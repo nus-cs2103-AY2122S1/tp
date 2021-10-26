@@ -231,7 +231,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleDownload() {
         FileManager fm = new FileManager();
-        JSONArray jsonData = fm.getJsonData();
+        JSONArray jsonData = fm.getJsonData("data/programmerError.json");
         assert (jsonData != null);
 
         if (jsonData.length() == 0) {

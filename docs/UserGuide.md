@@ -1,41 +1,48 @@
 ---
-layout: page
-title: User Guide
+layout: page title: User Guide
 ---
 
-ProgrammerError (P\|E) is a desktop app for managing students' information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this application is optimized to track personal particulars, emails and attendance of your students across different classes. If you are familiar with Unix commands, this is definitely for you!
+ProgrammerError (P\|E) is a desktop app for managing students' information, optimized for use via a Command Line
+Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this
+application is optimized to track personal particulars, emails and attendance of your students across different classes.
+If you are familiar with Unix commands, this is definitely for you!
 
 ## Table of Contents
+
 - [Quick Start](#quick-start)
 - [Features](#features)
-  1. [View Sample Data](#view-sample-data)
-  2. [Purge All Data: `purge`](#purge-all-data)
-  3. [Fill Sample Data: `fill`](#fill-sample-data)
-  4. [View Help: `help`](#view-help)
-  5. [Add Student: `add`](#add-student)
-  6. [Filter List: `filter`](#filter-student)
-  7. [Edit Student Details: `edit`](#edit-student)
-  8. [Delete Student: `delete`](#delete-student)
-  9. [Exit: `exit`](#exit)
-  10. [Download data](#download-data)
+    1. [View Sample Data](#view-sample-data)
+    2. [Purge All Data: `purge`](#purge-all-data)
+    3. [Fill Sample Data: `fill`](#fill-sample-data)
+    4. [View Help: `help`](#view-help)
+    5. [Add Student: `add`](#add-student)
+    6. [Filter List: `filter`](#filter-student)
+    7. [Edit Student Details: `edit`](#edit-student)
+    8. [Delete Student: `delete`](#delete-student)
+    9. [Exit: `exit`](#exit)
+    10. [Download data](#download-data)
 - [Command Summary](#command-summary)
 
-
 ## <a name="quick-start"></a>Quick Start
+
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `programmerError.jar` from [here](https://github.com/se-edu/addressbook-level3/releases) [coming soon].
+2. Download the latest `programmerError.jar`
+   from [here](https://github.com/se-edu/addressbook-level3/releases) [coming soon].
 
 3. Copy the file to the folder you want to use as the _home folder_ for your ProgrammerError.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
+   contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
    Some example commands you can try:
 
-    * **`add -n Sherwin -sid A1234567X -cid B01`**: Adds a student named `Sherwin` to the PE with his Student ID and Class ID.
-   
+    * **`add -n Sherwin -sid A1234567X -cid B01`**: Adds a student named `Sherwin` to the PE with his Student ID and
+      Class ID.
+
     * **`filter -sid A1234567X`** Filters the list to display student(s) whose student ID contains `A1234567X'
 
     * **`edit 1 -n Sherwin`** Updates the name of the student at index 1 (1-indexed) with the `-n` flag
@@ -55,13 +62,14 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 **Notes about the command format (Unix Command Syntax):**
 
 - Similar to Unix CLI, the up and down arrow keys can be used to navigate the history of commands executed.
-- Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify a student's student ID.
+- Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify
+  a student's student ID.
 - Parameters can be in any order.e.g. if the command specifies `-n NAME -sid STUDENT_ID`,
   `-sid STUDENT_ID -n NAME`is also acceptable.
 - If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of
-the parameter will be taken. e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be ignored.
-e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  the parameter will be taken. e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be
+  ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 ### <a name="view-sample-data"></a>1. View sample data
 
@@ -93,31 +101,35 @@ Adds a student to ProgrammerError with the his/her student ID and class ID.
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 
 Examples:
-- `add -n Sherwin -sid A1234567X -cid B01`: Adds the student called Sherwin with student ID A1234567X and class ID B01 to ProgrammerError.
 
-- `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to ProgrammerError.
+- `add -n Sherwin -sid A1234567X -cid B01`: Adds the student called Sherwin with student ID A1234567X and class ID B01
+  to ProgrammerError.
+
+- `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to
+  ProgrammerError.
 
 ### <a name="filter-student"></a>6. Filter List: `filter`
 
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
-Of the three arguments, at least one has to be provided. Arguments can be provided in any order and
-it is case-insensitive.
-ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
+Of the three arguments, at least one has to be provided. Arguments can be provided in any order and it is
+case-insensitive. ProgrammerError will display the filtered list of students whose details matches all the specified
+arguments.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
+
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
 - `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
 - `filter -email e1234567` Lists all students whose email contains the character sequence `e1234567`.
-- `filter -n Sherwin -cid B01` Lists all students whose name contains the character sequence `Sherwin` and
-  belongs to a class with the class ID containing the character sequence `B01`.
+- `filter -n Sherwin -cid B01` Lists all students whose name contains the character sequence `Sherwin` and belongs to a
+  class with the class ID containing the character sequence `B01`.
 
 ### <a name="edit-student"></a>7. Edit Student's Grade : `edit`
 
-Edits the grade of an existing student's in the PE.
-Take note that 1-indexing is used here as according to the displayed list.
+Edits the grade of an existing student's in the PE. Take note that 1-indexing is used here as according to the displayed
+list.
 
 Format:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 
@@ -148,7 +160,8 @@ Exits ProgrammerError and closes the GUI.
 
 ### <a name="download-data"></a>10. Download Data
 
-ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button under 'Files'. The TA will need to specify the directory to download the file to.
+ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button under 'Files'. The TA will need
+to specify the directory to download the file to.
 
 ## <a name="command-summary"></a>Command Summary
 

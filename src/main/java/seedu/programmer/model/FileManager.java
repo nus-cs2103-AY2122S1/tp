@@ -94,10 +94,9 @@ public class FileManager {
      *
      * @return JSONArray of student's data
      */
-    public JSONArray getJsonData() {
-        String resourceName = "data/programmerError.json";
+    public JSONArray getJsonData(String filePath) {
         try {
-            InputStream is = new FileInputStream(resourceName);
+            InputStream is = new FileInputStream(filePath);
             String jsonTxt = IOUtils.toString(is, StandardCharsets.UTF_8);
             JSONObject json = new JSONObject(jsonTxt);
             return json.getJSONArray("students");
