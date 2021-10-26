@@ -20,12 +20,12 @@ import seedu.academydirectory.logic.commands.DeleteCommand;
 import seedu.academydirectory.logic.commands.EditCommand;
 import seedu.academydirectory.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.academydirectory.logic.commands.ExitCommand;
-import seedu.academydirectory.logic.commands.FindCommand;
+import seedu.academydirectory.logic.commands.FilterCommand;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.student.NameContainsKeywordsPredicate;
+import seedu.academydirectory.model.student.InformationContainsKeywordsPredicate;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.testutil.EditStudentDescriptorBuilder;
 import seedu.academydirectory.testutil.StudentBuilder;
@@ -73,9 +73,9 @@ public class AcademyDirectoryParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterCommand(new InformationContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

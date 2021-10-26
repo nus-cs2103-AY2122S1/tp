@@ -15,7 +15,7 @@ import seedu.academydirectory.logic.commands.Command;
 import seedu.academydirectory.logic.commands.DeleteCommand;
 import seedu.academydirectory.logic.commands.EditCommand;
 import seedu.academydirectory.logic.commands.ExitCommand;
-import seedu.academydirectory.logic.commands.FindCommand;
+import seedu.academydirectory.logic.commands.FilterCommand;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
@@ -72,8 +72,8 @@ public class AcademyDirectoryParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         case GetCommand.COMMAND_WORD:
             return new RetrieveCommandParser().parse(arguments);
