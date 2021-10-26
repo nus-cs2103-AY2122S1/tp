@@ -1,3 +1,4 @@
+#PlannerMD
 PlannerMD is an easy-to-use command-line interface (CLI) application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
 If you are new, this guide is meant to introduce you to PlannerMD as well as guide you through our features and how to use them. If you are already 
@@ -58,8 +59,11 @@ we have to offer!
 3. Copy the file to the folder you want to use as the _home folder_ for plannerMD.
 
 4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
 
+   ![Ui](images/Ui.png)    
+   
+
+    
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
