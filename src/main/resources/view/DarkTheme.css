@@ -387,3 +387,6 @@
     -fx-text-fill: white;
 }
 
+#taskListTitle {
+    -fx-text-fill: white;
+}

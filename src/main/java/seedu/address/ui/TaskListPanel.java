@@ -4,10 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
 
 /**
@@ -18,6 +20,8 @@ public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
+    private Label taskListTitle;
+    @FXML
     private ListView<Task> taskListView;
 
     /**
@@ -25,6 +29,17 @@ public class TaskListPanel extends UiPart<Region> {
      */
     public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
+        taskListTitle.setText("No Member Displayed");
+        taskListView.setItems(taskList);
+        taskListView.setCellFactory(listView -> new TaskListViewCell());
+    }
+
+    /**
+     * Creates a {@code TaskListPanel} with the given {@code ObservableList} and {@code Member},
+     */
+    public TaskListPanel(ObservableList<Task> taskList, Member member) {
+        super(FXML);
+        taskListTitle.setText(member.getName().fullName);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
