@@ -11,6 +11,9 @@ import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
 import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +24,10 @@ import seedu.tuitione.model.ModelManager;
 import seedu.tuitione.model.UserPrefs;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
+import seedu.tuitione.model.lesson.LessonTime;
+import seedu.tuitione.model.lesson.Price;
+import seedu.tuitione.model.lesson.Subject;
+import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Student;
 
 public class EnrollCommandTest {
@@ -92,6 +99,40 @@ public class EnrollCommandTest {
         assertCommandFailure(invalidStudentEnrollment, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         assertCommandFailure(invalidLessonEnrollment, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         assertCommandFailure(invalidIndexEnrollment, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidLessonSizeMoreThan5_failure() {
+        Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
+        Lesson lessonTwo = new Lesson(new Subject("Science"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.MONDAY, LocalTime.NOON),
+                new Price(40));
+        Lesson lessonThree = new Lesson(new Subject("SS"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.TUESDAY, LocalTime.NOON),
+                new Price(40));
+        Lesson lessonFour = new Lesson(new Subject("Amath"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.NOON),
+                new Price(40));
+        Lesson lessonFive = new Lesson(new Subject("English"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.THURSDAY, LocalTime.NOON),
+                new Price(40));
+        Lesson lessonSix = new Lesson(new Subject("Chinese"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.FRIDAY, LocalTime.NOON),
+                new Price(40));
+        model.addLesson(lessonSix);
+        benson.enrollForLesson(lessonTwo);
+        benson.enrollForLesson(lessonThree);
+        benson.enrollForLesson(lessonFour);
+        benson.enrollForLesson(lessonFive);
+        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_5_LESSONS, benson.getName());
+        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(4)),
+                model,
+                expectedMessage);
     }
 
     @Test
