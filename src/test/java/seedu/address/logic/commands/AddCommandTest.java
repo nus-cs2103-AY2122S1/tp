@@ -163,6 +163,31 @@ public class AddCommandTest {
         public Summary getSummary() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void commit() {
+            //TODO
+        }
+
+        @Override
+        public boolean isUndoable() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isRedoable() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redo() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
