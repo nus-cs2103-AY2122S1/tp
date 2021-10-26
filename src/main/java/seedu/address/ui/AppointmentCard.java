@@ -40,7 +40,7 @@ public class AppointmentCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        meeting.setText("Meeting: " + person.getAppointment().getValue());
+        meeting.setText(person.getAppointment().getValue());
     }
 
     @Override

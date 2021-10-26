@@ -21,7 +21,7 @@ public class AppointmentListPanel extends UiPart<Region> {
     private ListView<Person> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code AppointmentListPanel} with the given {@code ObservableList}.
      */
     public AppointmentListPanel(ObservableList<Person> personList) {
         super(FXML);
