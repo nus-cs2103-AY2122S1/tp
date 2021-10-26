@@ -6,15 +6,15 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
 participant "d:FindCommand" as FindCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant ":PartialKeyContainsKeywordsPredicate" as PartialKeyContainsKeywordsPredicate LOGIC_COLOR
+participant ":TutorialIdOrRoleContainsKeywordsPredicate" as TutorialIdOrRoleContainsKeywordsPredicate LOGIC_COLOR
 end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("find n/ alex")
+[-> LogicManager : execute("find T/ 01")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find n/ alex")
+LogicManager -> AddressBookParser : parseCommand("find T/ 01")
 activate AddressBookParser
 
 create FindCommandParser
@@ -24,22 +24,18 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse("find n/ alex")
+AddressBookParser -> FindCommandParser : parse("find T/ 01")
 activate FindCommandParser
 
 create FindCommand
 FindCommandParser -> FindCommand
 activate FindCommand
 
-FindCommand -> PartialKeyContainsKeywordsPredicate: test("alex")
-activate PartialKeyContainsKeywordsPredicate
+FindCommand -> TutorialIdOrRoleContainsKeywordsPredicate: test("01")
+activate TutorialIdOrRoleContainsKeywordsPredicate
 
-PartialKeyContainsKeywordsPredicate -> PartialKeyContainsKeywordsPredicate : allPrefixes()
-activate PartialKeyContainsKeywordsPredicate
-deactivate PartialKeyContainsKeywordsPredicate
-
-PartialKeyContainsKeywordsPredicate --> FindCommand
-deactivate PartialKeyContainsKeywordsPredicate
+TutorialIdOrRoleContainsKeywordsPredicate --> FindCommand
+deactivate TutorialIdOrRoleContainsKeywordsPredicate
 
 FindCommand --> FindCommandParser
 deactivate FindCommand

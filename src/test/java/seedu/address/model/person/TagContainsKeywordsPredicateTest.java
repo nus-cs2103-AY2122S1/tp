@@ -49,6 +49,11 @@ public class TagContainsKeywordsPredicateTest {
         TagContainsKeywordsPredicate predicate =
                 new TagContainsKeywordsPredicate(Arrays.asList("t/", "friends"), TAG_TYPE);
         assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
+
+        //partial tag
+        predicate =
+                new TagContainsKeywordsPredicate(Arrays.asList("t/", "frie"), TAG_TYPE);
+        assertTrue(predicate.test(new PersonBuilder().withTags("friends").build()));
     }
 
     @Test
@@ -56,10 +61,6 @@ public class TagContainsKeywordsPredicateTest {
         // Full Tag with mixed-case
         TagContainsKeywordsPredicate predicate =
                 new TagContainsKeywordsPredicate(Arrays.asList("t/", "frIends"), TAG_TYPE);
-        assertFalse(predicate.test(new PersonBuilder().withTags("friends").build()));
-
-        // Partial Tag
-        predicate = new TagContainsKeywordsPredicate(Arrays.asList("t/", "fri"), TAG_TYPE);
         assertFalse(predicate.test(new PersonBuilder().withTags("friends").build()));
 
         // Non-Matching Tag

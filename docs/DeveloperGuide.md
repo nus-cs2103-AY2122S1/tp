@@ -190,15 +190,16 @@ The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetDat
 #### Find feature
 
 The find feature is facilitated by `FindCommand`. It extends `Command` with a type to be searched, as well as the 
-key to be searched. This feature uses `AttributeContainsKeywordsPredicate#test(Person)` and the person to be searched
-is obtained using `ModelManager#getFilteredPersonList()`. If a search using a partial match can be done, the feature
-also uses `AttributeContainsKeywordsPredicate#testByType(Person, String)`.
+key to be searched. This feature uses one of the subclasses of `AttributeContainsKeywordsPredicate#test(Person)` 
+and the person to be searched is obtained using `ModelManager#getFilteredPersonList()`. 
+If a search using a partial match can be done, the feature also uses 
+`PartialKeyContainsKeywordsPredicate#test(Person)`.
 
 The following sequence diagram shows how the find operation works for a name:
 ![FindCommandNameSequenceDiagram](images/FindNameSequenceDiagram.png)
 
 The following sequence diagram shows how the find operation works for a Tutorial ID:
-[comment]: <> (![FindCommandTutIdSequenceDiagram]&#40;images/FindTutIdSequenceDiagram.png&#41;)
+![FindCommandTutIdSequenceDiagram](images/FindTutorialIdSequenceDiagram.png)
 
 #### Proposed Implementation
 
