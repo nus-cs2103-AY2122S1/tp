@@ -13,10 +13,6 @@ import static seedu.address.testutil.TypicalPersons.BENSON_TAG_1;
 import static seedu.address.testutil.TypicalPersons.BENSON_TAG_2;
 import static seedu.address.testutil.TypicalPersons.BENSON_TELEGRAM;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -42,7 +38,6 @@ public class CsvAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON_EMAIL;
     private static final String VALID_ADDRESS = BENSON_ADDRESS;
     private static final String VALID_TAGS = String.join(" ", BENSON_TAG_1, BENSON_TAG_2);
-    private static final boolean NOT_IS_FAVOURITE = false;
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -75,11 +70,11 @@ public class CsvAdaptedPersonTest {
         String expectedMessage = Telegram.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
-    
+
     @Test
     public void toModelType_nullTelegram_throwsIllegalValueException() {
-        CsvAdaptedPerson person = new CsvAdaptedPerson(VALID_NAME, null, VALID_GITHUB, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        CsvAdaptedPerson person = new CsvAdaptedPerson(
+                VALID_NAME, null, VALID_GITHUB, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Telegram.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

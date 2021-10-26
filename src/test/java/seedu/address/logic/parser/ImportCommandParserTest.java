@@ -16,7 +16,7 @@ public class ImportCommandParserTest {
     private final ImportCommandParser parser = new ImportCommandParser();
 
     @Test
-    public void parse_FileNamePresentJson_success() {
+    public void parse_fileNamePresentJson_success() {
         // file name is .json
         assertParseSuccess(parser, VALID_FILENAME_JSON, new ImportCommand(VALID_FILENAME_JSON));
     }
