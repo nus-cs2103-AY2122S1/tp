@@ -1,6 +1,14 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -8,13 +16,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 public class SortCommandTest {
 
@@ -56,7 +57,7 @@ public class SortCommandTest {
             .withTutorialId("01")
             .build();
 
-    List<Person> unsortedList = Arrays.asList(alex, carol, alice);
+    private List<Person> unsortedList = Arrays.asList(alex, carol, alice);
 
     private Model setUnsortedModel() {
         AddressBook unsortedAB = new AddressBook();
@@ -154,7 +155,7 @@ public class SortCommandTest {
         final SortCommand standardCommand = new SortCommand(new Prefix("n/"), false);
 
         // same values -> returns true
-        assertTrue(standardCommand.equals( new SortCommand(new Prefix("n/"), false)));
+        assertTrue(standardCommand.equals(new SortCommand(new Prefix("n/"), false)));
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
