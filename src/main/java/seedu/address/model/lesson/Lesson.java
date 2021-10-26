@@ -190,8 +190,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
-        builder.append(typeOfLesson)
+        builder.append(getTypeOfLesson())
             .append(" ")
             .append(getDisplayDate())
             .append("; Time: ")

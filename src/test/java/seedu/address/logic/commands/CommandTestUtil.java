@@ -108,6 +108,10 @@ public class CommandTestUtil {
     public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String VALID_DATE_MON = "4 Oct 2021";
+    public static final String VALID_DATE_TUE = "5 Oct 2021";
+    public static final String VALID_DATE_NEXT_MON = "11 Oct 2021";
+    public static final String VALID_DATE_PREV_MON = "27 Sep 2021";
     public static final String VALID_DATE_PAST = "15 May 1988";
     public static final String VALID_DATE_FUTURE = "07 Apr 2103";
     public static final String VALID_TIME_RANGE = "1234-1345";

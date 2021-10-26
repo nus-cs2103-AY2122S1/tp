@@ -7,10 +7,16 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.DateUtil;
+
 public class DateTest {
+    private static final Set<Date> EMPTY_DATES = new HashSet<>();
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Date(null));
@@ -88,26 +94,42 @@ public class DateTest {
         assertTrue(Date.isValidDate("29 Feb 2020")); // leap year
     }
 
-//    @Test
-//    public void updateDate() {
-//        // At least 1 week has passed
-//        LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);
-//        Date dateOneWeekAgo = new Date(oneWeekAgo.format(Date.FORMATTER));
-//        assertEquals(LocalDate.now(), dateOneWeekAgo.updateDate().getLocalDate());
-//
-//        /*
-//        Less than a week has passed but the date is over.
-//         */
-//        long daysBefore = 2;
-//        long daysInAWeek = 7;
-//        LocalDate lessThanOneWeekAgo = LocalDate.now().minusDays(daysBefore);
-//        Date dateLessThanOneWeekAgo = new Date(lessThanOneWeekAgo.format(Date.FORMATTER));
-//        assertEquals(LocalDate.now().plusDays(daysInAWeek - daysBefore),
-//            dateLessThanOneWeekAgo.updateDate().getLocalDate());
-//
-//        // Current date (date is not over yet)
-//        Date today = new Date(LocalDate.now().format(Date.FORMATTER));
-//        assertEquals(LocalDate.now(), today.updateDate().getLocalDate());
-//    }
+
+    @Test
+    public void updateDate_withoutSkipDates() {
+        // At least 1 week has passed
+        LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);
+        Date dateOneWeekAgo = new Date(oneWeekAgo.format(Date.FORMATTER));
+        assertEquals(LocalDate.now(), dateOneWeekAgo.updateDate(EMPTY_DATES).getLocalDate());
+
+        // Less than a week has passed but the date is over.
+        long daysBefore = 2;
+        long daysInAWeek = 7;
+        LocalDate lessThanOneWeekAgo = LocalDate.now().minusDays(daysBefore);
+        Date dateLessThanOneWeekAgo = new Date(lessThanOneWeekAgo.format(Date.FORMATTER));
+        assertEquals(LocalDate.now().plusDays(daysInAWeek - daysBefore),
+            dateLessThanOneWeekAgo.updateDate(EMPTY_DATES).getLocalDate());
+
+        // Current date (date is not over yet)
+        Date today = new Date(LocalDate.now().format(Date.FORMATTER));
+        assertEquals(LocalDate.now(), today.updateDate(EMPTY_DATES).getLocalDate());
+    }
+
+    @Test
+    public void updateDate_withSkipDates() {
+        // Current date skip
+        Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
+        Date dateCurrentWeek = DateUtil.build(LocalDate.now());
+        Date dateNextWeek = DateUtil.build(LocalDate.now().plusWeeks(1));
+        Set<Date> cancelledDates = Set.of(dateCurrentWeek);
+
+        assertEquals(dateNextWeek, dateOneWeekAgo.updateDate(cancelledDates));
+
+        // Skip consecutive dates
+        cancelledDates = Set.of(dateCurrentWeek, dateNextWeek);
+        Date dateTwoWeeksLater = DateUtil.build(LocalDate.now().plusWeeks(2));
+
+        assertEquals(dateTwoWeeksLater, dateOneWeekAgo.updateDate(cancelledDates));
+    }
 }
 

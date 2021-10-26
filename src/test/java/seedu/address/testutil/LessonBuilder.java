@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.lesson.Date;
@@ -38,8 +36,9 @@ public class LessonBuilder {
         timeRange = new TimeRange(DEFAULT_TIME_RANGE);
         lessonRates = new LessonRates(DEFAULT_LESSON_RATES);
         subject = new Subject(DEFAULT_SUBJECT);
+        homeworkSet = new HashSet<>();
         homeworkSet.add(new Homework(DEFAULT_HOMEWORK));
-        cancelledDatesSet = new HashSet<>();
+        cancelledDatesSet = new HashSet<Date>();
     }
 
     /**
@@ -51,6 +50,7 @@ public class LessonBuilder {
         lessonRates = lessonToCopy.getLessonRates();
         subject = lessonToCopy.getSubject();
         homeworkSet = new HashSet<>(lessonToCopy.getHomework());
+        cancelledDatesSet = new HashSet<>(lessonToCopy.getCancelledDates());
     }
 
     /**
@@ -58,6 +58,15 @@ public class LessonBuilder {
      */
     public LessonBuilder withDate(String date) {
         this.date = new Date(date);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Date} of the {@code Lesson} that we are building
+     * with given {@code Date} object.
+     */
+    public LessonBuilder withDate(Date date) {
+        this.date = date;
         return this;
     }
 
@@ -90,13 +99,25 @@ public class LessonBuilder {
      * Parses the {@code homeworkList} into a {@code Set<Homework>} and
      * set it to the {@code Lesson} that we are building.
      */
-    public LessonBuilder withHomeworkSet(String ... homeworkList) {
+    public LessonBuilder withHomeworkSet(String... homeworkList) {
         homeworkSet = SampleDataUtil.getHomeworkSet(homeworkList);
         return this;
     }
 
-    public LessonBuilder withCancelledDatesSet(String ... cancelledDates) {
+    /**
+     * Parses the {@code cancelledDates} into a {@code Set<Date>} and
+     * set it to the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withCancelledDatesSet(String... cancelledDates) {
         cancelledDatesSet = SampleDataUtil.getCancelledDateSet(cancelledDates);
+        return this;
+    }
+
+    /**
+     * Sets the {@code cancelledDates} to the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withCancelledDatesSet(Date... cancelledDates) {
+        cancelledDatesSet = Set.of(cancelledDates);
         return this;
     }
 

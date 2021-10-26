@@ -98,18 +98,28 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Check if the date has passed.
+     * Checks if the date has passed.
      *
-     * @return true if date is earlier than now.
+     * @return True if date is earlier than now.
      */
     public boolean isOver() {
         return getLocalDate().isBefore(LocalDate.now());
     }
 
+    /**
+     * Checks if this date is after the specified date.
+     *
+     * @return True if this date is after the specified date, false if same date or before.
+     */
     public boolean isAfter(Date other) {
         return localDate.isAfter(other.localDate);
     }
 
+    /**
+     * Checks if this date is on the same day of the week as the specified date.
+     *
+     * @return True if this date is is on the same day of the week as the specified date, false otherwise.
+     */
     public boolean isSameDayOfWeek(Date other) {
         return localDate.getDayOfWeek().equals(other.getDayOfWeek());
     }

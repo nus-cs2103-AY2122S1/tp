@@ -102,6 +102,9 @@ public class SampleDataUtil {
             .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a cancelled date set containing the list of strings given.
+     */
     public static Set<Date> getCancelledDateSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Date::new)
