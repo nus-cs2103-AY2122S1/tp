@@ -120,7 +120,7 @@ public class EditAppointmentCommandTest {
                         .build();
         EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editAppointmentCommand, model, EditAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT);
+        assertCommandFailure(editAppointmentCommand, model, EditAppointmentCommand.MESSAGE_CLASHING_APPOINTMENT);
     }
 
     @Test

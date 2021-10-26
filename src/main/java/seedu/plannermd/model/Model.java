@@ -146,6 +146,14 @@ public interface Model {
     boolean isClashAppointment(Appointment appointment);
 
     /**
+     * Returns true if an edited appointment clashes with {@code appointment} in the PlannerMD.
+     *
+     * @param editedAppointment The appointment that is edited.
+     * @param oldAppointment    The appointment before applying the changes.
+     */
+    boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment);
+
+    /**
      * Deletes the given appointment.
      * The appointment must exist in the PlannerMD.
      */

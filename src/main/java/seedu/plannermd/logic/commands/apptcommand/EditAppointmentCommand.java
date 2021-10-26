@@ -43,7 +43,6 @@ public class EditAppointmentCommand extends AppointmentCommand {
 
     public static final String MESSAGE_EDIT_APPOINTMENT_SUCCESS = "Edited Appointment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the plannermd.";
     public static final String MESSAGE_CLASHING_APPOINTMENT = "This appointment clashes with an existing appointment.";
     public static final String MESSAGE_INVALID_START = "Start date/time should be of the format DD/MM/YYYY HH:MM "
             + "and adhere to the following constraints:\n"
@@ -80,11 +79,7 @@ public class EditAppointmentCommand extends AppointmentCommand {
         Appointment appointmentToEdit = lastShownList.get(index.getZeroBased());
         Appointment editedAppointment = createEditedAppointment(appointmentToEdit, editAppointmentDescriptor, model);
 
-        if (model.hasAppointment(editedAppointment)) {
-            throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
-        }
-
-        if (model.isClashAppointment(editedAppointment)) {
+        if (model.isClashAppointmentForEdited(editedAppointment, appointmentToEdit)) {
             throw new CommandException(MESSAGE_CLASHING_APPOINTMENT);
         }
 
