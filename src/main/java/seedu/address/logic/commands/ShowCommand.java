@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -154,6 +155,9 @@ public class ShowCommand extends Command {
     private CommandResult showAssessment(Model model) throws CommandException {
         assert getAssessment().isPresent();
         Assessment matchedAssessment = model.getAssessment(assessment);
+
+        // reset filtered student list (if any) into normal list
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         if (matchedAssessment == null) {
             throw new CommandException(MESSAGE_NONEXISTENT_ASSESSMENT);
