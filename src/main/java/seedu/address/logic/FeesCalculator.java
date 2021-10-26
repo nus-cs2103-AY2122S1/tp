@@ -69,7 +69,7 @@ public class FeesCalculator implements Calculator {
     }
 
     /**
-     * Automated updates the specific lesson's outstanding fees.
+     * Automatically updates the specific lesson's outstanding fees.
      * @param lesson the specific lesson to be updated.
      * @return Updated lesson with the correct outstanding fees.
      */
