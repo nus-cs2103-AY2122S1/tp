@@ -16,7 +16,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.CsBookBuilder;
 
 public class ModelManagerTest {
@@ -74,8 +76,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasStudent_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasStudent(null));
+    public void hasStudent_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasStudent((Name) null));
     }
 
     @Test

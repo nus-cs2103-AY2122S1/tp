@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.logging.Filter;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -103,7 +104,13 @@ public class ModelManager implements Model {
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return csBook.hasStudent(student);
+        return hasStudent(student.getName());
+    }
+
+    @Override
+    public boolean hasStudent(Name name) {
+        requireNonNull(name);
+        return getStudentByName(name) != null;
     }
 
     @Override
@@ -155,18 +162,17 @@ public class ModelManager implements Model {
 
     @Override
     public Student getStudentByName(Name studentName) {
-        updateFilteredStudentList(new ContainsStudentNamePredicate(studentName));
+        FilteredList<Student> tempFilteredStudents = new FilteredList<>(this.csBook.getStudentList());
+        tempFilteredStudents.setPredicate(new ContainsStudentNamePredicate(studentName));
 
         // return null if the student is not found
-        if (getFilteredStudentList().isEmpty()) {
-            updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        if (tempFilteredStudents.isEmpty()) {
             return null;
         }
 
-        assert getFilteredStudentList().size() == 1 : "Students name should be unique";
+        assert tempFilteredStudents.size() == 1 : "Students name should be unique";
 
-        Student retrievedStudent = getFilteredStudentList().get(0);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        Student retrievedStudent = tempFilteredStudents.get(0);
 
         return retrievedStudent;
     }
@@ -181,12 +187,12 @@ public class ModelManager implements Model {
     @Override
     public boolean hasGroup(Group group) {
         requireNonNull(group);
-        return csBook.hasGroup(group);
+        return hasGroup(group.getGroupName());
     }
 
     @Override
     public boolean hasGroup(GroupName groupName) {
-        requireAllNonNull(groupName);
+        requireNonNull(groupName);
         return getGroupByGroupName(groupName) != null;
     }
 
@@ -232,16 +238,17 @@ public class ModelManager implements Model {
 
     @Override
     public Group getGroupByGroupName(GroupName groupName) {
-        updateFilteredGroupList(new GroupNameContainsKeywordPredicate(groupName));
+        FilteredList<Group> tempFilteredGroups = new FilteredList<>(this.csBook.getGroupList());
+        tempFilteredGroups.setPredicate(new GroupNameContainsKeywordPredicate(groupName));
 
         // return null if the group is not found
-        if (getFilteredGroupList().isEmpty()) {
-            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        if (tempFilteredGroups.isEmpty()) {
             return null;
         }
 
-        Group retrievedGroup = getFilteredGroupList().get(0);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        assert tempFilteredGroups.size() == 1 : "Group names should be unique";
+
+        Group retrievedGroup = tempFilteredGroups.get(0);
 
         return retrievedGroup;
     }

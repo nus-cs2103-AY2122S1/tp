@@ -68,7 +68,7 @@ public class CsBook implements ReadOnlyCsBook {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
-        setGroups(newData.getGroupList()); //TODO Load group data in the future
+        setGroups(newData.getGroupList());
     }
 
     //// student-level operations

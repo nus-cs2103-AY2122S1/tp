@@ -30,6 +30,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setTelegramHandle(student.getTelegramHandle());
         descriptor.setEmail(student.getEmail());
+        descriptor.setGroupName(student.getGroupName());
     }
 
     /**
