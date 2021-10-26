@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -35,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_DONE_BOB = Done.STATUS_UNDONE;
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NOTES_AMY = "She is a very good candidate for this job!";
+    public static final String VALID_NOTES_BOB = "He is not a suitable candidate for this job based off his resume.";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -54,6 +57,8 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NOTES_DESC_AMY = " " + PREFIX_NOTES + VALID_NOTES_AMY;
+    public static final String NOTES_DESC_BOB = " " + PREFIX_NOTES + VALID_NOTES_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -104,6 +109,7 @@ public class CommandTestUtil {
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
                 .withExperience(VALID_EXPERIENCE_AMY)
                 .withTags(VALID_TAG_FRIEND)
+                .withNotes(VALID_NOTES_AMY)
                 .withDone(VALID_DONE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
@@ -113,6 +119,7 @@ public class CommandTestUtil {
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
                 .withExperience(VALID_EXPERIENCE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withNotes(VALID_NOTES_BOB)
                 .withDone(VALID_DONE_BOB).build();
     }
 

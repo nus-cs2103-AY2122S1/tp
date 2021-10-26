@@ -5,9 +5,10 @@
     "email": "hans@example.com",
     "role": "Software Engineer",
     "employmentType": "Full time",
-    "expectedSalary" : "3500",
+    "expectedSalary": "3500",
     "levelOfEducation": "PhD",
     "experience": "1",
+    "notes": "This person is a good candidate for the job!",
     "done" : "Not Done"
   }, {
     "name": "Person With Invalid Phone Field",
@@ -18,6 +19,7 @@
     "expectedSalary" : "3500",
     "levelOfEducation": "PhD",
     "experience": "1",
+    "notes": "This person is a good candidate for the job!",
     "done" : "Not Done"
   } ]
 }

@@ -57,6 +57,7 @@
                    </padding>
                     <children>
                         <TextFlow fx:id="interview" styleClass="cell_small_label" />
+                        <TextFlow fx:id="notes" styleClass="cell_small_label" />
                     </children>
                   <HBox.margin>
                      <Insets />

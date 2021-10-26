@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import seedu.address.model.done.Done;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,6 +54,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private TextFlow interview;
     @FXML
+    private TextFlow notes;
+    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane done;
@@ -78,6 +81,7 @@ public class PersonCard extends UiPart<Region> {
         experience.getChildren().add(getText("Years of Experience: " + person.getExperience().value));
         interview.getChildren().add(getText("Interview Time: "
                 + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime));
+        notes.getChildren().add(getText("Notes: " + person.getNotes().orElse(Notes.EMPTY_NOTES).information));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
