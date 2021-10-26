@@ -40,14 +40,14 @@ video here
    ![Ui](images/UG-00.png)
    
 5. That's all you need to do for the setup. To get started writing commands, refer to the Getting Started section 
-   [below](#ugetting-startedu).
+   [below](#getting-started).
 
 --------------------------------------------------------------------------------------------------------------------
 ## <u>How to use this User Guide</u>
 
-* Go to the [Getting Started](#ugetting-startedu) section if you want to know how to set things up.
-* If you want to dive straight into features, you can check out our [Features](#ufeaturesu) section.
-* For a quick recap of the commands, you can take a look at our [Command Summary](#ucommand-summaryu) section.
+* Go to the [Getting Started](#getting-started) section if you want to know how to set things up.
+* If you want to dive straight into features, you can check out our [Features](#features) section.
+* For a quick recap of the commands, you can take a look at our [Command Summary](#command-summary) section.
 
 
 * :information_source: indicates extra information about the specific section.
