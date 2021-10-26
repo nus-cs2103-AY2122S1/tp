@@ -144,6 +144,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         customers.remove(key);
     }
 
+    /**
+     * Sets the customer comparator to sort the customer list.
+     * @param customerComparator The comparator to sort the customer list.
+     */
+    public void setCustomerComparator(Comparator<Customer> customerComparator) {
+        customers.setComparator(customerComparator);
+    }
+
+    /**
+     * Returns a sortable customer list
+     */
+    public ObservableList<Customer> getSortableCustomerList() {
+        return customers.asSortableObservableList();
+    }
+
+    /**
+     * Resets the customer list sorting to its default state.
+     */
+    public void resetCustomerListToDefaultSortState() {
+        customers.resetCustomerListToDefaultSortState();
+    }
+
     /// supplier level operations
     /**
      * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
