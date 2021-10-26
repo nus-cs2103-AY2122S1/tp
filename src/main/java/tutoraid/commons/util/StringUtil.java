@@ -40,7 +40,7 @@ public class StringUtil {
 
     /**
      * Returns true if the {@code sentence} contains the {@code word} as a substring.
-     *   Ignores case, but a full word match is required.
+     *   Ignores case and at least a partial match is required.
      *   <br>examples:<pre>
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
