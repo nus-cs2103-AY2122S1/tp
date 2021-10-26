@@ -24,8 +24,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String MESSAGE_DUPLICATE_INDEX = "Indexes entered contain duplicates.";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -41,8 +39,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code multipleIndexes} into a list of {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code multipleIndexes} into a list of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if any of the specified indexes are invalid (not non-zero unsigned integer).
      */
@@ -50,12 +48,6 @@ public class ParserUtil {
         String trimmedIndexes = multipleIndexes.trim();
         List<String> indexes = Arrays.asList(trimmedIndexes.split("\\s+"));
         List<Index> parsedIndexes = new ArrayList<>();
-
-        // Checks for duplicates
-        Set<String> indexSet = new HashSet<>(indexes);
-        if (indexSet.size() < indexes.size()) {
-            throw new ParseException(MESSAGE_DUPLICATE_INDEX);
-        }
 
         for (String index : indexes) {
             if (!StringUtil.isNonZeroUnsignedInteger(index)) {

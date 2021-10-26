@@ -1,9 +1,12 @@
 package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.unify.commons.core.Messages.MESSAGE_DUPLICATE_INDEX;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
@@ -19,8 +22,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the displayed task list.\n"
-            + "Parameters: task_id\n"
+            + ": Deletes the task(s) identified by the index number(s) used in the displayed task list.\n"
+            + "Parameters: task_id (task_id)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task(s): %1$s";
@@ -34,8 +37,18 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Task> lastShownList = model.getFilteredTaskList();
         List<Task> deletedTasks = new ArrayList<>();
+
+        // Checks for duplicates
+        Set<Integer> indexSet = new HashSet<>();
+        for (Index index : targetIndexes) {
+            indexSet.add(index.getZeroBased());
+        }
+        if (indexSet.size() < targetIndexes.size()) {
+            throw new CommandException(MESSAGE_DUPLICATE_INDEX);
+        }
 
         // Deletes from the last item to prevent future deletes operating on wrong indexes
         for (int i = targetIndexes.size() - 1; i >= 0; i--) {
@@ -48,7 +61,13 @@ public class DeleteCommand extends Command {
             model.deleteTask(taskToDelete);
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTasks));
+        String deletedTasksString = "\n";
+
+        for (Task task : deletedTasks) {
+            deletedTasksString += task.toString() + "\n";
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTasksString));
     }
 
     @Override
