@@ -1,10 +1,14 @@
 package seedu.tracker.ui;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
@@ -15,19 +19,41 @@ import seedu.tracker.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-
+    public static final String ADD_COMMAND = "Adding a module:\n     add c/CODE t/TITLE d/DESCRIPTION m/MC [tag/TAG]";
+    public static final String CLEAR_COMMAND = "Removing the schedules for a specific semester:\n     "
+            + "clear y/YEAR s/SEMESTER";
+    public static final String COMMAND_FORMAT = "Below shows the format of all commands : ";
+    public static final String DELETE_COMMAND = "Deleting a module:\n     delete INDEX";
+    public static final String EDIT_COMMAND = "Editing a module:\n     "
+            + "edit INDEX [c/CODE] [t/TITLE] [d/Description] [m/MC] [tag/TAG]";
+    public static final String FIND_COMMAND = "Finding a module:\n     "
+            + "find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS";
+    public static final String HELP_COMMAND = "Viewing help:\n     help";
+    public static final String INFO_COMMAND = "Viewing user information:\n     info";
     public static final String USERGUIDE_URL =
             "https://github.com/AY2122S1-CS2103T-W17-2/tp/blob/master/docs/UserGuide.md";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-
+    public static final String HELP_MESSAGE = "Refer to the user guide for more information: " + USERGUIDE_URL;
+    public static final String LIST_COMMAND = "Listing all modules in the module bank:\n     list";
+    public static final String SET_COMMAND = "Setting user's Mc goal OR current semester:\n     "
+            + "set m/MC or set y/YEAR s/SEMESTER";
+    public static final String TAKE_COMMAND = "Taking a module:\n     take INDEX y/YEAR s/SEMESTER";
+    public static final String UNTAKE_COMMAND = "Removing(\"untake\") a module:\n     untake INDEX";
+    public static final String VIEW_COMMAND = "Viewing modules taken in a specific semester:\n     "
+            + "view y/YEAR s/SEMESTER";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    @FXML
-    private Button copyButton;
+    private static final List<String> commandList = Collections.unmodifiableList(Arrays.asList(ADD_COMMAND,
+            DELETE_COMMAND, EDIT_COMMAND, LIST_COMMAND, FIND_COMMAND,
+            TAKE_COMMAND, UNTAKE_COMMAND, VIEW_COMMAND, CLEAR_COMMAND, SET_COMMAND, INFO_COMMAND, HELP_COMMAND));
+
 
     @FXML
+    private Button copyButton;
+    @FXML
     private Label helpMessage;
+    @FXML
+    private TextArea commandInstruction;
 
     /**
      * Creates a new HelpWindow.
@@ -37,6 +63,11 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        String commandFormat = new String(COMMAND_FORMAT);
+        for (int i = 0; i < HelpWindow.commandList.size(); i++) {
+            commandFormat += "\n\n" + (i + 1) + ". " + HelpWindow.commandList.get(i);
+        }
+        commandInstruction.setText(commandFormat);
     }
 
     /**
