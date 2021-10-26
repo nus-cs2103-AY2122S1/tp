@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Field.addToFieldSet;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,7 +16,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
-import seedu.address.model.person.exceptions.NoShiftException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,7 +39,6 @@ public class Person {
     private final Set<Period> absentDates = new HashSet<>();
 
     private Schedule schedule;
-    private int totalWeeklyWorkingHour;
 
     /**
      * Every field must be present and not null.
@@ -61,11 +60,24 @@ public class Person {
         this.status = status;
         this.tags.addAll(tags);
         this.schedule = new Schedule();
-        this.totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
         this.fields.addAll(tags);
         this.absentDates.addAll(absentDates);
         this.fields.addAll(roles);
         addToFieldSet(fields, name, phone, email, address, salary, status);
+    }
+
+    /**
+     * Returns a copy of the provided Person object.
+     *
+     * @param p Person to be copied.
+     * @return Person copy of p.
+     */
+    public static Person copy(Person p) {
+        if (p == null) {
+            return null;
+        }
+        return new Person(p.getName(), p.getPhone(), p.getEmail(), p.getAddress(), p.getRoles(), p.getSalary(),
+                p.getStatus(), p.getTags(), p.getAbsentDates());
     }
 
     public Name getName() {
@@ -100,12 +112,12 @@ public class Person {
         return schedule;
     }
 
-    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum) {
-        return schedule.isWorking(dayOfWeek, slotNum);
+    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum, Period period) {
+        return schedule.isWorking(dayOfWeek, slotNum, period);
     }
 
-    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time) {
-        return schedule.isWorking(dayOfWeek, time);
+    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time, Period period) {
+        return schedule.isWorking(dayOfWeek, time, period);
     }
 
     /**
@@ -141,9 +153,10 @@ public class Person {
      * @param endTime of the shift.
      * @throws InvalidShiftTimeException throws when the timings of Shift are invalid.
      */
-    public void setShiftTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+    public void setShiftTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
+                             LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
-        schedule.setTime(dayOfWeek, slot, startTime, endTime);
+        schedule.setTime(dayOfWeek, slot, startTime, endTime, startDate, endDate);
     }
 
 
@@ -176,33 +189,38 @@ public class Person {
      *
      * @param dayOfWeek The day of the shift.
      * @param slot The time slot of the shift.
+     * @param startDate The date the shift starts at.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
-        schedule.addShift(dayOfWeek, slot);
-        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
+    public void addShift(DayOfWeek dayOfWeek, Slot slot,
+                         LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
+        schedule.addShift(dayOfWeek, slot, startDate, endDate);
     }
 
-    /**
-     * Removes a shift from the staff's schedule.
-     *
-     * @param dayOfWeek The day of the shift.
-     * @param slot The time slot of the shift.
-     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
-     */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
-        schedule.removeShift(dayOfWeek, slot);
-    }
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
-        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
     }
 
-    public int getTotalWeeklyWorkingHour() {
-        return totalWeeklyWorkingHour;
+
+    /**
+     * A method to get the working hours of {@code this} during {@code Period period}.
+     *
+     * @param period The period to get the working hours over.
+     * @return The total working hours over this period.
+     */
+    public long getTotalWorkingHour(Period period) {
+        return this.schedule.getTotalWorkingHour(period, getAbsentDates());
     }
 
+    /**
+     * Gets the total salary that this staff has earned over {@code Period period}.
+     *
+     * @return The salary to be paid in dollars.
+     */
+    public double getSalaryToBePaid(Period period) {
+        return getTotalWorkingHour(period) * salary.value / 100;
+    }
 
     /**
      * Returns true if both persons have the same name.
@@ -245,8 +263,7 @@ public class Person {
                 && otherStaff.getStatus().equals(getStatus())
                 && otherStaff.getTags().equals(getTags())
                 && periods.containsAll(otherPeriods)
-                && otherPeriods.containsAll(periods)
-                && otherStaff.totalWeeklyWorkingHour == totalWeeklyWorkingHour;
+                && otherPeriods.containsAll(periods);
 
     }
 

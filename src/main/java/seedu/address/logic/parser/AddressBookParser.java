@@ -22,6 +22,8 @@ import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemoveMarkCommand;
 import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.commands.SetShiftTimeCommand;
+import seedu.address.logic.commands.StaffIndividualStatisticsCommand;
+import seedu.address.logic.commands.StaffStatisticsCommand;
 import seedu.address.logic.commands.SwapShiftCommand;
 import seedu.address.logic.commands.SwitchTabCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -83,6 +85,9 @@ public class AddressBookParser {
         case DeleteShiftCommand.COMMAND_WORD:
             return new DeleteShiftCommandParser().parse(arguments);
 
+        case StaffIndividualStatisticsCommand.COMMAND_WORD:
+            return new StaffIndividualStatisticsCommandParser().parse(arguments);
+
         case SwapShiftCommand.COMMAND_WORD:
             return new SwapShiftCommandParser().parse(arguments);
 
@@ -112,6 +117,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case StaffStatisticsCommand.COMMAND_WORD:
+            return new StaffStatisticsCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

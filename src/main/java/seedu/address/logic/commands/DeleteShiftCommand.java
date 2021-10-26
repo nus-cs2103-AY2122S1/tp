@@ -3,10 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -25,11 +27,15 @@ public class DeleteShiftCommand extends Command {
     public static final String COMMAND_WORD = "deleteShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a shift from the staff identified "
-            + "by the index number used in the displayed staff list or the name of staff." + "\n\n"
+            + "by the index number used in the displayed staff list or the name of staff. By default, the shift"
+            + "deleted is from today to seven days later. When date input is provided, it should be in order. If "
+            + "only one date is provided, the end date is assumed to be seven days later.\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_INDEX + " INDEX] or "
             + "[" + PREFIX_DASH_NAME + " NAME] "
-            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT\n\n"
+            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT"
+            + "[" + PREFIX_DATE + "START_DATE]"
+            + "[" + PREFIX_DATE + "END_DATE\n\n"
             + "Examples:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_INDEX + " 1 "
             + PREFIX_DAY_SHIFT + "monday-1" + "\n"
@@ -44,17 +50,22 @@ public class DeleteShiftCommand extends Command {
     private final Name name;
     private final DayOfWeek dayOfWeek;
     private final Slot slot;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
      * Creates a DeleteShiftCommand to add the specified {@code Shift} to a {@code Person}.
      */
-    public DeleteShiftCommand(Index index, Name name, String shiftDateAndSlot) {
+    public DeleteShiftCommand(Index index, Name name, String shiftDateAndSlot, LocalDate startDate,
+                              LocalDate endDate) {
         requireNonNull(shiftDateAndSlot);
         this.index = index;
         this.name = name;
         String[] strings = shiftDateAndSlot.split("-");
         dayOfWeek = DayOfWeek.valueOf(strings[0].toUpperCase());
         slot = Slot.getSlotByOrder(strings[1]);
+        this.endDate = endDate;
+        this.startDate = startDate;
     }
 
     @Override
@@ -82,7 +93,7 @@ public class DeleteShiftCommand extends Command {
         }
 
         try {
-            model.deleteShift(staffToEdit, dayOfWeek, slot);
+            model.deleteShift(staffToEdit, dayOfWeek, slot, startDate, endDate);
         } catch (NoShiftException e) {
             throw new CommandException(MESSAGE_SHIFT_DOESNT_EXIST);
         }

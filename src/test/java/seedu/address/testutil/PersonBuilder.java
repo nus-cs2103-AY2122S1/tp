@@ -150,8 +150,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Schedule} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSchedule(String schedule) {
-        this.schedule = new Schedule(schedule);
+    public PersonBuilder withSchedule(ScheduleBuilder builder) {
+        this.schedule = builder.build();
         return this;
     }
 

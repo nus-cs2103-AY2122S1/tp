@@ -11,6 +11,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Shift;
@@ -43,6 +44,7 @@ public class ViewShiftCommand extends Command {
     private final int slotNum;
     private final LocalTime time;
     private final PersonIsWorkingPredicate isWorkingPredicate;
+    private final Period periodToLookAt;
 
     private String defaultMessage = "Staff working on shift: ";
     private int[] finalRoleReqCheck = new int[]{};
@@ -55,13 +57,14 @@ public class ViewShiftCommand extends Command {
      * @param slotNum The slot number that will be checked
      * @param time The time that will be checked
      */
-    public ViewShiftCommand(DayOfWeek dayOfWeek, int slotNum, LocalTime time) {
+    public ViewShiftCommand(DayOfWeek dayOfWeek, int slotNum, LocalTime time, Period period) {
         this.dayOfWeek = dayOfWeek;
         this.slotNum = slotNum;
         this.time = time;
-        this.isWorkingPredicate = new PersonIsWorkingPredicate(dayOfWeek, slotNum, time);
         this.defaultMessage += dayOfWeek.toString() + "-"
                 + (slotNum == INVALID_SLOT_NUMBER ? time.toString() : slotNum) + "\n";
+        this.isWorkingPredicate = new PersonIsWorkingPredicate(dayOfWeek, slotNum, time, period);
+        this.periodToLookAt = period;
     }
 
     @Override
@@ -71,9 +74,9 @@ public class ViewShiftCommand extends Command {
         if (staffs.size() == 0) {
             throw new CommandException(STAFF_LIST_EMPTY);
         }
-
         model.updateFilteredPersonList(isWorkingPredicate);
         setRoleReqMessage(model);
+        staffs = model.getFilteredPersonList();
 
         // Assumes either time is null, or dayOfWeek and slotNum is null (as passed in by ViewShiftCommandParser)
         if (time != null && dayOfWeek != null) {
@@ -95,7 +98,7 @@ public class ViewShiftCommand extends Command {
         StringBuilder result = new StringBuilder();
         int counter = 1;
         for (Person p : staffs) {
-            boolean hasShift = p.isWorking(dayOfWeek, slotNum);
+            boolean hasShift = p.isWorking(dayOfWeek, slotNum, periodToLookAt);
             if (hasShift) {
                 result.append(counter).append(". ").append(p.getName()).append("\n");
                 counter++;
@@ -115,7 +118,7 @@ public class ViewShiftCommand extends Command {
      * @return The staff working at that day of the week and time
      */
     public CommandResult executeViewShiftByTime(ObservableList<Person> staffs) {
-        String result = Shift.filterListByShift(staffs, dayOfWeek, time);
+        String result = Shift.filterListByShift(staffs, dayOfWeek, time, periodToLookAt);
         if (result.equals("")) {
             return new CommandResult(NO_STAFF_WORKING);
         } else if (slotNum == INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES) {
@@ -129,7 +132,7 @@ public class ViewShiftCommand extends Command {
         StringBuilder result = new StringBuilder();
         int counter = 1;
         for (Person p : staffs) {
-            boolean hasShift = p.isWorking(dayOfWeek, time);
+            boolean hasShift = p.isWorking(dayOfWeek, time, periodToLookAt);
             if (hasShift) {
                 result.append(counter).append(". ").append(p.getName()).append("\n");
                 counter++;

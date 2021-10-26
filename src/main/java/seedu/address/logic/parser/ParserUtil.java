@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.WRONG_NUMBER_OF_DATES;
 import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
@@ -10,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
@@ -301,22 +304,27 @@ public class ParserUtil {
     public static Period parsePeriod(Collection<String> periods) throws ParseException {
         LocalDate start = LocalDate.MAX;
         LocalDate end = LocalDate.MIN;
-        try {
-            for (String periodName : periods) {
-                if (start.isAfter(LocalDate.parse(periodName))) {
-                    start = LocalDate.parse(periodName);
-                }
-                if (end.isBefore(LocalDate.parse(periodName))) {
-                    end = LocalDate.parse(periodName);
-                }
+        for (String periodName : periods) {
+            if (start.isAfter(LocalDate.parse(periodName))) {
+                start = parseLocalDate(periodName);
             }
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_DATE_PARSED);
+            if (end.isBefore(LocalDate.parse(periodName))) {
+                end = parseLocalDate(periodName);
+            }
         }
-
         return new Period(start, end);
     }
 
+    /**
+     * Parses {@code String value} to a {@code LocalDate}.
+     */
+    public static LocalDate parseLocalDate(String value) throws ParseException {
+        try {
+            return LocalDate.parse(value);
+        } catch (DateTimeParseException dte) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE_PARSED);
+        }
+    }
     /**
      * Parsers {@code String shiftTimes} to a {@code LocalTime[]} which contains the a start time and end time.
      * @param shiftTimes The input string.
@@ -338,6 +346,7 @@ public class ParserUtil {
         }
         return new LocalTime[]{startTime, endTime};
     }
+
 
 
 
@@ -411,4 +420,37 @@ public class ParserUtil {
 
         return true;
     }
+
+    /**
+     * Extracts tuple dates. Assumes that the input has two or one dates, and outputs the result in a
+     * {@code LocalDate[]} of size 2.
+     *
+     * @param argMultimap The argument multimap storing the dates.
+     * @return The start and end date saved as a tuple.
+     * @throws ParseException If parsing of the dates fails.
+     */
+    public static LocalDate[] extractTupleDates(ArgumentMultimap argMultimap) throws ParseException {
+        LocalDate[] dateArray = new LocalDate[2];
+        List<String> dates = argMultimap.getAllValues(PREFIX_DATE);
+        if (dates.size() == 2) {
+            dateArray[0] = ParserUtil.parseLocalDate(dates.get(0));
+            dateArray[1] = ParserUtil.parseLocalDate(dates.get(1));
+        } else if (dates.size() == 1) {
+            dateArray[0] = ParserUtil.parseLocalDate(dates.get(0));
+            dateArray[1] = dateArray[0].plusDays(7);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    String.format(WRONG_NUMBER_OF_DATES, dates.size())));
+        }
+        return dateArray;
+    }
+
+    /**
+     * Assumes that the input has two or one dates, and outputs the result in a {@code Period}.
+     */
+    public static Period extractPeriodDates(ArgumentMultimap argMultimap) throws ParseException {
+        LocalDate[] dates = extractTupleDates(argMultimap);
+        return new Period(dates[0], dates[1]);
+    }
+
 }

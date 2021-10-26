@@ -4,6 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -11,7 +13,11 @@ import seedu.address.logic.commands.AddShiftCommand;
 import seedu.address.model.person.Name;
 
 public class AddShiftCommandParserTest {
+    private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
+    private static final LocalDate END_DATE = START_DATE.plusDays(7);
+
     private AddShiftCommandParser parser = new AddShiftCommandParser();
+
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -36,9 +42,9 @@ public class AddShiftCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         AddShiftCommand expectedNameCommand = new AddShiftCommand(null, new Name("testing"),
-                "monday-1");
+                "monday-1", START_DATE, END_DATE);
         AddShiftCommand expectedIndexCommand = new AddShiftCommand(Index.fromOneBased(1), null,
-                "monday-1");
+                "monday-1", START_DATE, END_DATE);
         assertParseSuccess(parser, " -n testing d/monday-1", expectedNameCommand);
         assertParseSuccess(parser, " -i 1 d/monday-1", expectedIndexCommand);
     }

@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.DayOfWeek;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 
@@ -18,6 +21,7 @@ import seedu.address.model.person.Slot;
 public class SlotCard extends UiPart<Region> {
 
     private static final String FXML = "SlotCard.fxml";
+    private final Logger logger = LogsCenter.getLogger(SlotCard.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -29,6 +33,8 @@ public class SlotCard extends UiPart<Region> {
 
     private final DayOfWeek day;
     private final Slot slot;
+    private ObservableList<Person> filteredList;
+    private ObservableList<Person> stafflist;
 
     @FXML
     private VBox slotPane;
@@ -41,13 +47,17 @@ public class SlotCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public SlotCard(DayOfWeek day, Slot slot, ObservableList<Person> stafflist) {
+    public SlotCard(DayOfWeek day, Slot slot, ObservableList<Person> stafflist, Period period) {
         super(FXML);
         this.day = day;
         this.slot = slot;
+        this.stafflist = stafflist;
         shiftName.setText(slot.toString());
-        ObservableList<Person> filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
+
+        ObservableList<Person> filteredList =
+                stafflist.filtered(p -> p.isWorking(day, slot.getOrder(), period));
         staffWorkingList.setItems(filteredList);
+        staffWorkingList.refresh();
         staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
 
@@ -60,28 +70,10 @@ public class SlotCard extends UiPart<Region> {
             super.updateItem(staff, empty);
 
             if (empty || staff == null) {
-                setGraphic(null);
                 setText(null);
             } else {
                 setText(staff.getName().toString());
             }
         }
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof SlotCard)) {
-            return false;
-        }
-
-        // state check
-        SlotCard card = (SlotCard) other;
-        return day.equals(card.day) && slot.equals(card.slot);
     }
 }

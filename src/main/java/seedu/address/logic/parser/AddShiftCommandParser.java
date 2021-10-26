@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATES_IN_WRONG_ORDER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.ParserUtil.extractTupleDates;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -27,11 +31,15 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
     public AddShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DATE,
+                        PREFIX_DASH_NAME, PREFIX_DAY_SHIFT);
 
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
+        LocalDate[] dates = new LocalDate[2];
+        dates[0] = LocalDate.now();
+        dates[1] = dates[0].plusDays(7);
 
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
@@ -43,18 +51,30 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
         }
 
         try {
+
             if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
             }
             if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
             }
+            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+                dates = extractTupleDates(argMultimap);
+
+            }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE), pe);
         }
-        return new AddShiftCommand(index, name, shiftDayAndSlot);
+        if (dates[0].isAfter(dates[1])) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DATES_IN_WRONG_ORDER));
+        }
+
+        return new AddShiftCommand(index, name, shiftDayAndSlot, dates[0], dates[1]);
     }
+
+
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
