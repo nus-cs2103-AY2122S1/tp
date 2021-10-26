@@ -15,7 +15,6 @@ import seedu.address.logic.parser.Prefix;
  */
 public class SortByAttribute implements Comparator<Client> {
 
-
     private final SortDirection direction;
     private final Prefix prefix;
 
@@ -34,12 +33,7 @@ public class SortByAttribute implements Comparator<Client> {
 
     @Override
     public int compare(Client a, Client b) {
-        BiFunction<Client, Client, Integer> compareFunction = compareFunction(prefix);
-        int result = compareFunction.apply(a, b);
-        if (!direction.isAscending()) {
-            result = Math.negateExact(result);
-        }
-
-        return result;
+        BiFunction<Client, Client, Integer> compareFunction = compareFunction(prefix, direction);
+        return compareFunction.apply(a, b);
     }
 }

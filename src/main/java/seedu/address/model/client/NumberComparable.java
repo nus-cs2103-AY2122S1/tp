@@ -1,28 +1,28 @@
 package seedu.address.model.client;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * An abstract class to allow the class extending it to be comparable
  * by the parsed number of the string representation.
  */
-public abstract class NumberComparable<T> implements Comparable<T> {
+public abstract class NumberComparable<T> implements IgnoreNullComparable<T> {
     @Override
-    public int compareTo(@NotNull T other) {
+    public int compareWithDirection(T other, SortDirection sortDirection) {
         int a;
         int b;
+
+        try {
+            b = Integer.parseInt(other.toString());
+        } catch (NumberFormatException | NullPointerException e) {
+            return -1;
+        }
+
         try {
             a = Integer.parseInt(this.toString());
         } catch (NumberFormatException | NullPointerException e) {
             return 1;
         }
 
-        try {
-            b = Integer.parseInt(other.toString());
-        } catch (NumberFormatException | NullPointerException e) {
-            return 0;
-        }
-
-        return Integer.compare(a, b);
+        int direction = sortDirection.isAscending() ? 1 : -1;
+        return direction * Integer.compare(a, b);
     }
 }
