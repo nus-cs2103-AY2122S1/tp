@@ -39,6 +39,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the claims in the filtered list of persons */
     ObservableList<Pair<Claim, Name>> getClaimList();
 
+    /** Returns an unmodifiable view of the Appointments in the filtered list of persons */
+    ObservableList<Person> getAppointmentList();
+
     /**
      * Returns the user prefs' address book file path.
      */
