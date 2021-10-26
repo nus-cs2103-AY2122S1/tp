@@ -88,6 +88,19 @@ Some example commands you can try:
 
 <div markdown="block" class="alert alert-info">
 
+**:information_source: How to read the Features section:**<br>
+
+_Description_: This is a brief description of what the command does.
+
+_Format_: ```This is how you're supposed to type the command into the command line``` (Refer to the section below on notes
+about the command format.)
+
+_Explanation_: This is an explanation on how the command can be used, and any noteworthy examples or caveats.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -114,7 +127,7 @@ Some example commands you can try:
 
 #### Switch Tabs: [contacts] or [tasks] or [help]
 
-Switches to the specified tab.
+If you want to switch to a certain tab, you can do that by typing out the tab name.
 
 Format: ```contacts or tasks or help```
 
@@ -126,7 +139,7 @@ Format: ```c or t or h```
 
 #### Exiting the program: [exit]
 
-Exits the program.
+The _Exit Command_ closes the window and exits the program.
 
 Format: ```exit```
 
@@ -137,7 +150,12 @@ Format: ```exit```
 ![Adding a Contact](images/UG-02.png)
 #### Adding contact details of a person: [add]
 
-Adds a contact to the address book. Only name is compulsory during creation.
+If you want to add a contact to the contacts list, the _Add Contact_ command adds a contact to the address book. Only 
+name is compulsory during creation. 
+
+The above screenshot shows how you can use the _Add Command_ to add a contact of a
+person named _"Mitski Miyawaki"_, with a phone number of _"9128841"_, an email of _"mitski@example.com"_, an address of _"1 
+Hougang Street 91, #01-41"_ and tagged with _"friend"_.
 
 Format: ```add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 
@@ -146,7 +164,11 @@ Format: ```add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 ![Editing a Contact](images/UG-04.png)
 #### Editing contact details: [edit]
 
-Replaces the contact details of the contact at the chosen index with the new details.
+If you want to modify certain details about a specific contact, the _Edit Command_ replaces the contact details of the 
+contact at the chosen index with the new details. 
+
+The above screenshot is an example of the before and after of
+using an _Edit Command_ to edit the phone number and email parameters of a contact.
 
 Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...```
 
@@ -163,7 +185,7 @@ Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...``
 
 #### Tagging a contact: [tag]
 
-Adds extra tags to a contact without wiping the old tags.
+The _Tag Command_ lets you add extra tags to a contact without wiping/replacing the old tags.
 
 Format: ```tag INDEX [t/TAG]...```
 
@@ -172,7 +194,7 @@ Format: ```tag INDEX [t/TAG]...```
 
 #### Deleting a contact: [delete]
 
-Deletes the contact at the chosen index.
+The _Delete Command_ deletes the contact at the chosen index.
 
 Format: ```delete INDEX```
 
@@ -185,7 +207,10 @@ Format: ```delete INDEX```
 ![Finding a Contact](images/UG-09.png)
 #### Finding contact through searching name: [find]
 
-Finds all contacts whose name matches the search term.
+The _Find Command_ finds all contacts whose name matches the search term. 
+
+The above screenshot is an example of how the 
+app would look like given a sample *Find Command*.
 
 Format: ```find NAME```
 
@@ -200,7 +225,11 @@ Format: ```find NAME```
 ![Finding a Contact](images/UG-06.png)
 #### Finding contact through searching a specific field: [find]
 
-Finds all contacts whose parameter (number, email, etc) matches the search term.
+Expanding on the _Find Command_, you can also find all contacts whose parameter (number, email, etc) matches the search 
+term. 
+
+The above screenshot shows an example of how you can use the _Find Command_ to find for a specific parameter only,
+in this case, all contacts which are tagged as "friends".
 
 Format: ```find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 
@@ -214,7 +243,7 @@ Format: ```find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 
 #### Listing all contacts: [list]
 
-Clears the search results of a find command, showing all contacts.
+The _List Command_ clears the search results of a find command, and shows all contacts.
 
 Format: ```list```
 
@@ -222,7 +251,7 @@ Format: ```list```
 
 #### Clearing all contacts: [clear]
 
-Deletes all contacts.
+The _Clear Command_ deletes all contacts.
 
 Format: ```clear```
 
@@ -233,7 +262,11 @@ Format: ```clear```
 ![Adding a Task](images/UG-03.png)
 #### Adding a task: [add]
 
-Adds a task to the task list. Only task `DESCRIPTION` is compulsory during creation.
+If you want to add a task to the task list, the _Add Command_ adds a task to the task list. Only task `DESCRIPTION` is 
+compulsory during creation. 
+
+The above screenshot shows an example of how you could use the _Add Command_ to add a task
+titled _"Submit PR"_ that is due on _"1 Nov 2021, 5:00 PM"_, tagged with _"Groupwork"_ and assigned to _"Alex Yeoh"_.
 
 Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
@@ -246,7 +279,11 @@ Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX
 ![Editing a Task](images/UG-05.png)
 #### Editing task details: [edit]
 
-Replaces the details of the task at the given `INDEX` with the new details.
+If you want to modify certain details about a task in your task list, you can use the _Edit Command_ to replace the 
+details of the task at the given `INDEX` with the new details. 
+
+The above screenshot shows the before and after of using 
+an _Edit Command_ to edit a task's date/time and assignee.
 
 Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
@@ -267,7 +304,7 @@ Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PER
 ![Tagging a Task](images/UG-10.png)
 #### Tagging a task: [tag]
 
-Adds extra tags to a task without wiping the old tags.
+The _Tag Command_ lets you add extra tags to a task without wiping/replacing the old tags.
 
 Format: ```tag INDEX [t/TAG]...```
 
@@ -276,7 +313,7 @@ Format: ```tag INDEX [t/TAG]...```
 ![Assigning people to a Task](images/UG-11.png)
 #### Assigning people to a task: [assign]
 
-Assigns extra people to a task without wiping people already assigned.
+The _Assign Command_ lets you add extra assignees to a task without wiping/replacing the old assignees.
 
 Format: ```assign INDEX [p/PERSON INDEX]...```
 
@@ -288,7 +325,11 @@ Format: ```assign INDEX [p/PERSON INDEX]...```
 ![Completing a Task](images/UG-12.png)
 #### Completing a task: [complete]
 
-Completes the task at the chosen index.
+If you have completed a task on the task list, you can indicate that it is completed by using the _Complete Command_ and 
+marking the task at the chosen index as complete. 
+
+As per the above screenshot, completed tasks are greyed out and have
+a green tick next to their description (as opposed to a red tick for incomplete tasks).
 
 Format: ```complete INDEX```
 
@@ -313,7 +354,11 @@ Format: ```delete INDEX```
 ![Finding a Task](images/UG-08.png)
 #### Finding task through task description: [find]
 
-Finds all tasks with descriptions that match the search term.
+If you want to find a task through its description, the _Find Command_ can find all tasks with descriptions that match the 
+search term. 
+
+The above screenshot demonstrates how you can use the _Find Command_ to find all tasks in your task list with 
+the word "PR" in its task description.
 
 Format: ```find DESCRIPTION```
 
@@ -329,7 +374,11 @@ Format: ```find DESCRIPTION```
 ![Finding a Task](images/UG-07.png)
 #### Finding task through searching a specific field: [find]
 
-Finds all tasks whose parameter (date/time, people, etc) matches the search term.
+Additionally, you can find tasks through other parameters with the _Find Command_ as it can also find all tasks whose 
+parameter (date/time, people, etc) matches the search term. 
+
+The above screenshot is an example of how you can use the
+_Find Command_ to find for all tasks that occur on 07:00 PM.
 
 Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
@@ -343,7 +392,10 @@ Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG].
 ![Finding upcoming Tasks](images/UG-13.png)
 #### Find all upcoming tasks: [upcoming]
 
-Finds all tasks whose Date/Time are after the current Date/Time.
+Finds all tasks whose Date/Time are after the current Date/Time (as determined locally on your computer). 
+
+The above screenshot demonstrates how the _Upcoming Command_ will show tasks with a Date/Time that is after the current 
+Date/Time on your computer.
 
 Format: ```upcoming```
 
