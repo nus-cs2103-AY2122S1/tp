@@ -7,7 +7,7 @@ import seedu.academydirectory.model.AdditionalInfo;
 
 public class DefaultCreator extends Creator {
 
-    private static final String FXML = "/creator/DefaultCreator.fxml";
+    private static final String FXML = "creator/DefaultCreator.fxml";
 
     private final AdditionalInfo<?> additionalInfo;
 

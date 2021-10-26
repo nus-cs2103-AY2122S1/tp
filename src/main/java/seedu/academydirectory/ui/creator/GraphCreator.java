@@ -24,7 +24,7 @@ import seedu.academydirectory.model.AdditionalInfo;
 
 public class GraphCreator extends Creator {
 
-    private static final String FXML = "/creator/GraphCreator.fxml";
+    private static final String FXML = "creator/GraphCreator.fxml";
 
     private final Map<String, List<Integer>> studentAssessmentResults;
 
