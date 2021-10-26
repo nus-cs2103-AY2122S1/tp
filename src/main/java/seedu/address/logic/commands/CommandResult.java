@@ -9,25 +9,40 @@ import java.util.Objects;
  */
 public class CommandResult {
 
+    /**
+     * Special Commands that UI has to treat in different ways.
+     */
+    public enum RESULT_TYPE {
+        NORMAL,
+        SHOW_HELP,
+        EXIT,
+        EXPORT_CSV
+    }
     private final String feedbackToUser;
+    private final RESULT_TYPE resultType;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
-
-    /** The application should exit. */
-    private final boolean exit;
-
-    /** The application should choose file lovation for export. */
-    private final boolean chooseFile;
+    /**
+     * Constructs a {@code CommandResult} with the specified specialType.
+     */
+    public CommandResult (String feedbackToUser, RESULT_TYPE specialType) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.resultType = specialType;
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    protected CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean chooseFile) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean exportCsv) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.chooseFile = chooseFile;
+        if (showHelp) {
+            this.resultType = RESULT_TYPE.SHOW_HELP;
+        } else if (exit) {
+            this.resultType = RESULT_TYPE.EXIT;
+        } else if (exportCsv) {
+            this.resultType = RESULT_TYPE.EXPORT_CSV;
+        } else {
+            this.resultType = RESULT_TYPE.NORMAL;
+        }
     }
 
     /**
@@ -43,7 +58,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, RESULT_TYPE.NORMAL);
     }
 
     public String getFeedbackToUser() {
@@ -51,15 +66,15 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return resultType.equals(RESULT_TYPE.SHOW_HELP);
     }
 
     public boolean isExit() {
-        return exit;
+        return resultType.equals(RESULT_TYPE.EXIT);
     }
 
     public boolean isChooseFile() {
-        return chooseFile;
+        return resultType.equals(RESULT_TYPE.EXPORT_CSV);
     }
 
     @Override
@@ -75,14 +90,11 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && chooseFile == otherCommandResult.chooseFile;
+                && resultType.equals(otherCommandResult.resultType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, chooseFile);
+        return Objects.hash(feedbackToUser, resultType);
     }
-
 }
