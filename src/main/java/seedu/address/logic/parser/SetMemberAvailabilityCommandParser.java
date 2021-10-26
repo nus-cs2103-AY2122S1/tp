@@ -5,10 +5,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.SetMemberAvailabilityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Availability;
@@ -29,17 +30,23 @@ public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvail
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_AVAILABILITY);
 
+        if (!argMultimap.getValue(PREFIX_AVAILABILITY).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SetMemberAvailabilityCommand.MESSAGE_USAGE));
+        }
+
         List<Index> indices;
         try {
             indices = new ArrayList<>();
             String indicesString = argMultimap.getPreamble();
-            String[] indicesArray = indicesString.split(" ");
-            for (String s : indicesArray) {
+            List<String> indicesWithNoDuplicates =
+                    Arrays.stream(indicesString.split(" ")).distinct().collect(Collectors.toList());
+            for (String s : indicesWithNoDuplicates) {
                 indices.add(ParserUtil.parseIndex(s));
             }
-        } catch (IllegalValueException ive) {
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SetMemberAvailabilityCommand.MESSAGE_USAGE), ive);
+                    SetMemberAvailabilityCommand.MESSAGE_USAGE), pe);
         }
 
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
