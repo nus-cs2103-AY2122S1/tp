@@ -143,6 +143,37 @@ public class AddAppCommandTest {
             -> commandResult.execute(modelTester));
     }
 
+    @Test
+    public void execute_conflictingAppointmentTime_returnInvalid() {
+        ArrayList<Index> indexOne = new ArrayList<>();
+        indexOne.add(Index.fromZeroBased(0));
+        ArrayList<Index> indexTwo = new ArrayList<>();
+        indexTwo.add(Index.fromZeroBased(1));
+        ModelStubAcceptingAppointmentAdded modelTester = new ModelStubAcceptingAppointmentAdded();
+        modelTester.addPerson(new PersonBuilder().withName("ALICE").build());
+        modelTester.addPerson(new PersonBuilder().withName("BOB").build());
+        Command initialCommand = new AddAppCommand(
+                indexOne,
+                new Address("vivocity"),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
+                        LocalDateTime.of(2021, 1, 1, 12, 0)),
+                "Halloween Sales");
+        Command commandResult = new AddAppCommand(
+                indexTwo,
+                new Address("vivocity"),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 11, 0),
+                        LocalDateTime.of(2021, 1, 1, 13, 0)),
+                "Halloween Sales");
+        try {
+            initialCommand.execute(modelTester);
+        } catch (CommandException e) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        assertThrows(CommandException.class, ()
+                -> commandResult.execute(modelTester));
+    }
+
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
