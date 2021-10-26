@@ -11,26 +11,24 @@ import seedu.address.model.position.Position;
  * https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java.
  */
 public class Memento {
-    Snapshot snapshot;
     Model model;
+    String message;
 
-    public Memento() {
-        this.snapshot = new Snapshot();
-    }
-
-    public void recordPositionList(ObservableList<Position> positionList) {
-        this.snapshot.withPositionList(positionList);
-    }
-
-    public void recordApplicantList(ObservableList<Applicant> applicantList) {
-        this.snapshot.withApplicantList(applicantList);
-    }
+    public Memento() {}
 
     public void record(Model model) {
         this.model = model;
     }
 
-    public Model getRecord() {
+    public void recordMessage(String message) {
+        this.message = message;
+    }
+
+    public Model getModel() {
         return model;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

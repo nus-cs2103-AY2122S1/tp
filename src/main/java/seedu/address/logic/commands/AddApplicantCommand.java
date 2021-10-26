@@ -60,15 +60,14 @@ public class AddApplicantCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-
-        Applicant applicant = model.addApplicantWithParticulars(applicantParticulars);
         memento.record(model.getCopiedModel());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, applicant));
-    }
+        Applicant applicant = model.addApplicantWithParticulars(applicantParticulars);
+        String successMessage = String.format(MESSAGE_SUCCESS, applicant);
+        memento.recordMessage(successMessage);
 
-    @Override
-    public void unExecute(Model model) throws CommandUndoException {
-        model = memento.getRecord();
+        model.addHistory(this);
+
+        return new CommandResult(successMessage);
     }
 
 

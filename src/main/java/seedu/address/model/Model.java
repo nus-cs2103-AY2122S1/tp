@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Name;
@@ -237,4 +238,21 @@ public interface Model {
      * Returns a deep-copied model.
      */
     Model getCopiedModel();
+
+    /**
+     * Records the modification history.
+     */
+    void addHistory(Command command);
+
+    /**
+     * Returns true if there exists history to recover.
+     */
+    boolean hasHistory();
+
+    /**
+     * Undoes the previous modification.
+     */
+    String recoverHistory();
+
+
 }

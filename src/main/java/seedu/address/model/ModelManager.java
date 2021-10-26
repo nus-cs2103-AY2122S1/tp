@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.memento.ChangeHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.memento.History;
+import seedu.address.logic.commands.memento.Memento;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Application.ApplicationStatus;
@@ -33,7 +35,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Applicant> filteredApplicants;
     private final FilteredList<Position> filteredPositions;
-    private final ChangeHistory changeHistory;
+    private final History history;
 
     /**
      * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
@@ -56,7 +58,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
-        changeHistory = new ChangeHistory();
+        history = new History();
     }
 
     /**
@@ -64,7 +66,7 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
                         ReadOnlyPositionBook positionBook,
-                        ReadOnlyUserPrefs userPrefs, ChangeHistory changeHistory) {
+                        ReadOnlyUserPrefs userPrefs, History changeHistory) {
         super();
         requireAllNonNull(addressBook, applicantBook, positionBook, userPrefs);
 
@@ -80,7 +82,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
-        this.changeHistory = changeHistory;
+        this.history = changeHistory;
     }
 
 
@@ -102,7 +104,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
-        changeHistory = new ChangeHistory();
+        history = new History();
     }
 
     /**
@@ -122,7 +124,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
-        changeHistory = new ChangeHistory();
+        history = new History();
     }
 
     /**
@@ -142,7 +144,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
-        changeHistory = new ChangeHistory();
+        history = new History();
     }
 
     /**
@@ -162,7 +164,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
-        changeHistory = new ChangeHistory();
+        history = new History();
     }
 
 
@@ -446,6 +448,27 @@ public class ModelManager implements Model {
     @Override
     public Model getCopiedModel() {
         return new ModelManager(this.addressBook, applicantBook.getCopiedApplicantBook(),
-                positionBook.getCopiedPositionBook(), this.userPrefs, this.changeHistory);
+                positionBook.getCopiedPositionBook(), this.userPrefs, this.history);
+    }
+
+    @Override
+    public void addHistory(Command command) {
+        history.add(command);
+    }
+
+
+    @Override
+    public boolean hasHistory() {
+        return history.hasHistory();
+    }
+
+    @Override
+    public String recoverHistory() {
+        Memento memento = history.recoverHistory();
+        Model previousModel = memento.getModel();
+        this.setPositionBook(previousModel.getPositionBook());
+        this.setApplicantBook(previousModel.getApplicantBook());
+
+        return memento.getMessage();
     }
 }
