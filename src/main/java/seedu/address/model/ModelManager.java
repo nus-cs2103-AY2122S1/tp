@@ -276,6 +276,11 @@ public class ModelManager implements Model {
         transactAndClearOrder(userPrefs.getTransactionFilePath());
     }
 
+    /**
+     * Helper TransactAndClearOrder with given path (for testing purposes)
+     *
+     * @param path the path of the file
+     */
     public void transactAndClearOrder(Path path) {
         assert hasUnclosedOrder();
 
