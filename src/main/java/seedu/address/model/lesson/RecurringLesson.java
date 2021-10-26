@@ -84,11 +84,12 @@ public class RecurringLesson extends Lesson {
         Set<Date> otherCancelledDates = other.getCancelledDates();
 
         // get the intersection
-        // https://stackoverflow.com/questions/60785426/finding-the-intersection-between-two-date-ranges-in-java-programatically
+        // https://stackoverflow.com/questions/60785426/
         LocalDate laterStart = Collections.max(Arrays.asList(getLocalDate(), other.getLocalDate()));
         LocalDate earlierEnd = Collections.min(Arrays.asList(getEndDate().getLocalDate(),
                 other.getEndDate().getLocalDate()));
-        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEnd.plusDays(1)) + 1; // 3 points, 2 interval
+        // 3 points, 2 interval
+        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEnd.plusDays(1)) + 1;
 
         Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream().sorted()
                 .takeWhile(date -> date.getLocalDate().compareTo(laterStart) >= 0

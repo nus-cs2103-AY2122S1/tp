@@ -106,6 +106,10 @@ public class LessonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code cancelledDates} into a {@code Set<Date>} and
+     * set it to the {@code Lesson} that we are building.
+     */
     public LessonBuilder withCancelledDatesSet(String ... cancelledDates) {
         cancelledDatesSet = SampleDataUtil.getCancelledDateSet(cancelledDates);
         return this;

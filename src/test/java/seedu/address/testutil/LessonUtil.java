@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
@@ -37,7 +36,7 @@ public class LessonUtil {
      */
     public static String getLessonEditCommand(int index, int indexToEdit, Lesson lesson) {
         return LessonEditCommand.COMMAND_WORD + " " + index + " " + indexToEdit + " "
-            + getLessonDetailsWithoutRecurrence(lesson);
+            + getLessonDetails(lesson);
     }
 
     /**
@@ -49,26 +48,6 @@ public class LessonUtil {
             sb.append(PREFIX_RECURRING + " ");
         }
 
-        sb.append(getLessonDetailsWithoutRecurrence(lesson));
-        return sb.toString();
-    }
-
-    /**
-     * Returns the part of command string for the given {@code person}'s details.
-     */
-    public static String getLessonEditDetails(Lesson lesson) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getLessonDetailsWithoutRecurrence(lesson));
-        lesson.getCancelledDates().forEach(date -> sb.append(PREFIX_CANCEL + date.toString() + " "));
-        return sb.toString();
-    }
-
-    /**
-     * Returns the part of command string for the given {@code person}'s details.
-     */
-    public static String getLessonDetailsWithoutRecurrence(Lesson lesson) {
-        StringBuilder sb = new StringBuilder();
-
         sb.append(PREFIX_DATE + lesson.getStartDate().toString() + " ");
         sb.append(PREFIX_TIME + lesson.getTimeRange().toString() + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
@@ -79,6 +58,5 @@ public class LessonUtil {
         );
         return sb.toString();
     }
-
 
 }

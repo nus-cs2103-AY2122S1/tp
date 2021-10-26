@@ -278,7 +278,7 @@ public class LessonEditCommand extends UndoableCommand {
         // state check
         LessonEditCommand e = (LessonEditCommand) other;
         return index.equals(e.index)
-                && lessonIndex.equals(lessonIndex)
+                && lessonIndex.equals(e.lessonIndex)
                 && editLessonDescriptor.equals(e.editLessonDescriptor);
     }
 
@@ -296,7 +296,6 @@ public class LessonEditCommand extends UndoableCommand {
         private LessonRates rate;
         private Set<Date> cancelledDates;
         private Set<Date> uncancelledDates;
-
 
         private boolean isRecurring;
 
@@ -433,6 +432,7 @@ public class LessonEditCommand extends UndoableCommand {
             EditLessonDescriptor e = (EditLessonDescriptor) other;
 
             return getDate().equals(e.getDate())
+                    && getIsRecurring() == e.getIsRecurring()
                     && getEndDate().equals(e.getEndDate())
                     && getTimeRange().equals(e.getTimeRange())
                     && getSubject().equals(e.getSubject())

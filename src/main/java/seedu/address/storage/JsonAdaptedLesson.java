@@ -133,8 +133,8 @@ class JsonAdaptedLesson {
 
         // lesson used to check if cancelled dates are valid
         Lesson lessonWithoutCancelledDates = isRecurring
-                ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates,
-                        modelCancelledDates)
+                ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange, modelSubject, modelHomework,
+                        modelLessonRates, modelCancelledDates)
                 : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates,
                         modelCancelledDates);
 

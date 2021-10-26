@@ -71,19 +71,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_ledit() throws Exception {
-        Lesson lesson = new LessonBuilder().withTimeRange(VALID_NON_CLASHING_TIME_RANGE).build();
-        LessonEditCommand command = (LessonEditCommand) parser.parseCommand(
-            LessonUtil.getLessonEditCommand(
-                INDEX_FIRST_PERSON.getOneBased(),
-                INDEX_FIRST_LESSON.getOneBased(),
-                lesson));
-        LessonEditCommand other = new LessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON,
-                new EditLessonDescriptorBuilder(lesson).build());
-        assertEquals(other, command);
-    }
-
-    @Test
     public void parseCommand_ldelete() throws Exception {
         LessonDeleteCommand command = (LessonDeleteCommand) parser.parseCommand(
             LessonUtil.getLessonDeleteCommand(
