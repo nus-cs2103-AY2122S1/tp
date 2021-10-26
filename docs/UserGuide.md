@@ -2,7 +2,7 @@
 layout: page title: User Guide
 ---
 
-ProgrammerError (P\|E) is a desktop app for managing students' information, optimized for use via a Command Line
+ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line
 Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this
 application is optimized to track personal particulars, emails and attendance of your students across different classes.
 If you are familiar with Unix commands, this is definitely for you!
@@ -40,8 +40,7 @@ If you are familiar with Unix commands, this is definitely for you!
    open the help window.<br>
    Some example commands you can try:
 
-    * **`add -n Sherwin -sid A1234567X -cid B01`**: Adds a student named `Sherwin` to the PE with his Student ID and
-      Class ID.
+    * **`add -n Sherwin -sid A1234567X -cid B01 -email e0523451@u.nus.edu`**: Adds a student named `Sherwin` to the PE with his Student ID, Class ID and Email.
 
     * **`filter -sid A1234567X`** Filters the list to display student(s) whose student ID contains `A1234567X'
 
