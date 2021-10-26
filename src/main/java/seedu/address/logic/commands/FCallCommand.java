@@ -51,7 +51,7 @@ public class FCallCommand extends Command {
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().incrementNumFailedCalls());
         model.setPerson(personToIncrement, newPerson);
 
-        return new CommandResult(String.format(MESSAGE_INCREMENT_PERSON_SUCCESS, newPerson.getName(),
+        return new CommandResult(String.format(MESSAGE_INCREMENT_PERSON_SUCCESS, newPerson.getCaseNumber(),
             newPerson.getCallStatus().getNumFailedCalls()));
     }
 

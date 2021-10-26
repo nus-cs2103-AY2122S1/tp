@@ -50,7 +50,7 @@ public class SCallCommand extends Command {
         Person newPerson = new Person(personToIncrement, personToIncrement.getCallStatus().call());
         model.setPerson(personToIncrement, newPerson);
 
-        return new CommandResult(String.format(MESSAGE_CALL_PERSON_SUCCESS, newPerson.getName(),
+        return new CommandResult(String.format(MESSAGE_CALL_PERSON_SUCCESS, newPerson.getCaseNumber(),
             newPerson.getCallStatus().getNumFailedCalls()));
     }
 

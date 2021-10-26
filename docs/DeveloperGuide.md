@@ -265,14 +265,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                  | I want to …​                   | So that I can…​                                                         |
 | -------- | ---------------------------------------- | ------------------------------ | ----------------------------------------------------------------------- |
 | `* * *`  | new user                                 | see usage instructions         | refer to instructions when I forget how to use the app                  |
-| `* * *`  | user                                     | update contacts’ contact details without re-adding that contact | avoid re-entering existing data        |
+| `* * *`  | user                                     | update contact's contact details and SHN periods without re-adding that contact  | avoid re-entering existing data |
 | `* * *`  | user                                     | find person(s) by name, phone number, case number, SHN start date or SHN end date          | locate details of person(s) containing keyword(s) in a specified field without having to go through the entire list  |
 | `* * *`  | user                                     | save my contacts               | keep track of their details between sessions                            |
 | `* *`    | experienced user                         | directly adjust my save files  | bypass the CLI for simple bulk tasks                                    |
 | `* * *`  | user                                     | add my contact’s next-of-kin’s information | contact the patient’s next-of-kin should an emergency arise |
 | `* *`    | user                                     | quickly batch-remove contacts whose SHN has been completed | clear outdated contacts                     |
 | `* *`    | user                                     | delete multiple contacts at once | more easily clean my contacts                                         |
-| `* *`    | user                                     | update contact's contact details and SHN periods | so that i do not have to re-enter existing data       |
 | `* *`    | user                                     | batch-update SHN periods       | extend or shorten the SHN end dates according to government mandates    |
 | `* *`    | user                                     | sort contacts by fields        | more easily browse through the contacts                                 |
 | `* *`    | user                                     | track call statuses            | enforce the contacts' SHN                                               |
