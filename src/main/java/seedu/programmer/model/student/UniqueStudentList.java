@@ -3,12 +3,14 @@ package seedu.programmer.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.programmer.model.student.comparator.SortByClass;
+import seedu.programmer.model.student.comparator.SortByLabNumber;
 import seedu.programmer.model.student.comparator.SortByStudentName;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.model.student.exceptions.StudentNotFoundException;
@@ -29,6 +31,8 @@ public class UniqueStudentList implements Iterable<Student> {
     private final ObservableList<Student> internalList = FXCollections.observableArrayList();
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    //Keep track of the existing labs
+    private List<Lab> labs = new ArrayList<>();
 
     /**
      * Returns true if the list contains an equivalent student as the given argument.
@@ -44,6 +48,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void add(Student toAdd) {
         requireNonNull(toAdd);
+        toAdd.setLabResultRecord(labs);
         if (contains(toAdd)) {
             throw new DuplicateStudentException();
         }
@@ -74,6 +79,8 @@ public class UniqueStudentList implements Iterable<Student> {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
+        labs.clear();
+        labs.addAll(editedStudent.getLabList());
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new StudentNotFoundException();
@@ -100,27 +107,26 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Adds the lab to the list.
+     * The lab must not exist in the list.
+     */
+    public void addLab(Lab toAdd) {
+        requireNonNull(toAdd);
+        labs.sort(new SortByLabNumber());
+        for (Student std : internalList) {
+            std.addLab(toAdd);
+        }
+    }
+
+    /**
      * Removes the equivalent lab from the list.
      * The lab must exist in the list.
      */
     public void removeLab(Lab toRemove) {
         requireNonNull(toRemove);
         for (Student std : internalList) {
-            std.delLabResult(toRemove);
+            std.deleteLab(toRemove);
         }
-        //internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
-    }
-
-    /**
-     * Adds the lab to the list.
-     * The lab must not exist in the list.
-     */
-    public void addLab(Lab toAdd) {
-        requireNonNull(toAdd);
-        for (Student std : internalList) {
-            std.addLabResult(toAdd);
-        }
-        //internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
     public void setStudents(UniqueStudentList replacement) {

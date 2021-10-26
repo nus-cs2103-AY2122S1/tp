@@ -41,7 +41,7 @@ public class DeleteLabCommand extends Command {
         boolean exists = true;
         for (Student std : lastShownList) {
             Student target = std;
-            if (!target.delLabResult(this.result)) {
+            if (!target.deleteLab(this.result)) {
                 exists = false;
             }
             model.setStudent(target, std);
