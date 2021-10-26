@@ -47,8 +47,10 @@ public class ClassId {
      * @return the class number
      */
     public int getClassNum() {
-        String classNum = classId.substring(1, 3);
-        return classNum.charAt(0) == '0' ? Integer.parseInt(classNum.substring(1, 2)) : Integer.parseInt(classNum);
+        int startIdx = 1;
+        char firstDigit = classId.charAt(startIdx);
+        String classNum = firstDigit == '0' ? classId.substring(startIdx + 1) : classId.substring(startIdx);
+        return Integer.parseInt(classNum);
     }
 
     @Override
