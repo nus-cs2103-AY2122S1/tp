@@ -47,8 +47,9 @@ public interface Logic {
     ObservableList<Client> getFilteredClientList();
 
     /**
-     * Returns an unmodifiable view of the clients filtered by next meetings for current user. 
+     * Returns an unmodifiable view of the clients filtered by next meetings for current user.
      */
+    ObservableList<Client> getSortedNextMeetingList();
 
     /**
      * Returns an unmodifiable view of the client to view
