@@ -100,7 +100,8 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different done status -> return false
-        editedAlice = new PersonBuilder(ALICE).withDone(Done.STATUS_DONE).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Person AliceWithDone = new PersonBuilder(ALICE).withDone(Done.STATUS_DONE).build();
+        Person AliceWithNotDone = new PersonBuilder(ALICE).withDone(Done.STATUS_UNDONE).build();
+        assertFalse(AliceWithDone.equals(AliceWithNotDone));
     }
 }
