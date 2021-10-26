@@ -399,8 +399,7 @@ public class ParserUtil {
             return false;
         }
 
-        if (!roleReqSplit[0].equals("bartender") && !roleReqSplit[0].equals("floor")
-                && !roleReqSplit[0].equals("kitchen")) {
+        if (!Role.isValidRole(roleReqSplit[0]) || roleReqSplit[0].equals("norole")) {
             return false;
         }
 
