@@ -9,11 +9,11 @@ import seedu.academydirectory.logic.commands.DeleteCommand;
 import seedu.academydirectory.logic.commands.EditCommand;
 import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.FindCommand;
+import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
-import seedu.academydirectory.logic.commands.RetrieveCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
 public class HelpCommandParser implements Parser<HelpCommand> {
@@ -46,8 +46,8 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case FindCommand.COMMAND_WORD:
             return new HelpCommand(userInput, FindCommand.HELP_MESSAGE);
 
-        case RetrieveCommand.COMMAND_WORD:
-            return new HelpCommand(userInput, RetrieveCommand.HELP_MESSAGE);
+        case GetCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, GetCommand.HELP_MESSAGE);
 
         case ListCommand.COMMAND_WORD:
             return new HelpCommand(userInput, ListCommand.HELP_MESSAGE);

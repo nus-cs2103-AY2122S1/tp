@@ -10,6 +10,7 @@ public class StudioRecord implements Information {
 
     private static final String VALIDATION_REGEX = "^-?\\d+$";
 
+    private final Integer numberOfSessions;
     private final Attendance attendance;
     private final Participation participation;
 
@@ -18,6 +19,7 @@ public class StudioRecord implements Information {
      * @param numberOfSessions The number of Studio Sessions
      */
     public StudioRecord(Integer numberOfSessions) {
+        this.numberOfSessions = numberOfSessions;
         this.attendance = new Attendance(numberOfSessions);
         this.participation = new Participation(numberOfSessions);
     }
@@ -29,6 +31,8 @@ public class StudioRecord implements Information {
      */
     public StudioRecord(Attendance attendance, Participation participation) {
         requireAllNonNull(attendance, participation);
+        assert (attendance.getSessionCount().equals(participation.getSessionCount()));
+        this.numberOfSessions = attendance.getSessionCount();
         this.participation = participation;
         this.attendance = attendance;
     }
@@ -75,6 +79,21 @@ public class StudioRecord implements Information {
 
     public Participation getParticipation() {
         return this.participation;
+    }
+
+    public String getExtendedStudioRecords() {
+        String displayedInfo = "";
+        for (int sessionNumber = 0; sessionNumber < numberOfSessions; sessionNumber++) {
+            boolean hasAttendedSession = attendance.getAttendanceFromSession(sessionNumber);
+            int participationScore = participation.getParticipationScoreFrom(sessionNumber);
+            if (hasAttendedSession) {
+                displayedInfo += "- Session " + (sessionNumber + 1) + " attended. ";
+                displayedInfo += "Participation mark is " + participationScore + "\n";
+            } else {
+                displayedInfo += "- Session " + (sessionNumber + 1) + " not attended.\n";
+            }
+        }
+        return displayedInfo;
     }
 
     @Override
