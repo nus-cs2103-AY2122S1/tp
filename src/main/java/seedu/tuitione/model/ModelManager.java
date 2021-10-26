@@ -52,10 +52,12 @@ public class ModelManager implements Model {
     }
 
     public void setStudentPredicate(Predicate<Student> studentPredicate) {
+        requireNonNull(studentPredicate);
         this.studentPredicate = studentPredicate;
     }
 
     public void setLessonPredicate(Predicate<Lesson> lessonPredicate) {
+        requireNonNull(lessonPredicate);
         this.lessonPredicate = lessonPredicate;
     }
 
@@ -98,6 +100,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setTuitione(ReadOnlyTuitione tuitione) {
+        requireNonNull(tuitione);
         this.tuitione.resetData(tuitione);
     }
 
@@ -108,41 +111,49 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasStudent(Student student) {
+        requireNonNull(student);
         return tuitione.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
+        requireNonNull(target);
         tuitione.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
+        requireNonNull(student);
         tuitione.addStudent(student);
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
         tuitione.setStudent(target, editedStudent);
     }
 
     @Override
     public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
         return tuitione.hasLesson(lesson);
     }
 
     @Override
     public void deleteLesson(Lesson target) {
+        requireNonNull(target);
         tuitione.removeLesson(target);
     }
 
     @Override
     public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
         tuitione.addLesson(lesson);
     }
 
     @Override
     public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
         tuitione.setLesson(target, editedLesson);
     }
 
