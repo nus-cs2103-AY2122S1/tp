@@ -44,12 +44,12 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private CommandBox commandBox;
     private AnimeListPanel animeListPanel;
     private ResultDisplay resultDisplay;
     private StatsDisplay statsDisplay;
     private ToggleGroup themeToggleGroup = new ToggleGroup();
     private String themeCss;
-    CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -233,11 +233,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleStats() {
-        updateStatsDisplay();
         if (!statsDisplay.isShowing()) {
             statsDisplay.show();
+            updateStatsDisplay();
         } else {
             statsDisplay.focus();
+            updateStatsDisplay();
         }
     }
 

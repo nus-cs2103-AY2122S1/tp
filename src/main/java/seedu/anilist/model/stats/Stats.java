@@ -103,6 +103,6 @@ public class Stats {
                 && this.finishedCount == otherStats.finishedCount
                 && this.episodesCount == otherStats.episodesCount
                 && this.numUniqueGenres == otherStats.numUniqueGenres
-                && this.topGenres.equals(otherStats.getTopGenres());
+                && this.topGenres.equals(otherStats.topGenres);
     }
 }

@@ -4,7 +4,6 @@ import static seedu.anilist.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.event.EventHandler;
@@ -65,15 +64,15 @@ public class StatsDisplay extends UiPart<Stage> {
         });
     }
 
-    public void setStatsCloseCommand(Runnable onStatsExit) {
-        this.onStatsExit = onStatsExit;
-    }
-
     /**
      * Creates a new StatsDisplay.
      */
     public StatsDisplay() {
         this(new Stage());
+    }
+
+    public void setStatsCloseCommand(Runnable onStatsExit) {
+        this.onStatsExit = onStatsExit;
     }
 
     /**
