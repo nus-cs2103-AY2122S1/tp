@@ -4,46 +4,44 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
-Interface ReadOnlyUserPrefs <<Interface>>
-Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
-Class Model
-Class ModelManager
-Class UserPrefs
-Class ReadOnlyUserPrefs
-
-
-Class UniqueStudentList
-Class UniqueGroupList
-Class UniqueTaskList
+Package Student <<Rectangle>>{
 Class Student
-Class Task
-Class Group
+Class Attendance
+Class Participation
+Class Name
+Class Email
+Class UserName
+Class StudentNumber
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside .down.> Model
+Package Group <<Rectangle>>{
+Class Group
+Class GroupName
+Class LinkYear
+Class Members
+}
 
-AddressBook .up.|> ReadOnlyAddressBook
+Package RepoName <<Rectangle>> {
+}
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+Package Tag <<Rectangle>> {
+}
 
-AddressBook *---> "1" UniqueStudentList
-AddressBook *---> "1" UniqueGroupList
-AddressBook *---> "1" UniqueTaskList
-UniqueStudentList ---> "~* all" Student
-UniqueGroupList ---> "~* all" Group
-UniqueTaskList ---> "~* all" Task
+Student *-down-> "1" Name
+Student *-down-> "1" Attendance
+Student *-down-> "1" Participation
+Student *-down-> "1" Email
+Student *-down-> "1" StudentNumber
+Student *-down-> "0..1" UserName
+Student *-up--> "0..1" RepoName
+Student -up--> "*" Tag
+Student *-right--> "0..1" GroupName
 
-ModelManager --->"~* filtered" Student
-ModelManager --->"~* filtered" Group
-ModelManager --->"~* filtered" Task
+Group *-down-> "1" GroupName
+Group *-left-> "1" Members
+Group *-down-> "0..1" LinkYear
+Group *-up--> "0..1" RepoName
+Group -up--> "*" Tag
+
+Members *-left--> "*" Student
 @enduml
