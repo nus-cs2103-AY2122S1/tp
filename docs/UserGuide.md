@@ -99,19 +99,19 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 The structure of this document is to help you find what you need quickly and easily.
 
-In the next section [Section 3.2 Reading this Document](#32-reading-this-document), you will be able to find definitions
-of technical terms, general syntax and format of commands that will be used throughout the guide.
+In the next section [Reading this Document](#32-reading-this-document), you will be able to find definitions of
+technical terms, general syntax and format of commands that will be used throughout the guide.
 
-The following section [Section 4 Features](#4-features), documents the main features of **Sellah** and provides
-explanations on how to utilise them to its fullest.
+The following section [Features](#4-features), documents the main features of **Sellah** and provides explanations on
+how to utilise them to its fullest.
 
-Alternatively, if you are looking for a quick summary of the command formats, go
+Alternatively, if you are looking for a quick summary of the command formats, you can jump
 to [Command Summary](#6-command-summary).
 
 ### 3.2 Reading this Document
 
 This section provides some common terms and syntax that would be used throughout the document. It is important that you
-familiarise yourself with them before moving on to [Section 4 Features](#4-features).
+familiarise yourself with them before moving on to the next section [Features](#4-features).
 
 Throughout this guide, [Products](#323-defining-client-and-product) refer to the items in your inventory
 and [Clients](#323-defining-client-and-product) refer to the people who have
