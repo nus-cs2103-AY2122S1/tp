@@ -276,6 +276,16 @@ public class AddCustomerCommandTest {
         }
 
         @Override
+        public ObservableList<Supplier> getSortableSupplierList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetSupplierListToDefaultSortState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredReservationList(Predicate<Reservation> predicate) {
             throw new AssertionError("This method should not be called.");
         }
