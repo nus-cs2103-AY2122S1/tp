@@ -20,7 +20,8 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: n/[name] ... t/[tag] ...\n"
             + "Example: " + COMMAND_WORD + " n/alice n/bob t/friends t/colleagues\n"
-            + "Note that users can opt for case-sensitive search on Tags by including the 'c/' flag\n"
+            + "Note that users can opt for case-sensitive search on Tags by including the 'c/' flag"
+            + "after the command word\n"
             + "Example: " + COMMAND_WORD + " c/ n/alice n/bob t/friends t/colleagues\n";
 
     private final FindPredicate findPredicate;
