@@ -101,6 +101,8 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 
+![UI](images/addStudent.png)
+
 - `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID A1234567X and class ID B01 and 
   email e0542421@u.nus.edu to ProgrammerError.
 
