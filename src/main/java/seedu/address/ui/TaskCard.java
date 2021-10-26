@@ -30,6 +30,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label deadline;
+    @FXML
     private Label isDone;
 
     /**
@@ -40,6 +42,7 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
+        deadline.setText("Due: " + task.getTaskDeadline().toString());
         isDone.setText(task.isDone()
                 ? "Completed"
                 : "Incomplete");
