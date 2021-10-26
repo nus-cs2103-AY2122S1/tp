@@ -26,7 +26,8 @@ public class JsonAdaptedTaskTest {
     private static final String VALID_NAME = MATH_ASSIGNMENT.getName().toString();
     private static final String VALID_TIME = MATH_ASSIGNMENT.getTime().toString();
     private static final String VALID_DATE = MATH_ASSIGNMENT.getDate().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = MATH_ASSIGNMENT.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
+    private static final List<JsonAdaptedTag> VALID_TAGS = MATH_ASSIGNMENT.getTags()
+            .stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
     private static final String VALID_STATE = MATH_ASSIGNMENT.getState().toString();
 
     @Test
