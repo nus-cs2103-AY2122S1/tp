@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
 import seedu.address.model.tag.Tag;
@@ -21,7 +20,7 @@ public class FindTagCaseSensitiveCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCaseInsensitiveCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCaseSensitiveCommand.MESSAGE_USAGE));
     }
 
     @Test

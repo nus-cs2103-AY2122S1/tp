@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindOrCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FindOrPredicate;
@@ -29,7 +28,7 @@ public class FindOrCommandParser implements Parser<FindOrCommand> {
 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap =
