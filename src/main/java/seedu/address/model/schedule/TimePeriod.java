@@ -61,7 +61,8 @@ public class TimePeriod implements Comparable<TimePeriod> {
      * @return A boolean value indicating whether the moment is included.
      */
     public boolean containsMoment(LocalDateTime moment) {
-        return this.startDateTime.isBefore(moment) && this.endDateTime.isAfter(moment);
+        return (this.startDateTime.isBefore(moment) && this.endDateTime.isAfter(moment)) ||
+                (this.startDateTime.equals(moment) || this.endDateTime.equals(moment));
     }
 
     /**
