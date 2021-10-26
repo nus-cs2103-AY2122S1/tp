@@ -100,6 +100,7 @@ public class EditCommand extends Command {
         Lab updatedLab = editStudentDescriptor.getLab().orElse(null);
         Double updatedResult = editStudentDescriptor.getResult().orElse(null);
         if (updatedLab != null && updatedResult != null) {
+            System.out.println(updatedResult);
             studentToEdit.editLabResult(updatedLab, updatedResult);
             ObservableList<Lab> updatedList = studentToEdit.getLabResultList();
             return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail, updatedList);
