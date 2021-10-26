@@ -162,7 +162,9 @@ Examples:
   Friday
 * `addm n/Harry Li p/91234567 d/1 t/exco t/y2` adds Harry Li to the member list, indicates his availability on Monday and tags him as 'exco' and 'y2' :camera:
 
-![addmExample](images/addmExample.png)
+<p align="center">
+   <img src="images/addmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
