@@ -6,7 +6,25 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EaddCommand;
+import seedu.address.logic.commands.EdeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ElistCommand;
+import seedu.address.logic.commands.ElistmCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PaddCommand;
+import seedu.address.logic.commands.TaddCommand;
+import seedu.address.logic.commands.TdelCommand;
+import seedu.address.logic.commands.TeditCommand;
+import seedu.address.logic.commands.TfindCommand;
+import seedu.address.logic.commands.TlistCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -83,6 +101,9 @@ public class AddressBookParser {
 
         case TfindCommand.COMMAND_WORD:
             return new TfindCommandParser().parse(arguments);
+
+        case TeditCommand.COMMAND_WORD:
+            return new TeditCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
