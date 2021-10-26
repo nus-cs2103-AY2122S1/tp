@@ -20,13 +20,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemoveMarkCommand;
-<<<<<<< HEAD
 import seedu.address.logic.commands.SetRoleReqCommand;
-=======
 import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.logic.commands.SwapShiftCommand;
 import seedu.address.logic.commands.SwitchTabCommand;
->>>>>>> 60f7bf7c9dcc3b772fe59278d452496ae47c3d7f
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewScheduleCommand;
 import seedu.address.logic.commands.ViewShiftCommand;
