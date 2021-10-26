@@ -28,8 +28,8 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
             + PREFIX_STUDENT + "STUDENT_INDEX(s) (must be a positive integer) "
             + PREFIX_LESSON + "LESSON_INDEX(s) (must be a positive integer) "
             + "Example: " + COMMAND_FLAG
-            + "s/ 1 9 11 "
-            + "l/ 2 5 4 ";
+            + " s/ 1 9 11"
+            + " l/ 2 5 4";
 
     public static final String MESSAGE_SUCCESS = "Removed students:\n%1$s\nFrom these lessons:\n%2$s";
 
@@ -171,6 +171,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
         }
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.viewList(true);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentsToEdit, lessonsToEdit));
     }

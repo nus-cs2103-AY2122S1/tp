@@ -62,6 +62,13 @@ public class Students {
         }
     }
 
+    /**
+     * Returns the number of students in this list.
+     */
+    public int numberOfStudents() {
+        return students.size();
+    }
+
     @Override
     public String toString() {
         String str = "";
