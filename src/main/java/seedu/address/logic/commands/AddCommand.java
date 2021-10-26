@@ -62,7 +62,10 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(generateSuccessMessage(toAdd));
+
+        CommandResult commandResult = new CommandResult(generateSuccessMessage(toAdd));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     /**

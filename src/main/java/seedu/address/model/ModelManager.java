@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -27,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> onlyFilteredPersons;
     private final SortedList<Person> filteredPersons;
+    private final UserCommandCache userCommandCache;
 
     private final TaskListManager taskListManager;
 
@@ -42,8 +44,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.taskListManager = new TaskListManager();
-
         taskListManager.initialiseArchive(this.getAddressBook().getPersonList());
+        this.userCommandCache = UserCommandCache.getInstance();
 
         onlyFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new SortedList<>(onlyFilteredPersons);
@@ -110,6 +112,7 @@ public class ModelManager implements Model {
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
         taskListManager.deleteEntry(target.getName());
+        taskListManager.updateStatistics();
     }
 
     @Override
@@ -117,6 +120,7 @@ public class ModelManager implements Model {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         taskListManager.createNewEntry(person);
+        taskListManager.updateStatistics();
     }
 
     @Override
@@ -125,6 +129,7 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
         taskListManager.updateEntry(target, editedPerson);
+        taskListManager.updateStatistics();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -177,12 +182,46 @@ public class ModelManager implements Model {
     //=========== display task List Accessors =============================================================
 
     @Override
+    public TaskListManager getTaskListManager() {
+        return taskListManager;
+    }
+
+    @Override
     public ObservableList<Task> getDisplayTaskList() {
         return taskListManager.getFilteredTasks();
     }
 
     @Override
     public void displayPersonTaskList(Person person) {
-        taskListManager.setToDisplayTaskList(person.getName());
+        taskListManager.setToDisplayTaskList(person.getName(), false);
+    }
+
+    @Override
+    public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
+        taskListManager.setFilteredTasksPredicate(predicate);
+        taskListManager.setToDisplayTaskList(person.getName(), true);
+    }
+
+    //=========== cache operation =============================================================
+    /** Get the next input command in the cache */
+    public String getAfter() {
+        return userCommandCache.getAfter();
+    }
+
+    /** Get the previous input command in the cache */
+    public String getBefore() {
+        return userCommandCache.getBefore();
+    }
+
+    /** Add a command to the cache */
+    public void addCommand(String command) {
+        userCommandCache.addCommand(command);
+    }
+
+    //=========== statistics Assessors =====================================================================
+
+    @Override
+    public ObservableList<PieChart.Data> getStatistics() {
+        return taskListManager.getStatList();
     }
 }
