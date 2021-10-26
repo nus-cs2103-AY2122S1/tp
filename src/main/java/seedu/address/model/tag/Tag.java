@@ -67,10 +67,10 @@ public class Tag {
      * @return Type of tag represented by tag description.
      */
     public Type parseTagType(String tagDescription) {
-        assert(!tagName.isEmpty());
-        if (tagName.indexOf("event-") == 0) {
+        assert(!tagDescription.isEmpty());
+        if (tagDescription.indexOf("event-") == 0) {
             return Type.EVENT;
-        } else if (tagName.indexOf("mod-") == 0) {
+        } else if (tagDescription.indexOf("mod-") == 0) {
             return Type.MODULE;
         } else {
             return Type.GENERAL;
@@ -80,17 +80,18 @@ public class Tag {
     /**
      * Parses the tag name based on the given tag type and description.
      *
-     * @param tagDescription A valid tag description.
      * @param tagType Type of tag.
+     * * @param tagDescription A valid tag description.
      * @return Name of tag represented by tag description.
      */
     public String parseTagName(Type tagType, String tagDescription) {
         if (tagType == Type.GENERAL) {
-            return tagName;
+            return tagDescription;
         } else if (tagType == Type.EVENT) {
-            return tagName.substring(6).trim();
+            return tagDescription.substring(6).trim();
         } else {
-            return tagName.substring(4).trim();
+            return tagDescription.substring(4).trim();
         }
     }
 }
+
