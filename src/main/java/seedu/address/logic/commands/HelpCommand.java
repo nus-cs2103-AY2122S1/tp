@@ -12,8 +12,7 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE =
-            "Try entering...\n"
+    public static final String SHOWING_HELP_MESSAGE = "Try entering...\n"
             + "add <parameters>                 " + "\tAdd a contact\n"
             + "alias <parameters>               " + "\tCreate command shortcut\n"
             + "clear                            " + "\t\t\tClear all contacts\n"
