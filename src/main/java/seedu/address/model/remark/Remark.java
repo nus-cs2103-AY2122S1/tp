@@ -1,5 +1,7 @@
 package seedu.address.model.remark;
 
+import seedu.address.model.person.UniquePersonList;
+
 import static java.util.Objects.requireNonNull;
 /**
  * Represents a Remark in the address book.
@@ -9,7 +11,7 @@ public class Remark {
     public final String remarkDetail;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Remark}.
      *
      * @param remarkDetail A valid tag name.
      */

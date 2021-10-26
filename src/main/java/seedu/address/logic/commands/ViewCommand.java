@@ -3,36 +3,52 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views a particular contact  "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "the specified index and displays the details of the contact at said index.\n"
+            + "Parameters: INDEX...\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Index index;
 
-    public ViewCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    public ViewCommand(Index index) {
+        this.index = index;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person viewPerson = lastShownList.get(index.getZeroBased());
+        model.updateViewedPerson(new Predicate<Person>() {
+            @Override
+            public boolean test(Person p) {
+                return p.equals(viewPerson);
+            }
+        });
+
+        return new CommandResult(String.format(Messages.MESSAGE_VIEW_PERSON, viewPerson.getName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewCommand // instanceof handles nulls
-                && predicate.equals(((ViewCommand) other).predicate)); // state check
+                && index.equals(((ViewCommand) other).index)); // state check
     }
 }
