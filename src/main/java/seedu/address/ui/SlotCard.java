@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.time.DayOfWeek;
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
