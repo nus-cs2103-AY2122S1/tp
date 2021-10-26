@@ -155,7 +155,7 @@ public class Lesson {
 
         if (price != null) {
             builder.append("; Lesson's price: ")
-                    .append(getCapacity());
+                    .append(getPrice());
         }
 
         if (students != null) {

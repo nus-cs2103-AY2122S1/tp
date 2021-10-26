@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showLessonAtIndex;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
@@ -29,8 +29,8 @@ public class ViewLessonCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Lesson lessonToView = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
-        ViewLessonCommand viewLessonCommand = new ViewLessonCommand(INDEX_FIRST_LESSON);
+        Lesson lessonToView = model.getFilteredLessonList().get(INDEX_FIRST_ITEM.getZeroBased());
+        ViewLessonCommand viewLessonCommand = new ViewLessonCommand(INDEX_FIRST_ITEM);
 
         String expectedMessage = "Viewing requested lesson";
 
@@ -50,10 +50,10 @@ public class ViewLessonCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showLessonAtIndex(model, INDEX_FIRST_LESSON);
+        showLessonAtIndex(model, INDEX_FIRST_ITEM);
 
-        Lesson lessonToView = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
-        ViewLessonCommand viewLessonCommand = new ViewLessonCommand(INDEX_FIRST_LESSON);
+        Lesson lessonToView = model.getFilteredLessonList().get(INDEX_FIRST_ITEM.getZeroBased());
+        ViewLessonCommand viewLessonCommand = new ViewLessonCommand(INDEX_FIRST_ITEM);
 
         String expectedMessage = "Viewing requested lesson";
 
@@ -65,9 +65,9 @@ public class ViewLessonCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showLessonAtIndex(model, INDEX_FIRST_LESSON);
+        showLessonAtIndex(model, INDEX_FIRST_ITEM);
 
-        Index outOfBoundIndex = INDEX_SECOND_LESSON;
+        Index outOfBoundIndex = INDEX_SECOND_ITEM;
         // ensures that outOfBoundIndex is still in bounds of lesson list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getLessonBook().getLessonList().size());
 
@@ -78,14 +78,14 @@ public class ViewLessonCommandTest {
 
     @Test
     public void equals() {
-        ViewLessonCommand viewFirstCommand = new ViewLessonCommand(INDEX_FIRST_LESSON);
-        ViewLessonCommand viewSecondCommand = new ViewLessonCommand(INDEX_SECOND_LESSON);
+        ViewLessonCommand viewFirstCommand = new ViewLessonCommand(INDEX_FIRST_ITEM);
+        ViewLessonCommand viewSecondCommand = new ViewLessonCommand(INDEX_SECOND_ITEM);
 
         // same object -> returns true
         assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewLessonCommand viewFirstCommandCopy = new ViewLessonCommand(INDEX_FIRST_LESSON);
+        ViewLessonCommand viewFirstCommandCopy = new ViewLessonCommand(INDEX_FIRST_ITEM);
         assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false

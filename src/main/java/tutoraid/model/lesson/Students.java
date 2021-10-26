@@ -91,7 +91,11 @@ public class Students {
             counter++;
         }
 
-        return str;
+        if (str.equals("")) {
+            return "No students";
+        } else {
+            return str;
+        }
     }
 
     @Override
