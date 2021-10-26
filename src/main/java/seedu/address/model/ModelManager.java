@@ -156,7 +156,7 @@ public class ModelManager implements Model {
     public String getAppointmentsThatOnlyHaveThisClientAsString(Person client) {
         List<Appointment> appointmentsThatOnlyHaveThisClient = new ArrayList<>();
         for (Appointment appointment : getRelatedAppointments(client)) {
-            if (appointment.hasClient(client) && appointment.getClientList().size() == 1) {
+            if (appointment.isTheOnlyClient(client)) {
                 appointmentsThatOnlyHaveThisClient.add(appointment);
             }
         }

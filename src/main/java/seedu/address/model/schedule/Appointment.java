@@ -105,6 +105,15 @@ public class Appointment {
                 && otherApp.getTime().equals(getTime());
     }
 
+    /**
+     * Checks whether the given client is the only client in the client list of this {@Code Appointment}.
+     * @param client the given client.
+     * @return A boolean value indicating whether the given client is the only client.
+     */
+    public boolean isTheOnlyClient(Person client) {
+        return this.hasClient(client) && this.getClientList().size() == 1;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(clients, location, date, time, description);
