@@ -16,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -29,6 +30,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -142,6 +144,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_alias() throws Exception {
+        assertTrue(parser.parseCommand(
+                AliasCommand.COMMAND_WORD + " aliasWord " + PREFIX_ALIAS + ExitCommand.COMMAND_WORD)
+                instanceof AliasCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -151,4 +160,6 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    // todo: add tests related to alias parsing
 }

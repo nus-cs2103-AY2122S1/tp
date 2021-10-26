@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.Alias;
 import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
@@ -45,6 +47,26 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Sets the user prefs' aliases.
+     */
+    void setAliases(Map<String, String> aliases);
+
+    /**
+     * Returns the user prefs' aliases.
+     */
+    Map<String, String> getAliases();
+
+    /**
+     * Adds an alias to the user prefs' aliases.
+     */
+    void addAlias(Alias alias);
+
+    /**
+     * Removes an alias from the user pref's aliases.
+     */
+    void removeAlias(Alias alias);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

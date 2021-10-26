@@ -13,5 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SCORE = new Prefix("-s ");
     public static final Prefix PREFIX_TAG = new Prefix("-t ");
     public static final Prefix PREFIX_FILE = new Prefix("-f ");
+    public static final Prefix PREFIX_ALIAS = new Prefix("-> "); // there was no appropriate letter left
 
 }

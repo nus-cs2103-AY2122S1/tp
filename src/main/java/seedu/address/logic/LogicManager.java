@@ -35,6 +35,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        addressBookParser.addAliases(model.getAliases());
     }
 
     @Override

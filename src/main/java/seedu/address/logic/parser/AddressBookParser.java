@@ -1,8 +1,14 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.util.CollectionUtil.equalsIgnoreOrder;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +17,7 @@ import seedu.address.logic.commands.AddAssessmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddScoreCommand;
+import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -28,11 +35,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class AddressBookParser {
-
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private final List<Alias> aliases = new ArrayList<>();
 
     /**
      * Parses user input into command for execution.
@@ -51,7 +58,7 @@ public class AddressBookParser {
         String arguments = matcher.group("arguments");
 
         // if it ends with a prefix, add a space so that the prefix can be picked up by the tokenizer
-        if (arguments.matches(".*-[a-z]$")) {
+        if (arguments.matches(".*-[a-z|>]$")) {
             arguments = arguments + " ";
         }
 
@@ -84,15 +91,18 @@ public class AddressBookParser {
         case ExportCommand.COMMAND_WORD:
             return new ExportCommand();
 
+        case AliasCommand.COMMAND_WORD:
+            return new AliasCommandParser(this).parse(arguments);
+
         default:
             boolean isTwoWordCommand = arguments.length() > 0
                     && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
 
             if (isTwoWordCommand) {
                 return parseTwoWordCommand(commandWord, arguments);
-            } else {
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
+
+            return parseAliases(userInput);
         }
     }
 
@@ -158,4 +168,65 @@ public class AddressBookParser {
         return fullCommandWord;
     }
 
+    /**
+     * Creates Aliases and adds it into the list for each aliasWord -> commandWord mapping in the provided Map.
+     */
+    public void addAliases(Map<String, String> aliases) {
+        requireNonNull(aliases);
+        for (String aliasWord : aliases.keySet()) {
+            if (Alias.isValidAlias(aliasWord)) {
+                addAlias(new Alias(aliasWord, aliases.get(aliasWord)));
+            }
+        }
+    }
+
+    /**
+     * Adds or replaces the alias in the parser's list of aliases.
+     */
+    public void addAlias(Alias alias) {
+        requireNonNull(alias);
+        removeAlias(alias);
+        aliases.add(alias);
+    }
+
+    /**
+     * Removes the provided alias from the parser's list of aliases.
+     */
+    public void removeAlias(Alias alias) {
+        requireNonNull(alias);
+        Optional<Alias> existing = aliases.stream()
+                .filter(a -> a.getAliasWord().equals(alias.getAliasWord()))
+                .findFirst();
+        existing.ifPresent(aliases::remove);
+    }
+
+    /**
+     * Returns true if there exists an alias with the same aliasWord as the one provided.
+     */
+    public boolean containsAlias(String aliasWord) {
+        return aliases.stream().anyMatch(a -> a.getAliasWord().equals(aliasWord));
+    }
+
+    /**
+     * Tries to match the user input to an alias. Throws ParseException if none match.
+     */
+    private Command parseAliases(String userInput) throws ParseException {
+        // matches the first word to the alias
+        Optional<Alias> firstAlias = aliases.stream()
+                .filter(alias -> userInput.split(" ")[0].equals(alias.getAliasWord()))
+                .findFirst();
+
+        Alias alias = firstAlias.orElseThrow(() -> new ParseException(MESSAGE_UNKNOWN_COMMAND));
+
+        // replace the command of the user input, then try to parse again
+        String newUserInput = alias.replaceFirst(userInput);
+        return parseCommand(newUserInput);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof AddressBookParser
+                && equalsIgnoreOrder(aliases, ((AddressBookParser) other).aliases));
+    }
 }

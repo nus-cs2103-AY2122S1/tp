@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.Alias;
 import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
@@ -76,6 +78,26 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public Map<String, String> getAliases() {
+        return userPrefs.getAliases();
+    }
+
+    @Override
+    public void setAliases(Map<String, String> aliases) {
+        userPrefs.setAliases(aliases);
+    }
+
+    @Override
+    public void addAlias(Alias alias) {
+        userPrefs.addAlias(alias);
+    }
+
+    @Override
+    public void removeAlias(Alias alias) {
+        userPrefs.removeAlias(alias);
     }
 
     //=========== AddressBook ================================================================================

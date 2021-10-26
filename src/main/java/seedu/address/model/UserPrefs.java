@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.Alias;
 
 /**
  * Represents User's preferences.
@@ -15,6 +18,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "sourcecontrol.json");
+    private Map<String, String> aliases = new HashMap<>();
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +40,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setAliases(newUserPrefs.getAliases());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,6 +61,23 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    public Map<String, String> getAliases() {
+        return aliases;
+    }
+
+    public void setAliases(Map<String, String> aliases) {
+        requireNonNull(aliases);
+        this.aliases = aliases;
+    }
+
+    public void addAlias(Alias alias) {
+        this.aliases.put(alias.getAliasWord(), alias.getCommandWord());
+    }
+
+    public void removeAlias(Alias alias) {
+        this.aliases.remove(alias.getAliasWord());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -68,7 +90,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && addressBookFilePath.equals(o.addressBookFilePath)
+                && aliases.equals(o.aliases);
     }
 
     @Override

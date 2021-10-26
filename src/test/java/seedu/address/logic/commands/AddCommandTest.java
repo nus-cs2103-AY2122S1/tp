@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Alias;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -177,6 +179,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAliases(Map<String, String> aliases) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Map<String, String> getAliases() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAlias(Alias alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAlias(Alias alias) {
             throw new AssertionError("This method should not be called.");
         }
     }
