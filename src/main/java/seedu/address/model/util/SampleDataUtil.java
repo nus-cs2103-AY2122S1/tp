@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.Conthacks;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyConthacks;
 import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.LessonTime;
@@ -57,7 +57,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyConthacks getSampleAddressBook() {
         Conthacks sampleAb = new Conthacks();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

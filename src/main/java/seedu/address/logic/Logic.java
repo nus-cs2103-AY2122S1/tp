@@ -7,7 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyConthacks;
 import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
@@ -27,9 +27,9 @@ public interface Logic {
     /**
      * Returns the Conthacks.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getConthacks()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyConthacks getConthacks();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -40,7 +40,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getConthacksFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

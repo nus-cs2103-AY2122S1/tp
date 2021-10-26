@@ -49,7 +49,7 @@ public class ConthacksTest {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(ALICE).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        ConthacksStub newData = new ConthacksStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> conthacks.resetData(newData));
     }
@@ -100,13 +100,13 @@ public class ConthacksTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyConthacks whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ConthacksStub implements ReadOnlyConthacks {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<ModuleLesson> classes = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        ConthacksStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

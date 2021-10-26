@@ -48,7 +48,7 @@ public class EditPersonCommandTest {
 
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new Conthacks(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Conthacks(model.getConthacks()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
@@ -61,7 +61,7 @@ public class EditPersonCommandTest {
 
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new Conthacks(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Conthacks(model.getConthacks()), new UserPrefs());
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
     }
@@ -77,7 +77,7 @@ public class EditPersonCommandTest {
 
         String expectedMessage = String.format(EditPersonCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new Conthacks(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Conthacks(model.getConthacks()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
@@ -97,7 +97,7 @@ public class EditPersonCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
 
         // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND.getZeroBased());
+        Person personInList = model.getConthacks().getPersonList().get(INDEX_SECOND.getZeroBased());
         EditPersonCommand editPersonCommand = new EditPersonCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder(personInList).build());
 
@@ -122,7 +122,7 @@ public class EditPersonCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getConthacks().getPersonList().size());
 
         EditPersonCommand editPersonCommand = new EditPersonCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());

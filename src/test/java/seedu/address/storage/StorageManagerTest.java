@@ -12,7 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Conthacks;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyConthacks;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -56,7 +56,7 @@ public class StorageManagerTest {
          */
         Conthacks original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyConthacks retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new Conthacks(retrieved));
     }
 

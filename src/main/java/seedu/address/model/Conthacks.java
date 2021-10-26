@@ -16,7 +16,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class Conthacks implements ReadOnlyAddressBook {
+public class Conthacks implements ReadOnlyConthacks {
 
     private final UniquePersonList persons;
     private final UniqueModuleLessonList moduleLessons;
@@ -38,7 +38,7 @@ public class Conthacks implements ReadOnlyAddressBook {
     /**
      * Creates an Conthacks using the Persons in the {@code toBeCopied}
      */
-    public Conthacks(ReadOnlyAddressBook toBeCopied) {
+    public Conthacks(ReadOnlyConthacks toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -64,7 +64,7 @@ public class Conthacks implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code Conthacks} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyConthacks newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());

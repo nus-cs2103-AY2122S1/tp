@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given conthacks and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyConthacks addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -69,21 +69,21 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getConthacksFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setConthacksFilePath(Path conthacksFilePath) {
+        requireNonNull(conthacksFilePath);
+        userPrefs.setAddressBookFilePath(conthacksFilePath);
     }
 
     //=========== Conthacks ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.conthacks.resetData(addressBook);
+    public void setConthacks(ReadOnlyConthacks conthacks) {
+        this.conthacks.resetData(conthacks);
     }
 
     /**
@@ -92,12 +92,12 @@ public class ModelManager implements Model {
      * For {@code ModuleLesson}, it is sorted by their module code.
      */
     @Override
-    public void sortAddressBook() {
+    public void sortConthacks() {
         conthacks.sortAddressBook();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyConthacks getConthacks() {
         return conthacks;
     }
 

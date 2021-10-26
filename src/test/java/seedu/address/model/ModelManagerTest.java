@@ -27,7 +27,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new Conthacks(), new Conthacks(modelManager.getAddressBook()));
+        assertEquals(new Conthacks(), new Conthacks(modelManager.getConthacks()));
     }
 
     @Test
@@ -63,14 +63,14 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setConthacksFilePath(null));
     }
 
     @Test
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setConthacksFilePath(path);
+        assertEquals(path, modelManager.getConthacksFilePath());
     }
 
     @Test
@@ -136,15 +136,15 @@ public class ModelManagerTest {
         Conthacks conthacks = new Conthacks();
         conthacks.addPerson(BOB);
         conthacks.addPerson(ALICE);
-        modelManager.setAddressBook(conthacks);
+        modelManager.setConthacks(conthacks);
 
         Conthacks expectedConthacks = new Conthacks();
         expectedConthacks.addPerson(ALICE);
         expectedConthacks.addPerson(BOB);
         ModelManager expectedModelManager = new ModelManager();
-        expectedModelManager.setAddressBook(expectedConthacks);
+        expectedModelManager.setConthacks(expectedConthacks);
 
-        modelManager.sortAddressBook();
+        modelManager.sortConthacks();
         assertEquals(expectedModelManager, modelManager);
     }
 }

@@ -19,7 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Conthacks;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyConthacks;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
@@ -102,12 +102,12 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getConthacksFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setConthacksFilePath(Path conthacksFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -122,17 +122,17 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setConthacks(ReadOnlyConthacks conthacks) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void sortAddressBook() {
+        public void sortConthacks() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyConthacks getConthacks() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -234,7 +234,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyConthacks getConthacks() {
             return new Conthacks();
         }
     }

@@ -17,7 +17,7 @@ public class ClearPersonCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.clearPersons();
-        assert model.getAddressBook().getPersonList().isEmpty();
+        assert model.getConthacks().getPersonList().isEmpty();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

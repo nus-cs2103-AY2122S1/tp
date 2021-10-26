@@ -35,7 +35,7 @@ import seedu.address.testutil.ModuleLessonBuilder;
 public class EditModuleLessonCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(new Conthacks(model.getAddressBook()), new UserPrefs());
+    private Model expectedModel = new ModelManager(new Conthacks(model.getConthacks()), new UserPrefs());
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -120,7 +120,7 @@ public class EditModuleLessonCommandTest {
         Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
 
         // ensures that invalidIndex is still in bounds of address book list
-        assertTrue(invalidIndex.getZeroBased() < model.getAddressBook().getModuleLessonList().size());
+        assertTrue(invalidIndex.getZeroBased() < model.getConthacks().getModuleLessonList().size());
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                         .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
