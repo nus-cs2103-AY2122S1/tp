@@ -12,9 +12,7 @@ public class ClassId {
             "Class ID should only contain 3 alphanumeric characters that begins with B followed by class number "
                     + "(eg. B01 or B11), and it should not be blank";
 
-    /*
-     * A class ID must start with an alphabet followed by two numbers.
-     */
+    // A class ID must start with an alphabet followed by two numbers.
     private static final String VALIDATION_REGEX = "[B][0-9]{2}";
 
     private final String classId;
@@ -37,7 +35,6 @@ public class ClassId {
 
         return classId.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {

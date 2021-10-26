@@ -23,6 +23,7 @@ import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
+import seedu.programmer.logic.commands.DashboardCommandResult;
 import seedu.programmer.logic.commands.DownloadCommandResult;
 import seedu.programmer.logic.commands.EditCommandResult;
 import seedu.programmer.logic.commands.ExitCommandResult;
@@ -53,6 +54,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private StudentCard studentParticular;
+    private DashboardWindow dashboardWindow;
+    private boolean isDashboardShowing;
 
     @FXML
     private Scene primaryScene;
@@ -100,6 +103,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        isDashboardShowing = false;
     }
 
     public Stage getPrimaryStage() {
@@ -161,6 +165,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
             return;
         }
+        logger.fine("Showing help window about the application.");
         helpWindow.show();
     }
 
@@ -194,6 +199,18 @@ public class MainWindow extends UiPart<Stage> {
         }
         LabResultListPanel labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
+    }
+
+    private void handleDashboard() {
+        dashboardWindow = new DashboardWindow(logic);
+
+        if (isDashboardShowing) {
+            dashboardWindow.focus();
+            return;
+        }
+
+        logger.fine("Showing dashboard window...");
+        dashboardWindow.show();
     }
 
     /**
@@ -347,6 +364,8 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof EditCommandResult) {
                 EditCommandResult editCommandResult = (EditCommandResult) commandResult;
                 handleShowResult(editCommandResult.getEditedStudent());
+            } else if (commandResult instanceof DashboardCommandResult) {
+                handleDashboard();
             }
             return commandResult;
         } catch (CommandException | ParseException e) {

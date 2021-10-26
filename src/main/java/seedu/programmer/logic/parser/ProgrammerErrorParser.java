@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.AddLabCommand;
 import seedu.programmer.logic.commands.Command;
+import seedu.programmer.logic.commands.DashboardCommand;
 import seedu.programmer.logic.commands.DeleteCommand;
 import seedu.programmer.logic.commands.DeleteLabCommand;
 import seedu.programmer.logic.commands.DownloadCommand;
@@ -96,6 +97,9 @@ public class ProgrammerErrorParser {
 
         case UploadCommand.COMMAND_WORD:
             return new UploadCommand();
+
+        case DashboardCommand.COMMAND_WORD:
+            return new DashboardCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
