@@ -79,7 +79,7 @@ public class SampleDataUtil {
     public static Insurance ofValidInsurance(String insuranceName) {
         for (InsuranceType type : InsuranceType.values()) {
             if (type.getTypeName().equalsIgnoreCase(insuranceName)) {
-                return new Insurance(type);
+                return new Insurance(type, "");
             }
         }
         assert false; // This shouldn't happen in testing

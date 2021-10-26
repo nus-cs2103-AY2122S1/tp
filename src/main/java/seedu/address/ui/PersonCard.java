@@ -69,7 +69,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getInsurances().stream()
                 .forEach(insurance -> insurances.getChildren().add(
-                        new Label(insurance.getType().getTypeName())));
+                        new Label(insurance.toString())));
         note.setText(person.getNote().value);
         meeting.setText("Meeting: " + person.getAppointment().getValue());
         person.getClaims().stream()

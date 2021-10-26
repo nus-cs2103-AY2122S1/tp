@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
 public class AppointmentTest {
@@ -58,5 +60,29 @@ public class AppointmentTest {
     public void constructor_invalidDateTime_throwsIllegalArgumentException() {
         String invalidDateTimeString = "blahblah";
         assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidDateTimeString));
+    }
+
+    @Test
+    public void isUpcoming() {
+        Appointment expiredAppointment = new Appointment("05-Jan-1999 05:40");
+
+        LocalDateTime upcomingDate = LocalDateTime.now().plusDays(2);
+        Appointment upcomingAppointment = new Appointment(upcomingDate.format(Appointment.FORMATTER));
+
+        // date has passed
+        assertFalse(expiredAppointment.isUpcoming());
+
+        // date has yet to pass
+        assertTrue(upcomingAppointment.isUpcoming());
+    }
+
+    @Test
+    public void compareTo() {
+        Appointment earlierAppointment = new Appointment("05-Jan-1999 05:40");
+        Appointment laterAppointment = new Appointment("05-Jan-2000 05:40");
+
+        assertTrue(earlierAppointment.compareTo(earlierAppointment) == 0);
+        assertTrue(earlierAppointment.compareTo(laterAppointment) < 0);
+        assertTrue(laterAppointment.compareTo(earlierAppointment) > 0);
     }
 }

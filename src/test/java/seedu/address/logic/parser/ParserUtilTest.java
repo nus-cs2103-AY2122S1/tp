@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_INSURANCE = "Money";
     private static final String INVALID_CLAIM_TITLE = "@Title ";
-    private static final String INVALID_CLAIM_DESCRIPTION = " ";
+    private static final String INVALID_CLAIM_DESCRIPTION = " &*&*&*&*";
     private static final String INVALID_CLAIM_STATUS = "isCompleted";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -41,9 +41,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_INSURANCE_1 = "Life";
-    private static final String VALID_INSURANCE_2 = "Health";
-    private static final String VALID_INSURANCE_ANY_CAPS = "gENEraL";
+    private static final String VALID_INSURANCE_TYPE_1 = "Life";
+    private static final String VALID_INSURANCE_TYPE_2 = "Health";
+    private static final String VALID_INSURANCE_TYPE_ANY_CAPS = "gENEraL";
+    private static final String VALID_INSURANCE_BRAND_1 = "NTUC";
+    private static final String VALID_INSURANCE_BRAND_2 = "Aviva";
     private static final String VALID_CLAIM_TITLE = "Title";
     private static final String VALID_CLAIM_DESCRIPTION = "Description description.";
     private static final String VALID_CLAIM_STATUS = "Completed";
@@ -274,14 +276,16 @@ public class ParserUtilTest {
 
     @Test
     public void parseInsurance_validValue_returnsTag() throws Exception {
-        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_1);
-        assertEquals(expectedInsurance, ParserUtil.parseInsurance(VALID_INSURANCE_1));
+        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_TYPE_1, VALID_INSURANCE_BRAND_1);
+        assertEquals(expectedInsurance, ParserUtil.parseInsurance(
+                VALID_INSURANCE_TYPE_1 + WHITESPACE + VALID_INSURANCE_BRAND_1));
     }
 
     @Test
     public void parseInsurance_validValueAnyCaps_returnsTag() throws Exception {
-        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_ANY_CAPS);
-        assertEquals(expectedInsurance, ParserUtil.parseInsurance(VALID_INSURANCE_ANY_CAPS));
+        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_TYPE_ANY_CAPS, VALID_INSURANCE_BRAND_2);
+        assertEquals(expectedInsurance, ParserUtil.parseInsurance(
+                VALID_INSURANCE_TYPE_ANY_CAPS + WHITESPACE + VALID_INSURANCE_BRAND_2));
     }
 
     @Test
@@ -292,7 +296,8 @@ public class ParserUtilTest {
     @Test
     public void parseInsurances_collectionWithInvalidInsurances_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseInsurances(
-                Arrays.asList(VALID_INSURANCE_1, INVALID_INSURANCE)));
+                Arrays.asList(VALID_INSURANCE_BRAND_1 + " " + VALID_INSURANCE_BRAND_1,
+                        INVALID_INSURANCE + " " + VALID_INSURANCE_BRAND_2)));
     }
 
     @Test
@@ -303,9 +308,11 @@ public class ParserUtilTest {
     @Test
     public void parseInsurances_collectionWithValidInsurances_returnsInsuranceSet() throws Exception {
         Set<Insurance> actualInsuranceSet = ParserUtil.parseInsurances(
-                Arrays.asList(VALID_INSURANCE_1, VALID_INSURANCE_2));
+                Arrays.asList(VALID_INSURANCE_TYPE_1 + " " + VALID_INSURANCE_BRAND_1,
+                        VALID_INSURANCE_TYPE_2 + " " + VALID_INSURANCE_BRAND_2));
         Set<Insurance> expectedInsuranceSet = new HashSet<Insurance>(
-                Arrays.asList(Insurance.of(VALID_INSURANCE_1), Insurance.of(VALID_INSURANCE_2)));
+                Arrays.asList(Insurance.of(VALID_INSURANCE_TYPE_1, VALID_INSURANCE_BRAND_1),
+                        Insurance.of(VALID_INSURANCE_TYPE_2, VALID_INSURANCE_BRAND_2)));
 
         assertEquals(expectedInsuranceSet, actualInsuranceSet);
     }
