@@ -15,11 +15,11 @@ import seedu.address.logic.commands.UnmarkCommand;
 
 public class MarkingCommandParserTest {
 
-    private final String MARK_COMMAND_WORD = "mark";
-    private final String UNMARK_COMMAND_WORD = "unmark";
+    private String markCommandWord = "mark";
+    private String unmarkCommandWord = "unmark";
 
-    private MarkingCommandParser parserForMark = new MarkingCommandParser(MARK_COMMAND_WORD);
-    private MarkingCommandParser parserForUnmark = new MarkingCommandParser(UNMARK_COMMAND_WORD);
+    private MarkingCommandParser parserForMark = new MarkingCommandParser(markCommandWord);
+    private MarkingCommandParser parserForUnmark = new MarkingCommandParser(unmarkCommandWord);
 
     @Test
     public void parse_validArgs_returnsMarkingCommand() {
