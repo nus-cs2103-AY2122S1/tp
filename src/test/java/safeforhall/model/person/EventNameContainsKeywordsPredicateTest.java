@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.testutil.PersonBuilder;
 
-public class NameContainsEventKeywordsPredicateTest {
+public class EventNameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {

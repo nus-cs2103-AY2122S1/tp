@@ -15,11 +15,10 @@ import javafx.scene.text.TextFlow;
 import safeforhall.logic.Logic;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.CommandResult;
+import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.commands.ExitCommand;
-import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.IncludeCommand;
-import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeleteEventCommand;
@@ -27,6 +26,8 @@ import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.commands.edit.EditEventCommand;
 import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
+import safeforhall.logic.commands.find.FindEventCommand;
+import safeforhall.logic.commands.find.FindPersonCommand;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -247,12 +248,12 @@ public class CommandBox extends UiPart<Region> {
                 return ClearCommand.PARAMETERS;
             case ExitCommand.COMMAND_WORD:
                 return ExitCommand.PARAMETERS;
-            case FindCommand.COMMAND_WORD:
-                return FindCommand.PARAMETERS;
+            case FindPersonCommand.COMMAND_WORD:
+                return FindPersonCommand.PARAMETERS;
             case HelpCommand.COMMAND_WORD:
                 return HelpCommand.PARAMETERS;
-            case ListCommand.COMMAND_WORD:
-                return ListCommand.PARAMETERS;
+            case DeadlineCommand.COMMAND_WORD:
+                return DeadlineCommand.PARAMETERS;
             default:
                 return "";
             }
@@ -270,8 +271,8 @@ public class CommandBox extends UiPart<Region> {
                 return ClearCommand.PARAMETERS;
             case ExitCommand.COMMAND_WORD:
                 return ExitCommand.PARAMETERS;
-            case FindCommand.COMMAND_WORD:
-                return FindCommand.PARAMETERS;
+            case FindEventCommand.COMMAND_WORD:
+                return FindEventCommand.PARAMETERS;
             case HelpCommand.COMMAND_WORD:
                 return HelpCommand.PARAMETERS;
             case IncludeCommand.COMMAND_WORD:
