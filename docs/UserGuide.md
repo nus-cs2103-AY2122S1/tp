@@ -14,7 +14,7 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage studentsâ
   * [Retrieve](#retrieving-additional-information-of-students-retrieve)
   * [Sort List](#sorting-the-list--sort)
   * [Add Attendance](#editing-a-students-studio-attendance-attendance)
-  * [Add Participation](#editing-a-students-studio-participation-part)
+  * [Add Participation](#editing-a-students-studio-participation-participation)
   * [Add Grade](#adding-grades-for-an-assessment--grade)
   * [Show Grade](#displaying-the-grades-for-an-assessment--show)
   * [Visualise all Grades](#visualizing-assessments-grades-of-the-entire-class-vis)
