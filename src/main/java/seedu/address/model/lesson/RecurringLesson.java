@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -75,10 +76,11 @@ public class RecurringLesson extends Lesson {
     }
 
     /**
-     * Returns true if intersects.
+     * Returns true if the date intervals intersect with each other, not considering
+     * cancelled dates as intersection.
      *
-     * @param other Other lesson to check.
-     * @return
+     * @param other Other lesson to check for intersection.
+     * @return True if they intersect
      */
     private boolean checkIntersection(Lesson other) {
         // Non-terminating recurrence
@@ -95,16 +97,18 @@ public class RecurringLesson extends Lesson {
         LocalDate earlierEnd = Collections.min(Arrays.asList(getEndDate().getLocalDate(),
                 other.getEndDate().getLocalDate()));
         // 3 points, 2 interval
-        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEnd.plusDays(1)) + 1;
+        // adjust end date to same day of week
+        LocalDate earlierEndDate = earlierEnd.with(TemporalAdjusters.previousOrSame(getDayOfWeek()));
+        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEndDate.plusDays(1)) + 1;
 
         Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream().sorted()
-                .takeWhile(date -> date.getLocalDate().compareTo(laterStart) >= 0
-                    && date.getLocalDate().compareTo(earlierEnd) <= 0)
+                .filter(date -> !date.getLocalDate().isBefore(laterStart)
+                    && !date.getLocalDate().isAfter(earlierEnd))
                 .filter(date -> !otherCancelledDates.contains(date))
                 .collect(Collectors.toSet());
 
         Set<Date> otherCancelledDatesWithinIntersection = otherCancelledDates.stream().sorted()
-            .takeWhile(date -> date.getLocalDate().compareTo(laterStart) >= 0
+            .filter(date -> date.getLocalDate().compareTo(laterStart) >= 0
                 && date.getLocalDate().compareTo(earlierEnd) <= 0)
             .collect(Collectors.toSet());
 
@@ -123,7 +127,8 @@ public class RecurringLesson extends Lesson {
     @Override
     public boolean isClashing(Lesson otherLesson) {
         if (otherLesson.isRecurring()) {
-            return checkOverlapping(otherLesson) // check if date range overlaps
+            return !otherLesson.isCancelled() && !isCancelled()
+                    && checkOverlapping(otherLesson) // check if date range overlaps
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
                     && getTimeRange().isClashing(otherLesson.getTimeRange())
                     && checkIntersection(otherLesson); //check if cancelled dates number the size of intersection
@@ -146,9 +151,9 @@ public class RecurringLesson extends Lesson {
             return false;
         }
 
-        // number of weeks between start and end
+        // number of weeks between start and end plus the start
         long numLessons = ChronoUnit.WEEKS.between(getStartDate().getLocalDate(),
-                getEndDate().getLocalDate());
+                getEndDate().getLocalDate()) + 1;
 
         return numLessons == getCancelledDates().size();
     }

@@ -63,11 +63,7 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public boolean isClashing(Lesson otherLesson) {
-        // this makeup lesson is cancelled
-        if (getCancelledDates().contains(getStartDate())) {
-            return false;
-        }
-        return !isCancelled()
+        return !isCancelled() && !otherLesson.isCancelled()
                 && otherLesson.hasLessonOnDate(getStartDate())
                 && getTimeRange().isClashing(otherLesson.getTimeRange());
     }

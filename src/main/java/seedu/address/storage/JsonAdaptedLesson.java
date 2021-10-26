@@ -145,9 +145,10 @@ class JsonAdaptedLesson {
     }
 
     private void checkNullFields() throws IllegalValueException {
-        if (date == null) {
+        if (date == null || endDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
+
         if (timeRange == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TimeRange.class.getSimpleName()));
