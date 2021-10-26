@@ -1,5 +1,6 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -32,9 +33,13 @@ public class Group {
      * Constructor for a new Group object
      */
     public Group(GroupName name, Members members, LinkYear year, RepoName repoName, Set<Tag> tags) {
-        requireAllNonNull(name, members);
+        requireNonNull(name);
         this.name = name;
-        this.members = members;
+        if (members != null) {
+            this.members = members;
+        } else {
+            this.members = new Members();
+        }
         if (year != null) {
             this.year = year;
         } else {

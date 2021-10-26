@@ -2,15 +2,19 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REPO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.tag.Tag;
 
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
@@ -22,7 +26,10 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
      */
     public AddGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GROUP, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_GROUP, PREFIX_TAG, PREFIX_REPO, PREFIX_YEAR);
+
+        LinkYear year = null;
+        RepoName repo = null;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -32,7 +39,15 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
         GroupName name = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Group group = new Group(name, tagList);
+        if (argMultimap.getValue(PREFIX_YEAR).isPresent()) {
+            year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_REPO).isPresent()) {
+            repo = ParserUtil.parseRepo(argMultimap.getValue(PREFIX_REPO).get());
+        }
+
+        Group group = new Group(name, null, year, repo, tagList);
 
         return new AddGroupCommand(group);
     }

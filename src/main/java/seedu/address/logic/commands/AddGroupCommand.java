@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REPO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,6 +22,8 @@ public class AddGroupCommand extends Command {
             + PREFIX_GROUP + "NAME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP + "W14-4 "
+            + PREFIX_YEAR + "AY20212022 "
+            + PREFIX_REPO + "tp "
             + PREFIX_TAG + "tApp";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
