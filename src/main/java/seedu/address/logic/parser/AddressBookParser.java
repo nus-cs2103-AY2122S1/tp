@@ -185,16 +185,16 @@ public class AddressBookParser {
      */
     public void addAlias(Alias alias) {
         requireNonNull(alias);
-        removeAlias(alias);
+        removeAlias(alias.getAliasWord());
         aliases.add(alias);
     }
 
     /**
      * Removes the provided alias from the parser's list of aliases.
      */
-    public void removeAlias(Alias alias) {
-        requireNonNull(alias);
-        Optional<Alias> existing = getAlias(alias.getAliasWord());
+    public void removeAlias(String aliasWord) {
+        requireNonNull(aliasWord);
+        Optional<Alias> existing = getAlias(aliasWord);
         existing.ifPresent(aliases::remove);
     }
 

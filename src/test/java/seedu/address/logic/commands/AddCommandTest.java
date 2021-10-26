@@ -203,7 +203,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void removeAlias(Alias alias) {
+        public void removeAlias(String aliasWord) {
             throw new AssertionError("This method should not be called.");
         }
     }

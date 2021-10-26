@@ -66,7 +66,7 @@ public interface Model {
     /**
      * Removes an alias from the user pref's aliases.
      */
-    void removeAlias(Alias alias);
+    void removeAlias(String aliasWord);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

@@ -42,8 +42,8 @@ public class AliasCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (alias.isRedundant()) {
-            model.removeAlias(alias);
-            parser.removeAlias(alias);
+            model.removeAlias(alias.getAliasWord());
+            parser.removeAlias(alias.getAliasWord());
             return new CommandResult(String.format(MESSAGE_REMOVE_SUCCESS, alias.getAliasWord()));
         } else {
             model.addAlias(alias);

@@ -96,8 +96,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeAlias(Alias alias) {
-        userPrefs.removeAlias(alias);
+    public void removeAlias(String aliasWord) {
+        userPrefs.removeAlias(aliasWord);
     }
 
     //=========== AddressBook ================================================================================

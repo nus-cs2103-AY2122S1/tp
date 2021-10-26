@@ -74,8 +74,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.aliases.put(alias.getAliasWord(), alias.getCommandWord());
     }
 
-    public void removeAlias(Alias alias) {
-        this.aliases.remove(alias.getAliasWord());
+    public void removeAlias(String aliasWord) {
+        this.aliases.remove(aliasWord);
     }
 
     @Override
