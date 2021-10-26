@@ -172,6 +172,11 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public void deleteDoneTasks() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public UserInputList getUserInputList() {
             throw new AssertionError("This method should not be called.");
         }
