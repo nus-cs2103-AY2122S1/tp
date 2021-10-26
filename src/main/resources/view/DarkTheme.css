@@ -328,9 +328,20 @@
     -fx-padding: 8 1 8 1;
 }
 
-#cardPane {
+.dayCard {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
+}
+
+.dayCardLight {
+    -fx-background-color: #31c445;
+}
+
+.dayCardMed {
+    -fx-background-color: #ebe307;
+}
+
+.dayCardHeavy {
+    -fx-background-color: #f03e02;
 }
 
 #commandTypeLabel {

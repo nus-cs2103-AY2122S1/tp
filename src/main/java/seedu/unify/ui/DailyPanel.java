@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.task.Task;
 
@@ -22,6 +23,8 @@ public class DailyPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(DailyPanel.class);
 
     @FXML
+    private VBox box;
+    @FXML
     private Label day;
     @FXML
     private ListView<Task> taskListView;
@@ -33,7 +36,7 @@ public class DailyPanel extends UiPart<Region> {
         super(FXML);
         day.setText(date.getDayOfWeek().toString());
         taskListView.setItems(dailyTaskList);
-        taskListView.setCellFactory(listView -> new DailyViewCell());
+        taskListView.setCellFactory(listView -> new DailyViewCell(dailyTaskList.size()));
         dailyTaskList.addListener((ListChangeListener<Task>) c -> {
             taskListView.setItems(dailyTaskList);
         });
@@ -43,15 +46,21 @@ public class DailyPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code DayCard}.
      */
     class DailyViewCell extends ListCell<Task> {
+
+        private final int size;
+
+        DailyViewCell(int size) {
+            this.size = size;
+        }
+
         @Override
         protected void updateItem(Task task, boolean empty) {
             super.updateItem(task, empty);
-
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new DayCard(task).getRoot());
+                setGraphic(new DayCard(task, size).getRoot());
             }
         }
     }
