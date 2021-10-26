@@ -25,6 +25,7 @@ import seedu.address.logic.commands.member.MfindCommand;
 import seedu.address.logic.commands.member.MlistCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
+import seedu.address.logic.commands.task.TeditCommand;
 import seedu.address.logic.commands.task.TlistCommand;
 import seedu.address.logic.parser.event.EaddCommandParser;
 import seedu.address.logic.parser.event.EdelCommandParser;
@@ -42,6 +43,7 @@ import seedu.address.logic.parser.member.MfindCommandParser;
 import seedu.address.logic.parser.member.MlistCommandParser;
 import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.logic.parser.task.TdelCommandParser;
+import seedu.address.logic.parser.task.TeditCommandParser;
 import seedu.address.logic.parser.task.TlistCommandParser;
 
 /**
@@ -127,6 +129,9 @@ public class AddressBookParser {
 
         case TlistCommand.COMMAND_WORD:
             return new TlistCommandParser().parse(arguments);
+
+        case TeditCommand.COMMAND_WORD:
+            return new TeditCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
