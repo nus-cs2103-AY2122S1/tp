@@ -212,7 +212,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
 
     @Override
     public boolean canAssignLesson(Lesson lesson) {
-        return !lesson.doLessonsOverlap(lesson);
+        return !lessonList.doesLessonOverlap(lesson);
     }
 
     @Override

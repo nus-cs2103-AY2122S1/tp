@@ -178,7 +178,7 @@ Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
 * `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
   for 8am.
-* Overlapping tasks cannot be added.
+* Overlapping lessons cannot be added. These include any lessons in groups that the student is in.
 
 Example:
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
@@ -266,6 +266,43 @@ Format: `student -dg INDEX`
 
 Examples:
 * `student -dg 5` deletes the group specified at the index 5.
+</details>
+
+### Adding a lesson to a group: `group -al`
+
+<details markdown="1">
+<summary>
+Adds a lesson to the specified group.
+</summary>
+
+Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
+
+* Adds a lesson to the group specified by the `INDEX`.
+* `SUBJECT` takes in any input with at least one alphanumeric character.
+* `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
+* `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
+  for 8am.
+* Overlapping lessons cannot be added. This will be cross-checked with all lessons for every student in the group.
+
+Example:
+* `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
+  starting at 8am and ending at 9am on Mondays.
+</details>
+
+### Deleting a lesson from a group: `group -dl`
+<details markdown="1">
+<summary>
+Deletes a lesson from the specified group
+</summary>
+
+Format: `student -dl GROUP_INDEX LESSON_INDEX`
+
+* Specifies the group at `GROUP_INDEX`.
+* Deletes the specified lesson at `LESSON_INDEX` of the group specified.
+* Both `GROUP_INDEX` and `LESSON_INDEX` must be a positive number.
+
+Example:
+* `group -dl 1 1` deletes the first lesson from the first group.
 </details>
 
 ### Adding a task
