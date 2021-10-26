@@ -20,12 +20,14 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all items whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: "
+            + "Able to find multiple names and ids with one command by putting multiple flags"
+            + "\n Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ID + "ID "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Banana Bread or "
-            + PREFIX_ID + "019381 ";
+            + "\n Example: " + COMMAND_WORD + " "
+            + PREFIX_ID + "019381 or "
+            + COMMAND_WORD + " " + PREFIX_NAME + "Banana "
+            + PREFIX_NAME + "bread.";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final IdContainsNumberPredicate idPredicate;
