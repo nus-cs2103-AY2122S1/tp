@@ -21,6 +21,7 @@ import seedu.edrecord.model.ReadOnlyEdRecord;
 import seedu.edrecord.model.ReadOnlyUserPrefs;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
@@ -182,6 +183,12 @@ public class AddAssignmentCommandTest {
 
         @Override
         public boolean hasModule(Module mod) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasModulesAndGroups(
+            ModuleGroupMap mod) {
             throw new AssertionError("This method should not be called.");
         }
 

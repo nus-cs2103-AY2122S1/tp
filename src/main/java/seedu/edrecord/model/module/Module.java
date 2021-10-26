@@ -46,6 +46,20 @@ public class Module {
     }
 
     /**
+     * Constructs a {@code Module} with a Group in it's Group System.
+     *
+     * @param code A valid module code.
+     */
+    public Module(String moduleCode, String groupCode) {
+        requireNonNull(moduleCode, groupCode);
+        this.code = moduleCode;
+        this.groupSystem = new GroupSystem();
+        Group group = new Group(groupCode);
+        groupSystem.addGroup(group);
+        this.assignmentList = new UniqueAssignmentList();
+    }
+
+    /**
      * Constructs a {@code Module} containing an empty list of assignments.
      *
      * @param code A valid module code.

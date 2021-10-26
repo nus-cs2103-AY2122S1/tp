@@ -5,6 +5,7 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edrecord.model.person.PartOfModulePredicate.PREDICATE_SHOW_ALL_MODULES;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -14,7 +15,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.commons.core.LogsCenter;
 import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.module.ModuleSystem;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.person.PartOfModulePredicate;
@@ -153,6 +156,24 @@ public class ModelManager implements Model {
     public boolean hasModule(Module mod) {
         requireNonNull(mod);
         return moduleSystem.hasModule(mod);
+    }
+
+    @Override
+    public boolean hasModulesAndGroups(ModuleGroupMap mods) {
+        requireNonNull(mods);
+        for (Map.Entry<Module, Group> modClassPair : mods.getMapping().entrySet()) {
+            Module mod = modClassPair.getKey();
+            if (!hasModule(mod)) {
+                return false;
+            }
+
+            Module modelModule = getModule(mod);
+            Group group = modClassPair.getValue();
+            if (!modelModule.hasGroup(group)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

@@ -46,7 +46,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com").withInfo("May be disruptive to other students").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withInfo("Needs examples to understand concepts well")
-            .withModule("CS3230").build();
+            .withModuleAndGroup("CS3230", "T02").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

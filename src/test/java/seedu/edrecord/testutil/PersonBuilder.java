@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
@@ -29,8 +30,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Info info;
-    private Module module;
-    private Group group;
+    private ModuleGroupMap modules;
     private Set<Tag> tags;
 
     /**
@@ -41,8 +41,11 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         info = new Info(DEFAULT_INFO);
-        module = new Module(DEFAULT_MODULE);
-        group = new Group(DEFAULT_GROUP);
+
+        Module module = new Module(DEFAULT_MODULE, DEFAULT_GROUP);
+        modules = new ModuleGroupMap();
+        modules.add(module, new Group(DEFAULT_GROUP));
+
         tags = new HashSet<>();
     }
 
@@ -54,8 +57,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         info = personToCopy.getInfo();
-        module = personToCopy.getModule();
-        group = personToCopy.getGroup();
+        modules = new ModuleGroupMap();
+        modules.addAll(personToCopy.getModules());
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -102,21 +105,17 @@ public class PersonBuilder {
     /**
      * Sets the {@code Module} of the {@code Person} that we are building.
      */
-    public PersonBuilder withModule(String mod) {
-        this.module = new Module(mod);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Group} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withGroup(String grp) {
-        this.group = new Group(grp);
+    public PersonBuilder withModuleAndGroup(String mod, String grp) {
+        Group group = new Group(grp);
+        Module module = new Module(mod);
+        module.addGroup(group);
+        this.modules = new ModuleGroupMap();
+        modules.add(module, group);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, info, module, group, tags);
+        return new Person(name, phone, email, info, modules, tags);
     }
 
 }

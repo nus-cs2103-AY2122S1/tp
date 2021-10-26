@@ -16,6 +16,7 @@ import seedu.edrecord.logic.commands.AddCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
@@ -53,7 +54,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, info, module, group, tagList);
+        module.addGroup(group);
+        ModuleGroupMap moduleGroupMap = new ModuleGroupMap();
+        moduleGroupMap.add(module, group);
+        Person person = new Person(name, phone, email, info, moduleGroupMap, tagList);
 
         return new AddCommand(person);
     }

@@ -60,7 +60,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!model.hasModule(toAdd.getModule())) {
+        if (!model.hasModulesAndGroups(toAdd.getModules())) {
             throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
         }
 

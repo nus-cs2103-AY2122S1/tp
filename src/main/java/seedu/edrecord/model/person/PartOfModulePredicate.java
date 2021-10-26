@@ -32,7 +32,7 @@ public class PartOfModulePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getModule().isSameModule(module);
+        return person.getModules().containsModule(module);
     }
 
     @Override

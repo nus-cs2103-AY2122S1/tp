@@ -8,10 +8,13 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Map;
 import java.util.Set;
 
 import seedu.edrecord.logic.commands.AddCommand;
 import seedu.edrecord.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.edrecord.model.group.Group;
+import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.model.tag.Tag;
 
@@ -36,8 +39,10 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_INFO + person.getInfo().value + " ");
-        sb.append(PREFIX_MODULE + person.getModule().getCode() + " ");
-        sb.append(PREFIX_GROUP + person.getGroup().code + " ");
+        for (Map.Entry<Module, Group> modGroupPair : person.getModules().getMapping().entrySet()) {
+            sb.append(PREFIX_MODULE + modGroupPair.getKey().getCode() + " ");
+            sb.append(PREFIX_GROUP + modGroupPair.getValue().getCode() + " ");
+        }
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -53,8 +58,6 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getInfo().ifPresent(info -> sb.append(PREFIX_INFO).append(info.value).append(" "));
-        descriptor.getModule().ifPresent(module -> sb.append(PREFIX_MODULE).append(module.getCode()).append(" "));
-        descriptor.getGroup().ifPresent(group -> sb.append(PREFIX_GROUP).append(group.code).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

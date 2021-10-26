@@ -23,6 +23,7 @@ import seedu.edrecord.model.ReadOnlyEdRecord;
 import seedu.edrecord.model.ReadOnlyUserPrefs;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
@@ -169,6 +170,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasModulesAndGroups(ModuleGroupMap mod) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteModule(Module target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -264,6 +270,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyEdRecord getEdRecord() {
             return new EdRecord();
+        }
+
+        @Override
+        public boolean hasModulesAndGroups(ModuleGroupMap mod) {
+            return true;
         }
     }
 

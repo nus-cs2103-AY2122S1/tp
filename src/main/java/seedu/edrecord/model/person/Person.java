@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.tag.Tag;
 
@@ -25,21 +26,19 @@ public class Person {
 
     // Data fields
     private final Info info;
-    private final Module module;
-    private final Group group;
+    private final ModuleGroupMap modules = new ModuleGroupMap();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and cannot be null.
      */
-    public Person(Name name, Phone phone, Email email, Info info, Module module, Group group, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Info info, ModuleGroupMap modules, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, info, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.info = info;
-        this.module = module;
-        this.group = group;
+        this.modules.addAll(modules);
         this.tags.addAll(tags);
     }
 
@@ -59,12 +58,12 @@ public class Person {
         return info;
     }
 
-    public Module getModule() {
-        return module;
+    public ModuleGroupMap getModules() {
+        return this.modules;
     }
 
-    public Group getGroup() {
-        return group;
+    public void addModuleClass(Module mod, Group group) {
+        this.modules.add(mod, group);
     }
 
     /**
@@ -107,15 +106,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getInfo().equals(getInfo())
-                && otherPerson.getModule().isSameModule(getModule())
-                && otherPerson.getGroup().equals(getGroup())
+                && otherPerson.getModules().equals(getModules())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, info, module, group, tags);
+        return Objects.hash(name, phone, email, info, modules, tags);
     }
 
     @Override
@@ -128,11 +126,8 @@ public class Person {
                 .append(getEmail())
                 .append("; Info: ")
                 .append(getInfo())
-                .append("; Module: ")
-                .append(getModule())
-                .append("; Group: ")
-                .append(getGroup());
-
+                .append("; Modules: ")
+                .append(getModules());
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

@@ -33,7 +33,6 @@ class JsonSerializableEdRecord {
 
     /**
      * Converts a given {@code ReadOnlyEdRecord} into this class for Jackson use.
-     *
      * @param source future changes to this will not affect the created {@code JsonSerializableEdRecord}.
      */
     public JsonSerializableEdRecord(ReadOnlyEdRecord source) {

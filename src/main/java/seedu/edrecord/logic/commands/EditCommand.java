@@ -21,8 +21,7 @@ import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.commons.util.CollectionUtil;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
-import seedu.edrecord.model.group.Group;
-import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
@@ -87,15 +86,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Module mod = editedPerson.getModule();
-        if (!model.hasModule(mod)) {
-            throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
-        }
-        Module savedMod = model.getModule(mod);
-        if (!savedMod.hasGroup(editedPerson.getGroup())) {
-            throw new CommandException(Group.MESSAGE_DOES_NOT_EXIST);
-        }
-
         model.setPerson(personToEdit, editedPerson);
         model.setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
@@ -112,12 +102,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
-        Module updatedModule = editPersonDescriptor.getModule().orElse(personToEdit.getModule());
-        Group updatedGroup = editPersonDescriptor.getGroup().orElse(personToEdit.getGroup());
+        ModuleGroupMap previousModules = personToEdit.getModules();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, updatedModule, updatedGroup,
-                updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, previousModules, updatedTags);
     }
 
     @Override
@@ -147,8 +135,6 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Info info;
-        private Module module;
-        private Group group;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -163,8 +149,6 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setInfo(toCopy.info);
-            setModule(toCopy.module);
-            setGroup(toCopy.group);
             setTags(toCopy.tags);
         }
 
@@ -172,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, info, module, group, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, info, tags);
         }
 
         public void setName(Name name) {
@@ -207,22 +191,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(info);
         }
 
-        public void setModule(Module mod) {
-            this.module = mod;
-        }
-
-        public Optional<Module> getModule() {
-            return Optional.ofNullable(module);
-        }
-
-        public void setGroup(Group grp) {
-            this.group = grp;
-        }
-
-        public Optional<Group> getGroup() {
-            return Optional.ofNullable(group);
-        }
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -254,18 +222,11 @@ public class EditCommand extends Command {
 
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
-            Optional<Module> thisModule = getModule();
-            Optional<Module> otherModule = e.getModule();
-            boolean isModuleEqual = (thisModule.equals(otherModule)) // default equality of Optional<T> objects
-                    || (thisModule.isPresent() && otherModule.isPresent() // or both modules are present
-                    && thisModule.get().isSameModule(otherModule.get())); // and have the same identity
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getInfo().equals(e.getInfo())
-                    && isModuleEqual
-                    && getGroup().equals(e.getGroup())
                     && getTags().equals(e.getTags());
         }
     }

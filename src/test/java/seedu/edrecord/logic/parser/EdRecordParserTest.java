@@ -39,6 +39,7 @@ public class EdRecordParserTest {
         setTypicalModuleSystem();
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+
         assertEquals(new AddCommand(person), command);
     }
 
