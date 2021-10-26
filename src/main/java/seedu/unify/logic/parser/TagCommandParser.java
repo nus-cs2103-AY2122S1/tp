@@ -7,18 +7,21 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.TagCommand;
 import seedu.unify.logic.commands.TagCommand.TagTaskDescriptor;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
-
-public class TagCommandParser implements Parser<TagCommand>{
+/**
+ * Parses input arguments and creates a new TagCommand object
+ */
+public class TagCommandParser implements Parser<TagCommand> {
 
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);

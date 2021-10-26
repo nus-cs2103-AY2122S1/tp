@@ -1,11 +1,14 @@
 package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.unify.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
@@ -15,11 +18,7 @@ import seedu.unify.model.Model;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Task;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+
 
 /**
  * Adds tags to an existing task in the Uni-Fy app.
@@ -42,6 +41,11 @@ public class TagCommand extends Command {
     private final Index index;
     private final TagTaskDescriptor tagTaskDescriptor;
 
+
+    /**
+     * @param index of the task in the filtered task list to edit
+     * @param tagTaskDescriptor details to edit the task with
+     */
     public TagCommand(Index index, TagTaskDescriptor tagTaskDescriptor) {
         requireNonNull(index);
         requireNonNull(tagTaskDescriptor);
@@ -62,7 +66,7 @@ public class TagCommand extends Command {
         Task taskToTag = lastShownList.get(index.getZeroBased());
         Task taggedTask = createTaggedTask(taskToTag, tagTaskDescriptor);
 
-        if(!taskToTag.isSameTask(taggedTask) && model.hasTask(taggedTask)) {
+        if (!taskToTag.isSameTask(taggedTask) && model.hasTask(taggedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
@@ -72,10 +76,15 @@ public class TagCommand extends Command {
 
     }
 
+    /**
+     * Creates and returns a {@code Task} with the details of {@code taskToTag}
+     * added with {@code tagTaskDescriptor}.
+     */
     private static Task createTaggedTask(Task taskToTag, TagTaskDescriptor tagTaskDescriptor) {
         assert taskToTag != null;
         Set<Tag> updatedTags = tagTaskDescriptor.getTags().orElse(taskToTag.getTags());
-        return new Task(taskToTag.getName(), taskToTag.getTime(), taskToTag.getDate(), updatedTags, taskToTag.getState());
+        return new Task(taskToTag.getName(), taskToTag.getTime(),
+                taskToTag.getDate(), updatedTags, taskToTag.getState());
     }
 
     @Override
@@ -110,12 +119,15 @@ public class TagCommand extends Command {
          */
         public TagTaskDescriptor(TagTaskDescriptor toCopy) {
             setTags(toCopy.tags);
-
         }
 
+        /**
+         * Returns true if the tag has been added
+         */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(tags);
         }
+
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null)  ? new HashSet<>(tags) : null;
         }
@@ -140,7 +152,6 @@ public class TagCommand extends Command {
             TagTaskDescriptor t = (TagTaskDescriptor) other;
 
             return getTags().equals(t.getTags());
-
         }
 
     }
