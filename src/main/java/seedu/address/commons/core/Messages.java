@@ -13,5 +13,6 @@ public class Messages {
             "The appointment index provided is invalid";
     public static final String MESSAGE_APPOINTMENTS_LISTED_OVERVIEW = "%1$d appointments listed!";
     public static final String MESSAGE_APPOINTMENTS_DUPLICATE_PERSON_ADDED = "Duplicated Person not allowed!";
+    public static final String MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED = "Clashing appointment";
 
 }

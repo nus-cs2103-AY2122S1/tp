@@ -76,6 +76,7 @@ public class AddAppCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Appointment> lastShownAppList = model.getFilteredAppointmentList();
         UniquePersonList clients = new UniquePersonList();
 
         for (Index index : indexes) {
@@ -87,6 +88,12 @@ public class AddAppCommand extends Command {
                 clients.add(client);
             } catch (DuplicatePersonException e) {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_PERSON_ADDED);
+            }
+        }
+
+        for (Appointment app : lastShownAppList) {
+            if (app.getDate().equals(date) && app.getTime().equals(time)) {
+                throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED);
             }
         }
 
