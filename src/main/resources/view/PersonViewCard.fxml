@@ -13,7 +13,7 @@
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+        <VBox id="personBox" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
@@ -24,8 +24,18 @@
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-            <Label fx:id="lessons" styleClass="cell_small_label" text="\$lessons" />
-            <Label fx:id="groupsLabel" styleClass="cell_small_label" text="\$groups" />
+            <Label text="" styleClass="cell_small_label"/>
+            <Label styleClass="cell_big_label" text="Lessons:"/>
+            <VBox fx:id="lessons"/>
+            <Label text="" styleClass="cell_small_label"/> <!--empty row!-->
+            <Label styleClass="cell_big_label" text="Tasks:"/>
+            <VBox fx:id="tasks"/>
+            <Label text="" styleClass="cell_small_label"/> <!--empty row!-->
+            <Label styleClass="cell_big_label" text="Exams:"/>
+            <VBox fx:id="exams"/>
+            <Label text="" styleClass="cell_small_label"/> <!--empty row!-->
+            <Label styleClass="cell_big_label" text="Groups:"/>
+            <VBox fx:id="groups"/>
         </VBox>
     </GridPane>
 </HBox>

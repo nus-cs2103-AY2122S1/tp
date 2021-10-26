@@ -221,7 +221,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public PersonWithDetails getPersonWithDetails(Person person) {
         Set<Group> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds());
-        return new PersonWithDetails(person, groupsPersonIsIn);
+        Set<Task> tasksPersonHas = tasks.getFromUniqueIds(person.getAssignedTaskIds());
+        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas);
     }
 
     public GroupWithDetails getGroupWithDetails(Group group) {
