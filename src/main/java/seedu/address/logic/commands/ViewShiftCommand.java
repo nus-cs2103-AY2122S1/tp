@@ -61,10 +61,8 @@ public class ViewShiftCommand extends Command {
         this.dayOfWeek = dayOfWeek;
         this.slotNum = slotNum;
         this.time = time;
-        this.defaultMessage += dayOfWeek.toString() + "-"
-                + (slotNum == INVALID_SLOT_NUMBER ? time.toString() : slotNum) + "\n";
-        this.isWorkingPredicate = new PersonIsWorkingPredicate(dayOfWeek, slotNum, time, period);
         this.periodToLookAt = period;
+        this.isWorkingPredicate = new PersonIsWorkingPredicate(dayOfWeek, slotNum, time, period);
     }
 
     @Override
@@ -80,8 +78,10 @@ public class ViewShiftCommand extends Command {
 
         // Assumes either time is null, or dayOfWeek and slotNum is null (as passed in by ViewShiftCommandParser)
         if (time != null && dayOfWeek != null) {
+            this.defaultMessage += String.format("%s-%s\n", dayOfWeek, time);
             return executeViewShiftByTime(staffs);
         } else if (slotNum != INVALID_SLOT_NUMBER && dayOfWeek != null) {
+            this.defaultMessage += String.format("%s-%s\n", dayOfWeek, slotNum);
             return executeViewShiftBySlot(staffs);
         } else {
             throw new CommandException(HELP_MESSAGE);
