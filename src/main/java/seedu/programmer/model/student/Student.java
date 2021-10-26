@@ -18,7 +18,9 @@ import seedu.programmer.logic.commands.exceptions.CommandException;
  */
 public class Student {
 
-    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
+    public static final String REQUIRE_POSITIVE_SCORE = "The student score should be a positive value.";
+
+    public static final String EXCEEDED_TOTAL_SCORE = "The student score should be less than or equal to total score";
 
     // Identity fields
     private final Name name;
@@ -117,8 +119,11 @@ public class Student {
      * Updates a lab result for a student
      * */
     public void editLabResult(Lab lab , Double score) throws CommandException {
-        if (score <= 0 || score <= lab.getTotalScore()) {
-            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+        if (score < 0.0) {
+            throw new CommandException(REQUIRE_POSITIVE_SCORE);
+        }
+        if (score > lab.getTotalScore()) {
+            throw new CommandException(EXCEEDED_TOTAL_SCORE);
         }
         int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
@@ -130,8 +135,8 @@ public class Student {
      * Updates a lab result for a student
      * */
     public void editLabInfo(Lab lab, String newTitle, Double total) throws CommandException {
-        if (total <= 0 || total <= lab.getTotalScore()) {
-            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+        if (total < 0.0) {
+            throw new CommandException(REQUIRE_POSITIVE_SCORE);
         }
         int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
