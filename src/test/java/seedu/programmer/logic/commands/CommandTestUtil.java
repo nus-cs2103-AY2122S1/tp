@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.programmer.testutil.Assert.assertThrows;
@@ -34,10 +37,12 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_AMY = "e0313455@u.nus.edu";
     public static final String VALID_EMAIL_BOB = "e0532115@u.nus.edu";
 
-    public static final String VALID_LAB_NO = "1";
-    public static final String VALID_LAB_NAME = "lab1";
+    public static final Integer VALID_LAB_NO = 1;
     public static final Double VALID_ACTUAL_SCORE = 15.0;
     public static final Double VALID_TOTAL_SCORE = 20.0;
+    public static final String LAB_NUM = " " + PREFIX_LAB_NUM + VALID_LAB_NO;
+    public static final String LAB_TOTAL = " " + PREFIX_LAB_TOTAL + VALID_ACTUAL_SCORE;
+    public static final String LAB_RESULT = " " + PREFIX_LAB_RESULT + VALID_TOTAL_SCORE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
