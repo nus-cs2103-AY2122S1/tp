@@ -16,10 +16,10 @@ import seedu.address.model.person.Person;
 
 public class AssignTaskToPersonCommand extends AssignTaskCommand {
 
-    public static final String COMMAND_WORD = "-ass";
+    public static final String COMMAND_WORD = "-as";
 
     public static final String MESSAGE_USAGE = String.format(
-            AssignTaskCommand.MESSAGE_USAGE, "student", "STUDENT");
+            AssignTaskCommand.MESSAGE_USAGE, COMMAND_WORD, "student", "STUDENT");
 
     /**
      * Constructs a {@code AssignTaskToPersonCommand}

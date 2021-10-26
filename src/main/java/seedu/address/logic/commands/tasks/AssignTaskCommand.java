@@ -19,12 +19,9 @@ import seedu.address.model.task.Task;
 
 public abstract class AssignTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "-ass";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Assigns a task to the %1$s identified "
-            + "by the index numbers used in the displayed %1$s list and the displayed task list. "
-            + "Parameters: %2$s INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = "%1$s: Assigns a task to the %1$s identified "
+            + "by the index numbers used in the displayed %2$s list and the displayed task list. "
+            + "Parameters: %3$s INDEX (must be a positive integer) "
             + "TASK INDEX (must be a positive integer) ";
 
     public static final String OVERLAPPING_TASK = "Task is already assigned to this %s!";

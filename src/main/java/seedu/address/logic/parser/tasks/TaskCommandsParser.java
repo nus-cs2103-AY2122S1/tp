@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.tasks.AddTaskCommand;
+import seedu.address.logic.commands.tasks.AssignTaskToGroupCommand;
 import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
 import seedu.address.logic.commands.tasks.EditTaskCommand;
 import seedu.address.logic.commands.tasks.FindTaskCommand;
@@ -50,6 +51,9 @@ public class TaskCommandsParser {
 
         case AssignTaskToPersonCommand.COMMAND_WORD:
             return new AssignTaskToPersonCommandParser().parse(arguments);
+
+        case AssignTaskToGroupCommand.COMMAND_WORD:
+            return new AssignTaskToGroupCommandParser().parse(arguments);
 
         case UnassignTaskFromPersonCommand.COMMAND_WORD:
             return new UnassignTaskFromPersonCommandParser().parse(arguments);

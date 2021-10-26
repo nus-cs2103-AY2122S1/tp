@@ -16,10 +16,10 @@ import seedu.address.model.group.Group;
 
 public class AssignTaskToGroupCommand extends AssignTaskCommand {
 
-    public static final String COMMAND_WORD = "-ass";
+    public static final String COMMAND_WORD = "-ag";
 
     public static final String MESSAGE_USAGE = String.format(
-            AssignTaskCommand.MESSAGE_USAGE, "group", "GROUP");
+            AssignTaskCommand.MESSAGE_USAGE, COMMAND_WORD, "group", "GROUP");
 
     /**
      * Constructs a {@code AssignTaskToGroupCommand}.
