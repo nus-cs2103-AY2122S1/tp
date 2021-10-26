@@ -79,13 +79,28 @@ TutAssistor is a ***desktop app intended for private tutors to manage their stud
 TutAssistor provides an all-in-one platform for tutors to track student details, resolve conflicting tuition timeslots, and efficiently make notes for each lesson.
 
 ### 1.2 How to use this guide?
+
+#### Step-by-step guide for each features
+
 The features in this guide are formatted with the following conventions:
+
 * **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the <code>&#124;</code> symbol. The user can use the command shortcuts to reduce typing. 
 * **Command Format** - Each command is accompanied by a set of information provided by the user. Refer to the [Features](#3-features) below for details of each command.
 * **Example** - Possible usage of each features are provided. Users may follow these examples when familiarising with the app. 
 * **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
 
-Jump right in to the next section to get you started!
+
+#### Icons used in this guide
+
+For additional information accompanying each segment, look for the following icons:
+
+&emsp; ℹ️ precedes information that are useful to remember. 
+
+&emsp; 💡 precedes information that serve as tips for a feature.
+
+&emsp; ⚠️ precedes information as an important warning.
+
+Jump right in to the next section [2 Get Started](#2-get-started) to get you started!
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -93,13 +108,15 @@ Jump right in to the next section to get you started!
 ## 2 Get Started
 
 ### For Windows
-1. Download the latest TutAssistor release from [our github site](https://github.com/AY2122S1-CS2103T-T12-4/tp/releases).
-2. Double click the downloaded TutAssistor.jar file to launch TutAssistor.
+1. Ensure you have Java 11 or above installed in your Computer. You may install it [here](https://www.oracle.com/java/technologies/downloads/).
+2. Download the latest TutAssistor release from [our github site](https://github.com/AY2122S1-CS2103T-T12-4/tp/releases).
+3. Double click the downloaded TutAssistor.jar file to launch TutAssistor.
 
 ### For Mac
-1. Download the latest TutAssistor release from [our github site](https://github.com/AY2122S1-CS2103T-T12-4/tp/releases).
-2. Open Terminal.
-3. Change the active directory to the location of TutAssistor.jar.
+1. Ensure you have Java 11 or above installed in your Computer. You may install it [here](https://www.oracle.com/java/technologies/downloads/).
+2. Download the latest TutAssistor release from [our github site](https://github.com/AY2122S1-CS2103T-T12-4/tp/releases).
+3. Open Terminal.
+4. Change the active directory to the location of TutAssistor.jar.
 
    For example,
     
@@ -141,7 +158,7 @@ After launching the app, the GUI similar to the one shown below should appear in
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
    
-Tip: Refer to the [Additional Command Format Information](#4-additional-command-format-information) under section 4 to learn the requirements of the various parameters used.
+Refer to the [Additional Command Format Information](#4-additional-command-format-information) under section 4 to learn the requirements of the various parameters used.
    
 </div>
 
@@ -243,6 +260,10 @@ Deletes a student or a tuition class from TutAssistor.
 * At least one student or class index must be provided.
    
 * Provide multiple indices to delete multiple students or classes at once.
+
+<div markdown="span" class="alert alert-primary">
+⚠️ THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL DATA OF THE IDENTIFIED STUDENT OR CLASS.
+</div>
 
 #### Deleting students: `delete` | `del`
 
@@ -358,7 +379,7 @@ rec 1
 ```
 
 <div markdown="span" class="alert alert-primary">
-Note: When creating a new student or tuition class with the `add` command, you can use the `r/` tag to add remarks  directly.
+ℹ️ Note: When creating a new student or tuition class with the `add` command, you can use the `r/` tag to add remarks  directly.
 </div>
 
 ### 3.7 Find student/tuition class
@@ -469,7 +490,7 @@ Clears all current student and tuition class data.
 Format: `clear`
 
 <div markdown="span" class="alert alert-primary">
-❗THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA❗
+⚠️ THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA.
 </div>
 
 ### 3.15 Exit the app: `exit`
@@ -486,7 +507,10 @@ _Detais coming soon..._
 
 ## 4 Additional Command Format Information
 
+The requirements of the various parameters used are explained below. Head back to [Features](#3-features) to refer to general notes on the command format.
+
 ### 4.1 Name
+
 Student name is unique. There cannot be 2 or more students registered with the exact same name.
 
 Names for tuition classes may be reused.
