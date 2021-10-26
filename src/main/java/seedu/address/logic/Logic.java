@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NextMeeting;
+import seedu.address.ui.ThemeType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,6 +103,19 @@ public interface Logic {
     ObservableList<Path> getAddressBookList();
 
     /**
+     * Returns the list of all filtered list of themes.
+     */
+    ObservableList<ThemeType> getThemeList();
+
+    /**
+     * Sets the theme of the GUI in user prefs.
+     */
+    void setTheme(ThemeType theme);
+
+    /**
+     * Returns the current theme.
+     */
+    ThemeType getTheme();
      * Returns an unmodifiable view of the filtered list of tags
      */
     ObservableList<Tag> getFilteredTagList();

@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             while (change.next()) {
                 if (change.wasRemoved()) {
                     Client client = change.getRemoved().get(0);
-                    logger.fine(client.getName() + "was replaced/removed from UniqueClientList");
+                    logger.fine(client.getName() + " was replaced/removed from UniqueClientList");
                     client.delete();
                     removeUnreferencedTags();
                 }
@@ -288,10 +288,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return clients.asUnmodifiableObservableList();
     }
 
-    public void updateLastMetDate() {
-        clients.updateLastMetDate();
-    }
-
     @Override
     public ObservableList<NextMeeting> getNextMeetingsList() {
         return meetings.asUnmodifiableObservableList();
@@ -327,6 +323,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.asUnmodifiableObservableList();
     }
 
+    public void updateLastMetDate() {
+        clients.updateLastMetDate();
+    }
+
     @Override
     public int hashCode() {
         return clients.hashCode();
@@ -335,8 +335,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && clients.equals(((AddressBook) other).clients));
+            || (other instanceof AddressBook // instanceof handles nulls
+            && clients.equals(((AddressBook) other).clients));
     }
 
     @Override
