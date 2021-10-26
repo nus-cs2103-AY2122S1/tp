@@ -29,8 +29,8 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
-    public static final String MESSAGE_CLASHING_LESSON = "Person contains clashing lesson(s)!";
-    public static final String MESSAGE_MISSING_CONTACT = "Person does not have any contact information!";
+    public static final String MESSAGE_CLASHING_LESSON = "Student contains clashing lesson(s)!";
+    public static final String MESSAGE_MISSING_CONTACT = "Student does not have any contact information!";
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
