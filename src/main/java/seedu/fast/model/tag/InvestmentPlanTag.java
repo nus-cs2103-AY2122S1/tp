@@ -1,5 +1,7 @@
 package seedu.fast.model.tag;
 
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_INVESTMENT_PLAN_TAG;
+
 import seedu.fast.logic.parser.ParserUtil;
 
 /**
@@ -7,8 +9,6 @@ import seedu.fast.logic.parser.ParserUtil;
  * Guarantees: immutable; name is fixed and valid as declared in {@link #isValidTagName(String)}
  */
 public class InvestmentPlanTag extends Tag {
-
-    public static final String INVESTMENT_PLAN_TAG_PREFIX = "ip/";
 
     public static final String MESSAGE_USAGE = "Investment Plan tag: label a client with their Investment plan "
         + "purchased. \n"
@@ -44,12 +44,12 @@ public class InvestmentPlanTag extends Tag {
     /**
      * Class containing relevant fields for a LifeInsurance Tag.
      */
-    public class LifeInsurance {
+    public static class LifeInsurance {
         public static final String NAME = "LifeInsurance";
 
         public static final String TERM = "life";
 
-        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_INVESTMENT_PLAN_TAG + TERM;
 
         //prevent instantiation of this class
         private LifeInsurance() {
@@ -59,12 +59,12 @@ public class InvestmentPlanTag extends Tag {
     /**
      * Class containing relevant fields for a MotorInsurance Tag.
      */
-    public class MotorInsurance {
+    public static class MotorInsurance {
         public static final String NAME = "MotorInsurance";
 
         public static final String TERM = "motor";
 
-        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_INVESTMENT_PLAN_TAG + TERM;
 
         //prevent instantiation of this class
         private MotorInsurance() {
@@ -74,12 +74,12 @@ public class InvestmentPlanTag extends Tag {
     /**
      * Class containing relevant fields for a HealthInsurance Tag.
      */
-    public class HealthInsurance {
+    public static class HealthInsurance {
         public static final String NAME = "HealthInsurance";
 
         public static final String TERM = "health";
 
-        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_INVESTMENT_PLAN_TAG + TERM;
 
         //prevent instantiation of this class
         private HealthInsurance() {
@@ -89,12 +89,12 @@ public class InvestmentPlanTag extends Tag {
     /**
      * Class containing relevant fields for a TravelInsurance Tag.
      */
-    public class TravelInsurance {
+    public static class TravelInsurance {
         public static final String NAME = "TravelInsurance";
 
         public static final String TERM = "travel";
 
-        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_INVESTMENT_PLAN_TAG + TERM;
 
         //prevent instantiation of this class
         private TravelInsurance() {
@@ -104,12 +104,12 @@ public class InvestmentPlanTag extends Tag {
     /**
      * Class containing relevant fields for a PropertyInsurance Tag.
      */
-    public class PropertyInsurance {
+    public static class PropertyInsurance {
         public static final String NAME = "PropertyInsurance";
 
         public static final String TERM = "property";
 
-        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_INVESTMENT_PLAN_TAG + TERM;
 
         //prevent instantiation of this class
         private PropertyInsurance() {
@@ -119,12 +119,12 @@ public class InvestmentPlanTag extends Tag {
     /**
      * Class containing relevant fields for a Investment Tag.
      */
-    public class Investment {
-        public static final String NAME = "investment";
+    public static class Investment {
+        public static final String NAME = "Investment";
 
         public static final String TERM = "invest";
 
-        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_INVESTMENT_PLAN_TAG + TERM;
 
         //prevent instantiation of this class
         private Investment() {
@@ -134,12 +134,12 @@ public class InvestmentPlanTag extends Tag {
     /**
      * Class containing relevant fields for a Savings Tag.
      */
-    public class Savings {
+    public static class Savings {
         public static final String NAME = "Savings";
 
         public static final String TERM = "save";
 
-        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_INVESTMENT_PLAN_TAG + TERM;
 
         //prevent instantiation of this class
         private Savings() {

@@ -1,6 +1,7 @@
 package seedu.fast.logic.parser;
 
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -41,11 +42,11 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new PriorityPredicate(Arrays.asList(PriorityTag.LowPriority.TERM,
                         PriorityTag.MediumPriority.TERM)));
-        assertParseSuccess(parser , PriorityTag.PRIORITY_TAG_PREFIX
+        assertParseSuccess(parser , PREFIX_PRIORITY_TAG.getPrefix()
                 + PriorityTag.LowPriority.TERM + " "
                 + PriorityTag.MediumPriority.TERM , expectedFindCommand);
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, PriorityTag.PRIORITY_TAG_PREFIX
+        assertParseSuccess(parser, PREFIX_PRIORITY_TAG.getPrefix()
                 + PriorityTag.LowPriority.TERM + " \n \t "
                 + PriorityTag.MediumPriority.TERM , expectedFindCommand);
     }

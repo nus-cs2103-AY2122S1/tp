@@ -3,6 +3,8 @@ package seedu.fast.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_HELP_COMMAND_FORMAT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_INVESTMENT_PLAN_TAG;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -175,10 +177,11 @@ public class ParserUtil {
      * @return The corresponding tag name.
      */
     public static String parsePriorityTag(String tagName) {
-        switch (tagName) {
-        case PriorityTag.LowPriority.COMMAND:
+        String tagTerm = tagName.replace(PREFIX_PRIORITY_TAG.getPrefix(), "");
+        switch (tagTerm) {
+        case PriorityTag.LowPriority.TERM:
             return PriorityTag.LowPriority.NAME;
-        case PriorityTag.MediumPriority.COMMAND:
+        case PriorityTag.MediumPriority.TERM:
             return PriorityTag.MediumPriority.NAME;
         default:
             return PriorityTag.HighPriority.NAME;
@@ -306,18 +309,19 @@ public class ParserUtil {
      * @return The corresponding tag name.
      */
     public static String parseInvestmentPlanTag(String tagName) {
-        switch (tagName) {
-        case InvestmentPlanTag.LifeInsurance.COMMAND:
+        String tagTerm = tagName.replace(PREFIX_INVESTMENT_PLAN_TAG.getPrefix(), "");
+        switch (tagTerm) {
+        case InvestmentPlanTag.LifeInsurance.TERM:
             return InvestmentPlanTag.LifeInsurance.NAME;
-        case InvestmentPlanTag.MotorInsurance.COMMAND:
+        case InvestmentPlanTag.MotorInsurance.TERM:
             return InvestmentPlanTag.MotorInsurance.NAME;
-        case InvestmentPlanTag.HealthInsurance.COMMAND:
+        case InvestmentPlanTag.HealthInsurance.TERM:
             return InvestmentPlanTag.HealthInsurance.NAME;
-        case InvestmentPlanTag.TravelInsurance.COMMAND:
+        case InvestmentPlanTag.TravelInsurance.TERM:
             return InvestmentPlanTag.TravelInsurance.NAME;
-        case InvestmentPlanTag.PropertyInsurance.COMMAND:
+        case InvestmentPlanTag.PropertyInsurance.TERM:
             return InvestmentPlanTag.PropertyInsurance.NAME;
-        case InvestmentPlanTag.Investment.COMMAND:
+        case InvestmentPlanTag.Investment.TERM:
             return InvestmentPlanTag.Investment.NAME;
         default:
             return InvestmentPlanTag.Savings.NAME;
