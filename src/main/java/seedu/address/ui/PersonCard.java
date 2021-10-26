@@ -66,7 +66,7 @@ public class PersonCard extends UiPart<Region> {
         tasksDue.setText("Overdue Tasks: " + person.getOverdueTasks()
                 + "\nSoon to be due Tasks: " + person.getSoonDueTasks());
         if (person.isImportant()) {
-        	importance.getChildren().add(new Label("Important!"));
+            importance.getChildren().add(new Label("Important!"));
         }
     }
 

@@ -31,7 +31,6 @@ import seedu.address.model.task.Venue;
 public class EditTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "edittask";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed person list and task number. "
             + "Existing values will be overwritten by the input values.\n"
@@ -43,7 +42,7 @@ public class EditTaskCommand extends Command {
             + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK_INDEX + " 2 "
-            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion";
+            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion"
             + PREFIX_IMPORTANCE + "false";
 
     public static final String DESCRIPTION = "Edits the details of the task identified";
