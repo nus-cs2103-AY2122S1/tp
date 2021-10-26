@@ -73,6 +73,9 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        // test new visual for this, will be decided later if have time. To
+        // revert back to the previous view, remove the below line.
+        container.getChildren().removeAll(tags, studioRecord, assessment, telegram);
         temp = new Label("Clicked");
         this.commandBox = commandBox;
     }

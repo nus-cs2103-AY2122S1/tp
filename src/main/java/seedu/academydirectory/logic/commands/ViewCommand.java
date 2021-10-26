@@ -20,7 +20,7 @@ public class ViewCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "View student %1$s";
+    public static final String MESSAGE_SUCCESS = "View information related to %1$s";
 
     private final Index index;
     /**
@@ -48,7 +48,7 @@ public class ViewCommand extends Command {
         Student studentToView = studentList.get(index.getZeroBased());
         model.setAdditionalViewType(AdditionalViewType.VIEW);
         model.setAdditionalInfo(AdditionalInfo.of(studentToView));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentToView));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, studentToView.getName()));
     }
 
     @Override

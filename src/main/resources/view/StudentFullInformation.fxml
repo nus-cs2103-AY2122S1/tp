@@ -16,7 +16,7 @@
                 </font>
             </Label>
         </HBox>
-      <HBox fx:id="tagContainer" alignment="CENTER" />
+        <FlowPane fx:id="tagContainer" alignment="CENTER" />
       <Accordion>
         <panes>
           <TitledPane fx:id="container1" animated="false" text="View Participation">
@@ -32,13 +32,17 @@
         </panes>
       </Accordion>
         <VBox alignment="BOTTOM_LEFT" spacing="10">
-            <Label styleClass="cell_small_label" text="Contact information:" VBox.vgrow="ALWAYS">
-                <font>
-                    <Font size="14.5" />
-                </font>
+            <Label />
+            <HBox alignment="CENTER">
+                <Label styleClass="cell_small_label" style="-fx-color: white" text="Contact information:" VBox.vgrow="ALWAYS">
+                    <font>
+                        <Font size="14.5" />
+                    </font>
+                </Label>
+            </HBox>
+            <Label fx:id="phone" styleClass="cell_small_label" text="- Phone number: \$phone" VBox.vgrow="ALWAYS">
             </Label>
-            <Label fx:id="phone" styleClass="cell_small_label" text="- Phone number: \$phone" VBox.vgrow="ALWAYS" />
-            <Label fx:id="email" styleClass="cell_small_label" text="- Email: \$email" VBox.vgrow="ALWAYS" />
+            <Label fx:id="email" styleClass="cell_small_label"  text="- Email: \$email" VBox.vgrow="ALWAYS" />
             <Label fx:id="telegram" styleClass="cell_small_label" text="- Telegram handle: \$telegram" VBox.vgrow="ALWAYS" />
         </VBox>
 
