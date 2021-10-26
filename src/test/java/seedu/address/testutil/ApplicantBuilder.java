@@ -29,6 +29,7 @@ public class ApplicantBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        position = DEFAULT_POSITION;
     }
 
     /**
