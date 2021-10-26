@@ -116,19 +116,44 @@ public class EnrollCommandTest {
                 new Grade("S2"),
                 new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.NOON),
                 new Price(40));
-        Lesson lessonFive = new Lesson(new Subject("English"),
+        Lesson lessonFive = new Lesson(new Subject("A"),
                 new Grade("S2"),
-                new LessonTime(DayOfWeek.THURSDAY, LocalTime.NOON),
+                new LessonTime(DayOfWeek.MONDAY, LocalTime.of(16, 00)),
                 new Price(40));
-        Lesson lessonSix = new Lesson(new Subject("Chinese"),
+        Lesson lessonSix = new Lesson(new Subject("B"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(16, 00)),
+                new Price(40));
+        Lesson lessonSeven = new Lesson(new Subject("C"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.of(16, 00)),
+                new Price(40));
+        Lesson lessonEight = new Lesson(new Subject("D"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.THURSDAY, LocalTime.of(16, 00)),
+                new Price(40));
+        Lesson lessonNine = new Lesson(new Subject("E"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.FRIDAY, LocalTime.of(16, 00)),
+                new Price(40));
+        Lesson lessonTen = new Lesson(new Subject("F"),
+                new Grade("S2"),
+                new LessonTime(DayOfWeek.SATURDAY, LocalTime.of(16, 00)),
+                new Price(40));
+        Lesson lessonEleven = new Lesson(new Subject("Chinese"),
                 new Grade("S2"),
                 new LessonTime(DayOfWeek.FRIDAY, LocalTime.NOON),
                 new Price(40));
-        model.addLesson(lessonSix);
+        model.addLesson(lessonEleven);
         benson.enrollForLesson(lessonTwo);
         benson.enrollForLesson(lessonThree);
         benson.enrollForLesson(lessonFour);
         benson.enrollForLesson(lessonFive);
+        benson.enrollForLesson(lessonSix);
+        benson.enrollForLesson(lessonSeven);
+        benson.enrollForLesson(lessonEight);
+        benson.enrollForLesson(lessonNine);
+        benson.enrollForLesson(lessonTen);
         String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_LESSONS, benson.getName());
         assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(4)),
                 model,

@@ -26,7 +26,7 @@ public class EnrollCommand extends Command {
 
     public static final String MESSAGE_STUDENT_IN_LESSON = "%1$s is already enrolled in the existing %2$s";
     public static final String MESSAGE_UNABLE_TO_ENROLL = "%1$s cannot be enrolled into %2$s";
-    public static final String MESSAGE_MORE_THAN_MAX_LESSONS = "%1$s is currently enrolled in more than 5 lessons, "
+    public static final String MESSAGE_MORE_THAN_MAX_LESSONS = "%1$s is currently enrolled in more than 10 lessons, "
             + "and cannot be enrolled in one more. "
             + "Please unenroll the student from a lesson before enrolling them in another.";
     public static final String MESSAGE_SUCCESS = "%1$s enrolled into lesson: %2$s";
@@ -69,7 +69,7 @@ public class EnrollCommand extends Command {
             throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
         }
 
-        if (studentToEnroll.isAbleToEnrollForMoreLessons()) {
+        if (!studentToEnroll.isAbleToEnrollForMoreLessons()) {
             throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_LESSONS, studentToEnroll.getName()));
         }
 
