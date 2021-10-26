@@ -238,7 +238,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 The proposed clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
 `AbortClearCommand` and `ConfirmClearCommand`. This results in a confirmation message to be displayed
-to the user when the user executes `clear`, after which it can either be confirmed (by entering `clear` again) or 
+to the user when the user executes `clear`, after which it can either be confirmed (by entering `clear` again) or
 aborted (by entering any other input).
 
 The last command executed by the user is stored internally as a `Command` in `LogicManager`.
@@ -252,9 +252,8 @@ as a confirmation message instead.
 
 **Aspect: Determining valid confirmation input messages:**
 
-* **Alternative 1 (current choice):** User enters `clear` again to actually clear displayed animes; 
-  else to abort.
-    * Pros: The least ambiguous; message reflects what is to be done. Only two scenarios (user input is 
+* **Alternative 1 (current choice):** User enters `clear` again to actually clear displayed animes; else to abort.
+    * Pros: The least ambiguous; message reflects what is to be done. Only two scenarios (user input is
       `clear` vs user input is not `clear`) to handle.
     * Cons: Entering regular commands such as `list` will abort the `clear` command instead of
        executing as per normal.
@@ -280,14 +279,14 @@ regular filter.
 **Aspect: How find executes:**
 
 * **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and 
-resets after each search. 
+resets after each search.
     * Pros: Allow for search with multiple spaces in between, allow for searching within tabs.
     * Cons: Complicated to implement.
 
 * **Alternative 2:** Search each keyword split by whitespace. Resets tab after each search.
     * Pros: Less complicated and less coupling.
     * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow 
-    searching within tabs.
+      searching within tabs.
 
 _{more aspects and alternatives to be added}_
 
@@ -295,8 +294,7 @@ _{more aspects and alternatives to be added}_
 
 #### Propose Implementation
 
-The proposed theme mechanism is simply done by completely altering the base css file of the program. The active css 
-file will be saved in `preferences.json` upon exiting the application.
+The proposed theme mechanism is simply done by completely altering the base css file of the program. The active css file will be saved in `preferences.json` upon exiting the application.
 
 If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and 
 will replace the invalid css file specification in `preferences.json`.
