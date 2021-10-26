@@ -337,6 +337,50 @@
     -fx-background-radius: 0;
 }
 
+#skills {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#skills .label {
+    -fx-text-fill: white;
+    -fx-background-color: #eb8034;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+
+#languages {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#languages .label {
+    -fx-text-fill: white;
+    -fx-background-color: #8f34eb;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+
+#frameworks {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#frameworks .label {
+    -fx-text-fill: white;
+    -fx-background-color: #eb34ae;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
