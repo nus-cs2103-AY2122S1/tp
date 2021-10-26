@@ -79,12 +79,12 @@ public class CommandTestUtil {
             + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + GENDER_DESC_BOB
             + REMARK_DESC_BOB + TAG_DESC_FRIEND;
     public static final String VALID_STATISTICS_INPUT = "stat " + VALID_TUTORIAL_GROUP_AMY;
-    public static final String UNKNOWN_COMMAND_INPUT = "x";
+    public static final String UNKNOWN_LONG_COMMAND_INPUT = "asdhasdhashasdhs";
 
     public static final String ALIAS = " " + PREFIX_ALIAS + VALID_ALIAS;
     public static final String ADD_COMMAND = " " + PREFIX_COMMAND + VALID_ADD_INPUT;
     public static final String STATISTICS_COMMAND = " " + PREFIX_COMMAND + VALID_STATISTICS_INPUT;
-    public static final String UNKNOWN_COMMAND = " " + PREFIX_COMMAND + UNKNOWN_COMMAND_INPUT;
+    public static final String UNKNOWN_COMMAND = " " + PREFIX_COMMAND + UNKNOWN_LONG_COMMAND_INPUT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "B"; // only 'M', 'F' and 'O' are allowed
