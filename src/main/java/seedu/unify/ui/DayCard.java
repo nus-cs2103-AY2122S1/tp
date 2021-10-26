@@ -32,8 +32,8 @@ public class DayCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
-    @FXML
-    private FlowPane tags;
+//    @FXML
+//    private FlowPane tags;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
@@ -42,9 +42,9 @@ public class DayCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         name.setText(task.getName().taskName);
-        task.getTags().stream().
-                sorted(Comparator.comparing(tag -> tag.tagTaskName)).
-                forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));
+//        task.getTags().stream().
+//                sorted(Comparator.comparing(tag -> tag.tagTaskName)).
+//                forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));
     }
 
     @Override
