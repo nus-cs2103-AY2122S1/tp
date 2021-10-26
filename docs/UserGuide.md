@@ -3,40 +3,132 @@ layout: page
 title: User Guide
 ---
 
-Spam is a desktop app for managing contacts **targeted at marketers who require fast manipulation and precise handling of contact data.** It enables marketers to more easily manage and make use of email and phone leads, and **minimise tedious and repetitive tasks** such as data entry, email blasts, and mail merge.
+Welcome to the SPAM user guide. The main purpose of this guide is to provide our users with the knowledge required to
+make full use of the application. 
 
-- [Quick start](#quick-start)
-- [Features](#features)
-  - [Viewing help: `help`](#viewing-help-help)
-  - [Adding a person: `add`](#adding-a-person-add)
-  - [Batch importing contacts: `import`](#batch-importing-contacts-import)
-  - [Listing all persons: `list`](#listing-all-persons-list)
-  - [Editing a person: `edit`](#editing-a-person-edit)
-  - [Locating persons by name: `find`](#locating-persons-find)
-  - [Deleting a person: `delete`](#deleting-a-person-delete)
-  - [Clearing all entries: `clear`](#clearing-all-entries-clear)
-  - [Exiting the program: `exit`](#exiting-the-program-exit)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
-- [Controls](#controls)
-  - [Navigating Previously Entered Commands](#navigating-previously-entered-commands)
-- [FAQ](#faq)
-- [Command Summary](#command-summary)
+To make your experience using the guide more enjoyable, we have prepared the following instructions based on 
+the kind of user you may be.
+
+| I am... | Instructions |
+| ------- | ------------ |
+| ... a new user          | You may want to take a look at the [introduction](#introduction) to SPAM to get a better understanding of what the application can do. After that, we suggest following our [quick start guide](#quick-start) to install and have a tour of the application. |
+| ... an experienced user | You may want to take a look at the [navigation links](#navigation-links) below to jump straight to the content that you are looking for. You could also make use of the search bar by pressing the `ctrl` and `f` keys. |
+
+#### Navigation Links
+
+Click on any link below to jump straight into that section.
+
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">[Introduction](#introduction)</h6>
+This section contains information that serves to introduce you to SPAM and some of its cool features.
+</div>
+</div>
+
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">[Quick Start](#quick-start)</h6>
+This section serves as a quick start guide that includes information on how to install, a tour of the graphical user
+interface and a getting started tutorial.
+</div>
+</div>
+
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">[Commands](#commands)</h6>
+This section contains details about all the available commands that you can use to control the SPAM application. 
+</div>
+</div>
+
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">[FAQ](#faq)</h6>
+This section contains all the frequently asked questions about SPAM. 
+</div>
+</div>
 
 ---
 
+<div style="page-break-after: always;"></div>
+
+## Introduction
+
+SPAM (Super Powerful App for Marketing) is a desktop app for managing contacts targeted at marketers who require fast 
+manipulation and precise handling of contact data. It enables marketers to more easily manage and make use of email 
+and phone leads, and minimise tedious and repetitive tasks such as data entry.
+
+#### Features
+
+Below is a list that highlights some of our special features.
+
+| Feature | Description  |
+| ------- | ------------ |
+| Data Security <span class="badge badge-pill bg-success text-white">NEW</span> | The application data is protected by industry standard [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption. |
+| Spreadsheets Support <span class="badge badge-pill bg-success text-white">NEW</span> | SPAM supports imports from and exports to _.csv_ files, which are compatible with Microsoft Excel and most modern day marketing software. |
+| Contacts Management | SPAM allows you to create, add, edit and delete contacts that are locally stored on your computer. | 
+
+---
+
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+This section includes all the necessary information that you will need to start using SPAM.
 
-1. Download the latest `Spam.jar` (Coming Soon).
+#### Setting Up
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Spam.
+To set up a working version of SPAM on your device, follow the steps below.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Ensure you have [Java 11](https://www.oracle.com/java/technologies/downloads) or above installed in your device.
+   
+2. Download the latest `SPAM.jar` release from [here](https://github.com/AY2122S1-CS2103T-W13-2/tp/releases).
+   
+3. Copy `SPAM.jar` into the folder you want to use as the home folder for SPAM.
+   
+4. Double click `SPAM.jar` to start the application.
+
+#### Graphical User Interface
+
+SPAM has a graphical user interface built for you to enjoy easy interaction with the application.
+
+<div class="alert alert-warning" role="alert">
+  This section is coming soon!
+</div>
+
+##### Controls
+
+In order to improve your experience when using the app, there are a few features that were added.
+
+| Previous Command | Use the `↑` and `↓` arrow keys to navigate between previously entered commands in the input text box. |
+
+#### Getting Started
+
+Follow the getting started tutorial steps below to learn more about what SPAM provides. 
+
+1. Open SPAM by double clicking `SPAM.jar` located in your SPAM home folder.
+   
+2. Since this is probably your first time interacting with the application, you will see a request by the application to
+   set a password. Type in a password and press `enter` to continue.
+   
+   <figure class="figure">
+       <img src="images/johndoe.png" class="figure-img img-fluid rounded" alt="Set Password Prompt Display">
+       <figcaption class="figure-caption">Figure 1: Set Password Prompt Display</figcaption>
+   </figure>
+
+   <div class="d-flex alert alert-info">
+   <div class="mr-2">
+       <span class="badge badge-info">INFO</span>
+   </div>
+   <div>
+       This password, which should be known only to you, will be used to encrypt all the information stored in the app.
+   </div>
+   </div>
+   
+3. After a brief period of loading, the GUI similar to the picture below should appear.
+   
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all contacts.
@@ -49,57 +141,144 @@ Spam is a desktop app for managing contacts **targeted at marketers who require 
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+5. Refer to the [Features](#features) below for details of each command.
 
 ---
 
-## Features
+<div style="page-break-after: always;"></div>
 
-<div markdown="block" class="alert alert-info">
+## Commands
 
-> **:information_source: Notes about the command format:**<br>
->
-> All command inputs follows the following format:
->
-> `<command> "<parameters>" <flag> "<flag parameters>" ...`
->
-> > Examples:
-> >
-> > `clear`
-> >
-> > `find --name "John"`
-> >
-> > `edit "1" --phone "91234567" -e "johndoe@example.com"`
->
-> > Note:
-> >
-> > All flags will have a long version and a short version that can be used. The long version will be prefixed with
-> > `--` while the short versions will be prefixed with `-`. (E.g. `--phone` and `-p`)
+This section contains details about all the available commands that you can use to control the SPAM application. Click
+on any command below to learn more about that particular command.
 
+| Command | Description |
+| ------- | ----------- |
+| [`help`](#help)  | Opens up a window that contains this user guide |
+| [`add`](#add)  | Adds a contact |
+| [`clear`](#clear)  | Clears all the contacts saved |
+| [`delete`](#delete)  | Deletes a contact saved |
+| [`edit`](#edit)  | Edits a contact saved |
+| [`export`](#export)  | Exports a list of contacts into a _.csv_ file |
+| [`find`](#find)  | Search for saved contacts that match the search criteria |
+| [`import`](#import)  | Import a _.csv_ file of contacts |
+| [`list`](#list)  | List all contacts |
+| [`exit`](#exit)  | Exits the application |
+
+<div class="d-flex alert alert-info pb-0">
+<div class="mr-2">
+   <span class="badge badge-info">INFO</span>
+</div>
+<div markdown="1">
+**Notes about the command format**
+
+All commands used to control the application begins with a command keyword.
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-secondary">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+edit
+```
+This is the command that tells the application to edit a saved contact. The command keyword here is `edit`.
+</div>
 </div>
 
-### Viewing help: `help`
+The command keyword may be followed by the command's parameters based on the specifications of the command.
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-secondary">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+edit "1"
+```
+We want to edit the contact with the ID `1`. As such, we specify `1` as the command parameter.
+</div>
+</div>
 
-Displays a window containing this user guide.
+Thereafter, the command may also consist of optional flags that specify certain details about the command entered. 
+Both the long form and short form of the flags can be used.
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-secondary">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+edit "1" --name "John Doe"
+```
+The command here specifies that we should change the name of the contact to `John Doe`. The flag used is `--name`. The
+short form `-n` can also be used instead.
+</div>
+</div>
 
-![help window](images/helpWindow.png)
+</div>
+</div>
 
-Format: `help`
+---
 
-### Adding a person: `add`
+<div style="page-break-after: always;"></div>
 
-Adds a person to the address book.
+### `help`
 
-Format: `add (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`
+Opens up a window that contains this user guide.
 
-- At least the name field must be provided.
+<figure class="figure">
+   <img src="images/johndoe.png" class="figure-img img-fluid rounded" alt="Help Window">
+   <figcaption class="figure-caption">The opened help window</figcaption>
+</figure>
 
-Examples:
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+help
+```
+</div>
+</div>
 
-- `add -n "John Doe" -p "6501234567" -e "johndoe@example.com" -a "NUS School of Computing" -t "undergraduate,computer science"` adds a contact with name of `John Doe`, phone number `6501234567`, email `johndoe@example.com`, address `NUS School of Computing`, tags `undergraduate` and `computer science`.
-- `add -n "Jane Deer" -t "woman"` adds a contact with the name of `Jane Deer` and tag of `woman`.
+### `add`
 
-### Batch importing contacts: `import`
+Adds a contact to the address manager.
+
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+add
+```
+
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+add -n "Jane Deer" -t "woman"
+```
+Add a contact with the name of `Jane Deer` that consist of the tag `woman`.
+</div>
+</div>
+
+</div>
+</div>
+
+Below is the list of flags that can be used with the `add` command. 
+
+| Flag | Long Form | Description |
+| ---- | ---------- | ----------- |
+| `-n` | `--name` | _Required_. The name associated with the contact. |
+| `-p` | `--phone` | _Optional_. The phone number of the contact. |
+| `-e` | `--email` | _Optional_. The email address of the contact. |
+| `-a` | `--address` | _Optional_. The address of the contact. |
+| `-t` | `--tag` | _Optional_. The tags that are associated with the contact. |
+
+### `import`
 
 Imports all contacts from a selected _csv_ file. Calling the command will open a file browser to help select the file.
 
@@ -132,13 +311,22 @@ Valid `.csv` file example:
 | Beth | 620400   | beth123<span>@eg.edu | 123 Drive     |friend            |
 | Cody | 90005000 | Cody<span>@test.org  | Oak Lane      | mentor;colleague |
 
-### Listing all persons: `list`
+### `list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+list
+```
+</div>
+</div>
 
-### Editing a person: `edit`
+### `edit`
 
 Edits an existing person in the address book.
 
@@ -155,7 +343,7 @@ Examples:
 - `edit "1" -p "91234567" -e "johndoe@example.com"` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit "2" -n "Betsy Crower" -t ""` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons: `find`
+### `find`
 
 Finds persons whose respective fields contain any of the respective keywords.
 
@@ -191,75 +379,79 @@ Examples:
 - `find -n alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person: `delete`
+### `delete`
 
-Deletes the person of choice from the address book.
+Deletes the person at the specified index. This index refers to the index number shown in the displayed person list. The
+index must be a positive integer.
 
-Format: `delete "[INDEX]"`
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+delete
+```
 
-- Deletes the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+delete 1
+```
+Delete the person that is associated with the ID `1`.
+</div>
+</div>
 
-Examples:
+</div>
+</div>
 
-- `delete 1` deletes the first person in the list.
+### `clear`
 
-### Clearing all entries: `clear`
+Clears all contacts from the application.
 
-Clears all entries from the address book.
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+clear
+```
+</div>
+</div>
 
-Format: `clear`
-
-### Exiting the program: `exit`
+### `exit`
 
 Shuts down and exits the program.
 
-Format: `exit`
-
-### Saving the data
-
-Spam data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-Spam data are saved as an encrypted file `[JAR file location]/data/addressbook.enc`. It is not intended to be user-modifiable. The contents of the encrypted file are intentionally obfuscated for security.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Manually modifying the encrypted file **will** corrupt the data. Spam will discard all data and start with an empty data file at the next run.
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+exit
+```
+</div>
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ---
 
-## Controls
-
-In order to improve your experience when using the app, there are a few features that were added.
-
-### Navigating Previously Entered Commands
-
-Use the ↑ and ↓ arrow keys to navigate between previously entered commands.
-
----
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Spam home folder.
+This section contains all the frequently asked questions about SPAM.
+
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">How do I transfer my data to another computer?</h6>
+Export all the contacts in your current device into a _.csv_ file. Then, after installing the app in your new device,
+import the _.csv_ file into the new list of contacts.
+</div>
+</div>
 
 ---
-
-## Command summary
-
-| Action     | Format, Examples                                                                                                                                                       |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" ...` <br> e.g., `add -n "James Ho" -p "22224444" -e "jamesho@example.com" -a "123, Clementi Rd, 1234665" -t "friend"` |
-| **Clear**  | `clear`                                                                                                                                                                |
-| **Delete** | `delete [INDEX]`<br> e.g., `delete 3`                                                                                                                    |
-| **Edit**   | `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]"…​`<br> e.g., `edit "2" -n "James Lee" -e "jameslee@example.com"`                                           |
-| **Exit**   | `exit`                                                                                                                                                                 |
-| **Find**   | `find (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`<br> e.g., `find -n "James Jake"`               |
-| **Help**   | `help`                                         |
-| **Import** | `import`                                                                                                                                                               |
-| **List**   | `list`                                                                                                                                                                 |
