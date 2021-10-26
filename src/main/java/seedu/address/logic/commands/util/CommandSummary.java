@@ -17,6 +17,7 @@ import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.ViewCommand;
 
 /**
@@ -138,6 +139,7 @@ public class CommandSummary {
                         RemindCommand.COMMAND_WORD),
                 new CommandSummary(ClearCommand.COMMAND_ACTION, ClearCommand.COMMAND_WORD,
                         ClearCommand.COMMAND_WORD),
+                new CommandSummary(TagCommand.COMMAND_ACTION, TagCommand.COMMAND_WORD, TagCommand.COMMAND_WORD),
                 new CommandSummary(ExitCommand.COMMAND_ACTION, ExitCommand.COMMAND_WORD,
                         ExitCommand.COMMAND_WORD));
     }

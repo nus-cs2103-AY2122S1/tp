@@ -17,6 +17,6 @@ public class RemindCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(SHOWING_REMIND_MESSAGE, false, false, true, false);
+        return new CommandResult(SHOWING_REMIND_MESSAGE, false, false, false, false, true, false);
     }
 }

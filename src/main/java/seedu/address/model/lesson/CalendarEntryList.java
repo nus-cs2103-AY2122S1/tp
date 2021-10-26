@@ -3,7 +3,7 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -34,7 +34,7 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
-    private static final long TWO_DAY_DIFF = 2;
+    private static final long TWO_DAY_DIFF = 48;
 
     private final Calendar calendar = new Calendar();
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class CalendarEntryList {
     private void add(Entry<Lesson> calendarEntry) {
         calendar.addEntry(calendarEntry);
         entryList.add(calendarEntry);
-        if (isUpcoming(calendarEntry.getUserObject().getDisplayLocalDate())) {
+        if (isUpcoming(calendarEntry.getUserObject().getDisplayEndLocalDateTime())) {
             upcomingLessons.add(calendarEntry);
             sortUpcomingLessons();
         }
@@ -219,11 +219,11 @@ public class CalendarEntryList {
     /**
      * Returns true if the given date and time is within two days of current date time.
      *
-     * @param endDate Date and time to be checked.
+     * @param endDateTime Date and time to be checked.
      * @return True if the given date and time is within two days of current date time.
      */
-    private boolean isUpcoming(LocalDate endDate) {
-        long timeDiff = ChronoUnit.DAYS.between(LocalDate.now(), endDate);
+    private boolean isUpcoming(LocalDateTime endDateTime) {
+        long timeDiff = ChronoUnit.HOURS.between(LocalDateTime.now(), endDateTime);
         return timeDiff >= 0 && timeDiff < TWO_DAY_DIFF;
     }
 
@@ -232,7 +232,7 @@ public class CalendarEntryList {
      */
     private void sortUpcomingLessons() {
         List<Entry<Lesson>> sortedList = upcomingLessons.stream()
-                .sorted(Comparator.comparing(Entry::getEndAsLocalDateTime))
+                .sorted(Comparator.comparing(e -> e.getUserObject().getDisplayEndLocalDateTime()))
                 .collect(Collectors.toList());
         upcomingLessons.setAll(sortedList);
     }

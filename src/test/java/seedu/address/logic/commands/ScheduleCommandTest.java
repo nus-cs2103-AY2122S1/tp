@@ -13,9 +13,10 @@ public class ScheduleCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_schedule_success() {
+    public void execute_showSchedule_success() {
         CommandResult expectedCommandResult =
-                new CommandResult(SHOWING_SCHEDULE_MESSAGE, false, true, false, false);
+                new CommandResult(SHOWING_SCHEDULE_MESSAGE,
+                        false, false, false, true, false, false);
         assertCommandSuccess(new ScheduleCommand(), model, expectedCommandResult, expectedModel);
     }
 }

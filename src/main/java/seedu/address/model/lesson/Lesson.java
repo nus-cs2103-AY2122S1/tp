@@ -107,9 +107,20 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     /**
      * Gets the local date of the lesson to display to the user.
+     *
+     * @return {@code LocalDate} to be displayed.
      */
     public LocalDate getDisplayLocalDate() {
         return getDisplayDate().getLocalDate();
+    }
+
+    /**
+     * Gets the end {@code LocalDateTime} to be displayed.
+     *
+     * @return End {@code LocalDateTime} to be displayed.
+     */
+    public LocalDateTime getDisplayEndLocalDateTime() {
+        return timeRange.getEnd().atDate(getDisplayLocalDate());
     }
 
     /**

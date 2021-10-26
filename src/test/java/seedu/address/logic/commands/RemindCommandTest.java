@@ -15,7 +15,8 @@ class RemindCommandTest {
     @Test
     public void execute_remind_success() {
         CommandResult expectedCommandResult =
-                new CommandResult(SHOWING_REMIND_MESSAGE, false, false, true, false);
+                new CommandResult(SHOWING_REMIND_MESSAGE,
+                        false, false, false, false, true, false);
         assertCommandSuccess(new RemindCommand(), model, expectedCommandResult, expectedModel);
     }
 }
