@@ -134,8 +134,8 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Pair<Claim, Name>> getClaimList() {
         ObservableList<Pair<Claim, Name>> claimList = observableArrayList();
-        filteredPersons.stream().forEach(person -> {
-            person.getClaims().stream().forEach(claim -> {
+        filteredPersons.forEach(person -> {
+            person.getClaims().forEach(claim -> {
                 Pair<Claim, Name> claimAndName = new Pair<>(claim, person.getName());
                 claimList.add(claimAndName);
             });
@@ -150,9 +150,8 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getAppointmentList() {
-        ObservableList<Person> ls = filteredPersons.filtered(Person::hasUpcomingAppointment);
-        ls = ls.sorted(Comparator.comparing(Person::getAppointment));
-        return ls;
+        return filteredPersons.filtered(Person::hasUpcomingAppointment)
+                .sorted(Comparator.comparing(Person::getAppointment));
     }
 
     @Override
