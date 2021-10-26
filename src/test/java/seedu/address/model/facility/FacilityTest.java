@@ -32,7 +32,7 @@ public class FacilityTest {
         Facility facility = new FacilityBuilder().build();
         facility.addPersonToFacility(person);
         facility.addPersonToFacility(secondPerson);
-        assertEquals("Amy Bee, Matt, ", facility.getPersonsAsString());
+        assertEquals("Amy Bee, Matt", facility.getPersonsAsString());
     }
 
     @Test

@@ -29,9 +29,10 @@ import seedu.address.model.tag.Tag;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-    public static final String MESSAGE_USAGE = ": Imports the member data from a CSV file into SportsPA's data file.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Imports the member data from a CSV file into SportsPA's data file.\n"
             + "There must be headers for the CSV file and they should be in this order:"
-            + " NAME, PHONE, AVAILABILITY, TAGS"
+            + " NAME, PHONE, AVAILABILITY, TAGS\n"
             + "Parameters: KEYWORD CSV_FILE_PATH\n"
             + "Example: " + COMMAND_WORD + " myFilePath.csv";
     public static final String MESSAGE_FILE_NOT_FOUND = "No CSV file called %s found.";
