@@ -33,7 +33,6 @@ public class FindCommand extends Command {
      */
     public FindCommand(ArrayList<Predicate<Person>> predicates) {
         requireNonNull(predicates);
-
         this.predicates = predicates;
     }
 
