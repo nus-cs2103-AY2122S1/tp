@@ -117,6 +117,7 @@ public class Person implements Comparable<Person> {
         this.getStatsThread = new Thread(() -> {
             this.gitStats = GitHubUtil.getUserStats(github.value);
             logger.info("Stats for " + name.fullName + ": " + gitStats);
+            ThreadProcessor.removeThread(getStatsThread);
         });
         ThreadProcessor.addThread(getStatsThread);
     }

@@ -140,7 +140,7 @@ public class AI {
         normalizeRepoCount(stats, mainUserStat);
         stats.keySet().parallelStream().forEach(u -> distance.put(u, getDistanceMetric(mainUserStat, stats.get(u))));
         normalize(distance);
-        return (distance);
+        return sort(distance);
     }
 
     /**

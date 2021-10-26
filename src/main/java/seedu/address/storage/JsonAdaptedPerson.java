@@ -152,7 +152,12 @@ public class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (gitStats.isEmpty()) {
+        if (image == null) {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite);
+        }
+
+        if (gitStats == null || gitStats.isEmpty()) {
             return new Person(modelName, modelTelegram, modelGithub, modelPhone,
                     modelEmail, modelAddress, modelTags, modelIsFavourite, image);
         } else {

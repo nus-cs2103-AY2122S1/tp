@@ -63,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
+    private StackPane progressPlaceHolder;
+
+    @FXML
     private StackPane tabPanePlaceholder;
 
     @FXML
@@ -164,8 +167,10 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
+        personListPanelPlaceholder.getChildren().add(progressIndicator.getRoot());
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        tabPaneHeader = new TabPaneHeader(logic);
+        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
         tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
         personListPanel.setTabPaneHeader(tabPaneHeader);

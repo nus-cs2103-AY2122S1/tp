@@ -89,7 +89,7 @@ public class GitHubUtil {
         assert userName != null && !userName.equals("") : "No UserName Found";
 
         if (!Github.isValidGithub(userName)) {
-            throw new RuntimeException("Invalid GitHib Account");
+            logger.severe("Invalid GitHib Account");
         }
 
         String htmlString = establishConnectionForWebsite(userName);

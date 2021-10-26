@@ -3,21 +3,7 @@ package seedu.address.logic.ai;
 import java.util.HashSet;
 
 public class ThreadProcessor {
-    private static final Thread supervisor;
     private static final HashSet<Thread> threadQueue = new HashSet<>();
-
-    static {
-        supervisor = new Thread(() -> {
-            if (!threadQueue.isEmpty()) {
-                threadQueue.parallelStream().forEach(thread -> {
-                    if (!thread.isAlive()) {
-                        threadQueue.remove(thread);
-                    }
-                });
-            }
-        });
-        supervisor.start();
-    }
 
     /**
      * Adds the given Thread to queue
@@ -29,12 +15,24 @@ public class ThreadProcessor {
         thread.start();
     }
 
+    public static void removeThread(Thread thread) {
+        threadQueue.remove(thread);
+    }
+
     /**
      * Stops All Running Parallel Threads
      */
     public static void stopAllThreads() {
         threadQueue.parallelStream().forEach(Thread::interrupt);
-        supervisor.interrupt();
+    }
+
+    /**
+     * Checks if all threads done running
+     *
+     * @return true, if all threads done
+     */
+    public static boolean isEmpty() {
+        return threadQueue.isEmpty();
     }
 
 }
