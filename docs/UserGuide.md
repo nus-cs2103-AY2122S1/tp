@@ -453,16 +453,16 @@ invalid, Sellah will start with a new data file on its next run.
 
 ## 5. FAQ
 
-**Q**: How do I transfer my clients and products' information to another Computer? <br>
-**A**: Install the app in the other computer. Copy the entire data folder that can be found together with the Sellah.jar
-file on the first computer and copy it over to the same directory where the Sellah.jar file can be found on the second
-computer. <br>
+**Q**: How do I transfer my clients' and products' information to another computer? <br>
+**A**: Copy the entire `data` folder and `sellah.jar` in your _home directory_ on the current computer over to the new
+_home directory_ on the new computer. Optionally, you can also copy `config.json` and `preferences.json` over if you
+wish to keep your preferences of the application.
 
 **Q**: Do I lose all my clients and products' information when I close the application? <br>
-**A**: All data is auto-saved once you exit the app and loaded upon next entry, so you do not lose any data. <br>
+**A**: All data is auto-saved once you exit the app and loaded upon next entry, so you do not lose any data.
 
 **Q**: What should I do if I don’t know the command format? <br>
-**A**: You can type the [`Help`](#41-getting-help) command to receive a help message. <br>
+**A**: You can type the [`Help`](#41-getting-help) command to receive a help message.
 
 --------------------------------------------------------------------------
 
