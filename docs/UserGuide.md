@@ -320,10 +320,15 @@ Format: `sortorders f/FIELD o/ORDERING`
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Adding / Deleting an order reverts the list to the default ordering.</div>
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
+</div>
+
 Examples:
 * `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
 * `sortorders f/d o/asc` sorts your orders in ascending order of date (orders with earlier dates shown first).
 * `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
+* `sortorders f/amount` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 
 ### Viewing total orders: `totalorders`
 
