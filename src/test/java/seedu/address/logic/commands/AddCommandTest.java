@@ -168,6 +168,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void displayFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public ObservableList<Task> getDisplayTaskList() {
             throw new AssertionError("This method should not be called");
         }
