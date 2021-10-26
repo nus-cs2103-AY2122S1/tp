@@ -158,8 +158,8 @@ Gets personal information of student/s. Personal information refers to:
 
 Format: `get [p/] [e/] [te/] [n/NAME]`
 
-* If `NAME` is provided, only personal information of the person/s whose name contain the given `NAME` will be shown
-* If `NAME` is not provided, the personal information of all persons in AcademyDirectory will be shown
+* If `NAME` is provided, only personal information of the student/s whose name contain the given `NAME` will be shown
+* If `NAME` is not provided, the personal information of all students in AcademyDirectory will be shown
 * Multiple tags can be supplied at the same time, and personal information corresponding to all the given tags will be shown
 
 Examples:
@@ -280,9 +280,6 @@ Format: `visualise`
 * Visualize assessment grades of the class with Box & Whisker plot
 * Any grade of any student that is not yet entered will be counted as `0`
 
-Examples:
-* `visualise`
-
 ### Seeking help : `help`
 
 ![help message](images/helpMessage.png)
@@ -380,7 +377,7 @@ control folder of your previous AcademyDirectory to retain commit history.
 **A**: Studios are tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture.
 
 **Q**: What are "Avengers" in this application?<br>
-**A**: ‘Avenger’ is a special term to call a CS1101S tutor. They are the people who organize a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
+**A**: ‘Avenger’ is a special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
 The two terms are used throughout the UG in substitute of ‘tutorial’ and ‘tutor’, in consideration of the targeted audience of our application as CS1101S tutors.
 
 --------------------------------------------------------------------------------------------------------------------
