@@ -20,8 +20,8 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
             + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "3. Year must be 4 characters.";
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy")
-            .withResolverStyle(ResolverStyle.SMART);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public static final DateTimeFormatter DISPLAYED_DATE_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy");
 

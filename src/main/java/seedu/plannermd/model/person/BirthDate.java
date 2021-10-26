@@ -23,8 +23,8 @@ public class BirthDate {
             + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "4. Year must be 4 characters.";
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy")
-            .withResolverStyle(ResolverStyle.SMART);
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final LocalDate value;
 

@@ -48,7 +48,7 @@ class AppointmentDateTest {
 
     @Test
     public void isEqualDate_notEqualDates_returnsFalse() {
-        String otherDate = "31/11/2030";
+        String otherDate = "31/12/2030";
         assertFalse(new AppointmentDate(validDate).isEqualDate(new AppointmentDate(otherDate)));
     }
 
