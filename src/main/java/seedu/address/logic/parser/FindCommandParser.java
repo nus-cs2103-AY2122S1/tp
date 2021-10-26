@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -22,6 +23,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.interview.InterviewContainsKeywordsPredicate;
+import seedu.address.model.notes.NotesContainsKeywordsPredicate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentType;
@@ -61,7 +63,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
                         PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
-                        PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW);
+                        PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW, PREFIX_NOTES);
 
         // If find command has no prefix, it is invalid
         if (argMultimap.isEmpty()) {
@@ -123,6 +125,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
                 addToPredicateList(extractInterviewPrefixInput(argMultimap));
+            }
+
+            if (argMultimap.getValue(PREFIX_NOTES).isPresent()) {
+                addToPredicateList(extractNotesPrefixInput(argMultimap));
             }
         }
 
@@ -339,6 +345,16 @@ public class FindCommandParser implements Parser<FindCommand> {
                     }
                 }
                 return new InterviewContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private NotesContainsKeywordsPredicate extractNotesPrefixInput(ArgumentMultimap argMultimap) {
+            assert argMultimap.getValue(PREFIX_NOTES).isPresent()
+                    : "No inputs for Prefix Notes exists.";
+            String arg = argMultimap.getValue(PREFIX_NOTES).get();
+            if (!arg.isEmpty()) {
+                return new NotesContainsKeywordsPredicate(arg);
             }
             return null;
         }
