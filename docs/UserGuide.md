@@ -3,11 +3,13 @@ layout: page
 title: User Guide
 ---
 
-Welcome to Socius User Guide! This User Guide hopes to get you familarized with the functionalities of Socius. [Clich here for Quick Start](#quick-start).
+[Jump to Quick Start](#quick-start)
 
-Socius is a desktop application which helps to manage your classmates’ contacts. It can also facilitates the finding of teammates.
+Welcome to Socius User Guide! 
 
-Socius is targeted towards students taking CS2103T.
+Socius is a desktop application that can help you, as a student taking CS2103T Software Engineering, to manage your classmates’ contacts, so that you can have a easier time looking for teammates for group projects. This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program so that you can get the most out of it.
+
+We hope that you will have a great time using Socius! :)
 
 Here are some example usages you can derive from Socius:
 * Keep track of details of classmates who are also taking CS2103T
@@ -15,10 +17,14 @@ Here are some example usages you can derive from Socius:
 * Tag classmates based on assigned project groups
 * Filter classmates based on different project groups
 
+<div markdown="block" class="alert alert-info">
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
 type fast, Socius can get your contact management tasks done faster than traditional *GUI* apps.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -37,6 +43,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
      8. Computing statistics of a tutorial group : `stats`
      9. Clearing all entries `clear`
      10. Exiting the program `exit`
+3. Arguments constraints
 3. FAQ
 4. Command Summary
 --->
@@ -51,15 +58,15 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
-1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds. Alternatively for Mac users, you can try going to the terminal and typing in `java -jar Socius.jar` in case double-clicking does not work.
+1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds. (If  double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.)
 
    ![Ui](images/Ui.png)
 
-1. Note that the app comes with some sample data by default. Type **`clear`** in the command box to remove those sample data.
+* Note that the app comes with some sample data by default. Type **`clear`** in the command box to remove those sample data.
 
-1. You can refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
+* You can refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
 
-1. The following are some example of commands you can try. Type the command in the command box and press `⤷Enter` to execute it.
+* The following are some example of commands you can try. Type the command in the command box and press `⤷Enter` to execute it.
 
     * **`list`** : Lists all contacts.
 
@@ -115,6 +122,10 @@ Adds a person to the address book.
 
 Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The [Parameters Constraints](#parameters-constraints) section shows the constaints for each parameter
+</div>
+
 * Only `n/NAME` field is *compulsory*, while other fields are *optional*.
 * The order of the fields does not matter
 * The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name (e.g. `ig` for Instagram, `tg` for Telegram) and `HANDLENAME` is the the identifying username for that platform.
@@ -166,7 +177,7 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
-* If duplicated field are given, only the latest one will be taken (except for `h/SOCIAL_HANDLE` and `t/TAG`)
+* If duplicated fields are given, only the latest one will be taken (except for `h/SOCIAL_HANDLE` and `t/TAG`)
 * When editing tags, the existing tags of the person will be removed (i.e adding of tags is not cumulative).
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
@@ -226,7 +237,6 @@ Computes the gender and nationality statistics of the specified tutorial group.
 
 Format: **`stats`** `TUTORIAL_GROUP`
 
-* Computes the statistics of the specified tutorial group.
 * If there are no tutorial groups with the given name/number, it will notify the user.
 
 Examples:
@@ -244,6 +254,66 @@ Format: **`clear`**
 Exits the program.
 
 Format: **`exit`**
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Parameters Constraints
+
+### `n/NAME`
+`NAME` should only contain alphanumeric characters and spaces.
+(e.g. `n/Zayden Tan Bee Hoon`)
+
+### `g/GENDER`
+`GENDER` can be `M` for male, `F` for female or `O` for others.
+(e.g. `g/M`)
+
+### `p/PHONE`
+`PHONE` should only contain numbers, and it should be at least 3 digits long.
+(e.g. `98739283`)
+
+### `e/EMAIL`
+`EMAIL` should be of the format `local-part@domain` and adhere to the following constraints:
+* The local-part should only contain alphanumeric characters and these special characters: `+_.-`.
+* The local-part may not start or end with any special characters.
+* The domain name is made up of domain labels separated by periods.
+* The domain name must:
+     * end with a domain label at least 2 characters long
+     * have each domain label start and end with alphanumeric characters
+     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+ 
+(e.g. `e/e3029834@u.nus.edu`)
+
+### `nat/NATIONALITY`
+`NATIONALITY` can take any values.
+(e.g. `nat/Singaporean`)
+
+### `tg/TUTORIAL_GROUP`
+`TUTORIAL_GROUP` should only contain one letter that is either M/T/W/F followed by two digits.
+(e.g. `tg/T09`)
+
+### `h/SOCIAL_HANDLE`
+`SOCIAL_HANDLE` should be of the format `platform:username` and adhere to the following constraints:
+* The platform should only contain the 2 letter shorthand for the social platform:
+     * `ig` for Instagram
+     * `tg` for Telegram
+     * `fb` for Facebook
+     * `tw` for Twitter
+     * `gh` for Github
+     * `ln` for Linkedin
+* The username should only contain alphanumeric characters
+
+(e.g. `h/tg:alexx9384`)
+
+### `r/REMARK`
+`REMARK` can take any values.
+(e.g. `r/Stays in PGP`)
+
+### `t/TAG`
+`TAG` names should be alphanumeric
+(e.g. `t/friends`)
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can change the default colour of the tag with `t/TAG:#HEX_COLOUR` (e.g. `t/friends:#FF0000` for a red colour tag)
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -269,10 +339,13 @@ If your changes to the data file makes its format invalid, Socius will discard a
 
 |Action | Format | Examples|
 |--------|------------------|------------------------------------|
+|**Help** | **`help`** | **`help`** |
 |**Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/tg:friendlyjames r/Friendly t/colleague`|
-|**Clear** | **`clear`** | **`clear`** |
-|**Delete** | **`delete`** `INDEX` | **`delete`** `3`|
+|**Import** | **`import`** | **`import`** 'addressbook.json'|
+|**List** | **`list`** | **`list`** |
 |**Edit** | **`edit`** `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​` | **`edit`** `2 n/James Lee e/jameslee@example.com` |
 |**Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
-|**Help** | **`help`** | **`help`** |
-|**List** | **`list`** | **`list`** |
+|**Delete** | **`delete`** `INDEX` | **`delete`** `3`|
+|**Stats** | **`stats`** `TUTORIAL_GROUP` | **`stats`** `T09`|
+|**Clear** | **`clear`** | **`clear`** |
+|**Exit** | **`exit`** | **`exit`** |
