@@ -253,17 +253,11 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.getStudent().isPresent()) {
                 Person student = commandResult.getStudent().get();
                 handlePersonGridPanel(student);
-            }
-
-            if (commandResult.isShowSchedule()) {
+            } else if (commandResult.isShowSchedule()) {
                 handleSchedule();
-            }
-
-            if (commandResult.isShowTagList()) {
+            } else if (commandResult.isShowTagList()) {
                 handleShowTagList();
-            }
-
-            if (commandResult.isShowPersonList()) {
+            } else {
                 handlePersonGridPanel();
             }
 

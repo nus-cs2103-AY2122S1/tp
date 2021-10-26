@@ -25,7 +25,7 @@ class TagCommandTest {
     @Test
     public void execute_tag_success() {
         CommandResult expectedCommandResult =
-                new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false, false);
+                new CommandResult(MESSAGE_SUCCESS, false, true, false, false, false);
         assertCommandSuccess(prepareTagCommand(), model, expectedCommandResult, expectedModel);
     }
 

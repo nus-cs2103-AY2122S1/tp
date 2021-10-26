@@ -13,6 +13,6 @@ public class TagCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, true, false, false, false);
     }
 }
