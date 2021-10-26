@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -13,11 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,40 +25,11 @@ public class MarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(new Index[]{INDEX_FIRST_PERSON});
-
-        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.markPerson(personToMark);
-
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARKED_PERSON_SUCCESS, personToMark);
-
-        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         MarkCommand markCommand = new MarkCommand(new Index[]{outOfBoundIndex});
 
         assertCommandFailure(markCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        MarkCommand markCommand = new MarkCommand(new Index[]{INDEX_FIRST_PERSON});
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.markPerson(personToMark);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARKED_PERSON_SUCCESS, personToMark);
-
-        assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
