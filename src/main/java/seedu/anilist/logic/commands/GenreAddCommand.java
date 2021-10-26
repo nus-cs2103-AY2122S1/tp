@@ -22,7 +22,7 @@ import seedu.anilist.model.genre.Genre;
  */
 public class GenreAddCommand extends GenreCommand {
 
-    public static final String MESSAGE_SUCCESS = "Genres %1$s added to anime.\n"
+    public static final String MESSAGE_SUCCESS = "Genre(s) %1$s added to anime.\n"
             + "%2$s";
     public static final String MESSAGE_GENRE_PRESENT = "Genres %1$s are already present in anime.\n"
             + "%2$s";
