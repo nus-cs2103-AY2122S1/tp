@@ -310,9 +310,6 @@ class LessonEditCommandTest {
                         .withDate(VALID_DATE_PREV_MON)
                         .withCancelledDatesSet(VALID_DATE_MON).buildRecurring())
                 .build();
-        Lesson formerLesson = personBeforeLessonEdit
-                .getLessons().stream().collect(Collectors.toList())
-                .get(INDEX_FIRST_LESSON.getZeroBased());
 
         model.setPerson(firstPerson, personBeforeLessonEdit); // Ensure at least one lesson to edit
 
@@ -325,6 +322,27 @@ class LessonEditCommandTest {
 
         assertCommandFailure(lessonEditCommand, model,
                 String.format(MESSAGE_INVALID_UNCANCEL_DATE, VALID_DATE_NEXT_MON));
+    }
+
+    @Test
+    public void execute_uncancelDateRecurringClash_failure() {
+        Lesson lessonWithCancelled = new LessonBuilder().withDate(VALID_DATE_MON)
+                .withCancelledDatesSet(VALID_DATE_NEXT_MON).buildRecurring();
+        Lesson makeupLesson = new LessonBuilder().withDate(VALID_DATE_NEXT_MON).build();
+        Person personBeforeLessonEdit = new PersonBuilder(firstPerson)
+                .withLessons(makeupLesson, lessonWithCancelled)
+                .build();
+
+        model.setPerson(firstPerson, personBeforeLessonEdit); // Ensure at least one lesson to edit
+
+        // uncancel date is not a valid cancelled date
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withUncancelDates(VALID_DATE_NEXT_MON).build();
+
+        LessonEditCommand lessonEditCommand =
+                prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_SECOND_LESSON, descriptor);
+
+        assertCommandFailure(lessonEditCommand, model, MESSAGE_CLASHING_LESSON);
     }
 
     @Test
