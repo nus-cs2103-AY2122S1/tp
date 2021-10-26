@@ -128,11 +128,13 @@ Format: `tab`
 
 #### Setting Role Requirements : `setRoleReq `
 
-Set the minimum number of staff required for each person
+Set the minimum number of staff required for each shift. The three roles are: kitchen, floor and bartender. 
+Multiple roles can be set with this same command, but if the same role occurs multiple times, the last instance will be
+used.
 
 Format:
 
-`setRoleReq r/ROLE NUMBER_REQUIRED`
+`setRoleReq r/ROLE-NUMBER_REQUIRED...`
 
 Examples:
 

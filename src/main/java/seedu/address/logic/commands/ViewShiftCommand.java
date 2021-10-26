@@ -6,13 +6,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TIME;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Shift;
 import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
+import seedu.address.storage.RoleReqStorage;
 
 
 /**
@@ -20,7 +23,7 @@ import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
  * which views the schedule by Person.
  */
 public class ViewShiftCommand extends Command {
-    public static final String DEFAULT_MESSAGE = "Staff working on shift ";
+    public static final String DEFAULT_MESSAGE = "Staff working on shift:\n";
     public static final String COMMAND_WORD = "viewShift";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n\n"
             + "Parameters:\n"
@@ -40,6 +43,8 @@ public class ViewShiftCommand extends Command {
     private final int slotNum;
     private final LocalTime time;
     private final PersonIsWorkingPredicate isWorkingPredicate;
+    private int[] ROLE_REQ_CHECK = new int[]{};
+    private String ROLE_REQ_MESSAGE;
 
     /**
      * Constructs a ViewShiftCommand object.
@@ -64,6 +69,7 @@ public class ViewShiftCommand extends Command {
         }
 
         model.updateFilteredPersonList(isWorkingPredicate);
+        setRoleReqMessage(model);
 
         // Assumes either time is null, or dayOfWeek and slotNum is null (as passed in by ViewShiftCommandParser)
         if (time != null && dayOfWeek != null) {
@@ -86,7 +92,7 @@ public class ViewShiftCommand extends Command {
         int counter = 1;
         for (Person p : staffs) {
             boolean hasShift = p.isWorking(dayOfWeek, slotNum);
-            result.append(dayOfWeek).append(" ").append(slotNum).append(":\n");
+//            result.append(dayOfWeek).append(" ").append(slotNum).append(":\n");
             if (hasShift) {
                 result.append(counter).append(". ").append(p.getName()).append("\n");
                 counter++;
@@ -95,7 +101,7 @@ public class ViewShiftCommand extends Command {
         if (counter == 0) {
             return new CommandResult(NO_STAFF_WORKING);
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result.toString());
+            return new CommandResult(DEFAULT_MESSAGE + result.toString() + ROLE_REQ_MESSAGE);
         }
     }
 
@@ -112,7 +118,7 @@ public class ViewShiftCommand extends Command {
         } else if (slotNum == INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES) {
             return new CommandResult(HELP_MESSAGE + getWorkingStaffByTime(staffs));
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result);
+            return new CommandResult(DEFAULT_MESSAGE + result + ROLE_REQ_MESSAGE);
         }
     }
 
@@ -136,5 +142,42 @@ public class ViewShiftCommand extends Command {
                 && (this.dayOfWeek == null || this.dayOfWeek.equals(((ViewShiftCommand) other).dayOfWeek))
                 && (this.slotNum != INVALID_SLOT_NUMBER || this.slotNum == ((ViewShiftCommand) other).slotNum)
                 && (this.time == null || this.time.equals(((ViewShiftCommand) other).time)));
+    }
+
+    private boolean checkRoleReq(Model model) {
+        int[] roleReqCheck = new int[]{0, 0, 0}; // bartender, floor, kitchen
+        ObservableList<Person> staffWorking = model.getFilteredPersonList();
+
+        for (Person p : staffWorking) {
+            Set<Role> pRoles = p.getRoles();
+            for (Role r : pRoles) {
+                if (r.getValue().equals("bartender")) {
+                    roleReqCheck[0] += 1;
+                } else if (r.getValue().equals("floor")) {
+                    roleReqCheck[1] += 1;
+                } else if (r.getValue().equals("kitchen")){
+                    roleReqCheck[2] += 1;
+                }
+            }
+        }
+
+        ROLE_REQ_CHECK = roleReqCheck;
+        if (roleReqCheck[0] < RoleReqStorage.getMinNumBartender()) {
+            return false;
+        } else if (roleReqCheck[1] < RoleReqStorage.getMinNumFloor()) {
+            return false;
+        } else return roleReqCheck[2] >= RoleReqStorage.getMinNumKitchen();
+    }
+
+    private void setRoleReqMessage(Model model) {
+        String roleReqMessage = checkRoleReq(model)
+                ? ""
+                : "\n\nThere is a manpower shortage! You are supposed to have:\n"
+                + RoleReqStorage.getRoleReqs() + "\n\n"
+                + "But you currently have:\n"
+                + "Bartender: " + ROLE_REQ_CHECK[0] + "\n"
+                + "Floor: " + ROLE_REQ_CHECK[1] + "\n"
+                + "Kitchen: " + ROLE_REQ_CHECK[2] + "\n";
+        ROLE_REQ_MESSAGE = roleReqMessage;
     }
 }

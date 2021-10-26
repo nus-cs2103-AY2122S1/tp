@@ -18,7 +18,7 @@ public class RoleReqStorage {
      * @return an ArrayList of requirements.
      * @throws IOException If there are errors processing the file.
      */
-    public int[] load() throws IOException {
+    public static int[] load() throws IOException {
 
         if (!file.exists()) {
             // Create the data folder if it does not exist.
@@ -44,7 +44,7 @@ public class RoleReqStorage {
      * @return An ArrayList of tasks read from the save file.
      * @throws FileNotFoundException If saved file cannot be found.
      */
-    private int[] readFileModifyRequirements() throws FileNotFoundException {
+    private static int[] readFileModifyRequirements() throws FileNotFoundException {
         Scanner fileSc = new Scanner(file);
         int i = 0;
 
@@ -92,7 +92,7 @@ public class RoleReqStorage {
         } else if (role.equals("floor")) {
             return 1;
         } else { // checks are done in setRoleReqCommand
-            return 3;
+            return 2;
         }
     }
 
@@ -129,9 +129,9 @@ public class RoleReqStorage {
      * @return String representation of the current Role Requirements.
      */
     public static String getRoleReqs() {
-        return "Bartenders: " + requirements[0]
-                + "Floor: " + requirements[1]
-                + "Kitchen: " + requirements[2];
+        return "Bartenders: " + requirements[0] + "\n"
+                + "Floor: " + requirements[1] + "\n"
+                + "Kitchen: " + requirements[2] + "\n";
     }
 }
 

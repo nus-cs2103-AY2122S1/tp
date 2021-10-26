@@ -4,6 +4,7 @@ import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Role;
 
+import java.util.Locale;
 import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
@@ -23,13 +24,13 @@ public class SetRoleReqCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SetRoleReqCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim().replace(SetRoleReqCommand.COMMAND_WORD, "");
+//        String trimmedArgs = args.trim().replace(SetRoleReqCommand.COMMAND_WORD, "");
 
         requireNonNull(args); // `setRoleReq r/kitchen-4 r/bartender-2`
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ROLE);
 
-        if (!argMultimap.getPreamble().isEmpty() || !arePrefixesPresent(argMultimap, PREFIX_ROLE)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ROLE) || !argMultimap.getPreamble().isEmpty()) {
             throw DEFAULT_ERROR;
         }
 

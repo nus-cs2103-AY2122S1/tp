@@ -2,14 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
 import java.time.LocalDate;
@@ -375,7 +368,7 @@ public class ParserUtil {
         requireNonNull(roles);
         final Set<String> roleSet = new HashSet<>();
         for (String roleReq : roles) {
-            roleReq = roleReq.trim();
+            roleReq = roleReq.trim().replace(PREFIX_ROLE.toString(), "");
             if (!isValidRoleRequirement(roleReq)) {
                 throw SetRoleReqCommandParser.DEFAULT_ERROR;
             }
