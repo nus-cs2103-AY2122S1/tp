@@ -1,27 +1,32 @@
-package safeforhall.logic.parser;
+package safeforhall.logic.parser.find;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import safeforhall.logic.commands.FindCommand;
+import safeforhall.logic.commands.find.FindPersonCommand;
+import safeforhall.logic.parser.ArgumentMultimap;
+import safeforhall.logic.parser.ArgumentTokenizer;
+import safeforhall.logic.parser.CliSyntax;
+import safeforhall.logic.parser.Parser;
+import safeforhall.logic.parser.ParserUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindPersonCommand object
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindPersonCommand
+     * and returns a FindPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCommand parse(String args) throws ParseException {
+    public FindPersonCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap =
@@ -29,7 +34,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                         CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_VACCSTATUS,
                         CliSyntax.PREFIX_FACULTY);
 
-        FindCommand.FindCompositePredicate findCompositePredicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate findCompositePredicate =
+                new FindPersonCommand.FindCompositePredicate();
 
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
             findCompositePredicate.setName(ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
@@ -57,10 +63,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (!findCompositePredicate.isAnyFieldFiltered()) {
-            throw new ParseException(FindCommand.MESSAGE_NOT_FILTERED);
+            throw new ParseException(FindPersonCommand.MESSAGE_NOT_FILTERED);
         }
 
-        return new FindCommand(findCompositePredicate);
+        return new FindPersonCommand(findCompositePredicate);
     }
 
 }

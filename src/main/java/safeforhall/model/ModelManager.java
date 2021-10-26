@@ -24,6 +24,7 @@ import safeforhall.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String EMPTY_STRING = "";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -176,7 +177,7 @@ public class ModelManager implements Model {
                 return information;
             }
         }
-        return "";
+        return EMPTY_STRING;
     }
 
     @Override

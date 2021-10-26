@@ -8,18 +8,20 @@ import java.util.regex.Pattern;
 
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.commands.ExcludeCommand;
 import safeforhall.logic.commands.ExitCommand;
-import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
-import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeleteEventCommand;
 import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.commands.edit.EditEventCommand;
 import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.find.FindEventCommand;
+import safeforhall.logic.commands.find.FindPersonCommand;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.add.AddEventCommandParser;
@@ -29,6 +31,8 @@ import safeforhall.logic.parser.delete.DeletePersonCommandParser;
 import safeforhall.logic.parser.edit.EditEventCommandParser;
 import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.logic.parser.find.FindEventCommandParser;
+import safeforhall.logic.parser.find.FindPersonCommandParser;
 import safeforhall.logic.parser.view.ViewEventCommandParser;
 import safeforhall.logic.parser.view.ViewPersonCommandParser;
 
@@ -101,14 +105,17 @@ public class AddressBookParser {
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPersonCommand.COMMAND_WORD:
+            return new FindPersonCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+        case DeadlineCommand.COMMAND_WORD:
+            return new DeadlineCommandParser().parse(arguments);
 
         case ViewPersonCommand.COMMAND_WORD:
             return new ViewPersonCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -143,6 +150,9 @@ public class AddressBookParser {
 
         case ExcludeCommand.COMMAND_WORD:
             return new ExcludeCommandParser().parse(arguments);
+
+        case FindEventCommand.COMMAND_WORD:
+            return new FindEventCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

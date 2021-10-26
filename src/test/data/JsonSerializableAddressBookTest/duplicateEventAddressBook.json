@@ -1,0 +1,16 @@
+{
+  "persons": [],
+  "events" : [ {
+    "eventName" : "basketball",
+    "eventDate" : "10-10-2021",
+    "venue" : "basketball court",
+    "capacity" : "5",
+    "residents" : "None"
+  }, {
+    "eventName" : "basketball",
+    "eventDate" : "10-10-2021",
+    "venue" : "basketball court",
+    "capacity" : "5",
+    "residents" : "None"
+  } ]
+}

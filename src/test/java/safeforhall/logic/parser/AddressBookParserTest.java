@@ -17,16 +17,18 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.ClearCommand;
-//import safeforhall.logic.commands.EditCommand;
+import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.commands.ExcludeCommand;
 import safeforhall.logic.commands.ExitCommand;
-import safeforhall.logic.commands.FindCommand;
-import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
-import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeletePersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.find.FindPersonCommand;
+import safeforhall.logic.commands.find.FindPersonCommand.FindCompositePredicate;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -35,7 +37,7 @@ import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.VaccStatus;
-//import safeforhall.testutil.EditPersonDescriptorBuilder;
+import safeforhall.testutil.EditPersonDescriptorBuilder;
 import safeforhall.testutil.PersonBuilder;
 import safeforhall.testutil.PersonUtil;
 
@@ -66,13 +68,22 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_import() throws Exception {
+        ImportCommand command = (ImportCommand) parser.parseCommand(
+                ImportCommand.COMMAND_WORD + " safeforhall", true);
+        assertEquals(new ImportCommand("safeforhall"), command);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
-        // TODO : Fix after edit command is done
-        /*Person person = new PersonBuilder().build();
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);*/
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor), true);
+        ArrayList<Index> list = new ArrayList<>();
+        list.add(INDEX_FIRST_PERSON);
+        assertEquals(new EditPersonCommand(list, descriptor), command);
     }
 
     @Test
@@ -85,8 +96,8 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         String joint = keywords.stream().collect(Collectors.joining(" "));
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " "
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " "
                         + CliSyntax.PREFIX_NAME + joint + " "
                         + CliSyntax.PREFIX_ROOM + "A100" + " "
                         + CliSyntax.PREFIX_VACCSTATUS + "T", true);
@@ -96,7 +107,7 @@ public class AddressBookParserTest {
         predicate.setRoom("A100");
         predicate.setVaccStatus(new VaccStatus("T"));
 
-        assertEquals(new FindCommand(predicate), command);
+        assertEquals(new FindPersonCommand(predicate), command);
     }
 
     @Test
@@ -107,9 +118,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        ListCommand command = (ListCommand) parser.parseCommand(
-                ListCommand.COMMAND_WORD + " k/c d1/10-10-2021", true);
-        assertEquals(new ListCommand("c", new LastDate("10-10-2021")), command);
+        DeadlineCommand command = (DeadlineCommand) parser.parseCommand(
+                DeadlineCommand.COMMAND_WORD + " k/c d1/10-10-2021", true);
+        assertEquals(new DeadlineCommand("c", new LastDate("10-10-2021")), command);
     }
 
     @Test

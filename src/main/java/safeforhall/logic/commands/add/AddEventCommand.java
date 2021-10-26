@@ -81,7 +81,7 @@ public class AddEventCommand extends Command {
     public String personListToString(ArrayList<Person> personList) {
         StringBuilder stringBuilder;
         if (personList.isEmpty()) {
-            return "None";
+            return ResidentList.DEFAULT_LIST;
         } else {
             stringBuilder = new StringBuilder("");
         }

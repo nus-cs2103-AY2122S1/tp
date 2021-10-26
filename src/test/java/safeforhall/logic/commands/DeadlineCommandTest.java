@@ -28,37 +28,37 @@ import safeforhall.testutil.TypicalPersons;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListCommandTest {
+public class DeadlineCommandTest {
     private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        ListCommand firstListCommand = new ListCommand("f", new LastDate("10-10-2021"));
-        ListCommand secondListCommand = new ListCommand("c", new LastDate("12-10-2021"));
+        DeadlineCommand firstDeadlineCommand = new DeadlineCommand("f", new LastDate("10-10-2021"));
+        DeadlineCommand secondDeadlineCommand = new DeadlineCommand("c", new LastDate("12-10-2021"));
 
         // same object -> returns true
-        assertTrue(firstListCommand.equals(firstListCommand));
+        assertTrue(firstDeadlineCommand.equals(firstDeadlineCommand));
 
         // same values -> returns true
-        ListCommand findFirstCommandCopy = new ListCommand("f", new LastDate("10-10-2021"));
-        assertTrue(firstListCommand.equals(findFirstCommandCopy));
+        DeadlineCommand findFirstCommandCopy = new DeadlineCommand("f", new LastDate("10-10-2021"));
+        assertTrue(firstDeadlineCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(firstListCommand.equals(1));
+        assertFalse(firstDeadlineCommand.equals(1));
 
         // null -> returns false
-        assertFalse(firstListCommand.equals(null));
+        assertFalse(firstDeadlineCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(firstListCommand.equals(secondListCommand));
+        assertFalse(firstDeadlineCommand.equals(secondDeadlineCommand));
     }
 
     @Test
     public void execute_oneLastDateFetNotFound() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_FET;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_FET;
         NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("f", new LastDate("17-09-2021"));
-        ListCommand command = new ListCommand("f", new LastDate("17-09-2021"));
+        DeadlineCommand command = new DeadlineCommand("f", new LastDate("17-09-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.EMPTY_LIST, expectedModel.getFilteredPersonList());
@@ -66,10 +66,10 @@ public class ListCommandTest {
 
     @Test
     public void execute_twoLastDateArtNotFound() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_ART;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_ART;
         NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("c", new LastDate("10-09-2021"),
                 new LastDate("15-09-2021"));
-        ListCommand command = new ListCommand("c", new LastDate("10-09-2021"), new LastDate("15-09-2021"));
+        DeadlineCommand command = new DeadlineCommand("c", new LastDate("10-09-2021"), new LastDate("15-09-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.EMPTY_LIST, expectedModel.getFilteredPersonList());
@@ -77,9 +77,9 @@ public class ListCommandTest {
 
     @Test
     public void execute_oneLastDateFet() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_FET;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_FET;
         NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("f", new LastDate("17-10-2021"));
-        ListCommand command = new ListCommand("f", new LastDate("17-10-2021"));
+        DeadlineCommand command = new DeadlineCommand("f", new LastDate("17-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
@@ -89,9 +89,9 @@ public class ListCommandTest {
 
     @Test
     public void execute_oneLastDateCollection() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_ART;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_ART;
         NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("c", new LastDate("10-10-2021"));
-        ListCommand command = new ListCommand("c", new LastDate("10-10-2021"));
+        DeadlineCommand command = new DeadlineCommand("c", new LastDate("10-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
@@ -102,10 +102,10 @@ public class ListCommandTest {
 
     @Test
     public void execute_twoLastDateFet() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_FET;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_FET;
         NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("f", new LastDate("10-10-2021"),
                 new LastDate("15-10-2021"));
-        ListCommand command = new ListCommand("f", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
+        DeadlineCommand command = new DeadlineCommand("f", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
@@ -116,10 +116,10 @@ public class ListCommandTest {
 
     @Test
     public void execute_twoLastDateCollection() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_ART;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_ART;
         NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("c", new LastDate("10-10-2021"),
                 new LastDate("15-10-2021"));
-        ListCommand command = new ListCommand("c", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
+        DeadlineCommand command = new DeadlineCommand("c", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
@@ -131,9 +131,9 @@ public class ListCommandTest {
 
     @Test
     public void execute_oneLateFet() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_MISSED_FET;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_MISSED_FET;
         NameMissedDeadlinePredicate predicate = new NameMissedDeadlinePredicate("f", new LastDate("17-10-2021"));
-        ListCommand command = new ListCommand("lf", new LastDate("17-10-2021"));
+        DeadlineCommand command = new DeadlineCommand("lf", new LastDate("17-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
@@ -144,9 +144,9 @@ public class ListCommandTest {
 
     @Test
     public void execute_oneLateCollection() {
-        String expectedMessage = ListCommand.MESSAGE_SUCCESS_MISSED_ART;
+        String expectedMessage = DeadlineCommand.MESSAGE_SUCCESS_MISSED_ART;
         NameMissedDeadlinePredicate predicate = new NameMissedDeadlinePredicate("c", new LastDate("10-10-2021"));
-        ListCommand command = new ListCommand("lc", new LastDate("10-10-2021"));
+        DeadlineCommand command = new DeadlineCommand("lc", new LastDate("10-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
