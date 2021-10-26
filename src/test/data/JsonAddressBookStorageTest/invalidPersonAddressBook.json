@@ -8,6 +8,7 @@
     "expectedSalary" : "900",
     "levelOfEducation": "PhD",
     "experience": "1",
+    "notes": "-",
     "done" : "Not Done"
   } ]
 }

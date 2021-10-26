@@ -22,6 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.LEVEL_OF_EDUCATION_DE
 import static seedu.address.logic.commands.CommandTestUtil.LEVEL_OF_EDUCATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NOTES_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NOTES_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -36,6 +38,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -65,70 +68,71 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
+                .withNotes(VALID_NOTES_BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_BOB
                 + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_BOB
                 + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_BOB
                 + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_AMY + EMAIL_DESC_BOB + ROLE_DESC_BOB
                 + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple roles - last role accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROLE_DESC_AMY + ROLE_DESC_BOB
                 + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple employment types - last employment type accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_AMY
                 + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple expected salaries - last expected salary accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
                 + EXPECTED_SALARY_DESC_AMY + EXPECTED_SALARY_DESC_BOB
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple levels of education - last level of education accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
                 + EXPECTED_SALARY_DESC_BOB + LEVEL_OF_EDUCATION_DESC_AMY
                 + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple experiences - last experience accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
                 + EXPECTED_SALARY_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB
                 + EXPERIENCE_DESC_AMY + EXPERIENCE_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
@@ -136,13 +140,20 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
                 + EXPECTED_SALARY_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB + EXPERIENCE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + NOTES_DESC_BOB, new AddCommand(expectedPersonMultipleTags));
+
+        // multiple notes - last notes accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
+                + EXPECTED_SALARY_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB
+                + EXPERIENCE_DESC_BOB + TAG_DESC_FRIEND + NOTES_DESC_AMY
+                + NOTES_DESC_BOB, new AddCommand(expectedPerson));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withNotes("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY + EXPECTED_SALARY_DESC_AMY
                 + LEVEL_OF_EDUCATION_DESC_AMY + EXPERIENCE_DESC_AMY, new AddCommand(expectedPerson));

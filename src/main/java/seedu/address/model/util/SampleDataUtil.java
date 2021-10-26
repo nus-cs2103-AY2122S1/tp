@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -33,8 +34,9 @@ public class SampleDataUtil {
                 new ExpectedSalary("3500"),
                 new LevelOfEducation("PhD"),
                 new Experience("0"),
-                    getTagSet("friends"),
-                    Optional.of(new Interview("2021-10-20, 9:30"))),
+                getTagSet("Excellent"),
+                Optional.of(new Interview("2021-10-20, 9:30")),
+                Optional.of(new Notes("He is a perfect candidate for this job!"))),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"),
                 new Role("Software Tester"),
@@ -42,8 +44,9 @@ public class SampleDataUtil {
                 new ExpectedSalary("1300"),
                 new LevelOfEducation("Masters"),
                 new Experience("1"),
-                getTagSet("colleagues", "friends"),
-                    Optional.empty()),
+                getTagSet("Remarkable", "Passionate"),
+                Optional.empty(),
+                Optional.of(new Notes("She is very passionate about this field."))),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Role("Software Developer"),
@@ -51,8 +54,9 @@ public class SampleDataUtil {
                 new ExpectedSalary("0"),
                 new LevelOfEducation("Elementary"),
                 new Experience("2"),
-                getTagSet("neighbours"),
-                    Optional.of(new Interview("2021-10-20, 11:00"))),
+                getTagSet("Average"),
+                Optional.of(new Interview("2021-10-20, 11:00")),
+                Optional.of(new Notes("Nothing outstanding about this applicant."))),
             new Person(new Name("David Li"), new Phone("91031282"),
                 new Email("lidavid@example.com"),
                 new Role("Software Developer"),
@@ -60,8 +64,9 @@ public class SampleDataUtil {
                 new ExpectedSalary("5700"),
                 new LevelOfEducation("Bachelors"),
                 new Experience("3"),
-                getTagSet("family"),
-                    Optional.of(new Interview("2021-10-20, 15:00"))),
+                getTagSet("Outstanding"),
+                Optional.of(new Interview("2021-10-20, 15:00")),
+                Optional.of(new Notes("He would not fit the job based off his resume."))),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                 new Email("irfan@example.com"),
                 new Role("Software Tester"),
@@ -69,8 +74,9 @@ public class SampleDataUtil {
                 new ExpectedSalary("2200"),
                 new LevelOfEducation("Middle School"),
                 new Experience("4"),
-                getTagSet("classmates"),
-                    Optional.empty()),
+                getTagSet("Good"),
+                Optional.empty(),
+                Optional.empty()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("royb@example.com"),
                 new Role("Software Engineer"),
@@ -78,8 +84,10 @@ public class SampleDataUtil {
                 new ExpectedSalary("4000"),
                 new LevelOfEducation("High School"),
                 new Experience("5"),
-                getTagSet("colleagues"),
-                   Optional.empty())
+                getTagSet("Normal"),
+                Optional.empty(),
+                Optional.of(new Notes("He has past leadership skills, "
+                        + "but do not have proper experience in this field.")))
         };
     }
 

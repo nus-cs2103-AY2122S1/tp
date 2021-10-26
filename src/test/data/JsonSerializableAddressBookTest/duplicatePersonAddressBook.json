@@ -5,22 +5,24 @@
     "email": "alice@example.com",
     "role": "Preschool Teacher",
     "employmentType": "Full time",
-    "expectedSalary" : "7500",
+    "expectedSalary": "7500",
     "levelOfEducation": "PhD",
     "experience" : "0",
     "tagged": [ "friends" ],
-    "interview" : "-",
-    "done" : "Not Done"
+    "interview": "-",
+    "notes": "-",
+    "done": "Not Done"
   }, {
     "name": "Janice Paula",
     "phone": "94351253",
     "email": "alice@example.com",
     "role": "Preschool Teacher",
     "employmentType": "Part time",
-    "expectedSalary" : "7500",
+    "expectedSalary": "7500",
     "levelOfEducation": "PhD",
-    "experience" : "1",
-    "interview" : "-",
-    "done" : "Not Done"
+    "experience": "1",
+    "interview": "-",
+    "notes": "-",
+    "done": "Not Done"
   } ]
 }

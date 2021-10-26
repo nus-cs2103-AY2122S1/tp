@@ -154,6 +154,31 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Show feature
+
+#### Implementation
+
+Given below is an example usage scenario and how the show operation behaves at each step.
+
+Step 1. A valid command `show n/` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `show n/` into command word `show` and command argument ` n/`.
+
+Step 2. `ShowCommandParser` is initialized based on the parse results and `ShowCommandParser#parse()` is called
+to identify the first prefix in the user input ` n/`. `ShowCommandParser#parse()` then initializes a
+`ShowCommand` with the first prefix `Name` as argument.
+
+Step 3. `ShowCommand#execute()` is then called, which will first obtain a `ReadOnlyAddressBook` from `Model`, from which
+the `ObservableList<Person>` belonging to the `ReadOnlyAddressBook` is obtained. The names of each applicant within
+the `ObservableList<Person>` is then accumulated to form a string of all applicant names.
+
+Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+The following sequence diagram shows how the show operation works.
+![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

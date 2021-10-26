@@ -11,6 +11,7 @@
     "experience" : "0",
     "tagged" : [ "friends" ],
     "interview" : "-",
+    "notes" : "She is very passionate about this field.",
     "done" : "Not Done"
   }, {
     "name" : "Benson Meier",
@@ -23,6 +24,7 @@
     "experience" : "1",
     "tagged" : [ "owesMoney", "friends" ],
     "interview" : "2021-10-22, 10:00",
+    "notes" : "He does not seem like he would fit the job based off his resume.",
     "done" : "Not Done"
   }, {
     "name" : "Carl Kurz",
@@ -35,6 +37,7 @@
     "experience" : "2",
     "tagged" : [ ],
     "interview" : "-",
+    "notes" : "He has past leadership skills, but do not have proper experience in this field.",
     "done" : "Not Done"
   }, {
     "name" : "Daniel Meier",
@@ -47,6 +50,7 @@
     "experience" : "3",
     "tagged" : [ "friends" ],
     "interview" : "-",
+    "notes" : "He is a perfect candidate for this job!",
     "done" : "Not Done"
   }, {
     "name" : "Elle Meyer",
@@ -59,6 +63,7 @@
     "experience" : "4",
     "tagged" : [ "old" ],
     "interview" : "-",
+    "notes" : "Nothing outstanding about this applicant compared to the rest of the applicants.",
     "done" : "Not Done"
   }, {
     "name" : "Fiona Kunz",
@@ -71,6 +76,7 @@
     "experience" : "5",
     "tagged" : [ ],
     "interview" : "-",
+    "notes" : "She has prior experience but in other countries.",
     "done" : "Not Done"
   }, {
     "name" : "George Best",
@@ -83,6 +89,7 @@
     "experience" : "6",
     "tagged" : [ ],
     "interview" : "-",
+    "notes" : "Might be worth taking more time to interview this person",
     "done" : "Not Done"
   } ]
 }

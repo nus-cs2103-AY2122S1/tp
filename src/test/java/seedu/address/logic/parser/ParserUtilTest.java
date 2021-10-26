@@ -12,12 +12,14 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -49,6 +51,7 @@ public class ParserUtilTest {
     private static final String VALID_EXPERIENCE = "1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_NOTES = "He is a very good candidate!";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -331,6 +334,17 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseNotes_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNotes((String) null));
+    }
+
+    @Test
+    public void parseNotes_validValue_returnsNotes() throws Exception {
+        Optional<Notes> expectedNotes = Optional.ofNullable(new Notes(VALID_NOTES));
+        assertEquals(expectedNotes, ParserUtil.parseNotes(VALID_NOTES));
     }
 
 }

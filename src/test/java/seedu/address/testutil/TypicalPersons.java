@@ -13,6 +13,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCAT
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
@@ -43,6 +45,7 @@ public class TypicalPersons {
             .withExperience("0")
             .withTags("friends")
             .withInterview("")
+            .withNotes("She is very passionate about this field.")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
@@ -55,6 +58,7 @@ public class TypicalPersons {
             .withExperience("1")
             .withTags("owesMoney", "friends")
             .withInterview("2021-10-22, 10:00")
+            .withNotes("He does not seem like he would fit the job based off his resume.")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
@@ -66,6 +70,7 @@ public class TypicalPersons {
             .withLevelOfEducation("Elementary")
             .withExperience("2")
             .withInterview("")
+            .withNotes("He has past leadership skills, but do not have proper experience in this field.")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
@@ -78,6 +83,7 @@ public class TypicalPersons {
             .withExperience("3")
             .withTags("friends")
             .withInterview("")
+            .withNotes("He is a perfect candidate for this job!")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
@@ -90,6 +96,7 @@ public class TypicalPersons {
             .withExperience("4")
             .withTags("old")
             .withInterview("")
+            .withNotes("Nothing outstanding about this applicant compared to the rest of the applicants.")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
@@ -101,6 +108,7 @@ public class TypicalPersons {
             .withLevelOfEducation("High School")
             .withExperience("5")
             .withInterview("")
+            .withNotes("She has prior experience but in other countries.")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
@@ -112,6 +120,7 @@ public class TypicalPersons {
             .withLevelOfEducation("University")
             .withExperience("6")
             .withInterview("")
+            .withNotes("Might be worth taking more time to interview this person")
             .withDone(Done.STATUS_UNDONE).build();
 
     // Manually added
@@ -124,6 +133,7 @@ public class TypicalPersons {
             .withLevelOfEducation("PhD")
             .withExperience("7")
             .withInterview("")
+            .withNotes("Good choice for this job, has the qualities the company is looking for.")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
@@ -135,6 +145,7 @@ public class TypicalPersons {
             .withLevelOfEducation("Masters")
             .withExperience("8")
             .withInterview("")
+            .withNotes("Experienced, reliable and very very passionate.")
             .withDone(Done.STATUS_UNDONE).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -148,6 +159,7 @@ public class TypicalPersons {
             .withExperience(VALID_EXPERIENCE_AMY)
             .withTags(VALID_TAG_FRIEND)
             .withInterview("")
+            .withNotes(VALID_NOTES_AMY)
             .withDone(VALID_DONE_AMY).build();
 
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
@@ -160,6 +172,7 @@ public class TypicalPersons {
             .withExperience(VALID_EXPERIENCE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withInterview("")
+            .withNotes(VALID_NOTES_BOB)
             .withDone(VALID_DONE_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
