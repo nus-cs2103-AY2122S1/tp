@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXISTING_FILE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_CSV;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_JSON;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -20,10 +21,10 @@ import seedu.address.model.UserPrefs;
 
 public class ExportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
-    private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/TestFiles/";
+    private static final String PATH_TEST_FILES = "src/test/data/ExportImportCommandTest/TestFiles/";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
 
     @Test
     public void equals() {
@@ -88,8 +89,8 @@ public class ExportCommandTest {
      */
     @Test
     public void execute_fileName_fileExists() {
-        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_FAILURE, VALID_FILENAME_JSON);
-        ExportCommand exportCommand = new ExportCommand(PATH_FOLDER_WITH_JSON, VALID_FILENAME_JSON);
+        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_FAILURE, VALID_EXISTING_FILE);
+        ExportCommand exportCommand = new ExportCommand(PATH_TEST_FILES, VALID_EXISTING_FILE);
         assertCommandFailure(exportCommand, model, expectedMessage);
     }
 }

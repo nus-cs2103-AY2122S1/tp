@@ -69,9 +69,10 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    /** Filenames for testing **/
+    /** Filenames for testing in {@link ExportCommandTest} and {@link ImportCommandTest} **/
     public static final String VALID_FILENAME_JSON = "ImportNewPerson.json";
     public static final String VALID_FILENAME_CSV = "ImportNewPerson.csv";
+    public static final String VALID_EXISTING_FILE = "ExistingFile.json";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
@@ -139,6 +140,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
