@@ -3,7 +3,7 @@ layout: page
 title: ModuLink
 ---
 
-ModuLink is a **desktop app for CS students to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a CS student and you need a platform to connect with your peers and to find project groups, ModuLink is the choice for you.
+ModuLink is a **desktop app for CS students to connect with other students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a CS student and you need a platform to connect with your peers and to find project groups, ModuLink is the choice for you.
 
 ## User Guide
 Here is a reference guide to the features and potential uses of ModuLink.
@@ -19,23 +19,23 @@ Here is a reference guide to the features and potential uses of ModuLink.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. You may follow the guide [here](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-61460339-5500-40CC-9006-D4FC3FBCFC0D).
 
-1. Download the latest `modulink.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
+2. Download the latest `modulink.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ModuLink.
+3. Copy the file to the folder you want to use as the _home folder_ for your ModuLink.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/screenshots/Ui2.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * **`create`**`n/John Doe id/A0123456A p/24680135 e/johnd@example.com` : Creates a ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
 
     * **`addFav`**`id/A0222594A` : Adds the profile with student ID A0222594A to your ModuLink favourite contacts.
 
-    * **`list`** : Lists all profiles in your ModuLink favourites list.
+    * **`list`** : Lists all profiles in ModuLink.
 
     * **`find`**`Joseph`: Finds profiles whose names contain the keyword 'Joseph' amongst all profiles in ModuLink.
 
@@ -98,7 +98,7 @@ Here is a reference guide to the features and potential uses of ModuLink.
 
 #### 1.1 Create your own profile : `create`
 
-Creates your user profile. You can also choose to add modules and indicate your group status for each module. Note, in order to start using ModuLink, you area **required** to create a new profile should you not have one.
+Creates your user profile. You can also choose to add modules and indicate your group status for each module. Note, in order to start using ModuLink, you are **required** to create a new profile should you not have one.
 
 Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP_STATUS]]...`
 
