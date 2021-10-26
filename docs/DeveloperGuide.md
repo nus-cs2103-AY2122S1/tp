@@ -338,6 +338,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC01 - Adding an item**
 
+**Actor:** User
+
 **MSS**
 
 1. User adds item into inventory.
@@ -365,6 +367,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC02 - Deleting an item**
 
+**Actor:** User
+
 **MSS**
 
 1. User requests to delete item from inventory.
@@ -391,6 +395,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC03 - Finding items through matching keywords**
 
+**Actor:** User
+
 **MSS**
 
 1. User searches for the details of an item in the inventory by stating id, name or tag.
@@ -410,20 +416,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**UC04 - Recording an Order**
+**UC04 - Placing an Order**
+
+**Actor:** User
 
 **MSS**
 
 1. User requests to start an order.
-2. BogoBogo requests for item names and quantities.
+2. BogoBogo creates an order and requests for item names and quantities.
 3. User adds an item into the order.
 4. BogoBogo saves item into the order.
 
    Step 3-4 is repeated until the user wishes to end the order.
 
-5. User requests to end the order.
-6. BogoBogo shows the summary of the order and prompts the user to confirm the order.
-7. User confirms the order.
+5. User requests to end entering item and place the order.
+6. BogoBogo transacts the order and updates inventory and transaction history.
 
    Use case ends.
 
@@ -440,18 +447,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 * 4a. User incorrectly added an item into the order.
-    * 3a1. User removes specified item from the order.
+    * 3a1. User removes specified item from the order (UC05).
 
       Use case resumes at step 3.
 
-* 7a. The order is empty.
+* 6a. The order is empty.
     * 7a1. BogoBogo notifies user that the order is empty.
 
       Use case ends.
 
-*{More to be added}*
+**UC05 - Remove an item from order**
 
-**UC05 - Sorting **
+**Actor:** User
+
+**MSS**
+
+1. User requests to remove the specified item from the order.
+2. User enters the item to remove.
+3. BogoBogo removes the item from the order.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. There is no order created.
+    * 1a1. BogoBogo notifies user there is no order.
+  
+      Use case ends.
+    
+* 2a. The item is specified in wrong format.
+    * 2a1. BogoBogo notifies user the item specification format is wrong.
+  
+      Use case ends.
+
+* 3a. The specified item is not in the order
+    * 3a1. BogoBogo notifies user the specified item is not in the order.
+  
+      Use case ends.
+
+**UC06 - Sorting**
+
+**Actor:** User
 
 **MSS**
 
@@ -460,14 +496,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
    
- **Extensions**
+**Extensions**
 
 * 1a. User specifies to sort by both name and count.
     * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
 
       Use case ends.
 
-**UC06 - Help **
+**UC06 - Help**
+
+**Actor:** User
 
 **MSS**
 
@@ -482,7 +520,119 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. BogoBogo notifies the user what that exact command does.
 
       Use case ends.
-      
+
+**UC07 - Remove certain amount of item**
+
+**Actor:** User
+
+**MSS**
+
+1. User requests to remove certain amount of an item.
+2. User enters the item name and amount.
+3. BogoBogo removes the specified amount of that item.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The name and amount is specified in wrong format.
+    * 2a1. BogoBogo notifies user the format is wrong.
+    
+        Use case ends.
+
+* 2b. There are multiple matching items in inventory.
+    * 2b1. BogoBogo lists out all the matching items and let user choose one.
+    * 2b2. User chooses the desired item.
+    * BogoBogo removes the specified amount of that item. 
+
+      Use case ends.
+
+* 3a. The item is not in the inventory.
+    * 3a1. BogoBogo notifies user there is on such item.
+
+        Use case ends.
+
+* 3b. The specified amount is greater than what inventory has.
+    * 3b1. BogoBogo notifies user the actual amount of item in the inventory.
+
+      Use case ends.
+
+**UC08 - Edit an item**
+
+**Actor:** User
+
+**MSS**
+
+1. User requests to edit an item.
+2. User enters the item index and fields and new values to change.
+3. BogoBogo updates the new value of the specified fields of the item.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The edited item is a duplicate of another item in the inventory.
+    * 3a1. BogoBogo notifies user the duplication.
+  
+      Use case ends
+
+* 3b. The specified index is invalid.
+    * 3b1. BogoBogo notifies user the index is invalid.
+
+      Use case ends
+
+**UC09 - Listing out inventory**
+
+**Actor:** User
+
+**MSS**
+
+1. User requests to list out all inventory
+2. BogoBogo lists out all items in inventory.
+
+   Use case ends
+
+**UC10 - Listing out order**
+
+**Actor:** User
+
+**MSS**
+
+1. User requests to list out current order.
+2. BogoBogo lists out all items in current order.
+
+   Use case ends
+
+**Extensions**
+
+* 2a. There is currently no order to list.
+  * 2a1. BogoBogo notifies user there is currently no order.
+    
+    Use case ends.
+
+**UC11 - Exit the application**
+
+**Actor:** User
+
+**MSS**
+
+1. User requests to exit the application
+2. BogoBogo acknowledges the request and exits.
+
+    Use case ends.
+
+**UC12 - Clear the inventory**
+
+**Actor:** User
+
+**MSS**
+
+1. User requests to clear the inventory.
+2. BogoBogo acknowledges the request and clears the inventory.
+    
+    Use case ends.
+
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
