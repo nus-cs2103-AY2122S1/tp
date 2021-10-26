@@ -211,6 +211,51 @@ The following activity diagram summarises what happens when a user executes a `c
 
     - Lesser view of information.
 
+### Find people feature
+
+Displays the people associated with the specified search keywords onto the `PersonListPanel` of the GUI.
+
+Given below is the example usage scenario:
+
+Step 1. The user launches the ContactSh application. Data will be loaded from the storage to the application memory. The `PersonListPanel` will be populated with a `PersonCard` for every person from memory.
+
+Step 2. The user executes `find -n Alex` command to find anyone whose name could be abbreviated to be `Alex` on the currently displayed person list.
+
+Step 3. If the parameters entered by the user is valid, the application will retrieve any `Person` that matches the keywords given. The person list reference currently encapsulated by the `FilteredList` will then be filtered based on whether a person has an attribute that matches the keywords. The updated `FilteredList` is then shown to the user with all matching persons via the `PersonListPanel`. Else, ContactSh will display an error message indicating that the user did not type in the parameters correctly.
+
+The following sequence diagram show how the view task list operation works:
+
+![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the parameters provided by the user is of non-integer form, ParseException will be thrown and an error message providing the correct format will be shown. Also, if the provided INDEX does not exists within the indices of the displayed person list, CommandException is thrown and an error message that warns of invalid INDEX will be shown.
+
+The following activity diagram summarises what happens when a user executes a `cat` command:
+
+![ViewTaskListActivityDiagram](images/ViewTaskListActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How to display the task list on the GUI
+
+- **Alternative 1 (current choice):** Have two side-by-side panels, left for person list and right for task list.
+
+    - Pros: User is able to concurrently view more information.
+    - Cons:
+        - More work to create and optimize the split panel.
+        - Content wrapping can was tricky since there is a slider in the middle to resize either panels.
+
+- **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
+
+    - Pros: More convenient to implement.
+
+    - Cons:
+
+        - `list` has to be executed again if user wants to redirect back to the person list (extra overhead
+
+          which reduces efficiency).
+
+        - Lesser view of information.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
