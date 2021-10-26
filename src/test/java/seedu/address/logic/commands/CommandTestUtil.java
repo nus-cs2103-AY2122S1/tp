@@ -17,7 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.module.Module;
-
+import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 
 /**
@@ -55,6 +55,18 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
+    public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
+
+    static {
+        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withStudentId(VALID_STUDENT_ID_AMY).withEmail(VALID_EMAIL_AMY).withTeleHandle(VALID_TELE_HANDLE_AMY)
+                .build();
+        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withStudentId(VALID_STUDENT_ID_AMY).withEmail(VALID_EMAIL_BOB).withTeleHandle(VALID_TELE_HANDLE_BOB)
+                .build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
