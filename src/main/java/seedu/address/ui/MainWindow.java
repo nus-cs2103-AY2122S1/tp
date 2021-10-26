@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -199,6 +201,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handlePersonGridPanel(Person student) {
+        requireNonNull(student);
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
     }
 
