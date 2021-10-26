@@ -55,7 +55,7 @@ We hope you find this User Guide helpful in using ClassMATE!
    * **`deletestu 3`**: Deletes the 3rd student shown in the current list.
    
    * **`clear`** : Deletes all students.
- 
+
    * **`exit`** : Exits the app.
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -129,7 +129,7 @@ Examples:
 
 ### Viewing a student : `viewstu`
 
-<img src="D:\Documents\Programming\2103T\tp\docs\images\viewstu.png" style="zoom:75%;" />
+![view student](images/viewstu.png)
 
 View a student's details in ClassMATE, as shown in the picture above
 
@@ -188,7 +188,7 @@ Examples:
 
 Clears all students from ClassMATE. Below is how it would look like.
 
-<img src="D:\Documents\Programming\2103T\tp\docs\images\clear.png" style="zoom:80%;" />
+![clear](images/clear.png)
 
 Format: `clear`
 
@@ -209,7 +209,7 @@ Examples:
 
 ### Viewing a class
 
-<img src="D:\Documents\Programming\2103T\tp\docs\images\viewc.png" style="zoom:80%;" />
+![viewing a class](images/viewc.png)
 
 Views a class in ClassMATE, as shown above
 
