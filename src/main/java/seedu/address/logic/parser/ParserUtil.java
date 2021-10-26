@@ -398,4 +398,13 @@ public class ParserUtil {
         }
         return dateArray;
     }
+
+    /**
+     * Assumes that the input has two or one dates, and outputs the result in a {@code Period}.
+     */
+    public static Period extractPeriodDates(ArgumentMultimap argMultimap) throws ParseException {
+        LocalDate[] dates = extractTupleDates(argMultimap);
+        return new Period(dates[0], dates[1]);
+    }
+
 }

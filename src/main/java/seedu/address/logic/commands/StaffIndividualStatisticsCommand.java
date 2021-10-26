@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -53,6 +52,7 @@ public class StaffIndividualStatisticsCommand extends Command {
 
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
+    private final Period period;
 
     /**
      * Constructor for the lookup command to display staff statistics.
@@ -61,9 +61,10 @@ public class StaffIndividualStatisticsCommand extends Command {
      * @param predicate The {@code PersonContainsFieldsPredicate} that decides
      *                  which staff to display the statistics of.
      */
-    public StaffIndividualStatisticsCommand(PersonContainsFieldsPredicate predicate) {
+    public StaffIndividualStatisticsCommand(PersonContainsFieldsPredicate predicate, Period period) {
         this.predicate = predicate;
         this.index = -1;
+        this.period = period;
     }
 
     /**
@@ -72,9 +73,10 @@ public class StaffIndividualStatisticsCommand extends Command {
      * @param predicate The predicate to test the staff with.
      * @param index The index of the staff to get.
      */
-    public StaffIndividualStatisticsCommand(PersonContainsFieldsPredicate predicate, Index index) {
+    public StaffIndividualStatisticsCommand(PersonContainsFieldsPredicate predicate, Index index, Period period) {
         this.predicate = predicate;
         this.index = index.getZeroBased();
+        this.period = period;
     }
 
     @Override
@@ -108,10 +110,9 @@ public class StaffIndividualStatisticsCommand extends Command {
     }
 
     private String staffSummary(Person staff) {
-        Period period = Period.getPeriodFromDateOverMonth(LocalDate.now());
         long workHours = staff
                 .getTotalWorkingHour(period);
-        double totalSalary = staff.getSalaryToBePaid(period);
+        double totalSalary = staff.getSalaryToBePaid(this.period);
         return String.format(INDIVIDUAL_STAFF_PRINT, staff.getName(), workHours, totalSalary);
     }
 

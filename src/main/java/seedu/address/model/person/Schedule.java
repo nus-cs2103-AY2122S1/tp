@@ -241,17 +241,17 @@ public class Schedule {
             if (datesNotCounted.contains(date)) {
                 continue;
             }
-            if (shifts[date.getDayOfWeek().getValue() - 1][Slot.MORNING.getOrder()] == null) {
-                continue;
+            if (shifts[date.getDayOfWeek().getValue() - 1][Slot.MORNING.getOrder()] != null) {
+                totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.MORNING.getOrder()]
+                        .getWorkingHour(new Period(date));
             }
 
-            totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.MORNING.getOrder()]
-                    .getWorkingHour(new Period(date));
-            if (shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()] == null) {
-                continue;
+
+            if (shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()] != null) {
+                totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()]
+                        .getWorkingHour(new Period(date));
             }
-            totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()]
-                    .getWorkingHour(new Period(date));
+
         }
         return totalHours;
     }
