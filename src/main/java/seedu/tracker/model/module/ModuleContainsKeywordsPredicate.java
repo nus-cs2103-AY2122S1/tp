@@ -145,7 +145,7 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword)));
                 break;
 
-            case "n/":
+            case "m/":
                 moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword)));
                 break;
