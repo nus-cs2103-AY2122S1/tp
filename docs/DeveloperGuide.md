@@ -318,7 +318,7 @@ Execution of the `AddClassCommand`
     * Pros: Faster in class specific student commands and students are better organised.
     * Complexity of tutorial classes is increased and slower to navigate to view other tutorial classes or perform general commands on the students
 
-### [Proposed] Student Participation Mark Features
+### Student Participation Mark Features
 
 (Contributed by Vishnu Sundaresan)
 
@@ -326,7 +326,7 @@ ClassMATE allows the user to manage information about Class Participation gradin
 
 1. Add a weekly participation mark
 2. Delete a weekly participation mark
-3. Edit a weekly participation mark
+3. Delete all weekly participation marks
 
 #### Proposed Implementation
 
@@ -344,7 +344,6 @@ ClassMATE will then support the following command classes:
 * `AddLastMarkCommand(Index index, StudentMark mark)`
 * `DeleteLastMarkCommand(Index index)`
 * `DeleteAllMarksCommand(Index index)`
-* `EditMarkCommand(Index index, int week)`
 
 These commands inherit from the `Command` class, and are named accordingly.
 
@@ -353,9 +352,9 @@ Given below is an example of how the student marks features can be used:
 Step 1. The user launches the application for the first time. The existing `marks` list would be derived from the
 initial ClassMATE state, and all students stored will be displayed along with their currently stored marks below their name
 
-Step 2. The user executes an `addm 1 m/low` command. The `addm` command calls `Model#setStudent()`, adding the mark provided (`LOW` in this case) to Classmate. This modifies and saves the state of ClassMATE. The updated `UniqueStudentList` will be displayed in the `ClassListPanel` to the user.
+Step 2. The user executes an `addm 1 m/low` command. After the Command has been parsed, the `addm` command calls `AddLastMarkCommand#addStudentMark()`  and subsequently `Model#setStudent()` and `Model#updateFilteredStudentList()`, adding the mark provided (`LOW` in this case) to Classmate. This modifies and saves the state of ClassMATE. The updated `UniqueStudentList` will be displayed in the `ClassListPanel` to the user.
 
-Step 3. The user executes a `deletelm 1` command. The `deletelm` command calls the `Model#setStudent()` and the `Model#updateFilteredStudentList()`, modifying the state of the filtered list of students. The updated filtered list consists the students with the latest mark removed from the 1st student.
+Step 3. The user executes a `deletelm 1` command. The `deletelm` command calls the `DeleteLastMarkCommand#deleteLastStudentMark()` and subsequently the`Model#setStudent()` and the `Model#updateFilteredStudentList()`, modifying the state of the filtered list of students. The updated filtered list consists the students with the latest mark removed from the 1st student.
 
 ​																						**Before `deletelm` command**
 
@@ -365,9 +364,7 @@ Step 3. The user executes a `deletelm 1` command. The `deletelm` command calls t
 
 ![StudentMarkState2](images/StudentMarksState2.png)
 
-Step 4. The user executes a `deleteam 1` command. The `deleteam` command calls `Model#setStudent()`, modifying and saving the state of ClassMATE by deleting all marks for the 1st student at the given index in the `UniqueStudentList`. This updated list will be displayed to the user.
-
-Step 5. The user executes a `editm` command. The `editm` command calls `Model#setStudent()` modifying and saving the state of the `FilteredList` to contain all students in ClassMATE. This updated list will be displayed to the user.
+Step 4. The user executes a `deleteam 1` command. The `deleteam` command calls `DeleteAllMarkCommand#deleteAllStudentMark()`, then subsequently `Model#setStudent()`and `Model#updateFilteredStudentList()`, modifying and saving the state of ClassMATE by deleting all marks for the 1st student at the given index in the `UniqueStudentList`. This updated list will be displayed to the user.
 
 Using the example of the `AddMarkCommand`,
 when the user enters the `addm` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
@@ -389,6 +386,15 @@ Execution of the `AddMarkCommand`
 * Alternative 2: Keep a fixed-size list of 26
   * Pros: Since there are 13 weeks and two tutorials a week, there will be a projected 26 tutorials held. Thus, a fixed size of 26 elements will allow the list to reflect this requirement.
   * Cons: Instructors are limited to this 26-class limit, and cannot store marks for extra tutorials/make-up sessions.
+
+#### Aspect: Display of Marks
+
+* Alternative 1: Display as a list under student credentials in each student card
+  * Pros: Simple to implement, easily viewed
+  * Cons: Unable to fit all marks, lack of earlier mark visibility
+* Alternative 2 (current choice): Display in 'viewstu' command as separate feature
+  * Pros: Can view all marks at once, clear to understand
+  * Cons: Marks can only be viewed for one student at a time
 
 ### ClassCode Implementation Feature
 (Contributed by Zhou Yirui)
