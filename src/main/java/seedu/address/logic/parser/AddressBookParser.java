@@ -194,17 +194,17 @@ public class AddressBookParser {
      */
     public void removeAlias(Alias alias) {
         requireNonNull(alias);
-        Optional<Alias> existing = aliases.stream()
-                .filter(a -> a.getAliasWord().equals(alias.getAliasWord()))
-                .findFirst();
+        Optional<Alias> existing = getAlias(alias.getAliasWord());
         existing.ifPresent(aliases::remove);
     }
 
     /**
-     * Returns true if there exists an alias with the same aliasWord as the one provided.
+     * Returns an optional containing the alias with that alias word, or an empty optional if no alias matches.
      */
-    public boolean containsAlias(String aliasWord) {
-        return aliases.stream().anyMatch(a -> a.getAliasWord().equals(aliasWord));
+    public Optional<Alias> getAlias(String aliasWord) {
+        return aliases.stream()
+                .filter(a -> a.getAliasWord().equals(aliasWord))
+                .findFirst();
     }
 
     /**

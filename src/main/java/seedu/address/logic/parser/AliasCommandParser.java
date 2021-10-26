@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -27,16 +29,22 @@ public class AliasCommandParser implements Parser<AliasCommand> {
         String aliasWord = argMultimap.getPreamble().strip();
         String commandWord = argMultimap.getValue(PREFIX_ALIAS).get().strip();
 
-        if (!isValidCommandWord(commandWord)) {
-            throw new ParseException(AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
-        }
+        Optional<Alias> existingAlias = parser.getAlias(commandWord);
+        // prevents chaining of aliases
+        // e.g. if there exists an existing alias "bye" for "exit", and "bye" is specified as the commandWord
+        commandWord = existingAlias.map(Alias::getCommandWord).orElse(commandWord);
 
         if (!Alias.isValidAlias(aliasWord)) {
             throw new ParseException(Alias.MESSAGE_CONSTRAINTS);
         }
 
-        if (isValidCommandWord(aliasWord) && !parser.containsAlias(aliasWord)) {
+        // prevents trying to alias a default command
+        if (isValidCommandWord(aliasWord) && parser.getAlias(aliasWord).isEmpty()) {
             throw new ParseException(AliasCommand.MESSAGE_OVERWRITE_DEFAULT);
+        }
+
+        if (!isValidCommandWord(commandWord)) {
+            throw new ParseException(AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
         }
 
         Alias newAlias = new Alias(aliasWord, commandWord);
