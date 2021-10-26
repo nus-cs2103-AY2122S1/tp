@@ -19,7 +19,7 @@ public class AliasCommand extends Command {
             + "Parameters: "
             + "<existing_command> " + PREFIX_ALIAS + "<alias>\n"
             + "Example: " + COMMAND_WORD + " "
-            + AddCommand.COMMAND_WORD + " " + PREFIX_ALIAS + "as";
+            + "as " + PREFIX_ALIAS + AddCommand.COMMAND_WORD;
 
     public static final String MESSAGE_ADD_SUCCESS = "New alias added: %1$s";
     public static final String MESSAGE_REMOVE_SUCCESS = "Alias removed: %1$s";
