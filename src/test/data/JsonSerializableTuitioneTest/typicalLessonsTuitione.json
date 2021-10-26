@@ -19,5 +19,17 @@
     "startTime" : "0930",
     "day" : "Tue",
     "price" : 15.3
+  }, {
+    "subject" : "English",
+    "grade" : "S1",
+    "startTime" : "1300",
+    "day" : "Thu",
+    "price" : 17.0
+  }, {
+    "subject" : "Mathematics",
+    "grade" : "S1",
+    "startTime" : "1030",
+    "day" : "Fri",
+    "price" : 19.2
   } ]
 }
