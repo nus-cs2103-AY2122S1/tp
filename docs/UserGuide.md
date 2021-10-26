@@ -93,7 +93,7 @@ all the details!<br>
 
    * **`delete`**`3` : Deletes the 3rd patient as shown in the current list.
 
-   * **`clear`** : Deletes all patients.
+   * **`clear`** : Deletes all patients, doctors and appointments.
    
    * **`toggle`** : Toggles between the patients and doctors tabs.
 
@@ -152,12 +152,12 @@ Format: `toggle`
 
 ### Clearing all entries : `clear` <a name="clear"/>
 
-Clears all patient/doctor entries.
+Clears all patient, doctor and appointment entries.
 
 Format: `clear`
 
 Examples:
-Typing `clear` in the patients tab removes all patient entries.
+Typing `clear` in the removes all patient, doctor and appointment entries.
 
 ### Exiting the program : `exit` <a name="exit"/>
 
