@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -41,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private CommandBox commandBox;
     private AddressBookListMenu addressBookListMenu;
+    private ThemeListMenu themeListMenu;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,6 +68,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private ImageView displayLogo;
+
+    @FXML
+    private Scene scene;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -143,9 +149,13 @@ public class MainWindow extends UiPart<Stage> {
         sideBar = new SideBar(logic.getClientToView(), logic.getSortedNextMeetingList());
         sideBarPlaceHolder.getChildren().add(sideBar.getRoot());
 
-        addressBookListMenu = new AddressBookListMenu(logic.getAddressBookList(),
-                logic.getAddressBookFilePathObject(), logic);
+        addressBookListMenu = new AddressBookListMenu(logic, logic.getAddressBookFilePathObject());
         menuBar.getMenus().add(addressBookListMenu.getRoot());
+
+        ObservableList<String> styleSheets = this.scene.getStylesheets();
+        styleSheets.add(this.logic.getTheme().getFilePathName());
+        themeListMenu = new ThemeListMenu(this.logic, this.scene.getStylesheets());
+        menuBar.getMenus().add(themeListMenu.getRoot());
     }
 
     /**
