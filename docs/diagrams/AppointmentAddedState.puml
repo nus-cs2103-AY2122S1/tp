@@ -1,0 +1,18 @@
+@startuml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T1
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+show fields
+
+title Adding new Appointment
+
+Package Appointment <<Rectangle>> {
+    object "__:Appointment__" as completeAppointment {
+        - date = "15 May 2023"
+        - time = "0715"
+        - venue = "Simei Avenue 6"
+    }
+}
+
+@enduml
