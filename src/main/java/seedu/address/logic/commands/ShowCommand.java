@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +20,7 @@ import seedu.address.model.student.AssessmentStatistics;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.IdContainsKeywordsPredicate;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.NameEqualsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentStatistics;
 
@@ -44,7 +43,7 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
-            "This student needs to be specified using ID due to duplicate naming.";
+            "This student needs to be specified using INDEX or ID due to duplicate naming.";
 
     private Index index;
     private Name name;
@@ -150,9 +149,9 @@ public class ShowCommand extends Command {
      */
     private Predicate<Student> createStudentPredicate() {
         return getName().isPresent()
-                ? new NameContainsKeywordsPredicate(Arrays.asList(name.toString().split("\\s+")))
+                ? new NameEqualsPredicate(name.fullName)
                 : getId().isPresent()
-                ? new IdContainsKeywordsPredicate(Collections.singletonList(id.toString()))
+                ? new IdContainsKeywordsPredicate(Collections.singletonList(id.getValue()))
                 : null;
     }
 
