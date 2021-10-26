@@ -455,8 +455,7 @@ import the _.csv_ file into the new list of contacts.
 
 <strong>Option 2 (with encryption):</strong>
 Move the encrypted file from the application's data folder in your current device to the application's data folder in 
-your new device. After starting the application, enter the password that was used to encrypt the data file when 
-prompted. 
+your new device. Start the application and then enter the same password when prompted. 
 </div>
 </div>
 
