@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 
 import java.util.Comparator;
 
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
 
@@ -16,12 +17,12 @@ public class SortSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "sorts";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
             + ": Sorts the supplier list by a sorting type and sorting order. "
             + "Parameters: "
             + PREFIX_SORT_BY + "name, address, email, phone, supply type or delivery details "
             + PREFIX_SORT_ORDER + "ascending or descending...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "
             + PREFIX_SORT_BY + "dd "
             + PREFIX_SORT_ORDER + "a ";
 

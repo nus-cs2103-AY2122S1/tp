@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 
 /**
@@ -11,9 +12,9 @@ public class ResetSupplierSortCommand extends Command {
 
     public static final String COMMAND_WORD = "resets";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
             + ": Resets the supplier list to the default sorting type.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD);
 
     public static final String SHOWING_RESET_MESSAGE = "Supplier list sorting has been reset to default (name).";
 

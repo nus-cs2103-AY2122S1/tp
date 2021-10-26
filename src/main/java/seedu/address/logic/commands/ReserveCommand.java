@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.Reservation;
@@ -24,7 +25,7 @@ public class ReserveCommand extends Command {
             "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
             + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME\n"
             + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1930.",
-            COMMAND_WORD,
+            CommandUtil.formatCommandWord(COMMAND_WORD),
             PREFIX_PHONE, PREFIX_TIME
     );
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
