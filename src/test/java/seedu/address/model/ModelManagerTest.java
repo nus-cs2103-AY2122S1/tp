@@ -141,6 +141,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteShift_success() {
+        LocalDate testDate = END_DATE.plusDays(7);
+        Person alice = new PersonBuilder().withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withTags("friends").build();
+        modelManager.addPerson(alice);
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
+        modelManager.deleteShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
+        assertFalse(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON, new Period(START_DATE, END_DATE)));
+
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, testDate);
+        modelManager.deleteShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
+        assertFalse(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON, new Period(START_DATE, END_DATE)));
+        assertTrue(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON, new Period(END_DATE.plusDays(1),
+                testDate)));
+        assertTrue(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON, new Period(END_DATE,
+                testDate)));
+
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

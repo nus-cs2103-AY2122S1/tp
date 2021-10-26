@@ -101,7 +101,7 @@ public class RecurrencePeriod extends Period {
     public Collection<RecurrencePeriod> complementWithInformation(Period period) {
         Collection<Period> periods = super.complement(period);
         return periods.stream()
-                .map(p -> new RecurrencePeriod(period, startTime, endTime))
+                .map(p -> new RecurrencePeriod(p, startTime, endTime))
                 .collect(Collectors.toList());
 
     }

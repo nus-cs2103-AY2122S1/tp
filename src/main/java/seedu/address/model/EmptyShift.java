@@ -22,6 +22,10 @@ public class EmptyShift extends Shift {
         super(dayOfWeek, slot);
     }
 
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
 
 
     @Override
