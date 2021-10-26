@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -25,6 +26,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.done.Done;
 import seedu.address.model.done.DoneContainsKeywordsPredicate;
 import seedu.address.model.interview.InterviewContainsKeywordsPredicate;
+import seedu.address.model.notes.NotesContainsKeywordsPredicate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentType;
@@ -63,8 +65,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                        PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
-                        PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW, PREFIX_DONE);
+                        PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE,
+                        PREFIX_TAG, PREFIX_INTERVIEW, PREFIX_NOTES, PREFIX_DONE);
 
         // If find command has no prefix, it is invalid
         if (argMultimap.isEmpty()) {
@@ -128,10 +130,13 @@ public class FindCommandParser implements Parser<FindCommand> {
                 addToPredicateList(extractInterviewPrefixInput(argMultimap));
             }
 
+            if (argMultimap.getValue(PREFIX_NOTES).isPresent()) {
+                addToPredicateList(extractNotesPrefixInput(argMultimap));
+            }
+
             if (argMultimap.getValue(PREFIX_DONE).isPresent()) {
                 addToPredicateList(extractDonePrefixInput(argMultimap));
             }
-
         }
 
         private void addToPredicateList(Predicate<Person> predicate) {
@@ -351,6 +356,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             return null;
         }
 
+        private NotesContainsKeywordsPredicate extractNotesPrefixInput(ArgumentMultimap argMultimap) {
+            assert argMultimap.getValue(PREFIX_NOTES).isPresent()
+                    : "No inputs for Prefix Notes exists.";
+            String arg = argMultimap.getValue(PREFIX_NOTES).get();
+            if (!arg.isEmpty()) {
+                return new NotesContainsKeywordsPredicate(arg);
+            }
+            return null;
+        }
+
         private DoneContainsKeywordsPredicate extractDonePrefixInput(ArgumentMultimap argMultimap)
                 throws ParseException {
             assert argMultimap.getValue(PREFIX_DONE).isPresent() : "No inputs for Prefix Role exist.";
@@ -369,6 +384,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             return null;
         }
+
+
 
         public ArrayList<Predicate<Person>> getPredicates() {
             return predicateList;
