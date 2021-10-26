@@ -46,7 +46,6 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
@@ -228,7 +227,7 @@ public class AddressBookParserTest {
 
         // null
         assertNotEquals(parser1, null);
-        
+
         // different types
         assertNotEquals(parser1, 5);
     }
