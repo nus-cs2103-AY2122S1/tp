@@ -15,9 +15,32 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private boolean isShowHelp = false;
+
+    private String commandSpecified = null;
+
+    /**
+     * Constructor for a HelpCommand to show help window.
+     */
+    public HelpCommand() {
+        isShowHelp = true;
+    }
+
+    /**
+     * Constructor for a HelpCommand to show help for a specified command.
+     * @param commandSpecified The command specified to show help for.
+     */
+    public HelpCommand(String commandSpecified) {
+        this.commandSpecified = commandSpecified;
+    }
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        if (isShowHelp) {
+            return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        } else {
+            
+        }
     }
 
     public String getCommand() {
