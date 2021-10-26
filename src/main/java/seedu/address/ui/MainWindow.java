@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Initialize Help window
         helpWindow = new HelpWindow();
-        
+
         userProfileWindow = new UserProfileWindow(logic);
 
         // Configure Events Icon
@@ -232,6 +232,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Opens the user profile window or focuses on it if it's already opened.
      */
+    @FXML
     public void handleUserProfileWindow() {
         if (!userProfileWindow.isShowing()) {
             userProfileWindow.show();
