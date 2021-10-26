@@ -423,22 +423,75 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Viewing the Schedule
+### Viewing your Calendar
 
-This section guides you on how to use TAB's scheduling feature.
+This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
+
+[New GUI screenshots coming soon...]
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing schedule: `schedule`
+#### Switching to the calendar interface: `calendar`
 
-Displays a read-only schedule of your upcoming week.
+Brings you to TAB's calendar interface for you to see all your scheduled lessons.
 
-Format: `schedule`
+Format: `calendar`
 
-![view schedule](images/ViewSchedule.png)
-<div class="caption">Schedule displaying lessons for the upcoming week.</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You don't always have to type `calendar` to switch to the calendar interface. All the other calendar commands in this section act as a shortcut that opens the calendar as well! 
+</div>
 
-* Typing `list` or any other valid command in the command box will bring you back out of schedule view.
+[New GUI screenshots coming soon...]
+
+#### Viewing your daily calendar: `day`
+
+Displays the daily calendar, which shows your scheduled lessons for the day.
+
+Format: `day`
+
+[New GUI screenshots coming soon...]
+
+#### Viewing your weekly calendar: `week`
+
+Shows the weekly calendar for you to see all the lessons you have for the week
+
+Format: `week`
+
+[New GUI screenshots coming soon...]
+
+#### Viewing your monthly calendar: `month`
+
+Displays the monthly calendar, allowing you to visualise your lessons for the month.
+
+Format: `month`
+
+[New GUI screenshots coming soon...]
+
+#### Viewing your weekly calendar: `year`
+
+Shows the yearly calendar. You can see which days of the year you have lessons in this view.
+
+Format: `year`
+
+[New GUI screenshots coming soon...]
+
+#### Navigating forward in the calendar: `next`
+
+Goes to the next day/week/month/year in the calendar interface.
+
+Format: `next`
+
+#### Navigating backwards in the calendar: `back`
+
+Goes to the previous day/week/month/year in the calendar.
+
+Format: `back`
+
+#### Navigate to today in the calendar: `today`
+
+Jumps to the current day in the calendar.
+
+Format: `today`
 
 <div style="page-break-after: always;"></div>
 

@@ -21,7 +21,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.WeekCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -38,7 +38,7 @@ public class MainWindow extends UiPart<Stage> {
             + AddCommand.USER_TIP + "\n\n"
             + DeleteCommand.USER_TIP + "\n\n"
             + LessonAddCommand.USER_TIP + "\n\n"
-            + ScheduleCommand.USER_TIP + "\n\n"
+            + WeekCommand.USER_TIP + "\n\n"
             + ClearCommand.USER_TIP + "\n\n"
             + HelpCommand.USER_TIP + "\n\n"
             + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
@@ -60,6 +60,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem studentsMenuItem;
+
+    @FXML
+    private MenuItem calendarMenuItem;
+
+    @FXML
+    private MenuItem tagsMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -96,7 +105,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F3"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F4"));
     }
 
     /**
@@ -127,6 +139,10 @@ public class MainWindow extends UiPart<Stage> {
                 event.consume();
             }
         });
+    }
+
+    void show() {
+        primaryStage.show();
     }
 
     /**
@@ -176,10 +192,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
-        primaryStage.show();
-    }
-
     /**
      * Closes the application.
      */
@@ -192,10 +204,40 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleSchedule() {
+    @FXML
+    private void handleCalendar() {
         centerPanel.displaySchedulePanel();
     }
 
+    private void handleDay() {
+        centerPanel.showDay();
+    }
+
+    private void handleWeek() {
+        centerPanel.showWeek();
+    }
+
+    private void handleMonth() {
+        centerPanel.showMonth();
+    }
+
+    private void handleYear() {
+        centerPanel.showYear();
+    }
+
+    private void handleNext() {
+        centerPanel.goNext();
+    }
+
+    private void handleToday() {
+        centerPanel.goToday();
+    }
+
+    private void handleBack() {
+        centerPanel.goBack();
+    }
+
+    @FXML
     private void handlePersonGridPanel() {
         centerPanel.displayPersonGridPanel(logic.getEmptyLessonList());
     }
@@ -208,7 +250,8 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Displays tag list instead of the default person list.
      */
-    public void handleShowTagList() {
+    @FXML
+    private void handleShowTagList() {
         centerPanel.displayTagListPanel();
     }
 
@@ -223,23 +266,63 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getDisplayType()) {
+
+            case HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.getStudent().isPresent()) {
-                Person student = commandResult.getStudent().get();
-                handlePersonGridPanel(student);
-            } else if (commandResult.isShowSchedule()) {
-                handleSchedule();
-            } else if (commandResult.isShowTagList()) {
-                handleShowTagList();
-            } else {
-                handlePersonGridPanel();
-            }
-
-            if (commandResult.isExit()) {
+            case EXIT:
                 handleExit();
+                break;
+
+            case STUDENTS:
+                if (commandResult.getStudent().isPresent()) {
+                    Person student = commandResult.getStudent().get();
+                    handlePersonGridPanel(student);
+                } else {
+                    handlePersonGridPanel();
+                }
+                break;
+
+            case TAGS:
+                handleShowTagList();
+                break;
+
+            case CALENDAR:
+                handleCalendar();
+                break;
+
+            case DAY:
+                handleDay();
+                break;
+
+            case WEEK:
+                handleWeek();
+                break;
+
+            case MONTH:
+                handleMonth();
+                break;
+
+            case YEAR:
+                handleYear();
+                break;
+
+            case NEXT:
+                handleNext();
+                break;
+
+            case TODAY:
+                handleToday();
+                break;
+
+            case BACK:
+                handleBack();
+                break;
+
+            default:
+                throw new AssertionError("Should not reach here.");
             }
 
             return commandResult;

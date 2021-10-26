@@ -34,7 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-    private static final double ACTION_WIDTH = 0.22;
+    private static final double ACTION_WIDTH = 0.23;
     private static final double FORMAT_WIDTH = 0.4;
     private static final double EXAMPLE_WIDTH = 0.38;
 

@@ -49,8 +49,60 @@ public class CenterPanel extends UiPart<Region> {
         displayPersonGridPanel(lessonList);
     }
 
-    public SchedulePanel getSchedulePanel() {
-        return schedulePanel;
+    /**
+     * Display the day page of the calendar interface
+     */
+    public void showDay() {
+        displaySchedulePanel();
+        schedulePanel.showDay();
+    }
+
+    /**
+     * Display the week page of the calendar interface
+     */
+    public void showWeek() {
+        displaySchedulePanel();
+        schedulePanel.showWeek();
+    }
+
+    /**
+     * Display the month page of the calendar interface
+     */
+    public void showMonth() {
+        displaySchedulePanel();
+        schedulePanel.showMonth();
+    }
+
+    /**
+     * Display the year page of the calendar interface
+     */
+    public void showYear() {
+        displaySchedulePanel();
+        schedulePanel.showYear();
+    }
+
+    /**
+     * Shows the next week of the calendar.
+     */
+    public void goNext() {
+        displaySchedulePanel();
+        schedulePanel.goNext();
+    }
+
+    /**
+     * Shows the current week of the calendar.
+     */
+    public void goToday() {
+        displaySchedulePanel();
+        schedulePanel.goToday();
+    }
+
+    /**
+     * Shows the previous week of the calendar.
+     */
+    public void goBack() {
+        displaySchedulePanel();
+        schedulePanel.goBack();
     }
 
     public ListView<Person> getPersonListView() {
