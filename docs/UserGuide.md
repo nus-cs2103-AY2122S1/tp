@@ -344,6 +344,30 @@ Format: `task -ag GROUPINDEX TASKINDEX`
 Examples:
 * `task -ag 2 4` adds the task at the index 4 to the group at the index 2
 
+### Unassigning tasks to students
+
+Unassigns a specific task from students’ task list.
+
+Format: `task -unas STUDENTINDEX TASKINDEX`
+
+* Unassigns the task specified at index `TASKINDEX` from the “Student” object specified at index `STUDENTINDEX`.
+* `-unas` refers to the "unassign from student" command.
+
+Examples:
+* `task -unas 2 4` removes the task at the index 4 from the student at the index 2
+
+### Unassigning tasks to groups
+
+Unassigns a specific task from groups’ task list.
+
+Format: `task -unag GROUPINDEX TASKINDEX`
+
+* Unassigns the task specified at index `TASKINDEX` from the “Group” object specified at index `GROUPINDEX`.
+* `-unag` refers to the "unassign from group" command.
+
+Examples:
+* `task -unag 2 4` removes the task at the index 4 from the group at the index 2
+
 ### Clearing all entries : `clear`
 
 Clears all entries in Tutor Master.
@@ -404,5 +428,7 @@ Action | Format, Examples
 **Delete a task** | `task -d INDEX​` <br> e.g., `task -d 1`
 **Assign a task to a student** | `task -as STUDENTINDEX TASKINDEX​` <br> e.g., `task -as 2 4`
 **Assign a task to a group** | `task -ag GROUPINDEX TASKINDEX​` <br> e.g., `task -ag 2 4`
+**Unassign a task from a student** | `task -unas STUDENTINDEX TASKINDEX​` <br> e.g., `task -unas 2 4`
+**Unassign a task from a group** | `task -unag GROUPINDEX TASKINDEX​` <br> e.g., `task -unag 2 4`
 **Clear all entries** | `clear`
 **Exit** | `exit`
