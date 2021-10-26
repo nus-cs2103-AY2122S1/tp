@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -10,6 +11,7 @@ import java.util.TreeSet;
 
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Represents a Person in the address book.
@@ -45,6 +47,7 @@ public class Person {
      * @param address The address of this person.
      * @param school The school of this person.
      * @param acadStream The academic stream of this person.
+     * @param acadLevel The academic level of this person.
      * @param outstandingFee The outstanding fees of this person.
      * @param remark Any remarks on this person.
      * @param tags Tags that categorise this person.
@@ -119,6 +122,26 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Adds this person's tags to the UniqueTagList.
+     *
+     * @param tagList UniqueTagList to add tags to.
+     */
+    public void addTagsToTagList(UniqueTagList tagList) {
+        requireNonNull(tagList);
+        tags.forEach(tagList::addTag);
+    }
+
+    /**
+     * Removes this person's tags to the UniqueTagList.
+     *
+     * @param tagList UniqueTagList to remove tags from.
+     */
+    public void removeTagsFromTagList(UniqueTagList tagList) {
+        requireNonNull(tagList);
+        tags.forEach(tagList::removeTag);
     }
 
     /**

@@ -47,6 +47,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -129,8 +131,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        centerPanel = new CenterPanel(logic.getCalendar(),
-                logic.getFilteredPersonList(), logic.getEmptyLessonList());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList(), logic.getEmptyLessonList(),
+                logic.getObservableTagList(), logic.getTagCounter());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -142,6 +144,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        // Add listeners
+        centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldVal, newVal) -> handlePersonGridPanel(newVal));
     }
 
     /**
@@ -189,11 +195,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handlePersonGridPanel() {
-        centerPanel.displayPersonGridPanel(logic.getFilteredPersonList(), logic.getEmptyLessonList());
+        centerPanel.displayPersonGridPanel(logic.getEmptyLessonList());
     }
 
     private void handlePersonGridPanel(Person student) {
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
+    }
+
+    /**
+     * Displays tag list instead of the default person list.
+     */
+    public void handleShowTagList() {
+        centerPanel.displayTagListPanel();
     }
 
     /**
@@ -216,6 +229,8 @@ public class MainWindow extends UiPart<Stage> {
                 handlePersonGridPanel(student);
             } else if (commandResult.isShowSchedule()) {
                 handleSchedule();
+            } else if (commandResult.isShowTagList()) {
+                handleShowTagList();
             } else {
                 handlePersonGridPanel();
             }
