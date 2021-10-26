@@ -21,6 +21,7 @@ import seedu.address.model.module.student.Student;
 class JsonSerializableAssistantBuddy {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Student list contains duplicate student(s).";
+    private static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s)";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
@@ -58,7 +59,7 @@ class JsonSerializableAssistantBuddy {
         for (JsonAdaptedModule jsonAdaptedModule : modules) {
             Module module = jsonAdaptedModule.toModelType();
             if (teachingAssistantBuddy.hasModule(module)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE);
             }
             teachingAssistantBuddy.addModule(module);
         }

@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,7 +20,7 @@ public class JsonAdaptedModule {
     public static final String MODULE_MISSING_FIELD_MESSAGE_FORMAT = "Module's %s field is missing!";
 
     private final String moduleName;
-    private final List<Student> studentList;
+    private final List<JsonAdaptedStudent> studentList = new ArrayList<>();
     private final List<Task> taskList;
 
     /**
@@ -27,10 +28,10 @@ public class JsonAdaptedModule {
      */
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("moduleName") String moduleName,
-                             @JsonProperty("uniqueStudentList") List<Student> studentList,
+                             @JsonProperty("uniqueStudentList") List<JsonAdaptedStudent> studentList,
                              @JsonProperty("uniqueTaskList") List<Task> taskList) {
         this.moduleName = moduleName;
-        this.studentList = studentList;
+        this.studentList.addAll(studentList);
         this.taskList = taskList;
     }
 
@@ -39,8 +40,12 @@ public class JsonAdaptedModule {
      */
     public JsonAdaptedModule(Module source) {
         moduleName = source.getName().getModuleName();
-        studentList = source.getStudentList();
-        taskList = source.getTaskList().asModifiableObservableList();
+        List<Student> tempStudentList = source.getStudentList();
+        for (Student student : tempStudentList) {
+            JsonAdaptedStudent studentToAdd = new JsonAdaptedStudent(student);
+            studentList.add(studentToAdd);
+        }
+        this.taskList = source.getTaskList().asModifiableObservableList();
     }
 
     /**
