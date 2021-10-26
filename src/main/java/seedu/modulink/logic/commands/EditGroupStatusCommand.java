@@ -33,7 +33,8 @@ public class EditGroupStatusCommand extends Command {
     public static final String MESSAGE_EDIT_GROUP_STATUS_SUCCESS = "Group status changed to: %1$s";
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "The specified module does not exist on your profile. "
             + "To add the module to your profile, use the addMod command.";
-    public static final String MESSAGE_NO_MODULE_SPECIFIED = "At least one module must be provided.";
+    public static final String MESSAGE_NO_MODULE_SPECIFIED = "One module must be provided.";
+    public static final String MESSAGE_MULTIPLE_MODULES_SPECIFIED = "Only one module must be provided.";
     public static final String MESSAGE_NO_STATUS_CHANGED = "The status specified is the same "
             + "as what exists for the specified module.";
 

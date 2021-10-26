@@ -1,9 +1,15 @@
 package seedu.modulink.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.modulink.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.modulink.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.modulink.testutil.TypicalPersons.ALICE;
 import static seedu.modulink.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -22,9 +28,9 @@ public class FilterCommandTest {
     @Test
     public void equals() {
         ModuleContainsKeywordsPredicate firstPredicate =
-                new ModuleContainsKeywordsPredicate(Set.of(new Mod("CS2100")), Status.NEED_GROUP);
+                new ModuleContainsKeywordsPredicate(Set.of(new Mod("CS2100")));
         ModuleContainsKeywordsPredicate secondPredicate =
-                new ModuleContainsKeywordsPredicate(Set.of(new Mod("CS2103T")), Status.NEED_MEMBER);
+                new ModuleContainsKeywordsPredicate(Set.of(new Mod("CS2103T need member")));
 
         FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
         FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
@@ -43,10 +49,8 @@ public class FilterCommandTest {
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
-    // Don't know how to fix these test cases rn - will fix in later iteration
-    /*
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noModuleFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ModuleContainsKeywordsPredicate predicate = preparePredicate(" ");
         FilterCommand command = new FilterCommand(predicate);
@@ -67,11 +71,13 @@ public class FilterCommandTest {
 
     /**
      * Parses {@code userInput} into a {@code ModuleContainsKeywordsPredicate}.
-
+     *
+     * @param userInput
+     * @return
+     */
     private ModuleContainsKeywordsPredicate preparePredicate(String userInput) {
         Set<Mod> modList = Set.of(new Mod(userInput.split("\\s+")[0]));
-        Status status = Status.NEED_MEMBER;
-        return new ModuleContainsKeywordsPredicate(modList, status);
+        return new ModuleContainsKeywordsPredicate(modList);
     }
-    */
+
 }

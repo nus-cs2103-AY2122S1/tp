@@ -167,15 +167,15 @@ Examples:
 
 Edits the group status of user-specified module(s).
 
-Format: `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION] [mod/MODULE [NEW_STATUS_DESCRIPTION]]...`
+Format: `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION]`
 
 **:information_source: Notes:**
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
 
-Examples:
+Examples (Will update screenshot after javafx stuff done):
 * `editGroupStatus mod/CS2103T`
-* `editGroupStatus mod/CS2103T mod/CS2101 need member mod/CS1101S`
-* `editGroupStatus mod/CS2100 need member mod/CS2101T need group`
+* `editGroupStatus mod/CS2103T need group`
+* `editGroupStatus mod/CS2100 need member`
   <br>
   <br>
   Original profile:
@@ -293,15 +293,15 @@ Examples:
 
 Show profiles filtered by module code and _optionally_ by group status.
 
-Format: `filter mod/MODULE_CODE [group/GROUP_STATUS]`
+Format: `filter mod/MODULE_CODE [GROUP_STATUS]`
 
-* `OPTIONAL_GROUP_STATUS` enumerates the following: { `SG`: seeking group, `SM`: seeking member, `G`: in a group, `NG`: no group }
+* You can filter by profiles who need to join or form a group ('need group') or profiles who need members for their group ('need member').
 * `MODULE_CODE` is required for filtering by group status. The filter will return the profiles with the specified group status of the specified module.
 
-Examples:
+Examples (will change screenshot after javafx stuff done):
 * `filter mod/CS2030`
-* `filter mod/CS2030 group/SM`
-* `filter mod/CS2030 group/SG`
+* `filter mod/CS2030 need member`
+* `filter mod/CS2030 need group`
   <br>
   <br>
   ![result for 'filter mod/CS2103T'](images/screenshots/filtermod.png)
