@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.position.exceptions.DuplicatePositionException;
 import seedu.address.model.position.exceptions.PositionNotFoundException;
 

@@ -272,6 +272,27 @@ public class AddCommandTest {
         public void setApplicantBook(ReadOnlyApplicantBook applicantBook) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Model getCopiedModel() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addHistory(Command command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public boolean hasHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String recoverHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.memento;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.model.Model;
-
 import java.util.Stack;
+
+import seedu.address.logic.commands.Command;
+
 
 /**
  * Records the command history.
@@ -21,8 +21,12 @@ public class History {
         return commandStack.size() > 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public Memento recoverHistory() {
-        assert hasHistory() : "There is no history to recover." ;
+        assert hasHistory() : "There is no history to recover.";
         Command previousCommand = commandStack.pop();
         return previousCommand.getMemento();
     }

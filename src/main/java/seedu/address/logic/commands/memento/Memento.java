@@ -1,9 +1,6 @@
 package seedu.address.logic.commands.memento;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.Model;
-import seedu.address.model.applicant.Applicant;
-import seedu.address.model.position.Position;
 
 /**
  * Keeps a {@code model} when a modification command executes.
@@ -11,8 +8,8 @@ import seedu.address.model.position.Position;
  * https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java.
  */
 public class Memento {
-    Model model;
-    String message;
+    private Model model;
+    private String message;
 
     public Memento() {}
 
