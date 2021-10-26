@@ -17,6 +17,7 @@ public class RoomValidCheckPredicateTest {
     private static final String VALID_ROOM_FOR_FIND1 = "A";
     private static final String VALID_ROOM_FOR_FIND2 = "A1";
     private static final String VALID_ROOM_FOR_FIND3 = "E200";
+    private static final String VALID_ROOM_FOR_FIND4 = "2";
 
     @Test
     public void equals() {
@@ -52,6 +53,9 @@ public class RoomValidCheckPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withRoom("A100").build()));
 
         predicate = new RoomValidCheckPredicate(VALID_ROOM_FOR_FIND3);
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").withRoom("e200").build()));
+
+        predicate = new RoomValidCheckPredicate(VALID_ROOM_FOR_FIND4);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").withRoom("e200").build()));
     }
 

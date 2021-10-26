@@ -22,7 +22,6 @@ import safeforhall.model.Model;
 import safeforhall.model.ReadOnlyAddressBook;
 import safeforhall.model.ReadOnlyUserPrefs;
 import safeforhall.model.event.Event;
-import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Person;
 import safeforhall.testutil.PersonBuilder;

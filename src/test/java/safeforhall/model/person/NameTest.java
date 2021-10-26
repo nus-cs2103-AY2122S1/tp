@@ -2,6 +2,7 @@ package safeforhall.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static safeforhall.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -36,5 +37,14 @@ public class NameTest {
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+    }
+
+    @Test
+    public void checkHashCode() {
+        try {
+            new Name("Ellie").hashCode();
+        } catch (NoSuchMethodError e) {
+            fail();
+        }
     }
 }

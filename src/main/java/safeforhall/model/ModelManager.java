@@ -15,7 +15,6 @@ import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
-import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Person;
 
