@@ -119,7 +119,7 @@ public class Student {
      * Updates a lab result for a student
      * */
     public void editLabResult(Lab lab , Double score) throws CommandException {
-        if (score < 0.0) {
+        if (score < 0.0 || score > lab.getTotalScore()) {
             throw new CommandException(REQUIRE_POSITIVE_SCORE);
         }
         int index = this.labResultList.indexOf(lab);
