@@ -32,6 +32,8 @@ public class EditLabCommand extends Command {
 
     public static final String MESSAGE_EDIT_LAB_SUCCESS = "Updated %1$s!";
 
+    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
+
     private final int newLabNum;
     private final Double total;
     private final Lab original;
@@ -70,6 +72,9 @@ public class EditLabCommand extends Command {
         boolean labExists = false;
         for (Student std : lastShownList) {
             Student editedStd = std;
+            if (total < 0.0) {
+                throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+            }
             if (!std.getLabResultList().contains(original)) {
                 continue;
             }
