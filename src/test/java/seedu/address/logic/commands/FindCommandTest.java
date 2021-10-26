@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.testutil.TypicalItems.CHOCOCHIP;
 import static seedu.address.testutil.TypicalItems.DALGONA_COFFEE;
 import static seedu.address.testutil.TypicalItems.EGGNOG;
@@ -85,7 +88,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicateName(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
@@ -95,7 +98,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
         IdContainsNumberPredicate predicate = preparePredicateId(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
@@ -105,7 +108,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicateName("Chocolate Egg Forest");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CHOCOCHIP, EGGNOG, FOREST_CAKE), model.getFilteredItemList());
     }
@@ -115,7 +118,20 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
         IdContainsNumberPredicate predicate = preparePredicateId("444444 555555");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredItemList(predicate);
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CHOCOCHIP, DALGONA_COFFEE), model.getFilteredItemList());
+    }
+
+    @Test
+    public void execute_displayOrderMode_setDisplayInventoryMode() {
+        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
+        IdContainsNumberPredicate predicate = preparePredicateId("444444 555555");
+        FindCommand command = new FindCommand(predicate);
+
+        model.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CHOCOCHIP, DALGONA_COFFEE), model.getFilteredItemList());
     }

@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.List;
@@ -34,7 +34,6 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ID + "ID] "
-            + "[" + PREFIX_COUNT + "COUNT] "
             + "[" + PREFIX_COSTPRICE + "COSTPRICE] "
             + "[" + PREFIX_SALESPRICE + "SALESPRICE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -44,6 +43,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory.";
+    public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
+            "Can't edit if not in inventory mode. Please use \"list\" first";
 
     private final Index index;
     private final ItemDescriptor itemDescriptor;
@@ -63,6 +64,11 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getDisplayMode() != DISPLAY_INVENTORY) {
+            throw new CommandException(MESSAGE_INVENTORY_NOT_DISPLAYED);
+        }
+
         List<Item> lastShownList = model.getFilteredItemList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -77,7 +83,7 @@ public class EditCommand extends Command {
         }
 
         model.setItem(itemToEdit, editedItem);
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(String.format(MESSAGE_EDIT_ITEM_SUCCESS, editedItem));
     }
 

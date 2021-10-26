@@ -2,7 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,28 +15,33 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 import seedu.address.model.order.TransactionTimeComparator;
+import seedu.address.storage.TransactionStorage;
 
 /**
  * Represents the in-memory model of BogoBogo data.
  */
 public class ModelManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final String TRANSACTION_LOGGING_MSG = "Transacted successfully: ";
 
     private final Inventory inventory;
     private final UserPrefs userPrefs;
-    private final FilteredList<Item> filteredItems;
+    private final DisplayList displayList;
     private Optional<Order> optionalOrder;
     private Set<TransactionRecord> transactions;
+
+    private DisplayMode currentDisplay = DISPLAY_INVENTORY;
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
@@ -47,9 +54,17 @@ public class ModelManager implements Model {
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredItems = new FilteredList<>(this.inventory.getItemList());
+        displayList = new DisplayList(this.inventory.getItemList());
         optionalOrder = Optional.empty();
-        transactions = new HashSet<>();
+        List<TransactionRecord> transactionRecordList = null;
+        try {
+            transactionRecordList = new TransactionStorage()
+                    .readTransaction(userPrefs.getTransactionFilePath()).orElse(null);
+        } catch (DataConversionException e) {
+            System.out.println(e);
+        }
+
+        transactions = transactionRecordList == null ? new HashSet<>() : new HashSet<>(transactionRecordList);
     }
 
     public ModelManager() {
@@ -123,7 +138,8 @@ public class ModelManager implements Model {
     @Override
     public void addItem(Item item) {
         inventory.addItem(item);
-        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        updateFilteredItemList(DisplayMode.DISPLAY_INVENTORY,
+                PREDICATE_SHOW_ALL_ITEMS);
     }
 
     @Override
@@ -159,13 +175,37 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Item> getFilteredItemList() {
-        return filteredItems;
+        return displayList.getFilteredItemList();
     }
 
     @Override
-    public void updateFilteredItemList(Predicate<Item> predicate) {
+    public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
         requireNonNull(predicate);
-        filteredItems.setPredicate(predicate);
+
+        // Switch display mode if needed
+        if (currentDisplay != mode) {
+            if (mode == DISPLAY_INVENTORY) {
+                // Display inventory items
+                displayList.setItems(this.inventory.getItemList());
+            } else {
+                // Display unopened order items
+                displayList.setItems(
+                    this.optionalOrder
+                        .map(Order::getOrderItems)
+                        .orElse(FXCollections.observableArrayList())
+                );
+            }
+
+            currentDisplay = mode;
+        }
+
+        // Update predicate
+        displayList.setPredicate(predicate);
+    }
+
+    @Override
+    public DisplayMode getDisplayMode() {
+        return currentDisplay;
     }
 
     @Override
@@ -184,7 +224,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return inventory.equals(other.inventory)
                 && userPrefs.equals(other.userPrefs)
-                && filteredItems.equals(other.filteredItems);
+                && displayList.equals(other.displayList);
     }
 
     // ============== Order related methods ========================
@@ -239,6 +279,15 @@ public class ModelManager implements Model {
         // Reset to no order status
         optionalOrder = Optional.empty();
         transactions.add(transaction);
+
+        try {
+            new TransactionStorage().saveTransaction(new ArrayList(transactions),
+                    userPrefs.getTransactionFilePath());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+
         logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
     }
 

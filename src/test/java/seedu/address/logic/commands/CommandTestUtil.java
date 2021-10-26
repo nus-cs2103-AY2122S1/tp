@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -149,7 +150,8 @@ public class CommandTestUtil {
 
         Item person = model.getFilteredItemList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredItemList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredItemList(DISPLAY_INVENTORY,
+                new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredItemList().size());
     }

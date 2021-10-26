@@ -228,7 +228,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredItemList(Predicate<Item> predicate) {
+        public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
         }
 
         @Override

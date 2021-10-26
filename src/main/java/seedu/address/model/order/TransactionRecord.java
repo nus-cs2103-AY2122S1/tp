@@ -49,6 +49,20 @@ public class TransactionRecord {
     }
 
     /**
+     * Instantiates a transaction record with a list of items, id, and timestamp.
+     */
+    public TransactionRecord(List<Item> items, String id, Instant timestamp) {
+        requireNonNull(items);
+        this.items = new UniqueItemList();
+        for (Item item: items) {
+            this.items.add(item);
+        }
+
+        this.id = id;
+        this.timestamp = timestamp;
+    }
+
+    /**
      * Get a list of items in the transaction.
      */
     public ObservableList<Item> getItems() {

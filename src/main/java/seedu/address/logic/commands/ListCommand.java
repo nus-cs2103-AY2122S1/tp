@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.model.Model;
@@ -20,7 +21,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

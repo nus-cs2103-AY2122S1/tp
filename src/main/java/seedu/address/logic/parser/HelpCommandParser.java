@@ -14,6 +14,7 @@ import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartOrderCommand;
+import seedu.address.logic.commands.ViewOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -29,8 +30,8 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      */
     public HelpCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        final String userGuide = "https://se-education.org/addressbook-level3/UserGuide.html";
-        final String helpMessage = "Refer to the user guide: " + userGuide;
+        final String userGuide = "https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/docs/UserGuide.md";
+        final String helpMessage = "\nRefer to the user guide: " + userGuide;
 
         switch (trimmedArgs) {
         case AddCommand.COMMAND_WORD:
@@ -68,6 +69,9 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case RemoveFromOrderCommand.COMMAND_WORD:
             return new HelpCommand(RemoveFromOrderCommand.MESSAGE_USAGE);
+
+        case ViewOrderCommand.COMMAND_WORD:
+            return new HelpCommand(ViewOrderCommand.MESSAGE_USAGE);
 
         case EndAndTransactOrderCommand.COMMAND_WORD:
             return new HelpCommand(EndAndTransactOrderCommand.MESSAGE_USAGE);
