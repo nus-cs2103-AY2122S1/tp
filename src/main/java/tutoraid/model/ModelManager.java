@@ -134,7 +134,8 @@ public class ModelManager implements Model {
     public void viewStudent(Student targetStudent) {
         requireNonNull(targetStudent);
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
-        filteredLessons.setPredicate(lesson -> targetStudent.getLessons().hasLesson(lesson));
+        filteredLessons.setPredicate(lesson ->
+                targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.toNameString()));
         UiManager.showViewWindow();
     }
 
@@ -179,8 +180,9 @@ public class ModelManager implements Model {
     @Override
     public void viewLesson(Lesson targetLesson) {
         requireNonNull(targetLesson);
-        filteredStudents.setPredicate(student -> targetLesson.getStudents().hasStudent(student));
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
+        filteredStudents.setPredicate(student ->
+            targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
         UiManager.showViewWindow();
     }
 

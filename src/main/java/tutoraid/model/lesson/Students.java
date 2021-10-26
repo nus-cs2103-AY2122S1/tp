@@ -72,10 +72,10 @@ public class Students {
     /**
      * Returns a string Array that contains all the student names in the correct order.
      */
-    public ArrayList<String> getAllLessonNamesAsStringArrayList() {
+    public ArrayList<String> getAllStudentNamesAsStringArrayList() {
         ArrayList<String> allStudentNamesAsStringArrayList = new ArrayList<>();
         for (int i = 0; i < students.size(); i++) {
-            String currentLessonName = students.get(i).toString();
+            String currentLessonName = students.get(i).toNameString();
             allStudentNamesAsStringArrayList.add(currentLessonName);
         }
         return allStudentNamesAsStringArrayList;

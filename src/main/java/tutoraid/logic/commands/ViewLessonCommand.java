@@ -42,8 +42,6 @@ public class ViewLessonCommand extends ViewCommand {
 
         Lesson lessonToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewLesson(lessonToView);
-        model.updateFilteredStudentList(
-                new NameContainsKeywordsPredicate(lessonToView.getStudents().getAllLessonNamesAsStringArrayList()));
         return new CommandResult(MESSAGE_VIEW_LESSON_SUCCESS);
     }
 

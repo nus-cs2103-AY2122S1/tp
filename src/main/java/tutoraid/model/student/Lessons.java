@@ -103,18 +103,6 @@ public class Lessons {
         return allLessonNamesAsStringArrayList;
     }
 
-    /**
-     * Returns true if lesson name is present in lessons.
-     */
-    public boolean hasLesson(Lesson lesson) {
-        for (int i = 0; i < lessons.size(); i++) {
-            if (lessons.get(i).toString().equals(lesson.toNameString())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
         String str = "";
