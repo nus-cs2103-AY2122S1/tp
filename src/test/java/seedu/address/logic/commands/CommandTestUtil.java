@@ -70,10 +70,10 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     /** Filenames for testing in {@link ExportCommandTest} and {@link ImportCommandTest} **/
-    public static final String VALID_FILENAME_JSON = "ImportNewPerson.json";
-    public static final String VALID_FILENAME_CSV = "ImportNewPerson.csv";
-    public static final String VALID_EXISTING_FILE = "ExistingFile.json";
-    public static final String INVALID_FILENAME_TXT = "ImportNewPerson.txt";
+    public static final String VALID_FILENAME_JSON = "importNewPerson.json";
+    public static final String VALID_FILENAME_CSV = "importNewPerson.csv";
+    public static final String VALID_EXISTING_FILE = "existingFile.json";
+    public static final String INVALID_FILENAME_TXT = "importNewPerson.txt";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

@@ -61,7 +61,7 @@ public class ExportCommandTest {
         try {
             FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + VALID_FILENAME_JSON));
         } catch (IOException ioe) {
-            System.out.println("Error deleting ImportNewPerson.json");
+            System.out.println("Error deleting importNewPerson.json");
         }
     }
 
@@ -79,7 +79,7 @@ public class ExportCommandTest {
         try {
             FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + VALID_FILENAME_CSV));
         } catch (IOException ioe) {
-            System.out.println("Error deleting ImportNewPerson.csv");
+            System.out.println("Error deleting importNewPerson.csv");
         }
     }
 
