@@ -55,7 +55,7 @@ public class AddLabCommand extends Command {
         }
         for (Student std: lastShownList) {
             Student target = std;
-            if (!target.addLabResult(this.result)) {
+            if (!target.addLab(this.result)) {
                 exists = true;
             }
             model.setStudent(target, std);

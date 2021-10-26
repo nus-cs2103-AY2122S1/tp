@@ -19,8 +19,11 @@ If you are familiar with Unix commands, this is definitely for you!
     6. [Filter List: `filter`](#filter-student)
     7. [Edit Student Details: `edit`](#edit-student)
     8. [Delete Student: `delete`](#delete-student)
-    9. [Exit: `exit`](#exit)
-    10. [Download data](#download-data)
+    9. [Add Lab: `addlab`](#add-lab)
+    10. [Edit Lab: `editlab`](#edit-lab)
+    11. [Delete Lab: `dellab`](#delete-lab)
+    12. [Exit: `exit`](#exit)
+    13. [Download data](#download-data)
 - [Command Summary](#command-summary)
 
 ## <a name="quick-start"></a>Quick Start
@@ -158,7 +161,40 @@ Examples:
 - `delete -sid A1234567X` Deletes the data of the student with student ID A1234567X
 - `delete -sid A2345678X` Deletes the data of the student with student ID A2345678X
 
-### <a name="download-data"></a>9. Download Data
+### <a name="add-lab"></a>9. Add Lab: `addlab`
+
+Adds a lab to every student with the lab number and total score.
+
+Format: `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
+
+Examples:
+
+- `addlab -t 1 -ts 20`: Adds a lab with number 1 and total score 20 for all students.
+
+- `addlab -t 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
+
+### <a name="edit-lab"></a>10. Edit Lab: `editlab`
+
+Edits the details of an existing lab for every student.
+
+Format: `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
+
+Examples:
+
+- `editlab -t 1 -ts 30`: Changes the total score of lab 1 to 30 for all students.
+  
+- `editlab -t 1 -nt 2`: Changes the number of an existing lab from 1 to 2 for all students.
+
+### <a name="delete-lab"></a>11. Delete Lab: `dellab`
+
+Deletes an existing lab from every student in ProgrammerError.
+
+Format: `dellab -t <LAB_NUM>`
+
+Examples:
+
+- `dellab -t 1`: Deletes lab 1 for all students if it exists.
+
 
 ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button or the enter command `download`. The TA will need
 to specify the directory to download the file to.
@@ -173,14 +209,18 @@ to specify the directory to upload the file from.
 Exits ProgrammerError and closes the GUI.
 
 
+
 ## <a name="command-summary"></a>Command Summary
 
 Command | Format & Examples
 --------| ----------------------
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+**Add Lab** | `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
 **Delete** | `delete <INDEX_IN_LIST>`
 **Download** | `download`
+**Delete Lab** | `dellab -t <LAB_NUM>`
 **Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+**Edit Lab** | `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 **Exit** | `exit`
 **Fill** | `fill`
 **Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`

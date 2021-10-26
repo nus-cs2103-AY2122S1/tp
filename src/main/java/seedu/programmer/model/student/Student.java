@@ -9,7 +9,7 @@ import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.programmer.logic.commands.exceptions.CommandException;
-//import seedu.programmer.model.student.comparator.SortByLabName;
+import seedu.programmer.model.student.comparator.SortByLabNumber;
 
 
 /**
@@ -27,7 +27,7 @@ public class Student {
     private final StudentId studentId;
     private final ClassId classId;
     private final Email email;
-    private ObservableList<Lab> labResultList;
+    private ObservableList<Lab> labList;
 
     /**
      * Every field must be present and not null.
@@ -38,7 +38,7 @@ public class Student {
         this.studentId = studentId;
         this.classId = classId;
         this.email = email;
-        this.labResultList = FXCollections.observableArrayList();
+        this.labList = FXCollections.observableArrayList();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Student {
         this.studentId = studentId;
         this.classId = classId;
         this.email = email;
-        this.labResultList = list;
+        this.labList = list;
     }
 
     public Name getName() {
@@ -85,23 +85,23 @@ public class Student {
         return email.toString();
     }
 
-    public ObservableList<Lab> getLabResultList() {
-        return labResultList;
+    public ObservableList<Lab> getLabList() {
+        return labList;
     }
 
-    public Lab getLab(int index) {
-        return labResultList.get(index);
+    public Lab getLab(int labNum) {
+        return labList.stream().filter(x -> x.getLabNum() == labNum).findFirst().orElse(null);
     }
 
     //todo check comment out
     /**
-     * Adds a lab result to all the student records
+     * Adds a lab to all the student records
      * */
-    public Boolean addLabResult(Lab lab) {
-        int index = this.labResultList.indexOf(lab);
+    public Boolean addLab(Lab lab) {
+        int index = this.labList.indexOf(lab);
         if (index == -1) {
-            this.labResultList.add(lab);
-            //labResultList.sort(new SortByLabName());
+            this.labList.add(lab);
+            labList.sort(new SortByLabNumber());
             return true;
         } else {
             return false;
@@ -109,24 +109,24 @@ public class Student {
     }
 
     /**
-     * Deletes a lab result from all the student records
+     * Deletes a lab from all the student records
      * */
-    public boolean delLabResult(Lab lab) {
-        return this.labResultList.remove(lab);
+    public boolean deleteLab(Lab lab) {
+        return this.labList.remove(lab);
     }
 
     /**
-     * Updates a lab result for a student
+     * Updates a lab's score  for a student
      * */
-    public void editLabResult(Lab lab , Double score) throws CommandException {
+    public void editLabScore(Lab lab , Double score) throws CommandException {
         if (score < 0.0) {
             throw new CommandException(REQUIRE_POSITIVE_SCORE);
         }
         if (score > lab.getTotalScore()) {
             throw new CommandException(EXCEEDED_TOTAL_SCORE);
         }
-        int index = this.labResultList.indexOf(lab);
-        Lab current = this.labResultList.get(index);
+        int index = this.labList.indexOf(lab);
+        Lab current = this.labList.get(index);
 
         current.updateActualScore(score);
     }
@@ -134,25 +134,23 @@ public class Student {
     /**
      * Updates a lab result for a student
      * */
-    public void editLabInfo(Lab lab, int newLabNum, Double total) throws CommandException {
-        if (total < 0.0) {
-            throw new CommandException(REQUIRE_POSITIVE_SCORE);
-        }
-        int index = this.labResultList.indexOf(lab);
-        Lab current = this.labResultList.get(index);
+    public void editLabInfo(Lab lab, int newLabNum, Double total) {
+        int index = this.labList.indexOf(lab);
+        Lab current = this.labList.get(index);
         current.updateLabNum(newLabNum);
         current.updateTotal(total);
+        labList.sort(new SortByLabNumber());
     }
 
     public void setLabResultRecord(List<Lab> labResultRecord) {
         if (labResultRecord == null) {
             labResultRecord = new ArrayList<>();
         }
-        this.labResultList.addAll(labResultRecord);
+        this.labList.addAll(labResultRecord);
     }
 
-    public void setLabResultList(ObservableList<Lab> labResultList) {
-        this.labResultList = labResultList;
+    public void setLabList(ObservableList<Lab> labList) {
+        this.labList = labList;
     }
 
     /**
@@ -187,7 +185,7 @@ public class Student {
                 && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getClassId().equals(getClassId())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getLabResultList().equals(getLabResultList());
+                && otherStudent.getLabList().equals(getLabList());
     }
 
     @Override
@@ -213,7 +211,7 @@ public class Student {
      * */
     public Student copy() {
         Student studentCopy = new Student(name, studentId, classId, email);
-        studentCopy.setLabResultRecord(labResultList);
+        studentCopy.setLabResultRecord(labList);
         return studentCopy;
     }
 }

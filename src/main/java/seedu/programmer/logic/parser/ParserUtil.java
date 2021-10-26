@@ -117,7 +117,11 @@ public class ParserUtil {
      * */
     public static int parseLabNum(String labNum) throws ParseException {
         try {
-            return Integer.parseInt(labNum);
+            int value = Integer.parseInt(labNum);
+            if (value < 0) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
+            }
+            return value;
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
         }
@@ -128,9 +132,12 @@ public class ParserUtil {
      *
      * @param result the result of the lab assignment.
      * */
-    public static Double parseResult(String result) {
+    public static Double parseResult (String result) throws ParseException {
+        double res = Double.parseDouble(result.trim());
         if (result == null) {
             return 0.0;
+        } else if (res < 0.0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
         }
         return Double.parseDouble(result.trim());
     }
@@ -140,9 +147,12 @@ public class ParserUtil {
      *
      * @param total the total score of the lab assignment.
      * */
-    public static Double parseTotal(String total) {
+    public static Double parseTotal(String total) throws ParseException {
+        double res = Double.parseDouble(total.trim());
         if (total == null) {
             return 0.0;
+        } else if (res < 0.0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
         }
         return Double.parseDouble(total.trim());
     }
