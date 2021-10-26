@@ -91,7 +91,7 @@ public class ExportCommand extends Command {
 
     private void appendAssessmentHeaders(StringBuilder writeContent, List<Assessment> assessments) {
         for (Assessment assessment : assessments) {
-            writeContent.append(assessment.value).append(",");
+            writeContent.append(assessment.name).append(",");
         }
     }
 
@@ -112,7 +112,7 @@ public class ExportCommand extends Command {
 
         List<Group> groups = student.getGroups();
         for (Group group : groups) {
-            writeContent.append(group.getValue()).append(",");
+            writeContent.append(group.getName()).append(",");
         }
         for (int i = groups.size(); i < groupColumns; i++) {
             writeContent.append(",");

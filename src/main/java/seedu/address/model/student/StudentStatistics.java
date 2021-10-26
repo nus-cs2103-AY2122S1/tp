@@ -35,7 +35,7 @@ public class StudentStatistics {
      */
     private Map<String, Number> getScoreDistribution() {
         Map<String, Number> distribution = new TreeMap<>();
-        scoreMap.forEach((assessment, score) -> distribution.put(assessment.getValue(), score.getNumericValue()));
+        scoreMap.forEach((assessment, score) -> distribution.put(assessment.getName(), score.getNumericValue()));
         return distribution;
     }
 
@@ -50,9 +50,10 @@ public class StudentStatistics {
         Map<String, Number> median = new TreeMap<>();
         scoreMap.forEach((assessment, score) -> {
             AssessmentStatistics statistics = new AssessmentStatistics(assessment);
-            mean.put(assessment.getValue(), statistics.getMean());
-            median.put(assessment.getValue(), statistics.getMedian());
+            mean.put(assessment.getName(), statistics.getMean());
+            median.put(assessment.getName(), statistics.getMedian());
         });
+        @SuppressWarnings("unchecked")
         Map<String, Number>[] dataSet = new Map[]{mean, median};
         return dataSet;
     }
@@ -63,6 +64,6 @@ public class StudentStatistics {
     public Chart toLineChart() {
         Map<String, Number>[] dataSet = getDataSet();
         return ChartUtil.createLineChart(student.getName() + CHART_TITLE,
-                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getScoreDistribution(), dataSet[0], dataSet[1]);
+                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, "score", getScoreDistribution(), dataSet[0], dataSet[1]);
     }
 }

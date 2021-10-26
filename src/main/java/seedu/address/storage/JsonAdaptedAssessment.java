@@ -29,7 +29,7 @@ public class JsonAdaptedAssessment {
      * Converts a given {@code Assessment} into this class for Jackson use.
      */
     public JsonAdaptedAssessment(Assessment source) {
-        name = source.value;
+        name = source.name;
         scores = new HashMap<>();
         for (ID id : source.scores.keySet()) {
             scores.put(id.value, source.scores.get(id).value);

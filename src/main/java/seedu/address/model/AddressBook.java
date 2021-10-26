@@ -129,6 +129,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+        groups.removeStudent(key);
+        assessments.removeStudent(key);
     }
 
     //// group-level operations
@@ -139,19 +141,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return groups.contains(group);
-    }
-
-    /**
-     * Returns student in address book with same name or ID as {@code studentToMatch} if exists.
-     */
-    public Student getStudent(Student studentToMatch) {
-        requireNonNull(studentToMatch);
-        for (Student student : getStudentList()) {
-            if (student.isSameName(studentToMatch) || student.isSameStudent(studentToMatch)) {
-                return student;
-            }
-        }
-        return null;
     }
 
     /**

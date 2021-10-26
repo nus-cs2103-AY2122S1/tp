@@ -20,7 +20,7 @@ public class Assessment {
     public final Map<ID, Score> scores = new HashMap<>();
 
     // Assessment name
-    public final String value;
+    public final String name;
 
     /**
      * Constructs an {@code Assessment}.
@@ -30,7 +30,7 @@ public class Assessment {
     public Assessment(String name) {
         requireNonNull(name);
         checkArgument(isValidAssessment(name), MESSAGE_CONSTRAINTS);
-        value = name;
+        this.name = name;
     }
 
     /**
@@ -40,8 +40,8 @@ public class Assessment {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public String getValue() {
-        return value;
+    public String getName() {
+        return name;
     }
 
     public Map<ID, Score> getScores() {
@@ -66,7 +66,7 @@ public class Assessment {
 
     @Override
     public String toString() {
-        return value;
+        return name;
     }
 
     /**
@@ -79,19 +79,19 @@ public class Assessment {
         }
 
         return otherAssessment != null
-                && otherAssessment.getValue().equals(getValue());
+                && otherAssessment.getName().equals(getName());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Assessment // instanceof handles nulls
-                && value.equals(((Assessment) other).value)); // state check
+                && name.equals(((Assessment) other).name)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return name.hashCode();
     }
 
 
