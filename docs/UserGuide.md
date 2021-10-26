@@ -1,12 +1,27 @@
-
-# User Guide
-
 ## Overview
 Academy Directory (AD) is a **desktop app for CS1101S tutors to manage students’ contact, grades, tutorial attendance, and assignment completion**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). AD is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I at the National University of Singapore.
 
 ### Table of Contents
 * [Quick Start](#quick-start)
 * [Features](#features)
+  * [Add Student](#adding-a-student-add)
+  * [Delete Student](#deleting-a-student-delete)
+  * [Edit Student](#editing-a-student--edit)
+  * [Tag Student](#tagging-a-student--tag)
+  * [Find Student](#locating-students-by-name-find)
+  * [List](#listing-all-students--list)
+  * [Clear List](#clearing-all-entries--clear)
+  * [Retrieve](#retrieving-additional-information-of-students-retrieve)
+  * [Sort List](#sorting-the-list--sort)
+  * [Add Attendance](#editing-a-students-studio-attendance-attendance)
+  * [Add Participation](#editing-a-students-studio-participation-participation)
+  * [Add Grade](#adding-grades-for-an-assessment--grade)
+  * [Show Grade](#displaying-the-grades-for-an-assessment--show)
+  * [Visualise all Grades](#visualizing-assessments-grades-of-the-entire-class-vis)
+  * [Help](#seeking-help--help)
+    * [General Help](#viewing-general-help)
+    * [Help with Specific Command](#viewing-specific-help)
+  * [Exit Academy Directory](#exiting-the-program--exit)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -82,12 +97,6 @@ Examples:
 * `add n/Charles Ng t/@charles e/e0123434@u.nus.edu p/NA`
 * `add n/Betsy Lim t/@unislave e/e0123456@u.nus.edu`
 
-### Clearing all entries : `clear`
-
-Clears all entries from the academy directory.
-
-Format: `clear`
-
 ### Deleting a student: `delete`
 
 Avengers will be able to delete their students.
@@ -153,6 +162,13 @@ Examples:
 Shows a list of all students in the academy directory.
 
 Format: `list`
+
+
+### Clearing all entries : `clear`
+
+Clears all entries from the academy directory.
+
+Format: `clear`
 
 ### Retrieving additional information of students': `retrieve`
 
