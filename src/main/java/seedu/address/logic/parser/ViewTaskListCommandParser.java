@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -76,7 +77,8 @@ public class ViewTaskListCommandParser implements Parser<ViewTaskListCommand> {
     private List<String> extractKeywords(String args) {
         int idx = args.indexOf("-f");
         String keywords = args.substring(idx + 2).trim();
-
-        return Arrays.asList(keywords.split(" "));
+        List<String> keywordList = new ArrayList<String>(Arrays.asList(keywords.split(" ")));
+        keywordList.removeIf(s -> s.equals(""));
+        return keywordList;
     }
 }
