@@ -9,9 +9,9 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks names should be alphanumeric, "
-            + "and should contain fewer than 25 characters";
     public static final int MAX_REMARK_CHARACTER = 25;
+    public static final String MESSAGE_CONSTRAINTS = "Remarks names should be alphanumeric, "
+            + "and should contain fewer than " + MAX_REMARK_CHARACTER + " characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String remarkName;
