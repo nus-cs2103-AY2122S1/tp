@@ -42,9 +42,13 @@ public class MainWindow extends UiPart<Stage> {
     private FileChooser fileChooser;
 
     // Independent Ui parts residing in this Ui container
+    private BirthdayReminderListPanel birthdayReminderListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    @FXML
+    private StackPane birthdayReminderListPanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -140,6 +144,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        birthdayReminderListPanel = new BirthdayReminderListPanel(logic.getFilteredPersonList());
+        birthdayReminderListPanelPlaceholder.getChildren().add(birthdayReminderListPanel.getRoot());
     }
 
     /**
