@@ -8,15 +8,15 @@ title: User Guide
 ## Table of Contents
 
 1. [Introduction](#1-introduction) <br>
-2. [Quick start](#2-quick-start) <br>
-3. <details><summary><a href="#3-about">About</a></summary>
+1. [Quick start](#2-quick-start) <br>
+1. <details><summary><a href="#3-about">About</a></summary>
       3.1. <a href="#31-structure-of-the-document">Structure of this Document</a><br>
       3.2. <a href="#32-reading-this-document">Reading this Document</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp; 3.2.1. <a href="#321-technical-terms">Technical terms</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp; 3.2.2. <a href="#322-general-symbols-and-syntax">General Symbols and Syntax</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp; 3.2.3. <a href="#323-defining-client-and-product">Defining Client and Product</a><br>
    </details>
-4. <details><summary><a href="#4-features">Features</a></summary>
+1. <details><summary><a href="#4-features">Features</a></summary>
       4.1. <a href="#41-getting-help">Getting Help</a><br>
       4.2. <a href="#42-add">Add</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp; 4.2.1. <a href="#421-adding-a-client">Adding a Client</a><br>
@@ -43,8 +43,8 @@ title: User Guide
       4.12. <a href="#412-saving-data">Saving Data</a><br>
       4.13. <a href="#413-editing-the-data-file">Editing the Data file</a><br>
    </details>
-5. [FAQ](#5-faq) <br>
-6. [Command summary](#6-command-summary) <br>
+1. [FAQ](#5-faq) <br>
+1. [Command summary](#6-command-summary) <br>
 
 --------------------------------------------------------------------------
 
@@ -60,6 +60,10 @@ the products in your inventory, as well as details of the orders placed by your 
 typing speed is fast, you can operate the application faster than other `GUI` applications; `GUI` applications allow you
 to interact with the application through graphical icons such as buttons. <br>
 
+You do not have to worry at all even if you are new to CLI applications as this user guide will take you through step 
+by step on how various features of the **Sellah** can be utilised, all geared towards providing the best possible 
+experience for you. <br>
+
 If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to learn how to optimise your inventory using
 **Sellah**. <br>
 
@@ -70,15 +74,28 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 1. Ensure you have `Java 11` or above installed in your Computer. You can download it from
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `sellah.jar` from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases).
+1. Download the latest `sellah.jar` from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your **Sellah**.
+1. Copy the file to the folder you want to use as the _home folder_ for your **Sellah**.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
+1. Double-click the file to start the app. 
+   
+1. Alternatively, if you wish to open **Sellah** using command prompt or terminal, key in `java -jar Sellah.jar` and 
+   press `enter` to launch the **Sellah** application.
+   
+1. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data. You can use the [`clear`](#48-clearing-all-data) command to purge all data. <br>
    ![Ui](images/UiHelpCommand.png)
 
-5. Refer to the [Features](#4-features) below for details of each command.
+1. Refer to the [Features](#4-features) below for details of each command.
+
+> :bulb: Image below shows you how you can open home directory of **Sellah** in command prompt or terminal.
+
+![Ui](images/terminalMac.png)
+
+Windows | Mac
+------------ | -------------
+Key in `cmd` and press enter. | Right click on the folder and click on “New Terminal at Folder”
 
 --------------------------------------------------------------------------
 
@@ -108,6 +125,8 @@ order [Products](#323-defining-client-and-product) from you.
 
 #### 3.2.1 Technical Terms
 
+The table below explains some technical terms that you may come across throughout the user guide.
+
 | Term | Definition |
 |:---:|:----:|
 | Command | Keywords that Sellah recognises to invoke specific commands. |
@@ -117,12 +136,15 @@ order [Products](#323-defining-client-and-product) from you.
 
 #### 3.2.2 General Symbols and Syntax
 
+The table below explains the general syntax used throughout the user guide.
+
 |Syntax| Definition |
 |:----:|:----:|
 |`...`| Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be ` `(empty) or `-o 1 -o 2`.|
 |`UPPER_CASE` | Name of the parameter. For example, `EMAIL` is a parameter named email. |
 |`-lower_case UPPER_CASE` | A parameter field. The name of the parameter is defined in `UPPER_CASE` and `-lower_case` refers to an acronym of `UPPER_CASE`. An example can be `-e abc@gmail.com`.|
 |`[-lower_case UPPER_CASE]` | An optional parameter field. Eg `-a A [-b B]` can be used as `-a A -b B` or just `-a A`.|
+|:bulb: | An light bulb indicates that the following text is a tip. |
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-pn PHONE_NUMBER -e EMAIL`, then `-e EMAIL -pn PHONE_NUMBER` is also acceptable.
@@ -412,21 +434,37 @@ Format : `exit`
 ### 4.12 Saving Data
 
 Sellah's data are saved in the hard disk automatically after any command that changes the data. There is no need to save
-manually.
+manually. <br>
+
+Your saved data can be found in the data folder within your home folder of Sellah.
+
+In the data folder you will find the text file as shown below.
+
+![Ui](images/UISavingData.png)
+
 
 ### 4.13 Editing the Data file
 
-Sellah data are saved as a JSON file `[JAR file location]/data/sellah.json`. You are welcome to update data directly by
-editing this file. However, if your changes to the file make its format invalid, Sellah will start with an data file on
-its next run.
+Sellah data are saved as a JSON file `[JAR file location]/data/addressbook.json`. <br>
+You are welcome to update data directly by editing this file. However, if your changes to the file make its format 
+invalid, Sellah will start with a new data file on its next run.
+
+> :bulb: It is highly recommended that you do not edit the saved data as it can cause data losses in future sessions!
 
 --------------------------------------------------------------------------
 
 ## 5. FAQ
 
-**Q**: How do I transfer my data to another Computer? <br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous Sellah home folder. <br>
+**Q**: How do I transfer my clients and products' information to another Computer? <br>
+**A**: Install the app in the other computer. Copy the entire data folder that can be found together with the 
+Sellah.jar file on the first computer and copy it over to the same directory where the Sellah.jar file can be found on 
+the second computer. <br>
+
+**Q**: Do I lose all my clients and products' information when I close the application? <br>
+**A**: All data is auto-saved once you exit the app and loaded upon next entry, so you do not lose any data. <br>
+
+**Q**: What should I do if I don’t know the command format? <br>
+**A**: You can type the [`Help`](#41-getting-help) command to receive a help message. <br>
 
 --------------------------------------------------------------------------
 
