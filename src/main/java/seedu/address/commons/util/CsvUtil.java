@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -62,7 +63,7 @@ public class CsvUtil {
      * @param exportPrefixes Prefixes for the fields to be included in the csv
      * @throws IOException
      */
-    public static void modelToCsv(List<Person> personList, Path path, List<Prefix> exportPrefixes) throws IOException {
+    public static void modelToCsv(List<Person> personList, Path path, Collection<Prefix> exportPrefixes) throws IOException {
 
         File file = new File(path.toString());
         FileWriter fileWriter = new FileWriter(file);
@@ -104,7 +105,7 @@ public class CsvUtil {
      * @param prefixes List of prefixes that the array should contain the information of
      * @return String Array containing Name, followed by other data
      */
-    private static String[] getPersonAsStringArray(Person person, List<Prefix> prefixes) {
+    private static String[] getPersonAsStringArray(Person person, Collection<Prefix> prefixes) {
 
         List<String> csvLine = new ArrayList<>();
         csvLine.add(getField(PREFIX_NAME, person));
@@ -123,7 +124,7 @@ public class CsvUtil {
      * @param prefixes List of prefixes to add
      * @return String Array of the headers
      */
-    private static String[] getPersonHeadersAsStringArray(List<Prefix> prefixes) {
+    private static String[] getPersonHeadersAsStringArray(Collection<Prefix> prefixes) {
         List<String> csvHeaders = new ArrayList<>();
         csvHeaders.add("Name");
 

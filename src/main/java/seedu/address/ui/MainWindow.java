@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -20,7 +21,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandResultExport;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -188,7 +188,8 @@ public class MainWindow extends UiPart<Stage> {
      * then writes the file
      */
     @FXML
-    private void handleMailingList(CommandResultExport commandResult) {
+    private void handleMailingList(CommandResult commandResult) {
+
         File file = fileChooser.showSaveDialog(primaryStage);
         String pathStr = file.getPath();
         if (!pathStr.endsWith(".csv")) {
@@ -196,11 +197,11 @@ public class MainWindow extends UiPart<Stage> {
         }
         Path path = Path.of(pathStr);
 
-        List<Person> personList = commandResult.getPersonList();
-        List<Prefix> prefixList = commandResult.getPrefixes();
+        List<Person> personList = logic.getFilteredPersonList();
+        Set<Prefix> prefixSet = logic.getPrefixStore();
 
         try {
-            CsvUtil.modelToCsv(personList, path, prefixList);
+            CsvUtil.modelToCsv(personList, path, prefixSet);
         } catch (IOException e) {
             logger.info("writing csv failed" + e.getMessage());
             resultDisplay.setFeedbackToUser(e.getMessage());
@@ -232,7 +233,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isChooseFile()) {
-                handleMailingList((CommandResultExport) commandResult);
+                handleMailingList(commandResult);
             }
 
             return commandResult;
