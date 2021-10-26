@@ -141,7 +141,6 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the name on title bar.
      */
     private void setTitleBar(String title) {
-        //primaryStage.getIcons().add(iconImage);
         primaryStage.setTitle(title);
     }
 
