@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -22,24 +24,72 @@ public class ModelManager implements Model {
 
     private final ModuleTracker moduleTracker;
     private final UserPrefs userPrefs;
+    private final UserInfo userInfo;
     private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given moduleTracker and userPrefs.
      */
-    public ModelManager(ReadOnlyModuleTracker moduleTracker, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyModuleTracker moduleTracker, ReadOnlyUserPrefs userPrefs, ReadOnlyUserInfo userInfo) {
         super();
-        requireAllNonNull(moduleTracker, userPrefs);
+        requireAllNonNull(moduleTracker, userPrefs, userInfo);
 
-        logger.fine("Initializing with mod tracker: " + moduleTracker + " and user prefs " + userPrefs);
+        logger.fine("Initializing with mod tracker: " + moduleTracker + ", user prefs " + userPrefs
+                + " and user information: " + userInfo);
 
         this.moduleTracker = new ModuleTracker(moduleTracker);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.userInfo = new UserInfo(userInfo);
         filteredModules = new FilteredList<>(this.moduleTracker.getModuleList());
     }
 
     public ModelManager() {
-        this(new ModuleTracker(), new UserPrefs());
+        this(new ModuleTracker(), new UserPrefs(), new UserInfo());
+    }
+
+    //=========== UserInfo =============================================================
+    @Override
+    public void setUserInfo(ReadOnlyUserInfo userInfo) {
+        requireNonNull(userInfo);
+        this.userInfo.resetData(userInfo);
+        updateMcProgress();
+    }
+
+    @Override
+    public ReadOnlyUserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    @Override
+    public AcademicCalendar getCurrentSemester() {
+        return userInfo.getCurrentSemester();
+    }
+
+    @Override
+    public void setCurrentSemester(AcademicCalendar currentSemester) {
+        requireNonNull(currentSemester);
+        this.userInfo.setCurrentSemester(currentSemester);
+        updateMcProgress();
+    }
+
+    @Override
+    public Mc getMcGoal() {
+        return userInfo.getMcGoal();
+    }
+    @Override
+    public void setMcGoal(Mc mcGoal) {
+        requireNonNull(mcGoal);
+        this.userInfo.setMcGoal(mcGoal);
+    }
+
+    @Override
+    public ObservableList<McProgress> getMcProgressList() {
+        return moduleTracker.getMcProgressList();
+    }
+
+    @Override
+    public void updateMcProgress() {
+        moduleTracker.updateMcProgressList(this.userInfo);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -87,16 +137,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyModuleTracker getModuleTracker() {
         return moduleTracker;
-    }
-
-    @Override
-    public void setCurrentSemester(AcademicCalendar academicCalendar) {
-        this.moduleTracker.setCurrentSemester(academicCalendar);
-    }
-
-    @Override
-    public AcademicCalendar getCurrentSemester() {
-        return moduleTracker.getCurrentSemester();
     }
 
     @Override

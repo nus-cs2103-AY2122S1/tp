@@ -9,6 +9,8 @@ import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.ReadOnlyUserInfo;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -35,6 +37,13 @@ public interface Logic {
     ObservableList<Module> getFilteredModuleList();
 
     /**
+     * Returns the course completion progress list.
+     *
+     * @see Model#getMcProgressList()
+     */
+    ObservableList<McProgress> getMcProgressList();
+
+    /**
      * Returns the user prefs' module tracker file path.
      */
     Path getModuleTrackerFilePath();
@@ -48,4 +57,10 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns the user info including Mc goal and current semester.
+     * @return User info
+     */
+    ReadOnlyUserInfo getUserInfo();
 }

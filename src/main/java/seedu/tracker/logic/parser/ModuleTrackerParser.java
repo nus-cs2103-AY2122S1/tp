@@ -18,6 +18,8 @@ import seedu.tracker.logic.commands.InfoCommand;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.SetCommand;
 import seedu.tracker.logic.commands.TakeCommand;
+import seedu.tracker.logic.commands.UntakeCommand;
+import seedu.tracker.logic.commands.ViewCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,11 +58,14 @@ public class ModuleTrackerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case UntakeCommand.COMMAND_WORD:
+            return new UntakeCommandParser().parse(arguments);
+
         case TakeCommand.COMMAND_WORD:
             return new TakeCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -79,6 +84,9 @@ public class ModuleTrackerParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

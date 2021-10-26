@@ -6,6 +6,8 @@ import static seedu.tracker.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import seedu.tracker.model.tag.Tag;
+
 /**
  * Helper functions for handling strings.
  */
@@ -39,6 +41,22 @@ public class StringUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if the {@code moduleTag} contains the {@code tagName}.
+     *
+     * @param moduleTag cannot be null
+     * @param tagName cannot be null
+     */
+    public static boolean containsTagNameIgnoreCase(Tag moduleTag, String tagName) {
+        requireNonNull(moduleTag);
+        requireNonNull(tagName);
+
+        String preppedWord = tagName.trim().toLowerCase();
+        String preppedSentence = moduleTag.toString().toLowerCase();
+
+        return preppedWord.equals(preppedSentence);
     }
 
     /**

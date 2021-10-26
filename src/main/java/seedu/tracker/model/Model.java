@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -14,6 +16,18 @@ import seedu.tracker.model.module.Module;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
+
+    void setUserInfo(ReadOnlyUserInfo userInfo);
+
+    ReadOnlyUserInfo getUserInfo();
+
+    AcademicCalendar getCurrentSemester();
+
+    void setCurrentSemester(AcademicCalendar currentSemester);
+
+    Mc getMcGoal();
+
+    void setMcGoal(Mc mcGoal);
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,9 +67,9 @@ public interface Model {
     /** Returns the ModuleTracker */
     ReadOnlyModuleTracker getModuleTracker();
 
-    void setCurrentSemester(AcademicCalendar academicCalendar);
+    ObservableList<McProgress> getMcProgressList();
 
-    AcademicCalendar getCurrentSemester();
+    void updateMcProgress();
 
     /**
      * Returns true if a module with the same identity as {@code module} exists in the moduleTracker.

@@ -15,6 +15,7 @@ import seedu.tracker.commons.core.Messages;
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.module.Module;
 
@@ -24,7 +25,7 @@ import seedu.tracker.model.module.Module;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +34,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, personToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
         expectedModel.deleteModule(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +57,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, personToDelete);
 
-        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
         expectedModel.deleteModule(personToDelete);
         showNoPerson(expectedModel);
 

@@ -32,10 +32,21 @@ class SemesterTest {
     }
 
     @Test
-    public void equals_sameSemester_true() {
+    public void equalsTest() {
+        //same value, different object -> true
         Semester test1 = new Semester(1);
         Semester test2 = new Semester(1);
         assertEquals(true, test1.equals(test2));
+
+        //same object -> true
+        assertEquals(true, test1.equals(test1));
+
+        //null -> false
+        assertEquals(false, test1.equals(null));
+
+        //different value -> false
+        test2 = new Semester(2);
+        assertEquals(false, test1.equals(test2));
     }
 
     @Test
@@ -43,6 +54,24 @@ class SemesterTest {
         Semester test1 = new Semester(1);
         Semester test2 = new Semester(2);
         assertEquals(false, test1.equals(test2));
+    }
+
+    @Test
+    public void compareToTest() {
+        Semester semester1 = new Semester(1);
+        Semester semester4 = new Semester(4);
+
+        // left < right -> negative
+        int result = semester1.compareTo(semester4);
+        assertEquals(true, result < 0);
+
+        // left > right -> positive
+        result = semester4.compareTo(semester1);
+        assertEquals(true, result > 0);
+
+        // left = right -> 0
+        result = semester1.compareTo(semester1);
+        assertEquals(true, result == 0);
     }
 
 }

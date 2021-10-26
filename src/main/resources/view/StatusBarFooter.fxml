@@ -4,9 +4,17 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <GridPane styleClass="status-bar" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
-  <Label fx:id="saveLocationStatus" />
+  <HBox fx:id="footerContainer" alignment="BASELINE_CENTER">
+    <Label fx:id="saveLocationStatus"/>
+    <Region fx:id="blankRegion"/>
+    <Label fx:id="currentSemester" prefWidth="150"/>
+    <Label fx:id="mcGoal" prefWidth="150"/>
+  </HBox>
+
 </GridPane>

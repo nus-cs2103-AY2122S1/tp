@@ -1,6 +1,7 @@
 package seedu.tracker.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX;
 import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.tracker.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.tracker.logic.commands.AddCommand;
 import seedu.tracker.logic.commands.CommandResult;
 import seedu.tracker.logic.commands.ListCommand;
@@ -25,9 +27,12 @@ import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.JsonModuleTrackerStorage;
+import seedu.tracker.storage.JsonUserInfoStorage;
 import seedu.tracker.storage.JsonUserPrefsStorage;
 import seedu.tracker.storage.StorageManager;
 import seedu.tracker.testutil.ModuleBuilder;
@@ -43,10 +48,11 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonModuleTrackerStorage addressBookStorage =
-                new JsonModuleTrackerStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonModuleTrackerStorage moduleTrackerStorage =
+                new JsonModuleTrackerStorage(temporaryFolder.resolve("moduleTracker.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonUserInfoStorage userInfoStorage = new JsonUserInfoStorage(temporaryFolder.resolve("userInfo.json"));
+        StorageManager storage = new StorageManager(moduleTrackerStorage, userPrefsStorage, userInfoStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -71,11 +77,13 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonModuleTrackerStorage addressBookStorage =
-                new JsonModuleTrackerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonModuleTrackerStorage moduleTrackerStorage =
+                new JsonModuleTrackerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionModuleTracker.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonUserInfoStorage userInfoStorage =
+                new JsonUserInfoStorage(temporaryFolder.resolve("ioExceptionUserInfo.json"));
+        StorageManager storage = new StorageManager(moduleTrackerStorage, userPrefsStorage, userInfoStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -91,6 +99,16 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredModuleList().remove(0));
+    }
+
+    @Test
+    public void getMcProgressList_returnsDefaultList() {
+        ObservableList<McProgress> mcProgress = logic.getMcProgressList();
+        boolean isValid = true;
+        for (McProgress progress : mcProgress) {
+            isValid = isValid && progress.getCompleted().value == 0;
+        }
+        assertTrue(isValid);
     }
 
     /**
@@ -129,7 +147,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

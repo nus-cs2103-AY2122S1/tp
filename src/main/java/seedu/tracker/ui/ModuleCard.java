@@ -49,17 +49,25 @@ public class ModuleCard extends UiPart<Region> {
     /**
      * Creates a {@code ModuleCard} with the given {@code Module} and index to display.
      */
-    public ModuleCard(Module module, int displayedIndex) {
+    public ModuleCard(Module module, int displayedIndex, AcademicCalendar currentSemester) {
         super(FXML);
         this.module = module;
         id.setText(displayedIndex + ". ");
         code.setText(module.getCode().value);
         title.setText(module.getTitle().value);
-        mc.setText(String.valueOf(module.getMc().value));
+        mc.setText("(" + String.valueOf(module.getMc().value) + "MC)");
         description.setText(module.getDescription().value);
 
+        cardPane.setStyle("-fx-background-color:#434343ff;");
         if (module.hasAcademicCalendar()) {
             academicCalendar.getChildren().add(new Label(getFormattedAcademicCalendar(module)));
+            if (module.getAcademicCalendar().compareTo(currentSemester) < 0) {
+                cardPane.setStyle("-fx-background-color:#64bc2666;"); //module has been finished
+            } else if (module.getAcademicCalendar().compareTo(currentSemester) > 0) {
+                cardPane.setStyle("-fx-background-color:#ea160166;"); //module planned to take
+            } else {
+                cardPane.setStyle("-fx-background-color:#fad20266;"); //module taking
+            }
         }
 
         module.getTags().stream()
@@ -71,7 +79,7 @@ public class ModuleCard extends UiPart<Region> {
         AcademicCalendar academicCalendar = module.getAcademicCalendar();
         AcademicYear year = academicCalendar.getAcademicYear();
         Semester semester = academicCalendar.getSemester();
-        return String.format("y%ss%s", year, semester);
+        return String.format("year%s sem%s", year, semester);
     }
 
     @Override
