@@ -45,7 +45,7 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
 
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DASH_DAY_SHIFT, PREFIX_DASH_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DASH_DAY_SHIFT, PREFIX_DASH_TIME, PREFIX_DATE);
         checkPrefixes(argMultimap);
 
         int slotNum = ViewShiftCommand.INVALID_SLOT_NUMBER;
