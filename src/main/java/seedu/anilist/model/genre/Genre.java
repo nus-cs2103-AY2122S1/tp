@@ -2,7 +2,8 @@ package seedu.anilist.model.genre;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
+
+import seedu.anilist.logic.commands.GenreListCommand;
 
 /**
  * Represents a Genre of an Anime in the anime list.
@@ -12,7 +13,7 @@ public class Genre {
 
     public static final String MESSAGE_CONSTRAINTS = "Genres must be inside the list of available genres.\n"
             + "To view the list, enter: "
-            + "genre " + PREFIX_ACTION + "list";
+            + GenreListCommand.COMMAND_WORD;
 
     public final String genreName;
 

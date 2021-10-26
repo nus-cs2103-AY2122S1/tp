@@ -15,6 +15,7 @@ import seedu.anilist.logic.commands.DeleteCommand;
 import seedu.anilist.logic.commands.ExitCommand;
 import seedu.anilist.logic.commands.FindCommand;
 import seedu.anilist.logic.commands.GenreCommand;
+import seedu.anilist.logic.commands.GenreListCommand;
 import seedu.anilist.logic.commands.HelpCommand;
 import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.logic.commands.RenameCommand;
@@ -72,6 +73,9 @@ public class AnimeListParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case GenreListCommand.COMMAND_WORD:
+            return new GenreListCommand();
 
         case UpdateEpisodeCommand.COMMAND_WORD:
             return new UpdateEpisodeCommandParser().parse(arguments);
