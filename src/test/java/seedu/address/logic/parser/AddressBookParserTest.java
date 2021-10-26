@@ -223,7 +223,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_reserve() throws Exception {
         assertTrue(parser.parseCommand(
-                ReserveCommand.COMMAND_WORD + " 2 p/98765432 at/2021-11-11 2030") instanceof ReserveCommand
+                ReserveCommand.COMMAND_WORD + " 2 p/98765432 at/2021-11-11 2000") instanceof ReserveCommand
         );
     }
 
