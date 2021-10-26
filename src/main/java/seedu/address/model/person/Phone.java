@@ -33,6 +33,13 @@ public class Phone {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another Phone's value using Java's compareTo function
+     */
+    public int compareTo(Phone e) {
+        return value.compareTo(e.value);
+    }
+
     @Override
     public String toString() {
         return value;

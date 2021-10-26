@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AttributeContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -65,6 +66,14 @@ public class AddressBookParserTest {
                 + " src/test/data/ImportTest/test.json");
         Path testPath = Paths.get("src/test/data/ImportTest/test.json");
         assertEquals(new ImportCommand(testPath), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD
+                + " n/");
+        Prefix name = new Prefix("n/");
+        assertEquals(new SortCommand(name, false), command);
     }
 
     @Test

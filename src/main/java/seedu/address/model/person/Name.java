@@ -39,6 +39,14 @@ public class Name {
     }
 
 
+    /**
+     * Compares this with another Name using Java's compareTo function
+     */
+    public int compareTo(Name n) {
+        return fullName.compareTo(n.fullName);
+    }
+
+
     @Override
     public String toString() {
         return fullName;
