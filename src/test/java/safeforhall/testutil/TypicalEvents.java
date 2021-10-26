@@ -64,6 +64,7 @@ public class TypicalEvents {
     // Manually added
     public static final Event POOL = new EventBuilder().withEventName("pool")
             .withEventDate("10-11-2021")
+            .withEventTime("1800")
             .withVenue("pool room")
             .withCapacity("10")
             .withResidentList("George Best, Carl Kurz")
@@ -71,6 +72,7 @@ public class TypicalEvents {
 
     public static final Event HACKERS = new EventBuilder().withEventName("hackers")
             .withEventDate("01-10-2021")
+            .withEventTime("2000")
             .withVenue("lab")
             .withCapacity("20")
             .withResidentList("Benson Meier")

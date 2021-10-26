@@ -22,6 +22,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 import safeforhall.model.person.LastDate;
@@ -118,7 +119,8 @@ public class ImportCommandTest {
     public void execute_readCsvWithEvents_success() {
         AddressBook addressBook = TypicalPersons.getTypicalAddressBook();
         Event event = new Event(new EventName("Gymming"), new EventDate("09-09-2021"),
-                new Venue("Gym"), new Capacity("10"), new ResidentList(TypicalPersons.AMY.toString()));
+                new EventTime("0830"), new Venue("Gym"), new Capacity("10"),
+                new ResidentList(TypicalPersons.AMY.toString()));
         ArrayList<Event> events = new ArrayList<>();
         events.add(event);
         addressBook.setEvents(events);
@@ -126,7 +128,8 @@ public class ImportCommandTest {
 
         AddressBook expectedAddressBook = TypicalPersons.getTypicalImportedAddressBook();
         Event expectedEvent = new Event(new EventName("Gymming"), new EventDate("09-09-2021"),
-                new Venue("Gym"), new Capacity("10"), new ResidentList(ResidentList.DEFAULT_LIST));
+                new EventTime("0830"), new Venue("Gym"), new Capacity("10"),
+                new ResidentList(ResidentList.DEFAULT_LIST));
         ArrayList<Event> expectedEvents = new ArrayList<>();
         expectedEvents.add(expectedEvent);
         expectedAddressBook.setEvents(expectedEvents);

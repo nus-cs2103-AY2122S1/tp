@@ -12,7 +12,6 @@ import static safeforhall.logic.commands.CommandTestUtil.VALID_DATE_FOOTBALL_TRA
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VENUE_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.VENUE_DESC_FOOTBALL_TRAINING;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
 

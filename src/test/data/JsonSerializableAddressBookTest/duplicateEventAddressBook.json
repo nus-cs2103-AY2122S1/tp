@@ -3,12 +3,14 @@
   "events" : [ {
     "eventName" : "basketball",
     "eventDate" : "10-10-2021",
+    "eventTime" : "1000",
     "venue" : "basketball court",
     "capacity" : "5",
     "residents" : ""
   }, {
     "eventName" : "basketball",
     "eventDate" : "10-10-2021",
+    "eventTime" : "1000",
     "venue" : "basketball court",
     "capacity" : "5",
     "residents" : ""

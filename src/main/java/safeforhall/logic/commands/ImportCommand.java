@@ -82,8 +82,8 @@ public class ImportCommand extends Command {
         List<Event> eventList = model.getAddressBook().getEventList();
         ArrayList<Event> eventListRemovedResidents = new ArrayList<>();
         for (Event event: eventList) {
-            Event newEvent = new Event(event.getEventName(), event.getEventDate(), event.getVenue(),
-                    event.getCapacity(), new ResidentList(ResidentList.DEFAULT_LIST));
+            Event newEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
+                    event.getVenue(), event.getCapacity(), new ResidentList(ResidentList.DEFAULT_LIST));
             eventListRemovedResidents.add(newEvent);
         }
         newAddressBook.setEvents(eventListRemovedResidents);

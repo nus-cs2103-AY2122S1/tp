@@ -4,42 +4,49 @@
   "events": [ {
     "eventName" : "basketball",
     "eventDate" : "10-10-2021",
+    "eventTime" : "0830",
     "venue" : "basketball court",
     "capacity" : "5",
     "residents" : ""
   }, {
     "eventName" : "volleyball",
     "eventDate" : "12-10-2021",
+    "eventTime" : "0800",
     "venue" : "volleyball court",
     "capacity" : "6",
     "residents" : "Daniel Meier"
   }, {
     "eventName" : "powerlifting",
     "eventDate" : "15-10-2021",
+    "eventTime" : "0830",
     "venue" : "gym",
     "capacity" : "7",
     "residents" : "Elle Meyer, Fiona Kunz, George Best"
   }, {
     "eventName" : "swim",
     "eventDate" : "10-09-2021",
+    "eventTime" : "0800",
     "venue" : "swimming pool",
     "capacity" : "8",
     "residents" : "George Best"
   }, {
     "eventName" : "band",
     "eventDate" : "10-11-2021",
+    "eventTime" : "0830",
     "venue" : "band room",
     "capacity" : "9",
     "residents" : "Carl Kurz, Benson Meier"
   }, {
     "eventName" : "road relay",
     "eventDate" : "12-12-2021",
+    "eventTime" : "1830",
     "venue" : "track",
     "capacity" : "10",
     "residents" : "George Best"
   }, {
     "eventName" : "dance",
     "eventDate" : "01-11-2021",
+    "eventTime" : "1230",
     "venue" : "studio",
     "capacity" : "11",
     "residents" : "George Best, Carl Kurz, Benson Meier"
