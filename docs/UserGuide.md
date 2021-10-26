@@ -98,7 +98,7 @@ Here is a reference guide to the features and potential uses of ModuLink.
 
 #### 1.1 Create your own profile : `create`
 
-Creates your user profile. You can also choose to add modules and indicate your group status for each module. Note, in order to start using ModuLink, you are **required** to create a new profile should you not have one.
+Creates your user profile. You can also choose to add modules and indicate your group status for each module. :warning: in order to start using ModuLink, you are **required** to create a new profile should you not have one.
 
 Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP_STATUS]]...`
 
@@ -154,7 +154,7 @@ Adds the user-specified module(s) to your own profile.
 Format: `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`
 
 Examples:
-* `addMod mod/CS2103T Need a member mod/CS1231S`
+* `addMod mod/CS2103T Need member mod/CS1231S`
 * `addMod mod/CS2220 mod/CS1231S`
   <br>
   <br>
@@ -199,7 +199,7 @@ Examples:
 
 #### 3.1 Add a profile as a favorite : `addFav`
 
-Adds a profile to your favourites list.
+Adds a profile to your favourites list. Favourited profiles will have a star beside their name.
 
 Format: `addFav STUDENT_ID`
 
@@ -306,7 +306,7 @@ Examples:
 
 #### 5.1 Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page. Upon entering the command, a pop-up window will appear. Follow the link on the window to access the User Guide.
 
 Format: `help`
 <br>
