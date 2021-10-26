@@ -17,7 +17,11 @@ public class HelpCommand extends Command {
 
     public static final String DESCRIPTION = "Shows program usage instructions.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + DESCRIPTION + "\nExample: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": " + DESCRIPTION + "\n"
+            + "Parameters: " + "[COMMAND]\n"
+            + "Example: " + COMMAND_WORD + " add";
+
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
@@ -63,7 +67,7 @@ public class HelpCommand extends Command {
                 break;
 
             case ClearCommand.COMMAND_WORD:
-                commandResult = new CommandResult(ClearCommand.DESCRIPTION);
+                commandResult = new CommandResult(ClearCommand.MESSAGE_USAGE);
                 break;
 
             case FindCommand.COMMAND_WORD:
@@ -75,7 +79,7 @@ public class HelpCommand extends Command {
                 break;
 
             case ListCommand.COMMAND_WORD:
-                commandResult = new CommandResult(ListCommand.DESCRIPTION);
+                commandResult = new CommandResult(ListCommand.MESSAGE_USAGE);
                 break;
 
             case ExitCommand.COMMAND_WORD:
