@@ -20,6 +20,7 @@ import seedu.tuitione.model.remark.Remark;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
+    public static final int MAX_LESSON_SIZE = 10;
 
     // Identity fields
     private final Name name;
@@ -31,7 +32,6 @@ public class Student {
     private final Grade grade;
     private final Set<Remark> remarks = new HashSet<>();
     private final List<Lesson> lessons = new ArrayList<>();
-    public static final int MAX_LESSON_SIZE = 10;
 
 
     /**
