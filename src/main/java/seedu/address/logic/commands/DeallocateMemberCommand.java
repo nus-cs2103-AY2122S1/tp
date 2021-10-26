@@ -47,10 +47,10 @@ public class DeallocateMemberCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         List<Facility> lastShownFacilityList = model.getFilteredFacilityList();
-        if (memberIndex.getZeroBased() > lastShownPersonList.size()) {
+        if (memberIndex.getOneBased() > lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
         }
-        if (facilityIndex.getZeroBased() > lastShownFacilityList.size()) {
+        if (facilityIndex.getOneBased() > lastShownFacilityList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
         }
         Person toBeDeallocated = lastShownPersonList.get(memberIndex.getZeroBased());

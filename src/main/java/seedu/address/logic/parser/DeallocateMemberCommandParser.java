@@ -27,7 +27,7 @@ public class DeallocateMemberCommandParser implements Parser<DeallocateMemberCom
         Index facilityIndex;
         DayOfWeek day;
 
-        if (trimmedArgs.length > 3) {
+        if (trimmedArgs.length != 3) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeallocateMemberCommand.MESSAGE_USAGE));
         }

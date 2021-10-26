@@ -28,7 +28,7 @@ public class AllocateMemberCommandParser implements Parser<AllocateMemberCommand
         Index facilityIndex;
         DayOfWeek day;
 
-        if (trimmedArgs.length > 3) {
+        if (trimmedArgs.length != 3) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AllocateMemberCommand.MESSAGE_USAGE));
         }

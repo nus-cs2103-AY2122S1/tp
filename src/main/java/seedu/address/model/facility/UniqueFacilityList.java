@@ -13,9 +13,6 @@ import seedu.address.model.facility.exceptions.DuplicateFacilityException;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 import seedu.address.model.person.Person;
 
-
-
-
 /**
  * Represents a list of facilities.
  */
@@ -133,7 +130,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
                 facilityCount++;
                 index++;
             }
-            this.replaceFacility(facility, toEdit);
+            this.setFacility(facility, toEdit);
         }
     }
 

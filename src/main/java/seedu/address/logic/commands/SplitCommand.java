@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FACILITIES;
+
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -40,6 +42,7 @@ public class SplitCommand extends Command {
         requireNonNull(model);
         PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(dayNumber);
         model.split(predicate);
+        model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault())));
     }
