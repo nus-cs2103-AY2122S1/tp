@@ -84,5 +84,4 @@ public class UniFyParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
