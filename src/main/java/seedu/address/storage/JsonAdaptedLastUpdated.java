@@ -27,7 +27,6 @@ public class JsonAdaptedLastUpdated {
      */
     public JsonAdaptedLastUpdated(LastUpdatedDate source) {
         date = source.getLastUpdatedDate().value;
-        System.out.println("HALLO: " + date);
     }
 
     /**

@@ -3,6 +3,10 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the amount of money and money-related fields in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidMonetaryField(String)} (String)}
+ */
 public class Money {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -15,6 +19,11 @@ public class Money {
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     public final String value;
 
+    /**
+     * Constructs a {@code Money}.
+     *
+     * @param amount Amount of money.
+     */
     public Money(String amount) {
         requireNonNull(amount);
         checkArgument(isValidMonetaryField(amount));

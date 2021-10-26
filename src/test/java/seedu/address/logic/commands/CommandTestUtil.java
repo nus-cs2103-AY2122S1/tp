@@ -112,6 +112,7 @@ public class CommandTestUtil {
     public static final String VALID_LESSON_RATES = "50.50";
     public static final String VALID_SUBJECT = "Language Arts";
     public static final String VALID_OUTSTANDING_FEES = "100.00";
+    public static final String VALID_OUTSTANDING_FEES_AFTER_PAYMENT = "80.00";
     public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
     public static final String VALID_HOMEWORK_POETRY = "Poetry draft";
     public static final String VALID_PAYMENT = "20.00";

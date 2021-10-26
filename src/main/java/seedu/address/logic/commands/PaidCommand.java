@@ -1,11 +1,19 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
@@ -20,12 +28,9 @@ import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-
+/**
+ * Pays the specific lesson a specified amount. Updated Outstanding Fees.
+ */
 public class PaidCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Pay Lesson's Outstanding Fees";
@@ -54,9 +59,13 @@ public class PaidCommand extends UndoableCommand {
     private Person personBeforeLessonPaid;
     private Person personAfterLessonPaid;
 
+    /**
+     * @param index of the person in the filtered person list to pay.
+     * @param indexToEdit to edit.
+     * @param payment amount to the lesson.
+     */
     public PaidCommand(Index index, Index indexToEdit, Money payment) {
-        requireNonNull(index);
-        requireNonNull(indexToEdit);
+        requireAllNonNull(index, indexToEdit, payment);
 
         this.index = index;
         this.indexToEdit = indexToEdit;
@@ -110,7 +119,7 @@ public class PaidCommand extends UndoableCommand {
      * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Lesson createEditedLesson(Lesson lessonToEdit, Money payment) {
+    private static Lesson createEditedLesson(Lesson lessonToEdit, Money payment) throws CommandException {
         assert lessonToEdit != null;
 
         Date copiedDate = lessonToEdit.getStartDate();
@@ -119,7 +128,12 @@ public class PaidCommand extends UndoableCommand {
         Set<Homework> copiedHomeworkSet = lessonToEdit.getHomework();
         LessonRates copiedLessonRates = lessonToEdit.getLessonRates();
 
-        OutstandingFees updatedOutstandingFees = lessonToEdit.getOutstandingFees().pay(payment);
+        OutstandingFees updatedOutstandingFees;
+        try {
+            updatedOutstandingFees = lessonToEdit.getOutstandingFees().pay(payment);
+        } catch (IllegalValueException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         return lessonToEdit.isRecurring()
                 ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject,

@@ -2,7 +2,7 @@ package seedu.address.model.lesson;
 
 /**
  * Represents the amount per lesson payable in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidMonetaryField(String)} (String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidMonetaryField(String)} (String)
  */
 public class LessonRates extends Money {
 

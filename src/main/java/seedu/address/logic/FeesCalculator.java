@@ -1,5 +1,15 @@
 package seedu.address.logic;
 
+import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Date;
@@ -13,16 +23,6 @@ import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
-
-import java.time.DayOfWeek;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Responsible for the automated updates and calculation of each lesson's fees.
@@ -61,7 +61,7 @@ public class FeesCalculator implements Calculator {
     private Person createEditedPerson(Person personToEdit) {
         assert personToEdit != null;
 
-       List<Lesson> lessonList = new ArrayList<>(personToEdit.getLessons());
+        List<Lesson> lessonList = new ArrayList<>(personToEdit.getLessons());
 
         for (int i = 0; i < lessonList.size(); i++) {
             lessonList.set(i, updateLessonOutstandingFeesField(lessonList.get(i)));

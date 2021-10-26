@@ -1,10 +1,10 @@
 package seedu.address.logic;
 
-import seedu.address.model.Model;
-import seedu.address.model.lesson.Lesson;
-
 import java.util.Optional;
 import java.util.Set;
+
+import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 
 public interface Calculator {
     /**

@@ -1,9 +1,14 @@
 package seedu.address.model.lesson;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 /**
  * Represents the Outstanding Fees for the lesson in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidMonetaryField(String)} (String)
  */
 public class OutstandingFees extends Money {
+    public static final String MESSAGE_PAY_TOO_MUCH = "Payment amount exceeds current "
+            + "Outstanding Fees. Invalid transcation.";
 
     /**
      * Constructs a {@code OutstandingFees}.
@@ -24,9 +29,18 @@ public class OutstandingFees extends Money {
         return value.isEmpty();
     }
 
-
-    public OutstandingFees pay(Money amount) {
+    /**
+     * Returns the outstanding fees after payment.
+     *
+     * @param amount Amount paid.
+     * @return Updated OutstandingFees.
+     */
+    public OutstandingFees pay(Money amount) throws IllegalValueException {
         float newOutstandingFees = getMonetaryValueInFloat() - amount.getMonetaryValueInFloat();
+
+        if (newOutstandingFees < 0) {
+            throw new IllegalValueException(MESSAGE_PAY_TOO_MUCH);
+        }
         String parseValueToString = Float.toString(newOutstandingFees);
         return new OutstandingFees(parseValueToString);
     }

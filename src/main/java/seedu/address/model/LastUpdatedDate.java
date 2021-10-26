@@ -16,7 +16,8 @@ public class LastUpdatedDate {
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format uuuu-MM-dd "
             + "and adhere to the following constraints:\n"
             + "1. dd, MM and uuuu are numerical characters.\n"
-            + "2. Must be a valid date for the year.";
+            + "2. Must be a valid date for the year.\n"
+            + "3. Must be a date that has not passed.";
 
     private static final String VALIDATION_REGEX_DATE = "^[0-9]{4}-(0[1-9]|1[0-2])-[0-9]{2}";
     private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
@@ -54,12 +55,15 @@ public class LastUpdatedDate {
      */
     public static boolean isValidLastUpdatedDate(String test) {
         boolean isValid = true;
+        LocalDate testDate = null;
         try {
-            LocalDate.parse(test, FORMATTER);
+            testDate = LocalDate.parse(test, FORMATTER);
         } catch (DateTimeParseException e) {
             isValid = false;
         } finally {
-            return test.matches(VALIDATION_REGEX_DATE) && isValid;
+            return test.matches(VALIDATION_REGEX_DATE)
+                    && isValid //check would short circuit here and will not throw NullPointerException
+                    && testDate.isAfter(LocalDate.now());
         }
     }
 

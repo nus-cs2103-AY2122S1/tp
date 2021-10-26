@@ -1,11 +1,11 @@
 package seedu.address.model.person;
 
-import seedu.address.model.lesson.Lesson;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Calculator.getStudentTotalFees;
 
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Calculator.getStudentTotalFees;
+import seedu.address.model.lesson.Lesson;
 
 /**
  * Represents a Person's outstanding fees in TAB.
