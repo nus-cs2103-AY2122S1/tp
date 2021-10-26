@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -39,5 +43,27 @@ public class TypeTest {
         // valid Type
         assertTrue(Type.isValidType("student"));
         assertTrue(Type.isValidType("tutor"));
+    }
+
+    @Test
+    public void isEqualType() {
+        Type type = new Type("student");
+        Type differentType = new Type("tutor");
+        Type sameType = new Type("student");
+
+        // Different Type
+        assertFalse(type.equals(differentType));
+
+        // Same Object
+        assertTrue(type.equals(type));
+
+        // Different Objects Same Type
+        assertTrue(type.equals(sameType));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(VALID_TYPE_AMY.hashCode(), VALID_TYPE_AMY.hashCode());
+        assertNotEquals(VALID_TYPE_AMY.hashCode(), VALID_TYPE_BOB.hashCode());
     }
 }

@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -36,5 +40,27 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+    }
+
+    @Test
+    public void isEqualName() {
+        Name name = new Name("peter jack");
+        Name differentName = new Name("David Roger Jackson Ray Jr 2nd");
+        Name sameName = new Name("peter jack");
+
+        // Different Name
+        assertFalse(name.equals(differentName));
+
+        // Same Object
+        assertTrue(name.equals(name));
+
+        // Different Objects Same Name
+        assertTrue(name.equals(sameName));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(VALID_NAME_AMY.hashCode(), VALID_NAME_AMY.hashCode());
+        assertNotEquals(VALID_NAME_AMY.hashCode(), VALID_NAME_BOB.hashCode());
     }
 }

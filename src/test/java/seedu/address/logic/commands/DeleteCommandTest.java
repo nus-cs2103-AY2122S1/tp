@@ -142,8 +142,6 @@ public class DeleteCommandTest {
 
         showPersons(model, personsToDelete);
 
-        System.out.println(model.getFilteredPersonList());
-
         StringBuilder resultSb = new StringBuilder(DeleteCommand.MESSAGE_DELETE_ALL_SHOWN_PERSONS_SUCCESS);
         for (Person person : personsToDelete) {
             resultSb.append("\n");
