@@ -165,11 +165,20 @@ Examples:
 
 #### Adding contacts to a folder: `echo`
 
-To organize and group contacts into an arbitrary folder
-Format: `echo CONTACT_INDEX >> FOLDER_NAME`
+To organize and group contacts into an arbitrary folder.
+
+Format:
+
+ For adding a single contact: `echo CONTACT_INDEX >> FOLDER_NAME`
+
+ For adding multiple contacts: `echo CONTACT_INDEX CONTACT_INDEX  >> FOLDER_NAME`
+
 - `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
+    - Command fails if such a contact index does not exit.
+    - Command fails if contact has already been added before.
+    
 - `FOLDER_NAME` must be an existing folder
-    - Command fails if there is no existing folder with that name
+    - Command fails if there is no existing folder with that name.
 
 #### Listing all folders: `ls -folders`
 
