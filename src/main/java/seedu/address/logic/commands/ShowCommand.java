@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -38,11 +40,12 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows performance analysis of a student, an assessment or a group. "
             + "Parameters: "
-            + "(INDEX | "
+            + "(<index> | "
             + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name> | "
-            + PREFIX_GROUP + "<group_name>)";
+            + PREFIX_GROUP + "<group_name>)"
+            + "[" + PREFIX_FILE + "<export_location>]";
 
     public static final String MESSAGE_SUCCESS = "Info requested successfully";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
@@ -56,40 +59,46 @@ public class ShowCommand extends Command {
     private ID id;
     private Assessment assessment;
     private Group group;
+    private Path savePath;
 
     /**
      * Constructor for a {@code ShowCommand} with given {@code Index}.
      */
-    public ShowCommand(Index index) {
+    public ShowCommand(Index index, Path savePath) {
         setIndex(index);
+        setSavePath(savePath);
     }
 
     /**
      * Constructor for a {@code ShowCommand} with given {@code Name}.
      */
-    public ShowCommand(Name name) {
+    public ShowCommand(Name name, Path savePath) {
         setName(name);
+        setSavePath(savePath);
     }
 
     /**
      * Constructor for a {@code ShowCommand} with given {@code ID}.
      */
-    public ShowCommand(ID id) {
+    public ShowCommand(ID id, Path savePath) {
         setId(id);
+        setSavePath(savePath);
     }
 
     /**
      * Constructor for a {@code ShowCommand} with given {@code Assessment}.
      */
-    public ShowCommand(Assessment assessment) {
+    public ShowCommand(Assessment assessment, Path savePath) {
         setAssessment(assessment);
+        setSavePath(savePath);
     }
 
     /**
      * Constructor for a {@code ShowCommand} with given {@code ShowCommand}.
      */
-    public ShowCommand(Group group) {
+    public ShowCommand(Group group, Path savePath) {
         setGroup(group);
+        setSavePath(savePath);
     }
 
     @Override
@@ -120,7 +129,7 @@ public class ShowCommand extends Command {
 
         Info info = new Info(matchedStudent);
         StudentStatistics statistics = new StudentStatistics(matchedStudent);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart(), savePath);
     }
 
     /**
@@ -146,7 +155,7 @@ public class ShowCommand extends Command {
 
         Info info = new Info(matchedStudent);
         StudentStatistics statistics = new StudentStatistics(matchedStudent);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart(), savePath);
     }
 
     /**
@@ -165,7 +174,7 @@ public class ShowCommand extends Command {
 
         Info info = new Info(matchedAssessment);
         AssessmentStatistics statistics = new AssessmentStatistics(matchedAssessment);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram(), savePath);
     }
 
     /**
@@ -187,7 +196,7 @@ public class ShowCommand extends Command {
 
         Info info = new Info(matchedGroup);
         GroupStatistics statistics = new GroupStatistics(matchedGroup, model);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart(), savePath);
     }
 
     /**
@@ -254,6 +263,10 @@ public class ShowCommand extends Command {
         this.group = group;
     }
 
+    public void setSavePath(Path savePath) {
+        this.savePath = savePath;
+    }
+
     public Optional<Index> getIndex() {
         return Optional.ofNullable(index);
     }
@@ -272,6 +285,10 @@ public class ShowCommand extends Command {
 
     public Optional<Group> getGroup() {
         return Optional.ofNullable(group);
+    }
+
+    public Optional<Path> getSavePath() {
+        return Optional.ofNullable(savePath);
     }
 
     /**
