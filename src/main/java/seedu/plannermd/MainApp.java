@@ -90,7 +90,9 @@ public class MainApp extends Application {
             initialData = new PlannerMd();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Model model = new ModelManager(initialData, userPrefs);
+        model.updateFilteredAppointmentList(Model.PREDICATE_SHOW_TODAY_APPOINTMENT);
+        return model;
     }
 
     private void initLogging(Config config) {

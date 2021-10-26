@@ -198,7 +198,6 @@ public class ModelManager implements Model {
     @Override
     public void addAppointment(Appointment appointment) {
         plannerMd.addAppointment(appointment);
-        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override

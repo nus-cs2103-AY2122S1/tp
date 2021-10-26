@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
@@ -25,7 +26,8 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
+    Predicate<Appointment> PREDICATE_SHOW_TODAY_APPOINTMENT =
+            AppointmentFilters.todayAppointmentFilter().collectAllFilters();
 
     /**
      * Changes current state to  {@code state}.
