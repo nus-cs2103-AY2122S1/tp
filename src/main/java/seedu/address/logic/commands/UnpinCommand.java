@@ -1,10 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-import java.util.Set;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,27 +13,31 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
+import java.util.List;
+import java.util.Set;
+
+import static java.util.Objects.requireNonNull;
 
 
 /**
- * Pins a person identified using it's displayed index from the address book.
+ * Unpins a person identified using it's displayed index from the address book.
  */
-public class PinCommand extends Command {
+public class UnpinCommand extends Command {
 
-    public static final String COMMAND_WORD = "pin";
+    public static final String COMMAND_WORD = "unpin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Pins the person identified by the index number "
+            + ": Unpins the person identified by the index number "
             + "used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_PINNED_PERSON_SUCCESS = "Pinned Person: %1$s";
-    public static final String MESSAGE_PERSON_ALREADY_PINNED_FAILURE = "Person is already pinned!";
+    public static final String MESSAGE_UNPINNED_PERSON_SUCCESS = "Unpinned Person: %1$s";
+    public static final String MESSAGE_PERSON_NOT_PINNED_FAILURE = "Person is not pinned!";
 
     private final Index targetIndex;
 
-    public PinCommand(Index targetIndex) {
+    public UnpinCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,22 +51,22 @@ public class PinCommand extends Command {
         }
 
         Person personToPin = lastShownList.get(targetIndex.getZeroBased());
-        if (personToPin.isPinned()) {
-            throw new CommandException(MESSAGE_PERSON_ALREADY_PINNED_FAILURE);
+        if (!personToPin.isPinned()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_PINNED_FAILURE);
         }
-        Person pinnedPerson = createPinnedPerson(personToPin);
+        Person pinnedPerson = createUnpinnedPerson(personToPin);
         model.setPerson(personToPin, pinnedPerson);
-        return new CommandResult(String.format(MESSAGE_PINNED_PERSON_SUCCESS, personToPin));
+        return new CommandResult(String.format(MESSAGE_UNPINNED_PERSON_SUCCESS, personToPin));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PinCommand // instanceof handles nulls
-                && targetIndex.equals(((PinCommand) other).targetIndex)); // state check
+                || (other instanceof UnpinCommand // instanceof handles nulls
+                && targetIndex.equals(((UnpinCommand) other).targetIndex)); // state check
     }
 
-    private Person createPinnedPerson(Person personToPin) {
+    private Person createUnpinnedPerson(Person personToPin) {
         assert personToPin != null;
         Name updatedName = personToPin.getName();
         Phone updatedPhone = personToPin.getPhone();
@@ -75,7 +74,7 @@ public class PinCommand extends Command {
         Address updatedAddress = personToPin.getAddress();
         Set<Tag> updatedTags = personToPin.getTags();
         Birthday updatedBirthday = personToPin.getBirthday().orElse(null);
-        assert !personToPin.isPinned() : "Person is already pinned!";
+        assert personToPin.isPinned() : "Person is not pinned!";
         Pin updatedPin = personToPin.getPin().togglePin();
         return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags, updatedBirthday, updatedPin);

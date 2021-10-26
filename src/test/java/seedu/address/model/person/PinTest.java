@@ -53,7 +53,7 @@ public class PinTest {
         Pin firstPin = new Pin(true);
         Pin secondPin = new Pin(false);
 
-        assertEquals(firstPin, secondPin.unPin());
-        assertEquals(secondPin, firstPin.unPin());
+        assertEquals(firstPin, secondPin.togglePin());
+        assertEquals(secondPin, firstPin.togglePin());
     }
 }

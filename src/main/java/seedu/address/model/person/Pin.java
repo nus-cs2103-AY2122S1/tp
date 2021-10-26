@@ -27,6 +27,10 @@ public class Pin {
         isPinned = pinString.equals(PINNED_STRING);
     }
 
+    public boolean isPinned() {
+        return isPinned;
+    }
+
     public static boolean isValidPinStatus(String pinStatus) {
         return pinStatus.equals(PINNED_STRING) || pinStatus.equals(NOT_PINNED_STRING);
     }
@@ -40,7 +44,7 @@ public class Pin {
         return otherPin.isPinned == this.isPinned;
     }
 
-    public Pin unPin() {
+    public Pin togglePin() {
         return new Pin(!isPinned);
     }
 

@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Comparable<Person> {
 
     // Identity fields
     private final Name name;
@@ -70,6 +70,10 @@ public class Person {
         return pin;
     }
 
+    public boolean isPinned() {
+        return pin.isPinned();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -117,6 +121,20 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getBirthday().equals(getBirthday())
                 && otherPerson.getPin().equals(getPin());
+    }
+
+    @Override
+    public int compareTo(Person otherPerson) {
+        if (otherPerson.isPinned() && this.isPinned()) {
+            return 0;
+        }
+        if (otherPerson.isPinned()) {
+            return 1;
+        }
+        if (this.isPinned()) {
+            return -1;
+        }
+        return 0;
     }
 
     @Override
