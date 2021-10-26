@@ -8,6 +8,7 @@ import static safeforhall.logic.commands.CommandTestUtil.VALID_DATE_VOLLEYBALL;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VENUE_BASKETBALL;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VENUE_FOOTBALL_TRAINING;
+import static safeforhall.testutil.TypicalEvents.BAND;
 import static safeforhall.testutil.TypicalEvents.BASKETBALL;
 import static safeforhall.testutil.TypicalEvents.DANCE;
 import static safeforhall.testutil.TypicalEvents.SWIM;
@@ -63,6 +64,13 @@ public class EventTest {
         assertEquals(1, SWIM.numOfUnvaccinatedResidents());
 
         assertEquals(2, DANCE.numOfUnvaccinatedResidents());
+    }
+
+    @Test
+    public void isOver() {
+        assertFalse(BASKETBALL.isOver());
+
+        assertTrue(SWIM.isOver());
     }
 
     @Test
