@@ -17,7 +17,7 @@ import seedu.address.model.group.Group;
  */
 public class DeleteGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "-dg";
+    public static final String COMMAND_WORD = "-d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the group identified by the index number used in the displayed group list.\n"

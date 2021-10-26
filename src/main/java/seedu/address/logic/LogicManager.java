@@ -17,6 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonWithDetails;
@@ -92,6 +93,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableValue<PersonWithDetails> getViewingPersonWithDetails() {
         return model.getViewingPersonWithDetails();
+    }
+
+    @Override
+    public ObservableValue<GroupWithDetails> getViewingGroupWithDetails() {
+        return model.getViewingGroupWithDetails();
     }
 
     @Override
