@@ -63,11 +63,13 @@ public interface Logic {
     /** Returns an unmodifiable view of the task list to be displayed on the GUI. */
     ObservableList<Task> getDisplayTaskList();
 
-    /** Displays {@code person}'s task list on the GUI. */
-    void displayPersonTaskList(Person person);
-
     /** Gets important statistics information relating to tasks. */
     ObservableList<PieChart.Data> getStatistics();
 
-    public TaskListManager getTaskListManager();
+    /**
+     * Returns the {@code ModelManager}'s {@code TaskListManager}.
+     */
+    TaskListManager getTaskListManager();
+
+    ObservableList<Person> getObservablePersonList();
 }

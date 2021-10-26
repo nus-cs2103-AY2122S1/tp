@@ -52,14 +52,21 @@ public class AllTaskListPanel extends UiPart<Region> {
         allTaskListView.setCellFactory(listView -> new AllTaskListPanel.AllTaskListViewCell());
     }
 
-    public TreeView<Tuple> getAllTaskListView() {
-        return allTaskListView;
+    /**
+     * Updates the TreeView with the newly updated {@code personList} to show changes.
+     */
+    public void updateTreeView(ObservableList<Person> personList) {
+        if (personList.isEmpty()) {
+            allTaskListView.getRoot().getChildren().clear();
+        } else {
+            updateRootNode(personList);
+        }
     }
 
     /**
      * Updates the root node with the newly updated {@code personList} to show changes.
      */
-    public void updateRootNode(ObservableList<Person> personList) {
+    private void updateRootNode(ObservableList<Person> personList) {
         requireNonNull(personList);
 
         ObservableList<TreeItem<Tuple>> childNodes = allTaskListView.getRoot().getChildren();
