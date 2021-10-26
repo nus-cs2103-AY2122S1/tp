@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
@@ -42,7 +43,8 @@ public class EditTaskCommand extends Command {
             + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK_INDEX + "2 "
-            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion";
+            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion"
+            + PREFIX_IMPORTANCE + "false";
 
     public static final String DESCRIPTION = "Edits the details of the task identified";
 
