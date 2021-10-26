@@ -35,9 +35,9 @@ public class DashboardWindow extends PopupWindow {
 
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new DashboardWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the DashboardWindow.
      */
     public DashboardWindow(Stage root, Logic logic) {
         super(FXML, root);
@@ -47,7 +47,7 @@ public class DashboardWindow extends PopupWindow {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new Dashboard Window.
      */
     public DashboardWindow(Logic logic) {
         this(new Stage(), logic);

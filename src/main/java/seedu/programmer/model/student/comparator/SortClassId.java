@@ -3,10 +3,9 @@ package seedu.programmer.model.student.comparator;
 import java.util.Comparator;
 
 import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Student;
 
 /**
- * A class to help sort Students by class in ascending order.
+ * A class to help sort ClassIds by their class number.
  */
 public class SortClassId implements Comparator<ClassId> {
 

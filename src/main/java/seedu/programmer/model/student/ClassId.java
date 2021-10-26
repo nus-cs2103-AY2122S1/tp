@@ -41,9 +41,14 @@ public class ClassId {
         return classId;
     }
 
+    /**
+     * Get the class number from the ClassId.
+     *
+     * @return the class number
+     */
     public int getClassNum() {
-        String ss = classId.substring(1, 3);
-        return ss.charAt(0) == '0' ? Integer.parseInt(ss.substring(1,2)) : Integer.parseInt(ss);
+        String classNum = classId.substring(1, 3);
+        return classNum.charAt(0) == '0' ? Integer.parseInt(classNum.substring(1, 2)) : Integer.parseInt(classNum);
     }
 
     @Override
