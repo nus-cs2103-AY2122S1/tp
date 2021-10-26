@@ -35,7 +35,7 @@ Here is an overview of the features FAST offers:
 * View built-in analysis of your client base to better understand your portfolio.
 
 ### Purpose of this guide
-This guide aims to help new users to be familar with FAST. After reading this guide, new users will be more familar with the different features available in FAST.
+This guide aims to help new users to be familiar with FAST. After reading this guide, new users will be more familiar with the different features available in FAST.
 This guide also serves as a reminder for existing users to quickly search for specific information if they are unsure of how to use certain features, 
 by clicking on the links, to jump to the section where the information which they are looking for exists.
 
@@ -198,7 +198,7 @@ are all sample data! Here are some commands you can try to see what they do:
     * e.g. `help 123` will simply be interpreted as `help`.
 
 
-* If a command expects a specific set of parameters and you entered *extra* parameter into the command (with unrecognised),
+* If a command expects a specific set of parameters, and you entered *extra* parameter into the command (with unrecognised),
 prefix, then FAST will assume it to be part of the previous parameter input, which may or may not be valid for certain commands. <br>
     * e.g. if a command expects this parameter `ea v/New York` but you enter `ea v/New York p/87657654`, 
   FAST will assume your input to `v/` to be `New York p/87657654`.
@@ -260,7 +260,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * The email address of your client
 * Should be in this format: `local-part@domain`
 * `local-part`: 
-  * should only contain *alphanumeric characters* and these *special characters* excluding parenthesis (!#$%&'*+/=?{|}~^.-`).
+  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?{|}~^.-`).
   * should not start and end with special characters,
 * `domain`: 
   * must be at least **2** characters long. 
@@ -327,7 +327,7 @@ in appointment dates and tag your clients all within FAST.
 (---------------------insert an image of a client card in FAST---------------------------)
 
 In this user guide, we will showcase commands related to Clients first followed by sections on [Appointment](#appointments)
-and [Tags](#tags). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
+and [Tags](#tag). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
 or view our [other utility features](#others). 
 
 <br>
@@ -404,7 +404,7 @@ You can delete the specified client from FAST. This is useful when a client has 
 * Deletes the client(s) at the specified `INDEX`.
 
 **Parameters**:
-* [`INDEX`](#INDEX)
+* [`INDEX`](#index)
 
 **Examples**:
 * `list` followed by `del 2` deletes the second clients in FAST.
@@ -570,7 +570,7 @@ This also allows you to keep track of the number of completed appointments with 
 **Examples**:
 * `ma 1` updates the completed appointment counter of the first client.
 
-![result for `done 1`](images/appointmentDone.png)
+![result for `done 1`](images/appointmentDone.PNG)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
 
@@ -678,7 +678,7 @@ to viewing your full client list after a
 
 You can sort all your clients by a given condition, allowing you to keep your clients list orderly and well-organised.
 You also can use this command quickly sieve through large client lists.
-Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tags).
+Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tag).
 
 **Format**: `sort KEYWORD`
 * There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
@@ -693,8 +693,8 @@ Currently, you can sort by name, [appointment date](#appointments), and [priorit
 
 #### Searching for clients: `find`
 
-You can use this command to find clients by their name, [priority](#tags), [tags](#tags) or
-[remarks](#adding-a-remark-rmk). This is useful if your have many clients in FAST and wish to quickly find a
+You can use this command to find clients by their name, [priority](#tag), [tags](#tag) or
+[remarks](#adding-a-remark-to-your-client-rmk). This is useful if your have many clients in FAST and wish to quickly find a
 specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
 
 **Format 1**: `find QUERY [MORE_QUERIES]` <br>
@@ -828,7 +828,7 @@ The tables below provides you with a summary for **all** the available commands 
 The commands are categorised (based on their purpose) into 5 different categories:
 * [Contact Management](#Contact-Management)
 * [Appointment](#Appointment)
-* [Tags](#Tags)
+* [Tags](#tag)
 * [Navigation](#Navigation)
 * [Others](#Others)
 
