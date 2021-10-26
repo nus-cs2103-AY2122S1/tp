@@ -16,7 +16,8 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    public static final String OVERDUE_STYLE_CLASS = "overdue";
+    public static final String OVERDUE_CARD_STYLE_CLASS = "overdue-card";
+    public static final String OVERDUE_VISIT_STYLE_CLASS = "overdue-visit";
 
     private static final String FXML = "PersonListCard.fxml";
     private static final String DISPLAY_LAST_VISIT = "Last visit: ";
@@ -81,12 +82,17 @@ public class PersonCard extends UiPart<Region> {
      * @param isOverdue whether the visit is overdue
      */
     private void setVisitOverdueStyle(boolean isOverdue) {
-        ObservableList<String> styles = visit.getStyleClass();
+        ObservableList<String> cardStyles = cardPane.getStyleClass();
+        ObservableList<String> visitStyles = visit.getStyleClass();
         if (!isOverdue) {
-            styles.remove(OVERDUE_STYLE_CLASS);
+            cardStyles.remove(OVERDUE_CARD_STYLE_CLASS);
+            visitStyles.remove(OVERDUE_VISIT_STYLE_CLASS);
         } else {
-            if (!styles.contains(OVERDUE_STYLE_CLASS)) {
-                styles.add(OVERDUE_STYLE_CLASS);
+            if (!cardStyles.contains(OVERDUE_CARD_STYLE_CLASS)) {
+                cardStyles.add(OVERDUE_CARD_STYLE_CLASS);
+            }
+            if (!visitStyles.contains(OVERDUE_VISIT_STYLE_CLASS)) {
+                visitStyles.add(OVERDUE_VISIT_STYLE_CLASS);
             }
         }
     }
