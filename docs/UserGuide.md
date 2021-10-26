@@ -7,47 +7,47 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Introduction
+## **Introduction**
 
 <div align="center">
   <img alt="logo" src="images/logo.png">
 </div>
 
 Welcome and thank you for downloading **FAST**! Are you a financial advisor having troubles managing your contacts
-on your phone? Do you find existing contact management software troublesome and not intuitive to use? Do you want 
-a cheaper alternative compared to those paid contact management software? If you answered YES! to all those questions
-then FAST is right for you!
+on your phone? Do you find existing contact management software troublesome and not intuitive to use? Do you want
+a free alternative compared to those paid contact management software? If you answered "YES!" to any those questions,
+then FAST is for you!
 
-FAST is an acronym for Financial Advisor Smart Tracker (FAST), the meaning behind it is that we aim to be fast and 
+FAST stands for Financial Advisor Smart Tracker (FAST), and as its name implies, we strive to be the fastest, and most
 efficient when it comes to managing your contacts.
-Financial Advisor Smart Tracker (FAST) is a **free open-source desktop app for Financial Advisors to manage 
-their contacts.** 
-More importantly, FAST is **optimized for those who prefer to work with a Command Line 
-Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-For Financial Advisors that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
+FAST is a **free and open-source desktop app for Financial Advisors to manage their contacts.**
+More importantly, FAST is **optimized for those who prefer to work with a Command Line
+Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you are a Financial Advisor that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
-### Structure of this document
-To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
-As such, this user guide has been structured to help you find what you are looking for.
 
-In [How to use this user guide](#how-to-use-this-user-guide), you can learn how to most effectively read through this guide.
+### Features overview
+Here is an overview of the features FAST offers:
+* Keep track of your client's information (i.e. Name, Phone number, Email address, Home address, and Remarks) in our
+  all-in-one app!
+* Record and keep track of your client's appointment dates. Never miss another appointment date again!
+* Tag your clients with the insurance plan they have purchased or are interested in.
+* View built-in analysis of your client base to better understand your portfolio.
 
-In [Features overview](#features-overview), you will find all the features available in FAST.
+### Purpose of this guide
+This guide aims to help new users to be familiar with FAST. After reading this guide, new users will be more familiar with the different features available in FAST.
+This guide also serves as a reminder for existing users to quickly search for specific information if they are unsure of how to use certain features, 
+by clicking on the links, to jump to the section where the information which they are looking for exists.
 
-In [Quick start](#quick-start), you will find simple instructions on how to quickly begin using FAST.
+--------------------------------------------------------------------------------------------------------------------
 
-In [Features](#features), you can find documentation on how to use the features available in FAST.
-
-In [FAQs](#faqs), you may find answers to questions or problems you might have while using FAST.
-
-In [Command summary](#command-summary), you will find a summary of the commands available in FAST.
-
-### How to use this user guide
+## How to use this user guide
 We recommend first time users to read the user guide in the order that is written.
-Throughout the user guide, we include links which will jump to the corresponding section of the user guide. These
-links allow you to quickly navigate this document.
+Throughout the user guide, we include links like [this](#how-to-use-this-user-guide) which will jump to the 
+corresponding section of the user guide. These links allow you to quickly navigate this document. 
+This guide follows the structure as stated [here](#structure-of-this-document).
 
-Multiple special formats are used to highlight information that will be important or useful to you.
+We also use special formats to highlight information that will be important or useful to you.
 These include:
 
 **Cautions**
@@ -78,22 +78,27 @@ Messages that appear in these boxes will be useful in helping you to understand 
 
 `Example technical information`
 
-Messages that appear in these boxes indicate that the message is of a more technical nature, such as user input.
+Messages that appear in these boxes indicate that the text is of a more technical nature, such as user input.
 
+### Structure of this document
+To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
+As such, this user guide has been structured to help you find what you are looking for.
 
+In [How to use this user guide](#how-to-use-this-user-guide), you can learn how to most effectively read through this guide.
 
-### Features overview
-Here is an overview of the features FAST offers:
-* Keep track of your client's information (i.e. Name, Phone number, Email address, Home address, and Remarks) in our
-  all-in-one app!
-* Record and keep track of your client's appointment dates. Never miss another appointment date again!
-* Tag your clients with the insurance plan they have purchased or are interested in.
-* View built-in analysis of your client base to better understand your portfolio.
+In [Quick start](#quick-start), you will find simple instructions on how to quickly begin using FAST.
 
-Interested? Jump to [Quick Start](#quick-start) to get started! 
+In [Features](#features), you can find documentation on how to use the features available in FAST.
 
+In [FAQs](#faqs), you may find answers to questions or problems you might have while using FAST.
 
-## Quick start
+In [Command summary](#command-summary), you will find a summary of the commands available in FAST.
+
+In [Glossary](#glossary), you will find useful descriptions and meanings of terms used in this document.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Quick start**
 
 1. Ensure you have Java `11` or above installed in your Computer. FAST can be used 
 on any operating system including Windows, macOS or Linux
@@ -103,15 +108,21 @@ on any operating system including Windows, macOS or Linux
 1. Copy the file to the folder you want to use as the _home folder_ for your FAST.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
-   When you first start up, FAST will contain some sample data for you to explore the different features.
+   
    ![Ui](images/Ui.png)
+   
+   (---------------------------Replace with UI image with no annotations---------------------------------------)
    
    <div markdown="block" class="alert alert-info">
    :information_source: More icons will be added in future iterations<br>
    </div>
+   
+1. When you first start up, FAST will contain some sample data for you to explore the different features.
 1. You are now ready to start managing your clients!
    
 ### User interface
+
+(---------------------------Add UI image w/ annotations + numbering---------------------------------------)
 Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
 FAST. <br><br>
 Next, the _Results display_ is where FAST gives you feedback to your commands. For example, if you make a typo
@@ -139,7 +150,7 @@ are all sample data! Here are some commands you can try to see what they do:
     * `find pr/high`
     
 5. Try setting an appointment for him.
-    * `appt 1 d/2021-12-12 t/14:30 v/Buona Vista`
+    * `aa 1 d/2021-12-12 t/14:30 v/Buona Vista`
     
 <div markdown="block" class="alert alert-info">
 :information_source: When you are ready to use FAST to keep track of your own clients, you can use 
@@ -147,68 +158,195 @@ are all sample data! Here are some commands you can try to see what they do:
 </div>
 
 
- Refer to the [Features](#features) below for details of each command.
-
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
-<div markdown="block" class="alert alert-info">
+### **Command Format**
+*All* the commands used in FAST application follows these notations style!
 
-**:information_source: Notes about the command format:**<br>
-
-Take note that for all the commands listed below, we follow these notations and style!
 
 * Words in `UPPER_CASE` are the parameters to be added in by the user.<br>
   * e.g. for `add n/NAME`, `NAME` is where you would replace it with the actual client's name such as `add n/John Doe`.
 
+
 * Items in square brackets are optional.<br>
   * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
 
 * Items with `…`​ after them can be used zero or more times.<br>
   * e.g. `[t/TAG]…​` can be `t/friend`, `t/friend t/family` or just left empty.
 
-* Parameters can be in any order.<br>
-  * e.g. if the command uses this format: `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Parameters can be in any order. (This excludes parameters without a prefix.) <br>
+    * e.g. if the command uses this format: `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+* Parameter without a prefix **must** be the **first** parameter in the command (when required).
+
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the
   last occurrence of the parameter will be taken.<br>
-  * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+    * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
 
 * For commands that do not take in any parameter (such as  `list`, `exit` and `clear`), anything written after
   the command will be ignored.<br>
-  * e.g. `help 123` will simply be interpreted as `help`.
+    * e.g. `help 123` will simply be interpreted as `help`.
 
-* `INDEX` refers to the index number shown in the client list. The index **must be a positive integer** 1, 2, 3, …​
 
+* If a command expects a specific set of parameters, and you entered *extra* parameter into the command (with unrecognised),
+prefix, then FAST will assume it to be part of the previous parameter input, which may or may not be valid for certain commands. <br>
+    * e.g. if a command expects this parameter `ea v/New York` but you enter `ea v/New York p/87657654`, 
+  FAST will assume your input to `v/` to be `New York p/87657654`.
 </div>
-
-### Viewing help: `help`
-
-You can use the `help` command to open a new window that contains the command usage, and a quick start guide.
-In the help window, you can access all the command usages using the dropdown menu.
-
-![help window](images/helpWindow.png)
-
-**Format**: `help [COMMAND]`
-
-**Examples**:
-* `help` will just open the default help window
-* `help add` will open the help window and directly navigate to the `Add` command help page.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The help window can also be quickly accessed by entering using the F1 key on your keyboard!
+Parameters refer to the details that are to be included as an input to a command. <br>
+Prefix refers to the word symbol used before the parameter. 
 </div>
 
+<br> <br>
 
-### Adding a client: `add`
+### **Command Parameters**
+This subsection serves to list out the parameters used in FAST.
 
-You can add a client to FAST.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+To achieve the best possible experience, avoid adding excessively long input to FAST.
+</div><br>
+
+#### `ADDRESS` 
+* The address of your client
+* Can take any value (should not be *blank*)
+
+
+#### `COMMAND`
+* The type of command available in FAST:
+  * `Quick Start`
+  * `Add`
+  * `Appointment`
+  * `Edit Appointment`
+  * `Delete Appointment`
+  * `Mark Appointment`
+  * `Clear`
+  * `Delete`
+  * `Edit`
+  * `Find`
+  * `List`
+  * `Help`
+  * `Remark`
+  * `Sort`
+  * `Statistic`
+  * `Tag`
+  * `Investment Plan Tag`
+  * `Priority Tag`
+  * `Misc`
+
+
+#### `DATE`
+* The date of an appointment with your client
+* Should be in this format: `yyyy-mm-dd` 
+  * e.g. `2023-05-15` 
+* Should be a valid date where:
+  * `yyyy` (year): should be a non-negative 4-digit number
+  * `mm` (month): should be a valid calendar month between 01 and 12
+  * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
+
+
+#### `EMAIL`
+* The email address of your client
+* Should be in this format: `local-part@domain`
+* `local-part`: 
+  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?{|}~^.-`).
+  * should not start and end with special characters,
+* `domain`: 
+  * must be at least **2** characters long. 
+  * each domain label must start and end with alphanumeric characters
+  * each domain label is separated using hyphens (if any)
+
+
+#### `INDEX`
+* Refers to the number shown in the displayed client list
+* **Must be a positive integer** 1, 2, 3, …​
+
+
+#### `NAME`
+* Name of your client
+* Should only contain alphanumeric characters and spaces (should not be blank)
+
+
+#### `PHONE`
+* The contact number of your client
+* Should only contain numbers
+* Should be at least **3** digit long
+
+
+#### `QUERY`
+* The term used to search for clients in FAST
+* `MORE QUERIES` also follows this definition
+* Can be any value but blank
+
+
+#### `REMARK`
+* Extra notes given for your client
+* Should not be more than **75** characters
+
+
+#### `TAG`
+* A label given to your client
+* There are 3 types of `TAG` in FAST:
+  1. Normal Tags: should not be longer than 20 characters
+  2. Priority Tag: either one of the 3 priorities (low, med, high)
+  3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
+* Refer to [Tags](#tag) to find out more about each tag
+
+#### `TIME`
+* The timing of an appointment with your client
+* 24-hour format
+* Should be in this format: `HH:mm` 
+  * eg. `10:30` represents 10.30am
+* Should be a valid time from 00:00 to 23:59 where:
+  * `HH` (hour): should be between 00 and 23
+  * `mm` (minute): should be between 00 and 59
+
+
+#### `Venue`
+* The location of an appointment with your client
+* Should not be longer than **30** characters long
+<br> <br>
+
+### **Managing a client**
+
+FAST allows you to easily manage your clients. Just like a contact in your phone's Contact Book, you can use
+FAST to save your client's Name, Phone Number, Address, Email Address and Remarks. In addition, you can also add
+in appointment dates and tag your clients all within FAST.
+
+(---------------------insert an image of a client card in FAST---------------------------)
+
+In this user guide, we will showcase commands related to Clients first followed by sections on [Appointment](#appointments)
+and [Tags](#tag). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
+or view our [other utility features](#others). 
+
+<br>
+
+#### Adding a client: `add`
+
+You can use this command to add a client to FAST.
 
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+**Parameters**:
+* [`NAME`](#name)
+* [`PHONE_NUMBER`](#phone)
+* [`EMAIL`](#email)
+* [`ADDRESS`](#address)
+* [`TAG`](#tag)
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0)
+A client can have any number of [`TAG`](#tag) (including 0)
 </div>
 
 **Examples**:
@@ -219,72 +357,54 @@ A client can have any number of tags (including 0)
    called `Betsy Crowe`, has a phone number of `1234567`, has an email address `betsycrowe@example.com`, 
   stays at `Newgate Prison` and is tagged as both a `friend` and `criminal`.
 
-### Listing all clients: `list`
+<br> 
 
-Shows you the list of all your clients in FAST. 
-This command is useful to return to viewing your full client list after a 
-[find](#searching-for-clients-find) command has been executed.
-
-**Format**: `list` 
-
-### Editing a client: `edit`
+#### Editing a client: `edit`
 
 You can edit an existing client in FAST. 
 This can be used if the client's information has changed, or if you entered an incorrect entry previously.
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
-* At least one of the optional fields must be provided.
+* Edits the client at the specified `INDEX`
+
+<div markdown="block" class="alert alert-info"> :information_source: 
 * Only the edited fields will be updated to the input values, while the unedited values are unchanged.
-* When editing tags, all existing tags of the client will be replaced with the new tags.
 * You can remove all the client’s tags by typing `t/` without specifying any tags after it.
 * For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
-
-**Examples**:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
-
-### Searching for clients: `find`
-
-Finds clients by their name, [priority](#tags), [tags](#tags) or 
-[remarks](#adding-a-remark-rmk). This is useful if your have many clients in FAST and wish to quickly find a
-specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
-
-**Format 1**: `find QUERY [MORE_QUERIES]` <br>
-**Format 2**: `find pr/PRIORITY [MORE_PRIORITIES]`<br>
-**Format 3**: `find t/TAG [MORE TAGS]`<br>
-**Format 4**: `find r/REMARK [MORE REMARKS]`<br>
-
-
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the queries does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* You can search by name, priority, tags or remarks using the formats shown above.
-* Names with words starting with the query will match. e.g. `Han` will match `Solo Hans`.
-* For priority searches, there are 3 priorities, `pr/low`, `pr/med`, or `pr/high`.
-* Any remarks containing the searched remark will match. e.g. `r/piz` will match `likes pizza`.
-* Clients matching at least one search query will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-**Examples**:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find pr/high med` returns all clients with `HighPriority` and `MediumPriority`.
-* `find t/friends enemies` returns all clients tagged with `friends` or `enemies`.
-* `find r/good` returns all clients with remarks containing `good`.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-When searching for remarks, use more specific queries for better results.
 </div>
 
-### Deleting a client: `del`
+<div markdown="span" class="alert alert-warning"> :exclamation: 
+* At least one of the optional fields must be provided.
+* When editing tags, all existing tags of the client will be replaced with the new tags.
+</div>
+
+**Parameters**:
+* [`INDEX`](#index)
+* [`NAME`](#name)
+* [`PHONE_NUMBER`](#phone)
+* [`EMAIL`](#email)
+* [`ADDRESS`](#address)
+* [`TAG`](#tag)
+
+
+**Examples**:
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
+
+<br>
+
+#### Deleting a client: `del`
 
 You can delete the specified client from FAST. This is useful when a client has stopped using your services.
 
-**Format**: `del INDEX`
+**Format 1**: `del INDEX...`
+**Format 2**: `del INDEX-INDEX`
 
-* Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
+* Deletes the client(s) at the specified `INDEX`.
+
+**Parameters**:
+* [`INDEX`](#index)
 
 **Examples**:
 * `list` followed by `del 2` deletes the second clients in FAST.
@@ -292,14 +412,11 @@ You can delete the specified client from FAST. This is useful when a client has 
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 Can be used to delete up to **10** contacts in a single `del` command by supplying more `INDEX`.
-
-**Format** 1: `del INDEX INDEX [INDEX]...` <br>
-**Format** 2: `del INDEX-INDEX`
-
-<div markdown="span" class="alert alert-primary">:exclamation: Reminder:
-If *Format 1* is used, there should be a space in between each `INDEX`. <br>
-If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'. 
 </div>
+
+<div markdown="span" class="alert alert-primary">:exclamation: Warning:
+If *Format 1* is used, there should be a space in between each `INDEX` if multiple `INDEX` are input. <br>
+If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'.
 </div>
 
 **Examples**:
@@ -308,22 +425,32 @@ If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. T
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This CANNOT be undone!</div>
+This CANNOT be undone!
+</div>
 
-### Adding a remark: `rmk`
+<br>
 
-You can add a remark to an existing client in FAST. This is useful for adding additional client information such 
-as their preferred meeting timing, allowing you to better keep track of your clients' preferences and habits.
+#### Adding a remark to your client: `rmk`
+
+You can add a remark to an existing client in FAST. <br>
+This is useful for adding additional client notes such as their preferred meeting timing, allowing you to better serve your clients!
+
+<div markdown="block" class="alert alert-info">
+:information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
+which should mostly be one or two words.<br>
+</div>
 
 **Format**: `rmk INDEX [r/REMARK]`
 
-* Adds a remark to the client at the specified `INDEX`.
-* Remarks have a character limit of 100 characters.
-* To delete a remark, leave the remark parameter `[r/REMARK]` empty.
-   <div markdown="block" class="alert alert-info">
-   :information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
-   which should mostly be one or two words.<br>
-   </div>
+* Adds a remark to the client at the specified `INDEX`
+
+**Parameter**:
+* [`INDEX`](#index)
+* [`REMARK`](#remark)
+
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
+</div>
 
 **Examples**:
 * `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first client.
@@ -333,29 +460,37 @@ as their preferred meeting timing, allowing you to better keep track of your cli
 Try to add remarks with specific keywords so that it is easier to [search](#searching-for-clients-find) for them.
 </div>
 
-### Appointments
+#### Appointments
 
-FAST is capable of storing and keeping track of appointments for your clients. You may save the date, time and venue of an appointment.
-* `DATE` the date of the appointment should be inputted in the format **`yyyy-mm-dd`**.
-* `TIME` the time of the appointment should be inputted in the 24-hour format **`HH:mm`**.
-* `VENUE` the location of the appointment can at most be 30 characters long (including whitespaces).
+You can also store and keep track of appointments with your clients all within FAST! 
+You may save the date, time and venue of an appointment.
 
-#### Adding an appointment: `aa`
+<br>
+
+##### Adding an appointment: `aa`
+You can add a scheduled appointment with the client. An appointment includes a date, time and venue.
+This allows you to keep track of all your clients' appointment dates all within the same app.
+You can also [edit](#editing-an-appointment-ea),[delete](#deleting-an-appointment-da),
+or [mark as completed](#updating-completed-appointment-ma) an appointment.
 
 **Format**: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
-You can add a scheduled appointment with the client. An appointment includes a date, time and venue.
-This allows you to keep track of all your clients' appointment dates all within the same app.
-You can also [edit](#editing-an-appointment-ea),[delete](#deleting-an-appointment-da), 
-or [mark as completed](#updating-completed-appointment-ma) an appointment.
+**Parameter**:
+* [`INDEX`](#index)
+* [`DATE`](#date)
+* [`TIME`](#time)
+* [`VENUE`](#venue)
 
 ![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
 
-* The `DATE` of the appointment must at least be specified.
+<div markdown="span" class="alert alert-primary">:warning:
+The `DATE` of the appointment must at least be specified.
+</div>
+
 
 **Examples**:
 * `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
-![result for `appt 1 d/2021-03-27`](images/appointment.png)
+![result for `aa 1 d/2021-03-27`](images/appointment.png)
 * `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
 * `find Matthew John` followed by `aa 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
@@ -363,25 +498,41 @@ or [mark as completed](#updating-completed-appointment-ma) an appointment.
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
    use the [edit appointment](#editing-an-appointment-ea) command.<br>
    </div>
-   
-#### Editing an appointment: `ea`
 
-You can edit a scheduled [appointment](#appointments) with the client. 
+<br>
+
+##### Editing an appointment: `ea`
+
+You can edit a scheduled [appointment](#appointments) with your client. 
 This command is useful when your appointment has been rescheduled or has a change in location.
 
 **Format**: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
 
 * Edits a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
-* Existing details will be updated with the input data.
-* At least **one** of the optional fields must be present.
+
+<div markdown="block" class="alert alert-info"> :information_source: 
+Existing details will be updated with the input data.
+</div>
+
+<div markdown="span" class="alert alert-warning"> :exclamation: 
+At least **one** of the optional fields must be present.
+</div>
+
+**Parameter**:
+* [`INDEX`](#index)
+* [`DATE`](#date)
+* [`TIME`](#time)
+* [`VENUE`](#venue)
 
 **Examples**:
 * `ea 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
-#### Deleting an appointment: `da`
+<br> 
 
-You can delete a scheduled [appointment](#appointments) with the client. 
+##### Deleting an appointment: `da`
+
+You can delete a scheduled [appointment](#appointments) with your client. 
 This command should be used when the appointment has been cancelled with a client.
 
 **Format**: `da INDEX`
@@ -389,47 +540,49 @@ This command should be used when the appointment has been cancelled with a clien
 * Deletes a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
 
+**Parameter**:
+* [`INDEX`](#index)
+
 **Examples**:
 * `da 1` deletes the appointment of the first client.
 * `find Ben` followed by `da 3` deletes the appointment the third client in the result of the `find` command.
 
-#### Updating completed appointment: `ma`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This CANNOT be undone!
+</div>
 
-You can mark the appointment [appointment](#adding-an-appointment-aa) with the client as completed.
+<br>
+
+##### Updating completed appointment: `ma`
+
+You can mark the appointment [appointment](#adding-an-appointment-aa) with your client as completed.
 This also allows you to keep track of the number of completed appointments with your client.
 
 ![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
 
 **Format**: `ma INDEX`
-* Increment the completed appointment count with the client at the specified `INDEX` if the appointment exist.
-* Existing details will be deleted.
+* Update the completed appointment count with the client at the specified `INDEX` if the appointment exist.
+* The marked appointment will be deleted!
+
+**Parameter**:
+* [`INDEX`](#index)
 
 **Examples**:
-
 * `ma 1` updates the completed appointment counter of the first client.
 
-![result for `done 1`](images/appointmentDone.png)
+![result for `done 1`](images/appointmentDone.PNG)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
 
-### Sorting all clients: `sort`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This CANNOT be undone!
+</div>
 
-You can sort all existing clients by the given condition. 
-Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tags). 
-This allows you to keep your clients list orderly and well-organised.
-It can also be used to quickly sieve through large client lists.
+<br>
 
-**Format**: `sort KEYWORD`
-* There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
-* `name` will sort all clients in alphabetical order from A to Z.
-* `appointment` will sort all client by appointment date from the earliest date to latest.
-* `priority` will sort all client by priority tag from the highest to the lowest priority.
+#### Tags
 
-**Example**:
-* `sort priority` Sorts all existing clients by their priority tag, from the highest priority to the lowest priority.
-
-### Tags
-
+You can use our Tagging system to label and categorise your clients.
 Tags are a quick way for you to organise your contacts, and recall their key characteristics.
 In FAST, we have three main types of tags:
 
@@ -453,7 +606,9 @@ A client can have more than 1 investment plan tag, but they may not have more th
 For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time. 
 </div>
 
-#### Tag Naming Conventions
+<br>
+
+##### Tag Naming Conventions
 
 You can refer to the table below to quickly learn about how to use these three tags.
 
@@ -468,15 +623,20 @@ Normal tags do not have prefixes, so simply type in the desired tag name.
 
 More examples of how to use these will be given in the following section.
 
-#### Editing a tag: `tag`
+<br>
 
-You can modify the tags of a specified client. 
+##### Editing a tag: `tag`
+
+You can add or delete the tags of a specified client. 
 
 **Format**: `tag INDEX [a/TAG] [d/TAG]`
 * Use `a/` to add a tag, and `d/` to delete a tag.
 * Does not affect any unmentioned tags, unlike `edit`.
 * Delete operations are performed first before add operations, regardless of their order in the input.
-* Tags have a maximum length of 20 characters, and may only contain alphanumeric characters.
+
+**Parameter**:
+* [`INDEX`](#index)
+* [`TAG`](#tag)
 
 
 **Examples**: 
@@ -492,19 +652,86 @@ You can modify the tags of a specified client.
 
 ![tagExample3](images/tagExample3.png)
 
-### Viewing statistics
-
-FAST comes with built-in statistics to provide you with an overview of your data.
-To view the statistics, simply click the "Stats" menu item on the top bar or press `F2`.
-Currently, FAST supports these statistics:
-* Priority Tag Chart
-* Insurance Plan Chart (Coming soon!)
 
 ![stats window](images/statsWindow.png)
 
-### Clearing all entries: `clear`
+<br>
 
-You can clear all entries from FAST. This command is useful to remove the default sample data in FAST.
+### **Managing your client base**
+
+In addition to changing individual [client's](#managing-a-client) details, you can also perform commands which affects your entire client list.
+This allows you to easily navigate your client list and improve your efficiency!
+
+<br>
+
+#### Listing all clients: `list`
+
+You can use this command to view your entire client list! This command is especially useful to return
+to viewing your full client list after a
+[find](#searching-for-clients-find) command has been executed.
+
+**Format**: `list`
+
+<br>
+
+#### Sorting all clients: `sort`
+
+You can sort all your clients by a given condition, allowing you to keep your clients list orderly and well-organised.
+You also can use this command quickly sieve through large client lists.
+Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tag).
+
+**Format**: `sort KEYWORD`
+* There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
+* `name` will sort all clients in alphabetical order from A to Z.
+* `appointment` will sort all client by appointment date from the earliest date to latest.
+* `priority` will sort all client by priority tag from the highest to the lowest priority.
+
+**Example**:
+* `sort priority` Sorts all existing clients by their priority tag, from the highest priority to the lowest priority.
+
+<br>
+
+#### Searching for clients: `find`
+
+You can use this command to find clients by their name, [priority](#tag), [tags](#tag) or
+[remarks](#adding-a-remark-to-your-client-rmk). This is useful if your have many clients in FAST and wish to quickly find a
+specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
+
+**Format 1**: `find QUERY [MORE_QUERIES]` <br>
+**Format 2**: `find pr/PRIORITY [MORE_PRIORITIES]`<br>
+**Format 3**: `find t/TAG [MORE TAGS]`<br>
+**Format 4**: `find r/REMARK [MORE REMARKS]`<br>
+
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the queries does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* You can search by name, priority, tags or remarks using the formats shown above.
+* Names with words starting with the query will match. e.g. `Han` will match `Solo Hans`.
+* Any remarks containing the searched remark will match. e.g. `r/piz` will match `likes pizza`.
+* Clients matching at least one search query will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+**Parameters**:
+* [`QUERY`](#query)
+* [`PRIORITY`](#tag)
+* [`TAG`](#tag)
+* [`REMARK`](#remark)
+
+**Examples**:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find pr/high med` returns all clients with `HighPriority` and `MediumPriority`.
+* `find t/friends enemies` returns all clients tagged with `friends` or `enemies`.
+* `find r/good` returns all clients with remarks containing `good`.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+When searching for remarks, use more specific queries for better results.
+</div>
+
+<br>
+
+#### Clearing all entries: `clear`
+
+You can clear all clients from FAST. This command is useful to remove the default sample data in FAST.
 
 **Format**: `clear`
 
@@ -512,21 +739,65 @@ You can clear all entries from FAST. This command is useful to remove the defaul
 This CANNOT be undone! 
 </div>
 
-### Exiting the program: `exit`
+<br>
 
-You can exit the program.
+### **Others**
+
+#### Viewing help: `help`
+
+You can use the `help` command to open a new window that contains the command usage, and a quick start guide.
+In the help window, you can view all the command usages built-in right into FAST using the dropdown menu.
+
+![help window](images/helpWindow.png)
+
+**Format**: `help [COMMAND]`
+
+**Parameters**:
+* [`COMMAND`](#command)
+
+**Examples**:
+* `help` will just open the default help window
+* `help add` will open the help window and directly navigate to the `Add` command help page.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The help window can also be quickly accessed by entering using the F1 key on your keyboard!
+</div>
+
+<br>
+
+#### Viewing statistics
+
+You can view FAST's built-in statistics and see and overview of your client's data.
+To view the statistics, simply click the "Stats" menu item on the top bar or press `F2`. You should see a window open
+that looks like this:
+
+![stats window](images/statsWindow.png)
+
+Currently, FAST supports these statistics:
+* Priority Tag Chart: View the breakdown of your client's priority.
+* Insurance Plan Chart: View the distribution of your insurance plans sold.
+
+<br>
+
+#### Exiting the program: `exit`
+
+You can exit the program using this command.
 
 **Format**: `exit`
 
-### Saving the data
+<br>
 
-FAST data is saved in the hard disk automatically after any command that changes the data.
-There is no need to save manually.
+#### Saving the data
 
-### Editing the data file
+You do not have to worry about saving the data manually! FAST automatically saves your data after any changes are made.
+This way, you can focus solely on serving your clients better!
+
+<br>
+
+#### Editing the data file
 
 FAST data is saved as a JSON file. 
-It can be found at `[JAR file location]/data/fast.json`. 
+You can find this at `[JAR file location]/data/fast.json`. 
 If you are an advanced user, feel free to update your data directly, by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -536,11 +807,9 @@ FAST will start with an empty data file on the next run!
 </div>
 
 
-
-
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQs
+## **FAQs**
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and move your previous FAST `data` folder into the new FAST home folder. The `data` folder is shown below. <br>
@@ -554,9 +823,17 @@ FAST will start with an empty data file on the next run!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## **Command summary**
+The tables below provides you with a summary for **all** the available commands in FAST. You can use this section to quickly refresh your memory on the different command formats. 
+The commands are categorised (based on their purpose) into 5 different categories:
+* [Contact Management](#Contact-Management)
+* [Appointment](#Appointment)
+* [Tags](#tag)
+* [Navigation](#Navigation)
+* [Others](#Others)
 
 ### Contact Management
+
 Action | Format, Examples
 --------|------------------
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
@@ -566,6 +843,7 @@ Action | Format, Examples
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 
 ### Appointment
+
 Action | Format, Examples
 --------|------------------
 **Add appointment** |`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br>
@@ -574,6 +852,7 @@ Action | Format, Examples
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
 
 ### Tags
+
 Action | Format, Examples
 --------|------------------
 **Edit Tag** |`tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
@@ -581,6 +860,7 @@ Action | Format, Examples
 **Priority Tag** | Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
 
 ### Navigation
+
 Action | Format, Examples
 --------|------------------
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
@@ -588,8 +868,28 @@ Action | Format, Examples
 **List** | `list`
 
 ### Others
-Action | Format, Examples
+
+Action|Format, Examples
 --------|------------------
 **Help** | `help [COMMAND]` <br> e.g. `help add`
 **Clear** | `clear`
 **Exit** | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Glossary**
+
+This section serves to provide a summary of descriptions and definitions of terms used throughout this User Guide. 
+Familiarising yourself with this section will make the User Guide easier to read.
+
+Term | Meaning
+--------|------------------
+**Graphical User Interface (GUI)** | A GUI allows users to use graphics to interact with a device.
+**Command Line Interface (GUI)** | A CLI allows users to use commands in the form of text as input to a device.
+**Java** | Java is a runtime environment that allows applications such as FAST to be run on your computer.
+**Command** | An instruction typed by a user, to be executed by FAST.
+**Parameter** | A section of a command that requires user input to be entered.
+**Prefix** | An identifier for a parameter to be entered right before the actual parameter of a command. Prefix's end with a slash (/).
+**Priority** | A label applied to clients, indicating the contact's value to the user.
+**Tag** | A label used to describe clients.
+

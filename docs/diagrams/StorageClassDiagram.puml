@@ -14,7 +14,7 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
+package "Fast Storage" #F4F6F6{
 Interface FastStorage <<Interface>>
 Class JsonFastStorage
 Class JsonSerializableFast

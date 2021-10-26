@@ -1,5 +1,7 @@
 package seedu.fast.model.tag;
 
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
+
 import seedu.fast.logic.parser.ParserUtil;
 
 /**
@@ -7,8 +9,6 @@ import seedu.fast.logic.parser.ParserUtil;
  * Guarantees: immutable; name is fixed and valid as declared in {@link #isValidTagName(String)}
  */
 public class PriorityTag extends Tag {
-
-    public static final String PRIORITY_TAG_PREFIX = "pr/";
 
     public static final String MESSAGE_USAGE = "Priority tag: label a client with a priority. "
             + "The priority can be high, med, or low\n"
@@ -39,12 +39,12 @@ public class PriorityTag extends Tag {
     /**
      * Class containing relevant fields for a Low Priority Tag.
      */
-    public class LowPriority {
+    public static class LowPriority {
         public static final String NAME = "LowPriority";
 
         public static final String TERM = "low";
 
-        public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_PRIORITY_TAG + TERM;
 
         public static final int PRIORITY = 3;
 
@@ -56,12 +56,12 @@ public class PriorityTag extends Tag {
     /**
      * Class containing relevant fields for a Medium Priority Tag.
      */
-    public class MediumPriority {
+    public static class MediumPriority {
         public static final String NAME = "MediumPriority";
 
         public static final String TERM = "med";
 
-        public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_PRIORITY_TAG + TERM;
 
         public static final int PRIORITY = 2;
 
@@ -73,12 +73,12 @@ public class PriorityTag extends Tag {
     /**
      * Class containing relevant fields for a High Priority Tag.
      */
-    public class HighPriority {
+    public static class HighPriority {
         public static final String NAME = "HighPriority";
 
         public static final String TERM = "high";
 
-        public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
+        public static final String COMMAND = PREFIX_PRIORITY_TAG + TERM;
 
         public static final int PRIORITY = 1;
 

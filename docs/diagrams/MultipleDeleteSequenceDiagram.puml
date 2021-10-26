@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete 1-5")
 activate LogicManager
 
-LogicManager -> FastParser : parseCommand("delete 1")
+LogicManager -> FastParser : parseCommand("delete 1-5")
 activate FastParser
 
 create DeleteCommandParser
@@ -26,7 +26,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> FastParser
 deactivate DeleteCommandParser
 
-FastParser -> DeleteCommandParser : parse("1")
+FastParser -> DeleteCommandParser : parse("1-5")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -48,11 +48,23 @@ deactivate FastParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
+DeleteCommand -> DeleteCommand : isMultipleDelete()
+activate DeleteCommand
 
-Model --> DeleteCommand
-deactivate Model
+DeleteCommand --> DeleteCommand
+deactivate DeleteCommand
+
+'loop' required'
+loop 5 times
+    DeleteCommand -> DeleteCommand : executeMultipleDelete()
+    activate DeleteCommand
+
+    DeleteCommand -> Model : deletePerson(i)
+    activate Model
+
+    Model --> DeleteCommand
+    deactivate Model
+end
 
 create CommandResult
 DeleteCommand -> CommandResult
@@ -61,9 +73,13 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
+DeleteCommand --> DeleteCommand
+deactivate DeleteCommand
+
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
 @enduml
+

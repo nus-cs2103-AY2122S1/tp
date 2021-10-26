@@ -1,0 +1,18 @@
+@startuml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T1
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+show fields
+
+title Default Appointment
+
+Package Appointment <<Rectangle>> {
+    object "__:Appointment__" as emptyAppointment {
+        - date = "No Appointment Scheduled Yet"
+        - time = ""
+        - venue = ""
+    }
+}
+
+@enduml
