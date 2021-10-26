@@ -55,7 +55,7 @@
     "mc": 4,
     "academicYear" : 2,
     "semester" : 1,
-    "tagged": [ "math science" ]
+    "tagged": [ "math and science" ]
   }, {
     "code": "CS2102",
     "title": "Database Systems",
@@ -63,7 +63,7 @@
     "mc": 4,
     "academicYear" : 2,
     "semester" : 1,
-    "tagged": [ "breadth depth" ]
+    "tagged": [ "breadth and depth" ]
   }, {
     "code": "IS1103",
     "title": "Ethics in Computing",
