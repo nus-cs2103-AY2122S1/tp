@@ -168,6 +168,11 @@ public class ModelManager implements Model {
         taskList.setTask(index, editedTask);
     }
 
+    @Override
+    public void deleteDoneTasks() {
+        taskList.deleteDoneTasks();
+    }
+
     //=========== UserInputList ==============================================================================
 
     @Override

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import dash.commons.util.CollectionUtil;
 import dash.model.task.exceptions.TaskNotFoundException;
@@ -135,6 +136,16 @@ public class TaskList implements Iterable<Task> {
             }
         };
         internalList.sort(c);
+    }
+
+    /**
+     * Deletes the tasks in this list that are completed.
+     */
+    public void deleteDoneTasks() {
+        List<Task> taskList = internalList.stream().filter(task -> !task.getCompletionStatus().get())
+                        .collect(Collectors.toList());
+
+        setTasks(taskList);
     }
 
     /**

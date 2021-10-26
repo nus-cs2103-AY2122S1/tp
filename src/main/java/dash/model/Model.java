@@ -130,6 +130,12 @@ public interface Model {
      */
     void setTask(int index, Task editedTask);
 
+
+    /**
+     * Clears the task list of completed tasks.
+     */
+    void deleteDoneTasks();
+
     /**
      * Returns the UserInputList
      */
