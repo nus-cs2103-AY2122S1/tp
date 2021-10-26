@@ -63,7 +63,11 @@ public class MemberCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(task -> task.getName().toString()))
                 .forEach(task -> {
                     Label taskLabel = new Label(task.getName().toString());
-                    taskLabel.setStyle( task.isDone() ? "-fx-background-color: #3e7b91" : "-fx-background-color: #b43360");
+                    if (task.isDone()) {
+                        taskLabel.setStyle("-fx-background-color: #64725a");
+                    } else {
+                        taskLabel.setStyle("-fx-background-color: #b43360");
+                    }
                     tasks.getChildren().add(taskLabel);
                 });
     }
