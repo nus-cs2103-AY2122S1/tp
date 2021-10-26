@@ -20,6 +20,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemoveMarkCommand;
+import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -72,7 +73,6 @@ public class AddressBookParser {
         case DeleteShiftCommand.COMMAND_WORD:
             return new DeleteShiftCommandParser().parse(arguments);
 
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -87,6 +87,9 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case SetRoleReqCommand.COMMAND_WORD:
+            return new SetRoleReqCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

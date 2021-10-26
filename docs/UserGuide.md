@@ -52,6 +52,19 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 
 </div>
 
+### Setting Role Requirements help : `setRoleReq `
+
+Set the minimum number of staff required for each person
+
+Format: 
+
+`setRoleReq r/ROLE NUMBER_REQUIRED`
+
+Examples:
+
+`setRoleReq r/floor 3`\
+`setRoleReq r/kitchen 4`
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -60,10 +73,11 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+
 ## Basic management of Staff Details
 
 
-### Tag legend - `todo: standardize tags for all commands`
+### Tag legend
 
 |Tag|Description|
 |---|-----------|

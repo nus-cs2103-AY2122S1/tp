@@ -79,5 +79,14 @@ public class RoleReqStorage {
         pw.flush();
     }
 
+    /**
+     * Updates the save file with the new minimum number of staff required for a specific role.
+     *
+     * @param role The role which minimum requirement will be updated.
+     * @param numMinStaff The minimum number of staff required for that role.
+     */
+    public static void update(String role, int numMinStaff) {
+
+    }
 }
 
