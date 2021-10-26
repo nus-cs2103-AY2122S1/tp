@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -59,22 +60,38 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         faculty.setText(person.getFaculty().value);
         major.setText(person.getMajor().value);
+        AtomicInteger index = new AtomicInteger(1);
 
         person.getSkills().stream()
                 .sorted(Comparator.comparing(skill -> skill.skillName))
-                .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
+                .forEach(skill -> {
+                    skills.getChildren().add(new Label(index + ". " + skill.skillName));
+                    index.addAndGet(1);
+                });
+        index.set(1);
 
         person.getLanguages().stream()
                 .sorted(Comparator.comparing(language -> language.languageName))
-                .forEach(language -> languages.getChildren().add(new Label(language.languageName)));
+                .forEach(language -> {
+                    languages.getChildren().add(new Label(index + ". " + language.languageName));
+                    index.addAndGet(1);
+                });
+        index.set(1);
 
         person.getFrameworks().stream()
                 .sorted(Comparator.comparing(framework -> framework.frameworkName))
-                .forEach(framework -> frameworks.getChildren().add(new Label(framework.frameworkName)));
+                .forEach(framework -> {
+                    frameworks.getChildren().add(new Label(index + ". " + framework.frameworkName));
+                    index.addAndGet(1);
+                });
+        index.set(1);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    tags.getChildren().add(new Label(index + ". " + tag.tagName));
+                    index.addAndGet(1);
+                });
     }
 
     @Override

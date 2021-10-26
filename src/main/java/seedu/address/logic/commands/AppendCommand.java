@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -35,45 +31,43 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in ComputingConnection.
+ * Appends a new data field to the existing data fields of a person in ComputingConnection.
+ *
+ * Only applicable to data fields which can have more than 1 value.
  */
-public class EditCommand extends Command {
+public class AppendCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "append";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Appends a new data field to "
+            + "existing data fields of a person. "
+            + "Only applicable to data fields which can have more than 1 value.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_FACULTY + "FACULTY] "
-            + "[" + PREFIX_MAJOR + "MAJOR] "
             + "[" + PREFIX_SKILL + "SKILL] "
             + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
             + "[" + PREFIX_TAG + "TAG] "
             + "[" + PREFIX_REMARKS + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_LANGUAGE + "python";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_APPEND_PERSON_SUCCESS = "Appended data field: %1$s";
+    public static final String MESSAGE_NOT_APPENDED = "At least one field to append must be provided";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final AppendPersonDescriptor appendPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the person in the filtered person list to append to
+     * @param appendPersonDescriptor detail to append to the person
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public AppendCommand(Index index, AppendPersonDescriptor appendPersonDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(appendPersonDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.appendPersonDescriptor = appendPersonDescriptor;
     }
 
     @Override
@@ -85,38 +79,63 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToAppendTo = lastShownList.get(index.getZeroBased());
+        Person appendedToPerson = createAppendedPerson(personToAppendTo, appendPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToAppendTo.isSamePerson(appendedToPerson) && model.hasPerson(appendedToPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personToAppendTo, appendedToPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_APPEND_PERSON_SUCCESS, appendedToPerson));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToAppendTo}
+     * edited with {@code appendPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Person createAppendedPerson(Person personToAppendTo, AppendPersonDescriptor appendPersonDescriptor) {
+        assert personToAppendTo != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
-        Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
-        Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
-        Set<Language> updatedLanguages = editPersonDescriptor.getLanguages().orElse(personToEdit.getLanguages());
-        Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Remark> updatedRemarks = editPersonDescriptor.getRemarks().orElse(personToEdit.getRemarks());
+        Name previousName = personToAppendTo.getName();
+        Email previousEmail = personToAppendTo.getEmail();
+        Faculty previousFaculty = personToAppendTo.getFaculty();
+        Major previousMajor = personToAppendTo.getMajor();
 
-        return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags,
-                updatedRemarks, personToEdit.getInteractions());
+        //TODO: Is this supposed to be unmodifiable?
+        Set<Skill> newSkills = appendPersonDescriptor.getSkills().orElse(Set.of()); // Else, empty set
+        Set<Skill> currentSkills = personToAppendTo.getSkills();
+        Set<Skill> updatedSkills = new HashSet<>();
+        updatedSkills.addAll(currentSkills);
+        updatedSkills.addAll(newSkills);
+
+        Set<Language> newLanguages = appendPersonDescriptor.getLanguages().orElse(Set.of()); // Else, empty set
+        Set<Language> currentLanguages = personToAppendTo.getLanguages();
+        Set<Language> updatedLanguages = new HashSet<>();
+        updatedLanguages.addAll(currentLanguages);
+        updatedLanguages.addAll(newLanguages);
+
+        Set<Framework> newFrameworks = appendPersonDescriptor.getFrameworks().orElse(Set.of()); // Else, empty set
+        Set<Framework> currentFrameworks = personToAppendTo.getFrameworks();
+        Set<Framework> updatedFrameworks = new HashSet<>();
+        updatedFrameworks.addAll(currentFrameworks);
+        updatedFrameworks.addAll(newFrameworks);
+
+        Set<Tag> newTags = appendPersonDescriptor.getTags().orElse(Set.of()); // Else, empty set
+        Set<Tag> currentTags = personToAppendTo.getTags();
+        Set<Tag> updatedTags = new HashSet<>();
+        updatedTags.addAll(currentTags);
+        updatedTags.addAll(newTags);
+
+        Set<Remark> newRemarks = appendPersonDescriptor.getRemarks().orElse(Set.of()); // Else, empty set
+        Set<Remark> currentRemarks = personToAppendTo.getRemarks();
+        Set<Remark> updatedRemarks = new HashSet<>();
+        updatedRemarks.addAll(currentRemarks);
+        updatedRemarks.addAll(newRemarks);
+
+        return new Person(previousName, previousEmail, previousFaculty, previousMajor,
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags, updatedRemarks);
     }
 
     @Override
@@ -127,42 +146,34 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof AppendCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        AppendCommand e = (AppendCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && appendPersonDescriptor.equals(e.appendPersonDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * Stores the details to append the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
-        private Name name;
-        private Email email;
-        private Faculty faculty;
-        private Major major;
+    public static class AppendPersonDescriptor {
         private Set<Skill> skills;
         private Set<Language> languages;
         private Set<Framework> frameworks;
         private Set<Tag> tags;
         private Set<Remark> remarks;
 
-        public EditPersonDescriptor() {}
+        public AppendPersonDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setName(toCopy.name);
-            setEmail(toCopy.email);
-            setFaculty(toCopy.faculty);
-            setMajor(toCopy.major);
+        public AppendPersonDescriptor(AppendPersonDescriptor toCopy) {
             setSkills(toCopy.skills);
             setLanguages(toCopy.languages);
             setFrameworks(toCopy.frameworks);
@@ -171,43 +182,10 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one field has been appended.
          */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, faculty, major, skills,
-                    languages, frameworks, tags, remarks);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
-        }
-
-        public void setFaculty(Faculty faculty) {
-            this.faculty = faculty;
-        }
-
-        public Optional<Faculty> getFaculty() {
-            return Optional.ofNullable(faculty);
-        }
-
-        public void setMajor(Major major) {
-            this.major = major;
-        }
-
-        public Optional<Major> getMajor() {
-            return Optional.ofNullable(major);
+        public boolean isAnyFieldAppended() {
+            return CollectionUtil.isAnyNonNull(skills, languages, frameworks, tags, remarks);
         }
 
         /**
@@ -262,7 +240,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
+         * Sets {@code tag} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
@@ -279,17 +257,17 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code remarks} to this object's {@code remarks}.
+         * A defensive copy of {@code remarks} is used internally.
          */
         public void setRemarks(Set<Remark> remarks) {
             this.remarks = (remarks != null) ? new HashSet<>(remarks) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable remarks set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code remarks} is null.
          */
         public Optional<Set<Remark>> getRemarks() {
             return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
@@ -303,17 +281,15 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof AppendPersonDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
-
-            return getName().equals(e.getName())
-                    && getEmail().equals(e.getEmail())
-                    && getFaculty().equals(e.getFaculty())
-                    && getMajor().equals(e.getMajor())
+            AppendPersonDescriptor e = (AppendPersonDescriptor) other;
+            return getSkills().equals(e.getSkills())
+                    && getLanguages().equals(e.getLanguages())
+                    && getFrameworks().equals(e.getFrameworks())
                     && getTags().equals(e.getTags());
         }
     }

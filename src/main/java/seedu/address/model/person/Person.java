@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.interaction.Interaction;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
@@ -30,16 +32,18 @@ public class Person {
     private final Set<Skill> skills = new HashSet<>();
     private final Set<Language> languages = new HashSet<>();
     private final Set<Framework> frameworks = new HashSet<>();
+    private final Set<Interaction> interactions = new HashSet<>();
 
     // Misc Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Remark> remarks = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills,
-                  Set<Language> languages, Set<Framework> frameworks, Set<Tag> tags) {
-        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags);
+    public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills, Set<Language> languages,
+            Set<Framework> frameworks, Set<Tag> tags, Set<Remark> remarks) {
+        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags, remarks);
         this.name = name;
         this.email = email;
         this.faculty = faculty;
@@ -48,6 +52,34 @@ public class Person {
         this.languages.addAll(languages);
         this.frameworks.addAll(frameworks);
         this.tags.addAll(tags);
+        this.remarks.addAll(remarks);
+    }
+
+    /**
+     * Used to create a person with a new skill
+     */
+    public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills, Set<Language> languages,
+            Set<Framework> frameworks, Set<Tag> tags, Set<Remark> remarks, Set<Interaction> interactions) {
+        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags, remarks);
+        this.name = name;
+        this.email = email;
+        this.faculty = faculty;
+        this.major = major;
+        this.skills.addAll(skills);
+        this.languages.addAll(languages);
+        this.frameworks.addAll(frameworks);
+        this.tags.addAll(tags);
+        this.interactions.addAll(interactions);
+        this.remarks.addAll(remarks);
+    }
+
+    /**
+     * Appends a new interaction to the person.
+     */
+    public Person appendInteraction(Interaction interaction) {
+        requireAllNonNull(interactions);
+        this.interactions.add(interaction);
+        return new Person(name, email, faculty, major, skills, languages, frameworks, tags, remarks, this.interactions);
     }
 
     public Name getName() {
@@ -99,6 +131,22 @@ public class Person {
     }
 
     /**
+     * Returns an immutable remark set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Remark> getRemarks() {
+        return Collections.unmodifiableSet(remarks);
+    }
+
+    /**
+     * Returns an immutable interaction set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Interaction> getInteractions() {
+        return Collections.unmodifiableSet(interactions);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -107,8 +155,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -126,14 +173,11 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getFaculty().equals(getFaculty())
-                && otherPerson.getMajor().equals(getMajor())
-                && otherPerson.getSkills().equals(getSkills())
-                && otherPerson.getLanguages().equals(getLanguages())
-                && otherPerson.getFrameworks().equals(getFrameworks())
-                && otherPerson.getTags().equals(getTags());
+        return otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getFaculty().equals(getFaculty()) && otherPerson.getMajor().equals(getMajor())
+                && otherPerson.getSkills().equals(getSkills()) && otherPerson.getLanguages().equals(getLanguages())
+                && otherPerson.getFrameworks().equals(getFrameworks()) && otherPerson.getTags().equals(getTags())
+                && otherPerson.getInteractions().equals(getInteractions());
     }
 
     @Override
@@ -146,12 +190,12 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Faculty: ")
-                .append(getFaculty())
-                .append("; Major: ")
-                .append(getMajor());
+                    .append("; Email: ")
+                    .append(getEmail())
+                    .append("; Faculty: ")
+                    .append(getFaculty())
+                    .append("; Major: ")
+                    .append(getMajor());
 
         Set<Skill> skills = getSkills();
         if (!skills.isEmpty()) {
@@ -175,6 +219,18 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        Set<Remark> remarks = getRemarks();
+        if (!remarks.isEmpty()) {
+            builder.append("; Remarks: ");
+            remarks.forEach(builder::append);
+        }
+
+        Set<Interaction> interactions = getInteractions();
+        if (!interactions.isEmpty()) {
+            builder.append("; Interaction: ");
+            interactions.forEach(builder::append);
         }
         return builder.toString();
     }
