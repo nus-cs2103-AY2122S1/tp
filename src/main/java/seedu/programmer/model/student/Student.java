@@ -122,11 +122,9 @@ public class Student {
         if (score < 0.0) {
             throw new CommandException(REQUIRE_POSITIVE_SCORE);
         }
-        //        System.out.println(lab.getTotalScore());
-        //        System.out.println(lab);
-        //        if (score > lab.getTotalScore()) {
-        //            throw new CommandException(EXCEEDED_TOTAL_SCORE);
-        //        }
+        if (score > lab.getTotalScore()) {
+            throw new CommandException(EXCEEDED_TOTAL_SCORE);
+        }
         int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
 

@@ -99,7 +99,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Lab updatedLab = editStudentDescriptor.getLab().orElse(null);
         Double updatedResult = editStudentDescriptor.getResult().orElse(null);
-        if (updatedLab != null && updatedResult != null) {
+        assert updatedLab != null;
+        String labNum = updatedLab.getTitle().substring(updatedLab.getTitle().length() - 1);
+        int i = Integer.parseInt(labNum) - 1;
+        Double currTotalScore = studentToEdit.getLab(i).getTotalScore();
+        updatedLab.updateTotal(currTotalScore);
+        if (updatedResult != null) {
             System.out.println(updatedResult);
             studentToEdit.editLabResult(updatedLab, updatedResult);
             ObservableList<Lab> updatedList = studentToEdit.getLabResultList();
