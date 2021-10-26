@@ -7,10 +7,8 @@ import java.util.logging.Logger;
 import javax.crypto.NoSuchPaddingException;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
@@ -26,13 +24,7 @@ public class LoginScreen extends UiPart<Stage> {
     private PasswordField userInput;
 
     @FXML
-    private Button sendButton;
-
-    @FXML
     private Label responseDisplay;
-
-    @FXML
-    private StackPane responseDisplayPane;
 
     private final MainApp app;
     private final boolean isNew;
@@ -40,7 +32,7 @@ public class LoginScreen extends UiPart<Stage> {
     /**
      * Constructs a new LoginScreen.
      *
-     * @param app   The app to have the login screen.
+     * @param app The app to have the login screen.
      * @param isNew The boolean value for whether the user is new.
      */
     public LoginScreen(MainApp app, boolean isNew) {
@@ -52,22 +44,14 @@ public class LoginScreen extends UiPart<Stage> {
     /**
      * Constructs a new LoginScreen.
      *
-     * @param app          The app to have the login screen.
-     * @param isNew        The boolean value for whether the user is new.
+     * @param app The app to have the login screen.
+     * @param isNew The boolean value for whether the user is new.
      * @param primaryStage The stage to run.
      */
     public LoginScreen(MainApp app, boolean isNew, Stage primaryStage) {
         super(FXML, primaryStage);
         this.app = app;
         this.isNew = isNew;
-    }
-
-    /**
-     * Handles the login button pressed event.
-     */
-    @FXML
-    private void onButtonClick() {
-        handleUserInputPassword();
     }
 
     /**
