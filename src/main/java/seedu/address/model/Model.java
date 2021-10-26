@@ -191,4 +191,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Member member, Predicate<Task> predicate);
+
+    /**
+     * Updates the filter of the filtered task list of the previously selected member.
+     * to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredTaskList(Predicate<Task> predicate);
 }

@@ -282,6 +282,18 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+    /**
+     * Updates the filter of the filtered task list of the previously selected member.
+     * to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        getFilteredTaskList();
+        filteredTasks.setPredicate(predicate);
+    }
+
     @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
