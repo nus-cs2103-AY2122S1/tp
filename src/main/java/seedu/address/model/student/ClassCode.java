@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -9,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable.
  */
 
-public class ClassCode {
+public class ClassCode implements Comparable<ClassCode> {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode must start with G/g, "
             + "followed by a 2-digit number and it should not be blank";
@@ -35,7 +36,6 @@ public class ClassCode {
         boolean value = test.matches(VALIDATION_REGEX);
         return value;
     }
-
     @Override
     public String toString() {
         return value;
@@ -53,4 +53,8 @@ public class ClassCode {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(ClassCode classCode) {
+        return Integer.compare(parseInt(this.value.substring(1)), parseInt(classCode.value.substring(1)));
+    }
 }

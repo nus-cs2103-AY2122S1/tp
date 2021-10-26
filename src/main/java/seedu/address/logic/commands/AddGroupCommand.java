@@ -5,12 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.HashSet;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
@@ -29,7 +25,7 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in Classmate";
-    public static final String MESSAGE_GROUP_NOT_EXIST = "The class does not exist in Classmate";
+    public static final String MESSAGE_CLASS_NOT_EXIST = "The class does not exist in Classmate";
 
     private final TutorialGroup toAdd;
     private final TutorialClass toAddTutorialClass;
@@ -41,8 +37,7 @@ public class AddGroupCommand extends Command {
         requireNonNull(tutorialGroup);
         toAdd = tutorialGroup;
         // new class with the same class code created to check whether it already exists in ClassMATE
-        toAddTutorialClass = new TutorialClass(tutorialGroup.getClassCode(),
-                new Schedule("dummy, dummy"), new HashSet<Tag>());
+        toAddTutorialClass = TutorialClass.createTestTutorialClass(toAdd.getClassCode());
     }
 
     @Override
@@ -51,7 +46,7 @@ public class AddGroupCommand extends Command {
 
         // check if tutorial class already exists in ClassMATE
         if (!model.hasTutorialClass(toAddTutorialClass)) {
-            throw new CommandException(MESSAGE_GROUP_NOT_EXIST);
+            throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
         }
 
         if (model.hasTutorialGroup(toAdd)) {
@@ -59,6 +54,9 @@ public class AddGroupCommand extends Command {
         }
 
         model.addTutorialGroup(toAdd);
+
+        // rearrange tutorial groups in order after adding
+        model.sortTutorialGroups();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

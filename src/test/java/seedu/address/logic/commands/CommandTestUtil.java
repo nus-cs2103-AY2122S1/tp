@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -44,6 +46,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_BESTCLASS = "BestClass";
     public static final String VALID_TAG_MORNING = "Morning";
+    public static final String VALID_GROUPNAME_1 = "1";
+    public static final String VALID_GROUPTYPE_OP1 = "OP1";
+    public static final String VALID_GROUPNAME_2 = "2";
+    public static final String VALID_GROUPTYPE_OP2 = "OP2";
     public static final String VALID_CLASSCODE_G01 = "G01";
     public static final String VALID_CLASSCODE_G02 = "G02";
     public static final String VALID_CLASSCODE_G06 = "G06";
@@ -51,7 +57,6 @@ public class CommandTestUtil {
     public static final String VALID_SCHEDULE_G02 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
     public static final String VALID_SCHEDULE_G06 = "Tuesday 12pm to 2pm, Friday 12pm to 2pm";
     public static final String VALID_MARK = "GOOD";
-
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -67,6 +72,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String TAG_DESC_BESTCLASS = " " + PREFIX_TAG + VALID_TAG_BESTCLASS;
     public static final String TAG_DESC_MORNING = " " + PREFIX_TAG + VALID_TAG_MORNING;
+    public static final String GROUPNAME_DESC_1 = " " + PREFIX_GROUPNAME + VALID_GROUPNAME_1;
+    public static final String GROUPTYPE_DESC_OP1 = " " + PREFIX_TYPE + VALID_GROUPTYPE_OP1;
+    public static final String GROUPNAME_DESC_2 = " " + PREFIX_GROUPNAME + VALID_GROUPNAME_2;
+    public static final String GROUPTYPE_DESC_OP2 = " " + PREFIX_TYPE + VALID_GROUPTYPE_OP2;
     public static final String CLASSCODE_DESC_G01 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G01;
     public static final String CLASSCODE_DESC_G02 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G02;
     public static final String CLASSCODE_DESC_G06 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G06;
@@ -86,6 +95,11 @@ public class CommandTestUtil {
 
     //Verification not yet implemented
     public static final String INVALID_CLASSCODE_DESC = " " + PREFIX_TAG + "T03"; // Classcode must start with G
+
+    // only numbers are allowed for group name
+    public static final String INVALID_GROUPNAME_DESC = " " + PREFIX_GROUPNAME + "a";
+    // only OP1 and OP2 are allowed for group type
+    public static final String INVALID_GROUPTYPE_DESC = " " + PREFIX_TYPE + "OP3";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

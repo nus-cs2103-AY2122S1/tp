@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tutorialgroup.GroupName;
+import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
@@ -56,11 +56,11 @@ public class JsonAdaptedTutorialGroup {
 
         if (groupName == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName())
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupNumber.class.getSimpleName())
             );
         }
 
-        final GroupName modelGroupName = new GroupName(groupName);
+        final GroupNumber modelGroupNumber = new GroupNumber(groupName);
 
         if (groupType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
@@ -68,7 +68,7 @@ public class JsonAdaptedTutorialGroup {
 
         final GroupType modelGroupType = new GroupType(groupType);
 
-        return new TutorialGroup(modelGroupName, modelClassCode, modelGroupType);
+        return new TutorialGroup(modelGroupNumber, modelClassCode, modelGroupType);
     }
 
 }

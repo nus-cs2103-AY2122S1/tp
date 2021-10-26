@@ -6,23 +6,23 @@ import seedu.address.model.student.ClassCode;
 
 public class TutorialGroup {
 
-    private final GroupName groupName;
+    private final GroupNumber groupNumber;
     private final ClassCode classCode;
     private final GroupType groupType;
 
     /**
-     * @param groupName GroupName of Tutorial Group.
+     * @param groupNumber GroupName of Tutorial Group.
      * @param classCode ClassCode of Tutorial Group.
      */
-    public TutorialGroup(GroupName groupName, ClassCode classCode, GroupType groupType) {
-        this.groupName = groupName;
+    public TutorialGroup(GroupNumber groupNumber, ClassCode classCode, GroupType groupType) {
+        this.groupNumber = groupNumber;
         this.classCode = classCode;
         this.groupType = groupType;
 
     }
 
-    public GroupName getGroupName() {
-        return groupName;
+    public GroupNumber getGroupName() {
+        return groupNumber;
     }
 
     public ClassCode getClassCode() {
@@ -67,7 +67,7 @@ public class TutorialGroup {
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName, classCode, groupType);
+        return Objects.hash(groupNumber, classCode, groupType);
     }
 
     @Override

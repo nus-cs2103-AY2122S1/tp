@@ -85,12 +85,6 @@ public interface Model {
     void deleteTutorialClass(TutorialClass target);
 
     /**
-     * Deletes the given group.
-     * The group must exist in Classmate.
-     */
-    void deleteTutorialGroup(TutorialGroup target);
-
-    /**
      * Adds the given student.
      * {@code student} must not already exist in the Classmate.
      */
@@ -109,6 +103,11 @@ public interface Model {
     void addTutorialGroup(TutorialGroup tutorialGroup);
 
     /**
+     * Sorts the tutorial groups.
+     */
+    void sortTutorialGroups();
+
+    /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the ClassMATE.
      * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
@@ -121,9 +120,6 @@ public interface Model {
     /** Returns unmodifiable view of filtered Tutorial ClassList */
     ObservableList<TutorialClass> getFilteredTutorialClassList();
 
-    /** Returns unmodifiable view of filtered Tutorial GroupList */
-    ObservableList<TutorialGroup> getFilteredTutorialGroupList();
-
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -132,5 +128,4 @@ public interface Model {
 
     void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate);
 
-    void updateFilteredTutorialGroupList(Predicate<TutorialGroup> predicate);
 }

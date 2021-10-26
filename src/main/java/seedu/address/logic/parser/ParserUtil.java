@@ -17,7 +17,7 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
-import seedu.address.model.tutorialgroup.GroupName;
+import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 
 /**
@@ -151,10 +151,13 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the given {@code schedule} is invalid.
      */
-    public static GroupName parseGroupName(String groupName) throws ParseException {
+    public static GroupNumber parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
-        return new GroupName(trimmedGroupName);
+        if (!GroupNumber.isValidGroupName(groupName)) {
+            throw new ParseException(GroupNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupNumber(trimmedGroupName);
     }
 
     /**

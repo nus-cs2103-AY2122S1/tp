@@ -1,12 +1,18 @@
 package seedu.address.model.tutorialclass;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.UniqueTutorialGroupList;
 
 /**
  * Represents a tutorial class in the Classmate.
@@ -18,6 +24,7 @@ public class TutorialClass {
     // Class Fields
     private final ClassCode classCode;
     private final Schedule schedule;
+    private UniqueTutorialGroupList tutorialGroups;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -28,7 +35,36 @@ public class TutorialClass {
     public TutorialClass(ClassCode classCode, Schedule schedule, Set<Tag> tags) {
         this.classCode = classCode;
         this.schedule = schedule;
+        this.tutorialGroups = new UniqueTutorialGroupList();
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor that is called when initializing the Tutorial class from storage.
+     *
+     * @param classCode ClassCode of Tutorial Class.
+     * @param schedule Class Schedule.
+     * @param tutorialGroups List of Tutorial Groups
+     * @param tags Optional tags.
+     */
+    public TutorialClass(ClassCode classCode, Schedule schedule, List<TutorialGroup> tutorialGroups, Set<Tag> tags) {
+        this.classCode = classCode;
+        this.schedule = schedule;
+        this.tutorialGroups = new UniqueTutorialGroupList();
+        for (TutorialGroup tutorialGroup : tutorialGroups) {
+            this.tutorialGroups.add(tutorialGroup);
+        }
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates a tutorial class for checking.
+     * @param classCode ClassCode of TutorialClass for checking.
+     * @return The TutorialClass with a ClassCode.
+     */
+    public static TutorialClass createTestTutorialClass(ClassCode classCode) {
+        return new TutorialClass(classCode, new Schedule("tues 12:00pm to 2:00pm, friday 12:00pm to 2:00pm"),
+                new HashSet<Tag>());
     }
 
     public ClassCode getClassCode() {
@@ -37,6 +73,20 @@ public class TutorialClass {
 
     public Schedule getSchedule() {
         return schedule;
+    }
+
+    public UniqueTutorialGroupList getTutorialGroups() {
+        return tutorialGroups;
+    }
+
+    /**
+     * Converts the UniqueTutorialGroupList to List to be used for storage
+     *
+     * @return List of tutorial groups
+     */
+    public List<TutorialGroup> getTutorialGroupsAsList() {
+        ArrayList<TutorialGroup> result = new ArrayList<>(tutorialGroups.getInternalList());
+        return result;
     }
 
     public Set<Tag> getTags() {
@@ -55,6 +105,37 @@ public class TutorialClass {
         return otherClass != null
                 && otherClass.getClassCode().equals(getClassCode());
 
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the ClassMATE.
+     */
+    public boolean contains(TutorialGroup tutorialGroup) {
+        requireNonNull(tutorialGroup);
+        return tutorialGroups.contains(tutorialGroup);
+    }
+
+    /**
+     * Adds a student to the ClassMATE.
+     * The student must not already exist in the ClassMATE.
+     */
+    public void addTutorialGroup(TutorialGroup tutorialGroup) {
+        tutorialGroups.add(tutorialGroup);
+    }
+
+    /**
+     * Sorts the tutorial groups in ClassMATE.
+     */
+    public void sortTutorialGroups() {
+        tutorialGroups.sort();
+    }
+
+    /**
+     * Removes {@code key} from this {@code Classmate}.
+     * {@code key} must exist in the ClassMATE.
+     */
+    public void removeTutorialGroup(TutorialGroup key) {
+        tutorialGroups.remove(key);
     }
 
     @Override

@@ -14,6 +14,7 @@ import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 //TODO: Implement this skeleton class properly.
 /**
@@ -25,6 +26,7 @@ class JsonAdaptedTutorialClass {
 
     private final String classCode;
     private final String schedule;
+    private final List<JsonAdaptedTutorialGroup> tutorialGroups = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -33,9 +35,13 @@ class JsonAdaptedTutorialClass {
     @JsonCreator
     public JsonAdaptedTutorialClass(@JsonProperty("classCode") String classCode,
                                     @JsonProperty("schedule") String schedule,
+                                    @JsonProperty("tutorialGroups") List<JsonAdaptedTutorialGroup> tutorialGroups,
                                     @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.classCode = classCode;
         this.schedule = schedule;
+        if (tutorialGroups != null) {
+            this.tutorialGroups.addAll(tutorialGroups);
+        }
 
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -48,6 +54,9 @@ class JsonAdaptedTutorialClass {
     public JsonAdaptedTutorialClass(TutorialClass source) {
         classCode = source.getClassCode().toString();
         schedule = source.getSchedule().toString();
+        tutorialGroups.addAll(source.getTutorialGroupsAsList().stream()
+                .map(JsonAdaptedTutorialGroup::new)
+                .collect(Collectors.toList()));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -59,6 +68,11 @@ class JsonAdaptedTutorialClass {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public TutorialClass toModelType() throws IllegalValueException {
+        final List<TutorialGroup> tutorialGroupsModel = new ArrayList<>();
+        for (JsonAdaptedTutorialGroup tutorialGroup : tutorialGroups) {
+            tutorialGroupsModel.add(tutorialGroup.toModelType());
+        }
+
         final List<Tag> tutorialClassTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             tutorialClassTags.add(tag.toModelType());
@@ -83,7 +97,7 @@ class JsonAdaptedTutorialClass {
         final Schedule modelSchedule = new Schedule(schedule);
 
         final Set<Tag> modelTags = new HashSet<>(tutorialClassTags);
-        return new TutorialClass(modelClassCode, modelSchedule, modelTags);
+        return new TutorialClass(modelClassCode, modelSchedule, tutorialGroupsModel, modelTags);
     }
 
 }
