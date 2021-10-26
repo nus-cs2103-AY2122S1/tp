@@ -286,28 +286,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1.  User requests for help
-2.  Track2Gather shows a message with the user guide
-3.  User accesses the user guide
-4.  User closes the message
+1.  User requests for help.
+2.  Track2Gather shows a message with a link to the user guide.
+3.  User accesses the user guide.
+4.  User closes the message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User closes the message
+* 2a. User closes the message.
     
     Use case ends.
 
 
-**Use case: UC02 -  Edit details of an existing contact**
+**Use case: UC02 - Edit details of an existing contact**
 
 **MSS:**
 
-1.  User requests to list persons
-2.  Track2Gather shows a list of persons
-3.  User requests to edit the details of a specific person in the list
-4.  Track2Gather edits the person
+1.  User requests to list persons.
+2.  Track2Gather shows a list of persons.
+3.  User requests to edit the details of a specific person in the list.
+4.  Track2Gather edits the person.
 
     Use case ends.
 
@@ -355,10 +355,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User chooses to add a new contact
-2. Track2Gather requests for details of contact
+1. User chooses to add a new contact.
+2. Track2Gather requests for details of contact.
 3. User enters the requested details.
-4. Track2Gather creates and shows the new contact with given details
+4. Track2Gather creates and shows the new contact with given details.
 
     Use case ends.
 
@@ -525,13 +525,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person is deleted from the list. Details of the deleted person shown in the status message.
 
    3. Test case: `delete 1 2`<br>
-      Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+      Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message.
 
    4. Test case: `delete 3 1 2`<br>
-      Expected: First, second and third persons are deleted from the list. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+      Expected: First, second and third persons are deleted from the list. Details of the deleted persons shown in the status message.
 
    5. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -543,13 +543,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Find specific person(s) using the `find` command.
 
    2. Test case: `delete 1`<br>
-      Expected: First person displayed in the search results is deleted from the application. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person displayed in the search results is deleted from the application. Details of the deleted person shown in the status message.
 
    3. Test case: `delete 1 2`<br>
-      Expected: First and second persons displayed in the search results are deleted from the application. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+      Expected: First and second persons displayed in the search results are deleted from the application. Details of the deleted persons shown in the status message.
 
    4. Test case: `delete 3 1 2`<br>
-      Expected: First, second and third persons displayed in the search results are deleted from the application. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+      Expected: First, second and third persons displayed in the search results are deleted from the application. Details of the deleted persons shown in the status message.
 
    5. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -579,11 +579,12 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `edit 1 INVALID_PREFIX/EXAMPLE`<br>
       Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
       remains the same.
+
    6. Test case: `edit 1 VALID_PREFIX/INVALID_INPUT`<br>
       Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
       remains the same.
 
-2. _{ more test cases …​ }_
+   7. _{ more test cases …​ }_
 
 ### Clearing person(s) with completed SHN periods
 
@@ -591,7 +592,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `clear`<br>
-      Expected: All persons with completed SHN periods are deleted from the list. Success message is shown. Timestamp in the status bar is updated.
+      Expected: All persons with completed SHN periods are deleted from the list. Success message is shown.
     
    3. Test case: `clear x` (where x is any character)<br>
       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
@@ -618,22 +619,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Sorting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `sort n/`<br>
-       Expected: The list of persons is sorted by name (in ascending order by default).
+   2. Test case: `sort n/`<br>
+      Expected: The list of persons is sorted by name (in ascending order by default).
 
-    3. Test case: `sort sh/start:dsc`<br>
-       Expected: The list of persons is sorted by start date of SHN Period in descending order.
+   3. Test case: `sort sh/start:dsc`<br>
+      Expected: The list of persons is sorted by start date of SHN Period in descending order.
 
-    4. Test case: `sort sh/end: cn/asc`<br>
-       Expected: The list of persons is sorted by end date of SHN period (in ascending order by default), then by case number in ascending order.
+   4. Test case: `sort sh/end: cn/asc`<br>
+      Expected: The list of persons is sorted by end date of SHN period (in ascending order by default), then by case number in ascending order.
 
-    5. Test case: `sort`<br>
-       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+   5. Test case: `sort`<br>
+      Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect sort commands to try: `sort shn/start`, `sort p/` (since `p/` is an unsupported field prefix), `...` <br>
-       Expected: Similar to previous.
+   6. Other incorrect sort commands to try: `sort shn/start`, `sort p/` (since `p/` is an unsupported field prefix), `...` <br>
+      Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
 
@@ -641,55 +642,55 @@ testers are expected to do more *exploratory* testing.
 
 1. Starting a new SHN enforcement session
 
-    1. Test case: `session`<br>
-       Expected: All persons in the list are updated to be non-called.
+   1. Test case: `session`<br>
+      Expected: All persons in the list are updated to be non-called.
        
-    2. Test case: `session x` (where x is any character)<br>
-       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+   2. Test case: `session x` (where x is any character)<br>
+      Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
 2. Updating a person's call status to successful in the current SHN enforcement session
 
-    1. Test case: `scall 1`<br>
-       Expected: First person displayed in the search results is updated as successfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `scall 1`<br>
+      Expected: First person displayed in the search results is updated as successfully called. The case number of the updated person is shown in the status message.
 
-    2. Test case: `scall 3`<br>
-       Expected: Third person displayed in the search results is updated as successfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `scall 3`<br>
+      Expected: Third person displayed in the search results is updated as successfully called. The case number of the updated person is shown in the status message.
       
-    3. Test case: `scall 0`<br>
-       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `scall 0`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size), `...` <br>
-       Expected: Similar to previous.
+   4. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size), `...` <br>
+      Expected: Similar to previous.
 
 3. Updating that a failed call was made to a person in the current SHN enforcement session
 
-    1. Test case: `fcall 1`<br>
-       Expected: First person displayed in the search results is updated as unsuccessfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `fcall 1`<br>
+      Expected: First person displayed in the search results is updated as unsuccessfully called. The case number of the updated person is shown in the status message.
 
-    2. Test case: `fcall 3`<br>
-       Expected: Third person displayed in the search results is updated as unsuccessfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `fcall 3`<br>
+      Expected: Third person displayed in the search results is updated as unsuccessfully called. The case number of the updated person is shown in the status message.
 
-    3. Test case: `fcall 0`<br>
-       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `fcall 0`<br>
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
     
-    4. Other incorrect scall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
-       Expected: Similar to previous.
+   4. Other incorrect fcall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
+      Expected: Similar to previous.
 
 4. Showing a list of all persons who have not been called in the current SHN enforcement session
 
-    1. Test case: `schedule`<br>
-       Expected: The list is updated to display only persons who have not been called in the current SHN enforcement session.
+   1. Test case: `schedule`<br>
+      Expected: The list is updated to display only persons who have not been called in the current SHN enforcement session.
 
-    2. Test case: `schedule x` (where x is any character)<br>
-       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+   2. Test case: `schedule x` (where x is any character)<br>
+      Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    2. Test case: Empty JSON file.  
-       Expected: Sample Track2Gather person list will be generated with sample persons' information.
-    3. Test case: Corrupted JSON file.  
-       Expected: Sample Track2Gather person list will be generated with sample persons' information.
+   1. Test case: Empty JSON file.  
+      Expected: Sample Track2Gather person list will be generated with sample persons' information.
+   2. Test case: Corrupted JSON file.  
+      Expected: Sample Track2Gather person list will be generated with sample persons' information.
 
 2. _{ more test cases …​ }_
 

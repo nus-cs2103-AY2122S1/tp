@@ -38,7 +38,7 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
    
     * **`list`** : Shows a list of all persons.
 
-    * **`sort`** : Sorts all persons in the contacts list.
+    * **`sort`** : Sorts all persons in the persons list.
 
     * **`clear`** : Deletes all persons with SHN periods that are completed at time of command call.
 
@@ -86,7 +86,7 @@ Refer to the [Features](#features) below for details of each command.
 Adds a person to the persons list for tracking.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL cn/CASE_NUMBER ha/HOME_ADDRESS [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`
-* There cannot be multiple persons with the same name (case-sensitive)
+* There cannot be multiple persons with the same case number
 
 Examples:
 * `add n/Alex p/98765432 e/alex@email.com cn/600204 ha/123 Orchard Road #01-100 800123`
@@ -100,7 +100,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOM
 * Edits the person at the specified `INDEX`
 * The index **must be a positive integer** (e.g. 1, 2, 3, ..)
 * The index **must not exceed the total number of persons** in the persons list
-* There cannot be multiple persons with the same name (case-sensitive)
+* There cannot be multiple persons with the same case number
 * At least one field to edit must be provided
 
 Examples:
@@ -111,22 +111,22 @@ Examples:
 Finds person(s) based on the field specified by the user and displays them as a list with index numbers.
 
 Format: `find FIELD_PREFIX KEYWORD [MORE_KEYWORDS]`
-* Field must be one of `n/`, `p/`, `cn/`, `sh/start:` or `sh/end:`
+* Field must be one of the following: `n/`, `p/`, `cn/`, `sh/start:` or `sh/end:`
 * For find by name (`n/`),
   * search is case-insensitive. e.g `hans` will match `Hans`
   * full words will be matched e.g. Han will not match Hans
-* For find by phone number (`p/`), phone numbers that starts with one or more keyword(s) will be matched e.g. `123` and `1234` will match `12345678`
+  * the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* For find by phone number (`p/`), phone numbers that start with the specified number will be matched e.g. `123` and `1234` will match `12345678`
 * For find by case number (`cn/`),
-  * search will only match if case number is equal to one or more keyword(s), e.g. `123` will match `123` but will not match `1234`
-  * all keywords must be entered in valid case number formats
+  * search will only match if case number is equal, e.g. `123` will match `123` but will not match `1234`
+  * case number must be entered in the valid format
 * For find by SHN start date (`sh/start:`),
-  * search will only match if SHN start date is equal to one or more keyword(s), e.g. `2021-01-01` will match `2021-01-01`
-  * all keywords must be entered in valid date formats
+  * search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`
+  * SHN start date must be entered in valid ISO-8601 date format
 * For find by SHN end date (`sh/end:`), 
-  * search will only match if SHN end date is equal to one or more keyword(s), e.g. `2021-01-02` will match `2021-01-02`
-  * all keywords must be entered in valid date formats
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` and `2021-01-01 2021-01-02 2021-01-03` will match `2021-01-01`
-* Only one of the following can be searched at a time: name, phone, case number, SHN start date and SHN end date
+  * search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`
+  * SHN end date must be entered in valid ISO-8601 date format
+* Only one of the following can be searched at a time: name, phone number, case number, SHN start date and SHN end date
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -157,14 +157,14 @@ Deletes the person(s) identified by the specified index number(s) used in the di
 
 Format: `delete INDEX [MORE_INDICES]`
 
-* Deletes the contact(s) at the specified `INDEX`(s).
+* Deletes the person(s) at the specified `INDEX`(s).
 * The index(s) **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index(s) **must not exceed the total number of contacts** in the address book
+* The index(s) **must not exceed the total number of persons** in the address book
 * The index(s) **can be given in any order** (e.g. `delete 1 4 5`, `delete 5 1 4`)
 
 Examples:
-* `sort n/` followed by `delete 2` deletes the 2nd person in the contacts list when sorted by name. 
-* `sort cn/` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the contacts list when sorted by case
+* `sort n/` followed by `delete 2` deletes the 2nd person in the persons list when sorted by name. 
+* `sort cn/` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the persons list when sorted by case
   number.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command, if any.
 
@@ -176,19 +176,19 @@ Format: `list`
 
 ### Sorting all persons : `sort`
 
-Sorts the contacts list based on the specified field prefixes.
+Sorts the persons list based on the specified field prefixes.
 
 Format: `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTION]`
 
-* Sorts the contacts list from the first to the last specified field prefix.
+* Sorts the persons list from the first to the last specified field prefix.
 * At least one field prefix must be specified.
 * Direction "asc" indicates ascending order and "dsc" indicates descending order.
 * Specifying the sort direction is optional. By default, field prefixes are sorted in ascending order.
 
 Examples:
-* `sort n/` sorts the contacts list by name (in ascending order by default).
-* `sort sh/end:dsc` sorts the contacts list by end date of SHN period in descending order.
-* `sort sh/start: cn/asc` sorts the contacts list by start date of SHN period (in ascending order by default), then by case number in ascending order.
+* `sort n/` sorts the persons list by name (in ascending order by default).
+* `sort sh/end:dsc` sorts the persons list by end date of SHN period in descending order.
+* `sort sh/start: cn/asc` sorts the persons list by start date of SHN period (in ascending order by default), then by case number in ascending order.
 
 ### Clearing all persons : `clear`
 
@@ -279,7 +279,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOME_ADDRESS] [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/ADD_SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g., `edit 1 n/Henry Hugh`
 **Find** | `find FIELD_PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake` `find p/123` `find cn/111` `find sh/start:2000-01-01` `find sh/end: 2000-01-02`
 **TShift** | `tshift [PLUS_MINUS_SIGN]DAYS`<br> e.g., `tshift 3`
-**Delete** | `delete [INDEX] [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
+**Delete** | `delete INDEX [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
 **List** | `list`
 **Sort** | `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTION]`<br> e.g., `sort n/` `sort sort/end:dsc` `sort sh/start: cn/asc`
 **Clear** | `clear`
