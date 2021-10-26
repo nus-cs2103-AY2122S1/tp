@@ -149,7 +149,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String risk} into an {@code Risk}.
+     * Parses a {@code String risk} into a {@code Risk}.
      * Leading and trailing whitespaces will be trimmed.
      * Optional Risk field accepts an empty string as UNCLASSIFIED.
      *

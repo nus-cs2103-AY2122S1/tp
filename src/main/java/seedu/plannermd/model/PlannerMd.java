@@ -1,6 +1,7 @@
 package seedu.plannermd.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,7 +38,8 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         appointments = new UniqueAppointmentList();
     }
 
-    public PlannerMd() {}
+    public PlannerMd() {
+    }
 
     /**
      * Creates an PlannerMd using the Persons in the {@code toBeCopied}
@@ -199,6 +201,27 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     }
 
     /**
+     * Returns true if an existing appointment clashes with the edited appointment in the PlannerMD.
+     *
+     * @param editedAppointment The appointment that is edited.
+     * @param oldAppointment    The appointment before applying the changes.
+     */
+    public boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment) {
+        requireAllNonNull(editedAppointment, oldAppointment);
+        for (Appointment existingAppointment : appointments) {
+            if (oldAppointment.isSameAppointment(existingAppointment)) {
+                // skip comparing, otherwise the edited appointment will almost always
+                // clash with itself before the changes
+                continue;
+            }
+            if (editedAppointment.isClash(existingAppointment)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds an appointment to the PlannerMD.
      * The appointment must not already exist in the PlannerMD.
      */
@@ -229,7 +252,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
      * Deletes appointments with {@code person} from the appointment list
      *
      * @param person person whose appointments should be deleted
-     * @param <T> Subtype of Person
+     * @param <T>    Subtype of Person
      */
     public <T extends Person> void deleteAppointmentsWithPerson(T person) {
         appointments.deleteAppointmentsWithPerson(person);
@@ -238,9 +261,9 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     /**
      * Updates appointments with {@code person} to {@code editedPerson} from the appointment list
      *
-     * @param person person whose appointments should be updated
+     * @param person       person whose appointments should be updated
      * @param editedPerson the person to replace {@code person} in existing appointments
-     * @param <T> Subtype of Person
+     * @param <T>          Subtype of Person
      */
     public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
         appointments.editAppointmentsWithPerson(person, editedPerson);

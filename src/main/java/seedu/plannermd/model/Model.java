@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
@@ -25,7 +26,8 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
+    Predicate<Appointment> PREDICATE_SHOW_TODAY_APPOINTMENT =
+            AppointmentFilters.todayAppointmentFilter().collectAllFilters();
 
     /**
      * Changes current state to  {@code state}.
@@ -144,6 +146,14 @@ public interface Model {
      * Returns true if an existing appointment clashes with {@code appointment} in the PlannerMD.
      */
     boolean isClashAppointment(Appointment appointment);
+
+    /**
+     * Returns true if an edited appointment clashes with {@code appointment} in the PlannerMD.
+     *
+     * @param editedAppointment The appointment that is edited.
+     * @param oldAppointment    The appointment before applying the changes.
+     */
+    boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment);
 
     /**
      * Deletes the given appointment.

@@ -185,6 +185,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment) {
+        requireAllNonNull(editedAppointment, oldAppointment);
+        return plannerMd.isClashAppointmentForEdited(editedAppointment, oldAppointment);
+    }
+
+    @Override
     public void deleteAppointment(Appointment target) {
         plannerMd.removeAppointment(target);
     }
@@ -192,7 +198,6 @@ public class ModelManager implements Model {
     @Override
     public void addAppointment(Appointment appointment) {
         plannerMd.addAppointment(appointment);
-        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override

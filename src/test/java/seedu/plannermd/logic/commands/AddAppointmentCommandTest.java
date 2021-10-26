@@ -40,6 +40,7 @@ import seedu.plannermd.testutil.patient.PatientBuilder;
 public class AddAppointmentCommandTest {
     private AddAppointmentCommand.AddAppointmentDescriptor descriptor =
             new AddAppointmentDescriptorBuilder(new AppointmentBuilder().build()).build();
+
     @Test
     public void constructor_nullAll_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null,
@@ -131,7 +132,7 @@ public class AddAppointmentCommandTest {
         // same values -> returns true
         AddAppointmentCommand addThirtyMinApptCommandCopy =
                 new AddAppointmentCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON,
-                new AddAppointmentDescriptorBuilder(thirtyMinDescriptor).build());
+                        new AddAppointmentDescriptorBuilder(thirtyMinDescriptor).build());
 
         assertTrue(addThirtyMinApptCommand.equals(addThirtyMinApptCommandCopy));
 
@@ -251,6 +252,11 @@ public class AddAppointmentCommandTest {
 
         @Override
         public boolean isClashAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -401,7 +407,6 @@ public class AddAppointmentCommandTest {
             }
             return false;
         }
-
 
 
         @Override

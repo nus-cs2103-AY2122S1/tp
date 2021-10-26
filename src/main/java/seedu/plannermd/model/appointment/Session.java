@@ -17,9 +17,8 @@ public class Session {
 
     public static final String MESSAGE_CONSTRAINTS = "Times should be of the format HH:MM "
             + "and adhere to the following constraints:\n"
-            + "1. Must be a valid time (after now if the given date is the current date)\n"
-            + "2. Hour must be between 0-23 (0 in front of single digit is optional)\n"
-            + "3. Minute must be between 0-59 (0 in front of single digit is optional).";
+            + "1. Hour must be between 0-23 (0 in front of single digit is optional)\n"
+            + "2. Minute must be between 0-59 (0 in front of single digit is optional).";
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:m")
             .withResolverStyle(ResolverStyle.SMART);
