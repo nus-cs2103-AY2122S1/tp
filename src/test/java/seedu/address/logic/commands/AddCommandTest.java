@@ -252,6 +252,16 @@ public class AddCommandTest {
             ModelStubAcceptingItemAdded other = (ModelStubAcceptingItemAdded) obj;
             return itemsAdded.equals(other.itemsAdded) && addedAmount == other.addedAmount;
         }
+
+        @Override
+        public void addCostBookKeeping(Double cost) {
+
+        }
+
+        @Override
+        public void addRevenueBookKeeping(Double revenue) {
+
+        }
     }
 
 }

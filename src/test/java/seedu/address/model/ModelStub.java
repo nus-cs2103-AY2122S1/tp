@@ -140,4 +140,14 @@ public class ModelStub implements Model {
     public void transactAndClearOrder() {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void addCostBookKeeping(Double cost) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addRevenueBookKeeping(Double revenue) {
+        throw new AssertionError("This method should not be called.");
+    }
 }

@@ -25,6 +25,7 @@ import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 import seedu.address.model.order.TransactionTimeComparator;
+import seedu.address.storage.BookKeepingStorage;
 import seedu.address.storage.TransactionStorage;
 
 /**
@@ -40,6 +41,7 @@ public class ModelManager implements Model {
     private final DisplayList displayList;
     private Optional<Order> optionalOrder;
     private Set<TransactionRecord> transactions;
+    private BookKeeping bookKeeping;
 
     private DisplayMode currentDisplay = DISPLAY_INVENTORY;
 
@@ -57,9 +59,13 @@ public class ModelManager implements Model {
         displayList = new DisplayList(this.inventory.getItemList());
         optionalOrder = Optional.empty();
         List<TransactionRecord> transactionRecordList = null;
+        bookKeeping = new BookKeeping(0.0, 0.0, 0.0);
         try {
             transactionRecordList = new TransactionStorage()
                     .readTransaction(userPrefs.getTransactionFilePath()).orElse(null);
+            bookKeeping = new BookKeepingStorage()
+                    .readBookKeeping(userPrefs.getBookKeepingFilePath())
+                    .orElse(new BookKeeping(0.0, 0.0, 0.0));
         } catch (DataConversionException e) {
             System.out.println(e);
         }
@@ -289,6 +295,12 @@ public class ModelManager implements Model {
         optionalOrder = Optional.empty();
         transactions.add(transaction);
 
+        Double totalRevenue = transaction.getItems().stream()
+                .map(i -> i.getCount() * i.getSalesPrice())
+                .reduce(0.0, (subTotal, next) -> subTotal + next);
+
+        addRevenueBookKeeping(totalRevenue);
+
         try {
             new TransactionStorage().saveTransaction(new ArrayList(transactions),
                     path);
@@ -317,5 +329,40 @@ public class ModelManager implements Model {
      */
     public List<TransactionRecord> getTransactions() {
         return getTransactions(new TransactionTimeComparator());
+    }
+
+    //=========== BookKeeping ================================================================================
+
+    /**
+     * Save the BookKeeping to json.
+     *
+     * @param bookKeeping current bookKeeping.
+     */
+    public void saveBookKeeping(BookKeeping bookKeeping) {
+        try {
+            new BookKeepingStorage().saveBookKeeping(bookKeeping, userPrefs.getBookKeepingFilePath());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Add cost to bookKeeping.
+     *
+     * @param cost cost to add.
+     */
+    public void addCostBookKeeping(Double cost) {
+        bookKeeping.addCost(cost);
+        saveBookKeeping(bookKeeping);
+    }
+
+    /**
+     * Add revenue to bookKeeping.
+     *
+     * @param revenue revenue to add.
+     */
+    public void addRevenueBookKeeping(Double revenue) {
+        bookKeeping.addRevenue(revenue);
+        saveBookKeeping(bookKeeping);
     }
 }

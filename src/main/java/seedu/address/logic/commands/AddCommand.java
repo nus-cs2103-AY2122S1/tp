@@ -73,6 +73,9 @@ public class AddCommand extends Command {
             // Add the new item into inventory
             Item newItem = toAddDescriptor.buildItem();
             model.addItem(newItem);
+
+            model.addCostBookKeeping(newItem.getCostPrice() * newItem.getCount());
+
             return new CommandResult(String.format(MESSAGE_SUCCESS_NEW, newItem));
         }
 
@@ -85,6 +88,7 @@ public class AddCommand extends Command {
         Item target = matchingItems.get(0);
         int amount = toAddDescriptor.getCount().get();
         model.restockItem(target, amount);
+        model.addCostBookKeeping(amount * target.getCostPrice());
         return new CommandResult(String.format(MESSAGE_SUCCESS_REPLENISH, amount, target.getName()));
     }
 
