@@ -129,12 +129,13 @@ Examples:
 - `filter -n Sherwin -cid B01` Lists all students whose name contains the character sequence `Sherwin` and belongs to a
   class with the class ID containing the character sequence `B01`.
 
-### <a name="edit-student"></a>7. Edit Student's Grade : `edit`
+### <a name="edit-student"></a>7. Edit Student's Details or Grade : `edit`
 
-Edits the grade of an existing student's in the PE. Take note that 1-indexing is used here as according to the displayed
+Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to the displayed
 list.
 
-Format:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+Format:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -email <EMAIL>`
+Format:`edit <INDEX_IN_LIST> -t <LAB_NUMBER> -s <ACTUAL_SCORE>`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input values.
