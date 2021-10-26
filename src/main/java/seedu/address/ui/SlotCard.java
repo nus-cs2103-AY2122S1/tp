@@ -53,20 +53,10 @@ public class SlotCard extends UiPart<Region> {
         this.slot = slot;
         this.stafflist = stafflist;
         shiftName.setText(slot.toString());
-        refresh();
-        stafflist.addListener((ListChangeListener<? super Person>) change -> {
-            refresh();
-        });
-        staffWorkingList.setCellFactory(listView -> new PersonNameCell());
-    }
-
-    /**
-     * Refreshes the listView in this slotCard instance.
-     */
-    public void refresh() {
         filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
         staffWorkingList.setItems(filteredList);
         staffWorkingList.refresh();
+        staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
 
     /**
