@@ -2,7 +2,7 @@
 layout: page title: User Guide
 ---
 
-ProgrammerError (P\|E) is a desktop app for managing students' information, optimized for use via a Command Line
+ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line
 Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this
 application is optimized to track personal particulars, emails and attendance of your students across different classes.
 If you are familiar with Unix commands, this is definitely for you!
@@ -37,14 +37,13 @@ If you are familiar with Unix commands, this is definitely for you!
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui1_v1.3b.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
-    * **`add -n Sherwin -sid A1234567X -cid B01`**: Adds a student named `Sherwin` to the PE with his Student ID and
-      Class ID.
+    * **`add -n Sherwin -sid A1234567X -cid B01 -email e0523451@u.nus.edu`**: Adds a student named `Sherwin` to the PE with his Student ID, Class ID and Email.
 
     * **`filter -sid A1234567X`** Filters the list to display student(s) whose student ID contains `A1234567X'
 
@@ -93,7 +92,7 @@ Example: `fill`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/help.png)
 
 Example: `help`
 
@@ -101,15 +100,17 @@ Example: `help`
 
 Adds a student to ProgrammerError with the his/her student ID and class ID.
 
-Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 
-- `add -n Sherwin -sid A1234567X -cid B01`: Adds the student called Sherwin with student ID A1234567X and class ID B01
-  to ProgrammerError.
+![UI](images/addStudent.png)
 
-- `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to
-  ProgrammerError.
+- `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID A1234567X and class ID B01 and 
+  email e0542421@u.nus.edu to ProgrammerError.
+
+- `add -n Betsy -sid A2345678X -cid B02 -email e043245@u.nus.edu`: Adds the student called Betsy with student ID A2345678X and class ID B02 to and 
+  email e043245@u.nus.edu ProgrammerError.
 
 ### <a name="filter-student"></a>6. Filter List: `filter`
 
@@ -122,6 +123,8 @@ Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 
+![UI](images/filter.png)
+
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
 - `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
@@ -129,12 +132,13 @@ Examples:
 - `filter -n Sherwin -cid B01` Lists all students whose name contains the character sequence `Sherwin` and belongs to a
   class with the class ID containing the character sequence `B01`.
 
-### <a name="edit-student"></a>7. Edit Student's Grade : `edit`
+### <a name="edit-student"></a>7. Edit Student's Details or Grade : `edit`
 
-Edits the grade of an existing student's in the PE. Take note that 1-indexing is used here as according to the displayed
+Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to the displayed
 list.
 
-Format:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+Format:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -email <EMAIL>`
+Format:`edit <INDEX_IN_LIST> -t <LAB_NUMBER> -s <ACTUAL_SCORE>`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input values.
@@ -191,14 +195,20 @@ Examples:
 
 - `dellab -t 1`: Deletes lab 1 for all students if it exists.
 
-### <a name="exit"></a>12. Exit: `exit`
+
+ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button or the enter command `download`. The TA will need
+to specify the directory to download the file to.
+
+### <a name="download-data"></a>10. Upload Data
+
+ProgrammerError data can be uploaded by a CSV file by clicking the 'Upload' button or enter the command `upload`. The TA will need
+to specify the directory to upload the file from.
+
+### <a name="exit"></a>11. Exit: `exit`
 
 Exits ProgrammerError and closes the GUI.
 
-### <a name="download-data"></a>13. Download Data
 
-ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button under 'Files'. The TA will need
-to specify the directory to download the file to.
 
 ## <a name="command-summary"></a>Command Summary
 
@@ -207,6 +217,7 @@ Command | Format & Examples
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 **Add Lab** | `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
 **Delete** | `delete <INDEX_IN_LIST>`
+**Download** | `download`
 **Delete Lab** | `dellab -t <LAB_NUM>`
 **Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 **Edit Lab** | `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
@@ -215,3 +226,5 @@ Command | Format & Examples
 **Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 **Help** | `help`
 **Purge** | `purge`
+**Upload** | `upload`
+
