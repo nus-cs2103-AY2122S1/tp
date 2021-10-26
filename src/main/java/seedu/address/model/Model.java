@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -122,14 +121,6 @@ public interface Model {
      * @return the String representation of the list of appointments related to the client.
      */
     String getRelatedAppointmentsAsString(Person client);
-
-    /**
-     * Returns the List of {@Code Appointment} that is related to the {@Code Person}.
-     *
-     * @param client the person to search.
-     * @return the List of {@Code Appointment} related to the client.
-     */
-    List<Appointment> getRelatedAppointments(Person client);
 
     /**
      * Returns the String representation of {@Code Appointment} that only have this {@Code client} in its client list.

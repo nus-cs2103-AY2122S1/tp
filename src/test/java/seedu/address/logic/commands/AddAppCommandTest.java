@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -218,11 +217,6 @@ public class AddAppCommandTest {
         @Override
         public String getRelatedAppointmentsAsString(Person client) {
             return "";
-        }
-
-        @Override
-        public List<Appointment> getRelatedAppointments(Person client) {
-            return new ArrayList<>();
         }
 
         @Override
