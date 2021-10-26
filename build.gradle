@@ -70,7 +70,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'sourceControl.jar'
 }
 
 defaultTasks 'clean', 'test'
