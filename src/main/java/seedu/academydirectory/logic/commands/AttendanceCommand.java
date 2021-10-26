@@ -87,7 +87,6 @@ public class AttendanceCommand extends Command {
             model.setStudent(studentToEdit, editedStudent);
         }
         return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
-
     }
 
     @Override
@@ -105,7 +104,5 @@ public class AttendanceCommand extends Command {
                 && attendanceStatus == e.attendanceStatus
                 && studioSession.equals(e.studioSession);
     }
-
-
 
 }
