@@ -123,7 +123,7 @@ public class FeesCalculator implements Calculator {
     }
 
     private int numOfLessonsSinceLastUpdate(LocalDateTime updateDateTime) {
-        // get the number of weeks past since lastAdded date
+        // get the number of weeks passed since lastAdded date
         LocalDateTime startDate = lastUpdated.dateTime;
         int numberOfWeeksBetween = (int) ChronoUnit.WEEKS.between(startDate, currentDateTime);
 
