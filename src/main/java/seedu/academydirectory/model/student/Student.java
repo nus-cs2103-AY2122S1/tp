@@ -43,7 +43,6 @@ public class Student {
     /**
      * Constructor for Student with Attendance and Assessment.
      */
-
     public Student(Name name, Phone phone, Email email, Telegram telegram, StudioRecord studioRecord,
                    Assessment assessment, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, telegram, tags);
@@ -53,6 +52,21 @@ public class Student {
         this.telegram = telegram;
         this.tags.addAll(tags);
         this.studioRecord = studioRecord;
+        this.assessment = assessment;
+    }
+
+    /**
+     * Constructor for Student with Assessment.
+     */
+    public Student(Name name, Phone phone, Email email, Telegram telegram,
+                   Assessment assessment, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, telegram, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.telegram = telegram;
+        this.tags.addAll(tags);
+        this.studioRecord = new StudioRecord(12);
         this.assessment = assessment;
     }
 
