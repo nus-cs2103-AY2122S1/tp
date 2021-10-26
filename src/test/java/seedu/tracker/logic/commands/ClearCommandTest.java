@@ -73,24 +73,25 @@ class ClearCommandTest {
         expectedModel.setModuleTracker(new ModuleTracker());
     }
 
+    @Test
     public void execute_allFieldsSpecified_clear() {
         AcademicYear year = new AcademicYear(1);
         Semester semester = new Semester(1);
         AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
 
-        model.updateFilteredModuleList(preparePredicate(1, 1));
-        ObservableList<Module> filteredList = model.getFilteredModuleList();
-        model.updateFilteredModuleList(x->true);
+        Module expectedModule1 = expectedModel.getFilteredModuleList().get(3);
+        Module expectedModule2 = expectedModel.getFilteredModuleList().get(4);
 
-        for (Module module : filteredList) {
-            expectedModel.setModule(module, createUnscheduledModule(module));
-        }
+        expectedModel.setModule(expectedModule1, createUnscheduledModule(expectedModule1));
+        expectedModel.setModule(expectedModule2, createUnscheduledModule(expectedModule2));
+
+        model.updateFilteredModuleList(preparePredicate(1, 1));
 
         String expectedMessage = String.format(ClearCommand.MESSAGE_SUCCESS, academicCalendar);
 
         ClearCommand command = new ClearCommand(academicCalendar);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, model);
     }
 
     /**
