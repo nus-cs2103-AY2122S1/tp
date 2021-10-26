@@ -34,7 +34,7 @@ public class AddProgressCommand extends AddCommand {
 
     /**
      * @param targetIndex of the student in the filtered student list to add progress
-     * @param progress Progress object to be added to the student
+     * @param progress    Progress object to be added to the student
      */
     public AddProgressCommand(Index targetIndex, Progress progress) {
         this.targetIndex = targetIndex;
@@ -54,6 +54,7 @@ public class AddProgressCommand extends AddCommand {
         studentToEdit.addProgress(this.progress);
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.viewStudent(studentToEdit);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit));
     }

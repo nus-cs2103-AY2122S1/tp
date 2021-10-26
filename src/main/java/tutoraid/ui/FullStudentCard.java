@@ -6,9 +6,9 @@ import javafx.scene.layout.HBox;
 import tutoraid.model.student.Student;
 
 /**
- * A UI component that displays information of a {@code Student}. This variant displays only the latest progress entry.
+ * A UI component that displays information of a {@code Student}. The full student card displays every progress entry.
  */
-public class StudentCard extends Card<Student> {
+public class FullStudentCard extends Card<Student> {
 
     private static final String FXML = "StudentListCard.fxml";
 
@@ -48,14 +48,14 @@ public class StudentCard extends Card<Student> {
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public FullStudentCard(Student student, int displayedIndex) {
         super(FXML, student, displayedIndex);
         id.setText(displayedIndex + ". ");
         studentName.setText(formatCardLabel(LABEL_STUDENT_NAME, student.getStudentName().fullName));
         studentPhone.setText(formatCardLabel(LABEL_STUDENT_PHONE, student.getStudentPhone().value));
         parentName.setText(formatCardLabel(LABEL_PARENT_NAME, student.getParentName().fullName));
         parentPhone.setText(formatCardLabel(LABEL_PARENT_PHONE, student.getParentPhone().value));
-        progress.setText(formatCardLabel(LABEL_PROGRESS, student.getLatestProgress().toString()));
+        progress.setText(formatCardLabel(LABEL_PROGRESS, "\n" + student.getProgressList().toString()));
         paymentStatus.setText(formatCardLabel(LABEL_PAYMENT_STATUS, student.getPaymentStatus().toString()));
     }
 }

@@ -1,6 +1,8 @@
 package tutoraid.model;
 
 import static java.util.Objects.requireNonNull;
+import static tutoraid.ui.DetailLevel.HIGH;
+import static tutoraid.ui.DetailLevel.MED;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -13,6 +15,7 @@ import tutoraid.commons.core.LogsCenter;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
+import tutoraid.ui.DetailLevel;
 import tutoraid.ui.UiManager;
 
 /**
@@ -134,15 +137,17 @@ public class ModelManager implements Model {
     public void viewStudent(Student targetStudent) {
         requireNonNull(targetStudent);
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
-        UiManager.showViewWindow();
+        UiManager.showFullStudentDetails();
     }
 
     @Override
-    public void viewList(boolean viewAll) {
-        if (viewAll) {
-            UiManager.showViewWindow();
+    public void viewList(DetailLevel detailLevel) {
+        if (detailLevel == HIGH) {
+            UiManager.showFullStudentDetails();
+        } else if (detailLevel == MED) {
+            UiManager.showMediumStudentDetails();
         } else {
-            UiManager.hideViewWindow();
+            UiManager.showMinimalStudentDetails();
         }
     }
 
@@ -179,7 +184,7 @@ public class ModelManager implements Model {
     public void viewLesson(Lesson targetLesson) {
         requireNonNull(targetLesson);
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
-        UiManager.showViewWindow();
+        UiManager.showFullStudentDetails();
     }
 
     //=========== Filtered Student List Accessors =============================================================

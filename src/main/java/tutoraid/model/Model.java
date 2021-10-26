@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
+import tutoraid.ui.DetailLevel;
 
 /**
  * The API of the Model component.
@@ -131,7 +132,7 @@ public interface Model {
     /**
      * Views the list of students in the database. The viewAll flag determines whether student details should be shown.
      */
-    void viewList(boolean viewAll);
+    void viewList(DetailLevel detailLevel);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
