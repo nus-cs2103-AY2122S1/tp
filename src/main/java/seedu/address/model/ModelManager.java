@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Event> filteredEvents;
     private TaskList taskListManager;
-    private final FilteredList<Task> filteredTasks;
+    private FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -188,6 +188,7 @@ public class ModelManager implements Model {
         requireNonNull(member);
         if (this.taskListManager != member.getTaskList()) {
             this.taskListManager = member.getTaskList();
+            this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
         }
     }
 
@@ -210,6 +211,7 @@ public class ModelManager implements Model {
     public void addTask(Member member, Task task) {
         loadTaskList(member);
         taskListManager.add(task);
+        updateFilteredTaskList(member, PREDICATE_SHOW_ALL_TASKS);
     }
 
     /**
@@ -238,8 +240,7 @@ public class ModelManager implements Model {
      * The member identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     @Override
-    public void setTask(Member member, Task target, Task editedTask) {
-        loadTaskList(member);
+    public void setTask(Task target, Task editedTask) {
         taskListManager.setTask(target, editedTask);
     }
 
@@ -247,8 +248,7 @@ public class ModelManager implements Model {
      * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
      */
     @Override
-    public void setTask(Member member, int index, Task editedTask) {
-        loadTaskList(member);
+    public void setTask(int index, Task editedTask) {
         taskListManager.setTask(index, editedTask);
     }
 
@@ -282,15 +282,8 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-    /**
-     * Updates the filter of the filtered task list of the previously selected member.
-     * to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
-        getFilteredTaskList();
         filteredTasks.setPredicate(predicate);
     }
 

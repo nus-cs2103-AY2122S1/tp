@@ -166,12 +166,12 @@ public interface Model {
      * Replaces the given task {@code target} with {@code editedTask} in the given {@code member}'s task list.
      * {@code target} must exist in the task list.
      */
-    void setTask(Member member, Task target, Task editedTask);
+    void setTask(Task target, Task editedTask);
 
     /**
      * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
      */
-    void setTask(Member member, int index, Task editedTask);
+    void setTask(int index, Task editedTask);
 
     /**
      * Returns an unmodifiable view of the filtered task list of the given {@code member}.
@@ -192,11 +192,5 @@ public interface Model {
      */
     void updateFilteredTaskList(Member member, Predicate<Task> predicate);
 
-    /**
-     * Updates the filter of the filtered task list of the previously selected member.
-     * to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    public void updateFilteredTaskList(Predicate<Task> predicate);
+    void updateFilteredTaskList(Predicate<Task> predicate);
 }
