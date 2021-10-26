@@ -164,11 +164,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addLab(Lab target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Lab> showLabResultList(Student target) {
             throw new AssertionError("This method should not be called.");
         }
