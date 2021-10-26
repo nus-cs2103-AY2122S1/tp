@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -113,12 +114,14 @@ public class EditPersonCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<UniqueId> updatedAssignedTaskIds = personToEdit.getAssignedTaskIds(); // not allowed to be edited here
+        Map<UniqueId, Boolean> updatedTasksCompletion = personToEdit.getTasksCompletion(); // not editable here
         NoOverlapLessonList lessonList = personToEdit.getLessonsList();
         List<Exam> exams = personToEdit.getExams();
         Set<UniqueId> assignedGroupIds = personToEdit.getAssignedGroupIds();
 
         Person newPerson = new Person(personToEdit.getId(), updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList, exams, assignedGroupIds);
+                updatedAddress, updatedTags, updatedAssignedTaskIds,
+                updatedTasksCompletion, lessonList, exams, assignedGroupIds);
         newPerson = editPersonDescriptor.updateLessons(newPerson, model.getGroupMapper());
         newPerson = editPersonDescriptor.updateExams(newPerson);
         return newPerson;
