@@ -1,15 +1,15 @@
 package seedu.unify.testutil;
 
-import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Name;
-import seedu.unify.model.tag.Tag;
-import seedu.unify.model.task.Task;
-import seedu.unify.model.task.Time;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Date;
+import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Task;
+import seedu.unify.model.task.Time;
 
 /**
  * A utility class to help with building EditTaskDescriptor objects.
