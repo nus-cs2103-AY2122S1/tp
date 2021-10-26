@@ -14,11 +14,12 @@ import seedu.address.model.person.FindOrPredicate;
 public class FindOrCommand extends Command {
 
     public static final String COMMAND_WORD = "findOr";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain ANY of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: n/[name] ... t/[tag] ...\n"
+    public static final String COMMAND_DESCRIPTION = "Finds all persons whose names contain ANY of "
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: n/[name] ... t/[tag] ...\n"
             + "Example: " + COMMAND_WORD + " n/alice n/bob t/friends t/colleagues";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     private final FindOrPredicate findOrPredicate;
 
