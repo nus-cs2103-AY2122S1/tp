@@ -343,7 +343,7 @@ Action | Format, Examples
 [**Retrieve**](#retrieving-additional-information-of-students-retrieve) | `retrieve [p/PHONE_NUMBER] [e/EMAIL] [te/TELEGRAM] [n/NAME]` <br> e.g., `retrieve p/ e/ n/Alex Yeoh`
 [**Sort**](#sorting-the-list--sort) | `sort attr/ATTRIBUTE ord/ORDER`<br> e.g., `sort attr/average ord/asc`
 [**Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` <br> e.g., `attendance 1, 2 ses/1 att/1`
-[**Studio Participation**](#editing-a-students-studio-participation-part) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
+[**Studio Participation**](#editing-a-students-studio-participation-part) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `participation 1 ses/12 att/0`
 [**Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` <br> e.g., `grade INDEX as/RA1 g/15`
 [**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` <br> e.g., `show RA1`
 [**Help**](#seeking-help--help) | `help`
