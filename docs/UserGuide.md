@@ -186,7 +186,6 @@ Finds elderly whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will not match `Bo Hans`
 * All attributes are searched (`NAME`, `PHONE`, `LANGUAGE`, `ADDRESS`, `VISIT`, `LAST_VISIT`)
 * Partial words will be matched, and will return any person who has the partial word as a substring of any attribute e.g. `Han` will match `Hans Bo` and `Rohan Tan`
 * `VISIT` and `LAST_VISIT` are in the `yyyy-MM-dd HH:mm` format.
