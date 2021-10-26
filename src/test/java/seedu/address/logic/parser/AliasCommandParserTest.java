@@ -1,13 +1,14 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AliasCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ExitCommand;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.AliasCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ExitCommand;
 
 public class AliasCommandParserTest {
     private final AddressBookParser abParser = new AddressBookParser();

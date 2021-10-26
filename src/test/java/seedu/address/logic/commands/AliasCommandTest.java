@@ -1,13 +1,14 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.Alias;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 public class AliasCommandTest {
     private final Model model = new ModelManager();
