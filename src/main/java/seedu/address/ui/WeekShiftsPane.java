@@ -34,4 +34,3 @@ public class WeekShiftsPane extends UiPart<Region> {
                 new DayCard(DayOfWeek.SUNDAY, staffList).getRoot());
     }
 }
-
