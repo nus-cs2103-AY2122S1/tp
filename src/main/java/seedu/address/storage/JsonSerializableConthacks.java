@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  * An Immutable Conthacks that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableConthacks {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_LESSON = "Lesson list contains duplicate lesson(es)";
@@ -27,11 +27,11 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedModuleLesson> lessons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and lessons.
+     * Constructs a {@code JsonSerializableConthacks} with the given persons and lessons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("lessons") List<JsonAdaptedModuleLesson> lessons) {
+    public JsonSerializableConthacks(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                     @JsonProperty("lessons") List<JsonAdaptedModuleLesson> lessons) {
         this.persons.addAll(persons);
         this.lessons.addAll(lessons);
     }
@@ -39,9 +39,9 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyConthacks} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableConthacks}.
      */
-    public JsonSerializableAddressBook(ReadOnlyConthacks source) {
+    public JsonSerializableConthacks(ReadOnlyConthacks source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         lessons.addAll(source.getModuleLessonList().stream().map(JsonAdaptedModuleLesson::new)
                 .collect(Collectors.toList()));

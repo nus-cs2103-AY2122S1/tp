@@ -39,7 +39,7 @@ public class TypicalModuleLessons {
     /**
      * Returns an {@code Conthacks} with all the typical classes.
      */
-    public static Conthacks getTypicalAddressBook() {
+    public static Conthacks getTypicalConthacks() {
         Conthacks ab = new Conthacks();
         for (ModuleLesson moduleLesson : getTypicalModuleClasses()) {
             ab.addLesson(moduleLesson);

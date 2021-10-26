@@ -3,7 +3,7 @@ package seedu.address.logic.commands.modulelesson;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModuleLessons.getTypicalConthacks;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class ListModuleLessonCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalConthacks(), new UserPrefs());
         expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
     }
 

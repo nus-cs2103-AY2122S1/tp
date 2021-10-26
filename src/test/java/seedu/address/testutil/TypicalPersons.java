@@ -73,7 +73,7 @@ public class TypicalPersons {
     /**
      * Returns an {@code Conthacks} with all the typical persons.
      */
-    public static Conthacks getTypicalAddressBook() {
+    public static Conthacks getTypicalConthacks() {
         Conthacks ab = new Conthacks();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

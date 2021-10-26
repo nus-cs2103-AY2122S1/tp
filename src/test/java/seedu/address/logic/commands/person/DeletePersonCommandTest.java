@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_HENRY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_ISAAC;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalConthacks;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,7 +38,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class DeletePersonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConthacks(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {

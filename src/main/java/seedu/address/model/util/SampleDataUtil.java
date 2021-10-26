@@ -57,7 +57,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyConthacks getSampleAddressBook() {
+    public static ReadOnlyConthacks getSampleConthacks() {
         Conthacks sampleAb = new Conthacks();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

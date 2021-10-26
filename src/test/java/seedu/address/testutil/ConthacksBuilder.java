@@ -7,24 +7,24 @@ import seedu.address.model.person.Person;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code Conthacks ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code Conthacks ab = new ConthacksBuilder().withPerson("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class ConthacksBuilder {
 
     private Conthacks conthacks;
 
-    public AddressBookBuilder() {
+    public ConthacksBuilder() {
         conthacks = new Conthacks();
     }
 
-    public AddressBookBuilder(Conthacks conthacks) {
+    public ConthacksBuilder(Conthacks conthacks) {
         this.conthacks = conthacks;
     }
 
     /**
      * Adds a new {@code Person} to the {@code Conthacks} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
+    public ConthacksBuilder withPerson(Person person) {
         conthacks.addPerson(person);
         return this;
     }
@@ -32,7 +32,7 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code ModuleLesson} to the {@code Conthacks} that we are building.
      */
-    public AddressBookBuilder withModuleLesson(ModuleLesson moduleLesson) {
+    public ConthacksBuilder withModuleLesson(ModuleLesson moduleLesson) {
         conthacks.addLesson(moduleLesson);
         return this;
     }

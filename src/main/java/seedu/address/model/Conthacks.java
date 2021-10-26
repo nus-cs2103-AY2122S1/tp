@@ -74,7 +74,7 @@ public class Conthacks implements ReadOnlyConthacks {
     /**
      * Sorts the contacts in the address book by alphabetical order.
      */
-    public void sortAddressBook() {
+    public void sortConthacks() {
         persons.sortList();
         moduleLessons.sortList();
     }

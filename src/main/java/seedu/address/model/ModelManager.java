@@ -70,13 +70,13 @@ public class ModelManager implements Model {
 
     @Override
     public Path getConthacksFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getConthacksFilePath();
     }
 
     @Override
     public void setConthacksFilePath(Path conthacksFilePath) {
         requireNonNull(conthacksFilePath);
-        userPrefs.setAddressBookFilePath(conthacksFilePath);
+        userPrefs.setConthacksFilePath(conthacksFilePath);
     }
 
     //=========== Conthacks ================================================================================
@@ -93,7 +93,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void sortConthacks() {
-        conthacks.sortAddressBook();
+        conthacks.sortConthacks();
     }
 
     @Override

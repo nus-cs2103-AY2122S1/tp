@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalConthacks;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,12 +26,12 @@ public class JsonConthacksStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readConthacks_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readConthacks(null));
     }
 
-    private java.util.Optional<ReadOnlyConthacks> readAddressBook(String filePath) throws Exception {
-        return new JsonAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyConthacks> readConthacks(String filePath) throws Exception {
+        return new JsonConthacksStorage(Paths.get(filePath)).readConthacks(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -42,69 +42,69 @@ public class JsonConthacksStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readConthacks("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatConthacks.json"));
+        assertThrows(DataConversionException.class, () -> readConthacks("notJsonFormatConthacks.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonConthacks.json"));
+    public void readConthacks_invalidPersonConthacks_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readConthacks("invalidPersonConthacks.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonConthacks.json"));
+    public void readConthacks_invalidAndValidPersonConthacks_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readConthacks("invalidAndValidPersonConthacks.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveConthacks_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        Conthacks original = getTypicalAddressBook();
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+        Conthacks original = getTypicalConthacks();
+        JsonConthacksStorage jsonAddressBookStorage = new JsonConthacksStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyConthacks readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveConthacks(original, filePath);
+        ReadOnlyConthacks readBack = jsonAddressBookStorage.readConthacks(filePath).get();
         assertEquals(original, new Conthacks(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveConthacks(original, filePath);
+        readBack = jsonAddressBookStorage.readConthacks(filePath).get();
         assertEquals(original, new Conthacks(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        jsonAddressBookStorage.saveConthacks(original); // file path not specified
+        readBack = jsonAddressBookStorage.readConthacks().get(); // file path not specified
         assertEquals(original, new Conthacks(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveConthacks_nullConthacks_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveConthacks(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code conthacks} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyConthacks addressBook, String filePath) {
+    private void saveConthacks(ReadOnlyConthacks conthacks, String filePath) {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new JsonConthacksStorage(Paths.get(filePath))
+                    .saveConthacks(conthacks, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new Conthacks(), null));
+    public void saveConthacks_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveConthacks(new Conthacks(), null));
     }
 }

@@ -48,7 +48,7 @@ public class LogicManager implements Logic {
         model.sortConthacks();
 
         try {
-            storage.saveAddressBook(model.getConthacks());
+            storage.saveConthacks(model.getConthacks());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

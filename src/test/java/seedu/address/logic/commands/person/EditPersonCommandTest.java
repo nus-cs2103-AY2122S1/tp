@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalConthacks;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditPersonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConthacks(), new UserPrefs());
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {

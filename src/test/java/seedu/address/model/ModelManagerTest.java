@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ConthacksBuilder;
 
 public class ModelManagerTest {
 
@@ -38,14 +38,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setConthacksFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setConthacksFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -62,12 +62,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setConthacksFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setConthacksFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setConthacksFilePath_validPath_setsConthacksFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setConthacksFilePath(path);
         assertEquals(path, modelManager.getConthacksFilePath());
@@ -79,12 +79,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInConthacks_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInConthacks_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -96,7 +96,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Conthacks conthacks = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Conthacks conthacks = new ConthacksBuilder().withPerson(ALICE).withPerson(BENSON).build();
         Conthacks differentConthacks = new Conthacks();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -127,12 +127,12 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setConthacksFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(conthacks, differentUserPrefs)));
     }
 
     @Test
-    public void sortAddressBookByName_success() {
+    public void sortConthacksByName_success() {
         Conthacks conthacks = new Conthacks();
         conthacks.addPerson(BOB);
         conthacks.addPerson(ALICE);

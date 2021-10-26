@@ -11,12 +11,12 @@ import seedu.address.model.ReadOnlyConthacks;
 /**
  * Represents a storage for {@link Conthacks}.
  */
-public interface AddressBookStorage {
+public interface ConthacksStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getConthacksFilePath();
 
     /**
      * Returns Conthacks data as a {@link ReadOnlyConthacks}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyConthacks> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyConthacks> readConthacks() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getConthacksFilePath()
      */
-    Optional<ReadOnlyConthacks> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyConthacks> readConthacks(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyConthacks} to the storage.
-     * @param addressBook cannot be null.
+     * @param conthacks cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyConthacks addressBook) throws IOException;
+    void saveConthacks(ReadOnlyConthacks conthacks) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyConthacks)
+     * @see #saveConthacks(ReadOnlyConthacks)
      */
-    void saveAddressBook(ReadOnlyConthacks addressBook, Path filePath) throws IOException;
+    void saveConthacks(ReadOnlyConthacks conthacks, Path filePath) throws IOException;
 
 }

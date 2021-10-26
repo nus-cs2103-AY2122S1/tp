@@ -29,49 +29,49 @@ public class JsonSerializableConthacksTest {
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+                JsonSerializableConthacks.class).get();
         Conthacks conthacksFromFile = dataFromFile.toModelType();
-        Conthacks typicalPersonsConthacks = TypicalPersons.getTypicalAddressBook();
+        Conthacks typicalPersonsConthacks = TypicalPersons.getTypicalConthacks();
         assertEquals(conthacksFromFile, typicalPersonsConthacks);
     }
 
     @Test
     public void toModelType_typicalModuleClassesFile_success() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULE_CLASSES_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULE_CLASSES_FILE,
+                JsonSerializableConthacks.class).get();
         Conthacks conthacksFromFile = dataFromFile.toModelType();
-        Conthacks typicalModuleClasses = TypicalModuleLessons.getTypicalAddressBook();
+        Conthacks typicalModuleClasses = TypicalModuleLessons.getTypicalConthacks();
         assertEquals(conthacksFromFile, typicalModuleClasses);
     }
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
+                JsonSerializableConthacks.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_invalidModuleClass_throwsIllegalArgument() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_MODULE_CLASS_FILE,
-                JsonSerializableAddressBook.class).get();
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(INVALID_MODULE_CLASS_FILE,
+                JsonSerializableConthacks.class).get();
         assertThrows(IllegalArgumentException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
-                JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
+                JsonSerializableConthacks.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableConthacks.MESSAGE_DUPLICATE_PERSON,
                 dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicateModuleClasses_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MODULE_CLASS_FILE,
-                JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_LESSON,
+        JsonSerializableConthacks dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MODULE_CLASS_FILE,
+                JsonSerializableConthacks.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableConthacks.MESSAGE_DUPLICATE_LESSON,
                 dataFromFile::toModelType);
     }
 

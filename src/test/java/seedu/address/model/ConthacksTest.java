@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalConthacks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,8 +38,8 @@ public class ConthacksTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Conthacks newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyConthacks_replacesData() {
+        Conthacks newData = getTypicalConthacks();
         conthacks.resetData(newData);
         assertEquals(newData, conthacks);
     }
@@ -60,18 +60,18 @@ public class ConthacksTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInConthacks_returnsFalse() {
         assertFalse(conthacks.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInConthacks_returnsTrue() {
         conthacks.addPerson(ALICE);
         assertTrue(conthacks.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInConthacks_returnsTrue() {
         conthacks.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).build();
         assertTrue(conthacks.hasPerson(editedAlice));
@@ -83,7 +83,7 @@ public class ConthacksTest {
     }
 
     @Test
-    public void sortAddressBookByName_success() {
+    public void sortConthacksByName_success() {
         List<Person> persons = new ArrayList<>();
         persons.add(BOB);
         persons.add(ALICE);
@@ -95,7 +95,7 @@ public class ConthacksTest {
         expectedPersons.add(BOB);
         expectedConthacks.setPersons(expectedPersons);
 
-        conthacks.sortAddressBook();
+        conthacks.sortConthacks();
         assertEquals(expectedConthacks, conthacks);
     }
 

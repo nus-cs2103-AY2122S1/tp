@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModuleLessons.getTypicalConthacks;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ import seedu.address.testutil.ModuleLessonBuilder;
  */
 public class EditModuleLessonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConthacks(), new UserPrefs());
     private Model expectedModel = new ModelManager(new Conthacks(model.getConthacks()), new UserPrefs());
 
     @Test
