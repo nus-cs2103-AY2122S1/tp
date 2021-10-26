@@ -78,6 +78,32 @@ public class Person implements Comparable<Person> {
         return Collections.unmodifiableList(tasks);
     }
 
+    /**
+     * Returns the number of tasks that are overdue.
+     */
+    public int getOverdueTasks() {
+        int count = 0;
+        for (Task task : tasks) {
+            if (task.getIsOverdue()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Returns the number of tasks that are due soon.
+     */
+    public int getSoonDueTasks() {
+        int count = 0;
+        for (Task task : tasks) {
+            if (task.getIsDueSoon()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public Description getDescription() {
         return description;
     }
