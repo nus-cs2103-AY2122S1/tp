@@ -460,4 +460,15 @@ prompted.
 </div>
 </div>
 
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">Help, I have forgotten my password!</h6>
+Unfortunately, there is no way to reset the password. To continue using the application, you need to move the encrypted 
+data file to a different location or delete it. The application will create a fresh data set for you to start over with.
+
+The good news is, the data file stays encrypted and secure regardless! If you suddenly remembered the password you used
+to encrypt the data, just move the data file back to the original directory and restart the application.
+</div>
+</div>
+
 ---
