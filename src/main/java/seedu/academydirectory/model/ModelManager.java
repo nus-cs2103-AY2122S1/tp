@@ -124,7 +124,6 @@ public class ModelManager implements VersionedModel {
     }
 
     @Override
-
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         academyDirectory.setStudent(target, editedStudent);
