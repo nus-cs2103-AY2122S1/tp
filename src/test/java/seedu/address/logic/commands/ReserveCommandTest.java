@@ -27,7 +27,7 @@ class ReserveCommandTest {
     private static final Phone DUMMY_PHONE = new Phone("98765432");
     private static final LocalDateTime DUMMY_DATE_TIME = LocalDateTime.parse("2021-11-11T20:00");
     private static final Table DUMMY_TABLE = new Table(5, 10);
-    private static final Remark DUMMY_REMARK = null;
+    private static final Remark DUMMY_REMARK = new Remark("");
     private static final Set<Tag> DUMMY_TAG_LIST = Set.of();
     private static final int DIFFERENT_NUMBER_OF_PEOPLE = 3;
     private static final Phone DIFFERENT_PHONE = new Phone("12345678");
