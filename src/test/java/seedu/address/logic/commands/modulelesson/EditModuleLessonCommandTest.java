@@ -119,7 +119,7 @@ public class EditModuleLessonCommandTest {
         showLessonAtIndex(model, INDEX_FIRST);
         Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
 
-        // ensures that invalidIndex is still in bounds of address book list
+        // ensures that invalidIndex is still in bounds of Conthacks list
         assertTrue(invalidIndex.getZeroBased() < model.getConthacks().getModuleLessonList().size());
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()

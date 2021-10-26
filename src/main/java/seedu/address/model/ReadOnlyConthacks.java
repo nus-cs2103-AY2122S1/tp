@@ -5,7 +5,7 @@ import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of Conthacks
  */
 public interface ReadOnlyConthacks {
 
