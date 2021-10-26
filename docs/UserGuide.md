@@ -43,7 +43,8 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `RecruitIn.jar` from here.
+2. Download the latest `recruitIn.jar` from [here](https://github.com/AY2122S1-CS2103T-F11-2/tp/releases/tag/v1.2.1).
+Scroll down to the bottom and click on `recruitIn.jar`.
 
 3. Copy the file to the folder you want to use as the _home folder_.
 
