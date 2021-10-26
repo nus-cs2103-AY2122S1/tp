@@ -41,6 +41,14 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
     * **`sort`** : Sorts all persons in the contacts list.
 
     * **`clear`** : Deletes all persons with SHN periods that are completed at time of command call.
+
+    * **`schedule`** : Shows a list of all persons who have not been called in the current SHN enforcement session.
+
+    * **`scall`** : Updates a person as successfully called in the current SHN enforcement session.
+
+    * **`fcall`** : Updates that a failed call was made to a person in the current SHN enforcement session.
+
+    * **`session`** : Starts a new SHN enforcement session with all persons set to non-called.
     
     * **`help`** : Shows a message explaining how to access the help page.
 
@@ -188,6 +196,48 @@ Deletes all persons with SHN periods that are completed at time of command call 
 
 Format: `clear`
 
+### Showing call schedule : `schedule`
+
+Shows a list of all persons who have not been called in the current SHN enforcement session.
+
+Format: `schedule`
+
+### Updating a person as successfully called : `scall`
+
+Updates a person as successfully called in the current SHN enforcement session.
+
+Format: `scall INDEX`
+
+* Updates the person at the specified `INDEX` as called.
+* The index **must be a positive integer** (e.g. 1, 2, 3, ..)
+* The index **must not exceed the total number of persons** in the address book
+* If `session` or `schedule` was previously called, the person at the specified `INDEX` will be removed from the list.
+
+Examples:
+* `scall 1` updates the first person in the list as called.
+* `session` followed by `scall 1` updates the first person in the list as called and removes the person from the list.
+
+### Updating a person as unsuccessfully called : `fcall`
+
+Updates that a failed call was made to a person in the current SHN enforcement session.
+
+Format: `fcall INDEX`
+* Updates the person at the specified `INDEX` as called, and increments the person's non-compliance counter by 1.
+* The index **must be a positive integer** (e.g. 1, 2, 3, ..)
+* The index **must not exceed the total number of persons** in the address book
+* If `session` or `schedule` was previously called, the person at the specified `INDEX` will be removed from the list.
+
+Examples:
+* `fcall 1` updates the first person in the list as called, and increments the person's non-compliance counter by 1.
+* `session` followed by `fcall 1` updates the first person in the list as called, increments the person's non-compliance counter by 1, and removes the person from the list.
+
+### Starting a new SHN enforcement session : `session`
+
+Starts a new SHN enforcement session with all persons set to non-called.
+
+Format: `session`
+* Shows a list of all persons who have not been called in the current SHN enforcement session.
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -233,5 +283,9 @@ Action | Format, Examples
 **List** | `list`
 **Sort** | `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTION]`<br> e.g., `sort n/` `sort sort/end:dsc` `sort sh/start: cn/asc`
 **Clear** | `clear`
+**Schedule** | `schedule`
+**SCall** | `scall INDEX`<br> e.g., `scall 3`
+**FCall** | `fcall INDEX`<br> e.g., `fcall 3`
+**Session** | `session`
 **Help** | `help`
 **Exit** | `exit`

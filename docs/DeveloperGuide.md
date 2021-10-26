@@ -275,6 +275,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                     | update contact's contact details and SHN periods | so that i do not have to re-enter existing data       |
 | `* *`    | user                                     | batch-update SHN periods       | extend or shorten the SHN end dates according to government mandates    |
 | `* *`    | user                                     | sort contacts by fields        | more easily browse through the contacts                                 |
+| `* *`    | user                                     | track call statuses            | enforce the contacts' SHN                                               |
 
 *{More to be added}*
 
@@ -453,6 +454,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 2.
 
+**Use case: UC09 - Enforce SHN**
+
+**MSS:**
+
+1.  User requests to start a new SHN enforcement session.
+2.	Track2Gather updates all persons as non-called in the new session.
+3.  User requests to update call statuses for specified person(s).
+4.	Track2Gather updates the list to remove all successfully called persons.
+
+Use case ends.
+
+**Extensions**
+
+* 3a. The given user input is invalid.
+  * 3a1. Track2Gather shows the correct format for updating call statuses.
+
+  Use case resumes from step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -581,6 +600,7 @@ testers are expected to do more *exploratory* testing.
 2. _{ more test cases …​ }_
 
 ### Batch-updating SHN periods
+
 1. Batch-updating SHN periods while all persons are being shown
    1. Prerequisites: List all persons using the `list` command. Multiple persons with an SHN period.
 
@@ -617,6 +637,52 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
+
+### Enforcing SHN
+
+1. Starting a new SHN enforcement session
+
+    1. Test case: `session`<br>
+       Expected: All persons in the list are updated to be non-called.
+       
+    2. Test case: `session x` (where x is any character)<br>
+       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+
+2. Updating a person's call status to successful in the current SHN enforcement session
+
+    1. Test case: `scall 1`<br>
+       Expected: First person displayed in the search results is updated as successfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+
+    2. Test case: `scall 3`<br>
+       Expected: Third person displayed in the search results is updated as successfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+      
+    3. Test case: `scall 0`<br>
+       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect scall commands to try: `scall`, `scall x` (where x is larger than the list size), `...` <br>
+       Expected: Similar to previous.
+
+3. Updating that a failed call was made to a person in the current SHN enforcement session
+
+    1. Test case: `fcall 1`<br>
+       Expected: First person displayed in the search results is updated as unsuccessfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+
+    2. Test case: `fcall 3`<br>
+       Expected: Third person displayed in the search results is updated as unsuccessfully called. The case number of the updated person is shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `fcall 0`<br>
+       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
+    
+    4. Other incorrect scall commands to try: `fcall`, `fcall x` (where x is larger than the list size), `...` <br>
+       Expected: Similar to previous.
+
+4. Showing a list of all persons who have not been called in the current SHN enforcement session
+
+    1. Test case: `schedule`<br>
+       Expected: The list is updated to display only persons who have not been called in the current SHN enforcement session.
+
+    2. Test case: `schedule x` (where x is any character)<br>
+       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
 ### Saving data
 
