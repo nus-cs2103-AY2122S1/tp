@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,6 +39,10 @@ public class EditMemberDescriptorTest {
 
         // different phone -> returns false
         editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different tags -> returns false
+        editedAmy = new EditMemberDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_EXCO).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

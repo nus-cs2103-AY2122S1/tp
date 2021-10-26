@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_Y2;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -79,7 +80,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addMemberCommandWord =
-                AddMemberCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + AVAILABILITY_DESC_AMY;
+                AddMemberCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + AVAILABILITY_DESC_AMY + TAG_DESC_Y2;
         Person expectedPerson = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
