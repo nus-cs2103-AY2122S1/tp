@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
+<?import javafx.scene.control.PasswordField?>
 <fx:root resizable="false" title="Login" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/lock.png" />
@@ -28,7 +29,7 @@
                     <padding>
                         <Insets top="5" right="10" bottom="5" left="10" />
                     </padding>
-                    <TextField fx:id="userInput" onAction="#onEnter"/>
+                    <PasswordField fx:id="userInput" onAction="#onEnter"/>
                 </StackPane>
                 <StackPane VBox.vgrow="NEVER" styleClass="status-bar" prefHeight="30">
                     <padding>
