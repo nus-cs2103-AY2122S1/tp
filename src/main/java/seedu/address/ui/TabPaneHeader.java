@@ -8,7 +8,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.address.logic.Logic;
-import seedu.address.logic.ai.AI;
+import seedu.address.logic.ai.Ai;
 import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.Model;
 import seedu.address.model.person.FindABuddyPredicate;
@@ -87,14 +87,14 @@ public class TabPaneHeader extends UiPart<Region> {
     }
 
     /**
-     * Sorts contacts based on GitHub similarity, using {@link AI}.
+     * Sorts contacts based on GitHub similarity, using {@link Ai}.
      *
      * @param logic Logic instance of CohortConnect.
      * @param indicator Loading indicator component.
      * @return Whether the contacts have been sorted.
      */
     public boolean getFab(Logic logic, ProgressIndicatorRegion indicator) {
-        boolean isDone = AI.sortProfiles(logic.getUserProfile(), logic.getModifiableList());
+        boolean isDone = Ai.sortProfiles(logic.getUserProfile(), logic.getModifiableList());
         if (!isDone) {
             indicator.getRoot().setVisible(true);
             logic.updateFilteredPersonList(person -> false);
