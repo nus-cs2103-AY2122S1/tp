@@ -79,6 +79,9 @@ public class CsvUtil {
                 .readValues(filePath.toFile());
 
         ArrayList<CsvAdaptedPerson> csvAdaptedPersons = new ArrayList<>();
+        if (!iterator.hasNext()) {
+            throw new IOException("Error reading from file");
+        }
         while (iterator.hasNext()) {
             Map<String, String> row = iterator.next();
             String name = row.get("name");

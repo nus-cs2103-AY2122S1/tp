@@ -32,7 +32,7 @@ public class CsvAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String tagged;
+    private String tagged = "";
 
     /**
      * Constructs a {@code CsvAdaptedPerson} with the given person details.
@@ -45,7 +45,9 @@ public class CsvAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tagged = tagged;
+        if (tagged != null) {
+            this.tagged = tagged;
+        }
     }
 
     /**
