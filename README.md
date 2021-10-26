@@ -29,7 +29,7 @@
     - `filter -cid <CLASS_ID>`
 8. Edit a student's record
     - Edit a student's details at a particular given index off the list
-    - Details that can be edited include name Name, Student ID, Class ID, Email, Lab scores
+    - Details that can be edited include Name Student ID, Class ID, Email, Lab scores
     - `edit <INDEX> -cid <NEW CLASS_ID>`
 10. Delete a student's record
      - Delete the entry of the entire student based on a given index off the list
