@@ -94,6 +94,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getClaimList() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getClaimList().remove(0));
+    }
+
+    @Test
+    public void getAppointmentList() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getAppointmentList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
