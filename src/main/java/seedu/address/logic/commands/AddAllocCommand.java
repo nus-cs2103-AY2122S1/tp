@@ -16,7 +16,13 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.student.*;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
+import seedu.address.model.student.ID;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.NameEqualsPredicate;
+import seedu.address.model.student.Score;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**

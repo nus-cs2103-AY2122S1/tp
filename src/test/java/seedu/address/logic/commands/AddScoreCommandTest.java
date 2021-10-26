@@ -14,8 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureW
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -152,7 +150,8 @@ public class AddScoreCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandFailureWithFilteredListChange(addScoreCommand, model, expectedMessage, expectedModel, VALID_NAME_AMY);
+        assertCommandFailureWithFilteredListChange(addScoreCommand, model, expectedMessage, expectedModel,
+                VALID_NAME_AMY);
     }
 
     @Test
