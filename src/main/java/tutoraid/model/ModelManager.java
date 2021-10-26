@@ -134,7 +134,7 @@ public class ModelManager implements Model {
     public void viewStudent(Student targetStudent) {
         requireNonNull(targetStudent);
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
-        filteredLessons.setPredicate(lesson -> targetStudent.hasLesson(lesson));
+        filteredLessons.setPredicate(lesson -> targetStudent.getLessons().hasLesson(lesson));
         UiManager.showViewWindow();
     }
 

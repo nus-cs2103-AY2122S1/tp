@@ -9,6 +9,7 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
+import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
@@ -50,9 +51,10 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
                 argMultimap.getValue(PREFIX_PARENT_PHONE).orElse(""));
         ProgressList progressList = new ProgressList();
         PaymentStatus paymentStatus = new PaymentStatus(false);
+        Lessons lessons = new Lessons();
 
         Student student = new Student(studentName, studentPhone, parentName, parentPhone,
-                progressList, paymentStatus);
+                progressList, paymentStatus, lessons);
 
         return new AddStudentCommand(student);
     }

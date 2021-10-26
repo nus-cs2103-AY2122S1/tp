@@ -1,11 +1,10 @@
 package tutoraid.model.lesson;
 
-import tutoraid.model.student.Student;
-
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Objects;
+
+import tutoraid.model.student.Student;
 
 /**
  * Represents a Lesson in the TutorAid.
@@ -17,7 +16,7 @@ public class Lesson {
     private final LessonName lessonName;
 
     // Data Fields
-    private final ArrayList<String> students;
+    private final Students students;
     private final Capacity capacity;
     private final Price price;
     private final Timing timing;
@@ -25,7 +24,7 @@ public class Lesson {
     /**
      * Every field must be present and not null.
      */
-    public Lesson(LessonName lessonName, Capacity capacity, Price price, ArrayList<String> students, Timing timing) {
+    public Lesson(LessonName lessonName, Capacity capacity, Price price, Students students, Timing timing) {
         requireAllNonNull(lessonName, capacity, price, students, timing);
         this.lessonName = lessonName;
         this.capacity = capacity;
@@ -46,12 +45,40 @@ public class Lesson {
         return price;
     }
 
-    public ArrayList<String> getStudents() {
+    public Students getStudents() {
         return students;
     }
 
     public Timing getTiming() {
         return timing;
+    }
+
+    /**
+     * Checks if a student is in this lesson.
+     *
+     * @param student student to be checked
+     * @return true if the student is in this lesson, false otherwise
+     */
+    public boolean containsStudent(Student student) {
+        return students.containsStudent(student);
+    }
+
+    /**
+     * Adds a student to this lesson.
+     *
+     * @param student student to be added
+     */
+    public void addStudent(Student student) {
+        students.addStudent(student);
+    }
+
+    /**
+     * Removes a student from this lesson.
+     *
+     * @param student student to be removed
+     */
+    public void removeStudent(Student student) {
+        students.removeStudent(student);
     }
 
     /**
@@ -65,6 +92,15 @@ public class Lesson {
 
         return otherLesson != null
                 && otherLesson.getLessonName().equals(this.getLessonName());
+    }
+
+    /**
+     * Returns the name of the lesson in a string form
+     *
+     * @return The name of the lesson in a String
+     */
+    public String toNameString() {
+        return this.getLessonName().toString();
     }
 
     /**

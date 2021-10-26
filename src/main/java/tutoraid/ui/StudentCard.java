@@ -18,6 +18,7 @@ public class StudentCard extends Card<Student> {
     private static final String LABEL_PARENT_PHONE = "Parent Mobile";
     private static final String LABEL_PROGRESS = "Progress";
     private static final String LABEL_PAYMENT_STATUS = "";
+    private static final String LABEL_LESSONS = "Lessons";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -43,7 +44,8 @@ public class StudentCard extends Card<Student> {
     private Label progress;
     @FXML
     private Label paymentStatus;
-
+    @FXML
+    private Label lessons;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -56,6 +58,7 @@ public class StudentCard extends Card<Student> {
         parentName.setText(formatCardLabel(LABEL_PARENT_NAME, student.getParentName().fullName));
         parentPhone.setText(formatCardLabel(LABEL_PARENT_PHONE, student.getParentPhone().value));
         progress.setText(formatCardLabel(LABEL_PROGRESS, student.getLatestProgress().toString()));
+        lessons.setText(formatCardLabel(LABEL_LESSONS, student.getLessons().toString()));
         paymentStatus.setText(formatCardLabel(LABEL_PAYMENT_STATUS, student.getPaymentStatus().toString()));
     }
 }
