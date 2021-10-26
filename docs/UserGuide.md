@@ -213,16 +213,35 @@ This subsection serves to list out the parameters used in FAST.
 To achieve the best possible experience, avoid adding excessively long input to FAST.
 </div><br>
 
-`ADDRESS` 
+####`ADDRESS` 
 * The address of your client
 * Can take any value (should not be *blank*)
 
 
-`COMMAND`
-* The type of command available in FAST
+####`COMMAND`
+* The type of command available in FAST:
+  * `Quick Start`
+  * `Add`
+  * `Appointment`
+  * `Edit Appointment`
+  * `Delete Appointment`
+  * `Mark Appointment`
+  * `Clear`
+  * `Delete`
+  * `Edit`
+  * `Find`
+  * `List`
+  * `Help`
+  * `Remark`
+  * `Sort`
+  * `Statistic`
+  * `Tag`
+  * `Investment Plan Tag`
+  * `Priority Tag`
+  * `Misc`
 
 
-`DATE`
+####`DATE`
 * The date of an appointment with your client
 * Should be in this format: `yyyy-mm-dd` 
   * e.g. `2023-05-15` 
@@ -232,7 +251,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
 
 
-`EMAIL`
+####`EMAIL`
 * The email address of your client
 * Should be in this format: `local-part@domain`
 * `local-part`: 
@@ -244,61 +263,42 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * each domain label is separated using hyphens (if any)
 
 
-`INDEX`
+####`INDEX`
 * Refers to the number shown in the displayed client list
 * **Must be a positive integer** 1, 2, 3, …​
 
 
-`NAME`
+####`NAME`
 * Name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
 
 
-`PHONE`
+####`PHONE`
 * The contact number of your client
 * Should only contain numbers
 * Should be at least **3** digit long
 
 
-`QUERY`
+####`QUERY`
 * The term used to search for clients in FAST
 * `MORE QUERIES` also follows this definition
 * Can be any value but blank
 
 
-`REMARK`
+####`REMARK`
 * Extra notes given for your client
 * Should not be more than **75** characters
 
 
-`TAG`
+####`TAG`
 * A label given to your client
 * There are 3 types of `TAG` in FAST:
+  1. Normal Tags: should not be longer than 20 characters
+  2. Priority Tag: either one of the 3 priorities (low, med, high)
+  3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
+* Refer to [Tags](#tags) to find out more about each tag
 
-  Tag type|Prefix|Term
-  --------|-------|-----
-  Normal|`No Prefix`| Your preferred tag name, that contains at most **20** alphanumeric characters and no spaces.
-  Priority|`pr/`| `low`: Low Priority<br>`med`:Medium Priority<br>`high`:High Priority 
-  Investment plan|`ip/`| `health`: Health Insurance<br>`invest`: Investment<br>`life`: Life Insurance<br>`motor`: Motor Insurance<br>`property`: Property Insurance <br>`save`: Savings <br>`travel`: Travel Insurance
-
-1. Normal tags, which you can customise according to your needs.
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Tags should be used to categorise clients; use short names for normal tags that you may be able to use for other clients as well!
-    </div>
-
-2. Priority tags, which have fixed names and help you to remember which contacts you need to focus on first.
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can **only have 1 priority tag** , but they can have other non-priority tags alongside the one priority tag.
-    </div>
-
-3. Investment plan tags, which help you recall the plans that each contact has bought.
-    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have more than 1 investment plan tag, but they may not have more than 1 of the same investment plan tag.
-
-For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time.
-    </div>
-
-`TIME`
+####`TIME`
 * The timing of an appointment with your client
 * 24-hour format
 * Should be in this format: `HH:mm` 
@@ -308,7 +308,7 @@ For example, a client may have both Savings and Investment concurrently, but not
   * `mm` (minute): should be between 00 and 59
 
 
-`Venue`
+####`Venue`
 * The location of an appointment with your client
 * Should not be longer than **30** characters long
 <br> <br>
@@ -333,15 +333,15 @@ You can use this command to add a client to FAST.
 
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-**Parameter**:
-* [`NAME`](#NAME)
-* [`PHONE_NUMBER`](#PHONE)
-* [`EMAIL`](#EMAIL)
-* [`ADDRESS`](#ADDRESS)
-* [`TAG`](#TAG)
+**Parameters**:
+* [`NAME`](#name)
+* [`PHONE_NUMBER`](#phone)
+* [`EMAIL`](#email)
+* [`ADDRESS`](#address)
+* [`TAG`](#tag)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0)
+A client can have any number of [`TAG`](#tag) (including 0)
 </div>
 
 **Examples**:
@@ -361,19 +361,7 @@ This can be used if the client's information has changed, or if you entered an i
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-**Parameter**:
-* [`INDEX`](#INDEX)
-* [`NAME`](#NAME)
-* [`PHONE_NUMBER`](#PHONE)
-* [`EMAIL`](#EMAIL)
-* [`ADDRESS`](#ADDRESS)
-* [`TAG`](#TAG)
-
-* Edits the client at the specified `INDEX`.
-
-**Examples**:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
+* Edits the client at the specified `INDEX`
 
 <div markdown="block" class="alert alert-info"> :information_source: 
 * Only the edited fields will be updated to the input values, while the unedited values are unchanged.
@@ -386,6 +374,19 @@ This can be used if the client's information has changed, or if you entered an i
 * When editing tags, all existing tags of the client will be replaced with the new tags.
 </div>
 
+**Parameters**:
+* [`INDEX`](#index)
+* [`NAME`](#name)
+* [`PHONE_NUMBER`](#phone)
+* [`EMAIL`](#email)
+* [`ADDRESS`](#address)
+* [`TAG`](#tag)
+
+
+**Examples**:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
+
 <br> <br>
 
 #### Deleting a client: `del`
@@ -395,10 +396,10 @@ You can delete the specified client from FAST. This is useful when a client has 
 **Format 1**: `del INDEX...`
 **Format 2**: `del INDEX-INDEX`
 
-**Parameter**:
-* [`INDEX`](#INDEX)
+* Deletes the client(s) at the specified `INDEX`.
 
-* Deletes the client at the specified `INDEX`.
+**Parameters**:
+* [`INDEX`](#INDEX)
 
 **Examples**:
 * `list` followed by `del 2` deletes the second clients in FAST.
@@ -426,7 +427,7 @@ This CANNOT be undone!
 
 #### Adding a remark to your client: `rmk`
 
-You can add a remark to an existing client at the specified [`INDEX`](#INDEX) in FAST. <br>
+You can add a remark to an existing client in FAST. <br>
 This is useful for adding additional client notes such as their preferred meeting timing, allowing you to better serve your clients!
 
 <div markdown="block" class="alert alert-info">
@@ -436,9 +437,11 @@ which should mostly be one or two words.<br>
 
 **Format**: `rmk INDEX [r/REMARK]`
 
+* Adds a remark to the client at the specified `INDEX`
+
 **Parameter**:
 * [`INDEX`](#index)
-* [`REMARK`](#index)
+* [`REMARK`](#remark)
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
@@ -458,24 +461,29 @@ Try to add remarks with specific keywords so that it is easier to [search](#sear
 
 You can also store and keep track of appointments with your clients all within FAST! 
 You may save the date, time and venue of an appointment.
-* `DATE` the date of the appointment should be inputted in the format **`yyyy-mm-dd`**.
-* `TIME` the time of the appointment should be inputted in the 24-hour format **`HH:mm`**.
-* `VENUE` the location of the appointment can at most be 30 characters long (including whitespaces).
 
-<br> <br>
+<br>
 
 ##### Adding an appointment: `aa`
+You can add a scheduled appointment with the client. An appointment includes a date, time and venue.
+This allows you to keep track of all your clients' appointment dates all within the same app.
+You can also [edit](#editing-an-appointment-ea),[delete](#deleting-an-appointment-da),
+or [mark as completed](#updating-completed-appointment-ma) an appointment.
 
 **Format**: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
-You can add a scheduled appointment with the client. An appointment includes a date, time and venue.
-This allows you to keep track of all your clients' appointment dates all within the same app.
-You can also [edit](#editing-an-appointment-ea),[delete](#deleting-an-appointment-da), 
-or [mark as completed](#updating-completed-appointment-ma) an appointment.
+**Parameter**:
+* [`INDEX`](#index)
+* [`DATE`](#date)
+* [`TIME`](#time)
+* [`VENUE`](#venue)
 
 ![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
 
-* The `DATE` of the appointment must at least be specified.
+<div markdown="span" class="alert alert-primary">:warning:
+The `DATE` of the appointment must at least be specified.
+</div>
+
 
 **Examples**:
 * `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
@@ -498,8 +506,20 @@ This command is useful when your appointment has been rescheduled or has a chang
 **Format**: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
 
 * Edits a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
-* Existing details will be updated with the input data.
-* At least **one** of the optional fields must be present.
+
+<div markdown="block" class="alert alert-info"> :information_source: 
+Existing details will be updated with the input data.
+</div>
+
+<div markdown="span" class="alert alert-warning"> :exclamation: 
+At least **one** of the optional fields must be present.
+</div>
+
+**Parameter**:
+* [`INDEX`](#index)
+* [`DATE`](#date)
+* [`TIME`](#time)
+* [`VENUE`](#venue)
 
 **Examples**:
 * `ea 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
@@ -517,9 +537,16 @@ This command should be used when the appointment has been cancelled with a clien
 * Deletes a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
 
+**Parameter**:
+* [`INDEX`](#index)
+
 **Examples**:
 * `da 1` deletes the appointment of the first client.
 * `find Ben` followed by `da 3` deletes the appointment the third client in the result of the `find` command.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This CANNOT be undone!
+</div>
 
 <br> <br>
 
@@ -531,16 +558,22 @@ This also allows you to keep track of the number of completed appointments with 
 ![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
 
 **Format**: `ma INDEX`
-* Increment the completed appointment count with the client at the specified `INDEX` if the appointment exist.
-* Existing details will be deleted.
+* Update the completed appointment count with the client at the specified `INDEX` if the appointment exist.
+* The marked appointment will be deleted!
+
+**Parameter**:
+* [`INDEX`](#index)
 
 **Examples**:
-
 * `ma 1` updates the completed appointment counter of the first client.
 
 ![result for `done 1`](images/appointmentDone.png)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This CANNOT be undone!
+</div>
 
 <br> <br>
 
@@ -597,7 +630,10 @@ You can add or delete the tags of a specified client.
 * Use `a/` to add a tag, and `d/` to delete a tag.
 * Does not affect any unmentioned tags, unlike `edit`.
 * Delete operations are performed first before add operations, regardless of their order in the input.
-* Tags have a maximum length of 20 characters, and may only contain alphanumeric characters.
+
+**Parameter**:
+* [`INDEX`](#index)
+* [`TAG`](#tag)
 
 
 **Examples**: 
@@ -663,15 +699,19 @@ specific client. To return to the full client list, you can use the [list](#list
 **Format 3**: `find t/TAG [MORE TAGS]`<br>
 **Format 4**: `find r/REMARK [MORE REMARKS]`<br>
 
-
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the queries does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * You can search by name, priority, tags or remarks using the formats shown above.
 * Names with words starting with the query will match. e.g. `Han` will match `Solo Hans`.
-* For priority searches, there are 3 priorities, `pr/low`, `pr/med`, or `pr/high`.
 * Any remarks containing the searched remark will match. e.g. `r/piz` will match `likes pizza`.
 * Clients matching at least one search query will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+**Parameters**:
+* [`QUERY`](#query)
+* [`PRIORITY`](#tag)
+* [`TAG`](#tag)
+* [`REMARK`](#remark)
 
 **Examples**:
 * `find John` returns `john` and `John Doe`
@@ -708,6 +748,9 @@ In the help window, you can view all the command usages built-in right into FAST
 ![help window](images/helpWindow.png)
 
 **Format**: `help [COMMAND]`
+
+**Parameters**:
+* [`COMMAND`](#command)
 
 **Examples**:
 * `help` will just open the default help window
@@ -780,7 +823,7 @@ FAST will start with an empty data file on the next run!
 ## **Command summary**
 The tables below provides you with a summary for **all** the available commands in FAST. You can use this section to quickly refresh your memory on the different command formats. 
 The commands are categorised (based on their purpose) into 5 different categories:
-* [Contact Management](#Contact Management)
+* [Contact Management](#Contact-Management)
 * [Appointment](#Appointment)
 * [Tags](#Tags)
 * [Navigation](#Navigation)
