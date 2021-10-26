@@ -230,7 +230,7 @@ class TdelCommandTest {
         }
 
         @Override
-        public void setTask(Member member, Task target, Task editedTask) {
+        public void setTask(Task target, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -238,7 +238,7 @@ class TdelCommandTest {
          * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
          */
         @Override
-        public void setTask(Member member, int index, Task editedTask) {
+        public void setTask(int index, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -254,6 +254,11 @@ class TdelCommandTest {
 
         @Override
         public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
