@@ -1,6 +1,9 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -97,7 +100,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setPrefixStore_modifySet_differentSet(){
+    public void setPrefixStore_modifySet_differentSet() {
         Set<Prefix> prefixSet = new HashSet<>();
         prefixSet.add(PREFIX_NAME);
         modelManager.setPrefixes(prefixSet);
@@ -107,7 +110,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getPrefixStore_modifySet_throwsUnsupportedOperationException(){
+    public void getPrefixStore_modifySet_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getPrefixes().add(PREFIX_PHONE));
     }
 

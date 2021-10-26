@@ -12,19 +12,19 @@ public class CommandResult {
     /**
      * Special Commands that UI has to treat in different ways.
      */
-    public enum RESULT_TYPE {
+    public enum ResultType {
         NORMAL,
         SHOW_HELP,
         EXIT,
         EXPORT_CSV
     }
     private final String feedbackToUser;
-    private final RESULT_TYPE resultType;
+    private final ResultType resultType;
 
     /**
      * Constructs a {@code CommandResult} with the specified specialType.
      */
-    public CommandResult (String feedbackToUser, RESULT_TYPE specialType) {
+    public CommandResult (String feedbackToUser, ResultType specialType) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.resultType = specialType;
     }
@@ -35,13 +35,13 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean exportCsv) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         if (showHelp) {
-            this.resultType = RESULT_TYPE.SHOW_HELP;
+            this.resultType = ResultType.SHOW_HELP;
         } else if (exit) {
-            this.resultType = RESULT_TYPE.EXIT;
+            this.resultType = ResultType.EXIT;
         } else if (exportCsv) {
-            this.resultType = RESULT_TYPE.EXPORT_CSV;
+            this.resultType = ResultType.EXPORT_CSV;
         } else {
-            this.resultType = RESULT_TYPE.NORMAL;
+            this.resultType = ResultType.NORMAL;
         }
     }
 
@@ -58,7 +58,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, RESULT_TYPE.NORMAL);
+        this(feedbackToUser, ResultType.NORMAL);
     }
 
     public String getFeedbackToUser() {
@@ -66,15 +66,15 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return resultType.equals(RESULT_TYPE.SHOW_HELP);
+        return resultType.equals(ResultType.SHOW_HELP);
     }
 
     public boolean isExit() {
-        return resultType.equals(RESULT_TYPE.EXIT);
+        return resultType.equals(ResultType.EXIT);
     }
 
     public boolean isChooseFile() {
-        return resultType.equals(RESULT_TYPE.EXPORT_CSV);
+        return resultType.equals(ResultType.EXPORT_CSV);
     }
 
     @Override

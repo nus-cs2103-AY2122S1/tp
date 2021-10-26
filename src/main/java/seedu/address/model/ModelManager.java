@@ -136,12 +136,12 @@ public class ModelManager implements Model {
 
     //=========== Prefix Set Accessors ===========================
     @Override
-    public void setPrefixes(Collection<Prefix> prefixes){
+    public void setPrefixes(Collection<Prefix> prefixes) {
         this.prefixStore = Set.copyOf(prefixes);
-}
+    }
 
     @Override
-    public Set<Prefix> getPrefixes(){
+    public Set<Prefix> getPrefixes() {
         return Set.copyOf(this.prefixStore);
     }
 

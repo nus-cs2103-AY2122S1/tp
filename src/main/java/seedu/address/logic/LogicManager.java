@@ -82,7 +82,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Set<Prefix> getPrefixStore(){
+    public Set<Prefix> getPrefixStore() {
         return Set.copyOf(model.getPrefixes());
     }
 }

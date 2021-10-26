@@ -26,7 +26,7 @@ class MailingListCommandTest {
 
         assertEquals(
                 new MailingListCommand(prefixes).execute(model),
-                new CommandResult(MailingListCommand.MESSAGE_SUCCESS, CommandResult.RESULT_TYPE.EXPORT_CSV));
+                new CommandResult(MailingListCommand.MESSAGE_SUCCESS, CommandResult.ResultType.EXPORT_CSV));
     }
 
     @Test
@@ -34,6 +34,6 @@ class MailingListCommandTest {
         Set<Prefix> prefixes = Set.of(PREFIX_PHONE);
         assertEquals(
                 new MailingListCommand(prefixes).execute(model),
-                new CommandResult(MailingListCommand.MESSAGE_SUCCESS, CommandResult.RESULT_TYPE.EXPORT_CSV));
+                new CommandResult(MailingListCommand.MESSAGE_SUCCESS, CommandResult.ResultType.EXPORT_CSV));
     }
 }

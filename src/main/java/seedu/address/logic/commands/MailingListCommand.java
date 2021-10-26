@@ -50,7 +50,7 @@ public class MailingListCommand extends Command {
         if (model.getFilteredPersonList().isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY_PERSON_LIST);
         }
-        return new CommandResult(MESSAGE_SUCCESS, false,false,true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
 
     @Override

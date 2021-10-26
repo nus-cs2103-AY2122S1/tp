@@ -63,7 +63,8 @@ public class CsvUtil {
      * @param exportPrefixes Prefixes for the fields to be included in the csv
      * @throws IOException
      */
-    public static void modelToCsv(List<Person> personList, Path path, Collection<Prefix> exportPrefixes) throws IOException {
+    public static void modelToCsv(List<Person> personList, Path path,
+                                  Collection<Prefix> exportPrefixes) throws IOException {
 
         File file = new File(path.toString());
         FileWriter fileWriter = new FileWriter(file);
