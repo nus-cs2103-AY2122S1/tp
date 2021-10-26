@@ -189,13 +189,13 @@ public class Lesson {
     public void updateStudent(Student oldStudent, Student newStudent) {
         requireAllNonNull(oldStudent, newStudent);
         checkArgument(isAbleToUnenroll(oldStudent), String.format(STUDENT_NOT_ENROLLED, oldStudent.getName(), this));
-        checkArgument(isAbleToEnroll(newStudent), String.format(ENROLLMENT_MESSAGE_CONSTRAINT, oldStudent.getName()));
 
-        for (int idx = 0; idx < students.size(); idx++) {
-            if (students.get(idx).isSameStudent(oldStudent)) {
-                students.set(idx, newStudent);
-                newStudent.addLesson(this);
+        for (Student student : students) {
+            if (student.isSameStudent(oldStudent)) {
                 removeStudent(oldStudent);
+                checkArgument(isAbleToEnroll(newStudent),
+                        String.format(ENROLLMENT_MESSAGE_CONSTRAINT, newStudent.getName()));
+                addStudent(newStudent);
                 return;
             }
         }
