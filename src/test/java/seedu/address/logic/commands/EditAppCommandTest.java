@@ -1,7 +1,18 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.testutil.TypicalAppointment.getTypicalSchedule;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -14,17 +25,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.testutil.TypicalAppointment.getTypicalSchedule;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -42,17 +42,6 @@ public class EditAppCommandTest {
 
         assertCommandFailure(editAppCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }
-
-//    @Test
-//    public void execute_validAppointmentEdit() {
-//        model.addAppointment(new Appointment(new UniquePersonList(),
-//                new Address(VALID_ADDRESS_AMY), VALID_DATE, VALID_TIME, "first description"));
-//        Index index = Index.fromOneBased(model.getFilteredAppointmentList().size());
-//        EditAppCommand editAppCommand = new EditAppCommand(index, new Address(VALID_ADDRESS_AMY),
-//                VALID_DATE, VALID_TIME, "second description");
-//
-//        assertCommandSuccess(editAppCommand, model, EditAppCommand.MESSAGE_SUCCESS, model);
-//    }
 
     private class ModelStub implements Model {
         @Override
@@ -160,18 +149,5 @@ public class EditAppCommandTest {
             return "";
         }
     }
-
-//    /**
-//     * A Model stub that contains a single person.
-//     */
-//    private class ModelStubWithAppointment extends EditAppCommandTest.ModelStub {
-//        private final Appointment appointment;
-//
-//        ModelStubWithAppointment(Appointment appointment) {
-//            requireNonNull(appointment);
-//            this.appointment = appointment;
-//        }
-//
-//    }
 
 }
