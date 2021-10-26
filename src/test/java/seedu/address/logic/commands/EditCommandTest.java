@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_CODE_ATT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RATING_BOB;
@@ -55,12 +56,13 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withReview(VALID_REVIEW_BOB).withTags(VALID_TAG_HUSBAND).withRating(VALID_RATING_BOB).build();
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        Person editedPerson = personInList.withCategoryCode(VALID_CATEGORY_CODE_ATT).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withReview(VALID_REVIEW_BOB).withTags(VALID_TAG_HUSBAND)
                 .withRating(VALID_RATING_BOB).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withCategory(VALID_CATEGORY_CODE_ATT)
+                .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withReview(VALID_REVIEW_BOB)
+                .withTags(VALID_TAG_HUSBAND).withRating(VALID_RATING_BOB).build();
 
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 

@@ -101,7 +101,7 @@ public class AddressBookParser {
             return new ViewCommandParser().parse(arguments);
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, CmdCommand.MESSAGE_USAGE));
         }
     }
 

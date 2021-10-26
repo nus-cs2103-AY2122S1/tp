@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_OTH;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -26,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.REVIEW_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_CODE_ATT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -41,6 +43,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CategoryCode;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -52,7 +55,6 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
-    //TODO(HK): Add test cases for category codes
     @Test
     public void parse_allFieldsPresent_success() {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
@@ -60,6 +62,11 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_OTH + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + REVIEW_DESC_BOB + TAG_DESC_FRIEND + RATING_DESC_BOB,
+                new AddCommand(expectedPerson));
+
+        // multiple categories - last category accepted
+        assertParseSuccess(parser, CATEGORY_DESC_ATT + CATEGORY_DESC_OTH + NAME_DESC_BOB + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + REVIEW_DESC_BOB + TAG_DESC_FRIEND + RATING_DESC_BOB,
                 new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
@@ -102,6 +109,10 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
+        // missing category prefix
+        assertParseFailure(parser, VALID_CATEGORY_CODE_ATT + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + RATING_DESC_BOB, expectedMessage);
+
         // missing name prefix
         assertParseFailure(parser, CATEGORY_DESC_OTH + VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + RATING_DESC_BOB, expectedMessage);
@@ -125,6 +136,11 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        //invalid category
+        assertParseFailure(parser, INVALID_CATEGORY_DESC + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + RATING_DESC_BOB,
+                CategoryCode.MESSAGE_CONSTRAINTS);
+
         // invalid name
         assertParseFailure(parser, CATEGORY_DESC_ATT + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + RATING_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
