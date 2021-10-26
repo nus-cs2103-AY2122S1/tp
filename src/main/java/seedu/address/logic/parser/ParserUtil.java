@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
 import java.time.LocalDate;
@@ -381,7 +382,52 @@ public class ParserUtil {
     }
 
     /**
-     * Assumes that the input has two or one dates, and outputs the result in a {@code LocalDate[]} of size 2.
+     * Parses the role requirements of form "role-number".
+     *
+     * @param roles The set of roles.
+     * @return A parsed set of role requirements as Strings of form "role-number".
+     * @throws ParseException If the roles cannot be parsed.
+     */
+    public static Set<String> parseRoleRequirements(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<String> roleSet = new HashSet<>();
+        for (String roleReq : roles) {
+            roleReq = roleReq.trim().replace(PREFIX_ROLE.toString(), "");
+            if (!isValidRoleRequirement(roleReq)) {
+                throw SetRoleReqCommandParser.DEFAULT_ERROR;
+            }
+            roleSet.add(roleReq);
+        }
+        return roleSet;
+    }
+
+    private static boolean isValidRoleRequirement(String roleReq) {
+        String[] roleReqSplit = roleReq.split("-");
+
+        if (roleReqSplit.length != 2) {
+            return false;
+        }
+
+        if (!Role.isValidRole(roleReqSplit[0]) || roleReqSplit[0].equals("norole")) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(roleReqSplit[1]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Extracts tuple dates. Assumes that the input has two or one dates, and outputs the result in a
+     * {@code LocalDate[]} of size 2.
+     *
+     * @param argMultimap The argument multimap storing the dates.
+     * @return The start and end date saved as a tuple.
+     * @throws ParseException If parsing of the dates fails.
      */
     public static LocalDate[] extractTupleDates(ArgumentMultimap argMultimap) throws ParseException {
         LocalDate[] dateArray = new LocalDate[2];
