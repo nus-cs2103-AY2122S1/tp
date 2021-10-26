@@ -15,10 +15,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.sun.javafx.collections.ImmutableObservableList;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import com.sun.javafx.collections.ImmutableObservableList;
+
+import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -63,11 +64,11 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void add_pinnedPerson_pinnedPersonIsPutInFront_success() {
+    public void add_pinnedPersonPinnedPersonIsPutInFront_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(HANNAH);
         ObservableList<Person> expectedPersonList = new ImmutableObservableList<>(HANNAH, ALICE);
-        assertEquals(uniquePersonList.asUnmodifiableObservableList(), expectedPersonList );
+        assertEquals(uniquePersonList.asUnmodifiableObservableList(), expectedPersonList);
     }
 
     @Test
