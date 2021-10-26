@@ -50,10 +50,18 @@ public class ToDoTaskCard extends UiPart<Region> {
         status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
 
-        Label priorityLabel = new Label("priority: " + task.getPriorityAsString());
+        Label priorityLabel = new Label("Priority: " + task.getPriorityAsString());
         Label taskType = new Label("Todo");
         tags.getChildren().addAll(taskType, priorityLabel);
-        priorityLabel.getStyleClass().add("priorityLabel");
+
+        String priority = task.getPriorityAsString();
+        if (priority.contains("HIGH")) {
+            priorityLabel.getStyleClass().add("priorityLabel-high");
+        } else if (priority.contains("MED")) {
+            priorityLabel.getStyleClass().add("priorityLabel-med");
+        } else {
+            priorityLabel.getStyleClass().add("priorityLabel-low");
+        }
         taskType.getStyleClass().add("taskType");
 
         task.getTags().stream()

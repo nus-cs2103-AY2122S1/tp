@@ -65,7 +65,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 16pt;
     -fx-font-family: "DM Sans";
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -348,7 +348,7 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "DM Sans";
-    -fx-font-size: 11pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -377,8 +377,8 @@
 #inputText {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-font-family: "DM Sans";
-    -fx-font-size: 11pt;
+    -fx-font-family: "DM Sans Bold";
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -386,7 +386,7 @@
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
     -fx-font-family: "DM Sans";
-    -fx-font-size: 10pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: white;
 }
 
@@ -394,7 +394,7 @@
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
     -fx-font-family: "DM Sans Bold";
-    -fx-font-size: 18pt;
+    -fx-font-size: 20pt;
     -fx-text-fill: white;
 }
 
@@ -410,8 +410,14 @@
     -fx-background-color: #fc3dc9 !important;
 }
 
-.priorityLabel {
+.priorityLabel-high {
+    -fx-background-color: #d82e3f !important;
+}
+.priorityLabel-med {
     -fx-background-color: #e0883a !important;
+}
+.priorityLabel-low {
+    -fx-background-color: #F6BE00 !important;
 }
 
 .studentGroupLabel {
@@ -453,4 +459,10 @@
 
 #memberListPanelPlaceholder {
     -fx-padding: 10 0 0 0;
+}
+
+#commandSummaryTable {
+    -fx-padding: 15 10 15 10;
+    -fx-font-family: "DM Sans";
+    -fx-font-size: 12px;
 }

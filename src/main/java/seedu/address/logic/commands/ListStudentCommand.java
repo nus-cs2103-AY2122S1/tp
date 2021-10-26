@@ -10,7 +10,7 @@ public class ListStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "students";
 
-    public static final String MESSAGE_SUCCESS = "Listed all students";
+    public static final String MESSAGE_SUCCESS = "Listed all students.";
 
 
     @Override
