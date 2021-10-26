@@ -3,6 +3,10 @@ package seedu.address.model.person.supplier;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Supplier's delivery details in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidSupplyType(String)}
+ */
 public class SupplyType {
 
     public static final String MESSAGE_CONSTRAINTS =
