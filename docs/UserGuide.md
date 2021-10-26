@@ -3,8 +3,6 @@ layout: page
 title: User Guide
 ---
 
-# User Guide for Sellah
-
 ## Table of Contents
 
 1. [Introduction](#1-introduction) <br>
