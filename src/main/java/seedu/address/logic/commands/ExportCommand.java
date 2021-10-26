@@ -49,7 +49,19 @@ public class ExportCommand extends Command {
         }
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS));
+                String.format(MESSAGE_SUCCESS + " to " + filePath));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ExportCommand)) {
+            return false;
+        }
+        ExportCommand e = (ExportCommand) other;
+        return filePath.equals(e.filePath);
     }
 
 }
