@@ -11,6 +11,7 @@ public class Done {
     public static final String STATUS_DONE = "Done";
     public static final String STATUS_UNDONE = "Not Done";
 
+    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for Done or Not Done";
     private String doneStatus;
 
     /**
