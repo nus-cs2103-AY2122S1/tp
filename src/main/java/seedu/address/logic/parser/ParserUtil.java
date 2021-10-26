@@ -187,11 +187,11 @@ public class ParserUtil {
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         try {
             return LocalDateTime.parse(trimmedDateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("DateTime format should be \"YYYY-MM-dd HHmm\"");
+            throw new ParseException("DateTime format should be \"dd-MM-yyyy HHmm\"");
         }
     }
 
