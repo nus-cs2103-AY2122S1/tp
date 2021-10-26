@@ -77,11 +77,7 @@ public class DashboardWindow extends PopupWindow {
 
     private TreeMap<ClassId, Integer> fillLabsUnmarkedMap(HashSet<ClassId> classList, ObservableList<Student> stuList) {
         TreeMap<ClassId, Integer> labsUnmarkedMap = new TreeMap<>(new SortClassId());
-        for (ClassId cid : classList) {
-            if (!labsUnmarkedMap.containsKey(cid)) {
-                labsUnmarkedMap.put(cid, 0);
-            }
-        }
+        classList.forEach(cid -> labsUnmarkedMap.put(cid, 0));
 
         for (Student s : stuList) {
             ObservableList<Lab> stuLabs = s.getLabList();
