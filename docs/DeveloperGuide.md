@@ -315,13 +315,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their email                | locate details of applicants without having to go through the entire list |
-| `* * *`  | user                                       | find applicants by their applied roles        | filter out applicants applying for a specific role                        |
+| `* * *`  | user                                       | find applicants by their applied roles        | filter out applicants that match the desired role                        |
 | `* * *`  | user                                       | find applicants by their employment type      | filter out applicants that match the desired employment type              |
-| `* * *`  | user                                       | find applicants by their expected salary      | filter out applicants that match the salary range of the hiring company   |
+| `* * *`  | user                                       | find applicants by their expected salary      | filter out applicants that match the desired salary range of the hiring company   |
 | `* * *`  | user                                       | find applicants by their level of education   | filter out applicants that match the desired highest level of education   |
-| `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants with desired years of experience                    |
-| `* * *`  | user                                       | find applicants by their tags                 | filter out applicants with desired tags                                   |
-| `* * *`  | user                                       | find applicants by their interview time       | know how many applicants will have interview on a specific time           |
+| `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants that match the desired years of experience                    |
+| `* * *`  | user                                       | find applicants by their tags                 | filter out applicants that match the desired tags                                   |
+| `* * *`  | user                                       | find applicants by their interview time       | filter out applicants that match the desired interview times           |
+| `* * *`  | user                                       | find applicants by their notes                | filter out applicants that match the desired note
 | `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
 | `* * *`  | user                                       | see all names available in the list           | check easily if a certain name is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all phone numbers available in the list   | check easily if a certain number is present in the list without having to go through the entire list      |
