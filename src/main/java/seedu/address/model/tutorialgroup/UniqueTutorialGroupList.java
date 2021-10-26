@@ -45,7 +45,7 @@ public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
         Comparator<TutorialGroup> compareByName = Comparator
                 .comparing(TutorialGroup::getClassCode)
                 .thenComparing(TutorialGroup::getGroupType)
-                .thenComparing(TutorialGroup::getGroupName);
+                .thenComparing(TutorialGroup::getGroupNumber);
         internalList.sort(compareByName);
     }
 

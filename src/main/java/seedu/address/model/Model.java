@@ -85,6 +85,12 @@ public interface Model {
     void deleteTutorialClass(TutorialClass target);
 
     /**
+     * Deletes the given group.
+     * The TutorialGroup must exist in Classmate.
+     */
+    void deleteTutorialGroup(TutorialGroup target);
+
+    /**
      * Adds the given student.
      * {@code student} must not already exist in the Classmate.
      */

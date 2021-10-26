@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tutorialclass.exceptions.DuplicateTutorialClassException;
 import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundException;
 import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.exceptions.DuplicateTutorialGroupException;
 
 /**
  * A list of tutorial classes that enforces uniqueness between its elements and does not allow nulls.
@@ -70,7 +71,7 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
     public void add(TutorialGroup toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateTutorialClassException();
+            throw new DuplicateTutorialGroupException();
         }
         // creates a class with the same class code to get that class from the class list as result
         TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toAdd.getClassCode());
@@ -117,6 +118,19 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
         if (!internalList.remove(toRemove)) {
             throw new TutorialClassNotFoundException();
         }
+    }
+
+    /**
+     * Removes the equivalent tutorial group from the list.
+     * The tutorial group must exist in the list.
+     */
+    public void remove(TutorialGroup toRemove) {
+        requireNonNull(toRemove);
+        // creates a class with the same class code to get that class from the class list as result
+        TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toRemove.getClassCode());
+        Optional<TutorialClass> result = internalList.stream()
+                .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
+        result.get().removeTutorialGroup(toRemove);
     }
 
     public void setTutorialClasses(UniqueTutorialClassList replacement) {

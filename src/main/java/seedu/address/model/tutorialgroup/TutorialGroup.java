@@ -21,7 +21,7 @@ public class TutorialGroup {
 
     }
 
-    public GroupNumber getGroupName() {
+    public GroupNumber getGroupNumber() {
         return groupNumber;
     }
 
@@ -43,7 +43,7 @@ public class TutorialGroup {
         }
 
         return otherGroup != null
-                && otherGroup.getGroupName().equals(getGroupName())
+                && otherGroup.getGroupNumber().equals(getGroupNumber())
                 && otherGroup.getClassCode().equals(getClassCode())
                 && otherGroup.getGroupType().equals(getGroupType());
 
@@ -60,7 +60,7 @@ public class TutorialGroup {
         }
 
         TutorialGroup otherGroup = (TutorialGroup) other;
-        return otherGroup.getGroupName().equals(getGroupName())
+        return otherGroup.getGroupNumber().equals(getGroupNumber())
                 && otherGroup.getClassCode().equals(getClassCode())
                 && otherGroup.getGroupType().equals(getGroupType());
     }
@@ -74,7 +74,7 @@ public class TutorialGroup {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("name: ")
-                .append(getGroupName())
+                .append(getGroupNumber())
                 .append("; class: ")
                 .append(getClassCode())
                 .append("; type: ")

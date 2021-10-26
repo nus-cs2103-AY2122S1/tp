@@ -103,6 +103,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteTutorialGroup(TutorialGroup target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setStudent(Student target, Student editedStudent) {
         throw new AssertionError("This method should not be called.");
     }

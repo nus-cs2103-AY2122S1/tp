@@ -151,6 +151,14 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
+     * Removes {@code key} from this {@code Classmate}.
+     * {@code key} must exist in the ClassMATE.
+     */
+    public void removeTutorialGroup(TutorialGroup key) {
+        tutorialClasses.remove(key);
+    }
+
+    /**
      * Returns true if a tutorialGroup with the same identity as {@code tutorialGroup} exists in the ClassMATE.
      */
     public boolean hasTutorialGroup(TutorialGroup tutorialGroup) {

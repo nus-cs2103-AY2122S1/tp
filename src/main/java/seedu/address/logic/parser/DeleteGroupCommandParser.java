@@ -7,27 +7,26 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
-public class AddGroupCommandParser implements Parser<AddGroupCommand> {
-
+public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddClassCommand
      * and returns an AddClassCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public AddGroupCommand parse(String args) throws ParseException {
+    public DeleteGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE));
         }
 
         GroupNumber groupNumber = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUPNUMBER).get());
@@ -36,7 +35,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
         TutorialGroup tutorialGroup = new TutorialGroup(groupNumber, classCode, groupType);
 
-        return new AddGroupCommand(tutorialGroup);
+        return new DeleteGroupCommand(tutorialGroup);
 
     }
 

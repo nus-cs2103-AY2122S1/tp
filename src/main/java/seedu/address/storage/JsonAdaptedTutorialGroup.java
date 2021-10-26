@@ -13,7 +13,7 @@ import seedu.address.model.tutorialgroup.TutorialGroup;
 public class JsonAdaptedTutorialGroup {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial Group's %s field is missing!";
 
-    private final String groupName;
+    private final String groupNumber;
     private final String classCode;
     private final String groupType;
 
@@ -21,11 +21,11 @@ public class JsonAdaptedTutorialGroup {
      * Constructs a {@code JsonAdaptedTutorialClass} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedTutorialGroup(@JsonProperty("groupName") String groupName,
+    public JsonAdaptedTutorialGroup(@JsonProperty("groupNumber") String groupNumber,
                                     @JsonProperty("classCode") String classCode,
                                     @JsonProperty("groupType") String groupType) {
 
-        this.groupName = groupName;
+        this.groupNumber = groupNumber;
         this.classCode = classCode;
         this.groupType = groupType;
     }
@@ -34,7 +34,7 @@ public class JsonAdaptedTutorialGroup {
      * Converts a given {@code TutorialGroup} into this class for Jackson use.
      */
     public JsonAdaptedTutorialGroup(TutorialGroup source) {
-        groupName = source.getGroupName().toString();
+        groupNumber = source.getGroupNumber().toString();
         classCode = source.getClassCode().toString();
         groupType = source.getGroupType().toString();
     }
@@ -54,13 +54,13 @@ public class JsonAdaptedTutorialGroup {
         }
         final ClassCode modelClassCode = new ClassCode(classCode);
 
-        if (groupName == null) {
+        if (groupNumber == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupNumber.class.getSimpleName())
             );
         }
 
-        final GroupNumber modelGroupNumber = new GroupNumber(groupName);
+        final GroupNumber modelGroupNumber = new GroupNumber(groupNumber);
 
         if (groupType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));

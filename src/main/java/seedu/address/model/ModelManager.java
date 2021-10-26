@@ -120,6 +120,10 @@ public class ModelManager implements Model {
         classmate.removeTutorialClass(target);
     }
 
+    @Override
+    public void deleteTutorialGroup(TutorialGroup target) {
+        classmate.removeTutorialGroup(target);
+    }
 
     @Override
     public void addStudent(Student student) {

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,11 +15,11 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to a class to Classmate. "
             + "Parameters: "
-            + PREFIX_GROUPNAME + "GROUPNAME "
+            + PREFIX_GROUPNUMBER + "GROUPNAME "
             + PREFIX_CLASSCODE + "CLASSCODE "
             + PREFIX_TYPE + "TYPE "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUPNAME + "1 "
+            + PREFIX_GROUPNUMBER + "1 "
             + PREFIX_CLASSCODE + "G06 "
             + PREFIX_TYPE + "OP1 ";
 
@@ -31,7 +31,7 @@ public class AddGroupCommand extends Command {
     private final TutorialClass toAddTutorialClass;
 
     /**
-     * Creates an AddClassCommand to add the specified {@code Student}
+     * Creates an AddClassCommand to add the specified {@code TutorialGroup}
      */
     public AddGroupCommand(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
