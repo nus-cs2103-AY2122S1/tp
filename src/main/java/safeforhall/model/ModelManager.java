@@ -119,7 +119,7 @@ public class ModelManager implements Model {
             personFound = addressBook.findPerson(information);
 
             if (personFound.isEmpty()) {
-                throw new CommandException("No person with this information '" + information + "' could be found");
+                throw new CommandException("No resident with this information '" + information + "' could be found");
             } else {
                 personList.add(personFound.get());
             }

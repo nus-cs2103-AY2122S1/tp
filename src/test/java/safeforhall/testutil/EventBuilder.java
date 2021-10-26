@@ -42,7 +42,7 @@ public class EventBuilder {
         eventDate = eventToCopy.getEventDate();
         venue = eventToCopy.getVenue();
         capacity = eventToCopy.getCapacity();
-        residents = eventToCopy.getResidents();
+        residents = eventToCopy.getResidentList();
     }
 
     /**

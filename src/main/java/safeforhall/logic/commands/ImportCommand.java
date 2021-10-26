@@ -35,15 +35,15 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports resident information from the specified csv "
             + "file located within the /data folder\n"
+            + "Parameters: "
+            + "NAME_OF_CSV\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "safeforhall\n"
             + "Note: \n"
             + "     1. 8 comma separated values for each row in order; \n"
             + "             name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate\n"
             + "     2. The first row will be discarded as column headings\n"
-            + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n"
-            + "Parameters: "
-            + "NAME_OF_CSV\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "safeforhall";
+            + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n";
 
     public static final String MESSAGE_SUCCESS = "Imported resident information from csv";
     public static final String MESSAGE_FILE_NOT_FOUND = "Specified csv file was not found within the /data folder.";

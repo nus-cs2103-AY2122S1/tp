@@ -78,7 +78,7 @@ public class IncludeCommand extends Command {
             throw new CommandException("Index given is invalid");
         }
         ArrayList<Person> toAdd = model.toPersonList(residentList);
-        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
+        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidentList());
 
         checkForDuplicates(toAdd, currentResidents);
 
