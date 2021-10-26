@@ -1,7 +1,9 @@
 package seedu.programmer.ui;
 
+import java.util.HashSet;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -10,6 +12,7 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Student;
 
 /**
  * Dashboard window of student data.
@@ -44,12 +47,14 @@ public class DashboardWindow extends PopupWindow {
 
     private void fillOverallStats() {
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
-        int numStudents = readOnlyPE.getStudentList().size();
-
-        int numClasses = ClassId.getNumClasses();
-        int numLabs = readOnlyPE.getLabList().size();
-        logger.info("NUM STUDENTS: " + logic.getModel().getFilteredStudentList().size());
-        logger.info("NUM LABS: " + numLabs);
+        ObservableList<Student> stuList = readOnlyPE.getStudentList();
+        HashSet<ClassId> classes = new HashSet<>();
+        for (Student s: stuList) {
+            classes.add(s.getClassId());
+        }
+        int numStudents = stuList.size();
+        int numClasses = classes.size();
+        int numLabs = stuList.size() > 0 ? stuList.get(0).getLabResultList().size() : 0;
 
         String overallStats = "";
         overallStats += "No. of students: " + numStudents + "\n";
