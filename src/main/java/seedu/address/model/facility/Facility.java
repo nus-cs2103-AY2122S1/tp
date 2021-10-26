@@ -54,7 +54,7 @@ public class Facility {
     public List<Person> getPersonAllocatedList() {
         return personAllocatedList;
     }
-  
+
     public boolean isMaxCapacity() {
         return !capacity.isWithinCapacity(personAllocatedList.size());
     }
