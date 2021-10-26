@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.interaction.Interaction;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -38,6 +39,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedFramework> frameworks = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedRemark> remarks = new ArrayList<>();
+    private final List<JsonAdaptedInteractions> interactions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -50,7 +52,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("languages") List<JsonAdaptedLanguage> languages,
                              @JsonProperty("frameworks") List<JsonAdaptedFramework> frameworks,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                             @JsonProperty("remarks") List<JsonAdaptedRemark> remarks) {
+                             @JsonProperty("remarks") List<JsonAdaptedRemark> remarks,
+                             @JsonProperty("interactions") List<JsonAdaptedInteractions> interactions) {
         this.name = name;
         this.email = email;
         this.faculty = faculty;
@@ -74,6 +77,10 @@ class JsonAdaptedPerson {
 
         if (remarks != null) {
             this.remarks.addAll(remarks);
+        }
+
+        if (interactions != null) {
+            this.interactions.addAll(interactions);
         }
     }
 
@@ -105,6 +112,10 @@ class JsonAdaptedPerson {
         remarks.addAll(source.getRemarks().stream()
                 .map(JsonAdaptedRemark::new)
                 .collect(Collectors.toList()));
+
+        interactions.addAll(source.getInteractions().stream()
+                .map(JsonAdaptedInteractions::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -131,6 +142,12 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        System.out.println(interactions);
+        final List<Interaction> personInteractions = new ArrayList<>();
+        for (JsonAdaptedInteractions interaction : interactions) {
+            personInteractions.add(interaction.toModelType());
         }
 
         final List<Remark> personRemarks = new ArrayList<>();
@@ -175,10 +192,10 @@ class JsonAdaptedPerson {
         final Set<Framework> modelFrameworks = new HashSet<>(personFrameworks);
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Remark> modelRemarks = new HashSet<>(personRemarks);
-
+        final Set<Interaction> modelInteractions = new HashSet<>(personInteractions);
 
         return new Person(modelName, modelEmail, modelFaculty, modelMajor,
-                modelSkills, modelLanguages, modelFrameworks, modelTags, modelRemarks);
+                modelSkills, modelLanguages, modelFrameworks, modelTags, modelRemarks, modelInteractions);
     }
 
 }
