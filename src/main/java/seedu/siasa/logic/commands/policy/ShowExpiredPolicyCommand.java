@@ -1,6 +1,7 @@
 package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.util.Iterator;
 
@@ -22,13 +23,12 @@ public class ShowExpiredPolicyCommand extends Command {
         Iterator<Policy> policyListIterator = model.getFilteredPolicyList().iterator();
         StringBuilder listOfPolicies = new StringBuilder("Policies expiring soon:\n");
 
-        while(policyListIterator.hasNext()) {
+        while (policyListIterator.hasNext()) {
             Policy policy = policyListIterator.next();
             if (policy.getExpiryDate().value.isBefore(LocalDate.now())) {
                 listOfPolicies.append(policy);
             }
         }
-
         return new CommandResult(listOfPolicies.toString());
     }
 }
