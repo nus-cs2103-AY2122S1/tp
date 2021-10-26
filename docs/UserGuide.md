@@ -434,7 +434,11 @@ This is useful for adding additional client notes such as their preferred meetin
 which should mostly be one or two words.<br>
 </div>
 
-**Format**: `rmk [`INDEX`](#INDEX) [r/[`REMARK`](#REMARK)]`
+**Format**: `rmk INDEX [r/REMARK]`
+
+**Parameter**:
+* [`INDEX`](#index)
+* [`REMARK`](#index)
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
