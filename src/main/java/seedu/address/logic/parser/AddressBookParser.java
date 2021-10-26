@@ -7,7 +7,29 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddShiftCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteShiftCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.RemoveMarkCommand;
+import seedu.address.logic.commands.SetDefaultShiftTimingsCommand;
+import seedu.address.logic.commands.SetRoleReqCommand;
+import seedu.address.logic.commands.SetShiftTimeCommand;
+import seedu.address.logic.commands.StaffIndividualStatisticsCommand;
+import seedu.address.logic.commands.StaffStatisticsCommand;
+import seedu.address.logic.commands.SwapShiftCommand;
+import seedu.address.logic.commands.SwitchTabCommand;
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewScheduleCommand;
+import seedu.address.logic.commands.ViewShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -91,8 +113,8 @@ public class AddressBookParser {
         case SetRoleReqCommand.COMMAND_WORD:
             return new SetRoleReqCommandParser().parse(arguments);
 
-        case SetDefaultShiftTimeCommand.COMMAND_WORD:
-            return new SetDefaultShiftTimeCommandParser().parse(arguments);
+        case SetDefaultShiftTimingsCommand.COMMAND_WORD:
+            return new SetDefaultShiftTimingsCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

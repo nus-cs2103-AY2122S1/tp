@@ -1,10 +1,5 @@
 package seedu.address.model;
 
-import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_END_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_START_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_END_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_START_TIME;
-
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -12,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.util.TimeUtil;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Slot;
 
@@ -42,11 +38,11 @@ public class RecurrencePeriod extends Period {
         super(period);
         this.period = period;
         if (slot.equals(Slot.MORNING)) {
-            this.startTime = DEFAULT_MORNING_START_TIME;
-            this.endTime = DEFAULT_MORNING_END_TIME;
+            this.startTime = TimeUtil.getDefaultMorningStartTime();
+            this.endTime = TimeUtil.getDefaultMorningEndTime();
         } else if (slot.equals(Slot.AFTERNOON)) {
-            this.startTime = DEFAULT_AFTERNOON_START_TIME;
-            this.endTime = DEFAULT_AFTERNOON_END_TIME;
+            this.startTime = TimeUtil.getDefaultAfternoonStartTime();
+            this.endTime = TimeUtil.getDefaultAfternoonEndTime();
         } else {
             throw new IllegalStateException("This should not occur");
         }

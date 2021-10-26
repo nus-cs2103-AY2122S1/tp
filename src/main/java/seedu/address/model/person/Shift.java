@@ -1,9 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_END_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_START_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_END_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_START_TIME;
 import static seedu.address.commons.util.TimeUtil.isValidTime;
 
 import java.time.DayOfWeek;
@@ -17,6 +13,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
+import seedu.address.commons.util.TimeUtil;
 import seedu.address.model.EmptyShift;
 import seedu.address.model.RecurrencePeriod;
 import seedu.address.model.person.exceptions.NoShiftException;
@@ -247,11 +244,13 @@ public class Shift {
             throw new InvalidShiftTimeException();
         }
         if (order == 0) {
-            if (startTime.isBefore(DEFAULT_MORNING_START_TIME) || endTime.isAfter(DEFAULT_MORNING_END_TIME)) {
+            if (startTime.isBefore(TimeUtil.getDefaultMorningStartTime())
+                    || endTime.isAfter(TimeUtil.getDefaultMorningEndTime())) {
                 throw new InvalidShiftTimeException();
             }
         } else {
-            if (startTime.isBefore(DEFAULT_AFTERNOON_START_TIME) || endTime.isAfter(DEFAULT_AFTERNOON_END_TIME)) {
+            if (startTime.isBefore(TimeUtil.getDefaultAfternoonStartTime())
+                    || endTime.isAfter(TimeUtil.getDefaultAfternoonEndTime())) {
                 throw new InvalidShiftTimeException();
             }
         }

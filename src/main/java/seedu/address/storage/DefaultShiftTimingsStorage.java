@@ -1,8 +1,5 @@
 package seedu.address.storage;
 
-import seedu.address.commons.util.TimeUtil;
-import seedu.address.logic.parser.ParserUtil;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,10 +8,12 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import seedu.address.commons.util.TimeUtil;
+
 public class DefaultShiftTimingsStorage {
 
-    public static final String filePath = "data/DefaultShiftTimings.txt";
-    private static File file = new File(filePath);
+    public static final String FILEPATH = "data/DefaultShiftTimings.txt";
+    private static File file = new File(FILEPATH);
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     // Morning shift start time, Morning shift end time, Afternoon shift start time, Afternoon shift end time
@@ -107,6 +106,12 @@ public class DefaultShiftTimingsStorage {
         update();
     }
 
+    /**
+     * Updates the save file with the new timings given.
+     *
+     * @param newTimings a LocalTime[] of new timings.
+     * @throws FileNotFoundException Thrown when file is not found.
+     */
     public static void update(LocalTime[] newTimings) throws FileNotFoundException {
         stringTimings[0] = newTimings[0].toString();
         stringTimings[1] = newTimings[1].toString();

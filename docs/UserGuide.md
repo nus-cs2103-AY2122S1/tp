@@ -141,7 +141,7 @@ Examples:
 `setRoleReq r/floor-3`\
 `setRoleReq r/kitchen-4 r/bartender-2`
 
-#### Setting Default Shift Timings : `setShiftTimings `
+#### Setting Default Shift Timings : `setDefaultShiftTimings `
 
 Set the default timings for the morning and afternoon shift. Note that all 4 timings must be present, and the timings 
 must be provided in an `HH:mm` format.

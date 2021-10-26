@@ -42,7 +42,7 @@ public class SetRoleReqCommand extends Command {
             try {
                 RoleReqStorage.update(roleReqSplit[0], Integer.parseInt(roleReqSplit[1]));
             } catch (FileNotFoundException e) {
-                throw new CommandException(FILE_NOT_FOUND + RoleReqStorage.filePath);
+                throw new CommandException(FILE_NOT_FOUND + RoleReqStorage.FILEPATH);
             }
         }
         return new CommandResult("Role requirements successfully updated:\n\n"

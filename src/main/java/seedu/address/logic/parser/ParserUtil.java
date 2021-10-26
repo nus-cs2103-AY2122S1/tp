@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.WRONG_NUMBER_OF_DATES;
-import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -20,7 +19,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.Messages;
@@ -459,7 +461,7 @@ public class ParserUtil {
      */
     public static LocalTime[] parseTimingsArr(String[] stringTimings) throws ParseException {
         if (stringTimings.length != 4) {
-            throw SetRoleReqCommandParser.DEFAULT_ERROR;
+            throw SetDefaultShiftTimingsCommandParser.DEFAULT_ERROR;
         }
 
         LocalTime[] timings = new LocalTime[4];
@@ -470,7 +472,14 @@ public class ParserUtil {
         } catch (DateTimeParseException e) {
             throw new ParseException(e.getMessage());
         }
+
+        for (int i = 0; i < 3; i++) {
+            // if i < (i + 1)
+            if (timings[i].compareTo(timings[i + 1]) >= 0) {
+                throw SetDefaultShiftTimingsCommandParser.DEFAULT_ERROR;
+            }
+        }
+
         return timings;
     }
-
 }

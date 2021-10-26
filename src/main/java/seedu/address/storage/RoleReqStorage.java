@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class RoleReqStorage {
 
-    public static final String filePath = "data/RoleReq.txt";
-    private static File file = new File(filePath);
+    public static final String FILEPATH = "data/RoleReq.txt";
+    private static File file = new File(FILEPATH);
     private static int[] requirements = new int[]{0, 0, 0}; // bartender, floor, kitchen
 
     /**
