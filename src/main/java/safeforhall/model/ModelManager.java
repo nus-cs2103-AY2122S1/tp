@@ -107,15 +107,19 @@ public class ModelManager implements Model {
     @Override
     public ArrayList<Person> toPersonList(ResidentList residentList) throws CommandException {
         requireNonNull(residentList);
-        ArrayList<String> residentInformation = residentList.getResidentInformation();
+        ArrayList<String> residentInformation = residentList.getStringResidentList();
         ArrayList<Person> personList = new ArrayList<>();
+
+        if (residentList.isEmpty()) {
+            return personList;
+        }
 
         for (String information : residentInformation) {
             Optional<Person> personFound;
             personFound = addressBook.findPerson(information);
 
             if (personFound.isEmpty()) {
-                throw new CommandException("No person with this " + information + " could be found");
+                throw new CommandException("No person with this information '" + information + "' could be found");
             } else {
                 personList.add(personFound.get());
             }
@@ -133,14 +137,15 @@ public class ModelManager implements Model {
         if (residentList.isEmpty()) {
             return personList;
         }
-        String[] residentInformation = residentList.getResidents().split("\\s*,\\s*");
+        String[] residentInformation = residentList.getResidentsStorage().split("\\s*,\\s*");
 
         for (String information : residentInformation) {
+            String[] informationList = information.split("\\s*;\\s*");
             Optional<Person> personFound;
-            personFound = addressBook.findPerson(information);
+            personFound = addressBook.findPerson(informationList[0]);
 
             if (personFound.isEmpty()) {
-                throw new CommandException("No event with this " + information + " could be found");
+                throw new CommandException("No event with this information '" + information + "' could be found");
             } else {
                 personList.add(personFound.get());
             }
@@ -152,6 +157,26 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    /**
+     * Returns a String of information if {@code Person} does not exist in the address book, return
+     * an empty String otherwise.
+     */
+    @Override
+    public String getInvalidResident(Event event) throws CommandException {
+        requireNonNull(event);
+        ArrayList<String> residentInformation = event.getStringResidentList();
+
+        for (String information : residentInformation) {
+            Optional<Person> personFound;
+            personFound = addressBook.findPerson(information);
+
+            if (personFound.isEmpty()) {
+                return information;
+            }
+        }
+        return "";
     }
 
     @Override

@@ -52,6 +52,10 @@ public class Event {
         return residents;
     }
 
+    public ArrayList<String> getStringResidentList() {
+        return residents.getStringResidentList();
+    }
+
     /**
      * Returns true if both events have the same name, date, venue and capacity.
      * This defines a weaker notion of equality between two events.
@@ -68,8 +72,12 @@ public class Event {
                 && otherEvent.getCapacity().equals(getCapacity());
     }
 
-    public String addResidentsToEvent(ArrayList<Person> current, ArrayList<Person> toAdd) {
-        return residents.addResidentList(current, toAdd);
+    public String getCombinedStorageString(ArrayList<Person> toAdd) {
+        return residents.getCombinedStorageString(toAdd);
+    }
+
+    public String getCombinedDisplayString(ArrayList<Person> toAdd) {
+        return residents.getCombinedDisplayString(toAdd);
     }
 
     /**
@@ -77,6 +85,13 @@ public class Event {
      */
     public boolean hasSameEventName(EventName eventName) {
         return getEventName().equals(eventName);
+    }
+
+    /**
+     * Returns true if the {@code ResidentList} of the {@code Event} is empty.
+     */
+    public boolean hasNoResidents() {
+        return residents.isEmpty();
     }
 
     /**

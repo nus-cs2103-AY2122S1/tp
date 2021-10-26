@@ -6,9 +6,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
+
 
 public class ResidentList {
     public static final String MESSAGE_CONSTRAINTS =
@@ -16,10 +22,13 @@ public class ResidentList {
     public static final String MESSAGE_CONSTRAINTS_ROOM_AND_NAME =
             "Arguments given should be all rooms or all names";
     public static final String DESC = "Residents: ";
-    public static final String DEFAULT_LIST = "";
+    public static final String DEFAULT_LIST = "None";
+    public static final String EMPTY_STRING = "";
+    public static final int NUMBER_OF_RESIDENT_FIELD = 8;
 
-    private final String residents;
-    private final ArrayList<String> residentInformation;
+    private final String residentsDisplay;
+    private String residentsStorage;
+    private final ArrayList<String> stringResidentList;
     private final boolean isEmpty;
     private final ArrayList<Person> residentList = new ArrayList<>();
 
@@ -31,8 +40,40 @@ public class ResidentList {
     public ResidentList(String residents) {
         requireNonNull(residents);
         this.isEmpty = residents.equals(DEFAULT_LIST);
-        this.residents = residents;
-        residentInformation = new ArrayList<>(Arrays.asList(this.residents.split("\\s*,\\s*")));
+        this.residentsDisplay = residents;
+        this.residentsStorage = EMPTY_STRING;
+        stringResidentList = new ArrayList<>(Arrays.asList(this.residentsDisplay.split("\\s*,\\s*")));
+    }
+
+    /**
+     * Constructs a {@code ResidentList}.
+     *
+     * @param residents A string of residents.
+     */
+    public ResidentList(String residents, String residentList) {
+        requireNonNull(residents);
+
+        this.isEmpty = residents.equals(DEFAULT_LIST);
+        this.residentsDisplay = residents;
+        this.residentsStorage = residentList;
+
+        if (!residentList.equals(ResidentList.DEFAULT_LIST)) {
+            String[] residentInformationList = residentList.split("\\s*,\\s*");
+            for (String residentInformation : residentInformationList) {
+                String[] information = residentInformation.split(";\\s*\\w*(\\w*\\s*)*:\\s*");
+                Name name = new Name(information[0]);
+                Room room = new Room(information[1]);
+                Phone phone = new Phone(information[2]);
+                Email email = new Email(information[3]);
+                VaccStatus vaccStatus = new VaccStatus(information[4]);
+                Faculty faculty = new Faculty(information[5]);
+                LastDate lastFetDate = new LastDate(information[6]);
+                LastDate lastCollectionDate = new LastDate(information[7]);
+                Person p = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
+                this.residentList.add(p);
+            }
+        }
+        stringResidentList = new ArrayList<>(Arrays.asList(this.residentsDisplay.split("\\s*,\\s*")));
     }
 
     /**
@@ -64,30 +105,84 @@ public class ResidentList {
     }
 
     /**
-     * Returns a string consisting of past and new residents for the event.
+     * Returns true if a given string is a valid date.
      *
-     * @param current  A string of current residents of the event.
+     * @param residents A string of residents.
+     */
+    public static boolean isValidResidentStorage(String residents) {
+        if (residents.equals(DEFAULT_LIST)) {
+            return true;
+        }
+        String[] residentList = residents.split("\\s*,\\s*");
+        for (String resident : residentList) {
+            String[] information = resident.split(";\\s*\\w*(\\w*\\s*)*:\\s*");
+            if (information.length != NUMBER_OF_RESIDENT_FIELD) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns a string of person details, consisting of past and new residents for the event.
+     *
      * @param toAdd    A string of residents to add to the event.
      *
      * @return A String consisting of past and new residents for the event.
      */
-    public String addResidentList(ArrayList<Person> current, ArrayList<Person> toAdd) {
-        StringBuilder newResidentList = new StringBuilder(residents);
-        for (Person person : current) {
-            if (!residentList.contains(person)) {
-                residentList.add(person);
-            }
+    public String getCombinedStorageString(ArrayList<Person> toAdd) {
+        StringBuilder newResidentList;
+
+        if (residentsStorage.equals(DEFAULT_LIST)) {
+            newResidentList = new StringBuilder(EMPTY_STRING);
+        } else {
+            newResidentList = new StringBuilder(residentsStorage);
         }
+
         for (Person person : toAdd) {
-            if (!residentList.contains(person) && !newResidentList.toString().equals("")) {
-                newResidentList.append(", ").append(person.getName());
-                residentList.add(person);
-            } else if (!residentList.contains(person) && newResidentList.toString().equals("")) {
-                newResidentList.append(person.getName());
-                residentList.add(person);
+            if (!newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person);
+            } else {
+                newResidentList.append(person);
             }
         }
-        return newResidentList.toString();
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
+    }
+
+    /**
+     * Returns a string of names, consisting of past and new residents for the event.
+     *
+     * @param toAdd    A string of residents to add to the event.
+     *
+     * @return A String consisting of past and new residents for the event.
+     */
+    public String getCombinedDisplayString(ArrayList<Person> toAdd) {
+        StringBuilder newResidentList;
+
+        if (residentsDisplay.equals(DEFAULT_LIST)) {
+            newResidentList = new StringBuilder(EMPTY_STRING);
+        } else {
+            newResidentList = new StringBuilder(residentsDisplay);
+        }
+
+        for (Person person : toAdd) {
+            if (!newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person.getName());
+            } else {
+                newResidentList.append(person.getName());
+            }
+        }
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
     }
 
     /**
@@ -101,19 +196,27 @@ public class ResidentList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ResidentList // instanceof handles nulls
-                && residents.equals(((ResidentList) other).residents)); // state check
+                && residentsDisplay.equals(((ResidentList) other).residentsDisplay)); // state check
     }
 
     @Override
     public String toString() {
-        return residents;
+        return residentsDisplay;
     }
 
-    public ArrayList<String> getResidentInformation() {
-        return this.residentInformation;
+    public ArrayList<String> getStringResidentList() {
+        return this.stringResidentList;
     }
 
-    public String getResidents() {
-        return this.residents;
+    public String getResidentsStorage() {
+        return this.residentsStorage;
+    }
+
+    public String getResidentsDisplay() {
+        return this.residentsDisplay;
+    }
+
+    public ArrayList<Person> getResidentList() {
+        return this.residentList;
     }
 }

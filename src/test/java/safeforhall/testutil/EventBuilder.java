@@ -15,7 +15,7 @@ public class EventBuilder {
     public static final String DEFAULT_EVENT_DATE = "20-10-2021";
     public static final String DEFAULT_VENUE = "Field";
     public static final String DEFAULT_CAPACITY = "20";
-    public static final String DEFAULT_RESIDENT_LIST = "";
+    public static final String DEFAULT_RESIDENT_LIST = "None";
 
     private EventName eventName;
     private EventDate eventDate;
@@ -80,8 +80,8 @@ public class EventBuilder {
     /**
      * Sets the {@code ResidentList} of the {@code Event} that we are building.
      */
-    public EventBuilder withResidentList(String residents) {
-        this.residents = new ResidentList(residents);
+    public EventBuilder withResidentList(String residentsDisplay, String residentStorage) {
+        this.residents = new ResidentList(residentsDisplay, residentStorage);
         return this;
     }
 
