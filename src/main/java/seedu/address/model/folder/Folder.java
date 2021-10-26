@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.model.folder.exceptions.ContactIndexOutOfBoundsInFolderException;
 import seedu.address.model.person.Person;
 
 /**
@@ -67,20 +65,9 @@ public class Folder {
 
     /**
      * Removes index of contact from the folder.
-     * @param targetIndex Index of contact to be removed.
+     * @param personToRemove contact to be removed.
      */
-    public void removePersonOfIndex(Index targetIndex) throws
-            ContactIndexOutOfBoundsInFolderException {
-        int lengthOfFolder = getContacts().size();
-        int specifiedIndex = targetIndex.getOneBased();
-
-        if (lengthOfFolder < specifiedIndex) {
-            throw new ContactIndexOutOfBoundsInFolderException(specifiedIndex);
-        }
-
-        Person[] allPerson = getContacts()
-                .toArray(new Person[lengthOfFolder]);
-        Person personToRemove = allPerson[targetIndex.getZeroBased()];
+    public void removePerson(Person personToRemove) {
         this.getContacts().remove(personToRemove);
     }
 
