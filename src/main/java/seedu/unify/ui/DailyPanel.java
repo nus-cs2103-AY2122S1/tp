@@ -60,7 +60,7 @@ public class DailyPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new DayCard(task,size).getRoot());
+                setGraphic(new DayCard(task, size).getRoot());
             }
         }
     }

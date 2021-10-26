@@ -54,7 +54,7 @@ public class DayCard extends UiPart<Region> {
         } else {
             cardPane.getStyleClass().add("dayCard");
         }
-}
+    }
 
     @Override
     public boolean equals(Object other) {
