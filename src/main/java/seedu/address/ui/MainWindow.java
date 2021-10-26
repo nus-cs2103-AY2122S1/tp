@@ -293,7 +293,7 @@ public class MainWindow extends UiPart<Stage> {
      * @return File object to be added to user's directory
      */
     private File userChooseDestination() {
-        String csvName = "addressbook.csv";
+        String csvName = "seniorlove.csv";
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(primaryStage);
         if (file == null) {
