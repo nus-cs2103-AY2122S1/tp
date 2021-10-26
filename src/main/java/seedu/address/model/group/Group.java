@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -155,6 +157,14 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
     }
 
     /**
+     * Returns only an empty unmodifiable map since class does not support task completion
+     */
+    @Override
+    public Map<UniqueId, Boolean> getTasksCompletion() {
+        return Collections.unmodifiableMap(new HashMap<>());
+    }
+
+    /**
      * Immutable way of updating the assigned task id list
      *
      * @param newAssignedTaskIds the new assigned task id list
@@ -164,6 +174,14 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
     public Group updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
         return new Group(name, id, newAssignedTaskIds, assignedPersonIds, lessonList);
+    }
+
+    /**
+     * Returns an identical copy of the Group since class does not support task completion
+     */
+    @Override
+    public Group updateTasksCompletion(Map<UniqueId, Boolean> newTasksCompletion) {
+        return new Group(name, id, assignedTaskIds, assignedPersonIds, lessonList);
     }
 
     /**

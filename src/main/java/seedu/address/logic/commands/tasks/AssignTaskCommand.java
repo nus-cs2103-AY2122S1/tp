@@ -3,8 +3,10 @@ package seedu.address.logic.commands.tasks;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -86,14 +88,18 @@ public abstract class AssignTaskCommand extends Command {
         TaskAssignable taskAssignableToEdit = assigneeList.get(assigneeIndex.getZeroBased());
         Task taskToAssign = taskList.get(taskIndex.getZeroBased());
         Set<UniqueId> previousAssignedTaskSet = taskAssignableToEdit.getAssignedTaskIds();
+        Map<UniqueId, Boolean> previousTasksCompletion = taskAssignableToEdit.getTasksCompletion();
         UniqueId taskId = taskToAssign.getId();
 
         if (previousAssignedTaskSet.contains(taskId)) {
             throw new CommandException(String.format(OVERLAPPING_TASK, assigneeType));
         }
         Set<UniqueId> newAssignedTaskSet = new HashSet<>(previousAssignedTaskSet);
+        Map<UniqueId, Boolean> newTasksCompletion = new HashMap<>(previousTasksCompletion);
         newAssignedTaskSet.add(taskId);
+        newTasksCompletion.put(taskId, false);
         TaskAssignable newTaskAssignable = taskAssignableToEdit.updateAssignedTaskIds(newAssignedTaskSet);
+        newTaskAssignable = newTaskAssignable.updateTasksCompletion(newTasksCompletion);
 
         if (!taskAssignableToEdit.isSameTaskAssignable(newTaskAssignable)
                 && newTaskAssignable.isInModel(model)) {
