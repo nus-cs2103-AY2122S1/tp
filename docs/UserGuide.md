@@ -33,6 +33,7 @@ Our app makes it easy to connect with like minded students in your module. Our *
     - [Setting a Contact as Unfavourite - unfav](#SetUnFavourite)
     - [Displaying the Help Window - help](#Help)
     - [Listing All Student Contacts - list](#List)
+    - [Deleting All Student Contacts - clear](#Clear)
     - [Exiting the App - exit](#Exit)
  - [Coming Soon](#ComingSoon)
  - [FAQ](#FAQ)
@@ -325,7 +326,7 @@ list
 
 <h3 id = "Clear"> </h3>
 
-## Listing All Student Contacts - `clear`
+## Deleting All Student Contacts - `clear`
 
 Deletes all the Student Contacts present.
 
