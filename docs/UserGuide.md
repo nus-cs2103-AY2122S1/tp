@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-<span style = "font-size: 24px;">**Welcome to the SportsPA User Guide!**</span>
+<span style = "font-size: 32px; color: #e46c0a">
+Welcome to the SportsPA User Guide!
+</span>
 
 SportsPA is a desktop application targeted for use among NUS sports CCA Leaders. It is used to manage membership and
 training sessions for NUS sports CCAs. SportsPA allows you to keep track of details of your members as well as
@@ -15,7 +17,10 @@ guide provides an in-depth documentation on the all the commands available. If t
 we also provide a quick start guide that demonstrates the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
-<a name="table-of-contents"></a><span style = "font-size: 24px;">**Table of Contents**</span>
+<a name="table-of-contents"></a>
+<span style = "font-size: 32px; color: #e46c0a">
+Table of Contents
+</span>
 * Table of Contents
 {:toc}
 _____________________________________________________________________________________________________________
@@ -562,8 +567,8 @@ Format: `exit`
 **A**: Visit [this site](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 and follow the instructions specific to your operating system. You may have to download and run an installer to install Java 11 on your computer.<br><br>
 **Q**: How do I transfer my data in SportsPA to another Computer?<br>
-**A**: Open the file explorer on your current computer and navigate to `[JAR file location]/data/sportspa.json`. 
-Make a copy of the `sportspa.json` file and transfer it to your other computer. On the other computer, navigate to
+**A**: Open the file explorer on your current computer and navigate to\
+`[JAR file location]/data/sportspa.json`. Make a copy of the `sportspa.json` file and transfer it to your other computer. On the other computer, navigate to
 `[JAR file location]/data/sportspa.json` and replace the empty data file it creates with the data file you have just copied.
 
 [Back to Table of Contents](#table-of-contents)
