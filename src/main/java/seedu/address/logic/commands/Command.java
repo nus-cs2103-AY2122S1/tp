@@ -32,9 +32,6 @@ public abstract class Command {
         return ;
     };
 
-    public Model getHistoryModel() {
-        return memento.getRecord();
-    }
 
     public Memento getMemento() {
         return memento;
