@@ -11,6 +11,7 @@ public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS = "Remarks names should be alphanumeric, "
             + "and should contain fewer than 25 characters";
+    public static final int MAX_REMARK_CHARACTER = 25;
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String remarkName;
@@ -30,7 +31,7 @@ public class Remark {
      * Returns true if a given string is a valid remark name.
      */
     public static boolean isValidRemarkName(String test) {
-        return (test.matches(VALIDATION_REGEX)) && (test.length() <= 25);
+        return (test.matches(VALIDATION_REGEX)) && (test.length() <= MAX_REMARK_CHARACTER);
     }
 
     @Override

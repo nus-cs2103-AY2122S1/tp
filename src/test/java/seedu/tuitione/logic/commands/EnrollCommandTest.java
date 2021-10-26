@@ -102,7 +102,7 @@ public class EnrollCommandTest {
     }
 
     @Test
-    public void execute_invalidLessonSizeMoreThan5_failure() {
+    public void execute_invalidLessonSizeMoreThanMaxAllowableSize_failure() {
         Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
         Lesson lessonTwo = new Lesson(new Subject("Science"),
                 new Grade("S2"),
@@ -144,7 +144,9 @@ public class EnrollCommandTest {
                 new Grade("S2"),
                 new LessonTime(DayOfWeek.FRIDAY, LocalTime.NOON),
                 new Price(40));
+        //Adding the eleventh lesson to model
         model.addLesson(lessonEleven);
+        // benson already enrolled for lessonOne in model
         benson.enrollForLesson(lessonTwo);
         benson.enrollForLesson(lessonThree);
         benson.enrollForLesson(lessonFour);
@@ -154,7 +156,9 @@ public class EnrollCommandTest {
         benson.enrollForLesson(lessonEight);
         benson.enrollForLesson(lessonNine);
         benson.enrollForLesson(lessonTen);
-        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_LESSONS, benson.getName());
+        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_LESSONS,
+                benson.getName(),
+                Student.MAX_LESSON_SIZE);
         assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(4)),
                 model,
                 expectedMessage);

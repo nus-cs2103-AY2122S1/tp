@@ -15,9 +15,9 @@ public class RemarkTest {
     @Test
     public void constructor_invalidRemarkName_throwsIllegalArgumentException() {
         String invalidRemarkName = "";
-        String remarkMoreThanTwentyFiveChars = "01234567890123456789123456";
+        String remarkMoreThanMaxCharAllowed = "01234567890123456789123456";
         assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemarkName));
-        assertThrows(IllegalArgumentException.class, () -> new Remark(remarkMoreThanTwentyFiveChars));
+        assertThrows(IllegalArgumentException.class, () -> new Remark(remarkMoreThanMaxCharAllowed));
     }
 
     @Test
