@@ -52,13 +52,9 @@ public class GroupStatistics {
     }
 
     /**
-     * Returns mean and median score of students in group who are graded in {@code assessment}.
-     *
-     * @return array of {@code double} where the first element contains the mean score,
-     * and the second element contains the median score.
+     * Returns median score of students in group who are graded in {@code assessment}.
      */
-    private double[] getMeanAndMedian(Assessment assessment) {
-        double sum = 0;
+    private double getMedian(Assessment assessment) {
         int count = 0;
         ArrayList<Score> scores = new ArrayList<>();
         for (ID id : studentList) {
@@ -66,11 +62,9 @@ public class GroupStatistics {
                 continue;
             }
             scores.add(assessment.getScores().get(id));
-            sum += assessment.getScores().get(id).getNumericValue();
             count++;
         }
 
-        double mean = sum / count;
         double median;
 
         List<Double> sorted = scores.stream()
@@ -86,19 +80,18 @@ public class GroupStatistics {
                     + sorted.get(midPos)) / 2.0;
         }
 
-        return new double[]{mean, median};
+        return median;
     }
 
     /**
      * Returns a distribution of scores for the assessment.
      *
-     * @return array of {@code Map<String, Number>} where the first element contains the group mean distribution,
-     * the second element contains the group median distribution,
-     * the third element contains the cohort mean distribution,
-     * and the fourth element contains the cohort median distribution.
+     * @return array of {@code Map<String, Number>} where
+     * the first element contains the group median distribution,
+     * the second element contains the cohort mean distribution,
+     * and the third element contains the cohort median distribution.
      */
     private Map<String, Number>[] getDataSet() {
-        Map<String, Number> groupMean = new TreeMap<>();
         Map<String, Number> cohortMean = new TreeMap<>();
         Map<String, Number> groupMedian = new TreeMap<>();
         Map<String, Number> cohortMedian = new TreeMap<>();
@@ -107,10 +100,8 @@ public class GroupStatistics {
             if (!isGraded(assessment)) {
                 continue;
             }
-            // group mean and median
-            double[] groupData = getMeanAndMedian(assessment);
-            groupMean.put(assessment.getName(), groupData[0]);
-            groupMedian.put(assessment.getName(), groupData[1]);
+            // group median
+            groupMedian.put(assessment.getName(), getMedian(assessment));
 
             // cohort mean and median
             AssessmentStatistics statistics = new AssessmentStatistics(assessment);
@@ -119,7 +110,7 @@ public class GroupStatistics {
         }
 
         @SuppressWarnings("unchecked")
-        Map<String, Number>[] dataSet = new Map[]{groupMean, groupMedian, cohortMean, cohortMedian};
+        Map<String, Number>[] dataSet = new Map[]{groupMedian, cohortMean, cohortMedian};
         return dataSet;
     }
 
@@ -129,6 +120,6 @@ public class GroupStatistics {
     public Chart toLineChart() {
         Map<String, Number>[] dataSet = getDataSet();
         return ChartUtil.createLineChart(String.format(CHART_TITLE, group.getName()),
-                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, dataSet[0], dataSet[1], dataSet[2], dataSet[3]);
+                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, "group median  ", dataSet[0], dataSet[1], dataSet[2]);
     }
 }

@@ -155,6 +155,12 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        //TODO: delete
+        @Override
+        public Group getGroup(Group assessmentToMatch) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public Assessment getAssessment(Assessment assessmentToMatch) {
             throw new AssertionError("This method should not be called.");

@@ -349,14 +349,6 @@
     -fx-stroke: transparent;
 }
 
-#chart2 .default-color2.chart-series-line {
-    -fx-stroke: transparent;
-}
-
-#chart2 .default-color3.chart-series-line {
-    -fx-stroke: transparent;
-}
-
 
 #cardPane {
     -fx-background-color: transparent;

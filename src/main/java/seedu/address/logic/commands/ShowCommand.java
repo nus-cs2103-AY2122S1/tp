@@ -13,14 +13,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Assessment;
-import seedu.address.model.student.AssessmentStatistics;
-import seedu.address.model.student.ID;
-import seedu.address.model.student.IdContainsKeywordsPredicate;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentStatistics;
+import seedu.address.model.student.*;
 
 /**
  * Shows information of a student or an assessment.
@@ -109,9 +102,15 @@ public class ShowCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_ASSESSMENT);
         }
 
-        Info info = new Info(matchedAssessment);
-        AssessmentStatistics statistics = new AssessmentStatistics(matchedAssessment);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
+//        Info info = new Info(matchedAssessment);
+//        AssessmentStatistics statistics = new AssessmentStatistics(matchedAssessment);
+//        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
+
+
+        Group g = new Group("T02A");
+        Group group = model.getGroup(g);
+        GroupStatistics statistics = new GroupStatistics(group, model);
+        return new CommandResult("ok", statistics.toLineChart());
     }
 
     /**

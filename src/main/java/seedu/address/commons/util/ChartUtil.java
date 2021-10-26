@@ -55,7 +55,8 @@ public class ChartUtil {
      * Creates a JavaFX LineChart with the given title, axis labels and data points.
      */
     public static LineChart<String, Number> createLineChart(String title, String xLabel, String yLabel,
-                                                          Map<String, Number> data, Map<String, Number> mean,
+                                                            String dataLabel, Map<String, Number> data,
+                                                            Map<String, Number> mean,
                                                             Map<String, Number> median) {
 
         // Defining axes
@@ -75,19 +76,19 @@ public class ChartUtil {
 
         // Input data points: score, mean, median
         XYChart.Series seriesScore = new XYChart.Series();
-        seriesScore.setName("score");
+        seriesScore.setName(dataLabel);
         for (Map.Entry<String, Number> entry : data.entrySet()) {
             seriesScore.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
         }
 
         XYChart.Series seriesMean = new XYChart.Series();
-        seriesMean.setName("mean");
+        seriesMean.setName("cohort mean");
         for (Map.Entry<String, Number> entry : mean.entrySet()) {
             seriesMean.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
         }
 
         XYChart.Series seriesMedian = new XYChart.Series();
-        seriesMedian.setName("median");
+        seriesMedian.setName("cohort median");
         for (Map.Entry<String, Number> entry : median.entrySet()) {
             seriesMedian.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
         }
@@ -96,61 +97,6 @@ public class ChartUtil {
 
         return lineChart;
     }
-
-    /**
-     * Creates a JavaFX LineChart with the given title, axis labels and data points.
-     */
-    public static LineChart<String, Number> createLineChart(String title, String xLabel, String yLabel,
-                                                            Map<String, Number> groupMean,
-                                                            Map<String, Number> groupMedian,
-                                                            Map<String, Number> cohortMean,
-                                                            Map<String, Number> cohortMedian) {
-
-        // Defining axes
-        final CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel(xLabel);
-        final NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel(yLabel);
-
-        yAxis.setAutoRanging(false);
-        yAxis.setLowerBound(0);
-        yAxis.setUpperBound(104);
-        yAxis.setTickUnit(10);
-
-        final LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
-        lineChart.setTitle(title);
-        lineChart.setId("chart2");
-
-        // Input data points: score, mean, median
-        XYChart.Series seriesMean = new XYChart.Series();
-        seriesMean.setName("group mean");
-        for (Map.Entry<String, Number> entry : groupMean.entrySet()) {
-            seriesMean.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-        }
-
-        XYChart.Series seriesMedian = new XYChart.Series();
-        seriesMedian.setName("group median");
-        for (Map.Entry<String, Number> entry : groupMedian.entrySet()) {
-            seriesMedian.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-        }
-
-        XYChart.Series seriesCohortMean = new XYChart.Series();
-        seriesCohortMean.setName("cohort mean");
-        for (Map.Entry<String, Number> entry : cohortMean.entrySet()) {
-            seriesCohortMean.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-        }
-
-        XYChart.Series seriesCohortMedian = new XYChart.Series();
-        seriesCohortMedian.setName("cohort median");
-        for (Map.Entry<String, Number> entry : cohortMedian.entrySet()) {
-            seriesCohortMedian.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
-        }
-
-        lineChart.getData().addAll(seriesMean, seriesMedian, seriesCohortMean, seriesCohortMedian);
-        return lineChart;
-    }
-
-
 
     private static double roundUpToNearestMultiple(double val, int multiple) {
         return Math.round(val / multiple) * multiple;
