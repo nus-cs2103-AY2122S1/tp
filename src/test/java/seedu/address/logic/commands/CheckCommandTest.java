@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.reservation.CustomerContainsReservationPredicate;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
+import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.table.Table;
 
@@ -36,10 +38,12 @@ class CheckCommandTest {
     private Model resultModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Table table1 = new Table(5, 10);
     private Table table2 = new Table(10, 11);
-    private Reservation reservation1 =
-            new Reservation(CUSTOMER_ALICE.getPhone(), 5, LocalDateTime.of(date1, time), table1);
-    private Reservation reservation2 =
-            new Reservation(CUSTOMER_BOB.getPhone(), 10, LocalDateTime.of(date2, time), table2);
+    private Reservation reservation1 = new Reservation(
+            CUSTOMER_ALICE.getPhone(), 5, LocalDateTime.of(date1, time), table1, new Remark(""), Set.of()
+    );
+    private Reservation reservation2 = new Reservation(
+            CUSTOMER_BOB.getPhone(), 10, LocalDateTime.of(date2, time), table2, new Remark(""), Set.of()
+    );
 
     @Test
     void execute_validDateTime_success() {
