@@ -62,7 +62,6 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-
         main.setBackground(Background.EMPTY);
         main.setPrefWidth(1600);
         suggestions.setFill(Color.GRAY);
@@ -163,7 +162,7 @@ public class CommandBox extends UiPart<Region> {
             String suggestion = mapSuggestion(commandString.trim(), isResidentTab);
             if (!suggestion.equals("")) {
                 String displayedSuggestion = getDisplaySuggestion(suggestion);
-                suggestions.setText(displayedSuggestion);
+                suggestions.setText("\n  " + displayedSuggestion);
             } else {
                 suggestions.setText("");
             }
@@ -174,6 +173,53 @@ public class CommandBox extends UiPart<Region> {
         return mainText.split(" ", 2);
     }
 
+    private String compareParts(StringBuilder stringBuilder, String[] suggestionParts, String[] parameterParts) {
+        for (String suggestionPart : suggestionParts) {
+            boolean isEntered = false;
+            for (String parameterPart : parameterParts) {
+                boolean isOneCharPrefix = parameterPart.length() > 1 && parameterPart.charAt(1) == '/'
+                        && suggestionPart.substring(0, 2).equals(parameterPart.substring(0, 2));
+                boolean isTwoCharPrefix = parameterPart.length() > 2 && parameterPart.charAt(2) == '/'
+                        && suggestionPart.substring(0, 3).equals(parameterPart.substring(0, 3));
+                boolean isIndex = (suggestionPart.equals("INDEXES") || suggestionPart.equals("INDEX")
+                        || suggestionPart.equals("[INDEXES]") || suggestionPart.equals("[INDEX]"))
+                        && parameterPart.matches("\\d+");
+                boolean isLateKeyword = parameterPart.contains("k/l") && suggestionPart.equals("d2/DATE");
+                boolean isOptionalOneCharPrefix = suggestionPart.charAt(0) == '['
+                        && parameterPart.length() > 1
+                        && parameterPart.charAt(1) == '/'
+                        && suggestionPart.substring(1, 3).equals(parameterPart.substring(0, 2));
+                boolean isOptionalTwoCharPrefix = suggestionPart.charAt(0) == '['
+                        && parameterPart.length() > 2
+                        && parameterPart.charAt(2) == '/'
+                        && suggestionPart.substring(1, 4).equals(parameterPart.substring(0, 3));
+
+                if (isOneCharPrefix) {
+                    isEntered = true;
+                    break;
+                } else if (isTwoCharPrefix) {
+                    isEntered = true;
+                    break;
+                } else if (isIndex) {
+                    isEntered = true;
+                    break;
+                } else if (isLateKeyword) {
+                    isEntered = true;
+                } else if (isOptionalOneCharPrefix) {
+                    isEntered = true;
+                    break;
+                } else if (isOptionalTwoCharPrefix) {
+                    isEntered = true;
+                    break;
+                }
+            }
+            if (!isEntered) {
+                stringBuilder.append(suggestionPart).append(" ");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
     private String getDisplaySuggestion(String suggestion) {
         if (currentParamters.equals("")) {
             return suggestion;
@@ -182,29 +228,7 @@ public class CommandBox extends UiPart<Region> {
             String[] suggestionParts = suggestion.split(" ");
             String[] parameterParts = currentParamters.split(" ");
 
-            for (String suggestionPart : suggestionParts) {
-                boolean isEntered = false;
-                for (String parameterPart : parameterParts) {
-                    if (parameterPart.length() > 1 && suggestionPart.substring(0, 2).equals(parameterPart.substring(0, 2))) {
-                        isEntered = true;
-                        break;
-                    } else if ((suggestionPart.equals("INDEXES") || suggestionPart.equals("INDEX")
-                            || suggestionPart.equals("[INDEXES]") || suggestionPart.equals("[INDEX]"))
-                            && parameterPart.matches("\\d+")) {
-                        isEntered = true;
-                        break;
-                    } else if (parameterPart.contains("k/l") && suggestionPart.equals("d2/DATE")) {
-                        isEntered = true;
-                    } else if (suggestionPart.charAt(0) == '[' && parameterPart.length() > 1 && suggestionPart.substring(1, 3).equals(parameterPart.substring(0, 2))) {
-                        isEntered = true;
-                        break;
-                    }
-                }
-                if (!isEntered) {
-                    displayedSuggestion.append(suggestionPart).append(" ");
-                }
-            }
-            return displayedSuggestion.toString();
+            return compareParts(displayedSuggestion, suggestionParts, parameterParts);
         }
     }
 
