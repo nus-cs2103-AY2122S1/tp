@@ -37,7 +37,7 @@
           </Menu>
         </MenuBar>
 
-        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.6f" orientation="VERTICAL">
+        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.8f" orientation="VERTICAL">
           <VBox fx:id="studentList" styleClass="pane-with-border" VBox.vgrow="ALWAYS" prefWidth="600" prefHeight="400">
             <padding>
               <Insets top="15" right="10" bottom="5" left="10" />

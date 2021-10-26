@@ -65,7 +65,7 @@ public class StudentValuesBox extends VBox {
 
         ObservableList<Node> children = valueArrayGrid.getChildren();
         for (int i = 0; i < children.size(); i++) {
-            if (participation.checkPresent(i) == 1) {
+            if (participation.checkParticipated(i) == 1) {
                 children.get(i).getStyleClass().add("studentValuePositive");
             } else {
                 children.get(i).getStyleClass().add("studentValueNegative");
