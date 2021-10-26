@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
@@ -59,27 +61,20 @@ public class SlotCard extends UiPart<Region> {
         super(FXML);
         this.day = day;
         this.slot = slot;
+        this.stafflist = stafflist;
         shiftName.setText(slot.toString());
-        filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
-//        Callback<Person, Observable[]> scheduleCallback = param -> {
-//            StringProperty scheduleString = new SimpleStringProperty(param.getSchedule().toString());
-//            return new Observable[]{
-//                    scheduleString
-//            };
-//        };
-//        trackedList = observableList(filteredList, scheduleCallback);
-        staffWorkingList.setItems(filteredList);
+        refresh();
         stafflist.addListener((ListChangeListener<? super Person>) change -> {
-            System.out.println("change detected");
-
+            refresh();
         });
-        staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
 
-    private void updateList() {
+    public void refresh() {
+        System.out.println("refreshed");
         filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
         staffWorkingList.setItems(filteredList);
         staffWorkingList.refresh();
+        staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.

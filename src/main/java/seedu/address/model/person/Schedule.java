@@ -8,6 +8,8 @@ import java.util.Objects;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
@@ -252,5 +254,8 @@ public class Schedule {
             }
         }
         return result;
+    }
+    public IntegerProperty getObservable(){
+        return new SimpleIntegerProperty(getTotalWorkingHour());
     }
 }

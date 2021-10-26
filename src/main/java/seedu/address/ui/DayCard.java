@@ -34,6 +34,8 @@ public class DayCard extends UiPart<Region> {
      */
 
     private final DayOfWeek day;
+    private static SlotCard morningSlot;
+    private static SlotCard afternoonSlot;
 
     @FXML
     private VBox slotPane;
@@ -47,8 +49,9 @@ public class DayCard extends UiPart<Region> {
         super(FXML);
         this.day = day;
         dayLabel.setText(day.toString().substring(0, 3));
-        slotPane.getChildren().addAll(new SlotCard(day, Slot.MORNING, stafflist).getRoot(),
-                new SlotCard(day, Slot.AFTERNOON, stafflist).getRoot());
+        morningSlot = new SlotCard(day, Slot.MORNING, stafflist);
+        afternoonSlot = new SlotCard(day, Slot.AFTERNOON, stafflist);
+        slotPane.getChildren().addAll(morningSlot.getRoot(), afternoonSlot.getRoot());
     }
 
     @Override
@@ -66,5 +69,16 @@ public class DayCard extends UiPart<Region> {
         // state check
         DayCard card = (DayCard) other;
         return day.equals(card.day);
+    }
+
+    public void refreshSlotCard(Slot slot) {
+        switch (slot) {
+        case MORNING:
+            morningSlot.refresh();
+            break;
+        case AFTERNOON:
+            afternoonSlot.refresh();
+            break;
+        }
     }
 }
