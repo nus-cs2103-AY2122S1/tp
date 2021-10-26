@@ -95,11 +95,11 @@ public class SampleDataUtil {
 
     public static Lab[] getSampleLab() {
         return new Lab[]{
-            new Lab("lab1", 10.0),
-            new Lab("lab2", 20.0),
-            new Lab("lab3", 24.0),
-            new Lab("lab4", 30.0),
-            new Lab("lab5", 15.0)
+            new Lab(1, 10.0),
+            new Lab(2, 20.0),
+            new Lab(3, 24.0),
+            new Lab(4, 30.0),
+            new Lab(5, 15.0)
         };
     }
 

@@ -91,7 +91,7 @@ public class StudentCard extends UiPart<Region> {
         email.setText("Email: " + student.getEmailValue());
         ObservableList<Lab> labResults = student.getLabResultList();
         for (Lab lab : labResults) {
-            Label labLabel = new Label(lab.getTitle());
+            Label labLabel = new Label(lab.toString());
             Background background;
             labLabel.setStyle(" -fx-background-color: red;");
             if (lab.isMarked()) {

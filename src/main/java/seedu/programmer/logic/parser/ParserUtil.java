@@ -1,9 +1,11 @@
 package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.StringUtil;
+import seedu.programmer.logic.commands.EditLabCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
@@ -111,12 +113,14 @@ public class ParserUtil {
 
     /**
      * Parses the title of the lab assignment.
-     *
-     * @param title the title of the lab assignment.
+     *  @param labNum the lab number
      * */
-    public static String parseTitle(String title) {
-        title = "lab" + title;
-        return title.trim();
+    public static int parseLabNum(String labNum) throws ParseException {
+        try {
+            return Integer.parseInt(labNum);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
+        }
     }
 
     /**

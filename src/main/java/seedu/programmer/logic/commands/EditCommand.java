@@ -101,9 +101,8 @@ public class EditCommand extends Command {
         Double updatedResult = null;
         if (updatedLab != null) {
             updatedResult = editStudentDescriptor.getResult().orElse(null);
-            String labNum = updatedLab.getTitle().substring(updatedLab.getTitle().length() - 1);
-            int i = Integer.parseInt(labNum) - 1;
-            Double currTotalScore = studentToEdit.getLab(i).getTotalScore();
+            int labNum = updatedLab.getLabNum();
+            Double currTotalScore = studentToEdit.getLab(labNum - 1).getTotalScore();
             updatedLab.updateTotal(currTotalScore);
         }
 

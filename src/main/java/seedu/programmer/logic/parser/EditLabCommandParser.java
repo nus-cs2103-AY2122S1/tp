@@ -2,7 +2,7 @@ package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_TITLE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 
@@ -27,30 +27,34 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
     public EditLabCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM, PREFIX_LAB_NEW_TITLE, PREFIX_LAB_TOTAL);
+                ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM, PREFIX_LAB_NEW_LAB_NUM, PREFIX_LAB_TOTAL);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_LAB_NEW_TITLE).isPresent()
+        if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()
                 && argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
-            String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
-            String newTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NEW_TITLE).orElse(null));
+            // Provided new lab number and total score
+            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+            int newLabNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null));
             Double total = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
-            Lab labResult = new Lab(title);
-            return new EditLabCommand(labResult, newTitle, total);
-        } else if (argMultimap.getValue(PREFIX_LAB_NEW_TITLE).isPresent()) {
-            String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
-            String newTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NEW_TITLE).orElse(null));
-            Lab labResult = new Lab(title);
-            return new EditLabCommand(labResult, newTitle);
+            Lab labResult = new Lab(labNum);
+            return new EditLabCommand(labResult, newLabNum, total);
+        } else if (argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).isPresent()) {
+            // Provided new lab number only
+            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+            int newLabNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null));
+            // TODO: find out the labNum's total score
+            // Lab labResult = new Lab(labNum, totalScore)
+            Lab labResult = new Lab(labNum);
+            return new EditLabCommand(labResult, newLabNum);
         } else {
             assert(argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent());
-            String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
             Double total = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
-            Lab labResult = new Lab(title);
+            Lab labResult = new Lab(labNum);
             return new EditLabCommand(labResult, total);
         }
     }
