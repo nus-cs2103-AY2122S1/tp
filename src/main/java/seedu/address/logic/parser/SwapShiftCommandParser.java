@@ -3,8 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,10 @@ public class SwapShiftCommandParser implements Parser<SwapShiftCommand> {
     public SwapShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME, PREFIX_DATE);
+        LocalDate[] dates = new LocalDate[2];
+        dates[0] = LocalDate.now();
+        dates[1] = dates[0].plusDays(1);
 
         // Checks if there are exactly 2 "- n" fields and exactly 2 "d/" fields
         if (argMultimap.getAllValues(PREFIX_DASH_NAME).size() != 2
@@ -56,7 +61,10 @@ public class SwapShiftCommandParser implements Parser<SwapShiftCommand> {
         for (String shift : argMultimap.getAllValues(PREFIX_DAY_SHIFT)) {
             shiftList.add(ParserUtil.parseDayOfWeekAndSlot(shift));
         }
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            dates = ParserUtil.extractTupleDates(argMultimap);
+        }
 
-        return new SwapShiftCommand(nameList, shiftList);
+        return new SwapShiftCommand(nameList, shiftList, dates[0], dates[1]);
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,6 +40,14 @@ public class Period {
 
     }
 
+    /**
+     * Constructs a {@code Period} with the same data as
+     * {@code period}.
+     */
+    public Period(Period period) {
+        this.startDate = period.startDate;
+        this.endDate = period.endDate;
+    }
 
     /**
      * Constructs a {@code Period} with a single {@code date}.
@@ -46,6 +55,34 @@ public class Period {
     public Period(LocalDate date) {
         this.startDate = date;
         this.endDate = date;
+    }
+
+
+
+    /**
+     * Returns true if any dates within {@code period} is within
+     * {@code this}.
+     */
+    public boolean isWithin(Period period) {
+        return this.contains(period.startDate)
+                || this.contains(period.endDate);
+    }
+
+
+
+
+    /**
+     * Obtains a {@code Period} representing the period across the month of the input date.
+     * E.g. with input date 2021-10-20, the resulting period will span 2021-10-01 to
+     * 2021-10-31.
+     */
+    public static Period getPeriodFromDateOverMonth(LocalDate date) {
+        Month month = date.getMonth();
+        int year = date.getYear();
+        int lastDate = month.length(year % 4 == 0);
+        return new Period(LocalDate.of(year, month, 1),
+                LocalDate.of(year, month, lastDate));
+
     }
 
     /**
@@ -123,6 +160,39 @@ public class Period {
 
         //when there is no need to
         return List.of(this);
+
+    }
+
+    /**
+     * Obtains the periods within the input set that lie in this.
+     * Assumes that the input periods do not have any overlaps.
+     */
+    public Collection<Period> intersect(Collection<? extends Period> periods) {
+        return periods.stream()
+                .flatMap(p -> this.intersect(p).stream())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds the region in time where both {@code this}
+     * and {@code period} lie in.
+     *
+     */
+    public Collection<Period> intersect(Period period) {
+        requireNonNull(period);
+        if (this.contains(period)) {
+            return List.of(period);
+        }
+        if (period.contains(this)) {
+            return List.of(this);
+        }
+        if (this.contains(period.startDate)) {
+            return List.of(new Period(period.startDate, this.endDate));
+        }
+        if (this.contains(period.endDate)) {
+            return List.of(new Period(this.startDate, period.endDate));
+        }
+        return List.of();
 
     }
 
@@ -213,6 +283,17 @@ public class Period {
         return true;
     }
 
+    /**
+     * Gets an List representing an iteration over this period.
+     *
+     * @return The List.
+     */
+    public List<LocalDate> toList() {
+        return startDate
+                .datesUntil(endDate.plusDays(1)) //exclusive
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public String toString() {
@@ -227,4 +308,6 @@ public class Period {
                 && ((Period) o).endDate.equals(endDate);
 
     }
+
+
 }

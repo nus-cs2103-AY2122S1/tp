@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT_TIME;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.stream.Stream;
 
@@ -25,12 +27,16 @@ public class SetShiftTimeCommandParser implements Parser<SetShiftTimeCommand> {
     public SetShiftTimeCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_DASH_INDEX, PREFIX_DASH_NAME, PREFIX_DAY_SHIFT, PREFIX_SHIFT_TIME);
+                PREFIX_DASH_INDEX, PREFIX_DASH_NAME, PREFIX_DAY_SHIFT, PREFIX_SHIFT_TIME, PREFIX_DATE);
 
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
         LocalTime[] shiftTimes;
+
+        LocalDate[] dates = new LocalDate[2];
+        dates[0] = LocalDate.now();
+        dates[1] = dates[0].plusDays(7);
 
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT, PREFIX_SHIFT_TIME)
@@ -48,13 +54,16 @@ public class SetShiftTimeCommandParser implements Parser<SetShiftTimeCommand> {
             if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
             }
+            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+                dates = ParserUtil.extractTupleDates(argMultimap);
+            }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
             shiftTimes = ParserUtil.parseShiftTime(argMultimap.getValue(PREFIX_SHIFT_TIME).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SetShiftTimeCommand.MESSAGE_USAGE), pe);
         }
-        return new SetShiftTimeCommand(index, name, shiftDayAndSlot, shiftTimes);
+        return new SetShiftTimeCommand(index, name, shiftDayAndSlot, shiftTimes, dates[0], dates[1]);
     }
 
     /**

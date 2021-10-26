@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,7 +64,8 @@ public class AddressBookParserTest {
         List<Name> nameList = Arrays.asList(new Name("Alex Yeoh"), new Name("David Li"));
         List<String> shiftList = Arrays.asList("monday-0", "tuesday-1");
         SwapShiftCommand command = (SwapShiftCommand) parser.parseCommand(userinput);
-        assertEquals(new SwapShiftCommand(nameList, shiftList), command);
+        assertEquals(new SwapShiftCommand(nameList, shiftList,
+                LocalDate.now(), LocalDate.now().plusDays(7)), command);
     }
 
     @Test
@@ -116,6 +118,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }

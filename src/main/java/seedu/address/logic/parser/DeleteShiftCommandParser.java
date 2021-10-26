@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATES_IN_WRONG_ORDER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.ParserUtil.extractTupleDates;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -28,12 +32,14 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
     public DeleteShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME, PREFIX_DATE);
 
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
-
+        LocalDate[] dates = new LocalDate[2];
+        dates[0] = LocalDate.now();
+        dates[1] = dates[0].plusDays(7);
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_DASH_INDEX and PREFIX_DASH_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
                 || !argMultimap.getPreamble().isEmpty() || (!arePrefixesPresent(argMultimap, PREFIX_DASH_INDEX)
@@ -50,13 +56,21 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
             if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
             }
+            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+                dates = extractTupleDates(argMultimap);
+
+            }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteShiftCommand.MESSAGE_USAGE), pe);
         }
+        if (dates[0].isAfter(dates[1])) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DATES_IN_WRONG_ORDER));
+        }
 
-        return new DeleteShiftCommand(index, name, shiftDayAndSlot);
+        return new DeleteShiftCommand(index, name, shiftDayAndSlot, dates[0], dates[1]);
     }
 
     /**

@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.person.PersonTestUtil.createDates;
+import static seedu.address.model.person.PersonTestUtil.createPeriod;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -123,14 +125,24 @@ public class PeriodTest {
 
     }
 
+    @Test
+    public void test_toList() {
+        Period testPeriod = createPeriod(1, 16);
+        List<LocalDate> expected = createDates(1, 16);
+        assertTrue(expected.containsAll(testPeriod.toList()));
+        assertTrue(testPeriod.toList().containsAll(expected));
 
-    /**
-     * Convenience method to create test periods.
-     */
-    private Period createPeriod(int val1, int val2) {
-        return new Period(LocalDate.of(1, 1, val1 % 30),
-                LocalDate.of(1, 1, val2 % 30));
+        //testing single period
+        testPeriod = createPeriod(1, 1);
+        expected = createDates(1, 1);
+        assertTrue(expected.containsAll(testPeriod.toList()));
+        assertTrue(testPeriod.toList().containsAll(expected));
+
     }
+
+
+
+
 
 
     private void assertNotEqual(Collection<Period> expected, Collection<Period> actual) {
@@ -142,6 +154,7 @@ public class PeriodTest {
         assertTrue(expected.containsAll(actual));
         assertTrue(actual.containsAll(expected));
     }
+
 
 
 

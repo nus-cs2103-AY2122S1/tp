@@ -13,5 +13,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE_PARSED = "This date cannot be parsed, expected: YYYY-MM-DD";
     public static final String MESSAGE_INVALID_SHIFT_TIME = "The shift time provided is invalid, expected: HH:MM-HH:MM";
     public static final String MESSAGE_INVALID_TIME = "The format or range of input time is invalid";
-
+    public static final String WRONG_NUMBER_OF_DATES = "Expects 0, 1 or 2 dates as input, received $d";
+    public static final String DATES_IN_WRONG_ORDER = "End date keyed in is after startDate.";
 }

@@ -2,15 +2,18 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 
@@ -21,12 +24,16 @@ public class SwapShiftCommand extends Command {
     public static final String COMMAND_WORD = "swapShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": swaps shifts between 2 staffs identified "
-            + "using their names. You have to input exactly 2 names and 2 shifts.\n\n"
+            + "using their names. You have to input exactly 2 names and 2 shifts. The period within which the"
+            + "shifts are active over is optional. By default, staff'd assumes the period from the current"
+            + "date to seven days after the current date.\n\n"
             + "NOTE: The staff identified using the first name is associated with the first shift and the staff "
             + "identified using the second name is associated with the second shift. Do take note of the order!\n\n"
             + "Parameters: (2 of each)\n"
             + PREFIX_DASH_NAME + " NAME\n"
-            + PREFIX_DAY_SHIFT + "monday-1\n\n"
+            + PREFIX_DAY_SHIFT + "monday-1"
+            + "[" + PREFIX_DATE + "START_DATE]"
+            + "[" + PREFIX_DATE + "END_DATE\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " -n Alex Yeoh d/monday-1 -n David Li d/friday-0\n\n"
             + COMMAND_WORD + " -n Alex Yeoh -n David Li d/tuesday-0 d/wednesday-1";
@@ -44,6 +51,9 @@ public class SwapShiftCommand extends Command {
     private final Slot firstSlot;
     private final DayOfWeek secondDayOfWeek;
     private final Slot secondSlot;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final Period period;
 
     /**
      * Creates a SwapShiftCommand to swap shifts between 2 staffs.
@@ -51,7 +61,7 @@ public class SwapShiftCommand extends Command {
      * @param nameList List containing the names of 2 staffs
      * @param shiftList List containing the shifts of 2 staffs
      */
-    public SwapShiftCommand(List<Name> nameList, List<String> shiftList) {
+    public SwapShiftCommand(List<Name> nameList, List<String> shiftList, LocalDate startDate, LocalDate endDate) {
         firstStaff = nameList.get(0);
         secondStaff = nameList.get(1);
 
@@ -62,6 +72,9 @@ public class SwapShiftCommand extends Command {
         String[] secondStringList = shiftList.get(1).split("-");
         secondDayOfWeek = DayOfWeek.valueOf(secondStringList[0].toUpperCase());
         secondSlot = Slot.getSlotByOrder(secondStringList[1]);
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.period = new Period(startDate, endDate);
     }
 
     @Override
@@ -81,29 +94,29 @@ public class SwapShiftCommand extends Command {
         }
 
         // If the first staff does not have the shift to swap
-        if (!firstStaffToEdit.isWorking(firstDayOfWeek, firstSlot.getOrder())) {
+        if (!firstStaffToEdit.isWorking(firstDayOfWeek, firstSlot.getOrder(), period)) {
             throw new CommandException(String.format(SHIFT_CANT_SWAP, firstStaff, firstDayOfWeek, firstSlot));
         }
 
         // If the second staff does not have the shift to swap
-        if (!secondStaffToEdit.isWorking(secondDayOfWeek, secondSlot.getOrder())) {
+        if (!secondStaffToEdit.isWorking(secondDayOfWeek, secondSlot.getOrder(), period)) {
             throw new CommandException(String.format(SHIFT_CANT_SWAP, secondStaff, secondDayOfWeek, secondSlot));
         }
 
         // If the first staff already has the shift that he/she is trying to swap to
-        if (firstStaffToEdit.isWorking(secondDayOfWeek, secondSlot.getOrder())) {
+        if (firstStaffToEdit.isWorking(secondDayOfWeek, secondSlot.getOrder(), period)) {
             throw new CommandException(String.format(SHIFT_ALREADY_EXISTS, firstStaff, secondDayOfWeek, secondSlot));
         }
 
         // If the second staff already has the shift that he/she is trying to swap to
-        if (secondStaffToEdit.isWorking(firstDayOfWeek, firstSlot.getOrder())) {
+        if (secondStaffToEdit.isWorking(firstDayOfWeek, firstSlot.getOrder(), period)) {
             throw new CommandException(String.format(SHIFT_ALREADY_EXISTS, secondStaff, firstDayOfWeek, firstSlot));
         }
 
-        model.deleteShift(firstStaffToEdit, firstDayOfWeek, firstSlot);
-        model.deleteShift(secondStaffToEdit, secondDayOfWeek, secondSlot);
-        model.addShift(firstStaffToEdit, secondDayOfWeek, secondSlot);
-        model.addShift(secondStaffToEdit, firstDayOfWeek, firstSlot);
+        model.deleteShift(firstStaffToEdit, firstDayOfWeek, firstSlot, startDate, endDate);
+        model.deleteShift(secondStaffToEdit, secondDayOfWeek, secondSlot, startDate, endDate);
+        model.addShift(firstStaffToEdit, secondDayOfWeek, secondSlot, startDate, endDate);
+        model.addShift(secondStaffToEdit, firstDayOfWeek, firstSlot, startDate, endDate);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SWAP_SHIFT_SUCCESS, firstStaff, secondStaff));
