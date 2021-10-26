@@ -324,13 +324,25 @@ Examples:
 
 Assigns a specific task to students’ task list.
 
-Format: `task -ass STUDENTINDEX TASKINDEX`
+Format: `task -as STUDENTINDEX TASKINDEX`
 
 * Assigns the task specified at index `TASKINDEX` to the “Student” object specified at index `STUDENTINDEX`.
-* `-ass` refers to the assignment command.
+* `-as` refers to the "assign to student" command.
 
 Examples:
-* `task -ass 2 4` adds the task at the index 4 to the student at the index 2
+* `task -as 2 4` adds the task at the index 4 to the student at the index 2
+
+### Assigning tasks to groups
+
+Assigns a specific task to groups’ task list.
+
+Format: `task -ag GROUPINDEX TASKINDEX`
+
+* Assigns the task specified at index `TASKINDEX` to the “Group” object specified at index `GROUPINDEX`.
+* `-ag` refers to the "assign to group" command.
+
+Examples:
+* `task -ag 2 4` adds the task at the index 4 to the group at the index 2
 
 ### Clearing all entries : `clear`
 
@@ -390,6 +402,7 @@ Action | Format, Examples
 **Edit a task** | `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]​` <br> e.g., `task -e 4 d/20211231 c/true`
 **View a task** | `task -v INDEX​` <br> e.g., `task -v 2`
 **Delete a task** | `task -d INDEX​` <br> e.g., `task -d 1`
-**Assign a task to a student** | `task -ass STUDENTINDEX TASKINDEX​` <br> e.g., `task -ass 2 4`
+**Assign a task to a student** | `task -as STUDENTINDEX TASKINDEX​` <br> e.g., `task -as 2 4`
+**Assign a task to a group** | `task -ag GROUPINDEX TASKINDEX​` <br> e.g., `task -ag 2 4`
 **Clear all entries** | `clear`
 **Exit** | `exit`
