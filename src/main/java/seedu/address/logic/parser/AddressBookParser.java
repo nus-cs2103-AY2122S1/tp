@@ -71,8 +71,8 @@ public class AddressBookParser {
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
 
-        case SortInterviewCommand.COMMAND_WORD:
-            return new SortInterviewCommandParser().parse(arguments);
+        case FilterInterviewCommand.COMMAND_WORD:
+            return new FilterInterviewCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
