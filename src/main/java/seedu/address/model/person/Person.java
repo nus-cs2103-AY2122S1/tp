@@ -319,8 +319,7 @@ public class Person implements HasUniqueId, Attendee,
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getLessonsList().equals(lessonsList)
-                && otherPerson.getExams().equals(exams)
-                && otherPerson.getAssignedGroupIds().equals(assignedGroupIds);
+                && otherPerson.getExams().equals(exams);
     }
 
     @Override
