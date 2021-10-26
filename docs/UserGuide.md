@@ -14,15 +14,15 @@ title: User Guide
 </div>
 
 Welcome and thank you for downloading **FAST**! Are you a financial advisor having troubles managing your contacts
-on your phone? Do you find existing contact management software troublesome and not intuitive to use? Do you want 
+on your phone? Do you find existing contact management software troublesome and not intuitive to use? Do you want
 a cheaper alternative compared to those paid contact management software? If you answered "YES!" to any those questions
 then FAST is right for you!
 
-FAST stands for Financial Advisor Smart Tracker (FAST), and as its name implies, we strive to be the fastest, and most 
+FAST stands for Financial Advisor Smart Tracker (FAST), and as its name implies, we strive to be the fastest, and most
 efficient when it comes to managing your contacts.
-FAST is a **free open-source desktop app for Financial Advisors to manage their contacts.** 
-More importantly, FAST is **optimized for those who prefer to work with a Command Line 
-Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+FAST is a **free open-source desktop app for Financial Advisors to manage their contacts.**
+More importantly, FAST is **optimized for those who prefer to work with a Command Line
+Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 For Financial Advisors that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
 
@@ -178,7 +178,7 @@ are all sample data! Here are some commands you can try to see what they do:
   * e.g. `[t/TAG]…​` can be `t/friend`, `t/friend t/family` or just left empty.
 
 
-* Parameters can be in any order. (This excludes parameters without a prefix.) <br> 
+* Parameters can be in any order. (This excludes parameters without a prefix.) <br>
     * e.g. if the command uses this format: `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
   
 
@@ -203,7 +203,6 @@ prefix, then FAST will assume it to be part of the previous parameter input, whi
     * e.g. if a command expects this parameter `ea v/New York` but you enter `ea v/New York p/87657654`, 
   FAST will assume your input to `v/` to be `New York p/87657654`.
 </div>
-
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Parameters refer to the details that are to be included as an input to a command. <br>
