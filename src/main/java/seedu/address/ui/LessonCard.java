@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
@@ -46,7 +47,16 @@ public class LessonCard extends UiPart<Region> {
         date.setText("Date: " + lesson.getDisplayDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         rates.setText("Rates: $" + lesson.getLessonRates().toString());
-        cancelledDates.setText("");
+        lesson.getHomework().stream()
+                .sorted(Comparator.comparing(homework -> homework.description))
+                .forEach(homework -> homeworkList.getChildren()
+                        .add(homeworkLabel(homework.toString())));
+
+        Set<Date> lessonCancelledDates = lesson.getCancelledDates();
+        if (lessonCancelledDates.isEmpty()) {
+            cancelledDates.setManaged(false);
+            return;
+        }
         if (lesson.isRecurring()) {
             List<String> dates = lesson.getCancelledDates().stream().sorted()
                     .map(Date::toString).collect(Collectors.toList());
@@ -54,10 +64,6 @@ public class LessonCard extends UiPart<Region> {
         } else if (lesson.getCancelledDates().size() > 0) {
             cancelledDates.setText("Cancelled!");
         }
-        lesson.getHomework().stream()
-                .sorted(Comparator.comparing(homework -> homework.description))
-                .forEach(homework -> homeworkList.getChildren()
-                        .add(homeworkLabel(homework.toString())));
     }
 
     private Label homeworkLabel(String homework) {

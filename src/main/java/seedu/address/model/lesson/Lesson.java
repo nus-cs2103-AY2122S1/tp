@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Lesson in the address book.
@@ -206,13 +207,16 @@ public abstract class Lesson implements Comparable<Lesson> {
             builder.append("; Homework: ");
             homework.forEach(x -> builder.append(x + "; "));
         }
-
-        List<Date> dates = new ArrayList<>(getCancelledDates());
-        Collections.sort(dates, Collections.reverseOrder()); // display dates from latest to earliest
+        if (isCancelled()) {
+            builder.append("(Cancelled)");
+            return builder.toString();
+        }
+        String dates = getCancelledDates().stream().sorted()
+                .map(Date::toString).collect(Collectors.joining(","));
 
         if (!dates.isEmpty()) {
-            builder.append("\nCancelled Dates: ");
-            dates.forEach(date -> builder.append(date + ", "));
+            builder.append("Cancelled Dates: ")
+                    .append(dates);
         }
         return builder.toString();
     }
