@@ -171,5 +171,8 @@ public class SortCommandTest {
 
         //different prefix and reverse -> returns false
         assertFalse(standardCommand.equals(new SortCommand(new Prefix("t/"), true)));
+
+        //different command -> returns false
+        assertFalse(standardCommand.equals(new HelpCommand()));
     }
 }
