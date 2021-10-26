@@ -50,9 +50,9 @@ We hope you find this User Guide helpful in using ClassMATE!
    Some example commands you can try:
    * **`liststu`** : Lists all students.
    
-   * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06 atd/1 as/OP1` **: Adds a student named `John Doe` to ClassMATE.
+   * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
    
-   * **`deletestu 3` **: Deletes the 3rd student shown in the current list.
+   * **`deletestu 3`**: Deletes the 3rd student shown in the current list.
    
    * **`clear`** : Deletes all students.
  
@@ -67,7 +67,7 @@ We hope you find this User Guide helpful in using ClassMATE!
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addstu n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -100,21 +100,21 @@ Format: `help`
 
 Adds a student to ClassMATE.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE atd/ATTENDANCE as/ASSIGNMENT [t/TAG]…​`
+Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
 Examples:
-* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06 atd/1 as/OP1`
-* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/G06 atd/0 as/OP1`
+* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`
+* `addstu n/Betsy Crowe t/proactive e/betsycrowe@example.com a/10 Kent Dr, #02-02 p/1234567 c/G06 t/team player`
 
 ### Editing a student : `editstu`
 
 Edits an existing student in ClassMATE.
 
-Format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -262,31 +262,13 @@ Examples:
 
 ## Tutorial Group Commands
 
-### Adding a group: `addsg`
+### Adding a group: `addcg`
 
-Adds a group to ClassMATE
+Adds a group to a particular tutorial class
 
-Format: `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]`
+Format: `addcg gn/GROUP_NAME c/CLASS_CODE type/GROUP_TYPE`
 
-* Adds the student to a group in the class
-* Type refers to the assignment that the group will work together for
-
-Example:
-* `liststu c/G06`shows that Betsy is a student in class G06.
-  `addsg n/Betsy tp/OP1 g/A` then adds a student called Betsy to OP1 Group A in class G06
-
-### Viewing a Group: `viewg` [Coming Soon]
-
-Views a group's details in ClassMATE
-
-Format: `viewg INDEX`
-
-* Views the group's details at the specified INDEX.
-* The index refers to the index number shown in the displayed group list.
-* The index must be a positive integer 1, 2, 3...
-
-Examples:
-* `listg c/G06` followed by `viewg 2` shows the 2nd group in the list of group in class G06
+Examples: `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
 ### Listing all groups : `listg` [Coming Soon]
 
@@ -297,11 +279,25 @@ Format: `listg c/CLASS_CODE`
 Examples:
 * `listg c/G06` Lists all groups in the class `G06`
 
-### Deleting a Group: `deleteg`
+### Viewing a Group: `viewcg` [Coming Soon]
+
+Views a group's details in ClassMATE
+
+Format: `viewcg INDEX`
+
+* Views the group's details at the specified INDEX.
+* The index refers to the index number shown in the displayed group list.
+* The index must be a positive integer 1, 2, 3...
+
+Examples:
+* `listg c/G06` followed by `viewcg 2` shows the 2nd group in the list of group in class G06
+
+
+### Deleting a Group: `deletecg`
 
 Deletes a group from ClassMATE by their index in the group list
 
-Format: `deleteg INDEX`
+Format: `deletecg INDEX`
 
 * Deletes the group at the specified INDEX.
 * The INDEX refers to the index number shown in the displayed group list.
@@ -309,6 +305,20 @@ Format: `deleteg INDEX`
 
 Examples:
 * `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
+
+## Adding Student to a group: `addsg` [Coming Soon]
+
+Adds student to a group.
+
+Format: `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]`
+
+* Adds the student to a group in the class
+* Type refers to the assignment that the group will work together for
+
+Example:
+* `liststu c/G06`shows that Betsy is a student in class G06.
+  `addsg n/Betsy tp/OP1 g/A` then adds a student called Betsy to OP1 Group A in class G06
+
 
 ### Exiting the program : `exit`
 
@@ -342,17 +352,21 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE atd/ATTENDANCE as/ASSIGNMENT [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 atd/1 as/OP1 t/nice`
-**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [atd/ATTENDANCE] [as/ASSIGNMENT] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Add student** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/G01 atd/1 t/attentive`
+**Edit student** | `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS_CODE] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
 **View student** | `viewstu INDEX`<br> e.g., `liststu` followed by `viewstu 2`
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
 **List students** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
 **Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesdays and Fridays 2-4pm`
 **Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
-**View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3
-`**List all classes** | `liststu`
+**View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
+**List all classes** | `listc`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
+**Add Tutorial Group** | `addcg gn/GROUP_NAME c/CLASS_CODE type/TYPE` <br> e.g.,`addsg n/Betsy tp/OP1 g/A`
+**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2` 
+**List Tutorial Group** | `listg`
+**Add Student to Group** | `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]` <br> e.g., `addcg gn/Group 1 c/G01 type/OP1`
 **Clear all students** | `clear`
 **Exit ClassMATE** | `exit`
 
