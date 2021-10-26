@@ -30,7 +30,7 @@ import safeforhall.model.person.VaccStatus;
 public class EditPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-    public static final String PARAMETERS = "INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STATUS] "
+    public static final String PARAMETERS = "INDEXES [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STATUS] "
             + "[f/FACULTY] [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the residents identified "
             + "by the index numbers used in the displayed resident list. "

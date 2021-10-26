@@ -41,7 +41,7 @@
         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
           <tabs>
 
-            <Tab text="Residents">
+            <Tab text="Residents" onSelectionChanged="#commandBoxToResidents">
               <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                 <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -68,7 +68,7 @@
               </SplitPane>
             </Tab>
 
-            <Tab text="Events">
+            <Tab text="Events" onSelectionChanged="#commandBoxToEvents">
               <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                 <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

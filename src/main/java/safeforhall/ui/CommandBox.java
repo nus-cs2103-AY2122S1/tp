@@ -7,7 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import safeforhall.logic.Logic;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.CommandResult;
@@ -39,10 +43,18 @@ public class CommandBox extends UiPart<Region> {
 
     private ArrayList<String> historicals = new ArrayList<>();
     private int current = 0;
+    private boolean isResidentTab = true;
     private String currentString = "";
+    private String currentParamters = "";
 
     @FXML
-    private TextField commandTextField;
+    private TextFlow commandTextField;
+
+    @FXML
+    private TextField main;
+
+    @FXML
+    private Text suggestions;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -50,12 +62,15 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
+        main.setBackground(Background.EMPTY);
+        main.setPrefWidth(1600);
+        suggestions.setFill(Color.GRAY);
+        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+        main.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        handleCommandEntered();
         handleInput();
         handleHistory();
-
     }
 
     /**
@@ -63,33 +78,38 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
-        historicals.add(commandText);
-        current = historicals.size() - 1;
-        if (commandText.equals("")) {
-            return;
-        }
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String commandText = main.getText();
+                historicals.add(commandText);
+                current = historicals.size() - 1;
+                if (commandText.equals("")) {
+                    return;
+                }
 
-        try {
-            commandExecutor.execute(commandText);
-            commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
-            setStyleToIndicateCommandFailure();
-        }
+                try {
+                    commandExecutor.execute(commandText);
+                    main.setText("");
+                } catch (CommandException | ParseException e) {
+                    setStyleToIndicateCommandFailure();
+                }
+            }
+        });
     }
 
     /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        main.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
+
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextField.getStyleClass();
+        ObservableList<String> styleClass = main.getStyleClass();
 
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
@@ -125,37 +145,67 @@ public class CommandBox extends UiPart<Region> {
                     }
                 }
                 event.consume();
-                commandTextField.setText(newText);
+                main.setText(newText);
             }
         });
     }
 
     private void handleInput() {
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode().isLetterKey() || event.getCode().isDigitKey() || event.getCode().isWhitespaceKey()) {
-                currentString += event.getText();
-                event.consume();
-            } else if (event.getCode() == KeyCode.BACK_SPACE && currentString.length() > 0) {
-                currentString = currentString.substring(0, currentString.length() - 1);
-            }
-        });
-        getRoot().addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (event.getCharacter().matches("^[a-zA-Z0-9_]*$")) {
-                event.consume();
-            }
-        });
         getRoot().addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            String suggestion = mapSuggestion(currentString.trim(), true);
-            if (!suggestion.equals("")) {
-                String output = currentString + " " + suggestion;
-                commandTextField.setText(output);
+            currentString = main.getText();
+            String[] processString = processMain(currentString.trim());
+            String commandString = processString[0];
+            if (processString.length > 1) {
+                currentParamters = processString[1].trim();
             } else {
-                commandTextField.setText(currentString);
+                currentParamters = "";
             }
-            commandTextField.positionCaret(currentString.length());
-            event.consume();
+            String suggestion = mapSuggestion(commandString.trim(), isResidentTab);
+            if (!suggestion.equals("")) {
+                String displayedSuggestion = getDisplaySuggestion(suggestion);
+                suggestions.setText(displayedSuggestion);
+            } else {
+                suggestions.setText("");
+            }
         });
+    }
 
+    private String[] processMain(String mainText) {
+        return mainText.split(" ", 2);
+    }
+
+    private String getDisplaySuggestion(String suggestion) {
+        if (currentParamters.equals("")) {
+            return suggestion;
+        } else {
+            StringBuilder displayedSuggestion = new StringBuilder();
+            String[] suggestionParts = suggestion.split(" ");
+            String[] parameterParts = currentParamters.split(" ");
+
+            for (String suggestionPart : suggestionParts) {
+                boolean isEntered = false;
+                for (String parameterPart : parameterParts) {
+                    if (parameterPart.length() > 1 && suggestionPart.substring(0, 2).equals(parameterPart.substring(0, 2))) {
+                        isEntered = true;
+                        break;
+                    } else if ((suggestionPart.equals("INDEXES") || suggestionPart.equals("INDEX")
+                            || suggestionPart.equals("[INDEXES]") || suggestionPart.equals("[INDEX]"))
+                            && parameterPart.matches("\\d+")) {
+                        isEntered = true;
+                        break;
+                    } else if (parameterPart.contains("k/l") && suggestionPart.equals("d2/DATE")) {
+                        isEntered = true;
+                    } else if (suggestionPart.charAt(0) == '[' && parameterPart.length() > 1 && suggestionPart.substring(1, 3).equals(parameterPart.substring(0, 2))) {
+                        isEntered = true;
+                        break;
+                    }
+                }
+                if (!isEntered) {
+                    displayedSuggestion.append(suggestionPart).append(" ");
+                }
+            }
+            return displayedSuggestion.toString();
+        }
     }
 
     private String mapSuggestion(String currentString, boolean isResidentTab) {
@@ -221,4 +271,25 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    public void setIsResidentTab(boolean isResidentTab) {
+        this.isResidentTab = isResidentTab;
+    }
+
+    /**
+     * Refreshes the suggestion when changing tabs .
+     */
+    public void refreshSuggestions() {
+        currentString = main.getText();
+        String[] processString = processMain(currentString.trim());
+        String commandString = processString[0];
+        if (processString.length > 1) {
+            currentParamters = processString[1].trim();
+        }
+        String suggestion = mapSuggestion(commandString.trim(), isResidentTab);
+        if (!suggestion.equals("")) {
+            suggestions.setText("  " + suggestion);
+        } else {
+            suggestions.setText("");
+        }
+    }
 }

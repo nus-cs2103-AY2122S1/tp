@@ -19,7 +19,7 @@ import safeforhall.model.person.Person;
 public class DeletePersonCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-    public static final String PARAMETERS = "INDEXES ";
+    public static final String PARAMETERS = "INDEXES";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the people identified by the index number used in the displayed person list.\n"
