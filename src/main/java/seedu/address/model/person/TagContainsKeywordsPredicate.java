@@ -37,7 +37,6 @@ public class TagContainsKeywordsPredicate extends AttributeContainsKeywordsPredi
             s += allPrefixes(nextValue);
         }
         final String str = s;
-        System.out.println(str);
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(str, keyword));
     }

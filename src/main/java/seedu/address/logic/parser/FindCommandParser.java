@@ -42,7 +42,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         //check that there is a key inputted for the command after the attribute type
         assert(typeKeywords.length > 1);
         //check that the attribute type is inputted as a 2-character string, e.g. "n/" and not "n/alex"
-        assert(typeKeywords[0].length() == 2);
+        //assert(typeKeywords[0].length() == 2);
         String type = typeKeywords[0];
         List<String> keywords = Arrays.asList(typeKeywords);
 
