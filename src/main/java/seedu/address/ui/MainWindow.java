@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -18,6 +18,12 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.game.Game;
+
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,12 +37,18 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private ObservableList<Friend> friendList;
+    private boolean isFriendTable;
 
     // Independent Ui parts residing in this Ui container
     private FriendListPanel friendListPanel;
     private GameListPanel gameListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private Friend currentFriendToGet;
+    private FriendMainCardTable friendMainCardTable;
+    private GameMainCardTable gameMainCardTable;
+    private Game currentGameToGet;
 
 
     @FXML
@@ -81,6 +93,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.friendList = logic.getFilteredFriendsList();
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -230,6 +243,51 @@ public class MainWindow extends UiPart<Stage> {
         addGameListPanelToGamesPlaceholder();
     }
 
+    private void handleFriendGet(Friend friendToGet) {
+            currentFriendToGet = friendToGet;
+            if (currentFriendToGet == null) {
+                rightMainCard.getChildren().clear();
+                return;
+            }
+            if (this.friendList.stream().filter(x -> x.isSameFriendId(currentFriendToGet)).count() != 0) {
+                friendToGet = this.friendList
+                        .stream()
+                        .filter(x -> x.isSameFriendId(currentFriendToGet))
+                        .findFirst()
+                        .get();
+
+                friendMainCardTable = new FriendMainCardTable(friendToGet);
+                rightMainCard.getChildren().clear();
+                rightMainCard.getChildren().add(friendMainCardTable.getRoot());
+            } else {
+                rightMainCard.getChildren().clear();
+                friendMainCardTable = new FriendMainCardTable();
+                rightMainCard.getChildren().add(friendMainCardTable.getRoot());
+            }
+    }
+
+    private void handleGameGet(Game gameToGet) {
+        currentGameToGet = gameToGet;
+        if (currentGameToGet == null) {
+            rightMainCard.getChildren().clear();
+            return;
+        }
+        if (friendList.stream().filter(friend -> friend.hasGameAssociation(gameToGet)).count() != 0) {
+            List<Friend> friendsWithGame = friendList.stream()
+                    .filter(friend -> friend.hasGameAssociation(gameToGet))
+                    .collect(Collectors.toList());
+
+            gameMainCardTable = new GameMainCardTable(FXCollections.observableList(friendsWithGame), gameToGet);
+            rightMainCard.getChildren().clear();
+            rightMainCard.getChildren().add(gameMainCardTable.getRoot());
+        } else {
+            rightMainCard.getChildren().clear();
+            gameMainCardTable = new GameMainCardTable();
+            rightMainCard.getChildren().add(gameMainCardTable.getRoot());
+        }
+    }
+
+
     /**
      * Handles the mounting and dismounting of UI Regions when a {@Code friend}
      * command is run.
@@ -252,7 +310,7 @@ public class MainWindow extends UiPart<Stage> {
      * Executes the command based on the {@Code CommandType}
      * enumeration.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
@@ -262,17 +320,33 @@ public class MainWindow extends UiPart<Stage> {
 
             switch (commandResult.getCommandType()) {
             case FRIEND_GET:
+                isFriendTable = true;
+                handleFriendGet(commandResult.getFriendToGet());
+                break;
+            case FRIEND_ADD_GAME_SKILL:
             case FRIEND_ADD:
             case FRIEND_EDIT:
-            case FRIEND_ADD_GAME_SKILL:
             case FRIEND_LIST:
             case CLEAR:
             case FRIEND_LINK:
+            case FRIEND_UNLINK:
             case FRIEND_DELETE:
-                handleFriendCommand(commandResult);
+                if (isFriendTable) {
+                    handleFriendGet(this.currentFriendToGet);
+                } else {
+                    handleGameGet(this.currentGameToGet);
+                }
                 break;
-            case GAME_ADD: case GAME_GET: case GAME_DELETE: case GAME_LIST:
-                handleGameCommand(commandResult);
+            case GAME_GET:
+                isFriendTable = false;
+                handleGameGet(commandResult.getGameToGet());
+                break;
+            case GAME_ADD: case GAME_DELETE: case GAME_LIST:
+                if (isFriendTable) {
+                    handleFriendGet(this.currentFriendToGet);
+                } else {
+                    handleGameGet(this.currentGameToGet);
+                }
                 break;
             case HELP:
                 handleHelp();
