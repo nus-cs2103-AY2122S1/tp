@@ -112,8 +112,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+        // update folder if necessary
+        folders.updateAllFolders(target, editedPerson);
     }
 
     /**
@@ -122,6 +123,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        // update folder if necessary
+        folders.updateAllFolders(key, null);
     }
 
     //// folder-level operations

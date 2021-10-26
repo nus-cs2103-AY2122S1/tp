@@ -173,6 +173,23 @@ public class UniqueFolderList implements Iterable<Folder> {
     }
 
     /**
+     * Updates all the folders when contact is updated, either edit or delete.
+     * @param originalPerson person that is going to be updated.
+     * @param updatedPerson person that is updated.
+     */
+    public void updateAllFolders(Person originalPerson, Person updatedPerson) {
+        for (Folder oldFolder : internalList) {
+            Set<Person> contacts = oldFolder.getContacts();
+            if (updatedPerson != null && contacts.contains(originalPerson)) {
+                contacts.add(updatedPerson);
+            }
+            contacts.removeIf(contact -> contact.equals(originalPerson));
+            Folder newFolder = new Folder(oldFolder.getFolderName(), contacts);
+            this.setFolder(oldFolder, newFolder);
+        }
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Folder> asUnmodifiableObservableList() {
