@@ -50,6 +50,9 @@ public class Price {
 
     @Override
     public String toString() {
+        if (price.equals("")) {
+            return "No price";
+        }
         return price;
     }
 

@@ -36,6 +36,9 @@ public class Timing {
 
     @Override
     public String toString() {
+        if (timing.equals("")) {
+            return "No timing";
+        }
         return timing;
     }
 

@@ -36,6 +36,9 @@ public class Capacity {
 
     @Override
     public String toString() {
+        if (capacity.equals("")) {
+            return "No capacity";
+        }
         return capacity;
     }
 
