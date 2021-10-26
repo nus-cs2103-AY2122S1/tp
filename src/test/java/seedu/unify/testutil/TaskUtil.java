@@ -34,8 +34,7 @@ public class TaskUtil {
         sb.append(PREFIX_DATE + task.getDate().value + " ");
         task.getTags()
                 .stream()
-                .forEach(s -> sb.append(PREFIX_TAG + s.tagTaskName + " ")
-                );
+                .forEach(s -> sb.append(PREFIX_TAG + s.tagTaskName + " "));
         return sb.toString();
     }
 
