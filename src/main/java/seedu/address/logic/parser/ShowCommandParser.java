@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.nio.file.Path;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -23,17 +25,21 @@ public class ShowCommandParser implements Parser<ShowCommand> {
      */
     public ShowCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_FILE);
+
+        Path savePath = argMultimap.getValue(PREFIX_FILE)
+                .map(fileName -> fileName.endsWith(".png") ? fileName : fileName + ".png")
+                .map(Path::of).orElse(null);
 
         return argMultimap.getPreamble().isEmpty()
-                ? parseByPrefixes(argMultimap)
-                : parseByIndex(argMultimap);
+                ? parseByPrefixes(argMultimap, savePath)
+                : parseByIndex(argMultimap, savePath);
     }
 
     /**
      * Handles parsing by {@code Index}.
      */
-    public ShowCommand parseByIndex(ArgumentMultimap argMultimap) throws ParseException {
+    public ShowCommand parseByIndex(ArgumentMultimap argMultimap, Path savePath) throws ParseException {
         Index index;
 
         try {
@@ -42,22 +48,22 @@ public class ShowCommandParser implements Parser<ShowCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
-        return new ShowCommand(index);
+        return new ShowCommand(index, savePath);
     }
 
     /**
      * Handles parsing by prefixes.
      */
-    public ShowCommand parseByPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+    public ShowCommand parseByPrefixes(ArgumentMultimap argMultimap, Path savePath) throws ParseException {
         if (areRedundantPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
         return argMultimap.getValue(PREFIX_NAME).isPresent()
-                ? new ShowCommand(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()))
+                ? new ShowCommand(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()), savePath)
                 : argMultimap.getValue(PREFIX_ID).isPresent()
-                ? new ShowCommand(ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get()))
-                : new ShowCommand(ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()));
+                ? new ShowCommand(ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get()), savePath)
+                : new ShowCommand(ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()), savePath);
     }
 
     /**

@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -35,10 +37,11 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows performance analysis of a student or an assessment. "
             + "Parameters: "
-            + "( INDEX | "
+            + "(<index> | "
             + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id> | "
-            + PREFIX_ASSESSMENT + "<assessment_name>)";
+            + PREFIX_ASSESSMENT + "<assessment_name>)"
+            + "[" + PREFIX_FILE + "<export_location>]";
 
     public static final String MESSAGE_SUCCESS = "Info requested successfully";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
@@ -50,31 +53,33 @@ public class ShowCommand extends Command {
     private Name name;
     private ID id;
     private Assessment assessment;
+    private Path savePath;
 
     /**
      * Constructor for a {@code ShowCommand}.
      */
-    public ShowCommand(Index index, Name name, ID id, Assessment assessment) {
+    public ShowCommand(Index index, Name name, ID id, Assessment assessment, Path savePath) {
         setIndex(index);
         setName(name);
         setId(id);
         setAssessment(assessment);
+        setSavePath(savePath);
     }
 
-    public ShowCommand(Index index) {
-        this(index, null, null, null);
+    public ShowCommand(Index index, Path savePath) {
+        this(index, null, null, null, savePath);
     }
 
-    public ShowCommand(Name name) {
-        this(null, name, null, null);
+    public ShowCommand(Name name, Path savePath) {
+        this(null, name, null, null, savePath);
     }
 
-    public ShowCommand(ID id) {
-        this(null, null, id, null);
+    public ShowCommand(ID id, Path savePath) {
+        this(null, null, id, null, savePath);
     }
 
-    public ShowCommand(Assessment assessment) {
-        this(null, null, null, assessment);
+    public ShowCommand(Assessment assessment, Path savePath) {
+        this(null, null, null, assessment, savePath);
     }
 
     @Override
@@ -101,7 +106,7 @@ public class ShowCommand extends Command {
 
         Info info = new Info(matchedStudent);
         StudentStatistics statistics = new StudentStatistics(matchedStudent);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart(), savePath);
     }
 
     /**
@@ -126,7 +131,7 @@ public class ShowCommand extends Command {
 
         Info info = new Info(matchedStudent);
         StudentStatistics statistics = new StudentStatistics(matchedStudent);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart(), savePath);
     }
 
     /**
@@ -142,7 +147,7 @@ public class ShowCommand extends Command {
 
         Info info = new Info(matchedAssessment);
         AssessmentStatistics statistics = new AssessmentStatistics(matchedAssessment);
-        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram(), savePath);
     }
 
     /**
@@ -194,6 +199,10 @@ public class ShowCommand extends Command {
         this.assessment = assessment;
     }
 
+    public void setSavePath(Path savePath) {
+        this.savePath = savePath;
+    }
+
     public Optional<Index> getIndex() {
         return Optional.ofNullable(index);
     }
@@ -208,6 +217,10 @@ public class ShowCommand extends Command {
 
     public Optional<Assessment> getAssessment() {
         return Optional.ofNullable(assessment);
+    }
+
+    public Optional<Path> getSavePath() {
+        return Optional.ofNullable(savePath);
     }
 
     /**
