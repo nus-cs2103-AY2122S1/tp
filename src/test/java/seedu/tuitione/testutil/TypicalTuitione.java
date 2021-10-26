@@ -1,7 +1,11 @@
 package seedu.tuitione.testutil;
 
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.tuitione.testutil.TypicalLessons.ENGLISH_S2;
+import static seedu.tuitione.testutil.TypicalStudents.FIONA;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,8 +36,18 @@ public class TypicalTuitione {
         // set up associations
         List<Student> students = getTypicalStudents();
         List<Lesson> lessons = getTypicalLessons();
+
+        // BENSON enrolled in MATH_S2 lesson
         lessons.get(INDEX_SECOND_LESSON.getZeroBased())
-                .enrollStudent(students.get(INDEX_SECOND_STUDENT.getZeroBased())); // BENSON enrolled in MATH_S2 lesson
+                .enrollStudent(students.get(INDEX_SECOND_STUDENT.getZeroBased()));
+
+        // FIONA enrolled in MATH_S2 lesson
+        lessons.get(INDEX_SECOND_LESSON.getZeroBased())
+                .enrollStudent(students.get(INDEX_FOURTH_STUDENT.getZeroBased()));
+
+        // BENSON enrolled in PHYSICS_S2 lesson
+        lessons.get(INDEX_FOURTH_LESSON.getZeroBased())
+                .enrollStudent(students.get(INDEX_SECOND_STUDENT.getZeroBased()));
 
         for (Student student : students) {
             tuitione.addStudent(student);
@@ -45,12 +59,14 @@ public class TypicalTuitione {
     }
 
     private static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(new LessonBuilder(SCIENCE_P2).build(), new LessonBuilder(MATH_S2).build(),
-                new LessonBuilder(PHYSICS_S2).build()));
+        return new ArrayList<>(Arrays.asList(new LessonBuilder(SCIENCE_P2).build(),
+                new LessonBuilder(MATH_S2).build(), new LessonBuilder(PHYSICS_S2).build(),
+                new LessonBuilder(ENGLISH_S2).build()));
     }
 
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(new StudentBuilder(ALICE).build(),
-                new StudentBuilder(BENSON).build(), new StudentBuilder(CARL).build()));
+                new StudentBuilder(BENSON).build(), new StudentBuilder(CARL).build(),
+                new StudentBuilder(FIONA).build()));
     }
 }
