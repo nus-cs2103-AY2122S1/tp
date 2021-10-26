@@ -38,8 +38,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox informationContainer;
     @FXML
-    private VBox deadlineContainer;
-    @FXML
     private VBox statusContainer;
 
     /**
