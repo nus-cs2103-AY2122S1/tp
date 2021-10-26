@@ -1,7 +1,10 @@
 package seedu.unify.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.unify.model.task.Task;
@@ -36,7 +39,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label state;
     @FXML
-    private Label tag;
+    private FlowPane tags;
 
 
     /**
@@ -49,7 +52,9 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().taskName);
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
-        tag.setText(task.getTag().tagTaskName);
+        task.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagTaskName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));
         String styleClass = "state-" + task.getState().toString();
         state.getStyleClass().add(styleClass);
         state.setText(task.getState().toString());

@@ -6,14 +6,12 @@ import static seedu.unify.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
 import static seedu.unify.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.unify.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.unify.logic.commands.CommandTestUtil.TIME_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.TIME_DESC_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
@@ -99,23 +97,8 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditTaskDescriptorBuilder().withTag(VALID_TAG_FRIEND).build();
+        descriptor = new EditTaskDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_TASK;
-        String userInput = targetIndex.getOneBased() + TIME_DESC_AMY + DATE_DESC_AMY
-                + TAG_DESC_FRIEND + TIME_DESC_AMY + DATE_DESC_AMY + TAG_DESC_FRIEND
-                + TIME_DESC_BOB + DATE_DESC_BOB + TAG_DESC_HUSBAND;
-
-        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTime(VALID_TIME_BOB)
-                .withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND)
-                .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
