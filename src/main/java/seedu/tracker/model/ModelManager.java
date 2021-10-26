@@ -40,6 +40,7 @@ public class ModelManager implements Model {
         this.moduleTracker = new ModuleTracker(moduleTracker);
         this.userPrefs = new UserPrefs(userPrefs);
         this.userInfo = new UserInfo(userInfo);
+        updateMcProgress();
         filteredModules = new FilteredList<>(this.moduleTracker.getModuleList());
     }
 

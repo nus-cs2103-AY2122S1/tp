@@ -62,11 +62,11 @@ public class ModuleCard extends UiPart<Region> {
         if (module.hasAcademicCalendar()) {
             academicCalendar.getChildren().add(new Label(getFormattedAcademicCalendar(module)));
             if (module.getAcademicCalendar().compareTo(currentSemester) < 0) {
-                cardPane.setStyle("-fx-background-color:#64bc2666;"); //module has been finished
+                cardPane.setStyle("-fx-background-color:#324a2d66;"); //module has been finished
             } else if (module.getAcademicCalendar().compareTo(currentSemester) > 0) {
-                cardPane.setStyle("-fx-background-color:#ea160166;"); //module planned to take
+                cardPane.setStyle("-fx-background-color:#78464666;"); //module planned to take
             } else {
-                cardPane.setStyle("-fx-background-color:#fad20266;"); //module taking
+                cardPane.setStyle("-fx-background-color:#7d693666;"); //module taking
             }
         }
 
