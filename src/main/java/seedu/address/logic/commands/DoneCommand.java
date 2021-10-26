@@ -62,12 +62,10 @@ public class DoneCommand extends Command {
         Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
 
         //Make new copy for defensive programming.
-        List<Task> tasks = new ArrayList<>();
-        tasks.addAll(personToEdit.getTasks());
-        List<Index> copyOfIndexList = new ArrayList<>();
-        copyOfIndexList.addAll(targetTaskIndexes);
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        List<Index> copyOfIndexList = new ArrayList<>(targetTaskIndexes);
 
-        Collections.sort(copyOfIndexList, Collections.reverseOrder());
+        copyOfIndexList.sort(Collections.reverseOrder());
 
         for (Index targetTaskIndex : targetTaskIndexes) {
             if (targetTaskIndex.getZeroBased() >= tasks.size()) {
@@ -82,7 +80,8 @@ public class DoneCommand extends Command {
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

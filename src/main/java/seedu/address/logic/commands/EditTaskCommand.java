@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
@@ -30,7 +31,6 @@ import seedu.address.model.task.Venue;
 public class EditTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "edittask";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
             + "by the index number used in the displayed person list and task number. "
             + "Existing values will be overwritten by the input values.\n"
@@ -42,7 +42,8 @@ public class EditTaskCommand extends Command {
             + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK_INDEX + " 2 "
-            + PREFIX_TASK_DESCRIPTION + " Assignment Discussion";
+            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion"
+            + PREFIX_IMPORTANCE + "false";
 
     public static final String DESCRIPTION = "Edits the details of the task identified";
 
@@ -81,8 +82,7 @@ public class EditTaskCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
-        List<Task> tasks = new ArrayList<>();
-        tasks.addAll(personToEdit.getTasks());
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
 
         if (targetTaskIndex.getZeroBased() >= tasks.size()) {
             throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
@@ -98,7 +98,9 @@ public class EditTaskCommand extends Command {
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant()
+        );
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -201,7 +203,7 @@ public class EditTaskCommand extends Command {
         }
 
         public void setTaskVenue(Venue venue) {
-            this.taskVenue = taskVenue;
+            this.taskVenue = venue;
         }
 
         public Optional<Venue> getTaskVenue() {

@@ -27,8 +27,7 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
             Set<Index> taskIndexSet = ParserUtil.parseTaskIndexes(argMultimap.getAllValues(PREFIX_TASK_INDEX));
-            List<Index> taskIndex = new ArrayList<>();
-            taskIndex.addAll(taskIndexSet);
+            List<Index> taskIndex = new ArrayList<>(taskIndexSet);
 
             return new DeleteTaskCommand(index, taskIndex);
         } catch (ParseException pe) {

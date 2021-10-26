@@ -33,6 +33,7 @@ class JsonAdaptedPerson {
     private final String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
+    private final String isImportant;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,12 +42,13 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
-            @JsonProperty("description") String description) {
+            @JsonProperty("description") String description, @JsonProperty("isImportant") String isImportant) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.description = description;
+        this.isImportant = isImportant;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -70,6 +72,7 @@ class JsonAdaptedPerson {
         tasks.addAll(source.getTasks().stream()
                 .map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
+        isImportant = String.valueOf(source.isImportant());
     }
 
     /**
@@ -129,8 +132,21 @@ class JsonAdaptedPerson {
         }
         final Description modelDescription = new Description(description);
 
+        if (isImportant == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "Importance"));
+        }
+
+        if (!(isImportant.equals(String.valueOf(true))
+                || isImportant.equals(String.valueOf(false)))) {
+            throw new IllegalValueException("isImportant should be boolean!");
+        }
+
+        final Boolean modelImportance = Boolean.parseBoolean(isImportant);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks, modelDescription);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelTasks, modelDescription,
+                modelImportance);
     }
 
 }

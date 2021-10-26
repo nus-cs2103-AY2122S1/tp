@@ -22,7 +22,8 @@
       "taskTime" : null,
       "taskVenue" : null
     } ],
-    "description" : "Owner of Lunta Inc"
+    "description" : "Owner of Lunta Inc",
+    "isImportant" : "true"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -45,7 +46,8 @@
       "taskTime" : null,
       "taskVenue" : null
     } ],
-    "description" : "HR in Sarimba"
+    "description" : "HR in Sarimba",
+    "isImportant" : "true"
   }, {
     "name" : "Benjamin Wesley",
     "phone" : "88956321",
@@ -68,7 +70,8 @@
       "taskTime" : null,
       "taskVenue" : null
     } ],
-    "description" : ""
+    "description" : "",
+    "isImportant" : "false"
   },{
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -76,7 +79,8 @@
     "address" : "wall street",
     "tagged" : [ ],
     "tasks" : [ ],
-    "description" : ""
+    "description" : "",
+    "isImportant" : "false"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -99,7 +103,8 @@
       "taskTime" : null,
       "taskVenue" : null
     } ],
-    "description" : "Potential Client?"
+    "description" : "Potential Client?",
+    "isImportant" : "true"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -112,7 +117,8 @@
       "taskTime" : null,
       "taskVenue" : null
     } ],
-    "description" : "CS2103/T Teammate"
+    "description" : "CS2103/T Teammate",
+    "isImportant" : "true"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -125,7 +131,8 @@
       "taskTime" : null,
       "taskVenue" : null
     } ],
-    "description" : "b"
+    "description" : "b",
+    "isImportant" : "false"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -138,6 +145,7 @@
       "taskTime" : null,
       "taskVenue" : null
     } ],
-    "description" : "fffffffffffffff"
+    "description" : "fffffffffffffff",
+    "isImportant" : "false"
   } ]
 }

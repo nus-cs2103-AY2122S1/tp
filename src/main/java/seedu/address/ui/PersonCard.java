@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane importance;
+    @FXML
     private FlowPane tags;
     @FXML
     private Text taskList;
@@ -63,6 +65,9 @@ public class PersonCard extends UiPart<Region> {
         taskList.setText(person.getDescription().toString());
         tasksDue.setText("Overdue Tasks: " + person.getOverdueTasks()
                 + "\nSoon to be due Tasks: " + person.getSoonDueTasks());
+        if (person.isImportant()) {
+            importance.getChildren().add(new Label("Important!"));
+        }
     }
 
     @Override
