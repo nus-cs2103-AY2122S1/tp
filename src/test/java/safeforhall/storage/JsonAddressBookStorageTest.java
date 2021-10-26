@@ -1,12 +1,15 @@
 package safeforhall.storage;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static safeforhall.testutil.Assert.assertThrows;
-//import static safeforhall.testutil.TypicalPersons.ALICE;
-//import static safeforhall.testutil.TypicalPersons.HOON;
-//import static safeforhall.testutil.TypicalPersons.IDA;
-//import static safeforhall.testutil.TypicalPersons.getTypicalAddressBook;
+import static safeforhall.testutil.TypicalEvents.BASKETBALL;
+import static safeforhall.testutil.TypicalEvents.HACKERS;
+import static safeforhall.testutil.TypicalEvents.POOL;
+import static safeforhall.testutil.TypicalPersons.ALICE;
+import static safeforhall.testutil.TypicalPersons.HOON;
+import static safeforhall.testutil.TypicalPersons.IDA;
+import static safeforhall.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,6 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 import safeforhall.commons.exceptions.DataConversionException;
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
+import safeforhall.testutil.TypicalEvents;
 
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
@@ -60,31 +64,65 @@ public class JsonAddressBookStorageTest {
         assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
     }
 
-    // TODO fix under Add
-    //    @Test
-    //    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-    //        Path filePath = testFolder.resolve("TempAddressBook.json");
-    //        AddressBook original = getTypicalAddressBook();
-    //        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
-    //
-    //        // Save in new file and read back
-    //        jsonAddressBookStorage.saveAddressBook(original, filePath);
-    //        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-    //        assertEquals(original, new AddressBook(readBack));
-    //
-    //        // Modify data, overwrite exiting file, and read back
-    //        original.addPerson(HOON);
-    //        original.removePerson(ALICE);
-    //        jsonAddressBookStorage.saveAddressBook(original, filePath);
-    //        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-    //        assertEquals(original, new AddressBook(readBack));
-    //
-    //        // Save and read without specifying file path
-    //        original.addPerson(IDA);
-    //        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-    //        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
-    //        assertEquals(original, new AddressBook(readBack));
-    //    }
+    @Test
+    public void readAddressBook_invalidEventAddressBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidEventAddressBook.json"));
+    }
+
+    @Test
+    public void readAddressBook_invalidAndValidEventAddressBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidEventAddressBook.json"));
+    }
+
+    @Test
+    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempAddressBook.json");
+        AddressBook original = getTypicalAddressBook();
+        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+
+        // Save in new file and read back
+        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        assertEquals(original, new AddressBook(readBack));
+
+        // Modify data, overwrite exiting file, and read back
+        original.addPerson(HOON);
+        original.removePerson(ALICE);
+        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        assertEquals(original, new AddressBook(readBack));
+
+        // Save and read without specifying file path
+        original.addPerson(IDA);
+        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
+        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        assertEquals(original, new AddressBook(readBack));
+    }
+
+    @Test
+    public void readAndSaveEventAddressBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempEventAddressBook.json");
+        AddressBook original = TypicalEvents.getTypicalAddressBook();
+        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+
+        // Save in new file and read back
+        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        assertEquals(original, new AddressBook(readBack));
+
+        // Modify data, overwrite exiting file, and read back
+        original.addEvent(HACKERS);
+        original.removeEvent(BASKETBALL);
+        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        assertEquals(original, new AddressBook(readBack));
+
+        // Save and read without specifying file path
+        original.addEvent(POOL);
+        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
+        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        assertEquals(original, new AddressBook(readBack));
+    }
 
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {

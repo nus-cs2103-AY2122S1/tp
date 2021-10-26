@@ -154,6 +154,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public String getInvalidResident(Event event) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
@@ -195,6 +200,36 @@ public class AddPersonCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getSinglePerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSinglePerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getSingleEvent() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSingleEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setNoPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setNoEvent() {
             throw new AssertionError("This method should not be called.");
         }
     }

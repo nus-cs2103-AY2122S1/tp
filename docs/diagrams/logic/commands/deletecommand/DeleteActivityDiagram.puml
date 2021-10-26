@@ -1,0 +1,28 @@
+@startuml
+start
+:App executes Delete command;
+: Validate user input;
+
+if () then ([Invalid command format])
+    : App shows error message;
+else ([else])
+ if () then ([Residents tab])
+        :Deletes Resident object;
+        if () then ([Invalid resident index])
+            :App shows error message;
+        else ([else])
+            :Deletes Resident;
+            :App shows success message;
+        endif
+    else([Events tab])
+        :Deletes Event object;
+        if () then ([Invalid event index])
+            :App shows error message;
+        else ([else])
+            :Deletes Event;
+            :App shows success message;
+endif
+endif
+endif
+stop
+@enduml

@@ -113,11 +113,15 @@ class JsonAdaptedPerson {
                     VaccStatus.class.getSimpleName()));
         }
         if (!VaccStatus.isValidVaccStatus(vaccStatus)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(VaccStatus.MESSAGE_CONSTRAINTS);
         }
         final VaccStatus modelVaccStatus = new VaccStatus(vaccStatus);
 
         // Faculty
+        if (faculty == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Faculty.class.getSimpleName()));
+        }
         if (!Faculty.isValidFaculty(faculty)) {
             throw new IllegalValueException(Faculty.MESSAGE_CONSTRAINTS);
         }

@@ -71,6 +71,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Event> getSingleEvent() {
+        model.setNoEvent();
+        return model.getSingleEvent();
+    }
+
+    @Override
+    public ObservableList<Person> getSinglePerson() {
+        model.setNoPerson();
+        return model.getSinglePerson();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }

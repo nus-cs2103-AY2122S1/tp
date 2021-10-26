@@ -48,7 +48,7 @@ class JsonAdaptedEvent {
         eventDate = source.getEventDate().eventDate;
         venue = source.getVenue().venue;
         capacity = source.getCapacity().capacity;
-        residents = source.getResidents().getResidents();
+        residents = source.getResidents().getResidentsStorage();
     }
 
     /**
@@ -95,7 +95,7 @@ class JsonAdaptedEvent {
                     Capacity.class.getSimpleName()));
         }
         if (!Capacity.isValidCapacity(capacity)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Capacity.MESSAGE_CONSTRAINTS);
         }
         final Capacity modelCapacity = new Capacity(capacity);
 
@@ -105,10 +105,23 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ResidentList.class.getSimpleName()));
         }
-        if (!ResidentList.isValidResidentList(residents)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+
+        String[] persons = residents.split("\\s*,\\s*");
+        StringBuilder stringBuilder = new StringBuilder("");
+        int count = 0;
+        for (String person : persons) {
+            String[] information = person.split("\\s*;\\s*");
+            if (count == 0) {
+                stringBuilder.append(information[0]);
+            } else {
+                stringBuilder.append(", ").append(information[0]);
+            }
+            count++;
         }
-        final ResidentList modelResidentList = new ResidentList(residents);
+        if (!ResidentList.isValidResidentStorage(residents)) {
+            throw new IllegalValueException(ResidentList.MESSAGE_CONSTRAINTS);
+        }
+        final ResidentList modelResidentList = new ResidentList(stringBuilder.toString(), residents);
 
         return new Event(modelEventName, modelEventDate, modelVenue, modelCapacity, modelResidentList);
     }

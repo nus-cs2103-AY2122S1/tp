@@ -1,9 +1,5 @@
 package safeforhall.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
 import safeforhall.model.event.Capacity;
@@ -20,7 +16,6 @@ import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
-import safeforhall.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -55,17 +50,9 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         sampleAb.addEvent(new Event(new EventName("Powerlifting"), new EventDate("03-01-2021"),
-                new Venue("Gym"), new Capacity("5"), new ResidentList("Alex Yeoh")));
+                new Venue("Gym"), new Capacity("5"), new ResidentList("Alex Yeoh",
+                "David Li; Room: C112; Phone: 91031282; Email: lidavid@example.com; Vaccinated: T;"
+                        + " Faculty: SDE; Last Fet Date: 02-10-2021; Last Collection Date: 01-10-2021")));
         return sampleAb;
     }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
-    }
-
 }

@@ -15,10 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.transformation.FilteredList;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
@@ -27,6 +27,7 @@ import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.NameContainsKeywordsPredicate;
 import safeforhall.model.person.Person;
 import safeforhall.testutil.AddressBookBuilder;
+import safeforhall.testutil.EventBuilder;
 
 public class ModelManagerTest {
 
@@ -104,6 +105,42 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void execute_validViewSinglePersonCommand_success() throws Exception {
+        AddressBook addressBook = new AddressBook();
+        FilteredList<Person> singlePerson = new FilteredList<>(addressBook.getPersonList());
+        singlePerson.setPredicate(ALICE::equals);
+        modelManager.setSinglePerson(ALICE);
+        assertEquals(modelManager.getSinglePerson(), singlePerson);
+    }
+
+    @Test
+    public void execute_validViewSingleEventCommand_success() throws Exception {
+        AddressBook addressBook = new AddressBook();
+        FilteredList<Event> singleEvent = new FilteredList<>(addressBook.getEventList());
+        singleEvent.setPredicate(BASKETBALL::equals);
+        modelManager.setSingleEvent(BASKETBALL);
+        assertEquals(modelManager.getSingleEvent(), singleEvent);
+    }
+
+    @Test
+    public void execute_validViewNoPersonCommand_success() throws Exception {
+        modelManager.setNoPerson();
+        AddressBook addressBook = new AddressBook();
+        FilteredList<Person> noPerson = new FilteredList<>(addressBook.getPersonList());
+        noPerson.setPredicate(person -> false);
+        assertEquals(modelManager.getSinglePerson(), noPerson);
+    }
+
+    @Test
+    public void execute_validViewNoEventCommand_success() throws Exception {
+        modelManager.setNoEvent();
+        AddressBook addressBook = new AddressBook();
+        FilteredList<Event> noEvent = new FilteredList<>(addressBook.getEventList());
+        noEvent.setPredicate(event -> false);
+        assertEquals(modelManager.getSingleEvent(), noEvent);
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -171,28 +208,64 @@ public class ModelManagerTest {
         expected.add(ALICE);
         expected.add(BENSON);
 
-        ResidentList list = new ResidentList("Alice Pauline, Benson Meier");
+        ResidentList list = new ResidentList("Alice Pauline, Benson Meier",
+                ALICE.toString() + ", " + BENSON.toString());
         ArrayList<Person> personList = modelManager.getCurrentEventResidents(list);
         assertEquals(personList, expected);
     }
 
     @Test
-    public void getEventSuccess() {
+    public void getEventSuccess() throws CommandException {
         AddressBook addressBook = new AddressBookBuilder().withEvent(BASKETBALL).withEvent(VOLLEYBALL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
         EventName basketballEvent = new EventName("basketball");
-        Optional<Event> foundBasketball = addressBook.findEvent(basketballEvent);
-        assertEquals(foundBasketball.get(), BASKETBALL);
+        Event foundBasketball = modelManager.getEvent(basketballEvent);
+        assertEquals(foundBasketball, BASKETBALL);
 
         EventName volleyballEvent = new EventName("volleyball");
-        Optional<Event> foundVolleyball = addressBook.findEvent(volleyballEvent);
-        assertEquals(foundVolleyball.get(), VOLLEYBALL);
+        Event foundVolleyball = modelManager.getEvent(volleyballEvent);
+        assertEquals(foundVolleyball, VOLLEYBALL);
     }
 
     @Test
     public void getEventFailure() {
         AddressBook addressBook = new AddressBookBuilder().withEvent(BASKETBALL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
         EventName volleyballEvent = new EventName("volleyball");
-        Optional<Event> foundVolleyball = addressBook.findEvent(volleyballEvent);
-        assertEquals(foundVolleyball, Optional.empty());
+        assertThrows(CommandException.class, () -> modelManager.getEvent(volleyballEvent));
+    }
+
+    @Test
+    public void getInvalidResident_invalidFound() throws CommandException {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
+                .withPerson(BENSON).withPerson(CARL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        EventBuilder eventBuilder = new EventBuilder();
+        Event event = eventBuilder.withResidentList(ALICE.getName().toString(), ALICE.toString()).build();
+        String result = modelManager.getInvalidResident(event);
+        assertEquals(result, "");
+    }
+
+    @Test
+    public void getInvalidResident_invalidNotFound() throws CommandException {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
+                .withPerson(BENSON).withPerson(CARL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        EventBuilder eventBuilder = new EventBuilder();
+        Event event = eventBuilder.withResidentList("John", "John; "
+                + "Room: C111; Phone: 91031280; "
+                + "Email: lijohn@example.com; Vaccinated: T; "
+                + "Faculty: SDE; Last Fet Date: 02-10-2021; "
+                + "Last Collection Date: 01-10-2021").build();
+        String result = modelManager.getInvalidResident(event);
+        assertEquals(result, "John");
     }
 }

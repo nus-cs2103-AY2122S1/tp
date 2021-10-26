@@ -20,7 +20,7 @@ import safeforhall.model.person.Person;
 @JsonRootName(value = "safeforhall")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Residents list contains duplicate resident(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();

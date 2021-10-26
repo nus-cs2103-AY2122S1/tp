@@ -73,6 +73,12 @@ public interface Model {
     ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException;
 
     /**
+     * Returns a String of information if {@code Person} does not exist in the address book, return
+     * an empty String otherwise.
+     */
+    String getInvalidResident(Event event) throws CommandException;
+
+    /**
      * Returns true if an event with the same details as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
@@ -125,6 +131,24 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
+
+    /** Adds the selected resident into the filtered resident list */
+    void setSinglePerson(Person person);
+
+    /** Set an empty person list */
+    void setNoPerson();
+
+    /** Returns an unmodifiable view of the selected resident */
+    ObservableList<Person> getSinglePerson();
+
+    /** Adds the selected event into the filtered event list */
+    void setSingleEvent(Event event);
+
+    /** Set an empty event list */
+    void setNoEvent();
+
+    /** Returns an unmodifiable view of the selected event */
+    ObservableList<Event> getSingleEvent();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
