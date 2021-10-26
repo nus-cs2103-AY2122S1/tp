@@ -54,21 +54,26 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-    
-    * **`list`** : Lists all applicants.
+   
+   * **`clear`** : Clears all sample data.
     
     * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/3000` : Adds an applicant named `John Doe` to RecruitIn,
     where `98765432`is his phone number, `johnd@example.com` is his email and `3000` is his expected salary.
+    
+    * **`add`**`n/Mary Poppins p/91131513 e/maryp@example.com s/3000` : Adds an applicant named `Mary Poppins` to RecruitIn,
+    where `91131513`is her phone number, `maryp@example.com` is her email and `3000` is her expected salary.
+    
+    * **`list`** : Lists all applicants.
    
     * **`find`**`n/John Mary` : Finds all applicants whose names are `John` or `Mary`.
 
-    * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
+    * **`delete`**`2` : Deletes the 2nd applicant shown in the list of all applicants, which would `Mary`.
 
-    * **`show`**`n/` : Displays all unique applicant names in RecruitIn.
+    * **`show`**`s/` : Displays all unique expected salaries in RecruitIn, which would be 1 result that is `3000`.
 
-    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done.
+    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done, which would `John`.
 
-    * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants.
+    * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants, which would `John`.
 
     * **`exit`** : Exits the app.
 
