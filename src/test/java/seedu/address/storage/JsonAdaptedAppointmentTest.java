@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalAppointment.ALICE_APPOINTMENT;
 import static seedu.address.testutil.TypicalAppointment.ALICE_CARL_APPOINTMENT;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +61,7 @@ public class JsonAdaptedAppointmentTest {
                 new JsonAdaptedAppointment(
                         clients,
                         VALID_LOCATION, INVALID_JSON_TIME_PERIOD, VALID_DESC);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDate.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, TimePeriod.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
@@ -74,7 +73,7 @@ public class JsonAdaptedAppointmentTest {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(
                         clients,
-                        VALID_LOCATION, INVALID_JSON_TIME_PERIOD, INVALID_DESC);
+                        VALID_LOCATION, VALID_JSON_TIME_PERIOD, INVALID_DESC);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
