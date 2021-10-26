@@ -21,4 +21,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUPPLY_TYPE = new Prefix("st/");
     public static final Prefix PREFIX_DELIVERY_DETAILS = new Prefix("dd/");
     public static final Prefix PREFIX_TIME = new Prefix("at/");
+    public static final Prefix PREFIX_SORT_BY = new Prefix("by/");
+    public static final Prefix PREFIX_SORT_ORDER = new Prefix("o/");
 }

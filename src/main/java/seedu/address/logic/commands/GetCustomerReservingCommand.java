@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.customer.CustomerContainsPhonePredicate;
 import seedu.address.model.reservation.Reservation;
@@ -14,10 +15,11 @@ import seedu.address.model.reservation.Reservation;
 public class GetCustomerReservingCommand extends Command {
     public static final String COMMAND_WORD = "getc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets the customer who made the reservation "
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Gets the customer who made the reservation "
             + "specified by the given index.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " 1";
 
     public static final String MESSAGE_CUSTOMER_RESERVING_LISTED =
             "Corresponding customer who made the reservation is listed!";
