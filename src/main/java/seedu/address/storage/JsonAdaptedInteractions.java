@@ -29,7 +29,6 @@ class JsonAdaptedInteractions {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedInteractions(Interaction source) {
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         this.description = source.description;
         this.date = source.date;
     }
@@ -40,7 +39,6 @@ class JsonAdaptedInteractions {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Interaction toModelType() {
-        System.out.println("INSIDE toModelTYPE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         return new Interaction(description, date.toString());
     }
 }

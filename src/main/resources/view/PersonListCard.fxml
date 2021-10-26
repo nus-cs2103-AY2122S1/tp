@@ -34,6 +34,7 @@
       <FlowPane fx:id="skills" />
       <FlowPane fx:id="languages" />
       <FlowPane fx:id="frameworks" />
+      <FlowPane fx:id="remarks" />
     </VBox>
   </GridPane>
 </HBox>
