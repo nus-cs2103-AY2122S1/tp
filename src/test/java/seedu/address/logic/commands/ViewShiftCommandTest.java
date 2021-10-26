@@ -26,8 +26,6 @@ public class ViewShiftCommandTest {
             ViewShiftCommand.INVALID_SLOT_NUMBER, LocalTime.of(17, 0));
     private final ViewShiftCommand thirdCommand = new ViewShiftCommand(DayOfWeek.WEDNESDAY, 0, null);
     private final ViewShiftCommand fourthCommand = new ViewShiftCommand(DayOfWeek.THURSDAY, 0, null);
-    private final ViewShiftCommand fifthCommand = new ViewShiftCommand(DayOfWeek.FRIDAY,
-            ViewShiftCommand.INVALID_SLOT_NUMBER, null);
     private final ViewShiftCommand sixthCommand = new ViewShiftCommand(DayOfWeek.SATURDAY, 0,
             LocalTime.of(10, 0));
 
@@ -44,7 +42,6 @@ public class ViewShiftCommandTest {
         // Tests
         assertNotEquals(firstCommand, secondCommand);
         assertNotEquals(firstCommand, fourthCommand);
-        assertNotEquals(firstCommand, fifthCommand);
 
         // Not equal null
         assertNotEquals(null, firstCommand);

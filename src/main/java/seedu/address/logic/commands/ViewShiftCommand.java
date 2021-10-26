@@ -23,7 +23,7 @@ import seedu.address.storage.RoleReqStorage;
  * which views the schedule by Person.
  */
 public class ViewShiftCommand extends Command {
-    public static final String DEFAULT_MESSAGE = "Staff working on shift:\n";
+
     public static final String COMMAND_WORD = "viewShift";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n\n"
             + "Parameters:\n"
@@ -43,6 +43,8 @@ public class ViewShiftCommand extends Command {
     private final int slotNum;
     private final LocalTime time;
     private final PersonIsWorkingPredicate isWorkingPredicate;
+
+    private String defaultMessage = "Staff working on shift: ";
     private int[] finalRoleReqCheck = new int[]{};
     private String finalRoleReqMessage;
 
@@ -58,6 +60,8 @@ public class ViewShiftCommand extends Command {
         this.slotNum = slotNum;
         this.time = time;
         this.isWorkingPredicate = new PersonIsWorkingPredicate(dayOfWeek, slotNum, time);
+        this.defaultMessage += dayOfWeek.toString() + "-"
+                + (slotNum == INVALID_SLOT_NUMBER ? time.toString() : slotNum) + "\n";
     }
 
     @Override
@@ -100,7 +104,7 @@ public class ViewShiftCommand extends Command {
         if (counter == 0) {
             return new CommandResult(NO_STAFF_WORKING);
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result.toString() + finalRoleReqMessage);
+            return new CommandResult(defaultMessage + result.toString() + finalRoleReqMessage);
         }
     }
 
@@ -117,7 +121,7 @@ public class ViewShiftCommand extends Command {
         } else if (slotNum == INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES) {
             return new CommandResult(HELP_MESSAGE + getWorkingStaffByTime(staffs));
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result + finalRoleReqMessage);
+            return new CommandResult(defaultMessage + result + finalRoleReqMessage);
         }
     }
 
