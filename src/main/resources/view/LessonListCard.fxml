@@ -28,37 +28,37 @@
             </HBox>
             <HBox>
                 <children>
-                    <Label maxWidth="75.0" minWidth="75.0" prefWidth="75.0" styleClass="cell_small_label" text="📖 Subject:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="📖 Subject:" />
                     <Label fx:id="subject" styleClass="cell_small_label" text="\$subject" />
                 </children>
             </HBox>
             <HBox>
                 <children>
-                    <Label maxWidth="75.0" minWidth="75.0" prefWidth="75.0" styleClass="cell_small_label" text="🔢 Grade:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="🔢 Grade:" />
                     <Label fx:id="grade" styleClass="cell_small_label" text="\$grade" />
                 </children>
             </HBox>
             <HBox>
                 <children>
-                    <Label maxWidth="75.0" minWidth="75.0" prefWidth="75.0" styleClass="cell_small_label" text="📅 Day:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="📅 Day:" />
                     <Label fx:id="dayOfWeek" styleClass="cell_small_label" text="\$dayOfWeek" />
                 </children>
             </HBox>
             <HBox>
                 <children>
-                    <Label maxWidth="75.0" minWidth="75.0" prefWidth="75.0" styleClass="cell_small_label" text="⏲ Time:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="⏲ Time:" />
                     <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
                 </children>
             </HBox>
             <HBox>
                 <children>
-                    <Label maxWidth="75.0" minWidth="75.0" prefWidth="75.0" styleClass="cell_small_label" text="💱 Price:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="💱 Price:" />
                     <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
                 </children>
             </HBox>
             <HBox>
                 <children>
-                    <Label maxWidth="75.0" minWidth="75.0" prefWidth="75.0" styleClass="cell_small_label" text="😀 Size:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="😀 Size:" />
                     <Label fx:id="numOfStudentsEnrolled" styleClass="cell_small_label" text="\$numOfStudentsEnrolled" />
                 </children>
             </HBox>
