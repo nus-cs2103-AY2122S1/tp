@@ -1,16 +1,14 @@
 package seedu.address.model.person;
-import seedu.address.model.person.AttributeContainsKeywordsPredicate;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 
 public class TutorialIdOrRoleContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate {
-    private final List<String> keywords;
-    private final String type;
     public static final String TUTORIAL_ID_TYPE = "T/";
     public static final String ROLE_TYPE = "r/";
+    private final List<String> keywords;
+    private final String type;
 
     /**
      * Constructor for the class.
@@ -39,6 +37,7 @@ public class TutorialIdOrRoleContainsKeywordsPredicate extends AttributeContains
         }
     }
 
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TutorialIdOrRoleContainsKeywordsPredicate // instanceof handles nulls

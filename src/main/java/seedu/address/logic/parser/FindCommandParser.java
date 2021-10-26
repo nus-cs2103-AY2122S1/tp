@@ -7,7 +7,6 @@ import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AttributeContainsKeywordsPredicate;
 import seedu.address.model.person.PartialKeyContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.person.TutorialIdOrRoleContainsKeywordsPredicate;
@@ -26,6 +25,12 @@ public class FindCommandParser implements Parser<FindCommand> {
     public static final String ROLE_TYPE = "r/";
     public static final String TAG_TYPE = "t/";
 
+    /**
+     * Parses the input.
+     * @param args input from user
+     * @return new FindCommand
+     * @throws ParseException
+     */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {

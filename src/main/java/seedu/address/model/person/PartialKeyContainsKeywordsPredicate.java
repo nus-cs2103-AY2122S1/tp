@@ -1,14 +1,10 @@
 package seedu.address.model.person;
-import seedu.address.model.person.AttributeContainsKeywordsPredicate;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 
 public class PartialKeyContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate {
-    private final List<String> keywords;
-    private final String type;
     public static final String NAME_TYPE = "n/";
     public static final String STUDENT_ID_TYPE = "s/";
     public static final String NUSNET_ID_TYPE = "N/";
@@ -16,6 +12,8 @@ public class PartialKeyContainsKeywordsPredicate extends AttributeContainsKeywor
     public static final String GITHUB_ID_TYPE = "g/";
     public static final String PHONE_TYPE = "p/";
     public static final String ADDRESS_TYPE = "a/";
+    private final List<String> keywords;
+    private final String type;
 
     /**
      * Constructor for the class.
@@ -83,6 +81,7 @@ public class PartialKeyContainsKeywordsPredicate extends AttributeContainsKeywor
         return allKeysValueList.toString();
     }
 
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PartialKeyContainsKeywordsPredicate // instanceof handles nulls
