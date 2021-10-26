@@ -29,6 +29,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_RATES = new Prefix("rates/");
     public static final Prefix PREFIX_OUTSTANDING_FEES = new Prefix("f/");
     public static final Prefix PREFIX_PAID_AMOUNT = new Prefix("amt/");
+    public static final Prefix PREFIX_CANCEL = new Prefix("cancel/");
+    public static final Prefix PREFIX_UNCANCEL = new Prefix("uncancel/");
 
     /* Prefix definitions for command options */
     public static final Prefix PREFIX_FIND_CONDITION = new Prefix("cond/");

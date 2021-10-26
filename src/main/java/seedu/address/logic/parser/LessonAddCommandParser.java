@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.OutstandingFees;
@@ -61,14 +63,12 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
                 .orElse("0.00"));
 
 
-        // Is a recurring lesson
-        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            RecurringLesson lesson =
-                    new RecurringLesson(date, timeRange, subject, homework, lessonRates, outstandingFees);
-            return new LessonAddCommand(index, lesson);
-        }
+        // initialise empty set of cancelledDates
+        Set<Date> cancelledDates = new HashSet<>();
 
-        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework, lessonRates, outstandingFees);
+        Lesson lesson = argMultimap.getValue(PREFIX_RECURRING).isPresent()
+                ? new RecurringLesson(date, timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates)
+                : new MakeUpLesson(date, timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
         return new LessonAddCommand(index, lesson);
     }
 

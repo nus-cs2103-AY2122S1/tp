@@ -95,6 +95,7 @@ public class FeesCalculator implements Calculator {
         Set<Homework> copiedHomework = lesson.getHomework() == null
                 ? null
                 : new HashSet<>(lesson.getHomework());
+        Set<Date> copiedCancelledDates = lesson.getCancelledDates();
 
         OutstandingFees currentOutstanding = lesson.getOutstandingFees();
 
@@ -106,9 +107,9 @@ public class FeesCalculator implements Calculator {
 
         return lesson.isRecurring()
                 ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject,
-                        copiedHomework, copiedLessonRates, updatedOutstandingFees)
+                        copiedHomework, copiedLessonRates, updatedOutstandingFees,copiedCancelledDates)
                 : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject,
-                        copiedHomework, copiedLessonRates, updatedOutstandingFees);
+                        copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
     }
 
     /**
@@ -151,7 +152,8 @@ public class FeesCalculator implements Calculator {
                 .toLocalDate()
                 .until(nearestNextMondayToLastUpdated, ChronoUnit.DAYS);
 
-        // if lesson is same day of week as last updated, check if last updated is after lesson
+        // if lesson is same day of week as last updated, check if last updated is before lesson
+        // if yes, lesson not recorded
         boolean isSameDayLessonBeforeUpdate = updateDay.getValue() != lastUpdatedDay
                 || lastUpdated.dateTime.toLocalTime().isBefore(endTime);
 
@@ -175,8 +177,10 @@ public class FeesCalculator implements Calculator {
         long numOfDaysAfterMonday = nearestPreviousMondayToCurrent
                 .until(currentDateTime.toLocalDate(), ChronoUnit.DAYS);
 
+        // if lesson is same day of week as current date, check if current is after lesson
+        // if yes, lesson not recorded
         boolean isSameDayLessonAfterCurrent = updateDay.getValue() != currentUpdatedDay
-                || lastUpdated.dateTime.toLocalTime().isAfter(endTime);
+                || currentDateTime.toLocalTime().isAfter(endTime);
 
         boolean isLessonBetweenMondayAndToday = numOfDaysAfterMonday > 0
                 && updateDay.getValue() <= currentUpdatedDay

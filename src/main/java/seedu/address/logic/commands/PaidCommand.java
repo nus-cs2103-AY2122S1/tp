@@ -127,6 +127,7 @@ public class PaidCommand extends UndoableCommand {
         Subject copiedSubject = lessonToEdit.getSubject();
         Set<Homework> copiedHomeworkSet = lessonToEdit.getHomework();
         LessonRates copiedLessonRates = lessonToEdit.getLessonRates();
+        Set<Date> copiedCancelledDates = lessonToEdit.getCancelledDates();
 
         OutstandingFees updatedOutstandingFees;
         try {
@@ -136,10 +137,10 @@ public class PaidCommand extends UndoableCommand {
         }
 
         return lessonToEdit.isRecurring()
-                ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject,
-                copiedHomeworkSet, copiedLessonRates, updatedOutstandingFees)
-                : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject,
-                copiedHomeworkSet, copiedLessonRates, updatedOutstandingFees);
+                ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject, copiedHomeworkSet,
+                copiedLessonRates, updatedOutstandingFees, copiedCancelledDates)
+                : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject, copiedHomeworkSet,
+                copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
     }
 
     @Override

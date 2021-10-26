@@ -28,6 +28,8 @@ class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
 
+    public static final String MESSAGE_INVALID_CANCELLED_DATE = "Cancelled date is not a date of this lesson.";
+
     private final String date;
     private final String timeRange;
     private final String subject;
@@ -35,6 +37,7 @@ class JsonAdaptedLesson {
     private final boolean isRecurring;
     private final String outstandingFees;
     private final List<JsonAdaptedHomework> homework = new ArrayList<>();
+    private final List<JsonAdaptedDate> cancelledDates = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given Lesson details.
@@ -45,7 +48,8 @@ class JsonAdaptedLesson {
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework,
                              @JsonProperty("lessonRates") String lessonRates,
-                             @JsonProperty("outstandingFees") String outstandingFees) {
+                             @JsonProperty("outstandingFees") String outstandingFees,
+                             @JsonProperty("cancelledDate") List<JsonAdaptedDate> cancelledDates) {
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
@@ -53,6 +57,9 @@ class JsonAdaptedLesson {
         this.outstandingFees = outstandingFees;
         if (homework != null) {
             this.homework.addAll(homework);
+        }
+        if (cancelledDates != null) {
+            this.cancelledDates.addAll(cancelledDates);
         }
         isRecurring = true;
     }
@@ -70,8 +77,11 @@ class JsonAdaptedLesson {
                 .map(JsonAdaptedHomework::new)
                 .collect(Collectors.toList()));
         isRecurring = source.isRecurring();
-
+        cancelledDates.addAll(source.getCancelledDates().stream()
+                .map(JsonAdaptedDate::new)
+                .collect(Collectors.toList()));
     }
+
 
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
@@ -79,59 +89,85 @@ class JsonAdaptedLesson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
     public Lesson toModelType() throws IllegalValueException {
-        final List<Homework> lessonHomework = new ArrayList<>();
-        for (JsonAdaptedHomework hw : homework) {
-            lessonHomework.add(hw.toModelType());
-        }
+        checkNullFields();
 
-        if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
-        }
-        if (!Date.isValidDate(date)) {
+        String strippedDate = date.strip();
+        if (!Date.isValidDate(strippedDate)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(StringUtil.stripLeadingZeroes(date));
+        final Date modelDate = new Date(StringUtil.stripLeadingZeroes(strippedDate));
 
-        if (timeRange == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TimeRange.class.getSimpleName()));
-        }
-        if (!TimeRange.isValidTimeRange(timeRange)) {
+        String strippedTimeRange = timeRange.strip();
+        if (!TimeRange.isValidTimeRange(strippedTimeRange)) {
             throw new IllegalValueException(TimeRange.MESSAGE_CONSTRAINTS);
         }
-        final TimeRange modelTimeRange = new TimeRange(timeRange);
+        final TimeRange modelTimeRange = new TimeRange(strippedTimeRange);
 
-        if (subject == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
-        }
-        if (!Subject.isValidSubject(subject)) {
+        String strippedSubject = subject.strip();
+        if (!Subject.isValidSubject(strippedSubject)) {
             throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
         }
-        final Subject modelSubject = new Subject(subject);
+        final Subject modelSubject = new Subject(strippedSubject);
 
-        if (lessonRates == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LessonRates.class.getSimpleName()));
-        }
-        if (!LessonRates.isValidMonetaryField(lessonRates)) {
+        String strippedLessonRates = lessonRates.strip();
+        if (!LessonRates.isValidMonetaryField(strippedLessonRates)) {
             throw new IllegalValueException(LessonRates.MESSAGE_CONSTRAINTS);
         }
-        final LessonRates modelLessonRates = new LessonRates(lessonRates);
+        final LessonRates modelLessonRates = new LessonRates(strippedLessonRates);
 
-        if (outstandingFees == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    OutstandingFees.class.getSimpleName()));
-        }
-        if (!OutstandingFees.isValidMonetaryField(outstandingFees)) {
+        String strippedOutstandingFees = outstandingFees.strip();
+        if (!OutstandingFees.isValidMonetaryField(strippedOutstandingFees)) {
             throw new IllegalValueException(OutstandingFees.MESSAGE_CONSTRAINTS);
         }
         final OutstandingFees modelOutstandingFees = new OutstandingFees(outstandingFees);
 
+        final List<Homework> lessonHomework = new ArrayList<>();
+        for (JsonAdaptedHomework hw : homework) {
+            lessonHomework.add(hw.toModelType());
+        }
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
-        return isRecurring
-                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject,
-                        modelHomework, modelLessonRates, modelOutstandingFees)
-                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject,
-                        modelHomework, modelLessonRates, modelOutstandingFees);
+
+        Set<Date> modelCancelledDates = new HashSet<>();
+
+        // lesson used to check if cancelled dates are valid
+        Lesson lessonWithoutCancelledDates = isRecurring
+                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework,
+                        modelLessonRates, modelOutstandingFees, modelCancelledDates)
+                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework,
+                        modelLessonRates, modelOutstandingFees, modelCancelledDates);
+
+        final List<Date> dates = new ArrayList<>();
+
+        for (JsonAdaptedDate date : cancelledDates) {
+            Date cancelledDate = date.toModelType();
+            if (!lessonWithoutCancelledDates.hasLessonOnDate(cancelledDate)) {
+                throw new IllegalValueException(MESSAGE_INVALID_CANCELLED_DATE);
+            }
+            dates.add(cancelledDate);
+        }
+        modelCancelledDates = new HashSet<>(dates);
+
+        return lessonWithoutCancelledDates.updateCancelledDates(modelCancelledDates);
+    }
+
+    private void checkNullFields() throws IllegalValueException {
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+        if (timeRange == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TimeRange.class.getSimpleName()));
+        }
+        if (subject == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
+        }
+        if (lessonRates == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LessonRates.class.getSimpleName()));
+        }
+        if (outstandingFees == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    OutstandingFees.class.getSimpleName()));
+        }
     }
 }

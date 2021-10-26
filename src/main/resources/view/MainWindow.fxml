@@ -28,6 +28,11 @@
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
+          <Menu mnemonicParsing="false" text="View">
+            <MenuItem fx:id="studentsMenuItem" mnemonicParsing="false" onAction="#handlePersonGridPanel" text="Students" />
+            <MenuItem fx:id="calendarMenuItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
+            <MenuItem fx:id="tagsMenuItem" mnemonicParsing="false" onAction="#handleShowTagList" text="Tags" />
+          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
@@ -40,7 +45,7 @@
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="200" prefHeight="100" maxHeight="200">
+                   minHeight="100" prefHeight="100" maxHeight="200">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
