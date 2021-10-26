@@ -27,7 +27,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    2.2 [Try it yourself!](#22-try-it-yourself)
 
 3. [Features](#3-features)
-1
+
    3.1 [Add student/class](#31-add-studenttuition-class)
 
    3.2 [View student/class](#32-view-studenttuition-class)
@@ -86,7 +86,7 @@ Welcome to the user guide of TutAssistor!
 Are you a private tutor struggling to keep track of all your classes and students? Do you spend 
 countless hours on administrative duties such as scheduling classes and updating numerous students' records?
 
-If the above situation sounds familiar to you, fret not, TutAssistor is here to save the day!
+If the above situation sounds familiar to you, fret not, **TutAssistor** is here to save the day!
 
 **TutAssistor** is a ***desktop app intended for private tutors like yourself to 
 manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
@@ -125,13 +125,14 @@ The features in this guide are formatted with the following conventions:
 
 #### General symbols and syntax used in this guide
 
-For additional information accompanying each segment, look for the following icons:
+For additional information accompanying each segment, look for the following symbols:
 
+Syntax | What it means 
+-------|--------
 &emsp; :information_source: | precedes information that are useful to remember
-
 &emsp; :bulb: | precedes information that serve as tips for a feature
+&emsp; :warning: | precedes information as an important warning
 
-&emsp; :warning: | precedes information as an important warning.
 
 Jump right in to the next section: [2 Get Started](#2-get-started) to get you started!
 
@@ -623,6 +624,7 @@ hence you do not lose any data.<br>
 
 **Q**: What should I do if I am unsure of the command formats?<br>
 **A**: Please type `help` to learn the command formats.<br>
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
