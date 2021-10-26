@@ -16,8 +16,7 @@ we also provide a quick start guide that demonstrates the end-to-end setup proce
 
 _____________________________________________________________________________________________________________
 ## <a name="table-of-contents"></a>Table of Contents
-* Table of Contents
-{:toc}
+* {:toc}
 _____________________________________________________________________________________________________________
 ## How to use the User Guide
 
