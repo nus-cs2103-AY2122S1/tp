@@ -76,24 +76,20 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 1. Copy the file to the folder you want to use as the _home directory_ for your **Sellah**.
 
-1. Double-click the file to start the app.
+1. For `Windows` users, simply `double-click` the file to start the application. <br>
+   For `Mac` users, you need to open **Sellah** using terminal, key in `java -jar sellah.jar` and press `Enter` to
+   launch the application. You can `right-click` on the folder and click on `New Terminal at Folder` to bring up your
+   terminal as shown below.
 
-1. Alternatively, if you wish to open **Sellah** using command prompt or terminal, key in `java -jar sellah.jar` and
-   press `enter` to launch the **Sellah** application.
+   > :bulb: The image below shows how you can open the home directory of **Sellah** in a terminal for Mac users.
+
+   ![Ui](images/terminalMac.png)
 
 1. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. You can use
    the [`clear`](#48-clearing-all-data) command to purge all data. <br>
    ![Ui](images/UiHelpCommand.png)
 
 1. Refer to the [Features](#4-features) below for details of each command.
-
-> :bulb: Image below shows you how you can open home directory of **Sellah** in command prompt or terminal.
-
-![Ui](images/terminalMac.png)
-
-Windows | Mac
------------- | -------------
-Key in `cmd` and press enter. | Right click on the folder and click on “New Terminal at Folder”
 
 --------------------------------------------------------------------------
 
