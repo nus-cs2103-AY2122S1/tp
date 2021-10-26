@@ -59,9 +59,6 @@ public class AnimeListPanel extends UiPart<Region> {
     @FXML
     private Tab finishedTab;
 
-    @FXML
-    private Tab statsTab;
-
     /**
      * Creates a {@code AnimeListPanel} with the given {@code ObservableList}.
      */

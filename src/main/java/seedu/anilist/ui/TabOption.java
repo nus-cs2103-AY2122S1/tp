@@ -11,7 +11,7 @@ import seedu.anilist.model.anime.Status;
  */
 public class TabOption {
     public static final String MESSAGE_CONSTRAINTS =
-            "Tab should only be one of 'all', 'towatch', 'watching' or 'finished'";
+            "Status should only be one of 'all', 'towatch', 'watching' or 'finished'";
     public static final String[] VALID_TAB_STRING = {"towatch", "t", "watching", "w", "finished", "f", "all", "a"};
 
     private TabOptions currentTab;
