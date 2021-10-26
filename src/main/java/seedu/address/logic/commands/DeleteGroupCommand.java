@@ -35,7 +35,7 @@ public class DeleteGroupCommand extends Command {
 
         Group groupToDelete = model.getGroupByGroupName(targetGroupName);
 
-        if(groupToDelete == null) {
+        if (groupToDelete == null) {
             throw new CommandException(Messages.MESSAGE_GROUP_NOT_FOUND);
         }
 
