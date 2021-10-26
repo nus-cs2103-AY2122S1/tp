@@ -3,7 +3,14 @@ layout: page
 title: User Guide
 ---
 
-ClassMATE is a **desktop app for managing student contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClassMATE can get your contact management tasks done faster than traditional GUI apps.
+ClassMATE is a **desktop app designed for CS2101 tutors to manage student contacts and organize them into their tutorial classes and groups, as well as
+other administrative matters including recording of students' class participation. It is optimized for use via a Command Line Interface** (CLI) while 
+still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClassMATE can get your contact management tasks done faster than traditional GUI apps.
+
+This guide will get you started on how to create students, classes and groups, 
+assigning students to their respective classes and groups and covers other functionalities for users 
+such as filtering and searching students. Finally, it will also guide
+you through on how you can add class participation marks for your students.
 
 * Table of Contents
 {:toc}
