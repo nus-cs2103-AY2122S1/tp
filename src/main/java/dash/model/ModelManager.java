@@ -240,6 +240,11 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+    @Override
+    public void sortTaskList() {
+        taskList.sortTasks();
+    }
+
     //=========== Observable User Input List Accessor =================================================================
 
     @Override

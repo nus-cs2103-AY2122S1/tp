@@ -18,6 +18,7 @@ public class UpcomingTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.sortTaskList();
         model.updateFilteredTaskList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));
