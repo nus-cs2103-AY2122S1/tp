@@ -100,6 +100,14 @@ public class Period {
             //when it is contained
             Period period1 = new Period(startDate, period.startDate.minusDays(1));
             Period period2 = new Period(period.endDate.plusDays(1), endDate);
+            if (startDate.equals(period.startDate)) {
+                //we know that period2 must be not in period
+                return List.of(period2);
+            }
+            if (endDate.equals(period.endDate)) {
+                //we know that period1 must be not in period
+                return List.of(period1);
+            }
             return List.of(period1, period2);
         }
         // startDate period.startDate endDate period.endDate

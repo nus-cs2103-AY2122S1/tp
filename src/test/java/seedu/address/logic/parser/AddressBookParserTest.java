@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -24,7 +23,10 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SwapShiftCommand;
+import seedu.address.logic.commands.SwitchTabCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -51,8 +53,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + PREFIX_INDEX + INDEX_FIRST_PERSON.getOneBased());
+                DeleteCommand.COMMAND_WORD + " " + PREFIX_DASH_INDEX + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_swapShift() throws Exception {
+        String userinput = SwapShiftCommand.COMMAND_WORD + " -n Alex Yeoh -n David Li d/monday-0 d/tuesday-1";
+        List<Name> nameList = Arrays.asList(new Name("Alex Yeoh"), new Name("David Li"));
+        List<String> shiftList = Arrays.asList("monday-0", "tuesday-1");
+        SwapShiftCommand command = (SwapShiftCommand) parser.parseCommand(userinput);
+        assertEquals(new SwapShiftCommand(nameList, shiftList), command);
     }
 
     @Test
@@ -69,6 +80,12 @@ public class AddressBookParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_switch() throws Exception {
+        assertTrue(parser.parseCommand(SwitchTabCommand.COMMAND_WORD) instanceof SwitchTabCommand);
+        assertTrue(parser.parseCommand(SwitchTabCommand.COMMAND_WORD + " 3") instanceof SwitchTabCommand);
     }
 
     @Test

@@ -1,16 +1,20 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
+import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,11 +30,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
-import seedu.address.model.person.PersonContainsFieldsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.Status;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -167,8 +171,8 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dayOfWeek} is invalid.
      */
-    public static String parseDayOfWeek(String shiftDay) throws ParseException {
-        String messageConstraints = "Valid input format: dayOfWeek + slotNumber:" + "List of valid dayOfWeek: "
+    public static String parseDayOfWeekAndSlot(String shiftDay) throws ParseException {
+        String messageConstraints = "Valid input format: dayOfWeek-slotNumber:" + "List of valid dayOfWeek: "
                 + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. (Not case-sensitive)\n"
                 + "List of valid slotNumber: 1, 2.";
         requireNonNull(shiftDay);
@@ -194,6 +198,36 @@ public class ParserUtil {
             break;
         default: throw new ParseException(messageConstraints);
         }
+        return trimmedStr;
+    }
+
+    /**
+     * Parses a dayOfWeek-time.
+     * Leading and trailing whitespaces will be trimmed.
+     * This parser is not case sensitive.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static String parseDayOfWeekAndTime(String shiftDay) throws ParseException {
+        String messageConstraints = "Valid input format: dayOfWeek-time:" + "List of valid dayOfWeek: "
+                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. (Not case-sensitive)\n"
+                + "valid time formats: HH:mm in 24-hour format, such as 13:00";
+        requireNonNull(shiftDay);
+        String trimmedStr = shiftDay.trim().toLowerCase();
+        String[] strings = trimmedStr.split("-");
+        if (strings.length != 2) {
+            throw new ParseException(messageConstraints);
+        }
+        if (!isValidDayOfWeek(strings[0])) {
+            throw new ParseException(messageConstraints);
+        }
+
+        try {
+            LocalTime.parse(strings[1], DateTimeFormatter.ofPattern("HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(messageConstraints);
+        }
+
         return trimmedStr;
     }
 
@@ -282,6 +316,28 @@ public class ParserUtil {
         return new Period(start, end);
     }
 
+    /**
+     * Parsers {@code String shiftTimes} to a {@code LocalTime[]} which contains the a start time and end time.
+     * @param shiftTimes The input string.
+     * @return A LocalTime array containing start time and end time of the shift.
+     * @throws ParseException throws when the input does not have the correct format.
+     */
+    public static LocalTime[] parseShiftTime(String shiftTimes) throws ParseException {
+        LocalTime startTime;
+        LocalTime endTime;
+        String[] separatedShiftTimes = shiftTimes.split("-");
+        if (separatedShiftTimes.length != 2) {
+            throw new ParseException(Messages.MESSAGE_INVALID_SHIFT_TIME);
+        }
+        try {
+            startTime = LocalTime.parse(separatedShiftTimes[0], TIME_FORMATTER);
+            endTime = LocalTime.parse(separatedShiftTimes[1], TIME_FORMATTER);
+        } catch (DateTimeParseException ite) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
+        }
+        return new LocalTime[]{startTime, endTime};
+    }
+
 
 
     /**
@@ -292,15 +348,15 @@ public class ParserUtil {
     public static PersonContainsFieldsPredicate testByAllFields(ArgumentMultimap argMultimap) throws ParseException {
         requireNonNull(argMultimap);
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME), ParserUtil::parseName);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_ADDRESS), ParserUtil::parseAddress);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_TAG), ParserUtil::parseTag);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_NAME), ParserUtil::parseName);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_PHONE), ParserUtil::parsePhone);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_EMAIL), ParserUtil::parseEmail);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_ROLE), Role::translateStringToRole);
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_SALARY), Salary::new);
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_STATUS), Status::translateStringToStatus);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ROLE), Role::translateStringToRole);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_SALARY), Salary::new);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_STATUS), Status::translateStringToStatus);
         } catch (IllegalArgumentException iae) {
             throw new ParseException(iae.getMessage());
         }

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private WeekShiftsPane schedulePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,10 +47,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane schedulePanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private TabPane tabPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -113,11 +118,11 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        schedulePanel = new WeekShiftsPane(logic.getFilteredPersonList());
+        schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -163,6 +168,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Switches the tab showing.
+     */
+    @FXML
+    private void handleSwitchTab() {
+        if (tabPane.getSelectionModel().isSelected(1)) {
+            tabPane.getSelectionModel().selectFirst();
+        } else {
+            tabPane.getSelectionModel().selectNext();
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +201,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isSwitchTab()) {
+                handleSwitchTab();
             }
 
             return commandResult;

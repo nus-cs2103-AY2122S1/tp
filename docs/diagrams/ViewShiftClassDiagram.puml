@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+Interface Parser <<Interface>>
+abstract class Command
+Parser <|.. ViewShiftCommandParser
+Command <|-- ViewShiftCommand
+
+class ViewShiftCommand {
+    dayOfWeek : DayOfWeek
+    slotNum : Integer
+    time : LocalTime
+    execute()
+    executeViewShiftBySlot()
+    executeViewShiftByTime()
+}
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title "After mark -i 1 d/4/1/2001"
+
+package Periods <<Rectangle>>{
+Class Period as "__initial:Period__"
+Class P1 as "__additionalPeriod:Period__"
+Class P2 as "__:Period__"
+
+}
+
+P1 -[hidden]left-> Period
+P2 -[hidden]left-> Period
+P1 -[hidden]right-> P2
+
+
+
+hide P2
+@enduml

@@ -12,6 +12,7 @@ public enum Slot {
     private String period;
     private int order;
 
+
     private Slot(String period, int order) {
         this.period = period;
         this.order = order;
@@ -80,5 +81,10 @@ public enum Slot {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return period;
     }
 }
