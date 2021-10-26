@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,7 +32,7 @@ public class MarkCommandTest {
         Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         MarkCommand markCommand = new MarkCommand(new Index[]{INDEX_FIRST_PERSON});
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.markPerson(personToMark);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARKED_PERSON_SUCCESS, personToMark);
@@ -54,7 +55,7 @@ public class MarkCommandTest {
         Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         MarkCommand markCommand = new MarkCommand(new Index[]{INDEX_FIRST_PERSON});
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.markPerson(personToMark);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
