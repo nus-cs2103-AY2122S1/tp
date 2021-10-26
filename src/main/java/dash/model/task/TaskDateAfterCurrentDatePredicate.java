@@ -14,6 +14,10 @@ public class TaskDateAfterCurrentDatePredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
+        if (task.getCompletionStatus().get()) {
+            return false;
+        }
+
         if (!task.getTaskDate().hasDate()) {
             return false;
         }

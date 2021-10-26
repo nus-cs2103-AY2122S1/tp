@@ -165,6 +165,11 @@ public interface Model {
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
+     * Sorts task list in chronological order.
+     */
+    void sortTaskList();
+
+    /**
      * Returns an unmodifiable view of the user input list
      * @return
      */

@@ -2,6 +2,7 @@ package dash.model.task;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -86,6 +87,54 @@ public class TaskList implements Iterable<Task> {
     public void setTasks(List<Task> tasks) {
         CollectionUtil.requireAllNonNull(tasks);
         internalList.setAll(tasks);
+    }
+
+    /**
+     * Sorts the contents of the list in the following order:
+     * Completed tasks, tasks without dates, and then chronologically.
+     */
+    public void sortTasks() {
+        Comparator<Task> c = (t1, t2) -> {
+            if (t1.getCompletionStatus().get()) {
+                return -1;
+            }
+
+            if (t2.getCompletionStatus().get()) {
+                return 1;
+            }
+
+            if (!t1.getTaskDate().hasDate()) {
+                return -1;
+            }
+            if (!t2.getTaskDate().hasDate()) {
+                return 1;
+            }
+
+            boolean isDateAfter = t1.getTaskDate().getDate().get().isAfter(t2.getTaskDate().getDate().get());
+            boolean isDateBefore = t1.getTaskDate().getDate().get().isBefore(t2.getTaskDate().getDate().get());
+
+            if (isDateAfter) {
+                return 1;
+            } else if (isDateBefore) {
+                return -1;
+            } else if (!t1.getTaskDate().hasTime()) {
+                return -1;
+            } else if (!t2.getTaskDate().hasTime()) {
+                return 1;
+            } else {
+                boolean isTimeAfter = t1.getTaskDate().getTime().get().isAfter(t2.getTaskDate().getTime().get());
+                boolean isTimeBefore = t1.getTaskDate().getTime().get().isBefore(t2.getTaskDate().getTime().get());
+
+                if (isTimeAfter) {
+                    return 1;
+                } else if (isTimeBefore) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        };
+        internalList.sort(c);
     }
 
     /**
