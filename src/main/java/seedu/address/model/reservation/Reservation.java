@@ -34,7 +34,7 @@ public class Reservation {
             Phone phone, int numberOfPeople, LocalDateTime dateTime,
             Table table, Remark remark, Set<Tag> tags
     ) {
-        requireAllNonNull(phone, numberOfPeople, dateTime, tags);
+        requireAllNonNull(phone, numberOfPeople, dateTime, tags, remark);
         this.phone = phone;
         this.numberOfPeople = numberOfPeople;
         this.dateTime = dateTime;

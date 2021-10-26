@@ -135,7 +135,7 @@ public class SampleDataUtil {
             new Reservation(new Phone("99272758"), 2, LocalDateTime.parse("2021-10-30T19:00"),
                     new Table(3, 13), new Remark("Propose to his gf"), getTagSet("clement")),
             new Reservation(new Phone("87438807"), 6, LocalDateTime.parse("2021-02-14T11:00"),
-                    new Table(6, 14), null, getTagSet("javier", "20PercentOff"))
+                    new Table(6, 14), new Remark(""), getTagSet("javier", "20PercentOff"))
         };
     }
 
