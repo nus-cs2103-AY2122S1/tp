@@ -67,6 +67,7 @@ You can type the command keyword and leave the details blank and click enter to 
 all the details!<br>
 
 ![get format](images/user-guide/tipGetFormat.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start <a name="quick-start"></a>
@@ -85,13 +86,13 @@ all the details!<br>
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all patients and doctors.
+   * **`list`** : Lists all patients.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/25/12/2021` : Adds a patient named `John Doe` to the application.
 
-   * **`edit`**`5 a/Bob street, block 123, #01-01 dob/25/12/2021` : Edits 5th patient's address and date of birth.
+   * **`edit`**`3 a/Bob street, block 123, #01-01 dob/25/12/1964` : Edits 3rd patient's address and date of birth.
 
-   * **`delete`**`3` : Deletes the 3rd patient as shown in the current list.
+   * **`delete`**`2` : Deletes the 2nd patient as shown in the current list.
 
    * **`clear`** : Deletes all patients, doctors and appointments.
    
