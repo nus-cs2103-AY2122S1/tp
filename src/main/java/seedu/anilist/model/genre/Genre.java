@@ -10,7 +10,7 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
  */
 public class Genre {
 
-    public static final String MESSAGE_CONSTRAINTS = "Genres must be inside the list of available genres.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Genres must be from the list of available genres.\n"
             + "To view the list, enter: "
             + "genre " + PREFIX_ACTION + "list";
 

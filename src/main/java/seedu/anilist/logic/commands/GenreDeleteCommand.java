@@ -23,7 +23,13 @@ import seedu.anilist.ui.TabOption;
  */
 public class GenreDeleteCommand extends GenreCommand {
 
-    public static final String MESSAGE_SUCCESS = "Genres %1$s deleted from anime %2$s";
+    public static final String MESSAGE_SUCCESS = "Genres %1$s deleted from anime.\n"
+            + "%2$s";
+    public static final String MESSAGE_GENRE_NOT_PRESENT = "Genres %1$s are not present in anime.\n"
+            + "%2$s";
+    public static final String MESSAGE_PARTIAL_SUCCESS = "Genres %1$s deleted.\n"
+            + "Genres %2$s are not present in anime.\n"
+            + "%3$s";
 
     public GenreDeleteCommand(Index index, GenreCommand.GenresDescriptor genresDescriptor) {
         super(index, genresDescriptor);
@@ -43,8 +49,24 @@ public class GenreDeleteCommand extends GenreCommand {
         Anime editedAnime = createUpdatedAnime(animeToEdit, getGenresDescriptor());
 
         model.setAnime(animeToEdit, editedAnime);
+
         model.updateFilteredAnimeList(PREDICATE_SHOW_ALL_ANIME);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, getGenresDescriptor().toString(), editedAnime));
+        String resultMessage;
+        if (getGenresDescriptor().hasUnusedGenres() && getGenresDescriptor().hasUsedGenres()) {
+            resultMessage = String.format(MESSAGE_PARTIAL_SUCCESS,
+                    getGenresDescriptor().usedGenresString(),
+                    getGenresDescriptor().unusedGenresString(),
+                    editedAnime);
+        } else if (getGenresDescriptor().hasUsedGenres()) {
+            resultMessage = String.format(MESSAGE_SUCCESS,
+                    getGenresDescriptor().usedGenresString(),
+                    editedAnime);
+        } else {
+            resultMessage = String.format(MESSAGE_GENRE_NOT_PRESENT,
+                    getGenresDescriptor().unusedGenresString(),
+                    editedAnime);
+        }
+        return new CommandResult(resultMessage);
     }
 
     /**
@@ -60,10 +82,22 @@ public class GenreDeleteCommand extends GenreCommand {
 
         Set<Genre> updatedGenres = new HashSet<>(animeToEdit.getGenres());
         Set<Genre> genresToDelete = genresDescriptor.getGenres().get();
+        Set<Genre> deletedGenres = new HashSet<>();
+        Set<Genre> unusedGenres = new HashSet<>();
 
         assert genresToDelete != null;
 
-        updatedGenres.removeAll(genresToDelete);
+        for (Genre genreToDelete : genresToDelete) {
+            boolean genreIsDeleted = updatedGenres.remove(genreToDelete);
+            if (genreIsDeleted) {
+                deletedGenres.add(genreToDelete);
+            } else {
+                unusedGenres.add(genreToDelete);
+            }
+        }
+
+        genresDescriptor.setUsedGenres(deletedGenres);
+        genresDescriptor.setUnusedGenres(unusedGenres);
 
 
         return new Anime(updatedName, episode, status, updatedGenres);
