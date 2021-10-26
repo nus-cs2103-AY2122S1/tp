@@ -14,7 +14,7 @@
     "parentName" : "Mrs Meier",
     "parentPhone" : "98765432",
     "progressList" : [],
-    "paymentStatus": false,
+    "paymentStatus": true,
     "lessons" : []
   }, {
     "studentName" : "Carl Kurz",
