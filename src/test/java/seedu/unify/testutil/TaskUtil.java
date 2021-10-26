@@ -35,7 +35,7 @@ public class TaskUtil {
         task.getTags()
                 .stream()
                 .forEach(s -> sb.append(PREFIX_TAG + s.tagTaskName + " ")
-        );
+                );
         return sb.toString();
     }
 
