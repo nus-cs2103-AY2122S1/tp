@@ -205,6 +205,50 @@ Examples:
     * For example:
         * NOTES inputs such as `This candidate is good!` and `@Applicant123 is suitab13 for th3 job!` are acceptable.
 
+### Editing an applicants : `edit`
+
+Edits an applicant's data in RecruitIn.
+
+Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE]
+ [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES] ```
+ 
+ * Edit command must take at least 1 prefix input.
+ * If you input multiple of the same prefix, only the last prefix will be used for the search of that category.
+ * Input for each prefix can contain multiple keywords separated by whitespace, e.g. n/John Mary, t/friend colleague
+ * Inputs for all prefixes are case-insensitive.
+ 
+#### Prefix Input Specifications ***{Advanced}***:
+
+* ##### NAME `n/`
+  * All keywords provided as NAME input must comply with input specifications for add given [**here**](#name-n).
+
+* ##### PHONE_NUMBER `p/`
+  * All keywords provided as PHONE_NUMBER input must comply with input specifications for add given [**here**](#phone_number-p).
+
+* ##### EMAIL_ADDRESS `e/`
+  * All keywords provided as EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#email_address-e).
+
+* ##### ROLE `r/`
+  * All keywords provided as ROLE input must comply with input specifications for add given [**here**](#role-r).
+ 
+* ##### EMPLOYMENT_TYPE `et/`
+  * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employment_type-et).
+
+* ##### EXPECTED_SALARY `s/`
+   * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
+
+* ##### LEVEL_OF_EDUCATION `l/`
+  * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
+
+* ##### YEARS_OF_EXPERIENCE `y/`
+    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#years_of_experience-y)..
+
+* ##### TAG `t/`
+    * All keywords provided as TAG input must comply with input specifications for add given [**here**](#tag-t).
+
+* ##### INTERVIEW `i/`
+    * All keywords provided as INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
+
 ### Listing all applicants : `list`
 
 Shows a list of all applicants in RecruitIn.
@@ -275,7 +319,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
     with.
 
 
-* ##### EXPECTED_SALARY `p/`
+* ##### EXPECTED_SALARY `s/`
     * An EXPECTED_SALARY is considered matching with a ***Expected Salary*** only if **at least 1** keyword is within a range of `500` from **at least 1** keyword in the ***Expected Salary***.
     * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
     * For example:
