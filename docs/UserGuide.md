@@ -444,7 +444,7 @@ exit
 
 ## FAQ
 
-This section contains all the frequently asked questions about SPAM.
+This section contains some frequently asked questions about SPAM.
 
 <div class="card mb-3">
 <div markdown="1" class="card-body pt-0 pb-0">
