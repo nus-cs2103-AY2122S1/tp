@@ -30,7 +30,7 @@ public class EditLabCommand extends Command {
             + PREFIX_LAB_NUM + "1 "
             + PREFIX_LAB_RESULT + "15";
 
-    public static final String MESSAGE_ADD_LAB_SUCCESS = "Updated %1$s!";
+    public static final String MESSAGE_EDIT_LAB_SUCCESS = "Updated %1$s!";
 
     private final int newLabNum;
     private final Double total;
@@ -78,7 +78,7 @@ public class EditLabCommand extends Command {
             model.setStudent(std, editedStd);
         }
 
-        return labExists ? new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, original))
+        return labExists ? new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, original))
                          : new CommandResult("This lab does not exist!");
     }
 
