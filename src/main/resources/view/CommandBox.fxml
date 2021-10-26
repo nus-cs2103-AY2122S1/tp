@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <TextFlow fx:id="commandTextField">
-    <TextField fx:id="main" promptText="Enter command here..." style="-fx-text-fill: white"/>
+    <TextField fx:id="main" promptText="Enter command here..."/>
     <Text fx:id="suggestions"/>
   </TextFlow>
 </StackPane>
