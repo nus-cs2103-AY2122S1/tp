@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
@@ -20,6 +21,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -108,12 +110,12 @@ public class CommandTestUtil {
     public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String VALID_DATE_MON = "4 Oct 2021";
-    public static final String VALID_DATE_TUE = "5 Oct 2021";
-    public static final String VALID_DATE_NEXT_MON = "11 Oct 2021";
-    public static final String VALID_DATE_PREV_MON = "27 Sep 2021";
+    public static final String VALID_DATE_MON = "4 OCT 2021";
+    public static final String VALID_DATE_TUE = "5 OCT 2021";
+    public static final String VALID_DATE_NEXT_MON = "11 OCT 2021";
+    public static final String VALID_DATE_PREV_MON = "27 SEP 2021";
     public static final String VALID_DATE_PAST = "15 May 1988";
-    public static final String VALID_DATE_FUTURE = "07 Apr 2103";
+    public static final String VALID_DATE_FUTURE = "7 Apr 2103";
     public static final String VALID_TIME_RANGE = "1234-1345";
     public static final String VALID_CLASHING_TIME_RANGE = "1300-1355";
     public static final String VALID_NON_CLASHING_TIME_RANGE = "1600-1855";
@@ -127,12 +129,18 @@ public class CommandTestUtil {
     public static final String TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_TIME_RANGE;
     public static final String CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_CLASHING_TIME_RANGE;
     public static final String NON_CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_NON_CLASHING_TIME_RANGE;
+    public static final String CANCEL_DATE_DESC_MON = " " + PREFIX_CANCEL + VALID_DATE_MON;
+    public static final String CANCEL_DATE_DESC_NEXT_MON = " " + PREFIX_CANCEL + VALID_DATE_NEXT_MON;
+    public static final String UNCANCEL_DATE_DESC_MON = " " + PREFIX_UNCANCEL + VALID_DATE_MON;
+    public static final String UNCANCEL_DATE_DESC_NEXT_MON = " " + PREFIX_UNCANCEL + VALID_DATE_NEXT_MON;
     public static final String LESSON_RATES_DESC = " " + PREFIX_RATES + VALID_LESSON_RATES;
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
     public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
     public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
 
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "32 Dec 2001"; // No such date
+    public static final String INVALID_CANCEL_DATE_DESC = " " + PREFIX_CANCEL + "32 Dec 2001"; // No such date
+    public static final String INVALID_UNCANCEL_DATE_DESC = " " + PREFIX_UNCANCEL + "32 Dec 2001"; // No such date
     public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
     public static final String INVALID_LESSON_RATES_DESC =
             " " + PREFIX_RATES + "$50.50"; //'$' not allowed in lesson rates

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -38,7 +39,7 @@ public class LessonBuilder {
         subject = new Subject(DEFAULT_SUBJECT);
         homeworkSet = new HashSet<>();
         homeworkSet.add(new Homework(DEFAULT_HOMEWORK));
-        cancelledDatesSet = new HashSet<Date>();
+        cancelledDatesSet = new HashSet<>();
     }
 
     /**
@@ -57,7 +58,7 @@ public class LessonBuilder {
      * Sets the {@code Date} of the {@code Lesson} that we are building.
      */
     public LessonBuilder withDate(String date) {
-        this.date = new Date(date);
+        this.date = new Date(StringUtil.stripLeadingZeroes(date));
         return this;
     }
 

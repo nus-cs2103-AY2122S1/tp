@@ -1,17 +1,25 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.CANCEL_DATE_DESC_MON;
+import static seedu.address.logic.commands.CommandTestUtil.CANCEL_DATE_DESC_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.FUTURE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_TEXTBOOK;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CANCEL_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOMEWORK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_RANGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNCANCEL_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_RANGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.UNCANCEL_DATE_DESC_MON;
+import static seedu.address.logic.commands.CommandTestUtil.UNCANCEL_DATE_DESC_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
@@ -85,6 +93,12 @@ class LessonEditCommandParserTest {
         // invalid date
         assertParseFailure(parser, "1 1" + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
 
+        // invalid cancelled date
+        assertParseFailure(parser, "1 1" + INVALID_CANCEL_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+
+        // invalid uncancelled date
+        assertParseFailure(parser, "1 1" + INVALID_UNCANCEL_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+
         // invalid subject
         assertParseFailure(parser, "1 1" + INVALID_SUBJECT_DESC, Subject.MESSAGE_CONSTRAINTS);
 
@@ -97,6 +111,7 @@ class LessonEditCommandParserTest {
         // invalid time range followed by valid subject
         assertParseFailure(parser, "1 1" + INVALID_TIME_RANGE_DESC + SUBJECT_DESC,
                 TimeRange.MESSAGE_CONSTRAINTS);
+
 
         // multiple invalid values, but only the first invalid value checked is captured
         // order goes in time range, subject, homework
@@ -167,6 +182,17 @@ class LessonEditCommandParserTest {
         expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // cancel dates list
+        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + CANCEL_DATE_DESC_MON;
+        descriptor = new EditLessonDescriptorBuilder().withCancelDates(VALID_DATE_MON).build();
+        expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // uncancel dates list
+        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + UNCANCEL_DATE_DESC_MON;
+        descriptor = new EditLessonDescriptorBuilder().withUncancelDates(VALID_DATE_MON).build();
+        expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -179,10 +205,28 @@ class LessonEditCommandParserTest {
                 + HOMEWORK_DESC_TEXTBOOK + HOMEWORK_DESC_TEXTBOOK;
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-            .withDate(VALID_DATE_PAST)
-            .withTimeRange(VALID_TIME_RANGE)
-            .withSubject(VALID_SUBJECT)
-            .withHomeworkSet(VALID_HOMEWORK_TEXTBOOK).build();
+                .withDate(VALID_DATE_PAST)
+                .withTimeRange(VALID_TIME_RANGE)
+                .withSubject(VALID_SUBJECT)
+                .withHomeworkSet(VALID_HOMEWORK_TEXTBOOK).build();
+
+        LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleCancelUncancelFields_acceptsAll() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        Index lessonTargetIndex = INDEX_THIRD_LESSON;
+
+        String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
+                + CANCEL_DATE_DESC_MON + CANCEL_DATE_DESC_NEXT_MON
+                + UNCANCEL_DATE_DESC_NEXT_MON + UNCANCEL_DATE_DESC_MON;
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withCancelDates(VALID_DATE_MON, VALID_DATE_NEXT_MON)
+                .withUncancelDates(VALID_DATE_NEXT_MON, VALID_DATE_MON).build();
 
         LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
 
@@ -195,7 +239,7 @@ class LessonEditCommandParserTest {
         Index lessonTargetIndex = INDEX_THIRD_LESSON;
 
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
-            + " " + PREFIX_RECURRING + HOMEWORK_DESC_TEXTBOOK;
+                + " " + PREFIX_RECURRING + HOMEWORK_DESC_TEXTBOOK;
 
         // disallow edits to type of lesson
         assertParseFailure(parser, userInput, MESSAGE_ATTEMPT_TO_EDIT_TYPE);
