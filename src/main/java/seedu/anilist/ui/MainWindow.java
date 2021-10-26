@@ -49,6 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private StatsDisplay statsDisplay;
     private ToggleGroup themeToggleGroup = new ToggleGroup();
     private String themeCss;
+    CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -88,6 +89,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         statsDisplay = new StatsDisplay();
+        statsDisplay.setStatsCloseCommand(this::onCloseStatsWindow);
 
         initTheme();
 
@@ -117,6 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
+        this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -238,6 +241,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    public void onCloseStatsWindow() {
+        commandBox.enableCommandTextField();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -272,6 +279,7 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowStats()) {
                 handleStats();
+                commandBox.disableCommandTextField();
             }
 
             if (commandResult.isExit()) {

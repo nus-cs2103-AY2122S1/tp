@@ -4,8 +4,10 @@ import static seedu.anilist.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
@@ -15,6 +17,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.genre.Genre;
 import seedu.anilist.model.stats.Stats;
@@ -35,6 +38,8 @@ public class StatsDisplay extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StatsDisplay.class);
     private static final String FXML = "StatsDisplay.fxml";
 
+    private Runnable onStatsExit;
+
     @FXML
     private PieChart pieChart;
 
@@ -52,6 +57,16 @@ public class StatsDisplay extends UiPart<Stage> {
         super(FXML, root);
         pieChart.setLabelsVisible(false);
         pieChart.setLegendSide(Side.RIGHT);
+        getRoot().setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                onStatsExit.run();
+            }
+        });
+    }
+
+    public void setStatsCloseCommand(Runnable onStatsExit) {
+        this.onStatsExit = onStatsExit;
     }
 
     /**
