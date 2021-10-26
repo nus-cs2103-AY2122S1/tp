@@ -48,7 +48,7 @@ public class StudentBuilder {
         studentId = studentToCopy.getStudentId();
         classId = studentToCopy.getClassId();
         email = studentToCopy.getEmail();
-        labResultList = studentToCopy.getLabResultList();
+        labResultList = studentToCopy.getLabList();
     }
 
     /**

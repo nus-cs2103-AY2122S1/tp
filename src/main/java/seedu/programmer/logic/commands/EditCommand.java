@@ -49,6 +49,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError.";
+    public static final String MESSAGE_INVALID_LAB_NUMBER = "The lab does not exist!";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -102,18 +103,23 @@ public class EditCommand extends Command {
         if (updatedLab != null) {
             updatedResult = editStudentDescriptor.getResult().orElse(null);
             int labNum = updatedLab.getLabNum();
-            Double currTotalScore = studentToEdit.getLab(labNum - 1).getTotalScore();
+            Double currTotalScore;
+            try {
+                currTotalScore = studentToEdit.getLab(labNum).getTotalScore();
+            } catch (NullPointerException e) { //when getLab does not find anything
+                throw new CommandException(MESSAGE_INVALID_LAB_NUMBER);
+            }
             updatedLab.updateTotal(currTotalScore);
         }
 
         if (updatedLab != null && updatedResult != null) {
             System.out.println(updatedResult);
-            studentToEdit.editLabResult(updatedLab, updatedResult);
-            ObservableList<Lab> updatedList = studentToEdit.getLabResultList();
+            studentToEdit.editLabScore(updatedLab, updatedResult);
+            ObservableList<Lab> updatedList = studentToEdit.getLabList();
             return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail, updatedList);
         } else {
             return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail,
-                    studentToEdit.getLabResultList());
+                    studentToEdit.getLabList());
         }
     }
 

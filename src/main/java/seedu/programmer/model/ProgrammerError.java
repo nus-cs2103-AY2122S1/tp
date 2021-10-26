@@ -25,6 +25,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      */
     {
         students = new UniqueStudentList();
+
     }
 
     public ProgrammerError() {}
@@ -124,7 +125,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
 
     @Override
     public ObservableList<Lab> showLabResultList(Student target) {
-        return target.getLabResultList();
+        return target.getLabList();
     }
 
     @Override

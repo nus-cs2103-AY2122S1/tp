@@ -47,10 +47,9 @@ class JsonAdaptedStudent {
         studentId = source.getStudentIdValue();
         classId = source.getClassIdValue();
         email = source.getEmailValue();
-        //todo: for test of show feature only
-        if (source.getLabResultList() != null) {
+        if (source.getLabList() != null) {
             labResultList = new ArrayList<>();
-            labResultList.addAll(source.getLabResultList());
+            labResultList.addAll(source.getLabList());
         }
     }
 
@@ -94,7 +93,6 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
         Student student = new Student(modelName, modelStudentId, modelClassId, modelEmail);
-        //todo: for test of show feature only
         student.setLabResultRecord(labResultList);
         return student;
     }
