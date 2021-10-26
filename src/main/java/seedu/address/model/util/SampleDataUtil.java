@@ -89,5 +89,4 @@ public class SampleDataUtil {
     public static Participation getDefaultParticipation() {
         return new Participation();
     }
-    
 }
