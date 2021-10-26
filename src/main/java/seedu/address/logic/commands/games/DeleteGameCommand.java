@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.games;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_DELETE;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -13,10 +15,10 @@ import seedu.address.model.game.GameId;
 
 public class DeleteGameCommand extends Command {
     public static final String COMMAND_WORD = "--delete";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the game identified by the game id"
-            + ".\n"
-            + "Parameters: GAME_ID (must be an existing game id)\n"
-            + "Example: " + COMMAND_WORD + " CSGO";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_GAME + " " + FLAG_DELETE + "GAME_ID\n"
+            + "Example: "
+            + CMD_GAME + " " + FLAG_DELETE + "CSGO";
     public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game: %1$s";
 
     private GameId gameToDeleteId;

@@ -1,6 +1,9 @@
 package seedu.address.logic.parser.friends;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LINK;
+import static seedu.address.logic.parser.CliSyntax.FLAG_USERNAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -18,7 +21,7 @@ class LinkFriendCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsLinkCommand() {
-        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " Draco -g CSGO -u GoldNova";
+        String userInput = " " + FLAG_LINK + "Draco " + FLAG_GAME + "CSGO " + FLAG_USERNAME + "GoldNova";
         FriendId friendId = new FriendId("Draco");
         GameId gameId = new GameId("CSGO");
         UserName userName = new UserName("GoldNova");
@@ -27,7 +30,7 @@ class LinkFriendCommandParserTest {
 
     @Test
     public void parse_validArgsInDifferentOrder_returnsLinkCommand() {
-        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " Draco -g CSGO -u GoldNova";
+        String userInput = " " + FLAG_LINK + "Draco " + FLAG_USERNAME + "GoldNova " + FLAG_GAME + "CSGO";
         FriendId friendId = new FriendId("Draco");
         GameId gameId = new GameId("CSGO");
         UserName userName = new UserName("GoldNova");
@@ -36,7 +39,7 @@ class LinkFriendCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldsMissing_failure() {
-        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " -g CSGO -u SmurfLord";
+        String userInput = " " + FLAG_LINK + "" + FLAG_GAME + "CSGO " + FLAG_USERNAME + "SmurfLord";
         assertParseFailure(parser, userInput, FriendId.MESSAGE_EMPTY_FRIEND_ID);
     }
 

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser.friends;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_UNLINK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -18,7 +20,7 @@ public class UnlinkFriendCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsUnlinkFriendCommand() {
-        String userInput = " " + UnlinkFriendCommand.COMMAND_WORD + " Draco -g CSGO";
+        String userInput = " " + FLAG_UNLINK + "Draco " + FLAG_GAME + "CSGO";
         FriendId friendId = new FriendId("Draco");
         GameId gameId = new GameId("CSGO");
         assertParseSuccess(parser, userInput, new UnlinkFriendCommand(friendId, gameId));
@@ -26,7 +28,7 @@ public class UnlinkFriendCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String userInput = " " + UnlinkFriendCommand.COMMAND_WORD + " Draco";
+        String userInput = " " + FLAG_UNLINK + "Draco";
         assertParseFailure(parser, userInput, invalidCommandFormatMessage);
     }
 

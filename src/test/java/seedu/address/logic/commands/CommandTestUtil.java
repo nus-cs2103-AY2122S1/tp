@@ -52,8 +52,6 @@ public class CommandTestUtil {
     public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;
     public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + VALID_NAME_BOB;
-    public static final String GAME_DESC_AMY = " " + FLAG_ADD + VALID_GAME_ID_APEX_LEGENDS;
-    public static final String GAME_DESC_BOB = " " + FLAG_ADD + VALID_GAME_ID_CSGO;
 
     public static final String GAME_DESC_CSGO = " " + FLAG_ADD + CSGO.gameId;
     public static final String GAME_DESC_VALORANT = " " + FLAG_ADD + VALORANT.gameId;

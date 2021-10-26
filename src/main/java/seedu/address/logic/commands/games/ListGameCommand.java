@@ -1,6 +1,9 @@
 package seedu.address.logic.commands.games;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GET;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST;
 
 import java.util.function.Predicate;
 
@@ -19,14 +22,12 @@ public class ListGameCommand extends Command {
 
     public static final String COMMAND_WORD = "--list";
 
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_GAME + " " + FLAG_LIST + "[KEYWORDS]\n"
+            + "Example: "
+            + CMD_GAME + " " + FLAG_GET + "Valorant";
     public static final String MESSAGE_SUCCESS_PREPEND = "Listed all games";
-
     public static final String MESSAGE_UNKNOWN_PREDICATE = "Unknown search filter entered";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all games whose id contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: = --list [KEYWORD] \n"
-            + "Example: " + COMMAND_WORD + "Valorant";
 
     private final Predicate<Game> predicate;
 
