@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
@@ -48,7 +49,6 @@ public class PrefixMapper {
     private static final Function<Client, LastMet> GET_LASTMET = Client::getLastMet;
     private static final Function<Client, NextMeeting> GET_NEXTMEETING = Client::getNextMeeting;
     private static final Function<Client, CurrentPlan> GET_CURRENTPLAN = Client::getCurrentPlan;
-    private static final Function<Client, Set<Tag>> GET_TAGS = Client::getTags;
 
     // EditClientDescriptor setter methods
     private static final BiConsumer<EditClientDescriptor, Name> EDIT_SET_NAME = EditClientDescriptor::setName;
@@ -111,11 +111,11 @@ public class PrefixMapper {
             EDIT_SET_NEXTMEETING, PARSE_NEXTMEETING, "Next Meeting");
     private static final PrefixMapperElement<CurrentPlan> PME_CURRENTPLAN = new PrefixMapperElement<>(GET_CURRENTPLAN,
             EDIT_SET_CURRENTPLAN, PARSE_CURRENTPLAN, "Current Plan");
-    private static final PrefixMapperElement<Set<Tag>> PME_TAG = new PrefixMapperElement<>(GET_TAGS, EDIT_SET_TAGS,
-            null, "Tag");
+    private static final PrefixMapperElement<Tag> PME_TAG = new PrefixMapperElement<>(null,
+            null, null, "Tag");
 
     // Maps prefix with their respective functions
-    private static final Map<Prefix, PrefixMapperElement<?>> PREFIX_MAP = Map.ofEntries(
+    private static final Map<Prefix, PrefixMapperElement<? extends Comparable<?>>> PREFIX_MAP = Map.ofEntries(
             Map.entry(PREFIX_CLIENTID, PME_CLIENTID),
             Map.entry(PREFIX_NAME, PME_NAME),
             Map.entry(PREFIX_PHONE, PME_PHONE),
@@ -129,24 +129,28 @@ public class PrefixMapper {
             Map.entry(PREFIX_TAG, PME_TAG)
     );
 
-    public static Function<Client, ?> getAttributeFunction(Prefix prefix) {
-        return PREFIX_MAP.get(prefix).getAttributeFunction;
-    }
-
     public static String getName(Prefix prefix) {
         return PREFIX_MAP.get(prefix).name;
     }
 
-    public static BiConsumer<EditClientDescriptor, String> parseAndEditSet(Prefix prefix) {
+    public static Function<Client, ? extends Comparable<?>> getAttributeFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).getAttributeFunction;
+    }
+
+    public static BiConsumer<EditClientDescriptor, String> parseAndEditSetFunction(Prefix prefix) {
         return PREFIX_MAP.get(prefix).parseAndEditSet();
     }
+
+    public static BiFunction<Client, Client, Integer> compareFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).compareFunction();
+    }
+
 
     /**
      * Wrapper class to wrap the different function related to an attribute
      */
-    private static class PrefixMapperElement<T> {
+    private static class PrefixMapperElement<T extends Comparable<T>> {
         private final Function<Client, T> getAttributeFunction;
-
         private final BiConsumer<EditClientDescriptor, T> editSetFunction;
         private final Function<String, T> parseFunction;
         private final String name;
@@ -166,6 +170,13 @@ public class PrefixMapper {
         private BiConsumer<EditClientDescriptor, String> parseAndEditSet() {
             return (editClientDescriptor, s) ->
                     editSetFunction.accept(editClientDescriptor, parseFunction.apply(s));
+        }
+
+        /**
+         * Returns an integer determined by the compareTo method based on the attribute of the two {@code Client}
+         */
+        private BiFunction<Client, Client, Integer> compareFunction() {
+            return (x, y) -> getAttributeFunction.apply(x).compareTo(getAttributeFunction.apply(y));
         }
 
     }

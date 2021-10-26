@@ -11,8 +11,11 @@ import static seedu.address.commons.util.StringUtil.parseToLocalTime;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
-public class NextMeeting implements OptionalNonStringBasedField {
+import org.jetbrains.annotations.NotNull;
+
+public class NextMeeting implements OptionalNonStringBasedField, Comparable<NextMeeting> {
 
     public static final String DATE_MESSAGE_CONSTRAINTS = "Next meeting date should be in the form of Day-Month-Year, "
             + "where Day, month and year should be numerical values.";
@@ -132,5 +135,19 @@ public class NextMeeting implements OptionalNonStringBasedField {
             && location.equals(((NextMeeting) other).location)
                 && ((withWho == null && ((NextMeeting) other).withWho == null)
                 || withWho.equals(((NextMeeting) other).withWho)));
+    }
+
+    @Override
+    public int compareTo(@NotNull NextMeeting o) {
+        LocalDate tLD = Optional.ofNullable(this.date).orElse(LocalDate.MAX);
+        LocalDate oLD = Optional.ofNullable(o.date).orElse(LocalDate.MAX);
+        int compareDate = tLD.compareTo(oLD);
+        if (compareDate != 0) {
+            return compareDate;
+        }
+        int compareStartTime = this.startTime.compareTo(o.startTime);
+        int compareEndTime = this.endTime.compareTo(o.endTime);
+
+        return compareStartTime != 0 ? compareStartTime : compareEndTime;
     }
 }

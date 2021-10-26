@@ -6,10 +6,13 @@ import static seedu.address.commons.util.StringUtil.isValidDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+
+import org.jetbrains.annotations.NotNull;
 
 import seedu.address.commons.util.StringUtil;
 
-public class LastMet implements OptionalNonStringBasedField {
+public class LastMet implements OptionalNonStringBasedField, Comparable<LastMet> {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
             + "where Day, month and year should be numerical values.";
 
@@ -79,5 +82,12 @@ public class LastMet implements OptionalNonStringBasedField {
             return 0;
         }
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(@NotNull LastMet o) {
+        LocalDate tLD = Optional.ofNullable(this.value).orElse(LocalDate.MAX);
+        LocalDate oLD = Optional.ofNullable(o.value).orElse(LocalDate.MAX);
+        return tLD.compareTo(oLD);
     }
 }
