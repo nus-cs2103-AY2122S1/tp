@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CALL_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CASE_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOME_ADDRESS_BOB;
@@ -33,7 +34,7 @@ public class PersonTest {
         // same case number, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withHomeAddress(VALID_HOME_ADDRESS_BOB).build();
+                .withHomeAddress(VALID_HOME_ADDRESS_BOB).withCallStatus(VALID_CALL_STATUS_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different case number, all other attributes same -> returns false
@@ -101,6 +102,10 @@ public class PersonTest {
 
         // different nextOfKinAddress -> returns false
         editedAlice = new PersonBuilder(ALICE).withNextOfKinAddress(VALID_NEXT_OF_KIN_ADDRESS_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different call status -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCallStatus("1 true").build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

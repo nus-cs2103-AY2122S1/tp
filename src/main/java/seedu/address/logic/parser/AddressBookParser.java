@@ -12,9 +12,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FCallCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SCallCommand;
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.SessionCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -69,6 +73,18 @@ public class AddressBookParser {
 
         case TShiftCommand.COMMAND_WORD:
             return new TShiftCommandParser().parse(arguments);
+
+        case FCallCommand.COMMAND_WORD:
+            return new FCallCommandParser().parse(arguments);
+
+        case SCallCommand.COMMAND_WORD:
+            return new SCallCommandParser().parse(arguments);
+
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommand();
+
+        case SessionCommand.COMMAND_WORD:
+            return new SessionCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
