@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.member.MaddCommand;
 import seedu.address.logic.commands.member.MdelCommand;
 import seedu.address.logic.commands.member.MeditCommand;
 import seedu.address.logic.commands.member.MeditCommand.EditMemberDescriptor;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.member.MfindCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.member.MlistCommand;
-import seedu.address.logic.commands.member.MaddCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
 import seedu.address.logic.commands.task.TlistCommand;
@@ -103,7 +103,7 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(MlistCommand.COMMAND_WORD) instanceof MlistCommand);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MlistCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(MlistCommand.COMMAND_WORD + " 3"));
+            -> parser.parseCommand(MlistCommand.COMMAND_WORD + " 3"));
     }
 
     @Test

@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.module.member.Member;
 
 /**
- * Lists all tasks of the user in the address book.
+ * Lists all tasks of the user in the Ailurus.
  */
 public class TlistCommand extends Command {
     public static final String COMMAND_WORD = "tlist";

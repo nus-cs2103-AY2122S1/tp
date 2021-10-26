@@ -12,7 +12,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EdeleteCommand object
+ * Parses input arguments and creates a new EdelCommand object
  */
 public class EdelCommandParser implements Parser<EdelCommand> {
 

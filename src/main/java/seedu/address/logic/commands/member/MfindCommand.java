@@ -10,7 +10,7 @@ import seedu.address.model.module.NameContainsKeywordsPredicate;
 import seedu.address.model.module.member.Member;
 
 /**
- * Finds and lists all members in address book whose name contains any of the argument keywords.
+ * Finds and lists all members in Ailurus whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class MfindCommand extends Command {

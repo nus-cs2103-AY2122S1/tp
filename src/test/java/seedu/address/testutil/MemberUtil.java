@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.member.MeditCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.member.MaddCommand;
+import seedu.address.logic.commands.member.MeditCommand.EditMemberDescriptor;
 import seedu.address.model.module.member.Member;
 import seedu.address.model.module.member.position.Position;
 

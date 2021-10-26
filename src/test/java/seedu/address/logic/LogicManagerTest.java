@@ -18,10 +18,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.member.MaddCommand;
 import seedu.address.logic.commands.member.MdelCommand;
 import seedu.address.logic.commands.member.MlistCommand;
-import seedu.address.logic.commands.member.MaddCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;

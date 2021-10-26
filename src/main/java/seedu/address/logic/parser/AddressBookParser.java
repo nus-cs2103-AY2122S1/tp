@@ -7,23 +7,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.member.MdelCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.event.EaddCommand;
 import seedu.address.logic.commands.event.EdelCommand;
-import seedu.address.logic.commands.member.MeditCommand;
+import seedu.address.logic.commands.event.EeditCommand;
 import seedu.address.logic.commands.event.ElistCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.member.MfindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.member.MlistCommand;
+import seedu.address.logic.commands.event.EmaddCommand;
+import seedu.address.logic.commands.event.EmarkAllCommand;
+import seedu.address.logic.commands.event.EmarkCommand;
+import seedu.address.logic.commands.event.EmdelCommand;
+import seedu.address.logic.commands.event.EunmarkCommand;
 import seedu.address.logic.commands.member.MaddCommand;
+import seedu.address.logic.commands.member.MdelCommand;
+import seedu.address.logic.commands.member.MeditCommand;
+import seedu.address.logic.commands.member.MfindCommand;
+import seedu.address.logic.commands.member.MlistCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
 import seedu.address.logic.commands.task.TlistCommand;
 import seedu.address.logic.parser.event.EaddCommandParser;
 import seedu.address.logic.parser.event.EdelCommandParser;
+import seedu.address.logic.parser.event.EeditCommandParser;
+import seedu.address.logic.parser.event.EmaddCommandParser;
+import seedu.address.logic.parser.event.EmarkAllCommandParser;
+import seedu.address.logic.parser.event.EmarkCommandParser;
+import seedu.address.logic.parser.event.EmdelCommandParser;
+import seedu.address.logic.parser.event.EunmarkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.member.*;
+import seedu.address.logic.parser.member.MaddCommandParser;
+import seedu.address.logic.parser.member.MdelCommandParser;
+import seedu.address.logic.parser.member.MeditCommandParser;
+import seedu.address.logic.parser.member.MfindCommandParser;
+import seedu.address.logic.parser.member.MlistCommandParser;
 import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.logic.parser.task.TdelCommandParser;
 import seedu.address.logic.parser.task.TlistCommandParser;
@@ -82,8 +98,26 @@ public class AddressBookParser {
         case EdelCommand.COMMAND_WORD:
             return new EdelCommandParser().parse(arguments);
 
+        case EeditCommand.COMMAND_WORD:
+            return new EeditCommandParser().parse(arguments);
+
         case ElistCommand.COMMAND_WORD:
             return new ElistCommand();
+
+        case EmaddCommand.COMMAND_WORD:
+            return new EmaddCommandParser().parse(arguments);
+
+        case EmdelCommand.COMMAND_WORD:
+            return new EmdelCommandParser().parse(arguments);
+
+        case EmarkCommand.COMMAND_WORD:
+            return new EmarkCommandParser().parse(arguments);
+
+        case EunmarkCommand.COMMAND_WORD:
+            return new EunmarkCommandParser().parse(arguments);
+
+        case EmarkAllCommand.COMMAND_WORD:
+            return new EmarkAllCommandParser().parse(arguments);
 
         case TaddCommand.COMMAND_WORD:
             return new TaddCommandParser().parse(arguments);

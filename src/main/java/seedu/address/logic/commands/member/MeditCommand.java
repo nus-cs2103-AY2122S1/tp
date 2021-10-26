@@ -51,7 +51,7 @@ public class MeditCommand extends Command {
 
     public static final String MESSAGE_EDIT_MEMBER_SUCCESS = "Edited Member: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the Ailurus.";
 
     private final Index index;
     private final EditMemberDescriptor editMemberDescriptor;

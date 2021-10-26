@@ -28,6 +28,7 @@ public class MdelCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, CliSyntax.PREFIX_MEMBER_ID + "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MdelCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, CliSyntax.PREFIX_MEMBER_ID + "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MdelCommand.MESSAGE_USAGE));
     }
 }

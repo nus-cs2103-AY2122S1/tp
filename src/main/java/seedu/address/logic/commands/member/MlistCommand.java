@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -12,9 +15,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.event.Event;
 import seedu.address.model.module.member.Member;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * Lists all members in the address book to the user.
