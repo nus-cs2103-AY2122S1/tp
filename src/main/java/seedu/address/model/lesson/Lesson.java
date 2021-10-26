@@ -44,7 +44,7 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     public Lesson(Date date, TimeRange timeRange, Subject subject,
                 Set<Homework> homework, LessonRates rates, OutstandingFees fees) {
-        requireAllNonNull(date, timeRange, subject, homework);
+        requireAllNonNull(date, timeRange, subject, homework, rates, fees);
         this.startDate = date;
         this.timeRange = timeRange;
         this.subject = subject;
@@ -67,14 +67,6 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public boolean hasStarted() {
         return startDate.isOver();
-    }
-
-    /**
-     * Default false for recurring lessons until EndDateTime is added.
-     * Meant for MakeupLessons to override.
-     */
-    public boolean hasEnded() {
-        return false;
     }
 
     public Subject getSubject() {
@@ -132,6 +124,13 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @return True if and only if lessons clash.
      */
     public abstract boolean isClashing(Lesson otherLesson);
+
+
+    /**
+     * Returns false by default for recurring lessons until EndDateTime is added.
+     * Meant for MakeupLessons to override.
+     */
+    public abstract boolean hasEnded();
 
     /**
      * Check if both lessons have the same data fields.

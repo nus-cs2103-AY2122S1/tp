@@ -15,6 +15,7 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.LessonDeleteCommand;
 import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -130,6 +131,8 @@ public class CommandSummary {
                         LessonAddCommand.COMMAND_EXAMPLE_RECURRING_LESSON),
                 new CommandSummary(LessonEditCommand.COMMAND_ACTION, LessonEditCommand.COMMAND_FORMAT,
                         LessonEditCommand.COMMAND_EXAMPLE),
+                new CommandSummary(PaidCommand.COMMAND_ACTION, PaidCommand.COMMAND_FORMAT,
+                        PaidCommand.COMMAND_EXAMPLE),
                 new CommandSummary(LessonDeleteCommand.COMMAND_ACTION, LessonDeleteCommand.COMMAND_FORMAT,
                         LessonDeleteCommand.COMMAND_EXAMPLE),
                 new CommandSummary(ViewCommand.COMMAND_ACTION, ViewCommand.COMMAND_FORMAT,

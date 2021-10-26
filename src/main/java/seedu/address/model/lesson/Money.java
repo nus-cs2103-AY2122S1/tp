@@ -38,7 +38,6 @@ public class Money {
     }
 
     /**
-     * This is taken exactly from implementation of {@code Fee#formateFee(String fee)}
      * Removes leading zeroes and postfixes decimal places.
      *
      * @param value A valid value that represents Money.

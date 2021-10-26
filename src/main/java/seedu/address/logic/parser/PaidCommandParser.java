@@ -39,6 +39,9 @@ public class PaidCommandParser implements Parser<PaidCommand> {
 
         Money payment = ParserUtil.parseMoney(argumentMultimap.getValue(PREFIX_PAID_AMOUNT).get());
 
-        return new PaidCommand(indices[0], indices[1], payment);
+        Index studentIndex = indices[0];
+        Index lessonIndex = indices[1];
+
+        return new PaidCommand(studentIndex, lessonIndex, payment);
     }
 }

@@ -31,7 +31,7 @@ public class LastUpdatedDate {
     }
 
     /**
-     * Constructs an {@code LastAddedDate}.
+     * Constructs a {@code LastAddedDate}.
      */
     public LastUpdatedDate(String lastUpdated) {
         dateTime = LocalDateTime.parse(lastUpdated, FORMATTER);
@@ -39,14 +39,14 @@ public class LastUpdatedDate {
     }
 
     /**
-     * Return immutable LastUpdatedDate.
+     * Returns immutable LastUpdatedDate.
      */
     public LastUpdatedDate getLastUpdatedDate() {
         return new LastUpdatedDate(value);
     }
 
     /**
-     * Returns if a given string is a valid last added date.
+     * Returns true if a given string is a valid last added date.
      *
      * @param test The string to be tested.
      */

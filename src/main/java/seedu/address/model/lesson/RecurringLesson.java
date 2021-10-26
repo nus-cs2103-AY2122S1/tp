@@ -22,6 +22,11 @@ public class RecurringLesson extends Lesson {
         super(date, timeRange, subject, homework, rates, fees);
     }
 
+    @Override
+    public boolean hasEnded() {
+        return false;
+    }
+
     /**
      * Check if the Lesson object is recurring.
      *
