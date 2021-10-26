@@ -127,8 +127,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Insurances} of the {@code Insurance} that we are building.
      */
-    public PersonBuilder withInsurances(String... insurances) {
-        this.insurances = SampleDataUtil.getInsuranceSet(insurances);
+    public PersonBuilder withInsurances(Insurance... insurances) {
+        this.insurances = new HashSet<Insurance>(Arrays.asList(insurances));
         return this;
     }
     /**

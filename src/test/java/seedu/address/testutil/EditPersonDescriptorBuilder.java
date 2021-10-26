@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,7 +17,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -101,9 +102,8 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code insurances} into a {@code Set<Insurance>} and set it to the
      * {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withInsurances(String... insurances) {
-        Set<Insurance> insuranceSet = Stream.of(insurances)
-                .map(SampleDataUtil::ofValidInsurance).collect(Collectors.toSet());
+    public EditPersonDescriptorBuilder withInsurances(Insurance... insurances) {
+        Set<Insurance> insuranceSet = new HashSet<>(Arrays.asList(insurances));
         descriptor.setInsurances(insuranceSet);
         return this;
     }

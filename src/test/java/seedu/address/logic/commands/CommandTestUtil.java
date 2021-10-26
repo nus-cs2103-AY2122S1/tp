@@ -24,6 +24,8 @@ import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.Description;
 import seedu.address.model.claim.Status;
 import seedu.address.model.claim.Title;
+import seedu.address.model.person.Insurance;
+import seedu.address.model.person.InsuranceType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -45,8 +47,16 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_INSURANCE_LIFE = "Life";
-    public static final String VALID_INSURANCE_HEALTH = "Health";
+
+    public static final String VALID_INSURANCE_TYPE_AMY = "Life";
+    public static final String VALID_INSURANCE_BRAND_AMY = "NTUC";
+    public static final String VALID_INSURANCE_TYPE_BOB = "Health";
+    public static final String VALID_INSURANCE_BRAND_BOB = "Prudential";
+    public static final Insurance VALID_INSURANCE_AMY = new Insurance(
+            InsuranceType.LIFE, VALID_INSURANCE_BRAND_AMY);
+    public static final Insurance VALID_INSURANCE_BOB = new Insurance(
+            InsuranceType.HEALTH, VALID_INSURANCE_BRAND_BOB);
+
     public static final String VALID_NOTE_AMY = "Has diabetes";
     public static final String VALID_NOTE_BOB = "Has chronic back pain";
 
