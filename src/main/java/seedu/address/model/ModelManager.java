@@ -138,13 +138,6 @@ public class ModelManager implements Model {
         return addressBook.getAssessment(assessmentToMatch);
     }
 
-    //TODO: delete
-    @Override
-    public Group getGroup(Group assessmentToMatch) {
-        requireNonNull(assessmentToMatch);
-        return addressBook.getGroup(assessmentToMatch);
-    }
-
     @Override
     public void addAssessment(Assessment assessment) {
         addressBook.addAssessment(assessment);
