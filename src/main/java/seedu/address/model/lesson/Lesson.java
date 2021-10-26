@@ -69,6 +69,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         return startDate.isOver();
     }
 
+    /**
+     * Default false for recurring lessons until EndDateTime is added.
+     * Meant for MakeupLessons to override.
+     */
     public boolean hasEnded() {
         return false;
     }
