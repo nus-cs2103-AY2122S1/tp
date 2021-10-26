@@ -33,6 +33,7 @@
                <children>
               <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS">
                 <Menu mnemonicParsing="false" text="File">
+                  <MenuItem fx:id="profileMenuItem" mnemonicParsing="false" onAction="#handleUserProfileWindow" text="Profile" />
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                 </Menu>
                      <Menu mnemonicParsing="false" text="Window">
