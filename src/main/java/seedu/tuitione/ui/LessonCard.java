@@ -15,12 +15,7 @@ import seedu.tuitione.model.lesson.Lesson;
 public class LessonCard extends UiPart<Region> {
 
     private static final String FXML = "LessonListCard.fxml";
-    private static final String STRING_FORMAT_SUBJECT = "📖\tSubject: \t%s";
-    private static final String STRING_FORMAT_GRADE = "🔢\tGrade: \t\t%s";
-    private static final String STRING_FORMAT_DAY = "📅\tDay: \t\t%s";
-    private static final String STRING_FORMAT_TIME = "⏲\tTime: \t\t%s - %s";
-    private static final String STRING_FORMAT_PRICE = "💱\tPrice: \t\t%s";
-    private static final String STRING_FORMAT_SIZE = "😀\tSize: \t\t%d";
+    private static final String STRING_FORMAT_TIME = "%s - %s";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -62,17 +57,15 @@ public class LessonCard extends UiPart<Region> {
         id.setText(displayIndex + ". ");
         lessonCode.setText(lesson.getLessonCode().value);
         lessonCode.setUnderline(true);
-        subject.setText(String.format(STRING_FORMAT_SUBJECT, lesson.getSubject()));
-        grade.setText(String.format(STRING_FORMAT_GRADE, lesson.getGrade().value));
-        dayOfWeek.setText(String.format(
-                STRING_FORMAT_DAY,
-                parseDayToString(lesson.getLessonTime().dayOfWeek)));
+        subject.setText(lesson.getSubject().value);
+        grade.setText(lesson.getGrade().value);
+        dayOfWeek.setText(parseDayToString(lesson.getLessonTime().dayOfWeek));
         time.setText(String.format(
                 STRING_FORMAT_TIME,
                 lesson.getLessonTime().startTime.format(TIME_FORMATTER),
                 lesson.getLessonTime().endTime.format(TIME_FORMATTER)));
-        price.setText(String.format(STRING_FORMAT_PRICE, lesson.getPrice().toString()));
-        numOfStudentsEnrolled.setText(String.format(STRING_FORMAT_SIZE, lesson.getLessonSize()));
+        price.setText(lesson.getPrice().toString());
+        numOfStudentsEnrolled.setText(String.format("%d", lesson.getLessonSize()));
     }
 
     @Override
