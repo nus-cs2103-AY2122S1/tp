@@ -11,6 +11,7 @@ import seedu.address.model.student.Assessment;
 import seedu.address.model.student.AssessmentStatistics;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
+import seedu.address.model.tag.Tag;
 
 /**
  * A UI component that displays information of a {@code Student}.
@@ -69,6 +70,10 @@ public class InfoDisplay extends UiPart<Region> {
         String groupsString = student.getGroups().stream()
                 .map(Group::toString).collect(Collectors.joining(", "));
         info2.setText("Groups: " + groupsString);
+
+        String tagsString = student.getTags().stream()
+                .map(Tag::getTagName).collect(Collectors.joining(", "));
+        info3.setText("Tags: " + tagsString);
     }
 
     /**
@@ -86,7 +91,7 @@ public class InfoDisplay extends UiPart<Region> {
         String percentile25 = reformatStats(statistics.getXPercentile(25));
         String percentile75 = reformatStats(statistics.getXPercentile(75));
 
-        info1.setText("Grade range: " + min + "-" + max);
+        info1.setText("Grade range: " + min + " - " + max);
         info2.setText("Median: " + median);
         info3.setText("Mean: " + mean);
         info4.setText("25th percentile: " + percentile25);
