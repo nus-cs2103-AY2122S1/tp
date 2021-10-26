@@ -77,7 +77,7 @@ public class FeesCalculator implements Calculator {
 
         // make a copy of untouched fields
         Date copiedDate = new Date(lesson.getStartDate().value);
-        TimeRange copiedTimRange = new TimeRange(lesson.getTimeRange().value);
+        TimeRange copiedTimeRange = new TimeRange(lesson.getTimeRange().value);
         Subject copiedSubject = new Subject(lesson.getSubject().subject);
         LessonRates copiedLessonRates = new LessonRates(lesson.getLessonRates().value);
         Set<Homework> copiedHomework = lesson.getHomework() == null
