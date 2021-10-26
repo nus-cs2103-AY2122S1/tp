@@ -15,7 +15,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 1. [Introduction](#1-introduction)
 
    1.1 [What is TutAssistor?](#11-what-is-tutassistor)
-   
+
    1.2 [What can TutAssistor do for you?](#12-what-can-tutassistor-do-for-you)
    
    1.3 [How to use this guide?](13-how-to-use-this-guide)
@@ -26,10 +26,13 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
   
    2.2 [Try it yourself!](#22-try-it-yourself)
 
-
 3. [Features](#3-features)
 
    3.1 [Add student/class](#31-add-studenttuition-class)
+
+    &nbsp; 3.1.1 [Add student](#311-adding-a-student)
+
+    &nbsp; 3.1.2 [Add class](#311-adding-a-class)
 
    3.2 [View student/class](#32-view-studenttuition-class)
 
@@ -61,7 +64,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    
    3.16 [Track payment `coming in v2.0`](#316-track-payment-coming-in-v20)
 
-4. [Additional Command Format Information](#4-additional-command-format-information)
+5. [Additional Command Format Information](#4-additional-command-format-information)
    
    4.1 [Name](#41-name)
    
@@ -73,8 +76,8 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 
    4.5 [Index](#45-index)
 
-5. [FAQ](#5-faq)
-6. [Command Summary](#6-command-summary)
+6. [FAQ](#5-faq)
+7. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -82,17 +85,29 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 ## 1 Introduction
 
 ### 1.1 What is TutAssistor?
-TutAssistor is a ***desktop app intended for private tutors to manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
+Welcome to the user guide of TutAssistor!
 
-The CLI is...
+Are you a private tutor struggling to keep track of all your classes and students? Do you spend 
+countless hours on administrative duties such as scheduling classes and updating numerous students' records?
 
-Don't worry if
+If the above situation sounds familiar to you, fret not, TutAssistor is here to save the day!
+
+TutAssistor is a ***desktop app intended for private tutors like yourself to 
+manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
+
+TutAssistor uses Command Line Interface (CLI); this means that you operate the application by typing commands into a Command Box. 
+If you are a fast typer, you can operate the application more easily and faster than
+Graphical User Interface (GUI) applications; GUI applications allow users to interact 
+with the application via graphical icons such as buttons.
+
+You do not have to worry at all even if you are new to CLI applications as this user guide will take you through step by step on how various features of the NUSMaze can be utilised, all geared towards providing the best possible experience to the user.
 
 ### 1.2 What can TutAssistor do for you?
 
 TutAssistor provides an all-in-one platform for you to manage information regarding your students and lessons stress-free and efficiently. In the latest version, we offer you the ability to: 
 
 * Track student details
+* Keep student details up-to-date
 * Resolve conflicting tuition timeslots
 * Efficiently make notes for each lesson
 
@@ -108,17 +123,17 @@ The features in this guide are formatted with the following conventions:
 * **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
 
 
-#### Icons used in this guide
+#### General symbols and syntax used in this guide
 
 For additional information accompanying each segment, look for the following icons:
 
-&emsp; :information_source: precedes information that are useful to remember. 
+&emsp; :information_source: | precedes information that are useful to remember
 
-&emsp; :bulb: precedes information that serve as tips for a feature.
+&emsp; :bulb: | precedes information that serve as tips for a feature
 
-&emsp; :warning: precedes information as an important warning.
+&emsp; :warning: | precedes information as an important warning.
 
-Jump right in to the next section [2 Get Started](#2-get-started) to get you started!
+Jump right in to the next section: [2 Get Started](#2-get-started) to get you started!
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -161,7 +176,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing h
 
 Some example commands you can try:
 
-* `view 1`: Views the 1st student show in the student list.
+* `view 1`: Views the first student show in the student list.
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a student named `John Doe` to the TutAssistor.
 * `addtoclass si/3 tc/1`: Adds the 3rd student in the student list to the 1st class in the tuition class list.
 * `deleteclass 2`: Deletes the 2nd class shown in the tuition class list.
@@ -201,8 +216,7 @@ Refer to the [Additional Command Format Information](#4-additional-command-forma
 </div>
 
 ### 3.1 Add student/tuition class
-
-#### Adding a student: `add` | `a`
+#### 3.1.1 Adding a student: `add` | `a`
 Adds a student with the specified information such as name, phone number, etc. 
 > [Read more on the requirements of the various parameters used.](#4-additional-command-format-information)
 
@@ -217,7 +231,7 @@ add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks
 ```
 
-#### Adding a tuition class: `addclass` | `ac`
+#### 3.1.2 Adding a tuition class: `addclass` | `ac`
 Adds a tuition class with a set limit of students at a specified [timeslot](#44-timeslot). TutAssistor will notify you if there are any conflicting timeslots.
 
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
@@ -240,7 +254,7 @@ ac n/Math l/8 ts/Mon 11:00-14:00 r/Quiz on final lesson
 ### 3.2 View student/tuition class
 Displays the details the specified student or class in the information page.
 
-#### Viewing a student: `student` | `vs`
+#### 3.2.1 Viewing a student: `student` | `vs`
 Format: `student INDEX`
 
 Example:
@@ -254,7 +268,7 @@ vs 2
 ![view student](images/student_view.png)
 *Displaying a student's details in the information page.*
 
-#### Viewing a tuition class: `class` | `vc`
+#### 3.2.2 Viewing a tuition class: `class` | `vc`
 Format: `class INDEX`
 
 Example:
@@ -544,7 +558,7 @@ Exits the program.
 Format: `exit`
 
 ### 3.16 Track payment `coming in v2.0`
-_Detais coming soon..._
+_Details coming soon..._
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -603,6 +617,9 @@ For example, if the list consists of `5` students/tuition classes:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.
 
+**Q**: Do I lose all the details of classes and students when I close the application?<br>
+**A**: All of your data is stored locally in a file under the data folder and will be loaded upon the next entry,
+hence you do not lose any data.
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -610,7 +627,7 @@ For example, if the list consists of `5` students/tuition classes:
 
 Action | Format | Shortcut
 -------|--------|---------
-***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
+[**Add Student**](#311-adding-a-student) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
 ***Add Class*** | `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]` | `ac`
 ***View Student*** | `student INDEX` | `vs`
 ***View Class*** | `class INDEX` | `vc`
