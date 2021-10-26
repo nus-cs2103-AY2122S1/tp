@@ -480,13 +480,9 @@
     -fx-background-color: derive(-fx-primary-color, 20%);
     -fx-padding: 20 20 20 20;
 }
-#barChart.chart {
-    -fx-background-color: derive(-fx-primary-color, 20%);
-    -fx-padding: 20 20 20 20;
-}
 
-.chart {
-    -fx-background-color: derive(-fx-primary-color, 20%);
+#barChart.chart {
+    -fx-background-color: derive(-fx-primary-color, 20%);;
     -fx-padding: 20 20 20 20;
 }
 
@@ -503,7 +499,7 @@ chart-pie-label-line {
 
 .chart-legend {
     -fx-background: transparent;
-    -fx-alignment: CENTER;
+    -fx-alignment: right;
     -fx-stroke: WHITE;
     -fx-text-fill: WHITE;
 
@@ -514,6 +510,16 @@ chart-pie-label-line {
 .chart-title {
     -fx-text-fill: white;
     -fx-alignment: CENTER;
+}
+
+.axis {
+    -fx-font-size: 1.4em;
+    -fx-tick-label-fill: white;
+    -fx-tick-label-font-size: 10pt;
+    -fx-font-family: "Open Sans Regular";
+    -fx-tick-visible: false;
+    -fx-minor-tick-visible: false;
+    -fx-border-color: transparent transparent transparent transparent;
 }
 
 .bar-chart {
@@ -528,14 +534,6 @@ chart-pie-label-line {
 
 .chart-plot-background {
     -fx-background-color: transparent;
-}
-
-.axis {
-    -fx-font-size: 1.4em;
-    -fx-tick-label-fill: white;
-    -fx-tick-label-font-size: 9pt;
-    -fx-font-family: "Open Sans Regular";
-    -fx-minor-tick-visible: false;
 }
 
 .axis-label {
