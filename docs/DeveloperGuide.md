@@ -266,7 +266,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ---------------------------------------- | ------------------------------ | ----------------------------------------------------------------------- |
 | `* * *`  | new user                                 | see usage instructions         | refer to instructions when I forget how to use the app                  |
 | `* * *`  | user                                     | update contacts’ contact details without re-adding that contact | avoid re-entering existing data        |
-| `* * *`  | user                                     | find a person by name          | locate details of persons without having to go through the entire list  |
+| `* * *`  | user                                     | find person(s) by name, phone number, case number, SHN start date or SHN end date          | locate details of person(s) containing keyword(s) in a specified field without having to go through the entire list  |
 | `* * *`  | user                                     | save my contacts               | keep track of their details between sessions                            |
 | `* *`    | experienced user                         | directly adjust my save files  | bypass the CLI for simple bulk tasks                                    |
 | `* * *`  | user                                     | add my contact’s next-of-kin’s information | contact the patient’s next-of-kin should an emergency arise |
@@ -326,28 +326,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: UC03 - Search contacts by name**
+**Use case: UC03 - Find contacts by name, phone number, case number, SHN start date or SHN end date**
 
 **MSS:**
 
-1. User requests to list persons
-2. Track2Gather shows a list of persons
-3. User requests to find a person by name
-4. Track2Gather shows the person with the given name
+1. User requests to list persons.
+2. Track2Gather shows a list of persons.
+3. User requests to find person(s) containing one or more keywords in a specific field.
+4. Track2Gather shows the person(s) containing keyword(s) in the field.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-    
+
     Use case ends.
-* 3a. The given search keyword is invalid.
-  * 3a1. Track2Gather shows an error message.
-    
+* 3a. The given user input is invalid.
+  * 3a1. Track2Gather shows the correct format for sorting.
+
     Use case resumes at step 2.
+* 3b. No person found.
+  * 3b2. Track2Gather tells the user that no person is found.
 
-
+    Use case resumes at step 2.
+  
 **Use case: UC04 - Add a new contact**
 
 **MSS:**
@@ -624,3 +627,34 @@ testers are expected to do more *exploratory* testing.
        Expected: Sample Track2Gather person list will be generated with sample persons' information.
 
 2. _{ more test cases …​ }_
+
+### Finding persons by field
+
+1. Find person(s) while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `find n/Alex Alice`
+      Expected: Only persons whose name contains `Alex` or `Alice` will be shown.
+   
+   3. Test case: `find p/123 234`
+      Expected: Only persons whose phone number starts with `123` or `234` will be shown.
+   
+   4. Test case: `find cn/1 2 3`
+      Expected: Only persons with case number `1` `2` or `3` will be shown.
+   
+   5. Test case: `find cn/-1`
+      Expected: Case number is not entered in the required format. Error details will be shown in the status message.
+   
+   6. Test case: `find sh/start: 2021-01-01 2021-01-02`
+      Expected: Only persons with SHN start date of `2021-01-01` or `2021-01-02` will be shown.
+   
+   7. Test case: `find sh/start: 2021/01/01`
+      Expected: Date is not entered in the required format. Error details will be shown in the status message.
+   
+   8. Test case: `find sh/end: 2021-01-01 2021-01-02`
+      Expected: Only persons with SHN end date of `2021-01-01` or `2021-01-02` will be shown.
+   
+   9. Test case: `find sh/end: 2021-01-01 2021/01/02`
+      Expected: One of the date keywords is not entered in the required format. Error details will be shown in the status message.
+
+2. { more test cases... }

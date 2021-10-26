@@ -32,7 +32,7 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
 
     * **`edit`** : Edit an existing person’s details at the specified index.
    
-    * **`find`** : Find a person by name.
+    * **`find`** : Find a person by name, phone, case number, SHN start date or SHN end date.
 
     * **`tshift`** : Shifts all person's SHN end dates by the specified number of days.
    
@@ -98,20 +98,36 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOM
 Examples:
 * `edit 1 n/Henry Hugh` edits the name of the first person in the list to be `Henry Hugh`
 
-### Finding persons by name: `find`
+### Finding persons by a field: `find`
 
-Finds all persons whose names contain any of the specified keywords and displays them as a list with index numbers.
+Finds person(s) based on the field specified by the user and displays them as a list with index numbers.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+Format: `find FIELD_PREFIX KEYWORD [MORE_KEYWORDS]`
+* Field must be one of `n/`, `p/`, `cn/`, `sh/start:` or `sh/end:`
+* For find by name (`n/`),
+  * search is case-insensitive. e.g `hans` will match `Hans`
+  * full words will be matched e.g. Han will not match Hans
+* For find by phone number (`p/`), phone numbers that starts with one or more keyword(s) will be matched e.g. `123` and `1234` will match `12345678`
+* For find by case number (`cn/`),
+  * search will only match if case number is equal to one or more keyword(s), e.g. `123` will match `123` but will not match `1234`
+  * all keywords must be entered in valid case number formats
+* For find by SHN start date (`sh/start:`),
+  * search will only match if SHN start date is equal to one or more keyword(s), e.g. `2021-01-01` will match `2021-01-01`
+  * all keywords must be entered in valid date formats
+* For find by SHN end date (`sh/end:`), 
+  * search will only match if SHN end date is equal to one or more keyword(s), e.g. `2021-01-02` will match `2021-01-02`
+  * all keywords must be entered in valid date formats
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans` and `2021-01-01 2021-01-02 2021-01-03` will match `2021-01-01`
+* Only one of the following can be searched at a time: name, phone, case number, SHN start date and SHN end date
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
+* `find n/John` will match the following names: `john` and `John Doe` 
+* `find n/alex david` will match the following names: `Alex Yeoh` and `David Li` 
+* `find p/123` will match the following phone numbers: `12345678` and `12387654` 
+* `find cn/1` will match the following case numbers: `111` and `111` 
+* `find sh/start:2021-01-01` will match the following SHN start dates: `2021-01-01` and `2021-01-02` 
+* `find sh/end:2021-01-02` will match the following SHN end dates: `2021-01-01` and `2021-01-02` 
 
 ### Finding persons by name: `tshift`
 
@@ -211,7 +227,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL cn/CASE_NUMBER ha/HOME_ADDRESS [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/ADD_SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g., `add n/Jane p/12345678 e/jane@email.com cn/600204 ha/123 Changi Road #01-100 700123 wa/50 Jurong Road 120050 qa/12 Harbourfront Ring 123012 sh/2021-01-01 2021-01-14 kn/Peter kp/90011234 ka/73 Yishun Drive #10-301 310073`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOME_ADDRESS] [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/ADD_SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g., `edit 1 n/Henry Hugh`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find FIELD_PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake` `find p/123` `find cn/111` `find sh/start:2000-01-01` `find sh/end: 2000-01-02`
 **TShift** | `tshift [PLUS_MINUS_SIGN]DAYS`<br> e.g., `tshift 3`
 **Delete** | `delete [INDEX] [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
 **List** | `list`
