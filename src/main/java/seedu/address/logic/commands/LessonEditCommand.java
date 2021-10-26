@@ -134,7 +134,7 @@ public class LessonEditCommand extends UndoableCommand {
             throws CommandException {
         assert lessonToEdit != null;
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getStartDate());
-        Date updatedEndDate = editLessonDescriptor.getEndDate().orElse(Date.MAX_DATE);
+        Date updatedEndDate = editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate());
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange().orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
@@ -144,7 +144,7 @@ public class LessonEditCommand extends UndoableCommand {
                 .filter(date -> date.isOnRecurringDate(updatedDate, updatedEndDate)).collect(Collectors.toSet());
 
         // lesson before handling cancel and uncancel of dates
-        Lesson lessonBeforeUpdateCancelledDates = editLessonDescriptor.getIsRecurring()
+        Lesson lessonBeforeUpdateCancelledDates = editLessonDescriptor.getIsRecurring() || lessonToEdit.isRecurring()
                 ? new RecurringLesson(updatedDate, updatedEndDate, updatedTimeRange,
                         updatedSubject, updatedHomeworkSet, updatedRate, filteredCancelledDates)
                 : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate,
@@ -308,6 +308,7 @@ public class LessonEditCommand extends UndoableCommand {
          */
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setDate(toCopy.date);
+            setEndDate(toCopy.endDate);
             setTimeRange(toCopy.timeRange);
             setSubject(toCopy.subject);
             setHomeworkSet(toCopy.homeworkSet);

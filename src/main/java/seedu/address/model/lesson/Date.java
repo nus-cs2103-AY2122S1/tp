@@ -85,7 +85,8 @@ public class Date implements Comparable<Date> {
      * @return newDate The date of the same day on the week that has yet to pass.
      */
     public Date updateDate(Set<Date> datesToSkip) {
-        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+        LocalDate laterDate = LocalDate.now().isAfter(getLocalDate()) ? LocalDate.now() : getLocalDate();
+        LocalDate updatedDate = laterDate.with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
 
         while (datesToSkip.contains(new Date(updatedDate.format(FORMATTER)))) { // todo: improve design
             updatedDate = updatedDate.plusWeeks(1);
@@ -120,6 +121,10 @@ public class Date implements Comparable<Date> {
         return localDate.isAfter(other.localDate);
     }
 
+    public boolean isBefore(Date other) {
+        return localDate.isBefore(other.localDate);
+    }
+
     public boolean isSameDayOfWeek(Date other) {
         return localDate.getDayOfWeek().equals(other.getDayOfWeek());
     }
@@ -138,7 +143,7 @@ public class Date implements Comparable<Date> {
             return false;
         }
 
-        if (!recurringEndDate.isAfter(this)) {
+        if (recurringEndDate.isBefore(this)) {
             return false;
         }
 

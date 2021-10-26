@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.calendarfx.model.Interval;
 
 /**
  * Represents a Recurring Lesson in the address book.
@@ -89,7 +88,7 @@ public class RecurringLesson extends Lesson {
         LocalDate laterStart = Collections.max(Arrays.asList(getLocalDate(), other.getLocalDate()));
         LocalDate earlierEnd = Collections.min(Arrays.asList(getEndDate().getLocalDate(),
                 other.getEndDate().getLocalDate()));
-        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEnd);
+        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEnd.plusDays(1)) + 1; // 3 points, 2 interval
 
         Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream().sorted()
                 .takeWhile(date -> date.getLocalDate().compareTo(laterStart) >= 0
