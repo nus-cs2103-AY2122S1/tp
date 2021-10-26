@@ -26,7 +26,7 @@
    - e.g. `addlab -t 1 -ts 20`
 7. Edit Lab records with Lab number and total score for all students
    - allow user to edit existing Lab report title and total score.
-   - `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -tsv <NEW_TOTAL_SCORE>`
+   - `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_TOTAL_SCORE>`
 8. Delete Lab records with Lab number and total score for all students
     - allow user delete an existing Lab report instances.
     - `dellab -t <LAB_NUM>`
