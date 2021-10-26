@@ -26,6 +26,7 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.sort.SortOrder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -254,5 +255,17 @@ public class ParserUtil {
         }
         Collections.sort(availability);
         return new Availability(availability);
+    }
+
+    /**
+     * Parses a {@code String sortOrder} into sortOrder.
+     */
+    public static SortOrder parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim().toLowerCase();
+        if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortOrder);
     }
 }
