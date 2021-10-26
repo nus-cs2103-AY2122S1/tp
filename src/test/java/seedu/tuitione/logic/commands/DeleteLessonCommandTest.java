@@ -6,10 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tuitione.testutil.TypicalGrades.GRADE_S2;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIFTH_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
-import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ import seedu.tuitione.model.ModelManager;
 import seedu.tuitione.model.UserPrefs;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
-import seedu.tuitione.testutil.TypicalTuitione;
+import seedu.tuitione.testutil.TypicalTuition;
 
 public class DeleteLessonCommandTest {
 
@@ -29,7 +30,7 @@ public class DeleteLessonCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalTuitione.getTypicalTuitione(), new UserPrefs());
+        model = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
     }
 
     @Test
@@ -81,8 +82,8 @@ public class DeleteLessonCommandTest {
 
     @Test
     public void execute_deleteLessonWithStudents_success() {
-        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
-        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_SECOND_LESSON);
+        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIFTH_LESSON.getZeroBased());
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIFTH_LESSON);
 
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
 
@@ -104,7 +105,7 @@ public class DeleteLessonCommandTest {
 
         assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
         assertEquals(1, model.getFilteredStudentList()
-                .get(INDEX_SECOND_STUDENT.getZeroBased())
+                .get(INDEX_FOURTH_STUDENT.getZeroBased())
                 .getLessons().size());
     }
 
