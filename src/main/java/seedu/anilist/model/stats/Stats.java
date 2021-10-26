@@ -18,7 +18,7 @@ public class Stats {
     private final int toWatchCount;
     private final int finishedCount;
 
-    private final int episodesCount;
+    private final long episodesCount;
 
     private final int numUniqueGenres;
 
@@ -27,7 +27,7 @@ public class Stats {
     /**
      * Creates a Stats object containing the user statistics.
      */
-    public Stats(int watchingCount, int toWatchCount, int finishedCount, int episodesCount,
+    public Stats(int watchingCount, int toWatchCount, int finishedCount, long episodesCount,
                  HashMap<Genre, Integer> genres) {
         this.watchingCount = watchingCount;
         this.toWatchCount = toWatchCount;
@@ -78,7 +78,7 @@ public class Stats {
         return this.finishedCount;
     }
 
-    public int getEpisodesCount() {
+    public long getEpisodesCount() {
         return this.episodesCount;
     }
 

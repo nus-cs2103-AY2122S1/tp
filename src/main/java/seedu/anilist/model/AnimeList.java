@@ -105,7 +105,7 @@ public class AnimeList implements ReadOnlyAnimeList {
         int watchingCount = 0;
         int toWatchCount = 0;
         int finishedCount = 0;
-        int episodesCount = 0;
+        long episodesCount = 0;
         HashMap<Genre, Integer> userGenres = new HashMap<>();
 
         for (Anime anime: animeList) {
