@@ -162,6 +162,7 @@
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
+    -fx-wrap-text: break-word;
 }
 
 .status-bar-with-border {

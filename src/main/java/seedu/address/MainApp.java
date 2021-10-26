@@ -221,13 +221,16 @@ public class MainApp extends Application {
             UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException {
         Encryption cryptor = null;
         cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
-        createEncryptedFile(cryptor);
-        try {
-            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
-        } catch (IOException e) {
-            return false;
+        if (hasEncryptedFile()) {
+            try {
+                cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+            } catch (IOException e) {
+                return false;
+            }
+        } else {
+            createEncryptedFile(cryptor);
         }
-        
+
         FileUtil.deleteFile(storage.getAddressBookFilePath());
         model = initModelManager(storage, userPrefs, cryptor);
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
@@ -241,9 +244,6 @@ public class MainApp extends Application {
      */
     private void createEncryptedFile(Encryption cryptor) {
         requireNonNull(cryptor);
-        if (hasEncryptedFile()) {
-            return;
-        }
         logger.info("Data file not found. Will be starting with a sample AddressBook");
         try {
             storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());

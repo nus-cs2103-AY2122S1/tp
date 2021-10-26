@@ -13,37 +13,37 @@
 
 <?import javafx.scene.control.PasswordField?>
 <fx:root resizable="false" title="Login" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-    <icons>
-        <Image url="@/images/lock.png" />
-    </icons>
-    <scene>
-        <Scene>
-            <stylesheets>
-                <URL value="@Fonts.css" />
-                <URL value="@DarkTheme.css" />
-                <URL value="@Extensions.css" />
-            </stylesheets>
+  <icons>
+    <Image url="@/images/lock.png" />
+  </icons>
+  <scene>
+    <Scene>
+      <stylesheets>
+        <URL value="@Fonts.css" />
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+      </stylesheets>
 
-            <VBox alignment="CENTER">
-                <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border">
-                    <padding>
-                        <Insets top="5" right="10" bottom="5" left="10" />
-                    </padding>
-                    <PasswordField fx:id="userInput" onAction="#onEnter"/>
-                </StackPane>
-                <StackPane VBox.vgrow="NEVER" styleClass="status-bar" prefHeight="30">
-                    <padding>
-                        <Insets top="5" right="10" bottom="5" left="10" />
-                    </padding>
-                    <Label fx:id="responseDisplay" />
-                </StackPane>
-                <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border">
-                    <padding>
-                        <Insets top="5" right="10" bottom="5" left="10" />
-                    </padding>
-                    <Button fx:id="sendButton" text="Login" onAction="#onButtonClick" />
-                </StackPane>
-            </VBox>
-        </Scene>
-    </scene>
+      <VBox alignment="CENTER">
+        <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+          <PasswordField fx:id="userInput" onAction="#onEnter" />
+        </StackPane>
+        <StackPane fx:id="responseDisplayPane" styleClass="status-bar">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+          <Label fx:id="responseDisplay" />
+        </StackPane>
+        <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+          <Button fx:id="sendButton" text="Login" onAction="#onButtonClick" />
+        </StackPane>
+      </VBox>
+    </Scene>
+  </scene>
 </fx:root>

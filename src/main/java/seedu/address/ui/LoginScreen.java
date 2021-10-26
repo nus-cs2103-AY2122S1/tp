@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
@@ -29,6 +30,9 @@ public class LoginScreen extends UiPart<Stage> {
 
     @FXML
     private Label responseDisplay;
+
+    @FXML
+    private StackPane responseDisplayPane;
 
     private final MainApp app;
     private final boolean isNew;
@@ -75,11 +79,28 @@ public class LoginScreen extends UiPart<Stage> {
     }
 
     private void handleUserInputPassword() {
+        if (isNew) {
+            handleNewPassword();
+        } else {
+            handlePassword();
+        }
+    }
+
+    private void handleNewPassword() {
         if (!PasswordCommandParser.passwordValidation(userInput.getText())) {
             responseDisplay.setText(PasswordCommand.CORRECT_PASSWORD_FORMAT);
             userInput.clear();
             return;
         }
+        try {
+            app.logIn(userInput.getText());
+        } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
+                | InvalidAlgorithmParameterException e) {
+            responseDisplay.setText("Something went wrong, try again!");
+        }
+    }
+
+    private void handlePassword() {
         try {
             boolean isCorrectPassword = app.logIn(userInput.getText());
             if (!isCorrectPassword) {
