@@ -322,7 +322,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants that match the desired years of experience                    |
 | `* * *`  | user                                       | find applicants by their tags                 | filter out applicants that match the desired tags                                   |
 | `* * *`  | user                                       | find applicants by their interview time       | filter out applicants that match the desired interview times           |
-| `* * *`  | user                                       | find applicants by their notes                | filter out applicants that match the desired note
+| `* * *`  | user                                       | find applicants by their notes                | filter out applicants that match the desired note                         |
+| `* * *`  | user                                       | find applicants by their done status          | filter out applicants that match the desire done status                   |
 | `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
 | `* * *`  | user                                       | see all names available in the list           | check easily if a certain name is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all phone numbers available in the list   | check easily if a certain number is present in the list without having to go through the entire list      |
