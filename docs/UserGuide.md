@@ -567,7 +567,7 @@ Format: `exit`
 **A**: Visit [this site](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 and follow the instructions specific to your operating system. You may have to download and run an installer to install Java 11 on your computer.<br><br>
 **Q**: How do I transfer my data in SportsPA to another Computer?<br>
-**A**: On your current computer and navigate to `[JAR file location]/data/sportspa.json`. Make a copy of the `sportspa.json` file and transfer it to your other computer.\
+**A**: On your current computer, navigate to `[JAR file location]/data/sportspa.json`. Make a copy of the `sportspa.json` file and transfer it to your other computer.\
 On the other computer, navigate to
 `[JAR file location]/data/sportspa.json` and replace the empty data file it creates with the data file you have just copied.
 
