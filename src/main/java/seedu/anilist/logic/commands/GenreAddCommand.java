@@ -24,7 +24,7 @@ public class GenreAddCommand extends GenreCommand {
 
     public static final String MESSAGE_SUCCESS = "Genre(s) %1$s added to anime.\n"
             + "%2$s";
-    public static final String MESSAGE_GENRE_PRESENT = "Genres %1$s are already present in anime.\n"
+    public static final String MESSAGE_GENRE_PRESENT = "Genre(s) %1$s are already present in anime.\n"
             + "%2$s";
     public static final String MESSAGE_PARTIAL_SUCCESS = "Genres %1$s added.\n"
             + "Genres %2$s are already present in anime.\n"
