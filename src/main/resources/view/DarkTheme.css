@@ -90,13 +90,14 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#00102b, 10%);
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: derive(#00102b, 10%);
 }
 
 .list-cell:filled:even {
@@ -108,7 +109,7 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #323335;
+    -fx-background-color: #1d1d1d;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -123,16 +124,16 @@
     -fx-text-fill: white;
 }
 
-.cell_big_label {
+.cell_big_label .text {
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-fill: #e1dddd;
 }
 
-.cell_small_label {
+.cell_small_label .text {
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-fill: #e1dddd;
 }
 
 .stack-pane {
