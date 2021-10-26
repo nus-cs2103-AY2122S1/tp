@@ -100,7 +100,8 @@ public class Student {
     public Boolean addLab(Lab lab) {
         int index = this.labList.indexOf(lab);
         if (index == -1) {
-            this.labList.add(lab);
+            Lab newLab = lab;
+            this.labList.add(newLab);
             labList.sort(new SortByLabNumber());
             return true;
         } else {
@@ -134,12 +135,19 @@ public class Student {
     /**
      * Updates a lab result for a student
      * */
-    public void editLabInfo(Lab lab, int newLabNum, Double total) {
-        int index = this.labList.indexOf(lab);
-        Lab current = this.labList.get(index);
-        current.updateLabNum(newLabNum);
-        current.updateTotal(total);
-        labList.sort(new SortByLabNumber());
+    public boolean editLabInfo(Lab lab, int newLabNum, Double total) {
+        Lab newLab = new Lab(newLabNum);
+        int index2 = this.labList.indexOf(newLab);
+        if (index2 == -1) {
+            int index = this.labList.indexOf(lab);
+            Lab current = this.labList.get(index);
+            current.updateLabNum(newLabNum);
+            current.updateTotal(total);
+            labList.sort(new SortByLabNumber());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setLabResultRecord(List<Lab> labResultRecord) {
