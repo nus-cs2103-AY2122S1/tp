@@ -73,27 +73,23 @@ public class EditLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-        boolean labExists = false;
         Lab newLab = new Lab(newLabNum);
+        if(lastShownList.get(0).getLabList().contains(newLab)) {
+            throw new CommandException(LAB_NEW_NUM_CONSTRAINTS);
+        }
         for (Student std : lastShownList) {
             Student editedStd = std;
             if (total != null && total < 0.0) {
                 throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
-            } else if (std.getLabList().contains(newLab)) {
-                throw new CommandException(LAB_NEW_NUM_CONSTRAINTS);
             } else if (!std.getLabList().contains(original)) {
                 throw new CommandException(LAB_NUM_CONSTRAINTS);
             } else {
-                labExists = true;
-
                 editedStd.editLabInfo(original, newLabNum, total);
                 model.setStudent(std, editedStd);
             }
-
         }
 
-        return labExists ? new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, original))
-                         : new CommandResult("This lab does not exist!");
+        return new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, original));
     }
 
     @Override

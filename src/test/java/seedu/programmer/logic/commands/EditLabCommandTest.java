@@ -22,7 +22,10 @@ public class EditLabCommandTest {
     private static Lab validLab;
     private static Lab sampleLabA;
     private static Lab sampleLabB;
-    private static int newLabNum = 11;
+    private static int newLabNum = 15;
+    private static int newLabNum1 = 14;
+    private static int newLabNum2 = 13;
+    private static int newLabNum3 = 12;
     private static Double newLabTotal = 40.0;
     private static EditLabCommand sampleCommandA;
     private static EditLabCommand sampleCommandB;
@@ -46,21 +49,31 @@ public class EditLabCommandTest {
         assertThrows(NullPointerException.class, () -> new AddLabCommand(null));
     }
 
-//    @Test
-//    public void execute_labTitleAlreadyExists_throwsCommandException() throws Exception {
-//        Lab labToAdd = getTypicalLabList().get(NUMBER_FIRST_LAB);
-//        EditLabCommand editLabCommand = new EditLabCommand(labToAdd, );
-//
-//        String expectedMessage = String.format(AddLabCommand.MESSAGE_LAB_ALREADY_EXISTS, labToAdd);
-//
-//        assertCommandFailure(addLabCommand, model, expectedMessage);
-//    }
+    @Test
+    public void execute_labTitleDoesNotExist_throwsCommandException() throws Exception {
+        Lab labToEdit = new Lab(10);
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
+
+        String expectedMessage = String.format(EditLabCommand.LAB_NUM_CONSTRAINTS, labToEdit);
+
+        assertCommandFailure(editLabCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_newlabTitleAlreadyExists_throwsCommandException() throws Exception {
+        Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, 2);
+
+        String expectedMessage = String.format(EditLabCommand.LAB_NEW_NUM_CONSTRAINTS, labToEdit);
+
+        assertCommandFailure(editLabCommand, model, expectedMessage);
+    }
 
     @Test
     public void execute_labEditedAllFields_success() {
-        Lab labToEdit = getTypicalLabList().get(NUMBER_SECOND_LAB);
-        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum, newLabTotal);
-        Lab newLab = new Lab(newLabNum, newLabTotal);
+        Lab labToEdit = getTypicalLabList().get(NUMBER_FIRST_LAB);
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum1, newLabTotal);
+        Lab newLab = new Lab(newLabNum1, newLabTotal);
 
         String expectedMessage = String.format(EditLabCommand.MESSAGE_EDIT_LAB_SUCCESS, newLab);
 
@@ -73,8 +86,8 @@ public class EditLabCommandTest {
     public void execute_labEditedOnlyOneField_success() {
         // only change labNum
         Lab labToEdit = getTypicalLabList().get(NUMBER_SECOND_LAB);
-        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum);
-        Lab newLab = new Lab(newLabNum);
+        EditLabCommand editLabCommand = new EditLabCommand(labToEdit, newLabNum2);
+        Lab newLab = new Lab(newLabNum2);
 
         String expectedMessage = String.format(EditLabCommand.MESSAGE_EDIT_LAB_SUCCESS, newLab);
 
@@ -84,8 +97,8 @@ public class EditLabCommandTest {
 
         // only change totalScore
         Lab labToEdit2 = getTypicalLabList().get(NUMBER_SECOND_LAB);
-        EditLabCommand editLabCommand2 = new EditLabCommand(labToEdit2, newLabNum, newLabTotal);
-        Lab newLab2 = new Lab(newLabNum, newLabTotal);
+        EditLabCommand editLabCommand2 = new EditLabCommand(labToEdit2, newLabTotal);
+        Lab newLab2 = new Lab(labToEdit2.getLabNum(), newLabTotal);
 
         String expectedMessage2 = String.format(EditLabCommand.MESSAGE_EDIT_LAB_SUCCESS, newLab2);
 
