@@ -97,15 +97,15 @@ Example: `help`
 
 Adds a student to ProgrammerError with the his/her student ID and class ID.
 
-Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 
-- `add -n Sherwin -sid A1234567X -cid B01`: Adds the student called Sherwin with student ID A1234567X and class ID B01
-  to ProgrammerError.
+- `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID A1234567X and class ID B01 and 
+  email e0542421@u.nus.edu to ProgrammerError.
 
-- `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to
-  ProgrammerError.
+- `add -n Betsy -sid A2345678X -cid B02 -email e043245@u.nus.edu`: Adds the student called Betsy with student ID A2345678X and class ID B02 to and 
+  email e043245@u.nus.edu ProgrammerError.
 
 ### <a name="filter-student"></a>6. Filter List: `filter`
 
