@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.logging.Filter;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -15,8 +14,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupGroupNameEqualsPredicate;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.group.GroupNameContainsKeywordPredicate;
 import seedu.address.model.student.ContainsStudentNamePredicate;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -239,7 +238,7 @@ public class ModelManager implements Model {
     @Override
     public Group getGroupByGroupName(GroupName groupName) {
         FilteredList<Group> tempFilteredGroups = new FilteredList<>(this.csBook.getGroupList());
-        tempFilteredGroups.setPredicate(new GroupNameContainsKeywordPredicate(groupName));
+        tempFilteredGroups.setPredicate(new GroupGroupNameEqualsPredicate(groupName));
 
         // return null if the group is not found
         if (tempFilteredGroups.isEmpty()) {
@@ -249,7 +248,6 @@ public class ModelManager implements Model {
         assert tempFilteredGroups.size() == 1 : "Group names should be unique";
 
         Group retrievedGroup = tempFilteredGroups.get(0);
-
         return retrievedGroup;
     }
 

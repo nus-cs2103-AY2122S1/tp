@@ -4,11 +4,11 @@ import java.util.function.Predicate;
 
 import seedu.address.model.group.GroupName;
 
-public class ContainsGroupNamePredicate implements Predicate<Student> {
+public class StudentGroupNameEqualsPredicate implements Predicate<Student> {
 
     private final GroupName groupName;
 
-    public ContainsGroupNamePredicate(GroupName groupName) {
+    public StudentGroupNameEqualsPredicate(GroupName groupName) {
         this.groupName = groupName;
     }
 
@@ -20,7 +20,7 @@ public class ContainsGroupNamePredicate implements Predicate<Student> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ContainsGroupNamePredicate // instanceof handles nulls
-                && groupName.equals(((ContainsGroupNamePredicate) other).groupName)); // state check
+                || (other instanceof StudentGroupNameEqualsPredicate // instanceof handles nulls
+                && groupName.equals(((StudentGroupNameEqualsPredicate) other).groupName)); // state check
     }
 }

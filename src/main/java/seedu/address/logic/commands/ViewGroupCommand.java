@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.ContainsGroupNamePredicate;
+import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 
 /**
  * Displays all students in a group that has the given group name.
@@ -22,14 +22,14 @@ public class ViewGroupCommand extends Command {
             + "Parameters: g/GROUPNAME \n"
             + "Example: " + COMMAND_WORD + " g/CS2103T";
 
-    private final ContainsGroupNamePredicate predicate;
+    private final StudentGroupNameEqualsPredicate predicate;
 
     private final GroupName groupName;
 
     /**
      * Creates a ViewGroupCommand to find a {@code Group} with the specified {@code GroupName}
      */
-    public ViewGroupCommand(ContainsGroupNamePredicate predicate, GroupName groupName) {
+    public ViewGroupCommand(StudentGroupNameEqualsPredicate predicate, GroupName groupName) {
         this.predicate = predicate;
         this.groupName = groupName;
     }

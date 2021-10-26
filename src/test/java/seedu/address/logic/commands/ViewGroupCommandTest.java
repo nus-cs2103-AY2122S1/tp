@@ -17,7 +17,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.ContainsGroupNamePredicate;
+import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -45,7 +45,7 @@ public class ViewGroupCommandTest {
 
     @Test
     public void execute_groupExists_displaysStudentsInGroup() {
-        ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2103T"));
+        StudentGroupNameEqualsPredicate predicate = new StudentGroupNameEqualsPredicate(new GroupName("CS2103T"));
         expectedModel.updateFilteredStudentList(predicate);
         String successMessage = String.format(Messages.MESSAGE_DISPLAY_GROUP_FORMAT, "CS2103T", "SWE Module") + "\n"
                                 + String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
@@ -56,7 +56,7 @@ public class ViewGroupCommandTest {
 
     @Test
     public void execute_groupDoesNotExist_displaysGroupNotFoundMessage() {
-        ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2100"));
+        StudentGroupNameEqualsPredicate predicate = new StudentGroupNameEqualsPredicate(new GroupName("CS2100"));
         expectedModel.updateFilteredStudentList(predicate);
         String feedbackMessage = Messages.MESSAGE_GROUP_NOT_FOUND + "\n"
                 + String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
