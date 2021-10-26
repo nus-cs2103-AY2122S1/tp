@@ -71,7 +71,7 @@
                         <Insets bottom="10" left="10" right="10" top="10" />
                      </padding>
                      <children>
-                        <StackPane fx:id="appointmentListPanelPlaceholder1" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="claimListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                     </children>
