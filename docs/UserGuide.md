@@ -55,8 +55,11 @@ ________________________________________________________________________________
 3. Copy the file to the folder you want to use as the _home folder_ for SportsPA.
 
 4. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds. The app
-   provides some sample data for you to play around with and familiarize yourself with the commands.<br><br>
-   ![FirstLook](images/FirstLook.png)
+   provides some sample data for you to play around with and familiarize yourself with the commands.
+
+<p align="center">
+   <img src="images/FirstLook.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -228,7 +231,9 @@ Examples:
   respectively
 * `editm 2 t/exco t/y1` edits the 2nd member to have tags `exco` and `y1` :camera:
 
-![editmExample](images/editmExample.png)
+<p align="center">
+   <img src="images/editmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -249,7 +254,9 @@ Examples:
 * `findm Bob` returns `bob` and `Bob Doe`
 * `findm alex irfan` returns `Alex Yeoh`, `Irfan Ibrahim` :camera:
 
-![findmExample](images/findmExample.png)
+<p align="center">
+   <img src="images/findmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -284,7 +291,9 @@ Examples:
   Tuesday
 * `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Tuesday and Thursday :camera:
 
-![setmExample](images/setmExample.png)
+<p align="center">
+   <img src="images/setmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -303,7 +312,9 @@ Examples:
 
 * `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list a present :camera:
 
-![markExample](images/markExample.png)
+<p align="center">
+   <img src="images/markExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -403,7 +414,9 @@ Examples:
   5
 * `addf n/Court 19 l/Tampines Hub Badminton Hall t/1700 c/5` adds Court 19 at Tampines Hub Badminton Hall at 5pm with a capacity of 5 :camera:
 
-![addfExample](images/addfExample.png)
+<p align="center">
+   <img src="images/addfExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -477,7 +490,9 @@ Examples:
 * `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
 * `findf opp tampines` returns `Opp University Hall` and `Tampines Hub Badminton Hall` :camera:
 
-![findfExample](images/findfExample.png)
+<p align="center">
+   <img src="images/findfExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -501,7 +516,9 @@ Examples:
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
   user :camera:
 
-![splitExample](images/splitExample.png)
+<p align="center">
+   <img src="images/splitExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -545,7 +562,9 @@ Examples:
 * `allocate 1 2 1` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
   at index 2 in the displayed facility list on Monday :camera:
 
-![allocateExample](images/allocateExample.png)
+<p align="center">
+   <img src="images/allocateExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
