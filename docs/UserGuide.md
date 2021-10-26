@@ -281,6 +281,14 @@ Examples:
 * `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1`
 * `import -f student_data.csv -g 3 -a 30`
 
+### Exporting data : `export`
+
+// TODO: 
+Exports data in the address book to (...file_location).
+
+* 
+
+Format: `export`
 
 ### Resetting all data : `clear`
 
@@ -353,5 +361,6 @@ Action | Format | Examples
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | e.g. `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
+**Export Data** | `export` |
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
