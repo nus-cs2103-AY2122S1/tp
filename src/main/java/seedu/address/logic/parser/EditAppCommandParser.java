@@ -16,6 +16,9 @@ import seedu.address.logic.commands.EditAppCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 
+/**
+ * Parses input arguments and creates a new EditAppCommand object
+ */
 public class EditAppCommandParser implements Parser<EditAppCommand> {
 
     @Override
