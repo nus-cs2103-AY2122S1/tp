@@ -102,7 +102,7 @@ Examples:
 
 ### Batch importing contacts: `import`
 
-Imports all contacts from a selected _csv_ file. Calling the command will open a file browser to help select the file.
+Imports all contacts from a selected _csv_ file to ease the transition from excel or other marketing software. Calling the command will open a file browser to help select the file.
 
 Format: `import`
 
@@ -110,28 +110,31 @@ Example:
 
 ![import window](images/importWindow.png)
 
-1. Select the `.csv` file.
+1. Select the _csv_ file.
 1. Click open to import contacts.
 
 Note:  
-- `.csv` file should have corresponding **headers**:
+- _Csv_ file should have corresponding **headers**:
   - name
   - phone(optional)
   - email(optional)
   - address(optional)
   - tags(optional)
-- Addresses containing **commas (,)** should be wrapped in **"double quotes"**.
 - Multiple tags should be seperated via **semicolons (;)**.
-- Make sure to save the spreadsheet data as **`.csv`** and not **`.csv UTF-8`**.
-- A template `importTemplate.csv` can be found in the default directory of the file browser.
+- Make sure to save the spreadsheet data as **_csv_** and not **_csv UTF-8_**.
+- A template _importTemplate.csv_ can be found in the default directory of the file browser.
 
-Valid `.csv` file example:
+Valid _csv_ file example:
 
 | name | phone    | email                | address       | tag              |
 | -----| -------- | -------------------- | ------------- | ---------------- |
-| Adam | 81234567 | adam<span>@test.com  | "ABC, Street" |                  |
+| Adam | 81234567 | adam<span>@test.com  | ABC, Street   |                  |
 | Beth | 620400   | beth123<span>@eg.edu | 123 Drive     |friend            |
 | Cody | 90005000 | Cody<span>@test.org  | Oak Lane      | mentor;colleague |
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When editing the csv file with a text editor instead of excel, addresses containing commas (,) should be wrapped in "double quotes".
+</div>
 
 ### Listing all persons: `list`
 

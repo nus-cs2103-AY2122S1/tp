@@ -191,6 +191,7 @@ This section describes some noteworthy details on how the following features are
 
 * [Command Input History](#command-input-history)
 * [Batch Import](#batch-import)
+* [Batch Export](#batch-export)
 * [Encryption](#encryption)
 * [Find Feature](#find-feature)
 * [[Proposed] Data Archiving](#proposed-data-archiving)
@@ -340,11 +341,11 @@ up arrow key to go to a previously entered command.
 
 #### Implementation
 
-The chosen implementation of the `ImportCommand` pulls up a `CsvFileSelector` window that only allows csv files to be selected.
+The chosen implementation of the `ImportCommand` pulls up a `CsvFileSelector` window that only allows _csv_ files to be selected.
 
 Once a file is selected, the command is supported by two parsers.
 
-- `CsvParser` — Deals with parsing a csv file and assigning its body to its headers via key-value pairs.
+- `CsvParser` — Deals with parsing a _csv_ file and assigning its body to its headers via key-value pairs.
 
 - `ImportCommandParser` — Retrieves the relevant entries from `CsvParser` then checks if the necessary fields are present and correctly formatted before creating the `Person` objects that will be added to the `Model` in `ImportCommand`.
 
@@ -358,20 +359,20 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 #### Design considerations:
 
-**Aspect: How csv file is chosen:**
+**Aspect: How _csv_ file is chosen:**
 
 - **Alternative 1 (current choice):** `FileSelector` window.
   - Pros:
-  	- Ensures users select files that exist and are in the csv format.
+  	- Ensures users select files that exist and are in the _csv_ format.
   	- Allows for easy navigability between directories for quick retrieval of the wanted file.
   - Cons:
   	- Diverts from target user profile by utilising GUI for commands.
 
-- **Alternative 2:** Csv file path to be inputted after `import` in command call.
+- **Alternative 2:** _Csv_ file path to be inputted after `import` in command call.
   - Pros:
   	- Meets target user profile by utilising CLI rather than GUI.
   - Cons:
-  	- More troublesome for the user as user has to search for the csv file's absolute path.
+  	- More troublesome for the user as user has to search for the _csv_ file's absolute path.
   	- File could also not exist or be in the wrong format. Would require additional exception handling.
 
 ### Batch Export
