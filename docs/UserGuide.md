@@ -255,7 +255,8 @@ Examples:
 ### Set the tables for the restaurant: `settables`
 
 <div markdown="block" class="alert alert-danger">
-:bangbang: This command will remove **ALL** reservations and overwrite previously set tables <br>
+:bangbang:**Warning**<br>
+This command will remove **ALL** reservations and overwrite previously set tables <br>
 </div>
 
 Sets the tables with the sizes specified so that reservations can be made
@@ -271,7 +272,7 @@ Examples:
 * `settables 10,8,8,4,4,2x6,1x4`
 
 <div markdown="block" class="alert alert-warning">
-:information_source:<br>
+:information_source:**Notes:**<br>
 
 * Size of tables and Number of tables with specified size has to be a positive integer
 
@@ -291,7 +292,7 @@ Examples:
 * `addr 5 p/12345668 at/2021-02-14 1200`
 
 <div markdown="block" class="alert alert-warning">
-:information_source:<br>
+:information_source:**Notes:**<br>
 
 * Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant-settables)
 
