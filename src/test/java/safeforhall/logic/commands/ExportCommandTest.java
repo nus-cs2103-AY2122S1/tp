@@ -6,19 +6,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //import static safeforhall.logic.commands.CommandTestUtil.assertCommandSuccess;
 //import static safeforhall.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
 
+import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
 import safeforhall.model.ModelManager;
 import safeforhall.model.UserPrefs;
+import safeforhall.testutil.AddressBookBuilder;
 import safeforhall.testutil.TypicalPersons;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ExportCommand}.
  */
 public class ExportCommandTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "ExportTest");
 
-    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(TypicalPersons.getTypicalImportedAddressBook(), new UserPrefs());
 
     @Test
@@ -43,6 +48,21 @@ public class ExportCommandTest {
         assertFalse(export1.equals(export2));
     }
 
+    private Path getTestDataFilePath(String csvFileInTestDataFolder) {
+        return csvFileInTestDataFolder != null
+                ? TEST_DATA_FOLDER.resolve(csvFileInTestDataFolder)
+                : null;
+    }
 
+    @Test
+    public void execute_emptyFilteredList_success() {
+        AddressBook emptyAddressBook = new AddressBookBuilder().build();
+        Model emptyModel = new ModelManager(emptyAddressBook, new UserPrefs());
 
+    }
+
+    @Test
+    public void execute_typicalFilteredList_success() {
+        Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    }
 }
