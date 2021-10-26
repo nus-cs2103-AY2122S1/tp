@@ -77,11 +77,17 @@ public class UnenrollCommandTest {
     }
 
     @Test
-    public void execute_invalidUnenrollmentWrongStudentIndex_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        UnenrollCommand unenrollCommand = new UnenrollCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
+    public void execute_invalidIndex_failure() {
+        Index studentOutOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        Index lessonOutOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
 
-        assertCommandFailure(unenrollCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        UnenrollCommand invalidStudentUnenroll = new UnenrollCommand(studentOutOfBoundIndex, INDEX_FIRST_LESSON);
+        UnenrollCommand invalidLessonUnenroll = new UnenrollCommand(INDEX_SECOND_LESSON, lessonOutOfBoundIndex);
+        UnenrollCommand invalidIndexUnenroll = new UnenrollCommand(studentOutOfBoundIndex, lessonOutOfBoundIndex);
+
+        assertCommandFailure(invalidStudentUnenroll, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(invalidLessonUnenroll, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(invalidIndexUnenroll, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
