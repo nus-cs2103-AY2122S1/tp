@@ -72,6 +72,17 @@ public class Group {
         return members;
     }
 
+    public void updateMember(Student target, Student editedStudent) {
+        members.updateMember(target, editedStudent);
+    }
+
+    /**
+     * Removes a member in the group
+     */
+    public void removeMember(Student student) {
+        members.removeMember(student);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
