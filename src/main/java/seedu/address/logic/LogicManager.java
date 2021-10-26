@@ -1,18 +1,27 @@
 package seedu.address.logic;
 
+import static seedu.address.MainApp.CIPHER_TRANSFORMATION;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 import java.util.logging.Logger;
+import javax.crypto.NoSuchPaddingException;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.encryption.Encryption;
+import seedu.address.encryption.EncryptionKeyGenerator;
+import seedu.address.encryption.EncryptionManager;
+import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,7 +40,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final Encryption cryptor;
+    private Encryption cryptor;
     private final Path encryptedFilePath;
 
     /**
@@ -45,14 +54,43 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /**
+     * Executes if the command is a PasswordCommand.
+     *
+     * @param command The command from user.
+     * @return An Optional CommandResult.
+     */
+    public Optional<CommandResult> executePasswordCommand(Command command) {
+        if (command instanceof PasswordCommand) {
+            try {
+                Encryption temp = new EncryptionManager(EncryptionKeyGenerator
+                        .generateKey(((PasswordCommand) command).getOldPassword()), CIPHER_TRANSFORMATION);
+                Encryption newToken = new EncryptionManager(EncryptionKeyGenerator
+                        .generateKey(((PasswordCommand) command).getNewPassword()), CIPHER_TRANSFORMATION);
+                temp.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
+                newToken.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
+                cryptor = newToken;
+                FileUtil.deleteFile(storage.getAddressBookFilePath());
+            } catch (NoSuchPaddingException | InvalidAlgorithmParameterException
+                    | UnsupportedPasswordException | InvalidKeyException | NoSuchAlgorithmException e) {
+                return Optional.of(new CommandResult(PasswordCommand.MESSAGE_FAIL));
+            } catch (IOException e) {
+                return Optional.of(new CommandResult(PasswordCommand.MESSAGE_WRONG_PASSWORD));
+            }
+        }
+        return Optional.empty();
+    }
+
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
 
+        Optional<CommandResult> temp = executePasswordCommand(command);
+
+        commandResult = temp.orElse(command.execute(model));
         try { // decrypt -> modify -> encrypt -> delete subroutine
             cryptor.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
             storage.saveAddressBook(model.getAddressBook());

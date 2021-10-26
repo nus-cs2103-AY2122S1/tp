@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -13,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.NoSuchPaddingException;
 
@@ -28,8 +31,10 @@ import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -43,6 +48,7 @@ import seedu.address.testutil.PersonBuilder;
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
     private static final String PASSWORD = "password1234";
+    private static final String WRONG_PASSWORD = "password123";
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final String ADDRESS_BOOK_ENCRYPTED_FILENAME = "addressBook.enc";
     private static final String ADDRESS_BOOK_JSON_FILENAME = "addressBook.json";
@@ -60,6 +66,10 @@ public class LogicManagerTest {
     private static final Path IO_EXCEPTION_PREF_FILE_PATH = IO_EXCEPTION_TEST_PATH.resolve(USER_PREFERENCE_FILENAME);
 
     private static final Model MODEL = new ModelManager();
+    private static final AddressBook ADDRESS_BOOK = new AddressBook();
+    private static final UserPrefs USER_PREFS = new UserPrefs();
+    private static final Model MODEL_WITH_CONTENT = new ModelManager(ADDRESS_BOOK, USER_PREFS);
+    private static final LogicManager LOGIC_MANAGER = new LogicManager(MODEL_WITH_CONTENT, null, null, null);
 
     private Logic logic;
     private Encryption cryptor;
@@ -124,8 +134,43 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_correctPasswordCommand_returnsEmptyOptional() throws IOException, InvalidKeyException {
+        FileUtil.createFile(MAIN_JSON_FILE_PATH);
+        cryptor.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
+        assertTrue(logic.executePasswordCommand(new PasswordCommand(PASSWORD, WRONG_PASSWORD)).isEmpty());
+    }
+
+    @Test
+    public void execute_incorrectPasswordCommand_returnsOptionalCommandResult() throws IOException,
+            InvalidKeyException {
+        FileUtil.createFile(MAIN_JSON_FILE_PATH);
+        cryptor.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
+        assertFalse(logic.executePasswordCommand(new PasswordCommand(WRONG_PASSWORD, WRONG_PASSWORD)).isEmpty());
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getAddressBookReturns_true() {
+        assertTrue(LOGIC_MANAGER.getAddressBook().equals(MODEL_WITH_CONTENT.getAddressBook()));
+    }
+
+    @Test
+    public void getSelectedPersonList_true() {
+        assertTrue(LOGIC_MANAGER.getSelectedPersonList().equals(MODEL_WITH_CONTENT.getSelectedPersonList()));
+    }
+
+    @Test
+    public void getAddressBookFilePath_true() {
+        assertTrue(LOGIC_MANAGER.getAddressBookFilePath().equals(MODEL_WITH_CONTENT.getAddressBookFilePath()));
+    }
+
+    @Test
+    public void getGuiSetting_true() {
+        assertTrue(LOGIC_MANAGER.getGuiSettings().equals(MODEL_WITH_CONTENT.getGuiSettings()));
     }
 
     /**

@@ -1,13 +1,17 @@
 package seedu.address;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.logging.Logger;
+import javax.crypto.NoSuchPaddingException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -21,6 +25,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.encryption.Encryption;
 import seedu.address.encryption.EncryptionKeyGenerator;
 import seedu.address.encryption.EncryptionManager;
+import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -36,7 +41,7 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.ui.Ui;
+import seedu.address.ui.LoginScreen;
 import seedu.address.ui.UiManager;
 
 /**
@@ -44,19 +49,17 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 1, true);
-
-    private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
-    // TODO: Remove hardcoded password by end of v1.3b
-    private static final String PASSWORD = "password1234";
-
+    public static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
     protected Config config;
-    protected Encryption cryptor;
+
+    private Stage stage;
+    private UserPrefs userPrefs;
+    private boolean isLoggedIn;
 
     @Override
     public void init() throws Exception {
@@ -67,20 +70,13 @@ public class MainApp extends Application {
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
-
-        model = initModelManager(storage, userPrefs);
-
-        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
-
-        ui = new UiManager(logic);
     }
 
     /**
@@ -88,19 +84,12 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Encryption cryptor) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
 
         try {
-            if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-                storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
-                FileUtil.createFile(userPrefs.getEncryptedFilePath());
-                cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
-            } else {
-                cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
-            }
+            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             addressBookOptional = storage.readAddressBook();
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             FileUtil.deleteFile(storage.getAddressBookFilePath());
@@ -216,15 +205,77 @@ public class MainApp extends Application {
         }
     }
 
+    /**
+     * Attempts to log in with the given password.
+     *
+     * @param input The input password from user.
+     * @return {@code true} if the password is correct, {@code false} otherwise
+     * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
+     * @throws NoSuchPaddingException If the padding does not exist.
+     * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
+     * @throws InvalidAlgorithmParameterException
+     * @throws InvalidKeyException
+     */
+    public boolean logIn(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
+            UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException {
+        Encryption cryptor = null;
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        if (hasEncryptedFile()) {
+            try {
+                cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+            } catch (IOException e) {
+                return false;
+            }
+        } else {
+            createEncryptedFile(cryptor);
+        }
+
+        FileUtil.deleteFile(storage.getAddressBookFilePath());
+        model = initModelManager(storage, userPrefs, cryptor);
+        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
+        new UiManager(logic).start(stage);
+
+        return true;
+    }
+
+    /**
+     * This method fails silently if encrypted file already exists.
+     */
+    private void createEncryptedFile(Encryption cryptor) {
+        requireNonNull(cryptor);
+        logger.info("Data file not found. Will be starting with a sample AddressBook");
+        try {
+            storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
+            FileUtil.createFile(userPrefs.getEncryptedFilePath());
+            cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
+        } catch (IOException | InvalidKeyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Checks if the user has existing data.
+     *
+     * @return True if there is an encrypted data file. False if otherwise.
+     */
+    private boolean hasEncryptedFile() {
+        return FileUtil.isFileExists(userPrefs.getEncryptedFilePath());
+    }
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        this.stage = primaryStage;
+        isLoggedIn = false;
+        new LoginScreen(this, !hasEncryptedFile(), primaryStage).show();
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
+        if (!isLoggedIn) {
+            return;
+        }
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
