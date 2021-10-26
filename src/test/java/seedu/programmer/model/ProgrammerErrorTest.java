@@ -99,11 +99,6 @@ public class ProgrammerErrorTest {
         }
 
         @Override
-        public ObservableList<Lab> getLabList() {
-            return labs;
-        }
-
-        @Override
         public ObservableList<Lab> showLabResultList(Student target) {
             return null;
         }
