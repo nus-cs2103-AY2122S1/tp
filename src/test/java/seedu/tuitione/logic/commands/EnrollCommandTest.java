@@ -13,6 +13,7 @@ import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,7 @@ import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.lesson.Subject;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Student;
+import seedu.tuitione.testutil.StudentBuilder;
 
 public class EnrollCommandTest {
 
@@ -160,6 +162,35 @@ public class EnrollCommandTest {
                 benson.getName(),
                 Student.MAX_LESSON_SIZE);
         assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(4)),
+                model,
+                expectedMessage);
+    }
+
+    @Test
+    public void execute_invalidStudentSizeMoreThanMaxAllowableSize_failure() {
+        ArrayList<Student> studentList = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            Student student = new StudentBuilder().withName("One" + i)
+                    .withPhone("94351253").withEmail("alice@example.com")
+                    .withAddress("123, Jurong West Ave 6, #08-111").withGrade("P2").withRemarks("friends")
+                    .build();
+            studentList.add(student);
+        }
+        //Test lesson
+        Lesson scienceP2 = new Lesson(new Subject("Science"),
+                new Grade("P2"),
+                new LessonTime(DayOfWeek.FRIDAY, LocalTime.NOON),
+                new Price(40));
+        //enrolling students into test lesson
+        for (Student student : studentList) {
+            scienceP2.enrollStudent(student);
+        }
+        //adding lesson into model
+        model.addLesson(scienceP2);
+        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_STUDENTS,
+                scienceP2.getLessonCode(),
+                Lesson.MAX_STUDENT_SIZE);
+        assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, Index.fromOneBased(4)),
                 model,
                 expectedMessage);
     }
