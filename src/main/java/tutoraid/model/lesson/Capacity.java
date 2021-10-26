@@ -10,8 +10,8 @@ import static tutoraid.commons.util.AppUtil.checkArgument;
 public class Capacity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Capacity should only contain numbers, and it should be at least 1 digit long";
-    public static final String VALIDATION_REGEX = "\\d+";
+            "Capacity should be a positive integer, and it should be at least 1 digit long";
+    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
     public final String capacity;
 
     /**
