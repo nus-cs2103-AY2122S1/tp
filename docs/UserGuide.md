@@ -25,13 +25,16 @@ Throughout the User Guide,
 
 **:bulb:Tips** will be used to provide quick information bits about features
 
+**:warning:Warning** will be used to provide warnings about features
+
 We hope you find this User Guide helpful in using ClassMATE!
 
 ------
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+
+1. Ensure you have Java `11` or above installed in your Computer. (Go to [this website](https://codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) and follow the instructions to download and install Oracle JDK 11, which is _basically_ Java 11.)
 1. Download the latest `classmate.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-1/tp/releases).
 1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -45,7 +48,7 @@ We hope you find this User Guide helpful in using ClassMATE!
    * **`deletestu 3` **: Deletes the 3rd student shown in the current list.
    
    * **`clear`** : Deletes all students.
-   
+ 
    * **`exit`** : Exits the app.
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -65,13 +68,13 @@ We hope you find this User Guide helpful in using ClassMATE!
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* You can add parameters in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, you can also type `p/PHONE_NUMBER n/NAME` for the parameters.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* If you add parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`), they will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -83,6 +86,8 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+## Student Commands
 
 ### Adding a student: `addstu`
 
@@ -132,6 +137,18 @@ Examples:
 * `liststu` followed by `viewstu 2` shows second student in the student list.
 * `findstu Betsy` followed by `viewstu 1` shows the 1st student in the results of the find command.
 
+### Listing all students : `liststu`
+
+Shows a list of all students in ClassMATE.
+
+Format: `liststu [c/CLASS_CODE]`
+
+* If the optional field is not provided, all students stored are listed. Otherwise, only students that belong to the field specified are listed.
+
+Examples:
+
+* `liststu c/G06` Lists all students stored in the class `G06`
+
 ### Finding students by name: `findstu`
 
 Finds students whose names contain any of the given keywords.
@@ -160,42 +177,28 @@ Examples:
 * `liststu` followed by `deletestu 2` deletes the 2nd student in the student list.
 * `findstu Betsy` followed by `deletestu 1` deletes the 1st student in the results of the `findstu` command.
 
-### Listing all students : `liststu`
+### Clearing all students : `clear`
 
-Shows a list of all students in ClassMATE.
+Clears all students from ClassMATE. Below is how it would look like.
 
-Format: `liststu [c/CLASS_CODE]`
+<img src="D:\Documents\Programming\2103T\tp\docs\images\clear.png" style="zoom:80%;" />
 
-* If the optional field is not provided, all students stored are listed. Otherwise, only students that belong to the field specified are listed.
+Format: `clear`
 
-Examples:
+<div markdown="span" class="alert alert-primary">:warning: **Warning:**
+This command deletes **ALL** students and is irreversible :warning:
+</div>
 
-* `liststu c/G06` Lists all students stored in the class `G06`
+## Tutorial Class Commands
 
-### Adding a class : `addc`
+### Adding a tutorial class : `addc`
 
-Adds a class to ClassMATE.
+Adds a tutorial class to ClassMATE.
 
 Format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
-* The schedule is stored as a String.
-
 Examples:
 * `addc c/G06 s/Tuesdays and Fridays 2-4pm`
-
-### Deleting a class: `deletec`
-
-Deletes a class from ClassMATE
-
-Format: `deletec INDEX`
-
-* Deletes the class at the specified INDEX.
-* The index refers to the index number shown in the displayed list of classes.
-The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listc` followed by `deletec 2` deletes the 2nd class in the list of classes.
-* `findc G06` followed by `deletec 1` deletes the 1st class in the results of the `findc` command.
 
 ### Viewing a class
 
@@ -236,7 +239,24 @@ Examples:
 * `findc A02` returns `A02` if it exists
 * `findc E` returns `E01`, `E02`, `E03`<br>
 
-### Adding a group: `addsg` [Coming Soon]
+### Deleting a class: `deletec`
+
+Deletes a class from ClassMATE
+
+Format: `deletec INDEX`
+
+* Deletes the class at the specified INDEX.
+* The index refers to the index number shown in the displayed list of classes.
+  The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listc` followed by `deletec 2` deletes the 2nd class in the list of classes.
+* `findc G06` followed by `deletec 1` deletes the 1st class in the results of the `findc` command.
+
+## Tutorial Group Commands
+
+### Adding a group: `addsg`
+
 Adds a group to ClassMATE
 
 Format: `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]`
@@ -249,7 +269,8 @@ Example:
   `addsg n/Betsy tp/OP1 g/A` then adds a student called Betsy to OP1 Group A in class G06
 
 ### Viewing a Group: `viewg` [Coming Soon]
-View a group's details in ClassMATE
+
+Views a group's details in ClassMATE
 
 Format: `viewg INDEX`
 
@@ -258,7 +279,7 @@ Format: `viewg INDEX`
 * The index must be a positive integer 1, 2, 3...
 
 Examples:
-* `listg n/G06` followed by `viewg 2` shows the 2nd group in the list of group in class G06
+* `listg c/G06` followed by `viewg 2` shows the 2nd group in the list of group in class G06
 
 ### Listing all groups : `listg` [Coming Soon]
 
@@ -269,25 +290,18 @@ Format: `listg c/CLASS_CODE`
 Examples:
 * `listg c/G06` Lists all groups in the class `G06`
 
-### Deleting a Group: `deleteg` [Coming Soon]
-Delete a group from ClassMATE by their index in the group list
+### Deleting a Group: `deleteg`
+
+Deletes a group from ClassMATE by their index in the group list
 
 Format: `deleteg INDEX`
 
 * Deletes the group at the specified INDEX.
-* The index refers to the index number shown in the displayed group list.
-* The index must be a positive integer 1, 2, 3...
+* The INDEX refers to the index number shown in the displayed group list.
+* The index you use must be a positive integer 1, 2, 3...
 
 Examples:
 * `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
-
-### Clearing all students : `clear`
-
-Clears all students from memory. Results in the following window
-
-<img src="D:\Documents\Programming\2103T\tp\docs\images\clear.png" style="zoom:80%;" />
-
-Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -334,3 +348,8 @@ Action | Format, Examples
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
 **Clear all students** | `clear`
 **Exit ClassMATE** | `exit`
+
+## Glossary
+
+**Java 11** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
+**JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
