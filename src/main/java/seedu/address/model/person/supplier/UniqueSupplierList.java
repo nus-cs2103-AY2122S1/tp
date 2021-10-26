@@ -3,6 +3,7 @@ package seedu.address.model.person.supplier;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -102,6 +103,22 @@ public class UniqueSupplierList implements Iterable<Supplier> {
      */
     public ObservableList<Supplier> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Resets the supplier list to its default sorting state.
+     */
+    public void resetSupplierListToDefaultSortState() {
+        Comparator<Supplier> defaultComparator = (s1, s2) ->
+                s1.getName().fullName.toLowerCase().compareToIgnoreCase(s2.getName().fullName);
+        internalList.sort(defaultComparator);
+    }
+
+    /**
+     * Returns the backing list as a sortable {@code ObservableList}.
+     */
+    public ObservableList<Supplier> asSortableObservableList() {
+        return internalList;
     }
 
     @Override

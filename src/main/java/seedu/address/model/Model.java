@@ -214,6 +214,12 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();
 
+    /** Returns a sortable view of the supplier list */
+    ObservableList<Supplier> getSortableSupplierList();
+
+    /** Resets the supplier list to its default sorting state */
+    void resetSupplierListToDefaultSortState();
+
     /**
      * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

@@ -32,6 +32,7 @@ public class ModelManager implements Model {
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Employee> filteredEmployees;
     private final FilteredList<Supplier> filteredSuppliers;
+    private final ObservableList<Supplier> sortableSuppliers;
     private final FilteredList<Reservation> filteredReservations;
     private final ReservationsManager reservationsManager;
     private final TableManager tableManager;
@@ -50,6 +51,7 @@ public class ModelManager implements Model {
         filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
         filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
+        sortableSuppliers = this.addressBook.getSortableSupplierList();
         filteredReservations = new FilteredList<>(this.addressBook.getReservationList());
         reservationsManager = this.addressBook.getReservationsManager();
         tableManager = this.addressBook.getTableManager();
@@ -261,6 +263,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Supplier> getFilteredSupplierList() {
         return filteredSuppliers;
+    }
+
+    @Override
+    public ObservableList<Supplier> getSortableSupplierList() {
+        return sortableSuppliers;
+    }
+
+    @Override
+    public void resetSupplierListToDefaultSortState() {
+        this.addressBook.resetSupplierListToDefaultSortState();
     }
 
     @Override

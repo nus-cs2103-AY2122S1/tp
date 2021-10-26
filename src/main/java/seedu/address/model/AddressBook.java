@@ -286,9 +286,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Customer> getCustomerList() {
         return customers.asUnmodifiableObservableList();
     }
+
     @Override
     public ObservableList<Supplier> getSupplierList() {
         return suppliers.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Supplier> getSortableSupplierList() {
+        return suppliers.asSortableObservableList();
+    }
+
+    @Override
+    public void resetSupplierListToDefaultSortState() {
+        suppliers.resetSupplierListToDefaultSortState();
     }
 
     @Override

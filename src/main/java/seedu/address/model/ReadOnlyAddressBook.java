@@ -18,13 +18,13 @@ public interface ReadOnlyAddressBook {
 
     /**
      * Returns an unmodifiable view of the customers list.
-     * This list will not contain any duplicate persons.
+     * This list will not contain any duplicate customers.
      */
     ObservableList<Customer> getCustomerList();
 
     /**
      * Returns an unmodifiable view of the employees list.
-     * This list will not contain any duplicate employee.
+     * This list will not contain any duplicate employees.
      */
     ObservableList<Employee> getEmployeeList();
 
@@ -33,4 +33,16 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate suppliers.
      */
     ObservableList<Supplier> getSupplierList();
+
+    /**
+     * Returns a sortable view of the supplier's list.
+     * This list will not contain any duplicate suppliers.
+     */
+    ObservableList<Supplier> getSortableSupplierList();
+
+    /**
+     * Returns a supplier list that has been reset to its default sort state.
+     * This list will not contain any duplicate suppliers.
+     */
+    void resetSupplierListToDefaultSortState();
 }
