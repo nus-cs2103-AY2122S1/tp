@@ -95,7 +95,7 @@ class JsonAdaptedEvent {
                     Capacity.class.getSimpleName()));
         }
         if (!Capacity.isValidCapacity(capacity)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Capacity.MESSAGE_CONSTRAINTS);
         }
         final Capacity modelCapacity = new Capacity(capacity);
 
@@ -106,7 +106,7 @@ class JsonAdaptedEvent {
                     ResidentList.class.getSimpleName()));
         }
         if (!ResidentList.isValidResidentList(residents)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(ResidentList.MESSAGE_CONSTRAINTS);
         }
         final ResidentList modelResidentList = new ResidentList(residents);
 
