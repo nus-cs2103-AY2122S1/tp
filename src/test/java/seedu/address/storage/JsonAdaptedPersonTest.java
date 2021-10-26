@@ -39,7 +39,7 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final String VALID_SALARY = BENSON.getSalary().toString();
     private static final String VALID_STATUS = BENSON.getStatus().getValue();
-    private static final String VALID_SCHEDULE = BENSON.getSchedule().toString();
+    private static final JsonAdaptedSchedule VALID_SCHEDULE = new JsonAdaptedSchedule(BENSON.getSchedule());
     private static final List<JsonAdaptedPeriod> VALID_PERIODS = BENSON.getAbsentDates().stream()
             .map(JsonAdaptedPeriod::new)
             .collect(Collectors.toList());

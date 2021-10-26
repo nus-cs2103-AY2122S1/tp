@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.function.Predicate;
@@ -18,6 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Slot;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
@@ -180,23 +182,33 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
-        requireAllNonNull(target, dayOfWeek, slot);
-        target.addShift(dayOfWeek, slot);
-
+    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
+        requireAllNonNull(target, dayOfWeek, slot, startDate, endDate);
+        Person staffToReplaceWith = Person.copy(target);
+        Schedule editSchedule = target.getSchedule();
+        editSchedule.addShift(dayOfWeek, slot, startDate, endDate);
+        staffToReplaceWith.setSchedule(editSchedule);
+        setPerson(target, staffToReplaceWith);
     }
 
     @Override
-    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
+                             LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
-        requireAllNonNull(target, dayOfWeek, slot, startTime, endTime);
-        target.setShiftTime(dayOfWeek, slot, startTime, endTime);
+        requireAllNonNull(target, dayOfWeek, slot, startTime, endTime, startDate, endDate);
+        target.setShiftTime(dayOfWeek, slot, startTime, endTime, startDate, endDate);
     }
 
     @Override
-    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                            LocalDate startDate, LocalDate endDate) throws NoShiftException {
         requireAllNonNull(target, dayOfWeek, slot);
-        target.removeShift(dayOfWeek, slot);
+        Person staffToReplaceWith = Person.copy(target);
+        Schedule editSchedule = target.getSchedule();
+        editSchedule.removeShift(dayOfWeek, slot, startDate, endDate);
+        staffToReplaceWith.setSchedule(editSchedule);
+        setPerson(target, staffToReplaceWith);
     }
 
     @Override
@@ -217,5 +229,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

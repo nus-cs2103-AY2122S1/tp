@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,7 +73,8 @@ public class SwapShiftCommandParserTest {
 
         List<Name> nameList = Arrays.asList(new Name("Alex Yeoh"), new Name("David Li"));
         List<String> shiftList = Arrays.asList("monday-0", "tuesday-1");
-        SwapShiftCommand expectedCommand = new SwapShiftCommand(nameList, shiftList);
+        SwapShiftCommand expectedCommand = new SwapShiftCommand(nameList, shiftList,
+                LocalDate.now(), LocalDate.now().plusDays(7));
 
         assertParseSuccess(parser, firstUserInput, expectedCommand);
         assertParseSuccess(parser, secondUserInput, expectedCommand);
