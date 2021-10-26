@@ -282,46 +282,48 @@ Examples:
   Tuesday
 * `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Tuesday and Thursday :camera:
 
+![setmExample](images/setmExample.png)
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Marking attendance of members : `mark`
 
-Marks attendance of members listed as present using a tick.
+Marks attendance of members listed as present, represented by a tick.
 
 Format: `mark INDEX/INDICES`
 
-* Marks the members at the specified `INDEX/INDICES` in the members list as present.
-* `INDEX` refers to the index number/position of the member in the displayed members list.
+* Marks the members at the specified `INDEX/INDICES` in the members list as present
+* `INDEX` refers to the index number/position of the member in the displayed members list
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
 
 Examples: 
 
-* `mark 1 2 3` marks the attendance of the members at indices
-1, 2 and 3 in the displayed list a present.
+* `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list a present :camera:
+
+![markExample](images/markExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Unmarking attendance of members: `unmark`
 
-Unmarks attendance of members marked as present by using a cross.
+Unmarks attendance of members marked as present, represented by a cross.
 
 Format `unmark INDEX/INDICES`
 
-* Unmarks the members at the specified `INDEX/INDICES` in the members list as not present.
-* `INDEX` refers to the index number/position of the member in the displayed members list.
+* Unmarks the members at the specified `INDEX/INDICES` in the members list as not present
+* `INDEX` refers to the index number/position of the member in the displayed members list
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
 
 Examples:
-* `unmark 1 2` unmarks the attendance of members at indices 1 and 2
-as not present.
+* `unmark 1 2` unmarks the attendance of members at indices 1 and 2 as not present
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Clearing all attendance for today: `cleara`
 
-Clears all member's attendance for today.
+Unmarks all member's attendance for and finalises their total attendance up till today.
 
 Format: `cleara`
 
@@ -333,7 +335,7 @@ All attendance data will be removed immediately after this command is executed. 
 
 #### Importing multiple members using a CSV file: `import`
 
-When you need to add or update the details of multiple members, you can import data from a comma-seperated values
+When you want to add or update the details of multiple members at once, you can import data from a comma-separated values
 file using `import`.
 
 Format: `import CSV_FILE_PATH`
@@ -343,18 +345,19 @@ Format: `import CSV_FILE_PATH`
   2. Phone number
   3. Availability
   4. Tags
-* When filling in the details of each member in the CSV file, the Names and Phone fields must be filled 
-  while Availability and Tags fields are optional.
-* `CSV_FILE_PATH` should be relative to the JAR file location.
+* In the CSV file, parameters' formats follows that of [addm](#adding-a-member-addm)
+* `CSV_FILE_PATH` should be relative to the JAR file location
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there is a duplicate member(same name) being imported using the
+If there is a duplicate members(same name) being imported using the
 CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**. 
 </div> <br>
 
 Examples: 
 
-* `import myFile.csv` imports member data from the CSV file in `[JAR_file_location]/myFile.csv`
+* `import myFile.csv` imports member data from the CSV file in `[JAR_file_location]/myFile.csv` :camera:
+
+![importExample](images/importExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -371,6 +374,7 @@ All member data will be removed immediately after this command is executed. This
 [Back to Table of Contents](#table-of-contents)
 
 ### Facility-Specific Features
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:** Facilities are assumed to be available on every day of the week.
@@ -382,7 +386,7 @@ Adds a facility to your facility list.
 
 Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
 
-* `TIME` specifies the start time and is to be inputted in the format HH:MM
+* `TIME` specifies the start time and is to be inputted in the format HHMM
 * `CAPACITY` specifies the maximum allowed people in the facility
 
 <div markdown="block" class="alert alert-info">
@@ -393,8 +397,11 @@ as they are considered duplicates.
 
 Examples:
 
-* `addf n/Court 1 l/University Sports Hall t/15:00 c/5` adds Court 1 at University Sports Hall at 3pm with a capacity of
+* `addf n/Court 1 l/University Sports Hall t/1500 c/5` adds Court 1 at University Sports Hall at 3pm with a capacity of
   5
+* `addf n/Court 19 l/Tampines Hub Badminton Hall t/1700 c/5` adds Court 19 at Tampines Hub Badminton Hall at 5pm with a capacity of 5 :camera:
+
+![addfExample](images/addfExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -466,6 +473,9 @@ Examples:
 
 * `findf redhill` returns `Redhill Sports Complex` and `Redhill Field`
 * `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
+* `findf opp tampines` returns `Opp University Hall` and `Tampines Hub Badminton Hall` :camera:
+
+![findfExample](images/findfExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -479,33 +489,23 @@ Format: `split DAY`
 * Allocate members available at the specified `DAY` to each facility
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** SportsPA will warn you when there are no members available on the specified day or insufficient facilities
+to accommodate all available members and the allocation will not be executed.
+</div>
+
 Examples:
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
-  user
+  user :camera:
 
-[Back to Table of Contents](#table-of-contents)
-
-#### Allocating a member to a facility : `allocate`
-
-If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility <br>
-on a specified day if they are available and the facility is not already at max capacity, using `allocate`.
-
-Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
-
-* `MEMBER_INDEX` refers to the index shown in the displayed member list. 
-* `FACILITY_INDEX` refers to the index shown in the displayed facility list.
-* Both `MEMBER_INDEX` and `FACILITY_INDEX` **must be positive integers** 1, 2, 3…
-* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
-
-Examples:
-* `allocate 1 2 3` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
-  at index 2 in the displayed facility list on Wednesday.
+![splitExample](images/splitExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Deallocating a member from a facility : `deallocate`
 
-You can easily accommodate changes in member's availability by deallocating a member from a facility they were <br> 
+You can easily accommodate changes in member's availability by deallocating a member from a facility they were <br>
 previously allocated to on a specified day, using `deallocate`.
 
 Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
@@ -517,7 +517,33 @@ Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
 
 Examples:
 * `deallocate 2 4 5` removes the member at index 2 in the displayed member list from the allocation list <br> of the facility
-at index 4 in the displayed facility list on Friday.
+  at index 4 in the displayed facility list on Friday.
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Allocating a member to a facility : `allocate`
+
+If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility 
+using `allocate`.
+
+Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
+
+* `MEMBER_INDEX` refers to the index shown in the displayed member list
+* `FACILITY_INDEX` refers to the index shown in the displayed facility list
+* Both `MEMBER_INDEX` and `FACILITY_INDEX` **must be positive integers** 1, 2, 3…
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** Members you choose to allocate must be available on the specified day and their addition must not result in 
+the selected facility's capacity to exceed.
+</div>
+
+Examples:
+* `allocate 1 2 1` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
+  at index 2 in the displayed facility list on Monday :camera:
+
+![allocateExample](images/allocateExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -563,7 +589,9 @@ will replace that existing one.
 Examples:
 
 * `alias s/lf cw/listf` creates an alias for `listf` command. Entering `lf` will execute the `listf` command and a list
-  of all facilities will be shown
+  of all facilities will be shown :camera:
+
+![aliasExample](images/aliasExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -660,8 +688,8 @@ Action | Format, Examples
 **Edit facility**| `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]` <br> e.g. `editf 2 n/Court 20 l/University Sports Hall`
 **Find facility**| `findf KEYWORD` <br> e.g. `findf Clementi`, `findf Utown`
 **Split members into facilities**| `split DAY` <br> e.g. `split Mon`
-**Allocate member to a facility**|`allocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `allocate 1 2 5`
 **Deallocate member from a facility**|`deallocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `deallocate 2 3 4`
+**Allocate member to a facility**|`allocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `allocate 1 2 5`
 **Clear facilities**|`clearf`
 
 [Back to Table of Contents](#table-of-contents)

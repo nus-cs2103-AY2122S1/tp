@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Person;
 
 /**
