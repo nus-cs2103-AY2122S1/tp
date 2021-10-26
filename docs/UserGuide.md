@@ -15,15 +15,15 @@ title: User Guide
 
 Welcome and thank you for downloading **FAST**! Are you a financial advisor having troubles managing your contacts
 on your phone? Do you find existing contact management software troublesome and not intuitive to use? Do you want
-a cheaper alternative compared to those paid contact management software? If you answered "YES!" to any those questions
-then FAST is right for you!
+a free alternative compared to those paid contact management software? If you answered "YES!" to any those questions,
+then FAST is for you!
 
 FAST stands for Financial Advisor Smart Tracker (FAST), and as its name implies, we strive to be the fastest, and most
 efficient when it comes to managing your contacts.
-FAST is a **free open-source desktop app for Financial Advisors to manage their contacts.**
+FAST is a **free and open-source desktop app for Financial Advisors to manage their contacts.**
 More importantly, FAST is **optimized for those who prefer to work with a Command Line
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-For Financial Advisors that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
+If you are a Financial Advisor that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
 
 ### Features overview
@@ -35,7 +35,7 @@ Here is an overview of the features FAST offers:
 * View built-in analysis of your client base to better understand your portfolio.
 
 ### Purpose of this guide
-This guide aims to help new users to be familar with FAST. After reading this guide, new users will be more familar with the different features available in FAST.
+This guide aims to help new users to be familiar with FAST. After reading this guide, new users will be more familiar with the different features available in FAST.
 This guide also serves as a reminder for existing users to quickly search for specific information if they are unsure of how to use certain features, 
 by clicking on the links, to jump to the section where the information which they are looking for exists.
 
@@ -45,7 +45,7 @@ by clicking on the links, to jump to the section where the information which the
 We recommend first time users to read the user guide in the order that is written.
 Throughout the user guide, we include links like [this](#how-to-use-this-user-guide) which will jump to the 
 corresponding section of the user guide. These links allow you to quickly navigate this document. 
-This guide follows the structure as stated [this](#structure-of-this-document).
+This guide follows the structure as stated [here](#structure-of-this-document).
 
 We also use special formats to highlight information that will be important or useful to you.
 These include:
@@ -78,7 +78,7 @@ Messages that appear in these boxes will be useful in helping you to understand 
 
 `Example technical information`
 
-Messages that appear in these boxes indicate that the message is of a more technical nature, such as user input.
+Messages that appear in these boxes indicate that the text is of a more technical nature, such as user input.
 
 ### Structure of this document
 To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
@@ -198,7 +198,7 @@ are all sample data! Here are some commands you can try to see what they do:
     * e.g. `help 123` will simply be interpreted as `help`.
 
 
-* If a command expects a specific set of parameters and you entered *extra* parameter into the command (with unrecognised),
+* If a command expects a specific set of parameters, and you entered *extra* parameter into the command (with unrecognised),
 prefix, then FAST will assume it to be part of the previous parameter input, which may or may not be valid for certain commands. <br>
     * e.g. if a command expects this parameter `ea v/New York` but you enter `ea v/New York p/87657654`, 
   FAST will assume your input to `v/` to be `New York p/87657654`.
@@ -260,7 +260,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * The email address of your client
 * Should be in this format: `local-part@domain`
 * `local-part`: 
-  * should only contain *alphanumeric characters* and these *special characters* excluding parenthesis (!#$%&'*+/=?{|}~^.-`).
+  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?{|}~^.-`).
   * should not start and end with special characters,
 * `domain`: 
   * must be at least **2** characters long. 
@@ -301,7 +301,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
   1. Normal Tags: should not be longer than 20 characters
   2. Priority Tag: either one of the 3 priorities (low, med, high)
   3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
-* Refer to [Tags](#tags) to find out more about each tag
+* Refer to [Tags](#tag) to find out more about each tag
 
 #### `TIME`
 * The timing of an appointment with your client
@@ -327,7 +327,7 @@ in appointment dates and tag your clients all within FAST.
 (---------------------insert an image of a client card in FAST---------------------------)
 
 In this user guide, we will showcase commands related to Clients first followed by sections on [Appointment](#appointments)
-and [Tags](#tags). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
+and [Tags](#tag). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
 or view our [other utility features](#others). 
 
 <br>
@@ -404,7 +404,7 @@ You can delete the specified client from FAST. This is useful when a client has 
 * Deletes the client(s) at the specified `INDEX`.
 
 **Parameters**:
-* [`INDEX`](#INDEX)
+* [`INDEX`](#index)
 
 **Examples**:
 * `list` followed by `del 2` deletes the second clients in FAST.
@@ -570,7 +570,7 @@ This also allows you to keep track of the number of completed appointments with 
 **Examples**:
 * `ma 1` updates the completed appointment counter of the first client.
 
-![result for `done 1`](images/appointmentDone.png)
+![result for `done 1`](images/appointmentDone.PNG)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
 
@@ -678,7 +678,7 @@ to viewing your full client list after a
 
 You can sort all your clients by a given condition, allowing you to keep your clients list orderly and well-organised.
 You also can use this command quickly sieve through large client lists.
-Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tags).
+Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tag).
 
 **Format**: `sort KEYWORD`
 * There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
@@ -693,8 +693,8 @@ Currently, you can sort by name, [appointment date](#appointments), and [priorit
 
 #### Searching for clients: `find`
 
-You can use this command to find clients by their name, [priority](#tags), [tags](#tags) or
-[remarks](#adding-a-remark-rmk). This is useful if your have many clients in FAST and wish to quickly find a
+You can use this command to find clients by their name, [priority](#tag), [tags](#tag) or
+[remarks](#adding-a-remark-to-your-client-rmk). This is useful if your have many clients in FAST and wish to quickly find a
 specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
 
 **Format 1**: `find QUERY [MORE_QUERIES]` <br>
@@ -828,12 +828,13 @@ The tables below provides you with a summary for **all** the available commands 
 The commands are categorised (based on their purpose) into 5 different categories:
 * [Contact Management](#Contact-Management)
 * [Appointment](#Appointment)
-* [Tags](#Tags)
+* [Tags](#tag)
 * [Navigation](#Navigation)
 * [Others](#Others)
 
 ### Contact Management
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete Contact** | `del INDEX`<br> e.g. `del 3`
@@ -842,7 +843,8 @@ Action|Format, Examples
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 
 ### Appointment
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Add appointment** |`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br>
 **Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br>
@@ -850,20 +852,23 @@ Action|Format, Examples
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
 
 ### Tags
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Edit Tag** |`tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
 **Investment Plan Tag** | Health Insurance: `ip/health`<br>Investment: `ip/invest`<br>Life Insurance: `ip/life`<br>Motor Insurance: `ip/motor`<br>Property Insurance: `ip/property`<br>Savings: `ip/save`<br>Travel Insurance: `ip/travel`<br><br>
 **Priority Tag** | Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
 
 ### Navigation
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Sort** | `sort KEYWORD`
 **List** | `list`
 
 ### Others
+
 Action|Format, Examples
 --------|------------------
 **Help** | `help [COMMAND]` <br> e.g. `help add`
