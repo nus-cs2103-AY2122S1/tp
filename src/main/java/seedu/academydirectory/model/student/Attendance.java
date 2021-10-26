@@ -69,6 +69,18 @@ public class Attendance implements Information {
         }
     }
 
+    /**
+     * Get attendance status of a specific session number
+     * @param sessionNumber to be retrieve from
+     * @return attendance status
+     */
+    public boolean getAttendanceFromSession(Integer sessionNumber) {
+        if (sessionNumber < 0 || sessionNumber >= attendanceArray.length) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return attendanceArray[sessionNumber];
+    }
+
     public static boolean isValidAttendance(String test) {
         return test.equals("1") || test.equals("0");
     }

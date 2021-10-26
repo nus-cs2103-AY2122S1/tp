@@ -1,13 +1,25 @@
 package seedu.academydirectory.ui.creator;
 
-import javafx.scene.control.Control;
-import javafx.scene.control.TextArea;
+import javafx.scene.Node;
 import seedu.academydirectory.model.AdditionalInfo;
 
-public class DefaultCreator implements Creator {
+public class DefaultCreator extends Creator {
+
+    private static final String FXML = "DefaultCreator.fxml";
+
+    private final AdditionalInfo<?> additionalInfo;
+
+    /**
+     * Constructor of Default Creator
+     * @param additionalInfo information
+     */
+    public DefaultCreator(AdditionalInfo<?> additionalInfo) {
+        super(additionalInfo, FXML);
+        this.additionalInfo = additionalInfo;
+    }
 
     @Override
-    public Control create(AdditionalInfo<?> additionalInfo) {
-        return new TextArea("Work In Progress");
+    public Node create() {
+        return getRoot();
     }
 }

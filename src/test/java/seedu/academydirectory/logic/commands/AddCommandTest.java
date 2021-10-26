@@ -20,6 +20,7 @@ import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.AcademyDirectory;
+import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyUserPrefs;
@@ -84,6 +85,11 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements VersionedModel {
+        @Override
+        public void setAdditionalInfo(AdditionalInfo<?> additionalInfo) {
+            throw new AssertionError("This method should not be called");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");

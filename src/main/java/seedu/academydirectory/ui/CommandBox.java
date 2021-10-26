@@ -70,6 +70,18 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Execute a command by action, through using the equivalent GUI
+     * @param commandText execute the command
+     */
+    public void execute(String commandText) {
+        try {
+            commandExecutor.execute(commandText);
+        } catch (CommandException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Represents a function that can execute commands.
      */
     @FunctionalInterface
