@@ -11,15 +11,13 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.claim.Claim;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -125,10 +123,10 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        appointmentListPanel = new AppointmentListPanel(logic.getFilteredPersonList());
+        ObservableList<Person> ls = logic.getAppointmentList();
+        appointmentListPanel = new AppointmentListPanel(logic.getAppointmentList());
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
 
-        ObservableList<Pair<Claim, Name>> ls = logic.getClaimList();
         claimListPanel = new ClaimListPanel(logic.getClaimList());
         claimListPanelPlaceholder.getChildren().add(claimListPanel.getRoot());
 
