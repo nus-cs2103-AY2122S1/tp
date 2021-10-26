@@ -214,7 +214,7 @@ public class CalendarEntryList {
      * Converts a lesson to a {@code List<Entry<Lesson>>} split by cancelled dates.
      *
      * @param owner  The person with the lesson.
-     * @param lesson The
+     * @param lesson The lesson associated with this entry.
      * @return A list of entries representing the lesson.
      */
     public List<Entry<Lesson>> convertRecurringLessonToEntries(Person owner, Lesson lesson) {
@@ -248,7 +248,7 @@ public class CalendarEntryList {
      * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
      *
      * @param owner The person with the lesson.
-     * @param lesson The lesson to be converted to a calendar entry.
+     * @param lesson The lesson associated with this entry.
      * @param entryInterval The interval of this entry.
      * @return Then calendar entry of the lesson.
      */
@@ -267,7 +267,7 @@ public class CalendarEntryList {
      * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
      *
      * @param owner The person with the lesson.
-     * @param lesson The lesson to be converted to a calendar entry.
+     * @param lesson The lesson associated with this entry.
      * @return The calendar entry that also contains this lesson.
      */
     private Entry<Lesson> convertToMakeupEntry(Person owner, Lesson lesson) {
@@ -279,7 +279,7 @@ public class CalendarEntryList {
      * The entry is recurring weekly.
      *
      * @param owner The person with the lesson.
-     * @param lesson The lesson to be converted to a calendar entry.
+     * @param lesson The lesson associated with this entry.
      * @param entryInterval The interval of this entry.
      * @return The calendar entry that also contains this lesson.
      */
@@ -296,7 +296,7 @@ public class CalendarEntryList {
      * The entry is recurring weekly and has an end date.
      *
      * @param owner The person with the lesson.
-     * @param lesson The lesson to be converted to a calendar entry.
+     * @param lesson The lesson associated with this entry.
      * @param entryInterval The interval of this entry.
      * @param endDate The end date of the recurrence.
      * @return
