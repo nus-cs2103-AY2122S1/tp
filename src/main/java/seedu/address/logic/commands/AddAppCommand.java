@@ -31,14 +31,14 @@ public class AddAppCommand extends Command {
             + "Parameters: "
             + PREFIX_INDEXES + "INDEX,INDEX "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_STARTDATETIME + "DATE (dd-MM-yyyy), TIME (HHmm) "
-            + PREFIX_ENDDATETIME + "DATE (dd-MM-yyyy), TIME (HHmm) "
+            + PREFIX_STARTDATETIME + "DATE (dd-MM-yyyy) TIME (HHmm) "
+            + PREFIX_ENDDATETIME + "DATE (dd-MM-yyyy) TIME (HHmm) "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_INDEXES + "1,2,3 "
             + PREFIX_ADDRESS + "Starbucks @ Raffles City "
-            + PREFIX_STARTDATETIME + "2021-01-01 14:00 "
-            + PREFIX_ENDDATETIME + "2021-01-01 15:00 "
+            + PREFIX_STARTDATETIME + "2021-01-01 1400 "
+            + PREFIX_ENDDATETIME + "2021-01-01 1500 "
             + PREFIX_DESCRIPTION + "discuss marketing strategies";
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
