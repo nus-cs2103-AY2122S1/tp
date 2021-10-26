@@ -5,6 +5,8 @@ import seedu.address.model.Model;
 import seedu.address.model.module.NameContainsKeywordsPredicate;
 import seedu.address.model.module.task.Task;
 
+import java.util.logging.Logger;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -21,6 +23,8 @@ public class TfindCommand extends Command {
             + "Example: " + COMMAND_WORD + " submit consent form";
 
     private final NameContainsKeywordsPredicate<Task> predicate;
+
+    private static Logger logger = Logger.getLogger("Foo");
 
     public TfindCommand(NameContainsKeywordsPredicate<Task> predicate) {
         this.predicate = predicate;

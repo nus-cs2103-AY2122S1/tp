@@ -17,6 +17,8 @@ public class NameContainsKeywordsPredicate<T extends Module> implements Predicat
 
     @Override
     public boolean test(T module) {
+        System.out.println(keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getName().fullName, keyword)));
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getName().fullName, keyword));
     }

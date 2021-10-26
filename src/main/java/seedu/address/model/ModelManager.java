@@ -258,7 +258,7 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Task> getFilteredTaskList(Member member) {
         loadTaskList(member);
-        return taskListManager.asUnmodifiableObservableList();
+        return filteredTasks;
     }
 
     /**
@@ -267,7 +267,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
-        return taskListManager.asUnmodifiableObservableList();
+        return filteredTasks;
     }
 
     /**
@@ -285,6 +285,11 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         filteredTasks.setPredicate(predicate);
+        for (Task task:
+                filteredTasks) {
+            System.out.println("in model");
+            System.out.println(task.getName());
+        }
     }
 
     @Override
