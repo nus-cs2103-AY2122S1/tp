@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 /**
  * A Jackson-CSV-Friendly version of {@link Person}
  */
-@JsonPropertyOrder({"name", "github", "telegram", "address", "phone", "tags"}) // Ensures correct sequence in csv
+@JsonPropertyOrder({"name", "github", "telegram", "address", "phone", "email", "tagged"}) // sequence in csv
 public class CsvAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -32,7 +32,7 @@ public class CsvAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String tagged;
+    private String tagged = "";
 
     /**
      * Constructs a {@code CsvAdaptedPerson} with the given person details.
@@ -45,7 +45,9 @@ public class CsvAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tagged = tagged;
+        if (tagged != null) {
+            this.tagged = tagged;
+        }
     }
 
     /**
@@ -65,18 +67,53 @@ public class CsvAdaptedPerson {
         tagged = String.join(" ", tagsString);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getTelegram() {
+        return telegram;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getTagged() {
+        return tagged;
+    }
+
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        if (tagged == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
+
+        }
         List<Tag> personTags = new ArrayList<>();
-        if (!tagged.equals("")) {
-            String[] stringTags = tagged.split(" ");
-            for (String tagString : stringTags) {
-                personTags.add(new Tag(tagString));
+        String[] stringTags = tagged.split(" ");
+        for (String tagString : stringTags) {
+            if (tagString.isEmpty()) {
+                continue;
+            } else if (!Tag.isValidTagName(tagString)) {
+                throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
             }
+            personTags.add(new Tag(tagString));
         }
 
         if (name == null) {

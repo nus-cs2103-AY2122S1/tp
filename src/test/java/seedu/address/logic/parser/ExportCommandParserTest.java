@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FILENAME_TXT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_CSV;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_JSON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -11,12 +13,25 @@ import seedu.address.logic.commands.ExportCommand;
 
 public class ExportCommandParserTest {
 
-    private ExportCommandParser parser = new ExportCommandParser();
+    private final ExportCommandParser parser = new ExportCommandParser();
 
     @Test
-    public void parse_fileNamePresent_success() {
-        // file name present
+    public void parse_fileNamePresentJson_success() {
+        // file name is .json
         assertParseSuccess(parser, VALID_FILENAME_JSON, new ExportCommand(VALID_FILENAME_JSON));
+    }
+
+    @Test
+    public void parse_fileNamePresentCsv_success() {
+        // file name is .csv
+        assertParseSuccess(parser, VALID_FILENAME_CSV, new ExportCommand(VALID_FILENAME_CSV));
+    }
+
+    @Test
+    public void parse_fileNameWrongExtension_failure() {
+        // file name present, but is not or .json or .csv
+        assertParseFailure(parser, INVALID_FILENAME_TXT,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
     }
 
     @Test
