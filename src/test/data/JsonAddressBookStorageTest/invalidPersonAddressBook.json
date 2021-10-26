@@ -5,6 +5,7 @@
     "github": "valid-github",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "isFavourite" : false
   } ]
 }
