@@ -43,7 +43,7 @@ public class ClassId {
 
     public int getClassNum() {
         String ss = classId.substring(1, 3);
-        return ss.charAt(1) == '0' ? Integer.parseInt(ss.substring(1,2)) : Integer.parseInt(ss);
+        return ss.charAt(0) == '0' ? Integer.parseInt(ss.substring(1,2)) : Integer.parseInt(ss);
     }
 
     @Override

@@ -15,6 +15,7 @@ import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.comparator.SortClassId;
 
 /**
  * Dashboard window of student data.
@@ -24,9 +25,13 @@ public class DashboardWindow extends PopupWindow {
     private static final String FXML = "DashboardWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
     private Logic logic;
+    private TreeMap<ClassId, Integer> labsMarkedMap;
 
     @FXML
     private StackPane overallStatsPlaceholder;
+
+    @FXML
+    private StackPane labsMarkedList;
 
 
     /**
@@ -38,6 +43,7 @@ public class DashboardWindow extends PopupWindow {
         super(FXML, root);
         this.logic = logic;
         fillOverallStats();
+        fillLabsMarked();
     }
 
     /**
@@ -50,15 +56,15 @@ public class DashboardWindow extends PopupWindow {
     private void fillOverallStats() {
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
         ObservableList<Student> stuList = readOnlyPE.getStudentList();
-        TreeMap<Integer, Integer> labsMarkedMap= new TreeMap<>();
+        labsMarkedMap = new TreeMap<>(new SortClassId());
         HashSet<ClassId> classes = new HashSet<>();
         for (Student s: stuList) {
             classes.add(s.getClassId());
         }
 
         for (ClassId cid : classes) {
-            if (!labsMarkedMap.containsKey(cid.getClassNum())) {
-                labsMarkedMap.put(cid.getClassNum(), 0);
+            if (!labsMarkedMap.containsKey(cid)) {
+                labsMarkedMap.put(cid, 0);
             }
         }
 
@@ -67,28 +73,44 @@ public class DashboardWindow extends PopupWindow {
             for (Lab l : stuLabs) {
                 if (!l.isMarked()) {
                     ClassId cid = s.getClassId();
-                    labsMarkedMap.put(cid.getClassNum(), labsMarkedMap.get(cid.getClassNum()) + 1);
+                    labsMarkedMap.put(cid, labsMarkedMap.get(cid) + 1);
                 }
             }
-        }
-
-        for (Integer cid: labsMarkedMap.keySet()) {
-            String key = cid.toString();
-            String value = labsMarkedMap.get(cid).toString();
-            System.out.println(key + " " + value);
         }
 
         int numStudents = stuList.size();
         int numClasses = classes.size();
         int numLabs = stuList.size() > 0 ? stuList.get(0).getLabResultList().size() : 0;
 
-        String overallStats = "";
-        overallStats += "No. of students: " + numStudents + "\n";
-        overallStats += "No. of classes: " + numClasses + "\n";
-        overallStats += "No. of labs: " + numLabs + "\n";
-        Label label = new Label(overallStats);
+        String dataToDisplay = formatDataToDisplay(numStudents, numClasses, numLabs);
+        Label label = new Label(dataToDisplay);
         label.getStylesheets().add("view/Dashboard.css");
         label.getStyleClass().add("overall-stats");
         overallStatsPlaceholder.getChildren().add(label);
+    }
+
+    void fillLabsMarked() {
+        String labsMarked = formatLabsToDisplay(labsMarkedMap);
+        Label labsLabel = new Label(labsMarked);
+        labsLabel.getStylesheets().add("view/Dashboard.css");
+        labsLabel.getStyleClass().add("labs-marked");
+        labsMarkedList.getChildren().add(labsLabel);
+    }
+
+    private String formatDataToDisplay(int numStudents, int numClasses, int numLabs) {
+        return "No. of students: " + numStudents + "\n" +
+                "No. of classes: " + numClasses + "\n" +
+                "No. of labs: " + numLabs + "\n\n";
+    }
+
+    private String formatLabsToDisplay(TreeMap<ClassId, Integer> labMap) {
+        StringBuilder dataToDisplay = new StringBuilder("No. of labs left to mark:\n\n");
+        for (ClassId cid: labMap.keySet()) {
+            String key = cid.toString();
+            String value = labMap.get(cid).toString();
+            dataToDisplay.append(key).append(": ").append(value).append("\n\n");
+        }
+
+        return dataToDisplay.append("Keep it going!  😄").toString();
     }
 }

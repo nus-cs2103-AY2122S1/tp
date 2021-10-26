@@ -1,6 +1,18 @@
-.overall-stats {
-    -fx-text-fill: #FFD369;
+* {
     -fx-font-family: null;
     -fx-font-size: 15;
     -fx-text-alignment: center;
+}
+
+.overall-stats {
+    -fx-text-fill: #FFD369;
+
+}
+
+.labs-marked {
+    -fx-text-fill: #1DB9C3;
+}
+
+.final-message {
+    -fx-font-size: 18;
 }
