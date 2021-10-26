@@ -54,17 +54,17 @@
             </children>
          </HBox>
          <HBox>
+             <children>
+                 <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="💵 Subscription:" />
+                 <Label fx:id="subscription" styleClass="cell_small_label" text="\$subscription" />
+             </children>
+         </HBox>
+        <HBox>
             <children>
                 <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="🎒 Lesson(s):" />
                 <Label fx:id="lessons" styleClass="cell_small_label" text="\$lessons" wrapText="true" />
             </children>
-         </HBox>
-         <HBox>
-            <children>
-                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="💵 Subscription:" />
-                <Label fx:id="subscription" styleClass="cell_small_label" text="\$subscription" />
-            </children>
-         </HBox>
+        </HBox>
     </VBox>
       <rowConstraints>
          <RowConstraints />
