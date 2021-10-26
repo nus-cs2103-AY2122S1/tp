@@ -26,6 +26,7 @@ import seedu.address.model.client.Client;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.Storage;
+import seedu.address.ui.ThemeType;
 
 /**
  * The main LogicManager of the app.
@@ -104,6 +105,21 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Path> getAddressBookList() {
         return model.getAddressBookList();
+    }
+
+    @Override
+    public ObservableList<ThemeType> getThemeList() {
+        return model.getThemeList();
+    }
+
+    @Override
+    public void setTheme(ThemeType theme) {
+        model.setTheme(theme);
+    }
+
+    @Override
+    public ThemeType getTheme() {
+        return model.getTheme();
     }
 
     @Override

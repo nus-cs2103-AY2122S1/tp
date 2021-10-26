@@ -31,6 +31,7 @@ import seedu.address.model.client.ClientId;
 import seedu.address.model.client.NextMeeting;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
+import seedu.address.ui.ThemeType;
 
 public class AddCommandTest {
 
@@ -128,6 +129,21 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Path> getAddressBookList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ThemeType> getThemeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTheme(ThemeType theme) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ThemeType getTheme() {
             throw new AssertionError("This method should not be called.");
         }
 

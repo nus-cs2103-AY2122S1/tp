@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.ui.ThemeType;
 
 /**
  * API of the Logic component
@@ -46,11 +47,12 @@ public interface Logic {
     ObservableList<Client> getFilteredClientList();
 
     /**
-    * Returns an unmodifiable view of the clients filtered by next meetings for current user.
-    * */
-    ObservableList<Client> getSortedNextMeetingList();
+     * Returns an unmodifiable view of the clients filtered by next meetings for current user. 
+     */
 
-    /** Returns an unmodifiable view of the client to view */
+    /**
+     * Returns an unmodifiable view of the client to view
+     */
     ObservableList<Client> getClientToView();
 
     /**
@@ -87,6 +89,7 @@ public interface Logic {
 
     /**
      * Creates the AddressBook at the specified {@code Path filePath}
+     *
      * @throws CommandException If an error occurs during command execution.
      */
     void createAddressBook() throws CommandException;
@@ -96,4 +99,19 @@ public interface Logic {
      * Returns the list of all address book file path.
      */
     ObservableList<Path> getAddressBookList();
+
+    /**
+     * Returns the list of all filtered list of themes.
+     */
+    ObservableList<ThemeType> getThemeList();
+
+    /**
+     * Sets the theme of the GUI in user prefs.
+     */
+    void setTheme(ThemeType theme);
+
+    /**
+     * Returns the current theme.
+     */
+    ThemeType getTheme();
 }
