@@ -97,6 +97,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Marks the status of the person in the list to "Done".
+     */
     public void markPerson(Person toMark) {
         requireNonNull(toMark);
 
@@ -111,6 +114,9 @@ public class UniquePersonList implements Iterable<Person> {
 
     }
 
+    /**
+     * Unmarks the status of the person in the list to "Not Done".
+     */
     public void unmarkPerson(Person toUnmark) {
         requireNonNull(toUnmark);
 
