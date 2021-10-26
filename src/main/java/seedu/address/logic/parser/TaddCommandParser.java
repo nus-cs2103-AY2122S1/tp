@@ -35,15 +35,10 @@ public class TaddCommandParser implements Parser<TaddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaddCommand.MESSAGE_USAGE));
         }
 
-<<<<<<< HEAD
-        Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_NAME).get());
         Set<Index> memberIdList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
-=======
         Name taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
         TaskDeadline taskDeadline = ParserUtil.parseTaskDeadline(argMultimap.getValue(PREFIX_DATE).get());
         Task task = new Task(taskName, taskDeadline);
-        Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
->>>>>>> master
 
         return new TaddCommand(memberIdList, task);
     }
