@@ -1,25 +1,26 @@
 package seedu.academydirectory.ui.creator;
 
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.layout.StackPane;
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.fx.ChartViewer;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
+
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.layout.StackPane;
 import seedu.academydirectory.model.AdditionalInfo;
 
-import java.awt.Color;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import org.jfree.chart.fx.ChartViewer;
 
 public class GraphCreator extends Creator {
 
@@ -34,9 +35,10 @@ public class GraphCreator extends Creator {
      * Constructor of Graph Creator
      * @param additionalInfo info to be passed in
      */
+    @SuppressWarnings("unchecked")
     public GraphCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
-        Map<String, List<Integer>> rawResults = (Map<String, List<Integer>>) additionalInfo.get();
+        Map<String, List<Integer>> rawResults = (HashMap<String, List<Integer>>) additionalInfo.get();
         this.studentAssessmentResults = this.cleanAssessmentResults(rawResults);
 
         BoxAndWhiskerCategoryDataset dataset = this.createDataset();
@@ -45,22 +47,20 @@ public class GraphCreator extends Creator {
         placeHolder.getChildren().add(chartViewer);
     }
 
-    private List<Integer> filterList(Predicate<Integer> predicate, List<Integer> list) {
-        return list.stream().filter(num -> predicate.test(num)).collect(Collectors.toList());
+    private List<Integer> filterNegative(List<Integer> list) {
+        return list.stream().filter(num -> num >= 0).collect(Collectors.toList());
     }
 
     private Map<String, List<Integer>> cleanAssessmentResults(Map<String, List<Integer>> assessmentResults) {
-
-        return assessmentResults.entrySet()
-                .stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        //Remove all -1 from the grades
-                        entrySet -> filterList(value -> value >= 0, entrySet.getValue())));
+        return assessmentResults
+            .entrySet()
+            .stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                entrySet -> filterNegative(entrySet.getValue())));
     }
 
     private BoxAndWhiskerCategoryDataset createDataset() {
-        String[] entities = {"RA1", "Midterm", "Final"};
 
         DefaultBoxAndWhiskerCategoryDataset dataset = new
                 DefaultBoxAndWhiskerCategoryDataset();

@@ -1,18 +1,19 @@
 package seedu.academydirectory.logic.parser;
 
-
 import seedu.academydirectory.logic.commands.VisualiseCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
-public class VisualiseCommandParser implements Parser<VisualiseCommand>  {
+
+public class VisualiseCommandParser implements Parser<VisualiseCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the VisualiseCommand
-     * and returns an VisualiseCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses {@code userInput} into a command and returns it.
+     *
+     * @param userInput
+     * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public VisualiseCommand parse(String args) throws ParseException {
-        return new VisualiseCommand();
+    public VisualiseCommand parse(String userInput) throws ParseException {
+        return null;
     }
 }

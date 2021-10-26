@@ -2,17 +2,16 @@ package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Student;
-
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 
 public class VisualiseCommand extends Command {
 
