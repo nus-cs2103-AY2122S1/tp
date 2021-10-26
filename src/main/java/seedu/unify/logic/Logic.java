@@ -9,6 +9,7 @@ import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.WeeklyTasks;
 
 /**
  * API of the Logic component
@@ -34,7 +35,7 @@ public interface Logic {
     ObservableList<Task> getFilteredTaskList();
 
     /** Returns an unmodifiable view of the filtered list of tasks */
-    ObservableList<Task> getWeeklyTaskList();
+    WeeklyTasks getWeeklyTaskList();
 
     /**
      * Returns the user prefs' address book file path.

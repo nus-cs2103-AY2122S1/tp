@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.unify.model.task.Task;
 
+
 /**
  * An UI component that displays information of a {@code Task} in the specified day.
  */

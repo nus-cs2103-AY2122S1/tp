@@ -7,7 +7,7 @@ import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalTasks.ALICE;
-import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,8 +37,8 @@ public class UniFyTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        UniFy newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyUniFy_replacesData() {
+        UniFy newData = getTypicalUniFy();
         uniFy.resetData(newData);
         assertEquals(newData, uniFy);
     }
@@ -46,7 +46,7 @@ public class UniFyTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two tasks with the same identity fields
-        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
         UniFyStub newData = new UniFyStub(newTasks);
@@ -60,20 +60,20 @@ public class UniFyTest {
     }
 
     @Test
-    public void hasTask_taskNotInAddressBook_returnsFalse() {
+    public void hasTask_taskNotInUniFy_returnsFalse() {
         assertFalse(uniFy.hasTask(ALICE));
     }
 
     @Test
-    public void hasTask_taskInAddressBook_returnsTrue() {
+    public void hasTask_taskInUniFy_returnsTrue() {
         uniFy.addTask(ALICE);
         assertTrue(uniFy.hasTask(ALICE));
     }
 
     @Test
-    public void hasTask_taskWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasTask_taskWithSameIdentityFieldsInUniFy_returnsTrue() {
         uniFy.addTask(ALICE);
-        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniFy.hasTask(editedAlice));
     }

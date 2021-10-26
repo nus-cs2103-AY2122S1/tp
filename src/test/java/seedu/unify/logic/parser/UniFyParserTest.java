@@ -31,7 +31,7 @@ import seedu.unify.testutil.TaskUtil;
 
 public class UniFyParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final UniFyParser parser = new UniFyParser();
 
     @Test
     public void parseCommand_add() throws Exception {

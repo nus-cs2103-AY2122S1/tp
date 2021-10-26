@@ -10,6 +10,7 @@ import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.commands.ClearCommand;
 import seedu.unify.logic.commands.Command;
 import seedu.unify.logic.commands.DeleteCommand;
+import seedu.unify.logic.commands.DoneCommand;
 import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.ExitCommand;
 import seedu.unify.logic.commands.FindCommand;
@@ -21,7 +22,7 @@ import seedu.unify.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class UniFyParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -53,6 +54,9 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

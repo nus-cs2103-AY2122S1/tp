@@ -23,15 +23,16 @@ public class TypicalTasks {
     public static final Task ALICE = new TaskBuilder().withName("Alice Pauline")
             .withDate("2021-12-11")
             .withTime("12:45")
-            .withTag("friends").build();
-    public static final Task BENSON = new TaskBuilder().withName("Benson Meier")
+            .withTags("friends").build();
+    public static final Task MATH_ASSIGNMENT = new TaskBuilder().withName("Math Assignment 1")
             .withDate("2021-11-23")
             .withTime("23:41")
-            .withTag("friends").build();
+            .withTags("Important")
+            .withState("TODO").build();
     public static final Task CARL = new TaskBuilder().withName("Carl Kurz").withTime("23:41")
             .withDate("2021-10-25").build();
     public static final Task DANIEL = new TaskBuilder().withName("Daniel Meier").withTime("07:24")
-            .withDate("2021-12-11").withTag("friends").build();
+            .withDate("2021-12-11").withTags("friends").build();
     public static final Task ELLE = new TaskBuilder().withName("Elle Meyer").withTime("12:33")
             .withDate("2021-12-25").build();
     public static final Task FIONA = new TaskBuilder().withName("Fiona Kunz").withTime("03:40")
@@ -47,9 +48,9 @@ public class TypicalTasks {
 
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task AMY = new TaskBuilder().withName(VALID_NAME_AMY).withTime(VALID_TIME_AMY)
-            .withDate(VALID_DATE_AMY).withTag(VALID_TAG_FRIEND).build();
+            .withDate(VALID_DATE_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Task BOB = new TaskBuilder().withName(VALID_NAME_BOB).withTime(VALID_TIME_BOB)
-            .withDate(VALID_DATE_BOB).withTag(VALID_TAG_FRIEND)
+            .withDate(VALID_DATE_BOB).withTags(VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -59,7 +60,7 @@ public class TypicalTasks {
     /**
      * Returns an {@code DateBook} with all the typical tasks.
      */
-    public static UniFy getTypicalAddressBook() {
+    public static UniFy getTypicalUniFy() {
         UniFy ab = new UniFy();
         for (Task task : getTypicalTasks()) {
             ab.addTask(task);
@@ -68,6 +69,6 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, MATH_ASSIGNMENT, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

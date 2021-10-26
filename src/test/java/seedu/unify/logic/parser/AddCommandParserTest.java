@@ -20,9 +20,9 @@ import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseFailure;
 import org.junit.jupiter.api.Test;
 
 import seedu.unify.logic.commands.AddCommand;
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Time;
 
 public class AddCommandParserTest {
@@ -34,10 +34,6 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + TIME_DESC_BOB + DATE_DESC_BOB,
-                expectedMessage);
-
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_TIME_BOB + DATE_DESC_BOB,
                 expectedMessage);
 
         // missing date prefix

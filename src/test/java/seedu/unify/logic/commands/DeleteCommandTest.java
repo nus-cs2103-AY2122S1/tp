@@ -7,7 +7,7 @@ import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unify.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
-import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ import seedu.unify.model.task.Task;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalUniFy(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -68,7 +68,7 @@ public class DeleteCommandTest {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
         Index outOfBoundIndex = INDEX_SECOND_TASK;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of UniFy list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getUniFy().getTaskList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);

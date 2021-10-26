@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -14,8 +15,13 @@ import seedu.unify.model.task.Task;
  * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
+
+    private static final String LABEL = "Task List";
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
+
+    @FXML
+    private Label taskListLabel;
 
     @FXML
     private ListView<Task> taskListView;
@@ -25,6 +31,7 @@ public class TaskListPanel extends UiPart<Region> {
      */
     public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
+        taskListLabel.setText(LABEL);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }

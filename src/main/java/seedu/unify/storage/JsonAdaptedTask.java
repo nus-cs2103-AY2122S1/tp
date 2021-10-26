@@ -1,14 +1,23 @@
 package seedu.unify.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.unify.commons.exceptions.IllegalValueException;
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Tag;
+import seedu.unify.model.task.State;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
+
+
 
 /**
  * Jackson-friendly version of {@link Task}.
@@ -20,18 +29,24 @@ class JsonAdaptedTask {
     private final String name;
     private final String time;
     private final String date;
-    private final String tag;
+    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String state;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("time") String time,
-            @JsonProperty("date") String date, @JsonProperty("tag") String tag) {
+            @JsonProperty("date") String date,
+                           @JsonProperty("state") String state,
+                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.time = time;
         this.date = date;
-        this.tag = tag;
+        if (tagged != null) {
+            this.tagged.addAll(tagged);
+        }
+        this.state = state;
     }
 
     /**
@@ -41,7 +56,8 @@ class JsonAdaptedTask {
         name = source.getName().taskName;
         time = source.getTime().value;
         date = source.getDate().value;
-        tag = source.getTag().tagTaskName;
+        tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        state = source.getState().toString();
     }
 
     /**
@@ -50,6 +66,10 @@ class JsonAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted task.
      */
     public Task toModelType() throws IllegalValueException {
+        final List<Tag> taskTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tagged) {
+            taskTags.add(tag.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -74,14 +94,16 @@ class JsonAdaptedTask {
         }
         final Date modelDate = new Date(date);
 
-        if (tag == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
+        final Set<Tag> modelTags = new HashSet<>(taskTags);
+
+        if (state == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, State.class.getSimpleName()));
         }
-        if (!Tag.isValidTagTaskName(tag)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        if (!State.isValidState(state)) {
+            throw new IllegalValueException(State.MESSAGE_CONSTRAINTS);
         }
-        final Tag modelTag = new Tag(tag);
-        return new Task(modelName, modelTime, modelDate, modelTag);
+        final State modelState = new State(state);
+        return new Task(modelName, modelTime, modelDate, modelTags, modelState);
     }
 
 }

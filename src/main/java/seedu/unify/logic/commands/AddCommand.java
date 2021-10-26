@@ -27,7 +27,8 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "Assignment 1 "
             + PREFIX_DATE + "2021-12-12 "
             + PREFIX_TIME + "16:40 "
-            + PREFIX_TAG + "Important";
+            + PREFIX_TAG + "important"
+            + PREFIX_TAG + "graded";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Uni-Fy app";

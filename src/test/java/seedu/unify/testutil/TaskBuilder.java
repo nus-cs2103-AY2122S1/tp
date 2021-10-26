@@ -1,10 +1,15 @@
 package seedu.unify.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Tag;
+import seedu.unify.model.task.State;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
+import seedu.unify.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Task objects.
@@ -15,12 +20,13 @@ public class TaskBuilder {
     public static final String DEFAULT_TIME = "16:40";
     public static final String DEFAULT_DATE = "2021-12-11";
     public static final String DEFAULT_TAG = "Important";
+    public static final String DEFAULT_STATE = "TODO";
 
     private Name name;
     private Time time;
-
     private Date date;
-    private Tag tag;
+    private Set<Tag> tags;
+    private State state;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -29,7 +35,8 @@ public class TaskBuilder {
         name = new Name(DEFAULT_NAME);
         time = new Time(DEFAULT_TIME);
         date = new Date(DEFAULT_DATE);
-        tag = new Tag(DEFAULT_TAG);
+        tags = new HashSet<>();
+        state = new State(DEFAULT_STATE);
     }
 
     /**
@@ -39,7 +46,8 @@ public class TaskBuilder {
         name = taskToCopy.getName();
         time = taskToCopy.getTime();
         date = taskToCopy.getDate();
-        tag = taskToCopy.getTag();
+        tags = new HashSet<>(taskToCopy.getTags());
+        state = taskToCopy.getState();
     }
 
     /**
@@ -50,11 +58,12 @@ public class TaskBuilder {
         return this;
     }
 
+
     /**
-     * Sets the {@code Name} of the {@code Task} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Task} that we are building.
      */
-    public TaskBuilder withTag(String tag) {
-        this.tag = new Tag(tag);
+    public TaskBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -68,6 +77,14 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the {@code State} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withState(String state) {
+        this.state = new State(state);
+        return this;
+    }
+
+    /**
      * Sets the {@code Time} of the {@code Task} that we are building.
      */
     public TaskBuilder withTime(String time) {
@@ -76,6 +93,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, time, date, tag);
+        return new Task(name, time, date, tags, state);
     }
 }

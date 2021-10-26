@@ -7,17 +7,20 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.unify.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.commons.util.CollectionUtil;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 /**
@@ -89,9 +92,9 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
         Time updatedTime = editTaskDescriptor.getTime().orElse(taskToEdit.getTime());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
-        Tag updatedTag = editTaskDescriptor.getTag().orElse(taskToEdit.getTag());
+        Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedName, updatedTime, updatedDate, updatedTag);
+        return new Task(updatedName, updatedTime, updatedDate, updatedTags);
     }
 
     @Override
@@ -120,7 +123,7 @@ public class EditCommand extends Command {
         private Name name;
         private Time time;
         private Date date;
-        private Tag tag;
+        private Set<Tag> tags;
 
         public EditTaskDescriptor() {}
 
@@ -132,14 +135,14 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setTime(toCopy.time);
             setDate(toCopy.date);
-            setTag(toCopy.tag);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, time, date, tag);
+            return CollectionUtil.isAnyNonNull(name, time, date, tags);
         }
 
         public void setName(Name name) {
@@ -166,12 +169,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        public void setTag(Tag tag) {
-            this.tag = tag;
+        public void setTags(Set<Tag> tags) {
+
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
-        public Optional<Tag> getTag() {
-            return Optional.ofNullable(tag);
+        public Optional<Set<Tag>> getTags() {
+
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override
@@ -192,7 +197,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getTime().equals(e.getTime())
                     && getDate().equals(e.getDate())
-                    && getTag().equals(e.getTag());
+                    && getTags().equals(e.getTags());
         }
     }
 }

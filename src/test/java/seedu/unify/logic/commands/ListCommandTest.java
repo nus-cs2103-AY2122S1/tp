@@ -3,7 +3,7 @@ package seedu.unify.logic.commands;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unify.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalUniFy(), new UserPrefs());
         expectedModel = new ModelManager(model.getUniFy(), new UserPrefs());
     }
 
