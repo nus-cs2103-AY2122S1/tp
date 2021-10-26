@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,11 +19,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 import seedu.address.model.order.TransactionTimeComparator;
+import seedu.address.storage.TransactionStorage;
 
 /**
  * Represents the in-memory model of BogoBogo data.
@@ -53,7 +56,14 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         displayList = new DisplayList(this.inventory.getItemList());
         optionalOrder = Optional.empty();
-        transactions = new HashSet<>();
+        List<TransactionRecord> transactionRecordList = null;
+        try {
+            transactionRecordList = new TransactionStorage().readTransaction(userPrefs.getTransactionFilePath()).orElse(null);
+        } catch (DataConversionException e) {
+            System.out.println(e);
+        }
+
+        transactions = transactionRecordList == null ? new HashSet<>() : new HashSet<>(transactionRecordList);
     }
 
     public ModelManager() {
@@ -268,6 +278,14 @@ public class ModelManager implements Model {
         // Reset to no order status
         optionalOrder = Optional.empty();
         transactions.add(transaction);
+
+        try {
+            new TransactionStorage().saveInventory(new ArrayList(transactions), userPrefs.getTransactionFilePath());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+
         logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
     }
 

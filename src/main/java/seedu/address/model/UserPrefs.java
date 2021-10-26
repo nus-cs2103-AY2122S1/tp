@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path inventoryFilePath = Paths.get("data" , "inventory.json");
+    private Path transactionFilePath = Paths.get("data", "transaction.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -49,6 +50,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public Path getInventoryFilePath() {
         return inventoryFilePath;
+    }
+
+    public Path getTransactionFilePath() {
+        return transactionFilePath;
     }
 
     public void setInventoryFilePath(Path inventoryFilePath) {
