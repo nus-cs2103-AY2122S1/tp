@@ -17,6 +17,7 @@ import seedu.unify.logic.commands.FindCommand;
 import seedu.unify.logic.commands.HelpCommand;
 import seedu.unify.logic.commands.ListCommand;
 import seedu.unify.logic.commands.ShowCommand;
+import seedu.unify.logic.commands.TagCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 
 /**
@@ -45,6 +46,9 @@ public class UniFyParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -78,7 +82,11 @@ public class UniFyParser {
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
         }
     }
-
 }
+
+
+
+
