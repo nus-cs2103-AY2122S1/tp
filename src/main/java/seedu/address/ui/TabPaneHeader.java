@@ -16,7 +16,7 @@ import seedu.address.model.person.IsFavouritePredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
- * A ui for the status bar that is displayed at the footer of the application.
+ * Ui component for navigating between different tabs.
  */
 public class TabPaneHeader extends UiPart<Region> {
 
@@ -35,10 +35,10 @@ public class TabPaneHeader extends UiPart<Region> {
     private Tab events;
 
     @FXML
-    private Tab randomPG;
+    private Tab findABuddy;
 
     /**
-     * Creates a {@code StatusBarFooter} with the given {@code Path}.
+     * Creates a {@code TabPaneHeader} with the given {@code Logic} and {@code ProgressIndicatorRegion}.
      */
     public TabPaneHeader(Logic logic, ProgressIndicatorRegion indicator) {
         super(FXML);
@@ -73,7 +73,7 @@ public class TabPaneHeader extends UiPart<Region> {
                 logic.getPersonList().getRoot().setVisible(true);
                 indicator.getRoot().setVisible(false);
                 logic.sort();
-            } else if (newValue.equals(randomPG)) {
+            } else if (newValue.equals(findABuddy)) {
                 logic.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 if (!getFab(logic, indicator)) {
                     fabLoader.start();
@@ -86,6 +86,13 @@ public class TabPaneHeader extends UiPart<Region> {
         return tabPane;
     }
 
+    /**
+     * Sorts contacts based on GitHub similarity, using {@link AI}.
+     *
+     * @param logic Logic instance of CohortConnect.
+     * @param indicator Loading indicator component.
+     * @return Whether the contacts have been sorted.
+     */
     public boolean getFab(Logic logic, ProgressIndicatorRegion indicator) {
         boolean isDone = AI.sortProfiles(logic.getUserProfile(), logic.getModifiableList());
         if (!isDone) {
@@ -97,5 +104,41 @@ public class TabPaneHeader extends UiPart<Region> {
             logic.getPersonList().getRoot().setVisible(true);
         }
         return isDone;
+    }
+
+    /**
+     * Activates the Contacts tab.
+     *
+     * @param logic Logic instance of CohortConnect.
+     */
+    public void activateContacts(Logic logic) {
+        tabPane.getSelectionModel().select(0);
+    }
+
+    /**
+     * Activates the Favorites tab.
+     *
+     * @param logic Logic instance of CohortConnect.
+     */
+    public void activateFavorites(Logic logic) {
+        tabPane.getSelectionModel().select(1);
+    }
+
+    /**
+     * Activates the Events tab.
+     *
+     * @param logic Logic instance of CohortConnect.
+     */
+    public void activateEvents(Logic logic) {
+        tabPane.getSelectionModel().select(2);
+    }
+
+    /**
+     * Activates the Find A Buddy tab.
+     *
+     * @param logic Logic instance of CohortConnect.
+     */
+    public void activateFindABuddy(Logic logic) {
+        tabPane.getSelectionModel().select(3);
     }
 }
