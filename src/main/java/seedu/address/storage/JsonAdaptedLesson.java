@@ -27,6 +27,8 @@ class JsonAdaptedLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
 
+    public static final String MESSAGE_INVALID_CANCELLED_DATE = "Cancelled date is not a date of this lesson.";
+
     private final String date;
     private final String endDate;
     private final String timeRange;
@@ -34,6 +36,7 @@ class JsonAdaptedLesson {
     private final String lessonRates;
     private final boolean isRecurring;
     private final List<JsonAdaptedHomework> homework = new ArrayList<>();
+    private final List<JsonAdaptedDate> cancelledDates = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given Lesson details.
@@ -43,7 +46,8 @@ class JsonAdaptedLesson {
                              @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework,
-                             @JsonProperty("lessonRates") String lessonRates) {
+                             @JsonProperty("lessonRates") String lessonRates,
+                             @JsonProperty("cancelledDate") List<JsonAdaptedDate> cancelledDates) {
         this.date = date;
         this.endDate = endDate;
         this.timeRange = timeRange;
@@ -51,6 +55,9 @@ class JsonAdaptedLesson {
         this.lessonRates = lessonRates;
         if (homework != null) {
             this.homework.addAll(homework);
+        }
+        if (cancelledDates != null) {
+            this.cancelledDates.addAll(cancelledDates);
         }
         isRecurring = true;
     }
@@ -68,8 +75,11 @@ class JsonAdaptedLesson {
                 .map(JsonAdaptedHomework::new)
                 .collect(Collectors.toList()));
         isRecurring = source.isRecurring();
-
+        cancelledDates.addAll(source.getCancelledDates().stream()
+                .map(JsonAdaptedDate::new)
+                .collect(Collectors.toList()));
     }
+
 
     /**
      * Converts this Jackson-friendly adapted lesson object into the model's {@code Lesson} object.
@@ -118,9 +128,27 @@ class JsonAdaptedLesson {
         final LessonRates modelLessonRates = new LessonRates(lessonRates);
 
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
-        return isRecurring
-                ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange,
-                        modelSubject, modelHomework, modelLessonRates)
-                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates);
+
+        Set<Date> modelCancelledDates = new HashSet<>();
+
+        // lesson used to check if cancelled dates are valid
+        Lesson lessonWithoutCancelledDates = isRecurring
+                ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates,
+                        modelCancelledDates)
+                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates,
+                        modelCancelledDates);
+
+        final List<Date> dates = new ArrayList<>();
+
+        for (JsonAdaptedDate date : cancelledDates) {
+            Date cancelledDate = date.toModelType();
+            if (!lessonWithoutCancelledDates.hasLessonOnDate(cancelledDate)) {
+                throw new IllegalValueException(MESSAGE_INVALID_CANCELLED_DATE);
+            }
+            dates.add(cancelledDate);
+        }
+        modelCancelledDates = new HashSet<>(dates);
+
+        return lessonWithoutCancelledDates.updateCancelledDates(modelCancelledDates);
     }
 }

@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -31,6 +33,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label rates;
     @FXML
+    private Label cancelledDates;
+    @FXML
     private FlowPane homeworkList;
 
     /**
@@ -48,6 +52,14 @@ public class LessonCard extends UiPart<Region> {
         endDate.setText("Ends on: " + lesson.getEndDate().toString());
         time.setText("Time: " + lesson.getTimeRange().toString());
         rates.setText("Rates: $" + lesson.getLessonRates().toString());
+        cancelledDates.setText("");
+        if (lesson.isRecurring()) {
+            List<String> dates = lesson.getCancelledDates().stream().sorted()
+                    .map(Date::toString).collect(Collectors.toList());
+            cancelledDates.setText("Cancelled Dates:\n" + String.join(",\n", dates));
+        } else if (lesson.getCancelledDates().size() > 0) {
+            cancelledDates.setText("Cancelled!");
+        }
         lesson.getHomework().stream()
             .sorted(Comparator.comparing(homework -> homework.toString()))
             .forEach(homework -> homeworkList.getChildren()

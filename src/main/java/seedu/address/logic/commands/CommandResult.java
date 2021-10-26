@@ -14,14 +14,20 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** Person list will be shown to the user. */
+    private final boolean isShowPersonList;
+
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isShowHelp;
+
+    /** Tag list should be shown to the user instead of the default person list. */
+    private final boolean isShowTagList;
 
     /** Schedule should be shown to the user. */
-    private final boolean showSchedule;
+    private final boolean isShowSchedule;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExit;
 
     /** Lesson information of student should be shown to the user. */
     private final Person student;
@@ -29,19 +35,23 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    private CommandResult(String feedbackToUser, boolean showHelp, boolean showSchedule, boolean exit, Person student) {
+    private CommandResult(String feedbackToUser, boolean isShowPersonList, boolean isShowHelp,
+                         boolean isShowTagList, boolean isShowSchedule, boolean isExit, Person student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.showSchedule = showSchedule;
-        this.exit = exit;
+        this.isShowPersonList = isShowPersonList;
+        this.isShowHelp = isShowHelp;
+        this.isExit = isExit;
+        this.isShowTagList = isShowTagList;
+        this.isShowSchedule = isShowSchedule;
         this.student = student;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showSchedule, boolean exit) {
-        this(feedbackToUser, showHelp, showSchedule, exit, null);
+    public CommandResult(String feedbackToUser, boolean isShowPersonList, boolean isShowHelp,
+                         boolean isShowTagList, boolean isShowSchedule, boolean isExit) {
+        this(feedbackToUser, isShowPersonList, isShowHelp, isShowTagList, isShowSchedule, isExit, null);
     }
 
     /**
@@ -49,7 +59,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null);
+        this(feedbackToUser, true, false, false, false, false, null);
     }
 
     /**
@@ -57,27 +67,61 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, Person student) {
-        this(feedbackToUser, false, false, false, student);
+        this(feedbackToUser, true, false, false, false, false, student);
     }
 
+    /**
+     * Returns the feedback to user from command execution.
+     *
+     * @return Feedback to user from command execution.
+     */
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
+    /**
+     * Returns true if the command is a help command.
+     *
+     * @return True if the command is a help command.
+     */
     public boolean isShowHelp() {
-        return showHelp;
+        return isShowHelp;
     }
 
+    /**
+     * Returns true if the command is a tag command.
+     *
+     * @return True if the command is a tag command.
+     */
+    public boolean isShowTagList() {
+        return isShowTagList;
+    }
+
+    /**
+     * Returns true if the command is a schedule command.
+     *
+     * @return True if the command is a schedule command.
+     */
     public boolean isShowSchedule() {
-        return showSchedule;
+        return isShowSchedule;
     }
 
+    /**
+     * Returns an Optional of student.
+     *
+     * @return Optional of student.
+     */
     public Optional<Person> getStudent() {
         return Optional.ofNullable(student);
     }
 
+    /**
+     * Returns true if the command is an exit command.
+     *
+     * @return True if the command is an exit command.
+     */
     public boolean isExit() {
-        return exit;
+        return isExit;
     }
 
     @Override
@@ -93,19 +137,22 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && showSchedule == otherCommandResult.showSchedule
-                && exit == otherCommandResult.exit;
+                && isShowPersonList == otherCommandResult.isShowPersonList
+                && isShowHelp == otherCommandResult.isShowHelp
+                && isShowTagList == otherCommandResult.isShowTagList
+                && isShowSchedule == otherCommandResult.isShowSchedule
+                && isExit == otherCommandResult.isExit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showSchedule, exit);
+        return Objects.hash(feedbackToUser, isShowPersonList, isShowHelp, isShowTagList, isShowSchedule, isExit);
     }
 
     @Override
     public String toString() {
-        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", showHelp = " + showHelp
-                + ", exit = " + exit;
+        return "Feedback To User: " + feedbackToUser + "\n" + "Show Student List: " + isShowHelp + "\n"
+                + "Show Help: " + isShowHelp + "\n" + "Show Tag List: " + isShowTagList + "\n"
+                + "Show Schedule: " + isShowSchedule + "\n" + "Exit: " + isExit;
     }
 }

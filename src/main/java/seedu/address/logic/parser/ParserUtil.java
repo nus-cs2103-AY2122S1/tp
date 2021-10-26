@@ -223,6 +223,17 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> dates} into a {@code Set<Date>}.
+     */
+    public static Set<Date> parseDates(Collection<String> dates) throws ParseException {
+        requireNonNull(dates);
+        final Set<Date> dateSet = new HashSet<>();
+        for (String date : dates) {
+            dateSet.add(parseDate(date).get());
+        }
+        return dateSet;
+    }
+    /**
      * Parses {@code String TimeRange} into a {@code TimeRange}.
      * Leading and trailing whitespaces will be stripped.
      *

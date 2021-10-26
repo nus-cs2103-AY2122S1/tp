@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Represents a Lesson's date in the address book.
@@ -83,9 +84,13 @@ public class Date implements Comparable<Date> {
      *
      * @return newDate The date of the same day on the week that has yet to pass.
      */
-    public Date updateDate() {
-        LocalDate laterDate = getLocalDate().isAfter(LocalDate.now()) ? getLocalDate() : LocalDate.now();
-        LocalDate updatedDate = laterDate.with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+    public Date updateDate(Set<Date> datesToSkip) {
+        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+
+        while (datesToSkip.contains(new Date(updatedDate.format(FORMATTER)))) { // todo: improve design
+            updatedDate = updatedDate.plusWeeks(1);
+        }
+
         Date newDate = new Date(updatedDate.format(FORMATTER));
         return newDate;
     }
@@ -109,6 +114,35 @@ public class Date implements Comparable<Date> {
      */
     public boolean isOver() {
         return getLocalDate().isBefore(LocalDate.now());
+    }
+
+    public boolean isAfter(Date other) {
+        return localDate.isAfter(other.localDate);
+    }
+
+    public boolean isSameDayOfWeek(Date other) {
+        return localDate.getDayOfWeek().equals(other.getDayOfWeek());
+    }
+
+    /**
+     * Checks is this date clashes with a recurring date.
+     *
+     * @param recurringStartDate
+     * @return
+     */
+    public boolean isOnRecurringDate(Date recurringStartDate, Date recurringEndDate) {
+        if (recurringStartDate.isAfter(this)) {
+            return false;
+        }
+        if (!recurringStartDate.isSameDayOfWeek(this)) {
+            return false;
+        }
+
+        if (!recurringEndDate.isAfter(this)) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

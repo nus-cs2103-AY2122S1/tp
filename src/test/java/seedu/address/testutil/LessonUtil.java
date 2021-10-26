@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
@@ -49,6 +50,16 @@ public class LessonUtil {
         }
 
         sb.append(getLessonDetailsWithoutRecurrence(lesson));
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code person}'s details.
+     */
+    public static String getLessonEditDetails(Lesson lesson) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getLessonDetailsWithoutRecurrence(lesson));
+        lesson.getCancelledDates().forEach(date -> sb.append(PREFIX_CANCEL + date.toString() + " "));
         return sb.toString();
     }
 

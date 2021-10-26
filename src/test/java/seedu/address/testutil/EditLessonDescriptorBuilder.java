@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -36,6 +37,8 @@ public class EditLessonDescriptorBuilder {
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
         descriptor.setRate(lesson.getLessonRates());
+        descriptor.setCancelledDates(lesson.getCancelledDates());
+        descriptor.setUncancelledDates(new HashSet<>());
         descriptor.setRecurring(lesson.isRecurring());
     }
 

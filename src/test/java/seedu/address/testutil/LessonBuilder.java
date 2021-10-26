@@ -27,6 +27,7 @@ public class LessonBuilder {
     private Subject subject;
     private LessonRates lessonRates;
     private Set<Homework> homeworkSet;
+    private Set<Date> cancelledDatesSet;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -39,6 +40,7 @@ public class LessonBuilder {
         subject = new Subject(DEFAULT_SUBJECT);
         homeworkSet = new HashSet<>();
         homeworkSet.add(new Homework(DEFAULT_HOMEWORK));
+        cancelledDatesSet = new HashSet<>();
     }
 
     /**
@@ -51,6 +53,7 @@ public class LessonBuilder {
         lessonRates = lessonToCopy.getLessonRates();
         subject = lessonToCopy.getSubject();
         homeworkSet = new HashSet<>(lessonToCopy.getHomework());
+        cancelledDatesSet = new HashSet<>(lessonToCopy.getCancelledDates());
     }
 
     /**
@@ -103,13 +106,19 @@ public class LessonBuilder {
         return this;
     }
 
+    public LessonBuilder withCancelledDatesSet(String ... cancelledDates) {
+        cancelledDatesSet = SampleDataUtil.getCancelledDateSet(cancelledDates);
+        return this;
+    }
+
     /**
      * Builds a recurring lesson with the specified information.
      *
      * @return {@code RecurringLesson} containing the information given.
      */
     public Lesson buildRecurring() {
-        return new RecurringLesson(date, Date.MAX_DATE, timeRange, subject, homeworkSet, lessonRates);
+        return new RecurringLesson(date, Date.MAX_DATE, timeRange,
+                subject, homeworkSet, lessonRates, cancelledDatesSet);
     }
 
     /**
@@ -119,6 +128,6 @@ public class LessonBuilder {
      * @return {@code MakeUpLesson} containing the information given.
      */
     public Lesson build() {
-        return new MakeUpLesson(date, timeRange, subject, homeworkSet, lessonRates);
+        return new MakeUpLesson(date, timeRange, subject, homeworkSet, lessonRates, cancelledDatesSet);
     }
 }

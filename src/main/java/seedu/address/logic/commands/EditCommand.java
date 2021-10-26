@@ -22,10 +22,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
@@ -101,11 +101,7 @@ public class EditCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-
-        personBeforeEdit = lastShownList.get(index.getZeroBased());
+        personBeforeEdit = CommandUtil.getPerson(lastShownList, index);
         personAfterEdit = createEditedPerson(personBeforeEdit, editPersonDescriptor);
 
         if (!personBeforeEdit.isSamePerson(personAfterEdit) && model.hasPerson(personAfterEdit)) {

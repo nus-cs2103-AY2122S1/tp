@@ -2,12 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +37,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
-                        PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES);
+                    PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_CANCEL, PREFIX_UNCANCEL);
 
         Index[] indices;
 
@@ -47,6 +49,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
 
         assert indices.length == 2;
+        Index studentIndex = indices[0];
+        Index lessonIndex = indices[1];
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
@@ -64,7 +68,6 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             }
             editLessonDescriptor.setDate(date.get());
         }
-
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             editLessonDescriptor.setTimeRange(ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get()));
         }
@@ -78,14 +81,16 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             editLessonDescriptor.setRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
         }
 
+        parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_CANCEL))
+                .ifPresent(editLessonDescriptor::setCancelledDates);
+        parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_UNCANCEL))
+                .ifPresent(editLessonDescriptor::setUncancelledDates);
+
         if (!editLessonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(LessonEditCommand.MESSAGE_NOT_EDITED);
         }
 
-        /*
-        First index identifies the student; second identifies the lesson of the student to be edited.
-         */
-        return new LessonEditCommand(indices[0], indices[1], editLessonDescriptor);
+        return new LessonEditCommand(studentIndex, lessonIndex, editLessonDescriptor);
     }
 
     /**
@@ -103,5 +108,22 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
                 ? Collections.emptySet()
                 : homework;
         return Optional.of(ParserUtil.parseHomeworkList(homeworkSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> homework} into a {@code Set<Homework>} if {@code homework} is non-empty.
+     * If {@code homework} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Homework>} containing zero homework.
+     */
+    private Optional<Set<Date>> parseDatesForLessonEdit(Collection<String> dates) throws ParseException {
+        assert dates != null;
+
+        if (dates.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> homeworkSet = dates.size() == 1 && dates.contains("")
+                ? Collections.emptySet()
+                : dates;
+        return Optional.of(ParserUtil.parseDates(homeworkSet));
     }
 }

@@ -3,8 +3,12 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
@@ -24,7 +28,6 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * will be removed.
  *
  * @author Chesterwongz
- *
  * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
@@ -58,12 +61,13 @@ public class CalendarEntryList {
      * @return The Entry that has the Lesson.
      * @throws LessonNotFoundException If the Entry does not exist.
      */
-    private Entry<Lesson> getEntry(Lesson toFind) {
-        return entryList.stream()
-                .filter(entry -> entry.getUserObject().equals(toFind))
-                .findFirst()
-                .orElseThrow(LessonNotFoundException::new);
-        // findFirst() assumes that there is only one lesson we need to delete
+    private List<Entry<Lesson>> getEntries(Lesson toFind) {
+        List<Entry<Lesson>> entries = entryList.stream().filter(entry -> entry.getUserObject().equals(toFind))
+                .collect(Collectors.toList());
+        if (entries.isEmpty()) {
+            throw new LessonNotFoundException();
+        }
+        return entries;
     }
 
     /**
@@ -112,15 +116,26 @@ public class CalendarEntryList {
      * The lesson must not clash with any in the list.
      *
      * @param editedPerson the person we added the lesson to.
-     * @param toAdd The lesson to add
+     * @param toAdd        The lesson to add
      */
     private void addLesson(Person editedPerson, Lesson toAdd) {
         requireAllNonNull(editedPerson, toAdd);
         if (hasClashes(toAdd)) {
             throw new ClashingLessonException();
         }
-        Entry<Lesson> entryToAdd = convertToEntry(editedPerson, toAdd);
-        add(entryToAdd);
+        if (!toAdd.isRecurring()) {
+            // makeup lesson is not cancelled
+            if (!toAdd.getCancelledDates().contains(toAdd.getStartDate())) {
+                Entry<Lesson> entry = convertToEntry(editedPerson, toAdd);
+                add(entry);
+            }
+            return;
+        }
+
+        List<Entry<Lesson>> entriesToAdd = convertRecurringLessonToEntries(editedPerson, toAdd);
+        for (Entry<Lesson> entry : entriesToAdd) {
+            add(entry);
+        }
     }
 
     /**
@@ -131,8 +146,15 @@ public class CalendarEntryList {
      */
     private void removeLesson(Lesson toRemove) {
         requireNonNull(toRemove);
-        Entry<Lesson> entryToRemove = getEntry(toRemove);
-        remove(entryToRemove);
+        if (toRemove.isCancelled()) {
+            // fully cancelled lessons have no associated calendar entries
+            return;
+        }
+
+        List<Entry<Lesson>> entriesToRemove = getEntries(toRemove);
+        for (Entry<Lesson> entry : entriesToRemove) {
+            remove(entry);
+        }
     }
 
     /**
@@ -190,26 +212,84 @@ public class CalendarEntryList {
     }
 
     /**
-     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
-     * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
+     * Converts a lesson to a {@code List<Entry<Lesson>>} split by cancelled dates.
      *
+     * @param owner  The person with the lesson.
+     * @param lesson The
+     * @return
+     */
+    public List<Entry<Lesson>> convertRecurringLessonToEntries(Person owner, Lesson lesson) {
+        List<Entry<Lesson>> entryList = new ArrayList<>();
+        List<Date> cancelledDates = lesson.getCancelledDates().stream().sorted().collect(Collectors.toList());
+
+        Interval interval = new Interval(lesson.getStartDateTime(), lesson.getEndDateTime());
+        LocalDate startDate = lesson.getLocalDate(); // Start date of recurring entry
+
+        // Split lesson by cancelled dates
+        while (cancelledDates.size() > 0) {
+            Date cancelledDate = cancelledDates.remove(0);
+            if (cancelledDate.getLocalDate().isAfter(startDate)) {
+                // end date of this recurring entry is 1 week before cancelledDate
+                LocalDate endDate = cancelledDate.getLocalDate().minusWeeks(1);
+                Entry<Lesson> entry = convertToEntry(owner, lesson, interval, Optional.of(endDate));
+                entryList.add(entry);
+            }
+            // update start date of next recurring entry to be 1 week after cancelledDate
+            startDate = cancelledDate.getLocalDate().plusWeeks(1);
+            interval = interval.withDates(startDate, startDate);
+
+        }
+        entryList.add(convertToEntry(owner, lesson, interval, Optional.empty()));
+
+        return entryList;
+    }
+
+    /**
+     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
+     *
+     * @param owner  The person with the lesson.
      * @param lesson The lesson to be converted to a calendar entry.
      * @return The calendar entry that also contains this lesson.
      */
     private Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
-        requireNonNull(lesson);
+        return convertToEntry(owner, lesson, new Interval(lesson.getStartDateTime(), lesson.getEndDateTime()),
+                Optional.empty());
+    }
 
+    /**
+     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
+     * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
+     *
+     * @param owner         The person with the lesson.
+     * @param lesson        The lesson to be converted to a calendar entry.
+     * @param entryInterval The interval of this entry.
+     * @param untilDate     An optional end date of the entry if it is recurring.
+     * @return Then calendar entry of the lesson.
+     */
+    private Entry<Lesson> convertToEntry(Person owner, Lesson lesson, Interval entryInterval,
+                                         Optional<LocalDate> untilDate) {
+        requireNonNull(lesson);
         Entry<Lesson> entry = new Entry<>();
         entry.setUserObject(lesson);
-        Interval entryInterval = new Interval(lesson.getStartDateTime(), lesson.getEndDateTime());
         entry.setInterval(entryInterval);
         StringBuilder entryTitle = new StringBuilder(owner.getName().toString());
         entryTitle.append(" (").append(lesson.getSubject().toString()).append(")");
-        if (lesson.isRecurring()) {
-            entry.setRecurrenceRule("RRULE:FREQ=WEEKLY");
-            entryTitle.append("(Recurring)");
+
+        // Non recurring
+        if (!lesson.isRecurring()) {
+            entry.setTitle(entryTitle.toString());
+            return entry;
         }
+
+        // Recurring
+        entryTitle.append("(Recurring)");
         entry.setTitle(entryTitle.toString());
+
+        String recurrenceRule = "RRULE:FREQ=WEEKLY";
+        if (untilDate.isPresent()) {
+            recurrenceRule += ";UNTIL=" + untilDate.get().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        }
+        entry.setRecurrenceRule(recurrenceRule);
         return entry;
     }
 

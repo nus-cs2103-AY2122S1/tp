@@ -31,6 +31,7 @@
             <Label fx:id="endDate" styleClass="cell_small_label" text="\$end date" />
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" />
+            <Label fx:id="cancelledDates" styleClass="cell_small_label" text="\$cancelledDates" />
             <FlowPane fx:id="homeworkList" />
         </VBox>
     </GridPane>
