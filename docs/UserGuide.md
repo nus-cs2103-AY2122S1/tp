@@ -18,13 +18,13 @@ Here is an overview of the main features that NUS Mod Tracker provides:
 * Keep track of the modules that you have taken.
 * Create your own academic plan.
 
-For more information about our features, you can head over to our [Features](#features) section. Better yet, 
+For more information about our features, you can head over to our [Features](#features) section. Better yet,
 head over to our [Quick Start](#quick-start) and try it out for yourself!
 
-### How to use the user guide 
+### How to use the user guide
 
-We strongly recommend first time users of our application to read through the user guide in the order that it is written. Throughout 
-the user guide, we include links which will jump to the corresponding section of the user guide. 
+We strongly recommend first time users of our application to read through the user guide in the order that it is written. Throughout
+the user guide, we include links which will jump to the corresponding section of the user guide.
 These links help you to quickly navigate this document.
 
 ### Table of Contents
