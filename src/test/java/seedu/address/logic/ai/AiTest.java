@@ -29,26 +29,26 @@ public class AiTest {
 
     @Test
     public void getCosineSimilarity_validFeatures_success() {
-        Assertions.assertTrue(1 - AI.getCosineSimilarity(point1, point1) < 0.000001);
-        Assertions.assertTrue(AI.getCosineSimilarity(point1, point3) > AI.getCosineSimilarity(point1, point2));
+        Assertions.assertTrue(1 - Ai.getCosineSimilarity(point1, point1) < 0.000001);
+        Assertions.assertTrue(Ai.getCosineSimilarity(point1, point3) > Ai.getCosineSimilarity(point1, point2));
     }
 
     @Test
     public void getEuclideanDistance_validFeatures_success() {
-        Assertions.assertEquals(0, AI.getEuclideanDistance(point1, point1));
-        Assertions.assertTrue(AI.getEuclideanDistance(point1, point3) < AI.getEuclideanDistance(point1, point2));
+        Assertions.assertEquals(0, Ai.getEuclideanDistance(point1, point1));
+        Assertions.assertTrue(Ai.getEuclideanDistance(point1, point3) < Ai.getEuclideanDistance(point1, point2));
     }
 
     @Test
     public void getManhattanDistance_validFeatures_success() {
-        Assertions.assertEquals(0, AI.getManhattanDistance(point1, point1));
-        Assertions.assertTrue(AI.getManhattanDistance(point1, point3) < AI.getManhattanDistance(point1, point2));
+        Assertions.assertEquals(0, Ai.getManhattanDistance(point1, point1));
+        Assertions.assertTrue(Ai.getManhattanDistance(point1, point3) < Ai.getManhattanDistance(point1, point2));
     }
 
     @Test
     public void getDistanceMetric_validFeatures_success() {
-        Assertions.assertTrue(AI.getDistanceMetric(point1, point1) < 0.000001);
-        Assertions.assertTrue(AI.getDistanceMetric(point1, point3) < AI.getDistanceMetric(point1, point2));
+        Assertions.assertTrue(Ai.getDistanceMetric(point1, point1) < 0.000001);
+        Assertions.assertTrue(Ai.getDistanceMetric(point1, point3) < Ai.getDistanceMetric(point1, point2));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class AiTest {
         points.put("p2", point2);
         points.put("p3", point2);
 
-        HashMap<String, Double> scores = AI.getSimilarityScore(point1, points);
+        HashMap<String, Double> scores = Ai.getSimilarityScore(point1, points);
         String[] expectedOrder = new String[] {"p3", "p2"};
         String[] actualOrder = scores.keySet().toArray(new String[0]);
         Assertions.assertEquals(expectedOrder[0], actualOrder[0], "Incorrect 1st Element");
