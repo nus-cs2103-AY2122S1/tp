@@ -21,7 +21,6 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.ReadOnlyUserPrefs;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.model.anime.Status;
 import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.ui.TabOption;
 
@@ -34,7 +33,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_animeAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingAnimeAddedWithTabOption modelStub = new ModelStubAcceptingAnimeAddedWithTabOption();
+        ModelStubAcceptingAnimeAdded modelStub = new ModelStubAcceptingAnimeAdded();
         Anime validAnime = new AnimeBuilder().build();
 
         CommandResult commandResult = new AddCommand(validAnime).execute(modelStub);
@@ -181,23 +180,16 @@ public class AddCommandTest {
      */
     private class ModelStubWithAnime extends ModelStub {
         private final Anime anime;
-        private final TabOption currentTab;
 
         ModelStubWithAnime(Anime anime) {
             requireNonNull(anime);
             this.anime = anime;
-            currentTab = new TabOption(Status.DEFAULT_STATUS);
         }
 
         @Override
         public boolean hasAnime(Anime anime) {
             requireNonNull(anime);
             return this.anime.isSameAnime(anime);
-        }
-
-        @Override
-        public void setCurrentTab(TabOption.TabOptions tabOptions) {
-            currentTab.setCurrentTab(tabOptions);
         }
     }
 
@@ -222,36 +214,6 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAnimeList getAnimeList() {
             return new AnimeList();
-        }
-    }
-
-    /**
-     * A model stub that always accepts anime added with added support for setting current tab to
-     * allow {@code execute} method to run.
-     */
-    private class ModelStubAcceptingAnimeAddedWithTabOption extends ModelStub {
-        final ArrayList<Anime> animesAdded = new ArrayList<>();
-        private final TabOption currentTab;
-
-        ModelStubAcceptingAnimeAddedWithTabOption() {
-            currentTab = new TabOption(Status.DEFAULT_STATUS);
-        }
-
-        @Override
-        public boolean hasAnime(Anime anime) {
-            requireNonNull(anime);
-            return animesAdded.stream().anyMatch(anime::isSameAnime);
-        }
-
-        @Override
-        public void addAnime(Anime anime) {
-            requireNonNull(anime);
-            animesAdded.add(anime);
-        }
-
-        @Override
-        public void setCurrentTab(TabOption.TabOptions tabOptions) {
-            currentTab.setCurrentTab(tabOptions);
         }
     }
 

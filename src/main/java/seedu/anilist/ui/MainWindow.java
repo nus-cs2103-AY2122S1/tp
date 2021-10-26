@@ -92,7 +92,7 @@ public class MainWindow extends UiPart<Stage> {
         KeyCombination nextTabHotKey = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
         Runnable nextTabRunnable = () -> animeListPanel.setNextTab();
         primaryStage.getScene().getAccelerators().put(nextTabHotKey, nextTabRunnable);
-        KeyCombination prevTabHotKey = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+        KeyCombination prevTabHotKey = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN);
         Runnable prevTabRunnable = () -> animeListPanel.setPrevTab();
         primaryStage.getScene().getAccelerators().put(prevTabHotKey, prevTabRunnable);
     }

@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.ui.TabOption;
 
 public class ConfirmClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
@@ -20,7 +19,6 @@ public class ConfirmClearCommand extends Command {
         while (!model.getFilteredAnimeList().isEmpty()) {
             model.deleteAnime(lastShownList.get(0));
         }
-        model.setCurrentTab(TabOption.TabOptions.ALL);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -14,10 +14,6 @@ import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.anilist.commons.core.Messages;
@@ -27,10 +23,8 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.ModelManager;
 import seedu.anilist.model.UserPrefs;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.model.genre.Genre;
 import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
-
 
 public class GenreDeleteCommandTest {
     private static final String ANIME_ONE_GENRE = FIRST_ANIME_GENRE;
@@ -38,7 +32,7 @@ public class GenreDeleteCommandTest {
     private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredListGenrePresent_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Anime updatedAnime = new AnimeBuilder(model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
                 .withGenres()
                 .build();
@@ -49,11 +43,7 @@ public class GenreDeleteCommandTest {
 
         GenreDeleteCommand genreDeleteCommand = new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor);
 
-        Set<Genre> usedGenres = new HashSet<>(descriptor.getGenres().get());
-
-        String expectedMessage = String.format(GenreDeleteCommand.MESSAGE_SUCCESS,
-                genresSetToString(usedGenres),
-                updatedAnime);
+        String expectedMessage = String.format(genreDeleteCommand.MESSAGE_SUCCESS, descriptor, updatedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), updatedAnime);
@@ -75,12 +65,7 @@ public class GenreDeleteCommandTest {
 
         GenreDeleteCommand genreDeleteCommand = new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor);
 
-        Set<Genre> usedGenres = new HashSet<>();
-        usedGenres.add(new Genre(ANIME_ONE_GENRE));
-
-        String expectedMessage = String.format(GenreDeleteCommand.MESSAGE_SUCCESS,
-                genresSetToString(usedGenres),
-                updatedAnime);
+        String expectedMessage = String.format(genreDeleteCommand.MESSAGE_SUCCESS, descriptor, updatedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), updatedAnime);
@@ -89,7 +74,7 @@ public class GenreDeleteCommandTest {
     }
 
     @Test
-    public void execute_unfilteredListGenreNotPresent_genreNotDeleted() {
+    public void execute_unfilteredListNoSuchGenre_success() {
         Anime updatedAnime = new AnimeBuilder(model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
                 .withGenres(ANIME_ONE_GENRE)
                 .build();
@@ -98,11 +83,7 @@ public class GenreDeleteCommandTest {
 
         GenreDeleteCommand genreDeleteCommand = new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor);
 
-        Set<Genre> unusedGenres = new HashSet<>(descriptor.getGenres().get());
-
-        String expectedMessage = String.format(GenreDeleteCommand.MESSAGE_GENRE_NOT_PRESENT,
-                genresSetToString(unusedGenres),
-                updatedAnime);
+        String expectedMessage = String.format(genreDeleteCommand.MESSAGE_SUCCESS, descriptor, updatedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), updatedAnime);
@@ -111,7 +92,7 @@ public class GenreDeleteCommandTest {
     }
 
     @Test
-    public void execute_unfilteredListGenreNotPresentWithPresentGenre_partialSuccess() {
+    public void execute_unfilteredListNoSuchGenreWithValidGenre_success() {
         Anime updatedAnime = new AnimeBuilder(model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
                 .withGenres()
                 .build();
@@ -122,15 +103,7 @@ public class GenreDeleteCommandTest {
 
         GenreDeleteCommand genreDeleteCommand = new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor);
 
-        Set<Genre> usedGenres = new HashSet<>();
-        Set<Genre> unusedGenres = new HashSet<>();
-        usedGenres.add(new Genre(ANIME_ONE_GENRE));
-        unusedGenres.add(new Genre(VALID_GENRE_ACTION));
-
-        String expectedMessage = String.format(GenreDeleteCommand.MESSAGE_PARTIAL_SUCCESS,
-                genresSetToString(usedGenres),
-                genresSetToString(unusedGenres),
-                updatedAnime);
+        String expectedMessage = String.format(genreDeleteCommand.MESSAGE_SUCCESS, descriptor, updatedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), updatedAnime);
@@ -191,17 +164,5 @@ public class GenreDeleteCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new GenreDeleteCommand(INDEX_FIRST_ANIME, DESC_GENRE_SCIENCE_FICTION)));
-    }
-
-    /**
-     * Converts a {@code Genre} {@code Set} into a {@code String}
-     * @param genresSet the set to be converted
-     * @return a String listing the items inside the set
-     */
-    private static String genresSetToString(Set<Genre> genresSet) {
-        assert genresSet != null;
-
-        String genresString = Arrays.toString(genresSet.toArray());
-        return genresString.substring(1, genresString.length() - 1);
     }
 }
