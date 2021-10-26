@@ -22,8 +22,7 @@ public class Pin {
      * @param pinString string indicating if pinned or not.
      */
     public Pin(String pinString) {
-        assert pinString.equals(PINNED_STRING) || pinString.equals(NOT_PINNED_STRING)
-                : "Pinned string not saved correctly";
+        assert(isValidPinStatus(pinString)) : "Invalid pin status used";
         isPinned = pinString.equals(PINNED_STRING);
     }
 

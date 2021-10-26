@@ -18,8 +18,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
-
-
 /**
  * Pins a person identified using it's displayed index from the address book.
  */
@@ -68,7 +66,7 @@ public class PinCommand extends Command {
     }
 
     private Person createPinnedPerson(Person personToPin) {
-        assert personToPin != null;
+        requireNonNull(personToPin);
         Name updatedName = personToPin.getName();
         Phone updatedPhone = personToPin.getPhone();
         Email updatedEmail = personToPin.getEmail();
