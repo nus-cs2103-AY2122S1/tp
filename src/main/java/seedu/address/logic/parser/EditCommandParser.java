@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -42,8 +43,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_DESCRIPTION, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_INDEX, PREFIX_TASK_DATE,
-                        PREFIX_TASK_TIME, PREFIX_TASK_VENUE);
+                        PREFIX_DESCRIPTION, PREFIX_TASK_DESCRIPTION, PREFIX_IMPORTANCE, PREFIX_TASK_INDEX,
+                        PREFIX_TASK_DATE, PREFIX_TASK_TIME, PREFIX_TASK_VENUE);
 
         Index index;
         Index taskIndex;
@@ -72,9 +73,14 @@ public class EditCommandParser implements Parser<EditCommand> {
                     argMultimap.getValue(PREFIX_DESCRIPTION).get()
             ));
         }
+        if (argMultimap.getValue(PREFIX_IMPORTANCE).isPresent()) {
+            editPersonDescriptor.setImportance(ParserUtil.parseImportance(
+                    argMultimap.getValue(PREFIX_IMPORTANCE).get()
+            ));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited() && !argMultimap.getValue(PREFIX_TASK_INDEX).isPresent()) {
+        if (!editPersonDescriptor.isAnyFieldEdited() && argMultimap.getValue(PREFIX_TASK_INDEX).isEmpty()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 

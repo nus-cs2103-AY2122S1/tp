@@ -14,8 +14,8 @@ public class AccessCacheCommandParser implements Parser<Command> {
         requireNonNull(internalCommandString);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(internalCommandString, PREFIX_KEY_DIRECTION);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_KEY_DIRECTION)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_INTERNAL_COMMAND_FORMAT));
+        if (argMultimap.getValue(PREFIX_KEY_DIRECTION).isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_INTERNAL_COMMAND_FORMAT);
         }
         return new AccessCacheCommand(argMultimap.getValue(PREFIX_KEY_DIRECTION).get());
     }

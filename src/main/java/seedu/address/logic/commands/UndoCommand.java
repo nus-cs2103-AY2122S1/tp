@@ -27,8 +27,8 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task, specified by the TASKINDEX, from person"
             + "identified by the index number used in the displayed person list as not done.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + PREFIX_TASK_INDEX + "TaskIndex\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_TASK_INDEX + " TaskIndex\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
 
     public static final String DESCRIPTION = "Marks the task(s), specified by the TASK_INDEX, "
@@ -62,12 +62,10 @@ public class UndoCommand extends Command {
         Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
 
         //Make new copy for defensive programming.
-        List<Task> tasks = new ArrayList<>();
-        tasks.addAll(personToEdit.getTasks());
-        List<Index> copyOfIndexList = new ArrayList<>();
-        copyOfIndexList.addAll(targetTaskIndexes);
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        List<Index> copyOfIndexList = new ArrayList<>(targetTaskIndexes);
 
-        Collections.sort(copyOfIndexList, Collections.reverseOrder());
+        copyOfIndexList.sort(Collections.reverseOrder());
 
         for (Index targetTaskIndex : targetTaskIndexes) {
             if (targetTaskIndex.getZeroBased() >= tasks.size()) {
@@ -80,9 +78,11 @@ public class UndoCommand extends Command {
             taskDone.setNotDone();
         }
 
-        Person editedPerson = new Person(
+        Person editedPerson = new Person (
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription(),
+                personToEdit.isImportant()
+        );
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL_FLAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.ArrayList;
@@ -23,7 +24,11 @@ public class DeleteCommandParser implements Parser<Command> {
      */
     public Command parse(String args) throws ParseException {
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX, PREFIX_ALL_FLAG);
+        if (argMultimap.getValue(PREFIX_ALL_FLAG).isPresent()) {
+            return new DeleteCommand();
+        }
+
         if (argMultimap.getValue(PREFIX_TASK_INDEX).isPresent()) {
             return new DeleteTaskCommandParser().parse(args);
         }

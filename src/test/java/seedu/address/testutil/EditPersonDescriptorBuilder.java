@@ -44,7 +44,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(person.getTags());
         descriptor.setDescription(person.getDescription());
         descriptor.setTasks(person.getTasks());
-
+        descriptor.setImportance(person.isImportant());
     }
 
     /**

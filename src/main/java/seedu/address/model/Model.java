@@ -109,6 +109,8 @@ public interface Model {
 
     void updateSortedPersonList(boolean isReverseOrder);
 
+    void displayFilteredTaskList(Predicate<Task> predicate);
+
     /** Gets important statistics information relating to tasks. */
     ObservableList<PieChart.Data> getStatistics();
 

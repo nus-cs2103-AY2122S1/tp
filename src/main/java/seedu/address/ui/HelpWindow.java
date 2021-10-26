@@ -208,7 +208,8 @@ public class HelpWindow extends AnchorPane {
     private void setupTableData() {
         Person samplePerson = new Person(
                 new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>(), new Description("")
+                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>(), new Description(""),
+                false
         );
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(samplePerson.getName());
@@ -216,6 +217,7 @@ public class HelpWindow extends AnchorPane {
         descriptor.setEmail(samplePerson.getEmail());
         descriptor.setAddress(samplePerson.getAddress());
         descriptor.setTags(samplePerson.getTags());
+        descriptor.setImportance(samplePerson.isImportant());
 
         EditTaskCommand.EditTaskDescriptor taskDescriptor = new EditTaskCommand.EditTaskDescriptor();
 

@@ -20,6 +20,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -257,6 +258,21 @@ public class ParserUtil {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String desc} into the Importance.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code desc} is invalid.
+     */
+    public static Boolean parseImportance(String importance) throws ParseException {
+        requireNonNull(importance);
+        String trimmedImportance = importance.trim();
+        if (!Person.isValidImportance(trimmedImportance)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return Boolean.parseBoolean(trimmedImportance);
     }
 
     /**
