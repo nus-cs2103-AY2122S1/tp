@@ -121,4 +121,9 @@ public interface Model {
      * Redoes the last changes undid by the undo command.
      */
     void redo();
+
+    /**
+     * Sorts the person list based on {@code sortBy}.
+     */
+    void sortList(String sortBy);
 }

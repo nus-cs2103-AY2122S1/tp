@@ -185,4 +185,14 @@ public class ParserUtil {
         }
         return new Rating(trimmedRating);
     }
+
+    /**
+     * Parses a {@code String command} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseSortCommand(String command) {
+        requireNonNull(command);
+        String trimmedCmd = command.trim();
+        return trimmedCmd;
+    }
 }

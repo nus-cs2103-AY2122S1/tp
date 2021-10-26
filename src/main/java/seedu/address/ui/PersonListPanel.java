@@ -24,19 +24,20 @@ public class PersonListPanel extends UiPart<Region> {
 
     private SelectedPersonCard selected = new SelectedPersonCard();
 
+    private ObservableList<Person> personList;
+
     @FXML
     private ListView<Person> personListView;
 
     @FXML
     private ScrollPane selectedPersonPanelPlaceholder;
 
-
-
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
     public PersonListPanel(ObservableList<Person> personList, Summary summary) {
         super(FXML);
+        this.personList = personList;
         selected.updateSummary(summary);
         setSelectedPersonPanel();
         selectedPersonPanelPlaceholder.setContent(selected.getRoot());
