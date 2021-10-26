@@ -269,14 +269,14 @@ Format: `elist [/m MEMBER_ID]`
 
 Marks participants as attended for a specific event.
 
-Format: `emark /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
+Format: `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
-* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * Multiple members under the event can be marked as attended when more than one `MEMBER_ID` is provided.
-* `emark` can only be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
+* It is recommended for `emark` to be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
 
 Examples:
-* `emark /m 2 /m 3` marks the 2nd and 3rd person in the member list as attended. 
+* `emark /e 1 /m 2 /m 3` marks the 2nd and 3rd person in the member list as attended in Event 1. 
 
 #### Editing an event : `eedit`
 
@@ -353,7 +353,7 @@ Action | Format, Examples
 **tdel** | `tdel /t TASK_ID [/t MORE_TASK_ID]…​` <br> e.g., `tdel /t 1 /t 4`
 **eadd** | `eadd /n EVENTNAME [/m MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
 **elist** | `elist [/m MEMBER_ID]` <br> e.g., `elist /m 1`
-**emark** | `emark /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emark /m 2 /m 3`
+**emark** | `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emark /e 1 /m 2 /m 3`
 **eedit** | `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID]…​` <br> e.g. `eedit /e 1 /n Freshman Orientation Project Discussion`
 **edel** | `edel /e EVENT_ID [/e MORE_EVENT_ID]…​` <br> e.g., `edel /e 7 /e 9`
 **exit** | `exit`
