@@ -4,7 +4,11 @@ title: Developer Guide
 ---
 
 ## Table of Contents
-<!--- * Table of Contents {:toc} --->
+
+* Table of Contents
+{:toc}
+
+<!---
 * Acknowledgements
 * Setting up, getting started
 * Design
@@ -18,6 +22,7 @@ title: Developer Guide
 * Documentation, logging, testing, configuration, dev-ops
 * Appendix: Requirements
 * Appendix: Instructions for manual testing
+--->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -483,37 +488,37 @@ groups with them.
 
 Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikely to have
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-|🔴 High|student|I can scroll through each user’s entry to access information about my classmates|I can have a basic understanding of my classmates background|
-|🔴 High|student|add new contacts|I can add new contacts into the address book|
-|🔴 High|student|delete existing contacts|I can delete redundant contacts from the address book|
-|🔴 High|student|edit existing contacts|Update any outdated contacts and customise my address book.|
-|🔴 High|introvert student|use the bot to obtain the information of all classmates|without having to chat with all of them personally|
-|🔴 High|first time user|see all the features / command lines of the bot|I know how to use the bot|
-|🔴 High|student|use the bot to get contact information of my classmates|I can connect with other students and make friends|
-|🟡 Medium|visual student|see graphics|I will not forget my commitments.|
-|🟡 Medium|unorganized student|help me organise my modules/schedule|keeps things on schedule, so i wont lack behind|
-|🟡 Medium|impatient student|have a responsive interface|I can have a good user experience|
-|🟡 Medium|tutor|use the bot to track students with varying ability|better spread out students with similar ability so that the weakest wont be in the same group|
-|🟡 Medium|tutor|use the bot to track students with varying background|better spread out students with similar background into different groups|
-|🟡 Medium|student|find the address of my classmates to identify where they are staying|I can see who stays on campus and who does not|
-|🟡 Medium|student|use the bot to find people with different skillsets|learn from others|
-|🟡 Medium|student|use the bot to check teammates availability|I can make sure my teammates have same vacant timeslots as me|
-|🟡 Medium|student|use the bot to differentiate classmates with different personalities|It is easy to identify like minded people / people of certain qualities you hope to work with in the group project|
-|🟡 Medium|student|use the bot to differentiate classmates from different countries|It will be easier to form groups with the correct international / local ratio|
-|🟡 Medium|student|use the bot to find classmates who stay near me|I can form groups with people who stay near me|
-|🟡 Medium|student|use the bot to find good off-campus study spots|We can find convenient meeting places|
-|🟡 Medium|student|use the bot to find where classmates stay|We can find convenient meeting places|
-|🟡 Medium|student|use the bot to identify classmates with experience|ensure the spread of people with background in different groups|
-|🟡 Medium|student|use the bot to start finding teammates early|I can make a sound decision on who I wish to be in the same group with|
-|🟡 Medium|student|use the bot to find classmates of the opposite gender|It will be easier to form groups with the correct gender ratio|
-|🟡 Medium|student|use the bot to remind tutorial/lecture/meeting time|students can be aware of the deadlines|
-|🟡 Medium|international student|use the bot to connect with other international students, possibly from the same country as you|You feel more relatable with these people, and uni life can be more vibrant and wont be as daunting.|
-|🟡 Medium|high CAP student|find competent team|to mantain my 5/5 cap|
-|🟡 Medium|low cap student|find people to carry|I can learn from them|
-|🟢 Low|international student|use the bot in different language|It helps with my understanding and I am able to navigate the bot comfortably|
-|🟢 Low|fast-typer student|pipe my command|achive greater efficiency|
+| Priority          | As a …​           | I want to …​                                     | So that I can…​                                            |
+| :---------------- | :---------------- | :----------------------------------------------- | :--------------------------------------------------------- |
+|🔴 High|student|scroll through each user’s entry to access information about my classmates|have a basic understanding of my classmates background|
+|🔴 High|student|add new contacts|keep track of new people|
+|🔴 High|student|delete existing contacts|delete irrelevant or outdated contacts from the address book|
+|🔴 High|student|edit existing contacts|update any outdated contacts and customise my address book|
+|🔴 High|introvert student|obtain the information of all classmates|know more about them without having to chat with all of them personally|
+|🔴 High|first time user|see all the features / commands of the application|better understand how to use it|
+|🔴 High|student|get contact information of my classmates|connect with other students and make friends|
+|🟡&nbsp;Medium|visual student|see more graphics|understand the program faster|
+|🟡 Medium|unorganized student|able to organise my modules/schedule easily|keeps things on schedule so i wont lack behind|
+|🟡 Medium|impatient student|have a responsive interface|have a good user experience|
+|🟡 Medium|tutor|track students with varying ability|better spread out students with similar ability so that the weakest wont be in the same group|
+|🟡 Medium|tutor|track students with varying background|better spread out students with similar background into different groups|
+|🟡 Medium|student|find the address of my classmates to identify where they are staying|see who stays on campus and who does not|
+|🟡 Medium|student|find people with different skillsets|learn from others|
+|🟡 Medium|student|check teammates availability|make sure my teammates have same vacant timeslots as me|
+|🟡 Medium|student|differentiate classmates with different personalities|identify like minded people / people of certain qualities you hope to work with in the group project|
+|🟡 Medium|student|differentiate classmates from different countries|form groups with the correct international / local ratio|
+|🟡 Medium|student|find classmates who stay near me|form groups with people who stay near me|
+|🟡 Medium|student|find good off-campus study spots|find convenient meeting places|
+|🟡 Medium|student|find where classmates stay|find convenient meeting places|
+|🟡 Medium|student|identify classmates with experience|ensure the spread of people with background in different groups|
+|🟡 Medium|student|start finding teammates early|make a sound decision on who I wish to be in the same group with|
+|🟡 Medium|student|find classmates of the opposite gender|form groups with the correct gender ratio|
+|🟡 Medium|student|be reminded of tutorial/lecture/meeting time|be aware of the deadlines and not miss any of them|
+|🟡 Medium|international student|find other international students, possibly from the same country as me|connect with them and talk with them|
+|🟡 Medium|high CAP student|find competent team|to mantain a good cap|
+|🟡 Medium|low cap student|find people to carry|learn from them|
+|🟢 Low|international student|have use the application in my own language|feel more comfortable using the application|
+|🟢 Low|fast-typer student|pipe my commands|achive greater efficiency|
 
 ### Use cases
 
