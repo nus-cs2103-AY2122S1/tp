@@ -7,9 +7,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javafx.scene.image.Image;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.GitHubUtil;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,6 +41,8 @@ public class Person implements Comparable<Person> {
     private Thread getStatsThread;
     private HashMap<String, Double> gitStats;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     /**
      * Every field must be present and not null.
      */
@@ -57,6 +62,8 @@ public class Person implements Comparable<Person> {
             profilePicture = GitHubUtil.getProfilePicture(github.value);
         });
         getProfilePicThread.start();
+        this.gitStats = new HashMap<>();
+        startGetStatThread();
     }
 
     /**
@@ -69,7 +76,7 @@ public class Person implements Comparable<Person> {
     }
 
     /**
-     * Overloaded constructor used when loading contacts from Json file.
+     * Overloaded constructor used when loading contacts from Json file with Image.
      */
     public Person(Name name, Telegram telegram, Github github,
                   Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite, Image image) {
@@ -82,8 +89,36 @@ public class Person implements Comparable<Person> {
         this.address = address;
         this.tags.addAll(tags);
         this.isFavourite = isFavourite;
-        this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
         this.profilePicture = image;
+        this.gitStats = new HashMap<>();
+        startGetStatThread();
+    }
+
+    /**
+     * Overloaded constructor used when loading contacts from Json file with Image.
+     */
+    public Person(Name name, Telegram telegram, Github github,
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite,
+                  Image image, HashMap<String, Double> gitStats) {
+        requireAllNonNull(name, telegram, github, phone, email, address, tags);
+        this.name = name;
+        this.telegram = telegram;
+        this.github = github;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isFavourite = isFavourite;
+        this.profilePicture = image;
+        this.gitStats = gitStats;
+    }
+
+    private void startGetStatThread() {
+        this.getStatsThread = new Thread(() -> {
+            this.gitStats = GitHubUtil.getUserStats(github.value);
+            logger.info("Stats for " + name.fullName + ": " + gitStats);
+        });
+        ThreadProcessor.addThread(getStatsThread);
     }
 
     public Name getName() {
@@ -108,6 +143,10 @@ public class Person implements Comparable<Person> {
 
     public Address getAddress() {
         return address;
+    }
+
+    public HashMap<String, Double> getGitStats() {
+        return gitStats;
     }
 
     /**

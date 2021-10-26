@@ -5,10 +5,20 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Person;
 
 
 public class AI {
+
+    private static final Logger logger = LogsCenter.getLogger(AI.class);
 
     /**
      * Returns the Cosine Similarity between two vectors
@@ -74,9 +84,12 @@ public class AI {
         return dist;
     }
 
-    private static void normalizeRepoCount(HashMap<String, HashMap<String, Double>> features) {
-        double sum = features.values().parallelStream().mapToDouble(u -> u.get("repo-count")).sum();
+    private static void normalizeRepoCount(HashMap<String, HashMap<String, Double>> features,
+                                           HashMap<String, Double> mainUser) {
+        double sum = features.values().parallelStream().mapToDouble(u -> u.get("repo-count")).sum()
+                + mainUser.get("repo-count");
         features.values().parallelStream().forEach(k -> k.replace("repo-count", k.get("repo-count") / sum));
+        mainUser.replace("repo-count", mainUser.get("repo-count") / sum);
     }
 
     private static HashMap<String, Double> sort(HashMap<String, Double> distances) {
@@ -117,17 +130,55 @@ public class AI {
     /**
      * Returns the sorted {@code HashMap} object based on decreasing similarity
      *
-     * @param userName username of the user to compare with
+     * @param mainUserStat username of the user to compare with
      * @param stats stats of all the users
      * @return a sorted dictionary based on similarity
      */
-    public static HashMap<String, Double> getSimilarityScore(String userName,
+    public static HashMap<String, Double> getSimilarityScore(HashMap<String, Double> mainUserStat,
                                                              HashMap<String, HashMap<String, Double>> stats) {
-        normalizeRepoCount(stats);
-        HashMap<String, Double> mainUserStat = stats.remove(userName);
         HashMap<String, Double> distance = new HashMap<>();
+        normalizeRepoCount(stats, mainUserStat);
         stats.keySet().parallelStream().forEach(u -> distance.put(u, getDistanceMetric(mainUserStat, stats.get(u))));
         normalize(distance);
-        return sort(distance);
+        return (distance);
+    }
+
+    /**
+     * Sorts the {@code ObservableList} object that is shown
+     * @param user Main user Person object
+     * @param list {@code ObservableList} object of Persons
+     */
+    public static boolean sortProfiles(Person user, ObservableList<Person> list) {
+        HashMap<String, HashMap<String, Double>> stats = new HashMap<>();
+        list.parallelStream().forEach(p -> {
+            HashMap<String, Double> temp = p.getGitStats();
+            if (!temp.isEmpty()) {
+                stats.put(p.getGithub().value,
+                        (HashMap<String, Double>) temp.entrySet().stream().collect(
+                                Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+            }
+        });
+        HashMap<String, Double> mainUserStats = (HashMap<String, Double>) user.getGitStats()
+                .entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        if (mainUserStats.isEmpty() || stats.keySet().size() != list.size()) {
+            logger.info("GitHub Metadata is still being gathered.");
+            return false;
+        }
+
+        HashMap<String, Double> scores = getSimilarityScore(mainUserStats, stats);
+        logger.info("Similarity Scores: " + scores);
+        FXCollections.sort(list, (p1, p2) -> {
+            double s1 = scores.get(p1.getGithub().value);
+            double s2 = scores.get(p2.getGithub().value);
+            if (s1 - s2 < 0) {
+                return 1;
+            } else if (s1 - s2 > 0) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        return true;
     }
 }

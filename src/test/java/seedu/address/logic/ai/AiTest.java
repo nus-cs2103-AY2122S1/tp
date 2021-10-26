@@ -54,11 +54,10 @@ public class AiTest {
     @Test
     public void getSimilarityScore_featureList_success() {
         HashMap<String, HashMap<String, Double>> points = new HashMap<>();
-        points.put("p1", point1);
         points.put("p2", point2);
         points.put("p3", point2);
 
-        HashMap<String, Double> scores = AI.getSimilarityScore("p1", points);
+        HashMap<String, Double> scores = AI.getSimilarityScore(point1, points);
         String[] expectedOrder = new String[] {"p3", "p2"};
         String[] actualOrder = scores.keySet().toArray(new String[0]);
         Assertions.assertEquals(expectedOrder[0], actualOrder[0], "Incorrect 1st Element");

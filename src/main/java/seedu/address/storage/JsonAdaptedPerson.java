@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,7 @@ public class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private boolean isFavourite;
+    private final HashMap<String, Double> gitStats;
     private final Image image;
 
     /**
@@ -50,6 +52,7 @@ public class JsonAdaptedPerson {
             @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("gitStats") HashMap<String, Double> gitStats,
             @JsonProperty("image") Image image) {
         this.name = name;
         this.telegram = telegram;
@@ -61,6 +64,7 @@ public class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.isFavourite = isFavourite;
+        this.gitStats = gitStats;
         this.image = image;
     }
 
@@ -79,6 +83,7 @@ public class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         isFavourite = source.isFavourite();
         image = source.getProfilePicture();
+        gitStats = source.getGitStats();
     }
 
     /**
@@ -146,8 +151,14 @@ public class JsonAdaptedPerson {
         final boolean modelIsFavourite = isFavourite;
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelTelegram, modelGithub, modelPhone,
-                modelEmail, modelAddress, modelTags, modelIsFavourite, image);
+
+        if (gitStats.isEmpty()) {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite, image);
+        } else {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite, image, gitStats);
+        }
     }
 
 }
