@@ -12,6 +12,7 @@ import seedu.address.logic.commands.AddLastMarkCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAllMarkCommand;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteLastMarkCommand;
@@ -81,6 +82,9 @@ public class ClassmateParser {
 
         case DeleteLastMarkCommand.COMMAND_WORD:
             return new DeleteLastMarkCommandParser().parse(arguments);
+
+        case DeleteAllMarkCommand.COMMAND_WORD:
+            return new DeleteAllMarkCommandParser().parse(arguments);
 
         case ViewClassCommand.COMMAND_WORD:
             return new ViewClassCommandParser().parse(arguments);
