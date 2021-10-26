@@ -370,4 +370,38 @@ public class ParserUtil {
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    public static Set<String> parseRoleRequirements(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<String> roleSet = new HashSet<>();
+        for (String roleReq : roles) {
+            roleReq = roleReq.trim();
+            if (!isValidRoleRequirement(roleReq)) {
+                throw SetRoleReqCommandParser.DEFAULT_ERROR;
+            }
+            roleSet.add(roleReq);
+        }
+        return roleSet;
+    }
+
+    private static boolean isValidRoleRequirement(String roleReq) {
+        String[] roleReqSplit = roleReq.split("-");
+
+        if (roleReqSplit.length != 2) {
+            return false;
+        }
+
+        if (!roleReqSplit[0].equals("bartender") && !roleReqSplit[0].equals("floor")
+                && !roleReqSplit[0].equals("kitchen")) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(roleReqSplit[1]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
 }

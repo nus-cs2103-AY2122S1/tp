@@ -6,6 +6,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.storage.RoleReqStorage;
 
+import java.io.FileNotFoundException;
+import java.util.Set;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 
@@ -19,12 +22,10 @@ public class SetRoleReqCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_ROLE + "kitchen" + " 1\n"
             + COMMAND_WORD + " " + PREFIX_ROLE + "floor" + " 3\n";
 
-    private String role;
-    private int numMinStaff;
+    private final Set<String> roleReqList;
 
-    public SetRoleReqCommand(String role, int minStaff) {
-        this.role = role;
-        this.numMinStaff = minStaff;
+    public SetRoleReqCommand(Set<String> roleReqList) {
+        this.roleReqList = roleReqList;
     }
 
 
@@ -32,7 +33,14 @@ public class SetRoleReqCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> staffs = model.getUnFilteredPersonList();
-        RoleReqStorage.update(role, numMinStaff);
+        for (String roleReq : roleReqList) {
+            String[] roleReqSplit = roleReq.split("-");
 
+            try {
+                RoleReqStorage.update(roleReqSplit[0], Integer.parseInt(roleReqSplit[1]));
+            }
+        }
+        return new CommandResult("Role requirements successfully updated:\n\n"
+                + RoleReqStorage.getRoleReqs());
     }
 }

@@ -136,8 +136,8 @@ Format:
 
 Examples:
 
-`setRoleReq r/floor 3`\
-`setRoleReq r/kitchen 4`
+`setRoleReq r/floor-3`\
+`setRoleReq r/kitchen-4 r/bartender-2`
 
 #### Listing all persons : `list`
 
