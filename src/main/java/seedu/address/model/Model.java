@@ -119,6 +119,11 @@ public interface Model {
      */
     void setAssessment(Assessment target, Assessment editedAssessment);
 
+    /**
+     * Returns group in address book with same identity as {@code groupToMatch} if exists.
+     */
+    Group getGroup(Group groupToMatch);
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 

@@ -133,6 +133,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Group getGroup(Group groupToMatch) {
+        requireNonNull(groupToMatch);
+        return addressBook.getGroup(groupToMatch);
+    }
+
+    @Override
     public boolean hasAssessment(Assessment assessment) {
         requireNonNull(assessment);
         return addressBook.hasAssessment(assessment);

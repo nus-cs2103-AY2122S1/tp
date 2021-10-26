@@ -164,6 +164,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(g);
     }
 
+    /**
+     * Returns group in address book with same identity as {@code groupToMatch} if exists.
+     */
+    public Group getGroup(Group groupToMatch) {
+        requireNonNull(groupToMatch);
+        for (Group group : getGroupList()) {
+            if (group.equals(groupToMatch)) {
+                return group;
+            }
+        }
+        return null;
+    }
+
     //// assessment-level operations
 
     /**

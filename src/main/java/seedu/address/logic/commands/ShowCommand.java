@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Assessment;
 import seedu.address.model.student.AssessmentStatistics;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.IdContainsKeywordsPredicate;
 import seedu.address.model.student.Name;
@@ -33,16 +35,18 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows performance analysis of a student or an assessment. "
+            + ": Shows performance analysis of a student, an assessment or a group. "
             + "Parameters: "
-            + "( INDEX | "
+            + "(INDEX | "
             + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id> | "
-            + PREFIX_ASSESSMENT + "<assessment_name>)";
+            + PREFIX_ASSESSMENT + "<assessment_name> | "
+            + PREFIX_GROUP + "<group_name>)";
 
     public static final String MESSAGE_SUCCESS = "Info requested successfully";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
+    public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
             "This student needs to be specified using ID due to duplicate naming.";
 
@@ -50,31 +54,37 @@ public class ShowCommand extends Command {
     private Name name;
     private ID id;
     private Assessment assessment;
+    private Group group;
 
     /**
      * Constructor for a {@code ShowCommand}.
      */
-    public ShowCommand(Index index, Name name, ID id, Assessment assessment) {
+    public ShowCommand(Index index, Name name, ID id, Assessment assessment, Group group) {
         setIndex(index);
         setName(name);
         setId(id);
         setAssessment(assessment);
+        setGroup(group);
     }
 
     public ShowCommand(Index index) {
-        this(index, null, null, null);
+        this(index, null, null, null, null);
     }
 
     public ShowCommand(Name name) {
-        this(null, name, null, null);
+        this(null, name, null, null, null);
     }
 
     public ShowCommand(ID id) {
-        this(null, null, id, null);
+        this(null, null, id, null, null);
     }
 
     public ShowCommand(Assessment assessment) {
-        this(null, null, null, assessment);
+        this(null, null, null, assessment, null);
+    }
+
+    public ShowCommand(Group group) {
+        this(null, null, null, null, group);
     }
 
     @Override
@@ -82,6 +92,7 @@ public class ShowCommand extends Command {
         requireNonNull(model);
         return getIndex().isPresent() ? showStudentByIndex(model)
                 : getAssessment().isPresent() ? showAssessment(model)
+                : getGroup().isPresent() ? showGroup(model)
                 : showStudentByPrefixes(model);
     }
 
@@ -128,7 +139,7 @@ public class ShowCommand extends Command {
     }
 
     /**
-     * Executes command when a {@code Student} info is requested.
+     * Executes command when an {@code Assessment} info is requested.
      */
     private CommandResult showAssessment(Model model) throws CommandException {
         assert getAssessment().isPresent();
@@ -141,6 +152,24 @@ public class ShowCommand extends Command {
         Info info = new Info(matchedAssessment);
         AssessmentStatistics statistics = new AssessmentStatistics(matchedAssessment);
         return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
+    }
+
+    /**
+     * Executes command when a {@code Group} info is requested.
+     */
+    private CommandResult showGroup(Model model) throws CommandException {
+        assert getGroup().isPresent();
+        Group matchedGroup = model.getGroup(group);
+
+        if (matchedGroup == null) {
+            throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
+        }
+
+        Info info = new Info(matchedGroup);
+        // uncomment when merging with graph display
+        // GroupStatistics statistics = new GroupStatistics(matchedGroup);
+        // return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
+        return new CommandResult(MESSAGE_SUCCESS, info); // delete when merging
     }
 
     /**
@@ -172,8 +201,9 @@ public class ShowCommand extends Command {
         boolean isNameEquals = Objects.equals(name, toCompare.name);
         boolean isIdEquals = Objects.equals(id, toCompare.id);
         boolean isAssessmentEquals = Objects.equals(assessment, toCompare.assessment);
+        boolean isGroupEquals = Objects.equals(group, toCompare.group);
 
-        return isIndexEquals && isNameEquals && isIdEquals && isAssessmentEquals;
+        return isIndexEquals && isNameEquals && isIdEquals && isAssessmentEquals && isGroupEquals;
     }
 
     public void setIndex(Index index) {
@@ -192,6 +222,10 @@ public class ShowCommand extends Command {
         this.assessment = assessment;
     }
 
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
     public Optional<Index> getIndex() {
         return Optional.ofNullable(index);
     }
@@ -208,17 +242,17 @@ public class ShowCommand extends Command {
         return Optional.ofNullable(assessment);
     }
 
+    public Optional<Group> getGroup() {
+        return Optional.ofNullable(group);
+    }
+
     /**
      * Stores info of a student or an assessment.
      */
     public static class Info {
-        private Index index;
         private Student student;
         private Assessment assessment;
-
-        public Info(Index index) {
-            setIndex(index);
-        }
+        private Group group;
 
         public Info(Student student) {
             setStudent(student);
@@ -228,8 +262,8 @@ public class ShowCommand extends Command {
             setAssessment(assessment);
         }
 
-        public void setIndex(Index index) {
-            this.index = index;
+        public Info(Group group) {
+            setGroup(group);
         }
 
         public void setStudent(Student student) {
@@ -240,8 +274,8 @@ public class ShowCommand extends Command {
             this.assessment = assessment;
         }
 
-        public Optional<Index> getIndex() {
-            return Optional.ofNullable(index);
+        public void setGroup(Group group) {
+            this.group = group;
         }
 
         public Optional<Student> getStudent() {
@@ -250,6 +284,10 @@ public class ShowCommand extends Command {
 
         public Optional<Assessment> getAssessment() {
             return Optional.ofNullable(assessment);
+        }
+
+        public Optional<Group> getGroup() {
+            return Optional.ofNullable(group);
         }
 
         @Override
@@ -267,9 +305,9 @@ public class ShowCommand extends Command {
             // state check
             Info e = (Info) other;
 
-            return getIndex().equals(e.getIndex())
-                    && getStudent().equals(e.getStudent())
-                    && getAssessment().equals(e.getAssessment());
+            return getStudent().equals(e.getStudent())
+                    && getAssessment().equals(e.getAssessment())
+                    && getGroup().equals(e.getGroup());
         }
     }
 }

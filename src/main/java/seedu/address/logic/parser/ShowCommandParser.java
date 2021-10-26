@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -23,7 +24,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
      */
     public ShowCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP);
 
         return argMultimap.getPreamble().isEmpty()
                 ? parseByPrefixes(argMultimap)
@@ -57,7 +58,9 @@ public class ShowCommandParser implements Parser<ShowCommand> {
                 ? new ShowCommand(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()))
                 : argMultimap.getValue(PREFIX_ID).isPresent()
                 ? new ShowCommand(ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get()))
-                : new ShowCommand(ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()));
+                : argMultimap.getValue(PREFIX_ASSESSMENT).isPresent()
+                ? new ShowCommand(ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()))
+                : new ShowCommand(ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get()));
     }
 
     /**
