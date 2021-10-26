@@ -52,6 +52,18 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem contactsMenuItem;
+
+    @FXML
+    private MenuItem favoritesMenuItem;
+
+    @FXML
+    private MenuItem eventsMenuItem;
+
+    @FXML
+    private MenuItem findABuddyMenuItem;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
@@ -107,12 +119,15 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
+        // Configure all keyboard shortcuts
         setAccelerators();
 
+        // Initialize Help window
         helpWindow = new HelpWindow();
-
+        
         userProfileWindow = new UserProfileWindow(logic);
 
+        // Configure Events Icon
         eventsIcon.setOnMouseClicked(event -> {
             tabPaneHeader.getTabPane().getSelectionModel().select(2);
         });
@@ -122,13 +137,21 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    /**
+     * Configures individual keyboard shortcuts.
+     */
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
+        setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
+        setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
+        setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -215,6 +238,38 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             userProfileWindow.focus();
         }
+    }
+
+    /**
+     * Switches to the Contacts tab.
+     */
+    @FXML
+    public void handleContacts() {
+        tabPaneHeader.activateContacts(logic);
+    }
+
+    /**
+     * Activates the Favorites tab.
+     */
+    @FXML
+    public void handleFavorites() {
+        tabPaneHeader.activateFavorites(logic);
+    }
+
+    /**
+     * Switches to the Events tab.
+     */
+    @FXML
+    public void handleEvents() {
+        tabPaneHeader.activateEvents(logic);
+    }
+
+    /**
+     * Switches to the Find A Buddy Tab.
+     */
+    @FXML
+    public void handleFindABuddy() {
+        tabPaneHeader.activateFindABuddy(logic);
     }
 
     /**

@@ -35,6 +35,14 @@
                 <Menu mnemonicParsing="false" text="File">
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                 </Menu>
+                     <Menu mnemonicParsing="false" text="Window">
+                       <items>
+                         <MenuItem fx:id="contactsMenuItem" mnemonicParsing="false" onAction="#handleContacts" text="Contacts" />
+                           <MenuItem fx:id="favoritesMenuItem" mnemonicParsing="false" onAction="#handleFavorites" text="Favorites" />
+                           <MenuItem fx:id="eventsMenuItem" mnemonicParsing="false" onAction="#handleEvents" text="Events" />
+                           <MenuItem fx:id="findABuddyMenuItem" mnemonicParsing="false" onAction="#handleFindABuddy" text="Find A Buddy" />
+                       </items>
+                     </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                 </Menu>

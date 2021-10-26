@@ -16,9 +16,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 
-public class AI {
+public class Ai {
 
-    private static final Logger logger = LogsCenter.getLogger(AI.class);
+    private static final Logger logger = LogsCenter.getLogger(Ai.class);
 
     /**
      * Returns the Cosine Similarity between two vectors
