@@ -21,6 +21,7 @@ public class JsonAdaptedTask {
     private final String taskId;
     private final String taskName;
     private final String taskDeadline;
+    private final boolean isComplete;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -28,11 +29,13 @@ public class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("moduleName") String moduleName, @JsonProperty("taskId") String taskId,
                               @JsonProperty("taskName") String taskName,
-                              @JsonProperty("taskDeadline") String taskDeadline) {
+                              @JsonProperty("taskDeadline") String taskDeadline,
+                              @JsonProperty("isComplete") boolean isComplete) {
         this.moduleName = moduleName;
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskDeadline = taskDeadline;
+        this.isComplete = isComplete;
     }
 
     /**
@@ -43,6 +46,7 @@ public class JsonAdaptedTask {
         taskId = source.getTaskId().value;
         taskName = source.getTaskName().taskName;
         taskDeadline = source.getTaskDeadline().value;
+        isComplete = source.isComplete();
     }
 
     /**
@@ -87,6 +91,6 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(TaskDeadline.MESSAGE_CONSTRAINTS);
         }
         final TaskDeadline modelTaskDeadline = new TaskDeadline(taskDeadline);
-        return new Task(modelModuleName, modelTaskId, modelTaskName, modelTaskDeadline);
+        return new Task(modelModuleName, modelTaskId, modelTaskName, modelTaskDeadline, isComplete);
     }
 }

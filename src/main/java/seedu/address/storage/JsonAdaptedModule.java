@@ -10,7 +10,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Jackson-friendly version of {@link Module}
@@ -21,7 +23,7 @@ public class JsonAdaptedModule {
 
     private final String moduleName;
     private final List<JsonAdaptedStudent> studentList = new ArrayList<>();
-    private final List<Task> taskList;
+    private final List<JsonAdaptedTask> taskList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedModule} with the given module details.
@@ -29,10 +31,10 @@ public class JsonAdaptedModule {
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("moduleName") String moduleName,
                              @JsonProperty("uniqueStudentList") List<JsonAdaptedStudent> studentList,
-                             @JsonProperty("uniqueTaskList") List<Task> taskList) {
+                             @JsonProperty("uniqueTaskList") List<JsonAdaptedTask> taskList) {
         this.moduleName = moduleName;
         this.studentList.addAll(studentList);
-        this.taskList = taskList;
+        this.taskList.addAll(taskList);
     }
 
     /**
@@ -45,7 +47,11 @@ public class JsonAdaptedModule {
             JsonAdaptedStudent studentToAdd = new JsonAdaptedStudent(student);
             studentList.add(studentToAdd);
         }
-        this.taskList = source.getTaskList().asModifiableObservableList();
+        List<Task> tempTaskList = source.getTaskList().asModifiableObservableList();
+        for (Task task : tempTaskList) {
+            JsonAdaptedTask taskToAdd = new JsonAdaptedTask(task);
+            taskList.add(taskToAdd);
+        }
     }
 
     /**
@@ -63,6 +69,23 @@ public class JsonAdaptedModule {
             throw new IllegalValueException(ModuleName.MESSAGE_CONSTRAINTS);
         }
         final ModuleName modelModuleName = new ModuleName(moduleName);
-        return new Module(modelModuleName);
+
+        final UniqueStudentList students = new UniqueStudentList();
+        if (!studentList.isEmpty()) {
+            for (JsonAdaptedStudent student : studentList) {
+                Student modelStudent = student.toModelType();
+                students.add(modelStudent);
+            }
+        }
+
+        final UniqueTaskList tasks = new UniqueTaskList();
+        if (!taskList.isEmpty()) {
+            for (JsonAdaptedTask task : taskList) {
+                Task modelTask = task.toModelType();
+                tasks.add(modelTask);
+            }
+        }
+
+        return new Module(modelModuleName, students, tasks);
     }
 }

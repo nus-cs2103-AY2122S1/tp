@@ -31,6 +31,19 @@ public class Task {
         this.isComplete = false;
     }
 
+    /**
+     * Constructs a Task with isComplete
+     */
+    public Task(ModuleName moduleName, TaskId taskId, TaskName taskName, TaskDeadline taskDeadline,
+                boolean isComplete) {
+        requireAllNonNull(moduleName, taskId, taskName, taskDeadline);
+        this.moduleName = moduleName;
+        this.taskId = taskId;
+        this.taskName = taskName;
+        this.taskDeadline = taskDeadline;
+        this.isComplete = isComplete;
+    }
+
     public String getModuleNameString() {
         return this.moduleName.toString();
     }
