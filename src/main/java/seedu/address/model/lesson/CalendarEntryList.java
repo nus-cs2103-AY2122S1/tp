@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.calendarfx.model.Calendar;
@@ -126,7 +125,7 @@ public class CalendarEntryList {
         if (!toAdd.isRecurring()) {
             // makeup lesson is not cancelled
             if (!toAdd.isCancelled()) {
-                Entry<Lesson> entry = convertToEntry(editedPerson, toAdd);
+                Entry<Lesson> entry = convertToMakeupEntry(editedPerson, toAdd);
                 add(entry);
             }
             return;
@@ -231,7 +230,7 @@ public class CalendarEntryList {
             if (cancelledDate.getLocalDate().isAfter(startDate)) {
                 // end date of this recurring entry is 1 week before cancelledDate
                 LocalDate endDate = cancelledDate.getLocalDate().minusWeeks(1);
-                Entry<Lesson> entry = convertToEntry(owner, lesson, interval, Optional.of(endDate));
+                Entry<Lesson> entry = convertToRecurringEntryWithEnd(owner, lesson, interval, endDate);
                 entryList.add(entry);
             }
             // update start date of next recurring entry to be 1 week after cancelledDate
@@ -239,57 +238,75 @@ public class CalendarEntryList {
             interval = interval.withDates(startDate, startDate);
 
         }
-        entryList.add(convertToEntry(owner, lesson, interval, Optional.empty()));
+        entryList.add(convertToRecurringEntry(owner, lesson, interval));
 
         return entryList;
     }
 
     /**
      * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
-     *
-     * @param owner  The person with the lesson.
-     * @param lesson The lesson to be converted to a calendar entry.
-     * @return The calendar entry that also contains this lesson.
-     */
-    private Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
-        return convertToEntry(owner, lesson, new Interval(lesson.getStartDateTime(), lesson.getEndDateTime()),
-                Optional.empty());
-    }
-
-    /**
-     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
      * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
      *
-     * @param owner         The person with the lesson.
-     * @param lesson        The lesson to be converted to a calendar entry.
+     * @param owner The person with the lesson.
+     * @param lesson The lesson to be converted to a calendar entry.
      * @param entryInterval The interval of this entry.
-     * @param untilDate     An optional end date of the entry if it is recurring.
      * @return Then calendar entry of the lesson.
      */
-    private Entry<Lesson> convertToEntry(Person owner, Lesson lesson, Interval entryInterval,
-                                         Optional<LocalDate> untilDate) {
+    private Entry<Lesson> convertToEntry(Person owner, Lesson lesson, Interval entryInterval) {
         requireNonNull(lesson);
         Entry<Lesson> entry = new Entry<>();
         entry.setUserObject(lesson);
         entry.setInterval(entryInterval);
         StringBuilder entryTitle = new StringBuilder(owner.getName().toString());
         entryTitle.append(" (").append(lesson.getSubject().toString()).append(")");
-
-        // Non recurring
-        if (!lesson.isRecurring()) {
-            entry.setTitle(entryTitle.toString());
-            return entry;
-        }
-
-        // Recurring
-        entryTitle.append("(Recurring)");
         entry.setTitle(entryTitle.toString());
+        return entry;
+    }
 
-        String recurrenceRule = "RRULE:FREQ=WEEKLY";
-        if (untilDate.isPresent()) {
-            recurrenceRule += ";UNTIL=" + untilDate.get().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        }
-        entry.setRecurrenceRule(recurrenceRule);
+    /**
+     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
+     *
+     * @param owner The person with the lesson.
+     * @param lesson The lesson to be converted to a calendar entry.
+     * @return The calendar entry that also contains this lesson.
+     */
+    private Entry<Lesson> convertToMakeupEntry(Person owner, Lesson lesson) {
+        return convertToEntry(owner, lesson, new Interval(lesson.getStartDateTime(), lesson.getEndDateTime()));
+    }
+
+    /**
+     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
+     * The entry is recurring weekly.
+     *
+     * @param owner The person with the lesson.
+     * @param lesson The lesson to be converted to a calendar entry.
+     * @param entryInterval The interval of this entry.
+     * @return The calendar entry that also contains this lesson.
+     */
+    private Entry<Lesson> convertToRecurringEntry(Person owner, Lesson lesson, Interval entryInterval) {
+        Entry<Lesson> entry = convertToEntry(owner, lesson, entryInterval);
+        String entryTitle = entry.getTitle();
+        entry.setTitle(entryTitle + "(Recurring)");
+        entry.setRecurrenceRule("RRULE:FREQ=WEEKLY");
+        return entry;
+    }
+
+    /**
+     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
+     * The entry is recurring weekly and has an end date.
+     *
+     * @param owner The person with the lesson.
+     * @param lesson The lesson to be converted to a calendar entry.
+     * @param entryInterval The interval of this entry.
+     * @param endDate The end date of the recurrence.
+     * @return
+     */
+    private Entry<Lesson> convertToRecurringEntryWithEnd(Person owner, Lesson lesson, Interval entryInterval,
+            LocalDate endDate) {
+        Entry<Lesson> entry = convertToRecurringEntry(owner, lesson, entryInterval);
+        String rule = entry.getRecurrenceRule();
+        String ruleWithUntil = rule + ";UNTIL=" + endDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        entry.setRecurrenceRule(ruleWithUntil);
         return entry;
     }
 
