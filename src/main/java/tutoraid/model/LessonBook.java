@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.UniqueLessonList;
+import tutoraid.model.student.Student;
 
 /**
  * Wraps all data at the lesson-book level
@@ -82,6 +83,13 @@ public class LessonBook implements ReadOnlyLessonBook {
         requireNonNull(editedLesson);
 
         lessons.setLesson(target, editedLesson);
+    }
+
+    /**
+     * Refreshes the lesson book.
+     */
+    public void refreshLessonBook() {
+        lessons.refreshUniqueLessonList();
     }
 
     /**
