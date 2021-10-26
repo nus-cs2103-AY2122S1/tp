@@ -33,12 +33,12 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withGender("F")
-            .withNationality("Singaporean ").withEmail("alice@example.com")
+            .withNationality("Singaporean").withEmail("alice@example.com")
             .withPhone("94351253").withTutorialGroup("T09")
             .withRemark("She likes aardvarks.").withTags("friends").withSocialHandles("tg:alicep")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withGender("M")
-            .withNationality("Chinese ").withEmail("johnd@example.com")
+            .withNationality("Chinese").withEmail("johnd@example.com")
             .withPhone("98765432").withTutorialGroup("W08")
             .withRemark("He can't take beer!").withTags("owesMoney", "friends")
             .withSocialHandles("tg:bensonm")
