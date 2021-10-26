@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.EmptyShift;
 import seedu.address.model.RecurrencePeriod;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
  * Represents a piece of work for a staff.
@@ -117,6 +118,10 @@ public class Shift {
      * represents that it is working during {@code period}.
      */
     public boolean isWorking(Period period) {
+        if (this.recurrences.size() == 0) {
+            return false;
+        }
+
         List<LocalDate> dates = period.toList()
                 .stream()
                 .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
@@ -157,14 +162,17 @@ public class Shift {
     /**
      * Removes the shift that is withing the input dates.
      */
-    public Shift remove(LocalDate startDate, LocalDate endDate) {
+    public Shift remove(LocalDate startDate, LocalDate endDate) throws NoShiftException {
         assert endDate.isAfter(startDate) || endDate.isEqual(startDate);
         //check if this period is already within the current set
         Period period = new Period(startDate, endDate);
-        this.recurrences = recurrences.stream()
+        List<RecurrencePeriod> recurrences = this.recurrences.stream()
                 .flatMap(p -> p.complementWithInformation(period).stream())
                 .collect(Collectors.toList());
-        if (this.recurrences.size() == 0) {
+        if (recurrences.equals(this.recurrences)) {
+            throw new NoShiftException();
+        }
+        if (recurrences.size() == 0) {
             return new EmptyShift(dayOfWeek, slot);
         }
         return new Shift(dayOfWeek, slot, recurrences);

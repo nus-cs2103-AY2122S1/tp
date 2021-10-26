@@ -87,7 +87,7 @@ public class Schedule {
 
             return;
         }
-        if (!shift1.isEmpty()) {
+        if (!shift1.isEmpty() && shift1.isWorking(new Period(startDate, endDate))) {
             throw new DuplicateShiftException();
         }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift1.add(startDate, endDate);

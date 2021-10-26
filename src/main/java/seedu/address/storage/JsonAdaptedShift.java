@@ -22,7 +22,7 @@ public class JsonAdaptedShift {
 
     private final String dayOfWeek;
     private final String slot;
-    private final String isWorking;
+    private final boolean isEmpty;
     private final List<JsonAdaptedRecurrencePeriod> history = new ArrayList<>();
 
     /**
@@ -31,13 +31,13 @@ public class JsonAdaptedShift {
     @JsonCreator
     public JsonAdaptedShift(@JsonProperty("dayOfWeek") String dayOfWeek, @JsonProperty("slot") String slot,
                             @JsonProperty("history") List<JsonAdaptedRecurrencePeriod> history,
-                            @JsonProperty("isWorking") String isWorking) {
+                            @JsonProperty("isEmpty") boolean isEmpty) {
         this.slot = slot;
         this.dayOfWeek = dayOfWeek;
         if (history != null) {
             this.history.addAll(history);
         }
-        this.isWorking = isWorking;
+        this.isEmpty = isEmpty;
     }
 
     /**
@@ -47,7 +47,7 @@ public class JsonAdaptedShift {
         assert shift != null;
         this.dayOfWeek = shift.getDayOfWeek().toString();
         this.slot = shift.getSlot().getValue();
-        this.isWorking = String.valueOf(!shift.isEmpty());
+        isEmpty = shift.isEmpty();
         List<RecurrencePeriod> history = shift.getRecurrences();
         this.history.addAll(history
                 .stream()
@@ -72,11 +72,9 @@ public class JsonAdaptedShift {
         for (JsonAdaptedRecurrencePeriod period : history) {
             periods.add(period.toModelType());
         }
-        if (!isWorking.equals("true") && !isWorking.equals("false")) {
-            throw new IllegalValueException(BOOLEAN_CONSTRAINTS);
-        }
+
         //empty case
-        if (isWorking.equals("false")) {
+        if (isEmpty) {
             //create empty
             return new EmptyShift(modelDayOfWeek, modelSlot);
         }
