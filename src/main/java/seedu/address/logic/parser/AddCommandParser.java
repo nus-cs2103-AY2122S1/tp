@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
@@ -39,9 +40,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         TelegramHandle telegramHandle = ParserUtil
                 .parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Note note = new Note(""); // every student starts with empty notes.
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
-        Student student = new Student(name, telegramHandle, email, groupName);
+        Student student = new Student(name, telegramHandle, email, note, groupName);
 
         return new AddCommand(student);
     }

@@ -24,7 +24,7 @@ public class Student {
     private final Email email;
 
     // Data fields
-    private final Note note = new Note();
+    private final Note note;
     private final GroupName groupName;
     private final UniqueAssessmentList assessments;
     private final FilteredList<Assessment> filteredAssessments;
@@ -32,10 +32,11 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, TelegramHandle telegramHandle, Email email, GroupName groupName) {
+    public Student(Name name, TelegramHandle telegramHandle, Email email, Note note, GroupName groupName) {
         requireAllNonNull(name, telegramHandle, email, groupName);
         this.name = name;
         this.telegramHandle = telegramHandle;
+        this.note = note;
         this.email = email;
         this.groupName = groupName;
         this.assessments = new UniqueAssessmentList();

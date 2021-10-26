@@ -33,6 +33,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_TELEGRAM_HANDLE = BENSON.getTelegramHandle().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_GROUP_NAME = BENSON.getGroupName().toString();
+    private static final String VALID_NOTE = BENSON.getNote().toString();
     private static final String VALID_DESCRIPTION = "A Software engineering module";
     private static final List<JsonAdaptedAssessment> VALID_ASSESSMENTS = new ArrayList<>(List.of(
             new JsonAdaptedAssessment(MIDTERMS), new JsonAdaptedAssessment(FINALS)));
@@ -52,7 +53,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(INVALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
-                VALID_GROUP_NAME, VALID_ASSESSMENTS);
+                VALID_NOTE, VALID_GROUP_NAME, VALID_ASSESSMENTS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -62,7 +63,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(null, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
-                VALID_GROUP_NAME, VALID_ASSESSMENTS);
+                VALID_NOTE, VALID_GROUP_NAME, VALID_ASSESSMENTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -72,7 +73,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, INVALID_TELEGRAM_HANDLE, VALID_EMAIL,
-                VALID_GROUP_NAME, VALID_ASSESSMENTS);
+                VALID_NOTE, VALID_GROUP_NAME, VALID_ASSESSMENTS);
         String expectedMessage = TelegramHandle.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -82,7 +83,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, null, VALID_EMAIL,
-                VALID_GROUP_NAME, VALID_ASSESSMENTS);
+                VALID_NOTE, VALID_GROUP_NAME, VALID_ASSESSMENTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, TelegramHandle.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -92,7 +93,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, INVALID_EMAIL,
-                VALID_GROUP_NAME, VALID_ASSESSMENTS);
+                VALID_NOTE, VALID_GROUP_NAME, VALID_ASSESSMENTS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -102,7 +103,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, null,
-                VALID_GROUP_NAME, VALID_ASSESSMENTS);
+                VALID_NOTE, VALID_GROUP_NAME, VALID_ASSESSMENTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -111,8 +112,8 @@ public class JsonAdaptedStudentTest {
     public void toModelType_nullGroupName_throwsIllegalValueException() {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL, null,
-                VALID_ASSESSMENTS);
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
+                VALID_NOTE, null, VALID_ASSESSMENTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -121,7 +122,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_noMatchingGroupNameInGroupList_throwsIllegalValueException() {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
-                VALID_GROUP_NAME, VALID_ASSESSMENTS);
+                VALID_NOTE, VALID_GROUP_NAME, VALID_ASSESSMENTS);
         String expectedMessage = MESSAGE_GROUP_NAME_NOT_FOUND;
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
@@ -131,7 +132,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
-                VALID_GROUP_NAME, null);
+                VALID_NOTE, VALID_GROUP_NAME, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Assessment.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }

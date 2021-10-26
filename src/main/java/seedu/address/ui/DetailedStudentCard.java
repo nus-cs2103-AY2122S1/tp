@@ -46,7 +46,7 @@ public class DetailedStudentCard extends UiPart<Region> {
         groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
-        notes.setText(student.getNote().getNote());
+        notes.setText(student.getNote().toString());
     }
 
     @Override

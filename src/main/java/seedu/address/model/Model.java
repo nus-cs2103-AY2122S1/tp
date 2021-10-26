@@ -9,6 +9,7 @@ import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 
 /**
@@ -66,6 +67,11 @@ public interface Model {
      * Returns the target student from the CS book.
      */
     void changeStudentGroup(Student student, Group newGroup);
+
+    /**
+     * Updates the note of a student in the CS book.
+     */
+    void updateStudentNote(Student student, Note note);
 
     /**
      * Deletes the given student.
