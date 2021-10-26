@@ -4,7 +4,6 @@ import static seedu.address.model.person.Shift.isValidShift;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.Objects;
 
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
@@ -209,7 +208,7 @@ public class Schedule {
         final StringBuilder builder = new StringBuilder();
         for (Shift[] innerArray : shifts) {
             for (Shift s : innerArray) {
-                if (!Objects.isNull(s)) {
+                if (s != null) {
                     builder.append(s.toSaveString());
                 }
             }
@@ -232,5 +231,4 @@ public class Schedule {
         }
         return true;
     }
-
 }

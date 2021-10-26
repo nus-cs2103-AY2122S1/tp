@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
-import seedu.address.model.person.exceptions.NoShiftException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,6 +65,20 @@ public class Person {
         this.absentDates.addAll(absentDates);
         this.fields.addAll(roles);
         addToFieldSet(fields, name, phone, email, address, salary, status);
+    }
+
+    /**
+     * Returns a copy of the provided Person object.
+     *
+     * @param p Person to be copied.
+     * @return Person copy of p.
+     */
+    public static Person copy(Person p) {
+        if (p == null) {
+            return null;
+        }
+        return new Person(p.getName(), p.getPhone(), p.getEmail(), p.getAddress(), p.getRoles(), p.getSalary(),
+                p.getStatus(), p.getTags(), p.getAbsentDates());
     }
 
     public Name getName() {
@@ -181,17 +194,6 @@ public class Person {
     public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         schedule.addShift(dayOfWeek, slot);
         totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
-    }
-
-    /**
-     * Removes a shift from the staff's schedule.
-     *
-     * @param dayOfWeek The day of the shift.
-     * @param slot The time slot of the shift.
-     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
-     */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
-        schedule.removeShift(dayOfWeek, slot);
     }
 
     public void setSchedule(Schedule schedule) {
