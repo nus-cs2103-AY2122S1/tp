@@ -99,4 +99,9 @@ public class Lab {
     public String toString() {
         return "Lab " + this.labNum;
     }
+
+    public Lab copy() {
+        Lab labCopy = new Lab(labNum, actualScore, totalScore);
+        return labCopy;
+    }
 }

@@ -49,24 +49,20 @@ public class AddLabCommand extends Command {
 
         // Gets the last filtered list displayed
         List<Student> lastShownList = model.getFilteredStudentList();
-        boolean exists = false;
         if (result.getTotalScore() < 0.0) {
             throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
         }
         for (Student std: lastShownList) {
             Student target = std;
-            if (!target.addLab(this.result)) {
-                exists = true;
+            Lab newLab = this.result.copy();
+            if (!target.addLab(newLab)) {
+                throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, result));
             }
             model.setStudent(target, std);
+        }
 
-        }
-        if (exists) {
-            throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, result));
-        } else {
-            model.addLab(result);
-            return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
-        }
+        model.addLab(result);
+        return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
     }
 
     @Override

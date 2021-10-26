@@ -100,7 +100,8 @@ public class Student {
     public Boolean addLab(Lab lab) {
         int index = this.labList.indexOf(lab);
         if (index == -1) {
-            this.labList.add(lab);
+            Lab newLab = lab;
+            this.labList.add(newLab);
             labList.sort(new SortByLabNumber());
             return true;
         } else {

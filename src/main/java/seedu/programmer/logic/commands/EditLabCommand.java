@@ -34,6 +34,10 @@ public class EditLabCommand extends Command {
 
     public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
 
+    public static final String LAB_NEW_NUM_CONSTRAINTS = "The lab number already exists.";
+
+    public static final String LAB_NUM_CONSTRAINTS = "The lab number doesn't exist.";
+
     private final int newLabNum;
     private final Double total;
     private final Lab original;
@@ -70,18 +74,21 @@ public class EditLabCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
         boolean labExists = false;
+        Lab newLab = new Lab(newLabNum);
         for (Student std : lastShownList) {
             Student editedStd = std;
             if (total != null && total < 0.0) {
                 throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
-            }
-            if (!std.getLabList().contains(original)) {
-                continue;
-            }
-            labExists = true;
+            } else if (std.getLabList().contains(newLab)) {
+                throw new CommandException(LAB_NEW_NUM_CONSTRAINTS);
+            } else if (!std.getLabList().contains(original)) {
+                throw new CommandException(LAB_NUM_CONSTRAINTS);
+            } else {
+                labExists = true;
 
-            editedStd.editLabInfo(original, newLabNum, total);
-            model.setStudent(std, editedStd);
+                editedStd.editLabInfo(original, newLabNum, total);
+                model.setStudent(std, editedStd);
+            }
 
         }
 
