@@ -73,6 +73,7 @@ public class CommandTestUtil {
     public static final String VALID_FILENAME_JSON = "ImportNewPerson.json";
     public static final String VALID_FILENAME_CSV = "ImportNewPerson.csv";
     public static final String VALID_EXISTING_FILE = "ExistingFile.json";
+    public static final String INVALID_FILENAME_TXT = "ImportNewPerson.txt";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
