@@ -50,7 +50,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
      * Handles parsing by prefixes.
      */
     public ShowCommand parseByPrefixes(ArgumentMultimap argMultimap) throws ParseException {
-        if (areRedundantPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT)) {
+        if (isInvalidPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
@@ -64,10 +64,11 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     }
 
     /**
-     * Returns true if only one of the prefixes is present in the given {@code ArgumentMultimap}.
+     * Returns true if only one of the prefixes is present in the given {@code ArgumentMultimap},
+     * i.e. false if there are multiple prefixes or no prefix present.
      */
-    private static boolean areRedundantPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).filter(prefix -> argumentMultimap.getValue(prefix).isPresent()).count() > 1;
+    private static boolean isInvalidPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).filter(prefix -> argumentMultimap.getValue(prefix).isPresent()).count() != 1;
     }
 
 }
