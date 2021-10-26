@@ -53,7 +53,6 @@ public abstract class UiPart<T> {
 
     /**
      * Returns the root object of the scene graph of this UiPart.
-     * @return
      */
     public T getRoot() {
         return fxmlLoader.getRoot();

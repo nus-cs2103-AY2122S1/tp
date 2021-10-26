@@ -65,18 +65,6 @@ public class SampleDataUtil {
         };
     }
 
-    //    for testing
-    //    public static Anime[] getSampleAnime() {
-    //        Anime[] animeArr = new Anime[100];
-    //        String animeName = "x";
-    //        for (int i = 0; i < 100; i++) {
-    //            animeArr[i] = new Anime(new Name(animeName),
-    //            new Episode("0"), new Status("t"), getGenreSet("comedy", "slice of life"));
-    //            animeName += "x";
-    //        }
-    //        return animeArr;
-    //     }
-
     public static ReadOnlyAnimeList getSampleAnimeList() {
         AnimeList sampleAb = new AnimeList();
         for (Anime sampleAnime : getSampleAnime()) {
