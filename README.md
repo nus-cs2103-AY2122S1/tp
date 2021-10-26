@@ -23,13 +23,13 @@
     - `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 6. Add Lab records with Lab number and total score for all students
    - allow user to create new Lab report instances with a Lab number and total score for that lab report. 
-   - `addlab -t 1 -ts 20`
+   - e.g. `addlab -t 1 -ts 20`
 7. Edit Lab records with Lab number and total score for all students
    - allow user to edit existing Lab report title and total score.
-   - `editlab -i 1 -t 1 -s 15`
+   - `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -tsv <NEW_TOTAL_SCORE>`
 8. Delete Lab records with Lab number and total score for all students
     - allow user delete an existing Lab report instances.
-    - `dellab -t 1`
+    - `dellab -t <LAB_NUM>`
 9. Filters the records of individual students using query parameters
     - Filters the list of students based on any combination of the following parameters: Name, Student ID, Class ID, Email
     - `filter -cid <CLASS_ID>`
