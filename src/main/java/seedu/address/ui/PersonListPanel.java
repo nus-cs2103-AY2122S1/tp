@@ -29,6 +29,7 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, PersonDetails personDetails) {
         super(FXML);
         this.personDetails = personDetails;
+        this.getRoot().setPrefHeight(Region.USE_PREF_SIZE);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.getSelectionModel().selectedItemProperty().addListener((
