@@ -2,21 +2,24 @@
 layout: page
 title: User Guide
 ---
-Welcome to Source Control User Guide! 
+Welcome to **Source Control** User Guide! 
 
 Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. 
-This application allows you to store comprehensive data of each student quickly, and allows you to search through them easily. 
-With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments!
-Source Control can also give you both a quick overview and a closer look of how your students are doing.
-This application provides in-depth data analysis of the performance of your students in each assessment, 
+This application allows you to **store comprehensive data** of each student quickly, and allows you to search through them easily. 
+With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments! <br>
+Source Control can also give you both a quick overview and a closer look of how your students are performing.
+This application provides **in-depth data analysis** of the performance of your students in each assessment, 
 giving you timely feedback on the pace and difficulty level of the module.
 
 Source Control is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps! 
 
-This guide takes you through all the latest features of Source Control. If you are a new user, this guide provides you 
+This guide takes you through all the _latest features_ of Source Control. If you are a new user, this guide provides you 
 all the basic knowledge to get started with Source Control, and is simple and easy to read.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -57,19 +60,19 @@ all the basic knowledge to get started with Source Control, and is simple and ea
 
 **:information_source: Notes about the command format:**<br>
 
-* `<angled brackets>` <br>
+* `<angled brackets>`: <br>
   Words in `<angled brackets>` are the parameters to be supplied by the user.<br>
   e.g. in `add -n <student_name>`, `<student_name>` is a placeholder which can be used as `add -n John Doe`.
 
-* `(round brackets)` <br>
+* `(round brackets)`: <br>
   Parameters in `(round brackets)` separated by `|` are mutually exclusive options for input. Only one input should to be supplied by the user.<br>
   e.g. `(-n <student_name> | -i <student_id> | -group <group_name>)` can be used as `-n John Doe`, or as `-i E0123456`, or as `-g T02A`
 
-* `[square brackets]` <br>
+* `[square brackets]`: <br>
   Parameters in `[square brackets]` are optional. <br>
   e.g. `-n <student_name> [-g <group_name>]` can be used as `-n John Doe -g T01A`, or as `-n John Doe`.
 
-* `...​` <br>
+* `...​`: <br>
   Items with `...​`  after them can be used multiple times, including zero times.<br>
   e.g. `[-g <group_name>]...` can be used as ` ` (i.e. 0 times), or `-g T01A -g R01A`.
 
@@ -92,6 +95,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+
 ### Listing all students : `list`
 
 Shows a list of all students in the address book.
@@ -103,33 +107,39 @@ Format: `list`
 
 Adds a student into the database.
 
-Format: `add student -n <student_name> -i <student_id>  [-g <group_name>] [-t <tag_name>]...`
+Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag_name>]...`
 
-* Adds a new student with the given name and NUSNET ID into the database.
-* Adds the student into the groups the student belongs to.
-* Adds a tag to the student if applicable.
+* Adds a new student into the database with the given name and NUSNET ID.
+* Adds the student into the specified groups if applicable. If group does not already exist, a new group would be created. 
+* Adds tags to the student if applicable.
+* NUSNET ID input cannot already exist in address book. 
 
 Examples:
-* `add student -n John Doe -i E0123456`
-* `add student -n Jane Doe -i E0123457 -g T01A -g R01A`
-* `add student -n Jane Doe -i E0123458 -t beginner`
+* `add student -n Jonas Chow -i E0123456` adds the student Jonas Chow with the given NUSNET ID. 
+* `add student -n Jonas Chow -i E0123456 -g T01A -g R01A` adds the student Jonas Chow and allocate him into groups `T01A` and `R01A`. 
+* `add student -n Jane Doe -i E0123456 -t beginner` adds the student Jonas Chow and tag him with `beginner`. 
 
-### Creating a new group: `add group`
+
+### Creating a new group : `add group`
 
 Creates a new group and adds students into the group.
 
 Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 
 * Creates a new group with the given group name.
-* Students can be identified by their name or NUSNET ID.
+* Group must not already exist, and student should not already exist in group.
+* Students can be identified by their name or NUSNET ID. 
+Only full name is allowed e.g. `Jonas` will not match `Jonas Chow`. 
+* If multiple students have the same name, NUSNET ID needs to be used to identify them.  
 
 Examples:
-* `add group -g FG1 -n John Doe -n Jane Doe`
-* `add group -g FG1`
-* `add group -g FG1 -n John Doe -i E0123456`
-* `add group -g FG1 -i E0123123 -i E0123456`
+* `add group -g T01A` creates group `T01A`
+* `add group -g T01A -n Hong Yao -n Hong Fai` creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group. 
+* `add group -g T01A -n Hong Yao -i E0123456` creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
+* `add group -g T01A -i E0123123 -i E0123456` creates group `T01A` and adds two students with corresponding NUSNET ID into the group. 
 
-### Adding a student into a group: `add alloc`
+
+### Adding a student into a group : `add alloc`
 
 Allocates an existing student into an existing group.
 
@@ -141,7 +151,7 @@ Examples:
 * `add alloc -g T01A -n John Doe`
 * `add alloc -g T02A -i E0123456`
 
-### Adding an assessment: `add assessment`
+### Adding an assessment : `add assessment`
 
 Adds a new assessment into the database.
 
@@ -152,7 +162,7 @@ Format: `add assessment -a <assessment_name>`
 Examples:
 * `add assessment -a P01`
 
-### Adding a score: `add score`
+### Adding a score : `add score`
 
 Adds score of an existing assessment into the database.
 
@@ -165,7 +175,7 @@ Examples:
 * `add score -a P01 -n John Doe -s 12`
 * `add score -a P02 -i E0123456 -s 12.5`
 
-### Searching for students: `search`
+### Searching for students : `search`
 
 Finds students who match the input keywords.
 
@@ -188,7 +198,7 @@ Examples:
 * `search -g T02B R03C`
 * `search -t friends colleagues`
 
-### Showing assessment result analysis: `show`
+### Showing assessment result analysis : `show`
 
 Shows the in-depth data analysis of individual, group, and cohort's performance for assessments.
 
@@ -203,12 +213,12 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 
 Examples:
 * `show -n Alex Yeoh` displays line chart of Alex Yeoh's performance in his assessments. 
-* `show 2 -f` exports the line chart produced of the 2nd student in the address book. 
+* `show 2 -f /home/prof/CS1101S/` exports the line chart produced of the 2nd student in the address book. 
 * `show -g T02A` displays line chart of group T02A's performance in their assessments. 
 * `show -a P01` displays bar chart of the distribution of scores in assessment P01. 
 
 
-### Editing a student: `edit`
+### Editing a student : `edit`
 
 Edits the information of an existing student.
 
@@ -240,7 +250,7 @@ Examples:
 * `search -n Alex` followed by `delete 1` deletes the 1st student in the results of the `search` command.
 
 
-### Importing data: `import`
+### Importing data : `import`
 
 Loads data as specified in the provided CSV file.
 
@@ -272,13 +282,13 @@ Examples:
 * `import -f student_data.csv -g 3 -a 30`
 
 
-### Resetting all data: `clear`
+### Resetting all data : `clear`
 
 Clears all existing data.
 
 Format: `clear`
 
-### Closing the app: `exit`
+### Closing the app : `exit`
 
 Exits the application.
 
@@ -305,7 +315,7 @@ If your changes to the data file makes its format invalid, SourceControl will di
 
 ## Glossary
 
-Here is a table of the parameter tags used in our document. 
+Below is a table of the parameter tags used in our document. 
 
 Tag | Full Form | Usage
 -------|--------|----------
@@ -333,7 +343,7 @@ Action | Format | Examples
 --------|--------|----------
 **Help** | `help` |
 **List** | `list` |
-**Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` | e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
+**Add Student** | `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag>]...` | e.g. `add student -n Jonas Chow -i E0123456 -g T01A -g R01A -t beginner`
 **Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` | e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` | e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
 **Add Assessment** | `add assessment -a <assessment_name>` | e.g. `add assessment -a P01`
