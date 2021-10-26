@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_DELETE;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -12,11 +14,13 @@ import seedu.address.model.friend.FriendId;
 
 public class DeleteFriendCommand extends Command {
     public static final String COMMAND_WORD = "--delete";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the person identified by the friend id"
-            + ".\n"
-            + "Parameters: FRIEND_ID (must be an existing friend id)\n"
-            + "Example: " + COMMAND_WORD + " Draco";
+
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_DELETE + "FRIEND_ID\n"
+            + "Example: "
+            + CMD_FRIEND + " " + FLAG_DELETE + "Draco";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
     private FriendId friendToDeleteId;
 
     /**

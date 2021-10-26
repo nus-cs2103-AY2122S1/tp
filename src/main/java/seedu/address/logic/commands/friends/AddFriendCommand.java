@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import seedu.address.logic.commands.Command;
@@ -12,18 +14,15 @@ import seedu.address.model.friend.Friend;
 
 public class AddFriendCommand extends Command {
     public static final String COMMAND_WORD = "--add";
+
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_ADD + "FRIEND_ID [" + FLAG_FRIEND_NAME + "NAME]\n"
+            + "Example: "
+            + CMD_FRIEND + " " + FLAG_ADD + "myfeely923 " + FLAG_FRIEND_NAME + "Yu Zher";
     public static final String MESSAGE_SUCCESS_ADD_FRIEND = "New friend added - %1$s";
     public static final String MESSAGE_DUPLICATE_FRIEND_ID = "A friend with the same FRIEND_ID already exists in "
             + "the friends list.";
-    public static final String MESSAGE_USAGE = "To add a friend: \n"
-            + "friend " + COMMAND_WORD
-            + " FRIEND_ID [--name NAME]: "
-            + "Adds a friend to the gitGud friends list. \n"
-            + "Example: "
-            + COMMAND_WORD + " "
-            + "myfeely923 "
-            + FLAG_FRIEND_NAME
-            + "Yu Zher ";
+
     private final Friend toAdd;
 
     /**

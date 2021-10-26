@@ -6,28 +6,37 @@ package seedu.address.logic.parser;
 public class CliSyntax {
     /* Flag definitions */
 
-    // command flags:
-    public static final Flag FLAG_FRIEND = new Flag("--friend ");
-    public static final Flag FLAG_GAME = new Flag("--game ");
-    public static final Flag FLAG_ADD_GAME_SKILL = new Flag("--skill ");
+    // Command-type words:
+    public static final String CMD_FRIEND = "friend";
+    public static final String CMD_GAME = "game";
+
+    // Command flags:
+    // 1) CRUD commands
     public static final Flag FLAG_ADD = new Flag("--add ");
-    public static final Flag FLAG_EDIT = new Flag("--edit ");
     public static final Flag FLAG_DELETE = new Flag("--delete ");
-    public static final Flag FLAG_GET = new Flag("--get ");
+    public static final Flag FLAG_ADD_GAME_SKILL = new Flag("--skill ");
+    public static final Flag FLAG_EDIT = new Flag("--edit ");
+
+    // 2) view commands
     public static final Flag FLAG_LIST = new Flag("--list ");
-    public static final Flag FLAG_SCHEDULE = new Flag("--schedule ");
+    public static final Flag FLAG_GET = new Flag("--get ");
+
+    // 3) link commands
     public static final Flag FLAG_LINK = new Flag("--link ");
     public static final Flag FLAG_UNLINK = new Flag("--unlink ");
-    public static final Flag FLAG_POSTFIX = new Flag(" "); // for flags with optional fields
 
-    // data flags
-    public static final Flag FLAG_FRIEND_NAME = new Flag("--name ");
-    public static final Flag FLAG_USERNAME = new Flag("--user ");
-    public static final Flag FLAG_PERIOD = new Flag("--period ");
-    public static final Flag FLAG_FREE = new Flag("--free ");
-    public static final Flag FLAG_VALUE = new Flag("--value ");
+    // 4) schedule command
+    public static final Flag FLAG_SCHEDULE = new Flag("--schedule ");
 
-    // TODO remove once commands are updated
-    public static final Flag FLAG_GAME_OLD = new Flag("--g");
-    public static final Flag FLAG_FRIEND_SPACE = new Flag("--friend ");
+    // Shorter data flags:
+    public static final Flag FLAG_GAME = new Flag("-g ");
+    public static final Flag FLAG_USERNAME = new Flag("-u ");
+    public static final Flag FLAG_ID = new Flag("-i ");
+    public static final Flag FLAG_FRIEND_NAME = new Flag("-n ");
+    public static final Flag FLAG_VALUE = new Flag("-v ");
+    public static final Flag FLAG_PERIOD = new Flag("-p ");
+    public static final Flag FLAG_FREE = new Flag("-f ");
+
+    // To be used for flags with optional fields
+    public static final Flag FLAG_POSTFIX = new Flag(" ");
 }

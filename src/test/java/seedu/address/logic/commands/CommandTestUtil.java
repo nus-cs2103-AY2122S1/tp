@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -64,7 +64,7 @@ public class CommandTestUtil {
             + " " + VALID_IS_FREE_TIME;
 
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
-    public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + "kickstar*"; // '*' not allowed in games
+    public static final String INVALID_GAME_DESC = " " + FLAG_GAME + "kickstar*"; // '*' not allowed in games
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_EDIT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import java.util.Optional;
@@ -25,16 +27,14 @@ import seedu.address.model.gamefriendlink.GameFriendLink;
 public class EditFriendCommand extends Command {
 
     public static final String COMMAND_WORD = "--edit";
-    public static final String USAGE_EXAMPLE = "Example: friend " + COMMAND_WORD + " Draco "
-            + FLAG_FRIEND_NAME + "Marcus Tang";
+
+    public static final String USAGE_EXAMPLE = "Example: "
+            + CMD_FRIEND + " " + FLAG_EDIT + "Draco " + FLAG_FRIEND_NAME + "Marcus Tang";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_EDIT + "FRIEND_ID " + FLAG_FRIEND_NAME + "NEW_FRIEND_NAME\n"
+            + USAGE_EXAMPLE;
     public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Friend edited - \nId: %1$s \nNew name: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n" + USAGE_EXAMPLE;
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the friend identified "
-            + "by friend's FRIEND_ID. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: FRIEND_ID "
-            + FLAG_FRIEND_NAME + "NEW_FRIEND_NAME \n"
-            + USAGE_EXAMPLE;
 
     private final FriendId friendIdToEdit;
     private final EditFriendDescriptor editFriendDescriptor;

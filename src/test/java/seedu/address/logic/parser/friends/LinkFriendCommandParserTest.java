@@ -18,7 +18,7 @@ class LinkFriendCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsLinkCommand() {
-        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " Draco --game CSGO --user GoldNova";
+        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " Draco -g CSGO -u GoldNova";
         FriendId friendId = new FriendId("Draco");
         GameId gameId = new GameId("CSGO");
         UserName userName = new UserName("GoldNova");
@@ -27,7 +27,7 @@ class LinkFriendCommandParserTest {
 
     @Test
     public void parse_validArgsInDifferentOrder_returnsLinkCommand() {
-        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " Draco --game CSGO --user GoldNova";
+        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " Draco -g CSGO -u GoldNova";
         FriendId friendId = new FriendId("Draco");
         GameId gameId = new GameId("CSGO");
         UserName userName = new UserName("GoldNova");
@@ -36,7 +36,7 @@ class LinkFriendCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldsMissing_failure() {
-        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " --game CSGO --user SmurfLord";
+        String userInput = " " + LinkFriendCommand.COMMAND_WORD + " -g CSGO -u SmurfLord";
         assertParseFailure(parser, userInput, FriendId.MESSAGE_EMPTY_FRIEND_ID);
     }
 

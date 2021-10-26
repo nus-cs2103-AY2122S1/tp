@@ -18,7 +18,7 @@ public class UnlinkFriendCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsUnlinkFriendCommand() {
-        String userInput = " " + UnlinkFriendCommand.COMMAND_WORD + " Draco --game CSGO";
+        String userInput = " " + UnlinkFriendCommand.COMMAND_WORD + " Draco -g CSGO";
         FriendId friendId = new FriendId("Draco");
         GameId gameId = new GameId("CSGO");
         assertParseSuccess(parser, userInput, new UnlinkFriendCommand(friendId, gameId));

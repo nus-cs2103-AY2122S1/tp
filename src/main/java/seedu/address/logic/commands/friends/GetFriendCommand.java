@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GET;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -19,15 +21,12 @@ import seedu.address.model.game.GameFriendLinksContainsGameIdPredicate;
  */
 public class GetFriendCommand extends Command {
 
-    public static final String COMMAND_FAMILY = "friend";
     public static final String COMMAND_WORD = "--get";
 
-    public static final String MESSAGE_USAGE = COMMAND_FAMILY + " " + COMMAND_WORD
-            + ": Gets all the information about a friend whose "
-            + "FRIEND_ID matches the given keyword(s) exactly (case-insensitive) and displays them in a "
-            + "easy-to-read format.\n"
-            + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_FAMILY + " " + COMMAND_WORD + " Draco";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_GET + "FRIEND_ID\n"
+            + "Example: "
+            + CMD_FRIEND + " " + FLAG_GET + "Draco";
     public static final String MESSAGE_FRIEND_FULL_INFORMATION = "Showing the complete information of %1$s";
 
     private final FriendId friendId;

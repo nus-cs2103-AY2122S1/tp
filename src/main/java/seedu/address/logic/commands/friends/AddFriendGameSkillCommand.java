@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ADD_GAME_SKILL;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_VALUE;
 
@@ -17,24 +19,14 @@ import seedu.address.model.gamefriendlink.SkillValue;
 
 public class AddFriendGameSkillCommand extends Command {
     public static final String COMMAND_WORD = "--skill";
+
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_ADD_GAME_SKILL + "FRIEND_ID " + FLAG_GAME + "GAME_ID "
+            + FLAG_VALUE + "NUMBER_VALUE\n"
+            + "Example: "
+            + CMD_FRIEND + " " + FLAG_ADD_GAME_SKILL + "myfeely923 " + FLAG_GAME + "CSGO " + FLAG_VALUE + "10";
     public static final String MESSAGE_SUCCESS_ADD_FRIEND_GAME_SKILL = "Successfully updated skill value for "
             + "friend %1$s for the game %2$s to %3$s.";
-    public static final String MESSAGE_USAGE = "To add a skill value for a game linked to friend: \n"
-            + "friend "
-            + COMMAND_WORD
-            + " FRIEND_ID "
-            + FLAG_GAME
-            + "GAME_ID "
-            + FLAG_VALUE
-            + "NUMBER_VALUE \n"
-            + "Assigns a skill level ranging from 0 - 10 (inclusive) to store friend's game skill. \n"
-            + "Example: friend "
-            + COMMAND_WORD + " "
-            + "myfeely923 "
-            + FLAG_GAME
-            + "CSGO "
-            + FLAG_VALUE
-            + "10";
     public static final String MESSAGE_FRIEND_ID_NOT_IN_MODEL = "Adding skill value failed. "
             + "Could not find FRIEND_ID in friends list.";
     public static final String MESSAGE_NO_GAME_LINK_FOUND = "Adding skill value failed. "
