@@ -31,7 +31,7 @@ diagrams.
 
 ### Architecture
 
-![Architecture Diagram](images/ArchitectureDiagram.png)
+<img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -40,8 +40,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes
-called [`Main`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It
+called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It
 is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -59,10 +59,9 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete Milk -c 5`.
+the command `delete 1`.
 
-//TODO: modify `saveInventory()` later
-![Delete Sequence Diagram](images/ArchitectureSequenceDiagram.png)
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -75,14 +74,14 @@ the `LogicManager.java` class which follows the `Logic` interface. Other compone
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
 implementation of a component), as illustrated in the (partial) class diagram below.
 
-![Component Managers](images/ComponentManagers.png)
+<img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -110,7 +109,7 @@ API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/s
 
 Here's a (partial) class diagram of the `Logic` component:
 
-![Logic class diagram](images/LogicClassDiagram.png)
+<img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
 
@@ -123,7 +122,7 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete Milk -c 5` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -146,23 +145,39 @@ How the parsing works:
 **
 API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-![Model class diagram](images/ModelClassDiagram.png)
+<img src="images/ModelClassDiagram.png" width="450" />
+
 
 The `Model` component
 
 - stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
-- stores the current order data i.e., an `Order` which contains all `Items` added to it.
-- stores the transaction history of orders i.e., a set of `TransactionRecord` objects.
-- stores the currently 'selected' `Item` objects (e.g., results of a search query) 
-  as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Item>`
-  that can be 'observed' e.g. the UI can be bound to this list 
-  so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. 
-  This is exposed to the outside as a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the Model represents data entities of the domain,
+- stores the order data i.e., an optional `Order` which contains all `Items` added to it.
+- stores the transaction history of orders i.e., a set of `TransactionRecord` objects. 
+- does not depend on any of the other three components (as the Model represents data entities of the domain, 
   they should make sense on their own without depending on other components)
-- it is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects.
-  i.e., updates `Inventory` when `Order` is placed by user, and keep the order histories as `TransactionRecord`.
+- Is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects. 
+  i.e., updates `Inventory` when `Order` is placed by user, and note down `TransactionRecord`.
+
+
+<<<<<<< HEAD
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+=======
+* stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
+* stores the currently 'selected' `Item` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to
+>>>>>>> master
+  this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
+  a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+  should make sense on their own without depending on other components)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Inventory`, which `Item` references. This allows `Inventory` to only require one `Tag` object per unique tag, instead of each `Item` needing their own `Tag` objects.<br>
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+</div>
 
 ### Storage component
 
@@ -338,8 +353,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC01 - Adding an item**
 
-**Actor:** User
-
 **MSS**
 
 1. User adds item into inventory.
@@ -367,8 +380,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC02 - Deleting an item**
 
-**Actor:** User
-
 **MSS**
 
 1. User requests to delete item from inventory.
@@ -395,8 +406,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC03 - Finding items through matching keywords**
 
-**Actor:** User
-
 **MSS**
 
 1. User searches for the details of an item in the inventory by stating id, name or tag.
@@ -416,21 +425,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**UC04 - Placing an Order**
-
-**Actor:** User
+**UC04 - Recording an Order**
 
 **MSS**
 
 1. User requests to start an order.
-2. BogoBogo creates an order and requests for item names and quantities.
+2. BogoBogo requests for item names and quantities.
 3. User adds an item into the order.
 4. BogoBogo saves item into the order.
 
    Step 3-4 is repeated until the user wishes to end the order.
 
-5. User requests to end entering item and place the order.
-6. BogoBogo transacts the order and updates inventory and transaction history.
+5. User requests to end the order.
+6. BogoBogo shows the summary of the order and prompts the user to confirm the order.
+7. User confirms the order.
 
    Use case ends.
 
@@ -447,47 +455,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 3.
 
 * 4a. User incorrectly added an item into the order.
-    * 3a1. User removes specified item from the order (UC05).
+    * 3a1. User removes specified item from the order.
 
       Use case resumes at step 3.
 
-* 6a. The order is empty.
+* 7a. The order is empty.
     * 7a1. BogoBogo notifies user that the order is empty.
 
       Use case ends.
 
-**UC05 - Remove an item from order**
+*{More to be added}*
 
-**Actor:** User
-
-**MSS**
-
-1. User requests to remove the specified item from the order.
-2. User enters the item to remove.
-3. BogoBogo removes the item from the order.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. There is no order created.
-    * 1a1. BogoBogo notifies user there is no order.
-  
-      Use case ends.
-    
-* 2a. The item is specified in wrong format.
-    * 2a1. BogoBogo notifies user the item specification format is wrong.
-  
-      Use case ends.
-
-* 3a. The specified item is not in the order
-    * 3a1. BogoBogo notifies user the specified item is not in the order.
-  
-      Use case ends.
-
-**UC06 - Sorting**
-
-**Actor:** User
+**UC05 - Sorting **
 
 **MSS**
 
@@ -496,16 +475,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
    
-**Extensions**
+ **Extensions**
 
 * 1a. User specifies to sort by both name and count.
     * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
 
       Use case ends.
 
-**UC06 - Help**
-
-**Actor:** User
+**UC06 - Help **
 
 **MSS**
 
@@ -520,119 +497,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. BogoBogo notifies the user what that exact command does.
 
       Use case ends.
-
-**UC07 - Remove certain amount of item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to remove certain amount of an item.
-2. User enters the item name and amount.
-3. BogoBogo removes the specified amount of that item.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The name and amount is specified in wrong format.
-    * 2a1. BogoBogo notifies user the format is wrong.
-    
-        Use case ends.
-
-* 2b. There are multiple matching items in inventory.
-    * 2b1. BogoBogo lists out all the matching items and let user choose one.
-    * 2b2. User chooses the desired item.
-    * BogoBogo removes the specified amount of that item. 
-
-      Use case ends.
-
-* 3a. The item is not in the inventory.
-    * 3a1. BogoBogo notifies user there is on such item.
-
-        Use case ends.
-
-* 3b. The specified amount is greater than what inventory has.
-    * 3b1. BogoBogo notifies user the actual amount of item in the inventory.
-
-      Use case ends.
-
-**UC08 - Edit an item**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to edit an item.
-2. User enters the item index and fields and new values to change.
-3. BogoBogo updates the new value of the specified fields of the item.
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The edited item is a duplicate of another item in the inventory.
-    * 3a1. BogoBogo notifies user the duplication.
-  
-      Use case ends
-
-* 3b. The specified index is invalid.
-    * 3b1. BogoBogo notifies user the index is invalid.
-
-      Use case ends
-
-**UC09 - Listing out inventory**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to list out all inventory
-2. BogoBogo lists out all items in inventory.
-
-   Use case ends
-
-**UC10 - Listing out order**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to list out current order.
-2. BogoBogo lists out all items in current order.
-
-   Use case ends
-
-**Extensions**
-
-* 2a. There is currently no order to list.
-  * 2a1. BogoBogo notifies user there is currently no order.
-    
-    Use case ends.
-
-**UC11 - Exit the application**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to exit the application
-2. BogoBogo acknowledges the request and exits.
-
-    Use case ends.
-
-**UC12 - Clear the inventory**
-
-**Actor:** User
-
-**MSS**
-
-1. User requests to clear the inventory.
-2. BogoBogo acknowledges the request and clears the inventory.
-    
-    Use case ends.
-
-
+      
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
