@@ -31,6 +31,8 @@ public class Student {
     private final Grade grade;
     private final Set<Remark> remarks = new HashSet<>();
     private final List<Lesson> lessons = new ArrayList<>();
+    public static final int MAX_LESSON_SIZE = 10;
+
 
     /**
      * Every field must be present and not null.
@@ -172,6 +174,13 @@ public class Student {
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
         lessons.remove(lesson);
+    }
+
+    /**
+     * Returns true if Student is enrolled in 9 or fewer lessons
+     */
+    public boolean isAbleToEnrollForMoreLessons() {
+        return lessons.size() < MAX_LESSON_SIZE;
     }
 
     /**

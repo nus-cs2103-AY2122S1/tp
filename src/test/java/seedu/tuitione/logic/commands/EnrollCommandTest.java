@@ -129,7 +129,7 @@ public class EnrollCommandTest {
         benson.enrollForLesson(lessonThree);
         benson.enrollForLesson(lessonFour);
         benson.enrollForLesson(lessonFive);
-        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_5_LESSONS, benson.getName());
+        String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_LESSONS, benson.getName());
         assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(4)),
                 model,
                 expectedMessage);
