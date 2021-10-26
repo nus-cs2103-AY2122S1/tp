@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tuitione.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIFTH_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.tuitione.testutil.TypicalStudents.getTypicalTuitione;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,9 @@ import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.ModelManager;
 import seedu.tuitione.model.UserPrefs;
+import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.student.Student;
+import seedu.tuitione.testutil.TypicalTuition;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,7 +33,7 @@ public class DeleteCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalTuitione(), new UserPrefs());
+        model = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
     }
 
     @Test
@@ -80,6 +84,26 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_deleteStudentWithLessons_success() {
+        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIFTH_STUDENT.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIFTH_STUDENT);
+
+        List<Lesson> lessonsToUnenroll = studentToDelete.getLessons();
+        while (!lessonsToUnenroll.isEmpty()) {
+            Lesson l = lessonsToUnenroll.get(0);
+            l.unenrollStudent(studentToDelete);
+            model.setLesson(l, l);
+        }
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
+        expectedModel.deleteStudent(studentToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

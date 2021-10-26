@@ -48,7 +48,7 @@ public class TypicalStudents {
             .build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz")
             .withPhone("9482427").withEmail("lydia@example.com")
-            .withAddress("little tokyo").withGrade("S2")
+            .withAddress("little tokyo").withGrade("S1")
             .build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best")
             .withPhone("9482442").withEmail("anna@example.com")
