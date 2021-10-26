@@ -29,8 +29,10 @@ public class TypicalLessons {
             new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(9, 30)), new Price(15.3));
     public static final Lesson PHYSICS_S2 = new Lesson(new Subject("Physics"), new Grade("S2"),
             new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(9, 30)), new Price(15.3));
-    public static final Lesson ENGLISH_S2 = new Lesson(new Subject("English"), new Grade("S2"),
+    public static final Lesson ENGLISH_S1 = new Lesson(new Subject("English"), new Grade("S1"),
             new LessonTime(DayOfWeek.THURSDAY, LocalTime.of(13, 00)), new Price(17.0));
+    public static final Lesson MATH_S1 = new Lesson(new Subject("Mathematics"), new Grade("S1"),
+            new LessonTime(DayOfWeek.FRIDAY, LocalTime.of(10, 30)), new Price(19.2));
 
     // Manually added - Lesson's details found in {@code CommandTestUtil}
     public static final Lesson MATHS = new LessonBuilder()
@@ -64,6 +66,7 @@ public class TypicalLessons {
         return new ArrayList<>(Arrays.asList(new LessonBuilder(SCIENCE_P2).build(),
                 new LessonBuilder(MATH_S2).build(),
                 new LessonBuilder(PHYSICS_S2).build(),
-                new LessonBuilder(ENGLISH_S2).build()));
+                new LessonBuilder(ENGLISH_S1).build(),
+                new LessonBuilder(MATH_S1).build()));
     }
 }
