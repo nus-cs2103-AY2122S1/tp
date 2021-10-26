@@ -5,11 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.tutorialclass.exceptions.DuplicateTutorialClassException;
 import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundException;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * A list of tutorial classes that enforces uniqueness between its elements and does not allow nulls.
@@ -39,6 +41,17 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
     }
 
     /**
+     * Returns true if the list contains the tutorial group.
+     */
+    public boolean contains(TutorialGroup toCheck) {
+        requireNonNull(toCheck);
+        TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toCheck.getClassCode());
+        Optional<TutorialClass> result = internalList.stream()
+                .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
+        return result.get().getTutorialGroups().contains(toCheck);
+    }
+
+    /**
      * Adds a tutorial class to the list.
      * The tutorial class must not already exist in the list.
      */
@@ -48,6 +61,30 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
             throw new DuplicateTutorialClassException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a tutorial group to the a class in the class list.
+     * The tutorial class must not already exist in the list.
+     */
+    public void add(TutorialGroup toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateTutorialClassException();
+        }
+        // creates a class with the same class code to get that class from the class list as result
+        TutorialClass toCheckTutorialClass = TutorialClass.createTestTutorialClass(toAdd.getClassCode());
+        Optional<TutorialClass> result = internalList.stream()
+                .filter(toCheckTutorialClass::isSameTutorialClass).findFirst();
+        result.get().addTutorialGroup(toAdd);
+    }
+
+    /**
+     * Adds a tutorial class to the list.
+     * The tutorial class must not already exist in the list.
+     */
+    public void sort() {
+        internalList.stream().forEach(x-> x.sortTutorialGroups());
     }
 
     /**

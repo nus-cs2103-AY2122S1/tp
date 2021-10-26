@@ -10,7 +10,6 @@ import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialclass.UniqueTutorialClassList;
 import seedu.address.model.tutorialgroup.TutorialGroup;
-import seedu.address.model.tutorialgroup.UniqueTutorialGroupList;
 
 /**
  * Wraps all data at the address-book level
@@ -20,7 +19,6 @@ public class Classmate implements ReadOnlyClassmate {
 
     private final UniqueStudentList students;
     private final UniqueTutorialClassList tutorialClasses;
-    private final UniqueTutorialGroupList tutorialGroups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,7 +30,6 @@ public class Classmate implements ReadOnlyClassmate {
     {
         students = new UniqueStudentList();
         tutorialClasses = new UniqueTutorialClassList();
-        tutorialGroups = new UniqueTutorialGroupList();
     }
 
     public Classmate() {}
@@ -64,14 +61,6 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
-     * Replaces the contents of the tutorial class list with {@code tutorialClasses}.
-     * {@code tutorialClasses} must not contain duplicate students.
-     */
-    public void setTutorialGroups(List<TutorialGroup> tutorialGroups) {
-        this.tutorialGroups.setTutorialGroups(tutorialGroups);
-    }
-
-    /**
      * Resets the existing data of this {@code Classmate} with {@code newData}.
      */
     public void resetData(ReadOnlyClassmate newData) {
@@ -79,7 +68,6 @@ public class Classmate implements ReadOnlyClassmate {
 
         setStudents(newData.getStudentList());
         setTutorialClasses(newData.getTutorialClassList());
-        setTutorialGroups(newData.getTutorialGroupList());
     }
 
     //// student-level operations
@@ -158,46 +146,28 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the ClassMATE.
+     * Returns true if a tutorialGroup with the same identity as {@code tutorialGroup} exists in the ClassMATE.
      */
     public boolean hasTutorialGroup(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
-        return tutorialGroups.contains(tutorialGroup);
+        return tutorialClasses.contains(tutorialGroup);
     }
 
     /**
-     * Adds a student to the ClassMATE.
-     * The student must not already exist in the ClassMATE.
+     * Adds a tutorialGroup to the ClassMATE.
+     * The tutorial group must not already exist in the ClassMATE.
      */
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
-        tutorialGroups.add(tutorialGroup);
+        tutorialClasses.add(tutorialGroup);
     }
 
     /**
      * Sorts the tutorial groups in ClassMATE.
      */
     public void sortTutorialGroups() {
-        tutorialGroups.sort();
+        tutorialClasses.sort();
     }
 
-    /**
-     * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the ClassMATE.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
-     */
-    public void setTutorialGroup(TutorialGroup target, TutorialGroup editedTutorialGroup) {
-        requireNonNull(editedTutorialGroup);
-
-        tutorialGroups.setTutorialGroup(target, editedTutorialGroup);
-    }
-
-    /**
-     * Removes {@code key} from this {@code Classmate}.
-     * {@code key} must exist in the ClassMATE.
-     */
-    public void removeTutorialGroup(TutorialGroup key) {
-        tutorialGroups.remove(key);
-    }
 
     //// util methods
 
@@ -215,11 +185,6 @@ public class Classmate implements ReadOnlyClassmate {
     @Override
     public ObservableList<TutorialClass> getTutorialClassList() {
         return tutorialClasses.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<TutorialGroup> getTutorialGroupList() {
-        return tutorialGroups.asUnmodifiableObservableList();
     }
 
 

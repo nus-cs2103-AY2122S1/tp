@@ -103,11 +103,6 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void deleteTutorialGroup(TutorialGroup target) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public void setStudent(Student target, Student editedStudent) {
         throw new AssertionError("This method should not be called.");
     }
@@ -123,11 +118,6 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<TutorialGroup> getFilteredTutorialGroupList() {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         throw new AssertionError("This method should not be called.");
     }
@@ -137,8 +127,4 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
-    @Override
-    public void updateFilteredTutorialGroupList(Predicate<TutorialGroup> predicate) {
-        throw new AssertionError("This method should not be called.");
-    }
 }
