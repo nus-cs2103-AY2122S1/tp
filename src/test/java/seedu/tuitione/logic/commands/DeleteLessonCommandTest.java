@@ -43,10 +43,10 @@ public class DeleteLessonCommandTest {
         assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
-    // Wait till v1.3 when find lesson feature implemented, to implement execute_validIndexFilteredList_success() test
     @Test
     public void execute_validIndexFilteredList_success() {
         model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(GRADE_S2));
+
         Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
 
@@ -58,9 +58,16 @@ public class DeleteLessonCommandTest {
         assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
     }
 
-    // Wait till v1.3 when find lesson feature implemented, to implement
-    // execute_invalidIndexFilteredList_throwsCommandException() test
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(GRADE_S2));
 
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredLessonList().size() + 1);
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(outOfBoundIndex);
+
+
+        assertCommandFailure(deleteLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
 
     @Test
     public void equals() {
