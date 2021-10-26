@@ -58,7 +58,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
-1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds. (If  double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.)
+1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds. (If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.)
 
    ![Ui](images/Ui.png)
 
