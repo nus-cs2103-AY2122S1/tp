@@ -6,45 +6,43 @@ public class Lab {
 
     public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
 
-    private String title;
+    private int labNum;
     private Double actualScore;
     private Double totalScore;
 
     /**
-     * @param title the title of the lab
+     * @param labNum the labNum of the lab
      * @param actualScore  the score obtained by the student
      * @param totalScore the total score
      * */
-    public Lab(String title, Double actualScore, Double totalScore) {
+    public Lab(int labNum, Double actualScore, Double totalScore) {
         requireNonNull(totalScore);
-        this.title = title;
+        this.labNum = labNum;
         this.actualScore = actualScore;
         this.totalScore = totalScore;
     }
 
     /**
-     * @param title the title of the lab
-     * @param totalScore the total score
-     * */
-    public Lab(String title, Double totalScore) {
-        requireNonNull(title);
+     * @param labNum the labNum of the lab
+     * @param totalScore the total score */
+    public Lab(int labNum, Double totalScore) {
         requireNonNull(totalScore);
-        this.title = title;
+        this.labNum = labNum;
         this.actualScore = Double.NaN;
         this.totalScore = totalScore;
     }
 
     /**
-     * @param title the title of the lab
+     * @param labNum the labNum of the lab
      * */
-    public Lab(String title) {
-        this.title = title;
+    public Lab(int labNum) {
+        this.labNum = labNum;
     }
 
     public Lab(){}
 
-    public String getTitle() {
-        return title;
+    public int getLabNum() {
+        return labNum;
     }
 
     public Double getActualScore() {
@@ -60,18 +58,18 @@ public class Lab {
     }
 
     /**
-     * Updates the title of the lab
-     * @param newTitle
+     * Updates the labNum of the lab
+     * @param newLabNum
      */
-    public void updateTitle(String newTitle) {
-        if (newTitle != null) {
-            this.title = newTitle;
+    public void updateLabNum(int newLabNum) {
+        if (newLabNum > 0) {
+            this.labNum = newLabNum;
         }
     }
 
     /**
      * Updates the totalScore of the lab
-     * @param total
+     * @param total new total score
      */
     public void updateTotal(Double total) {
         if (total != null) {
@@ -87,26 +85,18 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && title.equals(((Lab) other).getTitle()));
-    }
-
-    /**
-     * Returns true if a given string is a valid lab title.
-     */
-    public static boolean isValidLab (String title) {
-        return title.length() == 2;
+                && labNum == ((Lab) other).getLabNum());
     }
 
     /**
      * Returns true if a given string is a valid score.
      */
     public static boolean isValidScore (Double score) {
-        System.out.println(score);
         return score >= 0;
     }
 
     @Override
     public String toString() {
-        return this.title;
+        return "Lab " + this.labNum;
     }
 }

@@ -134,13 +134,13 @@ public class Student {
     /**
      * Updates a lab result for a student
      * */
-    public void editLabInfo(Lab lab, String newTitle, Double total) throws CommandException {
+    public void editLabInfo(Lab lab, int newLabNum, Double total) throws CommandException {
         if (total < 0.0) {
             throw new CommandException(REQUIRE_POSITIVE_SCORE);
         }
         int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
-        current.updateTitle(newTitle);
+        current.updateLabNum(newLabNum);
         current.updateTotal(total);
     }
 

@@ -26,16 +26,14 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
     public AddLabCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM, PREFIX_LAB_TOTAL);
-
         if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM, PREFIX_LAB_TOTAL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE));
         }
 
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+        int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
         Double total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
-        Lab labResult = new Lab(title, total);
-
+        Lab labResult = new Lab(labNum, total);
         return new AddLabCommand(labResult);
     }
 

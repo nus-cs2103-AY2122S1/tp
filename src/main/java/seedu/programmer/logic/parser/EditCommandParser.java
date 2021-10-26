@@ -54,9 +54,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editstudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_LAB_NUM).isPresent() && argMultimap.getValue(PREFIX_LAB_RESULT).isPresent()) {
-            String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
+            int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
             Double result = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_RESULT).orElse(null));
-            Lab labResult = new Lab(title);
+            Lab labResult = new Lab(labNum);
             editstudentDescriptor.setLab(labResult, result);
         }
 

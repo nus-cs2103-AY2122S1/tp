@@ -20,7 +20,7 @@ public class EditLabCommand extends Command {
 
     public static final String COMMAND_WORD = "editlab";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lab for a student in the list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lab number or total score."
             + "Parameters: "
             + PREFIX_INDEX + "Index "
             + PREFIX_LAB_NUM + "Lab Title "
@@ -30,18 +30,18 @@ public class EditLabCommand extends Command {
             + PREFIX_LAB_NUM + "1 "
             + PREFIX_LAB_RESULT + "15";
 
-    public static final String MESSAGE_ADD_LAB_SUCCESS = "Student Updated: %1$s";
+    public static final String MESSAGE_ADD_LAB_SUCCESS = "Updated %1$s!";
 
-    private final String newTitle;
+    private final int newLabNum;
     private final Double total;
     private final Lab original;
 
     /**
      * @param original the lab to be edited.
      * */
-    public EditLabCommand(Lab original, String newTitle, Double total) {
+    public EditLabCommand(Lab original, int newLabNum, Double total) {
         this.original = original;
-        this.newTitle = newTitle;
+        this.newLabNum = newLabNum;
         this.total = total;
     }
     /**
@@ -50,15 +50,16 @@ public class EditLabCommand extends Command {
     public EditLabCommand(Lab original, Double total) {
         this.original = original;
         this.total = total;
-        this.newTitle = null;
+        this.newLabNum = 0;
     }
 
     /**
      * @param original the lab to be edited.
+     * @param newLabNum the new lab number
      * */
-    public EditLabCommand(Lab original, String newTitle) {
+    public EditLabCommand(Lab original, int newLabNum) {
         this.original = original;
-        this.newTitle = newTitle;
+        this.newLabNum = newLabNum;
         this.total = null;
     }
 
@@ -66,13 +67,19 @@ public class EditLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
+        boolean labExists = false;
         for (Student std : lastShownList) {
-            Student target = std;
-            target.editLabInfo(original, newTitle, total);
-            model.setStudent(target, std);
+            Student editedStd = std;
+            if (!std.getLabResultList().contains(original)) {
+                continue;
+            }
+            labExists = true;
+            editedStd.editLabInfo(original, newLabNum, total);
+            model.setStudent(std, editedStd);
         }
 
-        return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, original));
+        return labExists ? new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, original))
+                         : new CommandResult("This lab does not exist!");
     }
 
     @Override

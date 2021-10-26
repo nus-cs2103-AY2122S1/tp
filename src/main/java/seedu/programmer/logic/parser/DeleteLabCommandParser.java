@@ -30,10 +30,8 @@ public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLabCommand.MESSAGE_USAGE));
         }
 
-
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(""));
-        Lab labResult = new Lab(title);
-
+        int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(""));
+        Lab labResult = new Lab(labNum);
         return new DeleteLabCommand(labResult);
     }
 
