@@ -94,9 +94,9 @@ public class EditCommandTest {
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-        showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         VersionedModel expectedModel = new ModelManager(
                 new AcademyDirectory(model.getAcademyDirectory()), new UserPrefs());
+        showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

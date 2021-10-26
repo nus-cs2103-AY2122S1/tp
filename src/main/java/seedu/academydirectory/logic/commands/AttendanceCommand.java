@@ -87,7 +87,7 @@ public class AttendanceCommand extends Command {
                     studentToEdit.getAssessment(), studentToEdit.getTags());
             model.setStudent(studentToEdit, editedStudent);
         }
-      
+
         return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS, Optional.of(MESSAGE_UPDATE_ATTENDANCE_SUCCESS));
 
     }
@@ -107,7 +107,5 @@ public class AttendanceCommand extends Command {
                 && attendanceStatus == e.attendanceStatus
                 && studioSession.equals(e.studioSession);
     }
-
-
 
 }

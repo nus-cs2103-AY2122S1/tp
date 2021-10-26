@@ -11,7 +11,6 @@ import java.util.Optional;
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
-import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Student;
@@ -80,8 +79,7 @@ public class GradeCommand extends Command {
                 studentToEdit.getTelegram(), studentToEdit.getStudioRecord(),
                 assessmentToEdit, studentToEdit.getTags());
         model.setStudent(studentToEdit, editedStudent);
-
-      return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment),
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment),
                 Optional.of(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment)));
 
     }
