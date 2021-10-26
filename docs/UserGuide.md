@@ -337,10 +337,41 @@ Examples:
 ### Deleting an appointment: `appt -d`
 
 ### Filtering all appointments: `appt -f`
+Searches and lists all appointments in the appointment records that match the given filter conditions.
+
+Format: `appt -f [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD] [s/START_DATE] [e/END_DATE]`
+
+* `PATIENT_KEYWORDS` and `DOCTOR_KEYWORDS` can be 1 or more words. 
+* Keyword search behave similarly to that of [FindCommand](#locating-doctors-by-name:-find).
+* The `START_DATE` and `END_DATE` should be entered with the format `dd/mm/yyyy`.
+* The `START_DATE` and `END_DATE` filters are inclusive of the entered date.
+* Entering the command with no filter parameters will list all appointments from the appointment records.
+
+Examples:
+* `appt -f` will list all appointments in the appointment records
+* `appt -f s/24/08/2021 e/24/09/2021` will list all appointments in the appointment records that has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
+* `appt -f s/24/08/2021 e/24/09/2021 p/Alice d/Carl` will list all appointments in the appointment records which contains patients with the name `Alice`, doctors with the name `Carl` and has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
 
 ### Filtering upcoming appointments: `appt -u`
 
+Searches and lists all upcoming appointments in the appointment records that match the given filter conditions.
+
+Format: `appt -u [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD]`
+
+* An appointment is considered upcoming if its starting date and time is after the current date and time. eg. If the current time is 18:00, any appointment today that starts at 18:00 or later is considered upcoming while earlier appointments on the same day are not.
+* `PATIENT_KEYWORDS` and `DOCTOR_KEYWORDS` can be 1 or more words.
+* Keyword search behave similarly to that of [FindCommand](#locating-doctors-by-name:-find).
+* Entering the command with no filter parameters will list all upcoming appointments from the appointment records.
+
+Examples:
+* `appt -u` will list all upcoming appointments in the appointment records
+* `appt -u p/Alice d/Carl` will list all upcoming appointments in the appointment records which contains patients with the name `Alice`and doctors with the name `Carl`.
+
 ### Listing appointments today: `appt -l`
+
+Show all of today's appointments.
+
+Format:`appt -l`
 
 ---
 
@@ -400,11 +431,11 @@ Action | Format, Examples
 **Edit doctor** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​`<br> e.g., `edit 2 p/98989898 e/john@example.com`
 **Edit patient** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​ [risk/RISK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Exit** | `exit`
-**Filter all appointments** | 
-**Filter upcoming appointments** | 
+**Filter all appointments** | `appt -f [p/PATIENT_KEYWORDS] [d/DOCTOR_KEYWORDS] [s/START_DATE] [e/END_DATE]`
+**Filter upcoming appointments** | `appt -u [p/PATIENT_KEYWORDS] [d/DOCTOR_KEYWORDS]`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
-**List appointments today** | 
+**List appointments today** | `appt -l`
 **List patients/doctors** | `list`
 **Remark** | `remark INDEX r/REMARK`<br> e.g.,`remark 2 r/Chronic diabetic, monthly insulin pick up`
 **Toggle tabs** | `toggle`
