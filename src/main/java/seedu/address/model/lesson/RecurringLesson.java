@@ -14,10 +14,24 @@ public class RecurringLesson extends Lesson {
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
-     * @param rates Cost per lesson for the lesson.
+     * @param rates Cost per hour for the lesson.
+     * @param cancelledDates Cancelled dates of the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
-        super(date, timeRange, subject, homework, rates);
+    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
+            Set<Date> cancelledDates) {
+        super(date, timeRange, subject, homework, rates, cancelledDates);
+    }
+
+    /**
+     * Returns a lesson with the same details but updated cancelled dates.
+     *
+     * @param updatedCancelledDates A set of cancelled dates of the lesson.
+     * @return Lesson with updated cancelled dates.
+     */
+    @Override
+    public Lesson updateCancelledDates(Set<Date> updatedCancelledDates) {
+        return new RecurringLesson(getStartDate(), getTimeRange(), getSubject(), getHomework(), getLessonRates(),
+                updatedCancelledDates);
     }
 
     /**
@@ -38,7 +52,7 @@ public class RecurringLesson extends Lesson {
      */
     @Override
     public Date getDisplayDate() {
-        return getStartDate().updateDate();
+        return getStartDate().updateDate(getCancelledDates());
     }
 
     /**
@@ -53,10 +67,33 @@ public class RecurringLesson extends Lesson {
             return getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         } else {
-            return getLocalDate().compareTo(otherLesson.getLocalDate()) <= 0 // same date or before
-                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+            return !otherLesson.isCancelled() // other makeup lesson is not cancelled
+                    && hasLessonOnDate(otherLesson.getStartDate())
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
+    }
+
+    /**
+     * Checks if this lesson is cancelled and does not occur on any date.
+     *
+     * @return false.
+     */
+    @Override
+    public boolean isCancelled() {
+        // recurring lesson does not terminate, hence it is never fully cancelled.
+        return false;
+    }
+
+    /**
+     * Checks if this lesson occurs on a given date.
+     *
+     * @param date The lesson date to check.
+     * @return True if this lesson occurs on the date.
+     */
+    @Override
+    public boolean hasLessonOnDate(Date date) {
+        return date.isOnRecurringDate(getStartDate()) // date lies on a recurring lesson date
+                && !getCancelledDates().contains(date); // date is not a cancelled date
     }
 
 }
