@@ -86,7 +86,7 @@ public class TagCommand extends Command {
         Birthday unchangedBirthday = personToEdit.getBirthday().orElse(null);
 
         Set<Tag> existingTags = personToEdit.getTags();
-        Set<Tag> addedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
+        Set<Tag> addedTags = editPersonDescriptor.getTags().orElse(new HashSet<>());
         Set<Tag> updatedTags = new HashSet<>();
         updatedTags.addAll(existingTags);
         updatedTags.addAll(addedTags);

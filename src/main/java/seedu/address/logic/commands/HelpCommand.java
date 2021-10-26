@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
             + UntagCommand.COMMAND_WORD + SPACE + UntagCommand.COMMAND_DESCRIPTION
             + ListCommand.COMMAND_WORD + SPACE + ListCommand.COMMAND_DESCRIPTION
             + FindCommand.COMMAND_WORD + SPACE + FindCommand.COMMAND_DESCRIPTION
-            + FindOrCommand.COMMAND_WORD + SPACE + FindOrCommand.COMMAND_DESCRIPTION
+            + FindAnyCommand.COMMAND_WORD + SPACE + FindAnyCommand.COMMAND_DESCRIPTION
             + FindTagCaseInsensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseInsensitiveCommand.COMMAND_DESCRIPTION
             + FindTagCaseSensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseSensitiveCommand.COMMAND_DESCRIPTION
             + DeleteCommand.COMMAND_WORD + SPACE + DeleteCommand.COMMAND_DESCRIPTION
@@ -82,8 +82,8 @@ public class HelpCommand extends Command {
         case FindCommand.COMMAND_WORD:
             return new CommandResult(FindCommand.MESSAGE_USAGE, false, false);
 
-        case FindOrCommand.COMMAND_WORD:
-            return new CommandResult(FindOrCommand.MESSAGE_USAGE, false, false);
+        case FindAnyCommand.COMMAND_WORD:
+            return new CommandResult(FindAnyCommand.MESSAGE_USAGE, false, false);
 
         case ListCommand.COMMAND_WORD:
             return new CommandResult(ListCommand.MESSAGE_USAGE, false, false);

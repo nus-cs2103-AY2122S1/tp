@@ -104,7 +104,7 @@ public class UntagCommand extends Command {
         Address originalAddress = personToUntag.getAddress();
         Birthday originalBirthday = personToUntag.getBirthday().orElse(null);
 
-        Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
+        Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<>());
         Set<Tag> updatedTags = new HashSet<>(personToUntag.getTags());
         if (!updatedTags.containsAll(removedTags)) {
             throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON, originalName,
@@ -138,7 +138,7 @@ public class UntagCommand extends Command {
      * @return String containing tags that are removed
      */
     public static String getRemovedTags(EditPersonDescriptor editPersonDescriptor) {
-        return editPersonDescriptor.getTags().orElse(new HashSet<Tag>()).stream()
+        return editPersonDescriptor.getTags().orElse(new HashSet<>()).stream()
                 .map(tag -> tag.tagName).collect(Collectors.joining(", "));
     }
 
