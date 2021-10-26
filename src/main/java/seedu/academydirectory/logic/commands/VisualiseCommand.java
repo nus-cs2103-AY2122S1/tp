@@ -30,8 +30,6 @@ public class VisualiseCommand extends Command {
             + "visualise class performance in assessment with box and whisker plot. ";
 
     public static final String MESSAGE_VISUALISE_SUCCESS = "Class Performance in Assessment shown";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the academy directory.";
 
     /**
      * Executes the command and returns the result message.

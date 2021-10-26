@@ -3,7 +3,6 @@ package seedu.academydirectory.logic.parser;
 import seedu.academydirectory.logic.commands.VisualiseCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
-
 public class VisualiseCommandParser implements Parser<VisualiseCommand> {
 
     /**
