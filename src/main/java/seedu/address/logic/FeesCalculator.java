@@ -107,7 +107,7 @@ public class FeesCalculator implements Calculator {
 
         return lesson.isRecurring()
                 ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject,
-                        copiedHomework, copiedLessonRates, updatedOutstandingFees,copiedCancelledDates)
+                        copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates)
                 : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject,
                         copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
     }

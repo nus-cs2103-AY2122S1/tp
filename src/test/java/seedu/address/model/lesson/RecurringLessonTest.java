@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NON_CLASHING_TIME_RANGE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 
 import java.time.LocalDate;
