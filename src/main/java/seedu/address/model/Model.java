@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
@@ -194,12 +195,26 @@ public interface Model {
     ObservableValue<PersonWithDetails> getViewingPersonWithDetails();
 
     /**
+     * Gets the current group to be viewed by the user.
+     * @return GroupWithDetails of the group to be viewed.
+     */
+    ObservableValue<GroupWithDetails> getViewingGroupWithDetails();
+
+    /**
      * Sets the current viewing of the Person.
      * It is the model's responsibility to figure out the person's details.
      *
      * @param person to set the PersonWithDetails
      */
     void setPersonToView(Person person);
+
+    /**
+     * Sets the current viewing of the Group.
+     * It is the model's responsibility to figure out the groups's details.
+     *
+     * @param group to set the GroupWithDetails
+     */
+    void setGroupToView(Group group);
 
     /**
      * Returns a mapper that can convert unique Ids to persons

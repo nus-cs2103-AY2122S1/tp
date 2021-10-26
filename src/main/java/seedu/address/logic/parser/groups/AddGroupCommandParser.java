@@ -17,7 +17,7 @@ import seedu.address.model.group.GroupName;
 
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
-    public static final String COMMAND_WORD = "-ag";
+    public static final String COMMAND_WORD = "-a";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group with the persons identified "
             + "by the index number used in the displayed person list. "
             + "Parameters: INDEX1 INDEX2 ... (must be distinct positive integers) "
