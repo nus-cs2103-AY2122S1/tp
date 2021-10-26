@@ -86,13 +86,13 @@ public class FeesCalculator implements Calculator {
 
         // update outstanding fees after calculation
         OutstandingFees updatedOutstandingFees = lesson.hasStarted() && !lesson.hasEnded()
-                ? getUpdatedOutstandingFees(lesson.getEndDateTime(), copiedTimRange, copiedLessonRates)
+                ? getUpdatedOutstandingFees(lesson.getEndDateTime(), copiedTimeRange, copiedLessonRates)
                 : new OutstandingFees(lesson.getOutstandingFees().value);
 
         return lesson.isRecurring()
-                ? new RecurringLesson(copiedDate, copiedTimRange, copiedSubject,
+                ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject,
                         copiedHomework, copiedLessonRates, updatedOutstandingFees)
-                : new MakeUpLesson(copiedDate, copiedTimRange, copiedSubject,
+                : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject,
                         copiedHomework, copiedLessonRates, updatedOutstandingFees);
     }
 
