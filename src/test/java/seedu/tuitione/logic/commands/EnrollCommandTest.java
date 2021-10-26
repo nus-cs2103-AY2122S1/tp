@@ -161,7 +161,7 @@ public class EnrollCommandTest {
         String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_LESSONS,
                 benson.getName(),
                 Student.MAX_LESSON_SIZE);
-        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(4)),
+        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(6)),
                 model,
                 expectedMessage);
     }
@@ -190,7 +190,7 @@ public class EnrollCommandTest {
         String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_STUDENTS,
                 scienceP2.getLessonCode(),
                 Lesson.MAX_STUDENT_SIZE);
-        assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, Index.fromOneBased(4)),
+        assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, Index.fromOneBased(6)),
                 model,
                 expectedMessage);
     }
