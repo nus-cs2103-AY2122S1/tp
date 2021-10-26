@@ -10,20 +10,38 @@ training sessions for NUS sports CCAs. SportsPA allows you to keep track of deta
 facilities to hold training sessions at. With SportsPA, you will be able to quickly organise training sessions as we
 help you allocate available members into the various facilities according to their specified capacity.
 
-As SportsPA mainly uses a CLI (Command Line Interface), this user guide provides an in-depth documentation on the all
-the commands available. If this is your first time using SportsPA, we also provide a quick start guide that demonstrates
-the end-to-end setup process to get you started.
+As SportsPA mainly uses a CLI (Command Line Interface), you simply have to type in commands to use it. This user
+guide provides an in-depth documentation on the all the commands available. If this is your first time using SportsPA,
+we also provide a quick start guide that demonstrates the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
-## Table of Contents
-* Table of Contents
+## <a name="table-of-contents"></a>Table of Contents
 {:toc}
 
 _____________________________________________________________________________________________________________
+## How to use the User Guide
 
+You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to the desired location in 
+this User Guide. A link to return to the [Table of Contents](#table-of-contents) is provided at the end of every section.
+<br>
+The table below summarizes the meaning of the icons and text styles used in this User Guide. 
+<br>
+
+Icon / Text Style | Description
+----------------- | ------------------
+**bold**        | Highlights important information such as components of SportsPA or constraints of command parameters
+`inline code`          | Represents commands in the format that the user should follow when typing them
+UPPER_CASE     | Represents parameters to be supplied by the user for commands
+[link](#table-of-contents) | Represents links that can be clicked on to be navigate to a different section of the User Guide or a different site
+**:information_source: Notes:** | Represents important information regarding commands such as their format and constraints
+**:exclamation: Caution:**| Represents warnings for actions that can result in the unintentional and irreversible removal of data
+
+[Back to Table of Contents](#table-of-contents)
+
+_____________________________________________________________________________________________________________
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer. If unsure how to do so, refer to [FAQ](#faq).
+1. Ensure you have Java `11` or above installed on your Computer. If you are unsure of how to do so, refer to the [FAQ](#faq).
 
 2. Download the latest `SportsPA.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases/tag/v1.2.1).
 
@@ -39,7 +57,8 @@ ________________________________________________________________________________
 
 ## Using SportsPA's Interface
 
-While SportsPA has a GUI (Graphical User Interface), you interact with the user mainly on the Command Line Interface (CLI). The figure below provides an overview on the key components of our interface. <br><br>
+While SportsPA has a GUI (Graphical User Interface) to display data and messages, you interact with it mainly 
+by typing. The figure below provides an overview on the key components of our interface. <br><br>
 ![Gui](images/Gui.png)
 
 Typically, to execute a command, this is how you interact with the interface:
@@ -54,14 +73,14 @@ Here are some example commands you can try:
 
 * **`help`** : Displays help window.
 
+* **`listm`** : Lists all members.
+
 * **`listf`** : Lists all facilities.
 
-* **`addf`**`n/Court 1 l/University Sports Centre t/1700 c/10` : Adds the facility named `Court 1` to the facilities
+* **`addf n/Court 1 l/University Sports Centre t/1700 c/10`** : Adds the facility named `Court 1` to the facilities
   list.
 
-* **`deletem`**`3` : Deletes 3rd member in the members list.
-
-* **`clearm`** : Clears the members list.
+* **`deletem 3`** : Deletes 3rd member in the members list.
 
 * **`exit`** : Exits the app.
 
@@ -80,21 +99,21 @@ documentation.
 
 **:information_source: Notes about the command format:**<br>
 
-* Characters with the slash symbols are used to indicate the type of parameter supplied by user.
-  <br> eg. in `addm n/NAME p/PHONE_NUMBER`, `n/` and `p/` are the symbols used before entering a parameter for `NAME`
+* Characters with the slash symbols are used to indicate the type of parameter supplied by the user.
+  <br> e.g. in `addm n/NAME p/PHONE_NUMBER`, `n/` and `p/` are the symbols used before entering a parameter for `NAME`
   and `PHONE_NUMBER` respectively.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `findm KEYWORD`, `KEYWORD` is a parameter which can be used as `findm Ben`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` can be used as `n/Ben p/91111111 d/1` or as `n/John p/91111111` or
+  e.g. `n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` can be used as `n/Ben p/91111111 d/1` or as `n/John p/91111111` or
   as `n/John p/91111111 t/exco`.
 
 * Items with `...` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]...` can be used as ` `(i.e. 0 times), `t/exco`, `t/exco t/y2`etc.
 
-* Parameters can be in any order.<br>
+* Parameters with the slash symbols can be in any order.<br>
   e.g. if the command specifies `n/NAME l/LOCATION`, `l/LOCATION n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
@@ -144,7 +163,7 @@ Format: `listm`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Sorting member list: `sortm`
+#### Sorting member list: `sortm`
 
 Shows a list of your members, sorted in your specified order.
 
@@ -152,7 +171,7 @@ Format: `sortm by/SORT_ORDER`
 
 * `SORT_ORDER` is a compulsory field and must be a valid `SORT_ORDER`
 
-* `SORT_ORDER` is case-insensitive. Eg. `Name` will match `name`
+* `SORT_ORDER` is case-insensitive. e.g. `Name` will match `name`
 * Valid `SORT_ORDER`: `name` ,`tag`
 
 Examples:
@@ -204,16 +223,16 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Finding a member `findm`
+#### Finding a member: `findm`
 
 If you want to see specific members you are looking for,`findm` lets you find and filter members whose name contains any of the
 given keywords.
 
 Format: `findm KEYWORD [MORE_KEYWORDS]`
 
-* `KEYWORD` is case-insensitive. Eg. `John` will match `john`
+* `KEYWORD` is case-insensitive. e.g. `John` will match `john`
 * Only the name of the member is searched
-* Only full words will be matched eg. `Johnny` will not match `John`
+* Only full words will be matched e.g. `Johnny` will not match `John`
 * Names matching at least one keyword will be returned (i.e. OR search) e.g `John Henry` will return `John, Henry`
 
 Examples:
@@ -275,7 +294,7 @@ Unmarks attendance of members marked as present.
 
 Format `unmark INDEX/INDICES`
 
-*Unmarks the members at the specified `INDEX/INDICES` in the members list as absent.
+* Unmarks the members at the specified `INDEX/INDICES` in the members list as absent.
 * `INDEX` refers to the index number/position of the member in the displayed members list.
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
@@ -288,6 +307,10 @@ Clears all member's attendance for today.
 
 Format: `cleara`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All attendance data will be removed immediately after this command is executed. This action is **irreversible**. 
+</div> <br>
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Importing multiple members using a CSV file: `import`
@@ -298,19 +321,18 @@ file using `import`.
 Format: `import CSV_FILE_PATH`
 
 * Data imported from the CSV file **must** have 4 headers in this order:
-   1) Name
-   2) Phone number
-   3) Availability
-   4) Tags
+  1. Name
+  2. Phone number
+  3. Availability
+  4. Tags
 * When filling in the details of each member in the CSV file, the Names and Phone fields must be filled 
   while Availability and Tags fields are optional.
 * `CSV_FILE_PATH` should be relative to the JAR file location.
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** If there happens to be a duplicate member(same name) being imported using the
-CSV file, the details from the CSV file will overwrite the existing details, except the attendance data.
-</div>
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If there is a duplicate member(same name) being imported using the
+CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**. 
+</div> <br>
 
 Examples: 
 
@@ -325,7 +347,7 @@ Clears all members from your member list.
 Format: `clearm`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All member data will be removed immediately after this command is executed. This action is undoable. 
+All member data will be removed immediately after this command is executed. This action is **irreversible**. 
 </div> <br>
 
 [Back to Table of Contents](#table-of-contents)
@@ -383,7 +405,7 @@ Examples:
 
 Edits an existing facility from your facility list.
 
-Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]
+Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
 
 * Edits the facility at the specified `INDEX`
 * `INDEX` refers to the index number shown in the displayed facility list
@@ -412,9 +434,9 @@ any of the given keywords.
 
 Format: `findf KEYWORD [MORE_KEYWORDS]`
 
-* `KEYWORD` is case-insensitive. Eg. `Utown` will match `utown`
+* `KEYWORD` is case-insensitive. e.g. `Utown` will match `utown`
 * Only the location is searched
-* Only full words will be matched eg. `Utown` will not match `town`
+* Only full words will be matched e.g. `Utown` will not match `town`
 * Facilities matching at least one keyword will be returned (i.e. OR search) e.g `Utown Redhill` will
   return `Utown Field` and `Redhill Sports Complex`
 
@@ -448,7 +470,7 @@ Clears all facilities from your facility list.
 Format: `clearf`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All facility data will be removed immediately after this command is executed. This action is undoable. 
+All facility data will be removed immediately after this command is executed. This action is **irreversible**. 
 </div> <br>
 
 [Back to Table of Contents](#table-of-contents)
@@ -457,7 +479,7 @@ All facility data will be removed immediately after this command is executed. Th
 
 #### Getting help: `help`
 
-Shows message explaining how you can access our help page.
+Shows a message explaining how you can access our help page.
 
 Format: `help`
 
@@ -466,7 +488,7 @@ Format: `help`
 #### Creating an alias: `alias`
 
 Some of our commands' names may be not be to your liking. Hence, SportsPA offers you the flexibility of personalising
-the commands you use. With `alias`, `you can create a shortcut name for any command.
+the commands you use. With `alias`, you can create a shortcut name for any command.
 
 Format: `alias s/SHORTCUT cw/COMMAND_WORD`
 
@@ -489,7 +511,7 @@ Examples:
 
 #### Listing all aliases: `aliases`
 
-Shows a list of your created aliases in the **Result Window**.
+Shows a list of your created aliases in the Result Window.
 
 Format: `aliases`
 
@@ -533,12 +555,16 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: How do I check if Java 11 is installed in my Computer?<br>
-**A**: Open your Operating System's command prompt and enter `java -version`. Java 11 is installed if output shows Java
+**Q**: How do I check if Java 11 is installed on my Computer?<br>
+**A**: Open your Operating System's command prompt and enter `java -version`. Java 11 is installed if the output shows Java
 11.<br><br>
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous SportsPA home folder.
+**Q**: How do I install Java 11 on my Computer?<br>
+**A**: Visit [this site](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+and follow the instructions specific to your operating system. You may have to download and run an installer to install Java 11 on your computer.<br><br>
+**Q**: How do I transfer my data in SportsPA to another Computer?<br>
+**A**: Open the file explorer on your current computer and navigate to `[JAR file location]/data/sportspa.json`. 
+Make a copy of the `sportspa.json` file and transfer it to your other computer. On the other computer, navigate to
+`[JAR file location]/data/sportspa.json` and replace the empty data file it creates with the data file you have just copied.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -550,17 +576,17 @@ the data of your previous SportsPA home folder.
 
 Action | Format, Examples
 --------|------------------
-**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
+**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> e.g. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
 **List members**| `listm`
-**Delete member**| `deletem INDEX` <br> eg. `deletem 1`
-**Edit member**| `editm INDEX [n/NAME] [p/PHONE_NUMBER] [d/DAYS]` <br> eg. `editm 1 n/Jonathan p/93837283`
-**Find member**| `findm KEYWORD` <br> eg. `findm John`, `findm John Bob`
-**Sort members**| `sortm by/SORT_ORDER` <br> eg. `sortm by/name`, `sortm by/tag`
-**Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
-**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
-**Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`
-**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
-**Import multiple members**| `import CSV_FILE_PATH` <br> eg.`import myFile.csv`
+**Delete member**| `deletem INDEX` <br> e.g. `deletem 1`
+**Edit member**| `editm INDEX [n/NAME] [p/PHONE_NUMBER] [d/DAYS]` <br> e.g. `editm 1 n/Jonathan p/93837283`
+**Find member**| `findm KEYWORD` <br> e.g. `findm John`, `findm John Bob`
+**Sort members**| `sortm by/SORT_ORDER` <br> e.g. `sortm by/name`, `sortm by/tag`
+**Mark member attendance**| `mark INDEX/INDICES` <br> e.g. `mark 1 2`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> e.g.`setm 1 2 3 d/Tue Wed`
+**Unmark member attendance**| `unmark INDEX/INDICES` <br> e.g. `unmark 1 2`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> e.g.`setm 1 2 3 d/2 3 5`
+**Import multiple members**| `import CSV_FILE_PATH` <br> e.g.`import myFile.csv`
 **Clear member**| `clearm`
 
 [Back to Table of Contents](#table-of-contents)
@@ -569,12 +595,12 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
+**Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> e.g. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
 **List facilities**| `listf`
-**Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
-**Edit facility**| `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]` <br> eg. `editf 2 n/Court 20 l/University Sports Hall`
-**Find facility**| `findf KEYWORD` <br> eg. `findf Clementi`, `findf Utown`
-**Split members into facilities**| `split DAY` <br> eg. `split Mon`
+**Delete facility**| `deletef INDEX` <br> e.g. `deletef 4`
+**Edit facility**| `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]` <br> e.g. `editf 2 n/Court 20 l/University Sports Hall`
+**Find facility**| `findf KEYWORD` <br> e.g. `findf Clementi`, `findf Utown`
+**Split members into facilities**| `split DAY` <br> e.g. `split Mon`
 **Clear facilities**|`clearf`
 
 [Back to Table of Contents](#table-of-contents)
@@ -584,9 +610,9 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **Help**| `help`
-**Creates alias**| `alias s/SHORTCUT cw/COMMAND_WORD` <br> eg. `alias s/lf cw/listf`
+**Creates alias**| `alias s/SHORTCUT cw/COMMAND_WORD` <br> e.g. `alias s/lf cw/listf`
 **List aliases**| `aliases`
-**Deletes alias**| `unalias SHORTCUT` <br> eg. `unalias lf`
+**Deletes alias**| `unalias SHORTCUT` <br> e.g. `unalias lf`
 **Exit**| `exit`
 
 [Back to Table of Contents](#table-of-contents)
