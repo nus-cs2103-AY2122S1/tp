@@ -71,7 +71,7 @@ public class Group {
     }
 
     /**
-     * Returns a mutable student set
+     * Returns a mutable member list
      */
     public Members getMembers() {
         return members;

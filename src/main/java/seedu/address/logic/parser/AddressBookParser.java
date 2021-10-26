@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddDeadlineTaskCommand;
 import seedu.address.logic.commands.AddEventTaskCommand;
-import seedu.address.logic.commands.AddGithubGroupCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentGroupCommand;
@@ -149,9 +148,6 @@ public class AddressBookParser {
 
         case DeleteStudentGroupCommand.COMMAND_WORD:
             return new DeleteStudentGroupCommandParser().parse(arguments);
-
-        case AddGithubGroupCommand.COMMAND_WORD:
-            return new AddGithubGroupCommandParser().parse(arguments);
 
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);

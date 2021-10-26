@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddDeadlineTaskCommand;
 import seedu.address.logic.commands.AddEventTaskCommand;
-import seedu.address.logic.commands.AddGithubGroupCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentGroupCommand;
@@ -27,6 +26,7 @@ import seedu.address.logic.commands.ClearTasksCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -67,7 +67,7 @@ public class HelpWindow extends UiPart<Stage> {
             new CommandCell(ClearTasksCommand.COMMAND_WORD, "Clears all tasks from the task list"),
             new CommandCell(ListGroupCommand.COMMAND_WORD, "lists all groups"),
             new CommandCell(AddGroupCommand.COMMAND_WORD, AddGroupCommand.MESSAGE_USAGE),
-            new CommandCell(AddGithubGroupCommand.COMMAND_WORD, AddGithubGroupCommand.MESSAGE_USAGE),
+            new CommandCell(EditGroupCommand.COMMAND_WORD, EditGroupCommand.MESSAGE_USAGE),
             new CommandCell(AddStudentGroupCommand.COMMAND_WORD, AddStudentGroupCommand.MESSAGE_USAGE),
             new CommandCell(DeleteGroupCommand.COMMAND_WORD, DeleteGroupCommand.MESSAGE_USAGE),
             new CommandCell(FindGroupCommand.COMMAND_WORD, FindGroupCommand.MESSAGE_USAGE),
