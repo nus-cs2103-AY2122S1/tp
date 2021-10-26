@@ -16,6 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_DAY_SHIFT = new Prefix("d/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
+    public static final Prefix PREFIX_SHIFT_TIME = new Prefix("st/");
 
     // Used when searching
     public static final Prefix PREFIX_DASH_INDEX = new Prefix("-i");
@@ -28,6 +29,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DASH_TAG = new Prefix("-t");
     public static final Prefix PREFIX_DASH_STATUS = new Prefix("-s");
     public static final Prefix PREFIX_DASH_DAY_SHIFT = new Prefix("-d");
-    public static final Prefix PREFIX_DASH_TIME = new Prefix("-t");
+    public static final Prefix PREFIX_DASH_TIME = new Prefix("-ti");
 
 }
