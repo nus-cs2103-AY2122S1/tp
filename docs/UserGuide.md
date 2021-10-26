@@ -341,15 +341,17 @@ Finds all the staff working at a particular shift. The shift can be specified ei
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
 * The DAY entry is not case sensitive.
+* If no date input is provided, it assumes that the period is from the current date to the next seven days.
+* If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
-`viewShift -d DAY-shift_number`  
-`viewShift -ti DAY-HH:mm`
+`viewShift -d DAY-shift_number [da/START_DATE] [da/END_DATE]`  
+`viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
 
 Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
 
 Examples:  
-`viewShift -d monday-1`  
+`viewShift -d monday-1 da/2021-10-01`  
 `viewShift -d TUESDAY-0`  
 `viewShift -ti wednesday-12:00`  
 `viewShift -ti THURSDAY-16:30`
@@ -365,6 +367,8 @@ Adds a time period where the staff is working to the staff’s schedule.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 * The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
   10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
+* If no date input is provided, it assumes that the period is from the current date to the next seven days.
+* If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
 `addShift -n name d/fullDayName-shiftNumber`  
