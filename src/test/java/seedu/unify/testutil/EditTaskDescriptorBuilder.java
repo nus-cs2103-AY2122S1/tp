@@ -7,6 +7,10 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * A utility class to help with building EditTaskDescriptor objects.
  */
@@ -30,7 +34,7 @@ public class EditTaskDescriptorBuilder {
         descriptor.setName(task.getName());
         descriptor.setTime(task.getTime());
         descriptor.setDate(task.getDate());
-        descriptor.setTag(task.getTag());
+        descriptor.setTags(task.getTags());
     }
 
     /**
@@ -58,10 +62,12 @@ public class EditTaskDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Tag} of the {@code EditTaskDescriptor} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditTaskDescriptor}
+     * that we are building
      */
-    public EditTaskDescriptorBuilder withTag(String tag) {
-        descriptor.setTag(new Tag(tag));
+    public EditTaskDescriptorBuilder withTags(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTags(tagSet);
         return this;
     }
 

@@ -99,7 +99,7 @@ public class EditCommandParserTest {
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditTaskDescriptorBuilder().withTag(VALID_TAG_FRIEND).build();
+        descriptor = new EditTaskDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -112,7 +112,7 @@ public class EditCommandParserTest {
                 + TIME_DESC_BOB + DATE_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTime(VALID_TIME_BOB)
-                .withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND)
+                .withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

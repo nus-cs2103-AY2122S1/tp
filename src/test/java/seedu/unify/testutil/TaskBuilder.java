@@ -6,6 +6,10 @@ import seedu.unify.model.task.State;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
+import seedu.unify.model.util.SampleDataUtil;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A utility class to help with building Task objects.
@@ -20,9 +24,8 @@ public class TaskBuilder {
 
     private Name name;
     private Time time;
-
     private Date date;
-    private Tag tag;
+    private Set<Tag> tags;
     private State state;
 
     /**
@@ -32,7 +35,7 @@ public class TaskBuilder {
         name = new Name(DEFAULT_NAME);
         time = new Time(DEFAULT_TIME);
         date = new Date(DEFAULT_DATE);
-        tag = new Tag(DEFAULT_TAG);
+        tags = new HashSet<>();
         state = new State(DEFAULT_STATE);
     }
 
@@ -43,7 +46,7 @@ public class TaskBuilder {
         name = taskToCopy.getName();
         time = taskToCopy.getTime();
         date = taskToCopy.getDate();
-        tag = taskToCopy.getTag();
+        tags = new HashSet<>(taskToCopy.getTags());
         state = taskToCopy.getState();
     }
 
@@ -55,11 +58,12 @@ public class TaskBuilder {
         return this;
     }
 
+
     /**
-     * Sets the {@code Name} of the {@code Task} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Task} that we are building.
      */
-    public TaskBuilder withTag(String tag) {
-        this.tag = new Tag(tag);
+    public TaskBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -89,6 +93,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, time, date, tag, state);
+        return new Task(name, time, date, tags, state);
     }
 }
