@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.interaction.Interaction;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -79,6 +80,15 @@ public class SampleDataUtil {
     public static Set<Language> getLanguageSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Language::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
+    public static Set<Interaction> getInteractionSet(String... description) {
+        return Arrays.stream(description)
+                .map(Interaction::new)
                 .collect(Collectors.toSet());
     }
 
