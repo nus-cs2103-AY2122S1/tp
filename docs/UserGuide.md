@@ -55,6 +55,7 @@ video here
 
 
 <div markdown="block" class="alert alert-info">
+   
 **:information_source: How to read the Features section:**<br>
 
 :orange_book: _Description_: This is a brief description of what the command does.
@@ -63,6 +64,7 @@ video here
 about the command format.)
 
 :grey_question: _Explanation_: This is an explanation on how the command can be used, and any noteworthy examples or caveats.
+   
 </div>
 
 
@@ -445,6 +447,7 @@ Date/Time on your computer.
 #### <u>Handling Date and Time of tasks</u>
 
 <div markdown="block" class="alert alert-info">
+   
 **:information_source: Notes about specifying date and time:**<br>
 A task can optionally have a Date, or both a Date and a Time.
 
@@ -459,6 +462,7 @@ A task can optionally have a Date, or both a Date and a Time.
 * When only Date is specified in the `edit` command, a task will only have its Date changed to the specified Date.
 * When only Time is specified in the `edit` command, a task will only have its Time changed to the specified Time.
 * When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
+   
 </div>
 
 #### Date Formats
