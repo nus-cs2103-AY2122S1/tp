@@ -47,10 +47,9 @@ public class GroupGroupNameEqualsPredicateTest {
         predicate = new GroupGroupNameEqualsPredicate(new GroupName("CS2103T CS2101"));
         assertTrue(predicate.test(new GroupBuilder().withGroupName("CS2103T CS2101").build()));
 
-        // Mixed-case keywords
-        // GroupName is considered equal so long as the characters match regardless of case
-        predicate = new GroupGroupNameEqualsPredicate(new GroupName("cS2103t"));
-        assertTrue(predicate.test(new GroupBuilder().withGroupName("CS2103T").build()));
+        // Numerical name
+        predicate = new GroupGroupNameEqualsPredicate(new GroupName("1234"));
+        assertTrue(predicate.test(new GroupBuilder().withGroupName("1234").build()));
     }
 
     @Test
