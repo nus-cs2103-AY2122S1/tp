@@ -31,7 +31,7 @@ public class AddGroupCommand extends Command {
     private final TutorialClass toAddTutorialClass;
 
     /**
-     * Creates an AddClassCommand to add the specified {@code Student}
+     * Creates an AddClassCommand to add the specified {@code TutorialGroup}
      */
     public AddGroupCommand(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
