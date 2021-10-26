@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\nListed all students & all lessons";
+    public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\nListed all students & lessons";
 
     @Override
     public CommandResult execute(Model model) {

@@ -108,14 +108,12 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasStudent(Student student) {
-        requireNonNull(student);
         return tuitione.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
         tuitione.removeStudent(target);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -125,20 +123,17 @@ public class ModelManager implements Model {
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
-        requireAllNonNull(target, editedStudent);
         tuitione.setStudent(target, editedStudent);
     }
 
     @Override
     public boolean hasLesson(Lesson lesson) {
-        requireNonNull(lesson);
         return tuitione.hasLesson(lesson);
     }
 
     @Override
     public void deleteLesson(Lesson target) {
         tuitione.removeLesson(target);
-        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
@@ -148,7 +143,6 @@ public class ModelManager implements Model {
 
     @Override
     public void setLesson(Lesson target, Lesson editedLesson) {
-        requireAllNonNull(target, editedLesson);
         tuitione.setLesson(target, editedLesson);
     }
 
