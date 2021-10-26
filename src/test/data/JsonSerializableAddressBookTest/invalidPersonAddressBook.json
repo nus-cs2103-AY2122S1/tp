@@ -5,9 +5,10 @@
     "email": "invalid@email!3e",
     "role": "Detective",
     "employmentType": "Full time",
-    "experience" : "0",
+    "experience": "0",
     "levelOfEducation": "PhD",
-    "expectedSalary" : "6300",
+    "expectedSalary": "6300",
+    "notes": "-",
     "done" : "Not Done"
   } ]
 }

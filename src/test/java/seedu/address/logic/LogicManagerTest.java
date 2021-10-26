@@ -87,7 +87,7 @@ public class LogicManagerTest {
                 + EMAIL_DESC_AMY + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY
                 + EXPECTED_SALARY_DESC_AMY + LEVEL_OF_EDUCATION_DESC_AMY + EXPERIENCE_DESC_AMY;
 
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withTags().withNotes("").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
