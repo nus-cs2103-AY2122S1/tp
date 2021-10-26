@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -108,6 +109,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<Student> getUnfilteredStudentList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Student> getFilteredStudentList() {
         throw new AssertionError("This method should not be called.");
     }
@@ -119,6 +125,11 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateUnfilteredStudentList(List<Student> students) {
         throw new AssertionError("This method should not be called.");
     }
 

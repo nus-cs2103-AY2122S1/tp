@@ -205,7 +205,8 @@ Adds a tutorial class to ClassMATE.
 Format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
 Examples:
-* `addc c/G06 s/Tuesdays and Fridays 2-4pm`
+* `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
+* `addc c/G01 s/Monday 10am to 12pm, thursday 10am to 12pm`
 
 ### Viewing a class
 
@@ -358,7 +359,7 @@ Action | Format, Examples
 **Find student** | `findstu KEYWORD [MORE_KEYWORDS]`<br> e.g., `findstu John`
 **Delete student** | `deletestu INDEX`<br> e.g., `liststu` followed by `deletestu 3`
 **List students** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
-**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesdays and Fridays 2-4pm`
+**Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
 **Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
