@@ -65,6 +65,7 @@ public interface Model {
     /**
      * Deletes the given student.
      * The student must exist in the tuitione book.
+     * Deleting a student refreshes the student list.
      */
     void deleteStudent(Student target);
 
@@ -101,6 +102,11 @@ public interface Model {
     void updateFilteredLessonList(Predicate<Lesson> predicate);
 
     /**
+     * Refreshes the filters for both student and lesson lists in the model instance.
+     */
+    void refresh();
+
+    /**
      * Returns true if a lesson with the same values as {@code lesson} exists in TuitiONE.
      */
     boolean hasLesson(Lesson lesson);
@@ -108,6 +114,7 @@ public interface Model {
     /**
      * Deletes the given lesson.
      * The lesson must exist in TuitiONE.
+     * Deleting a lesson refreshes the lesson list.
      */
     void deleteLesson(Lesson lesson);
 

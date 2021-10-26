@@ -1,6 +1,7 @@
 package seedu.tuitione.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -76,8 +77,9 @@ public class Tuitione implements ReadOnlyTuitione {
      * Adds a student to the tuitione book.
      * The student must not already exist in the tuitione book.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addStudent(Student s) {
+        requireNonNull(s);
+        students.add(s);
     }
 
     /**
@@ -87,7 +89,7 @@ public class Tuitione implements ReadOnlyTuitione {
      * must not be the same as another existing student in the tuitione book.
      */
     public void setStudent(Student target, Student editedStudent) {
-        requireNonNull(editedStudent);
+        requireAllNonNull(target, editedStudent);
         students.setStudent(target, editedStudent);
     }
 
@@ -96,6 +98,7 @@ public class Tuitione implements ReadOnlyTuitione {
      * {@code key} must exist in the tuitione book.
      */
     public void removeStudent(Student key) {
+        requireNonNull(key);
         students.remove(key);
     }
 
@@ -114,6 +117,7 @@ public class Tuitione implements ReadOnlyTuitione {
      * The student must not already exist in the tuitione book.
      */
     public void addLesson(Lesson l) {
+        requireNonNull(l);
         lessons.add(l);
     }
 
@@ -122,6 +126,7 @@ public class Tuitione implements ReadOnlyTuitione {
      * lesson must exist in TuitiONE.
      */
     public void removeLesson(Lesson key) {
+        requireNonNull(key);
         lessons.remove(key);
     }
 
@@ -130,11 +135,12 @@ public class Tuitione implements ReadOnlyTuitione {
      * {@code lesson} must not contain duplicate lessons.
      */
     public void setLessons(List<Lesson> lessons) {
+        requireNonNull(lessons);
         this.lessons.setLessons(lessons);
     }
 
     public void setLesson(Lesson target, Lesson editedLesson) {
-        requireNonNull(editedLesson);
+        requireAllNonNull(target, editedLesson);
         lessons.setLesson(target, editedLesson);
     }
 

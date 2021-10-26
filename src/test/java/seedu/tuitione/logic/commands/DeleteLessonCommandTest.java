@@ -64,6 +64,7 @@ public class DeleteLessonCommandTest {
         String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
+        expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(GRADE_S2));
         expectedModel.deleteLesson(lessonToDelete);
 
         assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
