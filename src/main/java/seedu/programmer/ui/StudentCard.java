@@ -89,7 +89,7 @@ public class StudentCard extends UiPart<Region> {
         studentId.setText("Student ID: " + student.getStudentIdValue());
         classId.setText("Class ID: " + student.getClassIdValue());
         email.setText("Email: " + student.getEmailValue());
-        ObservableList<Lab> labResults = student.getLabResultList();
+        ObservableList<Lab> labResults = student.getLabList();
         for (Lab lab : labResults) {
             Label labLabel = new Label(lab.toString());
             Background background;

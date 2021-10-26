@@ -72,15 +72,17 @@ public class EditLabCommand extends Command {
         boolean labExists = false;
         for (Student std : lastShownList) {
             Student editedStd = std;
-            if (total < 0.0) {
+            if (total != null && total < 0.0) {
                 throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
             }
-            if (!std.getLabResultList().contains(original)) {
+            if (!std.getLabList().contains(original)) {
                 continue;
             }
             labExists = true;
+
             editedStd.editLabInfo(original, newLabNum, total);
             model.setStudent(std, editedStd);
+
         }
 
         return labExists ? new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, original))

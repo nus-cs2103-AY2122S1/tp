@@ -108,12 +108,12 @@ public class EditCommand extends Command {
 
         if (updatedLab != null && updatedResult != null) {
             System.out.println(updatedResult);
-            studentToEdit.editLabResult(updatedLab, updatedResult);
-            ObservableList<Lab> updatedList = studentToEdit.getLabResultList();
+            studentToEdit.editLabScore(updatedLab, updatedResult);
+            ObservableList<Lab> updatedList = studentToEdit.getLabList();
             return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail, updatedList);
         } else {
             return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail,
-                    studentToEdit.getLabResultList());
+                    studentToEdit.getLabList());
         }
     }
 

@@ -134,6 +134,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void editLabRecord(List<Lab> labs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addLab(Lab lab) {
             throw new AssertionError("This method should not be called.");
         }
