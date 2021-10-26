@@ -51,7 +51,7 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 
 * An ellipsis (...) implies multiple of that parameter can be provided.<br>
   e.g `edit INDEX...` can be used as `edit 1` or as `edit 1 2 3 5 8`.
-  
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME f/FACULTY`, `f/FACULTY n/NAME` is also acceptable.
 
@@ -118,12 +118,12 @@ Format: `deadline k/KEYWORD d1/DATE1 d2/DATE2` or `deadline k/LATE_KEYWORD d1/DA
 
 * Normal keywords are `f` for fet and `c` for collection
 * Late keywords are `lf` for late fet and `lc` for late collection
-* The date inputted has to be in `dd-mm-yyyy` format  
+* The date inputted has to be in `dd-mm-yyyy` format
 * When a normal keyword is given, both date1 and date2 have to be inputted
 * The given Date2 must be a date later than the given Date1
-* `date1` is the start date and `date2` is the last date inclusive  
+* `date1` is the start date and `date2` is the last date inclusive
 * When a late keyword is given, only date1 should be given
-* Anyone whose fet and collection is due before but not on `date1` is outputted  
+* Anyone whose fet and collection is due before but not on `date1` is outputted
 
 Examples:
 * `deadline k/f d1/10-10-2021 d2/12-10-2021` retrieves a list of residents whose `FET` is due between `10 Oct 2021` and `12 Oct 2021`, inclusive
@@ -163,8 +163,8 @@ Edits the details of existing residents in the address book.
 
 Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STATUS] [f/FACULTY] [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
-* Edit the residents at the specified `INDEXES`. 
-* Each index refers to the index number shown in the displayed resident list. 
+* Edit the residents at the specified `INDEXES`.
+* Each index refers to the index number shown in the displayed resident list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -276,7 +276,7 @@ Action | Format, Examples
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `deadline k/f 15-8-2021 20-08-2021`
-**Find** | `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass` 
+**Find** | `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass`
 **Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
 **Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
 **Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
