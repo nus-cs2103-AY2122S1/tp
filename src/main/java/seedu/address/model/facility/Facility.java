@@ -81,6 +81,10 @@ public class Facility {
         personAllocatedList.add(person);
     }
 
+    public void removePersonFromFacility(Person person) {
+        personAllocatedList.remove(person);
+    }
+
     /**
      * Returns true if both name and location of the facilities are the same.
      * This defines a weaker notion of equality between two facilities.

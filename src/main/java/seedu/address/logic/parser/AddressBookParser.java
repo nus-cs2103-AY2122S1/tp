@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AllocateMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeallocateMemberCommand;
 import seedu.address.logic.commands.DeleteAliasCommand;
 import seedu.address.logic.commands.DeleteFacilityCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
@@ -115,6 +116,9 @@ public class AddressBookParser {
 
         case AllocateMemberCommand.COMMAND_WORD:
             return new AllocateMemberCommandParser().parse(arguments);
+
+        case DeallocateMemberCommand.COMMAND_WORD:
+            return new DeallocateMemberCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
