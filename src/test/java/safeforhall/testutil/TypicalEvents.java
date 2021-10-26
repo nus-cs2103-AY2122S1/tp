@@ -61,6 +61,21 @@ public class TypicalEvents {
             .withResidentList("George Best, Carl Kurz, Benson Meier")
             .build();
 
+    // Manually added
+    public static final Event POOL = new EventBuilder().withEventName("pool")
+            .withEventDate("10-11-2021")
+            .withVenue("pool room")
+            .withCapacity("10")
+            .withResidentList("George Best, Carl Kurz")
+            .build();
+
+    public static final Event HACKERS = new EventBuilder().withEventName("hackers")
+            .withEventDate("01-10-2021")
+            .withVenue("lab")
+            .withCapacity("20")
+            .withResidentList("Benson Meier")
+            .build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalEvents() {} // prevents instantiation

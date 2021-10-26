@@ -159,6 +159,71 @@ public class TypicalPersons {
             .withCollection(VALID_COLLECTIONDATE_BOB)
             .build();
 
+    // Typical persons to be imported
+    public static final Person AARON = new PersonBuilder().withName("Aaron Bower")
+            .withPhone("97601364")
+            .withEmail("Maggielonely@yahoo.co.jp")
+            .withRoom("D208")
+            .withVaccStatus("T")
+            .withFaculty("SoC")
+            .withFet("03-08-2021")
+            .withCollection("10-09-2021")
+            .build();
+    public static final Person BRAD = new PersonBuilder().withName("Brad Pitt")
+            .withPhone("92353605")
+            .withEmail("lazyHeidi@rambler.ru")
+            .withRoom("A111")
+            .withVaccStatus("T")
+            .withFaculty("Fass")
+            .withFet("20-08-2021")
+            .withCollection("16-08-2021")
+            .build();
+    public static final Person CODY = new PersonBuilder().withName("Cody Miller")
+            .withPhone("93510639")
+            .withEmail("lonelyCole2@live.fr")
+            .withRoom("A114")
+            .withVaccStatus("T")
+            .withFaculty("Sde")
+            .withFet("23-08-2021")
+            .withCollection("25-08-2021")
+            .build();
+    public static final Person DARREN = new PersonBuilder().withName("Darren Hia")
+            .withPhone("92976221")
+            .withEmail("elatedClaudia@chello.nl")
+            .withRoom("A410")
+            .withVaccStatus("F")
+            .withFaculty("Foe")
+            .withFet("29-08-2021")
+            .withCollection("17-08-2021")
+            .build();
+    public static final Person ELLIE = new PersonBuilder().withName("Ellie Muslinger")
+            .withPhone("97728537")
+            .withEmail("wanderingBrandon4@yahoo.com.sg")
+            .withRoom("B109")
+            .withVaccStatus("F")
+            .withFaculty("Biz")
+            .withFet("17-08-2021")
+            .withCollection("30-08-2021")
+            .build();
+
+    // Missing fet and collection for importing
+    public static final Person CODY_WO_FET = new PersonBuilder().withName("Cody Miller")
+            .withPhone("93510639")
+            .withEmail("lonelyCole2@live.fr")
+            .withRoom("A114")
+            .withVaccStatus("T")
+            .withFaculty("Sde")
+            .withCollection("25-08-2021")
+            .build();
+    public static final Person ELLIE_WO_COLLECTION = new PersonBuilder().withName("Ellie Muslinger")
+            .withPhone("97728537")
+            .withEmail("wanderingBrandon4@yahoo.com.sg")
+            .withRoom("B109")
+            .withVaccStatus("F")
+            .withFaculty("Biz")
+            .withFet("17-08-2021")
+            .build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -176,5 +241,31 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static AddressBook getTypicalImportedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalImportedPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static AddressBook getTypicalAddressBookWithSpecifiedPersons(List<Person> list) {
+        AddressBook ab = new AddressBook();
+        for (Person person : list) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    public static List<Person> getTypicalImportedPersons() {
+        return new ArrayList<>(Arrays.asList(AARON, BRAD, CODY, DARREN, ELLIE));
     }
 }
