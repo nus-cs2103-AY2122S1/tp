@@ -40,20 +40,23 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_CLASSCODE_AMY = "G08";
+    public static final String VALID_CLASSCODE_AMY = "G02";
     public static final String VALID_CLASSCODE_BOB = "G06";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_BESTCLASS = "BestClass";
     public static final String VALID_TAG_MORNING = "Morning";
-    public static final String VALID_CLASSCODE_G101 = "G101";
-    public static final String VALID_CLASSCODE_G102 = "G102";
-    public static final String VALID_SCHEDULE_G101 = "Monday 10am to 12pm, Thursday 10am to 12pm";
-    public static final String VALID_SCHEDULE_G102 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
     public static final String VALID_GROUPNAME_1 = "1";
     public static final String VALID_GROUPTYPE_OP1 = "OP1";
     public static final String VALID_GROUPNAME_2 = "2";
     public static final String VALID_GROUPTYPE_OP2 = "OP2";
+    public static final String VALID_CLASSCODE_G01 = "G01";
+    public static final String VALID_CLASSCODE_G02 = "G02";
+    public static final String VALID_CLASSCODE_G06 = "G06";
+    public static final String VALID_SCHEDULE_G01 = "Monday 10am to 12pm, Thursday 10am to 12pm";
+    public static final String VALID_SCHEDULE_G02 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
+    public static final String VALID_SCHEDULE_G06 = "Tuesday 12pm to 2pm, Friday 12pm to 2pm";
+    public static final String VALID_MARK = "GOOD";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -69,14 +72,16 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String TAG_DESC_BESTCLASS = " " + PREFIX_TAG + VALID_TAG_BESTCLASS;
     public static final String TAG_DESC_MORNING = " " + PREFIX_TAG + VALID_TAG_MORNING;
-    public static final String CLASSCODE_DESC_G101 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G101;
-    public static final String CLASSCODE_DESC_G102 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G102;
-    public static final String SCHEDULE_DESC_G1O1 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G101;
-    public static final String SCHEDULE_DESC_G1O2 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G102;
     public static final String GROUPNAME_DESC_1 = " " + PREFIX_GROUPNAME + VALID_GROUPNAME_1;
     public static final String GROUPTYPE_DESC_OP1 = " " + PREFIX_TYPE + VALID_GROUPTYPE_OP1;
     public static final String GROUPNAME_DESC_2 = " " + PREFIX_GROUPNAME + VALID_GROUPNAME_2;
     public static final String GROUPTYPE_DESC_OP2 = " " + PREFIX_TYPE + VALID_GROUPTYPE_OP2;
+    public static final String CLASSCODE_DESC_G01 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G01;
+    public static final String CLASSCODE_DESC_G02 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G02;
+    public static final String CLASSCODE_DESC_G06 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G06;
+    public static final String SCHEDULE_DESC_GO1 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G01;
+    public static final String SCHEDULE_DESC_GO2 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G02;
+    public static final String SCHEDULE_DESC_G06 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G06;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -85,6 +90,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_SCHEDULE = " " + PREFIX_SCHEDULE + " ";
+    public static final String INVALID_MARK = " " + "BAD"; //BAD is not a valid mark
 
 
     //Verification not yet implemented
@@ -104,7 +110,8 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withClassCode(VALID_CLASSCODE_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withClassCode(VALID_CLASSCODE_AMY).withTags(VALID_TAG_FRIEND)
+                .withMarks("LOW", "HIGH").build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withClassCode(VALID_CLASSCODE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();

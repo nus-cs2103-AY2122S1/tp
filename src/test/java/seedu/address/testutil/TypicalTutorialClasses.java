@@ -1,9 +1,11 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G102;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G102;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G01;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G02;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G06;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G01;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G02;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G06;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +18,12 @@ import seedu.address.model.tutorialclass.TutorialClass;
  * A utility class containing a list of {@code TutorialClass} objects to be used in tests.
  */
 public class TypicalTutorialClasses {
-    public static final TutorialClass G101 = new TutorialClassBuilder().withClassCode(VALID_CLASSCODE_G101)
-            .withSchedule(VALID_SCHEDULE_G101).build();
-    public static final TutorialClass G102 = new TutorialClassBuilder().withClassCode(VALID_CLASSCODE_G102)
-            .withSchedule(VALID_SCHEDULE_G102).build();
+    public static final TutorialClass G01 = new TutorialClassBuilder().withClassCode(VALID_CLASSCODE_G01)
+            .withSchedule(VALID_SCHEDULE_G01).build();
+    public static final TutorialClass G02 = new TutorialClassBuilder().withClassCode(VALID_CLASSCODE_G02)
+            .withSchedule(VALID_SCHEDULE_G02).build();
+    public static final TutorialClass G06 = new TutorialClassBuilder().withClassCode(VALID_CLASSCODE_G06)
+            .withSchedule(VALID_SCHEDULE_G06).build();
 
     // Prevent instantiation
     private TypicalTutorialClasses() {}
@@ -36,7 +40,7 @@ public class TypicalTutorialClasses {
     }
 
     public static List<TutorialClass> getTypicalTutorialClasses() {
-        return new ArrayList<>(Arrays.asList(G101, G102));
+        return new ArrayList<>(Arrays.asList(G01, G02, G06));
     }
 
 }
