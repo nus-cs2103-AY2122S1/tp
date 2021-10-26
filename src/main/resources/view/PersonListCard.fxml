@@ -29,8 +29,8 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="nusNetId" styleClass="cell_small_label" text="\$nusNetId" />
-      <Label fx:id="group" styleClass="cell_small_label" text="\$group" />
-      <Label fx:id="assessment" styleClass="cell_small_label" text="\$assessment" />
+      <Label fx:id="group" styleClass="cell_small_label" text="\$group" wrapText="true" />
+      <Label fx:id="assessment" styleClass="cell_small_label" text="\$assessment" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>
