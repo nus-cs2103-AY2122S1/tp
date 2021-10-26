@@ -19,13 +19,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.data.Name;
-import seedu.address.model.data.member.Address;
-import seedu.address.model.data.member.Email;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.data.member.Phone;
-import seedu.address.model.position.Position;
-import seedu.address.model.task.TaskList;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.member.Address;
+import seedu.address.model.module.member.Email;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.member.Phone;
+import seedu.address.model.module.member.position.Position;
+import seedu.address.model.module.task.TaskList;
 
 /**
  * Edits the details of an existing member in the address book.

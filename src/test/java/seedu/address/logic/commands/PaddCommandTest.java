@@ -21,9 +21,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 import seedu.address.testutil.MemberBuilder;
 
 public class PaddCommandTest {
@@ -225,6 +225,11 @@ public class PaddCommandTest {
 
         @Override
         public ObservableList<Task> getFilteredTaskList(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 

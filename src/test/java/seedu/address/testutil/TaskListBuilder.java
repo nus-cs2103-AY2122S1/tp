@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
+import seedu.address.model.module.task.Task;
+import seedu.address.model.module.task.TaskList;
 
 public class TaskListBuilder {
     private List<Task> tasks;

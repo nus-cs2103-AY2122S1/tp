@@ -3,39 +3,12 @@ layout: page
 title: User Guide
 ---
 
-Ailurus is a **desktop app** that helps to organise committees account for details of their members. It
-provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
+Ailurus is a **desktop application** designed to aid Organising Committees from the Computing Faculty in managing and accounting for their administrative concerns. It provides users with the ability to plan and manage events and tasks for their members.
 
-It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ailurus can get your contact management tasks done faster than traditional GUI apps.
+Ailurus is catered for people that are familiar with Command Line Interfaces (CLI), and are able to type fast. It also preserves the benefits of a Graphical User Interface (GUI) via JavaFX.
 
-## Table of Contents
-- [Table of Contents](#table-of-contents)
-- [Quick start](#quick-start)
-- [Features](#features)
-  - [Viewing help : `help`](#viewing-help--help)
-  - [Add](#add)
-    - [Adding a member: `padd`](#adding-a-member-padd)
-    - [Adding a task: `tadd`](#adding-a-task-tadd)
-    - [Adding an event: `eadd`](#adding-an-event-eadd)
-  - [List](#list)
-    - [Listing all members : `plist`](#listing-all-members--plist)
-    - [Listing all tasks of a member : `tlist`](#listing-all-tasks-of-a-member--tlist)
-    - [Listing all events : `elist`](#listing-all-events--elist)
-  - [Editing a member : `edit`](#editing-a-member--edit)
-  - [Locating members by name: `find`](#locating-members-by-name-find)
-  - [Delete](#delete)
-    - [Deleting a member : `pdel`](#deleting-a-member--pdel)
-    - [Deleting a task belonging to a member : `tdel`](#deleting-a-task-belonging-to-a-member--tdel)
-    - [Deleting an event : `edel`](#deleting-an-event--edel)
-  - [Mark a task as done : `tdone`](#mark-a-task-as-done--tdone)
-  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-  - [Exiting the program : `exit`](#exiting-the-program--exit)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
-  - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
-  - [Opening up the Menu page `[coming in v2.0]`](#opening-up-the-menu-page-coming-in-v20)
-- [FAQ](#faq)
-- [Command summary](#command-summary)
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,23 +16,22 @@ It is optimized for use via a Command Line Interface (CLI) while still having th
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `ailurus.jar` from [here](https://https://github.com/AY2122S1-CS2103T-T15-2/tp/releases).
+2. Download the latest `ailurus.jar` from [here](https://github.com/AY2122S1-CS2103T-T15-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Ailurus.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png) 
+   ![Ui](images/sampleUi.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
+open the help window.<br>
    Some example commands you can try:
 
-   * **`plist`** : Lists all contacts.
+   * **`mlist`** : Lists all members in Ailurus.
 
-   * **`padd`**`/n John Doe /p 98765432 /e johnd@example.com /a John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`madd`**`/n John Doe /ph 98765432 /em johnd@example.com /a John street, block 123, #01-01` : Adds a contact named `John Doe` to Ailurus.
 
-   * **`pdel`**`3` : Deletes the 3rd contact shown in the current list of people.
-
-   * **`clear`** : Deletes all contacts.
+   * **`mdel`**`3` : Deletes the 3rd contact shown in the current list of people.
 
    * **`exit`** : Exits the app.
 
@@ -73,23 +45,32 @@ It is optimized for use via a Command Line Interface (CLI) while still having th
 
 **:information_source: Notes about the command format:**<br>
 
+* Commands are usually abbreviated to facilitate faster typing for user convenience. As a general rule of thumb, `m`, `e` and `t` are used to represent `Member`, `Event` and `Task` respectively.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `padd /n NAME`, `NAME` is a parameter which can be used as `padd /n John Doe`.
+  e.g. in `madd /n NAME`, `NAME` is a parameter which can be used as `madd /n John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `/n NAME [/t POSITION]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
+  e.g. `/n NAME [/p POSITION]` can be used as `/n John Doe /p friend` or as `/n John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[/t POSITION]…​` can be used as ` ` (i.e. 0 times), `/t friend`, `/t friend /t family` etc.
+  e.g. `[/p POSITION]…​` can be used as ` ` (i.e. 0 times), `/p friend`, `/p friend /p family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `/n NAME /p PHONE_NUMBER`, `/p PHONE_NUMBER /n NAME` is also acceptable.
+  e.g. if the command specifies `/n NAME /ph PHONE_NUMBER`, `/ph PHONE_NUMBER /n NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `/p 12341234 /p 56785678`, only `/p 56785678` will be taken.
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `/ph 12341234 /ph 56785678`, only `/ph 56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.
+  <br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Some commands require the user to enter the `EVENT_ID`, `MEMBER_ID` or `TASK_ID`. The `ID` refers to the order on 
+  the display list.<br>
+  e.g. `Financial Planning` has a `EVENT_ID` of `1` and `Charlotte Oliveiro` has a `MEMBER_ID` 
+  of `3` according to the diagram below.
+  ![idNumberExample](images/idNumberExample.png)
 
 </div>
 
@@ -101,106 +82,59 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Add
+### Member Commands
 
-#### Adding a member: `padd`
+#### Adding a member: `madd`
 
 Adds a member to Ailurus.
 
-Format: `padd /n NAME /p PHONE_NUMBER /e EMAIL [/a ADDRESS] [/t POSITION]…​`
+Format: `madd /n NAME /ph PHONE_NUMBER /em EMAIL [/a ADDRESS] [/p POSITION]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A member can have any number of positions (including 0). A member MUST have a name,
-phone number and email address, but mailing address and positions are optional.
+<div markdown="span" class="alert alert-primary"> 
+:bulb: **Tip:** A member can have any number of positions (including 0). A member MUST have a name, phone number and email address, but mailing address and positions are optional.
 </div>
 
 Examples:
-* `padd /n John Doe /p 98765432 /e johnd@example.com`
-* `padd /n Betsy Crowe /t friend /e betsycrowe@example.com /a Newgate Prison /p 1234567 /t criminal`
+* `madd /n John Doe /ph 98765432 /em johnd@example.com`
+* `madd /n Betsy Crowe /t friend /em betsycrowe@example.com /a Newgate Prison /ph 1234567 /p criminal`
 
-#### Adding a task: `tadd`
-
-Adds a task to a member in Ailurus.
-
-Format: `tadd /n TASKNAME /p MEMBER_ID`
-
-<div markdown="span" class="alert alert-primary">:bulb: Note:
-A task must be assigned to a member.
-</div>
-
-Examples:
-* `tadd /n Collect payment from members /p 3`
-
-#### Adding an event: `eadd`
-
-Adds an event to the Ailurus.
-
-Format: `eadd /n EVENTNAME [/p MEMBER_ID]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: Note:
-You can add multiple members to an event e.g. /p 2 /p 3 /p 4...
-</div>
-
-Examples:
-* `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
-
-### List
-
-#### Listing all members : `plist`
+#### Listing all members : `mlist`
 
 Shows a list of all members (of an event optionally).
 
-Format: `plist [/e EVENT_ID]`
-* List everyone recorded in Ailurus.
+Format: `mlist [/e EVENT_ID]`
+
+* `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+* List everyone recorded in Ailurus if `EVENT_ID` is not given.
 * If  `EVENT_ID` is provided, list everyone who is participating in the event.
 * `EVENT_ID` refers to the index number shown in the displayed event list.
-* `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `plist` lists everyone in Ailurus.
-* `plist /e 3` lists all members of the event with index number 3.
+* `mlist` lists everyone in Ailurus.
+* `mlist /e 3` lists all members of the event with index number 3.
 
-#### Listing all tasks of a member : `tlist`
+#### Editing a member : `medit`
 
-Shows a list of tasks of a member with the specified id. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
+Edits an existing member in Ailurus. 
 
-Format: `tlist /p MEMBER_ID`
-* Can only be used in `plist [/e EVENT_ID]`.
-* `MEMBER_ID` refers to the index number of the member of concern in the displayed member list.
-* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+Format: `edit INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
 
-Example:
-* `tlist /p 2` lists all tasks of the member with index number 2.
-
-#### Listing all events : `elist`
-
-Shows a list of all events.
-
-Format: `elist`
-
-### Editing a member : `edit`
-
-Edits an existing member in Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
-
-Format: `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] [/a ADDRESS] [/t POSITION]…​`
-
-* Can only be used in `plist [/e EVENT_ID]`.
-* Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. 
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
+* Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing positions, the existing positions of the member will be removed i.e adding of positions is not cumulative.
-* You can remove all the member’s positions by typing `t/` without specifying any positions after it.
+* You can remove all the member’s positions by typing `/t` without specifying any positions after it.
 
 Examples:
-*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 /n Betsy Crower /t` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
+* `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 /n Betsy Crower /t` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
 
-### Locating members by name: `find`
+#### Locating members by name: `mfind`
 
 Finds members whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `mfind KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -212,39 +146,101 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findAlexDavid.png)
 
-### Delete
+#### Deleting a member : `mdel`
 
-#### Deleting a member : `pdel`
+Deletes the specified member from Ailurus.
 
-Deletes the specified member from Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
+Format: `mdel /m MEMBER_ID`
 
-Format: `pdel /p MEMBER_ID`
-
-* Can **only be used in member list**.
+* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * Deletes the member at the specified `MEMBER_ID`.
 * `MEMBER_ID` refers to the index number shown in the displayed member list.
-* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `pdel /p 2` deletes the 2nd member in the address book.
+* `mdel /m 2` deletes the 2nd member in the address book.
+
+### Task Commands
+
+#### Adding a task: `tadd`
+
+Adds a task to a member in Ailurus.
+
+Format: `tadd /n TASKNAME /m MEMBER_ID`
+
+<div markdown="span" class="alert alert-primary">
+:bulb: Note: A task must be assigned to a member.
+</div>
+
+Examples:
+* `tadd /n Collect payment from members /m 3`
+
+#### Listing all tasks of a member : `tlist`
+
+Shows a list of tasks of a member with the specified `MEMBER_ID`. 
+
+Format: `tlist /m MEMBER_ID`
+
+* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* `MEMBER_ID` refers to the index number of the member of concern in the displayed member list.
+
+
+Example:
+* `tlist /m 2` lists all tasks of the member with index number 2.
 
 #### Deleting a task belonging to a member : `tdel`
 
-Deletes the specified task of a specified member from Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
+Deletes the specified task of a specified member from Ailurus. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
-Format: `tdel /t TASK_ID /for MEMBER_ID`
+Format: `tdel /t TASK_ID`
 
-* Can **only be used in member list**.
-* Deletes the task at the specified `TASK_ID` belonging to the member at the specified `MEMBER_ID`.
-* `MEMBER_ID` refers to the index number shown in the displayed member list.
-* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
-* `TASK_ID` refers to the index number shown in the displayed task list of that specified member.
+* Can **only be used when task list has entries**.
 * `TASK_ID` **must be a positive integer** 1, 2, 3, …​
+* Deletes the task according to the specified `TASK_ID`.
+* `TASK_ID` refers to the index number shown in the displayed task list.
 
 Examples:
-* `tdel /t 3 /for 5` deletes the 3rd task for the 5th member in Ailurus.
+* `tdel /t 3` deletes the 3rd task on the displayed task list in Ailurus.
+
+#### Mark a task as done : `tdone`
+Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
+
+Format: `tdone /t TASK_ID`
+
+* Can **only be used when task list has entries**.
+* `TASK_ID` **must be a positive integer** 1, 2, 3, …​
+* Marks the task specified by `TASK_ID`.
+* `TASK_ID` refers to the index number shown in the displayed task list.
+
+Example:
+* `tdone /t 3` deletes the 3rd task on the displayed task list in Ailurus.
+
+### Event Commands
+
+#### Adding an event: `eadd`
+
+Adds an event to the Ailurus.
+
+Format: `eadd /n EVENTNAME [/m MEMBER_ID]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: Note:
+You can add multiple members to an event e.g. /m 2 /m 3 /m 4...
+</div>
+
+Examples:
+* `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
+
+#### Listing all events : `elist`
+
+Shows a list of all events of a member.
+
+Format: `elist [/m MEMBER_ID]`
+
+* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* List all events recorded in Ailurus if `MEMBER_ID` is not given.
+* If  `MEMBER_ID` is provided, list all events that the member is participating in.
+* `MEMBER_ID` refers to the index number shown in the displayed member list.
 
 #### Deleting an event : `edel`
 
@@ -252,32 +248,13 @@ Deletes the specified event from the address book.
 
 Format: `edel /e EVENT_ID`
 
+* `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
 * Deletes the event at the specified `EVENT_ID`.
 * `EVENT_ID` refers to the index number shown in the displayed member list.
-* `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+
 
 Examples:
-* `edel /e 10` deletes the 10th event in the address book.
-
-### Mark a task as done : `tdone`
-Marks the specified task of the specified member as done. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
-
-Format: `tdone /p MEMBER_ID /t TASK_ID`
-
-* Can **only be used in member list**.
-* Marks the task specified by `TASK_ID` of the member specified by `MEMBER_ID`.
-* `MEMBER_ID` refers to the index number shown in the displayed member list.
-* `TASK_ID` refers to the index number shown in the displayed task list of the specified member.
-* `MEMBER_ID` and `TASK_ID` **must be a positive integer** 1, 2, 3, …​
-
-Example:
-* `tdone /p 2 /t 3` deletes the 3rd task of the 2nd members.
-
-### Clearing all entries : `clear`
-
-Clears all entries from Ailurus.
-
-Format: `clear`
+* `edel /e 10` deletes the 10th event in Ailurus.
 
 ### Exiting the program : `exit`
 
@@ -291,26 +268,18 @@ Ailurus data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-Ailurus data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Ailurus data are saved as a JSON file `[JAR file location]/data/Ailurus.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Ailurus will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:** If your changes to the data file makes its format invalid, Ailurus will discard all data and start with an empty data file at the next run.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
-### Opening up the Menu page. `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Ailurus home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -319,17 +288,16 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **help** | `help`
-**padd** | `padd /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS [/t POSITION]…​` <br> e.g., `padd /n James Ho /p 22224444 /e jamesho@example.com /a 123, Clementi Rd, 1234665 /t friend /t colleague`
-**tadd** | `tadd /n TASKNAME /p MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /p 3`
-**eadd** | `eadd /n EVENTNAME [/p MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
-**plist** | `plist [/e EVENT_ID]` <br> e.g., `plist /e 3`
-**tlist** | `tlist /p MEMBER_ID` <br> e.g., `tlist /p 2`
-**elist** | `elist`
-**edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/POSITION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**pdel** | `pdel /p MEMBER_ID` <br> e.g., `pdel /p 6`
-**tdel** | `tdel /t TASK_ID /for MEMBER_ID` <br> e.g., `tdel /t 4 for/ 3`
+**madd** | `madd /n NAME /ph PHONE_NUMBER /em EMAIL /a ADDRESS [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
+**mlist** | `mlist [/e EVENT_ID]` <br> e.g., `mlist /e 3`
+**medit** | `medit INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit 2 /n James Lee /em jameslee@example.com`
+**mfind** | `mfind KEYWORD [MORE_KEYWORDS]`<br> e.g., `mfind James Jake`
+**mdel** | `mdel /m MEMBER_ID` <br> e.g., `mdel /m 6`
+**tadd** | `tadd /n TASKNAME /m MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /m 3`
+**tlist** | `tlist /m MEMBER_ID` <br> e.g., `tlist /m 2`
+**tdel** | `tdel /t TASK_ID` <br> e.g., `tdel /t 4`
+**tdone** | `tdone /t TASK_ID`<br> e.g. `tdone /t 3`
+**eadd** | `eadd /n EVENTNAME [/m MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
+**elist** | `elist [/m MEMBER_ID]` <br> e.g., `elist /m 1`
 **edel** | `edel /e EVENT_ID` <br> e.g., `edel /e 7`
-**tdone** | `tdone /p MEMBER_ID /t TASK_ID`<br> e.g. `tdone /p 2 /t 3`
-**clear** | `clear`
 **exit** | `exit`

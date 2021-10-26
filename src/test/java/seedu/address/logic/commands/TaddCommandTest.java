@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalTasks.PROJECT;
 
 import java.nio.file.Path;
 import java.util.HashSet;
@@ -21,12 +22,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.TaskListManager;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
+import seedu.address.model.module.task.TaskList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.TaskBuilder;
 
 class TaddCommandTest {
 
@@ -40,7 +42,7 @@ class TaddCommandTest {
         Index validMemberID = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberID);
-        Task validTask = new Task("Do homework");
+        Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         ModelStubAcceptingTaskAdded modelStub =
@@ -58,7 +60,7 @@ class TaddCommandTest {
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberID1);
         validMemberIdList.add(validMemberID2);
-        Task validTask = new Task("Do homework");
+        Task validTask = new TaskBuilder().build();
         Member validMember1 = new MemberBuilder().build();
         Member validMember2 = new MemberBuilder()
                 .withName("Amy").withEmail("amy@fakemail")
@@ -78,8 +80,8 @@ class TaddCommandTest {
         Index validMemberID = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberID);
-        Task validTask1 = new Task("Do homework");
-        Task validTask2 = new Task("Write a poem");
+        Task validTask1 = new TaskBuilder().build();
+        Task validTask2 = new TaskBuilder(PROJECT).build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand addHomeworkCommand = new TaddCommand(validMemberIdList, validTask1);
@@ -254,6 +256,11 @@ class TaddCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -266,7 +273,7 @@ class TaddCommandTest {
         private final AddressBook addressBook;
         private final Set<Member> members = new HashSet<>();
         private final Task task;
-        private final TaskListManager taskListManager;
+        private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
 
@@ -280,20 +287,20 @@ class TaddCommandTest {
 
             requireNonNull(task);
             this.task = task;
-            this.taskListManager = new TaskListManager();
+            this.taskListManager = new TaskList();
         }
 
         @Override
         public boolean hasTask(Member member, Task task) {
             loadTaskList(member);
-            return taskListManager.hasTask(task);
+            return taskListManager.contains(task);
         }
 
         @Override
         public void addTask(Member member, Task task) {
             requireNonNull(member);
             loadTaskList(member);
-            taskListManager.addTask(task);
+            taskListManager.add(task);
         }
 
         @Override
@@ -309,7 +316,9 @@ class TaddCommandTest {
         @Override
         public void loadTaskList(Member member) {
             requireNonNull(member);
-            taskListManager.loadTaskList(member.getTaskList());
+            if (this.taskListManager != member.getTaskList()) {
+                this.taskListManager = member.getTaskList();
+            }
         }
     }
 }

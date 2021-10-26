@@ -14,8 +14,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.member.Member;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 import seedu.address.storage.Storage;
 
 /**
@@ -68,6 +69,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Event> getFilteredEventList() {
         return model.getFilteredEventList();
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 
     @Override

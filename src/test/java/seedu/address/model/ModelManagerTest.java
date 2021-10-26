@@ -15,7 +15,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.data.NameContainsKeywordsPredicate;
+import seedu.address.model.module.NameContainsKeywordsPredicate;
+import seedu.address.model.module.member.Member;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -94,6 +95,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredTaskList_withoutSelectedMember_returnsEmptyList() {
+        assertTrue(modelManager.getFilteredTaskList().isEmpty());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withMember(ALICE).withMember(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -118,7 +124,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredMemberList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredMemberList(new NameContainsKeywordsPredicate<Member>(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

@@ -30,12 +30,13 @@ import seedu.address.logic.commands.TaddCommand;
 import seedu.address.logic.commands.TdelCommand;
 import seedu.address.logic.commands.TlistCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.data.NameContainsKeywordsPredicate;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.NameContainsKeywordsPredicate;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.MemberUtil;
+import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TaskUtil;
 
 public class AddressBookParserTest {
@@ -54,7 +55,7 @@ public class AddressBookParserTest {
         Index validMemberID = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberID);
-        Task validTask = new Task("do homework");
+        Task validTask = new TaskBuilder().build();
         TaddCommand command = (TaddCommand) parser.parseCommand(TaskUtil.getTaddCommand(validTask, validMemberID));
         assertEquals(new TaddCommand(validMemberIdList, validTask), command);
     }
@@ -100,7 +101,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate<Member>(keywords)), command);
     }
 
     @Test
