@@ -11,16 +11,16 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
-    private static String messageUsage = "";
+    private String messageUsage = "";
     /**
      * Creates a HelpCommand with specific help messages
      */
     public HelpCommand(String message) {
-        HelpCommand.messageUsage = message;
+        this.messageUsage = message;
     }
 
-    public static String getMessageUsage() {
-        return messageUsage;
+    public String getMessageUsage() {
+        return this.messageUsage;
     }
 
     @Override
@@ -32,6 +32,6 @@ public class HelpCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof HelpCommand // instanceof handles nulls
-                && this.messageUsage.equals(((HelpCommand) other).messageUsage));
+                && this.getMessageUsage().equals(((HelpCommand) other).getMessageUsage()));
     }
 }
