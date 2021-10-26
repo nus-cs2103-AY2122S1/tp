@@ -1,12 +1,27 @@
-
-# User Guide
-
 ## Overview
 Academy Directory (AD) is a **desktop app for CS1101S tutors to manage students’ contact, grades, tutorial attendance, and assignment completion**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). AD is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I at the National University of Singapore.
 
 ### Table of Contents
 * [Quick Start](#quick-start)
 * [Features](#features)
+  * [Add Student](#adding-a-student-add)
+  * [Delete Student](#deleting-a-student-delete)
+  * [Edit Student](#editing-a-student--edit)
+  * [Tag Student](#tagging-a-student--tag)
+  * [Find Student](#locating-students-by-name-find)
+  * [List](#listing-all-students--list)
+  * [Clear List](#clearing-all-entries--clear)
+  * [Retrieve](#retrieving-additional-information-of-students-retrieve)
+  * [Sort List](#sorting-the-list--sort)
+  * [Add Attendance](#editing-a-students-studio-attendance-attendance)
+  * [Add Participation](#editing-a-students-studio-participation-participation)
+  * [Add Grade](#adding-grades-for-an-assessment--grade)
+  * [Show Grade](#displaying-the-grades-for-an-assessment--show)
+  * [Visualise all Grades](#visualizing-assessments-grades-of-the-entire-class-vis)
+  * [Help](#seeking-help--help)
+    * [General Help](#viewing-general-help)
+    * [Help with Specific Command](#viewing-specific-help)
+  * [Exit Academy Directory](#exiting-the-program--exit)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -82,12 +97,6 @@ Examples:
 * `add n/Charles Ng t/@charles e/e0123434@u.nus.edu p/NA`
 * `add n/Betsy Lim t/@unislave e/e0123456@u.nus.edu`
 
-### Clearing all entries : `clear`
-
-Clears all entries from the academy directory.
-
-Format: `clear`
-
 ### Deleting a student: `delete`
 
 Avengers will be able to delete their students.
@@ -154,6 +163,13 @@ Shows a list of all students in the academy directory.
 
 Format: `list`
 
+
+### Clearing all entries : `clear`
+
+Clears all entries from the academy directory.
+
+Format: `clear`
+
 ### Retrieving additional information of students': `retrieve`
 
 Retrieves additional information of students. Currently supported information includes:
@@ -197,11 +213,11 @@ Examples:
 * `attendance 1 ses/1 att/1`
 * `attendance 1, 2, 3 ses/12 k/Chan a/1 i/7`
 
-### Editing a student’s Studio participation: `part`
+### Editing a student’s Studio participation: `participation`
 
 Avengers will be able to track the participation of their students during the relevant studios. We will be keeping track of Studio participation with a counter system which starts at 0 by default.
 
-Format: `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
+Format: `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
 
 * Edits the Studio participation of a student or multiple students based on their `INDEX`.
 * Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
@@ -212,9 +228,9 @@ Format: `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
 * If a student's `Attendance` is `false` and the Participation score to be added is greater than 0, the student will also be marked as having attended the Studio.
 
 Examples:
-* `part 1, 2, 3 ses/12 add/500`
-* `part 4, 6 ses/2 add/-300`
-* `part 4 ses/9 add/1`
+* `participation 1, 2, 3 ses/12 add/500`
+* `participation 4, 6 ses/2 add/-300`
+* `participation 4 ses/9 add/1`
 
 ### Adding grades for an assessment:  `grade`
 Avengers will be able to add a student’s grade for a particular assessment.
@@ -327,7 +343,7 @@ Action | Format, Examples
 [**Retrieve**](#retrieving-additional-information-of-students-retrieve) | `retrieve [p/PHONE_NUMBER] [e/EMAIL] [te/TELEGRAM] [n/NAME]` <br> e.g., `retrieve p/ e/ n/Alex Yeoh`
 [**Sort**](#sorting-the-list--sort) | `sort attr/ATTRIBUTE ord/ORDER`<br> e.g., `sort attr/average ord/asc`
 [**Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` <br> e.g., `attendance 1, 2 ses/1 att/1`
-[**Studio Participation**](#editing-a-students-studio-participation-part) | `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
+[**Studio Participation**](#editing-a-students-studio-participation-part) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
 [**Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` <br> e.g., `grade INDEX as/RA1 g/15`
 [**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` <br> e.g., `show RA1`
 [**Help**](#seeking-help--help) | `help`
