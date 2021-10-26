@@ -388,19 +388,19 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Student | `add n/\<NAME> te/\<TELEGRAM> g/\<GITHUB> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>]` |
+| Add a new Student | `add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]` |
 | Delete All Student Contacts Present | `clear` |
-| Delete a Student | `delete \<INDEX> ` |
+| Delete a Student | `delete <INDEX> ` |
 | Exit the App | `exit` |
-| Edit a Student | `edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [g/\<GITHUB>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>]` |
+| Edit a Student | `edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]` |
 | Exporting Student Contacts | `export filename.JSON` |
-| Favourite a Student Contact | `fav \<INDEX>` |
-| Find a Student (by Name) | `find \<STRING> ` |
-| Find a Student (by Tag) | `find t/\<TAG>` |
-| Find a Student (by Telegram Handle) | `find @\<TELEGRAM>` |
+| Favourite a Student Contact | `fav <INDEX>` |
+| Find a Student (by Name) | `find <STRING> ` |
+| Find a Student (by Tag) | `find t/<TAG>` |
+| Find a Student (by Telegram Handle) | `find @<TELEGRAM>` |
 | Show the Help Window | `help` |
 | Import Student Contacts | `import filename.JSON` |
 | List all the Student Contacts Present | `list` |
-| Show a Student Contact (by Name)| `show \<NAME>` |
-| Show a Student Contact (by Index) | `show \<INDEX>` |
-| Unfavourite a Student Contact | `unfav \<INDEX>` |
+| Show a Student Contact (by Name)| `show <NAME>` |
+| Show a Student Contact (by Index) | `show <INDEX>` |
+| Unfavourite a Student Contact | `unfav <INDEX>` |
