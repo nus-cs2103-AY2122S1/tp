@@ -13,6 +13,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,23 +42,27 @@ public class EditCommandTest {
     private UniquePersonList editTestPersonList = new UniquePersonList();
 
     private Model model;
+    private AddressBook testAddressbook;
+    private Schedule testSchedule;
 
     @BeforeEach
     public void setUp() {
         Person client1 = new PersonBuilder().withName("Client1").build();
         Person client2 = new PersonBuilder().withName("Client2").build();
 
-        AddressBook testAb = new AddressBookBuilder().build();
-        testAb.addPerson(client1);
-        testAb.addPerson(client2);
+        testAddressbook = new AddressBookBuilder().build();
+        testAddressbook.addPerson(client1);
+        testAddressbook.addPerson(client2);
 
         Appointment appointment1 = new AppointmentBuilder().addClient(client1).build();
         Appointment appointment2 = new AppointmentBuilder().addClient(client1).addClient(client2).build();
 
-        Schedule testSchedule = new Schedule();
+        testSchedule = new Schedule();
         testSchedule.addAppointment(appointment1);
         testSchedule.addAppointment(appointment2);
-        model = new ModelManager(testAb, new UserPrefs(), testSchedule);
+        model = new ModelManager(testAddressbook, new UserPrefs(), testSchedule);
+        System.out.println(model.getFilteredAppointmentList().get(0));
+        System.out.println(model.getFilteredAppointmentList().get(1));
     }
 
     @Test
@@ -68,9 +74,13 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel =
-                new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), model.getSchedule());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+                new ModelManager(testAddressbook, new UserPrefs(), testSchedule);
 
+        Person personToEdit = model.getFilteredPersonList().get(0);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.updateEditedClientInAppointments(personToEdit, editedPerson);
+
+        System.out.println(model.equals(expectedModel));
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
