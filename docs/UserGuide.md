@@ -833,7 +833,8 @@ The commands are categorised (based on their purpose) into 5 different categorie
 * [Others](#Others)
 
 ### Contact Management
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete Contact** | `del INDEX`<br> e.g. `del 3`
@@ -842,7 +843,8 @@ Action|Format, Examples
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 
 ### Appointment
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Add appointment** |`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br>
 **Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br>
@@ -850,20 +852,23 @@ Action|Format, Examples
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
 
 ### Tags
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Edit Tag** |`tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
 **Investment Plan Tag** | Health Insurance: `ip/health`<br>Investment: `ip/invest`<br>Life Insurance: `ip/life`<br>Motor Insurance: `ip/motor`<br>Property Insurance: `ip/property`<br>Savings: `ip/save`<br>Travel Insurance: `ip/travel`<br><br>
 **Priority Tag** | Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
 
 ### Navigation
-Action|Format, Examples
+
+Action | Format, Examples
 --------|------------------
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Sort** | `sort KEYWORD`
 **List** | `list`
 
 ### Others
+
 Action|Format, Examples
 --------|------------------
 **Help** | `help [COMMAND]` <br> e.g. `help add`
