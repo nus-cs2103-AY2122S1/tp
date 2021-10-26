@@ -280,11 +280,11 @@ Step 1. The user launches the application for the first time.
 
 Step 2. The user executes `add n/David …​` to add a new person.
 
-Step 3. Connections displays the new person. 
+Step 3. CONNECTIONS displays the new person. 
 
 Step 4. The user decides that the contact, currently at index 1, is important and should be pinned. User executes pin 1
 
-Step 5. Connections will pin the contact and moves the contact to the top of the list of contacts.
+Step 5. CONNECTIONS will pin the contact and moves the contact to the top of the list of contacts.
 
 The following sequence diagram shows how the pin operation works:
 
@@ -315,7 +315,7 @@ Step 1. The user launches the application.
 
 Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
 
-Step 3. Connections displays any person whose name contains `David` **while also having** `friend` **and** 
+Step 3. CONNECTIONS displays any person whose name contains `David` **while also having** `friend` **and** 
 `football` tagged to them.
 
 #### Design considerations:
@@ -342,7 +342,7 @@ Step 1. The user launches the application for the first time.
 
 Step 2. The user executes `findOr n/David n/Henry t/friend t/footnall` to search for a matching entry.
 
-Step 3. Connections displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
+Step 3. CONNECTIONS displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
 tagged to **either** `friend` **or** `football`.
 
 #### Design considerations:
@@ -358,7 +358,7 @@ tagged to **either** `friend` **or** `football`.
     * Cons: More code.
 
 
-### \[Work in progress\] Help feature
+### Help feature
 
 #### Implementation
 
@@ -497,7 +497,7 @@ Future versions user stories
 
 1.  User chooses to add a person
 2.  User provides the person's details
-3.  Connections create an entry for that person's details
+3.  CONNECTIONS create an entry for that person's details
 
     Use case ends.
 
@@ -505,13 +505,13 @@ Future versions user stories
 
 * 2a. User provides incomplete details
     
-    * 2a1. Connections show an error message.
+    * 2a1. CONNECTIONS show an error message.
       
       Use case resumes at step 2
     
-* 2b. User provides details identical to an existing entry in Connections
+* 2b. User provides details identical to an existing entry in CONNECTIONS
 
-    * 2b1. Connections remind User that this is a duplicate
+    * 2b1. CONNECTIONS remind User that this is a duplicate
     
       Use case resumes at Step 1
     
@@ -521,7 +521,7 @@ Future versions user stories
 **MSS**
 
 1.  User request to clear all entries
-2.  Connections deletes all entries
+2.  CONNECTIONS deletes all entries
 
     Use case ends.
 
@@ -530,9 +530,9 @@ Future versions user stories
 **MSS**
 
 1.  User requests to list persons
-2.  Connections show a list of persons
+2.  CONNECTIONS show a list of persons
 3.  User requests to delete a specific person in the list
-4.  Connections delete the person
+4.  CONNECTIONS delete the person
 
     Use case ends.
 
@@ -553,9 +553,9 @@ Future versions user stories
 **MSS**
 
 1.  User requests to list persons
-2.  Connections show a list of persons
+2.  CONNECTIONS show a list of persons
 3.  User provides his/her index in the list along with the replacement information
-4.  Connections reflect the edits that were made
+4.  CONNECTIONS reflect the edits that were made
 
     Use case ends.
 
@@ -567,7 +567,7 @@ Future versions user stories
 
 * 3a. The given index is invalid.
     
-    * 3a1. Connections show an error message.
+    * 3a1. CONNECTIONS show an error message.
       
       Use case resumes at step 2.
 
@@ -576,7 +576,7 @@ Future versions user stories
 **MSS**
 
 1.  User request to exit
-2.  Connections exit
+2.  CONNECTIONS exit
 
     Use case ends.
 
@@ -588,27 +588,27 @@ Future versions user stories
 
 1.  User chooses to look for an entry
 2.  Use provides the search term
-3.  Connections returns all entries that matches all search terms provided
+3.  CONNECTIONS returns all entries that matches all search terms provided
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Connections is empty
+* 2a. CONNECTIONS is empty
 
-    * 2a1. Connections display a message to indicate no entries
+    * 2a1. CONNECTIONS display a message to indicate no entries
     
       Use case ends.
 
 * 2b. No existing entries match the search term provided
     
-    * 2b1. Connections display a message to indicate no matching entries
+    * 2b1. CONNECTIONS display a message to indicate no matching entries
     
       Use case resumes at step 2.
     
 * 2c. FindOr command is used
     
-    * 2c1. Connections return all entries that matches any of the search terms provided.
+    * 2c1. CONNECTIONS return all entries that matches any of the search terms provided.
 
 **Use case: Find people via Tags**
 
@@ -616,21 +616,21 @@ Future versions user stories
 
 1.  User choose to look for an entry
 2.  User provides the tag
-3.  Connections return all entries that matches the tag
+3.  CONNECTIONS return all entries that matches the tag
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Connections is empty
+* 2a. CONNECTIONS is empty
 
-    * 2a1. Connections display a message to indicate no entries
+    * 2a1. CONNECTIONS display a message to indicate no entries
 
       Use case ends.
 
 * 2a. No existing entries match the tag provided
 
-    * 2a1. Connections display a message to indicate no matching entries
+    * 2a1. CONNECTIONS display a message to indicate no matching entries
 
       Use case resumes at step 2.
     
@@ -640,13 +640,13 @@ Future versions user stories
 **MSS**
 
 1.  User requests to list all entries
-2.  Connections display all entries
+2.  CONNECTIONS display all entries
     
     Use case ends.
 
 **Extensions**
 
-* 2a. Connections is empty
+* 2a. CONNECTIONS is empty
 
   Use case ends.
 
@@ -656,7 +656,7 @@ Future versions user stories
 
 1.  User requests for help
 2.  User provides the command
-3.  Connections explain how to use the command and provide examples
+3.  CONNECTIONS explain how to use the command and provide examples
 
     Use case ends.
 
@@ -664,7 +664,7 @@ Future versions user stories
 
 * 2a. Command provided is not supported
 
-    * 2a1. Connections display an error message
+    * 2a1. CONNECTIONS display an error message
       
       Use case ends.
 
@@ -673,27 +673,27 @@ Future versions user stories
 **MSS**
 
 1.  User requests to list persons
-2.  Connections show a list of persons
+2.  CONNECTIONS show a list of persons
 3.  User provides his index in the list along with the tags to be added
-4.  Connections add those tags from that entry
+4.  CONNECTIONS add those tags from that entry
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Connections is empty
+* 2a. CONNECTIONS is empty
 
   Use case ends.
 
 * 3a. Index provided is out of range
 
-    * 3a1. Connections display an error message
+    * 3a1. CONNECTIONS display an error message
     
       Use case resumes at step 2.
     
 * 3b. Target entry already has the tag specified
 
-    * 3b1. Connections display an error message
+    * 3b1. CONNECTIONS display an error message
     
       Use case resumes at step 2.
 
@@ -702,27 +702,27 @@ Future versions user stories
 **MSS**
 
 1.  User requests to list persons
-2.  Connections show a list of persons
+2.  CONNECTIONS show a list of persons
 3.  User provides his index in the list along with the tags to be removed
-4.  Connections remove those tags from that entry
+4.  CONNECTIONS remove those tags from that entry
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Connections is empty
+* 2a. CONNECTIONS is empty
 
   Use case ends.
 
 * 3a. Index provided is out of range
 
-    * 3a1. Connections display an error message
+    * 3a1. CONNECTIONS display an error message
 
       Use case resumes at step 2.
 
 * 3b. Target entry do not have the tag specified
 
-    * 3b1. Connections display an error message
+    * 3b1. CONNECTIONS display an error message
 
       Use case resumes at step 2.
 
@@ -731,19 +731,24 @@ Future versions user stories
 **MSS**
 
 1.  User requests to show help for a command
-2.  Connections show the guide on how to use the command
+2.  CONNECTIONS show the guide on how to use the command
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Command was not provided
-  * 2a1. Connections show all available commands
+* 2a. Keyword `more` was provided
+    * 2a1. CONNECTIONS shows a pop-up with a link to the UserGuide
 
       Use case ends.
 
-* 2b. Command provided is invalid
-  * 2a1. Connections display an error message followed by a list of valid commands
+* 2b. Command was not provided
+  * 2b1. CONNECTIONS show all available commands
+
+      Use case ends.
+
+* 2c. Command provided is invalid
+  * 2c1. CONNNECTIONS display an error message followed by a list of valid commands
 
   Use case ends.
     
@@ -759,7 +764,7 @@ Future versions user stories
 *{More to be added}*
 
 ### Glossary
-* **Connections**: The name of our product
+* **CONNECTIONS**: The name of our product
 * **Entry**: An item written or printed in a diary, list, account book, or reference book.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others

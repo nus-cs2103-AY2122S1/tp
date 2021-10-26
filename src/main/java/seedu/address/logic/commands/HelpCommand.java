@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -9,13 +12,114 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
+    public static final String SPACE = "            ";
+
+    public static final String HELP_MESSAGE = "Usage: help <command>\n"
+            + "\n"
+            + "Commands:\n"
+            + AddCommand.COMMAND_WORD + SPACE + AddCommand.COMMAND_DESCRIPTION
+            + EditCommand.COMMAND_WORD + SPACE + EditCommand.COMMAND_DESCRIPTION
+            + TagCommand.COMMAND_WORD + SPACE + TagCommand.COMMAND_DESCRIPTION
+            + UntagCommand.COMMAND_WORD + SPACE + UntagCommand.COMMAND_DESCRIPTION
+            + ListCommand.COMMAND_WORD + SPACE + ListCommand.COMMAND_DESCRIPTION
+            + FindCommand.COMMAND_WORD + SPACE + FindCommand.COMMAND_DESCRIPTION
+            + FindOrCommand.COMMAND_WORD + SPACE + FindOrCommand.COMMAND_DESCRIPTION
+            + FindTagCaseInsensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseInsensitiveCommand.COMMAND_DESCRIPTION
+            + FindTagCaseSensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseSensitiveCommand.COMMAND_DESCRIPTION
+            + DeleteCommand.COMMAND_WORD + SPACE + DeleteCommand.COMMAND_DESCRIPTION
+            + DeleteMultipleCommand.COMMAND_WORD + SPACE + DeleteMultipleCommand.COMMAND_DESCRIPTION
+            + ClearCommand.COMMAND_WORD + SPACE + ClearCommand.COMMAND_DESCRIPTION
+            + ExitCommand.COMMAND_WORD + SPACE + ExitCommand.COMMAND_DESCRIPTION
+            + "For more information, enter <help more>.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    public static final String MORE = "more";
+
+    public static final String EMPTY = "";
+
+    private final String commandWord;
+
+    public HelpCommand(String commandWord) {
+        this.commandWord = commandWord;
+    }
+
     @Override
-    public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+    public CommandResult execute(Model model) throws CommandException {
+
+        switch (commandWord) {
+
+        case EMPTY:
+            return new CommandResult(HELP_MESSAGE, false, false);
+
+        case MORE:
+            return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+
+        case AddCommand.COMMAND_WORD:
+            return new CommandResult(AddCommand.MESSAGE_USAGE, false, false);
+
+        case EditCommand.COMMAND_WORD:
+            return new CommandResult(EditCommand.MESSAGE_USAGE, false, false);
+
+        case UntagCommand.COMMAND_WORD:
+            return new CommandResult(UntagCommand.MESSAGE_USAGE, false, false);
+
+        case TagCommand.COMMAND_WORD:
+            return new CommandResult(TagCommand.MESSAGE_USAGE, false, false);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new CommandResult(DeleteCommand.MESSAGE_USAGE, false, false);
+
+        case DeleteMultipleCommand.COMMAND_WORD:
+            return new CommandResult(DeleteMultipleCommand.MESSAGE_USAGE, false, false);
+
+        case ClearCommand.COMMAND_WORD:
+            return new CommandResult(ClearCommand.MESSAGE_USAGE, false, false);
+
+        case FindCommand.COMMAND_WORD:
+            return new CommandResult(FindCommand.MESSAGE_USAGE, false, false);
+
+        case FindOrCommand.COMMAND_WORD:
+            return new CommandResult(FindOrCommand.MESSAGE_USAGE, false, false);
+
+        case ListCommand.COMMAND_WORD:
+            return new CommandResult(ListCommand.MESSAGE_USAGE, false, false);
+
+        case ExitCommand.COMMAND_WORD:
+            return new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
+
+        case HelpCommand.COMMAND_WORD:
+            return new CommandResult(HelpCommand.MESSAGE_USAGE, false, false);
+
+        case FindTagCaseInsensitiveCommand.COMMAND_WORD:
+            return new CommandResult(FindTagCaseInsensitiveCommand.MESSAGE_USAGE, false, false);
+
+        case FindTagCaseSensitiveCommand.COMMAND_WORD:
+            return new CommandResult(FindTagCaseSensitiveCommand.MESSAGE_USAGE, false, false);
+
+        default:
+            String message = MESSAGE_UNKNOWN_COMMAND + ": " + commandWord + "\n" + HELP_MESSAGE;
+            throw new CommandException(message);
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+
+        // state check
+        HelpCommand e = (HelpCommand) other;
+        return commandWord.equals(e.commandWord);
     }
 }

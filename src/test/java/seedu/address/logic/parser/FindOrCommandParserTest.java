@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindOrCommand;
 import seedu.address.model.person.FindOrPredicate;
 import seedu.address.model.person.Name;
@@ -21,7 +20,7 @@ public class FindOrCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindOrCommand.MESSAGE_USAGE));
     }
 
     @Test

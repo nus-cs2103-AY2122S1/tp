@@ -8,8 +8,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,19 +30,21 @@ import seedu.address.model.tag.Tag;
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a tag from the "
-            + "details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String COMMAND_DESCRIPTION = "Removes a tag from the details of the person "
+            + "identified by the index number used in the displayed person list.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) from %1$s: %2$s";
     public static final String MESSAGE_NOT_REMOVED = "At least one tag to be removed must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_TAG_NOT_IN_PERSON = "%s does not have the following tags: %s";
+
+    private static final Logger logger = LogsCenter.getLogger(HelpCommand.class);
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -107,6 +111,10 @@ public class UntagCommand extends Command {
                     getNotFoundTags(updatedTags, removedTags)));
         }
         updatedTags.removeAll(removedTags);
+
+        logger.info(String.format("%s contains the following tags: %s ; removed the following tags: %s",
+                originalName, updatedTags.stream().map(tag -> tag.tagName).collect(Collectors.joining(", ")),
+                getRemovedTags(editPersonDescriptor)));
 
         return new Person(originalName, originalPhone, originalEmail, originalAddress, updatedTags, originalBirthday);
     }
