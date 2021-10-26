@@ -5,6 +5,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -130,6 +131,7 @@ public class ModelManager implements Model {
     /**
      * Retrieves a list of claims of the persons in the filteredList
      */
+    @Override
     public ObservableList<Pair<Claim, Name>> getClaimList() {
         ObservableList<Pair<Claim, Name>> claimList = observableArrayList();
         filteredPersons.stream().forEach(person -> {
@@ -139,6 +141,18 @@ public class ModelManager implements Model {
             });
         });
         return claimList;
+    }
+
+    /**
+     * Retrieves sorted list of people whose appointment are still upcoming.
+     *
+     * @return the aforementioned sorted list of people.
+     */
+    @Override
+    public ObservableList<Person> getAppointmentList() {
+        ObservableList<Person> ls = filteredPersons.filtered(Person::hasUpcomingAppointment);
+        ls = ls.sorted(Comparator.comparing(Person::getAppointment));
+        return ls;
     }
 
     @Override
