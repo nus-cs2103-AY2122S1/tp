@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.CategoryCode;
 import seedu.address.model.person.Rating;
+import seedu.address.model.tag.Tag;
 
 class FilterCommandTest {
     @Test
@@ -21,17 +22,19 @@ class FilterCommandTest {
                 Arrays.asList(new CategoryCode("fnb"), new CategoryCode("att")));
         Rating firstRating = new Rating("2");
         Rating secondRating = new Rating("4");
+        Set<Tag> firstTag = new HashSet<>(Arrays.asList(new Tag("outdoor")));
+        Set<Tag> secondTag = Collections.emptySet();
 
-        FilterCommand firstFilterCommand = new FilterCommand(firstCategoryCodeSet, firstRating);
-        FilterCommand secondFilterCommand = new FilterCommand(secondCategoryCodeSet, secondRating);
-        FilterCommand thirdFilterCommand = new FilterCommand(firstCategoryCodeSet, secondRating);
-        FilterCommand fourthFilterCommand = new FilterCommand(secondCategoryCodeSet, firstRating);
+        FilterCommand firstFilterCommand = new FilterCommand(firstCategoryCodeSet, firstRating, firstTag);
+        FilterCommand secondFilterCommand = new FilterCommand(secondCategoryCodeSet, secondRating, secondTag);
+        FilterCommand thirdFilterCommand = new FilterCommand(firstCategoryCodeSet, secondRating, firstTag);
+        FilterCommand fourthFilterCommand = new FilterCommand(secondCategoryCodeSet, firstRating, secondTag);
 
         // same object -> returns true
         assertTrue(firstFilterCommand.equals(firstFilterCommand));
 
         // same values -> returns true
-        FilterCommand firstFilterCommandCopy = new FilterCommand(firstCategoryCodeSet, firstRating);
+        FilterCommand firstFilterCommandCopy = new FilterCommand(firstCategoryCodeSet, firstRating, firstTag);
         assertTrue(firstFilterCommand.equals(firstFilterCommandCopy));
 
         // different types -> returns false
