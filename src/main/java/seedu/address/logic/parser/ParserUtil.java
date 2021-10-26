@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -174,6 +175,23 @@ public class ParserUtil {
             return LocalTime.parse(trimmedTime, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException("Time format should be HHMM");
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@Code LocalTime}
+     * Leading and trailing whitespaces will be removed.
+     *
+     * @throws ParseException if the given {@Code LocalTime} is invalid
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        try {
+            return LocalDateTime.parse(trimmedDateTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("DateTime format should be \"YYYY-MM-dd HHmm\"");
         }
     }
 

@@ -102,4 +102,15 @@ public class TimePeriod implements Comparable<TimePeriod> {
             return this.startDateTime.compareTo(o.startDateTime);
         }
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Start Time: ")
+               .append(getStartDateTime())
+               .append("End Time: ")
+               .append(getEndDateTime());
+
+        return builder.toString();
+    }
 }

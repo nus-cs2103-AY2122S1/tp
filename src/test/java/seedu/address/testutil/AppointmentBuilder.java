@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Appointment;
+import seedu.address.model.schedule.TimePeriod;
 
 /**
  * A utility class to help with building Appointment Objects.
@@ -15,14 +15,11 @@ import seedu.address.model.schedule.Appointment;
 public class AppointmentBuilder {
     private static final String DEFAULT_CLIENT = "ALICE";
     private static final String DEFAULT_LOCATION = "vivocity";
-    private static final String DEFAULT_DATE = "01-01-2021";
-    private static final String DEFAULT_TIME = "1800";
     private static final String DEFAULT_DESCRIPTION = "Halloween Sales";
 
     private UniquePersonList clients;
     private Address location;
-    private LocalDate date;
-    private LocalTime time;
+    private TimePeriod timePeriod;
     private String description;
 
     /**
@@ -33,8 +30,8 @@ public class AppointmentBuilder {
         clients.add(new PersonBuilder().withName(DEFAULT_CLIENT).build());
         this.clients = clients;
         this.location = new Address(DEFAULT_LOCATION);
-        this.date = LocalDate.parse(DEFAULT_DATE, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        this.time = LocalTime.parse(DEFAULT_TIME, DateTimeFormatter.ofPattern("HHmm"));
+        this.timePeriod = new TimePeriod(LocalDateTime.of(2021, 12, 25, 21, 30),
+                LocalDateTime.of(2021, 12, 25, 22, 30));
         this.description = DEFAULT_DESCRIPTION;
     }
 
@@ -45,8 +42,7 @@ public class AppointmentBuilder {
     public AppointmentBuilder(Appointment appointmentToCopy) {
         this.clients = appointmentToCopy.getClients();
         this.location = appointmentToCopy.getLocation();
-        this.date = appointmentToCopy.getDate();
-        this.time = appointmentToCopy.getTime();
+        this.timePeriod = appointmentToCopy.getTimePeriod();
         this.description = appointmentToCopy.getDescription();
     }
 
@@ -95,20 +91,23 @@ public class AppointmentBuilder {
     }
 
     /**
-     * Sets the {@code date} of the {@code Appointment} that we are building.
+     * Sets the {@code TimePeriod} of the {@code Appointment} that we are building.
      */
-    public AppointmentBuilder withDate(String date) {
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    public AppointmentBuilder withTimePeriod(TimePeriod timePeriod) {
+        this.timePeriod = timePeriod;
         return this;
     }
 
     /**
-     * Sets the {@code time} of the {@code Appointment} that we are building.
+     * Sets the {@code TimePeriod} of the {@code Appointment} that we are building.
      */
-    public AppointmentBuilder withTime(String time) {
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
+    public AppointmentBuilder withTimePeriod(String startTime, String endTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        this.timePeriod = new TimePeriod(LocalDateTime.parse(startTime, formatter),
+                LocalDateTime.parse(endTime, formatter));
         return this;
     }
+
 
     /**
      * Sets the {@code description} of the {@code Appointment} that we are building.
@@ -119,6 +118,6 @@ public class AppointmentBuilder {
     }
 
     public Appointment build() {
-        return new Appointment(clients, location, date, time, description);
+        return new Appointment(clients, location, timePeriod, description);
     }
 }

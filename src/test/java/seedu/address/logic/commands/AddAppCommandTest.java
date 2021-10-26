@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -26,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
+import seedu.address.model.schedule.TimePeriod;
 import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -34,7 +34,7 @@ public class AddAppCommandTest {
     @Test
     public void constructor_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-            -> new AddAppCommand(null, null, null, null, null));
+            -> new AddAppCommand(null, null, null, null));
     }
 
     @Test
@@ -47,8 +47,8 @@ public class AddAppCommandTest {
         CommandResult commandResult = new AddAppCommand(
                 indexes,
                 new Address("vivocity"),
-                LocalDate.of(2021, 01, 01),
-                LocalTime.of(18, 00),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
+                        LocalDateTime.of(2021, 1, 2, 10, 0)),
                 "Halloween Sales").execute(modelStub);
 
         assertEquals(String.format(AddAppCommand.MESSAGE_SUCCESS, validAppointment), commandResult.getFeedbackToUser());
@@ -68,8 +68,8 @@ public class AddAppCommandTest {
         CommandResult commandResult = new AddAppCommand(
                 indexes,
                 new Address("vivocity"),
-                LocalDate.of(2021, 01, 01),
-                LocalTime.of(18, 00),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
+                        LocalDateTime.of(2021, 1, 2, 10, 0)),
                 "Halloween Sales").execute(modelStub);
 
         assertEquals(String.format(AddAppCommand.MESSAGE_SUCCESS, validAppointment), commandResult.getFeedbackToUser());
@@ -85,8 +85,8 @@ public class AddAppCommandTest {
         Command commandResult = new AddAppCommand(
                 indexes,
                 new Address("vivocity"),
-                LocalDate.of(2021, 01, 01),
-                LocalTime.of(18, 00),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
+                        LocalDateTime.of(2021, 1, 2, 10, 0)),
                 "Halloween Sales");
 
         assertThrows(CommandException.class, ()
@@ -104,14 +104,44 @@ public class AddAppCommandTest {
         Command commandResult = new AddAppCommand(
                 indexes,
                 new Address("vivocity"),
-                LocalDate.of(2021, 01, 01),
-                LocalTime.of(18, 00),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
+                        LocalDateTime.of(2021, 1, 2, 10, 0)),
                 "Halloween Sales");
 
         assertThrows(CommandException.class, ()
             -> commandResult.execute(modelStub));
     }
 
+    @Test
+    public void execute_duplicateAppointmentTime_returnInvalid() {
+        ArrayList<Index> indexOne = new ArrayList<>();
+        indexOne.add(Index.fromZeroBased(0));
+        ArrayList<Index> indexTwo = new ArrayList<>();
+        indexTwo.add(Index.fromZeroBased(1));
+        ModelStubAcceptingAppointmentAdded modelTester = new ModelStubAcceptingAppointmentAdded();
+        modelTester.addPerson(new PersonBuilder().withName("ALICE").build());
+        modelTester.addPerson(new PersonBuilder().withName("BOB").build());
+        Command initialCommand = new AddAppCommand(
+                indexOne,
+                new Address("vivocity"),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
+                        LocalDateTime.of(2021, 1, 2, 10, 0)),
+                "Halloween Sales");
+        Command commandResult = new AddAppCommand(
+                indexTwo,
+                new Address("vivocity"),
+                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
+                        LocalDateTime.of(2021, 1, 2, 10, 0)),
+                "Halloween Sales");
+        try {
+            initialCommand.execute(modelTester);
+        } catch (CommandException e) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        assertThrows(CommandException.class, ()
+            -> commandResult.execute(modelTester));
+    }
 
     private class ModelStub implements Model {
         @Override
@@ -224,7 +254,7 @@ public class AddAppCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingAppointmentAdded extends AddAppCommandTest.ModelStub {
-        final ArrayList<Appointment> appointmentAdded = new ArrayList<>();
+        final ObservableList<Appointment> appointmentAdded = FXCollections.observableArrayList();
         final ObservableList<Person> personsAdded = FXCollections.observableArrayList();
 
         @Override
@@ -248,6 +278,11 @@ public class AddAppCommandTest {
         public void addAppointment(Appointment a) {
             requireNonNull(a);
             appointmentAdded.add(a);
+        }
+
+        @Override
+        public ObservableList<Appointment> getFilteredAppointmentList() {
+            return appointmentAdded;
         }
 
         @Override

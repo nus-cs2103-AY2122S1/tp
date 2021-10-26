@@ -14,8 +14,7 @@ public class TypicalAppointment {
     public static final Appointment ALICE_APPOINTMENT = new AppointmentBuilder()
             .withClient(ALICE)
             .withLocation("369 Tanjong Rhu")
-            .withDate("25-12-2021")
-            .withTime("2130")
+            .withTimePeriod("2021-12-25 10:00", "2021-12-25 11:00")
             .withDescription("Talk about sales")
             .build();
 
@@ -23,16 +22,14 @@ public class TypicalAppointment {
             .withClient(ALICE)
             .addClient(CARL)
             .withLocation("369 Tanjong Rhu")
-            .withDate("25-12-2021")
-            .withTime("2130")
+            .withTimePeriod("2021-12-25 10:00", "2021-12-25 11:00")
             .withDescription("Talk about sales")
             .build();
 
     public static final Appointment CARL_APPOINTMENT = new AppointmentBuilder()
             .withClient(CARL)
             .withLocation("vivocity")
-            .withDate("31-10-2021")
-            .withTime("1930")
+            .withTimePeriod("2021-12-25 10:00", "2021-12-25 11:00")
             .withDescription("Halloween Sales")
             .build();
 

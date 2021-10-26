@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ListAppCommand extends Command {
     public static final String COMMAND_WORD = "listApp";
 
-    public static final String MESSAGE_SUCCESS = "listed all appointments";
+    public static final String MESSAGE_SUCCESS = "Listed all Appointments";
 
     private final String sortBy;
 

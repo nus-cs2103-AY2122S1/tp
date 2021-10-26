@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalAppointment.ALICE_CARL_APPOINTMENT;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +18,11 @@ import seedu.address.model.person.Address;
 
 public class JsonAdaptedAppointmentTest {
     private static final String INVALID_LOCATION = null;
-    private static final String INVALID_DATE = null;
-    private static final String INVALID_TIME = null;
+    private static final String INVALID_TIME_PERIOD = null;
     private static final String INVALID_DESC = null;
 
     private static final String VALID_LOCATION = "vivocity";
-    private static final String VALID_DATE = "2021-01-01";
-    private static final String VALID_TIME = "20:30";
+    private static final String VALID_TIME_PERIOD = ""; // TODO Find out TimePeriod Json
     private static final String VALID_DESC = "Testing";
 
     @Test
@@ -48,20 +45,20 @@ public class JsonAdaptedAppointmentTest {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(
                         clients,
-                        INVALID_LOCATION, VALID_DATE, VALID_DESC, VALID_TIME);
+                        INVALID_LOCATION, VALID_TIME_PERIOD, VALID_DESC);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
     @Test
-    public void toModelType_invalidDate_returnsAppointment() {
+    public void toModelType_invalidTimePeriod_returnsAppointment() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(ALICE);
         List<JsonAdaptedPerson> clients = new ArrayList<>();
         clients.add(person);
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(
                         clients,
-                        VALID_LOCATION, INVALID_DATE, VALID_DESC, VALID_TIME);
+                        VALID_LOCATION, INVALID_TIME_PERIOD, VALID_DESC);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalDate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
@@ -74,21 +71,8 @@ public class JsonAdaptedAppointmentTest {
         JsonAdaptedAppointment appointment =
                 new JsonAdaptedAppointment(
                         clients,
-                        VALID_LOCATION, VALID_DATE, INVALID_DESC, VALID_TIME);
+                        VALID_LOCATION, VALID_TIME_PERIOD, INVALID_DESC);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidTime_returnsAppointment() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(ALICE);
-        List<JsonAdaptedPerson> clients = new ArrayList<>();
-        clients.add(person);
-        JsonAdaptedAppointment appointment =
-                new JsonAdaptedAppointment(
-                        clients,
-                        VALID_LOCATION, VALID_DATE, VALID_DESC, INVALID_TIME);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LocalTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 }

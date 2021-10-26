@@ -36,9 +36,9 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label date;
+    private Label startDateTime; // Changed from Date
     @FXML
-    private Label time;
+    private Label endDateTime; // Changed from time
     /**
      * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
      */
@@ -48,8 +48,8 @@ public class AppointmentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(appointment.getDescription());
         address.setText(appointment.getLocation().value);
-        date.setText(appointment.getDate().toString());
-        time.setText(appointment.getTime().toString());
+        startDateTime.setText(appointment.getTimePeriod().getStartDateTime().toString()); // Changed from date.setText
+        endDateTime.setText(appointment.getTimePeriod().getStartDateTime().toString()); // Changed from time.setText
 
         UniquePersonList clients = appointment.getClients();
         PersonListPanel clientsDetail = new PersonListPanel(clients.asUnmodifiableObservableList());

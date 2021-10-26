@@ -188,8 +188,8 @@ public class ModelManager implements Model {
 
     @Override
     public void sortFilteredAppointmentList(String sortBy) {
-        if (sortBy.equals("Date")) {
-            schedule.sortAppointmentByDate();
+        if (sortBy.equals("DateTime")) {
+            schedule.sortAppointmentByTimePeriod();
         } else if (sortBy.equals("Description")) {
             schedule.sortAppointmentByDescription();
         }
