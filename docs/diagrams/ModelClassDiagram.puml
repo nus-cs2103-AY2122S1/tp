@@ -22,7 +22,12 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Appointment
+Class Revenue
+Class Note
 Class Tag
+Class Claim
+Class Insurance
 
 }
 
@@ -44,7 +49,12 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Appointment
+Person *--> Revenue
+Person *--> Note
+Person *--> "*" Insurance
 Person *--> "*" Tag
+Person *--> "*" Claim
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

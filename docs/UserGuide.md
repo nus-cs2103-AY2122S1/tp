@@ -196,7 +196,7 @@ Examples:
 * `schedule 5 m/05-Dec-2021 20:00`
 
 
-### Adding Revenue: `revenue` 
+### Adding Revenue: `revenue`
 
 
 Adds revenue earned from an existing person in the address book.
@@ -216,7 +216,7 @@ Examples:
 * `revenue 1 r/100.95` will update the revenue of first person in the contact list to be `100.95`. (Assuming revenue of
 the first person in the contact list was 0).
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` (Assuming Betsy Crowe is
-the second person in the contact list) followed by `revenue 2 r/350` and followed by `revenue 2 r/-100.11` will update the 
+the second person in the contact list) followed by `revenue 2 r/350` and followed by `revenue 2 r/-100.11` will update the
 revenue of Betsy Crowe to be `249.89`.
 
 

@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -234,10 +234,107 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+###  Claims feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Current Implementation
+{:.no_toc}
 
+The processing of a claim command from the user can be split into 2 general steps:
+1. Parsing the user input into a `ClaimCommand`
+2. Executing the `ClaimCommand`
+Each step will be described in the sections below.
+
+**Step 1:** Parsing of user input
+
+Parsing of the user input is primarily handled by the `ClaimCommandParser` which calls other helper classes to
+parse the text into the data classes `Title`, `Description` and `Status`
+
+<img src="images/ClaimCommandParserSequenceDiagram.png" width="800" />
+
+`ClaimCommandParser` uses the parsed data classes to create an `EditClaimDescriptor`. It does not create a `Claim` at
+this stage because the user input could be giving an incomplete description of a `Claim` with missing fields. These
+missing fields imply that the user wants to edit or delete an existing claim. The difference between a `Claim` and
+`EditClaimDescriptor` can be seen in the class diagram below.
+
+<img src="images/ClaimEditClaimDescriptorClassDiagram.png" width="300" />
+
+**Step 2:** Executing the ClaimCommand
+
+<img src="images/ClaimCommandExecuteActivityDiagram.png" width="400" />
+
+There are 3 possible outcomes from the execution of a ClaimCommand.
+1. Add a new claim to the client
+2. Edit an existing claim of the client
+3. Delete an existing claim of the client
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding, editing and deleting claims
+
+* **Alternative 1 (Current choice):** One ‘claim’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 2:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
+#### Future Improvements
+{:.no_toc}
+
+* A Java HashSet may not be the most appropriate data structure to store claims since it is unable to find a claim
+  in O(1) time. Instead, a HashMap may be more appropriate, using the claim title as key.
+* Currently, there is no relationship between Claim and EditClaimDescriptor. This means that any future changes
+  to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should
+  both extend from an abstract class to ensure that any future modification would not lead to regressions.
+
+###  Schedule appointment feature
+
+#### Current Implementation
+{:.no_toc}
+
+An appointment with a client is currently represented by the `appointment` field under `Person`,
+which is represented by an `Appointment` object.
+
+The `Appointment` object contains a `LocalDateTime` field called `appointmentTime` which represents the time that
+the appointment with is scheduled for. An empty appointment is represented when `appointmentTime` is set to `null`.
+
+<img src="images/ScheduleAppointmentClassDiagram.png" width="400" />
+
+The processing of a schedule command from the user can be split into 2 general steps:
+1. Parsing the user input into a `ScheduleCommand`
+2. Executing the `ScheduleCommand`
+
+Each step will be described in the sections below.
+
+**Step 1:** Parsing of user input
+
+Parsing of the user input is primarily handled by the `ScheduleCommandParser` which calls other helper classes to
+parse the text into the data classes `Index` and `Appointment`.
+
+<img src="images/ScheduleCommandParserSequenceDiagram.png" width="800" />
+
+`ScheduleCommandParser` then creates a `ScheduleCommand` using the `Index` and `Appointment` objects created.
+
+**Step 2:** Executing the ScheduleCommand
+
+<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="400" />
+
+There are 3 possible outcomes from the execution of a ScheduleCommand.
+1. Schedule a new appointment with the client
+2. Reschedule an appointment with the client
+3. Delete an existing appointment with the client
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding, editing and deleting appointments
+
+* **Alternative 1 (Current choice):** One ‘schedule’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 2:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -421,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: Add reveneue to a client**
+**Use case: Add revenue to a client**
 
 **MSS**
 

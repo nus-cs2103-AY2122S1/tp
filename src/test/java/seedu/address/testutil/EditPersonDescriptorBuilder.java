@@ -1,9 +1,12 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Money;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -12,8 +15,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -38,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setRevenue(person.getRevenue());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setInsurances(person.getInsurances());
@@ -69,6 +73,14 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Revenue} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRevenue(String revenue) {
+        Money money = new Money(Float.valueOf(revenue));
+        descriptor.setRevenue(new Revenue(money));
+        return this;
+    }
+    /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
@@ -90,9 +102,8 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code insurances} into a {@code Set<Insurance>} and set it to the
      * {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withInsurances(String... insurances) {
-        Set<Insurance> insuranceSet = Stream.of(insurances)
-                .map(SampleDataUtil::ofValidInsurance).collect(Collectors.toSet());
+    public EditPersonDescriptorBuilder withInsurances(Insurance... insurances) {
+        Set<Insurance> insuranceSet = new HashSet<>(Arrays.asList(insurances));
         descriptor.setInsurances(insuranceSet);
         return this;
     }
