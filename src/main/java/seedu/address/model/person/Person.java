@@ -27,16 +27,17 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Description description;
+    private final Boolean isImportant;
 
     // TaskList
-    private final List<Task> tasks = new ArrayList<Task>();
+    private final List<Task> tasks = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Task> tasks,
-                  Description description) {
-        requireAllNonNull(name, phone, email, address, tags, tasks, description);
+                  Description description, boolean isImportant) {
+        requireAllNonNull(name, phone, email, address, tags, tasks, description, isImportant);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +45,7 @@ public class Person implements Comparable<Person> {
         this.tags.addAll(tags);
         this.tasks.addAll(tasks);
         this.description = description;
+        this.isImportant = isImportant;
     }
 
     public Name getName() {
@@ -62,6 +64,10 @@ public class Person implements Comparable<Person> {
         return address;
     }
 
+    public boolean isImportant() {
+        return isImportant;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -76,6 +82,32 @@ public class Person implements Comparable<Person> {
      */
     public List<Task> getTasks() {
         return Collections.unmodifiableList(tasks);
+    }
+
+    /**
+     * Returns the number of tasks that are overdue.
+     */
+    public int getOverdueTasks() {
+        int count = 0;
+        for (Task task : tasks) {
+            if (task.getIsOverdue()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Returns the number of tasks that are due soon.
+     */
+    public int getSoonDueTasks() {
+        int count = 0;
+        for (Task task : tasks) {
+            if (task.getIsDueSoon()) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public Description getDescription() {
@@ -93,6 +125,15 @@ public class Person implements Comparable<Person> {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public static boolean isValidImportance(String input) {
+        String lowerCaseInput = input.toLowerCase();
+        return lowerCaseInput.equals("true") || lowerCaseInput.equals("false");
     }
 
     /**
@@ -115,13 +156,14 @@ public class Person implements Comparable<Person> {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getDescription().equals(getDescription());
+                && otherPerson.getDescription().equals(getDescription())
+                && otherPerson.isImportant() == isImportant();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, tasks, description);
+        return Objects.hash(name, phone, email, address, tags, tasks, description, isImportant);
     }
 
     @Override
@@ -134,7 +176,6 @@ public class Person implements Comparable<Person> {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress());
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

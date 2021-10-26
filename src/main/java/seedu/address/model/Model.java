@@ -4,9 +4,11 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 
 /**
  * The API of the Model component.
@@ -106,6 +108,13 @@ public interface Model {
     void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate);
 
     void updateSortedPersonList(boolean isReverseOrder);
+
+    void displayFilteredTaskList(Predicate<Task> predicate);
+
+    /** Gets important statistics information relating to tasks. */
+    ObservableList<PieChart.Data> getStatistics();
+
+    TaskListManager getTaskListManager();
 
     /**
      * Get the next input command in the cache.

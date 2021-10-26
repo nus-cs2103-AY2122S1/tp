@@ -66,9 +66,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_TASK_INDEX + "2 "
-            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_TASK_INDEX + " 2 "
+            + PREFIX_TASK_DESCRIPTION + " Assignment Discussion";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -143,7 +143,9 @@ public class EditCommand extends Command {
             tasks.set(targetTaskIndex.getZeroBased(), editedTask);
             editedPerson = new Person(
                     editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
-                    editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription());
+                    editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
+                    editedPerson.isImportant()
+            );
         }
         // If the edited details result in a duplicate person, throw an exception.
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -168,9 +170,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
         List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
+        Boolean updatedisImportant = editPersonDescriptor.getImportance().orElse(personToEdit.isImportant());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, tasks,
-                updatedDescription);
+                updatedDescription, updatedisImportant);
     }
 
     private static Task createEditedTask(Task taskToEdit, EditTaskCommand.EditTaskDescriptor editTaskDescriptor) {
@@ -224,6 +227,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Description description;
         private List<Task> tasks;
+        private Boolean isImportant;
 
         public EditPersonDescriptor() {}
 
@@ -239,13 +243,14 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setDescription(toCopy.description);
             setTasks(toCopy.tasks);
+            setImportance(toCopy.isImportant);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description, isImportant);
         }
 
         public void setName(Name name) {
@@ -294,7 +299,14 @@ public class EditCommand extends Command {
 
         public Optional<List<Task>> getTasks() {
             return Optional.ofNullable(tasks);
+        }
 
+        public void setImportance(Boolean isImportant) {
+            this.isImportant = isImportant;
+        }
+
+        public Optional<Boolean> getImportance() {
+            return Optional.ofNullable(isImportant);
         }
 
         /**

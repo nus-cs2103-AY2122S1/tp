@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -17,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 import seedu.address.storage.Storage;
 
 /**
@@ -109,5 +111,15 @@ public class LogicManager implements Logic {
     @Override
     public void displayPersonTaskList(Person person) {
         model.displayPersonTaskList(person);
+    }
+
+    /** Gets important statistics information relating to tasks. */
+    @Override
+    public ObservableList<PieChart.Data> getStatistics() {
+        return model.getStatistics();
+    }
+
+    public TaskListManager getTaskListManager() {
+        return model.getTaskListManager();
     }
 }

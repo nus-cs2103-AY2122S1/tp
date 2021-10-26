@@ -27,11 +27,13 @@ public class AddressBookInternalParser {
     public Command parseCommand(String internalCommandString) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(internalCommandString.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_INTERNAL_COMMAND_FORMAT));
+            throw new ParseException(MESSAGE_INVALID_INTERNAL_COMMAND_FORMAT);
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        // Coded as switch to ensure ease expansion
         switch (commandWord) {
 
         case AccessCacheCommand.COMMAND_WORD:

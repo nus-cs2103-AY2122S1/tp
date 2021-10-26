@@ -107,11 +107,14 @@ Format: sort [-r]
 
 Adds a person to ContactSH.
 
-Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-d Description] [-l LABEL]…​`
+Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-d Description] [-l LABEL]... [-impt IMPORTANCE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of labels (including 0)
 </div>
+
+Notes:
+*`IMPORTANCE` is either "true" or "false" (Case insensitive)
 
 Examples:
 * `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`
@@ -127,7 +130,7 @@ Format: `list`
 
 Edits an existing person in ContactSH.
 
-Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l LABEL]…​`
+Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION] [-l LABEL]… [-impt IMPORTANCE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -135,6 +138,7 @@ Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-d DESCRIPTION
 * When editing labels, the existing labels of the person will be removed i.e adding of labels is not cumulative.
 * You can remove all the person’s labels by typing `-l ` without
     specifying any labels after it.
+* `IMPORTANCE` is either "true" or "false" (Case insensitive)
 
 Examples:
 * `edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
