@@ -78,11 +78,6 @@ public interface Model {
     boolean hasEvent(Event event);
 
     /**
-     * Searches the eventList and return the {@code event} if it exists in the address book.
-     */
-    Event getEvent(EventName eventName) throws CommandException;
-
-    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

@@ -199,6 +199,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void toPersonListTest_fails() throws CommandException {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
+                .withPerson(BENSON).withPerson(CARL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        ArrayList<Person> expected = new ArrayList<>();
+        expected.add(ALICE);
+        expected.add(BENSON);
+
+        ResidentList listWithName = new ResidentList("Alice Pauline, Benson Meier, Jackson");
+        assertThrows(CommandException.class, () -> modelManager.toPersonList(listWithName));
+    }
+
+    @Test
     public void getCurrentResidentsTest() throws CommandException {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
                 .withPerson(BENSON).withPerson(CARL).build();
@@ -212,6 +227,21 @@ public class ModelManagerTest {
         ResidentList list = new ResidentList("Alice Pauline, Benson Meier");
         ArrayList<Person> personList = modelManager.getCurrentEventResidents(list);
         assertEquals(personList, expected);
+    }
+
+    @Test
+    public void getCurrentResidentsTest_fails() throws CommandException {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
+                .withPerson(BENSON).withPerson(CARL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        ArrayList<Person> expected = new ArrayList<>();
+        expected.add(ALICE);
+        expected.add(BENSON);
+
+        ResidentList list = new ResidentList("Alice Pauline, Benson Meier, Jackson");
+        assertThrows(CommandException.class, () -> modelManager.getCurrentEventResidents(list));
     }
 
     @Test

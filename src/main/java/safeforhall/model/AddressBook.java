@@ -139,7 +139,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 }
             }
         } else {
-            throw new CommandException("Information is not room or name");
+            throw new CommandException("Information is neither a room or name");
         }
         return Optional.empty();
     }

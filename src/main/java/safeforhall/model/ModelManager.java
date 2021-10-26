@@ -161,17 +161,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Event getEvent(EventName eventName) throws CommandException {
-        requireNonNull(eventName);
-        Optional<Event> eventOptional = addressBook.findEvent(eventName);
-        if (eventOptional.isEmpty()) {
-            throw new CommandException(eventName + " not found");
-        } else {
-            return eventOptional.get();
-        }
-    }
-
-    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

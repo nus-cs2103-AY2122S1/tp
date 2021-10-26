@@ -34,7 +34,7 @@ public class DeleteEventCommand extends Command {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
         List<Event> targetEventsArray = new ArrayList<>();
-        String deletedEvents = "";
+        StringBuilder deletedEvents = new StringBuilder();
         int count = 0;
 
         for (Index targetIndex : targetIndexArray) {
@@ -46,12 +46,12 @@ public class DeleteEventCommand extends Command {
         }
 
         for (Event eventToDelete : targetEventsArray) {
-            deletedEvents += ((count + 1) + ".\t" + eventToDelete.getEventName() + "\n");
+            deletedEvents.append(count + 1).append(".\t").append(eventToDelete.getEventName()).append("\n");
             model.deleteEvent(eventToDelete);
             count++;
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvents));
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvents.toString()));
     }
 
     @Override

@@ -1,6 +1,9 @@
 package safeforhall;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -16,6 +19,23 @@ public class AppParametersTest {
 
     private final ParametersStub parametersStub = new ParametersStub();
     private final AppParameters expected = new AppParameters();
+
+    @Test
+    public void checkEquals() {
+        assertEquals(expected, expected);
+        assertNotEquals(expected, 1);
+    }
+
+    @Test
+    public void checkHashCode() {
+        try {
+            parametersStub.namedParameters.put("config", "config.json");
+            expected.setConfigPath(Paths.get("config.json"));
+            expected.hashCode();
+        } catch (NoSuchMethodError e) {
+            fail();
+        }
+    }
 
     @Test
     public void parse_validConfigPath_success() {

@@ -3,6 +3,7 @@ package safeforhall.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static safeforhall.testutil.Assert.assertThrows;
 import static safeforhall.testutil.TypicalEvents.BASKETBALL;
 import static safeforhall.testutil.TypicalEvents.ROAD_RELAY;
@@ -10,6 +11,7 @@ import static safeforhall.testutil.TypicalPersons.ALICE;
 import static safeforhall.testutil.TypicalPersons.BENSON;
 import static safeforhall.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.nio.file.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -117,6 +119,16 @@ public class AddressBookTest {
     public void findPersonFailure() throws CommandException {
         assertEquals(Optional.empty(), addressBook.findPerson("A401"));
         assertEquals(Optional.empty(), addressBook.findPerson("Johnny Lim"));
+        assertThrows(CommandException.class, () -> addressBook.findPerson("T12"));
+    }
+
+    @Test
+    public void checkHashCode() {
+        try {
+            addressBook.hashCode();
+        } catch (NoSuchMethodError e) {
+            fail();
+        }
     }
 
     /**
