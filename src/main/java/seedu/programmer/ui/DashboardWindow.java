@@ -25,7 +25,7 @@ public class DashboardWindow extends PopupWindow {
     private static final String FXML = "DashboardWindow.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
     private Logic logic;
-    private TreeMap<ClassId, Integer> labsMarkedMap;
+    private TreeMap<ClassId, Integer> labsUnmarkedMap;
 
     @FXML
     private StackPane overallStatsPlaceholder;
@@ -56,30 +56,10 @@ public class DashboardWindow extends PopupWindow {
     private void fillOverallStats() {
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
         ObservableList<Student> stuList = readOnlyPE.getStudentList();
-        labsMarkedMap = new TreeMap<>(new SortClassId());
-        HashSet<ClassId> classes = new HashSet<>();
-        for (Student s: stuList) {
-            classes.add(s.getClassId());
-        }
-
-        for (ClassId cid : classes) {
-            if (!labsMarkedMap.containsKey(cid)) {
-                labsMarkedMap.put(cid, 0);
-            }
-        }
-
-        for (Student s : stuList) {
-            ObservableList<Lab> stuLabs = s.getLabList();
-            for (Lab l : stuLabs) {
-                if (!l.isMarked()) {
-                    ClassId cid = s.getClassId();
-                    labsMarkedMap.put(cid, labsMarkedMap.get(cid) + 1);
-                }
-            }
-        }
-
+        HashSet<ClassId> classList = fillClassList(stuList);
+        labsUnmarkedMap = fillLabsUnmarkedMap(classList, stuList);
         int numStudents = stuList.size();
-        int numClasses = classes.size();
+        int numClasses = classList.size();
         int numLabs = stuList.size() > 0 ? stuList.get(0).getLabList().size() : 0;
 
         String dataToDisplay = formatDataToDisplay(numStudents, numClasses, numLabs);
@@ -89,8 +69,34 @@ public class DashboardWindow extends PopupWindow {
         overallStatsPlaceholder.getChildren().add(label);
     }
 
+    private HashSet<ClassId> fillClassList(ObservableList<Student> stuList) {
+        HashSet<ClassId> classList = new HashSet<>();
+        stuList.forEach(s -> classList.add(s.getClassId()));
+        return classList;
+    }
+
+    private TreeMap<ClassId, Integer> fillLabsUnmarkedMap(HashSet<ClassId> classList, ObservableList<Student> stuList) {
+        TreeMap<ClassId, Integer> labsUnmarkedMap = new TreeMap<>(new SortClassId());
+        for (ClassId cid : classList) {
+            if (!labsUnmarkedMap.containsKey(cid)) {
+                labsUnmarkedMap.put(cid, 0);
+            }
+        }
+
+        for (Student s : stuList) {
+            ObservableList<Lab> stuLabs = s.getLabList();
+            for (Lab l : stuLabs) {
+                if (!l.isMarked()) {
+                    ClassId cid = s.getClassId();
+                    labsUnmarkedMap.put(cid, labsUnmarkedMap.get(cid) + 1);
+                }
+            }
+        }
+        return labsUnmarkedMap;
+    }
+
     void fillLabsMarked() {
-        String labsMarked = formatLabsToDisplay(labsMarkedMap);
+        String labsMarked = formatLabsToDisplay(labsUnmarkedMap);
         Label labsLabel = new Label(labsMarked);
         labsLabel.getStylesheets().add("view/Dashboard.css");
         labsLabel.getStyleClass().add("labs-marked");
