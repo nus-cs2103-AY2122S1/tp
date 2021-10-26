@@ -129,6 +129,7 @@ The table below explains some technical terms that you may come across throughou
 
 | Term | Definition |
 |:---:|:----:|
+| CLI | The Command-Line Interface (CLI) is the user interface in which Sellah is based on. Unlike traditional Graphical User Interface (GUI) base applications, it may be less intuitive to new users. However upon familiarisation, fast typists may find it faster to use. |
 | Command | Keywords that Sellah recognises to invoke specific commands. |
 | Parameters | Information to be passed to the Commands. |
 | Index | The number next to the list of [Clients](#323-defining-client-and-product) or [Products](#323-defining-client-and-product). |
@@ -144,7 +145,7 @@ The table below explains the general syntax used throughout the user guide.
 |`UPPER_CASE` | Name of the parameter. For example, `EMAIL` is a parameter named email. |
 |`-lower_case UPPER_CASE` | A parameter field. The name of the parameter is defined in `UPPER_CASE` and `-lower_case` refers to an acronym of `UPPER_CASE`. An example can be `-e abc@gmail.com`.|
 |`[-lower_case UPPER_CASE]` | An optional parameter field. Eg `-a A [-b B]` can be used as `-a A -b B` or just `-a A`.|
-|:bulb: | An light bulb indicates that the following text is a tip. |
+| :bulb: | An light bulb indicates that the following text is a tip. |
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-pn PHONE_NUMBER -e EMAIL`, then `-e EMAIL -pn PHONE_NUMBER` is also acceptable.
