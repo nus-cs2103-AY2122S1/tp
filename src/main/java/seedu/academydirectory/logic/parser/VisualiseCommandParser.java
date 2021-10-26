@@ -14,6 +14,6 @@ public class VisualiseCommandParser implements Parser<VisualiseCommand> {
      */
     @Override
     public VisualiseCommand parse(String userInput) throws ParseException {
-        return null;
+        return new VisualiseCommand();
     }
 }
