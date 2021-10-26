@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_DONE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMAIL_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMPLOYMENT_TYPE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPECTED_SALARY_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPERIENCE_SYNTAX;
-import static seedu.address.logic.parser.PrefixSyntax.PREFIX_DONE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_INTERVIEW_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_LEVEL_OF_EDUCATION_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_NAME_SYNTAX;
