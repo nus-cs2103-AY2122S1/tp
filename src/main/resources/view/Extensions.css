@@ -3,11 +3,6 @@
     -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
 }
 
-.positive {
-    -fx-background-radius: 10;
-    -fx-background-color: #6ce1ff;
-}
-
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
     -fx-background: #383838;

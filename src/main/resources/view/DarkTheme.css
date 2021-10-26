@@ -102,7 +102,9 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-radius: 15;
+    -fx-background-radius: 20;
+    -fx-border-color: #383838;
+    -fx-border-width: 3;
 }
 
 .list-cell:filled:even {
@@ -119,7 +121,7 @@
 
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-width: 3;
 }
 
 .list-cell .label {
@@ -308,8 +310,14 @@
     -fx-font-family: "Open Sans";
     -fx-font-size: 9pt;
     -fx-text-fill: white;
-    -fx-text-alignment: center
-    -fx-padding 0 10 0 10;
+    -fx-text-alignment: center;
+    -display: inline-block;
+    -fx-padding: 0 4 0 4;
+}
+
+.studentValuePositive {
+    -fx-background-color: #478D54 !important;
+    -fx-background-radius: 5 !important;
 }
 
 #cardPane {
@@ -387,27 +395,17 @@
     -fx-text-fill: white;
 }
 
-#taskType {
-    -fx-text-fill: white;
-    -fx-background-color: #fc3dc9;
-    -fx-padding: 2 4 2 4;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-font-size: 11;
+.taskType {
+    -fx-background-color: #fc3dc9 !important;
 }
 
-#priorityLabel {
-    -fx-text-fill: white;
-    -fx-background-color: #e0883a;
-    -fx-padding: 2 4 2 4;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-font-size: 11;
+.priorityLabel {
+    -fx-background-color: #e0883a !important;
 }
 
-#studentGroupContainer .label {
+.studentGroupLabel {
     -fx-text-fill: white;
-    -fx-background-color: #7c4dab;
+    -fx-background-color: #7c4dab !important;
     -fx-padding: 2 4 2 4;
     -fx-border-radius: 10;
     -fx-background-radius: 10;

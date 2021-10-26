@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * A UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends UiPart<Region> {
 
@@ -43,8 +43,6 @@ public class StudentCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private VBox studentValuesContainer;
-    @FXML
-    private FlowPane studentGroupContainer;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -57,7 +55,9 @@ public class StudentCard extends UiPart<Region> {
         email.setText("Email: " + student.getEmail().value);
         studentNumber.setText("Student Number: " + student.getStudentNumber().toString());
         if (!student.getGroupName().toString().contentEquals("-")) {
-            studentGroupContainer.getChildren().add(new Label(student.getGroupName().toString()));
+            Label studentGrp = new Label("Group: " + student.getGroupName().toString());
+            tags.getChildren().add(studentGrp);
+            studentGrp.getStyleClass().add("studentGroupLabel");
         }
 
         studentValuesContainer.getChildren().addAll(

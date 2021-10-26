@@ -22,7 +22,7 @@ import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentGroupCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.AddTodoTaskCommand;
-import seedu.address.logic.commands.ClearAllTasksCommand;
+import seedu.address.logic.commands.ClearTasksCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
@@ -64,7 +64,7 @@ public class HelpWindow extends UiPart<Stage> {
             new CommandCell(DeleteTaskCommand.COMMAND_WORD, DeleteTaskCommand.MESSAGE_USAGE),
             new CommandCell(EditTaskCommand.COMMAND_WORD, EditTaskCommand.MESSAGE_USAGE),
             new CommandCell(MarkTaskDoneCommand.COMMAND_WORD, MarkTaskDoneCommand.MESSAGE_USAGE),
-            new CommandCell(ClearAllTasksCommand.COMMAND_WORD, "Clears all tasks from the task list"),
+            new CommandCell(ClearTasksCommand.COMMAND_WORD, "Clears all tasks from the task list"),
             new CommandCell(ListGroupCommand.COMMAND_WORD, "lists all groups"),
             new CommandCell(AddGroupCommand.COMMAND_WORD, AddGroupCommand.MESSAGE_USAGE),
             new CommandCell(AddGithubGroupCommand.COMMAND_WORD, AddGithubGroupCommand.MESSAGE_USAGE),
