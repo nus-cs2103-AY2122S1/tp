@@ -282,7 +282,7 @@ Examples:
 
 #### Marking attendance of members : `mark`
 
-Marks attendance of members listed as present.
+Marks attendance of members listed as present using a tick.
 
 Format: `mark INDEX/INDICES`
 
@@ -291,18 +291,27 @@ Format: `mark INDEX/INDICES`
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
 
+Examples: 
+
+* `mark 1 2 3` marks the attendance of the members at indices
+1, 2 and 3 in the displayed list a present.
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Unmarking attendance of members: `unmark`
 
-Unmarks attendance of members marked as present.
+Unmarks attendance of members marked as present by using a cross.
 
 Format `unmark INDEX/INDICES`
 
-* Unmarks the members at the specified `INDEX/INDICES` in the members list as absent.
+* Unmarks the members at the specified `INDEX/INDICES` in the members list as not present.
 * `INDEX` refers to the index number/position of the member in the displayed members list.
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+Examples:
+* `unmark 1 2` unmarks the attendance of members at indices 1 and 2
+as not present.
 
 [Back to Table of Contents](#table-of-contents)
 
