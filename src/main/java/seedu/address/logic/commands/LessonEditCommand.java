@@ -147,8 +147,8 @@ public class LessonEditCommand extends UndoableCommand {
         if (!editLessonDescriptor.isCancelledDatesEdited()) {
             return lessonBeforeUpdateCancelledDates;
         }
-        Set<Date> datesToCancel = new HashSet<>(editLessonDescriptor.getCancelledDates().orElse(new HashSet<>()));
-        Set<Date> datesToUncancel = new HashSet<>(editLessonDescriptor.getUncancelledDates().orElse(new HashSet<>()));
+        Set<Date> datesToCancel = new HashSet<>(editLessonDescriptor.getCancelDates().orElse(new HashSet<>()));
+        Set<Date> datesToUncancel = new HashSet<>(editLessonDescriptor.getUncancelDates().orElse(new HashSet<>()));
 
         Set<Date> updatedCancelledDates = createUpdatedCancelledDates(lessonBeforeUpdateCancelledDates, datesToCancel,
                 datesToUncancel);
@@ -175,8 +175,8 @@ public class LessonEditCommand extends UndoableCommand {
         datesToCancel.removeAll(duplicates);
         datesToUncancel.removeAll(duplicates);
 
-        validateCancelledDates(lesson, datesToCancel);
-        validateUncancelledDates(updatedCancelledDates, datesToUncancel);
+        validateCancelDates(lesson, datesToCancel);
+        validateUncancelDates(updatedCancelledDates, datesToUncancel);
         updatedCancelledDates.addAll(datesToCancel);
         updatedCancelledDates.removeAll(datesToUncancel);
 
@@ -191,7 +191,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToCancel A set of dates to cancel.
      * @throws CommandException If the date to cancel is invalid.
      */
-    private static void validateCancelledDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
+    private static void validateCancelDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
         assert lesson != null;
         for (Date date : datesToCancel) {
             // check if date is a lesson date
@@ -208,7 +208,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToUncancel A set of dates to remove from cancelled dates.
      * @throws CommandException If the date to uncancel is invalid.
      */
-    private static void validateUncancelledDates(Set<Date> cancelledDates, Set<Date> datesToUncancel)
+    private static void validateUncancelDates(Set<Date> cancelledDates, Set<Date> datesToUncancel)
             throws CommandException {
         for (Date date : datesToUncancel) {
             // check if date is a cancelled date
@@ -289,8 +289,8 @@ public class LessonEditCommand extends UndoableCommand {
         private Subject subject;
         private Set<Homework> homeworkSet;
         private LessonRates rate;
-        private Set<Date> cancelledDates;
-        private Set<Date> uncancelledDates;
+        private Set<Date> cancelDates;
+        private Set<Date> uncancelDates;
 
 
         // Absence of isRecurring boolean field as changes to type of lesson is disallowed.
@@ -307,20 +307,20 @@ public class LessonEditCommand extends UndoableCommand {
             setSubject(toCopy.subject);
             setHomeworkSet(toCopy.homeworkSet);
             setRate(toCopy.rate);
-            setCancelledDates(toCopy.cancelledDates);
-            setUncancelledDates(toCopy.uncancelledDates);
+            setCancelDates(toCopy.cancelDates);
+            setUncancelDates(toCopy.uncancelDates);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate, cancelledDates,
-                    uncancelledDates);
+            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate, cancelDates,
+                    uncancelDates);
         }
 
         public boolean isCancelledDatesEdited() {
-            return CollectionUtil.isAnyNonNull(cancelledDates, uncancelledDates);
+            return CollectionUtil.isAnyNonNull(cancelDates, uncancelDates);
         }
 
         public Optional<Date> getDate() {
@@ -374,24 +374,24 @@ public class LessonEditCommand extends UndoableCommand {
             this.rate = rate;
         }
 
-        public Optional<Set<Date>> getCancelledDates() {
-            return (cancelledDates != null)
-                    ? Optional.of(Collections.unmodifiableSet(cancelledDates))
+        public Optional<Set<Date>> getCancelDates() {
+            return (cancelDates != null)
+                    ? Optional.of(Collections.unmodifiableSet(cancelDates))
                     : Optional.empty();
         }
 
-        public void setCancelledDates(Set<Date> cancelledDates) {
-            this.cancelledDates = (cancelledDates != null) ? new HashSet<>(cancelledDates) : null;
+        public void setCancelDates(Set<Date> cancelDates) {
+            this.cancelDates = (cancelDates != null) ? new HashSet<>(cancelDates) : null;
         }
 
-        public Optional<Set<Date>> getUncancelledDates() {
-            return (uncancelledDates != null)
-                    ? Optional.of(Collections.unmodifiableSet(uncancelledDates))
+        public Optional<Set<Date>> getUncancelDates() {
+            return (uncancelDates != null)
+                    ? Optional.of(Collections.unmodifiableSet(uncancelDates))
                     : Optional.empty();
         }
 
-        public void setUncancelledDates(Set<Date> uncancelledDates) {
-            this.uncancelledDates = (uncancelledDates != null) ? new HashSet<>(uncancelledDates) : null;
+        public void setUncancelDates(Set<Date> uncancelDates) {
+            this.uncancelDates = (uncancelDates != null) ? new HashSet<>(uncancelDates) : null;
         }
 
         @Override
@@ -414,8 +414,8 @@ public class LessonEditCommand extends UndoableCommand {
                     && getSubject().equals(e.getSubject())
                     && getHomeworkSet().equals(e.getHomeworkSet())
                     && getRate().equals(e.getRate())
-                    && getUncancelledDates().equals(e.getUncancelledDates())
-                    && getCancelledDates().equals(e.getCancelledDates());
+                    && getUncancelDates().equals(e.getUncancelDates())
+                    && getCancelDates().equals(e.getCancelDates());
         }
     }
 }

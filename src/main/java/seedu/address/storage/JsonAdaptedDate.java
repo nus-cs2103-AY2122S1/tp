@@ -29,7 +29,7 @@ class JsonAdaptedDate {
     }
 
     @JsonValue
-    public String getvalue() {
+    public String getValue() {
         return value;
     }
 

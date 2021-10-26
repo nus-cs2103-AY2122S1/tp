@@ -74,9 +74,9 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             editLessonDescriptor.setRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
         }
         parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_CANCEL))
-                .ifPresent(editLessonDescriptor::setCancelledDates);
+                .ifPresent(editLessonDescriptor::setCancelDates);
         parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_UNCANCEL))
-                .ifPresent(editLessonDescriptor::setUncancelledDates);
+                .ifPresent(editLessonDescriptor::setUncancelDates);
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(LessonEditCommand.MESSAGE_NOT_EDITED);
@@ -113,9 +113,9 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         if (dates.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> homeworkSet = dates.size() == 1 && dates.contains("")
+        Collection<String> dateSet = dates.size() == 1 && dates.contains("")
                 ? Collections.emptySet()
                 : dates;
-        return Optional.of(ParserUtil.parseDates(homeworkSet));
+        return Optional.of(ParserUtil.parseDates(dateSet));
     }
 }

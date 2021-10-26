@@ -53,6 +53,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         this.homework.addAll(homework);
         this.lessonRates = rates;
         if (!isRecurring()) {
+            // non-recurring lesson should have maximum one cancelled date
             assert cancelledDates.size() <= 1;
         }
         this.cancelledDates.addAll(cancelledDates);
