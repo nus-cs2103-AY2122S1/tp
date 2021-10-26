@@ -146,7 +146,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 * `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).<br>
 
-* A student can have any number of remarks (including 0).<br>
+* A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.<br>
 
 </div>
 
@@ -206,6 +206,7 @@ Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/E
 * You can edit any number of fields.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** `1`, `2`, `3`, …
+* You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.<br>
 * Entering the command `edit r/` will remove all remarks that is currently attached to the student
 * **Note that if you change a student's grade, TuitiONE will unenroll the student from all the classes he or she was previously taking in the previous grade**.
 
@@ -229,6 +230,7 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
 * Both indexes **must be a positive integer** `1`, `2`, `3`, …
+* Students can only be enrolled to a **maximum of 10 lessons**.
 
 Example(s):
 

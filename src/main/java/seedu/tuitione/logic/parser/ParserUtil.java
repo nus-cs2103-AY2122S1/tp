@@ -41,6 +41,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_TIME = "Time formatting is invalid.";
     public static final String MESSAGE_INVALID_DAY = "Day formatting is invalid.";
     public static final String MESSAGE_INVALID_COST_NOT_NUMBER = "Cost formating is invalid, it is not a number.";
+    public static final int LIMIT_REMARK = 5;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -152,6 +153,9 @@ public class ParserUtil {
         requireNonNull(remarks);
         final Set<Remark> remarkSet = new HashSet<>();
         for (String remarkName : remarks) {
+            if (remarkSet.size() == LIMIT_REMARK) {
+                break;
+            }
             remarkSet.add(parseRemark(remarkName));
         }
         return remarkSet;
