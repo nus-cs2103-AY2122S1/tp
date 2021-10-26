@@ -39,6 +39,12 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Usages
+
+![Parts of RecruitIn](images/description.png)
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -72,12 +78,6 @@ Scroll down to the bottom and click on `recruitIn.jar`.
     * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Usages
-
-![Parts of RecruitIn](images/description.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
