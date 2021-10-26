@@ -81,6 +81,6 @@ class DescriptionContainsKeywordsPredicateTest {
         predicate = new DescriptionContainsKeywordsPredicate(Arrays
                 .asList("12345", "Alice", "alice@email.com", "Main", "Street", "Building", "15-12-2020", "2103"));
         assertFalse(predicate.test(new AppointmentBuilder().withDescription("meeting").withClient(mockClient)
-                .withLocation("Main Building").withTimePeriod("2021-12-25 10:00", "2021-12-25 11:00").build()));
+                .withLocation("Main Building").withTimePeriod("25-12-2021 1000", "25-12-2021 1100").build()));
     }
 }
