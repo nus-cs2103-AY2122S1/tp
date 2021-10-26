@@ -87,8 +87,13 @@ public interface Model {
 
     /**
      * Marks the given person.
-     * {@code person} must not already exist in the address book.
+     * The person must exist in the address book.
      */
     void markPerson(Person target);
 
+    /**
+     * Unmarks the given person.
+     * The person must exist in the address book.
+     */
+    void unmarkPerson(Person target);
 }

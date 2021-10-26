@@ -154,4 +154,9 @@ public class ModelManager implements Model {
         addressBook.markPerson(target);
     }
 
+    public void unmarkPerson(Person target) {
+        requireAllNonNull(target);
+        addressBook.unmarkPerson(target);
+    }
+
 }

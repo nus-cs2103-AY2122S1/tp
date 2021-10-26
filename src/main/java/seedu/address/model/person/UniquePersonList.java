@@ -111,6 +111,20 @@ public class UniquePersonList implements Iterable<Person> {
 
     }
 
+    public void unmarkPerson(Person toUnmark) {
+        requireNonNull(toUnmark);
+
+        int index = internalList.indexOf(toUnmark);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person unmarkedPerson = internalList.get(index);
+        unmarkedPerson.getDone().setAsUndone();
+        internalList.set(index, unmarkedPerson);
+
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
