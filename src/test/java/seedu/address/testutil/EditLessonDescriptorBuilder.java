@@ -27,7 +27,8 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditLessonDescriptor} with fields containing {@code lesson}'s details
+     * Returns an {@code EditLessonDescriptor} with fields containing {@code lesson}'s details.
+     * Excludes cancelled dates.
      */
     public EditLessonDescriptorBuilder(Lesson lesson) {
         descriptor = new EditLessonDescriptor();
@@ -37,8 +38,8 @@ public class EditLessonDescriptorBuilder {
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
         descriptor.setRate(lesson.getLessonRates());
-        descriptor.setCancelledDates(lesson.getCancelledDates());
-        descriptor.setUncancelledDates(new HashSet<>());
+        descriptor.setCancelDates(lesson.getCancelledDates());
+        descriptor.setUncancelDates(new HashSet<>());
         descriptor.setRecurring(lesson.isRecurring());
     }
 
@@ -81,6 +82,28 @@ public class EditLessonDescriptorBuilder {
      */
     public EditLessonDescriptorBuilder withRate(String rate) {
         descriptor.setRate(new LessonRates(rate));
+        return this;
+    }
+
+    /**
+     * Parses the {@code cancelledDates} into a {@code Set<Date>} and set it to the {@code EditLessonDescriptor}
+     * that we are building.
+     */
+    public EditLessonDescriptorBuilder withCancelDates(String... cancelDates) {
+        Set<Date> cancelDatesSet = Stream.of(cancelDates)
+                .map(date -> new Date(StringUtil.stripLeadingZeroes(date))).collect(Collectors.toSet());
+        descriptor.setCancelDates(cancelDatesSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code uncancelledDates} into a {@code Set<Date>} and set it to the {@code EditLessonDescriptor}
+     * that we are building.
+     */
+    public EditLessonDescriptorBuilder withUncancelDates(String... uncancelDates) {
+        Set<Date> uncancelDatesSet = Stream.of(uncancelDates)
+                .map(date -> new Date(StringUtil.stripLeadingZeroes(date))).collect(Collectors.toSet());
+        descriptor.setUncancelDates(uncancelDatesSet);
         return this;
     }
 

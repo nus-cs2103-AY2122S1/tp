@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -60,7 +61,16 @@ public class LessonBuilder {
      * Sets the {@code Date} of the {@code Lesson} that we are building.
      */
     public LessonBuilder withDate(String date) {
-        this.date = new Date(date);
+        this.date = new Date(StringUtil.stripLeadingZeroes(date));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Date} of the {@code Lesson} that we are building
+     * with given {@code Date} object.
+     */
+    public LessonBuilder withDate(Date date) {
+        this.date = date;
         return this;
     }
 
@@ -101,7 +111,7 @@ public class LessonBuilder {
      * Parses the {@code homeworkList} into a {@code Set<Homework>} and
      * set it to the {@code Lesson} that we are building.
      */
-    public LessonBuilder withHomeworkSet(String ... homeworkList) {
+    public LessonBuilder withHomeworkSet(String... homeworkList) {
         homeworkSet = SampleDataUtil.getHomeworkSet(homeworkList);
         return this;
     }
@@ -110,8 +120,16 @@ public class LessonBuilder {
      * Parses the {@code cancelledDates} into a {@code Set<Date>} and
      * set it to the {@code Lesson} that we are building.
      */
-    public LessonBuilder withCancelledDatesSet(String ... cancelledDates) {
+    public LessonBuilder withCancelledDatesSet(String... cancelledDates) {
         cancelledDatesSet = SampleDataUtil.getCancelledDateSet(cancelledDates);
+        return this;
+    }
+
+    /**
+     * Sets the {@code cancelledDates} to the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withCancelledDatesSet(Date... cancelledDates) {
+        cancelledDatesSet = Set.of(cancelledDates);
         return this;
     }
 

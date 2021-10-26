@@ -7,6 +7,7 @@ import com.calendarfx.model.Calendar;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
@@ -45,18 +46,22 @@ public class CenterPanel extends UiPart<Region> {
         schedulePanel = new SchedulePanel(calendar);
         tagListPanel = new TagListPanel(tagList, tagCounter);
         personGridPanel = new PersonGridPanel(personList, lessonList);
-        displayPersonGridPanel(personList, lessonList);
+        displayPersonGridPanel(lessonList);
     }
 
     public SchedulePanel getSchedulePanel() {
         return schedulePanel;
     }
 
+    public ListView<Person> getPersonListView() {
+        return personGridPanel.getPersonListView();
+    }
+
     /**
      * Bring PersonGridPanel to top of the stack's child list.
      */
-    public void displayPersonGridPanel(ObservableList<Person> personList, ObservableList<Lesson> lessons) {
-        personGridPanel = new PersonGridPanel(personList, lessons);
+    public void displayPersonGridPanel(ObservableList<Lesson> lessons) {
+        personGridPanel.fillListPanels(lessons);
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
     }

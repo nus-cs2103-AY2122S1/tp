@@ -5,12 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Lesson in the address book.
@@ -38,11 +37,11 @@ public abstract class Lesson implements Comparable<Lesson> {
     /**
      * Every field must be present and not null.
      *
-     * @param date           Date of lesson.
-     * @param timeRange      Time range of the lesson.
-     * @param subject        Subject of the lesson.
-     * @param homework       Homework for the lesson.
-     * @param rates          Cost per hour for the lesson.
+     * @param date Date of lesson.
+     * @param timeRange Time range of the lesson.
+     * @param subject Subject of the lesson.
+     * @param homework Homework for the lesson.
+     * @param rates Cost per hour for the lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
     public Lesson(Date date, Date endDate, TimeRange timeRange, Subject subject, Set<Homework> homework,
@@ -55,6 +54,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         this.homework.addAll(homework);
         this.lessonRates = rates;
         if (!isRecurring()) {
+            // non-recurring lesson should have maximum one cancelled date
             assert cancelledDates.size() <= 1;
         }
         this.cancelledDates.addAll(cancelledDates);
@@ -108,6 +108,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         return Collections.unmodifiableSet(homework);
     }
 
+    /**
+     * Returns an immutable cancelledDates set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Date> getCancelledDates() {
         return Collections.unmodifiableSet(cancelledDates);
     }
@@ -144,15 +148,17 @@ public abstract class Lesson implements Comparable<Lesson> {
      * Checks if this lesson occurs on a given date.
      *
      * @param date The lesson date to check.
-     * @return True if this lesson
+     * @return True if this lesson occurs on the date.
      */
     public abstract boolean hasLessonOnDate(Date date);
 
     /**
      * Checks if this lesson is cancelled and does not occur on any date.
+     *
      * @return True if lesson is cancelled.
      */
     public abstract boolean isCancelled();
+
     /**
      * Checks if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.
@@ -184,8 +190,7 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startDate, endDate, timeRange, subject, homework, cancelledDates);
+        return Objects.hash(startDate, endDate, timeRange, subject, homework, lessonRates, cancelledDates);
     }
 
     @Override
@@ -212,13 +217,16 @@ public abstract class Lesson implements Comparable<Lesson> {
             builder.append("; Homework: ");
             homework.forEach(x -> builder.append(x + "; "));
         }
-
-        List<Date> dates = new ArrayList<>(getCancelledDates());
-        Collections.sort(dates, Collections.reverseOrder()); // display dates from latest to earliest
+        if (isCancelled()) {
+            builder.append("(Cancelled)");
+            return builder.toString();
+        }
+        String dates = getCancelledDates().stream().sorted()
+                .map(Date::toString).collect(Collectors.joining(","));
 
         if (!dates.isEmpty()) {
-            builder.append("\nCancelled Dates: ");
-            dates.forEach(date -> builder.append(date + ", "));
+            builder.append("Cancelled Dates: ")
+                    .append(dates);
         }
         return builder.toString();
     }

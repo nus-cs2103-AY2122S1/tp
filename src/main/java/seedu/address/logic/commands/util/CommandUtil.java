@@ -19,7 +19,7 @@ public class CommandUtil {
      * @param personList List of persons.
      * @param personIndex Index of person in the list.
      * @return Person at the specified index in a list.
-     * @throws CommandException
+     * @throws CommandException If person index is invalid.
      */
     public static Person getPerson(List<Person> personList, Index personIndex) throws CommandException {
         if (personIndex.getZeroBased() >= personList.size()) {
@@ -36,7 +36,7 @@ public class CommandUtil {
      * @param lessonList List of lessons.
      * @param lessonIndex Index of lesson in the list.
      * @return Lesson at the specified index in a list.
-     * @throws CommandException
+     * @throws CommandException If lesson index is invalid.
      */
     public static Lesson getLesson(List<Lesson> lessonList, Index lessonIndex) throws CommandException {
         if (lessonIndex.getZeroBased() >= lessonList.size()) {
