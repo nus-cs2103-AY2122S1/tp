@@ -7,6 +7,8 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.appointment.TypicalAppointments.ANOTHER_TWO_HOUR_APPOINTMENT;
+import static seedu.plannermd.testutil.appointment.TypicalAppointments.TWO_HOUR_APPOINTMENT;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_ALICE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
 
@@ -23,6 +25,7 @@ import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
+import seedu.plannermd.testutil.appointment.AppointmentBuilder;
 import seedu.plannermd.testutil.doctor.DoctorBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 
@@ -34,6 +37,7 @@ public class PlannerMdTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), plannerMd.getPatientList());
         assertEquals(Collections.emptyList(), plannerMd.getDoctorList());
+        assertEquals(Collections.emptyList(), plannerMd.getAppointmentList());
     }
 
     @Test
@@ -111,6 +115,80 @@ public class PlannerMdTest {
         assertThrows(UnsupportedOperationException.class, () -> plannerMd.getDoctorList().remove(0));
     }
 
+    @Test
+    public void deleteAppointmentsWithPerson_deletePerson_appointmentsDeleted() {
+        plannerMd.addAppointment(TWO_HOUR_APPOINTMENT);
+        plannerMd.addAppointment(ANOTHER_TWO_HOUR_APPOINTMENT);
+
+        plannerMd.deleteAppointmentsWithPerson(ALICE);
+        assertFalse(plannerMd.hasAppointment(TWO_HOUR_APPOINTMENT));
+
+        plannerMd.deleteAppointmentsWithPerson(DR_ALICE);
+        assertFalse(plannerMd.hasAppointment(ANOTHER_TWO_HOUR_APPOINTMENT));
+    }
+
+    @Test
+    public void editAppointmentsWithPerson_editPerson_appointmentsEdited() {
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        Appointment editedPatientAppointment = new AppointmentBuilder(TWO_HOUR_APPOINTMENT).withPatient(editedAlice)
+                .build();
+
+        Doctor editedDoctor = new DoctorBuilder(DR_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        Appointment editedDoctorAppointment = new AppointmentBuilder(ANOTHER_TWO_HOUR_APPOINTMENT)
+                .withDoctor(editedDoctor).build();
+
+        plannerMd.addAppointment(TWO_HOUR_APPOINTMENT);
+        plannerMd.editAppointmentsWithPerson(ALICE, editedAlice);
+
+        assertTrue(plannerMd.hasAppointment(editedPatientAppointment));
+        assertFalse(plannerMd.hasAppointment(TWO_HOUR_APPOINTMENT));
+
+        plannerMd.addAppointment(ANOTHER_TWO_HOUR_APPOINTMENT);
+        plannerMd.editAppointmentsWithPerson(DR_ALICE, editedDoctor);
+
+        assertTrue(plannerMd.hasAppointment(editedDoctorAppointment));
+        assertFalse(plannerMd.hasAppointment(ANOTHER_TWO_HOUR_APPOINTMENT));
+    }
+
+    void hasExactPatient_patientNotInPlannerMd_returnsEmpty() {
+        assertTrue(plannerMd.getExactPatient(ALICE).isEmpty());
+    }
+
+    @Test
+    void hasExactPatient_patientInPlannerMd_returnsPatient() {
+        plannerMd.addPatient(ALICE);
+        assertTrue(plannerMd.getExactPatient(ALICE).isPresent());
+    }
+
+    @Test
+    void hasExactPatient_patientWithSameIdentityFieldsInPlannerMd_returnsEmpty() {
+        plannerMd.addPatient(ALICE);
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(plannerMd.getExactPatient(editedAlice).isEmpty());
+    }
+
+    @Test
+    void hasExactDoctor_doctorNotInPlannerMd_returnsEmpty() {
+        assertTrue(plannerMd.getExactDoctor(DR_ALICE).isEmpty());
+    }
+
+    @Test
+    void hasExactDoctor_doctorInPlannerMd_returnsDoctor() {
+        plannerMd.addDoctor(DR_ALICE);
+        assertTrue(plannerMd.getExactDoctor(DR_ALICE).isPresent());
+    }
+
+    @Test
+    void hasExactDoctor_doctorWithSameIdentityFieldsInPlannerMd_returnsEmpty() {
+        plannerMd.addDoctor(DR_ALICE);
+        Doctor editedDoctor = new DoctorBuilder(DR_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(plannerMd.getExactDoctor(editedDoctor).isEmpty());
+    }
+
     /**
      * A stub ReadOnlyPlannerMd whose persons list can violate interface constraints.
      */
@@ -155,5 +233,4 @@ public class PlannerMdTest {
             return appointments;
         }
     }
-
 }

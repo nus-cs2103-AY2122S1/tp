@@ -14,6 +14,7 @@ import seedu.plannermd.commons.core.LogsCenter;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
 
 /**
  * Represents the in-memory model of the plannermd data.
@@ -184,6 +185,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment) {
+        requireAllNonNull(editedAppointment, oldAppointment);
+        return plannerMd.isClashAppointmentForEdited(editedAppointment, oldAppointment);
+    }
+
+    @Override
     public void deleteAppointment(Appointment target) {
         plannerMd.removeAppointment(target);
     }
@@ -191,7 +198,6 @@ public class ModelManager implements Model {
     @Override
     public void addAppointment(Appointment appointment) {
         plannerMd.addAppointment(appointment);
-        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override
@@ -245,6 +251,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public <T extends Person> void deleteAppointmentsWithPerson(T person) {
+        plannerMd.deleteAppointmentsWithPerson(person);
+    }
+
+    @Override
+    public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
+        plannerMd.editAppointmentsWithPerson(person, editedPerson);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -258,6 +274,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return plannerMd.equals(other.plannerMd)
                 && userPrefs.equals(other.userPrefs)
                 && state.equals(other.state)

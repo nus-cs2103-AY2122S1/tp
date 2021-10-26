@@ -1,7 +1,5 @@
 package seedu.plannermd.model.appointment;
 
-import seedu.plannermd.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.util.AppUtil.checkArgument;
 
@@ -32,10 +30,6 @@ public class Duration {
         this.duration = duration;
     }
 
-    public Duration(String duration) {
-        requireNonNull(duration);
-        this.duration = Integer.parseInt(duration);
-    }
     /**
      * Returns true if a given integer is a valid duration.
      * A valid duration is between 1-120 minutes.
@@ -44,20 +38,19 @@ public class Duration {
         return duration >= 1 && duration <= 120;
     }
 
-    public static boolean isValidDuration(String duration) throws NumberFormatException {
-        try {
-            int durationAsInt = Integer.parseInt(duration);
-            return durationAsInt >= 1 && durationAsInt <= 120;
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-    }
-
     /**
      * Factory method to return a default duration.
      */
     public static Duration getDefaultDuration() {
-        return new Duration(10);
+        return new Duration();
+    }
+
+
+    /**
+     * Returns the number of minutes.
+     */
+    public Integer getMinutes() {
+        return duration;
     }
 
     @Override

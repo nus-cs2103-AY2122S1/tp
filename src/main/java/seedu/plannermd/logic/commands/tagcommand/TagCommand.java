@@ -28,7 +28,7 @@ public abstract class TagCommand extends Command {
                     + "Adds a tag to the person identified by the index number used in the displayed person list.\n"
                     + "Parameters: "
                     + "INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n"
-                    + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " " + "1 " + PREFIX_TAG + "healthy"
+                    + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " " + "1 " + PREFIX_TAG + "healthy\n"
             + "tag -d: "
                     + "Deletes a tag to the person identified by the index number used in the displayed person list.\n"
                     + "Parameters: "
@@ -49,6 +49,7 @@ public abstract class TagCommand extends Command {
 
         model.setDoctor(doctorToEdit, editedDoctor);
         model.updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
+        model.editAppointmentsWithPerson(doctorToEdit, editedDoctor);
 
         return editedDoctor;
     }
@@ -68,6 +69,7 @@ public abstract class TagCommand extends Command {
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+        model.editAppointmentsWithPerson(patientToEdit, editedPatient);
 
         return editedPatient;
     }

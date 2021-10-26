@@ -26,8 +26,8 @@ import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.doctor.Doctor;
-import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.doctor.DoctorBuilder;
+import seedu.plannermd.testutil.doctor.EditDoctorDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditDoctorCommand.
@@ -48,6 +48,7 @@ public class EditDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(model.getFilteredDoctorList().get(0), editedDoctor);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(0), editedDoctor);
 
         assertCommandSuccess(editDoctorCommand, model, expectedMessage, expectedModel);
     }
@@ -69,6 +70,7 @@ public class EditDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(lastDoctor, editedDoctor);
+        expectedModel.editAppointmentsWithPerson(lastDoctor, editedDoctor);
 
         assertCommandSuccess(editDoctorCommand, model, expectedMessage, expectedModel);
     }
@@ -99,6 +101,7 @@ public class EditDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(model.getFilteredDoctorList().get(0), editedDoctor);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(0), editedDoctor);
 
         assertCommandSuccess(editDoctorCommand, model, expectedMessage, expectedModel);
     }

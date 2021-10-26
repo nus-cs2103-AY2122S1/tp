@@ -33,7 +33,6 @@ class AppointmentDateTest {
     @Test
     public void isValidAppointmentDate_invalidDate_failure() {
         assertFalse(AppointmentDate.isValidAppointmentDate(invalidDate));
-        assertFalse(AppointmentDate.isValidAppointmentDate("12/12/2012")); // before now
         assertFalse(AppointmentDate.isValidAppointmentDate("abc123"));
     }
 
