@@ -1,22 +1,28 @@
 package seedu.address.storage;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
-
 public class TransactionStorage {
-    public void saveInventory(ArrayList<TransactionRecord> orderList, Path filePath) throws IOException {
+    /**
+     * Saves list of TransactionRecord to transaction.json
+     *
+     * @param orderList list of TransactionRecord. Cannot be null.
+     * @param filePath path of Transaction. Cannot be null.
+     * @throws IOException if transaction cannot be saved.
+     */
+    public void saveTransaction(ArrayList<TransactionRecord> orderList, Path filePath) throws IOException {
         requireNonNull(orderList);
         requireNonNull(filePath);
 
@@ -24,6 +30,12 @@ public class TransactionStorage {
         JsonUtil.saveJsonFile(new JsonSerializableTransaction(orderList.stream()), filePath);
     }
 
+    /**
+     * Reads list of TransactionRecords from transaction.json
+     * @param filePath path of Transaction. Cannot be null.
+     * @return The TransactionRecord List enclosed in an Optional.
+     * @throws DataConversionException If json file's format is not correct.
+     */
     public Optional<List<TransactionRecord>> readTransaction(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
@@ -36,7 +48,6 @@ public class TransactionStorage {
         try {
             return Optional.of(jsonTransaction.get().toModelType());
         } catch (IllegalValueException ive) {
-//            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
     }

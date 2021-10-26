@@ -1,13 +1,12 @@
 package seedu.address.storage;
 
+import java.util.Collections;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
-import seedu.address.model.tag.Tag;
-
-import java.util.Collections;
-import java.util.Set;
 
 public class JsonAdaptedItemOrder {
 
@@ -15,6 +14,12 @@ public class JsonAdaptedItemOrder {
     private final Integer id;
     private final Integer count;
 
+    /**
+     * Constructor for JsonAdaptedItemOrder that supports json reading/writing
+     * @param name name of item.
+     * @param id id of item.
+     * @param count count of item.
+     */
     @JsonCreator
     public JsonAdaptedItemOrder(@JsonProperty("name") String name,
                            @JsonProperty("id") String id,
@@ -24,6 +29,10 @@ public class JsonAdaptedItemOrder {
         this.count = Integer.parseInt(count);
     }
 
+    /**
+     * Change an Item to the JsonAdapted version.
+     * @param source the Item to be converted.
+     */
     public JsonAdaptedItemOrder(Item source) {
         this.name = source.getName().toString();
         this.id = source.getId();

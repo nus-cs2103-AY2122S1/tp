@@ -58,7 +58,8 @@ public class ModelManager implements Model {
         optionalOrder = Optional.empty();
         List<TransactionRecord> transactionRecordList = null;
         try {
-            transactionRecordList = new TransactionStorage().readTransaction(userPrefs.getTransactionFilePath()).orElse(null);
+            transactionRecordList = new TransactionStorage()
+                    .readTransaction(userPrefs.getTransactionFilePath()).orElse(null);
         } catch (DataConversionException e) {
             System.out.println(e);
         }
@@ -280,7 +281,8 @@ public class ModelManager implements Model {
         transactions.add(transaction);
 
         try {
-            new TransactionStorage().saveInventory(new ArrayList(transactions), userPrefs.getTransactionFilePath());
+            new TransactionStorage().saveTransaction(new ArrayList(transactions),
+                    userPrefs.getTransactionFilePath());
         } catch (IOException e) {
             System.out.println(e);
         }
