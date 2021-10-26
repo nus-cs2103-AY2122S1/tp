@@ -24,13 +24,13 @@ public class Tag {
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param tagDescription A valid tag description.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName));
-        this.type = parseTagType(tagName);
-        this.tagName = parseTagName(type, tagName);
+    public Tag(String tagDescription) {
+        requireNonNull(tagDescription);
+        checkArgument(isValidTagName(tagDescription));
+        this.type = parseTagType(tagDescription);
+        this.tagName = parseTagName(type, tagDescription);
     }
 
     /**
@@ -61,15 +61,16 @@ public class Tag {
     }
 
     /**
+     * Parses the tag type based on the given tag description.
      *
-     * @param tagName
-     * @return
+     * @param tagDescription A valid tag description.
+     * @return Type of tag represented by tag description.
      */
-    public Type parseTagType(String tagName) {
-        assert(!tagName.isEmpty());
-        if (tagName.indexOf("event-") == 0) {
+    public Type parseTagType(String tagDescription) {
+        assert(!tagDescription.isEmpty());
+        if (tagDescription.indexOf("event-") == 0) {
             return Type.EVENT;
-        } else if (tagName.indexOf("mod-") == 0) {
+        } else if (tagDescription.indexOf("mod-") == 0) {
             return Type.MODULE;
         } else {
             return Type.GENERAL;
@@ -77,18 +78,20 @@ public class Tag {
     }
 
     /**
+     * Parses the tag name based on the given tag type and description.
      *
-     * @param tagName
-     * @param tagType
-     * @return
+     * @param tagType Type of tag.
+     * * @param tagDescription A valid tag description.
+     * @return Name of tag represented by tag description.
      */
-    public String parseTagName(Type tagType, String tagName) {
+    public String parseTagName(Type tagType, String tagDescription) {
         if (tagType == Type.GENERAL) {
-            return tagName;
+            return tagDescription;
         } else if (tagType == Type.EVENT) {
-            return tagName.substring(6).trim();
+            return tagDescription.substring(6).trim();
         } else {
-            return tagName.substring(4).trim();
+            return tagDescription.substring(4).trim();
         }
     }
 }
+
