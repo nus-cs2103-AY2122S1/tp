@@ -60,8 +60,8 @@ the products in your inventory, as well as details of the orders placed by your 
 typing speed is fast, you can operate the application faster than other `GUI` applications; `GUI` applications allow you
 to interact with the application through graphical icons such as buttons. <br>
 
-You do not have to worry at all even if you are new to CLI applications as this user guide will take you through step 
-by step on how various features of the **Sellah** can be utilised, all geared towards providing the best possible 
+You do not have to worry at all even if you are new to CLI applications as this user guide will take you through step by
+step on how various features of the **Sellah** can be utilised, all geared towards providing the best possible
 experience for you. <br>
 
 If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to learn how to optimise your inventory using
@@ -78,13 +78,13 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 1. Copy the file to the folder you want to use as the _home folder_ for your **Sellah**.
 
-1. Double-click the file to start the app. 
-   
-1. Alternatively, if you wish to open **Sellah** using command prompt or terminal, key in `java -jar Sellah.jar` and 
+1. Double-click the file to start the app.
+
+1. Alternatively, if you wish to open **Sellah** using command prompt or terminal, key in `java -jar Sellah.jar` and
    press `enter` to launch the **Sellah** application.
-   
-1. The GUI similar to the below should appear in a few seconds. Note how the app
-   contains some sample data. You can use the [`clear`](#48-clearing-all-data) command to purge all data. <br>
+
+1. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. You can use
+   the [`clear`](#48-clearing-all-data) command to purge all data. <br>
    ![Ui](images/UiHelpCommand.png)
 
 1. Refer to the [Features](#4-features) below for details of each command.
@@ -443,11 +443,10 @@ In the data folder you will find the text file as shown below.
 
 ![Ui](images/UISavingData.png)
 
-
 ### 4.13 Editing the Data file
 
 Sellah data are saved as a JSON file `[JAR file location]/data/addressbook.json`. <br>
-You are welcome to update data directly by editing this file. However, if your changes to the file make its format 
+You are welcome to update data directly by editing this file. However, if your changes to the file make its format
 invalid, Sellah will start with a new data file on its next run.
 
 > :bulb: It is highly recommended that you do not edit the saved data as it can cause data losses in future sessions!
@@ -457,9 +456,9 @@ invalid, Sellah will start with a new data file on its next run.
 ## 5. FAQ
 
 **Q**: How do I transfer my clients and products' information to another Computer? <br>
-**A**: Install the app in the other computer. Copy the entire data folder that can be found together with the 
-Sellah.jar file on the first computer and copy it over to the same directory where the Sellah.jar file can be found on 
-the second computer. <br>
+**A**: Install the app in the other computer. Copy the entire data folder that can be found together with the Sellah.jar
+file on the first computer and copy it over to the same directory where the Sellah.jar file can be found on the second
+computer. <br>
 
 **Q**: Do I lose all my clients and products' information when I close the application? <br>
 **A**: All data is auto-saved once you exit the app and loaded upon next entry, so you do not lose any data. <br>
