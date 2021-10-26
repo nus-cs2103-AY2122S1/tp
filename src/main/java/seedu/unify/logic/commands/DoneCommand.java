@@ -50,6 +50,7 @@ public class DoneCommand extends Command {
                         taskToMark.getTags(),
                         new State(State.ObjectState.DONE)));
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.updateWeeklyTasksState();
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToMark));
     }
 

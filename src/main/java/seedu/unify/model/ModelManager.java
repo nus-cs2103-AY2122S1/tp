@@ -134,12 +134,18 @@ public class ModelManager implements Model {
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
         filteredTask.setPredicate(predicate);
+        weeklyTasks.updateWeeklyProgress();
     }
 
     @Override
     public void updateWeeklyTaskList(Integer week) {
         requireNonNull(week);
         weeklyTasks.setWeek(week);
+    }
+
+    @Override
+    public void updateWeeklyTasksState() {
+        weeklyTasks.updateWeeklyProgress();
     }
 
     @Override

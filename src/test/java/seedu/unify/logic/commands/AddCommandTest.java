@@ -158,6 +158,11 @@ public class AddCommandTest {
         public void updateWeeklyTaskList(Integer week) {
 
         }
+
+        @Override
+        public void updateWeeklyTasksState() {
+
+        }
     }
 
     /**
