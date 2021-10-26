@@ -76,6 +76,8 @@ public abstract class GenreCommand extends Command {
      */
     public static class GenresDescriptor {
         private Set<Genre> genres;
+        private Set<Genre> usedGenres;
+        private Set<Genre> unusedGenres;
 
         public GenresDescriptor() {}
 
@@ -92,6 +94,22 @@ public abstract class GenreCommand extends Command {
          */
         public void setGenres(Set<Genre> genres) {
             this.genres = (genres != null) ? new HashSet<>(genres) : null;
+        }
+
+        /**
+         * Sets {@code usedGenres} to this object's {@code usedGenres}.
+         * A defensive copy of {@code usedGenres} is used internally.
+         */
+        public void setUsedGenres(Set<Genre> usedGenres) {
+            this.usedGenres = (usedGenres != null) ? new HashSet<>(usedGenres) : null;
+        }
+
+        /**
+         * Sets {@code unusedGenres} to this object's {@code unusedGenres}.
+         * A defensive copy of {@code unusedGenres} is used internally.
+         */
+        public void setUnusedGenres(Set<Genre> unusedGenres) {
+            this.unusedGenres = (unusedGenres != null) ? new HashSet<>(unusedGenres) : null;
         }
 
         /**
@@ -123,8 +141,51 @@ public abstract class GenreCommand extends Command {
 
         @Override
         public String toString() {
-            String changedGenres = Arrays.toString(genres.toArray());
-            return changedGenres.substring(1, changedGenres.length() - 1);
+            return genresSetToString(genres);
+        }
+
+        /**
+         * Gets the {@code Genre}s actually used in the command as a {@code String}
+         * @return A string representing the used Genres
+         */
+        public String usedGenresString() {
+            return genresSetToString(usedGenres);
+        }
+
+        /**
+         * Gets the {@code Genre}s not used in the command as a {@code String}
+         * @return A string representing the used Genres
+         */
+        public String unusedGenresString() {
+            return genresSetToString(unusedGenres);
+        }
+
+        /**
+         * Checks if any {@code Genre} is not used in the command
+         * @return true if there are unused Genres, false otherwise
+         */
+        public boolean hasUnusedGenres() {
+            return unusedGenres != null && unusedGenres.size() != 0;
+        }
+
+        /**
+         * Checks if any {@code Genre} is used in the command
+         * @return true if there are used Genres, false otherwise
+         */
+        public boolean hasUsedGenres() {
+            return usedGenres != null && usedGenres.size() != 0;
+        }
+
+        /**
+         * Converts a {@code Genre} {@code Set} into a {@code String}
+         * @param genresSet the set to be converted
+         * @return a String listing the items inside the set
+         */
+        private static String genresSetToString(Set<Genre> genresSet) {
+            assert genresSet != null;
+
+            String genresString = Arrays.toString(genresSet.toArray());
+            return genresString.substring(1, genresString.length() - 1);
         }
     }
 }
