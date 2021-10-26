@@ -2,8 +2,21 @@
 layout: page
 title: User Guide
 ---
+Welcome to Source Control User Guide! 
 
-Source Control is a **desktop app for CS1101S professors to manage the performance of their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Source Control can give you both a quick overview and a closer look of how your students are doing.
+Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. 
+This application allows you to store comprehensive data of each student quickly, and allows you to search through them easily. 
+With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments!
+Source Control can also give you both a quick overview and a closer look of how your students are doing.
+This application provides in-depth data analysis of the performance of your students in each assessment, 
+giving you timely feedback on the pace and difficulty level of the module.
+
+Source Control is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps! 
+
+This guide takes you through all the latest features of Source Control. If you are a new user, this guide provides you 
+all the basic knowledge to get started with Source Control, and is simple and easy to read.
+
 
 * Table of Contents
 {:toc}
@@ -28,13 +41,12 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 
     * **`add group`**`-g T01A -n John Doe` : Adds a group called `T01A` into the database and student `John Doe` into the group.
 
-    * **`add alloc`**`-g T01A -n John Doe` : Adds student `John Doe` into group `T01`.
-
     * **`add score`**`-a P01 -n John Doe -s 12`: Adds score for assessment `P01` as `12` for student `John Doe`.
 
     * **`search`**`-n John Doe` : Searches for student `John Doe`.
+   
+    * **`show`**`-n John Doe` : Displays information of student `John Doe`.
 
-    * **`clear`** : Clears all existing data.
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -45,22 +57,26 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `<angled brackets>` are the parameters to be supplied by the user.<br>
+* `<angled brackets>` <br>
+  Words in `<angled brackets>` are the parameters to be supplied by the user.<br>
   e.g. in `add -n <student_name>`, `<student_name>` is a placeholder which can be used as `add -n John Doe`.
 
-* Parameters in `(round brackets)` separated by `|` are mutually exclusive options for input. Only one input should to be supplied by the user.<br>
+* `(round brackets)` <br>
+  Parameters in `(round brackets)` separated by `|` are mutually exclusive options for input. Only one input should to be supplied by the user.<br>
   e.g. `(-n <student_name> | -i <student_id> | -group <group_name>)` can be used as `-n John Doe`, or as `-i E0123456`, or as `-g T02A`
 
-* Parameters in `[square brackets]` are optional. <br>
+* `[square brackets]` <br>
+  Parameters in `[square brackets]` are optional. <br>
   e.g. `-n <student_name> [-g <group_name>]` can be used as `-n John Doe -g T01A`, or as `-n John Doe`.
 
-* Items with `...​`  after them can be used multiple times including zero times.<br>
+* `...​` <br>
+  Items with `...​`  after them can be used multiple times, including zero times.<br>
   e.g. `[-g <group_name>]...` can be used as ` ` (i.e. 0 times), or `-g T01A -g R01A`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n <student_name> -g <group_name>`, then `-g <group_name> -n <student_name>` is also acceptable.
 
-* If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `-g T02A -g T03B` and the command only expects one group, only `-g T03B` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `clear`) will be ignored.<br>
@@ -76,9 +92,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the address book.
 
 Format: `list`
 
@@ -160,7 +176,7 @@ Only one type of tag should be used for each search.
 * To search with multiple keywords, separate keywords with spaces. e.g. `search -g T02A R03C`
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * For search with name, only full words will be matched. e.g. `Han` will not match `Hans`.
 * For search with NUSNET ID, group name or tag, partial search is supported. e.g. `T02` will match `T02A` and `T02B`.
@@ -176,18 +192,18 @@ Examples:
 
 Shows the in-depth data analysis of individual, group, and cohort's performance for assessments.
 
-Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f]`
+Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f <export_file_path>]`
 
 * Using `<index>`, `-n <student_name>` or `-i <student_id>` displays the information of the particular student's performance in all his graded assessments. 
-* The `<index>` refers to the index number shown in the displayed person list. The `<index>` must be a positive integer 1, 2, 3, …
-* Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessments. 
+* The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
 * Using `-g <group_name>` displays the information of the group's performance in all their graded assessments. 
+* Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessment.
 * Does not support partial searching. e.g. `T01` does not match `T01A`. Full name must be entered. 
-* Entering `-f` exports the graph produced from the command. 
+* Entering `-f <export_file_path>` exports the graph produced from the command to the specified location. 
 
 Examples:
 * `show -n Alex Yeoh` displays line chart of Alex Yeoh's performance in his assessments. 
-* `show 2 -f` exports the line chart produced of the 2nd person in the address book. 
+* `show 2 -f` exports the line chart produced of the 2nd student in the address book. 
 * `show -g T02A` displays line chart of group T02A's performance in their assessments. 
 * `show -a P01` displays bar chart of the distribution of scores in assessment P01. 
 
@@ -198,30 +214,30 @@ Edits the information of an existing student.
 
 Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...`
 
-* Edits the person at the specified `<index>`. The `<index>` refers to the index number shown in the displayed person list. The `<index>` must be a positive integer 1, 2, 3, …
+* Edits the student at the specified `<index>`. The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags and groups, the existing tags and groups of the person will be removed i.e adding of tags and groups are not cumulative.
-* You can remove all the person’s tags or groups by typing -t or -g without specifying any values after it.
+* When editing tags and groups, the existing tags and groups of the student will be removed i.e adding of tags and groups are not cumulative.
+* You can remove all the student’s tags or groups by typing -t or -g without specifying any values after it.
 
 Examples:
 * `edit 1 -n John Doe`
 * `edit 1 -n John Doe -i E1234567 -g T01 -g R01`
 * `edit 2 -t`
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
 Format: `delete <index>`
 
-* Deletes the person at the specified `<index>`.
-* The `<index>` refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `<index>`.
+* The `<index>` refers to the index number shown in the displayed student list.
 * The `<index>` **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `search -n Alex` followed by `delete 1` deletes the 1st person in the results of the `search` command.
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `search -n Alex` followed by `delete 1` deletes the 1st student in the results of the `search` command.
 
 
 ### Importing data: `import`
@@ -280,13 +296,34 @@ SourceControl data are saved as a JSON file `[JAR file location]/data/sourcecont
 If your changes to the data file makes its format invalid, SourceControl will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming soon]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ `[coming soon]`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+Here is a table of the parameter tags used in our document. 
+
+Tag | Full Form | Usage
+-------|--------|----------
+-n | name | `-n <student_name>`
+-i | id | `-i <student_id>`
+-g | group | `-g <group_name>`
+-a | assessment | `-a <assessment_name>`
+-s | score | `-s <score>`
+-t | tag | `-t <tag>`
+-f | file | `-f <file_path>`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+
+In `import` command, `-g`, `-a`, `-t` are used differently from other commands. More information can be found in the
+Import command description.
+</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -302,7 +339,7 @@ Action | Format | Examples
 **Add Assessment** | `add assessment -a <assessment_name>` | e.g. `add assessment -a P01`
 **Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | e.g. `search -n John Doe`, `search -g T02B R04D`
-**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f]` | e.g. `show -n Alex Yeoh`, `show -a P01`
+**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f <export_file_path>]` | e.g. `show -n Alex Yeoh`, `show -a P01`
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | e.g. `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
