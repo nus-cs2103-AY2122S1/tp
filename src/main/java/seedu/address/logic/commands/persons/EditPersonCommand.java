@@ -117,7 +117,7 @@ public class EditPersonCommand extends Command {
         List<Exam> exams = personToEdit.getExams();
         Set<UniqueId> assignedGroupIds = personToEdit.getAssignedGroupIds();
 
-        Person newPerson = new Person(updatedName, updatedPhone, updatedEmail,
+        Person newPerson = new Person(personToEdit.getId(), updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList, exams, assignedGroupIds);
         newPerson = editPersonDescriptor.updateLessons(newPerson, model.getGroupMapper());
         newPerson = editPersonDescriptor.updateExams(newPerson);
@@ -218,7 +218,7 @@ public class EditPersonCommand extends Command {
          * @param lessons to check
          * @return Optional group that is conflicting with lessons
          */
-        private static Optional<Group> findConflictingGroup(Set<Group> groups, List<Lesson> lessons) {
+        private static Optional<Group> findConflictingLessonGroup(Set<Group> groups, List<Lesson> lessons) {
             for (Lesson lesson : lessons) {
                 for (Group group : groups) {
                     if (!group.canAssignLesson(lesson)) {
@@ -227,6 +227,23 @@ public class EditPersonCommand extends Command {
                 }
             }
             return Optional.empty();
+        }
+
+        /**
+         * Util method to remove exams from a person
+         * @param personToEdit person to remove exams from
+         * @param examsToRemove indexes to remove
+         * @return Person with exams removed
+         * @throws IndexOutOfBoundsException if any index is out of bounds
+         */
+        private static Person removeExams(Person personToEdit,
+                List<Index> examsToRemove) throws IndexOutOfBoundsException {
+            // sort because removing from the back will not hurt the earlier indexes!
+            examsToRemove.sort(new Index.SortDescending());
+            for (Index i : examsToRemove) {
+                personToEdit = personToEdit.removeExam(i.getZeroBased());
+            }
+            return personToEdit;
         }
 
 
@@ -335,8 +352,8 @@ public class EditPersonCommand extends Command {
             try {
                 // first cross-check with all groups;
                 Set<Group> groupsPersonIsIn = mapper.getFromUniqueIds(personToEdit.getAssignedGroupIds());
-                Optional<Group> conflictingGroup = findConflictingGroup(groupsPersonIsIn, lessonsToAdd);
-                conflictingGroup.map(group -> {
+                Optional<Group> conflictingGroup = findConflictingLessonGroup(groupsPersonIsIn, lessonsToAdd);
+                conflictingGroup.ifPresent(group -> {
                     throw new CannotAssignException(CANNOT_ASSIGN_LESSON_GROUP + group.getName());
                 });
                 // now try add lesson to person
@@ -357,10 +374,7 @@ public class EditPersonCommand extends Command {
             // removes lesson first before adding lessons
             try {
                 // sort because removing from the back will not hurt the earlier indexes!
-                lessonsToRemove.sort(new Index.SortDescending());
-                for (Index i : examsToRemove) {
-                    personToEdit = personToEdit.removeExam(i.getZeroBased());
-                }
+                personToEdit = removeExams(personToEdit, examsToRemove);
             } catch (IndexOutOfBoundsException index) {
                 throw new CommandException(Messages.MESSAGE_INVALID_EXAM_INDEX);
             }
