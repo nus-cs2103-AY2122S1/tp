@@ -3,10 +3,14 @@ package seedu.address.model.schedule;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.schedule.exceptions.EndTimeBeforeStartTimeException;
 
 public class TimePeriod implements Comparable<TimePeriod> {
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+
     /** The start date and time of this {@code TimePeriod}. */
     private LocalDateTime startDateTime;
 
@@ -94,6 +98,20 @@ public class TimePeriod implements Comparable<TimePeriod> {
         return LocalDateTime.of(this.endDateTime.toLocalDate(), this.endDateTime.toLocalTime());
     }
 
+    /**
+     * Creates a string representation of the startDateTime using the formatter.
+     */
+    public String getStartDateTimeString() {
+        return this.startDateTime.format(formatter);
+    }
+
+    /**
+     * Creates a string representation of the endDateTime using the formatter.
+     */
+    public String getEndDateTimeString() {
+        return this.endDateTime.format(formatter);
+    }
+
     @Override
     public int compareTo(TimePeriod o) {
         if (this.startDateTime.compareTo(o.startDateTime) == 0) {
@@ -107,9 +125,9 @@ public class TimePeriod implements Comparable<TimePeriod> {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Start Time: ")
-               .append(getStartDateTime())
+               .append(getStartDateTime().format(formatter))
                .append("End Time: ")
-               .append(getEndDateTime());
+               .append(getEndDateTime().format(formatter));
 
         return builder.toString();
     }

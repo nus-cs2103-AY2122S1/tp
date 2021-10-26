@@ -11,7 +11,7 @@ public class Appointment {
 
     private final UniquePersonList clients;
     private final Address location;
-    private TimePeriod timePeriod;
+    private final TimePeriod timePeriod;
     private String description;
 
 
@@ -43,6 +43,20 @@ public class Appointment {
 
     public ObservableList<Person> getClientList() {
         return clients.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Creates a string representation of the start timing.
+     */
+    public String getStartDateTimeString() {
+        return this.timePeriod.getStartDateTimeString();
+    }
+
+    /**
+     * Creates a string representation of the end timing.
+     */
+    public String getEndDateTimeString() {
+        return this.timePeriod.getEndDateTimeString();
     }
 
     /**
