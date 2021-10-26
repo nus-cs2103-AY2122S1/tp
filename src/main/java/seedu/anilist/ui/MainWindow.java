@@ -121,6 +121,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
         this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
     }
 
 
