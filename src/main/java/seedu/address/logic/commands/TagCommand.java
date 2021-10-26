@@ -26,14 +26,14 @@ import seedu.address.model.tag.Tag;
  */
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds one or more Tags to the details of the person "
-            + "identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String COMMAND_DESCRIPTION = "Adds one or more Tags to the details of the person "
+            + "identified by the index number used in the displayed person list.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG "
             + "[" + PREFIX_TAG + "EXTRA_TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "ExampleTag";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_TAG_ADD_SUCCESS = "Person %1$s now has tags: %2$s";
 

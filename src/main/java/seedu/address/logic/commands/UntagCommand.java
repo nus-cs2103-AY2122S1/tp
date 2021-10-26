@@ -30,13 +30,14 @@ import seedu.address.model.tag.Tag;
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a tag from the details of the person "
-            + "identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String COMMAND_DESCRIPTION = "Removes a tag from the details of the person "
+            + "identified by the index number used in the displayed person list.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) from %1$s: %2$s";
     public static final String MESSAGE_NOT_REMOVED = "At least one tag to be removed must be provided.";

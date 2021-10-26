@@ -12,22 +12,24 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
+    public static final String SPACE = "            ";
+
     public static final String HELP_MESSAGE = "Usage: help <command>\n"
             + "\n"
             + "Commands:\n"
-            + "add            Adds a person to the address book.\n"
-            + "edit           Edits an existing person in the address book.\n"
-            + "tag            Adds tag to an existing person in the address book.\n"
-            + "untag          Removes an existing tag from an existing person in the address book.\n"
-            + "list           Shows a list of all persons in the address book.\n"
-            + "find           Finds all persons whose names contain ALL of the specified keywords (case-insensitive).\n"
-            + "findOr         Finds all persons whose names contain ANY of the specified keywords (case-insensitive).\n"
-            + "findTag        Finds persons whose contact contain any of the given tags (case insensitive).\n"
-            + "findTagC       Finds persons whose contact contain any of the given tags (case sensitive).\n"
-            + "delete         Deletes the specified person from the address book.\n"
-            + "deletem        Deletes the people within q range from the address book.\n"
-            + "clear          Clears all entries from the address book.\n"
-            + "exit           Exits the program.\n"
+            + AddCommand.COMMAND_WORD + SPACE + AddCommand.COMMAND_DESCRIPTION
+            + EditCommand.COMMAND_WORD + SPACE + EditCommand.COMMAND_DESCRIPTION
+            + TagCommand.COMMAND_WORD + SPACE + TagCommand.COMMAND_DESCRIPTION
+            + UntagCommand.COMMAND_WORD + SPACE + UntagCommand.COMMAND_DESCRIPTION
+            + ListCommand.COMMAND_WORD + SPACE + ListCommand.COMMAND_DESCRIPTION
+            + FindCommand.COMMAND_WORD + SPACE + FindCommand.COMMAND_DESCRIPTION
+            + FindOrCommand.COMMAND_WORD + SPACE + FindOrCommand.COMMAND_DESCRIPTION
+            + FindTagCaseInsensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseInsensitiveCommand.COMMAND_DESCRIPTION
+            + FindTagCaseSensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseSensitiveCommand.COMMAND_DESCRIPTION
+            + DeleteCommand.COMMAND_WORD + SPACE + DeleteCommand.COMMAND_DESCRIPTION
+            + DeleteMultipleCommand.COMMAND_WORD + SPACE + DeleteMultipleCommand.COMMAND_DESCRIPTION
+            + ClearCommand.COMMAND_WORD + SPACE + ClearCommand.COMMAND_DESCRIPTION
+            + ExitCommand.COMMAND_WORD + SPACE + ExitCommand.COMMAND_DESCRIPTION
             + "For more information, enter <help more>.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
