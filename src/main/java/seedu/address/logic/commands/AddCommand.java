@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -34,7 +35,8 @@ public class AddCommand extends Command {
             + PREFIX_LEVEL_OF_EDUCATION + "LEVEL OF EDUCATION "
             + PREFIX_EXPERIENCE + "YEARS OF EXPERIENCE "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_INTERVIEW + "INTERVIEW TIME]\n"
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW TIME]"
+            + "[" + PREFIX_NOTES + "NOTES]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -46,7 +48,8 @@ public class AddCommand extends Command {
             + PREFIX_EXPERIENCE + "3 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
-            + PREFIX_INTERVIEW + "2021-10-21, 12:00";
+            + PREFIX_INTERVIEW + "2021-10-21, 12:00"
+            + PREFIX_NOTES + "This applicant is a good candidate for the job!";
 
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";

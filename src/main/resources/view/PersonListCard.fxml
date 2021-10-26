@@ -38,6 +38,7 @@
       <Label fx:id="levelOfEducation" styleClass="cell_small_label" text="\$levelOfEducation" />
       <Label fx:id="experience" styleClass="cell_small_label" text="\$experience" />
       <Label fx:id="interview" styleClass="cell_small_label" text="\$interview" />
+      <Label fx:id="notes" styleClass="cell_small_label" text="\$notes" />
     </VBox>
   </GridPane>
 </HBox>
