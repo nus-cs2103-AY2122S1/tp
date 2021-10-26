@@ -89,8 +89,8 @@ public class CommandTestUtil {
     public static final String FEE_DESC_BOB = " " + PREFIX_FEE + VALID_FEE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FORGETFUL;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_ZOOM;
+    public static final String TAG_DESC_FORGETFUL = " " + PREFIX_TAG + VALID_TAG_FORGETFUL;
+    public static final String TAG_DESC_ZOOM = " " + PREFIX_TAG + VALID_TAG_ZOOM;
     public static final String FIND_COND_DESC_ALL = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ALL;
     public static final String FIND_COND_DESC_ANY = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ANY;
     public static final String FIND_COND_DESC_NONE = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.NONE;
