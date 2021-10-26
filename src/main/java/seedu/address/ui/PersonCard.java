@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import seedu.address.model.done.Done;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.notes.Notes;
@@ -32,29 +34,29 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private TextFlow name;
     @FXML
-    private Label id;
+    private TextFlow id;
     @FXML
-    private Label phone;
+    private TextFlow phone;
     @FXML
-    private Label email;
+    private TextFlow email;
     @FXML
-    private Label role;
+    private TextFlow role;
     @FXML
-    private Label employmentType;
+    private TextFlow employmentType;
     @FXML
-    private Label expectedSalary;
+    private TextFlow expectedSalary;
     @FXML
-    private Label levelOfEducation;
+    private TextFlow levelOfEducation;
     @FXML
-    private Label experience;
+    private TextFlow experience;
+    @FXML
+    private TextFlow interview;
+    @FXML
+    private TextFlow notes;
     @FXML
     private FlowPane tags;
-    @FXML
-    private Label interview;
-    @FXML
-    private Label notes;
     @FXML
     private FlowPane done;
     @FXML
@@ -67,17 +69,19 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText("Phone Number: " + person.getPhone().value);
-        email.setText("Email: " + person.getEmail().value);
-        role.setText("Applied Role: " + person.getRole().role);
-        employmentType.setText("Employment Type: " + person.getEmploymentType().employmentType);
-        expectedSalary.setText("Expected Salary: $" + person.getExpectedSalary().value);
-        levelOfEducation.setText("Level of Education: " + person.getLevelOfEducation().levelOfEducation);
-        experience.setText("Years of Experience: " + person.getExperience().value);
-        interview.setText("Interview Time: " + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime);
-        notes.setText("Notes: " + person.getNotes().orElse(Notes.EMPTY_NOTES).information);
+        id.getChildren().add(getText(displayedIndex + ". "));
+        name.getChildren().add(getText(person.getName().fullName));
+        phone.getChildren().add(getText("Phone Number: " + person.getPhone().value));
+        email.getChildren().add(getText("Email: " + person.getEmail().value));
+        role.getChildren().add(getText("Applied Role: " + person.getRole().role));
+        employmentType.getChildren().add(getText("Employment Type: " + person.getEmploymentType().employmentType));
+        expectedSalary.getChildren().add(getText("Expected Salary: $" + person.getExpectedSalary().value));
+        levelOfEducation.getChildren().add(getText("Level of Education: "
+                + person.getLevelOfEducation().levelOfEducation));
+        experience.getChildren().add(getText("Years of Experience: " + person.getExperience().value));
+        interview.getChildren().add(getText("Interview Time: "
+                + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime));
+        notes.getChildren().add(getText("Notes: " + person.getNotes().orElse(Notes.EMPTY_NOTES).information));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -90,6 +94,17 @@ public class PersonCard extends UiPart<Region> {
             notDone.getChildren().add(new Label(Done.STATUS_UNDONE));
             done.getChildren().clear();
         }
+    }
+
+    private Text getText(String text) {
+        Text node = new Text(text);
+        node.getStyleClass().add("text");
+        return node;
+    }
+
+    private String getId() {
+        Text textNode = (Text) id.getChildren().get(0);
+        return textNode.getText();
     }
 
     @Override
@@ -106,7 +121,7 @@ public class PersonCard extends UiPart<Region> {
 
         // state check
         PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
+        return this.getId().equals(card.getId())
                 && person.equals(card.person);
     }
 }
