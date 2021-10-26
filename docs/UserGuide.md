@@ -156,36 +156,156 @@ are all sample data! Here are some commands you can try to see what they do:
 
 ## **Features**
 
-<div markdown="block" class="alert alert-info">
+### **Command Format**
+*All* the commands used in FAST application follows these notations style!
 
-**:information_source: Notes about the command format:**<br>
-
-Take note that for all the commands listed below, we follow these notations and style!
 
 * Words in `UPPER_CASE` are the parameters to be added in by the user.<br>
   * e.g. for `add n/NAME`, `NAME` is where you would replace it with the actual client's name such as `add n/John Doe`.
 
+
 * Items in square brackets are optional.<br>
   * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
 
 * Items with `…`​ after them can be used zero or more times.<br>
   * e.g. `[t/TAG]…​` can be `t/friend`, `t/friend t/family` or just left empty.
 
-* Parameters can be in any order.<br>
-  * e.g. if the command uses this format: `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Parameters can be in any order. (This excludes parameters without a prefix.) <br> 
+    * e.g. if the command uses this format: `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+* Parameter without a prefix **must** be the **first** parameter in the command (when required).
+
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the
   last occurrence of the parameter will be taken.<br>
-  * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+    * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
 
 * For commands that do not take in any parameter (such as  `list`, `exit` and `clear`), anything written after
   the command will be ignored.<br>
-  * e.g. `help 123` will simply be interpreted as `help`.
+    * e.g. `help 123` will simply be interpreted as `help`.
 
-* `INDEX` refers to the index number shown in the client list. The index **must be a positive integer** 1, 2, 3, …​
 
+* If a command expects a specific set of parameters and you entered *extra* parameter into the command (with unrecognised),
+prefix, then FAST will assume it to be part of the previous parameter input, which may or may not be valid for certain commands. <br>
+    * e.g. if a command expects this parameter `ea v/New York` but you enter `ea v/New York p/87657654`, 
+  FAST will assume your input to `v/` to be `New York p/87657654`.
 </div>
 
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Parameters refer to the details that are to be included as an input to a command. <br>
+Prefix refers to the word symbol used before the parameter. 
+</div>
+
+<br> <br>
+
+### **Command Parameters**
+
+`ADDRESS` 
+* The address of your client
+* Can take any value (should not be *blank*)
+
+
+`COMMAND`
+* The type of command available in FAST
+
+
+`DATE`
+* The date of an appointment with your client
+* Should be in this format: `yyyy-mm-dd` 
+  * e.g. `2023-05-15` 
+* Should be a valid date where:
+  * `yyyy` (year): should be a non-negative 4-digit number
+  * `mm` (month): should be a valid calendar month between 01 and 12
+  * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
+
+
+`EMAIL`
+* The email address of your client
+* Should be in this format: `local-part@domain`
+* `local-part`: 
+  * should only contain *alphanumeric characters* and these *special characters* excluding parenthesis (!#$%&'*+/=?{|}~^.-`).
+  * should not start and end with special characters,
+* `domain`: 
+  * must be at least **2** characters long. 
+  * each domain label must start and end with alphanumeric characters
+  * each domain label is separated using hyphens (if any)
+
+
+`INDEX`
+* Refers to the number shown in the client list
+* **Must be a positive integer** 1, 2, 3, …​
+
+
+`NAME`
+* Name of your client
+* Should only contain alphanumeric characters and spaces (should not be blank)
+
+
+`PHONE`
+* The contact number of your client
+* Should only contain numbers
+* Should be at least **3** digit long
+
+
+`QUERY`
+* The term used to search for clients in FAST
+* `MORE QUERIES` also follows this definition
+* Can be any value but blank
+
+
+`REMARK`
+* Extra notes given for your client
+* Should not be more than **75** characters
+
+
+`TAG`
+* A label given to your client
+* There are 3 types of `TAG` in FAST:
+
+  Tag type|Prefix|Term
+  --------|-------|-----
+  Normal|`No Prefix`| Your preferred tag name, that contains at most **20** alphanumeric characters and no spaces.
+  Priority|`pr/`| `low`: Low Priority<br>`med`:Medium Priority<br>`high`:High Priority 
+  Investment plan|`ip/`| `health`: Health Insurance<br>`invest`: Investment<br>`life`: Life Insurance<br>`motor`: Motor Insurance<br>`property`: Property Insurance <br>`save`: Savings <br>`travel`: Travel Insurance
+
+1. Normal tags, which you can customise according to your needs.
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tags should be used to categorise clients; use short names for normal tags that you may be able to use for other clients as well!
+    </div>
+
+2. Priority tags, which have fixed names and help you to remember which contacts you need to focus on first.
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A client can **only have 1 priority tag** , but they can have other non-priority tags alongside the one priority tag.
+    </div>
+
+3. Investment plan tags, which help you recall the plans that each contact has bought.
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A client can have more than 1 investment plan tag, but they may not have more than 1 of the same investment plan tag.
+
+For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time.
+    </div>
+
+`TIME`
+* The timing of an appointment with your client
+* 24-hour format
+* Should be in this format: `HH:mm` 
+  * eg. `10:30` represents 10.30am
+* Should be a valid time from 00:00 to 23:59 where:
+  * `HH` (hour): should be between 00 and 23
+  * `mm` (minute): should be between 00 and 59
+
+
+`Venue`
+* The location of an appointment with your client
+* Should not be longer than **30** characters long
 <br> <br>
 
 ### **Managing a client**
@@ -628,9 +748,16 @@ FAST will start with an empty data file on the next run!
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Command summary**
+The tables below provides you with a summary for **all** the available commands in FAST. 
+The commands are categorised (based on their purpose) into 5 different categories:
+* Contact Management [Contact Management](#Contact Management)
+* Appointment [Appointment](#Appointment)
+* Tags [Tags](#Tags)
+* Navigation [Navigation](#Navigation)
+* Others [Others](#Others)
 
 ### Contact Management
-Action | Format, Examples
+Action|Format, Examples
 --------|------------------
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete Contact** | `del INDEX`<br> e.g. `del 3`
@@ -639,7 +766,7 @@ Action | Format, Examples
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 
 ### Appointment
-Action | Format, Examples
+Action|Format, Examples
 --------|------------------
 **Add appointment** |`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br>
 **Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br>
@@ -647,21 +774,21 @@ Action | Format, Examples
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
 
 ### Tags
-Action | Format, Examples
+Action|Format, Examples
 --------|------------------
 **Edit Tag** |`tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
 **Investment Plan Tag** | Health Insurance: `ip/health`<br>Investment: `ip/invest`<br>Life Insurance: `ip/life`<br>Motor Insurance: `ip/motor`<br>Property Insurance: `ip/property`<br>Savings: `ip/save`<br>Travel Insurance: `ip/travel`<br><br>
 **Priority Tag** | Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
 
 ### Navigation
-Action | Format, Examples
+Action|Format, Examples
 --------|------------------
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Sort** | `sort KEYWORD`
 **List** | `list`
 
 ### Others
-Action | Format, Examples
+Action|Format, Examples
 --------|------------------
 **Help** | `help [COMMAND]` <br> e.g. `help add`
 **Clear** | `clear`
