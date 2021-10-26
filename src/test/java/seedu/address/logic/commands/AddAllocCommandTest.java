@@ -2,15 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.ALLOC_DESCRIPTOR_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ALLOC_DESCRIPTOR_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithFilteredListChange;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -130,11 +122,10 @@ public class AddAllocCommandTest {
 
         String expectedMessage = AddAllocCommand.MESSAGE_DUPLICATE_STUDENT_NAME;
 
-        List<Student> expectedList = new ArrayList<>();
-        expectedList.add(simpleAmy);
-        expectedList.add(duplicateAmy);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandFailureWithFilteredListChange(addAllocCommand, model, expectedMessage, expectedList);
+        assertCommandFailureWithFilteredListChange(addAllocCommand, model, expectedMessage, expectedModel,
+                VALID_NAME_AMY);
     }
 
     @Test

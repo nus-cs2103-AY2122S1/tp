@@ -20,10 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.student.Assessment;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.Score;
-import seedu.address.model.student.Student;
+import seedu.address.model.student.*;
 import seedu.address.testutil.AllocDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.ScoreDescriptorBuilder;
@@ -182,12 +179,14 @@ public class CommandTestUtil {
      * @param command command to be executed.
      * @param actualModel actual state of the model.
      * @param expectedMessage expected error message.
-     * @param expectedList expected filteredList after executing command.
+     * @param expectedModel expected Model after executing command.
      */
     public static void assertCommandFailureWithFilteredListChange(Command command, Model actualModel,
-                                                                  String expectedMessage, List<Student> expectedList) {
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Student> expectedFilteredList = expectedList;
+                                                                  String expectedMessage, Model expectedModel,
+                                                                  String studentName) {
+        AddressBook expectedAddressBook = new AddressBook(expectedModel.getAddressBook());
+        expectedModel.updateFilteredStudentList(new NameEqualsPredicate(studentName));
+        List<Student> expectedFilteredList = new ArrayList<>(expectedModel.getFilteredStudentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());

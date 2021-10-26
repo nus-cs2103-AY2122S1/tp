@@ -150,11 +150,9 @@ public class AddScoreCommandTest {
 
         String expectedMessage = AddScoreCommand.MESSAGE_DUPLICATE_STUDENT_NAME;
 
-        List<Student> expectedList = new ArrayList<>();
-        expectedList.add(simpleAmy);
-        expectedList.add(duplicateAmy);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandFailureWithFilteredListChange(addScoreCommand, model, expectedMessage, expectedList);
+        assertCommandFailureWithFilteredListChange(addScoreCommand, model, expectedMessage, expectedModel, VALID_NAME_AMY);
     }
 
     @Test

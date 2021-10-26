@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.SameNameConflictUtil.showStudentsWithNameConflicts;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,12 +17,7 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.student.Assessment;
-import seedu.address.model.student.Group;
-import seedu.address.model.student.ID;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Score;
-import seedu.address.model.student.Student;
+import seedu.address.model.student.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -80,7 +74,11 @@ public class AddScoreCommand extends Command {
         }
 
         if (studentsToEdit.size() > 1) {
-            showStudentsWithNameConflicts(model, studentsToEdit);
+            List<String> matchedIds = studentsToEdit.stream()
+                    .map(Student::getName).map(Name::toString)
+                    .collect(Collectors.toList());
+            Predicate<Student> predicate = new NameEqualsPredicate(matchedIds.get(0));
+            model.updateFilteredStudentList(predicate);
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_NAME);
         }
 
