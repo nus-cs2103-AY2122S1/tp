@@ -38,10 +38,6 @@ public class DetailedStudentCard extends UiPart<Region> {
     public DetailedStudentCard(Student student) {
         super(FXML);
         this.student = student;
-        if (student.isWeak()) {
-            ObservableList<String> styleClass = name.getStyleClass();
-            styleClass.add("flag");
-        }
         name.setText(student.getName().fullName);
         groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);

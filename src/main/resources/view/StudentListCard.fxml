@@ -17,19 +17,13 @@
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+      <HBox alignment="CENTER_LEFT" spacing="30">
+        <Label fx:id="id" />
+        <VBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+          <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true"/>
+          <Label fx:id="groupName" text="\$groupName" />
+        </VBox>
       </HBox>
-      <Label fx:id="telegramHandle" styleClass="cell_small_label" text="\$telegramHandle" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="groupName" styleClass="cell_small_label" text="\$groupName" />
-      <Label fx:id="assessments" styleClass="cell_small_label" text="\$assessments" />
     </VBox>
   </GridPane>
 </HBox>

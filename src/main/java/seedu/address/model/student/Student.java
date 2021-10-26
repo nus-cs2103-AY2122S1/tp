@@ -96,6 +96,10 @@ public class Student {
     }
 
     public boolean isWeak() {
+        if (!assessments.asUnmodifiableObservableList().isEmpty()) {
+            int index  = assessments.asUnmodifiableObservableList().size() - 1;
+            return getAssessmentList().get(index).getScore().isFail();
+        }
         return false;
     }
 

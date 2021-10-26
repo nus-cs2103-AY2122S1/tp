@@ -40,7 +40,6 @@ public class MainWindow extends UiPart<Stage> {
     private GroupListPanel groupListPanel;
     private AssessmentListPanel assessmentListPanel;
     private DetailedStudentCard detailedStudentCard;
-    private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
     @FXML
@@ -54,9 +53,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane rightPanelPlaceholder;
-
-    @FXML
-    private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -122,9 +118,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         showAllStudentsAndGroups();
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCsBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -210,7 +203,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             // create a label
             Label label = new Label(commandResult.getFeedbackToUser());
 
@@ -244,7 +236,6 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }

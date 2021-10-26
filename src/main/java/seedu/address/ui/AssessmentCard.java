@@ -34,11 +34,16 @@ public class AssessmentCard extends UiPart<Region> {
     public AssessmentCard(Assessment assessment, int displayedIndex) {
         super(FXML);
         this.assessment = assessment;
+        ObservableList<String> assessmentCardStyleClass = assessmentCard.getStyleClass();
+        ObservableList<String> percentageStyleClass = percentage.getStyleClass();
         if (assessment.getScore().isFail()) {
-            ObservableList<String> styleClass = assessmentCard.getStyleClass();
-            styleClass.add("flag");
+            assessmentCardStyleClass.add("flag");
+            percentageStyleClass.add("fail");
+        } else {
+            assessmentCardStyleClass.add("normal-card");
+            percentageStyleClass.add("pass");
         }
-        id.setText(displayedIndex + ". ");
+        id.setText(String.format("%d", displayedIndex));
         name.setText(assessment.getAssessmentName().toString());
         grade.setText(assessment.getScore().toString());
         percentage.setText(assessment.getScore().getPercentage() + "%");
