@@ -11,8 +11,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NextMeeting;
-import seedu.address.ui.ThemeType;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.ThemeType;
 
 /**
  * API of the Logic component
@@ -108,14 +108,16 @@ public interface Logic {
     ObservableList<ThemeType> getThemeList();
 
     /**
+     * Returns the current theme.
+     */
+    ThemeType getTheme();
+
+    /**
      * Sets the theme of the GUI in user prefs.
      */
     void setTheme(ThemeType theme);
 
     /**
-     * Returns the current theme.
-     */
-    ThemeType getTheme();
      * Returns an unmodifiable view of the filtered list of tags
      */
     ObservableList<Tag> getFilteredTagList();
