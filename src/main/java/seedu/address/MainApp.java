@@ -211,10 +211,10 @@ public class MainApp extends Application {
      * @throws NoSuchPaddingException If the padding does not exist.
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
      */
-    public void logIn(String input) throws UnsupportedPasswordException,
-            NoSuchPaddingException, NoSuchAlgorithmException {
+    public void logIn(String input) throws UnsupportedPasswordException, NoSuchPaddingException,
+            NoSuchAlgorithmException, InvalidAlgorithmParameterException, IOException, InvalidKeyException {
         Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
-        if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
+        if (!hasEncryptedFile()) {
             logger.info("Data file not found. Will be starting with a sample AddressBook");
             try {
                 storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
@@ -224,22 +224,28 @@ public class MainApp extends Application {
                 e.printStackTrace();
             }
         }
-        try {
-            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
-            FileUtil.deleteFile(storage.getAddressBookFilePath());
-            model = initModelManager(storage, userPrefs, cryptor);
-            logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
-            new UiManager(logic).start(stage);
-        } catch (InvalidAlgorithmParameterException | IOException | InvalidKeyException e) {
-            e.printStackTrace();
-        }
+        cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+        FileUtil.deleteFile(storage.getAddressBookFilePath());
+        model = initModelManager(storage, userPrefs, cryptor);
+        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
+        new UiManager(logic).start(stage);
+    }
+
+
+    /**
+     * Checks if the user has existing data.
+     *
+     * @return True if there is an encrypted data file. False if otherwise.
+     */
+    private boolean hasEncryptedFile() {
+        return FileUtil.isFileExists(userPrefs.getEncryptedFilePath());
     }
 
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         this.stage = primaryStage;
-        new LoginScreen(this, !FileUtil.isFileExists(userPrefs.getEncryptedFilePath()), primaryStage).show();
+        new LoginScreen(this, !hasEncryptedFile(), primaryStage).show();
     }
 
     @Override

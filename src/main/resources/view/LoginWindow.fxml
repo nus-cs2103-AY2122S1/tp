@@ -28,7 +28,7 @@
                     <padding>
                         <Insets top="5" right="10" bottom="5" left="10" />
                     </padding>
-                    <TextField fx:id="userInput" />
+                    <TextField fx:id="userInput" onAction="#onEnter"/>
                 </StackPane>
                 <StackPane VBox.vgrow="NEVER" styleClass="status-bar" prefHeight="30">
                     <padding>
