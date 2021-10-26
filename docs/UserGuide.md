@@ -130,7 +130,7 @@ Format: `medit /m MEMBER_ID [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p P
 * Edits the member at the specified `MEMBER_ID`. The index refers to the index number shown in the displayed member list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing positions, the existing positions of the member will be removed i.e adding of positions is not cumulative.
+* When editing positions, the existing positions of the member will be removed i.e. adding of positions is not cumulative.
 * You can remove all the member’s positions by typing `/p` without specifying any positions after it.
 
 Examples:
@@ -144,7 +144,7 @@ Finds members whose names contain any of the given keywords.
 
 Format: `mfind KEYWORD [MORE_KEYWORDS]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
