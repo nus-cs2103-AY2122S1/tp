@@ -35,12 +35,18 @@ import seedu.address.model.util.PersonUtil;
  */
 public class FeesCalculator implements Calculator {
     public static final String MESSAGE_PAY_TOO_MUCH = "Payment amount exceeds current "
-            + "uutstanding fees. Invalid transaction.";
+            + "outstanding fees. Invalid transaction.";
 
     private static final float numberOfMinutesInAnHour = 60.00F;
     private final LocalDateTime currentDateTime;
     private final LastUpdatedDate lastUpdated;
 
+    /**
+     * Constructs a {@code FeesCalculator}
+     *
+     * @param lastUpdatedDate Last Updated Date. Equivalent to last date and time user launched TAB.
+     * @param currentDateTime Current Date and Time.
+     */
     public FeesCalculator(LastUpdatedDate lastUpdatedDate, LocalDateTime currentDateTime) {
         lastUpdated = lastUpdatedDate;
         this.currentDateTime = currentDateTime.truncatedTo(ChronoUnit.MINUTES);
@@ -94,7 +100,8 @@ public class FeesCalculator implements Calculator {
 
         // update outstanding fees after calculation
         OutstandingFees updatedOutstandingFees = lesson.hasStarted() && !lesson.hasEnded()
-                ? getUpdatedOutstandingFees(currentOutstanding, lesson.getDayOfWeek(), copiedTimeRange, copiedLessonRates)
+                ? getUpdatedOutstandingFees(currentOutstanding, lesson.getDayOfWeek(),
+                        copiedTimeRange, copiedLessonRates)
                 : new OutstandingFees(lesson.getOutstandingFees().value);
 
         return lesson.isRecurring()
@@ -140,10 +147,13 @@ public class FeesCalculator implements Calculator {
         // Get the nearest Monday
         LocalDate nearestNextMondayToLastUpdated =
                 lastUpdated.dateTime.toLocalDate().with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
-        long numOfDaysBeforeMonday = lastUpdated.dateTime.toLocalDate().until(nearestNextMondayToLastUpdated, ChronoUnit.DAYS);
+        long numOfDaysBeforeMonday = lastUpdated.dateTime
+                .toLocalDate()
+                .until(nearestNextMondayToLastUpdated, ChronoUnit.DAYS);
 
         // if lesson is same day of week as last updated, check if last updated is after lesson
-        boolean isSameDayLessonBeforeUpdate = updateDay.getValue() != lastUpdatedDay || lastUpdated.dateTime.toLocalTime().isBefore(endTime);
+        boolean isSameDayLessonBeforeUpdate = updateDay.getValue() != lastUpdatedDay
+                || lastUpdated.dateTime.toLocalTime().isBefore(endTime);
 
         // If lesson does not fall on a Monday itself
         // check if the lastUpdated day is it on the lesson's update day or after the updated day
@@ -162,9 +172,11 @@ public class FeesCalculator implements Calculator {
 
         numOfLessons += ChronoUnit.WEEKS.between(nearestNextMondayToLastUpdated, nearestPreviousMondayToCurrent);
 
-        long numOfDaysAfterMonday = nearestPreviousMondayToCurrent.until(currentDateTime.toLocalDate(), ChronoUnit.DAYS);
+        long numOfDaysAfterMonday = nearestPreviousMondayToCurrent
+                .until(currentDateTime.toLocalDate(), ChronoUnit.DAYS);
 
-        boolean isSameDayLessonAfterCurrent = updateDay.getValue() != currentUpdatedDay || lastUpdated.dateTime.toLocalTime().isAfter(endTime);
+        boolean isSameDayLessonAfterCurrent = updateDay.getValue() != currentUpdatedDay
+                || lastUpdated.dateTime.toLocalTime().isAfter(endTime);
 
         boolean isLessonBetweenMondayAndToday = numOfDaysAfterMonday > 0
                 && updateDay.getValue() <= currentUpdatedDay

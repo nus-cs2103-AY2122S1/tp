@@ -40,7 +40,7 @@ public class OutstandingFees extends Money {
 
     @Override
     public String toString() {
-        return "$" + df.format(value);
+        return "$" + value;
     }
 
     @Override

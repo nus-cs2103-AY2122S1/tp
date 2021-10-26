@@ -1,16 +1,18 @@
 package seedu.address.logic;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.LastUpdatedDate;
-import seedu.address.model.lesson.OutstandingFees;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 
 import java.time.LocalDateTime;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.LastUpdatedDate;
+import seedu.address.model.lesson.OutstandingFees;
 
 class FeesCalculatorTest {
     private final LastUpdatedDate lastUpdatedDate = new LastUpdatedDate("2021-10-15T00:00");
-    FeesCalculator feesCalculator = new FeesCalculator(lastUpdatedDate, LocalDateTime.parse("2021-10-25T08:00"));
+    private FeesCalculator feesCalculator =
+            new FeesCalculator(lastUpdatedDate, LocalDateTime.parse("2021-10-25T08:00"));
 
     @Test
     public void updateLessonOutstandingFeesField_recurringLessons() {
