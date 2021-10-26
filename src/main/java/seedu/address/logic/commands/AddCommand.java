@@ -45,7 +45,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_NAME + "John Doe "
             + PREFIX_ADDRESS + "S712345 "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@google.com "
+            + PREFIX_EMAIL + "johnd@gmail.com "
             + PREFIX_PARENT_PHONE + "91234567 "
             + PREFIX_PARENT_EMAIL + "jackd@google.com "
             + PREFIX_SCHOOL + "SJI "
