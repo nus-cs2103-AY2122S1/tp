@@ -20,6 +20,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemoveMarkCommand;
+import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.logic.commands.StaffIndividualStatisticsCommand;
 import seedu.address.logic.commands.StaffStatisticsCommand;
@@ -107,6 +108,9 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case SetRoleReqCommand.COMMAND_WORD:
+            return new SetRoleReqCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
