@@ -5,22 +5,28 @@ title: User Guide
 ![Banner](images/banner.png)
 
 Dash is a personal planner app which offers unparalleled speed using text-based input. It supports both management of
-tasks and contacts. Dash is tailored to the needs of students, who must keep track of a slew of different deadlines and
-commitments. So long as you're a fast typist, with its keyboard-optimised navigability, Dash provides a blisteringly
-quick way to stay on top of your responsibilities.
+tasks and contacts. Dash is tailored to the needs of university students, who must keep track of a slew of different 
+deadlines and commitments. So long as you're a fast typist, Dash provides a blisteringly quick way to stay on top of 
+your responsibilities using your keyboard.
 
-You can navigate this guide by clicking the table of contents. If you're a new user, the Quick Start guide has all you
-need to get started. If you're an intermediate user looking to get more out of Dash, all supported commands are listed
-below.
+This guide was written to help you set up and start using Dash. You can navigate by clicking the table of 
+contents [below](#table-of-contents). If you're a new user, the Quick Start guide has all you need to get started. If 
+you're an intermediate user looking to get more out of Dash, all supported commands are listed below.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## <u>Quick start</u>
+## <u>Setting up Dash</u>
 
 Whether you're using Windows or macOS, the steps for installation are the same.
+
+video here
 
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
@@ -28,17 +34,47 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+   icon and notes for shortcut here
+
+4. Double-click the file to start the app. Here's what you should see in a few seconds:<br>
    ![Ui](images/UG-00.png)
+   
+5. That's all you need to do for the setup. To get started writing commands, refer to the Getting Started section 
+   [below](#ugetting-startedu).
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+--------------------------------------------------------------------------------------------------------------------
+   
+## <u>Getting Started</u>
 
-* **`contacts`** : Switches to the contacts tab, where you can view and manage your contacts.
+Dash supports contact and task management in several ways. 
+In terms of contact management, Dash allows you to add contacts and fill in details such as their 
+phone number, address, and email. 
+It even allows you to group them using tags such as "Neighbour" or "Colleague", so you can look them up more easily. 
+For task management, Dash allows you to add tasks, tag them, and set deadlines for them. 
+Once you're done with a task, you can mark it as complete.
 
-* **`tasks`** : Switches to the tasks tab, where you can view and manage your tasks.
+Dash uses a tab system to keep your contacts and tasks separate. 
+To view and edit your contact list, you must switch to the contacts tab. 
+Similarly, to view and edit your task list, you must switch to the tasks tab. 
+Finally, the help tab provides you with a quick summary of Dash's features and how to use them.
 
-* **`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`** : Adds a contact with specified details.
+![Switching Tabs](images/UG-01.png)
+
+Dash uses a Command Line Interface (CLI) to optimize speed. This means that you use mostly your keyboard to interact 
+with Dash, instead of relying on your mouse to click on options.    
+   
+   icons for notes abt cli here, talk about how you cant click on tabs here
+
+![Using the CLI](images/CLITutorialGif.gif)
+
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+Some example commands you can try:
+
+* **`contacts`** : Switches to the contacts tab
+
+* **`tasks`** : Switches to the tasks tab
+
+* **`add n/Joe`** : Adds a contact named Joe.
 
 * **`clear`** : Deletes all contacts.
 
@@ -76,9 +112,6 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 
 ### <u>General</u>
 
-Dash uses **tabs** to help you compartmentalize between contacts and tasks.
-
-![Switching Tabs](images/UG-01.png)
 #### Switch Tabs: [contacts] or [tasks] or [help]
 
 Switches to the specified tab.
@@ -334,7 +367,7 @@ Format: ```clear```
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <u>Handling Date and Time of tasks</u>
+#### <u>Handling Date and Time of tasks</u>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about specifying date and time:**<br>
