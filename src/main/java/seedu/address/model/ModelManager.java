@@ -273,6 +273,15 @@ public class ModelManager implements Model {
 
     @Override
     public void transactAndClearOrder() {
+        transactAndClearOrder(userPrefs.getTransactionFilePath());
+    }
+
+    /**
+     * Helper TransactAndClearOrder with given path (for testing purposes)
+     *
+     * @param path the path of the file
+     */
+    public void transactAndClearOrder(Path path) {
         assert hasUnclosedOrder();
 
         TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
@@ -282,7 +291,7 @@ public class ModelManager implements Model {
 
         try {
             new TransactionStorage().saveTransaction(new ArrayList(transactions),
-                    userPrefs.getTransactionFilePath());
+                    path);
         } catch (IOException e) {
             System.out.println(e);
         }

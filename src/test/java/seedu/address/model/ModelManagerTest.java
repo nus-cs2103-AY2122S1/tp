@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
@@ -33,6 +34,9 @@ import seedu.address.testutil.TypicalItems;
 import seedu.address.testutil.TypicalOrders;
 
 public class ModelManagerTest {
+
+    @TempDir
+    public Path temporaryFolder;
 
     private ModelManager modelManager = new ModelManager();
 
@@ -189,7 +193,7 @@ public class ModelManagerTest {
         ModelManager model = new ModelManager();
         model.setInventory(TypicalItems.getTypicalInventory());
         model.setOrder(TypicalOrders.getTypicalOrder());
-        model.transactAndClearOrder();
+        model.transactAndClearOrder(temporaryFolder.resolve("transaction.json"));
 
         assertFalse(model.hasUnclosedOrder());
         assertEquals(model.getInventory(), new Inventory());
