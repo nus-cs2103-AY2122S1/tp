@@ -79,6 +79,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
 
     /**
      * Constructs a group by copying details from the given group
+     *
      * @param toCopy to copy
      */
     public Group(Group toCopy) {
@@ -87,6 +88,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
         this.assignedTaskIds.addAll(toCopy.assignedTaskIds);
         this.assignedPersonIds.addAll(toCopy.assignedPersonIds);
         this.lessonList = toCopy.lessonList;
+        id.setOwner(this);
     }
 
     public GroupName getName() {
@@ -147,6 +149,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
+    @Override
     public Set<UniqueId> getAssignedTaskIds() {
         return Collections.unmodifiableSet(assignedTaskIds);
     }
@@ -157,6 +160,7 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
      * @param newAssignedTaskIds the new assigned task id list
      * @return new Person instance with the updated assigned task id list
      */
+    @Override
     public Group updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
         return new Group(name, id, newAssignedTaskIds, assignedPersonIds, lessonList);
@@ -173,8 +177,23 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
         return new Group(name, id, assignedTaskIds, ids, lessonList);
     }
 
-    public List<Group> getFilteredListFromModel(Model model) {
-        return model.getFilteredGroupList();
+    @Override
+    public String getNameInString() {
+        return name.toString();
+    }
+
+    @Override
+    public boolean isSameTaskAssignable(TaskAssignable otherTaskAssignable) {
+        if (!(otherTaskAssignable instanceof Group)) {
+            return false;
+        }
+
+        return isSameGroup((Group) otherTaskAssignable);
+    }
+
+    @Override
+    public boolean isInModel(Model model) {
+        return model.hasGroup(this);
     }
 
     /**
@@ -258,9 +277,6 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
-
-        return builder.toString();
+        return String.valueOf(getName());
     }
 }

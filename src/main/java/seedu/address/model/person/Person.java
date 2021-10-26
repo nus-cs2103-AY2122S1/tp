@@ -261,28 +261,37 @@ public class Person implements HasUniqueId, Attendee,
         return newPerson;
     }
 
+    @Override
+    public String getNameInString() {
+        return name.toString();
+    }
+
     /**
      * Immutable way of updating the assigned task id list
      *
      * @param newAssignedTaskIds the new assigned task id list
      * @return new Person instance with the updated assigned task id list
      */
+    @Override
     public Person updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
         return new Person(id, name, phone, email, address, tags, newAssignedTaskIds,
                 lessonsList, exams, assignedGroupIds);
     }
 
-    /**
-     * Gets the filter list from the given model.
-     *
-     * @param model The model that stores the filter list.
-     * @return The filter list from the given model.
-     */
     @Override
-    public List<Person> getFilteredListFromModel(Model model) {
-        return model.getFilteredPersonList();
-    };
+    public boolean isSameTaskAssignable(TaskAssignable otherTaskAssignable) {
+        if (!(otherTaskAssignable instanceof Person)) {
+            return false;
+        }
+
+        return isSamePerson((Person) otherTaskAssignable);
+    }
+
+    @Override
+    public boolean isInModel(Model model) {
+        return model.hasPerson(this);
+    }
 
     /**
      * Returns true if both persons have the same name.
