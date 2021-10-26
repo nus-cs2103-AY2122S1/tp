@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -149,6 +150,52 @@ public class ModelManager implements Model {
             stringBuilder.append(appointment + "\n");
         }
         return stringBuilder.toString();
+    }
+
+    @Override
+    public String getAppointmentsThatOnlyHaveThisClientAsString(Person client) {
+        List<Appointment> appointmentsThatOnlyHaveThisClient = new ArrayList<>();
+        for (Appointment appointment : getRelatedAppointments(client)) {
+            if (appointment.isTheOnlyClient(client)) {
+                appointmentsThatOnlyHaveThisClient.add(appointment);
+            }
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Appointment appointment : appointmentsThatOnlyHaveThisClient) {
+            stringBuilder.append(appointment + "\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * When a person is edited, update all the appointments in the appointment list that contains this person
+     * by replacing the {@Code personToEdit} with the new {@Code editedPerson} instance.
+     * @param personToEdit The person to be edited.
+     * @param editedPerson The new person instance created.
+     */
+    @Override
+    public void updateEditedClientInAppointments(Person personToEdit, Person editedPerson) {
+        List<Appointment> relatedAppointments = getRelatedAppointments(personToEdit);
+        for (Appointment appointment : relatedAppointments) {
+            appointment.removeClient(personToEdit);
+            appointment.addClient(editedPerson);
+        }
+    }
+
+    /**
+     * Remove the given person from the client list of the appointments,
+     * if the appointment has no client after the deletion, the appointment will be removed from schedule.
+     * @param personToDelete the given person to delete.
+     */
+    @Override
+    public void removePersonFromAppointments(Person personToDelete) {
+        List<Appointment> relatedAppointments = getRelatedAppointments(personToDelete);
+        for (Appointment appointment : relatedAppointments) {
+            appointment.removeClient(personToDelete);
+            if (appointment.isClientListEmpty()) {
+                schedule.deleteAppointment(appointment);
+            }
+        }
     }
 
     /**

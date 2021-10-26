@@ -45,10 +45,11 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         String relatedAppointment = MESSAGE_DELETE_PERSON_WARNING
-                + model.getRelatedAppointmentsAsString(personToDelete);
+                + model.getAppointmentsThatOnlyHaveThisClientAsString(personToDelete);
 
         if (UiManager.showDeleteDialogAndWait(relatedAppointment)) {
             model.deletePerson(personToDelete);
+            model.removePersonFromAppointments(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         } else {
             return new CommandResult("No person deleted.");

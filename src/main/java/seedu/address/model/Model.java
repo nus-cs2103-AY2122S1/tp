@@ -115,10 +115,32 @@ public interface Model {
     void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 
     /**
-     * Returns the String representation of {@Code Appointment} that is related to the {@Code Person}
+     * Returns the String representation of {@Code Appointment} that is related to the {@Code Person}.
      *
-     * @param client the person to search
+     * @param client the person to search.
      * @return the String representation of the list of appointments related to the client.
      */
     String getRelatedAppointmentsAsString(Person client);
+
+    /**
+     * Returns the String representation of {@Code Appointment} that only have this {@Code client} in its client list.
+     *
+     * @param client the person to search.
+     * @return the String representation of the list of appointments that only have this client in its client list.
+     */
+    String getAppointmentsThatOnlyHaveThisClientAsString(Person client);
+
+    /**
+     * Replace the client in the client list of the appointments by a new edited client.
+     * @param personToEdit the previous client.
+     * @param editedPerson the new client that created when edit person information.
+     */
+    void updateEditedClientInAppointments(Person personToEdit, Person editedPerson);
+
+    /**
+     * Remove the given person from the client list of the appointments,
+     * if the appointment has no client after the deletion, the appointment will be removed from schedule.
+     * @param personToDelete the given person to delete.
+     */
+    void removePersonFromAppointments(Person personToDelete);
 }
