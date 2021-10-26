@@ -17,15 +17,15 @@ import seedu.address.testutil.TypicalPersons;
 public class JsonSerializableConthacksTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableConthacksTest");
-    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
+    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsConthacks.json");
     private static final Path TYPICAL_MODULE_CLASSES_FILE = TEST_DATA_FOLDER
-            .resolve("typicalModuleClassesAddressBook.json");
-    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
+            .resolve("typicalModuleClassesConthacks.json");
+    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonConthacks.json");
     private static final Path INVALID_MODULE_CLASS_FILE = TEST_DATA_FOLDER
-            .resolve("invalidModuleClassAddressBook.json");
-    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+            .resolve("invalidModuleClassConthacks.json");
+    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonConthacks.json");
     private static final Path DUPLICATE_MODULE_CLASS_FILE = TEST_DATA_FOLDER.resolve(
-            "duplicateModuleClassAddressBook.json");
+            "duplicateModuleClassConthacks.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
