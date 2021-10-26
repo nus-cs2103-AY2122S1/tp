@@ -123,7 +123,7 @@ Adds a person to the address book.
 Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-The [Parameters Constraints](#parameters-constraints) section shows the constaints for each parameter
+The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
 </div>
 
 * Only `n/NAME` field is *compulsory*, while other fields are *optional*.
@@ -257,7 +257,7 @@ Format: **`exit`**
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Parameters Constraints
+## Parameter Constraints
 
 ### `n/NAME`
 `NAME` should only contain alphanumeric characters and spaces.
