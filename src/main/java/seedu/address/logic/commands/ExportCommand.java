@@ -112,7 +112,7 @@ public class ExportCommand extends Command {
 
         List<Group> groups = student.getGroups();
         for (Group group : groups) {
-            writeContent.append(group.getValue()).append(",");
+            writeContent.append(group.getName()).append(",");
         }
         for (int i = groups.size(); i < groupColumns; i++) {
             writeContent.append(",");
