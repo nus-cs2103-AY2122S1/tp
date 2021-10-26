@@ -27,7 +27,7 @@ public class AddStudentsToLessonsCommandParser implements Parser<AddStudentsToLe
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT, PREFIX_LESSON);
 
-        // Student name is a required fields (student phone, parent name and parent phone are optional)
+        // Must specify student indexes and lesson indexes so these students can be added to these lessons
         if (argMultimap.getValue(PREFIX_STUDENT).isEmpty()
                 || argMultimap.getValue(PREFIX_LESSON).isEmpty()
                 || !argMultimap.getPreamble().isEmpty()) {

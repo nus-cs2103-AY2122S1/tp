@@ -98,7 +98,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
     private boolean canAcceptMoreStudents(Lesson lesson, int numOfStudents) {
         requireNonNull(lesson);
         requireNonNull(numOfStudents);
-        return !lesson.willExceedCapacity(numOfStudents);
+        return !lesson.exceedsCapacity(numOfStudents);
     }
 
     private boolean canAllLessonsAcceptMoreStudents(ArrayList<Lesson> lessons, ArrayList<Student> students) {
@@ -136,7 +136,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * @param lastShownStudentList the last list that was shown to the user
      * @param targetIndexesForStudents indexes of students to be added
      */
-    public ArrayList<Student> getStudentsToEdit (
+    public ArrayList<Student> getStudentsToAdd (
             List<Student> lastShownStudentList, ArrayList<Index> targetIndexesForStudents) throws CommandException {
 
         ArrayList<Student> studentsToEdit = new ArrayList<>();
@@ -153,12 +153,11 @@ public class AddStudentsToLessonsCommand extends AddCommand {
     }
 
     /**
-     * Returns an arraylist of lessons to have students added.
-     *
+     * Returns an arraylist of lessons to be added to students
      * @param lastShownLessonList the last list that was shown to the user
      * @param targetIndexesForLessons indexes of lessons to have students added
      */
-    public ArrayList<Lesson> getLessonsToEdit (
+    public ArrayList<Lesson> getLessonsToAdd (
             List<Lesson> lastShownLessonList, ArrayList<Index> targetIndexesForLessons) throws CommandException {
 
         ArrayList<Lesson> lessonsToEdit = new ArrayList<>();
@@ -182,8 +181,8 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
         List<Lesson> lastShownLessonList = model.getFilteredLessonList();
 
-        ArrayList<Student> studentsToEdit = getStudentsToEdit(lastShownStudentList, targetIndexesForStudents);
-        ArrayList<Lesson> lessonsToEdit = getLessonsToEdit(lastShownLessonList, targetIndexesForLessons);
+        ArrayList<Student> studentsToEdit = getStudentsToAdd(lastShownStudentList, targetIndexesForStudents);
+        ArrayList<Lesson> lessonsToEdit = getLessonsToAdd(lastShownLessonList, targetIndexesForLessons);
 
         if (isAnyOfTheseStudentsAttendingAnyOfTheseLessons(studentsToEdit, lessonsToEdit)) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON);

@@ -20,8 +20,8 @@ public class Messages {
             + " must not be attending any of the lessons provided";
     public static final String MESSAGE_INVALID_STUDENT_NOT_IN_LESSON = "The students provided"
             + " must be attending all of the lessons provided";
-    public static final String MESSAGE_INVALID_LESSON_FULL = "At least one of the lessons cannot accommodate"
-            + " all the students provided as it will exceed capacity";
+    public static final String MESSAGE_INVALID_LESSON_FULL = "Adding all the students provided will exceed"
+            + " the capacity of one or more lessons";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
 }
