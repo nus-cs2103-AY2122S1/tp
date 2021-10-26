@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-### *Welcome to the SportsPA User Guide!*
+**Welcome to the SportsPA User Guide!**
 
 SportsPA is a desktop application targeted for use among NUS sports CCA Leaders. It is used to manage membership and
 training sessions for NUS sports CCAs. SportsPA allows you to keep track of details of your members as well as
@@ -15,8 +15,9 @@ guide provides an in-depth documentation on the all the commands available. If t
 we also provide a quick start guide that demonstrates the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
-## <a name="table-of-contents"></a>Table of Contents
-* {:toc}
+<a name="table-of-contents"></a>**Table of Contents**
+* Table of Contents
+{:toc}
 _____________________________________________________________________________________________________________
 ## How to use the User Guide
 
