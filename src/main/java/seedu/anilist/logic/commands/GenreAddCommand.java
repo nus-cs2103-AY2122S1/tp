@@ -27,7 +27,7 @@ public class GenreAddCommand extends GenreCommand {
     public static final String MESSAGE_GENRE_PRESENT = "Genre(s) %1$s are already present in anime.\n"
             + "%2$s";
     public static final String MESSAGE_PARTIAL_SUCCESS = "Genres %1$s added.\n"
-            + "Genres %2$s are already present in anime.\n"
+            + "Genre(s) %2$s are already present in anime.\n"
             + "%3$s";
 
     public GenreAddCommand(Index index, GenreCommand.GenresDescriptor genresDescriptor) {
