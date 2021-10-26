@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.done.Done;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -96,6 +97,10 @@ public class PersonTest {
 
         // different notes -> returns false
         editedAlice = new PersonBuilder(ALICE).withNotes(VALID_NOTES_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different done status -> return false
+        editedAlice = new PersonBuilder(ALICE).withDone(Done.STATUS_DONE).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
