@@ -20,10 +20,17 @@ public class NationalityTest {
 
         // invalid nationality
         assertFalse(Nationality.isValidNationality(" ")); // spaces only
+        assertFalse(Nationality.isValidNationality("Singapor")); // this is a country, not a nationality
+        assertFalse(Nationality.isValidNationality("Indonesia"));
 
         // valid nationality
-        assertTrue(Nationality.isValidNationality("Singapore"));
-        assertTrue(Nationality.isValidNationality("-")); // one character
-        assertTrue(Nationality.isValidNationality("")); // empty string
+        assertTrue(Nationality.isValidNationality("Singaporean"));
+        assertTrue(Nationality.isValidNationality("Indonesian"));
+        assertTrue(Nationality.isValidNationality("American"));
+        // case-insensitive
+        assertTrue(Nationality.isValidNationality("singaporean"));
+        assertTrue(Nationality.isValidNationality("south korean"));
+        assertTrue(Nationality.isValidNationality("vietnamese"));
+        assertTrue(Nationality.isValidNationality("thai"));
     }
 }

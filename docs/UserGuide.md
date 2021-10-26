@@ -163,7 +163,7 @@ Edits an existing person in the address book.
 
 Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 
-* `FIELD_PREFIX/VALUE` can be any of the following: 
+* `FIELD_PREFIX/VALUE` can be any of the following:
      * `n/NAME`
      * `g/GENDER`
      * `p/PHONE`
@@ -193,7 +193,7 @@ Finds a person or a list of persons using `KEYWORD`.
 
 Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
-* `FIELD_PREFIX/KEYWORD` can be any of the following: 
+* `FIELD_PREFIX/KEYWORD` can be any of the following:
      * `n/NAME`
      * `g/GENDER`
      * `p/PHONE`
@@ -207,7 +207,7 @@ Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 * As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
 * Persons matching at least one keyword will be returned (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
   return `Hans Gruber`, `Bo Yang`)
-  
+
 Examples:
 
 * **`find`** `n/John` returns `john` and `John Doe`.

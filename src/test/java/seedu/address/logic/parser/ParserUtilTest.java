@@ -35,7 +35,7 @@ public class ParserUtilTest {
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_GENDER = "M";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_NATIONALITY = "Vietnam";
+    private static final String VALID_NATIONALITY = "Vietnamese";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TUTORIAL_GROUP = "T09";
     private static final String VALID_SOCIAL_HANDLE = "@rachelw";
