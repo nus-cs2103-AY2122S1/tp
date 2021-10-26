@@ -70,6 +70,19 @@ public class DeleteLessonCommandTest {
     }
 
     @Test
+    public void execute_deleteLessonWithStudents_success() {
+        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_SECOND_LESSON);
+
+        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
+        expectedModel.deleteLesson(lessonToDelete);
+
+        assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         DeleteLessonCommand deleteLessonFirstCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
         DeleteLessonCommand deleteLessonSecondCommand = new DeleteLessonCommand(INDEX_SECOND_LESSON);
