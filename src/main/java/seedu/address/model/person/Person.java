@@ -31,7 +31,7 @@ public class Person implements Comparable<Person> {
     // Status fields
     private boolean isFavourite;
 
-    //Extra fields
+    // Extra fields
     private Image profilePicture;
     private Thread parallelTask;
 
