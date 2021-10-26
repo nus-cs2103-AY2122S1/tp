@@ -30,10 +30,6 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 
    3.1 [Add student/class](#31-add-studenttuition-class)
 
-    &nbsp; 3.1.1 [Add student](#311-adding-a-student)
-
-    &nbsp; 3.1.2 [Add class](#311-adding-a-class)
-
    3.2 [View student/class](#32-view-studenttuition-class)
 
    3.3 [Edit student/class](#33-edit-studenttuition-class)
@@ -100,11 +96,15 @@ If you are a fast typer, you can operate the application more easily and faster 
 Graphical User Interface (GUI) applications; GUI applications allow users to interact 
 with the application via graphical icons such as buttons.
 
-You do not have to worry at all even if you are new to CLI applications as this user guide will take you through step by step on how various features of the NUSMaze can be utilised, all geared towards providing the best possible experience to the user.
+You do not have to worry at all even if you are new to CLI applications as 
+this user guide will take you through step by step on how various 
+features of the TutAssistor can be utilised, all directed towards 
+providing the best possible experience to the user.
 
 ### 1.2 What can TutAssistor do for you?
 
-TutAssistor provides an all-in-one platform for you to manage information regarding your students and lessons stress-free and efficiently. In the latest version, we offer you the ability to: 
+TutAssistor provides an all-in-one platform for you to manage information 
+regarding your students and lessons stress-free and efficiently. In the latest version, we offer you the ability to: 
 
 * Track student details
 * Keep student details up-to-date
@@ -216,7 +216,7 @@ Refer to the [Additional Command Format Information](#4-additional-command-forma
 </div>
 
 ### 3.1 Add student/tuition class
-#### 3.1.1 Adding a student: `add` | `a`
+#### Adding a student: `add` | `a`
 Adds a student with the specified information such as name, phone number, etc. 
 > [Read more on the requirements of the various parameters used.](#4-additional-command-format-information)
 
@@ -231,7 +231,7 @@ add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks
 ```
 
-#### 3.1.2 Adding a tuition class: `addclass` | `ac`
+#### Adding a tuition class: `addclass` | `ac`
 Adds a tuition class with a set limit of students at a specified [timeslot](#44-timeslot). TutAssistor will notify you if there are any conflicting timeslots.
 
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
@@ -266,7 +266,7 @@ or
 vs 2
 ```
 ![view student](images/student_view.png)
-*Displaying a student's details in the information page.*
+align="center">*Displaying a student's details in the information page.*
 
 #### 3.2.2 Viewing a tuition class: `class` | `vc`
 Format: `class INDEX`
@@ -280,7 +280,9 @@ or
 vc 3
 ```
 ![view class](images/class_view.png)
+<p align="center">
 *Displaying a class' details in the information page.*
+</p>
 
 ### 3.3 Edit student/tuition class
 Edits an existing student or tuition class.
@@ -627,26 +629,26 @@ hence you do not lose any data.
 
 Action | Format | Shortcut
 -------|--------|---------
-[**Add Student**](#311-adding-a-student) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
-***Add Class*** | `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]` | `ac`
-***View Student*** | `student INDEX` | `vs`
-***View Class*** | `class INDEX` | `vc`
-***Edit Student*** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` | `e`
-***Edit Class*** | `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]` | `ec`
-***Delete Student*** | `delete INDEX_STUDENT [INDEX_STUDENT]...` | `del`
-***Delete Class*** | `deleteclass INDEX_CLASS [INDEX_CLASS]...` | `delc`
-***Add Student to Class*** | `addtoclass si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS`<br>or<br>`addtoclass s/NAME[,NAME...] tc/INDEX_CLASS` | `atc`
-***Remove Students from Class*** | `remove si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS` | `rm`
-***Add Remarks to Student*** | `remark INDEX_STUDENT` | `re`
-***Add Remarks to Class*** | `remarkclass INDEX_CLASS` | `rec`
-***Find Student by Name*** | `find KEYWORD [KEYWORD]...` | `f`
-***Find Class by Name*** | `findclass KEYWORD [KEYWORD]...` | `fc`
-***List all Students*** | `list` | `l`
-***List all Classes*** | `listclass` | `lc`
-***Sort Tuition Class*** | `sort [o/ORDER]` | `s`
-***View Timetable*** | `timetable` | `tt`
-***View Today's Classes*** | `today` | `td`
-***Help*** | `help` | `h`
-***Clear all data*** | `clear` | -
-***Exit*** | `exit` | -
+[**Add Student**](#31-add-studenttuition-class) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
+[***Add Class***](#31-add-studenttuition-class) |`addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]` | `ac`
+[***View Student***](#32-view-studenttuition-class) | `student INDEX` | `vs`
+[***View Class***](#32-view-studenttuition-class) | `class INDEX` | `vc`
+[***Edit Student***](#33-edit-studenttuition-class) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` | `e`
+[***Edit Class***](#33-edit-studenttuition-class) | `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]` | `ec`
+[***Delete Student***](#34-delete-studenttuition-class) | `delete INDEX_STUDENT [INDEX_STUDENT]...` | `del`
+[***Delete Class***](#34-delete-studenttuition-class) | `deleteclass INDEX_CLASS [INDEX_CLASS]...` | `delc`
+[***Add Student to Class***](#35-addremove-student-from-class) | `addtoclass si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS`<br>or<br>`addtoclass s/NAME[,NAME...] tc/INDEX_CLASS` | `atc`
+[***Remove Students from Class***](#35-addremove-student-from-class) | `remove si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS` | `rm`
+[***Add Remarks to Student***](#36-add-remark-to-studenttuition-class) | `remark INDEX_STUDENT` | `re`
+[***Add Remarks to Class***](#36-add-remark-to-studenttuition-class) | `remarkclass INDEX_CLASS` | `rec`
+[***Find Student by Name***](#37-find-studenttuition-class) | `find KEYWORD [KEYWORD]...` | `f`
+[***Find Class by Name***](#37-find-studenttuition-class) | `findclass KEYWORD [KEYWORD]...` | `fc`
+[***List all Students***](#38-list-all-studentstuition-classes) | `list` | `l`
+[***List all Classes***](#38-list-all-studentstuition-classes) | `listclass` | `lc`
+[***Sort Tuition Class***](#39-sort-tuition-classes-sort--s) | `sort [o/ORDER]` | `s`
+[***View Timetable***](#310-view-timetable-timetable--tt) | `timetable` | `tt`
+[***View Today's Classes***](#311-view-todays-classes-today--td) | `today` | `td`
+[***Help***](#312-view-help-help--h) | `help` | `h`
+[***Clear all data***](#314-clear-data-clear) | `clear` | -
+[***Exit***](#315-exit-the-app-exit) | `exit` | -
 
