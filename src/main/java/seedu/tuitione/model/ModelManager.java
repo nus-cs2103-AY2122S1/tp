@@ -28,6 +28,10 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Lesson> filteredLessons;
 
+    // mutable predicates that stores previous filter settings
+    private Predicate<Student> studentPredicate = PREDICATE_SHOW_ALL_STUDENTS;
+    private Predicate<Lesson> lessonPredicate = PREDICATE_SHOW_ALL_LESSONS;
+
     /**
      * Initializes a ModelManager with the given tuitione and userPrefs.
      */
@@ -45,6 +49,14 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new Tuitione(), new UserPrefs());
+    }
+
+    public void setStudentPredicate(Predicate<Student> studentPredicate) {
+        this.studentPredicate = studentPredicate;
+    }
+
+    public void setLessonPredicate(Predicate<Lesson> lessonPredicate) {
+        this.lessonPredicate = lessonPredicate;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -109,14 +121,12 @@ public class ModelManager implements Model {
     @Override
     public void addStudent(Student student) {
         tuitione.addStudent(student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         tuitione.setStudent(target, editedStudent);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -134,14 +144,12 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Lesson lesson) {
         tuitione.addLesson(lesson);
-        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
         tuitione.setLesson(target, editedLesson);
-        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Student and Lesson List Accessors ======================================================
@@ -167,13 +175,21 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+        setStudentPredicate(predicate);
         filteredStudents.setPredicate(predicate);
     }
 
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
+        setLessonPredicate(predicate);
         filteredLessons.setPredicate(predicate);
+    }
+
+    @Override
+    public void refresh() {
+        filteredStudents.setPredicate(studentPredicate);
+        filteredLessons.setPredicate(lessonPredicate);
     }
 
     @Override

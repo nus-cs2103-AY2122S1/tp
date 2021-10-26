@@ -45,6 +45,7 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = tuitioneParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        model.refresh();
 
         try {
             storage.saveTuitione(model.getTuitione());
