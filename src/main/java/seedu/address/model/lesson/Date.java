@@ -10,8 +10,10 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAdjusters;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Lesson's date in the address book.
@@ -79,14 +81,15 @@ public class Date implements Comparable<Date> {
 
     /**
      * Update the lesson date to the same day on the most recent week
-     * that has yet to be pass.
+     * that has yet to pass and is not in {@code datesToSkip}.
      *
+     * @param datesToSkip Dates to skip.
      * @return newDate The date of the same day on the week that has yet to pass.
      */
     public Date updateDate(Set<Date> datesToSkip) {
         LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
-
-        while (datesToSkip.contains(new Date(updatedDate.format(FORMATTER)))) { // todo: improve design
+        List<LocalDate> dates = datesToSkip.stream().map(Date::getLocalDate).collect(Collectors.toList());
+        while (dates.contains(updatedDate)) {
             updatedDate = updatedDate.plusWeeks(1);
         }
 
@@ -112,10 +115,10 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Checks is this date clashes with a recurring date.
+     * Checks if this date occurs on a weekly recurring date.
      *
-     * @param recurringStartDate
-     * @return
+     * @param recurringStartDate The start date of the weekly recurrence.
+     * @return True if this date is on a recurring date, false otherwise.
      */
     public boolean isOnRecurringDate(Date recurringStartDate) {
         if (recurringStartDate.isAfter(this)) {

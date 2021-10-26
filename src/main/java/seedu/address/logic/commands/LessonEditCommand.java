@@ -166,6 +166,7 @@ public class LessonEditCommand extends UndoableCommand {
      */
     private static Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
                                                          Set<Date> datesToUncancel) throws CommandException {
+        assert lesson != null;
         Set<Date> updatedCancelledDates = new HashSet<>(lesson.getCancelledDates());
 
         // remove dates that appear in both cancelled and uncancelled input
@@ -191,6 +192,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @throws CommandException If the date to cancel is invalid.
      */
     private static void validateCancelledDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
+        assert lesson != null;
         for (Date date : datesToCancel) {
             // check if date is a lesson date
             if (!lesson.hasLessonOnDate(date)) {

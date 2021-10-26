@@ -74,11 +74,11 @@ public class LessonDeleteCommand extends UndoableCommand {
     }
 
     /**
-     * Removes specified {@code Lesson} from the updatedLessons for this person.
+     * Removes specified {@code Lesson} from the lesson list.
      *
      * @param lessonList
      * @param toRemove
-     * @return
+     * @return An updated lesson set.
      */
     private Set<Lesson> createUpdatedLessons(List<Lesson> lessonList, Lesson toRemove) {
         assert lessonList != null;

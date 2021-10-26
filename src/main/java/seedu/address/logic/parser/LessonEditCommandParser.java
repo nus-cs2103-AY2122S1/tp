@@ -35,9 +35,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
      */
     public LessonEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
-            PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_CANCEL, PREFIX_UNCANCEL);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
+                PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_CANCEL, PREFIX_UNCANCEL);
 
         // don't allow changes to type of lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {

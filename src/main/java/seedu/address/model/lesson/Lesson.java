@@ -37,11 +37,11 @@ public abstract class Lesson implements Comparable<Lesson> {
     /**
      * Every field must be present and not null.
      *
-     * @param date           Date of lesson.
-     * @param timeRange      Time range of the lesson.
-     * @param subject        Subject of the lesson.
-     * @param homework       Homework for the lesson.
-     * @param rates          Cost per hour for the lesson.
+     * @param date Date of lesson.
+     * @param timeRange Time range of the lesson.
+     * @param subject Subject of the lesson.
+     * @param homework Homework for the lesson.
+     * @param rates Cost per hour for the lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
     public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
@@ -102,6 +102,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         return Collections.unmodifiableSet(homework);
     }
 
+    /**
+     * Returns an immutable cancelledDates set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Date> getCancelledDates() {
         return Collections.unmodifiableSet(cancelledDates);
     }
@@ -138,15 +142,17 @@ public abstract class Lesson implements Comparable<Lesson> {
      * Checks if this lesson occurs on a given date.
      *
      * @param date The lesson date to check.
-     * @return True if this lesson
+     * @return True if this lesson occurs on the date.
      */
     public abstract boolean hasLessonOnDate(Date date);
 
     /**
      * Checks if this lesson is cancelled and does not occur on any date.
+     *
      * @return True if lesson is cancelled.
      */
     public abstract boolean isCancelled();
+
     /**
      * Checks if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.
@@ -178,7 +184,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startDate, timeRange, subject, homework);
+        return Objects.hash(startDate, timeRange, subject, homework, lessonRates, cancelledDates);
     }
 
     @Override

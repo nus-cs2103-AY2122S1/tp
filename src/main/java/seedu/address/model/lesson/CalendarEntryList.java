@@ -116,7 +116,7 @@ public class CalendarEntryList {
      * The lesson must not clash with any in the list.
      *
      * @param editedPerson the person we added the lesson to.
-     * @param toAdd        The lesson to add
+     * @param toAdd The lesson to add
      */
     private void addLesson(Person editedPerson, Lesson toAdd) {
         requireAllNonNull(editedPerson, toAdd);
@@ -125,7 +125,7 @@ public class CalendarEntryList {
         }
         if (!toAdd.isRecurring()) {
             // makeup lesson is not cancelled
-            if (!toAdd.getCancelledDates().contains(toAdd.getStartDate())) {
+            if (!toAdd.isCancelled()) {
                 Entry<Lesson> entry = convertToEntry(editedPerson, toAdd);
                 add(entry);
             }
@@ -216,7 +216,7 @@ public class CalendarEntryList {
      *
      * @param owner  The person with the lesson.
      * @param lesson The
-     * @return
+     * @return A list of entries representing the lesson.
      */
     public List<Entry<Lesson>> convertRecurringLessonToEntries(Person owner, Lesson lesson) {
         List<Entry<Lesson>> entryList = new ArrayList<>();
