@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -28,6 +30,14 @@ public class GameListPanel extends UiPart<Region> {
         super(FXML);
         gameListView.setItems(gameList);
         gameListView.setCellFactory(listView -> new GameListViewCell());
+        gameListView.getSelectionModel().selectedItemProperty()
+                .addListener(new ChangeListener<Game>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Game> observable, Game oldGame, Game newGame) {
+                        // TODO: call API from MainWindow to change the game mounted on MainCard
+                        System.out.println(newGame);
+                    }
+                });
     }
 
     /**

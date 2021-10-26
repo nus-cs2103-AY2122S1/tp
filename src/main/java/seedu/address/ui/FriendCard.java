@@ -1,14 +1,18 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.ui.util.SampleStyles;
 
 /**
@@ -35,7 +39,7 @@ public class FriendCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private FlowPane games;
+    private GridPane games;
 
     /**
      * Creates a {@code FriendCard} with the given {@code Friend} and index to display.
@@ -45,16 +49,24 @@ public class FriendCard extends UiPart<Region> {
         this.friend = friend;
         id.setText(displayedIndex + ". ");
         friendName.setText(formatFriendNameId(friend));
-        games.setHgap(20.0);
-        games.setVgap(15.0);
-        friend.getGameFriendLinks().stream()
-                .sorted(Comparator.comparing(game -> game.getGameId().value))
-                .forEach(game -> {
-                    Label label = new Label(game.getGameId().value);
-                    label.setBackground(SampleStyles.BLURPLE_BACKGROUND);
+        List<GameFriendLink> toSort = new ArrayList<>();
+        for (GameFriendLink game : friend.getGameFriendLinks()) {
+            toSort.add(game);
+        }
+        toSort.sort(Comparator.comparing(game -> game.getGameId().value));
+        for (int i = 0; i < toSort.size(); i++) {
+            if (i < 2) {
+                GameFriendLink game = toSort.get(i);
+                Label label = new Label(game.getGameId().value);
+                label.setPrefWidth(90);
+                label.setAlignment(Pos.CENTER);
+                label.setBackground(SampleStyles.BLURPLE_BACKGROUND);
+                games.add(label, i, 0);
+            } else {
+                break;
+            }
 
-                    games.getChildren().add(label);
-                });
+        }
     }
 
     /**
