@@ -122,8 +122,6 @@ public interface Model {
      */
     void addLesson(Lesson lesson);
 
-    void setLesson(Lesson target, Lesson editedLesson);
-
     /**
      * Views the given lesson.
      * {@code lesson} must exist in the lesson book.
