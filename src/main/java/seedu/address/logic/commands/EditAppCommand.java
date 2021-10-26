@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APP_INDEX;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -72,7 +76,8 @@ public class EditAppCommand extends Command {
         }
 
         Appointment appointmentToEdit = lastShownList.get(appIndex.getZeroBased());
-        Appointment editedAppointment = new Appointment(appointmentToEdit.getClients(), location, date, time, description);
+        Appointment editedAppointment =
+                new Appointment(appointmentToEdit.getClients(), location, date, time, description);
         model.deleteAppointment(appointmentToEdit);
         model.addAppointment(editedAppointment);
 
