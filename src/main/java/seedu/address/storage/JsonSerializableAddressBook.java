@@ -26,6 +26,8 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "Customers list contains duplicate customer(s).";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate employee(s).";
     public static final String MESSAGE_DUPLICATE_SUPPLIER = "Suppliers list contains duplicate supplier(s).";
+    public static final String MESSAGE_RESERVATION_PHONE_DOES_NOT_EXIST =
+            "Phone number of reservation does not exist in Customer database";
 
     private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
@@ -94,6 +96,9 @@ class JsonSerializableAddressBook {
         }
         for (JsonAdaptedReservation jsonAdaptedReservation : reservations) {
             Reservation reservation = jsonAdaptedReservation.toModelType();
+            if (!addressBook.hasCustomerWithPhone(reservation.getPhone())) {
+                throw new IllegalValueException(MESSAGE_RESERVATION_PHONE_DOES_NOT_EXIST);
+            }
             addressBook.addReservation(reservation);
         }
         for (JsonAdaptedTable jsonAdaptedTable : tables) {

@@ -30,6 +30,9 @@ public class ReservationCard extends UiPart<Region> {
     private Label id;
 
     @FXML
+    private Label tableId;
+
+    @FXML
     private Label phone;
 
     @FXML
@@ -45,9 +48,10 @@ public class ReservationCard extends UiPart<Region> {
         super(FXML);
         this.reservation = reservation;
         id.setText(displayedIndex + ". ");
+        tableId.setText("Table #" + reservation.getTableId());
         phone.setText("Phone: " + reservation.getPhone().value);
         numberOfPeople.setText(String.format("Table for %d", reservation.getNumberOfPeople()));
-        dateTime.setText("Date and Time: " + reservation.getDateTime().format(DATE_TIME_PRINTING_FORMAT));
+        dateTime.setText("On: " + reservation.getDateTime().format(DATE_TIME_PRINTING_FORMAT));
     }
 
     @Override
