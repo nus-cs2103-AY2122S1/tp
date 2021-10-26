@@ -11,7 +11,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.ContainsStudentNamePredicate;
 import seedu.address.model.student.Name;
 
 public class ViewStudentCommandTest {
@@ -27,8 +26,6 @@ public class ViewStudentCommandTest {
 
     @Test
     public void execute_validStudent_success() {
-        ContainsStudentNamePredicate predicate = new ContainsStudentNamePredicate(ALICE.getName());
-        expectedModel.updateFilteredStudentList(predicate);
         String successMsg = String.format("Viewing details of %1$s", ALICE.getName());
         assertCommandSuccess(new ViewStudentCommand(ALICE.getName()), model, successMsg, expectedModel);
     }
