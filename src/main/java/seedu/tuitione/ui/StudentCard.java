@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.tuitione.model.lesson.LessonCode;
-import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.student.Student;
 
 /**
@@ -17,12 +16,6 @@ import seedu.tuitione.model.student.Student;
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
-    private static final String STRING_FORMAT_PARENT_CONTACT = "☎\tParent's Contact: \t%s";
-    private static final String STRING_FORMAT_ADDRESS = "🏠\tAddress: \t\t\t%s";
-    private static final String STRING_FORMAT_EMAIL = "📧\tEmail Address: \t\t%s";
-    private static final String STRING_FORMAT_GRADE = "🔢\tGrade: \t\t\t\t%s";
-    private static final String STRING_FORMAT_LESSON = "🎒\tLesson(s): \t\t";
-    private static final String STRING_FORMAT_SUBSCRIPTION = "💵\tSubscription: \t\t" + Price.CURRENCY + " %.2f";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -65,25 +58,27 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         name.setUnderline(true);
-        parentContact.setText(String.format(STRING_FORMAT_PARENT_CONTACT, student.getParentContact().value));
-        address.setText(String.format(STRING_FORMAT_ADDRESS, student.getAddress().value));
-        email.setText(String.format(STRING_FORMAT_EMAIL, student.getEmail().value));
-        grade.setText(String.format(STRING_FORMAT_GRADE, student.getGrade().value));
+        parentContact.setText(student.getParentContact().value);
+        address.setText(student.getAddress().value);
+        email.setText(student.getEmail().value);
+        grade.setText(student.getGrade().value);
 
         student.getRemarks().stream()
                 .sorted(Comparator.comparing(remark -> remark.remarkName))
                 .forEach(remark -> remarks.getChildren().add(new Label(remark.remarkName)));
 
         if (student.getNumberOfLessonsEnrolled() > 0) {
-            lessons.setText(student.getLessonCodes().stream()
+            StringBuilder lessonSb = new StringBuilder();
+            student.getLessonCodes().stream()
                     .map(LessonCode::toString)
                     .sorted()
-                    .reduce(STRING_FORMAT_LESSON, (l1, l2) -> l1 + '\t' + l2));
+                    .forEach(lc -> lessonSb.append(lc).append("   "));
+            lessons.setText(lessonSb.toString());
         } else {
-            lessons.setText(STRING_FORMAT_LESSON + "\t-");
+            lessons.setText("-");
         }
 
-        subscription.setText(String.format(STRING_FORMAT_SUBSCRIPTION, student.getSubscriptionPrice()));
+        subscription.setText(String.format("%.2f", student.getSubscriptionPrice()));
     }
 
     @Override
