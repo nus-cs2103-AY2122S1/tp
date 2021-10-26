@@ -97,6 +97,20 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public void markPerson(Person toMark) {
+        requireNonNull(toMark);
+
+        int index = internalList.indexOf(toMark);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person markedPerson = internalList.get(index);
+        markedPerson.getDone().setAsDone();
+        internalList.set(index, markedPerson);
+
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

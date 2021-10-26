@@ -43,8 +43,9 @@ public class MarkCommand extends MarkingCommand {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToMark = lastShownList.get(targetIndex.getZeroBased());
+            model.markPerson(personToMark);
             result.append(personToMark);
-            personToMark.getDone().setAsDone();
+
         }
 
         return new CommandResult(String.format(MESSAGE_MARKED_PERSON_SUCCESS, result.toString()));
