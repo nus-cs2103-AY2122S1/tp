@@ -471,6 +471,20 @@
 }
 
 /* Graph CSS Design */
+#pieChart.chart {
+    -fx-background-image: url("/images/KannaKobayashi.gif");
+    -fx-background-size: 85px;
+    -fx-background-position: 92% 19.5%;
+    -fx-background-repeat: no-repeat;
+
+    -fx-background-color: derive(-fx-primary-color, 20%);
+    -fx-padding: 20 20 20 20;
+}
+#barChart.chart {
+    -fx-background-color: derive(-fx-primary-color, 20%);
+    -fx-padding: 20 20 20 20;
+}
+
 .chart {
     -fx-background-color: derive(-fx-primary-color, 20%);
     -fx-padding: 20 20 20 20;

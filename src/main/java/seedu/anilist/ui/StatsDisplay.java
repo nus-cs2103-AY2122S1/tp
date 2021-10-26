@@ -48,7 +48,6 @@ public class StatsDisplay extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-
     /**
      * Creates a StatsDisplay UI component.
      */
@@ -56,6 +55,8 @@ public class StatsDisplay extends UiPart<Stage> {
         super(FXML, root);
         pieChart.setLabelsVisible(false);
         pieChart.setLegendSide(Side.RIGHT);
+        pieChart.setId("pieChart");
+        barChart.setId("barChart");
         getRoot().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
