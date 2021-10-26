@@ -74,7 +74,7 @@ public class EditLabCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
         Lab newLab = new Lab(newLabNum);
-        if(lastShownList.get(0).getLabList().contains(newLab)) {
+        if (lastShownList.get(0).getLabList().contains(newLab)) {
             throw new CommandException(LAB_NEW_NUM_CONSTRAINTS);
         }
         for (Student std : lastShownList) {
