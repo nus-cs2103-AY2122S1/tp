@@ -51,7 +51,8 @@ In [Command summary](#command-summary), you will find a summary of the commands 
 
 In [Glossary](#glossary), you will find useful descriptions and meanings of terms used in this document.
 
-### How to use this user guide
+
+## How to use this user guide
 We recommend first time users to read the user guide in the order that is written.
 Throughout the user guide, we include links like [this](#how-to-use-this-user-guide) which will jump to the 
 corresponding section of the user guide. These links allow you to quickly navigate this document.
@@ -185,6 +186,7 @@ Take note that for all the commands listed below, we follow these notations and 
 
 </div>
 
+<br> <br>
 
 ### **Managing a client**
 
@@ -197,6 +199,8 @@ in appointment dates and tag your clients all within FAST.
 In this user guide, we will showcase commands related to Clients first followed by sections on [Appointment](#appointments)
 and [Tags](#tags). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
 or view our [other utility features](#others). 
+
+<br> <br>
 
 #### Adding a client: `add`
 
@@ -215,7 +219,8 @@ A client can have any number of tags (including 0)
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` will add a new client 
    called `Betsy Crowe`, has a phone number of `1234567`, has an email address `betsycrowe@example.com`, 
   stays at `Newgate Prison` and is tagged as both a `friend` and `criminal`.
-  
+
+<br> <br>  
 
 #### Editing a client: `edit`
 
@@ -235,6 +240,7 @@ This can be used if the client's information has changed, or if you entered an i
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
 
+<br> <br>
 
 #### Deleting a client: `del`
 
@@ -269,6 +275,8 @@ If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. T
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This CANNOT be undone!</div>
 
+<br> <br>
+
 #### Adding a remark to your client: `rmk`
 
 You can add a remark to an existing client in FAST. This is useful for adding additional client notes such 
@@ -292,6 +300,8 @@ as their preferred meeting timing, allowing you to better serve your clients!
 Try to add remarks with specific keywords so that it is easier to [search](#searching-for-clients-find) for them.
 </div>
 
+<br> <br>
+
 #### Appointments
 
 You can also store and keep track of appointments with your clients all within FAST! 
@@ -299,6 +309,8 @@ You may save the date, time and venue of an appointment.
 * `DATE` the date of the appointment should be inputted in the format **`yyyy-mm-dd`**.
 * `TIME` the time of the appointment should be inputted in the 24-hour format **`HH:mm`**.
 * `VENUE` the location of the appointment can at most be 30 characters long (including whitespaces).
+
+<br> <br>
 
 ##### Adding an appointment: `aa`
 
@@ -323,7 +335,9 @@ or [mark as completed](#updating-completed-appointment-ma) an appointment.
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
    use the [edit appointment](#editing-an-appointment-ea) command.<br>
    </div>
-   
+
+<br> <br>
+
 ##### Editing an appointment: `ea`
 
 You can edit a scheduled [appointment](#appointments) with your client. 
@@ -339,6 +353,8 @@ This command is useful when your appointment has been rescheduled or has a chang
 * `ea 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
+<br> <br>
+
 ##### Deleting an appointment: `da`
 
 You can delete a scheduled [appointment](#appointments) with your client. 
@@ -352,6 +368,8 @@ This command should be used when the appointment has been cancelled with a clien
 **Examples**:
 * `da 1` deletes the appointment of the first client.
 * `find Ben` followed by `da 3` deletes the appointment the third client in the result of the `find` command.
+
+<br> <br>
 
 ##### Updating completed appointment: `ma`
 
@@ -371,6 +389,8 @@ This also allows you to keep track of the number of completed appointments with 
 ![result for `done 1`](images/appointmentDone.png)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
+
+<br> <br>
 
 #### Tags
 
@@ -398,6 +418,8 @@ A client can have more than 1 investment plan tag, but they may not have more th
 For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time. 
 </div>
 
+<br> <br>
+
 ##### Tag Naming Conventions
 
 You can refer to the table below to quickly learn about how to use these three tags.
@@ -412,6 +434,8 @@ In general, append the term to the prefix when referring to a priority or invest
 Normal tags do not have prefixes, so simply type in the desired tag name.
 
 More examples of how to use these will be given in the following section.
+
+<br> <br>
 
 ##### Editing a tag: `tag`
 
@@ -440,10 +464,14 @@ You can add or delete the tags of a specified client.
 
 ![stats window](images/statsWindow.png)
 
+<br> <br>
+
 ### **Managing your client base**
 
 In addition to changing individual [client's](#managing-a-client) details, you can also perform commands which affects your entire client list.
 This allows you to easily navigate your client list and improve your efficiency!
+
+<br> <br>
 
 #### Listing all clients: `list`
 
@@ -452,6 +480,8 @@ to viewing your full client list after a
 [find](#searching-for-clients-find) command has been executed.
 
 **Format**: `list`
+
+<br> <br>
 
 #### Sorting all clients: `sort`
 
@@ -467,6 +497,8 @@ Currently, you can sort by name, [appointment date](#appointments), and [priorit
 
 **Example**:
 * `sort priority` Sorts all existing clients by their priority tag, from the highest priority to the lowest priority.
+
+<br> <br>
 
 #### Searching for clients: `find`
 
@@ -500,6 +532,8 @@ specific client. To return to the full client list, you can use the [list](#list
 When searching for remarks, use more specific queries for better results.
 </div>
 
+<br> <br>
+
 #### Clearing all entries: `clear`
 
 You can clear all clients from FAST. This command is useful to remove the default sample data in FAST.
@@ -510,8 +544,9 @@ You can clear all clients from FAST. This command is useful to remove the defaul
 This CANNOT be undone! 
 </div>
 
-### **Others**
+<br> <br>
 
+### **Others**
 
 #### Viewing help: `help`
 
@@ -530,6 +565,8 @@ In the help window, you can view all the command usages built-in right into FAST
 The help window can also be quickly accessed by entering using the F1 key on your keyboard!
 </div>
 
+<br> <br>
+
 #### Viewing statistics
 
 You can view FAST's built-in statistics and see and overview of your client's data.
@@ -542,16 +579,22 @@ Currently, FAST supports these statistics:
 * Priority Tag Chart: View the breakdown of your client's priority.
 * Insurance Plan Chart: View the distribution of your insurance plans sold.
 
+<br> <br>
+
 #### Exiting the program: `exit`
 
 You can exit the program using this command.
 
 **Format**: `exit`
 
+<br> <br>
+
 #### Saving the data
 
 You do not have to worry about saving the data manually! FAST automatically saves your data after any changes are made.
 This way, you can focus solely on serving your clients better!
+
+<br> <br>
 
 #### Editing the data file
 
