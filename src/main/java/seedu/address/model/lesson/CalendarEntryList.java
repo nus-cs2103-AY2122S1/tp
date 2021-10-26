@@ -104,8 +104,7 @@ public class CalendarEntryList {
      * @return True if there is a clash in lesson timing, false otherwise.
      */
     public boolean hasClashes(Lesson toCheck, Lesson toIgnore) {
-        requireNonNull(toCheck);
-        requireNonNull(toIgnore);
+        requireAllNonNull(toCheck, toIgnore);
         return entryList.stream().anyMatch(entry-> !entry.getUserObject().equals(toIgnore)
                 && entry.getUserObject().isClashing(toCheck));
     }
