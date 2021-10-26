@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Conthacks;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Conthacks that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
@@ -48,28 +48,28 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code Conthacks} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public Conthacks toModelType() throws IllegalValueException {
+        Conthacks conthacks = new Conthacks();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (conthacks.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            conthacks.addPerson(person);
         }
 
         for (JsonAdaptedModuleLesson jsonAdaptedModuleLesson : lessons) {
             ModuleLesson moduleLesson = jsonAdaptedModuleLesson.toModelType();
-            if (addressBook.hasLesson(moduleLesson)) {
+            if (conthacks.hasLesson(moduleLesson)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
             }
-            addressBook.addLesson(moduleLesson);
+            conthacks.addLesson(moduleLesson);
         }
-        return addressBook;
+        return conthacks;
     }
 
 }

@@ -56,7 +56,7 @@ public interface Model {
      */
     void sortAddressBook();
 
-    /** Returns the AddressBook */
+    /** Returns the Conthacks */
     ReadOnlyAddressBook getAddressBook();
 
     /**

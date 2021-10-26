@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Conthacks;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.modulelesson.LessonDay;
@@ -21,7 +21,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Conthacks} with sample data.
  */
 public class SampleDataUtil {
 
@@ -58,7 +58,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+        Conthacks sampleAb = new Conthacks();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Conthacks;
 import seedu.address.testutil.TypicalModuleLessons;
 import seedu.address.testutil.TypicalPersons;
 
-public class JsonSerializableAddressBookTest {
+public class JsonSerializableConthacksTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableConthacksTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
     private static final Path TYPICAL_MODULE_CLASSES_FILE = TEST_DATA_FOLDER
             .resolve("typicalModuleClassesAddressBook.json");
@@ -31,18 +31,18 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAddressBook.class).get();
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+        Conthacks conthacksFromFile = dataFromFile.toModelType();
+        Conthacks typicalPersonsConthacks = TypicalPersons.getTypicalAddressBook();
+        assertEquals(conthacksFromFile, typicalPersonsConthacks);
     }
 
     @Test
     public void toModelType_typicalModuleClassesFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULE_CLASSES_FILE,
                 JsonSerializableAddressBook.class).get();
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalModuleClasses = TypicalModuleLessons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalModuleClasses);
+        Conthacks conthacksFromFile = dataFromFile.toModelType();
+        Conthacks typicalModuleClasses = TypicalModuleLessons.getTypicalAddressBook();
+        assertEquals(conthacksFromFile, typicalModuleClasses);
     }
 
     @Test

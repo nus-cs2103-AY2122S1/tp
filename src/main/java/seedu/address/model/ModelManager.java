@@ -20,13 +20,13 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Conthacks conthacks;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<ModuleLesson> filteredModuleLessons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given conthacks and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -34,14 +34,14 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.conthacks = new Conthacks(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredModuleLessons = new FilteredList<>(this.addressBook.getModuleLessonList());
+        filteredPersons = new FilteredList<>(this.conthacks.getPersonList());
+        filteredModuleLessons = new FilteredList<>(this.conthacks.getModuleLessonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Conthacks(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,11 +79,11 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Conthacks ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.conthacks.resetData(addressBook);
     }
 
     /**
@@ -93,45 +93,45 @@ public class ModelManager implements Model {
      */
     @Override
     public void sortAddressBook() {
-        addressBook.sortAddressBook();
+        conthacks.sortAddressBook();
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return conthacks;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return conthacks.hasPerson(person);
     }
 
     @Override
     public boolean hasModuleLesson(ModuleLesson moduleLesson) {
         requireNonNull(moduleLesson);
-        return addressBook.hasLesson(moduleLesson);
+        return conthacks.hasLesson(moduleLesson);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        conthacks.removePerson(target);
     }
 
     @Override
     public void deleteLesson(ModuleLesson moduleLesson) {
-        addressBook.removeLesson(moduleLesson);
+        conthacks.removeLesson(moduleLesson);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        conthacks.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void addLesson(ModuleLesson moduleLesson) {
-        addressBook.addLesson(moduleLesson);
+        conthacks.addLesson(moduleLesson);
         updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
@@ -139,24 +139,24 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        conthacks.setPerson(target, editedPerson);
     }
 
     @Override
     public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
         requireAllNonNull(target, editedLesson);
 
-        addressBook.setModuleLesson(target, editedLesson);
+        conthacks.setModuleLesson(target, editedLesson);
     }
 
     @Override
     public void clearPersons() {
-        addressBook.clearPersonList();
+        conthacks.clearPersonList();
     }
 
     @Override
     public void clearLessons() {
-        addressBook.clearLessonList();
+        conthacks.clearLessonList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -202,7 +202,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return conthacks.equals(other.conthacks)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredModuleLessons.equals(other.filteredModuleLessons);

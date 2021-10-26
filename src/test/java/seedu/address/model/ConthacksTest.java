@@ -23,25 +23,25 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class ConthacksTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Conthacks conthacks = new Conthacks();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), conthacks.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> conthacks.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        Conthacks newData = getTypicalAddressBook();
+        conthacks.resetData(newData);
+        assertEquals(newData, conthacks);
     }
 
     @Test
@@ -51,35 +51,35 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> conthacks.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> conthacks.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(conthacks.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        conthacks.addPerson(ALICE);
+        assertTrue(conthacks.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        conthacks.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(conthacks.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> conthacks.getPersonList().remove(0));
     }
 
     @Test
@@ -87,16 +87,16 @@ public class AddressBookTest {
         List<Person> persons = new ArrayList<>();
         persons.add(BOB);
         persons.add(ALICE);
-        addressBook.setPersons(persons);
+        conthacks.setPersons(persons);
 
-        AddressBook expectedAddressBook = new AddressBook();
+        Conthacks expectedConthacks = new Conthacks();
         List<Person> expectedPersons = new ArrayList<>();
         expectedPersons.add(ALICE);
         expectedPersons.add(BOB);
-        expectedAddressBook.setPersons(expectedPersons);
+        expectedConthacks.setPersons(expectedPersons);
 
-        addressBook.sortAddressBook();
-        assertEquals(expectedAddressBook, addressBook);
+        conthacks.sortAddressBook();
+        assertEquals(expectedConthacks, conthacks);
     }
 
     /**

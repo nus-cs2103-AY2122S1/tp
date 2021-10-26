@@ -12,7 +12,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of Conthacks data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -47,7 +47,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ Conthacks methods ==============================
 
     @Override
     public Path getAddressBookFilePath() {

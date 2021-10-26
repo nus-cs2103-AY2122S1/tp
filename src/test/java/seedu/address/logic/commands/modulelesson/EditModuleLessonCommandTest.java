@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.EditLessonDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Conthacks;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,7 +35,7 @@ import seedu.address.testutil.ModuleLessonBuilder;
 public class EditModuleLessonCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+    private Model expectedModel = new ModelManager(new Conthacks(model.getAddressBook()), new UserPrefs());
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
