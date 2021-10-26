@@ -119,6 +119,12 @@
 .list-cell .label {
     -fx-text-fill: white;
 }
+.cell_view_title_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+}
+
 
 .cell_big_label {
     -fx-font-family: "Open Sans Semibold";
@@ -389,6 +395,69 @@
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#remarks {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#remarks .label {
+    -fx-text-fill: white;
+    -fx-background-color: #868686;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#interactions {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#interactions .label {
+    -fx-text-fill: white;
+    -fx-background-color: #26A066;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#nameView {
+    -fx-text-fill: white;
+    -fx-background-color: #0E82CF;
+    -fx-padding: 3 10 3 10;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+#emailView {
+    -fx-text-fill: black;
+    -fx-background-color: #1ED061;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#facultyView {
+    -fx-text-fill: black;
+    -fx-background-color: #F55550;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#majorView {
+    -fx-text-fill: black;
+    -fx-background-color: #F0D94F;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

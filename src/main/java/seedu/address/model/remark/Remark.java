@@ -9,7 +9,7 @@ public class Remark {
     public final String remarkDetail;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Remark}.
      *
      * @param remarkDetail A valid tag name.
      */
