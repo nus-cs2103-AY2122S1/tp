@@ -107,10 +107,14 @@ public class PersonTest {
 
         //compare type
         Person editedBenson = new PersonBuilder(BENSON).withType("tutor").build();
-        assertTrue(ALICE.compare(BENSON, new Prefix("r/")) < 0);
+        assertTrue(ALICE.compare(editedBenson, new Prefix("r/")) < 0);
 
         //compare NUS Network ID
         assertTrue(ALICE.compare(BENSON, new Prefix("N/")) < 0);
+
+        //compare if equal Tutorial ID
+        editedBenson = new PersonBuilder(BENSON).withTutorialId("00").build();
+        assertTrue(ALICE.compare(editedBenson, new Prefix("r/")) < 0);
     }
 
     @Test
