@@ -7,7 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -47,12 +46,11 @@ public class AddAppCommandTest {
         CommandResult commandResult = new AddAppCommand(
                 indexes,
                 new Address("vivocity"),
-                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
-                        LocalDateTime.of(2021, 1, 2, 10, 0)),
+                new TimePeriod(LocalDateTime.of(2021, 12, 25, 21, 30),
+                        LocalDateTime.of(2021, 12, 25, 22, 30)),
                 "Halloween Sales").execute(modelStub);
 
         assertEquals(String.format(AddAppCommand.MESSAGE_SUCCESS, validAppointment), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validAppointment), modelStub.appointmentAdded);
     }
 
     @Test
@@ -68,12 +66,11 @@ public class AddAppCommandTest {
         CommandResult commandResult = new AddAppCommand(
                 indexes,
                 new Address("vivocity"),
-                new TimePeriod(LocalDateTime.of(2021, 1, 1, 10, 0),
-                        LocalDateTime.of(2021, 1, 2, 10, 0)),
+                new TimePeriod(LocalDateTime.of(2021, 12, 25, 21, 30),
+                        LocalDateTime.of(2021, 12, 25, 22, 30)),
                 "Halloween Sales").execute(modelStub);
 
         assertEquals(String.format(AddAppCommand.MESSAGE_SUCCESS, validAppointment), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validAppointment), modelStub.appointmentAdded);
     }
 
     @Test
