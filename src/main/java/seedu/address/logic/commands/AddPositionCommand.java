@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandUndoException;
 import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 
@@ -44,8 +45,14 @@ public class AddPositionCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_POSITION);
         }
 
+        memento.record(model);
         model.addPosition(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public void unExecute(Model model) throws CommandUndoException {
+
     }
 
     @Override

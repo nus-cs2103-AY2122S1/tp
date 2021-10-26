@@ -231,4 +231,10 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
 
     void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
+
+
+    /**
+     * Returns a deep-copied model.
+     */
+    Model getCopiedModel();
 }

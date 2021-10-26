@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.memento.ChangeHistory;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Application.ApplicationStatus;
@@ -32,6 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Applicant> filteredApplicants;
     private final FilteredList<Position> filteredPositions;
+    private final ChangeHistory changeHistory;
 
     /**
      * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
@@ -54,7 +56,33 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+        changeHistory = new ChangeHistory();
     }
+
+    /**
+     * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
+                        ReadOnlyPositionBook positionBook,
+                        ReadOnlyUserPrefs userPrefs, ChangeHistory changeHistory) {
+        super();
+        requireAllNonNull(addressBook, applicantBook, positionBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook
+                + ", applicant book: " + applicantBook
+                + ", position book: " + positionBook
+                + ", userPrefs: " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.positionBook = new PositionBook(positionBook);
+        this.applicantBook = new ApplicantBook(applicantBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+        this.changeHistory = changeHistory;
+    }
+
 
     /**
      * Old constructor - left temporarily to pass unit tests
@@ -74,6 +102,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+        changeHistory = new ChangeHistory();
     }
 
     /**
@@ -93,6 +122,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+        changeHistory = new ChangeHistory();
     }
 
     /**
@@ -112,6 +142,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+        changeHistory = new ChangeHistory();
     }
 
     /**
@@ -131,6 +162,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+        changeHistory = new ChangeHistory();
     }
 
 
@@ -408,5 +440,12 @@ public class ModelManager implements Model {
                         && (applicant.getApplication().getStatus() == ApplicationStatus.REJECTED))
                 .count();
         return Calculator.calculateRejectionRate(total, count);
+    }
+
+
+    @Override
+    public Model getCopiedModel() {
+        return new ModelManager(this.addressBook, applicantBook.getCopiedApplicantBook(),
+                positionBook.getCopiedPositionBook(), this.userPrefs, this.changeHistory);
     }
 }

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.CommandUndoException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantParticulars;
@@ -59,9 +60,17 @@ public class AddApplicantCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
+
         Applicant applicant = model.addApplicantWithParticulars(applicantParticulars);
+        memento.record(model.getCopiedModel());
         return new CommandResult(String.format(MESSAGE_SUCCESS, applicant));
     }
+
+    @Override
+    public void unExecute(Model model) throws CommandUndoException {
+        model = memento.getRecord();
+    }
+
 
     @Override
     public boolean equals(Object other) {

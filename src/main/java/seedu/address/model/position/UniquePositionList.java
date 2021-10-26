@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.position.exceptions.DuplicatePositionException;
 import seedu.address.model.position.exceptions.PositionNotFoundException;
 
@@ -125,6 +126,9 @@ public class UniquePositionList implements Iterable<Position> {
         return internalUnmodifiableList;
     }
 
+
+
+
     @Override
     public Iterator<Position> iterator() {
         return internalList.iterator();
@@ -155,5 +159,15 @@ public class UniquePositionList implements Iterable<Position> {
         }
         return true;
     }
+
+    public UniquePositionList getCopiedPositions() {
+        UniquePositionList copiedPositions = new UniquePositionList();
+        for (Position position : internalList) {
+            copiedPositions.internalList.add(position.getCopiedPosition());
+        }
+
+        return copiedPositions;
+    }
+
 
 }

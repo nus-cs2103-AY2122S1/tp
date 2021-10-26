@@ -128,4 +128,11 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
                 && applicants.equals(((ApplicantBook) other).applicants));
     }
 
+    public ApplicantBook getCopiedApplicantBook() {
+        ApplicantBook copiedApplicantBook = new ApplicantBook();
+        copiedApplicantBook.applicants.setApplicants(this.applicants.getCopiedApplicants());
+
+        return copiedApplicantBook;
+    }
+
 }

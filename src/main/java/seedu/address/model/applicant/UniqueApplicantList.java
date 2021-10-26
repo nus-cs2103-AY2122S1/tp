@@ -185,4 +185,13 @@ public class UniqueApplicantList implements Iterable<Applicant> {
         return true;
     }
 
+    public UniqueApplicantList getCopiedApplicants() {
+        UniqueApplicantList copiedApplicants = new UniqueApplicantList();
+
+        for (Applicant applicant : this.internalList) {
+            copiedApplicants.internalList.add(applicant.getCopiedApplicant());
+        }
+
+        return copiedApplicants;
+    }
 }
