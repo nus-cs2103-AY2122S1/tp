@@ -2,8 +2,6 @@
 title: Developer Guide
 ---
 
-# Developer Guide
-
 ### Table of Contents
 * [Acknowledgements](#acknowledgements)
 * [Setting Up, Getting Started](#setting-up-getting-started)
