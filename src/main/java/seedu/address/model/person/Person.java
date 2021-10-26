@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -96,6 +97,20 @@ public class Person implements Comparable<Person> {
     }
 
     /**
+     * Removes tasks from the task list that returns false upon
+     * application {@code predicates}'s test method.
+     */
+    public void filterTasks(Predicate<Task> predicate) {
+        List<Task> tasksToRemove = new ArrayList<>();
+        for (Task task : tasks) {
+            if (!predicate.test(task)) {
+                tasksToRemove.add(task);
+            }
+        }
+        tasks.removeAll(tasksToRemove);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -146,5 +161,12 @@ public class Person implements Comparable<Person> {
     @Override
     public int compareTo(Person other) {
         return this.name.toString().compareTo(other.name.toString());
+    }
+
+    /**
+     * Creates a new {@code Person} object with the same attributes.
+     */
+    public Person makeClone() {
+        return new Person(name, phone, email, address, tags, tasks, description);
     }
 }

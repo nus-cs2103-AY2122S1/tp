@@ -108,18 +108,19 @@ public class LogicManager implements Logic {
         return model.getDisplayTaskList();
     }
 
-    @Override
-    public void displayPersonTaskList(Person person) {
-        model.displayPersonTaskList(person);
-    }
-
     /** Gets important statistics information relating to tasks. */
     @Override
     public ObservableList<PieChart.Data> getStatistics() {
         return model.getStatistics();
     }
 
+    @Override
     public TaskListManager getTaskListManager() {
         return model.getTaskListManager();
+    }
+
+    @Override
+    public ObservableList<Person> getObservablePersonList() {
+        return model.getObservablePersonList();
     }
 }

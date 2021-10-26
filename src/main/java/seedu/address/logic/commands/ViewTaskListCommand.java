@@ -42,6 +42,16 @@ public class ViewTaskListCommand extends Command {
         targetIndex = Index.fromOneBased(1);
     }
 
+    /**
+     * Constructor used if user wants to find within the view all task list panel.
+     */
+    public ViewTaskListCommand(List<String> keywords) {
+        isDisplayAll = true;
+        hasFilter = true;
+        this.keywords = keywords;
+        targetIndex = Index.fromOneBased(1);
+    }
+
     /** Constructor used if user wants to view a specific {@code Person}'s task list . */
     public ViewTaskListCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -59,21 +69,24 @@ public class ViewTaskListCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (isDisplayAll) {
             CommandResult cr = new CommandResult(MESSAGE_VIEW_TASKS_ALL_SUCCESS);
+            if (hasFilter) {
+                model.setViewAllTasksFindPred(new TaskMatchesKeywordPredicate(keywords));
+            } else {
+                model.setViewAllTasksFindPred(task -> true);
+            }
             cr.setDisplayAllTaskList();
+            cr.setWriteCommand();
             return cr;
         }
 
         List<Person> lastShownList = model.getFilteredPersonList();
-
         if ((targetIndex.getZeroBased() >= lastShownList.size())) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
-
         if (hasFilter) {
             TaskMatchesKeywordPredicate predicate = new TaskMatchesKeywordPredicate(keywords);
             model.displayFilteredPersonTaskList(personToView, predicate);
@@ -81,12 +94,12 @@ public class ViewTaskListCommand extends Command {
             model.displayPersonTaskList(personToView);
         }
 
-        CommandResult commandResult = new CommandResult(
-                String.format(MESSAGE_VIEW_TASKS_SUCCESS, personToView.getName()));
-        commandResult.setDisplaySingleTaskList();
-
-        return commandResult;
+        CommandResult cr = new CommandResult(String.format(MESSAGE_VIEW_TASKS_SUCCESS, personToView.getName()));
+        cr.setDisplaySingleTaskList();
+        return cr;
     }
+
+
 
     @Override
     public boolean equals(Object other) {

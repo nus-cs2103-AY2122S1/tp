@@ -128,4 +128,17 @@ public interface Model {
      * Add a command to cache
      */
     void addCommand(String command);
+
+    ObservableList<Person> getObservablePersonList();
+
+    /**
+     * Updates the {@code observablePersonList} using the newly updated
+     * {@code filteredTasks}.
+     */
+    void updateObservablePersonList();
+
+    /**
+     * Sets the predicate used to filter {@code observablePersonList}.
+     */
+    void setViewAllTasksFindPred(Predicate<Task> predicate);
 }

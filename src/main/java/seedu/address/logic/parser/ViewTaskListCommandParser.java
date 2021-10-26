@@ -17,6 +17,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class ViewTaskListCommandParser implements Parser<ViewTaskListCommand> {
     private static final String VALID_INPUT_WITH_FLAGS_REGEX = "[0-9]\\s-f\\s[\\w\\s]+";
     private static final String VALID_INPUT_WITHOUT_FLAGS_REGEX = "[0-9]+";
+    private static final String VALID_VIEW_ALL_REGEX = "-A";
+    private static final String VALID_VIEW_ALL_REGEX_WTIH_FLAG = "-A[\\s]*-f\\s[\\w\\s]+";
+
+    private final Pattern validPatternWithoutFlags = Pattern.compile(VALID_INPUT_WITHOUT_FLAGS_REGEX);
+    private final Pattern validPatternWithFlags = Pattern.compile(VALID_INPUT_WITH_FLAGS_REGEX);
+    private final Pattern viewAllWithoutFind = Pattern.compile(VALID_VIEW_ALL_REGEX);
+    private final Pattern viewAllWithFind = Pattern.compile(VALID_VIEW_ALL_REGEX_WTIH_FLAG);
+
+    private Matcher matcherWithoutFlags;
+    private Matcher matcherWithFlags;
+    private Matcher matcherViewAllWithoutFind;
+    private Matcher matcherViewAllWithFind;
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -26,25 +38,22 @@ public class ViewTaskListCommandParser implements Parser<ViewTaskListCommand> {
      */
     public ViewTaskListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.equals("-A")) {
+        setMatchers(trimmedArgs);
+
+        if (matcherViewAllWithoutFind.matches()) {
             return new ViewTaskListCommand();
+        } else if (matcherViewAllWithFind.matches()) {
+            return new ViewTaskListCommand(extractKeywords(trimmedArgs));
         } else {
             try {
-                Pattern validPatternWithoutFlags = Pattern.compile(VALID_INPUT_WITHOUT_FLAGS_REGEX);
-                Pattern validPatternWithFlags = Pattern.compile(VALID_INPUT_WITH_FLAGS_REGEX);
-                Matcher matcherWithoutFlags = validPatternWithoutFlags.matcher(trimmedArgs);
-                Matcher matcherWithFlags = validPatternWithFlags.matcher(trimmedArgs);
-
                 if (matcherWithoutFlags.matches()) {
                     Index index = ParserUtil.parseIndex(trimmedArgs);
                     return new ViewTaskListCommand(index);
                 }
-
                 if (matcherWithFlags.matches()) {
                     String[] flagAndKeywords = trimmedArgs.split(" ");
                     Index index = ParserUtil.parseIndex(flagAndKeywords[0]);
                     List<String> keywords = Arrays.asList(flagAndKeywords[2].split(" "));
-
                     return new ViewTaskListCommand(index, keywords);
                 } else {
                     throw new ParseException(
@@ -55,5 +64,19 @@ public class ViewTaskListCommandParser implements Parser<ViewTaskListCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskListCommand.MESSAGE_USAGE));
             }
         }
+    }
+
+    private void setMatchers(String args) {
+        matcherWithoutFlags = validPatternWithoutFlags.matcher(args);
+        matcherWithFlags = validPatternWithFlags.matcher(args);
+        matcherViewAllWithoutFind = viewAllWithoutFind.matcher(args);
+        matcherViewAllWithFind = viewAllWithFind.matcher(args);
+    }
+
+    private List<String> extractKeywords(String args) {
+        int idx = args.indexOf("-f");
+        String keywords = args.substring(idx + 2).trim();
+
+        return Arrays.asList(keywords.split(" "));
     }
 }

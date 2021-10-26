@@ -260,7 +260,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleDisplaySingleTaskList();
             }
             if (commandResult.isWriteCommand()) {
-                allTaskListPanel.updateRootNode(logic.getFilteredPersonList());
+                allTaskListPanel.updateTreeView(logic.getObservablePersonList());
             }
 
             return commandResult;
