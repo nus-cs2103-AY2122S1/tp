@@ -26,10 +26,10 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-                <Label fx:id="teleHandle" styleClass="cell_small_label" text="\$teleHandle" />
-                <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+                <Label fx:id="name" text="\$first" styleClass="student_big_label" />
+                <Label fx:id="teleHandle" styleClass="student_small_label" text="\$teleHandle" />
+                <Label fx:id="studentId" styleClass="student_small_label" text="\$studentId" />
+                <Label fx:id="email" styleClass="student_small_label" text="\$email" />
             </HBox>
             <!--            This VBox is a TaskListPanel-->
             <VBox fx:id="taskList" minHeight="-Infinity" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">

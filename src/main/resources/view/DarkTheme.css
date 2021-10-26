@@ -83,22 +83,22 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color:  #EF7C00;
+    -fx-background-color: #003D7C;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: derive(#EF7C00, 50%);
+    -fx-background-color: derive(#003D7C, 50%);
 }
 
 .list-cell:filled:even {
-    -fx-background-color: derive(#EF7C00, 30%);
+    -fx-background-color: derive(#003D7C, 30%);
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: derive(#EF7C00, 50%);
+    -fx-background-color: derive(#003D7C, 50%);
 }
 
 .cell_big_label {
@@ -110,7 +110,19 @@
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
+}
+
+.student_small_label {
+    -fx-font-family: "Open Sans Regular";
+        -fx-font-size: 13px;
+        -fx-text-fill: white;
+}
+
+.student_big_label {
+ -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
 }
 
 .command-box {
@@ -118,27 +130,26 @@
 }
 
 .pane-with-border {
-     -fx-background-color: #EF7C00;
-     -fx-border-color: #EF7C00;
+     -fx-background-color: #003D7C;
+     -fx-border-color: #003D7C;
      -fx-border-top-width: 1px;
 }
 
 .main-window {
-     -fx-background-color: #EF7C00;
+     -fx-background-color: #003D7C;
      -fx-border-color: white;
      -fx-border-top-width: 1px;
 }
 
 .task-card {
-     -fx-background-color: #EF7C00;
-     -fx-border-color: white;
-     -fx-border-bottom-width: 1px;
-     -fx-border-radius: 5;
+      -fx-background-color: #003D7C;
+      -fx-border-color: white;
+      -fx-border-width: 1px;
+      -fx-border-radius: 3;
 }
 
-
 .status-bar {
-    -fx-background-color: #003D7C;
+    -fx-background-color:  #EF7C00;
 }
 
 .result-display {
@@ -187,7 +198,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: #003D7C;
+    -fx-background-color:  #EF7C00;
 }
 
 .menu-bar .label {
