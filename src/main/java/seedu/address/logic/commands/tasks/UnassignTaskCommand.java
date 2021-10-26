@@ -1,5 +1,12 @@
 package seedu.address.logic.commands.tasks;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -9,13 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.TaskAssignable;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.task.Task;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public abstract class UnassignTaskCommand extends Command {
 
