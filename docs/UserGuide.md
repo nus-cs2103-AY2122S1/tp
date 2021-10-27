@@ -137,6 +137,18 @@ Clears all entries from CSBook.
 
 Format: `clear`
 
+#### Encrypting the data file: `encrypt`
+
+Encrypts the saved data file.
+
+Format: `encrypt`
+
+#### Decrypting the data file: `decrypt`
+
+Decrypts the saved data file.
+
+Format: `decrypt`
+
 #### Exiting the program : `exit`
 
 Exits the program.
@@ -145,12 +157,13 @@ Format: `exit`
 
 #### Saving the data
 
-CSBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CSBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually. The data is decrypted by default, but you may encrypt them using the `encrypt` command listed above.
 
 #### Editing the data file
 
-CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are thus highly advised to not try editing the data file directly and only manipulate
-data through the commands provided.
+CSBook data are saved as an JSON file at `[JAR file location]/data/csbook`. Advanced users are welcome to update data directly by editing that data file. 
+
+Note that if the encrypt function is turned on, the data will be saved in an encrypted JSON format. In which case, users are thus highly advised to **NOT** edit the data file directly and only manipulate data through the commands provided.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.<br/><br/>
@@ -194,7 +207,7 @@ Format: `list`
 
 Edits an existing student in the CSBook.
 
-Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUP_NAME]`
+Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL]`
 
 * Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -222,22 +235,19 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-#### Deleting a student : `delete`
+#### View student: `viewstudent`
 
-Deletes the specified student from CSBook.
+Views an existing student in the CSBook.
 
-Format: `delete INDEX`
+Format: `viewstudent n/NAME`
 
-* Deletes the student at the specified `INDEX` and removes the student from their assigned group.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The search is case-sensitive. e.g. `david` will **not** match `David`
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in CSBook.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `viewstudent n/David` returns `David`
+* `viewstudent n/Jun Wei` returns `Jun Wei`
 
 #### Adding an assessment: `addassessment`
 
@@ -279,13 +289,27 @@ Examples:
 
 Sets the note of the student to the given input.
 
-Format: `note n/STUDENTNAME no/NOTE`
+Format: `note n/NAME no/NOTE`
 
-* Overwrites the existing note of the student with the new note.
+* If a note exists, overwrites the existing note of the student with the new note.
 
 Examples:
 * `note n/Brian no/is weak in environment model.`
 * `note n/Jun Wei no/is strong in substitution model.`
+
+#### Deleting a student : `delete`
+
+Deletes the specified student from CSBook.
+
+Format: `delete INDEX`
+
+* Deletes the student at the specified `INDEX` and removes the student from their assigned group.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd student in CSBook.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Group management features
 
@@ -312,19 +336,6 @@ Examples:
 
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
-
-#### Listing all groups : `listgroups`
-
-Shows a list of all groups in the CSBook.
-
-Format: `listgroups`
-
-Examples:
-* `listgroups` displays a list of all the groups, including their group description and number of students in them.
-
-
-  ![result for `listgroups`](images/listGroups.png)
-
 #### Creating a group: `addgroup`
 
 Creates a group with the given group name and given description so that students can be added into it.
@@ -341,9 +352,9 @@ that students can be added into.
 
 Changes the group which the given student belongs in to the given group.
 
-Format: `changeGroup n/STUDENTNAME g/GROUPNAME`
+Format: `changegroup n/NAME g/GROUPNAME`
 
-* The student with the specified `STUDENTNAME` has its group changed to the group with the specified `GROUPNAME`.
+* The student with the specified `NAME` has its group changed to the group with the specified `GROUPNAME`.
 
 Examples:
 * `changegroup n/Brian g/CS2101` changes the group that `Brian` belongs in to `CS2101`.
@@ -366,18 +377,23 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Clear** | `clear`
+**Encrypt** | `encrypt`
+**Decrypt** | `decrypt`
 **Exit** | `exit`
-**Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
-**List** | `list`
-**Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUPNAME]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**AddAssessment** | `addassessment INDEX a/ASSESSMENT_NAME S/SCORE`
-**DeleteAssessment** | `deleteassessment INDEX a/ASSESSMENT_NAME`
+**Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
+**List Students** | `list`
+**Edit Student** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
+**Find Students** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**View Student** | `viewstudent n/NAME`
+**Add Assessment** | `addassessment INDEX a/ASSESSMENT_NAME S/SCORE`
+**Delete Assessment** | `deleteassessment INDEX a/ASSESSMENT_NAME`
+**Add Notes** | `note n/NAME no/NOTE`
+**Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **View Group** | `viewgroup GROUPNAME`
-**List Groups** | `listgroups`
 **Add Group** | `addgroup [g/GROUPNAME] [d/DESCRIPTION]`
+**Change Group** | `changegroup n/NAME g/GROUPNAME`
 **Delete Group** | `deletegroup GROUPNAME`
+
 
 ## FAQ
 
