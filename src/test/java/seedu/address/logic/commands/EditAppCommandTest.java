@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_PERIOD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalAppointment.getTypicalSchedule;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -28,7 +27,7 @@ public class EditAppCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
         EditAppCommand editAppCommand = new EditAppCommand(outOfBoundIndex, new Address(VALID_ADDRESS_AMY),
-                VALID_DATE, VALID_TIME, "description");
+                VALID_TIME_PERIOD, "description");
 
         assertCommandFailure(editAppCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }

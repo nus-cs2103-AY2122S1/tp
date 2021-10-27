@@ -3,12 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APP_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATETIME;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -17,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.schedule.Appointment;
+import seedu.address.model.schedule.TimePeriod;
 
 public class EditAppCommand extends Command {
 
@@ -24,45 +23,41 @@ public class EditAppCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an existing appointment in PlaceBook. "
             + "Parameters: "
-            + "APPOINTMENT INDEX "
+            + PREFIX_APP_INDEX + "APPOINTMENT INDEX "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_DATE + "DATE (dd-MM-yyyy) "
-            + PREFIX_TIME + "TIME (hhmm) "
+            + PREFIX_STARTDATETIME + "DATE (dd-MM-yyyy) TIME (HHmm) "
+            + PREFIX_ENDDATETIME + "DATE (dd-MM-yyyy) TIME (HHmm) "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_APP_INDEX + "1 "
             + PREFIX_ADDRESS + "Starbucks @ Raffles City "
-            + PREFIX_DATE + "14-12-2021"
-            + PREFIX_TIME + "1600"
+            + PREFIX_STARTDATETIME + "14-12-2021 1600"
+            + PREFIX_ENDDATETIME + "14-12-2021 1800"
             + PREFIX_DESCRIPTION + "discuss marketing strategies";
 
     public static final String MESSAGE_SUCCESS = "Appointment edited: %1$s";
 
     private final Index appIndex;
     private final Address location;
-    private final LocalDate date;
-    private final LocalTime time;
+    private final TimePeriod timePeriod;
     private final String description;
 
     /**
      * Creates an EditAppCommand
      * @param location The location of the appointment
-     * @param date The date of the appointment
-     * @param time The time of the appointment
+     * @param timePeriod The time period of the appointment
      * @param description The description of the appointment
      */
-    public EditAppCommand(Index appIndex, Address location, LocalDate date, LocalTime time,
+    public EditAppCommand(Index appIndex, Address location, TimePeriod timePeriod,
                           String description) {
         requireNonNull(appIndex);
         requireNonNull(location);
-        requireNonNull(date);
-        requireNonNull(time);
+        requireNonNull(timePeriod);
         requireNonNull(description);
 
         this.appIndex = appIndex;
         this.location = location;
-        this.date = date;
-        this.time = time;
+        this.timePeriod = timePeriod;
         this.description = description;
     }
 
@@ -77,7 +72,7 @@ public class EditAppCommand extends Command {
 
         Appointment appointmentToEdit = lastShownList.get(appIndex.getZeroBased());
         Appointment editedAppointment =
-                new Appointment(appointmentToEdit.getClients(), location, date, time, description);
+                new Appointment(appointmentToEdit.getClients(), location, timePeriod, description);
         model.deleteAppointment(appointmentToEdit);
         model.addAppointment(editedAppointment);
 
@@ -99,8 +94,7 @@ public class EditAppCommand extends Command {
         EditAppCommand ea = (EditAppCommand) other;
         return this.appIndex.equals(ea.appIndex)
                 && this.location.equals(ea.location)
-                && this.date.equals(ea.date)
-                && this.time.equals(ea.time)
+                && this.timePeriod.equals(ea.timePeriod)
                 && this.description.equals(ea.description);
     }
 }
