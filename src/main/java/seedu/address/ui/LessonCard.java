@@ -37,6 +37,8 @@ public class LessonCard extends UiPart<Region> {
     private VBox homeworkList;
     @FXML
     private Label cancelledDates;
+    @FXML
+    private Label cancelPlaceholder;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,15 +60,16 @@ public class LessonCard extends UiPart<Region> {
 
         Set<Date> lessonCancelledDates = lesson.getCancelledDates();
         if (lessonCancelledDates.isEmpty()) {
+            cancelPlaceholder.setManaged(false);
             cancelledDates.setManaged(false);
-            return;
-        }
-        if (lesson.isRecurring()) {
-            List<String> dates = lesson.getCancelledDates().stream().sorted()
-                    .map(Date::toString).collect(Collectors.toList());
-            cancelledDates.setText("Cancelled Dates:\n" + String.join(",\n", dates));
-        } else if (lesson.getCancelledDates().size() > 0) {
-            cancelledDates.setText("Cancelled!");
+        } else {
+            if (lesson.isRecurring()) {
+                List<String> dates = lesson.getCancelledDates().stream().sorted()
+                        .map(Date::toString).collect(Collectors.toList());
+                cancelledDates.setText(String.join(",\n", dates));
+            } else if (lesson.getCancelledDates().size() > 0) {
+                cancelPlaceholder.setText("Cancelled!");
+            }
         }
     }
 

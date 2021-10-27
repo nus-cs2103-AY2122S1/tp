@@ -42,7 +42,7 @@
             </HBox>
             <HBox>
                 <Label fx:id="cancelPlaceholder" styleClass="cell_medium_label" text="Cancelled Date: " wrapText="true" />
-                <Label fx:id="cancelledDates" styleClass="cell_small_label" text="\$cancelledDates" wrapText="true" />
+                <Label fx:id="cancelledDates" styleClass="cell_small_label" wrapText="true" />
             </HBox>
             <VBox fx:id="homeworkList" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS" />
         </VBox>
