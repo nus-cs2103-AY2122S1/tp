@@ -27,8 +27,16 @@ public class SortByAttribute implements Comparator<Client> {
         this.prefix = prefix;
     }
 
+    public SortByAttribute(Prefix prefix) {
+        this(prefix, SortDirection.SORT_ASCENDING);
+    }
+
     public String getPrefixName() {
         return getName(prefix);
+    }
+
+    public Comparator<Client> thenCompareByAttribute(Prefix prefix) {
+        return this.thenComparing(new SortByAttribute(prefix, this.direction));
     }
 
     @Override

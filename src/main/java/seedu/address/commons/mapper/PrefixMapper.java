@@ -111,8 +111,7 @@ public class PrefixMapper {
             EDIT_SET_NEXTMEETING, PARSE_NEXTMEETING, "Next Meeting");
     private static final PrefixMapperElement<CurrentPlan> PME_CURRENTPLAN = new PrefixMapperElement<>(GET_CURRENTPLAN,
             EDIT_SET_CURRENTPLAN, PARSE_CURRENTPLAN, "Current Plan");
-    private static final PrefixMapperElement<Tag> PME_TAG = new PrefixMapperElement<>(null,
-            null, null, "Tag");
+    private static final PrefixMapperElement<Tag> PME_TAG = new PrefixMapperElement<>(null, null, null, "Tag");
 
     // Maps prefix with their respective functions
     private static final Map<Prefix, PrefixMapperElement<? extends IgnoreNullComparable<?>>> PREFIX_MAP = Map.ofEntries(
@@ -156,7 +155,9 @@ public class PrefixMapper {
         private final String name;
 
         private PrefixMapperElement(Function<Client, T> getAttributeFunction,
-                BiConsumer<EditClientDescriptor, T> editSetFunction, Function<String, T> parseFunction, String name) {
+                                    BiConsumer<EditClientDescriptor, T> editSetFunction,
+                                    Function<String, T> parseFunction,
+                                    String name) {
             this.getAttributeFunction = getAttributeFunction;
             this.editSetFunction = editSetFunction;
             this.parseFunction = parseFunction;
