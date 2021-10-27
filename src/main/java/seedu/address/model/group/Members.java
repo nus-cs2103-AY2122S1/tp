@@ -41,8 +41,8 @@ public class Members {
      * @param student edited group member
      */
     public void updateMember(Student target, Student student) {
-        removeMember(target);
-        addMember(student);
+        int index = studentList.indexOf(target);
+        studentList.set(index, student);
     }
 
     @Override

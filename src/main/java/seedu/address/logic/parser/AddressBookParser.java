@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddDeadlineTaskCommand;
 import seedu.address.logic.commands.AddEventTaskCommand;
-import seedu.address.logic.commands.AddGithubGroupCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentGroupCommand;
@@ -23,6 +22,7 @@ import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.DeleteStudentGroupCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -134,6 +134,9 @@ public class AddressBookParser {
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
+        case EditGroupCommand.COMMAND_WORD:
+            return new EditGroupCommandParser().parse(arguments);
+
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);
 
@@ -145,9 +148,6 @@ public class AddressBookParser {
 
         case DeleteStudentGroupCommand.COMMAND_WORD:
             return new DeleteStudentGroupCommandParser().parse(arguments);
-
-        case AddGithubGroupCommand.COMMAND_WORD:
-            return new AddGithubGroupCommandParser().parse(arguments);
 
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);

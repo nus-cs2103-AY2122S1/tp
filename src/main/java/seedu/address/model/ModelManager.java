@@ -263,6 +263,15 @@ public class ModelManager implements Model {
     public void setGroup(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);
 
+        for (Student student : target.getMembers().studentList) {
+            Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
+                    student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
+                    student.getParticipation(), editedGroup.getName());
+            editedGroup.getMembers().updateMember(student, updatedStudent);
+            addressBook.setStudent(student, updatedStudent);
+        }
+
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         addressBook.setGroup(target, editedGroup);
     }
 
