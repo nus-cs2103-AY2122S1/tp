@@ -77,6 +77,13 @@ dependencies {
 
 shadowJar {
     archiveName = 'academydirectory.jar'
+    exclude "com/ibm/**/*"
+    exclude "com/openhtmltopdf/**/*"
+    exclude "libjfxwebkit.dylib"
+    exclude "javafx/scene/web/**/*"
+    exclude "org/intellij/**/*"
+    exclude "org/apache/**/*"
+    exclude "org/jetbrains/**/*"
 }
 
 defaultTasks 'clean', 'test'

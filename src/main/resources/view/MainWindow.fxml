@@ -30,6 +30,15 @@
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Grade">
+            <MenuItem mnemonicParsing="false" text="Help" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Visualize">
+            <MenuItem mnemonicParsing="false" text="Help" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="History">
+            <MenuItem mnemonicParsing="false" text="Help" />
+          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#openDefaultHelp" text="Help" />
           </Menu>

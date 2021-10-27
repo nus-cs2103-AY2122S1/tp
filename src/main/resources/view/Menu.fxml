@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<MenuBar xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <Menu mnemonicParsing="false" text="File">
+        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Retrieve all emails" />
+        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Retrieve all phones" />
+        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Retrieve all telegram handles" />
+        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Grade">
+        <MenuItem mnemonicParsing="false" onAction="#openDefaultHelp" text="Show RA1" />
+        <MenuItem mnemonicParsing="false" onAction="#openDefaultHelp" text="Show Midterm" />
+        <MenuItem mnemonicParsing="false" onAction="#openDefaultHelp" text="Show RA2" />
+        <MenuItem mnemonicParsing="false" onAction="#openDefaultHelp" text="Show PE" />
+        <MenuItem mnemonicParsing="false" onAction="#openDefaultHelp" text="Show Final" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Visualize">
+        <MenuItem mnemonicParsing="false" onAction="#openDefaultHelp" text="Visualize grades" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="History">
+        <MenuItem mnemonicParsing="false" onAction="#openDefaultHelp" text="Show usage history" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+        <MenuItem fx:id="" mnemonicParsing="false" onAction="#openDefaultHelp" text="View help" />
+    </Menu>
+</MenuBar>
