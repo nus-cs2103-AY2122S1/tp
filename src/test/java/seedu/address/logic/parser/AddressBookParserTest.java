@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PRODUCT;
 
@@ -26,11 +28,16 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClientCommand;
 import seedu.address.logic.commands.ListProductCommand;
+import seedu.address.logic.commands.StatCommand;
+import seedu.address.logic.commands.ViewClientCommand;
+import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientContainsIdPredicate;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductContainsIdPredicate;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
@@ -76,6 +83,26 @@ public class AddressBookParserTest {
         String actualOutput = actualCommand.execute(model).getFeedbackToUser();
         assertEquals(expectedOutput.substring(expectedOutput.indexOf("Name")),
                 actualOutput.substring(actualOutput.indexOf("Name")));
+    }
+
+    @Test
+    public void parseCommand_viewClient() throws Exception {
+        ViewClientCommand expectedCommand = (ViewClientCommand) parser.parseCommand(
+                ViewClientCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased(), model);
+        ArrayList<String> ids = new ArrayList<>();
+        ids.add(String.valueOf(INDEX_FIRST_CLIENT.getOneBased()));
+        ViewClientCommand actualCommand = new ViewClientCommand(new ClientContainsIdPredicate(ids));
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_viewProduct() throws Exception {
+        ViewProductCommand expectedCommand = (ViewProductCommand) parser.parseCommand(
+                ViewProductCommand.COMMAND_WORD + " " + INDEX_FIRST_PRODUCT.getOneBased(), model);
+        ArrayList<String> ids = new ArrayList<>();
+        ids.add(String.valueOf(INDEX_FIRST_PRODUCT.getOneBased()));
+        ViewProductCommand actualCommand = new ViewProductCommand(new ProductContainsIdPredicate(ids));
+        assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
@@ -177,13 +204,21 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_stat() throws Exception {
+        assertTrue(parser.parseCommand(StatCommand.COMMAND_WORD, model) instanceof StatCommand);
+        assertTrue(parser.parseCommand(StatCommand.COMMAND_WORD + " 3", model) instanceof StatCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parseCommand("", model));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand("", model));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parseCommand("unknownCommand", model));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+                -> parser.parseCommand("unknownCommand", model));
     }
 
     public static class ModelStub extends ModelManager {
