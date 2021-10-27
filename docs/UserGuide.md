@@ -16,7 +16,8 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Editing a person : `edit`](#editing-a-person--edit)
   * [Adding Tags : `tag`](#adding-tags--tag)
   * [Removing Tags : `untag`](#removing-tags--untag)
-  * [Locating persons by name: `find`](#locating-persons-by-name-find)
+  * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
+  * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findAny)
   * [Locating persons by tag (case insensitive): `findTag`](#locating-persons-by-tag-findtag)
   * [Locating persons by tag (case sensitive): `findTagC`](#locating-persons-by-tag-findtagC)
   * [Pinning a person: `pin`](#pinning-a-person--pin)
@@ -157,6 +158,7 @@ Adds tag to an existing person in the address book.
 Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * New tags will be added on top of existing tags i.e. tags added is cumulative.
+* Adding new tags which already exist will succeed with a warning letting you know that the person already had those tags
 
 **Sample Usage:**
 * `tag 2 t/friend t/NUS`
@@ -177,27 +179,61 @@ Notes:
 * `untag 2 t/friend t/NUS`
     * Removes the tags `friend` and `NUS` from the 2nd person.
 
-### Locating persons by name: `find`
+### Locating persons by name and tag(s): `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds all persons whose names **and** tags matches ALL keywords provided.
 
 #### Format:
-* `find KEYWORD [MORE_KEYWORDS]`
+* `find n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
 
 Notes:
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* `find` is case-insensitive by default. e.g. `hans` will match `Hans`
+  * However, users can opt for case-sensitive search by including the `c/` flag after the command word
+* The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as
+  `t/friends n/Hans`
+* Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  * This applies to both names and tags
+* Only Persons matching all keywords will be returned (i.e. `AND` search).
+  e.g. `n/Hans t/Friend` will return all Persons named `Hans` and are tagged with `Friend`
 
 **Sample Usage:**
-* `find John`
+* `find n/John`
   * returns `john` and `John Doe`
-* `find alex david`
-  * returns `Alex Yeoh`, `David Li`<br>
-    ![result for 'find alex david'](images/findAlexDavidResult.png
+    ![result for `find n/john`](images/findjohnResult.png)
+* `find n/alex t/football t/classmate`
+  * returns `Alex Yeoh`, who has both `football` and `classmates` tag<br>
+    ![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
+* `find c/ t/FRIENDS`
+  * returns `Shin`, who is tagged with `FRIENDS` 
+    ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
+
+### Locating persons by name or tag(s): `findAny`
+
+Finds all persons whose names **or** tags contain ANY of the given keywords.
+
+#### Format:
+* `findAny n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
+
+Notes:
+* `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Both name and tags are searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+  * This applies to both names and tags
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+
+**Sample Usage:**
+* `findAny n/John`
+  * returns `john` and `John Doe`
+    ![result for `findAny n/john`](images/findAnyjohnResult.png)
+* `findAny n/alex n/irfan t/chef`
+  * returns `Alex Yeoh`, `Irfan Ibrahim`, `Carol` who is tagged with `chef`<br>
+    ![result for `findAny alex david`](images/findAnyalexirfanchefResult.png)
+* `findAny c/ n/Shin t/FRIENDS t/chef`
+  * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`
+    ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
 
 ### Locating persons by tags: `findTag`
 
