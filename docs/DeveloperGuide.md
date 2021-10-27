@@ -195,7 +195,7 @@ The following sequence diagram shows how the find operation works for a name:
 ![FindCommandNameSequenceDiagram](images/FindNameSequenceDiagram.png)
 
 The following sequence diagram shows how the find operation works for a Tutorial ID:
-[comment]: <> (![FindCommandTutIdSequenceDiagram]&#40;images/FindTutIdSequenceDiagram.png&#41;)
+![FindCommandTutIdSequenceDiagram](images/FindTutorialIdSequenceDiagram.png)
 
 #### Proposed Implementation
 
