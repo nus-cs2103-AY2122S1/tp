@@ -8,7 +8,7 @@ import safeforhall.model.Model;
 public class SwitchCommand extends Command {
 
     public static final String COMMAND_WORD = "switch";
-
+    public static final String PARAMETERS = "";
     public static final String SWITCH_SUCCESS_MESSAGE = "Switched tabs";
 
     @Override

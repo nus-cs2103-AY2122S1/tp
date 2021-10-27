@@ -18,7 +18,7 @@ import safeforhall.model.person.Person;
  */
 public class ExcludeCommand extends Command {
     public static final String COMMAND_WORD = "exclude";
-
+    public static final String PARAMETERS = "INDEX r/ROOM/NAME";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes residents from the given event.\n"
             + "Parameters: "
             + "INDEX "
