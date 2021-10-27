@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class Shortcut implements Serializable {
     public static final String MESSAGE_CONSTRAINTS =
-            "The shortcut should not be an existing command, and it should not be blank";
+            "The shortcut should not be an existing command, and it should be one word";
 
     /*
      * The first character of the shortcut must not be a whitespace,
@@ -34,7 +34,8 @@ public class Shortcut implements Serializable {
      * Returns true if given string is a valid shortcut.
      */
     public static boolean isValidShortcut(String test) {
-        return test.matches(VALIDATION_REGEX) && !(CommandWord.isValidCommandWord(test));
+        return test.matches(VALIDATION_REGEX)
+                && test.split("\\s+").length == 1 && !(CommandWord.isValidCommandWord(test));
     }
 
     @Override
