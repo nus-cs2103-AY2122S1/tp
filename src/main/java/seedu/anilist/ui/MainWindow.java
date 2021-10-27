@@ -44,8 +44,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private CommandBox commandBox;
     private AnimeListPanel animeListPanel;
     private ResultDisplay resultDisplay;
+    private StatsDisplay statsDisplay;
     private ToggleGroup themeToggleGroup = new ToggleGroup();
     private String themeCss;
 
@@ -78,7 +80,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
-
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
@@ -86,6 +87,10 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        statsDisplay = new StatsDisplay();
+        statsDisplay.setStatsCloseCommand(this::onCloseStatsWindow);
+
         initTheme();
 
         // Configure Hotkeys for tab switching
@@ -114,7 +119,14 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
+        this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+    }
+
+
+    private void updateStatsDisplay() {
+        statsDisplay.setAnimeListStats(logic.getStats());
     }
 
     private void initTheme() {
@@ -217,6 +229,25 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the stats display window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleStats() {
+        updateStatsDisplay();
+        if (!statsDisplay.isShowing()) {
+            statsDisplay.show();
+            updateStatsDisplay();
+        } else {
+            statsDisplay.focus();
+            updateStatsDisplay();
+        }
+    }
+
+    public void onCloseStatsWindow() {
+        commandBox.enableCommandTextField();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -230,6 +261,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setThemeCss(themeCss);
         logic.setGuiSettings(guiSettings);
+        statsDisplay.hide();
         primaryStage.hide();
     }
 
@@ -247,6 +279,11 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowStats()) {
+                handleStats();
+                commandBox.disableCommandTextField();
+            }
 
             if (commandResult.isExit()) {
                 handleExit();

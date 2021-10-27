@@ -14,7 +14,7 @@ public class GenreListCommandTest {
 
     @Test
     public void execute_genreList_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_GENRE_LIST_MESSAGE, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_GENRE_LIST_MESSAGE);
         assertCommandSuccess(new GenreListCommand(), model, expectedCommandResult, expectedModel);
     }
 }
