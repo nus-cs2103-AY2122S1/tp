@@ -328,7 +328,7 @@ Format: `deleteEvent INDEX`
 Example Usage:
 * `delete 5` - Deletes the 5th Event in the displayed Event list.
 * `listEvents` followed by `deleteEvent 2` - Deletes the 2nd Event in the full Event list.
-  Find out more about `listEvents` [here](#locating-events-by-name-findevent).
+  Find out more about `listEvents` [here](#listing-all-events-listevents).
 * `filterEvents d/2021-09-18` followed by `deleteEvent 1` - Deletes the 1st Event in the results of the `filterEvents` 
   command. Find out more about `filterEvents` [here](#filtering-events-by-time-filterevents).
 
@@ -428,7 +428,7 @@ Format: `showDetails INDEX`
 Example Usage:
 * `showDetails 1` - Displays the details of the 1st Event in the displayed Event list.
 * `listEvents` followed by `showDetails 2` - Displays the details of the 2nd Event in the full Event list.
-  Find out more about `listEvents` [here](#locating-events-by-name-findevent).
+  Find out more about `listEvents` [here](#listing-all-events-listevents).
 * `filterEvents d/2021-09-18` followed by `showDetails 1` - Displays the details of the 1st Event in the results of 
   the `filterEvents` command. Find out more about `filterEvents` [here](#filtering-events-by-time-filterevents).
 
