@@ -212,8 +212,9 @@ The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
 The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
-
-*Figure I.3.3: Sequence Diagram of Lesson Add Command*
+*Figure I.3.3.1: Sequence Diagram of Lesson Add Command*
+![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
+*Figure I.3.3.2: Continued Sequence Diagram of Lesson Add Command*
 
 The following snippet shows how the `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in
 the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd`
@@ -226,14 +227,10 @@ public class LessonAddCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-        if (model.hasClashingLesson(toAdd)) {
-            throw new CommandException(MESSAGE_CLASHING_LESSON);
-        }
-        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
-        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
+        personBeforeLessonAdd = CommandUtil.getPerson(lastShownList, index);
+        Set<Lesson> lessons = personBeforeLessonAdd.getLessons();
+        Set<Lesson> updatedLessons = createUpdatedLessons(lessons, toAdd);
+        personAfterLessonAdd = PersonUtil.createdEditedPerson(personBeforeLessonAdd, updatedLessons);
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         
@@ -256,7 +253,8 @@ The figure below shows the sequence diagram for editing a lesson.
 
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
-object to create the `editedLesson` object.
+object to create the `editedLesson` object. The detailed sequence diagram for LessonEditCommand is the similar to LessonAddCommand's
+with an additional step for retrieving the lesson to edit from the student of interest. Refer to Figure I.3.3.2 above. 
 
 The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
@@ -284,7 +282,7 @@ into `model`-friendly `Lesson` objects.
 A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
 the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
 The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
-list of lessons to view.
+list of lessons to view. The `PersonListPanel` also has a listener that displays the selected student's list of lesson.
 
 #### Design considerations:
 
@@ -298,6 +296,18 @@ list of lessons to view.
     * Pros: No need to edit `Person` for `Lesson` operations.
     * Cons: Operations are done with respect to the full list of lessons in the application, which means user cannot
       isolate the list of lessons of a student of choice to operate on.
+
+**Aspect: Recurrence rule for recurring lessons**
+
+* **Alternative 1 (current choice):** Only allow weekly recurrence
+    * Pros: Easy to implement and allow room for other features (such as detecting of clashes). Weekly recurring lessons are
+      common for private 1-to-1 tuition in Singapore.
+    * Cons: Users cannot set their own recurrence rule. Workaround for schedule keeping possible through adding singular lessons
+      when needed.
+
+* **Alternative 2:** Allow user to define their own recurrence rule.
+    * Pros: Greater flexibility in planning lessons outside the regular weekly recurrence.
+    * Cons: Difficult to detect clashes with the endless possibilities.
 
 <br />
 
