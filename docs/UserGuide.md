@@ -13,7 +13,25 @@ This User Guide is to be used by any AniList user. No technical background is re
 
 ## Table of Content
 
-**TODO: ADD TOC**
+- [Quick Start](#quick-start)
+- [GUI Breakdown](#gui-breakdown)
+- [Hot-Keys](#hot-keys)
+- [Commands](#commands)
+  * [Adding an anime: `add`](#adding-an-anime-add)
+  * [Deleting an anime: `delete`](#deleting-an-anime-delete)
+  * [Updating anime episode: `update`](#updating-anime-episode-update)
+  * [Updating anime watch status: `status`](#updating-anime-watch-status-status)
+  * [Updating anime title: `rename`](#updating-anime-title-rename)
+  * [Adding/ Deleting genre from anime: `genre`](#adding-deleting-genre-from-anime-genre)
+  * [List all supported genres: `genrelist`](#list-all-supported-genres-genrelist)
+  * [Listing anime based on watch status: `list`](#listing-anime-based-on-watch-status-list)
+  * [Clearing all user data: `clear`](#clearing-all-user-data-clear)
+  * [Viewing all supported commands: `help`](#viewing-all-supported-commands-help)
+- [Commands Table](#commands-table)
+- [Glossary](#glossary)
+
+
+
 
 ## Quick Start
 1. Ensure you have `Java 11` or later installed on your computer. ([install here](https://java.com/en/download/help/download_options.html))
