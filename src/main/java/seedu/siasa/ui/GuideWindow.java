@@ -19,43 +19,43 @@ public class GuideWindow extends UiPart<Stage> {
     private enum Page {
         ONE("User Guide",
             "Welcome to Siasa! " +
-                "This is a guide that teaches you all the basic commands to use this application.\n" +
-                "For a more detailed guide, visit: https://ay2122s1-cs2103-f10-4.github.io/tp/UserGuide.html",
+                "This is a guide that teaches you all the basic commands to use this application.\n"
+                + "For a more detailed guide, visit: https://ay2122s1-cs2103-f10-4.github.io/tp/UserGuide.html",
             new Image("file:src/main/resources/images/guide/page_one.png")),
-        TWO("User Guide - Persons", "addclient: Adds a contact to your Siasa address book.\n" +
-            "Format: addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n" +
-            "Example: addclient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01",
+        TWO("User Guide - Persons", "addclient: Adds a contact to your Siasa address book.\n"
+            + "Format: addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]\n"
+            + "Example: addclient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01",
             new Image("file:src/main/resources/images/guide/page_two.png")),
         THREE("User Guide - Persons",
-            "deleteclient: Removes a contact from your Siasa address book based on the index provided.\n" +
-                "Format: deleteclient INDEX\n" +
-                "Example: deleteclient 2",
+            "deleteclient: Removes a contact from your Siasa address book based on the index provided.\n"
+                + "Format: deleteclient INDEX\n"
+                + "Example: deleteclient 2",
             new Image("file:src/main/resources/images/guide/page_three.png")),
         FOUR("User Guide - Persons",
-            "editclient: Edit a contact from your Siasa address book based on the index provided. " +
-                "At least one of the optional fields should be filled.\n" +
-                "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n" +
-                "Example: edit 2 p/91234567 e/johndoe@example.com",
+            "editclient: Edit a contact from your Siasa address book based on the index provided. "
+                + "At least one of the optional fields should be filled.\n"
+                + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n"
+                + "Example: edit 2 p/91234567 e/johndoe@example.com",
             new Image("file:src/main/resources/images/guide/page_four.png")),
         FIVE("User Guide - Policies",
-            "addpolicy: Adds a policy that is linked to a contact to your Siasa address book.\n" +
-                "addpolicy n/NAME_OF_POLICY e/EXPIRY_DATE p/PRICE c/COMMISSION cl/PERSON_INDEX\n" +
-                "Example: addpolicy n/Life Policy e/2021-06-13 p/1000 c/20 cl/1",
+            "addpolicy: Adds a policy that is linked to a contact to your Siasa address book.\n"
+                + "addpolicy n/NAME_OF_POLICY e/EXPIRY_DATE p/PRICE c/COMMISSION cl/PERSON_INDEX\n"
+                + "Example: addpolicy n/Life Policy e/2021-06-13 p/1000 c/20 cl/1",
             new Image("file:src/main/resources/images/guide/page_five.png")),
         SIX("User Guide - Policies",
-            "deletepolicy: Removes a policy from your Siasa address book based on the index provided.\n" +
-                "deletepolicy INDEX\n" +
-                "Example: deletepolicy 2",
+            "deletepolicy: Removes a policy from your Siasa address book based on the index provided.\n"
+                + "deletepolicy INDEX\n"
+                + "Example: deletepolicy 2",
             new Image("file:src/main/resources/images/guide/page_six.png")),
         SEVEN("User Guide - Policies",
-            "clientpolicy: List the policies belonging to the client based on the index provided.\n" +
-                "clientpolicy INDEX\n" +
-                "Example: clientpolicy 1",
+            "clientpolicy: List the policies belonging to the client based on the index provided.\n"
+                + "clientpolicy INDEX\n"
+                + "Example: clientpolicy 1",
             new Image("file:src/main/resources/images/guide/page_seven.png")),
         EIGHT("User Guide - Policies",
-            "listpolicy: List all policies in your Siasa address book.\n" +
-                "listpolicy\n" +
-                "Example: listpolicy",
+            "listpolicy: List all policies in your Siasa address book.\n"
+                + "listpolicy\n"
+                + "Example: listpolicy",
             new Image("file:src/main/resources/images/guide/page_eight.png"));
 
         private final String title;
@@ -107,6 +107,9 @@ public class GuideWindow extends UiPart<Stage> {
         showPage();
     }
 
+    /**
+     * Shows the GuideWindow.
+     */
     public void show() {
         logger.fine("Showing walkthrough page about the application.");
         getRoot().show();
@@ -176,6 +179,8 @@ public class GuideWindow extends UiPart<Stage> {
         case SEVEN:
             currentPage = Page.EIGHT;
             showPage();
+            return;
+        default:
         }
 
     }
@@ -215,6 +220,8 @@ public class GuideWindow extends UiPart<Stage> {
         case EIGHT:
             currentPage = Page.SEVEN;
             showPage();
+            return;
+        default:
         }
 
     }
