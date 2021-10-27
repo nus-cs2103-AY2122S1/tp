@@ -24,18 +24,17 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddEventTaskCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EventTaskBuilder;
 
 public class AddEventTaskCommandParserTest {
-    private AddEventTaskCommandParser parser = new AddEventTaskCommandParser();
+    private final AddEventTaskCommandParser parser = new AddEventTaskCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        EventTask expectedTask = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTask = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE)
                 .withDate(VALID_TASK_DATE)
@@ -62,7 +61,7 @@ public class AddEventTaskCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags and description
-        EventTask expectedTaskWithoutTagsAndDescription = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTaskWithoutTagsAndDescription = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();
 
@@ -70,7 +69,7 @@ public class AddEventTaskCommandParserTest {
                 new AddEventTaskCommand(expectedTaskWithoutTagsAndDescription));
 
         // zero tags
-        EventTask expectedTaskWithoutTags = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTaskWithoutTags = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();

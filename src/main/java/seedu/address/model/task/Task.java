@@ -18,7 +18,7 @@ public class Task implements Comparable<Task>, Cloneable {
     private Set<Tag> tags = new HashSet<>();
     private String description;
     private boolean isDone;
-    private Priority priority;
+    private final Priority priority;
 
     public enum Priority {
         HIGH, MEDIUM, LOW
@@ -163,7 +163,7 @@ public class Task implements Comparable<Task>, Cloneable {
      *
      * @return The date associated with a task.
      */
-    private LocalDate getDate() {
+    public LocalDate getDate() {
         if (this instanceof DeadlineTask) {
             return ((DeadlineTask) this).getDeadline().getDeadline();
         } else if (this instanceof EventTask) {

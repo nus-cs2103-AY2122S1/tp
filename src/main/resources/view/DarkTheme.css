@@ -457,6 +457,19 @@
     -fx-padding: 0 0 5 0;
 }
 
+#memberListView {
+    -fx-background-color: transparent !important;
+}
+
+#memberListView .list-cell{
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+    -fx-background-radius: 0 !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+}
+
 #memberListPanelPlaceholder {
     -fx-padding: 10 0 0 0;
 }

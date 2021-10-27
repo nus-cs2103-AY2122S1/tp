@@ -28,8 +28,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
-import seedu.address.model.task.NameContainsTestKeywordsPredicate;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
@@ -225,7 +225,7 @@ public class CommandTestUtil {
 
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
         final String[] splitName = task.getName().taskName.split("\\s+");
-        model.updateFilteredTaskList(new NameContainsTestKeywordsPredicate(List.of(splitName[0])));
+        model.updateFilteredTaskList(new TaskNameContainsKeywordsPredicate(List.of(splitName[0])));
 
         assertEquals(1, model.getFilteredTaskList().size());
     }

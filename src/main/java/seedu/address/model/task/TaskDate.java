@@ -31,6 +31,17 @@ public class TaskDate {
     }
 
     /**
+     * Constructs a {@code TaskDate}.
+     *
+     * @param date A valid deadline date.
+     */
+    public TaskDate(LocalDate date) {
+        requireNonNull(date);
+        this.value = date.format(DATE_TIME_FORMATTER);
+        this.deadline = date;
+    }
+
+    /**
      * Returns true if a given string is a valid deadline.
      *
      * @param test The given string.

@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddDeadlineTaskCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
@@ -31,11 +30,11 @@ import seedu.address.testutil.DeadlineTaskBuilder;
 
 public class AddDeadlineTaskCommandParserTest {
 
-    private AddDeadlineTaskCommandParser parser = new AddDeadlineTaskCommandParser();
+    private final AddDeadlineTaskCommandParser parser = new AddDeadlineTaskCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        DeadlineTask expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE)
                 .withDate(VALID_TASK_DATE)
@@ -62,7 +61,7 @@ public class AddDeadlineTaskCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        DeadlineTask expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();
         assertParseSuccess(parser, TASK_NAME_DESC_PLAY + TASK_DEADLINE_DESC

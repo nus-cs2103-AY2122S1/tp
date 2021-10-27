@@ -12,7 +12,6 @@ import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentGroupCommand;
 import seedu.address.logic.commands.AddTodoTaskCommand;
-import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.ClearGroupsCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
@@ -29,7 +28,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ListTaskCommand;
@@ -65,9 +63,6 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case BackCommand.COMMAND_WORD:
-            return new BackCommand();
-
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
@@ -100,9 +95,6 @@ public class AddressBookParser {
 
         case FindGroupCommand.COMMAND_WORD:
             return new FindGroupCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case ListStudentCommand.COMMAND_WORD:
             return new ListStudentCommand();
