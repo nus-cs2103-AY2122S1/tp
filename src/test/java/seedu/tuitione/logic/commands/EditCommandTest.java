@@ -56,22 +56,21 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        // Student with no lessons
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
-        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
-        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
-
-        StudentBuilder studentInList = new StudentBuilder(lastStudent);
+        StudentBuilder studentInList = new StudentBuilder(firstStudent);
         Student editedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withRemarks(VALID_REMARK_FINANCIAL_AID).build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withRemarks(VALID_REMARK_FINANCIAL_AID).build();
-        EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new Tuitione(model.getTuitione()), new UserPrefs());
-        expectedModel.setStudent(lastStudent, editedStudent);
+        expectedModel.setStudent(firstStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

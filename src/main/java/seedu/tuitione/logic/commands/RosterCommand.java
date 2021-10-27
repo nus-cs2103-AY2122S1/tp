@@ -11,6 +11,7 @@ import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedLessonCode;
+import seedu.tuitione.model.student.Student;
 import seedu.tuitione.model.student.StudentIsOfSpecifiedLessonCode;
 
 /**
@@ -26,15 +27,14 @@ public class RosterCommand extends Command {
             + "Parameters: "
             + "LESSON_INDEX"
             + "\nExample: " + COMMAND_WORD + " 1";
-
     public static final String MESSAGE_ROSTER_LESSON_SUCCESS = "✔\tSuccess:\n\nRoster of %s is displayed.\n"
             + "A total of %s student(s) found.";
+    private static final String MESSAGE_ENROLLED_STUDENT_HEADER = "\nStudent(s): ";
 
     private final Index targetIndex;
 
     /**
-     * Constructor
-     * @param targetIndex
+     * Creates an RosterCommand a given index to a specified {@code Lesson}.
      */
     public RosterCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -47,21 +47,25 @@ public class RosterCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
-
-        String output = "";
-
         Lesson lessonToShow = lastShownList.get(targetIndex.getZeroBased());
         LessonCode lessonCodeToUse = lessonToShow.getLessonCode();
 
-        if (lessonCodeToUse != null) {
-            model.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lessonCodeToUse));
-            model.updateFilteredStudentList(new StudentIsOfSpecifiedLessonCode(lessonCodeToUse));
-            output = String.format(MESSAGE_ROSTER_LESSON_SUCCESS,
-                    lessonCodeToUse,
-                    model.getFilteredStudentList().size());
-        }
+        model.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lessonCodeToUse));
+        model.updateFilteredStudentList(new StudentIsOfSpecifiedLessonCode(lessonCodeToUse));
 
-        return new CommandResult(output); // output should never be empty string
+        List<Student> filteredStudents = model.getFilteredStudentList();
+        StringBuilder outputSb = new StringBuilder();
+        outputSb.append(String.format(MESSAGE_ROSTER_LESSON_SUCCESS, lessonCodeToUse, filteredStudents.size()));
+
+        if (!filteredStudents.isEmpty()) {
+            outputSb.append(MESSAGE_ENROLLED_STUDENT_HEADER);
+            filteredStudents.stream()
+                    .map(s -> s.getName().fullName)
+                    .sorted()
+                    .forEach(n -> outputSb.append(n).append(", "));
+            outputSb.delete(outputSb.length() - 2, outputSb.length());
+        }
+        return new CommandResult(outputSb.toString());
 
     }
 

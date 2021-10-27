@@ -550,7 +550,7 @@ Command Box
     -fx-font-family: "Montserrat";
     -fx-font-size: 13pt;
     -fx-text-fill: #462401;
-    -fx-prompt-text-fill: #462401;
+    -fx-prompt-text-fill: #c98645;
 }
 
 #filterField, #studentListPanel, #studentWebpage {

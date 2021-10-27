@@ -25,7 +25,6 @@ public class EnrollCommand extends Command {
             + "l/LESSON_INDEX\n"
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "1";
 
-
     public static final String MESSAGE_STUDENT_IN_LESSON =
             "⚠\tAlert:\n\n%1$s is already enrolled in the existing %2$s";
     public static final String MESSAGE_UNABLE_TO_ENROLL = "⚠\tAlert:\n\n%1$s cannot be enrolled into %2$s";
@@ -38,10 +37,8 @@ public class EnrollCommand extends Command {
             + "%1$s currently has %2$s students enrolled, "
             + "and cannot enroll anymore students.";
 
-
     private final Index indexStudent;
     private final Index indexLesson;
-
 
     /**
      * Creates an EnrollCommand for a Student with a given index to a specified {@code Lesson}.

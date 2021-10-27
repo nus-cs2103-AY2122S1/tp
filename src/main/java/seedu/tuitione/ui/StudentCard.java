@@ -1,5 +1,7 @@
 package seedu.tuitione.ui;
 
+import static seedu.tuitione.model.lesson.Price.CURRENCY;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -78,7 +80,7 @@ public class StudentCard extends UiPart<Region> {
             lessons.setText("-");
         }
 
-        subscription.setText(String.format("%.2f", student.getSubscriptionPrice()));
+        subscription.setText(String.format(CURRENCY + " %.2f", student.getSubscriptionPrice()));
     }
 
     @Override

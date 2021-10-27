@@ -30,11 +30,10 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(predicate);
-        String output = model.getFilteredStudentList().size() == 0 || model.getFilteredStudentList().size() == 1
-                ? String.format(Messages.MESSAGE_SINGULAR_STUDENT_LISTED_OVERVIEW,
-                model.getFilteredStudentList().size())
-                : String.format(Messages.MESSAGE_PLURAL_STUDENT_LISTED_OVERVIEW,
-                model.getFilteredStudentList().size());
+        int numberOfFilteredStudents = model.getFilteredStudentList().size();
+        String output = (numberOfFilteredStudents == 0 || numberOfFilteredStudents == 1)
+                ? String.format(Messages.MESSAGE_SINGULAR_STUDENT_LISTED_OVERVIEW, numberOfFilteredStudents)
+                : String.format(Messages.MESSAGE_PLURAL_STUDENT_LISTED_OVERVIEW, numberOfFilteredStudents);
         return new CommandResult(output);
     }
 
