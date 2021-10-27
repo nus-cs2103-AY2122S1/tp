@@ -6,6 +6,7 @@ import static safeforhall.logic.commands.CommandTestUtil.CAPACITY_DESC_FOOTBALL_
 import static safeforhall.logic.commands.CommandTestUtil.DATE_DESC_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_CAPACITY_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC;
+import static safeforhall.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC2;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_EVENT_NAME_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.NAME_DESC_FOOTBALL_TRAINING;
@@ -161,6 +162,18 @@ public class FindEventCommandParserTest {
             predicate.setEventDate(new EventDate(INVALID_EVENT_DATE_DESC));
 
             assertParseFailure(parser, INVALID_EVENT_DATE_DESC, Venue.MESSAGE_CONSTRAINTS);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_invalidDate2_fail() {
+        try {
+            FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+            predicate.setEventDate(new EventDate(INVALID_EVENT_DATE_DESC2));
+
+            assertParseFailure(parser, INVALID_EVENT_DATE_DESC2, Venue.MESSAGE_CONSTRAINTS);
         } catch (IllegalArgumentException e) {
             assertEquals(1, 1);
         }
