@@ -164,15 +164,18 @@ A user can use the add command to add a clients. A sequence diagram of this acti
 
 #### Implementation
 
-`Insurance` is currently composed of one object, `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`. 
+`Insurance` is currently composed of two objects:
 
-In the future, a `name` property is planned to be added to `Insurance`, representing the name of the insurance.
+* `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`.
+* `brand`, a `String` representing the brand of insurance.
 
-A `Person` can have any number of different `Insurances`, represented by a `HashSet`. 
+A `Person` can have any number of different `Insurances`, stored as a `HashSet`. 
 
 `Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command. 
 
-[Placeholder for sequence diagram showing adding Insurance to Person]
+A class diagram of `Insurance` is as shown:
+
+![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
