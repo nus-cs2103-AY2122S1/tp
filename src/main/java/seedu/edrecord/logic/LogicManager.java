@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.commons.core.LogsCenter;
@@ -17,6 +18,7 @@ import seedu.edrecord.model.ReadOnlyEdRecord;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.storage.Storage;
+import seedu.edrecord.ui.PersonListPanel;
 
 /**
  * The main LogicManager of the app.
@@ -65,6 +67,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableValue<PersonListPanel.View> getSelectedView() {
+       return model.getSelectedView();
     }
 
     @Override

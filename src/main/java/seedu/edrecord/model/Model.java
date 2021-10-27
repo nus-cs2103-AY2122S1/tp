@@ -3,6 +3,7 @@ package seedu.edrecord.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.model.assignment.Assignment;
@@ -11,6 +12,7 @@ import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
+import seedu.edrecord.ui.PersonListPanel;
 
 /**
  * The API of the Model component.
@@ -168,4 +170,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void setSearchFilter(Predicate<Person> predicate);
+
+    /**
+     * Returns the currently selected view.
+     */
+    ObservableValue<PersonListPanel.View> getSelectedView();
+
+    /**
+     * Updates the currently selected view to the specified value.
+     * @param newView The new view
+     */
+    void setSelectedView(PersonListPanel.View newView);
 }

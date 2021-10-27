@@ -20,6 +20,7 @@ import seedu.edrecord.logic.commands.ListCommand;
 import seedu.edrecord.logic.commands.ListModulesCommand;
 import seedu.edrecord.logic.commands.MakeGroupCommand;
 import seedu.edrecord.logic.commands.MakeModuleCommand;
+import seedu.edrecord.logic.commands.ViewCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 
 /**
@@ -72,6 +73,9 @@ public class EdRecordParser {
 
         case CdCommand.COMMAND_WORD:
             return new CdCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         case AddAssignmentCommand.COMMAND_WORD:
             return new AddAssignmentCommandParser().parse(arguments);

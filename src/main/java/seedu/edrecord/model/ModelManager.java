@@ -10,6 +10,9 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
@@ -22,6 +25,7 @@ import seedu.edrecord.model.module.ModuleSystem;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
+import seedu.edrecord.ui.PersonListPanel;
 
 /**
  * Represents the in-memory model of edrecord data.
@@ -35,6 +39,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private PartOfModulePredicate selectedModulePredicate;
     private Module selectedModule;
+    private final ObjectProperty<PersonListPanel.View> selectedView =
+            new SimpleObjectProperty<>(PersonListPanel.View.CONTACTS);
 
     /**
      * Initializes a ModelManager with the given edRecord, moduleSystem and userPrefs.
@@ -244,6 +250,17 @@ public class ModelManager implements Model {
     public void addAssignment(Assignment assignment) {
         selectedModule.addAssignment(assignment);
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    //=========== Current View =============================================================================
+    @Override
+    public ObservableValue<PersonListPanel.View> getSelectedView() {
+        return selectedView;
+    }
+
+    @Override
+    public void setSelectedView(PersonListPanel.View newView) {
+        this.selectedView.set(newView);
     }
 
     @Override
