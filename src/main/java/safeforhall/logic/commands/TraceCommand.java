@@ -102,7 +102,8 @@ public class TraceCommand extends Command {
         ObservableList<Event> allEvents = model.getFilteredEventList().filtered(event -> {
             LocalDate eventDate = event.getEventDate().toLocalDate();
             LocalDate today = LocalDate.now();
-            return ChronoUnit.DAYS.between(eventDate, today) <= this.duration;
+            long days = ChronoUnit.DAYS.between(eventDate, today);
+            return days >= 0 && days <= this.duration;
         });
         ArrayList<Person> contacts = new ArrayList<>();
         contacts.add(person);
