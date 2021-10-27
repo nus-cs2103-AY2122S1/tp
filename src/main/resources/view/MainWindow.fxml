@@ -34,13 +34,7 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+        
 
           <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
             <padding>
@@ -48,6 +42,11 @@
             </padding>
             <SplitPane>
               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border">
+                <padding>
+                  <Insets top="5" right="10" bottom="5" left="10" />
+                </padding>
+              </StackPane>
             </SplitPane>
 
           </VBox>
