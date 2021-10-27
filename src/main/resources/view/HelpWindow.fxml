@@ -9,7 +9,6 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
@@ -22,21 +21,26 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="TOP_CENTER">
+      <VBox alignment="TOP_CENTER">
         <children>
-          <VBox fx:id="helpGuideContainer" alignment="CENTER_RIGHT">
+          <HBox alignment="TOP_LEFT">
+            <children>
+              <VBox>
+                <Label fx:id="message"></Label>
+                <HBox>
+                  <Label fx:id="moreMessage"></Label>
+                  <Hyperlink fx:id="hyperlink" layoutX="0.0" layoutY="0.0" onAction="#openLink" text="User Guide" />
+                </HBox>
+              </VBox>
+              
+            </children>
+          </HBox>
+          
+          <HBox fx:id="helpGuideContainer" alignment="CENTER_RIGHT">
             <padding>
               <Insets top="5" right="25" bottom="5" left="15" />
             </padding>
-          </VBox>
-
-          <VBox alignment="TOP_LEFT">
-            <children>
-              <Label fx:id="message"></Label>
-              <Hyperlink fx:id="hyperlink" layoutX="0.0" layoutY="0.0" onAction="#openLink" text="UserGuide" />
-            </children>
-          </VBox>
-
+          </HBox>
         </children>
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
@@ -44,7 +48,7 @@
         <padding>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
-      </HBox>
+      </VBox>
     </Scene>
   </scene>
 </fx:root>

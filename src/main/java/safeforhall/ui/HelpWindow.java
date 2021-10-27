@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -24,7 +24,8 @@ import safeforhall.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t15-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "For more information, \nplease refer to our ";
+    public static final String HELP_MESSAGE = "   Here's a quick summary of the commands!\n";
+    public static final String MORE_MESSAGE = "   For more information, please refer to our ";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -33,13 +34,16 @@ public class HelpWindow extends UiPart<Stage> {
     private Rectangle helpGuide;
 
     @FXML
-    private VBox helpGuideContainer;
+    private HBox helpGuideContainer;
 
     @FXML
     private Hyperlink hyperlink;
 
     @FXML
     private Label message;
+
+    @FXML
+    private Label moreMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -49,12 +53,14 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         Image helpGuideImg = new Image("/images/help-guide.png");
-        Rectangle rec = new Rectangle(1000, 700);
+        Rectangle rec = new Rectangle(800, 600);
         rec.setFill(new ImagePattern(helpGuideImg));
         helpGuideContainer.getChildren().add(rec);
         message.setText(HELP_MESSAGE);
-        message.setFont(new Font(30.0));
-        hyperlink.setFont(new Font(30.0));
+        moreMessage.setText(MORE_MESSAGE);
+        message.setFont(new Font(20.0));
+        moreMessage.setFont(new Font(20.0));
+        hyperlink.setFont(new Font(20.0));
     }
 
 
