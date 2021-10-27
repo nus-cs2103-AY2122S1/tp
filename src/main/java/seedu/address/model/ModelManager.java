@@ -256,6 +256,7 @@ public class ModelManager implements Model {
         optionalOrder = Optional.of(order);
     }
 
+    @Override
     public Order getOrder() {
         assert hasUnclosedOrder();
 
@@ -309,6 +310,10 @@ public class ModelManager implements Model {
         optionalOrder = Optional.empty();
         transactions.add(transaction);
 
+        if (transaction.getItems().size() == 0) {
+            return;
+        }
+
         Double totalRevenue = transaction.getItems().stream()
                 .map(i -> i.getCount() * i.getSalesPrice())
                 .reduce(0.0, (subTotal, next) -> subTotal + next);
@@ -338,9 +343,7 @@ public class ModelManager implements Model {
         return resultList;
     }
 
-    /**
-     * Return a list of {@code TransactionRecord} sorted according to timestamp.
-     */
+    @Override
     public List<TransactionRecord> getTransactions() {
         return getTransactions(new TransactionTimeComparator());
     }

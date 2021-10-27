@@ -12,6 +12,7 @@ import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.TransactionRecord;
 
 /**
  * The API of the Model component.
@@ -128,6 +129,13 @@ public interface Model {
     void addToOrder(Item item);
 
     /**
+     * Get order.
+     *
+     * @return the order.
+     */
+    Order getOrder();
+
+    /**
      * Decrements the count of the given {@code target} in the order by {@code amount}.
      * {@code target} must exist in the order.
      * {@code amount} must be less than {@code target}'s count.
@@ -144,6 +152,11 @@ public interface Model {
      * Destroys the current order when ordering finish.
      */
     void transactAndClearOrder();
+
+    /**
+     * Return a list of {@code TransactionRecord} sorted according to timestamp.
+     */
+    List<TransactionRecord> getTransactions();
 
     /**
      * Returns an unmodifiable view of the filtered list to be displayed.

@@ -67,8 +67,9 @@ public class AddToOrderCommandTest {
 
         // Item already in order
         expectedModel.addToOrder(DONUT);
-
-        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+        String message = new AddToOrderCommand(new ItemDescriptor())
+                .itemExceedsCount(DONUT, 10, 5);
+        assertCommandFailure(addCommand, modelWithOrder, expectedModel, message);
     }
 
     @Test
@@ -90,8 +91,9 @@ public class AddToOrderCommandTest {
 
         // Item already in order
         expectedModel.addToOrder(DONUT);
-
-        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+        String message = new AddToOrderCommand(new ItemDescriptor())
+                .itemExceedsCount(DONUT, 10, 5);
+        assertCommandFailure(addCommand, modelWithOrder, expectedModel, message);
     }
 
     @Test
@@ -114,8 +116,9 @@ public class AddToOrderCommandTest {
 
         // Test when item already in order
         expectedModel.addToOrder(DONUT);
-
-        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+        String message = new AddToOrderCommand(new ItemDescriptor())
+                .itemExceedsCount(DONUT, 10, 5);
+        assertCommandFailure(addCommand, modelWithOrder, expectedModel, message);
     }
 
     @Test

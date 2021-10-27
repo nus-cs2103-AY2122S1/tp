@@ -6,7 +6,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.DONUT;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -16,14 +19,17 @@ import seedu.address.model.order.Order;
 
 public class EndAndTransactOrderCommandTest {
 
+    @TempDir
+    public Path temporaryFolder;
+
     private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs());
-    private Model modelWithOrder = getModelWithOrderedDonut();
 
     /**
      * Returns a model with 5 donuts in its unclosed order
      */
-    private Model getModelWithOrderedDonut() {
-        Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model getModelWithOrderedDonut(Path path) {
+        UserPrefs userPrefs = new UserPrefs(path);
+        Model model = new ModelManager(getTypicalInventory(), userPrefs);
         model.addItem(DONUT.updateCount(5));
         model.setOrder(new Order());
         model.addToOrder(DONUT.updateCount(1));
@@ -46,15 +52,13 @@ public class EndAndTransactOrderCommandTest {
     public void execute_normalTransaction_itemRemoved() {
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(),
+                new UserPrefs(temporaryFolder.resolve("transaction.json")));
         expectedModel.addItem(DONUT.updateCount(4));
 
-        assertCommandSuccess(new EndAndTransactOrderCommand(), modelWithOrder, expectedMessage, expectedModel);
-    }
+        Model modelTemp = getModelWithOrderedDonut(temporaryFolder.resolve("transaction.json"));
 
-    @Test
-    public void execute_insufficientItemInInventory_failure() {
-        // TODO: Behaviour not supported yet. Change and update accordingly
+        assertCommandSuccess(new EndAndTransactOrderCommand(), modelTemp, expectedMessage, expectedModel);
     }
 
     @Test
@@ -64,14 +68,16 @@ public class EndAndTransactOrderCommandTest {
 
     @Test
     public void execute_displayingOrder_itemRemovedAndDisplayInventory() {
-        modelWithOrder.updateFilteredDisplayList(DisplayMode.DISPLAY_OPEN_ORDER, Model.PREDICATE_SHOW_ALL_ITEMS);
+        Model modelTemp = getModelWithOrderedDonut(temporaryFolder.resolve("transaction.json"));
+        modelTemp.updateFilteredDisplayList(DisplayMode.DISPLAY_OPEN_ORDER, Model.PREDICATE_SHOW_ALL_ITEMS);
 
         EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
         String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
-        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalInventory(),
+                new UserPrefs(temporaryFolder.resolve("transaction.json")));
         expectedModel.addItem(DONUT.updateCount(4));
 
-        assertCommandSuccess(new EndAndTransactOrderCommand(), modelWithOrder, expectedMessage, expectedModel);
+        assertCommandSuccess(new EndAndTransactOrderCommand(), modelTemp, expectedMessage, expectedModel);
     }
 }
