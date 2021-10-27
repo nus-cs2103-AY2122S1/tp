@@ -22,11 +22,11 @@ import seedu.address.model.person.Telegram;
 /**
  * Controller for the Profile Window.
  */
-public class ProfileWindow extends UiPart<Stage> {
+public class ProfileSetUpWindow extends UiPart<Stage> {
 
-    private static final Logger logger = LogsCenter.getLogger(ProfileWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(ProfileSetUpWindow.class);
 
-    private static final String FXML = "ProfileWindow.fxml";
+    private static final String FXML = "ProfileSetUpWindow.fxml";
     private static final String INVALID_GITHUB_MESSAGE = "The GitHub Username Entered is Invalid";
     private static final String INVALID_NAME_MESSAGE = "The Name Entered is Invalid";
     private static final String INVALID_TELEGRAM_MESSAGE = "The Telegram Handle Entered is Invalid";
@@ -54,13 +54,13 @@ public class ProfileWindow extends UiPart<Stage> {
     private TextField github;
 
     /**
-     * Creates a new {@code ProfileWindow}.
+     * Creates a new {@code ProfileSetUpWindow}.
      *
-     * @param stage Stage to use as the root of the {@code ProfileWindow}.
+     * @param stage Stage to use as the root of the {@code ProfileSetUpWindow}.
      * @param mainWindow To be able to interact with the {@code MainWindow}.
      * @param logic To be able to save and check if the user profile exists.
      */
-    public ProfileWindow(Stage stage, MainWindow mainWindow, Logic logic) {
+    public ProfileSetUpWindow(Stage stage, MainWindow mainWindow, Logic logic) {
         super(FXML, stage);
         this.mainWindow = mainWindow;
         this.logic = logic;
@@ -69,7 +69,7 @@ public class ProfileWindow extends UiPart<Stage> {
 
     /**
      * Launches the {@code MainWindow} if the User Profile
-     * is present or else the {@code ProfileWindow} is launched to
+     * is present or else the {@code ProfileSetUpWindow} is launched to
      * obtain user credentials.
      */
     public void start() {
@@ -83,7 +83,7 @@ public class ProfileWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the {@code ProfileWindow}.
+     * Closes the {@code ProfileSetUpWindow}.
      */
     public void close() {
         logger.info("Closing Profile Window");

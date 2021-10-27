@@ -294,8 +294,8 @@ public class MainWindow extends UiPart<Stage> {
      * Launches the {@code ProfileWindow}.
      */
     public void show() {
-        ProfileWindow profileWindow = new ProfileWindow(new Stage(), this, logic);
-        profileWindow.start();
+        ProfileSetUpWindow profileSetUpWindow = new ProfileSetUpWindow(new Stage(), this, logic);
+        profileSetUpWindow.start();
     }
 
     /**
