@@ -1,12 +1,9 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
@@ -45,11 +42,10 @@ public class ScheduleCommand extends Command {
         List<Client> clientsWithMeetings = model.retrieveSchedule(scheduleDate);
 
         model.filterSortedNextMeetingList(scheduleDate);
-       // there is no meetings schedule for the day
+        // there is no meetings schedule for the day
         if (clientsWithMeetings.size() == 0) {
             return new CommandResult(String.format(MESSAGE_NO_SCHEDULE_ON_DATE_SUCCESS));
         }
-
 
         return new CommandResult(String.format(MESSAGE_SCHEDULE_SUCCESS, formatter.format(scheduleDate)));
     }
