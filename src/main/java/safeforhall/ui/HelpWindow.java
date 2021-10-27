@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import safeforhall.commons.core.LogsCenter;
 
@@ -23,7 +24,7 @@ import safeforhall.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t15-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "For more information, please refer to  ";
+    public static final String HELP_MESSAGE = "For more information, \nplease refer to our ";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -52,6 +53,8 @@ public class HelpWindow extends UiPart<Stage> {
         rec.setFill(new ImagePattern(helpGuideImg));
         helpGuideContainer.getChildren().add(rec);
         message.setText(HELP_MESSAGE);
+        message.setFont(new Font(30.0));
+        hyperlink.setFont(new Font(30.0));
     }
 
 
