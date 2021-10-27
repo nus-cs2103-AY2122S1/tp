@@ -27,7 +27,7 @@ public class ResidentList {
     public static final int NUMBER_OF_RESIDENT_FIELD = 8;
 
     private final String residentsDisplay;
-    private String residentsStorage;
+    private final String residentsStorage;
     private final ArrayList<String> stringResidentList;
     private final boolean isEmpty;
     private final ArrayList<Person> residentList = new ArrayList<>();
