@@ -25,6 +25,7 @@ import seedu.address.logic.commands.ListApplicantCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListPositionCommand;
 import seedu.address.logic.commands.RejectionRateCommand;
+import seedu.address.logic.commands.VisualizePositionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -107,6 +108,9 @@ public class MrTechRecruiterParser {
 
         case EditApplicantCommand.COMMAND_WORD:
             return new EditApplicantCommandParser().parse(arguments);
+
+        case VisualizePositionCommand.COMMAND_WORD:
+            return new VisualizePositionCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
