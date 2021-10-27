@@ -161,7 +161,7 @@ An **Order** refers to a product that the client has ordered. For each order, th
 **Quantity** and the **Date of Purchase** must be included.
 
 Parameter | Format |
---- | ---
+|:---:| --- |
 `-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alice Bob`.
 `-pn` | A series of 8 positive numbers from 0 to 9. <br> E.g.: `-pn 12345678`.
 `-e` | Any valid email. <br> E.g.: `-e abc@asdf.com`.
@@ -468,7 +468,7 @@ wish to keep your preferences of the application.
 ## 6. Command Summary
 
 Action | Format
---- | ---
+|:---:| --- |
 [Help](#41-getting-help) | `help`
 [Exit](#411-exiting-sellah) | `exit`
 [Add](#42-add) | Client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
