@@ -257,6 +257,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the current user's Telegram.
+     */
+    public void handleTelegram() {
+        personListPanel.openTelegram();
+    }
+
+    /**
+     * Opens the current user's GitHub.
+     */
+    public void handleGithub() {
+        personListPanel.openGithub();
+    }
+
+    /**
      * Opens the user profile window or focuses on it if it's already opened.
      */
     @FXML
@@ -356,6 +370,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTelegram()) {
+                handleTelegram();
+            }
+
+            if (commandResult.isGithub()) {
+                handleGithub();
             }
 
             return commandResult;
