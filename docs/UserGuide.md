@@ -52,12 +52,12 @@ This section details the various components in TutorAid and how they will be ref
 This is an area where some features can be found. As TutorAid primarily interacts with you through the command box, this area is infrequently used.
 
 #### Command Box
-The Command Box is a field in which you can type instructions (commands) to TutorAid. Text in this user guide that is `highlighted` should typically be copied into the command box exactly (including spaces). After you have typed a command into this box, you can press ENTER :leftwards_arrow_with_hook: on your keyboard to tell TutorAid to execute your command. 
+The Command Box is a field in which you can type instructions (commands) to TutorAid. Text in this user guide that is `highlighted` should typically be copied into the command box exactly (including spaces). After you have typed a command into this box, you can press ENTER :leftwards_arrow_with_hook: on your keyboard to tell TutorAid to execute your command.
 
 If your command is of the wrong [format](#23-command-format), TutorAid will try to show you the correct format using the Console if it is able to guess what command you had intended to provide.
 
 #### Console
-The Console is used by TutorAid to communicate with you. Whenever a command is carried out, TutorAid will let you know whether the operation was successful. It may also provide you with details about the changes made during the operation. 
+The Console is used by TutorAid to communicate with you. Whenever a command is carried out, TutorAid will let you know whether the operation was successful. It may also provide you with details about the changes made during the operation.
 
 #### Student Panel
 The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their name and their index number. These modes can be set via [the list command](#listing-all-students--list). In the labelled screenshot, the Student Panel is in Minimal view.
@@ -78,7 +78,7 @@ Commands are text that you can enter into the Command Box to tell TutorAid to pe
 ![](images/command-syntax.png)
 
 #### Command Word
-The command word is how you can tell TutorAid what kind of operation you want to do. These command words are listed [here](#6-command-summary). All commands must contain a command word. 
+The command word is how you can tell TutorAid what kind of operation you want to do. These command words are listed [here](#6-command-summary). All commands must contain a command word.
 
 In the example above, `edit` tells TutorAid to perform an *edit* operation.
 
@@ -88,26 +88,29 @@ The flag is used to differentiate between variants of the same operation. For ex
 In the example above, `-s` tells TutorAid to perform the edit operation on *students*.
 
 #### Index Number
-Some commands perform operations on a specific student or lesson. You should give TutorAid an index number to specify a student or a lesson. The index number can be found by looking at the respective panels - the [Student Panel](#student-panel) or the [Lesson Panel](#lesson-panel). 
+Some commands perform operations on a specific student or lesson. You should give TutorAid an index number to specify a student or a lesson. The index number can be found by looking at the respective panels - the [Student Panel](#student-panel) or the [Lesson Panel](#lesson-panel).
 
-In the example above, `3` tells TutorAid to perform the edit operation on the *third student*. 
+In the example above, `3` tells TutorAid to perform the edit operation on the *third student*.
 
 #### Parameter
 A parameter contains the *specifics* of the command to be executed. There can be **multiple** parameters for a single command, depending on the type of command that you wish to perform. Arguments are prefixed with a few characters followed by a slash (`sn/` and `sp/` for this example). These prefixes help TutorAid to differentiate parameters.
 
-> :bulb: `sn/` is the prefix for Student Name and `sp/` is the prefix for Student Phone. 
+> :bulb: `sn/` is the prefix for Student Name and `sp/` is the prefix for Student Phone.
 
-In the example above, `sn/Matthew Judge` tells TutorAid that the third student should be edited *by changing their name to Matthew Judge*. Similarly, `sp/91263740` tells TutorAid that the third student should be edited *by changing their student mobile number to the specified number*. 
+In the example above, `sn/Matthew Judge` tells TutorAid that the third student should be edited *by changing their name to Matthew Judge*. Similarly, `sp/91263740` tells TutorAid that the third student should be edited *by changing their student mobile number to the specified number*.
 
 ### 2.3.1 Command Syntax in this Guide
 In this guide, the syntax / format of a command is shown like this:
 
 `edit -s INDEX_NUMBER [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
+`add -sl s/STUDENT_INDEX... n/LESSON_INDEX...`
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user and can contain spaces.
 * Items in square brackets are optional.
 * Parameters can be in any order.
 * If a parameter is expected only once in the command but if you specify it multiple times, only the last occurrence of the parameter will be taken.
+* `...` signals that multiple parameters of this type can be accepted(separated by a space), but there must be at least one parameter present.
+  e.g. if the format of a command has `s/STUDENT_INDEX...` then both `s/1 2 3` and `s/1` are acceptable inputs, but not `s/ `.
 * Extraneous parameters for commands that do not take in parameters will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 <hr>
@@ -334,10 +337,40 @@ Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRIC
 * If provided, the lesson name should only contain alphanumeric characters and spaces.
 * If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
-* At least 1 out of 4 optional fields must be provided. 
+* At least 1 out of 4 optional fields must be provided.
 
 Examples:
 * `edit -l c/20 p/80`
+
+### Adding students to lessons: `add -sl`
+
+Adds students to lessons in TutorAid.
+
+Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
+
+* Adds the students at the specified student indexes to the lessons at the specified lesson indexes.
+- The index refers to the index number shown in the displayed student list and lesson list.
+- The index must be a **positive integer** 1, 2, 3, ...
+
+Examples:
+* `add -sl s/1 2 3 l/1 2`
+
+> :bulb: All of these students must not be attending any of the lessons provided for this command to work.
+
+### Deleting students from lessons: `del -sl`
+
+Deletes students from lessons in TutorAid.
+
+Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
+
+* Deletes the students at the specified student indexes from the lessons at the specified lesson indexes.
+- The index refers to the index number shown in the displayed student list and lesson list.
+- The index must be a **positive integer** 1, 2, 3, ...
+
+Examples:
+* `del -sl s/2 3 l/1 2 3`
+
+> :bulb: All of these students must be attending all the lessons provided for this command to work.
 
 ### Locating students or lessons by name: `find -s` / `find -l`
 
@@ -381,7 +414,9 @@ Action | Format, Examples
 **View** | `view STUDENT_INDEX`<br> e.g., `view 2`
 **Add lesson** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
 **Delete lesson** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
-**Edit lesson** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80` 
+**Edit lesson** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
+**Add students to lessons** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
+**Delete students from lessons** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
 **Find student** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
 **Find lesson** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
 **Exit** | `exit`
