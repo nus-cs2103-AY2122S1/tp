@@ -27,9 +27,10 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_FILE);
 
-        Path savePath = argMultimap.getValue(PREFIX_FILE)
-                .map(fileName -> fileName.endsWith(".png") ? fileName : fileName + ".png")
-                .map(Path::of).orElse(null);
+        Path savePath = null;
+        if (argMultimap.getValue(PREFIX_FILE).isPresent()) {
+            savePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get(), ".png");
+        }
 
         return argMultimap.getPreamble().isEmpty()
                 ? parseByPrefixes(argMultimap, savePath)
@@ -55,6 +56,12 @@ public class ShowCommandParser implements Parser<ShowCommand> {
      * Handles parsing by prefixes.
      */
     public ShowCommand parseByPrefixes(ArgumentMultimap argMultimap, Path savePath) throws ParseException {
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty()
+            && argMultimap.getValue(PREFIX_ID).isEmpty()
+            && argMultimap.getValue(PREFIX_ASSESSMENT).isEmpty()) {
+            throw new ParseException(ShowCommand.MESSAGE_USAGE);
+        }
+
         if (areRedundantPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }

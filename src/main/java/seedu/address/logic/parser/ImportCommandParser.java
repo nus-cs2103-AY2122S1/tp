@@ -23,7 +23,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
 
-        Path filePath = argMultimap.getValue(PREFIX_FILE).map(Path::of).get();
+        // no extension: require the user to give the exact file path
+        Path filePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get(), "");
 
         int groupCount = getCount(argMultimap, PREFIX_GROUP);
         int assessmentCount = getCount(argMultimap, PREFIX_ASSESSMENT);
