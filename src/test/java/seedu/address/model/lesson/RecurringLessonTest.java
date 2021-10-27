@@ -31,6 +31,7 @@ class RecurringLessonTest {
         Date dateCurrentWeek = DateUtil.build(LocalDate.now());
         Lesson lesson = new LessonBuilder().withDate(dateCurrentWeek).buildRecurring();
         assertEquals(dateCurrentWeek, lesson.getDisplayDate());
+        assertEquals(LocalDate.now(), lesson.getDisplayLocalDate());
     }
 
     @Test
@@ -39,6 +40,7 @@ class RecurringLessonTest {
         Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
         Lesson lesson = new LessonBuilder().withDate(dateOneWeekAgo).buildRecurring();
         assertEquals(currentWeek, lesson.getDisplayDate());
+        assertEquals(LocalDate.now(), lesson.getDisplayLocalDate());
     }
 
     @Test
@@ -50,6 +52,7 @@ class RecurringLessonTest {
                 .withCancelledDatesSet(dateCurrentWeek).buildRecurring();
 
         assertEquals(dateOneWeekLater, lesson.getDisplayDate());
+        assertEquals(LocalDate.now().plusWeeks(1), lesson.getDisplayLocalDate());
     }
 
     @Test
