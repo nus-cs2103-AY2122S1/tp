@@ -66,6 +66,7 @@ public class PersonDetails extends UiPart<Region> {
     public PersonDetails(Person person) {
         super(FXML);
         this.setPerson(person);
+        this.getRoot().setPrefHeight(Region.USE_PREF_SIZE);
     }
 
     public void setPerson(Person person) {
