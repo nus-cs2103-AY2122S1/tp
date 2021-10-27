@@ -100,6 +100,11 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
+.list-cell:empty {
+    -fx-pref-width: 0;
+    -fx-opacity: 0;
+}
+
 .list-cell:filled:even {
     -fx-background-color: #f5f9ff;
 }
