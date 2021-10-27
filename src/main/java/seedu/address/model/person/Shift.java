@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.commons.util.TimeUtil;
-import seedu.address.model.EmptyShift;
 import seedu.address.model.RecurrencePeriod;
 import seedu.address.model.person.exceptions.NoShiftException;
 
