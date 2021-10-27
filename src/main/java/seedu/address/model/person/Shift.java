@@ -121,21 +121,43 @@ public class Shift {
             return false;
         }
 
+        return countOfOccurrences(period) != 0;
+    }
+
+
+    /**
+     * Returns whether the shift is working during {@code period}
+     * for all the dates in the period
+     */
+    public boolean isWorkingExact(Period period) {
+        long numOfDates = period.toList()
+                .stream()
+                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
+                .count();
+
+        return countOfOccurrences(period) == numOfDates;
+
+    }
+
+    /**
+     * Returns the number of times the staff works this shift in {@code period}.
+     *
+     */
+    private long countOfOccurrences(Period period) {
         List<LocalDate> dates = period.toList()
                 .stream()
                 .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
                 .collect(Collectors.toList());
 
-        long numOfRecurrences = recurrences.stream()
+        return recurrences.stream()
                 .filter(p ->
                         0 != dates.stream()
                                 .filter(date -> p.contains(date)) //find any date within the period
                                 .count() //that is in recurrence
                 )
                 .count();
-
-        return numOfRecurrences != 0;
     }
+
 
     public long getWorkingHour(Period period) {
         List<LocalDate> dates = period.toList()
