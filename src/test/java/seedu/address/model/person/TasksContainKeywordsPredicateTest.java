@@ -43,25 +43,27 @@ public class TasksContainKeywordsPredicateTest {
 
     @Test
     public void test_tasksContainKeywords_returnsTrue() {
-        Person samplePerson = new PersonBuilder().withTasks("eat| | | ", "sleep| | | ", "think| | | ").build();
+        Person samplePerson =
+                new PersonBuilder().withTasks("Conduct tutorial", "Project meeting", "Fill up gas tank").build();
         // One keyword
-        TasksContainKeywordsPredicate predicate = new TasksContainKeywordsPredicate(new ArrayList<>(List.of("eat")));
+        TasksContainKeywordsPredicate predicate =
+                new TasksContainKeywordsPredicate(new ArrayList<>(List.of("conduct")));
         assertTrue(predicate.test(samplePerson));
 
         // Multiple keywords
-        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(Arrays.asList("eat", "sleep")));
+        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(Arrays.asList("project", "meeting")));
         assertTrue(predicate.test(samplePerson));
 
         // One abbreviated keyword
-        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(List.of("sle")));
+        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(List.of("meet")));
         assertTrue(predicate.test(samplePerson));
 
         // Multiple abbreviated keywords
-        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(Arrays.asList("ea", "thin")));
+        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(Arrays.asList("pro", "meet")));
         assertTrue(predicate.test(samplePerson));
 
         // Multiple abbreviated keywords in random case
-        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(Arrays.asList("eA", "tHIn")));
+        predicate = new TasksContainKeywordsPredicate(new ArrayList<>(Arrays.asList("pR", "Mee")));
         assertTrue(predicate.test(samplePerson));
     }
 
