@@ -22,6 +22,7 @@ Manage large groups of contacts with advanced features such as **Import** for a 
  - [Purpose](#Purpose)
  - [Quick Start](#QuickStart)
  - [Features](#Features)
+    - [Navigating Between Tabs - cmd + numkey](#Nav)
     - [Adding a new Student - add](#Add)
     - [Delete a Student - delete](#Delete)
     - [Edit a Student - edit](#Edit)
@@ -34,6 +35,9 @@ Manage large groups of contacts with advanced features such as **Import** for a 
     - [Displaying the Help Window - help](#Help)
     - [Listing All Student Contacts - list](#List)
     - [Deleting All Student Contacts - clear](#Clear)
+    - [Open Telegram of Current User - te](#OpenTelegram)
+    - [Open GitHub of Current User - g](#OpenGithub)
+    - [Retrieve Command History - ↑ / ↓](#CommandHistory)
     - [Exiting the App - exit](#Exit)
  - [Coming Soon](#ComingSoon)
  - [FAQ](#FAQ)
@@ -86,6 +90,16 @@ Notes about command format:
 :bulb: **Tip:** In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
 </div>
 
+<h3 id = "Nav"> </h3>
+
+## Navigating Between Tabs - <kbd>⌘</kbd> + NumKey
+
+* <kbd>⌘</kbd> + 1: Contacts Tab
+* <kbd>⌘</kbd> + 2: Favorites Tab
+* <kbd>⌘</kbd> + 3: Events Tab
+* <kbd>⌘</kbd> + 4: Find A Buddy Tab
+
+
 <h3 id = "Add"> </h3>
 
 ## Adding a new Student - `add`
@@ -128,17 +142,29 @@ delete 7
 
 Edits an existing Student Contact in the Address Book.
 
-Format: 
+Format 1: 
 
 ```
 edit <INDEX> [n/<NAME>] [te/TELEGRAM] [g/GITHUB] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
-Example:
+Example 1:
 
 ```
 edit 1 n/John te/john_123 t/TA
 ```
+
+Format 2:
+
+```
+edit profile [n/<NAME>] [te/TELEGRAM] [g/GITHUB]
+```
+
+Example 2:
+```
+edit profile te/bob_osum
+```
+
 
 <h3 id = "Find"> </h3>
 
@@ -372,6 +398,26 @@ clear
 ```
 
 > WARNING: Use With Caution!
+
+<h3 id = "OpenTelegram"> </h3>
+
+## Open Telegram of Current User
+
+Format:
+
+```
+te
+```
+
+<h3 id = "OpenGithub"> </h3>
+
+## Open GitHub of Current User
+
+Format:
+
+```
+g
+```
 
 <h3 id = "CommandHistory"> </h3>
 
