@@ -31,8 +31,8 @@ public interface Model {
     Predicate<Task> PREDICATE_SHOW_ALL_DUE_TASKS = task -> !task.isDone();
 
     /** {@code Predicate} that evaluate if task is overdue */
-    Predicate<Task> PREDICATE_SHOW_ALL_OVERDUE_TASKS = task -> !task.isDone() &&
-            task.getTaskDeadlineDate().isBefore(LocalDateTime.now());
+    Predicate<Task> PREDICATE_SHOW_ALL_OVERDUE_TASKS = task -> !task.isDone()
+            && task.getTaskDeadlineDate().isBefore(LocalDateTime.now());
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

@@ -1,14 +1,17 @@
 package seedu.address.logic.parser.member;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTEND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.member.MlistCommand;
-import seedu.address.logic.parser.*;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.member.Email;
 
 /**
  * Parses input arguments and creates a new FindCommand object

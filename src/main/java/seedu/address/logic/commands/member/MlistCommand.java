@@ -42,10 +42,21 @@ public class MlistCommand extends Command {
 
     public MlistCommand() {}
 
+    /**
+     * Constructor for MlistCommand.
+     *
+     * @param eventIndex is the index of the event
+     */
     public MlistCommand(Index eventIndex) {
         this.eventIndex = eventIndex;
     }
 
+    /**
+     * Constructor for MlistCommand with filter.
+     *
+     * @param eventIndex is the index of the event
+     * @param hasAttended is string to indicate if checking for absence or attendance
+     */
     public MlistCommand(Index eventIndex, String hasAttended) {
         this.eventIndex = eventIndex;
         this.hasAttended = hasAttended;
