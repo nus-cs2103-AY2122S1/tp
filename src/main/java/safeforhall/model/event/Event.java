@@ -87,6 +87,14 @@ public class Event {
         return residents.getCombinedDisplayString(toAdd);
     }
 
+    public String getRemovedStorageString(ArrayList<Person> toRemove) {
+        return residents.getRemovedStorageString(toRemove);
+    }
+
+    public String getRemovedDisplayString(ArrayList<Person> toRemove) {
+        return residents.getRemovedDisplayString(toRemove);
+    }
+
     /**
      * Returns true if the given eventName is same as the eventName of the current instance of Event
      */

@@ -13,11 +13,13 @@ import safeforhall.logic.Logic;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.DeadlineCommand;
+import safeforhall.logic.commands.ExcludeCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
+import safeforhall.logic.commands.SwitchCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeleteEventCommand;
@@ -173,6 +175,7 @@ public class CommandBox extends UiPart<Region> {
                 boolean isIndex = (suggestionPart.equals("INDEXES") || suggestionPart.equals("INDEX")
                         || suggestionPart.equals("[INDEXES]") || suggestionPart.equals("[INDEX]"))
                         && parameterPart.matches("\\d+");
+                boolean isCsv = (suggestionPart.equals("CSV_NAME")) && parameterPart.matches("\\w+");
                 boolean isLateKeyword = parameterPart.contains("k/l") && suggestionPart.equals("d2/DATE");
                 boolean isOptionalOneCharPrefix = suggestionPart.charAt(0) == '['
                         && parameterPart.length() > 1
@@ -190,6 +193,9 @@ public class CommandBox extends UiPart<Region> {
                     isEntered = true;
                     break;
                 } else if (isIndex) {
+                    isEntered = true;
+                    break;
+                } else if (isCsv) {
                     isEntered = true;
                     break;
                 } else if (isLateKeyword) {
@@ -246,6 +252,9 @@ public class CommandBox extends UiPart<Region> {
                 return ImportCommand.PARAMETERS;
             case ExportCommand.COMMAND_WORD:
                 return ExportCommand.PARAMETERS;
+            case SwitchCommand.COMMAND_WORD:
+                return SwitchCommand.PARAMETERS;
+
             default:
                 return "";
             }
@@ -273,6 +282,11 @@ public class CommandBox extends UiPart<Region> {
                 return ImportCommand.PARAMETERS;
             case ExportCommand.COMMAND_WORD:
                 return ExportCommand.PARAMETERS;
+            case SwitchCommand.COMMAND_WORD:
+                return SwitchCommand.PARAMETERS;
+            case ExcludeCommand.COMMAND_WORD:
+                return ExcludeCommand.PARAMETERS;
+
             default:
                 return "";
             }
