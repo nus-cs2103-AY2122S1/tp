@@ -1,4 +1,5 @@
 package seedu.address.testutil;
+
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -9,6 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INTERVIEW_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -29,6 +32,7 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.done.Done;
 import seedu.address.model.person.Person;
+
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -158,7 +162,7 @@ public class TypicalPersons {
             .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
             .withExperience(VALID_EXPERIENCE_AMY)
             .withTags(VALID_TAG_FRIEND)
-            .withInterview("")
+            .withInterview(VALID_INTERVIEW_AMY)
             .withNotes(VALID_NOTES_AMY)
             .withDone(VALID_DONE_AMY).build();
 
@@ -171,7 +175,7 @@ public class TypicalPersons {
             .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
             .withExperience(VALID_EXPERIENCE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withInterview("")
+            .withInterview(VALID_INTERVIEW_BOB)
             .withNotes(VALID_NOTES_BOB)
             .withDone(VALID_DONE_BOB).build();
 

@@ -80,7 +80,7 @@ public class PersonCard extends UiPart<Region> {
                 + person.getLevelOfEducation().levelOfEducation));
         experience.getChildren().add(getText("Years of Experience: " + person.getExperience().value));
         interview.getChildren().add(getText("Interview Time: "
-                + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime));
+                + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).displayTime()));
         notes.getChildren().add(getText("Notes: " + person.getNotes().orElse(Notes.EMPTY_NOTES).information));
 
         person.getTags().stream()
