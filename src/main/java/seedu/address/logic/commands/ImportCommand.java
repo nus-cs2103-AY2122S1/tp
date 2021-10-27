@@ -26,6 +26,9 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$s imported, duplicates ignored.";
 
+    public static final String MESSAGE_JSON_ERROR = "JSON file not following correct format. \n"
+            + "Please refer to profbook.json for correct formatting";
+
     private final Path filePath;
 
     /**
@@ -39,8 +42,12 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException, DataConversionException {
         requireNonNull(model);
-        model.importFile(filePath);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
+        try {
+            model.importFile(filePath);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
+        } catch (DataConversionException de) {
+            throw new DataConversionException(MESSAGE_JSON_ERROR, de);
+        }
     }
 
     @Override
