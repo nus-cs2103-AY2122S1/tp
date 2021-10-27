@@ -51,9 +51,9 @@ so many platforms like Luminus, Source Academy, etc.? We have just
 the application for you!
 
 Academy Directory (AD) is a **desktop app for CS1101S tutors to manage their students.** Its main features are as follows: 
-- Manage students’ personal details
-- Track students' grades, Studio attendance, and participation
-- Visualize data in Academy Directory 
+- [Manage students’ personal details](#managing-students-personal-details)
+- [Track students' grades, Studio attendance, and participation](#tracking-students-grades-studio-attendance-and-participation)
+- [Visualize data in Academy Directory](#visualizing-data-in-academy-directory) 
 
 Academy Directory is written in _Java_ and thus can be run on all major operating systems!
 It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
@@ -162,8 +162,8 @@ A student can have no phone number due to privacy concern.
 
 * `PHONE_NUMBER` is an optional field. The default value is `NA` which stands for "Not Applicable".
 * If Avengers do not wish to enter a student's phone number, 
-  * `p` tag can be omitted from the command.
-  * Otherwise, Avengers can supply the value `NA` to `p` tag. Note that it must be `NA` not `N.A` or `NAb`
+  * `p/` prefix can be omitted from the command.
+  * Otherwise, Avengers can supply the value `NA` to `p/` prefix. Note that it must be `NA` not `N.A` or `NAb`
 * If newly inputted students have `NAME` matching exactly with an already existing entry, the program will output a warning message and show the existing entry.\
 `This student already exists in the academy directory`
 
@@ -229,9 +229,9 @@ Gets personal detail of student/s. Personal detail refers to:
 Format: `get [p/] [e/] [te/] [n/NAME]`
 
 * If `NAME` is provided, only personal detail of the student/s whose name contain the given `NAME` will be shown.
-The behavior here is similar to the [filter command](#filtering-the-academy-directory-by-name-or-tag-filter)
+The behavior here is similar to the [filter command](#filtering-academy-directory-by-name-or-tag-filter)
 * If `NAME` is not provided, the personal detail of all students in AcademyDirectory will be shown
-* Multiple tags can be supplied at the same time, and personal detail corresponding to all the given tags will be shown
+* Multiple prefixes can be supplied at the same time, and personal detail corresponding to all the given prefixes will be shown
 
 Examples:
 * `get p/` shows the phone number of all students in Academy Directory
@@ -491,8 +491,8 @@ Action | Format | Examples
 [**Redo**](#redo-changes-to-academy-directory-redo) | `redo` | `redo`
 [**Help**](#seeking-help--help) | `help` | `help add`
 [**Exit**](#exiting-the-program--exit) | `exit` | `exit`
-[**View Commit History**](#advanced-users-only-viewing-commit-history-history) | `history` | `history`
-[**Revert Commit**](#advanced-users-only-reverting-commit-revert) | `revert HASH` | `revert df7x3`
+[**View Commit History**](#for-advanced-users-viewing-commit-history-history) | `history` | `history`
+[**Revert Commit**](#for-advanced-users-reverting-commit-revert) | `revert HASH` | `revert df7x3`
 
 ### Prefix Summary
 This subsection provides a summary for all the fields and their prefixes 
@@ -521,18 +521,18 @@ This section explains the commonly used terms in this user guide
 
 Term | Definition | Comments
 -----| ----------- | ---------- 
-Studios | Studios are tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | 
-Avengers | Avenger is a special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. 
 CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore |
+Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | 
+Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
 Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something
 Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something
 Java | A program that allows running other programs written in Java programming language
 Operating System | Software that manages computer hardware and other computer software | 
 Command | An instruction typed by a user to Academy Directory
 Command Box | A part of the Academy Directory's GUI which can be used by users to type commands
-Field | Additional information that is provided to a command for the command to be executed properly | May or may not have an associated prefix
+Field | Additional information that can be provided to a command for correct command execution | May or may not have an associated prefix
 Parameter | Part of the command which provides additional information provided by the user | Actual values for the fields
-Prefix | An abbreviation of a parameter | Always ends with a backslash ('/')
+Prefix | An abbreviation of a field | Always ends with a backslash ('/')
 
 ## Links
 ### Academy Directory Resources
