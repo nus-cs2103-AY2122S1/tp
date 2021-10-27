@@ -272,6 +272,6 @@ public class MainWindow extends UiPart<Stage> {
             return;
         }
 
-        resultDisplay.setFeedbackToUser("Graph saved successfully");
+        resultDisplay.setFeedbackToUser("Graph saved successfully at " + savePath);
     }
 }
