@@ -67,7 +67,7 @@ public class UserProfileWindow extends UiPart<Stage> {
      * fields.
      */
     public void show() {
-        logger.fine("Showing user profile window");
+        logger.fine("Showing User Profile Window");
         initializeFields();
         getRoot().show();
         getRoot().centerOnScreen();
@@ -104,12 +104,18 @@ public class UserProfileWindow extends UiPart<Stage> {
      * on the window.
      */
     public void initializeFields() {
+        assert logic != null : "User Data Could Not Be Found";
         Person user = logic.getUserProfile();
 
         String userName = user.getName().toString();
         String userGitHub = user.getGithub().toString();
         String userTelegram = user.getTelegram().toString();
         Image userProfile = user.getProfilePicture();
+
+        assert userName != null : "User Name Could Not Be Set Up";
+        assert userGitHub != null : "User GitHub Username Could Not Be Set Up";
+        assert userTelegram != null : "User Telegram Handle Could Not Be Set Up";
+        assert userProfile != null : "User Profile Picture Could Not Be Set Up";
 
         setFields(userName, userGitHub, userTelegram, userProfile);
         logger.fine("Fields Initialized in User Profile Window");

@@ -75,6 +75,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
     public void start() {
         if (logic.isProfilePresent()) {
             logger.info("User Profile Found, Launching Main Window");
+            assert mainWindow != null : "Main Window not found";
             mainWindow.start();
         } else {
             logger.info("No User Profile Found, Launching Profile Window");
@@ -141,23 +142,26 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
      * @return true, if all the credentials entered by the user are valid.
      */
     public boolean areUserCredentialsValid() {
-        String userGithub = github.getText();
+        String userGitHub = github.getText();
         String userName = name.getText();
         String userTelegram = telegram.getText();
 
+        assert userName != null : "User Name Could Not Be Found";
         if (!Name.isValidName(userName)) {
             logger.info("Invalid Name Detected");
             errorMessage.setText(INVALID_NAME_MESSAGE);
             return false;
         }
 
+        assert userTelegram != null : "User Telegram Handle Could Not Be Found";
         if (!Telegram.isValidTelegram(userTelegram)) {
             logger.info("Invalid Telegram Handle Detected");
             errorMessage.setText(INVALID_TELEGRAM_MESSAGE);
             return false;
         }
 
-        if (!Github.isValidGithub(userGithub)) {
+        assert userGitHub != null : "User GitHub Username Could Not Be Found";
+        if (!Github.isValidGithub(userGitHub)) {
             logger.info("Invalid GitHub Username Detected");
             errorMessage.setText(INVALID_GITHUB_MESSAGE);
             return false;
