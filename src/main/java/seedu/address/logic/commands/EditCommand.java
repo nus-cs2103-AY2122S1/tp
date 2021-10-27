@@ -15,6 +15,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -81,7 +83,8 @@ public class EditCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), false, false,
+            editedStudent);
     }
 
     /**
@@ -99,12 +102,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Note note = studentToEdit.getNote(); // we don't allow editing of notes from EditCommand;
         GroupName updatedGroupName = editStudentDescriptor.getGroupName().orElse(studentToEdit.getGroupName());
+        UniqueAssessmentList assessments = studentToEdit.getUniqueAssessmentList();
 
         if (!model.hasGroup(updatedGroupName)) {
             throw new CommandException(MESSAGE_GROUP_NONEXISTENT);
         }
 
-        return new Student(updatedName, updatedTelegramHandle, updatedEmail, note, updatedGroupName);
+        return new Student(updatedName, updatedTelegramHandle, updatedEmail, note, updatedGroupName, assessments);
     }
 
     @Override

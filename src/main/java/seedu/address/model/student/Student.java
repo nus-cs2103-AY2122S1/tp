@@ -43,6 +43,18 @@ public class Student {
         this.filteredAssessments = new FilteredList<>(this.getAssessmentList());
     }
 
+    public Student(Name name, TelegramHandle telegramHandle, Email email, Note note, GroupName groupName,
+                   UniqueAssessmentList assessments) {
+        requireAllNonNull(name, telegramHandle, email, groupName, note, assessments);
+        this.name = name;
+        this.telegramHandle = telegramHandle;
+        this.note = note;
+        this.email = email;
+        this.groupName = groupName;
+        this.assessments = assessments;
+        this.filteredAssessments = new FilteredList<>(this.getAssessmentList());
+    }
+
     public Name getName() {
         return name;
     }
@@ -81,6 +93,10 @@ public class Student {
 
     public ObservableList<Assessment> getFilteredAssessmentList() {
         return filteredAssessments;
+    }
+
+    public UniqueAssessmentList getUniqueAssessmentList() {
+        return assessments;
     }
 
     /**

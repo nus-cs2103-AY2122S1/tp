@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.group.GroupNameContainsKeywordPredicate;
@@ -120,13 +121,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateStudentNote(Student student, Note updatedNote) {
+    public Student updateStudentNote(Student student, Note updatedNote) {
         Name name = student.getName();
         TelegramHandle telegramHandle = student.getTelegramHandle();
         Email email = student.getEmail();
         GroupName groupName = student.getGroupName();
-        Student editedStudent = new Student(name, telegramHandle, email, updatedNote, groupName);
-        setStudent(student, editedStudent);
+        UniqueAssessmentList assessments = student.getUniqueAssessmentList();
+        Student editedStudent = new Student(name, telegramHandle, email, updatedNote, groupName, assessments);
+        csBook.setStudent(student, editedStudent);
+        return editedStudent;
     }
 
     @Override

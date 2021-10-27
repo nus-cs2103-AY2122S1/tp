@@ -71,7 +71,7 @@ public interface Model {
     /**
      * Updates the note of a student in the CS book.
      */
-    void updateStudentNote(Student student, Note note);
+    Student updateStudentNote(Student student, Note note);
 
     /**
      * Deletes the given student.

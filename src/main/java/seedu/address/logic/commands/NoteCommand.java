@@ -44,8 +44,8 @@ public class NoteCommand extends Command {
             throw new CommandException(MESSAGE_STUDENT_NONEXISTENT);
         }
 
-        model.updateStudentNote(student, note);
+        Student editedStudent = model.updateStudentNote(student, note);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentName, note), false, false, student);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, studentName, note), false, false, editedStudent);
     }
 }
