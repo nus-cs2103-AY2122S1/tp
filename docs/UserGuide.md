@@ -25,7 +25,9 @@ This User Guide is to be used by any AniList user. No technical background is re
   * [Adding/ Deleting genre from anime: `genre`](#adding-deleting-genre-from-anime-genre)
   * [List all supported genres: `genrelist`](#list-all-supported-genres-genrelist)
   * [Listing anime based on watch status: `list`](#listing-anime-based-on-watch-status-list)
-  * [Clearing all user data: `clear`](#clearing-all-user-data-clear)
+  * [Clearing all animes currently displayed: `clear`](#clearing-all-animes-currently-displayed-clear)
+  * [Finding an anime: `find`](#finding-an-anime-find)  
+  * [View user statistics: `stats`](#view-user-statistics-stats)
   * [Viewing all supported commands: `help`](#viewing-all-supported-commands-help)
 - [Commands Table](#commands-table)
 - [Glossary](#glossary)
@@ -42,7 +44,9 @@ This User Guide is to be used by any AniList user. No technical background is re
 
 4. Double-click to launch the application. A window similar to the one shown below should appear shortly.
 
-5. On first launch, AniList will contain sample data. Use the `clear` command to delete all current user data.
+5. On first launch, AniList will contain sample anime data which you could play around with. Once you are done and 
+   wish to clear the sample data, enter `list` to [list](#listing-anime-based-on-watch-status-list) all sample animes, 
+   and then use the [clear](#clearing-all-animes-currently-displayed-clear) command to delete them.
 
 
 
@@ -60,9 +64,10 @@ ___
 
 2. **Tabs Bar:** Here the user can change the tabs to view their anime list filtered based on their watch status. (watching, towatch, finished)
 
-3. **Anime List Panel:** The panel where all of the user's animes are listed. The order of listing is based on the time each entry was added.
+3. **Anime List Panel:** The panel where all of the user's animes are listed. The order of listing is based on the order in which each anime was added —
+the latest to be added appears last in the list.
 
-4. **Save Location:** States the location in which the anime list file is saved in with respect to the location of the anilist.jar file.
+4. **Save Location:** States the location in which the anime list file is saved, with respect to the location of the `anilist.jar file`.
 
 5. **Command Result Panel:** This panel shows the result of the command based on user input in the Command Input Box.
 
@@ -74,13 +79,13 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 
 * **Theme Switching:** `CTRL-T`. This will cycle through all the available themes.
 
-Wonder Egg Priority Theme  |  Charlotte Theme
+Charlotte Theme            |  Dark Theme
 :-------------------------:|:-------------------------:
-![](images/UG-images/eggtheme.png)  |  ![](images/UG-images/charlottetheme.png)
+![](images/UG-images/charlottetheme.png)  |  ![](images/UG-images/darktheme.png)
 
-Squid Girl Theme           |  Dark Theme
+Squid Girl Theme           |  Wonder Egg Priority Theme
 :-------------------------:|:-------------------------:
-![](images/UG-images/squidtheme.png)  |  ![](images/UG-images/darktheme.png)
+![](images/UG-images/squidtheme.png)  |  ![](images/UG-images/eggtheme.png)
 
 ___
 
@@ -107,6 +112,13 @@ ___
 
 * Items in square brackets are optional
   e.g. `add n/NAME [e/EPISODE]`. Both `add n/Naruto` and `add n/Naruto e/27` are considered valid commands.
+
+* Commands are case-sensitive (TODO refine later)
+  e.g. `list` and `LIST` are registered differently. Entering `list` successfully lists all animes but
+  entering `LIST` registers as an unknown command.
+
+* Leading and trailing whitespace is ignored
+  TODO add example
 
 </div>
 
@@ -284,24 +296,42 @@ Example usages:
 ![](images/UG-images/list.png)
 ___
 
-### Clearing all user data: `clear`
-Deletes **ALL** user data in the current displayed list. Upon execution of clear command, the anime list of the active tab will be empty.
+### Clearing all animes currently displayed: `clear`
+
+Removes all anime(s) currently displayed on screen, upon user confirmation <br>
 Format: `clear`
 
-* Only animes from the current active tab will be deleted.
-* User will be prompted to key in the `clear` command once again upon first execution of `clear`.
-* Only on the second confirmation will the desired anime data be deleted.
+- Only animes currently listed will be removed from the application
+- User will be prompted with a confirmation message, and can proceed to clear all displayed animes by entering 'clear' again
+- Entering anything else will cancel the command
 
 <div markdown="box" class="alert alert-info">
 
 Example usages:
-* `clear` user will be prompted for a comfirmation `clear` command.
-* `clear` on second clear command all data of the active tab will be deleted.
+* `clear` on the initial clear command prompts the user to confirm the command.
+* `clear` on follow-up clear command deletes all anime data currently displayed.
 
 </div>
 
 ![](images/UG-images/clear.png)
 
+### Finding an anime: `find`
+
+Finds all anime(s) that match specified keyword(s) in their names or genres
+(case-insensitive) and displays them as a list with index numbers<br>
+Format: `find [n/NAME KEYWORD]... [g/GENRE KEYWORD]...`
+
+- `NAME KEYWORD` refers to the name keyword(s) you are searching for
+- `GENRE KEYWORD` refers to the genre keyword(s) you are searching for
+- `find` has to be followed by at least one search term
+
+Example:
+*  `find n/boku no n/hero g/comedy`
+
+### View user statistics: `stats`
+
+Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList
+Format: `stats`
 ___
 
 ### Viewing all supported commands: `help`
@@ -331,7 +361,9 @@ ___
 | [genre](#adding-deleting-genre-from-anime-genre)     | `genre INDEX c/ACTION g/GENRE [g/GENRE]` |
 | [genrelist](#list-all-supported-genres-genrelist) | `genrelist` |
 | [list](#listing-anime-based-on-watch-status-list)     | `list [s/STATUS]` |
-| [clear](#clearing-all-user-data-clear)    | `clear` |
+| [clear](#clearing-all-animes-currently-displayed-clear)    | `clear` |
+| [find](#finding-an-anime-find)  | `find [n/NAME KEYWORD]... [g/GENRE KEYWORD]...` |
+| [stats](#view-user-statistics-stats)  | `stats` |
 | [help](#viewing-all-supported-commands-help)     | `help` |
 
 ## Glossary
