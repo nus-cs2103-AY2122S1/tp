@@ -68,6 +68,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         }
 
         internalList.set(index, editedEmployee);
+        internalList.sort(employeeComparator);
     }
 
     /**
@@ -79,11 +80,13 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         if (!internalList.remove(toRemove)) {
             throw new EmployeeNotFoundException();
         }
+        internalList.sort(employeeComparator);
     }
 
     public void setEmployees(UniqueEmployeeList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        internalList.sort(employeeComparator);
     }
 
     /**
@@ -97,6 +100,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
         }
 
         internalList.setAll(employees);
+        internalList.sort(employeeComparator);
     }
 
     /**
