@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
 import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
+import static seedu.address.logic.commands.CommandUtil.checkDateForDayOfWeek;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TIME;
 
@@ -72,6 +73,7 @@ public class ViewShiftCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        checkDateForDayOfWeek(periodToLookAt, dayOfWeek);
         ObservableList<Person> staffs = model.getUnFilteredPersonList();
         if (staffs.size() == 0) {
             throw new CommandException(STAFF_LIST_EMPTY);

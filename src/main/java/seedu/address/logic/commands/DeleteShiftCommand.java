@@ -72,6 +72,7 @@ public class DeleteShiftCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        CommandUtil.checkDateForDayOfWeek(startDate, endDate, dayOfWeek);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person staffToEdit;

@@ -49,7 +49,6 @@ public class AddShiftCommand extends Command {
     public static final String MESSAGE_ADD_SHIFT_SUCCESS = "New shift added to the schedule of %s: %s, %s.";
     public static final String MESSAGE_DUPLICATE_SHIFT = "This shift already exists in the staff's schedule.";
 
-
     private final Index index;
     private final Name name;
     private final DayOfWeek dayOfWeek;
@@ -74,6 +73,10 @@ public class AddShiftCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        //check if the input dates contain the dayOfWeek
+        CommandUtil.checkDateForDayOfWeek(startDate, endDate, dayOfWeek);
+
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         Person staffToEdit;
@@ -105,6 +108,8 @@ public class AddShiftCommand extends Command {
         return new CommandResult(String.format(MESSAGE_ADD_SHIFT_SUCCESS, staffToEdit.getName(), dayOfWeek, slot));
 
     }
+
+
 
     @Override
     public boolean equals(Object other) {
