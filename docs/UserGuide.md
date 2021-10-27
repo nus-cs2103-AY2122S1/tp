@@ -68,7 +68,7 @@ If you are familiar with Unix commands, this is definitely for you!
 ### <a name="view-help"></a>1.1 View Help: `help`
 Shows a message explaining how to access the help page.
 
-![help message](images/help.png)
+![help message](images/commands/HelpCommand/help.png)
 Example: `help`
 
 ### <a name="exit"></a>1.2 Exit: `exit`
@@ -143,7 +143,7 @@ Example:
 - `delete 23` Deletes the data of the student at index 1
 
 
-### <a name="filter-student"></a>3.4 Filter List: `filter`
+### <a name="filter-student"></a>3.4 Filter Students: `filter`
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
 Of the three arguments, at least one has to be provided. Arguments can be provided in any order and are case-insensitive. 
 ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
@@ -214,4 +214,3 @@ Command | Format & Examples
 **Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 **Purge** | `purge`
 **Upload** | `upload`
-
