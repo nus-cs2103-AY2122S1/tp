@@ -23,7 +23,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupCommand;
+import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.commands.MarkStudentAttCommand;
 import seedu.address.logic.commands.MarkStudentPartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -103,9 +105,21 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_listStudent() throws Exception {
+        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD) instanceof ListStudentCommand);
+        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " 3") instanceof ListStudentCommand);
+    }
+
+    @Test
+    public void parseCommand_listTask() throws Exception {
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD) instanceof ListTaskCommand);
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD + " 3") instanceof ListTaskCommand);
+    }
+
+    @Test
+    public void parseCommand_listGroup() throws Exception {
+        assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD) instanceof ListGroupCommand);
+        assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD + " 3") instanceof ListGroupCommand);
     }
 
     @Test

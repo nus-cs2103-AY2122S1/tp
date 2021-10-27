@@ -155,6 +155,7 @@ public class EditTaskCommand extends Command {
             setTaskName(toCopy.taskName);
             setDeadline(toCopy.taskDate);
             setTags(toCopy.tags);
+            setTaskPriority(toCopy.priority);
             setDescription(toCopy.description);
         }
 
