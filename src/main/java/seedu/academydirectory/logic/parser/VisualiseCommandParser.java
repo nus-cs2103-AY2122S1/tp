@@ -1,9 +1,9 @@
 package seedu.academydirectory.logic.parser;
 
-import seedu.academydirectory.logic.commands.VisualiseCommand;
+import seedu.academydirectory.logic.commands.VisualizeCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
-public class VisualiseCommandParser implements Parser<VisualiseCommand> {
+public class VisualiseCommandParser implements Parser<VisualizeCommand> {
 
     /**
      * Parses {@code userInput} into a command and returns it.
@@ -12,7 +12,7 @@ public class VisualiseCommandParser implements Parser<VisualiseCommand> {
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public VisualiseCommand parse(String userInput) throws ParseException {
-        return new VisualiseCommand();
+    public VisualizeCommand parse(String userInput) throws ParseException {
+        return new VisualizeCommand();
     }
 }

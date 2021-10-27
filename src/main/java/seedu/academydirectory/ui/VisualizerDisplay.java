@@ -7,18 +7,19 @@ import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.ui.creator.Creator;
 import seedu.academydirectory.ui.creator.DefaultCreator;
 import seedu.academydirectory.ui.creator.GraphCreator;
+import seedu.academydirectory.ui.creator.HistoryCreator;
 import seedu.academydirectory.ui.creator.ViewCreator;
 
 /**
- * A ui for the visualiser bar that is displayed at bottom right of the app.
+ * A ui for the visualizer bar that is displayed at bottom right of the app.
  */
-public class VisualiserDisplay extends UiPart<Region> {
+public class VisualizerDisplay extends UiPart<Region> {
     private static final String FXML = "VisualizeDisplay.fxml";
 
     @FXML
     private StackPane placeHolder;
 
-    public VisualiserDisplay() {
+    public VisualizerDisplay() {
         super(FXML);
     }
 
@@ -36,8 +37,11 @@ public class VisualiserDisplay extends UiPart<Region> {
         case VIEW:
             setVisualizer(new ViewCreator(additionalViewModel.getAdditionalInfo()));
             break;
-        case VISUALISE:
+        case VISUALIZE:
             setVisualizer(new GraphCreator(additionalViewModel.getAdditionalInfo()));
+            break;
+        case HISTORY:
+            setVisualizer(new HistoryCreator(additionalViewModel.getAdditionalInfo()));
             break;
         default:
             setVisualizer(new DefaultCreator(additionalViewModel.getAdditionalInfo()));
