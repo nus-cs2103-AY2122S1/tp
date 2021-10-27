@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -123,6 +124,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns an unmodifiable view of the unfiltered student list */
+    ObservableList<Student> getUnfilteredStudentList();
+
     /** Returns unmodifiable view of filtered Tutorial ClassList */
     ObservableList<TutorialClass> getFilteredTutorialClassList();
 
@@ -131,6 +135,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    void updateUnfilteredStudentList(List<Student> students);
 
     void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate);
 
