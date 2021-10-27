@@ -15,7 +15,9 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all items";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": lists all the items in the inventory. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": display all the items in the inventory. "
+            + "No Parameters needed \n "
+            + "Example: list";
 
 
     @Override
