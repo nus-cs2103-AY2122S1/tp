@@ -23,7 +23,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Pinning a person: `pin`](#pinning-a-person--pin)
   * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
-  * [Deleting multiple person : `deleteM`](#deleting-multiple-people--deleteM)
+  * [Deleting multiple person : `deletem`](#deleting-multiple-people--deleteM)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
 * [FAQ](#faq)
@@ -387,11 +387,11 @@ Action | Summary | Format, Examples
 **Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
 **Clear** | Clears all entries | `clear`
 **Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
-**DeleteM** | Deletes multiple people within the range | `delete START_INDEX END_INDEX`<br> e.g., `deleteM 3 - 5`
+**DeleteM** | Deletes multiple people within the range | `deletem START_INDEX END_INDEX`<br> e.g., `deletem 3 - 5`
 **Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Exit** | Exits the program | `exit`
-**Find** | Locates persons by name and tags (must fulfill all)| `find n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
-**FindAny** | Locates persons by name and tags (fulfill one)| `findAny n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
+**Find** | Locates persons by name and tags (Results fulfill all search terms)| `find n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
+**FindAny** | Locates persons by name and tags (Results fulfill at least one search term)| `findAny n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
 **Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
 **Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
 **Help** | Displays help information | `help [COMMAND] [/d]`

@@ -639,7 +639,7 @@ Future versions user stories
 **MSS**
 
 1.  User provides index of person to pin
-3.  CONNECTIONS pins the person to the top of the contacts
+2.  CONNECTIONS pins the person to the top of the contacts
 
     Use case ends.
 
@@ -662,7 +662,7 @@ Future versions user stories
 **MSS**
 
 1.  User provides index of person to unpin
-3.  CONNECTIONS unpins the person
+2.  CONNECTIONS unpins the person
 
     Use case ends.
 
