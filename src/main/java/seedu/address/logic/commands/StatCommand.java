@@ -31,7 +31,6 @@ public class StatCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-
         return new CommandResult(getStatistics(lastShownList)
             );
     }
@@ -57,10 +56,9 @@ public class StatCommand extends Command {
                 tutDic.put(tutid.toString(), 1);
             }
 
-
             Set<Tag> tempSet = person.getTags();
             if (tempSet.isEmpty()) {
-                break;
+                continue;
             }
             for (Tag t : tempSet) {
                 if (tagDic.containsKey(t.toString())) {
