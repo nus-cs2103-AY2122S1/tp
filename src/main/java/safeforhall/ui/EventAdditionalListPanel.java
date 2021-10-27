@@ -25,6 +25,8 @@ public class EventAdditionalListPanel extends UiPart<Region> {
      */
     public EventAdditionalListPanel(ObservableList<Event> eventList) {
         super(FXML);
+        eventAdditionalListView.setMouseTransparent(true);
+        eventAdditionalListView.setFocusTraversable(false);
         eventAdditionalListView.setItems(eventList);
         eventAdditionalListView.setCellFactory(listView -> new EventAdditionalListViewCell());
     }

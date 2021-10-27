@@ -66,6 +66,8 @@ public class PersonAdditionalCard extends UiPart<Region> {
             } else {
                 date = new Label(missedDates + " day");
             }
+            textBox.setStyle("-fx-text-fill: #ff0000;");
+            date.setStyle("-fx-text-fill: #ff0000;");
             deadlineContainer.getChildren().add(textBox);
             deadlineContainer.getChildren().add(date);
         }
