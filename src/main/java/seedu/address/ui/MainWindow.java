@@ -269,7 +269,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleGithub() {
         personListPanel.openGithub();
     }
-  
+
     /**
      * Opens the user profile window or focuses on it if it's already opened.
      */
