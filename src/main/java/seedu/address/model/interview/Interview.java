@@ -58,8 +58,22 @@ public class Interview {
         return true;
     }
 
+    /**
+     * Returns true if this Interview has passed with respect to the current date and time, and false otherwise.
+     */
+    public boolean hasInterviewPassed() {
+        assert isValidInterviewTime(this.parseTime) : "Not a valid interview time";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
+        LocalDate interview = LocalDate.parse(this.parseTime, formatter);
+        return interview.isBefore(LocalDate.now());
+    }
+
+    /**
+     * Returns true if this Interview is an empty interview, and false otherwise.
+     */
     public boolean isEmptyInterview() {
-        return this.equals(EMPTY_INTERVIEW);
+        return this.equals(Interview.EMPTY_INTERVIEW);
     }
 
     @Override

@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -62,20 +61,20 @@ public class FindCommandTest {
         FindCommand findSecondCommand = new FindCommand(secondPredicateList);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertEquals(findFirstCommand, findFirstCommand);
 
         // same values -> returns true
         FindCommand findFirstCommandCopy = new FindCommand(firstPredicateList);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        assertEquals(findFirstCommandCopy, findFirstCommand);
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertNotEquals(findFirstCommand, 1);
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertNotEquals(findFirstCommand, null);
 
         // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertNotEquals(findSecondCommand, findFirstCommand);
     }
 
     @Test

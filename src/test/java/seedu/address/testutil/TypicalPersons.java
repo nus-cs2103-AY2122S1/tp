@@ -48,7 +48,7 @@ public class TypicalPersons {
             .withLevelOfEducation("PhD")
             .withExperience("0")
             .withTags("friends")
-            .withInterview("")
+            .withInterview("2022-10-22, 10:00")
             .withNotes("She is very passionate about this field.")
             .withDone(Done.STATUS_UNDONE).build();
 

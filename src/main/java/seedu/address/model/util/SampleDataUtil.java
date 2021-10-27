@@ -65,7 +65,7 @@ public class SampleDataUtil {
                 new LevelOfEducation("Bachelors"),
                 new Experience("3"),
                 getTagSet("Outstanding"),
-                Optional.of(new Interview("2021-10-20, 15:00")),
+                Optional.of(new Interview("2022-10-20, 15:00")),
                 Optional.of(new Notes("He would not fit the job based off his resume."))),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                 new Email("irfan@example.com"),
@@ -85,7 +85,7 @@ public class SampleDataUtil {
                 new LevelOfEducation("High School"),
                 new Experience("5"),
                 getTagSet("Normal"),
-                Optional.empty(),
+                Optional.of(new Interview("2022-01-20, 15:00")),
                 Optional.of(new Notes("He has past leadership skills, "
                         + "but do not have proper experience in this field.")))
         };
