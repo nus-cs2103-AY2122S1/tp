@@ -91,7 +91,7 @@ public class Task implements Comparable<Task>, Cloneable {
 
     public String getPriorityAsString() {
         if (this.priority == Priority.HIGH) {
-            return "HIGH ‼️";
+            return "HIGH️";
         } else if (this.priority == Priority.MEDIUM) {
             return "MEDIUM";
         } else {
@@ -175,6 +175,12 @@ public class Task implements Comparable<Task>, Cloneable {
 
     @Override
     public int compareTo(Task otherTask) {
+        if (this.isDone) {
+            return otherTask.isDone ? 0 : 1;
+        } else if (otherTask.isDone) {
+            return -1;
+        }
+
         LocalDate thisDate = this.getDate();
         LocalDate otherDate = otherTask.getDate();
 

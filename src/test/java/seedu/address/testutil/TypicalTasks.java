@@ -12,17 +12,20 @@ import seedu.address.model.task.Task;
  */
 public class TypicalTasks {
 
-    public static final Task TUTORIAL = new DeadlineAndEventTaskBuilder().withName("Do Tutorial").withDate("2000-02-02")
+    public static final Task TUTORIAL = new DeadlineTaskBuilder().withName("Do Tutorial")
+            .withDate("2000-02-02")
             .withTags("work").build();
-    public static final Task MEETING = new DeadlineAndEventTaskBuilder().withName("Prepare for meeting")
+    public static final Task MEETING = new DeadlineTaskBuilder().withName("Prepare for meeting")
             .withDate("2010-02-02")
             .withTags("work").build();
-    public static final Task DINNER = new DeadlineAndEventTaskBuilder().withName("Buy Dinner").withDate("2021-10-12")
+    public static final Task DINNER = new DeadlineTaskBuilder().withName("Buy Dinner")
+            .withDate("2021-10-12")
             .withTags("personal").build();
-    public static final Task FRIEND_BIRTHDAY = new DeadlineAndEventTaskBuilder().withName("Plan Birthday")
+    public static final Task FRIEND_BIRTHDAY = new DeadlineTaskBuilder().withName("Plan Birthday")
             .withDate("2021-10-20")
             .withTags("friends").build();
-    public static final Task EXERCISE = new DeadlineAndEventTaskBuilder().withName("Run").withDate("2000-02-02")
+    public static final Task EXERCISE = new DeadlineTaskBuilder().withName("Run")
+            .withDate("2000-02-02")
             .build();
 
     private TypicalTasks() {}
@@ -39,6 +42,7 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(TUTORIAL, MEETING, DINNER, FRIEND_BIRTHDAY, EXERCISE));
+        return new ArrayList<>(Arrays.asList(
+                TUTORIAL, MEETING, DINNER, FRIEND_BIRTHDAY, EXERCISE));
     }
 }

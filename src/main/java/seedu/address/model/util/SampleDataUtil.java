@@ -26,22 +26,22 @@ public class SampleDataUtil {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"), new StudentNumber("A0123436B"),
                     new UserName("ayeoh"), new RepoName("ip"), getTagSet("friends"),
-                    getAttendanceList(0), getParticipationList(0), new GroupName()),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
             new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"), new StudentNumber("A0123456A"),
                     new UserName("BYU"), null, getTagSet("colleagues", "friends"),
-                    getAttendanceList(0), getParticipationList(0), new GroupName()),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
             new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
                     new StudentNumber("A0123450B"), null, null, getTagSet("neighbours"),
-                    getAttendanceList(0), getParticipationList(0), new GroupName()),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
             new Student(new Name("David Li"), new Email("lidavid@example.com"), new StudentNumber("A0123956B"),
                     null, new RepoName("repo"), getTagSet("family"),
-                    getAttendanceList(0), getParticipationList(0), new GroupName()),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
             new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), new StudentNumber("A0823456B"),
                     new UserName("IrIb"), new RepoName("myRepo"), getTagSet("classmates"),
-                    getAttendanceList(0), getParticipationList(0), new GroupName()),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
             new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"), new StudentNumber("A1123456B"),
                     null, null, getTagSet("colleagues"),
-                    getAttendanceList(0), getParticipationList(0), new GroupName()),
+                    getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
         };
     }
 
@@ -63,7 +63,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a attendance list containing the list of integers given.
+     * Returns an attendance list containing the list of integers given.
      */
     public static Attendance getAttendanceList(Integer... integers) {
         return new Attendance(new ArrayList<>(Arrays.asList(integers)));
@@ -74,5 +74,19 @@ public class SampleDataUtil {
      */
     public static Participation getParticipationList(Integer... integers) {
         return new Participation(new ArrayList<>(Arrays.asList(integers)));
+    }
+
+    /**
+     * Returns the default attendance list.
+     */
+    public static Attendance getDefaultAttendance() {
+        return new Attendance();
+    }
+
+    /**
+     * Returns the default participation list.
+     */
+    public static Participation getDefaultParticipation() {
+        return new Participation();
     }
 }

@@ -48,14 +48,13 @@ public class Participation {
     }
 
     /**
-     * Checks if a student is present during the specified {@code week}.
+     * Checks if a student has participated during the specified {@code week}.
      *
      * @param week week to be checked.
-     * @return int specifying if student was present.
+     * @return int specifying if student has participated.
      */
-    public int checkPresent(int week) {
-        int isPresent = participationList.get(week);
-        return isPresent;
+    public int checkParticipated(int week) {
+        return participationList.get(week);
     }
 
     /**

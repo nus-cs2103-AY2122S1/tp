@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 public class ListTaskCommand extends Command {
     public static final String COMMAND_WORD = "tasks";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks.";
 
 
     @Override

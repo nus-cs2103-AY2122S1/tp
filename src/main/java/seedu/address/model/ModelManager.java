@@ -117,16 +117,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeStudent(Student target) {
+    public void deleteStudent(Student target) {
         requireNonNull(target);
-        addressBook.removeStudent(target);
+        addressBook.deleteStudent(target);
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group group = groupList.stream()
                                           .filter(g -> g.getName().equals(target.getGroupName()))
                                           .findAny()
                                           .orElse(null);
-            addressBook.removeStudentFromGroup(target, group);
+            addressBook.deleteStudentFromGroup(target, group);
         }
     }
 
@@ -153,32 +153,30 @@ public class ModelManager implements Model {
 
     @Override
     public void markStudentAttendance(Student target, int week) {
-        requireAllNonNull(target);
-        Student newPerson = target;
-
-        newPerson.getAttendance().toggleAttendance(week);
-        addressBook.setStudent(target, newPerson);
+        requireAllNonNull(target, week);
+        Student newStudent = target;
+        newStudent.toggleAttendance(week);
+        setStudent(target, newStudent);
     }
 
     @Override
     public String getStudentAttendance(Student target, int week) {
-        requireAllNonNull(target);
-        return target.getAttendance().checkPresent(week) == 1 ? "present" : "absent";
+        requireAllNonNull(target, week);
+        return target.checkPresent(week) == 1 ? "present" : "absent";
     }
 
     @Override
     public void markStudentParticipation(Student target, int week) {
-        requireAllNonNull(target);
-        Student newPerson = target;
-
-        newPerson.getParticipation().toggleParticipation(week);
-        addressBook.setStudent(target, newPerson);
+        requireAllNonNull(target, week);
+        Student newStudent = target;
+        newStudent.getParticipation().toggleParticipation(week);
+        setStudent(target, newStudent);
     }
 
     @Override
     public String getStudentParticipation(Student target, int week) {
-        requireAllNonNull(target);
-        return target.getParticipation().checkPresent(week) == 1 ? "participated" : "not participated";
+        requireAllNonNull(target, week);
+        return target.checkParticipated(week) == 1 ? "participated" : "not participated";
     }
 
     @Override
@@ -197,7 +195,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudentGroup(Student student, Group group) {
         requireAllNonNull(student, group);
-        addressBook.removeStudentFromGroup(student, group);
+        addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);
 
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
@@ -251,7 +249,7 @@ public class ModelManager implements Model {
         requireNonNull(target);
         List<Student> students = target.getMembersList();
         addressBook.clearGroupFromStudents(students);
-        addressBook.removeGroup(target);
+        addressBook.deleteGroup(target);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
