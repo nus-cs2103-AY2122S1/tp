@@ -188,7 +188,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete 3` - Deletes the 2nd Participant in the displayed Participant list.
+* `delete 3` - Deletes the 3rd Participant in the displayed Participant list.
 * `list` followed by `delete 2` - Deletes the 2nd Participant in the full Participant list. 
   Find out more about `list` [here](#listing-all-participants--list).
 * `find Betsy` followed by `delete 1` - Deletes the 1st Participant in the results of the `find` command.
@@ -262,7 +262,7 @@ Adds a Next-of-Kin to a Participant.
 
 Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 
-* Adds a Next of Kin to the Participant at the specified `INDEX`.
+* Adds a Next-of-Kin to the Participant at the specified `INDEX`.
 * The index refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * A Next-of-Kin with the same name cannot be assigned to the same Participant.
@@ -283,7 +283,7 @@ Format: `deleteNok INDEX_1 INDEX_2`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `deleteNok 2 1` - remove the 2nd Next of Kin from the 1st Participant
+* `deleteNok 2 1` - Removes the 2nd Next-of-Kin from the 1st Participant.
 
 <br>![result for 'deleteNok 1 2'](images/deleteNokSecondFirstResult.png)
 
@@ -328,7 +328,7 @@ Format: `deleteEvent INDEX`
 Example Usage:
 * `delete 5` - Deletes the 5th Event in the displayed Event list.
 * `listEvents` followed by `deleteEvent 2` - Deletes the 2nd Event in the full Event list.
-  Find out more about `listEvents` [here](#locating-events-by-name-findevent).
+  Find out more about `listEvents` [here](#listing-all-events-listevents).
 * `filterEvents d/2021-09-18` followed by `deleteEvent 1` - Deletes the 1st Event in the results of the `filterEvents` 
   command. Find out more about `filterEvents` [here](#filtering-events-by-time-filterevents).
 
@@ -428,7 +428,7 @@ Format: `showDetails INDEX`
 Example Usage:
 * `showDetails 1` - Displays the details of the 1st Event in the displayed Event list.
 * `listEvents` followed by `showDetails 2` - Displays the details of the 2nd Event in the full Event list.
-  Find out more about `listEvents` [here](#locating-events-by-name-findevent).
+  Find out more about `listEvents` [here](#listing-all-events-listevents).
 * `filterEvents d/2021-09-18` followed by `showDetails 1` - Displays the details of the 1st Event in the results of 
   the `filterEvents` command. Find out more about `filterEvents` [here](#filtering-events-by-time-filterevents).
 
@@ -512,12 +512,16 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the data
+--------------------------------------------------------------------------------------------------------------------
+
+## Saving the data
 
 Managera saves data in the hard disk automatically after any command that changes the data. 
 There is no need to save manually.
 
-### Editing the data file
+--------------------------------------------------------------------------------------------------------------------
+
+## Editing the data file
 
 Managera's data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to 
 update data directly by editing that data file.
