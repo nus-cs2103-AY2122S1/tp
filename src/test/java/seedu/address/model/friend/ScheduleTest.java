@@ -15,9 +15,9 @@ class ScheduleTest {
         Schedule schedule = new Schedule();
         // Invalid day numbers (Only from 1 - 7 allowed)
         assertThrows(InvalidDayTimeException.class, () ->
-                schedule.setScheduleDay(0, "0000", "1200", true));
+                schedule.setScheduleDay(0, "0", "12", true));
         assertThrows(InvalidDayTimeException.class, () ->
-                schedule.setScheduleDay(8, "0000", "1200", true));
+                schedule.setScheduleDay(8, "0", "12", true));
     }
 
     @Test
@@ -31,7 +31,7 @@ class ScheduleTest {
         assertTrue(scheduleOne.equals(scheduleTwo));
 
         // Different day schedules
-        scheduleOne.setScheduleDay(1, "0000", "1200", true);
+        scheduleOne.setScheduleDay(1, "0", "12", true);
         assertFalse(scheduleOne.equals(scheduleTwo));
     }
 

@@ -20,32 +20,32 @@ class DayTest {
         Day day = new Day(DayOfWeek.of(1));
 
         // Valid timeslots
-        day.setTime("0200", "1200", true);
-        day.setTime("0800", "2300", false);
+        day.setTime("2", "12", true);
+        day.setTime("8", "23", false);
         // Edge case of endTime being 0000
-        day.setTime("1000", "0000", true);
-        day.setTime("0000", "0000", false);
+        day.setTime("10", "24", true);
+        day.setTime("0", "24", false);
 
         //Invalid timeslots
-        assertThrows(InvalidDayTimeException.class, () -> day.setTime("01", "02", true));
-        assertThrows(InvalidDayTimeException.class, () -> day.setTime("avb", "200!", true));
+        assertThrows(InvalidDayTimeException.class, () -> day.setTime("0100", "0200", true));
+        assertThrows(InvalidDayTimeException.class, () -> day.setTime("avb", "0200", true));
         // End time before start time
-        assertThrows(InvalidDayTimeException.class, () -> day.setTime("1200", "1000", true));
+        assertThrows(InvalidDayTimeException.class, () -> day.setTime("12", "10", true));
         // Same time
-        assertThrows(InvalidDayTimeException.class, () -> day.setTime("1200", "1200", true));
+        assertThrows(InvalidDayTimeException.class, () -> day.setTime("12", "12", true));
     }
 
     @Test
     void getGroupedTimeSlots() throws InvalidDayTimeException {
         Day day = new Day(DayOfWeek.of(1));
-        day.setTime("0300", "1800", true);
-        day.setTime("0900", "0000", true);
+        day.setTime("3", "18", true);
+        day.setTime("9", "24", true);
         ArrayList<String[]> expected = new ArrayList<>();
         // Timeslots combined to 0300 - 0000
         expected.add(new String[]{"0300", "0000"});
         assertArrayEquals(expected.toArray(), day.getGroupedTimeSlots().toArray());
 
-        day.setTime("1000", "1200", false);
+        day.setTime("10", "12", false);
         expected = new ArrayList<>();
         // Timeslots split into two slots 0300 - 1000 and 1200 - 0000
         expected.add(new String[]{"0300", "1000"});
@@ -65,7 +65,7 @@ class DayTest {
         // Different day
         assertFalse(monday.equals(tuesday));
         // Same day but different free timeslots
-        mondayTwo.setTime("0300", "1800", true);
+        mondayTwo.setTime("3", "18", true);
         assertFalse(monday.equals(mondayTwo));
     }
 

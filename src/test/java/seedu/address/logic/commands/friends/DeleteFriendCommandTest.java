@@ -34,7 +34,7 @@ public class DeleteFriendCommandTest {
         Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
 
-        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_FRIEND_SUCCESS,
                 friendToDelete.getFriendId());
 
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
@@ -55,7 +55,7 @@ public class DeleteFriendCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_ITEM);
         Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
-        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_FRIEND_SUCCESS,
                 friendToDelete.getFriendId());
         Model expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
 

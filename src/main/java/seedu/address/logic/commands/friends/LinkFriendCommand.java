@@ -73,7 +73,8 @@ public class LinkFriendCommand extends Command {
      * Generates a success message referencing the friend and the games linked to him.
      */
     public String generateSuccessMessage(Friend friend) {
-        return friend.getFriendId() + " is now linked to " + gameId + " with username " + userName + ".";
+        return "Linked friend to game - FRIEND_ID: " + friend.getFriendId()
+                + ", GAME_ID: " + gameId + ", IN_GAME_USERNAME: " + userName;
     }
 
     @Override

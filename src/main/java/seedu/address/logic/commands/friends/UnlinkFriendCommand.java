@@ -64,7 +64,7 @@ public class UnlinkFriendCommand extends Command {
      * Generates a success message referencing the friend and the games unlinked.
      */
     public String generateSuccessMessage(Friend friend) {
-        return friend.getFriendId() + " is now unlinked to " + gameId + ".";
+        return "Unlinked friend from game - FRIEND_ID: " + friend.getFriendId() + ", GAME_ID: " + gameId;
     }
 
     @Override

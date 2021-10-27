@@ -14,7 +14,7 @@ import seedu.address.model.friend.exceptions.InvalidDayTimeException;
  */
 public class Schedule {
 
-    public static final String MESSAGE_INVALID_SCHEDULE = "Schedule must contain 7 valid days,from Monday to Sunday.";
+    public static final String MESSAGE_INVALID_SCHEDULE = "Schedule must contain 7 valid days, from Monday to Sunday.";
 
     private final ArrayList<Day> schedule;
 

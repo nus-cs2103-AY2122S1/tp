@@ -19,7 +19,7 @@ public class AddFriendCommand extends Command {
             + CMD_FRIEND + " " + FLAG_ADD + "FRIEND_ID [" + FLAG_FRIEND_NAME + "NAME]\n"
             + "Example: "
             + CMD_FRIEND + " " + FLAG_ADD + "myfeely923 " + FLAG_FRIEND_NAME + "Yu Zher";
-    public static final String MESSAGE_SUCCESS_ADD_FRIEND = "New friend added - %1$s";
+    public static final String MESSAGE_SUCCESS_ADD_FRIEND = "Added friend - FRIEND_ID: %1$s";
     public static final String MESSAGE_DUPLICATE_FRIEND_ID = "A friend with the same FRIEND_ID already exists in "
             + "the friends list.";
 
@@ -44,7 +44,8 @@ public class AddFriendCommand extends Command {
         }
 
         model.addFriend(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS_ADD_FRIEND, toAdd), CommandType.FRIEND_ADD);
+        return new CommandResult(String.format(MESSAGE_SUCCESS_ADD_FRIEND,
+                toAdd.getFriendId()), CommandType.FRIEND_ADD);
     }
 
     @Override

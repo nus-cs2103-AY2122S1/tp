@@ -169,6 +169,37 @@ Snapshot:
 ![Ui after assigning skill value](images/ui-snapshots/friend-skill-success.png)
 <br><ins>gitGud after assigning skill value to game linked to friend</ins>
 
+#### Scheduling a friend: `friend --schedule`
+
+Schedules an existing friend by updating their schedule to indicate the time periods they are free or busy.
+* gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
+
+Format: `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the schedule:**<br>
+
+New friends start off which a schedule with all periods marked as busy.
+
+</div>  
+
+* `FRIEND_ID` must belong to an existing friend in gitGud
+* `START_HOUR` and `END_HOUR` must be an integer between 0 and 24 inclusive, and represents the hour of the day.
+  * `END_HOUR` must be strictly after `START_HOUR`.
+  * For example, `START_HOUR` = 2 and `END_HOUR` = 20 represents the time period from the 2nd to the 20th hour of the day.
+* `DAY` must be an integer between 1 and 7 inclusive, with each day representing a day of the week from Monday to Sunday.
+* `IS_FREE` is used to mark the period as a free or busy period, with `1` meaning free and `0` meaning busy
+
+Examples:
+* `friend --schedule Draco -p 18 22 2 -f 1` Schedules "Draco" as free from 18th to 22nd hour, 1800 - 2200 on Tuesday.
+* `friend --schedule Draco -p 12 24 7 -f 0` Schedules "Draco" as busy from 12th to 24th hour, 1200 - 0000 (midnight) on Sunday.
+
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-schedule.png)
+<br><ins>gitGud after scheduling a friend's availability</ins>
+
 #### Getting a single friend's complete data: `friend --get`
 
 Displays a particular friend's complete data using gitGud’s **unique** friend identifier `FRIEND_ID`.
@@ -192,13 +223,13 @@ Snapshot:
 <br><ins>gitGud after getting a friend from friends list</ins>
 
 
-#### Listing multiple friends data: `friend --list`
+#### Listing/Filtering multiple friends data: `friend --list`
 
 Lists all friends stored in gitGud whose friend id contains any of the given keywords.
 
 Format: `friend --list [KEYWORD]`
 
-* If `KEYWORD` is left empty, all friends stored in gitGud will be listed
+* If `KEYWORD` is left empty, **all friends** stored in gitGud will be listed
 * The filter keyword is case insensitive e.g `Tau_bar` will match `tau_bar`
 * Only the `FRIEND_ID` of friends is filtered
 * Partial matches will be displayed e.g. `tau` will match `tau_bar`
@@ -211,36 +242,6 @@ Snapshot:
 
 ![Ui](images/ui-snapshots/friend-list.png)
 <br><ins>gitGud after listing friends with the keyword</ins>
-
-#### Scheduling a friend: `friend --schedule`
-
-Schedules an existing friend by updating their schedule to indicate the time periods they are free or busy.
-* gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
-
-Format: `friend --schedule FRIEND_ID -p START_TIME END_TIME DAY -f IS_FREE`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the schedule:**<br>
-
-New friends start off which a schedule with all periods marked as busy.
-
-</div>  
-
-* `FRIEND_ID` must belong to an existing friend in gitGud
-* `START_HOUR` and `END_HOUR` are written in 24 Hour notation and must be whole hours (e.g. 0230 and 1201 are not accepted)
-* `END_HOUR` must be after `START_HOUR`, the only exception is if `END_HOUR` is `0000` where it is taken as midnight.
-* `DAY` must be an integer between 1 and 7 inclusive, with each day representing a day of the week from Monday to Sunday.
-* `IS_FREE` is used to mark the period as a free or busy period, with `1` meaning free and `0` meaning busy
-
-Examples:
-* `friend --schedule Draco -p 1800 2200 2 -f 1` Schedules "Draco" as free from 1800 to 2200 on Tuesday.
-* `friend --schedule Draco -p 1200 0000 7 -f 0` Schedules "Draco" as busy from 1200 to 0000 (midnight) on Sunday.
-
-Snapshot:
-
-![Ui](images/ui-snapshots/friend-schedule.png)
-<br><ins>gitGud after scheduling a friend's availability</ins>
 
 ### Game commands
 
@@ -300,13 +301,13 @@ Snapshot:
 ![Ui](images/ui-snapshots/game-get.png)
 <br><ins>gitGud after getting a game</ins>
 
-#### Listing multiple games data: `game --list`
+#### Listing/Filtering multiple games data: `game --list`
 
 Lists all games stored in gitGud whose game id contains any of the given keywords.
 
 Format: `game --list [KEYWORD]`
 
-* If `KEYWORD` is left empty, all games stored in gitGud will be listed
+* If `KEYWORD` is left empty, **all games** stored in gitGud will be listed
 * The filter keyword is case insensitive e.g `valorant` will match `Valorant`
 * Only the `GAME_ID` of games is filtered
 * Partial matches will be displayed e.g. `Valo` will match `Valorant`
@@ -367,13 +368,13 @@ Action | Format, Examples
 **Link game and friend** | `friend --link FRIEND_ID -g GAME_ID -u IN_GAME_USERNAME`<br> e.g., `friend --link Draco -g Valorant -u taufiq007`
 **Unlink game and friend** | `friend --unlink FRIEND_ID -g GAME_ID` <br> e.g., `friend --unlink Draco -g DOTA`
 **Add skill value to linked game** | `friend --skill FRIEND_ID -g GAME_ID -v SKILL_VALUE` <br> e.g.,`friend --skill Draco -g Valorant -v 7`
+**Schedule Friend** | `friend --schedule FRIEND_ID -p START_HOUR END_HOUR DAY -f IS_FREE`<br> e.g., `friend --schedule Draco -p 18 22 2 -f 1`
 **Get friend** | `friend --get FRIEND_ID`<br> e.g., `friend --get Draco`
-**List Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
-**Schedule Friend** | `friend --schedule FRIEND_ID -p START_TIME END_TIME DAY -f IS_FREE`<br> e.g., `friend --schedule Draco -p 1800 2200 2 -f 1`
+**List/Filter Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
 **Add game** | `game --add GAME_ID` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
 **Delete game** | `game --delete GAME_ID` <br> e.g., `game --delete Valorant`
 **Get game** | `game --get GAME_ID`<br> e.g., `game --get Valorant`
-**List Games** | `game --list [KEYWORD]`<br> e.g., `game --list`, `game --list Valorant`
+**List/Filter Games** | `game --list [KEYWORD]`<br> e.g., `game --list`, `game --list Valorant`
 **Viewing Help** | `help`
 **Clearing friends and games lists** | `clear`
 **Exit program** | `exit`

@@ -13,7 +13,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
-    public static final String MESSAGE_SUCCESS = "gitGud friends and games list have been cleared!";
+    public static final String MESSAGE_SUCCESS = "Cleared gitGud friends and games list";
 
 
     @Override

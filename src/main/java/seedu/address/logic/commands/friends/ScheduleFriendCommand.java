@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
 
+import java.time.DayOfWeek;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -29,8 +30,9 @@ public class ScheduleFriendCommand extends Command {
             + CMD_FRIEND + " " + FLAG_SCHEDULE + "FRIEND_ID " + FLAG_PERIOD + "START_HOUR END_HOUR DAY "
             + FLAG_FREE + "IS_FREE\n"
             + "Example: "
-            + CMD_FRIEND + " " + FLAG_SCHEDULE + "Draco " + FLAG_PERIOD + "0800 0900 3 " + FLAG_FREE + "1\n";
-    public static final String MESSAGE_SCHEDULE_FRIEND_SUCCESS = "Scheduled Friend: %1$s";
+            + CMD_FRIEND + " " + FLAG_SCHEDULE + "Draco " + FLAG_PERIOD + "8 9 3 " + FLAG_FREE + "1\n";
+    public static final String MESSAGE_SCHEDULE_FRIEND_SUCCESS = "Scheduled Friend - FRIEND_ID: %1$s, START_HOUR: %2$s "
+            + ", END_HOUR: %3$s, DAY: %4$s, IS_FREE: %5$s";
 
     private FriendId friendToScheduleId;
     private int day;
@@ -83,8 +85,8 @@ public class ScheduleFriendCommand extends Command {
             Friend friendToSchedule = model.getFriend(friendToScheduleId);
             Friend scheduledFriend = createScheduledFriend(friendToSchedule);
             model.setFriend(friendToSchedule, scheduledFriend);
-            return new CommandResult(String.format(MESSAGE_SCHEDULE_FRIEND_SUCCESS,
-                    friendToScheduleId), CommandType.FRIEND_SCHEDULE);
+            return new CommandResult(String.format(MESSAGE_SCHEDULE_FRIEND_SUCCESS, friendToScheduleId, startTime,
+                    endTime, DayOfWeek.of(day).name(), isFree), CommandType.FRIEND_SCHEDULE);
         } catch (InvalidDayTimeException e) {
             throw new CommandException(String.format(MESSAGE_INVALID_DAY_TIME_FORMAT, e.getMessage()));
         }

@@ -18,7 +18,7 @@ public class AddGameCommand extends Command {
             + CMD_GAME + " " + FLAG_ADD + "GAME_ID\n"
             + "Example: "
             + CMD_GAME + " " + FLAG_ADD + "Valorant";
-    public static final String MESSAGE_SUCCESS_ADD_GAME = "New game added - %1$s";
+    public static final String MESSAGE_SUCCESS_ADD_GAME = "Added game - GAME_ID: %1$s";
     public static final String MESSAGE_DUPLICATE_GAME = "A game with the same GAME_ID"
             + " already exists in the gitGud games list.";
 

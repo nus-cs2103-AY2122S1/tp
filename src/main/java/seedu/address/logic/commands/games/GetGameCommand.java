@@ -22,7 +22,7 @@ public class GetGameCommand extends Command {
             + CMD_GAME + " " + FLAG_GET + "GAME_ID\n"
             + "Example: "
             + CMD_GAME + " " + FLAG_GET + "Minecraft";
-    public static final String MESSAGE_GAME_FULL_INFORMATION = "Showing the complete information of %1$s";
+    public static final String MESSAGE_GAME_FULL_INFORMATION = "Retrieved full game information - GAME_ID: %1$s";
 
     private final GameId gameId;
 
