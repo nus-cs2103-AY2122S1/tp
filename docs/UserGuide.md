@@ -290,7 +290,8 @@ Format: `tag -d INDEX t/TAG`
 
 
 Examples:
-`tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
+* `tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
+![deletePatientTag](images/deletePatientTag.png)
 
 ---
 
@@ -331,8 +332,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH]
   specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy dob/20/07/1964 Crower t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower dob/20/07/1964 t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
+* After executing `edit 2 n/Betsy Crower dob/20/07/1964 t/`:
+![editDoctor](images/editDoctor.png)
 
 ### Adding a remark to a doctor's information : `remark` <a name="remark-doctor"/>
 
@@ -419,6 +422,27 @@ Examples:
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
+Edits an existing appointment in the appointment list.
+
+Format: `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [dur/MINUTES] [r/REMARK]`
+
+* Edits the appointment at the specified `INDEX`. The index refers to the index number shown in the displayed appointment list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* `PATIENT_INDEX` refers to the index of the patient in the displayed patient list.
+* `DOCTOR_INDEX` refers to the index of the doctor in the displayed doctor list.
+* `START_DATE_TIME` accepts a format of `DD/MM/YYYY HH:MM`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
+</div>
+
+Examples:
+* `appt -e 1 p/2 r/Blood test` Edits the patient and remark of the 1st appointment to be the `second patient` in the patient list and `Blood test` respectively.
+
+![editAppointment](images/editAppointment.png)
+
 ### Deleting an appointment: `appt -d` <a name="delete-appointment"/>
 
 ### Filtering all appointments: `appt -f` <a name="find-appointments"/>
@@ -466,7 +490,7 @@ Action | Format, Examples
 **Delete appointment** | 
 **Delete patient/doctor** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `tag -d id/INDEX t/TAG`<br> e.g, `tag -d id/1 t/Unvaccinated`
-**Edit appointment** | 
+**Edit appointment** | `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [dur/MINUTES] [r/REMARK]`<br> e.g., `appt -e 1 p/2 r/Blood test`
 **Edit doctor** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​`<br> e.g., `edit 2 p/98989898 e/john@example.com`
 **Edit patient** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​ [risk/RISK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Exit** | `exit`
