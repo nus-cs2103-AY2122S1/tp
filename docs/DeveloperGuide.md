@@ -217,28 +217,12 @@ The figure below shows the sequence diagram for adding a lesson to a student.
 ![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
 *Figure I.3.3.2: Continued Sequence Diagram of Lesson Add Command*
 
-The following snippet shows how the `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in
-the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd`
-will not be added if there is an existing lesson with a clashing date and timeslot.
+The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
+by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
+existing lesson with a clashing date and timeslot.
 
-```java
-public class LessonAddCommand extends UndoableCommand {
-    @Override
-    public CommandResult executeUndoableCommand() throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        personBeforeLessonAdd = CommandUtil.getPerson(lastShownList, index);
-        Set<Lesson> lessons = personBeforeLessonAdd.getLessons();
-        Set<Lesson> updatedLessons = createUpdatedLessons(lessons, toAdd);
-        personAfterLessonAdd = PersonUtil.createdEditedPerson(personBeforeLessonAdd, updatedLessons);
-
-        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
-        
-        // ... display updated TAB and command result message
-    }
-}
-```
+![LessonAddActivityDiagram](images/LessonAddAcitivityDiagram.png)
+*Figure I.3.3.3
 
 The lesson added will be displayed in the `LessonListPanel` in TAB.
 
