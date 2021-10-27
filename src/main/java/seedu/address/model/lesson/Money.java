@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import java.text.DecimalFormat;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -43,9 +45,7 @@ public class Money {
      */
     public static String formatValue(String value) {
         String formattedValue = value;
-        if (formattedValue.startsWith("0")) { // remove all leading zeroes
-            formattedValue = formattedValue.replaceFirst("^0+", "");
-        }
+
         if (formattedValue.startsWith(".")) { // prefix missing zero that was removed
             formattedValue = "0" + formattedValue;
         }
