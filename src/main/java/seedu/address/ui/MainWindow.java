@@ -1,19 +1,28 @@
 package seedu.address.ui;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.Chart;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ShowCommand;
@@ -215,6 +224,9 @@ public class MainWindow extends UiPart<Stage> {
                 Chart chart = commandResult.getChart();
                 assert chart != null;
                 graphDisplay.setChart(chart);
+                if (commandResult.hasSavePath()) {
+                    saveGraph(commandResult.getSavePath());
+                }
             }
 
             if (commandResult.isShowHelp()) {
@@ -235,5 +247,32 @@ public class MainWindow extends UiPart<Stage> {
 
     public void loadDividerRatio() {
         splitPane.setDividerPositions(divideRatio);
+    }
+
+    private void saveGraph(Path savePath) {
+        assert savePath != null;
+        WritableImage img = graphDisplayPlaceholder.snapshot(new SnapshotParameters(), null);
+        int width = (int) img.getWidth();
+        int height = (int) img.getHeight();
+
+        PixelReader pixelReader = img.getPixelReader();
+
+        BufferedImage bimg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                bimg.setRGB(i, j, pixelReader.getArgb(i, j));
+            }
+        }
+
+        File file = FileUtil.getAppEnclosingFolder().resolve(savePath).toFile();
+
+        try {
+            ImageIO.write(bimg, "png", file);
+        } catch (IOException e) {
+            resultDisplay.setFeedbackToUser("Graph failed to save");
+            return;
+        }
+
+        resultDisplay.setFeedbackToUser("Graph saved successfully");
     }
 }
