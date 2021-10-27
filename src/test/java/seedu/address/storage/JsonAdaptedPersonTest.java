@@ -37,10 +37,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedUniqueId> VALID_ASSIGNED_TASK_IDS = BENSON.getAssignedTaskIds()
-            .stream().map(JsonAdaptedUniqueId::new).collect(Collectors.toList());
-    private static final List<JsonAdaptedUniqueId> VALID_ASSIGNED_GROUP_IDS = BENSON.getAssignedGroupIds()
-            .stream().map(JsonAdaptedUniqueId::new).collect(Collectors.toList());
+    private static final List<JsonAdaptedUniqueId> VALID_ASSIGNED_TASK_IDS = new ArrayList<>();
+    private static final List<JsonAdaptedUniqueId> VALID_ASSIGNED_GROUP_IDS = new ArrayList<>();
     private static final List<JsonAdaptedLesson> VALID_LESSONS = BENSON.getLessonsList()
             .getLessons()
             .stream().map(JsonAdaptedLesson::new)

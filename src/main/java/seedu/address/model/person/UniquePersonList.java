@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
