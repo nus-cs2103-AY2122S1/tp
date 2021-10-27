@@ -1,10 +1,10 @@
 package safeforhall.logic.parser;
 
-import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 
 import org.junit.jupiter.api.Test;
 
+import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.ImportCommand;
 
 public class ImportCommandParserTest {
@@ -13,8 +13,7 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, " ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " ", ExportCommand.MESSAGE_CONSTRAINTS);
     }
 
     @Test

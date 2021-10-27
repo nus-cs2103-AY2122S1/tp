@@ -1,7 +1,6 @@
 package safeforhall.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -15,13 +14,8 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      */
     public ExportCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
-        }
+        String fileName = ParserUtil.parseFileName(args);
 
-        String[] givenKeywords = trimmedArgs.split("\\s+");
-
-        return new ExportCommand(givenKeywords[0]);
+        return new ExportCommand(fileName);
     }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
+import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.EventDate;
@@ -267,5 +268,23 @@ public class ParserUtil {
             throw new ParseException(ResidentList.MESSAGE_CONSTRAINTS);
         }
         return new ResidentList(trimmedInformation);
+    }
+
+    /**
+     * Parse a {@code String fileName} into a {@code String fileName}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Ensures that fileName is a single word with no whitespace.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+
+        if (trimmedFileName.isEmpty() || trimmedFileName.contains(" ")) {
+            throw new ParseException(ExportCommand.MESSAGE_CONSTRAINTS);
+        }
+
+        return trimmedFileName;
     }
 }

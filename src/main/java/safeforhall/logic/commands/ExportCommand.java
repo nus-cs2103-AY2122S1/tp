@@ -17,13 +17,15 @@ import safeforhall.model.person.Person;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
+    public static final String PARAMETERS = "FILE_NAME";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the current list of residents'"
             + "email addresses into a csv file. \n"
-            + "Parameters: FILENAME \n"
+            + "Parameters: " + PARAMETERS + "\n"
             + "Example: " + COMMAND_WORD + "safeforhall";
 
     public static final String MESSAGE_SUCCESS = "Exported residents' email to csv file";
     public static final String MESSAGE_DUPLICATE_FILE_ERROR = "This filename already exists";
+    public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
 
     private final String filename;
 

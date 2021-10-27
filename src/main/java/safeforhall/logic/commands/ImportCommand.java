@@ -33,6 +33,7 @@ import safeforhall.model.person.VaccStatus;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
+    public static final String PARAMETERS = "NAME_OF_CSV";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports resident information from the specified csv "
             + "file located within the /data folder\n"
             + "Note: \n"
@@ -41,7 +42,7 @@ public class ImportCommand extends Command {
             + "     2. The first row will be discarded as column headings\n"
             + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n"
             + "Parameters: "
-            + "NAME_OF_CSV\n"
+            + PARAMETERS + "\n"
             + "Example: " + COMMAND_WORD + " "
             + "safeforhall";
 

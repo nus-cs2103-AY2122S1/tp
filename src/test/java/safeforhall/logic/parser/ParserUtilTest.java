@@ -40,6 +40,7 @@ public class ParserUtilTest {
     private static final String INVALID_EVENTTIME = "time";
     private static final String INVALID_VENUE = " ";
     private static final String INVALID_CAPACITY = "CAP5.0";
+    private static final String INVALID_FILENAME = "file name";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -57,7 +58,9 @@ public class ParserUtilTest {
     private static final String VALID_EVENTTIME = "0600";
     private static final String VALID_VENUE = "NUS field";
     private static final String VALID_CAPACITY = "5";
+    private static final String VALID_FILENAME = "filename";
 
+    private static final String EMPTY_STRING = "";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -390,5 +393,26 @@ public class ParserUtilTest {
         String capacityWithWhitespace = WHITESPACE + VALID_CAPACITY + WHITESPACE;
         Capacity expectedCapacity = new Capacity(VALID_CAPACITY);
         assertEquals(expectedCapacity, ParserUtil.parseCapacity(capacityWithWhitespace));
+    }
+
+    @Test
+    public void parseFileName_emptyValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFileName(EMPTY_STRING));
+    }
+
+    @Test
+    public void parseFileName_null_throwsNullPointerException() throws Exception {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFileName((String) null));
+    }
+
+    @Test
+    public void parseFileName_validValue_returnsString() throws Exception {
+        String expectedFileName = VALID_FILENAME;
+        assertEquals(expectedFileName, ParserUtil.parseFileName(VALID_FILENAME));
+    }
+
+    @Test
+    public void parseFileName_validValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFileName(INVALID_FILENAME));
     }
 }
