@@ -29,7 +29,7 @@ public class ScheduleFriendCommand extends Command {
             + CMD_FRIEND + " " + FLAG_SCHEDULE + "FRIEND_ID " + FLAG_PERIOD + "START_HOUR END_HOUR DAY "
             + FLAG_FREE + "IS_FREE\n"
             + "Example: "
-            + CMD_FRIEND + " " + FLAG_SCHEDULE + "Draco " + FLAG_PERIOD + "0800 0900 3 " + FLAG_FREE + "1\n";
+            + CMD_FRIEND + " " + FLAG_SCHEDULE + "Draco " + FLAG_PERIOD + "8 9 3 " + FLAG_FREE + "1\n";
     public static final String MESSAGE_SCHEDULE_FRIEND_SUCCESS = "Scheduled Friend: %1$s";
 
     private FriendId friendToScheduleId;

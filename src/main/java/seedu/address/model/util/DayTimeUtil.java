@@ -2,7 +2,6 @@ package seedu.address.model.util;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
@@ -42,14 +41,14 @@ public class DayTimeUtil {
      */
     public static int getIndexFromTime(String time) throws InvalidDayTimeException {
         requireNonNull(time);
-
-        final Matcher matcher = TIME_FORMAT.matcher(time.trim());
-        if (!matcher.matches()) {
-            throw new InvalidDayTimeException("Invalid time string input");
+        try {
+            int hour = Integer.parseInt(time);
+            if (hour < 0 || hour > 24) {
+                throw new InvalidDayTimeException("Invalid hour value, must be between 0 to 24 inclusive");
+            }
+            return hour;
+        } catch (NumberFormatException e) {
+            throw new InvalidDayTimeException("Invalid hour value");
         }
-        String indexTime = time.trim().substring(0, 2);
-        return Integer.parseInt(indexTime);
     }
-
-
 }

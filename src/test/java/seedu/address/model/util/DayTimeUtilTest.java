@@ -24,19 +24,14 @@ class DayTimeUtilTest {
     @Test
     void getIndexFromTime() throws InvalidDayTimeException {
         // Valid time string
-        assertEquals(0, DayTimeUtil.getIndexFromTime("0000"));
-        assertEquals(9, DayTimeUtil.getIndexFromTime("0900"));
-        assertEquals(23, DayTimeUtil.getIndexFromTime("2300"));
+        assertEquals(0, DayTimeUtil.getIndexFromTime("0"));
+        assertEquals(9, DayTimeUtil.getIndexFromTime("9"));
+        assertEquals(23, DayTimeUtil.getIndexFromTime("23"));
 
         // Invalid time string
         assertThrows(NullPointerException.class, () -> DayTimeUtil.getIndexFromTime(null));
-        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime(""));
-        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("20"));
-        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("22000"));
-        // Invalid time stamp
-        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("2400"));
-        // Invalid time containing minutes
-        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("2202"));
-        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("2220"));
+        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("   "));
+        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("-1"));
+        assertThrows(InvalidDayTimeException.class, () -> DayTimeUtil.getIndexFromTime("25"));
     }
 }
