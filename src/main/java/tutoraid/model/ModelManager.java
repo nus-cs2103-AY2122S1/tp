@@ -148,6 +148,16 @@ public class ModelManager implements Model {
         }
     }
 
+    @Override
+    public void deleteLessonFromStudents(Lesson lesson) {
+        for (Student student : filteredStudents) {
+            if (student.hasLesson(lesson)) {
+                student.getLessons().deleteLesson(lesson);
+            }
+        }
+        studentBook.refreshStudentBook();
+    }
+
     //=========== LessonBook ================================================================================
 
     @Override
@@ -182,8 +192,18 @@ public class ModelManager implements Model {
         requireNonNull(targetLesson);
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
         filteredStudents.setPredicate(student ->
-            targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
+                targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
         UiManager.showViewWindow();
+    }
+
+    @Override
+    public void deleteStudentFromLessons(Student student) {
+        for (Lesson lesson : filteredLessons) {
+            if (lesson.containsStudent(student)) {
+                lesson.removeStudent(student);
+            }
+        }
+        lessonBook.refreshLessonBook();
     }
 
     //=========== Filtered Student List Accessors =============================================================

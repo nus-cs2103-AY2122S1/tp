@@ -170,7 +170,7 @@ public class Lesson {
 
         if (students != null) {
             builder.append("; Lesson's students: ")
-                    .append(getStudents().getAllStudentNamesAsStringArrayList());
+                    .append(getStudents());
         }
 
         return builder.toString();

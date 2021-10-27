@@ -92,6 +92,13 @@ public class Lessons {
     }
 
     /**
+     * Returns boolean if lesson is in lessons or not.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        return lessons.contains(lesson.getLessonName());
+    }
+
+    /**
      * Returns a string Array that contains all the lesson names in the correct order.
      */
     public ArrayList<String> getAllLessonNamesAsStringArrayList() {

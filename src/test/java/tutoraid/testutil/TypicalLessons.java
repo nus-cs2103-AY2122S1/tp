@@ -29,6 +29,7 @@ public class TypicalLessons {
             .withParentPhone("94351253")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<String>(Arrays.asList("Maths 1", "Science 1")))
             .build();
 
     public static final Lesson MATHS_ONE = new LessonBuilder()

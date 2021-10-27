@@ -123,6 +123,16 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
+     * Deletes lesson from student(s).
+     */
+    void deleteLessonFromStudents(Lesson lesson);
+
+    /**
+     * Deletes student from lesson(s).
+     */
+    void deleteStudentFromLessons(Student student);
+
+    /**
      * Views the given lesson.
      * {@code lesson} must exist in the lesson book.
      */
