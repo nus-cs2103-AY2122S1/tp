@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -86,7 +87,7 @@ public interface Model {
 
     /**
      * Deletes the given group.
-     * The group must exist in Classmate.
+     * The TutorialGroup must exist in Classmate.
      */
     void deleteTutorialGroup(TutorialGroup target);
 
@@ -109,6 +110,11 @@ public interface Model {
     void addTutorialGroup(TutorialGroup tutorialGroup);
 
     /**
+     * Sorts the tutorial groups.
+     */
+    void sortTutorialGroups();
+
+    /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the ClassMATE.
      * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
@@ -118,11 +124,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns an unmodifiable view of the unfiltered student list */
+    ObservableList<Student> getUnfilteredStudentList();
+
     /** Returns unmodifiable view of filtered Tutorial ClassList */
     ObservableList<TutorialClass> getFilteredTutorialClassList();
-
-    /** Returns unmodifiable view of filtered Tutorial GroupList */
-    ObservableList<TutorialGroup> getFilteredTutorialGroupList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
@@ -130,7 +136,8 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
+    void updateUnfilteredStudentList(List<Student> students);
+
     void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate);
 
-    void updateFilteredTutorialGroupList(Predicate<TutorialGroup> predicate);
 }
