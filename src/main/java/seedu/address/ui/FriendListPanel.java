@@ -27,13 +27,13 @@ public class FriendListPanel extends UiPart<Region> {
     public FriendListPanel(ObservableList<Friend> friendList) {
         super(FXML);
         personListView.setItems(friendList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new FriendListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Friend} using a {@code FriendCard}.
      */
-    class PersonListViewCell extends ListCell<Friend> {
+    class FriendListViewCell extends ListCell<Friend> {
         @Override
         protected void updateItem(Friend friend, boolean empty) {
             super.updateItem(friend, empty);
