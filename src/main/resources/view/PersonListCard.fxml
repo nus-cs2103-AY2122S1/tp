@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" style="-fx-border-color: #000000; -fx-border-width: 1 1 1 1; -fx-border-radius: 5;">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -24,7 +24,10 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <VBox>
+          <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+          <Label fx:id="room" text="\$first" styleClass="cell_small_label" />
+        </VBox>
       </HBox>
       <VBox fx:id="labelBoxInterior" styleClass="cell_small_label">
       </VBox>
