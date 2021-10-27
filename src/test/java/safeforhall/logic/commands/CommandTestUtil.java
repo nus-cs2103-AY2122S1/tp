@@ -63,10 +63,14 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_FOOTBALL_TRAINING = "Football Training";
     public static final String VALID_NAME_SWIM_TRAINING = "Swim Training";
+    public static final String VALID_NAME_VOLLEYBALL = "Volleyball";
+    public static final String VALID_DATE_VOLLEYBALL = "12-10-2021";
     public static final String VALID_DATE_FOOTBALL_TRAINING = "20-10-2021";
     public static final String VALID_DATE_SWIM_TRAINING = "19-10-2021";
+    public static final String VALID_VENUE_BASKETBALL = "basketball court";
     public static final String VALID_VENUE_FOOTBALL_TRAINING = "Field";
     public static final String VALID_VENUE_SWIM_TRAINING = "Pool";
+    public static final String VALID_CAPACITY_BASKETBALL = "5";
     public static final String VALID_CAPACITY_FOOTBALL_TRAINING = "20";
     public static final String VALID_CAPACITY_SWIM_TRAINING = "15";
 
@@ -163,7 +167,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -221,5 +225,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredEventList().size());
     }
-
 }
