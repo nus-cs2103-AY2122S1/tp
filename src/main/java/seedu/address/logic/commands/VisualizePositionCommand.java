@@ -15,7 +15,9 @@ import seedu.address.model.position.exceptions.PositionNotFoundException;
 import seedu.address.ui.PieChartDisplayer;
 import seedu.address.ui.PositionPieChartFactory;
 
-// Adds a position to MrTechRecruiter.
+/*
+ * Displays a pie chart for a position in MrTechRecruiter.
+ */
 public class VisualizePositionCommand extends Command {
 
     public static final String COMMAND_WORD = "visualize";
