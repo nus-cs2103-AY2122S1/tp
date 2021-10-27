@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -99,6 +100,8 @@ public interface Model {
      * Returns the Calendar.
      */
     Calendar getCalendar();
+
+    ObservableList<Entry<Lesson>> getUpcomingLessons();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

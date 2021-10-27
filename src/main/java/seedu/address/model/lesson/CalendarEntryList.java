@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +16,8 @@ import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.LessonNotFoundException;
@@ -26,12 +31,15 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * However, the removal of a lesson uses Person#equals(Object) to ensure that the person with exactly the same fields
  * will be removed.
  *
- * @author Chesterwongz
+ * @author Chesterwongz, with add-ons from Xiaoyunnn and Lingshanng.
  * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
+    private static final long TWO_DAY_DIFF = 48;
+
     private final Calendar calendar = new Calendar();
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
+    private final ObservableList<Entry<Lesson>> upcomingLessons = FXCollections.observableArrayList();
 
     public Calendar getCalendar() {
         return calendar;
@@ -40,16 +48,25 @@ public class CalendarEntryList {
     private void add(Entry<Lesson> calendarEntry) {
         calendar.addEntry(calendarEntry);
         entryList.add(calendarEntry);
+        Lesson lesson = calendarEntry.getUserObject();
+        if (isUpcoming(lesson.getDisplayEndLocalDateTime())
+                && upcomingLessons.stream().noneMatch(entry -> entry.getUserObject().equals(lesson))) {
+            upcomingLessons.add(calendarEntry);
+            sortUpcomingLessons();
+        }
     }
 
     private void remove(Entry<Lesson> calendarEntry) {
         calendar.removeEntry(calendarEntry);
         entryList.remove(calendarEntry);
+        upcomingLessons.remove(calendarEntry);
+        sortUpcomingLessons();
     }
 
     private void clear() {
         calendar.clear();
         entryList.clear();
+        upcomingLessons.clear();
     }
 
     /**
@@ -88,10 +105,9 @@ public class CalendarEntryList {
      * @return True if there is a clash in lesson timing, false otherwise.
      */
     public boolean hasClashes(Lesson toCheck, Lesson toIgnore) {
-        requireNonNull(toCheck);
-        requireNonNull(toIgnore);
-        return entryList.stream().anyMatch(entry-> entry.getUserObject()
-                .equals(toIgnore) ? false : entry.getUserObject().isClashing(toCheck));
+        requireAllNonNull(toCheck, toIgnore);
+        return entryList.stream().anyMatch(entry-> !entry.getUserObject().equals(toIgnore)
+                && entry.getUserObject().isClashing(toCheck));
     }
 
     /**
@@ -211,6 +227,38 @@ public class CalendarEntryList {
     }
 
     /**
+     * Returns an unmodifiable view of upcoming lessons within two days from current time.
+     * Lessons are sorted from the earliest date to the latest date.
+     *
+     * @return Unmodifiable observable list of upcoming lessons within two days.
+     */
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        sortUpcomingLessons();
+        return FXCollections.unmodifiableObservableList(upcomingLessons);
+    }
+
+    /**
+     * Returns true if the given date and time is within two days of current date time.
+     *
+     * @param endDateTime Date and time to be checked.
+     * @return True if the given date and time is within two days of current date time.
+     */
+    private boolean isUpcoming(LocalDateTime endDateTime) {
+        long timeDiff = ChronoUnit.HOURS.between(LocalDateTime.now(), endDateTime);
+        return timeDiff >= 0 && timeDiff < TWO_DAY_DIFF;
+    }
+
+    /**
+     * Sorts the upcoming lessons from nearest to furthest date.
+     */
+    private void sortUpcomingLessons() {
+        List<Entry<Lesson>> sortedList = upcomingLessons.stream()
+                .sorted(Comparator.comparing(e -> e.getUserObject().getDisplayEndLocalDateTime()))
+                .collect(Collectors.toList());
+        upcomingLessons.setAll(sortedList);
+    }
+
+    /**
      * Converts a lesson to a {@code List<Entry<Lesson>>} split by cancelled dates.
      *
      * @param owner  The person with the lesson.
@@ -310,6 +358,15 @@ public class CalendarEntryList {
         return entry;
     }
 
+    /**
+     * Returns true if the compared object is an equivalent {@code CalendarEntryList}.
+     * Note that we don't use ArrayList#equals(Object) as we want to check if lessons are equal, not entries.
+     * CalendarFX Entry#equals(Object) method does not check equality of the user object, and only checks Entry.id,
+     * which we do not set, so we should not use it.
+     *
+     * @param obj Object to be compared.
+     * @return True if the compared object is an equivalent {@code CalendarEntryList}.
+     */
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -324,8 +381,7 @@ public class CalendarEntryList {
 
         // state check
         CalendarEntryList other = (CalendarEntryList) obj;
-
-        if (entryList.size() != other.entryList.size()) {
+        if (entryList.size() != other.entryList.size() || upcomingLessons.size() != other.upcomingLessons.size()) {
             return false;
         }
 
@@ -335,10 +391,15 @@ public class CalendarEntryList {
                 return false;
             }
         }
+
+        for (int i = 0; i < upcomingLessons.size(); i++) {
+            boolean equalPair = upcomingLessons.get(i).getUserObject()
+                    .equals(other.upcomingLessons.get(i).getUserObject());
+            if (!equalPair) {
+                return false;
+            }
+        }
         return true;
-        // Note that we don't use ArrayList#equals(Object) as we want to check if lessons are equal, not entries.
-        // CalendarFX Entry#equals(Object) method does not check equality of the user object, and only checks Entry.id,
-        // which we do not set, so we should not use it.
     }
 
     @Override
