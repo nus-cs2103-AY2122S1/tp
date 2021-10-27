@@ -16,8 +16,6 @@ import seedu.address.model.lesson.Lesson;
 public class LessonCard extends UiPart<Region> {
 
     private static final String FXML = "LessonListCard.fxml";
-    private static final double TEXT_WIDTH_PERC = 0.75;
-    private static final double HW_WIDTH_PERC = 0.88;
 
     public final Lesson lesson;
 
@@ -55,8 +53,6 @@ public class LessonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()
                         .add(createHomeworkLabel(homework.toString())));
-        title.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
-        rates.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
 
         Set<Date> lessonCancelledDates = lesson.getCancelledDates();
         if (lessonCancelledDates.isEmpty()) {
@@ -76,7 +72,6 @@ public class LessonCard extends UiPart<Region> {
     private Label createHomeworkLabel(String homework) {
         Label label = new Label(homework);
         label.setWrapText(true);
-        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(HW_WIDTH_PERC));
         return label;
     }
 }

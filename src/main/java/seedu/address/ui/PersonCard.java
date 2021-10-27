@@ -16,7 +16,6 @@ import seedu.address.model.tag.Tag;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final double TEXT_WIDTH_PERC = 0.85;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -85,102 +84,52 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         address.setText(person.getAddress().value);
 
-        if (person.getPhone().isEmpty()) {
-            phonePlaceholder.setManaged(false);
-            phone.setManaged(false);
-        } else {
-            phone.setText(person.getPhone().value);
-        }
+        phonePlaceholder.setManaged(!person.getPhone().isEmpty());
+        phone.setManaged(!person.getPhone().isEmpty());
+        phone.setText(person.getPhone().value);
 
-        if (person.getEmail().isEmpty()) {
-            emailPlaceholder.setManaged(false);
-            email.setManaged(false);
-        } else {
-            email.setText(person.getEmail().value);
-        }
+        emailPlaceholder.setManaged(!person.getEmail().isEmpty());
+        email.setManaged(!person.getEmail().isEmpty());
+        email.setText(person.getEmail().value);
 
-        if (person.getParentPhone().isEmpty()) {
-            ppPlaceholder.setManaged(false);
-            parentPhone.setManaged(false);
-        } else {
-            parentPhone.setText(person.getParentPhone().value);
-        }
+        ppPlaceholder.setManaged(!person.getParentPhone().isEmpty());
+        parentPhone.setManaged(!person.getParentPhone().isEmpty());
+        parentPhone.setText(person.getParentPhone().value);
 
-        if (person.getParentEmail().isEmpty()) {
-            pePlaceholder.setManaged(false);
-            parentEmail.setManaged(false);
-        } else {
-            parentEmail.setText(person.getParentEmail().value);
-        }
+        pePlaceholder.setManaged(!person.getParentEmail().isEmpty());
+        parentEmail.setManaged(!person.getParentEmail().isEmpty());
+        parentEmail.setText(person.getParentEmail().value);
 
-        if (person.getSchool().isEmpty()) {
-            schPlaceholder.setManaged(false);
-            school.setManaged(false);
-        } else {
-            school.setText(person.getSchool().value);
-        }
+        schPlaceholder.setManaged(!person.getSchool().isEmpty());
+        school.setManaged(!person.getSchool().isEmpty());
+        school.setText(person.getSchool().value);
 
-        if (person.getAcadStream().isEmpty()) {
-            streamPlaceholder.setManaged(false);
-            acadStream.setManaged(false);
-        } else {
-            acadStream.setText(person.getAcadStream().value);
-        }
+        streamPlaceholder.setManaged(!person.getAcadStream().isEmpty());
+        acadStream.setManaged(!person.getAcadStream().isEmpty());
+        acadStream.setText(person.getAcadStream().value);
 
-        if (person.getAcadLevel().isEmpty()) {
-            acadLevel.setVisible(false);
-            acadLevel.setManaged(false);
-        } else {
-            acadLevel.setText(person.getAcadLevel().value);
-        }
+        acadLevel.setManaged(!person.getAcadLevel().isEmpty());
+        lvlPlaceholder.setManaged(!person.getAcadLevel().isEmpty());
+        acadLevel.setText(person.getAcadLevel().value);
 
-        if (person.getRemark().isEmpty()) {
-            remarkPlaceholder.setManaged(false);
-            remark.setManaged(false);
-        } else {
-            remark.setText(person.getRemark().value);
-        }
+        remarkPlaceholder.setManaged(!person.getRemark().isEmpty());
+        remark.setManaged(!person.getRemark().isEmpty());
+        remark.setText(person.getRemark().value);
 
-        if (person.getFee().isEmpty()) {
-            feePlaceholder.setManaged(false);
-            outstandingFee.setManaged(false);
-        } else {
-            outstandingFee.setText("$" + person.getFee().value);
-        }
+        feePlaceholder.setManaged(!person.getFee().isEmpty());
+        outstandingFee.setManaged(!person.getFee().isEmpty());
+        outstandingFee.setText("$" + person.getFee().value);
 
-        if (person.getTags().isEmpty()) {
-            tags.setManaged(false);
-        } else {
-            person.getTags().stream()
-                    .sorted(Comparator.comparing(Tag::getTagName))
-                    .forEach(tag -> tags.getChildren().add(createTagLabel(tag.getTagName())));
-        }
-        setAllLabelsMaxWidth();
-        tags.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
+        tags.setManaged(!person.getTags().isEmpty());
+        person.getTags().stream()
+                .sorted(Comparator.comparing(Tag::getTagName))
+                .forEach(tag -> tags.getChildren().add(createTagLabel(tag.getTagName())));
     }
 
     private Label createTagLabel(String tag) {
         Label label = new Label(tag);
         label.setWrapText(true);
         return label;
-    }
-
-    private void setLabelMaxWidth(Label label) {
-        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
-    }
-
-    private void setAllLabelsMaxWidth() {
-        setLabelMaxWidth(name);
-        setLabelMaxWidth(phone);
-        setLabelMaxWidth(email);
-        setLabelMaxWidth(parentPhone);
-        setLabelMaxWidth(parentEmail);
-        setLabelMaxWidth(address);
-        setLabelMaxWidth(outstandingFee);
-        setLabelMaxWidth(school);
-        setLabelMaxWidth(acadStream);
-        setLabelMaxWidth(acadLevel);
-        setLabelMaxWidth(remark);
     }
 
     @Override

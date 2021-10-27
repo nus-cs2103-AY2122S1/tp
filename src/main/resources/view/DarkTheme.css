@@ -93,15 +93,15 @@
     -fx-background-insets: 5 10 5 10;
 }
 
-.list-cell:filled:even {
+.list-cell:even {
     -fx-background-color: #F0F3FD;
 }
 
-.list-cell:filled:odd {
+.list-cell:odd {
     -fx-background-color: #F0F3FD;
 }
 
-.list-cell:filled:selected {
+.list-cell:selected {
     -fx-background-color: #A6B1E165;
 }
 
@@ -285,17 +285,6 @@
 .dialog-pane > *.label.content {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #424874;
-}
-
-.dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#A6B1E160, 25%);
-}
-
-.dialog-pane:header *.header-panel *.label {
-    -fx-font-size: 14px;
-    -fx-font-style: italic;
-    -fx-fill: #424874;
     -fx-text-fill: #424874;
 }
 
