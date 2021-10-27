@@ -146,6 +146,7 @@ public class TraceCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof TraceCommand // instanceof handles nulls
                 && this.personInput.equals(((TraceCommand) other).personInput)
-                && this.depth.equals(((TraceCommand) other).depth)); // state check
+                && this.depth.equals(((TraceCommand) other).depth)
+                && this.duration.equals(((TraceCommand) other).duration)); // state check
     }
 }
