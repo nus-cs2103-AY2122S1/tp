@@ -36,6 +36,11 @@ public class AddToOrderCommand extends Command {
 
     private final ItemDescriptor toAddDescriptor;
 
+    private String itemExceedsCount(Item item, Integer count_requested, Integer count_inventory) {
+        return "There is/are only " + count_inventory.toString() + " of " + item.getName().fullName + " in inventory" +
+                "\nCurrently requested: " + count_requested.toString();
+    }
+
     /**
      * Instantiates a command to add {@code Item} to the current {@code Order}
      */
@@ -72,6 +77,23 @@ public class AddToOrderCommand extends Command {
         if (matchingItems.size() > 1) {
             model.updateFilteredItemList(DISPLAY_INVENTORY, toAddDescriptor::isMatch);
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
+        }
+
+        List<Item> matches_inventory = model.getFromOrder(toAddDescriptor);
+
+        Integer item_count_in_order = toAddDescriptor.getCount().get();
+
+        Integer item_count_in_inventory = matchingItems.get(0).getCount();
+
+        Item item_in_inventory = matchingItems.get(0);
+
+        if (!matches_inventory.isEmpty()) {
+            item_count_in_order += matches_inventory.get(0).getCount();
+        }
+
+        if (item_count_in_order > item_count_in_inventory) {
+            throw new CommandException(itemExceedsCount(item_in_inventory,
+                    item_count_in_order, item_count_in_inventory));
         }
 
         Item toAddItem = matchingItems.get(0).updateCount(toAddDescriptor.getCount().get());
