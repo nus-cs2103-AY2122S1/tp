@@ -24,13 +24,13 @@
                     <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
             </Label>
-            <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+            <Label fx:id="name" text="\$first" styleClass="cell_big" />
         </HBox>
-        <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-        <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
-        <Label fx:id="venue" styleClass="cell_small_label" text="\$venue" />
-        <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
-        <Label fx:id="residents" styleClass="cell_small_label" text="\$residents" />
+        <Label fx:id="date" styleClass="cell_normal" text="\$date" />
+        <Label fx:id="time" styleClass="cell_normal" text="\$time" />
+        <Label fx:id="venue" styleClass="cell_normal" text="\$venue" />
+        <Label fx:id="capacity" styleClass="cell_normal" text="\$capacity" />
+        <Label fx:id="residents" styleClass="cell_normal" text="\$residents" />
     </VBox>
 </GridPane>
 </HBox>
