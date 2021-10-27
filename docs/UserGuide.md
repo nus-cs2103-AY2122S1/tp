@@ -133,13 +133,13 @@ The table below explains some technical terms that you may come across throughou
 
 The table below explains the general syntax used throughout the user guide.
 
-|Syntax| Definition |
+| Syntax | Definition |
 |:----:|:----:|
-|`...`| Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be ` `(empty) or `-o 1 -o 2`.|
-|`UPPER_CASE` | Name of the parameter. For example, `EMAIL` is a parameter named email. |
-|`-lower_case UPPER_CASE` | A parameter field. The name of the parameter is defined in `UPPER_CASE` and `-lower_case` refers to an acronym of `UPPER_CASE`. An example can be `-e abc@gmail.com`.|
-|`[-lower_case UPPER_CASE]` | An optional parameter field. Eg `-a A [-b B]` can be used as `-a A -b B` or just `-a A`.|
-|<div markdown="block" class="alert alert-info"> :bulb: </div> | An light bulb indicates that the following text is a tip. |
+| `...` | Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be ` `(empty) or `-o 1 -o 2`. |
+| `UPPER_CASE` | Name of the parameter. For example, `EMAIL` is a parameter named email. |
+| `-lower_case UPPER_CASE` | A parameter field. The name of the parameter is defined in `UPPER_CASE` and `-lower_case` refers to an acronym of `UPPER_CASE`. An example can be `-e abc@gmail.com`. |
+| `[-lower_case UPPER_CASE]` | An optional parameter field. Eg `-a A [-b B]` can be used as `-a A -b B` or just `-a A`. |
+| :bulb: | An light bulb indicates that the following text is a tip. |
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-pn PHONE_NUMBER -e EMAIL`, then `-e EMAIL -pn PHONE_NUMBER` is also acceptable.
@@ -205,10 +205,9 @@ Adds a client with name, phone number and optional email, address and orders.
 
 Format: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 
-> Note: the format of `ORDER` is `PRODUCT_ID QUANTITY DATE`, e.g. `-o 0 10 10/26` represents an order made on 26 Oct of
-the current year, the product requested has `PRODUCT_ID` = `0` and `QUANTITY` = `10`.
+> Note: the format of `ORDER` is `PRODUCT_ID QUANTITY DATE`, e.g. `-o 0 10 10/26` represents an order made on 26 Oct of the current year, the product requested has `PRODUCT_ID` = `0` and `QUANTITY` = `10`.
 
-Example: `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, whose 
+Example: `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, whose
 `PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road`.
 
 Expected Output:
