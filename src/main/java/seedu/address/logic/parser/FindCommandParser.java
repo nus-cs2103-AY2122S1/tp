@@ -337,20 +337,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             return null;
         }
 
-        private InterviewContainsKeywordsPredicate extractInterviewPrefixInput(ArgumentMultimap argMultimap)
-                throws ParseException {
+        private InterviewContainsKeywordsPredicate extractInterviewPrefixInput(ArgumentMultimap argMultimap) {
             assert argMultimap.getValue(PREFIX_INTERVIEW).isPresent()
                     : "No inputs for Prefix Interview exists.";
             String arg = argMultimap.getValue(PREFIX_INTERVIEW).get();
             String trimmedArg = arg.trim();
             if (!trimmedArg.isEmpty()) {
-                // check that keywords do not contain alphabets
                 String[] keywords = splitByWhiteSpace(trimmedArg);
-                for (String keyword : keywords) {
-                    if (!InterviewContainsKeywordsPredicate.isValidInterviewKeyword(keyword)) {
-                        throw new ParseException(InterviewContainsKeywordsPredicate.MESSAGE_CONSTRAINTS);
-                    }
-                }
                 return new InterviewContainsKeywordsPredicate(Arrays.asList(keywords));
             }
             return null;

@@ -81,6 +81,11 @@ public class ShowCommandParserTest {
         // whitespaces before and after prefix
         assertParseSuccess(parser, "  t/   ", expectedShowCommand);
 
+        expectedShowCommand = new ShowCommand(CliSyntax.PREFIX_INTERVIEW);
+        assertParseSuccess(parser, "i/", expectedShowCommand);
+        // whitespaces before and after prefix
+        assertParseSuccess(parser, "  i/   ", expectedShowCommand);
+
     }
 
     @Test

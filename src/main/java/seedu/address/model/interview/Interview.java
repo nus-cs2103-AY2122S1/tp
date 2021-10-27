@@ -3,9 +3,13 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * Represents an interview in the address book.
@@ -13,9 +17,12 @@ import java.time.format.DateTimeParseException;
  */
 public class Interview {
     public static final Interview EMPTY_INTERVIEW = new Interview("");
-    public static final String PARSE_FORMAT = "yyyy-MM-dd, H:mm";
+    public static final String PARSE_FORMAT = "y-M-d, H:m"; //e.g. 2022-09-21, 9:30
+    public static final String DISPLAY_FORMAT = "MMM dd yyyy , HH:mm"; //e.g. Sep 21 2022, 09:30
+    public static final String EMPTY_TIME = "-";
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview time should follow the exact format: [" + PARSE_FORMAT + "]. E.g. i/2021-10-22, 8:00";
+            "Interview time should follow the format: [year-month-date, hour-minute]. "
+                    + "E.g. i/2021-09-01, 8:00 or i/21-9-1,08:00";
 
     public final String parseTime;
 
@@ -26,28 +33,34 @@ public class Interview {
      */
     public Interview(String time) {
         if (time.isEmpty()) {
-            this.parseTime = "-";
+            this.parseTime = EMPTY_TIME;
         } else {
             requireNonNull(time);
             checkArgument(isValidInterviewTime(time), MESSAGE_CONSTRAINTS);
             this.parseTime = time;
         }
-
     }
 
     /**
      * Returns true if a given string is a valid interview time which follows the timing format.
      */
     public static boolean isValidInterviewTime(String test) {
+        if (test.equals(EMPTY_TIME)) {
+            return true;
+        }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
             LocalDate.parse(test, formatter);
         } catch (DateTimeParseException e) {
             return false;
         }
+
         return true;
     }
 
+    public boolean isEmptyInterview() {
+        return this.equals(EMPTY_INTERVIEW);
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -59,6 +72,26 @@ public class Interview {
     @Override
     public int hashCode() {
         return parseTime.hashCode();
+    }
+
+    /**
+     * Returns the time in display format.
+     *
+     * @return Formatted time.
+     */
+    public String displayTime() {
+        String formatted = parseTime;
+        if (!isEmptyInterview()) {
+            try {
+                DateFormat parseFormat = new SimpleDateFormat(PARSE_FORMAT);
+                Date date = parseFormat.parse(parseTime);
+                DateFormat displayFormat = new SimpleDateFormat(DISPLAY_FORMAT);
+                formatted = displayFormat.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return formatted;
     }
 
     /**

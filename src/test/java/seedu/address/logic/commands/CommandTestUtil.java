@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
@@ -52,6 +53,8 @@ public class CommandTestUtil {
     public static final String VALID_LEVEL_OF_EDUCATION_BOB = "Masters";
     public static final String VALID_EXPERIENCE_AMY = "1";
     public static final String VALID_EXPERIENCE_BOB = "2";
+    public static final String VALID_INTERVIEW_AMY = "2021-10-29, 10:30";
+    public static final String VALID_INTERVIEW_BOB = "2021-11-01, 10:30";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -75,7 +78,8 @@ public class CommandTestUtil {
             " " + PREFIX_LEVEL_OF_EDUCATION + VALID_LEVEL_OF_EDUCATION_BOB;
     public static final String EXPERIENCE_DESC_AMY = " " + PREFIX_EXPERIENCE + VALID_EXPERIENCE_AMY;
     public static final String EXPERIENCE_DESC_BOB = " " + PREFIX_EXPERIENCE + VALID_EXPERIENCE_BOB;
-
+    public static final String INTERVIEW_DESC_AMY = " " + PREFIX_INTERVIEW + VALID_INTERVIEW_AMY;
+    public static final String INTERVIEW_DESC_BOB = " " + PREFIX_INTERVIEW + VALID_INTERVIEW_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -91,7 +95,8 @@ public class CommandTestUtil {
             " " + PREFIX_LEVEL_OF_EDUCATION + "Kindergarten"; // "Kindergarten" not allowed as level of education
     public static final String INVALID_EXPERIENCE_DESC =
             " " + PREFIX_EXPERIENCE + "-1"; // negative value not allowed for experience
-
+    public static final String INVALID_INTERVIEW_DESC =
+            " " + PREFIX_INTERVIEW + "2021.01.01"; // interview time not following the given format
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -109,6 +114,7 @@ public class CommandTestUtil {
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
                 .withExperience(VALID_EXPERIENCE_AMY)
                 .withTags(VALID_TAG_FRIEND)
+                .withInterview(VALID_INTERVIEW_AMY)
                 .withNotes(VALID_NOTES_AMY)
                 .withDone(VALID_DONE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -119,6 +125,7 @@ public class CommandTestUtil {
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
                 .withExperience(VALID_EXPERIENCE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withInterview(VALID_INTERVIEW_BOB)
                 .withNotes(VALID_NOTES_BOB)
                 .withDone(VALID_DONE_BOB).build();
     }
