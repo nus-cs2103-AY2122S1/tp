@@ -22,7 +22,7 @@ public class ShowCommand extends Command {
             + "Parameter: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SHOW_STUDENT_SUCCESS = "Show Student's lab results on the side panel";
+    public static final String MESSAGE_SHOW_STUDENT_SUCCESS = "Showed %s's lab results on the side panel";
 
     private final Index targetIndex;
 
@@ -40,7 +40,7 @@ public class ShowCommand extends Command {
         }
 
         Student studentToShow = lastShownList.get(targetIndex.getZeroBased());
-        return new ShowCommandResult(MESSAGE_SHOW_STUDENT_SUCCESS, studentToShow);
+        return new ShowCommandResult(String.format(MESSAGE_SHOW_STUDENT_SUCCESS, studentToShow.getName()), studentToShow);
     }
 
     @Override
