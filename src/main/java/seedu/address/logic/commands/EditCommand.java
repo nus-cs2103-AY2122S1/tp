@@ -43,22 +43,28 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory.";
+    public static final String MESSAGE_DUPLICATE_ID = "This id clashes with another item in the inventory.";
+    public static final String MESSAGE_DUPLICATE_NAME = "This name clashes with another item in the inventory.";
     public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
             "Can't edit if not in inventory mode. Please use \"list\" first";
 
     private final Index index;
     private final ItemDescriptor itemDescriptor;
+    private final boolean editId;
+    private final boolean editName;
 
     /**
      * @param index of the item in the filtered item list to edit
      * @param itemDescriptor details to edit the item with
      */
-    public EditCommand(Index index, ItemDescriptor itemDescriptor) {
+    public EditCommand(Index index, ItemDescriptor itemDescriptor, boolean editId) {
         requireNonNull(index);
         requireNonNull(itemDescriptor);
 
         this.index = index;
         this.itemDescriptor = new ItemDescriptor(itemDescriptor);
+        this.editId = editId;
+        this.editName = !editId;
     }
 
     @Override
@@ -81,6 +87,13 @@ public class EditCommand extends Command {
         if (!itemToEdit.isSameItem(editedItem) && model.hasItem(editedItem)) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
+        if (model.hasId(editedItem) && editId) {
+            throw new CommandException(MESSAGE_DUPLICATE_ID);
+        }
+        if (model.hasName(editedItem) && editName) {
+            throw new CommandException(MESSAGE_DUPLICATE_NAME);
+        }
+
 
         model.setItem(itemToEdit, editedItem);
         model.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);

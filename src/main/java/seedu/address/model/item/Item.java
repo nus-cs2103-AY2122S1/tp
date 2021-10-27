@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -117,6 +118,28 @@ public class Item {
         }
 
         return other != null && Objects.equals(other.getCount(), getCount());
+    }
+
+    /**
+     * Returns true if both items have the same count.
+     */
+    public boolean isSameId(Item other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other != null && Objects.equals(other.getId(), getId());
+    }
+
+    /**
+     * Returns true if both items have the same count.
+     */
+    public boolean isSameName(Item other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other != null && Objects.equals(other.getName(), getName());
     }
 
     /**

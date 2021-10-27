@@ -38,6 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_COSTPRICE, PREFIX_SALESPRICE);
 
         Index index;
+        boolean editId = true;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -48,6 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ItemDescriptor itemDescriptor = new ItemDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             itemDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editId = false;
         }
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             itemDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
@@ -67,7 +69,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, itemDescriptor);
+        return new EditCommand(index, itemDescriptor, editId);
     }
 
     /**

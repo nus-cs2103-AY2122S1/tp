@@ -124,6 +124,26 @@ public class ModelManager implements Model {
         return inventory.hasItem(item);
     }
 
+    /**
+     * Returns true if an item with the same identity fields as {@code item} that exists in the inventory.
+     * @see Item#isSameItem(Item)
+     */
+    @Override
+    public boolean hasId(Item item) {
+        requireNonNull(item);
+        return inventory.hasId(item);
+    }
+
+    /**
+     * Returns true if an item with the same identity fields as {@code item} that exists in the inventory.
+     * @see Item#isSameItem(Item)
+     */
+    @Override
+    public boolean hasName(Item item) {
+        requireNonNull(item);
+        return inventory.hasName(item);
+    }
+
     @Override
     public List<Item> getItems(ItemDescriptor descriptor) {
         requireNonNull(descriptor);
