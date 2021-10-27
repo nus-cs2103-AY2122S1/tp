@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_SYMBOL;
+
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
  *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
@@ -38,7 +40,6 @@ public class ArgumentTokenizer {
     private static List<String> extractInvalidPrefixes(String argsString, Prefix[] prefixes) {
         String[] splitArg = argsString.split(" ");
         List<String> flags = Arrays.stream(splitArg)
-                .map(s -> appendSpace(s))
                 .filter(word -> isPrefixAsFlagArg(word))
                 .collect(Collectors.toList());
         List<String> invalidFlags = flags.stream()
@@ -48,7 +49,8 @@ public class ArgumentTokenizer {
     }
 
     private static boolean isValidFlag(Prefix[] prefixes, String flag) {
-        return Arrays.stream(prefixes).anyMatch(prefix -> prefix.getPrefix().equals(flag));
+        return Arrays.stream(prefixes).anyMatch(prefix ->
+                prefix.getPrefix().equals(appendSpace(flag)));
     }
 
     private static String appendSpace(String str) {
@@ -59,7 +61,7 @@ public class ArgumentTokenizer {
         if (str.length() == 0) {
             return false;
         }
-        return str.charAt(0) == '-';
+        return Character.toString(str.charAt(0)).equals(PREFIX_SYMBOL.getPrefix());
     }
 
     /**

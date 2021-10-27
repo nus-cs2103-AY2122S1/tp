@@ -2,6 +2,7 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_LAB_NUM;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_LAB_TOTAL;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_NEW_LAB_NUM;
@@ -38,13 +39,19 @@ public class EditLabCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid labNum
-        assertParseFailure(parser, INVALID_LAB_NUM + NEW_LAB_NUM + LAB_TOTAL2, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser,
+                INVALID_LAB_NUM + NEW_LAB_NUM + LAB_TOTAL2,
+                String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, "[-1]", EditLabCommand.MESSAGE_USAGE));
 
         // invalid newLabNum
-        assertParseFailure(parser, LAB_NUM + INVALID_NEW_LAB_NUM + LAB_TOTAL2, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser,
+                LAB_NUM + INVALID_NEW_LAB_NUM + LAB_TOTAL2,
+                String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, "[-2]", EditLabCommand.MESSAGE_USAGE));
 
         // invalid labTotal
-        assertParseFailure(parser, LAB_NUM + NEW_LAB_NUM + INVALID_LAB_TOTAL, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser,
+                LAB_NUM + NEW_LAB_NUM + INVALID_LAB_TOTAL,
+                String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, "[-10.0]", EditLabCommand.MESSAGE_USAGE));
     }
 
     @Test
