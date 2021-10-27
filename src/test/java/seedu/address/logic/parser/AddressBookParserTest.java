@@ -32,7 +32,9 @@ import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PinCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FindAnyPredicate;
@@ -85,6 +87,20 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_pin() throws Exception {
+        PinCommand command = (PinCommand) parser.parseCommand(
+                PinCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new PinCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_unpin() throws Exception {
+        UnpinCommand command = (UnpinCommand) parser.parseCommand(
+                UnpinCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnpinCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

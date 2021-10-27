@@ -22,6 +22,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -103,6 +104,7 @@ public class UntagCommand extends Command {
         Email originalEmail = personToUntag.getEmail();
         Address originalAddress = personToUntag.getAddress();
         Birthday originalBirthday = personToUntag.getBirthday().orElse(null);
+        Pin originalPin = personToUntag.getPin();
 
         Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<>());
         Set<Tag> updatedTags = new HashSet<>(personToUntag.getTags());
@@ -116,7 +118,8 @@ public class UntagCommand extends Command {
                 originalName, updatedTags.stream().map(tag -> tag.tagName).collect(Collectors.joining(", ")),
                 getRemovedTags(editPersonDescriptor)));
 
-        return new Person(originalName, originalPhone, originalEmail, originalAddress, updatedTags, originalBirthday);
+        return new Person(originalName, originalPhone, originalEmail,
+                originalAddress, updatedTags, originalBirthday, originalPin);
     }
 
     /**
