@@ -18,7 +18,7 @@ public class AddNextOfKinCommand extends Command {
 
     public static final String COMMAND_WORD = "addNok";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a next of kin to a participant with specified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a next-of-kin to a participant with specified "
             + "index.\n"
             + "Parameters: "
             + "PARTICIPANT_INDEX "
