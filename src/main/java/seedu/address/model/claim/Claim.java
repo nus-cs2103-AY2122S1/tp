@@ -59,11 +59,13 @@ public class Claim {
         }
 
         Claim otherClaim = (Claim) o;
-        return this.title.equals(otherClaim.title);
+        return this.title.equals(otherClaim.title)
+                && this.description.equals(otherClaim.description)
+                && this.status.equals(otherClaim.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title.toString());
+        return Objects.hash(title, description, status);
     }
 }

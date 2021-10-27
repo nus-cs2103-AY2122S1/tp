@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -243,77 +243,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-<<<<<<< Updated upstream
-### \[Proposed\] Data archiving
-=======
-----------------
-
-###  Note feature
-
-#### Current Implementation
-
-{:.no_toc}
-
-An client's note is currently represented by the `note` field under `Person`,
-which is represented by an `Note` object.
-
-The `Note` object contains a `value` field that has the type `String`, the `value` field is the description of the note given to a `Person`.
-
-A `Note` can be given to a `Person` through any of these 3 methods:
-
-1. Using the `NoteCommand` to add a note to an existing `Person`.
-2. Through the `AddCommand`, a new `Person` with a `Note` can be created.
-3. Editing a `Person` using the `EditCommand` to give the `Person` a `Note`.
-
-The processing of a note command from the user can be split into 2 general steps:
-
-1. Parsing the user input into a `NoteCommand`
-2. Executing the `NoteCommand`
-   Each step will be described in the sections below.
-
-**Step 1:** Parsing of user input
-
-The user input is parsed by the `NoteCommandParser` which calls other helper methods to parse the text into 
-
-<img src="images/ClaimCommandParserSequenceDiagram.png" width="800" />
-
-The `NoteCommandParser` uses the parsed data classes to create a `NoteCommand`. Unlike the `Claim` feature, as the `Note` command has no constraints on the text that can be inputted, the `NoteCommandParser` is able to create a `NoteCommand` without using a `EditNoteDescriptor.
-
-**Step 2:** Executing the NoteCommand
-
-<img src="images/ClaimCommandExecuteActivityDiagram.png" width="400" />
-
-There are 3 possible outcomes from the execution of a `NoteCommand`.
-
-1. Add a new Note to the client
-2. Edit an existing Note of the client
-3. Delete an existing Note of the client
-
-#### Design considerations
-
-{:.no_toc}
-
-*Aspect*: User interface of adding, editing and deleting Note
-
-* **Alternative 1 (Current choice):** The 'Note' command and 'Edit' command adds, edits and deletes. The 'Add' command is also able to create a person with a note.
-  * Pros: 
-    * It is more intuitive as the note is a field that belongs to a `Person`.
-    * The user has more flexibility when choosing how to add, edit or delete a note.
-  * Cons: 
-    * It is difficult to give proper error messages since we are not sure of the user intentions
-    * The user has to keep track of more prefixes
-    * The "help message" for the 'Add' and 'Edit' commands become longer and harder to read due to the additional field.
-* **Alternative 2:** One ‘Note’ command adds, edits and deletes
-  * Pros: Fewer commands for the user to remember
-  * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
-* **Alternative 3:** Different commands for add, edit and delete
-  * Pros: Easier to implement
-  * Cons: User has to remember a lot of commands
-
-
-
------------------
-
 ###  Claims feature
 
 #### Current Implementation
@@ -406,10 +335,15 @@ There are 3 possible outcomes from the execution of a ScheduleCommand.
 
 #### Design considerations
 {:.no_toc}
->>>>>>> Stashed changes
 
-_{Explain here how the data archiving feature will be implemented}_
+*Aspect*: User interface of adding, editing and deleting appointments
 
+* **Alternative 1 (Current choice):** One ‘schedule’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 2:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -593,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: Add reveneue to a client**
+**Use case: Add revenue to a client**
 
 **MSS**
 

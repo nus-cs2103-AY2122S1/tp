@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REVENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,6 +24,8 @@ import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.Description;
 import seedu.address.model.claim.Status;
 import seedu.address.model.claim.Title;
+import seedu.address.model.person.Insurance;
+import seedu.address.model.person.InsuranceType;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -44,8 +47,16 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_INSURANCE_LIFE = "Life";
-    public static final String VALID_INSURANCE_HEALTH = "Health";
+
+    public static final String VALID_INSURANCE_TYPE_AMY = "Life";
+    public static final String VALID_INSURANCE_BRAND_AMY = "NTUC";
+    public static final String VALID_INSURANCE_TYPE_BOB = "Health";
+    public static final String VALID_INSURANCE_BRAND_BOB = "Prudential";
+    public static final Insurance VALID_INSURANCE_AMY = new Insurance(
+            InsuranceType.LIFE, VALID_INSURANCE_BRAND_AMY);
+    public static final Insurance VALID_INSURANCE_BOB = new Insurance(
+            InsuranceType.HEALTH, VALID_INSURANCE_BRAND_BOB);
+
     public static final String VALID_NOTE_AMY = "Has diabetes";
     public static final String VALID_NOTE_BOB = "Has chronic back pain";
 
@@ -62,6 +73,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String REVENUE_DESC_AMY = " " + PREFIX_REVENUE + VALID_REVENUE_AMY;
+    public static final String REVENUE_DESC_BOB = " " + PREFIX_REVENUE + VALID_REVENUE_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -82,6 +95,8 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_REVENUE_DESC = " " + PREFIX_REVENUE
+            + "-100"; // negative number not allowed in revenue
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 

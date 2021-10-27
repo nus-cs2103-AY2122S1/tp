@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_LIFE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -56,10 +56,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).withInsurances(VALID_INSURANCE_LIFE).build();
+                .withTags(VALID_TAG_HUSBAND).withInsurances(VALID_INSURANCE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).withInsurances(VALID_INSURANCE_LIFE)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).withInsurances(VALID_INSURANCE_BOB)
                 .build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 

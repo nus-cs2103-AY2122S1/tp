@@ -27,4 +27,13 @@ public class Money {
     public String toString() {
         return "S$" + String.format("%.02f", this.getInDollars());
     }
+
+    /**
+     * Returns the user input for revenue.
+     *
+     * @return String input by user for revenue field.
+     */
+    public String stringInputByUser() {
+        return String.valueOf(this.getInDollars());
+    }
 }
