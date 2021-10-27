@@ -13,11 +13,10 @@
 <?import javafx.stage.Stage?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 
-<fx:root minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="SafeFor(H)All" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="SafeFor(H)All" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/safeforhall.png" />
   </icons>
@@ -36,7 +35,6 @@
             <TabPane fx:id="tabPane" nodeOrientation="LEFT_TO_RIGHT" rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                 <Tab fx:id="residentsTab">
                     <GridPane fx:id="splitpane1" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-                        <!--                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS">-->
                         <children>
                             <VBox fx:id="personList" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS">
                                 <padding>
@@ -44,10 +42,6 @@
                                 </padding>
                                 <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                             </VBox>
-                            <!--                    </children>-->
-                            <!--                  </AnchorPane>-->
-                            <!--                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS">-->
-                            <!--                    <children>-->
                             <VBox fx:id="personAdditionalList" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                 <padding>
                                     <Insets bottom="10" left="10" right="10" top="10" />
@@ -55,65 +49,32 @@
                                 <StackPane fx:id="personAdditionalListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                             </VBox>
                         </children>
-                        <!--                  </AnchorPane>-->
-
                         <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0"/>
                             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0"/>
                         </columnConstraints>
                     </GridPane>
-<!--                    <SplitPane fx:id="splitpane1" dividerPositions="0.5">-->
-<!--                        <items>-->
-<!--                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="190.0" prefWidth="140.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
-<!--                                <children>-->
-<!--                                    <VBox fx:id="personList" minWidth="340" prefWidth="500" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
-<!--                                        <padding>-->
-<!--                                            <Insets bottom="10" left="10" right="10" top="10" />-->
-<!--                                        </padding>-->
-<!--                                        <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />-->
-<!--                                    </VBox>-->
-<!--                                </children>-->
-<!--                            </AnchorPane>-->
-<!--                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
-<!--                                <children>-->
-<!--                                    <VBox fx:id="personAdditionalList" minWidth="340" prefWidth="500" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
-<!--                                        <padding>-->
-<!--                                            <Insets bottom="10" left="10" right="10" top="10" />-->
-<!--                                        </padding>-->
-<!--                                        <StackPane fx:id="personAdditionalListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />-->
-<!--                                    </VBox>-->
-<!--                                </children>-->
-<!--                            </AnchorPane>-->
-<!--                        </items>-->
-<!--                    </SplitPane>-->
                 </Tab>
 
                 <Tab fx:id="eventsTab">
                     <GridPane prefHeight="160.0" prefWidth="200.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                             <children>
-                                <VBox fx:id="eventList" minWidth="340" prefWidth="500" styleClass="pane-with-border" VBox.vgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                <VBox fx:id="eventList" minWidth="340" prefWidth="500" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.vgrow="ALWAYS">
                                     <padding>
                                         <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
                                     <StackPane fx:id="eventListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                            <children>
-                                <VBox fx:id="eventAdditionalList" minWidth="340" prefWidth="500" styleClass="pane-with-border" VBox.vgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                <VBox fx:id="eventAdditionalList" minWidth="340" prefWidth="500" styleClass="pane-with-border" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                     <padding>
                                         <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
                                     <StackPane fx:id="eventAdditionalListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </children>
-                        </AnchorPane>
                         <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0"/>
-                            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0"/>
-                            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="25.0"/>
+                            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="50.0"/>
                         </columnConstraints>
                     </GridPane>
                 </Tab>
