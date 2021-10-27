@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -40,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private final HelpWindow helpWindow;
+    private final UserProfileWindow userProfileWindow;
     private TabPaneHeader tabPaneHeader;
 
     @FXML
@@ -47,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem profileMenuItem;
 
     @FXML
     private MenuItem contactsMenuItem;
@@ -96,6 +101,15 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private ImageView eventsIcon;
 
+    @FXML
+    private HBox userDetails;
+
+    @FXML
+    private ImageView userProfile;
+
+    @FXML
+    private Label userName;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -119,6 +133,13 @@ public class MainWindow extends UiPart<Stage> {
 
         // Initialize Help window
         helpWindow = new HelpWindow();
+
+        userProfileWindow = new UserProfileWindow(logic);
+
+        // Configure User Profile Window to be shown when clicked
+        userDetails.setOnMouseClicked(event -> {
+            handleUserProfileWindow();
+        });
 
         // Configure Events Icon
         eventsIcon.setOnMouseClicked(event -> {
@@ -196,6 +217,19 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        if (logic.isProfilePresent()) {
+            setUserProfileOnMenuBar();
+        }
+    }
+
+    /**
+     * Sets the {@code userName} and {@code userProfile}
+     * to be displayed on the Menu Bar.
+     */
+    public void setUserProfileOnMenuBar() {
+        userProfile.setImage(logic.getUserProfile().getProfilePicture());
+        userName.setText(logic.getUserProfile().getName().toString());
     }
 
     /**
@@ -219,6 +253,18 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the user profile window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleUserProfileWindow() {
+        if (!userProfileWindow.isShowing()) {
+            userProfileWindow.show();
+        } else {
+            userProfileWindow.focus();
         }
     }
 
@@ -258,8 +304,8 @@ public class MainWindow extends UiPart<Stage> {
      * Launches the {@code ProfileWindow}.
      */
     public void show() {
-        ProfileWindow profileWindow = new ProfileWindow(new Stage(), this, logic);
-        profileWindow.start();
+        ProfileSetUpWindow profileSetUpWindow = new ProfileSetUpWindow(new Stage(), this, logic);
+        profileSetUpWindow.start();
     }
 
     /**
@@ -284,6 +330,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.severe("Unable to save Address Book to Memory");
         }
         helpWindow.hide();
+        userProfileWindow.hide();
         primaryStage.hide();
         ThreadProcessor.stopAllThreads();
     }
