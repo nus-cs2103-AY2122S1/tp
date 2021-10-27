@@ -10,7 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.event.Event;
-import seedu.address.model.module.member.Member;
 
 /**
  * Panel containing the list of events.
@@ -29,17 +28,7 @@ public class EventListPanel extends UiPart<Region> {
      */
     public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
-        eventListTitle.setText("Listing All Events");
-        eventListView.setItems(eventList);
-        eventListView.setCellFactory(listView -> new EventListViewCell());
-    }
-
-    /**
-     * Creates a {@code EventListPanel} with the given {@code ObservableList} and {@code Member}.
-     */
-    public EventListPanel(ObservableList<Event> eventList, Member member) {
-        super(FXML);
-        eventListTitle.setText(member.getName().fullName);
+        eventListTitle.setText("Events");
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
     }
