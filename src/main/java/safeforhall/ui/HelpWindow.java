@@ -1,12 +1,20 @@
 package safeforhall.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import safeforhall.commons.core.LogsCenter;
 
@@ -16,16 +24,26 @@ import safeforhall.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t15-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "   Here's a quick summary of the commands!\n";
+    public static final String MORE_MESSAGE = "   For more information, please refer to our ";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Rectangle helpGuide;
 
     @FXML
-    private Label helpMessage;
+    private HBox helpGuideContainer;
+
+    @FXML
+    private Hyperlink hyperlink;
+
+    @FXML
+    private Label message;
+
+    @FXML
+    private Label moreMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -34,8 +52,17 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        Image helpGuideImg = new Image("/images/help-guide.png");
+        Rectangle rec = new Rectangle(800, 600);
+        rec.setFill(new ImagePattern(helpGuideImg));
+        helpGuideContainer.getChildren().add(rec);
+        message.setText(HELP_MESSAGE);
+        moreMessage.setText(MORE_MESSAGE);
+        message.setFont(new Font(20.0));
+        moreMessage.setFont(new Font(20.0));
+        hyperlink.setFont(new Font(20.0));
     }
+
 
     /**
      * Creates a new HelpWindow.
@@ -89,14 +116,8 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
     @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    void openLink(ActionEvent event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
     }
 }
