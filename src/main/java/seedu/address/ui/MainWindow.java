@@ -112,7 +112,7 @@ public class MainWindow extends UiPart<Stage> {
         // Fix dimension based on screen resolution
         primaryStage.setMinHeight(800);
         primaryStage.setMaxHeight(800);
-        primaryStage.setMinWidth(800);
+        primaryStage.setMinWidth(950);
 
         // Configure all keyboard shortcuts
         setAccelerators();
