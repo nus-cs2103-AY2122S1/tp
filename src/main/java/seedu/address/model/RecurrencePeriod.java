@@ -86,9 +86,9 @@ public class RecurrencePeriod extends Period {
                 .map(p -> p.getPeriod())
                 .collect(Collectors.toList());
         underlyingPeriods = this.period.union(underlyingPeriods);
-        result = underlyingPeriods.stream()
+        result.addAll(underlyingPeriods.stream()
                 .map(p -> new RecurrencePeriod(p, startTime, endTime))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
         return result;
 
     }

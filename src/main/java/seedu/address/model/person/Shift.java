@@ -208,7 +208,7 @@ public class Shift {
     }
 
     /**
-     * Makes this shift a working shift
+     * Makes this shift a working shift.
      */
     public Shift add(LocalDate startDate, LocalDate endDate) {
         Period period = new Period(startDate, endDate);
