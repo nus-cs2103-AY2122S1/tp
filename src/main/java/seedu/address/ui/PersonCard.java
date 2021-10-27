@@ -4,10 +4,13 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.storage.ImageStorage;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -57,6 +60,13 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        Image genderImage = ImageStorage.getGenderIcon(person.getGender().gender);
+        if (genderImage != null) {
+            ImageView genderIcon = new ImageView(genderImage);
+            genderIcon.setFitHeight(15);
+            genderIcon.setFitWidth(15);
+            name.setGraphic(genderIcon);
+        }
         phone.setText(person.getPhone().value);
         if (person.getPhone().value.isEmpty()) {
             phone.setManaged(false);
@@ -73,10 +83,13 @@ public class PersonCard extends UiPart<Region> {
         if (person.getTutorialGroup().value.isEmpty()) {
             tutorialGroup.setManaged(false);
         }
+        /*
         gender.setText(person.getGender().gender);
         if (person.getGender().gender.isEmpty()) {
             gender.setManaged(false);
         }
+         */
+
         remark.setText(person.getRemark().value);
         if (person.getRemark().value.isEmpty()) {
             remark.setManaged(false);
@@ -90,8 +103,20 @@ public class PersonCard extends UiPart<Region> {
                 });
         person.getSocialHandles().stream()
                 .sorted(Comparator.comparing(socialHandle -> socialHandle.platform))
-                .forEach(socialHandle -> socialHandles.getChildren()
-                .add(new Label(socialHandle.platform + " : " + socialHandle.value)));
+                .forEach(socialHandle -> {
+                    Label label = new Label();
+                    Image image = ImageStorage.getSocialIcon(socialHandle.platform);
+                    if (image == null) {
+                        label.setText(socialHandle.platform + " : " + socialHandle.value);
+                    } else {
+                        ImageView platformIcon = new ImageView(image);
+                        platformIcon.setFitHeight(20);
+                        platformIcon.setFitWidth(20);
+                        label.setGraphic(platformIcon);
+                        label.setText(socialHandle.value);
+                    }
+                    socialHandles.getChildren().add(label);
+                });
     }
 
     @Override
