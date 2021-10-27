@@ -84,9 +84,9 @@ public class IncludeCommand extends Command {
         String combinedDisplayString = event.getCombinedDisplayString(toAdd);
         String combinedStorageString = event.getCombinedStorageString(toAdd);
 
-        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(), 
-                                      event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString, 
-                                                                                              combinedStorageString));
+        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
+                event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString,
+                combinedStorageString));
         model.setEvent(event, editedEvent);
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
 

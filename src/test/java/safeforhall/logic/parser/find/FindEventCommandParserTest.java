@@ -31,14 +31,6 @@ public class FindEventCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE);
 
-    private static final String INVALID_ROOM_FOR_FIND1 = "AA";
-    private static final String INVALID_ROOM_FOR_FIND2 = "A12";
-    private static final String INVALID_ROOM_FOR_FIND3 = "12";
-
-    private static final String VALID_ROOM_FOR_FIND1 = "A";
-    private static final String VALID_ROOM_FOR_FIND2 = "A1";
-    private static final String VALID_ROOM_FOR_FIND3 = "E200";
-
     private FindEventCommandParser parser = new FindEventCommandParser();
 
     @Test

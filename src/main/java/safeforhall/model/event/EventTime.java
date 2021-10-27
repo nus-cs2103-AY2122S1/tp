@@ -1,6 +1,7 @@
 package safeforhall.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +22,7 @@ public class EventTime {
      */
     public EventTime(String time) {
         requireNonNull(time);
+        checkArgument(isValidEventTime(time), MESSAGE_CONSTRAINTS);
         this.eventTime = time;
     }
 

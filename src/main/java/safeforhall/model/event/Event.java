@@ -56,6 +56,7 @@ public class Event {
 
     public EventTime getEventTime() {
         return eventTime;
+    }
 
     public ArrayList<String> getStringResidentList() {
         return residents.getStringResidentList();
