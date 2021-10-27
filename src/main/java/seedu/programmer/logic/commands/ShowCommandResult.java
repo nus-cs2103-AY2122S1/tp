@@ -2,6 +2,7 @@ package seedu.programmer.logic.commands;
 
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.programmer.model.student.Student;
 
 
@@ -35,7 +36,7 @@ public class ShowCommandResult extends CommandResult {
 
         ShowCommandResult otherCommandResult = (ShowCommandResult) other;
         return getFeedbackToUser().equals(otherCommandResult.getFeedbackToUser())
-                && target == otherCommandResult.target;
+                && target.equals(otherCommandResult.target);
     }
 
     @Override

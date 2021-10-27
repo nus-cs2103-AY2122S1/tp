@@ -104,6 +104,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Student> getSelectedStudentWrapper() {
+        return model.getSelectedStudentWrapper();
+    }
+
+    @Override
     public Path getProgrammerErrorFilePath() {
         return model.getProgrammerErrorFilePath();
     }

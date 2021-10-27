@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.json.JSONArray;
 
 import javafx.fxml.FXML;
@@ -51,9 +53,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private StudentListPanel studentParticular;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private StudentCard studentParticular;
     private DashboardWindow dashboardWindow;
     private boolean isDashboardShowing;
 
@@ -142,6 +144,7 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+
     /**
      * Sets the default size based on {@code guiSettings}.
      */
@@ -190,13 +193,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleShowResult(Student target) {
-        if (studentParticularPlaceholder.getChildren().isEmpty()) {
-            studentParticular = new StudentCard(target);
-            studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
-        } else {
-            studentParticular.updateStudentInformation(target);
-            studentParticularPlaceholder.getChildren().set(0, studentParticular.getRoot());
-        }
+        studentParticular = new StudentListPanel(logic.getSelectedStudentWrapper());
+        studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
+
         LabResultListPanel labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
@@ -345,8 +344,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            studentParticularPlaceholder.getChildren().clear();
-            labResultListPanelPlaceholder.getChildren().clear();
+
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -363,10 +361,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleUpload();
             } else if (commandResult instanceof EditCommandResult) {
                 EditCommandResult editCommandResult = (EditCommandResult) commandResult;
-                handleShowResult(editCommandResult.getEditedStudent());
+                Student editedStudent = editCommandResult.getEditedStudent();
+                handleShowResult(editedStudent);
             } else if (commandResult instanceof DashboardCommandResult) {
                 handleDashboard();
             }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

@@ -53,7 +53,6 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      */
     public void resetData(ReadOnlyProgrammerError newData) {
         requireNonNull(newData);
-
         setStudents(newData.getStudentList());
     }
 
@@ -94,22 +93,18 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.remove(key);
     }
 
-    /**
-     * Removes {@code lab} from this {@code ProgrammerError}.
-     * {@code lab} must exist in ProgrammerError.
-     */
-    public void removeLab(Lab lab) {
-        students.removeLab(lab);
+
+    public ObservableList<Student> getSelectedStudentWrapper() {
+        return students.getSelectedStudentWrapper();
     }
 
-    /**
-     * Adds {@code lab} from this {@code ProgrammerError}.
-     * {@code lab} must not exist in ProgrammerError.
-     */
-    public void addLab(Lab lab) {
-        students.addLab(lab);
+    public void clearSelectedStudentWrapper() {
+        students.clearSelectedStudentWrapper();
     }
 
+    public void setSelectedStudentWrapper(Student target) {
+        students.setSelectedStudentWrapper(target);
+    }
     //// util methods
 
     @Override

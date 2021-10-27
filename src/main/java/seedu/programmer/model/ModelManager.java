@@ -102,19 +102,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteLab(Lab target) {
-        programmerError.removeLab(target);
-    }
-
-    @Override
     public void addStudent(Student student) {
         programmerError.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-    }
-
-    @Override
-    public void addLab(Lab target) {
-        programmerError.addLab(target);
     }
 
     @Override
@@ -132,6 +122,21 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
+    }
+
+    @Override
+    public ObservableList<Student> getSelectedStudentWrapper() {
+        return programmerError.getSelectedStudentWrapper();
+    }
+
+    @Override
+    public void setSelectedStudentWrapper(Student target) {
+        programmerError.setSelectedStudentWrapper(target);
+    }
+
+    @Override
+    public void clearSelectedStudentWrapper() {
+        programmerError.clearSelectedStudentWrapper();
     }
 
     @Override

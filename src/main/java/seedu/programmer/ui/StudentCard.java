@@ -89,10 +89,10 @@ public class StudentCard extends UiPart<Region> {
         studentId.setText("Student ID: " + student.getStudentIdValue());
         classId.setText("Class ID: " + student.getClassIdValue());
         email.setText("Email: " + student.getEmailValue());
+        tags.getChildren().clear();
         ObservableList<Lab> labResults = student.getLabList();
         for (Lab lab : labResults) {
             Label labLabel = new Label(lab.toString());
-            Background background;
             labLabel.setStyle(" -fx-background-color: red;");
             if (lab.isMarked()) {
                 labLabel.setStyle(" -fx-background-color: green;");

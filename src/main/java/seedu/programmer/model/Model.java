@@ -65,18 +65,6 @@ public interface Model {
     void deleteStudent(Student target);
 
     /**
-     * Deletes the given Lab.
-     * The Lab must exist in ProgrammerError.
-     */
-    void deleteLab(Lab target);
-
-    /**
-     * Adds the given Lab.
-     * The Lab must not exist in ProgrammerError.
-     */
-    void addLab(Lab target);
-
-    /**
      * Shows the given student's lab results.
      * The student must exist in ProgrammerError.
      */
@@ -98,6 +86,15 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
+
+    /** Returns the selected student wrapped in an ObservableList */
+    ObservableList<Student> getSelectedStudentWrapper();
+
+    /** Puts the target student in the wrapper  */
+    void setSelectedStudentWrapper(Student target);
+
+    /** Clear the selected student in the wrapper  */
+    void clearSelectedStudentWrapper();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.

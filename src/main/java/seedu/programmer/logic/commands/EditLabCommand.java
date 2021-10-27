@@ -88,6 +88,11 @@ public class EditLabCommand extends Command {
                 model.setStudent(std, editedStd);
             }
         }
+        if (!model.getSelectedStudentWrapper().isEmpty()) {
+            Student selectedStudent = model.getSelectedStudentWrapper().get(0).copy();
+            selectedStudent.editLabInfo(original, newLabNum, total);
+            model.setSelectedStudentWrapper(selectedStudent);
+        }
 
         return new CommandResult(String.format(MESSAGE_EDIT_LAB_SUCCESS, original));
     }

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.Messages;
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.exceptions.CommandException;
@@ -40,6 +42,7 @@ public class ShowCommand extends Command {
         }
 
         Student studentToShow = lastShownList.get(targetIndex.getZeroBased());
+        model.setSelectedStudentWrapper(studentToShow);
         return new ShowCommandResult(MESSAGE_SHOW_STUDENT_SUCCESS, studentToShow);
     }
 

@@ -51,6 +51,7 @@ public class AddCommand extends Command {
         }
 
         model.addStudent(toAdd);
+        model.setSelectedStudentWrapper(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
