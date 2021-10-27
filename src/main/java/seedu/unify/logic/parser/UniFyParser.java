@@ -18,6 +18,7 @@ import seedu.unify.logic.commands.HelpCommand;
 import seedu.unify.logic.commands.ListCommand;
 import seedu.unify.logic.commands.ShowCommand;
 import seedu.unify.logic.commands.TagCommand;
+import seedu.unify.logic.commands.UndoneCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 
 /**
@@ -62,6 +63,9 @@ public class UniFyParser {
         case DoneCommand.COMMAND_WORD:
             return new DoneCommandParser().parse(arguments);
 
+        case UndoneCommand.COMMAND_WORD:
+            return new UndoneCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -86,6 +90,7 @@ public class UniFyParser {
         }
     }
 }
+
 
 
 

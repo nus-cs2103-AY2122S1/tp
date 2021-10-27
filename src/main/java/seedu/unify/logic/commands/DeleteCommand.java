@@ -15,7 +15,7 @@ import seedu.unify.model.Model;
 import seedu.unify.model.task.Task;
 
 /**
- * Deletes a task identified using it's displayed index(es) or name from Uni-Fy.
+ * Deletes a task identified using it's displayed index(es) from Uni-Fy.
  */
 public class DeleteCommand extends Command {
 
