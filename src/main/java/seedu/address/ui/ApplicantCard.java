@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ProfileUrl;
 
 /**
  * A UI component that displays information of a {@code Applicant}.
@@ -26,8 +27,8 @@ public class ApplicantCard extends UiPart<Region> {
      */
 
     public final Applicant applicant;
-    private String gitHubUrl;
-    private String linkedInUrl;
+    private ProfileUrl gitHubUrl;
+    private ProfileUrl linkedInUrl;
 
     @FXML
     private ImageView gitHubLogo;
@@ -71,9 +72,8 @@ public class ApplicantCard extends UiPart<Region> {
 
     private void initializeHyperlinksForApplicant(Applicant applicant) {
         // Insert the code for initializing the applicant github link and linkedin link here
-        this.gitHubUrl = applicant.hasGitHubProfile() ? applicant.getGitHubUrl() : "https://github.com/";
-        this.linkedInUrl = applicant.hasLinkedInProfile() ? applicant.getLinkedInUrl()
-                : "https://www.linkedin.com/feed/";
+        this.gitHubUrl = applicant.getGitHubUrl();
+        this.linkedInUrl = applicant.getLinkedInUrl();
         if (!applicant.hasGitHubProfile()) {
             removeGitHubHyperLinkFromApplicantCard();
         }
@@ -95,7 +95,7 @@ public class ApplicantCard extends UiPart<Region> {
     private void handleGitHubHyperlink() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(gitHubUrl);
+        url.putString(gitHubUrl.getUrlString());
         clipboard.setContent(url);
     }
 
@@ -103,7 +103,7 @@ public class ApplicantCard extends UiPart<Region> {
     private void handleLinkedInHyperlink() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(linkedInUrl);
+        url.putString(linkedInUrl.getUrlString());
         clipboard.setContent(url);
     }
 

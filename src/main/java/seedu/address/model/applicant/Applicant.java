@@ -23,14 +23,14 @@ public class Applicant {
     // Data fields
     private final Address address;
     private final Application application;
-    private String gitHubUrl;
-    private String linkedInUrl;
+    private ProfileUrl gitHubUrl;
+    private ProfileUrl linkedInUrl;
 
     /**
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Position position,
-                     String gitHubUrl, String linkedInUrl) {
+                     ProfileUrl gitHubUrl, ProfileUrl linkedInUrl) {
         this(name, phone, email, address, new Application(position), gitHubUrl, linkedInUrl);
     }
 
@@ -54,13 +54,15 @@ public class Applicant {
      * Internal constructor for a new Applicant object.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Application application,
-                     String gitHubUrl, String linkedInUrl) {
+                     ProfileUrl gitHubUrl, ProfileUrl linkedInUrl) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.application = application;
+        this.gitHubUrl = gitHubUrl;
+        this.linkedInUrl = linkedInUrl;
     }
 
     /**
@@ -95,20 +97,20 @@ public class Applicant {
         return application.getTitle();
     }
 
-    public String getGitHubUrl() {
+    public ProfileUrl getGitHubUrl() {
         return gitHubUrl;
     }
 
     public boolean hasGitHubProfile() {
-        return gitHubUrl != null;
+        return gitHubUrl.hasProfile();
     }
 
-    public String getLinkedInUrl() {
+    public ProfileUrl getLinkedInUrl() {
         return linkedInUrl;
     }
 
     public boolean hasLinkedInProfile() {
-        return linkedInUrl != null;
+        return linkedInUrl.hasProfile();
     }
 
     /**

@@ -11,14 +11,14 @@ public class ApplicantParticulars {
     private final Email email;
     private final Address address;
     private final Title positionTitle;
-    private String gitHubUrl;
-    private String linkedInUrl;
+    private ProfileUrl gitHubUrl;
+    private ProfileUrl linkedInUrl;
 
     /**
      * Constructor for an ApplicantParticulars object.
      */
     public ApplicantParticulars(Name name, Phone phone, Email email, Address address, Title positionTitle,
-                                String gitHubUrl, String linkedInUrl) {
+                                ProfileUrl gitHubUrl, ProfileUrl linkedInUrl) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,11 +48,11 @@ public class ApplicantParticulars {
         return positionTitle;
     }
 
-    public String getGitHubUrl() {
+    public ProfileUrl getGitHubUrl() {
         return gitHubUrl;
     }
 
-    public String getLinkedInUrl() {
+    public ProfileUrl getLinkedInUrl() {
         return linkedInUrl;
     }
 }

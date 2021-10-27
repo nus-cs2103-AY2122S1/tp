@@ -12,6 +12,7 @@ import seedu.address.model.applicant.Application;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
@@ -27,6 +28,8 @@ public class EditApplicantDescriptor {
     private Address address;
     private Application application;
     private Title title;
+    private ProfileUrl gitHubUrl;
+    private ProfileUrl linkedInUrl;
 
     public EditApplicantDescriptor() {}
 
@@ -41,13 +44,15 @@ public class EditApplicantDescriptor {
         setAddress(toCopy.address);
         setApplication(toCopy.application);
         setTitle(toCopy.title);
+        setGitHubProfile(toCopy.gitHubUrl);
+        setLinkedInProfile(toCopy.linkedInUrl);
     }
 
     /**
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, phone, email, address, application, title);
+        return CollectionUtil.isAnyNonNull(name, phone, email, address, application, title, gitHubUrl, linkedInUrl);
     }
 
     public void setName(Name name) {
@@ -98,6 +103,33 @@ public class EditApplicantDescriptor {
         return Optional.ofNullable(title);
     }
 
+    public void setGitHubProfile(ProfileUrl gitHubUrl) {
+        this.gitHubUrl = gitHubUrl;
+    }
+
+    /**
+     * Returns the github url as an optional object. Since ProfileUrl already has its own null-handling, this will
+     * never be an empty optional.
+     *
+     * @return optional object containing a profile url.
+     */
+    public Optional<ProfileUrl> getGitHubUrl() {
+        return Optional.ofNullable(gitHubUrl);
+    }
+
+    public void setLinkedInProfile(ProfileUrl linkedInUrl) {
+        this.linkedInUrl = linkedInUrl;
+    }
+
+    /**
+     * Returns the linkedin url as an optional object. Since ProfileUrl already has its own null-handling, this will
+     * never be an empty optional.
+     *
+     * @return optional object containing a profile url.
+     */
+    public Optional<ProfileUrl> getLinkedInUrl() {
+        return Optional.ofNullable(linkedInUrl);
+    }
 
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
@@ -111,8 +143,11 @@ public class EditApplicantDescriptor {
         Email updatedEmail = getEmail().orElse(applicantToEdit.getEmail());
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
         Application updatedApplication = getApplication().orElse(applicantToEdit.getApplication());
+        ProfileUrl updatedGitHubUrl = getGitHubUrl().orElse(applicantToEdit.getGitHubUrl());
+        ProfileUrl updatedLinkedInUrl = getLinkedInUrl().orElse(applicantToEdit.getLinkedInUrl());
 
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication,
+                updatedGitHubUrl, updatedLinkedInUrl);
     }
 
     /**
@@ -130,9 +165,12 @@ public class EditApplicantDescriptor {
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
 
         Title title = getTitle().orElse(applicantToEdit.getTitle());
-
         Position updatedPosition = model.getPositionByTitle(title);
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPosition);
+
+        ProfileUrl updatedGitHubUrl = getGitHubUrl().orElse(applicantToEdit.getGitHubUrl());
+        ProfileUrl updatedLinkedInUrl = getLinkedInUrl().orElse(applicantToEdit.getLinkedInUrl());
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPosition,
+                updatedGitHubUrl, updatedLinkedInUrl);
     }
 
     @Override
