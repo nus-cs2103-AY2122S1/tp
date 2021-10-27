@@ -25,6 +25,8 @@ public class PersonAdditionalListPanel extends UiPart<Region> {
      */
     public PersonAdditionalListPanel(ObservableList<Person> personList) {
         super(FXML);
+        personAdditionalListView.setMouseTransparent(true);
+        personAdditionalListView.setFocusTraversable(false);
         personAdditionalListView.setItems(personList);
         personAdditionalListView.setCellFactory(listView -> new PersonAdditionalListViewCell());
     }
@@ -36,7 +38,6 @@ public class PersonAdditionalListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
-
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
