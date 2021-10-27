@@ -54,6 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonAdditionalListPanel personAdditionalListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -126,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         residentsTab.setGraphic(residentContent);
 
         HBox eventContent = new HBox();
-        Label eventLabel = new Label("Events");
+        Label eventLabel = new Label("Events     ");
         ImageView eventImage = new ImageView("/images/event.png");
         eventImage.setFitHeight(37);
         eventImage.setFitWidth(50);
@@ -223,7 +224,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -275,6 +276,28 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * Set isResidentTab of CommandBox to True.
+     */
+    @FXML
+    private void commandBoxToResidents() {
+        if (commandBox != null) {
+            this.commandBox.setIsResidentTab(true);
+            this.commandBox.refreshSuggestions();
+        }
+    }
+
+    /**
+     * Set isResidentTab of CommandBox to False.
+     */
+    @FXML
+    private void commandBoxToEvents() {
+        if (commandBox != null) {
+            this.commandBox.setIsResidentTab(false);
+            this.commandBox.refreshSuggestions();
+        }
     }
 
     /**
