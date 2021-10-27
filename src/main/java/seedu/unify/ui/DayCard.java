@@ -42,7 +42,7 @@ public class DayCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         name.setText(task.getName().taskName);
-        date.setText(task.getDate().toString());
+        date.setText(task.getTime().toString());
         if (task.getDate().localDate.equals(LocalDate.now())) {
             if (size < 3) {
                 cardPane.getStyleClass().add("dayCardLight");
