@@ -16,11 +16,12 @@ import seedu.address.model.reservation.exception.ReservationNotFoundException;
  * Supports a minimal set of list operations.
  */
 public class ReservationList implements Iterable<Reservation> {
+    private static final Comparator<Reservation> DATE_TIME_ASCENDING =
+            Comparator.comparing(Reservation::getDateTime).reversed();
+
     private final ObservableList<Reservation> internalList = FXCollections.observableArrayList();
     private final ObservableList<Reservation> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-    private final Comparator<Reservation> DATE_TIME_ASCENDING =
-            Comparator.comparing(Reservation::getDateTime).reversed();
 
     /**
      * Returns true if the list contains an equivalent reservation as the given argument
