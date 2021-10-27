@@ -13,8 +13,8 @@ import tutoraid.model.student.Progress;
 public class AddProgressCommandParser implements Parser<AddProgressCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of PaidCommand
-     * and returns a PaidCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of AddProgressCommand
+     * and returns an AddProgressCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddProgressCommand parse(String args) throws ParseException {

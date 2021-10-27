@@ -34,6 +34,16 @@ public class Capacity {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the capacity in integer.
+     */
+    public int getCapacity() {
+        if (capacity.equals("")) {
+            return Integer.MAX_VALUE;
+        }
+        return Integer.parseInt(capacity);
+    }
+
     @Override
     public String toString() {
         if (capacity.equals("")) {
