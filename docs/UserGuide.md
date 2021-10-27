@@ -261,17 +261,6 @@ You can add multiple members to an event e.g. /m 2 /m 3 /m 4...
 Examples:
 * `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
 
-#### Listing all events : `elist`
-
-Shows a list of all events of a member.
-
-Format: `elist [/m MEMBER_ID]`
-
-* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
-* List all events recorded in Ailurus if `MEMBER_ID` is not given.
-* If  `MEMBER_ID` is provided, list all events that the member is participating in.
-* `MEMBER_ID` refers to the index number shown in the displayed member list.
-
 #### Marking participants as attended : `emark`
 
 Marks the attendance of a participant in a specific event.
@@ -385,7 +374,6 @@ Action | Format, Examples
 **tedit** | `tedit /t TASK_ID [/n TASK_NAME] [/d TASK_DEADLINE]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
 **tdel** | `tdel /t TASK_ID [/t MORE_TASK_ID]…​` <br> e.g., `tdel /t 1 /t 4`
 **eadd** | `eadd /n EVENTNAME [/m MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
-**elist** | `elist [/m MEMBER_ID]` <br> e.g., `elist /m 1`
 **emark** | `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emark /e 1 /m 2 /m 3`
 **emarkall** | `emarkall /e EVENT_ID` <br> e.g. `emarkall /e 5`
 **eunmark** | `unmark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `eunmark /e 2 /m 2 /m 5`
