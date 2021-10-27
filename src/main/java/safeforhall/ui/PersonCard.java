@@ -14,7 +14,6 @@ import safeforhall.model.person.Person;
  * An UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
-
     private static final String FXML = "PersonListCard.fxml";
 
     /**
@@ -52,7 +51,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
 
         if (person.hasMissedDeadline()) {
-            this.getRoot().setStyle("-fx-background-color: #8B0000;");
+            this.getRoot().setStyle("-fx-border-color: derive(#FF0000, 70%); -fx-border-width: 1 1 1 7;");
         }
 
         if (person.getVaccStatus().vaccinated) {

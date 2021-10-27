@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import safeforhall.commons.core.GuiSettings;
@@ -116,8 +117,21 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
-        residentsTab.setGraphic(new Label("Residents"));
-        eventsTab.setGraphic(new Label("Events"));
+        HBox residentContent = new HBox();
+        Label residentLabel = new Label("Residents");
+        ImageView residentImage = new ImageView("/images/person.png");
+        residentImage.setFitHeight(37);
+        residentImage.setFitWidth(50);
+        residentContent.getChildren().addAll(residentImage, residentLabel);
+        residentsTab.setGraphic(residentContent);
+
+        HBox eventContent = new HBox();
+        Label eventLabel = new Label("Events");
+        ImageView eventImage = new ImageView("/images/event.png");
+        eventImage.setFitHeight(37);
+        eventImage.setFitWidth(50);
+        eventContent.getChildren().addAll(eventImage, eventLabel);
+        eventsTab.setGraphic(eventContent);
 
         Button helpButton = createTabButton("/images/help.png");
         helpButton.setOnAction(e -> handleHelp());
