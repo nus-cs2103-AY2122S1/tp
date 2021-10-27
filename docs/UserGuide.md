@@ -52,19 +52,27 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 
 * **Theme Switching:** `CTRL-T`. This will cycle through all the available themes.
 
-<img src="images/UG-images/eggtheme.png" alt="Egg Theme" width="45%"/>
-<img src="images/UG-images/charlottetheme.png" alt="Charlotte Theme" width="45%"/>
-<img src="images/UG-images/squidtheme.png" alt="Squid Theme" width="45%"/>
-<img src="images/UG-images/darktheme.png" alt="Dark Theme" width="45%"/>
+Wonder Egg Priority Theme  |  Charlotte Theme
+:-------------------------:|:-------------------------:
+![](images/UG-images/eggtheme.png)  |  ![](images/UG-images/charlottetheme.png)
+
+Squid Girl Theme           |  Dark Theme
+:-------------------------:|:-------------------------:
+![](images/UG-images/squidtheme.png)  |  ![](images/UG-images/darktheme.png)
 
 ___
 
 * **Tab Switching:** `CTRL-S` and `CTRL-D`. To cycle through the tabs to the right, use `CTRL-D`. To cycle through the tabs to the left, use `CTRL-S`.
 
-<img src="images/UG-images/list.png" alt="all" width="45%"/>
-<img src="images/UG-images/towatch.png" alt="watching" width="45%"/>
-<img src="images/UG-images/watching.png" alt="towatch" width="45%"/>
-<img src="images/UG-images/finished.png" alt="finished" width="45%"/>
+
+All Tab  |  Watching Tab
+:-------------------------:|:-------------------------:
+![](images/UG-images/list.png)  |  ![](images/UG-images/watching.png)
+
+To Watch Tab           |  Finished Tab
+:-------------------------:|:-------------------------:
+![](images/UG-images/towatch.png)  |  ![](images/UG-images/finished.png)
+
 
 ___
 ## Commands
