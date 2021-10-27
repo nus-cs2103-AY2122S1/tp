@@ -29,7 +29,7 @@ public class MemberListPanel extends UiPart<Region> {
      */
     public MemberListPanel(ObservableList<Member> memberList) {
         super(FXML);
-        memberListTitle.setText("Listing All Members");
+        memberListTitle.setText("Members");
         memberListView.setItems(memberList);
         memberListView.setCellFactory(listView -> new MemberListViewCell());
     }

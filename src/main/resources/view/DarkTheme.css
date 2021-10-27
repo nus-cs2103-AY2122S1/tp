@@ -344,7 +344,7 @@
 
 #positions .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: #7e57c2;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
@@ -387,7 +387,7 @@
 }
 
 #titleHolder {
-    -fx-background-color: #774814;
+    -fx-background-color: #36454f;
 }
 
 #memberListTitle, #taskListTitle, #eventListTitle {

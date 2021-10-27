@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -22,6 +23,16 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+
+    /** {@code Predicate} that evaluate if task is done */
+    Predicate<Task> PREDICATE_SHOW_ALL_COMPLETED_TASKS = Task::isDone;
+
+    /** {@code Predicate} that evaluate if task is not done */
+    Predicate<Task> PREDICATE_SHOW_ALL_DUE_TASKS = task -> !task.isDone();
+
+    /** {@code Predicate} that evaluate if task is overdue */
+    Predicate<Task> PREDICATE_SHOW_ALL_OVERDUE_TASKS = task -> !task.isDone()
+            && task.getTaskDeadlineDate().isBefore(LocalDateTime.now());
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -166,12 +177,12 @@ public interface Model {
      * Replaces the given task {@code target} with {@code editedTask} in the given {@code member}'s task list.
      * {@code target} must exist in the task list.
      */
-    void setTask(Member member, Task target, Task editedTask);
+    void setTask(Task target, Task editedTask);
 
     /**
      * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
      */
-    void setTask(Member member, int index, Task editedTask);
+    void setTask(int index, Task editedTask);
 
     /**
      * Returns an unmodifiable view of the filtered task list of the given {@code member}.
@@ -191,4 +202,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Member member, Predicate<Task> predicate);
+
+    void updateFilteredTaskList(Predicate<Task> predicate);
 }
