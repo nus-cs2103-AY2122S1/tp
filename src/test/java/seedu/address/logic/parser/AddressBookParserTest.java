@@ -17,18 +17,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteMarkedCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.MarkCommand;
-import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -76,23 +66,19 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_mark() throws Exception {
-        MarkCommand command = (MarkCommand) parser.parseCommand(
-                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new MarkCommand(new Index[]{INDEX_FIRST_PERSON}), command);
-    }
-
-    @Test
-    public void parseCommand_unmark() throws Exception {
-        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
-                UnmarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnmarkCommand(new Index[]{INDEX_FIRST_PERSON}), command);
-    }
-
-    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_filterInterview() throws Exception {
+        FilterInterviewCommand filterInterviewPastCommand = (FilterInterviewCommand) parser.parseCommand(
+                FilterInterviewCommand.COMMAND_WORD + " past");
+        FilterInterviewCommand filterInterviewFutureCommand = (FilterInterviewCommand) parser.parseCommand(
+                FilterInterviewCommand.COMMAND_WORD + " future");
+        assertEquals(filterInterviewPastCommand, new FilterInterviewPastCommand());
+        assertEquals(filterInterviewFutureCommand, new FilterInterviewFutureCommand());
     }
 
     @Test
@@ -116,6 +102,27 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_mark() throws Exception {
+        MarkCommand command = (MarkCommand) parser.parseCommand(
+                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new MarkCommand(new Index[]{INDEX_FIRST_PERSON}), command);
+    }
+
+    @Test
+    public void parseCommand_unmark() throws Exception {
+        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
+                UnmarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnmarkCommand(new Index[]{INDEX_FIRST_PERSON}), command);
+    }
+
+    @Test
+    public void parseCommand_show() throws Exception {
+        ShowCommand command = (ShowCommand) parser.parseCommand(
+                ShowCommand.COMMAND_WORD + " " + PREFIX_NAME);
+        assertEquals(new ShowCommand(PREFIX_NAME), command);
     }
 
     @Test

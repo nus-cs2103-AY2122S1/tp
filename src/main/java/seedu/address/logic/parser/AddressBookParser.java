@@ -54,6 +54,9 @@ public class AddressBookParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
+        case FilterInterviewCommand.COMMAND_WORD:
+            return new FilterInterviewCommandParser().parse(arguments);
+
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
@@ -70,9 +73,6 @@ public class AddressBookParser {
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
-
-        case FilterInterviewCommand.COMMAND_WORD:
-            return new FilterInterviewCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
