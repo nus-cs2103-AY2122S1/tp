@@ -53,6 +53,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PROFILE_SUCCESS = "Successfully edited profile!";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -71,8 +72,21 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
+    /**
+     * Executes the command to edit user's profile.
+     */
+    public CommandResult executeEditProfile(Model model) {
+        requireNonNull(model);
+        Person currentProfile = model.getUserProfile();
+        Person editedProfile = createEditedPerson(currentProfile, editPersonDescriptor);
+        model.setUserProfile(editedProfile);
+        return new CommandResult(String.format(MESSAGE_EDIT_PROFILE_SUCCESS, editedProfile));
+    }
+
+    /**
+     * Executes the command to edit a contact.
+     */
+    public CommandResult executeEditContact(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -90,6 +104,13 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        if (editPersonDescriptor.getIsProfile()) {
+            return executeEditProfile(model);
+        }
+        return executeEditContact(model);
     }
 
     /**
@@ -141,6 +162,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private boolean isProfile;
 
         public EditPersonDescriptor() {}
 
@@ -156,6 +178,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setIsProfile(toCopy.isProfile);
         }
 
         /**
@@ -165,8 +188,15 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, telegram, github, phone, email, address, tags);
         }
 
+        public void setIsProfile(boolean isProfile) {
+            this.isProfile = isProfile;
+        }
+
         public void setName(Name name) {
             this.name = name;
+        }
+        public boolean getIsProfile() {
+            return isProfile;
         }
 
         public Optional<Name> getName() {
