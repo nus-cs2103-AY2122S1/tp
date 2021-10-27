@@ -28,9 +28,10 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT, PREFIX_GROUP, PREFIX_FILE);
 
-        Path savePath = argMultimap.getValue(PREFIX_FILE)
-                .map(fileName -> fileName.endsWith(".png") ? fileName : fileName + ".png")
-                .map(Path::of).orElse(null);
+        Path savePath = null;
+        if (argMultimap.getValue(PREFIX_FILE).isPresent()) {
+            savePath = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get(), ".png");
+        }
 
         return argMultimap.getPreamble().isEmpty()
                 ? parseByPrefixes(argMultimap, savePath)

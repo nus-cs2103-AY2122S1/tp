@@ -44,7 +44,7 @@ public class ShowCommand extends Command {
             + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name> | "
-            + PREFIX_GROUP + "<group_name>)"
+            + PREFIX_GROUP + "<group_name>) "
             + "[" + PREFIX_FILE + "<export_location>]";
 
     public static final String MESSAGE_SUCCESS = "Info requested successfully";
@@ -94,7 +94,7 @@ public class ShowCommand extends Command {
     }
 
     /**
-     * Constructor for a {@code ShowCommand} with given {@code ShowCommand}.
+     * Constructor for a {@code ShowCommand} with given {@code Group}.
      */
     public ShowCommand(Group group, Path savePath) {
         setGroup(group);
@@ -114,7 +114,7 @@ public class ShowCommand extends Command {
     }
 
     /**
-     * Executes command when a {@code Student} info is requested by index.
+     * Executes command when a {@code Student} info is requested by an {@code Index}.
      */
     private CommandResult showStudentByIndex(Model model) throws CommandException {
         assert getIndex().isPresent();
@@ -133,7 +133,7 @@ public class ShowCommand extends Command {
     }
 
     /**
-     * Executes command when a {@code Student} info is requested by name or ID.
+     * Executes command when a {@code Student} info is requested by a {@code Name} or an {@code ID}.
      */
     private CommandResult showStudentByPrefixes(Model model) throws CommandException {
         assert getName().isPresent() || getId().isPresent();
@@ -200,7 +200,8 @@ public class ShowCommand extends Command {
     }
 
     /**
-     * Creates a {@code Predicate} checking if a student has a matched name or ID.
+     * Creates a {@code Predicate} checking if a student has a matched
+     * {@code Name}, or {@code ID}, or belonging to a {@code Group}.
      */
     private Predicate<Student> createStudentPredicate() {
         if (getName().isPresent()) {

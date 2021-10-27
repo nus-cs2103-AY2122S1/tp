@@ -29,9 +29,8 @@ public class ExportCommandTest {
 
     @Test
     public void execute_success() {
-        ExportCommand command = new ExportCommand();
         Path path = getTempFilePath("execute.csv");
-        command.setPath(path);
+        ExportCommand command = new ExportCommand(path);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(command, model,
                 String.format(ExportCommand.MESSAGE_SUCCESS, path.toString()), expectedModel);
@@ -39,9 +38,8 @@ public class ExportCommandTest {
 
     @Test
     public void exportImport_sameAb_success() throws Exception {
-        ExportCommand command = new ExportCommand();
         Path path = getTempFilePath("exportImport.csv");
-        command.setPath(path);
+        ExportCommand command = new ExportCommand(path);
         command.execute(model);
 
         ImportCommand importCommand = new ImportCommand(
@@ -57,13 +55,16 @@ public class ExportCommandTest {
 
     @Test
     public void equals() {
-        ExportCommand command = new ExportCommand();
-        ExportCommand otherCommand = new ExportCommand();
+        ExportCommand command = new ExportCommand(Path.of("abc.csv"));
+        ExportCommand otherCommand = new ExportCommand(Path.of("abc.csv"));
 
-        // same type
+        // same object
+        assertEquals(command, command);
+
+        // same path
         assertEquals(otherCommand, command);
 
-        otherCommand.setPath(Path.of("abc.csv"));
+        otherCommand = new ExportCommand(Path.of("def.csv"));
         // different path
         assertNotEquals(otherCommand, command);
 

@@ -19,7 +19,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -132,13 +131,19 @@ public class AddressBookParserTest {
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(VALID_TYPICAL_PERSONS_CSV_PATH)), command);
+                ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv")), command);
     }
 
     @Test
     public void parseCommand_export() throws Exception {
         assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD) instanceof ExportCommand);
         assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD + " 3") instanceof ExportCommand);
+
+        ExportCommand command = (ExportCommand) parser.parseCommand(
+                ExportCommand.COMMAND_WORD
+                + FILE_DESC_VALID_FILE);
+
+        assertEquals(new ExportCommand(ParserUtil.parsePath(VALID_TYPICAL_PERSONS_CSV_PATH, ".csv")), command);
     }
 
     @Test
