@@ -281,6 +281,7 @@ Format: `deleteNok INDEX_1 INDEX_2`
 Example Usage:
 * `deleteNok 1 2` - remove the 2nd Next of Kin from the 1st Participant
 
+<br>![result for 'deleteNok 1 2'](images/deleteNokSecondFirstResult.png)
 
 ## Event
 
@@ -551,7 +552,7 @@ from your previous computer. The save file of Managera is found in `[JAR file lo
 **Q**: I accidentally exited Managera by closing the window rather than using the given `exit` command, what do I 
 do?<br>
 **A**: Since Managera automatically saves your data to the hard disk after each change, it should not reverse any 
-changes you have made in the session. Your changes are likely to still be there after restarting Managera.
+changes you have made in the session. Your progress is most likely preserved after restarting Managera.
 
 --------------------------------------------------------------------------------------------------------------------
 
