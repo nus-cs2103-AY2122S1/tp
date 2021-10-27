@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +44,10 @@ public class AddressTest {
         Address address = new Address("Blk 456, Den Road, #01-355");
         Address differentAddress = new Address("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA");
         Address sameAddress = new Address("Blk 456, Den Road, #01-355");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(address.equals(person));
 
         // Different Address
         assertFalse(address.equals(differentAddress));

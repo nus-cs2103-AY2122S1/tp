@@ -13,8 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Exports last searched contact list into filepath
  */
 public class ExportCommand extends Command {
 
@@ -50,7 +49,19 @@ public class ExportCommand extends Command {
         }
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS));
+                String.format(MESSAGE_SUCCESS + " to " + filePath));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ExportCommand)) {
+            return false;
+        }
+        ExportCommand e = (ExportCommand) other;
+        return filePath.equals(e.filePath);
     }
 
 }

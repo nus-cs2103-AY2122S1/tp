@@ -36,6 +36,13 @@ public class NusNetworkId {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another NusNetworkId's value using Java's compareTo function
+     */
+    public int compareTo(NusNetworkId n) {
+        return value.compareTo(n.value);
+    }
+
     @Override
     public String toString() {
         return value;
