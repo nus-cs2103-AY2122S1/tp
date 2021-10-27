@@ -52,19 +52,19 @@ AniList currently supports some hotkeys to allow for ease of use for CLI users.
 
 * **Theme Switching:** `CTRL-T`. This will cycle through all the available themes.
 
-<img src="images/UG-images/eggtheme.png" alt="Egg Theme" width="50%"/>
-<img src="images/UG-images/charlottetheme.png" alt="Charlotte Theme" width="50%"/>
-<img src="images/UG-images/squidtheme.png" alt="Squid Theme" width="50%"/>
-<img src="images/UG-images/darktheme.png" alt="Dark Theme" width="50%"/>
+<img src="images/UG-images/eggtheme.png" alt="Egg Theme" width="49%"/>
+<img src="images/UG-images/charlottetheme.png" alt="Charlotte Theme" width="49%"/>
+<img src="images/UG-images/squidtheme.png" alt="Squid Theme" width="49%"/>
+<img src="images/UG-images/darktheme.png" alt="Dark Theme" width="49%"/>
 
 ___
 
 * **Tab Switching:** `CTRL-S` and `CTRL-D`. To cycle through the tabs to the right, use `CTRL-D`. To cycle through the tabs to the left, use `CTRL-S`.
 
-<img src="images/UG-images/list.png" alt="all" width="50%"/>
-<img src="images/UG-images/towatch.png" alt="watching" width="50%"/>
-<img src="images/UG-images/watching.png" alt="towatch" width="50%"/>
-<img src="images/UG-images/finished.png" alt="finished" width="50%"/>
+<img src="images/UG-images/list.png" alt="all" width="49%"/>
+<img src="images/UG-images/towatch.png" alt="watching" width="49%"/>
+<img src="images/UG-images/watching.png" alt="towatch" width="49%"/>
+<img src="images/UG-images/finished.png" alt="finished" width="49%"/>
 
 ___
 ## Commands
