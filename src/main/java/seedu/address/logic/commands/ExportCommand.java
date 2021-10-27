@@ -19,6 +19,7 @@ import seedu.address.model.facility.Facility;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
+    public static final String MESSAGE_IO_ERROR = "Please close exportedData.csv and try again.";
     public static final String MESSAGE_SUCCESS = "Successfully exported to [JAR file location]/data/exportedData.csv";
 
     @Override
@@ -49,14 +50,14 @@ public class ExportCommand extends Command {
             fw.close();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (IOException e) {
-            throw new CommandException("Please close exportedData.csv and try again.");
+            throw new CommandException(MESSAGE_IO_ERROR);
         }
     }
 
     /**
      * Helper function that converts a given facility's data into a {@code List<String>}.
      *
-     * @param facility the given facility
+     * @param facility the given facility.
      * @return the converted {@code List<String>} of the facility's data.
      */
     private List<String> convertToList(Facility facility) {
