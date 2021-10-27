@@ -122,6 +122,7 @@ public class CommandTestUtil {
     public static final String INVALID_EVENT_NAME_DESC =
             " " + PREFIX_NAME + "Football & Basketball"; // '&' not allowed in names
     public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_DATE + "41/20/20"; // not valid date
+    public static final String INVALID_EVENT_DATE_DESC2 = " " + PREFIX_DATE + "3"; // not valid date
     public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + "$bank"; // '$' not allowed in venues
     public static final String INVALID_CAPACITY_DESC = " " + PREFIX_CAPACITY + "ten"; // accepts numbers only
     public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "18:00"; // accepts numbers only

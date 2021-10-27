@@ -20,7 +20,7 @@ import safeforhall.model.event.Event;
 public class ViewEventCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-
+    public static final String PARAMETERS = "[INDEX]";
     public static final String MESSAGE_ALL_EVENTS_SHOWN = "All events shown";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the additional details of the identified event "
