@@ -93,30 +93,48 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.remove(key);
     }
 
-
+    /**
+     * Returns the selected student wrapped in an ObservableList.
+     */
     public ObservableList<Student> getSelectedStudentWrapper() {
         return students.getSelectedStudentWrapper();
     }
 
+    /**
+     * Puts the target student in the wrapper.
+     */
+    public void setSelectedStudentWrapper(Student target) {
+        students.setSelectedStudentWrapper(target);
+    }
+
+    /**
+     * Clears the selected student in the wrapper.
+     */
     public void clearSelectedStudentWrapper() {
         students.clearSelectedStudentWrapper();
     }
 
+    /**
+     * Returns the selected labs.
+     */
     public ObservableList<Lab> getSelectedLabs() {
         return students.getSelectedLabs();
     }
 
+    /**
+     * Changes the selected labs.
+     */
     public void setSelectedLabs(List<Lab> labs) {
         students.setSelectedLabs(labs);
     }
 
+    /**
+     * Clears the selected labs.
+     */
     public void clearSelectedLabs() {
         students.clearSelectedLabs();
     }
 
-    public void setSelectedStudentWrapper(Student target) {
-        students.setSelectedStudentWrapper(target);
-    }
     //// util methods
 
     @Override

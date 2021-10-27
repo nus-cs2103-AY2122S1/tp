@@ -91,16 +91,19 @@ public interface Model {
     /** Returns the selected student wrapped in an ObservableList */
     ObservableList<Student> getSelectedStudentWrapper();
 
-    /** Puts the target student in the wrapper  */
+    /** Puts the target student in the wrapper.  */
     void setSelectedStudentWrapper(Student target);
 
-    /** Clear the selected student in the wrapper  */
+    /** Clears the selected student in the wrapper.  */
     void clearSelectedStudentWrapper();
 
+    /** Returns the selected labs. */
     ObservableList<Lab> getSelectedLabs();
 
+    /** Changes the selected labs. */
     void setSelectedLabs(List<Lab> labs);
 
+    /** Clears the selected labs. */
     void clearSelectedLabs();
 
     /**

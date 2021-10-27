@@ -41,7 +41,7 @@ public interface Logic {
     /** Returns the selected student wrapped in an ObservableList */
     ObservableList<Student> getSelectedStudentWrapper();
 
-    /** Returns the selected student wrapped in an ObservableList */
+    /** Returns the selected labs. */
     ObservableList<Lab> getSelectedLabs();
 
     /** Returns an unmodifiable view of the lab scores of a student */
