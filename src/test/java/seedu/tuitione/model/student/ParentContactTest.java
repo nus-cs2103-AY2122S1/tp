@@ -1,8 +1,6 @@
 package seedu.tuitione.model.student;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
@@ -59,8 +57,8 @@ public class ParentContactTest {
         ParentContact test1 = new ParentContact("91234567");
         ParentContact copyTest1 = new ParentContact("91234567");
         ParentContact test2 = new ParentContact("91234568");
-        assertEquals(test1, test1);
-        assertEquals(test1, copyTest1);
-        assertNotEquals(test1, test2);
+        assertTrue(test1.equals(test1));
+        assertTrue(test1.equals(copyTest1));
+        assertFalse(test1.equals(test2));
     }
 }
