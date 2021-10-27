@@ -78,9 +78,9 @@ public class SampleDataUtil {
                 new Phone("66886665"), new Email("UGV@example.com"),
                 new Address("10 Ceylon Rd, Singapore 429606"),
                 new Review("Well, the mushroom dosai & rava masala dosai were really good. But their fried rice was "
-                        + "terrible. It’s just so soaked in oil felt like I was drinking the cooking oil. Never order "
-                        + "the fried rice. Always Stick to thosai."), getTagSet("vegetarian", "indian"),
-                    new Rating("2")),
+                        + "terrible. It’s just so soaked in oil felt like I was drinking the cooking oil. "
+                        + "Never order the fried rice. Always Stick to thosai."),
+                    getTagSet("vegetarian", "indian"), new Rating("2")),
             new Person(new CategoryCode("fnb"), new Name("Canton Paradise"), new Phone("67783817"),
                 new Email("paradiseGroup@gmail.com"), new Address("2 Bayfront Ave, #01 - 02, Singapore 018972"),
                 new Review("Amazing Chinese Food!"),
