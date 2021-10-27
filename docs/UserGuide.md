@@ -20,7 +20,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
    * [Finding contacts by name / module code: `find`](#find)
 
-   * [Edit contact: `edit`](#edit)
+   * [Editing contact: `edit`](#edit)
 
    * [Deleting contact individually / in batches: `delete`](#delete)
 
