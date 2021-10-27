@@ -122,7 +122,7 @@ order [Products](#323-defining-client-and-product) from you.
 The table below explains some technical terms that you may come across throughout the user guide.
 
 | Term | Definition |
-|:---:|:---:|
+|:---:| --- |
 | CLI | The Command-Line Interface (CLI) is the user interface in which Sellah is based on. Unlike traditional Graphical User Interface (GUI) base applications, it may be less intuitive to new users. However upon familiarisation, fast typists may find it faster to use. |
 | Command | Keywords that Sellah recognises to invoke specific commands. |
 | Parameters | Information to be passed to the Commands. |
@@ -132,6 +132,14 @@ The table below explains some technical terms that you may come across throughou
 #### 3.2.2 General Symbols and Syntax
 
 The table below explains the general syntax used throughout the user guide.
+
+| Term | Definition |
+|:---:| --- |
+| CLI | The Command-Line Interface (CLI) is the user interface in which Sellah is based on. Unlike traditional Graphical User Interface (GUI) base applications, it may be less intuitive to new users. However upon familiarisation, fast typists may find it faster to use. |
+| Command | Keywords that Sellah recognises to invoke specific commands. |
+| Parameters | Information to be passed to the Commands. |
+| Index | The number next to the list of [Clients](#323-defining-client-and-product) or [Products](#323-defining-client-and-product). |
+| ID | Each [Client](#323-defining-client-and-product) or [Product](#323-defining-client-and-product) is associated with a unique numerical `ID`. This number may not always be the same as `Index`. |
 
 | Syntax | Definition |
 |:---:| --- |
