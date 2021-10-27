@@ -8,12 +8,23 @@ title: AcademyDirectory
 
 ![Ui](images/Ui.png)
 
-**AcademyDirectory is a desktop app for CS1101S tutors to manage students’ contact, grades, tutorial attendance, and assignment completion.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**Academy Directory is a desktop app for CS1101S tutors to manage their students.** Its main features are as follows:
+- Manage students’ personal details
+- Track students' grades, Studio attendance, and participation
+- Visualize data in Academy Directory
 
-* If you are interested in using AcademyDirectory, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AcademyDirectory, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+Academy Directory runs on all major operating systems! It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+## Site Map
+* If you are interested in using AcademyDirectory, head over to our [**User Guide**](UserGuide.html).
+* If you are interested in developing Academy Directory further, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
-**Acknowledgements**
-
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+## Acknowledgements
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+- The formatting and content of the User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/)
+- Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git)
+- Libraries used: 
+  - [JavaFX](https://openjfx.io/) for the amazing GUI
+  - [Jackson](https://github.com/FasterXML/jackson) to save your data
+  - [JUnit5](https://github.com/junit-team/junit5) so that we can deliver to you bug-free!
