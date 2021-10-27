@@ -8,16 +8,16 @@ Participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 Participant ":AddCommand" as AddCommand LOGIC_COLOR
 
 User -> CommandBox : "add ..."
-activate CommandBox
+activate CommandBox UI_COLOR
 CommandBox -> Logic : execute("add ...")
-activate Logic
+activate Logic LOGIC_COLOR
 Logic -> AddressBookParser : parseCommand("add ...")
-activate AddressBookParser
+activate AddressBookParser LOGIC_COLOR
 create AddCommand
 AddressBookParser -> AddCommand
 
 AddressBookParser -> AddCommand : parse("add ...")
-activate AddCommand
+activate AddCommand LOGIC_COLOR
 AddressBookParser <-- AddCommand
 deactivate AddCommand
 @enduml
