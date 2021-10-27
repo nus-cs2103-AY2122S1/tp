@@ -195,6 +195,13 @@ public class Participant {
         return nextOfKins.get(index);
     }
 
+    public String getNextOfKinsListString() {
+        final StringBuilder builder = new StringBuilder();
+        IntStream.range(1, nextOfKins.size() + 1).forEach(i ->
+                builder.append(i).append(". ").append(nextOfKins.get(i - 1).toString()).append("\n"));
+        return builder.toString();
+    }
+
     /**
      * Returns true if the given next of kin is already assigned to this participant.
      *
@@ -311,8 +318,8 @@ public class Participant {
 
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: \n");
-            IntStream.range(1, nextOfKins.size() + 1).forEach(i ->
-                    builder.append(i).append(". ").append(nextOfKins.get(i - 1).toString()).append("\n"));
+            builder.append(getNextOfKinsListString());
+
         }
 
         if (!events.isEmpty()) {

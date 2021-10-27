@@ -56,17 +56,7 @@ public class ParticipantCard extends UiPart<Region> {
         address.setText(participant.getAddressValue());
         email.setText(participant.getEmailValue());
         birthDate.setText(participant.getBirthDateString());
-        nextOfKins.setText(getListString(participant.getNextOfKins()));
-    }
-
-    private <T> String getListString(List<T> list) {
-        if (list.isEmpty()) {
-            return "";
-        }
-
-        return IntStream.range(1, list.size() + 1)
-                .mapToObj(i -> i + ". " + list.get(i - 1).toString() + "\n")
-                .collect(Collectors.joining());
+        nextOfKins.setText(participant.getNextOfKinsListString());
     }
 
     @Override
