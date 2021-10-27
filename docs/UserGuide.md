@@ -371,7 +371,7 @@ Format: `redo`
 
 * `redo` only reverts changes made
 * `redo` will display an error message if there are no changes to be redone
-* 
+
 #### Seeking help : `help`
 
 ![help message](images/helpMessage.png)
@@ -430,6 +430,7 @@ Format: `revert HASH`
 
 Example:
 * `revert 6fdfx` reverts state of Academy Directory to the commit with hash starting with `6fdfx`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
