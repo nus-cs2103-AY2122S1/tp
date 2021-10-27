@@ -21,10 +21,10 @@ public class RemoveCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes the given item(s) from the inventory.\n"
-            + "Bogo Bogo still remembers memory about an item including cp and sp"
+            + "Bogo Bogo still remembers memory about an item including cp and sp \n"
             + "Parameters: NAME "
             + "Or " + PREFIX_ID + "ID"
-            + "[" + PREFIX_COUNT + "COUNT" + "]\n"
+            + " [" + PREFIX_COUNT + "COUNT" + "]\n"
             + "Example: " + COMMAND_WORD + "Apple Pie"
             + PREFIX_COUNT + " 1";
 

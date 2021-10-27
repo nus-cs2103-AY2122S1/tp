@@ -18,11 +18,11 @@ import seedu.address.model.item.ItemDescriptor;
 public class AddToOrderCommand extends Command {
     public static final String COMMAND_WORD = "iorder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to current order list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to current order list. \n"
             + "Parameters: "
             + "NAME "
-            + "Or " + PREFIX_ID + "ID"
-            + PREFIX_COUNT + "COUNT "
+            + "Or " + PREFIX_ID + "ID "
+            + PREFIX_COUNT + "COUNT \n"
             + "Example: " + COMMAND_WORD + " "
             + "Milk "
             + PREFIX_COUNT + "10 ";

@@ -21,9 +21,9 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Erases the item from the inventory entirely.\n"
-            + "Removes all memory about an item including cp and sp"
+            + "Removes all memory about an item including cp and sp \n"
             + "Parameters: " + PREFIX_NAME + "NAME"
-            + "Or " + PREFIX_ID + "ID"
+            + " Or " + PREFIX_ID + "ID \n"
             + "Example: " + COMMAND_WORD + "Apple Pie";
 
     public static final String MESSAGE_SUCCESS = "Item deleted: %1$s";
