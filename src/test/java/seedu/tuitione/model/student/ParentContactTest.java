@@ -27,14 +27,28 @@ public class ParentContactTest {
         // invalid phone numbers
         assertFalse(ParentContact.isValidPhone("")); // empty string
         assertFalse(ParentContact.isValidPhone(" ")); // spaces only
-        assertFalse(ParentContact.isValidPhone("91")); // less than 3 numbers
+        assertFalse(ParentContact.isValidPhone("1")); // PH with not exactly 8 characters
+        assertFalse(ParentContact.isValidPhone("12"));
+        assertFalse(ParentContact.isValidPhone("123"));
+        assertFalse(ParentContact.isValidPhone("1234"));
+        assertFalse(ParentContact.isValidPhone("12345"));
+        assertFalse(ParentContact.isValidPhone("123456"));
+        assertFalse(ParentContact.isValidPhone("1234567"));
+        assertFalse(ParentContact.isValidPhone("123456789"));
         assertFalse(ParentContact.isValidPhone("phone")); // non-numeric
         assertFalse(ParentContact.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(ParentContact.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(ParentContact.isValidPhone("02345678")); //PH that starts with 0
+        assertFalse(ParentContact.isValidPhone("12345678")); //PH that starts with 1
+        assertFalse(ParentContact.isValidPhone("22345678")); //PH that starts with 2
+        assertFalse(ParentContact.isValidPhone("32345678")); //PH that starts with 3
+        assertFalse(ParentContact.isValidPhone("42345678")); //PH that starts with 4
+        assertFalse(ParentContact.isValidPhone("52345678")); //PH that starts with 5
+        assertFalse(ParentContact.isValidPhone("72345678")); //PH that starts with 7
 
         // valid phone numbers
-        assertTrue(ParentContact.isValidPhone("67777777")); // exactly 3 numbers
-        assertTrue(ParentContact.isValidPhone("83121534"));
-        assertTrue(ParentContact.isValidPhone("98765432")); // long phone numbers
+        assertTrue(ParentContact.isValidPhone("67777777")); //PH that starts with 6 and is 8 digits long
+        assertTrue(ParentContact.isValidPhone("83121534")); //PH that starts with 8 and is 8 digits long
+        assertTrue(ParentContact.isValidPhone("98765432")); //PH that starts with 9 and is 8 digits long
     }
 }
