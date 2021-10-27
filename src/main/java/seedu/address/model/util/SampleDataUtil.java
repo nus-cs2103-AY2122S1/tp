@@ -63,7 +63,14 @@ public class SampleDataUtil {
     public static Schedule[] getSampleSchedules() {
         try {
             Schedule scheduleOne = new Schedule();
-            scheduleOne.setScheduleDay(0, "1800", "2200", true);
+            scheduleOne.setScheduleDay(1, "0000", "0100", true);
+            scheduleOne.setScheduleDay(1, "0200", "0400", true);
+            scheduleOne.setScheduleDay(1, "0600", "0800", true);
+
+            scheduleOne.setScheduleDay(2, "0600", "0800", true);
+
+            scheduleOne.setScheduleDay(3, "0200", "0400", true);
+            scheduleOne.setScheduleDay(3, "0600", "0800", true);
 
             Schedule scheduleTwo = new Schedule();
             scheduleTwo.setScheduleDay(2, "0200", "1600", true);

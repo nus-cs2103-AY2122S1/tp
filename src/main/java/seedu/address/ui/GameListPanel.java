@@ -10,6 +10,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.friend.*;
 import seedu.address.model.game.Game;
 
 /**
@@ -30,14 +31,11 @@ public class GameListPanel extends UiPart<Region> {
         super(FXML);
         gameListView.setItems(gameList);
         gameListView.setCellFactory(listView -> new GameListViewCell());
+    }
+
+    public void setListener(ChangeListener<Game> gameChangeListener) {
         gameListView.getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener<Game>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Game> observable, Game oldGame, Game newGame) {
-                        // TODO: call API from MainWindow to change the game mounted on MainCard
-                        System.out.println(newGame);
-                    }
-                });
+                .addListener(gameChangeListener);
     }
 
     /**

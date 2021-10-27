@@ -5,9 +5,11 @@ import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.*;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
@@ -29,23 +31,22 @@ public class FriendListPanel extends UiPart<Region> {
     public FriendListPanel(ObservableList<Friend> friendList) {
         super(FXML);
         personListView.setItems(friendList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-        personListView.getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener<Friend>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Friend> observable, Friend oldFriend,
-                                        Friend newFriend) {
-                        // TODO: call API from MainWindow to change the friend mounted on MainCard
-                        System.out.println(newFriend);
-                    }
-                });
+        personListView.setCellFactory(listView -> new FriendListViewCell());
     }
 
+    public void setListener(ChangeListener<Friend> friendChangeListener) {
+        personListView.getSelectionModel().selectedItemProperty()
+                .addListener(friendChangeListener);
+    }
+
+    public void requestFocus() {
+        personListView.requestFocus();
+    }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Friend} using a {@code FriendCard}.
      */
-    class PersonListViewCell extends ListCell<Friend> {
+    class FriendListViewCell extends ListCell<Friend> {
         @Override
         protected void updateItem(Friend friend, boolean empty) {
             super.updateItem(friend, empty);

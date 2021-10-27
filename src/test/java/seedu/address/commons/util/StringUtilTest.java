@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -226,6 +227,17 @@ public class StringUtilTest {
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+    }
+
+    @Test void toTitleCase_success() {
+        // All lowercase
+        assertEquals("Abcdefgh", StringUtil.toTitleCase("abcdefgh"));
+        // Mixed case
+        assertEquals("Abcdefgh", StringUtil.toTitleCase("aBcDEfGh"));
+        // Multiple words case
+        assertEquals("Ab Cde Fgh", StringUtil.toTitleCase("aB CDE fGh"));
+        // Multiple spaces and words case
+        assertEquals("Ab  Cde   Fgh", StringUtil.toTitleCase("aB  cDE   fGh"));
     }
 
 }

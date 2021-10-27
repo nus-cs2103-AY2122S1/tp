@@ -95,4 +95,26 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns a string formatted to TitleCase, where for each word separated by space, only the first character is
+     * uppercase and the remaining is set to lowercase.
+     *
+     * @param s Stromg tp convert
+     * @return String converted to TitleCase
+     */
+    public static String toTitleCase(String s) {
+        requireNonNull(s);
+
+        StringBuilder titleCase = new StringBuilder(s.length());
+        boolean isNextCapital = true;
+
+        for (char c : s.toCharArray()) {
+            c = isNextCapital ? Character.toTitleCase(c) : Character.toLowerCase(c);
+            isNextCapital = Character.isSpaceChar(c);
+            titleCase.append(c);
+        }
+
+        return titleCase.toString();
+    }
 }
