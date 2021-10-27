@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,8 +12,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
-
 /**
  * Controller for the User Profile Window.
  */
@@ -20,10 +20,10 @@ public class UserProfileWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(UserProfileWindow.class);
     private static final String FXML = "UserProfileWindow.fxml";
 
-    private final String HEADING = "Your Details";
-    private final String NAME = "Name: ";
-    private final String GITHUB = "GitHub Username: ";
-    private final String TELEGRAM = "Telegram Handle: ";
+    private static final String HEADING = "Your Details";
+    private static final String NAME = "Name: ";
+    private static final String GITHUB = "GitHub Username: ";
+    private static final String TELEGRAM = "Telegram Handle: ";
 
     private Logic logic;
 
@@ -40,7 +40,7 @@ public class UserProfileWindow extends UiPart<Stage> {
     private Label userTelegram;
 
     @FXML
-    ImageView userProfile;
+    private ImageView userProfile;
 
     /**
      * Creates a new {@code UserProfileWindow}.
