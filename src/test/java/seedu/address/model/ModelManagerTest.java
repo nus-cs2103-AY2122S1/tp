@@ -12,12 +12,14 @@ import static seedu.address.testutil.TypicalClients.CARL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
 import seedu.address.model.client.ClientId;
@@ -156,8 +158,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(ALICE.getName().fullName);
-        modelManager.updateFilteredClientList(new ClientContainsKeywordsPredicate(aMM));
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(ALICE.getName().toString());
+        Predicate<Client> predicate = (client) -> client.getName().toString().equals(aMM.toString());
+        modelManager.updateFilteredClientList(predicate);
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
