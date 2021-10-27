@@ -36,8 +36,8 @@ public class GradeCommand extends Command {
             + "identified by the index number used in the displayed student list. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + "ASSIGNMENT NAME "
-            + PREFIX_SCORE + "SCORE "
-            + PREFIX_STATUS + "STATUS \n"
+            + PREFIX_STATUS + "STATUS"
+            + "[" + PREFIX_SCORE + "SCORE] \n"
             + "Status has 3 possible inputs: Not submitted, Submitted or Graded. \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Assignment 2 "
@@ -89,10 +89,12 @@ public class GradeCommand extends Command {
                 .orElseThrow(() -> new CommandException(MESSAGE_NO_SUCH_ASSIGNMENT));
 
         // Check if score is more than the assignment's maximum score.
-        Score thisScore = grade.getScore();
-        Score maxScore = assignment.getMaxScore();
-        if (thisScore.compareTo(maxScore) > 0) {
-            throw new CommandException(MESSAGE_SCORE_GREATER_THAN_MAX);
+        if (grade.getScore().isPresent()) {
+            Score thisScore = grade.getScore().get();
+            Score maxScore = assignment.getMaxScore();
+            if (thisScore.compareTo(maxScore) > 0) {
+                throw new CommandException(MESSAGE_SCORE_GREATER_THAN_MAX);
+            }
         }
 
 

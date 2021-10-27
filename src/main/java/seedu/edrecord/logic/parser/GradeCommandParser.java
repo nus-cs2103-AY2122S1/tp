@@ -7,6 +7,8 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.Optional;
+
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.logic.commands.GradeCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
@@ -31,7 +33,7 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SCORE, PREFIX_STATUS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_SCORE, PREFIX_STATUS)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STATUS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
         }
 
@@ -44,7 +46,12 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Score score = ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get());
+        Optional<Score> score;
+        if (argMultimap.getValue(PREFIX_SCORE).isPresent()) {
+            score = Optional.of(ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get()));
+        } else {
+            score = Optional.empty();
+        }
         GradeStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         Grade grade = new Grade(score, status);
         return new GradeCommand(index, name, grade);
