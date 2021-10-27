@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
-import seedu.address.model.EmptyShift;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
 
