@@ -42,7 +42,7 @@ public class ClassId {
     }
 
     /**
-     * Get the class number from the ClassId.
+     * Gets the class number from the ClassId.
      *
      * @return the class number
      */
