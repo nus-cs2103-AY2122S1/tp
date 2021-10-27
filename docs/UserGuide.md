@@ -12,20 +12,25 @@ If you are familiar with Unix commands, this is definitely for you!
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    1. [View Sample Data](#view-sample-data)
-    2. [Purge All Data: `purge`](#purge-all-data)
-    3. [Fill Sample Data: `fill`](#fill-sample-data)
-    4. [View Help: `help`](#view-help)
-    5. [Add Student: `add`](#add-student)
-    6. [Filter List: `filter`](#filter-student)
-    7. [Edit Student Details: `edit`](#edit-student)
-    8. [Delete Student: `delete`](#delete-student)
-    9. [Add Lab: `addlab`](#add-lab)
-    10. [Edit Lab: `editlab`](#edit-lab)
-    11. [Delete Lab: `dellab`](#delete-lab)
-    12. [Download data: `download`](#download-data)
-    13. [Upload data: `upload`](#upload-data)
-    14. [Exit: `exit`](#exit)
+  1. [General Features](#general-features)
+     1. [View Help: `help`](#view-help)
+     2. [Exit: `exit`](#exit)
+     3. [View Dashboard `dashboard`](#view-dashboard)
+  2. [Data Features](#data-features)
+     1. [Fill Sample Data: `fill`](#fill-sample-data)
+     2. [Purge All Data: `purge`](#purge-all-data)
+     3. [Download Data: `download`](#download-data)
+     4. [Upload Data: `upload`](#upload-data)
+  3. [Student Features](#student-features)
+     1. [Add Student: `add`](#add-student)
+     2. [Edit Student Details: `edit`](#edit-student)
+     3. [Delete Student: `delete`](#delete-student)
+     4. [Filter Students: `filter`](#filter-student)
+     5. [Show Student Details `show`](#show-student)
+  4. [Lab Features](#lab-features)
+     1. [Add Lab: `addlab`](#add-lab)
+     2. [Edit Lab: `editlab`](#edit-lab)
+     3. [Delete Lab: `dellab`](#delete-lab)
 
 - [Command Summary](#command-summary)
 
@@ -34,7 +39,7 @@ If you are familiar with Unix commands, this is definitely for you!
 1. Ensure you have Java `11` or above installed in your Computer.
 
 2. Download the latest `programmerError.jar`
-   from [here](https://github.com/se-edu/addressbook-level3/releases) [coming soon].
+   from [here](https://github.com/AY2122S1-CS2103-F09-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your ProgrammerError.
 
@@ -42,23 +47,23 @@ If you are familiar with Unix commands, this is definitely for you!
    contains some sample data.<br>
    ![Ui](images/Ui1_v1.3b.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will
    open the help window.<br>
-   Some example commands you can try:
+   Here are some example commands you can try:
 
-    * **`add -n Sherwin -sid A1234567X -cid B01 -email e0523451@u.nus.edu`**: Adds a student named `Sherwin` to the PE with his Student ID, Class ID and Email.
+    * **`add -n Sherwin -sid A1234567X -cid B01 -email e0523451@u.nus.edu`**: Adds a student named `Sherwin` to PE with his Student ID, Class ID and Email.
 
-    * **`filter -sid A1234567X`** Filters the list to display student(s) whose student ID contains `A1234567X'
+    * **`filter -sid A1234567X`** Filters the list of students to display the student(s) whose student ID contains `A1234567X'
 
-    * **`edit 1 -n Sherwin`** Updates the name of the student at index 1 (1-indexed) with the `-n` flag
+    * **`edit 1 -n Sherwin`** Updates the name of the student at index 1 (1-indexed) to Sherwin
 
-    * **`delete -sid A1234567X`**  : Deletes a student's record by the student ID
+    * **`delete 1`**  : Deletes the student at index 1 (1-indexed)
 
-    * **`purge`**: Deletes all existing contacts
+    * **`purge`**: Deletes all existing students
 
-    * **`fill`**: Fills the app with sample data
+    * **`fill`**: Fills PE with sample student data
 
-    * **`exit`**: Exits the app.
+    * **`exit`**: Closes the PE window
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -69,16 +74,11 @@ If you are familiar with Unix commands, this is definitely for you!
 - Similar to Unix CLI, the up and down arrow keys can be used to navigate the history of commands executed.
 - Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify
   a student's student ID.
-- Parameters can be in any order.e.g. if the command specifies `-n NAME -sid STUDENT_ID`,
-  `-sid STUDENT_ID -n NAME`is also acceptable.
-- If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of
-  the parameter will be taken. e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
+- Parameters can be in any order. <br> e.g. if the command specifies `-n NAME -sid STUDENT_ID`, `-sid STUDENT_ID -n NAME`is also acceptable.
+- If a parameter is expected only once in the command, but you specified it multiple times, only the **last** occurrence of
+  the parameter will be taken. <br> e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be
   ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-### <a name="view-sample-data"></a>1. View sample data
-
-Sample Data will be available on starting PE.
 
 ### <a name="purge-all-data"></a>2. Purge all Data: `purge`
 
