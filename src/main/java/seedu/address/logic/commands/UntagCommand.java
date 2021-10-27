@@ -45,7 +45,7 @@ public class UntagCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_TAG_NOT_IN_PERSON = "%s does not have the following tags: %s";
 
-    private static final Logger logger = LogsCenter.getLogger(HelpCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(UntagCommand.class);
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
