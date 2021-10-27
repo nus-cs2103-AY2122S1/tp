@@ -158,6 +158,13 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
+The ```show``` command is facilitated by creating an ```ObservableList``` of ```Person``` objects from the
+```AddressBook```. A ```List``` of unique ```String``` objects is created, with ```String``` content depending on
+the prefix provided by the user. 
+
+The following activity diagram summarizes what happens when a user executes a ```show``` command:
+![images](images/ShowCommandActivityDiagram.png)
+
 Given below is an example usage scenario and how the show operation behaves at each step.
 
 Step 1. A valid command `show n/` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -175,7 +182,7 @@ Step 4. Once the string of all applicant names is formed, `CommandResult` is ini
 and returned.
 
 The following sequence diagram shows how the show operation works.
-![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+![images](images/ShowCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
