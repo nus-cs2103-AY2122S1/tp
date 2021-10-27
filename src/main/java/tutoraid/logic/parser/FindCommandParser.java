@@ -45,8 +45,13 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String trimmedArgs = arguments.trim();
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            if (commandFlag.equals(FindStudentCommand.COMMAND_FLAG)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLessonCommand.MESSAGE_USAGE));
+            }
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
