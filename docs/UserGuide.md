@@ -12,7 +12,7 @@ the kind of user you may be.
 | I am... | Instructions |
 | ------- | ------------ |
 | ... a new user          | You may want to take a look at the [introduction](#introduction) to SPAM to get a better understanding of what the application can do. After that, we suggest following our [quick start guide](#quick-start) to install and have a tour of the application. |
-| ... an experienced user | You may want to take a look at the [navigation links](#navigation-links) below to jump straight to the content that you are looking for. You could also make use of the search bar by pressing the `ctrl` and `f` keys. |
+| ... an experienced user | You may want to take a look at the [navigation links](#navigation-links) below to jump straight to the content that you are looking for. You could also make use of the search bar by pressing the `ctrl` (on Windows/Linux) / `command ⌘` (on macOS) and `f` keys. Alternatively, search for a term in this entire site by using the [search](Search.html) feature.|
 
 #### Navigation Links
 
@@ -457,13 +457,30 @@ exit
 
 ## FAQ
 
-This section contains all the frequently asked questions about SPAM.
+This section contains some frequently asked questions about SPAM.
 
 <div class="card mb-3">
 <div markdown="1" class="card-body pt-0 pb-0">
 <h6 markdown="1" class="card-title">How do I transfer my data to another computer?</h6>
+
+**Option 1:**
 Export all the contacts in your current device into a _.csv_ file. Then, after installing the app in your new device,
 import the _.csv_ file into the new list of contacts.
+
+**Option 2 (with encryption):**
+Move the encrypted file from the application's data folder in your current device to the application's data folder in 
+your new device. Start the application and then enter the same password when prompted. 
+</div>
+</div>
+
+<div class="card mb-3">
+<div markdown="1" class="card-body pt-0 pb-0">
+<h6 markdown="1" class="card-title">Help, I have forgotten my password!</h6>
+Unfortunately, there is no way to reset the password. To continue using the application, you need to move the encrypted 
+data file to a different location or delete it. The application will create a fresh data set for you to start over with.
+
+The good news is, the data file stays encrypted and secure regardless! If you suddenly remembered the password you used
+to encrypt the data, just move the data file back to the original directory and restart the application.
 </div>
 </div>
 
