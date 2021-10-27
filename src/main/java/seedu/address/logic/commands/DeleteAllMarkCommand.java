@@ -14,16 +14,16 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentMark;
 
 /**
- * Deletes the latest mark of an existing student in the ClassMATE.
+ * Deletes all marks of an existing student in the ClassMATE.
  */
-public class DeleteLastMarkCommand extends Command {
+public class DeleteAllMarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletelm";
+    public static final String COMMAND_WORD = "deleteam";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes Student's Latest Mark\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes All of Student's Mark\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_DELETE_MARK_STUDENT_SUCCESS = "Deleted Mark from Student: %1$s";
+    public static final String MESSAGE_DELETE_ALL_MARK_STUDENT_SUCCESS = "Deleted All Marks of Student: %1$s";
     public static final String MESSAGE_NO_MARKS = "No Marks to Delete!";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE.";
 
@@ -32,7 +32,7 @@ public class DeleteLastMarkCommand extends Command {
     /**
      * @param index of the student in the filtered student list to edit
      */
-    public DeleteLastMarkCommand(Index index) {
+    public DeleteAllMarkCommand(Index index) {
         requireNonNull(index);
 
         this.index = index;
@@ -48,7 +48,7 @@ public class DeleteLastMarkCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = deleteLastStudentMark(studentToEdit);
+        Student editedStudent = deleteAllStudentMark(studentToEdit);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -56,19 +56,18 @@ public class DeleteLastMarkCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_DELETE_MARK_STUDENT_SUCCESS, editedStudent));
+        return new CommandResult(String.format(MESSAGE_DELETE_ALL_MARK_STUDENT_SUCCESS, editedStudent));
     }
 
     /**
-     * Creates and returns a {@code Student} with the latest mark deleted.
+     * Creates and returns a {@code Student} with all the marks deleted.
      */
-    private static Student deleteLastStudentMark(Student studentToEdit) throws CommandException {
+    private static Student deleteAllStudentMark(Student studentToEdit) throws CommandException {
         assert studentToEdit != null;
-        List<StudentMark> updatedMarks = new ArrayList<>(studentToEdit.getMarks());
-        if (updatedMarks.isEmpty()) {
+        if (studentToEdit.getMarks().isEmpty()) {
             throw new CommandException(MESSAGE_NO_MARKS);
         }
-        updatedMarks.remove(updatedMarks.size() - 1);
+        List<StudentMark> updatedMarks = new ArrayList<>();
         return new Student(
                 studentToEdit.getName(),
                 studentToEdit.getPhone(),
@@ -87,12 +86,12 @@ public class DeleteLastMarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteLastMarkCommand)) {
+        if (!(other instanceof DeleteAllMarkCommand)) {
             return false;
         }
 
         // state check
-        DeleteLastMarkCommand e = (DeleteLastMarkCommand) other;
+        DeleteAllMarkCommand e = (DeleteAllMarkCommand) other;
         return index.equals(e.index);
     }
 }
