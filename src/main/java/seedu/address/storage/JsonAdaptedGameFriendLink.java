@@ -67,7 +67,7 @@ public class JsonAdaptedGameFriendLink {
             throw new IllegalValueException(SkillValue.MESSAGE_CONSTRAINTS);
         }
 
-        SkillValue loadedSkillValue = skillValue == null ? null : ParserUtil.parseSkillValue(skillValue);
+        SkillValue loadedSkillValue = skillValue == null ? new SkillValue(0) : ParserUtil.parseSkillValue(skillValue);
 
         return new GameFriendLink(new GameId(gameId), new FriendId(friendId), new UserName(friendGameUserName),
                 loadedSkillValue);
