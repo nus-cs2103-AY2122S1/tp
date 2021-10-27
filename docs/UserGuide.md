@@ -49,9 +49,9 @@ If you ever want to skip through any section of our user guide, do feel free to 
         * [4.1.3 List](#413-listing-current-modules-list)
         * [4.1.4 Find](#414-finding-a-module-find)
         * [4.1.5 Edit](#415-editing-a-module--edit)
-    * [4.2 Academic Calendar](#42-academic-calendar)
-      * [4.2.1 Take](#421-taking-a-module--take)
-      * [4.2.2 Un-take](#422-removing-the-schedule-from-untake-a-module--untake)
+    * [4.2 Academic Plan](#42-academic-plan)
+      * [4.2.1 Take](#421-adding-a-module-to-the-academic-plan--take)
+      * [4.2.2 Un-take](#422-remove-a-module-from-the-academic-plan--untake)
       * [4.2.3 Info](#423-viewing-user-information--info)
       * [4.2.4 Set](#424-setting-users-mc-goal-or-current-semester--set)
       * [4.2.5 View](#425-see-modules-taken-in-a-specific-semester--view)
@@ -254,7 +254,7 @@ This section gives you a detailed explanation on how each of our features work.
 
 For an easy reference, we have decided to split our features into 3 different sub-categories:
 * Module features
-* Academic Calendar features
+* Academic Plan features
 * Miscellaneous features
 
 The following sub-categories will explain the intended purpose for the set of features.
@@ -334,16 +334,16 @@ Examples:
   as well as editing the title of the 1st module in the database to be Software Engineering respectively.
 * `edit 3 m/2` is equivalent to editing the 3rd module in the database to have a MC of 2.
 
-### 4.2 Academic Calendar
+### 4.2 Academic Plan
 
-Academic Calendar features consist of features that allows you to be able to create and customize your own academic plan.
+Academic Plan features consist of features that allows you to be able to create and customize your own academic plan.
 Do note that these features are the ones that allows you to update and edit your academic plans
 (such as the visual display of which modules you have taken, as well as the progress bar for each of the University's requirements).
 
 Such features include taking/un-taking a module in a specific semester, viewing and setting the current semester or mc goal,
 as well as viewing and clearing modules in a specific semester.
 
-#### 4.2.1 Taking a module : `take`
+#### 4.2.1 Adding a module to the academic plan : `take`
 
 Take a module in the specified semester and adds it to the academic plan.
 
@@ -363,7 +363,7 @@ Example:
 * `take 1 y/1 s/4` is equivalent to scheduling the 1st module in the module tracker database for year 1 special semester 2.
 
 
-#### 4.2.2 Un-take a module : `untake`
+#### 4.2.2 Remove a module from the academic plan : `untake`
 
 Removes a module from the academic plan.
 
@@ -452,7 +452,7 @@ This section gives you the solutions to commonly asked questions.
 **A**: No, deleting a module from the database removes the module from your academic plan.
 
 **Q**: What should I do if there is a module that I want to add into my academic plan but it is not inside the database?<br>
-**A**: First, add the module into the database using the [add](#411-adding-a-module-add) command. Then, you can add the module into your academic plan using the [take](#421-taking-a-module--take) command.
+**A**: First, add the module into the database using the [add](#411-adding-a-module-add) command. Then, you can add the module into your academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -468,7 +468,7 @@ Module Commands | Format, Examples
 **Find** | `find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
 **Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [m/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
 
-Academic Calendar Commands | Format, Examples
+Academic Plan Commands | Format, Examples
 --------|------------------
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
