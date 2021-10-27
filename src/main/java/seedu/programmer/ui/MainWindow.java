@@ -228,9 +228,11 @@ public class MainWindow extends UiPart<Stage> {
         try {
             stuList = fm.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
+            // Error while adding data
             displayPopup("Upload failed: " + e.getMessage());
             return;
         } catch (IllegalValueException e) {
+            // Error with file headers
             displayPopup(e.getMessage());
             return;
         }
