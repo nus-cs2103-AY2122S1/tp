@@ -210,6 +210,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         logger.fine("Showing dashboard window...");
+        isDashboardShowing = true;
         dashboardWindow.show();
     }
 
