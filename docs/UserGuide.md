@@ -73,7 +73,8 @@ $/|Salary
 i/|Index
 e/|Email
 t/|Extra tags
-d/|Date (for mark command) and Shift (for shift related commands)
+d/|Shift (for shift related commands)
+da/|Date
 
 #### Flags for Lookup
 
@@ -367,8 +368,8 @@ Finds all the staff working at a particular shift. The shift can be specified ei
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
 * The DAY entry is not case sensitive.
-* If no date input is provided, it assumes that the period is from the current date to the next seven days.
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If no date input is provided the shift is viewed for this week.
+* If only one date input is provided, the shift is viewed for seven days after the date.
 
 Formats:  
 `viewShift -d DAY-shift_number [da/START_DATE] [da/END_DATE]`  
@@ -393,8 +394,10 @@ Adds a time period where the staff is working to the staff’s schedule.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 * The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
   10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
-* If no date input is provided, it assumes that the period is from the current date to the next seven days.
-* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If no date input is provided, this week is taken as default.
+* If only one date input is provided, the shift added is to the next date that the shift is at. For instance, 
+  if the shift is on a 1/10/2021, a monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
+* If the shift is not in the period provided, the program will do nothing.
 
 Formats:  
 `addShift -n name d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`  
@@ -408,7 +411,7 @@ Examples:
 #### Swapping shifts: `swapShift`
 Swaps shifts between 2 staffs. The 2 staffs are identified using their names.
 
-* If no date input is provided, it assumes that the period is from the current date to the next seven days.
+* If no date input is provided, this week is taken as default.
 * If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
@@ -428,7 +431,7 @@ Note:
 
 Updates the start time and end time of a specific shift of a specific staff.
 
-* If no date input is provided, it assumes that the period is from the current date to the next seven days.
+* If no date input is provided, this week is taken as default.
 * If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
@@ -449,6 +452,10 @@ Examples:
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
+* If no date input is provided, this week is taken as default.
+* If only one date input is provided, it assumes that the period is for the seven days after the date.
+* If the shift to delete is not in the input date range, the program will do nothing.
+
 Formats:  
 `deleteShift -n NAME d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`  
 `deleteShift -i INDEX d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
@@ -468,14 +475,14 @@ Action | Format, Examples
 **Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
+**View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]... [da/START_DATE] [da/END_DATE]`
 **Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
 **Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **View shift** | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
-**Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
-**Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
+**Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END DATE]`
+**Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END DATE]`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
