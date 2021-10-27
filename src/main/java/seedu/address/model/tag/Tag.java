@@ -8,12 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.client.Client;
+import seedu.address.model.client.StringComparable;
 
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Tag extends StringComparable<Tag> {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";

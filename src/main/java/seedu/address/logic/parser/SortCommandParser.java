@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FIELDS;
-import static seedu.address.commons.mapper.PrefixMapper.getName;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.mapper.PrefixMapper;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -30,8 +30,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args, Model model) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
@@ -61,7 +60,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         Prefix result = resultList.get(0);
         if (result.equals(PREFIX_TAG)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_PREFIX, getName(result)));
+            throw new ParseException(String.format(MESSAGE_INVALID_PREFIX, PrefixMapper.getName(PREFIX_TAG)));
         }
 
         return result;

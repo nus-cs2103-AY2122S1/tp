@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.mapper.PrefixMapper.parseAndEditSet;
+import static seedu.address.commons.mapper.PrefixMapper.parseAndEditSetFunction;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,7 +33,6 @@ public class EditCommandParser implements Parser<EditCommand> {
      * and returns an EditCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
-     * @return
      */
     @Override
     public EditCommand parse(String args, Model model) throws ParseException {
@@ -60,7 +59,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         Prefix[] prefixes = allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG);
         for (Prefix prefix : prefixes) {
             if (argMultimap.getValue(prefix).isPresent()) {
-                BiConsumer<EditClientDescriptor, String> parseEditSetFunction = parseAndEditSet(prefix);
+                BiConsumer<EditClientDescriptor, String> parseEditSetFunction = parseAndEditSetFunction(prefix);
                 String toParse = argMultimap.getValue(prefix).get();
                 parseEditSetFunction.accept(editClientDescriptor, toParse);
             }
