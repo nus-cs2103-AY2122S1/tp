@@ -3,70 +3,99 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="MrTechRecruiter" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="750" minWidth="450" onCloseRequest="#handleExit" title="MrTechRecruiter" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Fonts.css"/>
+        <URL value="@Fonts.css" />
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
+            <AnchorPane prefHeight="0.0" prefWidth="675.0">
+               <children>
+              <MenuBar fx:id="menuBar" layoutX="68.0" prefHeight="57.0" prefWidth="675.0">
+                <Menu mnemonicParsing="false" text="File">
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                </Menu>
+              </MenuBar>
+                  <ImageView fitHeight="56.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/MrTechRecruiter.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="120" minHeight="120.0" prefHeight="120.0" prefWidth="340.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <VBox fx:id="applicantList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="applicantList" alignment="TOP_RIGHT" minWidth="340" prefWidth="340.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <StackPane fx:id="applicantListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+               <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="318.0">
+                  <children>
+                     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="115.0" text="Applicants" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                     <ImageView fitHeight="40.0" fitWidth="250.0" pickOnBounds="true">
+                        <image>
+                           <Image url="@../images/Applicant.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+               </HBox>
+          <StackPane fx:id="applicantListPanelPlaceholder" alignment="TOP_LEFT" VBox.vgrow="ALWAYS" />
         </VBox>
 
 
-        <VBox fx:id="positionList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="positionList" alignment="TOP_RIGHT" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <StackPane fx:id="positionListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+               <HBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="318.0">
+                  <children>
+                     <Label alignment="CENTER" prefHeight="45.0" prefWidth="135.0" text="Positions" textAlignment="CENTER" textFill="WHITE" />
+                <ImageView fitHeight="45.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../images/Positions.png" />
+                  </image>
+                </ImageView>
+                  </children>
+               </HBox>
+          <StackPane fx:id="positionListPanelPlaceholder" alignment="TOP_RIGHT" VBox.vgrow="ALWAYS" />
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
