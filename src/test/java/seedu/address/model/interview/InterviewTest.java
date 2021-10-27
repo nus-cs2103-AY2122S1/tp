@@ -62,5 +62,4 @@ class InterviewTest {
         Interview notPassedInterview = new Interview("2100-08-12, 00:10");
         assertFalse(notPassedInterview.hasInterviewPassed());
     }
-    
 }
