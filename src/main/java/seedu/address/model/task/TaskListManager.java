@@ -234,7 +234,6 @@ public class TaskListManager {
             }
         }
         return new double[]{taskDone, taskNotDone, taskOverdue, taskDueSoon, totalTask};
-        //return new double[]{1000000000000000000000000.0, 1000000000000000.0, 1000000000000000.0, 100000000};
     }
 
     @Override
