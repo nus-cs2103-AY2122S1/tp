@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -51,8 +52,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_NATIONALITY + "NATIONALITY] "
             + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP] "
-            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE] "
             + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -111,15 +112,34 @@ public class EditCommand extends Command {
         Nationality updatedNationality = editPersonDescriptor.getNationality().orElse(personToEdit.getNationality());
         TutorialGroup updatedTutorialGroup = editPersonDescriptor.getTutorialGroup()
                 .orElse(personToEdit.getTutorialGroup());
-        SocialHandle updatedSocialHandle = editPersonDescriptor.getSocialHandle()
-                .orElse(personToEdit.getSocialHandle());
         Gender updatedGender = editPersonDescriptor.getGender()
                 .orElse(personToEdit.getGender());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<SocialHandle> updatedSocialHandles = updateSocialHandles(personToEdit, editPersonDescriptor);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNationality,
-                updatedTutorialGroup, updatedSocialHandle, updatedGender, updatedRemark, updatedTags);
+                updatedTutorialGroup, updatedGender, updatedRemark, updatedTags, updatedSocialHandles);
+    }
+
+    private static Set<SocialHandle> updateSocialHandles(
+            Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        Set<SocialHandle> updatedSocialHandles = new HashSet<>();
+        // social handles of non-conflicting platform will be added back
+        if (editPersonDescriptor.getSocialHandles().isPresent()) {
+            updatedSocialHandles.addAll(editPersonDescriptor.getSocialHandles().get());
+            if (updatedSocialHandles.isEmpty()) {
+                return updatedSocialHandles;
+            }
+            Set<SocialHandle> nonDuplicatePlatformSocialHandles = personToEdit.getSocialHandles().stream()
+                    .filter(personSocialHandle -> updatedSocialHandles.stream()
+                            .noneMatch(editSocialHandle -> editSocialHandle.isSamePlatform(personSocialHandle)))
+                    .collect(Collectors.toSet());
+            updatedSocialHandles.addAll(nonDuplicatePlatformSocialHandles);
+        } else {
+            updatedSocialHandles.addAll(personToEdit.getSocialHandles());
+        }
+        return updatedSocialHandles;
     }
 
     @Override
@@ -150,10 +170,10 @@ public class EditCommand extends Command {
         private Email email;
         private Nationality nationality;
         private TutorialGroup tutorialGroup;
-        private SocialHandle socialHandle;
         private Gender gender;
         private Remark remark;
         private Set<Tag> tags;
+        private Set<SocialHandle> socialHandles;
 
         public EditPersonDescriptor() {}
 
@@ -167,18 +187,18 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setNationality(toCopy.nationality);
             setTutorialGroup(toCopy.tutorialGroup);
-            setSocialHandle(toCopy.socialHandle);
             setGender(toCopy.gender);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
+            setSocialHandles(toCopy.socialHandles);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, nationality, tutorialGroup, socialHandle,
-                    gender, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, nationality, tutorialGroup,
+                    gender, remark, tags, socialHandles);
         }
 
         public void setName(Name name) {
@@ -221,14 +241,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(tutorialGroup);
         }
 
-        public void setSocialHandle(SocialHandle socialHandle) {
-            this.socialHandle = socialHandle;
-        }
-
-        public Optional<SocialHandle> getSocialHandle() {
-            return Optional.ofNullable(socialHandle);
-        }
-
         public void setGender(Gender gender) {
             this.gender = gender;
         }
@@ -262,6 +274,25 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code socialHandles} to this object's {@code socialHandles}.
+         * A defensive copy of {@code socialHandles} is used internally.
+         */
+        public void setSocialHandles(Set<SocialHandle> socialHandles) {
+            this.socialHandles = (socialHandles != null) ? new HashSet<>(socialHandles) : null;
+        }
+
+        /**
+         * Returns an unmodifiable social handle set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code socialHandles} is null.
+         */
+        public Optional<Set<SocialHandle>> getSocialHandles() {
+            return (socialHandles != null)
+                    ? Optional.of(Collections.unmodifiableSet(socialHandles)) : Optional.empty();
+        }
+
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -282,10 +313,10 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getNationality().equals(e.getNationality())
                     && getTutorialGroup().equals(e.getTutorialGroup())
-                    && getSocialHandle().equals(e.getSocialHandle())
                     && getGender().equals(e.getGender())
                     && getRemark().equals(e.getRemark())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getSocialHandles().equals(e.getSocialHandles());
         }
     }
 }

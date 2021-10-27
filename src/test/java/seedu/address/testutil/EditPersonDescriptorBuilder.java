@@ -42,9 +42,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setNationality(person.getNationality());
         descriptor.setTutorialGroup(person.getTutorialGroup());
-        descriptor.setSocialHandle(person.getSocialHandle());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
+        descriptor.setSocialHandles(person.getSocialHandles());
     }
 
     /**
@@ -88,14 +88,6 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code SocialHandle} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withSocialHandle(String socialHandle) {
-        descriptor.setSocialHandle(new SocialHandle(socialHandle));
-        return this;
-    }
-
-    /**
      * Sets the {@code Gender} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withGender(String gender) {
@@ -118,6 +110,17 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code socialHandles} into a {@code Set<SocialHandle>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withSocialHandles(String... socialHandles) {
+        Set<SocialHandle> socialHandleSet = Stream.of(socialHandles).map(SocialHandle::new)
+                .collect(Collectors.toSet());
+        descriptor.setSocialHandles(socialHandleSet);
         return this;
     }
 

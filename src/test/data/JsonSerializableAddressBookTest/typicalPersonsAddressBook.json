@@ -5,22 +5,24 @@
     "gender": "F",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "nationality": "Singapore ",
+    "nationality": "Singaporean",
     "tutorialGroup": "T09",
-    "socialHandle": "@alicep",
     "remark" : "She likes aardvarks.",
     "tagged" : [ {
       "tagName" : "friends",
       "tagColour" : "#3e7b91"
+    } ],
+    "socialHandles" : [ {
+      "platform" : "tg",
+      "value" : "alicep"
     } ]
   }, {
     "name" : "Benson Meier",
     "gender": "M",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "nationality": "China ",
+    "nationality": "Chinese",
     "tutorialGroup": "W08",
-    "socialHandle": "@bensonm",
     "remark" : "He can't take beer!",
     "tagged" : [ {
       "tagName" : "friends",
@@ -28,38 +30,47 @@
     }, {
       "tagName" : "owesMoney",
       "tagColour" : "#3e7b91"
+    } ],
+    "socialHandles" : [ {
+      "platform" : "tg",
+      "value" : "bensonm"
     } ]
   }, {
     "name" : "Carl Kurz",
     "gender": "M",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "nationality": "Malaysia ",
+    "nationality": "Malaysian",
     "tutorialGroup": "T05",
-    "socialHandle": "@carlk",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "socialHandles" : [ {
+      "platform" : "tl",
+      "value" : "carlk"
+    } ]
   }, {
     "name" : "Daniel Meier",
     "gender": "M",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "nationality": "Thailand ",
+    "nationality": "Thai",
     "tutorialGroup": "T09",
-    "socialHandle": "@danielm",
     "remark" : "She likes aardvarks.",
     "tagged" : [ {
       "tagName" : "friends",
       "tagColour" : "#3e7b91"
+    } ],
+    "socialHandles" : [ {
+      "platform" : "tg",
+      "value" : "danielm"
     } ]
   }, {
     "name" : "Elle Meyer",
     "gender": "F",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "nationality": "USA ",
+    "nationality": "American",
     "tutorialGroup": "T29",
-    "socialHandle": "@ellem",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   }, {
@@ -67,9 +78,8 @@
     "gender": "F",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "nationality": "Australia ",
+    "nationality": "Australian",
     "tutorialGroup": "T19",
-    "socialHandle": "@fionak",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   }, {
@@ -77,9 +87,8 @@
     "gender": "M",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "nationality": "Vietnam ",
+    "nationality": "Vietnamese",
     "tutorialGroup": "T28",
-    "socialHandle": "@georgeb",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   } ]
