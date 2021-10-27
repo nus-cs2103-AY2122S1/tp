@@ -8,6 +8,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess
 import static seedu.tuitione.logic.commands.RosterCommand.MESSAGE_ENROLLED_STUDENT_HEADER;
 import static seedu.tuitione.logic.commands.RosterCommand.MESSAGE_ROSTER_LESSON_SUCCESS;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIFTH_LESSON;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
 import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
 
@@ -23,6 +24,7 @@ import seedu.tuitione.model.UserPrefs;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedLessonCode;
+import seedu.tuitione.model.student.Student;
 import seedu.tuitione.model.student.StudentIsOfSpecifiedLessonCode;
 
 public class RosterCommandTest {
@@ -67,6 +69,24 @@ public class RosterCommandTest {
                     .forEach(n -> expectedMessage.append(n).append(", "));
             expectedMessage.delete(expectedMessage.length() - 2, expectedMessage.length());
         }
+
+        assertCommandSuccess(rosterCommand, model, expectedMessage.toString(), expectedModel);
+    }
+
+    @Test
+    public void execute_validLessonIndexWithoutStudents_success() {
+        Lesson lesson = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        LessonCode lc = lesson.getLessonCode();
+        RosterCommand rosterCommand = new RosterCommand(INDEX_FIRST_LESSON);
+
+        Model expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
+        expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lc));
+        expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedLessonCode(lc));
+        List<Student> expectedModelFilteredStudents = expectedModel.getFilteredStudentList();
+
+        // Build command success string message
+        String expectedMessage = String.format(MESSAGE_ROSTER_LESSON_SUCCESS, lesson.getLessonCode(),
+                expectedModel.getFilteredStudentList().size());
 
         assertCommandSuccess(rosterCommand, model, expectedMessage.toString(), expectedModel);
     }
