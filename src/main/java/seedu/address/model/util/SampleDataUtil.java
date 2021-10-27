@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import seedu.address.model.FriendsList;
 import seedu.address.model.GamesList;
@@ -123,12 +123,13 @@ public class SampleDataUtil {
                                             Game... games) {
         FriendId friendId = new FriendId(friendIdString);
 
-        Set<GameFriendLink> gameFriendLinks = new HashSet<>();
+        Map<GameId, GameFriendLink> gameFriendLinks = new HashMap<>();
         FriendName friendName = new FriendName(friendNameString);
         for (Game game : games) {
             // only link game and friend if game exists
             if (validateSampleGameExists(game)) {
-                gameFriendLinks.add(new GameFriendLink(game.getGameId(), friendId, new UserName("Username")));
+                gameFriendLinks.put(game.getGameId(),
+                        new GameFriendLink(game.getGameId(), friendId, new UserName("Username")));
             }
         }
         return new Friend(friendId, friendName, gameFriendLinks, schedule);
@@ -138,7 +139,9 @@ public class SampleDataUtil {
         return Arrays.asList(getSampleGames()).contains(game);
     }
 
-    public static Set<GameFriendLink> getGameFriendLinkSet(GameFriendLink... gameFriendLinks) {
-        return new HashSet<>(Arrays.asList(gameFriendLinks));
+    public static Map<GameId, GameFriendLink> getGameFriendLinkMap(GameFriendLink... gameFriendLinks) {
+        HashMap<GameId, GameFriendLink> gameFriendLinkMap = new HashMap<>();
+        Arrays.asList(gameFriendLinks).forEach(gfl -> gameFriendLinkMap.put(gfl.getGameId(), gfl));
+        return gameFriendLinkMap;
     }
 }

@@ -1,12 +1,13 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.Schedule;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,7 +21,7 @@ public class FriendBuilder {
 
     private FriendName friendName;
     private FriendId friendId;
-    private Set<GameFriendLink> games;
+    private Map<GameId, GameFriendLink> games;
     private Schedule schedule;
 
     /**
@@ -29,7 +30,7 @@ public class FriendBuilder {
     public FriendBuilder() {
         friendId = new FriendId(DEFAULT_FRIEND_ID);
         friendName = new FriendName(DEFAULT_NAME);
-        games = new HashSet<>();
+        games = new HashMap<>();
         schedule = new Schedule();
     }
 
@@ -39,7 +40,7 @@ public class FriendBuilder {
     public FriendBuilder(Friend friendToCopy) {
         friendId = friendToCopy.getFriendId();
         friendName = friendToCopy.getFriendName();
-        games = new HashSet<>(friendToCopy.getGameFriendLinks());
+        games = new HashMap<>(friendToCopy.getGameFriendLinks());
         schedule = friendToCopy.getSchedule();
     }
 
@@ -56,7 +57,7 @@ public class FriendBuilder {
      * building.
      */
     public FriendBuilder withGameFriendLinks(GameFriendLink... gameFriendLinks) {
-        this.games = SampleDataUtil.getGameFriendLinkSet(gameFriendLinks);
+        this.games = SampleDataUtil.getGameFriendLinkMap(gameFriendLinks);
         return this;
     }
 
