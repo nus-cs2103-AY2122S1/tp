@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 import com.opencsv.CSVReader;
 
 import seedu.programmer.commons.core.LogsCenter;
+import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
@@ -38,14 +40,15 @@ public class FileManager {
      * @throws IllegalArgumentException if CSV contains invalid input
      * @throws IOException if error reading the file
      */
-    public List<Student> getStudentsFromCsv(File chosenFile) throws IllegalArgumentException, IOException {
+    public List<Student> getStudentsFromCsv(File chosenFile) throws IllegalArgumentException, IOException,
+            IllegalValueException {
         List<Student> stuList = new ArrayList<>();
 
         CSVReader reader = new CSVReader(new FileReader(chosenFile));
         String[] headers = reader.readNext();
-        int numberOfFields = 4;
-        if (headers.length != numberOfFields) {
-            return null;
+        String[] expectedHeaders = {"studentId", "classId", "name", "email"};
+        if (!Arrays.equals(headers, expectedHeaders)) {
+            throw new IllegalValueException("Sorry! Your CSV file header should be: `studentId,classId,name,email`");
         }
 
         String [] nextLine;
