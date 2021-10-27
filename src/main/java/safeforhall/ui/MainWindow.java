@@ -2,6 +2,7 @@ package safeforhall.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,15 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
@@ -118,52 +113,53 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
-        HBox residentContent = new HBox();
-        Label residentLabel = new Label("Residents");
-        ImageView residentImage = new ImageView("/images/person.png");
-        residentImage.setFitHeight(37);
-        residentImage.setFitWidth(50);
-        residentContent.getChildren().addAll(residentImage, residentLabel);
-        residentsTab.setGraphic(residentContent);
+        handleTabCreation();
+    }
 
-        HBox eventContent = new HBox();
-        Label eventLabel = new Label("Events     ");
-        ImageView eventImage = new ImageView("/images/event.png");
-        eventImage.setFitHeight(37);
-        eventImage.setFitWidth(50);
-        eventContent.getChildren().addAll(eventImage, eventLabel);
-        eventsTab.setGraphic(eventContent);
+    private void handleTabCreation() {
+        // Label texts are padded with whitespace for alignment.
+        // This is not possible via style due to graphic rotation.
+        residentsTab.setGraphic(createTab("    Residents", "resident"));
 
-        HBox helpContent = new HBox();
-        Button helpButton = createTabButton("/images/help.png");
-        helpButton.setOnAction(e -> handleHelp());
-        helpButton.setStyle(BUTTON_STYLE);
-        helpButton.setTooltip(new Tooltip("Help"));
-        Label helpLabel = new Label("Help     ");
-        helpContent.getChildren().addAll(helpButton, helpLabel);
-        helpTab.setGraphic(helpContent);
-        helpTab.setDisable(true);
+        eventsTab.setGraphic(createTab("    Events     ", "event"));
 
-        HBox exitContent = new HBox();
-        Button exitButton = createTabButton("/images/exit.png");
-        exitButton.setOnAction(e -> handleExit());
-        exitButton.setStyle(BUTTON_STYLE);
-        exitButton.setTooltip(new Tooltip("Exit"));
-        Label exitLabel = new Label("Exit     ");
-        exitContent.getChildren().addAll(exitButton, exitLabel);
-        exitTab.setGraphic(exitContent);
-        exitTab.setDisable(true);
+        helpTab.setGraphic(createTab("    Help     ", "help"));
+        helpTab.setOnSelectionChanged(e -> {
+            if (helpTab.isSelected()) {
+                handleHelp();
+            }
+            e.consume();
+        });
+        
+        exitTab.setGraphic(createTab("    Exit     ", "exit"));
+        exitTab.setOnSelectionChanged(e -> {
+            if (exitTab.isSelected()) {
+                handleExit(); 
+            }
+        });
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+            boolean success = !newTab.equals(helpTab);
+            if (!success) {
+                Platform.runLater(() -> tabPane.getSelectionModel().select(oldTab));
+            }
+        });
 
         tabPane.setRotateGraphic(false);
     }
 
-    private Button createTabButton(String iconName) {
-        Button button = new Button();
-        ImageView imageView = new ImageView(new Image(getClass().getResource(iconName).toExternalForm(),
-                36, 36, true, true));
-        button.setGraphic(imageView);
-        button.getStyleClass().add("tab-button");
-        return button;
+    private HBox createTab(String text, String imageName) {
+        HBox content = new HBox();
+        Label label = new Label(text);
+        ImageView icon = new ImageView("/images/" + imageName + ".png");
+        VBox.setVgrow(tabPane, Priority.ALWAYS);
+        // icon.fitWidthProperty().bind(tabPane.widthProperty());
+        // icon.fitHeightProperty().bind(tabPane.heightProperty());
+        icon.setFitHeight(35);
+        icon.setFitWidth(35);
+        icon.setPreserveRatio(true);
+        content.getChildren().addAll(icon, label);
+        return content;
     }
 
     public Stage getPrimaryStage() {
