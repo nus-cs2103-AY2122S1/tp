@@ -3,7 +3,6 @@ package seedu.unify.ui;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -27,6 +26,7 @@ public class ProgressPanel extends UiPart<Region> {
      */
 
     public final SimpleDoubleProperty progress;
+    public final SimpleIntegerProperty total;
 
     @FXML
     private ProgressBar progressBar;
@@ -40,15 +40,17 @@ public class ProgressPanel extends UiPart<Region> {
     public ProgressPanel(SimpleDoubleProperty progress, SimpleIntegerProperty total, SimpleIntegerProperty completed) {
         super(FXML);
         this.progress = progress;
+        this.total = total;
         progressLabel.setText(String.format(PROGRESS_LABEL, completed.getValue(), total.getValue()));
         progressBar.setProgress(progress.getValue());
-        progress.addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                progressLabel.setText(String.format(PROGRESS_LABEL, completed.getValue(), total.getValue()));
-                progressBar.setProgress(newValue.doubleValue());
-            }
-        });
+
+        ChangeListener<Number> changeListener = (observable, oldValue, newValue) -> {
+            progressLabel.setText(String.format(PROGRESS_LABEL, completed.getValue(), total.getValue()));
+            progressBar.setProgress(progress.doubleValue());
+        };
+
+        progress.addListener(changeListener);
+        total.addListener(changeListener);
     }
 
     @Override
