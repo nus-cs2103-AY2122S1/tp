@@ -3,11 +3,11 @@
 start
 :User adds a new lesson to a student;
 
-:TAB searches for the student in the model;
+:TAB searches for the student in the application;
 
 :TAB creates a new lesson with given information;
 
-if () then ([Model has clashing lesson with new lesson])
+if () then ([TAB has clashing lessons with new lesson])
   :TAB disallows lesson to be added;
   :TAB displays clashing warning to user;
 else ([else])

@@ -212,17 +212,19 @@ The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
 The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
-*Figure I.3.3.1: Sequence Diagram of Lesson Add Command*
+*Figure I.3.3.1: Sequence Diagram of `LessonAddCommand`*
 
 ![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
-*Figure I.3.3.2: Continued Sequence Diagram of Lesson Add Command*
+*Figure I.3.3.2: Continued Sequence Diagram of `LessonAddCommand`*
 
 The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
 by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
-existing lesson with a clashing date and timeslot.
+existing lesson with a clashing date and timeslot. 
+
+A simple illustration of how TAB might interact with the user is shown below.
 
 ![LessonAddActivityDiagram](images/LessonAddAcitivityDiagram.png)
-*Figure I.3.3.3
+*Figure I.3.3.3: Activity diagram of `LessonAddCommand`*
 
 The lesson added will be displayed in the `LessonListPanel` in TAB.
 
