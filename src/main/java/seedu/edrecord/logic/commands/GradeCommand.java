@@ -6,9 +6,7 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import seedu.edrecord.commons.core.Messages;
@@ -20,6 +18,7 @@ import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.name.Name;
+import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
 import seedu.edrecord.model.person.Person;
@@ -109,11 +108,11 @@ public class GradeCommand extends Command {
         Module updatedModule = personToEdit.getModule();
         Group updatedGroup = personToEdit.getGroup();
         Set<Tag> updatedTags = personToEdit.getTags();
-        Map<Assignment, Grade> grades = new HashMap<>(personToEdit.getGrades());
-        grades.put(assignment, grade);
+        AssignmentGradeMap updatedGrades = personToEdit.getGrades();
+        updatedGrades.add(assignment, grade);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, updatedModule, updatedGroup,
-                updatedTags, grades);
+                updatedTags, updatedGrades);
     }
 
     @Override

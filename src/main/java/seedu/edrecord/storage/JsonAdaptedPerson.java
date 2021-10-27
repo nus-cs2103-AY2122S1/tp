@@ -1,7 +1,6 @@
 package seedu.edrecord.storage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +14,7 @@ import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
+import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
 import seedu.edrecord.model.person.Person;
@@ -146,8 +146,8 @@ class JsonAdaptedPerson {
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        // TODO change `new HashMap<>()` to save grades
-        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleGroupMap, modelTags, new HashMap<>());
+        // TODO change `new AssignmentGradeMap()` to save grades
+        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleGroupMap, modelTags, new AssignmentGradeMap<>());
     }
 
 }

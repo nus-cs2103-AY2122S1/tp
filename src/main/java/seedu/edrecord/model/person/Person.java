@@ -3,14 +3,10 @@ package seedu.edrecord.model.person;
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
@@ -32,12 +28,13 @@ public class Person {
     private final Info info;
     private final ModuleGroupMap modules = new ModuleGroupMap();
     private final Set<Tag> tags = new HashSet<>();
-    private final Map<Assignment, Grade> grades = new HashMap<>();
+    private final AssignmentGradeMap grades = new AssignmentGradeMap();
 
     /**
      * Every field must be present and cannot be null.
      */
-    public Person(Name name, Phone phone, Email email, Info info, ModuleGroupMap modules, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Info info, ModuleGroupMap modules,
+                  Set<Tag> tags, AssignmentGradeMap grades) {
         requireAllNonNull(name, phone, email, info, tags);
         this.name = name;
         this.phone = phone;
@@ -45,7 +42,7 @@ public class Person {
         this.info = info;
         this.modules.addAll(modules);
         this.tags.addAll(tags);
-        this.grades.putAll(grades);
+        this.grades.addAll(grades);
     }
 
     public Name getName() {
@@ -81,11 +78,12 @@ public class Person {
     }
 
     /**
-     * Returns an immutable grades map, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a copy of the student's AssignmentGradeMap.
      */
-    public Map<Assignment, Grade> getGrades() {
-        return Collections.unmodifiableMap(grades);
+    public AssignmentGradeMap getGrades() {
+        AssignmentGradeMap gradesCopy = new AssignmentGradeMap();
+        gradesCopy.addAll(grades);
+        return gradesCopy;
     }
 
     /**
@@ -148,10 +146,9 @@ public class Person {
             tags.forEach(builder::append);
         }
 
-        Map<Assignment, Grade> grades = getGrades();
         if (!grades.isEmpty()) {
             builder.append("; Grades: ");
-            grades.forEach((asg, grade) -> builder.append(asg).append(", ").append(grade).append("; "));
+            builder.append(grades);
         }
 
         return builder.toString();

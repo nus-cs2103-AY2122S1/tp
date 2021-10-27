@@ -28,6 +28,7 @@ import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.name.Name;
+import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
 import seedu.edrecord.model.person.Person;
@@ -109,7 +110,7 @@ public class EditCommand extends Command {
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
         ModuleGroupMap previousModules = personToEdit.getModules();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Map<Assignment, Grade> grades = personToEdit.getGrades();
+        AssignmentGradeMap grades = personToEdit.getGrades();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, previousModules, updatedTags, grades);
     }
