@@ -122,6 +122,7 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
+
 #### Changing tabs : `tab`
 Switches between the tabs: staff view and schedule.
 
@@ -342,6 +343,16 @@ Exits the program.
 Format: `exit`
 
 ### Basic Management of Staff Schedules
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The current week refers to the week of the monday before the current date until the sunday after the current date. 
+</div>
+
+
+#### Viewing schedule for the week
+
+The schedule for this week is shown under the schedule tab.
+
 
 #### Viewing schedule of staff(s): `viewSchedule`
 
