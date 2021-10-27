@@ -23,6 +23,8 @@ public class Applicant {
     // Data fields
     private final Address address;
     private final Application application;
+    private String gitHubUrl;
+    private String linkedInUrl;
 
     /**
      * Every field must be present and not null.
@@ -86,6 +88,22 @@ public class Applicant {
 
     public Title getTitle() {
         return application.getTitle();
+    }
+
+    public String getGitHubUrl() {
+        return gitHubUrl;
+    }
+
+    public boolean hasGitHubProfile() {
+        return gitHubUrl != null;
+    }
+
+    public String getLinkedInUrl() {
+        return linkedInUrl;
+    }
+
+    public boolean hasLinkedInProfile() {
+        return linkedInUrl != null;
     }
 
     /**
