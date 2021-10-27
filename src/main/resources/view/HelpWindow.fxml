@@ -46,17 +46,6 @@
                         <Label fx:id="helpCommand" text="Label" wrapText="true"/>
                     </TextFlow>
 
-                    <Label fx:id="addSTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="addSDesc" text="Label" wrapText="true"/>
-                    <TextFlow>
-                        <Label fx:id="format1" text="format" wrapText="true"/>
-                        <Label fx:id="addSCommand" text="Label" wrapText="true"/>
-                    </TextFlow>
-                    <TextFlow>
-                        <Label fx:id="example" text="Label" wrapText="true"/>
-                        <Label fx:id="addSExample" text="Label" wrapText="true"/>
-                    </TextFlow>
-
                     <Label fx:id="listTitle" text="Label" wrapText="true"/>
                     <Label fx:id="listDesc" text="Label" wrapText="true"/>
                     <TextFlow>
@@ -69,6 +58,17 @@
                         <Label fx:id="listExampleDesc" text="Label" wrapText="true"/>
                         <Label fx:id="listAExample" text="Label" wrapText="true"/>
                         <Label fx:id="listAExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="addSTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="addSDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format1" text="format" wrapText="true"/>
+                        <Label fx:id="addSCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example" text="Label" wrapText="true"/>
+                        <Label fx:id="addSExample" text="Label" wrapText="true"/>
                     </TextFlow>
 
                     <Label fx:id="delSTitle" text="Label" wrapText="true"/>
