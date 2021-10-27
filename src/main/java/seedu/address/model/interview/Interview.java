@@ -13,9 +13,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Interview {
     public static final Interview EMPTY_INTERVIEW = new Interview("");
-    public static final String PARSE_FORMAT = "yyyy-MM-dd, H:mm";
+    public static final String PARSE_FORMAT = "u-M-d, H:m";
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview time should follow the exact format: [" + PARSE_FORMAT + "]. E.g. i/2021-10-22, 8:00";
+            "Interview time should follow the format: [year-month-date, hour-minute]. E.g. i/2021-09-01, 8:00 or i/21-9-1,08:00";
 
     public final String parseTime;
 
@@ -47,8 +47,7 @@ public class Interview {
         }
         return true;
     }
-
-
+    
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
