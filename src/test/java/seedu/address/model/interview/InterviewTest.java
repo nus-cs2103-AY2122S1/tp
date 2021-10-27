@@ -1,10 +1,11 @@
 package seedu.address.model.interview;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Experience;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 class InterviewTest {
 
@@ -48,6 +49,5 @@ class InterviewTest {
         Interview nonEmptyInterview = new Interview("2021-10-31, 10:25");
         assertFalse(nonEmptyInterview.isEmptyInterview());
     }
-
 
 }

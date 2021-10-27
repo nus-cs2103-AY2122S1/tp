@@ -350,6 +350,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseInterview_validValue_returnsInterview() throws Exception {
+        Optional<Interview> expectedInterview = Optional.ofNullable(new Interview(VALID_Interview));
+        assertEquals(expectedInterview, ParserUtil.parseInterview(VALID_Interview));
+    }
+    @Test
     public void parseNotes_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseNotes((String) null));
     }
