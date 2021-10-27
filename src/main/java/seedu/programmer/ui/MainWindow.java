@@ -103,6 +103,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        dashboardWindow = new DashboardWindow(logic);
         isDashboardShowing = false;
     }
 
@@ -183,6 +184,7 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+        dashboardWindow.hide();
     }
 
     /**
@@ -210,6 +212,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         logger.fine("Showing dashboard window...");
+        isDashboardShowing = true;
         dashboardWindow.show();
     }
 
