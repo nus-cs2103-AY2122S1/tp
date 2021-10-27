@@ -78,7 +78,7 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     /**
      * Returns the applicant with the specified name, if any.
      */
-    public Applicant getApplicantByNameIgnoreCCase(Name applicantName) {
+    public Applicant getApplicantByNameIgnoreCase(Name applicantName) {
         requireNonNull(applicantName);
         return applicants.getApplicantByNameIgnoreCase(applicantName);
     }
