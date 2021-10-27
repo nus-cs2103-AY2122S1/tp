@@ -55,11 +55,11 @@ public class PersonCard extends UiPart<Region> {
         nusNetId.setText("ID: " + student.getId().value);
 
         String groupsString = student.getGroups().stream()
-                .map(Group::toString).collect(Collectors.joining(", "));
+                .map(Group::toString).sorted().collect(Collectors.joining(", "));
         group.setText("Groups: " + groupsString);
 
         String assessmentsString = student.getScores().entrySet().stream()
-                .map(Map.Entry::toString).sorted().collect(Collectors.joining(", "));
+                .map(Map.Entry::toString).collect(Collectors.joining(", "));
         assessment.setText("Assessments: " + assessmentsString);
 
         student.getTags().stream()

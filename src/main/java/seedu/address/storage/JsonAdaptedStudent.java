@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -94,7 +94,7 @@ class JsonAdaptedStudent {
         }
         final ID modelId = new ID(id);
 
-        final Map<Assessment, Score> modelScores = new HashMap<>();
+        final Map<Assessment, Score> modelScores = new LinkedHashMap<>();
 
         assessmentList.stream()
                 .filter(assessment -> assessments.contains(assessment.getName()))

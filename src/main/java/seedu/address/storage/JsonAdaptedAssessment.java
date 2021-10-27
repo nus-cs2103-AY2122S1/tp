@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -30,7 +30,7 @@ public class JsonAdaptedAssessment {
      */
     public JsonAdaptedAssessment(Assessment source) {
         name = source.name;
-        scores = new HashMap<>();
+        scores = new LinkedHashMap<>();
         for (ID id : source.scores.keySet()) {
             scores.put(id.value, source.scores.get(id).value);
         }

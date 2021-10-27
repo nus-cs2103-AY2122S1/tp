@@ -4,8 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -25,7 +25,7 @@ public class Student {
 
     // Data fields
     private final List<Group> groups = new ArrayList<>();
-    private final Map<Assessment, Score> scores = new HashMap<>();
+    private final Map<Assessment, Score> scores = new LinkedHashMap<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**

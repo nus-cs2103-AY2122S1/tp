@@ -3,7 +3,7 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -17,7 +17,7 @@ public class Assessment {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     // Assessment score list
-    public final Map<ID, Score> scores = new HashMap<>();
+    public final Map<ID, Score> scores = new LinkedHashMap<>();
 
     // Assessment name
     public final String name;
