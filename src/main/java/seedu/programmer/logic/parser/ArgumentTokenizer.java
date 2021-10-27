@@ -1,5 +1,7 @@
 package seedu.programmer.logic.parser;
 
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_SYMBOL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -8,7 +10,6 @@ import java.util.stream.Collectors;
 
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_SYMBOL;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>

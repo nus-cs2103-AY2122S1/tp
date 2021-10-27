@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 
 public class ArgumentTokenizerTest {
@@ -112,8 +113,8 @@ public class ArgumentTokenizerTest {
 
         // Prefixes not previously given to the tokenizer should not return any values
         String newArgsString = unknownPrefix + " some value";
-        assertThrows(InvalidArgFlagsException.class,
-                () -> ArgumentTokenizer.tokenize(newArgsString, pSlash, dashT, hatQ),
+        assertThrows(InvalidArgFlagsException.class, () ->
+                        ArgumentTokenizer.tokenize(newArgsString, pSlash, dashT, hatQ),
                 "--u");
     }
 

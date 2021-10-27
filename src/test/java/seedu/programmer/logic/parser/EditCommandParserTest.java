@@ -3,7 +3,6 @@ package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
-import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
