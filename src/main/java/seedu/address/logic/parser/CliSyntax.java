@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_DONE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMAIL_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMPLOYMENT_TYPE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPECTED_SALARY_SYNTAX;
@@ -29,5 +30,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_EXPERIENCE = new Prefix(PREFIX_EXPERIENCE_SYNTAX);
     public static final Prefix PREFIX_INTERVIEW = new Prefix(PREFIX_INTERVIEW_SYNTAX);
     public static final Prefix PREFIX_NOTES = new Prefix(PREFIX_NOTES_SYNTAX);
+    public static final Prefix PREFIX_DONE = new Prefix(PREFIX_DONE_SYNTAX);
 
 }

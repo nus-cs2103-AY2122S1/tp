@@ -148,4 +148,17 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== Changing Person Done Status Accessors =============================================================
+    @Override
+    public void markPerson(Person target) {
+        requireAllNonNull(target);
+        addressBook.markPerson(target);
+    }
+
+    @Override
+    public void unmarkPerson(Person target) {
+        requireAllNonNull(target);
+        addressBook.unmarkPerson(target);
+    }
+
 }
