@@ -4,7 +4,6 @@ package tutoraid.commons.core;
  * Container for user visible messages.
  */
 public class Messages {
-
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_ADD_COMMAND = "Invalid add command format! "
             + "Must start with 'add -s', 'add -l', 'add -p', or 'add -sl'";
@@ -30,4 +29,5 @@ public class Messages {
             + " must be attending all of the lessons provided";
     public static final String MESSAGE_INVALID_LESSON_FULL = "Adding all the students provided will exceed"
             + " the capacity of one or more lessons";
+    public static final String MESSAGES_SHOWING_HELP_MESSAGE = "Opened help window.";
 }
