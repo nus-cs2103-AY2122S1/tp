@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class Grade {
     public enum GradeStatus { NOT_SUBMITTED, SUBMITTED, GRADED }
-    public static final String MESSAGE_CONSTRAINTS = "Status should be not submitted, submitted or graded.";
+    public static final String MESSAGE_CONSTRAINTS = "Status should be \"not submitted\", \"submitted\" or \"graded\".";
 
     private final Score score;
     private final GradeStatus status;
@@ -29,6 +29,10 @@ public class Grade {
 
     public Score getScore() {
         return score;
+    }
+
+    public GradeStatus getStatus() {
+        return status;
     }
 
     @Override

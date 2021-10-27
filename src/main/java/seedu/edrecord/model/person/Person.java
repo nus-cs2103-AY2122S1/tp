@@ -45,6 +45,7 @@ public class Person {
         this.info = info;
         this.modules.addAll(modules);
         this.tags.addAll(tags);
+        this.grades.putAll(grades);
     }
 
     public Name getName() {
@@ -150,7 +151,7 @@ public class Person {
         Map<Assignment, Grade> grades = getGrades();
         if (!grades.isEmpty()) {
             builder.append("; Grades: ");
-            grades.forEach((asg, grade) -> builder.append(asg).append(": ").append(grade));
+            grades.forEach((asg, grade) -> builder.append(asg).append(", ").append(grade).append("; "));
         }
 
         return builder.toString();
