@@ -35,7 +35,7 @@ public class AddDeadlineTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        DeadlineTask expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE)
                 .withDate(VALID_TASK_DATE)
@@ -62,7 +62,7 @@ public class AddDeadlineTaskCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        DeadlineTask expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();
         assertParseSuccess(parser, TASK_NAME_DESC_PLAY + TASK_DEADLINE_DESC
