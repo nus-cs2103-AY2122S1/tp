@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_HENRY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_ISAAC;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalConthacks;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,7 +38,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class DeletePersonCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalConthacks(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -49,7 +49,7 @@ public class DeletePersonCommandTest {
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete);
         expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1) + expectedMessage;
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
@@ -66,7 +66,7 @@ public class DeletePersonCommandTest {
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete1)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete2);
 
-        ModelManager expectedModel1 = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel1 = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel1.deletePerson(personToDelete1);
         expectedModel1.deletePerson(personToDelete2);
 
@@ -88,7 +88,7 @@ public class DeletePersonCommandTest {
                 + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 1)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person2);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel.deletePerson(person1);
         expectedModel.setPerson(person2, newPerson2);
 
@@ -109,7 +109,7 @@ public class DeletePersonCommandTest {
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person)
                 + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 0);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel.deletePerson(person);
 
         assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
@@ -130,7 +130,7 @@ public class DeletePersonCommandTest {
                 + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 1)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel.setPerson(person, newPerson);
 
         assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
@@ -152,7 +152,7 @@ public class DeletePersonCommandTest {
                 + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 1)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel.setPerson(person, newPerson);
 
         assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
@@ -220,7 +220,7 @@ public class DeletePersonCommandTest {
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete);
         expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1) + expectedMessage;
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
@@ -239,7 +239,7 @@ public class DeletePersonCommandTest {
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete1)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete2);
 
-        ModelManager expectedModel1 = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel1 = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel1.deletePerson(personToDelete1);
         expectedModel1.deletePerson(personToDelete2);
 
@@ -263,7 +263,7 @@ public class DeletePersonCommandTest {
                 + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 1)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getConthacks(), new UserPrefs());
         expectedModel.setPerson(person, newPerson);
 
         assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
@@ -275,7 +275,7 @@ public class DeletePersonCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getConthacks().getPersonList().size());
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
@@ -289,8 +289,8 @@ public class DeletePersonCommandTest {
         Index invalidStartIndex = INDEX_SECOND;
         Index invalidEndIndex = INDEX_THIRD;
         //ensures that the invalidStartIndex and invalidEndIndex are still in bound of the address book list
-        assertTrue(invalidStartIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-        assertTrue(invalidEndIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(invalidStartIndex.getZeroBased() < model.getConthacks().getPersonList().size());
+        assertTrue(invalidEndIndex.getZeroBased() < model.getConthacks().getPersonList().size());
 
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(invalidStartIndex, invalidEndIndex);
 

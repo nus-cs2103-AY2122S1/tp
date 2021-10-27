@@ -39,25 +39,25 @@ public interface Model {
     /**
      * Returns the user prefs' contHACKS file path.
      */
-    Path getAddressBookFilePath();
+    Path getConthacksFilePath();
 
     /**
      * Sets the user prefs' contHACKS file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setConthacksFilePath(Path conthacksFilePath);
 
     /**
-     * Replaces contHACKS data with the data in {@code addressBook}.
+     * Replaces contHACKS data with the data in {@code conthacks}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setConthacks(ReadOnlyConthacks conthacks);
 
     /**
      * Sorts the contacts in contHACKS by alphabetical order.
      */
-    void sortAddressBook();
+    void sortConthacks();
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Conthacks */
+    ReadOnlyConthacks getConthacks();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in contHACKS.

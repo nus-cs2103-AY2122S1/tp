@@ -26,7 +26,7 @@ import seedu.address.logic.parser.person.FindPersonCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class ConthacksParser {
 
     /**
      * Used for initial separation of command word and args.

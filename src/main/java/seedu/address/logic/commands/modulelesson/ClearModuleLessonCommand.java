@@ -14,7 +14,7 @@ public class ClearModuleLessonCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.clearLessons();
-        assert model.getAddressBook().getModuleLessonList().isEmpty();
+        assert model.getConthacks().getModuleLessonList().isEmpty();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

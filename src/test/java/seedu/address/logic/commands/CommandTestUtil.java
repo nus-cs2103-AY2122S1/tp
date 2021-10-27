@@ -22,7 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand;
 import seedu.address.logic.commands.person.EditPersonCommand;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Conthacks;
 import seedu.address.model.Model;
 import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.LessonTime;
@@ -159,11 +159,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        Conthacks expectedConthacks = new Conthacks(actualModel.getConthacks());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedConthacks, actualModel.getConthacks());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
 

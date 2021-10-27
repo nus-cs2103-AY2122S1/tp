@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Conthacks;
 import seedu.address.model.modulelesson.ModuleLesson;
 
 /**
@@ -37,10 +37,10 @@ public class TypicalModuleLessons {
     private TypicalModuleLessons() {} //prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical classes.
+     * Returns an {@code Conthacks} with all the typical classes.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Conthacks getTypicalConthacks() {
+        Conthacks ab = new Conthacks();
         for (ModuleLesson moduleLesson : getTypicalModuleClasses()) {
             ab.addLesson(moduleLesson);
         }
