@@ -55,7 +55,8 @@ public class Interview {
         assert isValidInterviewTime(this.parseTime) : "Not a valid interview time";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
-        return LocalDate.parse(this.parseTime, formatter).isBefore(LocalDate.now());
+        LocalDate interview = LocalDate.parse(this.parseTime, formatter);
+        return interview.isBefore(LocalDate.now());
     }
 
     /**

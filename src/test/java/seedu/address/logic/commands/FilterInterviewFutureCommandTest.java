@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -15,6 +17,24 @@ import seedu.address.model.UserPrefs;
 public class FilterInterviewFutureCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void equals() {
+        FilterInterviewFutureCommand firstFilterFutureInterviewCommand = new FilterInterviewFutureCommand();
+        FilterInterviewFutureCommand secondFilterFutureInterviewCommand = new FilterInterviewFutureCommand();
+
+        // same object -> returns true
+        assertEquals(firstFilterFutureInterviewCommand, firstFilterFutureInterviewCommand);
+
+        // same values -> returns true
+        assertEquals(firstFilterFutureInterviewCommand, secondFilterFutureInterviewCommand);
+
+        // different types -> returns false
+        assertNotEquals(firstFilterFutureInterviewCommand, 1);
+
+        // null -> returns false
+        assertNotEquals(firstFilterFutureInterviewCommand, null);
+    }
 
     @Test
     public void execute_modelUnfilteredList_success() {

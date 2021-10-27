@@ -44,13 +44,4 @@ public abstract class FilterInterviewCommand extends Command {
                     + COMMAND_WORD + " " + ValidFilterInterviewArgs.FUTURE
                     + ": Shows applicants with upcoming interviews. ";
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FilterInterviewFutureCommand // instanceof handles nulls
-                && this instanceof FilterInterviewFutureCommand) // state check (FilterInterviewFutureCommand)
-                || (other instanceof FilterInterviewPastCommand
-                && this instanceof FilterInterviewPastCommand); // state check (FilterInterviewPastCommand)
-    }
-
 }
