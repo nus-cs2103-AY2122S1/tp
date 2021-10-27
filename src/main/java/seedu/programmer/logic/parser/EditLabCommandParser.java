@@ -2,6 +2,7 @@ package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
@@ -9,6 +10,7 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 import java.util.stream.Stream;
 
 import seedu.programmer.logic.commands.EditLabCommand;
+import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
 
@@ -26,8 +28,15 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
      */
     public EditLabCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM, PREFIX_LAB_NEW_LAB_NUM, PREFIX_LAB_TOTAL);
+
+        ArgumentMultimap argMultimap;
+        try {
+            argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM, PREFIX_LAB_NEW_LAB_NUM, PREFIX_LAB_TOTAL);
+        } catch (InvalidArgFlagsException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), EditLabCommand.MESSAGE_USAGE));
+        }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)
                 || !argMultimap.getPreamble().isEmpty()) {

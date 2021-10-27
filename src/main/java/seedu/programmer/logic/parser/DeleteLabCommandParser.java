@@ -1,11 +1,13 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 
 import java.util.stream.Stream;
 
 import seedu.programmer.logic.commands.DeleteLabCommand;
+import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
 
@@ -22,8 +24,13 @@ public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteLabCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM);
+        ArgumentMultimap argMultimap;
+        try {
+            argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM);
+        } catch (InvalidArgFlagsException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), DeleteLabCommand.MESSAGE_USAGE));
+        }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)
                 || !argMultimap.getPreamble().isEmpty()) {

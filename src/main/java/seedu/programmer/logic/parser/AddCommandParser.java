@@ -1,6 +1,7 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
@@ -9,6 +10,7 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import java.util.stream.Stream;
 
 import seedu.programmer.logic.commands.AddCommand;
+import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
@@ -28,8 +30,14 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL);
+        ArgumentMultimap argMultimap;
+        try {
+            argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL);
+        } catch (InvalidArgFlagsException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), AddCommand.MESSAGE_USAGE));
+        }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {

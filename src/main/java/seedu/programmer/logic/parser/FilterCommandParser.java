@@ -2,12 +2,14 @@ package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import seedu.programmer.logic.commands.FilterCommand;
+import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
@@ -24,8 +26,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL);
+
+        ArgumentMultimap argMultimap;
+        try {
+            argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL);
+        } catch (InvalidArgFlagsException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_UNKNOWN_ARGUMENT_FLAG, e.getMessage(), FilterCommand.MESSAGE_USAGE));
+        }
 
         // Initializing all the arguments as null at the beginning.
         String trimmedNameArg = getTrimmedPredicateArg(argMultimap, PREFIX_NAME);
