@@ -2,11 +2,11 @@ package seedu.academydirectory.logic;
 
 import seedu.academydirectory.logic.commands.Command;
 import seedu.academydirectory.logic.commands.ViewCommand;
-import seedu.academydirectory.logic.commands.VisualiseCommand;
+import seedu.academydirectory.logic.commands.VisualizeCommand;
 
 
 public enum AdditionalViewType {
-    DEFAULT, HELP, VIEW, EXIT, VISUALISE;
+    DEFAULT, HELP, VIEW, EXIT, VISUALIZE;
 
     /**
      *
@@ -17,8 +17,8 @@ public enum AdditionalViewType {
         if (command instanceof ViewCommand) {
             return AdditionalViewType.VIEW;
         }
-        if (command instanceof VisualiseCommand) {
-            return AdditionalViewType.VISUALISE;
+        if (command instanceof VisualizeCommand) {
+            return AdditionalViewType.VISUALIZE;
         }
         return AdditionalViewType.DEFAULT;
     }
