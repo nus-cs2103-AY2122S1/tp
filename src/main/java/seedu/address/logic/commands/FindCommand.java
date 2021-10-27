@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -59,7 +59,7 @@ public class FindCommand extends Command {
             model.updateFilteredItemList(DISPLAY_INVENTORY, namePredicate);
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));
+                String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredDisplayList().size()));
     }
 
     @Override

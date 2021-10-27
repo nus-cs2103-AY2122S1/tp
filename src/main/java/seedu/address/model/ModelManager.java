@@ -2,24 +2,26 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTIONS;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.display.DisplayList;
+import seedu.address.model.display.DisplayMode;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
@@ -40,7 +42,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final DisplayList displayList;
     private Optional<Order> optionalOrder;
-    private Set<TransactionRecord> transactions;
+    private List<TransactionRecord> transactions;
     private BookKeeping bookKeeping;
 
     private DisplayMode currentDisplay = DISPLAY_INVENTORY;
@@ -70,7 +72,7 @@ public class ModelManager implements Model {
             System.out.println(e);
         }
 
-        transactions = transactionRecordList == null ? new HashSet<>() : new HashSet<>(transactionRecordList);
+        transactions = transactionRecordList == null ? new ArrayList<>() : transactionRecordList;
     }
 
     public ModelManager() {
@@ -144,7 +146,7 @@ public class ModelManager implements Model {
     @Override
     public void addItem(Item item) {
         inventory.addItem(item);
-        updateFilteredItemList(DisplayMode.DISPLAY_INVENTORY,
+        updateFilteredDisplayList(DisplayMode.DISPLAY_INVENTORY,
                 PREDICATE_SHOW_ALL_ITEMS);
     }
 
@@ -176,16 +178,16 @@ public class ModelManager implements Model {
     //=========== Filtered Item List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Item} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Displayable} backed by the internal list of
      * {@code versionedInventory}
      */
     @Override
-    public ObservableList<Item> getFilteredItemList() {
-        return displayList.getFilteredItemList();
+    public ObservableList<Displayable> getFilteredDisplayList() {
+        return displayList.getFilteredDisplayList();
     }
 
     @Override
-    public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
+    public void updateFilteredDisplayList(DisplayMode mode, Predicate<Displayable> predicate) {
         requireNonNull(predicate);
 
         // Switch display mode if needed
@@ -193,13 +195,14 @@ public class ModelManager implements Model {
             if (mode == DISPLAY_INVENTORY) {
                 // Display inventory items
                 displayList.setItems(this.inventory.getItemList());
-            } else {
+            } else if (mode == DISPLAY_OPEN_ORDER) {
                 // Display unopened order items
+                assert(hasUnclosedOrder());
                 displayList.setItems(
-                    this.optionalOrder
-                        .map(Order::getOrderItems)
-                        .orElse(FXCollections.observableArrayList())
+                    this.optionalOrder.map(Order::getOrderItems).get()
                 );
+            } else {
+                displayList.setItems(transactions);
             }
 
             currentDisplay = mode;
@@ -207,6 +210,16 @@ public class ModelManager implements Model {
 
         // Update predicate
         displayList.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
+
+        if (mode == DISPLAY_TRANSACTIONS) {
+            throw new ClassCastException("Cannot filter transactions with Predicate<Item>");
+        }
+
+        updateFilteredDisplayList(mode, x -> predicate.test((Item) x));
     }
 
     @Override
@@ -230,7 +243,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return inventory.equals(other.inventory)
                 && userPrefs.equals(other.userPrefs)
-                && displayList.equals(other.displayList);
+                && displayList.equals(other.displayList)
+                && optionalOrder.equals(other.optionalOrder);
     }
 
     // ============== Order related methods ========================

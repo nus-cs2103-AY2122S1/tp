@@ -21,7 +21,6 @@ import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartOrderCommand;
-import seedu.address.logic.commands.ViewOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -73,7 +72,7 @@ public class AddressBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
@@ -92,9 +91,6 @@ public class AddressBookParser {
 
         case RemoveFromOrderCommand.COMMAND_WORD:
             return new RemoveFromOrderCommandParser().parse(arguments);
-
-        case ViewOrderCommand.COMMAND_WORD:
-            return new ViewOrderCommand();
 
         case EndAndTransactOrderCommand.COMMAND_WORD:
             return new EndAndTransactOrderCommand();

@@ -27,6 +27,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.display.DisplayMode;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.testutil.ItemBuilder;

@@ -1,23 +1,35 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-
-import java.util.HashSet;
-import java.util.Optional;
+import static seedu.address.testutil.TypicalItems.DONUT;
+import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Inventory;
-import seedu.address.model.ModelStub;
-import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.Name;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.display.DisplayMode;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.TransactionRecord;
 
 public class EndAndTransactOrderCommandTest {
+
+    private Model modelWithoutOrder = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private Model modelWithOrder = getModelWithOrderedDonut();
+
+    /**
+     * Returns a model with 5 donuts in its unclosed order
+     */
+    private Model getModelWithOrderedDonut() {
+        Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
+        model.addItem(DONUT.updateCount(5));
+        model.setOrder(new Order());
+        model.addToOrder(DONUT.updateCount(1));
+
+        return model;
+    }
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -25,119 +37,41 @@ public class EndAndTransactOrderCommandTest {
     }
 
     @Test
-    public void execute_normalTransaction_itemRemoved() throws CommandException {
-        ModelStubWithOrderAndInventory modelStub = new ModelStubWithOrderAndInventory();
-
-        Item item = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
-        Inventory inventory = new Inventory();
-        Order order = new Order();
-        inventory.addItem(item);
-        order.addItem(item);
-
-        modelStub.setInventory(inventory);
-        modelStub.setOrder(order);
-
+    public void execute_noUnclosedOrder_failure() {
         EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
-        command.execute(modelStub);
-
-        Inventory expectedInventory = new Inventory();
-
-        assertEquals(modelStub.inventory, expectedInventory);
+        assertCommandFailure(command, modelWithoutOrder, EndAndTransactOrderCommand.MESSAGE_NO_UNCLOSED_ORDER);
     }
 
     @Test
-    public void execute_insufficientTransaction_itemRemoved() throws CommandException {
-        // Order item has more quantity than item in inventory, inventory item should be removed
-        ModelStubWithOrderAndInventory modelStub = new ModelStubWithOrderAndInventory();
+    public void execute_normalTransaction_itemRemoved() {
+        String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
-        Item inventoryItem = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
-        Item orderItem = new Item(new Name("milk"), 120123, 15, new HashSet<>(), 1.1, 2.2);
-        Inventory inventory = new Inventory();
-        Order order = new Order();
-        inventory.addItem(inventoryItem);
-        order.addItem(orderItem);
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        expectedModel.addItem(DONUT.updateCount(4));
 
-        modelStub.setInventory(inventory);
-        modelStub.setOrder(order);
-
-        EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
-        command.execute(modelStub);
-
-        Inventory expectedInventory = new Inventory();
-
-        assertEquals(modelStub.inventory, expectedInventory);
+        assertCommandSuccess(new EndAndTransactOrderCommand(), modelWithOrder, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_moreQuantityInventory_itemCountDecreased() throws CommandException {
-        // Order item has more quantity than item in inventory, inventory item should be removed
-        ModelStubWithOrderAndInventory modelStub = new ModelStubWithOrderAndInventory();
-
-        Item inventoryItem = new Item(new Name("milk"), 120123, 15, new HashSet<>(), 1.1, 2.2);
-        Item orderItem = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
-        Inventory inventory = new Inventory();
-        Order order = new Order();
-        inventory.addItem(inventoryItem);
-        order.addItem(orderItem);
-
-        modelStub.setInventory(inventory);
-        modelStub.setOrder(order);
-
-        EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
-        command.execute(modelStub);
-
-        Item transactedItem = new Item(new Name("milk"), 120123, 5, new HashSet<>(), 1.1, 2.2);
-        Inventory expectedInventory = new Inventory();
-        expectedInventory.addItem(transactedItem);
-
-        assertEquals(modelStub.inventory, expectedInventory);
+    public void execute_insufficientItemInInventory_failure() {
+        // TODO: Behaviour not supported yet. Change and update accordingly
     }
 
-    /**
-     * A model stub that has only order related functionality.
-     */
-    private class ModelStubWithOrderAndInventory extends ModelStub {
-        private Optional<Order> optionalOrder;
-        private Inventory inventory;
+    @Test
+    public void execute_orderIsEmpty_failure() {
+        // TODO: Behaviour not supported yet. Change and update accordingly
+    }
 
-        ModelStubWithOrderAndInventory() {
-            optionalOrder = Optional.empty();
-            inventory = new Inventory();
-        }
+    @Test
+    public void execute_displayingOrder_itemRemovedAndDisplayInventory() {
+        modelWithOrder.updateFilteredDisplayList(DisplayMode.DISPLAY_OPEN_ORDER, Model.PREDICATE_SHOW_ALL_ITEMS);
 
-        @Override
-        public void setInventory(ReadOnlyInventory newData) {
-            inventory.resetData(newData);
-        }
+        EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
+        String expectedMessage = EndAndTransactOrderCommand.MESSAGE_SUCCESS;
 
-        @Override
-        public void setOrder(Order order) {
-            EndAndTransactOrderCommandTest.ModelStubWithOrderAndInventory.this.optionalOrder = Optional.of(order);
-        }
+        Model expectedModel = new ModelManager(getTypicalInventory(), new UserPrefs());
+        expectedModel.addItem(DONUT.updateCount(4));
 
-        @Override
-        public boolean hasUnclosedOrder() {
-            return optionalOrder.isPresent();
-        }
-
-        @Override
-        public void addToOrder(Item item) {
-            assert hasUnclosedOrder();
-            optionalOrder.get().addItem(item);
-        }
-
-        @Override
-        public void removeFromOrder(Item item, int amount) {
-            assert hasUnclosedOrder();
-            optionalOrder.get().removeItem(item, amount);
-        }
-
-        @Override
-        public void transactAndClearOrder() {
-            assert hasUnclosedOrder();
-            TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
-            // Reset to no order status
-            optionalOrder = Optional.empty();
-        }
+        assertCommandSuccess(new EndAndTransactOrderCommand(), modelWithOrder, expectedMessage, expectedModel);
     }
 }

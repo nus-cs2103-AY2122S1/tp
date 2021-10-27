@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.display.DisplayMode;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
@@ -97,7 +99,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Item> getFilteredItemList() {
+    public ObservableList<Displayable> getFilteredDisplayList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredDisplayList(DisplayMode mode, Predicate<Displayable> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
