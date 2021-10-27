@@ -1,6 +1,8 @@
 package seedu.tuitione.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
@@ -50,5 +52,15 @@ public class ParentContactTest {
         assertTrue(ParentContact.isValidPhone("67777777")); //PH that starts with 6 and is 8 digits long
         assertTrue(ParentContact.isValidPhone("83121534")); //PH that starts with 8 and is 8 digits long
         assertTrue(ParentContact.isValidPhone("98765432")); //PH that starts with 9 and is 8 digits long
+    }
+
+    @Test
+    public void isValidEquals() {
+        ParentContact test1 = new ParentContact("91234567");
+        ParentContact copyTest1 = new ParentContact("91234567");
+        ParentContact test2 = new ParentContact("91234568");
+        assertEquals(test1, test1);
+        assertEquals(test1, copyTest1);
+        assertNotEquals(test1, test2);
     }
 }
