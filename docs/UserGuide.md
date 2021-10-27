@@ -450,23 +450,35 @@ This section gives you the solutions to commonly asked questions.
 
 **Q**: If I have a module inside my academic plan and I delete the module from the database using the "delete" command, would the module still appear in my academic plan?<br>
 **A**: No, deleting a module from the database removes the module from your academic plan.
+
+**Q**: What should I do if there is a module that I want to add into my academic plan but it is not inside the database?<br>
+**A**: First, add the module into the database using the [add](#411-adding-a-module-add) command. Then, you can add the module into your academic plan using the [take](#421-taking-a-module--take) command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6. Command summary
 
 This section gives you a summary on how to use each of the features.
 
-Action | Format, Examples
+Module Commands | Format, Examples
 --------|------------------
 **Add** | `add c/CODE t/TITLE d/DESCRIPTION m/MC [tag/TAG]` <br> e.g. `add c/ST2334 t/Probability and Statistics d/Introduces students to basic probability theory and statistical inference m/4`
-**Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
-**Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [m/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
-**Find** | `find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
 **List** | `list`
+**Find** | `find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
+**Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [m/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
+
+Academic Calendar Commands | Format, Examples
+--------|------------------
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
-**Help**| `help`
 **Info**| `info`
 **Set**| `set m/MC` or `set y/YEAR s/SEMESTER` <br> e.g. `set m/120` `set y/2 s/1`
 **View**| `view y/YEAR s/SEMESTER` <br> e.g. `view y/2 s/1`
+**Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
+
+Miscellaneous Command | Format, Examples
+--------|------------------
+**Help**| `help`
+
+
