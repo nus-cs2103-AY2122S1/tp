@@ -10,12 +10,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.student.Student;
 
-/**
- * A UI component that displays information of a {@code Student}.
- */
-public class StudentCard extends UiPart<Region> {
-
-    private static final String FXML = "StudentListCard.fxml";
+public class MemberListCard extends UiPart<Region> {
+    private static final String FXML = "MemberListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -32,8 +28,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label email;
     @FXML
     private Label studentNumber;
@@ -47,18 +41,12 @@ public class StudentCard extends UiPart<Region> {
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public MemberListCard(Student student) {
         super(FXML);
         this.student = student;
-        id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         email.setText("Email: " + student.getEmail().value);
         studentNumber.setText("Student Number: " + student.getStudentNumber().toString());
-        if (!student.getGroupName().toString().contentEquals("-")) {
-            Label studentGrp = new Label("Group: " + student.getGroupName().toString());
-            tags.getChildren().add(studentGrp);
-            studentGrp.getStyleClass().add("studentGroupLabel");
-        }
 
         studentValuesContainer.getChildren().addAll(
                 new StudentValuesBox(StudentValuesBox.ATTENDANCE_HEADER, student.getAttendance()),
@@ -84,7 +72,6 @@ public class StudentCard extends UiPart<Region> {
 
         // state check
         StudentCard card = (StudentCard) other;
-        return id.getText().equals(card.id.getText())
-                && student.equals(card.student);
+        return student.equals(card.student);
     }
 }
