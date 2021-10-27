@@ -11,7 +11,7 @@ import tutoraid.logic.commands.ViewStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
- * Checks if a given add command is to add a student to TutorAid or to add a progress note to a student.
+ * Parses input arguments and creates a new ViewCommand object
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
     /**

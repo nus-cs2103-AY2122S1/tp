@@ -39,8 +39,8 @@ public class Lessons {
 
         lessons = new ArrayList<>();
 
-        for (int i = 0; i < lessonNames.size(); i++) {
-            LessonName currentLessonName = new LessonName(lessonNames.get(i));
+        for (String lessonName : lessonNames) {
+            LessonName currentLessonName = new LessonName(lessonName);
             lessons.add(currentLessonName);
         }
     }
@@ -52,8 +52,8 @@ public class Lessons {
      * @return true if all elements are valid lesson names, false otherwise
      */
     public static boolean isValidLessonNames(ArrayList<String> lessonNames) {
-        for (int i = 0; i < lessonNames.size(); i++) {
-            if (lessonNames.get(i) == null || !LessonName.isValidLessonName(lessonNames.get(i))) {
+        for (String lessonName : lessonNames) {
+            if (lessonName == null || !LessonName.isValidLessonName(lessonName)) {
                 return false;
             }
         }
@@ -103,8 +103,8 @@ public class Lessons {
      */
     public ArrayList<String> getAllLessonNamesAsStringArrayList() {
         ArrayList<String> allLessonNamesAsStringArrayList = new ArrayList<>();
-        for (int i = 0; i < lessons.size(); i++) {
-            String currentLessonName = lessons.get(i).toString();
+        for (LessonName lesson : lessons) {
+            String currentLessonName = lesson.toString();
             allLessonNamesAsStringArrayList.add(currentLessonName);
         }
         return allLessonNamesAsStringArrayList;
@@ -112,19 +112,15 @@ public class Lessons {
 
     @Override
     public String toString() {
-        if (lessons.size() == 0) {
-            return "No Lesson";
-        }
-
-        String str = "";
+        StringBuilder str = new StringBuilder();
         int counter = 1;
 
         for (String lessonName : getAllLessonNamesAsStringArrayList()) {
-            str += "\n" + counter + ".  " + lessonName;
+            str.append("\n").append(counter).append(".  ").append(lessonName);
             counter++;
         }
 
-        return str;
+        return str.toString();
     }
 
     @Override

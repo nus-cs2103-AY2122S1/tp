@@ -26,4 +26,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
     public static final String MESSAGE_INVALID_VIEW_COMMAND = "Invalid view command format! "
             + "Must start with 'view -s' or 'view -l'";
+    public static final String MESSAGES_SHOWING_HELP_MESSAGE = "Opened help window.";
 }

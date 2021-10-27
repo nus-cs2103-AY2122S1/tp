@@ -17,8 +17,8 @@ public class ViewLessonCommand extends ViewCommand {
 
     public static final String COMMAND_FLAG = "-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows the student identified by the index number used in the displayed student list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FLAG
+            + ": Shows the student identified by the index number used in the displayed lesson list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
 
