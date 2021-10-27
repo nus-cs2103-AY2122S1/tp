@@ -55,28 +55,45 @@ public class DeleteTaskCommand extends DeleteCommand {
         List<Module> lastShownList = model.getFilteredModuleList();
         for (Module module : lastShownList) {
             if (module.getName().equals(moduleName)) {
-                List<Task> taskList = module.getTaskList().asModifiableObservableList();
                 List<Student> studentList = module.getStudentList();
                 for (Student student : studentList) {
-                    for (Task task : taskList) {
-                        if (task.getTaskId().equals(targetTaskId)) {
-                            Task taskToDelete = task;
-                            logger.log(Level.INFO, "deleting task from student's taskList: " + task.getTaskId());
-                            student.removeTask(taskToDelete);
-                        }
-                    }
+                    deleteTaskFromStudent(student);
                 }
-                for (Task task : taskList) {
-                    if (task.getTaskId().equals(targetTaskId)) {
-                        Task taskToDelete = task;
-                        logger.log(Level.INFO, "deleting task from module taskList: " + task.getTaskId());
-                        module.deleteTask(taskToDelete);
-                        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
-                    }
-                }
+                deleteTaskFromModule(module);
+                return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, targetTaskId));
             }
         }
         throw new CommandException(Messages.MESSAGE_MODULE_NAME_NOT_FOUND);
+    }
+
+    /**
+     * Deletes task from student's taskList.
+     *
+     * @param student The student with the task to be deleted.
+     */
+    public void deleteTaskFromStudent(Student student) {
+        for (Task task : student.getTaskList()) {
+            if (task.getTaskId().equals(targetTaskId)) {
+                logger.log(Level.INFO, "deleting task from student's taskList: " + task.getTaskId());
+                student.removeTask(task);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Deletes task from module's taskList.
+     *
+     * @param module The module with the task to be deleted.
+     */
+    public void deleteTaskFromModule(Module module) {
+        for (Task task : module.getTaskList()) {
+            if (task.getTaskId().equals(targetTaskId)) {
+                logger.log(Level.INFO, "deleting task from module taskList: " + task.getTaskId());
+                module.deleteTask(task);
+                return;
+            }
+        }
     }
 
     @Override
