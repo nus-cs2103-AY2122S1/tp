@@ -30,8 +30,8 @@ public class JsonAdaptedModule {
      */
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("moduleName") String moduleName,
-                             @JsonProperty("uniqueStudentList") List<JsonAdaptedStudent> studentList,
-                             @JsonProperty("uniqueTaskList") List<JsonAdaptedTask> taskList) {
+                             @JsonProperty("studentList") List<JsonAdaptedStudent> studentList,
+                             @JsonProperty("taskList") List<JsonAdaptedTask> taskList) {
         this.moduleName = moduleName;
         this.studentList.addAll(studentList);
         this.taskList.addAll(taskList);
@@ -71,21 +71,25 @@ public class JsonAdaptedModule {
         final ModuleName modelModuleName = new ModuleName(moduleName);
 
         final UniqueStudentList students = new UniqueStudentList();
+        final UniqueTaskList tasks = new UniqueTaskList();
         if (!studentList.isEmpty()) {
             for (JsonAdaptedStudent student : studentList) {
                 Student modelStudent = student.toModelType();
+                if (!taskList.isEmpty()) {
+                    for (JsonAdaptedTask task : taskList) {
+                        Task modelTask = task.toModelType();
+                        modelStudent.addTask(modelTask);
+                    }
+                }
                 students.add(modelStudent);
             }
         }
-
-        final UniqueTaskList tasks = new UniqueTaskList();
         if (!taskList.isEmpty()) {
             for (JsonAdaptedTask task : taskList) {
                 Task modelTask = task.toModelType();
                 tasks.add(modelTask);
             }
         }
-
         return new Module(modelModuleName, students, tasks);
     }
 }
