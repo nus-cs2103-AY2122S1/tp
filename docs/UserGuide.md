@@ -110,11 +110,11 @@ Purges all pre-existing sample data to start adding your own data or purge the u
 Clears all data in PE. \
 Example: `purge`
 
-### <a name="download-data"></a>2c. Download Data
+### <a name="download-data"></a>2c. Download Data `download`
 ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button or the enter command `download`. The TA will need
 to specify the directory to download the file to.
 
-### <a name="upload-data"></a>2d. Upload Data
+### <a name="upload-data"></a>2d. Upload Data: `upload`
 ProgrammerError data can be uploaded by a CSV file by clicking the 'Upload' button or enter the command `upload`. The TA will need
 to specify the directory to upload the file from.
 
