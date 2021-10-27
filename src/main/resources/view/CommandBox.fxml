@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.TextFlow?>
-<!--<?import javafx.scene.control.TextField?>-->
 <?import javafx.scene.layout.StackPane?>
 
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <TextFlow fx:id="commandTextField">
+  <VBox>
+    <TextField fx:id="suggestions"/>
     <TextField fx:id="main" promptText="Enter command here..."/>
-    <Text fx:id="suggestions"/>
-  </TextFlow>
+  </VBox>
 </StackPane>
 
