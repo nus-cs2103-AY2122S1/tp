@@ -18,8 +18,8 @@ public class GuideWindow extends UiPart<Stage> {
      */
     private enum Page {
         ONE("User Guide",
-            "Welcome to Siasa! " +
-                "This is a guide that teaches you all the basic commands to use this application.\n"
+            "Welcome to Siasa! "
+                + "This is a guide that teaches you all the basic commands to use this application.\n"
                 + "For a more detailed guide, visit: https://ay2122s1-cs2103-f10-4.github.io/tp/UserGuide.html",
             new Image("file:src/main/resources/images/guide/page_one.png")),
         TWO("User Guide - Persons", "addclient: Adds a contact to your Siasa address book.\n"
