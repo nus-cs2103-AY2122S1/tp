@@ -60,7 +60,7 @@ public class ModelManager implements Model {
         filteredClients = new FilteredList<>(sortedClients);
 
         sortedNextMeetings = new SortedList<>(checkAllNextMeetings(this.addressBook.getClientList()));
-        shownNextMeetings = new FilteredList<>(sortedNextMeetings);
+        shownNextMeetings = new FilteredList<>(sortedNextMeetings.sorted());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
 
         clientToView = new FilteredList<>(this.addressBook.getClientList());
@@ -237,8 +237,16 @@ public class ModelManager implements Model {
     }
 
     public ObservableList<Client> getSortedNextMeetingList() {
-        shownNextMeetings.setPredicate((client) -> client.hasNextMeeting());
         return shownNextMeetings;
+    }
+
+    @Override
+    public void filterSortedNextMeetingList(LocalDate date) {
+        if (date == null) {
+            shownNextMeetings.setPredicate(PREDICATE_SHOW_ALL_CLIENTS);
+        } else {
+            shownNextMeetings.setPredicate((client) -> client.isSameDayMeeting(date));
+        }
     }
 
     @Override

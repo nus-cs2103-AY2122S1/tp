@@ -93,6 +93,9 @@ public class NextMeeting implements OptionalNonStringBasedField {
     public static boolean isValidNextMeeting(String test) {
         return test.matches(VALID_MEETING_STRING);
     }
+    public boolean isSameDay(LocalDate comparison) {
+        return comparison.equals(this.date);
+    }
 
     /**
      * Returns the a boolean of whether this {@code NextMeeting} falls before
