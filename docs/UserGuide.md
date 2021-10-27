@@ -51,6 +51,9 @@ Managera is OS-independent meaning it will work on any operating system. (Window
 ## What this user guide is for
 
 This user guide aims to give a brief overview of what Managera is and what features it has.
+It is intended mainly for first-time users or beginners to Managera, but experienced users may still use it for 
+reference.
+
 It contains instructions for [how to set up Managera](#quick-start), [how to use certain features](#features) 
 and answers to some [commonly-asked questions](#faq). You may also use this user guide as a
 [quick reference](#command-summary) to any commands once you are more experienced with Managera.
@@ -90,8 +93,8 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 
 4. Copy `managera.jar` to a new folder which will act as the _home folder_ for Managera.
 
-5. Double-click `managera.jar` to start the app. The GUI similar to the below should appear in a few seconds. Note how 
-   the app contains some sample data.<br>
+5. Double-click `managera.jar` to start the app. The GUI similar to the one below should appear in a few seconds. Note 
+   how the app contains some sample data.<br>
    ![Ui](images/Ui_labelled.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
