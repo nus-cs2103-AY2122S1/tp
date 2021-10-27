@@ -21,6 +21,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
+import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DashboardCommandResult;
@@ -224,12 +225,10 @@ public class MainWindow extends UiPart<Stage> {
         try {
             stuList = fm.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
-            displayPopup("Your CSV seems to be invalid. It should only have studentId, classId, name and email!");
+            displayPopup("Upload failed: " + e.getMessage());
             return;
-        }
-
-        if (stuList == null) {
-            displayPopup("Incorrect number of columns!");
+        } catch (IllegalValueException e) {
+            displayPopup(e.getMessage());
             return;
         }
 
@@ -275,7 +274,7 @@ public class MainWindow extends UiPart<Stage> {
         Popup popup = createPopup(message);
 
         // Add some left padding according to primaryStage's width
-        popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
+        popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.05);
 
         // Set Y coordinate scaled according to primaryStage's height
         popup.setY(primaryStage.getY() + primaryStage.getHeight() * 0.1);
@@ -294,6 +293,8 @@ public class MainWindow extends UiPart<Stage> {
         popup.setHideOnEscape(true);
 
         Label label = new Label(message);
+        label.setWrapText(true);
+        label.setMaxWidth(primaryStage.getWidth() * 0.9);
         label.getStylesheets().add("view/Styles.css");
         label.getStyleClass().add("popup");
 
