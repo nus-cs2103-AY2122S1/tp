@@ -28,7 +28,7 @@ public class ShortcutTest {
         assertFalse(Shortcut.isValidShortcut(" ")); // spaces only
         assertFalse(Shortcut.isValidShortcut("listf"));
         assertFalse(Shortcut.isValidShortcut("list all the facilities"));; // long names
-        
+
         // valid shortcut
         assertTrue(Shortcut.isValidShortcut("lf")); // alphabets only
         assertTrue(Shortcut.isValidShortcut("23")); // numbers only
