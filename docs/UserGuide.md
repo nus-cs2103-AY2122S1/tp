@@ -173,7 +173,7 @@ Parameter | Format |
 in your inventory currently. Every product command requires a `-p` parameter.
 
 Parameter | Format |
---- | ---
+|:---:| --- |
 `-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alienware Aurora R12`.
 `-$` | A valid price, optional to specify the cents (2 decimal places). <br> E.g.: `-$ 10.00` and `-$ 10`.
 `-q` | Any positive integer to specify the quantity. <br> E.g.: `-q 15`.
