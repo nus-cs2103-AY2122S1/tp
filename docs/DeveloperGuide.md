@@ -154,6 +154,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add command
+
+A user can use the add command to add a clients. A sequence diagram of this action is as shown:
+
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+
 ### Insurance feature
 
 #### Implementation
