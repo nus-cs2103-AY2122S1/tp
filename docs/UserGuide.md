@@ -91,14 +91,24 @@ Miscellaneous data fields| 8. ```r/```: Remark <br /> 9. ```int/```: Interaction
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+Features and commands are categorised based on 
+1. System commands
+2. Contact-specific commands
+3. Organisation-specific commands
 
 > The table below consists of important syntax regarding commands available
 
-### Viewing help: `help`
+### System commands
+```TODO: Categorise here```
+
+##### Viewing help: `help`
 Shows a message explaining how to access the help page.
 Format: `help`
 
-### Adding a contact: `add`
+### Contact-specific commands
+```TODO: Categorise here```
+
+##### Adding a contact: `add`
 Adds a contact to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE f/FACULTY m/MAJOR  [t/TAG]...`
