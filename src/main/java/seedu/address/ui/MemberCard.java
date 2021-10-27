@@ -64,9 +64,9 @@ public class MemberCard extends UiPart<Region> {
                 .forEach(task -> {
                     Label taskLabel = new Label(task.getName().toString());
                     if (task.isDone()) {
-                        taskLabel.setStyle("-fx-background-color: #549a1f");
+                        taskLabel.setStyle("-fx-background-color: #3f7318");
                     } else {
-                        taskLabel.setStyle("-fx-background-color: #c51162");
+                        taskLabel.setStyle("-fx-background-color: #7c0236");
                     }
                     tasks.getChildren().add(taskLabel);
                 });
