@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -104,14 +105,23 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered friend list
      */
-    ObservableList<Friend> getFilteredFriendsList();
+    ObservableList<Friend> getFilteredAndSortedFriendsList();
 
     /**
      * Updates the filter of the filtered friend list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredFriendsList(Predicate<Friend> predicate);
+    void updateFilteredAndSortedFriendsList(Predicate<Friend> predicate);
+
+    /**
+     * Updates the filter and comparator of the filtered and sorted friends list to filter by the given
+     * {@code predicate} and sorted by the given {@code comparator}.
+     * of the s
+     *
+     * @throws NullPointerException if {@code predicate} or {@code comparator} is null.
+     */
+    void updateFilteredAndSortedFriendsList(Predicate<Friend> predicate, Comparator<Friend> comparator);
 
     /**
      * Links the friend {@code toLink} with the game in {@code gameFriendLink}.

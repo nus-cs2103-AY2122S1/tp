@@ -2,6 +2,7 @@ package seedu.address.model.friend;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -9,10 +10,13 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
+import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.SkillValue;
+import seedu.address.model.time.HourOfDay;
+import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
 /**
  * Represents a Friend in the gitGud friend's list.
@@ -121,6 +125,11 @@ public class Friend {
         return this.friendId.equals(friend.getFriendId());
     }
 
+    public boolean isFriendScheduleFree(HourOfDay hour, DayOfWeek dayOfWeek)
+            throws InvalidHourOfDayException, InvalidDayTimeException {
+        return this.schedule.isTimeslotAvailable(hour.getHour(), dayOfWeek.getValue());
+    }
+
     /**
      * Returns true if both friends have the same friendId, name and games.
      */
@@ -138,6 +147,8 @@ public class Friend {
         return otherFriend.getFriendId().equals(getFriendId())
                 && otherFriend.getGameFriendLinks().equals(getGameFriendLinks())
                 && otherFriend.getFriendName().equals(getFriendName());
+        // TODO: marcus - debug schedule command when adding this equality check
+//                && otherFriend.getSchedule().equals(getSchedule());
     }
 
     @Override

@@ -22,19 +22,19 @@ public class HourOfDayTest {
     // test near the boundaries of equivalence partitions
     @Test
     public void validateHourOfDay_invalidHourOfDay_returnsFalse() {
-        assertFalse(HourOfDay.validateHourOfDay(-1));
-        assertFalse(HourOfDay.validateHourOfDay(-12));
-        assertFalse(HourOfDay.validateHourOfDay(24));
-        assertFalse(HourOfDay.validateHourOfDay(100));
+        assertFalse(HourOfDay.isValidHourOfDay(-1));
+        assertFalse(HourOfDay.isValidHourOfDay(-12));
+        assertFalse(HourOfDay.isValidHourOfDay(24));
+        assertFalse(HourOfDay.isValidHourOfDay(100));
     }
 
     // EP: within valid range
     @Test
     public void validateHourOfDay_validHourOfDays_returnsTrue() {
-        assertTrue(HourOfDay.validateHourOfDay(0));
-        assertTrue(HourOfDay.validateHourOfDay(23));
-        assertTrue(HourOfDay.validateHourOfDay(5));
-        assertTrue(HourOfDay.validateHourOfDay(8));
+        assertTrue(HourOfDay.isValidHourOfDay(0));
+        assertTrue(HourOfDay.isValidHourOfDay(23));
+        assertTrue(HourOfDay.isValidHourOfDay(5));
+        assertTrue(HourOfDay.isValidHourOfDay(8));
     }
 
     @Test

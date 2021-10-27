@@ -27,7 +27,7 @@ public class UnlinkFriendCommandTest {
     @Test
     public void execute_validFriendIdUnfilteredList_success() {
         Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
-        Friend friendToUnlink = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Friend friendToUnlink = model.getFilteredAndSortedFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         GameFriendLink gameFriendLink = new GameFriendLink(GENSHIN_IMPACT.getGameId(), friendToUnlink.getFriendId(),
                 new UserName("GoldNova"));
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(),

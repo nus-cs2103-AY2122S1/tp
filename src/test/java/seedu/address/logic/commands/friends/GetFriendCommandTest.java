@@ -35,7 +35,7 @@ public class GetFriendCommandTest {
     @Test
     public void execute_validIdUnfilteredList_success() {
         // command can get friend by friend id
-        Friend friendToGet = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Friend friendToGet = model.getFilteredAndSortedFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         GetFriendCommand getCommand = new GetFriendCommand(friendToGet.getFriendId());
 
         String expectedMessage = String.format(GetFriendCommand.MESSAGE_FRIEND_FULL_INFORMATION,
@@ -59,7 +59,7 @@ public class GetFriendCommandTest {
     @Test
     public void execute_validIdFilteredList_success() {
         // can get friend by friendId even if not in the currently filtered list
-        Friend friendToGet = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Friend friendToGet = model.getFilteredAndSortedFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         GetFriendCommand getCommand = new GetFriendCommand(friendToGet.getFriendId());
         showNoFriend(model);
 
@@ -101,8 +101,8 @@ public class GetFriendCommandTest {
      * Updates {@code model}'s filtered friend list to show no one.
      */
     private void showNoFriend(Model model) {
-        model.updateFilteredFriendsList(p -> false);
+        model.updateFilteredAndSortedFriendsList(p -> false);
 
-        assertTrue(model.getFilteredFriendsList().isEmpty());
+        assertTrue(model.getFilteredAndSortedFriendsList().isEmpty());
     }
 }

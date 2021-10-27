@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.time.DayOfWeek;
+import java.util.Comparator;
+import java.util.Locale;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendRecommendFilterPredicate;
 import seedu.address.model.game.GameId;
 import seedu.address.model.time.HourOfDay;
 
@@ -15,10 +19,13 @@ import seedu.address.model.time.HourOfDay;
  */
 public class RecommendCommand extends Command {
     public static final String COMMAND_WORD = "recommend";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " : Recommends friends with highest skill value "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Recommends friends sorted by the highest skill value "
             + "for the given game GAME_ID and available within the provided time to play with.\n"
-            + "Parameters: -g GAME_ID -t HOUR DAY"
+            + "Parameters: -g GAME_ID -t HOUR DAY\n"
             + "Example: recommend -g Valorant -t 10 6";
+    public static final String MESSAGE_GAME_NOT_FOUND = "Game with provided GAME_ID not found in games list.";
+    public static final String MESSAGE_SUCCESS = "Displaying friend recommendations for GAME_ID: %1$s available"
+            + " weekly on %2$s, %3$s";
 
     private final GameId gameFilter;
     private final HourOfDay hourFilter;
@@ -26,9 +33,10 @@ public class RecommendCommand extends Command {
 
     /**
      * Constructs an instance of RecommendCommand.
+     *
      * @param gameFilter valid existing game to recommend friends for.
      * @param hourFilter valid hour to find friends available during.
-     * @param dayFilter valid day to find friends available during.
+     * @param dayFilter  valid day to find friends available during.
      */
     public RecommendCommand(GameId gameFilter, HourOfDay hourFilter, DayOfWeek dayFilter) {
         requireNonNull(gameFilter);
@@ -41,7 +49,28 @@ public class RecommendCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        if (!model.hasGameWithId(gameFilter)) {
+            throw new CommandException(MESSAGE_GAME_NOT_FOUND);
+        }
+        FriendRecommendFilterPredicate recommendFilterPredicate =
+                new FriendRecommendFilterPredicate(hourFilter, dayFilter, model.getGame(gameFilter));
+
+        Comparator<Friend> friendComparator = new Comparator<Friend>() {
+            @Override
+            public int compare(Friend friend, Friend t1) {
+                if (friend.getFriendId().toString().length() < t1.getFriendId().toString().length()) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        };
+
+        model.updateFilteredAndSortedFriendsList(recommendFilterPredicate, friendComparator);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, gameFilter,
+                dayFilter.toString().toLowerCase(Locale.ROOT), hourFilter.toString() + "00"),
+                CommandType.RECOMMEND);
     }
 
     @Override

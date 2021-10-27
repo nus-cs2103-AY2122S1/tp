@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -24,29 +25,37 @@ import seedu.address.testutil.FriendBuilder;
  */
 class ScheduleFriendCommandTest {
 
-    private final Model model = new ModelManager(SampleDataUtil.getSampleFriendsList(),
-            SampleDataUtil.getSampleGamesList(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(SampleDataUtil.getSampleFriendsList(),
+                SampleDataUtil.getSampleGamesList(), new UserPrefs());
+    }
 
     @Test
     public void execute_updateSchedule_success() throws InvalidDayTimeException {
-        // Set up Schedule
+        // common schedule fields
         int day = 7;
         String startTime = "0000";
-        String endTime = "2300";
+        String endTime = "2200";
         boolean isFree = true;
+
+        // make a new Schedule
         Schedule updatedSchedule = new Schedule();
         updatedSchedule.setScheduleDay(day, startTime, endTime, isFree);
 
         // Set up Models
         Model expectedModel = new ModelManager(SampleDataUtil.getSampleFriendsList(),
                 SampleDataUtil.getSampleGamesList(), new UserPrefs());
+
         Friend friendToEdit = model.getFriendsList().getFriendsList().get(0);
         Friend editedFriend = new FriendBuilder(friendToEdit).withSchedule(updatedSchedule).build();
         expectedModel.setFriend(expectedModel.getFriend(friendToEdit.getFriendId()), editedFriend);
 
         // Test if command works
         ScheduleFriendCommand scheduleFriendCommand =
-                new ScheduleFriendCommand(friendToEdit.getFriendId(), day, startTime, endTime, isFree);
+                new ScheduleFriendCommand(editedFriend.getFriendId(), day, startTime, endTime, isFree);
         String expectedMessage = String.format(ScheduleFriendCommand.MESSAGE_SCHEDULE_FRIEND_SUCCESS,
                 editedFriend.getFriendId());
         assertCommandSuccess(scheduleFriendCommand, model, expectedMessage, expectedModel);

@@ -41,7 +41,7 @@ public class ListFriendCommand extends Command {
         if (predicate instanceof FriendIdContainsKeywordPredicate) {
             FriendIdContainsKeywordPredicate friendIdContainsKeywordPredicate =
                     (FriendIdContainsKeywordPredicate) predicate;
-            model.updateFilteredFriendsList(friendIdContainsKeywordPredicate);
+            model.updateFilteredAndSortedFriendsList(friendIdContainsKeywordPredicate);
             return new CommandResult(getMessageSuccess(), CommandType.FRIEND_LIST);
         }
         // ListCommand initialized with unknown predicate

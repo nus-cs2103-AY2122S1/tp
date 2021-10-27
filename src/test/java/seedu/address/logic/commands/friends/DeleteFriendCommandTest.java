@@ -31,7 +31,7 @@ public class DeleteFriendCommandTest {
     @Test
     public void execute_validIdUnfilteredList_success() {
         // command can delete friend by friend id
-        Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Friend friendToDelete = model.getFilteredAndSortedFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
 
         String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
@@ -53,7 +53,7 @@ public class DeleteFriendCommandTest {
     public void execute_validIdFilteredList_success() {
         // can delete friend by friendid even if not in the currently filtered list
         showPersonAtIndex(model, INDEX_FIRST_ITEM);
-        Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Friend friendToDelete = model.getFilteredAndSortedFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
         String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 friendToDelete.getFriendId());
@@ -95,8 +95,8 @@ public class DeleteFriendCommandTest {
      * Updates {@code model}'s filtered friend list to show no one.
      */
     private void showNoFriend(Model model) {
-        model.updateFilteredFriendsList(p -> false);
+        model.updateFilteredAndSortedFriendsList(p -> false);
 
-        assertTrue(model.getFilteredFriendsList().isEmpty());
+        assertTrue(model.getFilteredAndSortedFriendsList().isEmpty());
     }
 }

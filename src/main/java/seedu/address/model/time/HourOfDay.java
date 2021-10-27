@@ -20,11 +20,17 @@ public class HourOfDay {
      * @param hour valid hour between 0 and 23 inclusive.
      */
     public HourOfDay(int hour) {
-        checkArgument(validateHourOfDay(hour), MESSAGE_INVALID_RANGE);
+        checkArgument(isValidHourOfDay(hour), MESSAGE_INVALID_RANGE);
         this.hour = hour;
     }
 
-    public static boolean validateHourOfDay(int hourOfDay) {
+    /**
+     * Validates if HourOfDay is within the valid range MIN_HOUR and MAX_HOUR inclusive.
+     *
+     * @param hourOfDay value to validate.
+     * @return whether the HourOfDay is within the valid range.
+     */
+    public static boolean isValidHourOfDay(int hourOfDay) {
         return hourOfDay >= MIN_HOUR && hourOfDay <= MAX_HOUR;
     }
 
@@ -41,5 +47,10 @@ public class HourOfDay {
         } else {
             return ((HourOfDay) other).hour == this.hour;
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(hour);
     }
 }

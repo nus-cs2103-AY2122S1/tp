@@ -18,12 +18,6 @@ public class SkillLevelTest {
         assertThrows(IllegalArgumentException.class, () -> new SkillValue(outsideUpperBounds));
     }
 
-    @Test
-    public void validateSkillValue_null_throwsNullPointerException() {
-        // null skillValue
-        assertThrows(NullPointerException.class, () -> SkillValue.validateSkillValue(null));
-    }
-
     // EP: invalid ranges: less than valid range and greater than valid range
     // test near the boundaries of equivalence partitions
     @Test

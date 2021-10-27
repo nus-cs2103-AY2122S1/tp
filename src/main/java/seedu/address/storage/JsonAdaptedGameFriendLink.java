@@ -63,11 +63,12 @@ public class JsonAdaptedGameFriendLink {
             throw new IllegalValueException(UserName.MESSAGE_CONSTRAINTS);
         }
         if (skillValue != null
-                && !SkillValue.validateSkillValueString(skillValue)) {
+                && !SkillValue.isValidSkillValueString(skillValue)) {
             throw new IllegalValueException(SkillValue.MESSAGE_CONSTRAINTS);
         }
 
-        SkillValue loadedSkillValue = skillValue == null ? null : ParserUtil.parseSkillValue(skillValue);
+        // if no skill value assigned, set to 0 as default.
+        SkillValue loadedSkillValue = skillValue == null ? new SkillValue(0) : ParserUtil.parseSkillValue(skillValue);
 
         return new GameFriendLink(new GameId(gameId), new FriendId(friendId), new UserName(friendGameUserName),
                 loadedSkillValue);

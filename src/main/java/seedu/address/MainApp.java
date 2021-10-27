@@ -92,7 +92,8 @@ public class MainApp extends Application {
 
         // verify valid Games exist for all GameFriendLinks in initial friends list.
         if (!checkFriendsGamesExist(initialGamesList, initialFriendsList)) {
-            logger.info("Games linked to friends are not found in the games list. Loading an empty friends list.");
+            logger.info("Games linked to friends are not found in the games list. "
+                    + "Loading an empty friends list.");
             initialFriendsList = new FriendsList();
         }
 
@@ -109,7 +110,7 @@ public class MainApp extends Application {
                 return loadedGamesList.get();
             }
         } catch (DataConversionException e) {
-            logger.warning("Game data file not in the correct format. Loading an empty games list.");
+            logger.warning("Game data file not in the correct format/corrupted. Loading an empty games list.");
             return new GamesList();
         } catch (IOException e) {
             logger.info("Problem encountered reading game data file. Loading an empty games list.");
@@ -127,7 +128,8 @@ public class MainApp extends Application {
 
             return loadedFriendsList.get();
         } catch (DataConversionException e) {
-            logger.warning("Friend data file not in the correct format. Loading an empty friends list.");
+            logger.warning("Friend data file not in the correct format/corrupted. "
+                    + "Loading an empty friends list.");
             return new FriendsList();
         } catch (IOException e) {
             logger.info("Problem encountered reading friend data file. Loading an empty friends list.");

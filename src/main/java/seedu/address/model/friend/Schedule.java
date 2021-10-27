@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
+import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
 /**
  * Represents a Friend's schedule in gitGud's friend list.
@@ -16,16 +17,37 @@ public class Schedule {
 
     public static final String MESSAGE_INVALID_SCHEDULE = "Schedule must contain 7 valid days,from Monday to Sunday.";
 
-    private final ArrayList<Day> schedule;
+    private static final String MESSAGE_DAYTIME_INVALID_RANGE = "Day value must be an Integer within 1 - 7 (inclusive).";
+    private static final int SCHEDULE_START_INDEX = 1;
+    private static final int SCHEDULE_END_INDEX = 7;
+    private static final int EXPECTED_LIST_LENGTH = (SCHEDULE_END_INDEX - SCHEDULE_START_INDEX + 1);
+    private final ArrayList<Day> daysOfWeek;
 
     /**
      * Constructs a {@code Schedule}.
      */
     public Schedule() {
-        this.schedule = new ArrayList<>();
-        for (int i = 1; i <= 7; i++) {
-            schedule.add(new Day(DayOfWeek.of(i)));
+        this.daysOfWeek = new ArrayList<>();
+        for (int i = SCHEDULE_START_INDEX; i <= SCHEDULE_END_INDEX; i++) {
+            daysOfWeek.add(new Day(DayOfWeek.of(i)));
         }
+    }
+
+    /**
+     * Checks if schedule timeslot is free for given {@code dayOfWeek} and {@code hourOfDay}.
+     *
+     * @param dayOfWeek day to check if is free for.
+     * @param hourOfDay hour to check if is free for.
+     * @return whether schedule is free for given {@code dayOfWeek} and {@code hourOfDay}.
+     * @throws InvalidDayTimeException thrown when dayOfWeek given exceeds valid range.
+     * @throws InvalidHourOfDayException thrown when hourOfDay given exceeds valid range.
+     */
+    public boolean isTimeslotAvailable(int hourOfDay, int dayOfWeek)
+            throws InvalidDayTimeException, InvalidHourOfDayException {
+        if (dayOfWeek < SCHEDULE_START_INDEX || dayOfWeek > SCHEDULE_END_INDEX) {
+            throw new InvalidDayTimeException(MESSAGE_DAYTIME_INVALID_RANGE);
+        }
+        return daysOfWeek.get(convertToListIndex(dayOfWeek)).isTimeSlotHourFree(hourOfDay);
     }
 
     /**
@@ -35,12 +57,12 @@ public class Schedule {
      * @return True if valid.
      */
     public static boolean isValidSchedule(Schedule schedule) {
-        if (schedule.getSchedule().size() != 7) {
+        if (schedule.getDaysOfWeek().size() != EXPECTED_LIST_LENGTH) {
             return false;
         }
         boolean isValid = true;
-        for (int i = 1; i <= 7; i++) {
-            Day current = schedule.getSchedule().get(i - 1);
+        for (int i = SCHEDULE_START_INDEX; i <= SCHEDULE_END_INDEX; i++) {
+            Day current = schedule.getDaysOfWeek().get(i - 1);
             isValid = isValid && Day.isValidDay(current) && current.getDayName().equals(DayOfWeek.of(i).name());
         }
         return isValid;
@@ -57,24 +79,24 @@ public class Schedule {
      */
     public void setScheduleDay(int day, String startTime, String endTime, boolean isFree)
             throws InvalidDayTimeException {
-        if (day < 1 || day > 7) {
-            throw new InvalidDayTimeException("Day value must be an Integer within 1 - 7 (inclusive).");
+        if (day < SCHEDULE_START_INDEX || day > SCHEDULE_END_INDEX) {
+            throw new InvalidDayTimeException(MESSAGE_DAYTIME_INVALID_RANGE);
         }
-        schedule.get(day - 1).setTime(startTime, endTime, isFree);
+        daysOfWeek.get(convertToListIndex(day)).setTime(startTime, endTime, isFree);
     }
 
     /**
      * Returns an immutable day list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public List<Day> getSchedule() {
-        return Collections.unmodifiableList(schedule);
+    public List<Day> getDaysOfWeek() {
+        return Collections.unmodifiableList(daysOfWeek);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        for (Day day : schedule) {
+        for (Day day : daysOfWeek) {
             builder.append("\nDay: ")
                     .append(day.getDayName())
                     .append("; Free TimeSlots: ");
@@ -97,11 +119,15 @@ public class Schedule {
             return false;
         }
         Schedule schedule1 = (Schedule) o;
-        return Objects.equals(schedule, schedule1.schedule);
+        return Objects.equals(daysOfWeek, schedule1.daysOfWeek);
+    }
+
+    private int convertToListIndex(int dayOfWeek) {
+        return dayOfWeek - 1;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(schedule);
+        return Objects.hash(daysOfWeek);
     }
 }

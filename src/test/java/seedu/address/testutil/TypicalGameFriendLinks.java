@@ -29,9 +29,9 @@ public class TypicalGameFriendLinks {
     public static final GameFriendLink ALICE_CSGO_SKILL_VALUE_EIGHT_LINK = new GameFriendLink(
             TypicalGames.CSGO.getGameId(), new FriendId(ALICE_FRIEND_ID),
             new UserName(VALID_USER_NAME_OMEGA), new SkillValue(8));
-    public static final GameFriendLink BOB_CSGO_SKILL_VALUE_NULL_LINK = new GameFriendLink(
+    public static final GameFriendLink BOB_CSGO_SKILL_VALUE_ZERO_LINK = new GameFriendLink(
             TypicalGames.CSGO.getGameId(), new FriendId(BENSON_FRIEND_ID),
-            new UserName(VALID_USER_NAME_OMEGA), null);
+            new UserName(VALID_USER_NAME_OMEGA), new SkillValue(0));
 
     public static final GameFriendLink CSGO_AMY_DRACO_LINK = new GameFriendLinkBuilder().withGameId(VALID_GAME_ID_CSGO)
             .withFriendId(VALID_FRIEND_ID_AMY).withUserName(VALID_USER_NAME_DRACO).build();

@@ -148,13 +148,13 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         FriendsList expectedFriendsList = new FriendsList(actualModel.getFriendsList());
-        List<Friend> expectedFilteredFriendsList = new ArrayList<>(actualModel.getFilteredFriendsList());
+        List<Friend> expectedFilteredFriendsList = new ArrayList<>(actualModel.getFilteredAndSortedFriendsList());
         GamesList expectedGamesList = new GamesList(actualModel.getGamesList());
         List<Game> expectedFilteredGamesList = new ArrayList<>(actualModel.getFilteredGamesList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedFriendsList, actualModel.getFriendsList());
-        assertEquals(expectedFilteredFriendsList, actualModel.getFilteredFriendsList());
+        assertEquals(expectedFilteredFriendsList, actualModel.getFilteredAndSortedFriendsList());
         assertEquals(expectedGamesList, actualModel.getGamesList());
         assertEquals(expectedFilteredGamesList, actualModel.getFilteredGamesList());
     }
@@ -164,13 +164,13 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredFriendsList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAndSortedFriendsList().size());
 
-        Friend friend = model.getFilteredFriendsList().get(targetIndex.getZeroBased());
+        Friend friend = model.getFilteredAndSortedFriendsList().get(targetIndex.getZeroBased());
         final String[] splitName = friend.getFriendName().fullName.split("\\s+");
-        model.updateFilteredFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredAndSortedFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredFriendsList().size());
+        assertEquals(1, model.getFilteredAndSortedFriendsList().size());
     }
 
     /**

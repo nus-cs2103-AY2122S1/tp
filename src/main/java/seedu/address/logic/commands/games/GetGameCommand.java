@@ -42,7 +42,7 @@ public class GetGameCommand extends Command {
 
 
         Game game = model.getGame(gameId);
-        model.updateFilteredFriendsList(new FriendGameFriendLinksContainsGamePredicate(game));
+        model.updateFilteredAndSortedFriendsList(new FriendGameFriendLinksContainsGamePredicate(game));
         return new CommandResult(
                 String.format(MESSAGE_GAME_FULL_INFORMATION, gameId.value), CommandType.GAME_GET, game);
     }

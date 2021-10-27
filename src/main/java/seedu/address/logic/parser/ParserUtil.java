@@ -115,7 +115,7 @@ public class ParserUtil {
      */
     public static HourOfDay parseValidRecommendHour(String recommendationHourFilter) throws ParseException {
         int hourOfDay = parseInteger(recommendationHourFilter.trim(), MESSAGE_HOUR_OF_DAY_MUST_BE_INT);
-        if (!HourOfDay.validateHourOfDay(hourOfDay)) {
+        if (!HourOfDay.isValidHourOfDay(hourOfDay)) {
             throw new ParseException(MESSAGE_INVALID_RANGE);
         }
         return new HourOfDay(hourOfDay);

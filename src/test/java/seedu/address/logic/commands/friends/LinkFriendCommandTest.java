@@ -30,7 +30,7 @@ public class LinkFriendCommandTest {
 
     @Test
     public void execute_validFriendIdUnfilteredList_success() {
-        Friend friendToLink = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Friend friendToLink = model.getFilteredAndSortedFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         UserName userName = new UserName("GoldNova");
         LinkFriendCommand linkFriendCommand = new LinkFriendCommand(friendToLink.getFriendId(),
                 GENSHIN_IMPACT.getGameId(), userName);
