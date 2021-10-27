@@ -20,7 +20,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
    * [Finding contacts by name / module code: `find`](#find)
 
-   * [Edit contact: `edit`](#edit)
+   * [Editing contact: `edit`](#edit)
 
    * [Deleting contact individually / in batches: `delete`](#delete)
 
@@ -157,7 +157,9 @@ Finds a contact by specifying either the name/module code(s).
 * The search is case-insensitive <br> e.g `ben` will match `Ben`
 * The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
 * Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
-* If multiple module codes are specified, only results matching all the module codes specified will be returned <br> e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
+* If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
+  e.g `find n/Bernice Yu` will only return contacts that have both words `Bernice` and `Yu`
+* Similarly, if multiple module codes are specified, only results matching all the module codes specified will be returned <br> e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
 
 Format: `find n/NAME`/`find m/MODULE_CODE(S)`
 
