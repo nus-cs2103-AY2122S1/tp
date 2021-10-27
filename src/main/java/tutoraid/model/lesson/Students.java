@@ -1,7 +1,11 @@
 package tutoraid.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 
+import tutoraid.model.lesson.exceptions.DuplicateStudentInLessonException;
+import tutoraid.model.lesson.exceptions.StudentNotFoundInLessonException;
 import tutoraid.model.student.Student;
 
 /**
@@ -21,6 +25,50 @@ public class Students {
         this.students = students;
     }
 
+    /**
+     * Checks if this arraylist of students contains a student.
+     *
+     * @param student a Student object to be checked
+     */
+    public boolean containsStudent(Student student) {
+        requireNonNull(student);
+        return students.contains(student);
+    }
+
+    /**
+     * Adds a student into this arraylist of students.
+     *
+     * @param student a Student object to be added
+     * @throws DuplicateStudentInLessonException if this arraylist of students already contains the student
+     */
+    public void addStudent(Student student) {
+        requireNonNull(student);
+        if (students.contains(student)) {
+            throw new DuplicateStudentInLessonException();
+        }
+        students.add(student);
+    }
+
+    /**
+     * Removes a student from this arraylist of students.
+     *
+     * @param student a Student object to be removed
+     * @throws StudentNotFoundInLessonException if this arraylist of students does not have the student
+     */
+    public void removeStudent(Student student) {
+        requireNonNull(student);
+        if (!students.remove(student)) {
+            throw new StudentNotFoundInLessonException();
+        }
+    }
+
+    /**
+     * Returns the number of students in this list.
+     */
+    public int numberOfStudents() {
+        return students.size();
+    }
+
     @Override
     public String toString() {
         String str = "";
@@ -31,7 +79,11 @@ public class Students {
             counter++;
         }
 
-        return str;
+        if (str.equals("")) {
+            return "No students";
+        } else {
+            return str;
+        }
     }
 
     @Override

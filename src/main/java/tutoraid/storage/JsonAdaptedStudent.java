@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tutoraid.commons.exceptions.IllegalValueException;
+import tutoraid.model.student.Lessons;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
@@ -28,6 +29,7 @@ class JsonAdaptedStudent {
     private final String parentPhone;
     private final ArrayList<String> progressList;
     private final boolean hasPaid;
+    private final ArrayList<String> lessons;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -37,7 +39,8 @@ class JsonAdaptedStudent {
             @JsonProperty("studentName") String studentName, @JsonProperty("studentPhone") String studentPhone,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("progressList") ArrayList<String> progressList,
-            @JsonProperty("paymentStatus") boolean hasPaid) {
+            @JsonProperty("paymentStatus") boolean hasPaid,
+            @JsonProperty("lessons") ArrayList<String> lessons) {
 
         this.studentName = studentName;
         this.studentPhone = studentPhone;
@@ -45,6 +48,7 @@ class JsonAdaptedStudent {
         this.parentPhone = parentPhone;
         this.progressList = progressList;
         this.hasPaid = hasPaid;
+        this.lessons = lessons;
     }
 
     /**
@@ -57,6 +61,7 @@ class JsonAdaptedStudent {
         parentPhone = source.getParentPhone().value;
         progressList = source.getProgressList().getAllProgressAsStringArrayList();
         hasPaid = source.getPaymentStatus().hasPaid;
+        lessons = source.getLessons().getAllLessonNamesAsStringArrayList();
     }
 
     /**
@@ -99,8 +104,17 @@ class JsonAdaptedStudent {
 
         final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
 
+        if (lessons == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Lessons.class.getSimpleName()));
+        }
+        if (!Lessons.isValidLessonNames(lessons)) {
+            throw new IllegalValueException(Progress.MESSAGE_CONSTRAINTS);
+        }
+        final Lessons modelLessons = new Lessons(lessons);
+
         return new Student(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
-                modelProgress, modelPaymentStatus);
+                modelProgress, modelPaymentStatus, modelLessons);
     }
 
 }

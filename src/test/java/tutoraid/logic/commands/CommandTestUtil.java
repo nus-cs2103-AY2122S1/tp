@@ -27,6 +27,8 @@ import tutoraid.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
     public static final String VALID_ADD_STUDENT_COMMAND = "add -s ";
+    public static final String VALID_ADD_LESSON_COMMAND = "add -l ";
+
     public static final String VALID_STUDENT_NAME_AMY = "Amy Bee";
     public static final String VALID_STUDENT_NAME_BOB = "Bob Choo";
     public static final String VALID_STUDENT_PHONE_AMY = "11111111";

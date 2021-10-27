@@ -5,6 +5,7 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_PRICE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_TIMING;
 
+import tutoraid.logic.commands.AddLessonCommand;
 import tutoraid.logic.commands.EditLessonCommand;
 import tutoraid.model.lesson.Lesson;
 
@@ -19,7 +20,7 @@ public class LessonUtil {
      * @return The command string for adding the lesson
      */
     public static String getAddCommand(Lesson lesson) {
-        return ""; // TODO: uncomment // AddLessonCommand.COMMAND_FLAG + " " + getLessonDetails(lesson);
+        return AddLessonCommand.COMMAND_FLAG + " " + getLessonDetails(lesson);
     }
 
     /**
@@ -34,7 +35,7 @@ public class LessonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code student}'s details.
+     * Returns the part of command string for the given {@code lesson}'s details.
      */
     public static String getLessonDetails(Lesson lesson) {
         return PREFIX_LESSON_NAME + lesson.getLessonName().lessonName + " "

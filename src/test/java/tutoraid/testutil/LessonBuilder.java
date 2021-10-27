@@ -15,7 +15,7 @@ import tutoraid.model.student.Student;
  */
 public class LessonBuilder {
 
-    public static final String DEFAULT_LESSON_NAME = "Maths 1";
+    public static final String DEFAULT_LESSON_NAME = "Maths 3";
     public static final String DEFAULT_LESSON_CAPACITY = "50";
     public static final String DEFAULT_LESSON_PRICE = "100";
     public static final ArrayList<Student> DEFAULT_LESSON_STUDENTS = new ArrayList<Student>();

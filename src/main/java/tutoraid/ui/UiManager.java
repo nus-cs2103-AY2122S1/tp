@@ -92,6 +92,7 @@ public class UiManager implements Ui {
     public static void showViewWindow() {
         if (mainWindow != null) {
             mainWindow.fillStudentCard(true);
+            mainWindow.fillLessonCard(true);
         }
     }
 
@@ -101,6 +102,7 @@ public class UiManager implements Ui {
     public static void hideViewWindow() {
         if (mainWindow != null) {
             mainWindow.fillStudentCard(false);
+            mainWindow.fillLessonCard(false);
         }
     }
 }
