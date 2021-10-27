@@ -56,7 +56,7 @@ reference.
 
 It contains instructions for [how to set up Managera](#quick-start), [how to use certain features](#features) 
 and answers to some [commonly-asked questions](#faq). You may also use this user guide as a
-[quick reference](#command-summary) to any commands once you are more experienced with Managera.
+[quick reference](#command-summary) to any [commands](#glossary) once you are more experienced with Managera.
 
 If this is your first time using Managera, or your first time using this user guide, you are strongly advised to
 look through the [next section](#how-to-use-this-user-guide).
@@ -477,7 +477,8 @@ The following features are additional and deal with other actions that you may w
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Opens a popup window with a link to this user guide. You can always return here whenever you need help 
+or just want to learn more about Managera.
 
 ![help message](images/helpMessage.png)
 
@@ -487,12 +488,18 @@ Format: `help`
 
 Clears all Events and Participants from Managera.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command is irreversible! Please make sure you want to permanently delete all your data before
+entering this command.
+</div>
+
 Format: `clear`
 
 <br>![result for 'clear'](images/clearResult.png)
 
 ### Exiting the program : `exit`
 
+Exits the program.
 Exits the program.
 
 Format: `exit`
