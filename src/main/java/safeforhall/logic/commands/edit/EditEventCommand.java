@@ -18,6 +18,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
@@ -34,10 +35,12 @@ public class EditEventCommand extends Command {
             + "Parameters: INDEX (positive integers only) "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_DATE + "DATE] "
+            + "[" + CliSyntax.PREFIX_TIME + "TIME] "
             + "[" + CliSyntax.PREFIX_VENUE + "VENUE] "
             + "[" + CliSyntax.PREFIX_CAPACITY + "CAPACITY] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_DATE + "20-01-2021 "
+            + CliSyntax.PREFIX_TIME + "1200"
             + CliSyntax.PREFIX_CAPACITY + "50";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Events: \n%1$s";
@@ -89,12 +92,13 @@ public class EditEventCommand extends Command {
 
         EventName updatedName = editEventDescriptor.getName().orElse(eventToEdit.getEventName());
         EventDate updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getEventDate());
+        EventTime updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getEventTime());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Capacity updatedCapacity = editEventDescriptor.getCapacity().orElse(eventToEdit.getCapacity());
         ResidentList updatedResidentList = editEventDescriptor.getResidentList()
                 .orElse(eventToEdit.getResidents());
 
-        return new Event(updatedName, updatedDate, updatedVenue, updatedCapacity, updatedResidentList);
+        return new Event(updatedName, updatedDate, updatedTime, updatedVenue, updatedCapacity, updatedResidentList);
     }
 
 
@@ -123,6 +127,7 @@ public class EditEventCommand extends Command {
     public static class EditEventDescriptor {
         private EventName name;
         private EventDate date;
+        private EventTime time;
         private Venue venue;
         private Capacity capacity;
         private ResidentList residentList;
@@ -135,6 +140,7 @@ public class EditEventCommand extends Command {
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);
             setDate(toCopy.date);
+            setTime(toCopy.time);
             setVenue(toCopy.venue);
             setCapacity(toCopy.capacity);
             setResidentList(toCopy.residentList);
@@ -161,6 +167,14 @@ public class EditEventCommand extends Command {
 
         public Optional<EventDate> getDate() {
             return Optional.ofNullable(date);
+        }
+
+        public void setTime(EventTime time) {
+            this.time = time;
+        }
+
+        public Optional<EventTime> getTime() {
+            return Optional.ofNullable(time);
         }
 
         public void setVenue(Venue venue) {
@@ -203,6 +217,7 @@ public class EditEventCommand extends Command {
             EditEventDescriptor e = (EditEventDescriptor) other;
             return getName().equals(e.getName())
                     && getDate().equals(e.getDate())
+                    && getTime().equals(e.getTime())
                     && getVenue().equals(e.getVenue())
                     && getCapacity().equals(e.getCapacity());
         }
