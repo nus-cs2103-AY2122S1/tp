@@ -4,6 +4,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.display.DisplayMode;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 /**
  * Parses input arguments and creates a new ListCommand object
  */
@@ -29,7 +31,9 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListCommand(DisplayMode.DISPLAY_INVENTORY);
 
         default:
-            throw new ParseException(ListCommand.MESSAGE_USAGE);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE)
+            );
 
         }
     }

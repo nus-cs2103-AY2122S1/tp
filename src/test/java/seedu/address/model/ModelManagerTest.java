@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTIONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
@@ -200,7 +201,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void updateFilteredItemList_switchDisplayMode_success() {
+    public void updateFilteredDisplayList_switchDisplayMode_success() {
         modelManager.setInventory(TypicalItems.getTypicalInventory());
         modelManager.setOrder(new Order());
 
@@ -216,7 +217,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void updateFilteredItemList_sameDisplayMode_success() {
+    public void updateFilteredDisplayList_sameDisplayMode_success() {
         modelManager.setInventory(TypicalItems.getTypicalInventory());
         modelManager.setOrder(new Order());
 
@@ -230,6 +231,17 @@ public class ModelManagerTest {
         modelManager.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         assertEquals(modelManager.getDisplayMode(), DISPLAY_OPEN_ORDER);
         assertTrue(modelManager.getFilteredDisplayList().size() == 0);
+    }
+
+    @Test
+    public void updateFilteredItemList_displayingTransactions_throwClassCastException() {
+        modelManager.setInventory(TypicalItems.getTypicalInventory());
+        modelManager.setOrder(new Order());
+
+        // Attempt to pass item predicate when in transaction mode
+        assertThrows(ClassCastException.class,
+                () -> modelManager.updateFilteredItemList(DISPLAY_TRANSACTIONS, x -> true)
+        );
     }
 
     @Test

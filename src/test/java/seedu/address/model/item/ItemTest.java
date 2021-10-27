@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.ui.ItemCard;
 
 public class ItemTest {
 
