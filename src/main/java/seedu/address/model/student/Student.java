@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * Represents a Student in the ClassMATE.
@@ -26,6 +27,7 @@ public class Student {
     private final ClassCode classCode;
     private final List<StudentMark> marks;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<TutorialGroup> tutorialGroups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
