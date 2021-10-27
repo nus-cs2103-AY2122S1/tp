@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddDeadlineTaskCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
@@ -31,7 +30,7 @@ import seedu.address.testutil.DeadlineTaskBuilder;
 
 public class AddDeadlineTaskCommandParserTest {
 
-    private AddDeadlineTaskCommandParser parser = new AddDeadlineTaskCommandParser();
+    private final AddDeadlineTaskCommandParser parser = new AddDeadlineTaskCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

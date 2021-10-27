@@ -1,15 +1,10 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
-import java.util.Set;
 
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
-import seedu.address.model.task.TaskName;
-import seedu.address.model.util.SampleDataUtil;
 
 public class EventTaskBuilder extends TaskBuilder {
 

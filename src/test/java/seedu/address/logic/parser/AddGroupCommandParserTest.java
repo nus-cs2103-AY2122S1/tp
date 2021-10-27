@@ -22,7 +22,7 @@ import seedu.address.model.group.GroupName;
 import seedu.address.testutil.GroupBuilder;
 
 public class AddGroupCommandParserTest {
-    private AddGroupCommandParser parser = new AddGroupCommandParser();
+    private final AddGroupCommandParser parser = new AddGroupCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

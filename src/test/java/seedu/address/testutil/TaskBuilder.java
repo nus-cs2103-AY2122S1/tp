@@ -13,7 +13,11 @@ import seedu.address.model.task.TaskName;
 import seedu.address.model.task.TodoTask;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Task objects.
+ */
 public class TaskBuilder {
+
     public static final String DEFAULT_TASK_NAME = "Do CS2103 tP";
     public static final String DEFAULT_TASK_DATE = "2021-10-10";
 
@@ -46,6 +50,12 @@ public class TaskBuilder {
         this.description = new Description(taskToCopy.getDescription());
     }
 
+    /**
+     * Factory method that returns a TaskBuilder matching the TaskType of a given task.
+     *
+     * @param task The given task.
+     * @return A Task Builder.
+     */
     public static TaskBuilder of(Task task) {
         if (task instanceof TodoTask) {
             return new TodoTaskBuilder(task);

@@ -5,14 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTasks.TUTORIAL;
 import static seedu.address.testutil.TypicalTasks.DINNER;
+import static seedu.address.testutil.TypicalTasks.TUTORIAL;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 import seedu.address.testutil.TaskBuilder;
@@ -161,7 +162,7 @@ public class UniqueTaskListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueTaskList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class,
+                () -> uniqueTaskList.asUnmodifiableObservableList().remove(0));
     }
 }
