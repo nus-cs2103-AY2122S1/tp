@@ -204,10 +204,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleDashboard() {
         if (dashboardWindow.isShowing()) {
-            // Refresh the dashboard window
-            dashboardWindow.hide();
-            dashboardWindow = new DashboardWindow(logic);
-            dashboardWindow.show();
+            refreshDashboard();
             return;
         }
 
@@ -370,11 +367,21 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof DashboardCommandResult) {
                 handleDashboard();
             }
+            if (dashboardWindow.isShowing()) {
+                dashboardWindow.fillOverallStats();
+                dashboardWindow.fillLabsMarked();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void refreshDashboard() {
+        dashboardWindow.hide();
+        dashboardWindow = new DashboardWindow(logic);
+        dashboardWindow.show();
     }
 }

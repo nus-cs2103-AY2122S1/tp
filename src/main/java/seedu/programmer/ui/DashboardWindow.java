@@ -53,7 +53,8 @@ public class DashboardWindow extends PopupWindow {
         this(new Stage(), logic);
     }
 
-    private void fillOverallStats() {
+    public void fillOverallStats() {
+        overallStatsPlaceholder.getChildren().clear();
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
         ObservableList<Student> stuList = readOnlyPE.getStudentList();
         HashSet<ClassId> classList = fillClassList(stuList);
@@ -67,6 +68,15 @@ public class DashboardWindow extends PopupWindow {
         label.getStylesheets().add("view/Dashboard.css");
         label.getStyleClass().add("overall-stats");
         overallStatsPlaceholder.getChildren().add(label);
+    }
+
+    void fillLabsMarked() {
+        labsMarkedList.getChildren().clear();
+        String labsMarked = formatLabsToDisplay(labsUnmarkedMap);
+        Label labsLabel = new Label(labsMarked);
+        labsLabel.getStylesheets().add("view/Dashboard.css");
+        labsLabel.getStyleClass().add("labs-marked");
+        labsMarkedList.getChildren().add(labsLabel);
     }
 
     private HashSet<ClassId> fillClassList(ObservableList<Student> stuList) {
@@ -91,13 +101,6 @@ public class DashboardWindow extends PopupWindow {
         return labsUnmarkedMap;
     }
 
-    void fillLabsMarked() {
-        String labsMarked = formatLabsToDisplay(labsUnmarkedMap);
-        Label labsLabel = new Label(labsMarked);
-        labsLabel.getStylesheets().add("view/Dashboard.css");
-        labsLabel.getStyleClass().add("labs-marked");
-        labsMarkedList.getChildren().add(labsLabel);
-    }
 
     private String formatDataToDisplay(int numStudents, int numClasses, int numLabs) {
         return "No. of students: " + numStudents + "\n"
