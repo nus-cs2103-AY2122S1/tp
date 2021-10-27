@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,7 +44,7 @@ public class StatisticsCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredPersonList(p -> p.getTutorialGroup().equals(tutorialGroup));
-        List<Person> filteredPersonList = model.getFilteredPersonList();
+        List<Person> filteredPersonList = new ArrayList<Person>(model.getFilteredPersonList());
         if (filteredPersonList.size() == 0) {
             throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
         }
