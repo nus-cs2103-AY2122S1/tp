@@ -111,12 +111,12 @@ Clears all data in PE. \
 Example: `purge`
 
 ### <a name="download-data"></a>2c. Download Data `download`
-ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button or the enter command `download`. The TA will need
-to specify the directory to download the file to.
+PE data can be downloaded to a CSV file by clicking the 'Download' button with the command `download`. 
+The TA will need to specify the directory to download the file to.
 
 ### <a name="upload-data"></a>2d. Upload Data: `upload`
-ProgrammerError data can be uploaded by a CSV file by clicking the 'Upload' button or enter the command `upload`. The TA will need
-to specify the directory to upload the file from.
+PE data can be uploaded with a CSV file with the command `upload`. 
+The TA will need to specify the CSV file to upload the student data from.
 
 
 ## <a name="student-features"></a>3. Student Features
