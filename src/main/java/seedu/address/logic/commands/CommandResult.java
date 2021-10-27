@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -12,22 +12,25 @@ import seedu.address.model.person.Person;
  */
 public class CommandResult {
 
+    public enum DisplayType {
+        HELP, // Help information should be shown to the user.
+        TAGS, // Show the list of tags to the user.
+        STUDENTS, // Show the list of students to the user.
+        CALENDAR, // Switch to calendar view.
+        DAY, // Daily Schedule should be shown to the user.
+        WEEK, // Weekly Schedule should be shown to the user.
+        MONTH, // Monthly Schedule should be shown to the user.
+        YEAR, // yearly Schedule should be shown to the user.
+        NEXT, // Go forwards in the calendar.
+        TODAY, // Jump to today in the calendar.
+        BACK, // Go back in the calendar.
+        EXIT, // The application should exit.
+        REMINDER // Reminder of upcoming lessons.
+    }
+
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean isShowHelp;
-
-    /** Schedule should be shown to the user. */
-    private final boolean isShowSchedule;
-
-    /** Reminder of upcoming lessons should be shown to the user. */
-    private final boolean isShowReminder;
-
-    /** Tag list should be shown to the user instead of the default person list. */
-    private final boolean isShowTagList;
-
-    /** The application should exit. */
-    private final boolean isExit;
+    private final DisplayType displayType;
 
     /** Lesson information of student should be shown to the user. */
     private final Person student;
@@ -35,24 +38,25 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    private CommandResult(String feedbackToUser, boolean isShowHelp,
-            boolean isShowTagList, boolean isShowSchedule, boolean isShowReminder,
-            boolean isExit, Person student) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.isShowHelp = isShowHelp;
-        this.isExit = isExit;
-        this.isShowTagList = isShowTagList;
-        this.isShowSchedule = isShowSchedule;
-        this.isShowReminder = isShowReminder;
+    public CommandResult(String feedbackToUser, DisplayType displayType, Person student) {
+        requireAllNonNull(feedbackToUser, displayType);
+        this.feedbackToUser = feedbackToUser;
+        this.displayType = displayType;
         this.student = student;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp,
-            boolean isShowTagList, boolean isShowSchedule, boolean isShowReminder, boolean isExit) {
-        this(feedbackToUser, isShowHelp, isShowTagList, isShowSchedule, isShowReminder, isExit, null);
+    public CommandResult(String feedbackToUser, DisplayType displayType) {
+        this(feedbackToUser, displayType, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, Person student) {
+        this(feedbackToUser, DisplayType.STUDENTS, student);
     }
 
     /**
@@ -60,15 +64,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false, null);
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code student},
-     * and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser, Person student) {
-        this(feedbackToUser, false, false, false, false, false, student);
+        this(feedbackToUser, DisplayType.STUDENTS); // We show students by default
     }
 
     /**
@@ -80,35 +76,8 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    /**
-     * Returns true if the command is a help command.
-     *
-     * @return True if the command is a help command.
-     */
-    public boolean isShowHelp() {
-        return isShowHelp;
-    }
-
-    /**
-     * Returns true if the command is a tag command.
-     *
-     * @return True if the command is a tag command.
-     */
-    public boolean isShowTagList() {
-        return isShowTagList;
-    }
-
-    /**
-     * Returns true if the command is a schedule command.
-     *
-     * @return True if the command is a schedule command.
-     */
-    public boolean isShowSchedule() {
-        return isShowSchedule;
-    }
-
-    public boolean isShowReminder() {
-        return isShowReminder;
+    public DisplayType getDisplayType() {
+        return displayType;
     }
 
     /**
@@ -118,15 +87,6 @@ public class CommandResult {
      */
     public Optional<Person> getStudent() {
         return Optional.ofNullable(student);
-    }
-
-    /**
-     * Returns true if the command is an exit command.
-     *
-     * @return True if the command is an exit command.
-     */
-    public boolean isExit() {
-        return isExit;
     }
 
     @Override
@@ -142,24 +102,16 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && isShowHelp == otherCommandResult.isShowHelp
-                && isShowTagList == otherCommandResult.isShowTagList
-                && isShowSchedule == otherCommandResult.isShowSchedule
-                && isShowReminder == otherCommandResult.isShowReminder
-                && isExit == otherCommandResult.isExit;
+                && displayType == otherCommandResult.displayType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, isShowHelp, isShowTagList, isShowSchedule,
-                isShowReminder, isExit);
+        return Objects.hash(feedbackToUser, displayType);
     }
 
     @Override
     public String toString() {
-        return "Feedback To User: " + feedbackToUser + "\n"
-                + "Show Help: " + isShowHelp + "\n" + "Show Tag List: " + isShowTagList + "\n"
-                + "Show Schedule: " + isShowSchedule + "\n" + "Show Reminder: " + isShowReminder
-                + "\n" + "Exit: " + isExit;
+        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", displayType = " + displayType.name();
     }
 }

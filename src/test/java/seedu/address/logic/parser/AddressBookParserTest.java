@@ -12,7 +12,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BackCommand;
+import seedu.address.logic.commands.CalendarCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DayCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -23,6 +26,11 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.LessonDeleteCommand;
 import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MonthCommand;
+import seedu.address.logic.commands.NextCommand;
+import seedu.address.logic.commands.TodayCommand;
+import seedu.address.logic.commands.WeekCommand;
+import seedu.address.logic.commands.YearCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
@@ -129,6 +137,54 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_calendar() throws Exception {
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD) instanceof CalendarCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " 3") instanceof CalendarCommand);
+    }
+
+    @Test
+    public void parseCommand_day() throws Exception {
+        assertTrue(parser.parseCommand(DayCommand.COMMAND_WORD) instanceof DayCommand);
+        assertTrue(parser.parseCommand(DayCommand.COMMAND_WORD + " 3") instanceof DayCommand);
+    }
+
+    @Test
+    public void parseCommand_week() throws Exception {
+        assertTrue(parser.parseCommand(WeekCommand.COMMAND_WORD) instanceof WeekCommand);
+        assertTrue(parser.parseCommand(WeekCommand.COMMAND_WORD + " 3") instanceof WeekCommand);
+    }
+
+    @Test
+    public void parseCommand_month() throws Exception {
+        assertTrue(parser.parseCommand(MonthCommand.COMMAND_WORD) instanceof MonthCommand);
+        assertTrue(parser.parseCommand(MonthCommand.COMMAND_WORD + " 3") instanceof MonthCommand);
+    }
+
+    @Test
+    public void parseCommand_year() throws Exception {
+        assertTrue(parser.parseCommand(YearCommand.COMMAND_WORD) instanceof YearCommand);
+        assertTrue(parser.parseCommand(YearCommand.COMMAND_WORD + " 3") instanceof YearCommand);
+    }
+
+    @Test
+    public void parseCommand_next() throws Exception {
+        assertTrue(parser.parseCommand(NextCommand.COMMAND_WORD) instanceof NextCommand);
+        assertTrue(parser.parseCommand(NextCommand.COMMAND_WORD + " 3") instanceof NextCommand);
+    }
+
+    @Test
+    public void parseCommand_back() throws Exception {
+        assertTrue(parser.parseCommand(BackCommand.COMMAND_WORD) instanceof BackCommand);
+        assertTrue(parser.parseCommand(BackCommand.COMMAND_WORD + " 3") instanceof BackCommand);
+    }
+
+    @Test
+    public void parseCommand_today() throws Exception {
+        assertTrue(parser.parseCommand(TodayCommand.COMMAND_WORD) instanceof TodayCommand);
+        assertTrue(parser.parseCommand(TodayCommand.COMMAND_WORD + " 3") instanceof TodayCommand);
     }
 
     @Test
