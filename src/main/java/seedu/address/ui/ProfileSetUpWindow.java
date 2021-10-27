@@ -129,6 +129,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
             }
 
             close();
+            mainWindow.setUserProfileOnMenuBar();
             mainWindow.start();
         }
     }

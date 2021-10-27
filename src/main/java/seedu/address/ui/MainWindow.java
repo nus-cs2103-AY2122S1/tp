@@ -218,6 +218,16 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        if (logic.isProfilePresent()) {
+            setUserProfileOnMenuBar();
+        }
+    }
+
+    /**
+     * Sets the {@code userName} and {@code userProfile}
+     * to be displayed on the Menu Bar.
+     */
+    public void setUserProfileOnMenuBar() {
         userProfile.setImage(logic.getUserProfile().getProfilePicture());
         userName.setText(logic.getUserProfile().getName().toString());
     }
