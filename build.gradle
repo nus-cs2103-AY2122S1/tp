@@ -73,6 +73,8 @@ dependencies {
     implementation group: 'com.sandec', name: 'mdfx', version: '0.2.4'
 
     implementation group: 'org.jfree', name: 'org.jfree.chart.fx', version: '2.0.1'
+
+    implementation group: 'io.github.palexdev', name: 'materialfx', version: '11.12.0'
 }
 
 shadowJar {
