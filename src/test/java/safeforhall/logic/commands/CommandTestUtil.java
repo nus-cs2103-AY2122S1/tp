@@ -14,6 +14,7 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_TIME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 import static safeforhall.testutil.Assert.assertThrows;
@@ -63,12 +64,19 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_FOOTBALL_TRAINING = "Football Training";
     public static final String VALID_NAME_SWIM_TRAINING = "Swim Training";
+    public static final String VALID_NAME_VOLLEYBALL = "Volleyball";
+    public static final String VALID_DATE_VOLLEYBALL = "12-10-2021";
     public static final String VALID_DATE_FOOTBALL_TRAINING = "20-10-2021";
     public static final String VALID_DATE_SWIM_TRAINING = "19-10-2021";
+    public static final String VALID_VENUE_BASKETBALL = "basketball court";
     public static final String VALID_VENUE_FOOTBALL_TRAINING = "Field";
     public static final String VALID_VENUE_SWIM_TRAINING = "Pool";
+    public static final String VALID_CAPACITY_BASKETBALL = "5";
     public static final String VALID_CAPACITY_FOOTBALL_TRAINING = "20";
     public static final String VALID_CAPACITY_SWIM_TRAINING = "15";
+    public static final String VALID_TIME_BASKETBALL = "0830";
+    public static final String VALID_TIME_FOOTBALL_TRAINING = "1930";
+    public static final String VALID_TIME_SWIM_TRAINING = "0800";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -100,6 +108,8 @@ public class CommandTestUtil {
     public static final String CAPACITY_DESC_FOOTBALL_TRAINING =
             " " + PREFIX_CAPACITY + VALID_CAPACITY_FOOTBALL_TRAINING;
     public static final String CAPACITY_DESC_SWIM_TRAINING = " " + PREFIX_CAPACITY + VALID_CAPACITY_SWIM_TRAINING;
+    public static final String TIME_DESC_FOOTBALL_TRAINING = " " + PREFIX_TIME + VALID_TIME_FOOTBALL_TRAINING;
+    public static final String TIME_DESC_SWIM_TRAINING = " " + PREFIX_TIME + VALID_TIME_SWIM_TRAINING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -112,9 +122,10 @@ public class CommandTestUtil {
     public static final String INVALID_EVENT_NAME_DESC =
             " " + PREFIX_NAME + "Football & Basketball"; // '&' not allowed in names
     public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_DATE + "41/20/20"; // not valid date
+    public static final String INVALID_EVENT_DATE_DESC2 = " " + PREFIX_DATE + "3"; // not valid date
     public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + "$bank"; // '$' not allowed in venues
     public static final String INVALID_CAPACITY_DESC = " " + PREFIX_CAPACITY + "ten"; // accepts numbers only
-
+    public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "18:00"; // accepts numbers only
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -163,7 +174,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -221,5 +232,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredEventList().size());
     }
-
 }

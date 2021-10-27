@@ -6,6 +6,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
@@ -49,8 +50,12 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+
         sampleAb.addEvent(new Event(new EventName("Powerlifting"), new EventDate("03-01-2021"),
-                new Venue("Gym"), new Capacity("5"), new ResidentList("Alex Yeoh")));
+                new EventTime("0800"), new Venue("Gym"), new Capacity("5"), new ResidentList("Alex Yeoh",
+                "David Li; Room: C112; Phone: 91031282; Email: lidavid@example.com; Vaccinated: T;"
+                        + " Faculty: SDE; Last Fet Date: 02-10-2021; Last Collection Date: 01-10-2021")));
+
         return sampleAb;
     }
 }

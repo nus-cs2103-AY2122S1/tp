@@ -53,6 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonAdditionalListPanel personAdditionalListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -209,7 +210,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -253,8 +254,36 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleSwitch() {
+        int index = tabPane.getSelectionModel().getSelectedIndex() ^ 1;
+        tabPane.getSelectionModel().select(index);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    /**
+     * Set isResidentTab of CommandBox to True.
+     */
+    @FXML
+    private void commandBoxToResidents() {
+        if (commandBox != null) {
+            this.commandBox.setIsResidentTab(true);
+            this.commandBox.refreshSuggestions();
+        }
+    }
+
+    /**
+     * Set isResidentTab of CommandBox to False.
+     */
+    @FXML
+    private void commandBoxToEvents() {
+        if (commandBox != null) {
+            this.commandBox.setIsResidentTab(false);
+            this.commandBox.refreshSuggestions();
+        }
     }
 
     /**
@@ -274,6 +303,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isSwitchTab()) {
+                handleSwitch();
             }
 
             return commandResult;

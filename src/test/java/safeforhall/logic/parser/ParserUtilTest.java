@@ -9,7 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.Capacity;
+import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
+import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -30,6 +35,11 @@ public class ParserUtilTest {
     private static final String INVALID_ROOM_FOR_FIND2 = "A12";
     private static final String INVALID_ROOM_FOR_FIND3 = "12";
     private static final String INVALID_RESIDENTS = "Alex Yeoh, C11";
+    private static final String INVALID_EVENTNAME = "F@@tball";
+    private static final String INVALID_EVENTDATE = "03";
+    private static final String INVALID_EVENTTIME = "time";
+    private static final String INVALID_VENUE = " ";
+    private static final String INVALID_CAPACITY = "CAP5.0";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -42,6 +52,11 @@ public class ParserUtilTest {
     private static final String VALID_ROOM_FOR_FIND2 = "A1";
     private static final String VALID_ROOM_FOR_FIND3 = "E200";
     private static final String VALID_RESIDENTS = "Alex Yeoh, Bernice Yu";
+    private static final String VALID_EVENTNAME = "Training";
+    private static final String VALID_EVENTDATE = "03-01-2021";
+    private static final String VALID_EVENTTIME = "0600";
+    private static final String VALID_VENUE = "NUS field";
+    private static final String VALID_CAPACITY = "5";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -63,16 +78,6 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
-    }
-
-    @Test
-    public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
-    }
-
-    @Test
-    public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
     }
 
     @Test
@@ -280,5 +285,110 @@ public class ParserUtilTest {
         String listWithWhitespace = WHITESPACE + VALID_RESIDENTS + WHITESPACE;
         ResidentList expectedList = new ResidentList(VALID_RESIDENTS);
         Assertions.assertEquals(expectedList, ParserUtil.parseResidents(listWithWhitespace));
+    }
+
+    @Test
+    public void parseEventName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEventName((String) null));
+    }
+
+    @Test
+    public void parseEventName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEventName(INVALID_EVENTNAME));
+    }
+
+    @Test
+    public void parseEventDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEventDate((String) null));
+    }
+
+    @Test
+    public void parseEventDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEventDate(INVALID_EVENTDATE));
+    }
+
+    @Test
+    public void parseEventVenue_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVenue((String) null));
+    }
+
+    @Test
+    public void parseEventDate_invalidVenue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVenue(INVALID_VENUE));
+    }
+
+    @Test
+    public void parseCapacity_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCapacity((String) null));
+    }
+
+    @Test
+    public void parseCapacity_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCapacity(INVALID_CAPACITY));
+    }
+
+    @Test
+    public void parseEventName_validValueWithoutWhitespace_returnsEventName() throws Exception {
+        EventName expectedEventName = new EventName(VALID_EVENTNAME);
+        assertEquals(expectedEventName, ParserUtil.parseEventName(VALID_EVENTNAME));
+    }
+
+    @Test
+    public void parseEventName_validValueWithWhitespace_returnsTrimmedEventName() throws Exception {
+        String eventNameWithWhitespace = WHITESPACE + VALID_EVENTNAME + WHITESPACE;
+        EventName expectedEventName = new EventName(VALID_EVENTNAME);
+        assertEquals(expectedEventName, ParserUtil.parseEventName(eventNameWithWhitespace));
+    }
+
+    @Test
+    public void parseEventDate_validValueWithoutWhitespace_returnsEventDate() throws Exception {
+        EventDate expectedEventDate = new EventDate(VALID_EVENTDATE);
+        assertEquals(expectedEventDate, ParserUtil.parseEventDate(VALID_EVENTDATE));
+    }
+
+    @Test
+    public void parseEventDate_validValueWithWhitespace_returnsTrimmedEventDate() throws Exception {
+        String eventDateWithWhitespace = WHITESPACE + VALID_EVENTDATE + WHITESPACE;
+        EventDate expectedEventDate = new EventDate(VALID_EVENTDATE);
+        assertEquals(expectedEventDate, ParserUtil.parseEventDate(eventDateWithWhitespace));
+    }
+
+    @Test
+    public void parseEventTime_validValueWithoutWhitespace_returnsEventTime() throws Exception {
+        EventTime expectedEventTime = new EventTime(VALID_EVENTTIME);
+        assertEquals(expectedEventTime, ParserUtil.parseEventTime(VALID_EVENTTIME));
+    }
+
+    @Test
+    public void parseEventTime_validValueWithWhitespace_returnsTrimmedEventTime() throws Exception {
+        String eventTimeWithWhitespace = WHITESPACE + VALID_EVENTTIME + WHITESPACE;
+        EventTime expectedEventTime = new EventTime(VALID_EVENTTIME);
+        assertEquals(expectedEventTime, ParserUtil.parseEventTime(eventTimeWithWhitespace));
+    }
+
+    @Test
+    public void parseVenue_validValueWithoutWhitespace_returnsVenue() throws Exception {
+        Venue expectedVenue = new Venue(VALID_VENUE);
+        assertEquals(expectedVenue, ParserUtil.parseVenue(VALID_VENUE));
+    }
+
+    @Test
+    public void parseVenue_validValueWithWhitespace_returnsTrimmedVenue() throws Exception {
+        String venueWithWhitespace = WHITESPACE + VALID_VENUE + WHITESPACE;
+        Venue expectedVenue = new Venue(VALID_VENUE);
+        assertEquals(expectedVenue, ParserUtil.parseVenue(venueWithWhitespace));
+    }
+
+    @Test
+    public void parseCapacity_validValueWithoutWhitespace_returnsCapacity() throws Exception {
+        Capacity expectedCapacity = new Capacity(VALID_CAPACITY);
+        assertEquals(expectedCapacity, ParserUtil.parseCapacity(VALID_CAPACITY));
+    }
+
+    @Test
+    public void parseCapacity_validValueWithWhitespace_returnsTrimmedCapacity() throws Exception {
+        String capacityWithWhitespace = WHITESPACE + VALID_CAPACITY + WHITESPACE;
+        Capacity expectedCapacity = new Capacity(VALID_CAPACITY);
+        assertEquals(expectedCapacity, ParserUtil.parseCapacity(capacityWithWhitespace));
     }
 }
