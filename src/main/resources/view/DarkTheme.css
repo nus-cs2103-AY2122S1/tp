@@ -149,6 +149,7 @@
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+    -fx-font-size: 20pt;
 }
 
 .result-display .label {
@@ -322,7 +323,7 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 20pt;
     -fx-text-fill: white;
 }
 
