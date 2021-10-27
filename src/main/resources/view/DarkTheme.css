@@ -260,36 +260,25 @@ Colour region:
 Menu Sub-Menu
  */
 .context-menu {
-    -fx-background-color: #b2814c;
+    -fx-background-color: #3d2608;
     -fx-background-radius: 50;
 }
 
 /**
 Impt
 Colour region:
-Menu Sub-Menu Selected
+Menu Sub-Menu hover
  */
-#fileMenuItem:hover:selected, active {
-    -fx-background-color: derive(#ffefa6, 20%);
-    -fx-background-radius: 30;
-    -fx-text-fill: #b2814c;
+.menu-item:focused {
+    -fx-background-color: derive(#936204, 20%);
+    -fx-background-radius: 40;
+    -fx-text-fill: #3d2608;
+
 }
 
 .context-menu .label {
-    -fx-text-fill: #b2814c;
+    -fx-text-fill: #3d2608;
 }
-
-/*
-.context-menu:hover.text-field {
-    -fx-background-color: derive(#ffefa6, 20%);
-    -fx-background-radius: 50;
-}
-
-.context-menu:selected {
-    -fx-background-color: derive(#ffefa6, 20%);
-    -fx-background-radius: 50;
-}
-*/
 
 /*
 Impt
@@ -331,13 +320,13 @@ Static Send Button Colour
 effect observed
  */
 .button {
-    -fx-padding: 5 22 5 22;
+    -fx-alignment: center;
+    -fx-padding: 7 20 7 20;
     -fx-background-radius: 50;
     -fx-background-color: #b2814c;
     -fx-font-family: "Montserrat";
     -fx-font-size: 11pt;
     -fx-text-fill: derive(#ffefa6, 20%);
-    -fx-background-insets: 0 0 0 0, 0, 1, 1;
 }
 
 /*
@@ -348,13 +337,13 @@ Hovered Send Button Colour
 effect observed
  */
 .button:hover {
-    -fx-padding: 5 22 5 22;
+    -fx-alignment: center;
+    -fx-padding: 7 20 7 20;
     -fx-background-radius: 50;
     -fx-background-color: derive(#bda16c, 20%);
     -fx-font-family: "Montserrat";
     -fx-font-size: 11pt;
     -fx-text-fill: #b2814c;
-    -fx-background-insets: 0 0 0 0, 0, 1, 1;
 }
 
 /*
@@ -365,13 +354,13 @@ Pressed Send Button Colour
 No visible colour effect
  */
 .button:pressed, .button:default:hover:pressed {
-    -fx-padding: 5 22 5 22;
+    -fx-alignment: center;
+    -fx-padding: 7 20 7 20;
     -fx-background-radius: 50;
     -fx-background-color: red;
     -fx-font-family: "Montserrat";
     -fx-font-size: 11pt;
     -fx-text-fill: derive(#ffefa6, 20%);
-    -fx-background-insets: 0 0 0 0, 0, 1, 1;
 }
 
 /*
@@ -383,13 +372,13 @@ Pressed Send Button Colour
 effect observed
  */
 .button:focused {
-    -fx-padding: 5 22 5 22;
+    -fx-alignment: center;
+    -fx-padding: 7 20 7 20;
     -fx-background-radius: 50;
     -fx-background-color: #462401;
     -fx-font-family: "Montserrat";
     -fx-font-size: 11pt;
     -fx-text-fill: derive(#ffefa6, 20%);
-    -fx-background-insets: 0 0 0 0, 0, 1, 1;
 }
 
 /*
@@ -400,13 +389,13 @@ Send Button Colour
 No visible effect
  */
 .button:disabled, .button:default:disabled {
-    -fx-padding: 5 22 5 22;
+    -fx-alignment: center;
+    -fx-padding: 7 20 7 20;
     -fx-background-radius: 50;
     -fx-background-color: red;
     -fx-font-family: "Montserrat";
     -fx-font-size: 11pt;
     -fx-text-fill: derive(#ffefa6, 20%);
-    -fx-background-insets: 0 0 0 0, 0, 1, 1;
 }
 
 /*
@@ -417,13 +406,13 @@ Send Button Colour
 No visible effect
  */
 .button:default {
-    -fx-padding: 5 22 5 22;
+    -fx-alignment: center;
+    -fx-padding: 7 20 7 20;
     -fx-background-radius: 50;
     -fx-background-color: #b2814c;
     -fx-font-family: "Montserrat";
     -fx-font-size: 11pt;
     -fx-text-fill: derive(#ffefa6, 20%);
-    -fx-background-insets: 0 0 0 0, 0, 1, 1;
 }
 
 /*
@@ -434,13 +423,13 @@ Hover Send Button Colour
 No visible effect
  */
 .button:default:hover {
-    -fx-padding: 5 22 5 22;
+    -fx-alignment: center;
+    -fx-padding: 7 20 7 20;
     -fx-background-radius: 50;
     -fx-background-color: #000000;
     -fx-font-family: "Montserrat";
     -fx-font-size: 11pt;
     -fx-text-fill: derive(#ffefa6, 20%);
-    -fx-background-insets: 0 0 0 0, 0, 1, 1;
 }
 
 .dialog-pane {
@@ -561,6 +550,7 @@ Command Box
     -fx-font-family: "Montserrat";
     -fx-font-size: 13pt;
     -fx-text-fill: #462401;
+    -fx-prompt-text-fill: #462401;
 }
 
 #filterField, #studentListPanel, #studentWebpage {

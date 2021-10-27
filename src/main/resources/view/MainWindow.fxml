@@ -28,10 +28,10 @@
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="📂 File" style="-fx-background-color: #b2814c; -fx-background-radius: 50;">
+          <Menu mnemonicParsing="false" text="📂 File" style="-fx-background-color: #b2814c; -fx-background-radius: 40;">
             <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
           </Menu>
-          <Menu mnemonicParsing="false" text="❔ Help" style="-fx-background-color: #b2814c; -fx-background-radius: 50;">
+          <Menu mnemonicParsing="false" text="❔ Help" style="-fx-background-color: #b2814c; -fx-background-radius: 40;">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
