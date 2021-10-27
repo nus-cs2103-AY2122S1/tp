@@ -59,11 +59,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_LEVEL_OF_EDUCATION + "LEVEL OF EDUCATION] "
             + "[" + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE] "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_INTERVIEW + "INTERVIEW]"
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW] "
             + "[" + PREFIX_NOTES + "NOTES]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
