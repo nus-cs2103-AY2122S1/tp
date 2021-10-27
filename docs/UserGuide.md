@@ -58,7 +58,7 @@ It contains instructions for [how to set up Managera](#quick-start), [how to use
 and answers to some [commonly-asked questions](#faq). You may also use this user guide as a
 [quick reference](#command-summary) to any commands once you are more experienced with Managera.
 
-If this is your first time using Managera or your first time using this user guide, you are strongly advised to
+If this is your first time using Managera, or your first time using this user guide, you are strongly advised to
 look through the [next section](#how-to-use-this-user-guide).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -153,8 +153,15 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 
 ## Participant
 
-The following commands deal with the handling of Participants in Managera. They can help you add Participants, 
-delete Participants, view their details etc.
+The following commands deal with the handling of Participants in Managera. They can help you: 
+* [Add a Participant](#adding-a-participant-add), 
+* [Delete a Participant](#deleting-a-participant--delete), 
+* [Edit a Participants](#editing-a-participant--edit), 
+* [Locate Participants by name](#locating-participants-by-name-find), 
+* [List all Participants](#listing-all-participants--list), 
+* [View a Participant's details](#viewing-a-participants-details-view), 
+* [Add Next-of-Kin to a Participant](#adding-next-of-kin-to-a-participant-addnok) and 
+* [Remove Next-of-Kin from a Participant](#removing-next-of-kin-from-a-participant-deletenok).
 
 ### Adding a Participant: `add`
 
@@ -163,8 +170,10 @@ Adds a Participant to Managera.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` - Adds a Participant whose name is 
+  John Doe with given phone number, email and address to the Participant list.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567` - Adds a Participant whose name is Betsy 
+  Crowe with given phone number, email and address to the Participant list.
 
 <br>![result for 'add n/Betsy Crowe ...'](images/addBetsyResult.png)
 
@@ -175,12 +184,15 @@ Deletes the specified Participant from Managera.
 Format: `delete INDEX`
 
 * Deletes the Participant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Participant list.
+* The index refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd Participant in the current list.
-* `find Betsy` followed by `delete 1` deletes the 1st Participant in the results of the `find` command.
+* `delete 3` - Deletes the 2nd Participant in the displayed Participant list.
+* `list` followed by `delete 2` - Deletes the 2nd Participant in the full Participant list. 
+  Find out more about `list` [here](#listing-all-participants--list).
+* `find Betsy` followed by `delete 1` - Deletes the 1st Participant in the results of the `find` command.
+  Find out more about `find` [here](#locating-participants-by-name-find).
 
 ### Editing a Participant : `edit`
 
@@ -188,19 +200,20 @@ Edits an existing Participant in Managera.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
 
-* Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed 
-  Participant list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the Participant at the specified `INDEX`. The index refers to the index number of the Participant as shown 
+  in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant to be 
-   `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` - Edits the name of the 2nd Participant to be `Betsy Crower`.
+*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant 
+   in the displayed Participant list to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower` - Edits the name of the 2nd Participant in the displayed Participant list to be 
+   `Betsy Crower`.
 
 ### Locating Participants by name: `find`
 
-Finds Participants whose names contain any of the given keywords.
+Finds Participant(s) whose names contain any of the given keywords. It is possible for there to be no matches.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -208,12 +221,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Participants matching at least one keyword will be returned (i.e. `OR` search).
+* Participants whose names match at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` - Finds any Participants with the name "John"; possible matches: `John` and `John Doe`.
+* `find alex david` - Finds any Participants with "Alex" or "David" in their names; 
+  possible matches: `Alex Yeoh` and `David Li`<br>
   
 <br>![result for 'find alex david'](images/findAlexDavidResult.png)
 
@@ -230,11 +244,11 @@ Displays the details of a Participant in Managera.
 Format: `view INDEX`
 
 * Views the details of the Participant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Participant list.
+* The index refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `view 1` - Displays the details of the 1st Participant in the current list.
+* `view 1` - Displays the details of the 1st Participant in the displayed Participant list.
 
 <br>![result for 'view 1'](images/viewFirstResult.png)
 
@@ -250,7 +264,7 @@ Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 * A Next-of-Kin with the same name cannot be assigned to the same Participant.
 
 Example Usage:
-* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - adds a Next-of-Kin whose name is Janette Yeo with contact number
+* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - Adds a Next-of-Kin whose name is Janette Yeo with contact number
   88734323 and tag Spouse to the first Participant.
 
 ### Removing Next-of-Kin from a Participant: `deleteNok`
@@ -270,18 +284,31 @@ Example Usage:
 
 ## Event
 
-The following commands deal with the handling of Events in Managera. They can help you add Events, delete Events, 
-mark Events as done etc.
+The following commands deal with the handling of Events in Managera. They can help you:
+* [Add an Event](#adding-an-event-addevent), 
+* [Delete an Event](#deleting-an-event--deleteevent), 
+* [Edit an Event](#editing-an-event--editevent),
+* [Mark an Event as done](#marking-an-event-as-done-done), 
+* [Locate Events by name](#locating-events-by-name-findevent), 
+* [Filter Events by time](#filtering-events-by-time-filterevents), 
+* [Sort Events by time](#sorting-events-by-time-sortevents), 
+* [List all Events](#listing-all-participants--list), 
+* [Show an Event's details](#showing-an-events-details-showdetails),
+* [Add a Participant to an Event](#adding-a-participant-to-an-event-enroll), 
+* [Remove a Participant from an Event](#removing-a-participant-from-an-event-expel) and 
+* [Show Participants of an Event](#showing-an-events-participants-showparticipants).
 
 ### Adding an event: `addEvent`
 
-Creates an Event at the specified date and time and adds it to Managera.
+Adds an Event to Managera.
 
 Format: `addEvent n/NAME d/DATE [t/TIME]` 
 
 Example Usage:
-* `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
-* `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240 km Marathon" on 20th August 2022.
+* `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Adds an Event "CS2100 Finals" on 20th November 2021 9:00am 
+  to the Event list.
+* `addEvent n/240Km Marathon d/2022-08-20` - Adds a full-day Event "240 km Marathon" on 20th August 2022 
+  to the Event list.
 
 ### Deleting an event : `deleteEvent`
 
@@ -290,13 +317,15 @@ Deletes the specified Event from Managera.
 Format: `deleteEvent INDEX`
 
 * Deletes the Event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Events list.
+* The index refers to the index number of the Event as shown in the displayed Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `listEvents` followed by `deleteEvent 2` deletes the 2nd Event on the current list.
-* `filterEvents d/2021-09-18` followed by `deleteEvent 1` deletes the 1st Event in the results of the `filterEvents` 
-  command.
+* `delete 5` - Deletes the 5th Event in the displayed Event list.
+* `listEvents` followed by `deleteEvent 2` - Deletes the 2nd Event in the full Event list.
+  Find out more about `listEvents` [here](#locating-events-by-name-findevent).
+* `filterEvents d/2021-09-18` followed by `deleteEvent 1` - Deletes the 1st Event in the results of the `filterEvents` 
+  command. Find out more about `filterEvents` [here](#filtering-events-by-time-filterevents).
 
 ### Editing an event : `editEvent`
 
@@ -305,16 +334,18 @@ Edits an existing Event in Managera.
 Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 
 * Edits the Event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Events list.
+* The index refers to the index number of the Event as shown in the displayed Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* You can remove the time of Event by typing `t/` and leaving blank after it.
+* You can remove the time of Event by typing `t/` and leaving a blank after it. This is only possible
+due to the fact that time is optional for an Event.
 
 Example Usage:
-* `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event to be `241Km Marathon`.
+* `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event in the displayed Event list to be 
+  `241Km Marathon`.
 * `editEvent 2 n/2103T milestone d/2021-10-21 t/2359` - Edits the event name, event date and event time of the 
-  2nd Event to be `2103T milestone`, `2021-10-21` and `2359` respectively.
+  2nd Event in the displayed Event list to be `2103T milestone`, `2021-10-21` and `2359` respectively.
 
 <br>![result for 'editEvent 2 n/2103T milestone ...'](images/editEventSecondResult.png)
 
@@ -325,13 +356,15 @@ Marks the specified Event in Managera as done.
 Format: `done INDEX`
 
 * Marks the Event at the specified `INDEX` as done.
-* The index refers to the index number shown in the displayed Events list.
+* The index refers to the index number of the Event shown in the displayed Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `listEvents` followed by `done 2` marks the 2nd Event in the current list as done.
-* `filterEvents d/2021-09-18` followed by `done 1` marks the 1st Event in the results of the `filterEvents` command 
-  as done.
+* `done 3` - Marks the 3rd Event in the displayed Event list as done.
+* `listEvents` followed by `done 2` - Marks the 2nd Event in the full Event list as done.
+  Find out more about `listEvents` [here](#listing-all-events-listevents).
+* `filterEvents d/2021-09-18` followed by `done 1` - Marks the 1st Event in the results of the `filterEvents` command 
+  as done. Find out more about `filterEvents` [here](#filtering-events-by-time-filterevents).
 
 ### Locating Events by name: `findEvent`
 
@@ -347,23 +380,24 @@ Format: `findEvent KEYWORD [MORE_KEYWORDS]`
   e.g. `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`
 
 Examples:
-* `findEvent party` returns `beach party` and `Christmas party`
-* `findEvent marathon meeting` returns `240Km Marathon`, `project meeting`<br>
+* `findEvent party` - Finds any Events with the name "party"; possible matches: `beach party` and `Christmas party`
+* `findEvent marathon meeting` - Finds any Events with "marathon" or "meeting" in their names;
+  possible matches:  `240Km Marathon`, `project meeting`<br>
 
 ### Filtering Events by time: `filterEvents`
 
-Filters the list of events for events occurring on a specific date and optionally by time too.
+Filters the Event list for Events occurring on a specific date and optionally, time.
 
 Format: `filterEvents d/DATE [t/TIME]`
 
 Example Usage:
-* `filterEvents d/2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
-* `filterEvents d/2021-09-18 t/0900` - Filters the list of events to show only events occurring on 
+* `filterEvents d/2021-09-18` - Filters the displayed Event list to show only Events occurring on 18th September 2021.
+* `filterEvents d/2021-09-18 t/0900` - Filters the displayed Event list to show only Events occurring on 
   18th September 2021 9am.
 
 ### Sorting Events by time: `sortEvents`
 
-Sorts the current list of events in chronological order with the earlier events at the top and later events 
+Sorts the displayed Event list in chronological order with earlier Events at the top and later Events 
 at the bottom.
 
 <br>![result for 'sortEvents'](images/sortEventsResult.png)
@@ -383,11 +417,11 @@ Displays the details of the Event at the specified index.
 Format: `showDetails INDEX`
 
 * Views the details of the Event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Event list.
+* The index refers to the index number of the Event as shown in the displayed Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `showDetails 1` - Displays the date and time of the 1st Event in the current list.
+* `showDetails 1` - Displays the details of the 1st Event in the displayed Event list.
 
 ### Adding a Participant to an Event: `enroll`
 
@@ -397,7 +431,8 @@ Format:
 `enroll INDEX_1 INDEX_2`
 
 * Adds the Participant at specified `INDEX_1` to the Event at specified index `INDEX_2`.
-* The index refers to the index number shown in the displayed Participant/Event list.
+* `INDEX_1` refers to the index number of the Participant as shown in the displayed Participant list.
+* `INDEX_2` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Example Usage:
@@ -413,7 +448,8 @@ Removes the Participant with the first specified index from the Event with the s
 Format: `expel INDEX_1 INDEX_2`
 
 * Removes the Participant at specified `INDEX_1` from the Event at specified index `INDEX_2`.
-* The index refers to the index number shown in the displayed Participant/Event list.
+* `INDEX_1` refers to the index number of the Participant as shown in the displayed Participant list.
+* `INDEX_2` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Example Usage:
@@ -427,11 +463,11 @@ Displays the list of participants of the Event at the specified index.
 Format: `showParticipants INDEX`
 
 * Views the Participants of the Event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Event list.
+* The index refers to the index number of the Event as shown in the displayed Event list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `showParticipants 4` - Displays the list of participants of the 4th Event in the current list.
+* `showParticipants 4` - Displays the list of participants of the 4th Event in the displayed Event list.
 
 <br>![result for 'showParticipants 4'](images/showParticipantsFourthResult.png)
 
