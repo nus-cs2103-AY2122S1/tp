@@ -133,6 +133,30 @@ public class StringUtilTest {
     }
 
     @Test
+    public void equalArrayElements_validInputs_correctResult() {
+        //wrong index
+        String [] first = {"aaa", "bbb", "Ccc"};
+        String [] second = {"Ccc"};
+        assertFalse(StringUtil.equalArrayElements(first, second, 1));
+        //correct index
+        String [] first2 = {"aaa", "bbb", "Ccc"};
+        String [] second2 = {"Ccc"};
+        assertTrue(StringUtil.equalArrayElements(first2, second2, 2));
+        //different case
+        String [] first3 = {"aaa", "bbb", "Ccc"};
+        String [] second3 = {"ccc"};
+        assertTrue(StringUtil.equalArrayElements(first3, second3, 2));
+        //index out of bounds
+        String [] first4 = {"aaa", "bbb", "Ccc"};
+        String [] second4 = {};
+        assertFalse(StringUtil.equalArrayElements(first4, second4, 3));
+        //partial string
+        String [] first5 = {"aaa", "bbb", "Ccc"};
+        String [] second5 = {"aa"};
+        assertFalse(StringUtil.equalArrayElements(first5, second5, 1));
+    }
+
+    @Test
     public void containsWordIgnoreCase_validInputs_correctResult() {
 
         // Empty sentence

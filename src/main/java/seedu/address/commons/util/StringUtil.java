@@ -67,7 +67,8 @@ public class StringUtil {
         return StringUtil.equalArray(wordsInPreppedSentence, wordsInPreppedWord);
     }
     /**
-     * Checks whether element is first is equal to second
+     * Checks whether first array string contains the second array string in exact order
+     * example: [aaa, bbb, ddd] contains [aaa, Bbb] but does not contain [aaa, ddd]
      */
     public static boolean equalArray (String [] first, String [] second) {
         int firstLength = first.length;
@@ -76,25 +77,31 @@ public class StringUtil {
             return false;
         }
         boolean Doesmatch = false;
-        boolean DoesInnermatch;
         for (int i = 0; i < firstLength - secondLength + 1; i = i + 1) {
-            int t = i;
-            DoesInnermatch = true;
-            for (int j = 0; j < secondLength; j = j + 1) {
-                if (first[t].equalsIgnoreCase(second[j])) {
-                } else {
-                    DoesInnermatch = DoesInnermatch && false;
-                    break;
-                }
-                t = t + 1;
-            }
-            if (DoesInnermatch) {
-                return true;
-            }
+            Doesmatch = Doesmatch || StringUtil.equalArrayElements(first, second, i);
         }
         return Doesmatch;
     }
-
+    /**
+     * Helper Function for equalArray
+     * Checks whether first string array from firstStringIndex is the same as
+     * second array string with all elements in same order
+     */
+    public static boolean equalArrayElements (String [] first, String [] second, int firstStringIndex) {
+        if (firstStringIndex >= first.length) {
+            return false;
+        }
+        int indexOfFirst = firstStringIndex;
+        boolean Doesmatch = true;
+        for (int j = 0; j < second.length; j = j + 1) {
+            if (!first[indexOfFirst].equalsIgnoreCase(second[j])) {
+                Doesmatch = Doesmatch && false;
+                break;
+            }
+            indexOfFirst = indexOfFirst + 1;
+        }
+        return Doesmatch;
+    }
     /**
      * Returns a detailed message of the t, including the stack trace.
      */
