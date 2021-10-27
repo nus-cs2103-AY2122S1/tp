@@ -19,7 +19,7 @@ public class FillCommandTest {
     public void execute_emptyProgrammerError_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        expectedModel.setProgrammerError(SampleDataUtil.fillSampleProgrammerError());
+        expectedModel.setProgrammerError(SampleDataUtil.getSampleProgrammerError());
 
         assertCommandSuccess(new FillCommand(), model, FillCommand.MESSAGE_SUCCESS, expectedModel);
     }
