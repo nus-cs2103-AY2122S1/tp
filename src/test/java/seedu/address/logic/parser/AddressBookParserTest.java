@@ -31,7 +31,6 @@ import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartOrderCommand;
-import seedu.address.logic.commands.ViewOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
@@ -114,7 +113,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(
+                ListCommand.COMMAND_WORD + " " + ListCommand.TRANSACTIONS_KEYWORD) instanceof ListCommand
+        );
+
     }
 
     @Test
@@ -154,11 +156,6 @@ public class AddressBookParserTest {
 
         descriptor.setCount(1); // Parser should set descriptor count to 1
         assertEquals(new RemoveFromOrderCommand(descriptor), command);
-    }
-
-    @Test
-    public void parseCommand_viewOrder() throws Exception {
-        assertTrue(parser.parseCommand(ViewOrderCommand.COMMAND_WORD) instanceof ViewOrderCommand);
     }
 
     @Test

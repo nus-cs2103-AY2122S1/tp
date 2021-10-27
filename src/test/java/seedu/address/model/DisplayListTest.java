@@ -13,18 +13,20 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.model.display.DisplayList;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 
 public class DisplayListTest {
 
     private DisplayList displayList = new DisplayList(getTypicalInventory().getItemList());
-    private FilteredList<Item> filteredList = displayList.getFilteredItemList();
+    private FilteredList<Displayable> filteredList = displayList.getFilteredDisplayList();
 
     @Test
     public void constructor_setSource() {
         ObservableList<Item> itemSource = FXCollections.observableArrayList(getTypicalItems());
         DisplayList displayList = new DisplayList(itemSource);
-        assertSourceListening(displayList.getFilteredItemList(), itemSource);
+        assertSourceListening(displayList.getFilteredDisplayList(), itemSource);
     }
 
     @Test
@@ -68,7 +70,7 @@ public class DisplayListTest {
      * Asserts that source and filtered lists match
      * and any changes in the given source is propagated to the filteredList
      */
-    private void assertSourceListening(FilteredList<Item> filteredList, Collection<Item> source) {
+    private void assertSourceListening(FilteredList<? extends Displayable> filteredList, Collection<Item> source) {
         // Check if lists are initially the same
         assertEquals(source, filteredList);
 

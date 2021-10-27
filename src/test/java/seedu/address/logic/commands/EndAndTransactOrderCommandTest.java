@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.display.DisplayMode;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 import seedu.address.model.order.Order;
@@ -100,9 +101,19 @@ public class EndAndTransactOrderCommandTest {
         private Optional<Order> optionalOrder;
         private Inventory inventory;
 
+        private DisplayMode currentDisplay = DisplayMode.DISPLAY_INVENTORY;
+
         ModelStubWithOrderAndInventory() {
             optionalOrder = Optional.empty();
             inventory = new Inventory();
+        }
+
+        public void setDisplayMode(DisplayMode displayMode) {
+            this.currentDisplay = displayMode;
+        }
+
+        public DisplayMode getDisplayMode() {
+            return currentDisplay;
         }
 
         @Override
@@ -139,5 +150,6 @@ public class EndAndTransactOrderCommandTest {
             // Reset to no order status
             optionalOrder = Optional.empty();
         }
+
     }
 }

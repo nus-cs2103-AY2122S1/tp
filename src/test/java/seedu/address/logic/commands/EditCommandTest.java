@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
@@ -25,6 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
+import seedu.address.model.order.Order;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.ItemDescriptorBuilder;
 
@@ -44,15 +45,15 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredItemList().get(0), editedItem);
+        expectedModel.setItem((Item) model.getFilteredDisplayList().get(0), editedItem);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastItem = Index.fromOneBased(model.getFilteredItemList().size());
-        Item lastItem = model.getFilteredItemList().get(indexLastItem.getZeroBased());
+        Index indexLastItem = Index.fromOneBased(model.getFilteredDisplayList().size());
+        Item lastItem = (Item) model.getFilteredDisplayList().get(indexLastItem.getZeroBased());
 
         ItemBuilder itemInList = new ItemBuilder(lastItem);
         Item editedItem = itemInList.withName(VALID_NAME_DONUT).withTags(VALID_TAG_BAKED).build();
@@ -72,7 +73,7 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, new ItemDescriptor());
-        Item editedItem = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Item editedItem = (Item) model.getFilteredDisplayList().get(INDEX_FIRST_ITEM.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
@@ -85,7 +86,7 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
 
-        Item itemInFilteredList = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Item itemInFilteredList = (Item) model.getFilteredDisplayList().get(INDEX_FIRST_ITEM.getZeroBased());
         Item editedItem = new ItemBuilder(itemInFilteredList).withName(VALID_NAME_DONUT).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM,
                 new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).build());
@@ -93,14 +94,14 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
-        expectedModel.setItem(model.getFilteredItemList().get(0), editedItem);
+        expectedModel.setItem((Item) model.getFilteredDisplayList().get(0), editedItem);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateItemUnfilteredList_failure() {
-        Item firstItem = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Item firstItem = (Item) model.getFilteredDisplayList().get(INDEX_FIRST_ITEM.getZeroBased());
         ItemDescriptor descriptor = new ItemDescriptorBuilder(firstItem).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_ITEM, descriptor);
 
@@ -121,7 +122,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidItemIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDisplayList().size() + 1);
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
@@ -151,7 +152,8 @@ public class EditCommandTest {
         ItemDescriptor descriptor = new ItemDescriptorBuilder(editedItem).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
 
-        model.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        model.setOrder(new Order());
+        model.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         String expectedMessage = EditCommand.MESSAGE_INVENTORY_NOT_DISPLAYED;
 
         assertCommandFailure(editCommand, model, expectedMessage);
