@@ -89,6 +89,17 @@ public class Student {
         return labList;
     }
 
+    /**
+     * Returns a labList with all labs unmarked.
+     * */
+    public ObservableList<Lab> getFreshLabList() {
+        ObservableList<Lab> freshCopy = FXCollections.observableArrayList();
+        for (Lab lab : labList) {
+            freshCopy.add(new Lab(lab.getLabNum(), lab.getTotalScore()));
+        }
+        return freshCopy;
+    }
+
     public Lab getLab(int labNum) {
         return labList.stream().filter(x -> x.getLabNum() == labNum).findFirst().orElse(null);
     }
@@ -100,7 +111,7 @@ public class Student {
     public Boolean addLab(Lab lab) {
         int index = this.labList.indexOf(lab);
         if (index == -1) {
-            Lab newLab = lab;
+            Lab newLab = lab.copy();
             this.labList.add(newLab);
             labList.sort(new SortByLabNumber());
             return true;

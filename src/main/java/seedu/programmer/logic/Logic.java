@@ -38,6 +38,12 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns the selected student wrapped in an ObservableList */
+    ObservableList<Student> getSelectedStudentWrapper();
+
+    /** Returns the selected labs. */
+    ObservableList<Lab> getSelectedLabs();
+
     /** Returns an unmodifiable view of the lab scores of a student */
     ObservableList<Lab> getLabResultList(Student target);
 

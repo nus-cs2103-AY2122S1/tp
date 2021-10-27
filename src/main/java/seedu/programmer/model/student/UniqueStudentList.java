@@ -10,7 +10,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.programmer.model.student.comparator.SortByClass;
-import seedu.programmer.model.student.comparator.SortByLabNumber;
 import seedu.programmer.model.student.comparator.SortByStudentName;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.model.student.exceptions.StudentNotFoundException;
@@ -31,6 +30,8 @@ public class UniqueStudentList implements Iterable<Student> {
     private final ObservableList<Student> internalList = FXCollections.observableArrayList();
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private ObservableList<Student> selectedStudentWrapper = FXCollections.observableArrayList();
+    private ObservableList<Lab> selectedLabs = FXCollections.observableArrayList();
     //Keep track of the existing labs
     private List<Lab> labs = new ArrayList<>();
 
@@ -106,29 +107,6 @@ public class UniqueStudentList implements Iterable<Student> {
         internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
-    /**
-     * Adds the lab to the list.
-     * The lab must not exist in the list.
-     */
-    public void addLab(Lab toAdd) {
-        requireNonNull(toAdd);
-        labs.sort(new SortByLabNumber());
-        for (Student std : internalList) {
-            std.addLab(toAdd);
-        }
-    }
-
-    /**
-     * Removes the equivalent lab from the list.
-     * The lab must exist in the list.
-     */
-    public void removeLab(Lab toRemove) {
-        requireNonNull(toRemove);
-        for (Student std : internalList) {
-            std.deleteLab(toRemove);
-        }
-    }
-
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -144,7 +122,10 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!studentsAreUnique(students)) {
             throw new DuplicateStudentException();
         }
-
+        if (!students.isEmpty()) {
+            labs.clear();
+            labs.addAll(students.get(0).getFreshLabList());
+        }
         internalList.setAll(students);
         internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
@@ -185,5 +166,30 @@ public class UniqueStudentList implements Iterable<Student> {
             }
         }
         return true;
+    }
+
+    public void setSelectedStudentWrapper(Student selectedStudent) {
+        this.selectedStudentWrapper.clear();
+        this.selectedStudentWrapper.add(selectedStudent);
+    }
+
+    public ObservableList<Student> getSelectedStudentWrapper() {
+        return this.selectedStudentWrapper;
+    }
+
+    public void clearSelectedStudentWrapper() {
+        this.selectedStudentWrapper.clear();
+    }
+
+    public ObservableList<Lab> getSelectedLabs() {
+        return this.selectedLabs;
+    }
+
+    public void setSelectedLabs(List<Lab> labs) {
+        this.selectedLabs.setAll(labs);
+    }
+
+    public void clearSelectedLabs() {
+        this.selectedLabs.clear();
     }
 }

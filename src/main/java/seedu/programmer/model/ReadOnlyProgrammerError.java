@@ -16,7 +16,7 @@ public interface ReadOnlyProgrammerError {
     ObservableList<Student> getStudentList();
 
     /**
-     * Returns an unmodifiable view of the student's Lab results.
+     * Returns the student's Lab results.
      */
     ObservableList<Lab> showLabResultList(Student target);
 }
