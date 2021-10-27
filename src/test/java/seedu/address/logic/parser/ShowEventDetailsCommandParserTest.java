@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ShowEventDetailsCommand;
-import seedu.address.model.event.EventNamePredicate;
 
 public class ShowEventDetailsCommandParserTest {
 
@@ -23,11 +23,11 @@ public class ShowEventDetailsCommandParserTest {
     public void parse_validArgs_returnsShowDetailsCommand() {
         // exact event name
         ShowEventDetailsCommand expectedShowEventDetailsCommand =
-                new ShowEventDetailsCommand(new EventNamePredicate("240Km Marathon"));
-        assertParseSuccess(parser, "240Km Marathon", expectedShowEventDetailsCommand);
+                new ShowEventDetailsCommand(Index.fromOneBased(1));
+        assertParseSuccess(parser, "1", expectedShowEventDetailsCommand);
 
         // event name with extra whitespaces and newlines
-        assertParseSuccess(parser, " \n 240Km \n \t Marathon  \t", expectedShowEventDetailsCommand);
+        assertParseSuccess(parser, " \n \n \t 1  \t", expectedShowEventDetailsCommand);
     }
 
 }

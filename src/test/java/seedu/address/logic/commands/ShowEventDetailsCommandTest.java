@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventNamePredicate;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.testutil.DefaultModelStub;
 import seedu.address.testutil.TypicalEvents;
@@ -29,10 +29,8 @@ public class ShowEventDetailsCommandTest {
 
     private final Event sampleEventWithTimeAndCompletion = TypicalEvents.SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION;
     private final Event sampleEventWithoutTimeAndCompletion = TypicalEvents.SAMPLE_EVENT_DEFAULT_TIME_AND_COMPLETION;
-    private final EventNamePredicate samplePredicateWithTimeAndCompletion =
-            preparePredicate(sampleEventWithTimeAndCompletion.getNameString());
-    private final EventNamePredicate samplePredicateWithoutTimeAndCompletion =
-            preparePredicate(sampleEventWithoutTimeAndCompletion.getNameString());
+    private final Index sampleEventIndexWithTimeAndCompletion = Index.fromOneBased(1);
+    private final Index sampleEventIndexWithoutTimeAndCompletion = Index.fromOneBased(2);
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -45,17 +43,17 @@ public class ShowEventDetailsCommandTest {
 
     @Test
     public void equals() {
-        EventNamePredicate firstPredicate = new EventNamePredicate("first");
-        EventNamePredicate secondPredicate = new EventNamePredicate("second");
+        Index indexOne = Index.fromOneBased(1);
+        Index indexTwo = Index.fromOneBased(2);
 
-        ShowEventDetailsCommand showEventDetailsFirstCommand = new ShowEventDetailsCommand(firstPredicate);
-        ShowEventDetailsCommand showEventDetailsSecondCommand = new ShowEventDetailsCommand(secondPredicate);
+        ShowEventDetailsCommand showEventDetailsFirstCommand = new ShowEventDetailsCommand(indexOne);
+        ShowEventDetailsCommand showEventDetailsSecondCommand = new ShowEventDetailsCommand(indexTwo);
 
         // same object -> returns true
         assertTrue(showEventDetailsFirstCommand.equals(showEventDetailsFirstCommand));
 
         // same values -> returns true
-        ShowEventDetailsCommand showEventDetailsFirstCommandCopy = new ShowEventDetailsCommand(firstPredicate);
+        ShowEventDetailsCommand showEventDetailsFirstCommandCopy = new ShowEventDetailsCommand(indexOne);
         assertTrue(showEventDetailsFirstCommand.equals(showEventDetailsFirstCommandCopy));
 
         // different types -> returns false
@@ -75,8 +73,8 @@ public class ShowEventDetailsCommandTest {
 
     @Test
     public void execute_eventNotInList_throwsCommandException() {
-        EventNamePredicate predicate = preparePredicate(" ");
-        ShowEventDetailsCommand command = new ShowEventDetailsCommand(predicate);
+        Index index = Index.fromOneBased(200);
+        ShowEventDetailsCommand command = new ShowEventDetailsCommand(index);
         assertThrows(CommandException.class, MESSAGE_EVENT_NOT_FOUND, () -> command.execute(model));
     }
 
@@ -87,7 +85,7 @@ public class ShowEventDetailsCommandTest {
      */
     @Test
     public void execute_eventInList_noUiChangeSuccessful() throws CommandException {
-        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithTimeAndCompletion).execute(model);
+        CommandResult commandResult = new ShowEventDetailsCommand(sampleEventIndexWithTimeAndCompletion).execute(model);
         assertEquals(model.getFilteredEventList(), expectedModel.getFilteredEventList());
     }
 
@@ -99,13 +97,13 @@ public class ShowEventDetailsCommandTest {
      */
     @Test
     public void execute_eventWithSpecifiedTimeAndCompletionInList_showDetailsSuccessful() throws CommandException {
-        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithTimeAndCompletion).execute(model);
+        CommandResult commandResult = new ShowEventDetailsCommand(sampleEventIndexWithTimeAndCompletion).execute(model);
         String expectedOutput = String.format(
                 "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithTimeAndCompletion.getNameString(),
                 sampleEventWithTimeAndCompletion.getDateString(),
                 sampleEventWithTimeAndCompletion.getTimeString(),
-                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithTimeAndCompletion.getParticipants().size()
                 );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
@@ -119,14 +117,14 @@ public class ShowEventDetailsCommandTest {
      */
     @Test
     public void execute_eventWithDefaultTimeAndCompletionInList_showDetailsSuccessful() throws CommandException {
-        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithoutTimeAndCompletion)
+        CommandResult commandResult = new ShowEventDetailsCommand(sampleEventIndexWithoutTimeAndCompletion)
                 .execute(model);
         String expectedOutput = String.format(
                 "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithoutTimeAndCompletion.getNameString(),
                 sampleEventWithoutTimeAndCompletion.getDateString(),
                 sampleEventWithoutTimeAndCompletion.getTimeString(),
-                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithoutTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithoutTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
@@ -142,14 +140,14 @@ public class ShowEventDetailsCommandTest {
     public void execute_eventWithSpecifiedTimeAndCompletionInListUsingModelStub_showDetailsSuccessful()
             throws CommandException {
         ModelStubWithEvent modelStub = new ModelStubWithEvent(sampleEventWithTimeAndCompletion);
-        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithTimeAndCompletion)
+        CommandResult commandResult = new ShowEventDetailsCommand(sampleEventIndexWithTimeAndCompletion)
                 .execute(modelStub);
         String expectedOutput = String.format(
                 "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithTimeAndCompletion.getNameString(),
                 sampleEventWithTimeAndCompletion.getDateString(),
                 sampleEventWithTimeAndCompletion.getTimeString(),
-                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
@@ -165,14 +163,14 @@ public class ShowEventDetailsCommandTest {
     public void execute_eventWithDefaultTimeAndCompletionInListUsingModelStub_showDetailsSuccessful()
             throws CommandException {
         ModelStubWithEvent modelStub = new ModelStubWithEvent(sampleEventWithoutTimeAndCompletion);
-        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithoutTimeAndCompletion)
+        CommandResult commandResult = new ShowEventDetailsCommand(Index.fromOneBased(1))
                 .execute(modelStub);
         String expectedOutput = String.format(
                 "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithoutTimeAndCompletion.getNameString(),
                 sampleEventWithoutTimeAndCompletion.getDateString(),
                 sampleEventWithoutTimeAndCompletion.getTimeString(),
-                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithoutTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithoutTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
@@ -195,12 +193,5 @@ public class ShowEventDetailsCommandTest {
             eventList.add(event);
             return new FilteredList<>(eventList.asUnmodifiableObservableList());
         }
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code EventNamePredicate}.
-     */
-    private EventNamePredicate preparePredicate(String userInput) {
-        return new EventNamePredicate(userInput.trim().replaceAll("\\s+", " "));
     }
 }

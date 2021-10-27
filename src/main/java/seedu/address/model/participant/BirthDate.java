@@ -2,21 +2,22 @@ package seedu.address.model.participant;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeParseException;
-
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Participant's date of birth in the event.
- * Guarantees: immutable; is valid as declared in {@link #isValidBirthDate(LocalDate)}}
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthDate(String)}}
  */
 public class BirthDate {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date of birth cannot be in the future or invalid";
-
+    public static final String DATE_FORMAT = "y-M-d";
     private final LocalDate date;
-
 
     private BirthDate(LocalDate date) {
         this.date = date;
@@ -39,11 +40,15 @@ public class BirthDate {
     /**
      * Factory method for birthdate using LocalDate instance.
      *
-     * @param date    A LocalDate instance.
+     * @param date    A String representation of Date.
      * @return        A BirthDate instance.
      */
-    public static BirthDate of(LocalDate date) {
-        return new BirthDate(date);
+    public static BirthDate of(String date) {
+        if (date == null) {
+            return BirthDate.notSpecified();
+        }
+        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return new BirthDate(localDate);
     }
 
     /**
@@ -93,10 +98,13 @@ public class BirthDate {
      */
     public static boolean isValidBirthDate(String birthDate) {
         boolean isValid;
+        DateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        sdf.setLenient(false);
         try {
-            LocalDate date = LocalDate.parse(birthDate);
+            sdf.parse(birthDate);
+            LocalDate date = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern(DATE_FORMAT));
             isValid = isPresentOrPast(date);
-        } catch (DateTimeParseException e) {
+        } catch (ParseException e) {
             isValid = false;
         }
         return isValid;

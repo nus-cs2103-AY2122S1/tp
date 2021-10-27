@@ -5,14 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.tag.Tag;
 
 public class ParticipantUtil {
 
@@ -32,8 +28,6 @@ public class ParticipantUtil {
         sb.append(PREFIX_PHONE + participant.getPhoneValue() + " ");
         sb.append(PREFIX_EMAIL + participant.getEmailValue() + " ");
         sb.append(PREFIX_ADDRESS + participant.getAddressValue() + " ");
-        participant.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.getTagName() + " "));
         sb.append(PREFIX_DATE + participant.getBirthDateString() + " ");
         return sb.toString();
     }
@@ -47,16 +41,7 @@ public class ParticipantUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.toString()).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.toString()).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.toString()).append(" "));
-        descriptor.getBirthDate().ifPresent(birthDate -> sb.append(PREFIX_DATE).append(birthDate.toString())
-                .append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.getTagName()).append(" "));
-            }
-        }
+        descriptor.getBirthDate().ifPresent(birthDate -> sb.append(PREFIX_DATE).append(birthDate.toString()));
         return sb.toString();
     }
 }

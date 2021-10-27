@@ -33,7 +33,7 @@ public class BirthDateTest {
 
     @Test
     public void ofFactoryMethod_localDateParam_stringRepresentationTest() {
-        BirthDate birthDate = BirthDate.of(LocalDate.parse("2021-09-18"));
+        BirthDate birthDate = BirthDate.of("2021-09-18");
         assertEquals("2021-09-18", birthDate.toString());
     }
 
@@ -56,7 +56,7 @@ public class BirthDateTest {
     public void testEquals() {
         BirthDate sampleBirthDate = BirthDate.of(2020, 11, 11);
         BirthDate sampleBirthDateCopy = BirthDate.of(2020, 11, 11);
-        BirthDate sampleBirthDateLocalDate = BirthDate.of(LocalDate.of(2020, 11, 11));
+        BirthDate sampleBirthDateLocalDate = BirthDate.of("2020-11-11");
         BirthDate differentSampleBirthDate = BirthDate.of(2020, 11, 12);
         BirthDate nullSampleBirthDate = BirthDate.of(null);
 

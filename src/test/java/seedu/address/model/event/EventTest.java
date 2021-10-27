@@ -70,9 +70,9 @@ public class EventTest {
 
     @Test
     public void markAsDone() {
-        assertFalse(testEvent.getIsDone());
-        Event doneEvent = testEvent.markAsDone();
-        assertTrue(doneEvent.getIsDone());
+        assertFalse(testEvent.getDoneValue());
+        testEvent.markAsDone();
+        assertTrue(testEvent.getDoneValue());
     }
 
     @Test
@@ -142,7 +142,7 @@ public class EventTest {
                 firstTestEvent.getNameString(),
                 firstTestEvent.getDateString(),
                 firstTestEvent.getTimeString(),
-                firstTestEvent.getIsDone() ? "Completed" : "Uncompleted",
+                firstTestEvent.getDoneValue() ? "Completed" : "Uncompleted",
                 firstTestEvent.getParticipants().size());
 
         final String secondTestEventString = String.format(
@@ -150,7 +150,7 @@ public class EventTest {
                 secondTestEvent.getNameString(),
                 secondTestEvent.getDateString(),
                 secondTestEvent.getTimeString(),
-                secondTestEvent.getIsDone() ? "Completed" : "Uncompleted",
+                secondTestEvent.getDoneValue() ? "Completed" : "Uncompleted",
                 secondTestEvent.getParticipants().size());
 
         assertEquals(firstTestEvent.toString(), firstTestEventString);

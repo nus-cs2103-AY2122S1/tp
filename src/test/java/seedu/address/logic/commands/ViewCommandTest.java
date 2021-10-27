@@ -1,81 +1,97 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalParticipants.ALEX;
-import static seedu.address.testutil.TypicalParticipants.BERNICE;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showParticipantAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PARTICIPANT;
+import static seedu.address.testutil.TypicalParticipants.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.participant.Participant;
-import seedu.address.testutil.DefaultModelStub;
-import seedu.address.testutil.ParticipantBuilder;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code ViewCommand}.
+ */
 public class ViewCommandTest {
-    private static final Participant participantWithSimilarId =
-            new ParticipantBuilder(ALEX).withName("Alex Yeo").build();
-    private final ModelStubWithParticipants modelStub = new ModelStubWithParticipants();
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_findParticipantSuccessful() throws Exception {
-        CommandResult commandResult = new ViewCommand("beryu1").execute(modelStub);
-        assertEquals(BERNICE.toString(), commandResult.getFeedbackToUser());
+    public void execute_validIndexUnfilteredList_success() {
+        Participant participantToView = model.getFilteredParticipantList()
+                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
+        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PARTICIPANT);
+        String expectedMessage = participantToView.toString();
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_participantNotInList_throwsCommandException() {
-        ViewCommand viewCommand = new ViewCommand("mikerowe1");
-        assertThrows(CommandException.class,
-                String.format(MESSAGE_PARTICIPANT_NOT_FOUND, "mikerowe1",
-                        ListCommand.COMMAND_WORD), () -> viewCommand.execute(modelStub));
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredParticipantList().size() + 1);
+        ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
+
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showParticipantAtIndex(model, INDEX_FIRST_PARTICIPANT);
+
+        Participant participantToView = model.getFilteredParticipantList()
+                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
+
+        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PARTICIPANT);
+
+        String expectedMessage = participantToView.toString();
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        showParticipantAtIndex(expectedModel, INDEX_FIRST_PARTICIPANT);
+
+        assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showParticipantAtIndex(model, INDEX_FIRST_PARTICIPANT);
+
+        Index outOfBoundIndex = INDEX_SECOND_PARTICIPANT;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getParticipantList().size());
+        ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
+
+        assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        ViewCommand findFirstCommand = new ViewCommand("aleyeo1");
-        ViewCommand findSecondCommand = new ViewCommand("aleyeo2");
+        ViewCommand viewFirstCommand = new ViewCommand(INDEX_FIRST_PARTICIPANT);
+        ViewCommand viewSecondCommand = new ViewCommand(INDEX_SECOND_PARTICIPANT);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewCommand findFirstCommandCopy = new ViewCommand("aleyeo1");
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        ViewCommand viewFirstCommandCopy = new ViewCommand(INDEX_FIRST_PARTICIPANT);
+        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(viewFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(viewFirstCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
-    }
-
-    /**
-     * A Model stub that contains a several participants.
-     */
-    private static class ModelStubWithParticipants extends DefaultModelStub {
-        private final List<Participant> participantList = new ArrayList<>();
-
-        ModelStubWithParticipants() {
-            this.participantList.add(ALEX);
-            this.participantList.add(BERNICE);
-            this.participantList.add(participantWithSimilarId);
-        }
-
-        @Override
-        public Optional<Participant> findParticipant(Predicate<Participant> predicate) {
-            return this.participantList.stream().filter(predicate).findFirst();
-        }
+        // different participant -> returns false
+        assertFalse(viewFirstCommand.equals(viewSecondCommand));
     }
 }

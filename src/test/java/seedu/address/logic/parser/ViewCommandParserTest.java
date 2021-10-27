@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,22 +13,13 @@ class ViewCommandParserTest {
     private final ViewCommandParser parser = new ViewCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+    public void parse_validArgs_returnsViewCommand() {
+        assertParseSuccess(parser, "1", new ViewCommand(INDEX_FIRST_PARTICIPANT));
     }
 
     @Test
-    public void parse_invalidArg_throwsParseException() {
-        assertParseFailure(parser, "alex yeo",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ViewCommand.MESSAGE_USAGE));
     }
-
-    @Test
-    public void parse_validArg_returnsViewCommand() {
-        ViewCommand expectedViewCommand =
-                new ViewCommand("aleyeo1");
-        assertParseSuccess(parser, "aleyeo1", expectedViewCommand);
-    }
-
 }

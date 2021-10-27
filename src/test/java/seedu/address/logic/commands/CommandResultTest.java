@@ -12,7 +12,7 @@ import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.AddEventCommandParser;
 import seedu.address.logic.parser.AddParticipantToEventParser;
 import seedu.address.logic.parser.DeleteCommandParser;
-import seedu.address.logic.parser.DoneEventCommandParser;
+import seedu.address.logic.parser.DoneCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FilterEventCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
@@ -78,7 +78,7 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new AddParticipantToEventParser().parse(" id/tom2 ev/M").execute(model).isShowHelp());
+        assertFalse(new AddParticipantToEventParser().parse(" 1 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -91,10 +91,10 @@ public class CommandResultTest {
 
     @Test
     public void isShowHelp_doneEventCommand_returnsFalse() throws Exception {
-        // CommandResult from DoneEventCommand
+        // CommandResult from DoneCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new DoneEventCommandParser().parse(" 1").execute(model).isShowHelp());
+        assertFalse(new DoneCommandParser().parse(" 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -144,11 +144,11 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        // hard coded test
+
         AddParticipantToEventCommand addParticipantToEventCommand = new AddParticipantToEventParser()
-                .parse(" id/tom8 ev/M");
+                .parse(" 1 1");
         addParticipantToEventCommand.execute(model);
-        assertFalse(new RemoveParticipantFromEventParser().parse(" id/tom8 ev/M").execute(model).isShowHelp());
+        assertFalse(new RemoveParticipantFromEventParser().parse(" 1 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -156,7 +156,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventDetailsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventDetailsCommandParser().parse(" M").execute(model).isShowHelp());
+        assertFalse(new ShowEventDetailsCommandParser().parse(" 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -164,7 +164,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventParticipantsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventParticipantsCommandParser().parse(" M").execute(model).isShowHelp());
+        assertFalse(new ShowEventParticipantsCommandParser().parse(" 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -210,7 +210,7 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new AddParticipantToEventParser().parse(" id/tom4 ev/M").execute(model).isExit());
+        assertFalse(new AddParticipantToEventParser().parse(" 1 1").execute(model).isExit());
     }
 
     @Test
@@ -223,10 +223,10 @@ public class CommandResultTest {
 
     @Test
     public void isExit_doneEventCommand_returnsFalse() throws Exception {
-        // CommandResult from DoneEventCommand
+        // CommandResult from DoneCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new DoneEventCommandParser().parse(" 1").execute(model).isExit());
+        assertFalse(new DoneCommandParser().parse(" 1").execute(model).isExit());
     }
 
     @Test
@@ -276,11 +276,11 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        // hard coded test
+
         AddParticipantToEventCommand addParticipantToEventCommand = new AddParticipantToEventParser()
-                .parse(" id/tom9 ev/M");
+                .parse(" 1 1");
         addParticipantToEventCommand.execute(model);
-        assertFalse(new RemoveParticipantFromEventParser().parse(" id/tom9 ev/M").execute(model).isExit());
+        assertFalse(new RemoveParticipantFromEventParser().parse(" 1 1").execute(model).isExit());
     }
 
     @Test
@@ -288,7 +288,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventDetailsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventDetailsCommandParser().parse(" M").execute(model).isExit());
+        assertFalse(new ShowEventDetailsCommandParser().parse(" 1").execute(model).isExit());
     }
 
     @Test
@@ -296,7 +296,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventParticipantsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventParticipantsCommandParser().parse(" M").execute(model).isExit());
+        assertFalse(new ShowEventParticipantsCommandParser().parse(" 1").execute(model).isExit());
     }
 
     @Test

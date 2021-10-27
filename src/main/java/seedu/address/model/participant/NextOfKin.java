@@ -53,6 +53,19 @@ public class NextOfKin {
     }
 
     /**
+     * Returns true if both next of kins have the same name.
+     * This defines a weaker notion of equality between two next of kins.
+     */
+    public boolean isSameNextOfKin(NextOfKin otherNextOfKin) {
+        if (otherNextOfKin == this) {
+            return true;
+        }
+
+        return otherNextOfKin != null
+                && otherNextOfKin.getName().equals(getName());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
