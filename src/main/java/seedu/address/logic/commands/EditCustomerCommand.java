@@ -21,6 +21,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -39,7 +40,8 @@ import seedu.address.model.tag.Tag;
 public class EditCustomerCommand extends Command {
     public static final String COMMAND_WORD = "editc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Edits the details of the customer identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -51,7 +53,7 @@ public class EditCustomerCommand extends Command {
             + "[" + PREFIX_ALLERGIES + "ALLERGIES] "
             + "[" + PREFIX_SPECIALREQUESTS + "SPECIAL REQUESTS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " 1 "
             + PREFIX_LP + "4000 "
             + PREFIX_ALLERGIES + "Peanuts"
             + PREFIX_SPECIALREQUESTS + "Window seating"

@@ -7,12 +7,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.model.person.Phone;
 import seedu.address.model.table.Table;
+import seedu.address.model.tag.Tag;
 
 class ListContainsReservationPredicateTest {
     private LocalDate date1 = LocalDate.parse("2021-01-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -22,6 +24,8 @@ class ListContainsReservationPredicateTest {
     private Phone phone = new Phone("98765432");
     private int numberOfPeople = 5;
     private Table table = new Table(numberOfPeople, 10);
+    private Remark remark = new Remark("");
+    private Set<Tag> tags = Set.of();
 
     @Test
     void testEquals() {
@@ -49,7 +53,8 @@ class ListContainsReservationPredicateTest {
     @Test
     void test_reservationDateTimeMatch_returnsTrue() {
         Reservation reservation = new Reservation(phone, numberOfPeople,
-                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")), table);
+                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")),
+                table, remark, tags);
         ListContainsReservationPredicate predicate;
 
         // Matching date and time in query containing both date and time
@@ -66,7 +71,8 @@ class ListContainsReservationPredicateTest {
     @Test
     void test_reservationDateTimeNoMatch_returnsFalse() {
         Reservation reservation = new Reservation(phone, numberOfPeople,
-                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")), table);
+                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")),
+                table, remark, tags);
         ListContainsReservationPredicate predicate;
 
         // Not matching date and time in query containing both date and time

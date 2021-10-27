@@ -4,17 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Phone;
 import seedu.address.model.table.Table;
+import seedu.address.model.tag.Tag;
 
 class ReservationTest {
     public static final String DUMMY_PHONE_NUMBER = "98765432";
     public static final int DUMMY_NUMBER_OF_PEOPLE = 10;
     public static final LocalDateTime DUMMY_DATE_TIME = LocalDateTime.parse("2021-11-11T20:00");
     public static final Table DUMMY_TABLE = new Table(5, 10);
+    public static final Remark DUMMY_REMARK = new Remark("");
+    public static final Set<Tag> DUMMY_TAGS = Set.of();
 
     public static final String DIFFERENT_PHONE_NUMBER = "12345678";
     public static final int DIFFERENT_NUMBER_OF_PEOPLE = 5;
@@ -27,13 +31,17 @@ class ReservationTest {
                 new Phone(DUMMY_PHONE_NUMBER),
                 DUMMY_NUMBER_OF_PEOPLE,
                 DUMMY_DATE_TIME,
-                DUMMY_TABLE
+                DUMMY_TABLE,
+                DUMMY_REMARK,
+                DUMMY_TAGS
         );
         Reservation reservationCopied = new Reservation(
                 new Phone(DUMMY_PHONE_NUMBER),
                 DUMMY_NUMBER_OF_PEOPLE,
                 DUMMY_DATE_TIME,
-                DUMMY_TABLE
+                DUMMY_TABLE,
+                DUMMY_REMARK,
+                DUMMY_TAGS
         );
 
         // same values -> returns true
@@ -50,7 +58,9 @@ class ReservationTest {
                 new Phone(DIFFERENT_PHONE_NUMBER),
                 DUMMY_NUMBER_OF_PEOPLE,
                 DUMMY_DATE_TIME,
-                DUMMY_TABLE
+                DUMMY_TABLE,
+                DUMMY_REMARK,
+                DUMMY_TAGS
         )));
 
         // different number of people -> returns false
@@ -58,7 +68,9 @@ class ReservationTest {
                 new Phone(DUMMY_PHONE_NUMBER),
                 DIFFERENT_NUMBER_OF_PEOPLE,
                 DUMMY_DATE_TIME,
-                DUMMY_TABLE
+                DUMMY_TABLE,
+                DUMMY_REMARK,
+                DUMMY_TAGS
         )));
 
         // different date time -> returns false
@@ -66,7 +78,9 @@ class ReservationTest {
                 new Phone(DUMMY_PHONE_NUMBER),
                 DUMMY_NUMBER_OF_PEOPLE,
                 DIFFERENT_DATE_TIME,
-                DUMMY_TABLE
+                DUMMY_TABLE,
+                DUMMY_REMARK,
+                DUMMY_TAGS
         )));
 
         // different table -> returns false
@@ -74,7 +88,9 @@ class ReservationTest {
                 new Phone(DUMMY_PHONE_NUMBER),
                 DUMMY_NUMBER_OF_PEOPLE,
                 DUMMY_DATE_TIME,
-                DIFFERENT_TABLE
+                DIFFERENT_TABLE,
+                DUMMY_REMARK,
+                DUMMY_TAGS
         )));
     }
 }

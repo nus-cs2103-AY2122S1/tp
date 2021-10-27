@@ -7,6 +7,10 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Supplier's delivery details in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDeliveryDetail(String)}
+ */
 public class DeliveryDetails {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -21,7 +25,7 @@ public class DeliveryDetails {
 
     private static DateTimeFormatter chosenFormat = null;
 
-    private final LocalDateTime deliveryDetails;
+    public final LocalDateTime deliveryDetails;
     private final String deliveryDetailsString;
 
     /**

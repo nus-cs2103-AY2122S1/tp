@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -219,6 +220,21 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
+        public void setCustomerComparator(Comparator<Customer> customerComparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Customer> getSortableCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetCustomerListToDefaultSortState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Employee> getFilteredEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -265,7 +281,22 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
+        public void setSupplierComparator(Comparator<Supplier> supplierComparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Supplier> getFilteredSupplierList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Supplier> getSortableSupplierList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetSupplierListToDefaultSortState() {
             throw new AssertionError("This method should not be called.");
         }
 

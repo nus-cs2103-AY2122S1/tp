@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +21,17 @@ class ReservationListTest {
             new Phone("98765432"),
             5,
             LocalDateTime.parse("2021-11-11T20:00"),
-            new Table(2, 10)
+            new Table(2, 10),
+            new Remark(""),
+            Set.of()
     );
     public static final Reservation RESERVATION_NOT_IN_LIST = new Reservation(
             new Phone("12345678"),
             2,
             LocalDateTime.parse("2021-11-11T20:00"),
-            new Table(1, 11)
+            new Table(1, 11),
+            new Remark(""),
+            Set.of()
     );
 
     private ReservationList reservationList = new ReservationList();

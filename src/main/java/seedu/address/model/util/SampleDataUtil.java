@@ -24,6 +24,7 @@ import seedu.address.model.person.employee.Shift;
 import seedu.address.model.person.supplier.DeliveryDetails;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.SupplyType;
+import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.table.Table;
 import seedu.address.model.tag.Tag;
@@ -126,15 +127,15 @@ public class SampleDataUtil {
     public static Reservation[] getSampleReservations() {
         return new Reservation[] {
             new Reservation(new Phone("92492021"), 2, LocalDateTime.parse("2021-12-24T20:00"),
-                    new Table(2, 10)),
+                    new Table(2, 10), new Remark("Surprise birthday party"), getTagSet("Chetwin")),
             new Reservation(new Phone("91031282"), 4, LocalDateTime.parse("2021-11-11T13:00"),
-                    new Table(4, 11)),
-            new Reservation(new Phone("93210283"), 2, LocalDateTime.parse("2021-12-25T19:00"),
-                    new Table(2, 12)),
-            new Reservation(new Phone("99272758"), 3, LocalDateTime.parse("2021-10-30T19:00"),
-                    new Table(3, 13)),
+                    new Table(4, 11), new Remark("Family dinner, have kids"), getTagSet("hernpiblo", "10PercentOff")),
+            new Reservation(new Phone("93210283"), 3, LocalDateTime.parse("2021-12-25T19:00"),
+                    new Table(2, 12), new Remark(""), getTagSet("thang")),
+            new Reservation(new Phone("99272758"), 2, LocalDateTime.parse("2021-10-30T19:00"),
+                    new Table(3, 13), new Remark("Propose to his gf"), getTagSet("clement")),
             new Reservation(new Phone("87438807"), 6, LocalDateTime.parse("2021-02-14T11:00"),
-                    new Table(6, 14))
+                    new Table(6, 14), new Remark(""), getTagSet("javier", "20PercentOff"))
         };
     }
 

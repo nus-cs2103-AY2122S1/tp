@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -30,8 +31,10 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
+    private final ObservableList<Customer> sortableCustomers;
     private final FilteredList<Employee> filteredEmployees;
     private final FilteredList<Supplier> filteredSuppliers;
+    private final ObservableList<Supplier> sortableSuppliers;
     private final FilteredList<Reservation> filteredReservations;
     private final ReservationsManager reservationsManager;
     private final TableManager tableManager;
@@ -48,8 +51,10 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
+        sortableCustomers = this.addressBook.getSortableCustomerList();
         filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
+        sortableSuppliers = this.addressBook.getSortableSupplierList();
         filteredReservations = new FilteredList<>(this.addressBook.getReservationList());
         reservationsManager = this.addressBook.getReservationsManager();
         tableManager = this.addressBook.getTableManager();
@@ -149,6 +154,12 @@ public class ModelManager implements Model {
         addressBook.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
+
+    @Override
+    public void setCustomerComparator(Comparator<Customer> customerComparator) {
+        this.addressBook.setCustomerComparator(customerComparator);
+    }
+
     @Override
     public void addEmployee(Employee employee) {
         addressBook.addEmployee(employee);
@@ -177,6 +188,11 @@ public class ModelManager implements Model {
     public void setSupplier(Supplier target, Supplier editedSupplier) {
         requireAllNonNull(target, editedSupplier);
         addressBook.setSupplier(target, editedSupplier);
+    }
+
+    @Override
+    public void setSupplierComparator(Comparator<Supplier> supplierComparator) {
+        this.addressBook.setSupplierComparator(supplierComparator);
     }
 
     @Override
@@ -247,6 +263,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Customer> getSortableCustomerList() {
+        return sortableCustomers;
+    }
+
+    @Override
+    public void resetCustomerListToDefaultSortState() {
+        this.addressBook.resetCustomerListToDefaultSortState();
+    }
+
+    @Override
     public void updateFilteredCustomerList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
         filteredCustomers.setPredicate(predicate);
@@ -261,6 +287,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Supplier> getFilteredSupplierList() {
         return filteredSuppliers;
+    }
+
+    @Override
+    public ObservableList<Supplier> getSortableSupplierList() {
+        return sortableSuppliers;
+    }
+
+    @Override
+    public void resetSupplierListToDefaultSortState() {
+        this.addressBook.resetSupplierListToDefaultSortState();
     }
 
     @Override

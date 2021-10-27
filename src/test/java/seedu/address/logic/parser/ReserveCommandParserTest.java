@@ -6,11 +6,13 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ReserveCommand;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reservation.Remark;
 
 class ReserveCommandParserTest {
     private ReserveCommandParser parser = new ReserveCommandParser();
@@ -20,7 +22,9 @@ class ReserveCommandParserTest {
         ReserveCommand expected = new ReserveCommand(
                 new Phone("98765432"),
                 2,
-                LocalDateTime.parse("2021-11-11 2000", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
+                LocalDateTime.parse("2021-11-11 2000", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")),
+                new Remark(""),
+                Set.of());
 
         assertParseSuccess(parser, "2 p/98765432 at/2021-11-11 2000", expected);
     }

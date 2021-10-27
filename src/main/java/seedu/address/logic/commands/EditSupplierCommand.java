@@ -20,6 +20,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -37,7 +38,8 @@ public class EditSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "edits";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the supplier identified "
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Edits the details of the supplier identified "
             + "by the index number used in the displayed supplier list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -48,7 +50,7 @@ public class EditSupplierCommand extends Command {
             + "[" + PREFIX_TAG + "TAG] "
             + "[" + PREFIX_SUPPLY_TYPE + "SUPPLY TYPE] "
             + "[" + PREFIX_DELIVERY_DETAILS + "DELIVERY DETAILS]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
