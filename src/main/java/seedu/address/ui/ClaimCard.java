@@ -45,9 +45,9 @@ public class ClaimCard extends UiPart<Region> {
         super(FXML);
         this.claim = claim;
         this.name = name;
-        nameToDisplay.setText(name.fullName);
+        nameToDisplay.setText("Person: " + name.fullName);
         title.setText(claim.getTitle().toString());
-        description.setText(claim.getDescription().toString());
+        description.setText("Description: " + claim.getDescription().toString());
         status.setText(claim.getStatus().toString());
     }
 

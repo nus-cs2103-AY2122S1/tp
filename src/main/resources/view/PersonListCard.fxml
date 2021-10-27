@@ -29,6 +29,5 @@
    <Label fx:id="revenue" styleClass="cell_small_label" text="\$revenue" />
    <Label fx:id="meeting" styleClass="cell_small_label" text="\$meeting" />
    <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
-   <VBox fx:id="claims" />
  </VBox>
 </HBox>
