@@ -70,7 +70,6 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/commands/HelpCommand/help.png)
 
-Example: `help`
 
 ### <a name="exit"></a>1.2 Exit: `exit`
 Exits ProgrammerError and closes the GUI.
@@ -87,20 +86,19 @@ Displays a dashboard window showing the following data:
 
 ### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
 If no data present, fills it with sample data. Otherwise, throws an error message. \
-Example: `fill`
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
 Purges all pre-existing sample data to start adding your own data or purge the user data. \
 Clears all data in PE. \
-Example: `purge`
 
 ### <a name="download-data"></a>2.3 Download Data `download`
-PE data can be downloaded to a CSV file by clicking the 'Download' button with the command `download`. 
-The TA will need to specify the directory to download the file to.
+All current students' data can be downloaded to a CSV file. The TA will need to select the directory to download the file to.
 
 ### <a name="upload-data"></a>2.4 Upload Data: `upload`
-PE data can be uploaded with a CSV file with the command `upload`. 
-The TA will need to specify the CSV file to upload the student data from.
+Uploads student data (student ID, class ID, name, email) via a CSV file. 
+1. Select a valid CSV file from the file chooser to upload the student data from.
+2. A valid CSV file must contain the following column header: `studentId,classId,name,email`
+3. Note that this command is not meant for uploading lab results. Rather, it is only for automating the adding of students to PE.
 
 
 ## <a name="student-features"></a>3. Student Features
