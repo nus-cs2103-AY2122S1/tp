@@ -50,9 +50,6 @@ class JsonSerializableAssistantBuddy {
      * Converts this address book into the model's {@code TeachingAssistantBuddy} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
-     * todo add modules to JSON, and when converting to TAB object need to add both students and modules to TAB,
-     * todo as well as adding students to the module
-     * todo as well as adding tasks to modules with their done/undone status
      */
     public TeachingAssistantBuddy toModelType() throws IllegalValueException {
         TeachingAssistantBuddy teachingAssistantBuddy = new TeachingAssistantBuddy();
