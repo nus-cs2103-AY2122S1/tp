@@ -73,13 +73,16 @@ public interface Model {
     ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException;
 
     /**
+     * Returns a String of information if {@code Person} does not exist in the address book, return
+     * an empty String otherwise.
+     */
+    String getInvalidResident(Event event) throws CommandException;
+
+    /**
      * Returns true if an event with the same details as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
 
-    /**
-     * Searches the eventList and return the {@code event} if it exists in the address book.
-     */
     Event getEvent(EventName eventName) throws CommandException;
 
     /**

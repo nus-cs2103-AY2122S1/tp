@@ -38,7 +38,7 @@ public class PersonAdditionalCard extends UiPart<Region> {
     @FXML
     private HBox informationContainer;
     @FXML
-    private VBox deadlineContainer;
+    private HBox deadlineContainer;
     @FXML
     private VBox labelBox;
     @FXML
@@ -58,7 +58,7 @@ public class PersonAdditionalCard extends UiPart<Region> {
         vaccStatus.setText(VaccStatus.DESC + person.getVaccStatus().vaccStatus);
 
         if (person.hasMissedDeadline()) {
-            Label textBox = new Label("Late by:");
+            Label textBox = new Label("Fet late by: ");
             int missedDates = person.getMissedDates();
             Label date;
             if (missedDates > 1) {
@@ -66,19 +66,21 @@ public class PersonAdditionalCard extends UiPart<Region> {
             } else {
                 date = new Label(missedDates + " day");
             }
+            textBox.getStyleClass().add("cell_alert");
+            date.getStyleClass().add("cell_alert");
             deadlineContainer.getChildren().add(textBox);
             deadlineContainer.getChildren().add(date);
         }
 
         if (person.getLastFetDate().date != DEFAULT_DATE) {
             Label textBox = new Label(LastDate.FET_DESC + person.getLastFetDate().date);
-            textBox.getStyleClass().add("cell_small_label");
+            textBox.getStyleClass().add("cell_normal");
             labelBoxInterior.getChildren().add(textBox);
         }
 
         if (person.getLastCollectionDate().date != DEFAULT_DATE) {
             Label textBox = new Label(LastDate.COLLECTION_DESC + person.getLastCollectionDate().date);
-            textBox.getStyleClass().add("cell_small_label");
+            textBox.getStyleClass().add("cell_normal");
             labelBoxInterior.getChildren().add(textBox);
         }
     }

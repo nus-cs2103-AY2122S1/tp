@@ -1,18 +1,20 @@
 package safeforhall.logic.parser.find;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.commands.CommandTestUtil.CAPACITY_DESC_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.DATE_DESC_FOOTBALL_TRAINING;
+import static safeforhall.logic.commands.CommandTestUtil.INVALID_CAPACITY_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC;
+import static safeforhall.logic.commands.CommandTestUtil.INVALID_EVENT_DATE_DESC2;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_EVENT_NAME_DESC;
+import static safeforhall.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.NAME_DESC_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_CAPACITY_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_DATE_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VENUE_FOOTBALL_TRAINING;
 import static safeforhall.logic.commands.CommandTestUtil.VENUE_DESC_FOOTBALL_TRAINING;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -27,26 +29,11 @@ import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
 import safeforhall.model.event.Venue;
 
+
 public class FindEventCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE);
-
-    private static final String INVALID_ROOM_FOR_FIND1 = "AA";
-    private static final String INVALID_ROOM_FOR_FIND2 = "A12";
-    private static final String INVALID_ROOM_FOR_FIND3 = "12";
-
-    private static final String VALID_ROOM_FOR_FIND1 = "A";
-    private static final String VALID_ROOM_FOR_FIND2 = "A1";
-    private static final String VALID_ROOM_FOR_FIND3 = "E200";
-
-    private static final String INVALID_ROOM_DESC1 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND1;
-    private static final String INVALID_ROOM_DESC2 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND2;
-    private static final String INVALID_ROOM_DESC3 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND3;
-
-    private static final String VALID_ROOM_DESC1 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND1;
-    private static final String VALID_ROOM_DESC2 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND2;
-    private static final String VALID_ROOM_DESC3 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND3;
 
     private FindEventCommandParser parser = new FindEventCommandParser();
 
@@ -113,6 +100,107 @@ public class FindEventCommandParserTest {
         FindEventCommand expectedCommand = new FindEventCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_someFieldsSpecified_success() {
+        String userInput = NAME_DESC_FOOTBALL_TRAINING + DATE_DESC_FOOTBALL_TRAINING + VENUE_DESC_FOOTBALL_TRAINING;
+
+        FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+        predicate.setEventName(new EventName(VALID_NAME_FOOTBALL_TRAINING));
+        predicate.setEventDate(new EventDate(VALID_DATE_FOOTBALL_TRAINING));
+        predicate.setVenue(new Venue(VALID_VENUE_FOOTBALL_TRAINING));
+
+        FindEventCommand expectedCommand = new FindEventCommand(predicate);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_oneFieldSpecified_success() {
+        // event name
+        String userInput = NAME_DESC_FOOTBALL_TRAINING;
+        FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+        predicate.setEventName(new EventName(VALID_NAME_FOOTBALL_TRAINING));
+        FindEventCommand expectedCommand = new FindEventCommand(predicate);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // date
+        userInput = DATE_DESC_FOOTBALL_TRAINING;
+        predicate = new FindEventCommand.FindCompositePredicate();
+        predicate.setEventDate(new EventDate(VALID_DATE_FOOTBALL_TRAINING));
+        expectedCommand = new FindEventCommand(predicate);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // venue
+        userInput = VENUE_DESC_FOOTBALL_TRAINING;
+        predicate = new FindEventCommand.FindCompositePredicate();
+        predicate.setVenue(new Venue(VALID_VENUE_FOOTBALL_TRAINING));
+        expectedCommand = new FindEventCommand(predicate);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_invalidName_fail() {
+        try {
+            FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+            predicate.setEventName(new EventName(INVALID_EVENT_NAME_DESC));
+
+            assertParseFailure(parser, INVALID_EVENT_NAME_DESC, Venue.MESSAGE_CONSTRAINTS);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_invalidDate_fail() {
+        try {
+            FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+            predicate.setEventDate(new EventDate(INVALID_EVENT_DATE_DESC));
+
+            assertParseFailure(parser, INVALID_EVENT_DATE_DESC, Venue.MESSAGE_CONSTRAINTS);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_invalidDate2_fail() {
+        try {
+            FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+            predicate.setEventDate(new EventDate(INVALID_EVENT_DATE_DESC2));
+
+            assertParseFailure(parser, INVALID_EVENT_DATE_DESC2, Venue.MESSAGE_CONSTRAINTS);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_invalidVenue_fail() {
+        try {
+            FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+            predicate.setVenue(new Venue(INVALID_VENUE_DESC));
+
+            assertParseFailure(parser, INVALID_VENUE_DESC, Venue.MESSAGE_CONSTRAINTS);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_invalidCapacity_fail() {
+        try {
+            FindEventCommand.FindCompositePredicate predicate = new FindEventCommand.FindCompositePredicate();
+            predicate.setCapacity(new Capacity(INVALID_CAPACITY_DESC));
+
+            assertParseFailure(parser, INVALID_CAPACITY_DESC, Venue.MESSAGE_CONSTRAINTS);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
     }
 
     /**

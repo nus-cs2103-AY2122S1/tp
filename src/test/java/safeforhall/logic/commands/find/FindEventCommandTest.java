@@ -42,6 +42,8 @@ public class FindEventCommandTest {
         FindEventCommand findFirstCommand = new FindEventCommand(firstPredicate);
         FindEventCommand findSecondCommand = new FindEventCommand(secondPredicate);
 
+        assertFalse(firstPredicate.equals(1));
+
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 

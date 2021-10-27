@@ -19,7 +19,7 @@ import safeforhall.model.person.Person;
 public class ViewPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-
+    public static final String PARAMETERS = "[INDEX]";
     public static final String MESSAGE_ALL_RESIDENTS_SHOWN = "All residents shown";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the additional details of the "
@@ -49,13 +49,16 @@ public class ViewPersonCommand extends Command {
             model.setNoPerson();
             return new CommandResult(MESSAGE_ALL_RESIDENTS_SHOWN);
         } else {
-            List<Person> lastShownList = model.getFilteredPersonList();
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-            }
-            Person personToShow = lastShownList.get(targetIndex.getZeroBased());
-            model.setSinglePerson(personToShow);
+            setSinglePerson(model);
             return new CommandResult(MESSAGE_VIEW_RESIDENT_SUCCESS);
         }
+    }
+
+    public void setSinglePerson(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+        model.setSinglePerson(lastShownList.get(targetIndex.getZeroBased()));
     }
 }
