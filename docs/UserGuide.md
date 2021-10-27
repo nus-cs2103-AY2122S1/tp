@@ -154,13 +154,11 @@ Examples:
 ### <a name="delete-student"></a>3c. Delete Student: `delete`
 Deletes the specified student from the PE.
 
-Format: `delete -sid <STUDENT_ID>`
+Format: `delete <STUDENT_INDEX>`
+- Deletes the student at `<STUDENT_INDEX>`. (1-indexed)
 
-- Deletes the student with student ID of `<STUDENT_ID>`.
-
-Examples:
-- `delete -sid A1234567X` Deletes the data of the student with student ID A1234567X
-- `delete -sid A2345678X` Deletes the data of the student with student ID A2345678X
+Example:
+- `delete 23` Deletes the data of the student at index 1
 
 
 ### <a name="filter-student"></a>3d. Filter List: `filter`
