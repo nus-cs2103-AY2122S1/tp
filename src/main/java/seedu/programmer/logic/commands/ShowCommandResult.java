@@ -35,7 +35,7 @@ public class ShowCommandResult extends CommandResult {
 
         ShowCommandResult otherCommandResult = (ShowCommandResult) other;
         return getFeedbackToUser().equals(otherCommandResult.getFeedbackToUser())
-                && target == otherCommandResult.target;
+                && target.equals(otherCommandResult.target);
     }
 
     @Override

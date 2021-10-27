@@ -26,7 +26,6 @@ import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DashboardCommandResult;
 import seedu.programmer.logic.commands.DownloadCommandResult;
-import seedu.programmer.logic.commands.EditCommandResult;
 import seedu.programmer.logic.commands.ExitCommandResult;
 import seedu.programmer.logic.commands.HelpCommandResult;
 import seedu.programmer.logic.commands.ShowCommandResult;
@@ -52,9 +51,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private StudentListPanel studentParticular;
+    private LabResultListPanel labResultListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private StudentCard studentParticular;
     private DashboardWindow dashboardWindow;
 
     @FXML
@@ -190,15 +190,11 @@ public class MainWindow extends UiPart<Stage> {
      * Display the selected student's lab results.
      */
     @FXML
-    public void handleShowResult(Student target) {
-        if (studentParticularPlaceholder.getChildren().isEmpty()) {
-            studentParticular = new StudentCard(target);
-            studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
-        } else {
-            studentParticular.updateStudentInformation(target);
-            studentParticularPlaceholder.getChildren().set(0, studentParticular.getRoot());
-        }
-        LabResultListPanel labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
+    public void handleShowResult() {
+        studentParticular = new StudentListPanel(logic.getSelectedStudentWrapper());
+        studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
+
+        labResultListPanel = new LabResultListPanel(logic.getSelectedLabs());
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
 
@@ -346,8 +342,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            studentParticularPlaceholder.getChildren().clear();
-            labResultListPanelPlaceholder.getChildren().clear();
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -356,17 +350,14 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult instanceof ExitCommandResult) {
                 handleExit();
+            } else if (commandResult instanceof ShowCommandResult) {
+                handleShowResult();
             } else if (commandResult instanceof DownloadCommandResult) {
                 handleDownload();
             } else if (commandResult instanceof DashboardCommandResult) {
                 handleDashboard();
-            } else if (commandResult instanceof ShowCommandResult) {
-                handleShowResult(((ShowCommandResult) commandResult).getTarget());
             } else if (commandResult instanceof UploadCommandResult) {
                 handleUpload();
-            } else if (commandResult instanceof EditCommandResult) {
-                EditCommandResult editCommandResult = (EditCommandResult) commandResult;
-                handleShowResult(editCommandResult.getEditedStudent());
             }
             if (dashboardWindow.isShowing()) {
                 dashboardWindow.update();
