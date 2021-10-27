@@ -598,7 +598,7 @@ the commands you use. With `alias`, you can create a shortcut name for any comma
 Format: `alias s/SHORTCUT cw/COMMAND_WORD`
 
 * Creates an alias that allows the specified `COMMAND_WORD` to be executed with the specified `SHORTCUT`
-* `SHORTCUT` **must not an existing command**
+* `SHORTCUT` **must be one word and not an existing command**
 * `COMMAND_WORD` **must be an existing command**
 
 <div markdown="block" class="alert alert-info">
