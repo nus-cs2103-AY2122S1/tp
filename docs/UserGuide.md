@@ -92,12 +92,11 @@ Displays a dashboard window showing the following data:
 
 ### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
 
-If no data present, fills it with sample data. Otherwise, throws an error message. \
+If no data present, fills it with sample data. Otherwise, throws an error message.
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
-
-Purges all pre-existing sample data to start adding your own data or purge the user data. \
-Clears all data in PE. \
+Purges all pre-existing sample data to start adding your own data or purge the user data. 
+Clears all data in PE.
 
 ### <a name="download-data"></a>2.3 Download Data `download`
 
