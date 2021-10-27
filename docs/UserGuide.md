@@ -1,48 +1,100 @@
 ---
 title: User Guide
 ---
-
-## Overview
-Academy Directory (AD) is a **desktop app for CS1101S tutors to manage students’ contact, grades, tutorial attendance, and assignment completion**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). AD is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I at the National University of Singapore.
-
-### Table of Contents
+## Table of Contents
+* [Overview](#overview)
+* [Information About this User Guide](#information-about-this-user-guide)
+  * [Purpose of User Guide](#purpose)
+  * [Target Audience of User Guide](#target-audience)
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Add Student](#adding-a-student-add)
-  * [Find Student](#locating-students-by-name-find)
-  * [Delete Student](#deleting-a-student-delete)
-  * [Tag Student](#tagging-a-student--tag)
-  * [Get Personal Information](#getting-personal-information-of-students-get)
-  * [Edit Personal Information](#editing-a-students-personal-information--edit)
-  * [Edit Attendance](#editing-a-students-studio-attendance-attendance)
-  * [Edit Participation](#editing-a-students-studio-participation-participation)
-  * [Add Grade](#adding-grades-for-an-assessment--grade)
-  * [Show Grade](#displaying-the-grades-for-an-assessment--show)
-  * [List All Students](#listing-all-students--list)
-  * [Clear Student List](#clearing-all-students--clear)
-  * [Sort Student List](#sorting-the-list--sort)
-  * [Visualize all Grades](#visualizing-assessments-grades-of-the-entire-class-visualize)
-  * [Help](#seeking-help--help)
-    * [General Help](#viewing-general-help)
-    * [Help with Specific Command](#viewing-specific-help)
-  * [Exit Academy Directory](#exiting-the-program--exit)
-* [\[Advanced Users Only\]: View Commit History](#advanced-users-only-viewing-commit-history-history)
-* [\[Advanced Users Only\]: Revert Commit](#advanced-users-only-reverting-commit-revert)
+  * [Manage Students' Personal Details](#managing-students-personal-details)
+    * [Add Student](#adding-a-student-add)
+    * [Delete Student](#deleting-a-student-delete)
+    * [Tag Student](#tagging-a-student--tag)
+    * [Get Personal Detail](#getting-personal-detail-of-students-get)
+    * [Edit Personal Detail](#editing-a-students-detail--edit)
+  * [Track Students' Grades, Studio Attendance, and Participation](#tracking-students-grades-studio-attendance-and-participation)
+    * [Add Grade](#adding-grades-for-an-assessment--grade)
+    * [Edit Attendance](#editing-a-students-studio-attendance-attendance)
+    * [Edit Participation](#editing-a-students-studio-participation-participation)
+  * [Visualizing Data](#visualizing-data-in-academy-directory)
+    * [Show Grade](#displaying-the-grades-for-an-assessment--show)
+    * [Visualize all Grades](#visualizing-assessments-grades-of-the-entire-class-visualize)
+    * [Filter Academy Directory](#filtering-academy-directory-by-name-or-tag-filter)
+    * [Sort Student List](#sorting-student-list--sort)
+  * [Others](#others)
+    * [List All Students](#listing-all-students--list)
+    * [Clear Student List](#clearing-all-students--clear)
+    * [Undo Changes](#undo-changes-to-academy-directory-undo)
+    * [Redo Changes](#redo-changes-to-academy-directory-redo)
+    * [Help](#seeking-help--help)
+      * [General Help](#viewing-general-help)
+      * [Help with Specific Command](#viewing-specific-help)
+    * [Exit Academy Directory](#exiting-the-program--exit)
+    * [(For Advanced Users): View Commit History](#for-advanced-users-viewing-commit-history-history)
+    * [(For Advanced Users): Revert Commit](#for-advanced-users-reverting-commit-revert)
 * [FAQ](#faq)
-* [Command Summary](#command-summary)
+* [Summary](#summary)
+  * [Command Summary](#command-summary)
+  * [Prefix Summary](#prefix-summary)
+* [Glossary](#glossary)
+* [Links](#links)
+  * [Academy Directory Resources](#academy-directory-resources)
+  * [Other Resources](#other-sources)
+* [Acknowledgements](#acknowledgements)
+
+--------------------------------------------------------------------------------------------------------------------
+## Overview
+Are you a CS1101s Avenger? Are you tired of having to deal with
+so many platforms like Luminus, Source Academy, etc.? We have just 
+the application for you!
+
+Academy Directory (AD) is a **desktop app for CS1101S tutors to manage their students.** Its main features are as follows: 
+- Manage students’ personal details
+- Track students' grades, Studio attendance, and participation
+- Visualize data in Academy Directory 
+
+Academy Directory is written in _Java_ and thus can be run on all major operating systems!
+It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+AD is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I at the National University of Singapore.
+
+## Information about this User Guide
+### Purpose
+This user guide aims to: 
+- Provide first-time users how to use Academy Directory
+- Show [details of all commands](#features) should users face any issues using any
+of the command in Academy Directory.
+- Answer some [frequently asked questions](#faq)
+- Provide a [summary of all commands](#command-summary) supported by Academy Directory
+
+### Target Audience
+The current iteration of Academy Directory is specifically designed for 
+**CS1101S Avengers**. Therefore, the main target audience of this user guide are CS1101S avengers.
+As such, the following assumptions are made regarding the target audience:
+- Can type fast and are comfortable using a CLI
+- Is comfortable downloading and installing software such as Java 11
+onto their system
+- Is familiar with common terms in Computer Science and
+in CS1101S
+
+While some technical background is assumed, we also provide the definitions for
+certain technical terms commonly used in this user guide [here](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
+This section provides instructions to begin using Academy Directory.
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. Academy Directory has been tested on Java `11`.
 
-1. Download the file _(link to the latest JAR will be available upon completion of v1.3)_ to the folder you want to use as the _home folder_ for your Academy Directory.
+2. Download the file _(link to the latest JAR will be available upon completion of v1.3)_ to the folder you want to use as the _home folder_ for your Academy Directory.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+3. From the command line, navigate to the folder used as *home folder* for academy directory and run `java -jar academydirectory.jar`. 
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+4. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
@@ -51,11 +103,27 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage students�
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+5. Refer to the [Features](#features) below for the set of features supported by Academy Directory and the details for each command.
+
+Notes:
+- While it is possible to open `academydirectory.jar` by double-clicking it, this may cause Academy Directory
+related files to be saved to an indeterminate location on the computer. As such, this method is _not recommended_, especially
+for beginners. 
+- The `clear` command can be used to remove the sample data in Academy Directory
+- Changes to Academy Directory are automatically saved
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+This section shows all the commands supported by Academy Directory.
+
+The commands are categorized based on the main features of Academy Directory: 
+- Manage students’ personal details
+- Track students' grades, Studio attendance, and participation
+- Visualize data in Academy Directory
+- Others
+
+For better reading experience, please be familiar with the command format (shown below) as well as [some terms used](#glossary)
 
 <div markdown="block" class="alert alert-info">
 
@@ -81,9 +149,10 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage students�
 
 </div>
 
-### Adding a student: `add`
+### Managing students' personal details
+#### Adding a student: `add`
 
-Avengers will be able to add their students.
+Adds a student to Academy Directory
 
 Format: `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER]`
 
@@ -103,74 +172,77 @@ Examples:
 * `add n/Charles Ng te/@charles e/e0123434@u.nus.edu p/NA`
 * `add n/Betsy Lim te/@unislave e/e0123456@u.nus.edu`
 
-### Locating students by name: `find`
+#### Filtering Academy Directory by name or tag: `filter`
 
-Finds students whose names contain any of the given keywords.
+Finds all students whose names or tags contain any of the specified keywords (case-insensitive) and
+displays them as a list with index numbers.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `filter KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `stream` will not match `streams`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `filter John` returns `john` and `John Doe`
+* `filter alex david` returns `Alex Yeoh`, `David Li`<br>
+* `filter stream` returns all students who are tagged with `stream`
 
-### Deleting a student: `delete`
+#### Deleting a student: `delete`
 
-Deletes a student from AcademyDirectory by their index.
+Deletes a student from Academy Directory by their index.
 
 Format: `delete INDEX`
 
-* `INDEX` is a unique id assigned to each student in the system.
+* `INDEX` refers to the index number shown in the displayed student list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 * Deletes the student at the specified `INDEX`
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `delete 2` deletes the 2nd student in the currently displayed list.
 
-### Tagging a student : `tag`
+#### Tagging a student : `tag`
 
-Tag a student.
+Tags a student.
 
 Format: `tag INDEX t/TAG [t/TAG]...`
 
-* Assigns a `Tag` to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, ...
+* `INDEX` refers to the index number shown in the displayed student list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* Assigns a `Tag` to the student at the specified `INDEX`.
 * At least one tag must be provided
 * Existing tags will be replaced by the new tags
 
 Examples:
-* `tag 1 t/mission` Adds a `mission` tag to the student specified at index 1.
-* `tag 2 t/streams t/envmodel` Adds `streams` and `envmodel` tags to the student specified at index 2.
+* `tag 1 t/mission` sets `mission` tag to the student specified at index 1.
+* `tag 2 t/streams t/envmodel` sets `streams` and `envmodel` tags to the student specified at index 2.
 
-### Getting personal information of students': `get`
+#### Getting personal detail of students': `get`
 
-Gets personal information of student/s. Personal information refers to:
+Gets personal detail of student/s. Personal detail refers to:
 - Telegram Handle
 - Email address
 - Telephone number, if any
 
 Format: `get [p/] [e/] [te/] [n/NAME]`
 
-* If `NAME` is provided, only personal information of the student/s whose name contain the given `NAME` will be shown
-* If `NAME` is not provided, the personal information of all students in AcademyDirectory will be shown
-* Multiple tags can be supplied at the same time, and personal information corresponding to all the given tags will be shown
+* If `NAME` is provided, only personal detail of the student/s whose name contain the given `NAME` will be shown.
+The behavior here is similar to the [filter command](#filtering-the-academy-directory-by-name-or-tag-filter)
+* If `NAME` is not provided, the personal detail of all students in AcademyDirectory will be shown
+* Multiple tags can be supplied at the same time, and personal detail corresponding to all the given tags will be shown
 
 Examples:
-* `get p/` shows the phone number of all students in AcademyDirectory
-* `get p/ e/ te/` shows the phone number, email, and telegram handle of all students in AcademyDirectory
-* `get p/ n/alex` shows the phone number of `Alex Yeoh`
-* `get p/ e/ te/ n/alex` show the phone number, email, and telegram handle of `Alex Yeoh`
+* `get p/` shows the phone number of all students in Academy Directory
+* `get p/ e/ te/` shows the phone number, email, and telegram handle of all students in Academy Directory
+* `get p/ n/alex` shows the phone number of all students in Academy Directory whose name has `alex`
+* `get p/ e/ te/ n/alex` show the phone number, email, and telegram handle of all students in Academy Directory
+whose name contains `alex`
 
-### Editing a student's personal information : `edit`
+#### Editing a student's detail : `edit`
 
-Avengers will be able to edit their students' personal information, including `NAME``.
+Edits a student's personal detail and `NAME`.
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [te/TELE_HANDLE] [p/PHONE_NUMBER]`
 
@@ -182,8 +254,20 @@ Examples:
 * `edit 1 p/91234567 e/e0425205@u.nus.com`  Edits the phone number and email address of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.
 * `edit 2 n/Aaron Tan`  Edits the name of the 2nd student to be Aaron Tan.
 
-### Editing a student's Studio attendance: `attendance`
-Avengers will be able to edit the attendance status of their students.
+### Tracking students' grades, Studio attendance, and participation
+#### Adding grades for an assessment:  `grade`
+Adds a student’s grade for a particular assessment.
+
+Format: `grade INDEX as/ASSESSMENT g/GRADE`
+
+* Record the student’s `GRADE` for the `ASSESSMENT`.
+* The input `GRADE` must be a positive integer.
+
+Example:
+* `grade 1 as/RA1 g/15`
+* 
+#### Editing a student's Studio attendance: `attendance`
+Edits the attendance status of their students.
 
 Format: `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS`
 
@@ -196,12 +280,13 @@ Format: `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS`
 
 Examples:
 
-* `attendance 1 ses/1 att/1`
-* `attendance 1, 2, 3 ses/12 k/Chan a/1 i/7`
+* `attendance 1 ses/1 att/1` Marks the student with index number `1` as present for studio session 1
+* `attendance 1, 2, 3 ses/12 att/0` Marks students with index numbers `1`, `2`, and `3` as absent for studio session 12
+* `attendance 1, 2, 3 ses/7 att/1` Marks students with index numbers `1`, `2`, and `3` as present for studio session 7
 
-### Editing a student’s Studio participation: `participation`
+#### Editing a student’s Studio participation: `participation`
 
-Avengers will be able to track the participation of their students during the relevant studios. We will be keeping track of Studio participation with a counter system which starts at 0 by default.
+Tracks the participation of their students during the relevant studios. We will be keeping track of Studio participation with a counter system which starts at 0 by default.
 
 Format: `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
 
@@ -214,24 +299,13 @@ Format: `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
 * If a student's `Attendance` is `false` and the Participation score to be added is greater than 0, the student will also be marked as having attended the Studio.
 
 Examples:
+* `participation 4 ses/9 add/1` Adds `1` to the Participation score of student with index number `4` for Studio session `9`
 * `participation 1, 2, 3 ses/12 add/500`
 * `participation 4, 6 ses/2 add/-300`
-* `participation 4 ses/9 add/1`
 
-### Adding grades for an assessment:  `grade`
-Avengers will be able to add a student’s grade for a particular assessment.
-
-Format: `grade INDEX a/ASSESSMENT g/GRADE`
-
-* Record the student’s `GRADE` for the `ASSESSMENT`.
-* The input `GRADE` must be a positive integer.
-
-Example:
-* `grade 1 a/RA1 g/15`
-
-### Displaying the grades for an assessment:  `show`
-Avengers will be able to view the grades and the average score of all the students 
-for a particular assessment.
+### Visualizing data in Academy Directory
+#### Displaying the grades for an assessment:  `show`
+Displays the grades and the average score of all the students for a particular assessment.
 
 Format: `show ASSESSMENT`
 
@@ -241,165 +315,235 @@ as the average score.
 Examples:
 * `show RA1`
 
-### Listing all students : `list`
-
-Shows a list of all students in the academy directory.
-
-Format: `list`
-
-
-### Clearing all students : `clear`
-
-Clears all students from the academy directory. Results in an empty academy directory
-
-Format: `clear`
-
-### Sorting the list : `sort`
-
-Sorts the list of students in the academy directory.
-
-Format: `sort attr/ATTRIBUTE ord/ORDER`
-
-* The sort can be done on some `Attribute`  in either ascending order or descending order.
-* `Attribute` can only be `name`, `participation`, `RA1`, `Midterm`, `RA2`, `Final` and `Average`.
-* `Attribute` is case-insensitive. e.g. `name` and `NAME` will both sort the list by `Name`.
-* `Order` can only be `asc` and `desc` which indicate either ascending or descending sort.
-* `Order` is case-insensitive. e.g. `ASC` and `Asc` will both sort the list in ascending order
-* Both `Attribute` and `Order` are required for the sorting to work.
-
-Examples:
-* `sort attr/RA1 ord/desc` sorts the list in descending order based on their `RA1` grades.
-* `sort attr/participation ord/asc` sorts the list in ascending order based on their participation score.
-
-### Visualizing assessments' grades of the entire class: `visualize`
-Avengers will be able to visualize the grades and the average score of all the students
-for all assessments.
+#### Visualizing assessments' grades of the entire class: `visualize`
+Plots the grades and the average score of all the students for all assessments.
 
 Format: `visualize`
 
 * Visualize assessment grades of the class with Box & Whisker plot
 * Any grade of any student that is not yet entered will be counted as `0`
 
-### Seeking help : `help`
+#### Sorting student list : `sort`
+
+Sorts the list of students in Academy Directory.
+
+Format: `sort attr/ATTRIBUTE ord/ORDER`
+
+* The sort can be done on some `ATTRIBUTE`  in either ascending order or descending order.
+* `ATTRIBUTE` can only be `name`, `participation`, `RA1`, `Midterm`, `RA2`, `Final` and `Average`.
+* `ATTRIBUTE` is case-insensitive. e.g. `name` and `NAME` will both sort the list by `Name`.
+* `ORDER` can only be `asc` and `desc` which indicate either ascending or descending sort.
+* `ORDER` is case-insensitive. e.g. `ASC` and `Asc` will both sort the list in ascending order
+* Both `ATTRIBUTE` and `ORDER` are required for the sorting to work.
+
+Examples:
+* `sort attr/RA1 ord/desc` sorts the list in descending order based on their `RA1` grades.
+* `sort attr/participation ord/asc` sorts the list in ascending order based on their participation score.
+
+### Others
+#### Listing all students : `list`
+
+Shows a list of all students in Academy Directory.
+
+Format: `list`
+
+* This command is very useful to escape from the focused list obtain after running certain commands
+  such as `filter`
+
+#### Clearing all students : `clear`
+
+Clears all students from Academy Directory. Results in an empty academy directory
+
+Format: `clear`
+
+#### Undo changes to Academy Directory: `undo`
+Undo changes made to Academy Directory
+
+Format: `undo`
+
+* `undo` only reverts changes made 
+* `undo` will display an error message if there are no changes to be undone
+
+#### Redo changes to Academy Directory: `redo`
+Redo changes made to Academy Directory
+
+Format: `redo`
+
+* `redo` only reverts changes made
+* `redo` will display an error message if there are no changes to be redone
+* 
+#### Seeking help : `help`
 
 ![help message](images/helpMessage.png)
 
-First-time avengers can seek in-depth assistance using AD with a `help` command, either
-generally or specifically.
+Provides in-depth assistance using AD with a `help` command, either generally or specifically.
 
-#### Viewing general help
+##### Viewing general help
 Format: `help`
 
 * The singular command `help` displays a menu of all commands available to use, as a list, and how
   to navigate each command, alongside the syntax for each command.
 
-#### Viewing specific help
+##### Viewing specific help
 
 Format: `help COMMAND_NAME`
 
-* Display all information related to the command, which includes
+* Displays all information related to the command, which includes
     * What the command is about.
     * Why the command is needed.
     * What the syntax for the command is.
     * Example of usage and expected results.
 
 Examples:
+* `help`
 * `help add`: Displays the exact same content as what is shown on this User Guide for the `add` command
   or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
-* `help list`
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### [Advanced Users Only] Viewing Commit History: `history`
-Avengers will be able to view local commit history.
+#### [For Advanced Users] Viewing Commit History: `history`
+Shows local commit history.
 
 Format: `history`
 
-- Only commands that result in a state change in AcademyDirectory will be committed. Such commands include
+- Only commands that result in a state change in Academy Directory will be committed. Such commands include
   `add`, `edit`, `delete`, `clear`, and more.
 - Commits are sorted based on time, with the most recent commit shown at the top and the initial commit shown
   at the bottom
-- The commit corresponding to current AcademyDirectory state is labelled with "(HEAD)"
-- The commit corresponding to old branch is labelled with "(PRIOR)"
+- The commit corresponding to current Academy Directory state is labelled with "(HEAD)"
+- The commit corresponding to old branch is labelled with "(CURRENT)"
+- The commit corresponding to old branch is labelled with "(OLD)"
 - Old branch is shown at the left, current branch at the right
+- The corresponding commit hash is the five character string displayed
 
-### [Advanced Users Only] Reverting Commit: `revert`
-Avengers will be able to revert state of AcademyDirectory to a previous commit
+#### [For Advanced Users] Reverting Commit: `revert`
+Reverts state of Academy Directory to a previous commit
 
 Format: `revert HASH`
 
-- The commit hash to use can be obtained using the `history` command
+- `HASH` refers to the commit hash of the commit to be reverted to
+- `HASH` can be obtained using the `history` command
 
 Example:
-* `revert 6fdfx`
-
-### Saving the data
-
-AcademyDirectory data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AcademyDirectory data are saved as a JSON file `[JAR file location]/data/academydirectory.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AcademyDirectory will discard all data and start with an empty data file at the next run.
-</div>
-
-### Saving commit
-
-AcademyDirectory will automatically save all generated commits. Only commands that change the AcademyDirectory data will
-generate a commit. There is no need to save manually.
-
-### Editing the version control related files
-
-To support `history` and `revert` commands, AcademyDirectory implements an internal version control system (VCS) which saves to disk 
-version control related files such as commits. 
-
-Version control related files are saved as text files at `[JAR file location]/data/vc/`. Advanced users are welcome to
-look at the files in this folder. However, editing any of the files or the directory structure is not recommended as the
-files are not intended for manual editing. Thus, incorrect manual editing may result in undefined behavior of the version
-control system.
-
+* `revert 6fdfx` reverts state of Academy Directory to the commit with hash starting with `6fdfx`
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AcademyDirectory home folder. Overwrite the version control folder it creates with the version
 control folder of your previous AcademyDirectory to retain commit history.
 
-**Q**: What are "Studios" in this application?<br>
-**A**: Studios are tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture.
 
-**Q**: What are "Avengers" in this application?<br>
-**A**: ‘Avenger’ is a special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
-The two terms are used throughout the UG in substitute of ‘tutorial’ and ‘tutor’, in consideration of the targeted audience of our application as CS1101S tutors.
+**Q**: How do I save my data?<br>
+**A**: Academy Directory data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+**Q**: Can I edit the data file?<br>
+**A**: Academy Directory data are saved as a JSON file `[JAR file location]/data/academydirectory.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Academy Directory will discard all data and start with an empty data file at the next run.
+</div>
+
+**Q**: How do I commit changes made to Academy Directory?<br>
+**A**: Academy Directory implements an internal version control system (VCS) to keep track of state changes. Unlike some VCS, however, the internal VCS in Academy Directory will automatically stage and commit changes made
+to Academy Directory, including commit message. Only commands that change the Academy Directory data will be staged and committed.
+
+**Q**: Can I edit the version control files?<br>
+**A**: Version control related files are saved as text files at `[JAR file location]/data/vc/`. Advanced users are welcome to
+look at the files in this folder. 
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Invalid changes to any of the version control files may result in undefined behavior as this is not an intended use case. Proceed at your own risk.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
+## Summary
+This section provides a summary of commands and prefixes in Academy Directory
 
-## Command Summary
-Action | Format, Examples
---------|------------------
-[**Add Student**](#adding-a-student-add) | `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER]` <br> e.g., `add n/James Ho te/@TeleHandle p/22224444 e/jamesho@example.com t/Streams`
-[**Find Student**](#locating-students-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-[**Delete Student**](#deleting-a-student-delete) | `delete INDEX`<br> e.g., `delete 3`
-[**Tag Student**](#tagging-a-student--tag)| `tag INDEX t/TAG [t/TAG]...` <br> e.g., `tag 1 t/mission t/streams`
-[**Get Personal Information**](#getting-personal-information-of-students-get) | `get [p/] [e/] [te/] [n/NAME]` <br> e.g., `retrieve p/ e/ te/ n/Alex Yeoh`
-[**Edit Personal Information**](#editing-a-students-personal-information--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [te/TELE_HANDLE]` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-[**Edit Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` <br> e.g., `attendance 1, 2 ses/1 att/1`
-[**Edit Studio Participation**](#editing-a-students-studio-participation-participation) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `participation 1 ses/12 att/0`
-[**Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` <br> e.g., `grade INDEX as/RA1 g/15`
-[**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` <br> e.g., `show RA1`
-[**Visualize all grades**](#visualizing-assessments-grades-of-the-entire-class-visualize) | `visualize`
-[**List All Students**](#listing-all-students--list) | `list`
-[**Clear Student List**](#clearing-all-students--clear) | `clear`
-[**Sort Student List**](#sorting-the-list--sort) | `sort attr/ATTRIBUTE ord/ORDER`<br> e.g., `sort attr/average ord/asc`
-[**Help**](#seeking-help--help) | `help`
-[**Exit**](#exiting-the-program--exit) | `exit`
-[**View Commit History**](#advanced-users-only-viewing-commit-history-history) | `history`
-[**Revert Commit**](#advanced-users-only-reverting-commit-revert) | `revert HASH` <br> e.g., `revert df7x3` </br>
+### Command Summary
+This subsection provides a summary for all the commands used in Academy Directory
+
+Action | Format | Examples
+--------|--------|----------
+[**Add Student**](#adding-a-student-add) | `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER]` | `add n/James Ho te/@TeleHandle p/22224444 e/jamesho@example.com t/Streams`
+[**Delete Student**](#deleting-a-student-delete) | `delete INDEX` | `delete 3`
+[**Tag Student**](#tagging-a-student--tag)| `tag INDEX t/TAG [t/TAG]...` | `tag 1 t/mission t/streams`
+[**Get Personal Detail**](#getting-personal-detail-of-students-get) | `get [p/] [e/] [te/] [n/NAME]` | `get p/ e/ te/ n/Alex Yeoh`
+[**Edit Personal Detail**](#editing-a-students-detail--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [te/TELE_HANDLE]` | `edit 2 n/James Lee e/jameslee@example.com`
+[**Add Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` | `grade INDEX as/RA1 g/15`
+[**Edit Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` | `attendance 1, 2 ses/1 att/1`
+[**Edit Participation**](#editing-a-students-studio-participation-participation) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD` | `participation 1 ses/12 att/0`
+[**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` | `show RA1`
+[**Visualize all grades**](#visualizing-assessments-grades-of-the-entire-class-visualize) | `visualize` | `visualize`
+[**Filter Academy Directory**](#filtering-academy-directory-by-name-or-tag-filter) | `filter KEYWORD [MORE_KEYWORDS]` | `filter James Jake`
+[**Sort Student List**](#sorting-student-list--sort) | `sort attr/ATTRIBUTE ord/ORDER` | `sort attr/average ord/asc`
+[**List All Students**](#listing-all-students--list) | `list` | `list`
+[**Clear Student List**](#clearing-all-students--clear) | `clear` | `clear`
+[**Undo**](#undo-changes-to-academy-directory-undo) | `undo` | `undo`
+[**Redo**](#redo-changes-to-academy-directory-redo) | `redo` | `redo`
+[**Help**](#seeking-help--help) | `help` | `help add`
+[**Exit**](#exiting-the-program--exit) | `exit` | `exit`
+[**View Commit History**](#advanced-users-only-viewing-commit-history-history) | `history` | `history`
+[**Revert Commit**](#advanced-users-only-reverting-commit-revert) | `revert HASH` | `revert df7x3`
+
+### Prefix Summary
+This subsection provides a summary for all the fields and their prefixes 
+used in Academy Directory. Note that not all fields have a prefix; such fields
+will have `N.A.` be written in their `Prefix` column
+
+Field | Prefix
+------|-------
+INDEX | **N.A.**
+NAME | **n/**
+EMAIL | **e/**
+TELE_HANDLE | **te/**
+PHONE_NUMBER | **p/**
+TAG | **t/**
+STUDIO_SESSION   | **ses/**
+ATTENDANCE_STATUS | **att/**
+PARTICIPATION_TO_ADD | **add/**
+ASSESSMENT | **as/**
+GRADE | **g/**
+ATTRIBUTE | **attr/**
+ORDER | **ord/**
+HASH| **N.A**
+
+## Glossary
+This section explains the commonly used terms in this user guide
+
+Term | Definition | Comments
+-----| ----------- | ---------- 
+Studios | Studios are tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | 
+Avengers | Avenger is a special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades. 
+CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore |
+Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something
+Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something
+Java | A program that allows running other programs written in Java programming language
+Operating System | Software that manages computer hardware and other computer software | 
+Command | An instruction typed by a user to Academy Directory
+Command Box | A part of the Academy Directory's GUI which can be used by users to type commands
+Field | Additional information that is provided to a command for the command to be executed properly | May or may not have an associated prefix
+Parameter | Part of the command which provides additional information provided by the user | Actual values for the fields
+Prefix | An abbreviation of a parameter | Always ends with a backslash ('/')
+
+## Links
+### Academy Directory Resources
+- [Developer Guide](https://ay2122s1-cs2103t-t15-3.github.io/tp/DeveloperGuide.html): if you're interested in developing Academy Directory further, or only wish to see the gory details
+- [About Us](https://ay2122s1-cs2103t-t15-3.github.io/tp/AboutUs.html): if you're interested to learn more about us
+- [Github](https://github.com/AY2122S1-CS2103T-t15-3/tp): if you want to see our code or report any issues
+
+### Other Sources
+- [Java SE Runtime Download](https://www.oracle.com/java/technologies/downloads/) to install the latest Java version
+- [AddressBook 3 (AB3)](https://github.com/se-edu/addressbook-level3) to see how we started this project from
+
+## Acknowledgements
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+- The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/)
+- Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git)
