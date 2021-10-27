@@ -57,7 +57,8 @@ public class CsvUtil {
     );
 
     /**
-     * Writes a List of Person objects as a csv file
+     * Writes a List of Person objects as a csv file.
+     *
      * @param personList List of Person objects to write
      * @param path file path for csv
      * @param exportPrefixes Prefixes for the fields to be included in the csv
@@ -80,6 +81,7 @@ public class CsvUtil {
 
     /**
      * Gets the field for a person, prefix combination.
+     *
      * @param prefix
      * @param person
      * @return String data for the person,prefix combination
@@ -90,6 +92,7 @@ public class CsvUtil {
 
     /**
      * Gets the field name for a prefix.
+     *
      * @param prefix
      * @return String data for the person,prefix combination
      */
@@ -99,7 +102,6 @@ public class CsvUtil {
 
     /**
      * Serializes a {@code Person} into an array of Strings.
-     *
      * First member is always Name, rest of array is filled based on exportPrefixes.
      *
      * @param person Person object to serialize
@@ -121,7 +123,8 @@ public class CsvUtil {
     }
 
     /**
-     * Creates a header row when provided a series of Prefixes
+     * Creates a header row when provided a series of Prefixes.
+     *
      * @param prefixes List of prefixes to add
      * @return String Array of the headers
      */

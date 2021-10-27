@@ -89,13 +89,15 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Sets the {@code Prefix} store value
+     * Sets the {@code Prefix} store value.
+     *
      * @param prefixes Collection of {@code Prefix} to keep track of
      */
     void setPrefixes(Collection<Prefix> prefixes);
 
     /**
-     * Returns the stored Collection of prefixes as a Set
+     * Returns the stored Collection of prefixes as a Set.
+     *
      * @return Set of Prefixes
      */
     Set<Prefix> getPrefixes();

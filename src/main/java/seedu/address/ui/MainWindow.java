@@ -80,9 +80,7 @@ public class MainWindow extends UiPart<Stage> {
         fileChooser.getExtensionFilters().addAll(filter);
         fileChooser.setInitialDirectory(new File("./"));
         fileChooser.setSelectedExtensionFilter(filter);
-
-
-
+        
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
