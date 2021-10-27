@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import java.awt.event.FocusEvent;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
