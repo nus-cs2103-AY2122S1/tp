@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -55,9 +56,17 @@ public class ParticipantCard extends UiPart<Region> {
         address.setText(participant.getAddressValue());
         email.setText(participant.getEmailValue());
         birthDate.setText(participant.getBirthDateString());
-        nextOfKins.setText(IntStream.range(1, participant.getNextOfKins().size() + 1)
-                .mapToObj(i -> i + ". " + participant.getNextOfKins().get(i - 1).toString() + "\n")
-                .collect(Collectors.joining()));
+        nextOfKins.setText(getListString(participant.getNextOfKins()));
+    }
+
+    private <T> String getListString(List<T> list) {
+        if (list.isEmpty()) {
+            return "";
+        }
+
+        return IntStream.range(1, list.size() + 1)
+                .mapToObj(i -> i + ". " + list.get(i - 1).toString() + "\n")
+                .collect(Collectors.joining());
     }
 
     @Override
