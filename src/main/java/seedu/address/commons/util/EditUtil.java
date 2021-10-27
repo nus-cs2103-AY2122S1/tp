@@ -10,6 +10,7 @@ import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
 import seedu.address.model.tag.Tag;
 
 public class EditUtil {
@@ -24,6 +25,8 @@ public class EditUtil {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
+        private Pin pin;
+
 
         public EditPersonDescriptor() {}
 
@@ -38,6 +41,7 @@ public class EditUtil {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setBirthday(toCopy.birthday);
+            setPin(toCopy.pin);
         }
 
         /**
@@ -102,6 +106,14 @@ public class EditUtil {
 
         public Optional<Birthday> getBirthday() {
             return Optional.ofNullable(birthday);
+        }
+
+        public void setPin(Pin pin) {
+            this.pin = pin;
+        }
+
+        public Optional<Pin> getPin() {
+            return Optional.ofNullable(pin);
         }
 
         @Override

@@ -56,4 +56,9 @@ public interface Logic {
      * @return Set of Prefixes
      */
     Set<Prefix> getPrefixStore();
+
+    /**
+     * Returns an unmodifiable list of upcoming birthdays
+     */
+    ObservableList<Person> getBirthdayReminderList();
 }

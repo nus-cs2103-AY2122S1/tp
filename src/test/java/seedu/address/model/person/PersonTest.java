@@ -11,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.HANNAH;
+import static seedu.address.testutil.TypicalPersons.INDIGO;
 
 import org.junit.jupiter.api.Test;
 
@@ -60,6 +62,30 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void comparePerson() {
+        // Both are unpinned
+        assertTrue(BOB.compareTo(ALICE) == 0);
+
+        // Both are pinned
+        assertTrue(HANNAH.compareTo(INDIGO) == 0);
+
+        // First is pinned
+        assertTrue(HANNAH.compareTo(BOB) == -1);
+
+        // Second is pinned
+        assertTrue(ALICE.compareTo(INDIGO) == 1);
+    }
+
+    @Test
+    public void correctIsPinned() {
+        // Bob is not pinned
+        assertTrue(!BOB.isPinned());
+
+        // Hannah is pinned
+        assertTrue(HANNAH.isPinned());
     }
 
 

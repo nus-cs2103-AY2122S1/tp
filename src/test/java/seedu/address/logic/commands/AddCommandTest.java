@@ -160,6 +160,10 @@ public class AddCommandTest {
         public Set<Prefix> getPrefixes() {
             throw new AssertionError("This method should not be called.");
         }
+
+        public ObservableList<Person> getBirthdayReminderList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

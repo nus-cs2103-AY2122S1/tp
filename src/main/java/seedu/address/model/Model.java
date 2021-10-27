@@ -101,4 +101,7 @@ public interface Model {
      * @return Set of Prefixes
      */
     Set<Prefix> getPrefixes();
+
+    /** Returns an unmodifiable view of person sorted by with upcoming birthday at the top list */
+    ObservableList<Person> getBirthdayReminderList();
 }
