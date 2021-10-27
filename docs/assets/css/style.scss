@@ -4,9 +4,44 @@
 
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";
+  "minima/initialize",
+  "bootstrap/bootstrap";
 
 .icon {
     height: 21px;
     width: 21px
+}
+
+.label {
+    display: inline;
+    padding: 0.2em 0.6em 0.3em;
+    font-size: 60%;
+    font-weight: 700;
+    line-height: 1;
+    color: #FFFFFF;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25em;
+    background-color: #777;
+}
+
+.label-primary {
+    background-color: #F0AD4E;
+}
+
+.label-success {
+    background-color: #04AA6D;
+}
+
+.label-info {
+    background-color: #2196F3;
+}
+
+.label-warning {
+    background-color: #FF9800;
+}
+
+.label-danger {
+    background-color: #F44336;
 }

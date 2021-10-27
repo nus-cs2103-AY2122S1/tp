@@ -1,0 +1,27 @@
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: #555555;
+    -fx-opacity: 0.9;
+}
+
+.response-bar {
+    -fx-background-color: derive(#1d1d1d, 30%);
+}
+
+.response-bar .label {
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+    -fx-padding: 4px;
+}
+
+.pane-with-border {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Semibold";
+}
