@@ -312,20 +312,19 @@ Example usages:
 ___
 
 ## Commands Table
-**TODO**
 
 | Command | Usage |
 | :--------: | -------- |
-| add     | Text     |
-| delete     | Text     |
-| update     | Text     |
-| status     | Text     |
-| rename     | Text     |
-| genre     | Text     |
-| genrelist | Text    |
-| list     | Text     |
-| clear    | Text     |
-| help     | Text     |
+| [add](#adding-an-anime-add)     | `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE1] [g/GENRE2] ...` |
+| [delete](#deleting-an-anime-delete)     | `delete INDEX` |
+| [update](#updating-anime-episode-update)     | `update INDEX e/NEWEPISODE` |
+| [status](#updating-anime-watch-status-status)     | `status INDEX s/UPDATEDSTATUS` |
+| [rename](#updating-anime-title-rename)     | `rename INDEX n/NEWTITLE` |
+| [genre](#adding-deleting-genre-from-anime-genre)     | `genre INDEX c/ACTION g/GENRE [g/GENRE]` |
+| [genrelist](#list-all-supported-genres-genrelist) | Text    |
+| [list](#listing-anime-based-on-watch-status-list)     | `list [s/STATUS]` |
+| [clear](#clearing-all-user-data-clear)    | `clear` |
+| [help](#viewing-all-supported-commands-help)     | `help` |
 
 ## Glossary
 
