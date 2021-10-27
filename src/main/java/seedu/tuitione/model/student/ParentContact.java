@@ -11,8 +11,9 @@ public class ParentContact {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should only contain numbers, should be 8 digits long and should start with either a "
+                    + "'9','8' or '6'.";
+    public static final String VALIDATION_REGEX = "\\d{8}";
     public final String value;
 
     /**
@@ -30,7 +31,8 @@ public class ParentContact {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && (test.charAt(0) == '9' || test.charAt(0) == '8'
+                || test.charAt(0) == '6');
     }
 
     @Override
