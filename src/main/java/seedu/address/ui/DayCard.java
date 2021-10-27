@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
@@ -40,9 +39,8 @@ public class DayCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public DayCard(DayOfWeek day, ObservableList<Person> stafflist) {
+    public DayCard(DayOfWeek day, ObservableList<Person> stafflist, Period currentPeriod) {
         super(FXML);
-        Period currentPeriod = ParserUtil.initializePeriodToThisWeek();
         this.day = day;
         dayLabel.setText(day.toString().substring(0, 3));
         slotPane.getChildren().addAll(new SlotCard(day, Slot.MORNING, stafflist, currentPeriod).getRoot(),
