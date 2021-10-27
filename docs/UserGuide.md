@@ -69,6 +69,7 @@ If you are familiar with Unix commands, this is definitely for you!
 Shows a message explaining how to access the help page.
 
 ![help message](images/commands/HelpCommand/help.png)
+
 Example: `help`
 
 ### <a name="exit"></a>1.2 Exit: `exit`
