@@ -134,18 +134,24 @@ public class MainWindow extends UiPart<Stage> {
         eventContent.getChildren().addAll(eventImage, eventLabel);
         eventsTab.setGraphic(eventContent);
 
+        HBox helpContent = new HBox();
         Button helpButton = createTabButton("/images/help.png");
         helpButton.setOnAction(e -> handleHelp());
         helpButton.setStyle(BUTTON_STYLE);
         helpButton.setTooltip(new Tooltip("Help"));
-        helpTab.setGraphic(helpButton);
+        Label helpLabel = new Label("Help     ");
+        helpContent.getChildren().addAll(helpButton, helpLabel);
+        helpTab.setGraphic(helpContent);
         helpTab.setDisable(true);
 
+        HBox exitContent = new HBox();
         Button exitButton = createTabButton("/images/exit.png");
         exitButton.setOnAction(e -> handleExit());
         exitButton.setStyle(BUTTON_STYLE);
         exitButton.setTooltip(new Tooltip("Exit"));
-        exitTab.setGraphic(exitButton);
+        Label exitLabel = new Label("Exit     ");
+        exitContent.getChildren().addAll(exitButton, exitLabel);
+        exitTab.setGraphic(exitContent);
         exitTab.setDisable(true);
 
         tabPane.setRotateGraphic(false);
