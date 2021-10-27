@@ -15,7 +15,7 @@ public class EditCommandParserTest {
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
-    public void parseCommand_edit_lesson() throws Exception {
+    public void arseCommand_editLesson_correctCommandReturned() throws Exception {
         int index = 1;
 
         Lesson lesson = new LessonBuilder().build();

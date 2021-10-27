@@ -48,7 +48,7 @@ public class EditLessonCommand extends EditCommand {
     private final EditLessonDescriptor editLessonDescriptor;
 
     /**
-     * @param targetIndex          of the lesson in the filtered lesson list to edit
+     * @param targetIndex Index of the lesson in the filtered lesson list that is to be edited
      * @param editLessonDescriptor details to edit the lesson with
      */
     public EditLessonCommand(Index targetIndex, EditLessonDescriptor editLessonDescriptor) {

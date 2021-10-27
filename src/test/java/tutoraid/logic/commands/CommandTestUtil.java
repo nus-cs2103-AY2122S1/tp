@@ -95,7 +95,7 @@ public class CommandTestUtil {
             " " + CliSyntax.PREFIX_PARENT_PHONE + "911a"; // 'a' not allowed in phones
 
     public static final String INVALID_LESSON_NAME_DESC =
-            " " + CliSyntax.PREFIX_LESSON_NAME + "Maths&";
+            " " + CliSyntax.PREFIX_LESSON_NAME + "Maths&"; // alphanumeric chars only
     public static final String INVALID_CAPACITY_DESC =
             " " + CliSyntax.PREFIX_LESSON_CAPACITY + "911.1"; // must be integer
     public static final String INVALID_PRICE_DESC =
