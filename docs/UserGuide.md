@@ -275,6 +275,18 @@ Examples:
 * `deleteassessment 1 a/Midterms`
 * `deleteassessment 5 a/Lab5`
 
+#### Adding a note: `note`
+
+Sets the note of the student to the given input.
+
+Format: `note n/STUDENTNAME no/NOTE`
+
+* Overwrites the existing note of the student with the new note.
+
+Examples:
+* `note n/Brian no/is weak in environment model.`
+* `note n/Jun Wei no/is strong in substitution model.`
+
 ### Group management features
 
 <div markdown="block" class="alert alert-info">
@@ -317,13 +329,24 @@ Examples:
 
 Creates a group with the given group name and given description so that students can be added into it.
 
-Format: `addgroup n/GROUPNAME d/DESCRIPTION`
+Format: `addgroup g/GROUPNAME d/DESCRIPTION`
 
 * Creates a group with the specified `GROUPNAME` and `DESCRIPTION`.
 
 Examples:
 * `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod`
 that students can be added into.
+
+#### Changing the group of a student: `changegroup`
+
+Changes the group which the given student belongs in to the given group.
+
+Format: `changeGroup n/STUDENTNAME g/GROUPNAME`
+
+* The student with the specified `STUDENTNAME` has its group changed to the group with the specified `GROUPNAME`.
+
+Examples:
+* `changegroup n/Brian g/CS2101` changes the group that `Brian` belongs in to `CS2101`.
 
 #### Deleting a group: `deletegroup`
 
