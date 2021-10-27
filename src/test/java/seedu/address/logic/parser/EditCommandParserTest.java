@@ -1,53 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMPLOYMENT_TYPE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMPLOYMENT_TYPE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EXPECTED_SALARY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EXPECTED_SALARY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EXPERIENCE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EXPERIENCE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMPLOYMENT_TYPE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPECTED_SALARY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPERIENCE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEVEL_OF_EDUCATION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.LEVEL_OF_EDUCATION_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.LEVEL_OF_EDUCATION_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NOTES_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NOTES_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMPLOYMENT_TYPE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMPLOYMENT_TYPE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -60,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -122,6 +77,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EXPERIENCE_DESC,
                 Experience.MESSAGE_CONSTRAINTS); // invalid experience
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_INTERVIEW_DESC, Interview.MESSAGE_CONSTRAINTS); // invalid tag
+
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -151,7 +108,7 @@ public class EditCommandParserTest {
                 + TAG_DESC_HUSBAND + NAME_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_AMY
                 + EMPLOYMENT_TYPE_DESC_AMY + EXPECTED_SALARY_DESC_AMY
                 + LEVEL_OF_EDUCATION_DESC_AMY + EXPERIENCE_DESC_AMY + TAG_DESC_FRIEND
-                + NOTES_DESC_AMY;
+                + INTERVIEW_DESC_AMY + NOTES_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB)
@@ -161,6 +118,7 @@ public class EditCommandParserTest {
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
                 .withExperience(VALID_EXPERIENCE_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withInterview(VALID_INTERVIEW_AMY)
                 .withNotes(VALID_NOTES_AMY)
                 .build();
 
@@ -238,6 +196,12 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // interview
+        userInput = targetIndex.getOneBased() + INTERVIEW_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withInterview(VALID_INTERVIEW_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // notes
         userInput = targetIndex.getOneBased() + NOTES_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withNotes(VALID_NOTES_AMY).build();
@@ -250,11 +214,11 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + TAG_DESC_FRIEND
+                + EMAIL_DESC_AMY + TAG_DESC_FRIEND + INTERVIEW_DESC_AMY
                 + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY
                 + EXPECTED_SALARY_DESC_AMY + LEVEL_OF_EDUCATION_DESC_AMY
                 + EXPERIENCE_DESC_AMY + NOTES_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
+                + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + INTERVIEW_DESC_BOB
                 + EXPECTED_SALARY_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB
                 + EXPERIENCE_DESC_BOB + TAG_DESC_HUSBAND + NOTES_DESC_BOB;
 
@@ -266,6 +230,7 @@ public class EditCommandParserTest {
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
                 .withExperience(VALID_EXPERIENCE_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withInterview(VALID_INTERVIEW_BOB)
                 .withNotes(VALID_NOTES_BOB)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

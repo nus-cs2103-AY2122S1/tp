@@ -18,7 +18,7 @@ import java.util.Date;
 public class Interview {
     public static final Interview EMPTY_INTERVIEW = new Interview("");
     public static final String PARSE_FORMAT = "y-M-d, H:m"; //e.g. 2022-09-21, 9:30
-    public static final String DISPLAY_FORMAT = "MMM dd yyyy, HH:mm"; //e.g. Sep 21 2022, 09:30
+    public static final String DISPLAY_FORMAT = "MMM dd yyyy , HH:mm"; //e.g. Sep 21 2022, 09:30
     public static final String EMPTY_TIME = "-";
     public static final String MESSAGE_CONSTRAINTS =
             "Interview time should follow the format: [year-month-date, hour-minute]. E.g. i/2021-09-01, 8:00 or i/21-9-1,08:00";
@@ -44,12 +44,16 @@ public class Interview {
      * Returns true if a given string is a valid interview time which follows the timing format.
      */
     public static boolean isValidInterviewTime(String test) {
+        if (test.equals(EMPTY_TIME)) {
+            return true;
+        }
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
             LocalDate.parse(test, formatter);
         } catch (DateTimeParseException e) {
             return false;
         }
+
         return true;
     }
 
@@ -81,7 +85,6 @@ public class Interview {
                 e.printStackTrace();
             }
         }
-
         return formatted;
     }
 

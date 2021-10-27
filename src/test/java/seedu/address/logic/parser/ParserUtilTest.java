@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
@@ -40,6 +41,7 @@ public class ParserUtilTest {
     private static final String INVALID_LEVEL_OF_EDUCATION = "Kindergarten";
     private static final String INVALID_EXPERIENCE = "-1";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_INTERVIEW = "monday";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -51,6 +53,7 @@ public class ParserUtilTest {
     private static final String VALID_EXPERIENCE = "1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_Interview = "2021-10-29, 10:30";
     private static final String VALID_NOTES = "He is a very good candidate!";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -334,6 +337,16 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseInterview_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInterview(null));
+    }
+
+    @Test
+    public void parseInterview_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInterview(INVALID_INTERVIEW));
     }
 
     @Test
