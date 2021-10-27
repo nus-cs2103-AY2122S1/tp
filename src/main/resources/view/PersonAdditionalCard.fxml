@@ -24,14 +24,14 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="name" text="\$first" styleClass="cell_big" />
             </HBox>
-            <VBox fx:id="labelBoxInterior" styleClass="cell_small_label">
-                <Label fx:id="room" styleClass="cell_small_label" text="\$room" />
-                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-                <Label fx:id="faculty" styleClass="cell_small_label" text="\$faculty" />
-                <Label fx:id="vaccStatus" styleClass="cell_small_label" text="\$vaccStatus" />
+            <VBox fx:id="labelBoxInterior" styleClass="cell_normal">
+                <Label fx:id="room" styleClass="cell_normal" text="\$room" />
+                <Label fx:id="phone" styleClass="cell_normal" text="\$phone" />
+                <Label fx:id="email" styleClass="cell_normal" text="\$email" />
+                <Label fx:id="faculty" styleClass="cell_normal" text="\$faculty" />
+                <Label fx:id="vaccStatus" styleClass="cell_normal" text="\$vaccStatus" />
             </VBox>
         </VBox>
         <HBox fx:id="informationContainer" alignment="CENTER_RIGHT" minHeight="105">
