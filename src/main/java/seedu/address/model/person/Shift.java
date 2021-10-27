@@ -212,9 +212,21 @@ public class Shift {
      */
     public Shift add(LocalDate startDate, LocalDate endDate) {
         Period period = new Period(startDate, endDate);
-        RecurrencePeriod recurrencePeriod = new RecurrencePeriod(period, slot);
-        List<RecurrencePeriod> recurrences = recurrencePeriod.unionByDuration(this.recurrences).stream()
-                .collect(Collectors.toList());
+        Collection<Period> nonOverlaps = List.of(period);
+        for (RecurrencePeriod r : recurrences) {
+            Collection<Period> temp = new ArrayList<>();
+            for (Period p: nonOverlaps) {
+                temp.addAll(p.complement(r));
+            }
+            nonOverlaps = temp;
+        }
+        List<RecurrencePeriod> recurrences = this.recurrences;
+        for (Period p : nonOverlaps) {
+            RecurrencePeriod recurrencePeriod = new RecurrencePeriod(p, slot);
+            recurrences = recurrencePeriod.unionByDuration(recurrences).stream()
+                    .collect(Collectors.toList());
+        }
+
         return new Shift(dayOfWeek, slot, recurrences);
     }
 
