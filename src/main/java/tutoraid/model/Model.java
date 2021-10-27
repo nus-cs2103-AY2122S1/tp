@@ -131,6 +131,8 @@ public interface Model {
      * Deletes student from lesson(s).
      */
     void deleteStudentFromLessons(Student student);
+
+    /*
      * Replaces the given lesson {@code target} with {@code editedLesson}.
      * {@code target} must exist in the lesson book.
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the
@@ -163,7 +165,6 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
-     * @param predicate
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
