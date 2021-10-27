@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.person.PersonTestUtil.createPeriod;
@@ -52,6 +53,35 @@ public class ShiftTest {
 
 
     }
+
+    @Test
+    public void getWorkingHour_test() {
+        Period toRead = createPeriod(1, 14);
+        Period less = createPeriod(1, 7);
+        Period more = createPeriod(1, 20);
+        Shift toTest = firstShift.add(LocalDate.of(1, 1, 1),
+                LocalDate.of(1, 1, 14));
+        assertEquals(12, toTest.getWorkingHour(toRead));
+        assertEquals(6, toTest.getWorkingHour(less));
+        assertEquals(12, toTest.getWorkingHour(more));
+    }
+
+    @Test
+    public void isWorkingExactWithin() {
+        Period exact = createPeriod(1, 14);
+        Shift toTest = firstShift.add(LocalDate.of(1, 1, 1),
+                LocalDate.of(1, 1, 14));
+        assertTrue(toTest.isWorkingExactWithin(exact));
+
+        Period notExactButWithin = createPeriod(1, 7);
+        assertTrue(toTest.isWorkingExactWithin(notExactButWithin));
+
+        Period moreThanNotExact = createPeriod(1, 28);
+        assertFalse(toTest.isWorkingExactWithin(moreThanNotExact));
+
+
+    }
+
 
     @Test
     public void remove_successTest() {

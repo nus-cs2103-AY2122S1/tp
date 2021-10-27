@@ -127,9 +127,11 @@ public class Shift {
 
     /**
      * Returns whether the shift is working during {@code period}
-     * for all the dates in the period
+     * for all the dates in the period. False if and only if
+     * there is some date in the period that is not
+     * there.
      */
-    public boolean isWorkingExact(Period period) {
+    public boolean isWorkingExactWithin(Period period) {
         long numOfDates = period.toList()
                 .stream()
                 .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
@@ -150,27 +152,17 @@ public class Shift {
                 .collect(Collectors.toList());
 
         return recurrences.stream()
-                .filter(p ->
-                        0 != dates.stream()
+                .mapToLong(p -> dates.stream()
                                 .filter(date -> p.contains(date)) //find any date within the period
                                 .count() //that is in recurrence
                 )
-                .count();
+                .sum();
     }
 
 
     public long getWorkingHour(Period period) {
-        List<LocalDate> dates = period.toList()
-                .stream()
-                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
-                .collect(Collectors.toList());
         return recurrences.stream()
-                .filter(p ->
-                        0 != dates.stream()
-                                .filter(date -> p.contains(date)) //find any date within the period
-                                .count() //that is in recurrence
-                )
-                .mapToLong(p -> p.getWorkingHour())
+                .mapToLong(p -> p.getWorkingHour(dayOfWeek, period))
                 .sum();
 
 
