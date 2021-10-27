@@ -16,20 +16,25 @@ class JsonAdaptedOrder {
     private final List<JsonAdaptedItemOrder> itemOrders = new ArrayList<>();
     private final String id;
     private final Instant timeStamp;
+    private final Double totalCosts;
 
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("itemOrders") List<JsonAdaptedItemOrder> itemOrders,
                             @JsonProperty("id") String id,
-                            @JsonProperty("timeStamp") Instant timeStamp) {
+                            @JsonProperty("timeStamp") Instant timeStamp,
+                            @JsonProperty("totalCosts") Double totalCosts) {
         this.itemOrders.addAll(itemOrders);
         this.id = id;
         this.timeStamp = timeStamp;
+        this.totalCosts = totalCosts;
     }
 
     public JsonAdaptedOrder(TransactionRecord source) {
         this.id = source.getId();
         this.timeStamp = source.getTimestamp();
         itemOrders.addAll(source.getItems().stream().map(JsonAdaptedItemOrder::new).collect(Collectors.toList()));
+        totalCosts = source.getItems().stream()
+                .map(item -> item.getCount() * item.getSalesPrice()).reduce((a, b) -> a + b).get();
     }
 
     public TransactionRecord toModelType() {

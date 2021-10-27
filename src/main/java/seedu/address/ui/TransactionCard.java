@@ -45,7 +45,9 @@ public class TransactionCard extends UiPart<Region> {
         index.setText(displayedIndex + ". ");
         timestamp.setText(transaction.getTimeString());
         id.setText(transaction.getId());
-        totalPrice.setText("Total price: -");
+        Double sp = transaction.getItems().stream()
+                .map(item -> item.getCount() * item.getSalesPrice()).reduce((a, b) -> a + b).get();
+        totalPrice.setText("Total price: " + sp.toString());
         totalItems.setText(String.format("Total items: %d", transaction.getItems().size()));
     }
 
