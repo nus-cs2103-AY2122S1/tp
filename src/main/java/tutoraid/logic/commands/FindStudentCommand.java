@@ -7,7 +7,7 @@ import tutoraid.model.Model;
 import tutoraid.model.student.NameContainsSubstringsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all students in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindStudentCommand extends FindCommand {

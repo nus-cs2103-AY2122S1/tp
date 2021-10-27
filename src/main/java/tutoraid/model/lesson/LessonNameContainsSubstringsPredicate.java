@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import tutoraid.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Student}'s {@code Name} contains any of the substrings given.
+ * Tests that a {@code Lesson}'s {@code LessonName} contains any of the substrings given.
  */
 public class LessonNameContainsSubstringsPredicate implements Predicate<Lesson> {
     private final List<String> substrings;

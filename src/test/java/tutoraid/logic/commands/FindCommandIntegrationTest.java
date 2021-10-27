@@ -31,14 +31,14 @@ public class FindCommandIntegrationTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameContainsSubstringsPredicate}.
      */
     private NameContainsSubstringsPredicate prepareStudentPredicate(String userInput) {
         return new NameContainsSubstringsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameContainsSubstringsPredicate}.
      */
     private LessonNameContainsSubstringsPredicate prepareLessonPredicate(String userInput) {
         return new LessonNameContainsSubstringsPredicate(Arrays.asList(userInput.split("\\s+")));

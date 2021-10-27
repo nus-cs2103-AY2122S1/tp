@@ -23,7 +23,9 @@ public class Price {
      */
     public Price(String price) {
         requireNonNull(price);
-        checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
+        if (!price.equals("")) {
+            checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
+        }
         this.price = price;
     }
 
@@ -48,6 +50,9 @@ public class Price {
 
     @Override
     public String toString() {
+        if (price.equals("")) {
+            return "No price";
+        }
         return price;
     }
 

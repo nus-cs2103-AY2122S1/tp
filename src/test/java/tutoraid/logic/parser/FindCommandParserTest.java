@@ -14,7 +14,7 @@ import tutoraid.model.student.NameContainsSubstringsPredicate;
 public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code NameContainsSubstringsPredicate}.
      */
     private NameContainsSubstringsPredicate prepareFindStudentPredicate(String userInput) {
         return new NameContainsSubstringsPredicate(Arrays.asList(userInput.split("\\s+")));
