@@ -64,31 +64,24 @@ public class AddStudentCommand extends AddCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
-
         Module module;
         for (Module mod : lastShownList) {
             if (mod.getName().equals(moduleName)) {
                 module = mod;
-
                 if (module.hasStudent(studentToAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
                 }
-
                 module.addStudent(studentToAdd);
-
                 // for each task in this module's taskList, add it to a new UniqueTaskList
                 // give the new UniqueTaskList to student after all tasks have been added
                 UniqueTaskList thisModuleTaskList = module.getTaskList();
                 UniqueTaskList newStudentTaskList = new UniqueTaskList();
                 for (Task task : thisModuleTaskList) {
-
                     ModuleName moduleName = task.getTaskModuleName();
                     TaskId taskId = task.getTaskId();
                     TaskName taskName = task.getTaskName();
                     TaskDeadline taskDeadline = task.getTaskDeadline();
-
                     Task taskToAdd = new Task(moduleName, taskId, taskName, taskDeadline);
-
                     newStudentTaskList.add(taskToAdd);
                 }
                 studentToAdd.setTaskList(newStudentTaskList);
