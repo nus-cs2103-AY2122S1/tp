@@ -12,11 +12,11 @@ import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.AddEventCommandParser;
 import seedu.address.logic.parser.AddParticipantToEventParser;
 import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.DeleteEventCommandParser;
 import seedu.address.logic.parser.DoneCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FilterEventCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.RemoveEventCommandParser;
 import seedu.address.logic.parser.RemoveParticipantFromEventParser;
 import seedu.address.logic.parser.ShowEventDetailsCommandParser;
 import seedu.address.logic.parser.ShowEventParticipantsCommandParser;
@@ -134,7 +134,7 @@ public class CommandResultTest {
         // CommandResult from RemoveEventCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new RemoveEventCommandParser().parse(" 1").execute(model).isShowHelp());
+        assertFalse(new DeleteEventCommandParser().parse(" 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -266,7 +266,7 @@ public class CommandResultTest {
         // CommandResult from RemoveEventCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new RemoveEventCommandParser().parse(" 1").execute(model).isExit());
+        assertFalse(new DeleteEventCommandParser().parse(" 1").execute(model).isExit());
     }
 
     @Test

@@ -53,15 +53,15 @@ public class ParticipantTest {
     }
 
     @Test
-    public void removeEventTest() {
+    public void deleteEventTest() {
         Participant alexP = new ParticipantBuilder().build();
         assertTrue(alexP.getEvents().isEmpty());
         alexP.addEvent(SAMPLE_EVENT);
         alexP.addEvent(ANOTHER_EVENT);
-        alexP.removeEvent(ANOTHER_EVENT);
+        alexP.deleteEvent(ANOTHER_EVENT);
         ArrayList<Event> expectedEvents = new ArrayList<>(List.of(SAMPLE_EVENT));
         assertEquals(alexP.getEvents(), expectedEvents);
-        alexP.removeEvent(SAMPLE_EVENT);
+        alexP.deleteEvent(SAMPLE_EVENT);
         assertTrue(alexP.getEvents().isEmpty());
     }
 

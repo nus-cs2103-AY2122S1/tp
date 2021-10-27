@@ -129,7 +129,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in Managera.
      */
-    public void removeEvent(Event key) {
+    public void deleteEvent(Event key) {
         events.remove(key);
     }
 

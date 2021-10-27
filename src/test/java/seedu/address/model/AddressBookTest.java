@@ -106,10 +106,10 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removeEvent_eventInAddressBook_returnFalse() {
+    public void deleteEvent_eventInAddressBook_returnFalse() {
         addressBook.addEvent(SAMPLE_EVENT);
         assertTrue(addressBook.getEventList().contains(SAMPLE_EVENT));
-        addressBook.removeEvent(SAMPLE_EVENT);
+        addressBook.deleteEvent(SAMPLE_EVENT);
         assertFalse(addressBook.hasEvent(SAMPLE_EVENT));
     }
 

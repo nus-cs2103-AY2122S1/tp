@@ -150,11 +150,11 @@ public class Participant {
     }
 
     /**
-     * Removes a specific Event from the list of events.
+     * Deletes a specific Event from the list of events.
      *
      * @param event Event to be removed.
      */
-    public void removeEvent(Event event) {
+    public void deleteEvent(Event event) {
         events.remove(event);
     }
 
