@@ -356,7 +356,8 @@ Action | Summary | Format, Examples
 **Exit** | Exits the program | `exit`
 **Find** | Locates persons by name | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **FindTag** | Locates persons by tags (case insensitive) | `findTag TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
-**FindTag** | Locates persons by tags (case sensitive) | `findTagC TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
+**Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
+**Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
 **Help** | Displays help information | `help [COMMAND] [/d]`
 **List** | Lists all persons | `list`
 **Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
