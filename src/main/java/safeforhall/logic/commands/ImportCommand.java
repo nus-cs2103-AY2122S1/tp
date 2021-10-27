@@ -33,6 +33,7 @@ import safeforhall.model.person.VaccStatus;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
+    public static final String PARAMETERS = "CSV_NAME";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports resident information from the specified csv "
             + "file located within the /data folder\n"
             + "Note: \n"
