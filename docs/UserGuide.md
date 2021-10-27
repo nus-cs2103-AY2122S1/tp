@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming events 
-and the details of their participants**. It does not handle communication between the event organiser and the 
+Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming 
+[events](#glossary) and the details of their [participants](#glossary)**. It does not handle communication between the event organiser and the 
 participants.
 
 Managera is OS-independent meaning it will work on any operating system. (Windows, MacOS, Linux)
@@ -20,22 +20,22 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Editing a Participant: `edit`](#editing-a-participant--edit)
         * [Locating Participants by name: `find`](#locating-participants-by-name-find)
         * [Listing all Participants: `list`](#listing-all-participants--list)
-        * [Viewing a Participant's details: `view`](#view-participant-details-view)
+        * [Viewing a Participant's details: `view`](#viewing-a-participants-details-view)
         * [Adding Next of Kin to a Participant: `addNok`](#adding-next-of-kin-to-a-participant-addnok)
         * [Removing Next of Kin from a Participant: `deleteNok`](#removing-next-of-kin-from-a-participant-deletenok)
     * [Event](#event)
         * [Adding an event: `addEvent`](#adding-an-event-addevent)
         * [Deleting an event: `deleteEvent`](#deleting-an-event--deleteevent)
         * [Editing an event: `editEvent`](#editing-an-event--editevent)
-        * [Marking an Event as done: `done`](#mark-an-event-as-done-done)
+        * [Marking an Event as done: `done`](#marking-an-event-as-done-done)
         * [Locating Events by name: `findEvent`](#locating-events-by-name-findevent)
-        * [Filtering Events by time: `filterEvents`](#filter-events-filterevents)
-        * [Sorting Events by time: `sortEvents`](#sort-events-sortevents)
-        * [Listing all Events: `listEvents`](#list-events-listevents)
-        * [Showing an Event's details: `showDetails`](#show-event-details-showdetails)
-        * [Adding a Participant to an Event: `enroll`](#add-participant-to-event-enroll)
-        * [Remove a Participant from an Event: `expel`](#remove-participant-from-event-expel)
-        * [Showing an Event's Participants: `showParticipants`](#show-event-participants-showparticipants)
+        * [Filtering Events by time: `filterEvents`](#filtering-events-by-time-filterevents)
+        * [Sorting Events by time: `sortEvents`](#sorting-events-by-time-sortevents)
+        * [Listing all Events: `listEvents`](#listing-all-events-listevents)
+        * [Showing an Event's details: `showDetails`](#showing-an-events-details-showdetails)
+        * [Adding a Participant to an Event: `enroll`](#adding-a-participant-to-an-event-enroll)
+        * [Remove a Participant from an Event: `expel`](#removing-a-participant-from-an-event-expel)
+        * [Showing an Event's Participants: `showParticipants`](#showing-an-events-participants-showparticipants)
     * [Miscellaneous](#miscellaneous)
         * [Viewing help: `help`](#viewing-help--help)
         * [Clearing all Data: `clear`](#clearing-all-data--clear)
@@ -51,9 +51,12 @@ Managera is OS-independent meaning it will work on any operating system. (Window
 ## What this user guide is for
 
 This user guide aims to give a brief overview of what Managera is and what features it has.
-It contains instructions for [how to set up Managera](#quick_start), [how to use certain features](#features) 
+It contains instructions for [how to set up Managera](#quick-start), [how to use certain features](#features) 
 and answers to some [commonly-asked questions](#faq). You may also use this user guide as a
 [quick reference](#command-summary) to any commands once you are more experienced with Managera.
+
+If this is your first time using Managera or your first time using this user guide, you are strongly advised to
+look through the [next section](#how-to-use-this-user-guide).
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to use this user guide
@@ -67,7 +70,6 @@ If there are any doubts on how certain commands are used, you can look for the d
 
 If there are any terms used in this user guide you are unclear of or do not understand, their definitions may be found 
 in the [Glossary](#glossary).
-
 
 For any other questions about Managera, you may refer to the [FAQ](#faq) section.
 
@@ -121,7 +123,7 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the [parameters](#glossary) to be supplied by the user.<br>
   e.g. in `addEvent n/NAME d/DATE`, `n/NAME` and `d/DATE` are parameters which can be used as 
   `addEvent n/CS2103T Final d/2021-11-23`.
 
@@ -129,7 +131,7 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
   e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as 
   `addEvent n/CS2103T Final d/2021-11-23`.
 
-* Parameters with prefixes can be in any order.<br>
+* Parameters with [prefixes](#glossary) can be in any order.<br>
   e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 
 * Parameters without prefixes needs to be followed strictly.<br>
@@ -218,7 +220,7 @@ Shows a list of all Participants in Managera.
 
 Format: `list`
 
-### View Participant details: `view`
+### Viewing a Participant's details: `view`
 
 Displays the details of a Participant in Managera.
 
@@ -233,7 +235,7 @@ Example Usage:
 
 <br>![result for 'view 1'](images/viewFirstResult.png)
 
-### Add Next of Kin to Participant: `addNok`
+### Adding Next of Kin to a Participant: `addNok`
 
 Add Next of Kin to Participant at specified index.
 
@@ -249,7 +251,7 @@ Example Usage:
 * `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - adds Next of Kin whose name is Janette Yeo with contact number
   88734323 and with tag Spouse to the first Participant.
 
-### Remove Next of Kin from Participant: `deleteNok`
+### Removing Next of Kin from a Participant: `deleteNok`
 
 Remove Next of Kin at specified index from a Participant at another specified index.
 
@@ -313,7 +315,7 @@ Example Usage:
 
 <br>![result for 'editEvent 2 n/2103T milestone ...'](images/editEventSecondResult.png)
 
-### Mark an Event as done: `done`
+### Marking an Event as done: `done`
 
 Marks the specified Event in Managera as done.
 
@@ -345,7 +347,7 @@ Examples:
 * `findEvent party` returns `beach party` and `Christmas party`
 * `findEvent marathon meeting` returns `240Km Marathon`, `project meeting`<br>
 
-### Filter Events: `filterEvents`
+### Filtering Events by time: `filterEvents`
 
 Filters the list of events for events occurring on a specific date and optionally by time too.
 
@@ -356,7 +358,7 @@ Example Usage:
 * `filterEvents d/2021-09-18 t/0900` - Filters the list of events to show only events occurring on 
   18th September 2021 9am.
 
-### Sort Events: `sortEvents`
+### Sorting Events by time: `sortEvents`
 
 Sorts the current list of events in chronological order with the earlier events at the top and later events 
 at the bottom.
@@ -365,13 +367,13 @@ at the bottom.
 
 Format: `sortEvents`
 
-### List Events: `listEvents`
+### Listing all Events: `listEvents`
 
 Show a list of all events in Managera.
 
 Format: `listEvents`
 
-### Show Event details: `showDetails`
+### Showing an Event's details: `showDetails`
 
 Displays the details of the Event at the specified index.
 
@@ -384,7 +386,38 @@ Format: `showDetails INDEX`
 Example Usage:
 * `showDetails 1` - Displays the date and time of the 1st Event in the current list.
 
-### Show Event Participants: `showParticipants`
+### Adding a Participant to an Event: `enroll`
+
+Adds a Participant with the first specified index to the Event with the second specified index.
+
+Format:
+`enroll INDEX_1 INDEX_2`
+
+* Adds the Participant at specified `INDEX_1` to the Event at specified index `INDEX_2`.
+* The index refers to the index number shown in the displayed Participant/Event list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Example Usage:
+* `enroll 1 2` - Adds the 1st Participant in the displayed Participant list to the 2nd Event in the displayed Event
+  list.
+
+<br>![result for 'enroll 1 2'](images/enrollFirstSecondResult.png)
+
+### Removing a Participant from an Event: `expel`
+
+Removes the Participant with the first specified index from the Event with the second specified index.
+
+Format: `expel INDEX_1 INDEX_2`
+
+* Removes the Participant at specified `INDEX_1` from the Event at specified index `INDEX_2`.
+* The index refers to the index number shown in the displayed Participant/Event list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Example Usage:
+* `expel 3 1` - Removes the 3rd Participant in the displayed Participant list from the 1st Event in the displayed Event
+  list.
+
+### Showing an Event's Participants: `showParticipants`
 
 Displays the list of participants of the Event at the specified index.
 
@@ -398,42 +431,6 @@ Example Usage:
 * `showParticipants 4` - Displays the list of participants of the 4th Event in the current list.
 
 <br>![result for 'showParticipants 4'](images/showParticipantsFourthResult.png)
-
-## Interaction
-
-The following commands deal with the handling of Events and Participants in Managera. 
-They can help you add Participants to Events or remove Participants from Events.
-
-### Add Participant to Event: `enroll`
-
-Adds a Participant with the first specified index to the Event with the second specified index.
-
-Format: 
-`enroll INDEX_1 INDEX_2`
-
-* Adds the Participant at specified `INDEX_1` to the Event at specified index `INDEX_2`.
-* The index refers to the index number shown in the displayed Participant/Event list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-
-Example Usage:
-* `enroll 1 2` - Adds the 1st Participant in the displayed Participant list to the 2nd Event in the displayed Event 
-  list.
-
-<br>![result for 'enroll 1 2'](images/enrollFirstSecondResult.png)
-
-### Remove Participant from Event: `expel`
-
-Removes the Participant with the first specified index from the Event with the second specified index.
-
-Format: `expel INDEX_1 INDEX_2`
-
-* Removes the Participant at specified `INDEX_1` from the Event at specified index `INDEX_2`.
-* The index refers to the index number shown in the displayed Participant/Event list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-
-Example Usage:
-* `expel 3 1` - Removes the 3rd Participant in the displayed Participant list from the 1st Event in the displayed Event 
-  list.
 
 ## Miscellaneous
 
