@@ -3,10 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
+
 import seedu.address.logic.commands.FilterInterviewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.Arrays;
 
 public class FilterInterviewCommandParser implements Parser<FilterInterviewCommand> {
 

@@ -7,7 +7,7 @@ import seedu.address.model.interview.Interview;
 
 public class FilterInterviewPastCommand extends FilterInterviewCommand {
 
-    public static final String MESSAGE_SUCCESS=
+    public static final String MESSAGE_SUCCESS =
             "Showing applicants with interviews that have already passed. ";
 
     @Override
