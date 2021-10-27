@@ -221,13 +221,14 @@ Command | Format & Examples
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 **Add Lab** | `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
 **Delete** | `delete <INDEX_IN_LIST>`
-**Download** | `download`
+**Dashboard** | `dashboard`
 **Delete Lab** | `dellab -t <LAB_NUM>`
+**Download** | `download`
 **Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 **Edit Lab** | `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 **Exit** | `exit`
+**Help** | `help`
 **Fill** | `fill`
 **Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
-**Help** | `help`
 **Purge** | `purge`
 **Upload** | `upload`
