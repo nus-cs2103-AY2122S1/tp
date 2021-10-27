@@ -8,14 +8,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.scene.layout.Region;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.ui.TransactionCard;
+import seedu.address.ui.UiPart;
 
 /**
  * Records a list of items transacted items in an order. Immutable.
  */
-public class TransactionRecord {
+public class TransactionRecord implements Displayable {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
             .ofPattern("yyyy-MM-dd HH:mm:ss")
             .withZone(ZoneId.systemDefault());
@@ -106,6 +110,11 @@ public class TransactionRecord {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public UiPart<Region> asDisplayCard(int index) {
+        return new TransactionCard(this, index);
     }
 
     /**
