@@ -2,6 +2,7 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_LAB_NUM;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_LAB_TOTAL;
@@ -33,7 +34,9 @@ public class EditLabCommandParserTest {
     @Test
     public void parse_missingCompulsoryPrefix_failure() {
         // missing labNum prefix
-        assertParseFailure(parser, VALID_LAB_NO + NEW_LAB_NUM + LAB_TOTAL2, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser,
+                VALID_LAB_NO + NEW_LAB_NUM + LAB_TOTAL2,
+                String.format(MESSAGE_MISSING_ARGUMENT, EditLabCommand.MESSAGE_USAGE));
     }
 
     @Test

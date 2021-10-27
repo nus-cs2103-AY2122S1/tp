@@ -1,5 +1,6 @@
 package seedu.programmer.logic.parser;
 
+import static seedu.programmer.commons.core.Messages.MESSAGE_EMPTY_ARGUMENT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -29,11 +30,11 @@ public class FilterCommandParserTest {
 
         // single trailing whitespace
         assertParseFailure(parser, " -n ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
 
         // multiple trailing whitespace
         assertParseFailure(parser, " -n   ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -44,11 +45,11 @@ public class FilterCommandParserTest {
 
         // single trailing whitespace
         assertParseFailure(parser, " -cid ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
 
         // multiple trailing whitespace
         assertParseFailure(parser, " -cid   ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -59,11 +60,11 @@ public class FilterCommandParserTest {
 
         // single trailing whitespace
         assertParseFailure(parser, " -sid ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
 
         // multiple trailing whitespace
         assertParseFailure(parser, " -sid   ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -74,26 +75,26 @@ public class FilterCommandParserTest {
 
         // single trailing whitespace
         assertParseFailure(parser, " -email ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
 
         // multiple trailing whitespace
         assertParseFailure(parser, " -email   ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_multipleEmptyArgs_throwsParseException() {
         // no trailing whitespace
         assertParseFailure(parser, " -n -sid -cid -email",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
 
         // single trailing whitespace
         assertParseFailure(parser, " -n  -sid  -cid -email ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
 
         // single trailing whitespace
         assertParseFailure(parser, " -n    -sid    -cid   -email      ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
     }
 
     @Test

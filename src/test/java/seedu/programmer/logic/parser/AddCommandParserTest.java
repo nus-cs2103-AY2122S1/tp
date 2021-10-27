@@ -1,6 +1,6 @@
 package seedu.programmer.logic.parser;
 
-import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -53,7 +53,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_MISSING_ARGUMENT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB + EMAIL_DESC_BOB,
