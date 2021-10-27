@@ -27,7 +27,7 @@ public class TaskBuilder {
     /**
      * Creates a {@code TaskBuilder} with the default details.
      */
-    protected TaskBuilder() {
+    public TaskBuilder() {
         this.taskName = new TaskName(DEFAULT_TASK_NAME);
         this.taskDate = new TaskDate(DEFAULT_TASK_DATE);
         this.tags = new HashSet<>();
