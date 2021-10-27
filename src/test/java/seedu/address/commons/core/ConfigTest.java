@@ -26,7 +26,7 @@ public class ConfigTest {
     public void equalsMethod() {
         Config defaultConfig1 = new Config();
         Config defaultConfig2 = new Config();
-        defaultConfig2.setUserPrefsFilePath(Paths.get("addressbook.json"));
+        defaultConfig2.setUserPrefsFilePath(Paths.get("profbook.json"));
         assertNotNull(defaultConfig1);
         assertTrue(defaultConfig1.equals(defaultConfig1));
         assertFalse(defaultConfig1.equals(new Phone("12345678")));
