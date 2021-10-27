@@ -36,6 +36,13 @@ public class TutorialId {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another TutorialId using Java's compareTo function
+     */
+    public int compareTo(TutorialId t) {
+        return value.compareTo(t.value);
+    }
+
     @Override
     public String toString() {
         return value;

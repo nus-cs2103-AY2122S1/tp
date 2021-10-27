@@ -37,6 +37,13 @@ public class Type {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another Type's value using Java's compareTo function
+     */
+    public int compareTo(Type t) {
+        return value.compareTo(t.value);
+    }
+
     @Override
     public String toString() {
         return value;

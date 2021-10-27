@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -165,6 +166,10 @@ public class AddCommandTest {
 
         @Override
         public int redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void sortFilteredPersonList(Prefix prefix, boolean reverse) {
             throw new AssertionError("This method should not be called.");
         }
     }

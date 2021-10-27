@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.exceptions.OperationException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
 /**
@@ -103,4 +104,10 @@ public interface Model {
      * Redoes the last command undid, if available.  Returns true if redo was executed successfully.
      */
     int redo() throws OperationException;
+
+    /**
+     * Sorts the filtered person list by the given {@code prefix}
+     * @param prefix
+     */
+    void sortFilteredPersonList(Prefix prefix, boolean reverse);
 }

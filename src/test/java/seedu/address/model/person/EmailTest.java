@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,6 +52,10 @@ public class EmailTest {
         Email email = new Email("e1234567@u.nus.edu");
         Email differentEmail = new Email("E7654321@u.nus.edu");
         Email sameEmail = new Email("e1234567@u.nus.edu");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(email.equals(person));
 
         // Different Email
         assertFalse(email.equals(differentEmail));

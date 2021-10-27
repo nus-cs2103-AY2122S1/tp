@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,6 +51,10 @@ public class GitHubIdTest {
         GitHubId gitHubId = new GitHubId("Siddharth-Sid");
         GitHubId differentGitHubId = new GitHubId("siddharth");
         GitHubId sameGitHubId = new GitHubId("Siddharth-Sid");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(gitHubId.equals(person));
 
         // Different GitHubId
         assertFalse(gitHubId.equals(differentGitHubId));
