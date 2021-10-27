@@ -113,6 +113,7 @@ public class CenterPanel extends UiPart<Region> {
      * Bring PersonGridPanel to top of the stack's child list.
      */
     public void displayPersonGridPanel(ObservableList<Lesson> lessons) {
+        logger.info("Showing the student list without lessons.");
         personGridPanel.fillListPanels(lessons);
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
@@ -125,6 +126,7 @@ public class CenterPanel extends UiPart<Region> {
      * @param lessons Lessons of the student.
      */
     public void displayPersonGridPanel(Person student, ObservableList<Lesson> lessons) {
+        logger.info("Showing the student list with lessons.");
         personGridPanel.fillListPanels(student, lessons);
         personGridPanel.setListPanels();
         centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
