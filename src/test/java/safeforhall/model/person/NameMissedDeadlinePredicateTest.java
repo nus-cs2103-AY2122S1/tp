@@ -1,5 +1,6 @@
 package safeforhall.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,5 +57,9 @@ public class NameMissedDeadlinePredicateTest {
 
         predicate = new NameMissedDeadlinePredicate("c", new LastDate("11-10-2021"));
         assertEquals(predicate.getDeadlinePeriod(ALICE), 1);
+
+        predicate = new NameMissedDeadlinePredicate("c", new LastDate(""));
+        NameMissedDeadlinePredicate finalPredicate = predicate;
+        assertDoesNotThrow(() -> finalPredicate.getDeadlinePeriod(ALICE));
     }
 }
