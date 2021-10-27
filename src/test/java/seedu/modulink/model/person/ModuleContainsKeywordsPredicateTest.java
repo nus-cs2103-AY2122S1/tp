@@ -16,16 +16,16 @@ public class ModuleContainsKeywordsPredicateTest {
         Set<Mod> secondPredicateKeywordList = Set.of(new Mod("CS2103T"));
 
         ModuleContainsKeywordsPredicate firstPredicate =
-                new ModuleContainsKeywordsPredicate(firstPredicateKeywordList, null);
+                new ModuleContainsKeywordsPredicate(firstPredicateKeywordList);
         ModuleContainsKeywordsPredicate secondPredicate =
-                new ModuleContainsKeywordsPredicate(secondPredicateKeywordList, null);
+                new ModuleContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
         ModuleContainsKeywordsPredicate firstPredicateCopy =
-                new ModuleContainsKeywordsPredicate(firstPredicateKeywordList, null);
+                new ModuleContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

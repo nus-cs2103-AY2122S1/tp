@@ -15,13 +15,11 @@ public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show user profiles filtered by module code "
-            + "and optionally by group status.\n"
-            + "OPTIONAL_GROUP_STATUS enumerates the following: "
-            + "{ SG: seeking group, SM: seeking member, G: in a group, NG: no group }\n"
+            + "and optionally by group status (need member or need group).\n"
             + "MODULE_CODE is required for filtering by group status. "
             + "The filter will return the profiles with the specified group status of the specified module.\n"
-            + "Parameters: filter mod/MODULE_CODE [group/GROUP_STATUS]\n"
-            + "Example: " + COMMAND_WORD + " mod/CS2030 group/SM\n";
+            + "Parameters: filter mod/MODULE_CODE [GROUP_STATUS]\n"
+            + "Example: " + COMMAND_WORD + " mod/CS2030 need member\n";
 
     private final ModuleContainsKeywordsPredicate predicate;
 

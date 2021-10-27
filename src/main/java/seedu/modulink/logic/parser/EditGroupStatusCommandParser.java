@@ -53,6 +53,11 @@ public class EditGroupStatusCommandParser implements Parser {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
+
+        if (tags.size() > 1) {
+            throw new ParseException(EditGroupStatusCommand.MESSAGE_MULTIPLE_MODULES_SPECIFIED);
+        }
+
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }

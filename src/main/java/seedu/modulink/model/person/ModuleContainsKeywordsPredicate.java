@@ -14,18 +14,15 @@ import seedu.modulink.model.tag.Status;
 public class ModuleContainsKeywordsPredicate implements Predicate<Person> {
 
     private final Set<Mod> mods;
-    private final Status status;
 
     /**
      * Constructor for the ModuleContainsKeywordsPredicate class.
      *
      * @param mods Set of modules.
-     * @param status Group status of the module.
      */
-    public ModuleContainsKeywordsPredicate(Set<Mod> mods, Status status) {
+    public ModuleContainsKeywordsPredicate(Set<Mod> mods) {
         requireNonNull(mods);
         this.mods = mods;
-        this.status = status;
     }
 
     @Override
@@ -34,8 +31,8 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Person> {
         for (Mod mod : person.getMods()) {
             for (Mod module : mods) {
                 if (module.modName.equalsIgnoreCase(mod.modName)) {
-                    if (this.status != null) {
-                        if (mod.status.equals(this.status)) {
+                    if (!module.status.equals(Status.NONE)) {
+                        if (mod.status.equals(module.status)) {
                             doesMatchMod = true;
                             break;
                         }
