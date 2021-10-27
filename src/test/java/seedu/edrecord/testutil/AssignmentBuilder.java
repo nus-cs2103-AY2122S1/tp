@@ -1,7 +1,7 @@
 package seedu.edrecord.testutil;
 
 import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.assignment.MaxScore;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.name.Name;
 
@@ -16,7 +16,7 @@ public class AssignmentBuilder {
 
     private Name name;
     private Weightage weightage;
-    private MaxScore maxScore;
+    private Score score;
 
     /**
      * Creates an {@code AssignmentBuilder} with the default details.
@@ -24,7 +24,7 @@ public class AssignmentBuilder {
     public AssignmentBuilder() {
         name = new Name(DEFAULT_NAME);
         weightage = new Weightage(DEFAULT_WEIGHTAGE);
-        maxScore = new MaxScore(DEFAULT_MAX_SCORE);
+        score = new Score(DEFAULT_MAX_SCORE);
     }
 
     /**
@@ -33,7 +33,7 @@ public class AssignmentBuilder {
     public AssignmentBuilder(Assignment toCopy) {
         name = toCopy.getName();
         weightage = toCopy.getWeightage();
-        maxScore = toCopy.getMaxScore();
+        score = toCopy.getMaxScore();
     }
 
     /**
@@ -56,7 +56,7 @@ public class AssignmentBuilder {
      * Sets the {@code MaxScore} of the {@code Assignment} that we are building.
      */
     public AssignmentBuilder withMaxScore(String maxScore) {
-        this.maxScore = new MaxScore(maxScore);
+        this.score = new Score(maxScore);
         return this;
     }
 
@@ -64,6 +64,6 @@ public class AssignmentBuilder {
      * Builds and returns the Assignment.
      */
     public Assignment build() {
-        return new Assignment(name, weightage, maxScore);
+        return new Assignment(name, weightage, score);
     }
 }

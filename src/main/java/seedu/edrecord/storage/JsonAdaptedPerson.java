@@ -14,6 +14,7 @@ import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
+import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
 import seedu.edrecord.model.person.Person;
@@ -144,7 +145,10 @@ class JsonAdaptedPerson {
             moduleGroupMap.add(modelModule, modelGroup);
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleGroupMap, modelTags);
+
+        // TODO change `new AssignmentGradeMap()` to save grades
+        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleGroupMap, modelTags,
+                new AssignmentGradeMap());
     }
 
 }

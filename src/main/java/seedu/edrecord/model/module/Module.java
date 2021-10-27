@@ -3,13 +3,17 @@ package seedu.edrecord.model.module;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.UniqueAssignmentList;
+import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.group.GroupSystem;
 import seedu.edrecord.model.group.ReadOnlyGroupSystem;
+import seedu.edrecord.model.name.Name;
 
 /**
  * Represents a module in EdRecord.
@@ -33,7 +37,7 @@ public class Module {
     /**
      * Constructs a {@code Module}.
      *
-     * @param code A valid module code.
+     * @param code        A valid module code.
      * @param groupSystem A valid group system.
      */
     public Module(String code, GroupSystem groupSystem) {
@@ -135,6 +139,20 @@ public class Module {
      */
     public boolean hasAssignment(Assignment a) {
         return assignmentList.contains(a);
+    }
+
+    /**
+     * Returns an {@code Optional} containing the assignment with the given name, if it exists.
+     */
+    public Optional<Assignment> searchAssignment(Name name) {
+        // Create dummy assignment to search by name
+        Assignment a = new Assignment(name, new Weightage("0"), new Score("0"));
+        int index = getAssignmentList().indexOf(a);
+        if (index == -1) {
+            return Optional.empty();
+        } else {
+            return Optional.of(getAssignmentList().get(index));
+        }
     }
 
     /**
