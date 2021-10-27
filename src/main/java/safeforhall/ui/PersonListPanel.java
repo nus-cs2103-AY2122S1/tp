@@ -8,6 +8,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import safeforhall.commons.core.LogsCenter;
+import safeforhall.commons.core.index.Index;
+import safeforhall.logic.Logic;
+import safeforhall.logic.commands.exceptions.CommandException;
+import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.model.person.Person;
 
 /**
@@ -16,6 +20,8 @@ import safeforhall.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private boolean isResidentTab = true;
+    private final Logic logic;
 
     @FXML
     private ListView<Person> personListView;
@@ -23,10 +29,11 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, Logic logic) {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.logic = logic;
     }
 
     /**
@@ -46,4 +53,20 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    @FXML
+    private void setSinglePerson() {
+        if (isResidentTab) {
+            try {
+                new ViewPersonCommand(
+                        Index.fromZeroBased(personListView.getSelectionModel().getSelectedIndex()))
+                    .setSinglePerson(logic.getModel());
+            } catch (CommandException e) {
+                logger.info("Invalid card selected");
+            }
+        }
+    }
+
+    public void setIsResidentTab(boolean isResidentTab) {
+        this.isResidentTab = isResidentTab;
+    }
 }

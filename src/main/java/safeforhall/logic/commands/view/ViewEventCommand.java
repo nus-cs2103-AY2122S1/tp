@@ -13,14 +13,13 @@ import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.Model;
 import safeforhall.model.event.Event;
 
-
 /**
  * Lists all persons in the address book to the user.
  */
 public class ViewEventCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-
+    public static final String PARAMETERS = "[INDEX]";
     public static final String MESSAGE_ALL_EVENTS_SHOWN = "All events shown";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the additional details of the identified event "
@@ -51,13 +50,17 @@ public class ViewEventCommand extends Command {
             model.setNoEvent();
             return new CommandResult(MESSAGE_ALL_EVENTS_SHOWN);
         } else {
-            List<Event> lastShownList = model.getFilteredEventList();
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-            }
-            Event eventToShow = lastShownList.get(targetIndex.getZeroBased());
-            model.setSingleEvent(eventToShow);
+            setSingleEvent(model);
             return new CommandResult(MESSAGE_VIEW_EVENT_SUCCESS);
         }
+    }
+
+    public void setSingleEvent(Model model) throws CommandException {
+        List<Event> lastShownList = model.getFilteredEventList();
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+        Event eventToShow = lastShownList.get(targetIndex.getZeroBased());
+        model.setSingleEvent(eventToShow);
     }
 }

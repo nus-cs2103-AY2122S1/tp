@@ -14,32 +14,27 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox fx:id="labelBox" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <HBox fx:id="deadlineContainer" alignment="CENTER_LEFT"/>
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
-            <HBox spacing="5" alignment="CENTER_LEFT">
+
+            <HBox spacing="0" alignment="CENTER_LEFT">
                 <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="name" text="\$first" styleClass="cell_big" />
             </HBox>
-            <VBox fx:id="labelBoxInterior" styleClass="cell_small_label">
-                <Label fx:id="room" styleClass="cell_small_label" text="\$room" />
-                <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-                <Label fx:id="faculty" styleClass="cell_small_label" text="\$faculty" />
-                <Label fx:id="vaccStatus" styleClass="cell_small_label" text="\$vaccStatus" />
+            <VBox fx:id="labelBoxInterior" styleClass="cell_normal">
+                <Label fx:id="room" styleClass="cell_normal" text="\$room" />
+                <Label fx:id="phone" styleClass="cell_normal" text="\$phone" />
+                <Label fx:id="email" styleClass="cell_normal" text="\$email" />
+                <Label fx:id="faculty" styleClass="cell_normal" text="\$faculty" />
+                <Label fx:id="vaccStatus" styleClass="cell_normal" text="\$vaccStatus" />
             </VBox>
         </VBox>
-        <HBox fx:id="informationContainer" alignment="CENTER_RIGHT" minHeight="105">
-            <VBox fx:id="deadlineContainer" alignment="CENTER_LEFT">
-                <padding>
-                    <Insets top="5" right="25" bottom="5" left="15" />
-                </padding>
-            </VBox>
-        </HBox>
     </GridPane>
 </HBox>

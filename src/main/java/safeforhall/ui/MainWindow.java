@@ -2,20 +2,21 @@ package safeforhall.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import safeforhall.commons.core.GuiSettings;
@@ -53,12 +54,13 @@ public class MainWindow extends UiPart<Stage> {
     private PersonAdditionalListPanel personAdditionalListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private SplitPane splitpane1;
+    private GridPane splitpane1;
 
     @FXML
     private Button helpMenuItem;
@@ -116,33 +118,55 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
-        residentsTab.setGraphic(new Label("Residents"));
-        eventsTab.setGraphic(new Label("Events"));
+        handleTabCreation();
+    }
 
-        Button helpButton = createTabButton("/images/help.png");
-        helpButton.setOnAction(e -> handleHelp());
-        helpButton.setStyle(BUTTON_STYLE);
-        helpButton.setTooltip(new Tooltip("Help"));
-        helpTab.setGraphic(helpButton);
-        helpTab.setDisable(true);
+    private void handleTabCreation() {
+        // Label texts are padded with whitespace for alignment.
+        // This is not possible via style due to graphic rotation.
+        residentsTab.setGraphic(createTab("  Residents", "resident"));
+        residentsTab.setTooltip(new Tooltip("Residents"));
 
-        Button exitButton = createTabButton("/images/exit.png");
-        exitButton.setOnAction(e -> handleExit());
-        exitButton.setStyle(BUTTON_STYLE);
-        exitButton.setTooltip(new Tooltip("Exit"));
-        exitTab.setGraphic(exitButton);
-        exitTab.setDisable(true);
+        eventsTab.setGraphic(createTab("    Events     ", "event"));
+        eventsTab.setTooltip(new Tooltip("Events"));
+
+        helpTab.setGraphic(createTab("    Help     ", "help"));
+        helpTab.setTooltip(new Tooltip("Help"));
+        helpTab.setOnSelectionChanged(e -> {
+            if (helpTab.isSelected()) {
+                handleHelp();
+            }
+            e.consume();
+        });
+
+        exitTab.setGraphic(createTab("    Exit     ", "exit"));
+        exitTab.setTooltip(new Tooltip("Exit"));
+        exitTab.setOnSelectionChanged(e -> {
+            if (exitTab.isSelected()) {
+                handleExit();
+            }
+        });
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+            boolean success = !newTab.equals(helpTab);
+            if (!success) {
+                Platform.runLater(() -> tabPane.getSelectionModel().select(oldTab));
+            }
+        });
 
         tabPane.setRotateGraphic(false);
     }
 
-    private Button createTabButton(String iconName) {
-        Button button = new Button();
-        ImageView imageView = new ImageView(new Image(getClass().getResource(iconName).toExternalForm(),
-                36, 36, true, true));
-        button.setGraphic(imageView);
-        button.getStyleClass().add("tab-button");
-        return button;
+    private HBox createTab(String text, String imageName) {
+        HBox content = new HBox();
+
+        Label label = new Label(text);
+        ImageView icon = new ImageView("/images/" + imageName + ".png");
+        icon.setFitHeight(38);
+        icon.setFitWidth(38);
+        icon.setPreserveRatio(true);
+        content.getChildren().addAll(new Label("    "), icon, new Label("     "));
+        return content;
     }
 
     public Stage getPrimaryStage() {
@@ -191,13 +215,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         personAdditionalListPanel = new PersonAdditionalListPanel(logic.getSinglePerson());
         personAdditionalListPanelPlaceholder.getChildren().add(personAdditionalListPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), logic);
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         eventAdditionalListPanel = new EventAdditionalListPanel(logic.getSingleEvent());
@@ -209,7 +233,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -253,8 +277,44 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    @FXML
+    private void handleSwitch() {
+        int index = tabPane.getSelectionModel().getSelectedIndex() ^ 1;
+        tabPane.getSelectionModel().select(index);
+    }
+
+    /**
+     * Set isResidentTab of CommandBox to True.
+     */
+    @FXML
+    private void commandBoxToResidents() {
+        if (commandBox != null) {
+            this.commandBox.setIsResidentTab(true);
+            this.commandBox.refreshSuggestions();
+        }
+        if (personListPanel != null) {
+            this.personListPanel.setIsResidentTab(true);
+        }
+        if (eventListPanel != null) {
+            this.eventListPanel.setIsResidentTab(true);
+        }
+    }
+
+    /**
+     * Set isResidentTab of CommandBox to False.
+     */
+    @FXML
+    private void commandBoxToEvents() {
+        if (commandBox != null) {
+            this.commandBox.setIsResidentTab(false);
+            this.commandBox.refreshSuggestions();
+        }
+        if (personListPanel != null) {
+            this.personListPanel.setIsResidentTab(false);
+        }
+        if (eventListPanel != null) {
+            this.eventListPanel.setIsResidentTab(false);
+        }
     }
 
     /**
@@ -274,6 +334,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isSwitchTab()) {
+                handleSwitch();
             }
 
             return commandResult;
