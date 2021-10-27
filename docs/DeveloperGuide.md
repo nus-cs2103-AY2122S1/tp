@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -128,7 +128,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="800" />
 
 </div>
 
@@ -272,11 +272,11 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
 #### Future Improvements
 {:.no_toc}
 
-There are 3 possible outcomes from the execution of a ScheduleCommand.
-1. Schedule a new appointment with the client
-2. Reschedule an appointment with the client
-3. Delete an existing appointment with the client
-4. 
+* A Java HashSet may not be the most appropriate data structure to store claims since it is unable to find a claim
+  in O(1) time. Instead, a HashMap may be more appropriate, using the claim title as key.
+* Currently, there is no relationship between Claim and EditClaimDescriptor. This means that any future changes
+  to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should
+  both extend from an abstract class to ensure that any future modification would not lead to regressions.
 ###  Schedule appointment feature
 
 #### Current Implementation
@@ -288,7 +288,7 @@ which is represented by an `Appointment` object.
 The `Appointment` object contains a `LocalDateTime` field called `appointmentTime` which represents the time that
 the appointment with is scheduled for. An empty appointment is represented when `appointmentTime` is set to `null`.
 
-img src="images/ScheduleAppointmentClassDiagram.png" width="300" />
+<img src="images/ScheduleAppointmentClassDiagram.png" width="300" />
 
 The processing of a schedule command from the user can be split into 2 general steps:
 1. Parsing the user input into a `ScheduleCommand`
@@ -526,7 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: Add reveneue to a client**
+**Use case: Add revenue to a client**
 
 **MSS**
 
