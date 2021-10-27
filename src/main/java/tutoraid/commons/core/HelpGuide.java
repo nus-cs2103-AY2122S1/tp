@@ -45,15 +45,15 @@ public class HelpGuide {
     public static final String ADD_L_EXAMPLE = "add -l s/Maths 1 c/50 p/100 t/Mon 1000-1200";
 
     public static final String LIST_TITLE = "Listing all students and lessons";
-    public static final String LIST_DESC = "Shows a list of all students and lessons in TutorAid in the order that " +
-            "they were added.";
+    public static final String LIST_DESC = "Shows a list of all students and lessons in TutorAid in the order that "
+            + "they were added.";
     public static final String LIST_GENERAL_COMMAND = "list [-a]";
     public static final String LIST_EXAMPLE = "list";
-    public static final String LIST_EXAMPLE_DESC = " displays all students and lessons in TutorAid while showing only " +
-            "their names and list indexes. ";
+    public static final String LIST_EXAMPLE_DESC = " displays all students and lessons in TutorAid while showing only "
+            + "their names and list indexes. ";
     public static final String LIST_A_EXAMPLE = "list -a";
-    public static final String LIST_A_EXAMPLE_DESC = " displays all of the details of the students and lessons in " +
-            "TutorAid in full";
+    public static final String LIST_A_EXAMPLE_DESC = " displays all of the details of the students and lessons in "
+            + "TutorAid in full";
 
     public static final String DEL_S_TITLE = "Deleting a student";
     public static final String DEL_S_DESC = "Deletes the specified student with the given student index from TutorAid.";
@@ -68,8 +68,8 @@ public class HelpGuide {
     public static final String DEL_L_EXAMPLE_DESC = " deletes the 3rd lesson from TutorAid.";
 
     public static final String EDIT_S_TITLE = "Editing a student";
-    public static final String EDIT_S_DESC = "Edits the details of the specified student with the given student " +
-            "index in TutorAid.";
+    public static final String EDIT_S_DESC = "Edits the details of the specified student with the given student "
+            + "index in TutorAid.";
     public static final String EDIT_S_COMMAND = "edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] "
             + "[pn/PARENT_NAME] [pp/PARENT_PHONE]";
     public static final String EDIT_S_EXAMPLE = "edit -s 2 pp/91112222";
@@ -113,15 +113,15 @@ public class HelpGuide {
     public static final String DEL_P_EXAMPLE_DESC = " deletes the progress of the 2nd student in TutorAid.";
 
     public static final String PAID_TITLE = "Set payment made";
-    public static final String PAID_DESC = "Sets the payment status of the student corresponding to the given index " +
-            "to 'paid' for the current month.";
+    public static final String PAID_DESC = "Sets the payment status of the student corresponding to the given index "
+            + "to 'paid' for the current month.";
     public static final String PAID_COMMAND = "paid STUDENT_INDEX";
     public static final String PAID_EXAMPLE = "paid 3";
     public static final String PAID_EXAMPLE_DESC = " updates the 3rd student’s payment status to 'paid'.";
 
     public static final String UNPAID_TITLE = "Unset payment made";
-    public static final String UNPAID_DESC = "Sets the payment status of the student corresponding to the given index" +
-            " to ‘unpaid’ for the current month.";
+    public static final String UNPAID_DESC = "Sets the payment status of the student corresponding to the given index"
+            + " to ‘unpaid’ for the current month.";
     public static final String UNPAID_COMMAND = "unpaid STUDENT_INDEX";
     public static final String UNPAID_EXAMPLE = "unpaid 3";
     public static final String UNPAID_EXAMPLE_DESC = " updates the 3rd student’s payment status to 'unpaid'.";
