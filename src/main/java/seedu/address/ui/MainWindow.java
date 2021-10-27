@@ -22,7 +22,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.game.Game;
 
@@ -48,6 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private Friend currentFriendToGet;
     private FriendMainCardTable friendMainCardTable;
+    private FriendSchedulePanel friendSchedulePanel;
     private GameMainCardTable gameMainCardTable;
     private Game currentGameToGet;
 
@@ -162,8 +162,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-
-        leftMainCard.getChildren().add(new FriendSchedulePanel(SampleDataUtil.getSampleFriends()[0]).getRoot());
         showFriendBox();
         showGameBox();
     }
@@ -229,6 +227,7 @@ public class MainWindow extends UiPart<Stage> {
             friendsPlaceholder.getChildren().add(friendListPanel.getRoot());
         }
     }
+
     private void addGameListPanelToGamesPlaceholder() {
         if (!gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
             gamesPlaceholder.getChildren().add(gameListPanel.getRoot());
@@ -249,22 +248,23 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleFriendGet(Friend friendToGet) {
         currentFriendToGet = friendToGet;
+        leftMainCard.getChildren().clear();
+        rightMainCard.getChildren().clear();
         if (currentFriendToGet == null) {
-            rightMainCard.getChildren().clear();
             return;
         }
-        if (this.friendList.stream().filter(x -> x.isSameFriendId(currentFriendToGet)).count() != 0) {
+        if (this.friendList.stream().anyMatch(x -> x.isSameFriendId(currentFriendToGet))) {
             friendToGet = this.friendList
                     .stream()
                     .filter(x -> x.isSameFriendId(currentFriendToGet))
                     .findFirst()
                     .get();
-
             friendMainCardTable = new FriendMainCardTable(friendToGet);
-            rightMainCard.getChildren().clear();
             rightMainCard.getChildren().add(friendMainCardTable.getRoot());
+            friendSchedulePanel = new FriendSchedulePanel(friendToGet);
+            leftMainCard.getChildren().add(friendSchedulePanel.getRoot());
+
         } else {
-            rightMainCard.getChildren().clear();
             friendMainCardTable = new FriendMainCardTable();
             rightMainCard.getChildren().add(friendMainCardTable.getRoot());
         }
@@ -272,21 +272,20 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleGameGet(Game gameToGet) {
         currentGameToGet = gameToGet;
+        leftMainCard.getChildren().clear();
+        rightMainCard.getChildren().clear();
         if (currentGameToGet == null) {
-            rightMainCard.getChildren().clear();
             return;
         }
-        if (friendList.stream().filter(friend -> friend.hasGameAssociation(gameToGet)).count() != 0) {
+        if (friendList.stream().anyMatch(friend -> friend.hasGameAssociation(gameToGet))) {
             List<Friend> friendsWithGame = friendList.stream()
                     .filter(friend -> friend.hasGameAssociation(gameToGet))
                     .collect(Collectors.toList());
 
             gameMainCardTable = new GameMainCardTable(FXCollections.observableList(friendsWithGame), gameToGet);
-            rightMainCard.getChildren().clear();
             rightMainCard.getChildren().add(gameMainCardTable.getRoot());
         } else {
             rightMainCard.getChildren().clear();
-            gameMainCardTable = new GameMainCardTable();
             rightMainCard.getChildren().add(gameMainCardTable.getRoot());
         }
     }
@@ -295,16 +294,17 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Handles the mounting and dismounting of UI Regions when a {@Code friend}
      * command is run.
+     *
      * @param commandResult The {@Code commandResult} from the {@Code friend} command.
      */
     private void handleFriendCommand(CommandResult commandResult) {
     }
 
 
-
     /**
      * Handles the mounting and dismounting of UI Regions when a {@Code game}
      * command is run.
+     *
      * @param commandResult The {@Code commandResult} from the {@Code game} command.
      */
     private void handleGameCommand(CommandResult commandResult) {
@@ -327,38 +327,27 @@ public class MainWindow extends UiPart<Stage> {
                 isFriendTable = true;
                 handleFriendGet(commandResult.getFriendToGet());
                 break;
-            case FRIEND_ADD_GAME_SKILL:
-            case FRIEND_ADD:
-            case FRIEND_EDIT:
-            case FRIEND_LIST:
-            case CLEAR:
-            case FRIEND_LINK:
-            case FRIEND_UNLINK:
-            case FRIEND_DELETE:
-                if (isFriendTable) {
-                    handleFriendGet(this.currentFriendToGet);
-                } else {
-                    handleGameGet(this.currentGameToGet);
-                }
-                break;
             case GAME_GET:
                 isFriendTable = false;
                 handleGameGet(commandResult.getGameToGet());
                 break;
-<<<<<<< HEAD
+            case FRIEND_ADD:
+            case FRIEND_EDIT:
+            case FRIEND_DELETE:
+            case FRIEND_LINK:
+            case FRIEND_UNLINK:
+            case FRIEND_ADD_GAME_SKILL:
+            case FRIEND_LIST:
+            case FRIEND_SCHEDULE:
             case GAME_ADD:
-            case GAME_GET:
             case GAME_DELETE:
             case GAME_LIST:
-                handleGameCommand(commandResult);
-=======
-            case GAME_ADD: case GAME_DELETE: case GAME_LIST:
+            case CLEAR:
                 if (isFriendTable) {
                     handleFriendGet(this.currentFriendToGet);
                 } else {
                     handleGameGet(this.currentGameToGet);
                 }
->>>>>>> master
                 break;
             case HELP:
                 handleHelp();
