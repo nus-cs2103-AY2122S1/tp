@@ -6,6 +6,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_LESSON;
@@ -34,12 +35,12 @@ public class UnenrollCommandTest {
 
     @Test
     public void execute_validUnenrollment_success() {
-        UnenrollCommand unenrollCommand = new UnenrollCommand(INDEX_SECOND_STUDENT, INDEX_SECOND_LESSON);
+        UnenrollCommand unenrollCommand = new UnenrollCommand(INDEX_SECOND_STUDENT, INDEX_FOURTH_LESSON);
 
         Model expectedModel = new ModelManager(getTypicalTuitione(), new UserPrefs());
         Student studentToUnenroll = expectedModel.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
 
-        Lesson testLesson = expectedModel.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
+        Lesson testLesson = expectedModel.getFilteredLessonList().get(INDEX_FOURTH_LESSON.getZeroBased());
         testLesson.unenrollStudent(studentToUnenroll);
         String expectedMessage = String.format(UnenrollCommand.MESSAGE_UNENROLL_STUDENT_SUCCESS,
                 studentToUnenroll.getName(),
@@ -50,7 +51,7 @@ public class UnenrollCommandTest {
 
     @Test
     public void execute_invalidUnenrollment_failure() {
-        Lesson testLesson = model.getFilteredLessonList().get(INDEX_THIRD_LESSON.getZeroBased());
+        Lesson testLesson = model.getFilteredLessonList().get(INDEX_THIRD_LESSON.getZeroBased()); //
         Student alice = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()); //ALICE
         Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
         Student carl = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased()); //CARL

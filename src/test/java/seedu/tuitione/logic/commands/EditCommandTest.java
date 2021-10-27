@@ -201,7 +201,7 @@ public class EditCommandTest {
         expectedModel.setStudent(secondStudent, editedStudent);
 
         assertCommandSuccess(editCommand, modelWithStudentsAndLessons, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), modelWithStudentsAndLessons.getFilteredLessonList().get(1).getStudents());
+        assertEquals(Collections.emptyList(), modelWithStudentsAndLessons.getFilteredLessonList().get(3).getStudents());
         assertEquals(Collections.emptyList(), editedStudent.getLessons());
     }
 
@@ -229,7 +229,7 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, modelWithStudentsAndLessons, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(editedStudentName),
-                modelWithStudentsAndLessons.getFilteredLessonList().get(1).getStudents());
+                modelWithStudentsAndLessons.getFilteredLessonList().get(3).getStudents());
         assertEquals(Arrays.asList(MATH_S2), editedStudentName.getLessons());
 
         // create new model
@@ -238,7 +238,7 @@ public class EditCommandTest {
                 .getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
         studentInList = new StudentBuilder(secondStudent);
 
-        // edit parent contact
+        //edit parent contact
         Student editedStudentPhone = studentInList.withPhone("91111111").build();
         editedStudentPhone.addLesson(MATH_S2);
 
@@ -252,7 +252,7 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, modelWithStudentsAndLessons, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(editedStudentPhone),
-                modelWithStudentsAndLessons.getFilteredLessonList().get(1).getStudents());
+                modelWithStudentsAndLessons.getFilteredLessonList().get(3).getStudents());
         assertEquals(Arrays.asList(MATH_S2), editedStudentPhone.getLessons());
 
     }
