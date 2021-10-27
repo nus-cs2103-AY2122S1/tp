@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -19,7 +21,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.WeekCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -36,7 +38,7 @@ public class MainWindow extends UiPart<Stage> {
             + AddCommand.USER_TIP + "\n\n"
             + DeleteCommand.USER_TIP + "\n\n"
             + LessonAddCommand.USER_TIP + "\n\n"
-            + ScheduleCommand.USER_TIP + "\n\n"
+            + WeekCommand.USER_TIP + "\n\n"
             + ClearCommand.USER_TIP + "\n\n"
             + HelpCommand.USER_TIP + "\n\n"
             + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
@@ -47,15 +49,30 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReminderWindow reminderWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem remindMenuItem;
+
+    @FXML
+    private MenuItem studentsMenuItem;
+
+    @FXML
+    private MenuItem calendarMenuItem;
+
+    @FXML
+    private MenuItem tagsMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -85,6 +102,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        reminderWindow = new ReminderWindow(logic.getUpcomingLessons());
     }
 
     public Stage getPrimaryStage() {
@@ -92,7 +110,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F3"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F4"));
+        setAccelerator(remindMenuItem, KeyCombination.valueOf("F5"));
     }
 
     /**
@@ -125,12 +147,16 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        centerPanel = new CenterPanel(logic.getCalendar(),
-                logic.getFilteredPersonList(), logic.getEmptyLessonList());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList(), logic.getEmptyLessonList(),
+                logic.getObservableTagList(), logic.getTagCounter());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -142,6 +168,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        // Add listeners
+        centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldVal, newVal) -> handlePersonGridPanel(newVal));
     }
 
     /**
@@ -168,8 +198,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
-        primaryStage.show();
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReminder() {
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
+        } else {
+            reminderWindow.focus();
+        }
     }
 
     /**
@@ -181,19 +219,59 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
     }
 
-    private void handleSchedule() {
+    @FXML
+    private void handleCalendar() {
         centerPanel.displaySchedulePanel();
     }
 
+    private void handleDay() {
+        centerPanel.showDay();
+    }
+
+    private void handleWeek() {
+        centerPanel.showWeek();
+    }
+
+    private void handleMonth() {
+        centerPanel.showMonth();
+    }
+
+    private void handleYear() {
+        centerPanel.showYear();
+    }
+
+    private void handleNext() {
+        centerPanel.goNext();
+    }
+
+    private void handleToday() {
+        centerPanel.goToday();
+    }
+
+    private void handleBack() {
+        centerPanel.goBack();
+    }
+
+    @FXML
     private void handlePersonGridPanel() {
-        centerPanel.displayPersonGridPanel(logic.getFilteredPersonList(), logic.getEmptyLessonList());
+        centerPanel.displayPersonGridPanel(logic.getEmptyLessonList());
     }
 
     private void handlePersonGridPanel(Person student) {
+        requireNonNull(student);
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
+    }
+
+    /**
+     * Displays tag list instead of the default person list.
+     */
+    @FXML
+    private void handleShowTagList() {
+        centerPanel.displayTagListPanel();
     }
 
     /**
@@ -207,21 +285,66 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getDisplayType()) {
+            case HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.getStudent().isPresent()) {
-                Person student = commandResult.getStudent().get();
-                handlePersonGridPanel(student);
-            } else if (commandResult.isShowSchedule()) {
-                handleSchedule();
-            } else {
-                handlePersonGridPanel();
-            }
+            case REMINDER:
+                handleReminder();
+                break;
 
-            if (commandResult.isExit()) {
+            case EXIT:
                 handleExit();
+                break;
+
+            case STUDENTS:
+                if (commandResult.getStudent().isPresent()) {
+                    Person student = commandResult.getStudent().get();
+                    handlePersonGridPanel(student);
+                } else {
+                    handlePersonGridPanel();
+                }
+                break;
+
+            case TAGS:
+                handleShowTagList();
+                break;
+
+            case CALENDAR:
+                handleCalendar();
+                break;
+
+            case DAY:
+                handleDay();
+                break;
+
+            case WEEK:
+                handleWeek();
+                break;
+
+            case MONTH:
+                handleMonth();
+                break;
+
+            case YEAR:
+                handleYear();
+                break;
+
+            case NEXT:
+                handleNext();
+                break;
+
+            case TODAY:
+                handleToday();
+                break;
+
+            case BACK:
+                handleBack();
+                break;
+
+            default:
+                throw new AssertionError("Should not reach here.");
             }
 
             return commandResult;

@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -15,7 +16,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static double TEXT_WIDTH_PERC = 0.85;
+    private static final double TEXT_WIDTH_PERC = 0.85;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -151,8 +152,8 @@ public class PersonCard extends UiPart<Region> {
             tags.setManaged(false);
         } else {
             person.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(createTagLabel(tag.tagName)));
+                    .sorted(Comparator.comparing(Tag::getTagName))
+                    .forEach(tag -> tags.getChildren().add(createTagLabel(tag.getTagName())));
         }
         setAllLabelsMaxWidth();
         tags.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
