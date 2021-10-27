@@ -28,10 +28,10 @@ If you are a Financial Advisor that can type fast, FAST will get your contact ma
 
 ### Features overview
 Here is an overview of the features FAST offers:
-* Keep track of your [client's](#managing-a-client) information (i.e. Name, Phone number, Email address, Home address, and Remarks) in our
+* Keep track of your client's [information](#managing-a-client) (i.e. Name, Phone number, Email address, Home address, and Remarks) in our
   all-in-one app!
 * Record and keep track of your client's [appointment](#appointments) dates. Never miss another appointment date again!
-* Tag your clients with the [insurance plan](#tags) they have purchased or are interested in.
+* [Tag](#tags) your clients with the insurance plan they have purchased or are interested in.
 * View built-in [analysis](#viewing-statistics) of your client base to better understand your portfolio.
 
 ### Purpose of this guide
@@ -274,6 +274,14 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * **Must be a positive integer** 1, 2, 3, …​
 
 
+#### `KEYWORD`
+*   The condition to sort your client list
+*   There are currently only 3 conditions available: name, appointment, priority.
+    * name will sort all clients in alphabetical order from A to Z.
+    * appointment will sort all client by appointment date from the earliest date to latest.
+    * priority will sort all client by priority tag from the highest to the lowest priority.
+    
+
 #### `NAME`
 * The name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
@@ -303,7 +311,8 @@ To achieve the best possible experience, avoid adding excessively long input to 
   1. Normal Tags: should not be longer than 20 characters
   2. Priority Tag: either one of the 3 priorities (low, med, high)
   3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
-* Refer to [Tags](#tag) to find out more about each tag
+* Refer to [Tags](#tags) to find out more about each tag
+
 
 #### `TIME`
 * The time of an appointment with your client
@@ -313,15 +322,8 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * Should be a valid time from 00:00 to 23:59 where:
   * `HH` (hour): should be between 00 and 23
   * `mm` (minute): should be between 00 and 59
-  
-#### `KEYWORD`
-*   The condition to sort your client list
-*   There are currently only 3 conditions available: name, appointment, priority.
-    * name will sort all clients in alphabetical order from A to Z.
-    * appointment will sort all client by appointment date from the earliest date to latest.
-    * priority will sort all client by priority tag from the highest to the lowest priority.
+    
 
-  
 #### `VENUE`
 * The location of an appointment with your client
 * Should not be longer than **30** characters long
@@ -336,7 +338,7 @@ in appointment dates and tag your clients all within FAST.
 (---------------------insert an image of a client card in FAST---------------------------)
 
 In this user guide, we will showcase commands related to Clients first followed by sections on [Appointment](#appointments)
-and [Tags](#tag). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
+and [Tags](#tags). After this section on clients, you can also learn more about [managing your client base](#managing-your-client-base),
 or view our [other utility features](#others). 
 
 <br>
@@ -564,7 +566,7 @@ This CANNOT be undone!
 
 ##### Updating completed appointment: `ma`
 
-You can mark the appointment [appointment](#adding-an-appointment-aa) with your client as completed.
+You can mark the appointment [appointment](#appointments) with your client as completed.
 This also allows you to keep track of the number of completed appointments with your client.
 
 ![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
@@ -685,7 +687,7 @@ to viewing your full client list after a
 
 You can sort all your clients by a given condition, allowing you to keep your clients list orderly and well-organised.
 You also can use this command quickly sieve through large client lists.
-Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tag).
+Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tags).
 
 **Format**: `sort KEYWORD`
 
@@ -699,7 +701,7 @@ Currently, you can sort by name, [appointment date](#appointments), and [priorit
 
 #### Searching for clients: `find`
 
-You can use this command to find clients by their name, [priority](#tag), [tags](#tag) or
+You can use this command to find clients by their name, [priority](#tags), [tags](#tags) or
 [remarks](#adding-a-remark-to-your-client-rmk). This is useful if your have many clients in FAST and wish to quickly find a
 specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
 
@@ -832,11 +834,11 @@ FAST will start with an empty data file on the next run!
 ## **Command summary**
 The tables below provides you with a summary for **all** the available commands in FAST. You can use this section to quickly refresh your memory on the different command formats. 
 The commands are categorised (based on their purpose) into 5 different categories:
-* [Contact Management](#Contact-Management)
-* [Appointment](#Appointment)
-* [Tags](#tag)
-* [Navigation](#Navigation)
-* [Others](#Others)
+* [Contact Management](#contact-management)
+* [Appointment Management](#appointment-management)
+* [Tag Management](#tag-management)
+* [Navigation](#navigation)
+* [Others](#others)
 
 ### Contact Management
 
@@ -848,7 +850,7 @@ Action | Format, Examples
 **Add Remark** | `rmk INDEX [r/REMARK]`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 
-### Appointment
+### Appointment Management
 
 Action | Format, Examples
 --------|------------------
@@ -857,7 +859,7 @@ Action | Format, Examples
 **Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`<br>
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
 
-### Tags
+### Tag Management
 
 Action | Format, Examples
 --------|------------------
