@@ -69,10 +69,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui): The UI of the App.
+* [**`Logic`**](#logic): The command executor.
+* [**`Model`**](#model): Holds the data of the App in memory.
+* [**`Storage`**](#storage): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
@@ -141,7 +141,7 @@ How the parsing works:
 * When called upon to parse a user command, the `PlannerMdParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `PlannerMdParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteDoctorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model component <a name="model"/>
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -310,7 +310,7 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 **Value proposition**: easily manage patients' information and doctors' appointments faster than a typical mouse/GUI driven app
 
 
-### User stories  <a name="user-stores"/>
+### User stories  <a name="user-stories"/>
 These are some user stories we took into account when designing PlannerMD:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
