@@ -23,7 +23,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.AttributeContainsKeywordsPredicate;
+import seedu.address.model.person.PartialKeyContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -42,7 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_FRIEND = "friends";
     public static final String VALID_GITHUB_ID_AMY = "amy";
     public static final String VALID_GITHUB_ID_BOB = "bob";
     public static final String VALID_NUS_NETWORK_ID_AMY = "e0000000";
@@ -172,7 +172,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new AttributeContainsKeywordsPredicate(Arrays.asList(splitName[0]), NAMETYPE));
+        model.updateFilteredPersonList(new PartialKeyContainsKeywordsPredicate(Arrays.asList(splitName[0]), NAMETYPE));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -186,7 +186,7 @@ public class CommandTestUtil {
         for (int i = 0; i < persons.length; ++i) {
             queries[i] = persons[i].getName().fullName.split("\\s+")[0];
         }
-        model.updateFilteredPersonList(new AttributeContainsKeywordsPredicate(Arrays.asList(queries), NAMETYPE));
+        model.updateFilteredPersonList(new PartialKeyContainsKeywordsPredicate(Arrays.asList(queries), NAMETYPE));
 
         assertEquals(persons.length, model.getFilteredPersonList().size());
     }
