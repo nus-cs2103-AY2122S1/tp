@@ -285,11 +285,6 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         filteredTasks.setPredicate(predicate);
-        for (Task task:
-                filteredTasks) {
-            System.out.println("in model");
-            System.out.println(task.getName());
-        }
     }
 
     @Override
