@@ -21,8 +21,8 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Locating Participants by name: `find`](#locating-participants-by-name-find)
         * [Listing all Participants: `list`](#listing-all-participants--list)
         * [Viewing a Participant's details: `view`](#viewing-a-participants-details-view)
-        * [Adding Next of Kin to a Participant: `addNok`](#adding-next-of-kin-to-a-participant-addnok)
-        * [Removing Next of Kin from a Participant: `deleteNok`](#removing-next-of-kin-from-a-participant-deletenok)
+        * [Adding Next-of-Kin to a Participant: `addNok`](#adding-next-of-kin-to-a-participant-addnok)
+        * [Removing Next-of-Kin from a Participant: `deleteNok`](#removing-next-of-kin-from-a-participant-deletenok)
     * [Event](#event)
         * [Adding an event: `addEvent`](#adding-an-event-addevent)
         * [Deleting an event: `deleteEvent`](#deleting-an-event--deleteevent)
@@ -145,8 +145,8 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
   the parameter will be taken.<br>
   e.g. if you specify `t/1700 t/1800`, only `t/1800` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (namely `help`, `list`, `clear`, `sortEvents` and 
-  `exit`) will be ignored.<br>
+* If a command does not take in any parameters, (namely `help`, `list`, `clear`, `sortEvents` and 
+  `exit`) then any extra words added after the command will be ignored.<br>
   e.g. if the command specifies `sortEvents 123`, it will be interpreted as `sortEvents`.
 
 </div>
@@ -238,30 +238,30 @@ Example Usage:
 
 <br>![result for 'view 1'](images/viewFirstResult.png)
 
-### Adding Next of Kin to a Participant: `addNok`
+### Adding Next-of-Kin to a Participant: `addNok`
 
-Add Next of Kin to Participant at specified index.
+Adds a Next-of-Kin to a Participant.
 
 Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 
-* Add a Next of Kin to Participant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed Participant list.
+* Adds a Next of Kin to the Participant at the specified `INDEX`.
+* The index refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* All fields including `n/NAME`, `p/PHONE`, and 'tag/TAG' must be provided.
-* Next of Kin with the same name cannot be assigned to the same Participant
+* A Next-of-Kin with the same name cannot be assigned to the same Participant.
 
 Example Usage:
-* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - adds Next of Kin whose name is Janette Yeo with contact number
-  88734323 and with tag Spouse to the first Participant.
+* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - adds a Next-of-Kin whose name is Janette Yeo with contact number
+  88734323 and tag Spouse to the first Participant.
 
-### Removing Next of Kin from a Participant: `deleteNok`
+### Removing Next-of-Kin from a Participant: `deleteNok`
 
-Remove Next of Kin at specified index from a Participant at another specified index.
+Removes a Next-of-Kin from a Participant.
 
 Format: `deleteNok INDEX_1 INDEX_2`
 
-* Removes the Next of Kin at specified `INDEX_1` from the Participant at specified index `INDEX_2`.
-* The index refers to the index number shown in the displayed Participant list.
+* Removes the Next-of-Kin at specified `INDEX_1` from the Participant at specified index `INDEX_2`.
+* `INDEX_1` refers to the index number of the Next-of_Kin as shown in the Participant's list of Next-of-Kins.
+* `INDEX_2` refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
