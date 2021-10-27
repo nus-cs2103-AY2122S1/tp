@@ -31,7 +31,7 @@
       <VBox>
             <AnchorPane prefHeight="0.0" prefWidth="675.0">
                <children>
-              <MenuBar fx:id="menuBar" layoutX="68.0" prefHeight="57.0" prefWidth="675.0">
+              <MenuBar fx:id="menuBar" layoutX="53.0" prefHeight="43.0" prefWidth="690.0">
                 <Menu mnemonicParsing="false" text="File">
                   <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                 </Menu>
@@ -39,7 +39,7 @@
                   <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                 </Menu>
               </MenuBar>
-                  <ImageView fitHeight="56.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/MrTechRecruiter.png" />
                      </image>
