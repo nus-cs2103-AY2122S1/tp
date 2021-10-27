@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Event> filteredEvents;
     private TaskList taskListManager;
-    private final FilteredList<Task> filteredTasks;
+    private FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -188,6 +188,7 @@ public class ModelManager implements Model {
         requireNonNull(member);
         if (this.taskListManager != member.getTaskList()) {
             this.taskListManager = member.getTaskList();
+            this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
         }
     }
 
@@ -210,6 +211,7 @@ public class ModelManager implements Model {
     public void addTask(Member member, Task task) {
         loadTaskList(member);
         taskListManager.add(task);
+        updateFilteredTaskList(member, PREDICATE_SHOW_ALL_TASKS);
     }
 
     /**
@@ -238,8 +240,7 @@ public class ModelManager implements Model {
      * The member identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     @Override
-    public void setTask(Member member, Task target, Task editedTask) {
-        loadTaskList(member);
+    public void setTask(Task target, Task editedTask) {
         taskListManager.setTask(target, editedTask);
     }
 
@@ -247,8 +248,7 @@ public class ModelManager implements Model {
      * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
      */
     @Override
-    public void setTask(Member member, int index, Task editedTask) {
-        loadTaskList(member);
+    public void setTask(int index, Task editedTask) {
         taskListManager.setTask(index, editedTask);
     }
 
@@ -258,7 +258,7 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Task> getFilteredTaskList(Member member) {
         loadTaskList(member);
-        return taskListManager.asUnmodifiableObservableList();
+        return filteredTasks;
     }
 
     /**
@@ -267,7 +267,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
-        return taskListManager.asUnmodifiableObservableList();
+        return filteredTasks;
     }
 
     /**
@@ -279,6 +279,12 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
         loadTaskList(member);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
 

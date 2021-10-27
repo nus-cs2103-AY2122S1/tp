@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <ToolBar fx:id="titleHolder" prefHeight="20" VBox.vgrow="NEVER">
+      <items>
+         <Label fx:id="memberListTitle" accessibleRole="TEXT_AREA" alignment="CENTER" contentDisplay="CENTER"
+                textAlignment="CENTER" wrapText="true">
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </items>
+   </ToolBar>
   <ListView fx:id="memberListView" VBox.vgrow="ALWAYS" />
 </VBox>

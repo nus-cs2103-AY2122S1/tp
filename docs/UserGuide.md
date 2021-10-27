@@ -152,9 +152,9 @@ Format: `mfind KEYWORD [MORE_KEYWORDS]…​`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavid.png)
+* `mfind John` returns `john` and `John Doe`
+* `mfind alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'mfind alex david'](images/findAlexDavid.png)
 
 #### Deleting a member : `mdel`
 

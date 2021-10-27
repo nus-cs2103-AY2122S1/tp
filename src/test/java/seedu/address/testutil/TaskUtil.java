@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TaddCommand;
-import seedu.address.logic.commands.TdelCommand;
+import seedu.address.logic.commands.task.TaddCommand;
+import seedu.address.logic.commands.task.TdelCommand;
 import seedu.address.model.module.task.Task;
 
 /**

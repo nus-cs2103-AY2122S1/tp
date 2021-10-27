@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_POEM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMBER_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_DEADLINE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_NAME;
-import static seedu.address.logic.commands.TaddCommand.MESSAGE_USAGE;
+import static seedu.address.logic.commands.task.TaddCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -16,7 +16,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TaddCommand;
+import seedu.address.logic.commands.task.TaddCommand;
+import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.model.module.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
