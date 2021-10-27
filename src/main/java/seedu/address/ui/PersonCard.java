@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
 
 /**
@@ -92,7 +91,7 @@ public class PersonCard extends UiPart<Region> {
         person.getSocialHandles().stream()
                 .sorted(Comparator.comparing(socialHandle -> socialHandle.platform))
                 .forEach(socialHandle -> socialHandles.getChildren()
-                .add(new Label(socialHandle.platform + " : " + socialHandle.value)));
+                        .add(new Label(socialHandle.platform + " : " + socialHandle.value)));
     }
 
     @Override
