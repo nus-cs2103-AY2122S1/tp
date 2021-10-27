@@ -59,6 +59,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         return newAddressBook;
     }
 
+    /**
+     * Returns a new address book with contacts and zero folders
+     * @param model model to copy contacts from
+     * @return address book with contacts
+     */
+    public static AddressBook withContacts(Model model) {
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ObservableList<Person> contactList = addressBook.getPersonList();
+        AddressBook newAddressBook = new AddressBook();
+        newAddressBook.setPersons(contactList);
+        return newAddressBook;
+    }
+
     //// list overwrite operations
 
     /**
