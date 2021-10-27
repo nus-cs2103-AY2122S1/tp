@@ -8,16 +8,17 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
 [Quick Start](#quick-start)<br>
 [Features](#features)
-- [Give a list of instructions : `help`](#give-a-list-of-instructions-help)
+- [Give a list of instructions : `man`](#give-a-list-of-instructions-help)
 - [Adding a person: `add`](#adding-a-person-add)
-- [Listing all persons: `list`](#listing-all-persons-list)
+- [Listing all persons: `ls`](#listing-all-persons-list)
 - [Editing a person: `edit`](#editing-a-person-edit)
 - [Locating persons by name: `find`](#locating-persons-by-name-find)
-- [Deleting a person: `delete`](#deleting-a-person-delete)
-- [Add task:](#add-task)
-- [Delete task:](#delete-task)
-- [Edit task:](#edit-task)
-- [Mark task as done:](#mark-task-as-done)
+- [Deleting a person: `rm`](#deleting-a-person-delete)
+- [Add task: `add`](#add-task)
+- [Delete task: `rm`](#delete-task)
+- [Edit task: `edit`](#edit-task)
+- [Mark task as done: `donetask`](#mark-task-as-done)
+- [Mark task as not done: `undotask`](#mark-task-as-not-done)
 - [Clearing all entries: `clear`](#clearing-all-entries-clear)
 - [Viewing tasks: `cat`](#viewing-tasks-cat)
 - [Sorting persons by name: `sort`](#sorting-persons-by-name-sort)
@@ -41,14 +42,14 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`man`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`ls`** : Lists all contacts.
 
    * **`add`**`-n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01` : Adds a contact named `John Doe` to ContactSH.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`rm`**`3` : Deletes the 3rd contact shown in the current list.
 
    * **`clear`** : Deletes all contacts.
 
@@ -77,26 +78,26 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be taken.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- Extraneous parameters for commands that do not take in parameters (such as `ls`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `ls 123`, it will be interpreted as `ls`.
 
 </div>
 
-### Give a list of instructions: `help`
+### Give a list of instructions: `man`
 
 Shows the user a list of instructions that can be used to navigate the app.
 
-Format: `help [COMMAND_NAME]`
+Format: `man [COMMAND_NAME]`
 
 - If no command-name is entered, the user will see the list of all the keywords for each command
 
 * If the user enters a valid command-name, the user will see the full details of that command, which includes the format and taskName of the command.
 
 Examples:
-* `help`
-* `help sort`
+* `man` Shows the full list of keywords for all commands.
+* `man sort` Shows the full details of `sort` command.
 
-Sample outcome (User typed `help sort`):
+Sample outcome (User typed `man sort`):
 ```
 Sort persons by the alphabetical order of their name
 Format: sort [-r]
@@ -117,14 +118,14 @@ Notes:
 *`IMPORTANCE` is either "true" or "false" (Case insensitive)
 
 Examples:
-* `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`
-* `add -n Betsy Crowe -l friend -e betsycrowe@example.com -a Newgate Prison -p 1234567 -d Bald -l criminal`
+* `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01` Adds a person with name `John Doe`, phone number `98765432`, email `johnd@example.com`, address `John street, block 123, #01-01`.
+* `add -n Betsy Crowe -l friend -e betsycrowe@example.com -a Newgate Prison -p 1234567 -d Bald -l criminal` Adds a person with name `Betsy Crowe`, phone number `1234567`, email `betsycrowe@example.com`, address `Newgate Prison`, label `criminal` and `friend`, description `Bald`.
 
-### Listing all persons: `list`
+### Listing all persons: `ls`
 
 Shows a list of all persons in ContactSH.
 
-Format: `list`
+Format: `ls`
 
 ### Editing a person: `edit`
 
@@ -163,11 +164,11 @@ Examples:
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person: `delete`
+### Deleting a person: `rm`
 
 Deletes the specified person from ContactSH.
 
-Format: `delete INDEX`
+Format: `rm INDEX`
 
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
@@ -175,41 +176,41 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in ContactSH.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `ls` followed by `rm 2` deletes the 2nd person in ContactSH.
+- `find Betsy` followed by `rm 1` deletes the 1st person in the results of the `find` command.
 
-### Add task:
+### Add task: `add`
 
 Add a task to the current list of tasks attached to a person.
 
-Format: `addtask INDEX -tn TASKNAME [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]`
+Format: `add INDEX -tn TASKNAME [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]`
 
 * Adds a task to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
 * `TASK_TIME` should follow the format of `HH:MM`.
 
 Examples:
-* `addtask 1 -tn call for meeting -td 2021-12-03 -tt 14:30` Adds the task `call for meeting` with date `2021-12-03` and time `14:30` to the list of task of the person in 1st person.
+* `add 1 -tn call for meeting -td 2021-12-03 -tt 14:30` Adds the task `call for meeting` with date `2021-12-03` and time `14:30` to the list of task of the person in 1st person.
 
-### Delete task:
+### Delete task: `rm`
 
 Deletes a task from the specified person.
 
-Format: `deletetask INDEX -ti TASK_INDEX…​`
+Format: `rm INDEX -ti TASK_INDEX…​`
 
 * Deletes a task attached to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The task deleted is specified by the `TASK_INDEX`. The task_index refers to the index number displayed in the tasklist of said person. The index **must be a positive integer** 1, 2, 3, …​
 * If the same `TASK_INDEX` is specified more than once, it will only be deleted once.
 
 Examples:
-* `deletetask 2 -ti 2 -ti 2` Deletes the 2nd task attached to the 2nd person.
-* `deletetask 1 -ti 2 -ti 3` Deletes the 2nd and 3rd task attached to the 1st person.
+* `rm 2 -ti 2 -ti 2` Deletes the 2nd task attached to the 2nd person.
+* `rm 1 -ti 2 -ti 3` Deletes the 2nd and 3rd task attached to the 1st person.
 
-### Edit task:
+### Edit task: `edit`
 
 Edit an existing task in ContactSH.
 
-Format: `edittask INDEX -ti TASK_INDEX [-tn TASKNAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…​`
+Format: `edit INDEX -ti TASK_INDEX [-tn TASKNAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…​`
 
 * Edits tasks attached to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The tasks edited  is specified by the `TASK_INDEX`. The task_index refers to the index number displayed in the tasklist of said person. The index **must be a positive integer** 1, 2, 3, …​
@@ -220,10 +221,10 @@ Format: `edittask INDEX -ti TASK_INDEX [-tn TASKNAME] [-td TASK_DATE] [-tt TASK_
 * `TASK_TIME` should follow the format of `HH:MM`.
 
 Examples:
-* `edittask 3 -ti 2 -tn Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
-* `edittask 2 -ti 3 -tn Presentation Meeting -ta Zoom -ti 5 -td 2021-12-20` Changes the 3rd and 5th task of the second person in the list. Description of the 3rd task is changed to`Presentation Meeting` and address to `Zoom`, and date of the 5th task is changed to `2021-12-21`.
+* `edit 3 -ti 2 -tn Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
+* `edit 2 -ti 3 -tn Presentation Meeting -ta Zoom -ti 5 -td 2021-12-20` Changes the 3rd and 5th task of the second person in the list. Description of the 3rd task is changed to`Presentation Meeting` and address to `Zoom`, and date of the 5th task is changed to `2021-12-21`.
 
-### Mark task as done:
+### Mark task as done: `donetask`
 
 Marks existing tasks in ContactSH as done.
 
@@ -236,9 +237,24 @@ Format: `donetask INDEX -ti TASK_INDEX…​`
 Examples:
 * `donetask 4 -ti 1 -ti 5` Marks the 1st and 5th task of the 4th person in the list as done.
 
+### Mark task as not done: `undotask`
+
+Marks existing tasks in ContactSH as not done.
+
+Format: `undotask INDEX -ti TASK_INDEX…​`
+
+* Marks tasks attached to the person at the specified `INDEX` as not done. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The tasks marked is specified by the `TASK_INDEX`. The task_index refers to the index number displayed in the tasklist of said person. The index **must be a positive integer** 1, 2, 3, …​
+* Multiple tasks of one person can be marked as not done in one command.
+
+Examples:
+* `undotask 4 -ti 1 -ti 5` Marks the 1st and 5th task of the 4th person in the list as not done.
+
 ### Clearing all entries: `clear`
 
 Clears all entries from ContactSH.
+
+Format: `clear`
 
 ### Viewing tasks: `cat`
 
@@ -252,7 +268,7 @@ Clears all entries from ContactSH.
 
    Examples:
 
-   * `list` followed by delete 2 deletes the 2nd person in the address book.
+   * `ls` followed by delete 2 deletes the 2nd person in the address book.
    * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command. 
 
 2. Shows the user the task list of every single person in ContactSh.
@@ -299,14 +315,15 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-d Description] [-l LABEL]…​` <br> e.g., `add -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -d Rich -l friend -l colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `rm INDEX`<br> e.g., `rm 3`
 **Edit** | `edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-d Description] [-l LABEL]…​`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**List** | `ls`
 **Sort** | `sort [-r]`
-**Help** | `help`
-**Add Task** | `addtask INDEX -tn TASKNAME` <br> e.g., `addtask 2 -tn celebrate $1 million revenue -tn Contact Professor to get help`
-**Delete Task** | `deltask INDEX -ti TASK_INDEX` <br> e.g., `deletetask 2 -ti 2 -ti 3`
-**Edit Task** | `edittask INDEX -ti TASK_INDEX [-tn TASK_NAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…​` <br> e.g., `edittask 1 -ti 2 -tn Internship Interview -tt 15:45 -ti 4 -td 2022-09-20`
+**Help** | `man`
+**Add Task** | `add INDEX -tn TASKNAME` <br> e.g., `addtask 2 -tn celebrate $1 million revenue -tn Contact Professor to get help`
+**Delete Task** | `rm INDEX -ti TASK_INDEX` <br> e.g., `deletetask 2 -ti 2 -ti 3`
+**Edit Task** | `edit INDEX -ti TASK_INDEX [-tn TASK_NAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…​` <br> e.g., `edittask 1 -ti 2 -tn Internship Interview -tt 15:45 -ti 4 -td 2022-09-20`
 **Done Task** | `donetask INDEX -ti TASK_INDEX…​` <br> e.g., `donetask 3 -ti 2 -ti 5`
+**Not Done Task** | `undotask INDEX -ti TASK_INDEX…​` <br> e.g., `undotask 3 -ti 2 -ti 5`
 **View Task** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
