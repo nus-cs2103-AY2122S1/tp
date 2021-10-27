@@ -34,7 +34,7 @@
             <TableView fx:id="helpTable" AnchorPane.topAnchor="1.0">
               <columns>
                 <TableColumn text="Feature" prefWidth="220">
-                  <cellValueFactory><PropertyValueFactory property="featureName" />
+                  <cellValueFactory><PropertyValueFactory property="commandName" />
                   </cellValueFactory>
                 </TableColumn>
                 <TableColumn text="Command" prefWidth="290">
