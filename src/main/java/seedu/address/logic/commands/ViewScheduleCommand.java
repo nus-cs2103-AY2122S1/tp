@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
+import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
@@ -33,7 +35,8 @@ public class ViewScheduleCommand extends Command {
     public static final String COMMAND_WORD = "viewSchedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the schedules of the staff that have the"
-            + "input parameters.\n\n"
+            + "input parameters."
+            + SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_NAME + "NAME] "
             + "[" + PREFIX_DASH_INDEX + "INDEX] "
@@ -42,6 +45,7 @@ public class ViewScheduleCommand extends Command {
             + "[" + PREFIX_DASH_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DASH_SALARY + "SALARY] "
             + "[" + PREFIX_DASH_STATUS + "STATUS] "
+            + DATE_RANGE_INPUT
             + "[" + PREFIX_DASH_ROLE + "ROLE]... "
             + "[" + PREFIX_DASH_TAG + "TAG]...\n\n"
             + "Example:\n" + COMMAND_WORD + " "

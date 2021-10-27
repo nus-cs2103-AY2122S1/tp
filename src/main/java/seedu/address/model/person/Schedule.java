@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
+import seedu.address.model.EmptyShift;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
 
@@ -180,8 +181,10 @@ public class Schedule {
     public void setTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
                         LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
-        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
-            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = new Shift(dayOfWeek, slot);
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null
+                || shifts[dayOfWeek.getValue() - 1][slot.getOrder()].isEmpty()) {
+            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = new EmptyShift(dayOfWeek, slot);
+            shifts[dayOfWeek.getValue() - 1][slot.getOrder()].add(startDate, endDate);
         }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shifts[dayOfWeek.getValue() - 1][slot.getOrder()]
                 .setTime(startTime, endTime, slot.getOrder(),

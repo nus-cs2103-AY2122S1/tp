@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
+import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -27,15 +28,15 @@ public class DeleteShiftCommand extends Command {
     public static final String COMMAND_WORD = "deleteShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a shift from the staff identified "
-            + "by the index number used in the displayed staff list or the name of staff. By default, the shift"
-            + "deleted is from today to seven days later. When date input is provided, it should be in order. If "
-            + "only one date is provided, the end date is assumed to be seven days later.\n\n"
+            + "by the index number used in the displayed staff list or the name of staff. Date input is used"
+            + "to indicate the duration of the shift to delete."
+            + SHIFT_PERIOD_PARSING_DEFAULT + "n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_INDEX + " INDEX] or "
             + "[" + PREFIX_DASH_NAME + " NAME] "
             + PREFIX_DAY_SHIFT + "DAY_AND_SLOT"
-            + "[" + PREFIX_DATE + "START_DATE]"
-            + "[" + PREFIX_DATE + "END_DATE\n\n"
+            + DATE_RANGE_INPUT
+            + "\n\n"
             + "Examples:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_INDEX + " 1 "
             + PREFIX_DAY_SHIFT + "monday-1" + "\n"
