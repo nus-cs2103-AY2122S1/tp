@@ -48,8 +48,9 @@ public class CalendarEntryList {
     private void add(Entry<Lesson> calendarEntry) {
         calendar.addEntry(calendarEntry);
         entryList.add(calendarEntry);
-        if (isUpcoming(calendarEntry.getUserObject().getDisplayEndLocalDateTime())
-                && !upcomingLessons.contains(calendarEntry)) {
+        Lesson lesson = calendarEntry.getUserObject();
+        if (isUpcoming(lesson.getDisplayEndLocalDateTime())
+                && upcomingLessons.stream().noneMatch(entry -> entry.getUserObject().equals(lesson))) {
             upcomingLessons.add(calendarEntry);
             sortUpcomingLessons();
         }
