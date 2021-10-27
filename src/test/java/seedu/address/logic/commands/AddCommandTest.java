@@ -80,6 +80,18 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public boolean isProfilePresent() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Person getUserProfile() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setUserProfile(Person p) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -131,6 +143,16 @@ public class AddCommandTest {
 
         @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void favouritePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unfavouritePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 

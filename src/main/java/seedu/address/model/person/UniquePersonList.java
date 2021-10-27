@@ -34,7 +34,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().parallel().anyMatch(toCheck::isSamePerson);
     }
 
     /**
@@ -47,7 +47,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
-        Collections.sort(internalList);
+        sortList();
     }
 
     /**
@@ -81,6 +81,42 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Favourites the equivalent person from the list.
+     * The person must exist in the list.
+     */
+    public void favourite(Person toFavourite) {
+        requireNonNull(toFavourite);
+        if (!internalList.stream().anyMatch(x -> x.equals(toFavourite))) {
+            throw new PersonNotFoundException();
+        } else {
+            internalList.forEach(person -> {
+                if (person.equals(toFavourite)) {
+                    person.setIsFavourite();
+                }
+            }
+            );
+        }
+    }
+
+    /**
+     * Un-favourites the equivalent person from the list.
+     * The person must exist in the list.
+     */
+    public void unfavourite(Person toUnfavourite) {
+        requireNonNull(toUnfavourite);
+        if (!internalList.stream().anyMatch(x -> x.equals(toUnfavourite))) {
+            throw new PersonNotFoundException();
+        } else {
+            internalList.forEach(person -> {
+                if (person.equals(toUnfavourite)) {
+                    person.setIsNotFavourite();
+                }
+            }
+            );
+        }
+    }
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -99,11 +135,19 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public ObservableList<Person> getInternalList() {
+        return internalList;
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public void sortList() {
+        Collections.sort(internalList);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
@@ -27,11 +28,33 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
+     * Returns the user profile.
+     */
+    Person getUserProfile();
+
+    /**
+     * Checks if the user profile is present.
+     */
+    boolean isProfilePresent();
+
+    /**
+     * Set the data in user profile.
+     */
+    void setUserProfile(Person p) throws IOException;
+
+    /**
      * Returns the AddressBook.
      *
      * @see seedu.address.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Saves all data to their respective files
+     *
+     * @throws IOException if file write error
+     */
+    void saveAllData() throws IOException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -84,4 +107,8 @@ public interface Logic {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    ObservableList<Person> getModifiableList();
+
+    void sort();
 }

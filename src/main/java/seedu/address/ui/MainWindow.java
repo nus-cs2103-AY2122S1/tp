@@ -1,11 +1,11 @@
 package seedu.address.ui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,14 +34,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private PersonDetails personDetails;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
+    private final UserProfileWindow userProfileWindow;
     private TabPaneHeader tabPaneHeader;
 
     @FXML
@@ -48,6 +49,21 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem profileMenuItem;
+
+    @FXML
+    private MenuItem contactsMenuItem;
+
+    @FXML
+    private MenuItem favoritesMenuItem;
+
+    @FXML
+    private MenuItem eventsMenuItem;
+
+    @FXML
+    private MenuItem findABuddyMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -60,6 +76,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane progressPlaceHolder;
 
     @FXML
     private StackPane tabPanePlaceholder;
@@ -82,6 +101,15 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private ImageView eventsIcon;
 
+    @FXML
+    private HBox userDetails;
+
+    @FXML
+    private ImageView userProfile;
+
+    @FXML
+    private Label userName;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -92,20 +120,28 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        // Fix dimension based on screen resolution
-        Dimension dimensions = Toolkit.getDefaultToolkit().getScreenSize();
-        primaryStage.setMaxWidth(dimensions.getWidth() / 1.8);
-        primaryStage.setMaxHeight(dimensions.getHeight() / 1.2);
-        primaryStage.setMinWidth(dimensions.getWidth() / 2);
-        primaryStage.setMinHeight(dimensions.getHeight() / 1.4);
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
+        // Fix dimension based on screen resolution
+        primaryStage.setMinHeight(800);
+        primaryStage.setMaxHeight(800);
+        primaryStage.setMinWidth(950);
+
+        // Configure all keyboard shortcuts
         setAccelerators();
 
+        // Initialize Help window
         helpWindow = new HelpWindow();
 
+        userProfileWindow = new UserProfileWindow(logic);
+
+        // Configure User Profile Window to be shown when clicked
+        userDetails.setOnMouseClicked(event -> {
+            handleUserProfileWindow();
+        });
+
+        // Configure Events Icon
         eventsIcon.setOnMouseClicked(event -> {
             tabPaneHeader.getTabPane().getSelectionModel().select(2);
         });
@@ -115,13 +151,21 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    /**
+     * Configures individual keyboard shortcuts.
+     */
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(contactsMenuItem, KeyCombination.valueOf("Shortcut+1"));
+        setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
+        setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
+        setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
     }
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     *
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -153,7 +197,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personDetails = new PersonDetails(null);
+        PersonDetails personDetails = new PersonDetails(null);
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetails);
         logic.setPersonList(personListPanel);
 
@@ -163,14 +207,29 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
+        personListPanelPlaceholder.getChildren().add(progressIndicator.getRoot());
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        tabPaneHeader = new TabPaneHeader(logic);
+        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
         tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
         personListPanel.setTabPaneHeader(tabPaneHeader);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        if (logic.isProfilePresent()) {
+            setUserProfileOnMenuBar();
+        }
+    }
+
+    /**
+     * Sets the {@code userName} and {@code userProfile}
+     * to be displayed on the Menu Bar.
+     */
+    public void setUserProfileOnMenuBar() {
+        userProfile.setImage(logic.getUserProfile().getProfilePicture());
+        userName.setText(logic.getUserProfile().getName().toString());
     }
 
     /**
@@ -197,7 +256,76 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
+    /**
+     * Opens the current user's Telegram.
+     */
+    public void handleTelegram() {
+        personListPanel.openTelegram();
+    }
+
+    /**
+     * Opens the current user's GitHub.
+     */
+    public void handleGithub() {
+        personListPanel.openGithub();
+    }
+
+    /**
+     * Opens the user profile window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleUserProfileWindow() {
+        if (!userProfileWindow.isShowing()) {
+            userProfileWindow.show();
+        } else {
+            userProfileWindow.focus();
+        }
+    }
+
+    /**
+     * Switches to the Contacts tab.
+     */
+    @FXML
+    public void handleContacts() {
+        tabPaneHeader.activateContacts(logic);
+    }
+
+    /**
+     * Activates the Favorites tab.
+     */
+    @FXML
+    public void handleFavorites() {
+        tabPaneHeader.activateFavorites(logic);
+    }
+
+    /**
+     * Switches to the Events tab.
+     */
+    @FXML
+    public void handleEvents() {
+        tabPaneHeader.activateEvents(logic);
+    }
+
+    /**
+     * Switches to the Find A Buddy Tab.
+     */
+    @FXML
+    public void handleFindABuddy() {
+        tabPaneHeader.activateFindABuddy(logic);
+    }
+
+    /**
+     * Launches the {@code ProfileWindow}.
+     */
+    public void show() {
+        ProfileSetUpWindow profileSetUpWindow = new ProfileSetUpWindow(new Stage(), this, logic);
+        profileSetUpWindow.start();
+    }
+
+    /**
+     * Shows the {@code MainWindow}.
+     */
+    public void start() {
         primaryStage.show();
     }
 
@@ -209,8 +337,16 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        try {
+            logic.saveAllData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.severe("Unable to save Address Book to Memory");
+        }
         helpWindow.hide();
+        userProfileWindow.hide();
         primaryStage.hide();
+        ThreadProcessor.stopAllThreads();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -234,6 +370,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isTelegram()) {
+                handleTelegram();
+            }
+
+            if (commandResult.isGithub()) {
+                handleGithub();
             }
 
             return commandResult;

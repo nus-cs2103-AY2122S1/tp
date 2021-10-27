@@ -29,6 +29,7 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, PersonDetails personDetails) {
         super(FXML);
         this.personDetails = personDetails;
+        this.getRoot().setPrefHeight(Region.USE_PREF_SIZE);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.getSelectionModel().selectedItemProperty().addListener((
@@ -81,5 +82,26 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    /**
+     * Refreshes the person list GUI
+     */
+    public void refreshPersonListUI() {
+        personListView.refresh();
+    }
+
+    /**
+     * Opens the current user's Telegram.
+     */
+    public void openTelegram() {
+        this.personDetails.openTelegram();
+    }
+
+    /**
+     * Opens the current user's GitHub.
+     */
+    public void openGithub() {
+        this.personDetails.openGithub();
     }
 }

@@ -6,7 +6,7 @@ title: User Guide
 <img src = "https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/logo.jpeg?raw=true" align = "left" width="100" height="100" style="margin-right: 1.25em">
 <div>
   
-  <h1> CohortConnect v1.2 </h1>
+  <h1> CohortConnect v1.3b </h1>
   
   <b> Type. Explore. Connect. </b>
   
@@ -14,34 +14,65 @@ title: User Guide
 
 <br><br>
 
-CohortConnect is a desktop application for students, professors, and teaching assistants to connect, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface.
+CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+
+Manage large groups of contacts with advanced features such as **Import** for a quick 1-step setup, marking your **Favourite** contacts, as well as finding contacts going to the same **Event**. CohortConnect also makes it easy to connect with like-minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging GitHub’s metadata using a proprietary algorithm.
 
 ## Table of Contents
+ - [Purpose](#Purpose)
  - [Quick Start](#QuickStart)
  - [Features](#Features)
-    - [Adding a new Contact - add](#Add)
-    - [Delete a Contact - delete](#Delete)
-    - [Edit a Contact - edit](#Edit)
-    - [Find a Contact - find](#Find)
-    - [Show a Contact - show](#Show) (Coming Soon)
-    - [Importing Contacts - import ](#Import) (Coming Soon)
-    - [Exporting Contacts - export](#Export) (Coming Soon)
-  - [Coming Soon](#ComingSoon)
-  - [FAQ](#FAQ)
-  - [Command Summary](#CommandSummary)
+    - [Adding a new Student - add](#Add)
+    - [Delete a Student - delete](#Delete)
+    - [Edit a Student - edit](#Edit)
+    - [Find a Student - find](#Find)
+    - [Show a Student Contact - show](#Show)
+    - [Importing Student Contacts - import ](#Import)
+    - [Exporting Student Contacts - export](#Export)
+    - [Setting a Contact as Favourite - fav](#SetFavourite)
+    - [Setting a Contact as Unfavourite - unfav](#SetUnFavourite)
+    - [Displaying the Help Window - help](#Help)
+    - [Listing All Student Contacts - list](#List)
+    - [Deleting All Student Contacts - clear](#Clear)
+    - [Exiting the App - exit](#Exit)
+ - [Coming Soon](#ComingSoon)
+ - [FAQ](#FAQ)
+ - [Command Summary](#CommandSummary)
 
+<h2 id = "Purpose"> </h2>
+
+## Purpose
+
+This User Guide is intended for basic to advanced users of CohortConnect. It provides sufficient information for users to set up the application and learn all its features.
 
 <h2 id = "QuickStart"> </h2>
 
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest `addressbook.jar`  release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
-3. Place `addressbook.jar` in an empty folder.
-4. Using Terminal or Command Line, navigate to the folder containing `addressbook.jar`.
-5. Execute `java -jar addressbook.jar`
+2. Download the latest `CohortConnect.jar`  release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
+3. Place `CohortConnect.jar` in an empty folder.
+4. Double-click the jar file to start the program.
+5. The UI would look like this:
 
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/WelcomeSplashScreenUi.png?raw=true">
+</p>
 
+> * Welcome Splash Screen
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/ProfileWindowUi.png?raw=true">
+</p>
+
+> * This Window is only displayed once, when the Student launches the App for the first time.
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Ui.png?raw=true">
+</p>
+
+> * Main Window.
+  
 <h2 id = "Features"> </h2>
 
 ## Features
@@ -50,29 +81,34 @@ Notes about command format:
 
 - `[x/xxx]` refers to an optional field
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
+</div>
+
 <h3 id = "Add"> </h3>
 
-## Adding a new Contact - `add`
+## Adding a new Student - `add`
 
-Adds a person to the address book.
+Adds a Student to the Address Book.
 
 Format:
 
 ```
-add n/<NAME> te/<TELEGRAM> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
 
 ```
-add n/John Doe te/@johndoe123 p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+add n/John Doe te/@johndoe123 g/john-doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 ```
 
 <h3 id = "Delete"> </h3>
 
-## Delete a Contact - `delete`
+## Delete a Student - `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified Student Contact from the Address Book.
 
 Format:
 
@@ -88,14 +124,14 @@ delete 7
 
 <h3 id = "Edit"> </h3>
 
-## Edit a Contact - `edit`
+## Edit a Student - `edit`
 
-Edits an existing person in the address book.
+Edits an existing Student Contact in the Address Book.
 
 Format: 
 
 ```
-edit <INDEX> [n/<NAME>] [te/TELEGRAM] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/TELEGRAM] [g/GITHUB] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
@@ -106,9 +142,9 @@ edit 1 n/John te/john_123 t/TA
 
 <h3 id = "Find"> </h3>
 
-## Find a Contact - `find`
+## Find a Student - `find`
 
-Finds an existing contact by name(s), tag(s), or telegram handle(s).
+Finds an existing Student Contact by name(s), tag(s), or telegram handle(s).
 
 Format 1: 
 
@@ -148,9 +184,10 @@ find @alex_1 bobx2
 
 <h3 id = "Show"> </h3>
 
-## Show a Contact - `show`
+## Show a Student Contact - `show`
 
-Shows detailed information of a contact. This can be done using the name of the contact or the index.
+Shows detailed information of a Student Contact. This can be done using the name 
+of the contact or the index.
 
 Format 1: 
 
@@ -180,38 +217,184 @@ show 4
 
 <h3 id = "Import"> </h3>
 
-## Importing Contacts - `import`
+## Importing Student Contacts - `import`
 
-Imports contacts from the specified JSON file.
+Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
 
-Format:
-
-```
-import filename.JSON
-```
-
-Example:
+Format 1:
 
 ```
-import CS2103T.JSON
+import <FILENAME>.json
+```
+
+Example 1:
+
+```
+import CS2103T.json
+```
+
+Format 2:
+
+```
+import <FILENAME>.csv
+```
+
+Example 2:
+
+```
+import CS2103T.csv
 ```
 
 <h3 id = "Export"> </h3>
 
-## Exporting Contacts - `export`
+## Exporting Student Contacts - `export`
 
-Exports contacts to the specified JSON file.
+Exports the Student Contacts to the specified JSON or CSV file. Exported file will be in the same folder as the application.
 
-Format
+Format 1:
 
 ```
-export filename.JSON
+export <FILENAME>.json
+```
+
+Example 1:
+
+```
+export Friends.json
+```
+
+Format 2:
+
+```
+export <FILENAME>.csv
+```
+
+Example 2:
+
+```
+export Friends.csv
+```
+
+<h3 id = "SetFavourite"> </h3>
+
+## Setting a Contact as Favourite - `fav`
+
+Helps to set a particular Student Contact as a Favourite.
+
+Format:
+
+```
+fav <INDEX>
 ```
 
 Example:
 
 ```
-export Friends.JSON
+fav 1
+```
+
+<h3 id = "SetUnFavourite"> </h3>
+
+## Setting a Contact as Unfavourite - `unfav`
+
+Helps to set a particular Student Contact as an Unfavourite, only if it
+was set as a Favourite earlier.
+
+Format:
+
+```
+unfav <INDEX>
+```
+
+Example:
+
+```
+unfav 1
+```
+
+<h3 id = "Help"> </h3>
+
+## Displaying the Help Window - `help`
+
+Displays the Help Window, which consists of a list
+of possible Commands, and a link to this UserGuide.
+
+Format:
+
+```
+help
+```
+
+Example:
+
+```
+help
+```
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/HelpWindowUi.png?raw=true">
+</p>
+
+<h3 id = "List"> </h3>
+
+## Listing All Student Contacts - `list`
+
+Lists all the Student Contacts present.
+
+Format:
+
+```
+list
+```
+
+Example:
+
+```
+list
+```
+
+<h3 id = "Clear"> </h3>
+
+## Deleting All Student Contacts - `clear`
+
+Deletes all the Student Contacts present.
+
+Format:
+
+```
+clear
+```
+
+Example:
+
+```
+clear
+```
+
+> WARNING: Use With Caution!
+
+<h3 id = "CommandHistory"> </h3>
+
+## Retrieve Command History - <kbd>↑</kbd> / <kbd>↓</kbd>
+
+Similar to a Command Line Interface, <kbd>↑</kbd> retrieves the previous command, while <kbd>↓</kbd> retrieves the next command.
+
+<h3 id = "Exit"> </h3>
+
+## Exiting the App - `exit`
+
+Exits the App.
+
+Format:
+
+```
+exit
+```
+
+Example:
+
+```
+exit
 ```
 
 <h2 id = "ComingSoon"> </h2>
@@ -221,7 +404,7 @@ export Friends.JSON
 1. Splash Screen
 2. Optional Fields and Telegram handle
 3. Find using Tags
-4. Import and Export Contacts 
+4. Import and Export Student Details 
 5. Show Function to display details
 
 <h2 id = "FAQ"> </h2>
@@ -240,13 +423,19 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Contact | add n/\<NAME> te/\<TELEGRAM> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
-| Delete a Contact | delete \<INDEX> |
-| Edit a Contact | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
-| Find a Contact (by Name) | find \<STRING> |
-| Find a Contact (by Tag) | find t/\<TAG> |
-| Find a Contact (by Telegram Handle) | find @\<TELEGRAM> |
-| Show a Contact (by Name)| show \<NAME> |
-| Show a Contact (by Index) | show \<INDEX> |
-| Import Contacts | import filename.JSON |
-| Exporting Contacts | export filename.JSON |
+| Add a new Student | `add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]` |
+| Delete All Student Contacts Present | `clear` |
+| Delete a Student | `delete <INDEX> ` |
+| Exit the App | `exit` |
+| Edit a Student | `edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]` |
+| Exporting Student Contacts | `export <FILENAME>.json` <br> `export <FILENAME>.csv` |
+| Favourite a Student Contact | `fav <INDEX>` |
+| Find a Student (by Name) | `find <STRING> ` |
+| Find a Student (by Tag) | `find t/<TAG>` |
+| Find a Student (by Telegram Handle) | `find @<TELEGRAM>` |
+| Import Student Contacts | `import <FILENAME>.json` <br> `import <FILENAME>.csv` |
+| List all the Student Contacts Present | `list` |
+| Show the Help Window | `help` |
+| Show a Student Contact (by Name)| `show <NAME>` |
+| Show a Student Contact (by Index) | `show <INDEX>` |
+| Unfavourite a Student Contact | `unfav <INDEX>` |

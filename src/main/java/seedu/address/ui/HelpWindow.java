@@ -100,6 +100,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Returns true if the help window is currently being shown.
+     *
+     * @return true, if the help window is being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
@@ -177,7 +179,7 @@ public class HelpWindow extends UiPart<Stage> {
         try {
             Desktop.getDesktop().browse(new URL(USERGUIDE_URL).toURI());
         } catch (IOException e) {
-            logger.severe("Could not open browser to show user guide.");
+            logger.severe("Could not open the browser to show the user guide.");
         } catch (URISyntaxException e) {
             logger.severe("URL to user guide not formatted well.");
         }

@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.scene.image.Image;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -33,15 +35,25 @@ public class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private boolean isFavourite;
+    private final HashMap<String, Double> gitStats;
+    private final Image image;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
+    public JsonAdaptedPerson(
+            @JsonProperty("name") String name,
+            @JsonProperty("telegram") String telegram,
             @JsonProperty("github") String github,
-            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("gitStats") HashMap<String, Double> gitStats,
+            @JsonProperty("image") Image image) {
         this.name = name;
         this.telegram = telegram;
         this.github = github;
@@ -51,6 +63,9 @@ public class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.isFavourite = isFavourite;
+        this.gitStats = gitStats;
+        this.image = image;
     }
 
     /**
@@ -66,6 +81,9 @@ public class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isFavourite = source.isFavourite();
+        image = source.getProfilePicture();
+        gitStats = source.getGitStats();
     }
 
     /**
@@ -130,8 +148,22 @@ public class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final boolean modelIsFavourite = isFavourite;
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelTelegram, modelGithub, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (image == null) {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite);
+        }
+
+        if (gitStats == null || gitStats.isEmpty()) {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite, image);
+        } else {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite, image, gitStats);
+        }
     }
 
 }

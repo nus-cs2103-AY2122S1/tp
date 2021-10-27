@@ -3,12 +3,16 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javafx.scene.image.Image;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.GitHubUtil;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,9 +32,16 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    //Extra fields
+    // Status fields
+    private boolean isFavourite;
+
+    // Extra fields
     private Image profilePicture;
-    private Thread parallelTask;
+    private Thread getProfilePicThread;
+    private Thread getStatsThread;
+    private HashMap<String, Double> gitStats;
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Every field must be present and not null.
@@ -45,11 +56,70 @@ public class Person implements Comparable<Person> {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isFavourite = false;
         this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
-        this.parallelTask = new Thread(() -> {
+        this.getProfilePicThread = new Thread(() -> {
             profilePicture = GitHubUtil.getProfilePicture(github.value);
         });
-        parallelTask.start();
+        getProfilePicThread.start();
+        this.gitStats = new HashMap<>();
+        startGetStatThread();
+    }
+
+    /**
+     * Overloaded constructor used when loading contacts from Json file.
+     */
+    public Person(Name name, Telegram telegram, Github github,
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite) {
+        this(name, telegram, github, phone, email, address, tags);
+        this.isFavourite = isFavourite;
+    }
+
+    /**
+     * Overloaded constructor used when loading contacts from Json file with Image.
+     */
+    public Person(Name name, Telegram telegram, Github github,
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite, Image image) {
+        requireAllNonNull(name, telegram, github, phone, email, address, tags);
+        this.name = name;
+        this.telegram = telegram;
+        this.github = github;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isFavourite = isFavourite;
+        this.profilePicture = image;
+        this.gitStats = new HashMap<>();
+        startGetStatThread();
+    }
+
+    /**
+     * Overloaded constructor used when loading contacts from Json file with Image.
+     */
+    public Person(Name name, Telegram telegram, Github github,
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite,
+                  Image image, HashMap<String, Double> gitStats) {
+        requireAllNonNull(name, telegram, github, phone, email, address, tags);
+        this.name = name;
+        this.telegram = telegram;
+        this.github = github;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isFavourite = isFavourite;
+        this.profilePicture = image;
+        this.gitStats = gitStats;
+    }
+
+    private void startGetStatThread() {
+        this.getStatsThread = new Thread(() -> {
+            this.gitStats = GitHubUtil.getUserStats(github.value);
+            logger.info("Stats for " + name.fullName + ": " + gitStats);
+            ThreadProcessor.removeThread(getStatsThread);
+        });
+        ThreadProcessor.addThread(getStatsThread);
     }
 
     public Name getName() {
@@ -76,10 +146,30 @@ public class Person implements Comparable<Person> {
         return address;
     }
 
+    public HashMap<String, Double> getGitStats() {
+        return gitStats;
+    }
+
+    /**
+     * Returns a boolean flag to tell whether the Person
+     * is "Favourite" or not.
+     */
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setIsFavourite() {
+        this.isFavourite = true;
+    }
+
+    public void setIsNotFavourite() {
+        this.isFavourite = false;
+    }
+
     public Image getProfilePicture() {
-        if (parallelTask != null && parallelTask.isAlive()) {
+        if (getProfilePicThread != null && getProfilePicThread.isAlive()) {
             try {
-                parallelTask.join();
+                getProfilePicThread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

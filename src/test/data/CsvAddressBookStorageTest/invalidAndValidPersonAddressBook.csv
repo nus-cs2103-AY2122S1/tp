@@ -1,0 +1,3 @@
+name,github,telegram,address,phone,email
+"Valid Person",valid-github,valid_tele,"4th street",9482424,hans@example.com
+"Person With Invalid Phone Field",valid-github,valid_tele,"4th street",948asdf2424,hans@example.com

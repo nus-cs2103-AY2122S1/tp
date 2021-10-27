@@ -13,6 +13,20 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+
+CohortConnect is a desktop application for CS students to network. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+Our app makes it easy to connect with like-minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging Github’s metadata using a proprietary algorithm.
+
+This guide is for current or future developers working on features for CohortConnect, or developers who want to learn 
+more about how CohortConnect is built. It explains the requirements of CohortConnect, the implementation of each 
+individual component, as well as how they are pieced together to execute a command entered by the user.
+
+This developer guide assumes the reader has general knowledge of Java, Object-Oriented Programming and UML notation.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -23,7 +37,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder.
 </div>
 
 ### Architecture
@@ -152,7 +166,102 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes noteworthy details on how certain features are implemented.
+
+### Telegram
+
+#### Implementation
+
+The telegram handle field is facilitated by the `Telegram` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+
+The `Telegram` class implements the following operation:
+
+* `Telegram#isValidTelegram(String test)` — Returns true if a given string is a valid telegram handle.
+
+Regex used in verifying the validity of telegram handle:
+
+`public static final String VALIDATION_REGEX = "\\w{5,64}";`
+* `\w` — **Word**. Any word character (alphanumeric & underscore)
+* `{5,64}` — **Quantifier**. Match between 5 and 64 of the preceding token.
+
+The `Telegram` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where every field, including the `Telegram` field, is compulsory except the `Tag` field.
+
+![PersonWithTelegramClassDiagram](images/PersonWithTelegramClassDiagram.png)
+
+### Optional Fields
+
+#### Implementation
+
+The `Phone`, `Email` and `Address` fields were modified such that these fields are no longer compulsory. The class diagram below illustrates the `Person` class after the addition of the `Telegram` field. The `Name` and `Telegram` fields are compulsory while the rest are optional.
+
+![PersonOptionalFieldClassDiagram](images/PersonOptionalFieldClassDiagram.png)
+
+In order to accomodate to the above mentioned new optional fields, the respective constructors were modified such that the following examples are considered valid inputs.
+
+Example 1: Adding new contact without email and address.
+
+```
+add n/John Doe te/@johndoe123 p/98765432 
+```
+
+Example 2: Adding new contact without phone, email and address.
+
+```
+add n/John Doe te/@johndoe123
+```
+
+A more interesting input would be as such.
+
+Example 3: Adding new contact without email and address but with empty phone input.
+
+```
+add n/John Doe te/@johndoe123 p/
+```
+
+In such a case, the constructors are modified such that the above input is also deemed as valid. The rationale behind this is that there is nothing for the `VALIDATION_REGEX` to verify, unlike in the following example.
+
+Example 4: Adding new contact without email and address but with invalid phone input.
+
+```
+add n/John Doe te/@johndoe123 p/invalidPhoneNumber
+```
+
+For the case above, the respective constructors will carry out validation on the given input.
+
+In order to allow for optional fields, the `AddCommandParser` also has to be modified. In particular, the following methods are modified
+* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)`
+* `AddCommandParser#parse(args)`
+
+For the `arePrefixesPresent` method, the prefixes provided were changed to only include the following mandatory fields:
+* `PREFIX_NAME`
+* `PREFIX_TELEGRAM`
+
+`AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` uses the static parsing methods in `ParserUtil` to parse the different fields in `Person`. The individual fields are first initialised with an empty string, which is now a valid input. The method then calls the `arePrefixesPresent` method to check if the provided prefix is present. If present, the method will then call the respective static parsing methods in `ParserUtil`.
+
+### GitHub
+
+#### Implementation
+
+The GitHub field is facilitated by the `Github` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
+
+The `Github` class implements the following operation:
+
+* `Github#isValidGithub(String test)` — Returns true if a given string is a valid GitHub username.
+
+Regex used in verifying the validity of GitHub username:
+
+`public static final String VALIDATION_REGEX = "[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}";`
+* `[a-z\d]` — **Character set**. Match any character in the set.
+* `a-z` — **Range**. Matches a character in the range "a" to "z" (char code 97 to 122). Case sensitive.
+* `\d` — **Digit**. Matches any digit character (0-9).
+* `(?:[a-z\d]|-(?=[a-z\d]))` — **Non-capturing group**. Groups multiple tokens together without creating a capture group.
+* `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the **|**.
+* `-` — **Character**. Matches a "-" character (char code 45).
+* `{0,38}` — **Quantifier**. Match between 0 and 38 of the preceding token.
+
+The `Github` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where only the `Name`, `Telegram` and `Github` fields are compulsory.
+
+![PersonWithGithubClassDiagram](images/PersonWithGithubClassDiagram.png)
 
 ### Export command
 
@@ -173,89 +282,83 @@ the `execute("export newfriends.json")` API call.
 
 ![ExportSequenceDiagram](images/ExportSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### Find command
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The Find command accepts names, tags, Telegram handles or GitHub usernames as parameters with the following prefixes :
+* no prefix : for names
+* `t/` : for tags
+* `te/` : for Telegram handles
+* `g/` : for GitHub usernames
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+and allows users to search for contacts based on the specified criterion.
+It is facilitated by the `FindCommandParser` class, which implements `Parser<FindCommand>`.
+It implements the `parse()` method, which parses the find parameter (eg: name, tag, etc) and returns a `FindCommand`, to be executed in
+`LogicManager`.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The `FindCommand` class extends `Command`. Its instance is created by providing a predicate (condition to be fulfilled by the elements of 
+the `FilteredPersonList` that contains the contact(s) matching the find parameters). Its implementation of
+`Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find te/alex_1")` API call.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
-![UndoRedoState0](images/UndoRedoState0.png)
+### Welcome Window
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+#### Implementation
 
-![UndoRedoState1](images/UndoRedoState1.png)
+The class `WelcomeWindow` is responsible displaying the welcome window at the
+start, when the application is launched. It is facilitated by `WelcomeWindow.fxml` file
+which is responsible for how various components inside this window are arranged.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The `WelcomeWindow` class extends `UiPart<Stage>`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+When the app is launched, an instance of this class is created, and the 
+`WelcomeWindow#start` is invoked to display the window. Various methods
+including `fadeTransition` and `displayAnimatedText` are used within this
+class to achieve the fading image and character typing effect respectively.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+![WelcomeWindowSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
 
-</div>
+### Show command
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+#### Implementation
 
-![UndoRedoState3](images/UndoRedoState3.png)
+The Show command accepts the index in list or name of a contact as a parameter, and shows all the details of the contact to the
+Person Details Pane on the right-hand side of the screen. It is facilitated by the `ShowCommandParser` class, which implements `Parser<ShowCommand>`.
+It implements the `parse()` method, which parses the index/name and returns a `ShowCommand`, to be executed in
+`LogicManager`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+The `ShowCommand` class extends `Command`. It stores the index/name as a class variable and its implementation of
+`Command#execute()` calls `Command#executeWithIndex()` or `Command#executeWithName()` based on whether parameter is index or name.
 
-</div>
+#### Implementation of `Command#executeWithIndex()`
 
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+This is called if the parameter is a parsable Integer. 
+The method calls `model.setSelectedIndex(index)` which displays the details of the contact on the Details Pane.
 
 
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+The Sequence Diagram below illustrates the interactions within the `Logic`, `Model` and `UI` components for
+the `execute("show 5")` API call.
 
+![ExportSequenceDiagram](images/ShowWithIndexSequenceDiagram.png)
+
+#### Implementation of `Command#executeWithName()`
+
+This is called if the parameter is **NOT** a parsable Integer.
+The method calls `model.setSelectedIndex(index)` with index gotten from the `filteredList` which displays the details of the contact on the Details Pane.
+If there are multiple contacts with names that contain the parameter keyword then a list of such persons are shown.
+If there is no contact with name that contain the parameter keyword in the `filteredList`, then the entire addressbook is searched.
+
+
+The Sequence Diagram below illustrates the interactions within the `Logic`, `Model` and `UI` components for
+the `execute("show alex")` API call.
+
+![ExportSequenceDiagram](images/ShowWithNameSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,6 +397,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete contacts                | make sure that the address book remains relevant and up to date        |
 | `* * *`  | user                                       | edit individual contacts       | update any of the fields when necessary                                |
 | `* * *`  | user                                       | add individual contacts        | reach out to them later                                                |
+| `* *`    | user                                       | search for contact(s) by tag(s)| contact them based on their grouping                                   |
+| `* *`    | user                                       | search for contact(s) by Telegram handles(s)| contact them conveniently                                 |
+| `* *`    | user                                       | search for contact(s) by GitHub username(s)| contact them conveniently                                 |
 | `* * *`  | Prof                                       | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
 | `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
 | `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
@@ -305,7 +411,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | learn the command formats                                   | perform tasks quickly and efficiently     |
 | `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
 | `* * *`  | user                                       | be able to store my contact omitting certain fields         | save contact without having to include email or address |
-
+| `* *`    | user                                       | have a clean and uncluttered GUI                           | navigate easily between different functions in the application |
+| `* *`    | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
+| `* * *`  | CS student                                 | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
+| `* * *`  | CS student                                 | view the profiles of my contacts | learn more about them and connect with them |
+| `* *`    | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
 
 ### Use cases
 
@@ -558,5 +668,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Navigate to and open `/data/addressbook.json` in a text editor.
+
+   2. Delete one line of code from a Person object, such as `"tagged" : [ "friends" ]`
+
+   3. Restart CohortConnect.
+
+   4. CohortConnect will start with no contacts.
+
+   5. An error message will be shown in the `ResultDisplay`, stating that the file is corrupted.
+   
 
