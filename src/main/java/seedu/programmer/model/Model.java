@@ -1,6 +1,7 @@
 package seedu.programmer.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -95,6 +96,12 @@ public interface Model {
 
     /** Clear the selected student in the wrapper  */
     void clearSelectedStudentWrapper();
+
+    ObservableList<Lab> getSelectedLabs();
+
+    void setSelectedLabs(List<Lab> labs);
+
+    void clearSelectedLabs();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.

@@ -3,7 +3,6 @@ package seedu.programmer.model;
 import javafx.collections.ObservableList;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
-import seedu.programmer.model.student.UniqueStudentList;
 
 /**
  * Unmodifiable view of a ProgrammerError

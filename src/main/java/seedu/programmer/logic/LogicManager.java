@@ -109,6 +109,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Lab> getSelectedLabs() {
+        return model.getSelectedLabs();
+    }
+
+
+    @Override
     public Path getProgrammerErrorFilePath() {
         return model.getProgrammerErrorFilePath();
     }

@@ -51,6 +51,7 @@ public class DeleteLabCommand extends Command {
                 Student selectedStudent = model.getSelectedStudentWrapper().get(0).copy();
                 selectedStudent.deleteLab(result);
                 model.setSelectedStudentWrapper(selectedStudent);
+                model.setSelectedLabs(selectedStudent.getLabList());
             }
             return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, result));
         } else {

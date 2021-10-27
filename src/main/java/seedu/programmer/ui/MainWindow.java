@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.json.JSONArray;
 
 import javafx.fxml.FXML;
@@ -28,7 +26,6 @@ import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DashboardCommandResult;
 import seedu.programmer.logic.commands.DownloadCommandResult;
-import seedu.programmer.logic.commands.EditCommandResult;
 import seedu.programmer.logic.commands.ExitCommandResult;
 import seedu.programmer.logic.commands.HelpCommandResult;
 import seedu.programmer.logic.commands.ShowCommandResult;
@@ -55,6 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private StudentListPanel studentParticular;
+    private LabResultListPanel labResultListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private DashboardWindow dashboardWindow;
@@ -193,11 +191,11 @@ public class MainWindow extends UiPart<Stage> {
      * Display the selected student's lab results.
      */
     @FXML
-    public void handleShowResult(Student target) {
+    public void handleShowResult() {
         studentParticular = new StudentListPanel(logic.getSelectedStudentWrapper());
         studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
 
-        LabResultListPanel labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
+        labResultListPanel = new LabResultListPanel(logic.getSelectedLabs());
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
 
@@ -357,15 +355,11 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof ExitCommandResult) {
                 handleExit();
             } else if (commandResult instanceof ShowCommandResult) {
-                handleShowResult(((ShowCommandResult) commandResult).getTarget());
+                handleShowResult();
             } else if (commandResult instanceof DownloadCommandResult) {
                 handleDownload();
             } else if (commandResult instanceof UploadCommandResult) {
                 handleUpload();
-            } else if (commandResult instanceof EditCommandResult) {
-                EditCommandResult editCommandResult = (EditCommandResult) commandResult;
-                Student editedStudent = editCommandResult.getEditedStudent();
-                handleShowResult(editedStudent);
             } else if (commandResult instanceof DashboardCommandResult) {
                 handleDashboard();
             }

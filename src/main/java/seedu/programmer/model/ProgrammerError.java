@@ -102,6 +102,18 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.clearSelectedStudentWrapper();
     }
 
+    public ObservableList<Lab> getSelectedLabs() {
+        return students.getSelectedLabs();
+    }
+
+    public void setSelectedLabs(List<Lab> labs) {
+        students.setSelectedLabs(labs);
+    }
+
+    public void clearSelectedLabs() {
+        students.clearSelectedLabs();
+    }
+
     public void setSelectedStudentWrapper(Student target) {
         students.setSelectedStudentWrapper(target);
     }

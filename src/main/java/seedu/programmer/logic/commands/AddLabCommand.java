@@ -64,6 +64,7 @@ public class AddLabCommand extends Command {
             Student selectedStudent = model.getSelectedStudentWrapper().get(0).copy();
             selectedStudent.addLab(result);
             model.setSelectedStudentWrapper(selectedStudent);
+            model.setSelectedLabs(selectedStudent.getLabList());
         }
         return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
     }

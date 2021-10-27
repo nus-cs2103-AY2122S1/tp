@@ -31,6 +31,7 @@ public class UniqueStudentList implements Iterable<Student> {
     private final ObservableList<Student> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private ObservableList<Student> selectedStudentWrapper = FXCollections.observableArrayList();
+    private ObservableList<Lab> selectedLabs = FXCollections.observableArrayList();
     //Keep track of the existing labs
     private List<Lab> labs = new ArrayList<>();
 
@@ -178,5 +179,17 @@ public class UniqueStudentList implements Iterable<Student> {
 
     public void clearSelectedStudentWrapper() {
         this.selectedStudentWrapper.clear();
+    }
+
+    public ObservableList<Lab> getSelectedLabs() {
+        return this.selectedLabs;
+    }
+
+    public void setSelectedLabs(List<Lab> labs) {
+        this.selectedLabs.setAll(labs);
+    }
+
+    public void clearSelectedLabs() {
+        this.selectedLabs.clear();
     }
 }

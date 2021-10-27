@@ -8,8 +8,6 @@ import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.programmer.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.commons.core.Messages;

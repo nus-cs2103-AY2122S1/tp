@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -137,6 +138,21 @@ public class ModelManager implements Model {
     @Override
     public void clearSelectedStudentWrapper() {
         programmerError.clearSelectedStudentWrapper();
+    }
+
+    @Override
+    public ObservableList<Lab> getSelectedLabs() {
+        return programmerError.getSelectedLabs();
+    }
+
+    @Override
+    public void setSelectedLabs(List<Lab> labs) {
+        programmerError.setSelectedLabs(labs);
+    }
+
+    @Override
+    public void clearSelectedLabs() {
+        programmerError.clearSelectedLabs();
     }
 
     @Override

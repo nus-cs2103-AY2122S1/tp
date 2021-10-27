@@ -175,11 +175,26 @@ public class AddCommandTest {
 
         @Override
         public void setSelectedStudentWrapper(Student target) {
-            throw new AssertionError("This method should not be called.");
+
         }
 
         @Override
         public void clearSelectedStudentWrapper() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Lab> getSelectedLabs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedLabs(List<Lab> labs) {
+
+        }
+
+        @Override
+        public void clearSelectedLabs() {
             throw new AssertionError("This method should not be called.");
         }
 
