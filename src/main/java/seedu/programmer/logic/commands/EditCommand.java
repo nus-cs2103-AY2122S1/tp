@@ -83,7 +83,7 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.setSelectedStudentWrapper(studentToEdit);
+        model.setSelectedStudentWrapper(editedStudent);
         return new EditCommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), editedStudent);
     }
 
