@@ -77,16 +77,14 @@ public class PersonDetails extends UiPart<Region> {
         }
         cardPane.setVisible(true);
         name.setText(person.getName().fullName);
-        String teleUrl = TELEGRAM_URL_PREFIX + person.getTelegram();
         telegram.setText("@" + person.getTelegram().value);
-        String githubUrl = GITHUB_URL_PREFIX + person.getGithub();
         github.setText(person.getGithub().value);
         tags.getChildren().removeIf(c -> true);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        telegram.setOnMouseClicked((event) -> openTelegram(teleUrl));
-        github.setOnMouseClicked((event) -> openGithub(githubUrl));
+        telegram.setOnMouseClicked((event) -> openTelegram());
+        github.setOnMouseClicked((event) -> openGithub());
         if (person.getPhone().value.isBlank()) {
             phone.setText("-");
         } else {
@@ -120,7 +118,8 @@ public class PersonDetails extends UiPart<Region> {
      * the system.
      */
     @FXML
-    public void openTelegram(String teleUrl) {
+    public void openTelegram() {
+        String teleUrl = TELEGRAM_URL_PREFIX + person.getTelegram();
         try {
             Desktop.getDesktop().browse(new URL(teleUrl).toURI());
         } catch (IOException e) {
@@ -131,11 +130,12 @@ public class PersonDetails extends UiPart<Region> {
     }
 
     /**
-     * Opens the link to the person's Github profile in the default web browser on
+     * Opens the link to the person's GitHub profile in the default web browser on
      * the system.
      */
     @FXML
-    public void openGithub(String githubUrl) {
+    public void openGithub() {
+        String githubUrl = GITHUB_URL_PREFIX + person.getGithub();
         try {
             Desktop.getDesktop().browse(new URL(githubUrl).toURI());
         } catch (IOException e) {

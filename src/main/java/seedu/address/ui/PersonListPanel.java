@@ -90,4 +90,18 @@ public class PersonListPanel extends UiPart<Region> {
     public void refreshPersonListUI() {
         personListView.refresh();
     }
+
+    /**
+     * Opens the current user's Telegram.
+     */
+    public void openTelegram() {
+        this.personDetails.openTelegram();
+    }
+
+    /**
+     * Opens the current user's GitHub.
+     */
+    public void openGithub() {
+        this.personDetails.openGithub();
+    }
 }
