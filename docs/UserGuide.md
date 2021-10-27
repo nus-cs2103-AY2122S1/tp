@@ -111,8 +111,6 @@ on any operating system including Windows, macOS or Linux
    
    ![Ui](images/Ui.png)
    
-   (---------------------------Replace with UI image with no annotations---------------------------------------)
-   
    <div markdown="block" class="alert alert-info">
    :information_source: More icons will be added in future iterations<br>
    </div>
@@ -122,7 +120,7 @@ on any operating system including Windows, macOS or Linux
    
 ### User interface
 
-(---------------------------Add UI image w/ annotations + numbering---------------------------------------)
+![UiAnnotated](images/UiAnnotated.png)
 Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
 FAST. <br><br>
 Next, the _Results display_ is where FAST gives you feedback to your commands. For example, if you make a typo
@@ -333,7 +331,7 @@ FAST allows you to easily manage your clients. Just like a contact in your phone
 FAST to save your client's Name, Phone Number, Address, Email Address and Remarks. In addition, you can also add
 in appointment dates and tag your clients all within FAST.
 
-(---------------------insert an image of a client card in FAST---------------------------)
+![ClientCard](images/clientcardexample.png)
 
 In this user guide, we will showcase commands related to Clients first followed by sections on [Appointment](#appointments)
 and [Tags](#tag). After this section on clients, you can also learn more about [managing your whole client base](#managing-your-client-base),
@@ -362,6 +360,7 @@ A client can have any number of [`TAG`](#tag) (including 0)
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` will add a new client called 
   `John Doe`, who has phone number of `98765432`, has an email address `johnd@example.com` and stays at 
   `John street, block 123, #01-01`.
+  ![AddExample](images/addexample.png)
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` will add a new client 
    called `Betsy Crowe`, has a phone number of `1234567`, has an email address `betsycrowe@example.com`, 
   stays at `Newgate Prison` and is tagged as both a `friend` and `criminal`.
@@ -398,7 +397,8 @@ This can be used if the client's information has changed, or if you entered an i
 
 
 **Examples**:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
+* `edit 1 p/91234567 e/alexdabro@example.com` Edits the phone number and email address of the first client to be `91234567` and `alexdabro@example.com` respectively.
+![EditExample](images/editexample.png)
 * `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
 
 <br>
@@ -416,7 +416,9 @@ You can delete the specified client from FAST. This is useful when a client has 
 * [`INDEX`](#index)
 
 **Examples**:
-* `list` followed by `del 2` deletes the second clients in FAST.
+* `list` followed by `del 2` deletes the second client in FAST. If `Bernice Yu` is the second client on the list, his entry
+will be deleted.
+![EditExample](images/deleteexample.png)
 * `find Betsy` followed by `del 1` deletes the first client in the results of the `find` command.
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
@@ -462,8 +464,8 @@ To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
 </div>
 
 **Examples**:
-* `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first client.
-![result for `rmk 1 r/loves to eat`](images/remarkResult.png)
+* `rmk 1 r/loves to eat pizza` adds a remark `loves to eat pizza` to the first client.
+![result for `rmk 1 r/loves to eat pizza`](images/remarkResult.png)
 * `rmk 1` removes the remark from the first client.<br>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Try to add remarks with specific keywords so that it is easier to [search](#searching-for-clients-find) for them.
@@ -534,7 +536,8 @@ At least **one** of the optional fields must be present.
 * [`VENUE`](#venue)
 
 **Examples**:
-* `ea 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
+* `ea 1 d/2021-03-28` edits the appointment date to be `28 Mar 2021` of the first client.
+![result for `ea 1 d/2021-03-28`](images/editappointmentexample.png)
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
 <br> 
@@ -554,6 +557,7 @@ This command should be used when the appointment has been cancelled with a clien
 
 **Examples**:
 * `da 1` deletes the appointment of the first client.
+![result for `da 1`](images/deleteappointmentexample.png)
 * `find Ben` followed by `da 3` deletes the appointment the third client in the result of the `find` command.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -649,7 +653,7 @@ You can add or delete the tags of a specified client.
 
 
 **Examples**: 
-* `tag 1 a/family d/friend` will delete the `friend` tag before adding the `family` tag.
+* `tag 1 a/family d/friends` will delete the `friends` tag before adding the `family` tag.
 
 ![tagExample1](images/tagExample1.png)
 
