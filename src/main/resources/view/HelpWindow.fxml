@@ -32,10 +32,10 @@
                   <Hyperlink fx:id="hyperlink" layoutX="0.0" layoutY="0.0" onAction="#openLink" text="User Guide" />
                 </HBox>
               </VBox>
-              
+
             </children>
           </HBox>
-          
+
           <HBox fx:id="helpGuideContainer" alignment="CENTER_RIGHT">
             <padding>
               <Insets top="5" right="25" bottom="5" left="15" />
