@@ -135,7 +135,7 @@ The table below explains the general syntax used throughout the user guide.
 
 | Syntax | Definition |
 |:---:| --- |
-| CLI | The Command-Line Interface (CLI) is the user interface in which Sellah is based on. Unlike traditional Graphical User Interface (GUI) base applications, it may be less intuitive to new users. However upon familiarisation, fast typists may find it faster to use. |
+| `...` | Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be ` `(empty) or `-o 1 -o 2`. |
 | Command | Keywords that Sellah recognises to invoke specific commands. |
 | Parameters | Information to be passed to the Commands. |
 | Index | The number next to the list of [Clients](#323-defining-client-and-product) or [Products](#323-defining-client-and-product). |
