@@ -122,7 +122,7 @@ to specify the directory to upload the file from.
 ## <a name="student-features"></a>3. Student Features
 
 ### <a name="add-student"></a>3a. Add Student: `add`
-Adds a student to ProgrammerError with the his/her student ID and class ID.
+Adds a student to ProgrammerError with their student ID and class ID.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
@@ -163,9 +163,8 @@ Example:
 
 ### <a name="filter-student"></a>3d. Filter List: `filter`
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
-Of the three arguments, at least one has to be provided. Arguments can be provided in any order and it is
-case-insensitive. ProgrammerError will display the filtered list of students whose details matches all the specified
-arguments.
+Of the three arguments, at least one has to be provided. Arguments can be provided in any order and are case-insensitive. 
+ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
 
 Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
