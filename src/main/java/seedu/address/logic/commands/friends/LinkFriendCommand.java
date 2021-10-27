@@ -13,6 +13,7 @@ import seedu.address.model.friend.FriendId;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.gamefriendlink.UserName;
 
 /**
@@ -57,7 +58,7 @@ public class LinkFriendCommand extends Command {
         Friend friendToEdit = model.getFriend(friendId);
         Game gameToLink = model.getGame(gameId);
         GameFriendLink gameFriendLink = new GameFriendLink(gameToLink.getGameId(), friendToEdit.getFriendId(),
-                userName);
+                userName, new SkillValue(0));
 
         model.linkFriend(friendToEdit, gameFriendLink);
         model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
