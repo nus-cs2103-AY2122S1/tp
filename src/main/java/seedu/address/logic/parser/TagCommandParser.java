@@ -22,15 +22,19 @@ public class TagCommandParser implements Parser<Command> {
     public TagCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ADD_TAG, PREFIX_REMOVE_TAG);
-        Index index = ParserUtil.parseIndex("1");
+        Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
 
-        try {
+        if (argMultimap.getAllValues(PREFIX_ADD_TAG).isEmpty()
+                && argMultimap.getAllValues(PREFIX_REMOVE_TAG).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        }
 
+        try {
             ArrayList<Tag> tagsToAdd = argMultimap.getAllValues(PREFIX_ADD_TAG)
                     .parallelStream()
                     .map(Tag::new)
