@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class CommandDetailsTest {
 
     @Test
-    public void CommandDetails_aValidStringCombo_noException() {
+    public void commandDetails_aValidStringCombo_noException() {
         String commandName = "Test";
         String commandStructure = "Test";
         CommandDetails commandDetails = new CommandDetails(commandName, commandStructure);
@@ -16,7 +16,7 @@ public class CommandDetailsTest {
     }
 
     @Test
-    public void CommandDetails_noInputs_noException() {
+    public void commandDetails_noInputs_noException() {
         CommandDetails commandDetails = new CommandDetails();
 
         // If no error occurred.
