@@ -53,6 +53,16 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personWithLongName_throwsCommandException() {
+        String longName = "NameOverThirtyCharactersIsTooLong";
+        Person validPerson = new PersonBuilder().withName(longName).build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
