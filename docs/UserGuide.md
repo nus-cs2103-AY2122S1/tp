@@ -500,7 +500,6 @@ Format: `clear`
 ### Exiting the program : `exit`
 
 Exits the program.
-Exits the program.
 
 Format: `exit`
 
