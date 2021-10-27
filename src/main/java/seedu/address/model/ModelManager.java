@@ -117,16 +117,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeStudent(Student target) {
+    public void deleteStudent(Student target) {
         requireNonNull(target);
-        addressBook.removeStudent(target);
+        addressBook.deleteStudent(target);
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group group = groupList.stream()
                                           .filter(g -> g.getName().equals(target.getGroupName()))
                                           .findAny()
                                           .orElse(null);
-            addressBook.removeStudentFromGroup(target, group);
+            addressBook.deleteStudentFromGroup(target, group);
         }
     }
 
@@ -195,7 +195,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudentGroup(Student student, Group group) {
         requireAllNonNull(student, group);
-        addressBook.removeStudentFromGroup(student, group);
+        addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);
 
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
@@ -249,7 +249,7 @@ public class ModelManager implements Model {
         requireNonNull(target);
         List<Student> students = target.getMembersList();
         addressBook.clearGroupFromStudents(students);
-        addressBook.removeGroup(target);
+        addressBook.deleteGroup(target);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
