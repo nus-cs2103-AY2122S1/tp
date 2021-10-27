@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManagerState;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
@@ -79,6 +80,16 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public void restoreState(ModelManagerState state) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ModelManagerState getState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -155,6 +166,15 @@ public class AddCommandTest {
         }
 
         @Override
+        public int undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public void sortFilteredPersonList(Prefix prefix, boolean reverse) {
             throw new AssertionError("This method should not be called.");
         }

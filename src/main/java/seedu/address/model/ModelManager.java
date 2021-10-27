@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.exceptions.OperationException;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +25,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private final OperationManager operations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,10 +40,29 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.operations = new OperationManager(this);
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    @Override
+    public void restoreState(ModelManagerState state) {
+        this.addressBook.resetData(state.getAddressBook());
+        this.userPrefs.resetData(state.getUserPrefs());
+        filteredPersons.setPredicate(state.getFilterPredicate());
+    }
+
+    @Override
+    public ModelManagerState getState() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> filterPredicate = (Predicate<Person>) filteredPersons.getPredicate();
+        return new ModelManagerState(
+                new AddressBook(this.addressBook),
+                new UserPrefs(this.userPrefs),
+                filterPredicate
+        );
     }
 
     //=========== UserPrefs ==================================================================================
@@ -48,7 +70,7 @@ public class ModelManager implements Model {
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+        runOperation(() -> this.userPrefs.resetData(userPrefs));
     }
 
     @Override
@@ -64,7 +86,7 @@ public class ModelManager implements Model {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
-        userPrefs.setGuiSettings(guiSettings);
+        runOperation(() -> userPrefs.setGuiSettings(guiSettings));
     }
 
     @Override
@@ -75,14 +97,14 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        runOperation(() -> userPrefs.setAddressBookFilePath(addressBookFilePath));
     }
 
     //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        runOperation(() -> this.addressBook.resetData(addressBook));
     }
 
     @Override
@@ -98,26 +120,63 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        runOperation(() -> addressBook.removePerson(target));
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        runOperation(() -> {
+            addressBook.addPerson(person);
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        });
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
+        runOperation(() -> addressBook.setPerson(target, editedPerson));
     }
 
     @Override
     public void importFile(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
+
+        ModelManagerState beforeState = this.getState();
+
         addressBook.mergeFile(filePath);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        ModelManagerState afterState = this.getState();
+        registerOperation(beforeState, afterState);
+    }
+
+    @Override
+    public int undo() throws OperationException {
+        return operations.undo();
+    }
+
+    @Override
+    public int redo() throws OperationException {
+        return operations.redo();
+    }
+
+    /**
+     * Convenience method that runs operations through the OperationManager
+     * to allow for undoing and redoing.
+     * @param op operation to be executed
+     */
+    private void runOperation(Runnable op) {
+        operations.run(op);
+    }
+
+    /**
+     * Convenience method that registers already-executed through the
+     * OperationManager to allow for undoing and redoing
+     * @param beforeState model state before operation was executed
+     * @param afterState model state after operation was executed
+     */
+    private void registerOperation(ModelManagerState beforeState, ModelManagerState afterState) {
+        operations.registerOperation(() -> this.restoreState(afterState), beforeState);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -134,13 +193,13 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        runOperation(() -> filteredPersons.setPredicate(predicate));
     }
 
     @Override
     public void sortFilteredPersonList(Prefix prefix, boolean reverse) {
         requireNonNull(prefix);
-        addressBook.sortList(prefix, reverse);
+        runOperation(() -> addressBook.sortList(prefix, reverse));
     }
 
     @Override
@@ -161,5 +220,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }
