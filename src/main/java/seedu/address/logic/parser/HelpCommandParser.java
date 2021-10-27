@@ -14,7 +14,6 @@ import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartOrderCommand;
-import seedu.address.logic.commands.ViewOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -69,9 +68,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case RemoveFromOrderCommand.COMMAND_WORD:
             return new HelpCommand(RemoveFromOrderCommand.MESSAGE_USAGE);
-
-        case ViewOrderCommand.COMMAND_WORD:
-            return new HelpCommand(ViewOrderCommand.MESSAGE_USAGE);
 
         case EndAndTransactOrderCommand.COMMAND_WORD:
             return new HelpCommand(EndAndTransactOrderCommand.MESSAGE_USAGE);
