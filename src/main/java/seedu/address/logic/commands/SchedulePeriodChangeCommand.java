@@ -11,8 +11,7 @@ import seedu.address.model.person.Period;
 public class SchedulePeriodChangeCommand extends Command {
 
     public static final String COMMAND_WORD = "change";
-
-
+    public static final String DEFAULT_MESSAGE = "Changed schedule to period: %1$s";
 
     private final Period period;
 
@@ -23,8 +22,6 @@ public class SchedulePeriodChangeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
-
-        return new CommandResult();
+        return new CommandResult(String.format(DEFAULT_MESSAGE, period), period);
     }
 }
