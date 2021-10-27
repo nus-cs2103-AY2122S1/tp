@@ -51,10 +51,14 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[]{
-            new Event(new EventName("Investment Pitch with Sequoia Capital"), new EventDate("2022-08-20"), new EventTime("0800")),
-            new Event(new EventName("Mangera Marketing Team Retreat"), new EventDate("2022-08-20"), new EventTime("0900")),
-            new Event(new EventName("Managera Product Team Retreat"), new EventDate("2021-09-21"), new EventTime("0800")),
-            new Event(new EventName("Managera Annual Shareholder Meeting"), new EventDate("2021-11-20"), new EventTime("0900")),
+            new Event(new EventName("Investment Pitch with Sequoia Capital"), new EventDate("2022-08-20"),
+                    new EventTime("0800")),
+            new Event(new EventName("Managera Marketing Team Retreat"),
+                    new EventDate("2022-08-20"), new EventTime("0900")),
+            new Event(new EventName("Managera Product Team Retreat"),
+                    new EventDate("2021-09-21"), new EventTime("0800")),
+            new Event(new EventName("Managera Annual Shareholder Meeting"),
+                    new EventDate("2021-11-20"), new EventTime("0900")),
             new Event(new EventName("Managera Dinner and Dance"), new EventDate("2021-09-30")),
             new Event(new EventName("Monthly Roundup #28"), new EventDate("2021-09-26"), new EventTime("0900")),
             new Event(new EventName("Monthly Roundup #29"), new EventDate("2021-10-28"), new EventTime("0900")),
