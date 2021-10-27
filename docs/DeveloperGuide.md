@@ -213,6 +213,7 @@ The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
 *Figure I.3.3.1: Sequence Diagram of Lesson Add Command*
+
 ![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
 *Figure I.3.3.2: Continued Sequence Diagram of Lesson Add Command*
 
