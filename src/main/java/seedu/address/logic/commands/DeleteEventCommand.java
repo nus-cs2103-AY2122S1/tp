@@ -11,9 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
 /**
- * Removes an Event identified using its displayed index.
+ * Deletes an Event identified using its displayed index.
  */
-public class RemoveEventCommand extends Command {
+public class DeleteEventCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteEvent";
 
@@ -22,16 +22,16 @@ public class RemoveEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REMOVE_EVENT_SUCCESS = "Removed event:\n%1$s";
+    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted event:\n%1$s";
 
     private final Index targetIndex;
 
     /**
-     * This is a constructor for RemoveEventCommand.
+     * This is a constructor for DeleteEventCommand.
      *
-     * @param targetIndex The index of the event to be removed, as seen in the displayed event list.
+     * @param targetIndex The index of the event to be deleted, as seen in the displayed event list.
      */
-    public RemoveEventCommand(Index targetIndex) {
+    public DeleteEventCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -44,15 +44,15 @@ public class RemoveEventCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToRemove = lastShownList.get(targetIndex.getZeroBased());
-        model.removeEvent(eventToRemove);
-        return new CommandResult(String.format(MESSAGE_REMOVE_EVENT_SUCCESS, eventToRemove));
+        Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteEvent(eventToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof RemoveEventCommand
-                && targetIndex.equals(((RemoveEventCommand) other).targetIndex));
+                || (other instanceof DeleteEventCommand
+                && targetIndex.equals(((DeleteEventCommand) other).targetIndex));
     }
 }

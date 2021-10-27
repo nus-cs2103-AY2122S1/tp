@@ -99,7 +99,7 @@ public class DefaultModelStub implements Model {
     }
 
     @Override
-    public void removeEvent(Event target) {
+    public void deleteEvent(Event target) {
         throw new AssertionError("This method should not be called.");
     }
 

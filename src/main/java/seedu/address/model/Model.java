@@ -105,10 +105,10 @@ public interface Model {
     void addEvent(Event event);
 
     /**
-     * Removes the given Event {@code target}.
+     * Deletes the given Event {@code target}.
      * {@code target} must exist in Managera.
      */
-    void removeEvent(Event target);
+    void deleteEvent(Event target);
 
     /**
      * Replaces the given Event {@code target} with {@code editedEvent}.

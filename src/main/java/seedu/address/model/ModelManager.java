@@ -196,10 +196,10 @@ public class ModelManager implements Model {
      * Remove the event from Managera.
      */
     @Override
-    public void removeEvent(Event target) {
+    public void deleteEvent(Event target) {
         requireNonNull(target);
         target.deleteFromParticipants();
-        addressBook.removeEvent(target);
+        addressBook.deleteEvent(target);
     }
 
     @Override
