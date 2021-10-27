@@ -30,6 +30,7 @@ public class InfoDisplay extends UiPart<Region> {
 
     private Student student;
     private Assessment assessment;
+    private Group group;
 
     @FXML
     private Label name;
@@ -57,6 +58,11 @@ public class InfoDisplay extends UiPart<Region> {
         if (info.getAssessment().isPresent()) {
             assessment = info.getAssessment().get();
             setAssessmentInfo(assessment);
+        }
+
+        if (info.getGroup().isPresent()) {
+            group = info.getGroup().get();
+            setGroupInfo(group);
         }
     }
 
@@ -96,6 +102,16 @@ public class InfoDisplay extends UiPart<Region> {
         info3.setText("Mean: " + mean);
         info4.setText("25th percentile: " + percentile25);
         info5.setText("75th percentile: " + percentile75);
+    }
+
+    /**
+     * Displays info of a {@code group}.
+     */
+    public void setGroupInfo(Group group) {
+        name.setText(group.getName());
+
+        info1.setText("Number of students: " + group.getStudents().size());
+        info2.setText("List of students are displayed in the lower left window.");
     }
 
     /**
