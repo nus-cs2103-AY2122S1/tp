@@ -42,8 +42,10 @@ public class ShowCommand extends Command {
         }
 
         Student studentToShow = lastShownList.get(targetIndex.getZeroBased());
+
         model.setSelectedStudentWrapper(studentToShow);
-        return new ShowCommandResult(MESSAGE_SHOW_STUDENT_SUCCESS, studentToShow);
+        String feedbackToUser = String.format(MESSAGE_SHOW_STUDENT_SUCCESS, studentToShow.getName());
+        return new ShowCommandResult(feedbackToUser, studentToShow);
     }
 
     @Override
