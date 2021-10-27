@@ -2,6 +2,7 @@ package seedu.address.model.id;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import seedu.address.model.group.Group;
@@ -93,5 +94,10 @@ public class UniqueId {
         }
 
         return "#INVALID";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

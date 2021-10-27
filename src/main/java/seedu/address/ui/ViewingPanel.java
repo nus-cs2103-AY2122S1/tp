@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.model.ViewingType;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.PersonWithDetails;
 
@@ -23,15 +24,20 @@ public class ViewingPanel extends UiPart<Region> {
 
     private PersonViewCard personViewCard;
     private LessonSchedulePanel schedulePanel;
+    private GroupViewCard groupViewCard;
 
     /**
      * Constructs a Viewing Panel with the given observable values
      */
-    public ViewingPanel(ObservableValue<ViewingType> viewType, ObservableValue<PersonWithDetails> peronWithDetails,
-            ObservableList<LessonWithAttendees> lessonWithAttendees) {
+    public ViewingPanel(
+            ObservableValue<ViewingType> viewType,
+            ObservableValue<PersonWithDetails> personWithDetails,
+            ObservableList<LessonWithAttendees> lessonWithAttendees,
+            ObservableValue<GroupWithDetails> groupWithDetails) {
         super(FXML);
-        personViewCard = new PersonViewCard(peronWithDetails);
+        personViewCard = new PersonViewCard(personWithDetails);
         schedulePanel = new LessonSchedulePanel(lessonWithAttendees);
+        groupViewCard = new GroupViewCard(groupWithDetails);
 
         // main logic on what to do when view type changes in model!
         ChangeListener<? super ViewingType> changeListener = new ChangeListener<ViewingType>() {
@@ -58,6 +64,9 @@ public class ViewingPanel extends UiPart<Region> {
             break;
         case PERSON:
             viewingPanel.getChildren().addAll(personViewCard.getRoot());
+            break;
+        case GROUP:
+            viewingPanel.getChildren().addAll(groupViewCard.getRoot());
             break;
         default:
             break;
