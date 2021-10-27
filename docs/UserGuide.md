@@ -80,7 +80,7 @@ If you are familiar with Unix commands, this is definitely for you!
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be
   ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-## <a name="general-features"></a>General Features
+## <a name="general-features"></a>1. General Features
 
 ### <a name="view-help"></a>1a. View Help: `help`
 Shows a message explaining how to access the help page.
