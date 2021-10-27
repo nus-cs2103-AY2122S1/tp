@@ -65,11 +65,9 @@ public class LastUpdatedDate {
         LocalDateTime testDate = null;
         try {
             testDate = LocalDateTime.parse(test, FORMATTER);
+            return testDate.isBefore(LocalDateTime.now());
         } catch (DateTimeParseException e) {
-            isValid = false;
-        } finally {
-            return isValid //check would short circuit here and will not throw NullPointerException
-                    && testDate.isBefore(LocalDateTime.now());
+            return false;
         }
     }
 
