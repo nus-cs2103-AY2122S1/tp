@@ -58,11 +58,11 @@ public class ParserUtil {
      */
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
-        String trimmedSid = studentId.trim();
-        if (!StudentId.isValidStudentId(trimmedSid)) {
+        String formattedSid = studentId.trim().toUpperCase();
+        if (!StudentId.isValidStudentId(formattedSid)) {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        return new StudentId(trimmedSid);
+        return new StudentId(formattedSid);
     }
 
     /**
@@ -74,11 +74,11 @@ public class ParserUtil {
      */
     public static ClassId parseClassId(String classId) throws ParseException {
         requireNonNull(classId);
-        String trimmedCid = classId.trim();
-        if (!ClassId.isValidClassId(trimmedCid)) {
+        String formattedCid = classId.trim().toUpperCase();
+        if (!ClassId.isValidClassId(formattedCid)) {
             throw new ParseException(ClassId.MESSAGE_CONSTRAINTS);
         }
-        return new ClassId(trimmedCid);
+        return new ClassId(formattedCid);
     }
 
     /**
@@ -90,11 +90,11 @@ public class ParserUtil {
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
-        String trimmedemail = email.trim();
-        if (!Email.isValidEmail(trimmedemail)) {
+        String formattedEmail = email.trim().toLowerCase();
+        if (!Email.isValidEmail(formattedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedemail);
+        return new Email(formattedEmail);
     }
 
     //todo: for test of show feature only
