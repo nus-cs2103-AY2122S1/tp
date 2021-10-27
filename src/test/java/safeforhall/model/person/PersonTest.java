@@ -1,7 +1,10 @@
 package safeforhall.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -13,12 +16,6 @@ import org.junit.jupiter.api.Test;
 import safeforhall.testutil.PersonBuilder;
 
 public class PersonTest {
-
-    // @Test
-    // public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-    //     Person person = new PersonBuilder().build();
-    //     assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
-    // }
 
     @Test
     public void isSamePerson() {
@@ -76,5 +73,31 @@ public class PersonTest {
         // different email -> returns false
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void checkHashCode() {
+        try {
+            new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build().hashCode();
+        } catch (NoSuchMethodError e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testHasMissedDeadline() {
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertTrue(editedAlice.hasMissedDeadline());
+    }
+
+    @Test
+    public void getMissedDates() {
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Person finalEditedAlice = editedAlice;
+        assertDoesNotThrow(finalEditedAlice::getMissedDates);
+
+        // Has not missed returns -1
+        editedAlice = new PersonBuilder(ALICE).withFet("01-01-2100").build();
+        assertEquals(-1, editedAlice.getMissedDates());
     }
 }

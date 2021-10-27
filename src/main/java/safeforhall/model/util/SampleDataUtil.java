@@ -32,7 +32,7 @@ public class SampleDataUtil {
 
     public static final Person ALEX = new Person(new Name(NAME_ALEX), new Room("E417"), new Phone("87438807"),
             new Email("alexyeoh@example.com"), new VaccStatus("T"),
-            new Faculty("SoC"), new LastDate("01-10-2021"), new LastDate("10-10-2021"));
+            new Faculty("SoC"), new LastDate("24-10-2021"), new LastDate("10-10-2021"));
     public static final Person BERNICE = new Person(new Name(NAME_BERNICE), new Room("A213"), new Phone("99272758"),
             new Email("berniceyu@example.com"), new VaccStatus("F"),
             new Faculty("FASS"), new LastDate("10-10-2021"), new LastDate("11-10-2021"));
@@ -41,13 +41,13 @@ public class SampleDataUtil {
             new Faculty("SoC"), new LastDate("11-10-2021"), new LastDate("12-10-2021"));
     public static final Person DAVID = new Person(new Name(NAME_DAVID), new Room("C112"), new Phone("91031282"),
             new Email("lidavid@example.com"), new VaccStatus("T"),
-            new Faculty("SDE"), new LastDate("02-10-2021"), new LastDate("01-10-2021"));
+            new Faculty("SDE"), new LastDate("27-10-2021"), new LastDate("01-10-2021"));
     public static final Person IRFAN = new Person(new Name(NAME_IRFAN), new Room("D422"), new Phone("92492021"),
             new Email("irfan@example.com"), new VaccStatus("T"),
             new Faculty("FoE"), new LastDate("12-10-2021"), new LastDate("12-10-2021"));
     public static final Person ROY = new Person(new Name(NAME_ROY), new Room("A309"), new Phone("92624417"),
             new Email("royb@example.com"), new VaccStatus("T"),
-            new Faculty("BIZ"), new LastDate("20-10-2021"), new LastDate("21-10-2021"));
+            new Faculty("BIZ"), new LastDate("29-10-2021"), new LastDate("21-10-2021"));
 
     public static Person[] getSamplePersons() {
         return new Person[] { ALEX, BERNICE, CHARLOTTE, DAVID, IRFAN, ROY };

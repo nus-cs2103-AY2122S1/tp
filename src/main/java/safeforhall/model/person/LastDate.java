@@ -45,15 +45,13 @@ public class LastDate {
         return true;
     }
 
-    public String getDate() {
-        return date;
-    }
-
     /**
      * Converts the given {@code LastDate} to a {@code LocalDate}.
      */
     public LocalDate toLocalDate() {
-        return LocalDate.parse(date, dateFormatter);
+        return date.equals("")
+                ? LocalDate.now()
+                : LocalDate.parse(date, dateFormatter);
     }
 
     /**

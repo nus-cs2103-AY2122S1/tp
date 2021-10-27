@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <VBox>
-    <TextField fx:id="suggestions"/>
+    <TextField fx:id="suggestions" promptText="Command Suggestion"/>
     <TextField fx:id="main" promptText="Enter command here..."/>
   </VBox>
 </StackPane>
-

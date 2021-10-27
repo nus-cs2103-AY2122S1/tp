@@ -62,6 +62,7 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         suggestions.setPrefWidth(1400);
         suggestions.setEditable(false);
+        suggestions.setDisable(true);
         main.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         handleCommandEntered();
         handleInput();
