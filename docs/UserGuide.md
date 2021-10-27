@@ -197,6 +197,7 @@ Examples:
 
 
 ## <a name="command-summary"></a>Command Summary
+
 Command | Format & Examples
 --------| ----------------------
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
@@ -213,3 +214,4 @@ Command | Format & Examples
 **Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 **Purge** | `purge`
 **Upload** | `upload`
+
