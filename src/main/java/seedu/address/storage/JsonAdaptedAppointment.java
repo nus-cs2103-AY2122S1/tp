@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Appointment;
+import seedu.address.model.schedule.TimePeriod;
 
 /**
  * Jackson-friendly version of {@link Appointment}.
@@ -25,22 +24,20 @@ public class JsonAdaptedAppointment {
 
     private final List<JsonAdaptedPerson> clients = new ArrayList<>();
     private final String location;
-    private final String date;
+    private final JsonAdaptedTimePeriod timePeriod;
     private final String description;
-    private final String time;
 
     /**
      * Constructs a {@code JsonAdaptedAppointment} with the given appointment details.
      */
     @JsonCreator
     public JsonAdaptedAppointment(@JsonProperty("clients") List<JsonAdaptedPerson> clients,
-            @JsonProperty("location") String location, @JsonProperty("date") String date,
-            @JsonProperty("description") String description, @JsonProperty("time") String time) {
+            @JsonProperty("location") String location, @JsonProperty("timePeriod") JsonAdaptedTimePeriod timePeriod,
+            @JsonProperty("description") String description) {
         this.clients.addAll(clients);
         this.location = location;
-        this.date = date;
+        this.timePeriod = timePeriod;
         this.description = description;
-        this.time = time;
     }
 
     /**
@@ -49,15 +46,14 @@ public class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(Appointment source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         location = source.getLocation().toString();
-        date = source.getDate().toString();
+        timePeriod = new JsonAdaptedTimePeriod(source.getTimePeriod());
         description = source.getDescription();
-        time = source.getTime().toString();
     }
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Appointment} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType() throws IllegalValueException {
 
@@ -74,31 +70,18 @@ public class JsonAdaptedAppointment {
         }
         final Address modelLocation = new Address(location);
 
-        if (date == null) {
+        if (timePeriod == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocalDate.class.getSimpleName()));
+                    TimePeriod.class.getSimpleName()));
         }
-        String[] dateArgs = date.split("-");
-        int year = Integer.parseInt(dateArgs[0]);
-        int month = Integer.parseInt(dateArgs[1]);
-        int day = Integer.parseInt(dateArgs[2]);
-        final LocalDate modelDate = LocalDate.of(year, month, day);
+        final TimePeriod modelTimePeriod = timePeriod.toModelType();
 
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
         final String modelDescription = description;
 
-        if (time == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocalTime.class.getSimpleName()));
-        }
-        String[] timeArgs = time.split(":");
-        int hour = Integer.parseInt(timeArgs[0]);
-        int minute = Integer.parseInt(timeArgs[1]);
-        final LocalTime modelTime = LocalTime.of(hour, minute);
-
-        return new Appointment(modelClients, modelLocation, modelDate, modelTime, modelDescription);
+        return new Appointment(modelClients, modelLocation, modelTimePeriod, modelDescription);
     }
 
     private UniquePersonList createModelClient(List<JsonAdaptedPerson> clients) throws IllegalValueException {

@@ -1,7 +1,6 @@
 package seedu.address.model.schedule;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -13,19 +12,18 @@ public class Appointment {
 
     private final UniquePersonList clients;
     private final Address location;
-    private LocalDate date;
+    private final TimePeriod timePeriod;
     private String description;
-    private LocalTime time;
+
 
     /**
      * Creates an Appointment class with a specified time.
      */
-    public Appointment(UniquePersonList clients, Address location, LocalDate date, LocalTime time, String description) {
+    public Appointment(UniquePersonList clients, Address location, TimePeriod timePeriod, String description) {
         this.clients = clients;
         this.location = location;
-        this.date = date;
+        this.timePeriod = timePeriod;
         this.description = description;
-        this.time = time;
     }
 
     public UniquePersonList getClients() {
@@ -36,20 +34,30 @@ public class Appointment {
         return location;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public TimePeriod getTimePeriod() {
+        return timePeriod;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-
     public ObservableList<Person> getClientList() {
         return clients.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Creates a string representation of the start timing.
+     */
+    public String getStartDateTimeString() {
+        return this.timePeriod.getStartDateTimeString();
+    }
+
+    /**
+     * Creates a string representation of the end timing.
+     */
+    public String getEndDateTimeString() {
+        return this.timePeriod.getEndDateTimeString();
     }
 
     /**
@@ -58,9 +66,9 @@ public class Appointment {
      * @return the urgency of this appointment.
      */
     public Urgency getUrgency() {
-        if (LocalDate.now().plusDays(2).isAfter(date)) {
+        if (LocalDateTime.now().plusDays(2).isAfter(timePeriod.getStartDateTime())) {
             return Urgency.HIGH;
-        } else if (LocalDate.now().plusDays(8).isAfter(date)) {
+        } else if (LocalDateTime.now().plusDays(8).isAfter(timePeriod.getStartDateTime())) {
             return Urgency.MEDIUM;
         } else {
             return Urgency.LOW;
@@ -115,9 +123,8 @@ public class Appointment {
         Appointment otherApp = (Appointment) other;
         return otherApp.getClients().equals(getClients())
                 && otherApp.getLocation().equals(getLocation())
-                && otherApp.getDate().equals(getDate())
-                && otherApp.getDescription().equals(getDescription())
-                && otherApp.getTime().equals(getTime());
+                && otherApp.getTimePeriod().equals(getTimePeriod())
+                && otherApp.getDescription().equals(getDescription());
     }
 
     /**
@@ -131,7 +138,7 @@ public class Appointment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(clients, location, date, time, description);
+        return Objects.hash(clients, location, timePeriod, description);
     }
 
     @Override
@@ -142,13 +149,8 @@ public class Appointment {
                 .append(getClients())
                 .append("; Location: ")
                 .append(getLocation())
-                .append("; Date: ")
-                .append(getDate());
-
-        if (!(getTime() == null)) {
-            builder.append("; Time: ")
-                    .append(getTime());
-        }
+                .append("; Time Period: ")
+                .append(getTimePeriod());
 
         return builder.toString();
     }
