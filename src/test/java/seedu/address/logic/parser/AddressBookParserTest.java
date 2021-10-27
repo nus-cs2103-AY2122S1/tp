@@ -88,7 +88,7 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_ITEM.getOneBased() + " " + ItemUtil.getItemDescriptorDetails(descriptor));
 
-        assertEquals(new EditCommand(INDEX_FIRST_ITEM, descriptor), command);
+        assertEquals(new EditCommand(INDEX_FIRST_ITEM, descriptor, true), command);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + "") instanceof ListCommand);
     }
 
     @Test

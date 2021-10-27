@@ -2,13 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -39,7 +33,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Item editedItem = new ItemBuilder().build();
         ItemDescriptor descriptor = new ItemDescriptorBuilder(editedItem).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor, true);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
@@ -55,28 +49,15 @@ public class EditCommandTest {
         Item lastItem = model.getFilteredItemList().get(indexLastItem.getZeroBased());
 
         ItemBuilder itemInList = new ItemBuilder(lastItem);
-        Item editedItem = itemInList.withName(VALID_NAME_DONUT).withTags(VALID_TAG_BAKED).build();
+        Item editedItem = itemInList.withId(VALID_ID_DONUT).build();
 
-        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT)
-                .withTags(VALID_TAG_BAKED).build();
-        EditCommand editCommand = new EditCommand(indexLastItem, descriptor);
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withId(VALID_ID_DONUT).build();
+        EditCommand editCommand = new EditCommand(indexLastItem, descriptor, true);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
         expectedModel.setItem(lastItem, editedItem);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, new ItemDescriptor());
-        Item editedItem = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
-
-        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -88,7 +69,7 @@ public class EditCommandTest {
         Item itemInFilteredList = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
         Item editedItem = new ItemBuilder(itemInFilteredList).withName(VALID_NAME_DONUT).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM,
-                new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).build());
+                new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).build(), false);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
@@ -102,7 +83,7 @@ public class EditCommandTest {
     public void execute_duplicateItemUnfilteredList_failure() {
         Item firstItem = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
         ItemDescriptor descriptor = new ItemDescriptorBuilder(firstItem).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_ITEM, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_ITEM, descriptor, true);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_ITEM);
     }
@@ -114,16 +95,18 @@ public class EditCommandTest {
         // edit item in filtered list into a duplicate in inventory
         Item itemInList = model.getInventory().getItemList().get(INDEX_SECOND_ITEM.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM,
-                new ItemDescriptorBuilder(itemInList).build());
+                new ItemDescriptorBuilder(itemInList).build(), true);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_ITEM);
     }
+
+    //TODO: add tests for checking editcommand with duplicate id and name
 
     @Test
     public void execute_invalidItemIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor, true);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
@@ -140,7 +123,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getItemList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).build());
+                new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).build(), true);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
@@ -149,7 +132,7 @@ public class EditCommandTest {
     public void execute_displayOrderMode_failure() {
         Item editedItem = new ItemBuilder().build();
         ItemDescriptor descriptor = new ItemDescriptorBuilder(editedItem).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor, true);
 
         model.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         String expectedMessage = EditCommand.MESSAGE_INVENTORY_NOT_DISPLAYED;
@@ -159,11 +142,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ITEM, DESC_BAGEL);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ITEM, DESC_BAGEL, true);
 
         // same values -> returns true
         ItemDescriptor copyDescriptor = new ItemDescriptor(DESC_BAGEL);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_ITEM, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_ITEM, copyDescriptor, true);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -176,10 +159,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ITEM, DESC_BAGEL)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ITEM, DESC_BAGEL, true)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ITEM, DESC_DONUT)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ITEM, DESC_DONUT, true)));
     }
 
 }

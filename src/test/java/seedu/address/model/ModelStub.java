@@ -67,6 +67,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasId(Item item) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasName(Item item) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public List<Item> getItems(ItemDescriptor descriptor) {
         throw new AssertionError("This method should not be called.");
     }
