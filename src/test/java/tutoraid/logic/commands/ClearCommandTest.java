@@ -4,7 +4,11 @@ import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import tutoraid.model.*;
+import tutoraid.model.LessonBook;
+import tutoraid.model.Model;
+import tutoraid.model.ModelManager;
+import tutoraid.model.StudentBook;
+import tutoraid.model.UserPrefs;
 import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
