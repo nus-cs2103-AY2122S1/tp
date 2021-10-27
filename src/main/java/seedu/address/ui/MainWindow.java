@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -100,6 +101,15 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private ImageView eventsIcon;
 
+    @FXML
+    private HBox userDetails;
+
+    @FXML
+    private ImageView userProfile;
+
+    @FXML
+    private Label userName;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -125,6 +135,11 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
 
         userProfileWindow = new UserProfileWindow(logic);
+
+        // Configure User Profile to be shown when clicked
+        userDetails.setOnMouseClicked(event -> {
+            handleUserProfileWindow();
+        });
 
         // Configure Events Icon
         eventsIcon.setOnMouseClicked(event -> {
@@ -202,6 +217,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        userProfile.setImage(logic.getUserProfile().getProfilePicture());
+        userName.setText(logic.getUserProfile().getName().toString());
     }
 
     /**

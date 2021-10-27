@@ -22,7 +22,7 @@
                 <URL value="@UserProfileWindow.css" />
             </stylesheets>
 
-            <AnchorPane prefHeight="270" prefWidth="260">
+            <AnchorPane prefHeight="260" prefWidth="260">
                 <children>
                     <VBox>
                         <HBox>
