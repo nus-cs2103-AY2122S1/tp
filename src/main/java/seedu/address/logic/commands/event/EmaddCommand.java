@@ -35,7 +35,7 @@ public class EmaddCommand extends Command {
             + PREFIX_EVENT_ID + "1 "
             + PREFIX_MEMBER_ID + "1 " + PREFIX_MEMBER_ID + "2";
 
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Added members: %1$s. Event: %2$s. ";
+    public static final String MESSAGE_ADD_MEMBER_SUCCESS = "Added members: %1$s. Event: %2$s. ";
     public static final String MESSAGE_MEMBER_ALREADY_IN_EVENT = "The following member is already in the event: %1$s";
 
     private final Index eventIndex;
@@ -79,7 +79,7 @@ public class EmaddCommand extends Command {
         }
 
         selectedEvent.addParticipants(memberSet);
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_ADD_MEMBER_SUCCESS,
                 ParserUtil.memberSetToString(memberSet),
                 selectedEvent));
     }

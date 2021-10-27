@@ -27,7 +27,7 @@ public class EmarkAllCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT_ID + "1 ";
 
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Marked all members in event: %1$s";
+    public static final String MESSAGE_MARK_MEMBER_SUCCESS = "Marked all members in event: %1$s";
 
     private final Index eventIndex;
 
@@ -52,7 +52,7 @@ public class EmarkAllCommand extends Command {
         Event selectedEvent = lastShownEventList.get(eventIndex.getZeroBased());
 
         selectedEvent.markAttendanceForAll();
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, selectedEvent));
+        return new CommandResult(String.format(MESSAGE_MARK_MEMBER_SUCCESS, selectedEvent));
     }
 
     @Override

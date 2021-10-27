@@ -35,7 +35,7 @@ public class EmdelCommand extends Command {
             + PREFIX_EVENT_ID + "1 "
             + PREFIX_MEMBER_ID + "1 " + PREFIX_MEMBER_ID + "2";
 
-    public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Removed members: %1$s. Event: %2$s. ";
+    public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Removed members: %1$s. Event: %2$s. ";
     public static final String MESSAGE_MEMBER_NOT_IN_EVENT = "The following member is not in the event: %1$s";
 
     private final Index eventIndex;
@@ -78,7 +78,7 @@ public class EmdelCommand extends Command {
         }
 
         selectedEvent.removeParticipants(memberSet);
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS,
                 ParserUtil.memberSetToString(memberSet),
                 selectedEvent));
     }
