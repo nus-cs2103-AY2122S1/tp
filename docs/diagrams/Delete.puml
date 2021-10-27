@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User enters delete appointment command with index;
+:Parse command;
+if (index is valid) then (true)
+  :create new DeleteAppointmentCommand;
+  : execute DeleteAppointmentCommand;
+  : remove target appointment;
+else (false)
+    : generate Command Exception;
+endif
+: display result to user;
+stop
+
+@enduml
