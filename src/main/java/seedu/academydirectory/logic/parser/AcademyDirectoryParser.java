@@ -22,10 +22,12 @@ import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.HistoryCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
+import seedu.academydirectory.logic.commands.RedoCommand;
 import seedu.academydirectory.logic.commands.RevertCommand;
 import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.commands.SortCommand;
 import seedu.academydirectory.logic.commands.TagCommand;
+import seedu.academydirectory.logic.commands.UndoCommand;
 import seedu.academydirectory.logic.commands.ViewCommand;
 import seedu.academydirectory.logic.commands.VisualizeCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
@@ -112,6 +114,12 @@ public class AcademyDirectoryParser {
 
         case RevertCommand.COMMAND_WORD:
             return new RevertCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
