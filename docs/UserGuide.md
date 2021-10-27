@@ -12,7 +12,7 @@ the kind of user you may be.
 | I am... | Instructions |
 | ------- | ------------ |
 | ... a new user          | You may want to take a look at the [introduction](#introduction) to SPAM to get a better understanding of what the application can do. After that, we suggest following our [quick start guide](#quick-start) to install and have a tour of the application. |
-| ... an experienced user | You may want to take a look at the [navigation links](#navigation-links) below to jump straight to the content that you are looking for. You could also make use of the search bar by pressing the `ctrl` (on Windows) / `command ⌘` (on macOS) and `f` keys. Alternatively, search for a term in this entire site by using the [search](Search.html) feature.|
+| ... an experienced user | You may want to take a look at the [navigation links](#navigation-links) below to jump straight to the content that you are looking for. You could also make use of the search bar by pressing the `ctrl` (on Windows/Linux) / `command ⌘` (on macOS) and `f` keys. Alternatively, search for a term in this entire site by using the [search](Search.html) feature.|
 
 #### Navigation Links
 
@@ -449,11 +449,11 @@ This section contains some frequently asked questions about SPAM.
 <div class="card mb-3">
 <div markdown="1" class="card-body pt-0 pb-0">
 <h6 markdown="1" class="card-title">How do I transfer my data to another computer?</h6>
-<strong>Option 1:</strong>
+**Option 1:**
 Export all the contacts in your current device into a _.csv_ file. Then, after installing the app in your new device,
 import the _.csv_ file into the new list of contacts.
 
-<strong>Option 2 (with encryption):</strong>
+**Option 2 (with encryption):**
 Move the encrypted file from the application's data folder in your current device to the application's data folder in 
 your new device. Start the application and then enter the same password when prompted. 
 </div>
