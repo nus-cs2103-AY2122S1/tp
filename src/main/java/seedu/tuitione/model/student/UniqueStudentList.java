@@ -103,6 +103,7 @@ public class UniqueStudentList implements Iterable<Student> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
+        // internalList.sort((Comparator.comparingInt(o -> o.getName().fullName.charAt(0))));
         return internalUnmodifiableList;
     }
 

@@ -33,8 +33,8 @@ public class ParentContactTest {
         assertFalse(ParentContact.isValidPhone("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(ParentContact.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(ParentContact.isValidPhone("93121534"));
-        assertTrue(ParentContact.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(ParentContact.isValidPhone("67777777")); // exactly 3 numbers
+        assertTrue(ParentContact.isValidPhone("83121534"));
+        assertTrue(ParentContact.isValidPhone("98765432")); // long phone numbers
     }
 }
