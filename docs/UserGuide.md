@@ -65,16 +65,16 @@ If you are familiar with Unix commands, this is definitely for you!
 
 ## <a name="general-features"></a>1. General Features
 
-### <a name="view-help"></a>1a. View Help: `help`
+### <a name="view-help"></a>1.1 View Help: `help`
 Shows a message explaining how to access the help page.
 
 ![help message](images/help.png)
 Example: `help`
 
-### <a name="exit"></a>1b. Exit: `exit`
+### <a name="exit"></a>1.2 Exit: `exit`
 Exits ProgrammerError and closes the GUI.
 
-### <a name="view-dashboard"></a>1c. Dashboard: `dashboard`
+### <a name="view-dashboard"></a>1.3 Dashboard: `dashboard`
 Displays a dashboard window showing the following data:
 1. Number of students
 2. Number of classes
@@ -84,27 +84,27 @@ Displays a dashboard window showing the following data:
 
 ## <a name="data-features"></a>2. Data Features
 
-### <a name="fill-sample-data"></a>2a. Fill Sample Data: `fill`
+### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
 If no data present, fills it with sample data. Otherwise, throws an error message. \
 Example: `fill`
 
-### <a name="purge-all-data"></a>2b. Purge all Data: `purge`
+### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
 Purges all pre-existing sample data to start adding your own data or purge the user data. \
 Clears all data in PE. \
 Example: `purge`
 
-### <a name="download-data"></a>2c. Download Data `download`
+### <a name="download-data"></a>2.3 Download Data `download`
 PE data can be downloaded to a CSV file by clicking the 'Download' button with the command `download`. 
 The TA will need to specify the directory to download the file to.
 
-### <a name="upload-data"></a>2d. Upload Data: `upload`
+### <a name="upload-data"></a>2.4 Upload Data: `upload`
 PE data can be uploaded with a CSV file with the command `upload`. 
 The TA will need to specify the CSV file to upload the student data from.
 
 
 ## <a name="student-features"></a>3. Student Features
 
-### <a name="add-student"></a>3a. Add Student: `add`
+### <a name="add-student"></a>3.1 Add Student: `add`
 Adds a student to ProgrammerError with their student ID and class ID.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
@@ -118,27 +118,7 @@ Examples:
 - `add -n Betsy -sid A2345678X -cid B02 -email e043245@u.nus.edu`: Adds the student called Betsy with student ID A2345678X and class ID B02 to and 
   email e043245@u.nus.edu ProgrammerError.
 
-### <a name="filter-student"></a>6. Filter List: `filter`
-
-Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
-Of the three arguments, at least one has to be provided. Arguments can be provided in any order and it is
-case-insensitive. ProgrammerError will display the filtered list of students whose details matches all the specified
-arguments.
-
-Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
-
-Examples:
-
-![UI](images/commands/FilterCommand/filter.png)
-
-- `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
-- `filter -n abc` Lists all students whose name contains `abc`.
-- `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
-- `filter -email e1234567` Lists all students whose email contains the character sequence `e1234567`.
-- `filter -n Sherwin -cid B01` Lists all students whose name contains the character sequence `Sherwin` and belongs to a
-  class with the class ID containing the character sequence `B01`.
-
-### <a name="edit-student"></a>3b. Edit Student's Details or Grade : `edit`
+### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
 Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to the displayed
 list.
 
@@ -153,7 +133,7 @@ Examples:
 - `edit 2 -grade 97.5` Updates the grade of the student at index 2 (1-indexed) to 97.5.
 
 
-### <a name="delete-student"></a>3c. Delete Student: `delete`
+### <a name="delete-student"></a>3.3 Delete Student: `delete`
 Deletes the specified student from the PE.
 
 Format: `delete <STUDENT_INDEX>`
@@ -163,7 +143,7 @@ Example:
 - `delete 23` Deletes the data of the student at index 1
 
 
-### <a name="filter-student"></a>3d. Filter List: `filter`
+### <a name="filter-student"></a>3.4 Filter List: `filter`
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
 Of the three arguments, at least one has to be provided. Arguments can be provided in any order and are case-insensitive. 
 ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
@@ -172,7 +152,7 @@ Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 
-![UI](images/filter.png)
+![UI](images/commands/FilterCommand/filter.png)
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
 - `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
@@ -181,13 +161,13 @@ Examples:
   class with the class ID containing the character sequence `B01`.
 
 
-### <a name="show-student"></a>3e. Show Student Details: `show`
+### <a name="show-student"></a>3.5 Show Student Details: `show`
 Shows a particular student's details including their scores for each lab.
 
 
 ## <a name="lab-features"></a>4. Lab Features
 
-### <a name="add-lab"></a>4a. Add Lab: `addlab`
+### <a name="add-lab"></a>4.1 Add Lab: `addlab`
 Adds a lab to every student with the lab number and total score.
 
 Format: `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
@@ -197,7 +177,7 @@ Examples:
 - `addlab -t 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
 
 
-### <a name="edit-lab"></a>4b. Edit Lab: `editlab`
+### <a name="edit-lab"></a>4.2 Edit Lab: `editlab`
 Edits the details of an existing lab for every student.
 
 Format: `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
@@ -207,7 +187,7 @@ Examples:
 - `editlab -t 1 -nt 2`: Changes the number of an existing lab from 1 to 2 for all students.
 
 
-### <a name="delete-lab"></a>4c. Delete Lab: `dellab`
+### <a name="delete-lab"></a>4.3 Delete Lab: `dellab`
 Deletes an existing lab from every student in ProgrammerError.
 
 Format: `dellab -t <LAB_NUM>`
