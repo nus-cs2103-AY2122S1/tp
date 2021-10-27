@@ -53,6 +53,9 @@ public class DashboardWindow extends PopupWindow {
         this(new Stage(), logic);
     }
 
+    /**
+     * Fill number of students, classes and labs.
+     */
     public void fillOverallStats() {
         overallStatsPlaceholder.getChildren().clear();
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
