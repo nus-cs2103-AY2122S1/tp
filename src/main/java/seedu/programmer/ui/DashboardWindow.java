@@ -53,7 +53,7 @@ public class DashboardWindow extends PopupWindow {
     }
 
     /**
-     * Fill number of students, classes and labs.
+     * Fills number of students, classes and labs.
      */
     private void fillOverallStats() {
         overallStatsPlaceholder.getChildren().clear();

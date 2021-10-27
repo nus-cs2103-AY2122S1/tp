@@ -204,7 +204,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleDashboard() {
         if (dashboardWindow.isShowing()) {
-            refreshDashboard();
+            dashboardWindow.update();
+            dashboardWindow.focus();
             return;
         }
 
@@ -376,11 +377,5 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    private void refreshDashboard() {
-        dashboardWindow.hide();
-        dashboardWindow = new DashboardWindow(logic);
-        dashboardWindow.show();
     }
 }
