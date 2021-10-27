@@ -158,17 +158,17 @@ The workflow of the Add command is shown in the Activity diagram illustrated bel
 
 #### Design considerations:
 
-**Aspect: Optional `LastDate` fields when adding residents** 
+**Aspect: Optional `LastDate` fields when adding residents**
 
 * **Alternative 1 (current choice):** `lastFetDate` and `lastCollectionDate` are optional fields
-  * Pros: 
+  * Pros:
     - Provides more flexibility for users when adding residents to the application, as users have the choice to include or exclude these fields.
     - Saves time as all fields can be added in a single command
   * Cons: The length of command is increased as there are potentially more fields for the user to type.
-  
+
 * **Alternative 2:** Add `lastFetDate` and `lastCollectionDate` by editing the Person object
   * Pros: Makes add command more user-friendly as the command is more succinct
-  * Cons: User has to go through a two-step process of `add` and `edit` to initialise a residents information 
+  * Cons: User has to go through a two-step process of `add` and `edit` to initialise a residents information
 
 ### Delete Command
 
@@ -213,7 +213,7 @@ Note:
     * Pros:
         - Simpler implementation as there are less `EditDescriptors` to maintain.
         - `include` and `exclude` commands exist to enhance the updating of the `Residents` field.
-          `edit` currently replaces the specified fields with the user input, which will not be user-friendly for the `Residents` field. 
+          `edit` currently replaces the specified fields with the user input, which will not be user-friendly for the `Residents` field.
           It might also cause confusion of possible overlapping functionality on the user's side.
     * Cons: Increases the number of commands the user has to remember.
 
@@ -241,17 +241,17 @@ The following sequence diagram demonstrates what happens when the `ViewCommand` 
 **Aspect: How to reference residents/ events in the CLI:**
 
 * **Alternative 1 (current choice):** Reference by `Index`.
-    * Pros: 
+    * Pros:
       - Easy to reference and no need to type out the whole `residentName`/ `eventName`.
       - `Index` is unique.
     * Cons: Need to first determine the `Index` of the resident/ event in the UI. `View` could become a two-step process if the database is large.
 
 * **Alternative 2:** Reference by `residentName`/ `eventName`.
     * Pros: Do not have to first determine the `Index` of the resident/ event.
-    * Cons: 
+    * Cons:
       - Hard to type when the `residentName`/ `eventName` is long.
       - `eventName` is not unique, which might cause issues.
-    
+
 
 ### Find Command
 

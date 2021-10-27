@@ -29,8 +29,8 @@ public class TypicalEvents {
             .withVenue("gym")
             .withCapacity("7")
             .withResidentList(TypicalPersons.ELLE.getName().toString()
-                    + ", " + TypicalPersons.FIONA.getName().toString()
-                    + ", " + TypicalPersons.GEORGE.getName().toString(),
+                            + ", " + TypicalPersons.FIONA.getName().toString()
+                            + ", " + TypicalPersons.GEORGE.getName().toString(),
                     TypicalPersons.ELLE.toString()
                             + ", " + TypicalPersons.FIONA.toString()
                             + ", " + TypicalPersons.GEORGE.toString())

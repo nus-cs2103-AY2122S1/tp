@@ -104,6 +104,7 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ResidentList.class.getSimpleName()));
         }
+
         String[] persons = residents.split("\\s*,\\s*");
         StringBuilder stringBuilder = new StringBuilder("");
         int count = 0;

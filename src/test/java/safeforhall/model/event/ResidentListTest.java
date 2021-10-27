@@ -236,3 +236,4 @@ public class ResidentListTest {
         assertEquals(combinedString, ResidentList.DEFAULT_LIST);
     }
 }
+
