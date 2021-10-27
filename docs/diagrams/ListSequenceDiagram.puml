@@ -55,10 +55,10 @@ deactivate AnimeListParser
 LogicManager -> ListCommand : execute()
 activate ListCommand
 
-ListCommand -> Model : setCurrentTab(TabOptions.TOWATCH)
+ListCommand -> Model : setCurrentTab(t)
 activate Model
 
-Model -> TabOption : setCurrentTab(TabOptions.TOWATCH)
+Model -> TabOption : setCurrentTab(t)
 activate TabOption
 
 TabOption --> Model
