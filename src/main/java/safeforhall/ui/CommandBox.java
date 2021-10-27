@@ -15,6 +15,7 @@ import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.commands.ExcludeCommand;
 import safeforhall.logic.commands.ExitCommand;
+import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
@@ -249,8 +250,11 @@ public class CommandBox extends UiPart<Region> {
                 return DeadlineCommand.PARAMETERS;
             case ImportCommand.COMMAND_WORD:
                 return ImportCommand.PARAMETERS;
+            case ExportCommand.COMMAND_WORD:
+                return ExportCommand.PARAMETERS;
             case SwitchCommand.COMMAND_WORD:
                 return SwitchCommand.PARAMETERS;
+
             default:
                 return "";
             }
@@ -276,6 +280,8 @@ public class CommandBox extends UiPart<Region> {
                 return IncludeCommand.PARAMETERS;
             case ImportCommand.COMMAND_WORD:
                 return ImportCommand.PARAMETERS;
+            case ExportCommand.COMMAND_WORD:
+                return ExportCommand.PARAMETERS;
             case SwitchCommand.COMMAND_WORD:
                 return SwitchCommand.PARAMETERS;
             case ExcludeCommand.COMMAND_WORD:

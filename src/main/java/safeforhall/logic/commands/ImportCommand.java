@@ -42,7 +42,7 @@ public class ImportCommand extends Command {
             + "     2. The first row will be discarded as column headings\n"
             + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n"
             + "Parameters: "
-            + "NAME_OF_CSV\n"
+            + PARAMETERS + "\n"
             + "Example: " + COMMAND_WORD + " "
             + "safeforhall";
 
@@ -51,6 +51,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_ERROR_READING = "Error reading row %1d: ";
     public static final String MESSAGE_INCORRECT_CSV_FORMAT = "File is in an incorrect csv format";
     public static final String MESSAGE_INCORRECT_FIELDS = "8 fields of comma separated values not found";
+    public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
     public static final String DEFAULT_FILENAME = "safeforhall";
 
     private final Path filepath;
