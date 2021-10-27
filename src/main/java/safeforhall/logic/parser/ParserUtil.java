@@ -11,6 +11,7 @@ import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
@@ -206,6 +207,21 @@ public class ParserUtil {
             throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
         }
         return new EventDate(trimmedEventDate);
+    }
+
+    /**
+     * Parses a {@code String eventTime} into a {@code EventTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventTime} is invalid.
+     */
+    public static EventTime parseEventTime(String eventTime) throws ParseException {
+        requireNonNull(eventTime);
+        String trimmedEventTime = eventTime.trim();
+        if (!EventTime.isValidEventTime(trimmedEventTime)) {
+            throw new ParseException(EventTime.MESSAGE_CONSTRAINTS);
+        }
+        return new EventTime(trimmedEventTime);
     }
 
     /**

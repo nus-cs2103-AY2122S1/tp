@@ -84,8 +84,8 @@ public class ExcludeCommand extends Command {
         String combinedDisplayString = event.getRemovedDisplayString(toRemove);
         String combinedStorageString = event.getRemovedStorageString(toRemove);
 
-        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getVenue(),
-                event.getCapacity(), new ResidentList(combinedDisplayString, combinedStorageString));
+        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
+                event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString, combinedStorageString));
         model.setEvent(event, editedEvent);
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
 
