@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page title: 
+User Guide
 ---
 
 ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line
