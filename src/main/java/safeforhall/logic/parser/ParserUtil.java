@@ -8,6 +8,7 @@ import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.commands.ExportCommand;
+import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.EventDate;
@@ -271,13 +272,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parse a {@code String fileName} into a {@code String fileName}.
+     * Parse a {@code String fileName} into a {@code String fileName} for ExportCommand.
      * Leading and trailing whitespaces will be trimmed.
      * Ensures that fileName is a single word with no whitespace.
      *
      * @throws ParseException if the given {@code information} is invalid.
      */
-    public static String parseFileName(String fileName) throws ParseException {
+    public static String parseExportFileName(String fileName) throws ParseException {
         requireNonNull(fileName);
         String trimmedFileName = fileName.trim();
 
@@ -287,4 +288,23 @@ public class ParserUtil {
 
         return trimmedFileName;
     }
+
+    /**
+     * Parse a {@code String fileName} into a {@code String fileName} for ImportCommand.
+     * Leading and trailing whitespaces will be trimmed.
+     * Ensures that fileName is a single word with no whitespace.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static String parseImportFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+
+        if (trimmedFileName.isEmpty() || trimmedFileName.contains(" ")) {
+            throw new ParseException(ImportCommand.MESSAGE_CONSTRAINTS);
+        }
+
+        return trimmedFileName;
+    }
 }
+

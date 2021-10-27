@@ -396,23 +396,44 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseFileName_emptyValue_throwsParseException() throws Exception {
-        assertThrows(ParseException.class, () -> ParserUtil.parseFileName(EMPTY_STRING));
+    public void parseExportFileName_emptyValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExportFileName(EMPTY_STRING));
     }
 
     @Test
-    public void parseFileName_null_throwsNullPointerException() throws Exception {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseFileName((String) null));
+    public void parseExportFileName_null_throwsNullPointerException() throws Exception {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExportFileName((String) null));
     }
 
     @Test
-    public void parseFileName_validValue_returnsString() throws Exception {
+    public void parseExportFileName_validValue_returnsString() throws Exception {
         String expectedFileName = VALID_FILENAME;
-        assertEquals(expectedFileName, ParserUtil.parseFileName(VALID_FILENAME));
+        assertEquals(expectedFileName, ParserUtil.parseExportFileName(VALID_FILENAME));
     }
 
     @Test
-    public void parseFileName_validValue_throwsParseException() throws Exception {
-        assertThrows(ParseException.class, () -> ParserUtil.parseFileName(INVALID_FILENAME));
+    public void parseExportFileName_validValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExportFileName(INVALID_FILENAME));
+    }
+
+    @Test
+    public void parseImportFileName_emptyValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseImportFileName(EMPTY_STRING));
+    }
+
+    @Test
+    public void parseImportFileName_null_throwsNullPointerException() throws Exception {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseImportFileName((String) null));
+    }
+
+    @Test
+    public void parseImportFileName_validValue_returnsString() throws Exception {
+        String expectedFileName = VALID_FILENAME;
+        assertEquals(expectedFileName, ParserUtil.parseImportFileName(VALID_FILENAME));
+    }
+
+    @Test
+    public void parseImportFileName_validValue_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseImportFileName(INVALID_FILENAME));
     }
 }

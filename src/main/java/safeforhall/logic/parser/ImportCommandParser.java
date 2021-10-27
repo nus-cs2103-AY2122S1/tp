@@ -14,7 +14,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      */
     public ImportCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String fileName = ParserUtil.parseFileName(args);
+        String fileName = ParserUtil.parseImportFileName(args);
 
         return new ImportCommand(fileName);
     }

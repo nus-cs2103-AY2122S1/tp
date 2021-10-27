@@ -14,7 +14,7 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      */
     public ExportCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String fileName = ParserUtil.parseFileName(args);
+        String fileName = ParserUtil.parseExportFileName(args);
 
         return new ExportCommand(fileName);
     }

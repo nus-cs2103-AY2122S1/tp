@@ -17,8 +17,8 @@ public class ExportCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsImportCommand() {
-        ExportCommand expectedImportCommand = new ExportCommand("safeforhall");
+        ExportCommand expectedExportCommand = new ExportCommand("safeforhall");
         CommandParserTestUtil.assertParseSuccess(parser,
-                " safeforhall", expectedImportCommand);
+                " safeforhall", expectedExportCommand);
     }
 }
