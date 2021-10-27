@@ -109,6 +109,7 @@ public class ParserUtil {
     /**
      * Takes in {@code recommendationHourFilter} and returns the corresponding {@code HourOfDay} if its format and
      * value is valid.
+     *
      * @param recommendationHourFilter user input for hour of day to filter for recommendation.
      * @return valid {@code HourOfDay}
      * @throws ParseException thrown when format or value of trimmed hour filter provided is invalid.
@@ -124,6 +125,7 @@ public class ParserUtil {
     /**
      * Takes in {@code dayOfWeek} and returns the corresponding {@code DayOfWeek} if its format and
      * value is valid.
+     *
      * @param dayOfWeek user input for day of week to filter.
      * @return valid {@code DayOfWeek}
      * @throws ParseException thrown when format or value of trimmed day filter provided is invalid.

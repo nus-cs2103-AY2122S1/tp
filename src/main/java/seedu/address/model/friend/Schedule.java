@@ -3,10 +3,10 @@ package seedu.address.model.friend;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
@@ -15,9 +15,10 @@ import seedu.address.model.time.exceptions.InvalidHourOfDayException;
  */
 public class Schedule {
 
-    public static final String MESSAGE_INVALID_SCHEDULE = "Schedule must contain 7 valid days,from Monday to Sunday.";
+    public static final String MESSAGE_INVALID_SCHEDULE = "Schedule must contain 7 valid days, from Monday to Sunday.";
 
-    private static final String MESSAGE_DAYTIME_INVALID_RANGE = "Day value must be an Integer within 1 - 7 (inclusive).";
+    private static final String MESSAGE_DAYTIME_INVALID_RANGE =
+        "Day value must be an Integer within 1 - 7 (inclusive).";
     private static final int SCHEDULE_START_INDEX = 1;
     private static final int SCHEDULE_END_INDEX = 7;
     private static final int EXPECTED_LIST_LENGTH = (SCHEDULE_END_INDEX - SCHEDULE_START_INDEX + 1);
@@ -34,12 +35,30 @@ public class Schedule {
     }
 
     /**
+     * Returns true if valid schedule.
+     *
+     * @param schedule Schedule to validate.
+     * @return True if valid.
+     */
+    public static boolean isValidSchedule(Schedule schedule) {
+        if (schedule.daysOfWeek.size() != EXPECTED_LIST_LENGTH) {
+            return false;
+        }
+        boolean isValid = true;
+        for (int i = SCHEDULE_START_INDEX; i <= SCHEDULE_END_INDEX; i++) {
+            Day current = schedule.daysOfWeek.get(i - 1);
+            isValid = isValid && Day.isValidDay(current) && current.getDayName().equals(DayOfWeek.of(i).name());
+        }
+        return isValid;
+    }
+
+    /**
      * Checks if schedule timeslot is free for given {@code dayOfWeek} and {@code hourOfDay}.
      *
      * @param dayOfWeek day to check if is free for.
      * @param hourOfDay hour to check if is free for.
      * @return whether schedule is free for given {@code dayOfWeek} and {@code hourOfDay}.
-     * @throws InvalidDayTimeException thrown when dayOfWeek given exceeds valid range.
+     * @throws InvalidDayTimeException   thrown when dayOfWeek given exceeds valid range.
      * @throws InvalidHourOfDayException thrown when hourOfDay given exceeds valid range.
      */
     public boolean isTimeslotAvailable(int hourOfDay, int dayOfWeek)
@@ -48,24 +67,6 @@ public class Schedule {
             throw new InvalidDayTimeException(MESSAGE_DAYTIME_INVALID_RANGE);
         }
         return daysOfWeek.get(convertToListIndex(dayOfWeek)).isTimeSlotHourFree(hourOfDay);
-    }
-
-    /**
-     * Returns true if valid schedule.
-     *
-     * @param schedule Schedule to validate.
-     * @return True if valid.
-     */
-    public static boolean isValidSchedule(Schedule schedule) {
-        if (schedule.getDaysOfWeek().size() != EXPECTED_LIST_LENGTH) {
-            return false;
-        }
-        boolean isValid = true;
-        for (int i = SCHEDULE_START_INDEX; i <= SCHEDULE_END_INDEX; i++) {
-            Day current = schedule.getDaysOfWeek().get(i - 1);
-            isValid = isValid && Day.isValidDay(current) && current.getDayName().equals(DayOfWeek.of(i).name());
-        }
-        return isValid;
     }
 
     /**
@@ -86,11 +87,12 @@ public class Schedule {
     }
 
     /**
-     * Returns an immutable day list, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a list of days
+     *
+     * @return ObservableList of days
      */
-    public List<Day> getDaysOfWeek() {
-        return Collections.unmodifiableList(daysOfWeek);
+    public ObservableList<Day> getSchedule() {
+        return FXCollections.observableList(daysOfWeek);
     }
 
     @Override

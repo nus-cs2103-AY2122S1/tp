@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import seedu.address.model.FriendsList;
 import seedu.address.model.GamesList;
@@ -32,18 +32,18 @@ public class SampleDataUtil {
         Game[] sampleGames = getSampleGames();
         Schedule[] sampleSchedules = getSampleSchedules();
         return new Friend[]{
-                createSampleFriend("AlexY123", "Alex Yeoh", sampleSchedules[0],
-                        sampleGames[1], sampleGames[3]),
-                createSampleFriend("BernieSanders", "Bernice Yu", sampleSchedules[1],
-                        sampleGames[5], sampleGames[4]),
-                createSampleFriend("ChickenTender", "Charlotte Oliveiro", sampleSchedules[2],
-                        sampleGames[6], sampleGames[1]),
-                createSampleFriend("Davidz", "David Li", sampleSchedules[2],
-                        sampleGames[7]),
-                createSampleFriend("II3", "Irfan Ibrahim", sampleSchedules[1],
-                        sampleGames[0]),
-                createSampleFriend("RoyJoy", "Roy Balakrishnan", sampleSchedules[0],
-                        sampleGames[1], sampleGames[0])
+            createSampleFriend("AlexY123", "Alex Yeoh", sampleSchedules[0],
+                    sampleGames[1], sampleGames[3]),
+            createSampleFriend("BernieSanders", "Bernice Yu", sampleSchedules[1],
+                    sampleGames[5], sampleGames[4]),
+            createSampleFriend("ChickenTender", "Charlotte Oliveiro", sampleSchedules[2],
+                    sampleGames[6], sampleGames[1]),
+            createSampleFriend("Davidz", "David Li", sampleSchedules[2],
+                    sampleGames[7]),
+            createSampleFriend("II3", "Irfan Ibrahim", sampleSchedules[1],
+                    sampleGames[0]),
+            createSampleFriend("RoyJoy", "Roy Balakrishnan", sampleSchedules[0],
+                    sampleGames[1], sampleGames[0])
         };
     }
 
@@ -63,7 +63,14 @@ public class SampleDataUtil {
     public static Schedule[] getSampleSchedules() {
         try {
             Schedule scheduleOne = new Schedule();
-            scheduleOne.setScheduleDay(0, "1800", "2200", true);
+            scheduleOne.setScheduleDay(1, "0000", "0100", true);
+            scheduleOne.setScheduleDay(1, "0200", "0400", true);
+            scheduleOne.setScheduleDay(1, "0600", "0800", true);
+
+            scheduleOne.setScheduleDay(2, "0600", "0800", true);
+
+            scheduleOne.setScheduleDay(3, "0200", "0400", true);
+            scheduleOne.setScheduleDay(3, "0600", "0800", true);
 
             Schedule scheduleTwo = new Schedule();
             scheduleTwo.setScheduleDay(2, "0200", "1600", true);
@@ -116,12 +123,13 @@ public class SampleDataUtil {
                                             Game... games) {
         FriendId friendId = new FriendId(friendIdString);
 
-        Set<GameFriendLink> gameFriendLinks = new HashSet<>();
+        Map<GameId, GameFriendLink> gameFriendLinks = new HashMap<>();
         FriendName friendName = new FriendName(friendNameString);
         for (Game game : games) {
             // only link game and friend if game exists
             if (validateSampleGameExists(game)) {
-                gameFriendLinks.add(new GameFriendLink(game.getGameId(), friendId, new UserName("Username")));
+                gameFriendLinks.put(game.getGameId(),
+                        new GameFriendLink(game.getGameId(), friendId, new UserName("Username")));
             }
         }
         return new Friend(friendId, friendName, gameFriendLinks, schedule);
@@ -131,7 +139,9 @@ public class SampleDataUtil {
         return Arrays.asList(getSampleGames()).contains(game);
     }
 
-    public static Set<GameFriendLink> getGameFriendLinkSet(GameFriendLink... gameFriendLinks) {
-        return new HashSet<>(Arrays.asList(gameFriendLinks));
+    public static Map<GameId, GameFriendLink> getGameFriendLinkMap(GameFriendLink... gameFriendLinks) {
+        HashMap<GameId, GameFriendLink> gameFriendLinkMap = new HashMap<>();
+        Arrays.asList(gameFriendLinks).forEach(gfl -> gameFriendLinkMap.put(gfl.getGameId(), gfl));
+        return gameFriendLinkMap;
     }
 }

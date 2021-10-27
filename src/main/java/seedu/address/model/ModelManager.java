@@ -151,8 +151,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeLinkAllFriends(GameId gameId) {
-        friendsList.removeLinkAllFriends(gameId);
+    public void removeLinkAllFriends(Game game) {
+        friendsList.removeLinkAllFriends(game);
     }
 
     @Override
@@ -250,7 +250,7 @@ public class ModelManager implements Model {
         // short circuit if same object
         if (obj == this) {
             return true;
-        // instanceof handles other == null
+            // instanceof handles other == null
         } else if (!(obj instanceof ModelManager)) {
             return false;
         } else {

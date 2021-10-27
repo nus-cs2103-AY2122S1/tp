@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 import seedu.address.model.game.Game;
 
 
-
 public class FriendGameFriendLinksContainsGamePredicate implements Predicate<Friend> {
     private final Game game;
 

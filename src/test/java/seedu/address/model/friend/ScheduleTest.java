@@ -17,15 +17,15 @@ class ScheduleTest {
         Schedule schedule = new Schedule();
         // Invalid day numbers (Only from 1 - 7 allowed)
         assertThrows(InvalidDayTimeException.class, () ->
-                schedule.setScheduleDay(0, "0000", "1200", true));
+                schedule.setScheduleDay(0, "0", "12", true));
         assertThrows(InvalidDayTimeException.class, () ->
-                schedule.setScheduleDay(8, "0000", "1200", true));
+                schedule.setScheduleDay(8, "0", "12", true));
     }
 
     @Test
     void isScheduleFree_freeTimeSlots_returnsTrue() throws InvalidDayTimeException, InvalidHourOfDayException {
         Schedule schedule = new Schedule();
-        schedule.setScheduleDay(1, "1000", "1200", true);
+        schedule.setScheduleDay(1, "10", "12", true);
 
         assertTrue(schedule.isTimeslotAvailable(10, 1));
         assertTrue(schedule.isTimeslotAvailable(11, 1));
@@ -45,19 +45,13 @@ class ScheduleTest {
         assertTrue(scheduleOne.equals(scheduleTwo));
 
         // same edited schedule
-        scheduleTwo.setScheduleDay(1, "1000", "1200", true);
-        scheduleOne.setScheduleDay(1, "1000", "1200", true);
+        scheduleTwo.setScheduleDay(1, "10", "12", true);
+        scheduleOne.setScheduleDay(1, "10", "12", true);
         assertEquals(scheduleOne, scheduleTwo);
 
         // Different day schedules
-        scheduleOne.setScheduleDay(1, "0000", "1200", true);
+        scheduleOne.setScheduleDay(1, "0", "12", true);
         assertFalse(scheduleOne.equals(scheduleTwo));
     }
 
-    @Test
-    void getSchedule() {
-        Schedule schedule = new Schedule();
-        // Unmodifiable
-        assertThrows(UnsupportedOperationException.class, () -> schedule.getDaysOfWeek().remove(1));
-    }
 }

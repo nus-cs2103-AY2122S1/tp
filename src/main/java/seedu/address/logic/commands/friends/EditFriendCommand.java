@@ -1,10 +1,12 @@
 package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_EDIT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -17,6 +19,7 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.Schedule;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -25,16 +28,14 @@ import seedu.address.model.gamefriendlink.GameFriendLink;
 public class EditFriendCommand extends Command {
 
     public static final String COMMAND_WORD = "--edit";
-    public static final String USAGE_EXAMPLE = "Example: friend " + COMMAND_WORD + " Draco "
-            + FLAG_FRIEND_NAME + "Marcus Tang";
-    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Friend edited - \nId: %1$s \nNew name: %2$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n" + USAGE_EXAMPLE;
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the friend identified "
-            + "by friend's FRIEND_ID. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: FRIEND_ID "
-            + FLAG_FRIEND_NAME + "NEW_FRIEND_NAME \n"
+
+    public static final String USAGE_EXAMPLE = "Example: "
+            + CMD_FRIEND + " " + FLAG_EDIT + "Draco " + FLAG_FRIEND_NAME + "Marcus Tang";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_EDIT + "FRIEND_ID " + FLAG_FRIEND_NAME + "NEW_FRIEND_NAME\n"
             + USAGE_EXAMPLE;
+    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Edited Friend - FRIEND_ID: %1$s, NEW_FRIEND_NAME: %2$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n" + USAGE_EXAMPLE;
 
     private final FriendId friendIdToEdit;
     private final EditFriendDescriptor editFriendDescriptor;
@@ -61,7 +62,7 @@ public class EditFriendCommand extends Command {
 
         FriendId friendId = friendToEdit.getFriendId();
         FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getFriendName());
-        Set<GameFriendLink> gameFriendLinks = friendToEdit.getGameFriendLinks();
+        Map<GameId, GameFriendLink> gameFriendLinks = friendToEdit.getGameFriendLinks();
         Schedule schedule = friendToEdit.getSchedule();
 
         return new Friend(friendId, updatedFriendName, gameFriendLinks, schedule);

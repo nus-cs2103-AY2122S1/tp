@@ -68,7 +68,6 @@ public class Day {
     public void setTime(String startTime, String endTime, boolean isFree) throws InvalidDayTimeException {
         int startIndex = getIndexFromTime(startTime);
         int endIndex = getIndexFromTime(endTime);
-        endIndex = endIndex == 0 ? 24 : endIndex; // when endTime is 0000, it is treated as 2400
 
         if (endIndex <= startIndex) {
             throw new InvalidDayTimeException(MESSAGE_END_TIME_ORDER);
@@ -138,6 +137,7 @@ public class Day {
         Day day = (Day) o;
         return Arrays.equals(timeSlots, day.timeSlots) && dayOfWeek == day.dayOfWeek;
     }
+
     @Override
     public int hashCode() {
         int result = Objects.hash(dayOfWeek);

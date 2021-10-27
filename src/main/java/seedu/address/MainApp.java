@@ -28,7 +28,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
-import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.storage.FriendsListStorage;
 import seedu.address.storage.GamesListStorage;
 import seedu.address.storage.JsonFriendsListStorage;
@@ -140,7 +139,8 @@ public class MainApp extends Application {
     /**
      * Checks if all games linked as {@code GameFriendLink} in Friend stored in {@code friendsList} exist in the
      * {@code gamesList}.
-     * @param gamesList list of games which should contain all games friends link to.
+     *
+     * @param gamesList   list of games which should contain all games friends link to.
      * @param friendsList list of friends to check if all games linked by Friend elements are stored in the gamesList.
      * @return whether all games linked to by friends in the friends list exist in the games list.
      */
@@ -148,8 +148,8 @@ public class MainApp extends Application {
         List<GameId> includedGameIds = gamesList.getGamesList().stream().map(Game::getGameId)
                 .collect(Collectors.toList());
         for (Friend friend : friendsList.getFriendsList()) {
-            for (GameFriendLink gameFriendLink : friend.getGameFriendLinks()) {
-                if (!includedGameIds.contains(gameFriendLink.getGameId())) {
+            for (GameId gameId : friend.getGameFriendLinks().keySet()) {
+                if (!includedGameIds.contains(gameId)) {
                     return false;
                 }
             }

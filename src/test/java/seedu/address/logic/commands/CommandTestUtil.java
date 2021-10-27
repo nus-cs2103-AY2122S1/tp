@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_ID;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_TIME;
@@ -60,8 +60,6 @@ public class CommandTestUtil {
     public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;
     public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + VALID_NAME_BOB;
-    public static final String GAME_DESC_AMY = " " + FLAG_ADD + VALID_GAME_ID_APEX_LEGENDS;
-    public static final String GAME_DESC_BOB = " " + FLAG_ADD + VALID_GAME_ID_CSGO;
 
     public static final String GAME_DESC_CSGO = " " + FLAG_ADD + CSGO.gameId;
     public static final String GAME_DESC_VALORANT = " " + FLAG_ADD + VALORANT.gameId;
@@ -69,7 +67,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_GAME_ID = "kickstar*"; // '*' not allowed in GameId
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
-    public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + INVALID_GAME_ID;
+    public static final String INVALID_GAME_DESC = " " + FLAG_GAME + INVALID_GAME_ID;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

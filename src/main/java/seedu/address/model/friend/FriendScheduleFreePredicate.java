@@ -15,8 +15,9 @@ public class FriendScheduleFreePredicate implements Predicate<Friend> {
     /**
      * Constructs a predicate instance which checks if Friend's schedule is available
      * for given hour and day of week.
+     *
      * @param hour hour of day to check availability for.
-     * @param day day of week to check availability for.
+     * @param day  day of week to check availability for.
      */
     public FriendScheduleFreePredicate(HourOfDay hour, DayOfWeek day) {
         this.hour = hour;

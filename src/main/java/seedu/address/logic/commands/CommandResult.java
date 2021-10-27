@@ -24,7 +24,9 @@ public class CommandResult {
      */
     private final boolean exit;
 
-    /** The command is a {@Code friend} command. */
+    /**
+     * The command is a {@Code friend} command.
+     */
     private final CommandType commandType;
 
     /**
@@ -40,6 +42,7 @@ public class CommandResult {
     private final Game gameToGet;
 
     //TODO : Remove this once merged with main code.
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -112,22 +115,30 @@ public class CommandResult {
         return commandType;
     }
 
-    /** Returns true if the command is a {@Code help} command. */
+    /**
+     * Returns true if the command is a {@Code help} command.
+     */
     public boolean isShowHelp() {
         return showHelp;
     }
 
-    /** Returns true if the command is a {@Code help} command. */
+    /**
+     * Returns true if the command is a {@Code help} command.
+     */
     public boolean isExit() {
         return exit;
     }
 
-    /** Returns true if the command is a {@Code friend --get} command. */
+    /**
+     * Returns true if the command is a {@Code friend --get} command.
+     */
     public boolean isFriendGet() {
         return commandType.equals(CommandType.FRIEND_GET);
     }
 
-    /** Returns true if the command is a {@Code game --get} command. */
+    /**
+     * Returns true if the command is a {@Code game --get} command.
+     */
     public boolean isGameGet() {
         return commandType.equals(CommandType.GAME_GET);
     }

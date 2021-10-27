@@ -9,7 +9,6 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.UniqueFriendsList;
 import seedu.address.model.game.Game;
-import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -115,10 +114,10 @@ public class FriendsList implements ReadOnlyFriendsList {
     }
 
     /**
-     * Removes the {@code GameFriendLink} from all friends that are associated with the game of {@code gameId}.
+     * Removes the {@code GameFriendLink} from all friends that are associated with {@code gameId}.
      */
-    public void removeLinkAllFriends(GameId gameId) {
-        friends.removeLinkAllFriends(gameId);
+    public void removeLinkAllFriends(Game game) {
+        friends.removeLinkAllFriends(game);
     }
 
     /**
@@ -152,8 +151,8 @@ public class FriendsList implements ReadOnlyFriendsList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FriendsList // instanceof handles nulls
-                && friends.equals(((FriendsList) other).friends));
+            || (other instanceof FriendsList // instanceof handles nulls
+            && friends.equals(((FriendsList) other).friends));
     }
 
     @Override
