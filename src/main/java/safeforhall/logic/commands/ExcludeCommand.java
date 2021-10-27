@@ -76,6 +76,12 @@ public class ExcludeCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException("Index given is invalid");
         }
+
+        if (residentList.isEmpty()) {
+            throw new CommandException("No person with this information '" + residentList.getResidentsDisplay()
+                    + "' could be found");
+        }
+
         ArrayList<Person> toRemove = model.toPersonList(residentList);
         ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
 
