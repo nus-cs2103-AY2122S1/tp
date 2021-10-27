@@ -49,8 +49,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private TagListPanel tagListPanel;
     private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -73,9 +71,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem tagsMenuItem;
-
-    @FXML
-    private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane centerPanelPlaceholder;
@@ -176,7 +171,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void initKeyPressEventHandler(CommandBox commandBox) {
         // Add event handlers
-        getRoot().addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
                 commandBox.getCommandTextField().requestFocus();
             }

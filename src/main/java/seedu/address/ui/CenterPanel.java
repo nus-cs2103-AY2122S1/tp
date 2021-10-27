@@ -25,10 +25,9 @@ public class CenterPanel extends UiPart<Region> {
     private static final String FXML = "CenterPanel.fxml";
     private static final Logger logger = LogsCenter.getLogger(CenterPanel.class);
 
+    // Independent Ui parts residing in this Ui container
     private SchedulePanel schedulePanel;
-
     private PersonGridPanel personGridPanel;
-
     private TagListPanel tagListPanel;
 
     @FXML
