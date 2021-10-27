@@ -79,6 +79,6 @@ public class Task extends Module {
 
     @Override
     public String toString() {
-        return "(" + getStatusIcon() + ")" + super.getName();
+        return super.getName().toString() + " by " + getTaskDeadline().toString();
     }
 }
