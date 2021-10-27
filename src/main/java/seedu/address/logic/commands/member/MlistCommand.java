@@ -25,7 +25,7 @@ public class MlistCommand extends Command {
 
     public static final String COMMAND_WORD = "mlist";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all members in Ailurus with filters. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all members in Ailurus with filters. \n"
             + "Only one of " + PREFIX_ATTEND + "or " + PREFIX_ABSENT + "may be present\n"
             + "Parameters: [" + PREFIX_EVENT_ID + "EVENT_ID (must be a positive integer)] "
             + "[" + PREFIX_ATTEND + "] "

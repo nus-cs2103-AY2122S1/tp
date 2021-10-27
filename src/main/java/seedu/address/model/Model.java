@@ -11,7 +11,7 @@ import seedu.address.model.module.event.Event;
 import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
 
-/**tlist /m 1
+/**
  * The API of the Model component.
  */
 public interface Model {
