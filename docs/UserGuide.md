@@ -152,6 +152,24 @@ Examples:
 * `find Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
 * `delete -a` deletes all entries in the address book.
 
+### Sort contacts by attribute: `sort`
+
+Sort all the contacts in the ProfBook.
+
+Format: `sort [ATTRIBUTE] [-r]`
+
+* Contacts will be sorted by the attribute specified, then by name in the case of ties.
+* If no attribute is specified, contacts will be sorted by name by default.
+* The -r argument sorts the ProfBook in descending order.
+* Sorting by tags will sort by the number of tags given.
+* Sorting by address is not supported.
+
+Examples:
+* `sort` sorts the contacts by name.
+* `sort n/` also sorts the contacts by name.
+* `sort -r` sorts the contacts by name in descending order.
+* `sort T/` sorts the contacts by Tutorial ID.
+
 ### Import existing contacts from JSON: `import`
 
 Merges all contacts in a JSON file with the existing contacts in PB3.
