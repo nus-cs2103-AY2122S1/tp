@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
@@ -72,6 +73,9 @@ public class LessonEditCommand extends UndoableCommand {
     public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!";
     public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE =
             "You cannot edit the type of a lesson. Please add another" + " lesson if you wish to do so.";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "The end date cannot be earlier than the start date. Please"
+            + " edit the start date with " + PREFIX_DATE + "DATE and the end date with " + PREFIX_RECURRING + "END_DATE"
+            + " if you wish to proceed.";
 
     public static final String MESSAGE_INVALID_CANCEL_DATE =
             "Failed to cancel lesson! This lesson does not occur on %1$s.";
@@ -139,6 +143,12 @@ public class LessonEditCommand extends UndoableCommand {
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
         LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
+
+        // error if end date is earlier than start date
+        if (updatedEndDate.isBefore(updatedDate)) {
+            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
+        }
+
         // filter out dates after start date
         Set<Date> filteredCancelledDates = lessonToEdit.getCancelledDates().stream()
                 .filter(date -> date.isOnRecurringDate(updatedDate, updatedEndDate)).collect(Collectors.toSet());
