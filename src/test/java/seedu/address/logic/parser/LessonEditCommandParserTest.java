@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOMEWORK_DESC
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_RANGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_UNCANCEL_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_RATES_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.OUTSTANDING_FEES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_RANGE_DESC;
@@ -23,6 +25,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
@@ -179,6 +183,16 @@ class LessonEditCommandParserTest {
         descriptor = new EditLessonDescriptorBuilder().withHomeworkSet(VALID_HOMEWORK_POETRY).build();
         expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // lesson rates
+        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + LESSON_RATES_DESC;
+        descriptor = new EditLessonDescriptorBuilder().withLessonRates(VALID_LESSON_RATES).build();
+        expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // outstanding fees
+        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + OUTSTANDING_FEES_DESC;
+        descriptor = new EditLessonDescriptorBuilder().withOutstandingFees(VALID_OUTSTANDING_FEES).build();
 
         // cancel dates list
         userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + CANCEL_DATE_DESC_MON;

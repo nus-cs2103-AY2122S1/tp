@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NON_CLASHING_TIME_RANGE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.model.lesson.Date.MAX_DATE;
@@ -79,7 +80,8 @@ class RecurringLessonTest {
             MAX_DATE,
             new TimeRange(VALID_TIME_RANGE),
             new Subject(VALID_SUBJECT), new HashSet<>(),
-            new LessonRates(VALID_LESSON_RATES), new HashSet<>());
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES),
+            new HashSet<>());
         assertEquals(LocalDate.now(), lesson.getDisplayDate().getLocalDate());
 
         Date cancelled = new Date(LocalDate.now().format(Date.FORMATTER));
@@ -87,7 +89,7 @@ class RecurringLessonTest {
         dates.add(cancelled);
         Lesson lesson1 = new MakeUpLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
             new TimeRange(VALID_TIME_RANGE),
-            new Subject(VALID_SUBJECT), new HashSet<>(),
+            new Subject(VALID_SUBJECT), new OutstandingFees(VALID_OUTSTANDING_FEES), new HashSet<>(),
             new LessonRates(VALID_LESSON_RATES), dates);
 
         Date cancelled2 = new Date(LocalDate.now().format(Date.FORMATTER));
@@ -96,7 +98,7 @@ class RecurringLessonTest {
         Lesson lesson2 = new MakeUpLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
             new TimeRange(VALID_TIME_RANGE),
             new Subject(VALID_SUBJECT), new HashSet<>(),
-            new LessonRates(VALID_LESSON_RATES), dates2);
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES), dates2);
 
         TreeSet<Lesson> lessonSet = new TreeSet<>();
         lessonSet.add(lesson1);
@@ -112,12 +114,14 @@ class RecurringLessonTest {
             MAX_DATE,
             new TimeRange(VALID_TIME_RANGE),
             new Subject(VALID_SUBJECT), new HashSet<>(),
-            new LessonRates(VALID_LESSON_RATES), new HashSet<>());
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES),
+            new HashSet<>());
         Lesson clashingLesson = new RecurringLesson(oneWeekLaterDate,
             MAX_DATE,
             new TimeRange(VALID_TIME_RANGE),
             new Subject(VALID_SUBJECT), new HashSet<>(),
-            new LessonRates(VALID_LESSON_RATES), new HashSet<>());
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES),
+            new HashSet<>());
 
         assertTrue(lesson.isClashing(clashingLesson));
     }

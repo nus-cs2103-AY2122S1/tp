@@ -16,6 +16,7 @@ import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
+import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
@@ -35,6 +36,7 @@ class JsonAdaptedLesson {
     private final String subject;
     private final String lessonRates;
     private final boolean isRecurring;
+    private final String outstandingFees;
     private final List<JsonAdaptedHomework> homework = new ArrayList<>();
     private final List<JsonAdaptedDate> cancelledDates = new ArrayList<>();
 
@@ -47,12 +49,14 @@ class JsonAdaptedLesson {
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework,
                              @JsonProperty("lessonRates") String lessonRates,
+                             @JsonProperty("outstandingFees") String outstandingFees,
                              @JsonProperty("cancelledDate") List<JsonAdaptedDate> cancelledDates) {
         this.date = date;
         this.endDate = endDate;
         this.timeRange = timeRange;
         this.subject = subject;
         this.lessonRates = lessonRates;
+        this.outstandingFees = outstandingFees;
         if (homework != null) {
             this.homework.addAll(homework);
         }
@@ -71,6 +75,7 @@ class JsonAdaptedLesson {
         timeRange = source.getTimeRange().value;
         subject = source.getSubject().subject;
         lessonRates = source.getLessonRates().value;
+        outstandingFees = source.getOutstandingFees().value;
         homework.addAll(source.getHomework().stream()
                 .map(JsonAdaptedHomework::new)
                 .collect(Collectors.toList()));
@@ -110,10 +115,16 @@ class JsonAdaptedLesson {
         final Subject modelSubject = new Subject(strippedSubject);
 
         String strippedLessonRates = lessonRates.strip();
-        if (!LessonRates.isValidLessonRates(strippedLessonRates)) {
+        if (!LessonRates.isValidMonetaryField(strippedLessonRates)) {
             throw new IllegalValueException(LessonRates.MESSAGE_CONSTRAINTS);
         }
         final LessonRates modelLessonRates = new LessonRates(strippedLessonRates);
+
+        String strippedOutstandingFees = outstandingFees.strip();
+        if (!OutstandingFees.isValidMonetaryField(strippedOutstandingFees)) {
+            throw new IllegalValueException(OutstandingFees.MESSAGE_CONSTRAINTS);
+        }
+        final OutstandingFees modelOutstandingFees = new OutstandingFees(outstandingFees);
 
         final List<Homework> lessonHomework = new ArrayList<>();
         for (JsonAdaptedHomework hw : homework) {
@@ -126,9 +137,9 @@ class JsonAdaptedLesson {
         // lesson used to check if cancelled dates are valid
         Lesson lessonWithoutCancelledDates = isRecurring
                 ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange, modelSubject, modelHomework,
-                        modelLessonRates, modelCancelledDates)
+                        modelLessonRates, modelOutstandingFees, modelCancelledDates)
                 : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates,
-                        modelCancelledDates);
+                        modelOutstandingFees, modelCancelledDates);
 
         final List<Date> dates = new ArrayList<>();
 
@@ -159,6 +170,10 @@ class JsonAdaptedLesson {
         if (lessonRates == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LessonRates.class.getSimpleName()));
+        }
+        if (outstandingFees == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    OutstandingFees.class.getSimpleName()));
         }
     }
 }

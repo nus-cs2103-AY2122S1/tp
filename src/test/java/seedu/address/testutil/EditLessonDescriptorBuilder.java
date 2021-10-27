@@ -11,6 +11,7 @@ import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonRates;
+import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 
@@ -37,10 +38,15 @@ public class EditLessonDescriptorBuilder {
         descriptor.setTimeRange(lesson.getTimeRange());
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
+<<<<<<< HEAD
         descriptor.setRate(lesson.getLessonRates());
         descriptor.setCancelDates(lesson.getCancelledDates());
         descriptor.setUncancelDates(new HashSet<>());
         descriptor.setRecurring(lesson.isRecurring());
+=======
+        descriptor.setLessonRate(lesson.getLessonRates());
+        descriptor.setOutstandingFees(lesson.getOutstandingFees());
+>>>>>>> f8359a22ecf9a9ac527a5dc85a5c5953581d9abc
     }
 
     /**
@@ -80,8 +86,16 @@ public class EditLessonDescriptorBuilder {
     /**
      * Sets the {@code Rate} of the {@code EditLessonDescriptor} that we are building.
      */
-    public EditLessonDescriptorBuilder withRate(String rate) {
-        descriptor.setRate(new LessonRates(rate));
+    public EditLessonDescriptorBuilder withLessonRates(String rate) {
+        descriptor.setLessonRate(new LessonRates(rate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rate} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withOutstandingFees(String outstandingFees) {
+        descriptor.setOutstandingFees(new OutstandingFees(outstandingFees));
         return this;
     }
 

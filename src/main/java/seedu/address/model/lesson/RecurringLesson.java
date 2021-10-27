@@ -25,11 +25,12 @@ public class RecurringLesson extends Lesson {
      * @param subject        Subject of the lesson.
      * @param homework       Homework for the lesson.
      * @param rates          Cost per lesson for the lesson.
+     * @param fees           Outstanding fees for the lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
     public RecurringLesson(Date date, Date endDate, TimeRange timeRange, Subject subject, Set<Homework> homework,
-                           LessonRates rates, Set<Date> cancelledDates) {
-        super(date, endDate, timeRange, subject, homework, rates, cancelledDates);
+                           LessonRates rates, OutstandingFees fees, Set<Date> cancelledDates) {
+        super(date, endDate, timeRange, subject, homework, rates, fees, cancelledDates);
     }
 
     /**
@@ -41,7 +42,7 @@ public class RecurringLesson extends Lesson {
     @Override
     public Lesson updateCancelledDates(Set<Date> updatedCancelledDates) {
         return new RecurringLesson(getStartDate(), getEndDate(), getTimeRange(),
-                getSubject(), getHomework(), getLessonRates(), updatedCancelledDates);
+                getSubject(), getHomework(), getLessonRates(), getOutstandingFees(), updatedCancelledDates);
     }
 
     /**

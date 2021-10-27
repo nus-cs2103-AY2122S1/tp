@@ -9,6 +9,7 @@ import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
+import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
@@ -20,6 +21,7 @@ public class LessonBuilder {
     public static final String DEFAULT_TIME_RANGE = "1400-1500";
     public static final String DEFAULT_SUBJECT = "Mathematics";
     public static final String DEFAULT_LESSON_RATES = "50";
+    public static final String DEFAULT_OUTSTANDING_FEES = "100";
     public static final String DEFAULT_HOMEWORK = "Textbook Page 5";
 
     private Date date;
@@ -27,6 +29,7 @@ public class LessonBuilder {
     private TimeRange timeRange;
     private Subject subject;
     private LessonRates lessonRates;
+    private OutstandingFees outstandingFees;
     private Set<Homework> homeworkSet;
     private Set<Date> cancelledDatesSet;
 
@@ -40,6 +43,7 @@ public class LessonBuilder {
         lessonRates = new LessonRates(DEFAULT_LESSON_RATES);
         subject = new Subject(DEFAULT_SUBJECT);
         homeworkSet = new HashSet<>();
+        outstandingFees = new OutstandingFees(DEFAULT_OUTSTANDING_FEES); //default lastAdded = LocalDate.now()
         homeworkSet.add(new Homework(DEFAULT_HOMEWORK));
         cancelledDatesSet = new HashSet<>();
     }
@@ -54,6 +58,7 @@ public class LessonBuilder {
         lessonRates = lessonToCopy.getLessonRates();
         subject = lessonToCopy.getSubject();
         homeworkSet = new HashSet<>(lessonToCopy.getHomework());
+        outstandingFees = lessonToCopy.getOutstandingFees();
         cancelledDatesSet = new HashSet<>(lessonToCopy.getCancelledDates());
     }
 
@@ -106,6 +111,15 @@ public class LessonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code OutstandingFees} of the {@code Lesson} that we are building.
+     * The lastAdded field would be the current date.
+     */
+    public LessonBuilder withOutstandingFees(String fees) {
+        this.outstandingFees = new OutstandingFees(fees);
+        return this;
+    }
+
 
     /**
      * Parses the {@code homeworkList} into a {@code Set<Homework>} and
@@ -140,7 +154,7 @@ public class LessonBuilder {
      */
     public Lesson buildRecurring() {
         return new RecurringLesson(date, Date.MAX_DATE, timeRange,
-                subject, homeworkSet, lessonRates, cancelledDatesSet);
+                subject, homeworkSet, lessonRates, outstandingFees, cancelledDatesSet);
     }
 
     /**
@@ -150,6 +164,7 @@ public class LessonBuilder {
      * @return {@code MakeUpLesson} containing the information given.
      */
     public Lesson build() {
-        return new MakeUpLesson(date, timeRange, subject, homeworkSet, lessonRates, cancelledDatesSet);
+        return new MakeUpLesson(date, timeRange, subject, homeworkSet,
+                lessonRates, outstandingFees, cancelledDatesSet);
     }
 }
