@@ -148,7 +148,7 @@ public class Event implements Comparable<Event> {
     public void removeParticipant(Participant participant) {
         requireNonNull(participant);
         this.participants.remove(participant);
-        participant.removeEvent(this);
+        participant.deleteEvent(this);
     }
 
     /** Returns true if the given participant is attending this event.
@@ -190,7 +190,7 @@ public class Event implements Comparable<Event> {
      */
     public void deleteFromParticipants() {
         for (int i = participants.size() - 1; i >= 0; i--) {
-            participants.get(i).removeEvent(this);
+            participants.get(i).deleteEvent(this);
         }
     }
 

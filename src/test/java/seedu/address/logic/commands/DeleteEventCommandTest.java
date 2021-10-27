@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
-import static seedu.address.logic.commands.RemoveEventCommand.MESSAGE_REMOVE_EVENT_SUCCESS;
+import static seedu.address.logic.commands.DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS;
 import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
@@ -21,48 +21,48 @@ import seedu.address.model.event.Event;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code RemoveEventCommand}.
+ * {@code DeleteEventCommand}.
  */
-class RemoveEventCommandTest {
+class DeleteEventCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Event eventToRemove = model.getFilteredEventList()
+        Event eventToDelete = model.getFilteredEventList()
                 .get(INDEX_FIRST_EVENT.getZeroBased());
-        RemoveEventCommand removeEventCommand = new RemoveEventCommand(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
-        String expectedMessage = String.format(MESSAGE_REMOVE_EVENT_SUCCESS, eventToRemove);
+        String expectedMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.removeEvent(eventToRemove);
+        expectedModel.deleteEvent(eventToDelete);
 
-        assertCommandSuccess(removeEventCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEventList().size() + 1);
-        RemoveEventCommand removeEventCommand = new RemoveEventCommand(outOfBoundIndex);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(outOfBoundIndex);
 
-        assertCommandFailure(removeEventCommand, model, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteEventCommand, model, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
-        Event eventToRemove = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        RemoveEventCommand removeEventCommand = new RemoveEventCommand(INDEX_FIRST_EVENT);
+        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
-        String expectedMessage = String.format(MESSAGE_REMOVE_EVENT_SUCCESS, eventToRemove);
+        String expectedMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.removeEvent(eventToRemove);
+        expectedModel.deleteEvent(eventToDelete);
         showNoEvent(expectedModel);
 
-        assertCommandSuccess(removeEventCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -73,21 +73,21 @@ class RemoveEventCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
 
-        RemoveEventCommand removeEventCommand = new RemoveEventCommand(outOfBoundIndex);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(outOfBoundIndex);
 
-        assertCommandFailure(removeEventCommand, model, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteEventCommand, model, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        RemoveEventCommand deleteFirstCommand = new RemoveEventCommand(INDEX_FIRST_EVENT);
-        RemoveEventCommand deleteSecondCommand = new RemoveEventCommand(INDEX_SECOND_EVENT);
+        DeleteEventCommand deleteFirstCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteSecondCommand = new DeleteEventCommand(INDEX_SECOND_EVENT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        RemoveEventCommand deleteFirstCommandCopy = new RemoveEventCommand(INDEX_FIRST_EVENT);
+        DeleteEventCommand deleteFirstCommandCopy = new DeleteEventCommand(INDEX_FIRST_EVENT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
