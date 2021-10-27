@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.parser.Prefix;
+import seedu.address.model.exceptions.OperationException;
 import seedu.address.model.person.Person;
 
 /**
@@ -14,6 +16,17 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /**
+     * Sets address book, user prefs, and filter of filtered persons from a model state
+     * @param state model state to restore data from
+     */
+    void restoreState(ModelManagerState state);
+
+    /**
+     * Get a model state that captures the whole state of the model
+     */
+    ModelManagerState getState();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -87,4 +100,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Undoes the last command executed. Returns true if undo was executed successfully.
+     */
+    int undo() throws OperationException;
+
+    /**
+     * Redoes the last command undid, if available.  Returns true if redo was executed successfully.
+     */
+    int redo() throws OperationException;
+
+    /**
+     * Sorts the filtered person list by the given {@code prefix}
+     * @param prefix
+     */
+    void sortFilteredPersonList(Prefix prefix, boolean reverse);
 }

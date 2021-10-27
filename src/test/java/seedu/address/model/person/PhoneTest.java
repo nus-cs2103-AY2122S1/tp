@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,6 +48,10 @@ public class PhoneTest {
         Phone phone = new Phone("93121534");
         Phone differentPhone = new Phone("12345678");
         Phone samePhone = new Phone("93121534");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(phone.equals(person));
 
         // Different Phone
         assertFalse(phone.equals(differentPhone));

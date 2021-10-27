@@ -36,6 +36,13 @@ public class StudentId {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another StudentId's value using Java's compareTo function
+     */
+    public int compareTo(StudentId s) {
+        return value.compareTo(s.value);
+    }
+
     @Override
     public String toString() {
         return value;

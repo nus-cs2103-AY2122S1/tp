@@ -22,13 +22,12 @@ public class ImportCommand extends Command {
             + "Parameters: FILEPATH\n"
             + "Example: import students.json";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Import command not implemented yet";
-
     public static final String MESSAGE_FILEPATH_NOT_EXIST = "File path %1$s does not exist!";
 
-    public static final String MESSAGE_ARGUMENTS = "File Path: %1$s";
-
     public static final String MESSAGE_SUCCESS = "%1$s imported, duplicates ignored.";
+
+    public static final String MESSAGE_JSON_ERROR = "JSON file not following correct format. \n"
+            + "Please refer to profbook.json for correct formatting";
 
     private final Path filePath;
 
@@ -43,8 +42,12 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException, DataConversionException {
         requireNonNull(model);
-        model.importFile(filePath);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
+        try {
+            model.importFile(filePath);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
+        } catch (DataConversionException de) {
+            throw new DataConversionException(MESSAGE_JSON_ERROR, de);
+        }
     }
 
     @Override
