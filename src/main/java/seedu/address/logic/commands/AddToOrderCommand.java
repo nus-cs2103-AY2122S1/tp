@@ -36,17 +36,24 @@ public class AddToOrderCommand extends Command {
 
     private final ItemDescriptor toAddDescriptor;
 
-    private String itemExceedsCount(Item item, Integer count_requested, Integer count_inventory) {
-        return "There is/are only " + count_inventory.toString() + " of " + item.getName().fullName + " in inventory" +
-                "\nCurrently requested: " + count_requested.toString();
-    }
-
     /**
      * Instantiates a command to add {@code Item} to the current {@code Order}
      */
     public AddToOrderCommand(ItemDescriptor toAddDescriptor) {
         requireNonNull(toAddDescriptor);
         this.toAddDescriptor = toAddDescriptor;
+    }
+
+    /**
+     * Return a string message if an item requested exceeds count in inventory.
+     * @param item item requested.
+     * @param countRequested count requested.
+     * @param countInventory count in inventory.
+     * @return the string representation.
+     */
+    public String itemExceedsCount(Item item, Integer countRequested, Integer countInventory) {
+        return "There is/are only " + countInventory.toString() + " of " + item.getName().fullName + " in inventory"
+                + "\nCurrently requested: " + countRequested.toString();
     }
 
     /**
@@ -79,21 +86,21 @@ public class AddToOrderCommand extends Command {
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
         }
 
-        List<Item> matches_inventory = model.getFromOrder(toAddDescriptor);
+        List<Item> mathcesInventory = model.getFromOrder(toAddDescriptor);
 
-        Integer item_count_in_order = toAddDescriptor.getCount().get();
+        Integer itemCountInOrder = toAddDescriptor.getCount().get();
 
-        Integer item_count_in_inventory = matchingItems.get(0).getCount();
+        Integer itemCountInInventory = matchingItems.get(0).getCount();
 
-        Item item_in_inventory = matchingItems.get(0);
+        Item itemInINventory = matchingItems.get(0);
 
-        if (!matches_inventory.isEmpty()) {
-            item_count_in_order += matches_inventory.get(0).getCount();
+        if (!mathcesInventory.isEmpty()) {
+            itemCountInOrder += mathcesInventory.get(0).getCount();
         }
 
-        if (item_count_in_order > item_count_in_inventory) {
-            throw new CommandException(itemExceedsCount(item_in_inventory,
-                    item_count_in_order, item_count_in_inventory));
+        if (itemCountInOrder > itemCountInInventory) {
+            throw new CommandException(itemExceedsCount(itemInINventory,
+                    itemCountInOrder, itemCountInInventory));
         }
 
         Item toAddItem = matchingItems.get(0).updateCount(toAddDescriptor.getCount().get());

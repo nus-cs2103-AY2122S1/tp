@@ -32,6 +32,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     /**
+     * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}, other than transactionFilePath.
+     */
+    public UserPrefs(Path transactionFilePath) {
+        this();
+        setTransactionFilePath(transactionFilePath);
+    }
+
+    private void setTransactionFilePath(Path transactionFilePath) {
+        this.transactionFilePath = transactionFilePath;
+    }
+
+    /**
      * Resets the existing data of this {@code UserPrefs} with {@code newUserPrefs}.
      */
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {

@@ -17,8 +17,8 @@ public class EndAndTransactOrderCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Order is placed.";
 
-    public static final String MESSAGE_EMPTY_ORDER = "Order was empty. To start a new order, please restart the " +
-            "order process with 'sorder'";
+    public static final String MESSAGE_EMPTY_ORDER = "Order was empty. To start a new order, please restart the "
+            + "order process with 'sorder'";
 
     public static final String MESSAGE_NO_UNCLOSED_ORDER = "Please use `sorder` to enter ordering mode first.";
 
@@ -39,7 +39,7 @@ public class EndAndTransactOrderCommand extends Command {
             throw new CommandException(MESSAGE_NO_UNCLOSED_ORDER);
         }
 
-        boolean empty_order = model.getOrder().getOrderItems().isEmpty();
+        boolean emptyOrder = model.getOrder().getOrderItems().isEmpty();
 
         // Transact order
         model.transactAndClearOrder();
@@ -49,7 +49,7 @@ public class EndAndTransactOrderCommand extends Command {
             model.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
         }
 
-        if (empty_order) {
+        if (emptyOrder) {
             return new CommandResult(MESSAGE_EMPTY_ORDER);
         }
 
