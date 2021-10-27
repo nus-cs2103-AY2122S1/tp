@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -80,7 +81,17 @@ public class ParserUtil {
         requireNonNull(nationality);
         String trimmedNationality = nationality.trim();
         if (!Nationality.isValidNationality(trimmedNationality)) {
-            throw new ParseException(Nationality.MESSAGE_CONSTRAINTS);
+            String exceptionMessage = Nationality.MESSAGE_CONSTRAINTS;
+
+            // Check for suggestions
+            if (Nationality.VALID_NATIONALITIES.size() > 0) {
+                WordSuggestion nationalitiesSuggestion = new WordSuggestion(trimmedNationality,
+                        Nationality.VALID_NATIONALITIES);
+
+                exceptionMessage = nationalitiesSuggestion.getSuggestedWords();
+            }
+
+            throw new ParseException(exceptionMessage);
         }
         return new Nationality(trimmedNationality);
     }
@@ -116,21 +127,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String socialHandle} into an {@code SocialHandle}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code socialHandle} is invalid.
-     */
-    public static SocialHandle parseSocialHandle(String socialHandle) throws ParseException {
-        requireNonNull(socialHandle);
-        String trimmedSocialHandle = socialHandle.trim();
-        if (!SocialHandle.isValidSocialHandle(trimmedSocialHandle)) {
-            throw new ParseException(SocialHandle.MESSAGE_CONSTRAINTS);
-        }
-        return new SocialHandle(trimmedSocialHandle);
-    }
-
-    /**
      * Parses a {@code String gender} into an {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -158,6 +154,18 @@ public class ParserUtil {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String alias}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code alias} is invalid.
+     */
+    public static String parseAlias(String alias) throws ParseException {
+        requireNonNull(alias);
+
+        return alias.trim();
     }
 
     /**
@@ -200,5 +208,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String socialHandle} into an {@code SocialHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code socialHandle} is invalid.
+     */
+    public static SocialHandle parseSocialHandle(String socialHandle) throws ParseException {
+        requireNonNull(socialHandle);
+        String trimmedSocialHandle = socialHandle.trim();
+        if (!SocialHandle.isValidSocialHandle(trimmedSocialHandle)) {
+            throw new ParseException(SocialHandle.MESSAGE_CONSTRAINTS);
+        }
+        return new SocialHandle(trimmedSocialHandle);
+    }
+
+    /**
+     * Parses {@code Collection<String> socialHandles} into a {@code Set<SocialHandle>}.
+     */
+    public static Set<SocialHandle> parseSocialHandles(Collection<String> socialHandles) throws ParseException {
+        requireNonNull(socialHandles);
+        // Ensure only the latest entry of the same social platform are kept
+        Hashtable<String, SocialHandle> socialHandleTable = new Hashtable<>();
+        for (String socialHandle : socialHandles) {
+            SocialHandle tmp = parseSocialHandle(socialHandle);
+            socialHandleTable.put(tmp.platform, tmp);
+        }
+        final Set<SocialHandle> socialHandleSet = new HashSet<>(socialHandleTable.values());
+        return socialHandleSet;
     }
 }

@@ -65,8 +65,9 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        String arguments = PersonUtil.getEditPersonDescriptorDetails(descriptor);
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + arguments);
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -108,9 +109,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_findNationalityPredicate() throws Exception {
-        List<String> keywords = Arrays.asList("nat/North Korea");
+        List<String> keywords = Arrays.asList("nat/North Korean");
         NationalityContainsKeywordsPredicate predicate =
-                new NationalityContainsKeywordsPredicate(List.of("North Korea"));
+                new NationalityContainsKeywordsPredicate(List.of("North Korean"));
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(predicate), command);

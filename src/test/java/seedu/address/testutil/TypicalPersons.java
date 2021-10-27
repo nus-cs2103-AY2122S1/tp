@@ -33,45 +33,46 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withGender("F")
-            .withNationality("Singapore ").withEmail("alice@example.com")
-            .withPhone("94351253").withTutorialGroup("T09").withSocialHandle("@alicep")
-            .withRemark("She likes aardvarks.").withTags("friends")
+            .withNationality("Singaporean").withEmail("alice@example.com")
+            .withPhone("94351253").withTutorialGroup("T09")
+            .withRemark("She likes aardvarks.").withTags("friends").withSocialHandles("tg:alicep")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withGender("M")
-            .withNationality("China ").withEmail("johnd@example.com")
-            .withPhone("98765432").withTutorialGroup("W08").withSocialHandle("@bensonm")
+            .withNationality("Chinese").withEmail("johnd@example.com")
+            .withPhone("98765432").withTutorialGroup("W08")
             .withRemark("He can't take beer!").withTags("owesMoney", "friends")
+            .withSocialHandles("tg:bensonm")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withGender("M")
-            .withPhone("95352563").withEmail("heinz@example.com").withNationality("Malaysia ")
-            .withTutorialGroup("T05").withSocialHandle("@carlk").withRemark("She likes aardvarks.")
+            .withPhone("95352563").withEmail("heinz@example.com").withNationality("Malaysian")
+            .withTutorialGroup("T05").withRemark("She likes aardvarks.").withSocialHandles("tg:carlk")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withGender("M")
-            .withPhone("87652533").withEmail("cornelia@example.com").withNationality("Thailand ")
-            .withTutorialGroup("T09").withSocialHandle("@danielm").withRemark("She likes aardvarks.")
+            .withPhone("87652533").withEmail("cornelia@example.com").withNationality("Thai")
+            .withTutorialGroup("T09").withRemark("She likes aardvarks.").withSocialHandles("tg:danielm")
             .withTags("friends")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withGender("F")
-            .withPhone("9482224").withEmail("werner@example.com").withNationality("USA ")
-            .withTutorialGroup("T29").withSocialHandle("@ellem").withRemark("She likes aardvarks.")
+            .withPhone("9482224").withEmail("werner@example.com").withNationality("American")
+            .withTutorialGroup("T29").withRemark("She likes aardvarks.")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withGender("F")
-            .withPhone("9482427").withEmail("lydia@example.com").withNationality("Australia ")
-            .withTutorialGroup("T19").withSocialHandle("@fionak").withRemark("She likes aardvarks.")
+            .withPhone("9482427").withEmail("lydia@example.com").withNationality("Australian")
+            .withTutorialGroup("T19").withRemark("She likes aardvarks.")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withGender("M")
-            .withPhone("9482442").withEmail("anna@example.com").withNationality("Vietnam ")
-            .withTutorialGroup("T28").withSocialHandle("@georgeb").withRemark("She likes aardvarks.")
+            .withPhone("9482442").withEmail("anna@example.com").withNationality("Vietnamese")
+            .withTutorialGroup("T28").withRemark("She likes aardvarks.")
             .build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withGender("M")
-            .withPhone("8482424").withEmail("stefan@example.com").withNationality("India ")
-            .withSocialHandle("@hoonm").withRemark("She likes aardvarks.")
+            .withPhone("8482424").withEmail("stefan@example.com").withNationality("Indian")
+            .withRemark("She likes aardvarks.")
             .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withGender("M")
-            .withPhone("8482131").withEmail("hans@example.com").withNationality("China ")
-            .withSocialHandle("@idam").withRemark("She likes aardvarks.")
+            .withPhone("8482131").withEmail("hans@example.com").withNationality("Chinese")
+            .withRemark("She likes aardvarks.")
             .build();
 
 
@@ -83,9 +84,9 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withNationality(VALID_NATIONALITY_AMY)
             .withTutorialGroup(VALID_TUTORIAL_GROUP_AMY)
-            .withSocialHandle(VALID_SOCIAL_HANDLE_AMY)
             .withRemark(VALID_REMARK_AMY)
             .withTags(VALID_TAG_FRIEND)
+            .withSocialHandles(VALID_SOCIAL_HANDLE_AMY)
             .build();
     public static final Person BOB = new PersonBuilder()
             .withName(VALID_NAME_BOB)
@@ -94,9 +95,9 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB)
             .withNationality(VALID_NATIONALITY_BOB)
             .withTutorialGroup(VALID_TUTORIAL_GROUP_BOB)
-            .withSocialHandle(VALID_SOCIAL_HANDLE_BOB)
             .withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withSocialHandles(VALID_SOCIAL_HANDLE_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,17 +41,17 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_NATIONALITY_AMY = "Singapore";
-    public static final String VALID_NATIONALITY_BOB = "Malaysia";
+    public static final String VALID_NATIONALITY_AMY = "Singaporean";
+    public static final String VALID_NATIONALITY_BOB = "Malaysian";
     public static final String VALID_TUTORIAL_GROUP_AMY = "T09";
     public static final String VALID_TUTORIAL_GROUP_BOB = "T28";
-    public static final String VALID_SOCIAL_HANDLE_AMY = "@amyb";
-    public static final String VALID_SOCIAL_HANDLE_BOB = "@bobc";
     public static final String VALID_REMARK_AMY = "Like skiing.";
     public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
     public static final String VALID_TAG_COLOUR = "#00EFFF";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_SOCIAL_HANDLE_AMY = "tg:amyb";
+    public static final String VALID_SOCIAL_HANDLE_BOB = "tg:bobc";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -72,6 +74,18 @@ public class CommandTestUtil {
             + VALID_TAG_COLOUR;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String VALID_ALIAS = "myalias";
+    public static final String VALID_ADD_INPUT = "add n/" + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + GENDER_DESC_BOB
+            + REMARK_DESC_BOB + TAG_DESC_FRIEND;
+    public static final String VALID_STATISTICS_INPUT = "stat " + VALID_TUTORIAL_GROUP_AMY;
+    public static final String UNKNOWN_LONG_COMMAND_INPUT = "asdhasdhashasdhs";
+
+    public static final String ALIAS = " " + PREFIX_ALIAS + VALID_ALIAS;
+    public static final String ADD_COMMAND = " " + PREFIX_COMMAND + VALID_ADD_INPUT;
+    public static final String STATISTICS_COMMAND = " " + PREFIX_COMMAND + VALID_STATISTICS_INPUT;
+    public static final String UNKNOWN_COMMAND = " " + PREFIX_COMMAND + UNKNOWN_LONG_COMMAND_INPUT;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "B"; // only 'M', 'F' and 'O' are allowed
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -79,7 +93,7 @@ public class CommandTestUtil {
     public static final String INVALID_TUTORIAL_GROUP_DESC = " "
             + PREFIX_TUTORIAL_GROUP + "B"; // Alphabets not allowed in tutorial groups
     public static final String INVALID_SOCIAL_HANDLE_DESC = " "
-            + PREFIX_SOCIAL_HANDLE + "@fef fef"; // space not allowed in social handle
+            + PREFIX_SOCIAL_HANDLE + "igjewfewij"; // missing ':' to delimit platform and value
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG_COLOUR_DESC = " " + PREFIX_TAG + "hubby" + TAG_COLOUR_DELIMITER
             + "blue"; // invalid colour code not allowed
@@ -92,11 +106,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withGender(VALID_GENDER_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withNationality(VALID_NATIONALITY_AMY)
-                .withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).withSocialHandle(VALID_SOCIAL_HANDLE_AMY)
+                .withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).withSocialHandles(VALID_SOCIAL_HANDLE_AMY)
                 .withRemark(REMARK_DESC_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withNationality(VALID_NATIONALITY_BOB)
-                .withTutorialGroup(VALID_TUTORIAL_GROUP_BOB).withSocialHandle(VALID_SOCIAL_HANDLE_BOB)
+                .withTutorialGroup(VALID_TUTORIAL_GROUP_BOB).withSocialHandles(VALID_SOCIAL_HANDLE_BOB)
                 .withRemark(REMARK_DESC_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

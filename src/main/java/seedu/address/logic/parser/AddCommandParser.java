@@ -74,12 +74,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
         }
-        SocialHandle socialHandle;
-        if (argMultimap.getValue(PREFIX_SOCIAL_HANDLE).isEmpty()) {
-            socialHandle = ParserUtil.parseSocialHandle("");
-        } else {
-            socialHandle = ParserUtil.parseSocialHandle(argMultimap.getValue(PREFIX_SOCIAL_HANDLE).get());
-        }
         Gender gender;
         if (argMultimap.getValue(PREFIX_GENDER).isEmpty()) {
             gender = ParserUtil.parseGender("");
@@ -94,8 +88,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, nationality, tutorialGroup, socialHandle,
-                gender, remark, tagList);
+        Set<SocialHandle> socialHandleList = ParserUtil.parseSocialHandles(
+                argMultimap.getAllValues(PREFIX_SOCIAL_HANDLE));
+
+        Person person = new Person(name, phone, email, nationality, tutorialGroup,
+                gender, remark, tagList, socialHandleList);
         return new AddCommand(person);
     }
 
