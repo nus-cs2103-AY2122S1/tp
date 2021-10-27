@@ -481,7 +481,7 @@ You may save the date, time and venue of an appointment.
 ##### Adding an appointment: `aa`
 You can add a scheduled appointment with the client. An appointment includes a date, time and venue.
 This allows you to keep track of all your clients' appointment dates all within the same app.
-You can also [edit](#editing-an-appointment-ea),[delete](#deleting-an-appointment-da),
+You can also [edit](#editing-an-appointment-ea), [delete](#deleting-an-appointment-da),
 or [mark as completed](#updating-completed-appointment-ma) an appointment.
 
 **Format**: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
@@ -838,7 +838,7 @@ The commands are categorised (based on their purpose) into 5 different categorie
 * [Appointment Management](#appointment-management)
 * [Tag Management](#tag-management)
 * [Navigation](#navigation)
-* [Others](#others)
+* [Other Commands](#other-commands)
 
 ### Contact Management
 
@@ -875,7 +875,7 @@ Action | Format, Examples
 **Sort** | `sort KEYWORD`
 **List** | `list`
 
-### Others
+### Other Commands
 
 Action|Format, Examples
 --------|------------------
