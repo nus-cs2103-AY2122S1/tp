@@ -1,5 +1,9 @@
 package tutoraid.ui;
 
+import static tutoraid.commons.core.HelpGuide.ADD_L_COMMAND;
+import static tutoraid.commons.core.HelpGuide.ADD_L_DESC;
+import static tutoraid.commons.core.HelpGuide.ADD_L_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.ADD_L_TITLE;
 import static tutoraid.commons.core.HelpGuide.ADD_P_COMMAND;
 import static tutoraid.commons.core.HelpGuide.ADD_P_DESC;
 import static tutoraid.commons.core.HelpGuide.ADD_P_EXAMPLE;
@@ -12,6 +16,11 @@ import static tutoraid.commons.core.HelpGuide.ADD_S_TITLE;
 import static tutoraid.commons.core.HelpGuide.CLEAR_COMMAND;
 import static tutoraid.commons.core.HelpGuide.CLEAR_DESC;
 import static tutoraid.commons.core.HelpGuide.CLEAR_TITLE;
+import static tutoraid.commons.core.HelpGuide.DEL_L_COMMAND;
+import static tutoraid.commons.core.HelpGuide.DEL_L_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_L_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.DEL_L_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_L_TITLE;
 import static tutoraid.commons.core.HelpGuide.DEL_P_COMMAND;
 import static tutoraid.commons.core.HelpGuide.DEL_P_DESC;
 import static tutoraid.commons.core.HelpGuide.DEL_P_EXAMPLE;
@@ -27,6 +36,11 @@ import static tutoraid.commons.core.HelpGuide.EDIT_DATA_DESC1;
 import static tutoraid.commons.core.HelpGuide.EDIT_DATA_DESC2;
 import static tutoraid.commons.core.HelpGuide.EDIT_DATA_TITLE;
 import static tutoraid.commons.core.HelpGuide.EDIT_FILEPATH;
+import static tutoraid.commons.core.HelpGuide.EDIT_L_COMMAND;
+import static tutoraid.commons.core.HelpGuide.EDIT_L_DESC;
+import static tutoraid.commons.core.HelpGuide.EDIT_L_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.EDIT_L_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.EDIT_L_TITLE;
 import static tutoraid.commons.core.HelpGuide.EDIT_S_COMMAND;
 import static tutoraid.commons.core.HelpGuide.EDIT_S_DESC;
 import static tutoraid.commons.core.HelpGuide.EDIT_S_EXAMPLE;
@@ -79,6 +93,11 @@ import static tutoraid.commons.core.HelpGuide.UNPAID_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.UNPAID_EXAMPLE_DESC;
 import static tutoraid.commons.core.HelpGuide.UNPAID_TITLE;
 import static tutoraid.commons.core.HelpGuide.USER_GUIDE_TITLE;
+import static tutoraid.commons.core.HelpGuide.VIEW_L_COMMAND;
+import static tutoraid.commons.core.HelpGuide.VIEW_L_DESC;
+import static tutoraid.commons.core.HelpGuide.VIEW_L_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.VIEW_L_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.VIEW_L_TITLE;
 import static tutoraid.commons.core.HelpGuide.VIEW_S_COMMAND;
 import static tutoraid.commons.core.HelpGuide.VIEW_S_DESC;
 import static tutoraid.commons.core.HelpGuide.VIEW_S_EXAMPLE;
@@ -149,6 +168,14 @@ public class HelpWindow extends UiPart<Stage> {
     private Label format11;
     @FXML
     private Label format12;
+    @FXML
+    private Label format13;
+    @FXML
+    private Label format14;
+    @FXML
+    private Label format15;
+    @FXML
+    private Label format16;
 
     @FXML
     private Label example;
@@ -170,6 +197,15 @@ public class HelpWindow extends UiPart<Stage> {
     private Label example8;
     @FXML
     private Label example9;
+    @FXML
+    private Label example10;
+    @FXML
+    private Label example11;
+    @FXML
+    private Label example12;
+    @FXML
+    private Label example13;
+
 
     @FXML
     private Label sFlag;
@@ -218,7 +254,6 @@ public class HelpWindow extends UiPart<Stage> {
     private Label delSExample;
     @FXML
     private Label delSExampleDesc;
-
 
     @FXML
     private Label editSTitle;
@@ -306,6 +341,49 @@ public class HelpWindow extends UiPart<Stage> {
     private Label findLExampleDesc;
 
     @FXML
+    private Label addLTitle;
+    @FXML
+    private Label addLCommand;
+    @FXML
+    private Label addLDesc;
+    @FXML
+    private Label addLExample;
+
+    @FXML
+    private Label delLTitle;
+    @FXML
+    private Label delLCommand;
+    @FXML
+    private Label delLDesc;
+    @FXML
+    private Label delLExample;
+    @FXML
+    private Label delLExampleDesc;
+
+    @FXML
+    private Label editLTitle;
+    @FXML
+    private Label editLCommand;
+    @FXML
+    private Label editLDesc;
+    @FXML
+    private Label editLExample;
+    @FXML
+    private Label editLExampleDesc;
+
+    @FXML
+    private Label viewLTitle;
+    @FXML
+    private Label viewLCommand;
+    @FXML
+    private Label viewLDesc;
+    @FXML
+    private Label viewLExample;
+    @FXML
+    private Label viewLExampleDesc;
+
+
+    @FXML
     private Label clearTitle;
     @FXML
     private Label clearCommand;
@@ -367,6 +445,10 @@ public class HelpWindow extends UiPart<Stage> {
         viewStudentFeature();
         addProgressFeature();
         deleteProgressFeature();
+        addLessonFeature();
+        deleteLessonFeature();
+        editLessonFeature();
+        viewLessonFeature();
         paidFeature();
         unpaidFeature();
         clearFeature();
@@ -631,6 +713,61 @@ public class HelpWindow extends UiPart<Stage> {
         findSExampleDesc.setText(FIND_S_EXAMPLE_DESC);
         findLExample.setText(FIND_L_EXAMPLE);
         findLExampleDesc.setText(FIND_L_EXAMPLE_DESC);
+    }
+
+    /**
+     * Creates the 'add lesson feature' section.
+     */
+    public void addLessonFeature() {
+        format13.setText(FORMAT);
+        example10.setText(EXAMPLE);
+
+        addLTitle.setText(ADD_L_TITLE);
+        addLDesc.setText(ADD_L_DESC);
+        addLCommand.setText(ADD_L_COMMAND);
+        addLExample.setText(ADD_L_EXAMPLE);
+    }
+
+    /**
+     * Creates the 'delete lesson feature' section.
+     */
+    public void deleteLessonFeature() {
+        format14.setText(FORMAT);
+        example11.setText(EXAMPLE);
+
+        delLTitle.setText(DEL_L_TITLE);
+        delLDesc.setText(DEL_L_DESC);
+        delLCommand.setText(DEL_L_COMMAND);
+        delLExample.setText(DEL_L_EXAMPLE);
+        delLExampleDesc.setText(DEL_L_EXAMPLE_DESC);
+    }
+
+    /**
+     * Creates the 'edit lesson feature' section.
+     */
+    public void editLessonFeature() {
+        format15.setText(FORMAT);
+        example12.setText(EXAMPLE);
+
+        editLTitle.setText(EDIT_L_TITLE);
+        editLDesc.setText(EDIT_L_DESC);
+        editLCommand.setText(EDIT_L_COMMAND);
+        editLExample.setText(EDIT_L_EXAMPLE);
+        editLExampleDesc.setText(EDIT_L_EXAMPLE_DESC);
+    }
+
+    /**
+     * Creates the 'view lesson feature' section.
+     */
+    public void viewLessonFeature() {
+        format16.setText(FORMAT);
+        example13.setText(EXAMPLE);
+
+        viewLTitle.setText(VIEW_L_TITLE);
+        viewLDesc.setText(VIEW_L_DESC);
+        viewLCommand.setText(VIEW_L_COMMAND);
+        viewLExample.setText(VIEW_L_EXAMPLE);
+        viewLExampleDesc.setText(VIEW_L_EXAMPLE_DESC);
     }
 
     /**

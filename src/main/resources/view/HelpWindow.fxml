@@ -131,6 +131,53 @@
                         <Label fx:id="delPExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
 
+                    <Label fx:id="addLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="addLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format13" text="format" wrapText="true"/>
+                        <Label fx:id="addLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example10" text="Label" wrapText="true"/>
+                        <Label fx:id="addLExample" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="delLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="delLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format14" text="Format: " wrapText="true"/>
+                        <Label fx:id="delLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example11" text="Label" wrapText="true"/>
+                        <Label fx:id="delLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="delLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="editLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="editLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format15" text="Format: " wrapText="true"/>
+                        <Label fx:id="editLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example12" text="Label" wrapText="true"/>
+                        <Label fx:id="editLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="editLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
+                    <Label fx:id="viewLTitle" text="Label" wrapText="true"/>
+                    <Label fx:id="viewLDesc" text="Label" wrapText="true"/>
+                    <TextFlow>
+                        <Label fx:id="format16" text="Format: " wrapText="true"/>
+                        <Label fx:id="viewLCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example13" text="Label" wrapText="true"/>
+                        <Label fx:id="viewLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="viewLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
+
                     <Label fx:id="paidTitle" text="Label" wrapText="true"/>
                     <Label fx:id="paidDesc" text="Label" wrapText="true"/>
                     <TextFlow>
