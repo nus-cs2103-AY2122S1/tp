@@ -16,11 +16,7 @@ import tutoraid.model.student.Student;
 
 
 /**
-<<<<<<< HEAD
- * Adds progress string to an exiting student in TutorAid. Updates the progress if one already exists.
-=======
  * Adds students to lessons in TutorAid.
->>>>>>> master
  */
 public class AddStudentsToLessonsCommand extends AddCommand {
 

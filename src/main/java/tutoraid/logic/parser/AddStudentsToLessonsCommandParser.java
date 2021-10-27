@@ -12,11 +12,7 @@ import tutoraid.logic.commands.AddStudentsToLessonsCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
-<<<<<<< HEAD
- * Parses input arguments and creates a new PaidCommand object
-=======
  * Parses input arguments and creates a new AddStudentsToLessonsCommand object
->>>>>>> master
  */
 public class AddStudentsToLessonsCommandParser implements Parser<AddStudentsToLessonsCommand> {
 

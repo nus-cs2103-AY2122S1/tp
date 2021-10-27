@@ -12,11 +12,7 @@ import tutoraid.logic.commands.DeleteStudentsFromLessonsCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
-<<<<<<< HEAD
- * Parses input arguments and creates a new PaidCommand object
-=======
  * Parses input arguments and creates a new DeleteStudentsFromLessonsCommand object
->>>>>>> master
  */
 public class DeleteStudentsFromLessonsCommandParser implements Parser<DeleteStudentsFromLessonsCommand> {
 
