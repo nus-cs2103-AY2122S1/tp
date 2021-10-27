@@ -172,8 +172,12 @@ public class MainWindow extends UiPart<Stage> {
     private void initKeyPressEventHandler(CommandBox commandBox) {
         // Add event handlers
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (commandBox.getCommandTextField().isFocused()) {
+                return; // Don't filter if already in focus
+            }
             if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
                 commandBox.getCommandTextField().requestFocus();
+                commandBox.getCommandTextField().selectEnd();
             }
         });
     }
