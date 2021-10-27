@@ -43,7 +43,7 @@ public class TransactionCard extends UiPart<Region> {
         super(FXML);
         this.transaction = transaction;
         index.setText(displayedIndex + ". ");
-        timestamp.setText(transaction.getTimestamp().toString());
+        timestamp.setText(transaction.getTimeString());
         id.setText(transaction.getId());
         totalPrice.setText("Total price: -");
         totalItems.setText(String.format("Total items: %d", transaction.getItems().size()));

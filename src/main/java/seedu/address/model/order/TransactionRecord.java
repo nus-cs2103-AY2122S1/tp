@@ -96,6 +96,13 @@ public class TransactionRecord implements Displayable {
     }
 
     /**
+     * Returns the timestamp of the transaction in a readable format.
+     */
+    public String getTimeString() {
+        return DATE_TIME_FORMATTER.format(timestamp);
+    }
+
+    /**
      * Returns true if two transactions have the same id and timestamp.
      */
     @Override
