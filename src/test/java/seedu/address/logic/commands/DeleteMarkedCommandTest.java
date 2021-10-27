@@ -41,7 +41,7 @@ public class DeleteMarkedCommandTest {
     @Test
     public void execute_listIsNotFilteredAndHasDone_success() {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        personToDone.getDone().setAsDone();
+        model.markPerson(personToDone);
         DeleteMarkedCommand deleteMarkedCommand = new DeleteMarkedCommand();
         String expectedMessage = String.format(DeleteMarkedCommand.MESSAGE_SUCCESS, personToDone);
 
@@ -55,7 +55,7 @@ public class DeleteMarkedCommandTest {
     public void execute_listIsFilteredAndHasDone_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        personToDone.getDone().setAsDone();
+        model.markPerson(personToDone);
         DeleteMarkedCommand deleteMarkedCommand = new DeleteMarkedCommand();
         String expectedMessage = String.format(DeleteMarkedCommand.MESSAGE_SUCCESS, personToDone);
 

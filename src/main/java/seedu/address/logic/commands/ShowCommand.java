@@ -199,5 +199,4 @@ public class ShowCommand extends Command {
                 && prefix.equals(((ShowCommand) other).prefix)); // state check
     }
 
-
 }

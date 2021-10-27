@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.done.Done;
 import seedu.address.model.person.Person;
 
-
 /**
  * Deletes all applicants in the address book that are marked as done.
  */

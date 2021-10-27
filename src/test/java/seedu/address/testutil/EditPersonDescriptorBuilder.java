@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.done.Done;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
@@ -113,6 +114,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withExperience(String experience) {
         descriptor.setExperience(new Experience(experience));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Interview} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withInterview(String interview) {
+        descriptor.setInterview(Optional.ofNullable(new Interview(interview)));
         return this;
     }
 
