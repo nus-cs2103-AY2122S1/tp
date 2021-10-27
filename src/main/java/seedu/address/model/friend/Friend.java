@@ -146,10 +146,10 @@ public class Friend {
                 .append("; Name: ")
                 .append(getFriendName());
 
-        Collection<GameFriendLink> gameSet = getGameFriendLinks().values();
-        if (!gameSet.isEmpty()) {
+        Collection<GameFriendLink> gameFriendLinks = getGameFriendLinks().values();
+        if (!gameFriendLinks.isEmpty()) {
             builder.append("; Games: ");
-            gameSet.forEach(builder::append);
+            gameFriendLinks.forEach(builder::append);
             builder.append(" ");
         }
         builder.append(schedule);
