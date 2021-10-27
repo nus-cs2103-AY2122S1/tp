@@ -449,6 +449,7 @@ This section contains some frequently asked questions about SPAM.
 <div class="card mb-3">
 <div markdown="1" class="card-body pt-0 pb-0">
 <h6 markdown="1" class="card-title">How do I transfer my data to another computer?</h6>
+
 **Option 1:**
 Export all the contacts in your current device into a _.csv_ file. Then, after installing the app in your new device,
 import the _.csv_ file into the new list of contacts.
