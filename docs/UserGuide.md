@@ -1,5 +1,3 @@
-# ContactSh - User Guide
-
 ![Logo](images/ContactSh_Ug_logo.png)
 
 ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management tasks done faster than traditional GUI apps.
@@ -264,13 +262,13 @@ Clears all entries from ContactSH.
    - `list` followed by delete 2 deletes the 2nd person in the address book.
    - `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.
 
-   <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-    Alternatively, you could also click on the person in the GUI!
-    </div>
-
 2. Shows you the task list of every single person in ContactSh.
 
    Format: `cat -A`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    Alternatively, you could also click on the person in the GUI to open said person's tasks!
+    </div>
 
 ### Sorting persons by name: `sort`
 
