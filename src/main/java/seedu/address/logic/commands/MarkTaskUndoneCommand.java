@@ -12,8 +12,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
+import seedu.address.model.module.student.exceptions.StudentNotFoundException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDeadline;
 import seedu.address.model.task.TaskId;
@@ -26,6 +28,12 @@ import seedu.address.model.task.UniqueTaskList;
 public class MarkTaskUndoneCommand extends MarkTaskCommand {
 
     public static final String COMMAND_WORD = "mark undone";
+
+    public static final String MESSAGE_MODULE_NOT_FOUND = "This module is not found";
+
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found";
+
+    public static final String MESSAGE_TASK_NOT_FOUND = "This task is not found";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task of a student as not done.\n"
             + "Parameters: "
@@ -61,24 +69,94 @@ public class MarkTaskUndoneCommand extends MarkTaskCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        List<Module> lastShownList = model.getFilteredModuleList();
+
+        if (!isPresentModule(moduleName, lastShownList)) {
+            throw new CommandException(MESSAGE_MODULE_NOT_FOUND);
+        }
+
+        Module module = findModule(moduleName, lastShownList);
+        List<Student> studentList = module.getFilteredStudentList();
+
+        if (!isPresentStudent(studentId, studentList)) {
+            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
+        }
+
+        Student student = findStudent(studentId, studentList);
+        UniqueTaskList taskList = student.getTaskList();
+
+        if (!isPresentTasK(taskId, taskList)) {
+            throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+        }
+
         if (!model.isDone(moduleName, studentId, taskId)) {
             throw new CommandException(MESSAGE_IS_ALREADY_UNDONE);
         }
 
-        List<Module> lastShownList = model.getFilteredModuleList();
-
-        for (Module module : lastShownList) {
-            if (module.getName().equals(moduleName)) {
-                List<Student> studentList = module.getFilteredStudentList();
-                for (Student student : studentList) {
-                    if (student.getStudentId().equals(studentId)) {
-                        setTaskAsIncomplete(student, taskId);
-                    }
-                }
-            }
-        }
+        setTaskAsIncomplete(student, taskId);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskId, studentId));
+    }
+
+    /**
+     * A helper method that checks if a list of modules contains a module with a specified name.
+     */
+    public boolean isPresentModule(ModuleName moduleName, List<Module> moduleList) {
+        for (Module module : moduleList) {
+            if (module.getName().equals(moduleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A helper method that checks if a list of students contains a student with a specified student ID.
+     */
+    public boolean isPresentStudent(StudentId studentId, List<Student> studentList) {
+        for (Student student : studentList) {
+            if (student.getStudentId().equals(studentId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A helper method that checks if a UniqueTaskList contains a task with a specified task ID.
+     */
+    public boolean isPresentTasK(TaskId taskId, UniqueTaskList taskList) {
+        for (Task task : taskList) {
+            if (task.getTaskId().equals(taskId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * A helper method that finds a module from a list of modules according to module name.
+     */
+    public Module findModule(ModuleName moduleName, List<Module> moduleList) throws ModuleNotFoundException {
+        for (Module module : moduleList) {
+            if (module.getName().equals(moduleName)) {
+                return module;
+            }
+        }
+        throw new ModuleNotFoundException();
+    }
+
+    /**
+     * A helper method that finds a student from a list of students according to student ID.
+     */
+    public Student findStudent(StudentId studentId, List<Student> studentList) throws StudentNotFoundException {
+        for (Student student : studentList) {
+            if (student.getStudentId().equals(studentId)) {
+                return student;
+            }
+        }
+        throw new StudentNotFoundException();
     }
 
     public void setTaskAsIncomplete(Student student, TaskId taskId) {
