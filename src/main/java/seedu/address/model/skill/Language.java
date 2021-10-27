@@ -9,8 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Language {
 
-    public static final String MESSAGE_CONSTRAINTS = "Languages should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Languages should only contain alphanumeric characters and spaces, \n"
+                    + "followed by an optional '+' or '#'";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*[+]*[#]*";
 
     public final String languageName;
 
