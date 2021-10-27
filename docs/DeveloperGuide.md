@@ -154,85 +154,69 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+###  Note feature
 
-#### Proposed Implementation
+#### Current Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+{:.no_toc}
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+An client's note is currently represented by the `note` field under `Person`,
+which is represented by an `Note` object.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The `Note` object contains a `value` field that has the type `String`, the `value` field is the description of the note given to a `Person`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+<img src="images/NoteClassDiagram.png" width="00" />
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+A `Note` can be given to a `Person` through any of these 3 methods:
 
-![UndoRedoState0](images/UndoRedoState0.png)
+1. Using the `NoteCommand` to add a note to an existing `Person`.
+2. Through the `AddCommand`, a new `Person` with a `Note` can be created.
+3. Editing a `Person` using the `EditCommand` to give the `Person` a `Note`.
 
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The processing of a note command from the user can be split into 2 general steps:
 
-![UndoRedoState1](images/UndoRedoState1.png)
+1. Parsing the user input into a `NoteCommand`
+2. Executing the `NoteCommand`
+   Each step will be described in the sections below.
 
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+**Step 1:** Parsing of user input
 
-![UndoRedoState2](images/UndoRedoState2.png)
+The user input is parsed by the `NoteCommandParser` which calls other helper methods to parse the text into
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<img src="images/NoteCommandParserSequenceDiagram.png" width="400" />
 
-</div>
+The `NoteCommandParser` uses the parsed data classes to create a `NoteCommand`. Unlike the `Claim` feature, as the `Note` command has no constraints on the text that can be inputted, the `NoteCommandParser` is able to create a `NoteCommand` without using a `EditNoteDescriptor.
 
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+**Step 2:** Executing the NoteCommand
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<img src="images/NoteCommandExecuteActivityDiagram.png" width="400" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+There are 3 possible outcomes from the execution of a `NoteCommand`.
 
-</div>
+1. Add a new Note to the client
+2. Edit an existing Note of the client
+3. Delete an existing Note of the client
 
-The following sequence diagram shows how the undo operation works:
+#### Design considerations
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+{:.no_toc}
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+*Aspect*: User interface of adding, editing and deleting Note
 
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+* **Alternative 1 (Current choice):** The 'Note' command and 'Edit' command adds, edits and deletes. The 'Add' command is also able to create a person with a note.
+    * Pros:
+        * It is more intuitive as the note is a field that belongs to a `Person`.
+        * The user has more flexibility when choosing how to add, edit or delete a note.
+    * Cons:
+        * It is difficult to give proper error messages since we are not sure of the user intentions
+        * The user has to keep track of more prefixes
+        * The "help message" for the 'Add' and 'Edit' commands become longer and harder to read due to the additional field.
+* **Alternative 2:** One ‘Note’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 3:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
 
 ###  Claims feature
 
