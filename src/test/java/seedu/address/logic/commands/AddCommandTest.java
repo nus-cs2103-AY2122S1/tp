@@ -206,6 +206,21 @@ public class AddCommandTest {
         public String getAfter() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Person> getObservablePersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateObservablePersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setViewAllTasksFindPred(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
