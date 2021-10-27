@@ -2,11 +2,15 @@ package safeforhall.ui;
 
 import static safeforhall.model.person.LastDate.DEFAULT_DATE;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import safeforhall.logic.Logic;
+import safeforhall.model.event.Event;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -18,6 +22,7 @@ import safeforhall.model.person.VaccStatus;
 public class PersonAdditionalCard extends UiPart<Region> {
 
     private static final String FXML = "PersonAdditionalCard.fxml";
+    private static final String EVENTS_DESC = "Events: ";
 
     public final Person person;
 
@@ -36,6 +41,8 @@ public class PersonAdditionalCard extends UiPart<Region> {
     @FXML
     private Label faculty;
     @FXML
+    private Label events;
+    @FXML
     private HBox informationContainer;
     @FXML
     private HBox deadlineContainer;
@@ -47,7 +54,7 @@ public class PersonAdditionalCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonAdditionalCard} with the given {@code Member} and index to display.
      */
-    public PersonAdditionalCard(Person person) {
+    public PersonAdditionalCard(Person person, Logic logic) {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
@@ -56,6 +63,12 @@ public class PersonAdditionalCard extends UiPart<Region> {
         email.setText(Email.DESC + person.getEmail().value);
         faculty.setText(Faculty.DESC + person.getFaculty().faculty);
         vaccStatus.setText(VaccStatus.DESC + person.getVaccStatus().vaccStatus);
+
+        ArrayList<Event> eventList = logic.getModel().getPersonEvents(person, event -> true);
+        events.setText(EVENTS_DESC + (eventList.isEmpty() ? "None" : eventList
+                .stream()
+                .map(event -> event.getEventName().eventName)
+                .reduce("", (name, acc) -> name + acc)));
 
         if (person.hasMissedDeadline()) {
             Label textBox = new Label("Fet late by: ");

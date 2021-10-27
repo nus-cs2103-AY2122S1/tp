@@ -49,7 +49,7 @@ public class TraceCommandTest {
     }
 
     @Test
-    public void execute_command_success() {
+    public void execute_command_success() throws CommandException {
         String expectedMessage = String.format(TraceCommand.MESSAGE_FOUND_CONTACTS, 0);
         TraceCommand command = new TraceCommand(TypicalPersons.GEORGE.getRoom().toString(), 1);
         expectedModel.updateFilteredPersonList(e -> false);

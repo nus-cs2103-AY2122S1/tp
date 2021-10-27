@@ -289,6 +289,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ArrayList<Event> getPersonEvents(Person person, Predicate<Event> predicate) {
+        ArrayList<Event> events = new ArrayList<>();
+        for (Event e: filteredEvents.filtered(predicate)) {
+            if (e.getResidentList().getResidents().contains(person)) {
+                if (!events.contains(e)) {
+                    events.add(e);
+                }
+            }
+        }
+        return events;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

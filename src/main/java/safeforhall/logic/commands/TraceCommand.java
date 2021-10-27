@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.AddressBook;
@@ -99,18 +99,18 @@ public class TraceCommand extends Command {
     }
 
     private ArrayList<Person> findCloseContacts(Model model, Person person) {
-        ObservableList<Event> allEvents = model.getFilteredEventList().filtered(event -> {
+        Predicate<Event> predicate = event -> {
             LocalDate eventDate = event.getEventDate().toLocalDate();
             LocalDate today = LocalDate.now();
             long days = ChronoUnit.DAYS.between(eventDate, today);
             return days >= 0 && days <= this.duration;
-        });
+        };
         ArrayList<Person> contacts = new ArrayList<>();
         contacts.add(person);
         for (int i = 0; i < this.depth; i++) {
             ArrayList<Person> copyOfContacts = new ArrayList<>(contacts);
             for (Person contact: contacts) {
-                ArrayList<Event> relevantEvents = getEvents(allEvents, contact);
+                ArrayList<Event> relevantEvents = model.getPersonEvents(contact, predicate);
                 addToContacts(copyOfContacts, relevantEvents);
             }
             contacts = copyOfContacts;
@@ -127,18 +127,6 @@ public class TraceCommand extends Command {
                 }
             }
         }
-    }
-
-    private ArrayList<Event> getEvents(ObservableList<Event> allEvents, Person p) {
-        ArrayList<Event> events = new ArrayList<>();
-        for (Event e: allEvents) {
-            if (e.getResidentList().getResidents().contains(p)) {
-                if (!events.contains(e)) {
-                    events.add(e);
-                }
-            }
-        }
-        return events;
     }
 
     @Override
