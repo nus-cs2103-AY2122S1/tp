@@ -6,9 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
-
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
@@ -312,8 +311,8 @@ public class Participant {
 
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: \n");
-            IntStream.range(1, nextOfKins.size() + 1).forEach(
-                    i -> builder.append(i).append(". ").append(nextOfKins.get(i - 1).toString()).append("\n"));
+            IntStream.range(1, nextOfKins.size() + 1).forEach(i ->
+                    builder.append(i).append(". ").append(nextOfKins.get(i - 1).toString()).append("\n"));
         }
 
         if (!events.isEmpty()) {

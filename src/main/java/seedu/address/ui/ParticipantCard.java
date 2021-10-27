@@ -1,14 +1,12 @@
 package seedu.address.ui;
 
 import java.util.stream.Collectors;
-
 import java.util.stream.IntStream;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Participant;
 
 /**
