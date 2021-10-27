@@ -25,8 +25,8 @@ public class AddFriendGameSkillCommand extends Command {
             + FLAG_VALUE + "NUMBER_VALUE\n"
             + "Example: "
             + CMD_FRIEND + " " + FLAG_ADD_GAME_SKILL + "myfeely923 " + FLAG_GAME + "CSGO " + FLAG_VALUE + "10";
-    public static final String MESSAGE_SUCCESS_ADD_FRIEND_GAME_SKILL = "Successfully updated skill value for "
-            + "friend %1$s for the game %2$s to %3$s.";
+    public static final String MESSAGE_SUCCESS_ADD_FRIEND_GAME_SKILL = "Updated friend skill - "
+            + "FRIEND_ID: %1$s, GAME_ID: %2$s, NUMBER_VALUE: %3$s.";
     public static final String MESSAGE_FRIEND_ID_NOT_IN_MODEL = "Adding skill value failed. "
             + "Could not find FRIEND_ID in friends list.";
     public static final String MESSAGE_NO_GAME_LINK_FOUND = "Adding skill value failed. "

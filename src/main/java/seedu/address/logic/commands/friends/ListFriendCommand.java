@@ -22,7 +22,7 @@ public class ListFriendCommand extends Command {
     public static final String COMMAND_WORD = "--list";
 
     public static final String MESSAGE_USAGE = "Format: "
-            + CMD_FRIEND + " " + FLAG_LIST + "[KEYWORDS]\n"
+            + CMD_FRIEND + " " + FLAG_LIST + "[KEYWORD]\n"
             + "Example: "
             + CMD_FRIEND + " " + FLAG_LIST + "alice";
     public static final String MESSAGE_SUCCESS_PREPEND = "Listed all friends";
@@ -60,7 +60,7 @@ public class ListFriendCommand extends Command {
             String keyword = friendIdContainsKeywordPredicate.getKeyword();
             String messageEnd = keyword.isEmpty()
                     ? ""
-                    : " whose id contains the keyword: " + keyword;
+                    : " matching filter - KEYWORD: " + keyword;
             return MESSAGE_SUCCESS_PREPEND + messageEnd;
         }
         throw new CommandException(MESSAGE_UNKNOWN_PREDICATE);

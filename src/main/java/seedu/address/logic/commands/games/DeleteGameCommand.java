@@ -20,7 +20,7 @@ public class DeleteGameCommand extends Command {
             + CMD_GAME + " " + FLAG_DELETE + "GAME_ID\n"
             + "Example: "
             + CMD_GAME + " " + FLAG_DELETE + "CSGO";
-    public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game: %1$s";
+    public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game - GAME_ID: %1$s";
 
     private GameId gameToDeleteId;
 
