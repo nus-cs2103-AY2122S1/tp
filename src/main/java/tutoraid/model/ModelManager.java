@@ -150,7 +150,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteLessonFromStudents(Lesson lesson) {
-        for (Student student : filteredStudents) {
+        for (Student student : studentBook.getStudentList()) {
             if (student.hasLesson(lesson)) {
                 student.getLessons().deleteLesson(lesson);
             }
@@ -204,7 +204,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteStudentFromLessons(Student student) {
-        for (Lesson lesson : filteredLessons) {
+        for (Lesson lesson : lessonBook.getLessonList()) {
             if (lesson.containsStudent(student)) {
                 lesson.removeStudent(student);
             }
