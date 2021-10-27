@@ -10,6 +10,7 @@ participants.
 Managera is OS-independent meaning it will work on any operating system. (Windows, MacOS, Linux)
 
 ## Table of Contents
+- [**What this user guide is for**](#what-this-user-guide-is-for)
 - [**How to use this user guide**](#how-to-use-this-user-guide)
 - [**Quick start**](#quick-start)
 - [**Features**](#features)
@@ -19,32 +20,40 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Editing a Participant: `edit`](#editing-a-participant--edit)
         * [Locating Participants by name: `find`](#locating-participants-by-name-find)
         * [Listing all Participants: `list`](#listing-all-participants--list)
-        * [View Participant details: `view`](#view-participant-details-view)
-        * [Add Next of Kin to Participant: `addNok`](#add-next-of-kin-to-participant-addnok)
-        * [Remove Next of Kin from Participant: `deleteNok`](#remove-next-of-kin-from-participant-deletenok)
+        * [Viewing a Participant's details: `view`](#view-participant-details-view)
+        * [Adding Next of Kin to a Participant: `addNok`](#adding-next-of-kin-to-a-participant-addnok)
+        * [Removing Next of Kin from a Participant: `deleteNok`](#removing-next-of-kin-from-a-participant-deletenok)
     * [Event](#event)
         * [Adding an event: `addEvent`](#adding-an-event-addevent)
         * [Deleting an event: `deleteEvent`](#deleting-an-event--deleteevent)
         * [Editing an event: `editEvent`](#editing-an-event--editevent)
-        * [Mark an Event as done: `done`](#mark-an-event-as-done-done)
+        * [Marking an Event as done: `done`](#mark-an-event-as-done-done)
         * [Locating Events by name: `findEvent`](#locating-events-by-name-findevent)
-        * [Filter Events: `filterEvents`](#filter-events-filterevents)
-        * [Sort Events: `sortEvents`](#sort-events-sortevents)
+        * [Filtering Events by time: `filterEvents`](#filter-events-filterevents)
+        * [Sorting Events by time: `sortEvents`](#sort-events-sortevents)
         * [Listing all Events: `listEvents`](#list-events-listevents)
-        * [Show Event details: `showDetails`](#show-event-details-showdetails)
-        * [Show Event Participants: `showParticipants`](#show-event-participants-showparticipants)
-    * [Interaction](#interaction)
-        * [Add Participant to Event: `enroll`](#add-participant-to-event-enroll)
-        * [Remove Participant from Event: `expel`](#remove-participant-from-event-expel)
+        * [Showing an Event's details: `showDetails`](#show-event-details-showdetails)
+        * [Adding a Participant to an Event: `enroll`](#add-participant-to-event-enroll)
+        * [Remove a Participant from an Event: `expel`](#remove-participant-from-event-expel)
+        * [Showing an Event's Participants: `showParticipants`](#show-event-participants-showparticipants)
     * [Miscellaneous](#miscellaneous)
-        * [Viewing help : `help`](#viewing-help--help)
+        * [Viewing help: `help`](#viewing-help--help)
         * [Clearing all Data: `clear`](#clearing-all-data--clear)
         * [Exiting the program: `exit`](#exiting-the-program--exit)
-        * [Saving the data](#saving-the-data)
-        * [Editing the data file](#editing-the-data-file)
+- [**Saving the data**](#saving-the-data)
+- [**Editing the data file**](#editing-the-data-file)
 - [**Glossary**](#glossary)
 - [**FAQ**](#faq)
 - [**Command summary**](#command-summary)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## What this user guide is for
+
+This user guide aims to give a brief overview of what Managera is and what features it has.
+It contains instructions for [how to set up Managera](#quick_start), [how to use certain features](#features) 
+and answers to some [commonly-asked questions](#faq). You may also use this user guide as a
+[quick reference](#command-summary) to any commands once you are more experienced with Managera.
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to use this user guide
@@ -58,6 +67,7 @@ If there are any doubts on how certain commands are used, you can look for the d
 
 If there are any terms used in this user guide you are unclear of or do not understand, their definitions may be found 
 in the [Glossary](#glossary).
+
 
 For any other questions about Managera, you may refer to the [FAQ](#faq) section.
 
