@@ -43,6 +43,9 @@ public class Student {
         this.filteredAssessments = new FilteredList<>(this.getAssessmentList());
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Student(Name name, TelegramHandle telegramHandle, Email email, Note note, GroupName groupName,
                    UniqueAssessmentList assessments) {
         requireAllNonNull(name, telegramHandle, email, groupName, note, assessments);
@@ -108,13 +111,21 @@ public class Student {
         filteredAssessments.setPredicate(predicate);
     }
 
+    /**
+     * Return the note in students.
+     * @return Note object
+     */
     public Note getNote() {
         return this.note;
     }
 
+    /**
+     * Checks if student is weak based on recent assessment.
+     * @return true if student is weak
+     */
     public boolean isWeak() {
         if (!assessments.asUnmodifiableObservableList().isEmpty()) {
-            int index  = assessments.asUnmodifiableObservableList().size() - 1;
+            int index = assessments.asUnmodifiableObservableList().size() - 1;
             return getAssessmentList().get(index).getScore().isFail();
         }
         return false;

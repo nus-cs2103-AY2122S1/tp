@@ -66,7 +66,7 @@ public class DeleteAssessmentCommand extends Command {
         Assessment assessmentToDelete = student.getFilteredAssessmentList().get(0);
         model.deleteAssessment(student, assessmentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ASSESSMENT_SUCCESS,
-                assessmentToDelete.getAssessmentName()));
+                assessmentToDelete.getAssessmentName()), false, false, student);
     }
 
     @Override

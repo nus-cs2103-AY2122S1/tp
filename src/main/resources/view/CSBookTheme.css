@@ -100,33 +100,6 @@
     -fx-background-color: transparent;
 }
 
-/*.list-cell:empty {*/
-/*    -fx-padding: 2px;*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-background-insets: 0;*/
-/*}*/
-
-/*.list-cell:filled:even {*/
-/*    -fx-background-color: #3c3e3f;*/
-/*}*/
-
-/*.list-cell:filled:odd {*/
-/*    -fx-background-color: #515658;*/
-/*}*/
-
-/*.list-cell:filled:selected {*/
-/*    -fx-background-color: #424d5f;*/
-/*}*/
-
-/*.list-cell:filled:selected #cardPane {*/
-/*    -fx-border-color: #3e7b91;*/
-/*    -fx-border-width: 1;*/
-/*}*/
-
-/*.list-cell .label {*/
-/*    -fx-text-fill: white;*/
-/*}*/
-
 .stack-pane {
      -fx-background-color: derive(#d3e3fc, 20%);
 }
@@ -349,10 +322,6 @@
     -fx-font-weight: bold;
     -fx-opacity: 0.3;
 }
-/*#groupCard, #detailsCard {*/
-/*    -fx-background-color: white;*/
-/*    -fx-background-radius: 10;*/
-/*}*/
 
 .normal-card {
     -fx-background-color: white;

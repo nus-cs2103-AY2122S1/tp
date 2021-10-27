@@ -116,7 +116,8 @@ public class ModelManager implements Model {
         Email email = foundStudent.getEmail();
         Note note = foundStudent.getNote();
         GroupName groupName = newGroup.getGroupName();
-        Student updatedStudent = new Student(name, telegramHandle, email, note, groupName);
+        UniqueAssessmentList assessments = foundStudent.getUniqueAssessmentList();
+        Student updatedStudent = new Student(name, telegramHandle, email, note, groupName, assessments);
         csBook.setStudent(foundStudent, updatedStudent);
     }
 
