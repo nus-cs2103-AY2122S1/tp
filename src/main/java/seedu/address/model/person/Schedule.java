@@ -158,7 +158,7 @@ public class Schedule {
     private static String formatShiftsToString(Shift[] shifts, Period period) {
         String result = "";
         for (Shift shift: shifts) {
-            if (shift == null) {
+            if (shift == null || shift.isEmpty()) {
                 continue;
             }
             result += "\n\t";
