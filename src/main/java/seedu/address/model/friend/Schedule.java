@@ -3,10 +3,10 @@ package seedu.address.model.friend;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 
 /**
@@ -64,11 +64,11 @@ public class Schedule {
     }
 
     /**
-     * Returns an immutable day list, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a list of days
+     * @return ObservableList of days
      */
-    public List<Day> getSchedule() {
-        return Collections.unmodifiableList(schedule);
+    public ObservableList<Day> getSchedule() {
+        return FXCollections.observableList(schedule);
     }
 
     @Override
