@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package ListPanel <<Rectangle>>{
+Interface ListPanel <<Interface>>
+Class StudentListPanel
+Class GroupListPanel
+Class TaskListPanel
+Class MemberListPanel
+Class StudentListCard
+Class TaskListCard
+Class GroupListCard
+Class MemberListCard
+}
+
+package Model <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+ListPanel <|.down. TaskListPanel
+ListPanel <|.down. GroupListPanel
+ListPanel <|.down. StudentListPanel
+
+GroupListPanel *-down-> "*" GroupListCard
+GroupListCard *-down-> "1" MemberListPanel
+GroupListCard .right.> Model
+
+MemberListPanel *-down-> "*" MemberListCard
+MemberListCard .right.> Model
+
+StudentListPanel *-down-> "*" StudentListCard
+StudentListCard .right.> Model
+
+TaskListPanel *-down-> "*" TaskListCard
+TaskListCard .right.> Model
+
+ListPanelPlaceholder -down-> "1" ListPanel
+
+@enduml
