@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -26,43 +27,62 @@ public class AliasCommandParserTest {
 
     @Test
     public void parse_missingAliasWord_failure() {
-        assertParseFailure(parser, PREFIX_ALIAS + validCommandWord, AliasCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " " + PREFIX_COMMAND + validCommandWord, AliasCommand.MESSAGE_USAGE);
     }
 
     @Test
     public void parse_missingCommandWord_failure() {
-        assertParseFailure(parser, validAliasWord + " " + PREFIX_ALIAS, AliasCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, " " + PREFIX_ALIAS + validAliasWord, AliasCommand.MESSAGE_USAGE);
     }
 
     @Test
     public void parse_unknownCommandWord_failure() {
-        assertParseFailure(parser, validAliasWord + " " + PREFIX_ALIAS + invalidCommandWord,
+        assertParseFailure(parser, " " + PREFIX_ALIAS + validAliasWord + " "
+                + PREFIX_COMMAND + invalidCommandWord,
                 AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
 
         // extra word on command word
-        assertParseFailure(parser, validAliasWord + " " + PREFIX_ALIAS + validCommandWord + " hello",
+        assertParseFailure(parser, " " + PREFIX_ALIAS + validAliasWord + " "
+                + PREFIX_COMMAND + validCommandWord + " hello",
                 AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
 
         // extra characters on command word
-        assertParseFailure(parser, validAliasWord + " " + PREFIX_ALIAS + invalidCommandWord + "hello",
+        assertParseFailure(parser, " " + PREFIX_ALIAS + validAliasWord + " "
+                + PREFIX_COMMAND + validCommandWord + "hello",
                 AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
     }
 
     @Test
-    public void parse_multipleWordAliasWord_failure() {
-        assertParseFailure(parser, invalidAliasWord + " " + PREFIX_ALIAS + validCommandWord,
+    public void parse_invalidAliasWord_failure() {
+        // multiple words alias
+        assertParseFailure(parser, " " + PREFIX_ALIAS + invalidAliasWord + " "
+                + PREFIX_COMMAND + validCommandWord,
+                Alias.MESSAGE_CONSTRAINTS);
+
+        // empty alias
+        assertParseFailure(parser, " " + PREFIX_ALIAS + PREFIX_COMMAND + validCommandWord,
                 Alias.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_overwriteDefault_failure() {
-        assertParseFailure(parser, validCommandWord + " " + PREFIX_ALIAS + validCommandWord2,
+        assertParseFailure(parser, " " + PREFIX_ALIAS + validCommandWord + " "
+                + PREFIX_COMMAND + validCommandWord2,
                 AliasCommand.MESSAGE_OVERWRITE_DEFAULT);
     }
 
     @Test
     public void parse_validInputs_success() {
-        assertParseSuccess(parser, validAliasWord + " " + PREFIX_ALIAS + validCommandWord,
-                new AliasCommand(new Alias(validAliasWord, validCommandWord), abParser));
+        AliasCommand expectedCommand = new AliasCommand(new Alias(validAliasWord, validCommandWord), abParser);
+
+        // alias prefix first
+        assertParseSuccess(parser, " " + PREFIX_ALIAS + validAliasWord + " "
+                + PREFIX_COMMAND + validCommandWord,
+                expectedCommand);
+
+        // command prefix first
+        assertParseSuccess(parser, " " + PREFIX_COMMAND + validCommandWord + " "
+                + PREFIX_ALIAS + validAliasWord,
+                expectedCommand);
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.Alias;
@@ -17,9 +18,10 @@ public class AliasCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an alias for a command. \n"
             + "Parameters: "
-            + "<existing_command> " + PREFIX_ALIAS + "<alias>\n"
+            + PREFIX_COMMAND + "<existing_command> " + PREFIX_ALIAS + "<alias>\n"
             + "Example: " + COMMAND_WORD + " "
-            + "as " + PREFIX_ALIAS + AddCommand.COMMAND_WORD;
+            + PREFIX_COMMAND + AddCommand.COMMAND_WORD + " "
+            + PREFIX_ALIAS + "as";
 
     public static final String MESSAGE_ADD_SUCCESS = "New alias added: %1$s";
     public static final String MESSAGE_REMOVE_SUCCESS = "Alias removed: %1$s";

@@ -58,7 +58,7 @@ public class AddressBookParser {
         String arguments = matcher.group("arguments");
 
         // if it ends with a prefix, add a space so that the prefix can be picked up by the tokenizer
-        if (arguments.matches(".*-[a-z|>]$")) {
+        if (arguments.matches(".* -[a-z]+$")) {
             arguments = arguments + " ";
         }
 

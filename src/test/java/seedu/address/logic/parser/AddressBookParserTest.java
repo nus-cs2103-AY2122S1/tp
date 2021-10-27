@@ -19,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -155,7 +156,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_alias() throws Exception {
         assertTrue(parser.parseCommand(
-                AliasCommand.COMMAND_WORD + " aliasWord " + PREFIX_ALIAS + ExitCommand.COMMAND_WORD)
+                AliasCommand.COMMAND_WORD + " "
+                + PREFIX_COMMAND + ExitCommand.COMMAND_WORD + " "
+                + PREFIX_ALIAS + "aliasWord")
                 instanceof AliasCommand);
     }
 

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 
 import java.util.Optional;
 
@@ -18,21 +19,15 @@ public class AliasCommandParser implements Parser<AliasCommand> {
     @Override
     public AliasCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ALIAS);
+                ArgumentTokenizer.tokenize(args, PREFIX_ALIAS, PREFIX_COMMAND);
 
         if (argMultimap.getValue(PREFIX_ALIAS).isEmpty()
-            || argMultimap.getPreamble().equals("")
-            || argMultimap.getValue(PREFIX_ALIAS).get().equals("")) {
+            || argMultimap.getValue(PREFIX_COMMAND).isEmpty()) {
             throw new ParseException(AliasCommand.MESSAGE_USAGE);
         }
 
-        String aliasWord = argMultimap.getPreamble().strip();
-        String commandWord = argMultimap.getValue(PREFIX_ALIAS).get().strip();
-
-        Optional<Alias> existingAlias = parser.getAlias(commandWord);
-        // prevents chaining of aliases
-        // e.g. if there exists an existing alias "bye" for "exit", and "bye" is specified as the commandWord
-        commandWord = existingAlias.map(Alias::getCommandWord).orElse(commandWord);
+        String aliasWord = argMultimap.getValue(PREFIX_ALIAS).get().strip();
+        String commandWord = argMultimap.getValue(PREFIX_COMMAND).get().strip();
 
         if (!Alias.isValidAlias(aliasWord)) {
             throw new ParseException(Alias.MESSAGE_CONSTRAINTS);
@@ -42,6 +37,17 @@ public class AliasCommandParser implements Parser<AliasCommand> {
         if (isValidCommandWord(aliasWord) && parser.getAlias(aliasWord).isEmpty()) {
             throw new ParseException(AliasCommand.MESSAGE_OVERWRITE_DEFAULT);
         }
+
+        // short circuit if removing existing alias
+        if (aliasWord.equals(commandWord)) {
+            Alias newAlias = new Alias(aliasWord, commandWord);
+            return new AliasCommand(newAlias, parser);
+        }
+
+        Optional<Alias> existingAlias = parser.getAlias(commandWord);
+        // prevents chaining of aliases
+        // e.g. if there exists an existing alias "bye" for "exit", and "bye" is specified as the commandWord
+        commandWord = existingAlias.map(Alias::getCommandWord).orElse(commandWord);
 
         if (!isValidCommandWord(commandWord)) {
             throw new ParseException(AliasCommand.MESSAGE_UNKNOWN_OLD_COMMAND);
