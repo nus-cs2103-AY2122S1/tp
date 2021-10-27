@@ -47,6 +47,11 @@ public class NameContainsKeywordsPredicateTest {
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Banana", "Pie"));
         assertTrue(predicate.test(new ItemBuilder().withName("Apple Pie").build()));
+        // Multiple word predicate
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Banana Pie"));
+        assertTrue(predicate.test(new ItemBuilder().withName("Apple Banana Pie").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Banana Pie"));
+        assertTrue(predicate.test(new ItemBuilder().withName("Banana Pie").build()));
 
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aPplE", "pIe"));

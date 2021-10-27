@@ -31,13 +31,68 @@ public class StringUtil {
 
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        //checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code word}.
+     *   Ignores case, but a full word match is required.
+     *   <br>examples:<pre>
+     *       containsWordIgnoreCase("ABc def", "abc def") == true
+     *       containsWordIgnoreCase("ABc def", "abc DEF") == true
+     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       </pre>
+     * @param sentence cannot be null
+     * @param word cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsMultipleWord(String sentence, String word) {
+        requireNonNull(sentence);
+        requireNonNull(word);
+        if (sentence.length() == 0 || word.length() == 0) {
+            return false;
+        }
+
+        String preppedWord = word.trim();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        String[] wordsInPreppedWord = preppedWord.split("\\s+");
+        String preppedSentence = sentence;
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        return StringUtil.equalArray(wordsInPreppedSentence, wordsInPreppedWord);
+    }
+    /**
+     * Checks whether element is first is equal to second
+     */
+    public static boolean equalArray (String [] first, String [] second) {
+        int firstLength = first.length;
+        int secondLength = second.length;
+        if (firstLength == 0 || secondLength == 0) {
+            return false;
+        }
+        boolean Doesmatch = false;
+        boolean DoesInnermatch;
+        for (int i = 0; i < firstLength - secondLength + 1; i = i + 1) {
+            int t = i;
+            DoesInnermatch = true;
+            for (int j = 0; j < secondLength; j = j + 1) {
+                if (first[t].equalsIgnoreCase(second[j])) {
+                } else {
+                    DoesInnermatch = DoesInnermatch && false;
+                    break;
+                }
+                t = t + 1;
+            }
+            if (DoesInnermatch) {
+                return true;
+            }
+        }
+        return Doesmatch;
     }
 
     /**
