@@ -75,7 +75,7 @@ public class CustomerComparator {
     }
 
     /**
-     * Generates a supplyType comparator based on the provided order of sorting.
+     * Generates a loyalty points comparator based on the provided order of sorting.
      * @param isAscending True if sorting is to be done in ascending order.
      * @return A loyalty point comparator with type customer.
      */

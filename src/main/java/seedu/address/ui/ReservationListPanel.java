@@ -24,6 +24,7 @@ public class ReservationListPanel extends UiPart<Region> {
      * Creates a {@code ReservationListPanel} with the given {@code ObservableList}.
      */
     public ReservationListPanel(ObservableList<Reservation> reservationList) {
+
         super(FXML);
         reservationListView.setItems(reservationList);
         reservationListView.setCellFactory(listView -> new ReservationListPanel.ReservationListViewCell());

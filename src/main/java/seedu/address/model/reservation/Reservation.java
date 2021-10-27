@@ -18,14 +18,14 @@ import seedu.address.model.tag.Tag;
  */
 public class Reservation {
     private static final DateTimeFormatter DATE_TIME_PRINTING_FORMAT =
-            DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+            DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
 
-    private Phone phone;
-    private int numberOfPeople;
-    private LocalDateTime dateTime;
-    private Table table;
-    private Remark remark;
-    private Set<Tag> tags = new HashSet<>();
+    private final Phone phone;
+    private final int numberOfPeople;
+    private final LocalDateTime dateTime;
+    private final Table table;
+    private final Remark remark;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Creates a reservation with remark and tags
@@ -57,6 +57,10 @@ public class Reservation {
 
     public int getTableId() {
         return table.getTableId();
+    }
+
+    public Table getTable() {
+        return table;
     }
 
     public Remark getRemark() {
