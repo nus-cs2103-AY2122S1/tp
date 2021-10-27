@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
 
 
-        claimListPanel = new ClaimListPanel(logic.getFilteredPersonList());
+        claimListPanel = new ClaimListPanel(logic.getPersonsWithClaims());
         claimListPanelPlaceholder.getChildren().add(claimListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
