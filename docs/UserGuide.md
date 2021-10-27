@@ -122,7 +122,7 @@ order [Products](#323-defining-client-and-product) from you.
 The table below explains some technical terms that you may come across throughout the user guide.
 
 | Term | Definition |
-|:---:|:---:|
+|:---:| --- |
 | CLI | The Command-Line Interface (CLI) is the user interface in which Sellah is based on. Unlike traditional Graphical User Interface (GUI) base applications, it may be less intuitive to new users. However upon familiarisation, fast typists may find it faster to use. |
 | Command | Keywords that Sellah recognises to invoke specific commands. |
 | Parameters | Information to be passed to the Commands. |
@@ -135,12 +135,11 @@ The table below explains the general syntax used throughout the user guide.
 
 | Syntax | Definition |
 |:---:| --- |
-| `...` | Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be ` `(empty) or `-o 1 -o 2`. |
+| `...` | Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be <code></code>(empty) or `-o 1 -o 2`. |
 | `UPPER_CASE` | Name of the parameter. For example, `EMAIL` is a parameter named email. |
 | `-lower_case UPPER_CASE` | A parameter field. The name of the parameter is defined in `UPPER_CASE` and `-lower_case` refers to an acronym of `UPPER_CASE`. An example can be `-e abc@gmail.com`. |
 | `[-lower_case UPPER_CASE]` | An optional parameter field. Eg `-a A [-b B]` can be used as `-a A -b B` or just `-a A`. |
-
-* A light bulb :bulb: indicates that the following text is a tip.
+| :bulb: | A light bulb indicates that the following text is a tip. |
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-pn PHONE_NUMBER -e EMAIL`, then `-e EMAIL -pn PHONE_NUMBER` is also acceptable.
@@ -162,7 +161,7 @@ An **Order** refers to a product that the client has ordered. For each order, th
 **Quantity** and the **Date of Purchase** must be included.
 
 Parameter | Format |
---- | ---
+|:---:| --- |
 `-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alice Bob`.
 `-pn` | A series of 8 positive numbers from 0 to 9. <br> E.g.: `-pn 12345678`.
 `-e` | Any valid email. <br> E.g.: `-e abc@asdf.com`.
@@ -174,7 +173,7 @@ Parameter | Format |
 in your inventory currently. Every product command requires a `-p` parameter.
 
 Parameter | Format |
---- | ---
+|:---:| --- |
 `-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alienware Aurora R12`.
 `-$` | A valid price, optional to specify the cents (2 decimal places). <br> E.g.: `-$ 10.00` and `-$ 10`.
 `-q` | Any positive integer to specify the quantity. <br> E.g.: `-q 15`.
@@ -469,7 +468,7 @@ wish to keep your preferences of the application.
 ## 6. Command Summary
 
 Action | Format
---- | ---
+|:---:| --- |
 [Help](#41-getting-help) | `help`
 [Exit](#411-exiting-sellah) | `exit`
 [Add](#42-add) | Client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
