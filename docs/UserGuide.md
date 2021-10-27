@@ -1,8 +1,25 @@
+---
+layout: page
+title: User Guide
+---
 PlannerMD is an easy-to-use command-line interface (CLI) application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
 If you are new, this guide is meant to introduce you to PlannerMD as well as guide you through our features and how to use them. If you are already 
 experienced with PlannerMD, we hope that our comprehensive user guide will help clarify any queries you have! Refer to our [table of contents](#toc) to see what
 we have to offer!
+
+## Common Syntax
+Take note of some syntax we will frequently use throughout the User Guide:
+
+| Syntax | Description |
+|--------|------------|
+| **Bold** | keywords |
+| :bulb: **Tip:** | Useful tips |
+| :exclamation: **Caution:** | Possible pitfalls |
+| `markdown` | Commands or examples |
+| Format: | the format to write the commands in the application|
+
+
 
 ## Table Of Contents <a name="toc"></a>
 * [Quick start](#quick-start)
@@ -58,8 +75,11 @@ we have to offer!
 3. Copy the file to the folder you want to use as the _home folder_ for plannerMD.
 
 4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
 
+   ![Ui](images/Ui.png)    
+   
+
+    
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -95,7 +115,7 @@ patients, doctors and appointments.
 ### How to use a CLI?
 Just type your command in the command box with the format we have provided. Simple as that!
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can type the command keyword and leave the details blank and click enter to access the teamplte so you don't have to remember
+You can type the command keyword and leave the details blank and click enter to access the template so you don't have to remember
 all the details!<br>
 </div>
 
@@ -420,6 +440,29 @@ Examples:
 ## Managing Appointments `appt` <a name="managing-appointments"/>
 
 ### Adding an appointment: `appt -a` <a name="add-appointment"/>
+Creates an appointment. 
+
+Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION]
+ [r/REMARK]`
+
+* Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …​
+* `DATE_AND_TIME` accepts the format `DD/MM/YYYY HH:MM` e.g. `20/07/2022`.
+* If you did not include the duration, it will be automatically be set to **10** minutes.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
+</div>
+<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can also add appointments that have happened already! This is especially useful if you just started using PlannerMD
+and would like to store your entire history of appointments!
+</div>
+<br>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If the appointment you just created isn't appearing, it could be because the default appointment list only shows
+appointments occurring today and the one you just add doesn't happen today. To see upcoming appointments, enter `appt -u`. 
+</div>
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
@@ -510,7 +553,7 @@ If your changes to the data file makes its format invalid, PlannerMD will discar
 
 Action | Format, Examples
 --------|------------------
-**Add appointment** | 
+**Add appointment** | `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION] [r/REMARK]` <br> e.g., `appt -a p/1 d/2 s/25/12/2022 dur/20 r/Patient wants a blood test`|
 **Add doctor** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
 **Add patient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add Tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`

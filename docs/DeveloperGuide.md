@@ -2,6 +2,11 @@
 layout: page
 title: Developer Guide
 ---
+PlannerMD is an easy-to-use command-line interface (CLI) application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
+
+The purpose of the Developer Guide is to guide you through the architecture of our program, so you can familiarise yourself with its underlying structure.
+
+
 * Table of Contents
     - [Acknowledgements](#acknowledgements) 
     - [Setting up, getting started](#setting-up)
@@ -64,10 +69,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui): The UI of the App.
+* [**`Logic`**](#logic): The command executor.
+* [**`Model`**](#model): Holds the data of the App in memory.
+* [**`Storage`**](#storage): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
@@ -136,7 +141,7 @@ How the parsing works:
 * When called upon to parse a user command, the `PlannerMdParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `PlannerMdParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteDoctorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model component <a name="model"/>
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -305,7 +310,8 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 **Value proposition**: easily manage patients' information and doctors' appointments faster than a typical mouse/GUI driven app
 
 
-### User stories  <a name="user-stores"/>
+### User stories  <a name="user-stories"/>
+These are some user stories we took into account when designing PlannerMD:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -326,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
 | `* * *`  | clinic receptionist                        | add an appointment |                                                 |
 | `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
-| `* * *`  | clinic receptionist                        | update an appointment | reschedule the appointment when the patient or doctor asks for it |
+| `* * *`  | clinic receptionist                        | edit an appointment | reschedule the appointment when the patient or doctor asks for it |
 | `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
 | `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
 | `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
@@ -334,10 +340,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
 | `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
-
-*{More to be added}*
  
 ### Use cases  <a name="use-cases"/>
+These are some use cases to familiarise with the flow of our application: 
 
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
@@ -516,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Scheduling an appointment (Coming soon)**
+**Use case: Scheduling an appointment**
 
 **MSS**
 
@@ -546,7 +551,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a3. PlannerMD updates the doctor's schedule which is reflected immediately.
 
       Use case ends.
-    
+
+**Use case: Deleting an appointment**
+
+**MSS**
+1.  Receptionist requests to list appointments
+2.  PlannerMD shows the list of appointments
+2.  Receptionist requests to delete an appointment
+3.  PlannerMD deletes the appointment from the appointment list which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
 ### Non-Functional Requirements  <a name="nfr"/>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -572,6 +595,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Risk profile**: The health status and severity of the condition of a patient
 * **Tag**: A label attached to a patient for easy identification or providing additional information
+* **MSS**: Main Success Scenario in the use cases.
+* **Extensions**: "Add-ons" to the MSS that describes an exceptional/alternative flow of events. 
 
 --------------------------------------------------------------------------------------------------------------------
 
