@@ -42,9 +42,9 @@ public class UnmarkCommand extends MarkingCommand {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-            result.append(personToMark);
-            personToMark.getDone().setAsUndone();
+            Person personToUnmark = lastShownList.get(targetIndex.getZeroBased());
+            model.unmarkPerson(personToUnmark);
+            result.append(personToUnmark);
         }
 
         return new CommandResult(String.format(MESSAGE_UNMARKED_PERSON_SUCCESS, result.toString()));

@@ -17,5 +17,6 @@ public class PrefixSyntax {
     public static final String PREFIX_EXPERIENCE_SYNTAX = "y/";
     public static final String PREFIX_INTERVIEW_SYNTAX = "i/";
     public static final String PREFIX_NOTES_SYNTAX = "nt/";
+    public static final String PREFIX_DONE_SYNTAX = "d/";
 
 }
