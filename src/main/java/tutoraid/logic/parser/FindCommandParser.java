@@ -48,9 +48,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (commandFlag.equals(FindStudentCommand.COMMAND_FLAG)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
-            } else {
+            } else if (commandFlag.equals(FindLessonCommand.COMMAND_FLAG)) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLessonCommand.MESSAGE_USAGE));
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
             }
         }
 
