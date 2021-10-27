@@ -135,7 +135,7 @@ The table below explains the general syntax used throughout the user guide.
 
 | Syntax | Definition |
 |:---:| --- |
-| `...` | Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be ` `(empty) or `-o 1 -o 2`. |
+| `...` | Indicates that the parameter before it can be used multiple times, including 0 times. If the parameter is `-o`, some possible usages could be <code></code>(empty) or `-o 1 -o 2`. |
 | Command | Keywords that Sellah recognises to invoke specific commands. |
 | Parameters | Information to be passed to the Commands. |
 | Index | The number next to the list of [Clients](#323-defining-client-and-product) or [Products](#323-defining-client-and-product). |
