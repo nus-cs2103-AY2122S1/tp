@@ -225,7 +225,7 @@ public class AddCommandTest {
         public Optional<Assignment> searchAssignment(Name name) {
             throw new AssertionError("This method should not be called.");
         }
-        
+
         @Override
         public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
