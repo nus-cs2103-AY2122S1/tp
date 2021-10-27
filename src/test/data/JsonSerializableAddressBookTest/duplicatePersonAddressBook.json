@@ -6,7 +6,6 @@
     "email": "alice@example.com",
     "nationality": "Singaporean ",
     "tutorialGroup": "T09",
-    "socialHandle": "@valid",
     "remark": "likes coding",
     "tagged" : [ {
       "tagName" : "friend",
@@ -19,7 +18,6 @@
     "email": "pauline@example.com",
     "nationality": "Singaporean ",
     "tutorialGroup": "T09",
-    "socialHandle": "@valid",
     "remark": "likes coding"
   } ]
 }
