@@ -94,11 +94,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getClaimList() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getClaimList().remove(0));
-    }
-
-    @Test
     public void getAppointmentList() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getAppointmentList().remove(0));
     }

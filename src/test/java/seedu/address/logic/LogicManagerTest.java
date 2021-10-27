@@ -94,11 +94,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getClaimList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getClaimList().remove(0));
-    }
-
-    @Test
     public void getAppointmentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getAppointmentList().remove(0));
     }
