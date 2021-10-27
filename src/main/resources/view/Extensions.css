@@ -3,10 +3,33 @@
     -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
 }
 
-.list-cell:empty {
-    /* Empty cells will not have alternating colours */
-    -fx-background: #383838;
+.flag {
+    -fx-background-color: #ffccbc;
+    -fx-background-radius: 10;
 }
+
+.fail {
+    -fx-text-fill: #FAA0A0;
+    -fx-font-family: fantasy;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+}
+
+.pass {
+    -fx-text-fill: #C1E1C1;
+    -fx-font-family: fantasy;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+}
+
+.command-error {
+    -fx-background-color: #F1CFCF !important;
+}
+
+/*.list-cell:empty {*/
+/*    !* Empty cells will not have alternating colours *!*/
+/*    -fx-background: #383838;*/
+/*}*/
 
 .tooltip-text {
     -fx-text-fill: white;

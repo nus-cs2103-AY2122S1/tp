@@ -1,10 +1,15 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.function.Predicate;
 
-import seedu.address.model.group.Group;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -19,17 +24,38 @@ public class Student {
     private final Email email;
 
     // Data fields
-    private final Group group;
+    private final Note note;
+    private final GroupName groupName;
+    private final UniqueAssessmentList assessments;
+    private final FilteredList<Assessment> filteredAssessments;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, TelegramHandle telegramHandle, Email email, Group group) {
-        requireAllNonNull(name, telegramHandle, email, group);
+    public Student(Name name, TelegramHandle telegramHandle, Email email, Note note, GroupName groupName) {
+        requireAllNonNull(name, telegramHandle, email, groupName);
         this.name = name;
         this.telegramHandle = telegramHandle;
+        this.note = note;
         this.email = email;
-        this.group = group;
+        this.groupName = groupName;
+        this.assessments = new UniqueAssessmentList();
+        this.filteredAssessments = new FilteredList<>(this.getAssessmentList());
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Student(Name name, TelegramHandle telegramHandle, Email email, Note note, GroupName groupName,
+                   UniqueAssessmentList assessments) {
+        requireAllNonNull(name, telegramHandle, email, groupName, note, assessments);
+        this.name = name;
+        this.telegramHandle = telegramHandle;
+        this.note = note;
+        this.email = email;
+        this.groupName = groupName;
+        this.assessments = assessments;
+        this.filteredAssessments = new FilteredList<>(this.getAssessmentList());
     }
 
     public Name getName() {
@@ -44,12 +70,65 @@ public class Student {
         return email;
     }
 
-    public Group getGroup() {
-        return group;
+    public GroupName getGroupName() {
+        return groupName;
     }
 
-    public GroupName getGroupName() {
-        return group.getGroupName();
+    public boolean hasAssessment(Assessment assessment) {
+        return assessments.contains(assessment);
+    }
+
+    public void addAssessment(Assessment assessment) {
+        assessments.add(assessment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Student}.
+     * {@code key} must exist in the student's assessment list.
+     */
+    public void deleteAssessment(Assessment key) {
+        assessments.remove(key);
+    }
+
+    public ObservableList<Assessment> getAssessmentList() {
+        return assessments.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Assessment> getFilteredAssessmentList() {
+        return filteredAssessments;
+    }
+
+    public UniqueAssessmentList getUniqueAssessmentList() {
+        return assessments;
+    }
+
+    /**
+     * Updates the filter of the filtered assessment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredAssessmentList(Predicate<Assessment> predicate) {
+        requireNonNull(predicate);
+        filteredAssessments.setPredicate(predicate);
+    }
+
+    /**
+     * Return the note in students.
+     * @return Note object
+     */
+    public Note getNote() {
+        return this.note;
+    }
+
+    /**
+     * Checks if student is weak based on recent assessment.
+     * @return true if student is weak
+     */
+    public boolean isWeak() {
+        if (!assessments.asUnmodifiableObservableList().isEmpty()) {
+            int index = assessments.asUnmodifiableObservableList().size() - 1;
+            return getAssessmentList().get(index).getScore().isFail();
+        }
+        return false;
     }
 
     /**
@@ -83,13 +162,14 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getTelegramHandle().equals(getTelegramHandle())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getGroup().equals(getGroup());
+                && otherStudent.getGroupName().equals(getGroupName())
+                && otherStudent.getAssessmentList().equals(getAssessmentList());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegramHandle, email, getGroupName());
+        return Objects.hash(name, telegramHandle, email, groupName);
     }
 
     @Override

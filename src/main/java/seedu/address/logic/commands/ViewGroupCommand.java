@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.ContainsGroupNamePredicate;
+import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 
 /**
  * Displays all students in a group that has the given group name.
@@ -17,19 +17,19 @@ public class ViewGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "viewgroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find and displays details about a group that matches "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds and displays details about a group that matches "
             + "the specified group name (case-sensitive).\n"
-            + "Parameters: GROUPNAME \n"
-            + "Example: " + COMMAND_WORD + " CS2103T";
+            + "Parameters: g/GROUPNAME \n"
+            + "Example: " + COMMAND_WORD + " g/CS2103T";
 
-    private final ContainsGroupNamePredicate predicate;
+    private final StudentGroupNameEqualsPredicate predicate;
 
     private final GroupName groupName;
 
     /**
      * Creates a ViewGroupCommand to find a {@code Group} with the specified {@code GroupName}
      */
-    public ViewGroupCommand(ContainsGroupNamePredicate predicate, GroupName groupName) {
+    public ViewGroupCommand(StudentGroupNameEqualsPredicate predicate, GroupName groupName) {
         this.predicate = predicate;
         this.groupName = groupName;
     }
@@ -39,8 +39,7 @@ public class ViewGroupCommand extends Command {
         requireNonNull(model);
         model.updateFilteredStudentList(predicate);
         String displayedText = getGroupInformation(model) + "\n" + Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
-        return new CommandResult(
-                String.format(displayedText, model.getFilteredStudentList().size()));
+        return new CommandResult(String.format(displayedText, model.getFilteredStudentList().size()));
     }
 
     @Override

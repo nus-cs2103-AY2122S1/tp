@@ -17,8 +17,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.ContainsGroupNamePredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 import seedu.address.testutil.StudentBuilder;
 
 public class ViewGroupCommandTest {
@@ -30,11 +30,11 @@ public class ViewGroupCommandTest {
     public void setUp() {
         List<Group> testGroups = Arrays.asList(new Group(new GroupName("CS2103T"), new Description("SWE Module")));
         Student validStudent1 = new StudentBuilder().withName("Erin")
-                .withGroup("CS2103T", "SWE Module").build();
+                .withGroupName("CS2103T").build();
         Student validStudent2 = new StudentBuilder().withName("Monkey")
-                .withGroup("CS2103T", "SWE Module").build();
+                .withGroupName("CS2103T").build();
         Student validStudent3 = new StudentBuilder().withName("Pei Xian")
-                .withGroup("CS2101", "SWE Module").build();
+                .withGroupName("CS2101").build();
         List<Student> testStudents = Arrays.asList(validStudent1, validStudent2, validStudent3);
         CsBook csBook = getTypicalCsBook();
         csBook.setGroups(testGroups);
@@ -45,7 +45,7 @@ public class ViewGroupCommandTest {
 
     @Test
     public void execute_groupExists_displaysStudentsInGroup() {
-        ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2103T"));
+        StudentGroupNameEqualsPredicate predicate = new StudentGroupNameEqualsPredicate(new GroupName("CS2103T"));
         expectedModel.updateFilteredStudentList(predicate);
         String successMessage = String.format(Messages.MESSAGE_DISPLAY_GROUP_FORMAT, "CS2103T", "SWE Module") + "\n"
                                 + String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
@@ -56,7 +56,7 @@ public class ViewGroupCommandTest {
 
     @Test
     public void execute_groupDoesNotExist_displaysGroupNotFoundMessage() {
-        ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2100"));
+        StudentGroupNameEqualsPredicate predicate = new StudentGroupNameEqualsPredicate(new GroupName("CS2100"));
         expectedModel.updateFilteredStudentList(predicate);
         String feedbackMessage = Messages.MESSAGE_GROUP_NOT_FOUND + "\n"
                 + String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);

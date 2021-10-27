@@ -1,21 +1,25 @@
 package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddAssessmentCommand.MESSAGE_DUPLICATE_ASSESSMENT;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Description;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
-
-
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -30,18 +34,24 @@ class JsonAdaptedStudent {
     private final String name;
     private final String telegramHandle;
     private final String email;
+    private final String note;
     private final String groupName;
+    private final List<JsonAdaptedAssessment> assessments;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("telegramHandle") String telegramHandle,
-                              @JsonProperty("email") String email, @JsonProperty("groupName") String groupName) {
+                              @JsonProperty("email") String email, @JsonProperty("note") String note,
+                              @JsonProperty("groupName") String groupName,
+                              @JsonProperty("assessments") List<JsonAdaptedAssessment> assessments) {
         this.name = name;
         this.telegramHandle = telegramHandle;
         this.email = email;
+        this.note = note;
         this.groupName = groupName;
+        this.assessments = assessments;
     }
 
     /**
@@ -51,7 +61,11 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         telegramHandle = source.getTelegramHandle().value;
         email = source.getEmail().value;
-        groupName = source.getGroup().getGroupName().toString();
+        note = source.getNote().toString();
+        groupName = source.getGroupName().toString();
+        assessments = new ArrayList<>();
+        assessments.addAll(source.getAssessmentList().stream().map(JsonAdaptedAssessment::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -85,33 +99,52 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
+        final Note modelNote = new Note(note);
+
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 GroupName.class.getSimpleName()));
         }
-
+        if (!GroupName.isValidName(groupName)) {
+            throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
+        }
         final GroupName modelGroupName = new GroupName(groupName);
 
-        Group modelGroup = retrieveByName(modelGroupName, groupList);
+        if (!groupExistsInGroupList(modelGroupName, groupList)) {
+            throw new IllegalValueException(MESSAGE_GROUP_NAME_NOT_FOUND);
+        }
 
-        return new Student(modelName, modelTelegramHandle, modelEmail, modelGroup);
+        Student student = new Student(modelName, modelTelegramHandle, modelEmail, modelNote, modelGroupName);
+
+        if (assessments == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Assessment.class.getSimpleName()));
+        }
+        for (JsonAdaptedAssessment jsonAdaptedAssessment : assessments) {
+            Assessment assessment = jsonAdaptedAssessment.toModelType();
+            if (student.hasAssessment(assessment)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ASSESSMENT);
+            }
+            student.addAssessment(assessment);
+        }
+
+        return student;
     }
 
     /**
-     * Returns a {@code Group} from a given group list that matches the given {@code GroupName}.
+     * Returns true if the name of a {@code Group} from a given group list matches the given {@code GroupName}.
      * @return group from the group list that matches the given group name
-     * @throws IllegalValueException if no group that matches the groupName can be found.
      */
-    public Group retrieveByName(GroupName groupName, ObservableList<Group> groupList) throws IllegalValueException {
+    public boolean groupExistsInGroupList(GroupName groupName, ObservableList<Group> groupList) {
         requireNonNull(groupName);
         for (Group group : groupList) {
             if (group.getGroupName().equals(groupName)) {
-                String groupNameString = groupName.toString();
-                String descriptionString = group.getDescription().toString();
-                return new Group(new GroupName(groupNameString),
-                        new Description(descriptionString));
+                return true;
             }
         }
-        throw new IllegalValueException(MESSAGE_GROUP_NAME_NOT_FOUND);
+        return false;
     }
 }

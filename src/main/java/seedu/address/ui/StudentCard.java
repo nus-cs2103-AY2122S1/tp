@@ -1,9 +1,11 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.student.Student;
 
 /**
@@ -30,11 +32,9 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label telegramHandle;
-    @FXML
-    private Label email;
-    @FXML
     private Label groupName;
+    @FXML
+    private VBox studentCard;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -42,11 +42,15 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
-        id.setText(displayedIndex + ". ");
+        ObservableList<String> styleClass = studentCard.getStyleClass();
+        if (student.isWeak()) {
+            styleClass.add("flag");
+        } else {
+            styleClass.add("normal-card");
+        }
+        id.setText(String.format("%d", displayedIndex));
         name.setText(student.getName().fullName);
-        groupName.setText(student.getGroup().getGroupName().toString());
-        telegramHandle.setText(student.getTelegramHandle().value);
-        email.setText(student.getEmail().value);
+        groupName.setText(student.getGroupName().toString());
     }
 
     @Override

@@ -20,7 +20,11 @@ import seedu.address.model.CsBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyCsBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -118,6 +122,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Student getStudentByName(Name studentName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setCsBook(ReadOnlyCsBook csBook) {
             throw new AssertionError("This method should not be called.");
         }
@@ -129,6 +138,21 @@ public class AddCommandTest {
 
         @Override
         public boolean hasStudent(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasStudent(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void changeStudentGroup(Student student, Group newGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student updateStudentNote(Student student, Note note) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -158,6 +182,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasGroup(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateGroupStudent(Group group, Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteGroup(Group target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -168,12 +202,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public Group getGroupByGroupName(GroupName groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Group> getFilteredGroupList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssessment(Student student, Assessment assessment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssessment(Student student, Assessment assessment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssessment(Student student, Assessment assessment) {
             throw new AssertionError("This method should not be called.");
         }
     }

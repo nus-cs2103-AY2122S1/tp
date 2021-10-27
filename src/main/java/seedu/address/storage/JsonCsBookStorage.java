@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.EncryptedJsonUtil;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyCsBook;
 
 /**
@@ -21,10 +22,16 @@ public class JsonCsBookStorage implements CsBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonCsBookStorage.class);
 
+    private static boolean isEncrypted;
+
     private Path filePath;
 
     public JsonCsBookStorage(Path filePath) {
         this.filePath = filePath;
+    }
+
+    public static void setIsEncrypted(boolean state) {
+        isEncrypted = state;
     }
 
     public Path getCsBookFilePath() {
@@ -44,9 +51,17 @@ public class JsonCsBookStorage implements CsBookStorage {
      */
     public Optional<ReadOnlyCsBook> readCsBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
+        Optional<JsonSerializableCsBook> jsonCsBook;
+        try {
+            jsonCsBook = JsonUtil.readJsonFile(
+                    filePath, JsonSerializableCsBook.class);
+            isEncrypted = false;
+        } catch (DataConversionException e) {
+            jsonCsBook = EncryptedJsonUtil.readEncryptedJsonFile(
+                    filePath, JsonSerializableCsBook.class);
+            isEncrypted = true;
+        }
 
-        Optional<JsonSerializableCsBook> jsonCsBook = EncryptedJsonUtil.readEncryptedJsonFile(
-                filePath, JsonSerializableCsBook.class);
         if (!jsonCsBook.isPresent()) {
             return Optional.empty();
         }
@@ -72,9 +87,12 @@ public class JsonCsBookStorage implements CsBookStorage {
     public void saveCsBook(ReadOnlyCsBook csBook, Path filePath) throws IOException {
         requireNonNull(csBook);
         requireNonNull(filePath);
-
         FileUtil.createIfMissing(filePath);
-        EncryptedJsonUtil.saveEncryptedJsonFile(new JsonSerializableCsBook(csBook), filePath);
+        if (isEncrypted) {
+            EncryptedJsonUtil.saveEncryptedJsonFile(new JsonSerializableCsBook(csBook), filePath);
+        } else {
+            JsonUtil.saveJsonFile(new JsonSerializableCsBook(csBook), filePath);
+        }
     }
 
 }

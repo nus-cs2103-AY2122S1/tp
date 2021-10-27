@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
@@ -67,7 +68,7 @@ public class CsBook implements ReadOnlyCsBook {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
-        setGroups(newData.getGroupList()); //TODO Load group data in the future
+        setGroups(newData.getGroupList());
     }
 
     //// student-level operations
@@ -102,7 +103,7 @@ public class CsBook implements ReadOnlyCsBook {
 
     /**
      * Removes {@code key} from this {@code CsBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the CSBook.
      */
     public void removeStudent(Student key) {
         students.remove(key);
@@ -134,7 +135,6 @@ public class CsBook implements ReadOnlyCsBook {
         groups.remove(key);
     }
 
-
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
@@ -145,6 +145,35 @@ public class CsBook implements ReadOnlyCsBook {
         requireNonNull(editedGroup);
 
         groups.setGroup(target, editedGroup);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code assessment} exists in the student's assessment list.
+     */
+    public boolean hasAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        return student.hasAssessment(assessment);
+    }
+
+    /**
+     * Adds an assessment to a student.
+     * The assessment must not already exist in the student's assessment list.
+     */
+    public void addAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        student.addAssessment(assessment);
+    }
+
+    /**
+     * Removes {@code assessment} from the {@code student}.
+     * {@code assessment} must exist in the student's assessment list.
+     */
+    public void deleteAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        student.deleteAssessment(assessment);
     }
 
     //// util methods

@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,9 +34,10 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private GroupListPanel groupListPanel;
-    private ResultDisplay resultDisplay;
+    private AssessmentListPanel assessmentListPanel;
+    private DetailedStudentCard detailedStudentCard;
     private HelpWindow helpWindow;
-
+    private ResultPopup resultPopup;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -43,13 +45,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane listPanelPlaceholder;
+    private StackPane leftPanelPlaceholder;
 
     @FXML
-    private StackPane groupListPanelPlaceholder;
-
-    @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane rightPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -70,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resultPopup = new ResultPopup(this.primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -110,19 +110,11 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    private void showStudents() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-    }
-
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showStudents();
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        showAllStudentsAndGroups();
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCsBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -171,9 +163,24 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleShowGroups() {
+    private void handleViewStudent(Student studentToView) {
+        detailedStudentCard = new DetailedStudentCard(studentToView);
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(detailedStudentCard.getRoot());
+
+        assessmentListPanel = new AssessmentListPanel(studentToView.getAssessmentList());
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(assessmentListPanel.getRoot());
+    }
+
+    private void showAllStudentsAndGroups() {
+        leftPanelPlaceholder.getChildren().clear();
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        leftPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+
+        rightPanelPlaceholder.getChildren().clear();
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        listPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        rightPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
     }
 
     public StudentListPanel getStudentListPanel() {
@@ -193,26 +200,27 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isShowGroups()) {
-                handleShowGroups();
-            } else {
-                showStudents();
-            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+                return commandResult;
             }
+
+            resultPopup.setFeedbackToUser(commandResult.getFeedbackToUser(), false);
 
             if (commandResult.isExit()) {
                 handleExit();
             }
 
+            if (commandResult.isViewStudent()) {
+                handleViewStudent(commandResult.getStudentToView());
+            } else {
+                showAllStudentsAndGroups();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultPopup.setFeedbackToUser(e.getMessage(), true);
             throw e;
         }
     }

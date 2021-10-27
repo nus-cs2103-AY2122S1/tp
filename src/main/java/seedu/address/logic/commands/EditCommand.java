@@ -15,11 +15,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupContainsKeywordsPredicate;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
@@ -82,7 +82,8 @@ public class EditCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent), false, false,
+            editedStudent);
     }
 
     /**
@@ -98,18 +99,15 @@ public class EditCommand extends Command {
         TelegramHandle updatedTelegramHandle = editStudentDescriptor.getTelegramHandle()
             .orElse(studentToEdit.getTelegramHandle());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
-        Group updatedGroup = editStudentDescriptor.getGroup().orElse(studentToEdit.getGroup());
+        Note note = studentToEdit.getNote(); // we don't allow editing of notes from EditCommand;
+        GroupName updatedGroupName = editStudentDescriptor.getGroupName().orElse(studentToEdit.getGroupName());
+        UniqueAssessmentList assessments = studentToEdit.getUniqueAssessmentList();
 
-        if (!model.hasGroup(updatedGroup)) {
+        if (!model.hasGroup(updatedGroupName)) {
             throw new CommandException(MESSAGE_GROUP_NONEXISTENT);
         }
 
-        // Retrieve existing group in model
-        GroupName groupName = updatedGroup.getGroupName();
-        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
-        Group retrievedUpdatedGroup = model.getFilteredGroupList().get(0);
-
-        return new Student(updatedName, updatedTelegramHandle, updatedEmail, retrievedUpdatedGroup);
+        return new Student(updatedName, updatedTelegramHandle, updatedEmail, note, updatedGroupName, assessments);
     }
 
     @Override
@@ -138,7 +136,7 @@ public class EditCommand extends Command {
         private Name name;
         private TelegramHandle telegramHandle;
         private Email email;
-        private Group group;
+        private GroupName groupName;
 
         public EditStudentDescriptor() {
         }
@@ -150,7 +148,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setTelegramHandle(toCopy.telegramHandle);
             setEmail(toCopy.email);
-            setGroup(toCopy.group);
+            setGroupName(toCopy.groupName);
         }
 
         /**
@@ -184,12 +182,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setGroup(Group group) {
-            this.group = group;
+        public void setGroupName(GroupName groupName) {
+            this.groupName = groupName;
         }
 
-        public Optional<Group> getGroup() {
-            return Optional.ofNullable(group);
+        public Optional<GroupName> getGroupName() {
+            return Optional.ofNullable(groupName);
         }
 
 
@@ -211,7 +209,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                 && getTelegramHandle().equals(e.getTelegramHandle())
                 && getEmail().equals(e.getEmail())
-                && getGroup().equals(e.getGroup());
+                && getGroupName().equals(e.getGroupName());
         }
     }
 }

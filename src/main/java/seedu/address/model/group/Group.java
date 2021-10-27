@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.student.Student;
+import seedu.address.model.student.Name;
 
 /**
  * Represents a Group in the CSBook.
@@ -20,7 +20,7 @@ public class Group {
     private final Description description;
 
     // Data fields
-    private final Set<Student> students = new HashSet<>();
+    private final Set<Name> studentNames = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -39,20 +39,20 @@ public class Group {
         return description;
     }
 
-    public Set<Student> getStudents() {
-        return Collections.unmodifiableSet(students);
+    public Set<Name> getStudentNames() {
+        return Collections.unmodifiableSet(studentNames);
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
+    public void addStudentName(Name studentName) {
+        studentNames.add(studentName);
     }
 
-    public void addAllStudents(Collection<Student> students) {
-        this.students.addAll(students);
+    public void addAllStudentNames(Collection<Name> studentNames) {
+        this.studentNames.addAll(studentNames);
     }
 
-    public void removeStudent(Student student) {
-        students.remove(student);
+    public void removeStudentName(Name studentName) {
+        studentNames.remove(studentName);
     }
 
     /**
@@ -72,7 +72,7 @@ public class Group {
      * Returns true if the group has no assigned students
      */
     public boolean hasNoStudents() {
-        return students.isEmpty();
+        return studentNames.isEmpty();
     }
 
     /**
@@ -92,13 +92,13 @@ public class Group {
         Group otherGroup = (Group) other;
         return otherGroup.getGroupName().equals(getGroupName())
                 && getDescription().equals(otherGroup.getDescription())
-                && getStudents().equals(otherGroup.getStudents());
+                && getStudentNames().equals(otherGroup.getStudentNames());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(groupName, students, description);
+        return Objects.hash(groupName, studentNames, description);
     }
 
     @Override
@@ -109,10 +109,10 @@ public class Group {
                 .append(getDescription());
 
 
-        Set<Student> students = getStudents();
-        if (!students.isEmpty()) {
+        Set<Name> studentNames = getStudentNames();
+        if (!studentNames.isEmpty()) {
             builder.append("; Students: ");
-            students.forEach(student -> builder.append(student.getName()).append(", "));
+            studentNames.forEach(student -> builder.append(student).append(", "));
             builder.delete(builder.lastIndexOf(", "), builder.length() - 1); // Remove last delimiter
         }
         return builder.toString();

@@ -11,8 +11,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Description;
-import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -49,9 +47,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editStudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_GROUP_NAME).isPresent()) {
-            editStudentDescriptor.setGroup(
-                    new Group(ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get()),
-                            new Description("placeholder")));
+            editStudentDescriptor.setGroupName(
+                    ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get()));
         }
         if (!editStudentDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
