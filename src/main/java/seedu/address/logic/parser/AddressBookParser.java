@@ -92,7 +92,7 @@ public class AddressBookParser {
             return new ImportCommandParser().parse(arguments);
 
         case ExportCommand.COMMAND_WORD:
-            return new ExportCommand();
+            return new ExportCommandParser().parse(arguments);
 
         case AliasCommand.COMMAND_WORD:
             return new AliasCommandParser(this).parse(arguments);

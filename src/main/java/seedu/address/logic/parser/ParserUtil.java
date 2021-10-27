@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Assessment;
@@ -24,6 +27,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_EMPTY_PATH = "Path should not be empty";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
@@ -174,5 +178,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a given path into a path relative to the app's folder, ending in the right extension.
+     */
+    public static Path parsePath(String path, String extension) throws ParseException {
+        requireAllNonNull(path, extension);
+        if (path.equals("")) {
+            throw new ParseException(MESSAGE_EMPTY_PATH);
+        }
+        if (!path.endsWith(extension)) {
+            path = path + extension;
+        }
+        Path enclosingFolder = FileUtil.getAppEnclosingFolder();
+        return enclosingFolder == null ? Path.of(path) : enclosingFolder.resolve(Path.of(path));
     }
 }
