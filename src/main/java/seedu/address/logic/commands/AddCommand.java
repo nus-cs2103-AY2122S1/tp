@@ -48,8 +48,8 @@ public class AddCommand extends Command {
             + PREFIX_EXPERIENCE + "3 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
-            + PREFIX_INTERVIEW + "2021-10-21, 12:00"
-            + PREFIX_NOTES + "This applicant is a good candidate for the job!";
+            + PREFIX_INTERVIEW + "2021-10-21, 12:00 "
+            + PREFIX_NOTES + "This applicant is a good candidate for the job! ";
 
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
