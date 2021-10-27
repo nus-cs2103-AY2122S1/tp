@@ -30,14 +30,12 @@ import seedu.address.logic.commands.ListEmployeeCommand;
 import seedu.address.logic.commands.ListReservationCommand;
 import seedu.address.logic.commands.ListSupplierCommand;
 import seedu.address.logic.commands.ReserveCommand;
+import seedu.address.logic.commands.ResetCustomerSortCommand;
 import seedu.address.logic.commands.ResetEmployeeSortCommand;
 import seedu.address.logic.commands.ResetSupplierSortCommand;
 import seedu.address.logic.commands.SetTablesCommand;
-import seedu.address.logic.commands.SortEmployeeCommand;
-import seedu.address.logic.commands.ResetCustomerSortCommand;
-import seedu.address.logic.commands.ResetSupplierSortCommand;
-import seedu.address.logic.commands.SetTablesCommand;
 import seedu.address.logic.commands.SortCustomerCommand;
+import seedu.address.logic.commands.SortEmployeeCommand;
 import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
