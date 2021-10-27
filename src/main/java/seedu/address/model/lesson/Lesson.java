@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Lesson in the address book.
@@ -28,6 +29,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     // Data fields
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
+    private final Set<Date> cancelledDates = new HashSet<>();
 
     // Lesson Rates
     private final LessonRates lessonRates;
@@ -40,16 +42,22 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      * @param rates Cost per hour for the lesson.
+     * @param cancelledDates Cancelled dates of the lesson.
      */
-    public Lesson(Date date, Date endDate, TimeRange timeRange,
-                  Subject subject, Set<Homework> homework, LessonRates rates) {
-        requireAllNonNull(date, timeRange, subject, homework);
+    public Lesson(Date date, Date endDate, TimeRange timeRange, Subject subject, Set<Homework> homework,
+                  LessonRates rates, Set<Date> cancelledDates) {
+        requireAllNonNull(date, endDate, timeRange, subject, homework, rates, cancelledDates);
         this.startDate = date;
         this.endDate = endDate;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
         this.lessonRates = rates;
+        if (!isRecurring()) {
+            // non-recurring lesson should have maximum one cancelled date
+            assert cancelledDates.size() <= 1;
+        }
+        this.cancelledDates.addAll(cancelledDates);
     }
 
     public Date getStartDate() {
@@ -101,16 +109,50 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
     /**
-     * Check if the Lesson object is recurring.
+     * Returns an immutable cancelledDates set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Date> getCancelledDates() {
+        return Collections.unmodifiableSet(cancelledDates);
+    }
+
+    /**
+     * Returns a lesson with the same details but updated cancelled dates.
+     *
+     * @param updatedCancelledDates A set of cancelled dates of the lesson.
+     * @return Lesson with updated cancelled dates.
+     */
+    public abstract Lesson updateCancelledDates(Set<Date> updatedCancelledDates);
+
+    /**
+     * Checks if the Lesson object is recurring.
      *
      * @return True if it is a recurring lesson, false otherwise.
      */
     public abstract boolean isRecurring();
 
     /**
-     * Get the date of the lesson to display to the user.
+     * Gets the date of the lesson to display to the user.
      */
     public abstract Date getDisplayDate();
+
+    /**
+     * Gets the local date of the lesson to display to the user.
+     *
+     * @return {@code LocalDate} to be displayed.
+     */
+    public LocalDate getDisplayLocalDate() {
+        return getDisplayDate().getLocalDate();
+    }
+
+    /**
+     * Gets the end {@code LocalDateTime} to be displayed.
+     *
+     * @return End {@code LocalDateTime} to be displayed.
+     */
+    public LocalDateTime getDisplayEndLocalDateTime() {
+        return timeRange.getEnd().atDate(getDisplayLocalDate());
+    }
 
     /**
      * Returns true both lessons clash.
@@ -121,7 +163,22 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isClashing(Lesson otherLesson);
 
     /**
-     * Check if both lessons have the same data fields.
+     * Checks if this lesson occurs on a given date.
+     *
+     * @param date The lesson date to check.
+     * @return True if this lesson occurs on the date.
+     */
+    public abstract boolean hasLessonOnDate(Date date);
+
+    /**
+     * Checks if this lesson is cancelled and does not occur on any date.
+     *
+     * @return True if lesson is cancelled.
+     */
+    public abstract boolean isCancelled();
+
+    /**
+     * Checks if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.
      *
      * @param other The other object to compare.
@@ -138,19 +195,20 @@ public abstract class Lesson implements Comparable<Lesson> {
         }
 
         Lesson otherLesson = (Lesson) other;
+
         return otherLesson.getStartDate().equals(getStartDate())
-            && otherLesson.getEndDate().equals(getEndDate())
-            && otherLesson.getTimeRange().equals(getTimeRange())
-            && otherLesson.getSubject().equals(getSubject())
-            && otherLesson.getHomework().equals(getHomework())
-            && otherLesson.getLessonRates().equals(getLessonRates())
-            && otherLesson.isRecurring() == isRecurring();
+                && otherLesson.getEndDate().equals(getEndDate())
+                && otherLesson.getTimeRange().equals(getTimeRange())
+                && otherLesson.getSubject().equals(getSubject())
+                && otherLesson.getHomework().equals(getHomework())
+                && otherLesson.getLessonRates().equals(getLessonRates())
+                && otherLesson.getCancelledDates().equals(getCancelledDates())
+                && otherLesson.isRecurring() == isRecurring();
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startDate, endDate, timeRange, subject, homework);
+        return Objects.hash(startDate, endDate, timeRange, subject, homework, lessonRates, cancelledDates);
     }
 
     @Override
@@ -177,6 +235,17 @@ public abstract class Lesson implements Comparable<Lesson> {
             builder.append("; Homework: ");
             homework.forEach(x -> builder.append(x + "; "));
         }
+        if (isCancelled()) {
+            builder.append("(Cancelled)");
+            return builder.toString();
+        }
+        String dates = getCancelledDates().stream().sorted()
+                .map(Date::toString).collect(Collectors.joining(","));
+
+        if (!dates.isEmpty()) {
+            builder.append("Cancelled Dates: ")
+                    .append(dates);
+        }
         return builder.toString();
     }
 
@@ -188,6 +257,10 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     @Override
     public int compareTo(Lesson other) {
+        // enforces order as cancelled lessons could be equal
+        if (isCancelled() || other.isCancelled()) {
+            return -1;
+        }
         /*
         Date represents the date of this lesson that is relevant to the comparison.
         i.e. The upcoming date for recurring lessons; or the start date for makeup lessons

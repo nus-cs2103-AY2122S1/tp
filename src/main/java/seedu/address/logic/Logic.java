@@ -3,8 +3,10 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,6 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * API of the Logic component
@@ -36,12 +39,21 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the observable list of tags */
+    ObservableList<Tag> getObservableTagList();
+
+    /** Returns an unmodifiable view of the tag counter. */
+    ObservableMap<Tag, Integer> getTagCounter();
+
     ObservableList<Lesson> getLessonList(Person student);
 
     ObservableList<Lesson> getEmptyLessonList();
 
     /** Returns the CalendarFX calendar */
     Calendar getCalendar();
+
+    /** Returns an unmodifiable view of the list of upcoming lessons within two days. */
+    ObservableList<Entry<Lesson>> getUpcomingLessons();
 
     /**
      * Returns the user prefs' address book file path.

@@ -326,7 +326,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @return A predicate that tests a person's phone number.
      */
     private Predicate<Person> getTagMatchPredicate(String keyword) {
-        return person -> person.getTags().stream().anyMatch(tag -> keyword.equalsIgnoreCase(tag.tagName));
+        return person -> person.getTags().stream().anyMatch(tag -> keyword.equalsIgnoreCase(tag.getTagName()));
     }
 
     /**

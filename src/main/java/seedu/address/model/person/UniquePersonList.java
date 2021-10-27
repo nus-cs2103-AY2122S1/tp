@@ -152,7 +152,6 @@ public class UniquePersonList implements Iterable<Person> {
 
     @Override
     public String toString() {
-        return "Internal list:\n" + internalList
-                + "\nInternal unmodifiable list:\n" + internalUnmodifiableList;
+        return "Internal list:\n" + internalList;
     }
 }

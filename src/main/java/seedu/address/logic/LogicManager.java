@@ -5,9 +5,11 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -19,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.storage.Storage;
 
 /**
@@ -73,6 +76,15 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Tag> getObservableTagList() {
+        return model.getObservableTagList();
+    }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return model.getTagCounter();
+    }
+
     public ObservableList<Lesson> getLessonList(Person student) {
         ObservableList<Lesson> internalList = FXCollections.observableArrayList();
         internalList.addAll(student.getLessons());
@@ -88,6 +100,11 @@ public class LogicManager implements Logic {
     @Override
     public Calendar getCalendar() {
         return model.getCalendar();
+    }
+
+    @Override
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return model.getUpcomingLessons();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 /**
  * Format full help instructions for every command for display.
  */
@@ -19,6 +18,6 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, CommandResult.DisplayType.HELP);
     }
 }
