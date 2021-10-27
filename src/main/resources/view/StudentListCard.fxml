@@ -28,43 +28,43 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <FlowPane fx:id="remarks" />
+      <FlowPane fx:id="remarks"  />
          <HBox>
             <children>
-                <Label maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="cell_small_label" text="🔢 Grade:" />
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="🔢 Grade:" />
                 <Label fx:id="grade" styleClass="cell_small_label" text="\$grade" />
             </children>
          </HBox>
          <HBox>
             <children>
-                <Label maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="cell_small_label" text="☎ Parent's Contact:" />
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="☎ Parent's Contact:" wrapText="true" />
                 <Label fx:id="parentContact" styleClass="cell_small_label" text="\$parentContact" />
             </children>
          </HBox>
          <HBox>
             <children>
-                <Label maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="cell_small_label" text="🏠 Address:" />
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="🏠 Address:" />
                 <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
             </children>
          </HBox>
          <HBox>
             <children>
-                <Label maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="cell_small_label" text="📧 Email Address:" />
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="📧 Email Address:" />
                 <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
             </children>
          </HBox>
          <HBox>
+             <children>
+                 <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="💵 Subscription:" />
+                 <Label fx:id="subscription" styleClass="cell_small_label" text="\$subscription" />
+             </children>
+         </HBox>
+        <HBox>
             <children>
-                <Label maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="cell_small_label" text="🎒 Lesson(s):" />
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="🎒 Lesson(s):" />
                 <Label fx:id="lessons" styleClass="cell_small_label" text="\$lessons" wrapText="true" />
             </children>
-         </HBox>
-         <HBox>
-            <children>
-                <Label maxWidth="125.0" minWidth="125.0" prefWidth="125.0" styleClass="cell_small_label" text="💵 Subscription:" />
-                <Label fx:id="subscription" styleClass="cell_small_label" text="\$subscription" />
-            </children>
-         </HBox>
+        </HBox>
     </VBox>
       <rowConstraints>
          <RowConstraints />
