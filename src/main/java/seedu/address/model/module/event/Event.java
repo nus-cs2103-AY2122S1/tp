@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -73,13 +74,45 @@ public class Event extends Module {
     }
 
     /**
-     * Get of participants of the event.
+     * Get the participants of the event.
      *
      * @return an immutable set of participants, which throws {@code UnsupportedOperationException}
      * if modification is attempted
      */
     public Set<Member> getParticipants() {
         return Collections.unmodifiableSet(participants.keySet());
+    }
+
+    /**
+     * Get the participants who attended the event.
+     *
+     * @return an immutable set of participants, which throws {@code UnsupportedOperationException}
+     * if modification is attempted
+     */
+    public Set<Member> getAttended() {
+        Set<Member> attendees = new HashSet<>();
+        for (Member m : participants.keySet()) {
+            if (this.hasAttended(m)) {
+                attendees.add(m);
+            }
+        }
+        return Collections.unmodifiableSet(attendees);
+    }
+
+    /**
+     * Get the participants who were absent from the event.
+     *
+     * @return an immutable set of participants, which throws {@code UnsupportedOperationException}
+     * if modification is attempted
+     */
+    public Set<Member> getAbsent() {
+        Set<Member> absentees = new HashSet<>();
+        for (Member m : participants.keySet()) {
+            if (!this.hasAttended(m)) {
+                absentees.add(m);
+            }
+        }
+        return Collections.unmodifiableSet(absentees);
     }
 
     /**
