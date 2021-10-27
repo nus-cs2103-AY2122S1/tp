@@ -206,13 +206,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         personAdditionalListPanel = new PersonAdditionalListPanel(logic.getSinglePerson());
         personAdditionalListPanelPlaceholder.getChildren().add(personAdditionalListPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), logic);
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         eventAdditionalListPanel = new EventAdditionalListPanel(logic.getSingleEvent());
@@ -274,10 +274,6 @@ public class MainWindow extends UiPart<Stage> {
         tabPane.getSelectionModel().select(index);
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Set isResidentTab of CommandBox to True.
      */
@@ -286,6 +282,12 @@ public class MainWindow extends UiPart<Stage> {
         if (commandBox != null) {
             this.commandBox.setIsResidentTab(true);
             this.commandBox.refreshSuggestions();
+        }
+        if (personListPanel != null) {
+            this.personListPanel.setIsResidentTab(true);
+        }
+        if (eventListPanel != null) {
+            this.eventListPanel.setIsResidentTab(true);
         }
     }
 
@@ -297,6 +299,12 @@ public class MainWindow extends UiPart<Stage> {
         if (commandBox != null) {
             this.commandBox.setIsResidentTab(false);
             this.commandBox.refreshSuggestions();
+        }
+        if (personListPanel != null) {
+            this.personListPanel.setIsResidentTab(false);
+        }
+        if (eventListPanel != null) {
+            this.eventListPanel.setIsResidentTab(false);
         }
     }
 
