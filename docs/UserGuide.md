@@ -217,7 +217,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 * The `INDEX` refers to the index number shown in the displayed module list.
 * The `INDEX` **must be a positive integer** (1, 2, 3 ...).<br>
   ![IndexExplanation](images/IndexExplanation.png)
-* For example, with the screenshot above, an `INDEX` of 1 would represent the Module CS2030S, and an `INDEX` of 2 would represent the Module CS2040S
+* For example, with the screenshot above, an `INDEX` of 1 would represent the Module CS2030S, and an `INDEX` of 2 would represent the Module CS2040S.
 
 `CODE`
 * Represents the `module`'s code component.
@@ -263,7 +263,7 @@ The following sub-categories will explain the intended purpose for the set of fe
 
 Module features consist of features that allows you to be able to add and remove modules from our database. 
 Do note that these features do not directly affect the modules that are currently stored in your academic plan.
-(we will explain how such features can **indirectly** affect the modules that are currently stored in your academic plan  in the [FAQ](#5-faq) section) <br>
+(we will explain how such features can **indirectly** affect the modules that are currently stored in your academic plan in the [FAQ](#5-faq) section) <br>
 
 Such features include adding a new module into the database, removing a module from the database, as well as finding, editing, and listing modules that are in the database.
 
