@@ -51,6 +51,10 @@ public class Facility {
         return capacity;
     }
 
+    public List<Person> getPersonAllocatedList() {
+        return personAllocatedList;
+    }
+
     public boolean isMaxCapacity() {
         return !capacity.isWithinCapacity(personAllocatedList.size());
     }
@@ -59,6 +63,12 @@ public class Facility {
         personAllocatedList = new ArrayList<>();
     }
 
+
+    /**
+     * Returns the allocated list as a String separated by commas.
+     *
+     * @return the allocated list as a String.
+     */
     public boolean isPersonAllocated(Person person) {
         return personAllocatedList.contains(person);
     }

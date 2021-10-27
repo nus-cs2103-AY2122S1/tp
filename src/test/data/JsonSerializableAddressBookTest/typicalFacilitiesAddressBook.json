@@ -4,41 +4,49 @@
     "name" : "Court 1",
     "location" : "Tampines Hub Field",
     "time" : "1500",
-    "capacity" : "4"
+    "capacity" : "4",
+    "allocationList": [ ]
   }, {
     "name" : "Court 1",
     "location" : "Kent Ridge Sports Hall 5",
     "time" : "1500",
-    "capacity" : "4"
+    "capacity" : "4",
+    "allocationList": [ ]
   }, {
     "name" : "Court 2",
     "location" : "Kent Ridge Sports Hall 5",
     "time" : "1500",
-    "capacity" : "4"
+    "capacity" : "4",
+    "allocationList": [ ]
   }, {
     "name" : "Court 20",
     "location" : "University Town Sports Hall 1",
     "time" : "1600",
-    "capacity" : "4"
+    "capacity" : "4",
+    "allocationList": [ ]
   }, {
     "name" : "Court 21",
     "location" : "University Town Sports Hall 1",
     "time" : "1600",
-    "capacity" : "4"
+    "capacity" : "4",
+    "allocationList": [ ]
   }, {
     "name" : "Court 1",
     "location" : "Kent Ridge Outdoor Tennis Courts",
     "time" : "1900",
-    "capacity" : "5"
+    "capacity" : "5",
+    "allocationList": [ ]
   }, {
     "name" : "Court 10",
     "location" : "Kent Ridge Outdoor Tennis Courts",
     "time" : "1900",
-    "capacity" : "5"
+    "capacity" : "5",
+    "allocationList": [ ]
   }, {
     "name" : "Section A",
     "location" : "UTown Field",
     "time" : "1400",
-    "capacity" : "10"
+    "capacity" : "10",
+    "allocationList": [ ]
   } ]
 }
