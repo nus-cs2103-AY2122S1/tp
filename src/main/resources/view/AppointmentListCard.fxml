@@ -31,8 +31,11 @@
             <TitledPane fx:id="clientsPane" styleClass="titled_pane" expanded="false" maxHeight="400"/>
 
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-            <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-            <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+            <HBox>
+                <Label fx:id="startDate" styleClass="cell_small_label" text="\$date" />
+                <Label styleClass="cell_big_label" text="  ~  " />
+                <Label fx:id="endDate" styleClass="cell_small_label" text="\$time" />
+            </HBox>
         </VBox>
     </GridPane>
 </HBox>
