@@ -135,6 +135,22 @@ public class HelpCommandTest {
     }
 
     @Test
+    public void execute_pinCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(PinCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(PinCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_unpinCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(UnpinCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(UnpinCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
     public void execute_invalidCommand_failure() {
         HelpCommand helpCommand = new HelpCommand(invalidCommand);
         String message = MESSAGE_UNKNOWN_COMMAND + ": " + invalidCommand + "\n" + HelpCommand.HELP_MESSAGE;

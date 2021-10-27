@@ -25,11 +25,14 @@ public class UnpinCommand extends Command {
 
     public static final String COMMAND_WORD = "unpin";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unpins the person identified by the index number "
-            + "used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String COMMAND_DESCRIPTION = "Unpins the person identified by the index number "
+            + "used in the displayed person list.\n";
+
+    public static final String COMMAND_EXAMPLE =
+            "Parameters: INDEX (must be a positive integer)\n"
+                    + "Example: " + COMMAND_WORD + " 1";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_UNPINNED_PERSON_SUCCESS = "Unpinned Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_PINNED_FAILURE = "Person is not pinned!";
