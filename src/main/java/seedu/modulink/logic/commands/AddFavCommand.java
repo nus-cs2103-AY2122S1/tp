@@ -2,6 +2,8 @@ package seedu.modulink.logic.commands;
 
 import static seedu.modulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.modulink.commons.core.Messages;
 import seedu.modulink.model.Model;
@@ -19,6 +21,9 @@ public class AddFavCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person as a favourite. \n "
             + "Parameters: Student_ID \n"
             + "Example: " + COMMAND_WORD + " A1234567X";
+
+    public static final String FAVOURITING_PROFILE_ERROR =
+            "You cannot add your own profile to your Favourites list.";
 
     private final String studentId;
 
@@ -38,12 +43,17 @@ public class AddFavCommand extends Command {
             if (person.getStudentId().toString().equalsIgnoreCase(studentId)) {
                 if (person.getIsFavourite()) {
                     return new CommandResult(String.format(Messages.MESSAGE_PERSON_ALREADY_FAVOURITE));
+                } else if (person.getIsMyProfile()) {
+                    return new CommandResult(FAVOURITING_PROFILE_ERROR);
                 } else {
                     person.setFavouriteTrue();
                     noPersonFound = false;
                 }
             }
         }
+        // included this so the list will be properly updated
+        Predicate<Person> updatePredicate = unused -> false;
+        model.updateFilteredPersonList(updatePredicate);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         if (noPersonFound) {

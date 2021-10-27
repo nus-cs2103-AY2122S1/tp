@@ -28,6 +28,9 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         boolean doesMatchMod = false;
+        if (person.getIsMyProfile()) {
+            return false;
+        }
         for (Mod mod : person.getMods()) {
             for (Mod module : mods) {
                 if (module.modName.equalsIgnoreCase(mod.modName)) {
