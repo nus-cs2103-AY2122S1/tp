@@ -306,7 +306,7 @@ public class FindCommandParserTest {
         assertThrows(ParseException.class, () ->
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidTagPrefixInput, PREFIX_TAG)));
 
-        String invalidDonePrefixInput = " d/Wrong"; // Not "Done" or "Not Done"
+        String invalidDonePrefixInput = " d/Wrong"; // Neither "Done" nor "Not Done"
         assertThrows(ParseException.class, () ->
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidDonePrefixInput, PREFIX_DONE)));
 
