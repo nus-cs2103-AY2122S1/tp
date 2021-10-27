@@ -60,6 +60,31 @@ public class ImageStorage {
         return null;
     }
 
+    /**
+     * Returns a gender icon given a gender.
+     */
+    public static Image getGenderIcon(String gender) {
+
+        String imageFile;
+        switch (gender) {
+        case "M":
+            imageFile = "male.png";
+            break;
+        case "F":
+            imageFile = "female.png";
+            break;
+        default:
+            return null;
+        }
+        try {
+            FileInputStream inputStream = new FileInputStream(IMAGE_RESOURCE_PATH + "gender/" + imageFile);
+            return new Image(inputStream);
+        } catch (FileNotFoundException e) {
+            System.out.println("Image file not found for gender: " + gender);
+        }
+        return null;
+    }
+
 }
 
 

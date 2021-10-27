@@ -60,6 +60,13 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        Image genderImage = ImageStorage.getGenderIcon(person.getGender().gender);
+        if (genderImage != null) {
+            ImageView genderIcon = new ImageView(genderImage);
+            genderIcon.setFitHeight(15);
+            genderIcon.setFitWidth(15);
+            name.setGraphic(genderIcon);
+        }
         phone.setText(person.getPhone().value);
         if (person.getPhone().value.isEmpty()) {
             phone.setManaged(false);
@@ -76,10 +83,13 @@ public class PersonCard extends UiPart<Region> {
         if (person.getTutorialGroup().value.isEmpty()) {
             tutorialGroup.setManaged(false);
         }
+        /*
         gender.setText(person.getGender().gender);
         if (person.getGender().gender.isEmpty()) {
             gender.setManaged(false);
         }
+         */
+
         remark.setText(person.getRemark().value);
         if (person.getRemark().value.isEmpty()) {
             remark.setManaged(false);
