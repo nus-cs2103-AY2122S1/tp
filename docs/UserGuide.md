@@ -19,7 +19,10 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Locating persons by name: `find`](#locating-persons-by-name-find)
   * [Locating persons by tag (case insensitive): `findTag`](#locating-persons-by-tag-findtag)
   * [Locating persons by tag (case sensitive): `findTagC`](#locating-persons-by-tag-findtagC)
+  * [Pinning a person: `pin`](#pinning-a-person--pin)
+  * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
+  * [Deleting multiple person : `deleteM`](#deleting-multiple-people--deleteM)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
 * [FAQ](#faq)
@@ -230,6 +233,38 @@ Notes:
 * `find Friend NUS`
   * returns people tagged with both `Friend` and `NUS`
   * does not return people tagged with `friend` and `nus`
+
+### Pinning a person : `pin`
+
+### Format: 
+* `pin INDEX`
+  
+  Notes:
+* Pins the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Sample Usage:**
+* `list` followed by `pin 2`
+  * pins the 2nd person in the address book.
+* `find Betsy` followed by `pin 1`
+  * pins the 1st person in the results of the `find` command.
+
+### Pinning a person : `unpin`
+
+### Format:
+* `unpin INDEX`
+
+  Notes:
+* Unpins the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+**Sample Usage:**
+* `list` followed by `unpin 2`
+  * unpins the 2nd person in the address book.
+* `find Betsy` followed by `unpin 1`
+  * unpins the 1st person in the results of the `find` command.
 
 ### Deleting a person : `delete`
 
