@@ -28,11 +28,11 @@ If you are a Financial Advisor that can type fast, FAST will get your contact ma
 
 ### Features overview
 Here is an overview of the features FAST offers:
-* Keep track of your client's information (i.e. Name, Phone number, Email address, Home address, and Remarks) in our
+* Keep track of your [client's](#managing-a-client) information (i.e. Name, Phone number, Email address, Home address, and Remarks) in our
   all-in-one app!
-* Record and keep track of your client's appointment dates. Never miss another appointment date again!
-* Tag your clients with the insurance plan they have purchased or are interested in.
-* View built-in analysis of your client base to better understand your portfolio.
+* Record and keep track of your client's [appointment](#appointments) dates. Never miss another appointment date again!
+* Tag your clients with the [insurance plan](#tags) they have purchased or are interested in.
+* View built-in [analysis](#viewing-statistics) of your client base to better understand your portfolio.
 
 ### Purpose of this guide
 This guide aims to help new users to be familiar with FAST. After reading this guide, new users will be more familiar with the different features available in FAST.
@@ -41,9 +41,9 @@ by clicking on the links, to jump to the section where the information which the
 
 --------------------------------------------------------------------------------------------------------------------
 
-## How to use this user guide
+## **How to use this user guide**
 We recommend first time users to read the user guide in the order that is written.
-Throughout the user guide, we include links like [this](#how-to-use-this-user-guide) which will jump to the 
+Throughout the user guide, we include links in blue like [this](#how-to-use-this-user-guide) which will jump to the 
 corresponding section of the user guide. These links allow you to quickly navigate this document. 
 This guide follows the structure as stated [here](#structure-of-this-document).
 
@@ -144,7 +144,7 @@ are all sample data! Here are some commands you can try to see what they do:
     * `delete 3`
     
 3. View all your saved contacts
-    *  **`list`**
+    *  `list`
     
 4. Try searching for a high priority client!
     * `find pr/high`
@@ -163,23 +163,23 @@ are all sample data! Here are some commands you can try to see what they do:
 ## **Features**
 
 ### **Command Format**
-*All* the commands used in FAST application follows these notations style!
+*All* the commands used in FAST application follows these notations!
 
 
 * Words in `UPPER_CASE` are the parameters to be added in by the user.<br>
-  * e.g. for `add n/NAME`, `NAME` is where you would replace it with the actual client's name such as `add n/John Doe`.
+  * e.g. for `add n/NAME`, `NAME` is where you would replace it with the actual client's name such as in `add n/John Doe`.
 
 
 * Items in square brackets are optional.<br>
-  * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  * e.g. if you see `n/NAME [t/TAG]`, this can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 
 * Items with `…`​ after them can be used zero or more times.<br>
-  * e.g. `[t/TAG]…​` can be `t/friend`, `t/friend t/family` or just left empty.
+  * e.g. if you see`[t/TAG]…​`, it can be `t/friend`, `t/friend t/family` or just left empty.
 
 
 * Parameters can be in any order. (This excludes parameters without a prefix.) <br>
-    * e.g. if the command uses this format: `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+    * e.g. if the command uses this format: `n/NAME p/PHONE_NUMBER`, you can also input `p/PHONE_NUMBER n/NAME`.
   
 
 <div markdown="block" class="alert alert-info">
@@ -195,7 +195,7 @@ are all sample data! Here are some commands you can try to see what they do:
 
 * For commands that do not take in any parameter (such as  `list`, `exit` and `clear`), anything written after
   the command will be ignored.<br>
-    * e.g. `help 123` will simply be interpreted as `help`.
+    * e.g. if you input `help 123`, it will simply be interpreted as `help`.
 
 
 * If a command expects a specific set of parameters, and you entered *extra* parameter into the command (with unrecognised),
@@ -212,7 +212,8 @@ Prefix refers to the word symbol used before the parameter.
 <br> <br>
 
 ### **Command Parameters**
-This subsection serves to list out the parameters used in FAST.
+In this subsection, you can see all the parameters used in FAST at one place. These parameters are used for 
+all our features usage.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 To achieve the best possible experience, avoid adding excessively long input to FAST.
@@ -274,20 +275,21 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 
 #### `NAME`
-* Name of your client
+* The name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
 
 
 #### `PHONE`
 * The contact number of your client
 * Should only contain numbers
+  * for numbers with an area/country code e.g. +65 80081355, you can just enter 6580081355
 * Should be at least **3** digit long
 
 
 #### `QUERY`
 * The term used to search for clients in FAST
-* `MORE QUERIES` also follows this definition
-* Can be any value but blank
+* Can be any value
+* Cannot be left blank
 
 
 #### `REMARK`
@@ -304,16 +306,23 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * Refer to [Tags](#tag) to find out more about each tag
 
 #### `TIME`
-* The timing of an appointment with your client
+* The time of an appointment with your client
 * 24-hour format
 * Should be in this format: `HH:mm` 
   * eg. `10:30` represents 10.30am
 * Should be a valid time from 00:00 to 23:59 where:
   * `HH` (hour): should be between 00 and 23
   * `mm` (minute): should be between 00 and 59
+  
+#### `KEYWORD`
+*   The condition to sort your client list
+*   There are currently only 3 conditions available: name, appointment, priority.
+    * name will sort all clients in alphabetical order from A to Z.
+    * appointment will sort all client by appointment date from the earliest date to latest.
+    * priority will sort all client by priority tag from the highest to the lowest priority.
 
-
-#### `Venue`
+  
+#### `VENUE`
 * The location of an appointment with your client
 * Should not be longer than **30** characters long
 <br> <br>
@@ -653,8 +662,6 @@ You can add or delete the tags of a specified client.
 ![tagExample3](images/tagExample3.png)
 
 
-![stats window](images/statsWindow.png)
-
 <br>
 
 ### **Managing your client base**
@@ -681,10 +688,9 @@ You also can use this command quickly sieve through large client lists.
 Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tag).
 
 **Format**: `sort KEYWORD`
-* There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
-* `name` will sort all clients in alphabetical order from A to Z.
-* `appointment` will sort all client by appointment date from the earliest date to latest.
-* `priority` will sort all client by priority tag from the highest to the lowest priority.
+
+**Parameter**
+* [`KEYWORD`](#keyword)
 
 **Example**:
 * `sort priority` Sorts all existing clients by their priority tag, from the highest priority to the lowest priority.
