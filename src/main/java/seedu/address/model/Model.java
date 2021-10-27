@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -192,5 +193,16 @@ public interface Model {
      */
     void updateFilteredTaskList(Member member, Predicate<Task> predicate);
 
+    /**
+     * Updates the filter of the filtered task list of the current selected member
+     * to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Returns the current selected member.
+     */
+    Optional<Member> getCurrentMember();
 }
