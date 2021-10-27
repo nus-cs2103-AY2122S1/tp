@@ -115,7 +115,8 @@ public class EditCommand extends Command {
         Set<Remark> updatedRemarks = editPersonDescriptor.getRemarks().orElse(personToEdit.getRemarks());
 
         return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags, updatedRemarks);
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags,
+                updatedRemarks, personToEdit.getInteractions());
     }
 
     @Override

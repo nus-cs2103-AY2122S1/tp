@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons;
+    private FilteredList<Person> viewedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        viewedPerson = new FilteredList<>(this.addressBook.getPersonList());
+        resetViewedPerson();
     }
 
     public ModelManager() {
@@ -108,7 +111,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -124,9 +126,30 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getViewedPerson() {
+        return viewedPerson;
+    }
+
+    @Override
+    public void resetViewedPerson() {
+        viewedPerson.setPredicate(new Predicate<Person>() {
+            @Override
+            public boolean test(Person p) {
+                return false;
+            }
+        });
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateViewedPerson(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        viewedPerson.setPredicate(predicate);
     }
 
     @Override
