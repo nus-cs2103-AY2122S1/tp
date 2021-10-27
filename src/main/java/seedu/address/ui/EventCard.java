@@ -48,7 +48,15 @@ public class EventCard extends UiPart<Region> {
         date.setText(event.getDate().toString());
         event.getParticipants().stream()
                 .sorted(Comparator.comparing(member -> member.getName().fullName))
-                .forEach(member -> participants.getChildren().add(new Label(member.getName().fullName)));
+                .forEach(member -> {
+                    Label participantLabel = new Label(member.getName().fullName);
+                    if (event.hasAttended(member)) {
+                        participantLabel.setStyle("-fx-background-color: #3f7318");
+                    } else {
+                        participantLabel.setStyle("-fx-background-color: #7c0236");
+                    }
+                    participants.getChildren().add(participantLabel);
+                });
     }
 
     @Override

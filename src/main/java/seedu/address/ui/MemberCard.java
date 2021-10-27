@@ -61,7 +61,15 @@ public class MemberCard extends UiPart<Region> {
                 .forEach(position -> positions.getChildren().add(new Label(position.positionName)));
         member.getTaskList().asUnmodifiableObservableList().stream()
                 .sorted(Comparator.comparing(task -> task.getName().toString()))
-                .forEach(task -> tasks.getChildren().add(new Label(task.getName().toString())));
+                .forEach(task -> {
+                    Label taskLabel = new Label(task.getName().toString());
+                    if (task.isDone()) {
+                        taskLabel.setStyle("-fx-background-color: #3f7318");
+                    } else {
+                        taskLabel.setStyle("-fx-background-color: #7c0236");
+                    }
+                    tasks.getChildren().add(taskLabel);
+                });
     }
 
     @Override
