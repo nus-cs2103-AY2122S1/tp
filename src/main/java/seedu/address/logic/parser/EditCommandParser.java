@@ -3,11 +3,17 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IMPORTANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +24,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -36,9 +43,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_TASK);
+                        PREFIX_DESCRIPTION, PREFIX_TASK_DESCRIPTION, PREFIX_IMPORTANCE, PREFIX_TASK_INDEX,
+                        PREFIX_TASK_DATE, PREFIX_TASK_TIME, PREFIX_TASK_VENUE);
 
         Index index;
+        Index taskIndex;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -59,15 +68,48 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            editPersonDescriptor.setDescription(ParserUtil.parseDescription(
+                    argMultimap.getValue(PREFIX_DESCRIPTION).get()
+            ));
+        }
+        if (argMultimap.getValue(PREFIX_IMPORTANCE).isPresent()) {
+            editPersonDescriptor.setImportance(ParserUtil.parseImportance(
+                    argMultimap.getValue(PREFIX_IMPORTANCE).get()
+            ));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        parseTasksForEdit(argMultimap.getAllValues(PREFIX_TASK)).ifPresent(editPersonDescriptor::setTasks);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editPersonDescriptor.isAnyFieldEdited() && argMultimap.getValue(PREFIX_TASK_INDEX).isEmpty()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        if (argMultimap.getValue(PREFIX_TASK_INDEX).isPresent()) {
+            taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
+        } else {
+            return new EditCommand(index, editPersonDescriptor);
+        }
+
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
+        if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
+            editTaskDescriptor.setTaskName(
+                    ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TASK_DATE).isPresent()) {
+            editTaskDescriptor.setTaskDate(ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TASK_TIME).isPresent()) {
+            editTaskDescriptor.setTaskTime(ParserUtil.parseTaskTime(argMultimap.getValue(PREFIX_TASK_TIME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TASK_VENUE).isPresent()) {
+            editTaskDescriptor.setTaskVenue(ParserUtil.parseTaskVenue(argMultimap.getValue(PREFIX_TASK_VENUE).get()));
+        }
+
+        if (!editPersonDescriptor.isAnyFieldEdited() && !editTaskDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditCommand(index, editPersonDescriptor, taskIndex, editTaskDescriptor);
     }
 
     /**

@@ -71,7 +71,15 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'ContactSh.jar'
+
+    manifest {
+        attributes 'Main-Class': 'seedu.address.Main'
+    }
+}
+
+run {
+    enableAssertions = true;
 }
 
 defaultTasks 'clean', 'test'

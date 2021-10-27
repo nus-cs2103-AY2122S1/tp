@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -38,6 +39,9 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatisticsDisplay statisticsDisplay;
+    private AllTaskListPanel allTaskListPanel;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,8 +53,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private AnchorPane resultDisplayPlaceholder;
 
+    @FXML
+    private AnchorPane statisticsDisplayPlaceholder;
     @FXML
     private StackPane statusbarPlaceholder;
 
@@ -123,8 +129,16 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleMouseClicked(ListView<Person> personListView) {
-        Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
-        logic.displayPersonTaskList(selectedPerson);
+        int selectedIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
+        String inputCommand = ViewTaskListCommand.COMMAND_WORD + " " + selectedIndex;
+
+        try {
+            executeCommand(inputCommand);
+        } catch (ParseException | CommandException e) {
+            logger.warning("HandleMouseClicked caught an exception when not supposed to:\n"
+                    + e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
     }
 
     /** Makes child node of anchor resize together with its parent. */
@@ -149,16 +163,22 @@ public class MainWindow extends UiPart<Stage> {
         setAnchorProperties(personListSplitPanel);
 
         taskListPanel = new TaskListPanel(logic.getDisplayTaskList());
+        allTaskListPanel = new AllTaskListPanel(logic.getFilteredPersonList());
         taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
         setAnchorProperties(taskListSplitPanel);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        setAnchorProperties(resultDisplayPlaceholder);
+
+        statisticsDisplay = new StatisticsDisplay(logic.getStatistics());
+        statisticsDisplayPlaceholder.getChildren().add(statisticsDisplay.getRoot());
+        setAnchorProperties(statisticsDisplayPlaceholder);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand, this::executeInternalCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -202,8 +222,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    @FXML
+    private void handleDisplayAllTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(allTaskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
+    }
+
+    @FXML
+    private void handleDisplaySingleTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
     }
 
     /**
@@ -220,9 +250,40 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
             if (commandResult.isExit()) {
                 handleExit();
+            }
+            if (commandResult.isDisplayAllTaskList()) {
+                handleDisplayAllTaskList();
+            }
+            if (commandResult.isDisplaySingleTaskList()) {
+                handleDisplaySingleTaskList();
+            }
+            if (commandResult.isWriteCommand()) {
+                allTaskListPanel.updateTreeView(logic.getObservablePersonList());
+            }
+
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            logger.info("Invalid command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Executes the command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#executeInternal(String)
+     */
+    private CommandResult executeInternalCommand(String commandText) throws CommandException, ParseException {
+        try {
+            CommandResult commandResult = logic.executeInternal(commandText);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isChangeCommandBox()) {
+                commandBox.setText(commandResult.getAdditionalText());
             }
 
             return commandResult;

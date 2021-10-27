@@ -1,8 +1,12 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +21,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final InternalCommandExecutor internalCommandExecutor;
 
     @FXML
     private TextField commandTextField;
@@ -24,11 +29,36 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, InternalCommandExecutor internalCommandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.internalCommandExecutor = internalCommandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+    }
+
+    /**
+     * Handles the Up and Down arrow pressed event;
+     * @param key The key pressed.
+     */
+    @FXML
+    private void keyPressed(KeyEvent key) {
+        try {
+            if (key.getCode().equals(KeyCode.UP)) {
+                internalCommandExecutor.executeInternal("accesscache -qqUP");
+            } else if (key.getCode().equals(KeyCode.DOWN)) {
+                internalCommandExecutor.executeInternal("accesscache -qqDOWN");
+            } else {
+                //Do Nothing
+            }
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+    /** Method to set text in text field */
+    public void setText(String text) {
+        requireNonNull(text);
+        commandTextField.setText(text);
     }
 
     /**
@@ -80,6 +110,19 @@ public class CommandBox extends UiPart<Region> {
          * @see seedu.address.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
+    }
+
+    /**
+     * Represents a function that can execute commands.
+     */
+    @FunctionalInterface
+    public interface InternalCommandExecutor {
+        /**
+         * Executes the command and returns the result.
+         *
+         * @see seedu.address.logic.Logic#executeInternal(String)
+         */
+        CommandResult executeInternal(String commandText) throws CommandException, ParseException;
     }
 
 }

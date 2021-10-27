@@ -33,18 +33,20 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.task.Task;
 
 
 public class HelpWindow extends AnchorPane {
@@ -106,11 +108,11 @@ public class HelpWindow extends AnchorPane {
             e.printStackTrace();
         }
 
+        fillCommandTable();
         helpMessage.setText(HELP_MESSAGE);
         additionalInfo.setText("");
         userGuideMessage.setText(USER_GUIDE_MESSAGE);
         copyButton.setText("Copy URL");
-        fillCommandTable();
     }
 
     public static HelpWindow getWindow() {
@@ -206,7 +208,8 @@ public class HelpWindow extends AnchorPane {
     private void setupTableData() {
         Person samplePerson = new Person(
                 new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>()
+                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>(), new Description(""),
+                false
         );
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(samplePerson.getName());
@@ -214,14 +217,19 @@ public class HelpWindow extends AnchorPane {
         descriptor.setEmail(samplePerson.getEmail());
         descriptor.setAddress(samplePerson.getAddress());
         descriptor.setTags(samplePerson.getTags());
+        descriptor.setImportance(samplePerson.isImportant());
+
+        EditTaskCommand.EditTaskDescriptor taskDescriptor = new EditTaskCommand.EditTaskDescriptor();
 
         ObservableList<Command> data = FXCollections.observableArrayList(
-                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(null),
+                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(Index.fromZeroBased(0)),
                 new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
                 new ListCommand(), new ExitCommand(), new SortCommand(false),
                 new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
-                new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0)),
-                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), new Task("sample"))
+                new DeleteTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
+                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), taskDescriptor),
+                new DoneCommand(Index.fromZeroBased(0), new ArrayList<>()),
+                new UndoCommand(Index.fromZeroBased(0), new ArrayList<>())
         );
 
         tableView.setItems(data);
@@ -252,6 +260,8 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
         commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
         commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
+        commandTable.put(DoneCommand.COMMAND_WORD, this::handleDoneTask);
+        commandTable.put(UndoCommand.COMMAND_WORD, this::handleUndoTask);
         commandTable.put("close", this::handleCloseWindow);
     }
 
@@ -341,6 +351,18 @@ public class HelpWindow extends AnchorPane {
         additionalInfo.setText("Format: edittask INDEX ti/TASK_INDEX [task/TASKNAME]\n"
                 + "Edits a task attached to the person (at the specified INDEX) according to the TASK_INDEX\n"
                 + "At least one of the optional fields must be provided.");
+    }
+
+    private void handleDoneTask() {
+        additionalInfo.setText("Format: donetask INDEX -ti TASK_INDEX\n"
+                + "Marks task(s) indicated by the TASK_INDEX "
+                + "of person indicated by INDEX as done.");
+    }
+
+    private void handleUndoTask() {
+        additionalInfo.setText("Format: undotask INDEX -ti TASK_INDEX\n"
+                + "Marks task(s) indicated by the TASK_INDEX "
+                + "of person indicated by INDEX as not done.");
     }
 
     private void handleCloseWindow() {

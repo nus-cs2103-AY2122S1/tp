@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.Venue;
 
 public class AddTaskParserTest {
     private AddTaskCommandParser parser = new AddTaskCommandParser();
@@ -19,13 +21,13 @@ public class AddTaskParserTest {
     @Test
     void parse_validArgs_returnsAddTaskCommand() {
         List<Task> taskList1 = new ArrayList<>();
-        taskList1.add(new Task("play"));
+        taskList1.add(new Task(new TaskName("play"), null, null, null));
         List<Task> taskList2 = new ArrayList<>();
-        taskList2.add(new Task("play"));
-        taskList2.add(new Task("sleep"));
-        assertParseSuccess(parser, "1 task/play", new AddTaskCommand(INDEX_FIRST_PERSON,
+        taskList2.add(new Task(new TaskName("play"), null, null, null));
+        taskList2.add(new Task(new TaskName("sleep"), null, null, new Venue("Home")));
+        assertParseSuccess(parser, "1 -tn play", new AddTaskCommand(INDEX_FIRST_PERSON,
                 taskList1));
-        assertParseSuccess(parser, "1 task/play task/sleep", new AddTaskCommand(INDEX_FIRST_PERSON,
+        assertParseSuccess(parser, "1 -tn play -tn sleep -ta Home", new AddTaskCommand(INDEX_FIRST_PERSON,
                 taskList2));
     }
 
