@@ -52,7 +52,7 @@ public class Interview {
      * Returns true if this Interview has passed with respect to the current date and time, and false otherwise.
      */
     public boolean hasInterviewPassed() {
-        assert isValidInterviewTime(this.parseTime);
+        assert isValidInterviewTime(this.parseTime) : "Not a valid interview time";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
         return LocalDate.parse(this.parseTime, formatter).isBefore(LocalDate.now());
