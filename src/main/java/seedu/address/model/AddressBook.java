@@ -93,6 +93,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public void markPerson(Person toMark) {
+        persons.markPerson(toMark);
+    }
+
+    public void unmarkPerson(Person toUnmark) {
+        persons.unmarkPerson(toUnmark);
+    }
+
     //// util methods
 
     @Override
