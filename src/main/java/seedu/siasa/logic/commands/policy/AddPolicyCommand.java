@@ -8,7 +8,9 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
@@ -22,6 +24,7 @@ import seedu.siasa.model.policy.ExpiryDate;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.model.tag.Tag;
 
 
 /**
@@ -53,17 +56,20 @@ public class AddPolicyCommand extends Command {
     private final ExpiryDate expiryDate;
     private final Commission commission;
     private final Index index;
+    private final Set<Tag> tagList = new HashSet<>();
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddPolicyCommand(Title title, Price price, ExpiryDate expiryDate, Commission commission, Index index) {
+    public AddPolicyCommand(Title title, Price price, ExpiryDate expiryDate, Commission commission, Index index,
+                            Set<Tag> tagList) {
         requireAllNonNull(title, price, expiryDate, commission, index);
         this.title = title;
         this.price = price;
         this.expiryDate = expiryDate;
         this.commission = commission;
         this.index = index;
+        this.tagList.addAll(tagList);
     }
 
     @Override
@@ -78,7 +84,7 @@ public class AddPolicyCommand extends Command {
 
         Person owner = lastShownList.get(index.getZeroBased());
 
-        Policy toAdd = new Policy(title, price, expiryDate, commission, owner);
+        Policy toAdd = new Policy(title, price, expiryDate, commission, owner, tagList);
 
         if (model.hasPolicy(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
@@ -95,6 +101,7 @@ public class AddPolicyCommand extends Command {
                 && title.equals(((AddPolicyCommand) other).title)
                 && price.equals(((AddPolicyCommand) other).price)
                 && expiryDate.equals(((AddPolicyCommand) other).expiryDate)
-                && commission.equals(((AddPolicyCommand) other).commission));
+                && commission.equals(((AddPolicyCommand) other).commission)
+                && tagList.equals(((AddPolicyCommand) other).tagList));
     }
 }

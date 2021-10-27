@@ -4,6 +4,7 @@ import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_TAG_TERM_INSURANCE;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class TypicalPolicies {
             .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
             .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
             .withPrice(VALID_POLICY_PRICE_CRITICAL)
+            .withTags(VALID_TAG_TERM_INSURANCE)
             .build();
 
     private TypicalPolicies() {} // prevents instantiation

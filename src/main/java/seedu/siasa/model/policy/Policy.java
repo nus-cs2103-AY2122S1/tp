@@ -2,9 +2,13 @@ package seedu.siasa.model.policy;
 
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.siasa.model.person.Person;
+import seedu.siasa.model.tag.Tag;
 
 /**
  * Represents a Policy in SIASA.
@@ -16,6 +20,7 @@ public class Policy {
     private final Price price;
     private final ExpiryDate expiryDate;
     private final Commission commission;
+    private final Set<Tag> tags = new HashSet<>();
 
     // Policy should always have an owner
     private final Person owner;
@@ -23,13 +28,14 @@ public class Policy {
     /**
      * Every field must be present and not null.
      */
-    public Policy(Title title, Price price, ExpiryDate expiryDate, Commission commission, Person owner) {
-        requireAllNonNull(title, price, expiryDate, commission, owner);
+    public Policy(Title title, Price price, ExpiryDate expiryDate, Commission commission, Person owner, Set<Tag> tags) {
+        requireAllNonNull(title, price, expiryDate, commission, owner, tags);
         this.title = title;
         this.price = price;
         this.expiryDate = expiryDate;
         this.commission = commission;
         this.owner = owner;
+        this.tags.addAll(tags);
     }
 
     public Title getTitle() {
@@ -50,6 +56,14 @@ public class Policy {
 
     public Person getOwner() {
         return owner;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -83,13 +97,14 @@ public class Policy {
                 && otherPolicy.getPrice().equals(getPrice())
                 && otherPolicy.getCommission().equals(getCommission())
                 && otherPolicy.getExpiryDate().equals(getExpiryDate())
-                && otherPolicy.getOwner().isSamePerson(getOwner());
+                && otherPolicy.getOwner().isSamePerson(getOwner())
+                && otherPolicy.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, price, commission, expiryDate);
+        return Objects.hash(title, price, commission, expiryDate, tags);
     }
 
     @Override
@@ -103,6 +118,11 @@ public class Policy {
                 .append("; Expiry Date: ")
                 .append(getExpiryDate());
 
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("; Tags: ");
+            tags.forEach(builder::append);
+        }
         return builder.toString();
     }
 }

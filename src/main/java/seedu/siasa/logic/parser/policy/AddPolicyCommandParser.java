@@ -5,8 +5,10 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.siasa.commons.core.index.Index;
@@ -21,6 +23,7 @@ import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.ExpiryDate;
 import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -39,7 +42,8 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
                         PREFIX_EXPIRY,
                         PREFIX_PRICE,
                         PREFIX_COMMISSION,
-                        PREFIX_CLIENT_INDEX);
+                        PREFIX_CLIENT_INDEX,
+                        PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_TITLE,
@@ -56,8 +60,9 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         ExpiryDate expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY).get());
         Commission commission = ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).get());
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        return new AddPolicyCommand(title, price, expiryDate, commission, index);
+        return new AddPolicyCommand(title, price, expiryDate, commission, index, tagList);
     }
 
     /**

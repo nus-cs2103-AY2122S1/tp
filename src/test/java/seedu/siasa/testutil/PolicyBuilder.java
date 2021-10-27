@@ -3,6 +3,8 @@ package seedu.siasa.testutil;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
@@ -10,6 +12,8 @@ import seedu.siasa.model.policy.ExpiryDate;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.model.tag.Tag;
+import seedu.siasa.model.util.SampleDataUtil;
 
 public class PolicyBuilder {
     public static final int DEFAULT_COMMISSION = 10;
@@ -21,6 +25,7 @@ public class PolicyBuilder {
     private Price price;
     private ExpiryDate expiryDate;
     private Commission commission;
+    private Set<Tag> tags;
 
     private Person owner;
 
@@ -34,6 +39,7 @@ public class PolicyBuilder {
         this.expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
         this.commission = new Commission(DEFAULT_COMMISSION);
         this.owner = owner;
+        this.tags = new HashSet<>();
     }
 
     /**
@@ -46,6 +52,7 @@ public class PolicyBuilder {
         this.expiryDate = policyToCopy.getExpiryDate();
         this.commission = policyToCopy.getCommission();
         this.owner = policyToCopy.getOwner();
+        this.tags = new HashSet<>(policyToCopy.getTags());
     }
 
     /**
@@ -81,6 +88,14 @@ public class PolicyBuilder {
     }
 
     /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Policy} that we are building.
+     */
+    public PolicyBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
      * Sets the {@code Owner} of the {@code Policy} that we are building.
      */
     public PolicyBuilder withOwner(Person owner) {
@@ -89,7 +104,7 @@ public class PolicyBuilder {
     }
 
     public Policy build() {
-        return new Policy(title, price, expiryDate, commission, owner);
+        return new Policy(title, price, expiryDate, commission, owner, tags);
     }
 
 }
