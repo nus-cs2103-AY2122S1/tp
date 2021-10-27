@@ -28,6 +28,7 @@ class AcadLevelTest {
 
         // invalid acad level
         assertFalse(AcadLevel.isValidAcadLevel("abcdefghijklmnop")); // 16 characters
+        assertFalse(AcadLevel.isValidAcadLevel("abcdefghijklmn p")); // 16 characters including space
         assertFalse(AcadLevel.isValidAcadLevel("-")); // non-alphanumeric character
         assertFalse(AcadLevel.isValidAcadLevel(" ")); // single space character
 
