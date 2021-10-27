@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.applicant.Applicant;
@@ -25,9 +26,13 @@ public class ApplicantCard extends UiPart<Region> {
      */
 
     public final Applicant applicant;
-    private final ImageView gitHubLogo = new ImageView("/images/GitHub-logo.png");
-    private final ImageView linkedInLogo = new ImageView("/images/linkedin_logo.png");
+    private String gitHubUrl;
+    private String linkedInUrl;
 
+    @FXML
+    private ImageView gitHubLogo;
+    @FXML
+    private ImageView linkedInLogo;
     @FXML
     private HBox cardPane;
     @FXML
@@ -43,11 +48,11 @@ public class ApplicantCard extends UiPart<Region> {
     @FXML
     private Label application;
     @FXML
+    private AnchorPane hyperlinkAnchorPane;
+    @FXML
     private Hyperlink hyperlinkGitHub;
-    private String gitHubUrl;
     @FXML
     private Hyperlink hyperlinkLinkedIn;
-    private String linkedInUrl;
 
     /**
      * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
@@ -66,13 +71,23 @@ public class ApplicantCard extends UiPart<Region> {
 
     private void initializeHyperlinksForApplicant(Applicant applicant) {
         // Insert the code for initializing the applicant github link and linkedin link here
-        this.hyperlinkGitHub = new Hyperlink();
-        this.hyperlinkGitHub.setGraphic(gitHubLogo);
         this.gitHubUrl = "https://github.com/";
-
-        this.hyperlinkLinkedIn = new Hyperlink();
-        this.hyperlinkLinkedIn.setGraphic(linkedInLogo);
         this.linkedInUrl = "https://www.linkedin.com/feed/";
+        if (!applicant.hasGitHubProfile()) {
+            removeGitHubHyperLinkFromApplicantCard();
+        }
+
+        if (!applicant.hasLinkedInProfile()) {
+            removeLinkedInHyperLinkFromApplicantCard();
+        }
+    }
+
+    private void removeGitHubHyperLinkFromApplicantCard() {
+        hyperlinkAnchorPane.getChildren().removeAll(hyperlinkGitHub, gitHubLogo);
+    }
+
+    private void removeLinkedInHyperLinkFromApplicantCard() {
+        hyperlinkAnchorPane.getChildren().removeAll(hyperlinkLinkedIn, linkedInLogo);
     }
 
     @FXML
