@@ -10,10 +10,13 @@ public class SchedulePeriodChangeCommandParser implements Parser<SchedulePeriodC
     @Override
     public SchedulePeriodChangeCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_DATE);
-        if (argMultimap.getValue(PREFIX_DATE).isEmpty()) {
-            return new SchedulePeriodChangeCommand(ParserUtil.initializePeriodToThisWeek());
+        if (argMultimap.getValue(PREFIX_DATE).isEmpty()
+                || argMultimap.getAllValues(PREFIX_DATE).size() != 1) {
+            throw new ParseException(SchedulePeriodChangeCommand.HELP_MESSAGE);
         }
-        return new SchedulePeriodChangeCommand(ParserUtil.extractPeriodDates(argMultimap));
+
+        return new SchedulePeriodChangeCommand(ParserUtil
+                .getWeekPeriodFromDate(ParserUtil.parseLocalDate(argMultimap.getValue(PREFIX_DATE).get())));
 
     }
 }

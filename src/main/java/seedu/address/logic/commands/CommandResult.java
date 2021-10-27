@@ -52,6 +52,10 @@ public class CommandResult {
     }
 
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}
+     * and {@code Period} to set the schedule to.
+     */
     public CommandResult(String feedbackToUser, Period period) {
         this(feedbackToUser, false, false, false);
         this.changeSchedule = true;

@@ -511,12 +511,16 @@ public class ParserUtil {
                 currentDate.plusDays(diffFromSunday)};
     }
 
+    public static Period getWeekPeriodFromDate(LocalDate date) {
+        LocalDate[] init = getDateArrayOfTheWeek(date);
+        assert init.length == 2;
+        return new Period(init[0], init[1]);
+    }
+
     /**
      * Creates a Period from monday to sunday, where today is within that range.
      */
     public static Period initializePeriodToThisWeek() {
-        LocalDate[] init = initializeLocalDateToThisWeek();
-        assert init.length == 2;
-        return new Period(init[0], init[1]);
+        return getWeekPeriodFromDate(LocalDate.now());
     }
 }
