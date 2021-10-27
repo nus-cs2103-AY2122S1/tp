@@ -151,6 +151,16 @@ public class Person implements HasUniqueId, Attendee,
         return Collections.unmodifiableSet(assignedGroupIds);
     }
 
+    /**
+     * Checks if this person contains the group id.
+     *
+     * @param id to check.
+     * @return true if this person contains the id.
+     */
+    public boolean containsGroupId(UniqueId id) {
+        return assignedGroupIds.contains(id);
+    }
+
     @Override
     public boolean canAssignLesson(Lesson lesson) {
         return !lessonsList.doesLessonOverlap(lesson);

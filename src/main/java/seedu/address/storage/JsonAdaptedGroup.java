@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
-import seedu.address.model.group.GroupName;
 
 /**
  * Jackson-friendly version of {@link Group}.
@@ -84,7 +84,8 @@ public class JsonAdaptedGroup {
         }
 
         if (groupName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GroupName.class.getSimpleName()));
         }
         if (!GroupName.isValidName(groupName)) {
             throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
