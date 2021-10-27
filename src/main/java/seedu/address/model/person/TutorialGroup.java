@@ -46,7 +46,7 @@ public class TutorialGroup {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TutorialGroup // instanceof handles nulls
-                && value.equals(((TutorialGroup) other).value)); // state check
+                && value.toLowerCase().equals(((TutorialGroup) other).value.toLowerCase())); // state check
     }
 
     @Override

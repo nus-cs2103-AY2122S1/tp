@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class StatisticsCommandTest {
         StatisticsCommand statisticsCommand = new StatisticsCommand(tutorialGroup);
 
         model.updateFilteredPersonList(p -> p.getTutorialGroup().equals(tutorialGroup));
-        List<Person> filteredPersonList = model.getFilteredPersonList();
+        List<Person> filteredPersonList = new ArrayList<>(model.getFilteredPersonList());
         model.updateFilteredPersonList(p -> true);
 
         Statistic statistic = new Statistic(filteredPersonList);
