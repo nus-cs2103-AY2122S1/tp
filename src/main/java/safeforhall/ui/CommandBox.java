@@ -93,6 +93,7 @@ public class CommandBox extends UiPart<Region> {
                 } catch (CommandException | ParseException e) {
                     setStyleToIndicateCommandFailure();
                 }
+                event.consume();
             }
         });
     }
@@ -146,26 +147,29 @@ public class CommandBox extends UiPart<Region> {
                 }
                 event.consume();
                 main.setText(newText);
+                main.positionCaret(newText.length());
             }
         });
     }
 
     private void handleInput() {
         getRoot().addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            currentString = main.getText();
-            String[] processString = processMain(currentString.trim());
-            String commandString = processString[0];
-            if (processString.length > 1) {
-                currentParamters = processString[1].trim();
-            } else {
-                currentParamters = "";
-            }
-            String suggestion = mapSuggestion(commandString.trim(), isResidentTab);
-            if (!suggestion.equals("")) {
-                String displayedSuggestion = getDisplaySuggestion(suggestion);
-                suggestions.setText("\n  " + displayedSuggestion);
-            } else {
-                suggestions.setText("");
+            if (event.getCode() != KeyCode.UP && event.getCode() != KeyCode.DOWN) {
+                currentString = main.getText();
+                String[] processString = processMain(currentString.trim());
+                String commandString = processString[0];
+                if (processString.length > 1) {
+                    currentParamters = processString[1].trim();
+                } else {
+                    currentParamters = "";
+                }
+                String suggestion = mapSuggestion(commandString.trim(), isResidentTab);
+                if (!suggestion.equals("")) {
+                    String displayedSuggestion = getDisplaySuggestion(suggestion);
+                    suggestions.setText("\n  " + displayedSuggestion);
+                } else {
+                    suggestions.setText("");
+                }
             }
         });
     }
