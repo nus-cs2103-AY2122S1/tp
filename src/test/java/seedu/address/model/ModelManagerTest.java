@@ -239,8 +239,8 @@ public class ModelManagerTest {
         modelManager.setOrder(new Order());
 
         // Attempt to pass item predicate when in transaction mode
-        assertThrows(ClassCastException.class,
-                () -> modelManager.updateFilteredItemList(DISPLAY_TRANSACTIONS, x -> true)
+        assertThrows(ClassCastException.class, () ->
+            modelManager.updateFilteredItemList(DISPLAY_TRANSACTIONS, x -> true)
         );
     }
 

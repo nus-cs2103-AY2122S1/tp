@@ -3,7 +3,6 @@ package seedu.address.model.order;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalItems.BAGEL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
 import seedu.address.testutil.TypicalItems;
-import seedu.address.ui.ItemCard;
-import seedu.address.ui.TransactionCard;
 
 public class TransactionRecordTest {
     @Test

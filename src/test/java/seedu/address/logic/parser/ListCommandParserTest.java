@@ -6,24 +6,22 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.display.DisplayMode;
 
 public class ListCommandParserTest {
 
-    private ListCommandParser parser = new ListCommandParser();
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE);
+
+    private ListCommandParser parser = new ListCommandParser();
 
     @Test
     public void parse_noArgs_returnsListCommand() {
         // asking help for list command
         ListCommand expectedListCommand = new ListCommand(DisplayMode.DISPLAY_INVENTORY);
 
-        assertParseSuccess(parser,"", expectedListCommand);
+        assertParseSuccess(parser, "", expectedListCommand);
     }
 
     @Test

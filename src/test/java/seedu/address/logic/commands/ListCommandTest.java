@@ -35,13 +35,13 @@ public class ListCommandTest {
     }
 
     @Test
-    public void executeInventory_ListIsNotFiltered_showsSameList() {
+    public void executeInventory_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListCommand(DISPLAY_INVENTORY), model,
                 ListCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
     }
 
     @Test
-    public void executeInventory_ListIsFiltered_showsEverything() {
+    public void executeInventory_listIsFiltered_showsEverything() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
         assertCommandSuccess(new ListCommand(DISPLAY_INVENTORY), model,
                 ListCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
@@ -60,7 +60,8 @@ public class ListCommandTest {
 
     @Test
     public void executeOrder_noUnclosedOrder_failure() {
-        assertCommandFailure(new ListCommand(DISPLAY_OPEN_ORDER), model, ListCommand.MESSAGE_NO_UNCLOSED_ORDER);
+        assertCommandFailure(new ListCommand(DISPLAY_OPEN_ORDER), model,
+                ListCommand.MESSAGE_NO_UNCLOSED_ORDER);
     }
 
     @Test
@@ -70,7 +71,8 @@ public class ListCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
 
-        assertCommandSuccess(new ListCommand(DISPLAY_OPEN_ORDER), model, ListCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
+        assertCommandSuccess(new ListCommand(DISPLAY_OPEN_ORDER), model,
+                ListCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
         assertEquals(model.getFilteredDisplayList(), TypicalOrders.getTypicalOrder().getOrderItems());
     }
 
@@ -82,8 +84,10 @@ public class ListCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
 
-        assertCommandSuccess(new ListCommand(DISPLAY_OPEN_ORDER), model, ListCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
-        assertEquals(model.getFilteredDisplayList(), TypicalOrders.getTypicalOrder().getOrderItems());
+        assertCommandSuccess(new ListCommand(DISPLAY_OPEN_ORDER), model,
+                ListCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
+        assertEquals(model.getFilteredDisplayList(),
+                TypicalOrders.getTypicalOrder().getOrderItems());
     }
 
     @Test
@@ -94,7 +98,8 @@ public class ListCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_TRANSACTIONS, PREDICATE_SHOW_ALL_ITEMS);
 
-        assertCommandSuccess(new ListCommand(DISPLAY_TRANSACTIONS), model, ListCommand.MESSAGE_SUCCESS_TXNS, expectedModel);
+        assertCommandSuccess(new ListCommand(DISPLAY_TRANSACTIONS), model,
+                ListCommand.MESSAGE_SUCCESS_TXNS, expectedModel);
         // TODO: compare transactions with typical transactions
     }
 
@@ -106,7 +111,8 @@ public class ListCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_TRANSACTIONS, PREDICATE_SHOW_ALL_ITEMS);
 
-        assertCommandSuccess(new ListCommand(DISPLAY_TRANSACTIONS), model, ListCommand.MESSAGE_SUCCESS_TXNS, expectedModel);
+        assertCommandSuccess(new ListCommand(DISPLAY_TRANSACTIONS), model,
+                ListCommand.MESSAGE_SUCCESS_TXNS, expectedModel);
         // TODO: compare transactions with typical transactions
     }
 }
