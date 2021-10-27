@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -179,6 +180,11 @@ public class AddCommandTest {
 
         @Override
         public Calendar getCalendar() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public ObservableList<Entry<Lesson>> getUpcomingLessons() {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 

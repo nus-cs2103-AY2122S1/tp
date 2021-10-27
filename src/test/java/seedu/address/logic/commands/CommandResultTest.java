@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandResult.DisplayType.EXIT;
 import static seedu.address.logic.commands.CommandResult.DisplayType.HELP;
+import static seedu.address.logic.commands.CommandResult.DisplayType.REMINDER;
 import static seedu.address.logic.commands.CommandResult.DisplayType.STUDENTS;
+import static seedu.address.logic.commands.CommandResult.DisplayType.TAGS;
 import static seedu.address.logic.commands.CommandResult.DisplayType.WEEK;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +20,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
+
         assertTrue(commandResult.equals(
                 new CommandResult("feedback", STUDENTS)));
 
@@ -36,6 +39,14 @@ public class CommandResultTest {
         // different displayType enum value -> returns false
         assertFalse(commandResult.equals(
                 new CommandResult("feedback", HELP)));
+
+        // different displayType enum value -> returns false
+        assertFalse(commandResult.equals(
+                new CommandResult("feedback", REMINDER)));
+
+        // different displayType enum value -> returns false
+        assertFalse(commandResult.equals(
+                new CommandResult("feedback", TAGS)));
 
         // different displayType enum value -> returns false
         assertFalse(commandResult.equals(
@@ -59,6 +70,14 @@ public class CommandResultTest {
         // different displayType enum value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
                 new CommandResult("feedback", HELP).hashCode());
+
+        // different displayType enum value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(),
+                new CommandResult("feedback", TAGS).hashCode());
+
+        // different displayType enum value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(),
+                new CommandResult("feedback", REMINDER).hashCode());
 
         // different displayType enum value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),

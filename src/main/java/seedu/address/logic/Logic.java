@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -51,6 +52,9 @@ public interface Logic {
 
     /** Returns the CalendarFX calendar */
     Calendar getCalendar();
+
+    /** Returns an unmodifiable view of the list of upcoming lessons within two days. */
+    ObservableList<Entry<Lesson>> getUpcomingLessons();
 
     /**
      * Returns the user prefs' address book file path.

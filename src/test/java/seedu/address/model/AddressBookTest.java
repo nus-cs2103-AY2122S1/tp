@@ -122,6 +122,11 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getUpcomingLessons_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getUpcomingLessons().remove(0));
+    }
+
+    @Test
     public void getTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagList().remove(0));
     }

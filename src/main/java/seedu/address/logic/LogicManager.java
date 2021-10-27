@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -112,6 +113,11 @@ public class LogicManager implements Logic {
     @Override
     public Calendar getCalendar() {
         return model.getCalendar();
+    }
+
+    @Override
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return model.getUpcomingLessons();
     }
 
     @Override

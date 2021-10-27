@@ -25,6 +25,7 @@ import seedu.address.logic.commands.MonthCommand;
 import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -132,6 +133,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

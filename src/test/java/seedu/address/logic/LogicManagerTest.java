@@ -104,6 +104,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getUpcomingLessons_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getUpcomingLessons().remove(0));
+    }
+
+    @Test
     public void getObservableTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getObservableTagList().remove(0));
     }

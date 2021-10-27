@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -196,6 +197,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Calendar getCalendar() {
         // TODO: Make defensive
         return entries.getCalendar();
+    }
+
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return entries.getUpcomingLessons();
     }
 
     @Override
