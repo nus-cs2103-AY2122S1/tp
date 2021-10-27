@@ -75,12 +75,11 @@ public class TagCommand extends Command {
         Set<Tag> oldTags = personToEdit.getTags();
         Predicate<Tag> tagInOldTags = testTag -> oldTags.contains(testTag);
 
-
         Set<Tag> overlapTags = editPersonDescriptor.getTags().orElse(new HashSet<>()).stream()
                 .filter(tagInOldTags).collect(Collectors.toSet());
 
         String successMessage = String.format(MESSAGE_TAG_ADD_SUCCESS, editedPerson.getName(), editedPerson.getTags());
-        String existsMessage = overlapTags.size() > 0
+        String existsMessage = !overlapTags.isEmpty()
                 ? '\n' + String.format(MESSAGE_TAG_ADD_EXISTS, editedPerson.getName(), overlapTags)
                 : "";
         return new CommandResult(successMessage + existsMessage);
