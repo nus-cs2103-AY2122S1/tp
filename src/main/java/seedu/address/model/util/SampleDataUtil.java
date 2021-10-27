@@ -72,9 +72,6 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Client sampleClient : getSampleClients()) {
             sampleAb.addClient(sampleClient);
-            if (sampleClient.hasNextMeeting()) {
-                sampleAb.addNextMeeting(sampleClient.getNextMeeting());
-            }
         }
         sampleAb.setClientCounter("6");
         return sampleAb;

@@ -115,11 +115,6 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<NextMeeting> getNextMeetingsList() {
-            return nextMeetings;
-        }
-
-        @Override
         public String getClientCounter() {
             return clientCounter;
         }
@@ -127,11 +122,6 @@ public class AddressBookTest {
         @Override
         public void setClientCounter(String clientCounter) {
             this.clientCounter = clientCounter;
-        }
-
-        @Override
-        public ObservableList<NextMeeting> getSortedNextMeetingsList() {
-            return nextMeetings;
         }
 
         @Override
