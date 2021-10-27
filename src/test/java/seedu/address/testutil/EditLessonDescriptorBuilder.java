@@ -38,15 +38,11 @@ public class EditLessonDescriptorBuilder {
         descriptor.setTimeRange(lesson.getTimeRange());
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
-<<<<<<< HEAD
-        descriptor.setRate(lesson.getLessonRates());
         descriptor.setCancelDates(lesson.getCancelledDates());
         descriptor.setUncancelDates(new HashSet<>());
         descriptor.setRecurring(lesson.isRecurring());
-=======
         descriptor.setLessonRate(lesson.getLessonRates());
         descriptor.setOutstandingFees(lesson.getOutstandingFees());
->>>>>>> f8359a22ecf9a9ac527a5dc85a5c5953581d9abc
     }
 
     /**

@@ -58,15 +58,6 @@ public class MakeUpLesson extends Lesson {
     }
 
     /**
-     * To check if fees for this lesson should be updated.
-     * If lesson has passed.
-     */
-    @Override
-    public boolean hasEnded() {
-        return getEndDateTime().isBefore(LocalDateTime.now());
-    }
-
-    /**
      * Returns true if this {@code MakeUpLesson} clashes with the given {@code Lesson}.
      *
      * @param otherLesson The other lesson to be compared with.

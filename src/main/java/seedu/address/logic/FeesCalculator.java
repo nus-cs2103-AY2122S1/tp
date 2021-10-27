@@ -3,10 +3,14 @@ package seedu.address.logic;
 import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -102,8 +106,8 @@ public class FeesCalculator implements Calculator {
 
         if (lesson.isRecurring()) {
             OutstandingFees updatedOutstandingFees = lesson.hasStarted()
-                    ? getUpdatedOutstandingFeesRecurring(currentOutstanding, lesson.getDayOfWeek(),
-                    copiedTimeRange, copiedLessonRates, copiedCancelledDates)
+                    ? getUpdatedOutstandingFeesRecurring(currentOutstanding, lesson.getEndDate(),
+                    lesson.getDayOfWeek(), copiedTimeRange, copiedLessonRates, copiedCancelledDates)
                     : new OutstandingFees(lesson.getOutstandingFees().value);
             return new RecurringLesson(copiedDate, copiedEndDate, copiedTimeRange, copiedSubject,
                     copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
@@ -140,10 +144,11 @@ public class FeesCalculator implements Calculator {
      * @param lessonRates Cost per hour for the lesson.
      * @return Updated Outstanding Fees object.
      */
-    public OutstandingFees getUpdatedOutstandingFeesRecurring(OutstandingFees original, DayOfWeek updateDay,
+    public OutstandingFees getUpdatedOutstandingFeesRecurring(OutstandingFees original, Date endDate,
+                                                              DayOfWeek updateDay,
             TimeRange timeRange, LessonRates lessonRates, Set<Date> cancelledDates) {
         // updated fee values
-        int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, timeRange.getEnd(), cancelledDates);
+        int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, endDate.getLocalDate(), timeRange.getEnd(), cancelledDates);
         assert numberOfLessons >= 0;
         float costPerLesson = getCostPerLesson(timeRange, lessonRates);
         float updatedFees = costPerLesson * (float) numberOfLessons + original.getMonetaryValueInFloat();
@@ -157,8 +162,7 @@ public class FeesCalculator implements Calculator {
         return durationInHour * lessonRates.getMonetaryValueInFloat();
     }
 
-    public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalTime endTime, Set<Date> cancelledDates) {
-
+    public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalDate endDate, LocalTime endTime, Set<Date> cancelledDates) {
         int lastUpdatedDay = lastUpdated.getLastUpdatedLocalDate().getDayOfWeek().getValue();
         int currentUpdatedDay = currentDateTime.getDayOfWeek().getValue();
 
@@ -166,53 +170,31 @@ public class FeesCalculator implements Calculator {
             return 0;
         }
 
-        boolean isUpdatedToday = lastUpdated.getLastUpdatedLocalDate().isEqual(currentDateTime.toLocalDate());
-        boolean isUpdatedBeforeLessonOver = lastUpdated.getLastUpdatedLocalTime().isBefore(endTime);
-        boolean isUpdatedAfterLessonOver = lastUpdated.getLastUpdatedLocalTime().isAfter(endTime);
-
-        // if app launched today and lastUpdated is before this lesson ended
-        if (isUpdatedToday && isUpdatedBeforeLessonOver) {
-            return 1;
-        } else if (isUpdatedToday && isUpdatedAfterLessonOver) {
-            // if app launched today and and lastUpdated is after lesson end
-            return 0;
-        }
-
         // Number of Days between last updated and current date excluding these both days
-        long numOfDays = ChronoUnit.DAYS
-                .between(lastUpdated.getLastUpdatedLocalDate()
-                        .plus(1, ChronoUnit.DAYS), currentDateTime.toLocalDate());
-        int lessonCount = (int) Math.floor((int) numOfDays / numberOfDaysInAWeek);
-        // Represents the number of days from nearest update day to current day
-        int remainder = (int) (numOfDays % numberOfDaysInAWeek);
+        LocalDate earlierEnd = Collections.min(Arrays.asList(endDate, currentDateTime.toLocalDate()));
+        LocalDate start = lastUpdated.getLastUpdatedLocalDate().with(TemporalAdjusters.previous(updateDay));
+        LocalDate end = earlierEnd.with(TemporalAdjusters.next(updateDay));
 
-        // Number of days since last updated day
-        int sinceLastUpdateDay = (int) (currentUpdatedDay - updateDay.getValue());
+        // get lessons in between
+        int numLessons = (int) ChronoUnit.WEEKS.between(start, end.plusDays(1)) - 1;
 
-        if (sinceLastUpdateDay < 0) {
-            sinceLastUpdateDay += numberOfDaysInAWeek;
+        if (lastUpdatedDay == updateDay.getValue() && lastUpdated.getLastUpdatedLocalTime().isAfter(endTime)) {
+            numLessons -= 1;
         }
 
-        if (remainder >= sinceLastUpdateDay) { // if number of days from nearest update day is
-            lessonCount += 1;
-        }
-
-        // if the lesson on the same day as the last updated happens before last update. i.e. not recorded
-        if (lastUpdatedDay == updateDay.getValue() && lastUpdated.getLastUpdatedLocalTime().isBefore(endTime)) {
-            lessonCount += 1;
-        }
-
-        if (currentUpdatedDay == updateDay.getValue() && currentDateTime.toLocalTime().isAfter(endTime)) {
-            lessonCount += 1;
+        if (earlierEnd.equals(currentDateTime.toLocalDate())
+                && currentUpdatedDay == updateDay.getValue()
+                && currentDateTime.toLocalTime().isBefore(endTime)) {
+            numLessons -= 1;
         }
 
         for (Date cancelledDate : cancelledDates) {
             if (cancelledDate.isDateBetween(lastUpdated.getLastUpdatedLocalDate(), currentDateTime.toLocalDate())) {
-                lessonCount -= 1;
+                numLessons -= 1;
             }
         }
 
-        return lessonCount;
+        return numLessons;
     }
 
     /**

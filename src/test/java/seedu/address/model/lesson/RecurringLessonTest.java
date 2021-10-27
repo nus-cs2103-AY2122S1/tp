@@ -89,8 +89,8 @@ class RecurringLessonTest {
         dates.add(cancelled);
         Lesson lesson1 = new MakeUpLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
             new TimeRange(VALID_TIME_RANGE),
-            new Subject(VALID_SUBJECT), new OutstandingFees(VALID_OUTSTANDING_FEES), new HashSet<>(),
-            new LessonRates(VALID_LESSON_RATES), dates);
+            new Subject(VALID_SUBJECT), new HashSet<>(),
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES), dates);
 
         Date cancelled2 = new Date(LocalDate.now().format(Date.FORMATTER));
         Set<Date> dates2 = new HashSet<>();

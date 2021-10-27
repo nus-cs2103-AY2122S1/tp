@@ -39,10 +39,11 @@ class FeesCalculatorTest {
         // before lesson
         Lesson sameDayToBeUpdated = new LessonBuilder().withDate("27 OCT 2021").buildRecurring();
         expected = new LessonBuilder().withDate("27 OCT 2021").withOutstandingFees("150").buildRecurring();
-        assertEquals(sameDayToBeUpdated, feesCalculator.updateLessonOutstandingFeesField(sameDayToBeUpdated));
+        assertEquals(expected, feesCalculator.updateLessonOutstandingFeesField(sameDayToBeUpdated));
+
         // after lesson
         Lesson sameDayNotToBeUpdated = new LessonBuilder().withDate("27 OCT 2021").buildRecurring();
-        assertEquals(sameDayNotToBeUpdated, feesCalculator.updateLessonOutstandingFeesField(sameDayNotToBeUpdated));
+        assertEquals(expected, feesCalculator.updateLessonOutstandingFeesField(sameDayNotToBeUpdated));
 
         // lesson ends right after last updated, should update
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-23T14:59"),
@@ -66,6 +67,24 @@ class FeesCalculatorTest {
                 .buildRecurring();
         assertEquals(withCancelledDateBetween,
                 feesCalculator.updateLessonOutstandingFeesField(withCancelledDateBetween));
+
+        // With end date between last updated and current date
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-12T12:00"),
+                LocalDateTime.parse("2021-10-28T12:00"));
+
+        Lesson withEndDateBetween = new LessonBuilder()
+                .withDate("13 OCT 2021")
+                .withEndDate("26 OCT 2021")
+                .buildRecurring();
+
+        expected = new LessonBuilder()
+                .withDate("13 OCT 2021")
+                .withEndDate("26 OCT 2021")
+                .withOutstandingFees("200")
+                .buildRecurring();
+
+        assertEquals(expected,
+            feesCalculator.updateLessonOutstandingFeesField(withEndDateBetween));
     }
 
     @Test

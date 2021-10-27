@@ -64,8 +64,8 @@ public class RecurringLesson extends Lesson {
     @Override
     public Date getDisplayDate() {
         Date updatedDate = getStartDate().updateDate(getCancelledDates());
-        return getEndDate().compareTo(updatedDate) < 0 // end date earlier than updated date
-                ? getEndDate().getPreviousDate(updatedDate.getDayOfWeek())
+        return getEndDate().isBefore(updatedDate) // end date earlier than updated date
+                ? getEndDate().getPreviousDate(getDayOfWeek())
                 : updatedDate;
     }
 

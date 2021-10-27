@@ -153,7 +153,7 @@ public class LessonBuilder {
      * @return {@code RecurringLesson} containing the information given.
      */
     public Lesson buildRecurring() {
-        return new RecurringLesson(date, Date.MAX_DATE, timeRange,
+        return new RecurringLesson(date, endDate, timeRange,
                 subject, homeworkSet, lessonRates, outstandingFees, cancelledDatesSet);
     }
 
