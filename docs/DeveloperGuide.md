@@ -1,10 +1,8 @@
 ---
-layout: page
-title: Developer Guide
+layout: page title: Developer Guide
 ---
 
-* Table of Contents 
-{:toc}
+* Table of Contents {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -125,7 +123,7 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/commands/DeleteCommand/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -215,20 +213,20 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
 initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![UndoRedoState0](images/commands/UndoCommand/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command
 calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
 to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![UndoRedoState1](images/commands/UndoCommand/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new student. The `add` command also
 calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
 the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![UndoRedoState2](images/commands/UndoCommand/UndoRedoState2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
@@ -238,7 +236,7 @@ Step 4. The user now decides that adding the student was a mistake, and decides 
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![UndoRedoState3](images/commands/UndoCommand/UndoRedoState3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -247,7 +245,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![UndoSequenceDiagram](images/commands/UndoCommand/UndoSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -264,14 +262,14 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
 Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+![UndoRedoState4](images/commands/UndoCommand/UndoRedoState4.png)
 
 Step 6. The user executes `purge`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
 pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
 purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
 desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+![UndoRedoState5](images/commands/UndoCommand/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -313,7 +311,7 @@ Step 2. The user executes `filter -cid B01` to display all the students whose Cl
 
 The following UML sequence diagram shows how the filter command works.
 
-![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+![FilterSequenceDiagram](images/commands/FilterCommand/FilterSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StudentDetailContainsPredicate`
 , `QueryStudentDescriptor` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML,
 the lifeline reaches the end of diagram.>
@@ -403,11 +401,11 @@ that the index is invalid. This is triggered by `CommandException`, which is thr
 
 The following sequence diagram shows how the show command works:
 
-![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+![ShowSequenceDiagram](images/commands/ShowCommand/ShowSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![ShowActivityDiagram](images/ShowActivityDiagram.png)
+![ShowActivityDiagram](images/commands/ShowCommand/ShowActivityDiagram.png)
 
 #### Design considerations:
 
@@ -442,11 +440,11 @@ related to the UI. In addition, the following classes are utilised:
 
 The following sequence diagram shows how the `download` command works:
 
-![DownloadSequenceDiagram](images/DownloadSequenceDiagram.png)
+![DownloadSequenceDiagram](images/commands/DownloadCommand/DownloadSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes the download command:
 
-![DownloadActivityDiagram](images/DownloadActivityDiagram.png)
+![DownloadActivityDiagram](images/commands/DownloadCommand/DownloadActivityDiagram.png)
 
 #### Design Considerations
 

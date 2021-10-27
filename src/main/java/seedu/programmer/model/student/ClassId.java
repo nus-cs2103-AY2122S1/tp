@@ -41,6 +41,18 @@ public class ClassId {
         return classId;
     }
 
+    /**
+     * Gets the class number from the ClassId.
+     *
+     * @return the class number
+     */
+    public int getClassNum() {
+        int startIdx = 1;
+        char firstDigit = classId.charAt(startIdx);
+        String classNum = firstDigit == '0' ? classId.substring(startIdx + 1) : classId.substring(startIdx);
+        return Integer.parseInt(classNum);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
