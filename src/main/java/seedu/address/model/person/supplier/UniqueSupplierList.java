@@ -127,10 +127,6 @@ public class UniqueSupplierList implements Iterable<Supplier> {
         supplierComparator = comparator;
     }
 
-    public Comparator<Supplier> getComparator() {
-        return supplierComparator;
-    }
-
     @Override
     public Iterator<Supplier> iterator() {
         return internalList.iterator();

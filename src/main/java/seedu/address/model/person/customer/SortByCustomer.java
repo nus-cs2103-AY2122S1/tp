@@ -1,4 +1,4 @@
-package seedu.address.model.person.supplier;
+package seedu.address.model.person.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -8,34 +8,32 @@ import java.util.Comparator;
 /**
  * Represents the types of sorting methods we can apply to suppliers in the address book.
  */
-public class SortBySupplier {
+public class SortByCustomer {
 
     private static final String NAME = "n";
     private static final String PHONE = "p";
     private static final String ADDRESS = "a";
     private static final String EMAIL = "e";
-    private static final String SUPPLY_TYPE = "st";
-    private static final String DELIVERY_DETAILS = "dd";
+    private static final String LOYALTY_POINTS = "lp";
 
     private static final String NAME_DESC = "name";
     private static final String PHONE_DESC = "phone";
     private static final String ADDRESS_DESC = "address";
     private static final String EMAIL_DESC = "email";
-    private static final String SUPPLY_TYPE_DESC = "supply type";
-    private static final String DELIVERY_DETAILS_DESC = "delivery details";
+    private static final String LOYALTY_POINTS_DESC = "loyalty points";
 
-    public static final String MESSAGE_CONSTRAINTS = "Sort by can only be 1 of the supplier fields: "
-            + NAME_DESC + "/" + PHONE_DESC + "/" + ADDRESS_DESC + "/" + EMAIL_DESC + "/" + SUPPLY_TYPE_DESC + "/"
-            + DELIVERY_DETAILS_DESC + " and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Sort by can only be 1 of the customer fields: "
+            + NAME_DESC + "/" + PHONE_DESC + "/" + ADDRESS_DESC + "/" + EMAIL_DESC + "/" + LOYALTY_POINTS_DESC + "/"
+            + " and it should not be blank";
 
     private final String sortBy;
 
     /**
-     * Constructs an {@code SortBySupplier}.
+     * Constructs an {@code SortByCustomer}.
      *
      * @param sortBy A valid sorting type.
      */
-    public SortBySupplier(String sortBy) {
+    public SortByCustomer(String sortBy) {
         requireNonNull(sortBy);
         checkArgument(isValidSortingOrder(sortBy), MESSAGE_CONSTRAINTS);
         this.sortBy = sortBy;
@@ -50,8 +48,7 @@ public class SortBySupplier {
         case ADDRESS:
         case EMAIL:
         case PHONE:
-        case SUPPLY_TYPE:
-        case DELIVERY_DETAILS:
+        case LOYALTY_POINTS:
             return true;
         default:
             return false;
@@ -61,22 +58,20 @@ public class SortBySupplier {
     /**
      * Returns a comparator to sort the supplier list based on the sorting type and order given.
      * @param isAscending A boolean representing if sorting order is ascending.
-     * @return A comparator to sort the supplier list.
+     * @return A comparator to sort the customer list.
      */
-    public Comparator<Supplier> selectComparator(boolean isAscending) {
+    public Comparator<Customer> selectComparator(boolean isAscending) {
         switch (sortBy) {
         case ADDRESS:
-            return SupplierComparator.getAddressComparator(isAscending);
+            return CustomerComparator.getAddressComparator(isAscending);
         case EMAIL:
-            return SupplierComparator.getEmailComparator(isAscending);
+            return CustomerComparator.getEmailComparator(isAscending);
         case PHONE:
-            return SupplierComparator.getPhoneComparator(isAscending);
-        case SUPPLY_TYPE:
-            return SupplierComparator.getSupplyTypeComparator(isAscending);
-        case DELIVERY_DETAILS:
-            return SupplierComparator.getDeliveryDetailsComparator(isAscending);
+            return CustomerComparator.getPhoneComparator(isAscending);
+        case LOYALTY_POINTS:
+            return CustomerComparator.getLoyaltyPointsComparator(isAscending);
         default:
-            return SupplierComparator.getNameComparator(isAscending);
+            return CustomerComparator.getNameComparator(isAscending);
         }
     }
 
@@ -89,10 +84,8 @@ public class SortBySupplier {
             return EMAIL_DESC;
         case PHONE:
             return PHONE_DESC;
-        case SUPPLY_TYPE:
-            return SUPPLY_TYPE_DESC;
-        case DELIVERY_DETAILS:
-            return DELIVERY_DETAILS_DESC;
+        case LOYALTY_POINTS:
+            return LOYALTY_POINTS_DESC;
         default:
             return NAME_DESC;
         }
@@ -101,8 +94,8 @@ public class SortBySupplier {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SortBySupplier // instanceof handles nulls
-                && sortBy.equals(((SortBySupplier) other).sortBy)); // state check
+                || (other instanceof SortByCustomer // instanceof handles nulls
+                && sortBy.equals(((SortByCustomer) other).sortBy)); // state check
     }
 
     @Override

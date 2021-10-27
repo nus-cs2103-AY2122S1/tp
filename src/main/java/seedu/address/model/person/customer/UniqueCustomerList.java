@@ -3,6 +3,7 @@ package seedu.address.model.person.customer;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
     private final ObservableList<Customer> internalList = FXCollections.observableArrayList();
     private final ObservableList<Customer> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private Comparator<Customer> customerComparator = CustomerComparator.getDefaultComparator();
 
     /**
      * Returns true if the list contains an equivalent customer as the given argument.
@@ -56,6 +58,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
             throw new DuplicateCustomerException();
         }
         internalList.add(toAdd);
+        internalList.sort(customerComparator);
     }
 
     /**
@@ -77,6 +80,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
         }
 
         internalList.set(index, editedCustomer);
+        internalList.sort(customerComparator);
     }
 
     /**
@@ -88,6 +92,7 @@ public class UniqueCustomerList implements Iterable<Customer> {
         if (!internalList.remove(toRemove)) {
             throw new CustomerNotFoundException();
         }
+        internalList.sort(customerComparator);
     }
 
     public void setCustomers(UniqueCustomerList replacement) {
@@ -106,6 +111,24 @@ public class UniqueCustomerList implements Iterable<Customer> {
         }
 
         internalList.setAll(customers);
+    }
+
+    /**
+     * Resets the supplier list to its default sorting state.
+     */
+    public void resetCustomerListToDefaultSortState() {
+        internalList.sort(CustomerComparator.getDefaultComparator());
+    }
+
+    /**
+     * Returns the backing list as a sortable {@code ObservableList}.
+     */
+    public ObservableList<Customer> asSortableObservableList() {
+        return internalList;
+    }
+
+    public void setComparator(Comparator<Customer> comparator) {
+        customerComparator = comparator;
     }
 
     /**
