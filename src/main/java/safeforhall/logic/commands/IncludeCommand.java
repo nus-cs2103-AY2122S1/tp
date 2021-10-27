@@ -29,7 +29,7 @@ public class IncludeCommand extends Command {
             + "1 "
             + CliSyntax.PREFIX_RESIDENTS + "A101, A102, A103";
 
-    public static final String MESSAGE_SUCCESS = "Residents (%s) added to event %s";
+    public static final String MESSAGE_SUCCESS = "%s added to event %s";
     private final Index index;
     private final ResidentList residentList;
 
@@ -81,13 +81,15 @@ public class IncludeCommand extends Command {
         ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
 
         checkForDuplicates(toAdd, currentResidents);
+        String combinedDisplayString = event.getCombinedDisplayString(toAdd);
+        String combinedStorageString = event.getCombinedStorageString(toAdd);
 
-        String newResidents = event.addResidentsToEvent(currentResidents, toAdd);
-        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
-                event.getVenue(), event.getCapacity(), new ResidentList(newResidents));
+        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(), 
+                                      event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString, 
+                                                                                              combinedStorageString));
         model.setEvent(event, editedEvent);
-
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+
         String resultMsg = String.format(MESSAGE_SUCCESS, toAdd.stream()
                 .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(), event.getEventName());
         return new CommandResult(resultMsg);

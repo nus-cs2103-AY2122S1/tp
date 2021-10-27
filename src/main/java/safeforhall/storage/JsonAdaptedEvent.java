@@ -53,7 +53,7 @@ class JsonAdaptedEvent {
         eventTime = source.getEventTime().eventTime;
         venue = source.getVenue().venue;
         capacity = source.getCapacity().capacity;
-        residents = source.getResidents().getResidents();
+        residents = source.getResidents().getResidentsStorage();
     }
 
     /**
@@ -121,10 +121,23 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ResidentList.class.getSimpleName()));
         }
-        if (!ResidentList.isValidResidentList(residents)) {
+
+        String[] persons = residents.split("\\s*,\\s*");
+        StringBuilder stringBuilder = new StringBuilder("");
+        int count = 0;
+        for (String person : persons) {
+            String[] information = person.split("\\s*;\\s*");
+            if (count == 0) {
+                stringBuilder.append(information[0]);
+            } else {
+                stringBuilder.append(", ").append(information[0]);
+            }
+            count++;
+        }
+        if (!ResidentList.isValidResidentStorage(residents)) {
             throw new IllegalValueException(ResidentList.MESSAGE_CONSTRAINTS);
         }
-        final ResidentList modelResidentList = new ResidentList(residents);
+        final ResidentList modelResidentList = new ResidentList(stringBuilder.toString(), residents);
 
         return new Event(modelEventName, modelEventDate, modelEventTime,
                 modelVenue, modelCapacity, modelResidentList);
