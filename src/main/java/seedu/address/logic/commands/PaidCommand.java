@@ -33,7 +33,7 @@ import seedu.address.model.util.PersonUtil;
  */
 public class PaidCommand extends UndoableCommand {
 
-    public static final String COMMAND_ACTION = "Pay Lesson's Outstanding Fees";
+    public static final String COMMAND_ACTION = "Pay Lesson Fees";
 
     public static final String COMMAND_WORD = "paid";
 

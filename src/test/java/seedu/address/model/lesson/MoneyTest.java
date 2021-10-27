@@ -24,6 +24,7 @@ class MoneyTest {
         assertThrows(NullPointerException.class, () -> Money.isValidMonetaryField(null));
 
         // invalid fees
+        assertFalse(Money.isValidMonetaryField("")); // empty string
         assertFalse(Money.isValidMonetaryField(" ")); // spaces only
         assertFalse(Money.isValidMonetaryField(".12")); // no dollars before decimal
         assertFalse(Money.isValidMonetaryField("50.")); // no cents after decimal
@@ -39,7 +40,6 @@ class MoneyTest {
         assertFalse(Money.isValidMonetaryField("-100.00")); // negative value
 
         // valid fees
-        assertTrue(Money.isValidMonetaryField("")); // empty string
         assertTrue(Money.isValidMonetaryField("0")); // zero dollars
         assertTrue(Money.isValidMonetaryField("0.0")); // zero dollars and zero cents
         assertTrue(Money.isValidMonetaryField("123")); // only dollars

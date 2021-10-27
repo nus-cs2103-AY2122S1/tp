@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.testutil.LessonBuilder;
 
 class FeesCalculatorTest {
@@ -66,19 +64,29 @@ class FeesCalculatorTest {
                 .withDate("16 OCT 2021")
                 .withCancelledDatesSet(new Date("23 OCT 2021"))
                 .buildRecurring();
-        assertEquals(withCancelledDateBetween, feesCalculator.updateLessonOutstandingFeesField(withCancelledDateBetween));
+        assertEquals(withCancelledDateBetween,
+                feesCalculator.updateLessonOutstandingFeesField(withCancelledDateBetween));
     }
 
     @Test
     public void updateLessonOutstandingFeesField_makeUpLesson() {
-        //MakeUp Lesson in the past do not update
+        // MakeUp Lesson in the past do not update
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-23T12:00"), LocalDateTime.now());
         Lesson pastMakeUpLesson = new LessonBuilder().withDate("12 OCT 2021").build();
         assertEquals(pastMakeUpLesson, feesCalculator.updateLessonOutstandingFeesField(pastMakeUpLesson));
+
+        // MakeUp Lesson between last update and current date, should update
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-25T12:20"),
+                LocalDateTime.parse("2021-10-27T22:10"));
+        Lesson lessonBetweenLastUpdateAndToday = new LessonBuilder().withDate("26 OCT 2021").build();
+        Lesson expectedLessonBetweenUpdateAndToday = new LessonBuilder().withDate("26 OCT 2021")
+                .withOutstandingFees("150").build();
+        assertEquals(expectedLessonBetweenUpdateAndToday,
+                feesCalculator.updateLessonOutstandingFeesField(lessonBetweenLastUpdateAndToday));
     }
 
     @Test
     public void getUpdateOutstandingFees_success() {
-        OutstandingFees outstandingFees = new OutstandingFees(VALID_OUTSTANDING_FEES); // start out at 100.00
+
     }
 }

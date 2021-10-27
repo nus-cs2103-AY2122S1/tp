@@ -3,7 +3,6 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.DecimalFormat;
 
 /**
  * Represents the amount of money and money-related fields in the address book.
@@ -19,7 +18,6 @@ public class Money {
                     + "2. Money-related fields should not start or end with a decimal point"
                     + " and should have at most two decimal places.";
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
-    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
     public final String value;
 
     /**
@@ -65,7 +63,7 @@ public class Money {
      * Returns true if a given string is a valid format for monetary fields.
      */
     public static boolean isValidMonetaryField(String test) {
-        return test.isEmpty() || test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     public float getMonetaryValueInFloat() {

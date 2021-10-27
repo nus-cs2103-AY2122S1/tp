@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -61,7 +62,7 @@ public class LessonDeleteCommand extends UndoableCommand {
 
         personBeforeLessonDelete = CommandUtil.getPerson(lastShownList, index);
 
-        List<Lesson> lessonList = personBeforeLessonDelete.getLessons().stream().collect(Collectors.toList());
+        List<Lesson> lessonList = new ArrayList<>(personBeforeLessonDelete.getLessons());
         Lesson toRemove = CommandUtil.getLesson(lessonList, lessonIndex);
 
         Set<Lesson> updatedLessons = createUpdatedLessons(lessonList, toRemove);

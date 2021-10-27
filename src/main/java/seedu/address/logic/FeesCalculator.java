@@ -1,12 +1,11 @@
 package seedu.address.logic;
 
+import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +36,7 @@ public class FeesCalculator implements Calculator {
     public static final String MESSAGE_PAY_TOO_MUCH = "Payment amount exceeds current "
             + "outstanding fees. Invalid transaction.";
 
+    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
     private static final float numberOfMinutesInAnHour = 60.00F;
     private static final float numberOfDaysInAWeek = 7;
     private final LocalDateTime currentDateTime;
@@ -99,17 +99,35 @@ public class FeesCalculator implements Calculator {
 
         OutstandingFees currentOutstanding = lesson.getOutstandingFees();
 
-        // update outstanding fees after calculation
-        OutstandingFees updatedOutstandingFees = lesson.hasStarted() && !lesson.hasEnded()
-                ? getUpdatedOutstandingFees(currentOutstanding, lesson.getDayOfWeek(),
-                        copiedTimeRange, copiedLessonRates, copiedCancelledDates)
-                : new OutstandingFees(lesson.getOutstandingFees().value);
+        if (lesson.isRecurring()) {
+            OutstandingFees updatedOutstandingFees = lesson.hasStarted()
+                    ? getUpdatedOutstandingFeesRecurring(currentOutstanding, lesson.getDayOfWeek(),
+                    copiedTimeRange, copiedLessonRates, copiedCancelledDates)
+                    : new OutstandingFees(lesson.getOutstandingFees().value);
+            return new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject,
+                    copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
+        } else {
+            OutstandingFees updatedOutstandingFees = getUpdatedOutstandingFeesMakeup(currentOutstanding,
+                    copiedDate, copiedTimeRange, copiedLessonRates);
+            return new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject,
+                    copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
+        }
+    }
 
-        return lesson.isRecurring()
-                ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject,
-                        copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates)
-                : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject,
-                        copiedHomework, copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);
+    public OutstandingFees getUpdatedOutstandingFeesMakeup(OutstandingFees original, Date date, TimeRange timeRange,
+                                                           LessonRates lessonRates) {
+        float costPerLesson = getCostPerLesson(timeRange, lessonRates);
+        float updatedFees = original.getMonetaryValueInFloat();
+
+        LocalDateTime makeUpLessonEnd = LocalDateTime.of(date.getLocalDate(), timeRange.getEnd());
+
+        boolean isBetween = makeUpLessonEnd.isAfter(lastUpdated.dateTime) && makeUpLessonEnd.isBefore(currentDateTime);
+
+        if (isBetween) {
+            updatedFees += costPerLesson;
+        }
+
+        return new OutstandingFees(DECIMAL_FORMAT.format(updatedFees));
     }
 
     /**
@@ -121,15 +139,15 @@ public class FeesCalculator implements Calculator {
      * @param lessonRates Cost per hour for the lesson.
      * @return Updated Outstanding Fees object.
      */
-    public OutstandingFees getUpdatedOutstandingFees(OutstandingFees original, DayOfWeek updateDay, TimeRange timeRange,
-                                                     LessonRates lessonRates, Set<Date> cancelledDates) {
-
+    public OutstandingFees getUpdatedOutstandingFeesRecurring(OutstandingFees original, DayOfWeek updateDay,
+            TimeRange timeRange, LessonRates lessonRates, Set<Date> cancelledDates) {
         // updated fee values
         int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, timeRange.getEnd(), cancelledDates);
+        assert numberOfLessons >= 0;
         float costPerLesson = getCostPerLesson(timeRange, lessonRates);
         float updatedFees = costPerLesson * (float) numberOfLessons + original.getMonetaryValueInFloat();
 
-        return new OutstandingFees(Double.toString(updatedFees));
+        return new OutstandingFees(DECIMAL_FORMAT.format(updatedFees));
     }
 
     private float getCostPerLesson(TimeRange timeRange, LessonRates lessonRates) {
@@ -143,12 +161,20 @@ public class FeesCalculator implements Calculator {
         int lastUpdatedDay = lastUpdated.getLastUpdatedLocalDate().getDayOfWeek().getValue();
         int currentUpdatedDay = currentDateTime.getDayOfWeek().getValue();
 
+        if (lastUpdated.dateTime.isEqual(currentDateTime)) {
+            return 0;
+        }
+
         boolean isUpdatedToday = lastUpdated.getLastUpdatedLocalDate().isEqual(currentDateTime.toLocalDate());
         boolean isUpdatedBeforeLessonOver = lastUpdated.getLastUpdatedLocalTime().isBefore(endTime);
+        boolean isUpdatedAfterLessonOver = lastUpdated.getLastUpdatedLocalTime().isAfter(endTime);
 
         // if app launched today and lastUpdated is before this lesson ended
         if (isUpdatedToday && isUpdatedBeforeLessonOver) {
             return 1;
+        } else if (isUpdatedToday && isUpdatedAfterLessonOver) {
+            // if app launched today and and lastUpdated is after lesson end
+            return 0;
         }
 
         // Number of Days between last updated and current date excluding these both days
@@ -160,7 +186,7 @@ public class FeesCalculator implements Calculator {
         int remainder = (int) (numOfDays % numberOfDaysInAWeek);
 
         // Number of days since last updated day
-        int sinceLastUpdateDay = (int)(currentUpdatedDay - updateDay.getValue());
+        int sinceLastUpdateDay = (int) (currentUpdatedDay - updateDay.getValue());
 
         if (sinceLastUpdateDay < 0) {
             sinceLastUpdateDay += numberOfDaysInAWeek;

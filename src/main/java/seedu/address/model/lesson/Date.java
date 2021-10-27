@@ -98,6 +98,9 @@ public class Date implements Comparable<Date> {
         return newDate;
     }
 
+    /**
+     * Returns true if the date is between the start and end date, inclusive.
+     */
     public boolean isDateBetween(LocalDate start, LocalDate end) {
         boolean isAterOrEqualsStart = getLocalDate().isAfter(start) || getLocalDate().isEqual(start);
         boolean isBeforeOrEqualsEnd = getLocalDate().isBefore(end) || getLocalDate().isEqual(end);
