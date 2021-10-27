@@ -10,6 +10,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
@@ -26,6 +27,8 @@ public class JsonAdaptedApplicant {
     private final String email;
     private final String address;
     private final String positionApplyingTo;
+    private final String gitHubUrl;
+    private final String linkedInUrl;
 
     /**
      * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
@@ -33,12 +36,16 @@ public class JsonAdaptedApplicant {
     @JsonCreator
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                 @JsonProperty("email") String email, @JsonProperty("address") String address,
-                                @JsonProperty("positionApplyingTo") String positionApplyingTo) {
+                                @JsonProperty("positionApplyingTo") String positionApplyingTo,
+                                @JsonProperty("gitHubUrl") String gitHubUrl,
+                                @JsonProperty("linkedInUrl") String linkedInUrl) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.positionApplyingTo = positionApplyingTo;
+        this.gitHubUrl = gitHubUrl;
+        this.linkedInUrl = linkedInUrl;
     }
 
     /**
@@ -50,6 +57,8 @@ public class JsonAdaptedApplicant {
         email = source.getEmail().value;
         address = source.getAddress().value;
         positionApplyingTo = source.getApplication().getPosition().getTitle().fullTitle;
+        this.gitHubUrl = source.getGitHubUrl().url;
+        this.linkedInUrl = source.getLinkedInUrl().url;
     }
 
     /**
@@ -97,7 +106,20 @@ public class JsonAdaptedApplicant {
         }
         final Position modelPosition = positionBook.getPositionByTitle(new Title(positionApplyingTo));
 
-        return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelPosition);
+        if (gitHubUrl == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ProfileUrl.class.getSimpleName()));
+        }
+        final ProfileUrl modelGitHubUrl = ProfileUrl.ofNullable(gitHubUrl);
+
+        if (linkedInUrl == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ProfileUrl.class.getSimpleName()));
+        }
+        final ProfileUrl modelLinkedInUrl = ProfileUrl.ofNullable(linkedInUrl);
+
+        return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelPosition,
+                modelGitHubUrl, modelLinkedInUrl);
     }
 
 }

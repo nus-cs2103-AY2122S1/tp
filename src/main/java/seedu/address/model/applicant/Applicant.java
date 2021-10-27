@@ -29,6 +29,25 @@ public class Applicant {
     /**
      * Every field must be present and not null.
      */
+    public Applicant(Name name, Phone phone, Email email, Address address, Position position) {
+        this(name, phone, email, address, new Application(position));
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Applicant(Name name, Phone phone, Email email, Address address, Application application) {
+        requireAllNonNull(name, phone, email, address);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.application = application;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
     public Applicant(Name name, Phone phone, Email email, Address address, Position position,
                      ProfileUrl gitHubUrl, ProfileUrl linkedInUrl) {
         this(name, phone, email, address, new Application(position), gitHubUrl, linkedInUrl);

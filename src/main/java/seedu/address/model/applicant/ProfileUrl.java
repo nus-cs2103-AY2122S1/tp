@@ -30,6 +30,19 @@ public class ProfileUrl {
     }
 
     /**
+     * Returns a {@code ProfileUrl} containing the url given. If empty string is given,
+     * emptyProfileUrl object instance is returned.
+     * @param url  string url to be stored in this ProfileUrl.
+     * @return ProfileUrl instance containing this url, if valid.
+     */
+    public static ProfileUrl ofNullable(String url) {
+        if (url.equals("")) {
+            return emptyProfileUrl();
+        }
+        return new ProfileUrl(url);
+    }
+
+    /**
      * Returns the one single instance of empty profile url.
      *
      * @return the one single instance of empty profile url.
