@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.model.group.Group;
-import seedu.address.model.student.ContainsGroupNamePredicate;
+import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 import seedu.address.testutil.TypicalGroups;
 
 public class ViewGroupCommandParserTest {
@@ -19,7 +19,7 @@ public class ViewGroupCommandParserTest {
 
     private Group group = TypicalGroups.TYPICAL_GROUP_CS2103T;
 
-    private ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(group.getGroupName());
+    private StudentGroupNameEqualsPredicate predicate = new StudentGroupNameEqualsPredicate(group.getGroupName());
 
     @Test
     public void parser_validArgs_returnsViewGroupCommand() {

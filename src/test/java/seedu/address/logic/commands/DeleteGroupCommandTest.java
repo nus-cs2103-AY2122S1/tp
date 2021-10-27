@@ -25,6 +25,7 @@ public class DeleteGroupCommandTest {
 
     @Test
     public void execute_validGroup_success() {
+        // get any group already in the model
         Group groupToDelete = model.getFilteredGroupList().get(0);
         DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(groupToDelete.getGroupName());
 
@@ -37,7 +38,8 @@ public class DeleteGroupCommandTest {
     }
 
     @Test
-    public void execute_invalidGroup_throwsCommandException() {
+    public void execute_nonExistentGroup_throwsCommandException() {
+        // try some group that does not exist
         String nonExistentGroupName = "qwertyuiopasdfghjklzxcvbnm";
 
         assertTrue(GroupName.isValidName(nonExistentGroupName));

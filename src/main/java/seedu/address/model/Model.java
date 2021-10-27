@@ -64,6 +64,11 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in the CS book.
+     */
+    boolean hasStudent(Name name);
+
+    /**
      * Returns the target student from the CS book.
      */
     void changeStudentGroup(Student student, Group newGroup);

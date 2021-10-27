@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.ContainsGroupNamePredicate;
+import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 
 
 public class ViewGroupCommandParser implements Parser<ViewGroupCommand> {
@@ -26,7 +26,7 @@ public class ViewGroupCommandParser implements Parser<ViewGroupCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewGroupCommand.MESSAGE_USAGE));
         }
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
-        return new ViewGroupCommand(new ContainsGroupNamePredicate(groupName), groupName);
+        return new ViewGroupCommand(new StudentGroupNameEqualsPredicate(groupName), groupName);
     }
 
     /**

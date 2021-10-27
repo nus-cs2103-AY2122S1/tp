@@ -8,21 +8,21 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.group.GroupName;
 import seedu.address.testutil.StudentBuilder;
 
-class ContainsGroupNamePredicateTest {
+class StudentGroupNameEqualsPredicateTest {
 
     @Test
     public void equals() {
         GroupName firstGroupName = new GroupName("CS2103T");
         GroupName secondGroupName = new GroupName("CS2101");
 
-        ContainsGroupNamePredicate firstPredicate = new ContainsGroupNamePredicate(firstGroupName);
-        ContainsGroupNamePredicate secondPredicate = new ContainsGroupNamePredicate(secondGroupName);
+        StudentGroupNameEqualsPredicate firstPredicate = new StudentGroupNameEqualsPredicate(firstGroupName);
+        StudentGroupNameEqualsPredicate secondPredicate = new StudentGroupNameEqualsPredicate(secondGroupName);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ContainsGroupNamePredicate firstPredicateCopy = new ContainsGroupNamePredicate(firstGroupName);
+        StudentGroupNameEqualsPredicate firstPredicateCopy = new StudentGroupNameEqualsPredicate(firstGroupName);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -37,14 +37,14 @@ class ContainsGroupNamePredicateTest {
 
     @Test
     public void test_containsGroupName_returnsTrue() {
-        ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2103T"));
+        StudentGroupNameEqualsPredicate predicate = new StudentGroupNameEqualsPredicate(new GroupName("CS2103T"));
         assertTrue(predicate.test(new StudentBuilder().withName("Alice")
                 .withGroupName("CS2103T").build()));
     }
 
     @Test
     public void test_doesNotContainsGroupName_returnsFalse() {
-        ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2103T"));
+        StudentGroupNameEqualsPredicate predicate = new StudentGroupNameEqualsPredicate(new GroupName("CS2103T"));
         assertFalse(predicate.test(new StudentBuilder().withName("Alice")
                 .withGroupName("GEQ1000").build()));
     }
