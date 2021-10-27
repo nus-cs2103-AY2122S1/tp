@@ -43,7 +43,6 @@ public class ShowCommand extends Command {
             + "(<index> | "
             + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id> | "
-            + PREFIX_ASSESSMENT + "<assessment_name>)"
             + PREFIX_ASSESSMENT + "<assessment_name> | "
             + PREFIX_GROUP + "<group_name>) "
             + "[" + PREFIX_FILE + "<export_location>]";
