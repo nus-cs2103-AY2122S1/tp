@@ -249,6 +249,10 @@ Format: `view INDEX`
 
 Example Usage:
 * `view 1` - Displays the details of the 1st Participant in the displayed Participant list.
+* `list` followed by `view 2` - Displays the details of the 2nd Participant in the full Participant list.
+  Find out more about `list` [here](#listing-all-participants--list).
+* `find Betsy` followed by `delete 1` - Displays the details of the 1st Participant in the results of the 
+  `find` command. Find out more about `find` [here](#locating-participants-by-name-find).
 
 <br>![result for 'view 1'](images/viewFirstResult.png)
 
@@ -369,7 +373,7 @@ Example Usage:
 
 ### Locating Events by name: `findEvent`
 
-Finds Events whose names contain any of the given keywords.
+Finds Events whose names contain any of the given keywords. It is possible for there to be no matches.
 
 Format: `findEvent KEYWORD [MORE_KEYWORDS]`
 
@@ -423,6 +427,10 @@ Format: `showDetails INDEX`
 
 Example Usage:
 * `showDetails 1` - Displays the details of the 1st Event in the displayed Event list.
+* `listEvents` followed by `showDetails 2` - Displays the details of the 2nd Event in the full Event list.
+  Find out more about `listEvents` [here](#locating-events-by-name-findevent).
+* `filterEvents d/2021-09-18` followed by `showDetails 1` - Displays the details of the 1st Event in the results of 
+  the `filterEvents` command. Find out more about `filterEvents` [here](#filtering-events-by-time-filterevents).
 
 ### Adding a Participant to an Event: `enroll`
 
