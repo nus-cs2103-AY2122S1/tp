@@ -42,8 +42,7 @@ public class DashboardWindow extends PopupWindow {
     public DashboardWindow(Stage root, Logic logic) {
         super(FXML, root);
         this.logic = logic;
-        fillOverallStats();
-        fillLabsMarked();
+        update();
     }
 
     /**
@@ -85,7 +84,7 @@ public class DashboardWindow extends PopupWindow {
     /**
      * Refreshes the dashboard window.
      */
-    public void refresh() {
+    public void update() {
         fillOverallStats();
         fillLabsMarked();
     }
@@ -111,7 +110,6 @@ public class DashboardWindow extends PopupWindow {
         }
         return labsUnmarkedMap;
     }
-
 
     private String formatDataToDisplay(int numStudents, int numClasses, int numLabs) {
         return "No. of students: " + numStudents + "\n"

@@ -368,7 +368,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleShowResult(editCommandResult.getEditedStudent());
             }
             if (dashboardWindow.isShowing()) {
-                dashboardWindow.refresh();
+                dashboardWindow.update();
             }
             return commandResult;
         } catch (CommandException | ParseException e) {
