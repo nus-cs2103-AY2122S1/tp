@@ -139,6 +139,9 @@ public class ParserUtil {
         if (!Birthday.isValidDate(trimmedBirthday)) {
             throw new ParseException(Birthday.MESSAGE_INVALID_DATE);
         }
+        if (Birthday.isFutureDate(birthday)) {
+            throw new ParseException(Birthday.MESSAGE_BIRTHDAY_IN_FUTURE);
+        }
         return new Birthday(trimmedBirthday);
     }
 
