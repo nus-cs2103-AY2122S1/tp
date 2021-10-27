@@ -43,11 +43,11 @@ public class TypicalStudents {
             .withAddress("10th street").withGrade("S4").withRemarks("friends")
             .build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer")
-            .withPhone("94822241").withEmail("werner@example.com")
+            .withPhone("94822244").withEmail("werner@example.com")
             .withAddress("michegan ave").withGrade("S1")
             .build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz")
-            .withPhone("94824271").withEmail("lydia@example.com")
+            .withPhone("94824277").withEmail("lydia@example.com")
             .withAddress("little tokyo").withGrade("S1")
             .build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best")

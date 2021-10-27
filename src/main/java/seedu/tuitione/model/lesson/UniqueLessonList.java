@@ -101,8 +101,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Lesson> asUnmodifiableObservableList() {
-        // internalList.sort((o1, o2) -> String.CASE_INSENSITIVE_ORDER.compare(o1.getGrade().value,
-        // o2.getGrade().value));
+        internalList.sort((o1, o2) -> String.CASE_INSENSITIVE_ORDER.compare(o1.getGrade().value, o2.getGrade().value));
         return internalUnmodifiableList;
     }
 
