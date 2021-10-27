@@ -283,12 +283,13 @@ Examples:
 
 ### Exporting data : `export`
 
-// TODO: 
-Exports data in the address book to (...file_location).
+//TODO: add more instructions on how command works
 
-* 
+Exports data in the address book to (... what file_location).
 
 Format: `export`
+
+* ...
 
 ### Resetting all data : `clear`
 
@@ -314,6 +315,23 @@ SourceControl data are saved as a JSON file `[JAR file location]/data/sourcecont
 If your changes to the data file makes its format invalid, SourceControl will discard all data and start with an empty data file at the next run.
 </div>
 
+### Setting customised alias for commands keywords
+
+//TODO: add more instructions on how command works
+
+Adds new alias for existing commands, so that experienced users can customise commands to increase efficiency. 
+
+Format: `alias <alias> -> <existing_command>`
+
+* `<existing_commands>` refers to the command keywords e.g. `search`, `add alloc`, `add student`. 
+* New alias can be one single alphanumeric word. 
+* Multiple alias can be set for each command. 
+* Default and existing alias can still be used after new alias is added. e.g. after `alias as -> add student`, both `as` and `add student` can be used. 
+
+Examples:
+* `alias as -> add student` adds new alias to `add student` command i.e. `as -n Zhiying -i E7654321` adds student `Zhiying` to database. 
+* `alias alloc -> add alloc` adds new alias to `add alloc` command i.e. `alloc -g T02A -n Zhiying` adds student `Zhiying` into group `T02A`. 
+* `alias as2 -> add score` adds new alias to `add score` command. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -364,3 +382,4 @@ Action | Format | Examples
 **Export Data** | `export` |
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
+**Add Alias** | `alias <alias> -> <existing_command>` | e.g. `alias as -> add student`
