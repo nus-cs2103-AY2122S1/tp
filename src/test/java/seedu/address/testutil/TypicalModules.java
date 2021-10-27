@@ -31,6 +31,8 @@ public class TypicalModules {
 
     /**
      * Returns an {@code TAB} with all the typical modules.
+     *
+     * @return A TeachingAssistantBuddy.
      */
     public static TeachingAssistantBuddy getTypicalBuddy() {
         TeachingAssistantBuddy tab = new TeachingAssistantBuddy();
