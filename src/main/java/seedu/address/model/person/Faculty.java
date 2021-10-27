@@ -13,6 +13,7 @@ public class Faculty {
     public static final String FACULTY_OF_ARTS_AND_SOCIAL_SCIENCES = "fass";
     public static final String FACULTY_OF_ENGINEERING = "engineering";
     public static final String FACULTY_OF_SCIENCE = "science";
+    public static final String FACULTY_OF_BUSINESS = "biz";
     // TODO: Add on more faculties in the future
 
     public final String value;
@@ -36,7 +37,8 @@ public class Faculty {
         return test.equals(SCHOOL_OF_COMPUTING)
                 || test.equals(FACULTY_OF_ARTS_AND_SOCIAL_SCIENCES)
                 || test.equals(FACULTY_OF_ENGINEERING)
-                || test.equals(FACULTY_OF_SCIENCE);
+                || test.equals(FACULTY_OF_SCIENCE)
+                || test.equals(FACULTY_OF_BUSINESS);
     }
 
     @Override

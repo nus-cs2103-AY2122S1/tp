@@ -43,6 +43,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        model.resetViewedPerson();
         commandResult = command.execute(model);
 
         try {
@@ -62,6 +63,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Person> getViewedPerson() {
+        return model.getViewedPerson();
     }
 
     @Override

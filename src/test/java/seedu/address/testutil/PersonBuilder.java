@@ -8,6 +8,7 @@ import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
@@ -32,6 +33,7 @@ public class PersonBuilder {
     private Set<Language> languages;
     private Set<Framework> frameworks;
     private Set<Tag> tags;
+    private Set<Remark> remarks;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,6 +47,7 @@ public class PersonBuilder {
         languages = new HashSet<>();
         frameworks = new HashSet<>();
         tags = new HashSet<>();
+        remarks = new HashSet<>();
     }
 
     /**
@@ -59,6 +62,7 @@ public class PersonBuilder {
         languages = new HashSet<>(personToCopy.getLanguages());
         frameworks = new HashSet<>(personToCopy.getFrameworks());
         tags = new HashSet<>(personToCopy.getTags());
+        remarks = new HashSet<>(personToCopy.getRemarks());
     }
 
     /**
@@ -76,6 +80,15 @@ public class PersonBuilder {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemarks(String ... remarks) {
+        this.remarks = SampleDataUtil.getRemarkSet(remarks);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
@@ -127,7 +140,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, email, faculty, major, skills, languages, frameworks, tags);
+        return new Person(name, email, faculty, major, skills, languages, frameworks, tags, remarks);
     }
 
 }

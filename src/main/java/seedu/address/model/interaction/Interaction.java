@@ -18,8 +18,9 @@ public class Interaction {
     public final LocalDate date;
 
     /**
-     * Constructs a {@code Tag}.
-     * @param tagName A valid tag name.
+     * Constructs a {@code Interaction}.
+     * @param description A valid interaction description.
+     * @param date A valid date string
      */
     public Interaction(String description, String date) {
         requireNonNull(description);
@@ -28,6 +29,17 @@ public class Interaction {
         this.date = LocalDate.parse(date);
         this.description = description;
     }
+
+    /**
+     * Constructs a {@code Interaction}.
+     * @param description A valid interaction description.
+     */
+    public Interaction(String description) {
+        requireNonNull(description);
+        this.date = LocalDate.now();
+        this.description = description;
+    }
+
 
     /**
      * Returns true if a given string is a valid tag name.
