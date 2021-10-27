@@ -45,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private final HelpWindow helpWindow;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    //private NotePane notePane;
+    private NotePane notePane;
 
 
     @FXML
@@ -142,8 +142,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        //NotePane notePane = new NotePane();
-        //notePanePlaceholder.getChildren().add(notePane.getRoot());
+        NotePane notePane = new NotePane();
+//        notePanePlaceholder.getChildren().add(notePane.getRoot());
     }
 
     /**

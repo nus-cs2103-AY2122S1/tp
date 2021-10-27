@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="300" minWidth="450" onCloseRequest="#handleExit" title="Notor" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/address_book_32.png" />
     </icons>
@@ -28,8 +29,8 @@
             <URL value="@DarkTheme.css" />
             </stylesheets>
 
-            <VBox styleClass="background">
-            <GridPane styleClass="background">
+            <VBox alignment="TOP_CENTER" styleClass="background">
+            <GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" styleClass="splitpane-background" VBox.vgrow="NEVER">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -38,7 +39,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                      <MenuBar fx:id="menuBar" styleClass="splitpane-background">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTOR   " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Forte" size="18.0" />
+                     </font>
+                  </Text>
+                      <MenuBar fx:id="menuBar" GridPane.vgrow="SOMETIMES">
                           <Menu mnemonicParsing="false" text="File">
                         <MenuItem mnemonicParsing="false" text="Export to CSV.." />
                               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -46,26 +52,30 @@
                           <Menu mnemonicParsing="false" text="Help">
                               <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                           </Menu>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                       </MenuBar>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTOR   " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
-                     <font>
-                        <Font name="Forte" size="18.0" />
-                     </font>
-                  </Text>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="2.0" top="2.0" />
+               </VBox.margin>
             </GridPane>
-            <SplitPane dividerPositions="0.5" minWidth="400.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="400.0" styleClass="background">
+            <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" minWidth="400.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="300.0" prefWidth="400.0" styleClass="background" VBox.vgrow="ALWAYS">
               <items>
-                  <VBox styleClass="splitpane-background">
+                  <VBox alignment="BOTTOM_CENTER" styleClass="splitpane-background">
                      <children>
-                        <StackPane fx:id="notePanePlaceholder" maxHeight="1.7976931348623157E308" minHeight="120.0" prefHeight="120.0" />
+                        <StackPane fx:id="notePanePlaceholder" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
                         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" />
-                        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="100.0" />
+                        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="50.0" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="splitpane-background">
+                  <VBox styleClass="splitpane-background">
                      <children>
-                        <StackPane fx:id="personListPanelPlaceholder" />
+                        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
               </items>
