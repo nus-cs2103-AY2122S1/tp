@@ -133,9 +133,9 @@ public class SampleDataUtil {
                     table1, new Remark("Surprise birthday party"), getTagSet("Chetwin")),
             new Reservation(new Phone("91031282"), 4, LocalDateTime.parse("2021-12-24T20:00"),
                     table2, new Remark("Family dinner, have kids"), getTagSet("hernpiblo", "10PercentOff")),
-            new Reservation(new Phone("93210283"), 2, LocalDateTime.parse("2021-12-25T19:00"),
+            new Reservation(new Phone("99272758"), 2, LocalDateTime.parse("2021-12-25T19:00"),
                     table1, new Remark(""), getTagSet("thang")),
-            new Reservation(new Phone("99272758"), 3, LocalDateTime.parse("2021-10-30T19:00"),
+            new Reservation(new Phone("93210283"), 3, LocalDateTime.parse("2021-10-30T19:00"),
                     table2 , new Remark("Propose to his gf"), getTagSet("clement")),
             new Reservation(new Phone("87438807"), 6, LocalDateTime.parse("2021-02-14T11:00"),
                     table2 , new Remark(""), getTagSet("javier", "20PercentOff"))

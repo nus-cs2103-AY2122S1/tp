@@ -3,6 +3,7 @@ package seedu.address.model.reservation;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,9 @@ import seedu.address.model.reservation.exception.ReservationNotFoundException;
  * Supports a minimal set of list operations.
  */
 public class ReservationList implements Iterable<Reservation> {
+    private static final Comparator<Reservation> DATE_TIME_ASCENDING =
+            Comparator.comparing(Reservation::getDateTime).reversed();
+
     private final ObservableList<Reservation> internalList = FXCollections.observableArrayList();
     private final ObservableList<Reservation> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -33,6 +37,7 @@ public class ReservationList implements Iterable<Reservation> {
     public void add(Reservation toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
+        internalList.sort(DATE_TIME_ASCENDING);
     }
 
     /**
@@ -46,6 +51,7 @@ public class ReservationList implements Iterable<Reservation> {
             throw new ReservationNotFoundException();
         }
         internalList.set(index, editedReservation);
+        internalList.sort(DATE_TIME_ASCENDING);
     }
 
     /**
@@ -62,6 +68,7 @@ public class ReservationList implements Iterable<Reservation> {
     public void setReservations(ReservationList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        internalList.sort(DATE_TIME_ASCENDING);
     }
 
     /**
@@ -70,6 +77,7 @@ public class ReservationList implements Iterable<Reservation> {
     public void setReservations(List<Reservation> reservations) {
         requireNonNull(reservations);
         internalList.setAll(reservations);
+        internalList.sort(DATE_TIME_ASCENDING);
     }
 
     /**
