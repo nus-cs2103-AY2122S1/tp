@@ -1,13 +1,11 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Stack;
-import java.util.function.Predicate;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.address.model.exceptions.OperationException;
-import seedu.address.model.person.Person;
 
 /**
  * Represents the recent history of Model that allows undoing and redoing.
@@ -76,8 +74,23 @@ class OperationManager {
     void run(Runnable redo) {
         requireNonNull(redo);
 
-        Operation op = new Operation(redo);
+        Operation op = new Operation(redo, model.getState());
         op.redo();
+
+        undoStack.push(op);
+        redoStack.clear();
+    }
+
+    /**
+     * Register an operation without running it. Used for operations which have already
+     * been executed but still requires storing for undo/redo
+     * @param redo operation to be run
+     * @param beforeState state of model before op was executed
+     */
+    void registerOperation(Runnable redo, ModelManagerState beforeState) {
+        requireAllNonNull(redo, beforeState);
+
+        Operation op = new Operation(redo, beforeState);
 
         undoStack.push(op);
         redoStack.clear();
@@ -88,19 +101,12 @@ class OperationManager {
      */
     private class Operation {
         private final Runnable redo;
+        private final ModelManagerState modelManagerState;
 
-        private final AddressBook addressBookSnapshot;
-        private final UserPrefs userPrefsSnapshot;
-        private final FilteredList<Person> filteredPersonsSnapshot;
-
-        Operation(Runnable redo) {
-            requireNonNull(redo);
+        Operation(Runnable redo, ModelManagerState modelManagerState) {
+            requireAllNonNull(redo, modelManagerState);
             this.redo = redo;
-            this.addressBookSnapshot = new AddressBook(model.getAddressBook());
-            this.userPrefsSnapshot = new UserPrefs(model.getUserPrefs());
-            this.filteredPersonsSnapshot = new FilteredList<>(this.addressBookSnapshot.getPersonList());
-            this.filteredPersonsSnapshot.setPredicate((
-                    (FilteredList<Person>) model.getFilteredPersonList()).getPredicate());
+            this.modelManagerState = modelManagerState;
         }
 
         /**
@@ -113,12 +119,9 @@ class OperationManager {
         /**
          * Reverses the operation.
          */
-        @SuppressWarnings("unchecked")
         public void undo() {
             requireNonNull(model);
-            model.setAll(new AddressBook(addressBookSnapshot),
-                    new UserPrefs(userPrefsSnapshot),
-                    (Predicate<Person>) filteredPersonsSnapshot.getPredicate());
+            model.restoreState(modelManagerState);
         }
     }
 }

@@ -12,8 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.exceptions.OperationException;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.exceptions.OperationException;
 import seedu.address.model.person.Person;
 
 /**
@@ -48,14 +48,21 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAll(ReadOnlyAddressBook addressBook,
-                       ReadOnlyUserPrefs userPrefs,
-                       Predicate<Person> filterPredicate) {
-        this.addressBook.resetData(addressBook);
-        this.userPrefs.setAddressBookFilePath(userPrefs.getAddressBookFilePath());
-        this.userPrefs.setGuiSettings(userPrefs.getGuiSettings());
-        this.userPrefs.resetData(userPrefs);
-        filteredPersons.setPredicate(filterPredicate == null ? PREDICATE_SHOW_ALL_PERSONS : filterPredicate);
+    public void restoreState(ModelManagerState state) {
+        this.addressBook.resetData(state.getAddressBook());
+        this.userPrefs.resetData(state.getUserPrefs());
+        filteredPersons.setPredicate(state.getFilterPredicate());
+    }
+
+    @Override
+    public ModelManagerState getState() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> filterPredicate = (Predicate<Person>) filteredPersons.getPredicate();
+        return new ModelManagerState(
+                new AddressBook(this.addressBook),
+                new UserPrefs(this.userPrefs),
+                filterPredicate
+        );
     }
 
     //=========== UserPrefs ==================================================================================
@@ -133,8 +140,14 @@ public class ModelManager implements Model {
     @Override
     public void importFile(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
+
+        ModelManagerState beforeState = this.getState();
+
         addressBook.mergeFile(filePath);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        ModelManagerState afterState = this.getState();
+        registerOperation(beforeState, afterState);
     }
 
     @Override
@@ -154,6 +167,16 @@ public class ModelManager implements Model {
      */
     private void runOperation(Runnable op) {
         operations.run(op);
+    }
+
+    /**
+     * Convenience method that registers already-executed through the
+     * OperationManager to allow for undoing and redoing
+     * @param beforeState model state before operation was executed
+     * @param afterState model state after operation was executed
+     */
+    private void registerOperation(ModelManagerState beforeState, ModelManagerState afterState) {
+        operations.registerOperation(() -> this.restoreState(afterState), beforeState);
     }
 
     //=========== Filtered Person List Accessors =============================================================

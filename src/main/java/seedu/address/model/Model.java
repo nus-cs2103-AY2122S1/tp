@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.exceptions.OperationException;
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.exceptions.OperationException;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,9 +18,15 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
-     * Sets address book, user prefs, and filter of filtered persons
+     * Sets address book, user prefs, and filter of filtered persons from a model state
+     * @param state model state to restore data from
      */
-    void setAll(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Predicate<Person> predicate);
+    void restoreState(ModelManagerState state);
+
+    /**
+     * Get a model state that captures the whole state of the model
+     */
+    ModelManagerState getState();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
