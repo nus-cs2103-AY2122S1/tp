@@ -248,7 +248,15 @@ ___
 
 ### List all supported genres: `genrelist`
 
-**TODO**
+Lists all currently supported genres on the Command Results panel.
+Format: `genrelist`
+
+<div markdown="box" class="alert alert-info">
+
+Example usages:
+* `genrelist` displays all currently supported genres of AniList
+
+</div>
 
 ![](images/UG-images/genrelist.png)
 ___
@@ -321,7 +329,7 @@ ___
 | [status](#updating-anime-watch-status-status)     | `status INDEX s/UPDATEDSTATUS` |
 | [rename](#updating-anime-title-rename)     | `rename INDEX n/NEWTITLE` |
 | [genre](#adding-deleting-genre-from-anime-genre)     | `genre INDEX c/ACTION g/GENRE [g/GENRE]` |
-| [genrelist](#list-all-supported-genres-genrelist) | Text    |
+| [genrelist](#list-all-supported-genres-genrelist) | `genrelist` |
 | [list](#listing-anime-based-on-watch-status-list)     | `list [s/STATUS]` |
 | [clear](#clearing-all-user-data-clear)    | `clear` |
 | [help](#viewing-all-supported-commands-help)     | `help` |
