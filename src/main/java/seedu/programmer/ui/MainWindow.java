@@ -21,6 +21,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
+import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DashboardCommandResult;
@@ -55,7 +56,6 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private StudentCard studentParticular;
     private DashboardWindow dashboardWindow;
-    private boolean isDashboardShowing;
 
     @FXML
     private Scene primaryScene;
@@ -104,7 +104,6 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         dashboardWindow = new DashboardWindow(logic);
-        isDashboardShowing = false;
     }
 
     public Stage getPrimaryStage() {
@@ -204,15 +203,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleDashboard() {
-        dashboardWindow = new DashboardWindow(logic);
-
-        if (isDashboardShowing) {
-            dashboardWindow.focus();
+        if (dashboardWindow.isShowing()) {
+            // Refresh the dashboard window
+            dashboardWindow.hide();
+            dashboardWindow = new DashboardWindow(logic);
+            dashboardWindow.show();
             return;
         }
 
         logger.fine("Showing dashboard window...");
-        isDashboardShowing = true;
         dashboardWindow.show();
     }
 
@@ -227,12 +226,12 @@ public class MainWindow extends UiPart<Stage> {
         try {
             stuList = fm.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
-            displayPopup("Your CSV seems to be invalid. It should only have studentId, classId, name and email!");
+            // Error while adding data
+            displayPopup("Upload failed: " + e.getMessage());
             return;
-        }
-
-        if (stuList == null) {
-            displayPopup("Incorrect number of columns!");
+        } catch (IllegalValueException e) {
+            // Error with file headers
+            displayPopup(e.getMessage());
             return;
         }
 
@@ -241,7 +240,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.updateProgrammerError(newPE);
         logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
         logic.saveProgrammerError(newPE);
-
         logger.info("Uploaded CSV data successfully!");
     }
 
@@ -278,7 +276,7 @@ public class MainWindow extends UiPart<Stage> {
         Popup popup = createPopup(message);
 
         // Add some left padding according to primaryStage's width
-        popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
+        popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.05);
 
         // Set Y coordinate scaled according to primaryStage's height
         popup.setY(primaryStage.getY() + primaryStage.getHeight() * 0.1);
@@ -297,6 +295,8 @@ public class MainWindow extends UiPart<Stage> {
         popup.setHideOnEscape(true);
 
         Label label = new Label(message);
+        label.setWrapText(true);
+        label.setMaxWidth(primaryStage.getWidth() * 0.9);
         label.getStylesheets().add("view/Styles.css");
         label.getStyleClass().add("popup");
 
