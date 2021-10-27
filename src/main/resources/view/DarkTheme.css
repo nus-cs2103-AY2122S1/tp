@@ -1,31 +1,31 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: derive(#ffffff, 20%);
+    background-color: #dbf6ff; /* Used in the default.html file */
 }
 
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Montserrat";
-    -fx-text-fill: #555555;
+    -fx-text-fill: #b6f9ff;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Montserrat";
-    -fx-text-fill: white;
+    -fx-text-fill: #258bff;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Montserrat";
-    -fx-text-fill: white;
+    -fx-text-fill: #2a46d0;
     -fx-opacity: 1;
 }
 
 .text-field {
-    -fx-font-size: 12pt;
+    -fx-font-size: 14pt;
     -fx-font-family: "Montserrat";
 }
 
@@ -40,34 +40,32 @@
 }
 
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
+    -fx-base: #9e89ff;
+    -fx-control-inner-background: #7ac1ff;
+    -fx-background-color: #6e97f1;
+    -fx-table-cell-border-color: rgb(96, 251, 255);
+    -fx-table-header-border-color: rgb(82, 148, 215);
     -fx-padding: 5;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: transparent;
+    -fx-background-color: #7184ff;
 }
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
-    -fx-background-color: transparent;
+    -fx-background-color: #ffb5b5;
     -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+        #0046ff #315cf6
+        derive(-fx-base, 80%) #3255ff;
     -fx-border-insets: 0 10 1 0;
 }
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
     -fx-font-family: "Montserrat";
-    -fx-text-fill: black;
+    -fx-text-fill: #ffffff;
     -fx-alignment: center-left;
     -fx-opacity: 1;
 }
@@ -77,20 +75,20 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
+    -fx-background-color: derive(#54b9ff, 20%);
+    -fx-border-color: #6d65ff #6d65ff #6d65ff #6d65ff;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#286aff, 20%);
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#3c46ff, 20%);
 }
 
 .list-cell {
@@ -99,23 +97,45 @@
     -fx-padding: 0 0 0 0;
 }
 
+/*
+Colour change has no visible effect for above fields
+ */
+
+
+/*
+Impt
+ */
 .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
+    -fx-border-color: black;
 }
 
+/*
+Impt
+ */
 .list-cell:filled:odd {
     -fx-background-color: #515658;
+    -fx-border-color: black;
 }
 
+/*
+Impt
+ */
 .list-cell:filled:selected {
     -fx-background-color: #424d5f;
 }
 
+/*
+Impt
+ */
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
     -fx-border-width: 1;
 }
 
+/*
+Impt
+ */
 .list-cell .label {
     -fx-text-fill: white;
 }
@@ -132,25 +152,40 @@
     -fx-text-fill: #010504;
 }
 
+/*
+Impt
+ */
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/*
+Impt
+ */
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
 }
 
+/*
+Impt
+ */
 .pane-with-no-border {
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-top-width: 1px;
 }
 
+/*
+Impt
+ */
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
+/*
+Impt
+ */
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Montserrat";
@@ -162,12 +197,16 @@
     -fx-text-fill: black !important;
 }
 
+/*
+Impt
+ */
 .status-bar .label {
     -fx-font-family: "Montserrat";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
+
 
 .status-bar-with-border {
     -fx-background-color: derive(#1d1d1d, 30%);
@@ -179,6 +218,7 @@
     -fx-text-fill: white;
 }
 
+
 .grid-pane {
     -fx-background-color: derive(#1d1d1d, 30%);
     -fx-border-color: derive(#1d1d1d, 30%);
@@ -189,6 +229,9 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
+/*
+Impt
+ */
 .context-menu {
     -fx-background-color: derive(#1d1d1d, 50%);
 }
@@ -197,10 +240,15 @@
     -fx-text-fill: white;
 }
 
+/*
+Impt
+ */
 .menu-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
-
+/*
+Impt
+ */
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Montserrat";
@@ -217,6 +265,10 @@
  * Author: Pedro Duque Vieira
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
+
+/*
+Impt
+ */
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
@@ -229,15 +281,24 @@
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
+/*
+Impt
+ */
 .button:hover {
     -fx-background-color: #3a3a3a;
 }
 
+/*
+Impt
+ */
 .button:pressed, .button:default:hover:pressed {
   -fx-background-color: white;
   -fx-text-fill: #1d1d1d;
 }
 
+/*
+Impt
+ */
 .button:focused {
     -fx-border-color: white, white;
     -fx-border-width: 1, 1;
@@ -246,17 +307,26 @@
     -fx-border-insets: 1 1 1 1, 0;
 }
 
+/*
+Impt
+ */
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
     -fx-background-color: #1d1d1d;
     -fx-text-fill: white;
 }
 
+/*
+Impt
+ */
 .button:default {
     -fx-background-color: -fx-focus-color;
     -fx-text-fill: #ffffff;
 }
 
+/*
+Impt
+ */
 .button:default:hover {
     -fx-background-color: derive(-fx-focus-color, 30%);
 }
@@ -286,42 +356,69 @@
     -fx-text-fill: white;
 }
 
+/*
+Impt
+ */
 .scroll-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/*
+Impt
+ */
 .scroll-bar .thumb {
     -fx-background-color: derive(#1d1d1d, 50%);
     -fx-background-insets: 3;
 }
 
+/*
+Impt
+ */
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
     -fx-background-color: transparent;
     -fx-padding: 0 0 0 0;
 }
 
+/*
+Impt
+ */
 .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
     -fx-shape: " ";
 }
 
+/*
+Impt
+ */
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
     -fx-padding: 1 8 1 8;
 }
 
+/*
+Impt
+ */
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
 }
 
+/*
+Impt
+ */
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
 }
 
+/*
+Impt
+ */
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
 }
 
+/*
+Impt
+ */
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
@@ -337,16 +434,25 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+/*
+Impt
+ */
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
 
+/*
+Impt
+ */
 #remarks {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
+/*
+Impt
+ */
 #remarks .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
