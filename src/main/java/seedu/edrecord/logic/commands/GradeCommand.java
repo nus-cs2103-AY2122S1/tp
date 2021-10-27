@@ -15,6 +15,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
@@ -46,6 +47,8 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Graded student: %s \nfor assignment: %s \nwith grade: %s";
     public static final String MESSAGE_NO_MODULE_SELECTED = "No module selected. Please cd into a module first";
     public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
+    public static final String MESSAGE_SCORE_GREATER_THAN_MAX = "Student's score is greater than the "
+            + "maximum score for this assignment";
 
     private final Index index;
     private final Name name;
@@ -84,6 +87,14 @@ public class GradeCommand extends Command {
         // Get assignment
         Assignment assignment = model.searchAssignment(name)
                 .orElseThrow(() -> new CommandException(MESSAGE_NO_SUCH_ASSIGNMENT));
+
+        // Check if score is more than the assignment's maximum score.
+        Score thisScore = grade.getScore();
+        Score maxScore = assignment.getMaxScore();
+        if (thisScore.compareTo(maxScore) > 0) {
+            throw new CommandException(MESSAGE_SCORE_GREATER_THAN_MAX);
+        }
+
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, assignment, grade);

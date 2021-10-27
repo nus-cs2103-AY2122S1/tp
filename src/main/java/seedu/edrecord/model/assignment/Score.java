@@ -37,6 +37,17 @@ public class Score {
         }
     }
 
+    /**
+     * Compares a score to another score.
+     *
+     * @param other Other score to compare to.
+     * @return 0 if both scores are equal, a value less than 0 if this score is less than the other score,
+     * a value greater than 0 if this score is numerically greater than the other score.
+     */
+    public int compareTo(Score other) {
+        return score.compareTo(other.score);
+    }
+
     @Override
     public String toString() {
         return String.format("%.2f", score);
