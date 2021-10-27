@@ -309,7 +309,9 @@ public class Participant {
 
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: \n");
-            nextOfKins.forEach(nok -> builder.append(nok).append("\n"));
+            for (int i = 1; i < nextOfKins.size(); i++) {
+                builder.append(i).append(". ").append(nextOfKins.get(i - 1)).append("\n");
+            }
         }
 
         if (!events.isEmpty()) {
