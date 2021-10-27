@@ -13,7 +13,6 @@ public class ApplicantBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Position DEFAULT_POSITION = new PositionBuilder().build();
 
     private Name name;
     private Phone phone;
@@ -29,7 +28,7 @@ public class ApplicantBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        position = DEFAULT_POSITION;
+        position = new PositionBuilder().build();
     }
 
     /**
