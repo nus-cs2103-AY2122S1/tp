@@ -14,6 +14,7 @@ public class UndoneCommandParser implements Parser<UndoneCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the Undone Command
      * and returns a UndoneCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public UndoneCommand parse(String args) throws ParseException {
@@ -21,8 +22,8 @@ public class UndoneCommandParser implements Parser<UndoneCommand> {
             Index index = ParserUtil.parseIndex(args);
             return new UndoneCommand(index);
         } catch (ParseException pe) {
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE), pe);
         }
     }
 }
