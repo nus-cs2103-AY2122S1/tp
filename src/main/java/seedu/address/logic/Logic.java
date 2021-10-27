@@ -3,14 +3,11 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.claim.Claim;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,7 +34,7 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the claims in the filtered list of persons */
-    ObservableList<Pair<Claim, Name>> getClaimList();
+    ObservableList<Person> getPersonsWithClaims();
 
     /** Returns an unmodifiable view of the Appointments in the filtered list of persons */
     ObservableList<Person> getAppointmentList();

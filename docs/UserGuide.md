@@ -167,6 +167,8 @@ Examples:
 * `claim 1 t/Hospital Claim d/Broke a leg s/Pending`
 * `claim 1 t/Hospital Claim d/Broke left leg`
     * If a claim titled “Hospital Claim” already exists, the description will be updated to “Broke left leg”
+* `claim 1 t/Hostptal Claim`
+    * If a claim titled "Hospital Claim" already exists, it will be deleted 
 
 ### Adding a note: `note`
 Adds a note to an existing person in the address book

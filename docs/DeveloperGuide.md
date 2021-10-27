@@ -128,7 +128,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="800" />
 
 </div>
 
@@ -157,15 +157,14 @@ This section describes some noteworthy details on how certain features are imple
 ###  Note feature
 
 #### Current Implementation
-
 {:.no_toc}
 
-An client's note is currently represented by the `note` field under `Person`,
+A client's note is currently represented by the `note` field under `Person`,
 which is represented by an `Note` object.
 
 The `Note` object contains a `value` field that has the type `String`, the `value` field is the description of the note given to a `Person`.
 
-<img src="images/NoteClassDiagram.png" width="00" />
+<img src="images/NoteClassDiagram.png" width="400" />
 
 A `Note` can be given to a `Person` through any of these 3 methods:
 
@@ -181,15 +180,16 @@ The processing of a note command from the user can be split into 2 general steps
 
 **Step 1:** Parsing of user input
 
-The user input is parsed by the `NoteCommandParser` which calls other helper methods to parse the text into
+The user input is parsed by the `NoteCommandParser` which calls other helper methods 
+to parse the text into a `Note` object
 
-<img src="images/NoteCommandParserSequenceDiagram.png" width="400" />
+<img src="images/NoteCommandParserSequenceDiagram.png" width="800" />
 
 The `NoteCommandParser` uses the parsed data classes to create a `NoteCommand`. Unlike the `Claim` feature, as the `Note` command has no constraints on the text that can be inputted, the `NoteCommandParser` is able to create a `NoteCommand` without using a `EditNoteDescriptor.
 
 **Step 2:** Executing the NoteCommand
 
-<img src="images/NoteCommandExecuteActivityDiagram.png" width="400" />
+<img src="images/NoteCommandExecuteActivityDiagram.png" width="300" />
 
 There are 3 possible outcomes from the execution of a `NoteCommand`.
 
@@ -198,7 +198,6 @@ There are 3 possible outcomes from the execution of a `NoteCommand`.
 3. Delete an existing Note of the client
 
 #### Design considerations
-
 {:.no_toc}
 
 *Aspect*: User interface of adding, editing and deleting Note
@@ -244,7 +243,7 @@ missing fields imply that the user wants to edit or delete an existing claim. Th
 
 **Step 2:** Executing the ClaimCommand
 
-<img src="images/ClaimCommandExecuteActivityDiagram.png" width="400" />
+<img src="images/ClaimCommandExecuteActivityDiagram.png" width="500" />
 
 There are 3 possible outcomes from the execution of a ClaimCommand.
 1. Add a new claim to the client
@@ -262,6 +261,7 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
 * **Alternative 2:** Different commands for add, edit and delete
     * Pros: Easier to implement
     * Cons: User has to remember a lot of commands
+    
 #### Future Improvements
 {:.no_toc}
 
@@ -282,7 +282,7 @@ which is represented by an `Appointment` object.
 The `Appointment` object contains a `LocalDateTime` field called `appointmentTime` which represents the time that
 the appointment with is scheduled for. An empty appointment is represented when `appointmentTime` is set to `null`.
 
-<img src="images/ScheduleAppointmentClassDiagram.png" width="400" />
+<img src="images/ScheduleAppointmentClassDiagram.png" width="300" />
 
 The processing of a schedule command from the user can be split into 2 general steps:
 1. Parsing the user input into a `ScheduleCommand`

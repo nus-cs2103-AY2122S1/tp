@@ -4,10 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.claim.Claim;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,7 +81,7 @@ public interface Model {
 
 
     /** Returns an unmodifiable view of the claims in the filtered list of persons */
-    ObservableList<Pair<Claim, Name>> getClaimList();
+    ObservableList<Person> getPersonsWithClaims();
 
     /** Returns an unmodifiable view of the Appointments in the filtered list of persons */
     ObservableList<Person> getAppointmentList();
