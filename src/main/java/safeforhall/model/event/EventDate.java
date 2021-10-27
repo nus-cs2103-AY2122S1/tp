@@ -38,6 +38,13 @@ public class EventDate {
         return true;
     }
 
+    /**
+     * Returns true if the current eventDate is in the past.
+     */
+    public boolean isPast() {
+        return toLocalDate().isBefore(LocalDate.now());
+    }
+
     public String getEventDate() {
         return eventDate;
     }
