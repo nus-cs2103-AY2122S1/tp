@@ -52,6 +52,10 @@ public class CommandHistory {
 
     }
 
+    public static void clear() {
+        commandHistory.clear();
+    }
+
     private static void resetIndex() {
         index = DEFAULT_INDEX;
     }
