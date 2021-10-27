@@ -5,6 +5,19 @@ If you are new, this guide is meant to introduce you to PlannerMD as well as gui
 experienced with PlannerMD, we hope that our comprehensive user guide will help clarify any queries you have! Refer to our [table of contents](#toc) to see what
 we have to offer!
 
+## Common Syntax
+Take note of some syntax we will frequently use throughout the User Guide:
+
+| Syntax | Description |
+|--------|------------|
+| **Bold** | keywords |
+| :bulb: **Tip:** | Useful tips |
+| :exclamation: **Caution:** | Possible pitfalls |
+| `markdown` | Commands or examples |
+| Format: | the format to write the commands in the application|
+
+
+
 ## Table Of Contents <a name="toc"></a>
 * [Quick start](#quick-start)
 * [What is Command-line Interface (CLI)?](#what-is-cli)
@@ -99,7 +112,7 @@ patients, doctors and appointments.
 ### How to use a CLI?
 Just type your command in the command box with the format we have provided. Simple as that!
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can type the command keyword and leave the details blank and click enter to access the teamplte so you don't have to remember
+You can type the command keyword and leave the details blank and click enter to access the template so you don't have to remember
 all the details!<br>
 </div>
 
@@ -427,13 +440,17 @@ Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURAT
 
 * Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …​
 * `DATE_AND_TIME` accepts the format `DD/MM/YYYY HH:MM` e.g. `20/07/2022`.
-* If you did not include the duration, it will be automatically be set to **10** minutes. 
-
-
+* If you did not include the duration, it will be automatically be set to **10** minutes.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
 </div>
+<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can also add appointments that have happened already! This is especially useful if you just started using PlannerMD
+and would like to store your entire history of appointments!
+</div>
+<br>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If the appointment you just created isn't appearing, it could be because the default appointment list only shows
