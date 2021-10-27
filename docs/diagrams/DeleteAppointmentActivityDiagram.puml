@@ -5,13 +5,13 @@ start
 :User enters delete appointment command with index;
 :Parse command;
 if (index is valid) then (true)
-  :create new DeleteAppointmentCommand;
-  : execute DeleteAppointmentCommand;
-  : remove target appointment;
+  : Create new DeleteAppointmentCommand;
+  : Execute DeleteAppointmentCommand;
+  : Remove target appointment;
 else (false)
-    : generate Command Exception;
+    : Generate Command Exception;
 endif
-: display result to user;
+: Display result to user;
 stop
 
 @enduml
