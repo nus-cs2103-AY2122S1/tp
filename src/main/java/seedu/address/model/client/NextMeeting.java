@@ -113,6 +113,14 @@ public class NextMeeting implements OptionalNonStringBasedField {
         return new LastMet(dateInString);
     }
 
+    /**
+     * Returns a new Next Meeting with the same details
+     */
+    public NextMeeting copyNextMeeting() {
+        String newName = withWho != null ? withWho.fullName : "";
+        return new NextMeeting(dateInString, startTimeInString, endTimeInString, location, newName);
+    }
+
     @Override
     public String toString() {
         if (date == null) {
