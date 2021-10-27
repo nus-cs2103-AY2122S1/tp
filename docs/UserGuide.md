@@ -305,7 +305,7 @@ Format: `incompleteorders`
 
 ### Sorting orders: `sortorders`
 
-Sorts all orders based on a chosen field and ordering.
+Sorts all orders based on a chosen field and arrangement.
 
 Format: `sortorders f/FIELD o/ORDERING`
 
@@ -313,9 +313,9 @@ Format: `sortorders f/FIELD o/ORDERING`
   * The Date field, identified with a "d" or "date".
   * The Amount field, identified with an "a" or "amount".
 * By default, the orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
-* The direction of the sorting depends on the `ORDERING`, which is either in:
-  * Ascending order, identified with an "asc" or "ascending".
-  * Descending order, identified with a "desc" or "descending".
+* The direction of the arrangement depends on the `ORDERING`, which is either:
+  * Ascending, identified with an "asc" or "ascending".
+  * Descending, identified with a "desc" or "descending".
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Adding / Deleting an order reverts the list to the default ordering.</div>
