@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -19,7 +21,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
-import seedu.address.model.client.NextMeeting;
+import seedu.address.model.client.SortByAttribute;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.AddressBookList;
 import seedu.address.storage.ThemeList;
@@ -272,16 +274,9 @@ public class ModelManager implements Model {
 
     private SortedList<Client> checkAllNextMeetings(ObservableList<Client> filteredClients) {
         SortedList<Client> sortedMeetings = new SortedList<>(filteredClients);
-        sortedMeetings.setComparator((currentPerson, nextPerson) -> {
-            NextMeeting currentMeeting = currentPerson.getNextMeeting();
-            NextMeeting nextMeeting = nextPerson.getNextMeeting();
-            return currentMeeting.isNullMeeting() || nextMeeting.isNullMeeting() ? 1
-                : currentMeeting.date.compareTo(nextMeeting.date) != 0
-                    ? currentMeeting.date.compareTo(nextMeeting.date)
-                    : (currentMeeting.startTime.compareTo(nextMeeting.startTime) != 0
-                    ? currentMeeting.startTime.compareTo(nextMeeting.startTime)
-                    : (currentMeeting.endTime.compareTo(nextMeeting.endTime)));
-        });
+        Comparator<Client> nextMeetingComparator = new SortByAttribute(PREFIX_NEXTMEETING)
+                .thenCompareByAttribute(PREFIX_CLIENTID);
+        sortedMeetings.setComparator(nextMeetingComparator);
 
         return sortedMeetings;
     }
