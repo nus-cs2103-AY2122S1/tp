@@ -135,7 +135,7 @@ public class ModelManager implements Model {
         requireNonNull(targetStudent);
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
         filteredLessons.setPredicate(lesson ->
-                targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.toNameString()));
+                targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.nameAsString()));
         UiManager.showViewWindow();
     }
 
@@ -200,6 +200,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+        studentBook.refreshStudentBook();
         filteredStudents.setPredicate(predicate);
     }
 
@@ -217,6 +218,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
+        lessonBook.refreshLessonBook();
         filteredLessons.setPredicate(predicate);
     }
 

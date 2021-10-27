@@ -4,7 +4,12 @@
     "studentPhone": "9482424",
     "parentName": "H@s!",
     "parentPhone": "22334455",
+<<<<<<< HEAD
     "lessons": [],
     "progressList": []
+=======
+    "progressList": [],
+    "lessons" : []
+>>>>>>> master
   } ]
 }

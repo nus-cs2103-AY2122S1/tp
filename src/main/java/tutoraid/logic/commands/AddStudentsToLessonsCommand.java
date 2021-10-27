@@ -16,7 +16,11 @@ import tutoraid.model.student.Student;
 
 
 /**
+<<<<<<< HEAD
  * Adds progress string to an exiting student in TutorAid. Updates the progress if one already exists.
+=======
+ * Adds students to lessons in TutorAid.
+>>>>>>> master
  */
 public class AddStudentsToLessonsCommand extends AddCommand {
 
@@ -56,7 +60,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * @param lesson the lesson to be checked
      * @return true if at least one of the students attends this lesson
      */
-    public boolean isAnyOfTheseStudentsAttendingThisLesson(ArrayList<Student> students, Lesson lesson) {
+    private boolean isAnyOfTheseStudentsAttendingThisLesson(ArrayList<Student> students, Lesson lesson) {
         requireNonNull(students);
         requireNonNull(lesson);
         for (Student student : students) {
@@ -75,9 +79,8 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * @param lessons the lessons to be checked
      * @return true if at least one of the students attends one of the lessons
      */
-    public boolean isAnyOfTheseStudentsAttendingAnyOfTheseLessons(
+    private boolean isAnyOfTheseStudentsAttendingAnyOfTheseLessons(
             ArrayList<Student> students, ArrayList<Lesson> lessons) {
-
         requireNonNull(students);
         requireNonNull(lessons);
         for (Lesson lesson : lessons) {
@@ -90,12 +93,37 @@ public class AddStudentsToLessonsCommand extends AddCommand {
     }
 
     /**
+     * Checks if the lesson can accept an extra number of students without exceeding capacity.
+     *
+     * @param lesson the lesson to be checked
+     * @param numOfStudents the number of students to be added
+     */
+    private boolean canAcceptMoreStudents(Lesson lesson, int numOfStudents) {
+        requireNonNull(lesson);
+        requireNonNull(numOfStudents);
+        return !lesson.exceedsCapacity(numOfStudents);
+    }
+
+    private boolean canAllLessonsAcceptMoreStudents(ArrayList<Lesson> lessons, ArrayList<Student> students) {
+        requireNonNull(students);
+        requireNonNull(lessons);
+        int numOfStudents = students.size();
+        for (Lesson lesson : lessons) {
+            requireNonNull(lesson);
+            if (!canAcceptMoreStudents(lesson, numOfStudents)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Adds all specified students to a lesson
      *
      * @param students the students to be added
      * @param lesson the lesson to have these students attend
      */
-    public void addStudentsToALesson(ArrayList<Student> students, Lesson lesson) {
+    private void addStudentsToALesson(ArrayList<Student> students, Lesson lesson) {
         requireNonNull(students);
         requireNonNull(lesson);
         for (Student student : students) {
@@ -111,9 +139,8 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * @param lastShownStudentList the last list that was shown to the user
      * @param targetIndexesForStudents indexes of students to be added
      */
-    public ArrayList<Student> getStudentsToEdit (
+    public ArrayList<Student> getStudentsToAdd (
             List<Student> lastShownStudentList, ArrayList<Index> targetIndexesForStudents) throws CommandException {
-
         ArrayList<Student> studentsToEdit = new ArrayList<>();
         for (Index index : targetIndexesForStudents) {
             requireNonNull(index);
@@ -128,12 +155,11 @@ public class AddStudentsToLessonsCommand extends AddCommand {
     }
 
     /**
-     * Returns an arraylist of lessons to have students added.
-     *
+     * Returns an arraylist of lessons to be added to students
      * @param lastShownLessonList the last list that was shown to the user
      * @param targetIndexesForLessons indexes of lessons to have students added
      */
-    public ArrayList<Lesson> getLessonsToEdit (
+    public ArrayList<Lesson> getLessonsToAdd (
             List<Lesson> lastShownLessonList, ArrayList<Index> targetIndexesForLessons) throws CommandException {
 
         ArrayList<Lesson> lessonsToEdit = new ArrayList<>();
@@ -157,11 +183,15 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
         List<Lesson> lastShownLessonList = model.getFilteredLessonList();
 
-        ArrayList<Student> studentsToEdit = getStudentsToEdit(lastShownStudentList, targetIndexesForStudents);
-        ArrayList<Lesson> lessonsToEdit = getLessonsToEdit(lastShownLessonList, targetIndexesForLessons);
+        ArrayList<Student> studentsToEdit = getStudentsToAdd(lastShownStudentList, targetIndexesForStudents);
+        ArrayList<Lesson> lessonsToEdit = getLessonsToAdd(lastShownLessonList, targetIndexesForLessons);
 
         if (isAnyOfTheseStudentsAttendingAnyOfTheseLessons(studentsToEdit, lessonsToEdit)) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON);
+        }
+
+        if (!canAllLessonsAcceptMoreStudents(lessonsToEdit, studentsToEdit)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_FULL);
         }
 
         for (Lesson lesson : lessonsToEdit) {
@@ -170,6 +200,8 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         }
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
+        model.viewList(true);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentsToEdit, lessonsToEdit));
     }

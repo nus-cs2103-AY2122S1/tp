@@ -26,13 +26,6 @@ public class Students {
     }
 
     /**
-     * Returns true if student is in the set of students.
-     */
-    public boolean hasStudent(Student otherStudent) {
-        return students.contains(otherStudent);
-    }
-
-    /**
      * Checks if this arraylist of students contains a student.
      *
      * @param student a Student object to be checked
@@ -74,27 +67,35 @@ public class Students {
      */
     public ArrayList<String> getAllStudentNamesAsStringArrayList() {
         ArrayList<String> allStudentNamesAsStringArrayList = new ArrayList<>();
-        for (int i = 0; i < students.size(); i++) {
-            String currentLessonName = students.get(i).toNameString();
+        for (Student student : students) {
+            String currentLessonName = student.toNameString();
             allStudentNamesAsStringArrayList.add(currentLessonName);
         }
         return allStudentNamesAsStringArrayList;
+
+    }
+
+    /**
+     * Returns the number of students in this list.
+     */
+    public int numberOfStudents() {
+        return students.size();
     }
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         int counter = 1;
 
         for (Student student : students) {
-            str += "\n" + counter + ".  " + student.toNameString();
+            str.append("\n").append(counter).append(".  ").append(student.toNameString());
             counter++;
         }
 
-        if (str.equals("")) {
+        if (str.toString().equals("")) {
             return "No students";
         } else {
-            return str;
+            return str.toString();
         }
     }
 

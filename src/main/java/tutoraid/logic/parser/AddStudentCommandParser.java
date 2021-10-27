@@ -17,7 +17,6 @@ import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
-
 /**
  * Parses input arguments and creates a new AddStudentCommand object
  */

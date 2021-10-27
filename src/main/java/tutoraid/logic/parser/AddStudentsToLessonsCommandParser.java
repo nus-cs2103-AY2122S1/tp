@@ -12,13 +12,17 @@ import tutoraid.logic.commands.AddStudentsToLessonsCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
+<<<<<<< HEAD
  * Parses input arguments and creates a new PaidCommand object
+=======
+ * Parses input arguments and creates a new AddStudentsToLessonsCommand object
+>>>>>>> master
  */
 public class AddStudentsToLessonsCommandParser implements Parser<AddStudentsToLessonsCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of AddProgressCommand
-     * and returns an AddProgressCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of AddStudentsToLessonsCommand
+     * and returns an AddStudentsToLessonsCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentsToLessonsCommand parse(String args) throws ParseException {
@@ -27,7 +31,7 @@ public class AddStudentsToLessonsCommandParser implements Parser<AddStudentsToLe
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT, PREFIX_LESSON);
 
-        // Student name is a required fields (student phone, parent name and parent phone are optional)
+        // Must specify student indexes and lesson indexes so these students can be added to these lessons
         if (argMultimap.getValue(PREFIX_STUDENT).isEmpty()
                 || argMultimap.getValue(PREFIX_LESSON).isEmpty()
                 || !argMultimap.getPreamble().isEmpty()) {

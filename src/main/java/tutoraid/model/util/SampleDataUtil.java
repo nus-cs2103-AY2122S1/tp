@@ -52,7 +52,7 @@ public class SampleDataUtil {
             // Student phone unavailable
             new Student(new StudentName("Roy Balakrishnan"), new Phone(""),
                     new ParentName("Mrs Balakrishnan"), new Phone("93628676"),
-                    new ProgressList(), DEFAULT_PAYMENT_STATUS, DEFAULT_LESSONS),
+                    new ProgressList(), DEFAULT_PAYMENT_STATUS, DEFAULT_LESSONS)
         };
     }
 

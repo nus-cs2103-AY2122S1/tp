@@ -60,5 +60,6 @@ public class StudentCard extends Card<Student> {
         progress.setText(formatCardLabel(LABEL_PROGRESS, student.getLatestProgress().toString()));
         lessons.setText(formatCardLabel(LABEL_LESSONS, student.getLessons().toString()));
         paymentStatus.setText(formatCardLabel(LABEL_PAYMENT_STATUS, student.getPaymentStatus().toString()));
+        lessons.setText(formatCardLabel(LABEL_LESSONS, student.getLessons().toString()));
     }
 }

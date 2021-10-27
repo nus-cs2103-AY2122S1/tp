@@ -165,7 +165,7 @@ public class Student {
                 .append("; Payment Status: ")
                 .append(getPaymentStatus())
                 .append("; Lessons: ")
-                .append(getLessons().getAllLessonNamesAsStringArrayList());
+                .append(getLessons());
 
         return builder.toString();
     }

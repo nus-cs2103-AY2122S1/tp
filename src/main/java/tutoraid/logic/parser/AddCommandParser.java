@@ -13,11 +13,12 @@ import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
- * Checks if a given add command is to add a student/lesson to TutorAid or to add a progress note to a student.
+ * Checks if a given add command is to add a student/lesson to TutorAid or to add a progress note to a student
+ * or to add students to lessons.
  */
 public class AddCommandParser implements Parser<AddCommand> {
     /**
-     * Used for initial separation of command flag ('-s', '-p' or '-l') and args.
+     * Used for initial separation of command flag ('-s', '-l', '-p', or '-sl') and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandFlag>\\S+)(?<arguments>.*)");

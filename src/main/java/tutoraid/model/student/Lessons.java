@@ -105,6 +105,10 @@ public class Lessons {
 
     @Override
     public String toString() {
+        if (lessons.size() == 0) {
+            return "No Lesson";
+        }
+
         String str = "";
         int counter = 1;
 

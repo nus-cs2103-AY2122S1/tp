@@ -12,7 +12,11 @@ import tutoraid.logic.commands.DeleteStudentsFromLessonsCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
+<<<<<<< HEAD
  * Parses input arguments and creates a new PaidCommand object
+=======
+ * Parses input arguments and creates a new DeleteStudentsFromLessonsCommand object
+>>>>>>> master
  */
 public class DeleteStudentsFromLessonsCommandParser implements Parser<DeleteStudentsFromLessonsCommand> {
 
@@ -27,7 +31,7 @@ public class DeleteStudentsFromLessonsCommandParser implements Parser<DeleteStud
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STUDENT, PREFIX_LESSON);
 
-        // Student name is a required fields (student phone, parent name and parent phone are optional)
+        // Must specify student indexes and lesson indexes so these students can be removed from these lessons
         if (argMultimap.getValue(PREFIX_STUDENT).isEmpty()
                 || argMultimap.getValue(PREFIX_LESSON).isEmpty()
                 || !argMultimap.getPreamble().isEmpty()) {

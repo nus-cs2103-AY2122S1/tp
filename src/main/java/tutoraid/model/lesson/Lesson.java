@@ -82,6 +82,16 @@ public class Lesson {
     }
 
     /**
+     * Checks if the lesson will exceed capacity when accepting more students.
+     *
+     * @param numOfExtraStudents the number of students to be added
+     * @return true if the number of students after adding is larger than the capacity
+     */
+    public boolean exceedsCapacity(int numOfExtraStudents) {
+        return students.numberOfStudents() + numOfExtraStudents > capacity.getCapacity();
+    }
+
+    /**
      * Returns true if both lessons have the same name.
      * This defines a weaker notion of equality between two lessons.
      */
@@ -99,7 +109,7 @@ public class Lesson {
      *
      * @return The name of the lesson in a String
      */
-    public String toNameString() {
+    public String nameAsString() {
         return this.getLessonName().toString();
     }
 

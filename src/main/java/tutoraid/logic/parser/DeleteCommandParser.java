@@ -14,11 +14,11 @@ import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
  * Checks if a given delete command is to delete a student/lesson from TutorAid
- * or to delete the progress note of a student.
+ * or to delete the progress note of a student or to delete students from lessons.
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
-     * Used for initial separation of command flag ('-s', '-p' or '-l') and args.
+     * Used for initial separation of command flag ('-s', '-l', -p' or '-sl') and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandFlag>\\S+)(?<arguments>.*)");
