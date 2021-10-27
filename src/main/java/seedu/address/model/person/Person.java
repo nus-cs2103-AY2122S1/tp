@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Comparable<Person> {
 
     // Identity fields
     private final Name name;
@@ -25,19 +25,21 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Birthday birthday;
+    private final Pin pin;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Birthday birthday) {
-        requireAllNonNull(name, phone, email, address, tags);
+                  Set<Tag> tags, Birthday birthday, Pin pin) {
+        requireAllNonNull(name, phone, email, address, tags, pin);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.birthday = birthday;
+        this.pin = pin;
     }
 
     public Name getName() {
@@ -62,6 +64,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Pin getPin() {
+        return pin;
+    }
+
+    public boolean isPinned() {
+        return pin.isPinned();
     }
 
     /**
@@ -109,7 +119,22 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getBirthday().equals(getBirthday());
+                && otherPerson.getBirthday().equals(getBirthday())
+                && otherPerson.getPin().equals(getPin());
+    }
+
+    @Override
+    public int compareTo(Person otherPerson) {
+        if (otherPerson.isPinned() && this.isPinned()) {
+            return 0;
+        }
+        if (otherPerson.isPinned()) {
+            return 1;
+        }
+        if (this.isPinned()) {
+            return -1;
+        }
+        return 0;
     }
 
     @Override

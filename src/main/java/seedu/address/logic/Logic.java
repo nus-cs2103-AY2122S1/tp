@@ -49,4 +49,9 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns an unmodifiable list of upcoming birthdays
+     */
+    ObservableList<Person> getBirthdayReminderList();
 }
