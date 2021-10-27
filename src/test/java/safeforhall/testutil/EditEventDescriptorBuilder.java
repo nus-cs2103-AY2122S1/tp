@@ -5,6 +5,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.Venue;
 
 /**
@@ -29,6 +30,7 @@ public class EditEventDescriptorBuilder {
         descriptor = new EditEventCommand.EditEventDescriptor();
         descriptor.setName(event.getEventName());
         descriptor.setDate(event.getEventDate());
+        descriptor.setTime(event.getEventTime());
         descriptor.setVenue(event.getVenue());
         descriptor.setCapacity(event.getCapacity());
     }
@@ -46,6 +48,14 @@ public class EditEventDescriptorBuilder {
      */
     public safeforhall.testutil.EditEventDescriptorBuilder withDate(String date) {
         descriptor.setDate(new EventDate(date));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EventTime} of the {@code EditEventDescriptor} that we are building.
+     */
+    public safeforhall.testutil.EditEventDescriptorBuilder withTime(String time) {
+        descriptor.setTime(new EventTime(time));
         return this;
     }
 

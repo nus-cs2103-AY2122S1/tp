@@ -14,19 +14,22 @@ import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Person;
 
 public class AddEventCommand extends Command {
-    public static final String COMMAND_WORD = "add";
 
+    public static final String COMMAND_WORD = "add";
+    public static final String PARAMETERS = "n/NAME d/DATE v/VENUE c/CAPACITY r/RESIDENTS";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_NAME + "NAME "
             + CliSyntax.PREFIX_DATE + "DATE "
+            + CliSyntax.PREFIX_TIME + "TIME "
             + CliSyntax.PREFIX_VENUE + "VENUE "
             + CliSyntax.PREFIX_CAPACITY + "CAPACITY "
             + CliSyntax.PREFIX_RESIDENTS + "RESIDENTS \n"
 
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_NAME + "Football "
+            + CliSyntax.PREFIX_NAME + "Football Training "
             + CliSyntax.PREFIX_DATE + "03-01-2021 "
+            + CliSyntax.PREFIX_TIME + "0830 "
             + CliSyntax.PREFIX_VENUE + "NUS field "
             + CliSyntax.PREFIX_CAPACITY + "5 "
             + CliSyntax.PREFIX_RESIDENTS + "Alex Yeoh ";
@@ -61,8 +64,9 @@ public class AddEventCommand extends Command {
 
         ArrayList<Person> personList = model.toPersonList(toAdd.getResidentList());
         String combinedStorageString = toAdd.getCombinedStorageString(personList);
-        Event editedEvent = new Event(toAdd.getEventName(), toAdd.getEventDate(), toAdd.getVenue(),
-                toAdd.getCapacity(), new ResidentList(personListToString(personList), combinedStorageString));
+        Event editedEvent = new Event(toAdd.getEventName(), toAdd.getEventDate(), toAdd.getEventTime(),
+                toAdd.getVenue(), toAdd.getCapacity(), new ResidentList(personListToString(personList),
+                combinedStorageString));
         model.addEvent(editedEvent);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

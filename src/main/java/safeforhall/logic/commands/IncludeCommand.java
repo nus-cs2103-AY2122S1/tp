@@ -19,7 +19,7 @@ import safeforhall.model.person.Person;
 public class IncludeCommand extends Command {
 
     public static final String COMMAND_WORD = "include";
-
+    public static final String PARAMETERS = "INDEX r/ROOM/NAME";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds residents to the given event.\n"
             + "Parameters: "
             + "INDEX "
@@ -81,12 +81,12 @@ public class IncludeCommand extends Command {
         ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidentList());
 
         checkForDuplicates(toAdd, currentResidents);
-
         String combinedDisplayString = event.getCombinedDisplayString(toAdd);
         String combinedStorageString = event.getCombinedStorageString(toAdd);
 
-        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getVenue(),
-                event.getCapacity(), new ResidentList(combinedDisplayString, combinedStorageString));
+        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
+                event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString,
+                combinedStorageString));
         model.setEvent(event, editedEvent);
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
 

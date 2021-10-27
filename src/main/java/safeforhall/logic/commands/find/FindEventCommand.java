@@ -19,6 +19,7 @@ import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
 import safeforhall.model.event.EventNameContainsKeywordsPredicate;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.Venue;
 
 /**
@@ -28,7 +29,7 @@ import safeforhall.model.event.Venue;
 public class FindEventCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-
+    public static final String PARAMETERS = "[n/NAME] [d/DATE] [v/VENUE] [c/CAPACITY]";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose parameters match any of "
             + "the provided keywords for different options (case-insensitive)\nand displays them as a "
             + "list with index numbers.\n"
@@ -72,12 +73,14 @@ public class FindEventCommand extends Command {
     public static class FindCompositePredicate implements Predicate<Event> {
         private Predicate<Event> eventName;
         private Predicate<EventDate> eventDate;
+        private Predicate<EventTime> eventTime;
         private Predicate<Venue> venue;
         private Predicate<Capacity> capacity;
 
         // For equality checks
         private EventName eEventName;
         private EventDate eEventDate;
+        private EventTime eEventTime;
         private Venue eVenue;
         private Capacity eCapacity;
 
@@ -89,11 +92,13 @@ public class FindEventCommand extends Command {
         public FindCompositePredicate(FindCompositePredicate toCopy) {
             this.eventName = toCopy.eventName;
             this.eventDate = toCopy.eventDate;
+            this.eventTime = toCopy.eventTime;
             this.venue = toCopy.venue;
             this.capacity = toCopy.capacity;
 
             this.eEventName = toCopy.eEventName;
             this.eEventDate = toCopy.eEventDate;
+            this.eEventTime = toCopy.eEventTime;
             this.eVenue = toCopy.eVenue;
             this.eCapacity = toCopy.eCapacity;
         }
@@ -102,7 +107,7 @@ public class FindEventCommand extends Command {
          * Returns true if at least one field is to be filtered with.
          */
         public boolean isAnyFieldFiltered() {
-            return CollectionUtil.isAnyNonNull(eventName, eventDate, venue, capacity);
+            return CollectionUtil.isAnyNonNull(eventName, eventDate, eventTime, venue, capacity);
         }
 
         public void setEventName(EventName eventName) {
@@ -113,6 +118,11 @@ public class FindEventCommand extends Command {
         public void setEventDate(EventDate eventDate) {
             this.eEventDate = eventDate;
             this.eventDate = eventDate::equals;
+        }
+
+        public void setEventTime(EventTime eventTime) {
+            this.eEventTime = eventTime;
+            this.eventTime = eventTime::equals;
         }
 
         public void setVenue(Venue venue) {
@@ -131,6 +141,10 @@ public class FindEventCommand extends Command {
 
         public Optional<Predicate<EventDate>> getEventDate() {
             return Optional.ofNullable(eventDate);
+        }
+
+        public Optional<Predicate<EventTime>> getEventTime() {
+            return Optional.ofNullable(eventTime);
         }
 
         public Optional<Predicate<Venue>> getVenue() {
@@ -152,6 +166,7 @@ public class FindEventCommand extends Command {
             List<Predicate<Event>> allPredicates = Arrays.asList(
                 p -> getEventName().orElse(x -> true).test(p),
                 p -> getEventDate().orElse(x -> true).test(p.getEventDate()),
+                p -> getEventTime().orElse(x -> true).test(p.getEventTime()),
                 p -> getVenue().orElse(x -> true).test(p.getVenue()),
                 p -> getCapacity().orElse(x -> true).test(p.getCapacity()));
 
@@ -178,6 +193,7 @@ public class FindEventCommand extends Command {
 
             return Objects.equals(eEventName, e.eEventName)
                     && Objects.equals(eEventDate, e.eEventDate)
+                    && Objects.equals(eEventTime, e.eEventTime)
                     && Objects.equals(eVenue, e.eVenue)
                     && Objects.equals(eCapacity, e.eCapacity);
         }

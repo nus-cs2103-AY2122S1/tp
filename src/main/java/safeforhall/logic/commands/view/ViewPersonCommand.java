@@ -19,7 +19,7 @@ import safeforhall.model.person.Person;
 public class ViewPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-
+    public static final String PARAMETERS = "[INDEX]";
     public static final String MESSAGE_ALL_RESIDENTS_SHOWN = "All residents shown";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the additional details of the "
