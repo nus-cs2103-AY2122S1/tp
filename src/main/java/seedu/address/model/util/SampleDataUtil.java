@@ -42,25 +42,25 @@ public class SampleDataUtil {
             new Participant(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"), BirthDate.of(1982, 5, 13),
-                getNoteSet(new Note("Dislike pepper", Note.Importance.MEDIUM)),
+                getNoteSet(new Note("Dislike seafood", Note.Importance.MEDIUM)),
                 List.of(new NextOfKin(new Name("Daniel Pruvos"), new Phone("83460328"), new Tag("Brother")))),
 
             new Participant(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), BirthDate.of(1999, 2, 2), getNoteSet(new Note("Vegetarian",
+                getTagSet("family"), BirthDate.of(1999, 2, 2), getNoteSet(new Note("Vegan",
                 Note.Importance.VERY_HIGH)),
                 List.of(new NextOfKin(new Name("Maria Li"), new Phone("84459923"), new Tag("Girlfriend")))),
 
             new Participant(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), BirthDate.of(2000, 5, 23), getNoteSet(new Note("Dislike ill-mannered Person",
-                Note.Importance.MEDIUM)),
+                getTagSet("classmates"), BirthDate.of(2000, 5, 23), getNoteSet(new Note("Allergic to Nuts",
+                Note.Importance.VERY_HIGH)),
                 List.of(new NextOfKin(new Name("Juliet Ibrahim"), new Phone("89345342"), new Tag("Grandparent")))),
 
             new Participant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"), BirthDate.of(1999, 2, 8),
-                getNoteSet(new Note("Excessive attraction to " + "Alcohol",
+                getNoteSet(new Note("3 Month Paternity Leave beginning 2021-10-01",
                 Note.Importance.HIGH)),
                 List.of(new NextOfKin(new Name("Rouse Balakrishnan"), new Phone("93822312"), new Tag("Brother"))))
         };
@@ -68,15 +68,15 @@ public class SampleDataUtil {
 
     public static Event[] getSampleEvents() {
         return new Event[]{
-            new Event(new EventName("240Km Marathon"), new EventDate("2022-08-20")),
-            new Event(new EventName("Marathon Commencement"), new EventDate("2022-08-20"), new EventTime("0000")),
-            new Event(new EventName("CS2100 Finals"), new EventDate("2021-11-20"), new EventTime("0900")),
-            new Event(new EventName("CS2103T Submission"), new EventDate("2021-09-30")),
-            new Event(new EventName("End of Recess Week"), new EventDate("2021-09-26"), new EventTime("2359")),
-            new Event(new EventName("Recess Week"), new EventDate("2021-09-20"), new EventTime("0000")),
-            new Event(new EventName("Dinner"), new EventDate("2021-09-21"), new EventTime("2100")),
-            new Event(new EventName("Lunch"), new EventDate("2021-09-21"), new EventTime("1300")),
-            new Event(new EventName("BreakFast"), new EventDate("2021-09-21"), new EventTime("0800"))
+            new Event(new EventName("Investment Pitch with Sequoia Capital"), new EventDate("2022-08-20"), new EventTime("0800")),
+            new Event(new EventName("Mangera Marketing Team Retreat"), new EventDate("2022-08-20"), new EventTime("0900")),
+            new Event(new EventName("Managera Product Team Retreat"), new EventDate("2021-09-21"), new EventTime("0800")),
+            new Event(new EventName("Managera Annual Shareholder Meeting"), new EventDate("2021-11-20"), new EventTime("0900")),
+            new Event(new EventName("Managera Dinner and Dance"), new EventDate("2021-09-30")),
+            new Event(new EventName("Monthly Roundup #28"), new EventDate("2021-09-26"), new EventTime("0900")),
+            new Event(new EventName("Monthly Roundup #29"), new EventDate("2021-10-28"), new EventTime("0900")),
+            new Event(new EventName("Monthly Roundup #30"), new EventDate("2021-11-28"), new EventTime("0900")),
+            new Event(new EventName("Managera Alpha Release Milestone"), new EventDate("2021-09-20")),
         };
     }
 
