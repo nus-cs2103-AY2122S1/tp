@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::executeSystemCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         birthdayReminderListPanel = new BirthdayReminderListPanel(logic.getFilteredPersonList());
@@ -199,5 +199,11 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private CommandResult executeSystemCommand(String commandText) {
+        CommandResult commandResult = logic.systemExecute(commandText);
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+        return commandResult;
     }
 }

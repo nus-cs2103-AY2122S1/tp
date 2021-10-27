@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +18,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandExecutor systemExecutor;
 
     @FXML
     private TextField commandTextField;
@@ -24,9 +26,10 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, CommandExecutor systemExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.systemExecutor = systemExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -47,6 +50,20 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    @FXML
+    private void handleKeyStroke(KeyEvent event) {
+        String commandText = commandTextField.getText();
+        if (commandText.equals("")) {
+            return;
+        }
+        try {
+            systemExecutor.execute(commandText);
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+        event.consume();
     }
 
     /**
