@@ -2,6 +2,10 @@ package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY_TIME_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
+import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
 
 import java.util.Set;
 
@@ -20,11 +24,14 @@ import seedu.address.model.gamefriendlink.GameFriendLink;
 
 public class ScheduleFriendCommand extends Command {
     public static final String COMMAND_WORD = "--schedule";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedules free time for friend.\n"
-            + "Parameters: FRIEND_ID --period START_HOUR END_HOUR DAY --free IS_FREE\n"
-            + "Example: " + COMMAND_WORD + " Draco --period 0800 0900 3 --free 1\n";
 
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_SCHEDULE + "FRIEND_ID " + FLAG_PERIOD + "START_HOUR END_HOUR DAY "
+            + FLAG_FREE + "IS_FREE\n"
+            + "Example: "
+            + CMD_FRIEND + " " + FLAG_SCHEDULE + "Draco " + FLAG_PERIOD + "0800 0900 3 " + FLAG_FREE + "1\n";
     public static final String MESSAGE_SCHEDULE_FRIEND_SUCCESS = "Scheduled Friend: %1$s";
+
     private FriendId friendToScheduleId;
     private int day;
     private String startTime;

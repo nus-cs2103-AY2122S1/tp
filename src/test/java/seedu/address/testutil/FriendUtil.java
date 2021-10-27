@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 
 import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.logic.commands.friends.EditFriendCommand;
@@ -27,7 +27,7 @@ public class FriendUtil {
         sb.append(friend.getFriendId().value + " ");
         sb.append(FLAG_FRIEND_NAME + friend.getFriendName().fullName + " ");
         friend.getGameFriendLinks().stream().forEach(
-            game -> sb.append(FLAG_GAME_OLD + game.getGameId().value + " ")
+            game -> sb.append(FLAG_GAME + game.getGameId().value + " ")
         );
         return sb.toString();
     }

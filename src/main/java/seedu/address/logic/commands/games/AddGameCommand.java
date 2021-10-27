@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.games;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -11,17 +13,15 @@ import seedu.address.model.game.Game;
 
 public class AddGameCommand extends Command {
     public static final String COMMAND_WORD = "--add";
-    // add command messages
+
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_GAME + " " + FLAG_ADD + "GAME_ID\n"
+            + "Example: "
+            + CMD_GAME + " " + FLAG_ADD + "Valorant";
     public static final String MESSAGE_SUCCESS_ADD_GAME = "New game added - %1$s";
     public static final String MESSAGE_DUPLICATE_GAME = "A game with the same GAME_ID"
             + " already exists in the gitGud games list.";
-    public static final String MESSAGE_USAGE = "To add a game: \n"
-            + "game " + COMMAND_WORD
-            + " GAME_ID: "
-            + "Adds a game to the gitGud games list. \n"
-            + "Example: "
-            + COMMAND_WORD + " "
-            + "Valorant";
+
     private final Game toAdd;
 
     /**
