@@ -48,9 +48,6 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void add(Student toAdd) {
         requireNonNull(toAdd);
-        if (labs.isEmpty() && !internalList.isEmpty()) {
-            labs.addAll(internalList.get(0).getFreshLabList());
-        }
         toAdd.setLabResultRecord(labs);
         if (contains(toAdd)) {
             throw new DuplicateStudentException();
@@ -124,7 +121,10 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!studentsAreUnique(students)) {
             throw new DuplicateStudentException();
         }
-
+        if (!students.isEmpty()) {
+            labs.clear();
+            labs.addAll(students.get(0).getFreshLabList());
+        }
         internalList.setAll(students);
         internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }

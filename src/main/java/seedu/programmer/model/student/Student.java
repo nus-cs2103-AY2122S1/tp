@@ -111,7 +111,7 @@ public class Student {
     public Boolean addLab(Lab lab) {
         int index = this.labList.indexOf(lab);
         if (index == -1) {
-            Lab newLab = lab;
+            Lab newLab = lab.copy();
             this.labList.add(newLab);
             labList.sort(new SortByLabNumber());
             return true;

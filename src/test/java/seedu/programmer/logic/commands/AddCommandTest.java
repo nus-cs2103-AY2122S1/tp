@@ -134,11 +134,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addLab(Lab lab) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setProgrammerError(ReadOnlyProgrammerError programmerError) {
             throw new AssertionError("This method should not be called.");
         }
@@ -159,11 +154,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteLab(Lab target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Lab> showLabResultList(Student target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -175,6 +165,21 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Student> getFilteredStudentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Student> getSelectedStudentWrapper() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedStudentWrapper(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearSelectedStudentWrapper() {
             throw new AssertionError("This method should not be called.");
         }
 
