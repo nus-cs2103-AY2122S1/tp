@@ -314,6 +314,7 @@ Example usages:
 </div>
 
 ![](images/UG-images/clear.png)
+___
 
 ### Finding an anime: `find`
 
@@ -327,6 +328,7 @@ Format: `find [n/NAME KEYWORD]... [g/GENRE KEYWORD]...`
 
 Example:
 *  `find n/boku no n/hero g/comedy`
+___
 
 ### View user statistics: `stats`
 
