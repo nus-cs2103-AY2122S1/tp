@@ -114,7 +114,7 @@ public class Applicant {
 
     /**
      * Returns true if this applicant has the specified name.
-     * The comparison is case-insensitive.
+     * Case-insensitive comparison.
      */
     public boolean hasNameIgnoreCase(Name name) {
         requireNonNull(name);
