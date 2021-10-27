@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
             + "\nModify:\n"
             + "add <parameters>                 " + "\tAdd a contact\n"
             + "edit <index> <parameters>        " + "\tEdit a contact by index\n"
-            + "remark <index> <parameters>   "    + "Add a remark by index\n"
+            + "remark <index> <parameters>   " + "Add a remark by index\n"
             + "delete <index>                   " + "\t\tDelete a contact by index\n"
             + "deletem <parameters>             " + "\tDelete contacts by keywords\n"
             + "clear                            " + "\t\t\tClear all contacts\n"
