@@ -6,6 +6,7 @@ import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
@@ -17,11 +18,13 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TELEGRAM_HANDLE = "@amy_bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_NOTE = "Weak in environment model.";
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
 
     private Name name;
     private TelegramHandle telegramHandle;
     private Email email;
+    private Note note;
     private GroupName groupName;
     private UniqueAssessmentList assessments;
 
@@ -32,6 +35,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         email = new Email(DEFAULT_EMAIL);
+        note = new Note(DEFAULT_NOTE);
         groupName = new GroupName(DEFAULT_GROUP_NAME);
         assessments = new UniqueAssessmentList();
     }
@@ -43,6 +47,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         telegramHandle = studentToCopy.getTelegramHandle();
         email = studentToCopy.getEmail();
+        note = studentToCopy.getNote();
         groupName = studentToCopy.getGroupName();
         assessments = new UniqueAssessmentList();
 
@@ -73,6 +78,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Note} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withNote(String note) {
+        this.note = new Note(note);
         return this;
     }
 
@@ -113,7 +126,7 @@ public class StudentBuilder {
      * @return built student
      */
     public Student build() {
-        Student student = new Student(name, telegramHandle, email, groupName);
+        Student student = new Student(name, telegramHandle, email, note, groupName);
         ObservableList<Assessment> unmodifiableAssessments = assessments.asUnmodifiableObservableList();
         for (int i = 0; i < unmodifiableAssessments.size(); i++) {
             student.addAssessment(unmodifiableAssessments.get(i));

@@ -27,11 +27,11 @@ import seedu.address.model.student.Student;
 public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline").withEmail("alice@example.com")
-            .withTelegramHandle("@alice_pauline").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
+            .withTelegramHandle("@alice_pauline").withGroupName(TYPICAL_GROUP_CS2103T_NAME).withNote("Is a cs god.")
             .withAssessment(MIDTERMS).withAssessment(QUIZ1).build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withEmail("johnd@example.com")
-            .withTelegramHandle("@benson_meier").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).withAssessment(QUIZ1).build();
+            .withTelegramHandle("@benson_meier").withNote("He is bad at UML diagrams")
+            .withGroupName(TYPICAL_GROUP_CS2103T_NAME).withAssessment(MIDTERMS).withAssessment(QUIZ1).build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
             .withTelegramHandle("@carl_kurz").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withEmail("cornelia@example.com")

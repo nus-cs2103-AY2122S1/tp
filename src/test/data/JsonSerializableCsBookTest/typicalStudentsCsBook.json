@@ -4,6 +4,7 @@
     "name" : "Alice Pauline",
     "telegramHandle" : "@alice_pauline",
     "email" : "alice@example.com",
+    "note" : "",
     "groupName": "CS2103T",
     "assessments" : [ {
       "assessmentName" : "Midterms",
@@ -16,6 +17,7 @@
     "name" : "Benson Meier",
     "telegramHandle" : "@benson_meier",
     "email" : "johnd@example.com",
+    "note" : "",
     "groupName": "CS2103T",
     "assessments" : [ {
       "assessmentName" : "Midterms",
@@ -28,30 +30,35 @@
     "name" : "Carl Kurz",
     "telegramHandle" : "@carl_kurz",
     "email" : "heinz@example.com",
+    "note" : "",
     "groupName": "CS2103T",
     "assessments" : []
   }, {
     "name" : "Daniel Meier",
     "telegramHandle" : "@daniel_meier",
     "email" : "cornelia@example.com",
+    "note" : "",
     "groupName": "CS2103T",
     "assessments" : []
   }, {
     "name" : "Elle Meyer",
     "telegramHandle" : "@elle_meyer",
     "email" : "werner@example.com",
+    "note" : "",
     "groupName": "CS2103T",
     "assessments" : []
   }, {
     "name" : "Fiona Kunz",
     "telegramHandle" : "@fiona_kunz",
     "email" : "lydia@example.com",
+    "note" : "",
     "groupName": "CS2103T",
     "assessments" : []
   }, {
     "name" : "George Best",
     "telegramHandle" : "@george_best",
     "email" : "anna@example.com",
+    "note" : "",
     "groupName": "CS2103T",
     "assessments" : []
   } ],

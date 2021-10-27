@@ -333,16 +333,12 @@
     -fx-background-radius: 0;
 }
 
-#notes .content{
+#notes .content {
     -fx-background-color: #d3e3fc;
     -fx-background-radius: 0;
 }
 
-#notes {
-    -fx-background-color: transparent;
-}
-
-#noteCard {
+#notes, #noteCard {
     -fx-background-color: transparent;
 }
 
@@ -387,10 +383,27 @@
     -fx-text-fill: grey;
 }
 
-.bigger_label {
+.bigger_student_name{
     -fx-font-family: fantasy;
     -fx-font-weight: bold;
-    -fx-font-size: 50px;
+    -fx-font-size: 70px;
     -fx-text-fill: #010504;
+}
+
+.student_details {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: grey;
+}
+
+.bigger_group_name {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 2,2;
+    -fx-border-radius: 5;
+    -fx-background-color: #77a6f7;
+    -fx-background-radius: 5;
 }
 

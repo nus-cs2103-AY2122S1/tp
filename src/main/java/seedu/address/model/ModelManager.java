@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,11 +14,12 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.group.GroupNameContainsKeywordPredicate;
+import seedu.address.model.student.ContainsStudentNamePredicate;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
@@ -113,9 +113,20 @@ public class ModelManager implements Model {
         Name name = foundStudent.getName();
         TelegramHandle telegramHandle = foundStudent.getTelegramHandle();
         Email email = foundStudent.getEmail();
+        Note note = foundStudent.getNote();
         GroupName groupName = newGroup.getGroupName();
-        Student updatedStudent = new Student(name, telegramHandle, email, groupName);
+        Student updatedStudent = new Student(name, telegramHandle, email, note, groupName);
         csBook.setStudent(foundStudent, updatedStudent);
+    }
+
+    @Override
+    public void updateStudentNote(Student student, Note updatedNote) {
+        Name name = student.getName();
+        TelegramHandle telegramHandle = student.getTelegramHandle();
+        Email email = student.getEmail();
+        GroupName groupName = student.getGroupName();
+        Student editedStudent = new Student(name, telegramHandle, email, updatedNote, groupName);
+        setStudent(student, editedStudent);
     }
 
     @Override
@@ -125,7 +136,7 @@ public class ModelManager implements Model {
         Group retrievedGroup = getGroupByGroupName(groupName);
 
         // Remove reference to student from the group that the student belonged to
-        retrievedGroup.removeStudent(target);
+        retrievedGroup.removeStudentName(target.getName());
 
         csBook.removeStudent(target);
     }
@@ -137,14 +148,14 @@ public class ModelManager implements Model {
         Group retrievedGroup = getGroupByGroupName(groupName);
 
         // Add reference to student into the group
-        retrievedGroup.addStudent(student);
+        retrievedGroup.addStudentName(student.getName());
 
         csBook.addStudent(student);
     }
 
     @Override
     public Student getStudentByName(Name studentName) {
-        updateFilteredStudentList(new NameContainsKeywordsPredicate(List.of(studentName.toString())));
+        updateFilteredStudentList(new ContainsStudentNamePredicate(studentName));
 
         // return null if the student is not found
         if (getFilteredStudentList().isEmpty()) {
@@ -187,27 +198,29 @@ public class ModelManager implements Model {
         Group oldGroup = getGroupByGroupName(oldGroupName);
 
         // remove reference to student in old group
-        oldGroup.removeStudent(student);
+        oldGroup.removeStudentName(student.getName());
 
         // get new group
         GroupName newGroupName = group.getGroupName();
         Group newGroup = getGroupByGroupName(newGroupName);
 
-        //TODO: junwei might need to change to student name below
-
         // add reference to student in new group
-        newGroup.addStudent(student);
+        newGroup.addStudentName(student.getName());
     }
 
     @Override
     public void deleteGroup(Group target) {
-        Set<Student> studentsToDelete = target.getStudents();
+        Set<Name> namesOfStudentsToDelete = target.getStudentNames();
 
         // Delete all students associated with the group
-        for (Student student : studentsToDelete) {
-            csBook.removeStudent(student);
+        for (Name studentName : namesOfStudentsToDelete) {
+            updateFilteredStudentList((student -> student.getName().equals(studentName)));
+            // Should have only 1 student found since we cant have students with same name
+            assert(filteredStudents.size() == 1);
+            csBook.removeStudent(filteredStudents.get(0));
         }
-
+        //Resets filtered student list to show all students
+        updateFilteredStudentList(student -> true);
         csBook.removeGroup(target);
     }
 
@@ -219,7 +232,7 @@ public class ModelManager implements Model {
 
     @Override
     public Group getGroupByGroupName(GroupName groupName) {
-        updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
+        updateFilteredGroupList(new GroupNameContainsKeywordPredicate(groupName));
 
         // return null if the group is not found
         if (getFilteredGroupList().isEmpty()) {

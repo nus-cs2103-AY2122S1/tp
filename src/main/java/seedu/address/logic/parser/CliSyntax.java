@@ -11,6 +11,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_GROUP_NAME = new Prefix("g/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix ("d/");
+    public static final Prefix PREFIX_NOTE = new Prefix("no/");
     public static final Prefix PREFIX_ASSESSMENT_NAME = new Prefix("a/");
     public static final Prefix PREFIX_SCORE = new Prefix("s/");
 }

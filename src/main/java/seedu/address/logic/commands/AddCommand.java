@@ -59,7 +59,8 @@ public class AddCommand extends Command {
         }
 
         Student studentToAdd =
-                new Student(toAdd.getName(), toAdd.getTelegramHandle(), toAdd.getEmail(), toAdd.getGroupName());
+                new Student(toAdd.getName(),
+                        toAdd.getTelegramHandle(), toAdd.getEmail(), toAdd.getNote(), toAdd.getGroupName());
 
         // Add student with the group fetched from the data in the model
         model.addStudent(studentToAdd);

@@ -2,18 +2,14 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -41,7 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private AssessmentListPanel assessmentListPanel;
     private DetailedStudentCard detailedStudentCard;
     private HelpWindow helpWindow;
-
+    private ResultPopup resultPopup;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -73,6 +69,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resultPopup = new ResultPopup(this.primaryStage);
     }
 
     public Stage getPrimaryStage() {
@@ -203,25 +200,13 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            // create a label
-            Label label = new Label(commandResult.getFeedbackToUser());
-
-            // create a popup
-            Popup popup = new Popup();
-
-            // set background
-            label.setStyle(" -fx-background-color: white;");
-
-            // add the label
-            popup.getContent().add(label);
-            popup.show(primaryStage);
-            PauseTransition delay = new PauseTransition(Duration.seconds(5));
-            delay.setOnFinished(event -> popup.hide());
-            delay.play();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+                return commandResult;
             }
+
+            resultPopup.setFeedbackToUser(commandResult.getFeedbackToUser(), false);
 
             if (commandResult.isExit()) {
                 handleExit();
@@ -232,10 +217,10 @@ public class MainWindow extends UiPart<Stage> {
             } else {
                 showAllStudentsAndGroups();
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
+            resultPopup.setFeedbackToUser(e.getMessage(), true);
             throw e;
         }
     }
