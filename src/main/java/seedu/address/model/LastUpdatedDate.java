@@ -1,6 +1,8 @@
 package seedu.address.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -43,6 +45,14 @@ public class LastUpdatedDate {
      */
     public LastUpdatedDate getLastUpdatedDate() {
         return new LastUpdatedDate(value);
+    }
+
+    public LocalDate getLastUpdatedLocalDate() {
+        return dateTime.toLocalDate();
+    }
+
+    public LocalTime getLastUpdatedLocalTime() {
+        return dateTime.toLocalTime();
     }
 
     /**

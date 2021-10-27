@@ -98,6 +98,12 @@ public class Date implements Comparable<Date> {
         return newDate;
     }
 
+    public boolean isDateBetween(LocalDate start, LocalDate end) {
+        boolean isAterOrEqualsStart = getLocalDate().isAfter(start) || getLocalDate().isEqual(start);
+        boolean isBeforeOrEqualsEnd = getLocalDate().isBefore(end) || getLocalDate().isEqual(end);
+        return isAterOrEqualsStart && isBeforeOrEqualsEnd;
+    }
+
     /**
      * Checks if the date has passed.
      *

@@ -38,6 +38,7 @@ public class FeesCalculator implements Calculator {
             + "outstanding fees. Invalid transaction.";
 
     private static final float numberOfMinutesInAnHour = 60.00F;
+    private static final float numberOfDaysInAWeek = 7;
     private final LocalDateTime currentDateTime;
     private final LastUpdatedDate lastUpdated;
 
@@ -56,8 +57,7 @@ public class FeesCalculator implements Calculator {
     public Model updateAllLessonOutstandingFees(Model model) {
         List<Person> personList = model.getFilteredPersonList();
 
-        for (int i = 0; i < personList.size(); i++) {
-            Person targetPerson = personList.get(i);
+        for (Person targetPerson : personList) {
             model.setPerson(targetPerson, createEditedPerson(targetPerson));
         }
 
@@ -102,7 +102,7 @@ public class FeesCalculator implements Calculator {
         // update outstanding fees after calculation
         OutstandingFees updatedOutstandingFees = lesson.hasStarted() && !lesson.hasEnded()
                 ? getUpdatedOutstandingFees(currentOutstanding, lesson.getDayOfWeek(),
-                        copiedTimeRange, copiedLessonRates)
+                        copiedTimeRange, copiedLessonRates, copiedCancelledDates)
                 : new OutstandingFees(lesson.getOutstandingFees().value);
 
         return lesson.isRecurring()
@@ -122,10 +122,10 @@ public class FeesCalculator implements Calculator {
      * @return Updated Outstanding Fees object.
      */
     public OutstandingFees getUpdatedOutstandingFees(OutstandingFees original, DayOfWeek updateDay, TimeRange timeRange,
-                                                     LessonRates lessonRates) {
+                                                     LessonRates lessonRates, Set<Date> cancelledDates) {
 
         // updated fee values
-        int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, timeRange.getStart());
+        int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, timeRange.getEnd(), cancelledDates);
         float costPerLesson = getCostPerLesson(timeRange, lessonRates);
         float updatedFees = costPerLesson * (float) numberOfLessons + original.getMonetaryValueInFloat();
 
@@ -135,64 +135,57 @@ public class FeesCalculator implements Calculator {
     private float getCostPerLesson(TimeRange timeRange, LessonRates lessonRates) {
         Duration duration = timeRange.getDuration();
         float durationInHour = duration.toMinutes() / numberOfMinutesInAnHour;
-        float costPerLesson = durationInHour * lessonRates.getMonetaryValueInFloat();
-        return costPerLesson;
+        return durationInHour * lessonRates.getMonetaryValueInFloat();
     }
 
-    public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalTime endTime) {
-        int numOfLessons = 0;
+    public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalTime endTime, Set<Date> cancelledDates) {
 
-        int lastUpdatedDay = lastUpdated.dateTime.getDayOfWeek().getValue();
+        int lastUpdatedDay = lastUpdated.getLastUpdatedLocalDate().getDayOfWeek().getValue();
         int currentUpdatedDay = currentDateTime.getDayOfWeek().getValue();
 
-        // Get the nearest Monday
-        LocalDate nearestNextMondayToLastUpdated =
-                lastUpdated.dateTime.toLocalDate().with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
-        long numOfDaysBeforeMonday = lastUpdated.dateTime
-                .toLocalDate()
-                .until(nearestNextMondayToLastUpdated, ChronoUnit.DAYS);
+        boolean isUpdatedToday = lastUpdated.getLastUpdatedLocalDate().isEqual(currentDateTime.toLocalDate());
+        boolean isUpdatedBeforeLessonOver = lastUpdated.getLastUpdatedLocalTime().isBefore(endTime);
 
-        // if lesson is same day of week as last updated, check if last updated is before lesson
-        // if yes, lesson not recorded
-        boolean isSameDayLessonBeforeUpdate = updateDay.getValue() != lastUpdatedDay
-                || lastUpdated.dateTime.toLocalTime().isBefore(endTime);
-
-        // If lesson does not fall on a Monday itself
-        // check if the lastUpdated day is it on the lesson's update day or after the updated day
-        // if it is on update day check if the last update was before lesson endTime
-        // if all true
-        boolean isLessonBetweenLastUpdateAndMonday = numOfDaysBeforeMonday > 0
-                && updateDay.getValue() >= lastUpdatedDay
-                && isSameDayLessonBeforeUpdate;
-
-        if (isLessonBetweenLastUpdateAndMonday) {
-            numOfLessons += 1;
+        // if app launched today and lastUpdated is before this lesson ended
+        if (isUpdatedToday && isUpdatedBeforeLessonOver) {
+            return 1;
         }
 
-        LocalDate nearestPreviousMondayToCurrent =
-                currentDateTime.toLocalDate().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        // Number of Days between last updated and current date excluding these both days
+        long numOfDays = ChronoUnit.DAYS
+                .between(lastUpdated.getLastUpdatedLocalDate()
+                        .plus(1, ChronoUnit.DAYS), currentDateTime.toLocalDate());
+        int lessonCount = (int) Math.floor((int) numOfDays / numberOfDaysInAWeek);
+        // Represents the number of days from nearest update day to current day
+        int remainder = (int) (numOfDays % numberOfDaysInAWeek);
 
-        numOfLessons += ChronoUnit.WEEKS.between(nearestNextMondayToLastUpdated, nearestPreviousMondayToCurrent);
+        // Number of days since last updated day
+        int sinceLastUpdateDay = (int)(currentUpdatedDay - updateDay.getValue());
 
-        long numOfDaysAfterMonday = nearestPreviousMondayToCurrent
-                .until(currentDateTime.toLocalDate(), ChronoUnit.DAYS);
-
-        // if lesson is same day of week as current date, check if current is after lesson
-        // if yes, lesson not recorded
-        boolean isSameDayLessonAfterCurrent = updateDay.getValue() != currentUpdatedDay
-                || currentDateTime.toLocalTime().isAfter(endTime);
-
-        boolean isLessonBetweenMondayAndToday = numOfDaysAfterMonday > 0
-                && updateDay.getValue() <= currentUpdatedDay
-                && isSameDayLessonAfterCurrent;
-
-        if (isLessonBetweenMondayAndToday) {
-            numOfLessons += 1;
+        if (sinceLastUpdateDay < 0) {
+            sinceLastUpdateDay += numberOfDaysInAWeek;
         }
 
-        // isCancelled deduction logic goes here
+        if (remainder >= sinceLastUpdateDay) { // if number of days from nearest update day is
+            lessonCount += 1;
+        }
 
-        return numOfLessons;
+        // if the lesson on the same day as the last updated happens before last update. i.e. not recorded
+        if (lastUpdatedDay == updateDay.getValue() && lastUpdated.getLastUpdatedLocalTime().isBefore(endTime)) {
+            lessonCount += 1;
+        }
+
+        if (currentUpdatedDay == updateDay.getValue() && currentDateTime.toLocalTime().isAfter(endTime)) {
+            lessonCount += 1;
+        }
+
+        for (Date cancelledDate : cancelledDates) {
+            if (cancelledDate.isDateBetween(lastUpdated.getLastUpdatedLocalDate(), currentDateTime.toLocalDate())) {
+                lessonCount -= 1;
+            }
+        }
+
+        return lessonCount;
     }
 
     /**
