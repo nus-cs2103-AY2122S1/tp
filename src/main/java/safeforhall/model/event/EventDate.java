@@ -1,6 +1,7 @@
 package safeforhall.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,8 +13,6 @@ public class EventDate {
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    private static final int LASTDATE_DEADLINE = 1;
-
     public final String eventDate;
 
     /**
@@ -23,6 +22,7 @@ public class EventDate {
      */
     public EventDate(String date) {
         requireNonNull(date);
+        checkArgument(isValidEventDate(date), MESSAGE_CONSTRAINTS);
         this.eventDate = date;
     }
 

@@ -16,6 +16,7 @@ import static safeforhall.testutil.TypicalEvents.VOLLEYBALL;
 import org.junit.jupiter.api.Test;
 
 import safeforhall.testutil.EventBuilder;
+import safeforhall.testutil.TypicalPersons;
 
 public class EventTest {
     @Test
@@ -101,5 +102,30 @@ public class EventTest {
         // different email -> returns false
         editedBasketball = new EventBuilder(BASKETBALL).withVenue(VALID_VENUE_FOOTBALL_TRAINING).build();
         assertFalse(BASKETBALL.equals(editedBasketball));
+    }
+
+    @Test
+    public void test_hasNoResidents_success() {
+        Event editedBasketball = new EventBuilder(BASKETBALL).withCapacity(VALID_CAPACITY_BASKETBALL)
+                .withVenue(VALID_VENUE_BASKETBALL)
+                .withResidentList(TypicalPersons.GEORGE.getName().toString(), TypicalPersons.GEORGE.toString())
+                .build();
+        assertFalse(editedBasketball.hasNoResidents());
+
+        editedBasketball = new EventBuilder(BASKETBALL).withCapacity(VALID_CAPACITY_BASKETBALL)
+                .withVenue(VALID_VENUE_BASKETBALL)
+                .withResidentList(ResidentList.DEFAULT_LIST, ResidentList.DEFAULT_LIST)
+                .build();
+        assertTrue(editedBasketball.hasNoResidents());
+    }
+
+    @Test
+    public void checkHashCode() throws Exception {
+        try {
+            Event editedBasketball = new EventBuilder(BASKETBALL).withEventDate(VALID_DATE_VOLLEYBALL).build();
+            editedBasketball.hashCode();
+        } catch (NoSuchMethodError e) {
+            throw new NoSuchMethodException("hashCode not overridden");
+        }
     }
 }
