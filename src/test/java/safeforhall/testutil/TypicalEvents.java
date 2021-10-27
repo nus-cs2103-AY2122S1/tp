@@ -38,6 +38,12 @@ public class TypicalEvents {
                             + ", " + TypicalPersons.FIONA.toString()
                             + ", " + TypicalPersons.GEORGE.toString())
             .build();
+    public static final Event SWIM_WO_RESIDENTS = new EventBuilder().withEventName("Swim Training")
+            .withEventDate("19-10-2021")
+            .withEventTime("0800")
+            .withVenue("Pool")
+            .withCapacity("15")
+            .build();
     public static final Event SWIM = new EventBuilder().withEventName("swim")
             .withEventDate("10-09-2021")
             .withEventTime("0800")
