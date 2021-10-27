@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_POEM;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMBER_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_DEADLINE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_NAME;
-import static seedu.address.logic.commands.TaddCommand.MESSAGE_USAGE;
+import static seedu.address.logic.commands.task.TaddCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -19,7 +19,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TaddCommand;
+import seedu.address.logic.commands.task.TaddCommand;
+import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.model.module.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
@@ -30,9 +31,9 @@ class TaddCommandParserTest {
     void parse_allFieldsPresent_success() {
         Task expectedTask = new TaskBuilder().withName(VALID_POEM_TASK_NAME)
                 .withDeadline(VALID_POEM_TASK_DEADLINE).build();
-        Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID);
+        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_ID);
         Set<Index> expectedMemberIdList = new HashSet<>();
-        expectedMemberIdList.add(expectedMemberID);
+        expectedMemberIdList.add(expectedMemberId);
 
         assertParseSuccess(parser, TASK_NAME_DESC_POEM + TASK_DEADLINE_DESC_POEM + MEMBER_ID_DESC_ONE,
                 new TaddCommand(expectedMemberIdList, expectedTask));

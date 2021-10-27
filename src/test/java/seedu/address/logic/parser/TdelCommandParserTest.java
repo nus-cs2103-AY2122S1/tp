@@ -14,7 +14,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TdelCommand;
+import seedu.address.logic.commands.task.TdelCommand;
+import seedu.address.logic.parser.task.TdelCommandParser;
 
 class TdelCommandParserTest {
     private TdelCommandParser parser = new TdelCommandParser();
@@ -22,10 +23,10 @@ class TdelCommandParserTest {
     @Test
     void parse_allFieldsPresent_success() {
         Index expectedTaskID = Index.fromOneBased(VALID_TASK_ID);
-        Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID_DEL);
+        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_ID_DEL);
 
         assertParseSuccess(parser, TASK_ID_DESC_ONE + MEMBER_ID_DEL_DESC_ONE,
-                new TdelCommand(expectedMemberID, expectedTaskID));
+                new TdelCommand(expectedMemberId, expectedTaskID));
     }
 
     @Test

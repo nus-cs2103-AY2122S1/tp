@@ -11,17 +11,18 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TlistCommand;
+import seedu.address.logic.commands.task.TlistCommand;
+import seedu.address.logic.parser.task.TlistCommandParser;
 
 class TlistCommandParserTest {
     private TlistCommandParser parser = new TlistCommandParser();
 
     @Test
     void parse_allFieldsPresent_success() {
-        Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID);
+        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_ID);
 
         assertParseSuccess(parser, MEMBER_ID_DESC_ONE,
-                new TlistCommand(expectedMemberID));
+                new TlistCommand(expectedMemberId));
     }
 
     @Test
