@@ -22,10 +22,10 @@ public class TraceCommandParser implements Parser<TraceCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TraceCommand.MESSAGE_USAGE));
         }
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_RESIDENT, CliSyntax.PREFIX_DEPTH);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_RESIDENT,
+                CliSyntax.PREFIX_DEPTH, CliSyntax.PREFIX_DURATION);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_RESIDENT, CliSyntax.PREFIX_DEPTH)
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_RESIDENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TraceCommand.MESSAGE_USAGE));
         }
@@ -39,12 +39,24 @@ public class TraceCommandParser implements Parser<TraceCommand> {
             try {
                 ParserUtil.parseRoom(inputForResident);
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TraceCommand.MESSAGE_USAGE));
+                throw new ParseException("Information is neither a room or name\n"
+                        + TraceCommand.MESSAGE_USAGE);
             }
         }
-        Integer depth = Integer.parseInt(argMultimap.getValue(CliSyntax.PREFIX_DEPTH).get());
 
-        return new TraceCommand(inputForResident, depth);
+        // Optional fields
+        Integer depth;
+        Integer duration;
+        try {
+            depth = Integer.parseInt(argMultimap.getValue(CliSyntax.PREFIX_DEPTH)
+                    .orElse(TraceCommand.DEFAULT_DEPTH.toString()));
+            duration = Integer.parseInt(argMultimap.getValue(CliSyntax.PREFIX_DURATION)
+                    .orElse(TraceCommand.DEFAULT_DURATION.toString()));
+        } catch (NumberFormatException e) {
+            throw new ParseException("Depth and duration must be integers\n" + TraceCommand.MESSAGE_USAGE);
+        }
+
+        return new TraceCommand(inputForResident, depth, duration);
     }
 
     /**

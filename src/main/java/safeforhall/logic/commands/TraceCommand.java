@@ -2,6 +2,9 @@ package safeforhall.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.lang.reflect.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,21 +23,38 @@ public class TraceCommand extends Command {
             + "events they're involved in. \n"
             + "Parameters: "
             + CliSyntax.PREFIX_RESIDENT + "RESIDENT "
-            + "[" + CliSyntax.PREFIX_DEPTH + "DEPTH] \n"
+            + "[" + CliSyntax.PREFIX_DEPTH + "DEPTH] "
+            + "[" + CliSyntax.PREFIX_DURATION + "DURATION] \n"
             + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_RESIDENT + "A210 "
-            + CliSyntax.PREFIX_DEPTH + "2\n"
+            + CliSyntax.PREFIX_DEPTH + "2 "
+            + CliSyntax.PREFIX_DURATION + "4 \n"
             + "Note: \n"
             + "     1. A resident can be identified either by full name or room \n"
-            + "     2. Depth refers to the number of maximum links to the resident in question \n"
-            + "     3. Depth should be an integer >= 1 \n";
+            + "     2. Depth refers to the number of maximum links to reach resident in question \n"
+            + "     3. Depth should be an integer >= 1 and will default to 1 \n"
+            + "     4. Duration is in days and will default to 7\n";
 
-    public static final String MESSAGE_SUCCESS = "Imported resident information from csv";
     public static final String MESSAGE_FOUND_CONTACTS = "Found %1d close contacts at this depth: ";
+
+    public static final Integer DEFAULT_DEPTH = 1;
+    public static final Integer DEFAULT_DURATION = 7;
 
     private final String personInput;
     private final Integer depth;
+    private final Integer duration;
     private Optional<Person> person;
+
+    /**
+     * Creates a TraceCommand to trace the depth-level contacts of the specified {@code Person}
+     *
+     * @param person The resident to trace (either name or room validated)
+     */
+    public TraceCommand(String person) {
+        this.personInput = person;
+        this.depth = DEFAULT_DEPTH;
+        this.duration = DEFAULT_DURATION;
+    }
 
     /**
      * Creates a TraceCommand to trace the depth-level contacts of the specified {@code Person}
@@ -45,6 +65,20 @@ public class TraceCommand extends Command {
     public TraceCommand(String person, Integer depth) {
         this.personInput = person;
         this.depth = depth;
+        this.duration = DEFAULT_DURATION;
+    }
+
+    /**
+     * Creates a TraceCommand to trace the depth-level contacts of the specified {@code Person}
+     *
+     * @param person The resident to trace (either name or room validated)
+     * @param depth The depth of tracing
+     * @param duration The number of days to trace back to (for events)
+     */
+    public TraceCommand(String person, Integer depth, Integer duration) {
+        this.personInput = person;
+        this.depth = depth;
+        this.duration = duration;
     }
 
     @Override
@@ -66,23 +100,33 @@ public class TraceCommand extends Command {
     }
 
     private ArrayList<Person> findCloseContacts(Model model, Person person) {
-        ObservableList<Event> allEvents = model.getFilteredEventList();
+        ObservableList<Event> allEvents = model.getFilteredEventList().filtered(event -> {
+            LocalDate eventDate = event.getEventDate().toLocalDate();
+            LocalDate today = LocalDate.now();
+            return ChronoUnit.DAYS.between(eventDate, today) <= this.duration;
+        });
         ArrayList<Person> contacts = new ArrayList<>();
         contacts.add(person);
         for (int i = 0; i < this.depth; i++) {
+            ArrayList<Person> copyOfContacts = new ArrayList<>(contacts);
             for (Person contact: contacts) {
                 ArrayList<Event> relevantEvents = getEvents(allEvents, contact);
-                for (Event e: relevantEvents) {
-                    ArrayList<Person> attendees = e.getResidentList().getResidents();
-                    for (Person attendee: attendees) {
-                        if (!contacts.contains(attendee)) {
-                            contacts.add(attendee);
-                        }
-                    }
+                addToContacts(copyOfContacts, relevantEvents);
+            }
+            contacts = copyOfContacts;
+        }
+        return contacts;
+    }
+
+    private void addToContacts(ArrayList<Person> contacts, ArrayList<Event> relevantEvents) {
+        for (Event e: relevantEvents) {
+            ArrayList<Person> attendees = e.getResidentList().getResidents();
+            for (Person attendee: attendees) {
+                if (!contacts.contains(attendee)) {
+                    contacts.add(attendee);
                 }
             }
         }
-        return contacts;
     }
 
     private ArrayList<Event> getEvents(ObservableList<Event> allEvents, Person p) {

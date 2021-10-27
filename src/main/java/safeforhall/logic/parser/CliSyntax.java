@@ -24,4 +24,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_RESIDENT = new Prefix("r/");
     public static final Prefix PREFIX_DEPTH = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("t/");
+    public static final Prefix PREFIX_DURATION = new Prefix("t/");
 }
