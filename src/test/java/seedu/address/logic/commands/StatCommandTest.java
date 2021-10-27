@@ -37,7 +37,7 @@ public class StatCommandTest {
     private Model expectedModel;
 
     private Person carol = new PersonBuilder()
-        .withName("Carole Heinz")
+        .withName("Carol Heinz")
         .withPhone("97897897")
         .withEmail("e0000009@u.nus.edu")
         .withAddress("wall street")
