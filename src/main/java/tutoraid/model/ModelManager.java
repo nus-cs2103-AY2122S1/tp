@@ -196,6 +196,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+        studentBook.refreshStudentBook();
         filteredStudents.setPredicate(predicate);
     }
 
@@ -213,6 +214,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
+        lessonBook.refreshLessonBook();
         filteredLessons.setPredicate(predicate);
     }
 

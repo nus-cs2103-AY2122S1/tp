@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutoraid.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutoraid.testutil.Assert.assertThrows;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,15 +48,15 @@ public class TutorAidParserTest {
     @Test
     public void parseCommand_paid() throws Exception {
         PaidCommand command = (PaidCommand) parser.parseCommand(
-                PaidCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
-        assertEquals(new PaidCommand(INDEX_FIRST_STUDENT), command);
+                PaidCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(new PaidCommand(INDEX_FIRST_ITEM), command);
     }
 
     @Test
     public void parseCommand_unpaid() throws Exception {
         UnpaidCommand command = (UnpaidCommand) parser.parseCommand(
-                UnpaidCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
-        assertEquals(new UnpaidCommand(INDEX_FIRST_STUDENT), command);
+                UnpaidCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(new UnpaidCommand(INDEX_FIRST_ITEM), command);
     }
 
     @Test

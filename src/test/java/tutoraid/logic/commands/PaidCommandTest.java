@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
@@ -31,10 +31,10 @@ public class PaidCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         Student editedStudent = new StudentBuilder(studentToEdit).withPaymentStatus(true).build();
 
-        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_STUDENT);
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_ITEM);
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_SET_TO_PAID_SUCCESS, editedStudent);
 
@@ -55,12 +55,12 @@ public class PaidCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
-        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         Student editedStudent = new StudentBuilder(studentToEdit).withPaymentStatus(true).build();
 
-        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_STUDENT);
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_ITEM);
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_SET_TO_PAID_SUCCESS, editedStudent);
 
@@ -73,9 +73,9 @@ public class PaidCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
-        Index outOfBoundIndex = INDEX_SECOND_STUDENT;
+        Index outOfBoundIndex = INDEX_SECOND_ITEM;
         // ensures that outOfBoundIndex is still in bounds of student book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
@@ -86,14 +86,14 @@ public class PaidCommandTest {
 
     @Test
     public void equals() {
-        PaidCommand paidFirstCommand = new PaidCommand(INDEX_FIRST_STUDENT);
-        PaidCommand paidSecondCommand = new PaidCommand(INDEX_SECOND_STUDENT);
+        PaidCommand paidFirstCommand = new PaidCommand(INDEX_FIRST_ITEM);
+        PaidCommand paidSecondCommand = new PaidCommand(INDEX_SECOND_ITEM);
 
         // same object -> returns true
         assertTrue(paidFirstCommand.equals(paidFirstCommand));
 
         // same values -> returns true
-        PaidCommand paidFirstCommandCopy = new PaidCommand(INDEX_FIRST_STUDENT);
+        PaidCommand paidFirstCommandCopy = new PaidCommand(INDEX_FIRST_ITEM);
         assertTrue(paidFirstCommand.equals(paidFirstCommandCopy));
 
         // different types -> returns false

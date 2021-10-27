@@ -21,9 +21,9 @@ import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_BOB;
 import static tutoraid.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutoraid.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static tutoraid.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
+import static tutoraid.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -96,7 +96,7 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_STUDENT;
+        Index targetIndex = INDEX_SECOND_ITEM;
         String userInput = targetIndex.getOneBased()
                 + STUDENT_PHONE_DESC_BOB
                 + PARENT_PHONE_DESC_AMY
@@ -116,7 +116,7 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_STUDENT;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + STUDENT_PHONE_DESC_BOB + PARENT_PHONE_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
@@ -131,7 +131,7 @@ public class EditStudentCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_STUDENT;
+        Index targetIndex = INDEX_THIRD_ITEM;
         String userInput = targetIndex.getOneBased() + STUDENT_NAME_DESC_AMY;
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
                 .withStudentName(VALID_STUDENT_NAME_AMY)
@@ -166,7 +166,7 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_STUDENT;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased()
                 + STUDENT_PHONE_DESC_AMY + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY
                 + STUDENT_PHONE_DESC_AMY + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY
@@ -185,7 +185,7 @@ public class EditStudentCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_STUDENT;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + INVALID_STUDENT_PHONE_DESC + STUDENT_PHONE_DESC_BOB;
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
                 .withStudentPhone(VALID_STUDENT_PHONE_BOB)
