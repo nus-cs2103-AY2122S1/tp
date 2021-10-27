@@ -95,7 +95,7 @@ Example: `fill`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/help.png)
+![help message](images/commands/HelpCommand/help.png)
 
 Example: `help`
 
@@ -126,7 +126,7 @@ Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 
-![UI](images/filter.png)
+![UI](images/commands/FilterCommand/filter.png)
 
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
