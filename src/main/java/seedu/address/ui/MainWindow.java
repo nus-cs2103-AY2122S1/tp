@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.awt.event.FocusEvent;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -105,10 +106,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F1"));
-        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F2"));
-        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F3"));
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F4"));
+        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F9"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F10"));
+        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F11"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F12"));
     }
 
     /**
@@ -163,9 +164,28 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        initListeners();
+
+        initKeyPressEventHandler(commandBox);
+    }
+
+    private void initKeyPressEventHandler(CommandBox commandBox) {
+        // Add event handlers
+        getRoot().addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
+                commandBox.getCommandTextField().requestFocus();
+            }
+        });
+    }
+
+    private void initListeners() {
         // Add listeners
         centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
-                .addListener((obs, oldVal, newVal) -> handlePersonGridPanel(newVal));
+                .addListener((obs, oldVal, newVal) -> {
+                    if (newVal != null) {
+                        handlePersonGridPanel(newVal);
+                    }
+                });
     }
 
     /**
