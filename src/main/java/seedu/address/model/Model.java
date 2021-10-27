@@ -123,6 +123,9 @@ public interface Model {
      */
     void setEmployee(Employee target, Employee editedEmployee);
 
+    /** Sets the comparator for the employee list */
+    void setEmployeeComparator(Comparator<Employee> employeeComparator);
+
     /**
      * Returns true if the same reservation exists in the database.
      */
@@ -181,6 +184,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCustomerList(Predicate<Customer> predicate);
+
+    /** Returns a sortable view of the supplier list */
+    ObservableList<Employee> getSortableEmployeeList();
+
+    /** Resets the supplier list to its default sorting state */
+    void resetEmployeeListToDefaultSortState();
+
     /**
      * Updates the filter of the filtered Employee list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
