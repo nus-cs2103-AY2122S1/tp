@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 * Table of Contents
-  {:toc}
+{:toc}
 ---
 ## 1. Introduction
 ![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
@@ -12,8 +12,8 @@ as well as to **keep track of their Modular Credits(MC) and modules taken**.
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
 
-For more information about our features, you can head over to our [Features](#features) section. Better yet, 
-head over to our [Quick Start](#quick-start) and try it out for yourself!
+For more information about our features, you can head over to our [Features](#4-features) section. Better yet, 
+head over to our [Quick Start](#2-quick-start) and try it out for yourself!
 
 ### 1.1 Is this guide for you?
 
@@ -21,7 +21,7 @@ Are you someone who is trying our application for the very first time? If so, ou
 Just simple read along and we will guide you step by step on how to use our application.
 
 Are you someone who has maybe forgotten how some of our features work? Fret not, this user guide is also for you!
-Simply head over to either our [Features](#features) section or our [Command Summary](#command-summary) section to solve your problems.
+Simply head over to either our [Features](#4-features) section or our [Command Summary](#6-command-summary) section to solve your problems.
 
 ### 1.2 How to use the user guide 
 
@@ -87,7 +87,7 @@ This section gives you a quick summary on how to download and run our applicatio
    * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
 
-Kindly refer to the [Features](#features) below for details of each command.
+Kindly refer to the [Features](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -137,29 +137,29 @@ Here is how our application's homepage works
 
 #### 3.2.5 MC goal Progress (green)
 
-Tracks and displays the number of Mcs completed in total, and for each course requirement. <br>
+Tracks and displays the number of MCs completed in total, and for each course requirement. <br>
 
-![Mcs Display](images/mcsDisplay.png)
+![MCs Display](images/MCsDisplay.png)
 
 The user's progress is displayed in the form of:
-* The number of Mcs completed for that category, over the number of required Mcs.
+* The number of MCs completed for that category, over the number of required MCs.
 * A progress bar filled according to the level of completion.
 
-**Total Mcs completed display:**
+**Total MCs completed display:**
 
-![total Mcs Display](images/totalMcsCompletedDisplay.png)
-* Shows the total number of Mcs taken, over the user's set Mc goal.
-* The total number of Mcs taken is calculated from all modules taken before the current semester.
-    * For example: If the current semester is year 1 semester 2, the total number of Mcs will be calculated
+![total MCs Display](images/totalMCsCompletedDisplay.png)
+* Shows the total number of MCs taken, over the user's set MCs goal.
+* The total number of MCs taken is calculated from all modules taken before the current semester.
+    * For example: If the current semester is year 1 semester 2, the total number of MCs will be calculated
       from all modules taken in year 1 semester 1 only.
 
 **Course requirements display:**
 
-![requirements Mcs Display](images/courseRequirementsDisplay.png)
-* Shows the total number of Mcs taken for that requirement, over the number of Mcs needed to satisfy the requirement.
-* The total number of Mcs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
-    * For example: Mcs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
-* Modules with the following tags will be used in calculating the Mcs completed for the corresponding requirement:
+![requirements MCs Display](images/courseRequirementsDisplay.png)
+* Shows the total number of MCs taken for that requirement, over the number of MCs needed to satisfy the requirement.
+* The total number of MCs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
+    * For example: MCs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
+* Modules with the following tags will be used in calculating the MCs completed for the corresponding requirement:
 
 Requirement | Tag (not case sensitive)
 ------------|-----------
@@ -171,8 +171,8 @@ IT Professionalism | "it professionalism"
 Math and Science | "math and science"
 
 Notes:
-* If the Mc requirement has been satisfied, the completed Mcs and progress bar will be coloured light blue.
-* If the Mc requirement is not satisfied, the completed Mcs and progress bar will be coloured pink.
+* If the Mc requirement has been satisfied, the completed MCs and progress bar will be coloured light blue.
+* If the Mc requirement is not satisfied, the completed MCs and progress bar will be coloured pink.
 
 #### 3.2.6 Current Semester (dark blue)
 * Displays the current year and semester that the application is in.
@@ -192,7 +192,7 @@ Notes:
 * Items in square brackets are optional.<br>
   e.g. `c/CODE [tag/TAG]` can be used as `c/CS2103T tag/core` or as `c/CS2103T`.
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `m/GEQ1000 m/GEQ1000`, only `m/GEQ1000` will be taken.
+  e.g. if you specify `m/CS2030S m/GEQ1000`, only `m/GEQ1000` will be taken.
 
 * Inputs for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -211,7 +211,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 `academic plan`
 * Refers to modules that the user has assigned with a specific semester and year.
 * Contributes to the calculation of the MC requirements.
-  ![requirements Mcs Display](images/courseRequirementsDisplay.png)
+  ![requirements MCs Display](images/courseRequirementsDisplay.png)
 
 `INDEX`
 * The `INDEX` refers to the index number shown in the displayed module list.
