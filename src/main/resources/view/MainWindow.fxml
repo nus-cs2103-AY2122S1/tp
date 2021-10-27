@@ -48,7 +48,6 @@
             </padding>
             <SplitPane>
               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-              <HBox fx:id="personDescriptionPlaceholder" VBox.vgrow="ALWAYS"/>
             </SplitPane>
             
           </VBox>

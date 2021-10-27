@@ -49,8 +49,6 @@ public class PersonCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private FlowPane tags;
-    @FXML
-    private HBox personDescriptionPlaceholder;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -95,17 +93,6 @@ public class PersonCard extends UiPart<Region> {
                     l.setStyle("-fx-background-color: " + tag.tagColour + ";");
                     tags.getChildren().add(l);
                 });
-    }
-
-    /**
-     * Opens the PersonDescriptionCard
-     */
-    @FXML
-    private void handleMouseClick() {
-        System.out.println(person);
-        PersonDescriptionCard personDescriptionCard = new PersonDescriptionCard(person);
-        personDescriptionPlaceholder.getChildren().add(personDescriptionCard.getRoot());
-        
     }
 
     @Override
