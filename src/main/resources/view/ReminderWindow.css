@@ -92,3 +92,9 @@
     -fx-font-size: 14px;
     -fx-text-fill: #424874;
 }
+
+.cell_small_label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 14px;
+    -fx-text-fill: #424874;
+}

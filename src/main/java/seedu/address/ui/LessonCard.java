@@ -49,6 +49,7 @@ public class LessonCard extends UiPart<Region> {
         date.setText(lesson.getDisplayDate().value);
         time.setText(lesson.getTimeRange().toString());
         rates.setText("$" + lesson.getLessonRates().toString());
+        homeworkList.setManaged(!lesson.getHomework().isEmpty());
         lesson.getHomework().stream()
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()
@@ -64,6 +65,7 @@ public class LessonCard extends UiPart<Region> {
                         .map(Date::toString).collect(Collectors.toList());
                 cancelledDates.setText(String.join(",\n", dates));
             } else if (lesson.getCancelledDates().size() > 0) {
+                cancelledDates.setManaged(false);
                 cancelPlaceholder.setText("Cancelled!");
             }
         }
