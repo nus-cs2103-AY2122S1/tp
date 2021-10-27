@@ -57,7 +57,7 @@ class FileManagerTest {
     @Test
     public void getStudentsFromCsv_wrongNumberOfColumns_throwsIllegalValueException() {
         String expectedMessage = "Sorry! Your CSV file header should be: `studentId,classId,name,email`";
-        File testFile = new File(WRONG_COLUMN_ORDER_CSV);
+        File testFile = new File(WRONG_NUM_COLS_CSV);
         assertThrows(IllegalValueException.class, expectedMessage, () -> fm.getStudentsFromCsv(testFile));
     }
 

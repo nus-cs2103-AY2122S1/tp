@@ -237,7 +237,6 @@ public class MainWindow extends UiPart<Stage> {
         logic.updateProgrammerError(newPE);
         logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
         logic.saveProgrammerError(newPE);
-
         logger.info("Uploaded CSV data successfully!");
     }
 
