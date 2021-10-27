@@ -3,9 +3,13 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * Represents an interview in the address book.
@@ -13,7 +17,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Interview {
     public static final Interview EMPTY_INTERVIEW = new Interview("");
-    public static final String PARSE_FORMAT = "u-M-d, H:m";
+    public static final String PARSE_FORMAT = "y-M-d, H:m"; //e.g. 2022-09-21, 9:30
+    public static final String DISPLAY_FORMAT = "MMM dd yyyy, HH:mm"; //e.g. Sep 21 2022, 09:30
     public static final String MESSAGE_CONSTRAINTS =
             "Interview time should follow the format: [year-month-date, hour-minute]. E.g. i/2021-09-01, 8:00 or i/21-9-1,08:00";
 
@@ -32,7 +37,6 @@ public class Interview {
             checkArgument(isValidInterviewTime(time), MESSAGE_CONSTRAINTS);
             this.parseTime = time;
         }
-
     }
 
     /**
@@ -47,7 +51,11 @@ public class Interview {
         }
         return true;
     }
-    
+
+    public boolean isEmptyInterview() {
+        return this.equals(EMPTY_INTERVIEW);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -58,6 +66,22 @@ public class Interview {
     @Override
     public int hashCode() {
         return parseTime.hashCode();
+    }
+
+    public String displayTime() {
+        String formatted = parseTime;
+        if (!isEmptyInterview()) {
+            try {
+                DateFormat parseFormat = new SimpleDateFormat(PARSE_FORMAT);
+                Date date = parseFormat.parse(parseTime);
+                DateFormat displayFormat = new SimpleDateFormat(DISPLAY_FORMAT);
+                formatted = displayFormat.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return formatted;
     }
 
     /**
