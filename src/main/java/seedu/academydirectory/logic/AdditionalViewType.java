@@ -7,7 +7,7 @@ import seedu.academydirectory.logic.commands.VisualizeCommand;
 
 
 public enum AdditionalViewType {
-    DEFAULT, HELP, VIEW, EXIT, VISUALISE, HISTORY;
+    DEFAULT, HELP, VIEW, EXIT, VISUALIZE, HISTORY;
 
     /**
      *
