@@ -47,7 +47,7 @@ public class FriendCard extends UiPart<Region> {
         friendName.setText(formatFriendNameId(friend));
         games.setHgap(20.0);
         games.setVgap(15.0);
-        friend.getGameFriendLinks().stream()
+        friend.getGameFriendLinks().values().stream()
                 .sorted(Comparator.comparing(game -> game.getGameId().value))
                 .forEach(game -> {
                     Label label = new Label(game.getGameId().value);

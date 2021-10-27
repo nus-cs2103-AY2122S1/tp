@@ -3,8 +3,8 @@ package seedu.address.logic.commands.friends;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -17,6 +17,7 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.Schedule;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -61,7 +62,7 @@ public class EditFriendCommand extends Command {
 
         FriendId friendId = friendToEdit.getFriendId();
         FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getFriendName());
-        Set<GameFriendLink> gameFriendLinks = friendToEdit.getGameFriendLinks();
+        Map<GameId, GameFriendLink> gameFriendLinks = friendToEdit.getGameFriendLinks();
         Schedule schedule = friendToEdit.getSchedule();
 
         return new Friend(friendId, updatedFriendName, gameFriendLinks, schedule);

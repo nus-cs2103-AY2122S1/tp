@@ -43,7 +43,7 @@ public class UniqueFriendsListTest {
     public void contains_friendWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFriendsList.add(ALICE);
         Friend editedAlice = new FriendBuilder(ALICE).withFriendName("Alice Pauline")
-                .withGameFriendLinks(ALICE.getGameFriendLinks().toArray(GameFriendLink[]::new)).build();
+                .withGameFriendLinks(ALICE.getGameFriendLinks().values().toArray(GameFriendLink[]::new)).build();
         assertTrue(uniqueFriendsList.contains(editedAlice));
     }
 

@@ -26,7 +26,7 @@ public class FriendUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(friend.getFriendId().value + " ");
         sb.append(FLAG_FRIEND_NAME + friend.getFriendName().fullName + " ");
-        friend.getGameFriendLinks().stream().forEach(
+        friend.getGameFriendLinks().values().stream().forEach(
             game -> sb.append(FLAG_GAME_OLD + game.getGameId().value + " ")
         );
         return sb.toString();

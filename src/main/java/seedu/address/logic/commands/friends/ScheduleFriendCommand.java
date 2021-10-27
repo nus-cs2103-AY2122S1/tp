@@ -3,7 +3,7 @@ package seedu.address.logic.commands.friends;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY_TIME_FORMAT;
 
-import java.util.Set;
+import java.util.Map;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -16,6 +16,7 @@ import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.Schedule;
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 public class ScheduleFriendCommand extends Command {
@@ -59,7 +60,7 @@ public class ScheduleFriendCommand extends Command {
     private Friend createScheduledFriend(Friend friendToSchedule) throws InvalidDayTimeException {
         FriendId friendId = friendToSchedule.getFriendId();
         FriendName updatedFriendName = friendToSchedule.getFriendName();
-        Set<GameFriendLink> gameFriendLinks = friendToSchedule.getGameFriendLinks();
+        Map<GameId, GameFriendLink> gameFriendLinks = friendToSchedule.getGameFriendLinks();
         Schedule schedule = friendToSchedule.getSchedule();
         schedule.setScheduleDay(day, startTime, endTime, isFree);
         return new Friend(friendId, updatedFriendName, gameFriendLinks, schedule);
