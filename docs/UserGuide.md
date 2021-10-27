@@ -28,7 +28,7 @@ title: User Guide
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `seniorLove.jar` from [here](https://github.com/AY2122S1-CS2103-T14-1/tp).
+2. Download the latest `seniorlove.jar` from [here](https://github.com/AY2122S1-CS2103-T14-1/tp).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your SeniorLove.
 
