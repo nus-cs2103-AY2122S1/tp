@@ -63,8 +63,8 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTutorialGroup(VALID_TUTORIAL_GROUP_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different social handle -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSocialHandle(VALID_SOCIAL_HANDLE_BOB).build();
+        // different social handles -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSocialHandles(VALID_SOCIAL_HANDLE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different remark -> returns false

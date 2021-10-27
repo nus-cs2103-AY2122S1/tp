@@ -30,7 +30,7 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withNationality(VALID_NATIONALITY_BOB).withTutorialGroup(VALID_TUTORIAL_GROUP_BOB)
-                .withSocialHandle(VALID_SOCIAL_HANDLE_BOB).withGender(VALID_GENDER_BOB).withTags(VALID_TAG_HUSBAND)
+                .withSocialHandles(VALID_SOCIAL_HANDLE_BOB).withGender(VALID_GENDER_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -91,7 +91,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different social handle -> returns false
-        editedAlice = new PersonBuilder(ALICE).withSocialHandle(VALID_SOCIAL_HANDLE_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withSocialHandles(VALID_SOCIAL_HANDLE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different remark -> returns false
