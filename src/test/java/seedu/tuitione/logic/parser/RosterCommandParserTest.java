@@ -19,4 +19,14 @@ public class RosterCommandParserTest {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_validArgs_returnsRosterCommand() {
+        // no leading and trailing whitespaces
+        RosterCommand expectedRosterCommand = new RosterCommand(INDEX_SECOND_LESSON);
+        assertParseSuccess(parser, "2", expectedRosterCommand);
+
+        // leading and trailing whitespaces
+        assertParseSuccess(parser, "\n   2    \t", expectedRosterCommand);
+    }
+
 }
