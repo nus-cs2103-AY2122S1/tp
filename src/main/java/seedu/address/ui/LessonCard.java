@@ -53,6 +53,8 @@ public class LessonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()
                         .add(createHomeworkLabel(homework.toString())));
+        title.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
+        rates.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
 
         Set<Date> lessonCancelledDates = lesson.getCancelledDates();
         if (lessonCancelledDates.isEmpty()) {
@@ -66,8 +68,6 @@ public class LessonCard extends UiPart<Region> {
         } else if (lesson.getCancelledDates().size() > 0) {
             cancelledDates.setText("Cancelled!");
         }
-        title.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
-        rates.maxWidthProperty().bind(getRoot().widthProperty().multiply(TEXT_WIDTH_PERC));
     }
 
     private Label createHomeworkLabel(String homework) {

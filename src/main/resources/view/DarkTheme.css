@@ -445,11 +445,7 @@
     -fx-background-radius: 15 15 0 0;
 }
 
-#lessonListView {
-    -fx-background-radius: 0 0 15 15;
-}
-
-#personListView {
+#lessonListView, #personListView, #tagListView {
     -fx-background-radius: 0 0 15 15;
 }
 
