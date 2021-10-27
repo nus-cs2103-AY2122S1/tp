@@ -46,7 +46,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -55,6 +55,11 @@
 
 .table-view:focused .table-row-cell:filled:focused:selected {
     -fx-background-color: -fx-focus-color;
+}
+
+.table-view .table-cell{
+    -fx-font-size: 11pt;
+    -fx-font-family: "Open Sans Light";
 }
 
 .split-pane:horizontal .split-pane-divider {
