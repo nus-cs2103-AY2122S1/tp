@@ -58,7 +58,7 @@ public class PersonAdditionalCard extends UiPart<Region> {
         vaccStatus.setText(VaccStatus.DESC + person.getVaccStatus().vaccStatus);
 
         if (person.hasMissedDeadline()) {
-            Label textBox = new Label("Late by: ");
+            Label textBox = new Label("Fet late by: ");
             int missedDates = person.getMissedDates();
             Label date;
             if (missedDates > 1) {
