@@ -38,14 +38,10 @@ import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonRates;
-import seedu.address.model.lesson.MakeUpLesson;
-import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -63,8 +59,7 @@ public class PersonTest {
         Set<Tag> validTagSet = new HashSet<>();
         validTagSet.add(new Tag(VALID_TAG_ZOOM));
         Set<Lesson> validLessonSet = new TreeSet<>();
-        validLessonSet.add(new MakeUpLesson(new Date("14 Oct 2021"), new TimeRange("1000-1200"),
-                new Subject("math"), new HashSet<>(), new LessonRates("25")));
+        validLessonSet.add(new LessonBuilder().build());
 
 
         // null name
