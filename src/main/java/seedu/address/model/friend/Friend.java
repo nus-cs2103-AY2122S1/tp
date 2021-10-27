@@ -3,7 +3,8 @@ package seedu.address.model.friend;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class Friend {
     private final Schedule schedule;
 
     // Data fields
-    private final Set<GameFriendLink> gameFriendLinks = new HashSet<>();
+    private final Map<GameId, GameFriendLink> gameFriendLinks = new HashMap<>();
 
     /**
      * Constructs a {@code Friend}.
@@ -41,7 +42,7 @@ public class Friend {
         requireAllNonNull(friendId, gameFriendLinks);
         this.friendId = friendId;
         this.friendName = friendName == null ? FriendName.DEFAULT_FRIEND_NAME : friendName;
-        this.gameFriendLinks.addAll(gameFriendLinks);
+        this.gameFriendLinks.putAll(gameFriendLinks);
         this.schedule = schedule;
     }
 

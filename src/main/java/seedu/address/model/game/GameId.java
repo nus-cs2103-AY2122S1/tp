@@ -48,6 +48,6 @@ public class GameId {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value.toLowerCase().hashCode();
     }
 }
