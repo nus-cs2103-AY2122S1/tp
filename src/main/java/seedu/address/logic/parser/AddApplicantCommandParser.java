@@ -45,9 +45,11 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         Email email = ApplicantParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ApplicantParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Title positionTitle = ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
+        String gitHubUrl = ApplicantParserUtil.parseGitHubUrl(argMultimap.getValue(PREFIX_GITHUB_PROFILE).get());
+        String linkedInUrl = ApplicantParserUtil.parseLinkedInUrl(argMultimap.getValue(PREFIX_LINKEDIN_PROFILE).get());
 
         ApplicantParticulars applicantParticulars =
-                new ApplicantParticulars(name, phone, email, address, positionTitle);
+                new ApplicantParticulars(name, phone, email, address, positionTitle, gitHubUrl, linkedInUrl);
 
         return new AddApplicantCommand(applicantParticulars);
     }

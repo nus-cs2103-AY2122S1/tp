@@ -71,8 +71,9 @@ public class ApplicantCard extends UiPart<Region> {
 
     private void initializeHyperlinksForApplicant(Applicant applicant) {
         // Insert the code for initializing the applicant github link and linkedin link here
-        this.gitHubUrl = "https://github.com/";
-        this.linkedInUrl = "https://www.linkedin.com/feed/";
+        this.gitHubUrl = applicant.hasGitHubProfile() ? applicant.getGitHubUrl() : "https://github.com/";
+        this.linkedInUrl = applicant.hasLinkedInProfile() ? applicant.getLinkedInUrl()
+                : "https://www.linkedin.com/feed/";
         if (!applicant.hasGitHubProfile()) {
             removeGitHubHyperLinkFromApplicantCard();
         }

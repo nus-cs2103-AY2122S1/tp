@@ -29,8 +29,9 @@ public class Applicant {
     /**
      * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Address address, Position position) {
-        this(name, phone, email, address, new Application(position));
+    public Applicant(Name name, Phone phone, Email email, Address address, Position position,
+                     String gitHubUrl, String linkedInUrl) {
+        this(name, phone, email, address, new Application(position), gitHubUrl, linkedInUrl);
     }
 
 
@@ -43,14 +44,17 @@ public class Applicant {
                 applicantParticulars.getPhone(),
                 applicantParticulars.getEmail(),
                 applicantParticulars.getAddress(),
-                new Application(position)
+                new Application(position),
+                applicantParticulars.getGitHubUrl(),
+                applicantParticulars.getLinkedInUrl()
         );
     }
 
     /**
      * Internal constructor for a new Applicant object.
      */
-    public Applicant(Name name, Phone phone, Email email, Address address, Application application) {
+    public Applicant(Name name, Phone phone, Email email, Address address, Application application,
+                     String gitHubUrl, String linkedInUrl) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -63,7 +67,8 @@ public class Applicant {
      * Marks the application with the specified application status.
      */
     public Applicant markAs(ApplicationStatus applicationStatus) {
-        return new Applicant(name, phone, email, address, application.markAs(applicationStatus));
+        return new Applicant(name, phone, email, address, application.markAs(applicationStatus), gitHubUrl,
+                linkedInUrl);
     }
 
     public Name getName() {
