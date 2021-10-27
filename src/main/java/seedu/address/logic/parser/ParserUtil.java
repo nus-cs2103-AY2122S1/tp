@@ -1,10 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.time.HourOfDay.MESSAGE_HOUR_OF_DAY_MUST_BE_INT;
+import static seedu.address.model.time.HourOfDay.MESSAGE_INVALID_RANGE;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.DateTimeException;
+import java.time.DayOfWeek;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -13,9 +14,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.game.GameId;
-import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.gamefriendlink.UserName;
+import seedu.address.model.time.HourOfDay;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -23,6 +24,8 @@ import seedu.address.model.gamefriendlink.UserName;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DAY_OF_WEEK = "The day provided must an integer within the range 1 - 7 "
+            + "inclusive.";
 
     /**
      * Private constructor to hide implicit public constructor since
@@ -94,20 +97,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> games} into a {@code Set<Game>}.
-     */
-    public static Set<GameFriendLink> parseGameFriendLinks(Collection<String> games) throws ParseException {
-        requireNonNull(games);
-        final Set<GameFriendLink> gameSet = new HashSet<>();
-        for (String gameName : games) {
-            // TODO - Edit command
-
-            // gameSet.add(new Game(parseGameId(gameName)));
-        }
-        return gameSet;
-    }
-
-    /**
      * Takes in {@code userName} and returns the corresponding {@code UserName} if its format is valid.
      */
     public static UserName parseUserName(String userName) throws ParseException {
@@ -118,18 +107,47 @@ public class ParserUtil {
     }
 
     /**
+     * Takes in {@code recommendationHourFilter} and returns the corresponding {@code HourOfDay} if its format and
+     * value is valid.
+     * @param recommendationHourFilter user input for hour of day to filter for recommendation.
+     * @return valid {@code HourOfDay}
+     * @throws ParseException thrown when format or value of trimmed hour filter provided is invalid.
+     */
+    public static HourOfDay parseValidRecommendHour(String recommendationHourFilter) throws ParseException {
+        int hourOfDay = parseInteger(recommendationHourFilter.trim(), MESSAGE_HOUR_OF_DAY_MUST_BE_INT);
+        if (!HourOfDay.validateHourOfDay(hourOfDay)) {
+            throw new ParseException(MESSAGE_INVALID_RANGE);
+        }
+        return new HourOfDay(hourOfDay);
+    }
+
+    /**
+     * Takes in {@code dayOfWeek} and returns the corresponding {@code DayOfWeek} if its format and
+     * value is valid.
+     * @param dayOfWeek user input for day of week to filter.
+     * @return valid {@code DayOfWeek}
+     * @throws ParseException thrown when format or value of trimmed day filter provided is invalid.
+     */
+    public static DayOfWeek parseValidDayOfWeek(String dayOfWeek) throws ParseException {
+        String dayOfWeekNotIntegerMessage = "The day provided must be an integer value.";
+        int dayOfWeekVal = parseInteger(dayOfWeek.trim(), dayOfWeekNotIntegerMessage);
+        try {
+            return DayOfWeek.of(dayOfWeekVal);
+        } catch (DateTimeException dte) {
+            throw new ParseException(MESSAGE_INVALID_DAY_OF_WEEK);
+        }
+    }
+
+    /**
      * Takes in {@code skillVal} and returns the corresponding {@code SkillValue} if its range is valid.
      */
     public static SkillValue parseSkillValue(String skillVal) throws ParseException {
-        try {
-            Integer skillValue = Integer.parseInt(skillVal);
-            if (!SkillValue.validateSkillValue(skillValue)) {
-                throw new ParseException(SkillValue.MESSAGE_CONSTRAINTS);
-            }
-            return new SkillValue(skillValue);
-        } catch (NumberFormatException nfe) {
+        Integer skillValue = parseInteger(skillVal, SkillValue.MESSAGE_CONSTRAINTS);
+        if (!SkillValue.validateSkillValue(skillValue)) {
             throw new ParseException(SkillValue.MESSAGE_CONSTRAINTS);
         }
+
+        return new SkillValue(skillValue);
     }
 
     /**
@@ -138,5 +156,13 @@ public class ParserUtil {
      */
     public static boolean areFlagsPresent(ArgumentMultimap argumentMultimap, Flag... flags) {
         return Stream.of(flags).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static int parseInteger(String integerString, String errorMessage) throws ParseException {
+        try {
+            return Integer.parseInt(integerString);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(errorMessage);
+        }
     }
 }

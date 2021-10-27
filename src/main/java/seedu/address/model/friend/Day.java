@@ -124,7 +124,6 @@ public class Day {
         Day day = (Day) o;
         return Arrays.equals(timeSlots, day.timeSlots) && dayOfWeek == day.dayOfWeek;
     }
-
     @Override
     public int hashCode() {
         int result = Objects.hash(dayOfWeek);

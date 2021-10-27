@@ -26,6 +26,8 @@ public class CliSyntax {
     public static final Flag FLAG_PERIOD = new Flag("--period ");
     public static final Flag FLAG_FREE = new Flag("--free ");
     public static final Flag FLAG_VALUE = new Flag("--value ");
+    public static final Flag FLAG_TIME = new Flag("-t ");
+    public static final Flag FLAG_GAME_ID = new Flag("-g ");
 
     // TODO remove once commands are updated
     public static final Flag FLAG_GAME_OLD = new Flag("--g");

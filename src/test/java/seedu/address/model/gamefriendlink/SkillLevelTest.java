@@ -24,6 +24,7 @@ public class SkillLevelTest {
         assertThrows(NullPointerException.class, () -> SkillValue.validateSkillValue(null));
     }
 
+    // EP: invalid ranges: less than valid range and greater than valid range
     // test near the boundaries of equivalence partitions
     @Test
     public void validateSkillValue_invalidSkillValues_returnsFalse() {
@@ -33,6 +34,7 @@ public class SkillLevelTest {
         assertFalse(SkillValue.validateSkillValue(100));
     }
 
+    // EP: within valid range
     @Test
     public void validateSkillValue_validSkillValues_returnsTrue() {
         assertTrue(SkillValue.validateSkillValue(0));

@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_ID;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.FLAG_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
 import static seedu.address.testutil.TypicalGames.CSGO;
@@ -43,10 +45,16 @@ public class CommandTestUtil {
     public static final String VALID_USER_NAME_DRACO = "draco#1777";
     public static final String VALID_USER_NAME_OMEGA = "OmegaLynx";
 
-    public static final String VALID_DAY = "1"; // Monday
+    public static final int VALID_DAY_MONDAY = 1; // valid day range is 1-7 with 1 being monday and 7 being sunday.
+    public static final int VALID_DAY_SUNDAY = 7;
+    public static final int VALID_HOUR_LOWER_BOUNDARY = 0; // valid hour range is 0 - 23
+    public static final int VALID_HOUR_UPPER_BOUNDARY = 23;
     public static final String VALID_START_TIME = "0200";
     public static final String VALID_END_TIME = "0800";
     public static final String VALID_IS_FREE_TIME = "1";
+    public static final int INVALID_DAY_ZERO = 0;
+    public static final int INVALID_HOUR_LOWER_BOUND = -1;
+    public static final int INVALID_HOUR_UPPER_BOUND = 24;
 
     public static final String FRIEND_ID_DESC_AMY = " " + FLAG_ADD + VALID_FRIEND_ID_AMY;
     public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;
@@ -59,15 +67,40 @@ public class CommandTestUtil {
     public static final String GAME_DESC_VALORANT = " " + FLAG_ADD + VALORANT.gameId;
     public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_ADD + APEX_LEGENDS.gameId;
 
-    public static final String SCHEDULE_FRIEND_AMY = " " + FLAG_SCHEDULE + " " + VALID_FRIEND_ID_AMY + " " + FLAG_PERIOD
-            + " " + VALID_START_TIME + " " + VALID_END_TIME + " " + VALID_DAY + " " + FLAG_FREE
-            + " " + VALID_IS_FREE_TIME;
-
+    public static final String INVALID_GAME_ID = "kickstar*"; // '*' not allowed in GameId
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
-    public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + "kickstar*"; // '*' not allowed in games
+    public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + INVALID_GAME_ID;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String SCHEDULE_FRIEND_AMY = " " + FLAG_SCHEDULE + " " + VALID_FRIEND_ID_AMY + " " + FLAG_PERIOD
+            + " " + VALID_START_TIME + " " + VALID_END_TIME + " " + VALID_DAY_MONDAY + " " + FLAG_FREE
+            + " " + VALID_IS_FREE_TIME;
+
+    public static final String GAME_ID_VALORANT_DESC = FLAG_GAME_ID + " " + VALORANT.getGameId();
+    public static final String GAME_ID_CSGO_DESC = FLAG_GAME_ID + " " + CSGO.getGameId();
+    public static final String VALID_TIME_HOUR_ZERO_MONDAY_DESC = "" + FLAG_TIME
+            + VALID_HOUR_LOWER_BOUNDARY + " " + VALID_DAY_MONDAY;
+    public static final String VALID_TIME_HOUR_23_SUNDAY_DESC = "" + FLAG_TIME
+            + VALID_HOUR_UPPER_BOUNDARY + " " + VALID_DAY_SUNDAY;
+
+    public static final String RECOMMEND_VALID_VALORANT_VALID_HOUR_ZERO_MONDAY_DESC = " " + GAME_ID_VALORANT_DESC
+            + " " + VALID_TIME_HOUR_ZERO_MONDAY_DESC;
+    public static final String RECOMMEND_VALID_CSGO_VALID_HOUR_23_SUNDAY_DESC = " " + GAME_ID_CSGO_DESC
+            + " " + VALID_TIME_HOUR_23_SUNDAY_DESC;
+
+    public static final String RECOMMEND_INVALID_GAME_ID = " " + FLAG_GAME_ID + INVALID_GAME_ID + " "
+            + VALID_TIME_HOUR_ZERO_MONDAY_DESC;
+    public static final String RECOMMEND_INVALID_TIME_FLAG_MISSING_HOUR = " " + GAME_ID_CSGO_DESC + " " + FLAG_TIME
+            + VALID_DAY_MONDAY;
+    public static final String RECOMMEND_INVALID_TIME_FLAG_MISSING_DAY = " " + GAME_ID_CSGO_DESC + " " + FLAG_TIME
+            + VALID_HOUR_UPPER_BOUNDARY;
+    public static final String RECOMMEND_INVALID_HOUR_FILTER = " " + GAME_ID_CSGO_DESC + " " + FLAG_TIME
+            + INVALID_HOUR_LOWER_BOUND + " " + VALID_DAY_MONDAY;
+    public static final String RECOMMEND_INVALID_DAY_FILTER = " " + GAME_ID_CSGO_DESC + " " + FLAG_TIME
+            + VALID_HOUR_LOWER_BOUNDARY + " " + INVALID_DAY_ZERO;
+
 
     public static final EditFriendCommand.EditFriendDescriptor DESC_AMY;
     public static final EditFriendCommand.EditFriendDescriptor DESC_BOB;
@@ -85,7 +118,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -100,7 +133,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -125,6 +158,7 @@ public class CommandTestUtil {
         assertEquals(expectedGamesList, actualModel.getGamesList());
         assertEquals(expectedFilteredGamesList, actualModel.getFilteredGamesList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
