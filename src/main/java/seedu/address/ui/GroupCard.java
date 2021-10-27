@@ -33,7 +33,7 @@ public class GroupCard extends UiPart<Region> {
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);
         this.group = group;
-        id.setText(displayedIndex + ".");
+        id.setText(String.format("%d", displayedIndex));
         name.setText(group.getGroupName().toString());
         description.setText(group.getDescription().toString());
     }

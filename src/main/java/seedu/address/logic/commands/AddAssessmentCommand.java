@@ -64,7 +64,8 @@ public class AddAssessmentCommand extends Command {
 
         Assessment assessmentToAdd = new Assessment(assessment.getAssessmentName(), assessment.getScore());
         model.addAssessment(student, assessmentToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), assessment));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), assessment), false, false,
+            student);
     }
 
     @Override

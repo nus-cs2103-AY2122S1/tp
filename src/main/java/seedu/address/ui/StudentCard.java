@@ -32,13 +32,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label telegramHandle;
-    @FXML
-    private Label email;
-    @FXML
     private Label groupName;
-    @FXML
-    private Label assessments;
     @FXML
     private VBox studentCard;
 
@@ -48,16 +42,15 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+        ObservableList<String> styleClass = studentCard.getStyleClass();
         if (student.isWeak()) {
-            ObservableList<String> styleClass = studentCard.getStyleClass();
             styleClass.add("flag");
+        } else {
+            styleClass.add("normal-card");
         }
-        id.setText(displayedIndex + ". ");
+        id.setText(String.format("%d", displayedIndex));
         name.setText(student.getName().fullName);
         groupName.setText(student.getGroupName().toString());
-        telegramHandle.setText(student.getTelegramHandle().value);
-        email.setText(student.getEmail().value);
-        assessments.setText(student.getAssessmentList().toString());
     }
 
     @Override

@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#77a6f7, 20%);
     background-color: #383838; /* Used in the default.html file */
 }
 
@@ -84,72 +84,34 @@
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#d3e3fc, 20%);
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 3px;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#d3e3fc, 20%);
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 2px;
-}
-
-.list-cell:empty {
-    -fx-padding: 2px;
     -fx-background-color: transparent;
-    -fx-background-insets: 0;
-}
-
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
-}
-
-.list-cell .label {
-    -fx-text-fill: white;
-}
-
-.cell_big_label {
-    -fx-font-family: "Open Sans Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
-}
-
-.cell_small_label {
-    -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
-    -fx-text-fill: #010504;
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: derive(#d3e3fc, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#d3e3fc, 20%);
+     -fx-border-color: derive(#d3e3fc, 10%);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#d3e3fc, 30%);
 }
 
 .result-display {
@@ -165,13 +127,13 @@
 
 .status-bar .label {
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #77a6f7;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#ffeeff, 30%);
     -fx-border-color: derive(#1d1d1d, 25%);
     -fx-border-width: 1px;
 }
@@ -191,21 +153,21 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#d3e3fc, 50%);
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #77a6f7;
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#d3e3fc, 20%);
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill:  #77a6f7;
     -fx-opacity: 0.9;
 }
 
@@ -288,11 +250,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(transparent, 20%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#77a6f7, 50%);
     -fx-background-insets: 3;
 }
 
@@ -320,18 +282,19 @@
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
+    /*-fx-text-fill: #F70D1A;*/
+    -fx-text-fill:  #77a6f7;
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    /*-fx-background-color: transparent #383838 transparent #383838;*/
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #ffffff;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill:  #77a6f7;
 }
 
 #filterField, #studentListPanel, #studentWebpage {
@@ -343,21 +306,73 @@
     -fx-background-radius: 0;
 }
 
-#notes .content{
-    -fx-background-color: #383838;
+#notes .content {
+    -fx-background-color: #d3e3fc;
     -fx-background-radius: 0;
 }
 
-#notes {
+#notes, #noteCard {
     -fx-background-color: transparent;
 }
 
-#noteCard {
-    -fx-background-color: #383838;
+#id {
+    -fx-font-size: 40;
+    -fx-font-family: fantasy;
+    -fx-text-fill: grey;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.3;
 }
 
-#detailsCard {
-    -fx-background-color: #3c3e3f;
+.normal-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
 }
 
+#groupName {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 2,2;
+    -fx-border-radius: 5;
+    -fx-background-color: #77a6f7;
+    -fx-background-radius: 5;
+}
+
+
+.cell_big_label {
+    -fx-font-family: fantasy;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+    -fx-text-fill: #010504;
+}
+
+.cell_small_label {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: grey;
+}
+
+.bigger_student_name{
+    -fx-font-family: fantasy;
+    -fx-font-weight: bold;
+    -fx-font-size: 70px;
+    -fx-text-fill: #010504;
+}
+
+.student_details {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: grey;
+}
+
+.bigger_group_name {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 2,2;
+    -fx-border-radius: 5;
+    -fx-background-color: #77a6f7;
+    -fx-background-radius: 5;
+}
 

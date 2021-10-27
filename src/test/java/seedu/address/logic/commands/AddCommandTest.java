@@ -152,7 +152,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateStudentNote(Student student, Note note) {
+        public Student updateStudentNote(Student student, Note note) {
             throw new AssertionError("This method should not be called.");
         }
 

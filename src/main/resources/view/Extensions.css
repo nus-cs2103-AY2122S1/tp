@@ -4,7 +4,22 @@
 }
 
 .flag {
-    -fx-background-color: red;
+    -fx-background-color: #ffccbc;
+    -fx-background-radius: 10;
+}
+
+.fail {
+    -fx-text-fill: #FAA0A0;
+    -fx-font-family: fantasy;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+}
+
+.pass {
+    -fx-text-fill: #C1E1C1;
+    -fx-font-family: fantasy;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
 }
 
 .command-error {
