@@ -9,7 +9,4 @@ public class InvalidArgFlagsException extends ParseException {
         super(message);
     }
 
-    public InvalidArgFlagsException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

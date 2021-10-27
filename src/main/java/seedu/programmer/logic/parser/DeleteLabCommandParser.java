@@ -1,6 +1,6 @@
 package seedu.programmer.logic.parser;
 
-import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 
@@ -34,7 +34,7 @@ public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLabCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_MISSING_ARGUMENT, DeleteLabCommand.MESSAGE_USAGE));
         }
 
         int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(""));

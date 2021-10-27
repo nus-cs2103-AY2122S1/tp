@@ -1,6 +1,7 @@
 package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.core.Messages.MESSAGE_EMPTY_ARGUMENT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_ARGUMENT_FLAG;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
@@ -63,7 +64,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(predicate).isPresent()) {
             trimmedPredicateArg = argMultimap.getValue(predicate).get().trim();
             if (trimmedPredicateArg.isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_EMPTY_ARGUMENT, FilterCommand.MESSAGE_USAGE));
             }
         }
         return trimmedPredicateArg;
