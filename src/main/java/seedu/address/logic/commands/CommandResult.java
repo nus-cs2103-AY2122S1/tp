@@ -24,7 +24,8 @@ public class CommandResult {
         NEXT, // Go forwards in the calendar.
         TODAY, // Jump to today in the calendar.
         BACK, // Go back in the calendar.
-        EXIT // The application should exit.
+        EXIT, // The application should exit.
+        REMINDER // Reminder of upcoming lessons.
     }
 
     private final String feedbackToUser;

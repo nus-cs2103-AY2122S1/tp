@@ -55,12 +55,16 @@ public class MainWindow extends UiPart<Stage> {
     private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReminderWindow reminderWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem remindMenuItem;
 
     @FXML
     private MenuItem studentsMenuItem;
@@ -99,6 +103,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        reminderWindow = new ReminderWindow(logic.getUpcomingLessons());
     }
 
     public Stage getPrimaryStage() {
@@ -106,9 +111,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F9"));
-        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F10"));
-        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F11"));
+        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F8"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F9"));
+        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F10"));
+        setAccelerator(remindMenuItem, KeyCombination.valueOf("F11"));
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F12"));
     }
 
@@ -213,6 +219,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleReminder() {
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
+        } else {
+            reminderWindow.focus();
+        }
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -221,6 +239,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
     }
 
@@ -287,9 +306,12 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             switch (commandResult.getDisplayType()) {
-
             case HELP:
                 handleHelp();
+                break;
+
+            case REMINDER:
+                handleReminder();
                 break;
 
             case EXIT:

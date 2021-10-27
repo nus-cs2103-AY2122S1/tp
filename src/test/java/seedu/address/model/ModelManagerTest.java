@@ -95,6 +95,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getUpcomingLessons_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getUpcomingLessons().remove(0));
+    }
+
+    @Test
     public void getObservableTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getObservableTagList().remove(0));
     }
