@@ -168,5 +168,85 @@ public class ResidentListTest {
                 + TypicalPersons.CARL.getName().toString();
         assertEquals(combinedString, expectedString);
     }
+
+    @Test
+    public void getRemovedStorageStringTest() {
+        ResidentList residentList = new ResidentList(TypicalPersons.ALICE.getName().toString(),
+                TypicalPersons.ALICE.toString());
+        ArrayList<Person> toRemove = new ArrayList<>();
+        toRemove.add(TypicalPersons.ALICE);
+
+        // one resident in current, remove one of them
+        String combinedString = residentList.getRemovedStorageString(toRemove);
+        assertEquals(combinedString, ResidentList.DEFAULT_LIST);
+
+        // two residents in current, remove one of them
+        String constructorString1 = TypicalPersons.ALICE.getName().toString()
+                + ", "
+                + TypicalPersons.BOB.getName().toString();
+        String constructorString2 = TypicalPersons.ALICE.toString()
+                + ", "
+                + TypicalPersons.BOB.toString();
+        residentList = new ResidentList(constructorString1, constructorString2);
+        combinedString = residentList.getRemovedStorageString(toRemove);
+        assertEquals(combinedString, TypicalPersons.BOB.toString());
+
+        // three residents in current, remove three of them
+        toRemove.add(TypicalPersons.BOB);
+        toRemove.add(TypicalPersons.CARL);
+        constructorString1 = TypicalPersons.ALICE.getName().toString()
+                + ", "
+                + TypicalPersons.BOB.getName().toString()
+                + ", "
+                + TypicalPersons.CARL.getName().toString();
+        constructorString2 = TypicalPersons.ALICE.toString()
+                + ", "
+                + TypicalPersons.BOB.toString()
+                + ", "
+                + TypicalPersons.CARL.toString();
+        residentList = new ResidentList(constructorString1, constructorString2);
+        combinedString = residentList.getRemovedStorageString(toRemove);
+        assertEquals(combinedString, ResidentList.DEFAULT_LIST);
+    }
+
+    @Test
+    public void getRemovedDisplayStringTest() {
+        ResidentList residentList = new ResidentList(TypicalPersons.ALICE.getName().toString(),
+                TypicalPersons.ALICE.toString());
+        ArrayList<Person> toRemove = new ArrayList<>();
+        toRemove.add(TypicalPersons.ALICE);
+
+        // one resident in current, remove one of them
+        String combinedString = residentList.getRemovedDisplayString(toRemove);
+        assertEquals(combinedString, ResidentList.DEFAULT_LIST);
+
+        // two residents in current, remove one of them
+        String constructorString1 = TypicalPersons.ALICE.getName().toString()
+                + ", "
+                + TypicalPersons.BOB.getName().toString();
+        String constructorString2 = TypicalPersons.ALICE.toString()
+                + ", "
+                + TypicalPersons.BOB.toString();
+        residentList = new ResidentList(constructorString1, constructorString2);
+        combinedString = residentList.getRemovedDisplayString(toRemove);
+        assertEquals(combinedString, TypicalPersons.BOB.getName().toString());
+
+        // three residents in current, remove three of them
+        toRemove.add(TypicalPersons.BOB);
+        toRemove.add(TypicalPersons.CARL);
+        constructorString1 = TypicalPersons.ALICE.getName().toString()
+                + ", "
+                + TypicalPersons.BOB.getName().toString()
+                + ", "
+                + TypicalPersons.CARL.getName().toString();
+        constructorString2 = TypicalPersons.ALICE.toString()
+                + ", "
+                + TypicalPersons.BOB.toString()
+                + ", "
+                + TypicalPersons.CARL.toString();
+        residentList = new ResidentList(constructorString1, constructorString2);
+        combinedString = residentList.getRemovedDisplayString(toRemove);
+        assertEquals(combinedString, ResidentList.DEFAULT_LIST);
+    }
 }
 

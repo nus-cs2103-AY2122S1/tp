@@ -213,6 +213,56 @@ public class ResidentList {
     }
 
     /**
+     * Returns a string of person details, consisting of the remaining residents for the event.
+     *
+     * @param toRemove    A string of residents to add to the event.
+     *
+     * @return A String consisting of past and new residents for the event.
+     */
+    public String getRemovedStorageString(ArrayList<Person> toRemove) {
+        StringBuilder newResidentList = new StringBuilder("");
+
+        for (Person person : residentList) {
+            if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person);
+            } else if (!toRemove.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(person);
+            }
+        }
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
+    }
+
+    /**
+     * Returns a string of names, consisting of the remaining residents for the event.
+     *
+     * @param toRemove    A string of residents to remove from the event.
+     *
+     * @return A String consisting of the remaining residents for the event.
+     */
+    public String getRemovedDisplayString(ArrayList<Person> toRemove) {
+        StringBuilder newResidentList = new StringBuilder("");
+
+        for (Person person : residentList) {
+            if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person.getName());
+            } else if (!toRemove.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(person.getName());
+            }
+        }
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
+    }
+
+    /**
      * Returns true if the ResidentList is empty.
      */
     public boolean isEmpty() {

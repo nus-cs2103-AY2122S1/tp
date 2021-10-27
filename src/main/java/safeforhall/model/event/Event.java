@@ -87,6 +87,14 @@ public class Event {
         return residents.getCombinedDisplayString(toAdd);
     }
 
+    public String getRemovedStorageString(ArrayList<Person> toRemove) {
+        return residents.getRemovedStorageString(toRemove);
+    }
+
+    public String getRemovedDisplayString(ArrayList<Person> toRemove) {
+        return residents.getRemovedDisplayString(toRemove);
+    }
+
     /**
      * Checks if residents attending the event are vaccinated
      * @return Returns true if any {@code resident} in the {@code Event} is not vaccinated

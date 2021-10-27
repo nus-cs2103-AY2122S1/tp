@@ -5,11 +5,10 @@ import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import org.junit.jupiter.api.Test;
 
 import safeforhall.logic.commands.ExportCommand;
-import safeforhall.logic.commands.ImportCommand;
 
-public class ImportCommandParserTest {
+public class ExportCommandParserTest {
 
-    private ImportCommandParser parser = new ImportCommandParser();
+    private ExportCommandParser parser = new ExportCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -18,8 +17,8 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsImportCommand() {
-        ImportCommand expectedImportCommand = new ImportCommand("safeforhall");
+        ExportCommand expectedExportCommand = new ExportCommand("safeforhall");
         CommandParserTestUtil.assertParseSuccess(parser,
-                " safeforhall", expectedImportCommand);
+                " safeforhall", expectedExportCommand);
     }
 }

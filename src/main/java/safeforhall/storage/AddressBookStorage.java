@@ -43,4 +43,11 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
+    /**
+     * Creates the exports folder within data
+     * @param filepath The path of the exports folder.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void createExportsFolder(Path filepath) throws IOException;
+
 }
