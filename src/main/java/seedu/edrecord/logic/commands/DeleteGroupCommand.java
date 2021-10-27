@@ -9,6 +9,8 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.person.Person;
 
 /**
  * Deletes a class group.
@@ -32,7 +34,8 @@ public class DeleteGroupCommand extends Command {
     private final Module module;
 
     /**
-     * @param group to be created.
+     * @param group to be deleted.
+     * @param mod with group to be deleted from.
      */
     public DeleteGroupCommand(Group group, Module mod) {
         requireAllNonNull(group);
@@ -49,15 +52,20 @@ public class DeleteGroupCommand extends Command {
             throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
         }
 
-        Module mod = model.getModule(module);
-        if (!mod.hasGroup(group)) {
+        Module savedMod = model.getModule(module);
+        if (!savedMod.hasGroup(group)) {
             throw new CommandException(Group.MESSAGE_DOES_NOT_EXIST);
         }
 
-        // TODO: Go through students and delete group if same
+        for (Person p : model.getEdRecord().getPersonList()) {
+            ModuleGroupMap mods = p.getModules();
+            if (mods.containsModule(savedMod)) {
+                mods.removeGroup(savedMod, group);
+            }
+        }
 
-        mod.deleteGroup(group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, group, mod));
+        savedMod.deleteGroup(group);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, group, savedMod));
     }
 
     @Override

@@ -6,6 +6,8 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.person.Person;
 
 /**
  * Deletes a module.
@@ -41,10 +43,16 @@ public class DeleteModuleCommand extends Command {
             throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
         }
 
-        // TODO: Go through students and delete module if same
+        Module savedMod = model.getModule(module);
+        for (Person p : model.getEdRecord().getPersonList()) {
+            ModuleGroupMap mods = p.getModules();
+            if (mods.containsModule(savedMod)) {
+                mods.removeMod(savedMod);
+            }
+        }
 
-        model.deleteModule(module);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, module));
+        model.deleteModule(savedMod);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, savedMod));
     }
 
     @Override
