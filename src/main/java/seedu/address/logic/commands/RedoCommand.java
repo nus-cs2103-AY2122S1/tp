@@ -22,4 +22,9 @@ public class RedoCommand extends Command {
             return new CommandResult(MESSAGE_REDO_FAILURE);
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof RedoCommand;
+    }
 }

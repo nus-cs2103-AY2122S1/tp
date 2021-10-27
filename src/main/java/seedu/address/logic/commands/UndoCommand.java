@@ -21,6 +21,10 @@ public class UndoCommand extends Command {
         } catch (OperationException e) {
             return new CommandResult(MESSAGE_UNDO_FAILURE);
         }
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof UndoCommand;
     }
 }
