@@ -33,6 +33,9 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    private static Table table1 = new Table(2, 1);
+    private static Table table2 = new Table(10, 2);
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -127,15 +130,22 @@ public class SampleDataUtil {
     public static Reservation[] getSampleReservations() {
         return new Reservation[] {
             new Reservation(new Phone("92492021"), 2, LocalDateTime.parse("2021-12-24T20:00"),
-                    new Table(2, 10), new Remark("Surprise birthday party"), getTagSet("Chetwin")),
-            new Reservation(new Phone("91031282"), 4, LocalDateTime.parse("2021-11-11T13:00"),
-                    new Table(4, 11), new Remark("Family dinner, have kids"), getTagSet("hernpiblo", "10PercentOff")),
-            new Reservation(new Phone("93210283"), 3, LocalDateTime.parse("2021-12-25T19:00"),
-                    new Table(2, 12), new Remark(""), getTagSet("thang")),
-            new Reservation(new Phone("99272758"), 2, LocalDateTime.parse("2021-10-30T19:00"),
-                    new Table(3, 13), new Remark("Propose to his gf"), getTagSet("clement")),
+                    table1, new Remark("Surprise birthday party"), getTagSet("Chetwin")),
+            new Reservation(new Phone("91031282"), 4, LocalDateTime.parse("2021-12-24T20:00"),
+                    table2, new Remark("Family dinner, have kids"), getTagSet("hernpiblo", "10PercentOff")),
+            new Reservation(new Phone("93210283"), 2, LocalDateTime.parse("2021-12-25T19:00"),
+                    table1, new Remark(""), getTagSet("thang")),
+            new Reservation(new Phone("99272758"), 3, LocalDateTime.parse("2021-10-30T19:00"),
+                    table2 , new Remark("Propose to his gf"), getTagSet("clement")),
             new Reservation(new Phone("87438807"), 6, LocalDateTime.parse("2021-02-14T11:00"),
-                    new Table(6, 14), new Remark(""), getTagSet("javier", "20PercentOff"))
+                    table2 , new Remark(""), getTagSet("javier", "20PercentOff"))
+        };
+    }
+
+    public static Table[] getSampleTables() {
+        return new Table[] {
+            table1,
+            table2
         };
     }
 
@@ -152,6 +162,9 @@ public class SampleDataUtil {
         }
         for (Reservation sampleReservation : getSampleReservations()) {
             sampleAb.addReservation(sampleReservation);
+        }
+        for (Table sampleTable : getSampleTables()) {
+            sampleAb.addTable(sampleTable);
         }
         return sampleAb;
     }
