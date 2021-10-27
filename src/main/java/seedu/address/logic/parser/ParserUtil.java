@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringJoiner;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -13,6 +15,7 @@ import seedu.address.model.module.Name;
 import seedu.address.model.module.event.EventDate;
 import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;
+import seedu.address.model.module.member.Member;
 import seedu.address.model.module.member.Phone;
 import seedu.address.model.module.member.position.Position;
 import seedu.address.model.module.task.TaskDeadline;
@@ -195,5 +198,47 @@ public class ParserUtil {
             throw new ParseException(TaskDeadline.MESSAGE_CONSTRAINTS);
         }
         return new TaskDeadline(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String status} into an {@code Boolean}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Boolean parseTaskStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toLowerCase();
+        if (trimmedStatus != "done" || trimmedStatus != "undone") {
+            throw new ParseException("Invalid status, can only be done or undone");
+        }
+        Boolean isDone = trimmedStatus == "done" ? Boolean.TRUE : Boolean.FALSE;
+        return isDone;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap mapping of prefixes to their respective arguments
+     * @param prefixes variable number of prefixes as an array
+     * @return boolean of whether the prefixes are present in the mapping
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns string of module names separated by commas, given by a set of modules.
+     *
+     * @param memberSet set of modules with names
+     * @return string of module names
+     */
+    public static String memberSetToString(Set<Member> memberSet) {
+        StringJoiner joiner = new StringJoiner(", ");
+        for (Member member: memberSet) {
+            joiner.add(member.getName().toString());
+        }
+        return joiner.toString();
     }
 }
