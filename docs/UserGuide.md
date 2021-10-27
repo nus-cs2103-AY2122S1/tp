@@ -11,7 +11,11 @@ AniList is optimized for use via a Command Line Interface (CLI) while still havi
 
 This User Guide is to be used by any AniList user. No technical background is required.
 
-## Quick start
+## Table of Content
+
+**TODO: ADD TOC**
+
+## Quick Start
 1. Ensure you have `Java 11` or later installed on your computer. ([install here](https://java.com/en/download/help/download_options.html))
 
 2. Download the latest `anilist.jar` release [here](https://github.com/AY2122S1-CS2103T-T10-4/tp/releases).
@@ -212,12 +216,25 @@ Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 * Updates the anime at the specified `INDEX`
 * The index must be a positive integer 1, 2, 3, ...
 
+<div markdown="box" class="alert alert-info">
 
-Examples:
+Example usages:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
 *  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
 
+</div>
+
+![](images/UG-images/genreadd.png)
 ___
+
+
+### List all supported genres: `genrelist`
+
+**TODO**
+
+![](images/UG-images/genrelist.png)
+___
+
 
 ### Listing anime based on watch status: `list`
 Displays a list of animes that has been previously entered by the user based on their watch status.
@@ -277,7 +294,7 @@ Example usages:
 ___
 
 ## Commands Table
-
+**TODO**
 
 | Command | Usage |
 | :--------: | -------- |
@@ -293,3 +310,5 @@ ___
 | help     | Text     |
 
 ## Glossary
+
+**TODO**
