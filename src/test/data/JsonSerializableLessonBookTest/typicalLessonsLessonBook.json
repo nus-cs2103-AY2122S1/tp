@@ -11,7 +11,7 @@
       "parentPhone" : "94351253",
       "progressList" : [],
       "hasPaid" : false,
-      "lessons" : []
+      "lessons" : ["Maths 1", "Science 1"]
     } ],
     "timing" : "1000-1200"
   }, {
@@ -25,7 +25,7 @@
       "parentPhone" : "94351253",
       "progressList" : [],
       "hasPaid" : false,
-      "lessons" : []
+      "lessons" : ["Maths 1", "Science 1"]
     } ],
     "timing" : "1400-1600"
   } ]
