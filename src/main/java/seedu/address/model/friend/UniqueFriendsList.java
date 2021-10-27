@@ -124,23 +124,12 @@ public class UniqueFriendsList implements Iterable<Friend> {
     }
 
     /**
-     * Removes the {@code GameFriendLink} from all friends that are associated with the game of {@code gameId}.
+     * Removes the {@code GameFriendLink} from all friends that are associated with {@code game}.
      */
-    public void removeLinkAllFriends(GameId gameId) {
-        requireNonNull(gameId);
+    public void removeLinkAllFriends(Game game) {
+        requireNonNull(game);
 
-        // TODO make use of unlink
-        for (Friend currFriend : internalList) {
-            Map<GameId, GameFriendLink> currentLinks = new HashMap<>(currFriend.getGameFriendLinks());
-            if (!currentLinks.containsKey(gameId)) {
-                continue;
-            }
-            currentLinks.remove(gameId);
-
-            Friend editedFriend = new Friend(currFriend.getFriendId(), currFriend.getFriendName(),
-                    currentLinks, currFriend.getSchedule());
-            this.setFriend(currFriend, editedFriend);
-        }
+        internalList.forEach(friend -> unlink(friend, game));
     }
 
     /**
@@ -149,6 +138,11 @@ public class UniqueFriendsList implements Iterable<Friend> {
      */
     public void unlink(Friend friendToUnlink, Game gameToUnlink) {
         requireAllNonNull(friendToUnlink, gameToUnlink);
+
+        if (!friendToUnlink.hasGameAssociation(gameToUnlink)) {
+            // short-circuit if friend is not associated with the game
+            return;
+        }
 
         // Get a modifiable copy of the current games in toUnlink
         Map<GameId, GameFriendLink> currentLinks = new HashMap<>(friendToUnlink.getGameFriendLinks());

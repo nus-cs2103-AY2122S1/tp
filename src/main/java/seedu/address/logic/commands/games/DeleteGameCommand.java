@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 
 
@@ -43,7 +44,8 @@ public class DeleteGameCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_GAME_ID);
         }
 
-        model.removeLinkAllFriends(gameToDeleteId);
+        Game gameToDelete = model.getGame(gameToDeleteId);
+        model.removeLinkAllFriends(gameToDelete);
         model.deleteGame(gameToDeleteId);
         return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, gameToDeleteId),
                 CommandType.GAME_DELETE);

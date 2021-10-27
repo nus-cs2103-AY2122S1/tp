@@ -147,8 +147,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeLinkAllFriends(GameId gameId) {
-        friendsList.removeLinkAllFriends(gameId);
+    public void removeLinkAllFriends(Game game) {
+        friendsList.removeLinkAllFriends(game);
     }
 
     @Override
