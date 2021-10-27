@@ -2,6 +2,9 @@ package seedu.address.model.person.supplier;
 
 import java.util.Comparator;
 
+/**
+ * Represents a class to that generates supplier comparators
+ */
 public class SupplierComparator {
 
     /**

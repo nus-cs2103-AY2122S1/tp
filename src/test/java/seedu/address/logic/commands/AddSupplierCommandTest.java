@@ -230,6 +230,21 @@ public class AddSupplierCommandTest {
         }
 
         @Override
+        public void setCustomerComparator(Comparator<Customer> customerComparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Customer> getSortableCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetCustomerListToDefaultSortState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Employee> getFilteredEmployeeList() {
             throw new AssertionError("This method should not be called.");
         }

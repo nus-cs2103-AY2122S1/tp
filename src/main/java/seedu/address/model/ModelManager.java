@@ -31,6 +31,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
+    private final ObservableList<Customer> sortableCustomers;
     private final FilteredList<Employee> filteredEmployees;
     private final FilteredList<Supplier> filteredSuppliers;
     private final ObservableList<Employee> sortableEmployees;
@@ -51,6 +52,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
+        sortableCustomers = this.addressBook.getSortableCustomerList();
         filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
         sortableEmployees = this.addressBook.getSortableEmployeeList();
@@ -154,6 +156,12 @@ public class ModelManager implements Model {
         addressBook.addCustomer(customer);
         updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
+
+    @Override
+    public void setCustomerComparator(Comparator<Customer> customerComparator) {
+        this.addressBook.setCustomerComparator(customerComparator);
+    }
+
     @Override
     public void addEmployee(Employee employee) {
         addressBook.addEmployee(employee);
@@ -269,6 +277,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Customer> getFilteredCustomerList() {
         return filteredCustomers;
+    }
+
+    @Override
+    public ObservableList<Customer> getSortableCustomerList() {
+        return sortableCustomers;
+    }
+
+    @Override
+    public void resetCustomerListToDefaultSortState() {
+        this.addressBook.resetCustomerListToDefaultSortState();
     }
 
     @Override

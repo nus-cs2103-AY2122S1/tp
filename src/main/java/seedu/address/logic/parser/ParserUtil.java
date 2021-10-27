@@ -19,6 +19,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.SortOrder;
 import seedu.address.model.person.customer.Allergy;
 import seedu.address.model.person.customer.LoyaltyPoints;
+import seedu.address.model.person.customer.SortByCustomer;
 import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
@@ -366,6 +367,21 @@ public class ParserUtil {
             throw new ParseException(SortByEmployee.MESSAGE_CONSTRAINTS);
         }
         return new SortByEmployee(trimmedSortBy);
+    }
+
+    /**
+     * Parses a {@code String sortBy} into a {@code SortBy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SortByCustomer parseSortByCustomer(String sortBy) throws ParseException {
+        requireNonNull(sortBy);
+        String trimmedSortBy = sortBy.trim().toLowerCase();
+        if (!SortByCustomer.isValidSortingOrder(trimmedSortBy)) {
+            throw new ParseException(SortByCustomer.MESSAGE_CONSTRAINTS);
+        }
+        return new SortByCustomer(trimmedSortBy);
     }
 
     /**

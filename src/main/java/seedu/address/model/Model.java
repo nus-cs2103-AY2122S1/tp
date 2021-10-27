@@ -115,6 +115,16 @@ public interface Model {
      * the address book.
      */
     void setCustomer(Customer target, Customer editedCustomer);
+
+    /** Sets the comparator for the customer list */
+    void setCustomerComparator(Comparator<Customer> customerComparator);
+
+    /** Returns a sortable view of the customer list */
+    ObservableList<Customer> getSortableCustomerList();
+
+    /** Resets the customer list to its default sorting state */
+    void resetCustomerListToDefaultSortState();
+
     /**
      * Replaces the given employee {@code target} with {@code editedEmployee}.
      * {@code target} must exist in the address book.
