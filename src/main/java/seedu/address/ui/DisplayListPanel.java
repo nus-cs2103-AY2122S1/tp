@@ -8,42 +8,44 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.item.Item;
+import seedu.address.model.display.Displayable;
 
 /**
  * Panel containing the list of items.
  */
-public class ItemListPanel extends UiPart<Region> {
-    private static final String FXML = "ItemListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(ItemListPanel.class);
+public class DisplayListPanel extends UiPart<Region> {
+    private static final String FXML = "DisplayListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(DisplayListPanel.class);
 
     @FXML
-    private ListView<Item> itemListView;
+    private ListView<Displayable> displayListView;
 
     /**
-     * Creates a {@code ItemListPanel} with the given {@code ObservableList}.
+     * Creates a {@code DisplayListPanel} with the given {@code ObservableList}.
      */
-    public ItemListPanel(ObservableList<Item> itemList) {
+    public DisplayListPanel(ObservableList<Displayable> displayList) {
         super(FXML);
-        itemListView.setItems(itemList);
-        itemListView.setCellFactory(listView -> new ItemListViewCell());
+        displayListView.setItems(displayList);
+        displayListView.setCellFactory(listView -> new DisplayListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Item} using a {@code ItemCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Displayable}.
      */
-    class ItemListViewCell extends ListCell<Item> {
-        @Override
-        protected void updateItem(Item item, boolean empty) {
-            super.updateItem(item, empty);
+    class DisplayListViewCell extends ListCell<Displayable> {
 
-            if (empty || item == null) {
+        @Override
+        protected void updateItem(Displayable displayable, boolean empty) {
+            super.updateItem(displayable, empty);
+
+            if (empty || displayable == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ItemCard(item, getIndex() + 1).getRoot());
+                setGraphic(displayable.asDisplayCard(getIndex() + 1).getRoot());
             }
         }
+
     }
 
 }
