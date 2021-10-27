@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
@@ -194,7 +196,8 @@ public class Participant {
         return nextOfKins.get(index);
     }
 
-    /** Returns true if the given next of kin is already assigned to this participant.
+    /**
+     * Returns true if the given next of kin is already assigned to this participant.
      *
      * @param nextOfKin The given next of kin.
      * @return True if the nextOfKin is assigned to this participant.
@@ -309,9 +312,8 @@ public class Participant {
 
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: \n");
-            for (int i = 1; i < nextOfKins.size(); i++) {
-                builder.append(i).append(". ").append(nextOfKins.get(i - 1)).append("\n");
-            }
+            IntStream.range(1, nextOfKins.size() + 1).forEach(
+                    i -> builder.append(i).append(". ").append(nextOfKins.get(i - 1).toString()).append("\n"));
         }
 
         if (!events.isEmpty()) {
