@@ -51,13 +51,15 @@ public class EventCard extends UiPart<Region> {
 
 
         if (event.hasUnvaccinatedResident()) {
-            this.getRoot().setStyle("-fx-border-color: derive(#FF0000, 70%); -fx-border-width: 1 1 1 7;");
-            Label textBox = new Label("Non-Vaccinated: " + event.numOfUnvaccinatedResidents());
+            this.getRoot().setStyle("-fx-border-color: derive(#FF0000, 70%); -fx-border-width: 1 1 1 7;"
+                    + "-fx-border-radius: 5");
+            Label textBox = new Label("Un-Vaccinated: " + event.numOfUnvaccinatedResidents());
             vaccinatedContainer.getChildren().add(textBox);
         }
 
         if (event.isOver()) {
-            this.getRoot().setStyle("-fx-border-color: derive(#A9A9A9, 70%); -fx-border-width: 1 1 1 7;");
+            this.getRoot().setStyle("-fx-border-color: derive(#A9A9A9, 70%); -fx-border-width: 1 1 1 7;"
+                    + "-fx-border-radius: 5");
         }
     }
 
