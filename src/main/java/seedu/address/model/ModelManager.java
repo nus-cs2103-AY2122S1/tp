@@ -278,6 +278,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
+        requireNonNull(predicate);
         loadTaskList(member);
         filteredTasks.setPredicate(predicate);
     }

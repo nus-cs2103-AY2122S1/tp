@@ -1,15 +1,14 @@
 package seedu.address.logic.parser.member;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.member.MlistCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.member.Email;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -25,14 +24,19 @@ public class MlistCommandParser implements Parser<MlistCommand> {
         if (args.isEmpty()) {
             return new MlistCommand();
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_ID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_ID, PREFIX_ATTEND, PREFIX_ABSENT);
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_ID)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ATTEND, PREFIX_ABSENT)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MlistCommand.MESSAGE_USAGE));
         }
-
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
-        return new MlistCommand(index);
+        if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ATTEND)) {
+            return new MlistCommand(index, "true");
+        } else if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ABSENT)) {
+            return new MlistCommand(index, "false");
+        } else {
+            return new MlistCommand(index);
+        }
     }
-
 }
