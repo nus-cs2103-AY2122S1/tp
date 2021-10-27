@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 public class CommandHistory {
 
@@ -9,6 +12,7 @@ public class CommandHistory {
     private static final int DEFAULT_INDEX = -1;
     private static final String EMPTY_COMMAND = "";
     private static int index = DEFAULT_INDEX;
+    private static final Logger logger = LogsCenter.getLogger(CommandHistory.class);
 
     private CommandHistory() {}
 
@@ -18,6 +22,7 @@ public class CommandHistory {
      */
     public static void addCommand(String command) {
         commandHistory.add(0, command);
+        logger.info("[HISTORY] Added command to history");
         resetIndex();
     }
 
@@ -26,6 +31,7 @@ public class CommandHistory {
      * @return Previous command executed
      */
     public static String getPreviousCommand() {
+        logger.info("[HISTORY] Toggle previous command in history");
         if (hasNoHistory()) {
             return EMPTY_COMMAND;
         }
@@ -40,6 +46,7 @@ public class CommandHistory {
      * @return Next command executed
      */
     public static String getNextCommand() {
+        logger.info("[HISTORY] Toggle next command in history");
         if (hasNoHistory()) {
             return EMPTY_COMMAND;
         }
