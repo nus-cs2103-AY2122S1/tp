@@ -10,8 +10,8 @@ public class TelegramCommand extends Command {
 
     public static final String COMMAND_WORD = "te";
 
-    public static final String MESSAGE_NO_USER_SELECTED = "There is no user selected. " +
-            "Select a user using 'show <INDEX>' and try again.";
+    public static final String MESSAGE_NO_USER_SELECTED = "There is no user selected. "
+            + "Select a user using 'show <INDEX>' and try again.";
 
     public static final String MESSAGE_SUCCESS = "Telegram shown";
 
