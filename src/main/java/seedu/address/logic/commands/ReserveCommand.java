@@ -26,7 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ReserveCommand extends Command {
     public static final String COMMAND_WORD = "addr";
     public static final String MESSAGE_USAGE = String.format(
-            "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
+            "%1$s: Adds a new reservation with customer's phone number, number of people and time.\n"
             + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME\n"
             + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1930.",
             CommandUtil.formatCommandWord(COMMAND_WORD),
@@ -36,6 +36,7 @@ public class ReserveCommand extends Command {
     public static final String MESSAGE_RESERVATION_EXISTS = "Reservation already exist: %1$s";
     public static final String MESSAGE_CUSTOMER_MISSING =
             "No customer with phone number %1$s exist.\nUnable to create reservation.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private Phone phone;
     private int numberOfPeople;
