@@ -23,10 +23,10 @@ public class TeleHandleTest {
 
     @Test
     public void isValidTeleHandle() {
-        // null address
+        // null tele handle
         assertThrows(NullPointerException.class, () -> TeleHandle.isValidTeleHandle(null));
 
-        // invalid addresses
+        // invalid tele handles
         assertFalse(TeleHandle.isValidTeleHandle("")); // empty string
         assertFalse(TeleHandle.isValidTeleHandle(" ")); // spaces only
         assertFalse(TeleHandle.isValidTeleHandle("@")); // @ only
@@ -35,7 +35,7 @@ public class TeleHandleTest {
         assertFalse(TeleHandle.isValidTeleHandle("@amy lee ")); // there is a space separating the name
         assertFalse(TeleHandle.isValidTeleHandle("@amy'lee ")); // special character is used
 
-        // valid addresses
+        // valid tele handles
         assertTrue(TeleHandle.isValidTeleHandle("@AmyLee")); // letters only
         assertTrue(TeleHandle.isValidTeleHandle("@999")); // numbers only
         assertTrue(TeleHandle.isValidTeleHandle("@amylee99")); // combination of numbers and letters

@@ -21,7 +21,7 @@ public class TeachingAssistantBuddyBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Module} to the {@code TeachingAssistantBuddy} that we are building.
      */
     public TeachingAssistantBuddyBuilder withModule(Module module) {
         teachingAssistantBuddy.addModule(module);

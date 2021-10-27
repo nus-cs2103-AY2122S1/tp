@@ -24,10 +24,10 @@ public class StudentIdTest {
 
     @Test
     public void isValidStudentId() {
-        // null phone number
+        // null student id
         assertThrows(NullPointerException.class, () -> StudentId.isValidStudentId(null));
 
-        // invalid phone numbers
+        // invalid student ids
         assertFalse(StudentId.isValidStudentId("")); // empty string
         assertFalse(StudentId.isValidStudentId(" ")); // spaces only
         assertFalse(StudentId.isValidStudentId("123456789")); // numbers only
@@ -35,7 +35,7 @@ public class StudentIdTest {
         assertFalse(StudentId.isValidStudentId("Invalid")); // Letters only
         assertFalse(StudentId.isValidStudentId("A123 4567A")); // spaces within digits
 
-        // valid phone numbers
+        // valid student ids
         assertTrue(StudentId.isValidStudentId("A1234567A"));
         assertTrue(StudentId.isValidStudentId("A1111111Z"));
         assertTrue(StudentId.isValidStudentId("Z0000000Z"));

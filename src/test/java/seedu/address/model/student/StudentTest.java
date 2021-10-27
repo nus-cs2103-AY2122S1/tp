@@ -19,13 +19,6 @@ import seedu.address.model.module.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
-
-    //    @Test
-    //    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-    //        Student student = new StudentBuilder().build();
-    //        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
-    //    }
-
     @Test
     public void isSameStudent() {
         // same object -> returns true
