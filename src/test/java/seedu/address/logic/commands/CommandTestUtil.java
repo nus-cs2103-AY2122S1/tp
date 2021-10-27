@@ -45,13 +45,13 @@ public class CommandTestUtil {
     public static final String VALID_NATIONALITY_BOB = "Malaysian";
     public static final String VALID_TUTORIAL_GROUP_AMY = "T09";
     public static final String VALID_TUTORIAL_GROUP_BOB = "T28";
-    public static final String VALID_SOCIAL_HANDLE_AMY = "@amyb";
-    public static final String VALID_SOCIAL_HANDLE_BOB = "@bobc";
     public static final String VALID_REMARK_AMY = "Like skiing.";
     public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
     public static final String VALID_TAG_COLOUR = "#00EFFF";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_SOCIAL_HANDLE_AMY = "tg:amyb";
+    public static final String VALID_SOCIAL_HANDLE_BOB = "tg:bobc";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -93,7 +93,7 @@ public class CommandTestUtil {
     public static final String INVALID_TUTORIAL_GROUP_DESC = " "
             + PREFIX_TUTORIAL_GROUP + "B"; // Alphabets not allowed in tutorial groups
     public static final String INVALID_SOCIAL_HANDLE_DESC = " "
-            + PREFIX_SOCIAL_HANDLE + "@fef fef"; // space not allowed in social handle
+            + PREFIX_SOCIAL_HANDLE + "igjewfewij"; // missing ':' to delimit platform and value
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_TAG_COLOUR_DESC = " " + PREFIX_TAG + "hubby" + TAG_COLOUR_DELIMITER
             + "blue"; // invalid colour code not allowed
@@ -106,11 +106,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withGender(VALID_GENDER_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withNationality(VALID_NATIONALITY_AMY)
-                .withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).withSocialHandle(VALID_SOCIAL_HANDLE_AMY)
+                .withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).withSocialHandles(VALID_SOCIAL_HANDLE_AMY)
                 .withRemark(REMARK_DESC_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withNationality(VALID_NATIONALITY_BOB)
-                .withTutorialGroup(VALID_TUTORIAL_GROUP_BOB).withSocialHandle(VALID_SOCIAL_HANDLE_BOB)
+                .withTutorialGroup(VALID_TUTORIAL_GROUP_BOB).withSocialHandles(VALID_SOCIAL_HANDLE_BOB)
                 .withRemark(REMARK_DESC_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
