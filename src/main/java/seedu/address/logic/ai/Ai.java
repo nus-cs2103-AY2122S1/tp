@@ -145,6 +145,7 @@ public class Ai {
 
     /**
      * Sorts the {@code ObservableList} object that is shown
+     *
      * @param user Main user Person object
      * @param list {@code ObservableList} object of Persons
      */

@@ -14,7 +14,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.collections.FXCollections?>
-<?import seedu.address.ui.CommandDetails?>
+<?import seedu.address.logic.commands.CommandDetails?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <icons>
