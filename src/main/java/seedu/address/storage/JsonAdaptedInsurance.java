@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Insurance;
@@ -11,35 +11,35 @@ import seedu.address.model.person.Insurance;
  */
 class JsonAdaptedInsurance {
 
-    private final String insuranceName;
+    private final String insuranceType;
+    private final String insuranceBrand;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs an {@code Insurance} with the given {@code insuranceType}
+     * and {@code insuranceBrand}.
      */
     @JsonCreator
-    public JsonAdaptedInsurance(String insuranceName) {
-        this.insuranceName = insuranceName;
+    public JsonAdaptedInsurance(@JsonProperty("insuranceType") String insuranceType,
+            @JsonProperty("insuranceBrand") String insuranceBrand) {
+        this.insuranceType = insuranceType;
+        this.insuranceBrand = insuranceBrand;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Insurance} into this class for Jackson use.
      */
     public JsonAdaptedInsurance(Insurance source) {
-        insuranceName = source.getType().getTypeName();
-    }
-
-    @JsonValue
-    public String getInsuranceName() {
-        return insuranceName;
+        insuranceType = source.getTypeName();
+        insuranceBrand = source.getBrand();
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code Insurance} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted insurance.
      */
     public Insurance toModelType() throws IllegalValueException {
-        return Insurance.of(insuranceName);
+        return Insurance.of(insuranceType, insuranceBrand);
     }
 
 }

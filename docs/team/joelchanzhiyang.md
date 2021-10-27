@@ -11,7 +11,7 @@ to help manage the logistics of being an insurance agent.
 Given below are my contributions to the project.
 * **New Feature**: Added the ability for the user to add the status of insurance
 claims to a contact
-  * *What it does:*: Given the title, description and status of the claim, a user can add a insurance claim to 
+  * *What it does:*: Given the title, description and status of the claim, a user can add a insurance claim to
   * *Justification:* Insurance agents have to manage insurance claims of their clients
 * **Project Management**:
   * Managed issues for milestone v1.1 on GitHub

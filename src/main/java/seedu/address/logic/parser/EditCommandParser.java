@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REVENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -20,6 +21,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Insurance;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_INSURANCE, PREFIX_NOTE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_REVENUE,
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_INSURANCE, PREFIX_NOTE);
 
         Index index;
 
@@ -55,6 +57,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_REVENUE).isPresent()) {
+            Revenue revenue = ParserUtil.parseRevenue(argMultimap.getValue(PREFIX_REVENUE).get());
+            if (revenue.isValidResultingRevenue()) {
+                editPersonDescriptor.setRevenue(revenue);
+            } else {
+                throw new ParseException(Revenue.MESSAGE_CONSTRAINTS);
+            }
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
