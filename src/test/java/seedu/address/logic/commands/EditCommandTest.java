@@ -146,6 +146,14 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_personWithLongName_failure() {
+        String longName = "NameOverThirtyCharactersIsTooLong";
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder().withName(longName).build());
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_NAME_TOO_LONG);
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
