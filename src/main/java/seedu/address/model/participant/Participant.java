@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -194,7 +195,15 @@ public class Participant {
         return nextOfKins.get(index);
     }
 
-    /** Returns true if the given next of kin is already assigned to this participant.
+    public String getNextOfKinsListString() {
+        final StringBuilder builder = new StringBuilder();
+        IntStream.range(1, nextOfKins.size() + 1).forEach(i ->
+                builder.append(i).append(". ").append(nextOfKins.get(i - 1).toString()).append("\n"));
+        return builder.toString();
+    }
+
+    /**
+     * Returns true if the given next of kin is already assigned to this participant.
      *
      * @param nextOfKin The given next of kin.
      * @return True if the nextOfKin is assigned to this participant.
@@ -309,7 +318,8 @@ public class Participant {
 
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: \n");
-            nextOfKins.forEach(nok -> builder.append(nok).append("\n"));
+            builder.append(getNextOfKinsListString());
+
         }
 
         if (!events.isEmpty()) {

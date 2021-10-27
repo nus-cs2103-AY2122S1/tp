@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.stream.Collectors;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -54,9 +52,7 @@ public class ParticipantCard extends UiPart<Region> {
         address.setText(participant.getAddressValue());
         email.setText(participant.getEmailValue());
         birthDate.setText(participant.getBirthDateString());
-        nextOfKins.setText(participant.getNextOfKins().stream().map(i -> i.toString() + "\n")
-                .collect(Collectors.joining()));
-
+        nextOfKins.setText(participant.getNextOfKinsListString());
     }
 
     @Override

@@ -219,7 +219,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<ObservableList<NextOfKin>> getNextOfKins() {
-            return (nextOfKins != null) ? Optional.of( FXCollections.observableArrayList((nextOfKins)))
+            return (nextOfKins != null) ? Optional.of(FXCollections.observableArrayList((nextOfKins)))
                     : Optional.empty();
         }
 
