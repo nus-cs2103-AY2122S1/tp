@@ -186,10 +186,8 @@ public class Shift {
     public Shift remove(LocalDate startDate, LocalDate endDate) throws NoShiftException {
         assert endDate.isAfter(startDate) || endDate.isEqual(startDate);
         //check if this period is already within the current set
-        Period period = new Period(startDate, endDate);
-        List<RecurrencePeriod> recurrences = this.recurrences.stream()
-                .flatMap(p -> p.complementWithInformation(period).stream())
-                .collect(Collectors.toList());
+        List<RecurrencePeriod> recurrences = removeFromRecurrencePeriods(new Period(startDate, endDate),
+                this.recurrences);
         if (recurrences.equals(this.recurrences)) {
             throw new NoShiftException();
         }
@@ -198,6 +196,13 @@ public class Shift {
         }
         return new Shift(dayOfWeek, slot, recurrences);
 
+    }
+
+    private static List<RecurrencePeriod> removeFromRecurrencePeriods(Period period,
+                                                               Collection<RecurrencePeriod> recurrences) {
+        return recurrences.stream()
+                .flatMap(p -> p.complementWithInformation(period).stream())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -246,18 +251,19 @@ public class Shift {
     public Shift setTime(LocalTime startTime, LocalTime endTime, int order,
                         LocalDate startDate, LocalDate endDate) throws InvalidShiftTimeException {
         checkTimeOrder(startTime, endTime, order);
-        List<RecurrencePeriod> result = new ArrayList<>();
-        result.addAll(recurrences);
+
+
         Period period = new Period(startDate, endDate);
         Collection<Period> intersects = period.intersect(recurrences);
-        Collection<RecurrencePeriod> recurrenceIntersects = recurrences.stream() //obtain the periods to remove
-                .filter(p -> intersects.contains(p.getPeriod()))
-                .collect(Collectors.toList());
-        result.removeAll(recurrenceIntersects);
-        recurrenceIntersects = intersects.stream()
+        List<RecurrencePeriod> result = new ArrayList<>();
+        result.addAll(recurrences);
+        for (Period intersect : intersects) {
+            result = removeFromRecurrencePeriods(intersect, result);
+        }
+        result.addAll(intersects.stream()
                 .map(p -> new RecurrencePeriod(p, startTime, endTime))
-                .collect(Collectors.toList());
-        result.addAll(recurrenceIntersects);
+                .collect(Collectors.toList()));
+
         return new Shift(dayOfWeek, slot, result);
 
 
