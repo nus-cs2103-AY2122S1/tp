@@ -67,7 +67,7 @@ public class SampleDataUtil {
         sampleAb.addEvent(new Event(new EventName("Basketball"), new EventDate("22-10-2021"),
                 new EventTime("0830"), new Venue("basketball court"), new Capacity("5"), new ResidentList(
                         ResidentList.DEFAULT_LIST, ResidentList.DEFAULT_LIST)));
-    
+
         sampleAb.addEvent(new Event(new EventName("Volleyball"), new EventDate("23-10-2021"),
                 new EventTime("0800"), new Venue("volleyball court"), new Capacity("6"), new ResidentList(
                 String.join(", ", NAME_ALEX, NAME_DAVID, NAME_CHARLOTTE), String.join(", ",
