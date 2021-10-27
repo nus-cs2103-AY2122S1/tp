@@ -1,5 +1,6 @@
 package safeforhall.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
@@ -26,5 +27,11 @@ public class LastDateTest {
 
         // valid dates
         assertTrue(LastDate.isValidDate("21-10-2021"));
+    }
+
+    @Test
+    public void returnsDateWhenEmpty_success() {
+        LastDate date = new LastDate("");
+        assertDoesNotThrow(() -> date.getDeadline());
     }
 }

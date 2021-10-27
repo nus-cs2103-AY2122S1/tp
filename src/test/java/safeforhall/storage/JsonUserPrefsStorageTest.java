@@ -92,8 +92,8 @@ public class JsonUserPrefsStorageTest {
      */
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) {
         try {
-            new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
-                    .saveUserPrefs(userPrefs);
+            JsonUserPrefsStorage json = new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder));
+            json.saveUserPrefs(userPrefs);
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file", ioe);
         }
@@ -107,7 +107,11 @@ public class JsonUserPrefsStorageTest {
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
-
+        try {
+            Path result = jsonUserPrefsStorage.getUserPrefsFilePath();
+        } catch (NoSuchMethodError e) {
+            throw new AssertionError("There should not be an error getting the user prefs filepath");
+        }
         //Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);
         UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
