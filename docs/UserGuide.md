@@ -236,16 +236,11 @@ Examples:
 Displays the reservations made at the specified date and/or time
 
 Format:
-* `check DATE TIME`
-  * Returns all reservations on `DATE TIME`
-* `check DATE`
-  * Returns all reservations on `DATE`, for **all timings**
-* `check TIME`
-  * Returns all reservations on **today's date**, at `TIME` 
-
-
-* `DATE` is formatted as `yyyy-MM-dd`
-* `TIME` is formatted as `HH00`
+* `check DATE TIME`: Returns all reservations on `DATE TIME`
+* `check DATE`: Returns all reservations on `DATE`, for **all timings**
+* `check TIME`: Returns all reservations on **today's date**, at `TIME` 
+  * `DATE` is formatted as `yyyy-MM-dd`
+  * `TIME` is formatted as `HH00`
 
 Examples:
 * `check 2021-09-19 1800`
