@@ -136,7 +136,7 @@ public class MainWindow extends UiPart<Stage> {
 
         userProfileWindow = new UserProfileWindow(logic);
 
-        // Configure User Profile to be shown when clicked
+        // Configure User Profile Window to be shown when clicked
         userDetails.setOnMouseClicked(event -> {
             handleUserProfileWindow();
         });

@@ -12,10 +12,14 @@ import seedu.address.model.person.Person;
 
 import java.util.logging.Logger;
 
+/**
+ * Controller for the User Profile Window.
+ */
 public class UserProfileWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(UserProfileWindow.class);
     private static final String FXML = "UserProfileWindow.fxml";
+
     private final String HEADING = "Your Details";
     private final String NAME = "Name: ";
     private final String GITHUB = "GitHub Username: ";
@@ -38,15 +42,30 @@ public class UserProfileWindow extends UiPart<Stage> {
     @FXML
     ImageView userProfile;
 
-    public UserProfileWindow(Stage root, Logic logic) {
-        super(FXML, root);
+    /**
+     * Creates a new {@code UserProfileWindow}.
+     *
+     * @param stage Stage to use as the root of the {@code UserProfileWindow}.
+     * @param logic To obtain user data.
+     */
+    public UserProfileWindow(Stage stage, Logic logic) {
+        super(FXML, stage);
         this.logic = logic;
     }
 
+    /**
+     * Creates a new {@code UserProfileWindow}.
+     *
+     * @param logic To obtain user data.
+     */
     public UserProfileWindow(Logic logic) {
         this(new Stage(), logic);
     }
 
+    /**
+     * Shows the {@code UserProfileWindow} after initializing
+     * fields.
+     */
     public void show() {
         logger.fine("Showing user profile window");
         initializeFields();
@@ -55,18 +74,35 @@ public class UserProfileWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /**
+     * Returns true if the {@code UserProfileWindow} is currently being shown.
+     *
+     * @return true, if the {@code UserProfileWindow} is currently being shown.
+     */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
+    /**
+     * Focuses on the {@code UserProfileWindow}.
+     */
     public void focus() {
         getRoot().requestFocus();
     }
 
+    /**
+     * Hides the {@code UserProfileWindow}.
+     */
     public void hide() {
         getRoot().hide();
     }
 
+    /**
+     * Obtains the fields including {@code userName}
+     * {@code userGitHub}, {@code userTelegram} and
+     * {@code userProfile}, that are to be displayed
+     * on the window.
+     */
     public void initializeFields() {
         Person user = logic.getUserProfile();
 
@@ -79,6 +115,17 @@ public class UserProfileWindow extends UiPart<Stage> {
         logger.fine("Fields Initialized in User Profile Window");
     }
 
+    /**
+     * Sets up the fields including {@code heading},
+     * {@code userName}, {@code userGitHub},
+     * {@code userTelegram} and {@code userProfile},
+     * that are to be displayed on the window.
+     *
+     * @param userNameObtained The {@code userName} obtained.
+     * @param userGitHubObtained The {@code userGitHub} obtained.
+     * @param userTelegramObtained The {@code userTelegram} obtained.
+     * @param userProfileObtained The {@code userProfile} obtained.
+     */
     public void setFields(String userNameObtained, String userGitHubObtained,
                           String userTelegramObtained, Image userProfileObtained) {
         heading.setText(HEADING);
