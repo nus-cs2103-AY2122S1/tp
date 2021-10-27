@@ -26,8 +26,6 @@ public class Schedule {
     private static final int PERIOD_OF_DAY = 2;
     // Set the number of hours for a slot as 4 hours
 
-
-
     private static final String SCHEDULE_DEFAULT = "Schedule:\n"
             + "Monday: %1$s\n"
             + "Tuesday: %2$s\n"
@@ -164,7 +162,7 @@ public class Schedule {
                 continue;
             }
             result += "\n\t";
-            result += shift;
+            result += shift.toString();
 
         }
         return result;

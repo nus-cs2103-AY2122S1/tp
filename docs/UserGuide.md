@@ -141,6 +141,20 @@ Examples:
 `setRoleReq r/floor-3`\
 `setRoleReq r/kitchen-4 r/bartender-2`
 
+#### Setting Default Shift Timings : `setDefaultShiftTimings `
+
+Set the default timings for the morning and afternoon shift. Note that all 4 timings must be present, and the timings 
+must be provided in an `HH:mm` format.
+
+Format:
+
+`setShiftTimings MORNING_START_TIME MORNING_END_TIME AFTERNOON_START_TIME AFTERNOON_END_TIME`
+
+Examples:
+
+`setShiftTimings 10:00 16:00 17:00 22:00`\
+`setShiftTimings 09:00 15:00 18:00 23:00`
+
 #### Listing all persons : `list`
 
 Shows a list of all staffs in the staff view.
