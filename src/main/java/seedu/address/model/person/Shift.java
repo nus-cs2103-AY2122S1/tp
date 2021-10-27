@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.TimeUtil.isValidTime;
 
 import java.time.DayOfWeek;
@@ -24,6 +25,7 @@ import seedu.address.model.person.exceptions.NoShiftException;
 public class Shift {
 
     public static final String DELIMITER = "-";
+    private static final String DEFAULT_SHIFT_DISPLAY_STRING = "Day: %1$s, Slot:%2$s";
 
     protected Slot slot;
     protected DayOfWeek dayOfWeek;
@@ -279,7 +281,50 @@ public class Shift {
 
     }
 
+    /**
+     * Returns the recurrences that occur during {@code Period period}.
+     *
+     */
+    public String toRecurrenceString(Period period) {
+        requireNonNull(period);
+        if (!isWorking(period)) {
+            return "";
+        }
+        List<LocalDate> dates = period.toList() //get the dates that are within the period of this day.
+                .stream()
+                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
+                .collect(Collectors.toList());
 
+        List<RecurrencePeriod> result = recurrences.stream()
+                .filter(p ->
+                        0 != dates.stream()
+                                .filter(date -> p.contains(date)) //find any date within the period
+                                .count() //that is in recurrence
+                ).collect(Collectors.toList());
+        return toShiftString() + "\n" + getRecurrenceString(result);
+    }
+
+    /**
+     * Returns a string displaying the day of week and slot the shift is at.
+     */
+    private String toShiftString() {
+        return String.format(DEFAULT_SHIFT_DISPLAY_STRING, dayOfWeek, slot);
+
+    }
+
+    /**
+     * Takes in a {@code Collection<RecurrencePeriod> periods} and formats it to a string for the
+     * user to read.
+     *
+     */
+    private static String getRecurrenceString(Collection<RecurrencePeriod> periods) {
+        String resultString = "";
+
+        for (RecurrencePeriod rp : periods) {
+            resultString += rp.toString() + "\n";
+        }
+        return resultString;
+    }
 
     /**
      * Returns a string of staff names that work on a specified shift. Result string is numbered and
@@ -318,12 +363,10 @@ public class Shift {
 
     @Override
     public String toString() {
-        String resultString = "";
-
-        for (RecurrencePeriod rp : recurrences) {
-            resultString += rp.toString() + "\n";
-        }
+        String resultString = getRecurrenceString(recurrences);
         return resultString;
     }
+
+
 
 }

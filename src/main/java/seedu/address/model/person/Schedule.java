@@ -155,14 +155,14 @@ public class Schedule {
      *
      * @return The string format to display.
      */
-    private static String formatShiftsToString(Shift[] shifts) {
+    private static String formatShiftsToString(Shift[] shifts, Period period) {
         String result = "";
         for (Shift shift: shifts) {
             if (shift == null) {
                 continue;
             }
             result += "\n\t";
-            result += shift.toString();
+            result += shift.toRecurrenceString(period);
 
         }
         return result;
@@ -193,15 +193,15 @@ public class Schedule {
      *
      * @return The displayed schedule.
      */
-    public String toViewScheduleString() {
+    public String toViewScheduleString(Period period) {
         return String.format(SCHEDULE_DEFAULT,
-                formatShiftsToString(shifts[0]),
-                formatShiftsToString(shifts[1]),
-                formatShiftsToString(shifts[2]),
-                formatShiftsToString(shifts[3]),
-                formatShiftsToString(shifts[4]),
-                formatShiftsToString(shifts[5]),
-                formatShiftsToString(shifts[6]));
+                formatShiftsToString(shifts[0], period),
+                formatShiftsToString(shifts[1], period),
+                formatShiftsToString(shifts[2], period),
+                formatShiftsToString(shifts[3], period),
+                formatShiftsToString(shifts[4], period),
+                formatShiftsToString(shifts[5], period),
+                formatShiftsToString(shifts[6], period));
 
     }
 

@@ -30,7 +30,7 @@ public class AddShiftCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shift to the staff identified "
             + "by the index number used in the displayed staff list or the name of staff the period over"
             + "which the shift is active over is optional. Without the period, it is assumed that it lasts"
-            + "over today to seven days later." + "\n\n"
+            + "for the current week, where the current date is in between monday and sunday for the week." + "\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
             + PREFIX_DASH_NAME + " NAME "

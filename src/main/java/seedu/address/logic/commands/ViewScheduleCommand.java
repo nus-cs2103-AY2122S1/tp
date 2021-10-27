@@ -19,6 +19,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
@@ -48,6 +49,7 @@ public class ViewScheduleCommand extends Command {
             + PREFIX_DASH_EMAIL + "johndoe@example.com";
     private static final String PERSON_NOT_IN_LIST = "No staff satisfies conditions applied.";
 
+    private final Period period;
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
 
@@ -55,10 +57,11 @@ public class ViewScheduleCommand extends Command {
      * Constructs a view schedule command that views the schedule of the staff
      * filtered by {@code PersonContainsFieldsPredicate predicate}.
      */
-    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate) {
+    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate, Period period) {
         requireNonNull(predicate);
         this.predicate = predicate;
         this.index = -1;
+        this.period = period;
     }
 
     /**
@@ -66,10 +69,11 @@ public class ViewScheduleCommand extends Command {
      * staff at {@code Index index} and fulfils the {@code PersonContainsFieldsPredicate predicate}.
      *
      */
-    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate, Index index) {
+    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate, Index index, Period period) {
         requireAllNonNull(predicate, index);
         this.index = index.getZeroBased();
         this.predicate = predicate;
+        this.period = period;
 
     }
 
@@ -96,7 +100,7 @@ public class ViewScheduleCommand extends Command {
         String result = "";
         for (Person staff : staffs) {
             result += String.format(DEFAULT_MESSAGE, staff.getName());
-            result += staff.getSchedule().toViewScheduleString();
+            result += staff.getSchedule().toViewScheduleString(period);
         }
         return result;
     }
