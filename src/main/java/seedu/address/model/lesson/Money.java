@@ -1,7 +1,5 @@
 package seedu.address.model.lesson;
 
-import java.text.DecimalFormat;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
