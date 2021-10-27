@@ -20,8 +20,10 @@ public class NationalityTest {
 
         // invalid nationality
         assertFalse(Nationality.isValidNationality(" ")); // spaces only
-        assertFalse(Nationality.isValidNationality("Singapor")); // this is a country, not a nationality
+        assertFalse(Nationality.isValidNationality("-")); // dash only
+        assertFalse(Nationality.isValidNationality("Singapore")); // this is a country, not a nationality
         assertFalse(Nationality.isValidNationality("Indonesia"));
+        assertFalse(Nationality.isValidNationality("SoCian")); // invalid input
 
         // valid nationality
         assertTrue(Nationality.isValidNationality("Singaporean"));
