@@ -27,6 +27,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -130,7 +131,9 @@ public class ParserUtil {
     public static LessonName parseLessonName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+
         if (!LessonName.isValidLessonName(trimmedName)) {
+
             throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
         }
         return new LessonName(trimmedName);
@@ -147,7 +150,6 @@ public class ParserUtil {
         if (capacity.equals("")) {
             return new Capacity("");
         }
-
         String trimmedCapacity = capacity.trim();
         if (!Capacity.isValidCapacity(trimmedCapacity)) {
             throw new ParseException(Capacity.MESSAGE_CONSTRAINTS);
@@ -185,7 +187,6 @@ public class ParserUtil {
         if (timing.equals("")) {
             return new Timing("");
         }
-
         String trimmedTiming = timing.trim();
         if (!Timing.isValidTiming(trimmedTiming)) {
             throw new ParseException(Timing.MESSAGE_CONSTRAINTS);

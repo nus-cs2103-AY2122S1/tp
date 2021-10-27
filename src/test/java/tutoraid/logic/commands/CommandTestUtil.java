@@ -19,6 +19,7 @@ import tutoraid.model.lesson.LessonNameContainsKeywordsPredicate;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.EditLessonDescriptorBuilder;
 import tutoraid.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -26,6 +27,8 @@ import tutoraid.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
     public static final String VALID_ADD_STUDENT_COMMAND = "add -s ";
+    public static final String VALID_ADD_LESSON_COMMAND = "add -l ";
+
     public static final String VALID_STUDENT_NAME_AMY = "Amy Bee";
     public static final String VALID_STUDENT_NAME_BOB = "Bob Choo";
     public static final String VALID_STUDENT_PHONE_AMY = "11111111";
@@ -40,8 +43,6 @@ public class CommandTestUtil {
     public static final ArrayList<String> VALID_PROGRESS_LIST_AMY = new ArrayList<>();
     public static final boolean VALID_PAYMENT_STATUS_AMY = false;
     public static final boolean VALID_PAYMENT_STATUS_BOB = false;
-
-    public static final String VALID_ADD_LESSON_COMMAND = "add -l ";
 
     public static final String VALID_LESSON_NAME_MATHS_TWO = "Maths 2";
     public static final String VALID_LESSON_NAME_SCIENCE_TWO = "Science 2";
@@ -94,7 +95,7 @@ public class CommandTestUtil {
             " " + CliSyntax.PREFIX_PARENT_PHONE + "911a"; // 'a' not allowed in phones
 
     public static final String INVALID_LESSON_NAME_DESC =
-            " " + CliSyntax.PREFIX_LESSON_NAME + "Maths&";
+            " " + CliSyntax.PREFIX_LESSON_NAME + "Maths&"; // alphanumeric chars only
     public static final String INVALID_CAPACITY_DESC =
             " " + CliSyntax.PREFIX_LESSON_CAPACITY + "911.1"; // must be integer
     public static final String INVALID_PRICE_DESC =
@@ -107,6 +108,8 @@ public class CommandTestUtil {
 
     public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditLessonCommand.EditLessonDescriptor DESC_MATH;
+    public static final EditLessonCommand.EditLessonDescriptor DESC_SCIENCE;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder()
@@ -120,6 +123,18 @@ public class CommandTestUtil {
                 .withStudentPhone(VALID_STUDENT_PHONE_BOB)
                 .withParentPhone(VALID_PARENT_PHONE_BOB)
                 .withParentName(VALID_PARENT_NAME_BOB)
+                .build();
+        DESC_MATH = new EditLessonDescriptorBuilder()
+                .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+                .withCapacity(VALID_CAPACITY_MATHS_TWO)
+                .withPrice(VALID_PRICE_MATHS_TWO)
+                .withTiming(VALID_TIMING_MATHS_TWO)
+                .build();
+        DESC_SCIENCE = new EditLessonDescriptorBuilder()
+                .withLessonName(VALID_LESSON_NAME_SCIENCE_TWO)
+                .withCapacity(VALID_CAPACITY_SCIENCE_TWO)
+                .withPrice(VALID_PRICE_SCIENCE_TWO)
+                .withTiming(VALID_TIMING_SCIENCE_TWO)
                 .build();
     }
 
