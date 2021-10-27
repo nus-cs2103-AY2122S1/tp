@@ -210,12 +210,12 @@ Tip: Do take a good look at this section to understand the common terminologies 
 
 `academic plan`
 * Refers to modules that the user has assigned with a specific semester and year.
-* Contributes to the calculation of the MC requirements.
+* Contributes to the calculation of the MC requirements.<br>
   ![requirements MCs Display](images/courseRequirementsDisplay.png)
 
 `INDEX`
 * The `INDEX` refers to the index number shown in the displayed module list.
-* The `INDEX` **must be a positive integer** (1, 2, 3 ...).
+* The `INDEX` **must be a positive integer** (1, 2, 3 ...).<br>
   ![IndexExplanation](images/IndexExplanation.png)
 * For example, with the screenshot above, an `INDEX` of 1 would represent the Module CS2030S, and an `INDEX` of 2 would represent the Module CS2040S
 
