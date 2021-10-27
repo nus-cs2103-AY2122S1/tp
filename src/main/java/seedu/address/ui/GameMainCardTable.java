@@ -57,7 +57,7 @@ public class GameMainCardTable extends UiPart<Region> {
 
     private GameFriendLink getGameFriendLink(Friend friend, Game gameToGet) {
         return friend.getGameFriendLinks()
-                .stream()
+                .values().stream()
                 .filter(gameFriendLink -> gameFriendLink.getGameId().equals(gameToGet.getGameId()))
                 .findFirst()
                 .get();
