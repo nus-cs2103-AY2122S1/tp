@@ -420,6 +420,25 @@ Examples:
 ## Managing Appointments `appt` <a name="managing-appointments"/>
 
 ### Adding an appointment: `appt -a` <a name="add-appointment"/>
+Creates an appointment. 
+
+Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION]
+ [r/REMARK]`
+
+* Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …​
+* `DATE_AND_TIME` accepts the format `DD/MM/YYYY HH:MM` e.g. `20/07/2022`.
+* If you did not include the duration, it will be automatically be set to **10** minutes. 
+
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If the appointment you just created isn't appearing, it could be because the default appointment list only shows
+appointments occurring today and the one you just add doesn't happen today. To see upcoming appointments, enter `appt -u`. 
+</div>
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
@@ -462,7 +481,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add appointment** | 
+**Add appointment** | `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION] [r/REMARK]` <br> e.g., `appt -a p/1 d/2 s/25/12/2022 dur/20 r/Patient wants a blood test`|
 **Add doctor** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
 **Add patient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add Tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
