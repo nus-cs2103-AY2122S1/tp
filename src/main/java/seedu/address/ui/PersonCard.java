@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
         group.setText("Groups: " + groupsString);
 
         String assessmentsString = student.getScores().entrySet().stream()
-                .map(Map.Entry::toString).sorted().collect(Collectors.joining(", "));
+                .map(Map.Entry::toString).collect(Collectors.joining(", "));
         assessment.setText("Assessments: " + assessmentsString);
 
         student.getTags().stream()

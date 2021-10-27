@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -145,7 +145,7 @@ public class AddScoreCommand extends Command {
 
         Score scoreToEdit = scoreDescriptor.getScore().get();
 
-        Map<Assessment, Score> editedScores = new HashMap<>(scores);
+        Map<Assessment, Score> editedScores = new LinkedHashMap<>(scores);
         editedScores.put(assessmentToEdit, scoreToEdit);
 
         return new Student(name, id, groups, editedScores, tags);

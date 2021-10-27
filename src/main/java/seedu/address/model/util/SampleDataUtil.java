@@ -2,8 +2,8 @@ package seedu.address.model.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -130,7 +130,7 @@ public class SampleDataUtil {
      * Generates a score map for the sample assessments.
      */
     public static Map<Assessment, Score> getRandomAssessmentScores() {
-        Map<Assessment, Score> scores = new HashMap<>();
+        Map<Assessment, Score> scores = new LinkedHashMap<>();
 
         for (String assessmentName : SAMPLE_ASSESSMENT_NAMES) {
             String s = String.format("%.2f", getRandomScore());

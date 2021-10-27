@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import seedu.address.model.student.Assessment;
@@ -21,7 +21,7 @@ public class AssessmentBuilder {
      * Creates a {@code AssessmentBuilder} with the default details.
      */
     public AssessmentBuilder() {
-        scores = new HashMap<>();
+        scores = new LinkedHashMap<>();
         value = DEFAULT_VALUE;
     }
 
@@ -37,7 +37,7 @@ public class AssessmentBuilder {
      * Sets the {@code scores} of the {@code assessment} that we are building.
      */
     public AssessmentBuilder withScores(Map<String, String> scores) {
-        Map<ID, Score> scoresAdapted = new HashMap<>();
+        Map<ID, Score> scoresAdapted = new LinkedHashMap<>();
         for (Map.Entry<String, String> score : scores.entrySet()) {
             scoresAdapted.put(new ID(score.getKey()), new Score(score.getValue()));
         }
