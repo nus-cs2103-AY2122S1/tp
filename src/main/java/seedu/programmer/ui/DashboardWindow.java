@@ -56,7 +56,7 @@ public class DashboardWindow extends PopupWindow {
     /**
      * Fill number of students, classes and labs.
      */
-    public void fillOverallStats() {
+    private void fillOverallStats() {
         overallStatsPlaceholder.getChildren().clear();
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
         ObservableList<Student> stuList = readOnlyPE.getStudentList();
@@ -73,13 +73,21 @@ public class DashboardWindow extends PopupWindow {
         overallStatsPlaceholder.getChildren().add(label);
     }
 
-    void fillLabsMarked() {
+    private void fillLabsMarked() {
         labsMarkedList.getChildren().clear();
         String labsMarked = formatLabsToDisplay(labsUnmarkedMap);
         Label labsLabel = new Label(labsMarked);
         labsLabel.getStylesheets().add("view/Dashboard.css");
         labsLabel.getStyleClass().add("labs-marked");
         labsMarkedList.getChildren().add(labsLabel);
+    }
+
+    /**
+     * Refreshes the dashboard window.
+     */
+    public void refresh() {
+        fillOverallStats();
+        fillLabsMarked();
     }
 
     private HashSet<ClassId> fillClassList(ObservableList<Student> stuList) {

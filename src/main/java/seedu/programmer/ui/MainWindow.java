@@ -355,21 +355,20 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             } else if (commandResult instanceof ExitCommandResult) {
                 handleExit();
-            } else if (commandResult instanceof ShowCommandResult) {
-                handleShowResult(((ShowCommandResult) commandResult).getTarget());
             } else if (commandResult instanceof DownloadCommandResult) {
                 handleDownload();
+            } else if (commandResult instanceof DashboardCommandResult) {
+                handleDashboard();
+            } else if (commandResult instanceof ShowCommandResult) {
+                handleShowResult(((ShowCommandResult) commandResult).getTarget());
             } else if (commandResult instanceof UploadCommandResult) {
                 handleUpload();
             } else if (commandResult instanceof EditCommandResult) {
                 EditCommandResult editCommandResult = (EditCommandResult) commandResult;
                 handleShowResult(editCommandResult.getEditedStudent());
-            } else if (commandResult instanceof DashboardCommandResult) {
-                handleDashboard();
             }
             if (dashboardWindow.isShowing()) {
-                dashboardWindow.fillOverallStats();
-                dashboardWindow.fillLabsMarked();
+                dashboardWindow.refresh();
             }
             return commandResult;
         } catch (CommandException | ParseException e) {
