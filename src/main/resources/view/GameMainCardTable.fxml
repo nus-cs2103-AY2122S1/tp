@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView id="tableView" fx:id="tableView" prefHeight="1300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <columns>
+        <TableColumn id="friendCol" fx:id="friendCol" prefWidth="75.0" text="Friend" />
+        <TableColumn id="usernameCol" fx:id="usernameCol" prefWidth="75.0" text="Username" />
+        <TableColumn id="skillCol" fx:id="skillCol" prefWidth="75.0" text="Skill" />
+    </columns>
+   <columnResizePolicy>
+      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+   </columnResizePolicy>
+</TableView>

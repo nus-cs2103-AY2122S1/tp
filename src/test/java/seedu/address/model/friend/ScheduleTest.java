@@ -35,10 +35,4 @@ class ScheduleTest {
         assertFalse(scheduleOne.equals(scheduleTwo));
     }
 
-    @Test
-    void getSchedule() {
-        Schedule schedule = new Schedule();
-        // Unmodifiable
-        assertThrows(UnsupportedOperationException.class, () -> schedule.getSchedule().remove(1));
-    }
 }

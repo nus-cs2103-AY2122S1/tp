@@ -33,7 +33,7 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
 
    * **`friend --list`** : Lists all friends.
 
-   * **`friend --add`**`Draco --name Marcus` : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
+   * **`friend --add`**`Draco -n Marcus` : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
 
    * **`friend --delete`**`Draco` : Deletes friend with gitGud `FRIEND_ID` of __Draco__.
 
@@ -50,10 +50,10 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `get --game GAME_ID`, `GAME_ID` is a parameter which can be used as `get --game CSGO`.
+  e.g. in `game --get GAME_ID`, `GAME_ID` is a parameter which can be used as `game --get CSGO`.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `--name Marcus Tang --name Taufiq`, only `--name Taufiq` will be taken.
+  e.g. if you specify `-n Marcus Tang -n Taufiq`, only `-n Taufiq` will be taken.
 
 </div>
 
@@ -66,12 +66,12 @@ adding, editing, deleting or viewing of friends in your gitGud friend list.
 
 Adds a new friend to gitGud friend’s list with an associated **unique** friend identifier.
 
-Format: `friend -add FRIEND_ID [--name NAME]`
+Format: `friend --add FRIEND_ID [-n NAME]`
 
 Examples:
 * `friend --add Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and
   which does not currently have an associated real-life name.
-* `friend --add tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
+* `friend --add tau_bar -n Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
   has the real-life name 'Taufiq'.
 
 Snapshot:
@@ -83,12 +83,12 @@ Snapshot:
 
 Updates the friend's name to a new name for an existing friend with the given `FRIEND_ID`. 
 
-Format: `friend --edit FRIEND_ID --name NEW_NAME`
+Format: `friend --edit FRIEND_ID -n NEW_NAME`
 
 * The `FRIEND_ID` must currently exist in the friends list.
 
 Examples: 
-* `friend --edit Draco --name Kevin` Sets the name of existing friend with the `FRIEND_ID` "Draco" to "Kevin".
+* `friend --edit Draco -n Kevin` Sets the name of existing friend with the `FRIEND_ID` "Draco" to "Kevin".
 
 Snapshot: 
 ![Ui](images/ui-snapshots/friend-edit.png)
@@ -117,12 +117,12 @@ Links a game and the associated in-game username for the game to a friend with t
 
 A link between a particular friend and game shows that the friend plays the game. This association is required for subsequent commands, e.g. for the application to display all games that a friend plays or to recommend a friend to play with based on a particular game.
 
-Format: `friend --link FRIEND_ID --game GAME_ID --user IN_GAME_USERNAME`
+Format: `friend --link FRIEND_ID -g GAME_ID -u IN_GAME_USERNAME`
 
 * Both `FRIEND_ID` and `GAME_ID` has to already be inside the friends and games list respectively.
 
 Examples:
-* `friend --link Draco --game DOTA --user Draco995`
+* `friend --link Draco -g DOTA -u Draco995`
   Links a single game, “DOTA” with the in-game username ‘Draco995’,
   to the friend with the gitGud `FRIEND_ID` ‘Draco’.
 
@@ -135,13 +135,13 @@ Snapshot:
 
 Removes the link between a friend and a game.
 
-Format: `friend --unlink FRIEND_ID --game GAME_ID`
+Format: `friend --unlink FRIEND_ID -g GAME_ID`
 
 * `FRIEND_ID` has to already be inside the friends list.
 * The friend has to be previously linked to the game with the provided `GAME_ID`.
 
 Examples:
-* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with `GAME_ID` 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
+* `friend --unlink Draco -g DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with `GAME_ID` 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
 Snapshot:
 
@@ -153,7 +153,7 @@ Snapshot:
 Assigns the provided skill value to the friend with the given `FRIEND_ID` for the linked game with the given `GAME_ID`.
 This command allows you to record your perceived gauge of a friend's skill level at a particular game. 
 
-Format: `friend --skill FRIEND_ID --game GAME_ID --value SKILL_VALUE`
+Format: `friend --skill FRIEND_ID -g GAME_ID -v SKILL_VALUE`
 
 * A friend with the given `FRIEND_ID` provided must exist in the friends list.
 * The friend has to be previously linked to the game with the given `GAME_ID`.
@@ -161,7 +161,7 @@ Format: `friend --skill FRIEND_ID --game GAME_ID --value SKILL_VALUE`
   whereas -1, 11, 1.2, and "one" are invalid skill values.
  
 Examples: 
-* `friend --skill Draco --game Valorant --value 7` Sets the skill value for friend "Draco" for the linked game
+* `friend --skill Draco -g Valorant -v 7` Sets the skill value for friend "Draco" for the linked game
 "Valorant" to 7.
   
 Snapshot:
@@ -204,7 +204,7 @@ Format: `friend --list [KEYWORD]`
 * Partial matches will be displayed e.g. `tau` will match `tau_bar`
 
 Examples:
-* `friend --list` or  `friend --list` Lists all friends stored in gitGud
+* `friend --list` Lists all friends stored in gitGud
 * `friend --list ta` Lists all friends stored in gitGud that have `ta` in their name
 
 Snapshot:
@@ -217,7 +217,7 @@ Snapshot:
 Schedules an existing friend by updating their schedule to indicate the time periods they are free or busy.
 * gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
 
-Format: `friend --schedule FRIEND_ID --period START_TIME END_TIME DAY --free IS_FREE`
+Format: `friend --schedule FRIEND_ID -p START_TIME END_TIME DAY -f IS_FREE`
 
 <div markdown="block" class="alert alert-info">
 
@@ -234,8 +234,8 @@ New friends start off which a schedule with all periods marked as busy.
 * `IS_FREE` is used to mark the period as a free or busy period, with `1` meaning free and `0` meaning busy
 
 Examples:
-* `friend --schedule Draco --period 1800 2200 2 --free 1` Schedules "Draco" as free from 1800 to 2200 on Tuesday.
-* `friend --schedule Draco --period 1200 0000 7 --free 0` Schedules "Draco" as busy from 1200 to 0000 (midnight) on Sunday.
+* `friend --schedule Draco -p 1800 2200 2 -f 1` Schedules "Draco" as free from 1800 to 2200 on Tuesday.
+* `friend --schedule Draco -p 1200 0000 7 -f 0` Schedules "Draco" as busy from 1200 to 0000 (midnight) on Sunday.
 
 Snapshot:
 
@@ -361,15 +361,15 @@ gitGud.jar on the other computer.
 
 Action | Format, Examples
 --------|------------------
-**Add friend** | `friend --add FRIEND_ID [--name NAME]` <br> e.g., `friend --add Draco --name Marcus Tang`
-**Edit friend**| `friend --edit FRIEND_ID --name NEW_NAME` <br> e.g., `friend --edit Draco --name Kevin` 
+**Add friend** | `friend --add FRIEND_ID [-n NAME]` <br> e.g., `friend --add Draco -n Marcus Tang`
+**Edit friend**| `friend --edit FRIEND_ID -n NEW_NAME` <br> e.g., `friend --edit Draco -n Kevin` 
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
-**Link game and friend** | `friend --link FRIEND_ID --game GAME_ID --user IN_GAME_USERNAME`<br> e.g., `friend --link Draco --game Valorant --user taufiq007`
-**Unlink game and friend** | `friend --unlink FRIEND_ID --game GAME_ID` <br> e.g., `friend --unlink Draco --game DOTA`
-**Add skill value to linked game** | `friend --skill FRIEND_ID --game GAME_ID --value SKILL_VALUE` <br> e.g.,`friend --skill Draco --game Valorant --value 7`
+**Link game and friend** | `friend --link FRIEND_ID -g GAME_ID -u IN_GAME_USERNAME`<br> e.g., `friend --link Draco -g Valorant -u taufiq007`
+**Unlink game and friend** | `friend --unlink FRIEND_ID -g GAME_ID` <br> e.g., `friend --unlink Draco -g DOTA`
+**Add skill value to linked game** | `friend --skill FRIEND_ID -g GAME_ID -v SKILL_VALUE` <br> e.g.,`friend --skill Draco -g Valorant -v 7`
 **Get friend** | `friend --get FRIEND_ID`<br> e.g., `friend --get Draco`
 **List Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
-**Schedule Friend** | `friend --schedule FRIEND_ID --period START_TIME END_TIME DAY --free IS_FREE`<br> e.g., `friend --schedule Draco --period 1800 2200 2 --free 1`
+**Schedule Friend** | `friend --schedule FRIEND_ID -p START_TIME END_TIME DAY -f IS_FREE`<br> e.g., `friend --schedule Draco -p 1800 2200 2 -f 1`
 **Add game** | `game --add GAME_ID` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
 **Delete game** | `game --delete GAME_ID` <br> e.g., `game --delete Valorant`
 **Get game** | `game --get GAME_ID`<br> e.g., `game --get Valorant`

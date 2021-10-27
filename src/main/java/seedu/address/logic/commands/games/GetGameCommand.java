@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.games;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GET;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -14,15 +16,12 @@ import seedu.address.model.game.GameId;
 
 public class GetGameCommand extends Command {
 
-    public static final String COMMAND_FAMILY = "game";
     public static final String COMMAND_WORD = "--get";
 
-    public static final String MESSAGE_USAGE = COMMAND_FAMILY + " " + COMMAND_WORD
-            + ": Gets all the information about a game whose "
-            + "GAME_ID matches the given keyword(s) exactly (case-insensitive) and displays them in a "
-            + "easy-to-read format.\n"
-            + "Parameters: KEYWORD\n"
-            + "Example: " + COMMAND_FAMILY + " " + COMMAND_WORD + " Minecraft";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_GAME + " " + FLAG_GET + "GAME_ID\n"
+            + "Example: "
+            + CMD_GAME + " " + FLAG_GET + "Minecraft";
     public static final String MESSAGE_GAME_FULL_INFORMATION = "Showing the complete information of %1$s";
 
     private final GameId gameId;
