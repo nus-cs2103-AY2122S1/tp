@@ -9,9 +9,15 @@ import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.UniqueModuleList;
+import seedu.address.model.module.exceptions.ModuleNotFoundException;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.UniqueStudentList;
+import seedu.address.model.module.student.exceptions.StudentNotFoundException;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
+import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 /**
  * Wraps all data at the TAB level.
@@ -124,6 +130,61 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if the given task is marked as complete, else false.
+     */
+    public boolean isDone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+
+        Module module = findModule(moduleName, modules);
+
+        UniqueStudentList studentList = module.getUniqueStudentList();
+
+        Student student = findStudent(studentId, studentList);
+
+        UniqueTaskList taskList = student.getTaskList();
+
+        Task task = findTask(taskId, taskList);
+
+        return task.isComplete();
+    }
+
+    /**
+     * A helper method that finds a module from a UniqueModuleList modules according to module name.
+     */
+    public Module findModule(ModuleName moduleName, UniqueModuleList moduleList) throws ModuleNotFoundException {
+        for (Module module : moduleList) {
+            if (module.getName().equals(moduleName)) {
+                return module;
+            }
+        }
+        throw new ModuleNotFoundException();
+    }
+
+    /**
+     * A helper method that finds a student from a UniqueStudentList students according to student ID.
+     */
+    public Student findStudent(StudentId studentId, UniqueStudentList studentList) throws StudentNotFoundException {
+        for (Student student : studentList) {
+            if (student.getStudentId().equals(studentId)) {
+                return student;
+            }
+        }
+        throw new StudentNotFoundException();
+    }
+
+    /**
+     * A helper method that finds a task from a UniqueTaskList according to task ID.
+     */
+    public Task findTask(TaskId taskId, UniqueTaskList taskList) throws TaskNotFoundException {
+        for (Task task : taskList) {
+            if (task.getTaskId().equals(taskId)) {
+                return task;
+            }
+        }
+        throw new TaskNotFoundException();
     }
 
     /**

@@ -138,6 +138,10 @@ public class Module {
         return students.asUnmodifiableObservableList();
     }
 
+    public UniqueStudentList getUniqueStudentList() {
+        return this.students;
+    }
+
     /**
      * Adds a task to this module and add the task to all students in this module.
      * The task must not already exist in this module.

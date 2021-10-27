@@ -4,7 +4,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds a student to the address book.
+ * Adds a module, a student or a task to the TAB.
  */
 public abstract class AddCommand extends Command {
 

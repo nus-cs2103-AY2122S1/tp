@@ -145,8 +145,9 @@ public class EditTaskCommand extends EditCommand {
         TaskId taskId = taskToEdit.getTaskId();
         TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
         TaskDeadline updatedTaskDeadline = editTaskDescriptor.getTaskDeadline().orElse(taskToEdit.getTaskDeadline());
+        boolean isComplete = taskToEdit.isComplete();
 
-        Task editedTask = new Task(moduleName, taskId, updatedTaskName, updatedTaskDeadline);
+        Task editedTask = new Task(moduleName, taskId, updatedTaskName, updatedTaskDeadline, isComplete);
         return editedTask;
     }
 
@@ -189,6 +190,7 @@ public class EditTaskCommand extends EditCommand {
             setTaskId(toCopy.taskId);
             setTaskName(toCopy.taskName);
             setTaskDeadline(toCopy.taskDeadline);
+            setIsComplete(toCopy.isComplete);
         }
 
         /**
