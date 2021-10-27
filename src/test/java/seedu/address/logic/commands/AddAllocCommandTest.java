@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithFilteredListChange;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -126,7 +127,10 @@ public class AddAllocCommandTest {
 
         String expectedMessage = AddAllocCommand.MESSAGE_DUPLICATE_STUDENT_NAME;
 
-        assertCommandFailure(addAllocCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandFailureWithFilteredListChange(addAllocCommand, model, expectedMessage, expectedModel,
+                VALID_NAME_AMY);
     }
 
     @Test

@@ -50,7 +50,7 @@ public class Group {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public String getValue() {
+    public String getName() {
         return name;
     }
 
