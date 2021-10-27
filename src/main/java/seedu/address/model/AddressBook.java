@@ -83,8 +83,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sets the employee comparator to sort the supplier list.
-     * @param employeeComparator The comparator to sort the supplier list.
+     * Sets the employee comparator to sort the employee list.
+     * @param employeeComparator The comparator to sort the employee list.
      */
     public void setEmployeeComparator(Comparator<Employee> employeeComparator) {
         employees.setComparator(employeeComparator);

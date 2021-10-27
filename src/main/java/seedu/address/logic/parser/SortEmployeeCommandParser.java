@@ -14,13 +14,13 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.SortByEmployee;
 
 /**
- * Parses input arguments and creates a new SortSupplierCommand object
+ * Parses input arguments and creates a new SortEmployeeCommand object
  */
 public class SortEmployeeCommandParser implements Parser<SortEmployeeCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SortSupplierCommand
-     * and returns a SortSupplierCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortEmployeeCommand
+     * and returns a SortEmployeeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override

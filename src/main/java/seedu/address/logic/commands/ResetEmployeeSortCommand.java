@@ -6,7 +6,7 @@ import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 
 /**
- * Resets the supplier list sorting to the default sorting type.
+ * Resets the employee list sorting to the default sorting type.
  */
 public class ResetEmployeeSortCommand extends Command {
 

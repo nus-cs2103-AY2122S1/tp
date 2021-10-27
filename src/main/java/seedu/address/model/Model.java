@@ -195,10 +195,10 @@ public interface Model {
      */
     void updateFilteredCustomerList(Predicate<Customer> predicate);
 
-    /** Returns a sortable view of the supplier list */
+    /** Returns a sortable view of the employee list */
     ObservableList<Employee> getSortableEmployeeList();
 
-    /** Resets the supplier list to its default sorting state */
+    /** Resets the employee list to its default sorting state */
     void resetEmployeeListToDefaultSortState();
 
     /**

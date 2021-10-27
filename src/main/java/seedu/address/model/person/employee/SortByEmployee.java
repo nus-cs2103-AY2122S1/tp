@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.Comparator;
 
 /**
- * Represents the types of sorting methods we can apply to suppliers in the address book.
+ * Represents the types of sorting methods we can apply to employees in the address book.
  */
 public class SortByEmployee {
 
@@ -62,9 +62,9 @@ public class SortByEmployee {
     }
 
     /**
-     * Returns a comparator to sort the supplier list based on the sorting type and order given.
+     * Returns a comparator to sort the employee list based on the sorting type and order given.
      * @param isAscending A boolean representing if sorting order is ascending.
-     * @return A comparator to sort the supplier list.
+     * @return A comparator to sort the employee list.
      */
     public Comparator<Employee> selectComparator(boolean isAscending) {
         switch (sortBy) {

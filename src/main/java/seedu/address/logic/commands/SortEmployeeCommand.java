@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.employee.Employee;
 
 /**
- * Sorts the supplier list to the address book according to a comparator.
+ * Sorts the employee list to the address book according to a comparator.
  */
 public class SortEmployeeCommand extends Command {
 
@@ -33,7 +33,7 @@ public class SortEmployeeCommand extends Command {
     private final String sortingOrder;
 
     /**
-     * Creates a SortSupplierCommand object.
+     * Creates a SortEmployeeCommand object.
      */
     public SortEmployeeCommand(Comparator<Employee> comparator, String sortBy, String sortingOrder) {
         this.comparator = comparator;
