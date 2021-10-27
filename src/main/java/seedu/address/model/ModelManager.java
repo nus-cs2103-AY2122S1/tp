@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,12 +12,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.alias.Alias;
 import seedu.address.model.alias.AliasMap;
 import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortOrder;
 
 
 /**
@@ -126,6 +129,52 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isWithinListIndex(List<Index> indices) {
+        for (Index i : indices) {
+            if (i.getZeroBased() >= getFilteredPersonList().size()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public void markMembersAttendance(List<Index> indices) {
+        for (Index i : indices) {
+            Person person = filteredPersons.get(i.getZeroBased());
+            markOneMemberAttendance(person);
+        }
+    }
+
+    @Override
+    public void markOneMemberAttendance(Person person) {
+        Person toEdit = person;
+        toEdit.setPresent();
+        setPerson(person, toEdit);
+    }
+
+    @Override
+    public void unmarkMembersAttendance(List<Index> indices) {
+        for (Index i : indices) {
+            Person person = filteredPersons.get(i.getZeroBased());
+            unmarkOneMemberAttendance(person);
+        }
+    }
+
+    @Override
+    public void unmarkOneMemberAttendance(Person person) {
+        Person toEdit = person;
+        toEdit.setNotPresent();
+        setPerson(person, toEdit);
+    }
+
+    @Override
+    public void resetTodayAttendance() {
+        addressBook.resetTodayAttendance();
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -147,10 +196,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void split(Predicate<Person> predicate) {
+    public int split(Predicate<Person> predicate) {
         FilteredList<Person> toAllocate = new FilteredList<Person>(addressBook.getPersonList());
         toAllocate.setPredicate(predicate);
-        addressBook.split(toAllocate);
+        return addressBook.split(toAllocate);
     }
 
     @Override
@@ -164,6 +213,40 @@ public class ModelManager implements Model {
     public void setFacility(Facility target, Facility editedFacility) {
         requireAllNonNull(target, editedFacility);
         addressBook.setFacility(target, editedFacility);
+    }
+
+    @Override
+    public Person getSamePerson(Person toFind) {
+        requireNonNull(toFind);
+        return addressBook.getPersonList()
+                .stream()
+                .filter(person -> person.isSamePerson(toFind))
+                .findAny()
+                .orElse(null);
+    }
+
+    @Override
+    public void sortMemberList(SortOrder sortOrder) {
+        requireNonNull(sortOrder);
+        String order = sortOrder.toString();
+        switch (order) {
+        case "name":
+            sortMemberListByName();
+            break;
+        case "tag":
+            sortMemberListByTags();
+            break;
+        default:
+        }
+    }
+
+    private void sortMemberListByName() {
+        addressBook.sortMemberListByName();
+    }
+
+
+    private void sortMemberListByTags() {
+        addressBook.sortMemberListByTags();
     }
 
     @Override

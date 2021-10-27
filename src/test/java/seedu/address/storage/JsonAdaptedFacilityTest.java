@@ -3,9 +3,9 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalFacilities.FIELD;
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_1;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -26,10 +26,9 @@ public class JsonAdaptedFacilityTest {
     private static final String VALID_CAPACITY = KENT_RIDGE_SPORT_HALL_5_COURT_1.getCapacity().toString();
 
     @Test
-    @Disabled
     public void toModelType_validFacilityDetails_returnsFacility() throws Exception {
-        JsonAdaptedFacility facility = new JsonAdaptedFacility(KENT_RIDGE_SPORT_HALL_5_COURT_1);
-        assertEquals(KENT_RIDGE_SPORT_HALL_5_COURT_1, facility.toModelType());
+        JsonAdaptedFacility facility = new JsonAdaptedFacility(FIELD);
+        assertEquals(FIELD, facility.toModelType());
     }
 
     @Test

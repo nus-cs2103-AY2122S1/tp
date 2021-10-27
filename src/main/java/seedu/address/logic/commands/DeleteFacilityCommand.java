@@ -38,7 +38,8 @@ public class DeleteFacilityCommand extends Command {
 
         Facility facilityToDelete = lastShownFacilityList.get(targetIndex.getZeroBased());
         model.deleteFacility(facilityToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete),
+                false, true, false);
     }
 
     @Override

@@ -26,6 +26,7 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.sort.SortOrder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -228,7 +229,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses an {@code String availability string} into an {@code Availability}.
+     * Parses an {@code String availabilityString} into an {@code Availability}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code availability string} is invalid.
@@ -254,5 +255,30 @@ public class ParserUtil {
         }
         Collections.sort(availability);
         return new Availability(availability);
+    }
+
+    /**
+     * Parses a {@code String dayString} into DayOfWeek.
+     */
+    public static DayOfWeek parseDay(String dayString) throws ParseException {
+        requireNonNull(dayString);
+        String validationRegex = "[1-7]";
+        if (!dayString.matches(validationRegex)) {
+            throw new ParseException(CommandWord.MESSAGE_CONSTRAINTS);
+        }
+        int dayNumber = Integer.parseInt(dayString);
+        return DayOfWeek.of(dayNumber);
+    }
+
+    /**
+     * Parses a {@code String sortOrder} into sortOrder.
+     */
+    public static SortOrder parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim().toLowerCase();
+        if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortOrder);
     }
 }

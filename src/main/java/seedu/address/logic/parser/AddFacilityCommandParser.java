@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAPACITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -30,6 +31,7 @@ public class AddFacilityCommandParser implements Parser<AddFacilityCommand> {
      * @throws ParseException If the user input does not follow the format.
      */
     public AddFacilityCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LOCATION, PREFIX_TIME, PREFIX_CAPACITY);
 

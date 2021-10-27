@@ -31,7 +31,8 @@ public class FindFacilityCommand extends Command {
         requireNonNull(model);
         model.updateFilteredFacilityList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_FACILITIES_LISTED_OVERVIEW, model.getFilteredFacilityList().size()));
+                String.format(Messages.MESSAGE_FACILITIES_LISTED_OVERVIEW, model.getFilteredFacilityList().size()),
+                false, true, false);
     }
 
     @Override

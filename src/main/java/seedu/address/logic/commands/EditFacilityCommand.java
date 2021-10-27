@@ -75,7 +75,8 @@ public class EditFacilityCommand extends Command {
 
         model.setFacility(facilityToEdit, editedFacility);
         model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility));
+        return new CommandResult(String.format(MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility),
+                false, true, false);
     }
 
     /**

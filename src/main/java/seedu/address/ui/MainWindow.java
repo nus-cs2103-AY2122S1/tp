@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -53,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane facilityListPanelPlaceholder;
+
+    @FXML
+    private TabPane tabsPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -154,6 +158,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Selects the member tab.
+     */
+    private void handleShowMemberTab() {
+        tabsPlaceholder.getSelectionModel().select(0);
+    }
+
+    /**
+     * Selects the facility tab.
+     */
+    private void handleShowFacilityTab() {
+        tabsPlaceholder.getSelectionModel().select(1);
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -184,6 +202,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowFacilityTab()) {
+                handleShowFacilityTab();
+            }
+
+            if (commandResult.isShowMemberTab()) {
+                handleShowMemberTab();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

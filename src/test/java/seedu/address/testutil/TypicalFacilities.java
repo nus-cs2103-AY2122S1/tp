@@ -18,6 +18,12 @@ public class TypicalFacilities {
             .withTime("1500")
             .withCapacity("4").build();
 
+    public static final Facility FIELD = new FacilityBuilder()
+            .withFacilityName("Field")
+            .withLocation("NUS")
+            .withTime("1300")
+            .withCapacity("10").build();
+
     public static final Facility KENT_RIDGE_SPORT_HALL_5_COURT_1 = new FacilityBuilder()
             .withFacilityName("Court 1")
             .withLocation("Kent Ridge Sports Hall 5")

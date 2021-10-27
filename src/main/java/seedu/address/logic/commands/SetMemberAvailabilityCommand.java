@@ -46,6 +46,8 @@ public class SetMemberAvailabilityCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
+        StringBuilder names = new StringBuilder();
+
         for (Index i : indices) {
             if (i.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
@@ -53,19 +55,17 @@ public class SetMemberAvailabilityCommand extends Command {
 
             Person personToEdit = lastShownList.get(i.getZeroBased());
             Person editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), availability);
+                    personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTodayAttendance(),
+                    personToEdit.getTotalAttendance(), personToEdit.getTags());
 
             model.setPerson(personToEdit, editedPerson);
+            names.append(lastShownList.get(i.getZeroBased()).getName());
+            names.append(", ");
         }
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        StringBuilder names = new StringBuilder();
-        for (Person p : lastShownList) {
-            names.append(p.getName());
-            names.append(", ");
-        }
-
-        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability));
+        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability),
+                false, false, true);
     }
 
     @Override

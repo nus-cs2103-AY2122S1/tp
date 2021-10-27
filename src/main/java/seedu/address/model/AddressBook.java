@@ -61,6 +61,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Sorts the member list by name.
+     */
+    public void sortMemberListByName() {
+        this.persons.sortMembersByName();
+    }
+
+    /**
+     * Sorts the member list by tag.
+     */
+    public void sortMemberListByTags() {
+        this.persons.sortMembersByTags();
+    }
+    /**
      * Clears the contents of the member list.
      */
     public void resetMemberList() {
@@ -72,6 +85,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetFacilityList() {
         this.facilities.resetFacilities();
+    }
+
+    /**
+     * Resets today's attendance for all members in list.
+     */
+    public void resetTodayAttendance() {
+        this.persons.resetAttendance();
     }
 
     /**
@@ -122,9 +142,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Splits members into different facilities.
      *
      * @param membersFilteredList List of filtered members to be allocated.
+     * @return number of members left unallocated, -1 if zero members provided.
      */
-    public void split(FilteredList<Person> membersFilteredList) {
+    public int split(FilteredList<Person> membersFilteredList) {
+        int memberCount = membersFilteredList.size();
+        int facilityCap = facilities.getTotalCapacity();
+        // No members available
+        if (memberCount == 0) {
+            return -1;
+        }
+        // Insufficient capacity
+        if (memberCount > facilityCap) {
+            return memberCount - facilityCap;
+        }
+
         facilities.allocateMembersToFacilities(membersFilteredList);
+        return 0;
     }
 
     /**

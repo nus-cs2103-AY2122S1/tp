@@ -9,9 +9,12 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddAliasCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.commands.AddMemberCommand;
+import seedu.address.logic.commands.AllocateMemberCommand;
+import seedu.address.logic.commands.ClearAttendanceCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeallocateMemberCommand;
 import seedu.address.logic.commands.DeleteAliasCommand;
 import seedu.address.logic.commands.DeleteFacilityCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
@@ -21,11 +24,15 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.SetMemberAvailabilityCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
+import seedu.address.logic.commands.SortMemberCommand;
 import seedu.address.logic.commands.SplitCommand;
+import seedu.address.logic.commands.UnmarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.alias.AliasMap;
 
@@ -103,6 +110,15 @@ public class AddressBookParser {
         case SplitCommand.COMMAND_WORD:
             return new SplitCommandParser().parse(arguments);
 
+        case MarkAttendanceCommand.COMMAND_WORD:
+            return new MarkAttendanceCommandParser().parse(arguments);
+
+        case UnmarkAttendanceCommand.COMMAND_WORD:
+            return new UnmarkAttendanceCommandParser().parse(arguments);
+
+        case ClearAttendanceCommand.COMMAND_WORD:
+            return new ClearAttendanceCommand();
+
         case AddAliasCommand.COMMAND_WORD:
             return new AddAliasCommandParser().parse(arguments);
 
@@ -111,6 +127,18 @@ public class AddressBookParser {
 
         case ShowAliasesCommand.COMMAND_WORD:
             return new ShowAliasesCommand();
+
+        case AllocateMemberCommand.COMMAND_WORD:
+            return new AllocateMemberCommandParser().parse(arguments);
+
+        case DeallocateMemberCommand.COMMAND_WORD:
+            return new DeallocateMemberCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
+        case SortMemberCommand.COMMAND_WORD:
+            return new SortMemberCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -16,16 +17,18 @@ public class AddMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "addm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the member list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the member list.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_AVAILABILITY + "AVAILABILITY "
-            + "\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_AVAILABILITY + "1 3 5";
+            + PREFIX_AVAILABILITY + "1 3 5 "
+            + PREFIX_TAG + "exco "
+            + PREFIX_TAG + "y2";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the member list";
@@ -49,7 +52,8 @@ public class AddMemberCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
+                false, false, true);
     }
 
     @Override

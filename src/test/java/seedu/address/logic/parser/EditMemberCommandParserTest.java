@@ -1,15 +1,19 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_EXCO;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_Y2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_Y2;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -24,6 +28,7 @@ import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 
 public class EditMemberCommandParserTest {
@@ -66,13 +71,20 @@ public class EditMemberCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        // invalid phone followed by valid tag
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + TAG_DESC_Y2, Phone.MESSAGE_CONSTRAINTS);
 
         // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+
+        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
+        // parsing it together with a valid tag results in error
+        assertParseFailure(parser, "1" + TAG_DESC_Y2 + TAG_DESC_EXCO + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_Y2 + TAG_EMPTY + TAG_DESC_EXCO, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_Y2 + TAG_DESC_EXCO, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + VALID_PHONE_AMY,
@@ -110,11 +122,22 @@ public class EditMemberCommandParserTest {
     }
 
     @Test
+    public void parse_onlyTagsSpecified_success() {
+        Index targetIndex = INDEX_THIRD;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_Y2;
+        EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder().withTags(VALID_TAG_Y2).build();
+        EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + PHONE_DESC_AMY + PHONE_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + TAG_DESC_Y2 + PHONE_DESC_AMY
+                + TAG_DESC_Y2 + PHONE_DESC_BOB + TAG_DESC_EXCO;
 
-        EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
+        EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_Y2, VALID_TAG_EXCO).build();
         EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -127,6 +150,24 @@ public class EditMemberCommandParserTest {
         String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
         EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // other valid values specified
+        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB + TAG_DESC_EXCO + TAG_DESC_Y2;
+        descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+                .withTags(VALID_TAG_EXCO, VALID_TAG_Y2).build();
+        expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetTags_success() {
+        Index targetIndex = INDEX_THIRD;
+        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+
+        EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder().withTags().build();
+        EditMemberCommand expectedCommand = new EditMemberCommand(targetIndex, descriptor);
+
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddAliasCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.commands.AddMemberCommand;
+import seedu.address.logic.commands.ClearAttendanceCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteAliasCommand;
@@ -28,9 +29,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
+import seedu.address.logic.commands.SortMemberCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.alias.Alias;
@@ -78,6 +81,13 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD, aliases) instanceof ClearMembersCommand);
         assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3", aliases)
                 instanceof ClearMembersCommand);
+    }
+
+    @Test
+    public void parseCommand_cleara() throws ParseException {
+        assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD, aliases) instanceof ClearAttendanceCommand);
+        assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD
+                + " 1", aliases) instanceof ClearAttendanceCommand);
     }
 
     @Test
@@ -211,6 +221,19 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ShowAliasesCommand.COMMAND_WORD, aliases) instanceof ShowAliasesCommand);
         assertTrue(parser.parseCommand(
                 ShowAliasesCommand.COMMAND_WORD + " 3", aliases) instanceof ShowAliasesCommand);
+    }
+
+    @Test
+    public void parseCommand_importCommand() throws Exception {
+        String filePath = " src/test/data/ImportCommandParserTest/typicalImportFile.csv";
+        assertTrue(parser
+                .parseCommand(ImportCommand.COMMAND_WORD + filePath, aliases) instanceof ImportCommand);
+    }
+
+    @Test
+    public void parseCommand_sortm() throws Exception {
+        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " by/name", aliases)
+                instanceof SortMemberCommand);
     }
 
     @Test

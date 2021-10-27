@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Person;
 
@@ -50,20 +51,23 @@ public class Facility {
         return capacity;
     }
 
+    public boolean isMaxCapacity() {
+        return !capacity.isWithinCapacity(personAllocatedList.size());
+    }
+
     public void clearAllocationList() {
         personAllocatedList = new ArrayList<>();
     }
 
+    public boolean isPersonAllocated(Person person) {
+        return personAllocatedList.contains(person);
+    }
+
     public String getPersonsAsString() {
         if (personAllocatedList == null) {
-            return "no person allocated";
+            return "No person allocated";
         }
-
-        StringBuilder builder = new StringBuilder();
-        personAllocatedList.forEach(person -> builder
-                .append(person.getName()).append(", "));
-
-        return builder.toString();
+        return personAllocatedList.stream().map(p -> p.getName().fullName).collect(Collectors.joining(", "));
     }
 
     public boolean isWithinMaxCapacity(int numberOfPersons) {
@@ -72,6 +76,10 @@ public class Facility {
 
     public void addPersonToFacility(Person person) {
         personAllocatedList.add(person);
+    }
+
+    public void removePersonFromFacility(Person person) {
+        personAllocatedList.remove(person);
     }
 
     /**

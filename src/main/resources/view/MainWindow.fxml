@@ -54,7 +54,8 @@
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                     </padding>
-               <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+               <TabPane fx:id="tabsPlaceholder" prefHeight="200.0" prefWidth="200.0"
+                        tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                  <tabs>
                    <Tab text="Members">
                      <content>
