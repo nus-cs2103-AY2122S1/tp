@@ -33,7 +33,7 @@ public class EditFriendCommand extends Command {
     public static final String MESSAGE_USAGE = "Format: "
             + CMD_FRIEND + " " + FLAG_EDIT + "FRIEND_ID " + FLAG_FRIEND_NAME + "NEW_FRIEND_NAME\n"
             + USAGE_EXAMPLE;
-    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Friend edited - \nId: %1$s \nNew name: %2$s";
+    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Edited Friend - FRIEND_ID: %1$s, NEW_FRIEND_NAME: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n" + USAGE_EXAMPLE;
 
     private final FriendId friendIdToEdit;

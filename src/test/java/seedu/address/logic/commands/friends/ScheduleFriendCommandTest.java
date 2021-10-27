@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.time.DayOfWeek;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -48,7 +50,7 @@ class ScheduleFriendCommandTest {
         ScheduleFriendCommand scheduleFriendCommand =
                 new ScheduleFriendCommand(friendToEdit.getFriendId(), day, startTime, endTime, isFree);
         String expectedMessage = String.format(ScheduleFriendCommand.MESSAGE_SCHEDULE_FRIEND_SUCCESS,
-                editedFriend.getFriendId());
+                editedFriend.getFriendId(), startTime, endTime, DayOfWeek.of(day).name(), isFree);
         assertCommandSuccess(scheduleFriendCommand, model, expectedMessage, expectedModel);
     }
 

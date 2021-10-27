@@ -13,7 +13,7 @@ public class HelpCommand extends Command {
             + COMMAND_WORD + "\n"
             + "Example: "
             + COMMAND_WORD;
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+    public static final String SHOWING_HELP_MESSAGE = "Opened help window";
 
     @Override
     public CommandResult execute(Model model) {

@@ -24,10 +24,10 @@ public class GetFriendCommand extends Command {
     public static final String COMMAND_WORD = "--get";
 
     public static final String MESSAGE_USAGE = "Format: "
-            + CMD_FRIEND + " " + FLAG_GET + "FRIEND_ID\n"
+            + CMD_FRIEND + " " + FLAG_GET + "\n"
             + "Example: "
             + CMD_FRIEND + " " + FLAG_GET + "Draco";
-    public static final String MESSAGE_FRIEND_FULL_INFORMATION = "Showing the complete information of %1$s";
+    public static final String MESSAGE_FRIEND_FULL_INFORMATION = "Retrieved full friend information - FRIEND_ID: %1$s";
 
     private final FriendId friendId;
 

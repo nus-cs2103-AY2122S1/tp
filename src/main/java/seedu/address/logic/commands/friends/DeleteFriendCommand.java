@@ -19,7 +19,7 @@ public class DeleteFriendCommand extends Command {
             + CMD_FRIEND + " " + FLAG_DELETE + "FRIEND_ID\n"
             + "Example: "
             + CMD_FRIEND + " " + FLAG_DELETE + "Draco";
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_FRIEND_SUCCESS = "Deleted friend - FRIEND_ID: %1$s";
 
     private FriendId friendToDeleteId;
 
@@ -38,7 +38,7 @@ public class DeleteFriendCommand extends Command {
         requireNonNull(model);
         if (model.hasFriendWithId(friendToDeleteId)) {
             model.deleteFriend(friendToDeleteId);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_DELETE_FRIEND_SUCCESS,
                     friendToDeleteId), CommandType.FRIEND_DELETE);
         } else {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
