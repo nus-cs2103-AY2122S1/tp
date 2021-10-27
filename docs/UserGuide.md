@@ -259,7 +259,7 @@ Format: `list`
 
 Finds applicants by specific prefixes.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW] [nt/NOTES]`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW] [nt/NOTES] [d/DONE]`
 
 * Find command must take **at least 1** prefix input.
 * If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
@@ -271,7 +271,7 @@ Examples:
 * `find n/John n/Mary` finds all applicants with only `Mary` as values for name prefix.
 * `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
-* `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials`
+* `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials d/Not Done`
 
 #### Prefix Input Specifications ***{Advanced}***:
 
@@ -360,13 +360,19 @@ but not with *Role*s such as `Software` or `Software Developer`.
         * A `2021` input can match with applicants that have the *Interview* in year 2021.
         * A `20:21` input can match with applicants that have the *Interview* at time 20:21 on any date.
         * A `21` input can match with *Interviews* `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`.
-
+        
 * ##### NOTES `nt/`
     * NOTES are considered matching with  ***Notes*** only if  ***Notes*** contains **the entire** keyword.
     * All keywords provided as NOTES input must comply with input specifications for add given [**here**](#notes-nt).
     * For example:
         * A `good in this field` input can match with applicants that have *Notes* containing the `good in this field`.
         * A `passionate` input can match with applicants that have Notes such as `passionate but inexperienced` and `passionate and experienced`.
+
+* ##### DONE `d/`
+    * An DONE is considered matching with a ***Done*** only if the ***Done***'s status string is either `Done` or `Not Done`.
+    * For example:
+        * A `Done` input can match with applicants that have their *Done* status marked as Done.
+        * A `Not Done` input can match with applicants that have their *Done* status unmarked as Not Done.
 
 ### Deleting an applicant : `delete`
 
@@ -503,7 +509,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]` <br> e.g., `edit 1 p/90909090 s/4500`
 **List** | `list`
 **Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
-**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]`<br> e.g., `find n/John Mary`
+**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES] [d/DONE]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
