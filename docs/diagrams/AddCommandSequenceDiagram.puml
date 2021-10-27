@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+
+Actor User UI_COLOR
+Participant ":CommandBox" as CommandBox UI_COLOR
+Participant ":Logic" as Logic LOGIC_COLOR
+Participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+Participant ":AddCommand" as AddCommand LOGIC_COLOR
+
+User -> CommandBox : "add ..."
+activate CommandBox
+CommandBox -> Logic : execute("add ...")
+activate Logic
+Logic -> AddressBookParser : parseCommand("add ...")
+activate AddressBookParser
+create AddCommand
+AddressBookParser -> AddCommand
+
+AddressBookParser -> AddCommand : parse("add ...")
+activate AddCommand
+AddressBookParser <-- AddCommand
+deactivate AddCommand
+@enduml
