@@ -2,10 +2,10 @@ package seedu.tuitione.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_LESSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,11 +36,11 @@ public class SampleDataUtilTest {
         // check entity relations
         Student firstStudent = readOnlyTuitione.getStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student secondStudent = readOnlyTuitione.getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
-        Lesson firstLesson = readOnlyTuitione.getLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        Lesson thirdLesson = readOnlyTuitione.getLessonList().get(INDEX_THIRD_LESSON.getZeroBased());
         Lesson secondLesson = readOnlyTuitione.getLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
-        assertTrue(firstStudent.containsLesson(firstLesson));
+        assertTrue(firstStudent.containsLesson(thirdLesson));
         assertTrue(secondStudent.containsLesson(secondLesson));
-        assertTrue(firstLesson.containsStudent(firstStudent));
+        assertTrue(thirdLesson.containsStudent(firstStudent));
         assertTrue(secondLesson.containsStudent(secondStudent));
     }
 }

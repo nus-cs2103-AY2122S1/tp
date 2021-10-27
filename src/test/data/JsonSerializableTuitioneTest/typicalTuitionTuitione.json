@@ -48,18 +48,6 @@
     "day" : "Wed",
     "price" : 10.5
   }, {
-    "subject" : "Mathematics",
-    "grade" : "S2",
-    "startTime" : "0930",
-    "day" : "Tue",
-    "price" : 15.3
-  }, {
-    "subject" : "Physics",
-    "grade" : "S2",
-    "startTime" : "0930",
-    "day" : "Tue",
-    "price" : 15.3
-  }, {
     "subject" : "English",
     "grade" : "S1",
     "startTime" : "1300",
@@ -71,5 +59,17 @@
     "startTime" : "1030",
     "day" : "Fri",
     "price" : 19.2
+  }, {
+    "subject" : "Mathematics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
+    "price" : 15.3
+  }, {
+    "subject" : "Physics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
+    "price" : 15.3
   } ]
 }
