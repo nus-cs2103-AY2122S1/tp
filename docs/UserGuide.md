@@ -133,6 +133,7 @@ Examples:
 * `add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`
 * `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100 m/CS2030S T11 B09`
 * `add n/Terry e/terry321@gmail.com m/CS2100 B31 T18`
+* `add n/Tim e/timothy@gmail.com m/CS2101 G09 p/98761234 h/Teeeeeeeemo r/Favourite LOL champion is Teemo`
 
 Command alias: `a`
 
@@ -165,6 +166,7 @@ Format: `find n/NAME`/`find m/MODULE_CODE(S)`
 
 Examples:
 * `find n/Ben`
+* `find n/Ben Bernice Mary`
 * `find m/CS2103T CS2100`
 
 Command alias: `f`
@@ -187,6 +189,7 @@ Examples:
 * `edit 1 p/91234567 e/ben321@gmail.com`: Edits the phone number and email address of the 1st contact to be `91234567` and `ben321@gmail.com` respectively
 * `edit 2 n/John Doe m/CS2100 T09 B09`: Edits the name and module of the 2nd contact to be `John Doe` and `CS2100 T09 B09` respectively
 * `edit 3 h/@BenWasHere r/Overseas`: Edits the telegram handle and remark of the 3rd contact to be `@BenWasHere` and `Overseas` respectively
+* `edit 4 n/John Doe m/CS2100 T09 B09 p/91234567 e/ben321@gmail.com h/@BenWasHere r/Overseas`: Combined all previous example into one command
 
 Command aliases: `update` `e`
 
