@@ -12,8 +12,6 @@ import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
 
-import java.util.Locale;
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
