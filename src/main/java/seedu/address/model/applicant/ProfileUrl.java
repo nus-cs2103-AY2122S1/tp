@@ -12,10 +12,11 @@ import java.net.URL;
  */
 public class ProfileUrl {
 
+    public static final String PLACEHOLDER_URL = "https://www.google.com";
     public static final String MESSAGE_CONSTRAINTS =
             "Profile urls must be valid github and linkedin urls.";
 
-    private static final ProfileUrl EMPTY_PROFILE_URL = new ProfileUrl("Empty");
+    private static final ProfileUrl EMPTY_PROFILE_URL = new ProfileUrl(PLACEHOLDER_URL);
     public final String url;
 
     /**
@@ -36,7 +37,7 @@ public class ProfileUrl {
      * @return ProfileUrl instance containing this url, if valid.
      */
     public static ProfileUrl ofNullable(String url) {
-        if (url.equals("")) {
+        if (url.equals("") || url.equals(PLACEHOLDER_URL)) {
             return emptyProfileUrl();
         }
         return new ProfileUrl(url);
