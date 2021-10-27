@@ -121,33 +121,33 @@ public class JsonAdaptedTask {
         }
 
         switch (type) {
-            case TODO:
-                return new TodoTask(modelName, modelTags, isComplete, modelDescription, priority);
-            case DEADLINE:
-                if (date == null) {
-                    throw new IllegalValueException(
-                            String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
-                }
-
-                if (!TaskDate.isValidDeadline(date)) {
-                    throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
-                }
-                final TaskDate modelTaskDate_1 = new TaskDate(date);
-                return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate_1, modelDescription, priority);
-            case EVENT:
-                if (date == null) {
-                    throw new IllegalValueException(
-                            String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
-                }
-
-                if (!TaskDate.isValidDeadline(date)) {
-                    throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
-                }
-                final TaskDate modelTaskDate_2 = new TaskDate(date);
-                return new EventTask(modelName, modelTags, isComplete, modelTaskDate_2, modelDescription, priority);
-            default:
+        case TODO:
+            return new TodoTask(modelName, modelTags, isComplete, modelDescription, priority);
+        case DEADLINE:
+            if (date == null) {
                 throw new IllegalValueException(
-                        String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskType.class.getSimpleName()));
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
+            }
+
+            if (!TaskDate.isValidDeadline(date)) {
+                throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
+            }
+            final TaskDate modelDeadlineDate = new TaskDate(date);
+            return new DeadlineTask(modelName, modelTags, isComplete, modelDeadlineDate, modelDescription, priority);
+        case EVENT:
+            if (date == null) {
+                throw new IllegalValueException(
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
+            }
+
+            if (!TaskDate.isValidDeadline(date)) {
+                throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
+            }
+            final TaskDate modelEventDate = new TaskDate(date);
+            return new EventTask(modelName, modelTags, isComplete, modelEventDate, modelDescription, priority);
+        default:
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskType.class.getSimpleName()));
         }
     }
 }
