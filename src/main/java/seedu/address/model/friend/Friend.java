@@ -77,6 +77,12 @@ public class Friend {
         linkToUpdate.get().setSkillValue(skillValue);
     }
 
+    public Integer getSkillValue(GameId gameId) {
+        Optional<GameFriendLink> linkWithGame = gameFriendLinks.stream().filter(
+            gfl -> gfl.getGameId().equals(gameId)).findFirst();
+        return linkWithGame.get().getSkillValue().skillVal;
+    }
+
     public FriendId getFriendId() {
         return friendId;
     }

@@ -20,6 +20,7 @@ import seedu.address.ui.util.SampleStyles;
  */
 public class FriendCard extends UiPart<Region> {
 
+    public static final String GAME_AND_SKILL_STRING = "(%1$s) %2$s";
     private static final String FXML = "FriendListCard.fxml";
 
     /**
@@ -40,7 +41,6 @@ public class FriendCard extends UiPart<Region> {
     private Label id;
     @FXML
     private GridPane games;
-
     /**
      * Creates a {@code FriendCard} with the given {@code Friend} and index to display.
      */
@@ -57,7 +57,8 @@ public class FriendCard extends UiPart<Region> {
         for (int i = 0; i < toSort.size(); i++) {
             if (i < 2) {
                 GameFriendLink game = toSort.get(i);
-                Label label = new Label(game.getGameId().value);
+                Label label = new Label(String.format(GAME_AND_SKILL_STRING, friend.getSkillValue(game.getGameId()),
+                        game.getGameId().value));
                 label.setPrefWidth(90);
                 label.setAlignment(Pos.CENTER);
                 label.setBackground(SampleStyles.BLURPLE_BACKGROUND);
