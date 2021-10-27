@@ -26,6 +26,8 @@ public class HelpCommand extends Command {
             + FindAnyCommand.COMMAND_WORD + SPACE + FindAnyCommand.COMMAND_DESCRIPTION
             + FindTagCaseInsensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseInsensitiveCommand.COMMAND_DESCRIPTION
             + FindTagCaseSensitiveCommand.COMMAND_WORD + SPACE + FindTagCaseSensitiveCommand.COMMAND_DESCRIPTION
+            + PinCommand.COMMAND_WORD + SPACE + PinCommand.COMMAND_DESCRIPTION
+            + UnpinCommand.COMMAND_WORD + SPACE + UnpinCommand.COMMAND_DESCRIPTION
             + DeleteCommand.COMMAND_WORD + SPACE + DeleteCommand.COMMAND_DESCRIPTION
             + DeleteMultipleCommand.COMMAND_WORD + SPACE + DeleteMultipleCommand.COMMAND_DESCRIPTION
             + ClearCommand.COMMAND_WORD + SPACE + ClearCommand.COMMAND_DESCRIPTION
@@ -99,6 +101,12 @@ public class HelpCommand extends Command {
 
         case FindTagCaseSensitiveCommand.COMMAND_WORD:
             return new CommandResult(FindTagCaseSensitiveCommand.MESSAGE_USAGE, false, false);
+
+        case PinCommand.COMMAND_WORD:
+            return new CommandResult(PinCommand.MESSAGE_USAGE, false, false);
+
+        case UnpinCommand.COMMAND_WORD:
+            return new CommandResult(UnpinCommand.MESSAGE_USAGE, false, false);
 
         default:
             String message = MESSAGE_UNKNOWN_COMMAND + ": " + commandWord + "\n" + HELP_MESSAGE;
