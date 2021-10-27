@@ -204,15 +204,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleDashboard() {
-        dashboardWindow = new DashboardWindow(logic);
-
-        if (isDashboardShowing) {
-            dashboardWindow.focus();
+        if (dashboardWindow.isShowing()) {
+            // Refresh the dashboard window
+            dashboardWindow.hide();
+            dashboardWindow = new DashboardWindow(logic);
+            dashboardWindow.show();
             return;
         }
 
         logger.fine("Showing dashboard window...");
-        isDashboardShowing = true;
         dashboardWindow.show();
     }
 
