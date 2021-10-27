@@ -14,9 +14,11 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox fx:id="labelBox" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <HBox fx:id="deadlineContainer" alignment="CENTER_LEFT"/>
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
+
             <HBox spacing="0" alignment="CENTER_LEFT">
                 <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
@@ -34,12 +36,5 @@
                 <Label fx:id="vaccStatus" styleClass="cell_normal" text="\$vaccStatus" />
             </VBox>
         </VBox>
-        <HBox fx:id="informationContainer" alignment="CENTER_RIGHT" minHeight="105">
-            <VBox fx:id="deadlineContainer" alignment="CENTER_LEFT">
-                <padding>
-                    <Insets top="5" right="25" bottom="5" left="15" />
-                </padding>
-            </VBox>
-        </HBox>
     </GridPane>
 </HBox>

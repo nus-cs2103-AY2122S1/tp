@@ -25,8 +25,6 @@ public class PersonAdditionalListPanel extends UiPart<Region> {
      */
     public PersonAdditionalListPanel(ObservableList<Person> personList) {
         super(FXML);
-        personAdditionalListView.setMouseTransparent(true);
-        personAdditionalListView.setFocusTraversable(false);
         personAdditionalListView.setItems(personList);
         personAdditionalListView.setCellFactory(listView -> new PersonAdditionalListViewCell());
     }

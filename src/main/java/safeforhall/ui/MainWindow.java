@@ -2,7 +2,7 @@ package safeforhall.ui;
 
 import java.util.logging.Logger;
 
-import javafx.application.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
@@ -119,22 +124,26 @@ public class MainWindow extends UiPart<Stage> {
     private void handleTabCreation() {
         // Label texts are padded with whitespace for alignment.
         // This is not possible via style due to graphic rotation.
-        residentsTab.setGraphic(createTab("    Residents", "resident"));
+        residentsTab.setGraphic(createTab("  Residents", "resident"));
+        residentsTab.setTooltip(new Tooltip("Residents"));
 
         eventsTab.setGraphic(createTab("    Events     ", "event"));
+        eventsTab.setTooltip(new Tooltip("Events"));
 
         helpTab.setGraphic(createTab("    Help     ", "help"));
+        helpTab.setTooltip(new Tooltip("Help"));
         helpTab.setOnSelectionChanged(e -> {
             if (helpTab.isSelected()) {
                 handleHelp();
             }
             e.consume();
         });
-        
+
         exitTab.setGraphic(createTab("    Exit     ", "exit"));
+        exitTab.setTooltip(new Tooltip("Exit"));
         exitTab.setOnSelectionChanged(e -> {
             if (exitTab.isSelected()) {
-                handleExit(); 
+                handleExit();
             }
         });
 
@@ -150,15 +159,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private HBox createTab(String text, String imageName) {
         HBox content = new HBox();
+
         Label label = new Label(text);
         ImageView icon = new ImageView("/images/" + imageName + ".png");
-        VBox.setVgrow(tabPane, Priority.ALWAYS);
-        // icon.fitWidthProperty().bind(tabPane.widthProperty());
-        // icon.fitHeightProperty().bind(tabPane.heightProperty());
-        icon.setFitHeight(35);
-        icon.setFitWidth(35);
+        icon.setFitHeight(38);
+        icon.setFitWidth(38);
         icon.setPreserveRatio(true);
-        content.getChildren().addAll(icon, label);
+        content.getChildren().addAll(new Label("    "), icon, new Label("     "));
         return content;
     }
 

@@ -155,11 +155,6 @@
     -fx-background-radius: 5 5 5 5;
 }
 
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
-}
-
 .cell_big_label {
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
@@ -176,7 +171,7 @@
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 25px;
     -fx-text-fill: #010504;
-    -fx-padding: 50 0 20 0;
+    -fx-padding: 10 0 20 0;
 }
 
 .cell_normal {
@@ -372,6 +367,14 @@
     -fx-padding: 0 0 0 0;
     -fx-background-color: #ffffff;
     -fx-border-color: #ffffff;
+}
+
+#personAdditionalListView .list-cell:filled:selected {
+    -fx-background-color: derive(#D8EBFF, 20%);
+}
+
+#eventAdditionalListView .list-cell:filled:selected {
+    -fx-background-color: derive(#D8EBFF, 20%);
 }
 
 #eventListView .list-cell {
