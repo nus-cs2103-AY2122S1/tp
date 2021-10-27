@@ -100,6 +100,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Returns true if the help window is currently being shown.
+     *
+     * @return true, if the help window is being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();

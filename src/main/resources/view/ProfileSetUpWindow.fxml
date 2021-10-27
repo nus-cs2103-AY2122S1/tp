@@ -17,7 +17,7 @@
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@ProfileWindow.css" />
+                <URL value="@ProfileSetUpWindow.css" />
             </stylesheets>
             <AnchorPane prefHeight="270" prefWidth="260">
                 <children>
