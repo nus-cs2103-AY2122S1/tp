@@ -147,7 +147,8 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         // TODO change `new AssignmentGradeMap()` to save grades
-        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleGroupMap, modelTags, new AssignmentGradeMap<>());
+        return new Person(modelName, modelPhone, modelEmail, modelInfo, moduleGroupMap, modelTags,
+                new AssignmentGradeMap());
     }
 
 }

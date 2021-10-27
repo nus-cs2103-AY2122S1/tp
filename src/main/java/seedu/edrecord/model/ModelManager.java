@@ -222,6 +222,9 @@ public class ModelManager implements Model {
         Predicate<Person> modulePredicate =
                 Optional.ofNullable(this.selectedModulePredicate).orElse(PREDICATE_SHOW_ALL_MODULES);
         filteredPersons.setPredicate(modulePredicate.and(searchPredicate));
+        for (Person p: filteredPersons) {
+            System.out.println(p);
+        }
     }
 
     //=========== Current Module =============================================================================

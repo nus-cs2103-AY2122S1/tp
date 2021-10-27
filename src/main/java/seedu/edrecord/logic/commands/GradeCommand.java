@@ -15,8 +15,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
-import seedu.edrecord.model.group.Group;
-import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
@@ -105,14 +104,13 @@ public class GradeCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Info updatedInfo = personToEdit.getInfo();
-        Module updatedModule = personToEdit.getModule();
-        Group updatedGroup = personToEdit.getGroup();
+        ModuleGroupMap updatedModule = personToEdit.getModules();
         Set<Tag> updatedTags = personToEdit.getTags();
         AssignmentGradeMap updatedGrades = personToEdit.getGrades();
         updatedGrades.add(assignment, grade);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, updatedModule, updatedGroup,
-                updatedTags, updatedGrades);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, updatedModule, updatedTags,
+                updatedGrades);
     }
 
     @Override
