@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Reservation {
     private static final DateTimeFormatter DATE_TIME_PRINTING_FORMAT =
-            DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+            DateTimeFormatter.ofPattern("d MMMM yyyy, h:mm a");
 
     private final Phone phone;
     private final int numberOfPeople;
