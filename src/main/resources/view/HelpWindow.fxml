@@ -14,7 +14,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.collections.FXCollections?>
-<?import seedu.address.ui.CommandDetails?>
+<?import seedu.address.logic.commands.CommandDetails?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <icons>
@@ -34,7 +34,7 @@
             <TableView fx:id="helpTable" AnchorPane.topAnchor="1.0">
               <columns>
                 <TableColumn text="Feature" prefWidth="220">
-                  <cellValueFactory><PropertyValueFactory property="featureName" />
+                  <cellValueFactory><PropertyValueFactory property="commandName" />
                   </cellValueFactory>
                 </TableColumn>
                 <TableColumn text="Command" prefWidth="290">
