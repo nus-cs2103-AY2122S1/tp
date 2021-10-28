@@ -29,7 +29,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
@@ -67,6 +69,8 @@ class LessonEditCommandParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, "1 1 " + PREFIX_DATE, Date.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -125,10 +129,13 @@ class LessonEditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         Index lessonTargetIndex = INDEX_FIRST_LESSON;
+        String endDate = " " + PREFIX_RECURRING + VALID_DATE_FUTURE;
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
-            + HOMEWORK_DESC_TEXTBOOK + SUBJECT_DESC + TIME_RANGE_DESC + FUTURE_DATE_DESC;
+            + endDate + HOMEWORK_DESC_TEXTBOOK + SUBJECT_DESC + TIME_RANGE_DESC + FUTURE_DATE_DESC;
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withRecurrence()
+                .withEndDate(VALID_DATE_FUTURE)
                 .withDate(VALID_DATE_FUTURE)
                 .withTimeRange(VALID_TIME_RANGE)
                 .withSubject(VALID_SUBJECT)

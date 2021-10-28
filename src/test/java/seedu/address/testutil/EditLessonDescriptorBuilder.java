@@ -46,6 +46,14 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code isRecurring} flag of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withRecurrence() {
+        descriptor.setRecurring(true);
+        return this;
+    }
+
+    /**
      * Sets the {@code Date} of the {@code EditLessonDescriptor} that we are building.
      */
     public EditLessonDescriptorBuilder withDate(String date) {

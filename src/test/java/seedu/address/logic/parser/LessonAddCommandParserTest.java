@@ -18,11 +18,13 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_RANGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
@@ -50,6 +52,8 @@ public class LessonAddCommandParserTest {
 
     private static final int FIRST_PERSON = INDEX_FIRST_PERSON.getOneBased();
     private static final String RECURRENCE_FLAG = " " + PREFIX_RECURRING;
+    private static final String MESSAGE_INVALID_FORMAT =
+        String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE);
     private LessonAddCommandParser parser = new LessonAddCommandParser();
 
     @Test
@@ -216,10 +220,19 @@ public class LessonAddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // invalid index or preamble
+        assertParseFailure(parser, " " + 0 + VALID_DATE_PAST
+            + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+            + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, MESSAGE_INVALID_FORMAT);
+
         // invalid date
         assertParseFailure(parser, " " + FIRST_PERSON + INVALID_DATE_DESC
                 + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
                 + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, Date.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser, " " + FIRST_PERSON + " " + PREFIX_DATE
+            + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+            + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, Date.MESSAGE_CONSTRAINTS);
 
         // invalid time range
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC
