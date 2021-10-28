@@ -26,7 +26,6 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
-import seedu.address.model.order.TransactionTimeComparator;
 import seedu.address.storage.BookKeepingStorage;
 import seedu.address.storage.TransactionStorage;
 
@@ -349,21 +348,9 @@ public class ModelManager implements Model {
         logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
     }
 
-    /**
-     * Return a list of {@code TransactionRecord} sorted according to given comparator.
-     */
-    public List<TransactionRecord> getTransactions(Comparator<TransactionRecord> comparator) {
-        requireNonNull(comparator);
-
-        List<TransactionRecord> resultList = new ArrayList<>(transactions);
-        resultList.sort(comparator);
-
-        return resultList;
-    }
-
     @Override
     public List<TransactionRecord> getTransactions() {
-        return getTransactions(new TransactionTimeComparator());
+        return new ArrayList<>(transactions);
     }
 
     //=========== BookKeeping ================================================================================
