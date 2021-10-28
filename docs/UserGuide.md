@@ -231,9 +231,9 @@ Screenshot:
 Find items in the inventory.
 Note that display must be in inventory mode (see `list`).
 
-Format: `find [ n/{name}... | id/{id}... ]`
+Format: `find [ n/{name}... | id/{id}... | t/{tag}]`
 
-Searching by 1 or more names, or 1 or more ids is supported. However, searching by names and ids simultaneously is not supported.
+Searching by 1 or more names, or 1 or more ids, or 1 or more tags is supported. However, searching by multiple tags simultaneously is not supported.
 
 Examples: 
 
