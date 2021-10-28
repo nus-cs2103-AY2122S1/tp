@@ -37,8 +37,8 @@ public class PaidCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "paid";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
-            + "LESSON_INDEX (must be a positive integer) "
+    public static final String COMMAND_PARAMETERS = "INDEX "
+            + "LESSON_INDEX "
             + PREFIX_PAID_AMOUNT + "AMOUNT_PAID";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;

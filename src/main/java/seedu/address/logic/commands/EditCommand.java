@@ -46,7 +46,7 @@ public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
+    public static final String COMMAND_PARAMETERS = "INDEX "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
