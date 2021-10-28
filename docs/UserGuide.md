@@ -34,7 +34,8 @@ Syntax | Meaning
 <kbd>text</kbd> | A keyboard input, or a button to be clicked on.
 [text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
 _text_ | Caption for images.
-:information_source: | Indication that the following text is a tip.
+:information_source: | Indication that the following text is a note.
+:bulb: | Indication that the following text is a tip.
 :exclamation: | Indication that the following text is important.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -131,7 +132,7 @@ Format: `help`
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
 
-![help message](images/helpMessage.png)
+![help](images/help.png)
 <div class="caption">Help window interface.</div>
 
 <div style="page-break-after: always;"></div>
@@ -441,8 +442,6 @@ Format: `remind`
 
 This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
 
-[New GUI screenshots coming soon...]
-
 --------------------------------------------------------------------------------------------------------------------
 
 #### Switching to the calendar interface: `calendar`
@@ -455,7 +454,9 @@ Format: `calendar`
 You don't always have to type `calendar` to switch to the calendar interface. All the other calendar commands in this section act as a shortcut that opens the calendar as well! 
 </div>
 
-[New GUI screenshots coming soon...]
+![calendar](images/calendar.png)
+
+<div class="caption">Calendar interface.</div>
 
 #### Viewing your daily calendar: `day`
 
@@ -463,7 +464,9 @@ Displays the daily calendar, which shows your scheduled lessons for the day.
 
 Format: `day`
 
-[New GUI screenshots coming soon...]
+![day](images/day.png)
+
+<div class="caption">Day view for calendar interface.</div>
 
 #### Viewing your weekly calendar: `week`
 
@@ -471,7 +474,9 @@ Shows the weekly calendar for you to see all the lessons you have for the week
 
 Format: `week`
 
-[New GUI screenshots coming soon...]
+![week](images/week.png)
+
+<div class="caption">Week view for calendar interface.</div>
 
 #### Viewing your monthly calendar: `month`
 
@@ -479,7 +484,9 @@ Displays the monthly calendar, allowing you to visualise your lessons for the mo
 
 Format: `month`
 
-[New GUI screenshots coming soon...]
+![month](images/month.png)
+
+<div class="caption">Month view for calendar interface.</div>
 
 #### Viewing your weekly calendar: `year`
 
@@ -487,7 +494,9 @@ Shows the yearly calendar. You can see which days of the year you have lessons i
 
 Format: `year`
 
-[New GUI screenshots coming soon...]
+![year](images/year.png)
+
+<div class="caption">Year view for calendar interface.</div>
 
 #### Navigating forward in the calendar: `next`
 
@@ -546,7 +555,7 @@ Shows all the tags that you have created together with the number of students la
 
 Format: `tag`
 
-![taglist](images/taglist.png)
+![tag](images/tag.png)
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
 <div style="page-break-after: always;"></div>
