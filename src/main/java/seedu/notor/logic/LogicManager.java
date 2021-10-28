@@ -131,7 +131,7 @@ public class LogicManager implements Logic {
     @Override
     public boolean isSuperGroupView() {
         // TODO: BUG WHAT IF THERE IS NO ELEMENT.
-        return (model.getFilteredGroupList().get(0) instanceof SuperGroup);
+        return model.isSuperGroupView();
     }
 
     @Override

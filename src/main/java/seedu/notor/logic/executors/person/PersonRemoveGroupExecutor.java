@@ -29,6 +29,7 @@ public class PersonRemoveGroupExecutor extends PersonExecutor {
     }
 
     @Override public CommandResult execute() throws ExecuteException {
+        checkPersonView();
         requireNonNull(model);
         try {
             Person personToEdit = super.getPerson();

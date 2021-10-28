@@ -16,4 +16,5 @@ public class Messages {
     public static final String MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED = "Groups or SubGroups are not listed. "
                                                                            + "Please switch to Group or SubGroup view";
     public static final String MESSAGE_GROUPS_NOT_LISTED = "Groups are not listed. Please switch to Group view";
+    public static final String MESSAGE_PEOPLE_NOT_LISTED = "People are not listed. Please switch to Person view";
 }

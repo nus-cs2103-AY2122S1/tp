@@ -26,6 +26,12 @@ public abstract class PersonExecutor extends Executor {
         return lastShownList.get(index.getZeroBased());
     }
 
+    protected void checkPersonView() throws ExecuteException {
+        if (!model.isPersonView()) {
+            throw new ExecuteException(Messages.MESSAGE_PEOPLE_NOT_LISTED);
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

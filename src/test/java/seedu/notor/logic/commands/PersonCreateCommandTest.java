@@ -223,6 +223,11 @@ public class PersonCreateCommandTest {
 
         @Override
         public boolean isPersonView() {
+            return true;
+        }
+
+        @Override
+        public boolean isSuperGroupView() {
             return false;
         }
     }

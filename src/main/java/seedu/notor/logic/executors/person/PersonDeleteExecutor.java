@@ -18,6 +18,7 @@ public class PersonDeleteExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
+        checkPersonView();
         Person toBeDeletedPerson = super.getPerson();
         WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE,
                 toBeDeletedPerson.getName()));

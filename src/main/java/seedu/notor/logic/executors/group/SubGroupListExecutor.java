@@ -20,6 +20,9 @@ public class SubGroupListExecutor extends GroupExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         requireNonNull(model);
+        if (!model.isSuperGroupView()) {
+            throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
+        }
         // TODO: Should we create a new method lol in model.
         model.listSubGroup(super.index);
         return new CommandResult(
