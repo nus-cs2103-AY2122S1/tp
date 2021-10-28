@@ -34,6 +34,10 @@ public class ExportEmailCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        return execute(model, new JsonAddressBookStorage(filePath));
+    }
+
+    CommandResult execute(Model model, JsonAddressBookStorage storage) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<String> emailList = new ArrayList<String>();
@@ -42,12 +46,10 @@ public class ExportEmailCommand extends Command {
             emailList.add(p.getEmail().toString());
         }
 
-
-        JsonAddressBookStorage tempStorage = new JsonAddressBookStorage(filePath);
         try {
-            tempStorage.saveEmail(emailList);
+            storage.saveEmail(emailList);
         } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE);
         }
 
         return new CommandResult(
