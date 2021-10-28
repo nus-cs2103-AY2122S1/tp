@@ -44,11 +44,58 @@ Dangerous or potentially negative actions are displayed here
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
    Some example commands you can try:
 
-    - `addC` : Add a customer
+    - `addC`: Add a customer
     - Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
     - Example: `addC customer n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
+
+### Command syntax
+
+Commands in RHRH has the syntax: `COMMAND_WORD + [PREAMBLE] + [PREFIX + PARAMETER]...`, where:
+
+- `COMMAND_WORD` is a word that specifies an action of the command, e.g. `addC` for adding a customer, `deleteR` for deleting a reservation.
+- `PREAMBLE` is the text before the first valid prefix, usually a positive number (for delete, edit or add reservation commands), or a phrase (for find commands).
+- `PREFIX` is a keyword to recognize the beginning of a `PARAMETER`, usually ends with a `'/'` by convention.
+- `PARAMETER` is an argument input by user. `PREAMBLE` is also a kind of `PARAMETER`. A command can have 0 or more `PARAMETER`s, which can be compulsory or optional.
+
+Example: `addR 2 p/98765432 at/2021-12-24 2000`
+
+- `addR` is a `COMMAND_WORD` that specifies the action of adding a new reservation.
+- `2` is an `PREAMBLE` that specifies number of people.
+- `p/`, `at/` are prefixes for phone and date-time, respectively.
+- `2`, `98765432` and `2021-12-24 2000` are `PARAMETER`s
+
+This is the list of all prefixes used in RHRH, as well as their corresponding parameter constraints:
+
+| Prefix | Description         | Parameter constraints                             |
+| :----: | ------------------- | ------------------------------------------------- |
+|  `n/`  | Name                | Names should only contain alphanumeric characters and spaces, and it should not be blank
+|  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
+|  `a/`  | Address             | Addresses can take any values, and it should not be blank
+|  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
+|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. One entity can have multiple tags<br>When editing tags, the existing values of these fields will be replaced, i.e editing of these fields are not cumulative<br> If you want to remove all tags from an entity, you can use edit command with `r/` without specifying any tag after it
+| `lp/`  | Loyalty Point       |
+| `alg/` | Allergy (Optional)  | Similar to `t/`
+| `sr/`  | Special Request (Optional) | Similar to `t/`
+|  `l/`  | Leaves              | Leaves should only contain numbers
+| `jt/`  | Job Title           | Job Title should only contain alphanumeric characters and spaces, and should not be left blank
+| `sal/` | Salary              | Salary should contain numbers and should be at least 3 numbers long
+| `sh/`  | Shift (Optional)    | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-08 0800`. One entity can have multiple shifts <br> When editing shifts, the existing values of shifts will be replaced, i.e editing of these fields are not cumulative <br> If you want to remove all shifts from an entity, you can use `editE INDEX sh/` without specifying any shifts after it 
+| `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
+| `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-adds) for more details
+| `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
+|  `r/`  | Remark (Optional)   | Contains alphanumeric characters<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it
+
+This is the list of some repeatedly used preambles in RHRH, as well as there corresponding constraints:
+
+| Preamble              | Parameter constraints
+| :-------------------: | ---------------------------------------------|
+| `INDEX`               | Must be a positive integer 1, 2, 3, …
+| `KEYWORD`             | 
+| `LIST_OF_TABLE_SIZES` | 
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
@@ -84,52 +131,6 @@ Action | Format, Examples
 **Clear** | `clear`
 **Help** | `help`
 **Exit** | `exit`
-
-### Command syntax
-
-Commands in RHRH has the syntax: `COMMAND_WORD + [PREAMBLE] + [PREFIX + PARAMETER]...`, where:
-
-- `COMMAND_WORD` is a word that specifies an action of the command, e.g. `addC` for adding a customer, `deleteR` for deleting a reservation.
-- `PREAMBLE` is the text before the first valid prefix, usually a positive number (for delete, edit or add reservation commands), or a phrase (for find commands).
-- `PREFIX` is a keyword to recognize the beginning of a `PARAMETER`, usually ends with a `'/'` by convention.
-- `PARAMETER` is an argument input by user. `PREAMBLE` is also a kind of `PARAMETER`. A command can have 0 or more `PARAMETER`s, which can be compulsory or optional.
-
-Example: `addR 2 p/98765432 at/2021-12-24 2000`
-
-- `addR` is a `COMMAND_WORD` that specifies the action of adding a new reservation.
-- `2` is an `PREAMBLE` that specifies number of people.
-- `p/`, `at/` are prefixes for phone and date-time, respectively.
-- `2`, `98765432` and `2021-12-24 2000` are `PARAMETER`s
-
-This is the list of all prefixes used in RHRH, as well as their corresponding parameter constraints:
-
-| Prefix | Description         | Parameter constraints                             |
-| :----: | ------------------- | ------------------------------------------------- |
-|  `n/`  | Name                | Names should only contain alphanumeric characters and spaces, and it should not be blank
-|  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
-|  `a/`  | Address             | Addresses can take any values, and it should not be blank
-|  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
-|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. One entity can have multiple tags<br>When editing tags, the existing values of these fields will be replaced, i.e editing of these fields are not cumulative<br> If you want to remove all tags from an entity, you can use edit command with `r/` without specifying any tag after it
-| `lp/`  | Loyalty Point       |
-| `alg/` | Allergy (Optional)  | Similar to `t/`
-| `sr/`  | Special Request (Optional) | Similar to `t/`
-|  `l/`  | Leaves              | Leaves should only contain numbers
-| `jt/`  | Job Title           | Job Title should only contain alphanumeric characters and spaces, and should not be left blank
-| `sal/` | Salary              | Salary should contain numbers and should be at least 3 numbers long
-| `sh/`  | Shift (Optional)    | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-08 0800`. One entity can have multiple shifts <br> When editing shifts, the existing values of shifts will be replaced, i.e editing of these fields are not cumulative <br> If you want to remove all shifts from an entity, you can use `editE INDEX sh/` without specifying any shifts after it 
-| `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
-| `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-addS) for more details
-| `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
-|  `r/`  | Remark (Optional)   | Contains alphanumeric characters<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it
-
-This is the list of some repeatedly used preambles used in RHRH, as well as there corresponding constraints:
-
-| Preamble              | Parameter constraints
-| :-------------------: | ---------------------------------------------|
-| `INDEX`               | Must be a positive integer 1, 2, 3, …
-| `KEYWORD`             | 
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -601,29 +602,6 @@ Format: `listS`
 
 </div>
 
-### Searching for reservation's made: `check`
-
-Displays the reservations made at the specified date and/or time
-
-Format:
-* `check DATE TIME`: Returns all reservations on `DATE TIME`
-* `check DATE`: Returns all reservations on `DATE`, for **all timings**
-* `check TIME`: Returns all reservations on **today's date**, at `TIME` 
-  * `DATE` is formatted as `yyyy-MM-dd`
-  * `TIME` is formatted as `HH00`
-
-Examples:
-* `check 2021-09-19 1800`
-* `check 2021-09-19`
-* `check 1800`
-
-<div markdown="block" class="alert alert-warning">
-:information_source: **Notes:**<br>
-
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
-
-</div>
-
 ### Setting the tables for the restaurant: `settables`
 
 <div markdown="block" class="alert alert-danger">
@@ -691,4 +669,4 @@ Install the app in the other computer and overwrite the empty data file it creat
 
 </details>
 
----------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
