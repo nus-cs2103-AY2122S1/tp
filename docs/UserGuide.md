@@ -568,6 +568,22 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+#### Exporting member allocations: `export`
+
+Exports facility details, and it's member allocation to a CSV file that you can share with
+your CCA members.
+
+Format: `export`
+
+* The exported CSV file will be created in `[JAR file location]/data/exportedData.csv`
+* The CSV file will contain 5 headers: Facility Name, Location, Time, Capacity and Member Allocation
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:** If exportedData.csv already exists and the export command is ran,
+the existing CSV file will be overwritten. So, make sure to change the file name of the existing
+CSV file before running the export command if you want to save it.
+</div> <br>
+
 #### Clearing all entries in facility list: `clearf`
 
 Clears all facilities from your facility list.
