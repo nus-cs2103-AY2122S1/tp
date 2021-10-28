@@ -77,6 +77,7 @@ public class MlistCommand extends Command {
         } else if (hasAttended == null) {
             Event eventToList = lastShownList.get(eventIndex.getZeroBased());
             Set<Member> memberList = eventToList.getParticipants();
+            model.setCurrentEvent(eventToList);
             model.updateFilteredMemberList(memberList::contains);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(),
@@ -84,6 +85,7 @@ public class MlistCommand extends Command {
         } else if (hasAttended.equals("true")) {
             Event eventToList = lastShownList.get(eventIndex.getZeroBased());
             Set<Member> memberList = eventToList.getAttended();
+            model.setCurrentEvent(eventToList);
             model.updateFilteredMemberList(memberList::contains);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(),
@@ -91,6 +93,7 @@ public class MlistCommand extends Command {
         } else {
             Event eventToList = lastShownList.get(eventIndex.getZeroBased());
             Set<Member> memberList = eventToList.getAbsent();
+            model.setCurrentEvent(eventToList);
             model.updateFilteredMemberList(memberList::contains);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(),

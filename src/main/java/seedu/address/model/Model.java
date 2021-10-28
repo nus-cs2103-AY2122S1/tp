@@ -213,7 +213,17 @@ public interface Model {
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
-     * Returns the current selected member.
+     * Returns the currently selected member.
      */
     Optional<Member> getCurrentMember();
+
+    /**
+     * Sets the currently selected event.
+     */
+    void setCurrentEvent(Event currentEvent);
+
+    /**
+     * Returns the currently selected event.
+     */
+    Optional<Event> getCurrentEvent();
 }
