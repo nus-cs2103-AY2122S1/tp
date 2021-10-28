@@ -28,6 +28,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
+{TODO ADD TABOPTION}
+
 <img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
@@ -171,7 +173,7 @@ There are 4 tabs in AniList:
 To switch between tabs, the user can use the `list` command which accepts an optional parameter `status`, representing the `status` of the animes that will be listed in the tab. If no parameter is given, the current tab will switch to the `ALL` tab.
 The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
 
-<img src="images/ListSequenceDiagram.png" width="550" />
+<img src="images/ListSequenceDiagram.png" width="850" />
 
 #### Design considerations:
 
@@ -273,29 +275,23 @@ Given below is a MSS of an example usage scenario of a user adding a `Genre` to 
 **Use case: UCP1 - Add Genre to the GenreList**
 
 **MSS**
-1.  <ins>User lists all anime(UC01)</ins>
-2.  User decides which `Anime` to add a `Genre`
-3.  User requests a list of all previously added `Genre`
-4.  System displays a list of all previously added `Genre`
-5.  User chooses a `Genre` to tag the `Anime` with
-6.  User requests to tag an `Anime` with a `Genre`
-7.  System tags the Anime with the specified `Genre`
-
-    Use case ends.
+1.  User requests to add a genre to the genre list
+2.  AniList adds the genre
+    Use case ends
 
 **Extensions**
 
-- 4a. The `Genre` user wishes to tag is not in the list
+- 1a. The genre is a duplicate
 
-    - 4a1. User adds a new `Genre` to the list
+    - 1a1. AniList shows an error message
 
-  Use case resumes at step 4
+      Use case resumes at step 1
 
-- 4a1. The `Genre` user wishes to add is already in the list
+- 1b. The given genre is invalid
 
-    - 4a1a. System displays an error message, telling user that the `Genre` already exists
+    - 1b1. AniList shows an error message
 
-  Use case resumes at step 4
+      Use case resumes at step 1
 
 #### Design considerations:
 
