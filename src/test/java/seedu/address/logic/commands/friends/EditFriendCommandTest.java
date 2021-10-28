@@ -22,7 +22,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.EditFriendDescriptorBuilder;
 import seedu.address.testutil.FriendBuilder;
 
@@ -47,12 +46,12 @@ public class EditFriendCommandTest {
         Friend editedFriend = new FriendBuilder(friendToEdit).withFriendName("1234 5678 9101112 13141516").build();
 
         EditFriendCommand.EditFriendDescriptor editFriendDescriptor =
-                new EditFriendDescriptorBuilder(editedFriend).build();
+            new EditFriendDescriptorBuilder(editedFriend).build();
 
         EditFriendCommand editFriendCommand = new EditFriendCommand(friendToEdit.getFriendId(), editFriendDescriptor);
 
         String expectedMessage = String.format(EditFriendCommand.MESSAGE_EDIT_FRIEND_SUCCESS,
-                editedFriend.getFriendId(), editedFriend.getFriendName());
+            editedFriend.getFriendId(), editedFriend.getFriendName());
 
         expectedModel.setFriend(expectedModel.getFriend(friendToEdit.getFriendId()), editedFriend);
 
@@ -67,10 +66,10 @@ public class EditFriendCommandTest {
         FriendId notInListFriendId = new FriendId("NOTINLIST");
         assertThrows(FriendNotFoundException.class, () -> model.getFriend(notInListFriendId));
         EditFriendCommand editFriendCommand = new EditFriendCommand(notInListFriendId,
-                new EditFriendDescriptorBuilder().withFriendName(VALID_NAME_BOB).build());
+            new EditFriendDescriptorBuilder().withFriendName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editFriendCommand, model,
-                String.format(Messages.MESSAGE_FRIEND_ID_NOT_FOUND, notInListFriendId));
+            String.format(Messages.MESSAGE_FRIEND_ID_NOT_FOUND, notInListFriendId));
     }
 
     @Test
@@ -94,7 +93,7 @@ public class EditFriendCommandTest {
 
         // different index -> not equal
         assertNotEquals(new EditFriendCommand(new FriendId(friendToEdit.getFriendId().value + "diff"), DESC_AMY),
-                standardCommand);
+            standardCommand);
 
         // different descriptor -> not equal
         assertNotEquals(new EditFriendCommand(friendToEdit.getFriendId(), DESC_BOB), standardCommand);

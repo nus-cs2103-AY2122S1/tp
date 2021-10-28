@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.time.DayOfWeek;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +32,7 @@ class ScheduleFriendCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(SampleDataUtil.getSampleFriendsList(),
-                SampleDataUtil.getSampleGamesList(), new UserPrefs());
+            SampleDataUtil.getSampleGamesList(), new UserPrefs());
     }
 
     @Test
@@ -48,7 +49,7 @@ class ScheduleFriendCommandTest {
 
         // Set up Models
         Model expectedModel = new ModelManager(SampleDataUtil.getSampleFriendsList(),
-                SampleDataUtil.getSampleGamesList(), new UserPrefs());
+            SampleDataUtil.getSampleGamesList(), new UserPrefs());
 
         Friend friendToEdit = model.getFriendsList().getFriendsList().get(0);
         Friend editedFriend = new FriendBuilder(friendToEdit).withSchedule(updatedSchedule).build();
@@ -56,9 +57,9 @@ class ScheduleFriendCommandTest {
 
         // Test if command works
         ScheduleFriendCommand scheduleFriendCommand =
-                new ScheduleFriendCommand(editedFriend.getFriendId(), day, startTime, endTime, isFree);
+            new ScheduleFriendCommand(editedFriend.getFriendId(), day, startTime, endTime, isFree);
         String expectedMessage = String.format(ScheduleFriendCommand.MESSAGE_SCHEDULE_FRIEND_SUCCESS,
-                editedFriend.getFriendId(), startTime, endTime, DayOfWeek.of(day).name(), isFree);
+            editedFriend.getFriendId(), startTime, endTime, DayOfWeek.of(day).name(), isFree);
         assertCommandSuccess(scheduleFriendCommand, model, expectedMessage, expectedModel);
     }
 
@@ -66,19 +67,19 @@ class ScheduleFriendCommandTest {
     public void execute_nonExistentFriendId_failure() {
         FriendId nonExistentId = new FriendId("completelyrandomid1");
         ScheduleFriendCommand scheduleFriendCommand =
-                new ScheduleFriendCommand(nonExistentId, 1, "0000", "2000", true);
+            new ScheduleFriendCommand(nonExistentId, 1, "0000", "2000", true);
         assertCommandFailure(scheduleFriendCommand, model,
-                String.format(Messages.MESSAGE_NONEXISTENT_FRIEND_ID, nonExistentId));
+            String.format(Messages.MESSAGE_NONEXISTENT_FRIEND_ID, nonExistentId));
     }
 
     @Test
     public void execute_invalidDayTime_failure() {
         ScheduleFriendCommand scheduleFriendCommand =
-                new ScheduleFriendCommand(model.getFriendsList().getFriendsList().get(0).getFriendId(),
-                        1, "20", "10", true);
+            new ScheduleFriendCommand(model.getFriendsList().getFriendsList().get(0).getFriendId(),
+                1, "20", "10", true);
         assertCommandFailure(scheduleFriendCommand, model,
-                String.format(Messages.MESSAGE_INVALID_DAY_TIME_FORMAT,
-                        Messages.MESSAGE_END_TIME_ORDER));
+            String.format(Messages.MESSAGE_INVALID_DAY_TIME_FORMAT,
+                Messages.MESSAGE_END_TIME_ORDER));
     }
 
     @Test
@@ -90,17 +91,17 @@ class ScheduleFriendCommandTest {
         boolean isFree = true;
         FriendId friendId = model.getFriendsList().getFriendsList().get(0).getFriendId();
         ScheduleFriendCommand scheduleFriendCommand =
-                new ScheduleFriendCommand(friendId, day, startTime, endTime, isFree);
+            new ScheduleFriendCommand(friendId, day, startTime, endTime, isFree);
 
         // Same Fields
         assertTrue(scheduleFriendCommand.equals(
-                new ScheduleFriendCommand(friendId, day, startTime, endTime, isFree)));
+            new ScheduleFriendCommand(friendId, day, startTime, endTime, isFree)));
         // Same Object
         assertTrue(scheduleFriendCommand.equals(scheduleFriendCommand));
 
         // Different FriendId
         assertFalse(scheduleFriendCommand.equals(new ScheduleFriendCommand(
-                model.getFriendsList().getFriendsList().get(1).getFriendId(), day, startTime, endTime, isFree)));
+            model.getFriendsList().getFriendsList().get(1).getFriendId(), day, startTime, endTime, isFree)));
     }
 
 

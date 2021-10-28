@@ -52,38 +52,38 @@ public class RecommendCommandTest {
         Schedule twelveToFifteenMondayFree = new Schedule();
         twelveToFifteenMondayFree.setScheduleDay(1, "10", "15", true);
 
-        Friend SKILL_THREE_MINECRAFT_FRIEND =
+        Friend skillThreeMinecraftFriend =
             SKILL_THREE_MINECRAFT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_TWO_VALORANT_FRIEND =
+        Friend skillTwoValorantFriend =
             SKILL_TWO_VALORANT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_TEN_VALORANT_FRIEND =
+        Friend skillTenValorantFriend =
             SKILL_TEN_VALORANT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_SIX_MINECRAFT_FRIEND =
+        Friend skillSixMinecraftFriend =
             SKILL_SIX_MINECRAFT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_ZERO_MINECRAFT_FRIEND =
+        Friend skillZeroMinecraftFriend =
             SKILL_ZERO_MINECRAFT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
 
         List<Friend> friends = new ArrayList<>();
-        friends.add(SKILL_THREE_MINECRAFT_FRIEND);
-        friends.add(SKILL_TWO_VALORANT_FRIEND);
-        friends.add(SKILL_TEN_VALORANT_FRIEND);
-        friends.add(SKILL_SIX_MINECRAFT_FRIEND);
-        friends.add(SKILL_ZERO_MINECRAFT_FRIEND);
+        friends.add(skillThreeMinecraftFriend);
+        friends.add(skillTwoValorantFriend);
+        friends.add(skillTenValorantFriend);
+        friends.add(skillSixMinecraftFriend);
+        friends.add(skillZeroMinecraftFriend);
 
         FriendsList scrambledList = new FriendsList();
         scrambledList.setFriends(friends);
 
         List<Friend> orderedBySkillValorantFriends = new ArrayList<>();
-        orderedBySkillValorantFriends.add(SKILL_TEN_VALORANT_FRIEND);
-        orderedBySkillValorantFriends.add(SKILL_TWO_VALORANT_FRIEND);
+        orderedBySkillValorantFriends.add(skillTenValorantFriend);
+        orderedBySkillValorantFriends.add(skillTwoValorantFriend);
 
         FriendsList valorantSorted = new FriendsList();
         valorantSorted.setFriends(orderedBySkillValorantFriends);
 
         List<Friend> orderedBySkillMinecraftFriends = new ArrayList<>();
-        orderedBySkillMinecraftFriends.add(SKILL_SIX_MINECRAFT_FRIEND);
-        orderedBySkillMinecraftFriends.add(SKILL_THREE_MINECRAFT_FRIEND);
-        orderedBySkillMinecraftFriends.add(SKILL_ZERO_MINECRAFT_FRIEND);
+        orderedBySkillMinecraftFriends.add(skillSixMinecraftFriend);
+        orderedBySkillMinecraftFriends.add(skillThreeMinecraftFriend);
+        orderedBySkillMinecraftFriends.add(skillZeroMinecraftFriend);
 
         FriendsList minecraftSorted = new FriendsList();
         minecraftSorted.setFriends(orderedBySkillMinecraftFriends);
@@ -147,8 +147,8 @@ public class RecommendCommandTest {
             DayOfWeek.of(1).toString().toLowerCase(Locale.ROOT), new HourOfDay(15).toString() + "00");
 
         // hour not within but day within available times
-        RecommendCommand recommendCommandDayHourOutside = new RecommendCommand(MINECRAFT.getGameId(), new HourOfDay(15),
-            DayOfWeek.of(1));
+        RecommendCommand recommendCommandDayHourOutside = new RecommendCommand(MINECRAFT.getGameId(),
+            new HourOfDay(15), DayOfWeek.of(1));
 
         CommandResult commandResultHourOutside = recommendCommandDayHourOutside.execute(outOfOrderModel);
         assertEquals(successMessageHourOutside, commandResultHourOutside.getFeedbackToUser());

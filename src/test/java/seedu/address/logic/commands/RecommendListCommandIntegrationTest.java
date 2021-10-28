@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.RecommendCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalFriends.SKILL_SIX_MINECRAFT_FRIEND_BUILDER;
 import static seedu.address.testutil.TypicalFriends.SKILL_TEN_VALORANT_FRIEND_BUILDER;
 import static seedu.address.testutil.TypicalFriends.SKILL_THREE_MINECRAFT_FRIEND_BUILDER;
@@ -14,8 +12,6 @@ import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,38 +43,38 @@ public class RecommendListCommandIntegrationTest {
         Schedule twelveToFifteenMondayFree = new Schedule();
         twelveToFifteenMondayFree.setScheduleDay(1, "10", "15", true);
 
-        Friend SKILL_THREE_MINECRAFT_FRIEND =
+        Friend skillThreeMinecraftFriend =
             SKILL_THREE_MINECRAFT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_TWO_VALORANT_FRIEND =
+        Friend skillTwoValorantFriend =
             SKILL_TWO_VALORANT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_TEN_VALORANT_FRIEND =
+        Friend skillTenValorantFriend =
             SKILL_TEN_VALORANT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_SIX_MINECRAFT_FRIEND =
+        Friend skillSixMinecraftFriend =
             SKILL_SIX_MINECRAFT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
-        Friend SKILL_ZERO_MINECRAFT_FRIEND =
+        Friend skillZeroMinecraftFriend =
             SKILL_ZERO_MINECRAFT_FRIEND_BUILDER.withSchedule(tenToFifteenMondayFree).build();
 
         List<Friend> friends = new ArrayList<>();
-        friends.add(SKILL_THREE_MINECRAFT_FRIEND);
-        friends.add(SKILL_TWO_VALORANT_FRIEND);
-        friends.add(SKILL_TEN_VALORANT_FRIEND);
-        friends.add(SKILL_SIX_MINECRAFT_FRIEND);
-        friends.add(SKILL_ZERO_MINECRAFT_FRIEND);
+        friends.add(skillThreeMinecraftFriend);
+        friends.add(skillTwoValorantFriend);
+        friends.add(skillTenValorantFriend);
+        friends.add(skillSixMinecraftFriend);
+        friends.add(skillZeroMinecraftFriend);
 
         FriendsList scrambledList = new FriendsList();
         scrambledList.setFriends(friends);
 
         List<Friend> orderedBySkillMinecraftFriends = new ArrayList<>();
-        orderedBySkillMinecraftFriends.add(SKILL_SIX_MINECRAFT_FRIEND);
-        orderedBySkillMinecraftFriends.add(SKILL_THREE_MINECRAFT_FRIEND);
-        orderedBySkillMinecraftFriends.add(SKILL_ZERO_MINECRAFT_FRIEND);
+        orderedBySkillMinecraftFriends.add(skillSixMinecraftFriend);
+        orderedBySkillMinecraftFriends.add(skillThreeMinecraftFriend);
+        orderedBySkillMinecraftFriends.add(skillZeroMinecraftFriend);
 
         FriendsList minecraftSorted = new FriendsList();
         minecraftSorted.setFriends(orderedBySkillMinecraftFriends);
 
         List<Friend> onlyContainsFriendsWithVInFriendId = new ArrayList<>();
-        onlyContainsFriendsWithVInFriendId.add(SKILL_TWO_VALORANT_FRIEND);
-        onlyContainsFriendsWithVInFriendId.add(SKILL_TEN_VALORANT_FRIEND);
+        onlyContainsFriendsWithVInFriendId.add(skillTwoValorantFriend);
+        onlyContainsFriendsWithVInFriendId.add(skillTenValorantFriend);
 
         FriendsList containsVInFriendIdFriends = new FriendsList();
         containsVInFriendIdFriends.setFriends(onlyContainsFriendsWithVInFriendId);
@@ -91,6 +87,7 @@ public class RecommendListCommandIntegrationTest {
 
     /**
      * Test that recommend and list commands work correctly in succession.
+     *
      * @throws CommandException thrown when invalid command is executed.
      */
     @Test
@@ -106,7 +103,7 @@ public class RecommendListCommandIntegrationTest {
         // assert that list all command overrides the recommendation filter and sort
         ListFriendCommand listFriendCommand = new ListFriendCommand(new FriendIdContainsKeywordPredicate(""));
 
-         listFriendCommand.execute(outOfOrderModel);
+        listFriendCommand.execute(outOfOrderModel);
         assertEquals(outOfOrderModelClone.getFilteredAndSortedFriendsList(),
             outOfOrderModel.getFilteredAndSortedFriendsList());
         assertEquals(outOfOrderModelClone.getFilteredAndSortedFriendsList().size(),

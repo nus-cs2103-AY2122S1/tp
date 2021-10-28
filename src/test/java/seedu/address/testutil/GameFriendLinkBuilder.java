@@ -76,6 +76,10 @@ public class GameFriendLinkBuilder {
         return this;
     }
 
+    /**
+     * Constructs an instance of {@code GameFriendLink} based on the stored fields of the {@code GameFriendLinkBuilder}.
+     * @return constructed GameFriendLink based on stored fields.
+     */
     public GameFriendLink build() {
         if (skillValue == null) {
             return new GameFriendLink(gameId, friendId, userName);
