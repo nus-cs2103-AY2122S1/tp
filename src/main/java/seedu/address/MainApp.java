@@ -235,7 +235,7 @@ public class MainApp extends Application {
         model = initModelManager(storage, userPrefs, cryptor);
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
         new UiManager(logic).start(stage);
-
+        isLoggedIn = true;
         return true;
     }
 
