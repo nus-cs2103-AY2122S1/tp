@@ -156,6 +156,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setLabsTracker(List<Lab> labs) {
+        programmerError.setLabsTracker(labs);
+    }
+
+    @Override
+    public void clearLabsTracker() {
+        programmerError.clearLabsTracker();
+    }
+
+    @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);

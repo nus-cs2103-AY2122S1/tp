@@ -110,11 +110,14 @@ public class HelpWindow extends PopupWindow {
                 "help/press Help button/press F2",
                 "Open this Help Window");
         FeatureTableItem download = new FeatureTableItem("Download",
-                "Press Download Button/press F3",
+                "download/Press Download Button/press F3",
                 "Download the database as a csv file");
         FeatureTableItem upload = new FeatureTableItem("Upload",
-                "Press Upload Button/press F4",
+                "upload/press Upload Button/press F4",
                 "Upload a csv containing students' details to ProgrammerError's database");
+        FeatureTableItem dashboard = new FeatureTableItem("Dashboard",
+                "dashboard/press Dashboard Button/press F5",
+                "Show the dashboard of ProgrammerError");
         FeatureTableItem addLab = new FeatureTableItem("AddLab",
                 "addlab -t <LAB_NUMBER> -ts <TOTAL_SCORE>",
                 "Create a lab record for all students in the database");
@@ -126,7 +129,7 @@ public class HelpWindow extends PopupWindow {
                 "Assign an actual score to the student specified by the index");
         featureTableItems = FXCollections.observableArrayList();
         featureTableItems.addAll(list, purge, fill, add, view, edit, delete, show,
-                addLab, editLab, delLab, exit, help, download, upload);
+                addLab, editLab, delLab, exit, help, download, upload, dashboard);
     }
 
     /**
