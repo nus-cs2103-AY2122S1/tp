@@ -700,8 +700,71 @@ testers are expected to do more *exploratory* testing.
 ### Listing all doctors <a name="list-doctors"/>
 
 ### Adding an appointment <a name="appointment"/>
+1. Add an appointment when appointment list is showing today's appointments
+    1. Prerequisites: list all appointments using the `appt -l` command. There must be multiple doctors and patients in the patient and doctor lists. There are less than 100 patients and doctors. 
+       
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:00 dur/5 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment does not show up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:05 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment does not show up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:30 dur/50`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment does not show up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 14:00`<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment does not show up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/DATE_AND_TIME dur/5 r/Patient wants a blood test,` where `DATE_AND_TIME` is today's date and any time<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+       
+    1. Test case: `appt -a`<br>
+       Expected: No appointment is added. Response box displays error message: `Invalid command format! ...`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `Sessions should be of the format DD/MM/YYYY HH:MM and adhere to the following constraints:...`
+
+    1. Test case: `appt -a p/100 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The patient index provided is invalid`
+    
+    1. Test case: `appt -a p/1 d/100 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `The doctor index provided is invalid`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/xxx r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/121 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/0 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
 
 ### Deleting an appointment  <a name="delete-appointment"/>
+1. Deleting an appointment while all appointments are being shown
+
+    1. Prerequisites: list all appointments using the `appt -l` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
+       Expected: Similar to previous.
+
+2. Deleting an appointment while upcoming appointments are being shown
+    1. Prerequisites: list all persons using the `appt -l` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+       
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### Editing an appointment <a name="edit-appointment"/>
 
@@ -710,7 +773,6 @@ testers are expected to do more *exploratory* testing.
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
 
 ### Listing all appointments for today <a name="list-appointments"/>
-
 
 ### Saving data  <a name="saving-data"/>
 
