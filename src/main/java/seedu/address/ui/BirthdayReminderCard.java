@@ -17,15 +17,15 @@ import seedu.address.model.person.Person;
 
 public class BirthdayReminderCard extends UiPart<Region> {
     private static final String FXML = "BirthdayReminderListCard.fxml";
-    private static final String monthDayStringFormat = "dd MMM";
-    private static final String birthdayMessageDefault = "Turns %d on %s!";
-    private static final String birthdayMessageThisWeek = "Turns %d in %d days on %s!";
-    private static final String birthdayMessageToday = "Turns %d TODAY!";
-    private static final String wellWishesPromptMessage = "Send your well wishes to %s.";
-    private static final String styleCardBirthdayToday = "-fx-background-color: #6F9C51; "
+    private static final String MONTH_DAY_STRING_FORMAT = "dd MMM";
+    private static final String BIRTHDAY_MESSAGE_DEFAULT = "Turns %d on %s!";
+    private static final String BIRTHDAY_MESSAGE_THIS_WEEK = "Turns %d in %d days on %s!";
+    private static final String BIRTHDAY_MESSAGE_TODAY = "Turns %d TODAY!";
+    private static final String WELL_WISHES_PROMPT_MESSAGE = "Send your well wishes to %s.";
+    private static final String STYLE_CARD_BIRTHDAY_TODAY = "-fx-background-color: #6F9C51; "
             + "-fx-border-width: 0.5px; "
             + "-fx-border-color: #1d1d1d";
-    private static final String styleCardBirthdayThisWeek = "-fx-background-color: #345597; "
+    private static final String STYLE_CARD_BIRTHDAY_THIS_WEEK = "-fx-background-color: #345597; "
             + "-fx-border-width: 0.5px; "
             + "-fx-border-color: #1d1d1d";
 
@@ -67,7 +67,7 @@ public class BirthdayReminderCard extends UiPart<Region> {
         assert birthday != null;
         LocalDate birthdate = birthday.birthdate;
         MonthDay birthMonthDay = MonthDay.from(birthdate);
-        String birthMonthDayAsString = birthMonthDay.format(DateTimeFormatter.ofPattern(monthDayStringFormat));
+        String birthMonthDayAsString = birthMonthDay.format(DateTimeFormatter.ofPattern(MONTH_DAY_STRING_FORMAT));
         Year birthYear = Year.from(birthdate);
         LocalDate birthdateInCurrentYear = birthMonthDay.atYear(YearMonth.now().getYear());
 
@@ -75,18 +75,18 @@ public class BirthdayReminderCard extends UiPart<Region> {
         long daysToBirthday = ChronoUnit.DAYS.between(LocalDate.now(), birthdateInCurrentYear);
 
         if (daysToBirthday == 0) {
-            cardPane.setStyle(styleCardBirthdayToday);
-            return String.format(birthdayMessageToday, age);
+            cardPane.setStyle(STYLE_CARD_BIRTHDAY_TODAY);
+            return String.format(BIRTHDAY_MESSAGE_TODAY, age);
         }
         if (daysToBirthday > 0 && daysToBirthday <= 7) {
-            cardPane.setStyle(styleCardBirthdayThisWeek);
-            return String.format(birthdayMessageThisWeek, age, daysToBirthday, birthMonthDayAsString);
+            cardPane.setStyle(STYLE_CARD_BIRTHDAY_THIS_WEEK);
+            return String.format(BIRTHDAY_MESSAGE_THIS_WEEK, age, daysToBirthday, birthMonthDayAsString);
         }
-        return String.format(birthdayMessageDefault, age, birthMonthDayAsString);
+        return String.format(BIRTHDAY_MESSAGE_DEFAULT, age, birthMonthDayAsString);
     }
 
     private String generateSendWellWishesPrompt(String phoneNumber) {
-        return String.format(wellWishesPromptMessage, phoneNumber);
+        return String.format(WELL_WISHES_PROMPT_MESSAGE, phoneNumber);
     }
 
     @Override
