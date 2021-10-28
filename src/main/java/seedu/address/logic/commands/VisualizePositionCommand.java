@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import javafx.scene.chart.PieChart;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.followupaction.CommandFollowUpAction;
-import seedu.address.logic.commands.followupaction.ShowPieChartAction;
 import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -56,10 +54,11 @@ public class VisualizePositionCommand extends Command {
 
         PieChart positionChart = PositionPieChartFactory.createPieChart(model.getFilteredApplicantList(), position);
         PieChartDisplayer positionChartDisplayer = new PieChartDisplayer(positionChart);
-        CommandFollowUpAction showPositionPieChart = new ShowPieChartAction(positionChartDisplayer);
+        positionChartDisplayer.displayPieChart();
+        // CommandFollowUpAction showPositionPieChart = new ShowPieChartAction(positionChartDisplayer);
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, toShowTitle), false, showPositionPieChart, false);
+                String.format(MESSAGE_SUCCESS, toShowTitle));
     }
 
     @Override
