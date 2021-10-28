@@ -42,6 +42,7 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.LoginScreen;
+import seedu.address.ui.SetUpScreen;
 import seedu.address.ui.UiManager;
 
 /**
@@ -267,7 +268,11 @@ public class MainApp extends Application {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         this.stage = primaryStage;
         isLoggedIn = false;
-        new LoginScreen(this, !hasEncryptedFile(), primaryStage).show();
+        if (!hasEncryptedFile()) {
+            new SetUpScreen(this, primaryStage).show();
+        } else {
+            new LoginScreen(this, primaryStage).show();
+        }
     }
 
     @Override
