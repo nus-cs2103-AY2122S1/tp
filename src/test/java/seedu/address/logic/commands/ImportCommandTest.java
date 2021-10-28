@@ -18,7 +18,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class ImportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
-    private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/TestFiles/";
+    private static final String PATH_TEST_FILES = "src/test/data/ExportImportCommandTest/TestFiles/";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
@@ -53,7 +53,7 @@ public class ImportCommandTest {
     public void execute_fileNameJson_importSuccess() {
         Person newPerson = new PersonBuilder().build();
         expectedModel.addPerson(newPerson);
-        ImportCommand importNewPerson = new ImportCommand(PATH_FOLDER_WITH_JSON, VALID_FILENAME_JSON);
+        ImportCommand importNewPerson = new ImportCommand(PATH_TEST_FILES, VALID_FILENAME_JSON);
         String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, VALID_FILENAME_JSON);
         assertCommandSuccess(importNewPerson, model, expectedMessage, expectedModel);
     }
@@ -66,7 +66,7 @@ public class ImportCommandTest {
     public void execute_fileNameCsv_importSuccess() {
         Person newPerson = new PersonBuilder().build();
         expectedModel.addPerson(newPerson);
-        ImportCommand importNewPerson = new ImportCommand(PATH_FOLDER_WITH_JSON, VALID_FILENAME_CSV);
+        ImportCommand importNewPerson = new ImportCommand(PATH_TEST_FILES, VALID_FILENAME_CSV);
         String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, VALID_FILENAME_CSV);
         assertCommandSuccess(importNewPerson, model, expectedMessage, expectedModel);
     }

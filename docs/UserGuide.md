@@ -6,7 +6,7 @@ title: User Guide
 <img src = "https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/logo.jpeg?raw=true" align = "left" width="100" height="100" style="margin-right: 1.25em">
 <div>
   
-  <h1> CohortConnect v1.2 </h1>
+  <h1> CohortConnect v1.3b </h1>
   
   <b> Type. Explore. Connect. </b>
   
@@ -14,14 +14,15 @@ title: User Guide
 
 <br><br>
 
-CohortConnect is a desktop application for CS students to network, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+CohortConnect is an advanced desktop address book which facilitates networking among Computer Science (CS) students. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 
-Our app makes it easy to connect with like minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging Github’s metadata using a proprietary algorithm.
+Manage large groups of contacts with advanced features such as **Import** for a quick 1-step setup, marking your **Favourite** contacts, as well as finding contacts going to the same **Event**. CohortConnect also makes it easy to connect with like-minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging GitHub’s metadata using a proprietary algorithm.
 
 ## Table of Contents
  - [Purpose](#Purpose)
  - [Quick Start](#QuickStart)
  - [Features](#Features)
+    - [Navigating Between Tabs - cmd + numkey](#Nav)
     - [Adding a new Student - add](#Add)
     - [Delete a Student - delete](#Delete)
     - [Edit a Student - edit](#Edit)
@@ -34,6 +35,9 @@ Our app makes it easy to connect with like minded students in your module. Our *
     - [Displaying the Help Window - help](#Help)
     - [Listing All Student Contacts - list](#List)
     - [Deleting All Student Contacts - clear](#Clear)
+    - [Open Telegram of Current User - te](#OpenTelegram)
+    - [Open GitHub of Current User - g](#OpenGithub)
+    - [Retrieve Command History - ↑ / ↓](#CommandHistory)
     - [Exiting the App - exit](#Exit)
  - [Coming Soon](#ComingSoon)
  - [FAQ](#FAQ)
@@ -43,7 +47,7 @@ Our app makes it easy to connect with like minded students in your module. Our *
 
 ## Purpose
 
-This document is the User Guide of CohortConnect. It is intended to provide all the necessary information to use this software.
+This User Guide is intended for basic to advanced users of CohortConnect. It provides sufficient information for users to set up the application and learn all its features.
 
 <h2 id = "QuickStart"> </h2>
 
@@ -52,7 +56,7 @@ This document is the User Guide of CohortConnect. It is intended to provide all 
 1. Ensure you have Java 11 or above installed in your computer.
 2. Download the latest `CohortConnect.jar`  release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
 3. Place `CohortConnect.jar` in an empty folder.
-4. Double click the jar file to start the program.
+4. Double-click the jar file to start the program.
 5. The UI would look like this:
 
 <p align="center">
@@ -80,6 +84,21 @@ This document is the User Guide of CohortConnect. It is intended to provide all 
 Notes about command format:
 
 - `[x/xxx]` refers to an optional field
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:** In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
+</div>
+
+<h3 id = "Nav"> </h3>
+
+## Navigating Between Tabs - <kbd>⌘</kbd> + NumKey
+
+* <kbd>⌘</kbd> + 1: Contacts Tab
+* <kbd>⌘</kbd> + 2: Favorites Tab
+* <kbd>⌘</kbd> + 3: Events Tab
+* <kbd>⌘</kbd> + 4: Find A Buddy Tab
+
 
 <h3 id = "Add"> </h3>
 
@@ -123,17 +142,29 @@ delete 7
 
 Edits an existing Student Contact in the Address Book.
 
-Format: 
+Format 1: 
 
 ```
 edit <INDEX> [n/<NAME>] [te/TELEGRAM] [g/GITHUB] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
-Example:
+Example 1:
 
 ```
 edit 1 n/John te/john_123 t/TA
 ```
+
+Format 2:
+
+```
+edit profile [n/<NAME>] [te/TELEGRAM] [g/GITHUB]
+```
+
+Example 2:
+```
+edit profile te/bob_osum
+```
+
 
 <h3 id = "Find"> </h3>
 
@@ -214,36 +245,60 @@ show 4
 
 ## Importing Student Contacts - `import`
 
-Imports Student Contacts from the specified JSON file.
+Imports Student Contacts from the specified JSON or CSV file. File must be in the same folder as the application.
 
-Format:
-
-```
-import filename.JSON
-```
-
-Example:
+Format 1:
 
 ```
-import CS2103T.JSON
+import <FILENAME>.json
+```
+
+Example 1:
+
+```
+import CS2103T.json
+```
+
+Format 2:
+
+```
+import <FILENAME>.csv
+```
+
+Example 2:
+
+```
+import CS2103T.csv
 ```
 
 <h3 id = "Export"> </h3>
 
 ## Exporting Student Contacts - `export`
 
-Exports the Student Contacts to the specified JSON file.
+Exports the Student Contacts to the specified JSON or CSV file. Exported file will be in the same folder as the application.
 
-Format
-
-```
-export filename.JSON
-```
-
-Example:
+Format 1:
 
 ```
-export Friends.JSON
+export <FILENAME>.json
+```
+
+Example 1:
+
+```
+export Friends.json
+```
+
+Format 2:
+
+```
+export <FILENAME>.csv
+```
+
+Example 2:
+
+```
+export Friends.csv
 ```
 
 <h3 id = "SetFavourite"> </h3>
@@ -252,7 +307,7 @@ export Friends.JSON
 
 Helps to set a particular Student Contact as a Favourite.
 
-Format
+Format:
 
 ```
 fav <INDEX>
@@ -271,7 +326,7 @@ fav 1
 Helps to set a particular Student Contact as an Unfavourite, only if it
 was set as a Favourite earlier.
 
-Format
+Format:
 
 ```
 unfav <INDEX>
@@ -290,7 +345,7 @@ unfav 1
 Displays the Help Window, which consists of a list
 of possible Commands, and a link to this UserGuide.
 
-Format
+Format:
 
 ```
 help
@@ -312,7 +367,7 @@ help
 
 Lists all the Student Contacts present.
 
-Format
+Format:
 
 ```
 list
@@ -330,7 +385,7 @@ list
 
 Deletes all the Student Contacts present.
 
-Format
+Format:
 
 ```
 clear
@@ -344,13 +399,39 @@ clear
 
 > WARNING: Use With Caution!
 
+<h3 id = "OpenTelegram"> </h3>
+
+## Open Telegram of Current User
+
+Format:
+
+```
+te
+```
+
+<h3 id = "OpenGithub"> </h3>
+
+## Open GitHub of Current User
+
+Format:
+
+```
+g
+```
+
+<h3 id = "CommandHistory"> </h3>
+
+## Retrieve Command History - <kbd>↑</kbd> / <kbd>↓</kbd>
+
+Similar to a Command Line Interface, <kbd>↑</kbd> retrieves the previous command, while <kbd>↓</kbd> retrieves the next command.
+
 <h3 id = "Exit"> </h3>
 
 ## Exiting the App - `exit`
 
 Exits the App.
 
-Format
+Format:
 
 ```
 exit
@@ -393,14 +474,14 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Delete a Student | `delete <INDEX> ` |
 | Exit the App | `exit` |
 | Edit a Student | `edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]` |
-| Exporting Student Contacts | `export filename.JSON` |
+| Exporting Student Contacts | `export <FILENAME>.json` <br> `export <FILENAME>.csv` |
 | Favourite a Student Contact | `fav <INDEX>` |
 | Find a Student (by Name) | `find <STRING> ` |
 | Find a Student (by Tag) | `find t/<TAG>` |
 | Find a Student (by Telegram Handle) | `find @<TELEGRAM>` |
-| Show the Help Window | `help` |
-| Import Student Contacts | `import filename.JSON` |
+| Import Student Contacts | `import <FILENAME>.json` <br> `import <FILENAME>.csv` |
 | List all the Student Contacts Present | `list` |
+| Show the Help Window | `help` |
 | Show a Student Contact (by Name)| `show <NAME>` |
 | Show a Student Contact (by Index) | `show <INDEX>` |
 | Unfavourite a Student Contact | `unfav <INDEX>` |
