@@ -55,6 +55,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 1. Refer to the [Features](#features) below for details of each command.
 
+[Return to table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -90,6 +92,9 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 </div>
 
+[Return to table of contents](#table-of-contents)
+
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -98,12 +103,16 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+[Return to table of contents](#table-of-contents)
+
 
 ### Listing all students : `list`
 
 Displays a list of all students in the student list.
 
 Format: `list`
+
+[Return to table of contents](#table-of-contents)
 
 
 ### Adding a student : `add student`
@@ -122,6 +131,8 @@ Examples:
 * `add student -n Jonas Chow -i E0123456 -g T01A -g R01A` adds the student Jonas Chow and allocate him into groups `T01A` and `R01A`. 
 * `add student -n Jonas Chow -i E0123456 -t beginner` adds the student Jonas Chow and tag him with `beginner`. 
 
+[Return to table of contents](#table-of-contents)
+
 
 ### Creating a new group : `add group`
 
@@ -139,7 +150,9 @@ Examples:
 * `add group -g T01A` creates group `T01A`
 * `add group -g T01A -n Hong Yao -n Hong Fai` creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group. 
 * `add group -g T01A -n Hong Yao -i E0123456` creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
-* `add group -g T01A -i E0123123 -i E0123456` creates group `T01A` and adds two students with corresponding NUSNET ID into the group. 
+* `add group -g T01A -i E0123123 -i E0123456` creates group `T01A` and adds two students with corresponding NUSNET ID into the group.
+
+[Return to table of contents](#table-of-contents)
 
 
 ### Adding a student into a group : `add alloc`
@@ -156,6 +169,9 @@ Examples:
 * `add alloc -g T01A -n Zhiying` adds `Zhiying` into the tutorial group `T01A`. 
 * `add alloc -g T02A -i E0123456` adds student with NUSNET ID `E0123456` into tutorial group `T02A`.
 
+[Return to table of contents](#table-of-contents)
+
+
 ### Adding an assessment : `add assessment`
 
 Adds a new assessment into the database.
@@ -166,6 +182,9 @@ Format: `add assessment -a <assessment_name>`
 
 Examples:
 * `add assessment -a P01`
+
+[Return to table of contents](#table-of-contents)
+
 
 ### Adding a score : `add score`
 
@@ -179,6 +198,9 @@ Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s
 Examples:
 * `add score -a P01 -n John Doe -s 12`
 * `add score -a P02 -i E0123456 -s 12.5`
+
+[Return to table of contents](#table-of-contents)
+
 
 ### Searching for students : `search`
 
@@ -203,6 +225,9 @@ Examples:
 * `search -g T02B R03C`
 * `search -t friends colleagues`
 
+[Return to table of contents](#table-of-contents)
+
+
 ### Showing assessment result analysis : `show`
 
 Shows the in-depth data analysis of individual, group, and cohort's performance for assessments.
@@ -222,6 +247,8 @@ Examples:
 * `show -g T02A` displays line chart of group T02A's performance in their assessments. 
 * `show -a P01` displays bar chart of the distribution of scores in assessment P01. 
 
+[Return to table of contents](#table-of-contents)
+
 
 ### Editing a student : `edit`
 
@@ -232,13 +259,16 @@ Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]...
 * Edits the student at the specified `<index>`. The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags and groups, the existing tags and groups of the student will be removed i.e adding of tags and groups are not cumulative.
+* When editing tags and groups, the existing tags and groups of the student will be removed, i.e adding of tags and groups are not cumulative.
 * You can remove all the student’s tags or groups by typing -t or -g without specifying any values after it.
 
 Examples:
 * `edit 1 -n John Doe`
 * `edit 1 -n John Doe -i E1234567 -g T01 -g R01`
 * `edit 2 -t`
+
+[Return to table of contents](#table-of-contents)
+
 
 ### Deleting a student : `delete`
 
@@ -253,6 +283,8 @@ Format: `delete <index>`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the student list.
 * `search -n Alex` followed by `delete 1` deletes the 1st student in the results of the `search` command.
+
+[Return to table of contents](#table-of-contents)
 
 
 ### Importing data : `import`
@@ -287,6 +319,8 @@ Examples:
 * `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1`
 * `import -f student_data.csv -g 3 -a 30`
 
+[Return to table of contents](#table-of-contents)
+
 
 ### Exporting data: `export`
 
@@ -312,16 +346,20 @@ Examples:
 * `export -f /home/prof/CS1101S/student_data.csv`
 * `export` will save the data in `sourceControl.csv`
 
+[Return to table of contents](#table-of-contents)
+
 
 ### Resetting all data: `clear`
 
 Clears all existing data. 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Be careful: you can't undo this command! You can use the `export` command to get a backup of the data before clearing.
+You can't undo this command! You can use the `export` command to get a backup of the data before clearing.
 </div>
 
 Format: `clear`
+
+[Return to table of contents](#table-of-contents)
 
 
 ### Closing the app: `exit`
@@ -329,6 +367,8 @@ Format: `clear`
 Exits the application.
 
 Format: `exit`
+
+[Return to table of contents](#table-of-contents)
 
 
 ### Setting customised aliases for commands: `alias`
@@ -343,20 +383,17 @@ Format: `alias -c <existing_command> -as <alias>`
 * Default and existing alias can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added to the command that the existing alias maps to.
 * The aliases created will persist between Source Control sessions.
-
-<div markdown="block" class="alert alert-primary">
-
-:bulb: **Tips:**<br>
-
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`
 
-</div>
-
 Examples:
-* `alias -c add student -as as` adds a new alias to `add student` command. i.e. `as -n Zhiying -i E7654321` adds student `Zhiying` to database.
-* `alias -c add score -as as` maps the alias `as` to the `add score` command. i.e. `as -a P01 -n Zhiying -s 100` will add a score for `P01` for the student `Zhiying`.
+* `alias -c add student -as as` adds a new alias to `add student` command. 
+    * `as -n Zhiying -i E7654321` adds student `Zhiying` to database.
+* `alias -c add score -as as` maps the alias `as` to the `add score` command. 
+    * `as -a P01 -n Zhiying -s 100` will add a score for `P01` for the student `Zhiying`.
 * `alias -c as -as as2` will add the alias `as2` to the command that `as` currently maps to if `as` is an existing alias.
 * `alias -c as -as as` will remove the alias `as`. `as` will no longer be recognised as a command.
+
+[Return to table of contents](#table-of-contents)
 
 
 ### Saving the data
@@ -364,6 +401,8 @@ Examples:
 SourceControl data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 If you wish to backup the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
+
+[Return to table of contents](#table-of-contents)
 
 
 ### Editing the data file
@@ -374,10 +413,15 @@ SourceControl data are saved as a JSON file `[JAR file location]/data/sourcecont
 If your changes to the data file makes its format invalid, SourceControl will discard all data and start with an empty data file at the next run.
 </div>
 
+[Return to table of contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ `[coming soon]`
+
+[Return to table of contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -405,6 +449,8 @@ In `import` command, `-g`, `-a`, `-t` are used differently from other commands. 
 Import command description.
 </div>
 
+[Return to table of contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -428,3 +474,5 @@ Action | Format | Examples
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
 **Add Alias** | `alias -c <existing_command> -as <new_alias>` | e.g. `alias -c add student -as as`
+
+[Return to table of contents](#table-of-contents)
