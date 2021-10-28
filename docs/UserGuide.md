@@ -10,7 +10,7 @@ tApp is a **desktop app for managing tutorial groups and personal tasks, optimiz
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+# Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -38,7 +38,7 @@ tApp is a **desktop app for managing tutorial groups and personal tasks, optimiz
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -64,8 +64,8 @@ tApp is a **desktop app for managing tutorial groups and personal tasks, optimiz
 
 </div>
 
-### Students
-#### List all students: `students`
+## Students
+### List all students: `students`
 
 Shows a list of all students inputted into tApp together with their attendance and participation scores for tutorials.
 
@@ -74,7 +74,7 @@ Format: `students`
 Examples:
 * `students` returns a list of all students with their information and attendance scores
 
-#### Add a student : `addStudent`
+### Add a student : `addStudent`
 
 Adds a student to the student list.
 
@@ -92,7 +92,7 @@ Examples:
 * `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user` adds John Doe to the list and displays a confirmation
   output without a proper Github link, but storing the `GITHUB USERNAME` in memory nonetheless.
 
-#### Delete a student: `deleteStudent INDEX`
+### Delete a student: `deleteStudent INDEX`
 
 Deletes the specified student from the student list.
 
@@ -106,7 +106,7 @@ Examples:
 
 * `students` followed by `deleteStudent 1` removes the 1st person in the students list.
 
-#### Edit a student : `editStudent`
+### Edit a student : `editStudent`
 
 Edits an existing student in the students list.
 
@@ -123,11 +123,11 @@ Examples:
 *  `editStudent 1 s/A0221111L e/johndoe@example.com` Edits the student number and email address of the 1st person to be `A0221111L` and `johndoe@example.com` respectively.
 *  `editStudent 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-#### Marking a student's attendance: `marka`
+### Marking a student's attendance: `marka`
 
 Marks the specified student(s) in the student list as present or absent.
 
-Format: `marka INDEX [MORE_INDEXES] /wWEEK NUMBER`
+Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 * Marks the person(s) as present in the specified `INDEX(ES)`.
 * The index must refer to the index number shown in the displayed students list.
@@ -139,23 +139,23 @@ Examples:
 * `students` followed by `marka 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as present in week 1.
 * Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
 
-#### Marking a student's participation: `markp`
+### Marking a student's participation: `markp`
 
 Marks the specified student(s) in the student list as participated or not participated.
 
-Format: `markp INDEX [MORE_INDEXES] /wWEEK NUMBER`
+Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
-* Marks the person(s) as present in the specified `INDEX`.
+* Marks the person(s) as participated in the specified `INDEX` for that week.
 * The index must refer to the index number shown in the displayed students list.
 * The index and week number must be a positive number: 1, 2, 3…
 * If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
 Examples:
 
-* `students` followed by `markp 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as participated in week 1.
-* Another `mark 1 /w1` instance will mark the 1st person in the student list as not participated in week 1.
+* `students` followed by `markp 1 2 3 w/1` marks the 1st, 2nd and 3rd person in the students list as participated in week 1.
+* Another `markp 1 w/1` instance will mark the 1st person in the student list as not participated in week 1.
 
-#### Find student by name: `findStudent`
+### Find student by name: `findStudent`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -176,14 +176,14 @@ Examples:
 
 -----
 
-#### Clearing all entries from student list: `clearStudents`
+### Clearing all entries from student list: `clearStudents`
 
 Clears all entries from the student list.
 
 Format: `clearStudents`
 
-### Groups
-#### List all groups: `groups`
+## Groups
+### List all groups: `groups`
 
 Shows a list of all groups inputted into tApp together with its group members and group Github link if any are added.
 
@@ -192,7 +192,7 @@ Format: `groups`
 Examples:
 * `groups` returns a list of all groups with their information.
 
-#### Add a group: `addGroup`
+### Add a group: `addGroup`
 
 Adds a group to the group list. The group will only be initialized with a `GROUP NAME` and `TAG` if any.
 
@@ -205,7 +205,7 @@ Examples:
 * `addGroup g/W14-4 t/tApp` adds group W14-4 to the list and displays a confirmation output with no Github link and
   group members
 
-#### Delete a group: `deleteGroup`
+### Delete a group: `deleteGroup`
 
 Deletes the specified group from the group list.
 
@@ -216,16 +216,15 @@ Format: `deleteGroup INDEX`
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and Github
-  link of the group deleted
+* `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and Github link of the group deleted
 
-#### Editing a group : `editGroup`
+### Editing a group : `editGroup`
 
 Format: `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
 
 Requirements are similar to editStudent command.
 
-#### Add a student to a group: `addSG`
+### Add a student to a group: `addSG`
 
 Adds a student in student list to an existing group in the group list.
 
@@ -237,10 +236,9 @@ Format: `addSG INDEX g/GROUP`
 * `GROUP` must be an existing group in the displayed group list.
 
 Examples:
-* `addSG 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output
-  that the student has been added to the group
+* `addSG 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output that the student has been added to the group.
 
-#### Delete a student from a group: `deleteSG`
+### Delete a student from a group: `deleteSG`
 
 Deletes the specified group from the group list.
 
@@ -253,7 +251,7 @@ Format: `deleteSG GROUP_INDEX STUDENT_INDEX`
 Examples:
 * `deleteSG 1 2` deletes the member with index 2 in the group member list of the  group with index 1 in group list and displays a confirmation output with the affected group member and group name.
 
-#### Add a Github link to a group: `addGG`
+### Add a Github link to a group: `addGG`
 
 Adds a Github link to a specified group.
 
@@ -265,10 +263,9 @@ Format: `addGG INDEX y/YEAR r/REPO NAME`
 * The formatted Github link is of the form https://github.com/ `YEAR`-CS2103-`GROUP NAME`/`REPO NAME`
 
 Examples:
-* `addGG 1 y/AY20212022 r/tp` adds a Github link in the above format to the group with index 1 in the group list and
-  displays a confirmation output the link has been added to the group.
+* `addGG 1 y/AY20212022 r/tp` adds a Github link in the above format to the group with index 1 in the group list and displays a confirmation output the link has been added to the group.
 
-#### Locating group by name: `findGroup`
+### Locating group by name: `findGroup`
 
 Find groups whose names contain any of the given keywords.
 
@@ -287,24 +284,23 @@ Examples:
 * `findGroup w14 w15` returns `W14-3`, `W14-4`, `W15-2`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
----------------------------
 
-#### Clearing all entries from group list: `clearGroups`
+### Clearing all entries from group list: `clearGroups`
 
 Clears all entries from the group list.
 
 Format: `clearGroups`
 
-### Tasks
-#### List all tasks: `tasks`
+## Tasks
+### List all tasks: `tasks`
 
 Displays all the tasks currently in the task list.
 
 Format: `tasks`
 
-#### Add a todo task: `todo`
+### Add a todo task: `todo`
 
-Adds a TODO task with the given TASK_NAME.
+Adds a todo task with the given TASK_NAME.
 
 Format: `todo n/TASK_NAME [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
@@ -323,9 +319,9 @@ Examples:
 * `todo n/Complete tP d/Last chance to add features t/CS2103 t/work p/H` creates a todo task 'Complete tP'
   with the description "Last chance to add features" and tags "CS2103" & "work" with High Priority.
 
-#### Add an event task: `event`
+### Add an event task: `event`
 
-Adds an event task with the given TASK_NAME for a specified DATE.
+Adds an event task with the given event date.
 
 Format: `event n/TASK_NAME on/EVENT_DATE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
@@ -339,14 +335,14 @@ Examples:
   Medium Priority.
 * `event n/Exam on/2021-10-04` creates the event task "exam", on "2021-10-04", with Low Priority.
 
-#### Add a deadline task: `deadline`
+### Add a deadline task: `deadline`
 
-Adds a deadline task with the given name, and a specified taskDate.
+Adds a deadline task with the given name, and a specified deadline.
 
 Format: `event n/TASK_NAME by/DEADLINE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
 * Adds a deadline task with the specified `TASK_NAME`
-* The deadline task has the task date `DATE`
+* The deadline task has the task date `DEADLINE`
 * The taskDate must be in the format `YYYY-MM-dd`
 * Priority, description and tags are similar to Todo Tasks.
 
@@ -370,29 +366,15 @@ Examples:
 
 * `deleteTask 1` removes the 1st task in the task list.
 
-Sample Usage:
-
-`> deleteTask 1` removes the first Task from the task list.
-
 ### Editing a task: `editTask INDEX`
 
 Edits an existing task in the tasks list.
 
 Format: `editTask INDEX [n/NAME] [t/TAG]…​`
 
-* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. 
-  The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-  specifying any tags after it.
+Requirements are similar to editStudent command.
 
-Examples:
-*  `editTask 1 n/Complete iP` Edits the task name of the 1st task to be `Complete iP`.
-*  `editTask 2 n/Exercise t/` Edits the name of the 2nd task to be `Exercise` and clears all existing tags.
-
-#### Marking a task as done: : `doneTask`
+### Marking a task as done: : `doneTask`
 
 Mark the specified task from the list as done.
 
@@ -405,13 +387,13 @@ Format: `doneTask INDEX`
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed.
 
-#### Clearing all entries from task list: `clearTasks`
+### Clearing all entries from task list: `clearTasks`
 
 Clears all entries from the task list.
 
 Format: `clearTasks`
 
-#### Clearing all entries from tApp: `clear`
+### Clearing all entries from tApp: `clear`
 
 Clears all entries from tApp.
 
@@ -425,17 +407,17 @@ Shows a popup with all the available commands.
 
 Format: `help`
 
-### Exiting the program : `exit`
+## Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+## Saving the data
 
 tApp data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+## Editing the data file
 
 tApp data are saved as a JSON file `[JAR file location]/data/tApp.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -480,7 +462,7 @@ Commands | Format and Examples
 ## [Tasks](#tasks)
 Commands | Format and Examples
 --------|------------------|
-[**List Tasks**](#list-all-tasks-tasks) | `tasks` 
+[**List Tasks**](#list-all-tasks-tasks) | `tasks`
 [**Add Todo Task**](#add-a-todo-task-todo) | `todo n/TASK_NAME [t/TAG]…​` <br> e.g., `todo n/tP t/CS2103`
 [**Add Event Task**](#add-an-event-task-event) | `event n/TASK_NAME on/DATE [t/TAG]…​` <br> e.g., `event n/Final Exam on/2021-10-31 t/CS2103`
 [**Add Deadline Task**](#add-an-deadline-task-deadline) | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` <br> e.g., `deadline n/Finish tP by/2021-10-31 t/W14-4`
