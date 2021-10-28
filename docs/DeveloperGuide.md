@@ -171,6 +171,8 @@ There are 4 tabs in AniList:
 To switch between tabs, the user can use the `list` command which accepts an optional parameter `status`, representing the `status` of the animes that will be listed in the tab. If no parameter is given, the current tab will switch to the `ALL` tab.
 The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
 
+<img src="images/ListSequenceDiagram.png" width="550" />
+
 #### Design considerations:
 
 **Aspect: Determining which tab to switch to after updating the list:**
