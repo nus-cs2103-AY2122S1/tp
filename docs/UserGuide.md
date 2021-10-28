@@ -193,6 +193,12 @@ Example:
 
 - `show 1`: Shows the student particular and lab results of the student at index 1.
 
+
+### <a name="list-students"></a>3.6 List All Students: `list`
+
+Displays a list of all students in the left panel. This list is ordered first by class ID followed by student name.
+
+
 ## <a name="lab-features"></a>4. Lab Features
 
 ### <a name="add-lab"></a>4.1 Add Lab: `addlab`
