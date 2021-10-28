@@ -31,8 +31,8 @@ If you are familiar with Unix commands, this is definitely for you!
         1. [Add Lab: `addlab`](#add-lab)
         2. [Edit Lab: `editlab`](#edit-lab)
         3. [Delete Lab: `dellab`](#delete-lab)
-
 - [Command Summary](#command-summary)
+
 
 ## <a name="quick-start"></a>Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -53,10 +53,10 @@ If you are familiar with Unix commands, this is definitely for you!
       A1234567X'
 6. Refer to the [Features](#features) below for details on all available commands.
 
+
 ## <a name="features"></a>Features
 
 **Notes about the command format (Unix Command Syntax):**
-
 - Similar to Unix CLI, the up and down arrow keys can be used to navigate the history of commands executed.
 - Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify
   a student's student ID.
@@ -66,6 +66,7 @@ If you are familiar with Unix commands, this is definitely for you!
   of the parameter will be taken. <br> e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be
   ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
 
 ## <a name="general-features"></a>1. General Features
 
@@ -106,10 +107,10 @@ Uploads student data (student ID, class ID, name, email) via a CSV file.
 3. Note that this command is not meant for uploading lab results. Rather, it is only for automating the adding of
    students to PE.
 
+
 ## <a name="student-features"></a>3. Student Features
 
 ### <a name="add-student"></a>3.1 Add Student: `add`
-
 Adds a student to ProgrammerError with their student ID and class ID.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
@@ -124,35 +125,30 @@ Examples:
   A2345678X and class ID B02 to and email e043245@u.nus.edu ProgrammerError.
 
 ### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
-
 Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to
 the displayed list.
 
-Format:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -email <EMAIL>`
-Format:`edit <INDEX_IN_LIST> -t <LAB_NUMBER> -s <ACTUAL_SCORE>`
+Format 1:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -email <EMAIL>`
+
+Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 
 - Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input values.
 
 Examples:
-
 - `edit 1 -sid A1234567X` Updates the student ID of the student at index 1 (1-indexed) to A1234567X.
 - `edit 2 -grade 97.5` Updates the grade of the student at index 2 (1-indexed) to 97.5.
 
 ### <a name="delete-student"></a>3.3 Delete Student: `delete`
-
 Deletes the specified student from the PE.
 
 Format: `delete <STUDENT_INDEX>`
-
 - Deletes the student at `<STUDENT_INDEX>`. (1-indexed)
 
 Example:
-
 - `delete 23` Deletes the data of the student at index 1
 
 ### <a name="filter-student"></a>3.4 Filter Students: `filter`
-
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
 Of the three arguments, at least one has to be provided. Arguments can be provided in any order and are
 case-insensitive. ProgrammerError will display the filtered list of students whose details matches all the specified
@@ -172,7 +168,6 @@ Examples:
   class with the class ID containing the character sequence `B01`.
 
 ### <a name="show-student"></a>3.5 Show Student Details: `show`
-
 Shows a particular student's details including their scores for each lab.
 
 The student particular and lab results will be updated if other commands modify their fields.
@@ -186,42 +181,37 @@ Example:
 - `show 1`: Shows the student particular and lab results of the student at index 1.
 
 ### <a name="list-students"></a>3.6 List All Students: `list`
-
 Displays a list of all students in the left panel. This list is ordered first by class ID followed by student name.
+
 
 ## <a name="lab-features"></a>4. Lab Features
 
 ### <a name="add-lab"></a>4.1 Add Lab: `addlab`
-
 Adds a lab to every student with the lab number and total score.
 
 Format: `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
 
 Examples:
-
 - `addlab -t 1 -ts 20`: Adds a lab with number 1 and total score 20 for all students.
 - `addlab -t 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
 
 ### <a name="edit-lab"></a>4.2 Edit Lab: `editlab`
-
 Edits the details of an existing lab for every student.
 
 Format: `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 
 Examples:
-
 - `editlab -t 1 -ts 30`: Changes the total score of lab 1 to 30 for all students.
 - `editlab -t 1 -nt 2`: Changes the number of an existing lab from 1 to 2 for all students.
 
 ### <a name="delete-lab"></a>4.3 Delete Lab: `dellab`
-
 Deletes an existing lab from every student in ProgrammerError.
 
 Format: `dellab -t <LAB_NUM>`
 
-Examples:
-
+Example:
 - `dellab -t 1`: Deletes lab 1 for all students if it exists.
+
 
 ## <a name="command-summary"></a>Command Summary
 
