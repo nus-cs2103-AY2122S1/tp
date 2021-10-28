@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path notorFilePath = Paths.get("data", "notor.json");
+    private Path notorArchiveFilePath = Paths.get("data", "archive.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -56,6 +57,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.notorFilePath = notorFilePath;
     }
 
+    public Path getNotorArchiveFilePath() {
+        return notorArchiveFilePath;
+    }
+
+    public void setNotorArchiveFilePath(Path notorArchiveFilePath) {
+        requireNonNull(notorArchiveFilePath);
+        this.notorArchiveFilePath = notorArchiveFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -78,10 +88,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + notorFilePath);
-        return sb.toString();
+        return "Gui Settings : " + guiSettings + "\nLocal data file location : " + notorFilePath;
     }
-
 }

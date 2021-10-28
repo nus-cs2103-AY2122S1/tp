@@ -70,7 +70,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic);
+        ui = new UiManager(logic, model);
 
         Executor.setup(model);
     }

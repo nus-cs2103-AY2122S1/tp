@@ -86,6 +86,10 @@ public class NotorTest {
             return persons;
         }
 
+        @Override public ObservableList<Person> getPersonArchiveList() {
+            return null;
+        }
+
         @Override
         public ObservableList<SuperGroup> getSuperGroups() {
             return null;

@@ -1,6 +1,7 @@
 package seedu.notor.logic.parser;
 
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.notor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -53,7 +54,7 @@ public class PersonCreateCommandParserTest {
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withNote(Note.EMPTY_NOTE).withTags(VALID_TAG_FRIEND,
-                VALID_TAG_HUSBAND)
+                        VALID_TAG_HUSBAND)
                 .build();
         String multipleTags = String.format("person %s /create%s%s%s", VALID_NAME_BOB,
                 PHONE_DESC_BOB, EMAIL_DESC_BOB, TAG_MULTIPLE_TAGS);
@@ -66,19 +67,17 @@ public class PersonCreateCommandParserTest {
         // zero tags
         String noTag = PersonCommand.COMMAND_WORD + " " + VALID_NAME_BOB + " /" + PersonCreateCommand.COMMAND_WORD
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB;
-        Person expectedPerson = new Person(BOB.getName(), BOB.getPhone(), BOB.getEmail(), Note.EMPTY_NOTE ,
-                new HashSet<Tag>());
+        Person expectedPerson = new Person(BOB.getName(), BOB.getPhone(), BOB.getEmail(), Note.EMPTY_NOTE,
+                new HashSet<>());
         assertParseSuccess(notorParser.parseCommand(noTag), new PersonCreateCommand(null, expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
-
         // missing name prefix
         String noName = String.format("person /create %s%s%s", VALID_NAME_BOB,
                 PHONE_DESC_BOB, EMAIL_DESC_BOB);
-        assertParseFailure(notorParser, noName, expectedMessage);
+        assertParseFailure(notorParser, noName, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test

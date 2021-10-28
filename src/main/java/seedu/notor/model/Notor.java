@@ -21,19 +21,14 @@ public class Notor implements ReadOnlyNotor {
 
     private final UniqueList<Person> persons;
     private final UniqueList<SuperGroup> superGroups;
+    private final UniqueList<Person> personArchive;
 
     private Note note;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
     {
         persons = new UniqueList<>();
         superGroups = new UniqueList<>();
+        personArchive = new UniqueList<>();
     }
 
     public Notor() {
@@ -49,6 +44,8 @@ public class Notor implements ReadOnlyNotor {
      */
     public Notor(ReadOnlyNotor toBeCopied) {
         this(toBeCopied.getNote());
+        toBeCopied.getPersonList().forEach(persons::add);
+        toBeCopied.getPersonArchiveList().forEach(personArchive::add);
         resetData(toBeCopied);
     }
 
@@ -83,7 +80,7 @@ public class Notor implements ReadOnlyNotor {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in Notor.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -91,11 +88,50 @@ public class Notor implements ReadOnlyNotor {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in Notor archive.
+     */
+    public boolean hasArchive(Person person) {
+        requireNonNull(person);
+        return personArchive.contains(person);
+    }
+
+    /**
+     * Adds a person to Notor.
+     * The person must not already exist in Notor.
      */
     public void addPerson(Person person) {
         persons.add(person);
+    }
+
+    /**
+     * Adds a person to the Notor archive.
+     * The person must exist in Notor.
+     * The person must not already exist in Notor archive.
+     */
+    public void archivePerson(Person person) {
+        requireNonNull(person);
+        persons.remove(person);
+        personArchive.add(person);
+    }
+
+    /**
+     * Removes a person from the Notor archive.
+     * The person must exist in Notor archive.
+     * The person must not already exist in Notor.
+     */
+    public void unarchivePerson(Person person) {
+        requireNonNull(person);
+        persons.add(person);
+        personArchive.remove(person);
+    }
+
+    /**
+     * Adds a person to the Notor archive.
+     * The person must not already exist in Notor archive.
+     */
+    public void addArchivePerson(Person person) {
+        requireNonNull(person);
+        personArchive.add(person);
     }
 
     /**
@@ -151,6 +187,7 @@ public class Notor implements ReadOnlyNotor {
 
     /**
      * Removes superGroup from Notor.
+     *
      * @param sg the SuperGroup to removed.
      */
     public void deleteSuperGroup(SuperGroup sg) {
@@ -208,6 +245,11 @@ public class Notor implements ReadOnlyNotor {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> getPersonArchiveList() {
+        return personArchive.asUnmodifiableObservableList();
     }
 
     @Override

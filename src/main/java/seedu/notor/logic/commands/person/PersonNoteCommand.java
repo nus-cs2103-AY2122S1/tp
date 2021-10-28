@@ -21,11 +21,11 @@ public class PersonNoteCommand extends PersonCommand {
     private static final String COMMAND_DESCRIPTION =
             ": Edits the notes of the person identified by the index number used in the current person listing.\n";
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
-            + "Parameters: none"
+            + "Parameters: none\n"
             + "Example: "
-            + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
+            + PersonCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final PersonExecutor executor;
 

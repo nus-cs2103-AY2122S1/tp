@@ -27,7 +27,7 @@ public class PersonCreateCommand extends PersonCommand {
 
     private static final String COMMAND_DESCRIPTION = ": Creates a person in the address book.\n";
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " NAME " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " NAME /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters: "
             + PREFIX_PHONE + "PHONE "
@@ -35,7 +35,7 @@ public class PersonCreateCommand extends PersonCommand {
             + PREFIX_TAG + "TAGS... "
             + PREFIX_GROUPINDEX + "\n"
             + "Example: " + PersonCommand.COMMAND_WORD
-            + " John Doe " + COMMAND_WORD + " "
+            + " John Doe /" + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TAG + "student,year1"

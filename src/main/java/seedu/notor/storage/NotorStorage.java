@@ -44,5 +44,4 @@ public interface NotorStorage {
      * @see #saveNotor(ReadOnlyNotor)
      */
     void saveNotor(ReadOnlyNotor notor, Path filePath) throws IOException;
-
 }

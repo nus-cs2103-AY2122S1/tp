@@ -16,13 +16,16 @@ public class PersonRemoveGroupCommand extends PersonCommand {
     public static final String COMMAND_WORD = "remove";
     public static final List<String> COMMAND_WORDS = Arrays.asList("remove", "r");
 
+    private static final String COMMAND_DESCRIPTION = ": Removes a person from a group. \n";
+
     // TODO: Change this to fit correct command structure
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person from a group"
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
+            + COMMAND_DESCRIPTION
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_GROUPNAME + "GROUP\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + "Example: " + PersonCommand.COMMAND_WORD
+            + " 1 /" + COMMAND_WORD + " "
             + PREFIX_GROUPNAME + "Team";
 
     protected String groupName;
