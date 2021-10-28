@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User executes ""findStudent"" command;
+
+if () then ([valid command])
+    :Parse the ""findStudent""
+    command and arguments;
+
+    if () then ([contains special characters])
+
+    : Parser removes special characters;
+
+    else ([else])
+    endif
+
+    :Search for all students based
+    on the specified argument;
+
+    :Displays all matching students to user;
+
+    :Show success status message;
+
+else ([else])
+
+    :Show error message to user;
+
+endif
+
+stop
+
+@enduml

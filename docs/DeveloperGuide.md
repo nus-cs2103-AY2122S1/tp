@@ -219,6 +219,15 @@ The find command can be executed for two main features in tApp: students and gro
 Given below is an example usage scenario and how the find mechanism behaves at each step.
 In this example, we explore the `findStudent` command.
 
+The following diagram shows the workflow of a typical FindStudent command.
+
+![Activity Diagram of Find Student](images/FindStudentActivityDiagram.png)
+
+When the user executes the `findStudent` command, the user input is parsed to separate the command and its arguments. Special characters are removed during this parsing step. Students are then searched based on the specified arguments.
+During the execution of `FindStudentCommand`, the student list will be filtered based on the predicate created from the arguments.
+
+The following steps describes the execution of the FindStudent command, assuming no errors are encountered.
+
 1. The user executes a `findStudent alex ber` command to find students whose names contain the name word `alex` or `ber`.
 1. `LogicManager` handles this command by calling its `execute(String)` method.
 1. `LogicManager` then calls and passes this command to `AddressBookParser` to parse the command through its `parseCommand(String)` method.
@@ -230,7 +239,7 @@ In this example, we explore the `findStudent` command.
 1. In this case, the filtered student list should return the students: Alex and Bernice as in the sample data.
 1. A new `CommandResult` is returned, switching the current display to the filtered student list. The result is returned to `LogicManager`.
 
-The above process is shown in the following sequence diagram:
+The above process is further summarised in the following sequence diagram:
 
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
