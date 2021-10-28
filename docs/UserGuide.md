@@ -379,6 +379,7 @@ Examples:
 :bulb: Persons and organisations
 * Use organisations to help you link contact together!
 * An organisation can have any number of persons within it (including 0). However, an organisation must have a name and email.
+* Remember to add the member persons separately before adding them.
 </div>
 
 ##### Deleting an organisation: `deleteorg`
@@ -391,8 +392,8 @@ Examples:
 > Deletes the 1st organisation from the organisation list.
 
 <div markdown="block" class="alert alert-info">
-:exclamation: Be **careful!**
-* Remember to add the member persons separately before adding them. 
+:bulb: Insert tips
+* `INSERT HERE` 
 </div>
 
 ##### Adding person to an organisation: `addtoorg`
