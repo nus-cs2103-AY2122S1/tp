@@ -1,24 +1,48 @@
 package seedu.address.model.organisation;
 
+
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 public class Organisation {
 
     private final Name name;
+    private final Email email;
     private final UniquePersonList persons;
 
     /**
      * Constructor for Organisation.
      * @param n name of organisation
      */
-    public Organisation(String n) {
-        name = new Name(n);
+    public Organisation(Name n, Email e) {
+        name = n;
+        email = e;
         persons = new UniquePersonList();
+    }
+
+    public void addPerson(Person person) {
+        persons.add(person);
+    }
+
+    public void removePerson(Person person) {
+        persons.remove(person);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public boolean containsPerson(Person person) {
+        return persons.contains(person);
+    }
+    public Email getEmail() {
+        return email;
+    }
+
+    public UniquePersonList getPersons() {
+        return persons;
     }
 
     /**
@@ -50,5 +74,14 @@ public class Organisation {
 
         Organisation otherOrganisation = (Organisation) other;
         return otherOrganisation.getName().equals(getName());
+    }
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("; Email: ")
+                .append(getEmail());
+        persons.forEach(person -> builder.append(person.toString()));
+        return builder.toString();
     }
 }

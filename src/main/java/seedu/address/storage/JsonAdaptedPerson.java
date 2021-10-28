@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.interaction.Interaction;
+import seedu.address.model.person.Compatability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String faculty;
     private final String major;
+    private final Integer compatability;
 
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
     private final List<JsonAdaptedLanguage> languages = new ArrayList<>();
@@ -48,6 +50,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
                              @JsonProperty("faculty") String faculty,
                              @JsonProperty("major") String major,
+                             @JsonProperty("compatability") Integer compatability,
                              @JsonProperty("skills") List<JsonAdaptedSkill> skills,
                              @JsonProperty("languages") List<JsonAdaptedLanguage> languages,
                              @JsonProperty("frameworks") List<JsonAdaptedFramework> frameworks,
@@ -58,6 +61,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.faculty = faculty;
         this.major = major;
+        this.compatability = compatability;
 
         if (skills != null) {
             this.skills.addAll(skills);
@@ -92,6 +96,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         faculty = source.getFaculty().value;
         major = source.getMajor().value;
+        compatability = source.getCompatability().compatabilityRating.orElse(null);
 
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
@@ -144,7 +149,6 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        System.out.println(interactions);
         final List<Interaction> personInteractions = new ArrayList<>();
         for (JsonAdaptedInteractions interaction : interactions) {
             personInteractions.add(interaction.toModelType());
@@ -186,7 +190,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
         }
         final Major modelMajor = new Major(major);
-
+        final Compatability modelCompatability = new Compatability(compatability);
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
         final Set<Language> modelLanguages = new HashSet<>(personLanguages);
         final Set<Framework> modelFrameworks = new HashSet<>(personFrameworks);
@@ -195,7 +199,8 @@ class JsonAdaptedPerson {
         final Set<Interaction> modelInteractions = new HashSet<>(personInteractions);
 
         return new Person(modelName, modelEmail, modelFaculty, modelMajor,
-                modelSkills, modelLanguages, modelFrameworks, modelTags, modelRemarks, modelInteractions);
+                modelCompatability, modelSkills, modelLanguages, modelFrameworks,
+                modelTags, modelRemarks, modelInteractions);
     }
 
 }

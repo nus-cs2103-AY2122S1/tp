@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
@@ -17,12 +18,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Compatability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -49,6 +52,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_FACULTY + "FACULTY] "
             + "[" + PREFIX_MAJOR + "MAJOR] "
+            + "[" + PREFIX_COMPATABILITY + "COMPATABILITY] "
             + "[" + PREFIX_SKILL + "SKILL] "
             + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
@@ -80,12 +84,18 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastViewedPerson = model.getViewedPerson();
+        boolean updateViewed = false;
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        if (!lastViewedPerson.isEmpty() && lastViewedPerson.get(0).equals(personToEdit)) {
+            updateViewed = true;
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -94,6 +104,16 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        if (updateViewed) {
+            model.updateViewedPerson(new Predicate<Person>() {
+                @Override
+                public boolean test(Person person) {
+                    return person.equals(editedPerson);
+                }
+            });
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -103,11 +123,12 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
-
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
+        Compatability updatedCompatability = editPersonDescriptor.getCompatability()
+                                                .orElse(personToEdit.getCompatability());
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
         Set<Language> updatedLanguages = editPersonDescriptor.getLanguages().orElse(personToEdit.getLanguages());
         Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
@@ -115,8 +136,8 @@ public class EditCommand extends Command {
         Set<Remark> updatedRemarks = editPersonDescriptor.getRemarks().orElse(personToEdit.getRemarks());
 
         return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags,
-                updatedRemarks, personToEdit.getInteractions());
+                updatedCompatability, updatedSkills, updatedLanguages, updatedFrameworks,
+                updatedTags, updatedRemarks, personToEdit.getInteractions());
     }
 
     @Override
@@ -146,6 +167,7 @@ public class EditCommand extends Command {
         private Email email;
         private Faculty faculty;
         private Major major;
+        private Compatability compatability;
         private Set<Skill> skills;
         private Set<Language> languages;
         private Set<Framework> frameworks;
@@ -163,6 +185,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setFaculty(toCopy.faculty);
             setMajor(toCopy.major);
+            setCompatability(toCopy.compatability);
             setSkills(toCopy.skills);
             setLanguages(toCopy.languages);
             setFrameworks(toCopy.frameworks);
@@ -174,8 +197,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, faculty, major, skills,
-                    languages, frameworks, tags, remarks);
+            return CollectionUtil.isAnyNonNull(name, email, faculty, major, compatability,
+                                            skills, languages, frameworks, tags, remarks);
         }
 
         public void setName(Name name) {
@@ -210,6 +233,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(major);
         }
 
+        public void setCompatability(Compatability compatability) {
+            this.compatability = compatability;
+        }
+
+        public Optional<Compatability> getCompatability() {
+            return Optional.ofNullable(compatability);
+        }
+
         /**
          * Sets {@code skill} to this object's {@code skills}.
          * A defensive copy of {@code skills} is used internally.
@@ -224,7 +255,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code skills} is null.
          */
         public Optional<Set<Skill>> getSkills() {
-            return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
+            return (skills != null) ? Optional.ofNullable(Collections.unmodifiableSet(skills)) : Optional.empty();
         }
 
         /**
@@ -241,7 +272,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code languages} is null.
          */
         public Optional<Set<Language>> getLanguages() {
-            return (languages != null) ? Optional.of(Collections.unmodifiableSet(languages)) : Optional.empty();
+            return (languages != null) ? Optional.ofNullable(Collections.unmodifiableSet(languages)) : Optional.empty();
         }
 
         /**
@@ -258,7 +289,9 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code frameworks} is null.
          */
         public Optional<Set<Framework>> getFrameworks() {
-            return (frameworks != null) ? Optional.of(Collections.unmodifiableSet(frameworks)) : Optional.empty();
+            return (frameworks != null)
+                        ? Optional.ofNullable(Collections.unmodifiableSet(frameworks))
+                        : Optional.empty();
         }
 
         /**
@@ -275,7 +308,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null) ? Optional.ofNullable(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         /**
@@ -292,7 +325,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Remark>> getRemarks() {
-            return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
+            return (remarks != null) ? Optional.ofNullable(Collections.unmodifiableSet(remarks)) : Optional.empty();
         }
 
         @Override
@@ -314,6 +347,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getFaculty().equals(e.getFaculty())
                     && getMajor().equals(e.getMajor())
+                    && getCompatability().equals(e.getCompatability())
                     && getSkills().equals(e.getSkills())
                     && getLanguages().equals(e.getLanguages())
                     && getFrameworks().equals(e.getFrameworks())

@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -24,6 +25,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interaction.Interaction;
+import seedu.address.model.person.Compatability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -81,12 +83,17 @@ public class RemoveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastViewedPerson = model.getViewedPerson();
+        boolean updateViewed = false;
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToRemoveFrom = lastShownList.get(index.getZeroBased());
+        if (!lastViewedPerson.isEmpty() && lastViewedPerson.get(0).equals(personToRemoveFrom)) {
+            updateViewed = true;
+        }
         Person personRemovedFrom = createRemovePerson(personToRemoveFrom, removePersonDescriptor);
 
         if (!personToRemoveFrom.isSamePerson(personRemovedFrom) && model.hasPerson(personRemovedFrom)) {
@@ -95,6 +102,17 @@ public class RemoveCommand extends Command {
 
         model.setPerson(personToRemoveFrom, personRemovedFrom);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+
+        if (updateViewed) {
+            model.updateViewedPerson(new Predicate<Person>() {
+                @Override
+                public boolean test(Person person) {
+                    return person.equals(personRemovedFrom);
+                }
+            });
+        }
+
         return new CommandResult(String.format(MESSAGE_REMOVE_FIELD_SUCCESS, personRemovedFrom));
     }
 
@@ -106,6 +124,7 @@ public class RemoveCommand extends Command {
         Email previousEmail = personToRemoveFrom.getEmail();
         Faculty previousFaculty = personToRemoveFrom.getFaculty();
         Major previousMajor = personToRemoveFrom.getMajor();
+        Compatability previousCompatability = personToRemoveFrom.getCompatability();
 
         //Convert Set of Skills to an alphabetically sorted Array
         Set<Index> indexesOfSkillsToRemove = removePersonDescriptor
@@ -145,7 +164,8 @@ public class RemoveCommand extends Command {
                 previousInteractions);
 
         return new Person(previousName, previousEmail, previousFaculty, previousMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags, updatedRemarks, updatedInteractions);
+                previousCompatability, updatedSkills, updatedLanguages,
+                updatedFrameworks, updatedTags, updatedRemarks, updatedInteractions);
     }
 
     /**

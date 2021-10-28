@@ -20,6 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.organisation.Organisation;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -112,6 +114,20 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void addOrganisation(Organisation organisation) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addToOrganisation(Person person, Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Organisation getOrganisationByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
@@ -127,9 +143,23 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public boolean hasOrganisation(Organisation organisation) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteOrganisation(Organisation organisation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteFromOrganisation(Person person, Organisation organisation) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -142,7 +172,10 @@ public class AddCommandTest {
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public ObservableList<Organisation> getFilteredOrganisationList() {
+            throw new AssertionError("This method should not be called");
+        }
 
         @Override
         public void sortPersonList() {
@@ -152,6 +185,10 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateFilteredOrganisationList(Predicate<Organisation> predicate) {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override

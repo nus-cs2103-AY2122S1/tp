@@ -81,6 +81,11 @@ public class PersonViewCard extends UiPart<Region> {
     @FXML
     private FlowPane interactions;
 
+    @FXML
+    private Label compatibilityLabel;
+    @FXML
+    private Label compatibilityView;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -104,6 +109,13 @@ public class PersonViewCard extends UiPart<Region> {
         tagsLabel.setText("Tags");
         remarksLabel.setText("Remarks");
         interactionsLabel.setText("Interactions");
+
+        compatibilityLabel.setText("Compatibility");
+        if (person.getCompatability().compatabilityRating.isEmpty()) {
+            compatibilityView.setText("-");
+        } else {
+            compatibilityView.setText(person.getCompatability().compatabilityRating.get() + "/100");
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
