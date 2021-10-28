@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.organisation.Organisation;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons;
     private FilteredList<Person> viewedPerson;
+    private FilteredList<Organisation> filteredOrganisations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         viewedPerson = new FilteredList<>(this.addressBook.getPersonList());
+        filteredOrganisations = new FilteredList<>(this.addressBook.getOrganisationList());
         resetViewedPerson();
     }
 
@@ -96,6 +99,11 @@ public class ModelManager implements Model {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
+    @Override
+    public boolean hasOrganisation(Organisation organisation) {
+        requireNonNull(organisation);
+        return addressBook.hasOrganisation(organisation);
+    }
 
     @Override
     public void deletePerson(Person target) {
@@ -106,6 +114,11 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+    @Override
+    public void addOrganisation(Organisation organisation) {
+        addressBook.addOrganisation(organisation);
+        updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
     }
 
     @Override
@@ -123,6 +136,10 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+    @Override
+    public ObservableList<Organisation> getFilteredOrganisationList() {
+        return filteredOrganisations;
     }
 
     @Override
@@ -144,6 +161,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+    @Override
+    public void updateFilteredOrganisationList(Predicate<Organisation> predicate) {
+        requireNonNull(predicate);
+        filteredOrganisations.setPredicate(predicate);
     }
 
     @Override
