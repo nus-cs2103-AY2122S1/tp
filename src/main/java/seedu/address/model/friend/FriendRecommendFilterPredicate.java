@@ -17,7 +17,7 @@ public class FriendRecommendFilterPredicate implements Predicate<Friend> {
     private final Game game;
 
     /**
-     * Constructs an instance of predicate which ests if friend's schedule is free
+     * Constructs an instance of predicate which checks if friend's schedule is free
      * during the given {@code hour} and {@code day} and has a {@code GameFriendLink} with
      * the provided {@code game}.
      *
@@ -35,5 +35,19 @@ public class FriendRecommendFilterPredicate implements Predicate<Friend> {
     public boolean test(Friend friend) {
         return new FriendGameFriendLinksContainsGamePredicate(game).test(friend)
                 && new FriendScheduleFreePredicate(hour, day).test(friend);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (!(other instanceof FriendRecommendFilterPredicate)) {
+            return false;
+        } else {
+            FriendRecommendFilterPredicate otherPredicate = (FriendRecommendFilterPredicate) other;
+            return otherPredicate.game.equals(game)
+                && otherPredicate.day.equals(day)
+                && otherPredicate.hour.equals(hour);
+        }
     }
 }

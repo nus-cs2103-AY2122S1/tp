@@ -174,6 +174,8 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredAndSortedFriendsList(Predicate<Friend> predicate) {
         requireNonNull(predicate);
+        // important to set the comparator to null first.
+        filteredAndSortedFriends.setComparator(null);
         filteredFriends.setPredicate(predicate);
     }
 

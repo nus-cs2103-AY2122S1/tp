@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.TypicalGameFriendLinks.ALICE_CSGO_SKILL_VALUE_EIGHT_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.BOB_CSGO_SKILL_VALUE_ZERO_LINK;
+import static seedu.address.testutil.TypicalGames.MINECRAFT;
+import static seedu.address.testutil.TypicalGames.VALORANT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +15,11 @@ import java.util.List;
 
 import seedu.address.model.FriendsList;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.Schedule;
+import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
+import seedu.address.model.gamefriendlink.UserName;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -51,6 +57,22 @@ public class TypicalFriends {
             .withFriendId(VALID_FRIEND_ID_AMY).build();
     public static final Friend BOB = new FriendBuilder().withFriendName(VALID_NAME_BOB)
             .withFriendId(VALID_FRIEND_ID_BOB).build();
+
+    public static final FriendBuilder SKILL_ZERO_MINECRAFT_FRIEND_BUILDER = new FriendBuilder().withFriendId("zero")
+        .withGameFriendLinks(new GameFriendLink(MINECRAFT.getGameId(), new FriendId("zero"),
+            new UserName("zero"), new SkillValue(1)));
+    public static final FriendBuilder SKILL_THREE_MINECRAFT_FRIEND_BUILDER = new FriendBuilder().withFriendId("three")
+        .withGameFriendLinks(new GameFriendLink(MINECRAFT.getGameId(), new FriendId("three"),
+            new UserName("three"), new SkillValue(3)));
+    public static final FriendBuilder SKILL_SIX_MINECRAFT_FRIEND_BUILDER = new FriendBuilder().withFriendId("six")
+        .withGameFriendLinks(new GameFriendLink(MINECRAFT.getGameId(), new FriendId("six"),
+            new UserName("six"), new SkillValue(6)));
+    public static final FriendBuilder SKILL_TWO_VALORANT_FRIEND_BUILDER = new FriendBuilder().withFriendId("vtwo")
+        .withGameFriendLinks(new GameFriendLink(VALORANT.getGameId(), new FriendId("vtwo"),
+            new UserName("vtwo"), new SkillValue(2)));
+    public static final FriendBuilder SKILL_TEN_VALORANT_FRIEND_BUILDER = new FriendBuilder().withFriendId("vten")
+        .withGameFriendLinks(new GameFriendLink(VALORANT.getGameId(), new FriendId("vten"),
+            new UserName("vten"), new SkillValue(10)));
 
     private TypicalFriends() {
     } // prevents instantiation

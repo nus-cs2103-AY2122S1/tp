@@ -139,9 +139,8 @@ public class Friend {
         Friend otherFriend = (Friend) other;
         return otherFriend.getFriendId().equals(getFriendId())
                 && otherFriend.getGameFriendLinks().equals(getGameFriendLinks())
-                && otherFriend.getFriendName().equals(getFriendName());
-        // TODO: marcus - debug schedule command when adding this equality check
-//                && otherFriend.getSchedule().equals(getSchedule());
+                && otherFriend.getFriendName().equals(getFriendName())
+                && otherFriend.getSchedule().equals(getSchedule());
     }
 
     @Override

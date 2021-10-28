@@ -38,11 +38,11 @@ public class SampleDataUtil {
                     sampleGames[5], sampleGames[4]),
             createSampleFriend("ChickenTender", "Charlotte Oliveiro", sampleSchedules[2],
                     sampleGames[6], sampleGames[1]),
-            createSampleFriend("Davidz", "David Li", sampleSchedules[2],
+            createSampleFriend("Davidz", "David Li", sampleSchedules[3],
                     sampleGames[7]),
-            createSampleFriend("II3", "Irfan Ibrahim", sampleSchedules[1],
+            createSampleFriend("II3", "Irfan Ibrahim", sampleSchedules[4],
                     sampleGames[0]),
-            createSampleFriend("RoyJoy", "Roy Balakrishnan", sampleSchedules[0],
+            createSampleFriend("RoyJoy", "Roy Balakrishnan", sampleSchedules[5],
                     sampleGames[1], sampleGames[0])
         };
     }
@@ -81,14 +81,31 @@ public class SampleDataUtil {
             scheduleThree.setScheduleDay(5, "0800", "2200", true);
             scheduleThree.setScheduleDay(6, "0900", "2200", true);
 
+            Schedule scheduleFour = new Schedule();
+            scheduleThree.setScheduleDay(5, "0800", "2200", true);
+            scheduleThree.setScheduleDay(6, "0900", "2200", true);
+
+            Schedule scheduleFive = new Schedule();
+            scheduleThree.setScheduleDay(5, "0800", "2200", true);
+            scheduleThree.setScheduleDay(6, "0900", "2200", true);
+
+            Schedule scheduleSix = new Schedule();
+            scheduleThree.setScheduleDay(5, "0800", "2200", true);
+            scheduleThree.setScheduleDay(6, "0900", "2200", true);
             return new Schedule[]{
                 scheduleOne,
                 scheduleTwo,
-                scheduleThree
+                scheduleThree,
+                scheduleFour,
+                scheduleFive,
+                scheduleSix
             };
 
         } catch (InvalidDayTimeException e) {
             return new Schedule[]{
+                new Schedule(),
+                new Schedule(),
+                new Schedule(),
                 new Schedule(),
                 new Schedule(),
                 new Schedule()

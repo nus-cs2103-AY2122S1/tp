@@ -11,6 +11,8 @@ import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendRecommendFilterPredicate;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.time.HourOfDay;
 
 /**
@@ -24,8 +26,8 @@ public class RecommendCommand extends Command {
             + "Parameters: -g GAME_ID -t HOUR DAY\n"
             + "Example: recommend -g Valorant -t 10 6";
     public static final String MESSAGE_GAME_NOT_FOUND = "Game with provided GAME_ID not found in games list.";
-    public static final String MESSAGE_SUCCESS = "Displaying friend recommendations for GAME_ID: %1$s available"
-            + " weekly on %2$s, %3$s";
+    public static final String MESSAGE_SUCCESS = "Displaying friend recommendations sorted by highest skill for "
+        + "GAME_ID: %1$s available weekly on %2$s, %3$s";
 
     private final GameId gameFilter;
     private final HourOfDay hourFilter;
@@ -55,14 +57,22 @@ public class RecommendCommand extends Command {
         FriendRecommendFilterPredicate recommendFilterPredicate =
                 new FriendRecommendFilterPredicate(hourFilter, dayFilter, model.getGame(gameFilter));
 
-        Comparator<Friend> friendComparator = new Comparator<Friend>() {
-            @Override
-            public int compare(Friend friend, Friend t1) {
-                if (friend.getFriendId().toString().length() < t1.getFriendId().toString().length()) {
-                    return -1;
-                } else {
-                    return 1;
-                }
+        Comparator<Friend> friendComparator = (friend, other) -> {
+            GameFriendLink friendGfl = friend.getGameFriendLinks().get(gameFilter);
+            GameFriendLink otherFriendGfl = other.getGameFriendLinks().get(gameFilter);
+
+            requireNonNull(friendGfl);
+            requireNonNull(otherFriendGfl);
+
+            SkillValue friendSkillValue = friendGfl.getSkillValue();
+            SkillValue otherFriendSkillValue = otherFriendGfl.getSkillValue();
+
+            if (friendSkillValue.getSkillVal() > otherFriendSkillValue.getSkillVal()) {
+                return -1;
+            } else if (friendSkillValue.getSkillVal().equals(otherFriendSkillValue.getSkillVal())) {
+                return 0;
+            } else {
+                return 1;
             }
         };
 
