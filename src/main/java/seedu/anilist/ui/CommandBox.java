@@ -15,6 +15,8 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    public static final String PROMPT_TEXT_COMMAND_BOX_ENABLED = "Enter command here...";
+    public static final String PROMPT_TEXT_COMMAND_BOX_DISABLED = "Command box disabled — viewing user statistics";
 
     private final CommandExecutor commandExecutor;
     private final AnimeListPanel animeListPanel;
@@ -57,6 +59,7 @@ public class CommandBox extends UiPart<Region> {
      */
     public void disableCommandTextField() {
         commandTextField.setDisable(true);
+        commandTextField.setPromptText(PROMPT_TEXT_COMMAND_BOX_DISABLED);
     }
 
     /**
@@ -64,6 +67,7 @@ public class CommandBox extends UiPart<Region> {
      */
     public void enableCommandTextField() {
         commandTextField.setDisable(false);
+        commandTextField.setPromptText(PROMPT_TEXT_COMMAND_BOX_ENABLED);
     }
 
     /**
