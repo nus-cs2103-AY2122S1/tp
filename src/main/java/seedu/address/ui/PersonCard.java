@@ -71,6 +71,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label acadLevel;
     @FXML
+    private Label outstandingFees;
+    @FXML
     private Label remarkPlaceholder;
     @FXML
     private Label remark;
@@ -94,6 +96,7 @@ public class PersonCard extends UiPart<Region> {
         setSchoolField(person.getSchool());
         setAcadStreamField(person.getAcadStream());
         setAcadLevelField(person.getAcadLevel());
+        outstandingFees.setText(person.getOutstandingFees().toString());
         setRemarkField(person.getRemark());
         setTagsField(person.getTags());
     }
