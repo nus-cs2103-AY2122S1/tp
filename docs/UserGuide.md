@@ -7,6 +7,8 @@ title: User Guide
 
 ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management tasks done faster than traditional GUI apps.
 
+---
+
 ## Table of Contents
 
 [Quick Start](#quick-start) <br>
@@ -289,6 +291,8 @@ Format: `sort [-r]`
 - ContactSH guarantees it saves up to the last 25 `commands` you sent, no matter if they are valid or invalid. You can browse through the previous input using the up and down arrow key on your keyboard when typing in the command box.
 
 - ContactSH may save up to 50 newest command. However, once the cache is full, half (25) of the oldest `command` will be deleted. Hence, the oldest 25 is not guaranteed to be saved.
+
+- Cache will be deleted once you end the session (the application is closed)
 
 ### Saving the data
 
