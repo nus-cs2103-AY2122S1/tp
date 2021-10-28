@@ -296,12 +296,19 @@ Examples:
 * `interaction 1 int/We talked. on/1990-01-20` Adds an interaction with description 'We talked' and date '1990-01-20' to the Person at index 1 of the list.
 
 ##### Viewing a specific contact in detail : `view`
-Get a detailed view of specific contact(s).
-Format: `view n/NAME`
+Get a detailed view of a specific contact by index.
+
+Details of specific contact shown on right side of screen.
+Index is based on current list displayed on left side of screen.
+
+Format: `view INDEX`
+
 Examples:
 
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+*  `view 1` Displays the details of contact indexed at 1 in the current list.
+*  `view 2` Displays the details of contact indexed at 2 in the current list.
+
+![result for 'view 2'](images/viewscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :bulb: Insert tips
@@ -316,7 +323,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partial matches will work e.g. `Han` will match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
