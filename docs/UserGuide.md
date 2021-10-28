@@ -589,6 +589,37 @@ This also allows you to keep track of the number of completed appointments with 
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
 
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+If you have accidentally marked an appointment as completed, fret not! You can always undo it! 
+<br>Refer to [unmarkappointment](#undo-marking-of-completed-appointment) for more information.
+</div>
+
+
+<br>
+
+##### Undo marking of completed appointment: `ua`
+
+You can unmark the appointment [appointment](#appointments) with your client if you have accidentally marked it as completed.
+This also allows you to undo your mistakes by decreasing your appointment count by 1.
+
+**Format**: `ua INDEX`
+* Decreases the completed appointment count with the client at the specified `INDEX` if the appointment does not exist.
+* The current appointment count will have to be greater than 0!
+
+**Parameter**:
+* [`INDEX`](#index)
+
+**Examples**:
+
+Before undo:
+![FAST state before `ua 1`](images/UnmarkAppointmentBefore.png)
+
+* `ua 1` decreases the completed appointment counter of the first client by 1.
+
+![result for `ua 1`](images/UnmarkAppointmentAfter.png)
+* `find Matthew` followed by `ua 3` decreases the completed appointment counter of the third client in the result of
+  the `find` command by 1.
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This CANNOT be undone!
 </div>
@@ -862,6 +893,7 @@ Action | Format, Examples
 **Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br>
 **Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`<br>
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
+**Undo Marked Appointment** | `ua INDEX` <br> e.g. `ua 1`
 
 ### Tag Management
 
