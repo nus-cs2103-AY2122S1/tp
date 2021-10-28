@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.DONUT;
@@ -53,10 +49,9 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
         expectedModel.deleteItem(BAGEL);
 
-        String expectedMessage = String.format(
-                seedu.address.logic.commands.DeleteCommand.MESSAGE_SUCCESS, BAGEL);
+        String expectedMessage = String.format(seedu.address.logic.commands.DeleteCommand.MESSAGE_SUCCESS, BAGEL);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -84,6 +79,34 @@ public class DeleteCommandTest {
         String expectedMessage = DeleteCommand.MESSAGE_ITEM_NOT_FOUND;
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_idExistNonexistentName_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName("boo").withId(VALID_ID_BAGEL).build();
+
+        DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
+        String expectedMessage = DeleteCommand.MESSAGE_NAME_NOT_FOUND;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
+    public void execute_NameExistNonexistentId_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId("182018").build();
+
+        DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
+        String expectedMessage = DeleteCommand.MESSAGE_ID_NOT_FOUND;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
     }
 
     @Test
