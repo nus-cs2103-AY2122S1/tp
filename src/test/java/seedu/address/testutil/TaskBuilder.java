@@ -82,8 +82,14 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Build a Task based on the fields specified.
+     * @return The Task object built.
+     */
     public Task build() {
-        return new Task(moduleName, taskId, taskName, taskDeadline);
+        return this.isComplete
+                ? new Task(moduleName, taskId, taskName, taskDeadline, isComplete)
+                : new Task(moduleName, taskId, taskName, taskDeadline);
     }
 
 }

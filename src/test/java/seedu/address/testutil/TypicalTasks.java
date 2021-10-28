@@ -26,7 +26,8 @@ public class TypicalTasks {
     public static final Task TASK2 = new TaskBuilder().withModule(MODULE_NAME_1).withId(VALID_TASK_ID_2)
             .withName(VALID_TASK_NAME_2).withDeadline(VALID_TASK_DEADLINE_2).build();
     public static final Task TASK3 = new TaskBuilder().withModule(MODULE_NAME_0).withId(VALID_TASK_ID_3)
-            .withName(VALID_TASK_NAME_3).withDeadline(VALID_TASK_DEADLINE_3).withStatus(true).build();
+            .withName(VALID_TASK_NAME_3).withDeadline(VALID_TASK_DEADLINE_3)
+            .withStatus(true).build();
 
     /**
      * Returns a list of tasks assigned to the {@code moduleName} specified

@@ -37,13 +37,14 @@ public class CommandTestUtil {
     public static final String VALID_TASK_NAME_1 = "Assignment1";
     public static final String VALID_TASK_NAME_2 = "Assignment2";
     public static final String VALID_TASK_NAME_3 = "Assignment3";
-    public static final String VALID_TASK_NAME_4 = "Assignment4";
     public static final String VALID_TASK_DEADLINE_1 = "today";
     public static final String VALID_TASK_DEADLINE_2 = "30-10-2021";
     public static final String VALID_TASK_DEADLINE_3 = "2021-10-1";
     public static final String VALID_TASK_ID_1 = "T1";
     public static final String VALID_TASK_ID_2 = "T010";
     public static final String VALID_TASK_ID_3 = "T333";
+
+    public static final String INVALID_TASK_DEADLINE_1 = "!@#$";
 
     public static final String MODULE_NAME_DESC_0 = " " + PREFIX_MODULE_NAME + MODULE_NAME_0;
     public static final String MODULE_NAME_DESC_1 = " " + PREFIX_MODULE_NAME + MODULE_NAME_1;
