@@ -79,4 +79,9 @@ public class ProfileUrl {
     public String getUrlString() {
         return this.url;
     }
+
+    public ProfileUrl getCopiedProfileUrl() {
+        return new ProfileUrl(name.getCopiedName(), phone.getCopiedPhone(), email.getCopiedEmail(),
+                address.getCopiedAddress(), application.getCopiedApplication());
+    }
 }
