@@ -16,8 +16,8 @@ import seedu.address.model.module.member.Member;
 public class MfindCommandParser implements Parser<MfindCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MfindCommand
+     * and returns a MfindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MfindCommand parse(String args) throws ParseException {
@@ -31,5 +31,4 @@ public class MfindCommandParser implements Parser<MfindCommand> {
 
         return new MfindCommand(new NameContainsKeywordsPredicate<Member>(Arrays.asList(nameKeywords)));
     }
-
 }
