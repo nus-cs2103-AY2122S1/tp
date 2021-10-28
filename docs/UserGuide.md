@@ -457,7 +457,7 @@ In `import` command, `-g`, `-a`, `-t` are used differently from other commands. 
 Import command description.
 </div>
 
-
+<br>
 
 Below is a table of the restrictions of data types used in our application.
 
@@ -467,9 +467,10 @@ Name | Name can be any alphanumeric words.
 NUSNET ID | ID has to start with the letter E followed by 7 numerical numbers. 
 Group | Group name can be any alphanumeric words.
 Assessment | Assessment name can be any alphanumeric words.
-Score | Score is in percentage up to 2 decimal places. 
+Score | Score is in percentage, recorded up to 2 decimal places. 
 Tag | Tag can be a single alphanumeric word.
 
+<br>
 
 Below is a glossary of words used in out document.
 
