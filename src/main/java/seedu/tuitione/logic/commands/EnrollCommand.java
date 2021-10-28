@@ -3,6 +3,7 @@ package seedu.tuitione.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
 
 import java.util.List;
 
@@ -34,8 +35,7 @@ public class EnrollCommand extends Command {
             + "and cannot be enrolled in one more. "
             + "Please unenroll the student from a lesson before enrolling them in another.";
     public static final String MESSAGE_MORE_THAN_MAX_STUDENTS = "⚠\tAlert:\n\n"
-            + "%1$s currently has %2$s students enrolled, "
-            + "and cannot enroll anymore students.";
+            + EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
 
     private final Index indexStudent;
     private final Index indexLesson;
@@ -67,23 +67,24 @@ public class EnrollCommand extends Command {
         }
         Lesson lesson = lessonList.get(indexLesson.getZeroBased());
 
+        // individual checks
         if (lesson.containsStudent(studentToEnroll)) {
             throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON, studentToEnroll.getName(), lesson));
         }
-        if (!lesson.isAbleToEnroll(studentToEnroll)) {
-            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
-        }
-
         if (!studentToEnroll.isAbleToEnrollForMoreLessons()) {
             throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_LESSONS,
                     studentToEnroll.getName(),
                     Student.MAX_LESSON_SIZE));
         }
-
-        if (!lesson.isAbleToEnrollForMoreStudents()) {
+        if (!lesson.isAbleToEnrollMoreStudents()) {
             throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_STUDENTS,
                     lesson.getLessonCode(),
                     Lesson.MAX_STUDENT_SIZE));
+        }
+
+        // final overall check
+        if (!lesson.isAbleToEnroll(studentToEnroll)) {
+            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
         }
 
         lesson.enrollStudent(studentToEnroll);

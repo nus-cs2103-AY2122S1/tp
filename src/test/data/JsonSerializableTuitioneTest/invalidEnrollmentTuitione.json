@@ -1,0 +1,18 @@
+{
+  "students" : [ {
+    "name" : "Leena",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "grade" : "P2",
+    "remarks" : [ "friends" ],
+    "lessonCodes" : [ "Science-P3-Wed-1230" ]
+  } ],
+  "lessons": [ {
+    "subject" : "Science",
+    "grade" : "P3",
+    "startTime" : "1230",
+    "day" : "Wed",
+    "price" : 10.5
+  } ]
+}
