@@ -2,11 +2,14 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -176,11 +179,38 @@ public class MainWindow extends UiPart<Stage> {
             if (commandBox.getCommandTextField().isFocused()) {
                 return; // Don't filter if already in focus
             }
-            if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
+            if (isTextInputKeyCode(event.getCode())) {
                 commandBox.getCommandTextField().requestFocus();
                 commandBox.getCommandTextField().selectEnd();
             }
         });
+    }
+
+    /**
+     * Determines if keycode is a punctuation key base on optionally fixed virtual key codes
+     *
+     * @param keyCode The {@code KeyCode} to check
+     * @return True if it's a punctuation
+     */
+    private boolean isPunctuationKey(KeyCode keyCode) {
+        KeyCode[] punctuationKeyCodes = {
+                KeyCode.BACK_QUOTE, KeyCode.MINUS, KeyCode.EQUALS, KeyCode.SLASH, // first row
+                KeyCode.OPEN_BRACKET, KeyCode.CLOSE_BRACKET, KeyCode.BACK_SLASH, // second row
+                KeyCode.SEMICOLON, KeyCode.QUOTE, KeyCode.COMMA, KeyCode.PERIOD, KeyCode.SLASH, // third row
+                KeyCode.DIVIDE, KeyCode.MULTIPLY, KeyCode.SUBTRACT, KeyCode.ADD, KeyCode.DECIMAL // Num pad Keys
+        };
+        for (KeyCode code : punctuationKeyCodes) {
+            if (code.equals(keyCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isTextInputKeyCode(KeyCode keyCode) {
+        return keyCode.isLetterKey() || keyCode.isDigitKey()
+                || keyCode.isWhitespaceKey() || keyCode.equals(KeyCode.BACK_SPACE)
+                || isPunctuationKey(keyCode);
     }
 
     private void initListeners() {
