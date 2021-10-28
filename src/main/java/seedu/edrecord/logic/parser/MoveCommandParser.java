@@ -6,6 +6,9 @@ import static seedu.edrecord.logic.parser.AddCommandParser.arePrefixesPresent;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_MODULE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.logic.commands.MoveCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
@@ -34,15 +37,18 @@ public class MoveCommandParser implements Parser<MoveCommand> {
 
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
-        Index index;
+        List<Index> indexes = new ArrayList<>();
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            String[] preambles = argMultimap.getPreamble().split(" ");
+            for (String i : preambles) {
+                indexes.add(ParserUtil.parseIndex(i));
+            }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MoveCommand.MESSAGE_USAGE), pe);
         }
 
-        return new MoveCommand(index, module, group);
+        return new MoveCommand(indexes, module, group);
     }
 
 }
