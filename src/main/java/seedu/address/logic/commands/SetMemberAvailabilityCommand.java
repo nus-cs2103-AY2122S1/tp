@@ -55,7 +55,8 @@ public class SetMemberAvailabilityCommand extends Command {
 
             Person personToEdit = lastShownList.get(i.getZeroBased());
             Person editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTags());
+                    personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTodayAttendance(),
+                    personToEdit.getTotalAttendance(), personToEdit.getTags());
 
             model.setPerson(personToEdit, editedPerson);
             names.append(lastShownList.get(i.getZeroBased()).getName());

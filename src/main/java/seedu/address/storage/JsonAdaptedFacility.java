@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +12,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
+import seedu.address.model.person.Person;
 
 /**
  * Jackson-friendly version of {@link Facility}.
@@ -21,17 +25,20 @@ public class JsonAdaptedFacility {
     private final String location;
     private final String time;
     private final String capacity;
+    private final List<JsonAdaptedPerson> allocationList;
 
     /**
      * Constructs a {@code JsonAdaptedFacility} with the given facility details.
      */
     @JsonCreator
     public JsonAdaptedFacility(@JsonProperty("name") String name, @JsonProperty("location") String location,
-                             @JsonProperty("time") String time, @JsonProperty("capacity") String capacity) {
+                             @JsonProperty("time") String time, @JsonProperty("capacity") String capacity,
+                               @JsonProperty("allocationList") List<JsonAdaptedPerson> allocationList) {
         this.name = name;
         this.location = location;
         this.time = time;
         this.capacity = capacity;
+        this.allocationList = allocationList;
     }
 
     /**
@@ -42,12 +49,19 @@ public class JsonAdaptedFacility {
         location = source.getLocation().location;
         time = source.getTime().time;
         capacity = source.getCapacity().capacity;
+
+        List<JsonAdaptedPerson> allocationList = new ArrayList<>();
+        for (Person person : source.getPersonAllocatedList()) {
+            JsonAdaptedPerson adaptedPerson = new JsonAdaptedPerson(person);
+            allocationList.add(adaptedPerson);
+        }
+        this.allocationList = allocationList;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Facility} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted facility.
      */
     public Facility toModelType() throws IllegalValueException {
 
@@ -91,7 +105,15 @@ public class JsonAdaptedFacility {
 
         final Capacity modelCapacity = new Capacity(capacity);
 
-        return new Facility(modelFacilityName, modelLocation, modelTime, modelCapacity);
+        Facility convertedFacility = new Facility(modelFacilityName, modelLocation, modelTime, modelCapacity);
+        addAllocatedPersons(convertedFacility);
+        return convertedFacility;
     }
 
+    private void addAllocatedPersons(Facility facility) throws IllegalValueException {
+        for (JsonAdaptedPerson adaptedPerson : allocationList) {
+            Person allocatedPerson = adaptedPerson.toModelType();
+            facility.addPersonToFacility(allocatedPerson);
+        }
+    }
 }

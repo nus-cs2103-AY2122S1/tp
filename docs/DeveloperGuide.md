@@ -102,12 +102,11 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Facility` object residing in the `Model`.
 
 ### Logic component
 
-**
-API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -152,9 +151,10 @@ API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+* stores the address book data i.e., all `Person` and `Facility` objects (which are contained in a `UniquePersonList`
+and a `UniqueFacilityList` object respectively).
+* stores the currently 'selected' `Person` and `Facility` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as unmodifiable `ObservableList<Person>` and `ObservableList<Facility>` respectively which can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
@@ -737,7 +737,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC14 - Exiting the program**
+
+**Use case: UC14 - Importing member details from a CSV file**
+
+**MSS**
+1. User requests to import member details from a CSV file
+2. SportsPA imports the member details from the CSV file
+    
+    Use case ends.
+
+**Extensions**
+* 1a. The CSV file does not exist
+  * 1a1. SportsPA shows an error message telling the user that the file cannot be found
+    
+    Use case ends.
+* 1b. The CSV file is not in the specified format
+  * 1b1. SportsPA shows an error message informing the user why the error occurred
+
+    Use case ends.
+
+**Use case: UC15 - Exiting the program**
 
 **MSS**
 

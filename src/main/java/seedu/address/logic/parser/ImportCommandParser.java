@@ -10,8 +10,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ImportCommandParser implements Parser<ImportCommand> {
 
-    public static final String MESSAGE_FILE_NOT_FOUND = "No CSV file called %s found.";
-
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCommand
      * and returns a ImportCommand object for execution.

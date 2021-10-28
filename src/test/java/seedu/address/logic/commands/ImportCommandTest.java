@@ -44,29 +44,34 @@ public class ImportCommandTest {
     @Test
     public void execute_invalidNameImportFile_throwsCommandException() {
         String testFilePath = "src/test/data/ImportCommandTest/InvalidNameImportFile.csv";
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS + "\nPlease fix the error in the CSV file and try again";
         ImportCommand importCommand = new ImportCommand(testFilePath);
-        assertThrows(CommandException.class, Name.MESSAGE_CONSTRAINTS, () -> importCommand.execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> importCommand.execute(model));
     }
 
     @Test
     public void execute_invalidPhoneImportFile_throwsCommandException() {
         String testFilePath = "src/test/data/ImportCommandTest/InvalidPhoneImportFile.csv";
+        String expectedMessage = Phone.MESSAGE_CONSTRAINTS + "\nPlease fix the error in the CSV file and try again";
         ImportCommand importCommand = new ImportCommand(testFilePath);
-        assertThrows(CommandException.class, Phone.MESSAGE_CONSTRAINTS, () -> importCommand.execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> importCommand.execute(model));
     }
 
     @Test
     public void execute_invalidAvailabilityImportFile_throwsCommandException() {
         String testFilePath = "src/test/data/ImportCommandTest/InvalidAvailabilityImportFile.csv";
+        String expectedMessage = Availability.MESSAGE_CONSTRAINTS
+                + "\nPlease fix the error in the CSV file and try again";
         ImportCommand importCommand = new ImportCommand(testFilePath);
-        assertThrows(CommandException.class, Availability.MESSAGE_CONSTRAINTS, () -> importCommand.execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> importCommand.execute(model));
     }
 
     @Test
     public void execute_invalidTagsImportFile_throwsCommandException() {
         String testFilePath = "src/test/data/ImportCommandTest/InvalidTagsImportFile.csv";
+        String expectedMessage = Tag.MESSAGE_CONSTRAINTS + "\nPlease fix the error in the CSV file and try again";
         ImportCommand importCommand = new ImportCommand(testFilePath);
-        assertThrows(CommandException.class, Tag.MESSAGE_CONSTRAINTS, () -> importCommand.execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> importCommand.execute(model));
     }
 
     @Test

@@ -208,11 +208,7 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
-                .append(" ")
-                .append(getTodayAttendance())
-                .append(" ")
-                .append(getTotalAttendance());
+                .append(getPhone());
 
         Availability availability = getAvailability();
         if (!availability.isEmpty()) {
