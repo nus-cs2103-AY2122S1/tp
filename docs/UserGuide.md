@@ -147,7 +147,7 @@ Add a task to the task list. The tags for the command can be input in any order.
 
 <div markdown="block" class="alert alert-primary">
 **:clipboard: Format:**<br>
-- <code> add <i>n/task_name t/time d/date tg/level </i> </code>
+- <code> add <i>n/task_name t/time d/date tg/tag p/level </i> </code>
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -158,7 +158,7 @@ Add a task to the task list. The tags for the command can be input in any order.
   * The format should be as follows <code><i>t/hh:mm</i></code>
 * Adds task with the date <code><i>d/date</i></code>
   * The format should be as follows <code><i>d/yyyy-mm-dd</i></code>
-* Add task with the tag <code><i>tg/level</i></code>
+* Add task with the tag <code><i>tg/tag</i></code>
 * The task is added for that date only at the given time
   * Useful if it is an event or for marking dates for exams
 </div>
@@ -166,7 +166,7 @@ Add a task to the task list. The tags for the command can be input in any order.
 <div markdown="block" class="alert alert-success">
 
 :green_book: **Examples:**
-* `add n/CS2103 test t/16:30 d/2021-12-01 tg/Important ` adds the `CS2103 test` task on `2021-12-01`, scheduled for `16:30` with the priority set as `Important`
+* `add n/Test t/16:30 d/2021-12-01 tg/CS2103 p/Medium` adds the `Test` task on `2021-12-01`, scheduled for `16:30` with the tag set as `CS2103`, and priority level set as `Medium`
 </div>
 
 ![add_command](images/addCommand.jpeg)
@@ -214,7 +214,7 @@ After running the find command, the tasks having the mentioned keyword are displ
 
 ![find_command_after](images/findCommandAfter.jpeg)
 
-### 5.4 Showing Tasks: `show` (coming soon)
+### 4.4 Showing Tasks: `show` (coming soon)
 
 
 Show all tasks that have been added to the app in a specific week.
@@ -249,7 +249,7 @@ Examples:
 
 ![show_command](images/showCommand41.jpeg)
 
-### 4.5 Setting Priority Level for Tasks: `tag` (coming soon)
+### 4.5 Tagging Tasks: `tag` (coming soon)
 
 Set a task's priority.
 
@@ -429,7 +429,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | <code>add <i>n/task_name t/time d/date tg/level</i></code> <br>e.g `add n/CS3243_Assignment t/13:00 d/2021-12-12 tg/Important`
+**Add** | <code>add <i>n/task_name (t/time) d/date (tg/tag) (p/level)</i></code> <br>e.g `add n/Assignment 1 t/13:00 d/2021-12-12 tg/CS2103 p/HIGH`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
 **Show** | `show week_number `
 **Edit** | :warning:`WORK_IN_PROGRESS`
