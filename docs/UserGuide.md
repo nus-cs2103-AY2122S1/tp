@@ -122,8 +122,6 @@ Examples:
 
 - `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID
   A1234567X and class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
-- `add -n Betsy -sid A2345678X -cid B02 -email e043245@u.nus.edu`: Adds the student called Betsy with student ID
-  A2345678X and class ID B02 to and email e043245@u.nus.edu ProgrammerError.
 
 ### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
 Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to
@@ -137,8 +135,8 @@ Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 - Existing values will be updated to the input values.
 
 Examples:
-- `edit 1 -sid A1234567X` Updates the student ID of the student at index 1 (1-indexed) to A1234567X.
-- `edit 2 -grade 97.5` Updates the grade of the student at index 2 (1-indexed) to 97.5.
+- `edit 1 -name Elon Musk` Updates the student ID of the student at index 1 (1-indexed) to A1234567X.
+- `edit 1 -ln 4 -s 29.5` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
 
 ### <a name="delete-student"></a>3.3 Delete Student: `delete`
 Deletes the specified student from the PE.
