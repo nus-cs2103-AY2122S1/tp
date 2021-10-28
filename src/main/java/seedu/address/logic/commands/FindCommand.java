@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,16 +37,17 @@ public class FindCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] \n                      "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
             + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
-            + "[" + PREFIX_TAG + "TAG]...\n                      "
+            + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_SUBJECT + "LESSON_SUBJECT] "
             + "[" + PREFIX_TIME + "LESSON_TIME] "
             + "[" + PREFIX_DATE + "LESSON_DATE] "
-            + "[" + PREFIX_CANCEL + "CANCELLED_DATE] ";
+            + "[" + PREFIX_CANCEL + "CANCELLED_DATE] "
+            + "[" + PREFIX_RATES + "LESSON_RATE] ";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 

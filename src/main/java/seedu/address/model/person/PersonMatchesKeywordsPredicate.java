@@ -36,6 +36,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     private Date cancelledDate;
     private TimeRange timeRange;
     private List<String> subjectKeywords;
+    private List<String> ratesKeywords;
 
     private FindCondition condition = FindCondition.ALL; // default find condition is match all
 
@@ -48,7 +49,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords,
                 parentPhoneKeywords, parentEmailKeywords, addressKeywords,
                 schoolKeywords, acadStreamKeywords, acadLevelKeywords, remarkKeywords,
-                timeRange, date, cancelledDate, subjectKeywords,
+                timeRange, date, cancelledDate, subjectKeywords, ratesKeywords,
                 tagKeywords);
     }
 
@@ -293,6 +294,22 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Sets keywords to match with a Person's Lesson's rates.
+     *
+     * @param keywords Rate keywords to find.
+     */
+    public void setRatesKeywords(List<String> keywords) {
+        ratesKeywords = keywords;
+    }
+
+    /**
+     * Returns optional rate keywords.
+     */
+    public Optional<List<String>> getRateKeywords() {
+        return Optional.ofNullable(ratesKeywords);
+    }
+
+    /**
      * Returns optional tag keywords.
      */
     public Optional<List<String>> getTagKeywords() {
@@ -321,6 +338,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return keywords.stream().allMatch(keyword -> StringUtil.containsSubstringIgnoreCase(field, keyword));
     }
 
+    // Person Predicates -----------------------------------------------------------------------------------------------
     /**
      * Returns a {@code Predicate} that tests that a {@code Person}'s {@code Name} matches the keywords given.
      *
@@ -430,6 +448,10 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return getLessonAnyMatch(lesson -> isMatch(subjectKeywords, lesson.getSubject().value));
     }
 
+    private Predicate<Person> getRatesMatchPredicate() {
+        return getLessonAnyMatch(lesson -> isMatch(ratesKeywords, lesson.getLessonRates().value));
+    }
+
     private Predicate<Person> getLessonAnyMatch(Predicate<Lesson> predicate) {
         return person -> person.getLessons().stream().anyMatch(predicate);
     }
@@ -506,6 +528,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
         if (getSubjectKeywords().isPresent()) {
             predicates.add(getSubjectMatchPredicate());
+        }
+        if (getRateKeywords().isPresent()) {
+            predicates.add(getRatesMatchPredicate());
         }
 
         return predicates;
