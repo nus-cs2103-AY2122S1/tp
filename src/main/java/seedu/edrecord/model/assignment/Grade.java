@@ -9,7 +9,7 @@ import java.util.Optional;
  * Represents an Grade under a Student in EdRecord.
  * Guarantees: immutable, details are present and not null.
  */
-public class Grade implements Comparable<Grade> {
+public class Grade {
 
     public enum GradeStatus { NOT_SUBMITTED, SUBMITTED, GRADED }
 
@@ -55,11 +55,6 @@ public class Grade implements Comparable<Grade> {
                 || (other instanceof Grade // instanceof handles nulls
                 && score.equals(((Grade) other).score)
                 && status.equals(((Grade) other).status)); // state check
-    }
-
-    @Override
-    public int compareTo(Grade o) {
-        return 0;
     }
 
     @Override
