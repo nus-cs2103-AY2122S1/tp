@@ -73,7 +73,7 @@
     "address" : "4th street",
     "remark" : "",
     "tagged" : [ ],
-    "appointmentDate": "",
+    "appointmentDate": "No Appointment Scheduled Yet",
     "appointmentTime" : "",
     "appointmentVenue" : "",
     "appointmentCount" : "3"
