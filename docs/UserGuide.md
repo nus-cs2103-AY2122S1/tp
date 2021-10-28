@@ -549,10 +549,10 @@ The Fees Calculator will account for cancelled dates and ensure that lesson fees
 
 However, the Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
 
-* **Lesson rates increment.** In the event that you want to increase your lesson rates and edited lesson rates using `ledit`, the outstanding fees will not change.
-* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed. The updated outstanding fees will not change and will not be
-recalculated using the newly edited lesson rates.
-* **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the outstanding fees will not deduct
+* **Lesson rates increment.** In the event that you want to increase your lesson rates, the current outstanding fees will not change according to the newly edited lesson rates.
+* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed, the current outstanding fees will not change according to 
+the newly edited lesson rates.
+* **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the Fees Calculator will not deduct
 the fees of the cancelled lesson for you.
 * **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
 
