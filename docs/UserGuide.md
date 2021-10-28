@@ -19,7 +19,7 @@ title: User Guide
     * [Edit Attendance](#editing-a-students-studio-attendance-attendance)
     * [Edit Participation](#editing-a-students-studio-participation-participation)
   * [Visualizing Data](#visualizing-data-in-academy-directory)
-    * [View student information](#viewing-all-related-information-of-a-student--view)
+    * [View student information](#viewing-all-related-information-of-a-student-view)
     * [Show Grade](#displaying-the-grades-for-an-assessment--show)
     * [Visualize all Grades](#visualizing-assessments-grades-of-the-entire-class-visualize)
     * [Filter Academy Directory](#filtering-academy-directory-by-name-or-tag-filter)
