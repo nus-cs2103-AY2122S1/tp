@@ -56,7 +56,7 @@ public class EditModuleCommandTest {
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         editModuleDescriptor.setModuleName(editedModuleName);
         EditModuleCommand editCommand = new EditModuleCommand(initialModuleName, editModuleDescriptor);
-        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, MODULE_NAME_1));
+        assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_DUPLICATE_MODULE, MODULE_NAME_1));
     }
 
     @Test
