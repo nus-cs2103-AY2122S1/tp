@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Compatability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -98,6 +100,23 @@ public class ParserUtil {
             throw new ParseException((Major.MESSAGE_CONSTRAINTS));
         }
         return new Major(trimmedMajor);
+    }
+
+    /**
+     * Parses a {@code String compatability} into an {@code Compatability}.
+     * string will be converted to a integer type
+     *
+     * @throws ParseException if the given {@code major} is invalid.
+     */
+    public static Compatability parseCompatability(Optional<String> compatability) throws ParseException {
+        if (compatability.isEmpty()) {
+            return new Compatability(null);
+        }
+        Integer compatabilityRating = Integer.parseInt(compatability.get());
+        if (!Compatability.isValidRating(compatabilityRating)) {
+            throw new ParseException((Compatability.MESSAGE_CONSTRAINTS));
+        }
+        return new Compatability(compatabilityRating);
     }
 
     /**
