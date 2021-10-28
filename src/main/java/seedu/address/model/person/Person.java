@@ -35,19 +35,22 @@ public class Person {
     private final Set<Interaction> interactions = new HashSet<>();
 
     // Misc Data fields
+    private final Compatability compatability;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Remark> remarks = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills, Set<Language> languages,
-            Set<Framework> frameworks, Set<Tag> tags, Set<Remark> remarks) {
+    public Person(Name name, Email email, Faculty faculty, Major major, Compatability compatability,
+            Set<Skill> skills, Set<Language> languages, Set<Framework> frameworks,
+            Set<Tag> tags, Set<Remark> remarks) {
         requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags, remarks);
         this.name = name;
         this.email = email;
         this.faculty = faculty;
         this.major = major;
+        this.compatability = compatability;
         this.skills.addAll(skills);
         this.languages.addAll(languages);
         this.frameworks.addAll(frameworks);
@@ -58,13 +61,15 @@ public class Person {
     /**
      * Used to create a person with a new skill
      */
-    public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills, Set<Language> languages,
-            Set<Framework> frameworks, Set<Tag> tags, Set<Remark> remarks, Set<Interaction> interactions) {
+    public Person(Name name, Email email, Faculty faculty, Major major, Compatability compatability,
+            Set<Skill> skills, Set<Language> languages, Set<Framework> frameworks,
+            Set<Tag> tags, Set<Remark> remarks, Set<Interaction> interactions) {
         requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags, remarks);
         this.name = name;
         this.email = email;
         this.faculty = faculty;
         this.major = major;
+        this.compatability = compatability;
         this.skills.addAll(skills);
         this.languages.addAll(languages);
         this.frameworks.addAll(frameworks);
@@ -79,7 +84,8 @@ public class Person {
     public Person appendInteraction(Interaction interaction) {
         requireAllNonNull(interactions);
         this.interactions.add(interaction);
-        return new Person(name, email, faculty, major, skills, languages, frameworks, tags, remarks, this.interactions);
+        return new Person(name, email, faculty, major, compatability, skills, languages,
+                        frameworks, tags, remarks, this.interactions);
     }
 
     public Name getName() {
@@ -96,6 +102,10 @@ public class Person {
 
     public Major getMajor() {
         return major;
+    }
+
+    public Compatability getCompatability() {
+        return compatability;
     }
 
     /**
@@ -195,7 +205,9 @@ public class Person {
                     .append("; Faculty: ")
                     .append(getFaculty())
                     .append("; Major: ")
-                    .append(getMajor());
+                    .append(getMajor())
+                    .append("; Compatability: ")
+                    .append(getCompatability());
 
         Set<Skill> skills = getSkills();
         if (!skills.isEmpty()) {
