@@ -29,7 +29,7 @@ Some example commands you can try:
    * **`list`**: List all clients.
    * **`add`**`n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
    * **`delete`**`2`: Deletes the 2nd client shown in the current client list.
-   * **`clear`**: Deletes all clients.
+   * **`clear`**: Deletes all existing data.
    * **`exit`**: Exits the app.
 6. Refer to the [Features](#features) below to learn more about the commands.
 
