@@ -55,7 +55,6 @@ public class VisualizePositionCommand extends Command {
         PieChart positionChart = PositionPieChartFactory.createPieChart(model.getFilteredApplicantList(), position);
         PieChartDisplayer positionChartDisplayer = new PieChartDisplayer(positionChart);
         positionChartDisplayer.displayPieChart();
-        // CommandFollowUpAction showPositionPieChart = new ShowPieChartAction(positionChartDisplayer);
 
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, toShowTitle));
