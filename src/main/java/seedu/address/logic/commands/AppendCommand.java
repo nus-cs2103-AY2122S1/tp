@@ -135,7 +135,7 @@ public class AppendCommand extends Command {
         updatedRemarks.addAll(newRemarks);
 
         return new Person(previousName, previousEmail, previousFaculty, previousMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags, updatedRemarks);
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags, updatedRemarks, personToAppendTo.getInteractions());
     }
 
     @Override
