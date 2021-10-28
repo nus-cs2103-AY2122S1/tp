@@ -20,7 +20,7 @@ head over to our [Quick Start](#2-quick-start) and try it out for yourself!
 ### 1.1 Is this guide for you?
 
 Are you someone who is trying our application for the very first time? If so, our guide is just the thing you need to get started on your journey to create your very own academic plan! 
-Just simple read along and we will guide you step by step on how to use our application.
+Just simply read along and we will guide you step by step on how to use our application.
 
 Are you someone who has maybe forgotten how some of our features work? Fret not, this user guide is also for you!
 Simply head over to either our [Features](#4-features) section or our [Command Summary](#6-command-summary) section to solve your problems.
@@ -42,20 +42,21 @@ If you ever want to skip through any section of our user guide, do feel free to 
 * [3. About](#3-about)
     * [3.1 Special Icons](#31-special-icons)
     * [3.2 Application homepage explanation](#32-application-homepage-explanation)
-    * [3.3 Command format](#33-command-format)
-    * [3.4 Command terminology](#34-command-terminology)
+    * [3.2 Module Explanation](#33-module-explanation)
+    * [3.3 Command format](#33-module-explanation)
+    * [3.4 Command terminology](#34-command-format)
 * [4. Features](#4-features)
     * [4.1 Database](#41-database)
-        * [4.1.1 Add](#411-adding-a-module-add)
-        * [4.1.2 Delete](#412-deleting-a-module--delete)
-        * [4.1.3 List](#413-listing-current-modules-list)
-        * [4.1.4 Find](#414-finding-a-module-find)
-        * [4.1.5 Edit](#415-editing-a-module--edit)
+        * [4.1.1 Add](#411-adding-a-module-into-the-database--add)
+        * [4.1.2 Delete](#412-deleting-a-module-in-the-database--delete)
+        * [4.1.3 List](#413-listing-modules-stored-in-the-database--list)
+        * [4.1.4 Find](#414-finding-a-module-in-the-database--find)
+        * [4.1.5 Edit](#415-editing-a-module-in-the-database--edit)
     * [4.2 Academic Plan](#42-academic-plan)
       * [4.2.1 Take](#421-adding-a-module-to-the-academic-plan--take)
       * [4.2.2 Un-take](#422-remove-a-module-from-the-academic-plan--untake)
       * [4.2.3 Info](#423-viewing-user-information--info)
-      * [4.2.4 Set](#424-setting-users-MC-goal-or-current-semester--set)
+      * [4.2.4 Set](#424-setting-users-mc-goal-or-current-semester--set)
       * [4.2.5 View](#425-see-modules-taken-in-a-specific-semester--view)
       * [4.2.6 Clear](#426-remove-the-schedules-for-a-specific-semester-from-modules--clear)
     * [4.3 Miscellaneous](#43-miscellaneous)
@@ -90,7 +91,7 @@ This section gives you a quick summary on how to download and run our applicatio
 
 
 Kindly refer to the [Features](#4-features) below for more details of each command.
-Unsure of what some phrases or words mean? Head over to the [Command Terminology](#34-command-terminology) section to find out more.
+Unsure of what some phrases or words mean? Head over to the [Command Terminology](#35-command-terminology) section to find out more.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -135,7 +136,7 @@ Here is how our application's homepage works
 * Results will also be displayed in this section when the appropriate commands have been added.
 
 #### 3.2.4 Module List
-* Here are the modules stored in our database.
+* Here are the modules stored in our [database](#database).
 * Do note that we have included some modules for you to test out our [features](#4-features).
 
 #### 3.2.5 MC goal Progress
@@ -183,7 +184,35 @@ Notes:
 #### 3.2.7 Current MC goal
 * Displays your current MC goal.
 
-### 3.3 Command format
+### 3.3 Module explanation
+Here is an image of a module in our [database](#database)<br>
+![Module Explanation](images/ModuleExplanation.png)
+
+A module is made up of 6 components:
+* An index in the database
+* A module [code](#code) number
+* A [title](#title) 
+* A [description](#description) of the module
+* The number of [MC](#mc) that the module carries
+* The [tags](#tags) that the module can be classified under
+
+A module can have 4 different colour codes:
+* A grey coloured module represents a module that is in the database but not in your [academic plan](#academic-plan)
+  ![Default Module](images/ModuleExplanation.png)
+
+* A green coloured module represents a module that is in your academic plan and you have taken the module previously<br>
+  For example, if you are currently in Year 2 Semester 1, a module in Year 1 Semester 2 of your academic plan would look like this:<br>
+  ![Module taken](images/GreenModule.png)
+
+* A red coloured module represents a module that is in your academic plan and you are planning to take the module in a future year or semester<br>
+  For example, if you are currently in Year 1 Semester 1, a module in Year 1 Semester 2 of your academic plan would look like this:<br>
+  ![Module taken](images/RedModule.png)
+
+* A yellow coloured module represents a module that is in your academic plan and you are currently taking this module in this semester previously<br>
+  For example, if you are currently in Year 1 Semester 2, a module in Year 1 Semester 2 of your academic plan would look like this:<br>
+  ![Module taken](images/YellowModule.png)
+
+### 3.4 Command format
 
 <div markdown="block" class="alert alert-info">
 
@@ -202,7 +231,7 @@ Notes:
 
 </div>
 
-### 3.4 Command Terminology
+### 3.5 Command Terminology
 
 <div markdown="span" class="alert alert-primary">:bulb:
 Tip: Do take a good look at this section to understand the common terminologies that we have used in our Features Section below!
@@ -443,7 +472,7 @@ This section gives you the solutions to commonly asked questions.
 **A**: No, deleting a module from the database removes the module from your academic plan.
 
 **Q**: What should I do if there is a module that I want to add into my academic plan but it is not inside the database?<br>
-**A**: First, add the module into the database using the [add](#411-adding-a-module-add) command. Then, you can add the module into your academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command.
+**A**: First, add the module into the database using the [add](#411-adding-a-module-into-the-database--add) command. Then, you can add the module into your academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command.
 
 --------------------------------------------------------------------------------------------------------------------
 
