@@ -189,7 +189,7 @@ public class ModelManager implements Model {
     private static boolean haveBirthdayAfterCurrentDay(Person p) {
         Optional<Birthday> possibleBirthday = p.getBirthday();
         return possibleBirthday
-            .map(birthday -> isAfterCurrentMonthday(birthday))
+            .map(ModelManager::isAfterCurrentMonthday)
             .orElse(false);
     }
 
@@ -235,6 +235,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getBirthdayReminderList() {
         return new FilteredList<>(birthdayReminders);
+    }
+
+    @Override
+    public void clearBirthdayReminderList() {
+        birthdayReminders.clear();
     }
 
     @Override

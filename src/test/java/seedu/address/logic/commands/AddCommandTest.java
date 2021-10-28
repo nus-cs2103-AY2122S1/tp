@@ -164,6 +164,11 @@ public class AddCommandTest {
         public ObservableList<Person> getBirthdayReminderList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void clearBirthdayReminderList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
