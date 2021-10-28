@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.notor.commons.core.GuiSettings;
+import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
@@ -124,14 +125,23 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns an unmodifiable view of the filtered group list
+     * Returns an unmodifiable view of the filtered group list.
      */
     ObservableList<? extends Group> getFilteredGroupList();
 
     /**
-     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * Updates the list to all SuperGroups.
+     */
+    void listSuperGroup();
+
+    /**
+     * Updates the list to all SuperGroups.
+     */
+    void listSubGroup(Index i);
+
+    /**
+     * Updates the filter to  {@code predicate}.
      *
-     * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
 

@@ -1,36 +1,39 @@
 package seedu.notor.logic.commands.group;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
-import seedu.notor.logic.commands.person.PersonListCommand;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.logic.executors.group.SuperGroupListExecutor;
+import seedu.notor.logic.executors.group.SubGroupListExecutor;
 
 /**
  * Lists all groups in Notor.
  */
-public class SuperGroupListCommand extends GroupCommand {
+public class SubGroupListCommand extends GroupCommand {
     public static final String COMMAND_WORD = "list";
     public static final List<String> COMMAND_WORDS = Arrays.asList("list", "l");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Lists all groups\n";
+            ": Lists all subgroups\n";
 
-    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " /" + COMMAND_WORD + " "
+    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD + " "
             + COMMAND_DESCRIPTION
             + "Example: "
-            + GroupCommand.COMMAND_WORD + " /" + COMMAND_WORD;
+            + GroupCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
-    private final SuperGroupListExecutor executor;
+    private final SubGroupListExecutor executor;
 
     /**
      * Constructor for a PersonListCommand.
      */
-    public SuperGroupListCommand() {
-        super(null);
-        this.executor = new SuperGroupListExecutor();
+    public SubGroupListCommand(Index index) {
+        super(index);
+        requireNonNull(index);
+        this.executor = new SubGroupListExecutor(index);
     }
 
     @Override
@@ -41,6 +44,6 @@ public class SuperGroupListCommand extends GroupCommand {
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
-        return (other instanceof PersonListCommand); // instanceof handles nulls
+        return (other instanceof SubGroupListCommand); // instanceof handles nulls
     }
 }

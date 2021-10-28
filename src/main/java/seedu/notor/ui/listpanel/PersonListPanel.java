@@ -3,32 +3,29 @@ package seedu.notor.ui.listpanel;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.model.person.Person;
 import seedu.notor.ui.PersonCard;
-import seedu.notor.ui.UiPart;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
+public class PersonListPanel extends ListPanel<Person> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
-
-    @FXML
-    private ListView<Person> personListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
     public PersonListPanel(ObservableList<Person> personList) {
-        super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        super(FXML, personList);
+    }
+
+    @Override
+    void initializeListView(ObservableList<Person> list) {
+        super.listView.setItems(list);
+        super.listView.setCellFactory(listView -> new PersonListViewCell());
     }
 
     /**

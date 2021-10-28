@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.notor.commons.core.GuiSettings;
+import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -198,6 +199,16 @@ public class PersonCreateCommandTest {
         @Override
         public ObservableList<SuperGroup> getFilteredGroupList() {
             return null;
+        }
+
+        @Override
+        public void listSuperGroup() {
+
+        }
+
+        @Override
+        public void listSubGroup(Index i) {
+
         }
 
         @Override

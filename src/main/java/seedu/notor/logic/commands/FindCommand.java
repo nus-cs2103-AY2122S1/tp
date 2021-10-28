@@ -12,7 +12,9 @@ import seedu.notor.model.person.NameContainsKeywordsPredicate;
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
+ * (Kept only for reference while command format is being moved
  */
+@Deprecated
 public class FindCommand implements Command {
     public static final String COMMAND_WORD = "find";
     public static final List<String> COMMAND_WORDS = Arrays.asList("find", "f");

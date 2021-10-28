@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.SubGroup;
 
@@ -61,14 +60,13 @@ public class SubgroupCard extends UiPart<Region> {
         if (!subgroup.getNote().equals(Note.EMPTY_NOTE)) {
             note.setText(subgroup.getNote().getNoEmptyLineNote());
             noteLastModified.setText(subgroup.getNoteSavedDate());
-            noteLastModified.setTextAlignment(TextAlignment.CENTER);
         } else {
             vBox.setManaged(false);
             note.setManaged(false);
             noteLastModified.setManaged(false);
         }
-        parentGroup.setText(subgroup.getParent());
-        numberOfPersons.setText("");
+        parentGroup.setText("Parent Group: " + subgroup.getParent());
+        numberOfPersons.setText("Number of Persons: " + subgroup.getPeople().size());
         subgroup.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

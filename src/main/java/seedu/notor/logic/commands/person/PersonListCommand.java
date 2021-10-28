@@ -1,26 +1,45 @@
 package seedu.notor.logic.commands.person;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import java.util.Arrays;
+import java.util.List;
 
-import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.CommandResult;
-import seedu.notor.model.Model;
+import seedu.notor.logic.executors.exceptions.ExecuteException;
+import seedu.notor.logic.executors.person.PersonListExecutor;
 
 /**
  * Lists all persons in Notor to the user.
  */
-public class PersonListCommand implements Command {
-
+public class PersonListCommand extends PersonCommand {
     public static final String COMMAND_WORD = "list";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("list", "l");
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    private static final String COMMAND_DESCRIPTION =
+            ": Lists all person\n";
 
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " "
+            + COMMAND_DESCRIPTION
+            + "Example: "
+            + PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD;
+
+    private final PersonListExecutor executor;
+
+    /**
+     * Constructor for a PersonListCommand.
+     */
+    public PersonListCommand() {
+        super(null);
+        this.executor = new PersonListExecutor();
+    }
 
     @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+    public CommandResult execute() throws ExecuteException {
+        return executor.execute();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        return (other instanceof PersonListCommand); // instanceof handles nulls
     }
 }

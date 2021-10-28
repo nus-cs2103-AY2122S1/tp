@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.commons.core.LogsCenter;
+import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
@@ -27,8 +28,8 @@ public class ModelManager implements Model {
     private final Notor notor;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<? extends Group> filteredGroups;
-    private boolean isPersonView = true;
+    private FilteredList<? extends Group> filteredGroups;
+    private boolean isPersonView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,7 +43,8 @@ public class ModelManager implements Model {
         this.notor = new Notor(notor);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
-        filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
+        // Person view is first shown.
+        isPersonView = true;
     }
 
     public ModelManager() {
@@ -179,7 +181,9 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
+        // TODO: I am using levraging this method for list. Should we consider new method?
         requireNonNull(predicate);
+        isPersonView = true;
         filteredPersons.setPredicate(predicate);
     }
 
@@ -192,6 +196,23 @@ public class ModelManager implements Model {
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
+    }
+
+    @Override
+    public void listSuperGroup() {
+        isPersonView = false;
+        filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
+    }
+
+    /**
+     * Replace the List with SubGroups.
+     * @param i the Index i of the SuperGroup.
+     */
+    public void listSubGroup(Index i) {
+        isPersonView = false;
+        // TODO: Abstract this. This method is too long.
+        filteredGroups = new FilteredList<>(this.notor.getSuperGroups().get(i.getZeroBased()).getSubGroups()
+            .asUnmodifiableObservableList());
     }
 
     //=========== View Check =============================================================
