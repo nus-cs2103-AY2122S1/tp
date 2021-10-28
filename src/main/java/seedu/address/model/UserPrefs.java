@@ -3,12 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.parser.Alias;
 
 /**
@@ -17,7 +17,7 @@ import seedu.address.logic.parser.Alias;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "sourcecontrol.json");
+    private Path addressBookFilePath = FileUtil.pathOf("data" , "sourcecontrol.json");
     private Map<String, String> aliases = new HashMap<>();
 
     /**

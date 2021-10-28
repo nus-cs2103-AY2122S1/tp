@@ -191,7 +191,6 @@ public class ParserUtil {
         if (!path.endsWith(extension)) {
             path = path + extension;
         }
-        Path enclosingFolder = FileUtil.getAppEnclosingFolder();
-        return enclosingFolder == null ? Path.of(path) : enclosingFolder.resolve(Path.of(path));
+        return FileUtil.pathOf(path);
     }
 }

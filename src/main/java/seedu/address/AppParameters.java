@@ -1,7 +1,6 @@
 package seedu.address;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -38,7 +37,7 @@ public class AppParameters {
             logger.warning("Invalid config path " + configPathParameter + ". Using default config path.");
             configPathParameter = null;
         }
-        appParameters.setConfigPath(configPathParameter != null ? Paths.get(configPathParameter) : null);
+        appParameters.setConfigPath(configPathParameter != null ? FileUtil.pathOf(configPathParameter) : null);
 
         return appParameters;
     }
