@@ -14,6 +14,9 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -63,6 +66,14 @@ public class StatsDisplay extends UiPart<Stage> {
                 onStatsExit.run();
             }
         });
+
+        KeyCombination closeStatsDisplayHotKey = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
+        Runnable closeStatsDisplayRunnable = () -> {
+            this.hide();
+            onStatsExit.run();
+        };
+
+        getRoot().getScene().getAccelerators().put(closeStatsDisplayHotKey, closeStatsDisplayRunnable);
     }
 
     /**
