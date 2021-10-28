@@ -12,6 +12,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_TUTORIAL_CLASSES_LISTED_OVERVIEW = "%1$d tutorial classes listed!";
-    public static final String MESSAGE_TUTORIAL_GROUPS_LISTED_OVERVIEW = "%1$d tutorial groups listed!";
-
+    public static final String MESSAGE_TUTORIAL_GROUP_LISTED_OVERVIEW = "%1$d students from tutorial group listed!";
+    public static final String MESSAGE_CLASS_DOES_NOT_EXIST = "This class does not exist in Classmate";
+    public static final String MESSAGE_GROUP_DOES_NOT_EXIST = "This group does not exist in Classmate";
 }
