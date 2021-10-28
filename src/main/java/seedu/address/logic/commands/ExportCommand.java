@@ -57,7 +57,7 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> personList = model.getSelectedPersonList();
         if (personList.isEmpty()) {
-            throw new CommandException(MSG_NO_CONTACTS);
+            personList = model.getFilteredPersonList();
         }
         convertFieldsToString(personList);
         populateDataToExport();
