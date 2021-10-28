@@ -1,6 +1,7 @@
 package seedu.unify.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -12,7 +13,9 @@ import seedu.unify.model.task.WeeklyTasks;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
@@ -50,7 +53,9 @@ public interface Model {
      */
     void setUniFy(ReadOnlyUniFy uniFy);
 
-    /** Returns the UniFy */
+    /**
+     * Returns the UniFy
+     */
     ReadOnlyUniFy getUniFy();
 
     /**
@@ -71,6 +76,8 @@ public interface Model {
      */
     void addTask(Task task);
 
+    void sortTasks(Comparator<Task> f);
+
     /**
      * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in the unify.
@@ -78,20 +85,26 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
-    /** Returns an unmodifiable view of the filtered task list */
+    /**
+     * Returns an unmodifiable view of the filtered task list
+     */
     ObservableList<Task> getFilteredTaskList();
 
-    /** Returns a task list filtered by the week */
+    /**
+     * Returns a task list filtered by the week
+     */
     WeeklyTasks getWeeklyTasks();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateWeeklyTaskList(Integer week);

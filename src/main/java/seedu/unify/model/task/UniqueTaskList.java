@@ -3,6 +3,7 @@ package seedu.unify.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +47,15 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Sorts the tasks
+     * @param f
+     */
+    public void sort(Comparator<Task> f) {
+        requireNonNull(f);
+        internalList.sort(f);
     }
 
     /**
@@ -135,3 +145,4 @@ public class UniqueTaskList implements Iterable<Task> {
         return true;
     }
 }
+
