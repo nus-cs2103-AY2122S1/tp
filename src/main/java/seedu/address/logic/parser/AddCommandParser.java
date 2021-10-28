@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ID id = ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get());
 
         List<Group> groupList = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
-        Map<Assessment, Score> emptyScores = new HashMap<>();
+        Map<Assessment, Score> emptyScores = new LinkedHashMap<>();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Student student = new Student(name, id, groupList, emptyScores, tagList);

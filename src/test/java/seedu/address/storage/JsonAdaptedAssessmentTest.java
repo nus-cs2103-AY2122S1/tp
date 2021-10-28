@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +18,13 @@ public class JsonAdaptedAssessmentTest {
 
     @Test
     public void toModelType_validAssessmentDetails_returnsGroup() throws Exception {
-        JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(VALID_ASSESSMENT, new HashMap<>());
+        JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(VALID_ASSESSMENT, new LinkedHashMap<>());
         assertEquals(new Assessment(VALID_ASSESSMENT), assessment.toModelType());
     }
 
     @Test
     public void toModelType_invalidAssessmentName_throwsIllegalValueException() {
-        JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(INVALID_ASSESSMENT, new HashMap<>());
+        JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(INVALID_ASSESSMENT, new LinkedHashMap<>());
         String expectedMessage = Assessment.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, assessment::toModelType);
     }

@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -79,7 +79,10 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ID_DESC_AMY;
-        Student expectedStudent = new PersonBuilder(AMY).withGroups().withScores(new HashMap<>()).withTags().build();
+        Student expectedStudent = new PersonBuilder(AMY)
+                .withGroups()
+                .withScores(new LinkedHashMap<>())
+                .withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

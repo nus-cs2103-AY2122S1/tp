@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         id = new ID(DEFAULT_ID);
         groups = new ArrayList<>();
-        scores = new HashMap<>();
+        scores = new LinkedHashMap<>();
         tags = new HashSet<>();
     }
 
@@ -48,7 +48,7 @@ public class PersonBuilder {
         name = studentToCopy.getName();
         id = studentToCopy.getId();
         groups = new ArrayList<>(studentToCopy.getGroups());
-        scores = new HashMap<>(studentToCopy.getScores());
+        scores = new LinkedHashMap<>(studentToCopy.getScores());
         tags = new HashSet<>(studentToCopy.getTags());
     }
 
