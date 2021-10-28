@@ -164,10 +164,10 @@ Format: `claim INDEX t/TITLE d/DESCRIPTION s/STATUS`
 * If the person has a claim with the same title exists, the claim is updated instead
 
 Examples:
-* `claim 1 t/Hospital Claim d/Broke a leg s/Pending`
-* `claim 1 t/Hospital Claim d/Broke left leg`
+* `claim 1 n/Hospital Claim d/Broke a leg s/Pending`
+* `claim 1 n/Hospital Claim d/Broke left leg`
     * If a claim titled “Hospital Claim” already exists, the description will be updated to “Broke left leg”
-* `claim 1 t/Hostptal Claim`
+* `claim 1 n/Hospital Claim`
     * If a claim titled "Hospital Claim" already exists, it will be deleted 
 
 ### Adding a note: `note`
