@@ -16,7 +16,7 @@ public class GroupListPanel extends ListPanel<SuperGroup> {
     private final Logger logger = LogsCenter.getLogger(GroupListPanel.class);
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code GroupListPanel} with the given {@code ObservableList}.
      */
     public GroupListPanel(ObservableList<SuperGroup> groupList) {
         super(FXML, groupList);
@@ -29,7 +29,7 @@ public class GroupListPanel extends ListPanel<SuperGroup> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code GroupCard}.
      */
     class GroupListViewCell extends ListCell<SuperGroup> {
         @Override

@@ -125,7 +125,7 @@ public class LogicManager implements Logic {
 
     @Override
     public boolean isPersonView() {
-        return model.isPersonView();
+        return model.isPersonList();
     }
 
     @Override

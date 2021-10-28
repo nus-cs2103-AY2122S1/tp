@@ -201,7 +201,7 @@ public class Notor implements ReadOnlyNotor {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons, " + superGroups.asUnmodifiableObservableList().size() + "groups";
         // TODO: refine later
     }
 

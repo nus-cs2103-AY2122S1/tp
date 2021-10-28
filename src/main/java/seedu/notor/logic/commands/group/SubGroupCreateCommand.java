@@ -20,8 +20,8 @@ public class SubGroupCreateCommand extends GroupCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group. "
             + "Parameters: "
             + COMMAND_WORD
-            + "GROUP "
-            + PREFIX_TAG + "TAGS... "
+            + " GROUP "
+            + PREFIX_TAG + "TAGS... \n"
             + "Example: " + COMMAND_WORD
             + "Orbital";
 

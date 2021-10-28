@@ -148,5 +148,5 @@ public interface Model {
     void deleteSubGroup(SubGroup subGroup);
 
     //=========== View Check =============================================================
-    boolean isPersonView();
+    boolean isPersonList();
 }

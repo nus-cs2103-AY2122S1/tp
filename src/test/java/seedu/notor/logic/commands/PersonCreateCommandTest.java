@@ -222,7 +222,7 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public boolean isPersonView() {
+        public boolean isPersonList() {
             return false;
         }
     }
