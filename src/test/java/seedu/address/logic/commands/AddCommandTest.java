@@ -4,18 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALESPRICE_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalItems.BAGEL;
-import static seedu.address.testutil.TypicalItems.DONUT;
+import static seedu.address.testutil.TypicalItems.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +16,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Inventory;
-import seedu.address.model.ModelStub;
-import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.*;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.testutil.ItemBuilder;
@@ -35,6 +25,7 @@ import seedu.address.testutil.ItemDescriptorBuilder;
 public class AddCommandTest {
 
     private ModelStubAcceptingItemAdded modelStub = new ModelStubAcceptingItemAdded();
+    private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs());
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -155,9 +146,37 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_idExistNonexistentName_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName("boo").withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).build();
+
+        AddCommand addCommand = new AddCommand(bagelDescriptor);
+        String expectedMessage = AddCommand.MESSAGE_NAME_NOT_FOUND;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
+    public void execute_nameExistNonexistentId_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId("182018").withCount(VALID_COUNT_BAGEL).build();
+
+        AddCommand addCommand = new AddCommand(bagelDescriptor);
+        String expectedMessage = AddCommand.MESSAGE_ID_NOT_FOUND;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
     public void execute_multipleMatches_failure() {
-        modelStub.addItem(BAGEL);
-        modelStub.addItem(DONUT);
+        model.addItem(BAGEL);
+        model.addItem(DONUT);
 
         ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
                 .withName(VALID_NAME_DONUT)
@@ -167,7 +186,7 @@ public class AddCommandTest {
 
         AddCommand addCommand = new AddCommand(validDescriptor);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_MULTIPLE_MATCHES, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_MULTIPLE_MATCHES, () -> addCommand.execute(model));
     }
 
     @Test
