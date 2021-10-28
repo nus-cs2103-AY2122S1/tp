@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -25,21 +26,15 @@ public class MemberListPanel extends UiPart<Region> {
     private ListView<Member> memberListView;
 
     /**
-     * Creates a {@code MemberListPanel} with the given {@code ObservableList}.
-     */
-    public MemberListPanel(ObservableList<Member> memberList) {
-        super(FXML);
-        memberListTitle.setText("Members");
-        memberListView.setItems(memberList);
-        memberListView.setCellFactory(listView -> new MemberListViewCell());
-    }
-
-    /**
      * Creates a {@code MemberListPanel} with the given {@code ObservableList} and {@code Event}.
      */
-    public MemberListPanel(ObservableList<Member> memberList, Event event) {
+    public MemberListPanel(ObservableList<Member> memberList, Optional<Event> event) {
         super(FXML);
-        memberListTitle.setText(event.getName().fullName);
+        String titleText = event.isPresent()
+                ? event.get().getName().fullName
+                : "Members";
+
+        memberListTitle.setText(titleText);
         memberListView.setItems(memberList);
         memberListView.setCellFactory(listView -> new MemberListViewCell());
     }

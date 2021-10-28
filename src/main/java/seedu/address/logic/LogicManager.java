@@ -96,4 +96,9 @@ public class LogicManager implements Logic {
     public Optional<Member> getCurrentMember() {
         return model.getCurrentMember();
     }
+
+    @Override
+    public Optional<Event> getCurrentEvent() {
+        return model.getCurrentEvent();
+    }
 }

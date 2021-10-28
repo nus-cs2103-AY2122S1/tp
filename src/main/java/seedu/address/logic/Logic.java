@@ -67,4 +67,9 @@ public interface Logic {
      * Returns the member that tList is currently displaying.
      */
     Optional<Member> getCurrentMember();
+
+    /**
+     * Returns the event that mList is currently displaying.
+     */
+    Optional<Event> getCurrentEvent();
 }
