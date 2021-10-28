@@ -1,6 +1,7 @@
 package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -37,7 +38,6 @@ public class DeleteGradeCommand extends Command {
             + PREFIX_NAME + "Assignment 2";
 
     public static final String MESSAGE_SUCCESS = "Deleted grade %s \nfor assignment: %s \nfor student: %s";
-    public static final String MESSAGE_NO_MODULE_SELECTED = "No module selected. Please cd into a module first";
     public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
     public static final String MESSAGE_NO_SUCH_GRADE = "There is no grade for this assignment";
 

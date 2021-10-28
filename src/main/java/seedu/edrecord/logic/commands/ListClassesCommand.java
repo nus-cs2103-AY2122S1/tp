@@ -1,6 +1,7 @@
 package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,6 @@ public class ListClassesCommand extends Command {
 
     public static final String COMMAND_WORD = "lsclass";
     public static final String MESSAGE_SUCCESS = "Here are your classes: %s.";
-    public static final String MESSAGE_NO_MODULE_SELECTED = "Select a module with `cd` first!";
     public static final String CLASS_LIST_DELIM = ", ";
 
     @Override
