@@ -479,12 +479,12 @@ Below is a table explaining some terms used in this document.
 Word | Meaning
 -------|--------
 Alphanumeric | character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
+Command | instruction entered by the user e.g. `list`, `exit`.
 Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values.
-JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 Graphic User Interface (GUI) | a system of interactive visual components for computer software, which allows users to interact via many visual components.
 Java | a computing platform for application development. Source Control runs on Java.
-Command | instruction entered by the user e.g. `list`, `exit`.
+JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
 [Return to table of contents](#table-of-contents)
 
