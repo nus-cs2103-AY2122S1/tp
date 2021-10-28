@@ -112,6 +112,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withAssignedGroupIds(String ... assignedGroupIds) {
         this.assignedGroupIds = SampleDataUtil.getUniqueIdSet(assignedGroupIds);
+        return this;
     }
 
     /**
