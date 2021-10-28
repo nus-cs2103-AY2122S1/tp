@@ -109,16 +109,22 @@ Examples:
 
 Shows a list of all members (of an event optionally).
 
-Format: `mlist [/e EVENT_ID]`
+Format: `mlist [/e EVENT_ID] [/att] [/abs]`
 
 * `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
 * List everyone recorded in Ailurus if `EVENT_ID` is not given.
 * If  `EVENT_ID` is provided, list everyone who is participating in the event.
 * `EVENT_ID` refers to the index number shown in the displayed event list.
+* Only one of `/att` or `/abs` may be provided if EVENT_ID is present.
+* `/att` filters the list to those that attended the event.
+* `/abs` filters the list to those that were absent from the event.
+
 
 Example:
 * `mlist` lists everyone in Ailurus.
 * `mlist /e 3` lists all members of the event with index number 3.
+* `mlist /e 3 /att` lists all members who attended the event with index number 3.
+* `mlist /e 3` lists all members who were absent from the event with index number 3.
 
 #### Editing a member : `medit`
 
@@ -164,13 +170,24 @@ Format: `mtfind KEY_WORD`
 
 * The search is case-insensitive. e.g. `form` will match `Form`
 * Only the name of the task is searched.
-* Only full words will be matched e.g. `form` will not match `forms`
 * Members with at least one task matching the given keyword will be returned.
 
 Examples:
 * `mtfind form` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Irfan Ibrahim` because task `submit form` was assigned to them.
  ![result for 'mtfind form'](images/mtfind_example.png)
 
+#### Locating members by their positions: `pfind`
+
+Find positions whose names contain any of the given keywords.
+
+Format: `pfind KEYWORD [MORE_KEYWORDS]...`
+
+* The search is case-insensitive. e.g `friend` will match `Friend`
+* The order of the keywords does not matter. e.g. `work Buddies` will match `Buddies work`
+* Only the name of the position is searched.
+* Member with positions with names matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `work Buddies` will return `Best Buddies`, `workaholic`
+  
 #### Deleting a member : `mdel`
 
 Deletes the specified member from Ailurus.
@@ -206,15 +223,23 @@ Examples:
 
 #### Listing all tasks of a member : `tlist`
 
-Shows a list of tasks of a member with the specified `MEMBER_ID`. 
+Shows a list of tasks of a member with the specified `MEMBER_ID`. Optional fields are provided to further filter the list
+to completed, uncompleted or overdue tasks.
 
-Format: `tlist /m MEMBER_ID`
+Format: `tlist /m MEMBER_ID [/dn OPTION] [/ovd]`
 
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * `MEMBER_ID` refers to the index number of the member of concern in the displayed member list.
+* `OPTION` must be either **y** or **n** to indicate yes or no respectively.
+* Only one of `/dn` or `/ovd` may be present when in use.
+* `/dn` filters the list of tasks to either done tasks or not done tasks based on `OPTION`.
+* `/ovd` filters the list to tasks that are overdue.
 
 Example:
 * `tlist /m 2` lists all tasks of the member with index number 2.
+* `tlist /m 2 /dn y` lists all tasks of member with index number 2 that are completed.
+* `tlist /m 2 /dn n` lists all tasks of member with index number 2 that are not completed.
+* `tlist /m 2 /ovd` lists all tasks of member with index number 2 that are overdue.
 
 #### Mark a task as done : `tdone`
 Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
@@ -277,7 +302,7 @@ Examples:
 
 #### Locating tasks by name: `tfind`
 
-Finds tasks whose names contain any of the given keywords.
+Find tasks whose names contain any of the given keywords.
 
 Format: `tfind KEYWORD [MORE_KEYWORDS]...`
 
@@ -362,6 +387,18 @@ Examples:
 * `eedit /e 1 /n Freshman Orientation Project Discussion` edits the event name of the 1st event on the event list to be `Freshman Orientation Project Discussion`.
 * `eedit /e 2 /m 1 /m 2 /m 3` edits the participants in the event to be the 1st, 2nd and 3rd members on the member list.
 
+#### Locating events by their names: `efind`
+
+Finds events whose names contain any of the given keywords.
+
+Format: `efind KEYWORD [MORE_KEYWORDS]…​`
+
+* The search is case-insensitive. e.g. `cycling` will match `Cycling`
+* The order of the keywords does not matter. e.g. `Dance crazy` will match `crazy Dance`
+* Only the name of events is searched.
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Happy Cycling` will return `Happy Birthday Party`, `Cycling at Park`
+  
 #### Deleting an event : `edel`
 
 Deletes the specified event from Ailurus.
@@ -409,12 +446,14 @@ Action | Format, Examples
 --------|------------------
 **help** | `help`
 **madd** | `madd /n NAME /ph PHONE_NUMBER /em EMAIL /a ADDRESS [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
-**mlist** | `mlist [/e EVENT_ID]` <br> e.g., `mlist /e 3`
+**mlist** | `mlist [/e EVENT_ID] [/att] [/abs]` <br> e.g., `mlist /e 3 /att`
 **medit** | `medit /m MEMBER_ID [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
+**mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind Payment`
+**pfind** | `pfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `pfind colleague`
 **mdel** | `mdel /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g., `mdel /m 5 /m 6`
 **tadd** | `tadd /n TASKNAME /m MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /m 3`
-**tlist** | `tlist /m MEMBER_ID` <br> e.g., `tlist /m 2`
+**tlist** | `tlist /m MEMBER_ID [/dn OPTION] [/ovd]` <br> e.g., `tlist /m 2 /dn y`
 **tdone** | `tdone /t TASK_ID [/t MORE_TASK_ID]…​`<br> e.g. `tdone /t 3 /t 4`
 **tedit** | `tedit /t TASK_ID [/n TASK_NAME] [/d TASK_DEADLINE]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
 **tdel** | `tdel /t TASK_ID [/t MORE_TASK_ID]…​` <br> e.g., `tdel /t 1 /t 4`
@@ -423,5 +462,6 @@ Action | Format, Examples
 **emarkall** | `emarkall /e EVENT_ID` <br> e.g. `emarkall /e 5`
 **eunmark** | `unmark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `eunmark /e 2 /m 2 /m 5`
 **eedit** | `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID]…​` <br> e.g. `eedit /e 1 /n Freshman Orientation Project Discussion`
+**efind** | `efind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `efind competition`
 **edel** | `edel /e EVENT_ID [/e MORE_EVENT_ID]…​` <br> e.g., `edel /e 7 /e 9`
 **exit** | `exit`
