@@ -1,11 +1,15 @@
 package seedu.address.logic.parser.member;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.member.MtfindCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 import seedu.address.model.module.task.TaskList;
 
 public class MtfindCommandParser implements Parser<MtfindCommand> {
@@ -17,10 +21,20 @@ public class MtfindCommandParser implements Parser<MtfindCommand> {
      */
     @Override
     public MtfindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        return new Predicate<Member> = member -> {
-            TaskList taskList = member.getTaskList();
-            return taskList.iterator().forEachRemaining();
+        String trimmedArg = args.trim();
+        if (trimmedArg.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MtfindCommand.MESSAGE_USAGE));
         }
+        Predicate<Member> resultPredicate = member -> {
+            TaskList taskList = member.getTaskList();
+            for (Task task : taskList) {
+                if (StringUtil.containsWordIgnoreCase(task.getName().fullName, trimmedArg)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        return new MtfindCommand(resultPredicate);
     }
 }
