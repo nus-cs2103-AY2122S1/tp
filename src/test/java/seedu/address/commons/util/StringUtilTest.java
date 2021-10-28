@@ -1,6 +1,7 @@
 package seedu.address.commons.util;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
@@ -72,7 +73,7 @@ public class StringUtilTest {
     @Test
     public void containsMultipleWord_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
-                -> StringUtil.containsMultipleWord("typical sentence", "  "));
+            -> StringUtil.containsMultipleWord("typical sentence", "  "));
     }
 
     @Test

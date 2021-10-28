@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
@@ -55,7 +54,8 @@ public class DeleteCommand extends Command {
             throw new CommandException(MESSAGE_ITEM_NOT_FOUND);
         }
         //check that id and name given matches
-        if (!toDeleteDescriptor.getName().equals(Optional.empty()) && !toDeleteDescriptor.getId().equals(Optional.empty())) {
+        if (!toDeleteDescriptor.getName().equals(Optional.empty())
+                && !toDeleteDescriptor.getId().equals(Optional.empty())) {
             toDeleteDescriptor.setCostPrice(1.0);
             toDeleteDescriptor.setSalesPrice(1.0);
             //check that id exists
