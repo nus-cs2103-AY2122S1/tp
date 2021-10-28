@@ -145,8 +145,8 @@ public class EditAppCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.
-                    isAnyNonNull(location, timePeriod, description);
+            return CollectionUtil
+                    .isAnyNonNull(location, timePeriod, description);
         }
 
         public void setClients(UniquePersonList clients) {

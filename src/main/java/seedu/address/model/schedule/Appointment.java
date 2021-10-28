@@ -1,11 +1,9 @@
 package seedu.address.model.schedule;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -157,8 +155,5 @@ public class Appointment {
         return builder.toString();
     }
 
-    public boolean isSameAppointment(Appointment editedAppointment) {
-        return this.equals(editedAppointment);
-    }
 
 }

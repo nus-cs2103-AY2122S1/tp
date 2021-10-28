@@ -166,9 +166,9 @@ public interface Model {
     /**
      * Replaces the given appointment {@code target} with {@code editedAppointment}.
      * {@code target} must exist in the address book.
-     * The appointment identity of {@code editedAppointment} must not be the same as another existing appointment in PlaceBook.
+     * The appointment identity of {@code editedAppointment}
+     * must not be the same as another existing appointment in PlaceBook.
      */
     void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment);
 
-    boolean hasAppointment(Appointment editedAppointment);
 }

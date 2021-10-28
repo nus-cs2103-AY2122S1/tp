@@ -36,14 +36,14 @@ public class EditAppCommandParser implements Parser<EditAppCommand> {
         }
         if (argMultimap.getValue(PREFIX_STARTDATETIME).isPresent()
                 && argMultimap.getValue(PREFIX_ENDDATETIME).isPresent()) {
-            editAppDescriptor.
-                    setTimePeriod(new TimePeriod(ParserUtil.parseDateTime(argMultimap.
-                            getValue(PREFIX_STARTDATETIME).get()),
+            editAppDescriptor
+                    .setTimePeriod(new TimePeriod(ParserUtil.parseDateTime(argMultimap
+                            .getValue(PREFIX_STARTDATETIME).get()),
                             ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_ENDDATETIME).get())));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            editAppDescriptor.setDescription(ParserUtil.
-                    parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+            editAppDescriptor.setDescription(ParserUtil
+                    .parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
 
         if (!editAppDescriptor.isAnyFieldEdited()) {
