@@ -8,18 +8,19 @@ title: User Guide
 ##Table of Contents
 - [Quick start](#quick-start)
 - [Features](#features)
-  - [Adding elderly details](#add-elderly-details--add)
-  - [Deleting an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
-  - [Listing all elderly](#listing-all-persons--list)
-  - [Sorting elderly by visit](#sort-elderly-by-visit--sort)
-  - [Locating elderly by attribute](#locating-elderly-by-attribute--find)
-  - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
-  - [Marking one visit as done](#marking-one-visit-as-done--done)
-  - [Viewing summary statistics](#viewing-summary-statistics--summary)
-  - [Viewing help](#viewing-help--help)
-  - [Downloading data](#downloading-data--download)  
-  - [Clearing all entries](#clearing-all-entries--clear)
-  - [Exiting the app](#exiting-the-program--exit)
+  - [Add elderly details](#add-elderly-details--add)
+  - [Delete an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
+  - [Edit a person](#edit-a-person--edit)
+  - [List all elderly](#list-elderly--list)
+  - [Sort elderly by visit](#sort-elderly-by-visit--sort)
+  - [Find elderly by attribute](#find-elderly-by-attribute--find)
+  - [Schedule a visit to an elderly](#schedule-a-visit-to-an-elderly--visit)
+  - [Mark one visit as done](#mark-one-visit-as-done--done)
+  - [View summary statistics](#view-summary-statistics--summary)
+  - [View help](#view-help--help)
+  - [Download data](#download-data--download)  
+  - [Clear all entries](#clear-all-entries--clear)
+  - [Exit the app](#exit-the-program--exit)
 - [FAQ](#faq)
 - [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
@@ -55,17 +56,18 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
-* Add elderly with contact details
-* Delete elderly or deadline
-* List elderly details
-* Sort elderly by visit
-* Find an elderly
-* Schedule a visit to an elderly
-* Mark the current scheduled visit as done (update the last visited date and delete the current visit)
-* View a summary of overdue, upcoming and recent visit statistics
+* Add elderly with contact details 
+* Delete an elderly or corresponding visit 
+* Edit a person 
+* List all elderly
+* Sort elderly by visit or last visit 
+* Find elderly by attribute 
+* Schedule a visit to an elderly 
+* Mark visits as done 
+* View summary statistics 
 * View help
-* Download elderly data
-
+* Download data
+* Clear all entries
 
 ## Notes about command format:
 
@@ -88,6 +90,9 @@ title: User Guide
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
+* If a parameter is expected but two consecutive flags are given (i.e. no spaces between two flags), only the first parameter will be taken.<br>
+  e.g. if you specify `sort v/lv/`, only `v/` will be taken.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -100,6 +105,7 @@ Adds an elderly and all relevant details into SeniorLove.
 Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [f/FREQUENCY o/OCCURRENCE] [h/HEALTH_CONDITION]`
 
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`, `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
+
 * `NAME` is the elderly’s name. **This must be included.**
 * `PHONE_NUMBER` is the elderly’s phone number. **This must be included.**
 * `LANGUAGE` is the elderly’s preferred language for communication. **This must be included.**
@@ -107,7 +113,7 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `LAST_VISIT` is the last datetime that the user has visited the elderly. **This is optional to include.**
 * `VISIT` is the next scheduled datetime for the elderly’s visit. **This is optional to include.**
 * `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include**
-* The `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
+* `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
 * `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
 * `OCCURRENCE` is a **strictly positive integer**.
 * `OCCURRENCE` is the occurrence of the next scheduled visit for the elderly. **This is optional to include**
@@ -133,7 +139,7 @@ Examples:
 * `delete v/ 1` deletes the elderly’s visit of the elderly at list index 1.
 
 
-### Editing a person : `edit`
+### Edit a person : `edit`
 
 Edits an existing elderly's attributes in SeniorLove.
 
@@ -150,16 +156,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] 
 Examples:
 *  `edit 1 p/91234567 l/English` Edits the phone number and language of the 1st person to be `91234567` and `English` respectively. All other attributes are not modified.
 *  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
-*  `edit 1 lv/2021-10-10 13:00` Edits the last visit of the 1st person to be `10 Oct 2021 13:00`. All other attributes are not modified.
 *  `edit 1 lv/` Removes the last visit for the 1st person. All other attributes are not modified.
 
 
-### Listing all persons or persons with incoming visits: `list`
+### List elderly : `list`
 
 Shows a list of all the elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
 Format: `list [w/] [m/]`
-- `list` without any prefix displays all the elderly.
+- `list` without any prefix displays all the elderly in the alphabetical order of their names.
 - `list w/` displays all the elderly with an incoming visit in the next week.
 - `list m/` displays all the elderly with an incoming visit in the next month.
 - `w/` and `m/` fields cannot be both present.
@@ -179,7 +184,7 @@ Format: `sort [FIELD_TO_BE_SORTED]`
 
 Example: `sort lv/` sorts the person list in descending order of `last visit` date.
 
-### Locating elderly by attribute : `find`
+### Find elderly by attribute : `find`
 
 Finds elderly whose names contain any of the given keywords.
 
@@ -197,7 +202,7 @@ Examples:
 * `find alex English` returns `Alex Yeoh`, `Alex Lim`, both with `LANGUAGE` English.<br>
 
 
-### Scheduling a visit to an elderly : `visit`
+### Schedule a visit to an elderly : `visit`
 
 Updates the time for the next visit to the elderly with the given index of the elderly in the address book.
 
@@ -214,7 +219,7 @@ Examples:
 * `visit 1 at/2021-12-31 17:00` schedules a meeting to the first elderly in the address book on 31th December 2021, 5PM.
 
 
-### Marking one visit as done : `done`
+### Mark one visit as done : `done`
 
 Marks a scheduled visit to an elderly as done.
 
@@ -227,13 +232,13 @@ Examples:
 * `done 1` marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
 
 
-### Viewing summary statistics : `summary`
+### View summary statistics : `summary`
 
 Shows a summary of the overdue visits, upcoming visits and recent last visits statistics.
 
 Format: `summary`
 
-### Viewing help : `help`
+### View help : `help`
 
 Show a message linking users to the user guide.
 
@@ -241,33 +246,33 @@ Show a message linking users to the user guide.
 
 Format: `help`
 
-### Downloading data : `download`
+### Download data : `download`
 
 Downloads elderly data onto user's computer.
 
 Format: `download`
 
 
-### Clearing all entries : `clear`
+### Clear all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
 
-### Exiting the program : `exit`
+### Exit the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
 
-### Saving the data
+### Save the data
 
 SeniorLove data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
-### Editing the data file
+### Edit the data file
 
 SeniorLove data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -276,7 +281,7 @@ If your changes to the data file makes its format invalid, SeniorLove will disca
 </div>
 
 
-### Archiving data files `[coming in v2.0]`
+### Archive data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
