@@ -366,19 +366,21 @@ The essential fields for a lesson are:
 * Subject
 * Rate
 
+An optional field for both types of lesson is:
+* Homework
+
+Optional fields for a **recurring** lesson is:
+* End date
+* Cancelled dates
+
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 * The lesson's rate refers to the fee of the lesson per hour.
 This rate will be used in the calculation of fees due after each lesson.
 
-*  A lesson can be identified by the index number shown in the lesson list of the student.
+* A lesson can be identified by the index number shown in the lesson list of the student.
 </div>
 
-An optional field for both types of lesson is:
-* Homework
-
-An optional field for a **recurring** lesson is:
-* End date
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -417,21 +419,33 @@ starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displaye
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]…​`
+Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
-
-* You cannot change the lesson's type (i.e. recurring and makeup).
 
 * The index must be a valid index number shown in the displayed student list.
 
 * The lesson index must be a valid index number shown in the lesson list of the student.
+
+* You can edit all fields of a lesson except the start date.
+
+* You cannot change the lesson's type (i.e. recurring and makeup).
+
+* The date to cancel must be a valid lesson date.<br>
+  e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.
+  
+* The date to uncancel must be an already cancelled date.
+
+* If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
 * `ledit 1 1 recurring/30 Nov 2021` Edits the end date of the 1st lesson (assumed to be recurring with start date before 30 Nov 2021) of the 1st student to be `30 Nov 2021`.
 * `ledit 2 3 rates/35.85 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
 * `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
+* `ledit 1 2 date/1 Oct 2021 cancel/15 Oct 2021 cancel/03 Dec 2021`. Cancels the specific lessons on `15 Oct 2021` and `03 Dec 2021` for the 2nd lesson (recurring) of the 1st student.
+* `ledit 2 2 uncancel/10 Oct 2021` Uncancels the specific lesson on `10 Oct 2021`, which was previously cancelled, for the 2nd lesson of the 2nd student.
+
 
 #### Deleting a lesson : `ldelete`
 
@@ -677,7 +691,7 @@ Action | Format, Examples
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 **View Tags** | `tag`
 **Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math`
-**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [hw/HOMEWORK]…​`
+**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **View Schedule** | `schedule`
 **Clear** |`clear`
