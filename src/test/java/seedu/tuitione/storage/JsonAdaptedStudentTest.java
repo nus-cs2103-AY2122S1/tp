@@ -3,7 +3,7 @@ package seedu.tuitione.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.tuitione.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.tuitione.testutil.Assert.assertThrows;
-import static seedu.tuitione.testutil.TypicalStudents.BENSON;
+import static seedu.tuitione.testutil.TypicalStudents.GEORGE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +24,35 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_GRADE = "F9";
-    private static final String INVALID_REMARK = "#friend";
+    private static final String INVALID_CHAR_REMARK = "#friend";
+    private static final String INVALID_LENGTH_REMARK = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
+    private static final String VALID_REMARK = "mock";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getParentContact().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final String VALID_GRADE = BENSON.getGrade().toString();
-    private static final List<JsonAdaptedRemark> VALID_REMARKS = BENSON.getRemarks().stream()
+    private static final String VALID_NAME = GEORGE.getName().toString();
+    private static final String VALID_PHONE = GEORGE.getParentContact().toString();
+    private static final String VALID_EMAIL = GEORGE.getEmail().toString();
+    private static final String VALID_ADDRESS = GEORGE.getAddress().toString();
+    private static final String VALID_GRADE = GEORGE.getGrade().toString();
+    private static final List<JsonAdaptedRemark> VALID_REMARKS = GEORGE.getRemarks().stream()
             .map(JsonAdaptedRemark::new)
             .collect(Collectors.toList());
     private static final List<String> VALID_LESSON_CODES = new ArrayList<>();
 
     @Test
-    public void toModelType_validStudentDetails_returnsStudent() throws Exception {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(BENSON);
-        assertEquals(BENSON, student.toModelType());
+    public void toModelType_validStudentDetails_returnsStudent() throws IllegalValueException {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(GEORGE);
+        assertEquals(GEORGE, student.toModelType());
+    }
+
+    @Test
+    public void toModelType_tooManyRemarks_returnsStudentWithFirstFewRemarks() throws IllegalValueException {
+        List<JsonAdaptedRemark> extraRemarks = new ArrayList<>(VALID_REMARKS); // already has 5
+        extraRemarks.add(new JsonAdaptedRemark(VALID_REMARK)); // hit past max
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_GRADE,
+                        extraRemarks, VALID_LESSON_CODES);
+        // extra remarks are ignored in model creation
+        assertEquals(GEORGE, student.toModelType());
     }
 
     @Test
@@ -130,11 +143,19 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidRemarks_throwsIllegalValueException() {
         List<JsonAdaptedRemark> invalidRemarks = new ArrayList<>(VALID_REMARKS);
-        invalidRemarks.add(new JsonAdaptedRemark(INVALID_REMARK));
+
+        // invalid characters
+        invalidRemarks.set(0, new JsonAdaptedRemark(INVALID_CHAR_REMARK));
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_GRADE,
                         invalidRemarks, VALID_LESSON_CODES);
         assertThrows(IllegalValueException.class, student::toModelType);
-    }
 
+        // exceeds length
+        invalidRemarks.set(0, new JsonAdaptedRemark(INVALID_LENGTH_REMARK));
+        JsonAdaptedStudent otherStudent =
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_GRADE,
+                        invalidRemarks, VALID_LESSON_CODES);
+        assertThrows(IllegalValueException.class, otherStudent::toModelType);
+    }
 }
