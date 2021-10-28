@@ -388,7 +388,7 @@ Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT
   
 * The date to uncancel must be an already cancelled date.
 
-* When the start date is changed, cancelled dates that are invalid will be removed.
+* If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
