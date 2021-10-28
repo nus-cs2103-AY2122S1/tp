@@ -5,7 +5,7 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_CAPACITY;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_PRICE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_TIMING;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_LESSONS;
+import static tutoraid.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +21,7 @@ import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
 import tutoraid.model.lesson.Students;
 import tutoraid.model.lesson.Timing;
+import tutoraid.model.student.Student;
 
 public class EditLessonCommand extends EditCommand {
 
@@ -48,7 +49,7 @@ public class EditLessonCommand extends EditCommand {
     private final EditLessonDescriptor editLessonDescriptor;
 
     /**
-     * @param targetIndex Index of the lesson in the filtered lesson list that is to be edited
+     * @param targetIndex          Index of the lesson in the filtered lesson list that is to be edited
      * @param editLessonDescriptor details to edit the lesson with
      */
     public EditLessonCommand(Index targetIndex, EditLessonDescriptor editLessonDescriptor) {
@@ -62,13 +63,15 @@ public class EditLessonCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Lesson> lastShownList = model.getFilteredLessonList();
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        List<Student> studentList = model.getFilteredStudentList();
+        List<Lesson> lastShownLessonList = model.getFilteredLessonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownLessonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-        Lesson lessonToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Lesson lessonToEdit = lastShownLessonList.get(targetIndex.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
 
         if (!lessonToEdit.isSameLesson(editedLesson) && model.hasLesson(editedLesson)) {
@@ -76,7 +79,10 @@ public class EditLessonCommand extends EditCommand {
         }
 
         model.setLesson(lessonToEdit, editedLesson);
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        Student.updateStudentLessonLink(studentList, lessonToEdit, editedLesson);
+        model.viewLesson(editedLesson);
+        model.updateFilteredStudentList(editedLesson::hasStudent);
+
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson));
     }
 

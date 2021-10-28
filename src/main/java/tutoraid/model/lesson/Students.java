@@ -30,7 +30,7 @@ public class Students {
      *
      * @param student a Student object to be checked
      */
-    public boolean containsStudent(Student student) {
+    public boolean hasStudent(Student student) {
         requireNonNull(student);
         return students.contains(student);
     }

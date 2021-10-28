@@ -19,18 +19,18 @@ public class StudentsTest {
 
     @Test
     public void contains_nullStudent_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> studentList.containsStudent(null));
+        Assert.assertThrows(NullPointerException.class, () -> studentList.hasStudent(null));
     }
 
     @Test
     public void contains_studentNotInList_returnsFalse() {
-        assertFalse(studentList.containsStudent(TypicalStudents.ALICE));
+        assertFalse(studentList.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
     public void contains_studentInList_returnsTrue() {
         studentList.addStudent(TypicalStudents.ALICE);
-        assertTrue(studentList.containsStudent(TypicalStudents.ALICE));
+        assertTrue(studentList.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test

@@ -47,6 +47,8 @@ public class EditLessonCommandTest {
         Model expectedModel = new ModelManager(
                 modelNoStudents.getStudentBook(), new LessonBook(modelNoStudents.getLessonBook()), new UserPrefs());
         expectedModel.setLesson(modelNoStudents.getFilteredLessonList().get(0), editedLesson);
+        expectedModel.viewLesson(editedLesson);
+        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
 
         assertCommandSuccess(editCommand, modelNoStudents, expectedMessage, expectedModel);
     }
@@ -71,6 +73,8 @@ public class EditLessonCommandTest {
         Model expectedModel = new ModelManager(
                 model.getStudentBook(), new LessonBook(model.getLessonBook()), new UserPrefs());
         expectedModel.setLesson(lastLesson, editedLesson);
+        expectedModel.viewLesson(editedLesson);
+        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -84,6 +88,8 @@ public class EditLessonCommandTest {
 
         Model expectedModel = new ModelManager(
                 model.getStudentBook(), new LessonBook(model.getLessonBook()), new UserPrefs());
+        expectedModel.viewLesson(editedLesson);
+        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -104,6 +110,8 @@ public class EditLessonCommandTest {
         Model expectedModel = new ModelManager(
                 model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.setLesson(model.getFilteredLessonList().get(0), editedLesson);
+        expectedModel.viewLesson(editedLesson);
+        expectedModel.updateFilteredStudentList(editedLesson::hasStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

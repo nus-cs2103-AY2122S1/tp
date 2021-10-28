@@ -2,6 +2,7 @@ package tutoraid.model.lesson;
 
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import tutoraid.model.student.Student;
@@ -33,6 +34,21 @@ public class Lesson {
         this.timing = timing;
     }
 
+    /**
+     * Updates the dependency between each lesson and a student if the student gets edited
+     * @param lessonList A list containing all lessons in TutorAid
+     * @param studentToEdit The student being edited
+     * @param editedStudent The edited student
+     */
+    public static void updateStudentLessonLink(List<Lesson> lessonList, Student studentToEdit, Student editedStudent) {
+        for (Lesson lesson : lessonList) {
+            if (lesson.hasStudent(studentToEdit)) {
+                lesson.removeStudent(studentToEdit);
+                lesson.addStudent(editedStudent);
+            }
+        }
+    }
+
     public LessonName getLessonName() {
         return lessonName;
     }
@@ -59,8 +75,8 @@ public class Lesson {
      * @param student student to be checked
      * @return true if the student is in this lesson, false otherwise
      */
-    public boolean containsStudent(Student student) {
-        return students.containsStudent(student);
+    public boolean hasStudent(Student student) {
+        return students.hasStudent(student);
     }
 
     /**

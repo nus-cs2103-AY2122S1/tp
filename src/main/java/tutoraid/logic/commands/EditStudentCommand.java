@@ -5,7 +5,7 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutoraid.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +15,7 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
@@ -52,7 +53,7 @@ public class EditStudentCommand extends EditCommand {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param targetIndex of the student in the filtered student list to edit
+     * @param targetIndex           of the student in the filtered student list to edit
      * @param editStudentDescriptor details to edit the student with
      */
     public EditStudentCommand(Index targetIndex, EditStudentDescriptor editStudentDescriptor) {
@@ -66,13 +67,15 @@ public class EditStudentCommand extends EditCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        List<Lesson> lessonList = model.getFilteredLessonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToEdit = lastShownStudentList.get(targetIndex.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
@@ -80,7 +83,9 @@ public class EditStudentCommand extends EditCommand {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        Lesson.updateStudentLessonLink(lessonList, studentToEdit, editedStudent);
+        model.viewStudent(editedStudent);
+        model.updateFilteredLessonList(editedStudent::hasLesson);
 
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
