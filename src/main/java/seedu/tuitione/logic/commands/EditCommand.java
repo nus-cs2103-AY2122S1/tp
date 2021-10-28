@@ -56,6 +56,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "⚠\tAlert:\n\nAt least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT =
             "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
+    public static final String MESSAGE_T00_MANY_REMARKS =
+            "⚠\tAlert:\n\nThe amount of remarks tagged to this student will exceed the limit of 5! "
+                    + "You can only add %d more unique remark(s).";
+    public static final String MESSAGE_NO_SUCH_REMARK_FOUND =
+            "⚠\tAlert:\n\nThe remark(s) you wish to remove does not exist! Please check your spelling and formatting.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -110,7 +115,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor)
+            throws CommandException {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
@@ -119,20 +125,26 @@ public class EditCommand extends Command {
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
 
-        List<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(Collections.emptyList());
+        Set<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(Collections.emptySet());
         Set<Remark> remarksToDelete = editStudentDescriptor.getRemarksToDelete().orElse(Collections.emptySet());
 
         Set<Remark> updatedRemarks = new HashSet<>(studentToEdit.getRemarks());
-        updatedRemarks.removeAll(remarksToDelete);
+        int numOfExistingRemarks = updatedRemarks.size();
+
+        for (Remark remark : remarksToDelete) {
+            if (!updatedRemarks.contains(remark)) {
+                throw new CommandException(String.format(MESSAGE_NO_SUCH_REMARK_FOUND));
+            }
+            updatedRemarks.remove(remark);
+        }
+
         for (Remark remark : remarksToAdd) {
             if (updatedRemarks.size() >= MAX_REMARK_SIZE) {
-                break;
+                throw new CommandException(String.format(MESSAGE_T00_MANY_REMARKS,
+                        MAX_REMARK_SIZE - numOfExistingRemarks));
             }
             updatedRemarks.add(remark);
         }
-
-
-
 
         return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress,
                 updatedGrade, updatedRemarks);

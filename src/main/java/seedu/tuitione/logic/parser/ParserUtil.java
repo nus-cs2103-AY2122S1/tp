@@ -153,9 +153,6 @@ public class ParserUtil {
         requireNonNull(remarks);
         final Set<Remark> remarkSet = new HashSet<>();
         for (String remarkName : remarks) {
-            if (remarkSet.size() == MAX_REMARK_SIZE) {
-                break;
-            }
             remarkSet.add(parseRemark(remarkName));
         }
         return remarkSet;

@@ -7,6 +7,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
 
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
@@ -40,6 +41,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\nNew student added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT =
             "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
+    public static final String MESSAGE_T00_MANY_REMARKS =
+            "⚠\tAlert:\n\nYou can only tag 5 remarks to a student!";
 
     private final Student toAdd;
 
@@ -57,6 +60,10 @@ public class AddCommand extends Command {
 
         if (model.hasStudent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
+
+        if (toAdd.getRemarks().size() > MAX_REMARK_SIZE) {
+            throw new CommandException(MESSAGE_T00_MANY_REMARKS);
         }
 
         model.addStudent(toAdd);
