@@ -10,7 +10,27 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Getting Started
+
+### Before using this User Guide
+
+Here are some important syntax which are used throughout this document:
+
+<div markdown="block" class="alert alert-warning">
+
+**:information_source: Notes:**<br>
+Useful information or tips are displayed here
+
+</div>
+
+<div markdown="block" class="alert alert-danger">
+
+**:bangbang:Warning!**<br>
+Dangerous or potentially negative actions are displayed here
+
+</div>
+
+### Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -18,18 +38,53 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your RHRH.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
    Some example commands you can try:
 
-   * `add customer` : Add a customer
-     * Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL`
-     * Example: `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
-     * Note: customer specific question prompts will be triggered
+    - `addC` : Add a customer
+    - Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
+    - Example: `addC customer n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
 6. Refer to the [Features](#features) below for details of each command.
+
+### Command syntax
+
+Commands in RHRH has the syntax: `COMMAND_WORD + [PREAMBLE] + [PREFIX + PARAMETER]...`, where:
+
+- `COMMAND_WORD` is a word that specifies a action of the command, e.g. `addC` for adding a customer, `deleteR` for deleting a reservation.
+- `PREAMBLE` is the text before the first valid prefix, usually a positive number (for delete, edit or add reservation commands), or a phrase (for find commands).
+- `PREFIX` is a keyword to recognize the beginning of a `PARAMETER`, usually ends with a `'/'` by convention.
+- `PARAMETER` is an argument input by user. `PREAMBLE` is also a kind of `PARAMETER`. A command can have 0 or more `PARAMETER`s, which can be compulsory or optional.
+
+Example: `addr 2 p/98765432 at/2021-12-24 2000`
+
+- `addr` is a `COMMAND_WORD` that specifies the action of adding a new reservation.
+- `2` is an `PREAMBLE` that specifies number of people.
+- `p/`, `at/` are prefixes for phone and date-time, respectively.
+- `2`, `98765432` and `2021-12-24 2000` are `PARAMETER`s
+
+This is the list of all prefixes used in RHRH, as well as their corresponding parameter constraints:
+
+| Prefix | Description         | Parameter constraints                             |
+| :----: | ------------------- | ------------------------------------------------- |
+|  `n/`  | Name                |
+|  `p/`  | Phone               |
+|  `a/`  | Address             |
+|  `e/`  | Email               |
+| `lp/`  | Loyalty Point       |
+| `alg/` | Allergy             |
+| `sr/`  | Special Request     |
+|  `t/`  | Tag                 |
+|  `l/`  | Leaves              |
+| `jt/`  | Job Title           |
+| `sal/` | Salary              |
+| `st/`  | Supply Type         |
+| `dd/`  | Delivery Details    |
+| `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
+|  `r/`  | Remark              | Contains alphanumeric characters                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
