@@ -78,8 +78,8 @@ public class WeeklyTasks implements Iterable<Task> {
      * Returns the local date of the first day of the week
      */
     public LocalDate getFirstDayOfWeek() {
-        LocalDate firstDay = LocalDate.ofYearDay(YEAR,
-                (getWeekNumber() + ACADEMIC_WEEK_OFFSET) * DAYS_IN_WEEK - YEAR_OFFSET);
+        LocalDate firstDay = LocalDate.ofYearDay(
+                YEAR, (getWeekNumber() + ACADEMIC_WEEK_OFFSET) * DAYS_IN_WEEK - YEAR_OFFSET);
         return firstDay;
     }
 
