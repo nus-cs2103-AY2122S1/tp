@@ -64,6 +64,9 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText(CommandHistory.getPreviousCommand());
         } else if (event.getCode().equals(KeyCode.DOWN)) {
             commandTextField.setText(CommandHistory.getNextCommand());
+        } else if (event.getCode().equals(KeyCode.ENTER)) {
+            event.consume();
+            return;
         } else {
             String commandText = commandTextField.getText();
             if (commandText.equals("")) {
