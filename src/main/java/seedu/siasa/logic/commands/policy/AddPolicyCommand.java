@@ -49,7 +49,7 @@ public class AddPolicyCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
     public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified user";
     public static final String MESSAGE_PAST_EXPIRY_DATE = "Expiry Date is in the past.";
-    public static final String MESSAGE_SIMILAR_POLICY = "A similar policy already exists in the address book.";
+    public static final String MESSAGE_SIMILAR_POLICY = "A similar policy: %1$s already exists in the address book.";
 
     private final Title title;
     private final Price price;
@@ -94,8 +94,9 @@ public class AddPolicyCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
         }
 
-        if (model.hasSimilarPolicy(toAdd)) {
-            boolean response = Warning.warnUser(MESSAGE_SIMILAR_POLICY);
+        if (model.getSimilarPolicy(toAdd).isPresent()) {
+            Policy similarPolicy = model.getSimilarPolicy(toAdd).get();
+            boolean response = Warning.warnUser(String.format(MESSAGE_SIMILAR_POLICY, similarPolicy.getTitle()));
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }

@@ -1,6 +1,7 @@
 package seedu.siasa.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -64,7 +65,7 @@ public interface Model {
      * exists in SIASA. Similar is defined as full names having an edit distance of zero
      * or one (case insensitive).
      */
-    boolean hasSimilarPerson(Person person);
+    Optional<Person> getSimilarPerson(Person person);
 
     /**
      * Deletes the given person.
@@ -104,7 +105,7 @@ public interface Model {
      * exists in the SIASA. Similar titles are defined as having edit distance of zero or
      * one (case insensitive).
      */
-    boolean hasSimilarPolicy(Policy policy);
+    Optional<Policy> getSimilarPolicy(Policy policy);
 
     /**
      * Deletes the given policy.

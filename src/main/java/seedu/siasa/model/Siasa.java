@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.siasa.model.person.Person;
@@ -78,9 +79,9 @@ public class Siasa implements ReadOnlySiasa {
      * exists in SIASA. Similar is defined as full names having an edit distance of zero
      * or one (case insensitive).
      */
-    public boolean hasSimilarPerson(Person person) {
+    public Optional<Person> getSimilarPerson(Person person) {
         requireNonNull(person);
-        return persons.containsSimilar(person);
+        return persons.getSimilar(person);
     }
 
     /**
@@ -141,9 +142,9 @@ public class Siasa implements ReadOnlySiasa {
      * exists in the SIASA. Similar titles are defined as having edit distance of zero or
      * one (case insensitive).
      */
-    public boolean hasSimilarPolicy(Policy policy) {
+    public Optional<Policy> getSimilarPolicy(Policy policy) {
         requireNonNull(policy);
-        return policies.containsSimilar(policy);
+        return policies.getSimilar(policy);
     }
 
     public void removePolicy(Policy target) {

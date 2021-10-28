@@ -39,7 +39,7 @@ public class AddClientCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_SIMILAR_PERSON = "A similar person already exists in the address book.";
+    public static final String MESSAGE_SIMILAR_PERSON = "A similar person: %1$s already exists in the address book.";
 
     private final Person toAdd;
 
@@ -59,8 +59,9 @@ public class AddClientCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasSimilarPerson(toAdd)) {
-            boolean response = Warning.warnUser(MESSAGE_SIMILAR_PERSON);
+        if (model.getSimilarPerson(toAdd).isPresent()) {
+            Person similarPerson = model.getSimilarPerson(toAdd).get();
+            boolean response = Warning.warnUser(String.format(MESSAGE_SIMILAR_PERSON, similarPerson.getName()));
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
             }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -100,9 +101,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasSimilarPerson(Person person) {
+    public Optional<Person> getSimilarPerson(Person person) {
         requireNonNull(person);
-        return siasa.hasSimilarPerson(person);
+        return siasa.getSimilarPerson(person);
     }
 
     @Override
@@ -132,9 +133,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasSimilarPolicy(Policy policy) {
+    public Optional<Policy> getSimilarPolicy(Policy policy) {
         requireNonNull(policy);
-        return siasa.hasSimilarPolicy(policy);
+        return siasa.getSimilarPolicy(policy);
     }
 
     @Override
