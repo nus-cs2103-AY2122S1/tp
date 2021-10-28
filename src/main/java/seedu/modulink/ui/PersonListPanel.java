@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -42,9 +43,9 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else if (person.getIsMyProfile()) {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
-                setStyle("-fx-background-color: #228B22");
+                setStyle("-fx-background-color: #228B22; -fx-background-radius: 20px; -fx-border-radius: 10;  -fx-padding: 10px");
             } else {
-                setStyle("");
+                setStyle("-fx-background-radius: 20px; -fx-padding: 10px");
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
 
             }
