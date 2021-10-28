@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPATABILITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
@@ -11,11 +12,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Compatability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
@@ -39,7 +42,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_FACULTY,
-                PREFIX_MAJOR, PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
+                PREFIX_MAJOR, PREFIX_COMPATABILITY, PREFIX_SKILL, PREFIX_LANGUAGE,
+                PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EMAIL, PREFIX_FACULTY, PREFIX_MAJOR)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -50,13 +54,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Faculty faculty = ParserUtil.parseFaculty(argMultimap.getValue(PREFIX_FACULTY).get());
         Major major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
+        Compatability compatability = ParserUtil.parseCompatability(
+                                                        argMultimap.getValue(PREFIX_COMPATABILITY));
         Set<Skill> skillList = ParserUtil.parseSkills(argMultimap.getAllValues(PREFIX_SKILL));
         Set<Language> languageList = ParserUtil.parseLanguages(argMultimap.getAllValues(PREFIX_LANGUAGE));
         Set<Framework> frameworkList = ParserUtil.parseFrameworks(argMultimap.getAllValues(PREFIX_FRAMEWORK));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Remark> remarkList = ParserUtil.parseRemarks(argMultimap.getAllValues(PREFIX_REMARKS));
 
-        Person person = new Person(name, email, faculty, major, skillList,
+        Person person = new Person(name, email, faculty, major, compatability, skillList,
                 languageList, frameworkList, tagList, remarkList);
 
         return new AddCommand(person);
