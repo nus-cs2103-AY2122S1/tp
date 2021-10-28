@@ -11,7 +11,7 @@ import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 import seedu.address.model.position.exceptions.PositionNotFoundException;
 import seedu.address.ui.PieChartDisplayer;
-import seedu.address.ui.PositionPieChartFactory;
+import seedu.address.ui.PositionPieChart;
 
 /*
  * Displays a pie chart for a position in MrTechRecruiter.
@@ -52,12 +52,11 @@ public class VisualizePositionCommand extends Command {
 
         assert position != null; // Above try-catch block handles the 'Position not found' case
 
-        PieChart positionChart = PositionPieChartFactory.createPieChart(model.getFilteredApplicantList(), position);
+        PieChart positionChart = new PositionPieChart(model.getFilteredApplicantList(), position);
         PieChartDisplayer positionChartDisplayer = new PieChartDisplayer(positionChart);
         positionChartDisplayer.displayPieChart();
 
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, toShowTitle));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toShowTitle));
     }
 
     @Override
@@ -66,4 +65,5 @@ public class VisualizePositionCommand extends Command {
                 || (other instanceof VisualizePositionCommand // instanceof handles nulls
                 && toShowTitle.equals(((VisualizePositionCommand) other).toShowTitle));
     }
+
 }

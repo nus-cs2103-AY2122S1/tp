@@ -33,14 +33,17 @@ public class PieChartDisplayer {
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root, 450, 450));
+        setCloseOnLoseFocus(stage);
 
+        stage.show();
+    }
+
+    private void setCloseOnLoseFocus(Stage stage) {
         stage.focusedProperty().addListener((i, j, k) -> {
             if (!stage.isFocused()) {
                 Platform.runLater(stage::close);
             }
         });
-
-        stage.show();
     }
 
 }
