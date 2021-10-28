@@ -39,7 +39,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     {
         modules = new UniqueModuleList();
         students = new UniqueStudentList();
-        //tasks = new UniqueTaskList();
     }
 
     public TeachingAssistantBuddy() {}
@@ -70,14 +69,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         this.students.setStudents(students);
     }
 
-    ///**
-    //* Replaces the contents of the task list with {@code tasks}.
-    //* {@code persons} must not contain duplicate tasks.
-    //*/
-    //public void setTasks(List<Task> tasks) {
-    //this.tasks.setTasks(tasks);
-    //}
-
     /**
      * Resets the existing data of this {@code TeachingAssistantBuddy} with {@code newData}.
      */
@@ -85,7 +76,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
         setModules(newData.getModuleList());
-        //setTasks(newData.getTaskList());
     }
 
     //// student-level operations
@@ -238,17 +228,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         students.setStudent(target, editedStudent);
     }
 
-    ///**
-    //* Replaces the given task {@code target} in the list with {@code editedTask}.
-    //* {@code target} must exist in the TAB.
-    //* The task identity of {@code editedTask} must not be the same
-    //* as another existing task in the module.
-    //*/
-    //public void setTask(Task target, Task editedTask) {
-    //requireNonNull(editedTask);
-    //tasks.setTask(target, editedTask);
-    //}
-
     /**
      * Removes {@code key} from this {@code TeachingAssistantBuddy}.
      * {@code key} must exist in TAB.
@@ -264,14 +243,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public void removeStudent(Student key) {
         students.remove(key);
     }
-
-    ///**
-    //* Removes {@code key} from this {@code TeachingAssistantBuddy}.
-    //* {@code key} must exist in TAB.
-    //*/
-    //public void removeTask(Task key) {
-    //tasks.remove(key);
-    //}
 
     //// util methods
 
@@ -290,12 +261,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
     }
-
-
-    //@Override
-    //public ObservableList<Task> getTaskList() {
-    //return tasks.asUnmodifiableObservableList();
-    //}
 
     @Override
     public boolean equals(Object other) {

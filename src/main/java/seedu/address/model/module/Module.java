@@ -27,7 +27,7 @@ public class Module {
     private final ModuleName moduleName;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. Used for initializing an empty module
      */
     public Module(ModuleName moduleName) {
         requireAllNonNull(moduleName);
@@ -35,6 +35,17 @@ public class Module {
         students = new UniqueStudentList();
         filteredStudents = new FilteredList<>(this.getStudentList());
         taskList = new UniqueTaskList();
+    }
+
+    /**
+     * Every field must be present and not null. Used for initializing a module with students and tasks.
+     */
+    public Module (ModuleName moduleName, UniqueStudentList students, UniqueTaskList taskList) {
+        requireAllNonNull(moduleName, students, taskList);
+        this.moduleName = moduleName;
+        this.students = students;
+        this.filteredStudents = new FilteredList<>(this.getStudentList());
+        this.taskList = taskList;
     }
 
     public ModuleName getName() {
