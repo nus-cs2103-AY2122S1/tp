@@ -23,7 +23,7 @@ import seedu.edrecord.model.person.Phone;
 import seedu.edrecord.model.tag.Tag;
 
 /**
- * Assigns a grade to a student for an assignment.
+ * Deletes a student's grade for an assignment.
  */
 public class DeleteGradeCommand extends Command {
 
