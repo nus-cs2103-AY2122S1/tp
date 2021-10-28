@@ -218,11 +218,28 @@ public class ParserUtil {
      */
     public static SocialHandle parseSocialHandle(String socialHandle) throws ParseException {
         requireNonNull(socialHandle);
-        String trimmedSocialHandle = socialHandle.trim();
-        if (!SocialHandle.isValidSocialHandle(trimmedSocialHandle)) {
+        // Could be added to show which part of input is the error message is referring to
+        //String formattedInput = "[" + PREFIX_SOCIAL_HANDLE + socialHandle + "] ";
+        if (socialHandle.isEmpty()) {
+            return new SocialHandle(); // To delete all socialHandles
+        }
+        if (!socialHandle.contains(":")) {
+
             throw new ParseException(SocialHandle.MESSAGE_CONSTRAINTS);
         }
-        return new SocialHandle(trimmedSocialHandle);
+        String[] s = socialHandle.split(":", 2);
+        String platform = SocialHandle.parsePlatform(s[0]);
+        if (!SocialHandle.isValidPlatform(platform)) {
+            throw new ParseException(SocialHandle.PLATFORM_CONSTRAINTS);
+        }
+        String username = s[1].trim();
+        if (username.isEmpty()) {
+            return new SocialHandle(platform, ""); // To delete the platform in socialHandles
+        }
+        if (!SocialHandle.isValidValue(username)) {
+            throw new ParseException(SocialHandle.USERNAME_CONSTRAINTS);
+        }
+        return new SocialHandle(platform, username);
     }
 
     /**
@@ -230,11 +247,23 @@ public class ParserUtil {
      */
     public static Set<SocialHandle> parseSocialHandles(Collection<String> socialHandles) throws ParseException {
         requireNonNull(socialHandles);
-        // Ensure only the latest entry of the same social platform are kept
+        // Ensure only the last social handle of each social platform are kept
+        boolean isClearSocialHandlesDetected = false;
         Hashtable<String, SocialHandle> socialHandleTable = new Hashtable<>();
         for (String socialHandle : socialHandles) {
             SocialHandle tmp = parseSocialHandle(socialHandle);
-            socialHandleTable.put(tmp.platform, tmp);
+            if (tmp.platform.isEmpty()) {
+                isClearSocialHandlesDetected = true;
+            } else {
+                socialHandleTable.put(tmp.platform, tmp);
+            }
+        }
+        if (isClearSocialHandlesDetected) {
+            if (socialHandleTable.isEmpty()) {
+                return new HashSet<>();
+            } else {
+                throw new ParseException(SocialHandle.CLEAR_CONSTRAINTS);
+            }
         }
         final Set<SocialHandle> socialHandleSet = new HashSet<>(socialHandleTable.values());
         return socialHandleSet;

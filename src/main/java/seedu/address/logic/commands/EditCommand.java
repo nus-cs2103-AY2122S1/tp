@@ -14,10 +14,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -124,22 +124,33 @@ public class EditCommand extends Command {
 
     private static Set<SocialHandle> updateSocialHandles(
             Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        Set<SocialHandle> updatedSocialHandles = new HashSet<>();
-        // social handles of non-conflicting platform will be added back
         if (editPersonDescriptor.getSocialHandles().isPresent()) {
-            updatedSocialHandles.addAll(editPersonDescriptor.getSocialHandles().get());
-            if (updatedSocialHandles.isEmpty()) {
-                return updatedSocialHandles;
+            if (editPersonDescriptor.getSocialHandles().get().isEmpty()) {
+                return new HashSet<>(); // Clear all social handles entries
             }
-            Set<SocialHandle> nonDuplicatePlatformSocialHandles = personToEdit.getSocialHandles().stream()
-                    .filter(personSocialHandle -> updatedSocialHandles.stream()
-                            .noneMatch(editSocialHandle -> editSocialHandle.isSamePlatform(personSocialHandle)))
-                    .collect(Collectors.toSet());
-            updatedSocialHandles.addAll(nonDuplicatePlatformSocialHandles);
         } else {
-            updatedSocialHandles.addAll(personToEdit.getSocialHandles());
+            return new HashSet<>(personToEdit.getSocialHandles());
         }
-        return updatedSocialHandles;
+        Hashtable<String, SocialHandle> tmp = new Hashtable<>();
+        // Add all original social handles to hashtable
+        for (SocialHandle socialHandle : personToEdit.getSocialHandles()) {
+            if (!socialHandle.platform.isEmpty() && !socialHandle.value.isEmpty()) {
+                tmp.put(socialHandle.platform, socialHandle);
+            }
+        }
+        // Add all new social handles to hashtable; Replace with new social handles if platform already exists
+        for (SocialHandle socialHandle : editPersonDescriptor.getSocialHandles().get()) {
+            if (socialHandle.platform.isEmpty()) {
+                tmp.clear();
+            }
+            String value = socialHandle.value;
+            if (value.isEmpty()) {
+                tmp.remove(socialHandle.platform);
+            } else {
+                tmp.put(socialHandle.platform, socialHandle);
+            }
+        }
+        return new HashSet<>(tmp.values());
     }
 
     @Override
