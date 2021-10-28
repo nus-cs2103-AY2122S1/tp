@@ -62,7 +62,7 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 
 To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br><br>
 (Need to put different icon here)<br><br>
-**If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
+❗**If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
 
 
 1. [Profiles](#1-profiles) <br/>
