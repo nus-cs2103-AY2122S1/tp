@@ -46,8 +46,8 @@ public class EditTaskCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book.";
     public static final String MESSAGE_TODO_TIME = "A Todo task cannot contain any time information";
-    public static final String MESSAGE_DEADLINE_ON = "/on prefix cannot be used for a Deadline task";
-    public static final String MESSAGE_EVENT_BY = "/by prefix cannot be used for an Event task";
+    public static final String MESSAGE_DEADLINE_ON = "on/ prefix cannot be used for a Deadline task";
+    public static final String MESSAGE_EVENT_BY = "by/ prefix cannot be used for an Event task";
 
     private final Index index;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -99,14 +99,7 @@ public class EditTaskCommand extends Command {
                 .orElse(new Description(taskToEdit.getDescription()));
         Task.Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
-        if (taskToEdit instanceof TodoTask) {
-            //if the task is a Todo task, it should not contain any time info.
-            if (editTaskDescriptor.getTaskDate().isPresent() || editTaskDescriptor.getDeadline().isPresent()) {
-                throw new CommandException(EditTaskCommand.MESSAGE_TODO_TIME);
-            }
-            return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(),
-                    description, updatedPriority);
-        }
+
 
         if (taskToEdit instanceof DeadlineTask) {
             //If the task is a Deadline Task, it shouldn't contain /on prefix.
@@ -127,9 +120,16 @@ public class EditTaskCommand extends Command {
 
             return new EventTask(updatedTaskName, updatedTags,
                     taskToEdit.checkIsDone(), updatedTaskDate, description, updatedPriority);
+        } else { //if (taskToEdit instanceof TodoTask) {
+            //if the task is a Todo task, it should not contain any time info.
+            if (editTaskDescriptor.getTaskDate().isPresent() || editTaskDescriptor.getDeadline().isPresent()) {
+                throw new CommandException(EditTaskCommand.MESSAGE_TODO_TIME);
+            }
+            return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(),
+                    description, updatedPriority);
         }
 
-        return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), description, updatedPriority);
+        //return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), description, updatedPriority);
     }
 
     @Override
