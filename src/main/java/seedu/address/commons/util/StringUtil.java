@@ -226,4 +226,15 @@ public class StringUtil {
 
         return word.substring(0, word.length() - suffix.length());
     }
+
+    /**
+     * Converts an empty string or null to a dash ("-") for display in the GUI.
+     * Non-empty {@code str} are returned as normal.
+     */
+    public static String transformEmptyRepresentation(String str) {
+        if (str == null || str.trim().isEmpty()) {
+            return "-";
+        }
+        return str;
+    }
 }

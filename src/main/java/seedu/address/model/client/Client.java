@@ -61,6 +61,10 @@ public class Client {
         this.tags.forEach(tag -> tag.addClient(this));
     }
 
+    public boolean isSameDayMeeting(LocalDate date) {
+        return nextMeeting.isSameDay(date);
+    }
+
     /**
      * Removes lingering references to this client.
      * Invokes this when the client is no longer referenced.

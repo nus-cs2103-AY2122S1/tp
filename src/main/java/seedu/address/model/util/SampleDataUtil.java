@@ -82,16 +82,12 @@ public class SampleDataUtil {
         try {
             for (Client sampleClient : getSampleClients(sampleAb)) {
                 sampleAb.addClient(sampleClient);
-                if (sampleClient.hasNextMeeting()) {
-                    sampleAb.addNextMeeting(sampleClient.getNextMeeting());
-                }
             }
-            sampleAb.setClientCounter("6");
         } catch (ParseException e) {
-            logger.warning(
-                "Problem while reading from the sample address book. Will be starting with an empty AddressBook ");
+            logger.warning("Sample data file not in the correct format. Will be starting with an empty AddressBook");
             return new AddressBook();
         }
+
         return sampleAb;
     }
 

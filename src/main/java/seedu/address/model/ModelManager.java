@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -19,7 +21,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
-import seedu.address.model.client.NextMeeting;
+import seedu.address.model.client.SortByAttribute;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.AddressBookList;
 import seedu.address.storage.ThemeList;
@@ -36,7 +38,8 @@ public class ModelManager implements Model {
     private final SortedList<Client> sortedClients;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Client> clientToView;
-    private final SortedList<NextMeeting> sortedNextMeetings;
+    private final SortedList<Client> sortedNextMeetings;
+    private final FilteredList<Client> shownNextMeetings;
     private final FilteredList<Tag> filteredTags;
     private final AddressBookList addressBookList;
     private final ThemeList themeList;
@@ -63,13 +66,15 @@ public class ModelManager implements Model {
         sortedClients = new SortedList<>(clientList);
         filteredClients = new FilteredList<>(sortedClients);
 
-        clientToView = new FilteredList<>(clientList);
-        clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
+        sortedNextMeetings = new SortedList<>(checkAllNextMeetings(this.addressBook.getClientList()));
+        shownNextMeetings = new FilteredList<>(sortedNextMeetings);
 
-        sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
 
         // TODO: filter by colors, etc
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+
+        clientToView = new FilteredList<>(this.addressBook.getClientList());
+        clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -113,18 +118,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableValue<Path> getAddressBookFilePathObject() {
-        return userPrefs.getAddressBookFilePathObject();
-    }
-
-    @Override
-    public Path getAddressBookDirectory() {
-        return userPrefs.getAddressBookDirectory();
-    }
-
-    @Override
     public ObservableList<ThemeType> getThemeList() {
         return this.themeList.getThemeList();
+    }
+
+    @Override
+    public ThemeType getTheme() {
+        return this.themeList.getTheme();
     }
 
     @Override
@@ -134,8 +134,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ThemeType getTheme() {
-        return this.themeList.getTheme();
+    public ObservableValue<Path> getAddressBookFilePathObject() {
+        return userPrefs.getAddressBookFilePathObject();
+    }
+
+    @Override
+    public Path getAddressBookDirectory() {
+        return userPrefs.getAddressBookDirectory();
     }
 
     @Override
@@ -184,11 +189,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteMeetingsByClients(List<Client> toDelete) {
-        addressBook.deleteMeetingsByClients(toDelete);
-    }
-
-    @Override
     public void addClient(Client client) {
         addressBook.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
@@ -232,21 +232,25 @@ public class ModelManager implements Model {
         return filteredClients;
     }
 
-    //=========== Filtered Client List Accessors =============================================================
-
     @Override
     public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
     }
+    //=========== Filtered Client List Accessors =============================================================
 
     @Override
-    public void addNextMeeting(NextMeeting nextMeeting) {
-        addressBook.addNextMeeting(nextMeeting);
+    public ObservableList<Client> getSortedNextMeetingList() {
+        shownNextMeetings.setPredicate(Client::hasNextMeeting);
+        return shownNextMeetings;
     }
 
     @Override
-    public ObservableList<NextMeeting> getSortedNextMeetingList() {
-        return sortedNextMeetings;
+    public void filterSortedNextMeetingList(LocalDate date) {
+        if (date == null) {
+            shownNextMeetings.setPredicate(PREDICATE_SHOW_ALL_CLIENTS);
+        } else {
+            shownNextMeetings.setPredicate((client) -> client.isSameDayMeeting(date));
+        }
     }
 
     @Override
@@ -270,8 +274,6 @@ public class ModelManager implements Model {
         sortedClients.setComparator(sorter);
     }
 
-    //=========== Client To View List Accessors =============================================================
-
     /**
      * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
      * {@code versionedAddressBook}
@@ -285,6 +287,8 @@ public class ModelManager implements Model {
     public boolean isClientExistToView(ClientId clientId) {
         return this.addressBook.hasClientId(clientId);
     }
+
+    //=========== Client To View List Accessors =============================================================
 
     @Override
     public String getNameOfClientToView() {
@@ -300,6 +304,15 @@ public class ModelManager implements Model {
     public void updateClientToView(Predicate<Client> predicate) {
         requireNonNull(predicate);
         clientToView.setPredicate(predicate);
+    }
+
+    private SortedList<Client> checkAllNextMeetings(ObservableList<Client> filteredClients) {
+        SortedList<Client> sortedMeetings = new SortedList<>(filteredClients);
+        Comparator<Client> nextMeetingComparator = new SortByAttribute(PREFIX_NEXTMEETING)
+            .thenCompareByAttribute(PREFIX_CLIENTID);
+        sortedMeetings.setComparator(nextMeetingComparator);
+
+        return sortedMeetings;
     }
 
     @Override

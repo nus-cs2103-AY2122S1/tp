@@ -12,7 +12,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
-import seedu.address.model.client.NextMeeting;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.ThemeType;
 
@@ -28,18 +27,12 @@ public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
      */
-    Predicate<Client> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
-
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
 
     /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -136,11 +129,6 @@ public interface Model {
     List<Client> removeAll(List<ClientId> clientIds);
 
     /**
-     * Deletes the meetings from the belonging to the deleted persons
-     */
-    void deleteMeetingsByClients(List<Client> toDelete);
-
-    /**
      * Adds the given client.
      * {@code client} must not already exist in the address book.
      */
@@ -193,14 +181,11 @@ public interface Model {
     ObservableList<Tag> getFilteredTagList();
 
     /**
-     * Adds a meeting to the current meeting list
+     * Returns an unmodifiable view of the clients filtered by next meetings for current user.
      */
-    void addNextMeeting(NextMeeting nextMeeting);
+    ObservableList<Client> getSortedNextMeetingList();
 
-    /**
-     * Returns an unmodifiable view of the meetings for current user.
-     */
-    ObservableList<NextMeeting> getSortedNextMeetingList();
+    void filterSortedNextMeetingList(LocalDate date);
 
     /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.

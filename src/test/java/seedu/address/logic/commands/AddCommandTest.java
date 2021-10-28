@@ -205,12 +205,6 @@ public class AddCommandTest {
 
 
         @Override
-        public void deleteMeetingsByClients(List<Client> toDelete) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-
-        @Override
         public Client getClient(ClientId clientId) {
             throw new AssertionError("This method should not be called.");
         }
@@ -231,7 +225,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<NextMeeting> getSortedNextMeetingList() {
+        public ObservableList<Client> getSortedNextMeetingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterSortedNextMeetingList(LocalDate date) {
             throw new AssertionError("This method should not be called.");
         }
 

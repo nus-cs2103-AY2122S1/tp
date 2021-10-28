@@ -101,8 +101,13 @@ public class EditCommand extends Command {
             .orElse(clientToEdit.getDisposableIncome());
         CurrentPlan updatedCurrentPlan = editClientDescriptor.getCurrentPlan().orElse(clientToEdit.getCurrentPlan());
         LastMet updatedLastMet = editClientDescriptor.getLastMet().orElse(clientToEdit.getLastMet());
-        NextMeeting updatedNextMeeting = editClientDescriptor.getNextMeeting().orElse(clientToEdit.getNextMeeting());
-        updatedNextMeeting.setWithWho(updatedName);
+        NextMeeting tempUpdatedNextMeeting = editClientDescriptor.getNextMeeting()
+            .orElse(clientToEdit.getNextMeeting());
+        NextMeeting updatedNextMeeting = tempUpdatedNextMeeting.copyNextMeeting();
+        if (!updatedNextMeeting.isNullMeeting()) {
+            updatedNextMeeting.setWithWho(updatedName);
+
+        }
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,

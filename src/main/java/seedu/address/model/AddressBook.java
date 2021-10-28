@@ -16,10 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
-import seedu.address.model.client.Name;
-import seedu.address.model.client.NextMeeting;
 import seedu.address.model.client.UniqueClientList;
-import seedu.address.model.client.UniqueNextMeetingList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagIsUnreferenced;
 import seedu.address.model.tag.UniqueTagList;
@@ -33,7 +30,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     private final UniqueClientList clients;
-    private final UniqueNextMeetingList meetings;
     private final UniqueTagList tags;
 
     private String clientCounter;
@@ -47,7 +43,6 @@ public class AddressBook implements ReadOnlyAddressBook {
          *   among constructors.
          */
         clients = new UniqueClientList();
-        meetings = new UniqueNextMeetingList();
         tags = new UniqueTagList();
 
         clients.asUnmodifiableObservableList().addListener((ListChangeListener<Client>) change -> {
@@ -82,7 +77,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         setClients(newData.getClientList());
         setTags(newData.getTagList());
-        setMeetings(newData.getNextMeetingsList());
         setClientCounter(newData.getClientCounter());
     }
 
@@ -99,51 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the meetings list with {@code meetings}.
-     * {@code meetings} must not contain duplicate NextMeetings.
-     */
-    public void setMeetings(List<NextMeeting> meetings) {
-        this.meetings.setNextMeetings(meetings);
-    }
-
-    /**
-     * Returns true if a nextMeeting with the same identity as {@code nextMeeting} exists in the address book.
-     */
-    public boolean hasNextMeeting(NextMeeting nextMeeting) {
-        requireNonNull(nextMeeting);
-        return meetings.contains(nextMeeting);
-    }
-
-    /**
-     * Adds a NextMeeting to the address book.
-     * The meeting must not already exist in the address book.
-     */
-    public void addNextMeeting(NextMeeting nextMeeting) {
-        meetings.add(nextMeeting);
-    }
-
-    /**
-     * Returns NextMeeting with corresponding withWho.
-     *
-     * @param withWho name of client
-     * @return meeting with matching client
-     */
-    public NextMeeting getNextMeeting(Name withWho) {
-        requireNonNull(withWho);
-        return meetings.getNextMeeting(withWho);
-    }
-
-    //// meeting-level operations
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeNextMeeting(NextMeeting key) {
-        meetings.remove(key);
-    }
-
-    /**
+     * /**
      * Returns true if a client with the same identity as {@code client} exists in the address book.
      */
     public boolean hasClient(Client client) {
@@ -169,14 +119,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         clients.add(p);
     }
 
-    //// person-level operations
-
     /**
      * Replaces the given client {@code target} in the list with {@code editedClient}.
      * {@code target} must exist in the address book.
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * If the given client's next meeting is edited, {@code meetings} will be updated with the new NextMeeting
      *
-     * @return
+     * @return the given client {@code target} in the list with {@code editedClient}.
      */
     public List<Client> setAll(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireNonNull(clientIds);
@@ -203,6 +152,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(clientId);
         return clients.getClient(clientId);
     }
+
+    //// person-level operations
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
@@ -244,8 +195,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.removeByFields(predicates);
     }
 
-    //// tag-level operations
-
     /**
      * Returns true if a tag with the given {@code tagName} exists.
      *
@@ -275,12 +224,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return clients.removeAll(clientIds);
     }
 
-    public void deleteMeetingsByClients(List<Client> toDelete) {
-        meetings.deleteByClients(toDelete);
+    //// tag-level operations
+
+    public void updateLastMetDate() {
+        clients.updateLastMetDate();
     }
-
-
-    //// util methods
 
     @Override
     public ObservableList<Client> getClientList() {
@@ -288,16 +236,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         return clients.asUnmodifiableObservableList();
     }
 
-    @Override
-    public ObservableList<NextMeeting> getNextMeetingsList() {
-        return meetings.asUnmodifiableObservableList();
-    }
-
+    /**
+     * Gets the clientCounter of the address book.
+     */
     @Override
     public String getClientCounter() {
         return this.clientCounter;
     }
 
+    /**
+     * Replaces the clientCounter of the address book with {@code clientCounter}.
+     */
+    @Override
+    public void setClientCounter(String clientCounter) {
+        this.clientCounter = clientCounter;
+    }
+
+
+    //// util methods
+
+    /**
+     * Increments the clientCounter of the address book by 1 {@code clientCounter}.
+     */
     @Override
     public void incrementClientCounter() {
         try {
@@ -309,22 +269,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public void setClientCounter(String clientCounter) {
-        this.clientCounter = clientCounter;
-    }
-
-    @Override
-    public ObservableList<NextMeeting> getSortedNextMeetingsList() {
-        return meetings.asSortedObservableList();
-    }
-
-    @Override
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();
-    }
-
-    public void updateLastMetDate() {
-        clients.updateLastMetDate();
     }
 
     @Override

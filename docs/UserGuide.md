@@ -186,9 +186,12 @@ Format: `list`
 
 Sorts clients in order based off the inputted attribute
 
-Format: `sort <attribute>/{ASC/DSC}`
+Format: `sort <attribute>/{ASC/DSC}...`
 
 * The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order.
+* If multiple attributes are provided, then the clients will be sorted by the attributes sequentially.
+e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income first, then for those clients whose
+disposable income are the same, they will be sorted by next meeting in descending.
 * Sorting by the attribute Tag (t/) is not supported.
 * The tags are case-insensitive. (ASC and asc are both okay.)
 
@@ -202,9 +205,12 @@ Finds the meeting schedule that the user has on a specified date.
 
 Format: `schedule {DATE}`
 
-* `DATE` has to be in the format of `dd-MM-yyyy`, where Day, Month and Years are numerical values.
+* `DATE` has to be in the format of dd-MM-yyyy, where Day(dd), Month(MM) and Years(yyyy) are numerical values.
+* if the `{date}` is not specified, all meetings will be displayed.
 
-Example: `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
+Example:
+* `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
+* `schedule` displays all meetings
 
 ### Locating clients by keywords : `search`
 
@@ -339,7 +345,7 @@ Action | Format | Examples
 **Edit** | `edit {CLIENT'S ID}... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
 **Delete** | `delete {CLIENT'S ID}...` | delete 4  |
 **List** | `list` | - |
-**Sort** | `sort <attribute>/{ASC/DESC}` | sort r/asc |
+**Sort** | `sort <attribute>/{ASC/DESC}...` | sort r/asc |
 **Schedule** | `schedule {DATE}` | schedule 22-09-2021 |
 **Search** | `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
 **Filter** | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
