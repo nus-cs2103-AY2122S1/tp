@@ -6,12 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.FileUtil;
+
 public class ConfigTest {
 
     @Test
     public void toString_defaultObject_stringReturned() {
         String defaultConfigAsString = "Current log level : INFO\n"
-                + "Preference file Location : preferences.json";
+                + "Preference file Location : "
+                + FileUtil.pathOf("preferences.json");
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }

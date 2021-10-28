@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+    private static Path enclosingFolder;
 
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
@@ -85,12 +86,32 @@ public class FileUtil {
     /**
      * Gets the path of the folder which the jar file is located in (or whatever is used to launch the app)
      */
-    public static Path getAppEnclosingFolder() {
+    private static Path getAppEnclosingFolder() {
         try {
-            return Path.of(new File(FileUtil.class.getProtectionDomain()
-                    .getCodeSource().getLocation().toURI()).getPath()).getParent();
+            if (enclosingFolder == null) {
+                enclosingFolder = Path.of(new File(FileUtil.class.getProtectionDomain()
+                        .getCodeSource().getLocation().toURI()).getPath()).getParent();
+            }
+            return enclosingFolder;
         } catch (URISyntaxException e) {
             return null;
         }
+    }
+
+    /**
+     * Gets the absolute path, relative to where the jar file is located.
+     */
+    public static Path pathOf(String first, String... more) {
+        Path path = Path.of(first, more);
+        return getAppEnclosingFolder() == null ? path : enclosingFolder.resolve(path);
+    }
+
+    /**
+     * Gets the path, relative to where the jar file is located.
+     */
+    public static Path getRelativePath(Path path) {
+        return getAppEnclosingFolder() == null
+                ? path
+                : Path.of(".").resolve(getAppEnclosingFolder().relativize(path));
     }
 }

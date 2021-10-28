@@ -2,7 +2,6 @@ package seedu.address;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import javafx.application.Application;
+import seedu.address.commons.util.FileUtil;
 
 public class AppParametersTest {
 
@@ -20,7 +20,7 @@ public class AppParametersTest {
     @Test
     public void parse_validConfigPath_success() {
         parametersStub.namedParameters.put("config", "config.json");
-        expected.setConfigPath(Paths.get("config.json"));
+        expected.setConfigPath(FileUtil.pathOf("config.json"));
         assertEquals(expected, AppParameters.parse(parametersStub));
     }
 
