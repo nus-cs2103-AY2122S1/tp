@@ -19,9 +19,9 @@ section of the user guide.
 
 ## How to use
 
-This user guide will bring you through how to quickly start using our application through the [Quick Start](#quick-start) section, while also serving as a reference to more experienced users in the [Feature List](#feature-list) section, where notes and tips on how best to make use of our application will also be given.
+This user guide will bring you through **how to quickly start using our application through the [Quick Start](#quick-start) section**, while also serving as a **reference to more experienced users in the [Feature List](#feature-list) section**, where notes and tips on how best to make use of our application will also be given.
 
-If you face any difficult while following the user guide, do refer to the FAQ section to see if your issue has been addressed there. If the solution provided or your query has yet to be answered in the FAQ section, feel free to reach out to our team lead at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu) through email.
+**If you face any difficult while following the user guide, do refer to the [FAQ section](#faq)** to see if your issue has been addressed there. If the solution provided or your query has yet to be answered in the FAQ section, feel free to reach out to our team lead, Erin Ong, at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu) through email.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ If you face any difficult while following the user guide, do refer to the FAQ se
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
     * **`list`** : Lists all students currently stored.
@@ -73,12 +73,12 @@ Term | Definition
 
 These icons will appear within coloured boxes to indicate
 
-Icon | Meaning | Box colour
---------|------------------|----
-:information_source:**Note**|This icon serves to give an additional note or remark about the current feature|Blue
-:bulb:**Tip**|This icon serves to give a quick recommendation about how to use the feature in the most beneficial way|Blue
-:exclamation:**Caution**|This icon serves to give a note on behaviour of the application that could be unexpected to you|Yellow 
-:warning:**Warning**|This icon serves to warn against using a feature in some unintended manner| Yellow
+&nbsp; &nbsp; &nbsp; Icon &nbsp; &nbsp; &nbsp; | Meaning | Box colour
+------------|------------------|----
+ :information_source:**Note** |This icon serves to give an additional note or remark about the current feature|Blue
+ :bulb:**Tip** |This icon serves to give a quick recommendation about how to use the feature in the most beneficial way|Blue
+ :exclamation:**Caution** |This icon serves to give a note on behaviour of the application that could be unexpected to you|Yellow 
+ :warning:**Warning** |This icon serves to warn against using a feature in some unintended manner| Yellow
 
 
 
@@ -115,7 +115,7 @@ Icon | Meaning | Box colour
 
 #### Viewing help : `help`
 
-Shows a message explaining how to access the user guide.
+Displays a pop-up message explaining how to access the user guide as shown below:
 
 ![help message](images/helpMessage.png)
 
@@ -123,19 +123,19 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from CSBook.
+Clears all students, groups and their associated data from CSBook
 
 Format: `clear`
 
 #### Encrypting the data file: `encrypt`
 
-Encrypts the CSBook data file.
+Encrypts the CSBook data file into a non-human-readable format to protect the data from access by undesirable parties.
 
 Format: `encrypt`
 
 #### Decrypting the data file: `decrypt`
 
-Decrypts the CSBook data file.
+Decrypts the CSBook data file back into a human-readable format from its previously encrypted state.
 
 Format: `decrypt`
 
@@ -184,6 +184,7 @@ Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 * `add n/Jun Wei t/@albino_api e/albinoape@u.nus.edu g/CS2101`
 
+Result of `add n/Jun Wei t/@albino_api e/albinoape@u.nus.edu g/CS2101`:
   ![result for 'add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T'](images/addJunWeiResult.png)
 
 #### Listing all students : `list`
@@ -226,6 +227,7 @@ Examples:
 * `find oliveiro` returns `Charlotte Oliveiro` and `Edgar Oliveiro`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
+Result of `find alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 #### View student: `viewstudent`
@@ -243,6 +245,7 @@ Examples:
 * `viewstudent David Li` returns `David Li`
 * `viewstudent Irfan Ibrahim` returns `Irfan Ibrahim`<br>
 
+Result of `viewstudent Irfan Ibrahim`:
   ![result for 'viewstudent Irfan Ibrahim'](images/viewStudentIrfanIbrahimResult.png)
 
 #### Adding an assessment: `addassessment`
@@ -265,6 +268,7 @@ Examples:
 * `addassessment 1 a/Finals s/13/30`
 * `addassessment 6 a/Participation s/3/5`<br>
 
+Result of `addassessment 6 a/Participation s/3/5`:
   ![result for 'addassessment 6 a/Participation s/3/5'](images/addAssessmentParticipationResult.png)
 
 #### Deleting an assessment: `deleteassessment`
@@ -293,9 +297,10 @@ Format: `note n/NAME no/NOTE`
 
 Examples:
 * `note n/Charlotte Oliveiro no/Great with presentations` will replace the existing note `Very convincing presentations` with `Great with presentations`
-* `note n/Roy Balakrishnan no/Not clear about UML diagrams, particularly with Sequence Diagrams. Can a bit of help with Object Diagrams as well.` will add a note `Not clear about UML diagrams, particularly with Sequence Diagrams. Can a bit of help with Object Diagrams as well.`<br>
+* `note n/Roy Balakrishnan no/Not clear about UML diagrams, particularly with Sequence Diagrams. Can use a bit of help with Object Diagrams as well.` will add a note `Not clear about UML diagrams, particularly with Sequence Diagrams. Can use a bit of help with Object Diagrams as well.`<br>
 
-  ![result for 'note n/Roy Balakrishnan no/Not clear about UML diagrams, particularly with Sequence Diagrams. Can a bit of help with Object Diagrams as well.'](images/noteRoyUmlResult.png)
+Result of the above `note n/Roy Balakrishnan no/Not clear about...`:
+  ![result for 'note n/Roy Balakrishnan no/Not clear about UML diagrams, particularly with Sequence Diagrams. Can use a bit of help with Object Diagrams as well.'](images/noteRoyUmlResult.png)
 
 #### Deleting a student : `delete`
 
@@ -335,6 +340,8 @@ Examples:
 * `addgroup g/CS2100 d/Computer Organisation` creates a group called `CS2103T` and the description `Computer Organisation`
 that students can be added into.<br>
 
+
+  Result of `addgroup g/CS2100 d/Computer Organisation`:
   ![result for `addgroup g/CS2100 d/Computer Organisation`](images/addGroupCS2100Result.png)
 
 
@@ -347,6 +354,7 @@ Format: `viewgroup g/GROUPNAME`
 Examples:
 * `viewgroup CS2103T` displays the students in `CS2103T`.
 
+Result of `viewgroup CS2103T`:
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
 #### Changing the group of a student: `changegroup`
