@@ -49,4 +49,8 @@ public class Description {
                 || (other instanceof Description // instanceof handles nulls
                 && description.equals(((Description) other).description)); // state check
     }
+
+    public Description getCopiedDescription() {
+        return new Description(description);
+    }
 }
