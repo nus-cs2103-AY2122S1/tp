@@ -31,11 +31,11 @@ public class AddTagCommand extends Command {
 
     public static final String COMMAND_WORD = "addt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tags for persons in the current list. "
-            + "Add tags for all person by inputting the tag. OR, add tags of a person by "
-            + "inputting both the index number and the tag."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": "
+            + "'addt all t/TAG' adds tags for everyone. "
+            + "'addt INDEX t/TAG' adds tags for selected person."
             + "Parameters: "
-            + "[INDEX (must be a positive integer)] "
+            + "INDEX (must be a positive integer or the word 'all')"
             + "" + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "CS2103 Group Mate ";

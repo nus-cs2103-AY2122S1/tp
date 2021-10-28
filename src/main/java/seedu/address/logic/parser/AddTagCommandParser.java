@@ -28,14 +28,15 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         Index index;
         Set<Tag> tags;
 
-        if (argMultimap.getPreamble().isEmpty()) {
-            index = null; //No Index Inputted
+        String argument = argMultimap.getPreamble().trim().toLowerCase();
+        if (argument.equals("all")) {
+            index = null; //When no index is inputted
         } else {
             try {
                 index = ParserUtil.parseIndex(argMultimap.getPreamble());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE),
-                        pe); //Invalid Index Inputted
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddTagCommand.MESSAGE_USAGE), pe); //When invalid index is inputted.
             }
         }
 

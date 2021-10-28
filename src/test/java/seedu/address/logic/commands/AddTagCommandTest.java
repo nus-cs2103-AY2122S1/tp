@@ -41,7 +41,7 @@ public class AddTagCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, tagsToAdd);
 
-        for (Tag tagToAdd: tagsToAdd) {
+        for (Tag tagToAdd : tagsToAdd) {
             personToEdit = AddTagCommand.addTag(personToEdit, tagToAdd);
         }
 
@@ -63,7 +63,7 @@ public class AddTagCommandTest {
 
         for (int i = 0; i < model.getFilteredPersonList().size(); i++) {
             Person personToEdit = model.getFilteredPersonList().get(i);
-            for (Tag tagToAdd: tagsToAdd) {
+            for (Tag tagToAdd : tagsToAdd) {
                 personToEdit = AddTagCommand.addTag(personToEdit, tagToAdd);
             }
             expectedModel.setPerson(model.getFilteredPersonList().get(i), personToEdit);
