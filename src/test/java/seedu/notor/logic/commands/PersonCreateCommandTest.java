@@ -91,9 +91,11 @@ public class PersonCreateCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private static class ModelStub implements Model {
-        @Override public void setup(PersonListPanel personListPanel) {
+        @Override
+        public void setup(PersonListPanel personListPanel) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -127,11 +129,17 @@ public class PersonCreateCommandTest {
         @Override
         public void createPerson(Person person) {
             throw new AssertionError("This method should not be called.");
-        }@Override public void archivePerson(Person person) {
+        }
 
-    }@Override public void unarchivePerson(Person person) {
+        @Override
+        public void archivePerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
 
-    }
+        @Override
+        public void unarchivePerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public Person findPerson(String name) {
@@ -217,15 +225,18 @@ public class PersonCreateCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override public void displayPersons() {
+        @Override
+        public void displayPersons() {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override public void displayGroups() {
+        @Override
+        public void displayGroups() {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override public void displayPersonArchive() {
+        @Override
+        public void displayPersonArchive() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -237,11 +248,15 @@ public class PersonCreateCommandTest {
         @Override
         public boolean isPersonView() {
             return false;
-        }@Override public boolean isGroupView() {
+        }
+
+        @Override
+        public boolean isGroupView() {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override public boolean isArchiveView() {
+        @Override
+        public boolean isArchiveView() {
             throw new AssertionError("This method should not be called.");
         }
     }
