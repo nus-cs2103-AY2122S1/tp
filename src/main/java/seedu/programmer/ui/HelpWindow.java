@@ -86,9 +86,6 @@ public class HelpWindow extends PopupWindow {
         FeatureTableItem help = new FeatureTableItem("Help",
                 "help / Click Help button / Press F2",
                 "Opens this help window");
-        FeatureTableItem list = new FeatureTableItem("List",
-                "list",
-                "Displays all students records in the database");
         FeatureTableItem dashboard = new FeatureTableItem("Dashboard",
                 "dashboard / Click Dashboard button / Press F5",
                 "Shows a dashboard of ProgrammerError data");
@@ -123,6 +120,9 @@ public class HelpWindow extends PopupWindow {
         FeatureTableItem show = new FeatureTableItem("Show",
                 "show <INDEX_IN_LIST>",
                 "Shows the lab results of the chosen student");
+        FeatureTableItem list = new FeatureTableItem("List",
+                "list",
+                "Displays all students records in the database");
         FeatureTableItem addLab = new FeatureTableItem("AddLab",
                 "addlab -ln <LAB_NUMBER> -ts <TOTAL_SCORE>",
                 "Creates a lab record for all students in the database");
