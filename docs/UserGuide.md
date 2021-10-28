@@ -1,29 +1,25 @@
----
-layout: page
-title: ModuLink: User Guide
----
-
+# ModuLink: User Guide
 ## Welcome to ModuLink!
 
-ModuLink is a **desktop-based** application for Computer Science (CS) students at NUS to facilitate finding teammates for group-based modules. With a powerful integrated contact management platform, connecting with peers to form project groups has never been easier. ModuLink allows you to find students taking the modules you are interested in, search by their group status (to find students available to form or join groups), and much more.
+ModuLink is a **desktop-based** application for **Computer Science (CS) students** at NUS to facilitate finding teammates for group-based modules. With a powerful integrated contact management platform, connecting with peers to form project groups has never been easier. ModuLink allows you to find students taking the modules you are interested in, search by their group status (to find students available to form or join groups), and much more.
 <br>
+
+The app is configured to use the **Command Line Interface (CLI)**, which means most of the commands you will interact with will be typed in a command box, rather than using a Graphical User Interface (GUI) with graphical tools and icons. If you are unaccustomed to the CLI, do not worry, as ModuLink still provides a lot of the benefits of a GUI to make working with text-based inputs easy to understand.
 <br>
-The app is configured to use the Command Line Interface (CLI), which means most of the commands you will interact with will be typed in a command box, rather than using a Graphical User Interface (GUI) with graphical tools and icons. If you are unaccustomed to the CLI, do not worry, as ModuLink still provides a lot of the benefits of a GUI to make working with text-based inputs easy to understand.
-<br>
-<br>
-This User Guide will show you everything you need to know to optimize your experience with ModuLink, for both new and more proficient users. We recommend reading through **[Section 1: Using this User Guide](#section-1-using-this-user-guide)** if you are a first-time user. If you would like to skip to the features ModuLink provides, you can head to **[Section 3: Features - Understanding what ModuLink can do for you](#section-3-features---understanding-what-modulink-can-do-for-you)**.
+
+This User Guide will show you everything you need to know to optimize your experience with ModuLink, whether you are a new or proficient user. We recommend reading through **[Section 1: Using this User Guide](#section-1-using-this-user-guide)** if you are a first-time user. If you would like to skip to the features ModuLink provides, you can head to **[Section 3: Features - Understanding what ModuLink can do for you](#section-3-features---understanding-what-modulink-can-do-for-you)**.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Section 1: Using this User Guide
 This guide has been designed to make sure you can quickly access any information you may need. At a glance, here is how it is structured:
 
-1. [Quick Start - Getting started with ModuLink (Recommended for first-time users)](#quick-start)
-2. [Features - Understanding what ModuLink can do for you](#features)
+1. [Quick Start - Getting started with ModuLink (Recommended for first-time users)](#section-2-quick-start---getting-started-with-modulink)
+2. [Features - Understanding what ModuLink can do for you](#section-3-features---understanding-what-modulink-can-do-for-you)
 3. [Managing Data](#data-storage-in-modulink)
 4. [Summaries](#parameter--command-summary)
 5. [Frequently Asked Questions](#faq)
 6. [Glossary](#glossary)
-<br>
 
 We further recommend taking a glance at **[Section 2.1 Syntax and symbols](#section-21-syntax-and-symbols)** to familiarize yourself with the formats, icons and other terms this guide uses.
 ### Section 1.1: Syntax and Symbols
@@ -39,18 +35,16 @@ If you are using ModuLink for the first time, we will first walk you through a o
 <br> <br>
 Alternatively, if you prefer, you could also check the version via the GUI for both Mac and Windows systems, as mentioned in this [guide](https://phoenixnap.com/kb/check-java-version-on-mac-windows). 
    <br>
-   <br>
-   <div markdown="span" class="alert alert-warning">:exclamation: Caution:
-   ModuLink will not run on older versions of Java!
+   <div markdown="span" class="alert alert-warning">
+  **:exclamation: Caution:
+   ModuLink will not run on older versions of Java!**
    </div>
    
    If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/downloads/#java11?JDK11.0.13=).
-<br><br>
 2. Download the latest `modulink.jar` from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
-<br><br>
 3. Move the file to the folder you want to use as the home folder for ModuLink on your computer.
 
-###Section 2.2 Working with ModuLink
+### Section 2.2 Working with ModuLink
 To run the app, simply double click the file. You should see a GUI similar to the one shown below in a few seconds. The app will already contain data. Here’s a quick look at the different elements in the app.
 
 ![Ui](images/screenshots/Ui2.png) [To be updated]
@@ -69,10 +63,10 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 
 ## Section 3: Features - Understanding what ModuLink can do for you
 
-To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.
-   <div markdown="span" class="alert alert-warning">:exclamation: Caution:
-If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.
-</div>
+To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br><br>
+(Need to put different icon here)<br><br>
+**If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
+
 
 1. [Profiles](#1-profiles) <br/>
    1.1. [Create your own profile](#11-create-your-own-profile--create) <br/>
