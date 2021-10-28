@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -32,13 +33,12 @@ public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletet";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete tags of persons in the current list. "
-            + "Enter 'deletet all' to delete all tags of everyone in the current list"
-            + "Enter 'deletet INDEX' to delete all tags of the selected person from the current list"
-            + "Enter 'deletet all [t/TAG1 t/TAG2...]' to delete these tags for everyone in the current list."
-            + "Enter 'deletet INDEX [t/TAG1 t/TAG2...]' to delete these tags for the selected person from the current"
-            + "list."
+            + "'deletet all' deletes all tags of everyone."
+            + "'deletet INDEX' deletes all tags of selected person."
+            + "'deletet all [t/TAG1 t/TAG2...]' deletes selected tags for everyone."
+            + "'deletet INDEX [t/TAG1 t/TAG2...]' deletes selected tags for selected person"
             + "Parameters: "
-            + "INDEX (must be a positive integer or the string 'all') "
+            + "INDEX (must be a positive integer or the word 'all') "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "CS2103 Group Mate ";
@@ -233,7 +233,7 @@ public class DeleteTagCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the tags of {@code personToEdit} removed.
      */
-    public static Person deleteTag(Person personToEdit, Tag tag) {
+    public static Person deleteTag(Person personToEdit, Tag tagToEdit) {
         assert personToEdit != null;
 
         Name name = personToEdit.getName();
@@ -247,9 +247,13 @@ public class DeleteTagCommand extends Command {
         Set<SocialHandle> socialHandles = personToEdit.getSocialHandles();
 
         Set<Tag> editedTags = new HashSet<>();
-        if (tag != null) {
-            editedTags = new HashSet<>(tags);
-            editedTags.remove(tag);
+        if (tagToEdit != null) {
+            editedTags = new HashSet<>(
+                    new ArrayList<>(tags)
+                    .stream()
+                    .filter(tag -> !tag.getTagName().equalsIgnoreCase(tagToEdit.getTagName()))
+                    .collect(Collectors.toList())
+            );
         }
         editedTags = Collections.unmodifiableSet(editedTags);
         return new Person(name, phone, email, nationality,
@@ -262,7 +266,11 @@ public class DeleteTagCommand extends Command {
     public static String tagString(Set<Tag> tags) {
         final StringBuilder builder = new StringBuilder();
         if (!tags.isEmpty()) {
-            tags.forEach(builder::append);
+            tags.forEach(tag -> {
+                builder.append("[")
+                        .append(tag.getTagName())
+                        .append("]");
+            });
         }
         builder.append(".");
         return builder.toString();
