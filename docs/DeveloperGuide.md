@@ -338,22 +338,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `PlaceBook(PB)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  PB shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  PB deletes the person
+1. User requests to add a new person.
+2. PB adds the person.
+3. PB displays success message and shows the updated list of persons.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is invalid.
+
+    * 1a1. PB shows an error message, and gives an example of the correct format.
+    
+      Use case resumes on step 1.
+      
+* 1b. The input parameters are invalid.
+    
+    * 1b1. PB shows an error message, informing user what the valid format should be.
+    
+      Use case resumes on step 1.
+      
+**Use case: UC02 - list all persons**
+
+1. User requests to list all persons.
+2. PB shows the list of persons.
+
+* 2a. The list is empty.
+
+    * 2a1. PB informs the user that the list is empty.
+    
+      Use case ends. 
+
+**Use case: UC03 - Delete a person**
+
+**MSS**
+
+1.  User <ins>requests to list persons.<ins/>
+2.  User requests to delete a specific person in the list.
+3.  PB deletes the person.
 
     Use case ends.
 
 **Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -361,46 +391,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find a person by name**
+**Use case: UC04 - Find a person by name**
 
 **MSS**
 
-1.  User inputs the find command with keywords to search for
-2.  PB shows a list of persons whose names match the given keywords
+1.  User inputs the find command with keywords to search for.
+2.  PB shows a list of persons whose names match the given keywords.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
+* 2a. PB cannot find any matching Person.
+    
+    * PB shows an empty list.
+        
+      Use case ends.
 
     
-**Use case: Add appointment**
+**Use case: UC03 - Add appointment**
 
 **MSS**
 
-1. User enters the add appointment command specifying the person or persons, date and description of the appointment.
-
+1. User enters add appointment command specifying the index or indexes of persons, address, start and end datetimes and description of the appointment.
 2. PB creates the appointment and displays a successful message.
 
 Use case ends.
 
 **Extensions**
 
-* 1a. PB detects an error in date formatting.
+* 1a. PB detects an error in command format.
     * 1a1. PB displays an error message, showing an example of the correct format.
     
 	  Use case resumes at step 1.	
 	
-    * 1b. PB does not have the specified person in the contact list
+* 1b. PB does not have the specified person in the contact list.
 	    
-	    * 1b1. PB informs the user that the person does not exist
+	 * 1b1. PB informs the user that the person does not exist.
         
-        Use case ends.
+       Use case ends.
+        
+* 1c. PB detects a collision in the time period of appointment to be added with previously added appointments.
+    * 1c1. PB informs the user that there is a clash.
+    
+      Use case ends.
 
-**Use case: List appointments**
+**Use case: UC04 - List appointments**
 
 **MSS**
 
@@ -412,7 +448,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a. PB detects that there are no appointments added
+* 1a. PB detects that there are no appointments added.
     * 1a1. PB informs the user that there are no appointments added yet.
 	
       Use case ends.
@@ -421,26 +457,24 @@ Use case ends.
 
 **MSS**
 
-1. User requests to list appointments
-
-2. PB shows list of appointments
-
-3. User enters the delete appointment command indicating the index of the appointment to be deleted
-
-4. PB deletes the appointment and displays a successful message. 
+1. User <ins>requests to list appointments (UC04)<ins/>.
+3. User enters delete appointment command indicating the index of the appointment to be deleted.
+4. PB displays a pop up window with asking for user confirmation to delete.
+5. User confirms they want to delete.
+6. PB deletes the appointment and displays a successful message. 
 
 Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty
-    
-    Use case ends
-
-* 3a. PB detects that the inputted index is out of range
+* 3a. PB detects that the inputted index is out of range.
     * 3a1. PB informs the user that the index is out of range.
 	 
 	 Use case resumes at step 2.
+	 
+* 5a. User indicates that they do not want to delete.
+    
+    Use case ends.
 		
 		
 *{More to be added}*
