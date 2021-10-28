@@ -66,6 +66,7 @@ public class PersonCard extends UiPart<Region> {
             genderIcon.setFitHeight(15);
             genderIcon.setFitWidth(15);
             name.setGraphic(genderIcon);
+            name.setContentDisplay(ContentDisplay.RIGHT);
         }
         phone.setText(person.getPhone().value);
         if (person.getPhone().value.isEmpty()) {
