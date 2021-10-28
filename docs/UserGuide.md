@@ -172,7 +172,7 @@ To organize and group contacts into an arbitrary folder.
 Format:`echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME`
 
 * `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
-* Command fails if such a contact index does not exit.
+* Command fails if such a contact index does not exist.
 * Command fails if contact has already been added before.
 * Command fails if duplicate contacts are added to the same folder.
 * `FOLDER_NAME` must be an existing folder
@@ -264,7 +264,7 @@ Action | Format, Examples
 **Clear contacts** | `rm -contacts`
 **Add new folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` e.g. `echo 3 >> CS2103`
-**Add multiple contacts to folder** | `echo INDEX1 INDEX2 INDEX3 >> FOLDER_NAME` e.g. `echo 3 4 1 9 10 >> CS2103`
+**Add multiple contacts to folder** | `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME` e.g. `echo 3 4 1 9 10 >> CS2103`
 **List folders** | `ls -folders`
 **Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` e.g. `mv CS2103` &#124; `CS2102
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103``
