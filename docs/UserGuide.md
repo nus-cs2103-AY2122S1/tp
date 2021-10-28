@@ -79,6 +79,8 @@ Adds a student to the record.
 
 Format: `add n/NAME p/PHONE e/EMAIL [m/MODULE] [c/CLASS] [i/INFO] [t/TAG]…​`
 
+* If specified, the module and class must already exist.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
 </div>
