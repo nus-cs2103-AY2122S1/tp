@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.item.Item;
+import seedu.address.model.display.Displayable;
 
 /**
  * API of the Logic component
@@ -31,8 +31,11 @@ public interface Logic {
      */
     ReadOnlyInventory getInventory();
 
-    /** Returns an unmodifiable view of the filtered list of items */
-    ObservableList<Item> getFilteredItemList();
+    /** Returns an unmodifiable view of the filtered list of Displayables to be displayed.
+     *
+     * @see seedu.address.model.display.Displayable
+     */
+    ObservableList<Displayable> getFilteredDisplayList();
 
     /**
      * Returns the user prefs' address book file path.

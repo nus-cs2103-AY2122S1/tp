@@ -7,9 +7,12 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.display.DisplayMode;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.TransactionRecord;
 
 /**
  * The API of the Model component.
@@ -18,15 +21,7 @@ public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
      */
-    Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
-
-    /**
-     * Enumeration to categorise which list of items is on display.
-     */
-    public enum DisplayMode {
-        DISPLAY_INVENTORY,
-        DISPLAY_OPEN_ORDER
-    }
+    Predicate<Displayable> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -148,6 +143,13 @@ public interface Model {
     void addToOrder(Item item);
 
     /**
+     * Get order.
+     *
+     * @return the order.
+     */
+    Order getOrder();
+
+    /**
      * Decrements the count of the given {@code target} in the order by {@code amount}.
      * {@code target} must exist in the order.
      * {@code amount} must be less than {@code target}'s count.
@@ -166,21 +168,47 @@ public interface Model {
     void transactAndClearOrder();
 
     /**
-     * Returns an unmodifiable view of the filtered item list
+     * Return a list of {@code TransactionRecord} sorted according to timestamp.
      */
-    ObservableList<Item> getFilteredItemList();
+    List<TransactionRecord> getTransactions();
 
     /**
-     * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     * Returns an unmodifiable view of the filtered list to be displayed.
+     */
+    ObservableList<Displayable> getFilteredDisplayList();
+
+    /**
+     * Updates the filter of the filtered display list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredDisplayList(DisplayMode mode, Predicate<Displayable> predicate);
+
+    /**
+     * Updates the filter of the filtered display list to filter by the given {@code predicate}.
+     * {@code mode} cannot be DISPLAY_TRANSACTIONS.
+     * If displaying transactions, use {@code updateFilteredDisplayList} instead.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     * @throws ClassCastException if current displayed list is not displaying items.
      */
     void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate);
 
     /**
+     * Opens the past transaction that has the given {@code id}.
+     *
+     * @Returns true if transaction found, and false otherwise.
+     */
+    boolean openTransaction(String id);
+
+    /**
      * Returns the model's current {@code DisplayMode}.
      *
-     * @see Model.DisplayMode
+     * @see DisplayMode
      */
     DisplayMode getDisplayMode();
+
+    void addCostBookKeeping(Double cost);
+
+    void addRevenueBookKeeping(Double revenue);
 }

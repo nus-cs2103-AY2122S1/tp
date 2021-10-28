@@ -157,16 +157,11 @@ public class Inventory implements ReadOnlyInventory {
     public TransactionRecord transactOrder(Order order) {
         requireNonNull(order);
 
-        UniqueItemList transactedItems = new UniqueItemList();
-
         for (Item item : order.getOrderItems()) {
-            int transactedQuantity = transactItem(item);
-            if (transactedQuantity > 0) {
-                transactedItems.add(new Item(item, transactedQuantity));
-            }
+            transactItem(item);
         }
 
-        return new TransactionRecord(transactedItems);
+        return new TransactionRecord(order);
     }
 
     /**

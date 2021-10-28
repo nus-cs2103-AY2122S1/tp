@@ -7,9 +7,12 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.display.DisplayMode;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.TransactionRecord;
 
 /**
  * A default model stub that have all of its methods failing.
@@ -107,12 +110,22 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public ObservableList<Item> getFilteredItemList() {
+    public ObservableList<Displayable> getFilteredDisplayList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredDisplayList(DisplayMode mode, Predicate<Displayable> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean openTransaction(String id) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -148,6 +161,26 @@ public class ModelStub implements Model {
 
     @Override
     public void transactAndClearOrder() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addCostBookKeeping(Double cost) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Order getOrder() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public List<TransactionRecord> getTransactions() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addRevenueBookKeeping(Double revenue) {
         throw new AssertionError("This method should not be called.");
     }
 }

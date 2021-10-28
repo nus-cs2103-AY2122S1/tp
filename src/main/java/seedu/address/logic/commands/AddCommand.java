@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
 import java.util.Optional;
@@ -80,6 +80,9 @@ public class AddCommand extends Command {
             // Add the new item into inventory
             Item newItem = toAddDescriptor.buildItem();
             model.addItem(newItem);
+
+            model.addCostBookKeeping(newItem.getCostPrice() * newItem.getCount());
+
             return new CommandResult(String.format(MESSAGE_SUCCESS_NEW, newItem));
         }
         // Check that id and name of the replenished item does not exist
@@ -123,6 +126,7 @@ public class AddCommand extends Command {
         Item target = matchingItems.get(0);
         int amount = toAddDescriptor.getCount().get();
         model.restockItem(target, amount);
+        model.addCostBookKeeping(amount * target.getCostPrice());
         return new CommandResult(String.format(MESSAGE_SUCCESS_REPLENISH, amount, target.getName()));
     }
 

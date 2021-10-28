@@ -27,11 +27,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListInventoryCommand;
+import seedu.address.logic.commands.ListTransactionCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartOrderCommand;
-import seedu.address.logic.commands.ViewOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
@@ -113,8 +114,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
+<<<<<<< HEAD
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + "") instanceof ListCommand);
+=======
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListInventoryCommand);
+
+        String listTransactionInput = ListCommand.COMMAND_WORD + " " + ListTransactionCommand.TRANSACTIONS_KEYWORD;
+        assertTrue(parser.parseCommand(listTransactionInput) instanceof ListTransactionCommand);
+
+>>>>>>> master
     }
 
     @Test
@@ -154,11 +163,6 @@ public class AddressBookParserTest {
 
         descriptor.setCount(1); // Parser should set descriptor count to 1
         assertEquals(new RemoveFromOrderCommand(descriptor), command);
-    }
-
-    @Test
-    public void parseCommand_viewOrder() throws Exception {
-        assertTrue(parser.parseCommand(ViewOrderCommand.COMMAND_WORD) instanceof ViewOrderCommand);
     }
 
     @Test

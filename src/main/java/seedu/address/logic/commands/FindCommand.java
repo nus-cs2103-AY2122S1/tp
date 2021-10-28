@@ -3,9 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
@@ -17,6 +18,9 @@ import seedu.address.model.item.NameContainsKeywordsPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+
+    public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
+            "Can't find outside inventory mode. Please use `list` first";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all items whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -53,15 +57,21 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getDisplayMode() != DISPLAY_INVENTORY) {
+            throw new CommandException(MESSAGE_INVENTORY_NOT_DISPLAYED);
+        }
+
         if (namePredicate == null) {
             model.updateFilteredItemList(DISPLAY_INVENTORY, idPredicate);
         } else {
             model.updateFilteredItemList(DISPLAY_INVENTORY, namePredicate);
         }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));
+                String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredDisplayList().size()));
     }
 
     @Override

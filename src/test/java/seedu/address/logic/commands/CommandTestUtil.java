@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
@@ -121,11 +122,11 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         Inventory expectedInventory = new Inventory(actualModel.getInventory());
-        List<Item> expectedFilteredList = new ArrayList<>(actualModel.getFilteredItemList());
+        List<Displayable> expectedFilteredList = new ArrayList<>(actualModel.getFilteredDisplayList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedInventory, actualModel.getInventory());
-        assertEquals(expectedFilteredList, actualModel.getFilteredItemList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredDisplayList());
     }
 
     /**
@@ -138,7 +139,7 @@ public class CommandTestUtil {
                                             Model expectedModel, String expectedMessage) {
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(actualModel.getInventory(), expectedModel.getInventory());
-        assertEquals(expectedModel.getFilteredItemList(), actualModel.getFilteredItemList());
+        assertEquals(expectedModel.getFilteredDisplayList(), actualModel.getFilteredDisplayList());
     }
 
     /**
@@ -146,14 +147,14 @@ public class CommandTestUtil {
      * {@code model}'s inventory.
      */
     public static void showItemAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredItemList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredDisplayList().size());
 
-        Item person = model.getFilteredItemList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
+        Item item = (Item) model.getFilteredDisplayList().get(targetIndex.getZeroBased());
+        final String[] splitName = item.getName().fullName.split("\\s+");
         model.updateFilteredItemList(DISPLAY_INVENTORY,
                 new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredItemList().size());
+        assertEquals(1, model.getFilteredDisplayList().size());
     }
 
 }

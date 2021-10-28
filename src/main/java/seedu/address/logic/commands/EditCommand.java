@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +17,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
@@ -72,13 +73,12 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_INVENTORY_NOT_DISPLAYED);
         }
 
-        List<Item> lastShownList = model.getFilteredItemList();
+        List<Displayable> lastShownList = model.getFilteredDisplayList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
-
-        Item itemToEdit = lastShownList.get(index.getZeroBased());
+        Item itemToEdit = (Item) lastShownList.get(index.getZeroBased());
         Item editedItem = createEditedItem(itemToEdit, toEditDescriptor);
 
         if (!itemToEdit.isSameItem(editedItem) && model.hasItem(editedItem)) {
@@ -93,7 +93,7 @@ public class EditCommand extends Command {
 
 
         model.setItem(itemToEdit, editedItem);
-        model.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+        model.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
         return new CommandResult(String.format(MESSAGE_EDIT_ITEM_SUCCESS, editedItem));
     }
 

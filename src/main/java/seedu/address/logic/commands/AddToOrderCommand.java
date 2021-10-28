@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
 
@@ -45,6 +45,18 @@ public class AddToOrderCommand extends Command {
     }
 
     /**
+     * Return a string message if an item requested exceeds count in inventory.
+     * @param item item requested.
+     * @param countRequested count requested.
+     * @param countInventory count in inventory.
+     * @return the string representation.
+     */
+    public String itemExceedsCount(Item item, Integer countRequested, Integer countInventory) {
+        return "There is/are only " + countInventory.toString() + " of " + item.getName().fullName + " in inventory"
+                + "\nCurrently requested: " + countRequested.toString();
+    }
+
+    /**
      * Executes the command and returns the result message.
      *
      * @param model {@code Model} which the command should operate on.
@@ -72,6 +84,23 @@ public class AddToOrderCommand extends Command {
         if (matchingItems.size() > 1) {
             model.updateFilteredItemList(DISPLAY_INVENTORY, toAddDescriptor::isMatch);
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
+        }
+
+        List<Item> mathcesInventory = model.getFromOrder(toAddDescriptor);
+
+        Integer itemCountInOrder = toAddDescriptor.getCount().get();
+
+        Integer itemCountInInventory = matchingItems.get(0).getCount();
+
+        Item itemInINventory = matchingItems.get(0);
+
+        if (!mathcesInventory.isEmpty()) {
+            itemCountInOrder += mathcesInventory.get(0).getCount();
+        }
+
+        if (itemCountInOrder > itemCountInInventory) {
+            throw new CommandException(itemExceedsCount(itemInINventory,
+                    itemCountInOrder, itemCountInInventory));
         }
 
         Item toAddItem = matchingItems.get(0).updateCount(toAddDescriptor.getCount().get());

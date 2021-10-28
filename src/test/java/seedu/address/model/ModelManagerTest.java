@@ -6,9 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
@@ -33,6 +35,9 @@ import seedu.address.testutil.TypicalItems;
 import seedu.address.testutil.TypicalOrders;
 
 public class ModelManagerTest {
+
+    @TempDir
+    public Path temporaryFolder;
 
     private ModelManager modelManager = new ModelManager();
 
@@ -152,7 +157,7 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredItemList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredItemList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDisplayList().remove(0));
     }
 
 
@@ -189,43 +194,54 @@ public class ModelManagerTest {
         ModelManager model = new ModelManager();
         model.setInventory(TypicalItems.getTypicalInventory());
         model.setOrder(TypicalOrders.getTypicalOrder());
-        model.transactAndClearOrder();
+        model.transactAndClearOrder(temporaryFolder.resolve("transaction.json"));
 
         assertFalse(model.hasUnclosedOrder());
         assertEquals(model.getInventory(), new Inventory());
     }
 
     @Test
-    public void updateFilteredItemList_switchDisplayMode_success() {
+    public void updateFilteredDisplayList_switchDisplayMode_success() {
         modelManager.setInventory(TypicalItems.getTypicalInventory());
         modelManager.setOrder(new Order());
 
         // Switch display to order mode
-        modelManager.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        modelManager.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         assertEquals(modelManager.getDisplayMode(), DISPLAY_OPEN_ORDER);
-        assertTrue(modelManager.getFilteredItemList().size() == 0);
+        assertTrue(modelManager.getFilteredDisplayList().size() == 0);
 
         // Switch display back to inventory mode
-        modelManager.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+        modelManager.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
         assertEquals(modelManager.getDisplayMode(), DISPLAY_INVENTORY);
-        assertEquals(modelManager.getFilteredItemList(), TypicalItems.getTypicalInventory().getItemList());
+        assertEquals(modelManager.getFilteredDisplayList(), TypicalItems.getTypicalInventory().getItemList());
     }
 
     @Test
-    public void updateFilteredItemList_sameDisplayMode_success() {
+    public void updateFilteredDisplayList_sameDisplayMode_success() {
         modelManager.setInventory(TypicalItems.getTypicalInventory());
         modelManager.setOrder(new Order());
 
         // Switch display back to inventory mode
-        modelManager.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+        modelManager.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
         assertEquals(modelManager.getDisplayMode(), DISPLAY_INVENTORY);
-        assertEquals(modelManager.getFilteredItemList(), TypicalItems.getTypicalInventory().getItemList());
+        assertEquals(modelManager.getFilteredDisplayList(), TypicalItems.getTypicalInventory().getItemList());
 
         // Order mode to order mode
-        modelManager.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
-        modelManager.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        modelManager.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        modelManager.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         assertEquals(modelManager.getDisplayMode(), DISPLAY_OPEN_ORDER);
-        assertTrue(modelManager.getFilteredItemList().size() == 0);
+        assertTrue(modelManager.getFilteredDisplayList().size() == 0);
+    }
+
+    @Test
+    public void updateFilteredItemList_displayingTransactions_throwClassCastException() {
+        modelManager.setInventory(TypicalItems.getTypicalInventory());
+        modelManager.setOrder(new Order());
+
+        // Attempt to pass item predicate when in transaction mode
+        assertThrows(ClassCastException.class, () ->
+            modelManager.updateFilteredItemList(DISPLAY_TRANSACTION_LIST, x -> true)
+        );
     }
 
     @Test
@@ -258,16 +274,23 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(inventory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+        modelManager.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setInventoryFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(inventory, differentUserPrefs)));
 
-        // different display mode / list -> returns false
+        // different order -> returns false
         ModelManager other = new ModelManager(inventory, userPrefs);
-        other.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        other.setOrder(new Order());
+        assertFalse(modelManager.equals(other));
+
+        // different display mode / list -> returns false
+        modelManager.setOrder(new Order());
+        other = new ModelManager(inventory, userPrefs);
+        other.setOrder(new Order());
+        other.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         assertFalse(modelManager.equals(other));
 
     }

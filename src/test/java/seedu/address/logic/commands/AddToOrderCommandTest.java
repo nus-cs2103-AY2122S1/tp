@@ -5,7 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.DONUT;
@@ -67,8 +67,9 @@ public class AddToOrderCommandTest {
 
         // Item already in order
         expectedModel.addToOrder(DONUT);
-
-        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+        String message = new AddToOrderCommand(new ItemDescriptor())
+                .itemExceedsCount(DONUT, 10, 5);
+        assertCommandFailure(addCommand, modelWithOrder, expectedModel, message);
     }
 
     @Test
@@ -90,8 +91,9 @@ public class AddToOrderCommandTest {
 
         // Item already in order
         expectedModel.addToOrder(DONUT);
-
-        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+        String message = new AddToOrderCommand(new ItemDescriptor())
+                .itemExceedsCount(DONUT, 10, 5);
+        assertCommandFailure(addCommand, modelWithOrder, expectedModel, message);
     }
 
     @Test
@@ -114,8 +116,9 @@ public class AddToOrderCommandTest {
 
         // Test when item already in order
         expectedModel.addToOrder(DONUT);
-
-        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+        String message = new AddToOrderCommand(new ItemDescriptor())
+                .itemExceedsCount(DONUT, 10, 5);
+        assertCommandFailure(addCommand, modelWithOrder, expectedModel, message);
     }
 
     @Test

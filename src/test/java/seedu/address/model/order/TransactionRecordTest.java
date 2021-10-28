@@ -1,54 +1,90 @@
 package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalItems.APPLE_PIE;
+import static seedu.address.testutil.TypicalItems.getTypicalItems;
 
-import java.util.ArrayList;
+import java.time.Instant;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.item.Item;
-import seedu.address.model.item.UniqueItemList;
-import seedu.address.testutil.TypicalItems;
-
 public class TransactionRecordTest {
+
+    private static final String id1 = "id1";
+    private static final String id2 = "id2";
+    private static final Instant timestamp1 = Instant.ofEpochMilli(1000);
+    private static final Instant timestamp2 = Instant.ofEpochMilli(2000);
+
+    private TransactionRecord transaction =
+            new TransactionRecord(getTypicalItems(), id1, timestamp1);
+
     @Test
-    public void constructor_nullUniqueItemList_throwException() {
-        UniqueItemList currList = null;
-        assertThrows(NullPointerException.class, () -> new TransactionRecord(currList));
+    public void constructor() {
+        TransactionRecord t1 = new TransactionRecord(new Order(List.of(APPLE_PIE)));
+        assertEquals(List.of(APPLE_PIE), t1.getOrderItems());
+
+        t1 = new TransactionRecord(List.of(APPLE_PIE), id1, timestamp1);
+        assertEquals(List.of(APPLE_PIE), t1.getOrderItems());
+        assertEquals(id1, t1.getId());
+        assertEquals(timestamp1, t1.getTimestamp());
     }
 
     @Test
-    public void constructor_nullList_throwException() {
-        List<Item> currList = null;
-        assertThrows(NullPointerException.class, () -> new TransactionRecord(currList));
+    public void addItem_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> transaction.addItem(APPLE_PIE));
     }
 
     @Test
-    public void getItems_typicalItems_sameListOfItems() {
-        TransactionRecord transaction = new TransactionRecord(TypicalItems.getTypicalItems());
-        assertEquals(transaction.getItems(), TypicalItems.getTypicalItems());
+    public void removeItem_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> transaction.removeItem(APPLE_PIE, 1));
     }
 
     @Test
-    public void getItems_differedCountItems_differentListOfItems() {
-        List<Item> items = TypicalItems.getTypicalItems();
-        List<Item> updatedItems = new ArrayList<>();
-        for (Item item : items) {
-            updatedItems.add(item.updateCount(item.getCount() + 1));
-        }
+    public void equals() {
+        // same values -> returns true
+        TransactionRecord copy = new TransactionRecord(
+                transaction.getOrderItems(),
+                transaction.getId(),
+                transaction.getTimestamp()
+        );
+        assertTrue(transaction.equals(copy));
 
-        TransactionRecord transaction = new TransactionRecord(updatedItems);
-        assertNotEquals(transaction.getItems(), TypicalItems.getTypicalItems());
-    }
+        // same object -> returns true
+        assertTrue(transaction.equals(transaction));
 
-    @Test
-    public void equals_sameItems_returnFalse() {
-        TransactionRecord transaction1 = new TransactionRecord(TypicalItems.getTypicalItems());
-        TransactionRecord transaction2 = new TransactionRecord(TypicalItems.getTypicalItems());
-        assertNotEquals(transaction1, transaction2);
+        // null -> returns false
+        assertFalse(transaction.equals(null));
+
+        // different type -> returns false
+        assertFalse(transaction.equals(5));
+
+        // different items -> returns false
+        TransactionRecord other = new TransactionRecord(
+                List.of(APPLE_PIE),
+                transaction.getId(),
+                transaction.getTimestamp()
+        );
+        assertFalse(transaction.equals(other));
+
+        // different id -> returns false
+        other = new TransactionRecord(
+                transaction.getOrderItems(),
+                id2,
+                transaction.getTimestamp()
+        );
+        assertFalse(transaction.equals(other));
+
+        // different timestamp -> returns false
+        other = new TransactionRecord(
+                transaction.getOrderItems(),
+                transaction.getId(),
+                timestamp2
+        );
+        assertFalse(transaction.equals(other));
     }
 
 }

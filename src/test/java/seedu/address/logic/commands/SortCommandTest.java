@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.ItemCountComparator;
 import seedu.address.model.item.ItemNameComparator;
+import seedu.address.model.order.Order;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortCommand}.
@@ -53,10 +54,11 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_displayOrderMode_failure() {
+    public void execute_displayNotInInventoryMode_failure() {
         SortCommand command = new SortCommand(SortCommand.SortOrder.BY_COUNT);
 
-        model.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        model.setOrder(new Order());
+        model.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
         String expectedMessage = SortCommand.MESSAGE_INVENTORY_NOT_DISPLAYED;
 
         assertCommandFailure(command, model, expectedMessage);

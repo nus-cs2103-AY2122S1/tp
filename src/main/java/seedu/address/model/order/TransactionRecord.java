@@ -1,72 +1,48 @@
 package seedu.address.model.order;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javafx.collections.ObservableList;
+import javafx.scene.layout.Region;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.UniqueItemList;
+import seedu.address.ui.TransactionCard;
+import seedu.address.ui.UiPart;
 
 /**
- * Records a list of items transacted items in an order. Immutable.
+ * Represents a transacted order.
+ * Transacted orders are timestamped and given an id.
+ * Order should be immutable (since it already has been transacted).
  */
-public class TransactionRecord {
+public class TransactionRecord extends Order implements Displayable {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
             .ofPattern("yyyy-MM-dd HH:mm:ss")
             .withZone(ZoneId.systemDefault());
 
-    private final UniqueItemList items;
     private final Instant timestamp;
     private String id;
 
     /**
-     * Instantiates a transaction record with a list of items.
+     * Instantiates a transaction record based off the given order.
      */
-    public TransactionRecord(UniqueItemList items) {
-        requireNonNull(items);
-        this.items = items;
-        id = StringUtil.generateRandomString();
-        timestamp = Instant.now();
-    }
-
-    /**
-     * Instantiates a transaction record with a list of items.
-     */
-    public TransactionRecord(List<Item> items) {
-        requireNonNull(items);
-        this.items = new UniqueItemList();
-        for (Item item: items) {
-            this.items.add(item);
-        }
+    public TransactionRecord(Order order) {
+        super(order.getOrderItems());
 
         id = StringUtil.generateRandomString();
         timestamp = Instant.now();
     }
 
     /**
-     * Instantiates a transaction record with a list of items, id, and timestamp.
+     * Instantiates a transaction record with the given list of items, id, and timestamp.
      */
     public TransactionRecord(List<Item> items, String id, Instant timestamp) {
-        requireNonNull(items);
-        this.items = new UniqueItemList();
-        for (Item item: items) {
-            this.items.add(item);
-        }
+        super(items);
 
         this.id = id;
         this.timestamp = timestamp;
-    }
-
-    /**
-     * Get a list of items in the transaction.
-     */
-    public ObservableList<Item> getItems() {
-        return items.asUnmodifiableObservableList();
     }
 
     /**
@@ -84,11 +60,20 @@ public class TransactionRecord {
     }
 
     /**
-     * Returns true if two {@code TransactionRecord} have the same list of items.
-     * This is a less strict notion of equivalence than {@code equals}.
+     * Returns the timestamp of the transaction in a readable format.
      */
-    public boolean hasSameItems(TransactionRecord other) {
-        return items.equals(other.items);
+    public String getTimeString() {
+        return DATE_TIME_FORMATTER.format(timestamp);
+    }
+
+    @Override
+    public void addItem(Item item) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void removeItem(Item target, int amount) {
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -102,10 +87,17 @@ public class TransactionRecord {
 
         if (other instanceof TransactionRecord) {
             TransactionRecord temp = (TransactionRecord) other;
-            return temp.id.equals(id) && temp.timestamp.equals(timestamp) && hasSameItems(temp);
-        } else {
-            return false;
+            return id.equals(temp.id)
+                    && timestamp.equals(temp.timestamp)
+                    && getOrderItems().equals(temp.getOrderItems());
         }
+
+        return false;
+    }
+
+    @Override
+    public UiPart<Region> asDisplayCard(int index) {
+        return new TransactionCard(this, index);
     }
 
     /**

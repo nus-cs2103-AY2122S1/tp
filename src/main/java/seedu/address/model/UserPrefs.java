@@ -16,6 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path inventoryFilePath = Paths.get("data" , "inventory.json");
     private Path transactionFilePath = Paths.get("data", "transaction.json");
+    private Path bookKeepingFilePath = Paths.get("data", "bookKeeping.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -28,6 +29,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
         resetData(userPrefs);
+    }
+
+    /**
+     * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}, other than transactionFilePath.
+     */
+    public UserPrefs(Path transactionFilePath) {
+        this();
+        setTransactionFilePath(transactionFilePath);
+    }
+
+    private void setTransactionFilePath(Path transactionFilePath) {
+        this.transactionFilePath = transactionFilePath;
     }
 
     /**
@@ -59,6 +72,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setInventoryFilePath(Path inventoryFilePath) {
         requireNonNull(inventoryFilePath);
         this.inventoryFilePath = inventoryFilePath;
+    }
+
+    public Path getBookKeepingFilePath() {
+        return this.bookKeepingFilePath;
     }
 
     @Override

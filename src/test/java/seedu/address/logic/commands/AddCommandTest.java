@@ -16,7 +16,14 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+<<<<<<< HEAD
 import seedu.address.model.*;
+=======
+import seedu.address.model.Inventory;
+import seedu.address.model.ModelStub;
+import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.display.DisplayMode;
+>>>>>>> master
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.testutil.ItemBuilder;
@@ -302,6 +309,16 @@ public class AddCommandTest {
             // state check
             ModelStubAcceptingItemAdded other = (ModelStubAcceptingItemAdded) obj;
             return itemsAdded.equals(other.itemsAdded) && addedAmount == other.addedAmount;
+        }
+
+        @Override
+        public void addCostBookKeeping(Double cost) {
+
+        }
+
+        @Override
+        public void addRevenueBookKeeping(Double revenue) {
+
         }
     }
 

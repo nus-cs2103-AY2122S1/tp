@@ -7,14 +7,17 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.StringUtil;
+import javafx.scene.layout.Region;
+import seedu.address.model.display.Displayable;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.ItemCard;
+import seedu.address.ui.UiPart;
 
 /**
  * Represents an item in the inventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Item {
+public class Item implements Displayable {
 
     // Identity fields
     private final Name name;
@@ -70,10 +73,6 @@ public class Item {
 
     public Double getCostPrice() {
         return costPrice;
-    }
-
-    public void replenishItem(int n) {
-        this.count += n;
     }
 
     /**
@@ -190,5 +189,10 @@ public class Item {
             tags.forEach(builder::append);
         }
         return builder.toString();
+    }
+
+    @Override
+    public UiPart<Region> asDisplayCard(int index) {
+        return new ItemCard(this, index);
     }
 }

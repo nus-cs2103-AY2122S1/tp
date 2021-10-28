@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +23,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Erases the item from the inventory entirely.\n"
             + "Removes all memory about an item including cp and sp \n"
-            + "Parameters: " + PREFIX_NAME + "NAME"
+            + "Parameters: " + "NAME"
             + " Or " + PREFIX_ID + "ID \n"
-            + "Example: " + COMMAND_WORD + "Apple Pie";
+            + "Example: " + COMMAND_WORD + " Apple Pie";
 
     public static final String MESSAGE_SUCCESS = "Item deleted: %1$s";
     public static final String MESSAGE_ITEM_NOT_FOUND = "No such item in the inventory";

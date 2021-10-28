@@ -9,12 +9,11 @@ import seedu.address.logic.commands.EndAndTransactOrderCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListInventoryCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.StartOrderCommand;
-import seedu.address.logic.commands.ViewOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,8 +51,8 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case FindCommand.COMMAND_WORD:
             return new HelpCommand(FindCommand.MESSAGE_USAGE);
 
-        case ListCommand.COMMAND_WORD:
-            return new HelpCommand(ListCommand.MESSAGE_USAGE);
+        case ListInventoryCommand.COMMAND_WORD:
+            return new HelpCommand(ListInventoryCommand.MESSAGE_USAGE);
 
         case SortCommand.COMMAND_WORD:
             return new HelpCommand(SortCommand.MESSAGE_USAGE);
@@ -69,9 +68,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case RemoveFromOrderCommand.COMMAND_WORD:
             return new HelpCommand(RemoveFromOrderCommand.MESSAGE_USAGE);
-
-        case ViewOrderCommand.COMMAND_WORD:
-            return new HelpCommand(ViewOrderCommand.MESSAGE_USAGE);
 
         case EndAndTransactOrderCommand.COMMAND_WORD:
             return new HelpCommand(EndAndTransactOrderCommand.MESSAGE_USAGE);
