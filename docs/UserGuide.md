@@ -85,6 +85,12 @@ Exits the program and saves your data.
 
 Format: `exit`
 
+#### Exporting data : `export`
+
+Exports all the data of Notor into a CSV file. The exported CSV will be located in the same directory as Notor.
+
+Format: `export`
+
 ## Working with people
 The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
@@ -513,8 +519,9 @@ Action   | Format              | Short Format
 
 ### General
 
-Action    | Format  | Advanced Format
-----------|---------|----------
-**Help**  | `help`  | `h`
-**Exit**  | `exit`  | `e`
-**Clear** | `clear` | `c`
+Action     | Format   | Advanced Format
+-----------|----------|----------
+**Help**   | `help`   | `h`
+**Exit**   | `exit`   | `e`
+**Clear**  | `clear`  | `c`
+**Export** | `export` | `exp`
