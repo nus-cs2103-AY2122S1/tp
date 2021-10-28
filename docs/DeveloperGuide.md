@@ -192,7 +192,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
 input. This command then updates the ```model``` accordingly. 
 
-The following activity diagram summarizes what happens when a user executes a ```FilterInterview``` command:
+The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
 
 Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
