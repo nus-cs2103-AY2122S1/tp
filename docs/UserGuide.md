@@ -50,6 +50,38 @@ Dangerous or potentially negative actions are displayed here
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
+**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
+**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/19-12-2021 08:00`
+**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Create reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
+**Delete Employee** | `deleteE INDEX`<br> e.g., `delete 1`
+**Delete Supplier** | `deleteS INDEX`<br> e.g., `delete 2`
+**Delete Customer** | `deleteC INDEX`<br> e.g., `delete 3`
+**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
+**Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
+**Find Employee** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findE `
+**Find Supplier** | `findS KEYWORD [MORE_KEYWORDS]`<br> e.g., `findS Oct AM`
+**Sort Customer** | `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortC by/n o/d`
+**Sort Employee** | `sortE by/PREFIX_OF_EMPLOYEE_FIELD o/ORDER_OF_SORT` <br> e.g. `sortE by/sal o/a`
+**Sort Supplier** | `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortS by/dd o/a`
+**Reset Customer Sorting** | `resetC`
+**Reset Employee Sorting** | `resetE`
+**Reset Supplier Sorting** | `resetS`
+**List Customer** | `listC`
+**List Employee** | `listE`
+**List Supplier** | `listS`
+**Clear** | `clear`
+**Help** | `help`
+**Exit** | `exit`
+
 ### Command syntax
 
 Commands in RHRH has the syntax: `COMMAND_WORD + [PREAMBLE] + [PREFIX + PARAMETER]...`, where:
@@ -70,9 +102,9 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 
 | Prefix | Description         | Parameter constraints                             |
 | :----: | ------------------- | ------------------------------------------------- |
-|  `n/`  | Name                |
-|  `p/`  | Phone               | 
-|  `a/`  | Address             |
+|  `n/`  | Name                | Names should only contain alphanumeric characters and spaces, and it should not be blank
+|  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
+|  `a/`  | Address             | Addresses can take any values, and it should not be blank
 |  `e/`  | Email               |
 |  `t/`  | Tag (Optional)      | Contains alphanumeric characters. One entity can have multiple tags.<br>When editing tags, the existing values of these fields will be replaced, i.e editing of these fields are not cumulative.<br> If you want to remove all tags from an entity, you can use edit command with `r/` without specifying any tag after it.
 | `lp/`  | Loyalty Point       |
@@ -81,8 +113,8 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `l/`  | Leaves              |
 | `jt/`  | Job Title           |
 | `sal/` | Salary              |
-| `st/`  | Supply Type         |
-| `dd/`  | Delivery Details    |
+| `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
+| `dd/`  | Delivery Details    | Refer [here](#Adding-a-supplier-addS) for more details
 | `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
 |  `r/`  | Remark (Optional)   | Contains alphanumeric characters.<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it.
 
@@ -127,7 +159,7 @@ This is the list of some repeatedly used preambles used in RHRH, as well as ther
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![helpMessage](images/help_message.png)
 
 Format: `help`
 
@@ -184,10 +216,10 @@ The following table shows the acceptable formats and relevant examples for `Deli
 
 | Acceptable Formats | Examples |
 | ----------- | ----------- |
-| `yyyy-MM-dd HH:mm` | `2021-09-19 13:00` |
-| `dd-MM-yyyy HH:mm` | `19-09-2021 13:00` |
-| `HH:mm yyyy-MM-dd` | `14:00 2021-11-10` |
-| `HH:mm dd-MM-yyyy` | `14:00 10-11-2021` |
+| yyyy-MM-dd HH:mm | 2021-09-19 13:00 |
+| dd-MM-yyyy HH:mm | 19-09-2021 13:00 |
+| HH:mm yyyy-MM-dd | 14:00 2021-11-10 |
+| HH:mm dd-MM-yyyy | 14:00 10-11-2021 |
 
 </div>
 
@@ -297,11 +329,17 @@ Deletes the specified customer from RHRH.
 
 Format:
 * `deleteC INDEX`: Deletes the customer at the specified `INDEX`.
-  * `INDEX` refers to the index number shown in the displayed customer list.
-  * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `deleteC 2` deletes the 2nd customer displayed in the address book.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The index refers to the index number shown in the displayed employee list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
 
 ### Deleting an employee : `deleteemployee`
 
@@ -316,19 +354,16 @@ Format: `deleteemployee INDEX`
 Examples:
 * `deleteemployee 2` deletes the 2nd person in the address book.
 
-### Deleting a supplier : `deleteSupplier`
+### Deleting a supplier : `deleteS`
 
 Deletes the specified supplier from RHRH.
 
 Format: `deleteS INDEX`
 
 * Deletes the supplier at the specified `INDEX`.
-* The index refers to the index number shown in the displayed supplier list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-<<<<<<< HEAD
-* `deleteSupplier 2` deletes the 2nd supplier in the address book.
+* `deleteS 2` deletes the 2nd supplier in the address book.
 
 ### Deleting a reservation : `deleteR`
 
@@ -366,16 +401,21 @@ Examples:
 * Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
-=======
-* `deleteS 2` deletes the 2nd supplier in the address book.
->>>>>>> 4aacb5a1430e2359d87f3867cdb546ecb7760155
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The index refers to the index number shown in the displayed employee list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
 
 ### Finding customers based on keywords: `findC`
 
 Find customers that have fields that contain all specified keywords cumulatively
 
 Format:
-* `findC [KEYWORD]…​`: Displays all customers that match specified keywords
+* `findC KEYWORD [MORE_KEYWORD...]`: Displays all customers that match specified keywords
   * At least one `KEYWORD` must be provided.
   * Only customers that match **all** provided keywords will be returned.
 
@@ -383,16 +423,12 @@ Format:
 Examples:
 * `findC Chetwin Everything`: Finds customers that have both the keywords 'Chetwin' and 'Everything' in their fields.
 
-<<<<<<< HEAD
-### Displaying a sorted list of customers: `sortC`
-=======
 ### Finding Suppliers based on keywords: `findS`
 
 Find suppliers that have fields that contain all specified keywords cumulatively.
 
 Format: 
 * `findS KEYWORD [MORE_KEYWORDS...]`: Displays all suppliers that contain all specified keywords
-
 Examples:
 * `findS Oct AM`: Finds suppliers that have both keywords `Oct` and `AM` in their fields
 
@@ -406,27 +442,25 @@ Examples:
 
 </div>
 
-### Displays a sorted list of customers: `sortC`
->>>>>>> 4aacb5a1430e2359d87f3867cdb546ecb7760155
+### Displaying a sorted list of customers: `sortC`
 
 Sorts and displays the list of customers based on a given field in either ascending or descending order.
 
 Format:
-* `sortC by/PREFIX OF SORT KEY o/ORDER OF SORT`: Sorts and displays the list of customers based on provided arguments
-    * `PREFIX OF SORT KEY` is the prefix of the field you wish to sort the list of customers by, i.e. lp for loyaltyPoints and alg for allergies
-    * `ORDER OF SORT` can be set to 'a' for ascending order or 'd' for descending order
+* `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT`: Sorts and displays the list of customers based on provided 
+  arguments
+    * `PREFIX_OF_CUSTOMER_FIELD` is the prefix of the field you wish to sort the list of customers by, i.e. lp for loyaltyPoints and alg for allergies
+    * `ORDER_OF_SORT` can be set to 'a' for ascending order or 'd' for descending order
 
 Examples:
 * `sortC by/n o/d`: sorts the list of customers by `NAME` in descending order.
 * `sortC by/alg o/a`: sorts the list of customers by `ALLERGIES` in ascending order.
 
-<<<<<<< HEAD
-=======
 ### Displaying a sorted list of suppliers: `sortS`
 Sorts and displays the list of suppliers based on a given field in either ascending or descending order.
 
 Format:
-* `sortS by/PREFIX OF SUPPLIER FIELD o/ORDER OF SORT`: Sorts and displays the list of suppliers based on the sort type 
+* `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`: Sorts and displays the list of suppliers based on the sort type 
   and order.
 
 Examples:
@@ -436,9 +470,9 @@ Examples:
 <div markdown="block" class="alert alert-warning">
 :information_source: **Notes:**<br>
 
-* The prefixes used for the parameter `PREFIX OF SORT KEY` is the same as that when adding or deleting a supplier.
+* The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting a supplier.
   * For example `n` for name and `dd` for delivery details
-* The only acceptable inputs for the `ORDER OF SORT` parameter are `a` for `ascending` and `d` for `descending`.
+* The only acceptable inputs for the `ORDER_OF_SORT` parameter are `a` for `ascending` and `d` for `descending`.
 
 </div>
 
@@ -488,7 +522,6 @@ Examples:
 
 </div>
 
->>>>>>> 4aacb5a1430e2359d87f3867cdb546ecb7760155
 ### Setting the tables for the restaurant: `settables`
 
 <div markdown="block" class="alert alert-danger">
@@ -516,33 +549,6 @@ Examples:
 * Size of tables and Number of tables with specified size has to be a positive integer
 
 </div>
-
-<<<<<<< HEAD
-=======
-### Adding a reservation: `addr`
-
-Add a new reservation with number of people, 
-customer's phone number and the date & time.
-
-Format: `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
-
-* Date-time format is `yyyy-MM-dd HH00`, e.g. `2021-11-11 2000`
-
-Examples: 
-* `addr 2 p/98765432 at/2021-12-24 2000`
-* `addr 5 p/12345668 at/2021-02-14 1200`
-
-<div markdown="block" class="alert alert-warning">
-:information_source: **Notes:**<br>
-
-* Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant-settables)
-
-* Phone number has to be a valid phone number from a customer
-
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
-
-</div>
->>>>>>> 4aacb5a1430e2359d87f3867cdb546ecb7760155
 
 ### Clearing all entries : `clear`
 
@@ -580,8 +586,11 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
+<details>
+<summary>How do I transfer my data to another Computer?</summary>
+
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -603,7 +612,7 @@ Action | Format, Examples
 **Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
 **Edit Reservation**| `editR INDEX [r/REMARK] [t/TAG]…`<br> e.g. `editR 2 r/surprise birthday party t/10PercentOff`
 **Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
-**Find [COMING SOON]** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find [COMING SOON]** | `find KEYWORD…`<br> e.g., `find James Jake`
 **List Customers** | `listC`
 **List Employees** | `listE`
 **List Suppliers** | `listS`
