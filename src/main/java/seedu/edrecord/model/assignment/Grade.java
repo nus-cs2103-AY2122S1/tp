@@ -10,6 +10,7 @@ import java.util.Optional;
  * Guarantees: immutable, details are present and not null.
  */
 public class Grade {
+
     public enum GradeStatus { NOT_SUBMITTED, SUBMITTED, GRADED }
 
     public static final String MESSAGE_CONSTRAINTS = "Status should be \"not submitted\", \"submitted\" or \"graded\".";

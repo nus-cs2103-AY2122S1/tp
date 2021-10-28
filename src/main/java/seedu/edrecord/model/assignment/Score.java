@@ -7,7 +7,7 @@ import static seedu.edrecord.commons.util.AppUtil.checkArgument;
  * Represents the score of an Assignment.
  * Guarantees: immutable; is valid as declared in {@link #isValidScore(String)}
  */
-public class Score {
+public class Score implements Comparable<Score> {
     public static final String MESSAGE_CONSTRAINTS = "Assignment score should be a non-negative decimal value.";
 
     public final Double score;
@@ -44,6 +44,7 @@ public class Score {
      * @return 0 if both scores are equal, a value less than 0 if this score is less than the other score,
      * a value greater than 0 if this score is numerically greater than the other score.
      */
+    @Override
     public int compareTo(Score other) {
         return score.compareTo(other.score);
     }

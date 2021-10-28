@@ -91,6 +91,13 @@ public class Module {
     }
 
     /**
+     * Returns a view of this module's class list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Group> getGroupList() {
+        return groupSystem.getGroupList();
+    }
+
+    /**
      * Returns true if a given string is a valid module code.
      */
     public static boolean isValidModuleCode(String test) {
@@ -169,6 +176,15 @@ public class Module {
      */
     public void deleteAssignment(Assignment key) {
         assignmentList.remove(key);
+    }
+
+    /**
+     * Replaces the given Assignment {@code target} in the list with {@code editedAssignment}.
+     * {@code target} must exist in EdRecord under this module.
+     * The identity of {@code editedAssignment} must not be the same as any existing assignment under the same module.
+     */
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        assignmentList.setAssignment(target, editedAssignment);
     }
 
     @Override

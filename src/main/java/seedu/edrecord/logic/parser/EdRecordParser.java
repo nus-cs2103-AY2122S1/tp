@@ -16,17 +16,20 @@ import seedu.edrecord.logic.commands.DeleteCommand;
 import seedu.edrecord.logic.commands.DeleteGradeCommand;
 import seedu.edrecord.logic.commands.DeleteGroupCommand;
 import seedu.edrecord.logic.commands.DeleteModuleCommand;
+import seedu.edrecord.logic.commands.EditAssignmentCommand;
 import seedu.edrecord.logic.commands.EditCommand;
 import seedu.edrecord.logic.commands.ExitCommand;
 import seedu.edrecord.logic.commands.FindCommand;
 import seedu.edrecord.logic.commands.GradeCommand;
 import seedu.edrecord.logic.commands.HelpCommand;
+import seedu.edrecord.logic.commands.ListClassesCommand;
 import seedu.edrecord.logic.commands.ListCommand;
 import seedu.edrecord.logic.commands.ListModulesCommand;
 import seedu.edrecord.logic.commands.MakeGroupCommand;
 import seedu.edrecord.logic.commands.MakeModuleCommand;
 import seedu.edrecord.logic.commands.MoveCommand;
 import seedu.edrecord.logic.commands.RemoveCommand;
+import seedu.edrecord.logic.commands.ViewCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 
 /**
@@ -92,11 +95,17 @@ public class EdRecordParser {
         case CdCommand.COMMAND_WORD:
             return new CdCommandParser().parse(arguments);
 
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
         case AddAssignmentCommand.COMMAND_WORD:
             return new AddAssignmentCommandParser().parse(arguments);
 
         case DeleteAssignmentCommand.COMMAND_WORD:
             return new DeleteAssignmentCommandParser().parse(arguments);
+
+        case EditAssignmentCommand.COMMAND_WORD:
+            return new EditAssignmentCommandParser().parse(arguments);
 
         case GradeCommand.COMMAND_WORD:
             return new GradeCommandParser().parse(arguments);
@@ -109,6 +118,9 @@ public class EdRecordParser {
 
         case ListModulesCommand.COMMAND_WORD:
             return new ListModulesCommand();
+
+        case ListClassesCommand.COMMAND_WORD:
+            return new ListClassesCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -2,6 +2,7 @@ package seedu.edrecord.ui;
 
 import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -17,13 +18,19 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @FXML
     private Label selectedModuleStatus;
+    @FXML
+    private Label selectedViewStatus;
 
     /**
      * Creates a {@code StatusBarFooter}.
      */
-    public StatusBarFooter() {
+    public StatusBarFooter(ObservableValue<Module> selectedModule,
+                           ObservableValue<PersonListPanel.View> selectedView) {
         super(FXML);
-        selectedModuleStatus.setText(MESSAGE_NO_MODULE_SELECTED);
+        setSelectedModule(selectedModule.getValue());
+        setSelectedView(selectedView.getValue());
+        selectedModule.addListener((unused, oldModule, newModule) -> setSelectedModule(newModule));
+        selectedView.addListener((unused, oldView, newView) -> setSelectedView(newView));
     }
 
     public void setSelectedModule(Module module) {
@@ -33,6 +40,10 @@ public class StatusBarFooter extends UiPart<Region> {
         }
 
         selectedModuleStatus.setText(selectedModule);
+    }
+
+    public void setSelectedView(PersonListPanel.View newView) {
+        selectedViewStatus.setText(newView.name());
     }
 
 }

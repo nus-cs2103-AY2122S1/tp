@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.model.assignment.Assignment;
@@ -14,6 +15,7 @@ import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
+import seedu.edrecord.ui.PersonListPanel;
 
 /**
  * The API of the Model component.
@@ -148,7 +150,7 @@ public interface Model {
     /**
      * Returns the current selected module.
      */
-    Module getSelectedModule();
+    ObservableValue<Module> getSelectedModule();
 
     /**
      * Returns true if there is a currently selected module.
@@ -159,6 +161,13 @@ public interface Model {
      * Returns true if the currently selected module contains the given assignment.
      */
     boolean hasAssignmentInCurrentModule(Assignment assignment);
+
+    /**
+     * Returns true if any existing grade of the original assignment {@code current} is
+     * higher than the maximum score of {@code editedAssignment}. Both assignments
+     * must be under the currently selected module.
+     */
+    boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment);
 
     /**
      * Returns an unmodifiable view of the assignment list under the currently selected module.
@@ -183,8 +192,26 @@ public interface Model {
     void deleteAssignment(Assignment target);
 
     /**
+     * Replaces the given assignment {@code target} with {@code editedAssignment}.
+     * {@code target} must exist under the currently selected module in EdRecord.
+     * The identity of {@code editedAssignment} must not be the same as another existing assignment.
+     */
+    void setAssignment(Assignment target, Assignment editedAssignment);
+
+    /**
      * Updates the search filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void setSearchFilter(Predicate<Person> predicate);
+
+    /**
+     * Returns the currently selected view.
+     */
+    ObservableValue<PersonListPanel.View> getSelectedView();
+
+    /**
+     * Updates the currently selected view to the specified value.
+     * @param newView The new view
+     */
+    void setSelectedView(PersonListPanel.View newView);
 }

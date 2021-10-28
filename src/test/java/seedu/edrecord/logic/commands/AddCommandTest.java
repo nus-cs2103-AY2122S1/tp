@@ -16,6 +16,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
@@ -32,6 +33,7 @@ import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.testutil.PersonBuilder;
 import seedu.edrecord.testutil.TypicalModules;
+import seedu.edrecord.ui.PersonListPanel;
 
 public class AddCommandTest {
 
@@ -204,12 +206,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableValue<PersonListPanel.View> getSelectedView() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedView(PersonListPanel.View newView) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setModuleFilter(PartOfModulePredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Module getSelectedModule() {
+        public ObservableValue<Module> getSelectedModule() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -234,12 +246,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteAssignment(Assignment target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssignment(Assignment target, Assignment editedAssignment) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -12,6 +12,9 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
@@ -26,6 +29,7 @@ import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
+import seedu.edrecord.ui.PersonListPanel;
 
 /**
  * Represents the in-memory model of edrecord data.
@@ -38,7 +42,9 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private PartOfModulePredicate selectedModulePredicate;
-    private Module selectedModule;
+    private final ObjectProperty<Module> selectedModule = new SimpleObjectProperty<>();
+    private final ObjectProperty<PersonListPanel.View> selectedView =
+            new SimpleObjectProperty<>(PersonListPanel.View.CONTACTS);
 
     /**
      * Initializes a ModelManager with the given edRecord, moduleSystem and userPrefs.
@@ -55,7 +61,6 @@ public class ModelManager implements Model {
         this.moduleSystem.resetData(moduleSystem);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.edRecord.getPersonList());
-        selectedModule = null;
     }
 
     public ModelManager() {
@@ -212,7 +217,11 @@ public class ModelManager implements Model {
         this.selectedModulePredicate = modulePredicate;
 
         String currentModuleCode = modulePredicate.getModuleCode();
-        this.selectedModule = moduleSystem.getModule(currentModuleCode);
+        if (!modulePredicate.equals(PREDICATE_SHOW_ALL_MODULES)) {
+            this.selectedModule.set(moduleSystem.getModule(currentModuleCode));
+        } else {
+            this.selectedModule.set(null);
+        }
 
         filteredPersons.setPredicate(modulePredicate);
 
@@ -230,18 +239,30 @@ public class ModelManager implements Model {
     //=========== Current Module =============================================================================
 
     @Override
-    public Module getSelectedModule() {
+    public ObservableValue<Module> getSelectedModule() {
         return this.selectedModule;
     }
 
     @Override
     public boolean hasSelectedModule() {
-        return selectedModule != null;
+        return selectedModule.get() != null;
     }
 
     @Override
     public boolean hasAssignmentInCurrentModule(Assignment assignment) {
-        return hasSelectedModule() && selectedModule.hasAssignment(assignment);
+        return hasSelectedModule() && selectedModule.get().hasAssignment(assignment);
+    }
+
+    @Override
+    public boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment) {
+        if (!hasSelectedModule()) {
+            return false;
+        }
+        // Score editedMaxScore = editedAssignment.getMaxScore();
+        List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
+        return allPersons.stream()
+                .filter(selectedModulePredicate)
+                .anyMatch(person -> person.hasHigherScoreThanMaxScore(current, editedAssignment));
     }
 
     @Override
@@ -251,13 +272,31 @@ public class ModelManager implements Model {
 
     @Override
     public Optional<Assignment> searchAssignment(Name name) {
-        return selectedModule.searchAssignment(name);
+        return selectedModule.get().searchAssignment(name);
     }
 
     @Override
     public void addAssignment(Assignment assignment) {
-        selectedModule.addAssignment(assignment);
+        selectedModule.get().addAssignment(assignment);
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    //=========== Current View =============================================================================
+    @Override
+    public ObservableValue<PersonListPanel.View> getSelectedView() {
+        return selectedView;
+    }
+
+    @Override
+    public void setSelectedView(PersonListPanel.View newView) {
+        this.selectedView.set(newView);
+    }
+
+    @Override
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        requireAllNonNull(target, editedAssignment);
+
+        selectedModule.setAssignment(target, editedAssignment);
     }
 
     @Override
