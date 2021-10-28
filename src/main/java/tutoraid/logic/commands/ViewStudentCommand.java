@@ -11,22 +11,22 @@ import tutoraid.model.Model;
 import tutoraid.model.student.Student;
 
 /**
- * Deletes a student identified using its displayed index from the TutorAid.
+ * Lists all details of a student in TutorAid to the user.
  */
-public class DeleteStudentCommand extends DeleteCommand {
+public class ViewStudentCommand extends ViewCommand {
 
     public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG
-            + ": Deletes the student identified by the index number used in the displayed student list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FLAG
+            + ": Shows the student identified by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_FLAG + " 1";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Viewing requested student";
 
     private final Index targetIndex;
 
-    public DeleteStudentCommand(Index targetIndex) {
+    public ViewStudentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -39,17 +39,15 @@ public class DeleteStudentCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteStudent(studentToDelete);
-        model.deleteStudentFromLessons(studentToDelete);
-
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
+        Student studentToView = lastShownList.get(targetIndex.getZeroBased());
+        model.viewStudent(studentToView);
+        return new CommandResult(MESSAGE_VIEW_STUDENT_SUCCESS);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteStudentCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteStudentCommand) other).targetIndex)); // state check
+                || (other instanceof ViewStudentCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewStudentCommand) other).targetIndex)); // state check
     }
 }

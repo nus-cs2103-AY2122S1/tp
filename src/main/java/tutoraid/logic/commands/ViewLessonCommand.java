@@ -11,22 +11,22 @@ import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
 
 /**
- * Deletes a lesson identified using its displayed index from the TutorAid.
+ * List all details for a lesson in TutorAid to the user.
  */
-public class DeleteLessonCommand extends DeleteCommand {
+public class ViewLessonCommand extends ViewCommand {
 
     public static final String COMMAND_FLAG = "-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_FLAG
-            + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + COMMAND_FLAG
+            + ": Shows the lesson identified by the index number used in the displayed lesson list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_FLAG + " 1";
+            + "Example: " + COMMAND_WORD + " " + COMMAND_FLAG + " 1";
 
-    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
+    public static final String MESSAGE_VIEW_LESSON_SUCCESS = "Viewing requested lesson";
 
     private final Index targetIndex;
 
-    public DeleteLessonCommand(Index targetIndex) {
+    public ViewLessonCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -39,17 +39,15 @@ public class DeleteLessonCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-        Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteLesson(lessonToDelete);
-        model.deleteLessonFromStudents(lessonToDelete);
-
-        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete));
+        Lesson lessonToView = lastShownList.get(targetIndex.getZeroBased());
+        model.viewLesson(lessonToView);
+        return new CommandResult(MESSAGE_VIEW_LESSON_SUCCESS);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteLessonCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteLessonCommand) other).targetIndex)); // state check
+                || (other instanceof ViewLessonCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewLessonCommand) other).targetIndex)); // state check
     }
 }

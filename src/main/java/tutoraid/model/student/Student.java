@@ -86,6 +86,10 @@ public class Student {
         lessons.deleteLesson(toQuit);
     }
 
+    public boolean hasLesson(Lesson lesson) {
+        return lessons.hasLesson(lesson);
+    }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.

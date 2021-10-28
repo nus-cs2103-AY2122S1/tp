@@ -134,6 +134,8 @@ public class ModelManager implements Model {
     public void viewStudent(Student targetStudent) {
         requireNonNull(targetStudent);
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
+        filteredLessons.setPredicate(lesson ->
+                targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.nameAsString()));
         UiManager.showViewWindow();
     }
 
@@ -144,6 +146,16 @@ public class ModelManager implements Model {
         } else {
             UiManager.hideViewWindow();
         }
+    }
+
+    @Override
+    public void deleteLessonFromStudents(Lesson lesson) {
+        for (Student student : studentBook.getStudentList()) {
+            if (student.hasLesson(lesson)) {
+                student.getLessons().deleteLesson(lesson);
+            }
+        }
+        studentBook.refreshStudentBook();
     }
 
     //=========== LessonBook ================================================================================
@@ -185,7 +197,19 @@ public class ModelManager implements Model {
     public void viewLesson(Lesson targetLesson) {
         requireNonNull(targetLesson);
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
+        filteredStudents.setPredicate(student ->
+                targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
         UiManager.showViewWindow();
+    }
+
+    @Override
+    public void deleteStudentFromLessons(Student student) {
+        for (Lesson lesson : lessonBook.getLessonList()) {
+            if (lesson.containsStudent(student)) {
+                lesson.removeStudent(student);
+            }
+        }
+        lessonBook.refreshLessonBook();
     }
 
     //=========== Filtered Student List Accessors =============================================================

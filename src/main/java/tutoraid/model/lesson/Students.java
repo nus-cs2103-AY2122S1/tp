@@ -60,6 +60,20 @@ public class Students {
         if (!students.remove(student)) {
             throw new StudentNotFoundInLessonException();
         }
+        students.remove(student);
+    }
+
+    /**
+     * Returns a string Array that contains all the student names in the correct order.
+     */
+    public ArrayList<String> getAllStudentNamesAsStringArrayList() {
+        ArrayList<String> allStudentNamesAsStringArrayList = new ArrayList<>();
+        for (Student student : students) {
+            String currentLessonName = student.toNameString();
+            allStudentNamesAsStringArrayList.add(currentLessonName);
+        }
+        return allStudentNamesAsStringArrayList;
+
     }
 
     /**
@@ -71,18 +85,18 @@ public class Students {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         int counter = 1;
 
         for (Student student : students) {
-            str += "\n" + counter + ".  " + student.toNameString();
+            str.append("\n").append(counter).append(".  ").append(student.toNameString());
             counter++;
         }
 
-        if (str.equals("")) {
+        if (str.toString().equals("")) {
             return "No students";
         } else {
-            return str;
+            return str.toString();
         }
     }
 

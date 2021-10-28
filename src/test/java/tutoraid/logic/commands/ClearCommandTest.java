@@ -4,6 +4,7 @@ import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import tutoraid.model.LessonBook;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.StudentBook;
@@ -28,6 +29,7 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(TypicalStudents.getTypicalStudentBook(),
                 TypicalLessons.getTypicalLessonBook(), new UserPrefs());
         expectedModel.setStudentBook(new StudentBook());
+        expectedModel.setLessonBook(new LessonBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

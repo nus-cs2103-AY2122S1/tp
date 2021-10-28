@@ -16,9 +16,9 @@ public class Lesson {
     private final LessonName lessonName;
 
     // Data Fields
+    private final Students students;
     private final Capacity capacity;
     private final Price price;
-    private final Students students;
     private final Timing timing;
 
     /**

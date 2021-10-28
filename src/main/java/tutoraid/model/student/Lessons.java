@@ -39,8 +39,8 @@ public class Lessons {
 
         lessons = new ArrayList<>();
 
-        for (int i = 0; i < lessonNames.size(); i++) {
-            LessonName currentLessonName = new LessonName(lessonNames.get(i));
+        for (String lessonName : lessonNames) {
+            LessonName currentLessonName = new LessonName(lessonName);
             lessons.add(currentLessonName);
         }
     }
@@ -52,8 +52,8 @@ public class Lessons {
      * @return true if all elements are valid lesson names, false otherwise
      */
     public static boolean isValidLessonNames(ArrayList<String> lessonNames) {
-        for (int i = 0; i < lessonNames.size(); i++) {
-            if (lessonNames.get(i) == null || !LessonName.isValidLessonName(lessonNames.get(i))) {
+        for (String lessonName : lessonNames) {
+            if (lessonName == null || !LessonName.isValidLessonName(lessonName)) {
                 return false;
             }
         }
@@ -92,12 +92,19 @@ public class Lessons {
     }
 
     /**
+     * Returns boolean if lesson is in lessons or not.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        return lessons.contains(lesson.getLessonName());
+    }
+
+    /**
      * Returns a string Array that contains all the lesson names in the correct order.
      */
     public ArrayList<String> getAllLessonNamesAsStringArrayList() {
         ArrayList<String> allLessonNamesAsStringArrayList = new ArrayList<>();
-        for (int i = 0; i < lessons.size(); i++) {
-            String currentLessonName = lessons.get(i).toString();
+        for (LessonName lesson : lessons) {
+            String currentLessonName = lesson.toString();
             allLessonNamesAsStringArrayList.add(currentLessonName);
         }
         return allLessonNamesAsStringArrayList;
@@ -105,11 +112,19 @@ public class Lessons {
 
     @Override
     public String toString() {
-        if (lessons.size() == 0) {
-            return "No Lesson";
+        StringBuilder str = new StringBuilder();
+        int counter = 1;
+
+        for (String lessonName : getAllLessonNamesAsStringArrayList()) {
+            str.append("\n").append(counter).append(".  ").append(lessonName);
+            counter++;
         }
 
-        return lessons.toString();
+        if (str.toString().equals("")) {
+            return "No Lessons";
+        } else {
+            return str.toString();
+        }
     }
 
     @Override
