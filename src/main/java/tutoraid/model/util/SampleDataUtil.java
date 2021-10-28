@@ -1,6 +1,7 @@
 package tutoraid.model.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import tutoraid.model.LessonBook;
 import tutoraid.model.ReadOnlyLessonBook;
@@ -33,7 +34,8 @@ public class SampleDataUtil {
             // All details available
             new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
                     new ParentName("Mr Yeoh"), new Phone("93726483"),
-                    new ProgressList(), DEFAULT_PAYMENT_STATUS, DEFAULT_LESSONS),
+                    new ProgressList(), DEFAULT_PAYMENT_STATUS,
+                    new Lessons(new ArrayList<>(Arrays.asList("Maths 1")))),
             new Student(new StudentName("Bernice Yu"), new Phone("99272758"),
                     new ParentName("Mrs Yu"), new Phone("83548274"),
                     new ProgressList(), DEFAULT_PAYMENT_STATUS, DEFAULT_LESSONS),
@@ -68,7 +70,8 @@ public class SampleDataUtil {
         ArrayList<Student> sampleStudentInLesson = new ArrayList<>();
         Student sampleStudent = new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
                 new ParentName("Mr Yeoh"), new Phone("93726483"),
-                new ProgressList(), DEFAULT_PAYMENT_STATUS, DEFAULT_LESSONS);
+                new ProgressList(), DEFAULT_PAYMENT_STATUS,
+                new Lessons(new ArrayList<>(Arrays.asList("Maths 1"))));
         sampleStudentInLesson.add(sampleStudent);
 
         return new Lesson[] {
