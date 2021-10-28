@@ -40,20 +40,35 @@ It is most beneficial to Sales or Marketing staff who have to manage various app
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Reading the document
 
-<div markdown="block" class="alert alert-info">
+This purpose of this section is to provide you with definitions of syntax, data formats that would be used in 
+the next section [Features](#features) which contains detailed information on all the commands provided in PlaceBook.
 
-**:information_source: Notes about the command format:**<br>
+### Syntax and symbols
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+The table below contains definitions of syntax used in the command format.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+Syntax | Definition
+-------|-----------
+`n/, p/, etc...` | Words or letters followed by a slash refer to parameter tags. <br> e.g. `n/` refers to the name parameter.
+`UPPER_CASE` | Words in `UPPER_CASE` are the parameters to be supplied by the user. <br> e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+`[]` | Words in square brackets are optional. <br>  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+`...` | Items with `…`​ after them can be used multiple times including zero times.<br> e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+### Data format
+
+The table below contains definitions of data formats used in various parameters in the command format.
+
+Parameter | Data format
+----------|------------
+`INDEX` | Positive integers, e.g. 1,2,3, ...
+`DATETIME` | dd-mm-yyyy hhmm, e.g. 03-11-2021 1730 represents 3 November 2021 5.30 pm <br> **Notes:** The format uses the 24 hour clock formats.
+`EMAIL` | Emails should be of the format prefix@domain. e.g. Johnny@gmail.com
+`Others` | All other parameters will take any alphanumeric characters and special characters as input. 
+
+### Additional notes
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -63,12 +78,14 @@ It is most beneficial to Sales or Marketing staff who have to manage various app
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+--------------------------------------------------------------------------------------------------------------------
 
-</div>
+## Features
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
