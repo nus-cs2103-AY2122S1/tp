@@ -175,6 +175,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens NoteWindow if it is currently not opened. Focuses NoteWindow if otherwise.
+     * @param noteWindow Note Window.
+     */
     private void manageNoteWindow(NoteWindow noteWindow) {
         if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
             NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
@@ -185,26 +189,23 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    @FXML
     private void handleNote(Person person, Logic logic) {
         NoteWindow noteWindow = new PersonNoteWindow(person, logic, resultDisplay);
         manageNoteWindow(noteWindow);
     }
 
-    @FXML
     private void handleNote(Group group, Logic logic) {
         NoteWindow noteWindow = new GroupNoteWindow(group, logic, resultDisplay);
         manageNoteWindow(noteWindow);
     }
 
-    @FXML
     private void handleNote(Notor notor, Logic logic) {
         NoteWindow noteWindow = new GeneralNoteWindow(notor, logic, resultDisplay);
         manageNoteWindow(noteWindow);
     }
 
     /**
-     * Handles opening of Person Note or Group Note.
+     * Handles opening of Person Note, Group Note or general Note.
      * @param notable The object that is notable.
      * @param logic The Logic of Notor.
      */
@@ -278,9 +279,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
             if (commandResult.isShowNote()) {
-                if (commandResult.getNotable() != null) {
-                    handleNote(commandResult.getNotable(), logic);
-                }
+                handleNote(commandResult.getNotable(), logic);
             }
             if (commandResult.isExit()) {
                 handleExit();

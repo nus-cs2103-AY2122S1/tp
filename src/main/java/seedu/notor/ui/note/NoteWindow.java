@@ -144,8 +144,6 @@ public abstract class NoteWindow extends UiPart<Stage> {
         handleExit();
     }
 
-
-
     private void timeStampNote() {
         int noOfCharsTillCursor = noteTextArea.getCaretPosition();
         String noteBeforeLine = noOfCharsTillCursor == 0 ? "" : noteTextArea.getText(0, noOfCharsTillCursor);

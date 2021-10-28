@@ -75,7 +75,6 @@ public class GroupNoteWindow extends NoteWindow {
 
         GroupNoteWindow otherGroup = (GroupNoteWindow) other;
         return otherGroup.group.equals(this.group);
-
     }
 
     /**
