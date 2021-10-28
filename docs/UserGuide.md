@@ -41,10 +41,10 @@ If you ever want to skip through any section of our user guide, do feel free to 
 * [2. Quick Start](#2-quick-start)
 * [3. About](#3-about)
     * [3.1 Special Icons](#31-special-icons)
-    * [3.2 Application homepage explanation](#32-application-homepage-explanation)
+    * [3.2 Application Homepage Explanation](#32-application-homepage-explanation)
     * [3.2 Module Explanation](#33-module-explanation)
-    * [3.3 Command format](#33-module-explanation)
-    * [3.4 Command terminology](#34-command-format)
+    * [3.3 Command Format](#33-module-explanation)
+    * [3.4 Command Terminology](#34-command-format)
 * [4. Features](#4-features)
     * [4.1 Database](#41-database)
         * [4.1.1 Add](#411-adding-a-module-into-the-database--add)
@@ -119,7 +119,7 @@ Important Information are messages that are crucial for you to know in order to 
 Important Information: Remember the importance of this icon!
 </div>
 
-### 3.2 Application homepage explanation
+### 3.2 Application Homepage Explanation
 
 Here is how our application's homepage works
 
@@ -139,7 +139,7 @@ Here is how our application's homepage works
 * Here are the modules stored in our [database](#database).
 * Do note that we have included some modules for you to test out our [features](#4-features).
 
-#### 3.2.5 MC goal Progress
+#### 3.2.5 MC Goal Progress
 
 Tracks and displays the number of MCs completed in total, and for each course requirement. <br>
 
@@ -184,7 +184,7 @@ Notes:
 #### 3.2.7 Current MC goal
 * Displays your current MC goal.
 
-### 3.3 Module explanation
+### 3.3 Module Explanation
 Here is an image of a module in our [database](#database)<br>
 ![Module Explanation](images/ModuleExplanation.png)
 
@@ -212,7 +212,7 @@ A module can have 4 different colour codes:
   For example, if you are currently in Year 1 Semester 2, a module in Year 1 Semester 2 of your academic plan would look like this:<br>
   ![Module taken](images/YellowModule.png)
 
-### 3.4 Command format
+### 3.4 Command Format
 
 <div markdown="block" class="alert alert-info">
 
