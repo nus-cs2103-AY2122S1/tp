@@ -13,6 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import seedu.programmer.commons.core.GuiSettings;
+import seedu.programmer.logic.Logic;
+import seedu.programmer.logic.LogicManager;
 
 /**
  * Controller for a help page
@@ -24,6 +27,7 @@ public class HelpWindow extends PopupWindow {
     private static final String INSTRUCTION = "Here is the feature list of ProgrammerError:";
 
     private static final String FXML = "HelpWindow.fxml";
+    private static final Double FRACTION_OF_WINDOW = 0.925;
 
     private ObservableList<FeatureTableItem> featureTableItems;
 
@@ -58,8 +62,9 @@ public class HelpWindow extends PopupWindow {
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
+    public HelpWindow(GuiSettings guiSettings) {
         this(new Stage());
+        getRoot().setWidth(guiSettings.getWindowWidth() * FRACTION_OF_WINDOW);
     }
 
     private void initializeFeatureList() {
