@@ -76,12 +76,12 @@ public class SampleDataUtil {
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Position(new Title("software engineer"),
                     new Description("work in a team that builds a facial recognition application")),
-                    ProfileUrl.emptyProfileUrl(), new ProfileUrl("https://github.com/johndoe")),
+                    ProfileUrl.emptyProfileUrl()),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new Position(new Title("database administrator"),
                     new Description("handles database administration matters")),
-                    new ProfileUrl("https://www.linkedin.com/company/john-doe/"), ProfileUrl.emptyProfileUrl())
+                    new ProfileUrl("https://github.com/yumorishita"))
         };
     }
 

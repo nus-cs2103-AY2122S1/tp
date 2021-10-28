@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -52,8 +55,6 @@ public class ApplicantCard extends UiPart<Region> {
     private AnchorPane hyperlinkAnchorPane;
     @FXML
     private Hyperlink hyperlinkGitHub;
-    @FXML
-    private Hyperlink hyperlinkLinkedIn;
 
     /**
      * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
@@ -73,13 +74,8 @@ public class ApplicantCard extends UiPart<Region> {
     private void initializeHyperlinksForApplicant(Applicant applicant) {
         // Insert the code for initializing the applicant github link and linkedin link here
         this.gitHubUrl = applicant.getGitHubUrl();
-        this.linkedInUrl = applicant.getLinkedInUrl();
         if (!applicant.hasGitHubProfile()) {
             removeGitHubHyperLinkFromApplicantCard();
-        }
-
-        if (!applicant.hasLinkedInProfile()) {
-            removeLinkedInHyperLinkFromApplicantCard();
         }
     }
 
@@ -87,24 +83,15 @@ public class ApplicantCard extends UiPart<Region> {
         hyperlinkAnchorPane.getChildren().removeAll(hyperlinkGitHub, gitHubLogo);
     }
 
-    private void removeLinkedInHyperLinkFromApplicantCard() {
-        hyperlinkAnchorPane.getChildren().removeAll(hyperlinkLinkedIn, linkedInLogo);
-    }
-
     @FXML
     private void handleGitHubHyperlink() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(gitHubUrl.getUrlString());
-        clipboard.setContent(url);
-    }
-
-    @FXML
-    private void handleLinkedInHyperlink() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(linkedInUrl.getUrlString());
-        clipboard.setContent(url);
+        try {
+            Desktop.getDesktop().browse(new URI(gitHubUrl.getUrlString()));
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (URISyntaxException e1) {
+            e1.printStackTrace();
+        }
     }
 
     @Override

@@ -30,7 +30,6 @@ public class JsonAdaptedApplicant {
     private final String positionApplyingTo;
     private final String applicationStatus;
     private final String gitHubUrl;
-    private final String linkedInUrl;
 
     /**
      * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
@@ -40,8 +39,7 @@ public class JsonAdaptedApplicant {
                                 @JsonProperty("email") String email, @JsonProperty("address") String address,
                                 @JsonProperty("positionApplyingTo") String positionApplyingTo,
                                 @JsonProperty("applicationStatus") String applicationStatus,
-                                @JsonProperty("gitHubUrl") String gitHubUrl,
-                                @JsonProperty("linkedInUrl") String linkedInUrl) {
+                                @JsonProperty("gitHubUrl") String gitHubUrl) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,7 +47,6 @@ public class JsonAdaptedApplicant {
         this.positionApplyingTo = positionApplyingTo;
         this.applicationStatus = applicationStatus;
         this.gitHubUrl = gitHubUrl;
-        this.linkedInUrl = linkedInUrl;
     }
 
     /**
@@ -63,7 +60,6 @@ public class JsonAdaptedApplicant {
         positionApplyingTo = source.getApplication().getPosition().getTitle().fullTitle;
         applicationStatus = source.getApplication().getStatus().name();
         this.gitHubUrl = source.getGitHubUrl().url;
-        this.linkedInUrl = source.getLinkedInUrl().url;
     }
 
     /**
@@ -124,14 +120,8 @@ public class JsonAdaptedApplicant {
         }
         final ProfileUrl modelGitHubUrl = ProfileUrl.ofNullable(gitHubUrl);
 
-        if (linkedInUrl == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ProfileUrl.class.getSimpleName()));
-        }
-        final ProfileUrl modelLinkedInUrl = ProfileUrl.ofNullable(linkedInUrl);
-
         Applicant modelApplicant = new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelPosition,
-                modelGitHubUrl, modelLinkedInUrl);
+                modelGitHubUrl);
         return modelApplicant.markAs(modelApplicationStatus);
     }
 

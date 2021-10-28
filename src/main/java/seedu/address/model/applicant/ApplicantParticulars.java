@@ -12,20 +12,18 @@ public class ApplicantParticulars {
     private final Address address;
     private final Title positionTitle;
     private ProfileUrl gitHubUrl;
-    private ProfileUrl linkedInUrl;
 
     /**
      * Constructor for an ApplicantParticulars object.
      */
     public ApplicantParticulars(Name name, Phone phone, Email email, Address address, Title positionTitle,
-                                ProfileUrl gitHubUrl, ProfileUrl linkedInUrl) {
+                                ProfileUrl gitHubUrl) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.positionTitle = positionTitle;
         this.gitHubUrl = gitHubUrl;
-        this.linkedInUrl = linkedInUrl;
     }
 
     public Name getName() {
@@ -52,7 +50,4 @@ public class ApplicantParticulars {
         return gitHubUrl;
     }
 
-    public ProfileUrl getLinkedInUrl() {
-        return linkedInUrl;
-    }
 }

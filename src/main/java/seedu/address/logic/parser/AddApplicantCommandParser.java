@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_PROFILE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LINKEDIN_PROFILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
@@ -36,9 +35,10 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_POSITION, PREFIX_GITHUB_PROFILE, PREFIX_LINKEDIN_PROFILE);
+                        PREFIX_POSITION, PREFIX_GITHUB_PROFILE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_POSITION,
+                PREFIX_GITHUB_PROFILE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
         }
@@ -51,12 +51,9 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         ProfileUrl gitHubUrl = argMultimap.getValue(PREFIX_GITHUB_PROFILE).isPresent()
                 ? ApplicantParserUtil.parseUrl(argMultimap.getValue(PREFIX_GITHUB_PROFILE).get())
                 : ProfileUrl.emptyProfileUrl();
-        ProfileUrl linkedInUrl = argMultimap.getValue(PREFIX_LINKEDIN_PROFILE).isPresent()
-                ? ApplicantParserUtil.parseUrl(argMultimap.getValue(PREFIX_LINKEDIN_PROFILE).get())
-                : ProfileUrl.emptyProfileUrl();
 
         ApplicantParticulars applicantParticulars =
-                new ApplicantParticulars(name, phone, email, address, positionTitle, gitHubUrl, linkedInUrl);
+                new ApplicantParticulars(name, phone, email, address, positionTitle, gitHubUrl);
 
         return new AddApplicantCommand(applicantParticulars);
     }

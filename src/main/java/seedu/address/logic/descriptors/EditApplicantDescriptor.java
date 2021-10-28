@@ -29,7 +29,6 @@ public class EditApplicantDescriptor {
     private Application application;
     private Title title;
     private ProfileUrl gitHubUrl;
-    private ProfileUrl linkedInUrl;
 
     public EditApplicantDescriptor() {}
 
@@ -45,14 +44,13 @@ public class EditApplicantDescriptor {
         setApplication(toCopy.application);
         setTitle(toCopy.title);
         setGitHubProfile(toCopy.gitHubUrl);
-        setLinkedInProfile(toCopy.linkedInUrl);
     }
 
     /**
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, phone, email, address, application, title, gitHubUrl, linkedInUrl);
+        return CollectionUtil.isAnyNonNull(name, phone, email, address, application, title, gitHubUrl);
     }
 
     public void setName(Name name) {
@@ -118,17 +116,6 @@ public class EditApplicantDescriptor {
     }
 
     public void setLinkedInProfile(ProfileUrl linkedInUrl) {
-        this.linkedInUrl = linkedInUrl;
-    }
-
-    /**
-     * Returns the linkedin url as an optional object. Since ProfileUrl already has its own null-handling, this will
-     * never be an empty optional.
-     *
-     * @return optional object containing a profile url.
-     */
-    public Optional<ProfileUrl> getLinkedInUrl() {
-        return Optional.ofNullable(linkedInUrl);
     }
 
     /**
@@ -144,10 +131,9 @@ public class EditApplicantDescriptor {
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
         Application updatedApplication = getApplication().orElse(applicantToEdit.getApplication());
         ProfileUrl updatedGitHubUrl = getGitHubUrl().orElse(applicantToEdit.getGitHubUrl());
-        ProfileUrl updatedLinkedInUrl = getLinkedInUrl().orElse(applicantToEdit.getLinkedInUrl());
 
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication,
-                updatedGitHubUrl, updatedLinkedInUrl);
+                updatedGitHubUrl);
     }
 
     /**
@@ -168,9 +154,8 @@ public class EditApplicantDescriptor {
         Position updatedPosition = model.getPositionByTitle(title);
 
         ProfileUrl updatedGitHubUrl = getGitHubUrl().orElse(applicantToEdit.getGitHubUrl());
-        ProfileUrl updatedLinkedInUrl = getLinkedInUrl().orElse(applicantToEdit.getLinkedInUrl());
         return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPosition,
-                updatedGitHubUrl, updatedLinkedInUrl);
+                updatedGitHubUrl);
     }
 
     @Override

@@ -24,7 +24,6 @@ public class Applicant {
     private final Address address;
     private final Application application;
     private ProfileUrl gitHubUrl;
-    private ProfileUrl linkedInUrl;
 
     /**
      * Every field must be present and not null.
@@ -49,8 +48,8 @@ public class Applicant {
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Position position,
-                     ProfileUrl gitHubUrl, ProfileUrl linkedInUrl) {
-        this(name, phone, email, address, new Application(position), gitHubUrl, linkedInUrl);
+                     ProfileUrl gitHubUrl) {
+        this(name, phone, email, address, new Application(position), gitHubUrl);
     }
 
 
@@ -64,8 +63,7 @@ public class Applicant {
                 applicantParticulars.getEmail(),
                 applicantParticulars.getAddress(),
                 new Application(position),
-                applicantParticulars.getGitHubUrl(),
-                applicantParticulars.getLinkedInUrl()
+                applicantParticulars.getGitHubUrl()
         );
     }
 
@@ -73,7 +71,7 @@ public class Applicant {
      * Internal constructor for a new Applicant object.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Application application,
-                     ProfileUrl gitHubUrl, ProfileUrl linkedInUrl) {
+                     ProfileUrl gitHubUrl) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -81,15 +79,13 @@ public class Applicant {
         this.address = address;
         this.application = application;
         this.gitHubUrl = gitHubUrl;
-        this.linkedInUrl = linkedInUrl;
     }
 
     /**
      * Marks the application with the specified application status.
      */
     public Applicant markAs(ApplicationStatus applicationStatus) {
-        return new Applicant(name, phone, email, address, application.markAs(applicationStatus), gitHubUrl,
-                linkedInUrl);
+        return new Applicant(name, phone, email, address, application.markAs(applicationStatus), gitHubUrl);
     }
 
     public Name getName() {
@@ -124,13 +120,6 @@ public class Applicant {
         return gitHubUrl.hasProfile();
     }
 
-    public ProfileUrl getLinkedInUrl() {
-        return linkedInUrl;
-    }
-
-    public boolean hasLinkedInProfile() {
-        return linkedInUrl.hasProfile();
-    }
 
     /**
      * Returns true if this applicant is applying to the given position.
