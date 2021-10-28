@@ -14,6 +14,9 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -37,6 +40,8 @@ public class StatsDisplay extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StatsDisplay.class);
     private static final String FXML = "StatsDisplay.fxml";
 
+    private final StatsDisplayObserver observer;
+
     private Runnable onStatsExit;
 
     @FXML
@@ -51,7 +56,7 @@ public class StatsDisplay extends UiPart<Stage> {
     /**
      * Creates a StatsDisplay UI component.
      */
-    public StatsDisplay(Stage root) {
+    public StatsDisplay(Stage root, StatsDisplayObserver o) {
         super(FXML, root);
         pieChart.setLabelsVisible(false);
         pieChart.setLegendSide(Side.RIGHT);
@@ -63,13 +68,19 @@ public class StatsDisplay extends UiPart<Stage> {
                 onStatsExit.run();
             }
         });
+
+        observer = o;
+
+        KeyCombination closeStatsDisplayHotKey = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
+        Runnable closeStatsDisplayRunnable= () -> {this.hide();};
+        getRoot().getScene().getAccelerators().put(closeStatsDisplayHotKey, closeStatsDisplayRunnable);
     }
 
     /**
      * Creates a new StatsDisplay.
      */
-    public StatsDisplay() {
-        this(new Stage());
+    public StatsDisplay(StatsDisplayObserver o) {
+        this(new Stage(), new StatsDisplayObserver());
     }
 
     public void setStatsCloseCommand(Runnable onStatsExit) {
