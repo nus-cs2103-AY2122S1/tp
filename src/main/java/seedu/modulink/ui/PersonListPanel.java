@@ -42,9 +42,9 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else if (person.getIsMyProfile()) {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
-                setStyle("-fx-background-color: #228B22");
+                setStyle("-fx-background-color: #228B22; -fx-background-radius: 20px; -fx-padding: 10px");
             } else {
-                setStyle("");
+                setStyle("-fx-background-radius: 20px; -fx-padding: 10px");
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
 
             }

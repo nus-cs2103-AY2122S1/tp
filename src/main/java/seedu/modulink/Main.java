@@ -24,8 +24,6 @@ public class Main {
      * @param args parameter for main method.
      */
     public static void main(String[] args) {
-
-        assert false;
         Application.launch(MainApp.class, args);
     }
 }
