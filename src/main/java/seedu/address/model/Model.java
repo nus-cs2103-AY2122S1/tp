@@ -104,4 +104,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of person sorted by with upcoming birthday at the top list */
     ObservableList<Person> getBirthdayReminderList();
+
+    /** Removes all entries from Birthday Reminder List*/
+    void clearBirthdayReminderList();
 }
