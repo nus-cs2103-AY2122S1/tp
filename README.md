@@ -13,14 +13,14 @@ Source Control is **optimized for use via a Command Line Interface (CLI)** while
 ![Ui](docs/images/Ui.png)
 
 ## Usage
-* Keeps track of administrative info and academic records of large student intake. 
-* Analyzes the performance of individual, groups and the cohort in assessments. 
+* Keeps track of administrative info and academic records of large student intake.
+* Analyzes the performance of individual, groups and the cohort in assessments.
 
 ## User Guide
 If you are interested in using **Source Control**, head over to the [Quick Start section of the **User Guide**](https://ay2122s1-cs2103t-w08-2.github.io/tp/UserGuide.html#quick-start).
 
 ## Developer Guide
-If you are interested in developing **Source Control**, check out the **[Developer Guide](https://ay2122s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html)** for information on how the application is designed. 
+If you are interested in developing **Source Control**, check out the **[Developer Guide](https://ay2122s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html)** for information on how the application is designed.
 
 ## About Us
 If you are interested in contacting **Source Control** team, visit the [**About Us** website](https://ay2122s1-cs2103t-w08-2.github.io/tp/AboutUs.html).
