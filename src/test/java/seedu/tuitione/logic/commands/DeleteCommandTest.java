@@ -88,19 +88,19 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_deleteStudentWithLessons_success() {
-        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIFTH_STUDENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIFTH_STUDENT);
+
+        ModelManager expectedModel = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
+        Student studentToDelete = expectedModel.getFilteredStudentList().get(INDEX_FIFTH_STUDENT.getZeroBased());
 
         List<Lesson> lessonsToUnenroll = studentToDelete.getLessons();
         while (!lessonsToUnenroll.isEmpty()) {
             Lesson l = lessonsToUnenroll.get(0);
             l.unenrollStudent(studentToDelete);
-            model.setLesson(l, l);
+            expectedModel.setLesson(l, l);
         }
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
-
-        ModelManager expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
