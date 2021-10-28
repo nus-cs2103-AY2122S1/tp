@@ -182,7 +182,7 @@ Examples:
 
 Edits an existing student in TAB.
 
-Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. <br>
   e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
@@ -422,6 +422,9 @@ Examples:
 
 
 <div style="page-break-after: always;"></div>
+
+### Managing Lesson Fees
+
 
 ### Viewing your Calendar
 
