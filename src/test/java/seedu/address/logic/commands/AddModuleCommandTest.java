@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalModules.MODULE_2;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -29,7 +30,7 @@ public class AddModuleCommandTest {
     }
 
     @Test
-    public void execute_valid_moduleName_addSuccessful() throws CommandException {
+    public void execute_validModuleName_addSuccessful() throws CommandException {
         ModuleName validModuleName = new ModuleName("CS2105");
         Module moduleToAdd = new Module(validModuleName);
         Model expectedModel = new ModelManager();
