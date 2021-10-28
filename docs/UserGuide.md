@@ -292,8 +292,20 @@ interaction 1 int/We talked. on/1990-01-20
 * All fields must be present
 * Date must be in the format of `YYYY-MM-DD`
 
-Examples:
-* `interaction 1 int/We talked. on/1990-01-20` Adds an interaction with description 'We talked' and date '1990-01-20' to the Person at index 1 of the list.
+Examples: 
+* `interaction 1 int/We talked. on/1990-01-20` <br/>
+> Adds an interaction with description 'We talked.' and date '1990-01-20' to the Person at index 1 of the list.
+  
+* `interaction 2 int/We chat. on/1990-01-20` <br/>
+> Adds an interaction with description 'We chat.' and date '1990-01-20' to the Person at index 2 of the list.
+
+
+<div markdown="block" class="alert alert-info">
+:bulb: Do not specify duplicate delimiters!
+* If you specify duplicate delimiters, the program will take the first one out of the duplicates
+* For eg: `interaction 2 int/We chat. on/1990-01-20 on/1990-01-21` 
+* The program will save `1990-01-20` as the date.
+</div>
 
 ##### Viewing a specific contact in detail : `view`
 Get a detailed view of a specific contact by index.
