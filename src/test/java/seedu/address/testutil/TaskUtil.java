@@ -37,8 +37,8 @@ public class TaskUtil {
      * Returns a task delete command string for deleting the {@code task}
      * from the member with {@code memberId}.
      */
-    public static String getTdelCommand(Index taskID, Index memberId) {
-        return TdelCommand.COMMAND_WORD + " " + getTaskIdDetails(taskID, memberId);
+    public static String getTdelCommand(Index taskID) {
+        return TdelCommand.COMMAND_WORD + " " + PREFIX_TASK_ID + Integer.toString(taskID.getOneBased());
     }
 
     /**
