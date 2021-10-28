@@ -83,13 +83,6 @@ public class PersonCard extends UiPart<Region> {
         if (person.getTutorialGroup().value.isEmpty()) {
             tutorialGroup.setManaged(false);
         }
-        /*
-        gender.setText(person.getGender().gender);
-        if (person.getGender().gender.isEmpty()) {
-            gender.setManaged(false);
-        }
-         */
-
         remark.setText(person.getRemark().value);
         if (person.getRemark().value.isEmpty()) {
             remark.setManaged(false);
