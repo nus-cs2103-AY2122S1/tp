@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.unify.commons.exceptions.IllegalValueException;
-import seedu.unify.model.task.Tag;
+import seedu.unify.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Tag}.

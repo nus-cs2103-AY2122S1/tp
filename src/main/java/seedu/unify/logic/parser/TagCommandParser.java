@@ -13,55 +13,44 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.unify.commons.core.index.Index;
-import seedu.unify.logic.commands.EditCommand;
-import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.unify.logic.commands.TagCommand;
+import seedu.unify.logic.commands.TagCommand.TagTaskDescriptor;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new TagCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class TagCommandParser implements Parser<TagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses teh given {@code String} of arguments in the context of the TagCommand
+     * and returns a TagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_TAG);
-
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
 
-        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editTaskDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-            editTaskDescriptor.setTime(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editTaskDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
-        }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);
-        if (!editTaskDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        TagTaskDescriptor tagTaskDescriptor = new TagTaskDescriptor();
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(tagTaskDescriptor::setTags);
+        if (!tagTaskDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(TagCommand.MESSAGE_NOT_TAGGED);
         }
 
-        return new EditCommand(index, editTaskDescriptor);
+        return new TagCommand(index, tagTaskDescriptor);
     }
 
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
-
         if (tags.isEmpty()) {
             return Optional.empty();
         }

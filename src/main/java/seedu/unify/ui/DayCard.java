@@ -1,10 +1,13 @@
 package seedu.unify.ui;
 
+import java.time.LocalDate;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.unify.model.task.Task;
+
 
 /**
  * An UI component that displays information of a {@code Task} in the specified day.
@@ -28,15 +31,29 @@ public class DayCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label date;
+    @FXML
     private Label id;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
      */
-    public DayCard(Task task) {
+    public DayCard(Task task, int size) {
         super(FXML);
         this.task = task;
         name.setText(task.getName().taskName);
+        date.setText(task.getTime().toString());
+        if (task.getDate().localDate.equals(LocalDate.now())) {
+            if (size < 3) {
+                cardPane.getStyleClass().add("dayCardLight");
+            } else if (size < 5) {
+                cardPane.getStyleClass().add("dayCardMed");
+            } else {
+                cardPane.getStyleClass().add("dayCardHeavy");
+            }
+        } else {
+            cardPane.getStyleClass().add("dayCard");
+        }
     }
 
     @Override

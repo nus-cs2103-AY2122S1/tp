@@ -3,6 +3,7 @@ package seedu.unify.model.task;
 import java.time.LocalDate;
 import java.util.Iterator;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,9 @@ public class WeeklyTasks implements Iterable<Task> {
     private static final Integer DAYS_IN_WEEK = 7;
 
     private final SimpleIntegerProperty weekNumber;
+    private final SimpleIntegerProperty totalWeeklyTasks;
+    private final SimpleIntegerProperty totalDoneTasks;
+    private final SimpleDoubleProperty weeklyProgress;
     private final ObservableList<Task> allTaskList;
     private final ObservableList<FilteredList<Task>> weeklyTaskList;
 
@@ -44,11 +48,14 @@ public class WeeklyTasks implements Iterable<Task> {
         weeklyTaskList = FXCollections.observableArrayList();
         allTaskList = taskList;
         weekNumber = new SimpleIntegerProperty(week);
+        totalWeeklyTasks = new SimpleIntegerProperty();
+        totalDoneTasks = new SimpleIntegerProperty();
+        weeklyProgress = new SimpleDoubleProperty();
         // Populate the weeklyTaskList with 7 dailyTaskList
         for (int i = 0; i < DAYS_IN_WEEK; i++) {
             weeklyTaskList.add(new FilteredList<>(allTaskList));
         }
-        updateWeeklyList();
+        setWeek(week);
     }
 
     /**
@@ -93,15 +100,59 @@ public class WeeklyTasks implements Iterable<Task> {
     public void setWeek(Integer week) {
         weekNumber.set(week);
         updateWeeklyList();
+        updateWeeklyProgress();
     }
 
     /**
-     * Updates the filtered list to the week set
+     * Updates the weekly list to the week set
      */
     private void updateWeeklyList() {
         for (int i = 0; i < DAYS_IN_WEEK; i++) {
             weeklyTaskList.get(i).setPredicate(new TaskContainsDatePredicate(getFirstDayOfWeek().plusDays(i)));
         }
+    }
+
+    /**
+     * Updates the weekly progress state
+     */
+    public void updateWeeklyProgress() {
+        int doneTasksTemp = 0;
+        int totalTasksTemp = 0;
+        for (int i = 0; i < DAYS_IN_WEEK; i++) {
+            FilteredList<Task> tempList = new FilteredList<>(weeklyTaskList.get(i));
+            totalTasksTemp += tempList.size();
+            tempList.setPredicate(new TaskContainsStatePredicate(new State(State.ObjectState.DONE)));
+            doneTasksTemp += tempList.size();
+        }
+        totalWeeklyTasks.set(totalTasksTemp);
+        totalDoneTasks.set(doneTasksTemp);
+        if (totalTasksTemp == 0) {
+            weeklyProgress.set(1);
+        } else {
+            weeklyProgress.set(getTotalDoneTasks().doubleValue() / getTotalWeeklyTasks().doubleValue());
+        }
+
+    }
+
+    /**
+     * Return the total tasks for the week
+     */
+    public SimpleIntegerProperty getTotalWeeklyTasks() {
+        return totalWeeklyTasks;
+    }
+
+    /**
+     * Return the total completed tasks for the week
+     */
+    public SimpleIntegerProperty getTotalDoneTasks() {
+        return totalDoneTasks;
+    }
+
+    /**
+     * Returns the weekly progress
+     */
+    public SimpleDoubleProperty getWeeklyProgress() {
+        return weeklyProgress;
     }
 
     @Override

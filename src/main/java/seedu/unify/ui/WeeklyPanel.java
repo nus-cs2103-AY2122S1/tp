@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.task.WeeklyTasks;
 
@@ -24,6 +25,9 @@ public class WeeklyPanel extends UiPart<Region> {
 
     @FXML
     private Label weekLabel;
+
+    @FXML
+    private StackPane progressPanelPlaceholder;
 
     @FXML
     private HBox dailyHBox;
@@ -44,6 +48,14 @@ public class WeeklyPanel extends UiPart<Region> {
             dailyHBox.widthProperty()
                     .addListener(e -> dailyPanel.getRoot().setPrefWidth(dailyHBox.getWidth() / 7));
         }
+
+        ProgressPanel progressPanel =
+                new ProgressPanel(
+                        weeklyTasks.getWeeklyProgress(),
+                        weeklyTasks.getTotalWeeklyTasks(),
+                        weeklyTasks.getTotalDoneTasks());
+        progressPanelPlaceholder.getChildren().add(progressPanel.getRoot());
+
         observableWeekNumber.addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
