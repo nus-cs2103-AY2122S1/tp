@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;

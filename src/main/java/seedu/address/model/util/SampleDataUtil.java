@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -154,7 +155,8 @@ public class SampleDataUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} and stores them into the given {@code addressBook}.
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}
+     * and stores them into the given {@code addressBook}.
      */
     private static Set<Tag> parseAndStoreTags(Collection<String> tags, AddressBook addressBook) throws ParseException {
         requireNonNull(tags);
