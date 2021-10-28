@@ -26,16 +26,28 @@ public class State {
         value = ObjectState.TODO;
     }
 
+    /**
+     * Constructs a {@code State}.
+     *
+     */
     public State(ObjectState state) {
         this.value = state;
     }
 
+    /**
+     * Constructs a {@code State}.
+     *
+     */
     public State(String state) {
         requireNonNull(state);
         checkArgument(isValidState(state), MESSAGE_CONSTRAINTS);
         this.value = ObjectState.valueOf(state);
     }
 
+    /**
+     * Returns the object state.
+     *
+     */
     public ObjectState getState() {
         return value;
     }
