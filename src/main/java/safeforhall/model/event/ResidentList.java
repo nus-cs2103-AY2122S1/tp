@@ -27,7 +27,7 @@ public class ResidentList {
     public static final int NUMBER_OF_RESIDENT_FIELD = 8;
 
     private final String residentsDisplay;
-    private String residentsStorage;
+    private final String residentsStorage;
     private final ArrayList<String> stringResidentList;
     private final boolean isEmpty;
     private final ArrayList<Person> residentList = new ArrayList<>();
@@ -77,7 +77,7 @@ public class ResidentList {
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is a valid list of residents.
      *
      * @param residents A string of residents.
      */
@@ -186,10 +186,94 @@ public class ResidentList {
     }
 
     /**
+     * Checks if any {@code resident} is not vaccinated
+     * @return Returns true if any {@code resident} in the {@code ResidentList} is not vaccinated
+     */
+    public boolean hasUnvaccinatedResident() {
+        for (Person person : residentList) {
+            if (!person.isVaccinated()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Counts the number of unvaccinated residents in the {@code ResidentList}
+     * @return Returns the number of unvaccinated residents in the {@code ResidentList}
+     */
+    public int numOfUnvaccinatedResidents() {
+        int total = 0;
+        for (Person person : residentList) {
+            if (!person.isVaccinated()) {
+                total++;
+            }
+        }
+        return total;
+    }
+
+    /**
+     * Returns a string of person details, consisting of the remaining residents for the event.
+     *
+     * @param toRemove    A string of residents to add to the event.
+     *
+     * @return A String consisting of past and new residents for the event.
+     */
+    public String getRemovedStorageString(ArrayList<Person> toRemove) {
+        StringBuilder newResidentList = new StringBuilder("");
+
+        for (Person person : residentList) {
+            if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person);
+            } else if (!toRemove.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(person);
+            }
+        }
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
+    }
+
+    /**
+     * Returns a string of names, consisting of the remaining residents for the event.
+     *
+     * @param toRemove    A string of residents to remove from the event.
+     *
+     * @return A String consisting of the remaining residents for the event.
+     */
+    public String getRemovedDisplayString(ArrayList<Person> toRemove) {
+        StringBuilder newResidentList = new StringBuilder("");
+
+        for (Person person : residentList) {
+            if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person.getName());
+            } else if (!toRemove.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(person.getName());
+            }
+        }
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
+    }
+
+    /**
      * Returns true if the ResidentList is empty.
      */
     public boolean isEmpty() {
         return this.isEmpty;
+    }
+
+    /**
+     * Returns the number of residents currently in the event.
+     */
+    public int getResidentListSize() {
+        return this.residentList.size();
     }
 
     @Override
@@ -216,7 +300,7 @@ public class ResidentList {
         return this.residentsDisplay;
     }
 
-    public ArrayList<Person> getResidentList() {
+    public ArrayList<Person> getResidents() {
         return this.residentList;
     }
 }

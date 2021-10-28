@@ -69,7 +69,7 @@ public class TypicalEvents {
             .withResidentList(TypicalPersons.GEORGE.getName().toString(), TypicalPersons.GEORGE.toString())
             .build();
     public static final Event DANCE = new EventBuilder().withEventName("dance")
-            .withEventDate("01-11-2021")
+            .withEventDate("01-10-2021")
             .withEventTime("1230")
             .withVenue("studio")
             .withCapacity("11")

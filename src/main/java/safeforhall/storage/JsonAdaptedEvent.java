@@ -52,8 +52,8 @@ class JsonAdaptedEvent {
         eventDate = source.getEventDate().eventDate;
         eventTime = source.getEventTime().eventTime;
         venue = source.getVenue().venue;
-        capacity = source.getCapacity().capacity;
-        residents = source.getResidents().getResidentsStorage();
+        capacity = source.getCapacity().inputCapacity;
+        residents = source.getResidentList().getResidentsStorage();
     }
 
     /**
@@ -116,7 +116,6 @@ class JsonAdaptedEvent {
         final Capacity modelCapacity = new Capacity(capacity);
 
         // Residents
-
         if (residents == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ResidentList.class.getSimpleName()));

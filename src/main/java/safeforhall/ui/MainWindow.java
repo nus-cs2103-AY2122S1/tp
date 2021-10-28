@@ -33,14 +33,6 @@ import safeforhall.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    // Hard-coded as loading from css doesn't work
-    private static final String BUTTON_STYLE = "-fx-width: 50;\n"
-            + "-fx-height: 50;\n"
-            + "-fx-border-width: 2;\n"
-            + "-fx-background-radius: 0;\n"
-            + "-fx-border-radius: 10;\n"
-            + "-fx-background-color: transparent;\n"
-            + "-fx-content-display: graphic-only;";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -218,7 +210,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        personAdditionalListPanel = new PersonAdditionalListPanel(logic.getSinglePerson());
+        personAdditionalListPanel = new PersonAdditionalListPanel(logic.getSinglePerson(), logic);
         personAdditionalListPanelPlaceholder.getChildren().add(personAdditionalListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList(), logic);

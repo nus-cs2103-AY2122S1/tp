@@ -24,6 +24,7 @@ import safeforhall.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final String EMPTY_STRING = "";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -119,7 +120,7 @@ public class ModelManager implements Model {
             personFound = addressBook.findPerson(information);
 
             if (personFound.isEmpty()) {
-                throw new CommandException("No person with this information '" + information + "' could be found");
+                throw new CommandException("No resident with this information '" + information + "' could be found");
             } else {
                 personList.add(personFound.get());
             }
@@ -176,7 +177,7 @@ public class ModelManager implements Model {
                 return information;
             }
         }
-        return "";
+        return EMPTY_STRING;
     }
 
     @Override
@@ -286,6 +287,19 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public ArrayList<Event> getPersonEvents(Person person, Predicate<Event> predicate) {
+        ArrayList<Event> events = new ArrayList<>();
+        for (Event e: filteredEvents.filtered(predicate)) {
+            if (e.getResidentList().getResidents().contains(person)) {
+                if (!events.contains(e)) {
+                    events.add(e);
+                }
+            }
+        }
+        return events;
     }
 
     @Override

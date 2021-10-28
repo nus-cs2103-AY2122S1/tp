@@ -32,56 +32,66 @@ public class IncludeCommandTest {
         toAdd.add(BENSON);
         ArrayList<Person> current = new ArrayList<>();
         current.add(BENSON);
-        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1), new ResidentList("Benson"));
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
+                new ResidentList(BENSON.getName().toString(), BENSON.toString()));
         assertThrows(CommandException.class, () -> command.checkForDuplicates(toAdd, current));
     }
 
     @Test
     public void addOneRoomTest() throws CommandException {
-        ArrayList<Person> toAdd = model.toPersonList(new ResidentList("a105"));
+        ArrayList<Person> toAdd = model.toPersonList(new ResidentList(TypicalPersons.FIONA.getRoom().toString(),
+                TypicalPersons.FIONA.toString()));
         CommandResult expectedMessage = new CommandResult(String.format(IncludeCommand.MESSAGE_SUCCESS, toAdd.stream()
                 .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1), new ResidentList("a105"));
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
+                new ResidentList(TypicalPersons.FIONA.getRoom().toString(), TypicalPersons.FIONA.toString()));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
     }
 
     @Test
     public void addMultipleRoomsTest() throws CommandException {
-        ArrayList<Person> toAdd = model.toPersonList(new ResidentList("a104, a105"));
+        String constructor1 = TypicalPersons.ELLE.getRoom().toString() + ", "
+                + TypicalPersons.FIONA.getRoom().toString();
+        String constructor2 = TypicalPersons.ELLE.toString() + ", " + TypicalPersons.FIONA.toString();
+        ArrayList<Person> toAdd = model.toPersonList(new ResidentList(constructor1, constructor2));
         CommandResult expectedMessage = new CommandResult(String.format(IncludeCommand.MESSAGE_SUCCESS, toAdd.stream()
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1), new ResidentList("a104, a105"));
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
+                new ResidentList(constructor1, constructor2));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
     }
 
     @Test
     public void addOneNameTest() throws CommandException {
-        ArrayList<Person> toAdd = model.toPersonList(new ResidentList("Daniel Meier"));
+        ArrayList<Person> toAdd = model.toPersonList(new ResidentList(TypicalPersons.DANIEL.getName().toString()));
         CommandResult expectedMessage = new CommandResult(String.format(IncludeCommand.MESSAGE_SUCCESS, toAdd.stream()
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
-                new ResidentList("Daniel Meier"));
+                new ResidentList(TypicalPersons.DANIEL.getName().toString(), TypicalPersons.DANIEL.toString()));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
     }
 
     @Test
     public void addMultipleNamesTest() throws CommandException {
-        ArrayList<Person> toAdd = model.toPersonList(new ResidentList("Daniel Meier, Elle Meyer"));
+        String constructor1 = TypicalPersons.DANIEL.getName().toString() + ", "
+                + TypicalPersons.ELLE.getName().toString();
+        String constructor2 = TypicalPersons.DANIEL.toString() + ", " + TypicalPersons.ELLE.toString();
+        ArrayList<Person> toAdd = model.toPersonList(new ResidentList(constructor1, constructor2));
         CommandResult expectedMessage = new CommandResult(String.format(IncludeCommand.MESSAGE_SUCCESS, toAdd.stream()
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
-                new ResidentList("Daniel Meier, Elle Meyer"));
+                new ResidentList(constructor1, constructor2));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
     }
@@ -90,7 +100,7 @@ public class IncludeCommandTest {
     public void addExistingRoomTest() {
         model.addEvent(TypicalEvents.VOLLEYBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
-                new ResidentList("A103"));
+                new ResidentList(TypicalPersons.DANIEL.getRoom().toString(), TypicalPersons.DANIEL.toString()));
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
@@ -98,7 +108,7 @@ public class IncludeCommandTest {
     public void addExistingNameTest() {
         model.addEvent(TypicalEvents.VOLLEYBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
-                new ResidentList("Daniel Meier"));
+                new ResidentList(TypicalPersons.DANIEL.getName().toString(), TypicalPersons.DANIEL.toString()));
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 

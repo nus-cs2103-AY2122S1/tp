@@ -6,7 +6,6 @@ import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static safeforhall.testutil.Assert.assertThrows;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-//import static safeforhall.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,10 +17,13 @@ import org.junit.jupiter.api.Test;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.DeadlineCommand;
+import safeforhall.logic.commands.ExcludeCommand;
 import safeforhall.logic.commands.ExitCommand;
+import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
+import safeforhall.logic.commands.TraceCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.commands.edit.EditPersonCommand;
@@ -71,6 +73,13 @@ public class AddressBookParserTest {
         ImportCommand command = (ImportCommand) parser.parseCommand(
                 ImportCommand.COMMAND_WORD + " safeforhall", true);
         assertEquals(new ImportCommand("safeforhall"), command);
+    }
+
+    @Test
+    public void parseCommand_trace() throws Exception {
+        TraceCommand command = (TraceCommand) parser.parseCommand(
+                TraceCommand.COMMAND_WORD + " r/A123", true);
+        assertEquals(new TraceCommand("A123"), command);
     }
 
     @Test
@@ -137,6 +146,21 @@ public class AddressBookParserTest {
                 IncludeCommand.COMMAND_WORD + " "
                         + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
         assertEquals(command, new IncludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
+    }
+
+    @Test
+    public void parseCommand_export() throws Exception {
+        ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD
+                + " safeforhall", true);
+        assertEquals(new ExportCommand("safeforhall"), command);
+    }
+
+    @Test
+    public void parseCommand_exclude() throws Exception {
+        ExcludeCommand command = (ExcludeCommand) parser.parseCommand(
+                ExcludeCommand.COMMAND_WORD + " "
+                        + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
+        assertEquals(command, new ExcludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
     }
 
     @Test

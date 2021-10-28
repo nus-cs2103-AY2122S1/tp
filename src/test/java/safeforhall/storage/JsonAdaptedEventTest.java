@@ -28,8 +28,8 @@ public class JsonAdaptedEventTest {
     private static final String VALID_EVENTDATE = BAND.getEventDate().eventDate;
     private static final String VALID_EVENTTIME = BAND.getEventTime().eventTime;
     private static final String VALID_VENUE = BAND.getVenue().venue;
-    private static final String VALID_CAPACITY = BAND.getCapacity().capacity;
-    private static final String VALID_RESIDENTS = BAND.getResidents().getResidentsStorage();
+    private static final String VALID_CAPACITY = BAND.getCapacity().inputCapacity;
+    private static final String VALID_RESIDENTS = BAND.getResidentList().getResidentsStorage();
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {

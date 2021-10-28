@@ -46,6 +46,8 @@ public class EditEventCommand extends Command {
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Events: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
+    public static final String MESSAGE_EXCEED_CAPACITY = "New capacity of the event is less than the number of "
+            + "residents currently in the event";
 
     private final Index targetIndex;
     private final EditEventDescriptor editEventDescriptor;
@@ -78,6 +80,10 @@ public class EditEventCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
+        if (editedEvent.getCapacity().capacity < eventToEdit.getResidentListSize()) {
+            throw new CommandException(MESSAGE_EXCEED_CAPACITY);
+        }
+
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
@@ -96,7 +102,7 @@ public class EditEventCommand extends Command {
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Capacity updatedCapacity = editEventDescriptor.getCapacity().orElse(eventToEdit.getCapacity());
         ResidentList updatedResidentList = editEventDescriptor.getResidentList()
-                .orElse(eventToEdit.getResidents());
+                .orElse(eventToEdit.getResidentList());
 
         return new Event(updatedName, updatedDate, updatedTime, updatedVenue, updatedCapacity, updatedResidentList);
     }

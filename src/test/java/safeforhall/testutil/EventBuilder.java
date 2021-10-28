@@ -47,7 +47,7 @@ public class EventBuilder {
         eventTime = eventToCopy.getEventTime();
         venue = eventToCopy.getVenue();
         capacity = eventToCopy.getCapacity();
-        residents = eventToCopy.getResidents();
+        residents = eventToCopy.getResidentList();
     }
 
     /**

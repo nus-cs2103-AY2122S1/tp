@@ -33,15 +33,21 @@ import safeforhall.model.person.VaccStatus;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
+    public static final String PARAMETERS = "CSV_NAME";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports resident information from the specified csv "
             + "file located within the /data folder\n"
+            + "Parameters: "
+            + "NAME_OF_CSV\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "safeforhall\n"
             + "Note: \n"
             + "     1. 8 comma separated values for each row in order; \n"
             + "             name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate\n"
             + "     2. The first row will be discarded as column headings\n"
             + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n"
+            + "     4. Resident lists of all events will be wiped\n"
             + "Parameters: "
-            + "NAME_OF_CSV\n"
+            + PARAMETERS + "\n"
             + "Example: " + COMMAND_WORD + " "
             + "safeforhall";
 
@@ -50,6 +56,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_ERROR_READING = "Error reading row %1d: ";
     public static final String MESSAGE_INCORRECT_CSV_FORMAT = "File is in an incorrect csv format";
     public static final String MESSAGE_INCORRECT_FIELDS = "8 fields of comma separated values not found";
+    public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
     public static final String DEFAULT_FILENAME = "safeforhall";
 
     private final Path filepath;
@@ -83,7 +90,8 @@ public class ImportCommand extends Command {
         ArrayList<Event> eventListRemovedResidents = new ArrayList<>();
         for (Event event: eventList) {
             Event newEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
-                    event.getVenue(), event.getCapacity(), new ResidentList(ResidentList.DEFAULT_LIST));
+                    event.getVenue(), event.getCapacity(),
+                    new ResidentList(ResidentList.DEFAULT_LIST, ResidentList.DEFAULT_LIST));
             eventListRemovedResidents.add(newEvent);
         }
         newAddressBook.setEvents(eventListRemovedResidents);

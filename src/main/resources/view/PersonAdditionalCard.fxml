@@ -34,6 +34,7 @@
                 <Label fx:id="email" styleClass="cell_normal" text="\$email" />
                 <Label fx:id="faculty" styleClass="cell_normal" text="\$faculty" />
                 <Label fx:id="vaccStatus" styleClass="cell_normal" text="\$vaccStatus" />
+                <Label fx:id="events" styleClass="cell_normal" text="\$events" />
             </VBox>
         </VBox>
     </GridPane>

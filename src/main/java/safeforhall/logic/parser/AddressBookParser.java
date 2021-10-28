@@ -9,11 +9,14 @@ import java.util.regex.Pattern;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeadlineCommand;
+import safeforhall.logic.commands.ExcludeCommand;
 import safeforhall.logic.commands.ExitCommand;
+import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.SwitchCommand;
+import safeforhall.logic.commands.TraceCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeleteEventCommand;
@@ -120,6 +123,12 @@ public class AddressBookParser {
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
 
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
+
+        case TraceCommand.COMMAND_WORD:
+            return new TraceCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -150,6 +159,9 @@ public class AddressBookParser {
 
         case IncludeCommand.COMMAND_WORD:
             return new IncludeCommandParser().parse(arguments);
+
+        case ExcludeCommand.COMMAND_WORD:
+            return new ExcludeCommandParser().parse(arguments);
 
         case FindEventCommand.COMMAND_WORD:
             return new FindEventCommandParser().parse(arguments);

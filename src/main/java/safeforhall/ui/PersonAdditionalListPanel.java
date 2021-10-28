@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import safeforhall.commons.core.LogsCenter;
+import safeforhall.logic.Logic;
 import safeforhall.model.person.Person;
 
 /**
@@ -16,6 +17,7 @@ import safeforhall.model.person.Person;
 public class PersonAdditionalListPanel extends UiPart<Region> {
     private static final String FXML = "PersonAdditionalListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonAdditionalListPanel.class);
+    private final Logic logic;
 
     @FXML
     private ListView<Person> personAdditionalListView;
@@ -23,10 +25,11 @@ public class PersonAdditionalListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonAdditionalListPanel} with the given {@code ObservableList}.
      */
-    public PersonAdditionalListPanel(ObservableList<Person> personList) {
+    public PersonAdditionalListPanel(ObservableList<Person> personList, Logic logic) {
         super(FXML);
         personAdditionalListView.setItems(personList);
         personAdditionalListView.setCellFactory(listView -> new PersonAdditionalListViewCell());
+        this.logic = logic;
     }
 
     /**
@@ -40,7 +43,7 @@ public class PersonAdditionalListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonAdditionalCard(person).getRoot());
+                setGraphic(new PersonAdditionalCard(person, logic).getRoot());
             }
         }
     }
