@@ -371,7 +371,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
     * 2a1. PB informs the user that the list is empty.
     
@@ -415,9 +415,9 @@ Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. PB displays an error message.
+    * 2a1. PB displays an error message.
 
       Use case resumes at step 2.
       
@@ -436,7 +436,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. PB cannot find any matching Person.
+* 1a. PB cannot find any matching Person.
     
     * PB displays an empty list.
         
@@ -453,7 +453,7 @@ Use case ends.
     
 **Extensions**
 
-* 2a. PB cannot find any matching tags with any Person.
+* 1a. PB cannot find any matching tags with any Person.
 
     * PB displays an empty list.
     
@@ -496,9 +496,8 @@ Use case ends.
 
 **MSS**
 
-1. User enters the list appointments command
-
-2. PB displays a list of all currently added appointments
+1. User enters the list appointments command.
+2. PB displays a list of all currently added appointments.
 
 Use case ends.
 
@@ -508,8 +507,36 @@ Use case ends.
     * 1a1. PB informs the user that there are no appointments added yet.
 	
       Use case ends.
+    
+**Use case: UC09 - List appointments by Time**
 
-**Use case: UC09 - Delete appointment**
+**MSS**
+
+1. User requests to list the appointments sorted by time.
+2. PB displays a list of all currently added appointments sorted by time.
+
+**Extensions**
+
+* 1a. PB detects that there are no appointments added.
+    * 1a1. PB informs the user that there are no appointments added yet.
+
+      Use case ends.
+
+**Use case: UC10 - List appointments by Description**
+
+**MSS**
+
+1. User requests to list the appointments sorted by description.
+2. PB displays a list of all currently added appointments sorted by description.
+
+**Extensions**
+
+* 1a. PB detects that there are no appointments added.
+    * 1a1. PB informs the user that there are no appointments added yet.
+
+      Use case ends.
+
+**Use case: UC11 - Delete appointment**
 
 **MSS**
 
@@ -532,7 +559,7 @@ Use case ends.
     
     Use case ends.
 		
-**Use case: UC10 - Edit an appointment**
+**Use case: UC12 - Edit an appointment**
 
 **MSS**
 
@@ -557,9 +584,22 @@ Use case ends.
       
       Use case resumes at step 2.
 
-**Use case: UC11 - Find Appointment by description**
+**Use case: UC13 - Find Appointment by description**
 
+**MSS**
 
+1.  User inputs the find command with keywords to search for.
+2.  PB shows a list of persons whose names match the given keywords.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. PB cannot find any matching Person.
+
+    * PB displays an empty list.
+
+      Use case ends.
 		
 *{More to be added}*
 
