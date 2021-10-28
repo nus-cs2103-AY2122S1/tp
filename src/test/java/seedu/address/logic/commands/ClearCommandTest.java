@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.OrderBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
@@ -30,6 +32,8 @@ public class ClearCommandTest {
                 getTypicalTaskBook(), getTypicalOrderBook(), new UserPrefs());
 
         expectedModel.setAddressBook(new AddressBook());
+        expectedModel.setTaskBook(new TaskBook());
+        expectedModel.setOrderBook(new OrderBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
