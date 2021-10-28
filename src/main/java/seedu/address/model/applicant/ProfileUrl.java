@@ -80,8 +80,12 @@ public class ProfileUrl {
         return this.url;
     }
 
+    /**
+     * Returns a copied Profile Url.
+     *
+     * @return a copy of this Profile Url.
+     */
     public ProfileUrl getCopiedProfileUrl() {
-        return new ProfileUrl(name.getCopiedName(), phone.getCopiedPhone(), email.getCopiedEmail(),
-                address.getCopiedAddress(), application.getCopiedApplication());
+        return new ProfileUrl(url);
     }
 }

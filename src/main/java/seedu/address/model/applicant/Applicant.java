@@ -120,7 +120,6 @@ public class Applicant {
         return gitHubUrl.hasProfile();
     }
 
-
     /**
      * Returns true if this applicant is applying to the given position.
      */
@@ -205,6 +204,6 @@ public class Applicant {
 
     public Applicant getCopiedApplicant() {
         return new Applicant(name.getCopiedName(), phone.getCopiedPhone(), email.getCopiedEmail(),
-                address.getCopiedAddress(), application.getCopiedApplication());
+                address.getCopiedAddress(), application.getCopiedApplication(), gitHubUrl.getCopiedProfileUrl());
     }
 }
