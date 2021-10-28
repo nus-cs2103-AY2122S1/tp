@@ -4,18 +4,18 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 
-public class ExpiryDate {
+public class CoverageExpiryDate {
 
-    public static final String MESSAGE_CONSTRAINTS = "Expiry Date should be a date in the future.";
+    public static final String MESSAGE_CONSTRAINTS = "Expiry Date should be a valid date.";
 
     public final LocalDate value;
 
     /**
-     * Constructs an {@code ExpiryDate}.
+     * Constructs an {@code CoverageExpiry}.
      *
      * @param expiryDate A valid expiry date.
      */
-    public ExpiryDate(LocalDate expiryDate) {
+    public CoverageExpiryDate(LocalDate expiryDate) {
         requireNonNull(expiryDate);
         value = expiryDate;
     }
@@ -23,8 +23,8 @@ public class ExpiryDate {
     /**
      * Returns true if expiry date is in the future.
      */
-    public boolean isFutureExpiryDate() {
-        return value.isAfter(LocalDate.now());
+    public static boolean isFutureExpiryDate(LocalDate expiryDate) {
+        return expiryDate.isAfter(LocalDate.now());
     }
 
     @Override
@@ -35,8 +35,8 @@ public class ExpiryDate {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ExpiryDate // instanceof handles nulls
-                && value.equals(((ExpiryDate) other).value)); // state check
+                || (other instanceof CoverageExpiryDate // instanceof handles nulls
+                && value.equals(((CoverageExpiryDate) other).value)); // state check
     }
 
     @Override
