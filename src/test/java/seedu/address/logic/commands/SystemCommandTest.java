@@ -43,20 +43,6 @@ public class SystemCommandTest {
     }
 
     @Test
-    public void execute_findTagCaseInsensitiveCommand_success() {
-        CommandResult expectedCommandResult = new CommandResult(FindTagCaseInsensitiveCommand.COMMAND_EXAMPLE,
-                false, false);
-        assertSystemCommandSuccess(FindTagCaseInsensitiveCommand.COMMAND_WORD, expectedCommandResult);
-    }
-
-    @Test
-    public void execute_findTagCaseSensitiveCommand_success() {
-        CommandResult expectedCommandResult = new CommandResult(FindTagCaseSensitiveCommand.COMMAND_EXAMPLE,
-                false, false);
-        assertSystemCommandSuccess(FindTagCaseSensitiveCommand.COMMAND_WORD, expectedCommandResult);
-    }
-
-    @Test
     public void execute_pinCommand_success() {
         CommandResult expectedCommandResult = new CommandResult(PinCommand.COMMAND_EXAMPLE, false, false);
         assertSystemCommandSuccess(PinCommand.COMMAND_WORD, expectedCommandResult);

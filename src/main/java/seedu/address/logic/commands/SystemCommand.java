@@ -24,10 +24,6 @@ public class SystemCommand {
             return new CommandResult(FindAnyCommand.COMMAND_EXAMPLE, false, false);
         case (FindCommand.COMMAND_WORD):
             return new CommandResult(FindCommand.COMMAND_EXAMPLE, false, false);
-        case (FindTagCaseInsensitiveCommand.COMMAND_WORD):
-            return new CommandResult(FindTagCaseInsensitiveCommand.COMMAND_EXAMPLE, false, false);
-        case (FindTagCaseSensitiveCommand.COMMAND_WORD):
-            return new CommandResult(FindTagCaseSensitiveCommand.COMMAND_EXAMPLE, false, false);
         case (PinCommand.COMMAND_WORD):
             return new CommandResult(PinCommand.COMMAND_EXAMPLE, false, false);
         case (TagCommand.COMMAND_WORD):
