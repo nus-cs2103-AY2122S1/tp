@@ -69,6 +69,8 @@ The sections below give more details of each component.
 
 ### UI component
 
+{TODO ADD TABOPTION}
+
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/java/seedu/anilist/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
@@ -85,6 +87,8 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Anime` object residing in the `Model`.
 
 ### Logic component
+
+{TODO ADD DISCLAIMER ABOUT TABOPTION?}
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/java/seedu/anilist/logic/Logic.java)
 
@@ -154,7 +158,7 @@ Classes used by multiple components are in the `seedu.anilist.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Tabs Feature MH
+### Tabs Feature
 
 #### Implementation
 
@@ -180,7 +184,7 @@ The user can also use the hotkeys `CTRL-S` and `CTRL-D` to cycle between tabs.
     * Cons: Hard to implement and test.
 
 
-### Clear Feature LUODAN
+### Clear Feature
 
 #### Implementation
 
@@ -194,7 +198,7 @@ The last command executed by the user is stored internally as a `Command` in `Lo
 last command requires a user confirmation. If this is the case, the `Parser` parses the next user input
 as a confirmation message instead.
 
-{To be added later}
+{To be added later LUODAN}
 
 #### Design considerations:
 
@@ -213,14 +217,14 @@ as a confirmation message instead.
       confusion. In addition, if the input is invalid, the `clear` command is aborted anyway,
       making having invalid inputs redundant.
 
-### Find Feature RYAN
+### Find Feature
 
 #### Implementation
 
 The proposed find mechanism is implemented through the use of 2 `Predicate<Anime>`, one for the tab options and one for
 regular filter.
 
-{To be added later}
+{To be added later RYAN}
 
 #### Design considerations:
 
@@ -236,7 +240,7 @@ regular filter.
     * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow
       searching within tabs.
 
-### Themes Feature FARUQ
+### Themes Feature
 
 #### Implementation
 
@@ -245,7 +249,7 @@ The proposed theme mechanism is simply done by completely altering the base css 
 If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and
 will replace the invalid css file specification in `preferences.json`.
 
-### \[Proposed\] Genre adding feature LY
+### \[Proposed\] Genre adding feature
 
 #### Current Implementation
 
