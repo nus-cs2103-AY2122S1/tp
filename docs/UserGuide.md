@@ -461,14 +461,14 @@ Import command description.
 
 Below is a table of the restrictions of data types used in our application.
 
-Data | Restrictions
--------|--------
-Name | Name can be any alphanumeric words. 
-NUSNET ID | ID has to start with the letter E followed by 7 numerical numbers. 
-Group | Group name can be any alphanumeric words.
-Assessment | Assessment name can be any alphanumeric words.
-Score | Score is in percentage, recorded up to 2 decimal places. 
-Tag | Tag can be a single alphanumeric word.
+Data | Restrictions | Examples
+-------|--------|----
+Name | Name can be any alphanumeric words. | `David Roger the 2nd`
+NUSNET ID | ID has to start with the letter E followed by 7 numerical numbers. | `E1234567`
+Group | Group name can be any alphanumeric words. | `Tutorial Group 2`
+Assessment | Assessment name can be any alphanumeric words. | `Practical Assessment 2`
+Score | Score is in percentage, recorded up to 2 decimal places. | `67.75`
+Tag | Tag can be a single alphanumeric word. | `Beginner1`
 
 <br>
 
