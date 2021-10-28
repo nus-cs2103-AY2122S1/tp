@@ -377,8 +377,8 @@ objects to. The user executes a command that will create a new `Group` and add i
 
 **Step 2**. After the `Group` is added to the model, the user then executes a command to create a new `Student` that will
 be a part of an existing group. This command will then call `ModelManager#addStudent(Student)` with the created
-`Student` which adds the student to the model, and then finds the corresponding `Group` that the `Student` will be
-added to, and add a reference to the `Student` in the `Group`.
+`Student` which finds the `Group` that the `Student` is to be added to, include a reference to the `Student` in the `Group`,
+ then finally add the `Student` into the `CsBook` model.
 
 ![GroupManagementSequence1](images/GroupManagementSequence1.png)
 \
@@ -391,8 +391,8 @@ these will not be discussed here as the focus is on how the grouping of students
 
 **Step 3**. The user executes a command to delete a `Student` in order to, for example, remove a past student. The command
 then invokes `ModelManager#deleteStudent(Student)`, which will find the respective `Group` that the `Student` belongs to
-using the stored `Group` reference in the `Student` and remove the `Group`'s reference to the `Student`. Then, the
-`Student` itself is deleted from the model.
+using the stored `GroupName` reference in the `Student` and remove the `Group`'s reference to the `Student` (`StudentName`).
+Then, the `Student` itself is deleted from the model.
 
 ![GroupManagementSequence2](images/GroupManagementSequence2.png)
 \
@@ -402,8 +402,8 @@ using the stored `Group` reference in the `Student` and remove the `Group`'s ref
 
 **Step 4**. The user executes a command to delete a `Group` in order to, for example, remove an entire group and its
 students after the user has finished teaching a module. The command invokes `ModelManager#deleteGroup(Group)`, which
-finds the `Group` in the model, and for each `Student` reference found, removes them from `csbook`. After all `Student`
-objects associated with the `Group` has been removed, the `Group` itself is then deleted.
+finds the `Group` in the model, and for each `Name` found, remove the associated `Student` from `csbook`.
+After all `Student` objects associated with the `Group` has been removed, the `Group` itself is then deleted.
 
 ![GroupManagementSequence3](images/GroupManagementSequence3.png)
 \
@@ -415,14 +415,14 @@ objects associated with the `Group` has been removed, the `Group` itself is then
 
 **Aspect: How a Student references a Group and vice versa:**
 
-- **Alternative 1 (current choice):** Each `Group` stores a reference of `Student` and vice versa
+- **Alternative 1 (current choice):** Each `Group` only stores unique student `Name`s and `Student` stores unique `GroupName`s
+    - Pros: Reduces coupling between `Group` and `Student` significantly
+    - Cons: We must ensure that both `Name` and `GroupName`s are all unique throughout the `csbook`
+
+- **Alternative 2 (old implementation):** Each `Group` stores a reference of `Student` and vice versa
 
     - Pros: More straightforward to implement.
     - Cons: Increases coupling between `Group` and `Student` significantly
-
-- **Alternative 2:** Each `Group` only stores unique student `Name`s and `Student` stores unique `GroupName`s
-    - Pros: Reduces coupling between `Group` and `Student` significantly
-    - Cons: We must ensure that both `Name` and `GroupName`s are all unique throughout the `csbook`
 
 **Aspect: What happens when `ModelManager#deleteGroup(Group)` command is executed:**
 

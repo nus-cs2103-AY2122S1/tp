@@ -229,7 +229,7 @@ public class ModelManager implements Model {
             csBook.removeStudent(filteredStudents.get(0));
         }
         //Resets filtered student list to show all students
-        updateFilteredStudentList(student -> true);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         csBook.removeGroup(target);
     }
 
