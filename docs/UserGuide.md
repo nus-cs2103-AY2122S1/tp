@@ -18,8 +18,6 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Removing Tags : `untag`](#removing-tags--untag)
   * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
   * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findAny)
-  * [Locating persons by tag (case insensitive): `findTag`](#locating-persons-by-tag-findtag)
-  * [Locating persons by tag (case sensitive): `findTagC`](#locating-persons-by-tag-findtagC)
   * [Pinning a person: `pin`](#pinning-a-person--pin)
   * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
@@ -234,41 +232,6 @@ Notes:
 * `findAny c/ n/Shin t/FRIENDS t/chef`
   * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`
     ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
-
-### Locating persons by tags: `findTag`
-
-Finds persons whose contact contain any of the given tags.
-
-#### Format:
-* `findTag TAG [MORE_TAGS]`
-
-Notes:
-* The search is case-insensitive. e.g. `friend` will match `Friend`
-* The order of the tags does not matter.
-* Only full tags will be matched e.g. `Friend` will not match `Friends`
-* Persons matching all tags will be returned (i.e. `AND` search).
-
-**Sample Usage:**
-* `find Friend NUS`
-    * returns people tagged with both `Friend` or `friend` and `NUS` or `NUS`
-
-### Locating persons by tags: `findTagC`
-
-Finds persons whose contact contain any of the given tags.
-
-#### Format:
-* `findTagC TAG [MORE_TAGS]`
-
-Notes:
-* The search is case-sensitive. e.g. `friend` will not match `Friend`
-* The order of the tags does not matter.
-* Only full tags will be matched e.g. `Friend` will not match `Friends`
-* Persons matching all tags will be returned (i.e. `AND` search).
-
-**Sample Usage:**
-* `find Friend NUS`
-  * returns people tagged with both `Friend` and `NUS`
-  * does not return people tagged with `friend` and `nus`
 
 ### Pinning a person : `pin`
 
