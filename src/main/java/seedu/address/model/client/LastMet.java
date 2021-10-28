@@ -83,6 +83,10 @@ public class LastMet implements OptionalNonStringBasedField, IgnoreNullComparabl
 
     @Override
     public int compareWithDirection(LastMet o, SortDirection sortDirection) {
+        if (this.value == null && o.value == null) {
+            return 0;
+        }
+
         if (o.value == null) {
             return -1;
         }

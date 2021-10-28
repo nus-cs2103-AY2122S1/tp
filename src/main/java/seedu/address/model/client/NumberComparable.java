@@ -10,6 +10,10 @@ public abstract class NumberComparable<T> implements IgnoreNullComparable<T> {
         int a;
         int b;
 
+        if (this.toString().isEmpty() && other.toString().isEmpty()) {
+            return 0;
+        }
+
         try {
             b = Integer.parseInt(other.toString());
         } catch (NumberFormatException | NullPointerException e) {

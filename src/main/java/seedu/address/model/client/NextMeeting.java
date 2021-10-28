@@ -147,6 +147,10 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
 
     @Override
     public int compareWithDirection(NextMeeting o, SortDirection sortDirection) {
+        if (this.equals(NULL_MEETING) && o.equals(NULL_MEETING)) {
+            return 0;
+        }
+
         if (o.equals(NULL_MEETING)) {
             return -1;
         }
