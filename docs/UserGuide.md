@@ -92,7 +92,7 @@ Examples:
 
 ### Editing a student's details : `edit`
 
-Edits an existing student in the record.
+Edits an existing student in EdRecord.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [i/INFO] [t/TAG]…​`
 
