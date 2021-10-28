@@ -24,6 +24,7 @@ import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.LessonBuilder;
+import tutoraid.ui.DetailLevel;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -166,11 +167,6 @@ public class AddLessonCommandTest {
         }
 
         @Override
-        public void viewList(boolean viewAll) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deleteLessonFromStudents(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -227,6 +223,11 @@ public class AddLessonCommandTest {
 
         @Override
         public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void viewList(DetailLevel detailLevel) {
             throw new AssertionError("This method should not be called.");
         }
     }
