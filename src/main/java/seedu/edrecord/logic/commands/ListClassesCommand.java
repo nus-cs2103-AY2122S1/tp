@@ -1,13 +1,13 @@
 package seedu.edrecord.logic.commands;
 
-import seedu.edrecord.model.Model;
-import seedu.edrecord.model.group.Group;
-import seedu.edrecord.model.module.Module;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
+import seedu.edrecord.model.Model;
+import seedu.edrecord.model.group.Group;
+import seedu.edrecord.model.module.Module;
 
 /**
  * Lists all classes in the selected module to the user.
