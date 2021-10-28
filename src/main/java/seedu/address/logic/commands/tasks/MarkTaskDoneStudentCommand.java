@@ -21,7 +21,7 @@ import seedu.address.model.task.Task;
 
 public class MarkTaskDoneStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "-d";
+    public static final String COMMAND_WORD = "-do";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that a task has been done by a student. "
             + "The student and task are indicated"

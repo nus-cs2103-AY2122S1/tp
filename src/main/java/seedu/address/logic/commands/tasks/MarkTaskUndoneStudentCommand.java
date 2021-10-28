@@ -21,7 +21,7 @@ import seedu.address.model.task.Task;
 
 public class MarkTaskUndoneStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "-und";
+    public static final String COMMAND_WORD = "-undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that a task has not been done by a student. "
             + "The student and task are indicated"
