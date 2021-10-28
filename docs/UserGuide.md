@@ -178,7 +178,7 @@ Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 * `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
 * `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
   for 8am.
-* Overlapping tasks cannot be added.
+* Overlapping lessons cannot be added. These include any lessons in groups that the student is in.
 
 Example:
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
@@ -268,6 +268,43 @@ Examples:
 * `student -dg 5` deletes the group specified at the index 5.
 </details>
 
+### Adding a lesson to a group: `group -al`
+
+<details markdown="1">
+<summary>
+Adds a lesson to the specified group.
+</summary>
+
+Format: `group -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
+
+* Adds a lesson to the group specified by the `INDEX`.
+* `SUBJECT` takes in any input with at least one alphanumeric character.
+* `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
+* `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
+  for 8am.
+* Overlapping lessons cannot be added. This will be cross-checked with all lessons for every student in the group.
+
+Example:
+* `group -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
+  starting at 8am and ending at 9am on Mondays.
+</details>
+
+### Deleting a lesson from a group: `group -dl`
+<details markdown="1">
+<summary>
+Deletes a lesson from the specified group
+</summary>
+
+Format: `student -dl GROUP_INDEX LESSON_INDEX`
+
+* Specifies the group at `GROUP_INDEX`.
+* Deletes the specified lesson at `LESSON_INDEX` of the group specified.
+* Both `GROUP_INDEX` and `LESSON_INDEX` must be a positive number.
+
+Example:
+* `group -dl 1 1` deletes the first lesson from the first group.
+</details>
+
 ### Adding a task
 
 Adds a task to the task list.
@@ -324,13 +361,49 @@ Examples:
 
 Assigns a specific task to students’ task list.
 
-Format: `task -ass STUDENTINDEX TASKINDEX`
+Format: `task -as STUDENTINDEX TASKINDEX`
 
 * Assigns the task specified at index `TASKINDEX` to the “Student” object specified at index `STUDENTINDEX`.
-* `-ass` refers to the assignment command.
+* `-as` refers to the "assign to student" command.
 
 Examples:
-* `task -ass 2 4` adds the task at the index 4 to the student at the index 2
+* `task -as 2 4` adds the task at the index 4 to the student at the index 2
+
+### Assigning tasks to groups
+
+Assigns a specific task to groups’ task list.
+
+Format: `task -ag GROUPINDEX TASKINDEX`
+
+* Assigns the task specified at index `TASKINDEX` to the “Group” object specified at index `GROUPINDEX`.
+* `-ag` refers to the "assign to group" command.
+
+Examples:
+* `task -ag 2 4` adds the task at the index 4 to the group at the index 2
+
+### Unassigning tasks to students
+
+Unassigns a specific task from students’ task list.
+
+Format: `task -unas STUDENTINDEX TASKINDEX`
+
+* Unassigns the task specified at index `TASKINDEX` from the “Student” object specified at index `STUDENTINDEX`.
+* `-unas` refers to the "unassign from student" command.
+
+Examples:
+* `task -unas 2 4` removes the task at the index 4 from the student at the index 2
+
+### Unassigning tasks to groups
+
+Unassigns a specific task from groups’ task list.
+
+Format: `task -unag GROUPINDEX TASKINDEX`
+
+* Unassigns the task specified at index `TASKINDEX` from the “Group” object specified at index `GROUPINDEX`.
+* `-unag` refers to the "unassign from group" command.
+
+Examples:
+* `task -unag 2 4` removes the task at the index 4 from the group at the index 2
 
 ### Clearing all entries : `clear`
 
@@ -390,6 +463,9 @@ Action | Format, Examples
 **Edit a task** | `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]​` <br> e.g., `task -e 4 d/20211231 c/true`
 **View a task** | `task -v INDEX​` <br> e.g., `task -v 2`
 **Delete a task** | `task -d INDEX​` <br> e.g., `task -d 1`
-**Assign a task to a student** | `task -ass STUDENTINDEX TASKINDEX​` <br> e.g., `task -ass 2 4`
+**Assign a task to a student** | `task -as STUDENTINDEX TASKINDEX​` <br> e.g., `task -as 2 4`
+**Assign a task to a group** | `task -ag GROUPINDEX TASKINDEX​` <br> e.g., `task -ag 2 4`
+**Unassign a task from a student** | `task -unas STUDENTINDEX TASKINDEX​` <br> e.g., `task -unas 2 4`
+**Unassign a task from a group** | `task -unag GROUPINDEX TASKINDEX​` <br> e.g., `task -unag 2 4`
 **Clear all entries** | `clear`
 **Exit** | `exit`
