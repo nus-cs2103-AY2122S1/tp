@@ -15,13 +15,9 @@ public class AddOrgCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "Email "
-            + PREFIX_PERSON + "[Person] "
-            + PREFIX_PERSON + "[Person] ...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Shopee "
-            + PREFIX_EMAIL + "shopee@gmail.com "
-            + PREFIX_PERSON + "[n/John doe] "
-            + PREFIX_PERSON + "[n/Damith C e/d.c@gmail.com]";
+            + PREFIX_EMAIL + "shopee@gmail.com ";
     public static final String MESSAGE_SUCCESS = "New organisation added: %1$s";
     public static final String MESSAGE_DUPLICATE_ORGANISATION = "This organisation already exists in the address book";
 

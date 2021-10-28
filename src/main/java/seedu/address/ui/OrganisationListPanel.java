@@ -18,7 +18,7 @@ public class OrganisationListPanel extends UiPart<Region> {
     private ListView<Organisation> organisationListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code OrganisationListPanel} with the given {@code ObservableList}.
      */
     public OrganisationListPanel(ObservableList<Organisation> organisationList) {
         super(FXML);
@@ -27,7 +27,7 @@ public class OrganisationListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Organisation} using a {@code OrganisationCard}.
      */
     class OrganisationListViewCell extends ListCell<Organisation> {
         @Override
