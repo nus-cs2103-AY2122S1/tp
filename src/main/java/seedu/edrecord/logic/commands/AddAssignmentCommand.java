@@ -1,6 +1,7 @@
 package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
@@ -24,7 +25,7 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_SCORE + "50";
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
-    public static final String MESSAGE_NO_MODULE_SELECTED = "No module selected. Please cd into a module first";
+
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in this module";
 
     private final Assignment toAdd;

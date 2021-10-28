@@ -19,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.commons.core.LogsCenter;
+import seedu.edrecord.logic.commands.DeleteGradeCommand;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
@@ -265,6 +266,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Assignment> getAssignmentList() {
+        return selectedModule.get().getAssignmentList();
+    }
+
+    @Override
     public Optional<Assignment> searchAssignment(Name name) {
         return selectedModule.get().searchAssignment(name);
     }
@@ -290,7 +296,22 @@ public class ModelManager implements Model {
     public void setAssignment(Assignment target, Assignment editedAssignment) {
         requireAllNonNull(target, editedAssignment);
 
-        selectedModule.setAssignment(target, editedAssignment);
+        selectedModule.get().setAssignment(target, editedAssignment);
+    }
+
+    @Override
+    public void deleteAssignment(Assignment target) {
+        // Delete from the currently selected module
+        selectedModule.get().deleteAssignment(target);
+
+        // Delete grades from all persons under the module
+        List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
+        allPersons.stream()
+                .filter(selectedModulePredicate)
+                .forEach(person -> {
+                    Person editedPerson = DeleteGradeCommand.createEditedPerson(person, target);
+                    this.setPerson(person, editedPerson);
+                });
     }
 
     @Override
