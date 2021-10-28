@@ -38,9 +38,6 @@ _text_ | Caption for images.
 :bulb: | Indication that the following text is a tip.
 :exclamation: | Indication that the following text is important.
 
-**Application Layout**
-![layout](images/annotation.png)
-<div class="caption">Basic layout of TAB's user interface.</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -82,6 +79,25 @@ to help you with the installation. Follow the guide for your operating system fo
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) section for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Graphical User Interface (GUI)
+
+This section briefly explains the various section of TAB's GUI.
+
+![layout](images/annotation.png)
+<div class="caption">Basic layout of TAB's user interface.</div>
+
+No. | Section | Representation
+----|---------|---------
+1 | Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you pressed <kbd>Enter</kbd>.
+2 | Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display relevant success messages, otherwise, it will show error messages indicating the cause of the error.
+3 | Student List Panel | The area that shows the list of students you have in TAB.
+4 | Lesson List Panel | The area that shows the name of the student you have selected together with a list of lessons that the student has.
+5 | Center Panel | The area that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
