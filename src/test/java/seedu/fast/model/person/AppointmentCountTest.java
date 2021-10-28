@@ -33,6 +33,13 @@ public class AppointmentCountTest {
     }
 
     @Test
+    public void decrementAppointmentCount() {
+        AppointmentCount initialCount = new AppointmentCount("5");
+        initialCount.decrementAppointmentCount();
+        assertTrue(initialCount.toString().equals("4"));
+    }
+
+    @Test
     public void equals() {
         AppointmentCount standard = new AppointmentCount("0");
         AppointmentCount countWithSameValue = new AppointmentCount("0");
@@ -80,5 +87,15 @@ public class AppointmentCountTest {
         // non integer input
         assertFalse(AppointmentCount.isValidCount("Matthew"));
         assertFalse(AppointmentCount.isValidCount("!"));
+    }
+
+    @Test
+    public void isValidDecrementCount() {
+        // valid input
+        assertTrue(AppointmentCount.isValidDecrementCount(new AppointmentCount("1")));
+        assertTrue(AppointmentCount.isValidDecrementCount(new AppointmentCount("2")));
+
+        // invalid input
+        assertFalse(AppointmentCount.isValidDecrementCount(new AppointmentCount("0")));
     }
 }

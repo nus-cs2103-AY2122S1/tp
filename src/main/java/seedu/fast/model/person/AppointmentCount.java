@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.util.AppUtil.checkArgument;
 
 /**
- * Unmodifiable by the user.
- * Manipulated by the application program.
+ * Keeps track of the number of appointment the user have with a client.
  */
 public class AppointmentCount {
-    public static final String INVALID_COUNT_INPUT = "Appointment Count has be a non-negative integer";
+    public static final String INVALID_COUNT_INPUT = "Your Appointment Count cannot be less than 0!";
     public static final String INITIAL_COUNT = "0";
 
     private int count;
@@ -35,7 +34,17 @@ public class AppointmentCount {
     }
 
     /**
-     * Check if the input count is a non-negative integer.
+     * Decreases the appointment count by 1.
+     *
+     * @return The updated AppointmentCount
+     */
+    public AppointmentCount decrementAppointmentCount() {
+        count--;
+        return this;
+    }
+
+    /**
+     * Checks if the input count is a non-negative integer.
      *
      * @param test The input count string.
      * @return A boolean indicating if the count is valid.
@@ -49,6 +58,15 @@ public class AppointmentCount {
         }
     }
 
+    /**
+     * Checks if the Appointment count is can be decremented.
+     *
+     * @param test The current Appointment Count.
+     * @return A boolean indicating if the current Appointment Count can be decremented.
+     */
+    public static boolean isValidDecrementCount(AppointmentCount test) {
+        return (test.count >= 1);
+    }
 
     @Override
     public String toString() {

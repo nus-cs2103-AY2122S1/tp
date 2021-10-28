@@ -10,6 +10,8 @@ import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_SEVENTH_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
@@ -25,17 +27,16 @@ import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 import seedu.fast.testutil.PersonBuilder;
 
-public class MarkAppointmentCommandTest {
-
+public class UnmarkAppointmentCommandTest {
     private final Model model = new ModelManager(getTypicalFast(), new UserPrefs());
 
     @Test
     public void equals() {
-        final MarkAppointmentCommand standardCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
+        final UnmarkAppointmentCommand standardCommand = new UnmarkAppointmentCommand(INDEX_THIRD_PERSON,
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
 
         // same values -> returns true
-        MarkAppointmentCommand commandWithSameValues = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
+        UnmarkAppointmentCommand commandWithSameValues = new UnmarkAppointmentCommand(INDEX_THIRD_PERSON,
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -49,53 +50,71 @@ public class MarkAppointmentCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new MarkAppointmentCommand(INDEX_SECOND_PERSON,
+        assertFalse(standardCommand.equals(new UnmarkAppointmentCommand(INDEX_SECOND_PERSON,
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY))));
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MarkAppointmentCommand apptCommand = new MarkAppointmentCommand(outOfBoundIndex,
+        UnmarkAppointmentCommand apptCommand = new UnmarkAppointmentCommand(outOfBoundIndex,
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
 
         assertCommandFailure(apptCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_markAppointmentUnfilteredList_success() {
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
+    public void execute_unmarkAppointmentUnfilteredList_success() {
+        Person seventhPerson = model.getFilteredPersonList().get(INDEX_SEVENTH_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(seventhPerson)
                 .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
-                .withAppointmentCount("1")
+                .withAppointmentCount("2")
                 .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
-        MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_SECOND_PERSON,
+        UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_SEVENTH_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_SUCCESS,
-                secondPerson.getName().fullName, secondPerson.getAppointment().getDate(),
-                secondPerson.getAppointment().getTimeFormatted(), secondPerson.getAppointment().getVenue());
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_SUCCESS,
+                seventhPerson.getName().fullName);
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
+        expectedModel.setPerson(seventhPerson, editedPerson);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_markAppointmentUnfilteredList_failure() {
+    public void execute_unmarkAppointmentUnfilteredListZeroCount_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
                 .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .withAppointmentCount("0")
                 .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
-        MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
+        UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE);
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO);
+
+        assertCommandFailure(appointmentCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_unmarkAppointmentUnfilteredListAppointmentExist_failure() {
+        Person sixthPerson = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(sixthPerson)
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .withAppointmentCount("1")
+                .build();
+        Appointment editedAppt = editedPerson.getAppointment();
+
+        UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_SIXTH_PERSON,
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
+
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_EXIST,
+                sixthPerson.getName().fullName);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
@@ -107,49 +126,67 @@ public class MarkAppointmentCommandTest {
         // ensures that outOfBoundIndex is still in bounds of FAST list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFast().getPersonList().size());
 
-        MarkAppointmentCommand apptCommand = new MarkAppointmentCommand(outOfBoundIndex,
+        UnmarkAppointmentCommand apptCommand = new UnmarkAppointmentCommand(outOfBoundIndex,
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
         assertCommandFailure(apptCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_markAppointmentFilteredList_success() {
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
+    public void execute_unmarkAppointmentFilteredList_success() {
+        showPersonAtIndex(model, INDEX_SEVENTH_PERSON);
+        Person seventhPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(seventhPerson)
                 .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
-                .withAppointmentCount("1")
+                .withAppointmentCount("2")
                 .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
-        MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
+        UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_SUCCESS,
-                secondPerson.getName().fullName, secondPerson.getAppointment().getDate(),
-                secondPerson.getAppointment().getTimeFormatted(), secondPerson.getAppointment().getVenue());
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_SUCCESS,
+                seventhPerson.getName().fullName);
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
-        expectedModel.setPerson(secondPerson, editedPerson);
+        expectedModel.setPerson(seventhPerson, editedPerson);
 
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_markAppointmentFilteredList_failure() {
+    public void execute_unmarkAppointmentFilteredListZeroCount_failure() {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson)
                 .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .withAppointmentCount("0")
                 .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
-        MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
+        UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
-        String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE);
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_ZERO);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
     }
 
+    @Test
+    public void execute_unmarkAppointmentFilteredListAppointmentExist_failure() {
+        showPersonAtIndex(model, INDEX_SIXTH_PERSON);
+        Person sixthPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(sixthPerson)
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .withAppointmentCount("1")
+                .build();
+        Appointment editedAppt = editedPerson.getAppointment();
+
+        UnmarkAppointmentCommand appointmentCommand = new UnmarkAppointmentCommand(INDEX_FIRST_PERSON,
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
+
+        String expectedMessage = String.format(UnmarkAppointmentCommand.MESSAGE_UNMARK_APPOINTMENT_FAILURE_EXIST,
+                sixthPerson.getName().fullName);
+
+        assertCommandFailure(appointmentCommand, model, expectedMessage);
+    }
 }
