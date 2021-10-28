@@ -1,9 +1,11 @@
 ---
 layout: page
 title: User Guide
-* Table of Contents
-  {:toc}
 ---
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------  
 ## 1. Introduction
 ![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
 
