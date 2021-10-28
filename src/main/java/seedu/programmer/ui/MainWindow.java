@@ -113,15 +113,13 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Configure the UI
-        GuiSettings guiSettings = logic.getGuiSettings();
-        setWindowDefaultSize(guiSettings);
-
+        setWindowDefaultSize(logic.getGuiSettings());
         setAccelerators();
+        fixDividerPositions();
 
-        helpWindow = new HelpWindow(guiSettings);
+        helpWindow = new HelpWindow();
         dashboardWindow = new DashboardWindow(logic);
 
-        fixDividerPositions();
     }
 
 

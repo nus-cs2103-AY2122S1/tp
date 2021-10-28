@@ -12,20 +12,21 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.programmer.commons.core.GuiSettings;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends PopupWindow {
 
-    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103-f09-3.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Full user guide: " + USERGUIDE_URL;
+    public static final String USER_GUIDE_URL = "https://ay2122s1-cs2103-f09-3.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Full user guide: " + USER_GUIDE_URL;
     private static final String INSTRUCTION = "Here is the feature list of ProgrammerError:";
 
     private static final String FXML = "HelpWindow.fxml";
     private static final Double FRACTION_OF_WINDOW = 0.925;
+    private static final double HELP_WINDOW_WIDTH = Screen.getPrimary().getBounds().getWidth() * FRACTION_OF_WINDOW;
 
     private ObservableList<FeatureTableItem> featureTableItems;
 
@@ -60,9 +61,9 @@ public class HelpWindow extends PopupWindow {
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow(GuiSettings guiSettings) {
+    public HelpWindow() {
         this(new Stage());
-        getRoot().setWidth(guiSettings.getWindowWidth() * FRACTION_OF_WINDOW);
+        getRoot().setWidth(HELP_WINDOW_WIDTH);
     }
 
     private void initializeFeatureList() {
@@ -147,7 +148,7 @@ public class HelpWindow extends PopupWindow {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
+        url.putString(USER_GUIDE_URL);
         clipboard.setContent(url);
     }
 
