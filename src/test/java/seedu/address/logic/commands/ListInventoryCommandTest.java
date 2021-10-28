@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
-import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTIONS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
@@ -92,6 +92,6 @@ public class ListInventoryCommandTest {
     }
 
     @Test void constructor_invalidDisplayMode_throwAssertion() {
-        assertThrows(AssertionError.class, () -> new ListInventoryCommand(DISPLAY_TRANSACTIONS));
+        assertThrows(AssertionError.class, () -> new ListInventoryCommand(DISPLAY_TRANSACTION_LIST));
     }
 }

@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
-import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTIONS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
@@ -240,7 +240,7 @@ public class ModelManagerTest {
 
         // Attempt to pass item predicate when in transaction mode
         assertThrows(ClassCastException.class, () ->
-            modelManager.updateFilteredItemList(DISPLAY_TRANSACTIONS, x -> true)
+            modelManager.updateFilteredItemList(DISPLAY_TRANSACTION_LIST, x -> true)
         );
     }
 

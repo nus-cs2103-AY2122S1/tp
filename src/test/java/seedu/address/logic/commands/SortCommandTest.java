@@ -54,7 +54,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_displayOrderMode_failure() {
+    public void execute_displayNotInInventoryMode_failure() {
         SortCommand command = new SortCommand(SortCommand.SortOrder.BY_COUNT);
 
         model.setOrder(new Order());

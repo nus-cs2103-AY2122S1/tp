@@ -115,6 +115,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean openTransaction(String id) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public DisplayMode getDisplayMode() {
         throw new AssertionError("This method should not be called.");
     }
