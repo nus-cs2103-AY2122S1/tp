@@ -26,7 +26,7 @@ public class RemoveCommand extends Command {
             + "Parameters: NAME "
             + "Or " + PREFIX_ID + "ID"
             + " [" + PREFIX_COUNT + "COUNT" + "]\n"
-            + "Example: " + COMMAND_WORD + "Apple Pie"
+            + "Example: " + COMMAND_WORD + " Apple Pie "
             + PREFIX_COUNT + " 1";
 
     public static final String MESSAGE_SUCCESS = "Item removed: %d x %s";
