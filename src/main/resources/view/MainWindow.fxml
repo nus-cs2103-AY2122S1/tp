@@ -27,6 +27,7 @@
                   <Button fx:id="helpButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleHelp" text="Help (F2)" />
                   <Button fx:id="downloadButton" layoutX="87.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDownload" text="Download (F3)" />
                   <Button fx:id="uploadButton" layoutX="217.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleUpload" text="Upload (F4)" />
+                  <Button fx:id="dashboardButton" layoutX="377.0" layoutY="11.0" mnemonicParsing="false" onAction="#handleDashboard" text="Dashboard (F5)" />
               </items>
             </ToolBar>
 
