@@ -31,7 +31,7 @@ public class PersonCreateExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        checkPersonView();
+        checkPersonList();
         if (model.hasPerson(person)) {
             throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
         }

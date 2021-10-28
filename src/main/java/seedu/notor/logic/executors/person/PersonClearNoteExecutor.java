@@ -31,7 +31,7 @@ public class PersonClearNoteExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        checkPersonView();
+        checkPersonList();
         Person storedPerson = super.getPerson();
         WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE,
                 storedPerson.getName()));

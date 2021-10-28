@@ -32,7 +32,7 @@ public class PersonAddGroupExecutor extends PersonExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         try {
-            checkPersonView();
+            checkPersonList();
             Person person = super.getPerson();
             Group group = model.findGroup(groupName);
             if (group == null) {

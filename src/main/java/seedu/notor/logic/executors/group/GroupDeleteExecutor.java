@@ -25,7 +25,7 @@ public class GroupDeleteExecutor extends GroupExecutor {
         WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE, deletedGroup));
         warningWindow.show();
         if (warningWindow.canContinue()) {
-            if (!model.isPersonView()) {
+            if (!model.isPersonList()) {
                 if (deletedGroup instanceof SuperGroup) {
                     model.deleteSuperGroup((SuperGroup) deletedGroup);
                 } else if (deletedGroup instanceof SubGroup) {

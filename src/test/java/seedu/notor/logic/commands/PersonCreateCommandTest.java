@@ -222,12 +222,12 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public boolean isPersonView() {
+        public boolean isPersonList() {
             return true;
         }
 
         @Override
-        public boolean isSuperGroupView() {
+        public boolean isSuperGroupList() {
             return false;
         }
     }

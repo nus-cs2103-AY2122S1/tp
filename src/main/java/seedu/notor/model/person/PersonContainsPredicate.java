@@ -9,11 +9,11 @@ import java.util.function.Predicate;
 import seedu.notor.model.tag.Tag;
 
 /**
- * Tests that a {@code Person}'s {@code Name} fits the search query. Searches can optionally include a string to be
- * checked for in the name of the person, and / or tags which should be present in the tagset. Predicate only returns
- * true if all conditions are true
+ * Tests that a {@code Person}'s {@code Name} and {@code Tag}s fit the search query. Searches can optionally
+ * include a string to be checked for in the name of the person, and / or tags which should be present in the tagset.
+ * Predicate only returns true if all conditions are true
  */
-public class NameContainsPredicate implements Predicate<Person> {
+public class PersonContainsPredicate implements Predicate<Person> {
     private final Optional<String> nameQuery;
     private final Optional<Set<Tag>> tagQuery;
 
@@ -23,7 +23,7 @@ public class NameContainsPredicate implements Predicate<Person> {
      * @param nameQuery A parameter that might be a substring to search the name for
      * @param tagQuery A parameter that might be a set of tags which must all match the person
      */
-    public NameContainsPredicate(Optional<String> nameQuery, Optional<Set<Tag>> tagQuery) {
+    public PersonContainsPredicate(Optional<String> nameQuery, Optional<Set<Tag>> tagQuery) {
         this.nameQuery = nameQuery;
         this.tagQuery = tagQuery;
     }
@@ -40,9 +40,9 @@ public class NameContainsPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsPredicate // instanceof handles nulls
-                && nameQuery.equals(((NameContainsPredicate) other).nameQuery))
-                && tagQuery.equals(((NameContainsPredicate) other).tagQuery); // state check
+                || (other instanceof PersonContainsPredicate // instanceof handles nulls
+                && nameQuery.equals(((PersonContainsPredicate) other).nameQuery))
+                && tagQuery.equals(((PersonContainsPredicate) other).tagQuery); // state check
     }
 
 }

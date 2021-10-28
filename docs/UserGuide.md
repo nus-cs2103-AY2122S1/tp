@@ -498,7 +498,7 @@ Action                    | Format                                              
 
 Action                 | Format                                         | Short Format
 -----------------------|------------------------------------------------|---------------------------------------
-**Create Group**       | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
+**Create Group**       | `group (GROUP_NAME) /create` | `g (GROUP_NAME) /c`
 **Create Subgroup**    | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
 **Edit**               | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
 **Delete**             | `group (INDEX) /delete`                        | `g (INDEX) /d`

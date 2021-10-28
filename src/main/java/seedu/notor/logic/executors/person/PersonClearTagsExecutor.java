@@ -43,7 +43,7 @@ public class PersonClearTagsExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        checkPersonView();
+        checkPersonList();
         Person person = super.getPerson();
 
         if (person.getTags().equals(new HashSet<Tag>())) {

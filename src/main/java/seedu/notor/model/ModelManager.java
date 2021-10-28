@@ -29,8 +29,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private FilteredList<? extends Group> filteredGroups;
-    private boolean isPersonView;
-    private boolean isSuperGroupView;
+    private boolean isPersonList;
+    private boolean isSuperGroupList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -45,8 +45,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
         // Person view is first shown.
-        isPersonView = true;
-        isSuperGroupView = false;
+        isPersonList = true;
+        isSuperGroupList = false;
     }
 
     public ModelManager() {
@@ -185,8 +185,8 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         // TODO: I am using levraging this method for list. Should we consider new method?
         requireNonNull(predicate);
-        isPersonView = true;
-        isSuperGroupView = false;
+        isPersonList = true;
+        isSuperGroupList = false;
         filteredPersons.setPredicate(predicate);
     }
 
@@ -203,8 +203,8 @@ public class ModelManager implements Model {
 
     @Override
     public void listSuperGroup() {
-        isPersonView = false;
-        isSuperGroupView = true;
+        isPersonList = false;
+        isSuperGroupList = true;
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
     }
 
@@ -213,8 +213,8 @@ public class ModelManager implements Model {
      * @param i the Index i of the SuperGroup.
      */
     public void listSubGroup(Index i) {
-        isPersonView = false;
-        isSuperGroupView = false;
+        isPersonList = false;
+        isSuperGroupList = false;
         // TODO: Abstract this. This method is too long.
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups().get(i.getZeroBased()).getSubGroups()
             .asUnmodifiableObservableList());
@@ -222,13 +222,13 @@ public class ModelManager implements Model {
 
     //=========== View Check =============================================================
     @Override
-    public boolean isPersonView() {
-        return isPersonView;
+    public boolean isPersonList() {
+        return isPersonList;
     }
 
     @Override
-    public boolean isSuperGroupView() {
-        return isSuperGroupView;
+    public boolean isSuperGroupList() {
+        return isSuperGroupList;
     }
 
 

@@ -13,7 +13,7 @@ import seedu.notor.logic.parser.ArgumentMultimap;
 import seedu.notor.logic.parser.ArgumentTokenizer;
 import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
-import seedu.notor.model.person.NameContainsPredicate;
+import seedu.notor.model.person.PersonContainsPredicate;
 import seedu.notor.model.tag.Tag;
 
 /**
@@ -44,7 +44,7 @@ public class PersonFindCommandParser extends PersonCommandParser {
                     ? Optional.empty()
                     : Optional.ofNullable(ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get()));
 
-        return new PersonFindCommand(new NameContainsPredicate(nameQuery, tagQuery));
+        return new PersonFindCommand(new PersonContainsPredicate(nameQuery, tagQuery));
     }
 
     @Override

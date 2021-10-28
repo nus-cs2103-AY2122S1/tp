@@ -26,8 +26,8 @@ public abstract class PersonExecutor extends Executor {
         return lastShownList.get(index.getZeroBased());
     }
 
-    protected void checkPersonView() throws ExecuteException {
-        if (!model.isPersonView()) {
+    protected void checkPersonList() throws ExecuteException {
+        if (!model.isPersonList()) {
             throw new ExecuteException(Messages.MESSAGE_PEOPLE_NOT_LISTED);
         }
     }

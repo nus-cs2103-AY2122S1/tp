@@ -124,14 +124,14 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public boolean isPersonView() {
-        return model.isPersonView();
+    public boolean isPersonList() {
+        return model.isPersonList();
     }
 
     @Override
-    public boolean isSuperGroupView() {
+    public boolean isSuperGroupList() {
         // TODO: BUG WHAT IF THERE IS NO ELEMENT.
-        return model.isSuperGroupView();
+        return model.isSuperGroupList();
     }
 
     @Override
