@@ -46,7 +46,7 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 ## Overview
-Are you a CS1101s Avenger? Are you tired of having to deal with
+Are you a CS1101S Avenger? Are you tired of having to deal with
 so many platforms like Luminus, Source Academy, etc.? We have just 
 the application for you!
 
@@ -57,14 +57,14 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage their stu
 
 Academy Directory is written in _Java_ and thus can be run on all major operating systems!
 It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-AD is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I at the National University of Singapore.
+Academy Directory is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I at the National University of Singapore.
 
 ## Information about this User Guide
 ### Purpose
 This user guide aims to: 
 - Provide first-time users how to use Academy Directory
 - Show [details of all commands](#features) should users face any issues using any
-of the command in Academy Directory.
+of the command in Academy Directory
 - Answer some [frequently asked questions](#faq)
 - Provide a [summary of all commands](#command-summary) supported by Academy Directory
 
@@ -79,7 +79,7 @@ onto their system
 in CS1101S
 
 While some technical background is assumed, we also provide the definitions for
-certain technical terms commonly used in this user guide [here](#glossary)
+certain technical terms commonly used in this user guide [here](#glossary).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -123,7 +123,7 @@ The commands are categorized based on the main features of Academy Directory:
 - Visualize data in Academy Directory
 - Others
 
-For better reading experience, please be familiar with the command format (shown below) as well as [some terms used](#glossary)
+For better reading experience, please be familiar with the command format (shown below) as well as [some terms used](#glossary).
 
 <div markdown="block" class="alert alert-info">
 
@@ -473,7 +473,7 @@ This subsection provides a summary for all the commands used in Academy Director
 
 Action | Format | Examples
 --------|--------|----------
-[**Add Student**](#adding-a-student-add) | `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER]` | `add n/James Ho te/@TeleHandle p/22224444 e/jamesho@example.com t/Streams`
+[**Add Student**](#adding-a-student-add) | `add n/NAME e/EMAIL te/TELE_HANDLE [p/PHONE_NUMBER] [t/TAG]` | `add n/James Ho te/@TeleHandle p/22224444 e/jamesho@example.com t/Streams`
 [**Delete Student**](#deleting-a-student-delete) | `delete INDEX` | `delete 3`
 [**Tag Student**](#tagging-a-student--tag)| `tag INDEX t/TAG [t/TAG]...` | `tag 1 t/mission t/streams`
 [**Get Personal Detail**](#getting-personal-detail-of-students-get) | `get [p/] [e/] [te/] [n/NAME]` | `get p/ e/ te/ n/Alex Yeoh`
@@ -521,30 +521,30 @@ This section explains the commonly used terms in this user guide
 
 Term | Definition | Comments
 -----| ----------- | ---------- 
-CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore |
+CS1101S | An introductory Computer Science module for year 1 students in the the National University of Singapore. |
 Studios | Tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture. | 
 Avengers | A special term to call a CS1101S tutor. An avenger organizes a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
-Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something
-Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something
-Java | A program that allows running other programs written in Java programming language
-Operating System | Software that manages computer hardware and other computer software | 
-Command | An instruction typed by a user to Academy Directory
-Command Box | A part of the Academy Directory's GUI which can be used by users to type commands
-Field | Additional information that can be provided to a command for correct command execution | May or may not have an associated prefix
-Parameter | Part of the command which provides additional information provided by the user | Actual values for the fields
-Prefix | An abbreviation of a field | Always ends with a backslash ('/')
+Command Line Interface (CLI) | A text-based user interface, where users type commands to instruct the computer to do something.
+Graphical User Interface (GUI) | A graphics-based user interface, where users click buttons to instruct the computer to do something.
+Java | A program that allows running other programs written in Java programming language.
+Operating System | Software that manages computer hardware and other computer software. | 
+Command | An instruction typed by a user to Academy Directory.
+Command Box | A part of the Academy Directory's GUI which can be used by users to type commands.
+Field | Additional information that can be provided to a command for correct command execution. | May or may not have an associated prefix
+Parameter | Part of the command which provides additional information provided by the user. | Actual values for the fields
+Prefix | An abbreviation of a field. | Always ends with a backslash ('/')
 
 ## Links
 ### Academy Directory Resources
-- [Developer Guide](https://ay2122s1-cs2103t-t15-3.github.io/tp/DeveloperGuide.html): if you're interested in developing Academy Directory further, or only wish to see the gory details
-- [About Us](https://ay2122s1-cs2103t-t15-3.github.io/tp/AboutUs.html): if you're interested to learn more about us
-- [Github](https://github.com/AY2122S1-CS2103T-t15-3/tp): if you want to see our code or report any issues
+- [Developer Guide](https://ay2122s1-cs2103t-t15-3.github.io/tp/DeveloperGuide.html): If you're interested in developing Academy Directory further, or only wish to see the gory details
+- [About Us](https://ay2122s1-cs2103t-t15-3.github.io/tp/AboutUs.html): If you're interested to learn more about us
+- [Github](https://github.com/AY2122S1-CS2103T-t15-3/tp): If you want to see our code or report any issues
 
 ### Other Sources
 - [Java SE Runtime Download](https://www.oracle.com/java/technologies/downloads/) to install the latest Java version
-- [AddressBook 3 (AB3)](https://github.com/se-edu/addressbook-level3) to see how we started this project from
+- [AddressBook 3 (AB3)](https://github.com/se-edu/addressbook-level3) to see where we started this project from
 
 ## Acknowledgements
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
-- The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/)
-- Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git)
+- The formatting and content of this User Guide is referenced from [AY2122S1-CS2103T-w17-1/tp](https://ay2122s1-cs2103t-w17-1.github.io/tp/).
+- Design of the internal version control system is heavily inspired by [Git](https://github.com/git/git).
