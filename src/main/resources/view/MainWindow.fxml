@@ -52,7 +52,7 @@
                        </VBox.margin>
                      </Text>
             </VBox>
-            <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-border-color: #b2814c"/>
           </VBox>
 
           <VBox fx:id="lessonList" minWidth="260" prefWidth="260" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -68,7 +68,7 @@
                            <Insets top="5.0" bottom="5.0" left="12.0" />
                         </VBox.margin></Text>
             </VBox>
-            <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+            <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-border-color: #b2814c"/>
           </VBox>
 
         </HBox>
