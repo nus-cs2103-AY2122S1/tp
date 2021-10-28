@@ -20,6 +20,7 @@ Manage large groups of contacts with advanced features such as **Import** for a 
 
 ## Table of Contents
  - [Purpose](#Purpose)
+ - [Prerequisites](#Prerequisites)
  - [Quick Start](#QuickStart)
  - [Features](#Features)
     - [Navigating Between Tabs - cmd + numkey](#Nav)
@@ -50,6 +51,14 @@ Manage large groups of contacts with advanced features such as **Import** for a 
 
 This User Guide is intended for basic to advanced users of CohortConnect. It provides sufficient information for users to set up the application and learn all its features.
 
+<h2 id = "Prerequisites"> </h2>
+
+## Prerequisites
+
+1. Basic knowledge about `csv` and `json` type file formats.
+2. Basic knowledge about Technical Terms like `CLI`, `UI` and `JAR`.
+3. `Java 11` Installed on the System.
+
 <h2 id = "QuickStart"> </h2>
 
 ## Quick Start
@@ -73,7 +82,7 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 > * This Window is only displayed once, when the Student launches the App for the first time.
 
 <p align="center">
-<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Ui.png?raw=true">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/MainWindow.png?raw=true">
 </p>
 
 > * Main Window.
