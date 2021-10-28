@@ -81,7 +81,7 @@ public class UniqueStudentList implements Iterable<Student> {
         requireAllNonNull(target, editedStudent);
 
         labs.clear();
-        labs.addAll(editedStudent.getLabList());
+        labs.addAll(editedStudent.getFreshLabList());
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new StudentNotFoundException();
