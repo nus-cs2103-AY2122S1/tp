@@ -215,6 +215,11 @@ public class ModelManager implements Model {
 
         String currentModuleCode = modulePredicate.getModuleCode();
         this.selectedModule.set(moduleSystem.getModule(currentModuleCode));
+        if (!modulePredicate.equals(PREDICATE_SHOW_ALL_MODULES)) {
+            this.selectedModule.set(moduleSystem.getModule(currentModuleCode));
+        } else {
+            this.selectedModule.set(null);
+        }
 
         filteredPersons.setPredicate(modulePredicate);
 
