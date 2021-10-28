@@ -202,9 +202,12 @@ Finds the meeting schedule that the user has on a specified date.
 
 Format: `schedule {DATE}`
 
-* `DATE` has to be in the format of `dd-MM-yyyy`, where Day, Month and Years are numerical values.
+* `DATE` has to be in the format of dd-MM-yyyy, where Day(dd), Month(MM) and Years(yyyy) are numerical values.
+* if the `{date}` is not specified, all meetings will be displayed.
 
-Example: `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
+Example:
+* `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
+* `schedule` displays all meetings
 
 ### Locating clients by keywords : `search`
 
