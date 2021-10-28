@@ -120,7 +120,11 @@ public class Lessons {
             counter++;
         }
 
-        return str.toString();
+        if (str.toString().equals("")) {
+            return "No Lessons";
+        } else {
+            return str.toString();
+        }
     }
 
     @Override
