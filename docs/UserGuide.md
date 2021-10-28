@@ -436,6 +436,14 @@ Date/Time on your computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
+#### Clearing completed tasks: [cleardone]
+
+:orange_book: Deletes all completed tasks.
+
+:page_with_curl: Format: ```cleardone```
+
+--------------------------------------------------------------------------------------------------------------------
+
 #### Clearing all tasks: [clear]
 
 :orange_book: Deletes all tasks.
