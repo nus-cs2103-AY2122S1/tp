@@ -110,6 +110,7 @@ public class LessonTest {
 
         assertEquals(1, student.getLessons().size());
         assertTrue(student.getLessons().contains(defaultLesson));
+        assertEquals(defaultLesson.getPrice().value, student.getSubscriptionPrice());
     }
 
     @Test

@@ -23,6 +23,7 @@ public class TypicalTuition {
     public static final Student CARL = TypicalStudents.CARL;
     public static final Student ELLE = TypicalStudents.ELLE;
     public static final Student FIONA = TypicalStudents.FIONA;
+    public static final Student GEORGE = TypicalStudents.GEORGE;
     public static final Lesson SCIENCE_P2 = TypicalLessons.SCIENCE_P2;
     public static final Lesson MATH_S2 = TypicalLessons.MATH_S2;
     public static final Lesson PHYSICS_S2 = TypicalLessons.PHYSICS_S2;
@@ -75,6 +76,7 @@ public class TypicalTuition {
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(new StudentBuilder(ALICE).build(),
                 new StudentBuilder(BENSON).build(), new StudentBuilder(CARL).build(),
-                new StudentBuilder(ELLE).build(), new StudentBuilder(FIONA).build()));
+                new StudentBuilder(ELLE).build(), new StudentBuilder(FIONA).build(),
+                new StudentBuilder(GEORGE).build()));
     }
 }

@@ -53,6 +53,7 @@ public class TypicalStudents {
     public static final Student GEORGE = new StudentBuilder().withName("George Best")
             .withPhone("9482442").withEmail("anna@example.com")
             .withAddress("4th street").withGrade("S3")
+            .withRemarks("firstRemark", "secondRemark", "thirdRemark", "fourthRemark", "averylongremarkthatpasses")
             .build();
 
     // Manually added

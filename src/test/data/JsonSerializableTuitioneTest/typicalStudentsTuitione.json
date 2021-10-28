@@ -54,7 +54,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "grade" : "S3",
-    "remarks" : [ ],
+    "remarks" : [ "firstRemark", "secondRemark", "thirdRemark", "fourthRemark", "averylongremarkthatpasses" ],
     "lessonCodes" : [ ]
   } ],
   "lessons": [ ]

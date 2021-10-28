@@ -38,7 +38,6 @@ public class Student {
     private final Set<Remark> remarks = new HashSet<>();
     private final List<Lesson> lessons = new ArrayList<>();
 
-
     /**
      * Every field must be present and not null.
      */

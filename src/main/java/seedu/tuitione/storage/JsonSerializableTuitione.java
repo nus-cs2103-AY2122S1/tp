@@ -1,6 +1,8 @@
 package seedu.tuitione.storage;
 
 import static seedu.tuitione.model.lesson.Lesson.ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.MAX_STUDENT_SIZE;
 import static seedu.tuitione.model.student.Student.LESSON_SIZE_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.model.student.Student.MAX_LESSON_SIZE;
 
@@ -128,6 +130,10 @@ class JsonSerializableTuitione {
             if (!student.isAbleToEnrollForMoreLessons()) {
                 throw new IllegalValueException(String.format(LESSON_SIZE_MESSAGE_CONSTRAINT,
                         student.getName(), MAX_LESSON_SIZE));
+            }
+            if (!lesson.isAbleToEnrollMoreStudents()) {
+                throw new IllegalValueException(String.format(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT,
+                        lesson.getLessonCode(), MAX_STUDENT_SIZE));
             }
             if (lesson.containsStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
