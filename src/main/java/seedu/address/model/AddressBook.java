@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.organisation.Organisation;
 import seedu.address.model.organisation.UniqueOrganisationList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -96,6 +97,40 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addOrganisation(Organisation o) {
         organisations.add(o);
+    }
+
+    /**
+     * Deletes an organisation from the address book.
+     * The organisation must exist in the address book.
+     */
+    public void deleteOrganisation(Organisation organisation) {
+        organisations.remove(organisation);
+    }
+
+    /**
+     * Adds a person to an organisation.
+     * The person must not already exist in the organisation.
+     */
+    public void addToOrganisation(Person person, Name name) {
+        Organisation organisation = organisations.getByName(name);
+        organisation.addPerson(person);
+    }
+
+    /**
+     * Deletes a person from an organisation.
+     * The person must exist in the organisation.
+     */
+    public void deleteFromOrganisation(Person person, Organisation organisation) {
+        organisation.removePerson(person);
+    }
+
+    /**
+     * Gets organisation by name.
+     * The organisation must exist in the organisation list.
+     */
+    public Organisation getOrganisationByName(Name name) {
+        Organisation organisation = organisations.getByName(name);
+        return organisation;
     }
 
     /**
