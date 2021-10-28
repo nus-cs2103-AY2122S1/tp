@@ -73,6 +73,7 @@ public class MlistCommand extends Command {
 
         if (eventIndex == null) {
             model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+            model.setCurrentEvent(null);
             return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(), ""));
         } else if (hasAttended == null) {
             Event eventToList = lastShownList.get(eventIndex.getZeroBased());

@@ -131,6 +131,10 @@ public class ModelManager implements Model {
     @Override
     public void deleteEvent(Event target) {
         addressBook.removeEvent(target);
+
+        if (getCurrentEvent().isPresent() && target.isSameType(getCurrentEvent().get())) {
+            currentEvent = null;
+        }
     }
 
     @Override
