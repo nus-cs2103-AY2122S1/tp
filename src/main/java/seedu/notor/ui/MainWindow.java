@@ -144,7 +144,7 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         ViewPanel viewPane = new ViewPanel();
-        //notePanePlaceholder.getChildren().add(notePane.getRoot());
+        //viewPanePlaceholder.getChildren().add(viewPane.getRoot());
     }
 
     /**
