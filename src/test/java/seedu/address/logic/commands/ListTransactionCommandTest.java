@@ -33,8 +33,15 @@ public class ListTransactionCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_TRANSACTION_LIST, PREDICATE_SHOW_ALL_ITEMS);
 
+        String cost = String.format("%.2f", model.getBookKeeping().getCost());
+        String revenue = String.format("%.2f", model.getBookKeeping().getRevenue());
+        String profit = String.format("%.2f", model.getBookKeeping().getProfit());
+
+        String addMessage = "Total costs: " + cost + ", total revenue: "
+                + revenue + ", total profit: " + profit;
+
         assertCommandSuccess(new ListTransactionCommand(""), model,
-                ListTransactionCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+                ListTransactionCommand.MESSAGE_SUCCESS_ALL + "\n" + addMessage, expectedModel);
         // TODO: compare transactions with typical transactions
     }
 
@@ -46,8 +53,15 @@ public class ListTransactionCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_TRANSACTION_LIST, PREDICATE_SHOW_ALL_ITEMS);
 
+        String cost = String.format("%.2f", model.getBookKeeping().getCost());
+        String revenue = String.format("%.2f", model.getBookKeeping().getRevenue());
+        String profit = String.format("%.2f", model.getBookKeeping().getProfit());
+
+        String addMessage = "Total costs: " + cost + ", total revenue: "
+                + revenue + ", total profit: " + profit;
+
         assertCommandSuccess(new ListTransactionCommand(""), model,
-                ListTransactionCommand.MESSAGE_SUCCESS_ALL, expectedModel);
+                ListTransactionCommand.MESSAGE_SUCCESS_ALL + "\n" + addMessage, expectedModel);
         // TODO: compare transactions with typical transactions
     }
 
