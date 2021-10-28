@@ -192,7 +192,7 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
 input. This command then updates the ```model``` accordingly. 
 
-The following activity diagram summarizes what happens when a user executes a ```show``` command:
+The following activity diagram summarizes what happens when a user executes a ```FilterInterview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
 
 Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
@@ -212,7 +212,8 @@ Given below is an example usage scenario and how the show operation behaves at e
 
 The following sequence diagram shows how the show operation works.
 ![images](images/FilterInterviewCommandSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterInterviewCommandParser`
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
 ### \[Proposed\] Undo/redo feature
