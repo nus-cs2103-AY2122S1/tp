@@ -300,6 +300,11 @@ public class AddAppCommandTest {
         public String getClashingAppointmentsAsString(Appointment appointment) {
             return "";
         }
+
+        @Override
+        public void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
