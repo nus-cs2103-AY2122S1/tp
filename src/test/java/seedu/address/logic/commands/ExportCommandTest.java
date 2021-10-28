@@ -96,7 +96,7 @@ public class ExportCommandTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
