@@ -62,7 +62,7 @@ public class ModelManager implements Model {
         filteredClients = new FilteredList<>(sortedClients);
 
         sortedNextMeetings = new SortedList<>(checkAllNextMeetings(this.addressBook.getClientList()));
-        shownNextMeetings = new FilteredList<>(sortedNextMeetings.sorted());
+        shownNextMeetings = new FilteredList<>(sortedNextMeetings);
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
 
         clientToView = new FilteredList<>(this.addressBook.getClientList());

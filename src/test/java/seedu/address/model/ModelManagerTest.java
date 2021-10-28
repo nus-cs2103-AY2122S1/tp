@@ -20,6 +20,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
 import seedu.address.model.client.ClientId;
 import seedu.address.testutil.AddressBookBuilder;
@@ -157,9 +158,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(ALICE.getName().toString());
-        Predicate<Client> predicate = (client) -> client.getName().toString().equals(aMM.toString());
-        modelManager.updateFilteredClientList(predicate);
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(ALICE.getName().fullName);
+        modelManager.updateFilteredClientList(new ClientContainsKeywordsPredicate(aMM));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
