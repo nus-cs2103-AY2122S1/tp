@@ -49,7 +49,7 @@ public class MarkAppointmentCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DeleteAppointmentCommand(INDEX_SECOND_PERSON,
+        assertFalse(standardCommand.equals(new MarkAppointmentCommand(INDEX_SECOND_PERSON,
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY))));
     }
 
