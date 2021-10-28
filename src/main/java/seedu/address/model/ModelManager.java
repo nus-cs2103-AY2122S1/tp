@@ -260,7 +260,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes an order from orderBook. 
+     * Deletes an order from orderBook.
      */
     public void deleteOrder(Order toDelete) {
         orderBook.deleteOrder(toDelete);
