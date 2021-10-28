@@ -9,6 +9,8 @@ import static seedu.siasa.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -130,6 +132,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Optional<Person> getSimilarPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -151,6 +158,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPolicy(Policy policy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Policy> getSimilarPolicy(Policy policy) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -188,6 +200,11 @@ public class AddCommandTest {
         public int getTotalCommission() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Map<Person, Integer> getNumberPoliciesPerPerson() {
+            throw new AssertionError("This method should not be called.");
+        };
     }
 
     /**

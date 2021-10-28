@@ -5,7 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.siasa.logic.commands.exceptions.CommandException;
@@ -54,7 +58,8 @@ public class DownloadCommand extends Command {
             }
         });
 
-        List<String> listStringForTxt = stringListBuilderForTxt(totalCommission, modifiablePersonList, numberPoliciesPerPerson);
+        List<String> listStringForTxt = stringListBuilderForTxt(
+                totalCommission, modifiablePersonList, numberPoliciesPerPerson);
 
         try {
             writeToTxt(listStringForTxt);
@@ -68,8 +73,11 @@ public class DownloadCommand extends Command {
     private int getCommissionFromPolicyList(List<Policy> policyList) {
         float total = 0;
         for (Policy policy : policyList) {
-            total = total + ((float) policy.getCommission().commissionPercentage / 100)
-                    * policy.getPrice().priceInCents;
+            int commissionPercentage = policy.getCommission().commissionPercentage;
+            int numberPayments = policy.getCommission().numberOfPayments;
+            int paymentAmt = policy.getPaymentStructure().paymentAmount;
+            total = total + ((float) commissionPercentage / 100)
+                    * numberPayments * paymentAmt;
         }
         return (int) total;
     }
@@ -81,7 +89,8 @@ public class DownloadCommand extends Command {
         return (float) countPolicies / countPersons;
     }
 
-    private List<String> stringListBuilderForTxt(int totalCommission, List<Person> sortedPersons, Map<Person, Integer> numberPoliciesPerPerson) {
+    private List<String> stringListBuilderForTxt(
+            int totalCommission, List<Person> sortedPersons, Map<Person, Integer> numberPoliciesPerPerson) {
         List<String> stringList = new ArrayList<>();
 
         stringList.add("Statistics for " + CURRENT_DATE + "\n");

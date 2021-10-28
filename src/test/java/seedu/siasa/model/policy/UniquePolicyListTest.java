@@ -3,9 +3,9 @@ package seedu.siasa.model.policy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_AMOUNT_CRITICAL;
 import static seedu.siasa.testutil.Assert.assertThrows;
 import static seedu.siasa.testutil.TypicalPolicies.CRITICAL_ILLNESS;
 import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
@@ -43,8 +43,8 @@ class UniquePolicyListTest {
     public void contains_policyWithSameIdentityFieldsInList_returnsTrue() {
         uniquePolicyList.add(FULL_LIFE);
         Policy editedFullLife = new PolicyBuilder(FULL_LIFE)
-                .withPrice(VALID_POLICY_PRICE_CRITICAL)
-                .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
+                .withPaymentStructure(VALID_POLICY_PAYMENT_AMOUNT_CRITICAL)
+                .withCommission(VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL)
                 .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
                 .build();
         assertTrue(uniquePolicyList.contains(editedFullLife));
@@ -89,8 +89,8 @@ class UniquePolicyListTest {
     public void setPolicy_editedPolicyHasSameIdentity_success() {
         uniquePolicyList.add(FULL_LIFE);
         Policy editedFullLife = new PolicyBuilder(FULL_LIFE)
-                .withPrice(VALID_POLICY_PRICE_CRITICAL)
-                .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
+                .withPaymentStructure(VALID_POLICY_PAYMENT_AMOUNT_CRITICAL)
+                .withCommission(VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL)
                 .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
                 .build();
         uniquePolicyList.setPolicy(FULL_LIFE, editedFullLife);

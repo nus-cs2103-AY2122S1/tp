@@ -5,6 +5,7 @@ import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,16 @@ public class UniquePolicyList implements Iterable<Policy> {
     public boolean contains(Policy toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePolicy);
+    }
+
+    /**
+     * Returns true if the list contains a policy with a similar title and same
+     * owner as {@code toCheck}. Similar is defined as the policy titles having an
+     * edit distance of zero or one (case insensitive).
+     */
+    public Optional<Policy> getSimilar(Policy toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(toCheck::isSimilarPolicy).findFirst();
     }
 
     /**
@@ -105,8 +116,11 @@ public class UniquePolicyList implements Iterable<Policy> {
     public int getTotalCommission() {
         float total = 0;
         for (Policy policy : internalList) {
-            total = total + ((float) policy.getCommission().commissionPercentage / 100)
-                    * policy.getPrice().priceInCents;
+            int commissionPercentage = policy.getCommission().commissionPercentage;
+            int numberPayments = policy.getCommission().numberOfPayments;
+            int paymentAmt = policy.getPaymentStructure().paymentAmount;
+            total = total + ((float) commissionPercentage / 100)
+                    * numberPayments * paymentAmt;
         }
         return (int) total;
     }

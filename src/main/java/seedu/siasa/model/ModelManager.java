@@ -5,6 +5,7 @@ import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -101,6 +102,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Optional<Person> getSimilarPerson(Person person) {
+        requireNonNull(person);
+        return siasa.getSimilarPerson(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         siasa.removePersonAndAssociatedPolicies(target);
     }
@@ -126,9 +133,15 @@ public class ModelManager implements Model {
     //=========== Policy CRUD ================================================================================
 
     @Override
-    public boolean hasPolicy(Policy person) {
-        requireNonNull(person);
-        return siasa.hasPolicy(person);
+    public boolean hasPolicy(Policy policy) {
+        requireNonNull(policy);
+        return siasa.hasPolicy(policy);
+    }
+
+    @Override
+    public Optional<Policy> getSimilarPolicy(Policy policy) {
+        requireNonNull(policy);
+        return siasa.getSimilarPolicy(policy);
     }
 
     @Override
