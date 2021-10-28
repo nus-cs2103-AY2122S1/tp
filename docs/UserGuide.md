@@ -568,7 +568,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Exporting member allocations: `export`
+#### Exporting facility details and member allocation: `export`
 
 Exports facility details, and it's member allocation to a CSV file that you can share with
 your CCA members.
@@ -727,6 +727,7 @@ Action | Format, Examples
 **Split members into facilities**| `split DAY` <br> e.g. `split Mon`
 **Deallocate member from a facility**|`deallocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `deallocate 2 3 4`
 **Allocate member to a facility**|`allocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `allocate 1 2 5`
+**Export facility details and<br>member allocation**| `export`
 **Clear facilities**|`clearf`
 
 [Back to Table of Contents](#table-of-contents)
