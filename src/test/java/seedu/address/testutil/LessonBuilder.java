@@ -25,6 +25,7 @@ public class LessonBuilder {
     public static final String DEFAULT_HOMEWORK = "Textbook Page 5";
 
     private Date date;
+    private Date endDate;
     private TimeRange timeRange;
     private Subject subject;
     private LessonRates lessonRates;
@@ -37,6 +38,7 @@ public class LessonBuilder {
      */
     public LessonBuilder() {
         date = new Date(DEFAULT_DATE);
+        endDate = Date.MAX_DATE; // default
         timeRange = new TimeRange(DEFAULT_TIME_RANGE);
         lessonRates = new LessonRates(DEFAULT_LESSON_RATES);
         subject = new Subject(DEFAULT_SUBJECT);
@@ -51,6 +53,7 @@ public class LessonBuilder {
      */
     public LessonBuilder(Lesson lessonToCopy) {
         date = lessonToCopy.getStartDate();
+        endDate = lessonToCopy.getEndDate();
         timeRange = lessonToCopy.getTimeRange();
         lessonRates = lessonToCopy.getLessonRates();
         subject = lessonToCopy.getSubject();
@@ -73,6 +76,14 @@ public class LessonBuilder {
      */
     public LessonBuilder withDate(Date date) {
         this.date = date;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Date} of the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withEndDate(String date) {
+        this.endDate = new Date(date);
         return this;
     }
 
@@ -142,8 +153,8 @@ public class LessonBuilder {
      * @return {@code RecurringLesson} containing the information given.
      */
     public Lesson buildRecurring() {
-        return new RecurringLesson(date, timeRange, subject, homeworkSet, lessonRates,
-                outstandingFees, cancelledDatesSet);
+        return new RecurringLesson(date, endDate, timeRange,
+                subject, homeworkSet, lessonRates, outstandingFees, cancelledDatesSet);
     }
 
     /**

@@ -47,6 +47,7 @@ public class SampleDataUtil {
         return new Lesson[] {
             new RecurringLesson(
                     getDate(LocalDate.now().withDayOfMonth(3)),
+                    getDate(LocalDate.MAX),
                     new TimeRange("1630-1830"),
                     new Subject("Science"),
                     getHomeworkSet("Ex3", "ch4"),
@@ -63,6 +64,7 @@ public class SampleDataUtil {
                     EMPTY_CANCELLED_DATES_SET),
             new RecurringLesson(
                     getDate(LocalDate.now().withDayOfMonth(3).minusMonths(1)),
+                    getDate(LocalDate.MAX),
                     new TimeRange("1930-2130"),
                     new Subject("Math"),
                     getHomeworkSet("pg24"),
@@ -71,6 +73,7 @@ public class SampleDataUtil {
                     EMPTY_CANCELLED_DATES_SET),
             new RecurringLesson(
                     getDate(LocalDate.now().withDayOfMonth(6).minusMonths(1)),
+                    getDate(LocalDate.MAX),
                     new TimeRange("1500-1800"),
                     new Subject("Math"),
                     getHomeworkSet("workbook 2"),
@@ -79,6 +82,7 @@ public class SampleDataUtil {
                     EMPTY_CANCELLED_DATES_SET),
             new RecurringLesson(
                     getDate(LocalDate.now().withDayOfMonth(8).minusMonths(1)),
+                    getDate(LocalDate.MAX),
                     new TimeRange("1200-1400"),
                     new Subject("Math"),
                     getHomeworkSet("Ch7 pg10"),

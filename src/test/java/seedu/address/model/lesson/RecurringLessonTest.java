@@ -6,10 +6,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_NEXT_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NON_CLASHING_TIME_RANGE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.model.lesson.Date.MAX_DATE;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -66,6 +75,57 @@ class RecurringLessonTest {
     }
 
     @Test
+    public void getNextDate_dateNotOver_sameDate() {
+        Lesson lesson = new RecurringLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
+            MAX_DATE,
+            new TimeRange(VALID_TIME_RANGE),
+            new Subject(VALID_SUBJECT), new HashSet<>(),
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES),
+            new HashSet<>());
+        assertEquals(LocalDate.now(), lesson.getDisplayDate().getLocalDate());
+
+        Date cancelled = new Date(LocalDate.now().format(Date.FORMATTER));
+        Set<Date> dates = new HashSet<>();
+        dates.add(cancelled);
+        Lesson lesson1 = new MakeUpLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
+            new TimeRange(VALID_TIME_RANGE),
+            new Subject(VALID_SUBJECT), new HashSet<>(),
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES), dates);
+
+        Date cancelled2 = new Date(LocalDate.now().format(Date.FORMATTER));
+        Set<Date> dates2 = new HashSet<>();
+        dates2.add(cancelled2);
+        Lesson lesson2 = new MakeUpLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
+            new TimeRange(VALID_TIME_RANGE),
+            new Subject(VALID_SUBJECT), new HashSet<>(),
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES), dates2);
+
+        TreeSet<Lesson> lessonSet = new TreeSet<>();
+        lessonSet.add(lesson1);
+        lessonSet.add(lesson2);
+        SortedSet<Lesson> unmod = Collections.unmodifiableSortedSet(lessonSet);
+        assertTrue(unmod.size() == 2);
+    }
+
+    @Test
+    public void isClashing() {
+        Date oneWeekLaterDate = new Date("21 Jan 2021");
+        Lesson lesson = new RecurringLesson(new Date("14 Jan 2021"),
+            MAX_DATE,
+            new TimeRange(VALID_TIME_RANGE),
+            new Subject(VALID_SUBJECT), new HashSet<>(),
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES),
+            new HashSet<>());
+        Lesson clashingLesson = new RecurringLesson(oneWeekLaterDate,
+            MAX_DATE,
+            new TimeRange(VALID_TIME_RANGE),
+            new Subject(VALID_SUBJECT), new HashSet<>(),
+            new LessonRates(VALID_LESSON_RATES), new OutstandingFees(VALID_OUTSTANDING_FEES),
+            new HashSet<>());
+
+        assertTrue(lesson.isClashing(clashingLesson));
+    }
+
     public void isClashing_withCancelledMakeupLesson_returnsFalse() {
         // does not clash with cancelled makeup lesson
         Lesson recurringLesson = new LessonBuilder().withDate(VALID_DATE_MON).buildRecurring();

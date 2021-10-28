@@ -123,6 +123,7 @@ public class PaidCommand extends UndoableCommand {
         assert lessonToEdit != null;
 
         Date copiedDate = lessonToEdit.getStartDate();
+        Date copiedEndDate = lessonToEdit.getEndDate();
         TimeRange copiedTimeRange = lessonToEdit.getTimeRange();
         Subject copiedSubject = lessonToEdit.getSubject();
         Set<Homework> copiedHomeworkSet = lessonToEdit.getHomework();
@@ -137,7 +138,7 @@ public class PaidCommand extends UndoableCommand {
         }
 
         return lessonToEdit.isRecurring()
-                ? new RecurringLesson(copiedDate, copiedTimeRange, copiedSubject, copiedHomeworkSet,
+                ? new RecurringLesson(copiedDate, copiedEndDate, copiedTimeRange, copiedSubject, copiedHomeworkSet,
                 copiedLessonRates, updatedOutstandingFees, copiedCancelledDates)
                 : new MakeUpLesson(copiedDate, copiedTimeRange, copiedSubject, copiedHomeworkSet,
                 copiedLessonRates, updatedOutstandingFees, copiedCancelledDates);

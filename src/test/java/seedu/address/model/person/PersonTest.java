@@ -104,7 +104,6 @@ public class PersonTest {
                 validEmail, validAddress, validSchool, validAcadStream, null, validRemark,
                 validTagSet, validLessonSet));
 
-
         // null remark
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
                 validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, null,

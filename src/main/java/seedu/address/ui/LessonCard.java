@@ -28,6 +28,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label dateRange;
+    @FXML
     private Label time;
     @FXML
     private Label rates;
@@ -48,13 +50,17 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
         title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
-        date.setText(lesson.getDisplayDate().value);
+        date.setText(lesson.getDisplayDate().toString());
         time.setText(lesson.getTimeRange().toString());
         rates.setText(lesson.getLessonRates().toString());
         outstandingFees.setText(lesson.getOutstandingFees().toString());
 
-        homeworkList.setManaged(!lesson.getHomework().isEmpty());
+        String endDateString = lesson.getEndDate().equals(Date.MAX_DATE) ? " " : lesson.getEndDate().toString();
+        String dateRangeString =
+                String.format("%1$s - %2$s", lesson.getStartDate().toString(), endDateString);
+        dateRange.setText(dateRangeString);
 
+        homeworkList.setManaged(!lesson.getHomework().isEmpty());
         lesson.getHomework().stream()
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()

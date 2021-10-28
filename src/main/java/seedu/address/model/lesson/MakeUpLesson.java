@@ -1,6 +1,5 @@
 package seedu.address.model.lesson;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -11,17 +10,17 @@ public class MakeUpLesson extends Lesson {
     /**
      * Every field must be present and not null.
      *
-     * @param date Date of lesson.
-     * @param timeRange Time range of the lesson.
-     * @param subject Subject of the lesson.
-     * @param homework Homework for the lesson.
-     * @param rates Cost per hour for the lesson.
-     * @param fees Outstanding fees for the lesson.
+     * @param date Start and end Date of lesson.
+     * @param timeRange      Time range of the lesson.
+     * @param subject        Subject of the lesson.
+     * @param homework       Homework for the lesson.
+     * @param rates          Cost per lesson for the lesson.
+     * @param fees           Outstanding fees for the lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework,
-                LessonRates rates, OutstandingFees fees, Set<Date> cancelledDates) {
-        super(date, timeRange, subject, homework, rates, fees, cancelledDates);
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
+                        OutstandingFees fees, Set<Date> cancelledDates) {
+        super(date, date, timeRange, subject, homework, rates, fees, cancelledDates);
     }
 
     /**
@@ -58,15 +57,6 @@ public class MakeUpLesson extends Lesson {
     }
 
     /**
-     * To check if fees for this lesson should be updated.
-     * If lesson has passed.
-     */
-    @Override
-    public boolean hasEnded() {
-        return getEndDateTime().isBefore(LocalDateTime.now());
-    }
-
-    /**
      * Returns true if this {@code MakeUpLesson} clashes with the given {@code Lesson}.
      *
      * @param otherLesson The other lesson to be compared with.
@@ -74,11 +64,7 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public boolean isClashing(Lesson otherLesson) {
-        // this makeup lesson is cancelled
-        if (getCancelledDates().contains(getStartDate())) {
-            return false;
-        }
-        return !isCancelled()
+        return !isCancelled() && !otherLesson.isCancelled()
                 && otherLesson.hasLessonOnDate(getStartDate())
                 && getTimeRange().isClashing(otherLesson.getTimeRange());
     }

@@ -28,6 +28,10 @@
                 <Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true" />
             </HBox>
             <HBox>
+                <Label fx:id="dateRangePlaceholder" styleClass="cell_medium_label" text="Date Range: " wrapText="true" minWidth="80"/>
+                <Label fx:id="dateRange" styleClass="cell_small_label" text="\$dateRange" wrapText="true" />
+            </HBox>
+            <HBox>
                 <Label fx:id="datePlaceholder" styleClass="cell_medium_label" text="Date: " wrapText="true" />
                 <Label fx:id="date" styleClass="cell_small_label" text="\$date" wrapText="true" />
             </HBox>
