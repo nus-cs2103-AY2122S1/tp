@@ -19,7 +19,7 @@ public class SortCommand extends Command {
             + "ORDER_TO_SORT includes 'o/time', 'o/asc' (for ascending), and 'o/desc' (for descending)\n"
             + "Example1: " + COMMAND_WORD + " " + PREFIX_SORT_ORDER + "asc\n"
             + "Example2: " + COMMAND_WORD;
-    private static final String MESSAGE_SORTED = "The tuition class list is now sorted by %1$s order";
+    public static final String MESSAGE_SORTED = "The tuition class list is now sorted by %1$s order";
     private SortCommandParser.Order order;
     public SortCommand(SortCommandParser.Order order) {
         this.order = order;
@@ -70,5 +70,19 @@ public class SortCommand extends Command {
         default:
             return order;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SortCommand that = (SortCommand) o;
+
+        return order == that.order;
     }
 }

@@ -24,4 +24,18 @@ public class TimetableCommand extends Command {
         return new CommandResult("Timetable shown.",
                 CommandResult.UiAction.SHOW_TIMETABLE);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof TimetableCommand) {
+            return true;
+        }
+        return false;
+    }
 }
