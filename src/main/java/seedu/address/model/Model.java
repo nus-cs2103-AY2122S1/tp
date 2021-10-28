@@ -6,8 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.historyStates.State;
-import seedu.address.model.historyStates.exceptions.NoHistoryStatesException;
+import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
 

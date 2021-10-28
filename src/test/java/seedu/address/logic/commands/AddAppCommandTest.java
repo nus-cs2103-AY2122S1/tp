@@ -300,6 +300,14 @@ public class AddAppCommandTest {
         public String getClashingAppointmentsAsString(Appointment appointment) {
             return "";
         }
+
+        @Override
+        public void updateState() {
+        }
+
+        @Override
+        public void undo() {
+        }
     }
 
     /**

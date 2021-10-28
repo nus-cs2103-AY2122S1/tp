@@ -13,9 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.historyStates.HistoryStates;
-import seedu.address.model.historyStates.State;
-import seedu.address.model.historyStates.exceptions.NoHistoryStatesException;
+import seedu.address.model.history_states.HistoryStates;
+import seedu.address.model.history_states.State;
+import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
 import seedu.address.model.schedule.Schedule;
@@ -55,7 +55,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs, schedule and history states.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlySchedule schedule, HistoryStates historyStates) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlySchedule schedule, HistoryStates historyStates) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -352,6 +353,5 @@ public class ModelManager implements Model {
     public void updateState() {
         State stateToUpdate = new State(this.addressBook, this.schedule);
         this.historyStates.addNewState(stateToUpdate);
-        System.out.println("updateState" + " " + this.historyStates.historyStates.size());
     }
 }
