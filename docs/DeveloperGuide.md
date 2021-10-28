@@ -903,7 +903,22 @@ testers are expected to do more *exploratory* testing.
        
 ### Finding a student
 
-1. 
+1. Finding a student while all students are being shown
+
+    1. Prerequisites: List all students using the `students` command. Multiple students in the list.
+
+    1. Test case: `findStudent al`<br>
+       Expected: Students whose name contains "al" will be shown (e.g. Alex). Status message shows how many students has been found.
+
+    1. Test case: `findStudent !alex!`<br>
+       Expected: Students whose name contains "alex" will be shown (e.g. Alex). Special characters and numbers ignored. Status message shows how many students has been found.
+
+    1. Other incorrect findStudent commands to try: `findStudent`, `findStudent !` <br>
+       Expected: No student found. Error details shown in the status message.
+
+1. Finding a student while in another directory
+
+   Expected: Similar to previous.
 
 ### Clearing student list
 
@@ -917,7 +932,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a group
 
-1. 
+1. Finding a group while all groups are being shown
+
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+
+    1. Test case: `findGroup w14`<br>
+       Expected: Groups whose name contains "w14" will be shown (e.g. W14-4). Case-insensitive. Status message shows how many groups has been found.
+
+    1. Test case: `findGroup w14`<br>
+       Expected: Groups whose name contains "w14" will be shown (e.g. W14-2, W14-4). Case-insensitive. Status message shows how many groups has been found.
+
+    1. Other incorrect findGroup commands to try: `findGroup`, `findGroup !` <br>
+       Expected: No groups found. Error details shown in the status message.
+
+1. Finding a group while in another directory
+
+   Expected: Similar to previous.
 
 ### Clearing group list
 

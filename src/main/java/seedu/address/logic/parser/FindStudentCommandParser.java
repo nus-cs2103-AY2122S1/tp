@@ -22,6 +22,7 @@ public class FindStudentCommandParser implements Parser<FindStudentCommand> {
     public FindStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         String trimmedArgs = args.trim();
+        trimmedArgs = trimmedArgs.replaceAll("[^a-zA-Z\\s]", "");
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
