@@ -211,6 +211,16 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 
 ### Filtering appointments
 
+#### What it is
+Filters through the appointment records in PlannerMd and shows the appointments that matches the filter parameters. If no parameters are specified, all appointments in the appointment records are shown.
+
+#### Implementation
+
+![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
+
+![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
+
+
 ### Storage
 
 --- 
