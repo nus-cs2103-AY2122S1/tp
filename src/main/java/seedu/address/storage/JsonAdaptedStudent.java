@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +12,8 @@ import seedu.address.model.module.student.Name;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.TeleHandle;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 
 /**
@@ -22,6 +27,7 @@ class JsonAdaptedStudent {
     private final String teleHandle;
     private final String email;
     private final String studentId;
+    private final List<JsonAdaptedTask> studentTaskList = new ArrayList<>();
 
 
     /**
@@ -29,12 +35,13 @@ class JsonAdaptedStudent {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("teleHandle") String teleHandle,
-            @JsonProperty("email") String email, @JsonProperty("studentId") String studentId) {
+                              @JsonProperty("email") String email, @JsonProperty("studentId") String studentId,
+                              @JsonProperty("studentTaskList")List<JsonAdaptedTask> studentTaskList) {
         this.name = name;
         this.teleHandle = teleHandle;
         this.email = email;
         this.studentId = studentId;
-
+        this.studentTaskList.addAll(studentTaskList);
     }
 
     /**
@@ -45,6 +52,11 @@ class JsonAdaptedStudent {
         teleHandle = source.getTeleHandle().value;
         email = source.getEmail().value;
         studentId = source.getStudentId().value;
+        List<Task> tempTaskList = source.getTaskList().asModifiableObservableList();
+        for (Task task : tempTaskList) {
+            JsonAdaptedTask taskToAdd = new JsonAdaptedTask(task);
+            studentTaskList.add(taskToAdd);
+        }
     }
 
     /**
@@ -89,7 +101,15 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
         }
         final StudentId modelStudentId = new StudentId(studentId);
-        return new Student(modelStudentId, modelName, modelTeleHandle, modelEmail);
+
+        final UniqueTaskList tasks = new UniqueTaskList();
+        if (!studentTaskList.isEmpty()) {
+            for (JsonAdaptedTask task : studentTaskList) {
+                Task modelTask = task.toModelType();
+                tasks.add(modelTask);
+            }
+        }
+        return new Student(modelStudentId, modelName, modelTeleHandle, modelEmail, tasks);
     }
 
 }

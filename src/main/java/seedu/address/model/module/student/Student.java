@@ -33,8 +33,19 @@ public class Student {
         this.name = name;
         this.teleHandle = teleHandle;
         this.email = email;
-        //this.tags.addAll(tags);
         this.taskList = new UniqueTaskList();
+    }
+
+    /**
+     * Constructor that also specifies taskList, to be used for storage.
+     */
+    public Student(StudentId studentId, Name name, TeleHandle teleHandle, Email email,
+                   UniqueTaskList taskList) {
+        this.studentId = studentId;
+        this.name = name;
+        this.teleHandle = teleHandle;
+        this.email = email;
+        this.taskList = taskList;
     }
 
     public Name getName() {
@@ -136,7 +147,7 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
+                .append("; Telegram Handle: ")
                 .append(getTeleHandle())
                 .append("; Email: ")
                 .append(getEmail())
