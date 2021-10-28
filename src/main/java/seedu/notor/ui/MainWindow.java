@@ -21,6 +21,7 @@ import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.ListPanel.PersonListPanel;
 import seedu.notor.ui.note.GeneralNoteWindow;
 import seedu.notor.ui.note.GroupNoteWindow;
 import seedu.notor.ui.note.NoteWindow;
@@ -45,14 +46,14 @@ public class MainWindow extends UiPart<Stage> {
     private final HelpWindow helpWindow;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    //private NotePane notePane;
+    private ViewPanel viewPane;
 
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     //@FXML
-    //private StackPane notePanePlaceholder;
+    //private StackPane viewPanePlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -142,7 +143,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        //NotePane notePane = new NotePane();
+        ViewPanel viewPane = new ViewPanel();
         //notePanePlaceholder.getChildren().add(notePane.getRoot());
     }
 

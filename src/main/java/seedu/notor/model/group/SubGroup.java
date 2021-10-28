@@ -79,7 +79,6 @@ public class SubGroup extends Group implements Unique<SubGroup> {
         this.parent = parent.getName();
     }
 
-
     @Override
     public boolean isSame(SubGroup other) {
         return other.toString().equals(this.toString());

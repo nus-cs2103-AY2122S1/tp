@@ -1,4 +1,4 @@
-package seedu.notor.ui;
+package seedu.notor.ui.ListPanel;
 
 import java.util.logging.Logger;
 
@@ -9,6 +9,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.PersonCard;
+import seedu.notor.ui.UiPart;
 
 /**
  * Panel containing the list of persons.

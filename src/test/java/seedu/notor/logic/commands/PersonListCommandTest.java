@@ -7,6 +7,7 @@ import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.notor.logic.commands.person.PersonListCommand;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
 import seedu.notor.model.UserPrefs;
@@ -14,7 +15,7 @@ import seedu.notor.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListCommandTest {
+public class PersonListCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -27,12 +28,12 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandTestUtil.assertExecuteSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertExecuteSuccess(new PersonListCommand(), model, PersonListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        CommandTestUtil.assertExecuteSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertExecuteSuccess(new PersonListCommand(), model, PersonListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
