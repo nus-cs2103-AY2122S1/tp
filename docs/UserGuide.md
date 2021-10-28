@@ -57,6 +57,8 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 [Return to table of contents](#table-of-contents)
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -419,6 +421,7 @@ If your changes to the data file makes its format invalid, SourceControl will di
 
 [Return to table of contents](#table-of-contents)
 
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -426,6 +429,7 @@ If your changes to the data file makes its format invalid, SourceControl will di
 
 [Return to table of contents](#table-of-contents)
 
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -454,7 +458,9 @@ Import command description.
 </div>
 
 
+
 Below is a table of the restrictions of data types used in our application.
+
 Data | Restrictions
 -------|--------
 Name | Name can be any alphanumeric words. 
@@ -466,13 +472,16 @@ Tag | Tag can be a single alphanumeric word.
 
 
 Below is a glossary of words used in out document.
+
 Word | Meaning
 -------|--------
-Alphanumeric | word that contain alphabets (capitalised and non-capitalised) and numerical numbers as characters. 
+Alphanumeric | word that contain alphabets (capitalised and non-capitalised) and numerical numbers as characters.
+JSON | JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
 
 [Return to table of contents](#table-of-contents)
 
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
