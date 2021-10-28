@@ -139,7 +139,7 @@ Format: `cd MODULE`
 
 Move a particular student into a particular module and class.
 
-Format: `mv INDEX m/MODULE c/CLASS`
+Format: `mv INDEX [INDEX]... m/MODULE c/CLASS`
 
 * Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
