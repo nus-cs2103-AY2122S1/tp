@@ -40,9 +40,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane importance;
+    @FXML
     private FlowPane tags;
     @FXML
     private Text taskList;
+    @FXML
+    private Text tasksDue;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,7 +62,12 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        taskList.setText(person.getTasks().toString());
+        taskList.setText(person.getDescription().toString());
+        tasksDue.setText("Overdue Tasks: " + person.getOverdueTasks()
+                + "\nSoon to be due Tasks: " + person.getSoonDueTasks());
+        if (person.isImportant()) {
+            importance.getChildren().add(new Label("Important!"));
+        }
     }
 
     @Override

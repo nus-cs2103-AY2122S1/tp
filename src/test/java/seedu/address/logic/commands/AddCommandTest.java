@@ -9,12 +9,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -157,8 +158,18 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateDisplayTaskList(List<Task> taskList) {
-            throw new AssertionError("This method should not be called.");
+        public void displayPersonTaskList(Person person) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void displayFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override
@@ -166,7 +177,48 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called");
         }
 
+        @Override
         public void updateSortedPersonList(boolean isReverseOrder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<PieChart.Data> getStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommand(String command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TaskListManager getTaskListManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getBefore() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getAfter() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getObservablePersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateObservablePersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setViewAllTasksFindPred(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

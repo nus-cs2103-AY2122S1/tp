@@ -27,8 +27,6 @@ public class SortCommandParser implements Parser<SortCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
-        } else {
-            isReverseOrder = false;
         }
 
         return new SortCommand(isReverseOrder);

@@ -1,0 +1,22 @@
+@startuml
+
+start
+:User enters cat command;
+if () then ([Valid command format])
+  :Retrieve the last shown Person list;
+  if () then ([Valid Index])
+  :Retrieve the task list reference of the Person at INDEX;
+  :Set the task list as the ObservableList referenced by
+  the UI;
+  :UI is signaled that the contents of the ObservableList\nit is referencing has changed;
+  :UI updates the GUI to display the new task list;
+  else ([else])
+  :Show invalid INDEX error message;
+  endif
+else ([else])
+  :Show invalid format error message;
+endif
+
+stop
+
+@enduml

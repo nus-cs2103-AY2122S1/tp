@@ -3,10 +3,17 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new DeleteTaskCommand object
+ */
 public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTaskCommand
@@ -18,7 +25,10 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX);
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            Index taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
+
+            Set<Index> taskIndexSet = ParserUtil.parseTaskIndexes(argMultimap.getAllValues(PREFIX_TASK_INDEX));
+            List<Index> taskIndex = new ArrayList<>(taskIndexSet);
+
             return new DeleteTaskCommand(index, taskIndex);
         } catch (ParseException pe) {
             throw new ParseException(

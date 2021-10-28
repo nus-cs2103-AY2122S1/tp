@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -13,10 +14,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,8 +32,15 @@ public class ModelManager implements Model {
     private final FilteredList<Person> onlyFilteredPersons;
     private final SortedList<Person> filteredPersons;
 
-    private final ObservableList<Task> displayTaskList;
-    private final ObservableList<Task> unmodifiableDisplayTaskList;
+    /** ObservableList used in viewing all task list. */
+    private ObservableList<Person> observablePersons;
+
+    private final UserCommandCache userCommandCache;
+
+    private final TaskListManager taskListManager;
+
+    private Predicate<Task> viewAllTasksFindPred = s -> true;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -42,12 +52,13 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-
-        displayTaskList = FXCollections.observableArrayList();
-        unmodifiableDisplayTaskList = FXCollections.unmodifiableObservableList(displayTaskList);
+        this.taskListManager = new TaskListManager();
+        taskListManager.initialiseArchive(this.getAddressBook().getPersonList());
+        this.userCommandCache = UserCommandCache.getInstance();
 
         onlyFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new SortedList<>(onlyFilteredPersons);
+        observablePersons = FXCollections.observableArrayList(addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -110,12 +121,18 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        taskListManager.deleteEntry(target.getName());
+        taskListManager.updateStatistics();
+        updateObservablePersonList();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        taskListManager.createNewEntry(person);
+        taskListManager.updateStatistics();
+        updateObservablePersonList();
     }
 
     @Override
@@ -123,6 +140,9 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        taskListManager.updateEntry(target, editedPerson);
+        taskListManager.updateStatistics();
+        updateObservablePersonList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -139,7 +159,32 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+
         onlyFilteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getObservablePersonList() {
+        return observablePersons;
+    }
+
+    @Override
+    public void setViewAllTasksFindPred(Predicate<Task> predicate) {
+        this.viewAllTasksFindPred = predicate;
+        updateObservablePersonList();
+    }
+
+    @Override
+    public void updateObservablePersonList() {
+        List<Person> personList = new ArrayList<>();
+        for (Person person : addressBook.getPersonList()) {
+            personList.add(person.makeClone());
+        }
+        for (Person person : personList) {
+            person.filterTasks(viewAllTasksFindPred);
+        }
+        observablePersons = FXCollections.observableArrayList(personList);
+        observablePersons = observablePersons.filtered(person -> !person.getTasks().isEmpty());
     }
 
     @Override
@@ -168,19 +213,57 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && displayTaskList.equals(other.displayTaskList);
+                && taskListManager.equals(other.taskListManager);
     }
 
     //=========== display task List Accessors =============================================================
 
     @Override
-    public void updateDisplayTaskList(List<Task> taskList) {
-        requireNonNull(taskList);
-        displayTaskList.setAll(taskList);
+    public TaskListManager getTaskListManager() {
+        return taskListManager;
     }
 
     @Override
     public ObservableList<Task> getDisplayTaskList() {
-        return unmodifiableDisplayTaskList;
+        return taskListManager.getFilteredTasks();
+    }
+
+    @Override
+    public void displayPersonTaskList(Person person) {
+        taskListManager.setToDisplayTaskList(person.getName(), false);
+    }
+
+    @Override
+    public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
+        taskListManager.setFilteredTasksPredicate(predicate);
+        taskListManager.setToDisplayTaskList(person.getName(), true);
+    }
+
+    @Override
+    public void displayFilteredTaskList(Predicate<Task> predicate) {
+        taskListManager.setFilteredTasksPredicate(predicate);
+    }
+
+    //=========== cache operation =============================================================
+    /** Get the next input command in the cache */
+    public String getAfter() {
+        return userCommandCache.getAfter();
+    }
+
+    /** Get the previous input command in the cache */
+    public String getBefore() {
+        return userCommandCache.getBefore();
+    }
+
+    /** Add a command to the cache */
+    public void addCommand(String command) {
+        userCommandCache.addCommand(command);
+    }
+
+    //=========== statistics Assessors =====================================================================
+
+    @Override
+    public ObservableList<PieChart.Data> getStatistics() {
+        return taskListManager.getStatList();
     }
 }
