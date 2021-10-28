@@ -217,6 +217,7 @@ Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 
 Examples:
 * `visit 1 at/2021-12-31 17:00` schedules a meeting to the first elderly in the address book on 31th December 2021, 5PM.
+* `visit 1 at/2021-12-31 17:00 f/weekly o/3` schedules a recurring weekly meeting for 3 times to the first elderly in the address book on 31th December 2021, 5PM.
 
 
 ### Mark one visit as done : `done`
