@@ -128,9 +128,7 @@ public class FilterCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FilterCommand // instanceof handles nulls
-                && tagPredicate.equals(((FilterCommand) other).tagPredicate)
-                && facultyPredicate.equals(((FilterCommand) other).facultyPredicate)
-                && majorPredicate.equals(((FilterCommand) other).majorPredicate));
+                && argMultimap.equals(((FilterCommand) other).argMultimap));
     }
 
 }
