@@ -1,6 +1,6 @@
 package seedu.siasa.testutil;
 
-import static seedu.siasa.logic.commands.CommandTestUtil.INVALID_POLICY_EXPIRY_DATE_CONST;
+import static seedu.siasa.logic.commands.CommandTestUtil.PAST_POLICY_EXPIRY_DATE_FIXED;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
@@ -17,7 +17,7 @@ public class TypicalPolicies {
     public static final Policy CRITICAL_ILLNESS = new PolicyBuilder(ALICE)
             .withTitle(VALID_POLICY_TITLE_CRITICAL)
             .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
-            .withExpiryDate(INVALID_POLICY_EXPIRY_DATE_CONST)
+            .withExpiryDate(PAST_POLICY_EXPIRY_DATE_FIXED)
             .withPrice(VALID_POLICY_PRICE_CRITICAL)
             .build();
 

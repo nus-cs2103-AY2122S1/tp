@@ -21,7 +21,7 @@ public class ExpiryDate {
     }
 
     /**
-     * Returns true if expiry date is in the past.
+     * Returns true if expiry date is in the future.
      */
     public boolean isFutureExpiryDate() {
         return value.isAfter(LocalDate.now());

@@ -69,7 +69,7 @@ public class Policy {
 
     /**
      * Returns true if both policies have the same owner (by identity)
-     * and the policy titles differ by one edit distance.
+     * and the policy titles differ by less than 2 edit distance.
      */
     public boolean isSimilarPolicy(Policy otherPolicy) {
         return otherPolicy != null
