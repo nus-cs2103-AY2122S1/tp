@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 import static seedu.edrecord.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -47,7 +48,7 @@ public class AddAssignmentCommandTest {
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(validAssignment);
 
         assertThrows(CommandException.class,
-                AddAssignmentCommand.MESSAGE_NO_MODULE_SELECTED, () -> addAssignmentCommand.execute(modelStub));
+                MESSAGE_NO_MODULE_SELECTED, () -> addAssignmentCommand.execute(modelStub));
     }
 
     @Test
