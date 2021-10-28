@@ -12,9 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_CLASS_ID = new Prefix("-cid ");
     public static final Prefix PREFIX_EMAIL = new Prefix("-email ");
 
-    public static final Prefix PREFIX_INDEX = new Prefix("-i ");
-    public static final Prefix PREFIX_LAB_NUM = new Prefix("-t ");
-    public static final Prefix PREFIX_LAB_NEW_LAB_NUM = new Prefix("-nt ");
+    public static final Prefix PREFIX_LAB_NUM = new Prefix("-ln ");
+    public static final Prefix PREFIX_LAB_NEW_LAB_NUM = new Prefix("-nln ");
     public static final Prefix PREFIX_LAB_RESULT = new Prefix("-s ");
     public static final Prefix PREFIX_LAB_TOTAL = new Prefix("-ts ");
 }
