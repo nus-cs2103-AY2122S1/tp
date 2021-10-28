@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -15,11 +16,12 @@ public class MakeUpLesson extends Lesson {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      * @param rates Cost per hour for the lesson.
+     * @param fees Outstanding fees for the lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
-            Set<Date> cancelledDates) {
-        super(date, timeRange, subject, homework, rates, cancelledDates);
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework,
+                LessonRates rates, OutstandingFees fees, Set<Date> cancelledDates) {
+        super(date, timeRange, subject, homework, rates, fees, cancelledDates);
     }
 
     /**
@@ -30,8 +32,8 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public Lesson updateCancelledDates(Set<Date> updatedCancelledDates) {
-        return new MakeUpLesson(getStartDate(), getTimeRange(), getSubject(), getHomework(), getLessonRates(),
-                updatedCancelledDates);
+        return new MakeUpLesson(getStartDate(), getTimeRange(), getSubject(), getHomework(),
+                getLessonRates(), getOutstandingFees(), updatedCancelledDates);
     }
 
     /**
@@ -53,6 +55,15 @@ public class MakeUpLesson extends Lesson {
     @Override
     public Date getDisplayDate() {
         return getStartDate();
+    }
+
+    /**
+     * To check if fees for this lesson should be updated.
+     * If lesson has passed.
+     */
+    @Override
+    public boolean hasEnded() {
+        return getEndDateTime().isBefore(LocalDateTime.now());
     }
 
     /**

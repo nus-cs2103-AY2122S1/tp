@@ -30,8 +30,9 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Set<Homework> homework = new HashSet<>();
     private final Set<Date> cancelledDates = new HashSet<>();
 
-    // Lesson Rates
+    // Fees calculation related fields
     private final LessonRates lessonRates;
+    private final OutstandingFees outstandingFees;
 
     /**
      * Every field must be present and not null.
@@ -41,16 +42,19 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      * @param rates Cost per hour for the lesson.
+     * @param fees Outstanding fees that student has not paid for this lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
-    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
-                  Set<Date> cancelledDates) {
-        requireAllNonNull(date, timeRange, subject, homework, rates, cancelledDates);
+    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework,
+                  LessonRates rates, OutstandingFees fees, Set<Date> cancelledDates) {
+        requireAllNonNull(date, timeRange, subject, homework, rates, fees, cancelledDates);
+
         this.startDate = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
         this.lessonRates = rates;
+        this.outstandingFees = fees;
         if (!isRecurring()) {
             // non-recurring lesson should have maximum one cancelled date
             assert cancelledDates.size() <= 1;
@@ -68,6 +72,10 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public DayOfWeek getDayOfWeek() {
         return startDate.getDayOfWeek();
+    }
+
+    public boolean hasStarted() {
+        return startDate.isOver();
     }
 
     public Subject getSubject() {
@@ -92,6 +100,10 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public LessonRates getLessonRates() {
         return lessonRates;
+    }
+
+    public OutstandingFees getOutstandingFees() {
+        return outstandingFees;
     }
 
     /**
@@ -156,6 +168,13 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     public abstract boolean isClashing(Lesson otherLesson);
 
+
+    /**
+     * Returns false by default for recurring lessons until EndDateTime is added.
+     * Meant for MakeupLessons to override.
+     */
+    public abstract boolean hasEnded();
+
     /**
      * Checks if this lesson occurs on a given date.
      *
@@ -195,6 +214,7 @@ public abstract class Lesson implements Comparable<Lesson> {
                 && otherLesson.getSubject().equals(getSubject())
                 && otherLesson.getHomework().equals(getHomework())
                 && otherLesson.getLessonRates().equals(getLessonRates())
+                && otherLesson.getOutstandingFees().equals(getOutstandingFees())
                 && otherLesson.getCancelledDates().equals(getCancelledDates())
                 && otherLesson.isRecurring() == isRecurring();
     }
@@ -202,7 +222,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startDate, timeRange, subject, homework, lessonRates, cancelledDates);
+        return Objects.hash(startDate, timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
     }
 
     @Override
@@ -215,6 +235,8 @@ public abstract class Lesson implements Comparable<Lesson> {
             .append(getTimeRange())
             .append("; Subject: ")
             .append(getSubject())
+            .append("; Outstanding Fees: ")
+            .append(getOutstandingFees())
             .append("; Lesson Rates: ")
             .append(getLessonRates());
 

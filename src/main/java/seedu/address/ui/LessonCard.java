@@ -32,11 +32,13 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label rates;
     @FXML
-    private VBox homeworkList;
+    private Label outstandingFees;
+    @FXML
+    private Label cancelPlaceholder;
     @FXML
     private Label cancelledDates;
     @FXML
-    private Label cancelPlaceholder;
+    private VBox homeworkList;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,13 +50,20 @@ public class LessonCard extends UiPart<Region> {
         title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
         date.setText(lesson.getDisplayDate().value);
         time.setText(lesson.getTimeRange().toString());
-        rates.setText("$" + lesson.getLessonRates().toString());
+        rates.setText(lesson.getLessonRates().toString());
+        outstandingFees.setText(lesson.getOutstandingFees().toString());
+
         homeworkList.setManaged(!lesson.getHomework().isEmpty());
+
         lesson.getHomework().stream()
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()
                         .add(createHomeworkLabel(homework.toString())));
 
+        setCancelledDated(lesson);
+    }
+
+    private void setCancelledDated(Lesson lesson) {
         Set<Date> lessonCancelledDates = lesson.getCancelledDates();
         if (lessonCancelledDates.isEmpty()) {
             cancelPlaceholder.setManaged(false);

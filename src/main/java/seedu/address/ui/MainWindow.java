@@ -49,8 +49,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
-    private TagListPanel tagListPanel;
     private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -73,9 +71,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem tagsMenuItem;
-
-    @FXML
-    private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane centerPanelPlaceholder;
@@ -110,11 +105,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F1"));
-        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F2"));
-        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F3"));
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F4"));
-        setAccelerator(remindMenuItem, KeyCombination.valueOf("F5"));
+        setAccelerator(studentsMenuItem, KeyCombination.valueOf("F8"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F9"));
+        setAccelerator(tagsMenuItem, KeyCombination.valueOf("F10"));
+        setAccelerator(remindMenuItem, KeyCombination.valueOf("F11"));
+        setAccelerator(helpMenuItem, KeyCombination.valueOf("F12"));
     }
 
     /**
@@ -169,9 +164,32 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        initListeners();
+
+        initKeyPressEventHandler(commandBox);
+    }
+
+    private void initKeyPressEventHandler(CommandBox commandBox) {
+        // Add event handlers
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (commandBox.getCommandTextField().isFocused()) {
+                return; // Don't filter if already in focus
+            }
+            if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
+                commandBox.getCommandTextField().requestFocus();
+                commandBox.getCommandTextField().selectEnd();
+            }
+        });
+    }
+
+    private void initListeners() {
         // Add listeners
         centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
-                .addListener((obs, oldVal, newVal) -> handlePersonGridPanel(newVal));
+                .addListener((obs, oldVal, newVal) -> {
+                    if (newVal != null) {
+                        handlePersonGridPanel(newVal);
+                    }
+                });
     }
 
     /**

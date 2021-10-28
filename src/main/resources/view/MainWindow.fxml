@@ -33,11 +33,11 @@
             <MenuItem fx:id="calendarMenuItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
             <MenuItem fx:id="tagsMenuItem" mnemonicParsing="false" onAction="#handleShowTagList" text="Tags" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
           <Menu mnemonicParsing="false" text="Reminder">
             <MenuItem fx:id="remindMenuItem" mnemonicParsing="false" onAction="#handleReminder" text="Upcoming Lessons" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
 

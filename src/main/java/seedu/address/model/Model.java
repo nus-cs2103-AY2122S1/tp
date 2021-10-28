@@ -112,6 +112,14 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /** Returns an immutable Last Updated Date object. */
+    LastUpdatedDate getLastUpdatedDate();
+
+    /**
+     * Sets the last updated date to today.
+     */
+    void setLastUpdatedDate();
+
     /** Returns an unmodifiable view of the observable tag list */
     ObservableList<Tag> getObservableTagList();
 

@@ -1,13 +1,20 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.person.AcadLevel;
+import seedu.address.model.person.AcadStream;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -84,44 +91,56 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         address.setText(person.getAddress().value);
 
-        phonePlaceholder.setManaged(!person.getPhone().isEmpty());
-        phone.setManaged(!person.getPhone().isEmpty());
-        phone.setText(person.getPhone().value);
+        setPhoneField(phonePlaceholder, person.getPhone(), phone);
+        setEmailField(emailPlaceholder, person.getEmail(), email);
+        setPhoneField(ppPlaceholder, person.getParentPhone(), parentPhone);
+        setEmailField(pePlaceholder, person.getParentEmail(), parentEmail);
+        setSchoolField(person.getSchool());
+        setAcadStreamField(person.getAcadStream());
+        setAcadLevelField(person.getAcadLevel());
+        setRemarkField(person.getRemark());
+        setTagsField(person.getTags());
+    }
 
-        emailPlaceholder.setManaged(!person.getEmail().isEmpty());
-        email.setManaged(!person.getEmail().isEmpty());
-        email.setText(person.getEmail().value);
+    private void setPhoneField(Label phonePlaceholder, Phone phoneData, Label phoneLabel) {
+        phonePlaceholder.setManaged(!phoneData.isEmpty());
+        phoneLabel.setManaged(!phoneData.isEmpty());
+        phoneLabel.setText(phoneData.value);
+    }
 
-        ppPlaceholder.setManaged(!person.getParentPhone().isEmpty());
-        parentPhone.setManaged(!person.getParentPhone().isEmpty());
-        parentPhone.setText(person.getParentPhone().value);
+    private void setEmailField(Label emailPlaceholder, Email emailData, Label emailLabel) {
+        emailPlaceholder.setManaged(!emailData.isEmpty());
+        emailLabel.setManaged(!emailData.isEmpty());
+        emailLabel.setText(emailData.value);
+    }
 
-        pePlaceholder.setManaged(!person.getParentEmail().isEmpty());
-        parentEmail.setManaged(!person.getParentEmail().isEmpty());
-        parentEmail.setText(person.getParentEmail().value);
+    private void setSchoolField(School schoolData) {
+        schPlaceholder.setManaged(!schoolData.isEmpty());
+        school.setManaged(!schoolData.isEmpty());
+        school.setText(schoolData.value);
+    }
 
-        schPlaceholder.setManaged(!person.getSchool().isEmpty());
-        school.setManaged(!person.getSchool().isEmpty());
-        school.setText(person.getSchool().value);
+    private void setAcadStreamField(AcadStream acadStreamData) {
+        streamPlaceholder.setManaged(!acadStreamData.isEmpty());
+        acadStream.setManaged(!acadStreamData.isEmpty());
+        acadStream.setText(acadStreamData.value);
+    }
 
-        streamPlaceholder.setManaged(!person.getAcadStream().isEmpty());
-        acadStream.setManaged(!person.getAcadStream().isEmpty());
-        acadStream.setText(person.getAcadStream().value);
+    private void setAcadLevelField(AcadLevel acadLevelData) {
+        acadLevel.setManaged(!acadLevelData.isEmpty());
+        lvlPlaceholder.setManaged(!acadLevelData.isEmpty());
+        acadLevel.setText(acadLevelData.value);
+    }
 
-        acadLevel.setManaged(!person.getAcadLevel().isEmpty());
-        lvlPlaceholder.setManaged(!person.getAcadLevel().isEmpty());
-        acadLevel.setText(person.getAcadLevel().value);
+    private void setRemarkField(Remark remarkData) {
+        remarkPlaceholder.setManaged(!remarkData.isEmpty());
+        remark.setManaged(!remarkData.isEmpty());
+        remark.setText(remarkData.value);
+    }
 
-        remarkPlaceholder.setManaged(!person.getRemark().isEmpty());
-        remark.setManaged(!person.getRemark().isEmpty());
-        remark.setText(person.getRemark().value);
-
-        feePlaceholder.setManaged(!person.getFee().isEmpty());
-        outstandingFee.setManaged(!person.getFee().isEmpty());
-        outstandingFee.setText("$" + person.getFee().value);
-
+    private void setTagsField(Set<Tag> tagSet) {
         tags.setManaged(!person.getTags().isEmpty());
-        person.getTags().stream()
+        tagSet.stream()
                 .sorted(Comparator.comparing(Tag::getTagName))
                 .forEach(tag -> tags.getChildren().add(createTagLabel(tag.getTagName())));
     }
