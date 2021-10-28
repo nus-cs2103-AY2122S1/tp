@@ -148,6 +148,8 @@ Example usages:
 
 ![](images/UG-images/addcommand.png)
 
+1. Details of the added anime is shown in the Command Result Panel.
+2. The new added anime is added to the list in the Anime List Panel.
 ___
 
 ### Deleting an anime: `delete`
@@ -167,7 +169,7 @@ Example usages:
 </div>
 
 ![](images/UG-images/delete.png)
-
+1. Details of the deleted anime is shown in the Command Results Panel.
 ___
 
 ### Updating anime episode: `update`
@@ -188,7 +190,8 @@ Example usages:
 </div>
 
 ![](images/UG-images/updatepisode.png)
-
+1. Details of the updated anime is shown in the Command Results Panel.
+2. The episode number of the chosen anime is updated to the specified episode number.
 ___
 
 ### Updating anime watch status: `status`
@@ -211,6 +214,8 @@ Example usages:
 </div>
 
 ![](images/UG-images/updatestatus.png)
+1. Details of the updated anime is shown in the Command Results Panel.
+2. The watch status of the chosen anime is updated to the specified watch status.
 ___
 
 ### Updating anime title: `rename`
@@ -230,6 +235,8 @@ Example usages:
 </div>
 
 ![](images/UG-images/rename.png)
+1. Details of the updated anime is shown in the Command Results Panel.
+2. The name of the chosen anime is updated to the specified name.
 ___
 
 
@@ -255,6 +262,8 @@ Example usages:
 </div>
 
 ![](images/UG-images/genreadd.png)
+1. Details of the updated anime is shown in the Command Results Panel.
+2. The genres tagged to the chosen anime is updated based on the addition or deletion of genre.
 ___
 
 
@@ -271,6 +280,7 @@ Example usages:
 </div>
 
 ![](images/UG-images/genrelist.png)
+1. The list of all available genres is shown in the Command Results Panel.
 ___
 
 
@@ -294,6 +304,8 @@ Example usages:
 </div>
 
 ![](images/UG-images/list.png)
+1. The number of anime(s) listed in the current tab is shown in the Command Results Panel.
+2. The tab bar changes to show the current tab the user is on.
 ___
 
 ### Clearing all animes currently displayed: `clear`
@@ -314,6 +326,8 @@ Example usages:
 </div>
 
 ![](images/UG-images/clear.png)
+1. A success message showing all anime(s) has been cleared is shown on the Command Results Panel.
+2. The Anime List Panel is empty as all anime(s) have been cleared.
 ___
 
 ### Finding an anime: `find`
@@ -333,12 +347,16 @@ Example Usages:
 all anime with comedy genre.
 </div>
 
+**ADD IMAGE HERE**
+
 ___
 
 ### View user statistics: `stats`
 
 Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList
 Format: `stats`
+
+**ADD IMAGE HERE**
 ___
 
 ### Viewing all supported commands: `help`
@@ -353,7 +371,8 @@ Example usages:
 </div>
 
 ![](images/UG-images/help.png)
-
+1. A list of all supported commands is shown in the Command Results Panel.
+2. A link to the User Guide is provided.
 ___
 
 ## Commands Table
