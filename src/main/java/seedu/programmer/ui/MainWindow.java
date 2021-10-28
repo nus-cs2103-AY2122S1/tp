@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.SplitPane;
 import org.json.JSONArray;
 
 import javafx.fxml.FXML;
@@ -87,6 +90,12 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private SplitPane sidePanel;
+
+    @FXML
+    private SplitPane mainPanel;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -104,6 +113,33 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         dashboardWindow = new DashboardWindow(logic);
+
+        fixDividerPositions();
+    }
+
+
+    /**
+     * Fixes the positions of the dividers in split panes.
+     * Code fragment taken from: https://stackoverflow.com/questions/26762928/javafx-disable-divider;
+     */
+    private void fixDividerPositions() {
+        SplitPane.Divider sideDivider = sidePanel.getDividers().get(0);
+        sideDivider.positionProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue )
+            {
+                sideDivider.setPosition(0.25);
+            }
+        });
+
+        SplitPane.Divider mainDivider = mainPanel.getDividers().get(0);
+        mainDivider.positionProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue )
+            {
+                mainDivider.setPosition(0.5);
+            }
+        });
     }
 
     public Stage getPrimaryStage() {

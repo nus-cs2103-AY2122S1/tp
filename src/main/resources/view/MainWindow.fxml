@@ -41,7 +41,7 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+            <SplitPane fx:id="mainPanel" dividerPositions="0.5" VBox.vgrow="ALWAYS">
                <items>
 
               <VBox fx:id="studentList" minWidth="340" prefWidth="340" styleClass="pane-with-border">
@@ -50,15 +50,12 @@
                 </padding>
                 <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
               </VBox>
-                  <VBox fx:id="labResultList" layoutX="10.0" layoutY="10.0" minWidth="340" prefWidth="340" styleClass="pane-with-border">
-                     <padding>
-                        <Insets bottom="10" left="10" right="10" top="10" />
-                     </padding>
-                     <children>
-                        <StackPane fx:id="studentParticularPlaceholder" maxHeight="260.0" prefHeight="260.0" VBox.vgrow="NEVER" />
-                        <StackPane fx:id="labResultListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                     </children>
-                  </VBox>
+                  <SplitPane fx:id="sidePanel" dividerPositions="0.1" minWidth="340.0" orientation="VERTICAL" prefWidth="340.0">
+                     <items>
+                        <StackPane fx:id="studentParticularPlaceholder" maxHeight="260.0" prefHeight="260.0" styleClass="split-pane-divider" />
+                        <StackPane fx:id="labResultListPanelPlaceholder" />
+                     </items>
+                  </SplitPane>
                </items>
             </SplitPane>
 
