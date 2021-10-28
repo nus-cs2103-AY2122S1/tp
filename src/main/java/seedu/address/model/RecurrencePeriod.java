@@ -123,8 +123,12 @@ public class RecurrencePeriod extends Period {
                 || time.isBefore(endTime) && time.isAfter(startTime);
     }
 
-    @Override
-    public String toString() {
+
+    /**
+     * Print result for viewSchedule command.
+     *
+     */
+    public String toPrintString() {
         return getStartTime() + "-" + getEndTime();
     }
 }
