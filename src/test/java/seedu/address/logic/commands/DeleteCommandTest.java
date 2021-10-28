@@ -96,7 +96,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_NameExistNonexistentId_throwsCommandException() {
+    public void execute_nameExistNonexistentId_throwsCommandException() {
         model.addItem(BAGEL);
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
                 .withName(VALID_NAME_BAGEL).withId("182018").build();

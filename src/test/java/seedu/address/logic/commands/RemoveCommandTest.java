@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.BAGEL;
@@ -77,6 +73,34 @@ public class RemoveCommandTest {
         String expectedMessage = String.format(RemoveCommand.MESSAGE_SUCCESS, 1, BAGEL.getName());
 
         CommandTestUtil.assertCommandSuccess(removeCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_idExistNonexistentName_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName("boo").withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).build();
+
+        RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
+        String expectedMessage = RemoveCommand.MESSAGE_NAME_NOT_FOUND;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(removeCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
+    public void execute_nameExistNonexistentId_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId("182018").withCount(VALID_COUNT_BAGEL).build();
+
+        RemoveCommand removeCommand = new RemoveCommand(bagelDescriptor);
+        String expectedMessage = RemoveCommand.MESSAGE_ID_NOT_FOUND;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(removeCommand, model, expectedModel, expectedMessage);
     }
 
     @Test

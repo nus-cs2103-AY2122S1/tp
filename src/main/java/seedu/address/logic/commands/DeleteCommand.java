@@ -54,13 +54,15 @@ public class DeleteCommand extends Command {
         if (matchingItems.size() == 0) {
             throw new CommandException(MESSAGE_ITEM_NOT_FOUND);
         }
-        //check that id provided exists
+        //check that id and name given matches
         if (!toDeleteDescriptor.getName().equals(Optional.empty()) && !toDeleteDescriptor.getId().equals(Optional.empty())) {
             toDeleteDescriptor.setCostPrice(1.0);
             toDeleteDescriptor.setSalesPrice(1.0);
+            //check that id exists
             if (!model.hasId(toDeleteDescriptor.buildItem())) {
                 throw new CommandException(MESSAGE_ID_NOT_FOUND);
             }
+            //check that name exists
             if (!model.hasName(toDeleteDescriptor.buildItem())) {
                 throw new CommandException(MESSAGE_NAME_NOT_FOUND);
             }
