@@ -71,21 +71,21 @@ If you are familiar with Unix commands, this is definitely for you!
 
 ## <a name="general-features"></a>1. General Features
 
-### <a name="exit"></a>1.1 Exit: `exit` or F1 on keyboard
-Exits ProgrammerError and closes the GUI.
-
-### <a name="view-help"></a>1.2 View Help: `help` or F2 on keyboard
+### <a name="view-help"></a>1.1 View Help: `help` or F2 on keyboard
 Shows a message explaining how to access the help page.
 
 ![help message](images/commands/HelpCommand/help.png)
 
-### <a name="view-dashboard"></a>1.3 Dashboard: `dashboard`
+### <a name="view-dashboard"></a>1.2 Dashboard: `dashboard`
 Displays a dashboard window showing the following data:
 
 1. Number of students
 2. Number of classes
 3. Number of labs
 4. Number of labs unmarked for each class
+
+### <a name="exit"></a>1.3 Exit: `exit` or F1 on keyboard
+Exits ProgrammerError and closes the GUI.
 
 
 ## <a name="data-features"></a>2. Data Features
