@@ -30,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_BIRTHDAY_FORMAT = "20-01-1997";
     private static final String INVALID_BIRTHDAY_DATE = "12345678";
+    private static final String INVALID_BIRTHDAY_IN_FUTURE_DATE = "12122111";
     private static final String INVALID_SUBSTRING = "..";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -211,6 +212,11 @@ public class ParserUtilTest {
     @Test
     public void parseBirthday_invalidFormat_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY_FORMAT));
+    }
+
+    @Test
+    public void parseBirthday_futureDate_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY_IN_FUTURE_DATE));
     }
 
     @Test
