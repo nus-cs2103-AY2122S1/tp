@@ -45,6 +45,7 @@ public class VaccStatus {
         return test.matches(VALIDATION_REGEX);
     }
 
+
     @Override
     public String toString() {
         return vaccStatus;

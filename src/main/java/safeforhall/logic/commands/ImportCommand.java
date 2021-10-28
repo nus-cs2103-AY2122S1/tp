@@ -33,6 +33,7 @@ import safeforhall.model.person.VaccStatus;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
+    public static final String PARAMETERS = "CSV_NAME";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports resident information from the specified csv "
             + "file located within the /data folder\n"
             + "Parameters: "
@@ -43,13 +44,19 @@ public class ImportCommand extends Command {
             + "     1. 8 comma separated values for each row in order; \n"
             + "             name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate\n"
             + "     2. The first row will be discarded as column headings\n"
-            + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n";
+            + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n"
+            + "Parameters: "
+            + PARAMETERS + "\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "safeforhall";
+
 
     public static final String MESSAGE_SUCCESS = "Imported resident information from csv";
     public static final String MESSAGE_FILE_NOT_FOUND = "Specified csv file was not found within the /data folder.";
     public static final String MESSAGE_ERROR_READING = "Error reading row %1d: ";
     public static final String MESSAGE_INCORRECT_CSV_FORMAT = "File is in an incorrect csv format";
     public static final String MESSAGE_INCORRECT_FIELDS = "8 fields of comma separated values not found";
+    public static final String MESSAGE_CONSTRAINTS = "Filename should be a single word";
     public static final String DEFAULT_FILENAME = "safeforhall";
 
     private final Path filepath;

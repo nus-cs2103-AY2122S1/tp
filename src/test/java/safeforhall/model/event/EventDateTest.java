@@ -25,4 +25,13 @@ public class EventDateTest {
         // valid dates
         assertTrue(EventDate.isValidEventDate("21-10-2021"));
     }
+
+    @Test
+    public void isPast() {
+        EventDate past = new EventDate("01-01-2021");
+        assertTrue(past.isPast());
+
+        EventDate past2 = new EventDate("10-12-2000");
+        assertTrue(past2.isPast());
+    }
 }

@@ -17,7 +17,9 @@ import org.junit.jupiter.api.Test;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.DeadlineCommand;
+import safeforhall.logic.commands.ExcludeCommand;
 import safeforhall.logic.commands.ExitCommand;
+import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
@@ -144,6 +146,21 @@ public class AddressBookParserTest {
                 IncludeCommand.COMMAND_WORD + " "
                         + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
         assertEquals(command, new IncludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
+    }
+
+    @Test
+    public void parseCommand_export() throws Exception {
+        ExportCommand command = (ExportCommand) parser.parseCommand(ExportCommand.COMMAND_WORD
+                + " safeforhall", true);
+        assertEquals(new ExportCommand("safeforhall"), command);
+    }
+
+    @Test
+    public void parseCommand_exclude() throws Exception {
+        ExcludeCommand command = (ExcludeCommand) parser.parseCommand(
+                ExcludeCommand.COMMAND_WORD + " "
+                        + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
+        assertEquals(command, new ExcludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
     }
 
     @Test
