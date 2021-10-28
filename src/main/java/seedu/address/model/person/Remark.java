@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
-    public static final String MESSAGE_CONSTRAINTS = "Remarks should only contains up to 99 "
+    public static final String MESSAGE_CONSTRAINTS = "Remarks should only contain up to 99 "
             + "alphanumeric alphabets, comma, full stop and whitespace in total";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9,. ]*";
     public final String value;
