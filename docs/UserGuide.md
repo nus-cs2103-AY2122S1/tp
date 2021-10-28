@@ -158,7 +158,7 @@ Toggle views between between student details and module's assignments.
 Format: `view (contacts/asg)`
 
 * The default view when the application launches is the student details.
-* The only valid parameters is `contacts` or `asg`
+* The only valid parameters are `contacts` or `asg`
 
 ### Create module: `mkmod`
 
