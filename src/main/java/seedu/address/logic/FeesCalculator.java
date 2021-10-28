@@ -3,9 +3,11 @@ package seedu.address.logic;
 import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -165,44 +167,19 @@ public class FeesCalculator implements Calculator {
             return 0;
         }
 
-        boolean isUpdatedToday = lastUpdated.getLastUpdatedLocalDate().isEqual(currentDateTime.toLocalDate());
-        boolean isUpdatedBeforeLessonOver = lastUpdated.getLastUpdatedLocalTime().isBefore(endTime);
-        boolean isUpdatedAfterLessonOver = lastUpdated.getLastUpdatedLocalTime().isAfter(endTime);
+        LocalDate start = lastUpdated.getLastUpdatedLocalDate().with(TemporalAdjusters.previous(updateDay));
+        LocalDate end = currentDateTime.toLocalDate().with(TemporalAdjusters.next(updateDay));
 
-        // if app launched today and lastUpdated is before this lesson ended
-        if (isUpdatedToday && isUpdatedBeforeLessonOver) {
-            return 1;
-        } else if (isUpdatedToday && isUpdatedAfterLessonOver) {
-            // if app launched today and and lastUpdated is after lesson end
-            return 0;
-        }
+        int lessonCount = (int) ChronoUnit.WEEKS.between(start, end) - 1;
 
-        // Number of Days between last updated and current date excluding these both days
-        long numOfDays = ChronoUnit.DAYS
-                .between(lastUpdated.getLastUpdatedLocalDate()
-                        .plus(1, ChronoUnit.DAYS), currentDateTime.toLocalDate());
-        int lessonCount = (int) Math.floor((int) numOfDays / numberOfDaysInAWeek);
-        // Represents the number of days from nearest update day to current day
-        int remainder = (int) (numOfDays % numberOfDaysInAWeek);
-
-        // Number of days since last updated day
-        int sinceLastUpdateDay = (int) (currentUpdatedDay - updateDay.getValue());
-
-        if (sinceLastUpdateDay < 0) {
-            sinceLastUpdateDay += numberOfDaysInAWeek;
-        }
-
-        if (remainder >= sinceLastUpdateDay) { // if number of days from nearest update day is
-            lessonCount += 1;
-        }
 
         // if the lesson on the same day as the last updated happens before last update. i.e. not recorded
-        if (lastUpdatedDay == updateDay.getValue() && lastUpdated.getLastUpdatedLocalTime().isBefore(endTime)) {
-            lessonCount += 1;
+        if (lastUpdatedDay == updateDay.getValue() && lastUpdated.getLastUpdatedLocalTime().isAfter(endTime)) {
+            lessonCount -= 1;
         }
 
-        if (currentUpdatedDay == updateDay.getValue() && currentDateTime.toLocalTime().isAfter(endTime)) {
-            lessonCount += 1;
+        if (currentUpdatedDay == updateDay.getValue() && currentDateTime.toLocalTime().isBefore(endTime)) {
+            lessonCount -= 1;
         }
 
         for (Date cancelledDate : cancelledDates) {

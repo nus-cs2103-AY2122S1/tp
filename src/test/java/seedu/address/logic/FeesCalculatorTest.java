@@ -33,14 +33,15 @@ class FeesCalculatorTest {
         Lesson sameWeekNotPassedLesson = new LessonBuilder().withDate("9 SEP 2021").buildRecurring();
         assertEquals(sameWeekNotPassedLesson, feesCalculator.updateLessonOutstandingFeesField(sameWeekNotPassedLesson));
 
-        // Last updated today
+        // Last updated today before lesson
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-27T12:00"),
                 LocalDateTime.parse("2021-10-27T15:02"));
-        // before lesson
         Lesson sameDayToBeUpdated = new LessonBuilder().withDate("27 OCT 2021").buildRecurring();
         expected = new LessonBuilder().withDate("27 OCT 2021").withOutstandingFees("150").buildRecurring();
-        assertEquals(sameDayToBeUpdated, feesCalculator.updateLessonOutstandingFeesField(sameDayToBeUpdated));
-        // after lesson
+        assertEquals(expected, feesCalculator.updateLessonOutstandingFeesField(sameDayToBeUpdated));
+        // Last updated today after lesson
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-27T15:01"),
+                LocalDateTime.parse("2021-10-27T20:00"));
         Lesson sameDayNotToBeUpdated = new LessonBuilder().withDate("27 OCT 2021").buildRecurring();
         assertEquals(sameDayNotToBeUpdated, feesCalculator.updateLessonOutstandingFeesField(sameDayNotToBeUpdated));
 
