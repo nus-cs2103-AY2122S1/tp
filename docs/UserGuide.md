@@ -239,6 +239,23 @@ Examples:
 * `include 3 r/John Doe` adds John Doe to the third event in the address book
 * `include 4 r/John Doe, Jane Doe` adds John Doe and Jane Doe to the fourth event in the address book
 
+#### Remove residents from an Event: `exclude`
+
+Remove multiple residents from an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
+
+Format: `exclude INDEX r/INFORMATION [, MORE INFORMATION]`
+
+* Resident information can be given in the form of name or room, but all has to be all rooms or all names
+* When adding multiple residents, each piece of information is separated by a comma
+* The information inputted is case-insensitive
+* If one or more of the given information is invalid, an error message is outputted and none of the residents are added to the event
+
+Examples:
+* `exclude 1 r/A101` removes the resident who stays in room A101 from the first event in the address book
+* `exclude 2 r/A101, A102, A103` removes the residents who stay in rooms A101, A102 and A103 from the second event in the address book
+* `exclude 3 r/John Doe` removes John Doe from the third event in the address book
+* `exclude 4 r/John Doe, Jane Doe` removes John Doe and Jane Doe from the fourth event in the address book
+
 ### Commons
 
 These commands will function the same in either tab.
@@ -254,6 +271,10 @@ Format: `help`
 #### History
 
 The `up` and `down` arrow keys when used with the input box in focus, allows traversal of past input commands to increase of use and efficiency.
+
+#### Command Suggestion
+
+A suggested string of parameters is displayed above the input box when a valid command is entered, parameters that have their prefixes entered correctly are removed from this suggestion.
 
 #### Clearing all entries : `clear`
 
@@ -280,5 +301,6 @@ Action | Format, Examples
 **Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
 **Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
 **Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
+**Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `exclude 1 r/A102, E416`
 **Help** | `help`
 **Exit** | `exit`
