@@ -119,4 +119,8 @@ public class ViewTaskListCommand extends Command {
     public String getCommand() {
         return COMMAND_WORD;
     }
+
+    public String getDescription() {
+        return "Displays the task list of a person specified by index number used in the displayed person list";
+    }
 }

@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AccessCacheCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -40,6 +39,7 @@ import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ReminderCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewTaskListCommand;
@@ -230,7 +230,8 @@ public class HelpWindow extends AnchorPane {
                 new DoneCommand(Index.fromZeroBased(0), new ArrayList<>()),
                 new EditCommand(Index.fromZeroBased(0), descriptor),
                 new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), taskDescriptor), new ExitCommand(),
-                new FindCommand(null), new ListCommand(), new SortCommand(false),
+                new FindCommand(null), new ListCommand(), new ReminderCommand(),
+                new SortCommand(false),
                 new UndoCommand(Index.fromZeroBased(0), new ArrayList<>()), new ViewTaskListCommand()
         );
 
@@ -262,6 +263,7 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
         commandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
         commandTable.put(ListCommand.COMMAND_WORD, this::handleList);
+        commandTable.put(ReminderCommand.COMMAND_WORD, this::handleReminder);
         commandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
         commandTable.put(UndoCommand.COMMAND_WORD, this::handleUndoTask);
         commandTable.put(ViewTaskListCommand.COMMAND_WORD, this::handleViewTask);
@@ -359,8 +361,8 @@ public class HelpWindow extends AnchorPane {
 
     private void handleFind() {
         additionalInfo.setText("Format: "
-                + "find [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-l TAG]… [-d DESCRIPTION] [-tn TASK_NAME] "
-                + "KEYWORD [MORE_KEYWORDS]"
+                + "find [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-l TAG]… [-d DESCRIPTION] "
+                + "[-tn TASK_NAME] KEYWORD [MORE_KEYWORDS]"
                 + "\nPersons matching all the keywords will be returned"
                 + "\nAt least one of the optional fields must be provided"
         );
@@ -368,6 +370,14 @@ public class HelpWindow extends AnchorPane {
 
     private void handleList() {
         additionalInfo.setText("Format: list" + "\nShows a list of all persons in ContactSh");
+    }
+
+    private void handleReminder() {
+        additionalInfo.setText("Format: "
+                + "reminder [-s DAYS]"
+                + "\nShows the number of days prior to a task's date for the task to be reminded as due soon"
+                + "\nIf the optional field is provided, it sets the number of days to the provided number"
+        );
     }
 
     private void handleSort() {

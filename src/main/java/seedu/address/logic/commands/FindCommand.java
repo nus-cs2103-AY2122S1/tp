@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -35,8 +34,8 @@ public class FindCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]"
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
             + "Example: " + COMMAND_WORD + " -n alex yeoh";
 
     private final AttributeContainsKeywordsPredicate predicate;
