@@ -488,6 +488,17 @@ Examples:
 ![editAppointment](images/editAppointment.png)
 
 ### Deleting an appointment: `appt -d` <a name="delete-appointment"/>
+Deletes an appointment from the list.
+
+Format: `appt -d INDEX`
+
+* Deletes the appointment at the specified `INDEX`
+* The index refers to the index number shown in the displayed appointment list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `appt -l` followed by `delete 2` deletes the 2nd appointment in the appointment list.
+* `appt -f p/Betsy` followed by `delete 1` deletes the 1st appointment in the results of the filter command.
 
 ### Filtering all appointments: `appt -f` <a name="find-appointments"/>
 Searches and lists all appointments in the appointment records that match the given filter conditions.
@@ -524,7 +535,7 @@ Examples:
 
 Show all of today's appointments.
 
-Format:`appt -l`
+Format: `appt -l`
 
 ---
 
@@ -558,7 +569,7 @@ Action | Format, Examples
 **Add patient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add Tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
 **Clear** | `clear`
-**Delete appointment** | 
+**Delete appointment** | `appt -d INDEX`<br> e.g., `appt -d 3`
 **Delete patient/doctor** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `tag -d id/INDEX t/TAG`<br> e.g, `tag -d id/1 t/Unvaccinated`
 **Edit appointment** | `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [dur/MINUTES] [r/REMARK]`<br> e.g., `appt -e 1 p/2 r/Blood test`
