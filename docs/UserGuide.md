@@ -48,7 +48,7 @@ Dangerous or potentially negative actions are displayed here
     - Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
     - Example: `addC customer n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
 ## Command summary
 
@@ -105,18 +105,25 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `n/`  | Name                | Names should only contain alphanumeric characters and spaces, and it should not be blank
 |  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
 |  `a/`  | Address             | Addresses can take any values, and it should not be blank
-|  `e/`  | Email               | 
+|  `e/`  | Email               |
+|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. One entity can have multiple tags.<br>When editing tags, the existing values of these fields will be replaced, i.e editing of these fields are not cumulative.<br> If you want to remove all tags from an entity, you can use edit command with `r/` without specifying any tag after it.
 | `lp/`  | Loyalty Point       |
-| `alg/` | Allergy             |
-| `sr/`  | Special Request     |
-|  `t/`  | Tag                 | Tags names should be alphanumeric
+| `alg/` | Allergy (Optional)  | Similar to `t/`
+| `sr/`  | Special Request (Optional) | Similar to `t/`
 |  `l/`  | Leaves              |
 | `jt/`  | Job Title           |
 | `sal/` | Salary              |
 | `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
 | `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-addS) for more details
 | `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
-|  `r/`  | Remark              | Contains alphanumeric characters                  |
+|  `r/`  | Remark (Optional)   | Contains alphanumeric characters.<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it.
+
+This is the list of some repeatedly used preambles used in RHRH, as well as there corresponding constraints:
+
+| Preamble              | Parameter constraints
+| :-------------------: | ---------------------------------------------|
+| `INDEX`               | Must be a positive integer 1, 2, 3, …
+| `KEYWORD`             | 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -216,6 +223,30 @@ The following table shows the acceptable formats and relevant examples for `Deli
 
 </div>
 
+### Adding a reservation: `addr`
+
+Adds a new reservation to RHRH
+
+Format: `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]…`
+
+* Date-time format is `yyyy-MM-dd HH00`, e.g. `2021-11-11 2000`
+
+Examples:
+* `addr 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with
+* `addr 5 p/12345668 at/2021-02-14 1200`
+
+<div markdown="block" class="alert alert-warning">
+
+:information_source: **Notes:**<br>
+
+* Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant-settables)
+
+* Phone number has to be a valid phone number from a customer in the database
+
+* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
+
+</div>
+
 ### Editing a customer : `editC`
 
 Edits an existing customer in RHRH.
@@ -233,6 +264,7 @@ Examples:
 *  `editC 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
 
 <div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * For Allergies, Special Requests and Tags
@@ -283,6 +315,14 @@ Examples:
 
 </div>
 
+### Editing a reservation : `editR`
+
+Edits an existing reservation in RHRH
+
+Format: `editR INDEX [r/REMARK] [t/TAG]…`
+
+* Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list. The index **must be a positive integer** 1, 2, 3, … 
+
 ### Deleting a customer : `deleteC`
 
 Deletes the specified customer from RHRH.
@@ -325,6 +365,44 @@ Format: `deleteS INDEX`
 Examples:
 * `deleteS 2` deletes the 2nd supplier in the address book.
 
+### Deleting a reservation : `deleteR`
+
+Deletes the specified reservation from RHRH
+
+Format: `deleteR INDEX`
+
+* Deletes the reservation at the specified `INDEX`
+* The index refers to the index number shown in the display reservation list.
+* The index **must be a positive integer** 1, 2, 3, …
+
+Example: 
+* `deleteR 1` deletes the 1st reservation in the display reservation list.
+
+### Searching for reservation's made : `check`
+
+Displays the reservations made at the specified date and/or time
+
+Format:
+* `check DATE TIME`: Returns all reservations on `DATE TIME`
+* `check DATE`: Returns all reservations on `DATE`, for **all timings**
+* `check TIME`: Returns all reservations on **today's date**, at `TIME` 
+  * `DATE` is formatted as `yyyy-MM-dd`
+  * `TIME` is formatted as `HH00`
+
+Examples:
+* `check 2021-09-19 1800`
+* `check 2021-09-19`
+* `check 1800`
+
+<div markdown="block" class="alert alert-warning">
+
+:information_source: **Notes:**<br>
+
+* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
+
+</div>
+<<<<<<< HEAD
+
 <div markdown="block" class="alert alert-warning">
 :information_source: **Notes:**<br>
 
@@ -333,7 +411,7 @@ Examples:
 
 </div>
 
-### Finds customers based on keywords: `findC`
+### Finding customers based on keywords: `findC`
 
 Find customers that have fields that contain all specified keywords cumulatively
 
@@ -366,7 +444,7 @@ Examples:
 
 </div>
 
-### Displays a sorted list of customers: `sortC`
+### Displaying a sorted list of customers: `sortC`
 
 Sorts and displays the list of customers based on a given field in either ascending or descending order.
 
@@ -449,8 +527,10 @@ Examples:
 ### Setting the tables for the restaurant: `settables`
 
 <div markdown="block" class="alert alert-danger">
+
 :bangbang: **Warning!**<br>
 This command will remove **ALL** reservations and overwrite previously set tables <br>
+
 </div>
 
 Sets the tables with the sizes specified so that reservations can be made
@@ -465,33 +545,10 @@ Examples:
 * `settables 10,8,8,4,4,2x6,1x4`
 
 <div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * Size of tables and Number of tables with specified size has to be a positive integer
-
-</div>
-
-### Adding a reservation: `addr`
-
-Add a new reservation with number of people, 
-customer's phone number and the date & time.
-
-Format: `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
-
-* Date-time format is `yyyy-MM-dd HH00`, e.g. `2021-11-11 2000`
-
-Examples: 
-* `addr 2 p/98765432 at/2021-12-24 2000`
-* `addr 5 p/12345668 at/2021-02-14 1200`
-
-<div markdown="block" class="alert alert-warning">
-:information_source: **Notes:**<br>
-
-* Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant-settables)
-
-* Phone number has to be a valid phone number from a customer
-
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
 
@@ -515,8 +572,12 @@ RHRH data are saved in the hard disk automatically after any command that change
 
 RHRH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+:bangbang: **Caution:**
+
 If your changes to the data file makes its format invalid, RHRH will discard all data and start with an empty data file at the next run.
+
 </div>
 
 ---
@@ -531,7 +592,36 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
+<details>
+<summary>How do I transfer my data to another Computer?</summary>
+
+Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
+
+</details>
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Add Customer** | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
+**Add Employee** | `addemployee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
+**Add supplier** | `addsupplier n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/Every Monday`
+**Add reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
+**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Delete Employee** | `deleteemployee INDEX`<br> e.g., `delete 1`
+**Delete Supplier** | `deletesupplier INDEX`<br> e.g., `delete 2`
+**Delete Customer** | `deletecustomer INDEX`<br> e.g., `delete 3`
+**Delete Reservation** | `deleteR INDEx`
+**Edit Employee** | `editemployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editsupplier INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Edit Reservation**| `editR INDEX [r/REMARK] [t/TAG]…`<br> e.g. `editR 2 r/surprise birthday party t/10PercentOff`
+**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
+**Find [COMING SOON]** | `find KEYWORD…`<br> e.g., `find James Jake`
+**List Customers** | `listC`
+**List Employees** | `listE`
+**List Suppliers** | `listS`
+**List Reservations** | `listR`
+**Help** | `help`
