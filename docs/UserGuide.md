@@ -45,8 +45,8 @@ Dangerous or potentially negative actions are displayed here
    Some example commands you can try:
 
     - `addC`: Add a customer
-    - Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
-    - Example: `addC customer n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
+    - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
+    - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
