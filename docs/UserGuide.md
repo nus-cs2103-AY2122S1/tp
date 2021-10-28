@@ -36,17 +36,20 @@ Syntax          | Interpretation
 Orange text     | Headings and subheadings of various size
 ------          | Dividers for section breaks
 
+
 ### Meaning of icons and symbols
 :information_source: : Additional information <br/>
-:bulb: Tip <br/>
-:exclamation: Important message <br/>
-:x: Error or danger to avoid <br/>
+:bulb: : Tip <br/>
+:exclamation: : Important message <br/>
+:x: : Error or danger to avoid <br/>
 
 <div markdown="block" class="alert alert-info">
-:bulb: Call out bar for a tip
+:information_source: Call out bar 
 * These blocks of text are here to aid the readability of this user guide! 
 * They can be tagged with different icons for different purposes. 
 </div>
+
+> Quotes are used to explain examples of commands and features!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -87,17 +90,36 @@ Unique terms specific to *ComputingConnection*
 Term            | Meaning
 ----------------|-----------------
 Contact         | Represents a person in ComputingConnection
-Data field      | Categories that you can assign to a contact <br/> See [Structure of a contact](#structure-of-a-contact) for the full list of data fields 
+Data field      | Categorised data that you can assign to a contact <br/> See [Structure of a contact](#structure-of-a-contact) for the full list of data fields
+Item            | An element of a specific data field
 
 ### Structure of a contact
 Understanding the structure of a **contact** in *ComputingConnection* is important in enabling you to be more productive.
 
-Category        | Specific fields | Description
-----------------|-----------------|-----------------
-Personal data fields  | 1. `n/`: Name <br /> 2. `e/`: Email | Compulsory fields
-University data fields   | 3. `f/`: Faculty <br /> 4. `m/:` Major | Compulsory fields
-Skill data fields | 5. `s/`:Skill <br /> 6. `l/`: Programming Language <br /> 7. `fr/`: Framework | Optional fields that can have 0 or more values 
-Miscellaneous data fields| 8. `r/`: Remark <br /> 9. `int/`: Interaction | Optional fields that can have 0 or more values
+Category        | Specific fields | Valid entires | Description
+----------------|-----------------|-----------------|-----------------
+Personal data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
+University data fields   | 3. `f/`: Faculty <br><br>  4. `m/:` Major | 3. NUS Faculties: <br> fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law <br><br> 4. Alphanumeric |Compulsory
+Skill data fields | 5. `s/`:Skill <br><br> 6. `l/`: Programming Language <br><br> 7. `fr/`: Framework | 5. Alphanumeric <br><br> 6. Alphanumeric <br><br> 7. Alphanumeric| Optional
+Miscellaneous data fields| 8. `r/`: Remark <br><br> 9. `int/`: Interaction | 8. Alphanumeric <br><br> 9. Alphanumeric, Date | Optional
+
+Category | Specific data field | Valid entries | Description
+----------------|----------------|-----------------|-----------------
+Personal | 1. `n/`: Name   | Alphanumeric    | Compulsory 
+Personal | 2. `e/`: Email  | Email Regex    | Compulsory 
+University | 3. `f/`: Faculty| fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law     | Compulsory 
+University | 4. `m/`: Major  | Alphanumeric    | Compulsory 
+Skill | 5. `s/`: Skill  | Alphanumeric    | Optional 
+Skill | 6. `l/`: Programming Language  | Alphanumeric    | Optional 
+Skill | 7. `fr/`: Framework  | Alphanumeric    | Optional 
+Miscellaneous | 8. `r/`: Remark  | Alphanumeric    | Optional 
+Miscellaneous | 9. `int/`: Interaction  | Alphanumeric, Date    | Optional 
+
+<div markdown="block" class="alert alert-info">
+:information_source: Compulsory vs Optional data fields
+* Compulsory data fields cannot be left empty! 
+* Optional data fields can have 0 or more values.
+</div>
 
 ### ComputingConnection command formats
 <div markdown="block" class="alert alert-info">
@@ -107,7 +129,7 @@ Miscellaneous data fields| 8. `r/`: Remark <br /> 9. `int/`: Interaction | Optio
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Jason Ang`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets are optional for the command.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/Shivam Tiwari t/friend` or as `n/Shivam Tiwari`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -118,7 +140,9 @@ Miscellaneous data fields| 8. `r/`: Remark <br /> 9. `int/`: Interaction | Optio
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
+  
+* When an `INDEX` is specified after a command word, it refers to the index number of the contact shown in the displayed contact list, unless specified otherwise. The index **must be a positive integer** 1, 2, 3…​"
+ 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `sort`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -135,7 +159,7 @@ Features and commands are categorised based on
 ### System commands
 Commands that are related to the whole ComputingConnection system or database. 
 
-##### Viewing help: `help`
+##### Viewing help : `help`
 Shows a message explaining how to access the help page. <br/>
 
 Format: `help`
@@ -190,62 +214,72 @@ Format: `clear`
 ### Contact-specific commands
 Commands that are related to a specific contact
 
-##### Adding a contact: `add`
+##### Adding a contact : `add`
 Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE f/FACULTY m/MAJOR [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
+Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 Examples: 
 
 * `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science`
-* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science s/frontend l/javascript`
+* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science s/frontend l/javascript r/interest in web development`
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
+:bulb: Start with the essentials!
 * A contact must have one and only one name, email, faculty and major.
-* You can always add optional data fields later on! 
+* You can always add items to optional data fields later on! 
 </div>
 
 ##### Editing a contact : `edit`
-Edits an existing contact in the address book.
+Edits an existing contact at the specified `INDEX`.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
-
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without
-  specifying any tags after it.
-
-##### Appending multiple data fields: `append`
-Appends a new element to data fields that support multiple elements.
-
-Format: `append 1 [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
-
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:bulb: Easy editing!
+* At least one of the optional fields in [square brackets] must be provided.
+* Existing items will be updated to the input items.
 </div>
 
+<div markdown="block" class="alert alert-info">
+:exclamation: Editing is not cumulative!
+* When editing data fields, the existing items of the data field of the contact will be removed i.e adding of items is not cumulative (see [append](#appending-items-to-data-fields)).
+* You can remove all the contact’s optional data fields by typing `s/`, `l/`, `fr/`, `t/`, `r`, or `int/` without
+  specifying any tags after it.
+* However, you can't do this for compulsory data fields!
+</div>
+
+##### Appending items to data fields : `append`
+Appends a new item to an optional data field of the existing contact at the specified `INDEX`.
+
+Format:
+* `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+
 Examples:
-* `append 3 s/webdev l/python t/classmate` Appends 'webdev' to the skill data field, 'python' to the language data field, and 'classmate' to the tag data field of the Person at index 3 in the list.
+* `append 3 s/web devevelopment l/python t/classmate` Appends 'web development' to the skill data field, 'python' to the programming language data field, and 'classmate' to the tag data field of the Person at index 3 in the displayed list.
 
-##### Removing data fields: `remove`
-Removes an element from a data field at a specified index.
+<div markdown="block" class="alert alert-info">
+:bulb: Appending is cumulative! 
+* Items in data fields are not numbered chronologically after an `append`, but alphanumerically - this should help you see contacts more consistently. 
+</div>
 
-Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX] [int/INDEX]`
+##### Removing data fields : `rm`
+Removes an item from an optional data field of the existing contact at a specified index.
 
-* The index refers to the index of the specific element in the non-single data field.
-* Applicable to skill and miscellaneous data fields.
+Format: `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​ `
+
+Examples: 
+* `rm 6 l/2` <br/>
+> Removes the **2nd item from the language** data field of the 6th contact displayed.
+  
+* `rm 5 s/1 s/3 fr/3 r/1` <br/>
+> Removes the **1st and 3rd item from the skill** data field, the **3rd item from the framework** data field, and the **1st item from the remark** data field of the 5th contact displayed.
 
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:bulb: Remove items quickly!
+* The `INDEX` specified for each optional data field is the index of the item displayed in the contact list.
+* You cannot remove from compulsory data fields.
 </div>
 
 ##### Adding an interaction with a contact : `interaction`
@@ -297,21 +331,20 @@ Examples:
 </div>
 
 ##### Deleting a contact : `delete`
-Deletes the specified contact from the address book.
+Deletes aa contact at the specified index.
 
 Format: `delete INDEX`
 
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+* `list` followed by `delete 2`<br/> 
+> Deletes the 2nd contact in the address book.
+
+* `find Betsy` followed by `delete 1`<br/> 
+> Deletes the 1st contact in the results of the `find` command.
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:exclamation: Be **careful!**
+* The confirmation for deleting a contact will be implemented in future releases.
 </div>
 
 ### Organisation-specific commands
@@ -365,19 +398,19 @@ System Command | Format, Examples
 --------|------------------
 **Help** | `help`
 **List** | `list`
-**Sort** | details coming soon
+**Sort** | `sort`
 **Filter** | details coming soon
 **Clear** | `clear`|
 
 Contact-specific Command | Format, Examples
 --------|------------------
-**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com s/marketing t/colleague`
-**Edit** | `edit INDEX n/NAME e/EMAIL f/FACULTY [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Append** | `append INDEX [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
-**Remove** | `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
+**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
+**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Append** | `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `append 3 s/web devevelopment l/python t/classmate`
+**Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​` <br><br> e.g., `rm 5 s/1 s/3 fr/3 r/1`
 **View** | details coming soon
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find** | `find KEYWORD [MORE_KEYWORDS]…​`<br><br> e.g., `find James Jake`
+**Delete** | `delete INDEX`<br><br> e.g., `delete 3`
 
 Organisation-specific Command | Format, Examples
 --------|------------------
