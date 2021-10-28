@@ -67,7 +67,7 @@ public class AppendCommand extends Command {
         requireNonNull(appendPersonDescriptor);
 
         this.index = index;
-        this.appendPersonDescriptor = appendPersonDescriptor;
+        this.appendPersonDescriptor = new AppendPersonDescriptor(appendPersonDescriptor);
     }
 
     @Override
@@ -103,7 +103,6 @@ public class AppendCommand extends Command {
         Faculty previousFaculty = personToAppendTo.getFaculty();
         Major previousMajor = personToAppendTo.getMajor();
 
-        //TODO: Is this supposed to be unmodifiable?
         Set<Skill> newSkills = appendPersonDescriptor.getSkills().orElse(Set.of()); // Else, empty set
         Set<Skill> currentSkills = personToAppendTo.getSkills();
         Set<Skill> updatedSkills = new HashSet<>();
@@ -291,7 +290,8 @@ public class AppendCommand extends Command {
             return getSkills().equals(e.getSkills())
                     && getLanguages().equals(e.getLanguages())
                     && getFrameworks().equals(e.getFrameworks())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getRemarks().equals(e.getRemarks());
         }
     }
 }

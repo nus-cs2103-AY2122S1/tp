@@ -38,8 +38,10 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_FACULTY + "computing "
             + PREFIX_MAJOR + "computer science "
+            + PREFIX_SKILL + "backend"
+            + PREFIX_LANGUAGE + "sql"
+            + PREFIX_FRAMEWORK + "expressJS"
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
             + PREFIX_REMARKS + "met him at a hackathon. expressed interest in creating web apps.";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
