@@ -16,8 +16,10 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Editing a person : `edit`](#editing-a-person--edit)
   * [Adding Tags : `tag`](#adding-tags--tag)
   * [Removing Tags : `untag`](#removing-tags--untag)
-  * [Locating persons by name: `find`](#locating-persons-by-name-find)
-  * [Locating persons by tag: `findTag`](#locating-persons-by-tag-findtag)
+  * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
+  * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findAny)
+  * [Locating persons by tag (case insensitive): `findTag`](#locating-persons-by-tags-findtag)
+  * [Locating persons by tag (case sensitive): `findTagC`](#locating-persons-by-tags-findtagC)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
@@ -72,14 +74,13 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows help message explaining each command.
 
 #### Format:
 * `help` - List out all available commands
 * `help COMMAND` - Shows help message for the command
-* `help d/` - Opens link to documentation
+* `help more` - Opens link to documentation
+![help message](images/helpMessage.png)
 
 **Sample Usage:**
 
@@ -154,6 +155,7 @@ Adds tag to an existing person in the address book.
 Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * New tags will be added on top of existing tags i.e. tags added is cumulative.
+* Adding new tags which already exist will succeed with a warning letting you know that the person already had those tags
 
 **Sample Usage:**
 * `tag 2 t/friend t/NUS`
@@ -174,27 +176,61 @@ Notes:
 * `untag 2 t/friend t/NUS`
     * Removes the tags `friend` and `NUS` from the 2nd person.
 
-### Locating persons by name: `find`
+### Locating persons by name and tag(s): `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds all persons whose names **and** tags matches ALL keywords provided.
 
 #### Format:
-* `find KEYWORD [MORE_KEYWORDS]`
+* `find n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
 
 Notes:
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* `find` is case-insensitive by default. e.g. `hans` will match `Hans`
+  * However, users can opt for case-sensitive search by including the `c/` flag after the command word
+* The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as
+  `t/friends n/Hans`
+* Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  * This applies to both names and tags
+* Only Persons matching all keywords will be returned (i.e. `AND` search).
+  e.g. `n/Hans t/Friend` will return all Persons named `Hans` and are tagged with `Friend`
 
 **Sample Usage:**
-* `find John`
+* `find n/John`
   * returns `john` and `John Doe`
-* `find alex david`
-  * returns `Alex Yeoh`, `David Li`<br>
-    ![result for 'find alex david'](images/findAlexDavidResult.png
+    ![result for `find n/john`](images/findjohnResult.png)
+* `find n/alex t/football t/classmate`
+  * returns `Alex Yeoh`, who has both `football` and `classmates` tag<br>
+    ![result for `find n/alex t/football t/classmate`](images/findAlexfootballclassmatesResult.png)
+* `find c/ t/FRIENDS`
+  * returns `Shin`, who is tagged with `FRIENDS` 
+    ![result for `find c/ t/FRIENDS`](images/findcFRIENDSResult.png)
+
+### Locating persons by name or tag(s): `findAny`
+
+Finds all persons whose names **or** tags contain ANY of the given keywords.
+
+#### Format:
+* `findAny n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
+
+Notes:
+* `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Both name and tags are searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+  * This applies to both names and tags
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+
+**Sample Usage:**
+* `findAny n/John`
+  * returns `john` and `John Doe`
+    ![result for `findAny n/john`](images/findAnyjohnResult.png)
+* `findAny n/alex n/irfan t/chef`
+  * returns `Alex Yeoh`, `Irfan Ibrahim`, `Carol` who is tagged with `chef`<br>
+    ![result for `findAny alex david`](images/findAnyalexirfanchefResult.png)
+* `findAny c/ n/Shin t/FRIENDS t/chef`
+  * returns `Shin` who is tagged with `FRIENDS`, as well as `Carol` who is tagged with `chef`
+    ![result for `findAny c/ n/Shin t/FRIENDS t/chef`](images/findAnycShinFRIENDSchefResult.png)
 
 ### Locating persons by tags: `findTag`
 
@@ -211,7 +247,25 @@ Notes:
 
 **Sample Usage:**
 * `find Friend NUS`
-    * returns people tagged with both `Friend` and `NUS`
+    * returns people tagged with both `Friend` or `friend` and `NUS` or `NUS`
+
+### Locating persons by tags: `findTagC`
+
+Finds persons whose contact contain any of the given tags.
+
+#### Format:
+* `findTagC TAG [MORE_TAGS]`
+
+Notes:
+* The search is case-sensitive. e.g. `friend` will not match `Friend`
+* The order of the tags does not matter.
+* Only full tags will be matched e.g. `Friend` will not match `Friends`
+* Persons matching all tags will be returned (i.e. `AND` search).
+
+**Sample Usage:**
+* `find Friend NUS`
+  * returns people tagged with both `Friend` and `NUS`
+  * does not return people tagged with `friend` and `nus`
 
 ### Deleting a person : `delete`
 
@@ -230,6 +284,25 @@ Notes:
   * deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1`
   * deletes the 1st person in the results of the `find` command.
+
+### Deleting multiple people : `deleteM`
+
+Deletes the people within the range from the address book.
+
+#### Format:
+* `deleteM START_INDEX - END_INDEX`
+
+Notes:
+* Deletes the people within the specified range from `START_INDEX to END_INDEX`.
+* The indexes refers to the index number shown in the displayed person list.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* The `END_INDEX` must be bigger than or equal to `START_INDEX`
+
+**Sample Usage:**
+* `list` followed by `deleteM 2 - 3`
+  * deletes the 2nd and 3rd person in the address book.
+* `find Betsy` followed by `deleteM 1 - 5`
+  * deletes the 1st and 2nd person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -279,10 +352,12 @@ Action | Summary | Format, Examples
 **Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
 **Clear** | Clears all entries | `clear`
 **Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
+**DeleteM** | Deletes multiple people within the range | `delete START_INDEX END_INDEX`<br> e.g., `deleteM 3 - 5`
 **Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Exit** | Exits the program | `exit`
 **Find** | Locates persons by name | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindTag** | Locates persons by tags | `findTag TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
+**FindTag** | Locates persons by tags (case insensitive) | `findTag TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
+**FindTag** | Locates persons by tags (case sensitive) | `findTagC TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
 **Help** | Displays help information | `help [COMMAND] [/d]`
 **List** | Lists all persons | `list`
 **Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`

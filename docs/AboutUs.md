@@ -9,51 +9,50 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chan Yu Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yucheng11122017.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yucheng11122017)]
+[[portfolio](team/chanyucheng.md)]
 
-* Role: Project Advisor
+* Role: In charge of Model
 
-### Jane Doe
+### Lee Zhi Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leezhixuan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/leezhixuan)]
+[[portfolio](team/leezhixuan.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: In charge of Logic
 
-### Johnny Doe
+### Justin Hoe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/justinhoejj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/justinhoejj)]
+[[portfolio](team/justinhoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI + Repo config
 
-### James Doe
+### Daniel Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cookiedan42.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/cookiedan42)]
+[[portfolio](team/daniel.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: tests and documentation
+
+### Lim Ji Wei
+
+<img src="images/jiwei99.png" width="200px">
+
+[![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](http://github.com/jiwei99)
+[[portfolio](team/jiwei.md)]
+
+* Role: Developer
+* Responsibilities: In charge of Storage

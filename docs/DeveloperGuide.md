@@ -234,10 +234,163 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Tags
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
 
+Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple **distinct** tags can also be added for each person.
+
+#### Usage
+
+Given below is an example usage scenario and how the Tag mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add ... t/friend` command to add a person tagged with `friend` into CONNECTIONS.
+
+Step 3. CONNECTIONS displays the newly added contact with the added tag.
+
+Step 4. The user decides to add additional tags to the contact at index 1, and executes `tag 1 t/classmate`.
+
+Step 5. CONNECTIONS will update the specified contact to include the new tag `classmate`
+
+Step 6. The user decides to remove the tag `student` from a contact at index 3, and executes `untag 3 t/student`.
+
+Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
+
+#### Design considerations:
+
+* **Current implementation: Tags are saved within a `Set<Tag>` within `Person`**
+  * Pros: Easy to implement and doesn't allow for duplicates. 
+  * Cons: Searching for contacts by tags may be slow, especially if there are many contacts, with each contact having multiple tags.
+  
+* **Alternative: Utilise a separate `HashMap` data structure to map contacts to tags.**
+  * Pros: Fast retrieval of tagged contacts.
+  * Cons: Difficult to maintain a separate data structure.
+
+### \[Work in progress\] Pin feature
+
+#### Proposed Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `PinCommand#Execute`
+
+Given below is an example usage scenario and how the pin mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add n/David …​` to add a new person.
+
+Step 3. CONNECTIONS displays the new person. 
+
+Step 4. The user decides that the contact, currently at index 1, is important and should be pinned. User executes pin 1
+
+Step 5. CONNECTIONS will pin the contact and moves the contact to the top of the list of contacts.
+
+The following sequence diagram shows how the pin operation works:
+
+![PinSequenceDiagram](images/PinSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How pin executes:**
+
+* **Alternative 1:** Person has a boolean field isPinned to indicate if the person is pinned or not
+    * Pros: Easy to implement, less memory usage
+    * Cons: Less flexibility in expanding the usage of pin.
+
+* **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not
+    * Pros: More flexible to expand, other methods can be added to Pin if needed.
+    * Cons: Will use more memory.
+    
+
+### Find feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindCommand#Execute`
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
+
+Step 3. CONNECTIONS displays any person whose name contains `David` **while also having** `friend` **and** 
+`football` tagged to them.
+
+#### Design considerations:
+
+**Aspect: How Find executes:**
+
+* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+    * Pros: Straightforward.
+    * Cons: Introduces additional and unnecessary complexities to ModelManager.
+
+* **Alternative 2 (current choice):** Create a FindPredicate to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of Find.
+    * Cons: More code.
+
+### FindAny feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindAnyCommand#Execute`
+
+Given below is an example usage scenario and how the FindAny mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `findAny n/David n/Henry t/friend t/footnall` to search for a matching entry.
+
+Step 3. CONNECTIONS displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
+tagged to **either** `friend` **or** `football`.
+
+#### Design considerations:
+
+**Aspect: How FindOr executes:**
+
+* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+    * Pros: Straightforward.
+    * Cons: Introduces additional and unnecessary complexities to ModelManager.
+
+* **Alternative 2 (current choice):** Create a FindAnyPredicate to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of FindAny.
+    * Cons: More code.
+
+
+### Help feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `HelpCommand#Execute`
+
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `help` to seek help on CONNECTION's usage.
+
+Step 3. CONNECTIONS displays a list of available commands.
+
+Step 4. The user decides to view the usage of `add` to learn to add a contact, and executes `help add`.
+
+Step 5. CONNECTIONS will display a detailed help message on the usage of `add` command.
+
+
+### \[Work in progress\] Birthday Reminder feature
+Shows a list of people with upcoming birthday.
+
+#### Proposed Implementation
+
+Step 1. On app startup sort people with birthday by birth month and day only into a list of person.
+
+Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
+to current day.
+
+Step 3. The rest of the list with birthday after this first person will be displayed in sorted order.
+
+Step 4. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
+earliest birthday and display remaining people in sorted order.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,41 +411,128 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
+* sociable and has multiple different friend groups that can partially overlap
+* regularly organises birthday parties for these contacts
+* regularly invites other contacts to these parties
+* needs to keep track of different groups who are invited to different parties
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* receive reminders about birthdays or lookup upcoming birthdays
+* retrieve contact details of all members of a group quickly and easily
+* partition contacts by group
+* keep track of upcoming birthdays and invite lists of these parties
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Chosen user stories v1.2
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| As a... | I want to... | So that I can... |
+|---|---|---|
+| Person who loves Birthdays    | Track birthdays                       | Easy way of checking the birthday of friends
+| Sociable person               | Partition frequent contacts           | Easy to access people within each group
+| Party Organiser               | Add people to a party list            | Easily extend a party invite list
+| Party Organiser               | Remove people to a party list         | Easily Remove people from only one party
+| Party Organiser               | Search contacts by invited party      | Generate invite list
+|  |  |  |
+| User                          | App need to be bug free               | So that I can rely on the app to give me accurate contact details
+| Fast typer                    | Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
+| Sociable person               | To be able to save up to 100 contacts | I can keep all my friends contacts
+| User with many contacts       | Search timings to be reasonable       | Do not have to wait too long for search results
+| Forgetful user                | Track contacts                        | Retrieve Contact details whenever I need to contact somebody
 
-*{More to be added}*
+Nice to have user stories v1.2
+
+| As a... | I want to... | So that I can... |
+|---|---|---|
+| Beginner user                 | View feedback on wrong commands       | Format commands better
+| User                          | Can modify contact details            | So that I can update my contact details
+| Beginner user                 | View feedback on wrong commands       | To format commands better
+| Advanced user                 | Add nicknames to my contacts          | Find my close friends using their nicknames
+
+Future versions user stories
+
+| As a... | I want to... | So that I can... |
+| --- | --- | --- |
+| Beginner              | See sample commands                               | To see what I should be typing.
+| Beginner              | View tutorials                                    | To see how the app should be used
+| Beginner              | View helpful prompts                              | To see what can be done with the app
+| New user              | Immediately add my first contact                  | Use the product without reading a manual
+|  |  |  |
+| Advanced user         | Disable suggestions                               | Avoid accidentally pressing on them
+| Experienced user      | Quickly add contact without my mouse              | Just type
+| Experienced user      | Get suggestions on commonly run commands          | don't have to keep typing the commands they use frequently.
+|  |  |  |
+| Forgetful person      | Use the help button                               | Remind myself how to use the app
+| Forgetful person      | Select from existing tags                         | Have consistent labelling
+|  |  |  |
+| Party Organiser       | Look for contacts details for all my friends      | Send out my invites
+| Party Organiser       | Generate mailing list from my contacts            | Contact all invitees as a group
+| Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
+| Party Organiser       | Generate a mail to link for my selection          | Send emails to a group
+|  |  |  |
+| Loves Birthdays       | Birthday reminders                                | Won’t miss any of his/her friends’ birthdays
+| Sociable person       | Pin frequent contacts                             | Access these contacts easily
+|  |  |  |
+| Fast typer            | Use the app with little lag                       | Can utilise functions of the app quickly
+|  |  |  |
+| Person                | Add new optional fields                           | Add my own types of data
+| Youth                 | Use Emojis                                        | Add <3 to people i like and poop to people I don’t
+| University student    | User experience to be smooth                      | Find who they want to contact easily
+|  |  |  |
+| User with many contacts   | Show search suggestions                       | Easily find contacts
+| User with many contacts   | Search timings to be reasonable               | Do not have to wait too long for search results
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1.  User chooses to add a person
+2.  User provides the person's details
+3.  CONNECTIONS create an entry for that person's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User provides incomplete details
+    
+    * 2a1. CONNECTIONS show an error message.
+      
+      Use case resumes at step 2
+    
+* 2b. User provides details identical to an existing entry in CONNECTIONS
+
+    * 2b1. CONNECTIONS remind User that this is a duplicate
+    
+      Use case resumes at Step 1
+    
+
+**Use case: Clear all entries**
+
+**MSS**
+
+1.  User request to clear all entries
+2.  CONNECTIONS deletes all entries
+
+    Use case ends.
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CONNECTIONS show a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  CONNECTIONS delete the person
 
     Use case ends.
 
@@ -308,6 +548,210 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Edit a person's details**
+
+**MSS**
+
+1.  User requests to list persons
+2.  CONNECTIONS show a list of persons
+3.  User provides his/her index in the list along with the replacement information
+4.  CONNECTIONS reflect the edits that were made
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    
+    * 3a1. CONNECTIONS show an error message.
+      
+      Use case resumes at step 2.
+
+**Use case: Exit the program**
+
+**MSS**
+
+1.  User request to exit
+2.  CONNECTIONS exit
+
+    Use case ends.
+
+**Extensions**
+
+**Use case: Find a person**
+
+**MSS**
+
+1.  User chooses to look for an entry
+2.  Use provides the search term
+3.  CONNECTIONS returns all entries that matches all search terms provided
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. CONNECTIONS is empty
+
+    * 2a1. CONNECTIONS display a message to indicate no entries
+    
+      Use case ends.
+
+* 2b. No existing entries match the search term provided
+    
+    * 2b1. CONNECTIONS display a message to indicate no matching entries
+    
+      Use case resumes at step 2.
+    
+* 2c. FindAny command is used
+    
+    * 2c1. CONNECTIONS return all entries that matches any of the search terms provided.
+
+**Use case: Find people via Tags**
+
+**MSS**
+
+1.  User choose to look for an entry
+2.  User provides the tag
+3.  CONNECTIONS return all entries that matches the tag
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. CONNECTIONS is empty
+
+    * 2a1. CONNECTIONS display a message to indicate no entries
+
+      Use case ends.
+
+* 2a. No existing entries match the tag provided
+
+    * 2a1. CONNECTIONS display a message to indicate no matching entries
+
+      Use case resumes at step 2.
+    
+
+**Use case: List everyone in the address book**
+
+**MSS**
+
+1.  User requests to list all entries
+2.  CONNECTIONS display all entries
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. CONNECTIONS is empty
+
+  Use case ends.
+
+**Use Case: Obtaining more information about a command**
+
+**MSS**
+
+1.  User requests for help
+2.  User provides the command
+3.  CONNECTIONS explain how to use the command and provide examples
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Command provided is not supported
+
+    * 2a1. CONNECTIONS display an error message
+      
+      Use case ends.
+
+**Use case: Tag a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  CONNECTIONS show a list of persons
+3.  User provides his index in the list along with the tags to be added
+4.  CONNECTIONS add those tags from that entry
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. CONNECTIONS is empty
+
+  Use case ends.
+
+* 3a. Index provided is out of range
+
+    * 3a1. CONNECTIONS display an error message
+    
+      Use case resumes at step 2.
+    
+* 3b. Target entry already has the tag specified
+
+    * 3b1. CONNECTIONS display an error message
+    
+      Use case resumes at step 2.
+
+**Use case: Untag a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  CONNECTIONS show a list of persons
+3.  User provides his index in the list along with the tags to be removed
+4.  CONNECTIONS remove those tags from that entry
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. CONNECTIONS is empty
+
+  Use case ends.
+
+* 3a. Index provided is out of range
+
+    * 3a1. CONNECTIONS display an error message
+
+      Use case resumes at step 2.
+
+* 3b. Target entry do not have the tag specified
+
+    * 3b1. CONNECTIONS display an error message
+
+      Use case resumes at step 2.
+
+**Use case: Getting help**
+
+**MSS**
+
+1.  User requests to show help for a command
+2.  CONNECTIONS show the guide on how to use the command
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Keyword `more` was provided
+    * 2a1. CONNECTIONS shows a pop-up with a link to the UserGuide
+
+      Use case ends.
+
+* 2b. Command was not provided
+  * 2b1. CONNECTIONS show all available commands
+
+      Use case ends.
+
+* 2c. Command provided is invalid
+  * 2c1. CONNNECTIONS display an error message followed by a list of valid commands
+
+  Use case ends.
+    
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -316,12 +760,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+
 *{More to be added}*
 
 ### Glossary
-
+* **CONNECTIONS**: The name of our product
+* **Entry**: An item written or printed in a diary, list, account book, or reference book.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Search Term**: A search term is what users key in when they want to find something specific
+* **Tag**: A label attached to someone or something for the purpose of identification or to give other information.
 
 --------------------------------------------------------------------------------------------------------------------
 
