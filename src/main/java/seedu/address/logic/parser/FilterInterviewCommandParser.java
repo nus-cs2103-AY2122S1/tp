@@ -19,7 +19,7 @@ public class FilterInterviewCommandParser implements Parser<FilterInterviewComma
         requireNonNull(args);
 
         String errorMessage = FilterInterviewCommand.MESSAGE_USAGE;
-        String trimmedArgs = args.trim();
+        String trimmedArgs = args.trim().toLowerCase();
 
         if (!trimmedArgs.matches(FilterInterviewCommand.ValidFilterInterviewArgs.getRegex())) {
             throw new ParseException(
