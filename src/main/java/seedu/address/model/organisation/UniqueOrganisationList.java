@@ -8,7 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.organisation.exceptions.DuplicateOrganisationException;
 
 /**
  * A list of organisations that enforces uniqueness between its elements and does not allow nulls.
@@ -59,6 +59,13 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
+    public void setOrganisations(List<Organisation> organisations) {
+        requireNonNull(organisations);
+        if (!organisationsAreUnique(organisations)) {
+            throw new DuplicateOrganisationException();
+        }
+        internalList.setAll(organisations);
+    }
 
     /**
      * Returns true if the list contains an equivalent organisation as the given argument.
@@ -75,7 +82,7 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
     public void add(Organisation toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateOrganisationException();
         }
         internalList.add(toAdd);
     }
