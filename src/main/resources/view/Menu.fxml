@@ -8,7 +8,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.MenuItem?>
 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"
-         style="-fx-background-image: url(/images/space1.png); -fx-background-size: 1600 800;">
+         style="-fx-background-image: url(/images/space1.png);
+         -fx-background-repeat: stretch;
+              -fx-background-size: 100% 100%; -fx-background-position: center center;">
     <Menu mnemonicParsing="false">
         <graphic>
             <ImageView pickOnBounds="true" fitWidth="30" fitHeight="30"
@@ -43,7 +45,7 @@
         <graphic>
             <ImageView pickOnBounds="true" fitWidth="30" fitHeight="30"
                        preserveRatio="true">
-                <Image url="@/images/history.png" />
+                <Image url="@/images/clock.png" />
             </ImageView>
         </graphic>
         <MenuItem fx:id="history" mnemonicParsing="false" text="Usage history" onAction="#showHistory"/>
@@ -54,7 +56,7 @@
         <graphic>
             <ImageView fx:id="help" pickOnBounds="true" fitWidth="30" fitHeight="30"
                        preserveRatio="true">
-                <Image url="@/images/help.png" />
+                <Image url="@/images/help_icon.png" />
             </ImageView>
         </graphic>
         <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" text="Show help" onAction="#showHelp"/>

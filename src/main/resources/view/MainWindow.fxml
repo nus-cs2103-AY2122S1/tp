@@ -51,7 +51,8 @@
             </StackPane>
             <StackPane VBox.vgrow="ALWAYS" fx:id="visualiserDisplayPlaceholder"
                        styleClass="pane-with-border"
-                       style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                       style="-fx-background-color: transparent; -fx-opacity: 0.95;
+                       -fx-border-color: transparent;">
               <padding>
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
