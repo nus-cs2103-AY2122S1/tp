@@ -349,9 +349,15 @@ The current week refers to the week of the monday before the current date until 
 </div>
 
 
-#### Viewing schedule for the week
+#### Viewing schedule for the week: `change`
 
-The schedule for this week is shown under the schedule tab.
+The schedule for this week is shown under the schedule tab by default. The week
+can be changed using the `change` command.
+
+ * Takes in a single date input to translate into a week.
+
+Formats:
+`change [da/DATE]`
 
 
 #### Viewing schedule of staff(s): `viewSchedule`

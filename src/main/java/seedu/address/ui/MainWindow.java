@@ -17,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Period;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -180,8 +181,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public void setPeriod(Period period) {
+        this.schedulePanel.setChildren(logic.getFilteredPersonList(), period);
+
     }
 
     /**
@@ -205,6 +207,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isSwitchTab()) {
                 handleSwitchTab();
+            }
+
+            if (commandResult.isChangeSchedule()) {
+                setPeriod(commandResult.getPeriod());
             }
 
             return commandResult;

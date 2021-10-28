@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Period;
+
 /**
  * Represents the result of a command execution.
  */
@@ -26,6 +28,10 @@ public class CommandResult {
      */
     private final boolean switchTab;
 
+    private boolean changeSchedule;
+
+    private Period period;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -34,6 +40,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.switchTab = switchTab;
+        this.changeSchedule = false;
     }
 
     /**
@@ -43,6 +50,18 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false);
     }
+
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}
+     * and {@code Period} to set the schedule to.
+     */
+    public CommandResult(String feedbackToUser, Period period) {
+        this(feedbackToUser, false, false, false);
+        this.changeSchedule = true;
+        this.period = period;
+    }
+
 
     public String getFeedbackToUser() {
         return feedbackToUser;
@@ -59,6 +78,16 @@ public class CommandResult {
     public boolean isSwitchTab() {
         return switchTab;
     }
+
+    public boolean isChangeSchedule() {
+        return changeSchedule;
+    }
+
+    public Period getPeriod() {
+        assert period != null;
+        return period;
+    }
+
 
     @Override
     public boolean equals(Object other) {
