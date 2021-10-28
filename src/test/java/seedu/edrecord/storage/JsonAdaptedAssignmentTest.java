@@ -8,7 +8,7 @@ import static seedu.edrecord.testutil.TypicalAssignments.MIDTERM;
 import org.junit.jupiter.api.Test;
 
 import seedu.edrecord.commons.exceptions.IllegalValueException;
-import seedu.edrecord.model.assignment.MaxScore;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.name.Name;
 
@@ -20,7 +20,7 @@ public class JsonAdaptedAssignmentTest {
 
     private static final String VALID_NAME = MIDTERM.getName().name;
     private static final String VALID_WEIGHTAGE = String.valueOf(MIDTERM.getWeightage().weightage);
-    private static final String VALID_MAX_SCORE = String.valueOf(MIDTERM.getMaxScore().maxScore);
+    private static final String VALID_MAX_SCORE = String.valueOf(MIDTERM.getMaxScore().score);
 
     @Test
     public void toModelType_validAssignmentDetails_returnsAssignment() throws Exception {
@@ -59,14 +59,14 @@ public class JsonAdaptedAssignmentTest {
     @Test
     public void toModelType_invalidMaxScore_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_NAME, VALID_WEIGHTAGE, INVALID_MAX_SCORE);
-        String expectedMessage = MaxScore.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Score.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
 
     @Test
     public void toModelType_nullMaxScore_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment = new JsonAdaptedAssignment(VALID_NAME, VALID_WEIGHTAGE, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, MaxScore.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Score.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
 
