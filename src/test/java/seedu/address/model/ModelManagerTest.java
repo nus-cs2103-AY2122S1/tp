@@ -2,7 +2,10 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -16,10 +19,13 @@ import java.nio.file.Paths;
 import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
@@ -100,6 +106,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setPrefixStore_modifySet_differentSet() {
+        Set<Prefix> prefixSet = new HashSet<>();
+        prefixSet.add(PREFIX_NAME);
+        modelManager.setPrefixes(prefixSet);
+
+        prefixSet.add(PREFIX_PHONE);
+        assertNotEquals(modelManager.getPrefixes(), prefixSet);
+    }
+
+    @Test
+    public void getPrefixStore_modifySet_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getPrefixes().add(PREFIX_PHONE));
+    }
+
     public void birthdayReminderList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getBirthdayReminderList().remove(0));
     }
@@ -248,8 +268,15 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+        // different prefixStore -> return false
+        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Set<Prefix> prefixSet = Set.of(PREFIX_NAME);
+        modelManager.setPrefixes(prefixSet);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.setPrefixes(Set.of());
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
