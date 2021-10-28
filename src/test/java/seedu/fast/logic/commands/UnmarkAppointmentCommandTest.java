@@ -1,5 +1,22 @@
 package seedu.fast.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_SEVENTH_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
+
+import org.junit.jupiter.api.Test;
+
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.model.Fast;
@@ -9,23 +26,6 @@ import seedu.fast.model.UserPrefs;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 import seedu.fast.testutil.PersonBuilder;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_AMY;
-import static seedu.fast.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.fast.testutil.TypicalIndexes.INDEX_SEVENTH_PERSON;
-import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.fast.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
-import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 public class UnmarkAppointmentCommandTest {
     private final Model model = new ModelManager(getTypicalFast(), new UserPrefs());
