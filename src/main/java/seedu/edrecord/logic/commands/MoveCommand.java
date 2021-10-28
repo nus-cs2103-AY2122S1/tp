@@ -5,6 +5,7 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.edrecord.commons.core.Messages;
@@ -31,23 +32,23 @@ public class MoveCommand extends Command {
             + PREFIX_MODULE + "CS2103 "
             + PREFIX_GROUP + "T01";
 
-    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Moved %1$s to %2$s/%3$s";
+    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Successfully moved to %2$s/%3$s";
 
-    private final Index index;
+    private final List<Index> indexes;
     private final Module module;
     private final Group group;
 
     /**
-     * @param index of the person in the filtered person list to move.
+     * @param indexes of the people in the filtered person list to move.
      * @param mod to move the person to.
      * @param grp to move the person to.
      */
-    public MoveCommand(Index index, Module mod, Group grp) {
-        requireNonNull(index);
+    public MoveCommand(List<Index> indexes, Module mod, Group grp) {
+        requireNonNull(indexes);
         requireNonNull(mod);
         requireNonNull(grp);
 
-        this.index = index;
+        this.indexes = indexes;
         this.module = mod;
         this.group = grp;
     }
@@ -65,14 +66,17 @@ public class MoveCommand extends Command {
         }
 
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Index index : indexes) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Person personToMove = lastShownList.get(index.getZeroBased());
+            personToMove.getModules().add(savedMod, group);
         }
 
-        Person personToMove = lastShownList.get(index.getZeroBased());
-        personToMove.getModules().add(savedMod, group);
         model.setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MOVE_PERSON_SUCCESS, personToMove.getName(), savedMod, group));
+        return new CommandResult(String.format(MESSAGE_MOVE_PERSON_SUCCESS, savedMod, group));
     }
 
     @Override
@@ -89,7 +93,7 @@ public class MoveCommand extends Command {
 
         // state check
         MoveCommand e = (MoveCommand) other;
-        return index.equals(e.index)
+        return indexes.equals(e.indexes)
                 && module.isSameModule(e.module)
                 && group.isSameGroup(group);
     }

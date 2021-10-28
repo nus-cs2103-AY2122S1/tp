@@ -58,4 +58,11 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Returns the preambles (text before the first valid prefix). Trims any leading/trailing spaces.
+     */
+    public List<String> getPreambles() {
+        return getAllValues(new Prefix(""));
+    }
 }
