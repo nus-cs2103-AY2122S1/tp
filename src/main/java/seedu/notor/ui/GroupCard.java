@@ -45,8 +45,6 @@ public class GroupCard extends UiPart<Region> {
     private Label numberOfPersons;
     @FXML
     private Label numberOfSubgroups;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code SuperGroupCode} with the given {@code SuperGroup} and index to display.
@@ -66,9 +64,6 @@ public class GroupCard extends UiPart<Region> {
         }
         numberOfPersons.setText("Number of Persons: " + group.getPeople().size());
         numberOfSubgroups.setText("Number of SubGroups: " + group.getSubGroups().asUnmodifiableObservableList().size());
-        group.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
