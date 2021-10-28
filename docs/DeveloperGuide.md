@@ -197,6 +197,8 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 
 ### Adding an appointment
 
+### Deleting an appointment
+
 ### Editing an appointment
 
 ### Filtering appointments
