@@ -298,7 +298,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                | add a student contact                                | add my student into the list                                           |
 | `* * *`  | user                | delete a student contact                             | remove my student if he quits the course                               |
 | `* * *`  | user                | store my data in a file                              | easily export data from the application                                |
-| `* * *`  | user                | add different links for each student/group contact   | easily access their Github, email etc                                  |
+| `* * *`  | user                | add GitHub links for each student contact            | easily access their Github to check their progress                     |
+| `* * *`  | user                | add GitHub links for each student group              | easily access their Github to check their progress                     |
 | `* * *`  | user                | record participation during tutorials                | accurately award participation marks to students                       |
 | `* * *`  | user                | add descriptions to the tasks                        | see the extra detail pertaining to the task                            |
 | `* *`    | user                | set my current directory to either students or tasks | add students/tasks more easily                                         |
@@ -306,10 +307,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                | allocate students to different groups                | track their progress based on their groups                             |
 | `* *`    | user                | import data from CSV files                           | get started with the app quickly                                       |
 | `* *`    | user                | edit tasks                                           | correct any errors I made without deleting and creating a new task     |
-| `* *`    | new user            | search for a student                                 | quickly access all information related to the student                  |
+| `* *`    | user                | search for a student                                 | quickly access all information related to the student                  |
+| `* *`    | user                | search for a group                                   | quickly access all information related to the group                    |
+| `* *`    | user                | purge all current students                           | start a new semester with new students                                 |
+| `* *`    | user                | purge all current groups                             | start a new semester with new groups                                   |
+| `* *`    | user                | purge all current tasks                              | get rid of all my tasks                                                |
 | `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
 | `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
-| `* *`    | expert user         | sort tasks by earliest taskDate                      | know what tasks need to be completed urgently                          |
+| `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
 | `* *`    | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
 | `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
 | `* *`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
@@ -326,35 +331,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user         | create custom commands                               | make managing tasks more convenient, and more tailored to my needs     |
 | `*`      | user                | filter the CS2103/T textbook                         | refresh my memory on concepts I forgot                                 |
 
-
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is `tApp` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Set current directory**
+**Use case: UC1 - View student list**
 
 **MSS**
 
-1.  User requests to go back to the welcome page to choose either students or tasks directory again.
-2.  tApp navigates into the welcome page and displays the exit confirm message.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a.  The user hasn’t entered either the student or task management directory.
-
-  Use case ends.
-
-**Use case: UC2 - View student list**
-
-**MSS**
-
-1.  User requests to navigate to the student directory (UC1)
-2.  tApp navigates into the student directory
-3.  tApp displays the list of student contacts
+1.  User requests to list all students
+2.  tApp displays the list of students
 
     Use case ends.
 
@@ -368,12 +354,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC3 - Add a student contact**
+**Use case: UC2 - Add a student**
 
 **MSS**
 
-1.  User requests to enter student directory (UC1)
-2.  tApp navigates to student directory
+1.  User requests to view students (UC1)
+2.  tApp displays the list of students
 3.  User requests to add a student contact
 4.  tApp adds the student
 
@@ -387,12 +373,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC4 - Mark student as present**
+**Use case: UC3 - Edit a student**
 
 **MSS**
 
 1.  User requests to view students (UC2)
-2.  tApp shows a list of persons
+2.  tApp displays the list of students
+3.  User requests to delete a specific student in the list
+4.  tApp deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: UC4 - Delete a student**
+
+**MSS**
+
+1.  User requests to view students (UC1)
+2.  tApp displays the list of students
+3.  User requests to delete a specific student in the list
+4.  tApp deletes the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC5 - Mark student as present**
+
+**MSS**
+
+1.  User requests to view students (UC1)
+2.  tApp lists all students
 3.  User requests to mark a specific person as present in the list
 4.  tApp marks the person as present
 
@@ -416,14 +449,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC5 - Delete a student contact**
+
+**Use case: UC6 - Mark student as participated**
+
+Similar to UC5, except the student's participation is marked instead of attendance.
+
+**Use case: UC7 - Find student by name**
 
 **MSS**
 
-1.  User requests to view students (UC2)
-2.  tApp shows a list of persons
-3.  User requests to delete a specific student in the list
-4.  tApp deletes the person
+1.  User requests to find student whose name is John
+2.  tApp displays all names containing 'john'
 
     Use case ends.
 
@@ -431,185 +467,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The student list is empty.
 
-  Use case ends.
+    * 2a1. tApp displays an empty list
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. tApp shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: UC6 - View task list**
+**Use case: UC8 - Clear student list**
 
 **MSS**
 
-1.  User requests to view the list of tasks
-2.  tApp displays all the tasks currently in the list
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The task list is empty.
-
-    * 2a1. tApp displays message that there are no tasks
-
-      Use case ends.
-
-**Use case: UC7 - Add a todo task**
-
-**MSS**
-
-1.  User requests to create a todo task
-2.  tApp creates the todo and stores it in the task list
-3.  tApp displays the task that was just created
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The task name is empty.
-
-    * 1a1. tApp displays an error message stating that the task name is invalid
-
-      Use case ends.
-
-* 1b. The command format is incorrect.
-
-    * 1b1. tApp displays an error message requesting the user to follow the correct format
-
-      Use case ends.
-
-
-**Use case: UC8 - Add a task with a specified deadliine**
-
-**MSS**
-
-1.  User requests to create a deadline or event task with the specified taskDate
-2.  tApp creates the task and stores it in the task list
-3.  tApp displays the task that was just created
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The task name is empty.
-
-    * 1a1. tApp displays an error message stating that the task name is invalid
-
-      Use case ends.
-
-* 1b. The format of the taskDate is incorrect.
-
-    * 1b1. tApp displays an error message requesting the user to follow the correct taskDate format
-
-      Use case ends.
-
-**Use case: UC9 - Add a task with a specified taskDate**
-
-**MSS**
-
-1.  User requests to create an event with the specified taskDate
-2.  tApp creates the task and stores it in the task list
-3.  tApp displays the task that was just created
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The task name is empty.
-
-    * 1a1. tApp displays an error message stating that the task name is invalid
-
-      Use case ends.
-
-* 1b. The format of the taskDate is incorrect.
-
-    * 1b1. tApp displays an error message requesting the user to follow the correct taskDate format
-
-      Use case ends.
-
-**Use case: UC10 - Delete a task**
-
-**MSS**
-
-1.  User requests to view their list of tasks
-2.  tApp displays all the tasks currently in the list
-3.  User requests to delete a specific task from the list of tasks
-4.  tApp deletes the task
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 2a1. tApp shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC11 - Mark a task as done**
-
-**MSS**
-
-1.  User requests to view their list of tasks
-2.  tApp displays all the tasks currently in the list
-3.  User requests to mark a specific task as done
-4.  tApp marks the task as done
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-      Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1.  tApp shows an error message.
-
-      Use case ends.
-
-**Use case: UC12 - Mark student as participated**
-
-**MSS**
-
-1.  User requests to view students (UC2)
-2.  tApp shows a list of students
-3.  User requests to mark a specific student as participated in the list
-4.  tApp marks the person as participated
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The student list is empty.
-
-  Use case ends.
-
-* 2b. User requests to mark a specific person as not participated in the list.
-
-    * 2b1. tApp marks the person as not participated.
-
-      Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. tApp shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC13 - Clear student list**
-
-**MSS**
-
-1.  User requests to view students (UC2)
-2.  tApp shows a list of students
+1.  User requests to view students (UC1)
+2.  tApp displays the list of students
 3.  User requests clear the student list
 4.  tApp clears the student list
 
@@ -621,12 +488,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC13 - View group list**
+**Use case: UC9 - View group list**
 
 **MSS**
 
 1.  User requests to view the list of groups
-2.  tApp displays all the groups currently in the list
+2.  tApp displays all groups
 
     Use case ends.
 
@@ -638,13 +505,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC14 - Add a group**
+**Use case: UC10 - Add a group**
 
 **MSS**
 
 1.  User requests to create a group with the specified name
 2.  tApp creates the group and stores it in the group list
-3.  tApp displays the group that was just created
+3.  tApp displays all groups
 
     Use case ends.
 
@@ -654,22 +521,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
 
-      Use case ends.
+    Use case ends.
 
 * 1b. The group name is invalid.
 
     * 1b1. tApp displays an error message stating that the group name is invalid and to follow the correct format
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC15 - Delete a group**
+**Use case: UC11 - Edit a group**
 
 **MSS**
 
-1.  User requests to view their list of groups
-2.  tApp displays all the groups currently in the list
-3.  User requests to delete a specific group from the list of groups
-4.  tApp deletes the group
+1.  User requests to view the list of groups
+2.  tApp displays all groups
+3.  User requests to edits a specific group from the list of groups
+4.  tApp edits the group
+5.  tApp displays all groups with the edited group
 
     Use case ends.
 
@@ -685,12 +553,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC16 - Add a student to a group**
+**Use case: UC12 - Delete a group**
 
 **MSS**
 
-1.  User requests to view their list of students
-2.  tApp displays all the students currently in the list
+1.  User requests to view their list of groups
+2.  tApp displays all groups
+3.  User requests to delete a specific group from the list of groups
+4.  tApp deletes the group
+5.  tApp displays all the groups
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message. 
+      
+      Use case resumes at step 2.
+
+**Use case: UC13 - Add student to group**
+
+**MSS**
+
+1.  User requests to view the list of students
+2.  tApp displays all the students
 3.  User requests to add a specific student from the list of students to a specific group from the list of groups
 4.  tApp adds the student to the group
 
@@ -709,86 +601,174 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
 
       Use case ends.
-    
+
 * 3c. The group name is valid but the group does not exist.
 
     * 3c1. tApp displays an error message stating that the group does not exist
+      
+      Use case ends.
 
-    Use case ends.
-  
 * 3d. The student index is valid but the student does not exist.
 
     * 3d1. tApp displays an error message stating that the student already has a group
+      
+      Use case ends.
 
-    Use case ends.
+**Use case: UC13 - Delete student from group**
 
-**Use case: UC17 - Add a Github link to a group**
+Similar to UC12 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
+
+**Use case: UC14 - Find groups by name**
+
+Similar to UC7 (Find student by name), except we are finding groups by group name.
+
+**Use case: UC15 - Clear group list**
+
+Similar to UC8 (Clear student list), except we are clearing the group list.
+
+**Use case: UC16 - View task list**
 
 **MSS**
 
-1.  User requests to view their list of groups
-2.  tApp displays all the groups currently in the list
-3.  User requests to add a Github link to a specific group from the list of groups
-4.  tApp adds the link to the group
+1.  User requests to view the list of tasks
+2.  tApp displays all tasks
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The link fields are invalid.
+* 2a. The task list is empty.
 
-    * 3a1. tApp displays an error message stating that the link fields are invalid and to follow the correct format.
-
-      Use case ends.
-
-* 3b. The group index is invalid or missing.
-
-    * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
+    * 2a1. tApp displays message that there are no tasks
 
       Use case ends.
 
-* 3c. The group specified already has an existing Github link.
+**Use case: UC17 - Add a todo task**
 
-    * 3c1. tApp overwrites the link in the group with the one provided
+**MSS**
+
+1.  User requests to create a todo task
+2.  tApp creates the todo and stores it in the task list
+3.  tApp displays the task list with the task that was just created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The task name is empty.
+
+    * 1a1. tApp displays an error message stating that the task name is invalid
+
+      Use case ends.
+
+* 1b. The command format is incorrect.
+
+    * 1b1. tApp displays an error message requesting the user to follow the correct format
 
   Use case ends.
 
-**Use case: UC17 - Find student by name**
+**Use case: UC18 - Add a task with a specified deadliine**
 
 **MSS**
 
-1.  User requests to find student whose name is John
-2.  tApp displays all names containing 'john'
+1.  User requests to create a task with a specified deadline
+2.  tApp creates the task and stores it in the task list
+3.  tApp displays the task list with the task that was just created
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The student list is empty.
+* 1a. The task name is empty.
 
-    * 2a1. tApp displays an empty list
+    * 1a1. tApp displays an error message stating that the task name is invalid
 
       Use case ends.
 
-**Use case: UC18 - Find groups by name**
+* 1b. The format of the deadline is incorrect.
 
-Similar to UC17 (Find student by name), except we are finding groups.
+    * 1b1. tApp displays an error message requesting the user to follow the correct deadline format
 
-**Use case: UC19 - Clear group list**
+      Use case ends.
 
-Similar to UC12 (Clear student list), except we are clearing the group list.
+**Use case: UC19 - Add a task with a specified event date**
 
-**Use case: UC20 - Clear task list**
+**MSS**
 
-Similar to UC12 (Clear student list), except we are clearing the task list.
+1.  User requests to create an event with the specified event date
+2.  tApp creates the task and stores it in the task list
+3.  tApp displays the task list with the task that was just created
 
-**Use case: UC21 - Clear all entries in tApp**
+    Use case ends.
 
-Similar to UC12 (Clear student list), except we are clearing the whole address book.
+**Extensions**
 
-**Use case: UC22 - Delete a student from a group**
+* 1a. The task name is empty.
 
-Similar to UC16 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
+    * 1a1. tApp displays an error message stating that the task name is invalid
+
+      Use case ends.
+
+* 1b. The format of the event date is incorrect.
+
+    * 1b1. tApp displays an error message requesting the user to follow the correct event date format
+
+      Use case ends.
+
+**Use case: UC20 - Delete a task**
+
+**MSS**
+
+1.  User requests to view the list of tasks
+2.  tApp displays all the tasks currently in the list
+3.  User requests to delete a specific task from the list of tasks
+4.  tApp deletes the task
+5.  tApp displays the task list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 2a1. tApp shows an error message. 
+      Use case resumes at step 2.
+
+**Use case: UC21 - Mark a task as done**
+
+**MSS**
+
+1.  User requests to view the list of tasks
+2.  tApp displays all the tasks currently in the list
+3.  User requests to mark a specific task as done
+4.  tApp marks the task as done
+5.  tApp displays the task list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1.  tApp shows an error message.
+
+      Use case ends.
+
+**Use case: UC22 - Clear task list**
+
+Similar to UC8 (Clear student list), except we are clearing the task list.
+
+**Use case: UC23 - Clear all entries in tApp**
+
+Similar to UC8 (Clear student list), except we are clearing the whole address book.
+
 
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
