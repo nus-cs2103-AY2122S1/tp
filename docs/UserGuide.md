@@ -331,12 +331,6 @@ Notes about search keywords:
 
 Examples:
 
-The figure below shows TAB with four students in the list.
-<div align="center">
-  <img class="figure" src="images/FindStudents1.png" width="450px" alt="find initial list"/>
-</div>
-<div class="caption">Initial list of students displayed in TAB</div>
-
 To find a student, you may enter `find a/serangoon n/Bern` into the command box.
 
 All students in TAB whose address matches `serangoon` and whose name matches `Bern` will be returned. The figure below shows the list after the find command is executed.
