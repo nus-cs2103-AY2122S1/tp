@@ -33,6 +33,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
 
     // Lesson Keywords
     private Date date;
+    private Date cancelledDate;
     private TimeRange timeRange;
     private List<String> subjectKeywords;
 
@@ -47,7 +48,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords,
                 parentPhoneKeywords, parentEmailKeywords, addressKeywords,
                 schoolKeywords, acadStreamKeywords, acadLevelKeywords, remarkKeywords,
-                timeRange, date, subjectKeywords,
+                timeRange, date, cancelledDate, subjectKeywords,
                 tagKeywords);
     }
 
@@ -64,7 +65,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param condition Find condition
      */
     public void setCondition(FindCondition condition) {
-        condition = condition;
+        this.condition = condition;
     }
 
     /**
@@ -260,6 +261,22 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Sets keywords to match with a Person's Lesson's cancelled date.
+     *
+     * @param cancelledDate Valid cancelled date to find.
+     */
+    public void setCancelledDate(Date cancelledDate) {
+        this.cancelledDate = cancelledDate;
+    }
+
+    /**
+     * Returns optional cancelledDate.
+     */
+    public Optional<Date> getCancelledDate() {
+        return Optional.ofNullable(cancelledDate);
+    }
+
+    /**
      * Sets keywords to match with a Person's Lesson's subject.
      *
      * @param keywords Subject keywords to find.
@@ -405,6 +422,10 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return getLessonAnyMatch(lesson -> lesson.hasLessonOnDate(date));
     }
 
+    private Predicate<Person> getCancelledDateMatchPredicate() {
+        return getLessonAnyMatch(lesson -> lesson.getCancelledDates().contains(cancelledDate));
+    }
+
     private Predicate<Person> getSubjectMatchPredicate() {
         return getLessonAnyMatch(lesson -> isMatch(subjectKeywords, lesson.getSubject().value));
     }
@@ -479,6 +500,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
         if (getDate().isPresent()) {
             predicates.add(getDateMatchPredicate());
+        }
+        if (getCancelledDate().isPresent()) {
+            predicates.add(getCancelledDateMatchPredicate());
         }
         if (getSubjectKeywords().isPresent()) {
             predicates.add(getSubjectMatchPredicate());
@@ -562,6 +586,11 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
                 && getSchoolKeywords().equals(p.getSchoolKeywords())
                 && getAcadStreamKeywords().equals(p.getAcadStreamKeywords())
                 && getAcadLevelKeywords().equals(p.getAcadLevelKeywords())
+                && getRemarkKeywords().equals(p.getRemarkKeywords())
+                && getTimeRange().equals(p.getTimeRange())
+                && getDate().equals(p.getDate())
+                && getCancelledDate().equals(p.getCancelledDate())
+                && getSubjectKeywords().equals(p.getSubjectKeywords())
                 && getCondition().equals(p.getCondition());
     }
 
@@ -598,10 +627,24 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         if (getAcadLevelKeywords().isPresent()) {
             builder.append("\nAcademic Level: ").append(String.join(" ", getAcadLevelKeywords().get()));
         }
+        if (getRemarkKeywords().isPresent()) {
+            builder.append("\nRemark: ").append(String.join(" ", getRemarkKeywords().get()));
+        }
         if (getTagKeywords().isPresent()) {
             builder.append("\nTags: ").append(String.join("; ", getTagKeywords().get()));
         }
-
+        if (getSubjectKeywords().isPresent()) {
+            builder.append("\nLesson Subject: ").append(String.join("; ", getSubjectKeywords().get()));
+        }
+        if (getDate().isPresent()) {
+            builder.append("\nLesson Date: ").append(String.join("; ", getDate().get().toString()));
+        }
+        if (getCancelledDate().isPresent()) {
+            builder.append("\nCancelled Date: ").append(String.join("; ", getCancelledDate().get().toString()));
+        }
+        if (getTimeRange().isPresent()) {
+            builder.append("\nLesson Time: ").append(String.join("; ", getTimeRange().get().toString()));
+        }
         return builder.toString();
     }
 
