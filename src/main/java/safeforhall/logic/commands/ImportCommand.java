@@ -45,6 +45,7 @@ public class ImportCommand extends Command {
             + "             name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate\n"
             + "     2. The first row will be discarded as column headings\n"
             + "     3. LastFetDate and LastCollectionDate are optional (can be left as empty space)\n"
+            + "     4. Resident lists of all events will be wiped\n"
             + "Parameters: "
             + PARAMETERS + "\n"
             + "Example: " + COMMAND_WORD + " "
@@ -89,7 +90,8 @@ public class ImportCommand extends Command {
         ArrayList<Event> eventListRemovedResidents = new ArrayList<>();
         for (Event event: eventList) {
             Event newEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
-                    event.getVenue(), event.getCapacity(), new ResidentList(ResidentList.DEFAULT_LIST));
+                    event.getVenue(), event.getCapacity(),
+                    new ResidentList(ResidentList.DEFAULT_LIST, ResidentList.DEFAULT_LIST));
             eventListRemovedResidents.add(newEvent);
         }
         newAddressBook.setEvents(eventListRemovedResidents);

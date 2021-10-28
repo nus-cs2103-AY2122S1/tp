@@ -16,7 +16,7 @@ import safeforhall.model.person.Person;
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    public static final String PARAMETERS = "n/NAME d/DATE v/VENUE c/CAPACITY r/RESIDENTS";
+    public static final String PARAMETERS = "n/NAME d/DATE t/TIME v/VENUE c/CAPACITY r/RESIDENTS";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_NAME + "NAME "
@@ -36,6 +36,7 @@ public class AddEventCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
+    public static final String MESSAGE_EXCEED_CAPACITY = "Number of residents to add exceed event capacity";
     public static final String MESSAGE_INVALID_RESIDENT = "%s is not a valid resident in the address book";
     public static final String EMPTY_STRING = "";
 
@@ -63,6 +64,10 @@ public class AddEventCommand extends Command {
         }
 
         ArrayList<Person> personList = model.toPersonList(toAdd.getResidentList());
+        if (personList.size() > toAdd.getCapacity().capacity) {
+            throw new CommandException(MESSAGE_EXCEED_CAPACITY);
+        }
+
         String combinedStorageString = toAdd.getCombinedStorageString(personList);
         Event editedEvent = new Event(toAdd.getEventName(), toAdd.getEventDate(), toAdd.getEventTime(),
                 toAdd.getVenue(), toAdd.getCapacity(), new ResidentList(personListToString(personList),

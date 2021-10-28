@@ -30,6 +30,7 @@ public class IncludeCommand extends Command {
             + CliSyntax.PREFIX_RESIDENTS + "A101, A102, A103";
 
     public static final String MESSAGE_SUCCESS = "%s added to event %s";
+    public static final String MESSAGE_EXCEED_CAPACITY = "Number of residents to add exceed event capacity";
     private final Index index;
     private final ResidentList residentList;
 
@@ -85,8 +86,14 @@ public class IncludeCommand extends Command {
         ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidentList());
 
         checkForDuplicates(toAdd, currentResidents);
+
         String combinedDisplayString = event.getCombinedDisplayString(toAdd);
         String combinedStorageString = event.getCombinedStorageString(toAdd);
+
+        if (new ResidentList(combinedDisplayString,
+                combinedStorageString).getResidents().size() > event.getCapacity().capacity) {
+            throw new CommandException(MESSAGE_EXCEED_CAPACITY);
+        }
 
         Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
                 event.getVenue(), event.getCapacity(), new ResidentList(combinedDisplayString,
