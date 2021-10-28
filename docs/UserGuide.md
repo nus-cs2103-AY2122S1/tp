@@ -417,11 +417,6 @@ Examples:
 * `deleteorg 1`
 > Deletes the 1st organisation from the organisation list.
 
-<div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
-</div>
-
 ##### Adding person to an organisation: `addtoorg`
 Adding a person to an organisation from the organisation list.
 
