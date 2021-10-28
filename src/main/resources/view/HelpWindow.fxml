@@ -20,7 +20,7 @@
       </stylesheets>
       <VBox>
         <children>
-               <Label fx:id="instruction" text="Label" />
+               <Label fx:id="description" text="Label" />
                <TableView fx:id="featureTable" editable="true" prefHeight="378.0" prefWidth="470.0" />
 
           <HBox alignment="BOTTOM_LEFT" prefHeight="72.0" prefWidth="470.0">
