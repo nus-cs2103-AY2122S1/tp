@@ -281,7 +281,7 @@ Format: `clear`
    Examples:
 
    * `ls` followed by delete 2 deletes the 2nd person in the address book.
-   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command. 
+   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.
 
 1. Shows you the task list of every single person in ContactSh.
 

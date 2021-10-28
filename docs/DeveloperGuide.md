@@ -215,7 +215,7 @@ The following activity diagram summarises what happens when a user executes a `c
 ### Command Cache
 
 The command Cache is the aspect of the program which stores the previous user input. This allows the user to browse
-through the previous input using the up and down arrow key which simulates the Linux experience. 
+through the previous input using the up and down arrow key which simulates the Linux experience.
 
 This function is facilitated by 3 aspects of the program:
 1. CommandBox in GUI
@@ -226,51 +226,51 @@ This function is facilitated by 3 aspects of the program:
 The following sequence diagram demonstrates how the caching mechanism in the Model and Logic unit:
 ![CachingModelAndLogic](images/CachingModelAndLogic.png)
 
-:information_source: **Note:** The execution of the command happens after the caching 
-(and is omitted in the above diagram). This means invalid commands are also stored. 
+:information_source: **Note:** The execution of the command happens after the caching
+(and is omitted in the above diagram). This means invalid commands are also stored.
 
 The following activity diagram illustrates how the storage in the cache is handled:
 ![CacheAddCommandActivityDiagram](images/CacheAddCommandActivityDiagram.png)
 
-With the current iteration, the cache may hold up to 50 most recent command. However, only the newest 25 command is 
+With the current iteration, the cache may hold up to 50 most recent command. However, only the newest 25 command is
 guaranteed to be saved at all times. The user is not blocked from accessing older commands as it provides additional
 functionality without too much loss.
 
 #### Accessing the Cache
 As mentioned before, the caching feature utilises a different kind of command as with other features. The reason will be
 explored in the design consideration section. Nonetheless, both command type are handled by the Logic unit almost
-exactly the same way. 
+exactly the same way.
 
 The diagram below shws the generation of the internal command in the GUI:
 ![AccessingCacheSequenceDiagram](images/AccessingCacheSequenceDiagram.png)
 
-The cache, stored in the Model, is implemented using the Singleton design pattern as there should, at all times, 
-be only one cache existing. 
+The cache, stored in the Model, is implemented using the Singleton design pattern as there should, at all times,
+be only one cache existing.
 
 #### Design Consideration
 ##### Aspect: Accessing cache
 * **Alternative 1** : Have cache stored in model and piggyback on existing command code.
 
-    * Pros: 
-  
-        * A relatively simple design with less possibility of bug 
-        * Less effort needed.
+    * Pros:
+
+        * A relatively simple design with less possibility of bug
+        * Less effort needed
         * Still maintain cohesion and separation of responsibility
-      
+
     * Cons:
-  
+
         * Could not differentiate between internal and external input command. This leads to either the possibility
           for user to input the internal commands accidentally, causing bug, or some commands being blocked from running
 
 * **Alternative 2 (current choice):** Have cache stored in model and create new internal command.
 
     * Pros:
-  
+
         * No need for command blocking and no possibility for user to accidentally type in the command
         * Still maintain cohesion and separation of responsibility
-      
+
     * Cons:
-  
+
         * Increased avenue for bugs
         * More coding to be done
         * Relatively worse in terms of "repeating yourself"
