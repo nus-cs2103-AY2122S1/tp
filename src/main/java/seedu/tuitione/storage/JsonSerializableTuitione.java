@@ -1,7 +1,12 @@
 package seedu.tuitione.storage;
 
+import static seedu.tuitione.model.lesson.Lesson.ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.student.Student.LESSON_SIZE_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.student.Student.MAX_LESSON_SIZE;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -55,8 +60,8 @@ class JsonSerializableTuitione {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public Tuitione toModelType() throws IllegalValueException {
-        List<Lesson> lessonList = prepareLessonList();
-        List<Student> studentList = prepareStudentList(lessonList);
+        List<Lesson> lessonList = prepareLessons();
+        List<Student> studentList = prepareStudentsAndLinkages(lessonList);
         return prepareTuitione(lessonList, studentList);
     }
 
@@ -83,7 +88,7 @@ class JsonSerializableTuitione {
     /**
      * Prepares the list of Lessons for model.
      */
-    public List<Lesson> prepareLessonList() throws IllegalValueException {
+    public List<Lesson> prepareLessons() throws IllegalValueException {
         List<Lesson> lessonList = new ArrayList<>();
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
             Lesson lesson = jsonAdaptedLesson.toModelType();
@@ -93,9 +98,9 @@ class JsonSerializableTuitione {
     }
 
     /**
-     * Prepares the list of Students for model.
+     * Prepares the list of Students for model with their assigned lessons.
      */
-    public List<Student> prepareStudentList(List<Lesson> lessonList) throws IllegalValueException {
+    public List<Student> prepareStudentsAndLinkages(List<Lesson> lessonList) throws IllegalValueException {
         List<Student> studentList = new ArrayList<>();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
@@ -113,21 +118,24 @@ class JsonSerializableTuitione {
             List<Lesson> lessonList) throws IllegalValueException {
 
         for (String jsonLessonCode : jsonLessonCodes) {
-            boolean hasFoundLesson = false;
-            for (Lesson lesson : lessonList) {
-                boolean isSameLesson = jsonLessonCode.equals(lesson.getLessonCode().value);
-                if (isSameLesson && lesson.containsStudent(student)) {
-                    throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
-                }
-                if (isSameLesson) {
-                    lesson.enrollStudent(student);
-                    hasFoundLesson = true;
-                    break;
-                }
+            // find if lesson is present
+            Optional<Lesson> lessonStream = lessonList.stream()
+                    .filter(l -> l.getLessonCode().value.equals(jsonLessonCode))
+                    .findFirst();
+            Lesson lesson = lessonStream.orElseThrow(() -> new IllegalValueException(MESSAGE_INVALID_LESSON_CODE));
+
+            // enrollment checks
+            if (!student.isAbleToEnrollForMoreLessons()) {
+                throw new IllegalValueException(String.format(LESSON_SIZE_MESSAGE_CONSTRAINT,
+                        student.getName(), MAX_LESSON_SIZE));
             }
-            if (!hasFoundLesson) {
-                throw new IllegalValueException(MESSAGE_INVALID_LESSON_CODE);
+            if (lesson.containsStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
             }
+            if (!lesson.isAbleToEnroll(student)) {
+                throw new IllegalValueException(String.format(ENROLLMENT_MESSAGE_CONSTRAINT, student.getName()));
+            }
+            lesson.enrollStudent(student);
         }
     }
 }

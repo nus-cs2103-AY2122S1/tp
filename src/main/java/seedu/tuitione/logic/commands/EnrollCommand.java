@@ -67,23 +67,24 @@ public class EnrollCommand extends Command {
         }
         Lesson lesson = lessonList.get(indexLesson.getZeroBased());
 
+        // individual checks
         if (lesson.containsStudent(studentToEnroll)) {
             throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON, studentToEnroll.getName(), lesson));
         }
-        if (!lesson.isAbleToEnroll(studentToEnroll)) {
-            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
-        }
-
         if (!studentToEnroll.isAbleToEnrollForMoreLessons()) {
             throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_LESSONS,
                     studentToEnroll.getName(),
                     Student.MAX_LESSON_SIZE));
         }
-
-        if (!lesson.isAbleToEnrollForMoreStudents()) {
+        if (!lesson.isAbleToEnrollMoreStudents()) {
             throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_STUDENTS,
                     lesson.getLessonCode(),
                     Lesson.MAX_STUDENT_SIZE));
+        }
+
+        // final overall check
+        if (!lesson.isAbleToEnroll(studentToEnroll)) {
+            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
         }
 
         lesson.enrollStudent(studentToEnroll);

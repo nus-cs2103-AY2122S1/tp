@@ -108,12 +108,19 @@ public class Lesson {
     }
 
     /**
+     * Returns true if Lesson has 14 or fewer Students enrolled.
+     */
+    public boolean isAbleToEnrollMoreStudents() {
+        return students.size() < MAX_STUDENT_SIZE;
+    }
+
+    /**
      * Returns true if a student is eligible to enroll for the lesson.
      * A student must be of the same grade, must be available for the time slot,
      * and must not be already enrolled to the lesson.
      */
     public boolean isAbleToEnroll(Student student) {
-        if (student == null) {
+        if (student == null || !student.isAbleToEnrollForMoreLessons()) {
             return false;
         }
         if (containsStudent(student)) {
@@ -129,7 +136,7 @@ public class Lesson {
                 return false;
             }
         }
-        return true;
+        return isAbleToEnrollMoreStudents();
     }
 
     /**
@@ -234,13 +241,6 @@ public class Lesson {
                 && price.equals(otherLesson.price)
                 && lessonCode.equals(otherLesson.lessonCode)
                 && students.equals(otherLesson.students);
-    }
-
-    /**
-     * Returns true if Lesson has 14 or fewer Students enrolled.
-     */
-    public boolean isAbleToEnrollForMoreStudents() {
-        return students.size() < MAX_STUDENT_SIZE;
     }
 
     @Override

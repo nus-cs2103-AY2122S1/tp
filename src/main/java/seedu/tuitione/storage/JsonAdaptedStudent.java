@@ -1,5 +1,7 @@
 package seedu.tuitione.storage;
 
+import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -32,7 +34,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final String grade;
-    private final List<JsonAdaptedRemark> remarked = new ArrayList<>();
+    private final List<JsonAdaptedRemark> remarks = new ArrayList<>();
     private final List<String> lessonCodes = new ArrayList<>();
 
     /**
@@ -41,7 +43,7 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("tuitione") String address,
-            @JsonProperty("grade") String grade, @JsonProperty("remarked") List<JsonAdaptedRemark> remarked,
+            @JsonProperty("grade") String grade, @JsonProperty("remarks") List<JsonAdaptedRemark> remarks,
             @JsonProperty("lessons") List<String> lessonCodes) {
 
         this.name = name;
@@ -49,8 +51,8 @@ class JsonAdaptedStudent {
         this.email = email;
         this.address = address;
         this.grade = grade;
-        if (remarked != null) {
-            this.remarked.addAll(remarked);
+        if (remarks != null) {
+            this.remarks.addAll(remarks);
         }
         if (lessonCodes != null) {
             this.lessonCodes.addAll(lessonCodes);
@@ -66,7 +68,7 @@ class JsonAdaptedStudent {
         email = source.getEmail().value;
         address = source.getAddress().value;
         grade = source.getGrade().value;
-        remarked.addAll(source.getRemarks().stream()
+        remarks.addAll(source.getRemarks().stream()
                 .map(JsonAdaptedRemark::new)
                 .collect(Collectors.toList()));
         lessonCodes.addAll(source.getLessonCodes().stream()
@@ -89,11 +91,6 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Remark> studentRemarks = new ArrayList<>();
-        for (JsonAdaptedRemark remark : remarked) {
-            studentRemarks.add(remark.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -135,7 +132,13 @@ class JsonAdaptedStudent {
         }
         final Grade modelGrade = new Grade(grade);
 
-        final Set<Remark> modelRemarks = new HashSet<>(studentRemarks);
+        final Set<Remark> modelRemarks = new HashSet<>();
+        for (JsonAdaptedRemark remark : remarks) {
+            if (modelRemarks.size() == MAX_REMARK_SIZE) {
+                break;
+            }
+            modelRemarks.add(remark.toModelType());
+        }
         return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelGrade, modelRemarks);
     }
 }
