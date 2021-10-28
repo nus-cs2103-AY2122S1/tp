@@ -62,17 +62,17 @@ public class EventTask extends Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("\nDescription: ")
-                .append(getDescription().toString())
                 .append("\nEvent on: ")
                 .append(getTaskDate().toString())
                 .append("\nStatus: ")
                 .append(getStatusString())
                 .append("\nPriority: ")
                 .append(getPriority().toString());
-
+        if (!this.getDescription().isEmpty()) {
+            builder.append("\nDescription: ")
+                    .append(getDescription());
+        }
         Set<Tag> tags = getTags();
-
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");
             tags.forEach(builder::append);
