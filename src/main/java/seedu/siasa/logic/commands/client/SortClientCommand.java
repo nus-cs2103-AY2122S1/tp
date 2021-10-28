@@ -19,7 +19,7 @@ public class SortClientCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the client list alphabetically by the order specified.\n"
             + "Parameters: ORDER (asc, dsc)\n"
-            + "Example: " + COMMAND_WORD + "dsc";
+            + "Example: " + COMMAND_WORD + " dsc";
 
     public static final String MESSAGE_SUCCESS = "Sorted clients";
 

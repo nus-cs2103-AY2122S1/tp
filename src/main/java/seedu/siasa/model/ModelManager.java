@@ -2,7 +2,8 @@ package seedu.siasa.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.siasa.model.person.PersonComparator.SORT_BY_ALPHA_ASC;
+import static seedu.siasa.model.person.PersonComparator.PERSON_SORT_BY_ALPHA_ASC;
+import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_ALPHA_ASC;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -44,12 +45,13 @@ public class ModelManager implements Model {
 
         this.siasa = new Siasa(siasa);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.comparatorPerson = SORT_BY_ALPHA_ASC;
+        this.comparatorPerson = PERSON_SORT_BY_ALPHA_ASC;
         filteredPersons = new FilteredList<>(this.siasa.getPersonList());
         filteredPolicies = new FilteredList<>(this.siasa.getPolicyList());
         sortedPersons = new SortedList<>(filteredPersons);
-        sortedPersons.setComparator(SORT_BY_ALPHA_ASC);
+        sortedPersons.setComparator(PERSON_SORT_BY_ALPHA_ASC);
         sortedPolicies = new SortedList<>(filteredPolicies);
+        sortedPolicies.setComparator(POLICY_SORT_BY_ALPHA_ASC);
     }
 
     public ModelManager() {
