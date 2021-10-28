@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.SplitPane;
 import org.json.JSONArray;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
@@ -132,8 +132,7 @@ public class MainWindow extends UiPart<Stage> {
         SplitPane.Divider sideDivider = sidePanel.getDividers().get(0);
         sideDivider.positionProperty().addListener(new ChangeListener<Number>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue )
-            {
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 sideDivider.setPosition(0.25);
             }
         });
@@ -141,8 +140,7 @@ public class MainWindow extends UiPart<Stage> {
         SplitPane.Divider mainDivider = mainPanel.getDividers().get(0);
         mainDivider.positionProperty().addListener(new ChangeListener<Number>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue )
-            {
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 mainDivider.setPosition(0.5);
             }
         });
