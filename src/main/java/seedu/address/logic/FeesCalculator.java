@@ -178,7 +178,7 @@ public class FeesCalculator implements Calculator {
         LocalDate end = earlierEnd.with(TemporalAdjusters.next(updateDay));
 
         // get lessons in between
-        int numLessons = (int) ChronoUnit.WEEKS.between(start, end.plusDays(1)) - 1;
+        int numLessons = (int) ChronoUnit.WEEKS.between(start, end) - 1;
 
         if (laterStart.equals(lastUpdated.getLastUpdatedLocalDate())
                 && lastUpdatedDay == updateDay.getValue()
