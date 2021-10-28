@@ -110,9 +110,9 @@ Action | Format, Examples
 **Delete Employee** | `deleteE INDEX`<br> e.g., `deleteE 1`
 **Delete Supplier** | `deleteS INDEX`<br> e.g., `deleteS 2`
 **Delete Reservation** | `deleteR INDEx` <br> e.g., `deleteR 4`
-**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lp/LOYALTYPOINTS] [alg/ALLERGIES]…​ [sr/SPECIALREQUESTS]…​ [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [sh/SHIFTS]…​ [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
-**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [lp/LOYALTYPOINTS] [alg/ALLERGIES]…​ [sr/SPECIALREQUESTS]…​ [t/TAG]…​`<br> e.g.,`editC 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [sh/SHIFTS]…​ [t/TAG]…​`<br> e.g.,`editE 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`editS 2 n/James Lee e/jameslee@example.com st/Beef`
 **Edit Reservation**| `editR INDEX [r/REMARK] [t/TAG]…`<br> e.g. `editR 2 r/surprise birthday party t/10PercentOff`
 **Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
 **Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
