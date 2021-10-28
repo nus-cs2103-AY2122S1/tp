@@ -15,7 +15,7 @@ import seedu.edrecord.model.assignment.Assignment;
  */
 public class DeleteAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "delasg";
+    public static final String COMMAND_WORD = "dlasg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes an assignment using its index number used in the displayed assignment list.\n"
