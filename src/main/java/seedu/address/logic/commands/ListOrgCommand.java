@@ -12,7 +12,7 @@ import seedu.address.model.organisation.Organisation;
  */
 public class ListOrgCommand extends Command {
 
-    public static final String COMMAND_WORD = "list org";
+    public static final String COMMAND_WORD = "listorg";
 
     public static final String MESSAGE_SUCCESS = "Listed all organisations";
     public static final Predicate<Organisation> PREDICATE_SHOW_ALL_ORGANISATIONS = unused -> true;

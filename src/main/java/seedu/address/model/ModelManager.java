@@ -116,15 +116,21 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteFromOrganisation(Person person, Name name) {
-        Organisation organisation = organisationList.getByName(name);
-        organisation.removePerson(person);
+    public void deleteFromOrganisation(Person person, Organisation organisation) {
+        addressBook.deleteFromOrganisation(person, organisation);
         updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
     }
 
     @Override
-    public void deleteOrganisation(Organisation target) {
-        organisationList.remove(target);
+    public void deleteOrganisation(Organisation organisation) {
+        addressBook.deleteOrganisation(organisation);
+        updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
+    }
+
+    @Override
+    public Organisation getOrganisationByName(Name name) {
+        Organisation organisation = addressBook.getOrganisationByName(name);
+        return organisation;
     }
 
     @Override
@@ -140,8 +146,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addToOrganisation(Person person, Name name) {
-        Organisation organisation = organisationList.getByName(name);
-        organisation.addPerson(person);
+        addressBook.addToOrganisation(person, name);
         updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
     }
 

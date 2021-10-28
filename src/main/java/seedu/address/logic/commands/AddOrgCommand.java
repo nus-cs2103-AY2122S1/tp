@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.organisation.Organisation;
 
 public class AddOrgCommand extends Command {
-    public static final String COMMAND_WORD = "addO";
+    public static final String COMMAND_WORD = "addorg";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an organisation to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
