@@ -43,7 +43,7 @@ public class PaidCommand extends UndoableCommand {
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
-    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 " + "1" + " 150.00";
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 " + "1 " + PREFIX_PAID_AMOUNT + "150.00";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pays the specified amount to the lesson "
             + "identified by lesson index of the student identified by the"
