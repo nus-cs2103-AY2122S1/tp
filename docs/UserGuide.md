@@ -26,9 +26,9 @@ tApp is a **desktop app for managing tutorial groups and personal tasks, optimiz
 
     * **`students`** : Lists all students.
 
-    * **`addStudent`**`n/Tom Lim e/tom@u.nus.edu s/a0123456b` : Adds a student named `Tom Lim` to the student list.
+    * **`addStudent`**`n/Tom Lim e/tom@u.nus.edu s/A0123456B` : Adds a student named `Tom Lim` to the student list.
 
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`deleteStudent`**`3` : Deletes the 3rd student shown in the current list.
 
     * **`clearStudents`** : Deletes all students.
 
@@ -48,16 +48,16 @@ tApp is a **desktop app for managing tutorial groups and personal tasks, optimiz
   e.g. in `addStudent n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/cs` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/year2`, `t/year2 t/cs` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME s/STUDENT_NUMBER`, `s/STUDENT_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `s/A0221393L s/A0114938H`, only `s/A0114938H` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `students`, `exit` and `clearStudents`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
