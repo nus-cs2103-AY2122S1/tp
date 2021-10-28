@@ -175,7 +175,6 @@ Other available optional fields for a student are:
 * Academic level
 * Academic stream
 * School
-* Outstanding fees
 * Remarks
 * Tags
 * Lessons
@@ -362,6 +361,7 @@ The essential fields for a lesson are:
 
 An optional field for both types of lesson is:
 * Homework
+* Outstanding Fees (refer to more details in this [section](#managing-lesson-fees))
 
 Optional fields for a **recurring** lesson is:
 * End date
@@ -488,6 +488,73 @@ Format: `remind`
 
 <div class="caption">Reminder window interface.</div>
 
+<div style="page-break-after: always;"></div>
+
+### Managing Lesson Fees
+
+This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+* Outstanding fees can only be added and edited using Lesson Commands.
+* Outstanding fee displayed in Student details is the sum of all the student's lesson's outstanding fees.
+</div>
+
+#### Adding a Lesson's Outstanding Fees : `ladd`
+
+Adds outstanding fees to specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
+
+In the event that you have existing outstanding fees for the lesson prior to adding the lesson, you can add outstanding fees as a field when adding lesson.
+Outstanding fee is an optional field and if not added with lesson, TAB will assume outstanding fees for the newly added lesson as $0.00.
+
+Format: `ladd 1 COMPULSORY_FIELDS f/OUTSTANDING_AMOUNT`
+
+Examples:
+
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds the recurring lesson with the specified details and outstanding fees is assumed to be `$0.00`.
+
+* `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50 f/250`
+  adds the recurring lesson with an outstanding fee of `$250.00`.
+
+#### Editing a Lesson's Outstanding Fees: `ledit`
+
+Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
+
+In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
+Refer to [Behaviours of the Fees Calculator](#Behaviours-of-the-Fees-Calculator) for cases the Fees Calculator will not account for.
+
+Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
+
+Examples:
+* `ledit 2 1 f/250` Edits the outstanding fees to `$100.00`.
+* `ledit 1 1 time/1100-1200 f/100` Edits the time range to `1100-1200` and outstanding fees to `$100.00`.
+* `ledit 1 1 rates/50 f/0` Edits the rates to be `$50.00` and outstanding fees to be `$0.00`.
+
+#### Paying a Lesson's Outstanding Fees: `paid`
+
+Pays for a specific lesson.
+
+The amount paid would be deducted from the outstanding fees field. The amount paid should not be greater than the current outstanding fees.
+
+Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+
+Examples:
+* `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
+* `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
+
+#### Behaviours of the Fees Calculator
+
+TAB will automatically update your lesson's outstanding fees once the lesson has ended using Fees Calculator feature. 
+The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
+
+However, the Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
+
+* **Lesson rates increment.** In the event that you want to increase your lesson rates and edited lesson rates using `ledit`, the outstanding fees will not change.
+* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed. The updated outstanding fees will not change and will not be
+recalculated using the newly edited lesson rates.
+* **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the outstanding fees will not deduct
+the fees of the cancelled lesson for you.
+* **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
 
 <div style="page-break-after: always;"></div>
 
@@ -687,7 +754,16 @@ Action | Format, Examples
 **Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math`
 **Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
+**Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 **View Schedule** | `schedule`
+**View Schedule of Particular Day** | `day`
+**View Schedule of Today** | `today`
+**View Schedule of Week** | `week`
+**View Schedule of Month** | `month`
+**View Schedule of Year** | `year`
+**Navigate forward in Schedule** | `next`
+**Navigate backward in Schedule** | `back`
+**View Reminders** | `reminder`
 **Clear** |`clear`
 **Undo** | `undo`
 **Redo** | `redo`
