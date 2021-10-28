@@ -34,7 +34,7 @@ public class HelpWindow extends PopupWindow {
     private Button copyButton;
 
     @FXML
-    private Label instruction;
+    private Label description;
 
     @FXML
     private Label helpMessage;
@@ -53,7 +53,7 @@ public class HelpWindow extends PopupWindow {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        instruction.setText(DESCRIPTION);
+        description.setText(DESCRIPTION);
         helpMessage.setText(HELP_MESSAGE);
         initializeFeatureList();
     }
