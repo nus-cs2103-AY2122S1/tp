@@ -43,11 +43,23 @@ class InterviewTest {
 
     @Test
     public void isEmptyInterview() {
+        // EMPTY
         Interview emptyInterview = new Interview("");
         assertTrue(emptyInterview.isEmptyInterview());
 
+        // NON EMPTY
         Interview nonEmptyInterview = new Interview("2021-10-31, 10:25");
         assertFalse(nonEmptyInterview.isEmptyInterview());
     }
 
+    @Test
+    public void hasInterviewPassed() {
+        // PASSED
+        Interview passedInterview = new Interview("99-08-12, 00:10");
+        assertTrue(passedInterview.hasInterviewPassed());
+
+        // NOT YET PASSED
+        Interview notPassedInterview = new Interview("2100-08-12, 00:10");
+        assertFalse(notPassedInterview.hasInterviewPassed());
+    }
 }

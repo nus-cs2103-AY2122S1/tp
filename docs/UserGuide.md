@@ -373,6 +373,27 @@ but not with *Role*s such as `Software` or `Software Developer`.
     * For example:
         * A `Done` input can match with applicants that have their *Done* status marked as Done.
         * A `Not Done` input can match with applicants that have their *Done* status unmarked as Not Done.
+        
+        
+### Filtering interviews : `filter_interview`
+Filters applicants by interview dates based on whether they are upcoming or in the past (based on current date and time).
+Differs from ```find i/``` as it is not returning all applicants with interviews matching a specific date but 
+rather all applicants with interviews that fall into the same group (`past` or `future`).
+
+Format: `filter_interview past` or `filter_interview future`
+
+* `filter_interview past` returns applicants with interviews that were in the past (compared to the current date and time).
+* `filter_interview future` returns applicants with interviews that are coming up in the future (compared to the current date and time).
+* Either `past` or `future` must be given as an input after `filter_interview`, and is case-insensitive.
+* Only one input must be given (`filter_interview past future` will not work).
+
+Examples:
+* If the current date and time is 29th October 2021, 1600, then `filter_interview past` or 
+ `filter_interview pAsT` will return applicants with interviews that were before and including
+  29th October 2021, 1600.
+
+* If the current date and time is 29th October 2021, 1600, then `filter_interview future` or 
+ `filter_interview fUTURE` will return applicants with interviews that are after 29th October 2021, 1600.
 
 ### Deleting an applicant : `delete`
 
