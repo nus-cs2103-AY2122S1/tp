@@ -1,7 +1,7 @@
 package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.edrecord.logic.commands.AddAssignmentCommand.MESSAGE_NO_MODULE_SELECTED;
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
@@ -64,7 +64,7 @@ public class EditAssignmentCommand extends Command {
         if (!model.hasSelectedModule()) {
             throw new CommandException(MESSAGE_NO_MODULE_SELECTED);
         }
-        List<Assignment> assignmentList = model.getSelectedModule().getAssignmentList();
+        List<Assignment> assignmentList = model.getSelectedModule().getValue().getAssignmentList();
 
         if (index.getZeroBased() >= assignmentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);

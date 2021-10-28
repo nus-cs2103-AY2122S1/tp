@@ -171,6 +171,14 @@ public class Module {
     }
 
     /**
+     * Removes Assignment {@code key} from this {@code Module}.
+     * {@code key} must exist in this module.
+     */
+    public void deleteAssignment(Assignment key) {
+        assignmentList.remove(key);
+    }
+
+    /**
      * Replaces the given Assignment {@code target} in the list with {@code editedAssignment}.
      * {@code target} must exist in EdRecord under this module.
      * The identity of {@code editedAssignment} must not be the same as any existing assignment under the same module.

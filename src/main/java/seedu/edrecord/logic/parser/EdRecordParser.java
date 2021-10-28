@@ -11,6 +11,7 @@ import seedu.edrecord.logic.commands.AddCommand;
 import seedu.edrecord.logic.commands.CdCommand;
 import seedu.edrecord.logic.commands.ClearCommand;
 import seedu.edrecord.logic.commands.Command;
+import seedu.edrecord.logic.commands.DeleteAssignmentCommand;
 import seedu.edrecord.logic.commands.DeleteCommand;
 import seedu.edrecord.logic.commands.DeleteGradeCommand;
 import seedu.edrecord.logic.commands.DeleteGroupCommand;
@@ -99,6 +100,9 @@ public class EdRecordParser {
 
         case AddAssignmentCommand.COMMAND_WORD:
             return new AddAssignmentCommandParser().parse(arguments);
+
+        case DeleteAssignmentCommand.COMMAND_WORD:
+            return new DeleteAssignmentCommandParser().parse(arguments);
 
         case EditAssignmentCommand.COMMAND_WORD:
             return new EditAssignmentCommandParser().parse(arguments);

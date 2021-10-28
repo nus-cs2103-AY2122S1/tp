@@ -1,6 +1,7 @@
 package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -45,7 +46,6 @@ public class GradeCommand extends Command {
             + PREFIX_SCORE + "73 ";
 
     public static final String MESSAGE_SUCCESS = "Graded student: %s \nfor assignment: %s \nwith grade: %s";
-    public static final String MESSAGE_NO_MODULE_SELECTED = "No module selected. Please cd into a module first";
     public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
     public static final String MESSAGE_SCORE_GREATER_THAN_MAX = "Student's score is greater than the "
             + "maximum score for this assignment";

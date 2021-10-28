@@ -1,5 +1,7 @@
 package seedu.edrecord.ui;
 
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
+
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,7 +15,6 @@ import seedu.edrecord.model.module.Module;
 public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooter.fxml";
-    private static final String MESSAGE_NO_MODULES_SELECTED = "No Modules Selected";
 
     @FXML
     private Label selectedModuleStatus;
@@ -33,7 +34,7 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     public void setSelectedModule(Module module) {
-        String selectedModule = MESSAGE_NO_MODULES_SELECTED;
+        String selectedModule = MESSAGE_NO_MODULE_SELECTED;
         if (module != null && !module.toString().equals(CdCommand.WILDCARD_MODULE_CODE)) {
             selectedModule = module.toString();
         }

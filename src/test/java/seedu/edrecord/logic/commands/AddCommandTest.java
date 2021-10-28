@@ -10,6 +10,7 @@ import static seedu.edrecord.testutil.TypicalModules.getTypicalModules;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -235,6 +236,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public List<Assignment> getAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Optional<Assignment> searchAssignment(Name name) {
             throw new AssertionError("This method should not be called.");
         }
@@ -246,6 +252,11 @@ public class AddCommandTest {
 
         @Override
         public void addAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Assignment target) {
             throw new AssertionError("This method should not be called.");
         }
 
