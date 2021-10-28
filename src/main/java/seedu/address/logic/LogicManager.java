@@ -44,7 +44,6 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        model.resetViewedPerson();
         commandResult = command.execute(model);
 
         try {
