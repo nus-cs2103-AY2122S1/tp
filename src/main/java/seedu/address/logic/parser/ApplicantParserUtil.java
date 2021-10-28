@@ -143,43 +143,24 @@ public class ApplicantParserUtil {
     }
 
     /**
-     * Parses a {@code String gitHubUrl} into a {@code ProfileUrl}. It returns emptyProfileUrl if it receives
+     * Parses a {@code String url} into a {@code ProfileUrl}. It returns emptyProfileUrl if it receives
      * empty string.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param gitHubUrl user input string of the github link.
+     * @param url user input string of the github link.
      * @return the profileUrl containing this url.
      * @throws ParseException if the given {@code gitHubUrl} is invalid.
      */
-    public static ProfileUrl parseGitHubUrl(String gitHubUrl) throws ParseException {
-        String trimmedGitHubUrl = gitHubUrl.trim();
-        if (trimmedGitHubUrl.equals("")) {
+    public static ProfileUrl parseUrl(String url) throws ParseException {
+        requireNonNull(url);
+        String trimmedUrl = url.trim();
+        if (trimmedUrl.equals("")) {
             return ProfileUrl.emptyProfileUrl();
         }
-        if (!ProfileUrl.isValidUrl(gitHubUrl)) {
+        if (!ProfileUrl.isValidUrl(url)) {
             throw new ParseException(ProfileUrl.MESSAGE_CONSTRAINTS);
         }
-        return new ProfileUrl(gitHubUrl);
-    }
-
-    /**
-     * Parses a {@code String linkedInUrl} into a {@code ProfileUrl}. It returns emptyProfileUrl if it receives
-     * empty string.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @param linkedInUrl user input string of the linkedin link.
-     * @return the profileUrl containing this url.
-     * @throws ParseException if the given {@code linkedInUrl} is invalid.
-     */
-    public static ProfileUrl parseLinkedInUrl(String linkedInUrl) throws ParseException {
-        String trimmedLinkedInUrl = linkedInUrl.trim();
-        if (trimmedLinkedInUrl.equals("")) {
-            return ProfileUrl.emptyProfileUrl();
-        }
-        if (!ProfileUrl.isValidUrl(linkedInUrl)) {
-            throw new ParseException(ProfileUrl.MESSAGE_CONSTRAINTS);
-        }
-        return new ProfileUrl(linkedInUrl);
+        return new ProfileUrl(url);
     }
 
 }
