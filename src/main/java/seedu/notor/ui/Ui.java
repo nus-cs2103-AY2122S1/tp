@@ -1,6 +1,7 @@
 package seedu.notor.ui;
 
 import javafx.stage.Stage;
+import seedu.notor.ui.listpanel.PersonListPanel;
 
 /**
  * API of UI component

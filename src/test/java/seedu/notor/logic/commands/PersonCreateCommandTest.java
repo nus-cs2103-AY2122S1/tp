@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.notor.commons.core.GuiSettings;
+import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -28,7 +29,7 @@ import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
-import seedu.notor.ui.PersonListPanel;
+import seedu.notor.ui.listpanel.PersonListPanel;
 
 public class PersonCreateCommandTest {
 
@@ -226,17 +227,22 @@ public class PersonCreateCommandTest {
         }
 
         @Override
+        public void listSuperGroup() {
+
+        }
+
+        @Override
+        public void listSubGroup(Index i) {
+
+        }
+
+        @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void displayPersons() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void displayGroups() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -251,13 +257,13 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public boolean isPersonView() {
-            return false;
+        public boolean isPersonList() {
+            return true;
         }
 
         @Override
-        public boolean isGroupView() {
-            throw new AssertionError("This method should not be called.");
+        public boolean isSuperGroupList() {
+            return false;
         }
 
         @Override

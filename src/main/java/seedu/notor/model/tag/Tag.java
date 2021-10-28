@@ -14,13 +14,11 @@ import seedu.notor.model.util.UniqueList;
  */
 public class Tag implements Unique<Tag> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags' names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags' names should be alphanumeric and can have spaces";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String tagName;
     // TODO: populate tagged with all the people who are tagged, w/ appropriate accessors
-    // decide if groups are also tagged in the same way, and what happens if a group is
-    // removed from someone...
     private final UniqueList<Person> tagged;
 
     /**

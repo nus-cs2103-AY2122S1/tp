@@ -1,6 +1,6 @@
 package seedu.notor.ui;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -48,8 +48,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label groups;
     @FXML
-    private Label subGroups;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -70,8 +68,31 @@ public class PersonCard extends UiPart<Region> {
             note.setManaged(false);
             noteLastModified.setManaged(false);
         }
-        groups.setText(Arrays.toString(person.getDisplaySuperGroups().toArray()));
-        subGroups.setText(Arrays.toString(person.getDisplaySubGroups().toArray()));
+        // TODO: Messy Code here
+        StringBuilder groupsDisplayText = new StringBuilder();
+        int i = 0;
+        for (String superGroup : person.getDisplaySuperGroups()) {
+            groupsDisplayText.append(superGroup);
+            ArrayList<String> displaySubGroups = new ArrayList<>();
+            for (String subGroup : person.getDisplaySubGroups()) {
+                String[] split = subGroup.split("_");
+                if (split[0].equals(superGroup)) {
+                    displaySubGroups.add(split[1]);
+                }
+            }
+            if (displaySubGroups.size() != 0) {
+                groupsDisplayText.append(" (").append(String.join(",", displaySubGroups)).append(")");
+            }
+            if (i != person.getDisplaySuperGroups().size() - 1) {
+                groupsDisplayText.append(", ");
+            }
+            i += 1;
+        }
+        if (groupsDisplayText.toString().equals("")) {
+            groups.setManaged(false);
+        } else {
+            groups.setText(groupsDisplayText.toString());
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

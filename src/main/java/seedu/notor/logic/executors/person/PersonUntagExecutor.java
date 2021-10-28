@@ -35,6 +35,7 @@ public class PersonUntagExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
+        checkPersonList();
         Person person = super.getPerson();
         Person taggedPerson = createTaggedPerson(person, tags);
 

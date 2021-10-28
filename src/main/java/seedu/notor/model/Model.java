@@ -5,12 +5,13 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.notor.commons.core.GuiSettings;
+import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
-import seedu.notor.ui.PersonListPanel;
+import seedu.notor.ui.listpanel.PersonListPanel;
 
 /**
  * The API of the Model component.
@@ -153,28 +154,32 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns an unmodifiable view of the filtered group list
+     * Returns an unmodifiable view of the filtered group list.
      */
     ObservableList<? extends Group> getFilteredGroupList();
 
     /**
-     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * Updates the list to all SuperGroups.
+     */
+    void listSuperGroup();
+
+    /**
+     * Updates the list to all SuperGroups.
+     */
+    void listSubGroup(Index i);
+
+    /**
+     * Updates the filter to  {@code predicate}.
      *
-     * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
 
     //=========== View Change ============================================================
-
     /**
      * Updates Notor to display Persons.
      */
     void displayPersons();
 
-    /**
-     * Updates Notor to display Groups.
-     */
-    void displayGroups();
 
     /**
      * Updates Notor to display Person archive.
@@ -182,10 +187,9 @@ public interface Model {
     void displayPersonArchive();
 
     //=========== View Check =============================================================
+    boolean isPersonList();
 
-    boolean isPersonView();
-
-    boolean isGroupView();
+    boolean isSuperGroupList();
 
     boolean isArchiveView();
 }

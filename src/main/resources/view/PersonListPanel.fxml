@@ -4,5 +4,5 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox  xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="personListView" prefHeight="1700" maxHeight="1.7976931348623157E308"/>
+    <ListView fx:id="listView" prefHeight="1700" maxHeight="1.7976931348623157E308"/>
 </VBox>

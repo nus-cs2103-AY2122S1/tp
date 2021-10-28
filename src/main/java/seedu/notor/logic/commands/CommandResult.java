@@ -26,8 +26,11 @@ public class CommandResult {
     /** The note should be shown for the respective user. */
     private final boolean showNote;
 
-
     private final Notable notable;
+
+    // TODO: ADHFJIOJASFOIJOAFSJHAFJ. Some extremely bad coding practices here cuz Elton's Brain not functioning.
+
+
 
 
     /**

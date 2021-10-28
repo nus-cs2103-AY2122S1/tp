@@ -6,7 +6,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 //import seedu.notor.model.common.Note;
 
-public class NotePane extends UiPart<Region> {
+public class ViewPanel extends UiPart<Region> {
 
     private static final String FXML = "NotePane.fxml";
 
@@ -15,7 +15,7 @@ public class NotePane extends UiPart<Region> {
     @FXML
     private Label note;
 
-    NotePane() {
+    ViewPanel() {
         super(FXML);
 
     }

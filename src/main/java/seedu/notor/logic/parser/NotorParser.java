@@ -12,14 +12,16 @@ import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.ExitCommand;
 import seedu.notor.logic.commands.ExportCommand;
 import seedu.notor.logic.commands.HelpCommand;
-import seedu.notor.logic.commands.ListCommand;
 import seedu.notor.logic.commands.NoteCommand;
 import seedu.notor.logic.commands.group.GroupClearNoteCommand;
 import seedu.notor.logic.commands.group.GroupCommand;
 import seedu.notor.logic.commands.group.GroupDeleteCommand;
+import seedu.notor.logic.commands.group.GroupFindCommand;
 import seedu.notor.logic.commands.group.GroupNoteCommand;
 import seedu.notor.logic.commands.group.SubGroupCreateCommand;
+import seedu.notor.logic.commands.group.SubGroupListCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
+import seedu.notor.logic.commands.group.SuperGroupListCommand;
 import seedu.notor.logic.commands.person.PersonAddGroupCommand;
 import seedu.notor.logic.commands.person.PersonArchiveAllCommand;
 import seedu.notor.logic.commands.person.PersonArchiveCommand;
@@ -31,6 +33,7 @@ import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonFindCommand;
+import seedu.notor.logic.commands.person.PersonListCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
 import seedu.notor.logic.commands.person.PersonTagCommand;
@@ -39,9 +42,12 @@ import seedu.notor.logic.commands.person.PersonUntagCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.logic.parser.group.GroupClearNoteCommandParser;
 import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
+import seedu.notor.logic.parser.group.GroupFindCommandParser;
 import seedu.notor.logic.parser.group.GroupNoteCommandParser;
 import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
+import seedu.notor.logic.parser.group.SubGroupListCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
+import seedu.notor.logic.parser.group.SuperGroupListCommandParser;
 import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
 import seedu.notor.logic.parser.person.PersonArchiveAllCommandParser;
 import seedu.notor.logic.parser.person.PersonArchiveCommandParser;
@@ -52,6 +58,7 @@ import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
 import seedu.notor.logic.parser.person.PersonFindCommandParser;
+import seedu.notor.logic.parser.person.PersonListCommandParser;
 import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
 import seedu.notor.logic.parser.person.PersonTagCommandParser;
@@ -176,6 +183,8 @@ public class NotorParser {
                     return new GroupNoteCommandParser(index).parse();
                 } else if (GroupClearNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new GroupClearNoteCommandParser(index).parse();
+                } else if (SubGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new SubGroupListCommandParser(index).parse();
                 } else {
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
@@ -187,20 +196,25 @@ public class NotorParser {
             final String commandWord = targetedMatcher.group("commandWord");
             final String subCommandWord = targetedMatcher.group("subCommandWord");
             final String arguments = targetedMatcher.group("arguments");
+            // TODO: List command conversion/find command conversion
             if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
-                if (PersonArchiveShowCommand.COMMAND_WORDS.contains(subCommandWord)) {
-                    return new PersonArchiveShowCommandParser().parse();
-                } else if (ListCommand.COMMAND_WORD.equals(subCommandWord)) {
-                    // Temp stub used to test List command.
-                    return new ListCommand();
+                if (PersonListCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonListCommandParser(arguments).parse();
                 } else if (PersonFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonFindCommandParser(arguments).parse();
                 } else if (PersonArchiveAllCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonArchiveAllCommandParser().parse();
+                } else if (PersonArchiveShowCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonArchiveShowCommandParser().parse();
                 }
             }
-            // TODO: List command conversion/find command conversion
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
+                if (SuperGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new SuperGroupListCommandParser(arguments).parse();
+                } else if (GroupFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new GroupFindCommandParser(arguments).parse();
+                }
+            }
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

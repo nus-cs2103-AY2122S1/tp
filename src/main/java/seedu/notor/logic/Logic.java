@@ -10,6 +10,8 @@ import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
+import seedu.notor.model.group.SubGroup;
+import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
 /**
@@ -52,6 +54,20 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Returns an unmodifiable view of the filtered list of SuperGroups
+     */
+    ObservableList<SuperGroup> getFilteredSuperGroupList();
+
+    boolean isPersonList();
+
+    boolean isSuperGroupList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of SubGroups
+     */
+    ObservableList<SubGroup> getFilteredSubGroupList();
+
+    /**
      * Returns the user prefs' Notor file path.
      */
     Path getNotorFilePath();
@@ -65,6 +81,4 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
-
-
 }
