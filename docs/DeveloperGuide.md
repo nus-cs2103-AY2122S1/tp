@@ -339,8 +339,6 @@ The final predicate is stored in `PersonMatchesKeywordPredicate` and then passed
 * ** Alternative 2: User can only `findm` by specifying one attribute
     * Pros: Simpler to parse a single prefix and thus less prone to bugs
     * Cons: Not maximising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
-> > > > > > > master
-
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
