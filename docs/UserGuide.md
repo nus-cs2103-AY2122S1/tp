@@ -209,7 +209,16 @@ Examples:
 
 Format: `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
 
-Requirements are similar to editStudent command.
+* Edits the group at the specified `INDEX`. The index refers to the index number shown in the displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
+* You can remove all the group’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+* `editGroup 1 g/W14-4 r/tp` Edits the group name and repository name of the 1st group to be `W14-4` and `tp` respectively.
+* `editGroup 2 y/AY20212022 t/` Edits the name of the 2nd group to be `AY20212022` and clears all existing tags.
 
 ### Delete a group: `deleteGroup`
 
@@ -342,9 +351,20 @@ Examples:
 
 Edits an existing task in the tasks list.
 
-Format: `editTask INDEX [n/NAME] [t/TAG]…​`
+Format: `editTask INDEX [n/NAME] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]…​`
 
-Requirements are similar to editStudent command.
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
+* Command can be used to edit any of the three types of tasks: `todo`, `event` and `deadline`
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* If the task being edited is an `event`, the date of the event can be edited by applying the `on/` flag followed by a new date. i.e `editTask INDEX on/DATE`. The `on/` flag is invalid for other types of tasks.
+* * If the task being edited is a `deadline`, the date of the deadline can be edited by applying the `by/` flag followed by a new date. i.e `editTask INDEX by/DATE`. The `by/` flag is invalid for other types of tasks.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the task’s tags by typing `t/` without specifying any tags after it.
+
+Examples:
+* `editTask 1 n/Tutorial Preparation d/Presentation p/medium` Edits the name, description and priority of the 1st task to be `Tutorial Preparation`, `Presentation` and `medium` respectively.
+* `editTask 2 n/Final Examination on/2021-10-12 t/` Edits the name and date of the 2nd task to be `Final Examination` and `2021-10-12`, and clears all existing tags.
 
 ### Deleting a task: `deleteTask`
 
@@ -364,7 +384,7 @@ Examples:
 
 Mark the specified task from the list as done.
 
-Format: `doneTask`
+Format: `doneTask INDEX`
 
 * Mark the task as done at the specified `INDEX`.
 * The index refers to the index number shown in the task list.
@@ -442,8 +462,8 @@ Commands | Format and Examples
 [**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​`
 [**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
 [**Delete Group**](#delete-a-group-deletegroup) | `deleteGroup INDEX`
-[**Add Student to Group**](#add-a-student-to-a-group-addsg) | `addSG INDEX g/GROUP`
-[**Delete Student from Group**](#delete-a-student-from-a-group-deletesg) | `deleteSG GROUP_INDEX STUDENT_INDEX`
+[**Add Student to Group**](#add-a-student-to-a-group-addsg) | `addSG INDEX g/GROUP` <br> e.g., `addSG 1 g/W14-4`
+[**Delete Student from Group**](#delete-a-student-from-a-group-deletesg) | `deleteSG GROUP_INDEX STUDENT_INDEX` <br> e.g., `addSG 1 1`
 [**Find Group**](#locating-group-by-name-findgroup) | `findGroup KEYWORD [MORE_KEYWORDS]`
 [**Clear Groups**](#clearing-all-entries-from-group-list-cleargroups) | `clearGroups`
 
