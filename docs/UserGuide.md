@@ -83,14 +83,8 @@ Parameter | Data format
 
 ## Features
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
+## **Contact Features**
+This section contains information on features related to adding contacts to the contact list.
 
 ### Adding a person: `add`
 
@@ -183,6 +177,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the PlaceBook.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+## **Appointment Features**
+This section contains information on features related to adding appointments to the appointment list.
+
 ### Adding an appointment: `addApp`
 
 Adds an appointment for the specified person or persons identified using a list of index(es) with 
@@ -269,6 +266,16 @@ List is sorted by Date, Time and Description baseline. Can optionally add a cond
 to sort List by, if an invalid condition is input, it will sort by baseline conditions
 
 Format: `listapp` Optional: `listapp Time` or `listapp Description`
+
+## **Other Features**
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
 
 ### Exiting the program : `exit`
 
