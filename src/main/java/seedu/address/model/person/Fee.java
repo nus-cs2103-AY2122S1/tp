@@ -34,15 +34,6 @@ public class Fee {
         value = getStudentTotalFees(lessons);
     }
 
-    /**
-     * Returns the float value of the fee.
-     *
-     * @return Float value of the fee.
-     */
-    public float getValue() {
-        return value;
-    }
-
     @Override
     public String toString() {
         return "$" + df.format(value);
