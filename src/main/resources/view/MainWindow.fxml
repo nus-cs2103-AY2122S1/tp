@@ -28,6 +28,9 @@
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+          </Menu>
           <Menu mnemonicParsing="false" text="View">
             <MenuItem fx:id="studentsMenuItem" mnemonicParsing="false" onAction="#handlePersonGridPanel" text="Students" />
             <MenuItem fx:id="calendarMenuItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
@@ -35,9 +38,6 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Reminder">
             <MenuItem fx:id="remindMenuItem" mnemonicParsing="false" onAction="#handleReminder" text="Upcoming Lessons" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
 
