@@ -7,7 +7,9 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.DescriptionContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.IsImportantPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.TagsContainKeywordsPredicate;
@@ -42,8 +44,12 @@ public class FindCommandParser implements Parser<FindCommand> {
                 return new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
             case "-l":
                 return new FindCommand(new TagsContainKeywordsPredicate(Arrays.asList(nameKeywords)));
+            case "-d":
+                return new FindCommand(new DescriptionContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
             case "-tn":
                 return new FindCommand(new TasksContainKeywordsPredicate(Arrays.asList(nameKeywords)));
+            case "-impt":
+                return new FindCommand(new IsImportantPredicate(Arrays.asList(nameKeywords)));
             default:
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
