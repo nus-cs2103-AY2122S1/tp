@@ -168,10 +168,11 @@ Format: `help`
 
 ### Toggling between tabs: `toggle` <a name="toggle"/>
 
-Toggles between `Patients` tab and `Doctors` tab.<br>
-Commands entered while the `Patients` tab is displayed will only affect patients whereas commands entered while the `Doctors` tab is displayed will only affect doctors.
+Toggles between `Patients` and `Doctors` tab.<br>
+Commands enters only applies on the currently displayed tab. (eg. If the currently displayed tab the `add` command will add a patient to the records.)
 
 Format: `toggle`
+* toggles to the other tab (eg. if the currently displayed tab is the patient tab, `toggle` switches the displayed tab to the doctor tab)
 
 
 ### Clearing all entries : `clear` <a name="clear"/>
@@ -310,7 +311,8 @@ Format: `tag -d INDEX t/TAG`
 
 
 Examples:
-`tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
+* `tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
+![deletePatientTag](images/deletePatientTag.png)
 
 ---
 
@@ -351,8 +353,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH]
   specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy dob/20/07/1964 Crower t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower dob/20/07/1964 t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
+* After executing `edit 2 n/Betsy Crower dob/20/07/1964 t/`:
+![editDoctor](images/editDoctor.png)
 
 ### Adding a remark to a doctor's information : `remark` <a name="remark-doctor"/>
 
@@ -462,13 +466,76 @@ appointments occurring today and the one you just add doesn't happen today. To s
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
+Edits an existing appointment in the appointment list.
+
+Format: `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [dur/MINUTES] [r/REMARK]`
+
+* Edits the appointment at the specified `INDEX`. The index refers to the index number shown in the displayed appointment list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* `PATIENT_INDEX` refers to the index of the patient in the displayed patient list.
+* `DOCTOR_INDEX` refers to the index of the doctor in the displayed doctor list.
+* `START_DATE_TIME` accepts a format of `DD/MM/YYYY HH:MM`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
+</div>
+
+Examples:
+* `appt -e 1 p/2 r/Blood test` Edits the patient and remark of the 1st appointment to be the `second patient` in the patient list and `Blood test` respectively.
+
+![editAppointment](images/editAppointment.png)
+
 ### Deleting an appointment: `appt -d` <a name="delete-appointment"/>
+Deletes an appointment from the list.
+
+Format: `appt -d INDEX`
+
+* Deletes the appointment at the specified `INDEX`
+* The index refers to the index number shown in the displayed appointment list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `appt -l` followed by `delete 2` deletes the 2nd appointment in the appointment list.
+* `appt -f p/Betsy` followed by `delete 1` deletes the 1st appointment in the results of the filter command.
 
 ### Filtering all appointments: `appt -f` <a name="find-appointments"/>
+Searches and lists all appointments in the appointment records that match the given filter conditions.
+
+Format: `appt -f [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD] [s/START_DATE] [e/END_DATE]`
+
+* `PATIENT_KEYWORDS` and `DOCTOR_KEYWORDS` can be 1 or more words. 
+* Keyword search behave similarly to that of [FindCommand](#find-patient).
+* The `START_DATE` and `END_DATE` should be entered with the format `dd/mm/yyyy`.
+* The `START_DATE` and `END_DATE` filters are inclusive of the entered date.
+* Entering the command with no filter parameters will list all appointments from the appointment records.
+
+Examples:
+* `appt -f` will list all appointments in the appointment records
+* `appt -f s/24/08/2021 e/24/09/2021` will list all appointments in the appointment records that has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
+* `appt -f s/24/08/2021 e/24/09/2021 p/Alice d/Carl` will list all appointments in the appointment records which contains patients with the name `Alice`, doctors with the name `Carl` and has a starting date between 24 Aug 2021(inclusive) and 24 Sep 2021(inclusive).
 
 ### Filtering upcoming appointments: `appt -u` <a name="upcoming-appointments"/>
 
+Searches and lists all upcoming appointments in the appointment records that match the given filter conditions.
+
+Format: `appt -u [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD]`
+
+* An appointment is considered upcoming if its starting date and time is after the current date and time. eg. If the current time is 18:00, any appointment today that starts at 18:00 or later is considered upcoming while earlier appointments on the same day are not.
+* `PATIENT_KEYWORDS` and `DOCTOR_KEYWORDS` can be 1 or more words.
+* Keyword search behave similarly to that of [FindCommand](#find-patient).
+* Entering the command with no filter parameters will list all upcoming appointments from the appointment records.
+
+Examples:
+* `appt -u` will list all upcoming appointments in the appointment records
+* `appt -u p/Alice d/Carl` will list all upcoming appointments in the appointment records which contains patients with the name `Alice`and doctors with the name `Carl`.
+
 ### Listing appointments today: `appt -l` <a name="list-appointments"/>
+
+Show all of today's appointments.
+
+Format: `appt -l`
 
 ---
 
@@ -483,10 +550,6 @@ PlannerMD data are saved as a JSON file `[JAR file location]/data/plannermd.json
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, PlannerMD will discard all data and start with an empty data file at the next run.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -506,18 +569,18 @@ Action | Format, Examples
 **Add patient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add Tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
 **Clear** | `clear`
-**Delete appointment** | 
+**Delete appointment** | `appt -d INDEX`<br> e.g., `appt -d 3`
 **Delete patient/doctor** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `tag -d id/INDEX t/TAG`<br> e.g, `tag -d id/1 t/Unvaccinated`
-**Edit appointment** | 
+**Edit appointment** | `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [dur/MINUTES] [r/REMARK]`<br> e.g., `appt -e 1 p/2 r/Blood test`
 **Edit doctor** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​`<br> e.g., `edit 2 p/98989898 e/john@example.com`
 **Edit patient** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​ [risk/RISK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Exit** | `exit`
-**Filter all appointments** | 
-**Filter upcoming appointments** | 
+**Filter all appointments** | `appt -f [p/PATIENT_KEYWORDS] [d/DOCTOR_KEYWORDS] [s/START_DATE] [e/END_DATE]` <br> e.g., `appt -f s/24/08/2021 e/24/09/2021 p/Alice d/Carl`
+**Filter upcoming appointments** | `appt -u [p/PATIENT_KEYWORDS] [d/DOCTOR_KEYWORDS]` <br> e.g., `appt -u p/Alice d/Carl`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
-**List appointments today** | 
+**List appointments today** | `appt -l`
 **List patients/doctors** | `list`
 **Remark** | `remark INDEX r/REMARK`<br> e.g.,`remark 2 r/Chronic diabetic, monthly insulin pick up`
 **Toggle tabs** | `toggle`

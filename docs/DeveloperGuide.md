@@ -6,6 +6,14 @@ PlannerMD is an easy-to-use command-line interface (CLI) application that helps 
 
 The purpose of the Developer Guide is to guide you through the architecture of our program, so you can familiarise yourself with its underlying structure.
 
+## Navigating this Developer Guide
+Take note of some syntax we will frequently use throughout the Developer Guide:
+
+| Syntax | Description |
+|--------|------------|
+| **Bold** | keywords |
+| :bulb: **Tip:** | Useful tips |
+| `markdown` | Classes or methods |
 
 * Table of Contents
     - [Acknowledgements](#acknowledgements) 
@@ -175,6 +183,38 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Stateful PlannerMd
+With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
+a state is used to determine which list should be interacted with.
+
+The state is maintained in `ModelManager`
+* Two possible states (`State.PATIENT` and `State.Doctor`)
+* `ModelManager::toggleState` is used to switch between states
+* The UI displays the list according to the state. (eg. if the state is `State.PATIENT`, UI displays the filtered list of patients)
+* Commands are parsed based on the state. (eg. if a valid 'add' command is parsed and the state is `State.PATIENT`, an `AddPatientCommand` is executed)
+
+### \[Upcoming\] Propagating Person Changes to Appointment List
+Since specific patients and doctors within the records are directly referenced in appointments,
+changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
+* When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
+* When patients or doctor deleted, appointments they are a part of will be deleted as well.
+
+The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
+
+<img src="images/PropagateChangesDiagram.png" width="450" />
+
+### Adding an appointment
+
+### Deleting an appointment
+
+### Editing an appointment
+
+### Filtering appointments
+
+### Storage
+
+--- 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -254,31 +294,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
----
-### Stateful PlannerMd
-With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
-a state is used to determine which list should be interacted with.
-
-The state is maintained in `ModelManager`
- * Two possible states (`State.PATIENT` and `State.Doctor`)      
- * `ModelManager::toggleState` is used to switch between states
- * The UI displays the list according to the state. (eg. if the state is `State.PATIENT`, UI displays the filtered list of patients)
- * Commands are parsed based on the state. (eg. if a valid 'add' command is parsed and the state is `State.PATIENT`, an `AddPatientCommand` is executed)
- 
-### \[Upcoming\] Propagating Person Changes to Appointment List
-Since specific patients and doctors within the records are directly referenced in appointments, 
-changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
- * When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
- * When patients or doctor deleted, appointments they are a part of will be deleted as well.
- 
-The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
-
-<img src="images/PropagateChangesDiagram.png" width="450" />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -626,7 +641,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person  <a name="delete-person"/>
+### Adding a patient <a name="add-patient"/>
+
+### Deleting a patient  <a name="delete-patient"/>
 
 1. Deleting a person while all persons are being shown
 
@@ -642,6 +659,35 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Editing a patient <a name="edit-patient"/>
+
+### Finding a patient <a name="find-patient"/>
+
+### Listing all patients <a name="list-patients"/>
+
+### Adding a doctor <a name="add-doctor"/>
+
+### Deleting a doctor  <a name="delete-doctor"/>
+
+### Editing a doctor <a name="edit-doctor"/>
+
+### Finding a doctor <a name="find-doctor"/>
+
+### Listing all doctors <a name="list-doctors"/>
+
+### Adding an appointment <a name="appointment"/>
+
+### Deleting an appointment  <a name="delete-appointment"/>
+
+### Editing an appointment <a name="edit-appointment"/>
+
+### Filtering all appointments <a name="filter-all-appointments"/>
+
+### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
+
+### Listing all appointments for today <a name="list-appointments"/>
+
 
 ### Saving data  <a name="saving-data"/>
 

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.apptcommand.EditAppointmentCommand;
@@ -21,7 +22,8 @@ import seedu.plannermd.model.appointment.AppointmentDate;
 
 public class EditAppointmentCommandParser implements Parser<EditAppointmentCommand> {
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Parses the given {@code String} of arguments in the context of the
