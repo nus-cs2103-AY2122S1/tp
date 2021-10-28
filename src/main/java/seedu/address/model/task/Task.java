@@ -17,8 +17,8 @@ public class Task implements Comparable<Task> {
     public static final String MESSAGE_CONSTRAINTS =
             "Task should contain at least the task name.";
 
-    /** Days in advance of a task's deadline to remind user that its due soon. */
-    private static int reminderDays = 3;
+    /** Days prior to a task's date to remind user that its due soon. */
+    private static int daysPriorToTaskDate = 3;
 
     private final TaskName taskName;
     private final TaskDate date;
@@ -65,12 +65,12 @@ public class Task implements Comparable<Task> {
         return (Task t) -> new Observable[]{t.isOverdue, t.isDueSoon};
     }
 
-    public static void setReminderDays(int days) {
-        reminderDays = days;
+    public static void setDaysPriorToTaskDate(int days) {
+        daysPriorToTaskDate = days;
     }
 
-    public static int getReminderDays() {
-        return reminderDays;
+    public static int getDaysPriorToTaskDate() {
+        return daysPriorToTaskDate;
     }
 
     public TaskName getTaskName() {
@@ -120,7 +120,7 @@ public class Task implements Comparable<Task> {
             if (taskDateTime.isBefore(LocalDateTime.now())) { // Overdue
                 isOverdue.setValue(true);
                 isDueSoon.setValue(false);
-            } else if (taskDateTime.isBefore(LocalDateTime.now().plusDays(reminderDays))) { // Due soon
+            } else if (taskDateTime.isBefore(LocalDateTime.now().plusDays(daysPriorToTaskDate))) { // Due soon
                 isOverdue.setValue(false);
                 isDueSoon.setValue(true);
             } else {

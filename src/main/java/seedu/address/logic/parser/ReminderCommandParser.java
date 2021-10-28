@@ -28,9 +28,9 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
 
         if (matcherSetReminder.matches()) {
             try {
-                String reminderDaysArg = extractReminderDaysArg(trimmedArgs);
-                int reminderDays = Integer.parseInt(reminderDaysArg);
-                return new ReminderCommand(reminderDays);
+                String daysPriorToTaskDateArg = extractReminderDaysArg(trimmedArgs);
+                int daysPriorToTaskDate = Integer.parseInt(daysPriorToTaskDateArg);
+                return new ReminderCommand(daysPriorToTaskDate);
             } catch (NumberFormatException e) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReminderCommand.MESSAGE_USAGE));
@@ -44,8 +44,8 @@ public class ReminderCommandParser implements Parser<ReminderCommand> {
     }
 
     private String extractReminderDaysArg(String args) {
-        String reminderDaysArg = args.substring(2);
-        return reminderDaysArg.trim();
+        String daysPriorToTaskDateArg = args.substring(2);
+        return daysPriorToTaskDateArg.trim();
     }
 }
 

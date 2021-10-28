@@ -7,19 +7,19 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
     "tasks" : [ {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "eat",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "sleep",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "study",
       "taskDate" : null,
       "taskTime" : null,
@@ -34,19 +34,19 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ],
     "tasks" : [ {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "a",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "bc",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "c",
       "taskDate" : null,
       "taskTime" : null,
@@ -61,19 +61,19 @@
     "address" : "23, Coleman Street, #05-30",
     "tagged" : [ "cousin" ],
     "tasks" : [ {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "eat",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "sleep",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "study",
       "taskDate" : null,
       "taskTime" : null,
@@ -97,19 +97,19 @@
     "address" : "10th street",
     "tagged" : [ "friends" ],
     "tasks" : [ {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "c",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "d",
       "taskDate" : null,
       "taskTime" : null,
       "taskVenue" : null
     }, {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "e",
       "taskDate" : null,
       "taskTime" : null,
@@ -124,7 +124,7 @@
     "address" : "michegan ave",
     "tagged" : [ ],
     "tasks" : [ {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "consult prof Damith about project iteration v1.",
       "taskDate" : null,
       "taskTime" : null,
@@ -139,7 +139,7 @@
     "address" : "little tokyo",
     "tagged" : [ ],
     "tasks" : [ {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "a",
       "taskDate" : null,
       "taskTime" : null,
@@ -154,7 +154,7 @@
     "address" : "4th street",
     "tagged" : [ ],
     "tasks" : [ {
-      "reminderDays" : 3,
+      "daysPriorToTaskDate": 3,
       "taskName" : "asdasd",
       "taskDate" : null,
       "taskTime" : null,
