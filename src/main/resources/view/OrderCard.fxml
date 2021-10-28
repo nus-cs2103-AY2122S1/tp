@@ -34,6 +34,7 @@
               <CheckBox fx:id="isComplete" disable="true" mnemonicParsing="false" selected="true" HBox.hgrow="NEVER" />
             </children>
          </HBox>
+         <Label fx:id="orderLabel" text="\$Label" />
       <HBox spacing="5.0">
             <children>
             <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">

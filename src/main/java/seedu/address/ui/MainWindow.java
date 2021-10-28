@@ -208,18 +208,25 @@ public class MainWindow extends UiPart<Stage> {
 
             switch (displayState) {
             case CLIENT:
+                logger.info("Displaying client tab...");
                 toggle.selectClientTab();
                 toggleToListPersons();
                 break;
 
             case TASK:
+                logger.info("Displaying task tab...");
                 toggle.selectTaskTab();
                 toggleToListTasks();
                 break;
 
             case ORDER:
+                logger.info("Displaying order tab...");
                 toggle.selectOrderTab();
                 toggleToListOrders();
+                break;
+
+            case UNIMPORTANT:
+                logger.info("Displaying the same tab...");
                 break;
 
             default:
