@@ -380,6 +380,9 @@ You can import your friends' contact book into your application.
 
 Format: **`import`** `FILE_NAME.json`
 
+Examples:
+* **`import`** `amy.json` import a contact book via a file named `amy.json` into your existing application.
+
 ### Exporting contacts: `export`
 
 You can export your contact book and share it with your friends.
@@ -388,6 +391,10 @@ You can export your contact book and share it with your friends.
 <div markdown="block" class="alert alert-danger">:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.</div>
 
 Format: **`export`** `FILE_NAME.json`
+
+Examples:
+
+* **`export`** `amy.json` export your contact book details into a file named `amy.json`.
 
 ### Aliasing commands: `alias`
 
@@ -398,6 +405,12 @@ You can create command shortcut by aliasing it with custom `KEYWORD`.
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
 * The order of `KEYWORD` and `COMMAND` does not matter.
+* If `KEYWORD` coincides with command keyword such as `add`, it will not override the original command.
+
+Examples:
+
+* **`alias`** `a/nonLocal c/find nat/Indonesian nat/Malaysian` map the keyword `nonLocal` to the stated command.
+* **`alias`** `a/add c/add n/James p/12345678 nat/Malaysian` map the keyword `add` to the stated command without replacing the original `add` command keyword.
 
 ### Exiting the program: `exit`
 
