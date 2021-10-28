@@ -91,29 +91,32 @@ public class UiManager implements Ui {
     }
 
     /**
-     * Shows full view of student's details
+     * Shows full view details of students and lessons
      */
-    public static void showFullStudentDetails() {
+    public static void showFullDetails() {
         if (mainWindow != null) {
             mainWindow.fillStudentCard(HIGH);
+            mainWindow.fillLessonCard(HIGH);
         }
     }
 
     /**
-     * Shows full view of student's details
+     * Shows most view details of students and lessons: only one progress entry for each student is displayed
      */
-    public static void showMediumStudentDetails() {
+    public static void showMediumDetails() {
         if (mainWindow != null) {
             mainWindow.fillStudentCard(MED);
+            mainWindow.fillLessonCard(MED);
         }
     }
 
     /**
-     * Shows only the necessary details of a student
+     * Shows only the necessary details of students and lessons
      */
-    public static void showMinimalStudentDetails() {
+    public static void showMinimalDetails() {
         if (mainWindow != null) {
             mainWindow.fillStudentCard(LOW);
+            mainWindow.fillLessonCard(LOW);
         }
     }
 }

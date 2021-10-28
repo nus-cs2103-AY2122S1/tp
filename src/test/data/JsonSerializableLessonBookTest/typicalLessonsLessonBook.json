@@ -10,7 +10,8 @@
       "parentName" : "Mrs Tan",
       "parentPhone" : "94351253",
       "progressList" : [],
-      "hasPaid" : false
+      "hasPaid" : false,
+      "lessons" : ["Maths 1", "Science 1"]
     } ],
     "timing" : "1000-1200"
   }, {
@@ -23,7 +24,8 @@
       "parentName" : "Mrs Tan",
       "parentPhone" : "94351253",
       "progressList" : [],
-      "hasPaid" : false
+      "hasPaid" : false,
+      "lessons" : ["Maths 1", "Science 1"]
     } ],
     "timing" : "1400-1600"
   } ]

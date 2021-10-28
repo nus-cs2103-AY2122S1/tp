@@ -137,18 +137,30 @@ public class ModelManager implements Model {
     public void viewStudent(Student targetStudent) {
         requireNonNull(targetStudent);
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
-        UiManager.showFullStudentDetails();
+        filteredLessons.setPredicate(lesson ->
+                targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.nameAsString()));
+        UiManager.showFullDetails();
     }
 
     @Override
     public void viewList(DetailLevel detailLevel) {
         if (detailLevel == HIGH) {
-            UiManager.showFullStudentDetails();
+            UiManager.showFullDetails();
         } else if (detailLevel == MED) {
-            UiManager.showMediumStudentDetails();
+            UiManager.showMediumDetails();
         } else {
-            UiManager.showMinimalStudentDetails();
+            UiManager.showMinimalDetails();
         }
+    }
+
+    @Override
+    public void deleteLessonFromStudents(Lesson lesson) {
+        for (Student student : studentBook.getStudentList()) {
+            if (student.hasLesson(lesson)) {
+                student.getLessons().deleteLesson(lesson);
+            }
+        }
+        studentBook.refreshStudentBook();
     }
 
     //=========== LessonBook ================================================================================
@@ -181,10 +193,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        CollectionUtil.requireAllNonNull(target, editedLesson);
+        lessonBook.setLesson(target, editedLesson);
+    }
+
+    @Override
     public void viewLesson(Lesson targetLesson) {
         requireNonNull(targetLesson);
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
-        UiManager.showFullStudentDetails();
+        filteredStudents.setPredicate(student ->
+                targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
+        UiManager.showFullDetails();
+    }
+
+    @Override
+    public void deleteStudentFromLessons(Student student) {
+        for (Lesson lesson : lessonBook.getLessonList()) {
+            if (lesson.containsStudent(student)) {
+                lesson.removeStudent(student);
+            }
+        }
+        lessonBook.refreshLessonBook();
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -201,6 +231,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+        studentBook.refreshStudentBook();
         filteredStudents.setPredicate(predicate);
     }
 
@@ -218,6 +249,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
+        lessonBook.refreshLessonBook();
         filteredLessons.setPredicate(predicate);
     }
 
