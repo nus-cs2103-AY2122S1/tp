@@ -127,6 +127,8 @@ ___
 Adds a user defined anime into the anime list.
 Format: `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE] [g/GENRE] ...`
 
+Note: If multiple `n/NAME` is given in the command, the title of the added anime will be the last provided `NAME`
+
 Parameters:
 * [`NAME`](#name)
 * [`EPISODE`](#episode)
