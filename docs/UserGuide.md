@@ -4,9 +4,11 @@ title: User Guide
 ---
 Welcome to **Source Control** User Guide!
 
-Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. <br>
+Source Control is a **desktop app for CS1101S professors to manage the performance of their students**.
+
 This application allows you to **store comprehensive data** of each student quickly, and allows you to search through them easily. 
-With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments! <br>
+With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments!
+
 Source Control can also give you both a quick overview and a closer look of how your students are performing.
 This application **provides in-depth data analysis** of the performance of your students in each assessment, 
 giving you timely feedback on the pace and difficulty level of the module.
@@ -33,7 +35,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `sourcecontrol.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases).
+1. Download the latest `sourceControl.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for Source Control.
 
@@ -126,7 +128,7 @@ Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t 
 * Adds a new student into the database with the given name and NUSNET ID.
 * Adds the student into the specified groups if applicable. If group does not already exist, a new group would be created. 
 * Adds tags to the student if applicable. Tag name has to be one alphanumeric word. 
-* NUSNET ID input cannot already exist in the student list. 
+* There should not be an existing student with the same NUSNET ID. If there is, the student to be added is considered invalid.
 
 Examples:
 * `add student -n Jonas Chow -i E0123456` adds the student Jonas Chow with the given NUSNET ID. 
@@ -216,7 +218,7 @@ Finds students who match the input keywords.
 Format: `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)`
 
 * Search for students by their name, NUSNET ID, tag, or the group they belong in.
-Only one type of tag should be used for each search.
+Only one flag should be used for each search (e.g. having `-n` and `-g` arguments are not allowed.) .
 * To search with multiple keywords, separate keywords with spaces. e.g. `search -g T02A R03C`
 * The search is case-insensitive. e.g. `jonas` will match `Jonas`.
 * The order of the keywords does not matter. e.g. `Jonas Chow` will match `Chow Jonas`.
@@ -227,18 +229,18 @@ e.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
 `beginner` will match `beginners`.
 
 Examples:
-* `search -n Jonas Chow` return list of students with part of names that matches `Jonas` and `Chow`. 
-* `search -i E0123456` return student with NUSNET ID `E0123456`, if found in database.
-* `search -g T02B R03C` return list of students in the groups `T02B` and `R03C`. 
-* `search -g T02` return list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`. 
-* `search -t beginners` return list of students tagged as `beginners`. 
+* `search -n Jonas Chow` returns a list of students with part of names that matches `Jonas` and `Chow`.
+* `search -i E0123456` returns the student with NUSNET ID `E0123456`, if found in database.
+* `search -g T02B R03C` returns a list of students in the groups `T02B` and `R03C`.
+* `search -g T02` returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`.
+* `search -t beginners` returns a list of students tagged as `beginners`.
 
 [Return to table of contents](#table-of-contents)
 
 
 ### Showing assessment result analysis : `show`
 
-Shows the in-depth data analysis of individual, group, and cohort's performance for assessments.
+Shows the in-depth data analysis of individual, group, or the cohort's performance for assessments.
 
 Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f <export_file_path>]`
 
@@ -389,8 +391,8 @@ Format: `alias -c <existing_command> -as <alias>`
 
 * `<existing_command>` refers to any command keywords e.g. `search`, `add alloc`, `add student`.
 * The `<alias>` can only be a single alphanumeric word.
-* Multiple alias can be set for each command.
-* Default and existing alias can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
+* Multiple aliases can be set for each command.
+* Default and existing aliases can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command. 
 * The aliases created will persist between Source Control sessions.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`
@@ -408,7 +410,7 @@ Examples:
 
 ### Saving the data
 
-SourceControl data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
 
@@ -417,10 +419,10 @@ If you wish to back up the data, you can use the `export` command. The `import` 
 
 ### Editing the data file
 
-SourceControl data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
+Source Control data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, SourceControl will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Source Control will discard all data and start with an empty data file at the next run.
 </div>
 
 [Return to table of contents](#table-of-contents)
@@ -439,9 +441,9 @@ If your changes to the data file makes its format invalid, SourceControl will di
 
 ## Glossary
 
-Below is a table of the parameter tags used in our document. 
+Below is a table of the argument flags used in our document.
 
-Tag | Full Form | Usage
+Flag | Full Form | Usage
 -------|--------|----------
 -n | name | `-n <student_name>`
 -i | id | `-i <student_id>`
@@ -480,14 +482,13 @@ Below is a table explaining some terms used in this document.
 
 Word | Meaning
 -------|--------
-Alphanumeric | character that is either an alphabet (capitalised and non-capitalised) or a numerical number. 
-JSON | JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
-CSV | CSV is a delimited text file format that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
-Command Line Interface (CLI) | a text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
-Graphic User Interface (GUI) | a system of interactive visual components for computer software, which allows users to interact via many visual components. 
-Java | a computing platform for application development. Source Control runs on Java. 
+Alphanumeric | character that is either an alphabet (capitalised and non-capitalised) or a numerical number.
 Command | instruction entered by the user e.g. `list`, `exit`.
-
+Command Line Interface (CLI) | A text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
+CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
+Graphic User Interface (GUI) | a system of interactive visual components for computer software, which allows users to interact via many visual components.
+Java | a computing platform for application development. Source Control runs on Java.
+JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
 [Return to table of contents](#table-of-contents)
 
