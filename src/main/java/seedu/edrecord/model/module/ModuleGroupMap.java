@@ -24,6 +24,14 @@ public class ModuleGroupMap {
         mapping.putAll(mods.getMapping());
     }
 
+    public Group removeMod(Module mod) {
+        return mapping.remove(mod);
+    }
+
+    public boolean removeGroup(Module mod, Group grp) {
+        return mapping.remove(mod, grp);
+    }
+
     /**
      * @return A HashMap of Module and their Group mapping.
      */
@@ -39,6 +47,16 @@ public class ModuleGroupMap {
             if (modGroupMapping.getKey().isSameModule(mod)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * @return boolean to show if the mapping contains the given group in given module.
+     */
+    public boolean containsGroup(Module mod, Group grp) {
+        if (mapping.containsKey(mod)) {
+            return mapping.get(mod).isSameGroup(grp);
         }
         return false;
     }

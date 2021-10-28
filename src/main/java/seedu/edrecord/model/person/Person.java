@@ -128,11 +128,15 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Info: ")
-                .append(getInfo())
-                .append("; Modules: ")
+                .append(getEmail());
+
+        if (!getInfo().value.isBlank()) {
+            builder.append("; Info: ").append(getInfo());
+        }
+
+        builder.append("; Modules: ")
                 .append(getModules());
+
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
