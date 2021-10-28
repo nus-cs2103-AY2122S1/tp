@@ -68,15 +68,15 @@ public class LessonCard extends UiPart<Region> {
         if (lessonCancelledDates.isEmpty()) {
             cancelPlaceholder.setManaged(false);
             cancelledDates.setManaged(false);
-        } else {
-            if (lesson.isRecurring()) {
-                List<String> dates = lesson.getCancelledDates().stream().sorted()
-                        .map(Date::toString).collect(Collectors.toList());
-                cancelledDates.setText(String.join(",\n", dates));
-            } else if (lesson.getCancelledDates().size() > 0) {
-                cancelledDates.setManaged(false);
-                cancelPlaceholder.setText("Cancelled!");
-            }
+            return;
+        }
+        if (lesson.isRecurring()) {
+            List<String> dates = lesson.getCancelledDates().stream().sorted()
+                    .map(Date::toString).collect(Collectors.toList());
+            cancelledDates.setText(String.join(",\n", dates));
+        } else if (lesson.getCancelledDates().size() > 0) {
+            cancelledDates.setManaged(false);
+            cancelPlaceholder.setText("Cancelled!");
         }
     }
 
