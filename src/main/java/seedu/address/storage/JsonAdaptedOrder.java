@@ -32,8 +32,9 @@ class JsonAdaptedOrder {
     public JsonAdaptedOrder(TransactionRecord source) {
         this.id = source.getId();
         this.timeStamp = source.getTimestamp();
-        itemOrders.addAll(source.getItems().stream().map(JsonAdaptedItemOrder::new).collect(Collectors.toList()));
-        totalCosts = source.getItems().stream()
+
+        itemOrders.addAll(source.getOrderItems().stream().map(JsonAdaptedItemOrder::new).collect(Collectors.toList()));
+        totalCosts = source.getOrderItems().stream()
                 .map(item -> item.getCount() * item.getSalesPrice()).reduce((a, b) -> a + b).get();
     }
 

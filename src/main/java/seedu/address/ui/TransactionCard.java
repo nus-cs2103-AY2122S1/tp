@@ -45,10 +45,11 @@ public class TransactionCard extends UiPart<Region> {
         index.setText(displayedIndex + ". ");
         timestamp.setText(transaction.getTimeString());
         id.setText(transaction.getId());
-        Double sp = transaction.getItems().stream()
+
+        Double sp = transaction.getOrderItems().stream()
                 .map(item -> item.getCount() * item.getSalesPrice()).reduce((a, b) -> a + b).get();
         totalPrice.setText("Total price: " + sp.toString());
-        totalItems.setText(String.format("Total items: %d", transaction.getItems().size()));
+        totalItems.setText(String.format("Total items: %d", transaction.getOrderItems().size()));
     }
 
     @Override

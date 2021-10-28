@@ -310,11 +310,11 @@ public class ModelManager implements Model {
         optionalOrder = Optional.empty();
         transactions.add(transaction);
 
-        if (transaction.getItems().size() == 0) {
+        if (transaction.getOrderItems().size() == 0) {
             return;
         }
 
-        Double totalRevenue = transaction.getItems().stream()
+        Double totalRevenue = transaction.getOrderItems().stream()
                 .map(i -> i.getCount() * i.getSalesPrice())
                 .reduce(0.0, (subTotal, next) -> subTotal + next);
 
