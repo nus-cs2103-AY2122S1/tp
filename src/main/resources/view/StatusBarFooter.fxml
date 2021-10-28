@@ -9,4 +9,5 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
   <Label fx:id="selectedModuleStatus" />
+  <Label fx:id="selectedViewStatus" alignment="CENTER_RIGHT" maxWidth="Infinity" GridPane.hgrow="always"/>
 </GridPane>
