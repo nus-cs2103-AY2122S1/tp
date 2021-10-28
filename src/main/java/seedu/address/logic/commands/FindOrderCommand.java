@@ -14,7 +14,7 @@ public class FindOrderCommand extends Command {
             + "contain any of the specified keywords (case-insensitive) and "
             + "displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " 20th August John";
+            + "Example: " + COMMAND_WORD + " 20 August John";
 
     private final OrderContainsKeywordsPredicate predicate;
 
