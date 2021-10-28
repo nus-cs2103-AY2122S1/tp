@@ -116,7 +116,7 @@ Adds a student to ProgrammerError with their student ID and class ID.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
-Examples:
+Example:
 
 ![UI](images/addStudent.png)
 
