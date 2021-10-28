@@ -26,6 +26,7 @@
                 </Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
             <Label fx:id="isDone" styleClass="cell_small_label" text="\$isDone" />
         </VBox>
     </GridPane>
