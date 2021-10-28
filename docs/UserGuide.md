@@ -74,22 +74,23 @@ This section gives you a quick summary on how to download and run our applicatio
 
 1. Download the latest `modtracker.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-2/tp/releases/tag/v1.3.trial).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Mod Tracker.
+1. Copy the file to the folder you want to use as the _home folder_ for your Module Tracker.
 
-1. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note that the Module Tracker comes with some sample modules.<br>
+   ![NewUserUi](images/NewUserUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all modules.
 
-   * **`add c/CS2103T t/Software Engineering d/Covers the main areas of software development m/4 tag/core`** : Adds a module named `CS2103T` to the Mod Tracker.
+   * **`add c/CS2103T t/Software Engineering d/Covers the main areas of software development m/4 tag/core`** : Adds a module named `CS2103T` to the Module Tracker.
 
-   * **`delete`**`3` : Deletes the 3rd module shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd module from the database.
 
 
-Kindly refer to the [Features](#4-features) below for details of each command.
+Kindly refer to the [Features](#4-features) below for more details of each command.
+Unsure of what some phrases or words mean? Head over to the [Command Terminology](#34-command-terminology) section to find out more.
 
 --------------------------------------------------------------------------------------------------------------------
 
