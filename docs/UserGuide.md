@@ -108,6 +108,26 @@ The [Command summary](#command-summary) lists a table with all the commands pres
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Application Layout**
+
+This section presents the various elements in our **TuitiONE** application.
+
+![Result of `list`](images/UserGuideImage/default.png)
+
+1. File and Help toolbars: Here you can select the quit button or view the help window.
+
+2. Student panel: Here you can see the list of students present in your application. This list can be skimmed down using commands such as [`find`](#locating-students-by-name-find) and [`filter`](#filtering-of-list-filter).
+
+3. Lesson panel: Here you can see the list of lessons present in your application. This list can be skimmed down using commands such as [`filter`](#filtering-of-list-filter) and [`roster`](#viewing-of-lesson-roster-roster).
+
+4. Result panel: Here is where you will receive the various messages from the application after running your commands. There are a variety of messages, ranging from success messages to error messages.
+
+5. Command input box: Here is where you type your commands to run in the application.
+
+6. Send button: A button that helps submit your input command to run. Using the `Enter`-key on your keyboard after typing in the 'Command input box' performs the same job here.
+
+7. Storage file indicator: This portion displays the location of your saved **TuitiONE** data file in your device.
+
 ## **Features**
 
 This section outlines all the features that **TuitiONE** has. You will be able to see the purpose of each feature, the format of each command and possible examples and images of what you should expect to see.
@@ -160,7 +180,7 @@ Filter the respective list(s) to display entries that correspond to the conditio
 
 Command Format: `filter [g/GRADE] [s/SUBJECT]`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * You can filter by `GRADE`, `SUBJECT`, or both.
 
@@ -188,7 +208,7 @@ Adds a student to the TuitiONE.
 
 Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).
 
@@ -208,7 +228,7 @@ Finds students whose names contain any of the given keywords.
 
 Command Format: `find KEYWORD [MORE_KEYWORDS]`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 
@@ -235,7 +255,7 @@ Deletes a student from the TuitiONE.
 
 Command Format: `delete INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Deletes the student at the specified `INDEX`.
 
@@ -259,7 +279,7 @@ Deletes a student from the TuitiONE.
 
 Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD]... [dr/REMARK_TO_DELETE]...`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Edits the student at the specified `INDEX` based on the fields given.
 
@@ -297,7 +317,7 @@ Enroll a specified student to a given TuitiONE lesson.
 
 Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Enroll the student identified by `STUDENT_INDEX` in the displayed student list to the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
 
@@ -328,7 +348,7 @@ Unenroll a student from a given TuitiONE lesson.
 
 Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Unenroll the student identified by `STUDENT_INDEX` in the displayed student list from the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
 
@@ -352,7 +372,7 @@ Adds a lesson to the TuitiONE with the specified prefixes.
 
 Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * `GRADE` here follows the similar requirements when adding a student.
 
@@ -380,7 +400,7 @@ Deletes a lesson from the TuitiONE.
 
 Command Format: `delete-l INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Deletes the lesson of the specified `INDEX`.
 
@@ -400,7 +420,7 @@ Shows you the student roster of a specified lesson in the student panel. The nam
 
 Command Format: `roster LESSON_INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Displays the student roster of the lesson of the specified `LESSON_INDEX`.
 
