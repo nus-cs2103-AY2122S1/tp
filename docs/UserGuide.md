@@ -50,7 +50,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter should only appear once in the command but is specified multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -75,6 +75,7 @@ Examples:
 
 
 ### Editing a position: `edit-position`
+
 Edits the specified position in MrTechRecruiter.
 
 Format: `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`
@@ -111,6 +112,7 @@ If the job position exists, its rejection rate will update accordingly.
 Examples:
 * `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 
+
 ### Editing an applicant: `edit-applicant`
 Edits the specified applicant in MrTechRecruiter
 
@@ -123,6 +125,7 @@ Format: `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSIT
 Examples:
 * `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
 * `edit-applicant n/Betsy p/1234567 pos/database administrator`
+
 
 ### Deleting an applicant: `delete-applicant`
 
@@ -149,6 +152,19 @@ Shows a list of all applicants in MrTechRecruiter.
 
 Format: `list-applicant`
 
+
+### Get rejection rate of a specified position : `rate`
+
+Shows the rejection rate of an existing position in MrTechRecruiter.
+
+Format: `rate pos/POSITION`
+
+* If specified `POSITION` does not exist, will display a different message.
+* If the `POSITION` has no applicants, will display a `No current applicants` message.
+
+Examples:
+* `rate pos/software engineer`
+
 ### Undoing the last modification : `undo`
 
 Recovers the state before last modification is made.
@@ -156,6 +172,32 @@ The modification command includes: `add-position` `add-applicant` `edit-position
 `` [command that modifies the state should also be added later]
 
 Format: `undo`
+
+### Filtering applicants: `filter-applicant`
+
+Filter the list of applicants by specific criteria.
+
+Format: `filter-applicant [pos/POSITION] [status/STATUS]​`
+
+* The position filter is case-sensitive. e.g `software engineer` will not match `Software Engineer`
+* The status filter is case-insensitive. e.g. `accepted` or `ACCEPTED` will both match the `"Accepted"` application status.
+* A variable number of filters can be specified.
+* The filtering uses a logical `AND`. e.g. `filter-applicant pos/software engineer status/accepted` will match all applicants applying to the `software engineer` position AND with application status `"Accepted"`.
+* Consecutive calls are independent of one another (i.e. the filters do not stack).
+
+Examples:
+* `filter-applicant status/rejected` displays a list of all rejected applicants.
+* `filter-applicant pos/database administrator status/accepted` displays a list of all applicants to the `database administrator` position, that have been accepted.
+
+### Visualizing a position with a pie chart: `visualize`
+
+Displays a pie chart breakdown of a position and the statuses of its applicants.
+Hovering over a pie chart slice will display its percentage value. 
+
+Format: `visualize POSITION_TITLE​`
+
+* `POSITION_TITLE` is case-insensitive. e.g. `visualize software engineer` will display the pie chart for the position `SOFTWARE ENGINEER`.
+
 
 ### Searching for applicants using keywords: `find-applicant`
 
@@ -178,9 +220,11 @@ Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -207,4 +251,7 @@ Action | Format, Examples
 **Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
 **Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Applicants** | `list-applicant`
+**Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
+**Visualize Positions** | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`
+**Rate | `rate pos/POSITION` <br> e.g. `rate software engineer`
 **Help** | `help`
