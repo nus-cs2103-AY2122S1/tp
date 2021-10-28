@@ -1,5 +1,8 @@
 package seedu.edrecord.ui;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,6 +33,16 @@ public class AssignmentListCard extends UiPart<Region> {
 
     private static final String FXML = "AssignmentListCard.fxml";
 
+    private static final int FIXED_CELL_SIZE = 25;
+    private static final int TABLE_HEADER_SIZE = 3; // in number of normal rows
+
+    private static final double WIDTH_PADDING = 0.02;
+    private static final double WIDTH_STATUS_COL = 0.2;
+    private static final double WIDTH_NAME_COL = 0.4;
+    private static final double WIDTH_WEIGHTAGE_COL = 0.2;
+    private static final double WIDTH_SCORE_COL =
+            1 - WIDTH_STATUS_COL - WIDTH_NAME_COL - WIDTH_WEIGHTAGE_COL - WIDTH_PADDING;
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -47,7 +60,7 @@ public class AssignmentListCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private TableView<Map.Entry<Assignment, Grade>> assignments;
+    private TableView<Map.Entry<Assignment, Grade>> assignmentsTable;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -90,19 +103,32 @@ public class AssignmentListCard extends UiPart<Region> {
 
         TableColumn<Map.Entry<Assignment, Grade>, String> scoreCol = new TableColumn<>("Score");
         scoreCol.setCellValueFactory(c -> {
-            Grade g = map.get(c.getValue().getKey());
-            return new SimpleStringProperty(g.getScore().toString());
-        });
-
-        TableColumn<Map.Entry<Assignment, Grade>, String> maxScoreCol = new TableColumn<>("Max Score");
-        maxScoreCol.setCellValueFactory(c -> {
             Assignment a = c.getValue().getKey();
-            return new SimpleStringProperty(a.getMaxScore().toString());
+            Grade g = map.get(a);
+            return new SimpleStringProperty(g.getScore().toString() + " / " + a.getMaxScore().toString());
         });
 
         ObservableList<Map.Entry<Assignment, Grade>> items = FXCollections.observableArrayList(map.entrySet());
-        assignments.setItems(items);
-        assignments.getColumns().setAll(List.of(statusCol, nameCol, weightageCol, scoreCol, maxScoreCol));
+        assignmentsTable.setItems(items);
+
+        List<TableColumn<Map.Entry<Assignment, Grade>, String>> cols =
+                List.of(statusCol, nameCol, weightageCol, scoreCol);
+        double[] weights = {WIDTH_STATUS_COL, WIDTH_NAME_COL, WIDTH_WEIGHTAGE_COL, WIDTH_SCORE_COL};
+        assignmentsTable.getColumns().setAll(cols);
+
+        int i = 0;
+        for (var col : cols) {
+            col.setResizable(false);
+            DoubleBinding prefWidth = assignmentsTable.widthProperty().multiply(weights[i++]);
+            col.prefWidthProperty().bind(prefWidth);
+        }
+        assignmentsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        assignmentsTable.setFixedCellSize(FIXED_CELL_SIZE);
+        NumberBinding numRows = Bindings.size(assignmentsTable.getItems()).add(TABLE_HEADER_SIZE);
+        assignmentsTable.prefHeightProperty().bind(numRows.multiply(FIXED_CELL_SIZE));
+        assignmentsTable.minHeightProperty().bind(assignmentsTable.prefHeightProperty());
+        assignmentsTable.maxHeightProperty().bind(assignmentsTable.prefHeightProperty());
     }
 
     @Override

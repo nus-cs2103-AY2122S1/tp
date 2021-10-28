@@ -28,7 +28,7 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <TableView fx:id="assignments" VBox.vgrow="NEVER" />
+      <TableView fx:id="assignmentsTable" VBox.vgrow="NEVER" />
     </VBox>
       <rowConstraints>
          <RowConstraints />
