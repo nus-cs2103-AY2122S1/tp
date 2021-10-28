@@ -2,14 +2,14 @@ package seedu.address.logic.commands.member;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.module.member.Member;
 import seedu.address.model.module.member.position.Position;
-
-import java.util.List;
 
 /**
  * Finds and lists all members in Ailurus whose name contains any of the argument keywords.
