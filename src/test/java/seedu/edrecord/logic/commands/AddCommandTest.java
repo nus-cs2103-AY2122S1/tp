@@ -13,9 +13,9 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import javafx.beans.value.ObservableValue;
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
@@ -31,8 +31,8 @@ import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.testutil.PersonBuilder;
-import seedu.edrecord.ui.PersonListPanel;
 import seedu.edrecord.testutil.TypicalModules;
+import seedu.edrecord.ui.PersonListPanel;
 
 public class AddCommandTest {
 

@@ -3,11 +3,11 @@ package seedu.edrecord.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_VIEW_CHANGED;
 
+import java.util.Map;
+
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.ui.PersonListPanel;
-
-import java.util.Map;
 
 /**
  * Changes the selected view.

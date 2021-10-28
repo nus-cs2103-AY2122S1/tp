@@ -24,9 +24,9 @@ import seedu.edrecord.logic.commands.ListCommand;
 import seedu.edrecord.logic.commands.ListModulesCommand;
 import seedu.edrecord.logic.commands.MakeGroupCommand;
 import seedu.edrecord.logic.commands.MakeModuleCommand;
-import seedu.edrecord.logic.commands.ViewCommand;
 import seedu.edrecord.logic.commands.MoveCommand;
 import seedu.edrecord.logic.commands.RemoveCommand;
+import seedu.edrecord.logic.commands.ViewCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 
 /**

@@ -12,9 +12,9 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import javafx.beans.value.ObservableValue;
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.logic.commands.exceptions.CommandException;

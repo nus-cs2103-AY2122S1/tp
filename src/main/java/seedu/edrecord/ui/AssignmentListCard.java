@@ -1,5 +1,12 @@
 package seedu.edrecord.ui;
 
+import static seedu.edrecord.model.assignment.Grade.GradeStatus.NOT_SUBMITTED;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.NumberBinding;
@@ -16,16 +23,9 @@ import javafx.scene.layout.Region;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.assignment.Score;
+import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Person;
-import seedu.edrecord.model.module.Module;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import static seedu.edrecord.model.assignment.Grade.GradeStatus.NOT_SUBMITTED;
 
 /**
  * An UI component that displays assignment information of a {@code Person}.

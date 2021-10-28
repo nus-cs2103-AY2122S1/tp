@@ -9,8 +9,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.edrecord.commons.core.LogsCenter;
-import seedu.edrecord.model.person.Person;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.person.Person;
 
 /**
  * Panel containing the list of persons.

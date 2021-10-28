@@ -1,9 +1,9 @@
 package seedu.edrecord.logic.parser;
 
+import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.edrecord.logic.commands.ViewCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
-
-import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguments and creates a new ViewCommand object
