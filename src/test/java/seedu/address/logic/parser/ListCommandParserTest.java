@@ -6,17 +6,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD
-import seedu.address.logic.commands.ListCommand;
-
-public class ListCommandParserTest {
-
-    private ListCommandParser parser = new ListCommandParser();
-
-    @Test
-    public void parse_validArgs_returnsListCommand() {
-        ListCommand expectedListCommand = new ListCommand();
-=======
 import seedu.address.logic.commands.ListInventoryCommand;
 import seedu.address.logic.commands.ListTransactionCommand;
 import seedu.address.model.display.DisplayMode;
@@ -33,25 +22,10 @@ public class ListCommandParserTest {
     public void parse_noArgs_returnsListCommand() {
         // asking help for list command
         ListInventoryCommand expectedListCommand = new ListInventoryCommand(DisplayMode.DISPLAY_INVENTORY);
-
->>>>>>> master
         assertParseSuccess(parser, "", expectedListCommand);
     }
 
     @Test
-<<<<<<< HEAD
-    public void parse_validArgsWithSpaces_returnsListCommand() {
-        ListCommand expectedListCommand = new ListCommand();
-        assertParseSuccess(parser, "   ", expectedListCommand);
-    }
-
-    @Test
-    public void parse_invalidArgs_throwParseException() {
-        assertParseFailure(parser, " apple", String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-    }
-}
-=======
     public void parse_orderKeyword_returnsListCommand() {
         // asking help for list command
         ListInventoryCommand expectedListCommand = new ListInventoryCommand(DisplayMode.DISPLAY_OPEN_ORDER);
@@ -82,4 +56,3 @@ public class ListCommandParserTest {
         assertParseFailure(parser, ListInventoryCommand.COMMAND_WORD + "extra words", MESSAGE_INVALID_FORMAT);
     }
 }
->>>>>>> master

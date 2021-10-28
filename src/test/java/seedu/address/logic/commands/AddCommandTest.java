@@ -16,14 +16,8 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-<<<<<<< HEAD
 import seedu.address.model.*;
-=======
-import seedu.address.model.Inventory;
-import seedu.address.model.ModelStub;
-import seedu.address.model.ReadOnlyInventory;
 import seedu.address.model.display.DisplayMode;
->>>>>>> master
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.testutil.ItemBuilder;
@@ -201,8 +195,8 @@ public class AddCommandTest {
         model.addItem(BAGEL);
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
                 .withName("boo").withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL)
-                .withCostPrice(VALID_COSTPRICE_BAGEL).
-                withSalesPrice(VALID_SALESPRICE_BAGEL).build();
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL).build();
 
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = AddCommand.MESSAGE_ID_EXISTS;

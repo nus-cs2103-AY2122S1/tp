@@ -114,16 +114,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-<<<<<<< HEAD
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + "") instanceof ListCommand);
-=======
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListInventoryCommand);
 
         String listTransactionInput = ListCommand.COMMAND_WORD + " " + ListTransactionCommand.TRANSACTIONS_KEYWORD;
         assertTrue(parser.parseCommand(listTransactionInput) instanceof ListTransactionCommand);
-
->>>>>>> master
     }
 
     @Test

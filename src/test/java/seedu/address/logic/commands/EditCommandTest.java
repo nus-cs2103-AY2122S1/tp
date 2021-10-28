@@ -2,16 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-<<<<<<< HEAD
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
-import static seedu.address.testutil.TypicalIndexes.*;
-=======
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
@@ -19,7 +13,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
->>>>>>> master
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
@@ -35,6 +28,7 @@ import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.ItemDescriptorBuilder;
+import seedu.address.testutil.TypicalIndexes;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -77,8 +71,6 @@ public class EditCommandTest {
     }
 
     @Test
-<<<<<<< HEAD
-=======
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, new ItemDescriptor());
         Item editedItem = (Item) model.getFilteredDisplayList().get(INDEX_FIRST_ITEM.getZeroBased());
@@ -91,7 +83,6 @@ public class EditCommandTest {
     }
 
     @Test
->>>>>>> master
     public void execute_filteredList_success() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
 
@@ -131,18 +122,18 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateIdUnfilteredList_failure() {
-        Item secondItem = model.getFilteredItemList().get(INDEX_SECOND_ITEM.getZeroBased());
+        Item secondItem = model.getInventory().getItemList().get(INDEX_SECOND_ITEM.getZeroBased());
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withId(secondItem.getId()).build();
-        EditCommand editCommand = new EditCommand(INDEX_THIRD_ITEM, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_ID);
     }
 
     @Test
     public void execute_duplicateNameUnfilteredList_failure() {
-        Item secondItem = model.getFilteredItemList().get(INDEX_SECOND_ITEM.getZeroBased());
+        Item secondItem = model.getInventory().getItemList().get(INDEX_SECOND_ITEM.getZeroBased());
         ItemDescriptor descriptor = new ItemDescriptorBuilder().setName(secondItem.getName()).build();
-        EditCommand editCommand = new EditCommand(INDEX_THIRD_ITEM, descriptor);
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_THIRD_ITEM, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_NAME);
     }

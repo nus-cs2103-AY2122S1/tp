@@ -11,13 +11,6 @@ public class HelpCommandParserTest {
     private HelpCommandParser parser = new HelpCommandParser();
 
     @Test
-    public void parse_validListArgs_returnsHelpCommand() {
-        // asking help for list command
-        HelpCommand expectedHelpCommand = new HelpCommand(ListCommand.MESSAGE_USAGE);
-        assertParseSuccess(parser, "list", expectedHelpCommand);
-    }
-
-    @Test
     public void parse_validAddArgs_returnsHelpCommand() {
         // asking help for add command
         final String message = AddCommand.MESSAGE_USAGE;
@@ -106,11 +99,12 @@ public class HelpCommandParserTest {
     }
 
     @Test
-    public void parse_validViewOrderArgs_returnsHelpCommand() {
+    public void parse_validListsArgs_returnsHelpCommand() {
         // asking help for view order command
-        final String message = ViewOrderCommand.MESSAGE_USAGE;
-        HelpCommand expectedHelpCommand = new HelpCommand(message);
-        assertParseSuccess(parser, "vieworder", expectedHelpCommand);
+        String messageUsage = ListInventoryCommand.MESSAGE_USAGE + "\n"
+                + ListTransactionCommand.MESSAGE_USAGE;
+        HelpCommand expectedHelpCommand = new HelpCommand(messageUsage);
+        assertParseSuccess(parser, "list", expectedHelpCommand);
     }
 
     @Test
