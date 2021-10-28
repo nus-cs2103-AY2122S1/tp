@@ -352,20 +352,24 @@ Use case ends.
 
 * 1a. The command format is invalid.
 
-    * 1a1. PB shows an error message, and gives an example of the correct format.
+    * 1a1. PB displays an error message, and gives an example of the correct format.
     
       Use case resumes on step 1.
       
 * 1b. The input parameters are invalid.
     
-    * 1b1. PB shows an error message, informing user what the valid format should be.
+    * 1b1. PB displays an error message, informing user what the valid input format should be.
     
       Use case resumes on step 1.
       
-**Use case: UC02 - list all persons**
+**Use case: UC02 - List all persons**
+
+**MSS**
 
 1. User requests to list all persons.
 2. PB shows the list of persons.
+
+**Extensions**
 
 * 2a. The list is empty.
 
@@ -373,13 +377,39 @@ Use case ends.
     
       Use case ends. 
 
-**Use case: UC03 - Delete a person**
+**Use case: UC03 - Edit a person**
 
 **MSS**
 
-1.  User <ins>requests to list persons.<ins/>
-2.  User requests to delete a specific person in the list.
-3.  PB deletes the person.
+1. User <ins>requests to list persons(UC02).<ins/>
+2. User requests to edit a specific person in the list.
+3. PB edits the person.
+4. PB displays success message and shows updated list of persons.
+
+**Extensions**
+
+* 2a. The command format is invalid.
+    
+    * 2a1. PB displays an error message, and gives an example of the correct format.
+    
+      Use case resumes at step 2.
+   
+* 2b. The input parameters are invalid.
+
+    * 2b1. PB displays an error message, informing user what the valid input format should be.
+      
+      Use case resumes at step 2.
+
+**Use case: UC04 - Delete a person**
+
+**MSS**
+
+1. User <ins>requests to list persons(UC02).<ins/>
+2. User requests to delete a specific person in the list.
+3. PB displays a pop up window with asking for user confirmation to delete.
+4. User confirms they want to delete.
+5. PB deletes the person.
+6. PB displays success message and shows updated list of persons.
 
     Use case ends.
 
@@ -387,11 +417,15 @@ Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. PB shows an error message.
+    * 3a1. PB displays an error message.
 
       Use case resumes at step 2.
+      
+* 4a. User indicates that they do not want to delete.
+    
+    Use case ends.
 
-**Use case: UC04 - Find a person by name**
+**Use case: UC05 - Find persons by name**
 
 **MSS**
 
@@ -404,45 +438,67 @@ Use case ends.
 
 * 2a. PB cannot find any matching Person.
     
-    * PB shows an empty list.
+    * PB displays an empty list.
         
       Use case ends.
 
+**Use case: UC06 - Find persons by tags**
+
+**MSS**
+
+1. User inputs the find tags command with keywords to search for.
+2. PB shows a list of persons whose tags match the given keywords.
+
+    Use case ends.
     
-**Use case: UC03 - Add appointment**
+**Extensions**
+
+* 2a. PB cannot find any matching tags with any Person.
+
+    * PB displays an empty list.
+    
+      Use case ends.
+    
+**Use case: UC07 - Add appointment**
 
 **MSS**
 
 1. User enters add appointment command specifying the index or indexes of persons, address, start and end datetimes and description of the appointment.
-2. PB creates the appointment and displays a successful message.
+2. PB adds the appointment.
+3. PB displays success message and shows the updated list of appointments.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 
 * 1a. PB detects an error in command format.
     * 1a1. PB displays an error message, showing an example of the correct format.
     
-	  Use case resumes at step 1.	
+	  Use case resumes at step 1.
 	
-* 1b. PB does not have the specified person in the contact list.
+* 1b. PB detects an error in input format.
+    
+    * 1b1. PB displays an error message, informing user what the valid input format should be.
+	
+* 1c. PB does not have the specified person in the contact list.
 	    
-	 * 1b1. PB informs the user that the person does not exist.
+	 * 1c1. PB informs the user that the person does not exist.
         
        Use case ends.
         
-* 1c. PB detects a collision in the time period of appointment to be added with previously added appointments.
-    * 1c1. PB informs the user that there is a clash.
+* 1d. PB detects a collision in the time period of appointment to be added with previously added appointments.
+    
+    * 1d1. PB informs the user that there is a clash.
     
       Use case ends.
 
-**Use case: UC04 - List appointments**
+**Use case: UC08 - List appointments**
 
 **MSS**
 
 1. User enters the list appointments command
 
-2. PB shows a list of all currently added appointments
+2. PB displays a list of all currently added appointments
 
 Use case ends.
 
@@ -453,29 +509,57 @@ Use case ends.
 	
       Use case ends.
 
-**Use case: Delete appointment**
+**Use case: UC09 - Delete appointment**
 
 **MSS**
 
-1. User <ins>requests to list appointments (UC04)<ins/>.
-3. User enters delete appointment command indicating the index of the appointment to be deleted.
-4. PB displays a pop up window with asking for user confirmation to delete.
-5. User confirms they want to delete.
-6. PB deletes the appointment and displays a successful message. 
+1. User <ins>requests to list appointments (UC08)<ins/>.
+2. User enters delete appointment command indicating the index of the appointment to be deleted.
+3. PB displays a pop up window with asking for user confirmation to delete.
+4. User confirms they want to delete.
+5. PB deletes the appointment and displays a successful message. 
 
 Use case ends.
 
 **Extensions**
 
-* 3a. PB detects that the inputted index is out of range.
-    * 3a1. PB informs the user that the index is out of range.
+* 2a. PB detects that the inputted index is out of range.
+    * 2a1. PB informs the user that the index is out of range.
 	 
 	 Use case resumes at step 2.
 	 
-* 5a. User indicates that they do not want to delete.
+* 4a. User indicates that they do not want to delete.
     
     Use case ends.
 		
+**Use case: UC10 - Edit an appointment**
+
+**MSS**
+
+1. User <ins>requests to list appointments(UC08).<ins/>
+2. User requests to edit a specific appointment in the list.
+3. PB edits the appointment.
+4. PB displays success message and shows updated list of appointments.
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The command format is invalid.
+    
+    * 2a1. PB shows an error message, and gives an example of the correct format.
+    
+      Use case resumes at step 2.
+   
+* 2b. The input parameters are invalid.
+
+    * 2b1. PB shows an error message, informing user what the valid input format should be.
+      
+      Use case resumes at step 2.
+
+**Use case: UC11 - Find Appointment by description**
+
+
 		
 *{More to be added}*
 
