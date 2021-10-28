@@ -1,6 +1,8 @@
 package safeforhall.logic.commands.sort;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_ORDER;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_SORT;
 
 import java.util.Comparator;
 
@@ -8,15 +10,46 @@ import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.Model;
+import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.Venue;
 
 public class SortEventCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String PARAMETERS = "";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort events by date and time\n"
+    public static final String PARAMETERS = "by/FIELD o/ORDER";
+    public static final String MESSAGE_SUCCESS = "Events have been successfully sorted";
+    public static final String ALLOWED_FIELDS = "FIELD should be one of the following: "
+            + EventName.FIELD + ", "
+            + EventDate.FIELD + ", "
+            + Capacity.FIELD + ", "
+            + Venue.FIELD + ", ";
+    public static final String ASCENDING = "a";
+    public static final String DESCENDING = "d";
+    public static final String ALLOWED_ORDER = "ORDER should be one of the following: " + ASCENDING + ", " + DESCENDING;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort events by field in"
+            + "ascending or descending order \n"
+            + "Parameters: " + PREFIX_SORT + "FIELD " + PREFIX_ORDER + "ORDER \n"
+            + ALLOWED_FIELDS + "\n"
+            + ALLOWED_ORDER + "\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Events have successfully been sorted";
+
+    private final String field;
+    private final String order;
+
+
+    /**
+     * Creates a {@code SortCommand} to sort the list of residents
+     *
+     * @param field The field to sort by
+     * @param order Ascending or descending order to sort
+     */
+    public SortEventCommand(String field, String order) {
+        this.field = field;
+        this.order = order;
+    }
 
     /**
      * Executes the command and returns the result message.
@@ -28,18 +61,38 @@ public class SortEventCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateSortedEventList(new EventComparator());
+        Comparator<Event> comparator = getComparator(field, order);
+        model.updateSortedEventList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    public class EventComparator implements Comparator<Event> {
-        @Override
-        public int compare(Event e1, Event e2) {
-            int comparedResult = e1.getEventDate().compareTo(e2.getEventDate());
-            if (comparedResult == 0) {
-                return e1.getEventTime().compareTo(e2.getEventTime());
-            }
-            return comparedResult;
+    public Comparator<Event> getComparator(String field, String order) throws CommandException {
+        Comparator<Event> comparator;
+        switch (field) {
+        case EventName.FIELD:
+            comparator = Comparator.comparing(Event::getEventName);
+            break;
+        case EventDate.FIELD:
+            comparator = Comparator.comparing(Event::getEventDate).thenComparing(Event::getEventTime);
+            break;
+        case Capacity.FIELD:
+            comparator = Comparator.comparing(Event::getCapacity);
+            break;
+        case Venue.FIELD:
+            comparator = Comparator.comparing(Event::getVenue);
+            break;
+        default:
+            throw new CommandException(ALLOWED_FIELDS);
+        }
+
+        switch (order) {
+        case ASCENDING:
+            return comparator;
+        case DESCENDING:
+            return comparator.reversed();
+        default:
+            throw new CommandException(ALLOWED_ORDER);
         }
     }
+
 }

@@ -7,7 +7,7 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
  * Represents a Person's vaccination status in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidVaccStatus(String)}
  */
-public class VaccStatus {
+public class VaccStatus implements Comparable<VaccStatus> {
 
     public static final String MESSAGE_CONSTRAINTS = "Vaccination status can be T or F (case insensitive).";
 
@@ -17,6 +17,8 @@ public class VaccStatus {
     public static final String VALIDATION_REGEX = "^([Tt]|[Ff])$";
 
     public static final String DESC = "Vaccinated: ";
+    public static final String FIELD = "v";
+
 
     public final String vaccStatus;
     public final boolean vaccinated;
@@ -63,5 +65,9 @@ public class VaccStatus {
         return vaccStatus.hashCode();
     }
 
+    @Override
+    public int compareTo(VaccStatus v) {
+        return this.vaccStatus.compareToIgnoreCase(v.vaccStatus);
+    }
 }
 

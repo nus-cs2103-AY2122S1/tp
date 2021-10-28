@@ -25,4 +25,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DEPTH = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("t/");
     public static final Prefix PREFIX_DURATION = new Prefix("t/");
+    public static final Prefix PREFIX_SORT = new Prefix("by/");
+    public static final Prefix PREFIX_ORDER = new Prefix("o/");
 }

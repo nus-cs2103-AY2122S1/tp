@@ -63,6 +63,6 @@ public class EventTime implements Comparable<EventTime> {
 
     @Override
     public int compareTo(EventTime time) {
-        return toLocalTime().compareTo(time.toLocalTime());
+        return this.toLocalTime().compareTo(time.toLocalTime());
     }
 }

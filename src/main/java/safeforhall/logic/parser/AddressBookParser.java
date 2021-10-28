@@ -38,6 +38,8 @@ import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.logic.parser.find.FindEventCommandParser;
 import safeforhall.logic.parser.find.FindPersonCommandParser;
+import safeforhall.logic.parser.sort.SortEventCommandParser;
+import safeforhall.logic.parser.sort.SortPersonCommandParser;
 import safeforhall.logic.parser.view.ViewEventCommandParser;
 import safeforhall.logic.parser.view.ViewPersonCommandParser;
 
@@ -132,7 +134,7 @@ public class AddressBookParser {
             return new TraceCommandParser().parse(arguments);
 
         case SortPersonCommand.COMMAND_WORD:
-            return new SortPersonCommand();
+            return new SortPersonCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -172,7 +174,7 @@ public class AddressBookParser {
             return new FindEventCommandParser().parse(arguments);
 
         case SortEventCommand.COMMAND_WORD:
-            return new SortEventCommand();
+            return new SortEventCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

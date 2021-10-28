@@ -7,7 +7,7 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements Comparable<Phone> {
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -15,6 +15,8 @@ public class Phone {
     public static final String VALIDATION_REGEX = "\\d{3,}";
 
     public static final String DESC = "Phone: ";
+    public static final String FIELD = "p";
+
 
     public final String value;
 
@@ -53,4 +55,8 @@ public class Phone {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Phone p) {
+        return this.value.compareToIgnoreCase(p.value);
+    }
 }

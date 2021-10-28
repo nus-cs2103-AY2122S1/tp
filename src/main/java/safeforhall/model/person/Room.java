@@ -9,7 +9,7 @@ import safeforhall.logic.parser.CliSyntax;
  * Represents a Person's room in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRoom(String)}
  */
-public class Room {
+public class Room implements Comparable<Room> {
 
     public static final String MESSAGE_CONSTRAINTS = "Rooms should not contain spaces and be of the format AXXX: \n"
             + "Character 1: The block, A-E\n"
@@ -36,6 +36,8 @@ public class Room {
     public static final String VALIDATION_FOR_FIND_REGEX = "[a-eA-E]|[1-4]|[a-eA-E][1-4]";
 
     public static final String DESC = "Room: ";
+    public static final String FIELD = "r";
+
 
     public final String room;
 
@@ -82,5 +84,9 @@ public class Room {
         return room.hashCode();
     }
 
+    @Override
+    public int compareTo(Room r) {
+        return this.room.compareToIgnoreCase(r.room);
+    }
 }
 

@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 public class EventDate implements Comparable<EventDate> {
     public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy format";
     public static final String DESC = "Date: ";
+    public static final String FIELD = "d";
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -71,6 +72,6 @@ public class EventDate implements Comparable<EventDate> {
 
     @Override
     public int compareTo(EventDate date) {
-        return toLocalDate().compareTo(date.toLocalDate());
+        return this.toLocalDate().compareTo(date.toLocalDate());
     }
 }

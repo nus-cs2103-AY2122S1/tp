@@ -19,6 +19,7 @@ public class Name implements Comparable<Name> {
     public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
 
     public static final String DESC = "Name: ";
+    public static final String FIELD = "n";
 
     public final String fullName;
 

@@ -30,6 +30,8 @@ import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.commands.find.FindEventCommand;
 import safeforhall.logic.commands.find.FindPersonCommand;
+import safeforhall.logic.commands.sort.SortEventCommand;
+import safeforhall.logic.commands.sort.SortPersonCommand;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -257,6 +259,8 @@ public class CommandBox extends UiPart<Region> {
                 return SwitchCommand.PARAMETERS;
             case TraceCommand.COMMAND_WORD:
                 return TraceCommand.PARAMETERS;
+            case SortPersonCommand.COMMAND_WORD:
+                return SortPersonCommand.PARAMETERS;
 
             default:
                 return "";
@@ -289,6 +293,8 @@ public class CommandBox extends UiPart<Region> {
                 return SwitchCommand.PARAMETERS;
             case ExcludeCommand.COMMAND_WORD:
                 return ExcludeCommand.PARAMETERS;
+            case SortEventCommand.COMMAND_WORD:
+                return SortEventCommand.PARAMETERS;
 
             default:
                 return "";

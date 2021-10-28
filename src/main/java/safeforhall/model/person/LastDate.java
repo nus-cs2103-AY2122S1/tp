@@ -7,11 +7,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class LastDate {
+public class LastDate implements Comparable<LastDate> {
     public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be in dd-mm-yyyy format";
     public static final String DEFAULT_DATE = "";
     public static final String FET_DESC = "Last FET: ";
     public static final String COLLECTION_DESC = "Last Collection: ";
+    public static final String FET_FIELD = "fd";
+    public static final String COLLECTION_FIELD = "cd";
+
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -73,5 +76,10 @@ public class LastDate {
         return other == this // short circuit if same object
                 || (other instanceof LastDate // instanceof handles nulls
                 && date.equals(((LastDate) other).date)); // state check
+    }
+
+    @Override
+    public int compareTo(LastDate ld) {
+        return this.toLocalDate().compareTo(ld.toLocalDate());
     }
 }
