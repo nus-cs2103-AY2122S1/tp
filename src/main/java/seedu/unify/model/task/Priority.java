@@ -3,7 +3,7 @@ package seedu.unify.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.commons.util.AppUtil.checkArgument;
 
-public class Priority implements Comparable<Priority>{
+public class Priority implements Comparable<Priority> {
 
     public enum ObjectPriority {
         LOW,
