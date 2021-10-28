@@ -126,6 +126,14 @@ public class PeriodTest {
     }
 
     @Test
+    public void test_intersect() {
+        Period testPeriod = createPeriod(1, 10);
+        Collection<Period> set = List.of(createPeriod(1, 3), createPeriod(1, 5));
+        assertEquals(set, testPeriod.intersect(set));
+    }
+
+
+    @Test
     public void test_toList() {
         Period testPeriod = createPeriod(1, 16);
         List<LocalDate> expected = createDates(1, 16);

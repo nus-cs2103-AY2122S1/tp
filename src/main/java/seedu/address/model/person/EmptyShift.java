@@ -1,13 +1,11 @@
-package seedu.address.model;
+package seedu.address.model.person;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import seedu.address.model.person.Period;
-import seedu.address.model.person.Shift;
-import seedu.address.model.person.Slot;
+import seedu.address.model.RecurrencePeriod;
 
 /**
  * Class representing a shift that is not being used.

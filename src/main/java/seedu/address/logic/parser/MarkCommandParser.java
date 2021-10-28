@@ -9,10 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
-import static seedu.address.logic.parser.ParserUtil.parsePeriod;
-
-import java.util.List;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.ParserUtil.initializePeriodToThisWeek;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkCommand;
@@ -30,16 +28,14 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         //created to test if there are any identifiers
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_DASH_NAME, PREFIX_DASH_PHONE,
-                        PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT,
+                        PREFIX_DASH_INDEX, PREFIX_DATE,
                         PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
                         PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
-        //created to test if there are
-        List<String> periods = argMultimap.getAllValues(PREFIX_DAY_SHIFT);
-        if ((periods.size() != 1 && periods.size() != 2)) {
-            throw NO_FIELD_EXCEPTION;
-        }
-        Period period = parsePeriod(periods);
 
+        Period period = initializePeriodToThisWeek();
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            period = ParserUtil.extractPeriodDates(argMultimap);
+        }
         PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
         //checks for index
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
