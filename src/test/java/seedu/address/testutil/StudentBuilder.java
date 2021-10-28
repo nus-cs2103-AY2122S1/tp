@@ -57,9 +57,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         remark = studentToCopy.getRemark();
-        classes = studentToCopy.getClasses();
-
-
+        classes = getNewClasses(studentToCopy.getClasses());
     }
 
     /**
@@ -121,6 +119,13 @@ public class StudentBuilder {
 
     public Student build() {
         return new Student(name, phone, email, address, remark, tags, classes);
+    }
+
+    private Classes getNewClasses(Classes oldClasses) {
+        ArrayList<Integer> classes = oldClasses.getClasses();
+        ArrayList<Integer> newClasses = new ArrayList<>();
+        newClasses.addAll(classes);
+        return new Classes(newClasses);
     }
 
 }

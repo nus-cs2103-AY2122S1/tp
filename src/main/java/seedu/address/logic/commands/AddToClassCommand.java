@@ -192,7 +192,7 @@ public class AddToClassCommand extends Command {
      * @param tuitionClass the tuition class students are added to
      * @return a CommandResult of the AddToClass command
      */
-    private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) throws CommandException {
+    private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) {
         ArrayList<String> studentNames = new ArrayList<>();
         for (Index index: studentIndex) {
             Student student = model.getStudent(index);
@@ -243,5 +243,33 @@ public class AddToClassCommand extends Command {
             message += MESSAGE_STUDENT_NOT_FOUND + unfoundIndex;
         }
         return message;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !getClass().equals(o.getClass())) {
+            return false;
+        }
+        AddToClassCommand that = (AddToClassCommand) o;
+
+        if (isUsingIndex != that.isUsingIndex) {
+            return false;
+        }
+        if (isUsingIndex) {
+            if (!studentIndex.equals(that.studentIndex)) {
+                return false;
+            }
+        } else {
+            if (!studentList.equals(that.studentList)) {
+                return false;
+            }
+        }
+        if (!classIndex.equals(that.classIndex)) {
+            return false;
+        }
+        return true;
     }
 }
