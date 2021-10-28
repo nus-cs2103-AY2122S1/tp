@@ -5,7 +5,7 @@ title: User Guide
 
 **SeniorLove** is a contact management desktop app which aims to facilitate community workers' visits to the elderly. It is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Senior Love can get your contact management tasks done faster than traditional GUI apps.
 
-##Table of Contents
+## Table of Contents
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Add elderly details](#add-elderly-details--add)
