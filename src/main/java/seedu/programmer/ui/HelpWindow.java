@@ -134,9 +134,9 @@ public class HelpWindow extends PopupWindow {
                 "Edits an existing lab's lab number and/or total score");
         featureTableItems = FXCollections.observableArrayList();
         featureTableItems.addAll(
-                help, exit, list, dashboard,
+                help, dashboard, exit,
                 fill, purge, download, upload,
-                add, edit, delete, filter, show,
+                add, edit, delete, filter, show, list,
                 addLab, editLab, delLab
         );
     }
