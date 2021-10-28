@@ -301,11 +301,11 @@ If your changes to the data file makes its format invalid, ContactSH will discar
 
 1. Shows the number of days prior to a task's date and time to remind that it is due soon.
 
-    format: `reminder`
+    Format: `reminder`
 
 2. Sets the number of days prior to a task's date to remind that it is due soon.
 
-    format: `reminder -s DAYS`
+    Format: `reminder -s DAYS`
 
     * DAYS refer to the number of days prior to a task's date.
       The day **must be a positive integer** 1, 2, 3, ...
@@ -314,7 +314,7 @@ If your changes to the data file makes its format invalid, ContactSH will discar
 
     * reminder -s 10
 
-note: A task will turn orange in colour as a reminder that it is due soon
+:memo:**Note**: A task will turn orange in colour as a reminder that it is due soon
 when the system date is later than or same as (task's date - DAYS) and earlier than task's date.
 ### Archiving data files `[coming in v2.0]`
 
