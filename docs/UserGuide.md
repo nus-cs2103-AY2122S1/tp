@@ -83,7 +83,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 | `sal/` | Salary              |
 | `sh/`  | Shift               |
 | `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
-| `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-addS) for more details
+| `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-adds) for more details
 | `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
 |  `r/`  | Remark (Optional)   | Contains alphanumeric characters.<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it.
 
