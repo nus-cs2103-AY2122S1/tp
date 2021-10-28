@@ -45,6 +45,8 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Items in square brackets are optional.<br>
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -112,9 +114,10 @@ Examples:
 ### Editing an applicant: `edit-applicant`
 Edits the specified applicant in MrTechRecruiter
 
-Format: `edit-applicant INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` 
+Format: `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK]` 
 
 * Edit the applicant with the specified `INDEX`
+* At least one argument should be present
 * The `position` must have been added to MrTechRecruiter
 
 Examples:
@@ -133,17 +136,26 @@ Examples:
 * `delete-applicant 1` deletes the applicant with index 1.
 
 
-### Listing all positions : `list position` [coming soon]
+### Listing all positions : `list-position` 
 
 Shows a list of all positions in MrTechRecruiter.
 
-Format: `list position`
+Format: `list-position`
 
-### Listing all applicants : `list-applicant`
+
+### Listing all applicants : `list-applicant` 
 
 Shows a list of all applicants in MrTechRecruiter.
 
 Format: `list-applicant`
+
+### Undoing the last modification : `undo`
+
+Recovers the state before last modification is made.
+The modification command includes: `add-position` `add-applicant` `edit-position` `edit-applicant` `delete-position` `delete-applicant`
+`` [command that modifies the state should also be added later]
+
+Format: `undo`
 
 ### Searching for applicants using keywords: `find-applicant`
 
