@@ -447,24 +447,24 @@ If your changes to the data file makes its format invalid, tApp will discard all
 Commands | Format and Examples
 --------|-----------------------------
 [**List Students**](#list-all-students-students) | `students`
-[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​`
-[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​`
-[**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX`
-[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK`
-[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK`
-[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]`
+[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​` <br> e.g., `addStudent n/Clara Ng s/A0221111W e/clara@example.com`
+[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `editStudent 1 s/A0221111L e/johndoe@example.com`
+[**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` <br> e.g., `deleteStudent 1`
+[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/1`
+[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` <br> e.g., `markp 1 w/1`
+[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` <br> e.g., `findStudent John`
 [**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents`
 
 ## [Groups](#groups)
 Commands | Format and Examples
 --------|-----------------
 [**List Groups**](#list-all-groups-groups) | `groups`
-[**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​`
-[**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
-[**Delete Group**](#delete-a-group-deletegroup) | `deleteGroup INDEX`
+[**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​` <br> e.g., `addGroup g/W14-5 r/tp y/AY20222023`
+[**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​` <br> e.g., `editGroup 2 g/W14-4 r/tp y/AY20212022`
+[**Delete Group**](#delete-a-group-deletegroup) | `deleteGroup INDEX` <br> e.g., `deleteGroup 1`
 [**Add Student to Group**](#add-a-student-to-a-group-addsg) | `addSG INDEX g/GROUP` <br> e.g., `addSG 1 g/W14-4`
-[**Delete Student from Group**](#delete-a-student-from-a-group-deletesg) | `deleteSG GROUP_INDEX STUDENT_INDEX` <br> e.g., `addSG 1 1`
-[**Find Group**](#locating-group-by-name-findgroup) | `findGroup KEYWORD [MORE_KEYWORDS]`
+[**Delete Student from Group**](#delete-a-student-from-a-group-deletesg) | `deleteSG GROUP_INDEX STUDENT_INDEX` <br> e.g., `deleteSG 1 1`
+[**Find Group**](#locating-group-by-name-findgroup) | `findGroup KEYWORD [MORE_KEYWORDS]` <br> e.g., `findGroup W15-5`
 [**Clear Groups**](#clearing-all-entries-from-group-list-cleargroups) | `clearGroups`
 
 ## [Tasks](#tasks)
