@@ -21,7 +21,7 @@ import seedu.address.model.lesson.NoOverlapLessonList;
  */
 public class JsonAdaptedGroup {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String uniqueId;
     private final String groupName;
