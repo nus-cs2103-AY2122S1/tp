@@ -36,12 +36,20 @@ public class DeleteApplicantCommand extends Command {
         List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW);
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
+
+        memento.record(model.getCopiedModel());
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteApplicant(applicantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete));
+
+        String successMessage = String.format(MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete);
+        memento.recordMessage(successMessage);
+
+        model.addToHistory(this);
+
+        return new CommandResult(successMessage);
     }
 
     @Override

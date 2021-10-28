@@ -19,10 +19,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyApplicantBook;
+import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantParticulars;
+import seedu.address.model.applicant.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -106,6 +111,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getPositionBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getApplicantBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
@@ -116,12 +131,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addApplicantToPosition(Applicant applicant, Position position) {
+        public Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasApplicant(Applicant applicant) {
+        public boolean hasApplicantWithName(Name applicantName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -156,7 +171,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setApplicant(Applicant target, Applicant editedApplicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPosition(Position target, Position editedPosition) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -179,8 +209,30 @@ public class AddCommandTest {
         public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-        public boolean hasPosition(Position toAdd) {
-            return false;
+
+        @Override
+        public boolean hasPosition(Position position) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPositionWithTitle(Title toCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Position getPositionByTitle(Title title) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPositionBook(ReadOnlyPositionBook positionBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyPositionBook getPositionBook() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -200,6 +252,45 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPositionList(Predicate<Position> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public float calculateRejectionRate(Title p) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        public void updateApplicantsWithPosition(Position positionToEdit, Position newPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public ReadOnlyApplicantBook getApplicantBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setApplicantBook(ReadOnlyApplicantBook applicantBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Model getCopiedModel() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToHistory(Command command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public boolean hasHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String recoverHistory() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -15,8 +15,6 @@ public class Position {
 
     private final Description description;
 
-    // Data field is empty
-
     /**
      * Every field must be present and not null.
      */
@@ -80,5 +78,9 @@ public class Position {
                 .append(getDescription());
 
         return builder.toString();
+    }
+
+    public Position getCopiedPosition() {
+        return new Position(title.getCopiedTitle(), description.getCopiedDescription());
     }
 }

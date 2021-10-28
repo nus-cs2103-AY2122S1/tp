@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI component [need changes]
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +84,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic component [need changes]
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -153,6 +153,84 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Incomplete\] Rejection Rate feature
+
+#### Proposed Implementation
+
+The proposed rejection rate mechanism is facilitated by `Model` and `Calculator`.
+The `Model` component checks if the position exists and accesses it, while `Calculator` calculates the rejection rate.
+Implements the following functions:
+* `ModelManager#hasPositionWithTitle()`  — Checks if a position with such a given title exists.
+* `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of applicants and number of rejected applicants.
+
+These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
+
+Given below is an example usage scenario and how the rejection rate mechanism works at every step.
+
+Step 1. The user launches the application and is assumed to have some positions and applicants applying for a position in the PositionBook and ApplicantBook respectively.
+
+![InitialState](images/rejection-rates/Initial-state.png)
+
+Step 2. The user executes `rate pos/software engineer` command to calculate the rejection rate of Software Engineer in the PositionBook.
+The `rate` command calls `Model#hasPositionWithTitle`, causing the model to check whether `Software Engineer` exists in the database as a Position.
+
+![Step2](images/rejection-rates/Step2.png)
+
+Step 3. If the position exists, it will access the ApplicantBook via `Model#calculateRejectionRate()`, beginning a count of the number of applicants for the job and the number of rejected applicants of the same job.
+
+![Step3](images/rejection-rates/Step3.png)
+
+Step 4. After these numbers have been obtained, the `Calculator` class is called to calculate via `Calculator#calculateRejectionRate`. This resulting floating point number is then the rejection rate of the position.
+
+![SeqDiagram](images/rejection-rates/SeqDiagram.png)
+
+Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
+
+#### Design considerations:
+
+#### Aspect: How rejection rate executes:
+
+* **Alternative 1** (current choice): Only calculate the rejection rate when needed and not store it anywhere.
+    * Pros: Saves a significant amount of space and reduces immutability. Implementation is simple.
+    * Cons: A user could want to calculate many rejection rates frequently and hence not storing these values might have performance issues in the long run.
+* **Alternative 2**: Store all rejection rates with their respective positions in a dictionary.
+    * Pros: Accessing the rejection rates of a certain position will only require access to the dictionary and nothing else - limited accessibility.
+      Also, accessing a rejection rate will be much quicker.
+    * Cons: Potentially a large amount of space required, slowing performance. Also, the dictionary needs to be updated everytime an applicant's status changes or when a position/applicant is added/deleted,
+      which could result in many inter-linked implementations for the dictionary, rendering it slow.
+
+### Filter applicants feature
+
+#### Implementation
+
+The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX,
+which filters its contents based on a specified `Predicate`.  
+This `Predicate` is constructed from the filters specified whenever the `filter-applicant` command is called.
+
+Given below is an example usage scenario of the applicant filter feature.
+
+*{More to be added}*
+
+#### Rationale for implementation
+
+The `Descriptor` pattern (used similarly in features such as the editing of applicants) comes in handy whenever its corresponding command accepts a variable number of arguments & unspecified arguments are assumed to be ignored.
+For instance, the edit applicant feature accepts a variable number of fields to be edited, and leaves all unspecified fields untouched.
+
+The filter feature fits in this category, as the user should be able to specify a variable number of filtering criteria,
+and unspecified criteria should be left out of the filter.
+Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`.
+It is also used to in the validation of the filtering criteria.
+
+*{More to be added}*
+
+#### Alternatives considered
+
+- Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`
+    - Does not make good use of the in-built functionality of `FilteredList`
+
+*{More to be added}*
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -224,19 +302,71 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### Add applicant feature
+
+The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
+commands in MTR, it extends the Command class. The most important attribute that it has, is the `ApplicantParticulars`
+attribute, which contains all the details of the applicant (Name, Phone, Email, Address, 
+Title of Position Applying to), parsed straight from the user input.
+
+The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
+applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
+`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
+`applicantBook`, using the `Model#addApplicantWithParticulars` method.
+
+Given below is an example usage scenario and how the add applicant feature behaves at each step.
+Preconditions: The app is already launched and the appropriate position that the new applicant is applying to already
+exist.
+
+Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, 
+block 123, #01-01 pos/software engineer`. The app parser will store all the user-input parameters into an
+`applicantParticulars` object, and return the `AddApplicantCommand` instance.
+
+The following sequence diagram shows the method invocation in this step.
+![AddApplicantSequenceDiagram1](images/AddApplicantSequenceDiagram1.png)
+
+Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the 
+`Model#addApplicantWithParticulars` method.
+
+Step 3. Here, we will retrieve the `position` object from `positionBook`, using the `positionTitle` that the user
+input as argument, and create a new applicant instance using the `applicantParticulars` and `position` object. Then 
+we will add it to the `applicantBook`. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If any of the guard clauses fail, i.e. the
+applicant already exist, or the position does not exist, an appropriate exception will be thrown and the applicant
+will not be created.
+
+</div>
+
+The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand:
+![AddApplicantActivityDiagram1](images/AddApplicantActivityDiagram1.png)
+
+#### Design considerations:
+
+**Aspect: How and when the new applicant instance is created:**
+
+* **Alternative 1 (current choice):** Saves all the user input as an applicantParticulars object.
+    * Pros: Avoids the unnecessary clutter of passing multiple parameters to multiple method calls.
+    * Cons: May have lead to greater coupling among classes.
+
+* **Alternative 2:** Each user input parameter (e.g. Name, Address, PositionTitle etc.) are passed to multiple method
+    calls.
+    * Pros: Will reduce the usage of a new class, thereby reducing coupling.
+    * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -306,10 +436,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The format is invalid.
 
-  * 1a1. MrTechRecruiter shows an error message.
+    * 1a1. MrTechRecruiter shows an error message.
 
   Use case ends.
 
+**Use case: Edit a new position** [coming soon]
 
 **Use case: Delete a new position**
 
@@ -319,8 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. MrTechRecruiter shows a list of positions
 3. User requests to delete a specific position in the list
 4. MrTechRecruiter deletes the position
- 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -328,13 +458,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. MrTechRecruiter displays a message that no position is in the list.
 
-    Use case ends.
+  Use case ends.
 
 * 3a The given name of the position is invalid.
 
     * 3a1. MrTechRecruiter shows an error message.
 
-    Use case resumes at step 2.
+  Use case resumes at step 2.
 
 
 **Use case: Add a new applicant**
@@ -352,6 +482,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. MrTechRecruiter shows an error message.
 
       Use case resumes at step 1.
+
+**Use case: Edit a new applicant** [coming soon]
 
 **Use case: Delete an applicant**
 
@@ -448,6 +580,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+**Use case: Calculate the rejection rate for a position** [coming soon]
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -490,15 +624,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1.  _{ more test cases …​ }_
@@ -507,13 +641,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting an applicant from MrTechRecruiter
 
-   1. Prerequisites: Multiple applicants in MrTechRecruiter. John Doe exists within MrTechRecruiter but Mary Jane does not.
+    1. Prerequisites: Multiple applicants in MrTechRecruiter. John Doe exists within MrTechRecruiter but Mary Jane does not.
 
-   1. Test case: `delete applicant n/John Doe`<br>
-      Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete applicant n/John Doe`<br>
+       Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete applicant n/Mary Jane`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete applicant n/Mary Jane`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 1. _{ more test cases …​ }_
 
@@ -524,7 +658,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: -
 
     1. Test case: `add applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`<br>
-         Expected: John Doe, with all the relevant details that were passed as parameters is added to MrTechRecruiter.
+       Expected: John Doe, with all the relevant details that were passed as parameters is added to MrTechRecruiter.
 
 1. _{ more test cases …​ }_
 
@@ -547,7 +681,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }
 

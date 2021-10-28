@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,11 +13,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
-import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * Parses input arguments and creates a new AddApplicantCommand object
@@ -29,6 +30,7 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public AddApplicantCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_POSITION);
@@ -42,11 +44,12 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         Phone phone = ApplicantParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ApplicantParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ApplicantParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Position dummyPosition = ApplicantParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
+        Title positionTitle = ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
 
-        Applicant applicant = new Applicant(name, phone, email, address);
+        ApplicantParticulars applicantParticulars =
+                new ApplicantParticulars(name, phone, email, address, positionTitle);
 
-        return new AddApplicantCommand(applicant, dummyPosition);
+        return new AddApplicantCommand(applicantParticulars);
     }
 
     /**

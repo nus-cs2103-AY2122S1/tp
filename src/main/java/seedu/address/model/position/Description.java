@@ -16,7 +16,7 @@ public class Description {
      * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "(.|\\s)*\\S(.|\\s)*";
 
     public final String description;
 
@@ -48,5 +48,9 @@ public class Description {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
                 && description.equals(((Description) other).description)); // state check
+    }
+
+    public Description getCopiedDescription() {
+        return new Description(description);
     }
 }
