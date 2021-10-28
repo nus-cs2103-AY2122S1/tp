@@ -445,6 +445,21 @@ the data of your previous Notor home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
+##Keyboard Shortcuts for Note
+
+**Note**:
+- **TimeStamp** shortcut key types the current date and time in Note Window in this format `E, MMM dd yyyy HH:mm"`.
+- Example: `Fri., Oct. 22 2021 00:07`
+
+
+Shortcut Key            | Linux/Window                                   | MacOS
+------------------------|------------------------------------------------|---------------------------------------
+**TimeStamp**           | `Ctrl + T`                                     | `Cmd + T`
+**Save**                | `Ctrl + S`                                     | `Cmd + S`
+**Quit without Saving** | `Ctrl + W`                                     | `Cmd + W`
+**Save and Quit**       | `Ctrl + Q`                                     | `Cmd + Q`
+
+
 ## Command summary
 Round brackets `()` refer to COMPULSORY arguments.
 Square brackets `[]` refer to optional arguments.<p>
