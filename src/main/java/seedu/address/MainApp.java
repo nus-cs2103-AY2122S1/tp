@@ -54,6 +54,10 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
+    public static void openLinkInBrowser(String urlString) {
+
+    }
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
@@ -200,7 +204,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting MTR " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
@@ -213,4 +217,5 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
     }
+
 }

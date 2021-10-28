@@ -23,12 +23,33 @@ public class Applicant {
     // Data fields
     private final Address address;
     private final Application application;
+    private ProfileUrl gitHubUrl;
 
     /**
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Position position) {
         this(name, phone, email, address, new Application(position));
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Applicant(Name name, Phone phone, Email email, Address address, Application application) {
+        requireAllNonNull(name, phone, email, address);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.application = application;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Applicant(Name name, Phone phone, Email email, Address address, Position position,
+                     ProfileUrl gitHubUrl) {
+        this(name, phone, email, address, new Application(position), gitHubUrl);
     }
 
 
@@ -41,27 +62,30 @@ public class Applicant {
                 applicantParticulars.getPhone(),
                 applicantParticulars.getEmail(),
                 applicantParticulars.getAddress(),
-                new Application(position)
+                new Application(position),
+                applicantParticulars.getGitHubUrl()
         );
     }
 
     /**
      * Internal constructor for a new Applicant object.
      */
-    public Applicant(Name name, Phone phone, Email email, Address address, Application application) {
+    public Applicant(Name name, Phone phone, Email email, Address address, Application application,
+                     ProfileUrl gitHubUrl) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.application = application;
+        this.gitHubUrl = gitHubUrl;
     }
 
     /**
      * Marks the application with the specified application status.
      */
     public Applicant markAs(ApplicationStatus applicationStatus) {
-        return new Applicant(name, phone, email, address, application.markAs(applicationStatus));
+        return new Applicant(name, phone, email, address, application.markAs(applicationStatus), gitHubUrl);
     }
 
     public Name getName() {
@@ -86,6 +110,14 @@ public class Applicant {
 
     public Title getTitle() {
         return application.getTitle();
+    }
+
+    public ProfileUrl getGitHubUrl() {
+        return gitHubUrl;
+    }
+
+    public boolean hasGitHubProfile() {
+        return gitHubUrl.hasProfile();
     }
 
     /**
@@ -172,6 +204,6 @@ public class Applicant {
 
     public Applicant getCopiedApplicant() {
         return new Applicant(name.getCopiedName(), phone.getCopiedPhone(), email.getCopiedEmail(),
-                address.getCopiedAddress(), application.getCopiedApplication());
+                address.getCopiedAddress(), application.getCopiedApplication(), gitHubUrl.getCopiedProfileUrl());
     }
 }
