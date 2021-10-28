@@ -20,6 +20,7 @@ import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.SwitchCommand;
+import safeforhall.logic.commands.TraceCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeleteEventCommand;
@@ -254,6 +255,8 @@ public class CommandBox extends UiPart<Region> {
                 return ExportCommand.PARAMETERS;
             case SwitchCommand.COMMAND_WORD:
                 return SwitchCommand.PARAMETERS;
+            case TraceCommand.COMMAND_WORD:
+                return TraceCommand.PARAMETERS;
 
             default:
                 return "";

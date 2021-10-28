@@ -18,6 +18,7 @@ import safeforhall.model.person.Person;
 public class TraceCommand extends Command {
 
     public static final String COMMAND_WORD = "trace";
+    public static final String PARAMETERS = "r/RESIDENT [d/DEPTH] [t/DURATION] ";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Traces a resident's close contacts based on the "
             + "events they're involved in. \n"
             + "Parameters: "
