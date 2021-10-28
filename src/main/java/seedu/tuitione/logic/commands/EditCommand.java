@@ -60,7 +60,8 @@ public class EditCommand extends Command {
             "⚠\tAlert:\n\nThe amount of remarks tagged to this student will exceed the limit of 5! "
                     + "You can only add %d more unique remark(s).";
     public static final String MESSAGE_NO_SUCH_REMARK_FOUND =
-            "⚠\tAlert:\n\nThe remark(s) you wish to remove does not exist! Please check your spelling and formatting.";
+            "⚠\tAlert:\n\nThe remark(s) you wish to remove does not exist!"
+                    + "Please check your spelling and formatting.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;

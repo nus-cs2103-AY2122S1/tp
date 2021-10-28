@@ -9,7 +9,6 @@ import static seedu.tuitione.model.lesson.Price.PRICE_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.model.lesson.Price.isValidPrice;
 import static seedu.tuitione.model.lesson.Subject.SUBJECT_MESSAGE_CONSTRAINTS;
 import static seedu.tuitione.model.lesson.Subject.isValidSubject;
-import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
