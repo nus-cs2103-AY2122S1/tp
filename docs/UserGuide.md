@@ -250,7 +250,7 @@ Examples:
 
 Finds tasks whose names contain any of the given keywords.
 
-Format: `tfind KEYWORD [MORE_KEYWORDS]`
+Format: `tfind KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive. e.g `submit` will match `Submit`
 * The order of the keywords does not matter. e.g. `submit form` will match `form submit`
@@ -259,8 +259,8 @@ Format: `tfind KEYWORD [MORE_KEYWORDS]`
   e.g. `Submit form` will return `Submit homework`, `Edit form`
 
 Examples:
-* `mfind form` returns `form` and `submit form`
-* `mfind Submit form` returns `Submit homework`, `Edit form`<br>
+* `tfind form` returns `form` and `submit form`
+* `tfind Submit form` returns `Submit homework`, `Edit form`<br>
 
 ### Event Commands
 

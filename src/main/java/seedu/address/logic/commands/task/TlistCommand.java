@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.member.Member;
 
@@ -23,6 +24,8 @@ public class TlistCommand extends Command {
     public static final String COMMAND_WORD = "tlist";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
+
+    public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. \n"
             + "Only one of " + PREFIX_DONE + "or " + PREFIX_OVERDUE + "may be present\n"
@@ -58,9 +61,12 @@ public class TlistCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Member> members = model.getFilteredMemberList();
+        if (targetMemberId.getZeroBased() >= members.size()) {
+            throw new CommandException(MESSAGE_MEMBER_NOT_FOUND);
+        }
         Member targetMember = members.get(targetMemberId.getZeroBased());
         switch (filter) {
         case "y":
@@ -78,6 +84,7 @@ public class TlistCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS + " of " + targetMember.getName());
         }
     }
+
 
     @Override
     public boolean equals(Object other) {
