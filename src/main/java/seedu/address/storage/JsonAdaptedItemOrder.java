@@ -13,6 +13,7 @@ public class JsonAdaptedItemOrder {
     private final String name;
     private final Integer id;
     private final Integer count;
+    private final Double sp;
 
     /**
      * Constructor for JsonAdaptedItemOrder that supports json reading/writing
@@ -22,11 +23,13 @@ public class JsonAdaptedItemOrder {
      */
     @JsonCreator
     public JsonAdaptedItemOrder(@JsonProperty("name") String name,
-                           @JsonProperty("id") String id,
-                           @JsonProperty("count") String count) {
+                            @JsonProperty("id") String id,
+                            @JsonProperty("count") String count,
+                            @JsonProperty("sp") Double sp) {
         this.name = name;
         this.id = Integer.parseInt(id);
         this.count = Integer.parseInt(count);
+        this.sp = sp;
     }
 
     /**
@@ -37,9 +40,10 @@ public class JsonAdaptedItemOrder {
         this.name = source.getName().toString();
         this.id = source.getId();
         this.count = source.getCount();
+        this.sp = source.getSalesPrice();
     }
 
     public Item toModelType() {
-        return new Item(new Name(name), id, count, Collections.emptySet(), 1.0, 2.0);
+        return new Item(new Name(name), id, count, Collections.emptySet(), 1.0, sp);
     }
 }
