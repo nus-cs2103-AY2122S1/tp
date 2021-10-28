@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -23,6 +24,16 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+
+    /** {@code Predicate} that evaluate if task is done */
+    Predicate<Task> PREDICATE_SHOW_ALL_COMPLETED_TASKS = Task::isDone;
+
+    /** {@code Predicate} that evaluate if task is not done */
+    Predicate<Task> PREDICATE_SHOW_ALL_DUE_TASKS = task -> !task.isDone();
+
+    /** {@code Predicate} that evaluate if task is overdue */
+    Predicate<Task> PREDICATE_SHOW_ALL_OVERDUE_TASKS = task -> !task.isDone()
+            && task.getTaskDeadlineDate().isBefore(LocalDateTime.now());
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

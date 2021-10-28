@@ -46,6 +46,10 @@ public class TaskDeadline {
         return true;
     }
 
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
     @Override
     public String toString() {
         return deadline.format(DEADLINE_DATE_TIME_FORMATTER);
