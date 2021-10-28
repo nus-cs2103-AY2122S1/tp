@@ -228,15 +228,20 @@ public abstract class Lesson implements Comparable<Lesson> {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
+
         builder.append(typeOfLesson)
-                .append("; Date: ")
-                .append(getDisplayDate());
+                .append("Start date: ")
+                .append(getStartDate());
+
         if (!getEndDate().equals(Date.MAX_DATE)) {
             builder.append("; End date: ")
                    .append(getEndDate());
         }
 
-        builder.append("; Time: ")
+
+        builder.append("; Date: ")
+                .append(getDisplayDate())
+                .append("; Time: ")
                 .append(getTimeRange())
                 .append("; Subject: ")
                 .append(getSubject())
