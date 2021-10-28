@@ -101,6 +101,7 @@ public class ImportCommand extends Command {
                 Person person = new Person(name, phone, availability, tags);
                 personList.add(person);
             }
+            br.close();
             return personList;
         } catch (FileNotFoundException e) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, filePath));
@@ -108,7 +109,7 @@ public class ImportCommand extends Command {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         } catch (ParseException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(e.getMessage() + "\nPlease fix the error in the CSV file and try again");
         }
     }
 

@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: User Guide
 ---
 
@@ -26,10 +26,10 @@ Table of Contents
 _____________________________________________________________________________________________________________
 ## How to use the User Guide
 
-You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to the desired location in 
+You can click on the links in the [Table of Contents](#table-of-contents) to quickly navigate to the desired location in
 this User Guide. A link to return to the [Table of Contents](#table-of-contents) is provided at the end of every section.
 <br>
-The table below summarizes the meaning of the icons and text styles used in this User Guide. 
+The table below summarizes the meaning of the icons and text styles used in this User Guide.
 <br>
 
 Icon / Text Style | Description
@@ -55,8 +55,11 @@ ________________________________________________________________________________
 3. Copy the file to the folder you want to use as the _home folder_ for SportsPA.
 
 4. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds. The app
-   provides some sample data for you to play around with and familiarize yourself with the commands.<br><br>
-   ![FirstLook](images/FirstLook.png)
+   provides some sample data for you to play around with and familiarize yourself with the commands.
+
+<p align="center">
+   <img src="images/FirstLook.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -64,14 +67,14 @@ ________________________________________________________________________________
 
 ## Using SportsPA's Interface
 
-While SportsPA has a GUI (Graphical User Interface) to display data and messages, you interact with it mainly 
+While SportsPA has a GUI (Graphical User Interface) to display data and messages, you interact with it mainly
 by typing. The figure below provides an overview on the key components of our interface. <br><br>
 ![Gui](images/Gui.png)
 
 Typically, to execute a command, this is how you interact with the interface:
 
 1. Type the relevant command into the **Command Window** and press **Enter** on your keyboard.
-2. The results of the command (or any warning messages generated) are displayed in the **Result Window**. 
+2. The results of the command (or any warning messages generated) are displayed in the **Result Window**.
 3. Any changes made to the data will be reflected accordingly in the **List Window**. 
 
 SportsPA stores two lists - **Members** and **Facilities**, which you can freely switch between by clicking on the respective **Tabs**. Alternatively, whenever you execute a member-specific or facility-specific command, SportsPA automatically switches to the relevant tab for you.
@@ -98,7 +101,7 @@ Here are some example commands you can try:
 ## Features
 
 This section documents all the commands available in SportsPA, guiding you through its function, format, example usages
-and any other noteworthy tips. **Note that examples ending with :camera: means that a screenshot of the outcome is provided below.** 
+and any other noteworthy tips. **Note that examples ending with :camera: means that a screenshot of the outcome is provided below.**
 
 For a summary of all the commands, refer to the [Command Summary](#command-summary). If this
 is your first read, do go through the following notes about the command format to help you better understand the
@@ -162,7 +165,9 @@ Examples:
   Friday
 * `addm n/Harry Li p/91234567 d/1 t/exco t/y2` adds Harry Li to the member list, indicates his availability on Monday and tags him as 'exco' and 'y2' :camera:
 
-![addmExample](images/addmExample.png)
+<p align="center">
+   <img src="images/addmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -216,7 +221,7 @@ member as they are considered duplicates.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip 2:** If you are looking to edit a member's availability, look at [Setting memebr availability](#setting-member-availability-setm).
+**:bulb: Tip 2:** If you are looking to edit a member's availability, look at [Setting member availability](#setting-member-availability-setm).
 </div>
 
 Examples:
@@ -226,7 +231,9 @@ Examples:
   respectively
 * `editm 2 t/exco t/y1` edits the 2nd member to have tags `exco` and `y1` :camera:
 
-![editmExample](images/editmExample.png)
+<p align="center">
+   <img src="images/editmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -247,7 +254,9 @@ Examples:
 * `findm Bob` returns `bob` and `Bob Doe`
 * `findm alex irfan` returns `Alex Yeoh`, `Irfan Ibrahim` :camera:
 
-![findmExample](images/findmExample.png)
+<p align="center">
+   <img src="images/findmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -282,7 +291,9 @@ Examples:
   Tuesday
 * `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Tuesday and Thursday :camera:
 
-![setmExample](images/setmExample.png)
+<p align="center">
+   <img src="images/setmExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -297,11 +308,13 @@ Format: `mark INDEX/INDICES`
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
 
-Examples: 
+Examples:
 
 * `mark 1 2` marks the attendance of the members at indices 1 and 2 in the displayed list a present :camera:
 
-![markExample](images/markExample.png)
+<p align="center">
+   <img src="images/markExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -328,7 +341,7 @@ Unmarks all member's attendance for and finalises their total attendance up till
 Format: `cleara`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All attendance data will be removed immediately after this command is executed. This action is **irreversible**. 
+All attendance data will be removed immediately after this command is executed. This action is **irreversible**.
 </div> <br>
 
 [Back to Table of Contents](#table-of-contents)
@@ -350,10 +363,10 @@ Format: `import CSV_FILE_PATH`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If there is a duplicate members(same name) being imported using the
-CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**. 
+CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**.
 </div> <br>
 
-Examples: 
+Examples:
 
 * `import myFile.csv` imports member data from the CSV file in `[JAR_file_location]/myFile.csv` :camera:
 
@@ -368,7 +381,7 @@ Clears all members from your member list.
 Format: `clearm`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All member data will be removed immediately after this command is executed. This action is **irreversible**. 
+All member data will be removed immediately after this command is executed. This action is **irreversible**.
 </div> <br>
 
 [Back to Table of Contents](#table-of-contents)
@@ -401,7 +414,9 @@ Examples:
   5
 * `addf n/Court 19 l/Tampines Hub Badminton Hall t/1700 c/5` adds Court 19 at Tampines Hub Badminton Hall at 5pm with a capacity of 5 :camera:
 
-![addfExample](images/addfExample.png)
+<p align="center">
+   <img src="images/addfExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -475,7 +490,9 @@ Examples:
 * `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
 * `findf opp tampines` returns `Opp University Hall` and `Tampines Hub Badminton Hall` :camera:
 
-![findfExample](images/findfExample.png)
+<p align="center">
+   <img src="images/findfExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -499,7 +516,9 @@ Examples:
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
   user :camera:
 
-![splitExample](images/splitExample.png)
+<p align="center">
+   <img src="images/splitExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -523,7 +542,7 @@ Examples:
 
 #### Allocating a member to a facility : `allocate`
 
-If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility 
+If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility
 using `allocate`.
 
 Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
@@ -535,7 +554,7 @@ Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** Members you choose to allocate must be available on the specified day and their addition must not result in 
+**:information_source: Note:** Members you choose to allocate must be available on the specified day and their addition must not result in
 the selected facility's capacity to exceed.
 </div>
 
@@ -543,9 +562,27 @@ Examples:
 * `allocate 1 2 1` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
   at index 2 in the displayed facility list on Monday :camera:
 
-![allocateExample](images/allocateExample.png)
+<p align="center">
+   <img src="images/allocateExample.png" height="400" align="center"/>
+</p>
 
 [Back to Table of Contents](#table-of-contents)
+
+#### Exporting facility details and member allocation: `export`
+
+Exports facility details, and it's member allocation to a CSV file that you can share with
+your CCA members.
+
+Format: `export`
+
+* The exported CSV file will be created in `[JAR file location]/data/exportedData.csv`
+* The CSV file will contain 5 headers: Facility Name, Location, Time, Capacity and Member Allocation
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:** If exportedData.csv already exists and the export command is ran,
+the existing CSV file will be overwritten. So, make sure to change the file name of the existing
+CSV file before running the export command if you want to save it.
+</div> <br>
 
 #### Clearing all entries in facility list: `clearf`
 
@@ -554,7 +591,7 @@ Clears all facilities from your facility list.
 Format: `clearf`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All facility data will be removed immediately after this command is executed. This action is **irreversible**. 
+All facility data will be removed immediately after this command is executed. This action is **irreversible**.
 </div> <br>
 
 [Back to Table of Contents](#table-of-contents)
@@ -577,7 +614,7 @@ the commands you use. With `alias`, you can create a shortcut name for any comma
 Format: `alias s/SHORTCUT cw/COMMAND_WORD`
 
 * Creates an alias that allows the specified `COMMAND_WORD` to be executed with the specified `SHORTCUT`
-* `SHORTCUT` **must not an existing command**
+* `SHORTCUT` **must be one word and not an existing command**
 * `COMMAND_WORD` **must be an existing command**
 
 <div markdown="block" class="alert alert-info">
@@ -648,7 +685,7 @@ Format: `exit`
 **A**: Visit [this site](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 and follow the instructions specific to your operating system. You may have to download and run an installer to install Java 11 on your computer.<br><br>
 **Q**: How do I transfer my data in SportsPA to another Computer?<br>
-**A**: 
+**A**:
 1. On your current computer, navigate to `[JAR file location]/data/sportspa.json`. Make a copy of the `sportspa.json` file and transfer it to your other computer.
 2. On the other computer, navigate to
 `[JAR file location]/data/sportspa.json` and replace the empty data file it creates with the data file you have just copied.
@@ -690,6 +727,7 @@ Action | Format, Examples
 **Split members into facilities**| `split DAY` <br> e.g. `split Mon`
 **Deallocate member from a facility**|`deallocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `deallocate 2 3 4`
 **Allocate member to a facility**|`allocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `allocate 1 2 5`
+**Export facility details and<br>member allocation**| `export`
 **Clear facilities**|`clearf`
 
 [Back to Table of Contents](#table-of-contents)
