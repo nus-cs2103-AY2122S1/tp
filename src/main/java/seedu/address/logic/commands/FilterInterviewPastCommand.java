@@ -8,7 +8,7 @@ import seedu.address.model.interview.Interview;
 public class FilterInterviewPastCommand extends FilterInterviewCommand {
 
     public static final String MESSAGE_SUCCESS =
-            "Showing applicants with interviews that have already passed. ";
+            "Showing %d applicants with interviews that have already passed. ";
 
     @Override
     public CommandResult execute(Model model) {
@@ -19,7 +19,7 @@ public class FilterInterviewPastCommand extends FilterInterviewCommand {
             return !interview.isEmptyInterview() && interview.hasInterviewPassed();
         });
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredPersonList().size()));
     }
 
     @Override
