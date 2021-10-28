@@ -11,37 +11,45 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.organisation.Organisation;
+import seedu.address.model.organisation.UniqueOrganisationList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+    private static final Predicate<Organisation> PREDICATE_SHOW_ALL_ORGANISATIONS = unused -> true;
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final UniqueOrganisationList organisationList;
     private FilteredList<Person> filteredPersons;
     private FilteredList<Person> viewedPerson;
+    private FilteredList<Organisation> filteredOrganisations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        UniqueOrganisationList organisationList) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.organisationList = new UniqueOrganisationList(organisationList);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         viewedPerson = new FilteredList<>(this.addressBook.getPersonList());
+        filteredOrganisations = new FilteredList<>(organisationList.getOrganisationList());
         resetViewedPerson();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new UniqueOrganisationList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -103,9 +111,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteFromOrganisation(Person person, Name name) {
+        Organisation organisation = organisationList.getByName(name);
+        organisation.removePerson(person);
+        updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
+    }
+
+    @Override
+    public void deleteOrganisation(Organisation target) {
+        organisationList.remove(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addToOrganisation(Person person, Name name) {
+        Organisation organisation = organisationList.getByName(name);
+        organisation.addPerson(person);
+        updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
     }
 
     @Override
@@ -123,6 +150,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Organisation> getFilteredOrganisationList() {
+        return filteredOrganisations;
     }
 
     @Override
@@ -144,6 +176,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredOrganisationList(Predicate<Organisation> predicate) {
+        requireNonNull(predicate);
+        filteredOrganisations.setPredicate(predicate);
     }
 
     @Override

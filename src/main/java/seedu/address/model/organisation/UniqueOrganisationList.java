@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
@@ -27,11 +29,14 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
     private final ObservableList<Organisation> internalList = FXCollections.observableArrayList();
     private final ObservableList<Organisation> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private FilteredList<Organisation> filteredOrganisations;
 
-    public UniqueOrganisationList() {}
+    public UniqueOrganisationList() {
+        filteredOrganisations = new FilteredList<>(internalUnmodifiableList);
+    }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates a UniqueOrganisationList using the Organisations in the {@code toBeCopied}
      */
     public UniqueOrganisationList(UniqueOrganisationList toBeCopied) {
         this();
@@ -112,6 +117,16 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
         }
     }
 
+    public Organisation getByName(Name name) {
+        Organisation o = null;
+        for (Organisation organisation: internalList) {
+            if (organisation.getName().equals(name)) {
+                o = organisation;
+            }
+        }
+        return o;
+    }
+
     //    public void setPersons(seedu.address.model.person.UniquePersonList replacement) {
     //        requireNonNull(replacement);
     //        internalList.setAll(replacement.internalList);
@@ -143,7 +158,7 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
     }
 
     public ObservableList<Organisation> getOrganisationList() {
-        return this.asUnmodifiableObservableList();
+        return internalUnmodifiableList;
     }
 
     /**

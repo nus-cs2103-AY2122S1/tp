@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.organisation.Organisation;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -64,10 +66,28 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given person.
+     * The person must exist in the organisation.
+     */
+    void deleteFromOrganisation(Person person, Name name);
+
+    /**
+     * Deletes the given organisation.
+     * The organisation must exist in the organisation list.
+     */
+    void deleteOrganisation(Organisation target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given person to an organisation.
+     * {@code person} must not already exist in the organisation.
+     */
+    void addToOrganisation(Person person, Name name);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -78,6 +98,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered organisation list */
+    ObservableList<Organisation> getFilteredOrganisationList();
 
     /** Returns an unmodifiable view of the viewed person */
     ObservableList<Person> getViewedPerson();
@@ -92,6 +115,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered organisation list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredOrganisationList(Predicate<Organisation> predicate);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

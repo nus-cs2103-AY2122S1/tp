@@ -1,6 +1,7 @@
 package seedu.address.model.organisation;
 
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 public class Organisation {
@@ -17,8 +18,20 @@ public class Organisation {
         persons = new UniquePersonList();
     }
 
+    public void addPerson(Person person) {
+        persons.add(person);
+    }
+
+    public void removePerson(Person person) {
+        persons.remove(person);
+    }
+
     public Name getName() {
         return name;
+    }
+
+    public boolean containsPerson(Person person) {
+        return persons.contains(person);
     }
 
     /**
