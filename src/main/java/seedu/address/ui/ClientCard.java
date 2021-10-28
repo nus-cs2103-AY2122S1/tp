@@ -67,7 +67,7 @@ public class ClientCard extends UiPart<Region> {
     /**
      * Creates a {@code ClientCode}.
      */
-    public ClientCard(Client client) {
+    public ClientCard(Client client, CommandBox commandBox) {
         super(FXML);
 
         this.client = client;
@@ -82,8 +82,8 @@ public class ClientCard extends UiPart<Region> {
         lastMet.setText(LASTMET_ICON + transformEmptyRepresentation(client.getLastMet().toString()));
         nextMeeting.setText(NEXTMEETING_ICON + client.getNextMeeting().toString()); // has empty representation
         client.getTags().stream()
-            .sorted(Comparator.comparing(Tag::getName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.getName())));
+                .sorted(Comparator.comparing(Tag::getName))
+                .forEach(tag -> tags.getChildren().add(new TagLabel(tag.getName(), tag, commandBox).getRoot()));
     }
 
     @Override
@@ -101,6 +101,6 @@ public class ClientCard extends UiPart<Region> {
         // state check
         ClientCard card = (ClientCard) other;
         return id.getText().equals(card.id.getText())
-            && client.equals(card.client);
+                && client.equals(card.client);
     }
 }

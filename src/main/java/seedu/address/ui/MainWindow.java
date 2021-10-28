@@ -29,10 +29,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private Image leadsForceLogo = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
-
     private final Logger logger = LogsCenter.getLogger(getClass());
-
+    private Image leadsForceLogo = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
     private Stage primaryStage;
     private Logic logic;
 
@@ -44,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandBox commandBox;
     private AddressBookListMenu addressBookListMenu;
     private ThemeListMenu themeListMenu;
+    private TagsPanel tagsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,6 +64,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusBarPlaceholder;
+
+    @FXML
+    private StackPane tagsPanelPlaceholder;
 
     @FXML
     private ImageView displayLogo;
@@ -135,7 +137,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        clientListPanel = new ClientListPanel(logic.getFilteredClientList());
+        commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        clientListPanel = new ClientListPanel(logic.getFilteredClientList(), commandBox);
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -144,10 +149,12 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePathObject());
         statusBarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
         sideBar = new SideBar(logic.getClientToView(), logic.getSortedNextMeetingList());
         sideBarPlaceHolder.getChildren().add(sideBar.getRoot());
+
+        tagsPanel = new TagsPanel(logic.getFilteredTagList(), commandBox);
+        tagsPanelPlaceholder.getChildren().add(tagsPanel.getRoot());
+
 
         addressBookListMenu = new AddressBookListMenu(logic, logic.getAddressBookFilePathObject());
         menuBar.getMenus().add(addressBookListMenu.getRoot());
@@ -192,7 +199,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-            (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
