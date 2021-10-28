@@ -14,9 +14,9 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
 public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
-    private static final String FXML = "CommandBox.fxml";
     public static final String PROMPT_TEXT_COMMAND_BOX_ENABLED = "Enter command here...";
     public static final String PROMPT_TEXT_COMMAND_BOX_DISABLED = "Command box disabled — viewing user statistics";
+    private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
     private final AnimeListPanel animeListPanel;

@@ -40,8 +40,6 @@ public class StatsDisplay extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StatsDisplay.class);
     private static final String FXML = "StatsDisplay.fxml";
 
-    private final StatsDisplayObserver observer;
-
     private Runnable onStatsExit;
 
     @FXML
@@ -56,7 +54,7 @@ public class StatsDisplay extends UiPart<Stage> {
     /**
      * Creates a StatsDisplay UI component.
      */
-    public StatsDisplay(Stage root, StatsDisplayObserver o) {
+    public StatsDisplay(Stage root) {
         super(FXML, root);
         pieChart.setLabelsVisible(false);
         pieChart.setLegendSide(Side.RIGHT);
@@ -69,18 +67,20 @@ public class StatsDisplay extends UiPart<Stage> {
             }
         });
 
-        observer = o;
-
         KeyCombination closeStatsDisplayHotKey = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
-        Runnable closeStatsDisplayRunnable= () -> {this.hide(); onStatsExit.run();};
+        Runnable closeStatsDisplayRunnable = () -> {
+            this.hide();
+            onStatsExit.run();
+        };
+
         getRoot().getScene().getAccelerators().put(closeStatsDisplayHotKey, closeStatsDisplayRunnable);
     }
 
     /**
      * Creates a new StatsDisplay.
      */
-    public StatsDisplay(StatsDisplayObserver o) {
-        this(new Stage(), new StatsDisplayObserver());
+    public StatsDisplay() {
+        this(new Stage());
     }
 
     public void setStatsCloseCommand(Runnable onStatsExit) {

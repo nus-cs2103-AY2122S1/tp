@@ -88,7 +88,7 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        statsDisplay = new StatsDisplay(new StatsDisplayObserver());
+        statsDisplay = new StatsDisplay();
         statsDisplay.setStatsCloseCommand(this::onCloseStatsWindow);
 
         initTheme();
