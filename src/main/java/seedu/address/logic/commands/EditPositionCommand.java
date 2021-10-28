@@ -67,11 +67,19 @@ public class EditPositionCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_POSITION);
         }
 
+        memento.record(model.getCopiedModel());
+
         model.setPosition(positionToEdit, editedPosition);
         // when a position is edited, the position information in applicants should also be modified
         model.updateApplicantsWithPosition(positionToEdit, editedPosition);
         model.updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_POSITION_SUCCESS, editedPosition));
+
+        String successMessage = String.format(MESSAGE_EDIT_POSITION_SUCCESS, editedPosition);
+        memento.recordMessage(successMessage);
+
+        model.addToHistory(this);
+
+        return new CommandResult(successMessage);
     }
 
 
