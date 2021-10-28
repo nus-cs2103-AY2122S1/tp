@@ -110,7 +110,7 @@ Examples:
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the record.
+Deletes the specified student from EdRecord.
 
 Format: `delete INDEX`
 
@@ -131,11 +131,11 @@ Format: `list [TAG]…​`
 
 ### Listing modules: `cd`
 
-Lists a module available in EdRecord.
+Change the working directory to a specific module in EdRecord.
 
 Format: `cd MODULE`
 
-* Alternatively, the user can use `*` to list all modules
+* Alternatively, the user can use `cd *` to get an overview of all students in all modules.
 
 ### Moving students into an existing class and module : `mv`
 
@@ -147,7 +147,7 @@ Format: `mv INDEX [INDEX]... m/MODULE c/CLASS`
 
 ### Removing students from an existing class and module : `rm`
 
-Remove a particular student into a particular module and class.
+Remove a particular student from a particular module and class.
 
 Format: `rm INDEX m/MODULE c/CLASS`
 
@@ -155,12 +155,20 @@ Format: `rm INDEX m/MODULE c/CLASS`
 
 ### Toggle view: `view`
 
-Toggle views between between student details and module's assignments.
+Toggle the view between showing student details and showing module's assignments.
 
 Format: `view (contacts/asg)`
 
 * The default view when the application launches is the student details.
 * The only valid parameters are `contacts` or `asg`
+* `view contacts` toggles the view to display the student's contact details for each student listed.
+* `view asg` toggles the view to display the assignment completion status and/or grade for each student.
+
+###  List modules: `lsmod`
+
+Lists all modules available in EdRecord.
+
+Format: `lsmod`
 
 ### Create module: `mkmod`
 
@@ -188,7 +196,7 @@ Lists all available classes for a specified module.
 
 Format: `lsclass`
 
-* This command can only be made after listing a particular module (i.e `cd MODULE`)
+* This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
 
 ### Create class: `mkclass`
 
@@ -220,7 +228,7 @@ Examples:
 
 * `mkasg n/Side quest 10 w/20 s/50`
 
-* This command can only be made after listing a particular module (i.e `cd MODULE`)
+* This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
 ### Delete Assignment: `dlasg`
 
 Deletes an assignment in the specified module.
@@ -231,13 +239,13 @@ Examples:
 
 * `dlasg 2`
 
-* This command can only be made after listing a particular module (i.e `cd MODULE`)
+* This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
 
 ### Grade a student's assignment : `grade`
 
 Format: `grade INDEX n/ASSIGNMENT st/STATUS [s/SCORE]`
 
-* This command can only be made after listing a particular module (i.e `cd MODULE`)
+* This command can only be made after changing directory to a particular module (i.e `cd MODULE`).
 * Assigns a grade to the student identified specified `INDEX` used in the displayed student list. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * `ASSIGNMENT` refers to the name of the assignment that this grade should be assigned to. The name of the assignment is **case sensitive**.
 * Status has 3 possible inputs: Not submitted, Submitted or Graded
@@ -247,7 +255,7 @@ Format: `grade INDEX n/ASSIGNMENT st/STATUS [s/SCORE]`
 
 Format: `dlgrade INDEX n/ASSIGNMENT`
 
-* This command can only be made after listing a particular module (i.e `cd MODULE`)
+* This command can only be made after changing directory to a particular module (i.e `cd MODULE`),
 * `ASSIGNMENT` refers to the name of the assignment that the grade was assigned to. The name of the assignment is **case sensitive**.
 * Deletes a grade for the specified assignment from the student at the specified `INDEX` used in the displayed student list.
 
@@ -319,6 +327,7 @@ _Details coming soon ..._
 | **Create Class**| `mkclass m/MODULE c/CLASS`<br> e.g., `mkclass m/CS2103 c/T09`|
 | **Delete Class**| `dlclass m/MODULE c/CLASS`<br> e.g., `dlclass m/CS2103 c/T09`|
 | **Create Assigment**| `mkasg n/ASSIGNMENT w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Side quest 10 w/20 s/50`|
+| **Edit Assignment**| `edasg INDEX [n/NAME] [w/WEIGHTAGE] [s/MAXSCORE]`<br> e.g., `edasg 1 n/PE Dry Run w/12.5 s/10`|
 | **Delete Assignment**| `dlasg INDEX`<br> e.g., `dlasg 1`|
 | **Move Student into Class in Module**| `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`|
 | **Remove Student from Class in Module**| `rm INDEX m/MODULE c/CLASS`<br> e.g.,`rm 2 m/CS2103 c/T10`|
