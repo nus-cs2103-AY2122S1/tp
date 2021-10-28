@@ -13,6 +13,7 @@ import seedu.address.model.task.Venue;
 public class JsonAdaptedTask {
 
     public static final String MISSING_NAME_MESSAGE_FORMAT = "Task name field is missing!";
+    private final String reminderDays;
 
     private final String taskName;
     private final String taskDate;
@@ -24,9 +25,10 @@ public class JsonAdaptedTask {
      * Constructs a {@code JsonAdaptedTask} with the given {@code task}.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("taskName") String taskName, @JsonProperty("taskDate") String taskDate,
-                           @JsonProperty("taskTime") String taskTime, @JsonProperty("taskVenue") String taskVenue,
-                           @JsonProperty("isDone") String isDone) {
+    public JsonAdaptedTask(@JsonProperty("reminderDays") String reminderDays, @JsonProperty("taskName") String taskName,
+                           @JsonProperty("taskDate") String taskDate, @JsonProperty("taskTime") String taskTime,
+                           @JsonProperty("taskVenue") String taskVenue, @JsonProperty("isDone") String isDone) {
+        this.reminderDays = reminderDays;
         this.taskName = taskName;
         this.taskDate = taskDate;
         this.taskTime = taskTime;
@@ -38,6 +40,7 @@ public class JsonAdaptedTask {
      * Converts a given {@code Task} into this class for Jackson use.
      */
     public JsonAdaptedTask(Task source) {
+        this.reminderDays = String.valueOf(Task.getReminderDays());
         this.taskName = source.getTaskName().taskName;
         this.taskDate = source.getDate() == null
                 ? null
@@ -99,6 +102,9 @@ public class JsonAdaptedTask {
         if (modelIsDone) {
             newTask.setDone();
         }
+
+        int modelReminderDays = Integer.parseInt(reminderDays);
+        Task.setReminderDays(modelReminderDays);
 
         return newTask;
     };
