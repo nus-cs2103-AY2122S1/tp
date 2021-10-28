@@ -47,7 +47,7 @@ public class DeletePositionCommand extends Command {
         String successMessage = String.format(MESSAGE_DELETE_POSITION_SUCCESS, positionToDelete);
         memento.recordMessage(successMessage);
 
-        model.addHistory(this);
+        model.addToHistory(this);
 
         return new CommandResult(successMessage);
     }

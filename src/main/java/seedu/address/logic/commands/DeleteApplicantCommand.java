@@ -47,7 +47,7 @@ public class DeleteApplicantCommand extends Command {
         String successMessage = String.format(MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete);
         memento.recordMessage(successMessage);
 
-        model.addHistory(this);
+        model.addToHistory(this);
 
         return new CommandResult(successMessage);
     }

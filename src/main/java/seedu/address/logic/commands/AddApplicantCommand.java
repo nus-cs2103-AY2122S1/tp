@@ -64,7 +64,7 @@ public class AddApplicantCommand extends Command {
         String successMessage = String.format(MESSAGE_SUCCESS, applicant);
         memento.recordMessage(successMessage);
 
-        model.addHistory(this);
+        model.addToHistory(this);
 
         return new CommandResult(successMessage);
     }

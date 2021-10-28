@@ -242,7 +242,7 @@ public interface Model {
     /**
      * Records the modification history.
      */
-    void addHistory(Command command);
+    void addToHistory(Command command);
 
     /**
      * Returns true if there exists history to recover.
@@ -253,6 +253,5 @@ public interface Model {
      * Undoes the previous modification.
      */
     String recoverHistory();
-
 
 }

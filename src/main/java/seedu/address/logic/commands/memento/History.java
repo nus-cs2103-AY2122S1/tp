@@ -22,8 +22,7 @@ public class History {
     }
 
     /**
-     *
-     * @return
+     * Returns the previous memento.
      */
     public Memento recoverHistory() {
         assert hasHistory() : "There is no history to recover.";

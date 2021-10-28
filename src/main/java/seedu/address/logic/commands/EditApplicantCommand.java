@@ -88,7 +88,7 @@ public class EditApplicantCommand extends Command {
         String successMessage = String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
         memento.recordMessage(successMessage);
 
-        model.addHistory(this);
+        model.addToHistory(this);
 
         return new CommandResult(successMessage);
     }

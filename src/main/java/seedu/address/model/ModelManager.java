@@ -446,7 +446,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addHistory(Command command) {
+    public void addToHistory(Command command) {
         history.add(command);
     }
 

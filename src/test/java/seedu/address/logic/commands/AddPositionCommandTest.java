@@ -283,7 +283,7 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public void addHistory(Command command) {
+        public void addToHistory(Command command) {
             return;
         }
 
@@ -345,7 +345,7 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public void addHistory(Command command) {
+        public void addToHistory(Command command) {
             return;
         }
 

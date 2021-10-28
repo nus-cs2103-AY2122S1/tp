@@ -51,7 +51,7 @@ public class AddPositionCommand extends Command {
         String successMessage = String.format(MESSAGE_SUCCESS, toAdd);
         memento.recordMessage(successMessage);
 
-        model.addHistory(this);
+        model.addToHistory(this);
 
         return new CommandResult(successMessage);
     }

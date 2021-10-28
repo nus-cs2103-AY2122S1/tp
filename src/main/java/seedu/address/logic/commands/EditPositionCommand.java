@@ -77,7 +77,7 @@ public class EditPositionCommand extends Command {
         String successMessage = String.format(MESSAGE_EDIT_POSITION_SUCCESS, editedPosition);
         memento.recordMessage(successMessage);
 
-        model.addHistory(this);
+        model.addToHistory(this);
 
         return new CommandResult(successMessage);
     }

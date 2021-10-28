@@ -279,7 +279,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addHistory(Command command) {
+        public void addToHistory(Command command) {
             throw new AssertionError("This method should not be called.");
         }
 
