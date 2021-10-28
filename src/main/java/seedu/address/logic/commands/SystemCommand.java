@@ -27,12 +27,12 @@ public class SystemCommand {
             return new CommandResult(FindTagCaseInsensitiveCommand.COMMAND_EXAMPLE, false, false);
         case (FindTagCaseSensitiveCommand.COMMAND_WORD):
             return new CommandResult(FindTagCaseSensitiveCommand.COMMAND_EXAMPLE, false, false);
-        /*case (PinCommand.COMMAND_WORD):
-            return new CommandResult(PinCommand.COMMAND_EXAMPLE, false, false);*/
+        case (PinCommand.COMMAND_WORD):
+            return new CommandResult(PinCommand.COMMAND_EXAMPLE, false, false);
         case (TagCommand.COMMAND_WORD):
             return new CommandResult(TagCommand.COMMAND_EXAMPLE, false, false);
-        /*case (UnpinCommand.COMMAND_WORD):
-            return new CommandResult(UnpinCommand.COMMAND_EXAMPLE, false, false);*/
+        case (UnpinCommand.COMMAND_WORD):
+            return new CommandResult(UnpinCommand.COMMAND_EXAMPLE, false, false);
         case (UntagCommand.COMMAND_WORD):
             return new CommandResult(UntagCommand.COMMAND_EXAMPLE, false, false);
         default:

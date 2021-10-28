@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.BIRTHDAY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_STUDENT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
@@ -21,6 +23,8 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SystemCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -68,6 +72,35 @@ public class LogicManagerTest {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
+
+    @Test
+    public void systemExecute_validCommandWord() {
+        String addCommand = AddCommand.COMMAND_WORD;
+        CommandResult result = SystemCommand.execute(addCommand);
+        assertEquals(AddCommand.COMMAND_EXAMPLE, result.getFeedbackToUser());
+    }
+
+    @Test
+    public void systemExecute_validCommand() {
+        String tagCommand = TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getZeroBased() + TAG_DESC_STUDENT;
+        CommandResult result = SystemCommand.execute(tagCommand);
+        assertEquals(TagCommand.COMMAND_EXAMPLE, result.getFeedbackToUser());
+    }
+
+    @Test
+    public void systemExecute_invalidCommand() {
+        String command = "addd";
+        CommandResult result = SystemCommand.execute(command);
+        assertEquals("", result.getFeedbackToUser());
+    }
+
+    @Test
+    public void systemExecute_invalidCommandWord() {
+        String command = "";
+        CommandResult result = SystemCommand.execute(command);
+        assertEquals("", result.getFeedbackToUser());
+    }
+
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
