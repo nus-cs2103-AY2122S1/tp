@@ -82,7 +82,7 @@ public class MainApp extends Application {
             if (!tabOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TeachingAssistantBuddy");
             }
-            initialData = tabOptional.orElseGet(SampleDataUtil::getSampleModule);
+            initialData = tabOptional.orElseGet(SampleDataUtil::getSampleTeachingAssistantBuddy);
         } catch (DataConversionException e) {
             logger.warning(
                     "Data file not in the correct format. Will be starting with an empty TeachingAssistantBuddy");
