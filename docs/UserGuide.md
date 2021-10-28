@@ -26,7 +26,7 @@ This User Guide is to be used by any AniList user. No technical background is re
   * [List all supported genres: `genrelist`](#list-all-supported-genres-genrelist)
   * [Listing anime based on watch status: `list`](#listing-anime-based-on-watch-status-list)
   * [Clearing all animes currently displayed: `clear`](#clearing-all-animes-currently-displayed-clear)
-  * [Finding an anime: `find`](#finding-an-anime-find)  
+  * [Finding an anime: `find`](#finding-an-anime-find)
   * [View user statistics: `stats`](#view-user-statistics-stats)
   * [Viewing all supported commands: `help`](#viewing-all-supported-commands-help)
 - [Commands Table](#commands-table)
@@ -44,8 +44,8 @@ This User Guide is to be used by any AniList user. No technical background is re
 
 4. Double-click to launch the application. A window similar to the one shown below should appear shortly.
 
-5. On first launch, AniList will contain sample anime data which you could play around with. Once you are done and 
-   wish to clear the sample data, enter `list` to [list](#listing-anime-based-on-watch-status-list) all sample animes, 
+5. On first launch, AniList will contain sample anime data which you could play around with. Once you are done and
+   wish to clear the sample data, enter `list` to [list](#listing-anime-based-on-watch-status-list) all sample animes,
    and then use the [clear](#clearing-all-animes-currently-displayed-clear) command to delete them.
 
 
@@ -286,9 +286,9 @@ ___
 ### Listing anime based on watch status: `list`
 Displays a list of animes that has been previously entered by the user based on their watch status.<br>
 Format: `list [s/STATUS]`
-  
+
 * If no `STATUS` is given, all animes will be listed.
-  
+
 Parameters:
 * [`STATUS`](#status)
 
@@ -347,7 +347,7 @@ Parameters:
 <div markdown="block" class="alert alert-info">
 
 Example Usages:
-* `find n/boku no n/hero g/comedy` Finds all anime with "boku no" or "hero" in their name and 
+* `find n/boku no n/hero g/comedy` Finds all anime with "boku no" or "hero" in their name and
 all anime with comedy genre.
 </div>
 
