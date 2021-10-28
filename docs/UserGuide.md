@@ -22,6 +22,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
   * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
+  * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list--mailingList)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
   * [Command Assistant](#command-assistant)
@@ -307,6 +308,30 @@ Notes:
 * `find Betsy` followed by `deletem 1 - 5`
   * deletes the 1st and 2nd person in the results of the `find` command.
 
+### Exporting a mailing list of contacts
+
+Exports a CSV file of the current view containing specified fields
+
+#### Format:
+* `mailingList [p/] [e/] [a/] [b/] [t/]`
+
+Notes:
+* Name is always the first column in the CSV file
+* The default exported fields are name, phone, email
+* Invalid prefixes are ignored
+* Opens a file selector for you to pick the export location and file name
+
+**Sample Usage:**
+* `mailingList`
+  * Prepares a CSV of the current view containing Name, Phone and Email as the fields
+
+* `mailingList p/`
+  * Prepares a CSV of the current view containing Name and Phone as the fields
+
+* `mailingList j/`
+  * Invalid Prefix j/ is ignored
+  * Prepares a CSV of the current view containing Name, Phone and Email as the fields
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -393,3 +418,4 @@ Action | Summary | Format, Examples
 **List** | Lists all persons | `list`
 **Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
 **Untag** | Untags a person | `untag INDEX [t/TAG]…​`<br> e.g., `untag 2 t/colleague`
+**MailingList**| Exports a mailing list | `mailingList [p/] [e/] [a/] [b/] [t/]`
