@@ -2,9 +2,7 @@
 layout: page
 title: User Guide
 ---
-Welcome to **Source Control** User Guide! 
-
-This user guide is for both new users of Source Control and any experienced users looking to refresh their memory on how to use Source Control.
+Welcome to **Source Control** User Guide!
 
 Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. 
 This application allows you to **store comprehensive data** of each student quickly, and allows you to search through them easily. 
@@ -17,7 +15,8 @@ Source Control is **optimized for use via a Command Line Interface** (CLI) while
 If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps! 
 
 This guide takes you through all the _latest features_ of Source Control. If you are a new user, this guide provides you 
-all the basic knowledge to get started with Source Control, and is simple and easy to read.
+all the basic knowledge to get started with Source Control, and is simple and easy to read. If you are an experienced user, 
+feel free to skip to the [command summary](#command-summary) and experiment with our more advanced features! 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -26,6 +25,7 @@ all the basic knowledge to get started with Source Control, and is simple and ea
 * Table of Contents
 {:toc}
 
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ all the basic knowledge to get started with Source Control, and is simple and ea
 1. Copy the file to the folder you want to use as the _home folder_ for Source Control.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/StartingUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -115,7 +115,7 @@ Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t 
 * Adds a new student into the database with the given name and NUSNET ID.
 * Adds the student into the specified groups if applicable. If group does not already exist, a new group would be created. 
 * Adds tags to the student if applicable.
-* NUSNET ID input cannot already exist in student list. 
+* NUSNET ID input cannot already exist in the student list. 
 
 Examples:
 * `add student -n Jonas Chow -i E0123456` adds the student Jonas Chow with the given NUSNET ID. 
@@ -132,7 +132,7 @@ Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 * Creates a new group with the given group name.
 * Group must not already exist, and student should not already exist in group.
 * Students can be identified by their name or NUSNET ID. 
-Only full name is allowed e.g. `Jonas` will not match `Jonas Chow`. 
+Name is case-sensitive and only allows exact match e.g. `Jonas` will not match `Jonas Chow`. 
 * If multiple students have the same name, NUSNET ID needs to be used to identify them.  
 
 Examples:
@@ -147,12 +147,14 @@ Examples:
 Allocates an existing student into an existing group.
 
 Format: `add alloc -g <group_name> (-n <student_name> | -i <student_id>)`
-* Adds the student into an existing group specified by the group name.
+* Adds the student into an existing group specified by the group name. Group specified must already exist. 
 * Students can be identified by their name or NUSNET ID.
+  Name is case-sensitive and only allows exact match e.g. `Jonas` will not match `Jonas Chow`. 
+* If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `add alloc -g T01A -n John Doe`
-* `add alloc -g T02A -i E0123456`
+* `add alloc -g T01A -n Zhiying` adds `Zhiying` into the tutorial group `T01A`. 
+* `add alloc -g T02A -i E0123456` adds student with NUSNET ID `E0123456` into tutorial group `T02A`.
 
 ### Adding an assessment : `add assessment`
 
