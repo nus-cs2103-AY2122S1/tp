@@ -37,7 +37,7 @@ class TaskNameTest {
         assertFalse(TaskName.isValidTaskName(" task"));
 
         // contains other symbols -> returns false
-        assertTrue(TaskName.isValidTaskName("!@#$"));
+        assertFalse(TaskName.isValidTaskName("!@#$"));
     }
 
     @Test
