@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private static final String NO_EXISTING_STUDENTS = "There are no existing students!";
+    private static final String NO_EXISTING_STUDENTS_MESSAGE = "There are no existing students!";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
@@ -32,7 +32,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         if (personList.isEmpty()) {
-            placeholder.setText(NO_EXISTING_STUDENTS);
+            placeholder.setText(NO_EXISTING_STUDENTS_MESSAGE);
         }
     }
 
