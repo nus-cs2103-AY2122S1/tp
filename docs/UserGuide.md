@@ -209,7 +209,8 @@ Examples:
 
 Format: `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
 
-* Edits the group at the specified `INDEX`. The index refers to the index number shown in the displayed group list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the group at the specified `INDEX`. The index refers to the index number shown in the displayed group list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
@@ -231,7 +232,7 @@ Format: `deleteGroup INDEX`
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and GitHub link of the group deleted
+* `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and GitHub link of the group deleted.
 
 ### Add a student to a group: `addSG`
 
@@ -353,12 +354,13 @@ Edits an existing task in the tasks list.
 
 Format: `editTask INDEX [n/NAME] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]…​`
 
-* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * Command can be used to edit any of the three types of tasks: `todo`, `event` and `deadline`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * If the task being edited is an `event`, the date of the event can be edited by applying the `on/` flag followed by a new date. i.e `editTask INDEX on/DATE`. The `on/` flag is invalid for other types of tasks.
-* * If the task being edited is a `deadline`, the date of the deadline can be edited by applying the `by/` flag followed by a new date. i.e `editTask INDEX by/DATE`. The `by/` flag is invalid for other types of tasks.
+* If the task being edited is a `deadline`, the date of the deadline can be edited by applying the `by/` flag followed by a new date. i.e `editTask INDEX by/DATE`. The `by/` flag is invalid for other types of tasks.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the task’s tags by typing `t/` without specifying any tags after it.
 
