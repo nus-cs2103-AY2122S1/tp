@@ -19,7 +19,7 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 
 1. Copy the file to the folder you want to use as the _home folder_ for your SafeFor(H)All Application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. <br> 
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -27,7 +27,7 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 
    * **`view`** : Lists all residents.
 
-   * **`add`**`n/John Doe r/A100 v/t f/SoC` : Adds a resident named `John Doe` with the given information to the application.
+   * **`add`**`n/John Doe r/A100 e/john@gmail.com p/12345678 v/t f/SoC` : Adds a resident named `John Doe` with the given information to the application.
 
    * **`delete`**`3` : Deletes the 3rd resident shown in the current list.
 
@@ -35,7 +35,38 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+## Let's take a tour
+
+### The left bar
+
+The top-most 2 icons represent the main tabs: Residents and Events. <br> 
+ - You can view the relevant data when either is selected.
+
+The third will open the help window and the last will exit the application.
+
+![Ui](images/leftBar.png)
+
+### Viewing data
+
+Resident and Event information is organized in this panel. <br>
+You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#Viewing residents information))
+> Residents with late FETs by 7 days and, Events with un-vaccinated residents are highlighted red
+> 
+> Vaccinated residents include the syringe icon towards the right-side of the card
+> 
+> Past Events are highlighted grey.
+
+![Ui](images/data.png)
+
+### Interacting
+
+This is where you can enter commands to interact with the data. <br>
+The [Command Suggestion](#Command suggestion) box will suggest parameters on typing. <br>
+The result of executing the input command will be displayed the lower-most box.
+
+![Ui](images/commandBox.png)
+
 
 ## Features
 
@@ -61,7 +92,9 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit`, `view`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* [TODO] INCLUDE A DESCRIPTION ON DATE FORMATS
+* Date parameters can be of formats: `dd-mm-yyyy`, `dd.mm.yyyy` or `dd/mm/yyyy`
+
+* Time parameter is of format: `hhmm`
 
 </div>
 
@@ -95,7 +128,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 
-#### Viewing residents’ information : `view`
+#### Viewing residents information : `view`
 
 Shows a numbered list of all the residents in the address book.
 
@@ -112,13 +145,12 @@ Examples:
 
 #### Listing residents by fet/collection deadlines : `deadline`
 
-Lists residents whose ART collection or FET tests are due within the range of the given date or the range of the 2 dates given.
+Lists residents whose ART collection or FET tests are due before the given date or the within the range of the 2 given dates.
 
 Format: `deadline k/KEYWORD d1/DATE1 d2/DATE2` or `deadline k/LATE_KEYWORD d1/DATE1`
 
 * Normal keywords are `f` for fet and `c` for collection
 * Late keywords are `lf` for late fet and `lc` for late collection
-* The date inputted has to be in `dd-mm-yyyy` format
 * When a normal keyword is given, both date1 and date2 have to be inputted
 * The given Date2 must be a date later than the given Date1
 * `date1` is the start date and `date2` is the last date inclusive
@@ -131,21 +163,21 @@ Examples:
 * `deadline k/lf d1/11-10-2021` retrieves a list of residents whose `FET` is due before `11 Oct 2021`
 * `deadline k/lc d1/12-10-2021` retrieves a list of residents whose `Test Kit Collection` is due before `12 Oct 2021`
 
-#### Searching by resident information: `search`
+#### Searching by resident information: `find`
 
 Shows a list of residents that match the provided keywords for different available parameters.
 
 Format: `find [PREFIX/KEYWORD]...`
 
 * Allowed flags include; `n/`, `r/`, `e`, `p/`, `f/` and `v/`
-* Flags for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#Listing residents by fet/collection deadlines) on how to make use of these fields.
-* Notes on searching by name:
+* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#Listing residents by fet/collection deadlines) on how to make use of these fields.
+* Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
     - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
     - Only full words will be matched e.g `Han` will not match `Hans`
     - Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
   e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Notes on searching by room:
+* Searching by room:
     - A block can be used as a search. e.g `r/A`
     - A level can be used as a search. e.g `r/2`
     - A block-level can be used as a search. e.g `r/A2`
@@ -189,6 +221,48 @@ Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 residents in the address book.
 * `find n/Anne` followed by `delete 1` deletes the 1st resident named Anne in the results of the `find` command.
 
+#### Tracing close contacts : `trace`
+
+Traces a resident's close contacts based on the events they're involved in. This is useful when a COVID case is located within the residence and their close contacts are to be notified of proper procedure to follow.
+
+Format: `trace r/RESIDENT [d/DEPTH] [t/DURATION]`
+
+* A resident can be identified either by full name or room
+* Depth refers to the maximum links to reach the resident in question
+* Depth should be an integer >= 1 and will default to 1
+* Duration is in days and will default to 7
+
+Examples:
+* `trace` followed by `r/A101` lists the resident's immediate close contact from events in the past 7 days.
+* `trace n/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
+
+#### Importing resident data : `import`
+
+Imports resident information from the specified csv file which is to be located within the `data/` folder.
+
+Format: `import CSV_NAME`
+
+* 8 comma separated values for each row with values in order; <br>
+      `name`, `room`, `phone`, `email`, `vaccStatus`, `faculty`, `lastFetDate`, `lastCollectionDate`
+* The first row will be discarded as column headings
+* `lastFetDate`, `lastCollectionDate` are optional (can be left as empty space)
+* The file format (`.csv`) is not to be included in the `CSV_NAME`
+* Resident lists of all events will be wiped
+
+Examples:
+* `import` followed by `safeforhall` attempts to read the file `safeforhall.csv` within the `data/` folder.
+
+#### Exporting residents' emails : `export`
+
+Exports the emails of all the residents in the last filtered list to a filename of choice within the `data/exports/` folder.
+As they are comma-separated, a quick copy-paste allows you to send mass emails using modern email clients.
+
+Format: `export FILE_NAME`
+
+Examples:
+* `export` followed by `safeforhall` creates a `safeforhall.csv` within the `data/exports/` folder, with the emails of all the last filtered residents.
+
+
 ### For Events
 
 These commands will function as specified when run under the `Event` tab.
@@ -197,15 +271,15 @@ These commands will function as specified when run under the `Event` tab.
 
 Adds a new event to the address book.
 
-Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE [r/RESIDENTS]`
+Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE t/TIME [r/RESIDENTS]`
 
-[TODO]
-* The combination of the 4 required parameters should be unique
-* `FACULTY` has to be a single alphabetical word
+* The combination of the 5 required parameters should be unique
+* `RESIDENTS` can be included as all full names or all rooms
+* The number of residents cannot exceed to provided capacity
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
-* `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+* `add n/Swim v/Swimming Pool c/10 d/28-10-2021 t/1500`
+* `add n/Frisbee v/MPSH c/15 d/30/10/2021 t/1500 r/E201 a121`
 
 #### Editing an event : `edit`
 
@@ -222,7 +296,7 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
 Examples:
 *  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
-#### Add residents to an Event: `include`
+#### Add residents to an event: `include`
 
 Add multiple residents to an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
 
@@ -239,7 +313,7 @@ Examples:
 * `include 3 r/John Doe` adds John Doe to the third event in the address book
 * `include 4 r/John Doe, Jane Doe` adds John Doe and Jane Doe to the fourth event in the address book
 
-#### Remove residents from an Event: `exclude`
+#### Remove residents from an event: `exclude`
 
 Remove multiple residents from an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
 
@@ -262,17 +336,23 @@ These commands will function the same in either tab.
 
 #### Viewing help : `help`
 
-Provides the link for the user to reach this online user guide.
+Provides a short summary of the commands and a hyperlink for the user to reach this online user guide.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-#### History
+#### Switching tabs: `switch`
+
+Toggles between the `Residents` and `Events` tab.
+
+Format: `switch`
+
+#### Command history
 
 The `up` and `down` arrow keys when used with the input box in focus, allows traversal of past input commands to increase of use and efficiency.
 
-#### Command Suggestion
+#### Command suggestion
 
 A suggested string of parameters is displayed above the input box when a valid command is entered, parameters that have their prefixes entered correctly are removed from this suggestion.
 
@@ -288,7 +368,11 @@ Exits the program.
 
 Format: `exit`
 
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+
+## Prefix summary
+
+
 
 ## Command summary
 
@@ -297,10 +381,14 @@ Action | Format, Examples
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `deadline k/f 15-8-2021 20-08-2021`
-**Find** | `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass`
+**Find** | **Resident:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass` <br><br> **Event:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/Swim d/28-10-2021`
 **Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
 **Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
+**Trace** | `trace r/RESIDENT [d/DEPTH] [t/DURATION]` <br> e.g. `trace r/D201 d/2 t/4`
+**Import** | `import CSV_NAME` <br> e.g. `import safeforhall`
+**Export** | `export FILE_NAME` <br> e.g. `export closeContactsOfA123`
 **Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
 **Exclude** | `exclude INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `exclude 1 r/A102, E416`
+**Switch** | `switch`
 **Help** | `help`
 **Exit** | `exit`
