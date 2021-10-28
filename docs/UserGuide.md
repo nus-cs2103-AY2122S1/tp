@@ -21,7 +21,6 @@ inventory management tasks done faster than traditional GUI apps.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
 
-**TODO: Repalce sample ui image when ui is done**
 ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
@@ -77,9 +76,6 @@ inventory management tasks done faster than traditional GUI apps.
 Shows a message explaining how to access the help page.
 If a command word is specified, explains how to use the specified command.
 
-**TODO: Replace help ui image**
-![help message](images/helpMessage.png)
-
 Format: 
 - `help`: Shows help page url.
 - `help {command}` : Explains how to use the specified command.
@@ -88,6 +84,10 @@ Examples:
 ```
 help sorder // Explains how to use sorder command
 ```
+
+Screenshot:
+
+![help message](images/helpMessage.png)
 
 ### Adding an item: `add`
 
@@ -112,6 +112,10 @@ add apple id/192028 c/2 cp/1.1 sp/2.4
 add banana id/192023 c/5 cp/1.0 sp/2.2
 ```
 
+Screenshot:
+
+![add](images/screenshots/add_item.png)
+
 ### Deleting an item : `delete`
 
 Deletes the specified item from the inventory.
@@ -135,6 +139,10 @@ delete Apple // delete by name
 delete id/181817  // delete by serial number
 ```
 
+Screenshot:
+
+![delete](images/screenshots/delete_item.png)
+
 ### Removing an item : `remove`
 
 Removes a specified amount of a particular item from the inventory.
@@ -156,6 +164,10 @@ Examples:
 remove Apple c/2 // remove 2 apples from inventory
 remove id/181817 c/5 // remove 5 items with id 181817
 ```
+
+Screenshot:
+
+![remove](images/screenshots/remove_item.png)
 
 ### Editing an item : `edit`
 
@@ -181,6 +193,10 @@ edit 1 id/192028  // edit first item's id to 192028
 edit 2 n/Panadol  // edit second item's name to Panadol
 ```
 
+Screenshot:
+
+![edit](images/screenshots/edit_item.png)
+
 ### Listing items: `list`
 
 List items in the inventory, current order, or past transactions.
@@ -192,6 +208,10 @@ Format:
  - `list txns`: List past transactions.
  - `list txns {id}`: List items in the specified transaction.
 
+Screenshot:
+
+![list](images/screenshots/list_items.png)
+
 ### Sorting items: `sort`
 
 Sort items in the inventory.
@@ -201,6 +221,10 @@ Format:
 
  - `sort n/`: Sort items in the inventory by name.
  - `list id/`: Sort items in the inventory by id.
+
+Screenshot:
+
+![sort](images/screenshots/sort_items.png)
 
 ### Finding items: `find`
 
@@ -218,11 +242,19 @@ find n/Cookie n/Apple  // find and list items with names "Cookie" and "Apple"
 find id/123456  // find item with id 123456
 ```
 
+Screenshot:
+
+![find](images/screenshots/find_item.png)
+
 ### Clearing items: `clear`
 
 Clears the entire inventory.
 
 Format: `clear`
+
+Screenshot:
+
+![clear](images/screenshots/clear.png)
 
 ### Manage orders
 
@@ -244,6 +276,10 @@ sorder
 >> Please enter item name and quantity.
 ```
 
+Screenshot:
+
+![sorder](images/screenshots/sorder.png)
+
 ### Inputting an item into order: `iorder`
 
 Add an item into the current order.
@@ -263,6 +299,10 @@ Example:
 iorder milk c/5  // Add 5x milk into order
 iorder id/12345  // Add 1x item with id 12345 into order
 ```
+
+Screenshot:
+
+![iorder](images/screenshots/iorder.png)
 
 ### Cancelling an item in the order: `corder`
 
@@ -284,6 +324,10 @@ corder milk c/5  // Remove 5x milk from the order
 corder id/12345  // Remove 1x item with id 12345 from the order
 ```
 
+Screenshot:
+
+![corder](images/screenshots/corder.png)
+
 ### End ordering: `eorder`
 
 Process the current order and save it.
@@ -297,9 +341,9 @@ eorder
 >> Order is placed.
 ```
 
-### Archiving data files `[coming in v2.0]`
+Screenshot:
 
-_Details coming soon ..._
+![eorder](images/screenshots/eorder.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
