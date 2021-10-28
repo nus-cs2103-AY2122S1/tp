@@ -420,11 +420,7 @@ Examples:
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
 
-
 <div style="page-break-after: always;"></div>
-
-### Managing Lesson Fees
-
 
 ### Viewing your Calendar
 
