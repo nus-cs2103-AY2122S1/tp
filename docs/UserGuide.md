@@ -240,7 +240,7 @@ Examples:
 
 ### Showing assessment result analysis : `show`
 
-Shows the in-depth data analysis of individual, group, and cohort's performance for assessments.
+Shows the in-depth data analysis of individual, group, or the cohort's performance for assessments.
 
 Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f <export_file_path>]`
 
