@@ -1,12 +1,22 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-border-color:  #9172a5;
+    -fx-border-width: 0.5;
+    -fx-background-color: #232121;
+    background-color: #232121; /* Used in the default.html file */
+}
+
+.splitpane-background {
+    -fx-background-color: #232121;
+}
+
+.note-background {
+    -fx-background-color: #464646;
 }
 
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 
@@ -51,7 +61,7 @@
 .table-view .column-header-background {
     -fx-background-color: transparent;
 }
-.
+
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
@@ -73,14 +83,15 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-border-color: transparent transparent transparent #4d4d4d;
+    -fx-background-color: white;
+    -fx-padding: 0 0.1em 0 0.1em;
 }
 
 .split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-radius: 0.2;
+    -fx-border-width: 0.01;
+    -fx-background-color: derive(#232121, 20%);
+    -fx-border-color: transparent transparent #232121 transparent;
 }
 
 .list-view {
@@ -127,20 +138,9 @@
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
-.text_area {
-    -fx-control-inner-background: '#808080';
-    -fx-font-family: "Open Sans Regular";
-    -fx-opacity: 1;
-    -fx-text-fill: white;
-    -fx-focus-color: -fx-control-inner-background;
-    -fx-faint-focus-color: -fx-control-inner-background;
-    -fx-text-box-border: -fx-control-inner-background;
-    -fx-border-width: 5px;
-}
-
 
 .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #ffffff;
 }
 
 .pane-with-border {
@@ -200,7 +200,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #232121;
 }
 
 .menu-bar .label {
@@ -332,7 +332,7 @@
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #232121;
 }
 
 #filterField, #personListPanel, #personWebpage {
