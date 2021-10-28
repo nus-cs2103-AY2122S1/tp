@@ -329,7 +329,7 @@ The `Grade` object contains the completion status of the assignment (Not submitt
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                       | I want to …​                                                                                               | So that I can…​                                                                                          |
+| Priority | As a …​                                       | I want to …​                                                                                               | So that I can…​                                                                                 |
 | -------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `* * *`  | new user                                      | view the a list of commands and their usage                                                                | refer to instructions when I forget how to use EdRecord                                                  |
 | `* * *`  | user                                          | add a student's contact                                                                                    | contact them later                                                                                       |
@@ -337,30 +337,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                          | edit a student's contact                                                                                   | can have their most updated contact details                                                              |
 | `* * *`  | user                                          | list all students I have                                                                                   | see all the students that I have                                                                         |
 | `* * *`  | user                                          | find students by name                                                                                      | locate details of students without having to go through the entire list                                  |
-| `* * *`  | user with multiple modules                    | create a new module with information such as the current academic year                                     | separate students from different modules                                                                 |
-| `* * *`  | user with multiple classes in the same module | create a new class within a module with information such as venue and date/time                            | differentiate students based on their class                                                              |
-| `* * *`  | user                                          | assign a student to their class                                                                            |                                                                                                          |
+| `* * *`  | user with multiple modules                    | create a new module                                                                                        | separate students from different modules                                                                 |
+| `* * *`  | user with multiple classes in the same module | create a new class within a module                                                                         | assign students to their class                                                                           |
+| `* * *`  | user                                          | assign a student to their class                                                                            | differentiate students by their class                                                                    |
 | `* * *`  | user                                          | save and load my data                                                                                      | do not need to enter all my data each time I launch EdRecord                                             |
 | `* *`    | user                                          | use a command to exit EdRecord                                                                             | do not need to use my mouse                                                                              |
 | `* *`    | user                                          | clear all students                                                                                         | restart my EdRecord at the end of each semester                                                          |
-| `* *`    | user                                          | update module details                                                                                      | fix any mistakes when creating the module                                                                |
 | `* *`    | user                                          | delete module                                                                                              | remove completed or unused modules                                                                       |
 | `* *`    | user                                          | mark students' attendance                                                                                  | keep track of their attendance                                                                           |
 | `* *`    | user                                          | track students' class participation                                                                        | calculate class participation grade at the end of the semester                                           |
 | `* *`    | user                                          | create a module/class-wide assignment with information such as due date, maximum marks and weightage       | keep track of this assignment for each student                                                           |
-| `* *`    | user                                          | update assignment details                                                                                  | fix any mistakes made when creating the assignment                                                       |
 | `* *`    | user                                          | delete an assignment                                                                                       | remove assignments that are completed or irrelevant                                                      |
 | `* *`    | user                                          | update assignment status for each student                                                                  | track the completion status ("Not yet submitted", "Submitted", "Graded") and grade of individual student |
 | `* *`    | user                                          | create a module/class-wide assessment with details such as grade and follow-up actions                     | track the performance of individual students                                                             |
 | `*`      | user                                          | tag a student                                                                                              | categorise and filter my students by tags                                                                |
-| `*`      | user                                          | filter by tags                                                                                             | see only students relevant to my current task                                                            |
-| `*`      | user                                          | filter students with incomplete tasks                                                                      | easily find students who have tasks which are overdue                                                    |
 | `*`      | user                                          | batch add students' contacts                                                                               | add the entire class/module at once                                                                      |
-| `*`      | user                                          | view a list of pending tasks for me                                                                        | easily check what tasks I need to complete                                                               |
-| `*`      | user                                          | archive a module after it is completed                                                                     | hide old students' contacts when the semester is over                                                    |
-| `*`      | user teaching for more than 1 semester        | archive module data when the semester is over                                                              | hide old students' contacts but kept in storage for future reference                                     |
-| `*`      | experienced user                              | search for students based on criteria such as strong/weak points or grades above/below a certain threshold | tailor my teaching to students' specific needs                                                           |
-| `*`      | experienced user                              | add custom aliases for commands                                                                            | speed up my use of the application                                                                       |
 | `*`      | experienced user                              | modify the data file directly                                                                              | quickly update student information without having to go through the application commands                 |
 
 ### Use cases
@@ -667,28 +658,6 @@ Use case ends.
   - 2a1. EdRecord shows an error message.
 
     Use case resumes at step 2.
-
-**Use case: UC14 - Add custom command aliases**
-
-**MSS**
-
-1.  User requests to add an alias for a command.
-2.  EdRecord adds the alias.
-    Use case ends.
-
-**Extensions**
-
-- 1a. The command does not exist.
-
-  - 1a1. EdRecord shows an error message.
-
-    Use case ends.
-
-- 1b. The alias is already in use.
-
-  - 1b1. EdRecord shows an error message.
-
-    Use case ends.
 
 ### Non-Functional Requirements
 
