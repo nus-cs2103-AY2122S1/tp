@@ -9,8 +9,8 @@ import seedu.notor.logic.executors.person.PersonArchiveShowExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
 
 public class PersonArchiveShowCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "unarchive";
-    public static final List<String> COMMAND_WORDS = Arrays.asList("unarchive", "uar");
+    public static final String COMMAND_WORD = "listarchive";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("listarchive", "lar");
 
     private static final String COMMAND_DESCRIPTION =
             ": Lists out all archived persons.\n";

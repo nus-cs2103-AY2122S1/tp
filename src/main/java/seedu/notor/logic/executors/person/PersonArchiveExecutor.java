@@ -15,8 +15,8 @@ public class PersonArchiveExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        if (!model.isPersonView() && !model.isArchiveView()) {
-            throw new ExecuteException(Messages.MESSAGE_PERSONS_NOT_LISTED);
+        if (!model.isPersonView() || model.isArchiveView()) {
+            throw new ExecuteException(Messages.MESSAGE_PERSON_ARCHIVE_NOT_LISTED);
         }
         Person toBeArchivedPerson = super.getPerson();
         model.archivePerson(toBeArchivedPerson);

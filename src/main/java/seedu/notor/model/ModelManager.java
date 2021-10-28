@@ -143,7 +143,9 @@ public class ModelManager implements Model {
             notor.addArchivePerson(person);
         }
         for (Person person : notor.getPersonArchiveList()) {
-            notor.removePerson(person);
+            if (notor.hasPerson(person)) {
+                notor.removePerson(person);
+            }
         }
     }
 
