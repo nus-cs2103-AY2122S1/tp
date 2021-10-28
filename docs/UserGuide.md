@@ -95,6 +95,12 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### View Statistics of last searched list : `stat`
+
+Shows a count of the tags, type and tutorial ID of the last searched list
+
+Format: `stat`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -187,6 +193,14 @@ Format: `export FILENAME`
 
 * Takes the current filtered list of contacts and writes them into `FILENAME`
 
+### Export emails of filtered contacts to txt: `export email`
+
+Exports the list of contacts of all current filtered contacts into a txt file. This can then be used to create a group of contacts in outlook to mass send emails to.
+
+Format: `export email FILENAME`
+
+* Takes the current filtered list of contacts and writes them into `FILENAME`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -232,4 +246,7 @@ Action | Format, Examples
 **Find** | `find FIELD KEYWORD`<br> e.g., `find name James`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
+**Export** | `export FILENAME` <br> e.g., `export t01students.json`
+**Export Email** | `exportemail FILENAME` <br> e.g., `export email email.txt`
+**Statistics** | `stat`
 **Help** | `help`
