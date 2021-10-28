@@ -162,8 +162,8 @@ Format: `list [-a]`
 
 Examples:
 
-- `list` displays all students in TutorAid while showing only their name and list index
-- `list -a` displays all students in TutorAid while showing all of their data such as their contact number, payment status and so on.
+- `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
+- `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
 ### Deleting a student : `delete`
 Deletes the specified student with the given student index from TutorAid.
@@ -347,13 +347,13 @@ Adds students to lessons in TutorAid.
 Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
 * Adds the students at the specified student indexes to the lessons at the specified lesson indexes.
-- The index refers to the index number shown in the displayed student list and lesson list.
-- The index must be a **positive integer** 1, 2, 3, ...
+* The index refers to the index number shown in the displayed student list and lesson list.
+* The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
 * `add -sl s/1 2 3 l/1 2`
 
-> :bulb: All of these students must not be attending any of the lessons provided for this command to work.
+> :exclamation: All of these students must not be attending any of the lessons provided for this command to work.
 
 ### Deleting students from lessons: `del -sl`
 
@@ -362,13 +362,13 @@ Deletes students from lessons in TutorAid.
 Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 
 * Deletes the students at the specified student indexes from the lessons at the specified lesson indexes.
-- The index refers to the index number shown in the displayed student list and lesson list.
-- The index must be a **positive integer** 1, 2, 3, ...
+* The index refers to the index number shown in the displayed student list and lesson list.
+* The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
 * `del -sl s/2 3 l/1 2 3`
 
-> :bulb: All of these students must be attending all the lessons provided for this command to work.
+> :exclamation: All of these students must be attending all the lessons provided for this command to work.
 
 ### Locating students or lessons by name: `find -s` / `find -l`
 
@@ -409,7 +409,8 @@ Action | Format, Examples
 **Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
-**View** | `view STUDENT_INDEX`<br> e.g., `view 2`
+**Viewing a student** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
+**Viewing a lesson** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
 **Add lesson** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
 **Delete lesson** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
 **Edit lesson** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
