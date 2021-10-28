@@ -36,6 +36,10 @@ public class EeditCommandParser implements Parser<EeditCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_EVENT_ID, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_ID);
 
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_ID)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EeditCommand.MESSAGE_USAGE));
+        }
+
         Index index;
 
         try {
