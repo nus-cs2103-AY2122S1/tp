@@ -21,7 +21,7 @@ public class SetTablesCommand extends Command {
             + "Example: " + COMMAND_WORD + " 5, 4, 3x10, 2x5, 1x2";
 
     public static final String MESSAGE_SUCCESS =
-            "Tables set successfully, Restaurant has %1$d table(s) now.\nAll reservations have been deleted.";
+            "Tables set successfully, restaurant has %1$d table(s) now.\nAll reservations have been deleted.";
 
     private final List<Integer> tableSizes;
 
