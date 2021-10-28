@@ -154,6 +154,13 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add command
+
+A user can use the add command to add a clients. A sequence diagram of this action is as shown:
+
+![AddCommandSequenceDiagram](images/AddCommandSequenceDiagram.png)
+
+
 ###  Note feature
 
 #### Current Implementation
@@ -270,7 +277,6 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
 * Currently, there is no relationship between Claim and EditClaimDescriptor. This means that any future changes
   to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should
   both extend from an abstract class to ensure that any future modification would not lead to regressions.
-
 ###  Schedule appointment feature
 
 #### Current Implementation
@@ -319,6 +325,24 @@ There are 3 possible outcomes from the execution of a ScheduleCommand.
 * **Alternative 2:** Different commands for add, edit and delete
     * Pros: Easier to implement
     * Cons: User has to remember a lot of commands
+
+
+### Insurance feature
+
+#### Implementation
+
+`Insurance` is currently composed of two objects:
+
+* `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`.
+* `brand`, a `String` representing the brand of insurance.
+
+A `Person` can have any number of different `Insurances`, stored as a `HashSet`.
+
+`Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command.
+
+A class diagram of `Insurance` is as shown:
+
+![InsuranceClassDiagram](images/InsuranceClassDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
