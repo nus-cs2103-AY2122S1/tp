@@ -46,11 +46,11 @@ If you are familiar with Unix commands, this is definitely for you!
 5. Type the command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter
    will open the help window.<br>
    Here are some example commands you can try:
-    * **`add -n Sherwin -sid A1234567X -cid B01 -email e0523451@u.nus.edu`**: Adds a student named `Sherwin` to PE with
+    * `add -n Sherwin -sid A1234567X -cid B01 -email e0523451@u.nus.edu`: Adds a student named `Sherwin` to PE with
       his Student ID, Class ID and Email.
-    * **`edit 1 -n Sherwin`**: Updates the name of the student at index 1 (1-indexed) to Sherwin
-    * **`delete 1`**: Deletes the student at index 1 (1-indexed)
-    * **`filter -sid A1234567X`**: Filters the list of students to display the student(s) whose student ID contains `
+    * `edit 1 -n Sherwin`: Updates the name of the student at index 1 (1-indexed) to Sherwin
+    * `delete 1`: Deletes the student at index 1 (1-indexed)
+    * `filter -sid A1234567X`: Filters the list of students to display the student(s) whose student ID contains `
       A1234567X'
 6. Refer to the [Features](#features) below for details on all available commands.
 
@@ -71,21 +71,21 @@ If you are familiar with Unix commands, this is definitely for you!
 
 ## <a name="general-features"></a>1. General Features
 
-### <a name="exit"></a>1.1 Exit: `exit` or F1 on keyboard
-Exits ProgrammerError and closes the GUI.
-
-### <a name="view-help"></a>1.2 View Help: `help` or F2 on keyboard
+### <a name="view-help"></a>1.1 View Help: `help` or F2 on keyboard
 Shows a message explaining how to access the help page.
 
 ![help message](images/commands/HelpCommand/help.png)
 
-### <a name="view-dashboard"></a>1.3 Dashboard: `dashboard`
+### <a name="view-dashboard"></a>1.2 Dashboard: `dashboard`
 Displays a dashboard window showing the following data:
 
 1. Number of students
 2. Number of classes
 3. Number of labs
 4. Number of labs unmarked for each class
+
+### <a name="exit"></a>1.3 Exit: `exit` or F1 on keyboard
+Exits ProgrammerError and closes the GUI.
 
 
 ## <a name="data-features"></a>2. Data Features
