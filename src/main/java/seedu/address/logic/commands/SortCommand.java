@@ -34,7 +34,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortFilteredClientList(sorter);
-        return new CommandResult(String.format(Messages.MESSAGE_SORT_SUCCESS, sorter.getPrefixName()));
+        return new CommandResult(String.format(Messages.MESSAGE_SORT_SUCCESS, sorter.toString()));
     }
 
     @Override
