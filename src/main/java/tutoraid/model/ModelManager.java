@@ -210,7 +210,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudentFromLessons(Student student) {
         for (Lesson lesson : lessonBook.getLessonList()) {
-            if (lesson.containsStudent(student)) {
+            if (lesson.hasStudent(student)) {
                 lesson.removeStudent(student);
             }
         }
