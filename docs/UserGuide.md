@@ -437,7 +437,7 @@ Commands | Format and Examples
 
 ## [Groups](#groups)
 Commands | Format and Examples
---------|-----------------
+--------|-----------------------------
 [**List Groups**](#list-all-groups-groups) | `groups`
 [**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​`
 [**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
@@ -447,7 +447,7 @@ Commands | Format and Examples
 
 ## [Tasks](#tasks)
 Commands | Format and Examples
---------|------------------|
+--------|-----------------------------
 [**List Tasks**](#list-all-tasks-tasks) | `tasks`
 [**Add Todo Task**](#add-a-todo-task-todo) | `todo n/TASK_NAME [t/TAG]…​` <br> e.g., `todo n/tP t/CS2103`
 [**Add Event Task**](#add-an-event-task-event) | `event n/TASK_NAME on/DATE [t/TAG]…​` <br> e.g., `event n/Final Exam on/2021-10-31 t/CS2103`
@@ -459,7 +459,7 @@ Commands | Format and Examples
 
 ## General
 Action | Format, Examples
---------|------------------
+--------|-----------------------------
 [**Clear Address Book**](#clearing-all-entries-from-tapp-clear) | `clearAll`
 [**Help**](#viewing-help--help) | `help`
 [**Exit**](#exiting-the-program--exit) | `exit`
