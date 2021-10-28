@@ -4,9 +4,11 @@ title: User Guide
 ---
 Welcome to **Source Control** User Guide!
 
-Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. <br>
+Source Control is a **desktop app for CS1101S professors to manage the performance of their students**.
+
 This application allows you to **store comprehensive data** of each student quickly, and allows you to search through them easily. 
-With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments! <br>
+With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments!
+
 Source Control can also give you both a quick overview and a closer look of how your students are performing.
 This application **provides in-depth data analysis** of the performance of your students in each assessment, 
 giving you timely feedback on the pace and difficulty level of the module.
