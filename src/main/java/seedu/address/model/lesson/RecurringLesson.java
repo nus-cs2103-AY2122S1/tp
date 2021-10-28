@@ -86,7 +86,7 @@ public class RecurringLesson extends Lesson {
     private boolean checkIntersection(Lesson other) {
         // Non-terminating recurrence
         if (getEndDate().equals(other.getEndDate()) && getEndDate().equals(Date.MAX_DATE)) {
-            return true;
+            return getDayOfWeek().equals(other.getDayOfWeek());
         }
 
         Set<Date> cancelledDates = getCancelledDates();
@@ -100,7 +100,7 @@ public class RecurringLesson extends Lesson {
         // 3 points, 2 interval
         // adjust end date to same day of week
         LocalDate earlierEndDate = earlierEnd.with(TemporalAdjusters.previousOrSame(getDayOfWeek()));
-        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEndDate.plusDays(1)) + 1;
+        long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEndDate) + 1;
 
         Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream().sorted()
                 .filter(date -> !date.getLocalDate().isBefore(laterStart)
