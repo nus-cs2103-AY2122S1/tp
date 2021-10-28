@@ -64,8 +64,8 @@ This table below illustrates what each formatting means.
 | `mark-up`      | Words in light-blue highlight, also known as a mark-up| A command that can be typed into Uni-Fy|`help`|
 | <code><i>italic</i></code> | Words in <i>italic</i> | A parameter to be supplied by the user |<code><i>n/task_name</i></code>|
 | `(brackets)` | Words in round brackets| Optional parameter |<code><i>(d/date)</i></code> or <br> <code><i>(task_id)</i></code> |
-| <code>multiple...</code> | Words with `…` after them| Parameters that can be input multiple times including 0 times|`keywords...`|
-| [**Blue underline**](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
+| <code>multiple...</code> | Words with `…` after them| Parameters that can be used multiple times including 0 times|`keywords...`|
+| [<u>**Blue underline**</u>](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
 
 ### 2.3 Icons
 
@@ -117,7 +117,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
 
 **:information_source: Notes about the command format:**<br>
 
-* Italicised words represent parameters that are meant to be supplied by the user
+* Italicised words represent [**parameters**](#24-glossary) that are meant to be supplied by the user
    * e.g. in <code>add <i>n/task_name d/date</i></code>, the <code><i>task_name</i></code> keyword represents a task and the *date* keyword represents a date, both to be inputted by the user
 
 * Items inside round brackets are optional
@@ -143,13 +143,7 @@ Format: `help`
 
 ### 4.2 Adding a task: `add` 
 
-Add a task to the task list.
-
-![add_command](images/addCommand.jpeg)
-
-After running the add command the task gets added to the task list as shown below:
-
-![add_command_after](images/addCommandAfter.jpeg)
+Add a task to the task list. The tags for the command can be input in any order.
 
 <div markdown="block" class="alert alert-primary">
 **:clipboard: Format:**<br>
@@ -175,15 +169,18 @@ After running the add command the task gets added to the task list as shown belo
 * `add n/CS2103 test t/16:30 d/2021-12-01 tg/Important ` adds the `CS2103 test` task on `2021-12-01`, scheduled for `16:30` with the priority set as `Important`
 </div>
 
+![add_command](images/addCommand.jpeg)
+
+After running the add command the task gets added to the task list as shown below:
+
+
+![add_command_after](images/addCommandAfter.jpeg)
+
+
 ### 4.3 Locating a task by name: `find`
 
 Find tasks with matching keywords and show them in the task list.
 
-![find_command](images/userguide/findCommandBefore.png)
-
-After running the find command, the tasks having the mentioned keyword are displayed as shown below:
-
-![find_command_after](images/userguide/findCommandAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -211,12 +208,17 @@ After running the find command, the tasks having the mentioned keyword are displ
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
 </div>
 
+![find_command](images/findCommand.jpeg)
+
+After running the find command, the tasks having the mentioned keyword are displayed as shown below:
+
+![find_command_after](images/findCommandAfter.jpeg)
+
 ### 5.4 Showing Tasks: `show` (coming soon)
 
 
 Show all tasks that have been added to the app in a specific week.
 
-![show_command](images/showCommand41.jpeg)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -244,6 +246,8 @@ Examples:
 * `show 1` displays tasks in week `1`
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 </div>
+
+![show_command](images/showCommand41.jpeg)
 
 ### 4.5 Setting Priority Level for Tasks: `tag` (coming soon)
 
@@ -314,24 +318,21 @@ Removes a specific task that has been added to your app.
 
 #### Demonstration:
 
-![delete_command](images/userguide/deleteCommandBefore.png)
+
+<div style="page-break-after: always;"></div>
+
+
+![delete_command](images/User%20Guide/deleteCommandBefore.png)
+
 
 After running the delete command, the task at that particular index gets deleted as shown below:
 
 ![delete_command_after](images/userguide/deleteCommandAfter.png)
 
-
-<div style="page-break-after: always;"></div>
-
 ### 4.7 Deleting all tasks : `clear`
 
 Clears all entries from the Uni-Fy app.
 
-![clear_command_before](images/clearCommandBefore.jpeg)
-
-When you run the clear command, all the tasks in the task list of Uni-Fy get deleted as shown below:
-
-![clear_command_after](images/clearCommandAfter.jpeg)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -339,6 +340,12 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
  - `clear`
 
 </div>
+
+![clear_command_before](images/clearCommandBefore.jpeg)
+
+When you run the clear command, all the tasks in the task list of Uni-Fy get deleted as shown below:
+
+![clear_command_after](images/clearCommandAfter.jpeg)
 
 ### 4.8 Undoing the previous command : `undo` `[coming in v1.3]`
 
