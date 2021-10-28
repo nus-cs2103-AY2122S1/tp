@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -25,21 +26,14 @@ public class TaskListPanel extends UiPart<Region> {
     private ListView<Task> taskListView;
 
     /**
-     * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
-     */
-    public TaskListPanel(ObservableList<Task> taskList) {
-        super(FXML);
-        taskListTitle.setText("Tasks");
-        taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
-    }
-
-    /**
      * Creates a {@code TaskListPanel} with the given {@code ObservableList} and {@code Member},
      */
-    public TaskListPanel(ObservableList<Task> taskList, Member member) {
+    public TaskListPanel(ObservableList<Task> taskList, Optional<Member> optionalMember) {
         super(FXML);
-        taskListTitle.setText(member.getName().fullName);
+        String titleText = optionalMember.isPresent()
+                ? optionalMember.get().getName().fullName
+                : "Tasks";
+        taskListTitle.setText(titleText);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }

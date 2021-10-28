@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void fillTaskListPanel() {
-        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), logic.getCurrentMember() );
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
