@@ -115,13 +115,17 @@ A person can have any number of tags (including 0)
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-Format birthday as ddMMyyyy
+Format birthday as ddMMyyyy.
 </div>
 
 **Sample Usage:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison b/25121999 p/1234567 t/criminal`
 
+Notes:
+* Phone number must be unique.
+* Birthdays are optional and can be added in future with `edit` command.
+* Future dates as birthdays are not allowed.
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
