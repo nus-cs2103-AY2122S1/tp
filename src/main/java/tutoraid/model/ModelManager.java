@@ -1,6 +1,8 @@
 package tutoraid.model;
 
 import static java.util.Objects.requireNonNull;
+import static tutoraid.ui.DetailLevel.HIGH;
+import static tutoraid.ui.DetailLevel.MED;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -13,6 +15,7 @@ import tutoraid.commons.core.LogsCenter;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
+import tutoraid.ui.DetailLevel;
 import tutoraid.ui.UiManager;
 
 /**
@@ -136,15 +139,17 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
         filteredLessons.setPredicate(lesson ->
                 targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.nameAsString()));
-        UiManager.showViewWindow();
+        UiManager.showFullDetails();
     }
 
     @Override
-    public void viewList(boolean viewAll) {
-        if (viewAll) {
-            UiManager.showViewWindow();
+    public void viewList(DetailLevel detailLevel) {
+        if (detailLevel == HIGH) {
+            UiManager.showFullDetails();
+        } else if (detailLevel == MED) {
+            UiManager.showMediumDetails();
         } else {
-            UiManager.hideViewWindow();
+            UiManager.showMinimalDetails();
         }
     }
 
@@ -199,7 +204,7 @@ public class ModelManager implements Model {
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
         filteredStudents.setPredicate(student ->
                 targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
-        UiManager.showViewWindow();
+        UiManager.showFullDetails();
     }
 
     @Override

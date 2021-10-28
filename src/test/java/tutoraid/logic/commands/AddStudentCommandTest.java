@@ -24,6 +24,7 @@ import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.StudentBuilder;
+import tutoraid.ui.DetailLevel;
 
 public class AddStudentCommandTest {
 
@@ -162,7 +163,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void viewList(boolean viewAll) {
+        public void viewList(DetailLevel detailLevel) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -3,6 +3,7 @@ package tutoraid.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static tutoraid.ui.DetailLevel.HIGH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
      * Constructs an DeleteStudentsFromLessonsCommand.
      *
      * @param studentIndexes of the students in the filtered student list to add to lessons
-     * @param lessonIndexes of the lessons in the filtered lesson list to add to students
+     * @param lessonIndexes  of the lessons in the filtered lesson list to add to students
      */
     public DeleteStudentsFromLessonsCommand(ArrayList<Index> studentIndexes, ArrayList<Index> lessonIndexes) {
         requireNonNull(studentIndexes);
@@ -53,7 +54,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
      * Checks if any of the students does not attend a specified lesson.
      *
      * @param students the students to be checked
-     * @param lesson the lesson to be checked
+     * @param lesson   the lesson to be checked
      * @return true if at least one student does not attend this lesson
      */
     public boolean isAnyOfTheseStudentsNotAttendingThisLesson(ArrayList<Student> students, Lesson lesson) {
@@ -72,7 +73,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
      * Checks if any of the students does not attend any of the specified lessons.
      *
      * @param students the students to be checked
-     * @param lessons the lessons to be checked
+     * @param lessons  the lessons to be checked
      * @return true if at least one of the students does not attend one of the lessons
      */
     public boolean isAnyOfTheseStudentsNotAttendingAnyOfTheseLessons(
@@ -93,7 +94,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
      * Removes all specified students from a lesson
      *
      * @param students the students to be removed
-     * @param lesson the lesson to have these students removed
+     * @param lesson   the lesson to have these students removed
      */
     public void removeStudentsFromALesson(ArrayList<Student> students, Lesson lesson) {
         requireNonNull(students);
@@ -108,10 +109,10 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
     /**
      * Returns an arraylist of students to be added to lessons.
      *
-     * @param lastShownStudentList the last list that was shown to the user
+     * @param lastShownStudentList     the last list that was shown to the user
      * @param targetIndexesForStudents indexes of students to be added
      */
-    public ArrayList<Student> getStudentsToEdit (
+    public ArrayList<Student> getStudentsToEdit(
             List<Student> lastShownStudentList, ArrayList<Index> targetIndexesForStudents) throws CommandException {
 
         ArrayList<Student> studentsToEdit = new ArrayList<>();
@@ -130,10 +131,10 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
     /**
      * Returns an arraylist of lessons to have students added.
      *
-     * @param lastShownLessonList the last list that was shown to the user
+     * @param lastShownLessonList     the last list that was shown to the user
      * @param targetIndexesForLessons indexes of lessons to have students added
      */
-    public ArrayList<Lesson> getLessonsToEdit (
+    public ArrayList<Lesson> getLessonsToEdit(
             List<Lesson> lastShownLessonList, ArrayList<Index> targetIndexesForLessons) throws CommandException {
 
         ArrayList<Lesson> lessonsToEdit = new ArrayList<>();
@@ -172,7 +173,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
-        model.viewList(true);
+        model.viewList(HIGH);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentsToEdit, lessonsToEdit));
     }

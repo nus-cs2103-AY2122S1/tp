@@ -3,6 +3,7 @@ package tutoraid.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static tutoraid.ui.DetailLevel.HIGH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * Constructs an AddStudentsToLessonsCommand.
      *
      * @param studentIndexes of the students in the filtered student list to add to lessons
-     * @param lessonIndexes of the lessons in the filtered lesson list to add to students
+     * @param lessonIndexes  of the lessons in the filtered lesson list to add to students
      */
     public AddStudentsToLessonsCommand(ArrayList<Index> studentIndexes, ArrayList<Index> lessonIndexes) {
         requireNonNull(studentIndexes);
@@ -53,7 +54,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * Checks if any of the students attends a specified lesson.
      *
      * @param students the students to be checked
-     * @param lesson the lesson to be checked
+     * @param lesson   the lesson to be checked
      * @return true if at least one of the students attends this lesson
      */
     private boolean isAnyOfTheseStudentsAttendingThisLesson(ArrayList<Student> students, Lesson lesson) {
@@ -72,7 +73,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * Checks if any of the students attends any of the specified lessons.
      *
      * @param students the students to be checked
-     * @param lessons the lessons to be checked
+     * @param lessons  the lessons to be checked
      * @return true if at least one of the students attends one of the lessons
      */
     private boolean isAnyOfTheseStudentsAttendingAnyOfTheseLessons(
@@ -91,7 +92,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
     /**
      * Checks if the lesson can accept an extra number of students without exceeding capacity.
      *
-     * @param lesson the lesson to be checked
+     * @param lesson        the lesson to be checked
      * @param numOfStudents the number of students to be added
      */
     private boolean canAcceptMoreStudents(Lesson lesson, int numOfStudents) {
@@ -117,7 +118,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      * Adds all specified students to a lesson
      *
      * @param students the students to be added
-     * @param lesson the lesson to have these students attend
+     * @param lesson   the lesson to have these students attend
      */
     private void addStudentsToALesson(ArrayList<Student> students, Lesson lesson) {
         requireNonNull(students);
@@ -132,10 +133,10 @@ public class AddStudentsToLessonsCommand extends AddCommand {
     /**
      * Returns an arraylist of students to be added to lessons.
      *
-     * @param lastShownStudentList the last list that was shown to the user
+     * @param lastShownStudentList     the last list that was shown to the user
      * @param targetIndexesForStudents indexes of students to be added
      */
-    public ArrayList<Student> getStudentsToAdd (
+    public ArrayList<Student> getStudentsToAdd(
             List<Student> lastShownStudentList, ArrayList<Index> targetIndexesForStudents) throws CommandException {
         ArrayList<Student> studentsToEdit = new ArrayList<>();
         for (Index index : targetIndexesForStudents) {
@@ -152,10 +153,11 @@ public class AddStudentsToLessonsCommand extends AddCommand {
 
     /**
      * Returns an arraylist of lessons to be added to students
-     * @param lastShownLessonList the last list that was shown to the user
+     *
+     * @param lastShownLessonList     the last list that was shown to the user
      * @param targetIndexesForLessons indexes of lessons to have students added
      */
-    public ArrayList<Lesson> getLessonsToAdd (
+    public ArrayList<Lesson> getLessonsToAdd(
             List<Lesson> lastShownLessonList, ArrayList<Index> targetIndexesForLessons) throws CommandException {
 
         ArrayList<Lesson> lessonsToEdit = new ArrayList<>();
@@ -197,7 +199,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
-        model.viewList(true);
+        model.viewList(HIGH);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentsToEdit, lessonsToEdit));
     }

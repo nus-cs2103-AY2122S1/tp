@@ -2,6 +2,8 @@ package tutoraid.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LIST_ALL;
+import static tutoraid.ui.DetailLevel.LOW;
+import static tutoraid.ui.DetailLevel.MED;
 
 import tutoraid.logic.commands.ListCommand;
 
@@ -22,9 +24,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIST_ALL);
         if (argMultimap.getValue(PREFIX_LIST_ALL).isPresent()) {
-            return new ListCommand(true);
+            return new ListCommand(MED);
         } else { // all unexpected input is ignored
-            return new ListCommand(false);
+            return new ListCommand(LOW);
         }
     }
 }
