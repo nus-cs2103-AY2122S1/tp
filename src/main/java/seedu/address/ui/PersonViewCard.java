@@ -114,7 +114,7 @@ public class PersonViewCard extends UiPart<Region> {
         if (person.getCompatability().compatabilityRating.isEmpty()) {
             compatibilityView.setText("-");
         } else {
-            compatibilityView.setText(person.getCompatability().compatabilityRating.toString() + "/100");
+            compatibilityView.setText(person.getCompatability().compatabilityRating.get() + "/100");
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
