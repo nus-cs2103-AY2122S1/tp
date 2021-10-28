@@ -76,8 +76,6 @@ public class SocialHandle {
         String platform = parsePlatform(s[0]);
         checkArgument(isValidPlatform(platform), PLATFORM_CONSTRAINTS);
         String value = s[1].strip();
-        //checkArgument(!value.isEmpty(), "Invalid social handle: " + socialHandle
-        //        + "\nUSERNAME cannot be empty" + " " + value);
         checkArgument(isValidValue(value), "Invalid social handle: " + socialHandle
                 + "\n" + USERNAME_CONSTRAINTS);
         this.platform = platform;
@@ -112,19 +110,6 @@ public class SocialHandle {
         this.platform = "";
         this.value = "";
     }
-
-    /*
-     * Constructs an empty {code @SocialHandle}
-     */
-    /*
-    public SocialHandle(String platform) {
-        requireNonNull(platform);
-        checkArgument(isValidPlatform(platform), MESSAGE_CONSTRAINTS);
-        this.platform = platform;
-        this.value = "";
-    }
-     */
-
 
     /**
      * Returns true if a given string is a valid social handle.
