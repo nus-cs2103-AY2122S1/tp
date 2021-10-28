@@ -55,7 +55,7 @@ public class UnlinkFriendCommand extends Command {
         }
 
         model.unlinkFriend(friendToUnlink, gameToUnlink);
-        model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
+        model.updateFilteredAndSortedFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
 
         return new CommandResult(generateSuccessMessage(friendToUnlink), CommandType.FRIEND_UNLINK);
     }

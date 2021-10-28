@@ -10,6 +10,6 @@ public class SampleStyles {
 
     public static final Background BLURPLE_BACKGROUND = new Background(
             new BackgroundFill(Color.rgb(114, 137, 218, 1),
-            new CornerRadii(10.0),
-            new Insets(-5.0, -7.0, -5.0, -7.0)));
+                    new CornerRadii(10.0),
+                    new Insets(-5.0, -7.0, -5.0, -7.0)));
 }

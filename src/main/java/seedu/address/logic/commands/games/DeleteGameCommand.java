@@ -26,6 +26,7 @@ public class DeleteGameCommand extends Command {
 
     /**
      * Command to delete a friend using the unique FRIEND_ID.
+     *
      * @param gameId The friend id to identify the friend to be deleted.
      */
     public DeleteGameCommand(GameId gameId) {
@@ -35,6 +36,7 @@ public class DeleteGameCommand extends Command {
 
     /**
      * Executes the {@Code game --delete} command.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return The resulting {@Code CommandResult} from deleting the game.
      * @throws CommandException Thrown when the game does not exist.

@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 import seedu.address.model.friend.Friend;
 
+// TODO: remove duplicate
+
 /**
  * Tests that a {@code gameId} is contained within a friend's {@Code GameFriendLinks}
  */

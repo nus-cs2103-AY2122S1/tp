@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
+import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
 
 /**
@@ -41,6 +42,19 @@ public class Day {
         requireNonNull(dayOfWeek);
         this.timeSlots = new boolean[NUMBER_OF_SLOTS];
         this.dayOfWeek = dayOfWeek;
+    }
+
+    /**
+     * Checks if the time slot for the given {@code hourOfDay} is free.
+     *
+     * @param hourOfDay hour to check if free.
+     * @return whether the day timeslot is free for given hour.
+     */
+    public boolean isTimeSlotHourFree(int hourOfDay) throws InvalidHourOfDayException {
+        if (hourOfDay < 0 || hourOfDay > timeSlots.length) {
+            throw new InvalidHourOfDayException();
+        }
+        return timeSlots[hourOfDay];
     }
 
     /**

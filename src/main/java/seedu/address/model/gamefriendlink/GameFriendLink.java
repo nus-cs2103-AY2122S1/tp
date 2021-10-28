@@ -19,7 +19,7 @@ public class GameFriendLink {
     private SkillValue skillValue;
 
     /**
-     * Constructs a {@code GameFriendLink} with SkillValue set as null.
+     * Constructs a {@code GameFriendLink} with SkillValue set to value 0.
      * Every field except skillValue must be present and not null.
      *
      * @param gameId   the valid game id of an existing {@code Game}.
@@ -31,7 +31,7 @@ public class GameFriendLink {
         this.gameId = gameId;
         this.friendId = friendId;
         this.userName = userName;
-        this.skillValue = null;
+        this.skillValue = new SkillValue(0);
     }
 
     /**
@@ -44,7 +44,7 @@ public class GameFriendLink {
      * @param skillValue a valid skill value or null.
      */
     public GameFriendLink(GameId gameId, FriendId friendId, UserName userName, SkillValue skillValue) {
-        requireAllNonNull(gameId, friendId, userName);
+        requireAllNonNull(gameId, friendId, userName, skillValue);
         this.gameId = gameId;
         this.friendId = friendId;
         this.userName = userName;
@@ -85,8 +85,7 @@ public class GameFriendLink {
         return otherLink.getGameId().equals(getGameId())
                 && otherLink.getFriendId().equals(getFriendId())
                 && otherLink.getUserName().equals(getUserName())
-                && ((otherLink.getSkillValue() == null && getSkillValue() == null)
-                || (otherLink.getSkillValue() != null && otherLink.getSkillValue().equals(getSkillValue())));
+                && otherLink.getSkillValue().equals(getSkillValue());
     }
 
     @Override

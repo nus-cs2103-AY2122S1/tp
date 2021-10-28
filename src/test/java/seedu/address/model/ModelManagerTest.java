@@ -120,7 +120,8 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredFriendList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredFriendsList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAndSortedFriendsList()
+            .remove(0));
     }
 
     @Test
@@ -190,7 +191,8 @@ public class ModelManagerTest {
 
         // different filteredFriendsList -> returns false
         String[] keywords = ALICE.getFriendName().fullName.split("\\s+");
-        modelManager.updateFilteredFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredAndSortedFriendsList(
+            new FriendNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, userPrefs)));
 
         // different filteredGamesList -> returns false
@@ -198,7 +200,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
+        modelManager.updateFilteredAndSortedFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
         modelManager.updateFilteredGamesList(PREDICATE_SHOW_ALL_GAMES);
 
         // different userPrefs -> returns false

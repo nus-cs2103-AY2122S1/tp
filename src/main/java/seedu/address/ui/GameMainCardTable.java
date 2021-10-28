@@ -31,8 +31,9 @@ public class GameMainCardTable extends UiPart<Region> {
 
     /**
      * Constructor to create GameMainCardTable Ui component.
+     *
      * @param friendList List of friend that is linked to the Game to get.
-     * @param gameToGet Game to get.
+     * @param gameToGet  Game to get.
      */
     public GameMainCardTable(ObservableList<Friend> friendList, Game gameToGet) {
         super(FXML);

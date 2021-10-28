@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.RECOMMEND_VALID_VALORANT_VALID_HOUR_ZERO_MONDAY_DESC;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -10,9 +11,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.RecommendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class FriendsListParserTest {
+public class MainParserTest {
 
     private final MainParser parser = new MainParser();
 
@@ -22,6 +24,13 @@ public class FriendsListParserTest {
         // Friend friend = new FriendBuilder().build();
         // AddFriendCommand command = (AddFriendCommand) parser.parseCommand(FriendUtil.getAddFriendCommand(friend));
         // assertEquals(new AddFriendCommand(friend), command);
+    }
+
+    @Test
+    public void parseCommand_recommendFriends() throws ParseException {
+        String recommendFriendsCommandString = RecommendCommand.COMMAND_WORD + " "
+                + RECOMMEND_VALID_VALORANT_VALID_HOUR_ZERO_MONDAY_DESC;
+        assertTrue(parser.parseCommand(recommendFriendsCommandString) instanceof RecommendCommand);
     }
 
     @Test

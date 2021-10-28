@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
+import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
 class DayTest {
 
@@ -33,6 +34,21 @@ class DayTest {
         assertThrows(InvalidDayTimeException.class, () -> day.setTime("12", "10", true));
         // Same time
         assertThrows(InvalidDayTimeException.class, () -> day.setTime("12", "12", true));
+    }
+
+    @Test
+    void isTimeSlotHourFree_freeTimeSlots_returnsTrue() throws InvalidDayTimeException, InvalidHourOfDayException {
+        Day day = new Day(DayOfWeek.of(7));
+
+        day.setTime("10", "12", true);
+        assertTrue(day.isTimeSlotHourFree(10));
+        assertTrue(day.isTimeSlotHourFree(11));
+
+        // end time is not included
+        assertFalse(day.isTimeSlotHourFree(12));
+
+        assertFalse(day.isTimeSlotHourFree(9));
+        assertFalse(day.isTimeSlotHourFree(13));
     }
 
     @Test

@@ -54,8 +54,6 @@ public class FriendScheduleDayCard extends UiPart<Region> {
     }
 
 
-
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

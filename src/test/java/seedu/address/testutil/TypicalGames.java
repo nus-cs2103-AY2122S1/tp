@@ -10,6 +10,8 @@ import seedu.address.model.game.Game;
 
 /**
  * A utility class containing a list of {@code Game} objects to be used in tests.
+ *
+ * Must not contain an entry with the gameId 'NOTINLIST'
  */
 public class TypicalGames {
 

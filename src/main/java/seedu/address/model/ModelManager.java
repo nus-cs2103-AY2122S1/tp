@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
@@ -25,6 +27,7 @@ public class ModelManager implements Model {
 
     private final FriendsList friendsList;
     private final FilteredList<Friend> filteredFriends;
+    private final SortedList<Friend> filteredAndSortedFriends;
     private final GamesList gamesList;
     private final FilteredList<Game> filteredGames;
     private final UserPrefs userPrefs;
@@ -42,7 +45,8 @@ public class ModelManager implements Model {
                 + " and user prefs " + userPrefs);
 
         this.friendsList = new FriendsList(readOnlyFriendsList);
-        filteredFriends = new FilteredList<>(this.friendsList.getFriendsList());
+        this.filteredFriends = new FilteredList<>(this.friendsList.getFriendsList());
+        this.filteredAndSortedFriends = new SortedList<>(filteredFriends);
         this.gamesList = new GamesList(readOnlyGamesList);
         filteredGames = new FilteredList<>(this.gamesList.getGamesList());
         this.userPrefs = new UserPrefs(userPrefs);
@@ -130,7 +134,7 @@ public class ModelManager implements Model {
     @Override
     public void addFriend(Friend friend) {
         friendsList.addFriend(friend);
-        updateFilteredFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
+        updateFilteredAndSortedFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
     }
 
     @Override
@@ -159,21 +163,30 @@ public class ModelManager implements Model {
     //=========== Filtered Friend List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Friend}s filtered by the provided predicate and sorted
+     * by the {@code friendComparator} if not null.
      */
     @Override
-    public ObservableList<Friend> getFilteredFriendsList() {
-        return filteredFriends;
+    public ObservableList<Friend> getFilteredAndSortedFriendsList() {
+        return filteredAndSortedFriends;
     }
 
     @Override
-    public void updateFilteredFriendsList(Predicate<Friend> predicate) {
+    public void updateFilteredAndSortedFriendsList(Predicate<Friend> predicate) {
         requireNonNull(predicate);
+        // important to set the comparator to null first.
+        filteredAndSortedFriends.setComparator(null);
         filteredFriends.setPredicate(predicate);
     }
 
-    //=========== GamesBook ==================================================================================
+    @Override
+    public void updateFilteredAndSortedFriendsList(Predicate<Friend> predicate, Comparator<Friend> comparator) {
+        requireAllNonNull(predicate, comparator);
+        filteredFriends.setPredicate(predicate);
+        filteredAndSortedFriends.setComparator(comparator);
+    }
+
+    //=========== Games List ==================================================================================
 
     @Override
     public void setGamesList(ReadOnlyGamesList readOnlyGamesList) {
@@ -239,20 +252,19 @@ public class ModelManager implements Model {
         // short circuit if same object
         if (obj == this) {
             return true;
-        }
-
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
+            // instanceof handles other == null
+        } else if (!(obj instanceof ModelManager)) {
             return false;
+        } else {
+            // state check
+            ModelManager other = (ModelManager) obj;
+            return friendsList.equals(other.friendsList)
+                    && filteredFriends.equals(other.filteredFriends)
+                    && filteredAndSortedFriends.equals(other.filteredAndSortedFriends)
+                    && gamesList.equals(other.gamesList)
+                    && filteredGames.equals(other.filteredGames)
+                    && userPrefs.equals(other.userPrefs);
         }
-
-        // state check
-        ModelManager other = (ModelManager) obj;
-        return friendsList.equals(other.friendsList)
-                && filteredFriends.equals(other.filteredFriends)
-                && gamesList.equals(other.gamesList)
-                && filteredGames.equals(other.filteredGames)
-                && userPrefs.equals(other.userPrefs);
     }
 
 }

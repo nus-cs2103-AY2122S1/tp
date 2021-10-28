@@ -24,7 +24,9 @@ public class CommandResult {
      */
     private final boolean exit;
 
-    /** The command is a {@Code friend} command. */
+    /**
+     * The command is a {@Code friend} command.
+     */
     private final CommandType commandType;
 
     /**
@@ -40,6 +42,7 @@ public class CommandResult {
     private final Game gameToGet;
 
     //TODO : Remove this once merged with main code.
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */

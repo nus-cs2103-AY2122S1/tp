@@ -27,6 +27,8 @@ public class CliSyntax {
 
     // 4) schedule command
     public static final Flag FLAG_SCHEDULE = new Flag("--schedule ");
+    public static final Flag FLAG_TIME = new Flag("-t ");
+    public static final Flag FLAG_GAME_ID = new Flag("-g ");
 
     // Shorter data flags:
     public static final Flag FLAG_GAME = new Flag("-g ");

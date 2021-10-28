@@ -52,7 +52,7 @@ public class ListFriendCommandTest {
     @Test
     public void execute_listFriendIsFiltered_showsEverything() throws CommandException {
         // Set up expected filtered list by Ali
-        expectedModel.updateFilteredFriendsList(preparePredicate("Ali"));
+        expectedModel.updateFilteredAndSortedFriendsList(preparePredicate("Ali"));
 
         ListFriendCommand listFriendCommand = new ListFriendCommand(preparePredicate("Ali"));
         assertCommandSuccess(listFriendCommand, model,

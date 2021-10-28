@@ -41,6 +41,7 @@ public class FriendSchedulePanel extends UiPart<Region> {
 
     /**
      * Formats the friendName for the {@Code FriendCard}.
+     *
      * @param friend The friend whose id and name (if available) is to be displayed.
      * @return String with the friend's id and name.
      */

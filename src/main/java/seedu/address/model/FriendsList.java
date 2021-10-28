@@ -151,8 +151,8 @@ public class FriendsList implements ReadOnlyFriendsList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FriendsList // instanceof handles nulls
-                && friends.equals(((FriendsList) other).friends));
+            || (other instanceof FriendsList // instanceof handles nulls
+            && friends.equals(((FriendsList) other).friends));
     }
 
     @Override

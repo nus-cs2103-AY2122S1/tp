@@ -30,8 +30,8 @@ public class JsonAdaptedFriendTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsFriend() throws Exception {
-        JsonAdaptedFriend person = new JsonAdaptedFriend(BENSON);
-        assertEquals(BENSON, person.toModelType());
+        JsonAdaptedFriend friend = new JsonAdaptedFriend(BENSON);
+        assertEquals(BENSON, friend.toModelType());
     }
 
     @Test

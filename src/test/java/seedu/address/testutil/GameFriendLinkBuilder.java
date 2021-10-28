@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USER_NAME_OMEGA;
@@ -70,11 +71,20 @@ public class GameFriendLinkBuilder {
      * Sets the {@code SkillLevel} of the {@code GameFriendLink} that we are building.
      */
     public GameFriendLinkBuilder withSkillValue(SkillValue skillValue) {
+        requireNonNull(skillValue);
         this.skillValue = skillValue;
         return this;
     }
 
+    /**
+     * Constructs an instance of {@code GameFriendLink} based on the stored fields of the {@code GameFriendLinkBuilder}.
+     * @return constructed GameFriendLink based on stored fields.
+     */
     public GameFriendLink build() {
-        return new GameFriendLink(gameId, friendId, userName, skillValue);
+        if (skillValue == null) {
+            return new GameFriendLink(gameId, friendId, userName);
+        } else {
+            return new GameFriendLink(gameId, friendId, userName, skillValue);
+        }
     }
 }

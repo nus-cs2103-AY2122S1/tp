@@ -91,7 +91,8 @@ public class MainApp extends Application {
 
         // verify valid Games exist for all GameFriendLinks in initial friends list.
         if (!checkFriendsGamesExist(initialGamesList, initialFriendsList)) {
-            logger.info("Games linked to friends are not found in the games list. Loading an empty friends list.");
+            logger.info("Games linked to friends are not found in the games list. "
+                    + "Loading an empty friends list.");
             initialFriendsList = new FriendsList();
         }
 
@@ -108,7 +109,7 @@ public class MainApp extends Application {
                 return loadedGamesList.get();
             }
         } catch (DataConversionException e) {
-            logger.warning("Game data file not in the correct format. Loading an empty games list.");
+            logger.warning("Game data file not in the correct format/corrupted. Loading an empty games list.");
             return new GamesList();
         } catch (IOException e) {
             logger.info("Problem encountered reading game data file. Loading an empty games list.");
@@ -126,7 +127,8 @@ public class MainApp extends Application {
 
             return loadedFriendsList.get();
         } catch (DataConversionException e) {
-            logger.warning("Friend data file not in the correct format. Loading an empty friends list.");
+            logger.warning("Friend data file not in the correct format/corrupted. "
+                    + "Loading an empty friends list.");
             return new FriendsList();
         } catch (IOException e) {
             logger.info("Problem encountered reading friend data file. Loading an empty friends list.");
@@ -137,7 +139,8 @@ public class MainApp extends Application {
     /**
      * Checks if all games linked as {@code GameFriendLink} in Friend stored in {@code friendsList} exist in the
      * {@code gamesList}.
-     * @param gamesList list of games which should contain all games friends link to.
+     *
+     * @param gamesList   list of games which should contain all games friends link to.
      * @param friendsList list of friends to check if all games linked by Friend elements are stored in the gamesList.
      * @return whether all games linked to by friends in the friends list exist in the games list.
      */

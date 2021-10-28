@@ -95,4 +95,21 @@ public class FriendsListTest {
         }
     }
 
+    @Test
+    public void equals() {
+        // emoty list -> equals
+        assertEquals(friendsList.getFriendsList(), Collections.emptyList());
+
+        // another empty friendsList -> equals
+        assertEquals(friendsList.getFriendsList(), new FriendsList().getFriendsList());
+
+        // lists with friend with same fields -> equals
+        FriendsList first = new FriendsList();
+        FriendsList second = new FriendsList();
+        first.addFriend(new FriendBuilder().withFriendId("dummy").withFriendName("Jim").build());
+        second.addFriend(new FriendBuilder().withFriendId("dummy").withFriendName("Jim").build());
+
+        assertEquals(first, second);
+    }
+
 }

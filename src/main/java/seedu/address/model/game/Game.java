@@ -30,6 +30,7 @@ public class Game {
 
     /**
      * Returns true if both games have same gameId.
+     *
      * @return boolean result of equals.
      */
     public boolean isSameGameId(Game game) {

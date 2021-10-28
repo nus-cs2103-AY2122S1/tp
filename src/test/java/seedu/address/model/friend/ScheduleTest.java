@@ -1,5 +1,6 @@
 package seedu.address.model.friend;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
+import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
 class ScheduleTest {
 
@@ -21,6 +23,18 @@ class ScheduleTest {
     }
 
     @Test
+    void isScheduleFree_freeTimeSlots_returnsTrue() throws InvalidDayTimeException, InvalidHourOfDayException {
+        Schedule schedule = new Schedule();
+        schedule.setScheduleDay(1, "10", "12", true);
+
+        assertTrue(schedule.isTimeslotAvailable(10, 1));
+        assertTrue(schedule.isTimeslotAvailable(11, 1));
+
+        assertFalse(schedule.isTimeslotAvailable(12, 1));
+        assertFalse(schedule.isTimeslotAvailable(9, 1));
+    }
+
+    @Test
     void equals() throws InvalidDayTimeException {
         Schedule scheduleOne = new Schedule();
         Schedule scheduleTwo = new Schedule();
@@ -29,6 +43,11 @@ class ScheduleTest {
         assertTrue(scheduleOne.equals(scheduleOne));
         // Same schedule
         assertTrue(scheduleOne.equals(scheduleTwo));
+
+        // same edited schedule
+        scheduleTwo.setScheduleDay(1, "10", "12", true);
+        scheduleOne.setScheduleDay(1, "10", "12", true);
+        assertEquals(scheduleOne, scheduleTwo);
 
         // Different day schedules
         scheduleOne.setScheduleDay(1, "0", "12", true);

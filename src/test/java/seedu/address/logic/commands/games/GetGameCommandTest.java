@@ -43,7 +43,7 @@ public class GetGameCommandTest {
                 gameToGet.getGameId());
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.GAME_GET, gameToGet);
-        expectedModel.updateFilteredFriendsList(new FriendGameFriendLinksContainsGamePredicate(gameToGet));
+        expectedModel.updateFilteredAndSortedFriendsList(new FriendGameFriendLinksContainsGamePredicate(gameToGet));
         assertCommandSuccess(getCommand, model, expectedCommandResult, expectedModel);
     }
 
@@ -68,7 +68,7 @@ public class GetGameCommandTest {
         // show no one
         showNoGame(expectedModel);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.GAME_GET, gameToGet);
-        expectedModel.updateFilteredFriendsList(new FriendGameFriendLinksContainsGamePredicate(gameToGet));
+        expectedModel.updateFilteredAndSortedFriendsList(new FriendGameFriendLinksContainsGamePredicate(gameToGet));
         assertCommandSuccess(getCommand, model, expectedCommandResult, expectedModel);
     }
 

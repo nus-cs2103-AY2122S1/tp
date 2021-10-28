@@ -10,9 +10,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.friends.EditFriendCommand;
+import seedu.address.logic.commands.RecommendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.friends.EditFriendCommandParser;
 import seedu.address.logic.parser.friends.FriendCommandParser;
 import seedu.address.logic.parser.games.GameCommandParser;
 
@@ -48,8 +47,8 @@ public class MainParser {
         case GameCommandParser.COMMAND_WORD:
             return new GameCommandParser().parse(arguments);
 
-        case EditFriendCommand.COMMAND_WORD:
-            return new EditFriendCommandParser().parse(arguments);
+        case RecommendCommand.COMMAND_WORD:
+            return new RecommendCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

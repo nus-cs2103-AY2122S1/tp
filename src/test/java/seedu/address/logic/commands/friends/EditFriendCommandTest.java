@@ -8,7 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -19,7 +22,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.EditFriendDescriptorBuilder;
 import seedu.address.testutil.FriendBuilder;
 
@@ -28,26 +30,28 @@ import seedu.address.testutil.FriendBuilder;
  */
 public class EditFriendCommandTest {
 
-    private final Model model = new ModelManager(SampleDataUtil.getSampleFriendsList(),
-            SampleDataUtil.getSampleGamesList(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
+        expectedModel = new ModelManager(model.getFriendsList(), getTypicalGamesList(), new UserPrefs());
+    }
 
     @Test
     public void execute_allFieldsSpecified_success() {
-        Model expectedModel = new ModelManager(SampleDataUtil.getSampleFriendsList(),
-                SampleDataUtil.getSampleGamesList(),
-                new UserPrefs());
-
         Friend friendToEdit = model.getFriendsList().getFriendsList().get(0);
 
         Friend editedFriend = new FriendBuilder(friendToEdit).withFriendName("1234 5678 9101112 13141516").build();
 
         EditFriendCommand.EditFriendDescriptor editFriendDescriptor =
-                new EditFriendDescriptorBuilder(editedFriend).build();
+            new EditFriendDescriptorBuilder(editedFriend).build();
 
         EditFriendCommand editFriendCommand = new EditFriendCommand(friendToEdit.getFriendId(), editFriendDescriptor);
 
         String expectedMessage = String.format(EditFriendCommand.MESSAGE_EDIT_FRIEND_SUCCESS,
-                editedFriend.getFriendId(), editedFriend.getFriendName());
+            editedFriend.getFriendId(), editedFriend.getFriendName());
 
         expectedModel.setFriend(expectedModel.getFriend(friendToEdit.getFriendId()), editedFriend);
 
@@ -62,36 +66,36 @@ public class EditFriendCommandTest {
         FriendId notInListFriendId = new FriendId("NOTINLIST");
         assertThrows(FriendNotFoundException.class, () -> model.getFriend(notInListFriendId));
         EditFriendCommand editFriendCommand = new EditFriendCommand(notInListFriendId,
-                new EditFriendDescriptorBuilder().withFriendName(VALID_NAME_BOB).build());
+            new EditFriendDescriptorBuilder().withFriendName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editFriendCommand, model,
-                String.format(Messages.MESSAGE_FRIEND_ID_NOT_FOUND, notInListFriendId));
+            String.format(Messages.MESSAGE_FRIEND_ID_NOT_FOUND, notInListFriendId));
     }
 
     @Test
     public void equals() {
         Friend friendToEdit = model.getFriendsList().getFriendsList().get(0);
-        final EditFriendCommand standardCommand = new EditFriendCommand(friendToEdit.getFriendId(), DESC_AMY);
+        EditFriendCommand standardCommand = new EditFriendCommand(friendToEdit.getFriendId(), DESC_AMY);
 
-        // same values -> returns true
+        // same values -> equal
         EditFriendCommand.EditFriendDescriptor copyDescriptor = new EditFriendCommand.EditFriendDescriptor(DESC_AMY);
         EditFriendCommand commandWithSameValues = new EditFriendCommand(friendToEdit.getFriendId(), copyDescriptor);
         assertEquals(commandWithSameValues, standardCommand);
 
-        // same object -> returns true
+        // same object -> equal
         assertEquals(standardCommand, standardCommand);
 
-        // null -> returns false
+        // null -> not equal
         assertNotEquals(standardCommand, null);
 
-        // different types -> returns false
+        // different types -> not equal
         assertNotEquals(new ClearCommand(), standardCommand);
 
-        // different index -> returns false
+        // different index -> not equal
         assertNotEquals(new EditFriendCommand(new FriendId(friendToEdit.getFriendId().value + "diff"), DESC_AMY),
-                standardCommand);
+            standardCommand);
 
-        // different descriptor -> returns false
+        // different descriptor -> not equal
         assertNotEquals(new EditFriendCommand(friendToEdit.getFriendId(), DESC_BOB), standardCommand);
     }
 

@@ -26,6 +26,7 @@ public class AddGameCommand extends Command {
 
     /**
      * Constructor for AddGameCommand that takes in the game to add as the argument.
+     *
      * @param game The game to be added.
      */
     public AddGameCommand(Game game) {

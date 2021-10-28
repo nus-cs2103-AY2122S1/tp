@@ -2,6 +2,7 @@ package seedu.address.model.friend;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,10 +10,13 @@ import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
+import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.SkillValue;
+import seedu.address.model.time.HourOfDay;
+import seedu.address.model.time.exceptions.InvalidHourOfDayException;
 
 /**
  * Represents a Friend in the gitGud friend's list.
@@ -103,6 +107,7 @@ public class Friend {
 
     /**
      * Returns true if the friend is currently associated with the game provided.
+     *
      * @param game Game to check.
      * @return True if the friend is associated with the game.
      */
@@ -117,6 +122,11 @@ public class Friend {
      */
     public boolean isSameFriendId(Friend friend) {
         return this.friendId.equals(friend.getFriendId());
+    }
+
+    public boolean isFriendScheduleFree(HourOfDay hour, DayOfWeek dayOfWeek)
+            throws InvalidHourOfDayException, InvalidDayTimeException {
+        return this.schedule.isTimeslotAvailable(hour.getHour(), dayOfWeek.getValue());
     }
 
     /**
@@ -135,7 +145,8 @@ public class Friend {
         Friend otherFriend = (Friend) other;
         return otherFriend.getFriendId().equals(getFriendId())
                 && otherFriend.getGameFriendLinks().equals(getGameFriendLinks())
-                && otherFriend.getFriendName().equals(getFriendName());
+                && otherFriend.getFriendName().equals(getFriendName())
+                && otherFriend.getSchedule().equals(getSchedule());
     }
 
     @Override

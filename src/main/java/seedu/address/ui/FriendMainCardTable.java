@@ -34,6 +34,7 @@ public class FriendMainCardTable extends UiPart<Region> {
 
     /**
      * Constructor for FriendMainCardTable Ui component.
+     *
      * @param friend Friend to display information for.
      */
     public FriendMainCardTable(Friend friend) {
