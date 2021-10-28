@@ -22,14 +22,14 @@ public class SortOrdersCommandParser {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SORT_ORDERING, PREFIX_SORT_FIELD);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_SORT_ORDERING, PREFIX_SORT_FIELD)
+        if (!arePrefixesPresent(argMultimap, PREFIX_SORT_FIELD)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortOrdersCommand.MESSAGE_USAGE));
         }
 
-        SortOrdering sortOrdering = ParserUtil.parseSortOrder(argMultimap.getValue(PREFIX_SORT_ORDERING).get());
         SortField sortField = ParserUtil.parseSortField(argMultimap.getValue(PREFIX_SORT_FIELD).get());
-
+        SortOrdering sortOrdering = ParserUtil.parseSortOrder(argMultimap.getValue(PREFIX_SORT_ORDERING)
+                .orElse("ascending"));
         return new SortOrdersCommand(sortField, sortOrdering);
     }
 
