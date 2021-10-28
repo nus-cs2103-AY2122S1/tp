@@ -5,6 +5,8 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edrecord.model.person.PartOfModulePredicate.PREDICATE_SHOW_ALL_MODULES;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -241,9 +243,27 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Assignment> getAssignmentList() {
+        return selectedModule.getAssignmentList();
+    }
+
+    @Override
     public void addAssignment(Assignment assignment) {
         selectedModule.addAssignment(assignment);
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deleteAssignment(Assignment target) {
+        // Delete from the currently selected module
+        selectedModule.deleteAssignment(target);
+
+        // Delete grades from all persons under the module
+        List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
+        // TODO Integrate with AssignmentGradeMap, possibly refactor to enforce stricter immutability
+        allPersons.stream()
+                .filter(selectedModulePredicate)
+                .forEach(person -> person.deleteGrade(target));
     }
 
     @Override

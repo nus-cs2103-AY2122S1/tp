@@ -46,9 +46,9 @@ public class Module {
     }
 
     /**
-     * Constructs a {@code Module} with a Group in it's Group System.
+     * Constructs a {@code Module} with a Group in its Group System.
      *
-     * @param code A valid module code.
+     * @param moduleCode A valid module code.
      */
     public Module(String moduleCode, String groupCode) {
         requireNonNull(moduleCode, groupCode);
@@ -143,6 +143,14 @@ public class Module {
      */
     public void addAssignment(Assignment a) {
         assignmentList.add(a);
+    }
+
+    /**
+     * Removes Assignment {@code key} from this {@code Module}.
+     * {@code key} must exist in this module.
+     */
+    public void deleteAssignment(Assignment key) {
+        assignmentList.remove(key);
     }
 
     @Override

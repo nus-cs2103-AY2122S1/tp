@@ -1,6 +1,7 @@
 package seedu.edrecord.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -158,10 +159,21 @@ public interface Model {
     boolean hasAssignmentInCurrentModule(Assignment assignment);
 
     /**
+     * Returns an unmodifiable view of the assignment list under the currently selected module.
+     */
+    List<Assignment> getAssignmentList();
+
+    /**
      * Adds the given assignment to the currently selected module.
      * {@code assignment} must not already exist under the currently selected module.
      */
     void addAssignment(Assignment assignment);
+
+    /**
+     * Deletes the given assignment.
+     * The assignment must exist in the currently selected module.
+     */
+    void deleteAssignment(Assignment target);
 
     /**
      * Updates the search filter of the filtered person list to filter by the given {@code predicate}.

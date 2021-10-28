@@ -10,6 +10,7 @@ import static seedu.edrecord.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -239,7 +240,17 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public List<Assignment> getAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Assignment target) {
             throw new AssertionError("This method should not be called.");
         }
     }
