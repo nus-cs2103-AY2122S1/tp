@@ -63,7 +63,7 @@ public class DeleteTaskCommand extends DeleteCommand {
                 return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, targetTaskId));
             }
         }
-        throw new CommandException(Messages.MESSAGE_MODULE_NAME_NOT_FOUND);
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName));
     }
 
     /**
