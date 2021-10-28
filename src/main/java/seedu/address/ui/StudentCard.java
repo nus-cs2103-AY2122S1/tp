@@ -48,6 +48,8 @@ public class StudentCard extends UiPart<Region> {
     private Label classCode;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane tutorialGroups;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -64,6 +66,9 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getTutorialGroups().stream()
+                .sorted(Comparator.comparing(tutorialGroup -> tutorialGroup.toDisplayString()))
+                .forEach(tutorialGroup -> tutorialGroups.getChildren().add(new Label(tutorialGroup.toDisplayString())));
 
         if (student.getClassCode().equals(new EmptyClassCode())) {
             classCode.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
