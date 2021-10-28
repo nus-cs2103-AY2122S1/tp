@@ -3,30 +3,34 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AnimeListParser" as AnimeListParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
+box Ui UI_COLOR_T1
+participant ":TabOption" as TabOption UI_COLOR
+end box
+
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> AnimeListParser : parseCommand("delete 1")
+activate AnimeListParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+AnimeListParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> AnimeListParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AnimeListParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -36,17 +40,29 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> AnimeListParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> AnimeListParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+AnimeListParser --> LogicManager : d
+deactivate AnimeListParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
+
+DeleteCommand -> Model : setCurrentTab(t)
+activate Model
+
+Model -> TabOption : setCurrentTab(t)
+activate TabOption
+
+TabOption --> Model
+deactivate TabOption
+
+Model --> DeleteCommand
+deactivate Model
 
 DeleteCommand -> Model : deletePerson(1)
 activate Model
@@ -60,9 +76,15 @@ activate CommandResult
 
 CommandResult --> DeleteCommand
 deactivate CommandResult
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CommandResult -[hidden]-> AnimeListParser
+destroy CommandResult
 
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommand  -[hidden]-> AnimeListParser
+destroy DeleteCommand
 
 [<--LogicManager
 deactivate LogicManager
