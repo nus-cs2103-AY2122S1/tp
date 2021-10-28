@@ -23,6 +23,7 @@ title: User Guide
   - [Exit the app](#exit-the-program--exit)
 - [FAQ](#faq)
 - [Command summary](#command-summary)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
