@@ -252,8 +252,7 @@ as a confirmation message instead.
 
 **Aspect: Determining valid confirmation input messages:**
 
-* **Alternative 1 (current choice):** User enters `clear` again to actually clear displayed animes;
-  else to abort.
+* **Alternative 1 (current choice):** User enters `clear` again to actually clear displayed animes; else to abort.
     * Pros: The least ambiguous; message reflects what is to be done. Only two scenarios (user input is
       `clear` vs user input is not `clear`) to handle.
     * Cons: Entering regular commands such as `list` will abort the `clear` command instead of
@@ -295,8 +294,7 @@ _{more aspects and alternatives to be added}_
 
 #### Propose Implementation
 
-The proposed theme mechanism is simply done by completely altering the base css file of the program. The active css
-file will be saved in `preferences.json` upon exiting the application.
+The proposed theme mechanism is simply done by completely altering the base css file of the program. The active css file will be saved in `preferences.json` upon exiting the application.
 
 If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and
 will replace the invalid css file specification in `preferences.json`.

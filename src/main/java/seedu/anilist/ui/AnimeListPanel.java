@@ -62,8 +62,10 @@ public class AnimeListPanel extends UiPart<Region> {
     /**
      * Creates a {@code AnimeListPanel} with the given {@code ObservableList}.
      */
-    public AnimeListPanel(ObservableList<Anime> animeList, TabOption currentTab, CommandExecutor commandExecutor) {
+    public AnimeListPanel(ObservableList<Anime> animeList,
+                          TabOption currentTab, CommandExecutor commandExecutor) {
         super(FXML);
+
         this.currentTab = currentTab;
         this.commandExecutor = commandExecutor;
         this.animeList = animeList;
