@@ -211,14 +211,15 @@ Loads data as specified in the provided CSV file.
 Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]`
 
 * The file path can be either the absolute path or the relative path.
+* The relative path will be relative to the folder your jar file is located.
 * The first row of the CSV file needs to be headers for the respective columns.
 * The header for the assessment columns should the name of the assessment. For example, `Rune Trials`.
 * The header for every other column does not matter.
 * Every row apart from the first represents a student.
 * The first two columns refer to the student’s name and NUSNET ID.
-* The next i columns, where i is the specified number of group columns, refer to the student’s groups.
-* The next j columns, where j is the specified number of assessment columns, refer to the student’s grade in the respective assessments.
-* The next k columns, where k is the specified number of tag columns, refer to the student's tags.
+* The next `<number_of_group_columns>` columns, refer to the student’s groups.
+* The next `<number_of_assessment_columns>` columns, refer to the student’s grade in the respective assessments.
+* The next `<number_of_tag_columns>` columns, refer to the student's tags.
 * The number of group columns, assessment columns, and tag columns are assumed to be 0 if they are not specified.
 
 <div markdown="block" class="alert alert-primary">
@@ -236,11 +237,39 @@ Examples:
 * `import -f student_data.csv -g 3 -a 30`
 
 
+### Exporting data: `export`
+
+Exports data into a CSV file. Can be used to backup the data, or to send the data to colleagues for them to load into their copy of Source Control.
+
+Format: `export [-f <file_path>]`
+
+* The file path can be either the absolute path or the relative path.
+* The relative path will be relative to the folder your jar file is located.
+* If the file path is not specified, it will be saved to `sourceControl.csv`.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tips:**<br>
+
+* The exported csv file can be imported again to restore the state of the application when the data was exported
+
+</div>
+
+Examples:
+* `export -f student_data.csv`
+* `export` will save the data in `sourceControl.csv`
+
+
 ### Resetting all data: `clear`
 
-Clears all existing data.
+Clears all existing data. Be careful with this command! 
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+You can't undo this command! You can use the `export` command to get a backup of the data before clearing.
+</div>
 
 Format: `clear`
+
 
 ### Closing the app: `exit`
 
@@ -248,9 +277,34 @@ Exits the application.
 
 Format: `exit`
 
+
+### Aliasing commands: `alias`
+
+Sets up an alias that can be used instead of a command.
+
+Format: `alias -c <existing_command> -as <new_alias>`
+
+* The `existing_command` can be any command.
+* The `alias` can only be one word long.
+* The aliases created will persist between Source Control sessions.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tips:**<br>
+
+* You can remove an alias by using `alias -c <alias> -as <same_alias>`
+
+</div>
+
+Examples:
+* `alias -c add assessment -as aa` will allow you to use `aa` instead of `add assessment` in the future.
+* `alias -c aa -as aa` will remove the alias `aa`. `aa` will no longer be recognised as a command.
+
+
 ### Saving the data
 
 SourceControl data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -260,9 +314,6 @@ SourceControl data are saved as a JSON file `[JAR file location]/data/sourcecont
 If your changes to the data file makes its format invalid, SourceControl will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming soon]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -285,5 +336,7 @@ Action | Format | Examples
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | e.g. `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
+**Export Data** | `export [-f <file_path>]` | e.g. `export -f save_data.csv`
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
+**Add Alias** | `alias -c <existing_command> -as <new_alias>` | e.g. `alias -c add assessment -as aa`
