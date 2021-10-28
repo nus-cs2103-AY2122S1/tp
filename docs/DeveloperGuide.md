@@ -156,16 +156,54 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### timePeriod Class
+
+#### Implementation
+
+The feature is a variable contained within the Appointment class. `timePeriod` tracks the start and end time
+of the Appointment and contains functions to check if two appointments have clashing timePeriods and thus
+cannot both happen. `timePeriod` is also used to calculate the urgency of the appointment, assigning the
+appointment either `High`, `Medium` or `Low` urgency.
+
 ### AddApp feature
 
 #### Implementation
 
 The feature allows users to create an appointment with any number of clients (`Person`), 
-along with a location (`Address`), a Date (`LocalDate`), a Time (`LocalTime`) and a description (`String`).
+along with a location (`Address`), a time period (`timePeriod`) and a description (`String`).
 The addApp mechanism is facilitated by `Schedule`. 
 
 `Schedule` contains an Observable List of `Appointment` that we can add appointments to. These appointments will be
-generated from the inputs entered by the user using the `AddAppCommand` and `AddAppCommandParser`
+generated from the inputs entered by the user using the `AddAppCommand`
+
+Given below is an example usage scenario and how the addApp mechanism behaves at each step.
+
+Step 1. The user launches the application. Placebook will be initialized with a `LogicManager`, a `StorageManage`, a `UiManager`
+and a `ModelManager`. `StorageManager` contains an `AddressBookStorage` an a `ScheduleStorage` which manages
+the specific saved data. `StorageManager` will attempt to read data from a saved json file and loads the 
+data into `ModelManager` when the class is initialized
+
+##INSERT UML HERE
+
+Step 2. The user inputs the addApp command with `addApp id/1,2,3 a/Starbucks @ Raffles City start/01-01-2021 1400 end/01-01-2021 1500 ds/discuss marketing strategies`
+The `logicManager`, which has been initialized with an `AddressBookParser`, will use that class to parse the
+addApp command and return an addApp command with the appropriate inputs to be executed by `LogicManger`
+
+##INSERT UML HERE
+
+Step 3. On the execution of the command, the command will retrieve the list of persons and appointments from
+`ModelManager` and create a new `UniquePersonList`. The new `UniquePersonList` will then be populated with the
+appropriate client or clients retrieved from the list of persons according to the input index or indexes.
+A new Appointment will then be created and added to the `ModelManager`. It is at this stage the input will
+be checked to ensure that there are no duplicates or clashes with other appointments.
+
+##INSERT UML HERE
+
+Step 4. After execution, the CommandResult is passed upwards to the UI so that it can return a status message
+and update the display to match the updated model
+
+##@Yanyu im not 100% sure how the UI interacts with the overall model, if you see any issues could you help me correct them?
+
 
 ####Design considerations
 * **Alternative 1 (current choice):** User selects `Person` in `Appointment` through indexes of the displayed list.
@@ -174,6 +212,23 @@ generated from the inputs entered by the user using the `AddAppCommand` and `Add
 * **Alternative 2:** User selects `Person` in `Appointment` through the name field in `Person`
     * Pros: The user will have greater confidence that they are adding the correct person.
     * Cons: Longer command lines, especially if multiple `Person` added to the same `Appointment`. One spelling mistake in the name will cause an error. There the possibility that there are multiple `Person` with the same name.
+
+### Filter & Sort Feature
+
+#### Implementation
+
+##### Filtering
+The feature allows users to filter using `findApp` . The input of the command will be passed down through the parser into 
+the findAppCommand as a `DescriptionContainsKeywordsPredicate`, where on execution, this predicate is passed
+into the initialized `ModelManager` filters the list of Appointments by setting this predicate in a 
+FilteredList of Appointments, updating it to be displayed by the UI.
+
+##### Sorting
+The feature allows sort using one of two metrics, time of appointment or description, and return to the original list.
+Using `listApp Time` or `listApp Description` will sort the list, and `listApp` will return the list of appointments to
+its original display. This is also done through the `ModelManager`. The parser will first determine what type of `listApp`
+is being input by the user, before passing it into `listAppCommand`. On execution, `listAppComand` will call `ModelManager`
+functions to sort the list according to input and update the displayed list to be displayed by the UI
 
 ### Delete feature
 
