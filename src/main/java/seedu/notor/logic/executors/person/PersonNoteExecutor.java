@@ -28,11 +28,7 @@ public class PersonNoteExecutor extends PersonExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         Person storedPerson = super.getPerson();
-        Person editedPerson = new Person(
-                storedPerson.getName(), storedPerson.getPhone(), storedPerson.getEmail(),
-                storedPerson.getNote(), storedPerson.getTags());
-
-        return new CommandResult(generateSuccessMessage(editedPerson), false, true, false, editedPerson);
+        return new CommandResult(generateSuccessMessage(storedPerson), false, true, false, storedPerson);
     }
 
     /**

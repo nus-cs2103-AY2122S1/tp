@@ -10,8 +10,8 @@ import seedu.notor.ui.ResultDisplay;
 
 public class GeneralNoteWindow extends NoteWindow {
 
-    private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved general note.";
-    private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited General Note";
+    private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved General Note.";
+    private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited General Note.";
     private static final String WINDOW_NAME = "General Note";
 
     private final Notor notor;
@@ -39,12 +39,12 @@ public class GeneralNoteWindow extends NoteWindow {
      */
     @Override
     public String generateSuccessMessage(String message) {
-        return MESSAGE_SAVE_NOTE_SUCCESS;
+        return message;
     }
 
 
     /**
-     * Saves the file
+     * Saves the file.
      */
     @FXML
     @Override

@@ -9,7 +9,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.stage.Stage?>
 
-<Stage xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Stage xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
         <Scene stylesheets="@GeneralWindow.css">
             <AnchorPane prefHeight="151.0" prefWidth="368.0">
