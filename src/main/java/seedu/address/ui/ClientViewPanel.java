@@ -29,9 +29,6 @@ public class ClientViewPanel extends UiPart<Region> {
     private Label clientCreationDate;
 
     @FXML
-    private Label clientCreatedAt;
-
-    @FXML
     private Label clientLastMet;
 
     @FXML
@@ -94,8 +91,6 @@ public class ClientViewPanel extends UiPart<Region> {
             Client client = clientToView.get(0);
             clientName.setText(client.getName().toString());
             clientId.setText(client.getClientId().toString());
-            // TODO: implement created at
-            clientCreatedAt.setText("---");
             clientLastMet.setText(client.getLastMet().toString());
             clientRiskAppetite.setText(client.getRiskAppetite().toString());
             clientCurrentPlans.setText(client.getCurrentPlan().toString());
@@ -106,7 +101,6 @@ public class ClientViewPanel extends UiPart<Region> {
         } else {
             clientName.setText(null);
             clientId.setText(null);
-            clientCreatedAt.setText(null);
             clientLastMet.setText(null);
             clientRiskAppetite.setText(null);
             clientCurrentPlans.setText(null);

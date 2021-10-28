@@ -57,14 +57,6 @@
                     </Label>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefWidth="184.0" spacing="5">
-                    <Label styleClass="card_big_label" text="Created At:"/>
-                    <Label fx:id="clientCreatedAt" styleClass="card_small_label">
-                        <tooltip>
-                            <Tooltip text="Created At"/>
-                        </tooltip>
-                    </Label>
-                </HBox>
-                <HBox alignment="CENTER_LEFT" prefWidth="184.0" spacing="5">
                     <Label styleClass="card_big_label" text="Risk Appetite:"/>
                     <Label fx:id="clientRiskAppetite" styleClass="card_small_label">
                         <tooltip>
