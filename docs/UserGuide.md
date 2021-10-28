@@ -338,7 +338,7 @@ Examples:
 Find customers that have fields that contain all specified keywords cumulatively
 
 Format:
-* `findC [KEYWORD]…​`: Displays all customers that match specified keywords
+* `findC KEYWORD [MORE_KEYWORD...]`: Displays all customers that match specified keywords
   * At least one `KEYWORD` must be provided.
   * Only customers that match **all** provided keywords will be returned.
 
@@ -352,7 +352,6 @@ Find suppliers that have fields that contain all specified keywords cumulatively
 
 Format: 
 * `findS KEYWORD [MORE_KEYWORDS...]`: Displays all suppliers that contain all specified keywords
-
 Examples:
 * `findS Oct AM`: Finds suppliers that have both keywords `Oct` and `AM` in their fields
 
@@ -371,9 +370,10 @@ Examples:
 Sorts and displays the list of customers based on a given field in either ascending or descending order.
 
 Format:
-* `sortC by/PREFIX OF SORT KEY o/ORDER OF SORT`: Sorts and displays the list of customers based on provided arguments
-    * `PREFIX OF SORT KEY` is the prefix of the field you wish to sort the list of customers by, i.e. lp for loyaltyPoints and alg for allergies
-    * `ORDER OF SORT` can be set to 'a' for ascending order or 'd' for descending order
+* `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT`: Sorts and displays the list of customers based on provided 
+  arguments
+    * `PREFIX_OF_CUSTOMER_FIELD` is the prefix of the field you wish to sort the list of customers by, i.e. lp for loyaltyPoints and alg for allergies
+    * `ORDER_OF_SORT` can be set to 'a' for ascending order or 'd' for descending order
 
 Examples:
 * `sortC by/n o/d`: sorts the list of customers by `NAME` in descending order.
@@ -383,7 +383,7 @@ Examples:
 Sorts and displays the list of suppliers based on a given field in either ascending or descending order.
 
 Format:
-* `sortS by/PREFIX OF SUPPLIER FIELD o/ORDER OF SORT`: Sorts and displays the list of suppliers based on the sort type 
+* `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`: Sorts and displays the list of suppliers based on the sort type 
   and order.
 
 Examples:
@@ -393,9 +393,9 @@ Examples:
 <div markdown="block" class="alert alert-warning">
 :information_source: **Notes:**<br>
 
-* The prefixes used for the parameter `PREFIX OF SORT KEY` is the same as that when adding or deleting a supplier.
+* The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting a supplier.
   * For example `n` for name and `dd` for delivery details
-* The only acceptable inputs for the `ORDER OF SORT` parameter are `a` for `ascending` and `d` for `descending`.
+* The only acceptable inputs for the `ORDER_OF_SORT` parameter are `a` for `ascending` and `d` for `descending`.
 
 </div>
 
