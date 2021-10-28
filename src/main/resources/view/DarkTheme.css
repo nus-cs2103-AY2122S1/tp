@@ -65,7 +65,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 15pt;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
@@ -120,13 +120,13 @@
 
 .cell_big_label {
     -fx-font-family: "Open Sans Extra Bold";
-    -fx-font-size: 25px;
+    -fx-font-size: 18px;
     -fx-text-fill: #1dbdb6;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 22px;
+    -fx-font-size: 15px;
     -fx-text-fill: white;
 }
 
@@ -149,7 +149,6 @@
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
-    -fx-font-size: 20pt;
 }
 
 .result-display .label {
@@ -323,7 +322,7 @@
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 20pt;
+    -fx-font-size: 14pt;
     -fx-text-fill: white;
 }
 
