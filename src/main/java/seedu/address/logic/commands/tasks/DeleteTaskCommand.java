@@ -92,5 +92,4 @@ public class DeleteTaskCommand extends Command {
                 || (other instanceof DeleteTaskCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteTaskCommand) other).targetIndex)); // state check
     }
-    
 }
