@@ -16,7 +16,7 @@ public class StudentCard extends Card<Student> {
     private static final String LABEL_STUDENT_PHONE = "Mobile";
     private static final String LABEL_PARENT_NAME = "Parent";
     private static final String LABEL_PARENT_PHONE = "Parent Mobile";
-    private static final String LABEL_PROGRESS = "Progress";
+    private static final String LABEL_PROGRESS = "Latest Progress";
     private static final String LABEL_PAYMENT_STATUS = "Payment Status";
     private static final String LABEL_LESSONS = "Lessons";
 
