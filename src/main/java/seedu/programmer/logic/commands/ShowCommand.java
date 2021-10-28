@@ -19,7 +19,7 @@ public class ShowCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the student's particular and lab results "
             + "at the given index.\n"
-            + "Parameter: INDEX (must be a positive integer)\n"
+            + "Parameter: <INDEX> (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SHOW_STUDENT_SUCCESS = "Showed %s's lab results on the side panel";

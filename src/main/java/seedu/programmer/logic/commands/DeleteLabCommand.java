@@ -16,11 +16,11 @@ public class DeleteLabCommand extends Command {
 
     public static final String COMMAND_WORD = "dellab";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a lab from all the students in the list. "
-            + "\nParameters: "
-            + PREFIX_LAB_NUM + "<Lab Title> "
-            + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_LAB_NUM + "1 ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a lab from all the students in the list.\n"
+            + "Parameters: "
+            + PREFIX_LAB_NUM + "<LAB_NUMBER>\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_LAB_NUM + "1";
 
     public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s";
     public static final String MESSAGE_LAB_DOES_NOT_EXIST = "Lab doesn't exist: %1$s";
