@@ -4,11 +4,11 @@ title: User Guide
 ---
 
 ClassMATE is a **desktop app designed for CS2101 tutors to manage student contacts and organize them into their tutorial classes and groups, as well as
-other administrative matters including recording of students' class participation. It is optimized for use via a Command Line Interface** (CLI) while 
+other administrative matters including recording of students' class participation. It is optimized for use via a Command Line Interface** (CLI) while
 still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClassMATE can get your contact management tasks done faster than traditional GUI apps.
 
-This guide will get you started on how to create students, classes and groups, 
-assigning students to their respective classes and groups and covers other functionalities for users 
+This guide will get you started on how to create students, classes and groups,
+assigning students to their respective classes and groups and covers other functionalities for users
 such as filtering and searching students. Finally, it will also guide
 you through on how you can add class participation marks for your students.
 
@@ -47,7 +47,6 @@ We hope you find this User Guide helpful in using ClassMATE!
 1. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-annotated.png)
 1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   
 1. Refer to the [Features](#Features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -64,23 +63,23 @@ Once you have familiarised yourself with the layout of the application, try out 
 Some example commands you can try:
 * **`liststu`** : Lists all students. All students currently stored in ClassMATE will be displayed in the **Student Panel**.
 
-* **`addc c/G99 s/Tuesday 2 to 4pm, Friday 2 to 4pm`**: Adds a tutorial class with the code `G99`. The **Tutorial Class Panel** 
+* **`addc c/G99 s/Tuesday 2 to 4pm, Friday 2 to 4pm`**: Adds a tutorial class with the code `G99`. The **Tutorial Class Panel**
 should reflect the updated list of tutorial classes including your new class, `G99`.
 
 * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G99`**: Adds a student named `John Doe` to ClassMATE.
 The **Student Panel** Should reflect the updated list of students including your new student, `John Doe`.
 
-* **`deletestu 3`**: Deletes the 3rd student shown in the current list. 
+* **`deletestu 3`**: Deletes the 3rd student shown in the current list.
 
 * **`clear`** : Deletes all students.
 
 * **`exit`** : Exits the app.
 
-Once you have attempted these commands, you're ready to go! 
+Once you have attempted these commands, you're ready to go!
 
 ### Command format
 
-This section will help you understand the syntax used to describe the command features in this guide better. 
+This section will help you understand the syntax used to describe the command features in this guide better.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
@@ -105,10 +104,10 @@ This section will help you understand the syntax used to describe the command fe
 
 </div>
 
-## Features 
+## Features
 
 Here, you can find instructions on how to use ClassMATE's various features. The features are divided into three main subsections,
-each covering different subsections, namely the Student features, Tutorial Class Features and Tutorial Group Features. Each 
+each covering different subsections, namely the Student features, Tutorial Class Features and Tutorial Group Features. Each
 subsection will provide you with an overview of the section, followed by the individual commands' formats, instructions on how to use them,
 examples of use and the expected outcome of executing these commands.
 
@@ -298,7 +297,7 @@ Examples:
 
 This part of the guide covers all the features you can use to manage Groups within a tutorial class. These features include:
 1. Add a group
-1. View all groups in a class 
+1. View all groups in a class
 1. Delete a group
 1. Add a student to a group
 1. Remove a student from a group
@@ -414,7 +413,7 @@ Action | Format, Examples
 **List all classes** | `listc`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
 **Add Tutorial Group** | `addcg gn/GROUP_NAME c/CLASS_CODE type/TYPE` <br> e.g.,`addsg n/Betsy tp/OP1 g/A`
-**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2` 
+**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
 **List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]` <br> e.g., `addcg gn/Group 1 c/G01 type/OP1`
 **Clear all students** | `clear`
@@ -424,7 +423,7 @@ Action | Format, Examples
 
 **Java 11** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
 **JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
-**CLI** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following 
+**CLI** | Command Line Interface (CLI)  enables users to interact with a program by typing in text commands following
 visual prompts from the program.
 **GUI** | Graphical User Interface (GUI) is a system of interactive visual components that allows users to interact with
 a program through graphical icons.
