@@ -212,6 +212,19 @@ Examples:
 
 * `rmdir CS1010` deletes a folder with the name `CS1010`.
 
+
+#### Deleting a contact from folder: `rm`
+
+Deletes the specified contact from the list of contacts from the folder.
+
+Format `rm 1 >> FOLDER_NAME`
+
+* Deletes contact number 1 seen on the contact list from the folder named `FOLDER_NAME`.
+
+Examples:
+
+* `rm 1 >> CS1010` deletes a contact that corresponds to index 1 in the contact list from the folder `CS1010`.
+
 #### Clearing all folders: `rm -folders`
 
 Clears all folders from the address book.
@@ -260,6 +273,7 @@ Action | Format, Examples
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` <br> e.g., `echo 3 >> CS2103`
 **List folders** | `ls -folders`
 **Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` <br> e.g., `mv CS2103` &#124; `CS2102`
+**Delete contact from folder** | `rm INDEX >> FOLDER_NAME` <br> e.g., `rm 1 >> CS2102`
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
 **Delete folder** | `rmdir FOLDER_NAME` <br> e.g., `rmdir CS1010`
 **Clear folders** | `rm -folders`
