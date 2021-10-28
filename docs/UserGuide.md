@@ -4,7 +4,7 @@ title: User Guide
 ---
 Welcome to **Source Control** User Guide!
 
-Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. 
+Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. <br>
 This application allows you to **store comprehensive data** of each student quickly, and allows you to search through them easily. 
 With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments! <br>
 Source Control can also give you both a quick overview and a closer look of how your students are performing.
@@ -15,7 +15,7 @@ Source Control is **optimized for use via a Command Line Interface** (CLI) while
 If you can type fast, Source Control can help you track your students' performance faster than traditional GUI apps! 
 
 This guide takes you through all the _latest features_ of Source Control. If you are a new user, this guide provides you 
-all the basic knowledge to get started with Source Control, and is simple and easy to read. If you are an experienced user, 
+all the basic knowledge to get started with Source Control. If you are an experienced user, 
 feel free to skip to the [command summary](#command-summary) and experiment with our more advanced features! 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t 
 
 * Adds a new student into the database with the given name and NUSNET ID.
 * Adds the student into the specified groups if applicable. If group does not already exist, a new group would be created. 
-* Adds tags to the student if applicable.
+* Adds tags to the student if applicable. Tag name has to be one alphanumeric word. 
 * NUSNET ID input cannot already exist in the student list. 
 
 Examples:
@@ -141,6 +141,7 @@ Creates a new group and adds students into the group.
 Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 
 * Creates a new group with the given group name.
+* Group name can be any number of alphanumeric words. 
 * Group must not already exist, and student should not already exist in group.
 * Students can be identified by their name or NUSNET ID. 
 Name is case-sensitive and only allows exact match e.g. `Jonas` will not match `Jonas Chow`. 
@@ -150,7 +151,7 @@ Examples:
 * `add group -g T01A` creates group `T01A`
 * `add group -g T01A -n Hong Yao -n Hong Fai` creates group `T01A` and adds `Hong Yao` and `Hong Fai` into the group. 
 * `add group -g T01A -n Hong Yao -i E0123456` creates group `T01A` and adds `Hong Yao` and student with NUSNET ID `E0123456` into the group.
-* `add group -g T01A -i E0123123 -i E0123456` creates group `T01A` and adds two students with corresponding NUSNET ID into the group.
+* `add group -g Require More Help -i E0123456` creates group `Require More Help` and adds student with NUSNET ID `E0123456` into the group.
 
 [Return to table of contents](#table-of-contents)
 
@@ -177,27 +178,31 @@ Examples:
 Adds a new assessment into the database.
 
 Format: `add assessment -a <assessment_name>`
-* Adds an assessment only if the assessment is not already in the database.
-* Assessment name can only be alphanumeric.
+* Assessment should not already in the database.
+* Group name can be any number of alphanumeric words.
 
 Examples:
-* `add assessment -a P01`
+* `add assessment -a P01` creates a new assessment `P01`.
+* `add assessment -a Midterm Assessment` creates a new assessment `Midterm Assessment`.
 
 [Return to table of contents](#table-of-contents)
 
 
 ### Adding a score : `add score`
 
-Adds score of an existing assessment into the database.
+Adds students' score for an existing assessment into the database.
 
 Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>`
-* Adds student’s score for an existing assessment into the database.
+* Assessment must already exist in database. 
 * Updates the student's score if the student already has a score for the assessment.
+* Scores given should be in percentage out of a 100, and can be accurate to 2 decimal places. 
 * Students can be identified by their name or NUSNET ID.
+  Name is case-sensitive and only allows exact match e.g. `Jonas` will not match `Jonas Chow`.
+* If multiple students have the same name, NUSNET ID needs to be used to identify them.
 
 Examples:
-* `add score -a P01 -n John Doe -s 12`
-* `add score -a P02 -i E0123456 -s 12.5`
+* `add score -a Midterm -n Van Nhi -s 95` records score for `Van Nhi` in `Midterm` to be `95` percent. 
+* `add score -a P01 -i E0123456 -s 75.25` records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent.
 
 [Return to table of contents](#table-of-contents)
 
@@ -211,19 +216,20 @@ Format: `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag
 * Search for students by their name, NUSNET ID, tag, or the group they belong in.
 Only one type of tag should be used for each search.
 * To search with multiple keywords, separate keywords with spaces. e.g. `search -g T02A R03C`
-* The search is case-insensitive. e.g. `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* The search is case-insensitive. e.g. `jonas` will match `Jonas`.
+* The order of the keywords does not matter. e.g. `Jonas Chow` will match `Chow Jonas`.
 * Students matching at least one keyword will be returned (i.e. `OR` search).
-e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* For search with name, only full words will be matched. e.g. `Han` will not match `Hans`.
+e.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
+* For search with name, only full words will be matched. e.g. `Jon` will not match `Jonas`.
 * For search with NUSNET ID, group name or tag, partial search is supported. e.g. `T02` will match `T02A` and `T02B`.
-`friend` will match `friends`.
+`beginner` will match `beginners`.
 
 Examples:
-* `search -n John Doe`
-* `search -i E0123456`
-* `search -g T02B R03C`
-* `search -t friends colleagues`
+* `search -n Jonas Chow` return list of students with part of names that matches `Jonas` and `Chow`. 
+* `search -i E0123456` return student with NUSNET ID `E0123456`, if found in database.
+* `search -g T02B R03C` return list of students in the groups `T02B` and `R03C`. 
+* `search -g T02` return list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`. 
+* `search -t beginners` return list of students tagged as `beginners`. 
 
 [Return to table of contents](#table-of-contents)
 
@@ -238,14 +244,14 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 * The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
 * Using `-g <group_name>` displays the information of the group's performance in all their graded assessments. 
 * Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessment.
-* Does not support partial searching. e.g. `T01` does not match `T01A`. Full name must be entered. 
-* Entering `-f <export_file_path>` exports the graph produced from the command to the specified location. 
+* Keywords are case-sensitive and only allows exact match. e.g. `T01` does not match `T01A`, `jonas` will not match `Jonas`.
+* Entering `-f <export_file_path>` exports the graph produced from the command to the specified location. `<export_file_path>` can be relative or absolute filepath. 
 
 Examples:
-* `show -n Alex Yeoh` displays line chart of Alex Yeoh's performance in his assessments. 
-* `show 2 -f chartImage` shows and exports the line chart (produced of the 2nd student in the student list) into a file `chartImage.png`.
-* `show -g T02A` displays line chart of group T02A's performance in their assessments. 
-* `show -a P01` displays bar chart of the distribution of scores in assessment P01. 
+* `show -n Hong Fai` displays line chart of `Hong Fai`'s performance in all his assessments. 
+* `show 2 -f chartImage` shows and exports the line chart (produced of the 2nd student on the displayed list) into a file `chartImage.png`.
+* `show -g T02A` displays line chart of group `T02A`'s performance in their assessments. 
+* `show -a Midterm` displays bar chart of the distribution of scores in the `Midterm` assessment. 
 
 [Return to table of contents](#table-of-contents)
 
@@ -256,16 +262,17 @@ Edits the information of an existing student.
 
 Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...`
 
-* Edits the student at the specified `<index>`. The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
+* Edits the student at the specified `<index>`. Search can be used before this to identify the student in need. 
+* The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags and groups, the existing tags and groups of the student will be removed, i.e adding of tags and groups are not cumulative.
-* You can remove all the student’s tags or groups by typing -t or -g without specifying any values after it.
+* When editing tags and groups, all existing tags and groups of the student will be removed, i.e. adding of tags and groups are not cumulative.
+* You can remove all the student’s tags or groups by typing `-t` or `-g` without specifying any values after it.
 
 Examples:
-* `edit 1 -n John Doe`
-* `edit 1 -n John Doe -i E1234567 -g T01 -g R01`
-* `edit 2 -t`
+* `edit 1 -n Hong Yao -i E1234567` edits the name of the 1st student on the displayed list to `Hong Yao` and his NUSNET ID to `E1234567`. 
+* `edit 3 -g T01C -g R01A` edits the group of the 3rd student on the displayed list to `T01C` and `R01A`. 
+* `search -n Hong Yao` followed by `edit 1 -t` removes all tags of the 1st student on the displayed list after searching for `Hong Yao`. 
 
 [Return to table of contents](#table-of-contents)
 
@@ -277,12 +284,11 @@ Deletes the specified student from the student list.
 Format: `delete <index>`
 
 * Deletes the student at the specified `<index>`.
-* The `<index>` refers to the index number shown in the displayed student list.
-* The `<index>` **must be a positive integer** 1, 2, 3, …
+* The `<index>` refers to the index number shown in the displayed student list. The `<index>` **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the student list.
-* `search -n Alex` followed by `delete 1` deletes the 1st student in the results of the `search` command.
+* `search -n Van Nhi` followed by `delete 1` deletes the 1st student in the results of the `search` command.
 
 [Return to table of contents](#table-of-contents)
 
@@ -293,11 +299,9 @@ Loads data as specified in the provided CSV file.
 
 Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]`
 
-* The file path can be either the absolute path or the relative path.
-* The relative path will be relative to the folder your jar file is located.
+* The file path can be either the absolute path or the relative path. The relative path will be relative to the folder your jar file is located.
 * The first row of the CSV file needs to be headers for the respective columns.
-* The header for the assessment columns should the name of the assessment. For example, `Rune Trials`.
-* The header for every other column does not matter.
+* The header for the assessment columns should the name of the assessment. For example, `Rune Trials`. The header for every other column does not matter.
 * Every row apart from the first represents a student.
 * The first two columns refer to the student’s name and NUSNET ID.
 * The next `<number_of_group_columns>` columns, refer to the student’s groups.
@@ -316,8 +320,8 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 </div>
 
 Examples:
-* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1`
-* `import -f student_data.csv -g 3 -a 30`
+* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1` imports from the absolute path and database has 2 group columns, 10 assessments, and 1 tag column. 
+* `import -f student_data.csv -g 5 -a 20` imports from the relative path and database has 5 group columns, 20 assessments.
 
 [Return to table of contents](#table-of-contents)
 
@@ -342,9 +346,9 @@ Format: `export [-f <file_path>]`
 </div>
 
 Examples:
-* `export -f student_data.csv`
-* `export -f /home/prof/CS1101S/student_data.csv`
-* `export` will save the data in `sourceControl.csv`
+* `export -f student_data.csv` exports database as file `student_data.csv`. 
+* `export -f /home/prof/CS1101S/student_data.csv` exports database to the given absolute path.
+* `export` exports database as file `sourceControl.csv`. 
 
 [Return to table of contents](#table-of-contents)
 
@@ -381,16 +385,16 @@ Format: `alias -c <existing_command> -as <alias>`
 * The `<alias>` can only be a single alphanumeric word.
 * Multiple alias can be set for each command.
 * Default and existing alias can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
-* The `<existing_command>` can also take any existing alias as an input. The new alias will be added to the command that the existing alias maps to.
+* The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command. 
 * The aliases created will persist between Source Control sessions.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`
 
 Examples:
 * `alias -c add student -as as` adds a new alias to `add student` command. 
-    * `as -n Zhiying -i E7654321` adds student `Zhiying` to database.
-* `alias -c add score -as as` maps the alias `as` to the `add score` command. 
-    * `as -a P01 -n Zhiying -s 100` will add a score for `P01` for the student `Zhiying`.
-* `alias -c as -as as2` will add the alias `as2` to the command that `as` currently maps to if `as` is an existing alias.
+  * `as -n Zhiying -i E1234567` adds student `Zhiying` to database.
+* `alias -c add score -as as` replace the mapping of the alias `as` to the `add score` command. i.e. `as` no longer function as `add student`.
+  * `as -a P01 -n Zhiying -s 80` will add a score for `P01` for the student `Zhiying`.
+* `alias -c as -as as2` will add the alias `as2` to the command that `as` currently maps to. i.e. `as2` functions as `add score`. 
 * `alias -c as -as as` will remove the alias `as`. `as` will no longer be recognised as a command.
 
 [Return to table of contents](#table-of-contents)
@@ -400,7 +404,7 @@ Examples:
 
 SourceControl data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-If you wish to backup the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
+If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
 
 [Return to table of contents](#table-of-contents)
 
