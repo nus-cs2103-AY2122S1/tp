@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.Task;
 
 public class TasksContainKeywordsPredicate extends AttributeContainsKeywordsPredicate {
@@ -37,26 +38,20 @@ public class TasksContainKeywordsPredicate extends AttributeContainsKeywordsPred
         requireNonNull(person);
         checkArgument(!keywords.stream().allMatch(String::isEmpty));
 
-        List<Task> tasks = person.getTasks();
-        for (String keyword: keywords) {
-            if (!tasksMatchKeyword(tasks, keyword)) {
-                return false;
-            }
-        }
-        return true;
+        return tasksMatchKeyword(person.getTasks(), keywords);
     }
 
     /**
      * Checks if a keyword matches any tag in a set of tags.
      *
      * @param tasks A {@code List<Task>} that might contain a tasks which has a name that matches the keyword.
-     * @param keyword A {@code String} that might match any task in the tasks given.
+     * @param keywords A {@code List<String>} that might match any task in the tasks given.
      */
-    public boolean tasksMatchKeyword(List<Task> tasks, String keyword) {
+    public boolean tasksMatchKeyword(List<Task> tasks, List<String> keywords) {
         List<String> preppedTaskNames = new ArrayList<>();
         for (Task task : tasks) {
             preppedTaskNames.add(task.getTaskName().taskName.toLowerCase());
         }
-        return preppedTaskNames.stream().anyMatch(s -> s.startsWith(keyword.toLowerCase()));
+        return preppedTaskNames.stream().anyMatch(s -> StringUtil.containsWordsInOrderIgnoreCase(s, keywords));
     }
 }
