@@ -296,6 +296,25 @@ Format: `sort [-r]`
 If your changes to the data file makes its format invalid, ContactSH will discard all data and start with an empty data file at the next run.
 </div>
 
+### Reminder for tasks that are due soon: `reminder`
+
+1. Shows the number of days prior to a task's date and time to remind that it is due soon.
+    
+    format: `reminder`
+
+2. Sets the number of days prior to a task's date to remind that it is due soon.
+    
+    format: `reminder -s DAYS`
+
+    * DAYS refer to the number of days prior to a task's date.
+      The day **must be a positive integer** 1, 2, 3, ...
+      
+    Example:
+
+    * reminder -s 10
+
+note: A task will turn orange in colour as a reminder that it is due soon
+when the system date is later than or same as (task's date - DAYS) and earlier than task's date.
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -324,6 +343,8 @@ Action | Format, Examples
 **Add Task** | `add INDEX -tn TASKNAME` <br> e.g., `addtask 2 -tn celebrate $1 million revenue -tn Contact Professor to get help`
 **Delete Task** | `rm INDEX -ti TASK_INDEX` <br> e.g., `deletetask 2 -ti 2 -ti 3`
 **Edit Task** | `edit INDEX -ti TASK_INDEX [-tn TASK_NAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…​` <br> e.g., `edittask 1 -ti 2 -tn Internship Interview -tt 15:45 -ti 4 -td 2022-09-20`
-**Done Task** | `donetask INDEX -ti TASK_INDEX…​` <br> e.g., `donetask 3 -ti 2 -ti 5`
-**Not Done Task** | `undotask INDEX -ti TASK_INDEX…​` <br> e.g., `undotask 3 -ti 2 -ti 5`
-**View Task** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
+**Mark Task Done** | `donetask INDEX -ti TASK_INDEX…​` <br> e.g., `donetask 3 -ti 2 -ti 5`
+**Undo Mark Task Done** | `undotask INDEX -ti TASK_INDEX…​` <br> e.g., `undotask 3 -ti 2 -ti 5`
+**View Tasks** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
+**View Reminder days** | `reminder`
+**Set Reminder days** | `reminder -s DAYS`<br>e.g., reminder -s 21
