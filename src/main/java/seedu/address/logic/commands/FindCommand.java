@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.model.item.TagContainsKeywordsPredicate;
 
 /**
  * Finds and lists all items in inventory whose name contains any of the argument keywords.
@@ -35,6 +36,7 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final IdContainsNumberPredicate idPredicate;
+    private final TagContainsKeywordsPredicate tagPredicate;
 
     /**
      * Creates FindCommand in the case of query by name
@@ -44,6 +46,7 @@ public class FindCommand extends Command {
     public FindCommand(NameContainsKeywordsPredicate namePredicate) {
         this.namePredicate = namePredicate;
         this.idPredicate = null;
+        this.tagPredicate = null;
     }
 
     /**
@@ -54,6 +57,18 @@ public class FindCommand extends Command {
     public FindCommand(IdContainsNumberPredicate idPredicate) {
         this.idPredicate = idPredicate;
         this.namePredicate = null;
+        this.tagPredicate = null;
+    }
+
+    /**
+     * Creates FindCommand in the case of query by tag
+     *
+     * @param tagPredicate tag of the item that the user is finding
+     */
+    public FindCommand(TagContainsKeywordsPredicate tagPredicate) {
+        this.idPredicate = null;
+        this.namePredicate = null;
+        this.tagPredicate = tagPredicate;
     }
 
     @Override
@@ -64,10 +79,14 @@ public class FindCommand extends Command {
             throw new CommandException(MESSAGE_INVENTORY_NOT_DISPLAYED);
         }
 
-        if (namePredicate == null) {
-            model.updateFilteredItemList(DISPLAY_INVENTORY, idPredicate);
-        } else {
+        if (namePredicate != null) {
             model.updateFilteredItemList(DISPLAY_INVENTORY, namePredicate);
+        }
+        if (idPredicate != null) {
+            model.updateFilteredItemList(DISPLAY_INVENTORY, idPredicate);
+        }
+        if (tagPredicate != null) {
+            model.updateFilteredItemList(DISPLAY_INVENTORY, tagPredicate);
         }
 
         return new CommandResult(
@@ -76,14 +95,19 @@ public class FindCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (namePredicate == null) {
+        if (idPredicate != null) {
             return other == this // short circuit if same object
                     || (other instanceof FindCommand // instanceof handles nulls
                     && idPredicate.equals(((FindCommand) other).idPredicate)); // state check
-        } else {
+        }
+        if (namePredicate != null) {
             return other == this // short circuit if same object
                     || (other instanceof FindCommand // instanceof handles nulls
                     && namePredicate.equals(((FindCommand) other).namePredicate)); // state check
+        } else {
+            return other == this // short circuit if same object
+                    || (other instanceof FindCommand // instanceof handles nulls
+                    && tagPredicate.equals(((FindCommand) other).tagPredicate));
         }
     }
 
