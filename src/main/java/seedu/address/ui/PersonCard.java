@@ -65,6 +65,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         address.setText("Address: " + person.getAddress().value);
+        outstandingFee.setText("Outstanding Fees: " + person.getOutstandingFees().toString());
 
         if (person.getPhone().isEmpty()) {
             phone.setManaged(false);
@@ -113,12 +114,6 @@ public class PersonCard extends UiPart<Region> {
             remark.setManaged(false);
         } else {
             remark.setText("Remark: " + person.getRemark().value);
-        }
-
-        if (person.getFee().isEmpty()) {
-            outstandingFee.setManaged(false);
-        } else {
-            outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
         }
 
         if (person.getTags().isEmpty()) {

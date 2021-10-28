@@ -32,6 +32,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label rates;
     @FXML
+    private Label outstandingFees;
+    @FXML
     private Label cancelledDates;
     @FXML
     private FlowPane homeworkList;
@@ -46,7 +48,8 @@ public class LessonCard extends UiPart<Region> {
         title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
         date.setText("Date: " + lesson.getDisplayDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
-        rates.setText("Rates: $" + lesson.getLessonRates().toString());
+        rates.setText("Rates: " + lesson.getLessonRates().toString());
+        outstandingFees.setText("Outstanding Fees: " + lesson.getOutstandingFees().toString());
         lesson.getHomework().stream()
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()
