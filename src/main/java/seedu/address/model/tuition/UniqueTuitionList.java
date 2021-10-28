@@ -220,5 +220,9 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         return mostRecentTuitionClasses;
     }
 
+    public static void setMostRecentTuitionClasses() {
+        mostRecentTuitionClasses = FXCollections.observableArrayList();
+    }
+
 }
 
