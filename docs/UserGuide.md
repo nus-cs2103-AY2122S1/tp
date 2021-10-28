@@ -28,12 +28,12 @@ inventory management tasks done faster than traditional GUI apps.
    open the help window.<br>
    Some example commands you can try:
 
-    - **`add`**`apple -sp 8.5 -s A012345 -c 1000 -cp 5.2` : Adds apple with sales price 8.5, serial number A012345,
-      quantity 1000, and cost price 5.2, into the inventory.
+    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds apple with id 139827, quantity 3, 
+      cost price 1.3, and sales price 2.4, into the inventory.
 
-    - **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    - **`delete`**` cookie` : Deletes the cookie item from inventory.
 
-    - **`clear`** : Deletes all contacts.
+    - **`clear`** : Deletes all items in inventory.
 
     - **`exit`** : Exits the app.
 
@@ -48,20 +48,20 @@ inventory management tasks done faster than traditional GUI apps.
 **:information_source: Notes about the command format:**<br>
 
 - Words in `{}` are the parameters to be supplied by the user.<br>
-  e.g. in `add -n {name}`, `name` is a parameter which can be used as `add -n milk`.
+  e.g. in `add {name}`, `name` is a parameter which can be used as `add milk`.
 
 - Items in square brackets with pipes are exclusively optional (user must specify at least one of the option).<br>
-  e.g `delete [-n {name} | -s {serial number}]` should be supplied with either `name` or `serial number`.
+  e.g `delete [{name} | id/{id_number}]` should be supplied with either `name` or `id number`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/popular`, `t/popular t/baked` etc.
 
 - Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `id/{id_number} cp/{cost_price}`, `cp/{cost_price} id/{id_number}` is also acceptable.
 
 - If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
   the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `id/123413 id/567856`, only `id/567856` will be taken.
 
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
@@ -82,46 +82,90 @@ Format: `help`
 
 Adds an item to the inventory.
 
-Format: `add {name} -sp {sales price} -s {serial number} -c {count} -cp {cost price}`
+Format: `add {name} id/{id number} c/{count} cp/{cost price} sp/{sell price}`
 
 Flag    |  Argument    | Description
 --------|--------------|-------------
 &nbsp;  | name          | name of the item to add.
-`-sp`   | sell price    | Sell price of the item to add.
-`-s`    | serial number | Serial number of item to add.
-`-c`    | count         | Quantity of the item to add.
-`-cp`   | cost price    | Cost price of the item to add.
+`/id`   | id number     | Id number of item to add.
+`/c`    | count         | Quantity of the item to add.
+`/cp`   | cost price    | Cost price of the item to add.
+`/sp`   | sell price    | Sell price of the item to add.
 
 Examples:
 
 ```
-add apple -sp 8.5 -s A012345 -c 1000 -cp 5.2
-add banana -sp 7.5 -s A012346 -c 800 -cp 4.8
+add apple id/192028 c/2 cp/1.1 sp/2.4
+add banana id/192023 c/5 cp/1.0 sp/2.2
 ```
 
 ### Deleting an item : `delete` [coming soon]
 
 Deletes the specified item from the inventory.
 
-Format: `delete [-n {name} | -s {serial number}] -c {count}`
+Format: `delete [{name} | id/{id number}]`
 
 Flag    |  Argument      | Description
 --------|----------------|-------------
-`-n`    | name           | Name of the item to delete.
-`-s`    | serial number  | Serial number of the item to delete.
-`-c`    | count          | Quantity of the item to delete.
+`n/`    | name           | Name of the item to delete.
+`id/`   | id number      | Serial number of the item to delete.
 
-- Decreases the specified item's quantity by the count specified.
+- Delete the specified item entirely from the inventory.
 - An item can be specified by either name or serial number.
 - If both name and serial number are specified, the command will take the name as reference.
-- The `count` **must be a positive integer**.
 
 Examples:
 
 ```
-delete -n milk -c 10  // delete by name
-delete -s A01234 -c 10  // delete by serial number
-delete -n milk -s A01111 -c 12  // delete 12 milks
+delete Apple // delete by name
+delete id/181817  // delete by serial number
+```
+
+### Removing an item : `remove` [coming soon]
+
+Removes a specified amount of a particular item from the inventory.
+
+Format: `remove [{name} | id/{id number}] c/{count}`
+
+Flag    |  Argument      | Description
+--------|----------------|-------------
+`n/`    | name           | Name of the item to remove.
+`id/`   | id number      | Id number of the item to remove.
+`c/`    | count          | Quantity of the item to remove.
+
+- An item can be specified by either name or serial number.
+- If both name and serial number are specified, the command will take the name as reference.
+- Count must be positive integer
+
+Examples:
+
+```
+remove Apple c/2 // remove 2 apples from inventory
+remove id/181817 c/5 // remove 5 items with id 181817
+```
+
+### Editing an item : `edit` [coming soon]
+
+Edit a particular item in the inventory.
+
+Format: `edit {index} [n/{name}] [id/{id}] [cp/{cp}] [sp/{sp}] [t/{tag}]...`
+
+Flag    |  Argument    | Description
+--------|--------------|-------------
+&nbsp;  | index         | index of the item to edit.
+`n/`    | name          | new name for the item.
+`/id`   | id number     | new id number for the item.
+`/cp`   | cost price    | new cost price for the item.
+`/sp`   | sell price    | new sell price for the item.
+`/t`    | tag           | new tag for the item.
+
+- Count cannot be edited
+
+Examples:
+
+```
+edit 1 id/192028  // edit first item's id to 192028
+edit 2 n/Panadol  // edit second item's name to Panadol
 ```
 
 ### Get quantity of the item: `count` [Coming soon]
