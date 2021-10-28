@@ -62,7 +62,7 @@ public class AddEventCommand extends Command {
             throw new CommandException(String.format(MESSAGE_INVALID_RESIDENT, invalidResident));
         }
 
-        ArrayList<Person> personList = model.toPersonList(toAdd.getResidents());
+        ArrayList<Person> personList = model.toPersonList(toAdd.getResidentList());
         String combinedStorageString = toAdd.getCombinedStorageString(personList);
         Event editedEvent = new Event(toAdd.getEventName(), toAdd.getEventDate(), toAdd.getEventTime(),
                 toAdd.getVenue(), toAdd.getCapacity(), new ResidentList(personListToString(personList),

@@ -158,4 +158,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Returns an array list of events the specified person is in.
+     * @param person The person to search for in events
+     * @param predicate A predicate to filter given events by
+     * @return The array list of events
+     */
+    ArrayList<Event> getPersonEvents(Person person, Predicate<Event> predicate);
 }

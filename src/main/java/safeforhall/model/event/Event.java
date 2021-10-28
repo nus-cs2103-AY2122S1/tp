@@ -50,7 +50,7 @@ public class Event {
         return capacity;
     }
 
-    public ResidentList getResidents() {
+    public ResidentList getResidentList() {
         return residents;
     }
 
@@ -173,7 +173,7 @@ public class Event {
                 .append("; Capacity: ")
                 .append(getCapacity())
                 .append("; Residents: ")
-                .append(getResidents());
+                .append(getResidentList());
         return builder.toString();
     }
 }

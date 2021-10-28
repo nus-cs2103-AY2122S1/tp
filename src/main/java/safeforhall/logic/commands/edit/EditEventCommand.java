@@ -96,7 +96,7 @@ public class EditEventCommand extends Command {
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Capacity updatedCapacity = editEventDescriptor.getCapacity().orElse(eventToEdit.getCapacity());
         ResidentList updatedResidentList = editEventDescriptor.getResidentList()
-                .orElse(eventToEdit.getResidents());
+                .orElse(eventToEdit.getResidentList());
 
         return new Event(updatedName, updatedDate, updatedTime, updatedVenue, updatedCapacity, updatedResidentList);
     }

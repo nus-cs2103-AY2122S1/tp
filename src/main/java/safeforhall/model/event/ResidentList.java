@@ -293,7 +293,7 @@ public class ResidentList {
         return this.residentsDisplay;
     }
 
-    public ArrayList<Person> getResidentList() {
+    public ArrayList<Person> getResidents() {
         return this.residentList;
     }
 }

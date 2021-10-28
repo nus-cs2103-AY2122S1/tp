@@ -53,7 +53,7 @@ class JsonAdaptedEvent {
         eventTime = source.getEventTime().eventTime;
         venue = source.getVenue().venue;
         capacity = source.getCapacity().capacity;
-        residents = source.getResidents().getResidentsStorage();
+        residents = source.getResidentList().getResidentsStorage();
     }
 
     /**

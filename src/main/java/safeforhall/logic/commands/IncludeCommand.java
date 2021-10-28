@@ -82,7 +82,7 @@ public class IncludeCommand extends Command {
                     + "' could be found");
         }
         ArrayList<Person> toAdd = model.toPersonList(residentList);
-        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
+        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidentList());
 
         checkForDuplicates(toAdd, currentResidents);
         String combinedDisplayString = event.getCombinedDisplayString(toAdd);
