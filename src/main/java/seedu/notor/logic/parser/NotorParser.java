@@ -29,6 +29,7 @@ import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
+import seedu.notor.logic.commands.person.PersonFindCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
 import seedu.notor.logic.commands.person.PersonTagCommand;
@@ -48,6 +49,7 @@ import seedu.notor.logic.parser.person.PersonClearTagsCommandParser;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
+import seedu.notor.logic.parser.person.PersonFindCommandParser;
 import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
 import seedu.notor.logic.parser.person.PersonTagCommandParser;
@@ -201,9 +203,12 @@ public class NotorParser {
                 if (ListCommand.COMMAND_WORD.equals(subCommandWord)) {
                     return new ListCommand();
                 }
+                if (PersonFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonFindCommandParser(arguments).parse();
+                }
             }
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             // TODO: List command conversion/find command conversion
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
