@@ -42,6 +42,20 @@ public class AssignmentGradeMap {
         return grades.isEmpty();
     }
 
+    /**
+     * @return Grade if it exists, null otherwise.
+     */
+    public Grade findGrade(Assignment assignment) {
+        return grades.get(assignment);
+    }
+
+    /**
+     * Removes a grade from the HashMap.
+     */
+    public void removeGrade(Assignment assignment) {
+        grades.remove(assignment);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
