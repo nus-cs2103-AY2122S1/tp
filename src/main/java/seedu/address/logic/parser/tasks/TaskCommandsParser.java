@@ -15,6 +15,7 @@ import seedu.address.logic.commands.tasks.EditTaskCommand;
 import seedu.address.logic.commands.tasks.FindTaskCommand;
 import seedu.address.logic.commands.tasks.ListTaskCommand;
 import seedu.address.logic.commands.tasks.MarkTaskDoneStudentCommand;
+import seedu.address.logic.commands.tasks.MarkTaskUndoneStudentCommand;
 import seedu.address.logic.commands.tasks.UnassignTaskFromGroupCommand;
 import seedu.address.logic.commands.tasks.UnassignTaskFromPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -66,6 +67,9 @@ public class TaskCommandsParser {
 
         case MarkTaskDoneStudentCommand.COMMAND_WORD:
             return new MarkTaskDoneStudentCommandParser().parse(arguments);
+
+        case MarkTaskUndoneStudentCommand.COMMAND_WORD:
+            return new MarkTaskUndoneStudentCommandParser().parse(arguments);
 
         case FindTaskCommand.COMMAND_WORD:
             return new FindTaskCommandParser().parse(arguments);

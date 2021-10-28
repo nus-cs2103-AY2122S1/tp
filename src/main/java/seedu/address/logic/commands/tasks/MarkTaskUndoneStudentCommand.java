@@ -19,29 +19,29 @@ import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
-public class MarkTaskDoneStudentCommand extends Command {
+public class MarkTaskUndoneStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "-d";
+    public static final String COMMAND_WORD = "-und";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that a task has been done by a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that a task has not been done by a student. "
             + "The student and task are indicated"
             + "by the index numbers used in the displayed student list and the displayed task list. "
             + "Parameters: STUDENT INDEX (must be a positive integer) "
             + "TASK INDEX (must be a positive integer) ";
     public static final String MISSING_TASK = "Specified task is not assigned to this student!";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_SUCCESS = "Task %1$s marked as done by student %2$s";
+    public static final String MESSAGE_SUCCESS = "Task %1$s marked as not done by student %2$s";
 
     private final Index personIndex;
     private final Index taskIndex;
 
     /**
-     * Constructs a {@code MarkTaskDoneStudentCommand}
+     * Constructs a {@code MarkTaskUndoneStudentCommand}
      *
      * @param personIndex the index of the {@code Student} who did the task
      * @param taskIndex the index of the task in the filtered task list to mark as done
      */
-    public MarkTaskDoneStudentCommand(Index personIndex, Index taskIndex) {
+    public MarkTaskUndoneStudentCommand(Index personIndex, Index taskIndex) {
         requireAllNonNull(personIndex, taskIndex);
 
         this.personIndex = personIndex;
@@ -72,7 +72,7 @@ public class MarkTaskDoneStudentCommand extends Command {
         }
 
         Map<UniqueId, Boolean> newTasksCompletion = new HashMap<>(previousTasksCompletion);
-        newTasksCompletion.replace(taskId, true);
+        newTasksCompletion.replace(taskId, false);
         Person newPerson = personToEdit.updateTasksCompletion(newTasksCompletion);
 
         if (!personToEdit.isSamePerson(newPerson)
