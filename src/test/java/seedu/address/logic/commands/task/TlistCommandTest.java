@@ -29,10 +29,10 @@ class TlistCommandTest {
 
     @Test
     public void execute_tlistIsSuccessfulShown_showsSameList() {
-        Index validMemberID = TypicalIndexes.INDEX_FIRST_MEMBER;
+        Index validMemberId = TypicalIndexes.INDEX_FIRST_MEMBER;
         Member targetMember = model.getFilteredMemberList().get(0);
         expectedModel.loadTaskList(targetMember);
-        assertCommandSuccess(new TlistCommand(validMemberID), model,
+        assertCommandSuccess(new TlistCommand(validMemberId), model,
                 TlistCommand.MESSAGE_SUCCESS + " of " + targetMember.getName(), expectedModel);
     }
 }

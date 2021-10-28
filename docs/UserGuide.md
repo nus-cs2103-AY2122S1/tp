@@ -246,6 +246,22 @@ Examples:
 * `tdel /t 3` deletes the 3rd task on the displayed task list in Ailurus.
 * `tdel /t 1 /t 2` deletes the 1st and 2nd task on the displayed task list in Ailurus.
 
+#### Locating tasks by name: `tfind`
+
+Finds tasks whose names contain any of the given keywords.
+
+Format: `tfind KEYWORD [MORE_KEYWORDS]...`
+
+* The search is case-insensitive. e.g `submit` will match `Submit`
+* The order of the keywords does not matter. e.g. `submit form` will match `form submit`
+* Only the name is searched.
+* Tasks matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Submit form` will return `Submit homework`, `Edit form`
+
+Examples:
+* `tfind form` returns `form` and `submit form`
+* `tfind Submit form` returns `Submit homework`, `Edit form`<br>
+
 ### Event Commands
 
 #### Adding an event: `eadd`

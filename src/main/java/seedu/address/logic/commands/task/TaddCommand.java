@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -31,17 +33,17 @@ public class TaddCommand extends Command {
             + PREFIX_DATE + "21/10/2021 23:59 "
             + PREFIX_MEMBER_ID + "2";
 
-    public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 
-    public final Index targetMemberID;
+    public final Set<Index> targetMemberIdList;
     public final Task toAdd;
 
     /**
-     * Creates an TaddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
+     * Creates an TaddCommand to add the specified {@code Task} to the member with specified {@code MemberId}.
      */
-    public TaddCommand(Index memberID, Task task) {
-        requireAllNonNull(memberID, task);
-        targetMemberID = memberID;
+    public TaddCommand(Set<Index> memberIdList, Task task) {
+        requireAllNonNull(memberIdList, task);
+        targetMemberIdList = memberIdList;
         toAdd = task;
     }
 
@@ -50,10 +52,12 @@ public class TaddCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getFilteredMemberList();
-        Member targetMember = members.get(targetMemberID.getZeroBased());
-        model.addTask(targetMember, toAdd);
+        for (Index targetMemberId: targetMemberIdList) {
+            Member targetMember = members.get(targetMemberId.getZeroBased());
+            model.addTask(targetMember, toAdd);
+        }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName(), toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

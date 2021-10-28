@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.member.Member;
 
@@ -24,6 +25,8 @@ public class TlistCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
+    public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. \n"
             + "Only one of " + PREFIX_DONE + "or " + PREFIX_OVERDUE + "may be present\n"
             + "Parameters: "
@@ -34,33 +37,37 @@ public class TlistCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_DONE + "y\n"
             + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_OVERDUE + "\n";
 
-    public final Index targetMemberID;
+    public final Index targetMemberId;
+
     private String filter = "";
 
     /**
      * Creates an TListCommand to display the specified {@code Tasks}
-     * belonging to the member with the specified {@code MemberID}.
+     * belonging to the member with the specified {@code MemberId}.
      */
-    public TlistCommand(Index memberID) {
-        requireNonNull(memberID);
-        targetMemberID = memberID;
+    public TlistCommand(Index memberId) {
+        requireNonNull(memberId);
+        targetMemberId = memberId;
     }
 
     /**
      * Creates an TListCommand to display the specified {@code Tasks}
-     * belonging to the member with the specified {@code MemberID} with a {@code filter}.
+     * belonging to the member with the specified {@code MemberId} with a {@code filter}.
      */
-    public TlistCommand(Index memberID, String filter) {
-        requireNonNull(memberID, filter);
-        targetMemberID = memberID;
+    public TlistCommand(Index memberId, String filter) {
+        requireNonNull(memberId, filter);
+        targetMemberId = memberId;
         this.filter = filter;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Member> members = model.getFilteredMemberList();
-        Member targetMember = members.get(targetMemberID.getZeroBased());
+        if (targetMemberId.getZeroBased() >= members.size()) {
+            throw new CommandException(MESSAGE_MEMBER_NOT_FOUND);
+        }
+        Member targetMember = members.get(targetMemberId.getZeroBased());
         switch (filter) {
         case "y":
             model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_COMPLETED_TASKS);
@@ -78,10 +85,11 @@ public class TlistCommand extends Command {
         }
     }
 
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TlistCommand // instanceof handles nulls
-                && targetMemberID.equals(((TlistCommand) other).targetMemberID));
+                && targetMemberId.equals(((TlistCommand) other).targetMemberId));
     }
 }

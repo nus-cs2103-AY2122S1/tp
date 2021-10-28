@@ -23,10 +23,10 @@ class TdelCommandParserTest {
     @Test
     void parse_allFieldsPresent_success() {
         Index expectedTaskID = Index.fromOneBased(VALID_TASK_ID);
-        Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID_DEL);
+        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_ID_DEL);
 
         assertParseSuccess(parser, TASK_ID_DESC_ONE + MEMBER_ID_DEL_DESC_ONE,
-                new TdelCommand(expectedMemberID, expectedTaskID));
+                new TdelCommand(expectedMemberId, expectedTaskID));
     }
 
     @Test

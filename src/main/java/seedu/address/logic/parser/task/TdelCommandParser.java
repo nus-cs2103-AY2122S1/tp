@@ -33,8 +33,8 @@ public class TdelCommandParser implements Parser<TdelCommand> {
         }
 
         Index taskID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_ID).get());
-        Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID_DEL).get());
+        Index memberId = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID_DEL).get());
 
-        return new TdelCommand(memberID, taskID);
+        return new TdelCommand(memberId, taskID);
     }
 }
