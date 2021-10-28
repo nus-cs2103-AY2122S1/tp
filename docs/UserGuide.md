@@ -35,7 +35,7 @@ If you are familiar with Unix commands, this is definitely for you!
 
 
 ## <a name="quick-start"></a>Quick Start
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have `Java 11` or above installed in your Computer.
 2. Download the latest `programmerError.jar`
    from [here](https://github.com/AY2122S1-CS2103-F09-3/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for your ProgrammerError.
@@ -189,28 +189,28 @@ Displays a list of all students in the left panel. This list is ordered first by
 ### <a name="add-lab"></a>4.1 Add Lab: `addlab`
 Adds a lab to every student with the lab number and total score.
 
-Format: `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
+Format: `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
 
 Examples:
-- `addlab -t 1 -ts 20`: Adds a lab with number 1 and total score 20 for all students.
-- `addlab -t 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
+- `addlab -ln 1 -ts 20`: Adds a lab with number 1 and total score 20 for all students.
+- `addlab -ln 2 -ts 30`: Adds a lab with number 2 and total score 30 for all students.
 
 ### <a name="edit-lab"></a>4.2 Edit Lab: `editlab`
 Edits the details of an existing lab for every student.
 
-Format: `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
+Format: `editlab -ln <LAB_NUM> -nln <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 
 Examples:
-- `editlab -t 1 -ts 30`: Changes the total score of lab 1 to 30 for all students.
-- `editlab -t 1 -nt 2`: Changes the number of an existing lab from 1 to 2 for all students.
+- `editlab -ln 1 -ts 30`: Changes the total score of lab 1 to 30 for all students.
+- `editlab -ln 1 -nln 2`: Changes the number of an existing lab from 1 to 2 for all students.
 
 ### <a name="delete-lab"></a>4.3 Delete Lab: `dellab`
 Deletes an existing lab from every student in ProgrammerError.
 
-Format: `dellab -t <LAB_NUM>`
+Format: `dellab -ln <LAB_NUM>`
 
 Example:
-- `dellab -t 1`: Deletes lab 1 for all students if it exists.
+- `dellab -ln 1`: Deletes lab 1 for all students if it exists.
 
 
 ## <a name="command-summary"></a>Command Summary
@@ -218,13 +218,13 @@ Example:
 Command | Format & Examples
 --------| ----------------------
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
-**Add Lab** | `addlab -t <LAB_NUM> -ts <TOTAL_SCORE>`
+**Add Lab** | `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
 **Delete** | `delete <INDEX_IN_LIST>`
 **Dashboard** | `dashboard`
-**Delete Lab** | `dellab -t <LAB_NUM>`
+**Delete Lab** | `dellab -ln <LAB_NUM>`
 **Download** | `download`
-**Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
-**Edit Lab** | `editlab -t <LAB_NUM> -nt <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
+**Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID>`
+**Edit Lab** | `editlab -ln <LAB_NUM> -nln <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 **Exit** | `exit`
 **Help** | `help`
 **Fill** | `fill`
