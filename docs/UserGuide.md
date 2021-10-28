@@ -94,7 +94,7 @@ ___
 
 All Tab  |  Watching Tab
 :-------------------------:|:-------------------------:
-![](images/UG-images/list.png)  |  ![](images/UG-images/watching.png)
+![](images/UG-images/all.png)  |  ![](images/UG-images/watching.png)
 
 To Watch Tab           |  Finished Tab
 :-------------------------:|:-------------------------:
