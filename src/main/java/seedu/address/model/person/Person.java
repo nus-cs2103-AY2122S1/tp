@@ -42,7 +42,6 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-
     /**
      * Constructor with all fields of a member.
      * @param name Name of member.
@@ -209,11 +208,7 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
-                .append(" ")
-                .append(getTodayAttendance())
-                .append(" ")
-                .append(getTotalAttendance());
+                .append(getPhone());
 
         Availability availability = getAvailability();
         if (!availability.isEmpty()) {

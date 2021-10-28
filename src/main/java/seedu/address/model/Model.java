@@ -147,7 +147,13 @@ public interface Model {
      */
     void addFacility(Facility facility);
 
-    void split(Predicate<Person> predicate);
+    /**
+     * Allocates members into facilities.
+     *
+     * @param predicate the condition in which specifies the members to allocate.
+     * @return number of members left unallocated, -1 if zero members to allocate.
+     */
+    int split(Predicate<Person> predicate);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -172,6 +178,14 @@ public interface Model {
      * @return ObservableList with filtered facilities.
      */
     ObservableList<Facility> getFilteredFacilityList();
+
+    /**
+     * Returns a person from the address book that has the same name as the given {@code person}.
+     *
+     * @param person the given person
+     * @return a person that has the same name.
+     */
+    Person getSamePerson(Person person);
 
     /**
      * Sorts the member list in the specified order.

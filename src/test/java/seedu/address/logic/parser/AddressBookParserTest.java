@@ -27,9 +27,11 @@ import seedu.address.logic.commands.EditFacilityCommand;
 import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
@@ -227,6 +229,20 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ShowAliasesCommand.COMMAND_WORD, aliases) instanceof ShowAliasesCommand);
         assertTrue(parser.parseCommand(
                 ShowAliasesCommand.COMMAND_WORD + " 3", aliases) instanceof ShowAliasesCommand);
+    }
+
+    @Test
+    public void parseCommand_importCommand() throws Exception {
+        String filePath = " src/test/data/ImportCommandParserTest/typicalImportFile.csv";
+        assertTrue(parser
+                .parseCommand(ImportCommand.COMMAND_WORD + filePath, aliases) instanceof ImportCommand);
+    }
+
+    @Test
+    public void parseCommand_exportCommand() throws Exception {
+        assertTrue(parser.parseCommand(ExportCommand.COMMAND_WORD, aliases) instanceof ExportCommand);
+        assertTrue(parser.parseCommand(
+                ExportCommand.COMMAND_WORD + " 3", aliases) instanceof ExportCommand);
     }
 
     @Test

@@ -196,10 +196,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void split(Predicate<Person> predicate) {
+    public int split(Predicate<Person> predicate) {
         FilteredList<Person> toAllocate = new FilteredList<Person>(addressBook.getPersonList());
         toAllocate.setPredicate(predicate);
-        addressBook.split(toAllocate);
+        return addressBook.split(toAllocate);
     }
 
     @Override
@@ -213,6 +213,16 @@ public class ModelManager implements Model {
     public void setFacility(Facility target, Facility editedFacility) {
         requireAllNonNull(target, editedFacility);
         addressBook.setFacility(target, editedFacility);
+    }
+
+    @Override
+    public Person getSamePerson(Person toFind) {
+        requireNonNull(toFind);
+        return addressBook.getPersonList()
+                .stream()
+                .filter(person -> person.isSamePerson(toFind))
+                .findAny()
+                .orElse(null);
     }
 
     @Override
