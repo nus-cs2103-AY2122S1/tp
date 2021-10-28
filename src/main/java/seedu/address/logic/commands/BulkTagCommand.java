@@ -71,7 +71,7 @@ public class BulkTagCommand extends Command {
             tagsSb.append(tag.toString() + " ");
         }
 
-        String stringTags = tagsSb.toString().trim().substring(0, tagsSb.toString().length() - 2);
+        String stringTags = tagsSb.toString().trim().substring(0, tagsSb.toString().length() - 1);
 
         if (numberOfPersonsTagged == 0) {
             return new CommandResult(String.format(MESSAGE_PERSONS_ALREADY_HAVE_THE_TAGS, stringTags));
