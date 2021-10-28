@@ -135,7 +135,7 @@ Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 - Existing values will be updated to the input values.
 
 Examples:
-- `edit 1 -name Elon Musk` Updates the name of the student at index 1 (1-indexed) to 'Elon Musk'.
+- `edit 1 -n Elon Musk` Updates the name of the student at index 1 (1-indexed) to 'Elon Musk'.
 - `edit 1 -ln 4 -s 29.5` Updates the lab 4 result of the student at index 1 (1-indexed) to 29.5.
 
 ### <a name="delete-student"></a>3.3 Delete Student: `delete`
