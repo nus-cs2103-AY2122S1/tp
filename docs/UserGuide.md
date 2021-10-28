@@ -347,5 +347,5 @@ Action | Format, Examples
 **Mark Task Done** | `donetask INDEX -ti TASK_INDEX…​` <br> e.g., `donetask 3 -ti 2 -ti 5`
 **Undo Mark Task Done** | `undotask INDEX -ti TASK_INDEX…​` <br> e.g., `undotask 3 -ti 2 -ti 5`
 **View Tasks** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`
-**View Reminder days** | `reminder`
-**Set Reminder days** | `reminder -s DAYS`<br>e.g., reminder -s 21
+**View Reminder Days** | `reminder`
+**Set Reminder Days** | `reminder -s DAYS`<br>e.g., reminder -s 21
