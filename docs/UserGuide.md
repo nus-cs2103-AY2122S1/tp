@@ -89,39 +89,27 @@ Unique terms specific to *ComputingConnection*
 
 Term            | Meaning
 ----------------|-----------------
-Contact         | Represents a person in ComputingConnection
-Organisation    | Represents an organisation in ComputingConnection
+Contact         | Represents a person in *ComputingConnection*
+Organisation    | Represents an organisation in *ComputingConnection*
 Data field      | Categorised data that you can assign to a contact <br/> See [Structure of a contact](#structure-of-a-contact) for the full list of data fields
 Item            | An element of a specific data field
 
 ### Structure of a contact
 Understanding the structure of a **contact** in *ComputingConnection* is important in enabling you to be more productive.
 
-Category        | Specific fields | Valid entires | Description
+Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
 Personal data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
 University data fields   | 3. `f/`: Faculty <br><br>  4. `m/:` Major | 3. NUS Faculties: <br> fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law <br><br> 4. Alphanumeric |Compulsory
 Skill data fields | 5. `s/`:Skill <br><br> 6. `l/`: Programming Language <br><br> 7. `fr/`: Framework | 5. Alphanumeric <br><br> 6. Alphanumeric <br><br> 7. Alphanumeric| Optional
-Miscellaneous data fields| 8. `r/`: Remark <br><br> 9. `int/`: Interaction <br><br> 10. `compat/`: Compatability | 8. Alphanumeric <br><br> 9. Alphanumeric, Date | Optional <br><br> 9. Integer
-
-Category | Specific data field | Valid entries | Description
-----------------|----------------|-----------------|-----------------
-Personal | 1. `n/`: Name   | Alphanumeric    | Compulsory 
-Personal | 2. `e/`: Email  | Email Regex    | Compulsory 
-University | 3. `f/`: Faculty| fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law     | Compulsory 
-University | 4. `m/`: Major  | Alphanumeric    | Compulsory 
-Skill | 5. `s/`: Skill  | Alphanumeric    | Optional 
-Skill | 6. `l/`: Programming Language  | Alphanumeric    | Optional 
-Skill | 7. `fr/`: Framework  | Alphanumeric    | Optional 
-Miscellaneous | 8. `r/`: Remark  | Alphanumeric    | Optional 
-Miscellaneous | 9. `int/`: Interaction  | Alphanumeric, Date    | Optional 
+Miscellaneous data fields| 8. `r/`: Remark <br><br> 9. `int/`: Interaction <br><br> 10. `compat/`: Compatability | 8. Alphanumeric <br><br> 9. Alphanumeric, Date <br><br> 10. 0 - 100 | Optional
 
 ### Structure of an Organisation
-Understanding the structure of a **organisation** in *ComputingConnection* is also important in enabling you to be more productive and keep contacts together in the one organisation.
+Understanding the structure of a **organisation** in *ComputingConnection* is also important in enabling you to be more productive and keep contacts together in the one organisation. E.g. a group, CCA or company
 
-Category        | Specific fields | Valid entires | Description
+Category        | Specific fields | Valid items | Requirement
 ----------------|-----------------|-----------------|-----------------
-Organisational data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
+Organisation data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
 
 
 
@@ -177,22 +165,11 @@ Format: `help`
 ##### Listing all contacts : `list`
 Shows a list of all contacts in the address book. <br/>
 
-Format: `list`
-<div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
-</div>
-
 ##### Sorting contacts : `sort`
 Sorts all contacts and shows the list in alphabetical order. <br/>
 
 Format: `sort`
 ![result for 'sort'](images/sortscreenshot.png)
-
-<div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
-</div>
 
 ##### Filtering contacts : `filter`
 Filters the contacts by data fields of the person including faculty, major, skill, framework, language and tag.
@@ -203,14 +180,14 @@ Examples:
 * `filter f/computing`
 >  returns all users who have been assigned the f/computing tag.
 * `filter t/staff f/computing`
->  returns all users who have been assigned the t/staff tag and f/computing tag .
+>  returns all users who have been assigned the t/staff tag and f/computing tag.
 
   ![result for 'filter f/computing'](images/filterscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
 :bulb: Tips
 *  You can add multiple fields in one command to see all filters together.
-*  Empty filter gives a list with all persons
+*  Empty filter gives a list with all persons.
 </div>
 
 
@@ -225,20 +202,22 @@ Format: `clear`
 </div>
 
 ### Contact-specific commands
-Commands that are related to a specific contact
+Commands that are related to a specific contact.
 
 ##### Adding a contact : `add`
 Adds a contact to the address book.
 
-Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATABILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR compat/COMPATABILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 Examples: 
 
-* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science`
-* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science s/frontend l/javascript r/interest in web development`
+* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science` 
+  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science'. 
+* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science s/frontend l/javascript r/interest in web development` 
+  > Adds a person named 'Timothy Wong', with an email of 'timothy@nus.edu.sg', faculty of 'computing', and major of 'computer science', with skills 'frontend', languages 'javascript', and a remark of 'interest in web development'.
 
 <div markdown="block" class="alert alert-info">
-:bulb: Start with the essentials!
+:bulb: :information_source: Start with the essentials!
 * A contact must have one and only one name, email, faculty and major.
 * You can always add items to optional data fields later on! 
 </div>
@@ -246,7 +225,7 @@ Examples:
 ##### Editing a contact : `edit`
 Edits an existing contact at the specified `INDEX`.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] compat/COMPATABILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATABILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 <div markdown="block" class="alert alert-info">
 :bulb: Easy editing!
@@ -265,11 +244,11 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] compat/COMPATABILIT
 ##### Appending items to data fields : `append`
 Appends a new item to an optional data field of the existing contact at the specified `INDEX`.
 
-Format:
-* `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+Format: `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 Examples:
-* `append 3 s/web devevelopment l/python t/classmate` Appends 'web development' to the skill data field, 'python' to the programming language data field, and 'classmate' to the tag data field of the Person at index 3 in the displayed list.
+* `append 3 s/web devevelopment l/python t/classmate` 
+  > Appends 'web development' to the skill data field, 'python' to the programming language data field, and 'classmate' to the tag data field of the Person at index 3 in the displayed list.
 
 <div markdown="block" class="alert alert-info">
 :bulb: Appending is cumulative! 
@@ -299,45 +278,40 @@ Examples:
 Adds an interaction record to a specific contact in the address book.
 
 Format: `interaction INDEX int/DESCRIPTION on/DATE`
-interaction 1 int/We talked. on/1990-01-20
-* Adds an interaction record to the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. 
-  The index **must be a positive    integer** 1, 2, 3, …​
-* All fields must be present
-* Date must be in the format of `YYYY-MM-DD`
 
 Examples: 
 * `interaction 1 int/We talked. on/1990-01-20` <br/>
-> Adds an interaction with description 'We talked.' and date '1990-01-20' to the Person at index 1 of the list.
+> Adds an interaction with description 'We talked.' and date '1990-01-20' to the Person at index 1 of the displayed list.
   
 * `interaction 2 int/We chat. on/1990-01-20` <br/>
-> Adds an interaction with description 'We chat.' and date '1990-01-20' to the Person at index 2 of the list.
+> Adds an interaction with description 'We chat.' and date '1990-01-20' to the Person at index 2 of the displayed list.
 
 
 <div markdown="block" class="alert alert-info">
-:bulb: Do not specify duplicate delimiters!
+:information_source: Do not specify duplicate delimiters!
 * If you specify duplicate delimiters, the program will take the first one out of the duplicates
 * For eg: `interaction 2 int/We chat. on/1990-01-20 on/1990-01-21` 
 * The program will save `1990-01-20` as the date.
+* Date must be in the format of `YYYY-MM-DD`
 </div>
 
 ##### Viewing a specific contact in detail : `view`
-Get a detailed view of a specific contact by index.
-
-Details of specific contact shown on right side of screen.
-Index is based on current list displayed on left side of screen.
+Displays a detailed view of a existing contact at a specified index.
 
 Format: `view INDEX`
 
 Examples:
+*  `view 1` 
+> Displays the details of contact indexed at 1 in the currently displayed list.
+*  `view 2`
+> Displays the details of contact indexed at 2 in the currently dispalyed list.
 
-*  `view 1` Displays the details of contact indexed at 1 in the current list.
-*  `view 2` Displays the details of contact indexed at 2 in the current list.
-
-![result for 'view 2'](images/viewscreenshot.png)
+![result for 'view 2'](images/viewscreenshot.PNG)
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:information_source: Different columns
+* Details of specific contact shown on right side of screen.
+* Index is based on current list displayed on left side of screen. 
 </div>
 
 ##### Locating contacts by name: `find`
@@ -358,8 +332,13 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:information_source: How to 'find'
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Partial matches will work e.g. `Han` will match `Hans`
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </div>
 
 ##### Deleting a contact : `delete`
@@ -387,45 +366,28 @@ Shows the list of organisations in the organisation list.
 
 Format: `listorg`
 
-<div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
-</div>
-
 ##### Adding an organisation: `addorg`
-Adds an organisation to the address book.
+Adds an organisation to *ComputingConnection*.
 
 Format: `addorg n/NAME e/EMAIL`
 
-An organisation can have any number of  persons within it(including 0). However, an organisation must have a name.
-These are organisations whose contact the user wished to remember.
-
 Examples:
-
 * `addorg n/Shopee e/shopee.org@gmail.com`
-> adds an organisation with the name Shopee and email shopee.org@gmail.com
-
-List of personal detail tags:
-* n/: name
-* e/: email
-
-List of members:
-* p/: persons in the organisation
+> Adds an organisation with the name 'Shopee' and email 'shopee.org@gmail.com'.
 
 <div markdown="block" class="alert alert-info">
-:exclamation: Be **careful!**
+:bulb: Persons and organisations
+* Use organisations to help you link contact together!
+* An organisation can have any number of persons within it (including 0). However, an organisation must have a name and email.
 * Remember to add the member persons separately before adding them.
 </div>
 
 ##### Deleting an organisation: `deleteorg`
-Deletes an organisation from the organisation list.
+Deletes an organisation at the specified index of the organisation list.
 
 Format: `deleteorg INDEX`
 
-Deletes an organisation at the specified index.
-
 Examples:
-
 * `deleteorg 1`
 > Deletes the 1st organisation from the organisation list.
 
@@ -435,45 +397,37 @@ Examples:
 </div>
 
 ##### Adding person to an organisation: `addtoorg`
-Adding a person to an organisation from the organisation list.
+Adds the person at the specified index in the displayed list to an organisation with the specified name.
 
-Format: `addtoorg INDEX NAME`
-
-Adds the person at the specified index in the address book to an organisation with the specified name.
+Format: `addtoorg INDEX n/NAME`
 
 Examples:
-
 * `addtoorg 1 n/Facebook`
-> Adds the 1st person in the address book to the Facebook organisation.
+> Adds the 1st person in the displayed list to the Facebook organisation.
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:information_source: Add a person to an organisation one at a time! 
+* Multiple addition will be implemented in future versions.
 </div>
 
 ##### Removing person from an organisation: `deletefromorg`
-Removing a person from an organisation from the organisation list.
+Deletes the person at the specified index in the person list of an organisation with the specified name.
 
 Format: `deletefromorg INDEX NAME`
 
-Deletes the person at the specified index in the person list of an organisation with the specified name.
-
 Examples:
-
 * `deletefromorg 1 n/Facebook`
 > Deletes the 1st person in the person list of the Facebook organisation.
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:information_source: The person and organisation will not be deleted, just the relation.
 </div>
 
 ### Future commands
 Commands to be implemented in future versions
 
-##### Archiving data files `[coming in v2.0]`
+##### Archiving data files
 _Details coming soon ..._
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -496,10 +450,11 @@ System Command | Format, Examples
 
 Contact-specific Command | Format, Examples
 --------|------------------
-**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
-**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR compat/COMPATABILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `add n/James Ho e/jamesho@example.com f/fass m/communications s/marketing t/colleague`
+**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [compat/COMPATABILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Append** | `append INDEX [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​` <br><br> e.g., `append 3 s/web devevelopment l/python t/classmate`
 **Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​` <br><br> e.g., `rm 5 s/1 s/3 fr/3 r/1`
+**Interaction** | `interaction INDEX int/DESCRIPTION on/DATE`
 **View** | details coming soon
 **Find** | `find KEYWORD [MORE_KEYWORDS]…​`<br><br> e.g., `find James Jake`
 **Filter** | `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
