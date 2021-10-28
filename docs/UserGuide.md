@@ -70,18 +70,18 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a customer: `addcustomer`
+### Adding a customer: `addC`
 
 Adds a customer to RHRH.
 
-Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]`
-
-* Adds a customer with all specified fields, where `LOYALTYPOINTS`, `ALLERGIES` and `SPECIALREQUESTS` are fields specific to customers.
-* `ALLERGIES`, `SPECIALREQUESTS` and `TAG` are optional fields that can be omitted.
+Format:
+* `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTY POINTS [alg/ALLERGIES] [sr/SPECIAL REQUESTS] [t/TAG]`: 
+Adds a customer with all specified fields, where `LOYALTY POINTS`, `ALLERGIES` and `SPECIAL REQUESTS` are fields specific to customers.
+  * `ALLERGIES`, `SPECIAL REQUESTS` and `TAG` are optional fields that can be omitted.
 
 Examples: 
-* `addcustomer n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/0 alg/Kiwi sr/NoAirCon t/friendly` adds a customer with the respective fields to the customer list.
-* `addcustomer n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/0` adds a customer without any optional fields.
+* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/1000 alg/Kiwi sr/NoAirCon t/friendly`
+* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/10000`
 
 
 ### Adding an employee: `addemployee`
@@ -110,45 +110,38 @@ Examples:
 * `addSupplier n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/Every Monday t/punctual` adds a supplier with the respective fields.
 * `addSupplier n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/Every Monday` adds a supplier without any optional fields.
 
-### Editing a person : `edit`
-
-Edits an existing person in RHRH.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Editing a customer : `editcustomer`
+### Editing a customer : `editC`
 
 Edits an existing customer in RHRH.
 
-Format: `editcustomer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`
-
-* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing allergies, special requests or tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it. Similar for allergies by typing `alg/` and special requests by typing `sr/`.
+Format:
+* `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`: Edits
+    the customer at the specified `INDEX`.
+  * `INDEX` refers to the index number shown in the displayed customer list. 
+  * `INDEX` **must be a positive integer** 1, 2, 3, …​
+  * At least one of the optional fields must be provided.
+  * Existing values will be updated to the input values.
 
 Examples:
-*  `editcustomer 1 alg/Kiwi sr/noAirCon` Edits the allergies and special requests of the 1st customer to be `Kiwi` and `noAirCon` respectively.
-*  `editcustomer 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
+*  `editC 1 alg/Kiwi sr/no air con` Replaces the existing allergies and special requests of the 1st customer to `Kiwi` and `no air con` respectively.
+*  `editC 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* For Allergies, Special Requests and Tags
+  * the existing values of these fields will be replaced i.e editing of these fields are not cumulative.
+  * You can remove the customer's tags by typing `t/` without
+    specifying any tags after it. Similar for allergies by typing `alg/` and special requests by typing `sr/`.
+
+</div>
 
 ### Editing an employee : `editemployee`
 
 Edits an existing employee in RHRH.
 
-Format: `editemployee INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`
+Format:
+* `editemployee INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`: 
 
 * Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -178,32 +171,17 @@ Examples:
 *  `editSupplier 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.
 *  `editSupplier 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
 
-### Deleting a person : `delete`
-
-Deletes the specified person from RHRH.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Deleting a customer : `deletecustomer`
+### Deleting a customer : `deleteC`
 
 Deletes the specified customer from RHRH.
 
-Format: `deletecustomer INDEX`
-
-* Deletes the customer at the specified `INDEX`.
-* The index refers to the index number shown in the displayed customer list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Format:
+* `deleteC INDEX`: Deletes the customer at the specified `INDEX`.
+  * `INDEX` refers to the index number shown in the displayed customer list.
+  * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deletecustomer 2` deletes the 2nd customer in the address book.
+* `deleteC 2` deletes the 2nd customer displayed in the address book.
 
 ### Deleting an employee : `deleteemployee`
 
@@ -253,6 +231,32 @@ Examples:
 * Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
+
+### Finds customers based on keywords: `findC`
+
+Find customers that have fields that contain all specified keywords cumulatively
+
+Format:
+* `findC [KEYWORD]…​`: Displays all customers that match specified keywords
+  * At least one `KEYWORD` must be provided.
+  * Only customers that match **all** provided keywords will be returned.
+
+
+Examples:
+* `findC Chetwin Everything`: Finds customers that have both the keywords 'Chetwin' and 'Everything' in their fields.
+
+### Displays a sorted list of customers: `sortC`
+
+Sorts and displays the list of customers based on a given field in either ascending or descending order.
+
+Format:
+* `sortC by/PREFIX OF SORT KEY o/ORDER OF SORT`: Sorts and displays the list of customers based on provided arguments
+    * `PREFIX OF SORT KEY` is the prefix of the field you wish to sort the list of customers by, i.e. lp for loyaltyPoints and alg for allergies
+    * `ORDER OF SORT` can be set to 'a' for ascending order or 'd' for descending order
+
+Examples:
+* `sortC by/n o/d`: sorts the list of customers by `NAME` in descending order.
+* `sortC by/alg o/a`: sorts the list of customers by `ALLERGIES` in ascending order.
 
 ### Set the tables for the restaurant: `settables`
 
