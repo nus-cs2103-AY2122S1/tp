@@ -73,28 +73,15 @@ public class JsonAdaptedModule {
         final UniqueStudentList students = new UniqueStudentList();
         final UniqueTaskList tasks = new UniqueTaskList();
         if (!studentList.isEmpty()) {
-            setStudentsTaskList(students);
+            for (JsonAdaptedStudent student : studentList) {
+                Student modelStudent = student.toModelType();
+                students.add(modelStudent);
+            }
         }
         if (!taskList.isEmpty()) {
             setModuleTaskList(tasks);
         }
         return new Module(modelModuleName, students, tasks);
-    }
-
-    /**
-     * Helper method to set the student list
-     */
-    public void setStudentsTaskList(UniqueStudentList students) throws IllegalValueException {
-        for (JsonAdaptedStudent student : studentList) {
-            Student modelStudent = student.toModelType();
-            if (!taskList.isEmpty()) {
-                for (JsonAdaptedTask task : taskList) {
-                    Task modelTask = task.toModelType();
-                    modelStudent.addTask(modelTask);
-                }
-            }
-            students.add(modelStudent);
-        }
     }
 
     /**
