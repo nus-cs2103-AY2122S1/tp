@@ -1,6 +1,7 @@
 package seedu.edrecord.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -169,6 +170,11 @@ public interface Model {
     boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment);
 
     /**
+     * Returns an unmodifiable view of the assignment list under the currently selected module.
+     */
+    List<Assignment> getAssignmentList();
+
+    /**
      * Returns the assignment that matches the given name.
      */
     Optional<Assignment> searchAssignment(Name name);
@@ -178,6 +184,12 @@ public interface Model {
      * {@code assignment} must not already exist under the currently selected module.
      */
     void addAssignment(Assignment assignment);
+
+    /**
+     * Deletes the given assignment.
+     * The assignment must exist in the currently selected module.
+     */
+    void deleteAssignment(Assignment target);
 
     /**
      * Replaces the given assignment {@code target} with {@code editedAssignment}.
