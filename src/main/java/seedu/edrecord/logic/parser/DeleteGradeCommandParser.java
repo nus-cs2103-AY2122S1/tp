@@ -16,10 +16,10 @@ import seedu.edrecord.model.name.Name;
 public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the GradeCommand
-     * and returns an GradeCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteGradeCommand
+     * and returns a DeleteGradeCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public DeleteGradeCommand parse(String args) throws ParseException {
         requireNonNull(args);
