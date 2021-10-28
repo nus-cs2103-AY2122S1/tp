@@ -8,7 +8,7 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 This application allows you to **store comprehensive data** of each student quickly, and allows you to search through them easily. 
 With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments! <br>
 Source Control can also give you both a quick overview and a closer look of how your students are performing.
-This application provides **in-depth data analysis** of the performance of your students in each assessment, 
+This application **provides in-depth data analysis** of the performance of your students in each assessment, 
 giving you timely feedback on the pace and difficulty level of the module.
 
 Source Control is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
@@ -23,6 +23,7 @@ all the basic knowledge to get started with Source Control, and is simple and ea
 
 * Table of Contents
 {:toc}
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -321,17 +322,17 @@ If your changes to the data file makes its format invalid, SourceControl will di
 
 Adds new alias for existing commands, so that experienced users can customise commands to increase efficiency. 
 
-Format: `alias <alias> -> <existing_command>`
+Format: `alias -c <existing_command> -as <alias>`
 
-* `<existing_commands>` refers to the command keywords e.g. `search`, `add alloc`, `add student`. 
+* `<existing_commands>` refers to any command keywords e.g. `search`, `add alloc`, `add student`. 
 * New alias can be one single alphanumeric word. 
 * Multiple alias can be set for each command. 
-* Default and existing alias can still be used after new alias is added. e.g. after `alias as -> add student`, both `as` and `add student` can be used. 
+* Default and existing alias can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used. 
 
 Examples:
-* `alias as -> add student` adds new alias to `add student` command i.e. `as -n Zhiying -i E7654321` adds student `Zhiying` to database. 
-* `alias alloc -> add alloc` adds new alias to `add alloc` command i.e. `alloc -g T02A -n Zhiying` adds student `Zhiying` into group `T02A`. 
-* `alias as2 -> add score` adds new alias to `add score` command. 
+* `alias -c add student -a as` adds new alias to `add student` command i.e. `as -n Zhiying -i E7654321` adds student `Zhiying` to database. 
+* `alias -c add alloc -a alloc` adds new alias to `add alloc` command i.e. `alloc -g T02A -n Zhiying` adds student `Zhiying` into group `T02A`. 
+* `alias -c add score -a as2` adds new alias to `add score` command. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -352,6 +353,9 @@ Tag | Full Form | Usage
 -s | score | `-s <score>`
 -t | tag | `-t <tag>`
 -f | file | `-f <file_path>`
+-c | command | `-c <existing_command>`
+-as | alias | `-a <alias>`
+
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
