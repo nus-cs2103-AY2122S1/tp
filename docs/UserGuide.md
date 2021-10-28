@@ -95,6 +95,12 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### View Statistics of last searched list : `stat`
+
+Shows a count of the tags, type and tutorial ID of the last searched list
+
+Format: `stat`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -163,19 +169,45 @@ Examples:
 * `find Alice` followed by `bulk_tag t/friends` adds the tag `friends` to all the persons in the filtered person list.
 * `bulk_tag t/friends` adds the tag `friends` in the filtered person list.
 
+### Sort contacts by attribute: `sort`
+
+Sort all the contacts in the ProfBook in ascending order.
+
+Format: `sort [ATTRIBUTE] [-r]`
+
+* Contacts will be sorted by the attribute specified, then by name in the case of ties.
+* If no attribute is specified, contacts will be sorted by name by default.
+* The -r argument sorts the contacts in descending order.
+* Sorting by tags will sort by the number of tags attached to the contact.
+* Sorting by address is not supported.
+
+Examples:
+* `sort` sorts the contacts by name.
+* `sort n/` also sorts the contacts by name.
+* `sort -r` sorts the contacts by name in descending order.
+* `sort T/` sorts the contacts by Tutorial ID.
+
 ### Import existing contacts from JSON: `import`
 
-Merges all contacts in a JSON file with the existing contacts in PB3.
+Merges all contacts in a JSON file with the existing contacts in ProfBook.
 
 Format: `import FILENAME`
 
-* Reads the contacts in `FILENAME` and merges them into the existing contacts.
-
+* Reads the contacts in `FILENAME` and merges them into the existing ProfBook.
+* 
 ### Export filtered contacts to JSON: `export`
 
 Exports all current filtered contacts into a JSON file.
 
 Format: `export FILENAME`
+
+* Takes the current filtered list of contacts and writes them into `FILENAME`
+
+### Export emails of filtered contacts to txt: `export email`
+
+Exports the list of contacts of all current filtered contacts into a txt file. This can then be used to create a group of contacts in outlook to mass send emails to.
+
+Format: `export email FILENAME`
 
 * Takes the current filtered list of contacts and writes them into `FILENAME`
 
@@ -224,4 +256,7 @@ Action | Format, Examples
 **Find** | `find FIELD KEYWORD`<br> e.g., `find name James`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
+**Export** | `export FILENAME` <br> e.g., `export t01students.json`
+**Export Email** | `exportemail FILENAME` <br> e.g., `export email email.txt`
+**Statistics** | `stat`
 **Help** | `help`

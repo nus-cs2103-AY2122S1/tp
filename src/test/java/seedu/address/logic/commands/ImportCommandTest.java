@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -20,6 +21,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class ImportCommandTest {
 
+    private Path filePathIncorrectFormat = Paths.get("src/test/data/ImportTest/incorrectFormat.json");
     private Path filePathNoDuplicates = Paths.get("src/test/data/ImportTest/noDuplicates.json");
     private Path filePathWithDuplicates = Paths.get("src/test/data/ImportTest/withDuplicates.json");
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -51,6 +53,11 @@ public class ImportCommandTest {
     @Test
     public void constructor_nullFile_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ImportCommand(null));
+    }
+
+    @Test
+    public void execute_jsonFileFormatIncorrect_throwsDataConversionException() {
+        assertThrows(DataConversionException.class, () -> new ImportCommand(filePathIncorrectFormat).execute(model));
     }
 
     @Test

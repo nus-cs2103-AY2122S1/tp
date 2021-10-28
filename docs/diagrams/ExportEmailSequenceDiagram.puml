@@ -1,0 +1,103 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ExportEmailCommandParser" as ExportEmailCommandParser LOGIC_COLOR
+participant "ee:ExportEmailCommand" as ExportEmailCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "tempData:AddressBook" as AddressBook LOGIC_COLOR
+participant ":JsonAddressBookStorage" as JsonAddressBookStorage LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Output STORAGE_COLOR_T1
+participant ":Output" as Output STORAGE_COLOR
+end box
+
+
+
+[-> LogicManager : execute("exportemail data/toImport.json")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("exportemail data/toImport.json")
+activate AddressBookParser
+
+create ExportEmailCommandParser
+AddressBookParser -> ExportEmailCommandParser
+activate ExportEmailCommandParser
+
+ExportEmailCommandParser --> AddressBookParser
+deactivate ExportEmailCommandParser
+
+AddressBookParser -> ExportEmailCommandParser : parse("data/toExport.json")
+activate ExportEmailCommandParser
+
+create ExportEmailCommand
+ExportEmailCommandParser -> ExportEmailCommand
+activate ExportEmailCommand
+
+ExportEmailCommand --> ExportEmailCommandParser : ee
+deactivate ExportEmailCommand
+
+ExportEmailCommandParser --> AddressBookParser : ee
+deactivate ExportEmailCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ExportEmailCommandParser -[hidden]-> AddressBookParser
+destroy ExportEmailCommandParser
+
+AddressBookParser --> LogicManager : ee
+deactivate AddressBookParser
+
+LogicManager -> ExportEmailCommand : execute()
+activate ExportEmailCommand
+
+ExportEmailCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ExportEmailCommand : lastShownList
+deactivate Model
+
+create AddressBook
+ExportEmailCommand -> AddressBook
+activate AddressBook
+
+AddressBook -> AddressBook : setPersons(lastShownList)
+activate AddressBook
+deactivate AddressBook
+
+AddressBook -> ExportEmailCommand
+deactivate AddressBook
+
+ExportEmailCommand -> JsonAddressBookStorage
+activate JsonAddressBookStorage
+
+
+JsonAddressBookStorage ->  JsonAddressBookStorage: saveEmail(tempData)
+activate JsonAddressBookStorage
+
+
+JsonAddressBookStorage -> Output : saveJsonFile(tempData, data/toExport.json)
+deactivate JsonAddressBookStorage
+deactivate JsonAddressBookStorage
+
+
+
+create CommandResult
+ExportEmailCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ExportEmailCommand
+deactivate CommandResult
+
+ExportEmailCommand --> LogicManager : result
+deactivate ExportEmailCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

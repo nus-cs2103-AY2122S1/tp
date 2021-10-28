@@ -46,7 +46,7 @@ public class ImportCommand extends Command {
             model.importFile(filePath);
             return new CommandResult(String.format(MESSAGE_SUCCESS, filePath.toString()));
         } catch (DataConversionException de) {
-            throw new DataConversionException(MESSAGE_JSON_ERROR, de);
+            throw new DataConversionException(MESSAGE_JSON_ERROR);
         }
     }
 

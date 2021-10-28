@@ -22,6 +22,8 @@ public class ExportEmailCommandParserTest {
                 MESSAGE_INVALID_COMMAND_FORMAT, ExportEmailCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "    ", String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT, ExportEmailCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "//\0.21.3?:", String.format(
+            MESSAGE_INVALID_COMMAND_FORMAT, ExportEmailCommand.MESSAGE_USAGE));
     }
 
     @Test

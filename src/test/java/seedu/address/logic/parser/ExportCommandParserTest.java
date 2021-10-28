@@ -20,6 +20,8 @@ public class ExportCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "//\0.21.3?:",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
     }
 
     @Test
