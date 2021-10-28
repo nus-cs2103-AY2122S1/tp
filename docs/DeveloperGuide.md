@@ -6,6 +6,14 @@ PlannerMD is an easy-to-use command-line interface (CLI) application that helps 
 
 The purpose of the Developer Guide is to guide you through the architecture of our program, so you can familiarise yourself with its underlying structure.
 
+## Navigating this Developer Guide
+Take note of some syntax we will frequently use throughout the Developer Guide:
+
+| Syntax | Description |
+|--------|------------|
+| **Bold** | keywords |
+| :bulb: **Tip:** | Useful tips |
+| `markdown` | Classes or methods |
 
 * Table of Contents
     - [Acknowledgements](#acknowledgements) 
