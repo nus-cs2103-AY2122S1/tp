@@ -20,7 +20,9 @@ public class TypicalTasks {
             .withDate("18th of September 2021").build();
     public static final Task TASK2 = new TaskBuilder().withLabel("Buy green buttons")
             .withDate("20th of September 2021").withIsDone(false).build();
-    public static final Task TASK3 = new TaskBuilder().withLabel("Buy blue buttons")
+    public static final Task TASK3 = new TaskBuilder().withLabel("Buy orange buttons")
+            .withDate("23th of September 2021").withIsDone(true).build();
+    public static final Task TASK4 = new TaskBuilder().withLabel("Buy blue buttons")
             .withDate("23th of September 2021").withIsDone(false).build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
@@ -41,7 +43,7 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(TASK1, TASK2, TASK3));
+        return new ArrayList<>(Arrays.asList(TASK1, TASK2, TASK3, TASK4));
     }
 
 }
