@@ -208,7 +208,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeGroup(Group key) {
+        UniqueId groupId = key.getId();
         groups.remove(key);
+        assert !groups.contains(key); // assert removal first, before cleaning up.
+        persons.cleanUpGroupId(groupId);
     }
 
     public UniqueIdMapper<Person> getPersonMapper() {

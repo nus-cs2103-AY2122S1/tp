@@ -342,7 +342,7 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/20211231` edits the deadline to 20211231
+* `task -e 4 d/2021-12-31` edits the deadline to 20211231
 
 ### Deleting a task `[coming in v1.3]`
 
