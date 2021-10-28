@@ -15,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -276,6 +277,13 @@ public class ModelManager implements Model {
         filteredOrders.setPredicate(predicate);
     }
 
+    @Override
+    public void sortOrderList(SortDescriptor sortDescriptor) {
+        Comparator<Order> comparator = sortDescriptor.generateComparator();
+        orderBook.sortOrders(comparator);
+        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
     /**
      * Marks an order as completed
      */
@@ -343,12 +351,6 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
-    }
-
-    @Override
-    public void sortOrderList(Comparator<Order> comparator) {
-        orderBook.sortOrders(comparator);
-        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     @Override

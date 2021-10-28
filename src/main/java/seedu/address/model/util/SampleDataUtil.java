@@ -65,16 +65,16 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new Label("Buy a green button"), new Date("28th of September"), new TaskTag("SO1")),
-            new Task(new Label("Buy a red button"), new Date("29th of September"), new TaskTag("SO1")),
-            new Task(new Label("Buy a blue button"), new Date("30th of September"), new TaskTag("SO1")),
+            new Task(new Label("Buy a green button"), new Date("2020-12-10"), new TaskTag("SO1")),
+            new Task(new Label("Buy a red button"), new Date("2018-06-09"), new TaskTag("SO1")),
+            new Task(new Label("Buy a blue button"), new Date("2017-10-02"), new TaskTag("SO1")),
         };
     }
 
     public static Order[] getSampleOrders() {
         return new Order[] {
             new Order(new Label("Blue blazer"), new Customer("Alex Yeoh"),
-                    new Date("10th of October"), new Amount("10")),
+                    new Date("2020-12-10"), new Amount("10")),
         };
     }
 
