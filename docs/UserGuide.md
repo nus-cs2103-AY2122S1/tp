@@ -230,7 +230,7 @@ Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]...
 * Edits the student at the specified `<index>`. The `<index>` refers to the index number shown in the displayed student list. The `<index>` must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags and groups, the existing tags and groups of the student will be removed i.e adding of tags and groups are not cumulative.
+* When editing tags and groups, the existing tags and groups of the student will be removed, i.e adding of tags and groups are not cumulative.
 * You can remove all the student’s tags or groups by typing -t or -g without specifying any values after it.
 
 Examples:
@@ -316,7 +316,7 @@ Examples:
 Clears all existing data. 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Be careful: you can't undo this command! You can use the `export` command to get a backup of the data before clearing.
+You can't undo this command! You can use the `export` command to get a backup of the data before clearing.
 </div>
 
 Format: `clear`
@@ -341,18 +341,13 @@ Format: `alias -c <existing_command> -as <alias>`
 * Default and existing alias can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added to the command that the existing alias maps to.
 * The aliases created will persist between Source Control sessions.
-
-<div markdown="block" class="alert alert-primary">
-
-:bulb: **Tips:**<br>
-
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`
 
-</div>
-
 Examples:
-* `alias -c add student -as as` adds a new alias to `add student` command. i.e. `as -n Zhiying -i E7654321` adds student `Zhiying` to database.
-* `alias -c add score -as as` maps the alias `as` to the `add score` command. i.e. `as -a P01 -n Zhiying -s 100` will add a score for `P01` for the student `Zhiying`.
+* `alias -c add student -as as` adds a new alias to `add student` command. 
+    * `as -n Zhiying -i E7654321` adds student `Zhiying` to database.
+* `alias -c add score -as as` maps the alias `as` to the `add score` command. 
+    * `as -a P01 -n Zhiying -s 100` will add a score for `P01` for the student `Zhiying`.
 * `alias -c as -as as2` will add the alias `as2` to the command that `as` currently maps to if `as` is an existing alias.
 * `alias -c as -as as` will remove the alias `as`. `as` will no longer be recognised as a command.
 
