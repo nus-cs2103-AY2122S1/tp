@@ -47,21 +47,18 @@ We hope you find this User Guide helpful in using ClassMATE!
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui-annotated.png)
 1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-   * **`liststu`** : Lists all students.
    
-   * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06`**: Adds a student named `John Doe` to ClassMATE.
-   
-   * **`deletestu 3`**: Deletes the 3rd student shown in the current list.
-   
-   * **`clear`** : Deletes all students.
-
-   * **`exit`** : Exits the app.
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Tutorial](#CLI-Tutorial) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## CLI Tutorial
+
+In this section, you will familiarize yourself with the use of CLI to facilitate your experience when using ClassMATE.
+All commands would be typed in the **Command-Line Input** as shown in the image below.
+
+
+### Command Features
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about the command format:**<br>
