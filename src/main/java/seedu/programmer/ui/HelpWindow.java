@@ -82,58 +82,62 @@ public class HelpWindow extends PopupWindow {
     }
 
     private void initializeFeatureTableItem(FeatureTableItem... items) {
+        FeatureTableItem help = new FeatureTableItem("Help",
+                "help / Click Help button / Press F2",
+                "Opens this help window");
         FeatureTableItem list = new FeatureTableItem("List",
                 "list",
-                "List all students records in the database");
-        FeatureTableItem purge = new FeatureTableItem("Purge",
-                "purge",
-                "Purge Sample Data (Delete all)");
+                "Displays all students records in the database");
+        FeatureTableItem dashboard = new FeatureTableItem("Dashboard",
+                "dashboard / Click Dashboard button / Press F5",
+                "Shows a dashboard of ProgrammerError data");
+        FeatureTableItem exit = new FeatureTableItem("Exit",
+                "exit / Click Exit button / Press F1",
+                "Closes ProgrammerError");
         FeatureTableItem fill = new FeatureTableItem("Fill",
                 "fill",
-                "Fill ProgrammerError with sample data, only when the database is empty");
+                "Fills ProgrammerError with sample data, only when the database is empty");
+        FeatureTableItem purge = new FeatureTableItem("Purge",
+                "purge",
+                "Deletes all data");
+        FeatureTableItem download = new FeatureTableItem("Download",
+                "download / Click Download Button / Press F3",
+                "Downloads the database as a csv file");
+        FeatureTableItem upload = new FeatureTableItem("Upload",
+                "upload / Press Upload button / Press F4",
+                "Uploads a CSV file containing students' details to ProgrammerError's database");
         FeatureTableItem add = new FeatureTableItem("Add",
                 "add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>",
-                "Create records of individual students");
-        FeatureTableItem view = new FeatureTableItem("Filter",
-                "filter -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-email <EMAIL>",
-                "Filter the list with the specified parameters. Multiple fields can be used as the filter criteria");
+                "Creates a record of a new student");
         FeatureTableItem edit = new FeatureTableItem("Edit",
-                "edit <INDEX_IN_LIST> -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-email <EMAIL>/"
-                        + "-t <LAB_NUMBER> -s <LAB_SCORE>",
-                "Edit the specified field to the new value. Multiple fields can be edited at the same time");
+                "edit <INDEX_IN_LIST> -n <NAME> / -sid <STUDENT_ID> / -cid <CLASS_ID> / -email <EMAIL>/ "
+                        + "-ln <LAB_NUMBER> -s <LAB_SCORE>",
+                "Edits a student's specified field to the new value. Multiple fields can be edited at the same time");
         FeatureTableItem delete = new FeatureTableItem("Delete",
                 "delete <INDEX_IN_LIST>",
-                "Delete the specified student's record");
+                "Deletes the student record at the index");
+        FeatureTableItem filter = new FeatureTableItem("Filter",
+                "filter -n <NAME> / -sid <STUDENT_ID> / -cid <CLASS_ID> / -email <EMAIL>",
+                "Filters the list of students with the specified parameters. At least one parameter must be provided.");
         FeatureTableItem show = new FeatureTableItem("Show",
                 "show <INDEX_IN_LIST>",
-                "Show the lab results of the chosen student");
-        FeatureTableItem exit = new FeatureTableItem("Exit",
-                "exit/press Exit button/press F1",
-                "Exit ProgrammerError");
-        FeatureTableItem help = new FeatureTableItem("Help",
-                "help/press Help button/press F2",
-                "Open this Help Window");
-        FeatureTableItem download = new FeatureTableItem("Download",
-                "download/Press Download Button/press F3",
-                "Download the database as a csv file");
-        FeatureTableItem upload = new FeatureTableItem("Upload",
-                "upload/press Upload Button/press F4",
-                "Upload a csv containing students' details to ProgrammerError's database");
-        FeatureTableItem dashboard = new FeatureTableItem("Dashboard",
-                "dashboard/press Dashboard Button/press F5",
-                "Show the dashboard of ProgrammerError");
+                "Shows the lab results of the chosen student");
         FeatureTableItem addLab = new FeatureTableItem("AddLab",
-                "addlab -t <LAB_NUMBER> -ts <TOTAL_SCORE>",
-                "Create a lab record for all students in the database");
+                "addlab -ln <LAB_NUMBER> -ts <TOTAL_SCORE>",
+                "Creates a lab record for all students in the database");
         FeatureTableItem delLab = new FeatureTableItem("DeleteLab",
-                "dellab -t <LAB_NUMBER>",
-                "Remove the lab with the corresponding lab number from ProgrammerError");
+                "dellab -ln <LAB_NUMBER>",
+                "Removes the lab with the corresponding lab number from ProgrammerError");
         FeatureTableItem editLab = new FeatureTableItem("EditLab",
-                "editlab -t <LAB_NUMBER> -nt <NEW_LAB_NUMBER>/-ts <TOTAL_SCORE>",
-                "Edit an existing lab's lab number and/or total score");
+                "editlab -ln <LAB_NUMBER> -nln <NEW_LAB_NUMBER>/-ts <TOTAL_SCORE>",
+                "Edits an existing lab's lab number and/or total score");
         featureTableItems = FXCollections.observableArrayList();
-        featureTableItems.addAll(list, purge, fill, add, view, edit, delete, show,
-                addLab, editLab, delLab, exit, help, download, upload, dashboard);
+        featureTableItems.addAll(
+                help, exit, list, dashboard,
+                fill, purge, download, upload,
+                add, edit, delete, filter, show,
+                addLab, editLab, delLab
+        );
     }
 
     /**
