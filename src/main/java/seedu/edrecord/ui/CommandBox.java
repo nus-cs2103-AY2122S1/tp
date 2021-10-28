@@ -39,12 +39,12 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(e -> {
             KeyCode c = e.getCode();
             if (commandHistory.size() > 0 && (c.equals(KeyCode.UP) || c.equals(KeyCode.DOWN))) {
-               e.consume();
-               commandHistoryPtr += c.equals(KeyCode.DOWN) ? 1 : -1;
-               commandHistoryPtr = Math.max(0, commandHistoryPtr);
-               commandHistoryPtr = Math.min(commandHistory.size() - 1, commandHistoryPtr);
-               commandTextField.setText(commandHistory.get(commandHistoryPtr));
-               commandTextField.end();
+                e.consume();
+                commandHistoryPtr += c.equals(KeyCode.DOWN) ? 1 : -1;
+                commandHistoryPtr = Math.max(0, commandHistoryPtr);
+                commandHistoryPtr = Math.min(commandHistory.size() - 1, commandHistoryPtr);
+                commandTextField.setText(commandHistory.get(commandHistoryPtr));
+                commandTextField.end();
             }
         });
     }
