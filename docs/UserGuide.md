@@ -401,6 +401,7 @@ Examples:
 * Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
+<<<<<<< HEAD
 
 <div markdown="block" class="alert alert-warning">
 :information_source: **Notes:**<br>
@@ -409,6 +410,8 @@ Examples:
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
+=======
+>>>>>>> aab95a1ea841e78eb5c2f88b5287b15a77369482
 
 ### Finding customers based on keywords: `findC`
 
@@ -570,8 +573,12 @@ RHRH data are saved in the hard disk automatically after any command that change
 
 RHRH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+:bangbang: **Caution:**
+
 If your changes to the data file makes its format invalid, RHRH will discard all data and start with an empty data file at the next run.
+
 </div>
 
 ---
@@ -590,6 +597,7 @@ _Details coming soon ..._
 <summary>How do I transfer my data to another Computer?</summary>
 
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
+
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
