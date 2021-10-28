@@ -167,7 +167,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void fillMemberListPanel() {
-        memberListPanel = new MemberListPanel(logic.getFilteredMemberList());
+        memberListPanel = new MemberListPanel(logic.getFilteredMemberList(), logic.getCurrentEvent());
         memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
     }
 
@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void fillTaskListPanel() {
-        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), logic.getCurrentMember());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
