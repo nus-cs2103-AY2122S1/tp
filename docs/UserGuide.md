@@ -612,6 +612,7 @@ This also allows you to undo your mistakes by decreasing your appointment count 
 **Examples**:
 
 Before undo:
+
 ![FAST state before `ua 1`](images/UnmarkAppointmentBefore.png)
 
 * `ua 1` decreases the completed appointment counter of the first client by 1.
