@@ -129,7 +129,7 @@ public class HelpWindow extends PopupWindow {
                 "dellab -ln <LAB_NUMBER>",
                 "Removes the lab with the corresponding lab number from ProgrammerError");
         FeatureTableItem editLab = new FeatureTableItem("EditLab",
-                "editlab -ln <LAB_NUMBER> -nln <NEW_LAB_NUMBER>/-ts <TOTAL_SCORE>",
+                "editlab -ln <LAB_NUMBER> -nln <NEW_LAB_NUMBER> / -ts <TOTAL_SCORE>",
                 "Edits an existing lab's lab number and/or total score");
         featureTableItems = FXCollections.observableArrayList();
         featureTableItems.addAll(
