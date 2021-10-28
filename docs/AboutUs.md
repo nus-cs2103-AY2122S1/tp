@@ -16,7 +16,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/timothywongej)]
 [[portfolio](team/timothywong.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: Documentation 
 
 ### Jason Ang
 
@@ -25,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/kdeasymoneysniper)]
 [[portfolio](team/jasonang.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: UI and Integration
 
 ### Dion
 
@@ -35,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/noobmaster19)] [[portfolio](team/noobmaster.md)]
 
 * Role: Developer
-* Responsibilities: Data Master
+* Responsibilities: Code quality
 
 ### Ang Yang Cheng
 
@@ -45,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/angyangcheng.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing
 
 ### Shivam Tiwari
 
@@ -55,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and deadlines, scheduling and tracking
