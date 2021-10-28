@@ -128,7 +128,7 @@ Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t 
 * Adds a new student into the database with the given name and NUSNET ID.
 * Adds the student into the specified groups if applicable. If group does not already exist, a new group would be created. 
 * Adds tags to the student if applicable. Tag name has to be one alphanumeric word. 
-* NUSNET ID input cannot already exist in the student list. 
+* There should not be an existing student with the same NUSNET ID. If there is, the student to be added is considered invalid.
 
 Examples:
 * `add student -n Jonas Chow -i E0123456` adds the student Jonas Chow with the given NUSNET ID. 
