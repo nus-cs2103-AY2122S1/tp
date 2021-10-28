@@ -239,6 +239,7 @@ public class ModelManager implements Model {
     }
 
     public ObservableList<Client> getSortedNextMeetingList() {
+        shownNextMeetings.setPredicate(Client::hasNextMeeting);
         return shownNextMeetings;
     }
 
