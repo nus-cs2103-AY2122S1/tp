@@ -47,7 +47,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
-        Collections.sort(internalList);
+        sortList();
     }
 
     /**
@@ -135,11 +135,19 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    public ObservableList<Person> getInternalList() {
+        return internalList;
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public void sortList() {
+        Collections.sort(internalList);
     }
 
     @Override

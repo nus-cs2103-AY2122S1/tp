@@ -115,6 +115,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Person> getModifiableList() {
+        return persons.getInternalList();
+    }
+
+    @Override
+    public void sort() {
+        persons.sortList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls

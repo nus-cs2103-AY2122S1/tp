@@ -15,6 +15,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.CommandDetails;
 
 /**
  * Controller for the Help Window
@@ -100,7 +101,9 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the Help Window is currently being shown.
+     * Returns true if the help window is currently being shown.
+     *
+     * @return true, if the help window is being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
