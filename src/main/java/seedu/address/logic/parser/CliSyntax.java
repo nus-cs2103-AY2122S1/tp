@@ -15,5 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_GITHUB_ID = new Prefix("g/");
     public static final Prefix PREFIX_TUTORIAL_ID = new Prefix("T/");
     public static final Prefix PREFIX_TYPE = new Prefix("r/");
-    public static final Prefix PREFIX_NUS_NETWORK_ID = new Prefix("m/");
+    public static final Prefix PREFIX_NUS_NETWORK_ID = new Prefix("N/");
 }
