@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -115,6 +116,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         siasa.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Map<Person, Integer> getNumberPoliciesPerPerson() {
+        return siasa.getNumberPoliciesPerPerson();
     }
 
     //=========== Policy CRUD ================================================================================

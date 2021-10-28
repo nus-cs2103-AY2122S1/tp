@@ -1,6 +1,7 @@
 package seedu.siasa.model;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -86,6 +87,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns a map of persons and the number of policies each of them has.
+     */
+    Map<Person, Integer> getNumberPoliciesPerPerson();
 
     /**
      * Returns true if a policy with the same identity as {@code policy} exists in the SIASA.

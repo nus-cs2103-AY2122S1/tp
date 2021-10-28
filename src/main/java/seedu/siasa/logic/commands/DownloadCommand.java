@@ -4,9 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javafx.collections.ObservableList;
 import seedu.siasa.logic.commands.exceptions.CommandException;
@@ -19,10 +18,12 @@ public class DownloadCommand extends Command {
 
     public static final String COMMAND_WORD = "download";
 
-    public static final String CSV_FILEPATH = "data\\stats.csv";
+    public static final String CURRENT_DATE = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+    public static final String TXT_FILEPATH = "data\\stats.txt";
     public static final String MESSAGE_DOWNLOAD_SUCCESS = "File has been downloaded, you can view it at "
-            + CSV_FILEPATH;
+            + TXT_FILEPATH;
     public static final String MESSAGE_ERROR_WRITING_FILE = "There was an error saving the file.";
+    public static final String TITLE_UNDERLINE = "-----------------------";
 
 
     @Override
@@ -30,6 +31,8 @@ public class DownloadCommand extends Command {
         requireNonNull(model);
 
         int totalCommission = model.getTotalCommission();
+
+        Map<Person, Integer> numberPoliciesPerPerson = model.getNumberPoliciesPerPerson();
 
         List<Person> modifiablePersonList = new ArrayList<>(model.getFilteredPersonList());
 
@@ -51,10 +54,10 @@ public class DownloadCommand extends Command {
             }
         });
 
-        List<String> listStringForCsv = stringListBuilderForCsv(totalCommission, modifiablePersonList);
+        List<String> listStringForTxt = stringListBuilderForTxt(totalCommission, modifiablePersonList, numberPoliciesPerPerson);
 
         try {
-            writeToCsv(listStringForCsv);
+            writeToTxt(listStringForTxt);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_ERROR_WRITING_FILE);
         }
@@ -71,20 +74,38 @@ public class DownloadCommand extends Command {
         return (int) total;
     }
 
-    private List<String> stringListBuilderForCsv(int totalCommission, List<Person> sortedPersons) {
-        List<String> stringList = new ArrayList<>();
-        stringList.add("Most premium customers:");
+    private float getAvgPoliciesPerClient(Map<Person, Integer> numberPoliciesPerPerson) {
+        int countPersons = numberPoliciesPerPerson.size();
+        int countPolicies = numberPoliciesPerPerson.values()
+                .stream().mapToInt(Integer::intValue).sum();
+        return (float) countPolicies / countPersons;
+    }
 
+    private List<String> stringListBuilderForTxt(int totalCommission, List<Person> sortedPersons, Map<Person, Integer> numberPoliciesPerPerson) {
+        List<String> stringList = new ArrayList<>();
+
+        stringList.add("Statistics for " + CURRENT_DATE + "\n");
+        stringList.add("Most premium clients:\n" + TITLE_UNDERLINE);
         for (Person person : sortedPersons) {
             stringList.add(person.toString());
         }
+        stringList.add("\n");
+
+        stringList.add("Number of policies per client:\n" + TITLE_UNDERLINE);
+        numberPoliciesPerPerson.forEach((person, count) -> {
+            stringList.add(String.format("%s: %d policies", person.getName().fullName, count));
+        });
+        stringList.add("\n");
+
+        stringList.add("Average number of policies per client: "
+                + String.format("%.2f", getAvgPoliciesPerClient(numberPoliciesPerPerson)));
 
         stringList.add("Total Commission: " + centsToDollars(totalCommission));
         return stringList;
     }
 
-    private void writeToCsv(List<String> stringList) throws IOException {
-        FileWriter fileWriter = new FileWriter(CSV_FILEPATH);
+    private void writeToTxt(List<String> stringList) throws IOException {
+        FileWriter fileWriter = new FileWriter(TXT_FILEPATH);
         for (String string : stringList) {
             fileWriter.append(string);
             fileWriter.append("\n");
