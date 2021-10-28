@@ -22,7 +22,7 @@ public class CapacityTest {
     @Test
     public void isValidCapacity() {
         // null capacity
-        assertThrows(NullPointerException.class, () -> Capacity.isValidCapacity(null));
+        assertFalse(Capacity.isValidCapacity(null));
 
         // blank capacity
         assertFalse(Capacity.isValidCapacity("")); // empty string
@@ -30,12 +30,13 @@ public class CapacityTest {
 
         // invalid capacity
         assertFalse(Capacity.isValidCapacity("-1"));
-        assertFalse(Capacity.isValidCapacity("1000"));
+        assertFalse(Capacity.isValidCapacity("0"));
         assertFalse(Capacity.isValidCapacity("3.5"));
 
         // valid capacity
         assertTrue(Capacity.isValidCapacity("1"));
         assertTrue(Capacity.isValidCapacity("3"));
         assertTrue(Capacity.isValidCapacity("300"));
+        assertTrue(Capacity.isValidCapacity("1000"));
     }
 }

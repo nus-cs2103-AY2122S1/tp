@@ -42,7 +42,7 @@ public class EventAdditionalCard extends UiPart<Region> {
         date.setText(EventDate.DESC + event.getEventDate().eventDate);
         time.setText(EventTime.DESC + event.getEventTime().eventTime);
         venue.setText(Venue.DESC + event.getVenue().venue);
-        capacity.setText(Capacity.DESC + event.getCapacity().capacity);
+        capacity.setText(Capacity.DESC + event.getCapacity().inputCapacity);
         residents.setText(ResidentList.DESC + event.getResidents().getResidentsDisplay());
     }
 

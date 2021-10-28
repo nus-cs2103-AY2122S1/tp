@@ -133,6 +133,13 @@ public class Event {
     }
 
     /**
+     * Returns the number of residents currently in the event.
+     */
+    public int getResidentListSize() {
+        return this.residents.getResidentListSize();
+    }
+
+    /**
      * Returns true if both events have the same identity and data fields.
      * This defines a stronger notion of equality between two events.
      */
