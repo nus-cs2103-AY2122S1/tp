@@ -5,6 +5,9 @@ import java.util.HashMap;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
 
+/**
+ * Represents a mapping of the student's {@code Assignment} to the corresponding {@code Grade}.
+ */
 public class AssignmentGradeMap {
 
     public static final String MESSAGE_CONSTRAINTS = "Assignment and Grade map must be separated by a colon.";
@@ -26,14 +29,14 @@ public class AssignmentGradeMap {
     }
 
     /**
-     * @return A HashMap of Module and their Group mapping.
+     * @return A HashMap of {@code Assignment} and the corresponding {@code Grade}.
      */
     public HashMap<Assignment, Grade> getGrades() {
         return grades;
     }
 
     /**
-     * @return Whether the assignment grade map is empty.
+     * @return Whether the HashMap is empty.
      */
     public boolean isEmpty() {
         return grades.isEmpty();

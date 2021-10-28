@@ -5,11 +5,13 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.edrecord.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.edrecord.model.assignment.exceptions.DuplicateAssignmentException;
+import seedu.edrecord.model.name.Name;
 
 /**
  * A list of assignments that enforces uniqueness among its elements and does not allow nulls.
@@ -100,6 +102,20 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         }
 
         internalList.setAll(assignments);
+    }
+
+    /**
+     * Returns an {@code Optional} containing the assignment with the given name, if it exists.
+     */
+    public Optional<Assignment> searchAssignment(Name name) {
+        // Create dummy assignment to search by name
+        Assignment a = new Assignment(name, new Weightage("0"), new Score("0"));
+        int index = internalUnmodifiableList.indexOf(a);
+        if (index == -1) {
+            return Optional.empty();
+        } else {
+            return Optional.of(internalUnmodifiableList.get(index));
+        }
     }
 
     /**

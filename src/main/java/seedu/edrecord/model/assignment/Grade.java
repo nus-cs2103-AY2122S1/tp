@@ -18,7 +18,7 @@ public class Grade {
     private final GradeStatus status;
 
     /**
-     * Constructs an {@code Assignment}. Every field must be present and not null.
+     * Constructs a {@code Grade}. Every field must be present and not null.
      *
      * @param score  Score of the grade
      * @param status Status of the grade.
@@ -40,7 +40,7 @@ public class Grade {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Status: ").append(status);
+        builder.append("Status: ").append(status).append(", ");
         if (score.isPresent()) {
             builder.append("Score: ");
             score.ifPresent(builder::append);

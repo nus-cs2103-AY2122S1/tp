@@ -8,12 +8,12 @@ import static seedu.edrecord.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidScore(String)}
  */
 public class Score {
-    public static final String MESSAGE_CONSTRAINTS = "Assignment score should be a non-negative integer";
+    public static final String MESSAGE_CONSTRAINTS = "Assignment score should be a non-negative decimal value.";
 
     public final Double score;
 
     /**
-     * Constructs a {@code Weightage} object.
+     * Constructs a {@code Score} object.
      *
      * @param score The score.
      */
@@ -24,7 +24,7 @@ public class Score {
     }
 
     /**
-     * Returns true if a given string is a valid maxScore.
+     * Returns true if a given string is a valid score.
      *
      * @param test The string to test.
      */
