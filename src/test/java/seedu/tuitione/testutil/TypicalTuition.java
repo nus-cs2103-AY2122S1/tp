@@ -1,11 +1,11 @@
 package seedu.tuitione.testutil;
 
-import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIFTH_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIFTH_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_LESSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,19 +43,19 @@ public class TypicalTuition {
         List<Lesson> lessons = getTypicalLessons();
 
         // BENSON enrolled in MATH_S2 lesson
-        lessons.get(INDEX_SECOND_LESSON.getZeroBased())
+        lessons.get(INDEX_FOURTH_LESSON.getZeroBased())
                 .enrollStudent(students.get(INDEX_SECOND_STUDENT.getZeroBased()));
 
         // ELLE enrolled in MATH_S1 lesson
-        lessons.get(INDEX_FIFTH_LESSON.getZeroBased())
+        lessons.get(INDEX_THIRD_LESSON.getZeroBased())
                 .enrollStudent(students.get(INDEX_FOURTH_STUDENT.getZeroBased()));
 
         // FIONA enrolled in ENGLISH_S1 lesson
-        lessons.get(INDEX_FOURTH_LESSON.getZeroBased())
+        lessons.get(INDEX_SECOND_LESSON.getZeroBased())
                 .enrollStudent(students.get(INDEX_FIFTH_STUDENT.getZeroBased()));
 
         // FIONA enrolled in MATH_S1 lesson
-        lessons.get(INDEX_FIFTH_LESSON.getZeroBased())
+        lessons.get(INDEX_THIRD_LESSON.getZeroBased())
                 .enrollStudent(students.get(INDEX_FIFTH_STUDENT.getZeroBased()));
 
         for (Student student : students) {
@@ -69,8 +69,8 @@ public class TypicalTuition {
 
     private static List<Lesson> getTypicalLessons() {
         return new ArrayList<>(Arrays.asList(new LessonBuilder(SCIENCE_P2).build(),
-                new LessonBuilder(MATH_S2).build(), new LessonBuilder(PHYSICS_S2).build(),
-                new LessonBuilder(ENGLISH_S1).build(), new LessonBuilder(MATH_S1).build()));
+                new LessonBuilder(ENGLISH_S1).build(), new LessonBuilder(MATH_S1).build(),
+                new LessonBuilder(MATH_S2).build(), new LessonBuilder(PHYSICS_S2).build()));
     }
 
     public static List<Student> getTypicalStudents() {

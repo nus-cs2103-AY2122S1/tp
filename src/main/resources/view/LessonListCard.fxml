@@ -34,7 +34,7 @@
             </HBox>
             <HBox>
                 <children>
-                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="💱 Price:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text="💵 Price:" />
                     <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
                 </children>
             </HBox>

@@ -43,26 +43,26 @@ public class TypicalStudents {
             .withAddress("10th street").withGrade("S4").withRemarks("friends")
             .build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer")
-            .withPhone("9482224").withEmail("werner@example.com")
+            .withPhone("94822244").withEmail("werner@example.com")
             .withAddress("michegan ave").withGrade("S1")
             .build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz")
-            .withPhone("9482427").withEmail("lydia@example.com")
+            .withPhone("94824277").withEmail("lydia@example.com")
             .withAddress("little tokyo").withGrade("S1")
             .build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best")
-            .withPhone("9482442").withEmail("anna@example.com")
+            .withPhone("94824421").withEmail("anna@example.com")
             .withAddress("4th street").withGrade("S3")
             .withRemarks("firstRemark", "secondRemark", "thirdRemark", "fourthRemark", "averylongremarkthatpasses")
             .build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier")
-            .withPhone("8482424").withEmail("stefan@example.com")
+            .withPhone("84824241").withEmail("stefan@example.com")
             .withAddress("little india").withGrade("P1")
             .build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller")
-            .withPhone("8482131").withEmail("hans@example.com")
+            .withPhone("84821311").withEmail("hans@example.com")
             .withAddress("chicago ave").withGrade("P3")
             .build();
 
