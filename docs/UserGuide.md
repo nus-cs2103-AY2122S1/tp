@@ -126,6 +126,17 @@ Examples:
 * `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
 * `edit-applicant n/Betsy p/1234567 pos/database administrator`
 
+### Updating an applicant's status: `mark`
+
+Updates an applicant's status as specified.  
+
+Format: `mark NAME status/STATUS`
+
+* `NAME` is case-insensitive. e.g. `john doe` and `John Doe` will update the same applicant's status.
+* `STATUS` is case-insensitive. e.g. `accepted` and `ACCEPTED` will both update the applicant's status to `"Accepted"`.
+
+Examples:
+* `mark john doe status/rejected` marks the applicant `John Doe` with status `"Accepted"`.
 
 ### Deleting an applicant: `delete-applicant`
 
@@ -249,6 +260,7 @@ Action | Format, Examples
 --------|------------------
 **Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 **Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
+**Update Applicant status** | `mark NAME` <br> e.g.,  `mark john doe status/accepted`
 **Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Applicants** | `list-applicant`
 **Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
