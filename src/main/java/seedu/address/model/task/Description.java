@@ -13,12 +13,6 @@ public class Description {
     public static final Description NO_DESCRIPTION =
             new Description("No Description");
 
-    /**
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
     public final String description;
 
     /**
@@ -37,7 +31,7 @@ public class Description {
      */
     public static boolean isValidDescription(String test) {
         try {
-            return test.matches(VALIDATION_REGEX);
+            return true;
         //If there is no description, it still is considered valid.
         } catch (NullPointerException e) {
             return true;
