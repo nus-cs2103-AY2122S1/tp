@@ -59,10 +59,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label feePlaceholder;
-    @FXML
-    private Label outstandingFee;
-    @FXML
     private Label schPlaceholder;
     @FXML
     private Label school;

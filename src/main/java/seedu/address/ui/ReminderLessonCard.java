@@ -40,7 +40,7 @@ public class ReminderLessonCard extends UiPart<Region> {
         lessonId.setText(displayedIndex + ". ");
         date.setText(lesson.getDisplayDate().value);
         time.setText(lesson.getTimeRange().toString());
-        rates.setText("$" + lesson.getLessonRates().toString());
+        rates.setText(lesson.getLessonRates().toString());
         homeworkList.setManaged(!lesson.getHomework().isEmpty());
         lesson.getHomework().stream()
                 .sorted(Comparator.comparing(homework -> homework.description))
