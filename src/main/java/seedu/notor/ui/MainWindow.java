@@ -20,7 +20,13 @@ import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.group.Group;
+import seedu.notor.model.group.SubGroup;
+import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.listpanel.GroupListPanel;
+import seedu.notor.ui.listpanel.ListPanel;
+import seedu.notor.ui.listpanel.PersonListPanel;
+import seedu.notor.ui.listpanel.SubgroupListPanel;
 import seedu.notor.ui.note.GeneralNoteWindow;
 import seedu.notor.ui.note.GroupNoteWindow;
 import seedu.notor.ui.note.NoteWindow;
@@ -43,22 +49,21 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private final HelpWindow helpWindow;
-    private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private NotePane notePane;
+    private ViewPanel viewPane;
 
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     //@FXML
-    //private StackPane notePanePlaceholder;
+    //private StackPane viewPanePlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -130,8 +135,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        ListPanel<Person> listPanel = new PersonListPanel(logic.getFilteredPersonList());
+        listPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -142,8 +147,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        NotePane notePane = new NotePane();
-        //notePanePlaceholder.getChildren().add(notePane.getRoot());
+        ViewPanel viewPane = new ViewPanel();
+        //viewPanePlaceholder.getChildren().add(viewPane.getRoot());
     }
 
     /**
@@ -251,7 +256,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+        PersonListPanel listPanel = new PersonListPanel(logic.getFilteredPersonList());
+        listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+        return listPanel;
     }
 
     /**
@@ -264,6 +271,16 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            if (logic.isPersonList()) {
+                ListPanel<Person> listPanel = new PersonListPanel(logic.getFilteredPersonList());
+                listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+            } else if (logic.isSuperGroupList()) {
+                ListPanel<SuperGroup> listPanel = new GroupListPanel(logic.getFilteredSuperGroupList());
+                listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+            } else {
+                ListPanel<SubGroup> listPanel = new SubgroupListPanel(logic.getFilteredSubGroupList());
+                listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+            }
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

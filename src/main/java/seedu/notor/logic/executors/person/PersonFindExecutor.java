@@ -5,19 +5,19 @@ import static java.util.Objects.requireNonNull;
 import seedu.notor.commons.core.Messages;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.model.person.NameContainsPredicate;
+import seedu.notor.model.person.PersonContainsPredicate;
 
 /**
  * Executor for a PersonFindCommand.
  */
 public class PersonFindExecutor extends PersonExecutor {
 
-    private final NameContainsPredicate predicate;
+    private final PersonContainsPredicate predicate;
 
     /**
      * Constructor for a PersonFindExecutor instance.
      */
-    public PersonFindExecutor(NameContainsPredicate predicate) {
+    public PersonFindExecutor(PersonContainsPredicate predicate) {
         super(null);
         requireNonNull(predicate);
         this.predicate = predicate;
@@ -25,6 +25,7 @@ public class PersonFindExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
+        checkPersonList();
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

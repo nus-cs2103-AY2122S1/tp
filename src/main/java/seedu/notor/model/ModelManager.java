@@ -11,13 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.commons.core.LogsCenter;
+import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
-import seedu.notor.ui.PersonListPanel;
+import seedu.notor.ui.listpanel.PersonListPanel;
 
 /**
  * Represents the in-memory model of Notor's data.
@@ -30,8 +31,9 @@ public class ModelManager implements Model {
     private final Notor notor;
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons;
-    private final FilteredList<? extends Group> filteredGroups;
-    private boolean isPersonView = true;
+    private FilteredList<? extends Group> filteredGroups;
+    private boolean isPersonList;
+    private boolean isSuperGroupList;
     private boolean isArchiveView = false;
 
     /**
@@ -46,7 +48,9 @@ public class ModelManager implements Model {
         this.notor = new Notor(notor);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
-        filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
+        // Person view is first shown.
+        isPersonList = true;
+        isSuperGroupList = false;
     }
 
     public ModelManager() {
@@ -215,7 +219,10 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
+        // TODO: I am using levraging this method for list. Should we consider new method?
         requireNonNull(predicate);
+        isPersonList = true;
+        isSuperGroupList = false;
         filteredPersons.setPredicate(predicate);
     }
 
@@ -230,26 +237,40 @@ public class ModelManager implements Model {
         filteredGroups.setPredicate(predicate);
     }
 
-    //=========== View Change ============================================================
+    @Override
+    public void listSuperGroup() {
+        isPersonList = false;
+        isSuperGroupList = true;
+        isArchiveView = false;
+        filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
+    }
 
     @Override
     public void displayPersons() {
-        isPersonView = true;
+        isPersonList = true;
         isArchiveView = false;
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         personListPanel.setPersonList(filteredPersons);
     }
 
-    @Override
-    public void displayGroups() {
-        isPersonView = false;
+    /**
+     * Replace the List with SubGroups.
+     * @param i the Index i of the SuperGroup.
+     */
+    public void listSubGroup(Index i) {
+        isPersonList = false;
+        isSuperGroupList = false;
         isArchiveView = false;
+        // TODO: Abstract this. This method is too long.
+        filteredGroups = new FilteredList<>(this.notor.getSuperGroups().get(i.getZeroBased()).getSubGroups()
+            .asUnmodifiableObservableList());
     }
 
     @Override
     public void displayPersonArchive() {
-        isPersonView = true;
+        isPersonList = true;
+        isSuperGroupList = false;
         isArchiveView = true;
         filteredPersons = new FilteredList<>(this.notor.getPersonArchiveList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -258,19 +279,20 @@ public class ModelManager implements Model {
 
     //=========== View Check =============================================================
     @Override
-    public boolean isPersonView() {
-        return isPersonView;
+    public boolean isPersonList() {
+        return isPersonList;
     }
 
     @Override
-    public boolean isGroupView() {
-        return !isPersonView;
+    public boolean isSuperGroupList() {
+        return isSuperGroupList;
     }
 
     @Override
     public boolean isArchiveView() {
-        return isPersonView && isArchiveView;
+        return isPersonList && isArchiveView;
     }
+
 
     @Override
     public boolean equals(Object obj) {

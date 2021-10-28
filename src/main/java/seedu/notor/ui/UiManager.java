@@ -13,6 +13,7 @@ import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.commons.util.StringUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.model.Model;
+import seedu.notor.ui.listpanel.PersonListPanel;
 
 /**
  * The manager of the UI component.

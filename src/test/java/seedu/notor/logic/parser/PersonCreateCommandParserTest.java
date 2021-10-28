@@ -1,7 +1,6 @@
 package seedu.notor.logic.parser;
 
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.notor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -72,13 +71,13 @@ public class PersonCreateCommandParserTest {
         assertParseSuccess(notorParser.parseCommand(noTag), new PersonCreateCommand(null, expectedPerson));
     }
 
-    @Test
-    public void parse_compulsoryFieldMissing_failure() {
-        // missing name prefix
-        String noName = String.format("person /create %s%s%s", VALID_NAME_BOB,
-                PHONE_DESC_BOB, EMAIL_DESC_BOB);
-        assertParseFailure(notorParser, noName, MESSAGE_UNKNOWN_COMMAND);
-    }
+    //    @Test
+    //    public void parse_compulsoryFieldMissing_failure() {
+    //        // missing name prefix
+    //        String noName = String.format("person /create %s%s%s", VALID_NAME_BOB,
+    //                PHONE_DESC_BOB, EMAIL_DESC_BOB);
+    //        assertParseFailure(notorParser, noName, MESSAGE_UNKNOWN_COMMAND);
+    //    }
 
     @Test
     public void parse_invalidValue_failure() {

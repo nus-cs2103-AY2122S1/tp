@@ -37,7 +37,7 @@ public class GroupClearNoteExecutor extends GroupExecutor {
         warningWindow.show();
         // TODO: To update the if true after list is done. it is suppose to check person view.
         if (warningWindow.canContinue()) {
-            if (true) {
+            if (!model.isPersonList()) {
                 group.setNote(Note.EMPTY_NOTE);
                 return new CommandResult(String.format(MESSAGE_CLEAR_GROUP_NOTE_SUCCESS, group));
             }

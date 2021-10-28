@@ -16,6 +16,8 @@ import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Model;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
+import seedu.notor.model.group.SubGroup;
+import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.storage.Storage;
 
@@ -75,7 +77,6 @@ public class LogicManager implements Logic {
      * @throws CommandException If an error occurs during command execution.
      */
     public void executeSaveNote() throws CommandException {
-        // TODO: Update Group Display
         try {
             storage.saveNotor(model.getNotor());
         } catch (IOException ioe) {
@@ -106,6 +107,31 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public ObservableList<SuperGroup> getFilteredSuperGroupList() {
+        // TODO: Probably need to check here. This is too hacky.
+        return (ObservableList<SuperGroup>) model.getFilteredGroupList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public ObservableList<SubGroup> getFilteredSubGroupList() {
+        // TODO: Probably need to check here. This is too hacky.
+        return (ObservableList<SubGroup>) model.getFilteredGroupList();
+    }
+
+    @Override
+    public boolean isPersonList() {
+        return model.isPersonList();
+    }
+
+    @Override
+    public boolean isSuperGroupList() {
+        // TODO: BUG WHAT IF THERE IS NO ELEMENT.
+        return model.isSuperGroupList();
     }
 
     @Override

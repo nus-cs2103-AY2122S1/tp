@@ -120,12 +120,25 @@ Adds a person at the given index to a specified group.
 Format: `person (INDEX) /add (g:GROUP_NAME)`<br>
 Advanced user Format: `p (INDEX) /a (g:GROUP_NAME)`
 
-* Adds a person with the `NAME` to `GROUP_NAME`.
+* Adds a person with the `INDEX` to `GROUP_NAME`.
 
 Examples:
 
-* `p John /add Lim g:CS2103T`
-* `p Mary /a g:CS2103T`
+* `p John /add Lim g:Orbital`
+* `p Mary /a g:Orbital`
+
+### Adding a person to a subgroup: `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)`
+
+Adds a person at the given index to a specified subgroup of group.
+
+Format: `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
+Advanced user Format: `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`
+
+* Adds a person with the `INDEX` to `SUBGROUP_NAME` of `SUBGROUP_NAME`.
+
+Examples:
+* `p John /add Lim g:Orbital sg:Artemis`
+* `p Mary /a g:Orbital sg:Artemis`
 
 ### Deleting a person : `person (INDEX) /delete`
 
@@ -171,8 +184,21 @@ Advanced user Format:`p (INDEX) /r (g:GROUP_NAME)`
 * Removes an existing person at the given `INDEX` from a `GROUP_NAME`.
 
 Examples:
-* `person 1 /remove g:CS2103T`
-* `p 2 /r g:CS2103T sg:W08`
+* `person 1 /remove g:Orbital`
+* `p 2 /r g:Orbital`
+
+### Removing a person from subgroup: `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)`
+
+Removes an existing person from a subgroup.
+
+Format: `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)`<br>
+Advanced user Format:`p (INDEX) /r (g:GROUP_NAME sg:SUBGROUP_NAME)`
+
+* Removes an existing person at the given `INDEX` from a `SUBGROUP_NAME` of `GROUP_NAME`.
+
+Examples:
+* `person 1 /remove g:Orbital sg:GroupA`
+* `p 1 /r g:Orbital sg:GroupA`
 
 ### Taking notes for a person : `person (INDEX) /note`
 
@@ -221,8 +247,8 @@ Advanced user Format: `g (GROUP_NAME) /c`
 
 Examples:
 
-* `group CS2103T /create` will create a new group called CS2103T.
-* `g CS2103T /c`
+* `group Orbital /create` will create a new group called Orbital.
+* `g Orbital /c`
 
 ### Deleting a group: `group (INDEX) /delete`
 
@@ -251,8 +277,8 @@ Advanced user Format: `group (INDEX) /e [n:NEW_NAME]`
 
 Examples :
 
-* `group 1 /edit n:CS2101` will rename the group at index 1 to CS2101.
-* `g 1 /e CS2101`
+* `group 1 /edit n:ClassA` will rename the group at index 1 to ClassA.
+* `g 1 /e ClassA`
 
 ### Creating a subgroup: `group (INDEX) /create n:SUBGROUP_NAME`
 Creates a new subgroup. **This command only works when group are listed and not when subgroups are listed.**
@@ -286,47 +312,6 @@ Examples :
 * `group 1 /note` will prompt a popup window where the user can edit the notes for group at index 1.
 * `g 1 /n`
 
-### Adding tags to a group: `group (INDEX) /tag [t:TAG1,TAG2,...]`
-
-Add tags to a group.
-
-Format: `group (INDEX) /tag [t:TAG1,TAG2,...]`<br>
-Advanced user Format: `g (INDEX) /t [t:TAG1,TAG2,...]`
-
-* Add tags to a group at the index specified.
-* The tags must not have a same name with other existing tags in the same group.
-
-Examples :
-
-* `group 1 /tag t:orbital,CS2103` add tags orbital and CS2103 to group 1.
-* `g 1 /t t:orbital,CS2103`
-
-### Untag tags from a group: `group (INDEX) /untag [t:TAG1,TAG2,...]`
-
-Untag tags from a group.
-
-Format: `group (INDEX) /untag [t:TAG1,TAG2,...]`<br>
-Advanced user Format: `g (INDEX) /u [t:TAG1,TAG2,...]`
-
-* Remove tags from a group at the index specified.
-
-Examples :
-* `group 1 /untag t:orbital,CS2103` remove tags orbital and CS2103 to group 1.
-* `g 1 /ut t:orbital,CS2103`
-
-### Clear tags from a group: `group (INDEX) /cleartags`
-
-Clear tags from a group.
-
-Format: `group (INDEX) /cleartags`<br>
-Advanced user Format: `g (INDEX) /ct`
-
-* Clear all tags from a group at the index specified.
-
-Examples :
-
-* `group 1 /cleartags` clears all tags from group 1.
-* `g 1 /ct`
 
 ## Filtering with Notor
 
@@ -418,7 +403,7 @@ Examples of finding group:
 
 * `group /find g:Orbital_Team_1`
 * `g /f g:W08`
-* `group /f sg:W08 g:CS2103T`
+* `group /f sg:W08 g:Orbital`
 * `g /f sg:Artemis g:Orbital`
 
 ## Miscellaneous information
@@ -483,8 +468,10 @@ Action                    | Format                                              
 **Create**                | `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `p (NAME) /c [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
 **Edit**                  | `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`                           | `p (INDEX) /e [n:NAME] [p:phone] [e:email]`
 **Delete**                | `person (INDEX) /delete`                                                      | `p (INDEX) /d`
-**Add**                   | `person (INDEX) /add (g:GROUP_NAME) `                                         | `p (INDEX) /a (g:GROUP_NAME)`
-**Remove**                | `person (INDEX) /remove (g:GROUP_NAME) `                                      | `p (INDEX) /r (g:GROUP_NAME)`
+**Add Group**             | `person (INDEX) /add (g:GROUP_NAME) `                                         | `p (INDEX) /a (g:GROUP_NAME)`
+**Add SubGroup**          | `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME) `                        | `p (INDEX) /a (g:GROUP_NAME sg:SUBGROUP_NAME)`
+**Remove Group**          | `person (INDEX) /remove (g:GROUP_NAME) `                                      | `p (INDEX) /r (g:GROUP_NAME)`
+**Remove SubGroup**       | `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME) `                     | `p (INDEX) /r (g:GROUP_NAME sg:SUBGROUP_NAME)`
 **Note**                  | `person (INDEX) /note`                                                        | `p (INDEX) /n`
 **Clear Note**            | `person (INDEX) /clearnote`                                                   | `p (INDEX) /cn`
 **Tag**                   | `person (INDEX) /tag [t:TAG1,TAG2,...]`                                       | `p (INDEX) /t [t:TAG1,TAG2,...]`
@@ -502,7 +489,7 @@ Action                    | Format                                              
 
 Action                 | Format                                         | Short Format
 -----------------------|------------------------------------------------|---------------------------------------
-**Create Group**       | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
+**Create Group**       | `group (GROUP_NAME) /create` | `g (GROUP_NAME) /c`
 **Create Subgroup**    | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
 **Edit**               | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
 **Delete**             | `group (INDEX) /delete`                        | `g (INDEX) /d`

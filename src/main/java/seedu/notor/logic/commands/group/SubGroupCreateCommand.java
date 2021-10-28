@@ -1,7 +1,5 @@
 package seedu.notor.logic.commands.group;
 
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,10 +18,9 @@ public class SubGroupCreateCommand extends GroupCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group. "
             + "Parameters: "
             + COMMAND_WORD
-            + "GROUP "
-            + PREFIX_TAG + "TAGS... "
+            + " GROUP_NAME \n"
             + "Example: " + COMMAND_WORD
-            + "Orbital";
+            + "Team 1";
 
     private final GroupExecutor executor;
 

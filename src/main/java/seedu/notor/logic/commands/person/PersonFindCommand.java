@@ -9,7 +9,7 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonExecutor;
 import seedu.notor.logic.executors.person.PersonFindExecutor;
-import seedu.notor.model.person.NameContainsPredicate;
+import seedu.notor.model.person.PersonContainsPredicate;
 
 /**
  * Finds a person via searching their name for a given query
@@ -33,7 +33,7 @@ public class PersonFindCommand extends PersonCommand {
     /**
      * Constructor for a PersonFindCommand.
      */
-    public PersonFindCommand(NameContainsPredicate predicate) {
+    public PersonFindCommand(PersonContainsPredicate predicate) {
         super(null);
         requireNonNull(predicate);
         this.executor = new PersonFindExecutor(predicate);

@@ -30,7 +30,7 @@ public class GroupNoteExecutor extends GroupExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         // TODO: To update the if true after list is done. it is suppose to check person view.
-        if (true) {
+        if (!model.isPersonList()) {
             Group group = super.getGroup();
             return new CommandResult(generateSuccessMessage(group), false, true, false, group);
         }

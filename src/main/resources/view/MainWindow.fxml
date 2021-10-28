@@ -75,7 +75,7 @@
                   </VBox>
                   <VBox styleClass="splitpane-background">
                      <children>
-                        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
               </items>
