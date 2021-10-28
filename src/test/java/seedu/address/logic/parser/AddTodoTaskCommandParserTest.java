@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -22,7 +21,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTodoTaskCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 import seedu.address.testutil.TodoTaskBuilder;
@@ -78,10 +76,6 @@ public class AddTodoTaskCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_TASK_NAME_DESC + TASK_DESCRIPTION_DESC_PLAY
                 + TASK_TAG_DESC_FUN, TaskName.MESSAGE_CONSTRAINTS);
-
-        // invalid description
-        assertParseFailure(parser, TASK_NAME_DESC_PLAY + INVALID_DESCRIPTION_DESC,
-                Description.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, TASK_NAME_DESC_PLAY + TASK_DESCRIPTION_DESC_PLAY
