@@ -500,6 +500,8 @@ This section guides you on how to use the commands for managing the lesson fees 
 * Outstanding fee displayed in Student details is the sum of all the student's lesson's outstanding fees.
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
 #### Adding a Lesson's Outstanding Fees : `ladd`
 
 Adds outstanding fees to specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
