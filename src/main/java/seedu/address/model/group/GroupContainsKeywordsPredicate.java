@@ -1,6 +1,5 @@
 package seedu.address.model.group;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -11,26 +10,14 @@ import seedu.address.commons.util.StringUtil;
  */
 public class GroupContainsKeywordsPredicate implements Predicate<Group> {
     private final List<String> keywords;
-    private List<String> keywordsClone = new ArrayList<>();
 
     public GroupContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
-    /**
-     * Ignores some special characters in input keyword
-     */
-    private void removeSpecialCharacters() {
-        for (String keyword : keywords) {
-            String newKeyword = keyword.replaceAll("/^[\\w-]+$/", "");
-            keywordsClone.add(newKeyword);
-        }
-    }
-
     @Override
     public boolean test(Group group) {
-        removeSpecialCharacters();
-        return keywordsClone.stream()
+        return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(group.getName().name, keyword));
     }
 

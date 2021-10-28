@@ -20,6 +20,7 @@ public class FindGroupCommandParser implements Parser<FindGroupCommand> {
      */
     public FindGroupCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        trimmedArgs = trimmedArgs.replaceAll("[^a-zA-Z0-9\\s_-]", "");
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE));
