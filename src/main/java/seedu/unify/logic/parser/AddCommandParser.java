@@ -3,6 +3,7 @@ package seedu.unify.logic.parser;
 import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -14,6 +15,7 @@ import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Priority;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 
@@ -23,6 +25,9 @@ import seedu.unify.model.task.Time;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    public static final String DEFAULT_TIME = "23:59";
+    public static final String DEFAULT_PRIORITY = "LOW";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -31,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_TAG, PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -40,10 +45,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).orElse("23:59"));
+        Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).orElse(DEFAULT_TIME));
+        Priority priority = ParserUtil.parsePriority((argMultimap.getValue(PREFIX_PRIORITY).orElse(DEFAULT_PRIORITY)));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(name, time, date, tagList);
+        Task task = new Task(name, time, date, tagList, priority);
 
         return new AddCommand(task);
     }

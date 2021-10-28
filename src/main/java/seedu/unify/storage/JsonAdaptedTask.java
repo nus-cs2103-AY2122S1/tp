@@ -13,6 +13,7 @@ import seedu.unify.commons.exceptions.IllegalValueException;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Priority;
 import seedu.unify.model.task.State;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -31,22 +32,26 @@ class JsonAdaptedTask {
     private final String date;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String state;
+    private final String priority;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("time") String time,
-            @JsonProperty("date") String date,
+    public JsonAdaptedTask(@JsonProperty("name") String name,
+                           @JsonProperty("time") String time,
+                           @JsonProperty("date") String date,
                            @JsonProperty("state") String state,
+                           @JsonProperty("priority") String priority,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.time = time;
         this.date = date;
+        this.state = state;
+        this.priority = priority;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.state = state;
     }
 
     /**
@@ -58,6 +63,7 @@ class JsonAdaptedTask {
         date = source.getDate().value;
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         state = source.getState().toString();
+        priority = source.getPriority().toString();
     }
 
     /**
@@ -103,7 +109,16 @@ class JsonAdaptedTask {
             throw new IllegalValueException(State.MESSAGE_CONSTRAINTS);
         }
         final State modelState = new State(state);
-        return new Task(modelName, modelTime, modelDate, modelTags, modelState);
+
+        if (priority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, State.class.getSimpleName()));
+        }
+        if (!Priority.isValidPriority(priority)) {
+            throw new IllegalValueException(State.MESSAGE_CONSTRAINTS);
+        }
+        final Priority modelPriority = new Priority(priority);
+
+        return new Task(modelName, modelTime, modelDate, modelTags, modelState, modelPriority);
     }
 
 }

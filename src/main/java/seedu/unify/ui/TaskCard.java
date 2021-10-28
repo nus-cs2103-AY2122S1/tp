@@ -39,6 +39,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label state;
     @FXML
+    private Label priority;
+    @FXML
     private FlowPane tags;
 
 
@@ -55,9 +57,14 @@ public class TaskCard extends UiPart<Region> {
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagTaskName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));
-        String styleClass = "state-" + task.getState().toString();
-        state.getStyleClass().add(styleClass);
+
+        String stateStyleClass = "state-" + task.getState().toString();
+        state.getStyleClass().add(stateStyleClass);
         state.setText(task.getState().toString());
+
+        String priorityStyleClass = "priority-" + task.getPriority().toString();
+        priority.getStyleClass().add(priorityStyleClass);
+        priority.setText(task.getPriority().toString());
     }
 
     @Override

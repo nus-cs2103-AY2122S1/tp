@@ -48,7 +48,8 @@ public class DoneCommand extends Command {
                         taskToMark.getTime(),
                         taskToMark.getDate(),
                         taskToMark.getTags(),
-                        new State(State.ObjectState.DONE)));
+                        new State(State.ObjectState.DONE),
+                        taskToMark.getPriority()));
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.updateWeeklyTasksState();
         return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToMark));
