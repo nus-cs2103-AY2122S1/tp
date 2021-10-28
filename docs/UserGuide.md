@@ -480,6 +480,10 @@ Action                    | Format                                              
 **List Persons**          | `person /list`                                                                | `p /l`
 **List Persons in Group** | `person [INDEX] /list`                                                        | `p [INDEX] /l`
 **Find**                  | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
+**Archive**               | `person (INDEX) /archive`                                                     | `p (INDEX) /ar`
+**Archive All**           | `person /archive`                                                             | `p /ar`
+**Show Unarchived**       | `person /unarchive`                                                           | `p /uar`
+**Unarchive**             | `person (INDEX) /unarchive`                                                   | `p (INDEX) /uar`
 
 ### Group
 

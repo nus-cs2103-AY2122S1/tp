@@ -1,6 +1,7 @@
 package seedu.notor.logic.executors.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.notor.commons.core.Messages;
 import seedu.notor.logic.commands.CommandResult;
@@ -19,7 +20,8 @@ public class PersonListExecutor extends PersonExecutor {
     public CommandResult execute() throws ExecuteException {
         requireNonNull(model);
         // TODO: Should we create a new method lol in model.
-        model.updateFilteredPersonList(x -> true);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.displayPersons();
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

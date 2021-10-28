@@ -28,6 +28,11 @@ public class PersonListPanel extends ListPanel<Person> {
         super.listView.setCellFactory(listView -> new PersonListViewCell());
     }
 
+    public void setPersonList(ObservableList<Person> personList) {
+        super.listView.setItems(personList);
+        super.listView.setCellFactory(listView -> new PersonListViewCell());
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */

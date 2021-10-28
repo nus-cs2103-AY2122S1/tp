@@ -28,13 +28,14 @@ public class PersonEditCommand extends PersonCommand {
             ": Edits the details of the person identified by the index number used in the displayed person list.\n"
                     + "Existing values will be overwritten by the input values.\n";
 
-    private static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    private static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters:"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] \n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_EMAIL + "EMAIL]\n"
+            + "Example: " + PersonCommand.COMMAND_WORD
+            + " 1 /" + COMMAND_WORD + " "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

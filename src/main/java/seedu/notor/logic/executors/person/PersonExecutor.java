@@ -27,7 +27,7 @@ public abstract class PersonExecutor extends Executor {
     }
 
     protected void checkPersonList() throws ExecuteException {
-        if (!model.isPersonList()) {
+        if (!model.isPersonList() && !model.isArchiveView()) {
             throw new ExecuteException(Messages.MESSAGE_PEOPLE_NOT_LISTED);
         }
     }

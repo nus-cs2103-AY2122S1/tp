@@ -29,6 +29,7 @@ import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
+import seedu.notor.ui.listpanel.PersonListPanel;
 
 public class PersonCreateCommandTest {
 
@@ -92,6 +93,11 @@ public class PersonCreateCommandTest {
      */
     private static class ModelStub implements Model {
         @Override
+        public void setup(PersonListPanel personListPanel) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -127,6 +133,21 @@ public class PersonCreateCommandTest {
         }
 
         @Override
+        public void archivePerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void archiveAllPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unarchivePerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Person findPerson(String name) {
             return null;
         }
@@ -138,17 +159,17 @@ public class PersonCreateCommandTest {
 
         @Override
         public void addSuperGroup(SuperGroup superGroup) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addSuperGroup(String superGroup) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteSuperGroup(SuperGroup superGroup) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -173,6 +194,10 @@ public class PersonCreateCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override public boolean hasArchive(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -213,12 +238,22 @@ public class PersonCreateCommandTest {
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void displayPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void displayPersonArchive() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteSubGroup(SubGroup subGroup) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -229,6 +264,11 @@ public class PersonCreateCommandTest {
         @Override
         public boolean isSuperGroupList() {
             return false;
+        }
+
+        @Override
+        public boolean isArchiveView() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

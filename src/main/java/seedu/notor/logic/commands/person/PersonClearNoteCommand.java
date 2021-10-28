@@ -18,11 +18,11 @@ public class PersonClearNoteCommand extends PersonCommand {
     public static final String COMMAND_WORD = "clearnote";
     public static final List<String> COMMAND_WORDS = Arrays.asList("clearnote", "cn");
 
-    private static final String COMMAND_DESCRIPTION = ": Clears the note of a person in notor.\n";
+    private static final String COMMAND_DESCRIPTION = ": Clears the notes of a person in notor.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
-            + "Parameters: none"
+            + "Parameters: none\n"
             + "Example: "
             + PersonCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 

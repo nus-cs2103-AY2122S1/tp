@@ -255,6 +255,12 @@ public class MainWindow extends UiPart<Stage> {
         return true;
     }
 
+    public PersonListPanel getPersonListPanel() {
+        PersonListPanel listPanel = new PersonListPanel(logic.getFilteredPersonList());
+        listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+        return listPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *

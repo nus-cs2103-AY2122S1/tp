@@ -8,18 +8,15 @@ import java.util.List;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.logic.executors.person.PersonDeleteExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
+import seedu.notor.logic.executors.person.PersonUnarchiveExecutor;
 
-/**
- * Deletes a person identified using its displayed index from Notor.
- */
-public class PersonDeleteCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "delete";
-    public static final List<String> COMMAND_WORDS = Arrays.asList("delete", "d");
+public class PersonUnarchiveCommand extends PersonCommand {
+    public static final String COMMAND_WORD = "unarchive";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("unarchive", "uar");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Deletes the person identified by the index number used in the displayed person list.\n";
+            ": Unarchives the person identified by the index number used in the displayed person archive list.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
@@ -30,14 +27,14 @@ public class PersonDeleteCommand extends PersonCommand {
     private final PersonExecutor executor;
 
     /**
-     * Constructor for a PersonDeleteCommand.
+     * Constructor for a PersonUnarchiveCommand.
      *
-     * @param index Index of the person to be deleted.
+     * @param index Index of the person to be unarchived.
      */
-    public PersonDeleteCommand(Index index) {
+    public PersonUnarchiveCommand(Index index) {
         super(index);
         requireNonNull(index);
-        this.executor = new PersonDeleteExecutor(index);
+        this.executor = new PersonUnarchiveExecutor(index);
     }
 
     @Override
@@ -48,7 +45,7 @@ public class PersonDeleteCommand extends PersonCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PersonDeleteCommand // instanceof handles nulls
-                && executor.equals(((PersonDeleteCommand) other).executor)); // state check
+                || (other instanceof PersonUnarchiveCommand // instanceof handles nulls
+                && executor.equals(((PersonUnarchiveCommand) other).executor)); // state check
     }
 }
