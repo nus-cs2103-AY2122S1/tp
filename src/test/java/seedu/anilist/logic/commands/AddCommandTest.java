@@ -22,6 +22,7 @@ import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.ReadOnlyUserPrefs;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Status;
+import seedu.anilist.model.stats.Stats;
 import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.ui.TabOption;
 
@@ -152,6 +153,16 @@ public class AddCommandTest {
 
         @Override
         public void updateTabOptionsAnimeList(Predicate<Anime> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateUserStats() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Stats getUserStats() {
             throw new AssertionError("This method should not be called.");
         }
 

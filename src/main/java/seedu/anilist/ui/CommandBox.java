@@ -53,6 +53,20 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Disables the command text field
+     */
+    public void disableCommandTextField() {
+        commandTextField.setDisable(true);
+    }
+
+    /**
+     * Enables the command text field
+     */
+    public void enableCommandTextField() {
+        commandTextField.setDisable(false);
+    }
+
+    /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {

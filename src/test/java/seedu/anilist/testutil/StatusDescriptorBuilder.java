@@ -4,7 +4,7 @@ import seedu.anilist.logic.commands.UpdateStatusCommand;
 import seedu.anilist.model.anime.Status;
 
 /**
- * A utility class to help with building EditAnimeDescriptor objects.
+ * A utility class to help with building StatusDescriptor objects.
  */
 public class StatusDescriptorBuilder {
 

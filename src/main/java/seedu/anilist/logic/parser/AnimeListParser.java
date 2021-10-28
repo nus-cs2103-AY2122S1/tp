@@ -19,6 +19,7 @@ import seedu.anilist.logic.commands.GenreListCommand;
 import seedu.anilist.logic.commands.HelpCommand;
 import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.logic.commands.RenameCommand;
+import seedu.anilist.logic.commands.StatsCommand;
 import seedu.anilist.logic.commands.UpdateEpisodeCommand;
 import seedu.anilist.logic.commands.UpdateStatusCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
@@ -77,6 +78,9 @@ public class AnimeListParser {
         case GenreListCommand.COMMAND_WORD:
             return new GenreListCommand();
 
+        case StatsCommand.COMMAND_WORD:
+            return new StatsCommand();
+
         case UpdateEpisodeCommand.COMMAND_WORD:
             return new UpdateEpisodeCommandParser().parse(arguments);
 
@@ -98,9 +102,8 @@ public class AnimeListParser {
      * @param cmdInProgress the command currently in progress
      * @param userInput full user input string
      * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseConfirmationCommand(Command cmdInProgress, String userInput) throws ParseException {
+    public Command parseConfirmationCommand(Command cmdInProgress, String userInput) {
         String cmdWord = userInput.trim();
         //Extendable to future commands that require confirmation
         switch (cmdWord) {

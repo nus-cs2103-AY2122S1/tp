@@ -228,15 +228,13 @@ regular filter.
 
 **Aspect: How find executes:**
 
-* **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and
-  resets after each search.
+* **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and resets after each search.
     * Pros: Allow for search with multiple spaces in between, allow for searching within tabs.
     * Cons: Complicated to implement.
 
 * **Alternative 2:** Search each keyword split by whitespace. Resets tab after each search.
     * Pros: Less complicated and less coupling.
-    * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow
-      searching within tabs.
+    * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow searching within tabs.
 
 ### Themes Feature
 
@@ -254,6 +252,7 @@ will replace the invalid css file specification in `preferences.json`.
 The `Genre` command allows the user to specify any `Genre` for an `Anime`, and stores it in a `Set` in the `Anime`.
 However, the list of `Genre` is fixed and the user cannot modify the `GenreList`.<br>
 The user can only add or delete a `Genre` from an `Anime` if the `Genre` is in the `GenreList`
+
 * Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
 * Cons: Inconvenient for the user, as user can only use a `Genre` if it is in the `GenreList`.
 
@@ -303,7 +302,6 @@ Given below is a MSS of an example usage scenario of a user adding a `Genre` to 
 **Aspect: How to implement `GenreList`**
 * `GenreList` as a `HashSet`
     * Pros: Prevents duplication, easy to implement.
-
 
 ## **Glossary, Naming Conventions**
 
@@ -679,8 +677,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC13 - Find anime by name and genre**
 
 1. User requests to find anime based on some name and genre
-2. AniList shows a list of anime filtered based on these criteria and the current
-   tab
+2. AniList shows a list of anime filtered based on these criteria and the current tab
+
 
    Use case ends
 
