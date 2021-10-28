@@ -26,7 +26,7 @@ public class InterviewContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
-                        person.getInterview().get().displayTime(), keyword));
+                        person.getInterview().orElse(Interview.EMPTY_INTERVIEW).displayTime(), keyword));
     }
 
 
