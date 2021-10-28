@@ -165,7 +165,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleThemeChange() {
-       themeManager.changeTheme(primaryStage, themeButton);
+        themeManager.changeTheme(primaryStage, themeButton);
     }
 
     void show() {
