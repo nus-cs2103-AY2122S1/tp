@@ -62,7 +62,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
         requireNonNull(lesson);
         for (Student student : students) {
             requireNonNull(student);
-            if (!lesson.containsStudent(student)) {
+            if (!lesson.hasStudent(student)) {
                 return true;
             }
         }
@@ -102,7 +102,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
         for (Student student : students) {
             requireNonNull(student);
             lesson.removeStudent(student);
-            student.quitsLesson(lesson);
+            student.removeLesson(lesson);
         }
     }
 

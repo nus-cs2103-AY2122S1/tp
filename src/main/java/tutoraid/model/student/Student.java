@@ -1,5 +1,6 @@
 package tutoraid.model.student;
 
+import java.util.List;
 import java.util.Objects;
 
 import tutoraid.commons.util.CollectionUtil;
@@ -36,6 +37,15 @@ public class Student {
         this.progressList = progressList;
         this.paymentStatus = paymentStatus;
         this.lessons = lessons;
+    }
+
+    public static void updateStudentLessonLink(List<Student> studentList, Lesson lessonToEdit, Lesson editedLesson) {
+        for (Student student : studentList) {
+            if (student.hasLesson(lessonToEdit)) {
+                student.removeLesson(lessonToEdit);
+                student.addLesson(editedLesson);
+            }
+        }
     }
 
     public StudentName getStudentName() {
@@ -78,11 +88,11 @@ public class Student {
         return progressList.deleteLatestProgress();
     }
 
-    public void attendsLesson(Lesson toAttend) {
+    public void addLesson(Lesson toAttend) {
         lessons.addLesson(toAttend);
     }
 
-    public void quitsLesson(Lesson toQuit) {
+    public void removeLesson(Lesson toQuit) {
         lessons.deleteLesson(toQuit);
     }
 
