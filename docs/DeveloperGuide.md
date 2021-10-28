@@ -223,7 +223,7 @@ Step 2. The user executes `find -n Alex` command to find anyone whose name could
 
 Step 3. If the parameters entered by the user is valid, the application will retrieve any `Person` that matches the keywords given. The person list reference currently encapsulated by the `FilteredList` will then be filtered based on whether a person has an attribute that matches the keywords. The updated `FilteredList` is then shown to the user with all matching persons via the `PersonListPanel`. Else, ContactSh will display an error message indicating that the user did not type in the parameters correctly.
 
-The following sequence diagram show how the view task list operation works:
+The following sequence diagram show how the find operation works:
 
 ![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png)
 
