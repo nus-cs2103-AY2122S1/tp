@@ -73,7 +73,7 @@ public class AddTagCommandParserTest {
     @Test
     public void parse_tagOnlySpecified_success() {
         Index targetIndex = null;
-        String validTagString = TAG_DESC_FRIEND;
+        String validTagString = "all" + TAG_DESC_FRIEND;
         Set<Tag> validTag = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_FRIEND)));
 
         AddTagCommand expectedCommand = new AddTagCommand(targetIndex, validTag);
