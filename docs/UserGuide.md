@@ -345,23 +345,25 @@ Format: `exit`
 ### Basic Management of Staff Schedules
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The current week refers to the week of the monday before the current date until the sunday after the current date. 
+The current week refers to a week from monday to sunday which includes today's date.  
+An example would be if 27/10/2021 were the date we were looking at (a wednesday),
+the range would be from 25/10/2021 to 31/10/2021.
 </div>
 
 
 #### Viewing schedule for the week: `change`
 
-The schedule for this week is shown under the schedule tab by default. The week
+The schedule for the current week is shown under the schedule tab by default. The week
 can be changed using the `change` command.
 
  * Takes in a single date input to translate into a week.
  * The date is in `YYYY-MM-DD`
 
-Formats:
-`change [da/DATE]`  
+Format:  
+`change da/DATE`    
 
 Examples:  
-`change da/2021-12-28`
+`change da/2021-12-28`  
 
 
 #### Viewing schedule of staff(s): `viewSchedule`
@@ -389,7 +391,7 @@ Finds all the staff working at a particular shift. The shift can be specified ei
 
 * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
 * The DAY entry is not case sensitive.
-* If no date input is provided the shift is viewed for this week.
+* If no date input is provided the shift is viewed for current week.
 * If only one date input is provided, the shift is viewed for seven days after the date.
 
 Formats:  
@@ -415,7 +417,7 @@ Adds a time period where the staff is working to the staff’s schedule.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 * The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
   10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
-* If no date input is provided, this week is taken as default.
+* If no date input is provided, current week is taken as default.
 * If only one date input is provided, the shift added is to the next date that the shift is at. For instance, 
   if the shift is on a 1/10/2021, a monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
 * If the shift is not in the period provided, the program will do nothing.
@@ -432,7 +434,7 @@ Examples:
 #### Swapping shifts: `swapShift`
 Swaps shifts between 2 staffs. The 2 staffs are identified using their names.
 
-* If no date input is provided, this week is taken as default.
+* If no date input is provided, current week is taken as default.
 * If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
@@ -452,7 +454,7 @@ Note:
 
 Updates the start time and end time of a specific shift of a specific staff.
 
-* If no date input is provided, this week is taken as default.  
+* If no date input is provided, current week is taken as default.  
 * If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
@@ -473,7 +475,7 @@ Examples:
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
-* If no date input is provided, this week is taken as default.
+* If no date input is provided, current week is taken as default.
 * If only one date input is provided, it assumes that the period is for the seven days after the date.
 * If the shift to delete is not in the input date range, the program will do nothing.
 
@@ -502,8 +504,9 @@ Action | Format, Examples
 **Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **View shift** | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
-**Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END_DATE]`
-**Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END_DATE]`
+**Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
+**Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [da/END_DATE]`
+**Change schedule** | `change da/START_DATE`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`

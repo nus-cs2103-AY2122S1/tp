@@ -20,7 +20,7 @@ public class SchedulePeriodChangeCommand extends Command {
             + "YYYY-MM-DD format.\n\n"
             + "Parameters:\n"
             + PREFIX_DATE + "DATE"
-            + "e.g. " + COMMAND_WORD + " " + PREFIX_DATE + "2021-12-25";
+            + "Examples:\n" + COMMAND_WORD + " " + PREFIX_DATE + "2021-12-25";
 
     private final Period period;
 

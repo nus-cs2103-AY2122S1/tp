@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.DATE_RANGE_INPUT;
 import static seedu.address.commons.core.Messages.SHIFT_PERIOD_PARSING_DEFAULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -42,7 +43,9 @@ public class DeleteShiftCommand extends Command {
             + PREFIX_DAY_SHIFT + "monday-1" + "\n"
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " Alex Yeoh "
-            + PREFIX_DAY_SHIFT + "TUESDAY-0";
+            + PREFIX_DAY_SHIFT + "TUESDAY-0"
+            + PREFIX_DATE + "2021-01-01" + " "
+            + PREFIX_DATE + "2021-01-05";
 
     public static final String MESSAGE_DELETE_SHIFT_SUCCESS = "Shift deleted from the schedule of %s: %s, %s.";
     public static final String MESSAGE_SHIFT_DOESNT_EXIST = "The shift that you are trying to delete does not exist!";
