@@ -5,34 +5,46 @@
 
 ### Introduction
 
-* Academy Directory (AD) is a desktop app for CS1101S tutors to manage students’
-  contact, grades, tutorial attendance, and assignment completion.
-  It is optimized primarily for usage in teaching CS1101S - Programming Methodology I, at the National University of Singapore.<br>
+* Academy Directory (AD) is a desktop appplication for CS1101S tutors (or Avengers) to manage students’ personal
+  contact, grades, tutorial attendance, and assignment completion, as well as visualizing and manipulating statistics for tutoring purposes.
+  It is optimized primarily for usage in teaching CS1101S - Programming Methodology I - at the National University of Singapore.<br>
 
-* The project simulates an ongoing software project for a desktop application used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC)
-    than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-  * It is optimized for CLI usage and suitable to fast typists.
+* This project is developed with the following discretions:
+  * It comes with a detailed User Guide and Developer Guide, as well as sufficient and comprehensive software testing for Quality Assurance purposes.
+  * It is optimized for CLI usage and suitable to fast typists, while at the same time having a highly interactive and stylized GUI for slow typers.
+  * It has a wide range of features, of different categories, for usage in recording and analyzing student data.
 
-### Feature List (for version 1.2)
+![Ui](docs/images/Ui.png)
+
+### Site Map
+
+* To find out about how to use Academy Directory, [view User Guide here](https://ay2122s1-cs2103t-t15-3.github.io/tp/UserGuide.html)
+* To find out about how Academy Directory was created and the various software engineering principles behind it, [view Developer Guide here](https://ay2122s1-cs2103t-t15-3.github.io/tp/DeveloperGuide.html)
+
+### Feature List (As of Version 1.3)
 1. Student
     * Add a student's information
     * Edit a student's information
     * Delete a student's information
+    * Tag a student
+    * Get student's details
+    * Find a student through filtering
 2. Assessment
-    * Add an assessment
-    * Add the score/grade that the student achieved for a particular assessment
-3. Studio
-    * Add a student's attendance for studio sessions
-    * Add a student's studio participation marks
-4. Retrieve
-    * Find specific information tagged to a student
-5. Help
-    * List out available commands
-    * Display the input format for the individual commands
-
-![Ui](docs/images/Ui.png)
+    * Add a grade for student's assessment
+    * Edit student attendance of a studio session
+    * Edit student participation mark of a studio session
+4. Visualizing data
+    * View student information
+    * Show all grades of students
+    * Visualize students' grade with box-plot diagram
+    * Sort a student by metric
+5. Others
+    * List all students
+    * Clear all entry
+    * Undo and redo changes
+    * View Help
+    * View commit history
+    * Revert commit
 
 ### Acknowledgement
 
