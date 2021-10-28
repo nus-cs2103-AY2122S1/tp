@@ -28,18 +28,18 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="orderId" styleClass="cell_big_label" text="\$SOXXX" />
-                  <Label fx:id="customer" styleClass="cell_big_label" text="\$Customer" />
+                <Label fx:id="orderLabel" styleClass="cell_big_label" text="\$label" />
             </HBox>
-              <CheckBox fx:id="isComplete" disable="true" mnemonicParsing="false" selected="true" HBox.hgrow="NEVER" />
             </children>
          </HBox>
-         <Label fx:id="orderLabel" text="\$Label" />
+         <Label fx:id="orderId"/>
+        <Label fx:id="customer" styleClass="cell_small_label" text="\$Customer" />
       <HBox spacing="5.0">
             <children>
             <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                 <children>
                     <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+                    <CheckBox fx:id="isComplete" disable="true" mnemonicParsing="false" selected="true" HBox.hgrow="NEVER" />
                 </children>
             </HBox>
                <Label fx:id="amount" text="\$$$" />
