@@ -10,7 +10,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import seedu.address.model.task.Task;
 
 /**
@@ -27,7 +26,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Text taskName;
+    private Label taskName;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -50,7 +49,7 @@ public class TaskCard extends UiPart<Region> {
                 vbox.widthProperty(), vbox.paddingProperty()));
 
         // Sets width property of Text to be dependent on VBox's width and padding property.
-        taskName.wrappingWidthProperty().bind(Bindings.createDoubleBinding(()->
+        taskName.maxWidthProperty().bind(Bindings.createDoubleBinding(()->
                 vbox.getWidth() - vbox.getPadding().getLeft() - vbox.getPadding().getRight() - value,
                 vbox.widthProperty(), vbox.paddingProperty()));
 
