@@ -22,10 +22,8 @@ public class VisualizePositionCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays a visual representation of a position. "
-            + "Parameters: "
-            + PREFIX_TITLE + "TITLE "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TITLE + "software engineer ";
+            + "Parameters: " + "TITLE " + "\n"
+            + "Example: " + COMMAND_WORD + " " + "software engineer ";
 
     public static final String MESSAGE_SUCCESS = "Position chart displayed: %1$s";
 
