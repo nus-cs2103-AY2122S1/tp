@@ -44,6 +44,7 @@ public class Score implements Comparable<Score> {
      * @return 0 if both scores are equal, a value less than 0 if this score is less than the other score,
      * a value greater than 0 if this score is numerically greater than the other score.
      */
+    @Override
     public int compareTo(Score other) {
         return score.compareTo(other.score);
     }
