@@ -66,7 +66,6 @@ public class PersonCard extends UiPart<Region> {
         if (!person.getNote().equals(Note.EMPTY_NOTE)) {
             note.setText(person.getNote().getNoEmptyLineNote());
             noteLastModified.setText(person.getNoteSavedDate());
-            noteLastModified.setTextAlignment(TextAlignment.CENTER);
         } else {
             vBox.setManaged(false);
             note.setManaged(false);
