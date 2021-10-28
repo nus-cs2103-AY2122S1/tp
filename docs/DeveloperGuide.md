@@ -161,7 +161,27 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### 
+### Find Command
+
+The find command can be executed for two main features in tApp: students and groups.
+
+#### Implementation
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+In this example, we explore the `findStudent` command.
+
+1. The user executes a `findStudent alex ber` command to find students whose names contain the name word `alex` or `ber`.
+1. `LogicManager` handles this command by calling its `execute(String)` method.
+1. `LogicManager` then calls and passes this command to `AddressBookParser` to parse the command through its `parseCommand(String)` method.
+1. The address
+
+The above process is shown in the following sequence diagram:
+
+![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
+
+ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+#### Design Consideration
 
 
 --------------------------------------------------------------------------------------------------------------------
