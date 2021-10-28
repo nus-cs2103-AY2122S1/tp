@@ -51,4 +51,14 @@ public class ParentContactTest {
         assertTrue(ParentContact.isValidPhone("83121534")); //PH that starts with 8 and is 8 digits long
         assertTrue(ParentContact.isValidPhone("98765432")); //PH that starts with 9 and is 8 digits long
     }
+
+    @Test
+    public void isValidEquals() {
+        ParentContact test1 = new ParentContact("91234567");
+        ParentContact copyTest1 = new ParentContact("91234567");
+        ParentContact test2 = new ParentContact("91234568");
+        assertTrue(test1.equals(test1));
+        assertTrue(test1.equals(copyTest1));
+        assertFalse(test1.equals(test2));
+    }
 }
