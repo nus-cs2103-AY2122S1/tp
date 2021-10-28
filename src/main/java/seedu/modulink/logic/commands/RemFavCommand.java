@@ -1,9 +1,5 @@
 package seedu.modulink.logic.commands;
 
-import static seedu.modulink.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.modulink.commons.core.Messages;
 import seedu.modulink.model.Model;
@@ -46,9 +42,8 @@ public class RemFavCommand extends Command {
             }
         }
         // included this so the list will be properly updated
-        Predicate<Person> updatePredicate = unused -> false;
-        model.updateFilteredPersonList(updatePredicate);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.refreshFilteredPersonList();
+
         if (noPersonFound) {
             return new CommandResult(Messages.MESSAGE_NO_SUCH_ID_FOUND);
         } else {
