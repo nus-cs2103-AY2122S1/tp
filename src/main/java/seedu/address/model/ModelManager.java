@@ -302,4 +302,17 @@ public class ModelManager implements Model {
         }
         return stringBuilder.toString();
     }
+
+    @Override
+    public void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment) {
+        requireAllNonNull(appointmentToEdit, editedAppointment);
+
+        schedule.setAppointment(appointmentToEdit, editedAppointment);
+    }
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return schedule.contains(appointment);
+    }
 }

@@ -26,8 +26,11 @@ public class EditAppCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
-        EditAppCommand editAppCommand = new EditAppCommand(outOfBoundIndex, new Address(VALID_ADDRESS_AMY),
-                VALID_TIME_PERIOD, "description");
+        EditAppCommand.EditAppDescriptor editAppDescriptor = new EditAppCommand.EditAppDescriptor();
+        editAppDescriptor.setLocation(new Address(VALID_ADDRESS_AMY));
+        editAppDescriptor.setTimePeriod(VALID_TIME_PERIOD);
+        editAppDescriptor.setDescription("description");
+        EditAppCommand editAppCommand = new EditAppCommand(outOfBoundIndex, editAppDescriptor);
 
         assertCommandFailure(editAppCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }

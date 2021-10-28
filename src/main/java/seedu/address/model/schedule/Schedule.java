@@ -133,4 +133,12 @@ public class Schedule implements Iterable<Appointment>, ReadOnlySchedule {
     public ObservableList<Appointment> getSchedule() {
         return appointmentList;
     }
+
+    public void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment) {
+        requireNonNull(appointmentToEdit);
+        requireNonNull(editedAppointment);
+
+        appointmentList.remove(appointmentToEdit);
+        appointmentList.add(editedAppointment);
+    }
 }
