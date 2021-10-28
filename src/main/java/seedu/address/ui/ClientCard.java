@@ -80,7 +80,7 @@ public class ClientCard extends UiPart<Region> {
         disposableIncome.setText(INCOME_ICON + transformEmptyRepresentation(client.getDisposableIncome().value));
         currentPlan.setText(PLAN_ICON + transformEmptyRepresentation(client.getCurrentPlan().toString()));
         lastMet.setText(LASTMET_ICON + transformEmptyRepresentation(client.getLastMet().toString()));
-        nextMeeting.setText(NEXTMEETING_ICON + transformEmptyRepresentation(client.getNextMeeting().toString()));
+        nextMeeting.setText(NEXTMEETING_ICON + client.getNextMeeting().toString()); // has empty representation
         client.getTags().stream()
             .sorted(Comparator.comparing(Tag::getName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.getName())));
