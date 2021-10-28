@@ -70,15 +70,15 @@ If you are familiar with Unix commands, this is definitely for you!
 
 ## <a name="general-features"></a>1. General Features
 
-### <a name="view-help"></a>1.1 View Help: `help`
+### <a name="exit"></a>1.1 Exit: `exit` or F1 on keyboard
+
+Exits ProgrammerError and closes the GUI.
+
+### <a name="view-help"></a>1.2 View Help: `help` or F2 on keyboard
 
 Shows a message explaining how to access the help page.
 
 ![help message](images/commands/HelpCommand/help.png)
-
-### <a name="exit"></a>1.2 Exit: `exit`
-
-Exits ProgrammerError and closes the GUI.
 
 ### <a name="view-dashboard"></a>1.3 Dashboard: `dashboard`
 
@@ -99,12 +99,12 @@ If no data present, fills it with sample data. Otherwise, throws an error messag
 Purges all pre-existing sample data to start adding your own data or purge the user data. 
 Clears all data in PE.
 
-### <a name="download-data"></a>2.3 Download Data `download`
+### <a name="download-data"></a>2.3 Download Data `download` or F3 on keyboard
 
 All current students' data can be downloaded to a CSV file. The TA will need to select the directory to download the
 file to.
 
-### <a name="upload-data"></a>2.4 Upload Data: `upload`
+### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
 
 Uploads student data (student ID, class ID, name, email) via a CSV file.
 
@@ -181,6 +181,16 @@ Examples:
 ### <a name="show-student"></a>3.5 Show Student Details: `show`
 
 Shows a particular student's details including their scores for each lab.
+
+The student particular and lab results will be updated if other commands modify their fields.
+
+Format: `show <INDEX_IN_LIST>`
+
+![UI](images/commands/ShowCommand/show.png)
+
+Example:
+
+- `show 1`: Shows the student particular and lab results of the student at index 1.
 
 ## <a name="lab-features"></a>4. Lab Features
 
