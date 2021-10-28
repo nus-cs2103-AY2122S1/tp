@@ -113,13 +113,6 @@ public class TypicalItems {
     }
 
     /**
-     * Returns a list of transaction containing all typical items in {@code getTypicalItems()}
-     */
-    public static TransactionRecord getTypicalTransaction() {
-        return new TransactionRecord(getTypicalItems());
-    }
-
-    /**
      * Returns an item with random name and id.
      * Used as unexisting item in tests.
      */

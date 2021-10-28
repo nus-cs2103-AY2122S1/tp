@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.DONUT;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
+import static seedu.address.testutil.TypicalOrders.getTypicalTransaction;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -249,10 +250,10 @@ public class InventoryTest {
         Order order = TypicalOrders.getTypicalOrder();
         TransactionRecord transaction = typicalInventory.transactOrder(order);
 
-        TransactionRecord expectedTransaction = new TransactionRecord(TypicalItems.getTypicalItems());
+        TransactionRecord expectedTransaction = getTypicalTransaction();
 
-        // Use hasSameItems() to get equivalence of internal list of items only.
-        assertTrue(transaction.hasSameItems(expectedTransaction));
+        // Test items are the same
+        assertEquals(transaction.getOrderItems(), expectedTransaction.getOrderItems());
     }
 
     /**

@@ -4,6 +4,7 @@ import java.util.List;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.TransactionRecord;
 
 public class TypicalOrders {
 
@@ -45,5 +46,12 @@ public class TypicalOrders {
                         .withId(String.valueOf(164582))
                         .withCount(String.valueOf(10))
                         .withTags("baked").build()));
+    }
+
+    /**
+     * Returns a list of transaction containing all typical items in {@code getTypicalItems()}
+     */
+    public static TransactionRecord getTypicalTransaction() {
+        return new TransactionRecord(getTypicalOrder());
     }
 }
