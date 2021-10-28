@@ -87,10 +87,10 @@ Format: `add {name} id/{id number} c/{count} cp/{cost price} sp/{sell price}`
 Flag    |  Argument    | Description
 --------|--------------|-------------
 &nbsp;  | name          | name of the item to add.
-`/id`   | id number     | Id number of item to add.
-`/c`    | count         | Quantity of the item to add.
-`/cp`   | cost price    | Cost price of the item to add.
-`/sp`   | sell price    | Sell price of the item to add.
+`id/`   | id number     | Id number of item to add.
+`c/`    | count         | Quantity of the item to add.
+`cp/`   | cost price    | Cost price of the item to add.
+`sp/`   | sell price    | Sell price of the item to add.
 
 Examples:
 
@@ -154,10 +154,10 @@ Flag    |  Argument    | Description
 --------|--------------|-------------
 &nbsp;  | index         | index of the item to edit.
 `n/`    | name          | new name for the item.
-`/id`   | id number     | new id number for the item.
-`/cp`   | cost price    | new cost price for the item.
-`/sp`   | sell price    | new sell price for the item.
-`/t`    | tag           | new tag for the item.
+`id/`   | id number     | new id number for the item.
+`cp/`   | cost price    | new cost price for the item.
+`sp/`   | sell price    | new sell price for the item.
+`t/`    | tag           | new tag for the item.
 
 - Count cannot be edited
 
