@@ -15,8 +15,8 @@ import java.time.format.ResolverStyle;
 public class Birthday {
 
     public static final String MESSAGE_CONSTRAINTS = "Birthdays should come in the form of ddMMyyyy";
-    public static final String MESSAGE_INVALID_DATE = "Birthday is not a valid date";
     public static final String MESSAGE_BIRTHDAY_IN_FUTURE = "Birthday should not be a future date";
+    public static final String MESSAGE_INVALID_DATE = "Birthday is not a valid date. " + MESSAGE_CONSTRAINTS;
     public static final String VALIDATION_REGEX = "\\d{8}";
     private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("ddMMuuuu");
     public final LocalDate birthdate;

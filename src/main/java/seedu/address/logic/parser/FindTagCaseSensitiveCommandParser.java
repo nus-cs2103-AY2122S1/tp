@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
@@ -28,7 +27,7 @@ public class FindTagCaseSensitiveCommandParser implements Parser<FindTagCaseSens
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCaseInsensitiveCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCaseSensitiveCommand.MESSAGE_USAGE));
         }
         try {
             List<Tag> tagKeywords = Arrays.stream(trimmedArgs.split("\\s+"))

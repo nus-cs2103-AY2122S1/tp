@@ -9,11 +9,12 @@ import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
 public class FindTagCaseSensitiveCommand extends FindTagCommand {
 
     public static final String COMMAND_WORD = "findTagC";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified tags (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: TAG [MORE_TAGS]...\n"
+    public static final String COMMAND_DESCRIPTION = "Finds all persons whose names contain any of "
+            + "the specified tags (case-sensitive) and displays them as a list with index numbers.\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: TAG [MORE_TAGS]...\n"
             + "Example: " + COMMAND_WORD + " friend NUS";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     public FindTagCaseSensitiveCommand(PersonTagsContainsCaseSensitiveTagsPredicate predicate) {
         super(predicate);
