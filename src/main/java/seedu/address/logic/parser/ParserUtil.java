@@ -21,7 +21,13 @@ import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Availability;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TodayAttendance;
+import seedu.address.model.person.TotalAttendance;
 import seedu.address.model.sort.SortOrder;
 import seedu.address.model.tag.Tag;
 
@@ -50,6 +56,12 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses a {@code String todayAttendance} into a {@code TodayAttendance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code todayAttendance} is invalid.
+     */
     public static TodayAttendance parseTodayAttendance(String todayAttendance) throws ParseException {
         String trimmedTodayAttendance = todayAttendance.trim();
         if (!StringUtil.isValidBooleanValue(trimmedTodayAttendance)) {
@@ -58,6 +70,12 @@ public class ParserUtil {
         return new TodayAttendance(Boolean.parseBoolean(trimmedTodayAttendance));
     }
 
+    /**
+     * Parses a {@code String totalAttendance} into a {@code TotalAttendance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code totalAttendance} is invalid.
+     */
     public static TotalAttendance parseTotalAttendance(String totalAttendance) throws ParseException {
         String trimmedTotalAttendance = totalAttendance.trim();
         if (!StringUtil.isNonNegativeUnsignedInteger(trimmedTotalAttendance)) {

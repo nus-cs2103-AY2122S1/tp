@@ -182,8 +182,8 @@ public class StringUtilTest {
 
     @Test
     public void isValidBooleanValue_invalidInputs_returnsFalse() {
-        assertFalse(StringUtil.isValidBooleanValue("f"));
+        assertFalse(StringUtil.isValidBooleanValue(" false "));
         assertFalse(StringUtil.isValidBooleanValue("1"));
-        assertFalse(StringUtil.isValidBooleanValue("@"));
+        assertFalse(StringUtil.isValidBooleanValue("t rue"));
     }
 }

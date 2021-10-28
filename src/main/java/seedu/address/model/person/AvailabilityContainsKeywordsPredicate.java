@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Person}'s {@code Availability} matches any of the availability keywords given.
+ */
 public class AvailabilityContainsKeywordsPredicate implements Predicate<Person> {
     private final List<Availability> availability;
 

@@ -93,6 +93,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
             return this;
         }
 
+        /**
+         * Builds a {@code PersonMatchesKeywordsPredicate} to be used in {@code FindMemberCommand}
+         */
         public PersonMatchesKeywordsPredicate build() {
             return new PersonMatchesKeywordsPredicate(name, phone, tags, availability,
                     todayAttendance, totalAttendance, predicate);

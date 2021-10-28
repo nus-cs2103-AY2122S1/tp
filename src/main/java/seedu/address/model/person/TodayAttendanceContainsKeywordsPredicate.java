@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-
 /**
  * Tests that a {@code Person}'s {@code TodayAttendance} matches any of the keywords given.
  */

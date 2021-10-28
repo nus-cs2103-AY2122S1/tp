@@ -62,7 +62,7 @@ public class FindMemberCommandParserTest {
 
     // valid today attendance
     private final TodayAttendance todayAttendance = new TodayAttendance(true);
-    
+
     // valid total attendance
     private final TotalAttendance totalAttendance = new TotalAttendance(3);
 
@@ -183,7 +183,7 @@ public class FindMemberCommandParserTest {
                 Availability.MESSAGE_CONSTRAINTS);
 
         // empty field
-        assertParseFailure(parser, " n/  ", Name.MESSAGE_CONSTRAINTS );
+        assertParseFailure(parser, " n/  ", Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -16,7 +16,7 @@ public class AvailabilityContainsKeywordsPredicateTest {
     private final List<DayOfWeek> monList = Collections.singletonList(DayOfWeek.MONDAY);
     private final List<DayOfWeek> monTueList = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY);
     private final List<DayOfWeek> wedThuFriList =
-            Arrays.asList( DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY);
+            Arrays.asList(DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY);
     private final Availability mon = new Availability(Collections.singletonList(DayOfWeek.MONDAY));
     private final Availability monTue = new Availability(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY));
 

@@ -12,7 +12,8 @@ import seedu.address.testutil.PersonBuilder;
 
 public class TodayAttendanceContainsKeywordsPredicateTest {
     private final List<TodayAttendance> truePredicateKeywordList = Collections.singletonList(new TodayAttendance(true));
-    private final List<TodayAttendance> falsePredicateKeywordList = Collections.singletonList(new TodayAttendance(false));
+    private final List<TodayAttendance> falsePredicateKeywordList =
+            Collections.singletonList(new TodayAttendance(false));
     @Test
     public void equals() {
         TodayAttendanceContainsKeywordsPredicate firstPredicate =

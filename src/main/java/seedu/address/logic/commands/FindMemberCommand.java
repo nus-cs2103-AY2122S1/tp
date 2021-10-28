@@ -23,6 +23,7 @@ public class FindMemberCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    /** Creates a {@code FindMemberCommand} object **/
     public FindMemberCommand(Predicate<Person> predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;

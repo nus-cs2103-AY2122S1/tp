@@ -52,6 +52,10 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
         return new FindMemberCommand(generatePredicate(args));
     }
 
+    /**
+     * Generates the final predicate to be used for FindMemberCommand
+     * @throws ParseException if the user input does not conform the expected format.
+     */
     private Predicate<Person> generatePredicate(String args) throws ParseException {
         Builder builder = new Builder();
         Predicate<Person> predicate = x -> true;
@@ -131,9 +135,9 @@ public class FindMemberCommandParser implements Parser<FindMemberCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * Parses {@code Collection<String> tags} into a {@code Optional<List<Tag>>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * {@code Optional<List<Tag>>} containing zero tags.
      */
     private Optional<List<Tag>> parseTags(Collection<String> tags) throws ParseException {
         assert tags != null;
