@@ -22,7 +22,7 @@ public class Fee {
 
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     private static final DecimalFormat df = new DecimalFormat("0.00");
-    public final float value;
+    private final float value;
 
     /**
      * Constructs an outstanding {@code Fee}.
@@ -32,6 +32,15 @@ public class Fee {
     public Fee(Set<Lesson> lessons) {
         requireNonNull(lessons);
         value = getStudentTotalFees(lessons);
+    }
+
+    /**
+     * Returns the float value of the fee.
+     *
+     * @return Float value of the fee.
+     */
+    public float getValue() {
+        return value;
     }
 
     @Override
