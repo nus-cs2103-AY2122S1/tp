@@ -6,7 +6,6 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static tutoraid.model.Model.PREDICATE_SHOW_ALL_LESSONS;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +53,7 @@ public class EditStudentCommand extends EditCommand {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param targetIndex of the student in the filtered student list to edit
+     * @param targetIndex           of the student in the filtered student list to edit
      * @param editStudentDescriptor details to edit the student with
      */
     public EditStudentCommand(Index targetIndex, EditStudentDescriptor editStudentDescriptor) {

@@ -5,7 +5,6 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_CAPACITY;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_PRICE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON_TIMING;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static tutoraid.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
@@ -50,7 +49,7 @@ public class EditLessonCommand extends EditCommand {
     private final EditLessonDescriptor editLessonDescriptor;
 
     /**
-     * @param targetIndex Index of the lesson in the filtered lesson list that is to be edited
+     * @param targetIndex          Index of the lesson in the filtered lesson list that is to be edited
      * @param editLessonDescriptor details to edit the lesson with
      */
     public EditLessonCommand(Index targetIndex, EditLessonDescriptor editLessonDescriptor) {

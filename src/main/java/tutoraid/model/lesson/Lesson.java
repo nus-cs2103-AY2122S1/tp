@@ -34,6 +34,12 @@ public class Lesson {
         this.timing = timing;
     }
 
+    /**
+     * Updates the dependency between each lesson and a student if the student gets edited
+     * @param lessonList A list containing all lessons in TutorAid
+     * @param studentToEdit The student being edited
+     * @param editedStudent The edited student
+     */
     public static void updateStudentLessonLink(List<Lesson> lessonList, Student studentToEdit, Student editedStudent) {
         for (Lesson lesson : lessonList) {
             if (lesson.hasStudent(studentToEdit)) {
