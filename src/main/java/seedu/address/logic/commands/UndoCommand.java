@@ -18,7 +18,7 @@ public class UndoCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasHistory()) {
-            throw new CommandUndoException("Undo cannot be done because there is no record.");
+            throw new CommandUndoException("Cannot undo because there is no record.");
         }
 
         String previousMessages = model.recoverHistory();
