@@ -9,8 +9,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.model.person.Name;
 import seedu.address.model.organisation.exceptions.DuplicateOrganisationException;
+import seedu.address.model.person.Name;
 
 /**
  * A list of organisations that enforces uniqueness between its elements and does not allow nulls.
