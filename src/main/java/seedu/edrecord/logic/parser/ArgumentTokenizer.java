@@ -1,7 +1,6 @@
 package seedu.edrecord.logic.parser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,9 +35,26 @@ public class ArgumentTokenizer {
      * @return           List of zero-based prefix positions in the given arguments string
      */
     private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
-        return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
-                .collect(Collectors.toList());
+        List<Prefix> prefixesWithoutMissingOptional = removeMissingOptionalPrefixes(argsString, prefixes);
+        return prefixesWithoutMissingOptional.stream()
+                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream()).collect(Collectors.toList());
+    }
+    /**
+     * Returns a new list of prefixes after removing all prefixes that are both missing and optional.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefixes Prefixes to tokenize the arguments string with
+     * @return A new list of prefixes without the missing optional prefixes.
+     */
+    public static List<Prefix> removeMissingOptionalPrefixes(String argsString, Prefix... prefixes) {
+        List<Prefix> prefixesWithoutMissingOptional = new ArrayList<>();
+        for (Prefix prefix : prefixes) {
+            if (prefix.getPrefixIsOptional() == PrefixIsOptional.YES && !argsString.contains(prefix.getPrefix())) {
+                continue;
+            }
+            prefixesWithoutMissingOptional.add(prefix);
+        }
+        return prefixesWithoutMissingOptional;
     }
 
     /**

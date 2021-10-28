@@ -64,6 +64,13 @@ public class AddCommand extends Command {
             throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
         }
 
+        // TODO: By Fergus, in #121
+        /*  Module savedMod = model.getModule(toAdd.getModule());
+            if (!savedMod.hasGroup(toAdd.getGroup())) {
+                throw new CommandException(Group.MESSAGE_DOES_NOT_EXIST);
+            }
+         */
+
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

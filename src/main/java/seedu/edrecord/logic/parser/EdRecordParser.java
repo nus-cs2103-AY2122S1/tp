@@ -12,6 +12,9 @@ import seedu.edrecord.logic.commands.CdCommand;
 import seedu.edrecord.logic.commands.ClearCommand;
 import seedu.edrecord.logic.commands.Command;
 import seedu.edrecord.logic.commands.DeleteCommand;
+import seedu.edrecord.logic.commands.DeleteGradeCommand;
+import seedu.edrecord.logic.commands.DeleteGroupCommand;
+import seedu.edrecord.logic.commands.DeleteModuleCommand;
 import seedu.edrecord.logic.commands.EditCommand;
 import seedu.edrecord.logic.commands.ExitCommand;
 import seedu.edrecord.logic.commands.FindCommand;
@@ -22,6 +25,8 @@ import seedu.edrecord.logic.commands.ListModulesCommand;
 import seedu.edrecord.logic.commands.MakeGroupCommand;
 import seedu.edrecord.logic.commands.MakeModuleCommand;
 import seedu.edrecord.logic.commands.ViewCommand;
+import seedu.edrecord.logic.commands.MoveCommand;
+import seedu.edrecord.logic.commands.RemoveCommand;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
 
 /**
@@ -66,6 +71,18 @@ public class EdRecordParser {
         case MakeGroupCommand.COMMAND_WORD:
             return new MakeGroupCommandParser().parse(arguments);
 
+        case DeleteModuleCommand.COMMAND_WORD:
+            return new DeleteModuleCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        case MoveCommand.COMMAND_WORD:
+            return new MoveCommandParser().parse(arguments);
+
+        case RemoveCommand.COMMAND_WORD:
+            return new RemoveCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -83,6 +100,9 @@ public class EdRecordParser {
 
         case GradeCommand.COMMAND_WORD:
             return new GradeCommandParser().parse(arguments);
+
+        case DeleteGradeCommand.COMMAND_WORD:
+            return new DeleteGradeCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

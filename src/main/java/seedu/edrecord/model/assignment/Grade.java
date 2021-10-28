@@ -3,6 +3,7 @@ package seedu.edrecord.model.assignment;
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Represents an Grade under a Student in EdRecord.
@@ -10,24 +11,25 @@ import java.util.Objects;
  */
 public class Grade {
     public enum GradeStatus { NOT_SUBMITTED, SUBMITTED, GRADED }
+
     public static final String MESSAGE_CONSTRAINTS = "Status should be \"not submitted\", \"submitted\" or \"graded\".";
 
-    private final Score score;
+    private final Optional<Score> score;
     private final GradeStatus status;
 
     /**
-     * Constructs an {@code Assignment}. Every field must be present and not null.
+     * Constructs a {@code Grade}. Every field must be present and not null.
      *
      * @param score  Score of the grade
      * @param status Status of the grade.
      */
-    public Grade(Score score, GradeStatus status) {
+    public Grade(Optional<Score> score, GradeStatus status) {
         requireAllNonNull(score);
         this.score = score;
         this.status = status;
     }
 
-    public Score getScore() {
+    public Optional<Score> getScore() {
         return score;
     }
 
@@ -37,7 +39,13 @@ public class Grade {
 
     @Override
     public String toString() {
-        return String.format("Score: %s, Status: %s", score, status);
+        StringBuilder builder = new StringBuilder();
+        builder.append("Status: ").append(status).append(", ");
+        if (score.isPresent()) {
+            builder.append("Score: ");
+            score.ifPresent(builder::append);
+        }
+        return builder.toString();
     }
 
     @Override

@@ -2,8 +2,6 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -15,7 +13,6 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.assignment.Grade;
-import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
@@ -26,47 +23,37 @@ import seedu.edrecord.model.person.Phone;
 import seedu.edrecord.model.tag.Tag;
 
 /**
- * Assigns a grade to a student for an assignment.
+ * Deletes a student's grade for an assignment.
  */
-public class GradeCommand extends Command {
+public class DeleteGradeCommand extends Command {
 
-    public static final String COMMAND_WORD = "grade";
+    public static final String COMMAND_WORD = "dlgrade";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a grade to the student "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a grade from the student "
             + "identified by the index number used in the displayed student list. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NAME + "ASSIGNMENT NAME "
-            + PREFIX_STATUS + "STATUS "
-            + "[" + PREFIX_SCORE + "SCORE] \n"
-            + "Status has 3 possible inputs: Not submitted, Submitted or Graded. \n"
+            + PREFIX_NAME + "ASSIGNMENT NAME \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Assignment 2 "
-            + PREFIX_STATUS + "Graded "
-            + PREFIX_SCORE + "73 ";
+            + PREFIX_NAME + "Assignment 2";
 
-    public static final String MESSAGE_SUCCESS = "Graded student: %s \nfor assignment: %s \nwith grade: %s";
+    public static final String MESSAGE_SUCCESS = "Deleted grade %s \nfor assignment: %s \nfor student: %s";
     public static final String MESSAGE_NO_MODULE_SELECTED = "No module selected. Please cd into a module first";
     public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
-    public static final String MESSAGE_SCORE_GREATER_THAN_MAX = "Student's score is greater than the "
-            + "maximum score for this assignment";
+    public static final String MESSAGE_NO_SUCH_GRADE = "There is no grade for this assignment";
 
     private final Index index;
     private final Name name;
-    private final Grade grade;
 
     /**
      * @param index Index of the student to grade.
      * @param name  Name of the assignment to grade.
-     * @param grade Grade of the assignment.
      */
-    public GradeCommand(Index index, Name name, Grade grade) {
+    public DeleteGradeCommand(Index index, Name name) {
         requireNonNull(index);
         requireNonNull(name);
-        requireNonNull(grade);
 
         this.index = index;
         this.name = name;
-        this.grade = grade;
     }
 
     @Override
@@ -88,29 +75,25 @@ public class GradeCommand extends Command {
         Assignment assignment = model.searchAssignment(name)
                 .orElseThrow(() -> new CommandException(MESSAGE_NO_SUCH_ASSIGNMENT));
 
-        // Check if score is more than the assignment's maximum score.
-        if (grade.getScore().isPresent()) {
-            Score thisScore = grade.getScore().get();
-            Score maxScore = assignment.getMaxScore();
-            if (thisScore.compareTo(maxScore) > 0) {
-                throw new CommandException(MESSAGE_SCORE_GREATER_THAN_MAX);
-            }
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        AssignmentGradeMap grades = personToEdit.getGrades();
+        Grade toRemove = grades.findGrade(assignment);
+        if (toRemove == null) {
+            throw new CommandException(MESSAGE_NO_SUCH_GRADE);
         }
 
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, assignment, grade);
+        Person editedPerson = createEditedPerson(personToEdit, assignment);
 
         model.setPerson(personToEdit, editedPerson);
         model.setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson, assignment, grade));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove, assignment, editedPerson));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with the given {@code Assignment} and corresponding {@code Grade}.
      */
-    private static Person createEditedPerson(Person personToEdit, Assignment assignment, Grade grade) {
+    private static Person createEditedPerson(Person personToEdit, Assignment assignment) {
         requireNonNull(personToEdit);
 
         Name updatedName = personToEdit.getName();
@@ -120,7 +103,7 @@ public class GradeCommand extends Command {
         ModuleGroupMap updatedModule = personToEdit.getModules();
         Set<Tag> updatedTags = personToEdit.getTags();
         AssignmentGradeMap updatedGrades = personToEdit.getGrades();
-        updatedGrades.add(assignment, grade);
+        updatedGrades.removeGrade(assignment);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, updatedModule, updatedTags,
                 updatedGrades);
@@ -134,14 +117,13 @@ public class GradeCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GradeCommand)) {
+        if (!(other instanceof DeleteGradeCommand)) {
             return false;
         }
 
         // state check
-        GradeCommand e = (GradeCommand) other;
+        DeleteGradeCommand e = (DeleteGradeCommand) other;
         return index.equals(e.index)
-                && name.equals(e.name)
-                && grade.equals(e.grade);
+                && name.equals(e.name);
     }
 }
