@@ -41,6 +41,21 @@
             <Label fx:id="majorView" styleClass="cell_small_label" text="\$major" />
             </HBox>
 
+            <HBox spacing="10" >
+                <Label fx:id="compatibilityLabel" styleClass="cell_small_label" text="\$compatibility" />
+                <Label fx:id="compatibilityView" styleClass="cell_small_label" text="\$compatibility" />
+            </HBox>
+
+            <VBox spacing="5" >
+                <Label fx:id="remarksLabel" styleClass="cell_small_label" />
+                <FlowPane fx:id="remarks" />
+            </VBox>
+
+            <VBox spacing="5" >
+                <Label fx:id="interactionsLabel" styleClass="cell_small_label" />
+                <FlowPane fx:id="interactions" />
+            </VBox>
+
             <VBox spacing="5" >
             <Label fx:id="tagsLabel" styleClass="cell_small_label" />
             <FlowPane fx:id="tags" />
@@ -61,15 +76,6 @@
             <FlowPane fx:id="frameworks" />
         </VBox>
 
-        <VBox spacing="5" >
-            <Label fx:id="remarksLabel" styleClass="cell_small_label" />
-            <FlowPane fx:id="remarks" />
-        </VBox>
-
-        <VBox spacing="5" >
-            <Label fx:id="interactionsLabel" styleClass="cell_small_label" />
-            <FlowPane fx:id="interactions" />
-        </VBox>
         </VBox>
     </GridPane>
 </HBox>
