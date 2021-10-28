@@ -126,6 +126,17 @@ Examples:
 * `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
 * `edit-applicant n/Betsy p/1234567 pos/database administrator`
 
+### Updating an applicant's status: `mark`
+
+Updates an applicant's status as specified.  
+
+Format: `mark NAME status/STATUS`
+
+* `NAME` is case-insensitive. e.g. `john doe` and `John Doe` will update the same applicant's status.
+* `STATUS` is case-insensitive. e.g. `accepted` and `ACCEPTED` will both update the applicant's status to `"Accepted"`.
+
+Examples:
+* `mark john doe status/rejected` marks the applicant `John Doe` with status `"Accepted"`.
 
 ### Deleting an applicant: `delete-applicant`
 
