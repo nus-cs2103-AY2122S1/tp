@@ -16,9 +16,9 @@ import seedu.address.model.student.Student;
 /**
  * Adds an existing student in the student list to an existing group in the group list.
  */
-public class DeleteStudentGroupCommand extends Command {
+public class DeleteMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteSG";
+    public static final String COMMAND_WORD = "deleteMember";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a member from a group "
             + "by the index number used in the displayed group list and member list.\n"
@@ -34,7 +34,7 @@ public class DeleteStudentGroupCommand extends Command {
     /**
      * @param groupIndex of the group in the filtered group list to add to the group
      */
-    public DeleteStudentGroupCommand(Index groupIndex, Index memberIndex) {
+    public DeleteMemberCommand(Index groupIndex, Index memberIndex) {
         requireAllNonNull(groupIndex, memberIndex);
 
         this.groupIndex = groupIndex;
@@ -60,7 +60,7 @@ public class DeleteStudentGroupCommand extends Command {
 
         Student memberToRemove = lastShownMemberList.get(memberIndex.getZeroBased());
 
-        model.deleteStudentGroup(memberToRemove, groupToUpdate);
+        model.deleteMember(memberToRemove, groupToUpdate);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS,
                 memberToRemove.getName().fullName, groupToUpdate.getName().name));
@@ -74,12 +74,12 @@ public class DeleteStudentGroupCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteStudentGroupCommand)) {
+        if (!(other instanceof DeleteMemberCommand)) {
             return false;
         }
 
         // state check
-        DeleteStudentGroupCommand e = (DeleteStudentGroupCommand) other;
+        DeleteMemberCommand e = (DeleteMemberCommand) other;
         return groupIndex.equals(e.groupIndex)
                 && memberIndex.equals(e.memberIndex);
     }
