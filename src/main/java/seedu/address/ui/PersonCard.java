@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,8 +45,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label tutorialGroup;
     @FXML
-    private Label gender;
-    @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
@@ -60,12 +59,14 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        // Add gender icon
         Image genderImage = ImageStorage.getGenderIcon(person.getGender().gender);
         if (genderImage != null) {
             ImageView genderIcon = new ImageView(genderImage);
             genderIcon.setFitHeight(15);
             genderIcon.setFitWidth(15);
             name.setGraphic(genderIcon);
+            name.setContentDisplay(ContentDisplay.RIGHT);
         }
         phone.setText(person.getPhone().value);
         if (person.getPhone().value.isEmpty()) {
