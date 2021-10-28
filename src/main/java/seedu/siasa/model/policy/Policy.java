@@ -17,8 +17,8 @@ import seedu.siasa.model.tag.Tag;
 public class Policy {
 
     private final Title title;
-    private final Price price;
-    private final ExpiryDate expiryDate;
+    private final PaymentStructure paymentStructure;
+    private final CoverageExpiryDate coverageExpiryDate;
     private final Commission commission;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -28,11 +28,12 @@ public class Policy {
     /**
      * Every field must be present and not null.
      */
-    public Policy(Title title, Price price, ExpiryDate expiryDate, Commission commission, Person owner, Set<Tag> tags) {
-        requireAllNonNull(title, price, expiryDate, commission, owner, tags);
+    public Policy(Title title, PaymentStructure paymentStructure, CoverageExpiryDate coverageExpiryDate,
+                  Commission commission, Person owner, Set<Tag> tags) {
+        requireAllNonNull(title, paymentStructure, coverageExpiryDate, commission, owner, tags);
         this.title = title;
-        this.price = price;
-        this.expiryDate = expiryDate;
+        this.paymentStructure = paymentStructure;
+        this.coverageExpiryDate = coverageExpiryDate;
         this.commission = commission;
         this.owner = owner;
         this.tags.addAll(tags);
@@ -42,12 +43,12 @@ public class Policy {
         return title;
     }
 
-    public Price getPrice() {
-        return price;
+    public PaymentStructure getPaymentStructure() {
+        return paymentStructure;
     }
 
-    public ExpiryDate getExpiryDate() {
-        return expiryDate;
+    public CoverageExpiryDate getCoverageExpiryDate() {
+        return coverageExpiryDate;
     }
 
     public Commission getCommission() {
@@ -81,6 +82,16 @@ public class Policy {
                 && otherPolicy.getOwner().isSamePerson(getOwner());
     }
 
+    /**
+     * Returns true if both policies have the same owner (by identity)
+     * and the policy titles differ by less than 2 edit distance.
+     */
+    public boolean isSimilarPolicy(Policy otherPolicy) {
+        return otherPolicy != null
+                && otherPolicy.getOwner().isSamePerson(getOwner())
+                && otherPolicy.getTitle().isSimilarTo(getTitle());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -94,9 +105,9 @@ public class Policy {
         Policy otherPolicy = (Policy) other;
         // Note the use of isSamePerson instead of equals
         return otherPolicy.getTitle().equals(getTitle())
-                && otherPolicy.getPrice().equals(getPrice())
+                && otherPolicy.getPaymentStructure().equals(getPaymentStructure())
                 && otherPolicy.getCommission().equals(getCommission())
-                && otherPolicy.getExpiryDate().equals(getExpiryDate())
+                && otherPolicy.getCoverageExpiryDate().equals(getCoverageExpiryDate())
                 && otherPolicy.getOwner().isSamePerson(getOwner())
                 && otherPolicy.getTags().equals(getTags());
     }
@@ -104,19 +115,19 @@ public class Policy {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(title, price, commission, expiryDate, tags);
+        return Objects.hash(title, paymentStructure, commission, coverageExpiryDate, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getTitle())
-                .append("; Price: ")
-                .append(getPrice())
+                .append("; Payment Structure: ")
+                .append(getPaymentStructure())
                 .append("; Commission: ")
                 .append(getCommission())
                 .append("; Expiry Date: ")
-                .append(getExpiryDate());
+                .append(getCoverageExpiryDate());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

@@ -4,7 +4,7 @@ import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
@@ -20,8 +20,8 @@ import seedu.siasa.logic.parser.ParserUtil;
 import seedu.siasa.logic.parser.Prefix;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.ExpiryDate;
-import seedu.siasa.model.policy.Price;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
@@ -40,7 +40,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
                 ArgumentTokenizer.tokenize(args,
                         PREFIX_TITLE,
                         PREFIX_EXPIRY,
-                        PREFIX_PRICE,
+                        PREFIX_PAYMENT,
                         PREFIX_COMMISSION,
                         PREFIX_CLIENT_INDEX,
                         PREFIX_TAG);
@@ -48,7 +48,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_TITLE,
                 PREFIX_EXPIRY,
-                PREFIX_PRICE,
+                PREFIX_PAYMENT,
                 PREFIX_COMMISSION,
                 PREFIX_CLIENT_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -56,13 +56,16 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         }
 
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
-        Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
-        ExpiryDate expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY).get());
-        Commission commission = ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).get());
+        PaymentStructure paymentStructure =
+                ParserUtil.parsePaymentStructure(argMultimap.getValue(PREFIX_PAYMENT).get());
+        Commission commission =
+                ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).get(), paymentStructure);
+        CoverageExpiryDate coverageExpiryDate =
+                ParserUtil.parseCoverageExpiryDate(argMultimap.getValue(PREFIX_EXPIRY).get());
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        return new AddPolicyCommand(title, price, expiryDate, commission, index, tagList);
+        return new AddPolicyCommand(title, paymentStructure, coverageExpiryDate, commission, index, tagList);
     }
 
     /**

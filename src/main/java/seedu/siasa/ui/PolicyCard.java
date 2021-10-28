@@ -42,8 +42,8 @@ public class PolicyCard extends UiPart<Region> {
         this.policy = policy;
         id.setText(displayedIndex + ". ");
         title.setText(policy.getTitle().value);
-        price.setText(String.valueOf(policy.getPrice()));
-        expiryDate.setText(String.valueOf(policy.getExpiryDate()));
+        price.setText(String.valueOf(policy.getPaymentStructure()));
+        expiryDate.setText(String.valueOf(policy.getCoverageExpiryDate()));
         commission.setText(String.valueOf(policy.getCommission()));
         owner.setText(String.valueOf(policy.getOwner().getName()));
         policy.getTags().stream()
