@@ -12,14 +12,12 @@ import static seedu.address.testutil.TypicalClients.CARL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
 import seedu.address.model.client.ClientId;
