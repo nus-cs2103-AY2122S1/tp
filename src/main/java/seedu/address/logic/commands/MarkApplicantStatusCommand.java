@@ -52,10 +52,17 @@ public class MarkApplicantStatusCommand extends Command {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_APPLICANT_WITH_NAME, name));
         }
 
+        memento.record(model.getCopiedModel());
+
         model.setApplicant(applicantToUpdate, applicantToUpdate.markAs(applicationStatus));
 
-        return new CommandResult(
-                String.format(MESSAGE_MARK_APPLICANT_STATUS_SUCCESS, applicantToUpdate.getName(), applicationStatus));
+        String successMessage =
+                String.format(MESSAGE_MARK_APPLICANT_STATUS_SUCCESS, applicantToUpdate.getName(), applicationStatus);
+        memento.recordMessage(successMessage);
+
+        model.addToHistory(this);
+
+        return new CommandResult(successMessage);
     }
 
     @Override
