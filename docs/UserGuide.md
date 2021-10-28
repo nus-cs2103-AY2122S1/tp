@@ -479,7 +479,8 @@ Below is a glossary of words used in out document.
 Word | Meaning
 -------|--------
 Alphanumeric | word that contain alphabets (capitalised and non-capitalised) and numerical numbers as characters.
-JSON | JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
+CSV | A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values.
+JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
 
 [Return to table of contents](#table-of-contents)
