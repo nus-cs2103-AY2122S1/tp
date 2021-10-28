@@ -100,11 +100,17 @@ public interface Model {
     /** Returns the selected labs. */
     ObservableList<Lab> getSelectedLabs();
 
-    /** Changes the selected labs. */
+    /** Changes the selected labs to the one specified by the input. */
     void setSelectedLabs(List<Lab> labs);
 
     /** Clears the selected labs. */
     void clearSelectedLabs();
+
+    /** Sets the lab tracker to the specified list of labs. */
+    void setLabsTracker(List<Lab> labs);
+
+    /** Clears the labs tracker. */
+    void clearLabsTracker();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.

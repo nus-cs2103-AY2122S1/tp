@@ -18,15 +18,15 @@ public class StudentParticularPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(StudentParticularPanel.class);
 
     @FXML
-    private ListView<Student> studentParticularView;
+    private ListView<Student> studentListView;
 
     /**
      * Creates a {@code StudentParticularPanel} with the given {@code ObservableList}.
      */
     public StudentParticularPanel(ObservableList<Student> studentList) {
         super(FXML);
-        studentParticularView.setItems(studentList);
-        studentParticularView.setCellFactory(listView -> new StudentParticularViewCell());
+        studentListView.setItems(studentList);
+        studentListView.setCellFactory(listView -> new StudentParticularViewCell());
     }
 
     /**
