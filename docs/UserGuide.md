@@ -50,6 +50,38 @@ Dangerous or potentially negative actions are displayed here
 
 6. Refer to the [Features](#features) below for details of each command.
 
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
+**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
+**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/19-12-2021 08:00`
+**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Create reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
+**Delete Employee** | `deleteE INDEX`<br> e.g., `delete 1`
+**Delete Supplier** | `deleteS INDEX`<br> e.g., `delete 2`
+**Delete Customer** | `deleteC INDEX`<br> e.g., `delete 3`
+**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
+**Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
+**Find Employee** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findE `
+**Find Supplier** | `findS KEYWORD [MORE_KEYWORDS]`<br> e.g., `findS Oct AM`
+**Sort Customer** | `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortC by/n o/d`
+**Sort Employee** | `sortE by/PREFIX_OF_EMPLOYEE_FIELD o/ORDER_OF_SORT` <br> e.g. `sortE by/sal o/a`
+**Sort Supplier** | `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortS by/dd o/a`
+**Reset Customer Sorting** | `resetC`
+**Reset Employee Sorting** | `resetE`
+**Reset Supplier Sorting** | `resetS`
+**List Customer** | `listC`
+**List Employee** | `listE`
+**List Supplier** | `listS`
+**Clear** | `clear`
+**Help** | `help`
+**Exit** | `exit`
+
 ### Command syntax
 
 Commands in RHRH has the syntax: `COMMAND_WORD + [PREAMBLE] + [PREFIX + PARAMETER]...`, where:
@@ -70,19 +102,19 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 
 | Prefix | Description         | Parameter constraints                             |
 | :----: | ------------------- | ------------------------------------------------- |
-|  `n/`  | Name                |
-|  `p/`  | Phone               |
-|  `a/`  | Address             |
-|  `e/`  | Email               |
+|  `n/`  | Name                | Names should only contain alphanumeric characters and spaces, and it should not be blank
+|  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
+|  `a/`  | Address             | Addresses can take any values, and it should not be blank
+|  `e/`  | Email               | 
 | `lp/`  | Loyalty Point       |
 | `alg/` | Allergy             |
 | `sr/`  | Special Request     |
-|  `t/`  | Tag                 |
+|  `t/`  | Tag                 | Tags names should be alphanumeric
 |  `l/`  | Leaves              |
 | `jt/`  | Job Title           |
 | `sal/` | Salary              |
-| `st/`  | Supply Type         |
-| `dd/`  | Delivery Details    |
+| `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
+| `dd/`  | Delivery Details    | Refer [here](#Adding-a-supplier-addS) for more details
 | `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
 |  `r/`  | Remark              | Contains alphanumeric characters                  |
 
@@ -116,11 +148,11 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 
 </div>
 
-### Viewing help [COMING SOON]: `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
-![help message]()
+
 
 Format: `help`
 
@@ -177,10 +209,10 @@ The following table shows the acceptable formats and relevant examples for `Deli
 
 | Acceptable Formats | Examples |
 | ----------- | ----------- |
-| `yyyy-MM-dd HH:mm` | `2021-09-19 13:00` |
-| `dd-MM-yyyy HH:mm` | `19-09-2021 13:00` |
-| `HH:mm yyyy-MM-dd` | `14:00 2021-11-10` |
-| `HH:mm dd-MM-yyyy` | `14:00 10-11-2021` |
+| yyyy-MM-dd HH:mm | 2021-09-19 13:00 |
+| dd-MM-yyyy HH:mm | 19-09-2021 13:00 |
+| HH:mm yyyy-MM-dd | 14:00 2021-11-10 |
+| HH:mm dd-MM-yyyy | 14:00 10-11-2021 |
 
 </div>
 
@@ -257,11 +289,17 @@ Deletes the specified customer from RHRH.
 
 Format:
 * `deleteC INDEX`: Deletes the customer at the specified `INDEX`.
-  * `INDEX` refers to the index number shown in the displayed customer list.
-  * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `deleteC 2` deletes the 2nd customer displayed in the address book.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The index refers to the index number shown in the displayed employee list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
 
 ### Deleting an employee : `deleteemployee`
 
@@ -276,18 +314,24 @@ Format: `deleteemployee INDEX`
 Examples:
 * `deleteemployee 2` deletes the 2nd person in the address book.
 
-### Deleting a supplier : `deleteSupplier`
+### Deleting a supplier : `deleteS`
 
 Deletes the specified supplier from RHRH.
 
 Format: `deleteS INDEX`
 
 * Deletes the supplier at the specified `INDEX`.
-* The index refers to the index number shown in the displayed supplier list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `deleteS 2` deletes the 2nd supplier in the address book.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The index refers to the index number shown in the displayed employee list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+</div>
 
 ### Finds customers based on keywords: `findC`
 
@@ -490,23 +534,3 @@ _Details coming soon ..._
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RHRH home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add Customer** | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
-**Add Employee** | `addemployee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
-**Add supplier** | `addsupplier n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/Every Monday`
-**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
-**Create reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
-**Delete Employee** | `deleteemployee INDEX`<br> e.g., `delete 1`
-**Delete Supplier** | `deletesupplier INDEX`<br> e.g., `delete 2`
-**Delete Customer** | `deletecustomer INDEX`<br> e.g., `delete 3`
-**Edit Employee** | `editemployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
-**Edit Supplier** | `editsupplier INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
-**Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
-**Find [COMING SOON]** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List [COMING SOON]** | `list`
-**Help [COMING SOON]** | `help`
