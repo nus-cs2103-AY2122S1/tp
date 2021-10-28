@@ -24,7 +24,7 @@ public class FillCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (checkEmpty(model)) {
-            model.setProgrammerError(SampleDataUtil.fillSampleProgrammerError());
+            model.setProgrammerError(SampleDataUtil.getSampleProgrammerError());
             return new CommandResult(MESSAGE_SUCCESS);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
