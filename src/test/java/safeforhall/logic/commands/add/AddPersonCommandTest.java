@@ -204,6 +204,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public ArrayList<Event> getPersonEvents(Person person, Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getSinglePerson() {
             throw new AssertionError("This method should not be called.");
         }

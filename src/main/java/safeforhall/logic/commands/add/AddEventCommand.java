@@ -63,7 +63,7 @@ public class AddEventCommand extends Command {
             throw new CommandException(String.format(MESSAGE_INVALID_RESIDENT, invalidResident));
         }
 
-        ArrayList<Person> personList = model.toPersonList(toAdd.getResidents());
+        ArrayList<Person> personList = model.toPersonList(toAdd.getResidentList());
         if (personList.size() > toAdd.getCapacity().capacity) {
             throw new CommandException(MESSAGE_EXCEED_CAPACITY);
         }

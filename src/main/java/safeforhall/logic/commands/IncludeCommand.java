@@ -83,7 +83,7 @@ public class IncludeCommand extends Command {
                     + "' could be found");
         }
         ArrayList<Person> toAdd = model.toPersonList(residentList);
-        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
+        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidentList());
 
         checkForDuplicates(toAdd, currentResidents);
 
@@ -91,7 +91,7 @@ public class IncludeCommand extends Command {
         String combinedStorageString = event.getCombinedStorageString(toAdd);
 
         if (new ResidentList(combinedDisplayString,
-                combinedStorageString).getResidentList().size() > event.getCapacity().capacity) {
+                combinedStorageString).getResidents().size() > event.getCapacity().capacity) {
             throw new CommandException(MESSAGE_EXCEED_CAPACITY);
         }
 

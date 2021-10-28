@@ -83,7 +83,7 @@ public class ExcludeCommand extends Command {
         }
 
         ArrayList<Person> toRemove = model.toPersonList(residentList);
-        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
+        ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidentList());
 
         checkAllExists(toRemove, currentResidents);
 

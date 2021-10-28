@@ -36,6 +36,10 @@ public class ImportCommand extends Command {
     public static final String PARAMETERS = "CSV_NAME";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports resident information from the specified csv "
             + "file located within the /data folder\n"
+            + "Parameters: "
+            + "NAME_OF_CSV\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "safeforhall\n"
             + "Note: \n"
             + "     1. 8 comma separated values for each row in order; \n"
             + "             name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate\n"
