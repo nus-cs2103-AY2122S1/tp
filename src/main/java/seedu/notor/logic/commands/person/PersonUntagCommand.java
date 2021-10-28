@@ -22,12 +22,16 @@ public class PersonUntagCommand extends PersonCommand {
     public static final String COMMAND_WORD = "untag";
     public static final List<String> COMMAND_WORDS = Arrays.asList("untag", "ut");
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
-            + ": Removes tags from the person identified by the index number used in the displayed person"
-            + "list, if they exist. You may list multiple tags separated by commas \n"
+    private static final String COMMAND_DESCRIPTION =
+            ": Removes tags from the person identified by the index number used in the displayed person list, if they"
+                    + " exist. You may list multiple tags separated by commas.\n";
+
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
+            + COMMAND_DESCRIPTION
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG ...]  \n"
-            + "Example: " + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
+            + "[" + PREFIX_TAG + "TAG...]\n"
+            + "Example: " + PersonCommand.COMMAND_WORD
+            + " 1 /" + COMMAND_WORD + " "
             + PREFIX_TAG + "important";
 
     public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
@@ -37,9 +41,10 @@ public class PersonUntagCommand extends PersonCommand {
     private final PersonExecutor executor;
 
     /**
+     * Constructor for a PersonUntagCommand instance.
      *
-     * @param index
-     * @param tags
+     * @param index Index of the person to have tags removed.
+     * @param tags Tags to be removed from the specified person.
      */
     public PersonUntagCommand(Index index, Set<Tag> tags) {
         super(index);

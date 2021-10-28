@@ -17,6 +17,7 @@ import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.PersonListPanel;
 
 /**
  * Represents the in-memory model of Notor's data.
@@ -24,11 +25,14 @@ import seedu.notor.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    PersonListPanel personListPanel;
+
     private final Notor notor;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
     private final FilteredList<? extends Group> filteredGroups;
     private boolean isPersonView = true;
+    private boolean isArchiveView = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -47,6 +51,11 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new Notor(), new UserPrefs());
+    }
+
+    @Override
+    public void setup(PersonListPanel personListPanel) {
+        this.personListPanel = personListPanel;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -84,7 +93,7 @@ public class ModelManager implements Model {
         userPrefs.setNotorFilePath(notorFilePath);
     }
 
-    //=========== Notor =====================================================================================
+    //=========== Notor ==================================================================
 
     @Override
     public void setNotor(ReadOnlyNotor notor) {
@@ -108,6 +117,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasArchive(Person person) {
+        return notor.hasArchive(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         notor.removePerson(target);
     }
@@ -116,6 +130,16 @@ public class ModelManager implements Model {
     public void createPerson(Person person) {
         notor.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void archivePerson(Person person) {
+        notor.archivePerson(person);
+    }
+
+    @Override
+    public void unarchivePerson(Person person) {
+        notor.unarchivePerson(person);
     }
 
     @Override
@@ -166,7 +190,7 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Person List Accessors =========================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -194,10 +218,46 @@ public class ModelManager implements Model {
         filteredGroups.setPredicate(predicate);
     }
 
+    //=========== View Change ============================================================
+
+    @Override
+    public void displayPersons() {
+        isPersonView = true;
+        isArchiveView = false;
+        filteredPersons = new FilteredList<>(this.notor.getPersonList());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        personListPanel.setPersonList(filteredPersons);
+    }
+
+    @Override
+    public void displayGroups() {
+        isPersonView = false;
+        isArchiveView = false;
+    }
+
+    @Override
+    public void displayPersonArchive() {
+        isPersonView = true;
+        isArchiveView = true;
+        filteredPersons = new FilteredList<>(this.notor.getPersonArchiveList());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        personListPanel.setPersonList(filteredPersons);
+    }
+
     //=========== View Check =============================================================
     @Override
     public boolean isPersonView() {
         return isPersonView;
+    }
+
+    @Override
+    public boolean isGroupView() {
+        return !isPersonView;
+    }
+
+    @Override
+    public boolean isArchiveView() {
+        return isPersonView && isArchiveView;
     }
 
     @Override

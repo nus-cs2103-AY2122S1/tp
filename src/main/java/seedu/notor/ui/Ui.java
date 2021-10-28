@@ -12,4 +12,9 @@ public interface Ui {
      */
     void start(Stage primaryStage);
 
+    /**
+     * Gets the PersonListPanel currently being displayed.
+     */
+    PersonListPanel getPersonListPanel();
+
 }

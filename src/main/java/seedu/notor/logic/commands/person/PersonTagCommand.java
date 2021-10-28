@@ -22,12 +22,16 @@ public class PersonTagCommand extends PersonCommand {
     public static final String COMMAND_WORD = "tag";
     public static final List<String> COMMAND_WORDS = Arrays.asList("tag", "t");
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
-            + ": Adds tags to the person identified by the index number used in the displayed person list,"
-            + " if they do not already have them. You may list multiple tags separated by commas \n"
+    private static final String COMMAND_DESCRIPTION =
+            ": Adds tags to the person identified by theindex number used in the displayed person list, if they do "
+                    + "not already have them. You may list multiple tags separated by commas.\n";
+
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
+            + COMMAND_DESCRIPTION
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]  \n"
-            + "Example: " + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
+            + "Example: " + PersonCommand.COMMAND_WORD
+            + " 1 /" + COMMAND_WORD + " "
             + PREFIX_TAG + "important, needsSupport";
 
     public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
@@ -37,9 +41,10 @@ public class PersonTagCommand extends PersonCommand {
     private final PersonExecutor executor;
 
     /**
+     * Constructor for a PersonTagCommandInstance.
      *
-     * @param index
-     * @param tags
+     * @param index Index of person to add tags to.
+     * @param tags Tags to be added to specified person.
      */
     public PersonTagCommand(Index index, Set<Tag> tags) {
         super(index);

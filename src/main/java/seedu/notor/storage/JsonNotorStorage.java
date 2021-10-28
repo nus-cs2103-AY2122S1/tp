@@ -47,7 +47,7 @@ public class JsonNotorStorage implements NotorStorage {
 
         Optional<JsonSerializableNotor> jsonNotor = JsonUtil.readJsonFile(
                 filePath, JsonSerializableNotor.class);
-        if (!jsonNotor.isPresent()) {
+        if (jsonNotor.isEmpty()) {
             return Optional.empty();
         }
 
@@ -76,5 +76,4 @@ public class JsonNotorStorage implements NotorStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableNotor(notor), filePath);
     }
-
 }

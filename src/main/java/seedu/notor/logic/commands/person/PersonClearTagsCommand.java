@@ -1,7 +1,5 @@
 package seedu.notor.logic.commands.person;
 
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,13 +17,13 @@ public class PersonClearTagsCommand extends PersonCommand {
     public static final String COMMAND_WORD = "cleartags";
     public static final List<String> COMMAND_WORDS = Arrays.asList("cleartags", "ct");
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
-            + ": Clears all tags from the person identified by the index number used in the displayed "
-            + "person list. You may list multiple tags separated by commas \n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]  \n"
-            + "Example: " + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
-            + PREFIX_TAG + "important, needsSupport";
+    private static final String COMMAND_DESCRIPTION =
+            ": Clears all tags from the person identified by the index number used in the displayed person list.\n";
+
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
+            + COMMAND_DESCRIPTION
+            + "Parameters: none\n"
+            + "Example: " + PersonCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final PersonExecutor executor;
 

@@ -1,5 +1,6 @@
 package seedu.notor.ui;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -11,6 +12,7 @@ import seedu.notor.MainApp;
 import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.commons.util.StringUtil;
 import seedu.notor.logic.Logic;
+import seedu.notor.model.Model;
 
 /**
  * The manager of the UI component.
@@ -23,14 +25,16 @@ public class UiManager implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private final Logic logic;
+    private final Model model;
     private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic) {
+    public UiManager(Logic logic, Model model) {
         super();
         this.logic = logic;
+        this.model = model;
     }
 
     @Override
@@ -44,15 +48,20 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-
+            model.setup(getPersonListPanel());
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
 
+    @Override
+    public PersonListPanel getPersonListPanel() {
+        return mainWindow.getPersonListPanel();
+    }
+
     private Image getImage(String imagePath) {
-        return new Image(MainApp.class.getResourceAsStream(imagePath));
+        return new Image(Objects.requireNonNull(MainApp.class.getResourceAsStream(imagePath)));
     }
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {

@@ -8,36 +8,36 @@ import java.util.List;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.logic.executors.person.PersonDeleteExecutor;
+import seedu.notor.logic.executors.person.PersonArchiveExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
 
 /**
- * Deletes a person identified using its displayed index from Notor.
+ * Archives a person identified using its displayed index.
  */
-public class PersonDeleteCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "delete";
-    public static final List<String> COMMAND_WORDS = Arrays.asList("delete", "d");
+public class PersonArchiveCommand extends PersonCommand {
+    public static final String COMMAND_WORD = "archive";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("archive", "ar");
 
     private static final String COMMAND_DESCRIPTION =
-            ": Deletes the person identified by the index number used in the displayed person list.\n";
+            ": Archives the person identified by the index number used in the displayed person list.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
-            + "Parameters: none\n"
+            + "Parameters: none"
             + "Example: "
             + PersonCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final PersonExecutor executor;
 
     /**
-     * Constructor for a PersonDeleteCommand.
+     * Constructor for a PersonArchiveCommand.
      *
-     * @param index Index of the person to be deleted.
+     * @param index Index of the person to be archived.
      */
-    public PersonDeleteCommand(Index index) {
+    public PersonArchiveCommand(Index index) {
         super(index);
         requireNonNull(index);
-        this.executor = new PersonDeleteExecutor(index);
+        this.executor = new PersonArchiveExecutor(index);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PersonDeleteCommand extends PersonCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof PersonDeleteCommand // instanceof handles nulls
-                && executor.equals(((PersonDeleteCommand) other).executor)); // state check
+                || (other instanceof PersonArchiveCommand // instanceof handles nulls
+                && executor.equals(((PersonArchiveCommand) other).executor)); // state check
     }
 }

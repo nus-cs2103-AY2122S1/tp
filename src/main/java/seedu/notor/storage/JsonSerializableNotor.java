@@ -1,4 +1,5 @@
 package seedu.notor.storage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +27,8 @@ class JsonSerializableNotor {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
+    private final List<JsonAdaptedPerson> personArchive = new ArrayList<>();
+
     private final List<JsonAdaptedSuperGroup> superGroups = new ArrayList<>();
 
     private final String note;
@@ -38,9 +41,11 @@ class JsonSerializableNotor {
      */
     @JsonCreator
     public JsonSerializableNotor(@JsonProperty("note") String note, @JsonProperty("noteDate") String noteDate,
-                                 @JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                 @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups) {
+            @JsonProperty("persons") List<JsonAdaptedPerson> persons,
+            @JsonProperty("personArchive") List<JsonAdaptedPerson> personArchive,
+            @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups) {
         this.persons.addAll(persons);
+        this.personArchive.addAll(personArchive);
         this.superGroups.addAll(superGroups);
         this.note = note;
         this.noteDate = noteDate;
@@ -53,10 +58,12 @@ class JsonSerializableNotor {
      */
     public JsonSerializableNotor(ReadOnlyNotor source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(
-            Collectors.toList()));
+                Collectors.toList()));
+        personArchive.addAll(source.getPersonArchiveList().stream().map(JsonAdaptedPerson::new).collect(
+                Collectors.toList()));
         superGroups
-            .addAll(source.getSuperGroups().stream().map(JsonAdaptedSuperGroup::new).collect(
-            Collectors.toList()));
+                .addAll(source.getSuperGroups().stream().map(JsonAdaptedSuperGroup::new).collect(
+                        Collectors.toList()));
         note = source.getNote().value;
         noteDate = source.getNote().getSavedDate();
     }
@@ -100,6 +107,23 @@ class JsonSerializableNotor {
             }
 
             notor.addPerson(person);
+        }
+
+        for (JsonAdaptedPerson jsonAdaptedPerson : personArchive) {
+            Person person = jsonAdaptedPerson.toModelType();
+            if (notor.hasArchive(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            for (String superGroup : person.getDisplaySuperGroups()) {
+                notor.findSuperGroup(superGroup).addPerson(person);
+            }
+            for (String subGroup : person.getDisplaySubGroups()) {
+                String[] split = subGroup.split("_");
+                // TODO: Create method to check for validity
+                notor.findSuperGroup(split[0]).addPersonToSubGroup(split[1], person);
+            }
+
+            notor.addArchivePerson(person);
         }
         return notor;
     }

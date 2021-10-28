@@ -10,6 +10,7 @@ import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.PersonListPanel;
 
 /**
  * The API of the Model component.
@@ -19,6 +20,8 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    void setup(PersonListPanel personListPanel);
 
     // TODO: List
     // Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
@@ -55,7 +58,7 @@ public interface Model {
      */
     void setNotorFilePath(Path notorFilePath);
 
-    //=========== Notor =====================================================================================
+    //=========== Notor ==================================================================
 
     /**
      * Replaces Notor data (of the list) with the data in {@code notor}.
@@ -75,8 +78,13 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in Notor archive.
+     */
+    boolean hasArchive(Person person);
+
+    /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the Notor.
      */
     void deletePerson(Person target);
 
@@ -85,6 +93,18 @@ public interface Model {
      * {@code person} must not already exist in Notor.
      */
     void createPerson(Person person);
+
+    /**
+     * Archives the given person.
+     * {@code person} must exist in Notor.
+     */
+    void archivePerson(Person person);
+
+    /**
+     * Unarchives the given person.
+     * {@code person} must exist in Notor archive.
+     */
+    void unarchivePerson(Person person);
 
     /**
      * Finds the given person.
@@ -104,12 +124,16 @@ public interface Model {
 
     Group findGroup(String name);
 
+    void deleteSubGroup(SubGroup subGroup);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in Notor.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in Notor.
      */
     void setPerson(Person target, Person editedPerson);
+
+    //=========== Filtered Person List Accessors =========================================
 
     /**
      * Returns an unmodifiable view of the filtered person list
@@ -135,8 +159,28 @@ public interface Model {
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
 
-    void deleteSubGroup(SubGroup subGroup);
+    //=========== View Change ============================================================
+
+    /**
+     * Updates Notor to display Persons.
+     */
+    void displayPersons();
+
+    /**
+     * Updates Notor to display Groups.
+     */
+    void displayGroups();
+
+    /**
+     * Updates Notor to display Person archive.
+     */
+    void displayPersonArchive();
 
     //=========== View Check =============================================================
+
     boolean isPersonView();
+
+    boolean isGroupView();
+
+    boolean isArchiveView();
 }
