@@ -20,13 +20,13 @@ public class LastDateTest {
 
         // invalid dates
         //assertFalse(LastDate.isValidDate(""));
-        assertFalse(LastDate.isValidDate("10.10.2021"));
-        assertFalse(LastDate.isValidDate("10/10/2021"));
         assertFalse(LastDate.isValidDate("9-9-2021"));
         assertFalse(LastDate.isValidDate("19-9-2021"));
 
         // valid dates
         assertTrue(LastDate.isValidDate("21-10-2021"));
+        assertTrue(LastDate.isValidDate("10.10.2021"));
+        assertTrue(LastDate.isValidDate("10/10/2021"));
     }
 
     @Test

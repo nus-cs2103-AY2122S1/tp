@@ -19,11 +19,11 @@ public class EventDateTest {
 
         // invalid dates
         assertFalse(EventDate.isValidEventDate(""));
-        assertFalse(EventDate.isValidEventDate("10.10.2021"));
-        assertFalse(EventDate.isValidEventDate("10/10/2021"));
 
         // valid dates
         assertTrue(EventDate.isValidEventDate("21-10-2021"));
+        assertTrue(EventDate.isValidEventDate("10.10.2021"));
+        assertTrue(EventDate.isValidEventDate("10/10/2021"));
     }
 
     @Test

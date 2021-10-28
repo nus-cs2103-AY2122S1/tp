@@ -8,12 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class LastDate {
-    public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be in dd-mm-yyyy format";
+    public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be in dd-mm-yyyy, dd.mm.yyyy"
+            + "or dd/mm/yyyy format";
     public static final String DEFAULT_DATE = "";
     public static final String FET_DESC = "Last FET: ";
     public static final String COLLECTION_DESC = "Last Collection: ";
 
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter
+            .ofPattern("[dd-MM-yyyy][dd.MM.yyyy][dd/MM/yyyy]");
 
     private static final int LASTDATE_DEADLINE = 1;
 
@@ -27,7 +29,14 @@ public class LastDate {
     public LastDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = date;
+        if (date.equals(DEFAULT_DATE)) {
+            this.date = date;
+        } else {
+            String[] dayMonthYear = date.split("[-./]");
+            assert dayMonthYear.length == 3;
+            this.date = dayMonthYear[0] + "-" + dayMonthYear[1] + "-" + dayMonthYear[2];
+        }
+
     }
 
     /**
