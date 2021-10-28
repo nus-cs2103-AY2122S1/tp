@@ -2,21 +2,15 @@ package seedu.academydirectory.ui;
 
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
-import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
@@ -36,7 +30,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ADMenu adMenu;
+    private AppMenu appMenu;
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -99,8 +93,8 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
 
-        adMenu = new ADMenu(commandBox);
-        container.getChildren().add(adMenu.getRoot());
+        appMenu = new AppMenu(commandBox);
+        container.getChildren().add(appMenu.getRoot());
 
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), commandBox);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
@@ -117,7 +111,7 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         container.getChildren().clear();
-        container.getChildren().addAll(adMenu.getRoot(), contentHolder,
+        container.getChildren().addAll(appMenu.getRoot(), contentHolder,
                 commandBoxPlaceholder, statusbarPlaceholder);
     }
 

@@ -21,6 +21,9 @@ public class VisualizerDisplay extends UiPart<Region> {
     @FXML
     private StackPane placeHolder;
 
+    /**
+     * Constructor for a Visualizer Display
+     */
     public VisualizerDisplay() {
         super(FXML);
         handleAdditionalInfo(new AdditionalViewModel(AdditionalViewType.DEFAULT, AdditionalInfo.empty()));

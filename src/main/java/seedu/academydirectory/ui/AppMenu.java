@@ -9,12 +9,16 @@ import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.commands.UndoCommand;
 import seedu.academydirectory.logic.commands.VisualizeCommand;
 
-public class ADMenu extends UiPart<Region> {
+public class AppMenu extends UiPart<Region> {
     public static final String FXML = "Menu.fxml";
 
     private final CommandBox commandBox;
 
-    public ADMenu(CommandBox commandBox) {
+    /**
+     * Create an application Menu for Academy Directory
+     * @param commandBox command executor
+     */
+    public AppMenu(CommandBox commandBox) {
         super(FXML);
         this.commandBox = commandBox;
     }

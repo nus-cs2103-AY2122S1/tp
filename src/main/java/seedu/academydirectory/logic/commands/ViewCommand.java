@@ -16,6 +16,20 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
+    public static final String HELP_MESSAGE = "#### Viewing all related information of a student: `view`\n"
+            + "Displays all information relating to a student, both personal and academic information. "
+            + "Information shown include the student's name, tag, participation data, examination score, "
+            + "and contact information.\n\n"
+            + "Format: `view INDEX`\n\n"
+            + "* View students' information, both personal and academic related, "
+            + "based on their `INDEX` number on the list.\n"
+            + "* Information shown for the student will be in a drop-down menu listing participation and grades.\n"
+            + "* Contact information like phone number, email address, and Telegram handle are also displayed.\n\n"
+            + "Examples:\n"
+            + "* `view 1`\n\n"
+            + "**Include an interactive GUI version where Avengers can click"
+            + " on the list to view student information as well.**";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View full information about the student.\n"
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
