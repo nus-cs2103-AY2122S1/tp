@@ -54,8 +54,6 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-{TODO ADD TABOPTION}
-
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
@@ -70,8 +68,6 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 The sections below give more details of each component.
 
 ### UI component
-
-{TODO ADD TABOPTION}
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T10-4/tp/blob/master/src/main/java/seedu/anilist/ui/Ui.java)
 
@@ -103,8 +99,6 @@ How the `Logic` component works:
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
-
-{TODO ADD DISCLAIMER ABOUT TABOPTION?}
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -202,7 +196,7 @@ The last command executed by the user is stored internally as a `Command` in `Lo
 last command requires a user confirmation. If this is the case, the `Parser` parses the next user input
 as a confirmation message instead.
 
-{To be added later LUODAN}
+{To be added later}
 
 #### Design considerations:
 
@@ -228,7 +222,7 @@ as a confirmation message instead.
 The proposed find mechanism is implemented through the use of 2 `Predicate<Anime>`, one for the tab options and one for
 regular filter.
 
-{To be added later RYAN}
+{To be added later}
 
 #### Design considerations:
 
