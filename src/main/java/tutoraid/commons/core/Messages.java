@@ -13,6 +13,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_FIND_COMMAND = "Invalid find command format! "
             + "Must start with 'find -s' or 'find -l'";
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid";
+    public static final String MESSAGE_LIST_SUCCESS = "Listed all students and lessons";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
     public static final String MESSAGE_INVALID_EDIT_COMMAND = "Invalid edit command format! "
             + "Must start with 'edit -s' or 'edit -l'";
