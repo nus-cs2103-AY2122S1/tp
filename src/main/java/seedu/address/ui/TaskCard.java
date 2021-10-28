@@ -41,18 +41,13 @@ public class TaskCard extends UiPart<Region> {
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
      */
     public TaskCard(Task task, int displayedIndex) {
-        super(FXML);
+        super((task.isComplete()) ? "TaskCardComplete.fxml" : "TaskCardIncomplete.fxml");
         this.task = task;
         id.setText(displayedIndex + ". ");
         taskId.setText(task.getTaskId().value);
         taskName.setText(task.getTaskName().taskName);
         taskDeadline.setText(task.getTaskDeadline().value);
         isComplete.setText(task.isComplete() ? "Completed" : "Incomplete");
-        if (task.isComplete()) {
-            FXML = "TaskCardComplete.fxml";
-        } else {
-            FXML = "TaskCardIncomplete.fxml";
-        }
     }
 
     @Override
