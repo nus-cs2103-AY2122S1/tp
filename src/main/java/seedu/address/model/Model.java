@@ -101,7 +101,6 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
-    ObservableList<Organisation> getFilteredOrganisationList();
 
     /** Returns an unmodifiable view of the filtered organisation list */
     ObservableList<Organisation> getFilteredOrganisationList();
@@ -119,7 +118,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-    void updateFilteredOrganisationList(Predicate<Organisation> predicate);
 
     /**
      * Updates the filter of the filtered organisation list to filter by the given {@code predicate}.
