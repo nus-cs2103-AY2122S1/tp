@@ -26,6 +26,8 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Deleting multiple person : `deletem`](#deleting-multiple-people--deleteM)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [Command Assistant](#command-assistant)
+  * [Command History](#command-history)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
