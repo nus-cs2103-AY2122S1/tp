@@ -11,7 +11,7 @@ public class StatsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
 
-    public static final String MESSAGE_SUCCESS = "Here are you statistics.";
+    public static final String MESSAGE_SUCCESS = "Displaying user statistics.";
 
     @Override
     public CommandResult execute(Model model) {
