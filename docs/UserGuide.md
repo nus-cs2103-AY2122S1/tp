@@ -26,12 +26,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
    * **`list-applicant`** : Lists all applicants.
 
-   * **`add-applicant`**`n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo linkedin/https://www.linkedin.com/in/mary-ann-818673b4/?originalSubdomain=sg` : Adds an applicant named `Mary Ann` to the `software engineer` position.
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Optional Arguments:**<br>
-* The GitHub profiles and LinkedIn profiles of the new applicant are optional, because not everybody has both profiles.
-</div>
+   * **`add-applicant`**`n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo` : Adds an applicant named `Mary Ann` to the `software engineer` position.
 
    * **`delete-applicant`**`1` : Deletes the 1st applicant shown in the current list.
    
@@ -49,9 +44,6 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [github/GITHUB_PROFILE_LINK]` can be used as `n/John Doe github/https://github.com/matoledo` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -107,7 +99,7 @@ Examples:
 
 Adds an applicant to MrTechRecruiter.
 
-Format: `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK linkedin/LINKEDIN_PROFILE_LINK`
+Format: `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An applicant should only have 1 position. This position must exist, otherwise an error message will show.<br>
@@ -115,13 +107,12 @@ If the job position exists, its rejection rate will update accordingly.
 </div>
 
 Examples:
-* `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo linkedin/https://www.linkedin.com/in/mary-ann-818673b4/?originalSubdomain=sg`
-* `add-applicant n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
+* `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 
 ### Editing an applicant: `edit-applicant`
 Edits the specified applicant in MrTechRecruiter
 
-Format: `edit-applicant INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION` 
+Format: `edit-applicant INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` 
 
 * Edit the applicant with the specified `INDEX`
 * The `position` must have been added to MrTechRecruiter
@@ -200,7 +191,7 @@ If your changes to the data file makes its format invalid, MrTechRecruiter will 
 
 Action | Format, Examples
 --------|------------------
-**Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK linkedin/LINKEDIN_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo linkedin/https://www.linkedin.com/in/mary-ann-818673b4/?originalSubdomain=sg`
+**Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 **Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
 **Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Applicants** | `list-applicant`
