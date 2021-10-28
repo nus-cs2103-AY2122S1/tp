@@ -93,7 +93,7 @@ public class DeleteGradeCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with the given {@code Assignment} and corresponding {@code Grade}.
      */
-    private static Person createEditedPerson(Person personToEdit, Assignment assignment) {
+    public static Person createEditedPerson(Person personToEdit, Assignment assignment) {
         requireNonNull(personToEdit);
 
         Name updatedName = personToEdit.getName();

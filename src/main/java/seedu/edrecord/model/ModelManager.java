@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.commons.core.LogsCenter;
+import seedu.edrecord.logic.commands.DeleteGradeCommand;
 import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
@@ -266,10 +267,12 @@ public class ModelManager implements Model {
 
         // Delete grades from all persons under the module
         List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
-        // TODO Integrate with AssignmentGradeMap, possibly refactor to enforce stricter immutability
         allPersons.stream()
                 .filter(selectedModulePredicate)
-                .forEach(person -> person.deleteGrade(target));
+                .forEach(person -> {
+                    Person editedPerson = DeleteGradeCommand.createEditedPerson(person, target);
+                    this.setPerson(person, editedPerson);
+                });
     }
 
     @Override
