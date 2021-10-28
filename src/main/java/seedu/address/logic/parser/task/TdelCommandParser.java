@@ -31,8 +31,8 @@ public class TdelCommandParser implements Parser<TdelCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TdelCommand.MESSAGE_USAGE));
         }
 
-        Index taskID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_ID).get());
+        Index taskId = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_ID).get());
 
-        return new TdelCommand(taskID);
+        return new TdelCommand(taskId);
     }
 }

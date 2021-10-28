@@ -45,14 +45,14 @@ class TdelCommandTest {
         Index validMemberId = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberId);
-        Index validTaskID = Index.fromOneBased(1);
+        Index validTaskId = Index.fromOneBased(1);
         Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
         ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberId);
         tAddCommand.execute(modelStub);
-        CommandResult commandResult = new TdelCommand(validTaskID).execute(modelStub);
+        CommandResult commandResult = new TdelCommand(validTaskId).execute(modelStub);
 
         assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getName()),
                 commandResult.getFeedbackToUser());
@@ -61,10 +61,10 @@ class TdelCommandTest {
     @Test
     public void execute_taskNotPresent_throwsTaskNotFoundException() throws CommandException {
         Index validMemberId = Index.fromOneBased(1);
-        Index validTaskID = Index.fromOneBased(1);
+        Index validTaskId = Index.fromOneBased(1);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand = new TdelCommand(validTaskID);
+        TdelCommand tDelCommand = new TdelCommand(validTaskId);
         ModelStubWithoutTask modelStub = new ModelStubWithoutTask(addressBook, validMemberId);
         TlistCommand tlistCommand = new TlistCommand(validMemberId);
         tlistCommand.execute(modelStub);
@@ -76,18 +76,18 @@ class TdelCommandTest {
     @Test
     void equals() {
         Index validMemberId = Index.fromOneBased(1);
-        Index validTaskID1 = Index.fromOneBased(1);
-        Index validTaskID2 = Index.fromOneBased(2);
+        Index validTaskId1 = Index.fromOneBased(1);
+        Index validTaskId2 = Index.fromOneBased(2);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand1 = new TdelCommand(validTaskID1);
-        TdelCommand tDelCommand2 = new TdelCommand(validTaskID2);
+        TdelCommand tDelCommand1 = new TdelCommand(validTaskId1);
+        TdelCommand tDelCommand2 = new TdelCommand(validTaskId2);
 
         // same object -> returns true
         assertTrue(tDelCommand1.equals(tDelCommand1));
 
         // same values -> returns true
-        TdelCommand tDelCommand1Copy = new TdelCommand(validTaskID1);
+        TdelCommand tDelCommand1Copy = new TdelCommand(validTaskId1);
         assertTrue(tDelCommand1.equals(tDelCommand1Copy));
 
         // different types -> returns false
