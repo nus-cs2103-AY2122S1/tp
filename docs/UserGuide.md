@@ -236,6 +236,28 @@ Examples:
 * `trace` followed by `r/A101` lists the resident's immediate close contact from events in the past 7 days.
 * `trace n/Anne` followed by `d/2 t/4` lists Anne's immediate contacts and their immediate contacts from events in the past 4 days.
 
+#### Sorting residents : `sort`
+
+Sorts the residents according to specified fields in ascending or descending order
+
+Format: `sort by/FIELD o/ORDER`
+
+FIELD | Resident's field
+-------- | ------ 
+`n` | Name
+`e` | Email
+`r` | Room
+`p` | Phone
+`f` | Faculty
+`v` | Vaccination
+`ld` | FET date
+`cd` | Collection date
+
+* `ORDER` can be `a` for ascending or `d` for descending
+
+Examples:
+* `sort by/n o/a` sorts the residents by name in ascending order
+
 #### Importing resident data : `import`
 
 Imports resident information from the specified csv file which is to be located within the `data/` folder.
@@ -329,6 +351,25 @@ Examples:
 * `exclude 2 r/A101, A102, A103` removes the residents who stay in rooms A101, A102 and A103 from the second event in the address book
 * `exclude 3 r/John Doe` removes John Doe from the third event in the address book
 * `exclude 4 r/John Doe, Jane Doe` removes John Doe and Jane Doe from the fourth event in the address book
+
+#### Sorting events : `sort`
+
+Sorts the events according to specified fields in ascending or descending order
+
+Format: `sort by/FIELD o/ORDER`
+
+FIELD | Event's field
+-------- | ------ 
+`n` | Name
+`d` | Date and Time
+`c` | Capacity
+`v` | Venue
+
+* `ORDER` can be `a` for ascending or `d` for descending
+
+Examples:
+* `sort by/n o/a` sorts the events by name in ascending order
+* `sort by/d o/a` sorts the events by date and time from old to new
 
 ### Commons
 
