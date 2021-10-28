@@ -13,8 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FEE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FEE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_BOB;
@@ -54,7 +52,6 @@ public class PersonTest {
         School validSchool = new School(VALID_SCHOOL_AMY);
         AcadStream validAcadStream = new AcadStream(VALID_ACAD_STREAM_AMY);
         AcadLevel validAcadLevel = new AcadLevel(VALID_ACAD_LEVEL_AMY);
-        Fee validFee = new Fee(VALID_FEE_AMY);
         Remark validRemark = new Remark(VALID_REMARK_AMY);
         Set<Tag> validTagSet = new HashSet<>();
         validTagSet.add(new Tag(VALID_TAG_ZOOM));
@@ -64,67 +61,62 @@ public class PersonTest {
 
         // null name
         assertThrows(NullPointerException.class, () -> new Person(null, validPhone, validEmail, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null phone
         assertThrows(NullPointerException.class, () -> new Person(validName, null, validEmail, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null email
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, null, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null parent phone
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, null,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null parent email
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                null, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                null, validAddress, validSchool, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null address
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, null, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, null, validSchool, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null school
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, validAddress, null, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, null, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null acad stream
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, validAddress, validSchool, null, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, validSchool, null, validAcadLevel, validRemark,
                 validTagSet, validLessonSet));
 
         // null acad level
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, null, validFee, validRemark,
-                validTagSet, validLessonSet));
-
-        // null fee
-        assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, null, validRemark,
+                validEmail, validAddress, validSchool, validAcadStream, null, validRemark,
                 validTagSet, validLessonSet));
 
         // null remark
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, null,
+                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, null,
                 validTagSet, validLessonSet));
 
         // null tag set
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validRemark,
                 null, validLessonSet));
 
         // null lesson
         assertThrows(NullPointerException.class, () -> new Person(validName, validPhone, validEmail, validPhone,
-                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validFee, validRemark,
+                validEmail, validAddress, validSchool, validAcadStream, validAcadLevel, validRemark,
                 validTagSet, null));
 
     }
@@ -162,7 +154,7 @@ public class PersonTest {
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withParentPhone(VALID_PARENT_PHONE_BOB).withParentEmail(VALID_PARENT_EMAIL_BOB)
-                .withFee(VALID_FEE_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_ZOOM).build();
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_ZOOM).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -296,10 +288,6 @@ public class PersonTest {
 
         // different remark -> returns false
         editedAlice = new PersonBuilder(ALICE).withRemark(VALID_REMARK_BOB).build();
-        assertNotEquals(editedAlice.hashCode(), ALICE.hashCode());
-
-        // different fee -> returns false
-        editedAlice = new PersonBuilder(ALICE).withFee(VALID_FEE_BOB).build();
         assertNotEquals(editedAlice.hashCode(), ALICE.hashCode());
     }
 

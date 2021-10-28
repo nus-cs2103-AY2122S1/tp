@@ -94,7 +94,6 @@ public class DateTest {
         assertTrue(Date.isValidDate("29 Feb 2020")); // leap year
     }
 
-
     @Test
     public void updateDate_withoutSkipDates() {
         // At least 1 week has passed

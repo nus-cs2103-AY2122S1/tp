@@ -344,7 +344,7 @@ A lesson can be categorised into 2 types:
 2. A one-off makeup lesson.
 
 The essential fields for a lesson are:
-* Date
+* Start date
 * Time range
 * Subject
 * Rate
@@ -357,8 +357,11 @@ This rate will be used in the calculation of fees due after each lesson.
 *  A lesson can be identified by the index number shown in the lesson list of the student.
 </div>
 
-An optional field for a lesson is:
+An optional field for both types of lesson is:
 * Homework
+
+An optional field for a **recurring** lesson is:
+* End date
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -367,17 +370,22 @@ An optional field for a lesson is:
 
 Adds a lesson to the specified student in TAB.
 
-Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
+Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple pieces of homework to a lesson in TAB.
 </div>
 
 * The type of lesson will be inferred from the presence of the `recurring/` prefix.
+
+* The end date for the recurrence is optional.
   
 * The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
 
 Examples:
+
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that
+starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
 
 * `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50`
   adds the recurring lesson to the 1st student in the displayed student list.
@@ -392,11 +400,9 @@ Examples:
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]…​`
+Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]…​`
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
-
-* You can edit all fields of a lesson except the start date.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
@@ -406,6 +412,7 @@ Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
+* `ledit 1 1 recurring/30 Nov 2021` Edits the end date of the 1st lesson (assumed to be recurring with start date before 30 Nov 2021) of the 1st student to be `30 Nov 2021`.
 * `ledit 2 3 rates/35.85 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
 * `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 
@@ -653,6 +660,7 @@ Action | Format, Examples
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 **View Tags** | `tag`
 **Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math`
+**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [hw/HOMEWORK]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **View Schedule** | `schedule`
 **Clear** |`clear`
