@@ -50,13 +50,13 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used multiple times (or none at all).<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter should only appear once in the command but is specified multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -81,6 +81,7 @@ Examples:
 
 
 ### Editing a position: `edit-position`
+
 Edits the specified position in MrTechRecruiter.
 
 Format: `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`
@@ -118,6 +119,7 @@ Examples:
 * `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`
 * `add-applicant n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
 
+
 ### Editing an applicant: `edit-applicant`
 Edits the specified applicant in MrTechRecruiter
 
@@ -129,6 +131,7 @@ Format: `edit-applicant INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITI
 Examples:
 * `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
 * `edit-applicant n/Betsy p/1234567 pos/database administrator`
+
 
 ### Deleting an applicant: `delete-applicant`
 
@@ -155,6 +158,19 @@ Shows a list of all applicants in MrTechRecruiter.
 
 Format: `list-applicant`
 
+
+### Get rejection rate of a specified position : `rate`
+
+Shows the rejection rate of an existing position in MrTechRecruiter.
+
+Format: `rate pos/POSITION`
+
+* If specified `POSITION` does not exist, will display a different message.
+* If the `POSITION` has no applicants, will display a `No current applicants` message.
+
+Examples:
+* `rate pos/software engineer`
+
 ### Undoing the last modification : `undo`
 
 Recovers the state before last modification is made.
@@ -162,6 +178,7 @@ The modification command includes: `add-position` `add-applicant` `edit-position
 `` [command that modifies the state should also be added later]
 
 Format: `undo`
+
 
 ### Searching for applicants using keywords: `find` [coming soon]
 
@@ -176,11 +193,13 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/Mary p/12345678` returns applicants whose names contain `mary` AND whose numbers contain `12345678`
 
+
 ### Clearing all entries : `clear` `[coming soon]`
 
 Clears all entries from MrTechRecruiter.
 
 Format: `clear`
+
 
 ### Exiting the program : `exit` `[coming soon]`
 
@@ -188,9 +207,11 @@ Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -225,3 +246,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List [coming soon]** | `list`
 **Help [coming soon]** | `help`
+**Rate | `rate pos/POSITION` <br> e.g. `rate software engineer`
