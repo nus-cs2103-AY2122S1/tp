@@ -218,7 +218,7 @@ Finds students who match the input keywords.
 Format: `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)`
 
 * Search for students by their name, NUSNET ID, tag, or the group they belong in.
-Only one type of tag should be used for each search.
+Only one flag should be used for each search (e.g. having `-n` and `-g` arguments are not allowed.) .
 * To search with multiple keywords, separate keywords with spaces. e.g. `search -g T02A R03C`
 * The search is case-insensitive. e.g. `jonas` will match `Jonas`.
 * The order of the keywords does not matter. e.g. `Jonas Chow` will match `Chow Jonas`.
@@ -229,11 +229,11 @@ e.g. `Jonas Leong` will return `Jonas Chow`, `Leong Hong Fai`.
 `beginner` will match `beginners`.
 
 Examples:
-* `search -n Jonas Chow` return list of students with part of names that matches `Jonas` and `Chow`. 
-* `search -i E0123456` return student with NUSNET ID `E0123456`, if found in database.
-* `search -g T02B R03C` return list of students in the groups `T02B` and `R03C`. 
-* `search -g T02` return list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`. 
-* `search -t beginners` return list of students tagged as `beginners`. 
+* `search -n Jonas Chow` returns a list of students with part of names that matches `Jonas` and `Chow`.
+* `search -i E0123456` returns the student with NUSNET ID `E0123456`, if found in database.
+* `search -g T02B R03C` returns a list of students in the groups `T02B` and `R03C`.
+* `search -g T02` returns a list of students in all tutorial groups with names containing `T02`, e.g. `T02A` and `T02B`.
+* `search -t beginners` returns a list of students tagged as `beginners`.
 
 [Return to table of contents](#table-of-contents)
 
@@ -437,9 +437,9 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 ## Glossary
 
-Below is a table of the parameter tags used in our document. 
+Below is a table of the argument flags used in our document.
 
-Tag | Full Form | Usage
+Flag | Full Form | Usage
 -------|--------|----------
 -n | name | `-n <student_name>`
 -i | id | `-i <student_id>`
