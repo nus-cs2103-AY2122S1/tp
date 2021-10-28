@@ -310,9 +310,4 @@ public class ModelManager implements Model {
         schedule.setAppointment(appointmentToEdit, editedAppointment);
     }
 
-    @Override
-    public boolean hasAppointment(Appointment appointment) {
-        requireNonNull(appointment);
-        return schedule.contains(appointment);
-    }
 }
