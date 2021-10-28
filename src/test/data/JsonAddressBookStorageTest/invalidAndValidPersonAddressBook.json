@@ -10,7 +10,5 @@
     "faculty": "invalid_faculty",
     "major": "computer science"
   } ],
-  "organisations" : [ {
-
-  } ]
+  "organisations" : []
 }
