@@ -156,9 +156,7 @@ Format: **`help`**
 
 You can add a person to the contact book.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: Name of a person must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: Name of a person must be provided!</div>
 
 Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
 
@@ -192,12 +190,8 @@ Examples:
 
 You can edit an existing person in the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: At least one field of the person must be changed!
-</div>
-<div markdown="block" class="alert alert-danger">
-:exclamation: Index must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: At least one field of the person must be changed!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
 
 Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 
@@ -221,7 +215,7 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can change the default colour of the tag with `t/TAG:#HEX_COLOUR`
+You can change the default colour of the tag with `t/TAG:#HEX_COLOUR`<br>
 Example: `t/friends:#FF0000` for a red colour tag
 </div>
 
@@ -235,9 +229,7 @@ Examples:
 
 You can add a remark to a person in the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: Index must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
 
 Format: **`remark`** `INDEX r/VALUE`
 * Add a remark to the person at the specified `INDEX`. 
@@ -256,9 +248,7 @@ Examples:
 
 You can delete the specified person from the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: Index must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
 
 Format: **`delete`** `INDEX`
 
@@ -275,9 +265,7 @@ Examples:
 
 You can delete multiple person from the contact book using `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: At least one keyword must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: At least one keyword must be provided!</div>
 
 Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
@@ -318,9 +306,7 @@ Format: **`list`**
 
 You can find the specified persons using `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: At least one keyword must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: At least one keyword must be provided!</div>
 
 Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
@@ -352,9 +338,7 @@ Examples:
 
 You can sort all persons in the contact book by a specified field.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: Exactly one field must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: Exactly one field must be provided!</div>
 
 Format: **`sort`** `FIELD_PREFIX/`
 
@@ -391,12 +375,8 @@ Examples:
 
 You can import your friends' contact book into your application.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: File must be in JSON format!
-</div>
-<div markdown="block" class="alert alert-danger">
-:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: File must be in JSON format!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.</div>
 
 Format: **`import`** `FILE_NAME.json`
 
@@ -404,12 +384,8 @@ Format: **`import`** `FILE_NAME.json`
 
 You can export your contact book and share it with your friends.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: File must be in JSON format!
-</div>
-<div markdown="block" class="alert alert-danger">
-:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: File must be in JSON format!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.</div>
 
 Format: **`export`** `FILE_NAME.json`
 
@@ -417,9 +393,7 @@ Format: **`export`** `FILE_NAME.json`
 
 You can create command shortcut by aliasing it with custom `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">
-:exclamation: Exactly one keyword must be provided!
-</div>
+<div markdown="block" class="alert alert-danger">:exclamation: Exactly one keyword must be provided!</div>
 
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
