@@ -135,7 +135,7 @@ Format: `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE1] [g/GENRE2] ...`
 * `GENRE` refers to the genre to which the animes belong to.
 * `GENRE` given must be from the list of available genres found in INSERT HOW TO FIND LIST HERE. Any number of genres can be provided for a single anime.
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `add n/Shingeki no Kyojin`
@@ -158,7 +158,7 @@ Format: `delete INDEX`
 * Deletes the anime at the specified `INDEX`
 * The `INDEX` provided must be a positive integer `1, 2, 3...`
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `delete 1` deletes the first anime shown in the list.
@@ -179,7 +179,7 @@ Format: `update INDEX e/NEWEPISODE`
 * `NEWEPISODE`  must be a non-negative integer `0, 1, 2...`
 * The `INDEX` provided must be a positive integer `1, 2, 3...`
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `update 1 e/3` updates the first anime to episode 3.
@@ -201,7 +201,7 @@ Format: `status INDEX s/UPDATEDSTATUS`
 * Shortforms to the keywords above are `t`, `w` and `f` respectively.
 * The `INDEX` provided must be a positive integer `1, 2, 3...`
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `status 1 s/finished` updates the first anime to watch status `finished`.
@@ -221,7 +221,7 @@ Format: `rename INDEX n/NEWTITLE`
 * `NEWTITLE` must only contain `ASCII` characters and cannot be empty
 * The `INDEX` provided must be a positive integer `1, 2, 3...`
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `rename 1 n/Narutoo` updates the first anime title to Narutoo.
@@ -246,7 +246,7 @@ Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 * Updates the anime at the specified `INDEX`
 * The index must be a positive integer 1, 2, 3, ...
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
@@ -263,7 +263,7 @@ ___
 Lists all currently supported genres on the Command Results panel.
 Format: `genrelist`
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `genrelist` displays all currently supported genres of AniList
@@ -283,7 +283,7 @@ Format: `list [s/STATUS]`
 * `STATUS` must be in the form `towatch`, `watching`, `finished`.
 * Shortforms to the keywords above are `t`, `w` and `f` respectively.
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `list` displays all the anime in the list panel.
@@ -305,7 +305,7 @@ Format: `clear`
 - User will be prompted with a confirmation message, and can proceed to clear all displayed animes by entering 'clear' again
 - Entering anything else will cancel the command
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `clear` on the initial clear command prompts the user to confirm the command.
@@ -326,8 +326,13 @@ Format: `find [n/NAME KEYWORD]... [g/GENRE KEYWORD]...`
 - `GENRE KEYWORD` refers to the genre keyword(s) you are searching for
 - `find` has to be followed by at least one search term
 
-Example:
-*  `find n/boku no n/hero g/comedy`
+<div markdown="block" class="alert alert-info">
+
+Example Usages:
+* `find n/boku no n/hero g/comedy` Finds all anime with "boku no" or "hero" in their name and 
+all anime with comedy genre.
+</div>
+
 ___
 
 ### View user statistics: `stats`
@@ -340,7 +345,7 @@ ___
 Lists all currently supported commands on the Command Results panel.
 Format: `help`
 
-<div markdown="box" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 Example usages:
 * `help` displays all currently supported commands of AniList
