@@ -5,6 +5,7 @@ import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +35,16 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with a similar full name as {@code toCheck}.
+     * Similar is defined as full names having an edit distance of zero
+     * or one (case insensitive).
+     */
+    public Optional<Person> getSimilar(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(toCheck::isSimilarPerson).findFirst();
     }
 
     /**

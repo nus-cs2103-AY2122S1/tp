@@ -156,9 +156,7 @@ public class ParserUtil {
         } catch (Exception e) {
             throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
-        if (!ExpiryDate.isValidExpiryDate(date)) {
-            throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
-        }
+
         return new ExpiryDate(date);
     }
 
