@@ -633,6 +633,52 @@ Future versions user stories
     * 2a1. CONNECTIONS display a message to indicate no matching entries
 
       Use case resumes at step 2.
+
+**Use case: Pin a person**
+
+**MSS**
+
+1.  User provides index of person to pin
+2.  CONNECTIONS pins the person to the top of the contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Index provided is invalid
+
+    * 1a1. CONNECTIONS display a message to indicate index is invalid.
+
+      Use case ends.
+
+* 1b. Person at index is already pinned
+
+    * 1b1. CONNECTIONS display a message to indicate person is already pinned.
+
+      Use case end.
+
+**Use case: Unpin a person**
+
+**MSS**
+
+1.  User provides index of person to unpin
+2.  CONNECTIONS unpins the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Index provided is invalid
+
+    * 1a1. CONNECTIONS display a message to indicate index is invalid.
+
+      Use case ends.
+
+* 1b. Person at index is not pinned
+
+    * 1b1. CONNECTIONS display a message to indicate person is not pinned.
+
+      Use case end.
     
 
 **Use case: List everyone in the address book**

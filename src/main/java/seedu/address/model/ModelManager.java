@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.MonthDay;
+import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -17,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonBirthdayComparator;
@@ -30,6 +33,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Set<Prefix> prefixStore;
     private final ObservableList<Person> birthdayReminders;
 
     /**
@@ -44,6 +48,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.prefixStore = Set.of();
         this.birthdayReminders = generateBirthdayReminderList(addressBook);
     }
 
@@ -144,6 +149,18 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+
+    //=========== Prefix Set Accessors ===========================
+    @Override
+    public void setPrefixes(Collection<Prefix> prefixes) {
+        this.prefixStore = Set.copyOf(prefixes);
+    }
+
+    @Override
+    public Set<Prefix> getPrefixes() {
+        return Set.copyOf(this.prefixStore);
+    }
+
     //=========== Birthday Reminder List Accessors ===========================================================
     private static ObservableList<Person> generateBirthdayReminderList(ReadOnlyAddressBook addressBook) {
 
@@ -170,7 +187,6 @@ public class ModelManager implements Model {
     }
 
     private static boolean haveBirthdayAfterCurrentDay(Person p) {
-        MonthDay currentMonthDay = MonthDay.now();
         Optional<Birthday> possibleBirthday = p.getBirthday();
         return possibleBirthday
             .map(birthday -> isAfterCurrentMonthday(birthday))
@@ -238,6 +254,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
+                && prefixStore.equals(other.prefixStore)
                 && birthdayReminders.equals(other.birthdayReminders);
     }
 
