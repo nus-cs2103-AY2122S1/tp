@@ -19,6 +19,7 @@ title: User Guide
     * [Edit Attendance](#editing-a-students-studio-attendance-attendance)
     * [Edit Participation](#editing-a-students-studio-participation-participation)
   * [Visualizing Data](#visualizing-data-in-academy-directory)
+    * [View student information](#viewing-all-related-information-of-a-student--view)
     * [Show Grade](#displaying-the-grades-for-an-assessment--show)
     * [Visualize all Grades](#visualizing-assessments-grades-of-the-entire-class-visualize)
     * [Filter Academy Directory](#filtering-academy-directory-by-name-or-tag-filter)
@@ -46,26 +47,27 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 ## Overview
-Are you a CS1101S Avenger? Are you tired of having to deal with
-so many platforms like Luminus, Source Academy, etc.? We have just 
-the application for you!
+Are you a CS1101S Avenger? Are you tired of dealing with
+so many platforms like Luminus, Source Academy, etc.? And none of these platforms are even remotely useful for you? 
 
-Academy Directory (AD) is a **desktop app for CS1101S tutors to manage their students.** Its main features are as follows: 
+Well, we have good news. Academy Directory is just the application for you!
+
+Academy Directory (AD) is a **desktop application for CS1101S tutors to manage their students.** Its main features are as follows: 
 - [Manage students’ personal details](#managing-students-personal-details)
 - [Track students' grades, Studio attendance, and participation](#tracking-students-grades-studio-attendance-and-participation)
 - [Visualize data in Academy Directory](#visualizing-data-in-academy-directory) 
 
 Academy Directory is written in _Java_ and thus can be run on all major operating systems!
-It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-Academy Directory is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I at the National University of Singapore.
+It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User Interface (GUI).
+Academy Directory is developed as an evolution of the Address Book 3 application, primarily for usage in teaching CS1101S - Programming Methodology I - at the National University of Singapore.
 
 ## Information about this User Guide
 ### Purpose
 This user guide aims to: 
-- Provide first-time users how to use Academy Directory
+- Provide first-time users on how to use Academy Directory
 - Show [details of all commands](#features) should users face any issues using any
 of the command in Academy Directory
-- Answer some [frequently asked questions](#faq)
+- Answer some of the [frequently asked questions](#faq)
 - Provide a [summary of all commands](#command-summary) supported by Academy Directory
 
 ### Target Audience
@@ -75,8 +77,8 @@ As such, the following assumptions are made regarding the target audience:
 - Can type fast and are comfortable using a CLI
 - Is comfortable downloading and installing software such as Java 11
 onto their system
-- Is familiar with common terms in Computer Science and
-in CS1101S
+- Is familiar with the common terms relating to Computer Science
+- Is familiar with CS1101S module structure and teaching pedagogy.
 
 While some technical background is assumed, we also provide the definitions for
 certain technical terms commonly used in this user guide [here](#glossary).
@@ -97,9 +99,9 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 4. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all contacts. For new users, the list will contain some sample data which users can delete.
 
-   * **`attendance`** : Mark a student attendance.
+   * **`visualize`** : Visualize grades of students. For new users, an empty whisker box plot diagram will be shown.
 
    * **`exit`** : Exits the app.
 
@@ -109,8 +111,8 @@ Notes:
 - While it is possible to open `academydirectory.jar` by double-clicking it, this may cause Academy Directory
 related files to be saved to an indeterminate location on the computer. As such, this method is _not recommended_, especially
 for beginners. 
-- The `clear` command can be used to remove the sample data in Academy Directory
-- Changes to Academy Directory are automatically saved
+- The `clear` command can be used to remove the sample data in Academy Directory.
+- Changes to Academy Directory are automatically saved into the database.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -304,6 +306,20 @@ Examples:
 * `participation 4, 6 ses/2 add/-300`
 
 ### Visualizing data in Academy Directory
+#### Viewing all related information of a student: `view`
+Displays all information relating to a student, both personal and academic information. Information shown include the student's name, tag, participation data, examination score, and contact information.
+
+Format: `view INDEX`
+
+* View students' information, both personal and academic related, based on their `INDEX` number on the list.
+* Information shown for the student will be in a drop-down menu listing participation and grades.
+* Contact information like phone number, email address, and Telegram handle are also displayed.
+
+Examples:
+* `view 1`
+
+**Include an interactive GUI version where Avengers can click on the list to view student information as well.**
+
 #### Displaying the grades for an assessment:  `show`
 Displays the grades and the average score of all the students for a particular assessment.
 
@@ -315,6 +331,8 @@ as the average score.
 Examples:
 * `show RA1`
 
+**Include an interactive GUI version where Avengers can click on the menu to show students' grades as well.**
+
 #### Visualizing assessments' grades of the entire class: `visualize`
 Plots the grades and the average score of all the students for all assessments.
 
@@ -322,6 +340,8 @@ Format: `visualize`
 
 * Visualize assessment grades of the class with Box & Whisker plot
 * Any grade of any student that is not yet entered will be counted as `0`
+
+**Include an interactive GUI version where Avengers can click on the list to view statistics as well.**
 
 #### Sorting student list : `sort`
 
@@ -352,7 +372,7 @@ Format: `list`
 
 #### Clearing all students : `clear`
 
-Clears all students from Academy Directory. Results in an empty academy directory
+Clears all students from Academy Directory. This will result in an empty academy directory
 
 Format: `clear`
 
@@ -364,6 +384,8 @@ Format: `undo`
 * `undo` only reverts changes made 
 * `undo` will display an error message if there are no changes to be undone
 
+**Include an interactive GUI version where Avengers can click on the menu to undo the most recent changes as well.**
+
 #### Redo changes to Academy Directory: `redo`
 Redo changes made to Academy Directory
 
@@ -371,6 +393,8 @@ Format: `redo`
 
 * `redo` only reverts changes made
 * `redo` will display an error message if there are no changes to be redone
+
+**Include an interactive GUI version where Avengers can click on the menu to redo the most recent changes as well.**
 
 #### Seeking help : `help`
 
@@ -398,12 +422,16 @@ Examples:
 * `help`
 * `help add`: Displays the exact same content as what is shown on this User Guide for the `add` command
   or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
+  
+**Include an interactive GUI version where Avengers can click on the menu to view help. Only available for general help**
 
 #### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+Alternatively, users can exit by clicking the `X` button on the top right corner of the application window.
 
 #### [For Advanced Users] Viewing Commit History: `history`
 Shows local commit history.
@@ -419,6 +447,8 @@ Format: `history`
 - The commit corresponding to old branch is labelled with "(OLD)"
 - Old branch is shown at the left, current branch at the right
 - The corresponding commit hash is the five character string displayed
+
+**Include an interactive GUI version where Avengers can click on the menu to see usage history as well.**
 
 #### [For Advanced Users] Reverting Commit: `revert`
 Reverts state of Academy Directory to a previous commit
@@ -440,7 +470,6 @@ Example:
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AcademyDirectory home folder. Overwrite the version control folder it creates with the version
 control folder of your previous AcademyDirectory to retain commit history.
-
 
 **Q**: How do I save my data?<br>
 **A**: Academy Directory data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -489,7 +518,7 @@ Action | Format | Examples
 [**Clear Student List**](#clearing-all-students--clear) | `clear` | `clear`
 [**Undo**](#undo-changes-to-academy-directory-undo) | `undo` | `undo`
 [**Redo**](#redo-changes-to-academy-directory-redo) | `redo` | `redo`
-[**Help**](#seeking-help--help) | `help` | `help add`
+[**Help**](#seeking-help--help) | `help [COMMAND_NAME]` | `help add`
 [**Exit**](#exiting-the-program--exit) | `exit` | `exit`
 [**View Commit History**](#for-advanced-users-viewing-commit-history-history) | `history` | `history`
 [**Revert Commit**](#for-advanced-users-reverting-commit-revert) | `revert HASH` | `revert df7x3`
