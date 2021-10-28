@@ -186,6 +186,35 @@ The following sequence diagram shows how the show operation works.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ShowCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+
+### Filter interview feature
+
+The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
+input. This command then updates the ```model``` accordingly. 
+
+The following activity diagram summarizes what happens when a user executes a ```show``` command:
+![images](images/FilterInterviewCommandActivityDiagram.png)
+
+Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ` past`.
+
+Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
+to identify the user input ` past`. `FilterInterviewCommandParser#parse` then initializes a
+`FilterInterviewPastCommand`.
+
+Step 3. `FilterInterviewPastCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
+and filters for applicants that have interviews that have already passed. 
+ 
+Step 4. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
+have interviews that have passed. This `CommandResult` is then returned. 
+
+Given below is an example usage scenario and how the show operation behaves at each step.
+
+The following sequence diagram shows how the show operation works.
+![images](images/FilterInterviewCommandSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterInterviewCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
