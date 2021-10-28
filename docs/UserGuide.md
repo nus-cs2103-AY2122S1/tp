@@ -21,7 +21,6 @@ inventory management tasks done faster than traditional GUI apps.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
 
-**TODO: Repalce sample ui image when ui is done**
 ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
@@ -77,9 +76,6 @@ inventory management tasks done faster than traditional GUI apps.
 Shows a message explaining how to access the help page.
 If a command word is specified, explains how to use the specified command.
 
-**TODO: Replace help ui image**
-![help message](images/helpMessage.png)
-
 Format: 
 - `help`: Shows help page url.
 - `help {command}` : Explains how to use the specified command.
@@ -88,6 +84,10 @@ Examples:
 ```
 help sorder // Explains how to use sorder command
 ```
+
+Screenshot:
+
+![help message](images/helpMessage.png)
 
 ### Adding an item: `add`
 
