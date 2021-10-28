@@ -26,15 +26,13 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 
 Whether you're using Windows or macOS, the steps for installation are the same.
 
-[//]: # (Consider adding video here)
+[//]: # (TODO: Consider adding video here)
 
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
 2. Download the latest `dash.jar` from here (not available yet).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
-
-   icon and notes for shortcut here
 
 4. Double-click the file to start the app. Here's what you should see in a few seconds:<br>
    ![Ui](images/UG-00.png)
@@ -45,7 +43,7 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 --------------------------------------------------------------------------------------------------------------------
 ## <u>How to use this User Guide</u>
 
-* Go to the [Getting Started](#getting-started) section if you want to know how to set things up.
+* Go to the [Getting Started](#getting-started) section for an overview of Dash.
 * If you want to dive straight into features, you can check out our [Features](#features) section.
 * For a quick recap of the commands, you can take a look at our [Command Summary](#command-summary) section.
 
@@ -56,7 +54,7 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 
 <div markdown="block" class="alert alert-info">
    
-**:information_source: How to read the Features section:**<br>
+**:information_source: Meaning of icons:**<br>
 
 :orange_book: _Description_: This is a brief description of what the command does.
 
@@ -64,6 +62,8 @@ Whether you're using Windows or macOS, the steps for installation are the same.
 about the command format.)
 
 :grey_question: _Explanation_: This is an explanation on how the command can be used, and any noteworthy examples or caveats.
+
+:bulb: Tip: This is additional info to help you get the most out of Dash.
    
 </div>
 
@@ -89,7 +89,7 @@ Finally, the help tab provides you with a quick summary of Dash's features and h
 Dash uses a Command Line Interface (CLI) to optimize speed. This means that you use mostly your keyboard to interact 
 with Dash, instead of relying on your mouse to click on options.    
 
-[//]: # (icons for notes abt cli here, talk about how you cant click on tabs here)
+[//]: # (TODO: icons for notes abt cli here, talk about how you cant click on tabs here)
 
 ![Using the CLI](images/CLITutorialGif.gif)
 
@@ -105,6 +105,13 @@ Some example commands you can try:
 * **`clear`** : Deletes all contacts.
 
 * **`exit`** : Exits the app.
+
+<div markdown="block" class="alert alert-info">
+
+:bulb: You can press the up and down arrow keys in the command box to retrieve your previous commands. This can save 
+you a lot of time!
+
+</div>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -416,10 +423,11 @@ _Find Command_ to find for all tasks that occur on 07:00 PM.
 ![Finding upcoming Tasks](images/UG-13.png)
 #### Find all upcoming tasks: [upcoming]
 
-:orange_book: Finds all tasks whose Date/Time are after the current Date/Time (as determined locally on your computer). 
+:orange_book: Finds all incomplete tasks whose Date/Time are after the current Date/Time (as determined locally on your 
+computer). These tasks will be sorted chronologically, with tasks that are closer to the current Date/Time first.
 
-The above screenshot demonstrates how the _Upcoming Command_ will show tasks with a Date/Time that is after the current 
-Date/Time on your computer.
+The above screenshot demonstrates how the _Upcoming Command_ will show incomplete tasks with a Date/Time that is after 
+the current Date/Time on your computer. These tasks are sorted chronologically as described above.
 
 :page_with_curl: Format: ```upcoming```
 
