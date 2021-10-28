@@ -12,7 +12,7 @@ import seedu.notor.logic.executors.person.PersonDeleteExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from Notor.
  */
 public class PersonDeleteCommand extends PersonCommand {
     public static final String COMMAND_WORD = "delete";

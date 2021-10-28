@@ -26,6 +26,7 @@ import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
+import seedu.notor.logic.commands.person.PersonFindCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
 import seedu.notor.logic.commands.person.PersonTagCommand;
@@ -42,6 +43,7 @@ import seedu.notor.logic.parser.person.PersonClearTagsCommandParser;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
+import seedu.notor.logic.parser.person.PersonFindCommandParser;
 import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
 import seedu.notor.logic.parser.person.PersonTagCommandParser;
@@ -132,32 +134,25 @@ public class NotorParser {
             if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
                 if (PersonDeleteCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonDeleteCommandParser(index).parse();
-                }
-                if (PersonEditCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonEditCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonEditCommandParser(index, arguments).parse();
-                }
-                if (PersonNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonNoteCommandParser(index).parse();
-                }
-                if (PersonClearNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonClearNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonClearNoteCommandParser(index).parse();
-                }
-                if (PersonAddGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonAddGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
-                }
-                if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
-                }
-                if (PersonTagCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonTagCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonTagCommandParser(index, arguments).parse();
-                }
-                if (PersonUntagCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonUntagCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonUntagCommandParser(index, arguments).parse();
-                }
-                if (PersonClearTagsCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonClearTagsCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonClearTagsCommandParser(index).parse();
+                } else {
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
             if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
                 if (SubGroupCreateCommand.COMMAND_WORDS.contains(subCommandWord)) {
@@ -181,6 +176,9 @@ public class NotorParser {
             final String subCommandWord = targetedMatcher.group("subCommandWord");
             final String arguments = targetedMatcher.group("arguments");
             // TODO: List command conversion/find command conversion
+            if (PersonFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                return new PersonFindCommandParser(arguments).parse();
+            }
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

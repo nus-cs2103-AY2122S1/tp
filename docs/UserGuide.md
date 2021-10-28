@@ -381,22 +381,25 @@ Find allows you to obtain the results that match with the keyword specified. You
 
 ### _Finding persons_ : `person /find (n:QUERY)`
 
-Finds all persons that match your search term. This will search for the term within the person's name.
+Finds all persons that match your search term. You may search for substrings within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
 
-Format: `person  /find (n:QUERY)`<br>
-Advanced user Format:`p /f (n:QUERY)`
+Format: `person  /find [n:NAME_QUERY] [t:TAG1, TAG2...]`<br>
+Advanced user Format:`p /f [n:NAME_QUERY] [t:TAG1, TAG2...]`
 
-* Finds all persons that match with given `QUERY`.
-* Substrings will match: `jo` will match `John` and `joanne`.
+* Finds all persons that match with given `NAME_QUERY`, or are tagged with the tags specified.
+* The query for name will match if the string exists within the name, regardless of case: `jo` will match `John` and `joanne`.
+* Tags must be spelled exactly. You may specify more than one tag
+* While the parameters have been marked optional, you should specify at least one parameter if you want to filter the results! Specifying no parameters will bring up the help message
 
 Examples:
 
-* `person /find n:John`
+* `person /find n:Alex t:graduated, engineering`
 * `p /f n:Mary`
+* `p /find n:Jo t:FinalYearProject`
 
 ### _Find a group or subgroup_ : `group /find (g:KEYWORD)`
 
-Find all the groups with the keyword specified. This will search for the keyword within the group's name.
+Find all the groups with the keyword specified. This will search for the keyword within the group's name. You can also optionally specify a subgroup name to search only within that subgroup
 
 Format:  `group /find g:KEYWORD`<br>
 Advanced user Format: `g /f g:KEYWORD`
