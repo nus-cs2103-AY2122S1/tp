@@ -222,7 +222,9 @@ Format:
  - `sort n/`: Sort items in the inventory by name.
  - `list id/`: Sort items in the inventory by id.
 
-## TODO: SORT SCREENSHOT!
+Screenshot:
+
+![sort](images/screenshots/sort_items.png)
 
 ### Finding items: `find`
 
@@ -342,10 +344,6 @@ eorder
 Screenshot:
 
 ![eorder](images/screenshots/eorder.png)
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
