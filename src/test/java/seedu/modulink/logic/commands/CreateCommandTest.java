@@ -141,7 +141,7 @@ public class CreateCommandTest {
         }
 
         @Override
-        public void createProfile(Person target) {
+        public void addProfile(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 

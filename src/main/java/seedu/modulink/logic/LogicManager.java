@@ -94,6 +94,6 @@ public class LogicManager implements Logic {
     }
 
     public boolean hasCreatedProfile() {
-        return !model.getPersonList().filtered(Person::getIsMyProfile).isEmpty();
+        return !model.hasPerson(Person.getPlaceholder());
     }
 }

@@ -89,6 +89,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasProfile_personInIndexZeroOfAddressBook_returnsTrue() {
+        modelManager.addProfile(ALICE);
+        assertTrue(modelManager.hasPerson(ALICE));
+        assertEquals(modelManager.getFilteredPersonList().get(0), ALICE);
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
