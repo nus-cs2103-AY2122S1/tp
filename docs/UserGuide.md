@@ -155,7 +155,8 @@ Clear all policies from a person.
 
 Format: `clearpolicy PERSON_INDEX`
 
-### Download useful statistics as CSV : `download`
+### Download useful statistics as CSV : `download` 
+(Coming Soon)
 
 Download a CSV file containing useful statistics for the user. This includes
 - Most valuable clients + commission from them
