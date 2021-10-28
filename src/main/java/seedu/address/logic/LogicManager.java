@@ -76,7 +76,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getTeachingAssistantBuddyFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getAssistantBuddyFilePath();
     }
 
     @Override
