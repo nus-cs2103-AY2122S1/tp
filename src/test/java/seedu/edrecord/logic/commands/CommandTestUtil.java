@@ -38,7 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_INFO_AMY = "Has trouble understanding database principles";
     public static final String VALID_INFO_BOB = "Has trouble understanding software engineering principles";
     public static final String VALID_MODULE_AMY = "CS2103";
-    public static final String VALID_MODULE_BOB = "CS2103";
+    public static final String VALID_MODULE_BOB = "cS2103";
     public static final String VALID_GROUP_AMY = "T03";
     public static final String VALID_GROUP_BOB = "T03";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -62,7 +62,6 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_INFO_DESC = " " + PREFIX_INFO; // empty string not allowed for info
     public static final String INVALID_MODULE_DESC = " " + PREFIX_MODULE + "CS 2103"; // whitespace not allowed
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "T 99"; // whitespace not allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
