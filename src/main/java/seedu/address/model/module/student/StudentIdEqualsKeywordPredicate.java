@@ -5,10 +5,10 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Student}'s {@code StudentId} matches any of the keywords given.
  */
-public class StudentIdEqualsKeywordsPredicate implements Predicate<Student> {
+public class StudentIdEqualsKeywordPredicate implements Predicate<Student> {
     private final String keyword;
 
-    public StudentIdEqualsKeywordsPredicate(String keyword) {
+    public StudentIdEqualsKeywordPredicate(String keyword) {
         this.keyword = keyword;
     }
 
@@ -20,8 +20,8 @@ public class StudentIdEqualsKeywordsPredicate implements Predicate<Student> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof StudentIdEqualsKeywordsPredicate // instanceof handles nulls
-                && keyword.equals(((StudentIdEqualsKeywordsPredicate) other).keyword)); // state check
+                || (other instanceof StudentIdEqualsKeywordPredicate // instanceof handles nulls
+                && keyword.equals(((StudentIdEqualsKeywordPredicate) other).keyword)); // state check
     }
 
 }

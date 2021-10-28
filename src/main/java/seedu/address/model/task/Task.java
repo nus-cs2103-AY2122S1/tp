@@ -18,8 +18,9 @@ public class Task {
 
     /**
      * Constructs a Task.
-     * @param moduleName The TeachingAssistantBuddy this Task is under.
-     * @param taskName The Name of this Task.
+     * @param moduleName The name of the Module this Task is under.
+     * @param taskId The ID of this task.
+     * @param taskName The name of this task.
      * @param taskDeadline The Deadline of this Task.
      */
     public Task(ModuleName moduleName, TaskId taskId, TaskName taskName, TaskDeadline taskDeadline) {
@@ -32,7 +33,12 @@ public class Task {
     }
 
     /**
-     * Constructs a Task with isComplete
+     * Another constructor of a Task object that will initialise the isComplete field of a Task as specified.
+     * @param moduleName The name of the Module this Task is under.
+     * @param taskId The ID of this task.
+     * @param taskName The name of this task.
+     * @param taskDeadline The Deadline of this Task.
+     * @param isComplete Whether this Task is complete or not.
      */
     public Task(ModuleName moduleName, TaskId taskId, TaskName taskName, TaskDeadline taskDeadline,
                 boolean isComplete) {

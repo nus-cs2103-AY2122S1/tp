@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
 import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.student.Student;
 
 /**
  * An Immutable TeachingAssistantBuddy that is serializable to JSON format.
@@ -20,19 +19,15 @@ import seedu.address.model.module.student.Student;
 @JsonRootName(value = "assistantbuddy")
 class JsonSerializableAssistantBuddy {
 
-    public static final String MESSAGE_DUPLICATE_STUDENT = "Student list contains duplicate student(s).";
     private static final String MESSAGE_DUPLICATE_MODULE = "Module list contains duplicate module(s)";
 
-    private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAssistantBuddy} with the given persons.
+     * Constructs a {@code JsonSerializableAssistantBuddy} with the given modules.
      */
     @JsonCreator
-    public JsonSerializableAssistantBuddy(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                          @JsonProperty("modules") List<JsonAdaptedModule> modules) {
-        this.students.addAll(students);
+    public JsonSerializableAssistantBuddy(@JsonProperty("modules") List<JsonAdaptedModule> modules) {
         this.modules.addAll(modules);
     }
 
@@ -42,7 +37,6 @@ class JsonSerializableAssistantBuddy {
      * @param source future changes to this will not affect the created {@code JsonSerializableAssistantBuddy}.
      */
     public JsonSerializableAssistantBuddy(ReadOnlyTeachingAssistantBuddy source) {
-        students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
     }
 
@@ -59,13 +53,6 @@ class JsonSerializableAssistantBuddy {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE);
             }
             teachingAssistantBuddy.addModule(module);
-        }
-        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            Student student = jsonAdaptedStudent.toModelType();
-            if (teachingAssistantBuddy.hasStudent(student)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
-            }
-            teachingAssistantBuddy.addStudent(student);
         }
         return teachingAssistantBuddy;
     }
