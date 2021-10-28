@@ -39,6 +39,8 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
 
+    // To fix first 2 tests in v1.4
+
     @Test
     public void execute_allFieldsSpecifiedUnfilteredListStudentNoLessons_success() {
 
@@ -46,10 +48,12 @@ public class EditCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        // friends is the original remark of the original student
+        Student expectedStudent = new StudentBuilder(editedStudent).withRemarks("friends").build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, expectedStudent);
 
         Model expectedModel = new ModelManager(new Tuitione(model.getTuitione()), new UserPrefs());
-        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), expectedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -67,10 +71,14 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).withRemarks(VALID_REMARK_FINANCIAL_AID).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        // friends is the original remark of the original student
+        Student expectedStudent = new StudentBuilder(editedStudent)
+                .withRemarks("friends", VALID_REMARK_FINANCIAL_AID).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, expectedStudent);
 
         Model expectedModel = new ModelManager(new Tuitione(model.getTuitione()), new UserPrefs());
-        expectedModel.setStudent(firstStudent, editedStudent);
+        expectedModel.setStudent(firstStudent, expectedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

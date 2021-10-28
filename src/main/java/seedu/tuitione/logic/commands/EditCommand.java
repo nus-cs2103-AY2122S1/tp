@@ -8,6 +8,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -55,6 +56,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "⚠\tAlert:\n\nAt least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT =
             "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
+    public static final String MESSAGE_T00_MANY_REMARKS =
+            "⚠\tAlert:\n\nThe amount of remarks tagged to this student will exceed the limit of 5! "
+                    + "You can only add %d more unique remark(s).";
+    public static final String MESSAGE_NO_SUCH_REMARK_FOUND =
+            "⚠\tAlert:\n\nThe remark(s) you wish to remove does not exist!"
+                    + "Please check your spelling and formatting.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -109,7 +116,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor)
+            throws CommandException {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
@@ -117,7 +125,27 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
-        Set<Remark> updatedRemarks = editStudentDescriptor.getRemarks().orElse(studentToEdit.getRemarks());
+
+        Set<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(Collections.emptySet());
+        Set<Remark> remarksToDelete = editStudentDescriptor.getRemarksToDelete().orElse(Collections.emptySet());
+
+        Set<Remark> updatedRemarks = new HashSet<>(studentToEdit.getRemarks());
+        int numOfExistingRemarks = updatedRemarks.size();
+
+        for (Remark remark : remarksToDelete) {
+            if (!updatedRemarks.contains(remark)) {
+                throw new CommandException(String.format(MESSAGE_NO_SUCH_REMARK_FOUND));
+            }
+            updatedRemarks.remove(remark);
+        }
+
+        for (Remark remark : remarksToAdd) {
+            if (updatedRemarks.size() >= MAX_REMARK_SIZE) {
+                throw new CommandException(String.format(MESSAGE_T00_MANY_REMARKS,
+                        MAX_REMARK_SIZE - numOfExistingRemarks));
+            }
+            updatedRemarks.add(remark);
+        }
 
         return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress,
                 updatedGrade, updatedRemarks);
@@ -152,6 +180,7 @@ public class EditCommand extends Command {
         private Address address;
         private Grade grade;
         private Set<Remark> remarks;
+        private Set<Remark> remarksToDelete;
 
         private boolean gradeIsEdited = false;
 
@@ -168,13 +197,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
             setRemarks(toCopy.remarks);
+            setRemarksToDelete(toCopy.remarksToDelete);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, remarks);
+            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, remarks, remarksToDelete);
         }
 
         public void setName(Name name) {
@@ -226,12 +256,30 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code remarksToDelete} to this object's {@code remarksToDelete}.
+         * A defensive copy of {@code remarksToDelete} is used internally.
+         */
+        public void setRemarksToDelete(Set<Remark> remarksToDelete) {
+            this.remarksToDelete = (remarksToDelete != null) ? new HashSet<>(remarksToDelete) : null;
+        }
+
+        /**
          * Returns an unmodifiable remark set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code remarks} is null.
          */
         public Optional<Set<Remark>> getRemarks() {
             return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable remark set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code remarks} is null.
+         */
+        public Optional<Set<Remark>> getRemarksToDelete() {
+            return (remarksToDelete != null)
+                    ? Optional.of(Collections.unmodifiableSet(remarksToDelete)) : Optional.empty();
         }
 
         @Override
