@@ -286,7 +286,7 @@ public class CalendarEntryList {
             interval = interval.withDates(startDate, startDate);
 
         }
-        entryList.add(convertToRecurringEntry(owner, lesson, interval));
+        entryList.add(convertToRecurringEntryWithEnd(owner, lesson, interval, lesson.getEndDate().getLocalDate()));
 
         return entryList;
     }

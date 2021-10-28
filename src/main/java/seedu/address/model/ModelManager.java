@@ -178,6 +178,18 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Last Updated Accessors =============================================================
+
+    @Override
+    public LastUpdatedDate getLastUpdatedDate() {
+        return addressBook.getLastUpdatedDate();
+    }
+
+    @Override
+    public void setLastUpdatedDate() {
+        addressBook.setLastUpdatedDate(new LastUpdatedDate());
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(addressBook, userPrefs, filteredPersons);

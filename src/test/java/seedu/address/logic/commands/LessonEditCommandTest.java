@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASHING_TIME_RANGE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_NEXT_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PREV_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
@@ -17,6 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_CLASHING_LESSON;
 import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_INVALID_CANCEL_DATE;
+import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_INVALID_DATE_RANGE;
 import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_INVALID_UNCANCEL_DATE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -200,6 +203,27 @@ class LessonEditCommandTest {
                 prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_SECOND_LESSON, descriptor);
 
         assertCommandFailure(lessonEditCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidDateRange_failure() {
+        Lesson lesson = new LessonBuilder()
+            .withDate(VALID_DATE_FUTURE)
+            .buildRecurring();
+
+        Person personBeforeLessonEdit = new PersonBuilder(firstPerson)
+            .withLessons(lesson)
+            .build();
+
+        model.setPerson(firstPerson, personBeforeLessonEdit); // Ensure at least one lesson to edit
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson)
+            .withEndDate(VALID_DATE_PAST).build();
+
+        LessonEditCommand lessonEditCommand =
+            prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_SECOND_LESSON, descriptor);
+
+        assertThrows(CommandException.class, () -> lessonEditCommand.execute(), MESSAGE_INVALID_DATE_RANGE);
     }
 
     @Test
