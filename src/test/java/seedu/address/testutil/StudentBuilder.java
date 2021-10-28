@@ -128,7 +128,7 @@ public class StudentBuilder {
      * Sets the {@code Participation} of the {@code Student} that we are building.
      */
     public StudentBuilder withParticipation(Integer... integers) {
-        this.attendance = SampleDataUtil.getAttendanceList(integers);
+        this.participation = SampleDataUtil.getParticipationList(integers);
         return this;
     }
 
