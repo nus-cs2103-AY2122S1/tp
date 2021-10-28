@@ -237,15 +237,29 @@ Examples:
 ##### Removing data fields: `remove`
 Removes an element from a data field at a specified index.
 
-Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
+Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX] [int/INDEX]`
 
 * The index refers to the index of the specific element in the non-single data field.
 * Applicable to skill and miscellaneous data fields.
+
 
 <div markdown="block" class="alert alert-info">
 :bulb: Insert tips
 * `INSERT HERE` 
 </div>
+
+##### Adding an interaction with a contact : `interaction`
+Adds an interaction record to a specific contact in the address book.
+
+Format: `interaction INDEX [int/DESCRIPTION] [on/DATE]`
+interaction 1 int/We talked. on/1990-01-20
+* Adds an interaction record to the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. 
+  The index **must be a positive    integer** 1, 2, 3, …​
+* All fields must be present
+* Date must be in the format of `YYYY-MM-DD`
+
+Examples:
+* `interaction 1 int/We talked. on/1990-01-20` Adds an interaction with description 'We talked' and date '1990-01-20' to the Person at index 1 of the list.
 
 ##### Viewing a specific contact in detail : `view`
 Get a detailed view of specific contact(s).

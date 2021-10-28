@@ -43,17 +43,17 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
         RemovePersonDescriptor removePersonDescriptor = new RemovePersonDescriptor();
 
         parseSkillIndexesForRemove(argMultimap.getAllValues(PREFIX_SKILL))
-                .ifPresent(removePersonDescriptor::setSkillIndexes);
+                .ifPresent(removePersonDescriptor::setIndexesOfSkillsToRemove);
         parseLanguageIndexesForRemove(argMultimap.getAllValues(PREFIX_LANGUAGE))
-                .ifPresent(removePersonDescriptor::setLanguageIndexes);
+                .ifPresent(removePersonDescriptor::setIndexesOfLanguagesToRemove);
         parseFrameworkIndexesForRemove(argMultimap.getAllValues(PREFIX_FRAMEWORK))
-                .ifPresent(removePersonDescriptor::setFrameworkIndexes);
+                .ifPresent(removePersonDescriptor::setIndexesOfFrameworksToRemove);
         parseTagIndexesForRemove(argMultimap.getAllValues(PREFIX_TAG))
-                .ifPresent(removePersonDescriptor::setTagIndexes);
+                .ifPresent(removePersonDescriptor::setIndexesOfTagsToRemove);
         parseRemarkIndexesForRemove(argMultimap.getAllValues(PREFIX_REMARKS))
-                .ifPresent(removePersonDescriptor::setRemarkIndexes);
+                .ifPresent(removePersonDescriptor::setIndexesOfRemarksToRemove);
         parseInteractionIndexesForRemove(argMultimap.getAllValues(PREFIX_INTERACTION))
-                .ifPresent(removePersonDescriptor::setInteractionIndexes);
+                .ifPresent(removePersonDescriptor::setIndexesOfInteractionsToRemove);
 
         if (!removePersonDescriptor.isAnyFieldRemoved()) {
             throw new ParseException(RemoveCommand.MESSAGE_NOT_REMOVED);
