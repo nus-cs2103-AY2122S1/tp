@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindCommand.FindCondition;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.TimeRange;
 
 /**
  * Tests that a {@code Person}'s fields matches the keywords given.
@@ -27,6 +30,10 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     private List<String> acadLevelKeywords;
     private List<String> tagKeywords;
 
+    // Lesson Keywords
+    private Date date;
+    private TimeRange timeRange;
+
     private FindCondition condition = FindCondition.ALL; // default find condition is match all
 
     /**
@@ -37,7 +44,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     public boolean isAnyFieldSearched() {
         return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords,
                 parentPhoneKeywords, parentEmailKeywords, addressKeywords,
-                schoolKeywords, acadStreamKeywords, acadLevelKeywords, tagKeywords);
+                schoolKeywords, acadStreamKeywords, acadLevelKeywords,
+                timeRange, date,
+                tagKeywords);
     }
 
     /**
@@ -201,6 +210,38 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Sets keywords to match with a Person's Lesson's time range.
+     *
+     * @param timeRange TimeRange to find.
+     */
+    public void setTimeRange(TimeRange timeRange) {
+        this.timeRange = timeRange;
+    }
+
+    /**
+     * Returns optional time range keywords.
+     */
+    public Optional<TimeRange> getTimeRange() {
+        return Optional.ofNullable(timeRange);
+    }
+
+    /**
+     * Sets keywords to match with a Person's Lesson's date.
+     *
+     * @param date Valid date to find.
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    /**
+     * Returns optional date keywords.
+     */
+    public Optional<Date> getDate() {
+        return Optional.ofNullable(date);
+    }
+
+    /**
      * Returns optional tag keywords.
      */
     public Optional<List<String>> getTagKeywords() {
@@ -310,6 +351,18 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return person -> isMatch(acadLevelKeywords, person.getAcadLevel().value);
     }
 
+    private Predicate<Person> getTimeRangeMatchPredicate() {
+        return getLessonAnyMatch(lesson -> timeRange.isClashing(lesson.getTimeRange()));
+    }
+
+    private Predicate<Person> getDateMatchPredicate() {
+        return getLessonAnyMatch(lesson -> lesson.hasLessonOnDate(date));
+    }
+
+    private Predicate<Person> getLessonAnyMatch(Predicate<Lesson> predicate) {
+        return person -> person.getLessons().stream().anyMatch(predicate);
+    }
+
     /**
      * Returns a {@code List<Predicate<Person>>} that tests if each keyword matches a {@code Person}'s {@code Tag}s.
      *
@@ -330,7 +383,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns a list of predicates that test a person's fields against non-null keywords.
+     * Returns a list of predicates that test a person's fields against non-null keywords/fields.
      *
      * @return A list of person predicates.
      */
@@ -367,11 +420,19 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
             predicates.addAll(getTagsMatchPredicates());
         }
 
+        // Lesson predicates
+        if (getTimeRange().isPresent()) {
+            predicates.add(getTimeRangeMatchPredicate());
+        }
+        if (getDate().isPresent()) {
+            predicates.add(getDateMatchPredicate());
+        }
+
         return predicates;
     }
 
     /**
-     * Returns a composed predicate that represents matching all of the given predicates.
+     * Returns a composed predicate that represents matching all the given predicates.
      *
      * @param predicates A list of predicates to match.
      * @return A predicate that returns true only if all predicates test true on a person.
