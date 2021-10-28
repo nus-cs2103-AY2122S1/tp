@@ -21,6 +21,7 @@ import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.AddTodoTaskCommand;
+import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.ClearTasksCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
@@ -71,6 +72,7 @@ public class HelpWindow extends UiPart<Stage> {
             new CommandCell(AddMemberCommand.COMMAND_WORD, AddMemberCommand.MESSAGE_USAGE),
             new CommandCell(DeleteGroupCommand.COMMAND_WORD, DeleteGroupCommand.MESSAGE_USAGE),
             new CommandCell(FindGroupCommand.COMMAND_WORD, FindGroupCommand.MESSAGE_USAGE),
+            new CommandCell(ClearAllCommand.COMMAND_WORD, "Clears all data in tApp"),
             new CommandCell(HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE),
             new CommandCell(ExitCommand.COMMAND_WORD, "Exits from tApp"));
 

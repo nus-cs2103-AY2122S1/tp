@@ -51,7 +51,8 @@ public class GroupCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(group.getName().name);
         link.setText("Github: " + group.getGroupGithubLink());
-        memberListPanel = new MemberListPanel(FXCollections.observableArrayList(group.getMembers().studentList));
+        memberListPanel = new MemberListPanel(
+                FXCollections.observableArrayList(group.getMembers().studentList));
 
         memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
 

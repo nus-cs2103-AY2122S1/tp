@@ -28,6 +28,8 @@ public class MemberListCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label id;
+    @FXML
     private Label email;
     @FXML
     private Label studentNumber;
@@ -41,9 +43,10 @@ public class MemberListCard extends UiPart<Region> {
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
-    public MemberListCard(Student student) {
+    public MemberListCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+        id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         email.setText("Email: " + student.getEmail().value);
         studentNumber.setText("Student Number: " + student.getStudentNumber().toString());
