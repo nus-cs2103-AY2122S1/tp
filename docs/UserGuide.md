@@ -12,7 +12,8 @@ title: User Guide
 
 **Tuition Address Book (TAB)** is an all-in-one desktop application that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
 
-TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
+TAB is a Command Line Interface (CLI) application which allows users to interact with it with just text inputs. On top of that, TAB also 
+comes with a clean and aesthetic Graphical User Interface (GUI), allowing users to view their data easily.
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -27,10 +28,14 @@ In the [Table of Contents](), each item listed is a link which you can click on 
 
 **Conventions Used**
 
-* `text` : denotes a command to be entered into the command box in TAB.
-* <kbd>text</kbd> : denotes a keyboard input, or a button to be clicked on.
-* [text](#about-this-guide) : denotes links to other parts of the document, or links to be opened in the browser.
-
+Syntax | Meaning
+--------|------------------
+`text` | A command to be entered into the command box in TAB.
+<kbd>text</kbd> | A keyboard input, or a button to be clicked on.
+[text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
+_text_ | Caption for images.
+:information_source: | Indication that the following text is a tip.
+:exclamation: | Indication that the following text is important.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
@@ -56,7 +61,8 @@ to help you with the installation. Follow the guide for your operating system fo
 4. Double-click the file to start the app. The window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
+   
    Some example commands you can try:
 
    * **`list`** : Lists all students.
@@ -420,6 +426,14 @@ Examples:
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
 
+#### Viewing upcoming lessons : `remind`
+
+Displays a list of upcoming lessons within the next 48 hours.
+
+Format: `remind`
+
+<div class="caption">Reminder window interface.</div>
+
 
 <div style="page-break-after: always;"></div>
 
@@ -574,20 +588,23 @@ This section records frequently asked questions from users of TAB.
 <div style="page-break-after: always;"></div>
 
 ## Glossary
+This section shows a list of technical and TAB-related terms used in this user guide with their respective definitions.
 
-* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
-* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
-* **CLI**: Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only.
-* **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
-* **JAR**: Java Archive - a file format used for aggregating multiple Java class files and their associated components (e.g. images) into a single file for distribution.
-* **Lesson Rates**: Amount charged per hour for lessons.
-* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
-* **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
-* **UI**: User Interface - the means by which the user and the app interact.
-* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
-  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
-* **UX**: User Experience - The experience a user has when using the app.
+Term | Meaning
+--------|------------------
+Academic level | Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
+Academic stream | Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+CLI | Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only. New users may find it difficult to use but fast typist may find it faster to use upon familiarization.
+GUI | Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
+JAR | Java Archive - a file format used for aggregating multiple Java class files and their associated components (e.g. images) into a single file for distribution.
+Lesson rates | Amount charged per hour for lessons.
+Makeup lesson | A lesson that occurs only once, for a student who has missed a previous lesson.
+Mainstream OS | Windows, Linux, Unix, OS-X.
+Parameter | User input required to specify the data to be saved into the application.
+Recurring lesson | A lesson that will occur more than once in patterned intervals.
+UI | User Interface - the means by which the user and the app interact.
+UTC+8 | The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8. UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
+UX | User Experience - The experience a user has when using the app.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
