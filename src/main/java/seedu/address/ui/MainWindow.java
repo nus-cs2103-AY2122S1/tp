@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -194,10 +192,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     private boolean isPunctuationKey(KeyCode keyCode) {
         KeyCode[] punctuationKeyCodes = {
-                KeyCode.BACK_QUOTE, KeyCode.MINUS, KeyCode.EQUALS, KeyCode.SLASH, // first row
-                KeyCode.OPEN_BRACKET, KeyCode.CLOSE_BRACKET, KeyCode.BACK_SLASH, // second row
-                KeyCode.SEMICOLON, KeyCode.QUOTE, KeyCode.COMMA, KeyCode.PERIOD, KeyCode.SLASH, // third row
-                KeyCode.DIVIDE, KeyCode.MULTIPLY, KeyCode.SUBTRACT, KeyCode.ADD, KeyCode.DECIMAL // Num pad Keys
+            KeyCode.BACK_QUOTE, KeyCode.MINUS, KeyCode.EQUALS, KeyCode.SLASH, // first row
+            KeyCode.OPEN_BRACKET, KeyCode.CLOSE_BRACKET, KeyCode.BACK_SLASH, // second row
+            KeyCode.SEMICOLON, KeyCode.QUOTE, KeyCode.COMMA, KeyCode.PERIOD, KeyCode.SLASH, // third row
+            KeyCode.DIVIDE, KeyCode.MULTIPLY, KeyCode.SUBTRACT, KeyCode.ADD, KeyCode.DECIMAL // Num pad Keys
         };
         for (KeyCode code : punctuationKeyCodes) {
             if (code.equals(keyCode)) {
