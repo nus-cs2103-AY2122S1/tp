@@ -51,7 +51,7 @@ public enum Status {
         s = s.trim();
         if (s.equals("need group")) {
             return Status.NEED_GROUP;
-        } else if (s.equals("need member")) {
+        } else if (s.equals("need member") || s.equals("need members")) {
             return Status.NEED_MEMBER;
         } else {
             return Status.NONE;
