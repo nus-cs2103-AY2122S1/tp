@@ -464,8 +464,8 @@ Commands | Format and Examples
 [**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​` <br> e.g., `addGroup g/W14-5 r/tp y/AY20222023`
 [**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​` <br> e.g., `editGroup 2 g/W14-4 r/tp y/AY20212022`
 [**Delete Group**](#delete-a-group-deletegroup) | `deleteGroup INDEX` <br> e.g., `deleteGroup 1`
-[**Add Student to Group**](#add-a-student-to-a-group-addMember) | `addMember INDEX g/GROUP` <br> e.g., `addMember 2 g/W14-4`
-[**Delete Student from Group**](#delete-a-student-from-a-group-deleteMember) | `deleteMember GROUP_INDEX STUDENT_INDEX` <br> e.g., `deleteMember 2 1`
+[**Add Student to Group**](#add-a-student-to-a-group-addmember) | `addMember INDEX g/GROUP` <br> e.g., `addMember 2 g/W14-4`
+[**Delete Student from Group**](#delete-a-student-from-a-group-deletemember) | `deleteMember GROUP_INDEX STUDENT_INDEX` <br> e.g., `deleteMember 2 1`
 [**Find Group**](#locating-group-by-name-findgroup) | `findGroup KEYWORD [MORE_KEYWORDS]` <br> e.g., `findGroup W15-5`
 [**Clear Groups**](#clearing-all-entries-from-group-list-cleargroups) | `clearGroups`
 
