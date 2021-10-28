@@ -24,15 +24,13 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all applicants.
+   * **`list-applicant`** : Lists all applicants.
 
-   * **`add-applicant`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer` : Adds an applicant named `John Doe` to the `software engineer` position.
+   * **`add-applicant`**`n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo` : Adds an applicant named `Mary Ann` to the `software engineer` position.
 
-   * **`delete-applicant`**`n/John Doe` : Deletes `John Doe` from the applicant list.
-
-   * **`clear`** : Deletes all applicants.
-
-    * **`exit`** : Exits the app.
+   * **`delete-applicant`**`1` : Deletes the 1st applicant shown in the current list.
+   
+   * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -48,7 +46,6 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -61,7 +58,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
 </div>
 
-### Viewing help : `help` `[coming soon]`
+### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -105,24 +102,24 @@ Examples:
 
 Adds an applicant to MrTechRecruiter.
 
-Format: `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
+Format: `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An applicant should only have 1 position. <br>
-If the job position exists, its rejection rate should update accordingly.
+An applicant should only have 1 position. This position must exist, otherwise an error message will show.<br>
+If the job position exists, its rejection rate will update accordingly.
 </div>
 
 Examples:
-* `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`
-* `add-applicant n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
+* `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 
 
 ### Editing an applicant: `edit-applicant`
 Edits the specified applicant in MrTechRecruiter
 
-Format: `edit-applicant INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION` 
+Format: `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK]` 
 
 * Edit the applicant with the specified `INDEX`
+* At least one argument should be present
 * The `position` must have been added to MrTechRecruiter
 
 Examples:
@@ -202,28 +199,22 @@ Format: `visualize POSITION_TITLE​`
 * `POSITION_TITLE` is case-insensitive. e.g. `visualize software engineer` will display the pie chart for the position `SOFTWARE ENGINEER`.
 
 
-### Searching for applicants using keywords: `find` [coming soon]
+### Searching for applicants using keywords: `find-applicant`
 
-Finds all applicants whose categorical information match the specified search terms.
+Finds all applicants whose name match the specified search terms.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `find-applicant KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* Only applicants matching ALL specified search terms specified will be returned.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/Mary p/12345678` returns applicants whose names contain `mary` AND whose numbers contain `12345678`
+* `find-applicant John` returns `john` and `John Doe`
 
-
-### Clearing all entries : `clear` `[coming soon]`
-
-Clears all entries from MrTechRecruiter.
-
-Format: `clear`
-
-
-### Exiting the program : `exit` `[coming soon]`
+### Exiting the program : `exit`
 
 Exits the program.
 
@@ -237,19 +228,11 @@ All data is saved in the hard disk automatically after any command that changes 
 
 ### Editing the data file
 
-Data is saved as a JSON file `[JAR file location]/data/POSITION-TITLE.json`. Advanced users are welcome to update data directly by editing that data file.
+Data is saved as a JSON file `[JAR file location]/data/applicantbook.json` and `[JAR file location]/data/positionbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, MrTechRecruiter will discard all data and start with an empty data file at the next run.
 </div>
-
-### Viewing command history
-Using the up and down arrow keys, you can navigate your command history to view your most recent commands.
-
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -264,13 +247,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION` <br> e.g., `add-applicant n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pos/software engineer`
-**Delete Applicant** | `delete-applicant n/NAME`<br> e.g., `delete-applicant John Doe`
-**Clear [coming soon]** | `clear`
-**Edit [coming soon]** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
+**Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
+**Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List Applicants** | `list-applicant`
 **Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
 **Visualize Positions** | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List [coming soon]** | `list`
-**Help [coming soon]** | `help`
 **Rate | `rate pos/POSITION` <br> e.g. `rate software engineer`
+**Help** | `help`
