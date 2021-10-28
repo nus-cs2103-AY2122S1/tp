@@ -159,6 +159,16 @@ Examples:
 * `find Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
 * `delete -a` deletes all entries in the address book.
 
+### Bulk Tag Persons : `bulk_tag`
+
+Adds a tag to the filtered list of Persons.
+
+Format: `bulk_tag t/TAGNAME [t/TAGNAME…​]`
+
+Examples:
+* `find Alice` followed by `bulk_tag t/friends` adds the tag `friends` to all the persons in the filtered person list.
+* `bulk_tag t/friends` adds the tag `friends` in the filtered person list.
+
 ### Sort contacts by attribute: `sort`
 
 Sort all the contacts in the ProfBook in ascending order.
