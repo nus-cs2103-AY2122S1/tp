@@ -162,7 +162,7 @@ public class FeesCalculator implements Calculator {
         return durationInHour * lessonRates.getMonetaryValueInFloat();
     }
 
-    private int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalDate startDate,
+    public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalDate startDate,
                                                LocalDate endDate, LocalTime endTime, Set<Date> cancelledDates) {
         int lastUpdatedDay = lastUpdated.getLastUpdatedLocalDate().getDayOfWeek().getValue();
         int currentUpdatedDay = currentDateTime.getDayOfWeek().getValue();
