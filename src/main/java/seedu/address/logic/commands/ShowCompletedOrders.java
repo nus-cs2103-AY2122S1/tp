@@ -13,8 +13,6 @@ public class ShowCompletedOrders extends Command {
 
     public static final String COMMAND_WORD = "completedorders";
 
-    public static final String MESSAGE_SUCCESS = "Listed all the completed orders";
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

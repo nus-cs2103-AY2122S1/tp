@@ -13,8 +13,6 @@ public class ShowIncompleteOrders extends Command {
 
     public static final String COMMAND_WORD = "incompleteorders";
 
-    public static final String MESSAGE_SUCCESS = "Listed all the incomplete orders";
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

@@ -13,8 +13,6 @@ public class ShowCompletedTasks extends Command {
 
     public static final String COMMAND_WORD = "completedtasks";
 
-    public static final String MESSAGE_SUCCESS = "Listed all the completed tasks";
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

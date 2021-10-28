@@ -13,8 +13,6 @@ public class ShowIncompleteTasks extends Command {
 
     public static final String COMMAND_WORD = "incompletetasks";
 
-    public static final String MESSAGE_SUCCESS = "Listed all the incomplete tasks";
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
