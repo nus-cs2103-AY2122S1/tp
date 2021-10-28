@@ -34,7 +34,6 @@ public class GroupFindCommandParser extends GroupCommandParser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupFindCommand.MESSAGE_USAGE));
         }
-        
         nameQuery = argMultimap.getValue(PREFIX_NAME).map(String::trim);
 
         return new GroupFindCommand(new GroupContainsPredicate(nameQuery));
