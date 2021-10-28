@@ -117,7 +117,15 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
-        Set<Remark> updatedRemarks = editStudentDescriptor.getRemarks().orElse(studentToEdit.getRemarks());
+
+        Set<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(new HashSet<>());
+        Set<Remark> remarksToDelete = editStudentDescriptor.getRemarksToDelete().orElse(new HashSet<>());
+
+        Set<Remark> modifiableUpdatedRemarks = new HashSet<>();
+        modifiableUpdatedRemarks.addAll(studentToEdit.getRemarks());
+        modifiableUpdatedRemarks.addAll(remarksToAdd);
+        modifiableUpdatedRemarks.removeAll(remarksToDelete);
+        Set<Remark> updatedRemarks = Collections.unmodifiableSet(modifiableUpdatedRemarks);
 
         return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress,
                 updatedGrade, updatedRemarks);
@@ -152,6 +160,7 @@ public class EditCommand extends Command {
         private Address address;
         private Grade grade;
         private Set<Remark> remarks;
+        private Set<Remark> remarksToDelete;
 
         private boolean gradeIsEdited = false;
 
@@ -168,13 +177,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
             setRemarks(toCopy.remarks);
+            setRemarksToDelete(toCopy.remarksToDelete);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, remarks);
+            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, remarks, remarksToDelete);
         }
 
         public void setName(Name name) {
@@ -226,12 +236,30 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code remarksToDelete} to this object's {@code remarksToDelete}.
+         * A defensive copy of {@code remarksToDelete} is used internally.
+         */
+        public void setRemarksToDelete(Set<Remark> remarksToDelete) {
+            this.remarksToDelete = (remarksToDelete != null) ? new HashSet<>(remarksToDelete) : null;
+        }
+
+        /**
          * Returns an unmodifiable remark set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code remarks} is null.
          */
         public Optional<Set<Remark>> getRemarks() {
             return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable remark set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code remarks} is null.
+         */
+        public Optional<Set<Remark>> getRemarksToDelete() {
+            return (remarksToDelete != null)
+                    ? Optional.of(Collections.unmodifiableSet(remarksToDelete)) : Optional.empty();
         }
 
         @Override
