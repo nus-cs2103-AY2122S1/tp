@@ -269,6 +269,16 @@ class TdelCommandTest {
         public Optional<Member> getCurrentMember() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setCurrentEvent(Event currentEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Event> getCurrentEvent() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
