@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "grade" : "P2",
-    "remarked" : [ "friends" ],
+    "remarks" : [ "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "grade" : "S2",
-    "remarked" : [ "owesMoney", "friends" ],
+    "remarks" : [ "owesMoney", "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +22,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "grade" : "P6",
-    "remarked" : [ ],
+    "remarks" : [ ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -30,31 +30,31 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "grade" : "S4",
-    "remarked" : [ "friends" ],
+    "remarks" : [ "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822244",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "grade" : "S1",
-    "remarked" : [ ],
+    "remarks" : [ ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824277",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "grade" : "S1",
-    "remarked" : [ ],
+    "remarks" : [ ],
     "lessonCodes" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824421",
     "email" : "anna@example.com",
     "address" : "4th street",
     "grade" : "S3",
-    "remarked" : [ ],
+    "remarks" : [ "firstRemark", "secondRemark", "thirdRemark", "fourthRemark", "averylongremarkthatpasses" ],
     "lessonCodes" : [ ]
   } ],
   "lessons": [ ]

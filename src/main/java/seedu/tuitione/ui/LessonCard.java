@@ -1,7 +1,6 @@
 package seedu.tuitione.ui;
 
 import static seedu.tuitione.model.lesson.LessonTime.TIME_FORMATTER;
-import static seedu.tuitione.model.lesson.LessonTime.parseDayToString;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -30,13 +29,7 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label subject;
-    @FXML
     private Label id;
-    @FXML
-    private Label grade;
-    @FXML
-    private Label dayOfWeek;
     @FXML
     private Label time;
     @FXML
@@ -57,9 +50,6 @@ public class LessonCard extends UiPart<Region> {
         id.setText(displayIndex + ". ");
         lessonCode.setText(lesson.getLessonCode().value);
         lessonCode.setUnderline(true);
-        subject.setText(lesson.getSubject().value);
-        grade.setText(lesson.getGrade().value);
-        dayOfWeek.setText(parseDayToString(lesson.getLessonTime().dayOfWeek));
         time.setText(String.format(
                 STRING_FORMAT_TIME,
                 lesson.getLessonTime().startTime.format(TIME_FORMATTER),

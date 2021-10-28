@@ -1,6 +1,7 @@
 package seedu.tuitione.model.student;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.util.AppUtil.checkArgument;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -20,7 +21,11 @@ import seedu.tuitione.model.remark.Remark;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
+
     public static final int MAX_LESSON_SIZE = 10;
+    public static final int MAX_REMARK_SIZE = 5;
+
+    public static final String LESSON_SIZE_MESSAGE_CONSTRAINT = "Student %1$s has enrolled for %2$d lessons already.";
 
     // Identity fields
     private final Name name;
@@ -32,7 +37,6 @@ public class Student {
     private final Grade grade;
     private final Set<Remark> remarks = new HashSet<>();
     private final List<Lesson> lessons = new ArrayList<>();
-
 
     /**
      * Every field must be present and not null.
@@ -150,6 +154,8 @@ public class Student {
      */
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
+        checkArgument(isAbleToEnrollForMoreLessons(),
+                String.format(LESSON_SIZE_MESSAGE_CONSTRAINT, this.getName(), MAX_LESSON_SIZE));
         if (!containsLesson(lesson)) {
             lessons.add(lesson);
         }

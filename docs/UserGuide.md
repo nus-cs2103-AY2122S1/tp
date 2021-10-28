@@ -50,6 +50,14 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
 
    * **`exit`** : Exits the app.
 
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Caution:**<br>
+
+After running **TuitiONE**, you will notice there are some additional files created in the _home folder_. Please do not delete these files, as they contain your data and important configurations for **TuitiONE** to run smoothly.
+
+</div>
+
 Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -98,6 +106,8 @@ The [Command summary](#command-summary) lists a table with all the commands pres
 
 ## **Features**
 
+This section outlines all the features that **TuitiONE** has. You will be able to see the purpose of each feature, the format of each command and possible examples and images of what you should expect to see.
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -122,7 +132,7 @@ The [Command summary](#command-summary) lists a table with all the commands pres
 
 </div>
 
-### Getting help
+### General Commands
 
 #### Viewing help: `help`
 
@@ -132,6 +142,32 @@ TuitiONE will display the help panel which shows you a summary of the command sy
 
 Command Format: `help`
 
+#### Listing all students: `list`
+
+Shows you a list of all students and lessons in the TuitiONE. Students will be sorted in ascending alphabetical order by their name. Lessons will be sorted by grade, from P1 to S4.
+
+Command Format: `list`
+
+#### Filtering of list: `filter`
+
+Filter the respective list(s) to display entries that correspond to the conditions as specified.
+
+Command Format: `filter [g/GRADE] [s/SUBJECT]`
+
+:bulb: **Tip:**
+
+* You can filter by `GRADE`, `SUBJECT`, or both.
+    * If you are only filtering by `GRADE`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` as specified.
+    * If you are only filtering by `SUBJECT`, only the lesson list will be filtered to display the respective lessons that correspond to the `SUBJECT` as specified.
+    * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
+
+Example(s):
+
+* `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective lists.
+* `filter s/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
+* `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student
+ list by grade of `P2`, and display the corresponding entries in the respective lists.
+
 ### Managing Students
 
 #### Adding a student: `add`
@@ -140,32 +176,24 @@ Adds a student to the TuitiONE.
 
 Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…`
 
-<div markdown="block" class="alert alert-primary">
+:bulb: **Tip:**
 
-:bulb: **Tip:**<br>
+* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).
 
-* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).<br>
-
-* A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.<br>
-
-</div>
+* A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.
 
 Example(s):
 
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
-#### Listing all students: `list`
-
-Shows you a list of all students and lessons in the TuitiONE.
-
-Command Format: `list`
-
 #### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
 
 Command Format: `find KEYWORD [MORE_KEYWORDS]`
+
+:bulb: **Tip:**
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -187,6 +215,8 @@ Deletes a student from the TuitiONE.
 
 Command Format: `delete INDEX`
 
+:bulb: **Tip:**
+
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** `1`, `2`, `3`, …
@@ -200,14 +230,18 @@ Example(s):
 
 Deletes a student from the TuitiONE.
 
-Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK]...`
+Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD]... [dr/REMARK_TO_DELETE]...`
+
+:bulb: **Tip:**
 
 * Edits the student at the specified `INDEX` based on the fields given.
 * You can edit any number of fields.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** `1`, `2`, `3`, …
 * You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.<br>
-* Entering the command `edit r/` will remove all remarks that is currently attached to the student
+* If you enter `edit r/[REMARK_TO_ADD]`, TuitiONE will add on the given `REMARK` to the existing set of remarks.
+* If you enter `edit dr/[REMARK_TO_DELETE]`, TuitiONE will delete the `REMARK` from the existing set of remarks, if it is present in the set.
+* If you were to add and remove remarks in the same command, TuitiONE will remove specified remarks before adding the new ones.
 * **Note that if you change a student's grade, TuitiONE will unenroll the student from all the classes he or she was previously taking in the previous grade**.
 
 Example(s):
@@ -215,12 +249,15 @@ Example(s):
 * `edit 2 p/98765432` changes the parent contact number information of the second student in the student list.
 * `edit 2 g/S2` changes the grade of the second student in the student list from its current grade to `S2`, and he or she will be unenrolled from all classes in his or her previous grade.
 * `edit 2 n/Ben Lim e/benlim@gmail.com` changes the name and email of the second student in the student list.
+* `edit 2 r/discounted dr/unpaid` removes the `unpaid` remark from the second student's set of remarks, before adding the `discounted` remark.
 
 #### Enrolling a student from lesson: `enroll`
 
 Enroll a specified student to a given TuitiONE lesson.
 
 Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
+
+:bulb: **Tip:**
 
 * Enroll the student identified by `STUDENT_INDEX` in the displayed student list to the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
 * Enrolling a student is only possible if the student:
@@ -242,6 +279,8 @@ Unenroll a student from a given TuitiONE lesson.
 
 Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 
+:bulb: **Tip:**
+
 * Unenroll the student identified by `STUDENT_INDEX` in the displayed student list from the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
@@ -259,23 +298,19 @@ Adds a lesson to the TuitiONE with the specified prefixes.
 
 Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
-<div markdown="block" class="alert alert-primary">
+:bulb: **Tip:**
 
-:bulb: **Tip:**<br>
+* `GRADE` here follows the similar requirements when adding a student.
 
-* `GRADE` here follows the similar requirements when adding a student.<br>
+* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.
 
-* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.<br>
+* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.
 
-* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.<br>
+* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.
 
-* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.<br>
+* Lessons are fixed at **two** hour periods.
 
-* Lessons are fixed at **two** hour periods.<br>
-
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …<br>
-
-</div>
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …
 
 Example(s):
 
@@ -288,6 +323,8 @@ Deletes a lesson from the TuitiONE.
 
 Command Format: `delete-l INDEX`
 
+:bulb: **Tip:**
+
 * Deletes the lesson of the specified `INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
 * The index **must be a positive integer** `1`, `2`, `3`, …
@@ -298,9 +335,11 @@ Example(s):
 
 #### Viewing of lesson roster: `roster`
 
-Shows you the student roster of a specified lesson in the student panel.
+Shows you the student roster of a specified lesson in the student panel. The names of the students will also be displayed in the result panel.
 
 Command Format: `roster LESSON_INDEX`
+
+:bulb: **Tip:**
 
 * Displays the student roster of the lesson of the specified `LESSON_INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
@@ -309,28 +348,7 @@ Command Format: `roster LESSON_INDEX`
 Examples:
 * `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
 
-### Miscellaneous Commands
-
-#### Filtering of list: `filter`
-
-Filter the respective list(s) to display entries that correspond to the conditions as specified.
-
-Command Format: `filter [g/GRADE] [s/Subject]`
-
-* When filtering, filtering conditions `GRADE` and `SUBJECT` can be coexistent. The order of the 2 conditions can be interchanged.
-* When filtering, there must be at least 1 filtering condition.
-* Filter and display the corresponding the respective list by:
-    * `GRADE`: If only filtering by `GRADE`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` as specified.
-    * `SUBJECT`: If only filtering by `SUBJECT`, only the lesson list will be filtered to display the respective lessons that correspond to the `SUBJECT` as specified.
-    * Both `GRADE` and `SUBJECT`: If filtering by both conditions, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
-
-
-Example(s):
-
-* `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective lists.
-* `filter s/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
-* `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student
- list by grade of `P2`, and display the corresponding entries in the respective lists.
+### Others
 
 #### Clearing all entries : `clear`
 
@@ -374,22 +392,22 @@ If the changes you made to the data file render its format invalid, TuitiONE wil
 
 ## **Command summary**
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` <br> e.g. `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
-**Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK]` <br> e.g. `edit 2 n/Ben Lim e/benlim@gmail.com`
+Action | Format | Examples 
+--------|-------|----------
+**Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` | `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
+**Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` | `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD] [dr/REMARK_TO_DELETE]` | `edit 2 n/Ben Lim e/benlim@gmail.com`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g. `delete 3`
-**Delete lesson** | `delete-l INDEX`<br> e.g. `delete-l 1`
-**Enroll** | `enroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `enroll 1 l/1`
-**Unenroll** | `unenroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `unenroll 1 l/1`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
-**Filter** | `filter [g/GRADE] s[SUBJECT]`<br> e.g. `filter g/P2`
-**Roster** | `roster LESSON_INDEX` <br> e.g. `roster 1`
-**List** | `list`
-**Help** | `help`
-**Exit** | `exit`
+**Delete** | `delete INDEX` | `delete 3`
+**Delete lesson** | `delete-l INDEX` | `delete-l 1`
+**Enroll** | `enroll STUDENT_INDEX l/LESSON_INDEX` | `enroll 1 l/1`
+**Unenroll** | `unenroll STUDENT_INDEX l/LESSON_INDEX` | `unenroll 1 l/1`
+**Find** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake`
+**Filter** | `filter [g/GRADE] s[SUBJECT]` | `filter g/P2`
+**Roster** | `roster LESSON_INDEX` | `roster 1`
+**List** | `list` |
+**Help** | `help` |
+**Exit** | `exit` |
 
 --------------------------------------------------------------------------------------------------------------------
 

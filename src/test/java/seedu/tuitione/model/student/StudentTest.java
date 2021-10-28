@@ -71,7 +71,7 @@ public class StudentTest {
         assertNotEquals(null, ALICE);
 
         // different type -> returns false
-        assertNotEquals(5, ALICE);
+        assertNotEquals(new Object(), ALICE);
 
         // different student -> returns false
         assertNotEquals(ALICE, BOB);

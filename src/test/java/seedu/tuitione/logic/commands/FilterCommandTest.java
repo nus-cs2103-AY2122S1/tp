@@ -78,7 +78,7 @@ public class FilterCommandTest {
         String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
-        Grade grade = new Grade("S3");
+        Grade grade = new Grade("S4");
         FilterCommand command = new FilterCommand(grade, null);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));

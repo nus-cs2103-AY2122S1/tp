@@ -1,0 +1,138 @@
+{
+  "students" : [ {
+    "name" : "One Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Two Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Three Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Four Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Five Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Six Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Seven Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Eight Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Nine Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Ten Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Eleven Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Twelve Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Thirteen Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Fourteen Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Fifteen Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  }, {
+    "name" : "Sixteen Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ ],
+    "lessonCodes" : [ "Science-S3-Sun-1730" ]
+  } ],
+  "lessons": [ {
+    "subject" : "Science",
+    "grade" : "S3",
+    "startTime" : "1730",
+    "day" : "Sun",
+    "price" : 10.5
+  } ]
+}

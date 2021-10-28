@@ -18,6 +18,8 @@ import seedu.tuitione.model.student.Student;
 public class Lesson {
 
     public static final String ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s is unable to enroll for this lesson";
+    public static final String EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s currently has %2$s students enrolled, "
+            + "and cannot enroll anymore students.";
     public static final String STUDENT_NOT_ENROLLED = "%1$s is not enrolled for %2$s";
     public static final int MAX_STUDENT_SIZE = 15;
 
@@ -108,12 +110,19 @@ public class Lesson {
     }
 
     /**
+     * Returns true if Lesson has 14 or fewer Students enrolled.
+     */
+    public boolean isAbleToEnrollMoreStudents() {
+        return students.size() < MAX_STUDENT_SIZE;
+    }
+
+    /**
      * Returns true if a student is eligible to enroll for the lesson.
      * A student must be of the same grade, must be available for the time slot,
      * and must not be already enrolled to the lesson.
      */
     public boolean isAbleToEnroll(Student student) {
-        if (student == null) {
+        if (student == null || !student.isAbleToEnrollForMoreLessons()) {
             return false;
         }
         if (containsStudent(student)) {
@@ -129,7 +138,7 @@ public class Lesson {
                 return false;
             }
         }
-        return true;
+        return isAbleToEnrollMoreStudents();
     }
 
     /**
@@ -234,13 +243,6 @@ public class Lesson {
                 && price.equals(otherLesson.price)
                 && lessonCode.equals(otherLesson.lessonCode)
                 && students.equals(otherLesson.students);
-    }
-
-    /**
-     * Returns true if Lesson has 14 or fewer Students enrolled.
-     */
-    public boolean isAbleToEnrollForMoreStudents() {
-        return students.size() < MAX_STUDENT_SIZE;
     }
 
     @Override

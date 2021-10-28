@@ -6,6 +6,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
@@ -78,7 +79,7 @@ public class EnrollCommandTest {
 
     @Test
     public void execute_invalidEnrollmentAlreadyInLesson_failure() {
-        Lesson testLesson = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
+        Lesson testLesson = model.getFilteredLessonList().get(INDEX_FOURTH_LESSON.getZeroBased());
         LessonCode code = testLesson.getLessonCode();
         Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
 
@@ -86,7 +87,7 @@ public class EnrollCommandTest {
                 benson.getName(),
                 code);
 
-        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, INDEX_SECOND_LESSON),
+        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, INDEX_FOURTH_LESSON),
                 model,
                 expectedMessageBenson);
     }
@@ -94,7 +95,7 @@ public class EnrollCommandTest {
     @Test
     public void execute_invalidIndex_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        EnrollCommand invalidStudentEnrollment = new EnrollCommand(outOfBoundIndex, INDEX_SECOND_LESSON);
+        EnrollCommand invalidStudentEnrollment = new EnrollCommand(outOfBoundIndex, INDEX_FOURTH_LESSON);
         EnrollCommand invalidLessonEnrollment = new EnrollCommand(INDEX_FIRST_STUDENT, outOfBoundIndex);
         EnrollCommand invalidIndexEnrollment = new EnrollCommand(outOfBoundIndex, outOfBoundIndex);
 
@@ -190,7 +191,7 @@ public class EnrollCommandTest {
         String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_STUDENTS,
                 scienceP2.getLessonCode(),
                 Lesson.MAX_STUDENT_SIZE);
-        assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, Index.fromOneBased(6)),
+        assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, Index.fromOneBased(2)),
                 model,
                 expectedMessage);
     }

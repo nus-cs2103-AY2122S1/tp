@@ -28,7 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_REMARK = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "98765432";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_REMARK_1 = "friend";
@@ -47,8 +47,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil
+                .parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -198,37 +198,5 @@ public class ParserUtilTest {
                 new Remark(VALID_REMARK_2)));
 
         assertEquals(expectedRemarkSet, actualRemarkSet);
-    }
-
-    @Test
-    public void parseRemarks_collectionWithMoreThanFiveValidRemarks_returnsRemarkSet() throws Exception {
-        Set<Remark> actualRemarkSet = ParserUtil.parseRemarks(Arrays
-                .asList(VALID_REMARK_1, VALID_REMARK_2, VALID_REMARK_3, VALID_REMARK_4,
-                        VALID_REMARK_5, VALID_REMARK_6));
-        Set<Remark> expectedRemarkSet = new HashSet<>(Arrays.asList(new Remark(VALID_REMARK_1),
-                new Remark(VALID_REMARK_2), new Remark(VALID_REMARK_3), new Remark(VALID_REMARK_4),
-                new Remark(VALID_REMARK_5)));
-
-        assertEquals(expectedRemarkSet, actualRemarkSet);
-    }
-
-    @Test
-    public void parseRemarks_collectionWithRepeatedValidRemarks_returnsRemarkSet() throws Exception {
-        // all repeated remarks -> only 1 remark in set
-        Set<Remark> actualRemarkSet1 = ParserUtil.parseRemarks(Arrays
-                .asList(VALID_REMARK_1, VALID_REMARK_1, VALID_REMARK_1, VALID_REMARK_1,
-                        VALID_REMARK_1, VALID_REMARK_1));
-        Set<Remark> expectedRemarkSet1 = new HashSet<>(Arrays.asList(new Remark(VALID_REMARK_1)));
-
-        assertEquals(expectedRemarkSet1, actualRemarkSet1);
-
-        // some repeated remarks -> take in the first 5 unique remarks
-        Set<Remark> actualRemarkSet2 = ParserUtil.parseRemarks(Arrays
-                .asList(VALID_REMARK_1, VALID_REMARK_1, VALID_REMARK_2, VALID_REMARK_2, VALID_REMARK_3,
-                        VALID_REMARK_4, VALID_REMARK_5, VALID_REMARK_6));
-        Set<Remark> expectedRemarkSet2 = new HashSet<>(Arrays.asList(new Remark(VALID_REMARK_1),
-                new Remark(VALID_REMARK_2), new Remark(VALID_REMARK_3), new Remark(VALID_REMARK_4),
-                new Remark(VALID_REMARK_5)));
-        assertEquals(expectedRemarkSet2, actualRemarkSet2);
     }
 }

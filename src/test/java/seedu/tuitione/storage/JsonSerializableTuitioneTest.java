@@ -1,6 +1,11 @@
 package seedu.tuitione.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.tuitione.model.lesson.Lesson.ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.MAX_STUDENT_SIZE;
+import static seedu.tuitione.model.student.Student.LESSON_SIZE_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.student.Student.MAX_LESSON_SIZE;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -29,6 +34,16 @@ public class JsonSerializableTuitioneTest {
             .resolve("duplicateEnrollmentTuitione.json");
     private static final Path ENROLLED_LESSON_NOT_FOUND_FILE = TEST_DATA_FOLDER
             .resolve("enrolledLessonNotFoundTuitione.json");
+
+    // extracted from json files
+    private static final String PROBLEMATIC_STUDENT_NAME = "Leena";
+    private static final String PROBLEMATIC_LESSON_CODE = "Science-S3-Sun-1730";
+    private static final Path INVALID_ENROLLMENT_FILE = TEST_DATA_FOLDER
+            .resolve("invalidEnrollmentTuitione.json");
+    private static final Path EXCEEDING_STUDENT_ENROLLMENT_FILE = TEST_DATA_FOLDER
+            .resolve("exceedingStudentEnrollmentTuitione.json");
+    private static final Path EXCEEDING_LESSON_ENROLLMENT_FILE = TEST_DATA_FOLDER
+            .resolve("exceedingLessonEnrollmentTuitione.json");
 
     @Test
     public void toModelType_typicalStudentsFile_success() throws Exception {
@@ -101,5 +116,47 @@ public class JsonSerializableTuitioneTest {
                 JsonSerializableTuitione.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableTuitione.MESSAGE_INVALID_LESSON_CODE,
                 dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_exactlyAtStudentEnrollmentCapacity_success() throws Exception {
+        JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(EXCEEDING_STUDENT_ENROLLMENT_FILE,
+                JsonSerializableTuitione.class).get();
+        String expected = String.format(LESSON_SIZE_MESSAGE_CONSTRAINT, PROBLEMATIC_STUDENT_NAME, MAX_LESSON_SIZE);
+        assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_exactlyAtLessonEnrollmentCapacity_success() throws Exception {
+        JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(EXCEEDING_LESSON_ENROLLMENT_FILE,
+                JsonSerializableTuitione.class).get();
+        String expected = String.format(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT, PROBLEMATIC_LESSON_CODE,
+                MAX_STUDENT_SIZE);
+        assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidEnrollment_throwsIllegalValueException() throws Exception {
+        JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(INVALID_ENROLLMENT_FILE,
+                JsonSerializableTuitione.class).get();
+        String expected = String.format(ENROLLMENT_MESSAGE_CONSTRAINT, PROBLEMATIC_STUDENT_NAME);
+        assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_exceedingStudentEnrollmentCapacity_throwsIllegalValueException() throws Exception {
+        JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(EXCEEDING_STUDENT_ENROLLMENT_FILE,
+                JsonSerializableTuitione.class).get();
+        String expected = String.format(LESSON_SIZE_MESSAGE_CONSTRAINT, PROBLEMATIC_STUDENT_NAME, MAX_LESSON_SIZE);
+        assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_exceedingLessonEnrollmentCapacity_throwsIllegalValueException() throws Exception {
+        JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(EXCEEDING_LESSON_ENROLLMENT_FILE,
+                JsonSerializableTuitione.class).get();
+        String expected = String.format(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT, PROBLEMATIC_LESSON_CODE,
+                MAX_STUDENT_SIZE);
+        assertThrows(IllegalValueException.class, expected, dataFromFile::toModelType);
     }
 }

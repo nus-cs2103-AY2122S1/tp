@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "grade" : "P2",
-    "remarked" : [ "friends" ],
+    "remarks" : [ "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "grade" : "S2",
-    "remarked" : [ "owesMoney", "friends" ],
+    "remarks" : [ "owesMoney", "friends" ],
     "lessonCodes" : [ "Mathematics-S2-Tue-0930" ]
   }, {
     "name" : "Carl Kurz",
@@ -22,24 +22,32 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "grade" : "P6",
-    "remarked" : [ ],
+    "remarks" : [ ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822244",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "grade" : "S1",
-    "remarked" : [ ],
+    "remarks" : [ ],
     "lessonCodes" : [ "Mathematics-S1-Fri-1030" ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824277",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "grade" : "S1",
-    "remarked" : [ ],
+    "remarks" : [ ],
     "lessonCodes" : [ "English-S1-Thu-1300", "Mathematics-S1-Fri-1030" ]
+  }, {
+    "name" : "George Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "grade" : "S3",
+    "remarks" : [ "firstRemark", "secondRemark", "thirdRemark", "fourthRemark", "averylongremarkthatpasses" ],
+    "lessonCodes" : [ ]
   } ],
   "lessons": [ {
     "subject" : "Science",
@@ -47,18 +55,6 @@
     "startTime" : "1230",
     "day" : "Wed",
     "price" : 10.5
-  }, {
-    "subject" : "Mathematics",
-    "grade" : "S2",
-    "startTime" : "0930",
-    "day" : "Tue",
-    "price" : 15.3
-  }, {
-    "subject" : "Physics",
-    "grade" : "S2",
-    "startTime" : "0930",
-    "day" : "Tue",
-    "price" : 15.3
   }, {
     "subject" : "English",
     "grade" : "S1",
@@ -71,5 +67,17 @@
     "startTime" : "1030",
     "day" : "Fri",
     "price" : 19.2
+  }, {
+    "subject" : "Mathematics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
+    "price" : 15.3
+  }, {
+    "subject" : "Physics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
+    "price" : 15.3
   } ]
 }

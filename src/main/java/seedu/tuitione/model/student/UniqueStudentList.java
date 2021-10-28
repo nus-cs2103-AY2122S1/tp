@@ -3,6 +3,7 @@ package seedu.tuitione.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -103,6 +104,7 @@ public class UniqueStudentList implements Iterable<Student> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
+        internalList.sort((Comparator.comparingInt(o -> o.getName().fullName.charAt(0))));
         return internalUnmodifiableList;
     }
 

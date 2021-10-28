@@ -110,6 +110,7 @@ public class LessonTest {
 
         assertEquals(1, student.getLessons().size());
         assertTrue(student.getLessons().contains(defaultLesson));
+        assertEquals(defaultLesson.getPrice().value, student.getSubscriptionPrice());
     }
 
     @Test
@@ -127,7 +128,7 @@ public class LessonTest {
         defaultLesson.updateStudent(editedNameStudent, student); // revert back
 
         // edit Parent Contact
-        Student editedParentContact = new StudentBuilder(student).withPhone("123456789").build();
+        Student editedParentContact = new StudentBuilder(student).withPhone("98765432").build();
         defaultLesson.updateStudent(student, editedParentContact);
         assertTrue(editedParentContact.containsLesson(defaultLesson));
         assertFalse(student.containsLesson(defaultLesson));
