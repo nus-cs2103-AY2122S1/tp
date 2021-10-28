@@ -107,12 +107,11 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        System.out.println(editPersonDescriptor.getEmail());
-        System.out.println("@@@");
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
-        Compatability updatedCompatability= editPersonDescriptor.getCompatability().orElse(personToEdit.getCompatability());
+        Compatability updatedCompatability = editPersonDescriptor.getCompatability()
+                                                .orElse(personToEdit.getCompatability());
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
         Set<Language> updatedLanguages = editPersonDescriptor.getLanguages().orElse(personToEdit.getLanguages());
         Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
@@ -190,17 +189,15 @@ public class EditCommand extends Command {
         }
 
         public Optional<Name> getName() {
-            return Optional.of(name);
+            return Optional.ofNullable(name);
         }
 
         public void setEmail(Email email) {
-            System.out.print("SETTING EMAIl >======");
-            System.out.print(email);
             this.email = email;
         }
 
         public Optional<Email> getEmail() {
-            return Optional.of(email);
+            return Optional.ofNullable(email);
         }
 
         public void setFaculty(Faculty faculty) {
@@ -208,7 +205,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Faculty> getFaculty() {
-            return Optional.of(faculty);
+            return Optional.ofNullable(faculty);
         }
 
         public void setMajor(Major major) {
@@ -216,7 +213,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Major> getMajor() {
-            return Optional.of(major);
+            return Optional.ofNullable(major);
         }
 
         public void setCompatability(Compatability compatability) {
@@ -224,7 +221,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Compatability> getCompatability() {
-            return Optional.of(compatability);
+            return Optional.ofNullable(compatability);
         }
 
         /**
@@ -241,7 +238,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code skills} is null.
          */
         public Optional<Set<Skill>> getSkills() {
-            return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
+            return (skills != null) ? Optional.ofNullable(Collections.unmodifiableSet(skills)) : Optional.empty();
         }
 
         /**
@@ -258,7 +255,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code languages} is null.
          */
         public Optional<Set<Language>> getLanguages() {
-            return (languages != null) ? Optional.of(Collections.unmodifiableSet(languages)) : Optional.empty();
+            return (languages != null) ? Optional.ofNullable(Collections.unmodifiableSet(languages)) : Optional.empty();
         }
 
         /**
@@ -275,7 +272,9 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code frameworks} is null.
          */
         public Optional<Set<Framework>> getFrameworks() {
-            return (frameworks != null) ? Optional.of(Collections.unmodifiableSet(frameworks)) : Optional.empty();
+            return (frameworks != null)
+                        ? Optional.ofNullable(Collections.unmodifiableSet(frameworks))
+                        : Optional.empty();
         }
 
         /**
@@ -292,7 +291,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null) ? Optional.ofNullable(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         /**
@@ -309,7 +308,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Remark>> getRemarks() {
-            return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
+            return (remarks != null) ? Optional.ofNullable(Collections.unmodifiableSet(remarks)) : Optional.empty();
         }
 
         @Override

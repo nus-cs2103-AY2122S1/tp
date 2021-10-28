@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Compatability;
@@ -32,7 +31,7 @@ public class PersonBuilder {
     private Email email;
     private Faculty faculty;
     private Major major;
-    private Optional<Compatability> compatability;
+    private Compatability compatability;
     private Set<Skill> skills;
     private Set<Language> languages;
     private Set<Framework> frameworks;
@@ -47,7 +46,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         faculty = new Faculty(DEFAULT_FACULTY);
         major = new Major(DEFAULT_MAJOR);
-        compatability = Optional.of(new Compatability(DEFAULT_COMPATABILITY));
+        compatability = new Compatability(DEFAULT_COMPATABILITY);
         skills = new HashSet<>();
         languages = new HashSet<>();
         frameworks = new HashSet<>();
@@ -124,7 +123,7 @@ public class PersonBuilder {
      * Sets the {@code Major} of the {@code Person} that we are building.
      */
     public PersonBuilder withCompatability(Integer compatability) {
-        this.compatability = Optional.of(new Compatability(compatability));
+        this.compatability = new Compatability(compatability);
         return this;
     }
 
