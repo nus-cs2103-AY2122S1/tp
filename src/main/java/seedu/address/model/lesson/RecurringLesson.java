@@ -65,7 +65,8 @@ public class RecurringLesson extends Lesson {
     public Date getDisplayDate() {
         Date updatedDate = getStartDate().updateDate(getCancelledDates());
         return getEndDate().isBefore(updatedDate) // end date earlier than updated date
-                ? getEndDate().getPreviousDate(getDayOfWeek())
+                ? Collections.max(Arrays.asList(getEndDate().getPreviousDate(getDayOfWeek()),
+                getStartDate())) // earliest date to display is start date
                 : updatedDate;
     }
 
