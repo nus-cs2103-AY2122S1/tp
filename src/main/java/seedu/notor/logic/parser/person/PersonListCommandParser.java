@@ -5,7 +5,7 @@ import seedu.notor.logic.commands.person.PersonListCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new ListCommand object
  */
 public class PersonListCommandParser extends PersonCommandParser {
     public PersonListCommandParser(String arguments) throws ParseException {
@@ -13,8 +13,8 @@ public class PersonListCommandParser extends PersonCommandParser {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the PersonFindCommand
-     * and returns a PersonFindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the PersonListCommand
+     * and returns a PersonListCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */

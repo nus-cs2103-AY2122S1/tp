@@ -31,6 +31,7 @@ import seedu.notor.ui.note.GeneralNoteWindow;
 import seedu.notor.ui.note.GroupNoteWindow;
 import seedu.notor.ui.note.NoteWindow;
 import seedu.notor.ui.note.PersonNoteWindow;
+import seedu.notor.ui.view.ViewPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing

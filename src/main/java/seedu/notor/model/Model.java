@@ -164,9 +164,14 @@ public interface Model {
     void listSuperGroup();
 
     /**
-     * Updates the list to all SuperGroups.
+     * Updates the list to all Subgroups.
      */
     void listSubGroup(Index i);
+
+    /**
+     * Update shte list to all persons in a group.
+     */
+    void listPersonInGroup(Index i);
 
     /**
      * Updates the filter to  {@code predicate}.

@@ -34,6 +34,7 @@ import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonFindCommand;
 import seedu.notor.logic.commands.person.PersonListCommand;
+import seedu.notor.logic.commands.person.PersonGroupListCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
 import seedu.notor.logic.commands.person.PersonTagCommand;
@@ -48,22 +49,7 @@ import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SubGroupListCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupListCommandParser;
-import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
-import seedu.notor.logic.parser.person.PersonArchiveAllCommandParser;
-import seedu.notor.logic.parser.person.PersonArchiveCommandParser;
-import seedu.notor.logic.parser.person.PersonArchiveShowCommandParser;
-import seedu.notor.logic.parser.person.PersonClearNoteCommandParser;
-import seedu.notor.logic.parser.person.PersonClearTagsCommandParser;
-import seedu.notor.logic.parser.person.PersonCreateCommandParser;
-import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
-import seedu.notor.logic.parser.person.PersonEditCommandParser;
-import seedu.notor.logic.parser.person.PersonFindCommandParser;
-import seedu.notor.logic.parser.person.PersonListCommandParser;
-import seedu.notor.logic.parser.person.PersonNoteCommandParser;
-import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
-import seedu.notor.logic.parser.person.PersonTagCommandParser;
-import seedu.notor.logic.parser.person.PersonUnarchiveCommandParser;
-import seedu.notor.logic.parser.person.PersonUntagCommandParser;
+import seedu.notor.logic.parser.person.*;
 
 /**
  * Parses user input.
@@ -160,6 +146,8 @@ public class NotorParser {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
                 } else if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
+                } else if (PersonGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonGroupListCommandParser(arguments).parse();
                 } else if (PersonTagCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonTagCommandParser(index, arguments).parse();
                 } else if (PersonUntagCommand.COMMAND_WORDS.contains(subCommandWord)) {

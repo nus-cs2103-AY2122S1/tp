@@ -12,6 +12,7 @@ import seedu.notor.model.common.Note;
 import seedu.notor.model.exceptions.ItemNotFoundException;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.tag.Tag;
+import seedu.notor.model.util.UniqueList;
 
 /**
  * Represents a group which a person can belong to.
@@ -96,6 +97,14 @@ public abstract class Group implements Notable {
 
     public HashMap<String, Person> getPeople() {
         return people;
+    }
+
+    public UniqueList<Person> getPersons() {
+        UniqueList<Person> persons = new UniqueList<>();
+        for(int i = 0; i < people.size(); i++) {
+               persons.add(people.get(i));
+        }
+        return persons;
     }
 
     /**
