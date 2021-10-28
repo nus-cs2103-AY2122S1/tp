@@ -23,7 +23,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Pinning a person: `pin`](#pinning-a-person--pin)
   * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
-  * [Deleting multiple person : `deletem`](#deleting-multiple-people--deleteM)
+  * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
   * [Command Assistant](#command-assistant)
@@ -330,7 +330,7 @@ Notes:
 Deletes the people within the range from the address book.
 
 #### Format:
-* `deleteM START_INDEX - END_INDEX`
+* `deletem START_INDEX - END_INDEX`
 
 Notes:
 * Deletes the people within the specified range from `START_INDEX to END_INDEX`.
@@ -339,9 +339,9 @@ Notes:
 * The `END_INDEX` must be bigger than or equal to `START_INDEX`
 
 **Sample Usage:**
-* `list` followed by `deleteM 2 - 3`
+* `list` followed by `deletem 2 - 3`
   * deletes the 2nd and 3rd person in the address book.
-* `find Betsy` followed by `deleteM 1 - 5`
+* `find Betsy` followed by `deletem 1 - 5`
   * deletes the 1st and 2nd person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -419,7 +419,7 @@ Action | Summary | Format, Examples
 **Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
 **Clear** | Clears all entries | `clear`
 **Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
-**DeleteM** | Deletes multiple people within the range | `deletem START_INDEX END_INDEX`<br> e.g., `deletem 3 - 5`
+**Deletem** | Deletes multiple people within the range | `deletem START_INDEX END_INDEX`<br> e.g., `deletem 3 - 5`
 **Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Exit** | Exits the program | `exit`
 **Find** | Locates persons by name and tags (Results fulfill all search terms)| `find n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
