@@ -238,6 +238,160 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Uniquely identify persons/groups/tasks
+
+#### Implementation
+
+We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by
+the `UniqueId` class. Each `UniqueId` instance stores a randomly-generated UUID and the owner of the id. When an element
+is created, the constructors can call `UniqueId#generateId()` to generate a new `UniqueId`.
+
+The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId`
+includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the
+`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without
+exhausting all classes that have `UniqueId` as instance.
+
+When storing references of `HasUniqueId`, we can simply store their id, instead of storing the entire object.
+
+<img src="images/UniqueIdDiagram.png" alt="Unique id diagram" width="254">
+
+#### Design Consideration
+
+**Aspect: How to generate a unique id:**
+
+- Aspect 1 (Current choice): UUID (128-bit label)
+  - Pros: Low possibility of collision
+  - Cons: Require more spaces to store
+- Aspect 2: `java.rmi.server.UID` (unique ID over time with respect to the host that it was generated on)
+  - Pros: Ensure uniqueness within same device
+  - Cons: As users can copy the data file and run the program in other devices, it may corrupt.
+- Aspect 3: UID + IP address:
+  - Pros: Solve the problem introduced in aspect 2.
+  - Cons: Require more spaces to store, IP addresses may confuse collaborator as they are not supposed to be in an id.
+- Aspect 4: Give a serial number for each objects
+  - Pros: Easy to implement / intuitive.
+  - Cons: Numbers (`int`, `long`) may be out-of-bound, need to keep a reference of the total number of id.
+
+### Assign/Unassign task to student
+
+#### Implementation
+
+Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task`
+object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object
+and the `Task` object.
+
+![TaskAssignment](images/TaskAssignmentDiagram.png)
+
+The implementation currently supports two task commands:
+- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object,
+and adds the `UniqueId` representing the `Person` to the set of `UniqueId`s stored in the `Task` object
+- `UnassignTaskToPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object,
+and removes the `UniqueId` representing the `Person` from the set of `UniqueId`s stored in the `Task` object
+
+#### Implementation rationale
+
+- `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects that are assigned to one another.
+- Storing assignments as a set in each `Person` and `Task` makes it easy to display and retrieve all assigned tasks for each `Person`
+and all assigned `Person` for each `Task`. It also makes implementation relatively simple, without having to use external lists.
+
+#### Alternatives considered
+
+Storing assignments as a separate set in the `AddressBook`. This may complicate command execution as the command needs to retrieve the
+entire set from the `AddressBook` and look up the persons and tasks in the set.
+
+#### \[Proposed\] Future implementation
+
+- Adds support for group assignment using similar assignment methods. Automatically assign task to all students in the group
+- Replace the set of `UniqueId`s with a set of `TaskCompletion` objects in order to track which student has done which task
+
+### Edit a task
+
+### Implementation
+This command is implemented to allow tutors to edit the details of the tasks stored in TutorMaster.
+
+The tutor's input to edit a particular task is executed by the Logic Manager. The logic manager passes the input to the
+`AddressBookParser` class which checks for the matching command. The arguments of the input are passed to `TaskCommandsParser`
+class which will then check for the matching action word. In this case, the action word will be '-e' and the arguments will be
+passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` object. This command object is return to the
+`LogicManager` class to be executed. The `EditTaskCommand` object will create a newly edited task with the edited details and
+set the edited task in place of the original task in the model. It also returns a `CommandResult` object that is returned
+to the `LogicManager` class.
+
+![EditTask](images/EditTaskSequenceDiagram.png)
+
+### Implementation Rationale
+When a new task is created with the details input by the user, the uniqueId of the task also changes. This implies that
+the list of uniqueIds of tasks assigned to each student will have to be edited so store the newly created task in place of
+the original task. To tackle this issue, we created a new constructor for the `Task` class such that we can pass in the
+uniqueId of the original task so that the id is retained and does not change. This simplifies matters when it comes to
+assigning and unassigning tasks to the students.
+
+### Alternatives considered
+An alternative considered was to edit the list of uniqueIds of tasks assigned to each student after editing a particular
+task. However, this seemed inefficient and hence, we went with the current implementation.
+
+### View a student
+
+#### Implementation
+
+The command to view a student is facilitated through the `PersonCommandsParser` class. The `PersonCommandsParser` class
+checks the command word given by the user and creates a `ViewPersonCommandParser` object which also creates a `ViewPersonCommand`
+object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be
+executed. The `ViewPersonCommand` object gets the list of students via `Model#getfilteredPersonsList()`. It then obtains the
+target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying the details of the student in the 'Result Display'.
+
+#### Implementation rationale
+* `PersonCommandParser` helps filter out `ViewPersonCommandParser` as it helps differentiate the various commands
+  related to student.
+
+#### Alternatives considered
+View the student from the persons list itself as it also displays the students' details. This may not include other details
+relating to the student, such as the different `Task` object they have, and the `Group` they are in.
+
+The following sequence diagram shows how the view operation works.
+
+![ViewDiagram](images/ViewStudentDiagram.png)
+
+### Lessons
+
+#### Implementation
+
+Lessons and all related classes are inside the `seedu.address.model.lesson` package. A `Lesson` consists of a `java.time.DayOfWeek`,
+a `Subject` and a `Timeslot`, which describes a Lesson well.
+
+A `NoOverlapLessonList` contains a list of lessons, in which the lessons within must not overlap. Overlap is defined as falling on the
+same day and with timings that run within each other.
+
+`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular
+
+The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use maintain knowledge of a
+lesson and its attendees. For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
+a `LessonAssignable`.
+
+![LessonDiagram](images/LessonDiagram.png)
+
+#### Implementation Rationale
+
+`NoOverlapLessonList` is useful in cases such as students where they should not have lessons that overlap. `LessonWithAttendees`
+is a useful wrapper class to obtain the full details of a lesson (the lesson details and the details of attendees), since a lesson
+does not have a direct reference to its attendee.
+
+Lessons were created to be held by other classes, and thus does not hold information about its attendees. We acknowledge that a
+`Lesson` can hold reference to its `Attendee` and vice versa. However, for the sake of simplicity, we have decided let other classes be
+in charge of knowing who _attends_ each `Lesson`.
+
+#### Alternatives considered
+
+When `Lesson` was implemented, the `Person` class was already in place. We had originally considered a two-way reference, in which
+a `Person` had multiple `Lesson` and a `Lesson` had multiple `Person`. However, given that this app was mainly for tuition, in which
+most lessons would be 1:1, it made more sense to assign `Lesson` under a `Person` instead, and if multiple `Person` was attending
+the same `Lesson`, they would be assigned through a `Group`. The avoidance of a two-way reference was also due to the immutability
+of `Person`, in which any updates to a `Person` could cause any references to it to be invalid.
+
+#### \[Proposed\] Future implementation
+
+Add support for a custom recurrence of lessons. Right now it is guaranteed that a lesson would occur weekly, which is in line with
+what many of our users require, but the ability to customise can be useful.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -265,44 +419,51 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage students' schedules and progress faster than a typical mouse/GUI driven app
+**Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app.
+The app is purely offline, and does not include any online feature.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new student              |                                                                        |
-| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a student by name         | locate details of persons without having to go through the entire list |
-| `* * *`  | user                                       | group students together        | locate similar through their groupings easily                          |
-| `* * *`  | tutor                                      | add a new task                 | remember tasks I have created easily                                   |
-| `* * *`  | tutor                                      | assign tasks to students       | reuse similar tasks for my students                                    |
-| `* * *`  | tutor                                      | mark tasks as completed        | track my students' task progress                                       |
-| `* * *`  | user                                       | delete a task                  | remove tasks that I no longer need                                     |
-| `* * *`  | busy tutor                                 | view current lesson schedules  | plan my working and resting hours accordingly                          |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `* *`    | tutor                                      | store exam dates of students   | prioritize and help a large number of students better                  |
-| `* *`    | busy tutor                                 | be warned if schedules clash   | minimize error in my planning                                          |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                           | So that I can…​                                                     |
+| -------- | ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new student                            |                                                                        |
+| `* * *`  | user                                       | delete a student                             | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a student by name                       | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | group students together                      | locate similar through their groupings easily                          |
+| `* * *`  | tutor                                      | add a new task                               | remember tasks I have created easily                                   |
+| `* * *`  | tutor                                      | assign tasks to students                     | reuse similar tasks for my students                                    |
+| `* * *`  | tutor                                      | mark tasks as completed                      | track my students' task progress                                       |
+| `* * *`  | user                                       | delete a task                                | remove tasks that I no longer need                                     |
+| `* * *`  | busy tutor                                 | view current lesson schedules                | plan my working and resting hours accordingly                          |
+| `* *`    | tutor                                      | set deadlines for tasks                      | collect assignments in a timely manner                                 |
+| `* *`    | tutor                                      | input students' grade for tasks              | track how my students are coping                                       |
+| `* *`    | user                                       | hide private contact details                 | minimize chance of someone else seeing them by accident                |
+| `* *`    | tutor                                      | store exam dates of students                 | prioritize and help a large number of students better                  |
+| `* *`    | busy tutor                                 | be warned if schedules clash                 | minimize error in my planning                                          |
+| `* *`    | busy tutor                                 | track who has paid their fees                | send reminders to students who have not paid                           |
+| `*`      | tutor                                      | record students' attendance                  | track which lessons students have missed and help them catch up        |
+| `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                 |
+| `*`      | tutor                                      | monitor number of tasks assigned to a student| assign tasks to students while ensuring they can manage the workload   |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TutorMaster` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all students
+2.  TutorMaster shows a list of students in the students list
+3.  User requests to delete a specific student in the list
+4.  TutorMaster deletes the student from the students list
 
     Use case ends.
 
@@ -314,11 +475,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TutorMaster shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Delete a task**
+
+**MSS**
+
+1.  User requests to list all tasks
+2.  TutorMaster shows a list of tasks in the tasks list
+3.  User requests to delete a specific task in the list
+4.  TutorMaster deletes the task from the tasks list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorMaster shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Assign a task to a student**
+
+**MSS**
+
+1.  User requests to list all tasks
+2.  TutorMaster shows a list of tasks in the tasks list
+3.  User requests to list all students
+4.  TutorMaster shows a list of students in the students list
+5.  User requests to assign a task to a student
+6.  TutorMaster assigns the task to the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The tasks list is empty.
+
+  Use case ends.
+
+* 4a. The students list is empty.
+
+  Use case ends.
+
+* 5a. The given task name or student name is invalid.
+
+    * 5a1. TutorMaster shows an error message.
+
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 

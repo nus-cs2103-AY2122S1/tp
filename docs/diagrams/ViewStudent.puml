@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PersonCommandsParser" as PersonCommandsParser LOGIC_COLOR
+participant ":ViewPersonCommandsParser" as ViewPersonCommandsParser LOGIC_COLOR
+participant ":ViewPersonCommand" as ViewPersonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+
+[-> LogicManager : execute(student -v 3)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(student -v 3)
+activate AddressBookParser
+
+AddressBookParser ->  PersonCommandsParser : parseCommand(student -v 3)
+activate PersonCommandsParser
+
+create ViewPersonCommandsParser
+PersonCommandsParser -> ViewPersonCommandsParser : parse(student -v 3)
+activate ViewPersonCommandsParser
+
+create ViewPersonCommand
+ViewPersonCommandsParser -> ViewPersonCommand : parse(3)
+activate ViewPersonCommand
+
+ViewPersonCommand --> ViewPersonCommandsParser
+deactivate ViewPersonCommand
+
+ViewPersonCommandsParser --> PersonCommandsParser
+deactivate ViewPersonCommandsParser
+
+PersonCommandsParser --> AddressBookParser
+deactivate PersonCommandsParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+
+
+LogicManager -> ViewPersonCommand : execute()
+activate ViewPersonCommand
+
+ViewPersonCommand -> Model : getFilteredPersonsList()
+activate Model
+
+Model --> ViewPersonCommand : lastShownList
+deactivate Model
+
+ViewPersonCommand -> AddressBook : get(index)
+activate AddressBook
+
+AddressBook --> ViewPersonCommand : Person
+deactivate AddressBook
+
+ViewPersonCommand --> LogicManager : CommandResult
+deactivate ViewPersonCommand
+
+[<-- LogicManager
+deactivate LogicManager
+
+@enduml

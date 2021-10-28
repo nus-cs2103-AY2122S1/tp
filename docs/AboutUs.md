@@ -9,15 +9,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yeh Yu-Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eltonyeh.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/eltonyeh)]
+[[portfolio](team/eltonyeh.md)]
 
-* Role: Project Advisor
+* Role: Developer
 
 ### Tan Hua Kun
 
@@ -29,21 +28,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Backend
 
-### Johnny Doe
+### Srinivasan Neharikha
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/neha-5678.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Neha-5678)] [[portfolio](team/Neha-5678.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Scheduling and tracking
 
-### Jean Doe
+### Le Quoc Huy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeremy-7007.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jeremy-7007)]
+[[portfolio](team/jeremy-7007.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
