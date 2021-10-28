@@ -48,6 +48,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private ImageView fav;
     @FXML
+    private ImageView userProfile;
+    @FXML
     private FlowPane mods;
 
     /**
@@ -61,6 +63,10 @@ public class PersonCard extends UiPart<Region> {
         if (person.getIsFavourite()) {
             Image favIcon = new Image(getClass().getResourceAsStream("/images/fav_icon.png"));
             fav.setImage(favIcon);
+        }
+        if (person.getIsMyProfile()) {
+            Image userIcon = new Image(getClass().getResourceAsStream("/images/user_icon.png"));
+            userProfile.setImage(userIcon);
         }
         studentId.setText(person.getStudentId().value);
         phone.setText(person.getPhone().value);
@@ -111,4 +117,5 @@ public class PersonCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
     }
+
 }

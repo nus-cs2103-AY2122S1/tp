@@ -26,6 +26,7 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
         personListView.setItems(personList);
+
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
@@ -36,12 +37,16 @@ public class PersonListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
-
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
-            } else {
+            } else if (person.getIsMyProfile()) {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setStyle("-fx-background-color: #228B22");
+            } else {
+                setStyle("");
+                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+
             }
         }
     }
