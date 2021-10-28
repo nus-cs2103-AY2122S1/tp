@@ -7,7 +7,6 @@ import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.tuitione.logic.commands.FindCommand;
 import seedu.tuitione.logic.commands.RosterCommand;
 
 public class RosterCommandParserTest {
@@ -16,7 +15,7 @@ public class RosterCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RosterCommand.MESSAGE_USAGE));
     }
 
     @Test

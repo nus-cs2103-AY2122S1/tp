@@ -54,16 +54,16 @@ public class RosterCommandTest {
         Model expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lc));
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedLessonCode(lc));
-        List<Lesson> expectedModelFilteredLessons = expectedModel.getFilteredLessonList();
+        List<Student> expectedModelFilteredStudents = expectedModel.getFilteredStudentList();
 
         // Build command success string message
         StringBuilder expectedMessage = new StringBuilder();
         expectedMessage.append(String.format(MESSAGE_ROSTER_LESSON_SUCCESS, lesson.getLessonCode(),
-                expectedModel.getFilteredStudentList().size()));
+                expectedModelFilteredStudents.size()));
 
-        if (!expectedModelFilteredLessons.isEmpty()) {
+        if (!expectedModelFilteredStudents.isEmpty()) {
             expectedMessage.append(MESSAGE_ENROLLED_STUDENT_HEADER);
-            expectedModel.getFilteredStudentList().stream()
+            expectedModelFilteredStudents.stream()
                     .map(s -> s.getName().fullName)
                     .sorted()
                     .forEach(n -> expectedMessage.append(n).append(", "));
