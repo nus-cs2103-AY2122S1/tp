@@ -139,10 +139,13 @@ Examples:
 </details>
 
 ### Listing all students : `list`
-
+<details markdown="1">
+<summary>
 Shows a list of all students in the students list.
+</summary>
 
 Format: `list`
+</details>
 
 ### Locating students by name: `student -f`
 <details markdown="1">
@@ -239,16 +242,16 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 Groups students by their names together.
 </summary>
 
-Format: `student -ag INDEX…​ n/GROUPNAME`
+Format: `student -a INDEX…​ n/GROUPNAME`
 
 * Groups students into a group specified at `GROUPNAME`
-* `-ag` refers to the add group command
+* `-a` refers to the add group command
 * You can specify as many index numbers as required.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -ag 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
+* `student -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
 </details>
 
 ### Deleting a group
@@ -257,15 +260,15 @@ Examples:
 Deletes a group of students.
 </summary>
 
-Format: `student -dg INDEX`
+Format: `student -d INDEX`
 
 * Deletes a group of students specified at `INDEX`
-* `-dg` refers to delete group command.
+* `-d` refers to delete group command.
 * The index refers to the index number shown in the displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -dg 5` deletes the group specified at the index 5.
+* `student -d 5` deletes the group specified at the index 5.
 </details>
 
 ### Adding a lesson to a group: `group -al`
@@ -318,21 +321,11 @@ Format: `task -a n/NAME d/DEADLINE`
 Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
 
-### Viewing a task `[coming in v1.3]`
-
-Views a task in the task list.
-
-Format: `task -v INDEX`
-
-* Views a task with the index `INDEX`
-* `-v` refers to the view command
-
-Examples:
-* `task -v 2` shows the attributes of the 2nd task on the student’s task list
-
 ### Editing a task `[coming in v1.3]`
-
+<details markdown="1">
+<summary>
 Edits a task in the task list.
+</summary>
 
 Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
@@ -342,7 +335,8 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/2021-12-31` edits the deadline to 20211231
+* `task -e 4 d/2021-12-31` edits the deadline to 31 December 2021
+</details>
 
 ### Deleting a task `[coming in v1.3]`
 
@@ -356,6 +350,35 @@ Format: `task -d INDEX`
 
 Examples:
 * `task -d 1` deletes the task at index 1
+
+### Listing all tasks `[coming in v1.3]`
+<details markdown="1">
+<summary>
+Shows a list of all the tasks in the task list. 
+</summary>
+
+Format: `task -l`
+</details>
+
+### Finding a task by name`[coming in v1.3]`
+<details markdown="1">
+<summary>
+Find tasks whose names contain any of the given keywords.
+</summary>
+
+Format: `task -f KEYWORD…​`
+
+* The search is case-insensitive. e.g `report` will match `Report`
+* The order of the keywords does not matter. e.g. `Report Lab` will match `Lab Report`
+* Only the name is searched.
+* Only full words will be matched e.g. `Rep` will not match `Report`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Report Submission` will return `Report 1`, `Lab Submission`
+
+Examples:
+* `student -f Report` returns `Report 1` and `Report Submission`
+* `student -f lab submission` returns `Lab Submission`, `Report Submission`<br>
+</details>
 
 ### Assigning tasks to students
 
