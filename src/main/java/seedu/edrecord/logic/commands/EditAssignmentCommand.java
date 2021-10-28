@@ -2,8 +2,8 @@ package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.logic.commands.AddAssignmentCommand.MESSAGE_NO_MODULE_SELECTED;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_MAX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import seedu.edrecord.commons.util.CollectionUtil;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.assignment.MaxScore;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.name.Name;
 
@@ -32,7 +32,7 @@ public class EditAssignmentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_WEIGHTAGE + "WEIGHTAGE] "
-            + "[" + PREFIX_MAX_SCORE + "MAX_SCORE]\n"
+            + "[" + PREFIX_SCORE + "MAX_SCORE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Side Quest 7 "
             + PREFIX_WEIGHTAGE + "2.5";
@@ -95,7 +95,7 @@ public class EditAssignmentCommand extends Command {
 
         Name updatedName = editDescriptor.getName().orElse(toEdit.getName());
         Weightage updatedWeightage = editDescriptor.getWeightage().orElse(toEdit.getWeightage());
-        MaxScore updatedMaxScore = editDescriptor.getMaxScore().orElse(toEdit.getMaxScore());
+        Score updatedMaxScore = editDescriptor.getMaxScore().orElse(toEdit.getMaxScore());
 
         return new Assignment(updatedName, updatedWeightage, updatedMaxScore);
     }
@@ -125,7 +125,7 @@ public class EditAssignmentCommand extends Command {
     public static class EditAssignmentDescriptor {
         private Name name;
         private Weightage weightage;
-        private MaxScore maxScore;
+        private Score maxScore;
 
         public EditAssignmentDescriptor() {
         }
@@ -162,11 +162,11 @@ public class EditAssignmentCommand extends Command {
             return Optional.ofNullable(weightage);
         }
 
-        public void setMaxScore(MaxScore maxScore) {
+        public void setMaxScore(Score maxScore) {
             this.maxScore = maxScore;
         }
 
-        public Optional<MaxScore> getMaxScore() {
+        public Optional<Score> getMaxScore() {
             return Optional.ofNullable(maxScore);
         }
 

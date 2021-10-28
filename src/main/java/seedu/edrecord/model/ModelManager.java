@@ -17,7 +17,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.commons.core.LogsCenter;
 import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
@@ -249,11 +248,11 @@ public class ModelManager implements Model {
         if (!hasSelectedModule()) {
             return false;
         }
-        Score editedMaxScore = editedAssignment.getMaxScore();
+        // Score editedMaxScore = editedAssignment.getMaxScore();
         List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
         return allPersons.stream()
                 .filter(selectedModulePredicate)
-                .anyMatch(person -> person.getGrade(current).compareTo(editedMaxScore) > 0);
+                .anyMatch(person -> person.hasHigherScoreThanMaxScore(current, editedAssignment));
     }
 
     @Override

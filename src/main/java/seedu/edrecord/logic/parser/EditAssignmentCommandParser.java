@@ -3,8 +3,8 @@ package seedu.edrecord.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edrecord.logic.commands.EditAssignmentCommand.MESSAGE_USAGE;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_MAX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
 
 import seedu.edrecord.commons.core.index.Index;
@@ -26,7 +26,7 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
     public EditAssignmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEIGHTAGE, PREFIX_MAX_SCORE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEIGHTAGE, PREFIX_SCORE);
 
         Index index;
 
@@ -43,8 +43,8 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         if (argMultimap.getValue(PREFIX_WEIGHTAGE).isPresent()) {
             descriptor.setWeightage(ParserUtil.parseWeightage(argMultimap.getValue(PREFIX_WEIGHTAGE).get()));
         }
-        if (argMultimap.getValue(PREFIX_MAX_SCORE).isPresent()) {
-            descriptor.setMaxScore(ParserUtil.parseMaxScore(argMultimap.getValue(PREFIX_MAX_SCORE).get()));
+        if (argMultimap.getValue(PREFIX_SCORE).isPresent()) {
+            descriptor.setMaxScore(ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get()));
         }
 
         if (!descriptor.isAnyFieldEdited()) {
