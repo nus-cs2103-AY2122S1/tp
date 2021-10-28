@@ -112,7 +112,7 @@ The [Command summary](#command-summary) lists a table with all the commands pres
 
 This section presents the various elements in our **TuitiONE** application.
 
-![Result of `list`](images/UserGuideImage/default.png)
+![Result of `list`](images/UserGuideImage/default.PNG)
 <center><i>Image: Layout of <b>TuitiONE</b>.<br></i></center>
 
 **No.** | **Section** | **Description**
@@ -169,7 +169,7 @@ Shows you a list of all students and lessons in the **TuitiONE**. Students will 
 
 Command Format: `list`
 
-![Result of `list`](images/UserGuideImage/list.png)
+![Result of `list`](images/UserGuideImage/list.PNG)
 
 <center><i>Image: Expected output of <code>list</code> command.<br></i></center>
 
@@ -199,7 +199,7 @@ Example(s):
 
 * `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student list by grade of `P2`, and display the corresponding entries in the respective lists.
 
-![Result of `filter`](images/UserGuideImage/filter.png)
+![Result of `filter`](images/UserGuideImage/filter.PNG)
 
 <center><i>Image: Expected output of <code>filter g/P5 s/Science</code> command.<br></i></center>
 
@@ -223,7 +223,7 @@ Example(s):
 
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
-![Outcome of `add`](images/UserGuideImage/add.png)
+![Outcome of `add`](images/UserGuideImage/add.PNG)
 <center><i>Image: Expected output of <code>add</code> command.<br></i></center>
 
 #### Locating students by name: `find`
@@ -251,7 +251,7 @@ Example(s):
 
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-![Result of `find alex`](images/UserGuideImage/find.png)
+![Result of `find alex`](images/UserGuideImage/find.PNG)
 <center><i>Image: Expected output of <code>find tan</code> command.<br></i></center>
 
 #### Deleting a student : `delete`
@@ -276,7 +276,7 @@ Example(s):
 
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-![Outcome of `delete`](images/UserGuideImage/delete.png)
+![Outcome of `delete`](images/UserGuideImage/delete.PNG)
 
 <center><i>Image: Expected output of <code>delete 1</code> command.<br></i></center>
 
@@ -316,7 +316,7 @@ Example(s):
 
 * `edit 2 r/discounted dr/unpaid` removes the `unpaid` remark from the second student's set of remarks, before adding the `discounted` remark.
 
-![Outcome of `edit 2 r/discounted`](images/UserGuideImage/edit.png)
+![Outcome of `edit 2 r/discounted`](images/UserGuideImage/edit.PNG)
 
 <center><i>Image: Expected output of <code>edit</code> command.<br></i></center>
 
@@ -349,7 +349,7 @@ Example(s):
 
 * `enroll 1 l/2` will enroll the student indexed at `2` in the displayed student list to the lesson indexed at `2` in the displayed lesson list.
 
-![Outcome of `enroll 1 l/2`](images/UserGuideImage/enroll.png)
+![Outcome of `enroll 1 l/2`](images/UserGuideImage/enroll.PNG)
 
 <center><i>Image: Expected output of <code>enroll 1 l/2</code> command.<br></i></center>
 
@@ -373,7 +373,7 @@ Example(s):
 
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
-![Outcome of `unenroll 1 l/1`](images/UserGuideImage/unenroll.png)
+![Outcome of `unenroll 1 l/1`](images/UserGuideImage/unenroll.PNG)
 
 <center><i>Image: Expected output of <code>unenroll 1 l/1</code> command.<br></i></center>
 
@@ -405,7 +405,7 @@ Example(s):
 
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
-![Outcome of `add-l`](images/UserGuideImage/add-l.png)
+![Outcome of `add-l`](images/UserGuideImage/add-l.PNG)
 
 <center><i>Image: Expected output of <code>add-l</code> command.<br></i></center>
 
@@ -427,7 +427,7 @@ Example(s):
 
 * `delete-l 1` deletes the lesson with corresponding index `1`.
 
-![Outcome of `delete-l`](images/UserGuideImage/delete-l.png)
+![Outcome of `delete-l`](images/UserGuideImage/delete-l.PNG)
 
 <center><i>Image: Expected output of <code>delete-l 1</code> command.<br></i></center>
 
@@ -448,7 +448,7 @@ Command Format: `roster LESSON_INDEX`
 Examples:
 * `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
 
-![Outcome of `roster 1`](images/UserGuideImage/roster.png)
+![Outcome of `roster 1`](images/UserGuideImage/roster.PNG)
 
 <center><i>Image: Expected output of <code>roster 1</code> command.<br></i></center>
 
