@@ -814,20 +814,130 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
+### Adding a student
+
+1. Adding a student while all students are being shown
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all students using the `students` command. Multiple students in the list.
+    1. Prerequisites: List all students using the `students` command. Multiple students in the list.
 
-   1. Test case: `deleteStudent 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    1. Test case: `deleteStudent 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `deleteStudent 0`<br>
-      Expected: No student is deleted. Error details shown in the status message.
+    1. Test case: `deleteStudent 0`<br>
+       Expected: No student is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `deleteStudent`, `deleteStudent x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `deleteStudent`, `deleteStudent x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Editing a student
+
+### Marking a student's attendance
+
+1. Marking a student while all students are being shown
+
+    1. Prerequisites: List all students using the `students` command. Multiple students in the list.
+
+    1. Test case: `marka 1 w/1`<br>
+       Expected: First contact is marked as present in the list. Status message shows details of his week 1 attendance.
+
+    1. Test case: `marka 0 w/1`<br>
+       Expected: No student is marked. Error details shown in the status message.
+
+    1. Other incorrect mark attendance commands to try: `marka`, `marka x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Marking a student while on another directory
+
+    1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
+    
+    1. Test case: `marka 1 w/1`<br>
+       Expected: First contact in the last filtered students list (David) is marked as present. Status message shows details of student's week 1 attendance. Updated students list is shown.
+
+    1. Test case: `marka 1 w/1`<br>
+       Expected: First contact in student list (Alex) is marked as present/absent depending on his last attendance status. Status message shows details of student's week 1 attendance. Updated students list is shown.
+
+1. Marking multiple students
+
+    1. Test case: `marka 1 2 3 w/1`<br>
+       Expected: Students 1, 2 and 3 are marked as present in the list. Status message shows details of their week 1 attendance.
+
+    1. Test case: `marka 1 2 3 w/1`<br>
+       Expected: Students 1, 2 and 3 are marked as absent in the list. Status message shows details of their week 1 attendance.
+
+### Marking a student's participation
+
+1. Marking a student while all students are being shown
+
+    1. Prerequisites: List all students using the `students` command. Multiple students in the list.
+
+    1. Test case: `markp 1 w/1`<br>
+       Expected: First contact is marked as participated in the list. Status message shows details of his week 1 participation.
+
+    1. Test case: `markp 0 w/1`<br>
+       Expected: No student is marked. Error details shown in the status message.
+
+    1. Other incorrect mark participation commands to try: `markp`, `markp x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Marking a student while on another directory
+
+    1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
+
+    1. Test case: `markp 1 w/1`<br>
+       Expected: First contact in the last filtered students list (David) is marked as participated. Status message shows details of student's week 1 participation. Updated students list is shown.
+
+    1. Test case: `markp 1 w/1`<br>
+       Expected: First contact in student list (Alex) is marked as participated/not participated depending on his last participation status. Status message shows details of student's week 1 participation. Updated students list is shown.
+
+1. Marking multiple students
+
+    1. Test case: `markp 1 2 3 w/1`<br>
+       Expected: Students 1, 2 and 3 are marked as participated in the list. Status message shows details of their week 1 participation.
+
+    1. Test case: `markp 1 2 3 w/1`<br>
+       Expected: Students 1, 2 and 3 are marked as not participated in the list. Status message shows details of their week 1 participation.
+       
+### Finding a student
+
+1. 
+
+### Clearing student list
+
+1. 
+
+### Adding a group 
+
+### Deleting a group
+
+### Editing a group
+
+### Finding a group
+
+1. 
+
+### Clearing group list
+
+1. 
+
+### Adding a todo
+
+### Adding a deadline task
+
+### Adding an event task
+
+### Editing a task
+
+### Deleting a task
+
+### Marking a task as done
+
+### Clearing task list
+
+### Clearing all data from tApp
 
 ### Saving data
 
@@ -836,3 +946,13 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+[comment]: <> (TODO)
+## **Effort**
+We highly recommend adding an appendix named Effort that evaluators can use to estimate the total project effort.
+Keep it brief (~1 page)
+Explain the difficulty level, challenges faced, effort required, and achievements of the project.
+If a significant part (e.g., more than 5%) of the effort was saved through reuse, mention what you reused and how it affected the effort e.g., the feature X is implemented using library Foo -- our work on adapting Foo to our product is contained in class FooAdapter.java.
+Use AB3 as a reference point e.g., you can explain that while AB3 deals with only one entity type, your project was harder because it deals with multiple entity types.
