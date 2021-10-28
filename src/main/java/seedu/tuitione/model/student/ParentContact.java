@@ -11,8 +11,8 @@ public class ParentContact {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, should be 8 digits long and should start with either a "
-                    + "'9','8' or '6'.";
+            "⚠\tAlert:\n\nPhone numbers should only contain numbers, should be 8 digits long and should "
+                    + "start with either a '9','8' or '6'.";
     public static final String VALIDATION_REGEX = "\\d{8}";
     public final String value;
 
