@@ -22,10 +22,10 @@ public class HelpWindow extends PopupWindow {
 
     public static final String USER_GUIDE_URL = "https://ay2122s1-cs2103-f09-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Full user guide: " + USER_GUIDE_URL;
-    private static final String INSTRUCTION = "Here is the feature list of ProgrammerError:";
+    private static final String DESCRIPTION = "Here's a list of ProgrammerError's features:";
 
     private static final String FXML = "HelpWindow.fxml";
-    private static final Double FRACTION_OF_WINDOW = 0.925;
+    private static final Double FRACTION_OF_WINDOW = 0.975;
     private static final double HELP_WINDOW_WIDTH = Screen.getPrimary().getBounds().getWidth() * FRACTION_OF_WINDOW;
 
     private ObservableList<FeatureTableItem> featureTableItems;
@@ -53,7 +53,7 @@ public class HelpWindow extends PopupWindow {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        instruction.setText(INSTRUCTION);
+        instruction.setText(DESCRIPTION);
         helpMessage.setText(HELP_MESSAGE);
         initializeFeatureList();
     }
