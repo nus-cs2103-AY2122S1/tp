@@ -242,7 +242,30 @@ This section guides you on how to find or filter students of your choice in TAB.
 
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
 
-Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
+Fields that you can search for are:
+
+| Field            | Parameter                   | Result                                                  |
+|------------------|-----------------------------|---------------------------------------------------------|
+| Student Name     | n/NAME_KEYWORDS             | Students whose name contain the keywords                |
+| Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contain the keywords             |
+| Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contain the keywords        |
+| Student Email    | e/EMAIL_KEYWORDS            | Students whose email contain the keywords               |
+| Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contain the keywords |
+| Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contain the keywords        |
+| School           | sch/SCHOOL_KEYWORDS         | Students whose school contain the keywords              |
+| Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contain the keywords     |
+| Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contain the keywords      |
+| Outstanding Fees [COMING SOON] | [COMING SOON] | [COMING SOON]                                           |
+| Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contain the keywords         |
+| Tags             | t/TAG                           | Students who have the specified tag                 |
+| Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students with lessons that match the keywords       |
+| Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date              |
+| Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range        |
+| Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date |
+| Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword|
+| Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contain the keywords    |                                           |
+
+Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS`
 
 Notes about the find condition:
 
@@ -252,14 +275,9 @@ Notes about the find condition:
     * `find n/John t/math cond/all` will return students with both the name `John` and the tag `math`.
     * `find n/John t/math cond/any` will return students with only the name `John`, or only the tag `math`, or both.
     * `find n/John t/math cond/none` will return students without the name `John` and the tag `math`.
-
-* The find condition will not accept other arguments besides `all`, `any` and `none`.<br>
-  e.g. `cond/every` will result in an error.
-  
-* The find condition is optional and defaults to `all` if not specified.
-
-* The find condition is case-insensitive.<br>
-  e.g. `None` or `ANY` are valid.
+    
+* The find condition is optional and defaults to `all` if not specified. <br>
+  e.g. `find date/10 Oct 2021 time/1000-1400` will return students with lessons that occur between `1000-1400` on `10 Oct 2021`.
   
 Notes about search keywords:
 

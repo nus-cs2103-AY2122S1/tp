@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
@@ -44,7 +45,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIND_CONDITION, PREFIX_NAME,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL, PREFIX_ADDRESS,
                 PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_ACAD_LEVEL, PREFIX_REMARK, PREFIX_TAG,
-                PREFIX_TIME, PREFIX_DATE, PREFIX_SUBJECT, PREFIX_CANCEL, PREFIX_RATES);
+                PREFIX_TIME, PREFIX_DATE, PREFIX_SUBJECT, PREFIX_CANCEL, PREFIX_RATES, PREFIX_HOMEWORK);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -98,6 +99,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_RATES).isPresent()) {
             predicate.setRatesKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_RATES).get()));
+        }
+        if (argMultimap.getValue(PREFIX_HOMEWORK).isPresent()) {
+            predicate.setHomeworkKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_HOMEWORK).get()));
         }
 
         Optional<List<String>> tagsKeywords = parseTagsForFind(argMultimap.getAllValues(PREFIX_TAG));

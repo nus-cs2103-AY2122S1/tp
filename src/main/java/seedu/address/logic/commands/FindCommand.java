@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
@@ -47,7 +48,8 @@ public class FindCommand extends Command {
             + "[" + PREFIX_TIME + "LESSON_TIME] "
             + "[" + PREFIX_DATE + "LESSON_DATE] "
             + "[" + PREFIX_CANCEL + "CANCELLED_DATE] "
-            + "[" + PREFIX_RATES + "LESSON_RATE] ";
+            + "[" + PREFIX_RATES + "LESSON_RATE] "
+            + "[" + PREFIX_HOMEWORK + "LESSON_HOMEWORK] ";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 

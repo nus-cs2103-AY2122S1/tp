@@ -37,6 +37,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     private TimeRange timeRange;
     private List<String> subjectKeywords;
     private List<String> ratesKeywords;
+    private List<String> homeworkKeywords;
 
     private FindCondition condition = FindCondition.ALL; // default find condition is match all
 
@@ -49,7 +50,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords,
                 parentPhoneKeywords, parentEmailKeywords, addressKeywords,
                 schoolKeywords, acadStreamKeywords, acadLevelKeywords, remarkKeywords,
-                timeRange, date, cancelledDate, subjectKeywords, ratesKeywords,
+                timeRange, date, cancelledDate, subjectKeywords, ratesKeywords, homeworkKeywords,
                 tagKeywords);
     }
 
@@ -310,6 +311,22 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Sets keywords to match with a Person's Lesson's homework.
+     *
+     * @param keywords homework keywords to find.
+     */
+    public void setHomeworkKeywords(List<String> keywords) {
+        homeworkKeywords = keywords;
+    }
+
+    /**
+     * Returns optional homework keywords.
+     */
+    public Optional<List<String>> getHomeworkKeywords() {
+        return Optional.ofNullable(homeworkKeywords);
+    }
+
+    /**
      * Returns optional tag keywords.
      */
     public Optional<List<String>> getTagKeywords() {
@@ -452,6 +469,11 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return getLessonAnyMatch(lesson -> isMatch(ratesKeywords, lesson.getLessonRates().value));
     }
 
+    private Predicate<Person> getHomeworkMatchPredicate() {
+        return getLessonAnyMatch(lesson -> lesson.getHomework().stream()
+                .anyMatch(homework -> isMatch(homeworkKeywords, homework.description)));
+    }
+
     private Predicate<Person> getLessonAnyMatch(Predicate<Lesson> predicate) {
         return person -> person.getLessons().stream().anyMatch(predicate);
     }
@@ -462,7 +484,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @return A predicate that tests a person's tags.
      */
     private List<Predicate<Person>> getTagsMatchPredicates() {
-        return tagKeywords.stream().map(keyword -> getTagMatchPredicate(keyword)).collect(Collectors.toList());
+        return tagKeywords.stream().map(this::getTagMatchPredicate).collect(Collectors.toList());
     }
 
     /**
@@ -531,6 +553,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
         if (getRateKeywords().isPresent()) {
             predicates.add(getRatesMatchPredicate());
+        }
+        if (getHomeworkKeywords().isPresent()) {
+            predicates.add(getHomeworkMatchPredicate());
         }
 
         return predicates;
