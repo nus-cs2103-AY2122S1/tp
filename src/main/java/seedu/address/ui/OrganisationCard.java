@@ -58,7 +58,7 @@ public class OrganisationCard extends UiPart<Region> {
         email.setText(organisation.getEmail().value);
         AtomicInteger index = new AtomicInteger(1);
         organisation.getPersons().forEach(person -> {
-            persons.getChildren().add(new Label(index + ". " + person.getName()));
+            persons.getChildren().add(new Label(index + ". " + person.getName() + " "));
             index.addAndGet(1);
         });
         index.set(1);
