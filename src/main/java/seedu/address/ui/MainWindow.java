@@ -135,7 +135,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         viewingPanel = new ViewingPanel(logic.getViewingType(), logic.getViewingPersonWithDetails(),
-                logic.getSortedLessonsWithAttendees());
+                logic.getSortedLessonsWithAttendees(), logic.getViewingGroupWithDetails());
         viewingPanelPlaceholder.getChildren().add(viewingPanel.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());

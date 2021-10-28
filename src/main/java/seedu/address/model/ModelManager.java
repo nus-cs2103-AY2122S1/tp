@@ -16,6 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
@@ -36,6 +37,7 @@ public class ModelManager implements Model {
 
     private final ObservableList<LessonWithAttendees> lessonWithAttendees;
     private final ObjectProperty<PersonWithDetails> personWithDetails;
+    private final ObjectProperty<GroupWithDetails> groupWithDetails;
     private final ObjectProperty<ViewingType> viewType;
 
     /**
@@ -55,6 +57,7 @@ public class ModelManager implements Model {
         lessonWithAttendees = FXCollections.observableArrayList(this.addressBook.getSortedLessonsWithAttendees());
         viewType = new SimpleObjectProperty<>(ViewingType.SCHEDULE);
         personWithDetails = new SimpleObjectProperty<>(null);
+        groupWithDetails = new SimpleObjectProperty<>(null);
     }
 
     public ModelManager() {
@@ -128,7 +131,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -269,8 +271,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableValue<GroupWithDetails> getViewingGroupWithDetails() {
+        return groupWithDetails;
+    }
+
+    @Override
     public void setPersonToView(Person person) {
         personWithDetails.set(addressBook.getPersonWithDetails(person));
+    }
+
+    @Override
+    public void setGroupToView(Group group) {
+        groupWithDetails.set(addressBook.getGroupWithDetails(group));
     }
 
     @Override

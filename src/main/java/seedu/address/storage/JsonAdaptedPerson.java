@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,6 +38,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedUniqueId> assignedTaskIds = new ArrayList<>();
     private final List<JsonAdaptedUniqueId> assignedGroupIds = new ArrayList<>();
+    private final List<JsonAdaptedTaskCompletion> tasksCompletion = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessonsList = new ArrayList<>();
     private final List<JsonAdaptedExam> exams = new ArrayList<>();
 
@@ -48,6 +51,7 @@ class JsonAdaptedPerson {
             @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("assignedTaskIds") List<JsonAdaptedUniqueId> assignedTaskIds,
             @JsonProperty("assignedGroupIds") List<JsonAdaptedUniqueId> assignedGroupIds,
+            @JsonProperty("tasksCompletion") List<JsonAdaptedTaskCompletion> tasksCompletion,
             @JsonProperty("lessonsList") List<JsonAdaptedLesson> lessonsList,
             @JsonProperty("exams") List<JsonAdaptedExam> exams) {
         this.uniqueId = uniqueId;
@@ -63,6 +67,9 @@ class JsonAdaptedPerson {
         }
         if (assignedGroupIds != null) {
             this.assignedGroupIds.addAll(assignedGroupIds);
+        }
+        if (tasksCompletion != null) {
+            this.tasksCompletion.addAll(tasksCompletion);
         }
         if (lessonsList != null) {
             this.lessonsList.addAll(lessonsList);
@@ -90,6 +97,9 @@ class JsonAdaptedPerson {
         assignedGroupIds.addAll(source.getAssignedGroupIds().stream()
                 .map(JsonAdaptedUniqueId::new)
                 .collect(Collectors.toList()));
+        source.getTasksCompletion().forEach((taskId, isDone) -> {
+            tasksCompletion.add(new JsonAdaptedTaskCompletion(taskId.getUuid().toString(), isDone));
+        });
         lessonsList.addAll(source.getLessonsList().getLessons().stream()
                 .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
@@ -116,6 +126,11 @@ class JsonAdaptedPerson {
         final List<UniqueId> personAssignedGroupIds = new ArrayList<>();
         for (JsonAdaptedUniqueId id : assignedGroupIds) {
             personAssignedGroupIds.add(id.toModelType());
+        }
+
+        final Map<UniqueId, Boolean> personTasksCompletion = new HashMap<>();
+        for (JsonAdaptedTaskCompletion taskCompletion : tasksCompletion) {
+            personTasksCompletion.put(taskCompletion.getModelTaskId(), taskCompletion.getModelIsDone());
         }
 
         if (name == null) {
@@ -153,6 +168,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<UniqueId> modelAssignedTaskIds = new HashSet<>(personAssignedTaskIds);
         final Set<UniqueId> modelAssignedGroupIds = new HashSet<>(personAssignedGroupIds);
+        final Map<UniqueId, Boolean> modelTasksCompletion = new HashMap<>(personTasksCompletion);
 
         final List<Lesson> modelLessonsList = new ArrayList<>();
         for (JsonAdaptedLesson l : lessonsList) {
@@ -176,7 +192,8 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelUniqueId, modelName, modelPhone, modelEmail,
-                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, modelExams, modelAssignedGroupIds);
+                modelAddress, modelTags, modelAssignedTaskIds, modelTasksCompletion,
+                lessonsList, modelExams, modelAssignedGroupIds);
     }
 
 }

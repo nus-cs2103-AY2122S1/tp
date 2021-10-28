@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.tasks;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
@@ -12,33 +12,33 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TaskAssignable;
-import seedu.address.model.person.Person;
+import seedu.address.model.group.Group;
 
-public class UnassignTaskFromPersonCommand extends UnassignTaskCommand {
+public class UnassignTaskFromGroupCommand extends UnassignTaskCommand {
 
-    public static final String COMMAND_WORD = "-unas";
+    public static final String COMMAND_WORD = "-unag";
 
     public static final String MESSAGE_USAGE = String.format(
-            UnassignTaskCommand.MESSAGE_USAGE, COMMAND_WORD, "student", "STUDENT");
+            UnassignTaskCommand.MESSAGE_USAGE, COMMAND_WORD, "group", "GROUP");
 
     /**
-     * Constructs a {@code UnassignTaskFromPersonCommand}
+     * Constructs a {@code UnassignTaskFromGroupCommand}
      *
-     * @param personIndex of the person in the filtered person list to unassign from
+     * @param groupIndex of the group in the filtered group list to unassign from
      * @param taskIndex of the task in the filtered task list to unassign
      */
-    public UnassignTaskFromPersonCommand(Index personIndex, Index taskIndex) {
-        super(personIndex, taskIndex);
+    public UnassignTaskFromGroupCommand(Index groupIndex, Index taskIndex) {
+        super(groupIndex, taskIndex);
     }
 
     @Override
     protected String invalidDisplayedIndexMessage() {
-        return Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        return Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX;
     }
 
     @Override
-    protected List<Person> getTaskAssignableListFromModel(Model model) {
-        return model.getFilteredPersonList();
+    protected List<Group> getTaskAssignableListFromModel(Model model) {
+        return model.getFilteredGroupList();
     }
 
     @Override
@@ -46,19 +46,20 @@ public class UnassignTaskFromPersonCommand extends UnassignTaskCommand {
             newTaskAssignable) {
         requireAllNonNull(model, taskAssignableToEdit, newTaskAssignable);
 
-        if (!(taskAssignableToEdit instanceof Person && newTaskAssignable instanceof Person)) {
+        if (!(taskAssignableToEdit instanceof Group && newTaskAssignable instanceof Group)) {
             return;
         }
-        Person personToEdit = (Person) taskAssignableToEdit;
-        Person newPerson = (Person) newTaskAssignable;
+        Group groupToEdit = (Group) taskAssignableToEdit;
+        Group newGroup = (Group) newTaskAssignable;
 
-        model.setPerson(personToEdit, newPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setGroup(groupToEdit, newGroup);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return executeWithGivenMessage(model, "student");
+        return executeWithGivenMessage(model, "group");
     }
 }
+
