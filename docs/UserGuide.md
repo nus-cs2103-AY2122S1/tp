@@ -1,6 +1,5 @@
 ---
-layout: page
-title: User Guide
+layout: page title: User Guide
 ---
 
 ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line
@@ -36,7 +35,6 @@ If you are familiar with Unix commands, this is definitely for you!
 - [Command Summary](#command-summary)
 
 ## <a name="quick-start"></a>Quick Start
-
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `programmerError.jar`
    from [here](https://github.com/AY2122S1-CS2103-F09-3/tp/releases).
@@ -72,17 +70,14 @@ If you are familiar with Unix commands, this is definitely for you!
 ## <a name="general-features"></a>1. General Features
 
 ### <a name="exit"></a>1.1 Exit: `exit` or F1 on keyboard
-
 Exits ProgrammerError and closes the GUI.
 
 ### <a name="view-help"></a>1.2 View Help: `help` or F2 on keyboard
-
 Shows a message explaining how to access the help page.
 
 ![help message](images/commands/HelpCommand/help.png)
 
 ### <a name="view-dashboard"></a>1.3 Dashboard: `dashboard`
-
 Displays a dashboard window showing the following data:
 
 1. Number of students
@@ -90,23 +85,20 @@ Displays a dashboard window showing the following data:
 3. Number of labs
 4. Number of labs unmarked for each class
 
+
 ## <a name="data-features"></a>2. Data Features
 
 ### <a name="fill-sample-data"></a>2.1 Fill Sample Data: `fill`
-
 If no data present, fills it with sample data. Otherwise, throws an error message.
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
-Purges all pre-existing sample data to start adding your own data or purge the user data. 
-Clears all data in PE.
+Purges all pre-existing sample data to start adding your own data or purge the user data. Clears all data in PE.
 
 ### <a name="download-data"></a>2.3 Download Data `download` or F3 on keyboard
-
 All current students' data can be downloaded to a CSV file. The TA will need to select the directory to download the
 file to.
 
 ### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
-
 Uploads student data (student ID, class ID, name, email) via a CSV file.
 
 1. Select a valid CSV file from the file chooser to upload the student data from.
@@ -193,11 +185,9 @@ Example:
 
 - `show 1`: Shows the student particular and lab results of the student at index 1.
 
-
 ### <a name="list-students"></a>3.6 List All Students: `list`
 
 Displays a list of all students in the left panel. This list is ordered first by class ID followed by student name.
-
 
 ## <a name="lab-features"></a>4. Lab Features
 
