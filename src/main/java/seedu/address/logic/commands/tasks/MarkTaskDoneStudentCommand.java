@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MarkTaskDoneCommand extends Command {
+public class MarkTaskDoneStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "-done";
 
@@ -36,12 +36,12 @@ public class MarkTaskDoneCommand extends Command {
     private final Index taskIndex;
 
     /**
-     * Constructs a {@code MarkTaskDoneCommand}
+     * Constructs a {@code MarkTaskDoneStudentCommand}
      *
      * @param personIndex the index of the {@code Student} who did the task
      * @param taskIndex the index of the task in the filtered task list to mark as done
      */
-    public MarkTaskDoneCommand(Index personIndex, Index taskIndex) {
+    public MarkTaskDoneStudentCommand(Index personIndex, Index taskIndex) {
         requireAllNonNull(personIndex, taskIndex);
 
         this.personIndex = personIndex;
