@@ -20,6 +20,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandExecutor systemExecutor;
 
     @FXML
     private TextField commandTextField;
@@ -27,9 +28,10 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, CommandExecutor systemExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.systemExecutor = systemExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -62,9 +64,19 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText(CommandHistory.getPreviousCommand());
         } else if (event.getCode().equals(KeyCode.DOWN)) {
             commandTextField.setText(CommandHistory.getNextCommand());
-        } else {
+        } else if (event.getCode().equals(KeyCode.ENTER)) {
             event.consume();
             return;
+        } else {
+            String commandText = commandTextField.getText();
+            if (commandText.equals("")) {
+                return;
+            }
+            try {
+                systemExecutor.execute(commandText);
+            } catch (CommandException | ParseException e) {
+                setStyleToIndicateCommandFailure();
+            }
         }
         event.consume();
     }

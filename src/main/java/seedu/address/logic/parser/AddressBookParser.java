@@ -15,8 +15,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindAnyCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
-import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MailingListCommand;
@@ -91,12 +89,6 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
-
-        case FindTagCaseInsensitiveCommand.COMMAND_WORD:
-            return new FindTagCaseInsensitiveCommandParser().parse(arguments);
-
-        case FindTagCaseSensitiveCommand.COMMAND_WORD:
-            return new FindTagCaseSensitiveCommandParser().parse(arguments);
 
         case PinCommand.COMMAND_WORD:
             return new PinCommandParser().parse(arguments);
