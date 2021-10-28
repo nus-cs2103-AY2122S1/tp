@@ -113,7 +113,7 @@ public class Task {
         Set<Person> people = getPeople();
         if (!people.isEmpty()) {
             builder.append("; People: ");
-            people.forEach(p -> builder.append(p.getName()));
+            people.forEach(p -> builder.append("[" + p.getName() + "]"));
         }
 
         Set<Tag> tags = getTags();
