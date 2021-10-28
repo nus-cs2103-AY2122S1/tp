@@ -183,7 +183,8 @@ public class Schedule {
         if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null
                 || shifts[dayOfWeek.getValue() - 1][slot.getOrder()].isEmpty()) {
             shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = new EmptyShift(dayOfWeek, slot);
-            shifts[dayOfWeek.getValue() - 1][slot.getOrder()].add(startDate, endDate);
+            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] =
+                    shifts[dayOfWeek.getValue() - 1][slot.getOrder()].add(startDate, endDate);
         }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shifts[dayOfWeek.getValue() - 1][slot.getOrder()]
                 .setTime(startTime, endTime, slot.getOrder(),

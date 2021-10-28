@@ -352,7 +352,7 @@ public class Shift {
         String resultString = "";
 
         for (RecurrencePeriod rp : periods) {
-            resultString += rp.toString() + "\n";
+            resultString += rp.toPrintString() + "\n";
         }
         return resultString;
     }
