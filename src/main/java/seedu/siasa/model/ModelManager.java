@@ -2,14 +2,17 @@ package seedu.siasa.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.siasa.model.person.PersonComparator.SORT_BY_ALPHA_ASC;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.commons.core.LogsCenter;
 import seedu.siasa.model.person.Person;
@@ -25,6 +28,10 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Policy> filteredPolicies;
+    private SortedList<Person> sortedPersons;
+    private SortedList<Policy> sortedPolicies;
+    private Comparator<Person> comparatorPerson;
+    private Comparator<Policy> comparatorPolicy;
 
     /**
      * Initializes a ModelManager with the given SIASA and userPrefs.
@@ -37,8 +44,12 @@ public class ModelManager implements Model {
 
         this.siasa = new Siasa(siasa);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.comparatorPerson = SORT_BY_ALPHA_ASC;
         filteredPersons = new FilteredList<>(this.siasa.getPersonList());
         filteredPolicies = new FilteredList<>(this.siasa.getPolicyList());
+        sortedPersons = new SortedList<>(filteredPersons);
+        sortedPersons.setComparator(SORT_BY_ALPHA_ASC);
+        sortedPolicies = new SortedList<>(filteredPolicies);
     }
 
     public ModelManager() {
@@ -169,13 +180,22 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        sortedPersons = new SortedList<>(filteredPersons);
+        sortedPersons.setComparator(comparatorPerson);
+    }
+
+    @Override
+    public void updateFilteredPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        comparatorPerson = comparator;
+        sortedPersons.setComparator(comparatorPerson);
     }
 
     //=========== Filtered Policy List Accessors =============================================================
@@ -186,13 +206,22 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Policy> getFilteredPolicyList() {
-        return filteredPolicies;
+        return sortedPolicies;
     }
 
     @Override
     public void updateFilteredPolicyList(Predicate<Policy> predicate) {
         requireNonNull(predicate);
         filteredPolicies.setPredicate(predicate);
+        sortedPolicies = new SortedList<>(filteredPolicies);
+        sortedPolicies.setComparator(comparatorPolicy);
+    }
+
+    @Override
+    public void updateFilteredPolicyList(Comparator<Policy> comparator) {
+        requireNonNull(comparator);
+        comparatorPolicy = comparator;
+        sortedPolicies.setComparator(comparatorPolicy);
     }
 
     /**
@@ -202,6 +231,7 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
     }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
