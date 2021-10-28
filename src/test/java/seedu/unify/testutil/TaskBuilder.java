@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Priority;
 import seedu.unify.model.task.State;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -21,12 +22,14 @@ public class TaskBuilder {
     public static final String DEFAULT_DATE = "2021-12-11";
     public static final String DEFAULT_TAG = "Important";
     public static final String DEFAULT_STATE = "TODO";
+    public static final String DEFAULT_PRIORITY = "LOW";
 
     private Name name;
     private Time time;
     private Date date;
     private Set<Tag> tags;
     private State state;
+    private Priority priority;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -37,6 +40,7 @@ public class TaskBuilder {
         date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
         state = new State(DEFAULT_STATE);
+        priority = new Priority(DEFAULT_PRIORITY);
     }
 
     /**
@@ -48,6 +52,7 @@ public class TaskBuilder {
         date = taskToCopy.getDate();
         tags = new HashSet<>(taskToCopy.getTags());
         state = taskToCopy.getState();
+        priority = taskToCopy.getPriority();
     }
 
     /**
@@ -85,6 +90,14 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the {@code Priority} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withPriority(String priority) {
+        this.priority = new Priority(priority);
+        return this;
+    }
+
+    /**
      * Sets the {@code Time} of the {@code Task} that we are building.
      */
     public TaskBuilder withTime(String time) {
@@ -93,6 +106,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, time, date, tags, state);
+        return new Task(name, time, date, tags, state, priority);
     }
 }

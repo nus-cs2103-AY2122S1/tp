@@ -24,29 +24,32 @@ public class Task {
     private final Date date;
     private final Set<Tag> tags = new HashSet<>();
     private final State state;
+    private final Priority priority;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Time time, Date date, Set<Tag> tags) {
-        requireAllNonNull(name, time, date, tags);
+    public Task(Name name, Time time, Date date, Set<Tag> tags, Priority priority) {
+        requireAllNonNull(name, time, date, tags, priority);
         this.name = name;
         this.time = time;
         this.date = date;
         this.tags.addAll(tags);
+        this.priority = priority;
         this.state = new State();
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Time time, Date date, Set<Tag> tags, State state) {
-        requireAllNonNull(name, time, date, tags, state);
+    public Task(Name name, Time time, Date date, Set<Tag> tags, State state, Priority priority) {
+        requireAllNonNull(name, time, date, tags, state, priority);
         this.name = name;
         this.time = time;
         this.date = date;
         this.tags.addAll(tags);
         this.state = state;
+        this.priority = priority;
     }
 
     public Name getName() {
@@ -67,6 +70,10 @@ public class Task {
 
     public State getState() {
         return state;
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     /**
@@ -118,7 +125,9 @@ public class Task {
                 .append("; Date: ")
                 .append(getDate())
                 .append("; State: ")
-                .append(getState());
+                .append(getState())
+                .append("; Priority: ")
+                .append(getPriority());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

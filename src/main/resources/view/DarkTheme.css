@@ -24,6 +24,22 @@
     -fx-background-color: #00649e
 }
 
+.state-OVERDUE {
+    -fx-background-color: #9e0035
+}
+
+.priority-LOW {
+    -fx-background-color: #009e84
+}
+
+.priority-MEDIUM{
+    -fx-background-color: #9e8900
+}
+
+.priority-HIGH {
+    -fx-background-color: #9e006f
+}
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";

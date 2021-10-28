@@ -3,6 +3,7 @@ package seedu.unify.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.unify.model.Model.PREDICATE_SHOW_ALL_TASKS;
@@ -21,6 +22,7 @@ import seedu.unify.model.Model;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Priority;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 /**
@@ -37,7 +39,8 @@ public class EditCommand extends Command {
             + "(" + PREFIX_NAME + "name) "
             + "(" + PREFIX_DATE + "date) "
             + "(" + PREFIX_TIME + "time) "
-            + "(" + PREFIX_TAG + "tag)\n"
+            + "(" + PREFIX_TAG + "tag) "
+            + "(" + PREFIX_PRIORITY + "priority)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TIME + "16:40 "
             + PREFIX_NAME + "Homework 2A";
@@ -93,8 +96,9 @@ public class EditCommand extends Command {
         Time updatedTime = editTaskDescriptor.getTime().orElse(taskToEdit.getTime());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
+        Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
-        return new Task(updatedName, updatedTime, updatedDate, updatedTags);
+        return new Task(updatedName, updatedTime, updatedDate, updatedTags, updatedPriority);
     }
 
     @Override
@@ -124,6 +128,7 @@ public class EditCommand extends Command {
         private Time time;
         private Date date;
         private Set<Tag> tags;
+        private Priority priority;
 
         public EditTaskDescriptor() {}
 
@@ -136,6 +141,7 @@ public class EditCommand extends Command {
             setTime(toCopy.time);
             setDate(toCopy.date);
             setTags(toCopy.tags);
+            setPriority(toCopy.priority);
         }
 
         /**
@@ -179,6 +185,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setPriority(Priority priority) {
+            this.priority = priority;
+        }
+
+        public Optional<Priority> getPriority() {
+            return Optional.ofNullable(priority);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -197,7 +211,8 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getTime().equals(e.getTime())
                     && getDate().equals(e.getDate())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getPriority().equals(e.getPriority());
         }
     }
 }
