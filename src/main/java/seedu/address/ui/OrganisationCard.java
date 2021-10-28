@@ -31,6 +31,8 @@ public class OrganisationCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane persons;
+    @FXML
     private Label faculty;
     @FXML
     private Label major;
@@ -55,6 +57,11 @@ public class OrganisationCard extends UiPart<Region> {
         name.setText(organisation.getName().fullName);
         email.setText(organisation.getEmail().value);
         AtomicInteger index = new AtomicInteger(1);
+        organisation.getPersons().forEach(person -> {
+            persons.getChildren().add(new Label(index + ". " + person.getName()));
+            index.addAndGet(1);
+        });
+        index.set(1);
     }
 
     @Override
