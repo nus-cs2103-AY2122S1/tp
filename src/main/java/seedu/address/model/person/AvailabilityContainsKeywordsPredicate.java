@@ -14,4 +14,11 @@ public class AvailabilityContainsKeywordsPredicate implements Predicate<Person> 
         return availability.stream()
                 .anyMatch(availability -> person.getAvailability().containsAll(availability));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof AvailabilityContainsKeywordsPredicate
+                && availability.equals(((AvailabilityContainsKeywordsPredicate) other).availability));
+    }
 }
