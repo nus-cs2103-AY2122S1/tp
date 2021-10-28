@@ -160,6 +160,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
         setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
         setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+        setAccelerator(profileMenuItem, KeyCombination.valueOf("Shortcut+P"));
     }
 
     /**
