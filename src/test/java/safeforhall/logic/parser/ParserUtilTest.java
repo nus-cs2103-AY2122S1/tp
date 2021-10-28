@@ -30,7 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_FACULTY = " ";
     private static final String INVALID_VACCSTATUS = " ";
-    private static final String INVALID_DATE = "21.10.2021";
+    private static final String INVALID_DATE = "1.10.2021";
     private static final String INVALID_ROOM_FOR_FIND1 = "AA";
     private static final String INVALID_ROOM_FOR_FIND2 = "A12";
     private static final String INVALID_ROOM_FOR_FIND3 = "12";

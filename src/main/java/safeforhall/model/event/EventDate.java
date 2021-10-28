@@ -8,10 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class EventDate {
-    public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy format";
+    public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy, dd.mm.yyyy"
+            + "or dd/mm/yyyy format";
     public static final String DESC = "Date: ";
 
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter
+            .ofPattern("[dd-MM-yyyy][dd.MM.yyyy][dd/MM/yyyy]");
 
     public final String eventDate;
 
@@ -23,7 +25,9 @@ public class EventDate {
     public EventDate(String date) {
         requireNonNull(date);
         checkArgument(isValidEventDate(date), MESSAGE_CONSTRAINTS);
-        this.eventDate = date;
+        String[] dayMonthYear = date.split("[-./]");
+        assert dayMonthYear.length == 3;
+        this.eventDate = dayMonthYear[0] + "-" + dayMonthYear[1] + "-" + dayMonthYear[2];
     }
 
     /**
