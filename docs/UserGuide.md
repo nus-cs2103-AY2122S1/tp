@@ -55,7 +55,7 @@ If you ever want to skip through any section of our user guide, do feel free to 
       * [4.2.1 Take](#421-adding-a-module-to-the-academic-plan--take)
       * [4.2.2 Un-take](#422-remove-a-module-from-the-academic-plan--untake)
       * [4.2.3 Info](#423-viewing-user-information--info)
-      * [4.2.4 Set](#424-setting-users-mc-goal-or-current-semester--set)
+      * [4.2.4 Set](#424-setting-users-MC-goal-or-current-semester--set)
       * [4.2.5 View](#425-see-modules-taken-in-a-specific-semester--view)
       * [4.2.6 Clear](#426-remove-the-schedules-for-a-specific-semester-from-modules--clear)
     * [4.3 Miscellaneous](#43-miscellaneous)
@@ -150,7 +150,7 @@ The user's progress is displayed in the form of:
 
 **Total MCs completed display:**
 
-![total MCs Display](images/totalMCsCompletedDisplay.png)
+![total MCs Display](images/TotalMCsCompletedDisplay.png)
 * Shows the total number of MCs taken, over the user's set MCs goal.
 * The total number of MCs taken is calculated from all modules taken before the current semester.
     * For example: If the current semester is year 1 semester 2, the total number of MCs will be calculated
@@ -158,7 +158,7 @@ The user's progress is displayed in the form of:
 
 **Course requirements display:**
 
-![requirements MCs Display](images/courseRequirementsDisplay.png)
+![requirements MCs Display](images/CourseRequirementsDisplay.png)
 * Shows the total number of MCs taken for that requirement, over the number of MCs needed to satisfy the requirement.
 * The total number of MCs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
     * For example: MCs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
@@ -174,14 +174,14 @@ IT Professionalism | "it professionalism"
 Math and Science | "math and science"
 
 Notes:
-* If the Mc requirement has been satisfied, the completed MCs and progress bar will be coloured light blue.
-* If the Mc requirement is not satisfied, the completed MCs and progress bar will be coloured pink.
+* If the MC requirement has been satisfied, the completed MCs and progress bar will be coloured light blue.
+* If the MC requirement is not satisfied, the completed MCs and progress bar will be coloured pink.
 
 #### 3.2.6 Current Semester (dark blue)
 * Displays the current year and semester that the application is in.
 
 #### 3.2.7 Current MC goal (light blue)
-* Displays your current mc goal.
+* Displays your current MC goal.
 
 ### 3.3 Command format
 
@@ -214,7 +214,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 `academic plan`
 * Refers to modules that the user has assigned with a specific semester and year.
 * Contributes to the calculation of the MC requirements.<br>
-  ![requirements MCs Display](images/courseRequirementsDisplay.png)
+  ![requirements MCs Display](images/CourseRequirementsDisplay.png)
 
 `INDEX`
 * The `INDEX` refers to the index number shown in the displayed module list.
@@ -234,7 +234,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 
 `MC`
 * Stands for Modular Credits
-* Represents the `module`'s mc component.
+* Represents the `module`'s MC component.
 * `MC` must be a **positive integer** (1,2,3...).
 
 `TAG`
@@ -313,7 +313,7 @@ Format: `FORMAT: find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS`
   specified components for matching `KEYWORDS`
 
 Examples:
-* `find CS`is equivalent to displaying any modules that contain the word "CS" in the code, title, description, mc or tag.
+* `find CS`is equivalent to displaying any modules that contain the word "CS" in the code, title, description, MC or tag.
 * `find c/ t/ CS GE` is equivalent to displaying any modules that contain the words "CS" or "GE" in the code or title.
 * `find c/ CS2040S` is equivalent to displaying any modules that contain the word "CS2040S" in the code.
 * `find tag/ UE` is equivalent to displaying any modules that contain the word "UE" in the tag.
@@ -343,7 +343,7 @@ Academic Plan features consist of features that allows you to be able to create 
 Do note that these features are the ones that allows you to update and edit your academic plans
 (such as the visual display of which modules you have taken, as well as the progress bar for each of the University's requirements).
 
-Such features include taking/un-taking a module in a specific semester, viewing and setting the current semester or mc goal,
+Such features include taking/un-taking a module in a specific semester, viewing and setting the current semester or MC goal,
 as well as viewing and clearing modules in a specific semester.
 
 #### 4.2.1 Adding a module to the academic plan : `take`
@@ -382,15 +382,15 @@ Example:
 
 #### 4.2.3 Viewing user information : `info`
 
-Shows a message containing the user's Mc goal and current semester.
+Shows a message containing the user's MC goal and current semester.
 
 ![info message](images/infoMessage.png)
 
 Format: `info`
 
-#### 4.2.4 Setting user's Mc goal OR current semester : `set`
+#### 4.2.4 Setting user's MC goal OR current semester : `set`
 
-Updates user's Mc goal or current semester.
+Updates user's MC goal or current semester.
 
 Format: `set m/MC` `set y/YEAR s/SEM`
 * `MC` must be a **positive integer** (1,2,3...).
@@ -399,7 +399,7 @@ Format: `set m/MC` `set y/YEAR s/SEM`
 * Special semesters 1 and 2 are represented by integer values 3 and 4 respectively (see examples below).
 
 Examples:
-* `set m/160` - is equivalent to setting the Mc goal to 160 credits
+* `set m/160` - is equivalent to setting the MC goal to 160 credits
 * `set y/2 s/1` - is equivalent to setting the current semester to year 2 semester 1
 * `set y/3 s/3` - is equivalent to setting the current semester to year 3 special semester 1
 
