@@ -80,6 +80,6 @@ public class Date implements Comparable<Date> {
 
     @Override
     public int compareTo(Date o) {
-        return date.compareTo(LocalDate.parse(o.dateString));
+        return date.compareTo(o.date);
     }
 }
