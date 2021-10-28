@@ -9,7 +9,9 @@ import java.util.Set;
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.commons.util.StringUtil;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
-import seedu.edrecord.model.assignment.MaxScore;
+import seedu.edrecord.model.assignment.Grade;
+import seedu.edrecord.model.assignment.Grade.GradeStatus;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
@@ -180,17 +182,38 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String maxScore} into a {@code MaxScore}.
+     * Parses a {@code String score} into a {@code Score}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code maxScore} is invalid.
+     * @throws ParseException if the given {@code score} is invalid.
      */
-    public static MaxScore parseMaxScore(String maxScore) throws ParseException {
-        requireNonNull(maxScore);
-        String trimmedScore = maxScore.trim();
-        if (!MaxScore.isValidMaxScore(trimmedScore)) {
-            throw new ParseException(MaxScore.MESSAGE_CONSTRAINTS);
+    public static Score parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedScore = score.trim();
+        if (!Score.isValidScore(trimmedScore)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
-        return new MaxScore(trimmedScore);
+        return new Score(trimmedScore);
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code GradeStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static GradeStatus parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        switch (trimmedStatus) {
+        case "NOT SUBMITTED":
+            return GradeStatus.NOT_SUBMITTED;
+        case "SUBMITTED":
+            return GradeStatus.SUBMITTED;
+        case "GRADED":
+            return GradeStatus.GRADED;
+        default:
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
     }
 }

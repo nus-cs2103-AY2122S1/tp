@@ -2,6 +2,7 @@ package seedu.edrecord.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.edrecord.model.assignment.Assignment;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
+import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 
@@ -162,6 +164,11 @@ public interface Model {
      * Returns an unmodifiable view of the assignment list under the currently selected module.
      */
     List<Assignment> getAssignmentList();
+
+    /**
+     * Returns the assignment that matches the given name.
+     */
+    Optional<Assignment> searchAssignment(Name name);
 
     /**
      * Adds the given assignment to the currently selected module.

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.edrecord.commons.exceptions.IllegalValueException;
 import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.assignment.MaxScore;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.name.Name;
 
@@ -37,7 +37,7 @@ public class JsonAdaptedAssignment {
     public JsonAdaptedAssignment(Assignment source) {
         name = source.getName().name;
         weightage = String.valueOf(source.getWeightage().weightage);
-        maxScore = String.valueOf(source.getMaxScore().maxScore);
+        maxScore = String.valueOf(source.getMaxScore().score);
     }
 
     /**
@@ -65,14 +65,14 @@ public class JsonAdaptedAssignment {
 
         if (maxScore == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, MaxScore.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Score.class.getSimpleName()));
         }
-        if (!MaxScore.isValidMaxScore(maxScore)) {
-            throw new IllegalValueException(MaxScore.MESSAGE_CONSTRAINTS);
+        if (!Score.isValidScore(maxScore)) {
+            throw new IllegalValueException(Score.MESSAGE_CONSTRAINTS);
         }
-        final MaxScore modelMaxScore = new MaxScore(maxScore);
+        final Score modelScore = new Score(maxScore);
 
-        return new Assignment(modelName, modelWeightage, modelMaxScore);
+        return new Assignment(modelName, modelWeightage, modelScore);
     }
 
 }

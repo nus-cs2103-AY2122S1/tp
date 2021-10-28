@@ -7,6 +7,7 @@ import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.name.Name;
+import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
 import seedu.edrecord.model.person.Person;
@@ -32,6 +33,8 @@ public class PersonBuilder {
     private Info info;
     private ModuleGroupMap modules;
     private Set<Tag> tags;
+    private final AssignmentGradeMap grades = new AssignmentGradeMap();
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -60,6 +63,7 @@ public class PersonBuilder {
         modules = new ModuleGroupMap();
         modules.addAll(personToCopy.getModules());
         tags = new HashSet<>(personToCopy.getTags());
+        grades.addAll(personToCopy.getGrades());
     }
 
     /**
@@ -115,7 +119,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, info, modules, tags);
+        return new Person(name, phone, email, info, modules, tags, grades);
     }
 
 }
