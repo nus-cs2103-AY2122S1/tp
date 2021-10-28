@@ -41,19 +41,19 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' assistant buddy file path.
      */
-    Path getAddressBookFilePath();
+    Path getAssistantBuddyFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' assistant buddy file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAssistantBuddyFilePath(Path assistantBuddyFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces assistant buddy data with the data in {@code assistantBuddy}.
      */
-    void setBuddy(ReadOnlyTeachingAssistantBuddy addressBook);
+    void setBuddy(ReadOnlyTeachingAssistantBuddy assistantBuddy);
 
     /** Returns the TeachingAssistantBuddy */
     ReadOnlyTeachingAssistantBuddy getBuddy();
