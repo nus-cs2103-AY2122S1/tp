@@ -26,7 +26,7 @@ you're an intermediate user looking to get more out of Dash, all supported comma
 
 Whether you're using Windows or macOS, the steps for installation are the same.
 
-video here
+[//]: # (Consider adding video here)
 
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
@@ -88,8 +88,8 @@ Finally, the help tab provides you with a quick summary of Dash's features and h
 
 Dash uses a Command Line Interface (CLI) to optimize speed. This means that you use mostly your keyboard to interact 
 with Dash, instead of relying on your mouse to click on options.    
-   
-   icons for notes abt cli here, talk about how you cant click on tabs here
+
+[//]: # (icons for notes abt cli here, talk about how you cant click on tabs here)
 
 ![Using the CLI](images/CLITutorialGif.gif)
 
