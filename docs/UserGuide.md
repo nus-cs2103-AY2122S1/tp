@@ -114,19 +114,15 @@ This section presents the various elements in our **TuitiONE** application.
 
 ![Result of `list`](images/UserGuideImage/default.png)
 
-1. File and Help toolbars: Here you can select the quit button or view the help window.
-
-2. Student panel: Here you can see the list of students present in your application. This list can be skimmed down using commands such as [`find`](#locating-students-by-name-find) and [`filter`](#filtering-of-list-filter).
-
-3. Lesson panel: Here you can see the list of lessons present in your application. This list can be skimmed down using commands such as [`filter`](#filtering-of-list-filter) and [`roster`](#viewing-of-lesson-roster-roster).
-
-4. Result panel: Here is where you will receive the various messages from the application after running your commands. There are a variety of messages, ranging from success messages to error messages.
-
-5. Command input box: Here is where you type your commands to run in the application.
-
-6. Send button: A button that helps submit your input command to run. Using the `Enter`-key on your keyboard after typing in the 'Command input box' performs the same job here.
-
-7. Storage file indicator: This portion displays the location of your saved **TuitiONE** data file in your device.
+**No.** | **Section** | **Description**
+--------|-------------|----------------
+1 | Toolbar pane | Here you can select the quit button or view the help window.
+2 | Student panel | Here you can see the list of students present in your application. This list can be skimmed down using commands such as [`find`](#locating-students-by-name-find) and [`filter`](#filtering-of-list-filter).
+3 | Lesson panel | Here you can see the list of lessons present in your application. This list can be skimmed down using commands such as [`filter`](#filtering-of-list-filter) and [`roster`](#viewing-of-lesson-roster-roster).
+4 | Result panel | Here is where you will receive the various messages from the application after running your commands. There are a variety of messages, ranging from success messages to error messages.
+5 | Command input box | Here is where you type your commands to run in the application.
+6 | Send button | A button that helps submit your input command to run. Using the `Enter`-key on your keyboard after typing in the **Command input box** performs the same job here.
+7 | Storage file indicator | This portion displays the location of your saved **TuitiONE** data file in your device.
 
 ## **Features**
 
