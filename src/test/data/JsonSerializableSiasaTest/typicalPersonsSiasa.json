@@ -79,6 +79,7 @@
       "email" : "alice@example.com",
       "address" : "123, Jurong West Ave 6, #08-111",
       "tagged" : [ "friends" ]
-    }
+    },
+    "tagged" : [ "term" ]
   } ]
 }
