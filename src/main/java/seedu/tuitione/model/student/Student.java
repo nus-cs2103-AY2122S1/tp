@@ -21,6 +21,7 @@ import seedu.tuitione.model.remark.Remark;
  */
 public class Student {
     public static final int MAX_LESSON_SIZE = 10;
+    public static final int MAX_REMARK_SIZE = 5;
 
     // Identity fields
     private final Name name;

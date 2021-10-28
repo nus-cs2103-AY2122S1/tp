@@ -8,6 +8,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -118,12 +119,20 @@ public class EditCommand extends Command {
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
 
-        Set<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(Collections.emptySet());
+        List<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(Collections.emptyList());
         Set<Remark> remarksToDelete = editStudentDescriptor.getRemarksToDelete().orElse(Collections.emptySet());
 
         Set<Remark> updatedRemarks = new HashSet<>(studentToEdit.getRemarks());
-        updatedRemarks.addAll(remarksToAdd);
         updatedRemarks.removeAll(remarksToDelete);
+        for (Remark remark : remarksToAdd) {
+            if (updatedRemarks.size() >= MAX_REMARK_SIZE) {
+                break;
+            }
+            updatedRemarks.add(remark);
+        }
+
+
+
 
         return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress,
                 updatedGrade, updatedRemarks);
