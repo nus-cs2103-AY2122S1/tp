@@ -44,6 +44,8 @@ public class Notor implements ReadOnlyNotor {
      */
     public Notor(ReadOnlyNotor toBeCopied) {
         this(toBeCopied.getNote());
+        toBeCopied.getPersonList().forEach(persons::add);
+        toBeCopied.getPersonArchiveList().forEach(personArchive::add);
         resetData(toBeCopied);
     }
 

@@ -138,6 +138,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void archiveAllPersons() {
+        for (Person person : filteredPersons) {
+            notor.addArchivePerson(person);
+        }
+        for (Person person : notor.getPersonArchiveList()) {
+            notor.removePerson(person);
+        }
+    }
+
+    @Override
     public void unarchivePerson(Person person) {
         notor.unarchivePerson(person);
     }

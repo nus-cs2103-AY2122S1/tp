@@ -114,14 +114,6 @@ class JsonSerializableNotor {
             if (notor.hasArchive(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            for (String superGroup : person.getDisplaySuperGroups()) {
-                notor.findSuperGroup(superGroup).addPerson(person);
-            }
-            for (String subGroup : person.getDisplaySubGroups()) {
-                String[] split = subGroup.split("_");
-                // TODO: Create method to check for validity
-                notor.findSuperGroup(split[0]).addPersonToSubGroup(split[1], person);
-            }
 
             notor.addArchivePerson(person);
         }

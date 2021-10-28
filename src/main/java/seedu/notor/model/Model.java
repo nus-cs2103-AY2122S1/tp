@@ -101,6 +101,11 @@ public interface Model {
     void archivePerson(Person person);
 
     /**
+     * Archives all currently displayed persons in Notor.
+     */
+    void archiveAllPersons();
+
+    /**
      * Unarchives the given person.
      * {@code person} must exist in Notor archive.
      */

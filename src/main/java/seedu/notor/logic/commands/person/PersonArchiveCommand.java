@@ -23,14 +23,14 @@ public class PersonArchiveCommand extends PersonCommand {
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
-            + "Parameters: none"
+            + "Parameters: none\n"
             + "Example: "
             + PersonCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final PersonExecutor executor;
 
     /**
-     * Constructor for a PersonArchiveCommand.
+     * Constructor for a PersonArchiveCommand instance.
      *
      * @param index Index of the person to be archived.
      */
