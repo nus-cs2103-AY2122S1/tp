@@ -196,7 +196,8 @@ Finds all persons whose names **and** tags matches ALL keywords provided.
 
 Notes:
 * `find` is case-insensitive by default. e.g. `hans` will match `Hans`
-  * However, users can opt for case-sensitive search by including the `c/` flag after the command word
+  * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
+  * `c/` case-sensitive search applies **ONLY** to tags
 * The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as
   `t/friends n/Hans`
 * Both name and tags are searched.
@@ -225,6 +226,8 @@ Finds all persons whose names **or** tags contain ANY of the given keywords.
 
 Notes:
 * `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`
+  * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
+  * `c/` case-sensitive search applies **ONLY** to tags
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
