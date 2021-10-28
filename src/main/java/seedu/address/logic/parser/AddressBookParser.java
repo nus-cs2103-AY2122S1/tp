@@ -12,6 +12,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.event.EaddCommand;
 import seedu.address.logic.commands.event.EdelCommand;
 import seedu.address.logic.commands.event.EeditCommand;
+import seedu.address.logic.commands.event.EfindCommand;
 import seedu.address.logic.commands.event.ElistCommand;
 import seedu.address.logic.commands.event.EmaddCommand;
 import seedu.address.logic.commands.event.EmarkAllCommand;
@@ -25,12 +26,14 @@ import seedu.address.logic.commands.member.MfindCommand;
 import seedu.address.logic.commands.member.MlistCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
+import seedu.address.logic.commands.task.TdoneCommand;
 import seedu.address.logic.commands.task.TeditCommand;
 import seedu.address.logic.commands.task.TfindCommand;
 import seedu.address.logic.commands.task.TlistCommand;
 import seedu.address.logic.parser.event.EaddCommandParser;
 import seedu.address.logic.parser.event.EdelCommandParser;
 import seedu.address.logic.parser.event.EeditCommandParser;
+import seedu.address.logic.parser.event.EfindCommandParser;
 import seedu.address.logic.parser.event.EmaddCommandParser;
 import seedu.address.logic.parser.event.EmarkAllCommandParser;
 import seedu.address.logic.parser.event.EmarkCommandParser;
@@ -44,6 +47,7 @@ import seedu.address.logic.parser.member.MfindCommandParser;
 import seedu.address.logic.parser.member.MlistCommandParser;
 import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.logic.parser.task.TdelCommandParser;
+import seedu.address.logic.parser.task.TdoneCommandParser;
 import seedu.address.logic.parser.task.TeditCommandParser;
 import seedu.address.logic.parser.task.TfindCommandParser;
 import seedu.address.logic.parser.task.TlistCommandParser;
@@ -105,6 +109,9 @@ public class AddressBookParser {
         case EeditCommand.COMMAND_WORD:
             return new EeditCommandParser().parse(arguments);
 
+        case EfindCommand.COMMAND_WORD:
+            return new EfindCommandParser().parse(arguments);
+
         case ElistCommand.COMMAND_WORD:
             return new ElistCommand();
 
@@ -137,6 +144,9 @@ public class AddressBookParser {
 
         case TeditCommand.COMMAND_WORD:
             return new TeditCommandParser().parse(arguments);
+
+        case TdoneCommand.COMMAND_WORD:
+            return new TdoneCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

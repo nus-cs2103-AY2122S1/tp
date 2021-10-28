@@ -8,6 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.PROJECT;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -39,32 +41,59 @@ class TaddCommandTest {
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-        Index validMemberID = Index.fromOneBased(1);
+        Index validMemberId = Index.fromOneBased(1);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId);
         Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberID);
-        CommandResult commandResult = new TaddCommand(validMemberID, validTask).execute(modelStub);
+        ModelStubAcceptingTaskAdded modelStub =
+                new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberIdList);
+        CommandResult commandResult = new TaddCommand(validMemberIdList, validTask).execute(modelStub);
 
-        assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validMember.getName(), validTask),
+        assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validTask),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_taskForMultipleMembersAcceptedByModel_addSuccessful() throws Exception {
+        Index validMemberId1 = Index.fromOneBased(1);
+        Index validMemberId2 = Index.fromOneBased(2);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId1);
+        validMemberIdList.add(validMemberId2);
+        Task validTask = new TaskBuilder().build();
+        Member validMember1 = new MemberBuilder().build();
+        Member validMember2 = new MemberBuilder()
+                .withName("Amy").withEmail("amy@fakemail")
+                .withPhone("12312312").withAddress("Block23 St Andrew Street").build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember1).build();
+        addressBook.addMember(validMember2);
+        ModelStubAcceptingTaskAdded modelStub =
+                new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberIdList);
+        CommandResult commandResult = new TaddCommand(validMemberIdList, validTask).execute(modelStub);
+
+        assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validTask),
                 commandResult.getFeedbackToUser());
     }
 
     @Test
     public void equals() {
-        Index validMemberID = Index.fromOneBased(1);
+        Index validMemberId = Index.fromOneBased(1);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId);
         Task validTask1 = new TaskBuilder().build();
         Task validTask2 = new TaskBuilder(PROJECT).build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand addHomeworkCommand = new TaddCommand(validMemberID, validTask1);
-        TaddCommand addPoemCommand = new TaddCommand(validMemberID, validTask2);
+        TaddCommand addHomeworkCommand = new TaddCommand(validMemberIdList, validTask1);
+        TaddCommand addPoemCommand = new TaddCommand(validMemberIdList, validTask2);
 
         // same object -> returns true
         assertTrue(addHomeworkCommand.equals(addHomeworkCommand));
 
         // same values -> returns true
-        TaddCommand addHomeworkCommandCopy = new TaddCommand(validMemberID, validTask1);
+        TaddCommand addHomeworkCommandCopy = new TaddCommand(validMemberIdList, validTask1);
         assertTrue(addHomeworkCommand.equals(addHomeworkCommandCopy));
 
         // different types -> returns false
@@ -242,6 +271,11 @@ class TaddCommandTest {
         public void updateFilteredTaskList(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Optional<Member> getCurrentMember() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -249,17 +283,20 @@ class TaddCommandTest {
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         private final AddressBook addressBook;
-        private final Member member;
+        private final Set<Member> members = new HashSet<>();
         private final Task task;
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
 
-        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
+        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Set<Index> memberIdList) {
             this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
+            requireNonNull(memberIdList);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
+            for (Index memberId: memberIdList) {
+                this.members.add(filteredMembers.get(memberId.getZeroBased()));
+            }
+
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskList();

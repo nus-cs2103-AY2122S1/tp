@@ -17,4 +17,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TASK_ID = new Prefix("/t ");
     public static final Prefix PREFIX_MEMBER_ID_DEL = new Prefix("/for ");
     public static final Prefix PREFIX_STATUS = new Prefix("/s ");
+    public static final Prefix PREFIX_ATTEND = new Prefix("/att ");
+    public static final Prefix PREFIX_ABSENT = new Prefix("/abs ");
+    public static final Prefix PREFIX_DONE = new Prefix("/dn ");
+    public static final Prefix PREFIX_OVERDUE = new Prefix("/ovd ");
 }

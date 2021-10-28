@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -29,6 +30,9 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private TaskList taskListManager;
     private FilteredList<Task> filteredTasks;
+
+    // The current selected member
+    private Member currentMember;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -113,6 +117,13 @@ public class ModelManager implements Model {
     @Override
     public void deleteMember(Member target) {
         addressBook.removeMember(target);
+
+        // If the deleted member is the current selected member
+        if (getCurrentMember().isPresent() && target.isSameType(getCurrentMember().get())) {
+            currentMember = null;
+            this.taskListManager = new TaskList();
+            filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
+        }
     }
 
     @Override
@@ -178,6 +189,12 @@ public class ModelManager implements Model {
         filteredMembers.setPredicate(predicate);
     }
 
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
     //=========== TaskListManager ============================================================================
 
     /**
@@ -189,6 +206,7 @@ public class ModelManager implements Model {
         if (this.taskListManager != member.getTaskList()) {
             this.taskListManager = member.getTaskList();
             this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
+            this.currentMember = member;
         }
     }
 
@@ -278,19 +296,31 @@ public class ModelManager implements Model {
      */
     @Override
     public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
+        requireNonNull(predicate);
         loadTaskList(member);
         filteredTasks.setPredicate(predicate);
     }
 
+    /**
+     * Updates the filter of the filtered task list of the current selected member
+     * to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
 
+    //=========== CurrentMember ==============================================================================
+
+    /**
+     * Returns the current selected member.
+     */
     @Override
-    public void updateFilteredEventList(Predicate<Event> predicate) {
-        requireNonNull(predicate);
-        filteredEvents.setPredicate(predicate);
+    public Optional<Member> getCurrentMember() {
+        return Optional.ofNullable(currentMember);
     }
 
     @Override
@@ -310,7 +340,9 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredMembers.equals(other.filteredMembers)
-                && filteredEvents.equals(other.filteredEvents);
+                && filteredEvents.equals(other.filteredEvents)
+                && filteredTasks.equals(other.filteredTasks)
+                && getCurrentMember().equals(other.getCurrentMember());
     }
 
 }

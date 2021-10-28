@@ -9,7 +9,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -49,18 +51,20 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add_task() throws Exception {
-        Index validMemberID = Index.fromOneBased(1);
+        Index validMemberId = Index.fromOneBased(1);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId);
         Task validTask = new TaskBuilder().build();
-        TaddCommand command = (TaddCommand) parser.parseCommand(TaskUtil.getTaddCommand(validTask, validMemberID));
-        assertEquals(new TaddCommand(validMemberID, validTask), command);
+        TaddCommand command = (TaddCommand) parser.parseCommand(TaskUtil.getTaddCommand(validTask, validMemberId));
+        assertEquals(new TaddCommand(validMemberIdList, validTask), command);
     }
 
     @Test
     public void parseCommand_del_task() throws Exception {
-        Index validMemberID = Index.fromOneBased(1);
+        Index validMemberId = Index.fromOneBased(1);
         Index validTaskID = Index.fromOneBased(1);
-        TdelCommand command = (TdelCommand) parser.parseCommand(TaskUtil.getTdelCommand(validTaskID, validMemberID));
-        assertEquals(new TdelCommand(validMemberID, validTaskID), command);
+        TdelCommand command = (TdelCommand) parser.parseCommand(TaskUtil.getTdelCommand(validTaskID, validMemberId));
+        assertEquals(new TdelCommand(validMemberId, validTaskID), command);
     }
 
     @Test

@@ -1,7 +1,12 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERDUE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_COMPLETED_TASKS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DUE_TASKS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_OVERDUE_TASKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import javafx.collections.ObservableList;
@@ -22,38 +27,69 @@ public class TlistCommand extends Command {
 
     public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. \n"
+            + "Only one of " + PREFIX_DONE + "or " + PREFIX_OVERDUE + "may be present\n"
             + "Parameters: "
-            + PREFIX_MEMBER_ID + "MEMBER_ID\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MEMBER_ID + "2";
+            + PREFIX_MEMBER_ID + "MEMBER_ID "
+            + "[" + PREFIX_DONE + " OPTION (must be \"y\" or \"n\")] "
+            + "[" + PREFIX_OVERDUE + "] \n"
+            + "Examples: " + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2\n"
+            + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_DONE + "y\n"
+            + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_OVERDUE + "\n";
 
-    public final Index targetMemberID;
+    public final Index targetMemberId;
+
+    private String filter = "";
 
     /**
-     * Creates an TaddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
+     * Creates an TListCommand to display the specified {@code Tasks}
+     * belonging to the member with the specified {@code MemberId}.
      */
-    public TlistCommand(Index memberID) {
-        requireNonNull(memberID);
-        targetMemberID = memberID;
+    public TlistCommand(Index memberId) {
+        requireNonNull(memberId);
+        targetMemberId = memberId;
+    }
+
+    /**
+     * Creates an TListCommand to display the specified {@code Tasks}
+     * belonging to the member with the specified {@code MemberId} with a {@code filter}.
+     */
+    public TlistCommand(Index memberId, String filter) {
+        requireNonNull(memberId, filter);
+        targetMemberId = memberId;
+        this.filter = filter;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Member> members = model.getFilteredMemberList();
-        if (targetMemberID.getZeroBased() >= members.size()) {
+        if (targetMemberId.getZeroBased() >= members.size()) {
             throw new CommandException(MESSAGE_MEMBER_NOT_FOUND);
         }
-        Member targetMember = members.get(targetMemberID.getZeroBased());
-        model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(MESSAGE_SUCCESS + " of " + targetMember.getName());
+        Member targetMember = members.get(targetMemberId.getZeroBased());
+        switch (filter) {
+        case "y":
+            model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_COMPLETED_TASKS);
+            return new CommandResult(MESSAGE_SUCCESS + " that have been completed by "
+                    + targetMember.getName());
+        case "n":
+            model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_DUE_TASKS);
+            return new CommandResult(MESSAGE_SUCCESS + " that are due for " + targetMember.getName());
+        case "overdue":
+            model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_OVERDUE_TASKS);
+            return new CommandResult(MESSAGE_SUCCESS + " that are overdue for " + targetMember.getName());
+        default:
+            model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_TASKS);
+            return new CommandResult(MESSAGE_SUCCESS + " of " + targetMember.getName());
+        }
     }
+
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TlistCommand // instanceof handles nulls
-                && targetMemberID.equals(((TlistCommand) other).targetMemberID));
+                && targetMemberId.equals(((TlistCommand) other).targetMemberId));
     }
 }

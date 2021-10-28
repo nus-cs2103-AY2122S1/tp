@@ -16,38 +16,38 @@ import seedu.address.model.module.task.Task;
  */
 public class TaskUtil {
     /**
-     * Returns an add command string for adding the {@code task} to the member with {@code memberID}.
+     * Returns an add command string for adding the {@code task} to the member with {@code memberId}.
      */
-    public static String getTaddCommand(Task task, Index memberID) {
-        return TaddCommand.COMMAND_WORD + " " + getTaskDetails(task, memberID);
+    public static String getTaddCommand(Task task, Index memberId) {
+        return TaddCommand.COMMAND_WORD + " " + getTaskDetails(task, memberId);
     }
 
     /**
      * Returns the part of command string for the given {@code task}'s details.
      */
-    public static String getTaskDetails(Task task, Index memberID) {
+    public static String getTaskDetails(Task task, Index memberId) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + task.getName().toString() + " ");
         sb.append(PREFIX_DATE + task.getTaskDeadline().toString() + " ");
-        sb.append(PREFIX_MEMBER_ID + Integer.toString(memberID.getOneBased()));
+        sb.append(PREFIX_MEMBER_ID + Integer.toString(memberId.getOneBased()));
         return sb.toString();
     }
 
     /**
      * Returns a task delete command string for deleting the {@code task}
-     * from the member with {@code memberID}.
+     * from the member with {@code memberId}.
      */
-    public static String getTdelCommand(Index taskID, Index memberID) {
-        return TdelCommand.COMMAND_WORD + " " + getTaskIdDetails(taskID, memberID);
+    public static String getTdelCommand(Index taskID, Index memberId) {
+        return TdelCommand.COMMAND_WORD + " " + getTaskIdDetails(taskID, memberId);
     }
 
     /**
-     * Returns the part of command string for the given {@code taskID} and {@code memberID}'s details.
+     * Returns the part of command string for the given {@code taskID} and {@code memberId}'s details.
      */
-    public static String getTaskIdDetails(Index taskID, Index memberID) {
+    public static String getTaskIdDetails(Index taskID, Index memberId) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_TASK_ID + Integer.toString(taskID.getOneBased()) + " ");
-        sb.append(PREFIX_MEMBER_ID_DEL + Integer.toString(memberID.getOneBased()));
+        sb.append(PREFIX_MEMBER_ID_DEL + Integer.toString(memberId.getOneBased()));
         return sb.toString();
     }
 }

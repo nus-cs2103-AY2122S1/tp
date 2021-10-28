@@ -2,6 +2,7 @@ package seedu.address.model.module.task;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.model.module.Module;
@@ -54,6 +55,15 @@ public class Task extends Module {
         return taskDeadline;
     }
 
+    /**
+     * Returns the deadline date of the {@code Task}.
+     *
+     * @return date
+     */
+    public LocalDateTime getTaskDeadlineDate() {
+        return taskDeadline.getDeadline();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -79,6 +89,6 @@ public class Task extends Module {
 
     @Override
     public String toString() {
-        return "(" + getStatusIcon() + ")" + super.getName();
+        return super.getName().toString() + " by " + getTaskDeadline().toString();
     }
 }

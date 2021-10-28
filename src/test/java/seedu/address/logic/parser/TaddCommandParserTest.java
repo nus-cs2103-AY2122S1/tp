@@ -13,6 +13,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,10 +31,12 @@ class TaddCommandParserTest {
     void parse_allFieldsPresent_success() {
         Task expectedTask = new TaskBuilder().withName(VALID_POEM_TASK_NAME)
                 .withDeadline(VALID_POEM_TASK_DEADLINE).build();
-        Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID);
+        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_ID);
+        Set<Index> expectedMemberIdList = new HashSet<>();
+        expectedMemberIdList.add(expectedMemberId);
 
         assertParseSuccess(parser, TASK_NAME_DESC_POEM + TASK_DEADLINE_DESC_POEM + MEMBER_ID_DESC_ONE,
-                new TaddCommand(expectedMemberID, expectedTask));
+                new TaddCommand(expectedMemberIdList, expectedTask));
     }
 
     @Test
