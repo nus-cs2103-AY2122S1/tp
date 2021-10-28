@@ -14,8 +14,8 @@ as well as to **keep track of their Modular Credits(MC) and modules taken**.
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
 
-For more information about our features, you can head over to our [Features](#features) section. Better yet, 
-head over to our [Quick Start](#quick-start) and try it out for yourself!
+For more information about our features, you can head over to our [Features](#4-features) section. Better yet, 
+head over to our [Quick Start](#2-quick-start) and try it out for yourself!
 
 ### 1.1 Is this guide for you?
 
@@ -23,7 +23,7 @@ Are you someone who is trying our application for the very first time? If so, ou
 Just simple read along and we will guide you step by step on how to use our application.
 
 Are you someone who has maybe forgotten how some of our features work? Fret not, this user guide is also for you!
-Simply head over to either our [Features](#features) section or our [Command Summary](#command-summary) section to solve your problems.
+Simply head over to either our [Features](#4-features) section or our [Command Summary](#6-command-summary) section to solve your problems.
 
 ### 1.2 How to use the user guide 
 
@@ -51,9 +51,9 @@ If you ever want to skip through any section of our user guide, do feel free to 
         * [4.1.3 List](#413-listing-current-modules-list)
         * [4.1.4 Find](#414-finding-a-module-find)
         * [4.1.5 Edit](#415-editing-a-module--edit)
-    * [4.2 Academic Calendar](#42-academic-calendar)
-      * [4.2.1 Take](#421-taking-a-module--take)
-      * [4.2.2 Un-take](#422-removing-the-schedule-from-untake-a-module--untake)
+    * [4.2 Academic Plan](#42-academic-plan)
+      * [4.2.1 Take](#421-adding-a-module-to-the-academic-plan--take)
+      * [4.2.2 Un-take](#422-remove-a-module-from-the-academic-plan--untake)
       * [4.2.3 Info](#423-viewing-user-information--info)
       * [4.2.4 Set](#424-setting-users-mc-goal-or-current-semester--set)
       * [4.2.5 View](#425-see-modules-taken-in-a-specific-semester--view)
@@ -89,7 +89,7 @@ This section gives you a quick summary on how to download and run our applicatio
    * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
 
-Kindly refer to the [Features](#features) below for details of each command.
+Kindly refer to the [Features](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,29 +139,29 @@ Here is how our application's homepage works
 
 #### 3.2.5 MC goal Progress (green)
 
-Tracks and displays the number of Mcs completed in total, and for each course requirement. <br>
+Tracks and displays the number of MCs completed in total, and for each course requirement. <br>
 
-![Mcs Display](images/mcsDisplay.png)
+![MCs Display](images/MCsDisplay.png)
 
 The user's progress is displayed in the form of:
-* The number of Mcs completed for that category, over the number of required Mcs.
+* The number of MCs completed for that category, over the number of required MCs.
 * A progress bar filled according to the level of completion.
 
-**Total Mcs completed display:**
+**Total MCs completed display:**
 
-![total Mcs Display](images/totalMcsCompletedDisplay.png)
-* Shows the total number of Mcs taken, over the user's set Mc goal.
-* The total number of Mcs taken is calculated from all modules taken before the current semester.
-    * For example: If the current semester is year 1 semester 2, the total number of Mcs will be calculated
+![total MCs Display](images/totalMCsCompletedDisplay.png)
+* Shows the total number of MCs taken, over the user's set MCs goal.
+* The total number of MCs taken is calculated from all modules taken before the current semester.
+    * For example: If the current semester is year 1 semester 2, the total number of MCs will be calculated
       from all modules taken in year 1 semester 1 only.
 
 **Course requirements display:**
 
-![requirements Mcs Display](images/courseRequirementsDisplay.png)
-* Shows the total number of Mcs taken for that requirement, over the number of Mcs needed to satisfy the requirement.
-* The total number of Mcs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
-    * For example: Mcs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
-* Modules with the following tags will be used in calculating the Mcs completed for the corresponding requirement:
+![requirements MCs Display](images/courseRequirementsDisplay.png)
+* Shows the total number of MCs taken for that requirement, over the number of MCs needed to satisfy the requirement.
+* The total number of MCs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
+    * For example: MCs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
+* Modules with the following tags will be used in calculating the MCs completed for the corresponding requirement:
 
 Requirement | Tag (not case sensitive)
 ------------|-----------
@@ -173,8 +173,8 @@ IT Professionalism | "it professionalism"
 Math and Science | "math and science"
 
 Notes:
-* If the Mc requirement has been satisfied, the completed Mcs and progress bar will be coloured light blue.
-* If the Mc requirement is not satisfied, the completed Mcs and progress bar will be coloured pink.
+* If the Mc requirement has been satisfied, the completed MCs and progress bar will be coloured light blue.
+* If the Mc requirement is not satisfied, the completed MCs and progress bar will be coloured pink.
 
 #### 3.2.6 Current Semester (dark blue)
 * Displays the current year and semester that the application is in.
@@ -194,7 +194,7 @@ Notes:
 * Items in square brackets are optional.<br>
   e.g. `c/CODE [tag/TAG]` can be used as `c/CS2103T tag/core` or as `c/CS2103T`.
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `m/GEQ1000 m/GEQ1000`, only `m/GEQ1000` will be taken.
+  e.g. if you specify `m/CS2030S m/GEQ1000`, only `m/GEQ1000` will be taken.
 
 * Inputs for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -212,14 +212,14 @@ Tip: Do take a good look at this section to understand the common terminologies 
 
 `academic plan`
 * Refers to modules that the user has assigned with a specific semester and year.
-* Contributes to the calculation of the MC requirements.
-  ![requirements Mcs Display](images/courseRequirementsDisplay.png)
+* Contributes to the calculation of the MC requirements.<br>
+  ![requirements MCs Display](images/courseRequirementsDisplay.png)
 
 `INDEX`
 * The `INDEX` refers to the index number shown in the displayed module list.
-* The `INDEX` **must be a positive integer** (1, 2, 3 ...).
+* The `INDEX` **must be a positive integer** (1, 2, 3 ...).<br>
   ![IndexExplanation](images/IndexExplanation.png)
-* For example, with the screenshot above, an `INDEX` of 1 would represent the Module CS2030S, and an `INDEX` of 2 would represent the Module CS2040S
+* For example, with the screenshot above, an `INDEX` of 1 would represent the Module CS2030S, and an `INDEX` of 2 would represent the Module CS2040S.
 
 `CODE`
 * Represents the `module`'s code component.
@@ -256,7 +256,7 @@ This section gives you a detailed explanation on how each of our features work.
 
 For an easy reference, we have decided to split our features into 3 different sub-categories:
 * Module features
-* Academic Calendar features
+* Academic Plan features
 * Miscellaneous features
 
 The following sub-categories will explain the intended purpose for the set of features.
@@ -265,7 +265,7 @@ The following sub-categories will explain the intended purpose for the set of fe
 
 Module features consist of features that allows you to be able to add and remove modules from our database. 
 Do note that these features do not directly affect the modules that are currently stored in your academic plan.
-(we will explain how such features can **indirectly** affect the modules that are currently stored in your academic plan  in the [FAQ](#5-faq) section) <br>
+(we will explain how such features can **indirectly** affect the modules that are currently stored in your academic plan in the [FAQ](#5-faq) section) <br>
 
 Such features include adding a new module into the database, removing a module from the database, as well as finding, editing, and listing modules that are in the database.
 
@@ -336,16 +336,16 @@ Examples:
   as well as editing the title of the 1st module in the database to be Software Engineering respectively.
 * `edit 3 m/2` is equivalent to editing the 3rd module in the database to have a MC of 2.
 
-### 4.2 Academic Calendar
+### 4.2 Academic Plan
 
-Academic Calendar features consist of features that allows you to be able to create and customize your own academic plan.
+Academic Plan features consist of features that allows you to be able to create and customize your own academic plan.
 Do note that these features are the ones that allows you to update and edit your academic plans
 (such as the visual display of which modules you have taken, as well as the progress bar for each of the University's requirements).
 
 Such features include taking/un-taking a module in a specific semester, viewing and setting the current semester or mc goal,
 as well as viewing and clearing modules in a specific semester.
 
-#### 4.2.1 Taking a module : `take`
+#### 4.2.1 Adding a module to the academic plan : `take`
 
 Take a module in the specified semester and adds it to the academic plan.
 
@@ -365,7 +365,7 @@ Example:
 * `take 1 y/1 s/4` is equivalent to scheduling the 1st module in the module tracker database for year 1 special semester 2.
 
 
-#### 4.2.2 Un-take a module : `untake`
+#### 4.2.2 Remove a module from the academic plan : `untake`
 
 Removes a module from the academic plan.
 
@@ -452,23 +452,35 @@ This section gives you the solutions to commonly asked questions.
 
 **Q**: If I have a module inside my academic plan and I delete the module from the database using the "delete" command, would the module still appear in my academic plan?<br>
 **A**: No, deleting a module from the database removes the module from your academic plan.
+
+**Q**: What should I do if there is a module that I want to add into my academic plan but it is not inside the database?<br>
+**A**: First, add the module into the database using the [add](#411-adding-a-module-add) command. Then, you can add the module into your academic plan using the [take](#421-adding-a-module-to-the-academic-plan--take) command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6. Command summary
 
 This section gives you a summary on how to use each of the features.
 
-Action | Format, Examples
+Module Commands | Format, Examples
 --------|------------------
 **Add** | `add c/CODE t/TITLE d/DESCRIPTION m/MC [tag/TAG]` <br> e.g. `add c/ST2334 t/Probability and Statistics d/Introduces students to basic probability theory and statistical inference m/4`
-**Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
-**Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [m/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
-**Find** | `find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
 **List** | `list`
+**Find** | `find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
+**Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [m/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
+
+Academic Plan Commands | Format, Examples
+--------|------------------
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
-**Help**| `help`
 **Info**| `info`
 **Set**| `set m/MC` or `set y/YEAR s/SEMESTER` <br> e.g. `set m/120` `set y/2 s/1`
 **View**| `view y/YEAR s/SEMESTER` <br> e.g. `view y/2 s/1`
+**Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
+
+Miscellaneous Command | Format, Examples
+--------|------------------
+**Help**| `help`
+
+
