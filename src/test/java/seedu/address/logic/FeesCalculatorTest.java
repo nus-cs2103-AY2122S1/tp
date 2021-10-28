@@ -35,17 +35,18 @@ class FeesCalculatorTest {
         Lesson sameWeekNotPassedLesson = new LessonBuilder().withDate("9 SEP 2021").buildRecurring();
         assertEquals(sameWeekNotPassedLesson, feesCalculator.updateLessonOutstandingFeesField(sameWeekNotPassedLesson));
 
-        // Last updated today
+        // Last updated today before lesson
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-27T12:00"),
                 LocalDateTime.parse("2021-10-27T15:02"));
-        // before lesson
         Lesson sameDayToBeUpdated = new LessonBuilder().withDate("27 OCT 2021").buildRecurring();
         expected = new LessonBuilder().withDate("27 OCT 2021").withOutstandingFees("150").buildRecurring();
         assertEquals(expected, feesCalculator.updateLessonOutstandingFeesField(sameDayToBeUpdated));
 
-        // after lesson
+        // Last updated today after lesson then shouldn't update fees since lesson has already passed last updated
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-27T15:01"),
+                LocalDateTime.parse("2021-10-27T20:00"));
         Lesson sameDayNotToBeUpdated = new LessonBuilder().withDate("27 OCT 2021").buildRecurring();
-        assertEquals(expected, feesCalculator.updateLessonOutstandingFeesField(sameDayNotToBeUpdated));
+        assertEquals(sameDayNotToBeUpdated, feesCalculator.updateLessonOutstandingFeesField(sameDayNotToBeUpdated));
 
         // lesson ends right after last updated, should update
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-23T14:59"),
@@ -330,7 +331,7 @@ class FeesCalculatorTest {
     }
 
     @Test
-    public void cancelledLesson_Start() {
+    public void cancelledLesson_start() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-04T10:00"),
             LocalDateTime.parse("2021-10-11T11:00"));
 
@@ -350,7 +351,7 @@ class FeesCalculatorTest {
     }
 
     @Test
-    public void cancelledLesson_End() {
+    public void cancelledLesson_end() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-20T10:00"),
             LocalDateTime.parse("2021-10-27T13:00"));
 
@@ -370,7 +371,7 @@ class FeesCalculatorTest {
     }
 
     @Test
-    public void cancelledLesson_StartEqualsEndCancelled() {
+    public void cancelledLesson_startEqualsEndCancelled() {
         feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-10T10:00"),
             LocalDateTime.parse("2021-10-27T13:00"));
 
