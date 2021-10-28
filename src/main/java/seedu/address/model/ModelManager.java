@@ -242,7 +242,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean openTransaction(String id) {
+    public Double openTransaction(String id) {
         // Attempt to find transaction with matching id
         Optional<TransactionRecord> transactionOptional = transactions.stream()
                 .filter(txn -> txn.getId().equals(id))
@@ -250,18 +250,27 @@ public class ModelManager implements Model {
 
         // If transaction found, return false
         if (transactionOptional.isEmpty()) {
-            return false;
+            return -1.0;
         }
+
+        Double totalCost = transactionOptional.get().getOrderItems().stream()
+                .map(item -> item.getSalesPrice() * item.getCount())
+                .reduce((a, b) -> a + b).get();
 
         // Display transaction
         currentDisplay = DISPLAY_TRANSACTION_LIST;
         displayList.setItems(transactionOptional.get().getOrderItems());
-        return true;
+        return totalCost;
     }
 
     @Override
     public DisplayMode getDisplayMode() {
         return currentDisplay;
+    }
+
+    @Override
+    public BookKeeping getBookKeeping() {
+        return this.bookKeeping;
     }
 
     @Override

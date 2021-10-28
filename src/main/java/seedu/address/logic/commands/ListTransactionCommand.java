@@ -44,20 +44,32 @@ public class ListTransactionCommand extends ListCommand {
 
         // If no id specified, display all past transactions
         if (transactionId.isEmpty()) {
+
+            String cost = String.format("%.2f", model.getBookKeeping().getCost());
+            String revenue = String.format("%.2f", model.getBookKeeping().getRevenue());
+            String profit = String.format("%.2f", model.getBookKeeping().getProfit());
+
+            String addMessage = "Total costs: " + cost + ", total revenue: "
+                    + revenue + ", total profit: " + profit;
+
+            String finalMessage = MESSAGE_SUCCESS_ALL + "\n" + addMessage;
+
             model.updateFilteredDisplayList(DISPLAY_TRANSACTION_LIST, PREDICATE_SHOW_ALL_ITEMS);
-            return new CommandResult(MESSAGE_SUCCESS_ALL);
+            return new CommandResult(finalMessage);
         }
 
         // Else, display specific transaction
-        boolean success = model.openTransaction(transactionId.get());
-        if (!success) {
+        Double totalCost = model.openTransaction(transactionId.get());
+        if (totalCost == -1.0) {
             // Transaction id not found
             throw new CommandException(
                     String.format(MESSAGE_TXN_NOT_FOUND, transactionId.get())
             );
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, transactionId.get()));
+        String addMessage = transactionId.get() + ", total cost: " + String.format("%.2f", totalCost);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, addMessage));
     }
 
     @Override

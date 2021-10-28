@@ -125,7 +125,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean openTransaction(String id) {
+    public Double openTransaction(String id) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -181,6 +181,11 @@ public class ModelStub implements Model {
 
     @Override
     public void addRevenueBookKeeping(Double revenue) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public BookKeeping getBookKeeping() {
         throw new AssertionError("This method should not be called.");
     }
 }

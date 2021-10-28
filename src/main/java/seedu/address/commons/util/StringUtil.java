@@ -76,11 +76,11 @@ public class StringUtil {
         if (firstLength == 0 || secondLength == 0) {
             return false;
         }
-        boolean Doesmatch = false;
+        boolean doesMatch = false;
         for (int i = 0; i < firstLength - secondLength + 1; i = i + 1) {
-            Doesmatch = Doesmatch || StringUtil.equalArrayElements(first, second, i);
+            doesMatch = doesMatch || StringUtil.equalArrayElements(first, second, i);
         }
-        return Doesmatch;
+        return doesMatch;
     }
     /**
      * Helper Function for equalArray
@@ -92,15 +92,15 @@ public class StringUtil {
             return false;
         }
         int indexOfFirst = firstStringIndex;
-        boolean Doesmatch = true;
+        boolean doesMatch = true;
         for (int j = 0; j < second.length; j = j + 1) {
             if (!first[indexOfFirst].equalsIgnoreCase(second[j])) {
-                Doesmatch = Doesmatch && false;
+                doesMatch = doesMatch && false;
                 break;
             }
             indexOfFirst = indexOfFirst + 1;
         }
-        return Doesmatch;
+        return doesMatch;
     }
     /**
      * Returns a detailed message of the t, including the stack trace.

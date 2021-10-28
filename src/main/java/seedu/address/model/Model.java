@@ -197,9 +197,9 @@ public interface Model {
     /**
      * Opens the past transaction that has the given {@code id}.
      *
-     * @Returns true if transaction found, and false otherwise.
+     * @Returns totalCost if transaction found, and -1.0 otherwise.
      */
-    boolean openTransaction(String id);
+    Double openTransaction(String id);
 
     /**
      * Returns the model's current {@code DisplayMode}.
@@ -211,4 +211,6 @@ public interface Model {
     void addCostBookKeeping(Double cost);
 
     void addRevenueBookKeeping(Double revenue);
+
+    BookKeeping getBookKeeping();
 }
