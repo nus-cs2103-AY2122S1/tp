@@ -14,7 +14,7 @@
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="-Infinity" GridPane.columnIndex="0" styleClass="task-card">
+        <VBox alignment="CENTER_LEFT" minHeight="-Infinity" GridPane.columnIndex="0" styleClass="task-card_complete">
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
@@ -25,10 +25,10 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="taskName" styleClass="cell_big_label" text="\$taskName"/>
-                <Label fx:id="taskId" text="\$taskId" styleClass="cell_small_label" />
-                <Label fx:id="taskDeadline" styleClass="cell_small_label" text="\$taskDeadline" />
-                <Label fx:id="isComplete" styleClass="cell_small_label" text="\$isComplete" />
+                <Label fx:id="taskName" styleClass="task_default_big_label" text="\$taskName"/>
+                <Label fx:id="taskId" text="\$taskId" styleClass="task_default_small_label" />
+                <Label fx:id="taskDeadline" styleClass="task_default_small_label" text="\$taskDeadline" />
+                <Label fx:id="isComplete" styleClass="task_complete_small_label" text="\$isComplete" />
             </HBox>
         </VBox>
     </GridPane>
