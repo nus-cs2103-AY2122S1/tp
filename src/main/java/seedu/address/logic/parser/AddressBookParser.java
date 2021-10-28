@@ -8,10 +8,13 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddOrgCommand;
+import seedu.address.logic.commands.AddToOrgCommand;
 import seedu.address.logic.commands.AppendCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteFromOrgCommand;
+import seedu.address.logic.commands.DeleteOrgCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
@@ -19,6 +22,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.InteractionCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOrgCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -72,6 +76,9 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListOrgCommand.COMMAND_WORD:
+            return new ListOrgCommand();
+
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
         case ViewCommand.COMMAND_WORD:
@@ -91,6 +98,15 @@ public class AddressBookParser {
 
         case RemoveCommand.COMMAND_WORD:
             return new RemoveCommandParser().parse(arguments);
+
+        case DeleteOrgCommand.COMMAND_WORD:
+            return new DeleteOrgCommandParser().parse(arguments);
+
+        case AddToOrgCommand.COMMAND_WORD:
+            return new AddToOrgCommandParser().parse(arguments);
+
+        case DeleteFromOrgCommand.COMMAND_WORD:
+            return new DeleteFromOrgCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

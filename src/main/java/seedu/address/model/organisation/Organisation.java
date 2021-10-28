@@ -21,19 +21,27 @@ public class Organisation {
         persons = new UniquePersonList();
     }
 
+    public void addPerson(Person person) {
+        persons.add(person);
+    }
+
+    public void removePerson(Person person) {
+        persons.remove(person);
+    }
+
     public Name getName() {
         return name;
     }
 
+    public boolean containsPerson(Person person) {
+        return persons.contains(person);
+    }
     public Email getEmail() {
         return email;
     }
 
     public UniquePersonList getPersons() {
         return persons;
-    }
-    public void addPerson(Person person) {
-        persons.add(person);
     }
 
     /**

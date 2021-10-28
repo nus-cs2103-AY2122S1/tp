@@ -22,11 +22,13 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.organisation.UniqueOrganisationList;
 import seedu.address.model.person.Person;
 
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueOrganisationList());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            new UniqueOrganisationList());
     private Predicate<Person> predicate = unused -> true;
 
     @Test
