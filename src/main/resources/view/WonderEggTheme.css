@@ -499,7 +499,6 @@ chart-pie-label-line {
 
 .chart-legend {
     -fx-background: transparent;
-    -fx-alignment: right;
     -fx-stroke: WHITE;
     -fx-text-fill: WHITE;
 
