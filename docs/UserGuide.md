@@ -355,9 +355,13 @@ The schedule for this week is shown under the schedule tab by default. The week
 can be changed using the `change` command.
 
  * Takes in a single date input to translate into a week.
+ * The date is in `YYYY-MM-DD`
 
 Formats:
-`change [da/DATE]`
+`change [da/DATE]`  
+
+Examples:  
+`change da/2021-12-28`
 
 
 #### Viewing schedule of staff(s): `viewSchedule`
