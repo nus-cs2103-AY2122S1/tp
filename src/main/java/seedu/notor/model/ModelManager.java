@@ -30,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private FilteredList<? extends Group> filteredGroups;
     private boolean isPersonList;
+    private boolean isSuperGroupList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -45,6 +46,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
         // Person view is first shown.
         isPersonList = true;
+        isSuperGroupList = false;
     }
 
     public ModelManager() {
@@ -184,6 +186,7 @@ public class ModelManager implements Model {
         // TODO: I am using levraging this method for list. Should we consider new method?
         requireNonNull(predicate);
         isPersonList = true;
+        isSuperGroupList = false;
         filteredPersons.setPredicate(predicate);
     }
 
@@ -201,6 +204,7 @@ public class ModelManager implements Model {
     @Override
     public void listSuperGroup() {
         isPersonList = false;
+        isSuperGroupList = true;
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
     }
 
@@ -210,6 +214,7 @@ public class ModelManager implements Model {
      */
     public void listSubGroup(Index i) {
         isPersonList = false;
+        isSuperGroupList = false;
         // TODO: Abstract this. This method is too long.
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups().get(i.getZeroBased()).getSubGroups()
             .asUnmodifiableObservableList());
@@ -220,6 +225,12 @@ public class ModelManager implements Model {
     public boolean isPersonList() {
         return isPersonList;
     }
+
+    @Override
+    public boolean isSuperGroupList() {
+        return isSuperGroupList;
+    }
+
 
     @Override
     public boolean equals(Object obj) {

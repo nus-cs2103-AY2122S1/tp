@@ -149,4 +149,6 @@ public interface Model {
 
     //=========== View Check =============================================================
     boolean isPersonList();
+
+    boolean isSuperGroupList();
 }

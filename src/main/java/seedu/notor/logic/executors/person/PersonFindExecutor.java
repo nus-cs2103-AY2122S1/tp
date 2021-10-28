@@ -25,6 +25,7 @@ public class PersonFindExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
+        checkPersonList();
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

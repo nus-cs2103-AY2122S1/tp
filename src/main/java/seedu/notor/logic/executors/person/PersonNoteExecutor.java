@@ -27,6 +27,7 @@ public class PersonNoteExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
+        checkPersonList();
         Person storedPerson = super.getPerson();
         Person editedPerson = new Person(
                 storedPerson.getName(), storedPerson.getPhone(), storedPerson.getEmail(),

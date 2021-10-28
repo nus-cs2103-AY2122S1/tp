@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.group.GroupFindExecutor;
@@ -35,6 +34,7 @@ public class GroupFindCommand extends GroupCommand {
      */
     public GroupFindCommand(GroupContainsPredicate predicate) {
         super(null);
+        requireNonNull(predicate);
         this.executor = new GroupFindExecutor(predicate);
     }
 

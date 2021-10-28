@@ -58,9 +58,9 @@ public interface Logic {
      */
     ObservableList<SuperGroup> getFilteredSuperGroupList();
 
-    boolean isPersonView();
+    boolean isPersonList();
 
-    boolean isSuperGroupView();
+    boolean isSuperGroupList();
 
     /**
      * Returns an unmodifiable view of the filtered list of SubGroups

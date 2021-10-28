@@ -7,9 +7,17 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.group.GroupContainsPredicate;
 
+/**
+ * Executor for the GroupFindCommand
+ */
 public class GroupFindExecutor extends GroupExecutor {
     private final GroupContainsPredicate predicate;
 
+    /**
+     * Constructor for the executor
+     *
+     * @param predicate used to filter groups
+     */
     public GroupFindExecutor(GroupContainsPredicate predicate) {
         super(null);
         this.predicate = predicate;

@@ -38,6 +38,7 @@ public class PersonEditExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
+        checkPersonList();
         Person person = super.getPerson();
         Person editedPerson = createEditedPerson(person, personEditDescriptor);
 

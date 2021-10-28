@@ -264,10 +264,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            if (logic.isPersonView()) {
+            if (logic.isPersonList()) {
                 ListPanel<Person> listPanel = new PersonListPanel(logic.getFilteredPersonList());
                 listPanelPlaceholder.getChildren().add(listPanel.getRoot());
-            } else if (logic.isSuperGroupView()) {
+            } else if (logic.isSuperGroupList()) {
                 ListPanel<SuperGroup> listPanel = new GroupListPanel(logic.getFilteredSuperGroupList());
                 listPanelPlaceholder.getChildren().add(listPanel.getRoot());
             } else {

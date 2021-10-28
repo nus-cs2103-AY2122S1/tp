@@ -223,6 +223,11 @@ public class PersonCreateCommandTest {
 
         @Override
         public boolean isPersonList() {
+            return true;
+        }
+
+        @Override
+        public boolean isSuperGroupList() {
             return false;
         }
     }
