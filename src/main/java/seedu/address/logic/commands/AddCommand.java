@@ -98,6 +98,11 @@ public class AddCommand extends Command {
                 throw new CommandException(MESSAGE_NAME_NOT_FOUND);
             }
         }
+        // Check that only 1 item fit the description
+        if (matchingItems.size() > 1) {
+            model.updateFilteredItemList(DISPLAY_INVENTORY, toAddDescriptor::isMatch);
+            throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
+        }
         // Check that id and name of new item does not exist
         if (!toAddDescriptor.getName().equals(Optional.empty())
                 && !toAddDescriptor.getId().equals(Optional.empty())
@@ -113,12 +118,6 @@ public class AddCommand extends Command {
             if (model.hasName(toAddDescriptor.buildItem())) {
                 throw new CommandException(MESSAGE_NAME_EXISTS);
             }
-        }
-
-        // Check that only 1 item fit the description
-        if (matchingItems.size() > 1) {
-            model.updateFilteredItemList(DISPLAY_INVENTORY, toAddDescriptor::isMatch);
-            throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
         }
 
         Item target = matchingItems.get(0);

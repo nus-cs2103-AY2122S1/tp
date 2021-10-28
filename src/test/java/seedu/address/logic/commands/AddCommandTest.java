@@ -193,10 +193,12 @@ public class AddCommandTest {
     public void execute_idAlreadyExists_throwsCommandException() {
         model.addItem(BAGEL);
         ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
-                .withName(VALID_NAME_BAGEL).withId("182018").withCount(VALID_COUNT_BAGEL).build();
+                .withName("boo").withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL).
+                withSalesPrice(VALID_SALESPRICE_BAGEL).build();
 
         AddCommand addCommand = new AddCommand(bagelDescriptor);
-        String expectedMessage = AddCommand.MESSAGE_ID_NOT_FOUND;
+        String expectedMessage = AddCommand.MESSAGE_ID_EXISTS;
 
         Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
 
