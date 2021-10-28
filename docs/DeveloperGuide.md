@@ -8,8 +8,8 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+* Libraries used: JavaFX, Jackson, JUnit5
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,7 +224,7 @@ which is represented by an `Note` object.
 
 The `Note` object contains a `value` field that has the type `String`, the `value` field is the description of the note given to a `Person`.
 
-<img src="images/NoteClassDiagram.png" width="400" />
+<img src="images/NoteClassDiagram.png" width="300" />
 
 A `Note` can be given to a `Person` through any of these 3 methods:
 
@@ -330,6 +330,7 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
 * Currently, there is no relationship between Claim and EditClaimDescriptor. This means that any future changes
   to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should
   both extend from an abstract class to ensure that any future modification would not lead to regressions.
+
 ###  Schedule appointment feature
 
 #### Current Implementation
@@ -378,11 +379,11 @@ There are 3 possible outcomes from the execution of a ScheduleCommand.
 * **Alternative 2:** Different commands for add, edit and delete
     * Pros: Easier to implement
     * Cons: User has to remember a lot of commands
-
-
+    
 ### Insurance feature
 
 #### Implementation
+{:.no_toc}
 
 `Insurance` is currently composed of two objects:
 
