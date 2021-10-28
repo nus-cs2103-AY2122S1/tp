@@ -267,7 +267,7 @@ public class ModelManager implements Model {
 
     @Override
     public List<Assignment> getAssignmentList() {
-        return selectedModule.getAssignmentList();
+        return selectedModule.get().getAssignmentList();
     }
 
     @Override
@@ -296,13 +296,13 @@ public class ModelManager implements Model {
     public void setAssignment(Assignment target, Assignment editedAssignment) {
         requireAllNonNull(target, editedAssignment);
 
-        selectedModule.setAssignment(target, editedAssignment);
+        selectedModule.get().setAssignment(target, editedAssignment);
     }
 
     @Override
     public void deleteAssignment(Assignment target) {
         // Delete from the currently selected module
-        selectedModule.deleteAssignment(target);
+        selectedModule.get().deleteAssignment(target);
 
         // Delete grades from all persons under the module
         List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
