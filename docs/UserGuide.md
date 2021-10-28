@@ -44,43 +44,11 @@ Dangerous or potentially negative actions are displayed here
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
    Some example commands you can try:
 
-    - `addC` : Add a customer
+    - `addC`: Add a customer
     - Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
     - Example: `addC customer n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
-**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
-**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/19-12-2021 08:00`
-**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
-**Create reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
-**Delete Employee** | `deleteE INDEX`<br> e.g., `delete 1`
-**Delete Supplier** | `deleteS INDEX`<br> e.g., `delete 2`
-**Delete Customer** | `deleteC INDEX`<br> e.g., `delete 3`
-**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
-**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
-**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
-**Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
-**Find Employee** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findE `
-**Find Supplier** | `findS KEYWORD [MORE_KEYWORDS]`<br> e.g., `findS Oct AM`
-**Sort Customer** | `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortC by/n o/d`
-**Sort Employee** | `sortE by/PREFIX_OF_EMPLOYEE_FIELD o/ORDER_OF_SORT` <br> e.g. `sortE by/sal o/a`
-**Sort Supplier** | `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortS by/dd o/a`
-**Reset Customer Sorting** | `resetC`
-**Reset Employee Sorting** | `resetE`
-**Reset Supplier Sorting** | `resetS`
-**List Customer** | `listC`
-**List Employee** | `listE`
-**List Supplier** | `listS`
-**Clear** | `clear`
-**Help** | `help`
-**Exit** | `exit`
 
 ### Command syntax
 
@@ -113,19 +81,56 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `l/`  | Leaves              |
 | `jt/`  | Job Title           |
 | `sal/` | Salary              |
+| `sh/`  | Shift               |
 | `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
 | `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-adds) for more details
 | `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
 |  `r/`  | Remark (Optional)   | Contains alphanumeric characters.<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it.
 
-This is the list of some repeatedly used preambles used in RHRH, as well as there corresponding constraints:
+This is the list of some repeatedly used preambles in RHRH, as well as there corresponding constraints:
 
 | Preamble              | Parameter constraints
 | :-------------------: | ---------------------------------------------|
 | `INDEX`               | Must be a positive integer 1, 2, 3, …
 | `KEYWORD`             | 
+| `LIST_OF_TABLE_SIZES` | 
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
+**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
+**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/19-12-2021 08:00`
+**Add reservation** | `addr number_of_people p/phone at/date_time [r/remark] [t/tag]` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
+**Check Reservation Availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Delete Employee** | `deleteE INDEX`<br> e.g., `delete 1`
+**Delete Supplier** | `deleteS INDEX`<br> e.g., `delete 2`
+**Delete Customer** | `deleteC INDEX`<br> e.g., `delete 3`
+**Delete Reservation** | `deleter index`<br> e.g., `delete 4`
+**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Edit Reservation**| `editr index [r/remark] [t/tag]…`<br> e.g. `editr 2 r/surprise birthday party t/10percentoff`
+**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
+**Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
+**Find Employee** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findE `
+**Find Supplier** | `findS KEYWORD [MORE_KEYWORDS]`<br> e.g., `findS Oct AM`
+**Sort Customer** | `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortC by/n o/d`
+**Sort Employee** | `sortE by/PREFIX_OF_EMPLOYEE_FIELD o/ORDER_OF_SORT` <br> e.g. `sortE by/sal o/a`
+**Sort Supplier** | `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortS by/dd o/a`
+**Reset Customer Sorting** | `resetC`
+**Reset Employee Sorting** | `resetE`
+**Reset Supplier Sorting** | `resetS`
+**List Customer** | `listC`
+**List Employee** | `listE`
+**List Supplier** | `listS`
+**List Reservation** | `listR`
+**Clear** | `clear`
+**Help** | `help`
+**Exit** | `exit`
 
 ## Features
 
@@ -223,7 +228,7 @@ The following table shows the acceptable formats and relevant examples for `Deli
 
 </div>
 
-### Adding a reservation: `addr`
+### Adding a reservation: `addR`
 
 Adds a new reservation to RHRH
 
@@ -401,7 +406,6 @@ Examples:
 * Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
-<<<<<<< HEAD
 
 <div markdown="block" class="alert alert-warning">
 :information_source: **Notes:**<br>
@@ -501,29 +505,6 @@ Format: `listS`
 
 </div>
 
-### Searching for reservation's made: `check`
-
-Displays the reservations made at the specified date and/or time
-
-Format:
-* `check DATE TIME`: Returns all reservations on `DATE TIME`
-* `check DATE`: Returns all reservations on `DATE`, for **all timings**
-* `check TIME`: Returns all reservations on **today's date**, at `TIME` 
-  * `DATE` is formatted as `yyyy-MM-dd`
-  * `TIME` is formatted as `HH00`
-
-Examples:
-* `check 2021-09-19 1800`
-* `check 2021-09-19`
-* `check 1800`
-
-<div markdown="block" class="alert alert-warning">
-:information_source: **Notes:**<br>
-
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
-
-</div>
-
 ### Setting the tables for the restaurant: `settables`
 
 <div markdown="block" class="alert alert-danger">
@@ -600,28 +581,3 @@ Install the app in the other computer and overwrite the empty data file it creat
 </details>
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add Customer** | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
-**Add Employee** | `addemployee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
-**Add supplier** | `addsupplier n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/Every Monday`
-**Add reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
-**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
-**Delete Employee** | `deleteemployee INDEX`<br> e.g., `delete 1`
-**Delete Supplier** | `deletesupplier INDEX`<br> e.g., `delete 2`
-**Delete Customer** | `deletecustomer INDEX`<br> e.g., `delete 3`
-**Delete Reservation** | `deleteR INDEx`
-**Edit Employee** | `editemployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
-**Edit Supplier** | `editsupplier INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
-**Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Edit Reservation**| `editR INDEX [r/REMARK] [t/TAG]…`<br> e.g. `editR 2 r/surprise birthday party t/10PercentOff`
-**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
-**Find [COMING SOON]** | `find KEYWORD…`<br> e.g., `find James Jake`
-**List Customers** | `listC`
-**List Employees** | `listE`
-**List Suppliers** | `listS`
-**List Reservations** | `listR`
-**Help** | `help`
