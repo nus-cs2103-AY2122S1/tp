@@ -299,7 +299,7 @@ If your changes to the data file makes its format invalid, ContactSH will discar
 
 ### Reminder for tasks that are due soon: `reminder`
 
-1. Shows the number of days prior to a task's date and time to remind that it is due soon.
+1. Shows a numerical value in days. The value is the number of days prior to a task's date to remind that it is due soon.
 
     Format: `reminder`
 
