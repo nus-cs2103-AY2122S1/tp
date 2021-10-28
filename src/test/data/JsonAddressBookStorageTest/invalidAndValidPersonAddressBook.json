@@ -9,5 +9,8 @@
     "email": "hans@example.com",
     "faculty": "invalid_faculty",
     "major": "computer science"
+  } ],
+  "organisations" : [ {
+
   } ]
 }

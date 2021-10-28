@@ -16,5 +16,8 @@
     "role": "student",
     "faculty": "computing",
     "major": "computer science"
+  } ],
+  "organisations" : [ {
+
   } ]
 }
