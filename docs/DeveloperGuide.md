@@ -139,6 +139,22 @@ The `Model` component,
 
 </div>
 
+#### Student and Group component
+
+<img src="images/StudentGroupClassDiagram.png"/>
+
+The `Student` component,
+
+* stores the student's personal information.
+* stores `Tag` and `RepoName` common to both `Student` and `Group` data types.
+* depends on `groupName` from the `Group` component.
+
+The `Group` component,
+
+* stores group related information.
+* stores `Tag` and `RepoName` common to both `Student` and `Group` data types.
+* has a `Members` subcomponent that stores references to the `Student` component.
+
 
 ### Storage component
 
@@ -161,29 +177,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find Command
-
-The find command can be executed for two main features in tApp: students and groups.
+### Add Member to Group Command
 
 #### Implementation
 
-Given below is an example usage scenario and how the find mechanism behaves at each step.
-In this example, we explore the `findStudent` command.
+<img src="images/AddMemberSequenceDiagram.png"/>
 
-1. The user executes a `findStudent alex ber` command to find students whose names contain the name word `alex` or `ber`.
-1. `LogicManager` handles this command by calling its `execute(String)` method.
-1. `LogicManager` then calls and passes this command to `AddressBookParser` to parse the command through its `parseCommand(String)` method.
-1. The address
+As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
+The main difference between the addMember command lies not in the way the `Logic` class is activated but in the way the `Model` class processes this command.
 
-The above process is shown in the following sequence diagram:
+<img src="images/AddMemberRefSequenceDiagram.png"/>
 
-![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
+The command first gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
+It then calls the `get` command to get a reference of the `Student` to be added using the index supplied by the user.
+The group to be added to is referenced to by its unique name by the user, and the command gets a reference to this `Group` by finding a group with the same name in the list.
 
-ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+`addMembers` then updates the hidden `groupName` field of the `Student` to be added, and adds the said student to the `Group` specified by updating its `Members` class.
+Both the updated `Student` and `Group` are then set in `AddressBook`. 
 
-#### Design Consideration
+Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
+these changes in the `AddressBook`.
+
+#### Design considerations:
+
+* Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
+    * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
+    * Cons: Increases coupling between `Student` and `Group` classes.
+    
+* Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
+  * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
+  * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
+    unnatural modelling of the real world since `Group` contains students and not the other way around.
 
 
+
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

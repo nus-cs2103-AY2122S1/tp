@@ -44,7 +44,7 @@ public class MemberListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new MemberListCard(student).getRoot());
+                setGraphic(new MemberListCard(student, getIndex() + 1).getRoot());
             }
         }
     }

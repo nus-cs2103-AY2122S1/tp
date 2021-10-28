@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
@@ -21,7 +20,6 @@ import seedu.address.model.task.TaskType;
 public class JsonAdaptedTaskTest {
     private static final String INVALID_NAME = "Tutori@l";
     private static final String INVALID_TASK_DATE = "2000 12 12";
-    private static final String INVALID_DESCRIPTION = "!#@*^@$%*@$^%*@";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = TUTORIAL.getName().toString();
@@ -89,15 +87,6 @@ public class JsonAdaptedTaskTest {
                 new JsonAdaptedTask(VALID_NAME, VALID_TASK_DATE, VALID_TAGS, VALID_STATUS, VALID_TASK_TYPE,
                         null, VALID_DESCRIPTION);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Task.Priority.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidDescription_throwsIllegalValueException() {
-        JsonAdaptedTask task =
-                new JsonAdaptedTask(VALID_NAME, INVALID_TASK_DATE, VALID_TAGS, VALID_STATUS, VALID_TASK_TYPE,
-                        VALID_PRIORITY, INVALID_DESCRIPTION);
-        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 

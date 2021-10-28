@@ -23,7 +23,7 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteStudentCommand}.
  */
-public class DeleteStudentGroupCommandTest {
+public class DeleteMemberCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
@@ -31,10 +31,10 @@ public class DeleteStudentGroupCommandTest {
     @Test
     public void execute_invalidGroupIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGroupList().size() + 1);
-        DeleteStudentGroupCommand deleteStudentGroupCommand = new DeleteStudentGroupCommand(outOfBoundIndex,
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(outOfBoundIndex,
                 INDEX_FIRST_STUDENT);
 
-        assertCommandFailure(deleteStudentGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        assertCommandFailure(deleteMemberCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
 
     // Pass
@@ -42,19 +42,19 @@ public class DeleteStudentGroupCommandTest {
     public void execute_invalidMemberIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGroupList()
                 .get(INDEX_THIRD_GROUP.getZeroBased()).getMembersList().size() + 1);
-        DeleteStudentGroupCommand deleteStudentGroupCommand = new DeleteStudentGroupCommand(INDEX_THIRD_GROUP,
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_THIRD_GROUP,
                 outOfBoundIndex);
 
-        assertCommandFailure(deleteStudentGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_MEMBER_REMOVAL_INDEX);
+        assertCommandFailure(deleteMemberCommand, model, Messages.MESSAGE_INVALID_GROUP_MEMBER_REMOVAL_INDEX);
     }
 
     @Test
     public void execute_invalidGroupAndMemberIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGroupList().size() + 1);
-        DeleteStudentGroupCommand deleteStudentGroupCommand = new DeleteStudentGroupCommand(outOfBoundIndex,
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(outOfBoundIndex,
                 outOfBoundIndex);
 
-        assertCommandFailure(deleteStudentGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        assertCommandFailure(deleteMemberCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
 
     // Pass
@@ -66,10 +66,10 @@ public class DeleteStudentGroupCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getGroupList().size());
 
-        DeleteStudentGroupCommand deleteStudentGroupCommand = new DeleteStudentGroupCommand(outOfBoundIndex,
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(outOfBoundIndex,
                 outOfBoundIndex);
 
-        assertCommandFailure(deleteStudentGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        assertCommandFailure(deleteMemberCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
 
 
@@ -77,27 +77,27 @@ public class DeleteStudentGroupCommandTest {
     // Pass
     @Test
     public void equals() {
-        DeleteStudentGroupCommand deleteStudentGroupCommand = new DeleteStudentGroupCommand(INDEX_FIRST_GROUP,
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_GROUP,
                 INDEX_FIRST_STUDENT);
-        DeleteStudentGroupCommand addSecondCommand = new DeleteStudentGroupCommand(INDEX_SECOND_GROUP,
+        DeleteMemberCommand addSecondCommand = new DeleteMemberCommand(INDEX_SECOND_GROUP,
                 INDEX_SECOND_STUDENT);
 
         // same object -> returns true
-        assertTrue(deleteStudentGroupCommand.equals(deleteStudentGroupCommand));
+        assertTrue(deleteMemberCommand.equals(deleteMemberCommand));
 
         // same values -> returns true
-        DeleteStudentGroupCommand addFirstCommandCopy = new DeleteStudentGroupCommand(INDEX_FIRST_GROUP,
+        DeleteMemberCommand addFirstCommandCopy = new DeleteMemberCommand(INDEX_FIRST_GROUP,
                 INDEX_FIRST_STUDENT);
-        assertTrue(deleteStudentGroupCommand.equals(addFirstCommandCopy));
+        assertTrue(deleteMemberCommand.equals(addFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteStudentGroupCommand.equals(1));
+        assertFalse(deleteMemberCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteStudentGroupCommand.equals(null));
+        assertFalse(deleteMemberCommand.equals(null));
 
         // different group -> returns false
-        assertFalse(deleteStudentGroupCommand.equals(addSecondCommand));
+        assertFalse(deleteMemberCommand.equals(addSecondCommand));
     }
 
     /**
