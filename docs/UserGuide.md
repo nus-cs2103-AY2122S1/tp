@@ -98,7 +98,7 @@ Format: `help`
 
 ### Listing all students : `list`
 
-Shows a list of all students in the address book.
+Displays a list of all students in the student list.
 
 Format: `list`
 
@@ -112,7 +112,7 @@ Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t 
 * Adds a new student into the database with the given name and NUSNET ID.
 * Adds the student into the specified groups if applicable. If group does not already exist, a new group would be created. 
 * Adds tags to the student if applicable.
-* NUSNET ID input cannot already exist in address book. 
+* NUSNET ID input cannot already exist in student list. 
 
 Examples:
 * `add student -n Jonas Chow -i E0123456` adds the student Jonas Chow with the given NUSNET ID. 
@@ -213,7 +213,7 @@ Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> |
 
 Examples:
 * `show -n Alex Yeoh` displays line chart of Alex Yeoh's performance in his assessments. 
-* `show 2 -f /home/prof/CS1101S/` exports the line chart produced of the 2nd student in the address book. 
+* `show 2 -f chartImage` shows and exports the line chart (produced of the 2nd student in the student list) into a file `chartImage.png`.
 * `show -g T02A` displays line chart of group T02A's performance in their assessments. 
 * `show -a P01` displays bar chart of the distribution of scores in assessment P01. 
 
@@ -237,7 +237,7 @@ Examples:
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified student from the student list.
 
 Format: `delete <index>`
 
@@ -246,7 +246,7 @@ Format: `delete <index>`
 * The `<index>` **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `list` followed by `delete 2` deletes the 2nd student in the student list.
 * `search -n Alex` followed by `delete 1` deletes the 1st student in the results of the `search` command.
 
 
@@ -285,7 +285,7 @@ Examples:
 
 //TODO: add more instructions on how command works
 
-Exports data in the address book to (... what file_location).
+Exports data in the student list to (... what file_location).
 
 Format: `export`
 
