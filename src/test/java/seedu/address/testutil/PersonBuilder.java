@@ -108,6 +108,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code ids} into a {@code Set<UniqueId>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAssignedGroupIds(String ... assignedGroupIds) {
+        this.assignedGroupIds = SampleDataUtil.getUniqueIdSet(assignedGroupIds);
+        return this;
+    }
+
+    /**
      * Copies the task completion map into {@code tasksCompletion} of the {@code Person} that we are building.
      */
     public PersonBuilder withTasksCompletion(Map<UniqueId, Boolean> tasksCompletion) {

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -22,18 +23,22 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Groups list contains duplicate group(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
+    private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and tasks.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+                                       @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
+                                       @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         this.persons.addAll(persons);
         this.tasks.addAll(tasks);
+        this.groups.addAll(groups);
     }
 
     /**
@@ -44,6 +49,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
+        groups.addAll(source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
     /**
@@ -66,6 +72,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
             addressBook.addTask(task);
+        }
+        for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
+            Group group = jsonAdaptedGroup.toModelType();
+            if (addressBook.hasGroup(group)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
+            }
+            addressBook.addGroup(group);
         }
         return addressBook;
     }
