@@ -28,6 +28,12 @@ public class TaskCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Text taskName;
+    @FXML
+    private Label taskDate;
+    @FXML
+    private Label taskTime;
+    @FXML
+    private Label taskVenue;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -36,6 +42,8 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         this.displayedIndex = displayedIndex;
+        taskDate.setText(task.getDate() == null ? "" : task.getDate().taskDate.toString());
+
     }
 
     /**
