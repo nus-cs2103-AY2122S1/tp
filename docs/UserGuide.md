@@ -97,18 +97,37 @@ Examples:
 * `addemployee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Developer t/workaholic` adds an employee with the respective fields.
 * `addemployee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Developer` adds an employee without any optional fields.
 
-### Adding a supplier: `addSupplier`
+### Adding a supplier: `addS`
 
 Adds a supplier to RHRH.
 
-Format: `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]`
+Format: `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]`
 
 * Adds a supplier with all specified fields, where `SUPPLYTYPE` and `DELIVERYDETAILS` are fields specific to suppliers
 * `TAG` is an optional field that can be omitted.
 
 Examples:
-* `addSupplier n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/Every Monday t/punctual` adds a supplier with the respective fields.
-* `addSupplier n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/Every Monday` adds a supplier without any optional fields.
+* `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/2021-11-19 15:00 t/Regular` 
+  adds a supplier with the respective fields.
+* `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/08:00 24-12-2021` adds a 
+  supplier without any optional fields.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* Order of the `date` and `time` in `DeliveryDetails` does not matter but `time` has to be in `24 hour` 
+  format.
+
+The following table shows the acceptable formats and relevant examples for `DeliveryDetails`:
+
+| Acceptable Formats | Examples |
+| ----------- | ----------- |
+| `yyyy-MM-dd HH:mm` | `2021-09-19 13:00` |
+| `dd-MM-yyyy HH:mm` | `19-09-2021 13:00` |
+| `HH:mm yyyy-MM-dd` | `14:00 2021-11-10` |
+| `HH:mm dd-MM-yyyy` | `14:00 10-11-2021` |
+
+</div>
 
 ### Editing a person : `edit`
 
@@ -161,22 +180,28 @@ Examples:
 *  `editemployee 1 sal/4000` Edits the salary of the 1st employee to be `4000`.
 *  `editemployee 2 n/Betsy Crower t/` Edits the name of the 2nd employeee to be `Betsy Crower` and clears all existing tags.
 
-### Editing a supplier : `editSupplier`
+### Editing a supplier : `editS`
 
 Edits an existing supplier in RHRH.
 
-Format: `editSupplier INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`
+Format: `editS INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`
 
-* Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list.
+
+Examples:
+* `editS 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.
+* `editS 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
-* You can remove all the supplier’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the supplier’s tags by typing `t/` without specifying any tags after it.
 
-Examples:
-*  `editSupplier 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.
-*  `editSupplier 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
+</div>
 
 ### Deleting a person : `delete`
 
@@ -222,16 +247,16 @@ Examples:
 
 Deletes the specified supplier from RHRH.
 
-Format: `deleteSupplier INDEX`
+Format: `deleteS INDEX`
 
 * Deletes the supplier at the specified `INDEX`.
 * The index refers to the index number shown in the displayed supplier list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deleteSupplier 2` deletes the 2nd supplier in the address book.
+* `deleteS 2` deletes the 2nd supplier in the address book.
 
-### Search for reservation's made: `check`
+### Searching for reservation's made: `check`
 
 Displays the reservations made at the specified date and/or time
 
@@ -254,7 +279,71 @@ Examples:
 
 </div>
 
-### Set the tables for the restaurant: `settables`
+### Finding Suppliers based on keywords: `findS`
+
+Find suppliers that have fields that contain all specified keywords cumulatively.
+
+Format: 
+* `findS KEYWORD [MORE_KEYWORDS...]`: Displays all suppliers that contain all specified keywords
+
+Examples:
+* `findS Oct AM`: Finds suppliers that have both keywords `Oct` and `AM` in their fields
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* At least one `KEYWORD` must be provided
+* The search is case-insensitive. e.g `oct` will match `OCT`
+* Partial words can be matched. e.g `oct` will match `October`
+* Only suppliers that contain **all** provided keywords will be displayed.
+
+</div>
+
+### Displaying a sorted list of suppliers: `sortS`
+Sorts and displays the list of suppliers based on a given field in either ascending or descending order.
+
+Format:
+* `sortS by/PREFIX OF SUPPLIER FIELD o/ORDER OF SORT`: Sorts and displays the list of suppliers based on the sort type 
+  and order.
+
+Examples:
+* `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERYDETAILS` in `ascending` order
+* `sorts by/N o/d`: Sorts the list of suppliers by `NAME` in `descending` order
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The prefixes used for the parameter `PREFIX OF SORT KEY` is the same as that when adding or deleting a supplier.
+  * For example `n` for name and `dd` for delivery details
+* The only acceptable inputs for the `ORDER OF SORT` parameter are `a` for `ascending` and `d` for `descending`.
+
+</div>
+
+
+### Resetting a sorted supplier list: `resetS`
+
+Resets the sorting of the supplier list to its default state (sorted by name)
+
+Format:
+* `resetS`
+
+### Listing all suppliers: `listS`
+
+Shows a list of all suppliers in RHRH.
+
+Format: `listS`
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* RHRH will switch to the supplier list and list all suppliers no matter which list you are current viewing
+* You can also switch to the supplier list manually by clicking the `View` tab in the menu bar and selecting 
+  `Suppliers`
+
+</div>
+
+
+### Setting the tables for the restaurant: `settables`
 
 <div markdown="block" class="alert alert-danger">
 :bangbang: **Warning!**<br>
@@ -279,7 +368,7 @@ Examples:
 
 </div>
 
-### Create a reservation: `addr`
+### Adding a reservation: `addr`
 
 Add a new reservation with number of people, 
 customer's phone number and the date & time.
@@ -302,33 +391,6 @@ Examples:
 * Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
-
----
-
-## These features will be coming soon!
-
-### Listing all persons : `list`
-
-Shows a list of all persons in RHRH.
-
-Format: `list`
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Clearing all entries : `clear`
 
@@ -353,6 +415,10 @@ RHRH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, RHRH will discard all data and start with an empty data file at the next run.
 </div>
+
+---
+
+## These features will be coming soon!
 
 ### Archiving data files `[coming in v2.0]`
 
