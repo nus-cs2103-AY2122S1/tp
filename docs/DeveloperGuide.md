@@ -168,10 +168,9 @@ appointment either `High`, `Medium` or `Low` urgency.
 ### AddApp feature
 
 #### Implementation
-
 The feature allows users to create an appointment with any number of clients (`Person`), 
 along with a location (`Address`), a time period (`timePeriod`) and a description (`String`).
-The addApp mechanism is facilitated by `Schedule`. 
+The addApp mechanism is facilitated by `Schedule`.
 
 `Schedule` contains an Observable List of `Appointment` that we can add appointments to. These appointments will be
 generated from the inputs entered by the user using the `AddAppCommand`
