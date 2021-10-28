@@ -11,8 +11,6 @@ import seedu.address.model.task.Task;
  */
 public class TaskCard extends UiPart<Region> {
 
-    private static String FXML = "TaskCardDefault.fxml";
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
