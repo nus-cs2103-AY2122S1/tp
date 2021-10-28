@@ -28,6 +28,7 @@ import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
 import seedu.address.logic.commands.task.TdoneCommand;
 import seedu.address.logic.commands.task.TeditCommand;
+import seedu.address.logic.commands.task.TfindCommand;
 import seedu.address.logic.commands.task.TlistCommand;
 import seedu.address.logic.commands.task.TundoneCommand;
 import seedu.address.logic.parser.event.EaddCommandParser;
@@ -49,6 +50,7 @@ import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.logic.parser.task.TdelCommandParser;
 import seedu.address.logic.parser.task.TdoneCommandParser;
 import seedu.address.logic.parser.task.TeditCommandParser;
+import seedu.address.logic.parser.task.TfindCommandParser;
 import seedu.address.logic.parser.task.TlistCommandParser;
 import seedu.address.logic.parser.task.TundoneCommandParser;
 
@@ -138,6 +140,9 @@ public class AddressBookParser {
 
         case TlistCommand.COMMAND_WORD:
             return new TlistCommandParser().parse(arguments);
+
+        case TfindCommand.COMMAND_WORD:
+            return new TfindCommandParser().parse(arguments);
 
         case TeditCommand.COMMAND_WORD:
             return new TeditCommandParser().parse(arguments);

@@ -50,6 +50,7 @@ public class TaddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         ObservableList<Member> members = model.getFilteredMemberList();
         for (Index targetMemberId: targetMemberIdList) {
             Member targetMember = members.get(targetMemberId.getZeroBased());
