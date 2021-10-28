@@ -1,4 +1,5 @@
 package seedu.notor.ui;
+import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,7 +11,7 @@ import javafx.scene.text.TextAlignment;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.SuperGroup;
 
-import java.util.Comparator;
+
 
 /**
  * An UI component that displays information of a {@code SuperGroup}.

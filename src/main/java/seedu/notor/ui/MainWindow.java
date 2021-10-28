@@ -21,7 +21,7 @@ import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
-import seedu.notor.ui.ListPanel.PersonListPanel;
+import seedu.notor.ui.listpanel.PersonListPanel;
 import seedu.notor.ui.note.GeneralNoteWindow;
 import seedu.notor.ui.note.GroupNoteWindow;
 import seedu.notor.ui.note.NoteWindow;

@@ -1,4 +1,6 @@
-package seedu.notor.ui.ListPanel;
+package seedu.notor.ui.listpanel;
+
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,8 +11,6 @@ import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.ui.SubgroupCard;
 import seedu.notor.ui.UiPart;
-
-import java.util.logging.Logger;
 
 /**
  * Panel containing the list of groups.

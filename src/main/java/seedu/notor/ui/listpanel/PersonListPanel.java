@@ -1,4 +1,4 @@
-package seedu.notor.ui.ListPanel;
+package seedu.notor.ui.listpanel;
 
 import java.util.logging.Logger;
 

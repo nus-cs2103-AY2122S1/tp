@@ -1,11 +1,10 @@
 package seedu.notor.logic.commands.group;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.model.Model;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Lists all supergroups in Notor to the user.
@@ -20,7 +19,7 @@ public class SuperGroupListCommand implements Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredGroupList();
+        //        model.updateFilteredGroupList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
