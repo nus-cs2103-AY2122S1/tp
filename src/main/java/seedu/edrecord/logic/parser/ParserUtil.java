@@ -142,10 +142,6 @@ public class ParserUtil {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
 
-        if (Module.MODULE_SYSTEM.hasModule(trimmedModuleCode)) {
-            throw new ParseException(Module.MESSAGE_DUPLICATE);
-        }
-
         return new Module(trimmedModuleCode);
     }
 
