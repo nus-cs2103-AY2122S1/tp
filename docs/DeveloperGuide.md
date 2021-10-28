@@ -424,6 +424,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Extensions**
+
+- 1a. The given status is invalid
+
+    - 1a1. AniList shows an error message
+
+      Use case resumes at step 1
+
 **Use case: UC04 - Clear all anime from the current tab**
 
 **MSS**
@@ -437,11 +445,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 3a. User aborts command.
+- 3a. User aborts command
 
-    - 1a1. AniList shows an abort message.
+    - 3a1. AniList shows an abort message
 
-      Use case ends.
+      Use case ends
 
 **Use case: UC05 - Add an anime**
 
@@ -450,95 +458,151 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to add an anime to the list
 2.  AniList adds the anime
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
-- 1a. The anime name is a duplicate.
+- 1a. The anime name is a duplicate
 
-    - 1a1. AniList shows an error message.
+    - 1a1. AniList shows an error message
 
-      Use case resumes at step 1.
+      Use case resumes at step 1
+
+- 1b. The given episode is invalid
+
+    - 1b1. AniList shows an error message
+
+      Use case resumes at step 1
+
+- 1c. The given status is invalid
+
+    - 1c1. AniList shows an error message
+
+      Use case resumes at step 1
+
+- 1d. The given genre is invalid
+
+    - 1d1. AniList shows an error message
+
+      Use case resumes at step 1
+
+- 1e. The given name is invalid
+
+    * 1e1. AniList shows an error message
+
+      Use case resumes at step 1
 
 **Use case: UC06 - Delete an anime**
 
 **MSS**
 
-1.  User requests to list anime
-2.  AniList shows a list of anime
-3.  User requests to delete a specific anime in the list
-4.  AniList deletes the anime
+1.  <ins>User lists all anime(UC02)</ins>
+2.  User requests to delete a specific anime in the list
+3.  AniList deletes the anime
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty
 
-  Use case ends.
+  Use case ends
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid
 
-    * 3a1. AniList shows an error message.
+    * 2a1. AniList shows an error message
 
-      Use case resumes at step 2.
+      Use case resumes at step 2
 
 **Use case: UC07 - Update the episode of an anime**
 
 **MSS**
 
-1.  User requests to list anime
-2.  AniList shows a list of anime
-3.  User requests to update the episode number of a specific anime
-4.  AniList updates the episode number of the anime
+1.  <ins>User lists all anime(UC02)</ins>
+2.  User requests to update the episode number of a specific anime
+3.  AniList updates the episode number of the anime
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 1a. The list is empty
 
-    * 3a1. AniList shows an error message.
+  Use case ends
 
-      Use case resumes at step 2.
+* 2a. The given index is invalid
+
+    * 2a1. AniList shows an error message
+
+      Use case resumes at step 2
+
+* 2b. The given episode is invalid
+
+    * 2b1. AniList shows an error message
+
+      Use case resumes at step 2
 
 **Use case: UC08 - Update the status of an anime**
 
 **MSS**
 
-1.  User requests to list anime
-2.  AniList shows a list of anime
-3.  User requests to update the status of a specific anime
-4.  AniList updates the status of the anime
+1.  <ins>User lists all anime(UC02)</ins>
+2.  User requests to update the status of a specific anime
+3.  AniList updates the status of the anime
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 1a. The list is empty
 
-    * 3a1. AniList shows an error message.
+  Use case ends
 
-      Use case resumes at step 2.
+* 2a. The given index is invalid
+
+    * 2a1. AniList shows an error message
+
+      Use case resumes at step 2
+
+* 2b. The given status is invalid
+
+    * 2b1. AniList shows an error message
+
+      Use case resumes at step 2
 
 **Use case: UC09 - Update the name of an anime**
 
 **MSS**
 
-1.  User requests to list anime
-2.  AniList shows a list of anime
-3.  User requests to update the status of a specific anime
-4.  AniList updates the status of the anime
+1.  <ins>User lists all anime(UC02)</ins>
+2.  User requests to update the name of a specific anime
+3.  AniList updates the name of the anime
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 1a. The list is empty
 
-    * 3a1. AniList shows an error message.
+  Use case ends
 
-      Use case resumes at step 2.
+* 2a. The given index is invalid
+
+    * 2a1. AniList shows an error message
+
+      Use case resumes at step 2
+
+* 2b. The anime name is a duplicate
+
+    * 2b1. AniList shows an error message
+
+      Use case resumes at step 2
+
+* 2c. The given name is invalid
+
+    * 2c1. AniList shows an error message
+
+      Use case resumes at step 2
 
 **Use case: UC10 - List all genres**
 
@@ -552,56 +616,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC11 - Add genre to an anime**
 
 **MSS**
-1.  <ins>User lists all anime(UC01)</ins>
-2.  User decides which `Anime` to add a `Genre`
-3.  User requests a list of all previously added `Genre`
-4.  System displays a list of all previously added `Genre`
-5.  User chooses a `Genre` to tag the `Anime` with
-6.  User requests to tag an `Anime` with a `Genre`
-7.  System tags the Anime with the specified `Genre`
+1. <ins>User lists all anime(UC02)</ins>
+2. User decides which `Anime` to add a `Genre`
+3. <ins>User lists all genres(UC10)</ins>
+4. User chooses a `Genre` to tag the `Anime` with
+5. User requests to tag an `Anime` with a `Genre`
+6. System tags the Anime with the specified `Genre`
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
+
+* 1a. The list is empty
+
+  Use case ends
+
+* 5a. The given index is invalid
+
+    * 5a1. AniList shows an error message
+
+      Use case resumes at step 5
+
+* 5b. The given genre is invalid
+
+    * 5b1. AniList shows an error message
+
+      Use case resumes at step 5
+
+* 5c. The given genre is a duplicate
+
+    * 5c1. AniList shows an error message
+
+      Use case resumes at step 5
 
 **Use case: UC12 - Delete genre from an anime**
 
 **MSS**
-1.  <ins>User lists all anime(UC01)</ins>
-2.  User decides which `Anime` to add a `Genre`
-3.  User requests a list of all previously added `Genre`
-4.  System displays a list of all previously added `Genre`
-5.  User chooses a `Genre` to tag the `Anime` with
-6.  User requests to tag an `Anime` with a `Genre`
-7.  System tags the Anime with the specified `Genre`
+1. <ins>User lists all anime(UC02)</ins>
+2. User decides which `Anime` to delete a `Genre` from
+3. User chooses a `Genre` to delete
+4. User requests to delete the `Genre` from the `Anime`
+5. System deletes the specified `Genre` from the `Anime`
 
-    Use case ends.
+    Use case ends
 
 **Extensions**
 
+* 1a. The list is empty
+
+  Use case ends
+
+* 4a. The given index is invalid
+
+    * 4a1. AniList shows an error message
+
+      Use case resumes at step 4
+
+* 4b. The given genre is invalid
+
+    * 4b1. AniList shows an error message
+
+      Use case resumes at step 4
+
+* 4c. The given genre is not in the anime
+
+    * 4c1. AniList shows an error message
+
+      Use case resumes at step 4
 
 **Use case: UC13 - Find anime by name and genre**
 
 1. User requests to find anime based on some name and genre
 2. AniList shows a list of anime filtered based on these criteria and the current
-   tab.
+   tab
 
-   Use case ends.
+   Use case ends
 
 **Extensions**
 
-* 1a. The given request is invalid.
+* 1a. The given genre is invalid
 
-    * 1a1. AniList shows an error message.
+    * 1a1. AniList shows an error message
 
-      Use case ends.
+      Use case resumes at step 1
+
+* 1b. The given name is invalid
+
+    * 1b1. AniList shows an error message
+
+      Use case resumes at step 1
 
 **Use case: UC14 - View user statistics**
 
-1. User changes the anime theme based on the menu bar theme options
-2. AniList applies the required css file based on the theme selected
+1. User requests to view statistics
+2. AniList shows user statistics on another window
 
-   Use case ends.
+   Use case ends
 
 
 **Use case: UC15 - Change application theme**
@@ -609,7 +719,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User changes the anime theme based on the menu bar theme options
 2. AniList applies the required css file based on the theme selected
 
-   Use case ends.
+   Use case ends
 
 *{More to be added}*
 
