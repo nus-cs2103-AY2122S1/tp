@@ -16,6 +16,7 @@ import seedu.notor.logic.commands.NoteCommand;
 import seedu.notor.logic.commands.group.GroupClearNoteCommand;
 import seedu.notor.logic.commands.group.GroupCommand;
 import seedu.notor.logic.commands.group.GroupDeleteCommand;
+import seedu.notor.logic.commands.group.GroupFindCommand;
 import seedu.notor.logic.commands.group.GroupNoteCommand;
 import seedu.notor.logic.commands.group.SubGroupCreateCommand;
 import seedu.notor.logic.commands.group.SubGroupListCommand;
@@ -37,6 +38,7 @@ import seedu.notor.logic.commands.person.PersonUntagCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.logic.parser.group.GroupClearNoteCommandParser;
 import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
+import seedu.notor.logic.parser.group.GroupFindCommandParser;
 import seedu.notor.logic.parser.group.GroupNoteCommandParser;
 import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SubGroupListCommandParser;
@@ -188,14 +190,15 @@ public class NotorParser {
             if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
                 if (PersonListCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonListCommandParser(arguments).parse();
-                }
-                if (PersonFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                } else if (PersonFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonFindCommandParser(arguments).parse();
                 }
             }
             if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
                 if (SuperGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new SuperGroupListCommandParser(arguments).parse();
+                } else if (GroupFindCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new GroupFindCommandParser(arguments).parse();
                 }
             }
         }
