@@ -174,6 +174,36 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_nameAlreadyExists_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId("173927")
+                .withCount(VALID_COUNT_BAGEL).withCostPrice(VALID_COSTPRICE_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL).build();
+
+        AddCommand addCommand = new AddCommand(bagelDescriptor);
+        String expectedMessage = AddCommand.MESSAGE_NAME_EXISTS;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
+    public void execute_idAlreadyExists_throwsCommandException() {
+        model.addItem(BAGEL);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId("182018").withCount(VALID_COUNT_BAGEL).build();
+
+        AddCommand addCommand = new AddCommand(bagelDescriptor);
+        String expectedMessage = AddCommand.MESSAGE_ID_NOT_FOUND;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+
+        assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
     public void execute_multipleMatches_failure() {
         model.addItem(BAGEL);
         model.addItem(DONUT);

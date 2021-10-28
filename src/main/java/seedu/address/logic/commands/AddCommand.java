@@ -48,6 +48,8 @@ public class AddCommand extends Command {
             + " please provide name, id, cost price, and sales price";
     public static final String MESSAGE_ID_NOT_FOUND = "Name provided exists but id provided is nonexistent";
     public static final String MESSAGE_NAME_NOT_FOUND = "Id provided exists but name provided is nonexistent";
+    public static final String MESSAGE_ID_EXISTS = "Id provided already used for another item";
+    public static final String MESSAGE_NAME_EXISTS = "Name provided already used for another item";
     public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple candidates found, which one did you mean to add?";
 
     private final ItemDescriptor toAddDescriptor;
@@ -80,18 +82,36 @@ public class AddCommand extends Command {
             model.addItem(newItem);
             return new CommandResult(String.format(MESSAGE_SUCCESS_NEW, newItem));
         }
-        //check that id and name given matches
+        // Check that id and name of the replenished item does not exist
         if (!toAddDescriptor.getName().equals(Optional.empty())
-                && !toAddDescriptor.getId().equals(Optional.empty())) {
+                && !toAddDescriptor.getId().equals(Optional.empty())
+                && toAddDescriptor.getCostPrice().equals(Optional.empty())
+                && toAddDescriptor.getSalesPrice().equals(Optional.empty())) {
             toAddDescriptor.setCostPrice(1.0);
             toAddDescriptor.setSalesPrice(1.0);
-            //check that id exists
+            //check that id does not exist
             if (!model.hasId(toAddDescriptor.buildItem())) {
                 throw new CommandException(MESSAGE_ID_NOT_FOUND);
             }
-            //check that name exists
+            //check that name does not exist
             if (!model.hasName(toAddDescriptor.buildItem())) {
                 throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            }
+        }
+        // Check that id and name of new item does not exist
+        if (!toAddDescriptor.getName().equals(Optional.empty())
+                && !toAddDescriptor.getId().equals(Optional.empty())
+                && !toAddDescriptor.getCostPrice().equals(Optional.empty())
+                && !toAddDescriptor.getSalesPrice().equals(Optional.empty())) {
+            toAddDescriptor.setCostPrice(1.0);
+            toAddDescriptor.setSalesPrice(1.0);
+            //check that id exists
+            if (model.hasId(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_ID_EXISTS);
+            }
+            //check that name exists
+            if (model.hasName(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_NAME_EXISTS);
             }
         }
 
