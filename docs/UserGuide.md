@@ -433,6 +433,11 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 ## FAQ `[coming soon]`
 
+### Double clicking isn't opening the app! What can I do?
+Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
+
+Run the JAR file by using the command `java -jar sourceControl.jar`.
+
 [Return to table of contents](#table-of-contents)
 
 <br>
