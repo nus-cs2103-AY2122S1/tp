@@ -18,6 +18,9 @@ public class TagContainsKeywordsPredicate implements Predicate<Item> {
     @Override
     public boolean test(Item item) {
         int lengthOfItemTag = item.getTags().toString().length();
+        if (item.getTags().isEmpty()) {
+            return false;
+        }
         String itemTag = item.getTags().toString().substring(2, lengthOfItemTag - 2);
         boolean multipleWord = keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsMultipleWord(itemTag, keyword));
