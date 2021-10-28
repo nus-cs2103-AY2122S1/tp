@@ -344,8 +344,21 @@ Given below is an example usage scenario:
 - Implementing a class of `SortComparator`:
 
     Creating a class of `SortComparator` makes the `SortCommand` more extensible in the future if developers would like to sort the list of persons by other attributes.
-    
 
+### Summary command
+
+#### Implementation details
+
+The summary command displays the statistics of overdue visits, upcoming visits and recent last visits.
+
+It makes use of polymorphism and is similar in implementation to other commands in SeniorLove:
+- `SummaryCommand` extends `Command`
+
+Given below is an example usage scenario:
+1. User inputs the summary command.
+2. The `SummaryCommand#execute(Model model)` method is called.
+3. Statistics of the relevant visits and last visits are calculated and returned on the main panel.
+4. `CommandResult` object is instantiated and returned to `LogicManager`.
 
 ### \[Proposed\] Undo/redo feature
 
