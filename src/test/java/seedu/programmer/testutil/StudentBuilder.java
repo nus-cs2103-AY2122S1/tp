@@ -98,7 +98,7 @@ public class StudentBuilder {
         return new Student(name, studentId, classId, email, labResultList);
     }
 
-    public Student build_noLab() {
+    public Student buildNoLab() {
         return new Student(name, studentId, classId, email);
     }
 
