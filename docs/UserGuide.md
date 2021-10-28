@@ -90,6 +90,7 @@ Unique terms specific to *ComputingConnection*
 Term            | Meaning
 ----------------|-----------------
 Contact         | Represents a person in ComputingConnection
+Organisation    | Represents an organisation in ComputingConnection
 Data field      | Categorised data that you can assign to a contact <br/> See [Structure of a contact](#structure-of-a-contact) for the full list of data fields
 Item            | An element of a specific data field
 
@@ -114,6 +115,15 @@ Skill | 6. `l/`: Programming Language  | Alphanumeric    | Optional
 Skill | 7. `fr/`: Framework  | Alphanumeric    | Optional 
 Miscellaneous | 8. `r/`: Remark  | Alphanumeric    | Optional 
 Miscellaneous | 9. `int/`: Interaction  | Alphanumeric, Date    | Optional 
+
+### Structure of an Organisation
+Understanding the structure of a **organisation** in *ComputingConnection* is also important in enabling you to be more productive and keep contacts together in the one organisation.
+
+Category        | Specific fields | Valid entires | Description
+----------------|-----------------|-----------------|-----------------
+Organisational data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
+
+
 
 <div markdown="block" class="alert alert-info">
 :information_source: Compulsory vs Optional data fields
@@ -185,12 +195,11 @@ Format: `sort`
 </div>
 
 ##### Filtering contacts : `filter`
-Filters the contacts by tags.
+Filters the contacts by data fields of the person including faculty, major, skill, framework, language and tag.
 
-Format: `filter f/FACULTY [t/TAG]`
+Format: `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
 
-* Filters a contact according to a tag
-  Examples:
+Examples:
 * `filter f/computing` returns all users who have been assigned the f/computing tag.
 * `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
   ![result for 'filter f/computing'](images/filterscreenshot.png)
