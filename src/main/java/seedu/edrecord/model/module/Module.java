@@ -48,7 +48,7 @@ public class Module {
     /**
      * Constructs a {@code Module} with a Group in it's Group System.
      *
-     * @param code A valid module code.
+     * @param moduleCode A valid module code.
      */
     public Module(String moduleCode, String groupCode) {
         requireNonNull(moduleCode, groupCode);
@@ -143,6 +143,15 @@ public class Module {
      */
     public void addAssignment(Assignment a) {
         assignmentList.add(a);
+    }
+
+    /**
+     * Replaces the given Assignment {@code target} in the list with {@code editedAssignment}.
+     * {@code target} must exist in EdRecord under this module.
+     * The identity of {@code editedAssignment} must not be the same as any existing assignment under the same module.
+     */
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        assignmentList.setAssignment(target, editedAssignment);
     }
 
     @Override

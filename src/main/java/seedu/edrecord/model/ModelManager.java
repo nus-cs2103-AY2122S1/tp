@@ -247,6 +247,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        requireAllNonNull(target, editedAssignment);
+
+        selectedModule.setAssignment(target, editedAssignment);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

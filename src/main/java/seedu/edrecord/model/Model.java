@@ -164,6 +164,13 @@ public interface Model {
     void addAssignment(Assignment assignment);
 
     /**
+     * Replaces the given assignment {@code target} with {@code editedAssignment}.
+     * {@code target} must exist under the currently selected module in EdRecord.
+     * The identity of {@code editedAssignment} must not be the same as another existing assignment.
+     */
+    void setAssignment(Assignment target, Assignment editedAssignment);
+
+    /**
      * Updates the search filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
