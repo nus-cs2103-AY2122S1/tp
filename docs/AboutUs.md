@@ -11,7 +11,7 @@ You can reach us at the email `shermannws@u.nus.edu`
 
 ### Allard Quek
 
-<img src="images/team/allardquek.png" width="200px">
+<img src="images/allardquek.png" width="200px">
 
 [[homepage](https://allardquek.tech)]
 [[github](https://github.com/AllardQuek)]
@@ -21,7 +21,7 @@ You can reach us at the email `shermannws@u.nus.edu`
 
 ### Erwin Quek
 
-<img src="images/team/erwinqxy.png" width="200px">
+<img src="images/erwinqxy.png" width="200px">
 
 [[github](http://github.com/erwinqxy)]
 [[portfolio](team/erwinquek.md)]
@@ -31,7 +31,7 @@ You can reach us at the email `shermannws@u.nus.edu`
 
 ### Samay Sagar
 
-<img src="images/team/reddevil1313.png" width="200px">
+<img src="images/reddevil1313.png" width="200px">
 
 [[github](http://github.com/reddevil1313)] [[portfolio](team/reddevil1313.md)]
 
@@ -40,7 +40,7 @@ You can reach us at the email `shermannws@u.nus.edu`
 
 ### Sherman Ng Wei Sheng
 
-<img src="images/team/shermannws.png" width="200px">
+<img src="images/shermannws.png" width="200px">
 
 [[github](http://github.com/shermannws)]
 [[portfolio](team/shermannws.md)]
@@ -50,7 +50,7 @@ You can reach us at the email `shermannws@u.nus.edu`
 
 ### Zhao Peiduo
 
-<img src="images/team/zhaopeiduo.png" width="200px">
+<img src="images/zhaopeiduo.png" width="200px">
 
 [[github](https://github.com/ZhaoPeiduo)]
 [[portfolio](team/zhaopeiduo.md)]
