@@ -74,7 +74,7 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DESCRIPTION_DESC_BOB,
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DESCRIPTION_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -83,7 +83,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + DESCRIPTION_DESC_AMY,
+                + DESCRIPTION_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
@@ -93,27 +93,27 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + DESCRIPTION_DESC_BOB,
+                + DESCRIPTION_DESC_BOB,
                 expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + DESCRIPTION_DESC_BOB,
+                + DESCRIPTION_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                        + DESCRIPTION_DESC_BOB,
+                + DESCRIPTION_DESC_BOB,
                 expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                        + DESCRIPTION_DESC_BOB,
+                + DESCRIPTION_DESC_BOB,
                 expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                        + VALID_DESCRIPTION_BOB,
+                + VALID_DESCRIPTION_BOB,
                 expectedMessage);
     }
 
@@ -145,7 +145,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
