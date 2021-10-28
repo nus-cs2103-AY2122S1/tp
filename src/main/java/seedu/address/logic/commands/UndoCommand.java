@@ -6,7 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandUndoException;
 import seedu.address.model.Model;
 
 /**
- * Undo the previous modification to MTR.
+ * Undoes the previous modification to MTR.
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
