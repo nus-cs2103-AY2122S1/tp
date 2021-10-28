@@ -152,7 +152,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 
 Shows a message explaining how to access the help page.
 
-![helpMessage](images/helpMessage.png)
+![helpMessage](images/help_message.png)
 
 Format: `help`
 
