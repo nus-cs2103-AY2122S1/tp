@@ -11,8 +11,6 @@ import seedu.address.model.task.Task;
  */
 public class TaskCard extends UiPart<Region> {
 
-    private static String FXML = "TaskCardDefault.fxml";
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -41,18 +39,13 @@ public class TaskCard extends UiPart<Region> {
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
      */
     public TaskCard(Task task, int displayedIndex) {
-        super(FXML);
+        super((task.isComplete()) ? "TaskCardComplete.fxml" : "TaskCardIncomplete.fxml");
         this.task = task;
         id.setText(displayedIndex + ". ");
         taskId.setText(task.getTaskId().value);
         taskName.setText(task.getTaskName().taskName);
         taskDeadline.setText(task.getTaskDeadline().value);
         isComplete.setText(task.isComplete() ? "Completed" : "Incomplete");
-        if (task.isComplete()) {
-            FXML = "TaskCardComplete.fxml";
-        } else {
-            FXML = "TaskCardIncomplete.fxml";
-        }
     }
 
     @Override
