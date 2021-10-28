@@ -1,5 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddGroupCommand;
@@ -10,12 +17,6 @@ import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 public class AddStudentToGroupCommandParser implements Parser<AddGroupCommand> {
 

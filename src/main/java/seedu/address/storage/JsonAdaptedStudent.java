@@ -139,6 +139,9 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassCode.class.getSimpleName()));
         }
+        if (!ClassCode.isValidClassCode(classCode)) {
+            throw new IllegalValueException(ClassCode.MESSAGE_CONSTRAINTS);
+        }
         final ClassCode modelClassCode = new ClassCode(classCode);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
