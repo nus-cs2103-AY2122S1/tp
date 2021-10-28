@@ -154,6 +154,60 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+###  Revenue feature
+
+#### Current Implementation
+{:.no_toc}
+
+A client's revenue is currently represented by the `revenue` field under `Person`,
+which is represented by a `Revenue` object.
+
+The `Revenue` object contains a `Money` field called `value` which represents the amount 
+of money in Singapore Dollars(SGD) that the user earned from the client. This `value` can 
+never be null.
+
+<img src="images/RevenueClassDiagram.png" width="300" />
+
+The processing of a revenue command from the user can be split into 2 general steps:
+1. Parsing the user input into a `RevenueCommand`
+2. Executing the `RevenueCommand`
+
+Each step will be described in the sections below.
+
+**Step 1**: Parsing of user input
+
+Parsing of the user input is primarily handled by the `RevenueCommandParser` which calls other
+helper classes to parse the text into the data classes `Index` and `Revenue`.
+
+<img src="images/RevenueCommandParserSequenceDiagram.png" width="800" />
+
+`RevenueCommandParser` then creates a `RevenueCommand` using the `Index` and `Revenue` objects created.
+
+**Step 2**: Executing the RevenueCommand
+
+<img src="images/RevenueCommandExecuteActivityDiagram.png" width="300" />
+
+There are 2 possible outcomes from the execution of a RevenueCommand.
+
+1. Add a new revenue to the client
+2. No changes to the client's revenue after a RevenueCommand as the total value of
+the new revenue and client's original revenue is negative
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding and editing revenue.
+
+* **Alternative 1 (Current Choice):** `revenue` command adds to existing `revenue`
+of client. `edit` command sets the `revenue` of client.
+  * Pros: Easier to implement
+  * Cons: User has to remember a lot of commands and to also understand the differences
+  between each command
+* **Alternative 2:** One `revenue` command adds and edits
+  * Pros: Fewer commands for the user to remember
+  * Cons: It will be difficult to give proper error messages since we are not sure
+  of the user's intentions
+
 ###  Note feature
 
 #### Current Implementation
@@ -164,7 +218,7 @@ which is represented by an `Note` object.
 
 The `Note` object contains a `value` field that has the type `String`, the `value` field is the description of the note given to a `Person`.
 
-<img src="images/NoteClassDiagram.png" width="400" />
+<img src="images/NoteClassDiagram.png" width="300" />
 
 A `Note` can be given to a `Person` through any of these 3 methods:
 
