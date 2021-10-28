@@ -43,7 +43,7 @@ public class ReserveCommandParser implements Parser<ReserveCommand> {
         assert numberOfPeople > 0;
         assert phone.value.length() > 0;
 
-        Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         return new ReserveCommand(phone, numberOfPeople, time, remark, tagList);

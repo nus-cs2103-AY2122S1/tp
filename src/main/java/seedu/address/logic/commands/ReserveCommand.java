@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalDateTime;
@@ -26,16 +28,20 @@ import seedu.address.model.tag.Tag;
 public class ReserveCommand extends Command {
     public static final String COMMAND_WORD = "addr";
     public static final String MESSAGE_USAGE = String.format(
-            "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
-            + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME\n"
-            + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1930.",
+            "%1$s: Adds a new reservation with customer's phone number, number of people, time and remark and tags.\n"
+            + "Parameters: NUMBER_OF_PEOPLE (must be a positive integer) %2$sPHONE "
+            + "%3$sDATE_TIME (has to be on the hour, i.e. hh00) "
+            + "[%4$sREMARK] "
+            + "[%5$sTAG] ...\n"
+            + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1900 %4$sbirthday party %5$s10PercentOff",
             CommandUtil.formatCommandWord(COMMAND_WORD),
-            PREFIX_PHONE, PREFIX_TIME
+            PREFIX_PHONE, PREFIX_TIME, PREFIX_REMARK, PREFIX_TAG
     );
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
     public static final String MESSAGE_RESERVATION_EXISTS = "Reservation already exist: %1$s";
     public static final String MESSAGE_CUSTOMER_MISSING =
             "No customer with phone number %1$s exist.\nUnable to create reservation.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private Phone phone;
     private int numberOfPeople;

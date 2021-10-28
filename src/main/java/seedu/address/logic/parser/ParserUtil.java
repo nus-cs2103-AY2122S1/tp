@@ -25,9 +25,11 @@ import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
 import seedu.address.model.person.employee.Shift;
+import seedu.address.model.person.employee.SortByEmployee;
 import seedu.address.model.person.supplier.DeliveryDetails;
 import seedu.address.model.person.supplier.SortBySupplier;
 import seedu.address.model.person.supplier.SupplyType;
+import seedu.address.model.reservation.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -359,6 +361,21 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code} is invalid.
      */
+    public static SortByEmployee parseSortByEmployee(String sortBy) throws ParseException {
+        requireNonNull(sortBy);
+        String trimmedSortBy = sortBy.trim().toLowerCase();
+        if (!SortByEmployee.isValidSortingOrder(trimmedSortBy)) {
+            throw new ParseException(SortByEmployee.MESSAGE_CONSTRAINTS);
+        }
+        return new SortByEmployee(trimmedSortBy);
+    }
+
+    /**
+     * Parses a {@code String sortBy} into a {@code SortBy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
     public static SortByCustomer parseSortByCustomer(String sortBy) throws ParseException {
         requireNonNull(sortBy);
         String trimmedSortBy = sortBy.trim().toLowerCase();
@@ -384,8 +401,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code dateTime} into a {@code LocalDateTime object}
-     * @throws ParseException if {@code dateTime} is of invalid format
+     * Parses {@code dateTime} into a {@code LocalDateTime} object.
+     * @throws ParseException if {@code dateTime} is of invalid format.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
@@ -398,5 +415,23 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_DATE_TIME_FORMAT);
         }
         return result;
+    }
+
+    /**
+     * Parses {@code remark} into a {@code Remark} object.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if {@code remark} is of invalid format.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+
+        if (trimmedRemark.isEmpty()) {
+            return new Remark("");
+        }
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 }

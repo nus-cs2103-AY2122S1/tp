@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
+import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BENSON;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_CARL;
 import static seedu.address.testutil.TypicalReservation.CARL_RESERVATION;
 import static seedu.address.testutil.TypicalReservation.getTypicalAddressBook;
@@ -32,7 +32,7 @@ public class GetCustomerReservingCommandTest {
         Phone customerPhone = expectedModel.getFilteredReservationList().get(0).getPhone();
         expectedModel.updateFilteredCustomerList(customer -> customer.getPhone().equals(customerPhone));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CUSTOMER_ALICE), model.getFilteredCustomerList());
+        assertEquals(Arrays.asList(CUSTOMER_BENSON), model.getFilteredCustomerList());
     }
 
     @Test
