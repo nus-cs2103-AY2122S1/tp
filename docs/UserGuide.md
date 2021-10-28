@@ -300,16 +300,16 @@ If your changes to the data file makes its format invalid, ContactSH will discar
 ### Reminder for tasks that are due soon: `reminder`
 
 1. Shows the number of days prior to a task's date and time to remind that it is due soon.
-    
+
     format: `reminder`
 
 2. Sets the number of days prior to a task's date to remind that it is due soon.
-    
+
     format: `reminder -s DAYS`
 
     * DAYS refer to the number of days prior to a task's date.
       The day **must be a positive integer** 1, 2, 3, ...
-      
+
     Example:
 
     * reminder -s 10
