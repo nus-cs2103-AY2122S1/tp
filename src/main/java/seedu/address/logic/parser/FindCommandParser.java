@@ -89,10 +89,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicate.setTimeRange(ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            predicate.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            predicate.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()).get());
         }
         if (argMultimap.getValue(PREFIX_CANCEL).isPresent()) {
-            predicate.setCancelledDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_CANCEL).get()));
+            predicate.setCancelledDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_CANCEL).get()).get());
         }
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             predicate.setSubjectKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_SUBJECT).get()));

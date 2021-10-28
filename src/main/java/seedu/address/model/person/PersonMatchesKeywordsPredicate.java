@@ -641,6 +641,8 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
                 && getDate().equals(p.getDate())
                 && getCancelledDate().equals(p.getCancelledDate())
                 && getSubjectKeywords().equals(p.getSubjectKeywords())
+                && getRateKeywords().equals(p.getRateKeywords())
+                && getHomeworkKeywords().equals(p.getHomeworkKeywords())
                 && getCondition().equals(p.getCondition());
     }
 
@@ -694,6 +696,12 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
         if (getTimeRange().isPresent()) {
             builder.append("\nLesson Time: ").append(String.join("; ", getTimeRange().get().toString()));
+        }
+        if (getRateKeywords().isPresent()) {
+            builder.append("\nLesson Rates: ").append(String.join("; ", getRateKeywords().get()));
+        }
+        if (getHomeworkKeywords().isPresent()) {
+            builder.append("\nLesson Homework: ").append(String.join("; ", getHomeworkKeywords().get()));
         }
         return builder.toString();
     }
