@@ -410,8 +410,6 @@ Examples:
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
-=======
->>>>>>> aab95a1ea841e78eb5c2f88b5287b15a77369482
 
 ### Finding customers based on keywords: `findC`
 
