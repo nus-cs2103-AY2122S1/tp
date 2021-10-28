@@ -278,15 +278,15 @@ regular filter.
 
 **Aspect: How find executes:**
 
-* **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and 
+* **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and
 resets after each search.
     * Pros: Allow for search with multiple spaces in between, allow for searching within tabs.
     * Cons: Complicated to implement.
 
 * **Alternative 2:** Search each keyword split by whitespace. Resets tab after each search.
     * Pros: Less complicated and less coupling.
-    * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow 
-      searching within tabs.
+    * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow
+    searching within tabs.
 
 _{more aspects and alternatives to be added}_
 
@@ -296,7 +296,7 @@ _{more aspects and alternatives to be added}_
 
 The proposed theme mechanism is simply done by completely altering the base css file of the program. The active css file will be saved in `preferences.json` upon exiting the application.
 
-If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and 
+If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and
 will replace the invalid css file specification in `preferences.json`.
 
 ### \[Proposed\] Genre tagging feature
@@ -305,8 +305,8 @@ will replace the invalid css file specification in `preferences.json`.
 
 The `Genre` command allows the user to specify any `Genre` for an `Anime`, and stores it in a `Set` in the `Anime`.
 However, the `Genre` specified isn't tracked anywhere else.<br>
-If a user wishes to specify the same `Genre` for a different `Anime`, the user will have to type the `Genre`'s name 
-again exactly, and the system will create a new `Genre` and store it inside that `Anime` as well. 
+If a user wishes to specify the same `Genre` for a different `Anime`, the user will have to type the `Genre`'s name
+again exactly, and the system will create a new `Genre` and store it inside that `Anime` as well.
 * Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
 * Cons: Inconvenient for the user, as `Genres` with slightly different names are considered as different, even if the user may have meant for them to be the same.
     For example, `science fiction`, `sci fi`, `scifi`
@@ -316,9 +316,9 @@ again exactly, and the system will create a new `Genre` and store it inside that
 Instead of directly adding a `Genre` to an `Anime`, we can instead add it to a `GenresList`, and keep track of all user defined `Genres` there.<br>
 The user can then tag an `Anime` with a `Genre` in this list.
 * Pros: User no longer have to keep track of all the `Genres` that has been added, and this prevents "similar `Genres`", which improves `find` by `Genre` functionality
-* Cons: More storage intensive, as we have to now store a list of `Genre`. 
+* Cons: More storage intensive, as we have to now store a list of `Genre`.
   `Genre` must be synced in multiple locations, and deletion of a `Genre` from the `GenreList` would require the system to remove the `Genre` from all tagged `Animes`.
-  
+
 
 Given below is a MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
 
@@ -332,21 +332,21 @@ Given below is a MSS of an example usage scenario of a user adding a `Genre` to 
 5.  User chooses a `Genre` to tag the `Anime` with
 6.  User requests to tag an `Anime` with a `Genre`
 7.  System tags the Anime with the specified `Genre`
-    
-    Use case ends. 
+
+    Use case ends.
 
 **Extensions**
 
 - 4a. The `Genre` user wishes to tag is not in the list
 
     - 4a1. User adds a new `Genre` to the list
-    
+
     Use case resumes at step 4
-  
+
 - 4a1. The `Genre` user wishes to add is already in the list
-  
+
     - 4a1a. System displays an error message, telling user that the `Genre` already exists
-    
+
     Use case resumes at step 4
 
 #### Design considerations:
@@ -355,19 +355,16 @@ Given below is a MSS of an example usage scenario of a user adding a `Genre` to 
 
 * **Alternative 1** `Genre` keeps track of which anime is tagged by this `Genre`. Find searches from the `GenreList`.
     * Pros: Very efficient, as we do not need to go through the list of anime checking each of the anime. Works well when number of `Anime` is large.
-    * Cons: More storage intensive, requires us to store the list of tagged `Anime` for every `Genre`. 
+    * Cons: More storage intensive, requires us to store the list of tagged `Anime` for every `Genre`.
       Could also cause problems if the save file is tempered with, as there is bi-directional referencing between `Anime` and `Genre`
-      
+
 * **Alternative 2 (Suggested)** Find searches through the list of `Anime` and see if each `Anime` is tagged with this `Genre`
     * Pros: Less bug prone, easy to implement, doesn't require a bi-directional navigability between `Anime` and `Genre`
     * Cons: Can have an effect on performance when a large number of `Anime` is in the list
-    
+
 **Aspect: How to implement `GenreList`**
 * `GenreList` as a `HashSet`
     * Pros: Prevents duplication, easy to implement.
-    
-    
-
 
 ## **Glossary, Naming Conventions**
 
@@ -516,7 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AniList shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: UC05 - Update the status of an anime**
 
 **MSS**
@@ -539,7 +536,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC06 - Find anime by name and genre**
 
 1. User requests to find anime based on some name and genre
-2. AniList shows a list of anime filtered based on these criteria and the current 
+2. AniList shows a list of anime filtered based on these criteria and the current
 tab.
 
     Use case ends.
