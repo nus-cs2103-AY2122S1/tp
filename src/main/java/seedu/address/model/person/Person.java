@@ -187,6 +187,7 @@ public class Person {
                 && otherPerson.getFaculty().equals(getFaculty()) && otherPerson.getMajor().equals(getMajor())
                 && otherPerson.getSkills().equals(getSkills()) && otherPerson.getLanguages().equals(getLanguages())
                 && otherPerson.getFrameworks().equals(getFrameworks()) && otherPerson.getTags().equals(getTags())
+                && otherPerson.getCompatability().equals(otherPerson.getCompatability())
                 && otherPerson.getInteractions().equals(getInteractions());
     }
 
