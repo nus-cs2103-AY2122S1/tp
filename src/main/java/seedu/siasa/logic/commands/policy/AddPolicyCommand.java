@@ -59,7 +59,7 @@ public class AddPolicyCommand extends Command {
     private final Set<Tag> tagList = new HashSet<>();
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPolicyCommand that adds a policy with the following fields.
      */
     public AddPolicyCommand(Title title, Price price, ExpiryDate expiryDate, Commission commission, Index index,
                             Set<Tag> tagList) {
