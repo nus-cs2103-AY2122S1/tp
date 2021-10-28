@@ -200,13 +200,17 @@ Filters the contacts by data fields of the person including faculty, major, skil
 Format: `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
 
 Examples:
-* `filter f/computing` returns all users who have been assigned the f/computing tag.
-* `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
+* `filter f/computing`
+>  returns all users who have been assigned the f/computing tag.
+* `filter t/staff f/computing`
+>  returns all users who have been assigned the t/staff tag and f/computing tag .
+
   ![result for 'filter f/computing'](images/filterscreenshot.png)
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:bulb: Tips
+*  You can add multiple fields in one command to see all filters together.
+*  Empty filter gives a list with all persons
 </div>
 
 
@@ -391,16 +395,15 @@ Format: `listorg`
 ##### Adding an organisation: `addorg`
 Adds an organisation to the address book.
 
-Format: `addorg n/NAME e/EMAIL p/PERSON`
+Format: `addorg n/NAME e/EMAIL`
 
 An organisation can have any number of  persons within it(including 0). However, an organisation must have a name.
 These are organisations whose contact the user wished to remember.
 
 Examples:
 
-* `addorg n/Shopee e/EMAIL p/[n/John doe]`
-* `addorg n/SoC e/EMAIL p/[n/Seth e/EMAIL f/computing m/computer science]`
-* `addorg n/NUS e/EMAIL p/[n/Damith e/EMAIL f/computing m/computer science] p/[n/Danny e/EMAIL f/computing m/computer science]`
+* `addorg n/Shopee e/shopee.org@gmail.com`
+> adds an organisation with the name Shopee and email shopee.org@gmail.com
 
 List of personal detail tags:
 * n/: name
@@ -410,8 +413,8 @@ List of members:
 * p/: persons in the organisation
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:bulb: Tips
+* Remember to all 
 </div>
 
 ##### Deleting an organisation: `deleteorg`
@@ -427,8 +430,8 @@ Examples:
 > Deletes the 1st organisation from the organisation list.
 
 <div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
+:exclamation: Be **careful!**
+* Remember to add the member persons separately before adding them. 
 </div>
 
 ##### Adding person to an organisation: `addtoorg`
@@ -488,7 +491,7 @@ System Command | Format, Examples
 **Help** | `help`
 **List** | `list`
 **Sort** | `sort`
-**Filter** | details coming soon
+**Filter** | `filter`
 **Clear** | `clear`|
 
 Contact-specific Command | Format, Examples
@@ -499,8 +502,9 @@ Contact-specific Command | Format, Examples
 **Remove** | `rm INDEX [s/INDEX]…​ [l/INDEX]…​ [fr/INDEX]…​ [t/INDEX]…​ [r/REMARK]…​ [int/INDEX]…​` <br><br> e.g., `rm 5 s/1 s/3 fr/3 r/1`
 **View** | details coming soon
 **Find** | `find KEYWORD [MORE_KEYWORDS]…​`<br><br> e.g., `find James Jake`
+**Filter** | `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
 **Delete** | `delete INDEX`<br><br> e.g., `delete 3`
 
 Organisation-specific Command | Format, Examples
 --------|------------------
-**Add Org** | `add org n/NAME e/EMAIL p/PERSON`
+**Add Org** | `addorg n/NAME e/EMAIL`
