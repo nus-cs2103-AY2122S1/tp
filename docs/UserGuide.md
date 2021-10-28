@@ -450,7 +450,7 @@ Example: `nat/Singaporean`
 
 Example: `tg/T09`
 
-### `h/SOCIAL_HANDLE`
+### `s/SOCIAL_HANDLE`
 `SOCIAL_HANDLE` should be of the format `platform:username` and adhere to the following constraints:
 * The platform should only contain the 2 letter shorthand for the social platform:
      * `ig` for Instagram
@@ -461,7 +461,7 @@ Example: `tg/T09`
      * `ln` for Linkedin
 * The username should only contain alphanumeric characters
 
-Example: `h/tg:alexx9384`
+Example: `s/tg:alexx9384`
 
 ### `r/REMARK`
 `REMARK` can take any values.
@@ -498,19 +498,19 @@ If the format of your data file is invalid, Socius will discard all data and sta
 
 ## Command Summary
 
-|Action | Command | Format | Examples|
-|--------|------------------|------------------------------------|
-Help |**Help** | **`help`** | **`help`** |
-Modify |**Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/tg:friendlyjames r/Friendly t/colleague`|
-Modify |**Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
-Modify |**Delete** | **`delete`** `INDEX` | **`delete`** `3`|
-Modify |**Deletem** | **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`deletem`** `n/James g/f` |
-Modify |**Clear** | **`clear`** | **`clear`** |
-View |**List** | **`list`** | **`list`** |
-View |**Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
-View |**Sort** | **`sort`** `FIELD_PREFIX/` | **`sort`** `n/` |
-View |**Stats** | **`stats`** `TUTORIAL_GROUP` | **`stats`** `T09`|
-Share |**Import** | **`import`** | **`import`** 'addressbook.json'|
-Share |**Export** | **`export`** | **`export`** 'addressbook.json'|
-Advance |**Alias** | **`alias`** | **`alias`** `a/allFemales c/find g/f`|
-Exit |**Exit** | **`exit`** | **`exit`** |
+| Action | Command | Format | Examples|
+|--------|---------|-------------------|----------------------------------------------------|
+| Help | **Help** | **`help`** | **`help`** |
+| Modify | **Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/T12 s/tg:friendlyjames r/Friendly t/colleague`|
+|  | **Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
+|  | **Delete** | **`delete`** `INDEX` | **`delete`** `3`|
+|  | **Deletem** | **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`deletem`** `n/James g/f` |
+|  | **Clear** | **`clear`** | **`clear`** |
+| View | **List** | **`list`** | **`list`** |
+|  | **Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
+|  | **Sort** | **`sort`** `FIELD_PREFIX/` | **`sort`** `n/` |
+|  | **Stat** | **`stat`** `TUTORIAL_GROUP` | **`stat`** `T09`|
+| Share | **Import** | **`import`** | **`import`** `contactbook.json`|
+|  | **Export** | **`export`** | **`export`** `contactbook.json`|
+| Advance | **Alias** | **`alias`** `a/KEYWORD c/COMMAND` | **`alias`** `a/allFemales c/find g/f`|
+| Exit | **Exit** | **`exit`** | **`exit`** |
