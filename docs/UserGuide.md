@@ -63,8 +63,8 @@ This table below illustrates what each formatting means.
 | `mark-up`      | Words in light-blue highlight, also known as a mark-up| A command that can be typed into Uni-Fy|`help`|
 | <code><i>italic</i></code> | Words in <i>italic</i> | A parameter to be supplied by the user |<code><i>n/task_name</i></code>|
 | `(brackets)` | Words in round brackets| Optional parameter |<code><i>(d/date)</i></code> or <br> <code><i>(task_id)</i></code> |
-| <code>multiple...</code> | Words with `…` after them| Parameters that can be input multiple times including 0 times|`keywords...`|
-| [**Blue underline**](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
+| <code>multiple...</code> | Words with `…` after them| Parameters that can be used multiple times including 0 times|`keywords...`|
+| [<u>**Blue underline**</u>](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
 
 ### 2.3 Icons
 
@@ -116,7 +116,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
 
 **:information_source: Notes about the command format:**<br>
 
-* Italicised words represent parameters that are meant to be supplied by the user
+* Italicised words represent [**parameters**](#24-glossary) that are meant to be supplied by the user
    * e.g. in <code>add <i>n/task_name d/date</i></code>, the <code><i>task_name</i></code> keyword represents a task and the *date* keyword represents a date, both to be inputted by the user
 
 * Items inside round brackets are optional
@@ -142,7 +142,7 @@ Format: `help`
 
 ### 4.2 Adding a task: `add` 
 
-Add a task to the task list.
+Add a task to the task list. The tags for the command can be input in any order.
 
 ![add_command](images/addCommand.jpeg)
 
