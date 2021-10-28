@@ -396,8 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. tApp shows an error message.
 
       Use case resumes at step 2.
-
-
+    
 **Use case: UC4 - Delete a student**
 
 **MSS**
@@ -556,27 +555,7 @@ Similar to UC5, except the student's participation is marked instead of attendan
 
 **Use case: UC12 - Delete a group**
 
-**MSS**
-
-1.  User requests to view their list of groups
-2.  tApp displays all groups
-3.  User requests to delete a specific group from the list of groups
-4.  tApp deletes the group
-5.  tApp displays all the groups
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. tApp shows an error message. 
-      
-      Use case resumes at step 2.
+Similar to UC11 (Edit a group), except the group is deleted instead of edited.
 
 **Use case: UC13 - Add student to group**
 
@@ -694,36 +673,16 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
 **Use case: UC19 - Add a task with a specified event date**
 
-**MSS**
+Similar to UC18, except the deadline is an event date.
 
-1.  User requests to create an event with the specified event date
-2.  tApp creates the task and stores it in the task list
-3.  tApp displays the task list with the task that was just created
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The task name is empty.
-
-    * 1a1. tApp displays an error message stating that the task name is invalid
-
-      Use case ends.
-
-* 1b. The format of the event date is incorrect.
-
-    * 1b1. tApp displays an error message requesting the user to follow the correct event date format
-
-      Use case ends.
-
-**Use case: UC20 - Delete a task**
+**Use case: UC20 - Edit a task**
 
 **MSS**
 
 1.  User requests to view the list of tasks
 2.  tApp displays all the tasks currently in the list
-3.  User requests to delete a specific task from the list of tasks
-4.  tApp deletes the task
+3.  User requests to edit a specific task from the list of tasks
+4.  tApp edits the task
 5.  tApp displays the task list
 
     Use case ends.
@@ -736,37 +695,22 @@ Similar to UC8 (Clear student list), except we are clearing the group list.
 
 * 3a. The given index is invalid.
 
-    * 2a1. tApp shows an error message. 
+    * 2a1. tApp shows an error message.
       Use case resumes at step 2.
 
-**Use case: UC21 - Mark a task as done**
+**Use case: UC21 - Delete a task**
 
-**MSS**
+Similar to UC20 (Edit a task), except the task is deleted instead of edited.
 
-1.  User requests to view the list of tasks
-2.  tApp displays all the tasks currently in the list
-3.  User requests to mark a specific task as done
-4.  tApp marks the task as done
-5.  tApp displays the task list
+**Use case: UC22 - Mark a task as done**
 
-    Use case ends.
+Similar to UC20 (Edit a task), except the task is marked as done instead of edited.
 
-**Extensions**
-
-* 2a. The list is empty.
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1.  tApp shows an error message.
-
-      Use case ends.
-
-**Use case: UC22 - Clear task list**
+**Use case: UC23 - Clear task list**
 
 Similar to UC8 (Clear student list), except we are clearing the task list.
 
-**Use case: UC23 - Clear all entries in tApp**
+**Use case: UC24 - Clear all entries in tApp**
 
 Similar to UC8 (Clear student list), except we are clearing the whole address book.
 
