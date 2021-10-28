@@ -226,7 +226,7 @@ In this example, we explore the `findStudent` command.
 1. A new `FindStudentCommand` is created by `FindStudentCommandParser` and is returned to `LogicManager` with the predicate as one of its fields.
 1. The `LogicManager` calls the `execute()` method in `FindStudentCommand`.
 1. The `FindStudentCommand` calls the `Model#updateFilteredStudentList()` method, passing in the previously returned predicate as its argument.
-1. The filtered student list is updated by checking all the students in the filtered task list with the `NameContainsKeywordPredicate` instance.
+1. The filtered student list is updated by checking all the students in the filtered students list with the `NameContainsKeywordPredicate` instance.
 1. In this case, the filtered student list should return the students: Alex and Bernice as in the sample data.
 1. A new `CommandResult` is returned, switching the current display to the filtered student list. The result is returned to `LogicManager`.
 
