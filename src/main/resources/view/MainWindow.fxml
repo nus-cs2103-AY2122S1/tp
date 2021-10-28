@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="650" minWidth="600" onCloseRequest="#handleExit" title="MrTechRecruiter" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="690" minWidth="900" onCloseRequest="#handleExit" title="MrTechRecruiter" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -27,8 +27,10 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity">
-            <AnchorPane prefHeight="0.0" prefWidth="675.0">
+      <VBox maxWidth="-Infinity" minHeight="-Infinity" prefHeight="630.0" prefWidth="650.0">
+
+        <StackPane fx:id="statusbarPlaceholder" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="650.0" styleClass="pane-with-border" />
+            <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="43.0" prefWidth="650.0">
                <children>
               <MenuBar fx:id="menuBar" layoutX="53.0" prefHeight="43.0" prefWidth="126.0">
                 <Menu mnemonicParsing="false" text="File">
@@ -45,7 +47,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="303.0" prefWidth="680.0" styleClass="pane-with-border">
+            <AnchorPane prefHeight="424.0" prefWidth="829.0" styleClass="pane-with-border">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="172.0" layoutX="156.0" mouseTransparent="true" pickOnBounds="true">
                      <image>
@@ -58,44 +60,42 @@
                      </font>
                   </Label>
       
-                    <VBox fx:id="applicantList" alignment="TOP_RIGHT" layoutX="-1.0" layoutY="37.0" prefHeight="352.0" prefWidth="390.0" styleClass="pane-with-border">
+                    <VBox fx:id="applicantList" alignment="TOP_RIGHT" layoutY="40.0" prefHeight="382.0" prefWidth="421.0" styleClass="pane-with-border">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
                      <children>
-                   <StackPane fx:id="applicantListPanelPlaceholder" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="368.0" />
+                   <StackPane fx:id="applicantListPanelPlaceholder" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="344.0" />
                      </children>
               </VBox>
-                  <Label alignment="CENTER" layoutX="442.0" layoutY="7.0" prefHeight="26.0" prefWidth="135.0" text="Positions" textAlignment="CENTER" textFill="WHITE" />
-             <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="546.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                  <Label alignment="CENTER" layoutX="562.0" layoutY="7.0" prefHeight="26.0" prefWidth="135.0" text="Positions" textAlignment="CENTER" textFill="WHITE" />
+             <ImageView fitHeight="39.0" fitWidth="43.0" layoutX="667.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                  <Image url="@../images/Positions.png" />
                </image>
              </ImageView>
       
       
-              <VBox fx:id="positionList" alignment="TOP_RIGHT" layoutX="399.0" layoutY="37.0" prefHeight="323.0" prefWidth="278.0" styleClass="pane-with-border">
+              <VBox fx:id="positionList" alignment="TOP_RIGHT" layoutX="425.0" layoutY="39.0" prefHeight="382.0" prefWidth="438.0" styleClass="pane-with-border">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <StackPane fx:id="positionListPanelPlaceholder" alignment="TOP_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="267.0" VBox.vgrow="ALWAYS" />
+                <StackPane fx:id="positionListPanelPlaceholder" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="358.0" prefWidth="420.0" />
               </VBox>
                </children>
             </AnchorPane>
 
-        <StackPane fx:id="commandBoxPlaceholder" prefHeight="38.0" prefWidth="680.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+              <StackPane fx:id="commandBoxPlaceholder" prefHeight="66.0" prefWidth="799.0" styleClass="background" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-              <StackPane fx:id="resultDisplayPlaceholder" maxHeight="120" minHeight="60.0" prefHeight="60.0" prefWidth="680.0" styleClass="pane-with-border">
+              <StackPane fx:id="resultDisplayPlaceholder" maxHeight="200" minHeight="110.0" prefHeight="110.0" prefWidth="799.0" styleClass="pane-with-border">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-
-        <StackPane fx:id="statusbarPlaceholder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="700.0" styleClass="pane-with-border" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>
