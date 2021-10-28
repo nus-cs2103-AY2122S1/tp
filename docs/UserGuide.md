@@ -357,19 +357,29 @@ Examples:
 ### Organisation-specific commands
 Commands that are related to organisations
 
-##### Adding an organisation: `add org`
+##### Showing the list of all organisations: `listorg`
+Shows the list of organisations in the organisation list.
+
+Format: `listorg`
+
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Adding an organisation: `addorg`
 Adds an organisation to the address book.
 
-Format: `add org n/NAME e/EMAIL p/PERSON`
+Format: `addorg n/NAME e/EMAIL p/PERSON`
 
-AAn organisation can have any number of  persons within it(including 0). However, an organisation must have a name.
+An organisation can have any number of  persons within it(including 0). However, an organisation must have a name.
 These are organisations whose contact the user wished to remember.
 
 Examples:
 
-* `add org n/Shopee e/EMAIL p/[n/John doe]`
-* `add org n/SoC e/EMAIL p/[n/Seth e/EMAIL f/computing m/computer science]`
-* `add org n/NUS e/EMAIL p/[n/Damith e/EMAIL f/computing m/computer science] p/[n/Danny e/EMAIL f/computing m/computer science]`
+* `addorg n/Shopee e/EMAIL p/[n/John doe]`
+* `addorg n/SoC e/EMAIL p/[n/Seth e/EMAIL f/computing m/computer science]`
+* `addorg n/NUS e/EMAIL p/[n/Damith e/EMAIL f/computing m/computer science] p/[n/Danny e/EMAIL f/computing m/computer science]`
 
 List of personal detail tags:
 * n/: name
@@ -377,6 +387,57 @@ List of personal detail tags:
 
 List of members:
 * p/: persons in the organisation
+
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Deleting an organisation: `deleteorg`
+Deletes an organisation from the organisation list.
+
+Format: `deleteorg INDEX`
+
+Deletes an organisation at the specified index.
+
+Examples:
+
+* `deleteorg 1`
+> Deletes the 1st organisation from the organisation list.
+
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Adding person to an organisation: `addtoorg`
+Adding a person to an organisation from the organisation list.
+
+Format: `addtoorg INDEX NAME`
+
+Adds the person at the specified index to an organisation with the specified name.
+
+Examples:
+
+* `addtoorg 1 n/Facebook`
+> Adds the 1st person to the Facebook organisation.
+
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Removing person from an organisation: `deletefromorg`
+Removing a person from an organisation from the organisation list.
+
+Format: `deletefromorg INDEX NAME`
+
+Deletes the person at the specified index from an organisation with the specified name.
+
+Examples:
+
+* `deletefromorg 1 n/Facebook`
+> Deletes the 1st person from the Facebook organisation.
 
 <div markdown="block" class="alert alert-info">
 :bulb: Insert tips

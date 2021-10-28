@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -21,18 +22,21 @@ public class DeleteFromOrgCommandParser implements Parser<DeleteFromOrgCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteFromOrgCommand parse(String args) throws ParseException {
+        requireNonNull(args);
 
-        Index index = ParserUtil.parseIndex(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteFromOrgCommand.MESSAGE_USAGE));
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteFromOrgCommand.MESSAGE_USAGE), pe);
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-
 
         return new DeleteFromOrgCommand(index, name);
     }
