@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class EventTime {
+public class EventTime implements Comparable<EventTime> {
     public static final String MESSAGE_CONSTRAINTS = "EventTime inputted has to be in HHmm format";
     public static final String DESC = "Time: ";
 
@@ -59,5 +59,10 @@ public class EventTime {
     @Override
     public String toString() {
         return eventTime;
+    }
+
+    @Override
+    public int compareTo(EventTime time) {
+        return this.toLocalTime().compareTo(time.toLocalTime());
     }
 }

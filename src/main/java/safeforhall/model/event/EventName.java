@@ -3,7 +3,7 @@ package safeforhall.model.event;
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.AppUtil.checkArgument;
 
-public class EventName {
+public class EventName implements Comparable<EventName> {
     public static final String MESSAGE_CONSTRAINTS =
             "Event names should only contain alphanumeric characters and spaces, and it should not be blank";
 
@@ -12,6 +12,7 @@ public class EventName {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String FIELD = "n";
 
     public final String eventName;
 
@@ -49,5 +50,10 @@ public class EventName {
     @Override
     public int hashCode() {
         return eventName.hashCode();
+    }
+
+    @Override
+    public int compareTo(EventName e) {
+        return this.eventName.compareToIgnoreCase(e.eventName);
     }
 }

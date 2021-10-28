@@ -7,7 +7,7 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
  * Represents a Person's faculty in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidFaculty(String)} (String)}
  */
-public class Faculty {
+public class Faculty implements Comparable<Faculty> {
 
     public static final String MESSAGE_CONSTRAINTS = "Faculty is a single word made up of alphabets "
             + "and it should not be blank";
@@ -18,6 +18,8 @@ public class Faculty {
     public static final String VALIDATION_REGEX = "[A-Za-z]{2,}$";
 
     public static final String DESC = "Faculty: ";
+    public static final String FIELD = "f";
+
 
     public final String faculty;
 
@@ -56,4 +58,8 @@ public class Faculty {
         return faculty.hashCode();
     }
 
+    @Override
+    public int compareTo(Faculty f) {
+        return this.faculty.compareToIgnoreCase(f.faculty);
+    }
 }

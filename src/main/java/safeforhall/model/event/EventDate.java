@@ -7,10 +7,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class EventDate {
+public class EventDate implements Comparable<EventDate> {
     public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy, dd.mm.yyyy"
             + "or dd/mm/yyyy format";
     public static final String DESC = "Date: ";
+    public static final String FIELD = "d";
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter
             .ofPattern("[dd-MM-yyyy][dd.MM.yyyy][dd/MM/yyyy]");
@@ -70,5 +71,10 @@ public class EventDate {
     @Override
     public String toString() {
         return eventDate;
+    }
+
+    @Override
+    public int compareTo(EventDate date) {
+        return this.toLocalDate().compareTo(date.toLocalDate());
     }
 }

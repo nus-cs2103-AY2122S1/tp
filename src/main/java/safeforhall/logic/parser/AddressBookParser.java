@@ -25,6 +25,8 @@ import safeforhall.logic.commands.edit.EditEventCommand;
 import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.commands.find.FindEventCommand;
 import safeforhall.logic.commands.find.FindPersonCommand;
+import safeforhall.logic.commands.sort.SortEventCommand;
+import safeforhall.logic.commands.sort.SortPersonCommand;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.add.AddEventCommandParser;
@@ -36,6 +38,8 @@ import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.logic.parser.find.FindEventCommandParser;
 import safeforhall.logic.parser.find.FindPersonCommandParser;
+import safeforhall.logic.parser.sort.SortEventCommandParser;
+import safeforhall.logic.parser.sort.SortPersonCommandParser;
 import safeforhall.logic.parser.view.ViewEventCommandParser;
 import safeforhall.logic.parser.view.ViewPersonCommandParser;
 
@@ -129,6 +133,9 @@ public class AddressBookParser {
         case TraceCommand.COMMAND_WORD:
             return new TraceCommandParser().parse(arguments);
 
+        case SortPersonCommand.COMMAND_WORD:
+            return new SortPersonCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -165,6 +172,9 @@ public class AddressBookParser {
 
         case FindEventCommand.COMMAND_WORD:
             return new FindEventCommandParser().parse(arguments);
+
+        case SortEventCommand.COMMAND_WORD:
+            return new SortEventCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

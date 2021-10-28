@@ -1,8 +1,13 @@
 package safeforhall.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.logic.commands.sort.SortPersonCommand.ALLOWED_FIELDS;
+import static safeforhall.logic.commands.sort.SortPersonCommand.ALLOWED_ORDER;
+import static safeforhall.logic.commands.sort.SortPersonCommand.ASCENDING;
+import static safeforhall.logic.commands.sort.SortPersonCommand.DESCENDING;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
@@ -306,5 +311,62 @@ public class ParserUtil {
 
         return trimmedFileName;
     }
+
+    /**
+     * Parse a {@code String field} into a {@code String field} for SortPersonCommand.
+     * Leading and trailing whitespaces will be trimmed.
+     * Ensures that field is valid.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static String parsePersonField(String field) throws ParseException {
+        requireNonNull(field);
+        String trimmedField = field.trim().toLowerCase();
+        ArrayList<String> allowedFields = new ArrayList<>(Arrays.asList(Name.FIELD,
+                Email.FIELD, Room.FIELD, Phone.FIELD, Faculty.FIELD, VaccStatus.FIELD,
+                LastDate.FET_FIELD, LastDate.COLLECTION_FIELD));
+
+        if (!allowedFields.contains(trimmedField)) {
+            throw new ParseException(ALLOWED_FIELDS);
+        }
+        return trimmedField;
+    }
+
+    /**
+     * Parse a {@code String field} into a {@code String field} for SortEventCommand.
+     * Leading and trailing whitespaces will be trimmed.
+     * Ensures that field is valid.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static String parseEventField(String field) throws ParseException {
+        requireNonNull(field);
+        String trimmedField = field.trim().toLowerCase();
+        ArrayList<String> allowedFields = new ArrayList<>(Arrays.asList(EventName.FIELD,
+                EventDate.FIELD, Capacity.FIELD, Venue.FIELD));
+
+        if (!allowedFields.contains(trimmedField)) {
+            throw new ParseException(ALLOWED_FIELDS);
+        }
+        return trimmedField;
+    }
+
+    /**
+     * Parse a {@code String order} into a {@code String order} for SortCommand.
+     * Leading and trailing whitespaces will be trimmed.
+     * Ensures that field is valid.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static String parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+
+        if (!trimmedOrder.equals(ASCENDING) && !trimmedOrder.equals(DESCENDING)) {
+            throw new ParseException(ALLOWED_ORDER);
+        }
+        return trimmedOrder;
+    }
+
 }
 

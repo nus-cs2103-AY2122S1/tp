@@ -47,6 +47,7 @@ public class ViewPersonCommand extends Command {
         if (targetIndex == null) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             model.setNoPerson();
+            model.updateSortedPersonList(null);
             return new CommandResult(MESSAGE_ALL_RESIDENTS_SHOWN);
         } else {
             setSinglePerson(model);

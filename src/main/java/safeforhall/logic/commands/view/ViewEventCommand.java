@@ -48,6 +48,7 @@ public class ViewEventCommand extends Command {
         if (targetIndex == null) {
             model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
             model.setNoEvent();
+            model.updateSortedEventList(null);
             return new CommandResult(MESSAGE_ALL_EVENTS_SHOWN);
         } else {
             setSingleEvent(model);
