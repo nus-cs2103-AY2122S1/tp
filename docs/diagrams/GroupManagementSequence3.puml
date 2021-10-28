@@ -10,9 +10,12 @@ end box
 
 [-> ModelManager : deleteGroup(Group)
 activate ModelManager
-ModelManager -> Group : getStudents()
+ModelManager -> Group : getStudentNames()
+activate Group
+Group --> ModelManager : namesOfStudentsToDelete
+deactivate Group
 
-loop Each student in studentList
+loop Each student in namesOfStudentsToDelete
 ModelManager -> CsBook : removeStudent(student)
 activate CsBook
 CsBook --> ModelManager
