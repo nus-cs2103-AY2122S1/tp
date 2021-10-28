@@ -15,10 +15,10 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 [Features](#features)
 * [Give a list of instructions : `man`](#give-a-list-of-instructions-man)
 * [Adding a person : `add`](#adding-a-person-add)
-* [Listing all persons : `ls`](#listing-all-persons-list)
+* [Listing all persons : `ls`](#listing-all-persons-ls)
 * [Editing a person : `edit`](#editing-a-person-edit)
 * [Locating persons by name : `find`](#locating-persons-by-name-find)
-* [Deleting a person : `rm`](#deleting-a-person-delete)
+* [Deleting a person : `rm`](#deleting-a-person-rm)
 * [Add task : `add`](#add-task-add)
 * [Delete task : `rm`](#delete-task-rm)
 * [Edit task : `edit`](#edit-task-edit)
@@ -55,6 +55,7 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
    * **`add`**`-n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01` : Adds a contact named `John Doe` to ContactSH.
    * **`rm`**`3` : Deletes the 3rd contact shown in the current list.
    * **`clear`** : Deletes all contacts.
+
 
 1. Refer to the [Features](#features) below for details of each command.
 
