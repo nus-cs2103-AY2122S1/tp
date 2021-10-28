@@ -142,17 +142,26 @@ Examples:
 * `delete-applicant 1` deletes the applicant with index 1.
 
 
-### Listing all positions : `list position` [coming soon]
+### Listing all positions : `list-position` 
 
 Shows a list of all positions in MrTechRecruiter.
 
-Format: `list position`
+Format: `list-position`
 
-### Listing all applicants : `list applicant` [coming soon]
+
+### Listing all applicants : `list-applicant` 
 
 Shows a list of all applicants in MrTechRecruiter.
 
-Format: `list applicant`
+Format: `list-applicant`
+
+### Undoing the last modification : `undo`
+
+Recovers the state before last modification is made.
+The modification command includes: `add-position` `add-applicant` `edit-position` `edit-applicant` `delete-position` `delete-applicant`
+`` [command that modifies the state should also be added later]
+
+Format: `undo`
 
 ### Searching for applicants using keywords: `find` [coming soon]
 
@@ -191,9 +200,6 @@ Data is saved as a JSON file `[JAR file location]/data/POSITION-TITLE.json`. Adv
 If your changes to the data file makes its format invalid, MrTechRecruiter will discard all data and start with an empty data file at the next run.
 </div>
 
-### Editing a person : `edit` `[coming soon]`
-
-Edits an existing applicant in MrTechRecruiter.
 
 ### Archiving data files `[coming in v2.0]`
 

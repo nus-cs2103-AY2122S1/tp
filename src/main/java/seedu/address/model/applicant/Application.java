@@ -89,6 +89,10 @@ public class Application {
                 + "}";
     }
 
+    public Application getCopiedApplication() {
+        return new Application(position.getCopiedPosition(), status);
+    }
+
     /**
      * The status of a job application.
      */
