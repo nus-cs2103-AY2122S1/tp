@@ -28,6 +28,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label dateRangePlaceholder;
+    @FXML
     private Label dateRange;
     @FXML
     private Label time;
@@ -55,7 +57,9 @@ public class LessonCard extends UiPart<Region> {
         rates.setText(lesson.getLessonRates().toString());
         outstandingFees.setText(lesson.getOutstandingFees().toString());
 
-        String endDateString = lesson.getEndDate().equals(Date.MAX_DATE) ? " " : lesson.getEndDate().toString();
+        dateRangePlaceholder.setManaged(lesson.isRecurring());
+        dateRange.setManaged(lesson.isRecurring());
+        String endDateString = lesson.getEndDate().equals(Date.MAX_DATE) ? "∞" : lesson.getEndDate().toString();
         String dateRangeString =
                 String.format("%1$s - %2$s", lesson.getStartDate().toString(), endDateString);
         dateRange.setText(dateRangeString);
