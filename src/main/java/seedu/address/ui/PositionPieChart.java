@@ -17,8 +17,7 @@ import seedu.address.model.applicant.ApplyingToPositionPredicate;
 import seedu.address.model.position.Position;
 
 /**
- * A factory class containing methods to process a position and its applicants
- * into a pie chart.
+ * A pie chart representing a job position and the breakdown of its applicants.
  */
 public class PositionPieChart extends PieChart {
 
