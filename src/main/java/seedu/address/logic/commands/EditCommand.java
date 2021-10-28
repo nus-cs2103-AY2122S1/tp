@@ -107,6 +107,8 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        System.out.println(editPersonDescriptor.getEmail());
+        System.out.println("@@@");
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
@@ -192,6 +194,8 @@ public class EditCommand extends Command {
         }
 
         public void setEmail(Email email) {
+            System.out.print("SETTING EMAIl >======");
+            System.out.print(email);
             this.email = email;
         }
 
