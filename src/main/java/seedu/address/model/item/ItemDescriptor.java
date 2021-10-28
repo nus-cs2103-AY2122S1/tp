@@ -142,8 +142,10 @@ public class ItemDescriptor {
 
         int itemCount = (count == null) ? 1 : count;
         Set<Tag> itemTags = (tags == null) ? new HashSet<>() : tags;
+        Double cp = (costPrice == null) ? 1.0 : costPrice;
+        Double sp = (salesPrice == null) ? 1.0 : salesPrice;
 
-        return new Item(name, id, itemCount, itemTags, costPrice, salesPrice);
+        return new Item(name, id, itemCount, itemTags, cp, sp);
     }
 
     @Override

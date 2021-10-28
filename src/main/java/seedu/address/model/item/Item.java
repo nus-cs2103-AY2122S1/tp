@@ -120,6 +120,28 @@ public class Item implements Displayable {
     }
 
     /**
+     * Returns true if both items have the same count.
+     */
+    public boolean isSameId(Item other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other != null && Objects.equals(other.getId(), getId());
+    }
+
+    /**
+     * Returns true if both items have the same count.
+     */
+    public boolean isSameName(Item other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other != null && Objects.equals(other.getName(), getName());
+    }
+
+    /**
      * Returns true if both items have the same identity and data fields.
      * This defines a stronger notion of equality between two items.
      */

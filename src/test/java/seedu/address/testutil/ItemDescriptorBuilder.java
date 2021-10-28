@@ -46,6 +46,14 @@ public class ItemDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Name} of the {@code ItemDescriptor} that we are building.
+     */
+    public ItemDescriptorBuilder setName(Name name) {
+        descriptor.setName(name);
+        return this;
+    }
+
+    /**
      * Sets the {@code Count} of the {@code ItemDescriptor} that we are building.
      */
     public ItemDescriptorBuilder withCount(String count) {

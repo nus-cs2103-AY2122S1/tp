@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
@@ -28,6 +28,7 @@ import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.ItemDescriptorBuilder;
+import seedu.address.testutil.TypicalIndexes;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -56,10 +57,9 @@ public class EditCommandTest {
         Item lastItem = (Item) model.getFilteredDisplayList().get(indexLastItem.getZeroBased());
 
         ItemBuilder itemInList = new ItemBuilder(lastItem);
-        Item editedItem = itemInList.withName(VALID_NAME_DONUT).withTags(VALID_TAG_BAKED).build();
+        Item editedItem = itemInList.withId(VALID_ID_DONUT).build();
 
-        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT)
-                .withTags(VALID_TAG_BAKED).build();
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withId(VALID_ID_DONUT).build();
         EditCommand editCommand = new EditCommand(indexLastItem, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
@@ -118,6 +118,24 @@ public class EditCommandTest {
                 new ItemDescriptorBuilder(itemInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_ITEM);
+    }
+
+    @Test
+    public void execute_duplicateIdUnfilteredList_failure() {
+        Item secondItem = model.getInventory().getItemList().get(INDEX_SECOND_ITEM.getZeroBased());
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withId(secondItem.getId()).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_ID);
+    }
+
+    @Test
+    public void execute_duplicateNameUnfilteredList_failure() {
+        Item secondItem = model.getInventory().getItemList().get(INDEX_SECOND_ITEM.getZeroBased());
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().setName(secondItem.getName()).build();
+        EditCommand editCommand = new EditCommand(TypicalIndexes.INDEX_THIRD_ITEM, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_NAME);
     }
 
     @Test

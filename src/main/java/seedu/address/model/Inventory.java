@@ -73,6 +73,24 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
+     * Returns true if an item with the same identity fields as {@code item} that exists in the inventory.
+     * @see Item#isSameItem(Item)
+     */
+    public boolean hasId(Item item) {
+        requireNonNull(item);
+        return items.containsID(item);
+    }
+
+    /**
+     * Returns true if an item with the same identity fields as {@code item} that exists in the inventory.
+     * @see Item#isSameItem(Item)
+     */
+    public boolean hasName(Item item) {
+        requireNonNull(item);
+        return items.containsName(item);
+    }
+
+    /**
      * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
      * @see ItemDescriptor#isMatch(Item)
      */

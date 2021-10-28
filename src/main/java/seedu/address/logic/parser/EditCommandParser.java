@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COUNT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
@@ -37,16 +37,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_COSTPRICE, PREFIX_SALESPRICE);
 
         Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
+        boolean editId = true;
 
         ItemDescriptor itemDescriptor = new ItemDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             itemDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editId = false;
         }
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             itemDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
@@ -65,7 +61,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!itemDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COUNT_INDEX, EditCommand.MESSAGE_USAGE), pe);
+        }
         return new EditCommand(index, itemDescriptor);
     }
 

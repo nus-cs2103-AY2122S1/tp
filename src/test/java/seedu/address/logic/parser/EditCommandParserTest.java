@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COUNT_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -43,28 +44,27 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_BAGEL, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_BAGEL, EditCommand.MESSAGE_NOT_EDITED);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_BAGEL, MESSAGE_INVALID_FORMAT);
-
+        assertParseFailure(parser, "-5 n/t" + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_BAGEL, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0 n/t" + NAME_DESC_BAGEL, MESSAGE_INVALID_COUNT_INDEX);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string n/t", MESSAGE_INVALID_COUNT_INDEX);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string n/t", MESSAGE_INVALID_COUNT_INDEX);
     }
 
     @Test

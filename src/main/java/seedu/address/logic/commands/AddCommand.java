@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -23,13 +24,15 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds item(s) to the inventory. "
-            + "Parameters: "
+            + "\nEnter all fields if item added for the first time"
+            + "\nIf replenish an existing item, only name or/and id, and count are needed"
+            + "\nParameters: "
             + "NAME "
             + PREFIX_ID + "ID "
             + PREFIX_COUNT + "COUNT "
-            + PREFIX_COSTPRICE + "COSTPRICE "
-            + PREFIX_SALESPRICE + "SALESPRICE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_COSTPRICE + "COSTPRICE]"
+            + " [" + PREFIX_SALESPRICE + "SALESPRICE] "
+            + " [" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + "Banana Bread "
             + PREFIX_ID + "019381 "
@@ -43,6 +46,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %d x %s";
     public static final String MESSAGE_INCOMPLETE_INFO = "Item has not been added before,"
             + " please provide name, id, cost price, and sales price";
+    public static final String MESSAGE_ID_NOT_FOUND = "Name provided exists but id provided is nonexistent";
+    public static final String MESSAGE_NAME_NOT_FOUND = "Id provided exists but name provided is nonexistent";
+    public static final String MESSAGE_ID_EXISTS = "Id provided already used for another item";
+    public static final String MESSAGE_NAME_EXISTS = "Name provided already used for another item";
     public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple candidates found, which one did you mean to add?";
 
     private final ItemDescriptor toAddDescriptor;
@@ -78,11 +85,42 @@ public class AddCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_SUCCESS_NEW, newItem));
         }
-
+        // Check that id and name of the replenished item does not exist
+        if (!toAddDescriptor.getName().equals(Optional.empty())
+                && !toAddDescriptor.getId().equals(Optional.empty())
+                && toAddDescriptor.getCostPrice().equals(Optional.empty())
+                && toAddDescriptor.getSalesPrice().equals(Optional.empty())) {
+            toAddDescriptor.setCostPrice(1.0);
+            toAddDescriptor.setSalesPrice(1.0);
+            //check that id does not exist
+            if (!model.hasId(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_ID_NOT_FOUND);
+            }
+            //check that name does not exist
+            if (!model.hasName(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            }
+        }
         // Check that only 1 item fit the description
         if (matchingItems.size() > 1) {
             model.updateFilteredItemList(DISPLAY_INVENTORY, toAddDescriptor::isMatch);
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
+        }
+        // Check that id and name of new item does not exist
+        if (!toAddDescriptor.getName().equals(Optional.empty())
+                && !toAddDescriptor.getId().equals(Optional.empty())
+                && !toAddDescriptor.getCostPrice().equals(Optional.empty())
+                && !toAddDescriptor.getSalesPrice().equals(Optional.empty())) {
+            toAddDescriptor.setCostPrice(1.0);
+            toAddDescriptor.setSalesPrice(1.0);
+            //check that id exists
+            if (model.hasId(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_ID_EXISTS);
+            }
+            //check that name exists
+            if (model.hasName(toAddDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_NAME_EXISTS);
+            }
         }
 
         Item target = matchingItems.get(0);

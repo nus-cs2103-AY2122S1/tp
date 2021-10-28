@@ -71,6 +71,20 @@ public interface Model {
     boolean hasItem(Item item);
 
     /**
+     * Returns true if an item with the given {@code id} exists in the inventory.
+     *
+     * @see Item#isSameItem
+     */
+    boolean hasId(Item item);
+
+    /**
+     * Returns true if an item with the given {@code id} exists in the inventory.
+     *
+     * @see Item#isSameItem
+     */
+    boolean hasName(Item item);
+
+    /**
      * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
      */
     List<Item> getItems(ItemDescriptor descriptor);

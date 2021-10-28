@@ -22,7 +22,6 @@ public class ListCommandParserTest {
     public void parse_noArgs_returnsListCommand() {
         // asking help for list command
         ListInventoryCommand expectedListCommand = new ListInventoryCommand(DisplayMode.DISPLAY_INVENTORY);
-
         assertParseSuccess(parser, "", expectedListCommand);
     }
 

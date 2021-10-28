@@ -10,6 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -44,11 +45,13 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory.";
+    public static final String MESSAGE_DUPLICATE_ID = "This id clashes with another item in the inventory.";
+    public static final String MESSAGE_DUPLICATE_NAME = "This name clashes with another item in the inventory.";
     public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
             "Can't edit if not in inventory mode. Please use \"list\" first";
 
     private final Index index;
-    private final ItemDescriptor itemDescriptor;
+    private final ItemDescriptor toEditDescriptor;
 
     /**
      * @param index of the item in the filtered item list to edit
@@ -59,7 +62,7 @@ public class EditCommand extends Command {
         requireNonNull(itemDescriptor);
 
         this.index = index;
-        this.itemDescriptor = new ItemDescriptor(itemDescriptor);
+        this.toEditDescriptor = new ItemDescriptor(itemDescriptor);
     }
 
     @Override
@@ -75,13 +78,19 @@ public class EditCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
-
         Item itemToEdit = (Item) lastShownList.get(index.getZeroBased());
-        Item editedItem = createEditedItem(itemToEdit, itemDescriptor);
+        Item editedItem = createEditedItem(itemToEdit, toEditDescriptor);
 
         if (!itemToEdit.isSameItem(editedItem) && model.hasItem(editedItem)) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
         }
+        if (model.hasId(editedItem) && !toEditDescriptor.getId().equals(Optional.empty())) {
+            throw new CommandException(MESSAGE_DUPLICATE_ID);
+        }
+        if (model.hasName(editedItem) && !toEditDescriptor.getName().equals(Optional.empty())) {
+            throw new CommandException(MESSAGE_DUPLICATE_NAME);
+        }
+
 
         model.setItem(itemToEdit, editedItem);
         model.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
@@ -120,7 +129,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && itemDescriptor.equals(e.itemDescriptor);
+                && toEditDescriptor.equals(e.toEditDescriptor);
     }
 
 }

@@ -12,7 +12,7 @@ public class EndAndTransactOrderCommand extends Command {
     public static final String COMMAND_WORD = "eorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": exit ordering mode and make transactions."
-            + "Example: " + COMMAND_WORD;
+            + "\nExample: " + COMMAND_WORD;
 
 
     public static final String MESSAGE_SUCCESS = "Order is placed.";

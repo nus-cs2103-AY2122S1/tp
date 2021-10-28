@@ -13,7 +13,7 @@ public class StartOrderCommand extends Command {
     public static final String COMMAND_WORD = "sorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an order and enter ordering mode. "
-            + "Example: " + COMMAND_WORD;
+            + "\nExample: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Ordering mode: Please enter item name and quantity.";
 

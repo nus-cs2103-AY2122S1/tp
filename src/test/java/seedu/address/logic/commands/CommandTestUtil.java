@@ -35,7 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_100PLUS = "100Plus";
     public static final String VALID_NAME_H20 = "H20";
     public static final String VALID_ID_BAGEL = "123";
-    public static final String VALID_ID_DONUT = "789012";
+    public static final String VALID_ID_DONUT = "789013";
     public static final String VALID_COUNT_BAGEL = "5";
     public static final String VALID_COUNT_DONUT = "6";
     public static final String VALID_COSTPRICE_BAGEL = "5.0";

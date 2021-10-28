@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -19,13 +20,16 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the item from the inventory entirely.\n"
-            + "Parameters: NAME "
-            + "Or " + PREFIX_ID + "ID"
-            + "Example: " + COMMAND_WORD + "Apple Pie";
+            + ": Erases the item from the inventory entirely.\n"
+            + "Removes all memory about an item including cp and sp \n"
+            + "Parameters: " + "NAME"
+            + " Or " + PREFIX_ID + "ID \n"
+            + "Example: " + COMMAND_WORD + " Apple Pie";
 
     public static final String MESSAGE_SUCCESS = "Item deleted: %1$s";
     public static final String MESSAGE_ITEM_NOT_FOUND = "No such item in the inventory";
+    public static final String MESSAGE_ID_NOT_FOUND = "Name provided exists but id provided is nonexistent";
+    public static final String MESSAGE_NAME_NOT_FOUND = "Id provided exists but name provided is nonexistent";
     public static final String MESSAGE_MULTIPLE_MATCHES =
             "Multiple candidates found, which one did you mean to delete?";
 
@@ -48,6 +52,20 @@ public class DeleteCommand extends Command {
         // Check if item exists in inventory
         if (matchingItems.size() == 0) {
             throw new CommandException(MESSAGE_ITEM_NOT_FOUND);
+        }
+        //check that id and name given matches
+        if (!toDeleteDescriptor.getName().equals(Optional.empty())
+                && !toDeleteDescriptor.getId().equals(Optional.empty())) {
+            toDeleteDescriptor.setCostPrice(1.0);
+            toDeleteDescriptor.setSalesPrice(1.0);
+            //check that id exists
+            if (!model.hasId(toDeleteDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_ID_NOT_FOUND);
+            }
+            //check that name exists
+            if (!model.hasName(toDeleteDescriptor.buildItem())) {
+                throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            }
         }
 
         // Check that only 1 item fit the description

@@ -118,7 +118,6 @@ public class AddressBookParserTest {
 
         String listTransactionInput = ListCommand.COMMAND_WORD + " " + ListTransactionCommand.TRANSACTIONS_KEYWORD;
         assertTrue(parser.parseCommand(listTransactionInput) instanceof ListTransactionCommand);
-
     }
 
     @Test
