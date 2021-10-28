@@ -184,8 +184,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Client> removeAll(List<ClientId> clientIds) {
-        return addressBook.removeAll(clientIds);
+    public List<Client> removeAllClients(List<ClientId> clientIds) {
+        return addressBook.removeAllClients(clientIds);
     }
 
     @Override
@@ -197,7 +197,7 @@ public class ModelManager implements Model {
     @Override
     public List<Client> setAllClients(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireAllNonNull(clientIds, editedClientDescriptor);
-        return addressBook.setAll(clientIds, editedClientDescriptor);
+        return addressBook.setAllClients(clientIds, editedClientDescriptor);
     }
 
     @Override

@@ -33,6 +33,7 @@ public interface Model {
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -126,7 +127,7 @@ public interface Model {
     /**
      * Deletes the client with the matching Client ID and Email and returns the deleted client
      */
-    List<Client> removeAll(List<ClientId> clientIds);
+    List<Client> removeAllClients(List<ClientId> clientIds);
 
     /**
      * Adds the given client.

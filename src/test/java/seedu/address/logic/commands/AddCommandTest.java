@@ -187,7 +187,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Client> removeAll(List<ClientId> clientIds) {
+        public List<Client> removeAllClients(List<ClientId> clientIds) {
             throw new AssertionError("This method should not be called.");
         }
 

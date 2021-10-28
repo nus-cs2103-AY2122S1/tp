@@ -127,7 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @return the given client {@code target} in the list with {@code editedClient}.
      */
-    public List<Client> setAll(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
+    public List<Client> setAllClients(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireNonNull(clientIds);
         requireNonNull(editedClientDescriptor);
         return clients.setAll(clientIds, editedClientDescriptor);
@@ -220,7 +220,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes client with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Client with {@code clientId} and {@code email} must exist in the address book.
      */
-    public List<Client> removeAll(List<ClientId> clientIds) {
+    public List<Client> removeAllClients(List<ClientId> clientIds) {
         return clients.removeAll(clientIds);
     }
 
