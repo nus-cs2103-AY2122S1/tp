@@ -75,7 +75,7 @@ Shows a message explaning how to access the help page.
 
 ### Adding a student: `add`
 
-Adds a student to the record.
+Adds a student to EdRecord.
 
 Format: `add n/NAME p/PHONE e/EMAIL [m/MODULE] [c/CLASS] [i/INFO] [t/TAG]…​`
 
