@@ -21,9 +21,11 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Pinning a person: `pin`](#pinning-a-person--pin)
   * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
-  * [Deleting multiple person : `deletem`](#deleting-multiple-people--deleteM)
+  * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [Command Assistant](#command-assistant)
+  * [Command History](#command-history)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -40,7 +42,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will show a list of commands that CONNECTIONS supports.<br>
    Click [here](#command-summary) for example commands you can try!
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -79,21 +81,23 @@ Shows help message explaining each command.
 
 #### Format:
 * `help` - List out all available commands
-* `help COMMAND` - Shows help message for the command
-* `help more` - Opens link to documentation
-![help message](images/helpMessage.png)
+* `help COMMAND` - Shows help message for the command specified
+
+Notes:
+* Use the command `help more` to open a link to the documentation
+
 
 **Sample Usage:**
 
-`help add`
-
-**Sample Outcome:**
-
-```
-add: Adds a person to the address book.
-Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...
-Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
-```
+* `help`
+  * Shows all available commands
+  ![help](images/helpMessage.png)
+* `help add`
+  * Shows help message for `add`
+  ![help_with_command](images/helpWithCommand.png)
+* `help more`
+  * Opens a link to the documentation
+  ![help link](images/helpLink.png)
 
 ### Adding a person: `add`
 
@@ -172,6 +176,7 @@ Removes an existing tag from an existing person in the address book.
 Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Only tags that exist will be removed.
+* If the command contains tags that the person does not have, a warning will be shown and no tags will be removed.
 
 **Sample Usage:**
 * `untag 2 t/friend t/NUS`
@@ -283,12 +288,12 @@ Notes:
 * `find Betsy` followed by `delete 1`
   * deletes the 1st person in the results of the `find` command.
 
-### Deleting multiple people : `deleteM`
+### Deleting multiple people : `deletem`
 
 Deletes the people within the range from the address book.
 
 #### Format:
-* `deleteM START_INDEX - END_INDEX`
+* `deletem START_INDEX - END_INDEX`
 
 Notes:
 * Deletes the people within the specified range from `START_INDEX to END_INDEX`.
@@ -297,9 +302,9 @@ Notes:
 * The `END_INDEX` must be bigger than or equal to `START_INDEX`
 
 **Sample Usage:**
-* `list` followed by `deleteM 2 - 3`
+* `list` followed by `deletem 2 - 3`
   * deletes the 2nd and 3rd person in the address book.
-* `find Betsy` followed by `deleteM 1 - 5`
+* `find Betsy` followed by `deletem 1 - 5`
   * deletes the 1st and 2nd person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -315,6 +320,33 @@ Exits the program.
 
 #### Format:
 * `exit`
+
+### Command Assistant
+
+Shows command format and example as the command is entered
+
+#### Sample Usage:
+
+* `edit` is entered in the command box
+  * CONNECTIONS shows command format and sample for `edit`
+    ![Tag_Command_Assistant](images/commandAssistantEdit.png)
+
+* `tag` is entered in the command box
+  * CONNECTIONS shows command format and sample for `tag`
+  ![Tag_Command_Assistant](images/commandAssistantTag.png)
+
+### Command History
+
+View and use previously called commands.
+
+Notes:
+* Only commands from the current program run can be viewed. Commands from previous runs are not stored.
+
+#### Sample Usage:
+* Up Arrow
+  * Shows the previous command called in the command box, or the earliest command called if there are no earlier commands.
+* Down Arrow
+  * Shows the next command called in the command box, or an empty command box if there are no later commands.
 
 ### Saving the data
 
@@ -350,7 +382,7 @@ Action | Summary | Format, Examples
 **Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
 **Clear** | Clears all entries | `clear`
 **Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
-**DeleteM** | Deletes multiple people within the range | `deletem START_INDEX END_INDEX`<br> e.g., `deletem 3 - 5`
+**Deletem** | Deletes multiple people within the range | `deletem START_INDEX END_INDEX`<br> e.g., `deletem 3 - 5`
 **Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Exit** | Exits the program | `exit`
 **Find** | Locates persons by name and tags (Results fulfill all search terms)| `find n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `find n/James t/friends`
