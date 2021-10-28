@@ -147,7 +147,7 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
+                .append("; Telegram Handle: ")
                 .append(getTeleHandle())
                 .append("; Email: ")
                 .append(getEmail())
