@@ -238,8 +238,7 @@ Examples:
 [Back to Table of Contents](#table-of-contents)
 
 #### Finding a member: `findm`
-
-If you want to see specific members you are looking for,`findm` lets you find and filter members whose name contains any of the
+If you are looking for specific members,`findm` lets you find and filter members based on any of the
 specified field keywords.
 
 Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...`
