@@ -66,7 +66,7 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(Lesson source) {
         date = source.getStartDate().value;
         timeRange = source.getTimeRange().value;
-        subject = source.getSubject().subject;
+        subject = source.getSubject().value;
         lessonRates = source.getLessonRates().value;
         homework.addAll(source.getHomework().stream()
                 .map(JsonAdaptedHomework::new)

@@ -11,7 +11,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -39,8 +41,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIND_CONDITION, PREFIX_NAME,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_ACAD_LEVEL, PREFIX_TAG,
-                PREFIX_TIME, PREFIX_DATE);
+                PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_ACAD_LEVEL, PREFIX_REMARK, PREFIX_TAG,
+                PREFIX_TIME, PREFIX_DATE, PREFIX_SUBJECT);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -75,6 +77,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_ACAD_LEVEL).isPresent()) {
             predicate.setAcadLevelKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_ACAD_LEVEL).get()));
         }
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            predicate.setRemarkKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_REMARK).get()));
+        }
 
         // Lesson args
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
@@ -82,6 +87,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             predicate.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            predicate.setSubjectKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_SUBJECT).get()));
         }
 
         Optional<List<String>> tagsKeywords = parseTagsForFind(argMultimap.getAllValues(PREFIX_TAG));

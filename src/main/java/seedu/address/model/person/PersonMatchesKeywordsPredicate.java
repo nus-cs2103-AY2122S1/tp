@@ -28,11 +28,13 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     private List<String> schoolKeywords;
     private List<String> acadStreamKeywords;
     private List<String> acadLevelKeywords;
+    private List<String> remarkKeywords;
     private List<String> tagKeywords;
 
     // Lesson Keywords
     private Date date;
     private TimeRange timeRange;
+    private List<String> subjectKeywords;
 
     private FindCondition condition = FindCondition.ALL; // default find condition is match all
 
@@ -44,8 +46,8 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     public boolean isAnyFieldSearched() {
         return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords,
                 parentPhoneKeywords, parentEmailKeywords, addressKeywords,
-                schoolKeywords, acadStreamKeywords, acadLevelKeywords,
-                timeRange, date,
+                schoolKeywords, acadStreamKeywords, acadLevelKeywords, remarkKeywords,
+                timeRange, date, subjectKeywords,
                 tagKeywords);
     }
 
@@ -62,7 +64,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param condition Find condition
      */
     public void setCondition(FindCondition condition) {
-        this.condition = condition;
+        condition = condition;
     }
 
     /**
@@ -78,7 +80,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Name keywords to find.
      */
     public void setNameKeywords(List<String> keywords) {
-        this.nameKeywords = keywords;
+        nameKeywords = keywords;
     }
 
     /**
@@ -94,7 +96,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Phone keywords to find.
      */
     public void setPhoneKeywords(List<String> keywords) {
-        this.phoneKeywords = keywords;
+        phoneKeywords = keywords;
     }
 
     /**
@@ -110,7 +112,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Email keywords to find.
      */
     public void setEmailKeywords(List<String> keywords) {
-        this.emailKeywords = keywords;
+        emailKeywords = keywords;
     }
 
     /**
@@ -126,7 +128,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Parent phone keywords to find.
      */
     public void setParentPhoneKeywords(List<String> keywords) {
-        this.parentPhoneKeywords = keywords;
+        parentPhoneKeywords = keywords;
     }
 
     /**
@@ -142,7 +144,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Parent email keywords to find.
      */
     public void setParentEmailKeywords(List<String> keywords) {
-        this.parentEmailKeywords = keywords;
+        parentEmailKeywords = keywords;
     }
 
     /**
@@ -158,7 +160,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Address keywords to find.
      */
     public void setAddressKeywords(List<String> keywords) {
-        this.addressKeywords = keywords;
+        addressKeywords = keywords;
     }
 
     /**
@@ -174,7 +176,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords School keywords to find.
      */
     public void setSchoolKeywords(List<String> keywords) {
-        this.schoolKeywords = keywords;
+        schoolKeywords = keywords;
     }
 
     /**
@@ -190,7 +192,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Academic stream keywords to find.
      */
     public void setAcadStreamKeywords(List<String> keywords) {
-        this.acadStreamKeywords = keywords;
+        acadStreamKeywords = keywords;
     }
 
     /**
@@ -206,7 +208,23 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @param keywords Academic level keywords to find.
      */
     public void setAcadLevelKeywords(List<String> keywords) {
-        this.acadLevelKeywords = keywords;
+        acadLevelKeywords = keywords;
+    }
+
+    /**
+     * Returns optional remark level keywords.
+     */
+    public Optional<List<String>> getRemarkKeywords() {
+        return Optional.ofNullable(remarkKeywords);
+    }
+
+    /**
+     * Sets keywords to match with a Person's remarks.
+     *
+     * @param keywords Remark keywords to find.
+     */
+    public void setRemarkKeywords(List<String> keywords) {
+        this.remarkKeywords = keywords;
     }
 
     /**
@@ -219,7 +237,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns optional time range keywords.
+     * Returns optional time range.
      */
     public Optional<TimeRange> getTimeRange() {
         return Optional.ofNullable(timeRange);
@@ -235,10 +253,26 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns optional date keywords.
+     * Returns optional date.
      */
     public Optional<Date> getDate() {
         return Optional.ofNullable(date);
+    }
+
+    /**
+     * Sets keywords to match with a Person's Lesson's subject.
+     *
+     * @param keywords Subject keywords to find.
+     */
+    public void setSubjectKeywords(List<String> keywords) {
+        subjectKeywords = keywords;
+    }
+
+    /**
+     * Returns optional subject keywords.
+     */
+    public Optional<List<String>> getSubjectKeywords() {
+        return Optional.ofNullable(subjectKeywords);
     }
 
     /**
@@ -351,12 +385,28 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         return person -> isMatch(acadLevelKeywords, person.getAcadLevel().value);
     }
 
+    /**
+     * Returns a {@code Predicate} that tests that a {@code Person}'s {@code Remark} matches the keywords given.
+     *
+     * @return A predicate that tests a person's remarks.
+     */
+    private Predicate<Person> getRemarkMatchPredicate() {
+        return person -> isMatch(remarkKeywords, person.getRemark().value);
+    }
+
+
+    // Person Lesson predicates ----------------------------------------------------------------------------------------
+
     private Predicate<Person> getTimeRangeMatchPredicate() {
         return getLessonAnyMatch(lesson -> timeRange.isClashing(lesson.getTimeRange()));
     }
 
     private Predicate<Person> getDateMatchPredicate() {
         return getLessonAnyMatch(lesson -> lesson.hasLessonOnDate(date));
+    }
+
+    private Predicate<Person> getSubjectMatchPredicate() {
+        return getLessonAnyMatch(lesson -> isMatch(subjectKeywords, lesson.getSubject().value));
     }
 
     private Predicate<Person> getLessonAnyMatch(Predicate<Lesson> predicate) {
@@ -416,6 +466,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         if (getAcadLevelKeywords().isPresent()) {
             predicates.add(getAcadLevelMatchPredicate());
         }
+        if (getRemarkKeywords().isPresent()) {
+            predicates.add(getRemarkMatchPredicate());
+        }
         if (getTagKeywords().isPresent()) {
             predicates.addAll(getTagsMatchPredicates());
         }
@@ -426,6 +479,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
         if (getDate().isPresent()) {
             predicates.add(getDateMatchPredicate());
+        }
+        if (getSubjectKeywords().isPresent()) {
+            predicates.add(getSubjectMatchPredicate());
         }
 
         return predicates;
