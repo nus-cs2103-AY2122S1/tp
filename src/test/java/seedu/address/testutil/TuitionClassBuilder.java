@@ -42,7 +42,7 @@ public class TuitionClassBuilder {
         name = classToCopy.getName();
         limit = classToCopy.getLimit();
         timeslot = classToCopy.getTimeslot();
-        studentList = classToCopy.getStudentList();
+        studentList = getNewStudentList(classToCopy.getStudentList());
         remark = classToCopy.getRemark();
         id = classToCopy.getId();
     }
@@ -95,5 +95,11 @@ public class TuitionClassBuilder {
 
     public TuitionClass build() {
         return new TuitionClass(name, limit, timeslot, studentList, remark, id);
+    }
+
+    private StudentList getNewStudentList(StudentList studentListToCopy) {
+        ArrayList<String> newList = new ArrayList<>();
+        newList.addAll(studentListToCopy.getStudents());
+        return new StudentList(newList);
     }
 }

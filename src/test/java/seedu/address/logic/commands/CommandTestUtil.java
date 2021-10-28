@@ -106,6 +106,20 @@ public class CommandTestUtil {
 
     /**
      * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
+     */
+    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage) {
+        try {
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            CommandResult result = command.execute(actualModel);
+            assertEquals(expectedCommandResult, result);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered student list and selected student in {@code actualModel} remain unchanged
@@ -119,6 +133,23 @@ public class CommandTestUtil {
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the address book, filtered student list and selected student in {@code actualModel} remain unchanged
+     */
+    public static void assertCommandFailureWithoutException(Command command, Model actualModel,
+                                                            String expectedMessage) {
+        try {
+            CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+            CommandResult result = command.execute(actualModel);
+            assertEquals(expectedCommandResult, result);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should fail.", ce);
+        }
     }
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the

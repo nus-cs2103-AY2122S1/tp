@@ -192,7 +192,7 @@ public class AddToClassCommand extends Command {
      * @param tuitionClass the tuition class students are added to
      * @return a CommandResult of the AddToClass command
      */
-    private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) throws CommandException {
+    private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) {
         ArrayList<String> studentNames = new ArrayList<>();
         for (Index index: studentIndex) {
             Student student = model.getStudent(index);
