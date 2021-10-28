@@ -399,9 +399,9 @@ User can specify which fields to download using arguments
 
 Step 1. The user filters the contacts using some other command, such as `find`
 
-Step 2. The user provides a series of prefixes to pick the fields to `mailingList`, if none are provided, proceed using the defaults
+Step 2. The user provides a series of prefixes to `mailingList` to pick the fields, if none are provided, proceed using the defaults
 
-Step 3. The user is prompted to pick the name and location of their CSV exported file.
+Step 3. The user is prompted to pick the name and location of their CSV file.
 
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.

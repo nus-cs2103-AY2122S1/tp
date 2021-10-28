@@ -22,14 +22,13 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
   * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
-  * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list--mailingList)
+  * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailingList)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
   * [Command Assistant](#command-assistant)
   * [Command History](#command-history)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -308,7 +307,7 @@ Notes:
 * `find Betsy` followed by `deletem 1 - 5`
   * deletes the 1st and 2nd person in the results of the `find` command.
 
-### Exporting a mailing list of contacts
+### Exporting a mailing list of contacts : `mailingList`
 
 Exports a CSV file of the current view containing specified fields
 
