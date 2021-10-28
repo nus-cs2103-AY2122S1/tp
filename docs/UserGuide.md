@@ -254,7 +254,7 @@ Notes:
 * `find Betsy` followed by `pin 1`
   * pins the 1st person in the results of the `find` command.
 
-### Pinning a person : `unpin`
+### Unpinning a person : `unpin`
 
 ### Format:
 * `unpin INDEX`
