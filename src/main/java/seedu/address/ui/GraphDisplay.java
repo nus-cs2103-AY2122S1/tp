@@ -22,6 +22,8 @@ public class GraphDisplay extends UiPart<Region> {
     }
 
     public void setChart(Chart chart) {
+        // to make the image save properly
+        chart.setAnimated(false);
         placeHolder.getChildren().add(chart);
     }
 
