@@ -4,6 +4,8 @@ title: User Guide
 ---
 Welcome to **Source Control** User Guide! 
 
+This user guide is for both new users of Source Control and any experienced users looking to refresh their memory on how to use Source Control.
+
 Source Control is a **desktop app for CS1101S professors to manage the performance of their students**. 
 This application allows you to **store comprehensive data** of each student quickly, and allows you to search through them easily. 
 With Source Control, you will never have to worry about your large student cohort and tracking numerous assessments! <br>
@@ -118,7 +120,7 @@ Format: `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t 
 Examples:
 * `add student -n Jonas Chow -i E0123456` adds the student Jonas Chow with the given NUSNET ID. 
 * `add student -n Jonas Chow -i E0123456 -g T01A -g R01A` adds the student Jonas Chow and allocate him into groups `T01A` and `R01A`. 
-* `add student -n Jane Doe -i E0123456 -t beginner` adds the student Jonas Chow and tag him with `beginner`. 
+* `add student -n Jonas Chow -i E0123456 -t beginner` adds the student Jonas Chow and tag him with `beginner`. 
 
 
 ### Creating a new group : `add group`
@@ -293,6 +295,7 @@ Format: `export [-f <file_path>]`
 * The file path can be either the absolute path or the relative path.
 * The relative path will be relative to the folder your jar file is located.
 * If the file path is not specified, it will be saved to `sourceControl.csv`.
+* The format of the csv file saved matches exactly the csv format used by the `import` command.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -304,15 +307,16 @@ Format: `export [-f <file_path>]`
 
 Examples:
 * `export -f student_data.csv`
+* `export -f /home/prof/CS1101S/student_data.csv`
 * `export` will save the data in `sourceControl.csv`
 
 
 ### Resetting all data: `clear`
 
-Clears all existing data. Be careful with this command! 
+Clears all existing data. 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-You can't undo this command! You can use the `export` command to get a backup of the data before clearing.
+Be careful: you can't undo this command! You can use the `export` command to get a backup of the data before clearing.
 </div>
 
 Format: `clear`
