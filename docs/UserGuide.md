@@ -37,6 +37,11 @@ _text_ | Caption for images.
 :information_source: | Indication that the following text is a note.
 :bulb: | Indication that the following text is a tip.
 :exclamation: | Indication that the following text is important.
+
+**Application Layout**
+![layout](images/annotation.png)
+<div class="caption">Basic layout of TAB's user interface.</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
