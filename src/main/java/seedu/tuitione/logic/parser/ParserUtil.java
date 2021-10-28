@@ -9,7 +9,6 @@ import static seedu.tuitione.model.lesson.Price.PRICE_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.model.lesson.Price.isValidPrice;
 import static seedu.tuitione.model.lesson.Subject.SUBJECT_MESSAGE_CONSTRAINTS;
 import static seedu.tuitione.model.lesson.Subject.isValidSubject;
-import static seedu.tuitione.model.student.Student.MAX_REMARK_SIZE;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -38,10 +37,11 @@ import seedu.tuitione.model.student.ParentContact;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TIME = "Time formatting is invalid.";
-    public static final String MESSAGE_INVALID_DAY = "Day formatting is invalid.";
-    public static final String MESSAGE_INVALID_COST_NOT_NUMBER = "Cost formating is invalid, it is not a number.";
+    public static final String MESSAGE_INVALID_INDEX = "⚠\tAlert:\n\nIndex is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_TIME = "⚠\tAlert:\n\nTime formatting is invalid.";
+    public static final String MESSAGE_INVALID_DAY = "⚠\tAlert:\n\nDay formatting is invalid.";
+    public static final String MESSAGE_INVALID_COST_NOT_NUMBER =
+            "⚠\tAlert:\n\nCost formating is invalid, it is not a number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -153,9 +153,6 @@ public class ParserUtil {
         requireNonNull(remarks);
         final Set<Remark> remarkSet = new HashSet<>();
         for (String remarkName : remarks) {
-            if (remarkSet.size() == MAX_REMARK_SIZE) {
-                break;
-            }
             remarkSet.add(parseRemark(remarkName));
         }
         return remarkSet;

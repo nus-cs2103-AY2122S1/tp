@@ -8,7 +8,7 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
  */
 public class Price {
 
-    public static final String PRICE_MESSAGE_CONSTRAINT = "Price cannot be negative";
+    public static final String PRICE_MESSAGE_CONSTRAINT = "⚠\tAlert:\n\nPrice cannot be negative";
     public static final String CURRENCY = "SGD $";
 
     public final double value;

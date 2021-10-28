@@ -17,10 +17,12 @@ import seedu.tuitione.model.student.Student;
  */
 public class Lesson {
 
-    public static final String ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s is unable to enroll for this lesson";
-    public static final String EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s currently has %2$s students enrolled, "
+    public static final String ENROLLMENT_MESSAGE_CONSTRAINT =
+            "%1$s is unable to enroll for this lesson";
+    public static final String EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT =
+            "%1$s currently has %2$s students enrolled, "
             + "and cannot enroll anymore students.";
-    public static final String STUDENT_NOT_ENROLLED = "%1$s is not enrolled for %2$s";
+    public static final String STUDENT_NOT_ENROLLED = "⚠\tAlert:\n\n%1$s is not enrolled for %2$s";
     public static final int MAX_STUDENT_SIZE = 15;
 
     private final Subject subject;

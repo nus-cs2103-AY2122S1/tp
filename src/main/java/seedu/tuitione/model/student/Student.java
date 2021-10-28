@@ -25,7 +25,8 @@ public class Student {
     public static final int MAX_LESSON_SIZE = 10;
     public static final int MAX_REMARK_SIZE = 5;
 
-    public static final String LESSON_SIZE_MESSAGE_CONSTRAINT = "Student %1$s has enrolled for %2$d lessons already.";
+    public static final String LESSON_SIZE_MESSAGE_CONSTRAINT =
+            "⚠\tAlert:\n\nStudent %1$s has enrolled for %2$d lessons already.";
 
     // Identity fields
     private final Name name;
