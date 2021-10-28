@@ -167,11 +167,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Organisation> getFilteredOrganisationList() {
-        return filteredOrganisations;
-    }
-
-    @Override
     public ObservableList<Person> getViewedPerson() {
         return viewedPerson;
     }
@@ -190,11 +185,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-    @Override
-    public void updateFilteredOrganisationList(Predicate<Organisation> predicate) {
-        requireNonNull(predicate);
-        filteredOrganisations.setPredicate(predicate);
     }
 
     @Override
