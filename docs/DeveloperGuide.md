@@ -636,14 +636,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a person to the list of people
+   1. Test case: `add n/Susan p/90090099 e/susan@example.com a/serangoon t/Housewife` <br>
+      Expected: New person Susan is added to the list. Details of the person will be as displayed in the
+      UI under the person list, as well as the status message
+
+   2. Test case: `add n/Susan p/90090099 e/susan@example.com a/serangoon t/Housewife` then 
+      `add n/Susan p/90090099 e/susan@example.com a/serangoon t/Housewife` again <br>
+      Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
+   3. Other incorrect add commands to try: `add`, `add Susan`, `add n/Susan` and other incomplete `add` commands.
+      Expected: Similar to previous.
 
 ### Deleting a person
 
@@ -651,21 +663,61 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   5. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   6. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding an Appointment
 
-### Saving data
+1. Adding an Appointment to the list of Appointments
 
-1. Dealing with missing/corrupted data files
+   1. Prerequisites: List all persons using the `list` command. At least two people in the list.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   2. Test case: `addApp id/1 a/Starbucks @ Raffles City start/01-01-2021 1400 end/01-01-2021 1500 ds/discuss marketing strategies` <br>
+      Expected: New Appointment discuss marketing strategies is added to the list. Details of the Appointment will be as shown in the
+      UI under the Appointment list, and details of the person can be viewed as well. This will also be displayed in the status message.
 
-1. _{ more test cases …​ }_
+   3. Test case: `addApp id/1,2 a/Starbucks @ Nex start/01-01-2021 1500 end/01-01-2021 1600 ds/sell product` <br>
+      Expected: New Appointment discuss marketing strategies is added to the list. Details of the Appointment will be as shown in the
+      UI under the Appointment list, and details of the two people added can be viewed as well. This will also be displayed in the status message.
+
+   4. Test case: `addApp id/1 a/Starbucks @ Raffles City start/01-01-2021 1400 end/01-01-2021 1500 ds/discuss marketing strategies` then
+      `addApp id/2 a/Starbucks @ Raffles City start/01-01-2021 1400 end/01-01-2021 1500 ds/sell product`<br>
+      Expected: No Appointment is added due to clashing time period. Error details shown in the status message. Status bar remains the same.
+
+   5. Other incorrect add commands to try: `addApp`, `addApp Susan`, `addApp n/Susan` and incomplete `addApp` commands.
+      Expected: Similar to previous.
+   
+### Deleting an Appointment
+
+1. Deleting an Appointment while all Appointments are being shown
+
+    1. Prerequisites: List all persons using the `listApp` command. Multiple Appointments in the list.
+
+    2. Test case: `delApp 1`<br>
+       Expected: First Appointment is deleted from the list. Details of the deleted Appointment shown in the status message.
+
+    3. Test case: `delApp 0`<br>
+       Expected: No Appointment is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `delApp`, `delApp x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+   
+### Editing an Appointment
+
+1. Editing an existing Appointment while all Appointments are being shown
+
+   1. Prerequisites: List all persons using the `listApp` command. Multiple Appointments in the list.
+
+   2. Test case: `editApp 1 a/Earth` <br>
+      Expected: The appointment at index 1 will have its address changed to Earth. Details of the edited Appointment shown in the status message.
+
+   3. Incorrect edit commands to try: `editApp`, `editApp 1`, `editApp x a/address` (where x is larger than the list size)
+      `editApp 1 edit` and other incorrect edited inputs <br>
+      Expected: No Appointment is edited. Error details shown in the status message. Status bar remains the same
+      
