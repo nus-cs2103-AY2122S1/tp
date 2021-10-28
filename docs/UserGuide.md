@@ -237,45 +237,45 @@ A module can have 4 different colour codes:
 Tip: Do take a good look at this section to understand the common terminologies that we have used in our Features Section below!
 </div><br>
 
-####`database`
+#### `database`
 * Refers to NUS Mod Tracker's database.
 * Contains all the modules that is currently stored in the application locally.
 * Modules in the database can be view in the [Module List](#324-module-list)
 
-####`academic plan`
+#### `academic plan`
 * Refers to modules that the user has assigned with a specific semester and year.
 * Contributes to the calculation of the MC requirements.<br>
   ![requirements MCs Display](images/CourseRequirementsDisplay.png)
 
-####`INDEX`
+#### `INDEX`
 * The `INDEX` refers to the index number of a module shown in the [database](#database).
 * The `INDEX` **must be a positive integer** (1, 2, 3 ...).<br>
   ![IndexExplanation](images/IndexExplanation.png)
 * For example, with the screenshot above, an `INDEX` of 1 would represent the Module CS2030S, and an `INDEX` of 2 would represent the Module CS2040S.
 
-####`CODE`
+#### `CODE`
 * Represents the `module`'s code component.
 * `CODE` must follow the NUSMods module code format.
 
-####`TITLE`
+#### `TITLE`
 * Represents the `module`'s title component.
 
-####`DESCRIPTION`
+#### `DESCRIPTION`
 * Represents the `module`'s description component.
 
-####`MC`
+#### `MC`
 * Stands for Modular Credits
 * Represents the `module`'s MC component.
 * `MC` must be a **positive integer** (1,2,3...).
 
-####`TAG`
+#### `TAG`
 * Represents the `module`'s tag component.
 
-####`YEAR`
+#### `YEAR`
 * Represents Academic Year of the module that is being taken.
 * The `YEAR` must be a positive integer from 1-6.
 
-####`SEMESTER`
+#### `SEMESTER`
 * Represents Semester of the module that is being taken.
 * The `SEMESTER` must be a positive integer from 1-4.
 * Special semesters 1 and 2 are represented by integer values 3 and 4 respectively
