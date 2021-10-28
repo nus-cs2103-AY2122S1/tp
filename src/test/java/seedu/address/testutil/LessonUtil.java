@@ -37,7 +37,7 @@ public class LessonUtil {
      */
     public static String getLessonEditCommand(int index, int indexToEdit, Lesson lesson) {
         return LessonEditCommand.COMMAND_WORD + " " + index + " " + indexToEdit + " "
-            + getLessonDetailsWithoutRecurrence(lesson);
+            + getLessonDetails(lesson);
     }
 
     /**
@@ -48,16 +48,6 @@ public class LessonUtil {
         if (lesson.isRecurring()) {
             sb.append(PREFIX_RECURRING + " ");
         }
-
-        sb.append(getLessonDetailsWithoutRecurrence(lesson));
-        return sb.toString();
-    }
-
-    /**
-     * Returns the part of command string for the given {@code person}'s details.
-     */
-    public static String getLessonDetailsWithoutRecurrence(Lesson lesson) {
-        StringBuilder sb = new StringBuilder();
 
         sb.append(PREFIX_DATE + lesson.getStartDate().toString() + " ");
         sb.append(PREFIX_TIME + lesson.getTimeRange().toString() + " ");
@@ -70,6 +60,5 @@ public class LessonUtil {
         );
         return sb.toString();
     }
-
 
 }

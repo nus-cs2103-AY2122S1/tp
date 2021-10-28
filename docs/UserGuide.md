@@ -12,7 +12,8 @@ title: User Guide
 
 **Tuition Address Book (TAB)** is an all-in-one desktop application that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
 
-TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
+TAB is a Command Line Interface (CLI) application which allows users to interact with it with just text inputs. On top of that, TAB also 
+comes with a clean and aesthetic Graphical User Interface (GUI), allowing users to view their data easily.
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -27,9 +28,16 @@ In the [Table of Contents](), each item listed is a link which you can click on 
 
 **Conventions Used**
 
-* `text` : denotes a command to be entered into the command box in TAB.
-* <kbd>text</kbd> : denotes a keyboard input, or a button to be clicked on.
-* [text](#about-this-guide) : denotes links to other parts of the document, or links to be opened in the browser.
+Syntax | Meaning
+--------|------------------
+`text` | A command to be entered into the command box in TAB.
+<kbd>text</kbd> | A keyboard input, or a button to be clicked on.
+[text](#about-this-guide) | Links to other parts of the document, or links to be opened in the browser.
+_text_ | Caption for images.
+:information_source: | Indication that the following text is a note.
+:bulb: | Indication that the following text is a tip.
+:exclamation: | Indication that the following text is important.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -56,7 +64,8 @@ to help you with the installation. Follow the guide for your operating system fo
 4. Double-click the file to start the app. The window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
+   
    Some example commands you can try:
 
    * **`list`** : Lists all students.
@@ -70,6 +79,25 @@ to help you with the installation. Follow the guide for your operating system fo
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) section for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Graphical User Interface (GUI)
+
+This section briefly explains the various section of TAB's GUI.
+
+![layout](images/annotation.png)
+<div class="caption">Basic layout of TAB's user interface.</div>
+
+No. | Section | Representation
+----|---------|---------
+1 | Command Box | The text field where you key in commands that are meant to be processed by TAB. TAB will execute the command after you pressed <kbd>Enter</kbd>.
+2 | Result Display | The area that shows the result of the execution of the command. If the command entered has been executed successfully, it will display relevant success messages, otherwise, it will show error messages indicating the cause of the error.
+3 | Student List Panel | The area that shows the list of students you have in TAB.
+4 | Lesson List Panel | The area that shows the name of the student you have selected together with a list of lessons that the student has.
+5 | Center Panel | The area that displays the lists of students and lessons, calendar or the list of tags depending on the command you have entered. See [Features](#features) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -125,7 +153,7 @@ Format: `help`
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
 
-![help message](images/helpMessage.png)
+![help](images/help.png)
 <div class="caption">Help window interface.</div>
 
 <div style="page-break-after: always;"></div>
@@ -242,7 +270,29 @@ This section guides you on how to find or filter students of your choice in TAB.
 
 Finds all students whose fields match the given keyword(s), based on the specified find condition.
 
-Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
+Fields that you can search for are:
+
+| Field            | Parameter                   | Result                                                  |
+|------------------|-----------------------------|---------------------------------------------------------|
+| Student Name     | n/NAME_KEYWORDS             | Students whose name contain the keywords                |
+| Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contain the keywords             |
+| Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contain the keywords        |
+| Student Email    | e/EMAIL_KEYWORDS            | Students whose email contain the keywords               |
+| Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contain the keywords |
+| Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contain the keywords        |
+| School           | sch/SCHOOL_KEYWORDS         | Students whose school contain the keywords              |
+| Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contain the keywords     |
+| Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contain the keywords      |
+| Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contain the keywords         |
+| Tags             | t/TAG                           | Students who have the specified tag                 |
+| Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students with lessons that match the keywords       |
+| Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date              |
+| Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range        |
+| Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date |
+| Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword|
+| Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contain the keywords    |                                           |
+
+Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS]`
 
 Notes about the find condition:
 
@@ -252,14 +302,9 @@ Notes about the find condition:
     * `find n/John t/math cond/all` will return students with both the name `John` and the tag `math`.
     * `find n/John t/math cond/any` will return students with only the name `John`, or only the tag `math`, or both.
     * `find n/John t/math cond/none` will return students without the name `John` and the tag `math`.
-
-* The find condition will not accept other arguments besides `all`, `any` and `none`.<br>
-  e.g. `cond/every` will result in an error.
-  
-* The find condition is optional and defaults to `all` if not specified.
-
-* The find condition is case-insensitive.<br>
-  e.g. `None` or `ANY` are valid.
+    
+* The find condition is optional and defaults to `all` if not specified. <br>
+  e.g. `find date/10 Oct 2021 time/1000-1400` will return students with lessons that occur between `1000-1400` on `10 Oct 2021`.
   
 Notes about search keywords:
 
@@ -296,17 +341,13 @@ To find a student, you may enter `find a/serangoon n/Bern` into the command box.
 
 All students in TAB whose address matches `serangoon` and whose name matches `Bern` will be returned. The figure below shows the list after the find command is executed.
 
-<div align="center">
-  <img class="figure" src="images/FindStudents2.png" width="400px" alt="find eg1"/>
-</div>
+![findAll](images/findAll.png)
 <div class="caption">TAB displays one student after the find command.</div>
 
 To find students without the `unpaid` tag and whose school is not `NYJC`, you may enter the command `find cond/none t/unpaid sch/NYJC`. The figure below shows the list after this find command is executed.
 
-<div align="center">
-  <img class="figure" src="images/FindStudents3.png" width="400px" alt="find eg2"/>
-</div>
-<div class="caption">TAB displays two students after the find command.</div>
+![findNone](images/findNone.png)
+<div class="caption">TAB displays three students after the find command.</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -320,21 +361,26 @@ A lesson can be categorised into 2 types:
 2. A one-off makeup lesson.
 
 The essential fields for a lesson are:
-* Date
+* Start date
 * Time range
 * Subject
 * Rate
+
+An optional field for both types of lesson is:
+* Homework
+
+Optional fields for a **recurring** lesson is:
+* End date
+* Cancelled dates
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 * The lesson's rate refers to the fee of the lesson per hour.
 This rate will be used in the calculation of fees due after each lesson.
 
-*  A lesson can be identified by the index number shown in the lesson list of the student.
+* A lesson can be identified by the index number shown in the lesson list of the student.
 </div>
 
-An optional field for a lesson is:
-* Homework
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -343,17 +389,22 @@ An optional field for a lesson is:
 
 Adds a lesson to the specified student in TAB.
 
-Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
+Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple pieces of homework to a lesson in TAB.
 </div>
 
 * The type of lesson will be inferred from the presence of the `recurring/` prefix.
+
+* The end date for the recurrence is optional.
   
 * The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
 
 Examples:
+
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds a recurring lesson that
+starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displayed student list.
 
 * `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50`
   adds the recurring lesson to the 1st student in the displayed student list.
@@ -368,22 +419,33 @@ Examples:
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]…​`
+Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
-
-* You can edit all fields of a lesson except the start date.
-
-* You cannot change the lesson's type (i.e. recurring and makeup).
 
 * The index must be a valid index number shown in the displayed student list.
 
 * The lesson index must be a valid index number shown in the lesson list of the student.
 
+* You can edit all fields of a lesson except the start date.
+
+* You cannot change the lesson's type (i.e. recurring and makeup).
+
+* The date to cancel must be a valid lesson date.<br>
+  e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.
+  
+* The date to uncancel must be an already cancelled date.
+
+* If you change the start date of the lesson, the cancelled dates that become invalid will be removed.
+
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
+* `ledit 1 1 recurring/30 Nov 2021` Edits the end date of the 1st lesson (assumed to be recurring with start date before 30 Nov 2021) of the 1st student to be `30 Nov 2021`.
 * `ledit 2 3 rates/35.85 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
 * `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
+* `ledit 1 2 date/1 Oct 2021 cancel/15 Oct 2021 cancel/03 Dec 2021`. Cancels the specific lessons on `15 Oct 2021` and `03 Dec 2021` for the 2nd lesson (recurring) of the 1st student.
+* `ledit 2 2 uncancel/10 Oct 2021` Uncancels the specific lesson on `10 Oct 2021`, which was previously cancelled, for the 2nd lesson of the 2nd student.
+
 
 #### Deleting a lesson : `ldelete`
 
@@ -416,9 +478,21 @@ Format: `view INDEX`
 
 Examples:
 
-* `view 2` Displays the list of lessons for the 2nd student in the displayed student list.
+* `view 1` displays the list of lessons for the 1st student in the displayed student list.
+  ![viewLessons](images/viewLessons.png)
+  <div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
+
+#### Viewing upcoming lessons : `remind`
+
+Displays a list of upcoming lessons within the next 48 hours.
+
+Format: `remind`
+
+![remind](images/remind.png)
+
+<div class="caption">Reminder window interface.</div>
 
 
 <div style="page-break-after: always;"></div>
@@ -426,8 +500,6 @@ Examples:
 ### Viewing your Calendar
 
 This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
-
-[New GUI screenshots coming soon...]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -441,7 +513,9 @@ Format: `calendar`
 You don't always have to type `calendar` to switch to the calendar interface. All the other calendar commands in this section act as a shortcut that opens the calendar as well! 
 </div>
 
-[New GUI screenshots coming soon...]
+![calendar](images/calendar.png)
+
+<div class="caption">Calendar interface.</div>
 
 #### Viewing your daily calendar: `day`
 
@@ -449,7 +523,9 @@ Displays the daily calendar, which shows your scheduled lessons for the day.
 
 Format: `day`
 
-[New GUI screenshots coming soon...]
+![day](images/day.png)
+
+<div class="caption">Day view for calendar interface.</div>
 
 #### Viewing your weekly calendar: `week`
 
@@ -457,7 +533,9 @@ Shows the weekly calendar for you to see all the lessons you have for the week
 
 Format: `week`
 
-[New GUI screenshots coming soon...]
+![week](images/week.png)
+
+<div class="caption">Week view for calendar interface.</div>
 
 #### Viewing your monthly calendar: `month`
 
@@ -465,7 +543,9 @@ Displays the monthly calendar, allowing you to visualise your lessons for the mo
 
 Format: `month`
 
-[New GUI screenshots coming soon...]
+![month](images/month.png)
+
+<div class="caption">Month view for calendar interface.</div>
 
 #### Viewing your weekly calendar: `year`
 
@@ -473,7 +553,9 @@ Shows the yearly calendar. You can see which days of the year you have lessons i
 
 Format: `year`
 
-[New GUI screenshots coming soon...]
+![year](images/year.png)
+
+<div class="caption">Year view for calendar interface.</div>
 
 #### Navigating forward in the calendar: `next`
 
@@ -532,7 +614,7 @@ Shows all the tags that you have created together with the number of students la
 
 Format: `tag`
 
-![taglist](images/taglist.png)
+![tag](images/tag.png)
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
 <div style="page-break-after: always;"></div>
@@ -574,20 +656,23 @@ This section records frequently asked questions from users of TAB.
 <div style="page-break-after: always;"></div>
 
 ## Glossary
+This section shows a list of technical and TAB-related terms used in this user guide with their respective definitions.
 
-* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
-* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
-* **CLI**: Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only.
-* **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
-* **JAR**: Java Archive - a file format used for aggregating multiple Java class files and their associated components (e.g. images) into a single file for distribution.
-* **Lesson Rates**: Amount charged per hour for lessons.
-* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
-* **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
-* **UI**: User Interface - the means by which the user and the app interact.
-* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
-  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
-* **UX**: User Experience - The experience a user has when using the app.
+Term | Meaning
+--------|------------------
+Academic level | Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
+Academic stream | Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+CLI | Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only. New users may find it difficult to use but fast typist may find it faster to use upon familiarization.
+GUI | Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
+JAR | Java Archive - a file format used for aggregating multiple Java class files and their associated components (e.g. images) into a single file for distribution.
+Lesson rates | Amount charged per hour for lessons.
+Makeup lesson | A lesson that occurs only once, for a student who has missed a previous lesson.
+Mainstream OS | Windows, Linux, Unix, OS-X.
+Parameter | User input required to specify the data to be saved into the application.
+Recurring lesson | A lesson that will occur more than once in patterned intervals.
+UI | User Interface - the means by which the user and the app interact.
+UTC+8 | The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8. UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
+UX | User Experience - The experience a user has when using the app.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -606,6 +691,7 @@ Action | Format, Examples
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 **View Tags** | `tag`
 **Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math`
+**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **View Schedule** | `schedule`
 **Clear** |`clear`

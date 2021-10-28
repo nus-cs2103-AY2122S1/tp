@@ -37,14 +37,9 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
     public LessonEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
-                PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_OUTSTANDING_FEES,
-                PREFIX_CANCEL, PREFIX_UNCANCEL);
-
-        // don't allow changes to type of lesson
-        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            throw new ParseException(LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_TYPE);
-        }
+                ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
+                    PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_OUTSTANDING_FEES,
+                    PREFIX_CANCEL, PREFIX_UNCANCEL);
 
         Index[] indices;
 
@@ -61,8 +56,19 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
+        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
+            Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
+                    .orElse(Date.MAX_DATE);
+            editLessonDescriptor.setEndDate(endDate);
+            editLessonDescriptor.setRecurring(true);
+        }
+
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editLessonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            if (date.isEmpty()) {
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            }
+            editLessonDescriptor.setDate(date.get());
         }
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             editLessonDescriptor.setTimeRange(ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get()));
@@ -71,7 +77,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             editLessonDescriptor.setSubject(ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get()));
         }
         parseHomeworkForLessonEdit(argMultimap.getAllValues(PREFIX_HOMEWORK))
-            .ifPresent(editLessonDescriptor::setHomeworkSet);
+                .ifPresent(editLessonDescriptor::setHomeworkSet);
 
         if (argMultimap.getValue(PREFIX_RATES).isPresent()) {
             editLessonDescriptor.setLessonRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
@@ -81,6 +87,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             editLessonDescriptor.setOutstandingFees(ParserUtil.parseOutstandingFees(argMultimap
                     .getValue(PREFIX_OUTSTANDING_FEES).get()));
         }
+
         parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_CANCEL))
                 .ifPresent(editLessonDescriptor::setCancelDates);
         parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_UNCANCEL))
@@ -105,8 +112,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             return Optional.empty();
         }
         Collection<String> homeworkSet = homework.size() == 1 && homework.contains("")
-            ? Collections.emptySet()
-            : homework;
+                ? Collections.emptySet()
+                : homework;
         return Optional.of(ParserUtil.parseHomeworkList(homeworkSet));
     }
 
