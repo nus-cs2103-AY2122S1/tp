@@ -198,6 +198,9 @@ Format: `tlist /m MEMBER_ID`
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * `MEMBER_ID` refers to the index number of the member of concern in the displayed member list.
 
+Example:
+* `tlist /m 2` lists all tasks of the member with index number 2.
+
 #### Mark a task as done : `tdone`
 Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
@@ -210,7 +213,21 @@ Format: `tdone /t TASK_ID [/t MORE_TASK_ID]…​`
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Example:
-* `tdone /t 2 /t 3` deletes the 2nd and 3rd task on the displayed task list in Ailurus.
+* `tdone /t 2 /t 3` marks the 2nd and 3rd task on the displayed task list as done in Ailurus.
+
+#### Mark a task as done : `tundone`
+Marks the specified completed task of the specified member as undone. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
+
+Format: `tundone /t TASK_ID [/t MORE_TASK_ID]…​`
+
+* Can **only be used when task list has entries**.
+* Multiple completed tasks can be marked as undone when there is more than one `TASK_ID` provided.
+* `TASK_ID` **must be a positive integer** 1, 2, 3, …​
+* Marks the task specified by `TASK_ID`.
+* `TASK_ID` refers to the index number shown in the displayed task list.
+
+Example:
+* `tundone /t 2 /t 3` marks the 2nd and 3rd completed task on the displayed task list as undone in Ailurus.
 
 #### Editing a task: `tedit`
 Edits an existing task within Ailurus.
@@ -226,9 +243,6 @@ Format: `tedit /t TASK_ID [/n TASK_NAME] [/d TASK_DEADLINE]`
 Examples:
 * `tedit /t 1 /n Vaccinate Myself` Edits the task name of the 1st task on task list to be `Vaccinate Myself`.
 * `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59` Edits the task name and deadline of the 2nd task on task list to be `Do OSA Quiz` and `21/10/2021 23:59` respectively.
-
-Example:
-* `tlist /m 2` lists all tasks of the member with index number 2.
 
 #### Deleting a task belonging to a member : `tdel`
 
@@ -259,8 +273,8 @@ Format: `tfind KEYWORD [MORE_KEYWORDS]`
   e.g. `Submit form` will return `Submit homework`, `Edit form`
 
 Examples:
-* `mfind form` returns `form` and `submit form`
-* `mfind Submit form` returns `Submit homework`, `Edit form`<br>
+* `tfind form` returns `form` and `submit form`
+* `tfind Submit form` returns `Submit homework`, `Edit form`<br>
 
 ### Event Commands
 
