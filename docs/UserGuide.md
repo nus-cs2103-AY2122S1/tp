@@ -111,7 +111,7 @@ Follow the getting started tutorial steps below to learn more about what SPAM pr
    set a password. Type in a password and press `enter` to continue.
    
    <figure class="figure">
-       <img src="images/johndoe.png" class="figure-img img-fluid rounded" alt="Set Password Prompt Display">
+       <img src="images/setupPassword.png" class="figure-img img-fluid rounded" alt="Set Password Prompt Display">
        <figcaption class="figure-caption">Figure 1: Set Password Prompt Display</figcaption>
    </figure>
 
@@ -141,7 +141,7 @@ Follow the getting started tutorial steps below to learn more about what SPAM pr
 
    - `exit` : Exits the app.
 
-5. Refer to the [Features](#features) below for details of each command.
+5. Refer below for details of each command.
 
 ---
 
@@ -154,16 +154,19 @@ on any command below to learn more about that particular command.
 
 | Command | Description |
 | ------- | ----------- |
-| [`help`](#help)  | Opens up a window that contains this user guide |
 | [`add`](#add)  | Adds a contact |
-| [`clear`](#clear)  | Clears all the contacts saved |
-| [`delete`](#delete)  | Deletes a contact saved |
-| [`edit`](#edit)  | Edits a contact saved |
-| [`export`](#export)  | Exports a list of contacts into a _.csv_ file |
-| [`find`](#find)  | Search for saved contacts that match the search criteria |
 | [`import`](#import)  | Import a _.csv_ file of contacts |
-| [`list`](#list)  | List all contacts |
+| [`list`](#list)  | Lists all contacts |
+| [`edit`](#edit)  | Edits a contact saved |
+| [`delete`](#delete)  | Deletes a contact saved |
+| [`clear`](#clear)  | Clears all the contacts saved |
+| [`find`](#find)  | Searches for saved contacts that match the search criteria |
+| [`select`](#select)  | Selects contacts |
+| [`unselect`](#unselect)  | Unselects contacts |
+| [`export`](#export)  | Exports a list of contacts into a _.csv_ file |
 | [`exit`](#exit)  | Exits the application |
+| [`password`](#password)  | Sets a new password |
+| [`help`](#help)  | Opens up a window that contains this user guide |
 
 <div class="d-flex alert alert-info pb-0">
 <div class="mr-2">
@@ -219,26 +222,6 @@ short form `-n` can also be used instead.
 ---
 
 <div style="page-break-after: always;"></div>
-
-### `help`
-
-Opens up a window that contains this user guide.
-
-<figure class="figure">
-   <img src="images/johndoe.png" class="figure-img img-fluid rounded" alt="Help Window">
-   <figcaption class="figure-caption">The opened help window</figcaption>
-</figure>
-
-<div class="d-flex alert alert-secondary pb-0">
-<div class="mr-2">
-   <span class="badge badge-dark">KEYWORD</span>
-</div>
-<div markdown="1" class="w-100">
-```text
-help
-```
-</div>
-</div>
 
 ### `add`
 
@@ -342,46 +325,33 @@ Format: `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email)
 - When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `-t` without specifying any tags after it.
 
-Examples:
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+edit
+```
 
-- `edit "1" -p "91234567" -e "johndoe@example.com"` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit "2" -n "Betsy Crower" -t ""` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+edit "1" -p "91234567" -e "johndoe@example.com"
+```
+Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+```text
+edit "2" -n "Betsy Crower" -t ""
+```
+Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+</div>
+</div>
 
-### `find`
-
-Finds persons whose respective fields contain any of the respective keywords.
-
-Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
-
-- At least one of the optional fields must be provided.
-- The search is case-insensitive. e.g. `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- The order of the optional fields does not matter. e.g. `-n Hans Bo -p 12345678` and `-p 12345678 -n Hans Bo` will return the same result
-- Optional fields can be repeated. e.g. `-t friend -t colleagues` returns only persons with tags containing both `friends` and `colleagues`
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword in **EACH** option will be returned (i.e. `OR` search within individual fields).
-
-  e.g. `Hans Bo` will return:
-
-  - `Hans Gruber`
-  - `Bo Yang`
-
-- Persons matching **all** given options will be returned (i.e. `AND` search across multiple fields).
-
-  e.g. `-n Hans Bo -p 12345678` will return:
-
-  - `Name: Hans, Phone: 12345678`
-  - `Name: Bo, Phone: 12345678`
-
-  But not:
-
-  - `Name: Hans Bo, Phone: 87654321`
-
-Examples:
-
-- `find -n John` returns `john` and `John Doe`
-- `find -n alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+</div>
+</div>
 
 ### `delete`
 
@@ -427,14 +397,154 @@ clear
 </div>
 </div>
 
+### `find`
+
+Finds persons whose respective fields contain any of the respective keywords.
+
+Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
+
+- At least one of the optional fields must be provided.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Persons matching at least one keyword in **EACH** option will be returned (i.e. `OR` search within individual fields).
+- Persons matching **ALL** given options will be returned (i.e. `AND` search across multiple fields).
+
+<figure class="figure">
+   <img src="images/findAlexDavidResult.png" class="figure-img img-fluid rounded" alt="Help Window">
+</figure>
+
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+find
+```
+
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+find -n Alex David
+```
+Returns `Alex Yeoh`, `David Li` as shown in the figure above.
+```text
+find -n alex daVID
+```
+The search is case-insensitive, and will return the same result as the previous example.
+```text
+find -n Yeoh Alex
+```
+The order of the keywords does not matter.
+```text
+find -t friend -t colleagues
+```
+Optional fields can be repeated. The above returns only persons with tags containing both `friends` and `colleagues`.
+</div>
+</div>
+
+</div>
+</div>
+
+### `select`
+
+Selects contacts from the current list. Below is the list of flags that can be used with the `select` command in the order of precedence. 
+
+| Flag | Description |
+| ---- | ----------- |
+| `-e` | Exclude indexes when selecting. |
+| `-a` | Select all indexes. |
+| `-i` | Include indexes when selecting. |
+
+<figure class="figure">
+   <img src="images/select.gif" class="figure-img img-fluid rounded" alt="Help Window">
+</figure>
+
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+select
+```
+
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+select -i 1 2 3
+```
+Select contacts at indexes `1`, `2` and `3` of the list.
+</div>
+</div>
+
+</div>
+</div>
+
+### `unselect`
+
+Unselects contacts from the selected list. The `unselect` command uses the same flags as [`select`](#select).
+
+<figure class="figure">
+   <img src="images/unselect.gif" class="figure-img img-fluid rounded" alt="Help Window">
+</figure>
+
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+unselect
+```
+
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+unselect -i 1
+```
+Unselect contacts at indexes `1` of the selected list.
+</div>
+</div>
+
+</div>
+</div>
+
 ### `export`
 
 Exports all selected contacts to a _csv_ file. Generated file can be found in a folder named _exports_ located in the _home folder_.
 
-Format: `export "[FILENAME]"`
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+export
+```
 
-Example:
-- `export myContacts` exports all currently selected contacts to the file _myContacts.csv_
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+export myContacts
+```
+Export all currently selected contacts to the file _myContacts.csv_.
+</div>
+</div>
+
+</div>
+</div>
 
 ### `exit`
 
@@ -447,6 +557,52 @@ Shuts down and exits the program.
 <div markdown="1" class="w-100">
 ```text
 exit
+```
+</div>
+</div>
+
+### `password`
+
+Sets a new password.
+
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+password
+```
+
+<div class="d-flex alert alert-light pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">EXAMPLE</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+password -o password123! -n password!321
+```
+</div>
+</div>
+
+</div>
+</div>
+
+### `help`
+
+Opens up a window that contains this user guide.
+
+<figure class="figure">
+   <img src="images/helpWindow.gif" class="figure-img img-fluid rounded" alt="Help Window">
+</figure>
+
+<div class="d-flex alert alert-secondary pb-0">
+<div class="mr-2">
+   <span class="badge badge-dark">KEYWORD</span>
+</div>
+<div markdown="1" class="w-100">
+```text
+help
 ```
 </div>
 </div>
