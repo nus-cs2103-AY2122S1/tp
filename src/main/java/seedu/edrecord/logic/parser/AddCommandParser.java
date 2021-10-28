@@ -41,7 +41,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_MODULE, PREFIX_GROUP, PREFIX_TAG);
 
         if (!arePrefixesPresent(
-                argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MODULE, PREFIX_GROUP)
+                argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MODULE,
+            PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -49,7 +50,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Info info = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO).get());
+        Info info = new Info("");
+        if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
+            info = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO).get());
+        }
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -67,7 +71,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      * {@code ArgumentMultimap}.
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).allMatch(prefix -> {
+            boolean multiMapContainsPrefix = argumentMultimap.getValue(prefix).isPresent();
+            if (!multiMapContainsPrefix) {
+                return prefix.getPrefixIsOptional() == PrefixIsOptional.YES;
+            }
+            return multiMapContainsPrefix;
+        });
     }
-
 }
