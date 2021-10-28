@@ -45,7 +45,7 @@ destroy AddTodoTaskCommandParser
 AddressBookParser --> LogicManager : t
 deactivate AddressBookParser
 
-LogicManager -> AddTodoTaskCommand : execute()
+LogicManager -> AddTodoTaskCommand : execute(model)
 activate AddTodoTaskCommand
 
 AddTodoTaskCommand -> Model : addTask(todoTask)
