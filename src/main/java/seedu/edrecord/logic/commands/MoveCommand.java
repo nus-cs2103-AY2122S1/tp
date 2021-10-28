@@ -32,7 +32,7 @@ public class MoveCommand extends Command {
             + PREFIX_MODULE + "CS2103 "
             + PREFIX_GROUP + "T01";
 
-    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Successfully moved to %2$s/%3$s";
+    public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Successfully moved to %1$s/%2$s";
 
     private final List<Index> indexes;
     private final Module module;
