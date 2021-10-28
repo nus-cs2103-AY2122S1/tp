@@ -27,7 +27,7 @@ public class VisualizePositionCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "software engineer ";
 
-    public static final String MESSAGE_SUCCESS = "Position displayed: %1$s";
+    public static final String MESSAGE_SUCCESS = "Position chart displayed: %1$s";
 
     private final Title toShowTitle;
 
