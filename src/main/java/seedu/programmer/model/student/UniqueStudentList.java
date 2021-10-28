@@ -33,7 +33,7 @@ public class UniqueStudentList implements Iterable<Student> {
     private ObservableList<Student> selectedStudentWrapper = FXCollections.observableArrayList();
     private ObservableList<Lab> selectedLabs = FXCollections.observableArrayList();
     //Keep track of the existing labs
-    private List<Lab> labs = new ArrayList<>();
+    private List<Lab> labsTracker = new ArrayList<>();
 
     /**
      * Returns true if the list contains an equivalent student as the given argument.
@@ -49,7 +49,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void add(Student toAdd) {
         requireNonNull(toAdd);
-        toAdd.setLabResultRecord(labs);
+        toAdd.setLabResultRecord(labsTracker);
         if (contains(toAdd)) {
             throw new DuplicateStudentException();
         }
@@ -80,8 +80,9 @@ public class UniqueStudentList implements Iterable<Student> {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        labs.clear();
-        labs.addAll(editedStudent.getFreshLabList());
+        labsTracker.clear();
+        labsTracker.addAll(editedStudent.getFreshLabList());
+
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new StudentNotFoundException();
@@ -123,8 +124,8 @@ public class UniqueStudentList implements Iterable<Student> {
             throw new DuplicateStudentException();
         }
         if (!students.isEmpty()) {
-            labs.clear();
-            labs.addAll(students.get(0).getFreshLabList());
+            labsTracker.clear();
+            labsTracker.addAll(students.get(0).getFreshLabList());
         }
         internalList.setAll(students);
         internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
@@ -168,28 +169,60 @@ public class UniqueStudentList implements Iterable<Student> {
         return true;
     }
 
+    /**
+     * Puts the target student in the wrapper.
+     */
     public void setSelectedStudentWrapper(Student selectedStudent) {
         this.selectedStudentWrapper.clear();
         this.selectedStudentWrapper.add(selectedStudent);
     }
 
+    /**
+     * Returns the selected student wrapped in an ObservableList.
+     */
     public ObservableList<Student> getSelectedStudentWrapper() {
         return this.selectedStudentWrapper;
     }
 
+    /**
+     * Clears the selected student in the wrapper.
+     */
     public void clearSelectedStudentWrapper() {
         this.selectedStudentWrapper.clear();
     }
 
+    /**
+     * Returns the selected labs.
+     */
     public ObservableList<Lab> getSelectedLabs() {
         return this.selectedLabs;
     }
 
+    /**
+     * Changes the selected labs to the one specified by the input.
+     */
     public void setSelectedLabs(List<Lab> labs) {
         this.selectedLabs.setAll(labs);
     }
-
+    /**
+     * Clears the selected labs.
+     */
     public void clearSelectedLabs() {
         this.selectedLabs.clear();
+    }
+
+    /**
+     * Sets the lab tracker to the specified list of labs.
+     */
+    public void setLabsTracker(List<Lab> labs) {
+        this.labsTracker.clear();
+        this.labsTracker.addAll(labs);
+    }
+
+    /**
+     * Clears the labs tracker.
+     */
+    public void clearLabsTracker() {
+        this.labsTracker.clear();
     }
 }

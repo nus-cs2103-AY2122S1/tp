@@ -29,6 +29,7 @@ public class PurgeCommand extends Command {
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.clearSelectedStudentWrapper();
         model.clearSelectedLabs();
+        model.clearLabsTracker();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

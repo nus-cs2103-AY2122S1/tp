@@ -199,6 +199,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setLabsTracker(List<Lab> labs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearLabsTracker() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
             throw new AssertionError("This method should not be called.");
         }

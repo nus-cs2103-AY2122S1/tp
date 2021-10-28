@@ -11,28 +11,29 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.model.student.Student;
 
 /**
- * Panel containing the list of students.
+ * Panel containing the student particular on the side panel.
  */
-public class StudentListPanel extends UiPart<Region> {
+public class StudentParticularPanel extends UiPart<Region> {
     private static final String FXML = "StudentListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(StudentParticularPanel.class);
 
     @FXML
     private ListView<Student> studentListView;
 
     /**
-     * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
+     * Creates a {@code StudentParticularPanel} with the given {@code ObservableList}.
      */
-    public StudentListPanel(ObservableList<Student> studentList) {
+    public StudentParticularPanel(ObservableList<Student> studentList) {
         super(FXML);
         studentListView.setItems(studentList);
-        studentListView.setCellFactory(listView -> new StudentListViewCell());
+        studentListView.setCellFactory(listView -> new StudentParticularViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code student} using a {@code studentCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code student} using a {@code studentCard}
+     * without an index.
      */
-    static class StudentListViewCell extends ListCell<Student> {
+    static class StudentParticularViewCell extends ListCell<Student> {
         @Override
         protected void updateItem(Student student, boolean empty) {
             super.updateItem(student, empty);
@@ -41,7 +42,7 @@ public class StudentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
+                setGraphic(new StudentCard(student).getRoot());
             }
         }
     }
