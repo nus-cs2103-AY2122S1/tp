@@ -347,7 +347,7 @@ Examples:
 </div>
 
 ##### Deleting a contact : `delete`
-Deletes aa contact at the specified index.
+Deletes a contact at the specified index.
 
 Format: `delete INDEX`
 
@@ -424,12 +424,12 @@ Adding a person to an organisation from the organisation list.
 
 Format: `addtoorg INDEX NAME`
 
-Adds the person at the specified index to an organisation with the specified name.
+Adds the person at the specified index in the address book to an organisation with the specified name.
 
 Examples:
 
 * `addtoorg 1 n/Facebook`
-> Adds the 1st person to the Facebook organisation.
+> Adds the 1st person in the address book to the Facebook organisation.
 
 <div markdown="block" class="alert alert-info">
 :bulb: Insert tips
@@ -441,12 +441,12 @@ Removing a person from an organisation from the organisation list.
 
 Format: `deletefromorg INDEX NAME`
 
-Deletes the person at the specified index from an organisation with the specified name.
+Deletes the person at the specified index in the person list of an organisation with the specified name.
 
 Examples:
 
 * `deletefromorg 1 n/Facebook`
-> Deletes the 1st person from the Facebook organisation.
+> Deletes the 1st person in the person list of the Facebook organisation.
 
 <div markdown="block" class="alert alert-info">
 :bulb: Insert tips
