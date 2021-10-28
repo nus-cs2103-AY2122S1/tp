@@ -220,7 +220,8 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(startDate, endDate, timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
+        return Objects.hash(startDate, endDate, timeRange, subject, homework,
+                lessonRates, outstandingFees, cancelledDates);
     }
 
     @Override

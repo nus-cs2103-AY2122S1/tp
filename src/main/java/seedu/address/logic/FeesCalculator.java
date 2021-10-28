@@ -147,8 +147,8 @@ public class FeesCalculator implements Calculator {
                                                               DayOfWeek updateDay,
             TimeRange timeRange, LessonRates lessonRates, Set<Date> cancelledDates) {
         // updated fee values
-        int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, startDate.getLocalDate(), endDate.getLocalDate(),
-                timeRange.getEnd(), cancelledDates);
+        int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, startDate.getLocalDate(),
+                endDate.getLocalDate(), timeRange.getEnd(), cancelledDates);
         assert numberOfLessons >= 0;
         float costPerLesson = getCostPerLesson(timeRange, lessonRates);
         float updatedFees = costPerLesson * (float) numberOfLessons + original.getMonetaryValueInFloat();
@@ -162,7 +162,8 @@ public class FeesCalculator implements Calculator {
         return durationInHour * lessonRates.getMonetaryValueInFloat();
     }
 
-    private int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalDate startDate, LocalDate endDate, LocalTime endTime, Set<Date> cancelledDates) {
+    private int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalDate startDate,
+                                               LocalDate endDate, LocalTime endTime, Set<Date> cancelledDates) {
         int lastUpdatedDay = lastUpdated.getLastUpdatedLocalDate().getDayOfWeek().getValue();
         int currentUpdatedDay = currentDateTime.getDayOfWeek().getValue();
 
