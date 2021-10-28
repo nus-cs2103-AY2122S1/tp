@@ -197,6 +197,18 @@ Returns to homepage which shows the complete list of modules and students along 
 
 Format: `home`
 
+### Clear all information: `clear`
+
+Clears all information stored in the application
+
+Format: `clear`
+
+### Exit the application: `exit`
+
+Closes Teaching Assistant's Buddy application
+
+Format: `exit`
+
 ## FAQ
 
 **Q**: How do I assign tasks to students<br>
