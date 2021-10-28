@@ -208,7 +208,7 @@ these changes in the `AddressBook`.
   * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
   * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
     unnatural modelling of the real world since `Group` contains students and not the other way around.
-
+    
 
 ### Find Command
 
@@ -236,7 +236,7 @@ The above process is shown in the following sequence diagram:
 
 ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-    
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
