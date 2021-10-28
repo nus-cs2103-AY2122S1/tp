@@ -23,7 +23,6 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SystemCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -76,28 +75,28 @@ public class LogicManagerTest {
     @Test
     public void systemExecute_validCommandWord() {
         String addCommand = AddCommand.COMMAND_WORD;
-        CommandResult result = SystemCommand.execute(addCommand);
+        CommandResult result = logic.systemExecute(addCommand);
         assertEquals(AddCommand.COMMAND_EXAMPLE, result.getFeedbackToUser());
     }
 
     @Test
     public void systemExecute_validCommand() {
         String tagCommand = TagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getZeroBased() + TAG_DESC_STUDENT;
-        CommandResult result = SystemCommand.execute(tagCommand);
+        CommandResult result = logic.systemExecute(tagCommand);
         assertEquals(TagCommand.COMMAND_EXAMPLE, result.getFeedbackToUser());
     }
 
     @Test
     public void systemExecute_invalidCommand() {
         String command = "addd";
-        CommandResult result = SystemCommand.execute(command);
+        CommandResult result = logic.systemExecute(command);
         assertEquals("", result.getFeedbackToUser());
     }
 
     @Test
     public void systemExecute_invalidCommandWord() {
         String command = "";
-        CommandResult result = SystemCommand.execute(command);
+        CommandResult result = logic.systemExecute(command);
         assertEquals("", result.getFeedbackToUser());
     }
 
