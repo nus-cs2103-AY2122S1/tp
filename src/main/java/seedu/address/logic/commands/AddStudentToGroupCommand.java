@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -7,12 +8,15 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 public class AddStudentToGroupCommand extends Command {
     public static final String COMMAND_WORD = "addsg";
@@ -30,6 +34,9 @@ public class AddStudentToGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Index: %1$d added to Group: %2$s";
     public static final String MESSAGE_GROUP_NOT_EXIST = "The group does not exist in Classmate";
+    public static final String MESSAGE_DUPLICATE_GROUP = "The student has already been added to an %1$s group";
+    public static final String MESSAGE_NOT_SAME_CLASS = "The student and the tutorial group "
+            + "do not belong to the same tutorial class";
 
     private final Index index;
     private final TutorialGroup toAddTutorialGroup;
@@ -47,14 +54,35 @@ public class AddStudentToGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Student> lastShownList = model.getFilteredStudentList();
+
+        // Check if index is within range of student list
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
 
         // check if tutorial group already exists in ClassMATE
-        if (model.hasTutorialGroup(toAddTutorialGroup)) {
+        if (!model.hasTutorialGroup(toAddTutorialGroup)) {
             throw new CommandException(MESSAGE_GROUP_NOT_EXIST);
         }
 
-        //model.addStudentToGroup(toAddStudent);
+        Student studentToEdit = lastShownList.get(index.getZeroBased());
+
+        // check if Tutorial Group and Student belong to the same Tutorial Class
+        if (!isSameClass(studentToEdit, toAddTutorialGroup)) {
+            throw new CommandException(MESSAGE_NOT_SAME_CLASS);
+        }
+
+        Student editedStudent = addTutorialGroup(studentToEdit, toAddTutorialGroup);
+
+        model.setStudent(studentToEdit, editedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, index.getOneBased(), toAddTutorialGroup));
+    }
+
+    public boolean isSameClass(Student student, TutorialGroup tutorialGroup) {
+        return student.getClassCode().equals(tutorialGroup.getClassCode());
     }
 
     @Override
@@ -72,5 +100,27 @@ public class AddStudentToGroupCommand extends Command {
         // state check
         return index.equals(((AddStudentToGroupCommand) other).index)
                 && toAddTutorialGroup.equals(((AddStudentToGroupCommand) other).toAddTutorialGroup);
+    }
+    /**
+     * Creates and returns a {@code Student} with the {@code TutorialGroup} added.
+     */
+    private static Student addTutorialGroup(Student studentToEdit, TutorialGroup group) throws CommandException {
+        assert studentToEdit != null;
+        if (studentToEdit.hasTutorialGroupType(group.getGroupType())) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_GROUP, group.getGroupType()));
+        }
+
+        Set<TutorialGroup> updatedTutorialGroups = new HashSet<>(studentToEdit.getTutorialGroups());
+        updatedTutorialGroups.add(group);
+        return new Student(
+                studentToEdit.getName(),
+                studentToEdit.getPhone(),
+                studentToEdit.getEmail(),
+                studentToEdit.getAddress(),
+                studentToEdit.getClassCode(),
+                studentToEdit.getTags(),
+                studentToEdit.getMarks(),
+                updatedTutorialGroups);
+
     }
 }
