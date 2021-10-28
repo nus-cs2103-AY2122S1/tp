@@ -1,10 +1,15 @@
 package seedu.programmer.logic.parser;
 
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_SYMBOL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import seedu.programmer.logic.parser.exceptions.InvalidArgFlagsException;
+
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -24,9 +29,40 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws InvalidArgFlagsException {
+        List<String> invalidFlags = extractInvalidPrefixes(argsString, prefixes);
+        if (invalidFlags.size() != 0) {
+            throw new InvalidArgFlagsException(invalidFlags.toString());
+        }
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    private static List<String> extractInvalidPrefixes(String argsString, Prefix[] prefixes) {
+        String[] splitArg = argsString.split(" ");
+        List<String> flags = Arrays.stream(splitArg)
+                .filter(word -> isPrefixAsFlagArg(word))
+                .collect(Collectors.toList());
+        List<String> invalidFlags = flags.stream()
+                .filter(flag -> !isValidFlag(prefixes, flag))
+                .collect(Collectors.toList());
+        return invalidFlags;
+    }
+
+    private static boolean isValidFlag(Prefix[] prefixes, String flag) {
+        return Arrays.stream(prefixes).anyMatch(prefix ->
+                prefix.getPrefix().equals(appendSpace(flag)));
+    }
+
+    private static String appendSpace(String str) {
+        return str + " ";
+    }
+
+    private static boolean isPrefixAsFlagArg(String str) {
+        if (str.length() == 0) {
+            return false;
+        }
+        return Character.toString(str.charAt(0)).equals(PREFIX_SYMBOL.getPrefix());
     }
 
     /**

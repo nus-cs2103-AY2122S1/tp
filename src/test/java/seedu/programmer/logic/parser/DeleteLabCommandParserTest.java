@@ -1,7 +1,6 @@
 package seedu.programmer.logic.parser;
 
-
-import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.commons.core.Messages.MESSAGE_MISSING_ARGUMENT;
 import static seedu.programmer.logic.commands.CommandTestUtil.LAB_NUM;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_LAB_NO;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -26,7 +25,7 @@ public class DeleteLabCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "a", String.format(MESSAGE_MISSING_ARGUMENT,
                 DeleteLabCommand.MESSAGE_USAGE));
     }
 }
