@@ -7,7 +7,7 @@ import seedu.address.model.order.Order;
  * A utility class to help with building OrderBook objects.
  * Example usage: <br>
  *     {@code OrderBook ob = new OrderBuilder().withCustomer("Josh")
- *             .withDate("18th of September 2021").withAmount("10").build();}
+ *             .withDate("2021-09-19").withAmount("10").build();}
  */
 public class OrderBookBuilder {
 

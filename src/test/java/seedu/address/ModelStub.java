@@ -1,7 +1,6 @@
 package seedu.address;
 
 import java.nio.file.Path;
-import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -14,6 +13,7 @@ import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -211,7 +211,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void sortOrderList(Comparator<Order> comparator) {
+    public void sortOrderList(SortDescriptor sortDescriptor) {
         throw new AssertionError("This method should not be called.");
     }
 

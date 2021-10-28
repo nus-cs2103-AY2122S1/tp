@@ -21,7 +21,7 @@ public class OrderContainsKeywordsPredicate implements Predicate<Order> {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(order.getLabel().checkedLabel, keyword))
                 || keywords.stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(order.getDate().parsedDate, keyword))
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(order.getDate().dateString, keyword))
                 || keywords.stream()
                         .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(order.getCustomer().name, keyword))
                 || keywords.stream()
