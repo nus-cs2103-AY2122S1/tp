@@ -18,9 +18,9 @@ import seedu.address.model.student.Student;
 /**
  * Adds an existing student in the student list to an existing group in the group list.
  */
-public class AddStudentGroupCommand extends Command {
+public class AddMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "addSG";
+    public static final String COMMAND_WORD = "addMember";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an existing student to an existing group "
             + "by the index number used in the displayed group list.\n"
@@ -37,7 +37,7 @@ public class AddStudentGroupCommand extends Command {
     /**
      * @param index of the student in the filtered student list to add to the group
      */
-    public AddStudentGroupCommand(Index index, GroupName group) {
+    public AddMemberCommand(Index index, GroupName group) {
         requireAllNonNull(index, group);
 
         this.index = index;
@@ -75,7 +75,7 @@ public class AddStudentGroupCommand extends Command {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_GROUP_MEMBER_INDEX);
         }
 
-        model.addStudentGroup(studentToAdd, groupToUpdate);
+        model.addMember(studentToAdd, groupToUpdate);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS,
                 studentToAdd.getName().fullName, groupToUpdate.getName().name));
@@ -89,12 +89,12 @@ public class AddStudentGroupCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddStudentGroupCommand)) {
+        if (!(other instanceof AddMemberCommand)) {
             return false;
         }
 
         // state check
-        AddStudentGroupCommand e = (AddStudentGroupCommand) other;
+        AddMemberCommand e = (AddMemberCommand) other;
         return index.equals(e.index);
     }
 }
