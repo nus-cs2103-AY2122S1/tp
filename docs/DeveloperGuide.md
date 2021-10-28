@@ -195,7 +195,7 @@ Below is a sequence diagram for the deleting all shown Persons executed after th
 
 ![Sequence of the Delete All Shown command](images/DeleteAllShownSequenceDiagram.png)
 
-The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`. 
+The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`.
 
 
 #### Statistic Feature
