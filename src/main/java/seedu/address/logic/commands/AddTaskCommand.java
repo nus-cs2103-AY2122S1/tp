@@ -69,13 +69,14 @@ public class AddTaskCommand extends AddCommand {
         logger.log(Level.INFO, "adding task: " + toAdd.getTaskName()
                 + "into module: " + toAdd.getModuleNameString());
         model.addTask(moduleName, toAdd);
-        return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, toAdd.getTaskId()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddTaskCommand // instanceof handles nulls
+                && moduleName.equals(((AddTaskCommand) other).moduleName)
                 && toAdd.equals(((AddTaskCommand) other).toAdd));
     }
 }
