@@ -9,28 +9,28 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteStudentGroupCommand;
+import seedu.address.logic.commands.DeleteMemberCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
  * outside of the DeleteStudentCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the DeleteStudentGroupCommand, and therefore we test only one of them.
+ * same path through the DeleteMemberCommand, and therefore we test only one of them.
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class DeleteStudentGroupCommandParserTest {
+public class DeleteMemberCommandParserTest {
 
-    private DeleteStudentGroupCommandParser parser = new DeleteStudentGroupCommandParser();
+    private DeleteMemberCommandParser parser = new DeleteMemberCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1 1", new DeleteStudentGroupCommand(INDEX_FIRST_GROUP, INDEX_FIRST_STUDENT));
+        assertParseSuccess(parser, "1 1", new DeleteMemberCommand(INDEX_FIRST_GROUP, INDEX_FIRST_STUDENT));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentGroupCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteMemberCommand.MESSAGE_USAGE));
     }
 
     @Test

@@ -180,7 +180,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addStudentGroup(Student student, Group group) {
+    public void addMember(Student student, Group group) {
         requireAllNonNull(student, group);
         Group newGroup = group;
         Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
@@ -193,7 +193,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteStudentGroup(Student student, Group group) {
+    public void deleteMember(Student student, Group group) {
         requireAllNonNull(student, group);
         addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);

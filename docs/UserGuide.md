@@ -234,11 +234,11 @@ Format: `deleteGroup INDEX`
 Examples:
 * `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and GitHub link of the group deleted.
 
-### Add a student to a group: `addSG`
+### Add a student to a group: `addMember`
 
 Adds a student in student list to an existing group in the group list.
 
-Format: `addSG INDEX g/GROUP`
+Format: `addMember INDEX g/GROUP`
 
 * Adds the student specified at `INDEX` to the group with name specified by `GROUP`.
 * The index refers to the index number shown in the displayed person list.
@@ -246,20 +246,20 @@ Format: `addSG INDEX g/GROUP`
 * `GROUP` must be an existing group in the displayed group list.
 
 Examples:
-* `addSG 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output that the student has been added to the group.
+* `addMember 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output that the student has been added to the group.
 
-### Delete a student from a group: `deleteSG`
+### Delete a student from a group: `deleteMember`
 
 Deletes the specified group from the group list.
 
-Format: `deleteSG GROUP_INDEX STUDENT_INDEX`
+Format: `deleteMember GROUP_INDEX STUDENT_INDEX`
 
 * Deletes the person at the specified `STUDENT_INDEX` in the group at the specified `GROUP_INDEX`.
 * The index refers to the index number shown in the respective displayed group list and group member list.
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `deleteSG 1 2` deletes the member with index 2 in the group member list of the  group with index 1 in group list and displays a confirmation output with the affected group member and group name.
+* `deleteMember 1 2` deletes the member with index 2 in the group member list of the  group with index 1 in group list and displays a confirmation output with the affected group member and group name.
 
 ### Locating group by name: `findGroup`
 
@@ -464,8 +464,8 @@ Commands | Format and Examples
 [**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​` <br> e.g., `addGroup g/W14-5 r/tp y/AY20222023`
 [**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​` <br> e.g., `editGroup 2 g/W14-4 r/tp y/AY20212022`
 [**Delete Group**](#delete-a-group-deletegroup) | `deleteGroup INDEX` <br> e.g., `deleteGroup 1`
-[**Add Student to Group**](#add-a-student-to-a-group-addsg) | `addSG INDEX g/GROUP` <br> e.g., `addSG 1 g/W14-4`
-[**Delete Student from Group**](#delete-a-student-from-a-group-deletesg) | `deleteSG GROUP_INDEX STUDENT_INDEX` <br> e.g., `deleteSG 1 1`
+[**Add Student to Group**](#add-a-student-to-a-group-addMember) | `addMember INDEX g/GROUP` <br> e.g., `addMember 2 g/W14-4`
+[**Delete Student from Group**](#delete-a-student-from-a-group-deleteMember) | `deleteMember GROUP_INDEX STUDENT_INDEX` <br> e.g., `deleteMember 2 1`
 [**Find Group**](#locating-group-by-name-findgroup) | `findGroup KEYWORD [MORE_KEYWORDS]` <br> e.g., `findGroup W15-5`
 [**Clear Groups**](#clearing-all-entries-from-group-list-cleargroups) | `clearGroups`
 
