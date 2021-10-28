@@ -43,9 +43,6 @@ public class Organisation {
     public UniquePersonList getPersons() {
         return persons;
     }
-    public void addPerson(Person person) {
-        persons.add(person);
-    }
 
     /**
      * Returns true if both persons have the same name.
