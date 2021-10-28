@@ -7,11 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.FEE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ACAD_LEVEL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_FEE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PARENT_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PARENT_PHONE_DESC;
@@ -32,7 +30,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FEE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
@@ -57,7 +54,6 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -115,8 +111,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
         // invalid acad level
         assertParseFailure(parser, "1" + INVALID_ACAD_LEVEL_DESC, AcadLevel.MESSAGE_CONSTRAINTS);
-        // invalid fee
-        assertParseFailure(parser, "1" + INVALID_FEE_DESC, Fee.MESSAGE_CONSTRAINTS);
         // invalid tag
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
@@ -144,15 +138,16 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_ZOOM
                 + PARENT_EMAIL_DESC_AMY + PARENT_PHONE_DESC_AMY
                 + SCHOOL_DESC_AMY + ACAD_STREAM_DESC_AMY + ACAD_LEVEL_DESC_AMY
-                + FEE_DESC_AMY + REMARK_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FORGETFUL;
+                + REMARK_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + NAME_DESC_AMY + TAG_DESC_FORGETFUL;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withParentPhone(VALID_PARENT_PHONE_AMY).withParentEmail(VALID_PARENT_EMAIL_AMY)
                 .withSchool(VALID_SCHOOL_AMY).withAcadStream(VALID_ACAD_STREAM_AMY).withAcadLevel(VALID_ACAD_LEVEL_AMY)
-                .withFee(VALID_FEE_AMY).withRemark(VALID_REMARK_AMY)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_ZOOM, VALID_TAG_FORGETFUL).build();
+
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -227,11 +222,6 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // fee
-        userInput = targetIndex.getOneBased() + FEE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withFee(VALID_FEE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
 
         // remark
         userInput = targetIndex.getOneBased() + REMARK_DESC_AMY;

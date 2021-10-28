@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -61,7 +62,8 @@ public class LessonUtil {
         sb.append(PREFIX_DATE + lesson.getStartDate().toString() + " ");
         sb.append(PREFIX_TIME + lesson.getTimeRange().toString() + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
-        sb.append(PREFIX_RATES + lesson.getLessonRates().toString() + " ");
+        sb.append(PREFIX_RATES + lesson.getLessonRates().value + " ");
+        sb.append(PREFIX_OUTSTANDING_FEES + lesson.getOutstandingFees().value + " ");
 
         lesson.getHomework().stream().forEach(
             s -> sb.append(PREFIX_HOMEWORK + s.description + " ")

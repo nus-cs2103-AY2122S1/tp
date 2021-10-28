@@ -17,13 +17,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.LessonRates;
+import seedu.address.model.lesson.Money;
+import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -158,21 +159,6 @@ public class ParserUtil {
         requireNonNull(acadStream);
         String strippedAcadStream = acadStream.strip();
         return new AcadStream(strippedAcadStream);
-    }
-
-    /**
-     * Parses a {@code String fee} into an {@code Fee}.
-     * Leading and trailing whitespaces will be stripped.
-     *
-     * @throws ParseException if the given {@code fee} is invalid.
-     */
-    public static Fee parseFee(String fee) throws ParseException {
-        requireNonNull(fee);
-        String strippedFee = fee.strip();
-        if (!Fee.isValidFee(strippedFee)) {
-            throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
-        }
-        return new Fee(strippedFee);
     }
 
     /**
@@ -385,10 +371,33 @@ public class ParserUtil {
      */
     public static LessonRates parseLessonRates(String lessonRates) throws ParseException {
         requireNonNull(lessonRates);
-        String strippedRates = lessonRates.strip();
-        if (!LessonRates.isValidLessonRates(strippedRates)) {
-            throw new ParseException(LessonRates.MESSAGE_CONSTRAINTS);
+        String strippedRates = parseMoney(lessonRates).value;
+        return new LessonRates(strippedRates);
+    }
+
+    /**
+     * Parses a {@code String outstandingFees} into an {@code OutstandingFees}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code outstandingFees} is invalid.
+     */
+    public static OutstandingFees parseOutstandingFees(String fees) throws ParseException {
+        requireNonNull(fees);
+        String strippedFees = parseMoney(fees).value;
+        return new OutstandingFees(strippedFees);
+    }
+
+    /**
+     * Parses a {@code String amount} into {@code Money}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static Money parseMoney(String amount) throws ParseException {
+        String strippedAmount = amount.strip();
+        if (!Money.isValidMonetaryField(strippedAmount)) {
+            throw new ParseException(Money.MESSAGE_CONSTRAINTS);
         }
-        return new LessonRates(lessonRates);
+        return new Money(strippedAmount);
     }
 }
