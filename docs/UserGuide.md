@@ -387,8 +387,8 @@ Format: `alias -c <existing_command> -as <alias>`
 
 * `<existing_command>` refers to any command keywords e.g. `search`, `add alloc`, `add student`.
 * The `<alias>` can only be a single alphanumeric word.
-* Multiple alias can be set for each command.
-* Default and existing alias can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
+* Multiple aliases can be set for each command.
+* Default and existing aliases can still be used after new alias is added. e.g. after `alias -c add student -a as`, both `as` and `add student` can be used.
 * The `<existing_command>` can also take any existing alias as an input. The new alias will be added as an alternative to the default command. 
 * The aliases created will persist between Source Control sessions.
 * If you find that you have too many aliases, you can remove an alias by using `alias -c <alias> -as <same_alias>`
