@@ -103,12 +103,21 @@
 
 /* Even cells */
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #818192, #303035);
 }
 
 /* Odd cells */
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #4A48A9 , #202049);
+}
+
+/*
+Acknowledgement: Taken from StackOverflow,
+https://stackoverflow.com/questions/65929630/after-adding-a-drop-shadow-to-a-list-cell-hovering-and-selection-events-are-bugg
+*/
+.list-cell:filled:hover {
+  -fx-view-order: -1;
+  -fx-effect: dropshadow(gaussian, #67676D, 12, 0.05, 0.0, 2);
 }
 
 /* When the cells are selected */
@@ -150,7 +159,7 @@
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+     -fx-border-top-width: 4px;
 }
 
 .status-bar {
@@ -228,8 +237,8 @@
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Open Sans Regular";
+    -fx-background-color: #cfb4b4;
+    -fx-font-family: "Arial";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;

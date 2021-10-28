@@ -21,6 +21,7 @@ public class DefaultCreator extends Creator {
     public DefaultCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
         this.additionalInfo = additionalInfo;
+        placeHolder.setVisible(false);
     }
 
     @Override

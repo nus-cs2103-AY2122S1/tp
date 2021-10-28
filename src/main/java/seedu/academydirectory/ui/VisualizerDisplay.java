@@ -21,6 +21,7 @@ public class VisualizerDisplay extends UiPart<Region> {
 
     public VisualizerDisplay() {
         super(FXML);
+        placeHolder.setVisible(false);
     }
 
     private void setVisualizer(Creator creator) {
@@ -35,15 +36,19 @@ public class VisualizerDisplay extends UiPart<Region> {
     public void handleAdditionalInfo(AdditionalViewModel additionalViewModel) {
         switch (additionalViewModel.getAdditionalViewType()) {
         case VIEW:
+            placeHolder.setVisible(true);
             setVisualizer(new ViewCreator(additionalViewModel.getAdditionalInfo()));
             break;
         case VISUALIZE:
+            placeHolder.setVisible(true);
             setVisualizer(new GraphCreator(additionalViewModel.getAdditionalInfo()));
             break;
         case HISTORY:
+            placeHolder.setVisible(true);
             setVisualizer(new HistoryCreator(additionalViewModel.getAdditionalInfo()));
             break;
         default:
+            placeHolder.setVisible(false);
             setVisualizer(new DefaultCreator(additionalViewModel.getAdditionalInfo()));
             break;
         }

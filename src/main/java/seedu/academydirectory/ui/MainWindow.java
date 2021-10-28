@@ -6,9 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
@@ -32,10 +36,20 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private ADMenu adMenu;
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private VisualizerDisplay visualizerDisplay;
+
+    @FXML
+    private VBox container;
+
+    @FXML
+    private HBox contentHolder;
+
+    @FXML
+    private ImageView image;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -53,6 +67,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane visualiserDisplayPlaceholder;
 
     @FXML
+    private StackPane separator;
+
+
+    @FXML
     private StackPane statusbarPlaceholder;
 
     /**
@@ -68,8 +86,6 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAccelerators();
-
         helpWindow = new HelpWindow();
     }
 
@@ -77,45 +93,15 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
-    private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
-    }
-
-    /**
-     * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
-     */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
-
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
-    }
-
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
+
+        adMenu = new ADMenu(commandBox);
+        container.getChildren().add(adMenu.getRoot());
+
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), commandBox);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
@@ -129,6 +115,10 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        container.getChildren().clear();
+        container.getChildren().addAll(adMenu.getRoot(), contentHolder,
+                commandBoxPlaceholder, statusbarPlaceholder);
     }
 
     /**
@@ -141,15 +131,6 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
-    }
-
-    /**
-     * Open the default menu help to show command summary.
-     */
-    @FXML
-    public void openDefaultHelp() {
-        String defaultHelp = Messages.GENERAL_HELP_MESSAGE;
-        showHelpFrom(defaultHelp);
     }
 
     /**

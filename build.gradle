@@ -86,6 +86,7 @@ shadowJar {
     exclude "org/intellij/**/*"
     exclude "org/apache/**/*"
     exclude "org/jetbrains/**/*"
+    exclude "jfxwebkit.dll"
 }
 
 defaultTasks 'clean', 'test'

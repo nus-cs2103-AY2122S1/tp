@@ -23,7 +23,6 @@ public class HistoryCreator extends Creator {
 
         resultDisplay.setWrapText(true);
         resultDisplay.setText(history);
-        resultDisplay.setPrefRowCount(30);
     }
 
     @Override
