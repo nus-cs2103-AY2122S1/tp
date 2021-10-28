@@ -118,14 +118,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
 
-        Set<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(new HashSet<>());
-        Set<Remark> remarksToDelete = editStudentDescriptor.getRemarksToDelete().orElse(new HashSet<>());
+        Set<Remark> remarksToAdd = editStudentDescriptor.getRemarks().orElse(Collections.emptySet());
+        Set<Remark> remarksToDelete = editStudentDescriptor.getRemarksToDelete().orElse(Collections.emptySet());
 
-        Set<Remark> modifiableUpdatedRemarks = new HashSet<>();
-        modifiableUpdatedRemarks.addAll(studentToEdit.getRemarks());
-        modifiableUpdatedRemarks.addAll(remarksToAdd);
-        modifiableUpdatedRemarks.removeAll(remarksToDelete);
-        Set<Remark> updatedRemarks = Collections.unmodifiableSet(modifiableUpdatedRemarks);
+        Set<Remark> updatedRemarks = new HashSet<>(studentToEdit.getRemarks());
+        updatedRemarks.addAll(remarksToAdd);
+        updatedRemarks.removeAll(remarksToDelete);
 
         return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress,
                 updatedGrade, updatedRemarks);
