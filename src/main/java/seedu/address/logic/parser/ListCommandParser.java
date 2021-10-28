@@ -33,7 +33,9 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         // Listing Transactions
         if (trimmedArgs.startsWith(ListTransactionCommand.TRANSACTIONS_KEYWORD)) {
-            String id = args.substring(ListTransactionCommand.TRANSACTIONS_KEYWORD.length()).trim();
+            String id = trimmedArgs
+                    .substring(ListTransactionCommand.TRANSACTIONS_KEYWORD.length())
+                    .trim();
 
             return new ListTransactionCommand(id);
         }

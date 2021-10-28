@@ -2,18 +2,18 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.display.DisplayList;
 
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
-import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTIONS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 
 public class ListTransactionCommand extends ListCommand {
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all past transactions";
     public static final String MESSAGE_SUCCESS = "Listed past transaction %s";
+    public static final String MESSAGE_TXN_NOT_FOUND = "Transaction %s not found";
 
     public static final String TRANSACTIONS_KEYWORD = "txns";
 
@@ -44,11 +44,18 @@ public class ListTransactionCommand extends ListCommand {
 
         // If no id specified, display all past transactions
         if (transactionId.isEmpty()) {
-            model.updateFilteredDisplayList(DISPLAY_TRANSACTIONS, PREDICATE_SHOW_ALL_ITEMS);
+            model.updateFilteredDisplayList(DISPLAY_TRANSACTION_LIST, PREDICATE_SHOW_ALL_ITEMS);
             return new CommandResult(MESSAGE_SUCCESS_ALL);
         }
 
         // Else, display specific transaction
+        boolean success = model.openTransaction(transactionId.get());
+        if (!success) {
+            // Transaction id not found
+            throw new CommandException(
+                    String.format(MESSAGE_TXN_NOT_FOUND, transactionId.get())
+            );
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, transactionId.get()));
     }

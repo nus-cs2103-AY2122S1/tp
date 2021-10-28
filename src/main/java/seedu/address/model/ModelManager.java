@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
-import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTIONS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -215,11 +215,29 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
 
-        if (mode == DISPLAY_TRANSACTIONS) {
+        if (mode == DISPLAY_TRANSACTION_LIST) {
             throw new ClassCastException("Cannot filter transactions with Predicate<Item>");
         }
 
         updateFilteredDisplayList(mode, x -> predicate.test((Item) x));
+    }
+
+    @Override
+    public boolean openTransaction(String id) {
+        // Attempt to find transaction with matching id
+        Optional<TransactionRecord> transactionOptional = transactions.stream()
+                .filter(txn -> txn.getId().equals(id))
+                .findFirst();
+
+        // If transaction found, return false
+        if (transactionOptional.isEmpty()) {
+            return false;
+        }
+
+        // Display transaction
+        currentDisplay = DISPLAY_TRANSACTION_LIST;
+        displayList.setItems(transactionOptional.get().getOrderItems());
+        return true;
     }
 
     @Override

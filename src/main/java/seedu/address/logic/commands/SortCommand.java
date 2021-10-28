@@ -29,7 +29,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed items sorted by %s";
     public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
-            "Can't sort if not in inventory mode. Please use \"list\" first";
+            "Can't sort if not in inventory mode. Please use `list` first";
 
     private SortOrder order;
 
