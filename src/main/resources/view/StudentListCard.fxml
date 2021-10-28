@@ -39,6 +39,7 @@
           <Insets bottom="5" left="5" right="15" top="5" />
         </padding>
        <Label fx:id="classCode" style="-fx-background-color: #FF7F50#FF7F50; -fx-background-radius: 2;" styleClass="cell_small_label" text="\$classCode" textAlignment="CENTER" />
+      <FlowPane fx:id="tutorialGroups"/>
     </VBox>
       <rowConstraints>
          <RowConstraints />

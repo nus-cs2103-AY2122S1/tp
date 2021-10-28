@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialgroup.GroupType;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * Represents a Student in the ClassMATE.
@@ -26,12 +28,13 @@ public class Student {
     private final ClassCode classCode;
     private final List<StudentMark> marks;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<TutorialGroup> tutorialGroups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, ClassCode classCode, Set<Tag> tags,
-                   List<StudentMark> marks) {
+                   List<StudentMark> marks, Set<TutorialGroup> tutorialGroups) {
         requireAllNonNull(name, phone, email, address, classCode, tags);
         this.name = name;
         this.phone = phone;
@@ -40,6 +43,7 @@ public class Student {
         this.classCode = classCode;
         this.marks = marks;
         this.tags.addAll(tags);
+        this.tutorialGroups.addAll(tutorialGroups);
     }
 
     public Name getName() {
@@ -71,6 +75,14 @@ public class Student {
     }
 
     /**
+     * Returns an immutable tutorial group set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<TutorialGroup> getTutorialGroups() {
+        return Collections.unmodifiableSet(tutorialGroups);
+    }
+
+    /**
      * Returns an immutable list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -89,6 +101,21 @@ public class Student {
 
         return otherStudent != null
                 && this.equals(otherStudent);
+    }
+
+    /**
+     * Returns true if student is already in a OP group type.
+     * Checks whether student is added to multiple groups of the same type.
+     * @param groupType
+     * @return whether {@code Student} is already in
+     */
+    public boolean hasTutorialGroupType(GroupType groupType) {
+        for (TutorialGroup group : tutorialGroups) {
+            if (group.getGroupType().equals(groupType)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -136,6 +163,12 @@ public class Student {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        Set<TutorialGroup> tutorialGroups = getTutorialGroups();
+        if (!tutorialGroups.isEmpty()) {
+            builder.append("; TutorialGroups: ");
+            tutorialGroups.forEach(builder::append);
         }
 
         List<StudentMark> studentMarks = getMarks();
