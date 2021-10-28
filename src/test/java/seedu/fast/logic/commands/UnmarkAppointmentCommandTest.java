@@ -155,9 +155,9 @@ public class UnmarkAppointmentCommandTest {
 
     @Test
     public void execute_unmarkAppointmentFilteredListZeroCount_failure() {
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(secondPerson)
+        showPersonAtIndex(model, INDEX_THIRD_PERSON);
+        Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(thirdPerson)
                 .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
                 .withAppointmentCount("0")
                 .build();
