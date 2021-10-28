@@ -74,7 +74,7 @@ public class RecurringLesson extends Lesson {
         requireNonNull(other);
 
         return !getStartDate().getLocalDate().isAfter(other.getEndDate().getLocalDate()) // <=
-            && !other.getStartDate().getLocalDate().isAfter(getEndDate().getLocalDate()); // <=
+                && !other.getStartDate().getLocalDate().isAfter(getEndDate().getLocalDate()); // <=
     }
 
     /**
@@ -107,15 +107,15 @@ public class RecurringLesson extends Lesson {
         // minus the duplicates with the other lesson
         Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream()
                 .filter(date -> !date.getLocalDate().isBefore(laterStart)
-                    && !date.getLocalDate().isAfter(earlierEnd))
+                        && !date.getLocalDate().isAfter(earlierEnd))
                 .filter(date -> !otherCancelledDates.contains(date))
                 .collect(Collectors.toSet());
 
         // get the number of cancelled dates fro mthe other lesson within this intersection
         Set<Date> otherCancelledDatesWithinIntersection = otherCancelledDates.stream()
-            .filter(date -> date.getLocalDate().compareTo(laterStart) >= 0
-                && date.getLocalDate().compareTo(earlierEnd) <= 0)
-            .collect(Collectors.toSet());
+                .filter(date -> date.getLocalDate().compareTo(laterStart) >= 0
+                        && date.getLocalDate().compareTo(earlierEnd) <= 0)
+                .collect(Collectors.toSet());
 
         long numberOfUniqueCancelledDates = cancelledDatesWithinIntersection.size()
                 + otherCancelledDatesWithinIntersection.size();
