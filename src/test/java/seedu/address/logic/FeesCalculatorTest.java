@@ -525,6 +525,19 @@ class FeesCalculatorTest {
         // no update
         assertEquals(startsAfterLastUpdatedEndsAfterCurrent,
             feesCalculator.updateLessonOutstandingFeesField(startsAfterLastUpdatedEndsAfterCurrent));
+
+        // updated on current day and is cancelled
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T15:30"),
+            LocalDateTime.parse("2021-10-21T16:45"));
+
+        Lesson todayIsCancelled = new LessonBuilder()
+            .withDate("21 OCT 2021")
+            .withCancelledDatesSet("21 OCT 2021")
+            .buildRecurring();
+
+        // no update since cancelled
+        assertEquals(todayIsCancelled,
+            feesCalculator.updateLessonOutstandingFeesField(todayIsCancelled));
     }
 
 }
