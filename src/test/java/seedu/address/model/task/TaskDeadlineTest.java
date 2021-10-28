@@ -47,7 +47,7 @@ class TaskDeadlineTest {
         // same object -> returns true
         assertTrue(taskDeadline1.equals(taskDeadline1));
 
-        // not a Task object -> returns false
+        // not a TaskDeadline object -> returns false
         assertFalse(taskDeadline1.equals(VALID_TASK_DEADLINE_1));
 
         // same String -> returns true
