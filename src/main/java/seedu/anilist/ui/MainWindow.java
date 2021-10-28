@@ -1,6 +1,5 @@
 package seedu.anilist.ui;
 
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private final String cssFilePath = "src/main/resources/view/";
+    private final String cssFilePath = "view/";
     private final String[] themesArr = {
         "CharlotteTheme.css",
         "DarkTheme.css",
@@ -194,12 +193,10 @@ public class MainWindow extends UiPart<Stage> {
             charlotteTheme.setSelected(true);
             break;
         }
-        File f = new File(cssFilePath + themeCss);
-        String filepath = "file:///" + f.getAbsolutePath().replace("\\", "/");
         Scene scene = primaryStage.getScene();
         ObservableList<String> styleSheets = scene.getStylesheets();
         styleSheets.remove(0);
-        styleSheets.add(filepath);
+        styleSheets.add(cssFilePath + themeCss);
     }
 
     private void setNextTheme() {
