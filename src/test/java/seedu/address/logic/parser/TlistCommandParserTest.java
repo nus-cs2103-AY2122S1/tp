@@ -19,10 +19,10 @@ class TlistCommandParserTest {
 
     @Test
     void parse_allFieldsPresent_success() {
-        Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID);
+        Index expectedMemberId = Index.fromOneBased(VALID_MEMBER_ID);
 
         assertParseSuccess(parser, MEMBER_ID_DESC_ONE,
-                new TlistCommand(expectedMemberID));
+                new TlistCommand(expectedMemberId));
     }
 
     @Test

@@ -28,17 +28,17 @@ public class TlistCommandParser implements Parser<TlistCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TlistCommand.MESSAGE_USAGE));
         }
 
-        Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
+        Index memberId = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
         if (argMultimap.getValue(PREFIX_DONE).isPresent()) {
             if (argMultimap.getValue(PREFIX_DONE).get().equals("y")
                     || argMultimap.getValue(PREFIX_DONE).get().equals("n")) {
-                return new TlistCommand(memberID, argMultimap.getValue(PREFIX_DONE).get());
+                return new TlistCommand(memberId, argMultimap.getValue(PREFIX_DONE).get());
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TlistCommand.MESSAGE_USAGE));
         } else if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_OVERDUE)) {
-            return new TlistCommand(memberID, "overdue");
+            return new TlistCommand(memberId, "overdue");
         } else {
-            return new TlistCommand(memberID);
+            return new TlistCommand(memberId);
         }
     }
 }

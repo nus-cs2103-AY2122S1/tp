@@ -34,25 +34,26 @@ public class TlistCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_DONE + "y\n"
             + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "2" + PREFIX_OVERDUE + "\n";
 
-    public final Index targetMemberID;
+    public final Index targetMemberId;
+
     private String filter = "";
 
     /**
      * Creates an TListCommand to display the specified {@code Tasks}
-     * belonging to the member with the specified {@code MemberID}.
+     * belonging to the member with the specified {@code MemberId}.
      */
-    public TlistCommand(Index memberID) {
-        requireNonNull(memberID);
-        targetMemberID = memberID;
+    public TlistCommand(Index memberId) {
+        requireNonNull(memberId);
+        targetMemberId = memberId;
     }
 
     /**
      * Creates an TListCommand to display the specified {@code Tasks}
-     * belonging to the member with the specified {@code MemberID} with a {@code filter}.
+     * belonging to the member with the specified {@code MemberId} with a {@code filter}.
      */
-    public TlistCommand(Index memberID, String filter) {
-        requireNonNull(memberID, filter);
-        targetMemberID = memberID;
+    public TlistCommand(Index memberId, String filter) {
+        requireNonNull(memberId, filter);
+        targetMemberId = memberId;
         this.filter = filter;
     }
 
@@ -60,7 +61,7 @@ public class TlistCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         ObservableList<Member> members = model.getFilteredMemberList();
-        Member targetMember = members.get(targetMemberID.getZeroBased());
+        Member targetMember = members.get(targetMemberId.getZeroBased());
         switch (filter) {
         case "y":
             model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_COMPLETED_TASKS);
@@ -82,6 +83,6 @@ public class TlistCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TlistCommand // instanceof handles nulls
-                && targetMemberID.equals(((TlistCommand) other).targetMemberID));
+                && targetMemberId.equals(((TlistCommand) other).targetMemberId));
     }
 }

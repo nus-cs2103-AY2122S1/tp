@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -41,15 +42,17 @@ class TdelCommandTest {
 
     @Test
     public void execute_taskDeletedByModel_deleteSuccessful() throws Exception {
-        Index validMemberID = Index.fromOneBased(1);
+        Index validMemberId = Index.fromOneBased(1);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberId);
         Index validTaskID = Index.fromOneBased(1);
         Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand tAddCommand = new TaddCommand(validMemberID, validTask);
-        ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberID);
+        TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
+        ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberId);
         tAddCommand.execute(modelStub);
-        CommandResult commandResult = new TdelCommand(validMemberID, validTaskID).execute(modelStub);
+        CommandResult commandResult = new TdelCommand(validMemberId, validTaskID).execute(modelStub);
 
         assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getName()),
                 commandResult.getFeedbackToUser());
@@ -57,12 +60,12 @@ class TdelCommandTest {
 
     @Test
     public void execute_taskNotPresent_throwsTaskNotFoundException() {
-        Index validMemberID = Index.fromOneBased(1);
+        Index validMemberId = Index.fromOneBased(1);
         Index validTaskID = Index.fromOneBased(1);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand = new TdelCommand(validMemberID, validTaskID);
-        ModelStubWithoutTask modelStub = new ModelStubWithoutTask(addressBook, validMemberID);
+        TdelCommand tDelCommand = new TdelCommand(validMemberId, validTaskID);
+        ModelStubWithoutTask modelStub = new ModelStubWithoutTask(addressBook, validMemberId);
 
         assertThrows(CommandException.class, TdelCommand.MESSAGE_TASK_NOT_FOUND, () ->
                 tDelCommand.execute(modelStub));
@@ -71,19 +74,19 @@ class TdelCommandTest {
     //TODO
     @Test
     void equals() {
-        Index validMemberID = Index.fromOneBased(1);
+        Index validMemberId = Index.fromOneBased(1);
         Index validTaskID1 = Index.fromOneBased(1);
         Index validTaskID2 = Index.fromOneBased(2);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand1 = new TdelCommand(validMemberID, validTaskID1);
-        TdelCommand tDelCommand2 = new TdelCommand(validMemberID, validTaskID2);
+        TdelCommand tDelCommand1 = new TdelCommand(validMemberId, validTaskID1);
+        TdelCommand tDelCommand2 = new TdelCommand(validMemberId, validTaskID2);
 
         // same object -> returns true
         assertTrue(tDelCommand1.equals(tDelCommand1));
 
         // same values -> returns true
-        TdelCommand tDelCommand1Copy = new TdelCommand(validMemberID, validTaskID1);
+        TdelCommand tDelCommand1Copy = new TdelCommand(validMemberId, validTaskID1);
         assertTrue(tDelCommand1.equals(tDelCommand1Copy));
 
         // different types -> returns false
@@ -278,11 +281,11 @@ class TdelCommandTest {
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
-        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
+        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberId) {
             this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
+            requireNonNull(memberId);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
+            this.member = filteredMembers.get(memberId.getZeroBased());
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskList();
@@ -335,11 +338,11 @@ class TdelCommandTest {
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
-        ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberID) {
+        ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberId) {
             this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
+            requireNonNull(memberId);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
+            this.member = filteredMembers.get(memberId.getZeroBased());
             this.taskListManager = new TaskList();
         }
 

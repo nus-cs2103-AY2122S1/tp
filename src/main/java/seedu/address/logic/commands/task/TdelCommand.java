@@ -33,16 +33,16 @@ public class TdelCommand extends Command {
     public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
     public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
-    public final Index targetMemberID;
+    public final Index targetMemberId;
     public final Index targetTaskID;
 
     /**
      * Creates an TdelCommand to delete the task with specified {@code TaskID}
-     * from the member with specified {@code MemberID}.
+     * from the member with specified {@code MemberId}.
      */
-    public TdelCommand(Index memberID, Index taskID) {
-        requireAllNonNull(memberID, taskID);
-        targetMemberID = memberID;
+    public TdelCommand(Index memberId, Index taskID) {
+        requireAllNonNull(memberId, taskID);
+        targetMemberId = memberId;
         targetTaskID = taskID;
     }
 
@@ -51,8 +51,8 @@ public class TdelCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getFilteredMemberList();
-        int memberId = targetMemberID.getZeroBased();
-        if (targetMemberID.getZeroBased() >= members.size()) {
+        int memberId = targetMemberId.getZeroBased();
+        if (targetMemberId.getZeroBased() >= members.size()) {
             throw new CommandException(MESSAGE_MEMBER_NOT_FOUND);
         }
         Member targetMember = members.get(memberId);

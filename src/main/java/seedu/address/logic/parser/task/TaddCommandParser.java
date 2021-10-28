@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -36,11 +38,11 @@ public class TaddCommandParser implements Parser<TaddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaddCommand.MESSAGE_USAGE));
         }
 
+        Set<Index> memberIdList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
         Name taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
         TaskDeadline taskDeadline = ParserUtil.parseTaskDeadline(argMultimap.getValue(PREFIX_DATE).get());
         Task task = new Task(taskName, taskDeadline);
-        Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
 
-        return new TaddCommand(memberID, task);
+        return new TaddCommand(memberIdList, task);
     }
 }
