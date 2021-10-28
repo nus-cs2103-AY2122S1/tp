@@ -349,8 +349,12 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
+                && taskBook.equals(other.taskBook)
+                && orderBook.equals(other.orderBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredTasks.equals(other.filteredTasks)
+                && filteredOrders.equals(other.filteredOrders);
     }
 
     @Override
