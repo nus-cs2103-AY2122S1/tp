@@ -13,19 +13,19 @@ import seedu.siasa.model.policy.Policy;
 /**
  * Lists all expired policies to the user.
  */
-public class ShowExpiredPolicyCommand extends Command {
+public class ShowExpiringPolicyCommand extends Command {
 
-    public static final String COMMAND_WORD = "expiredpolicy";
+    public static final String COMMAND_WORD = "expiringpolicy";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         Iterator<Policy> policyListIterator = model.getFilteredPolicyList().iterator();
-        StringBuilder listOfPolicies = new StringBuilder("Policies expiring soon:\n");
+        StringBuilder listOfPolicies = new StringBuilder("Policies expiring soon in 1 month:\n");
 
         while (policyListIterator.hasNext()) {
             Policy policy = policyListIterator.next();
-            if (policy.getExpiryDate().value.isBefore(LocalDate.now())) {
+            if (policy.getExpiryDate().value.isBefore(LocalDate.now().plusMonths(1))) {
                 listOfPolicies.append(policy);
             }
         }

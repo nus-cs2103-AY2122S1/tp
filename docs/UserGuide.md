@@ -135,6 +135,12 @@ Clear all policies from a person.
 
 Format: `clearpolicy PERSON_INDEX`
 
+### Show Expiring Policies: `expiringpolicy`
+
+Show policies that are expiring in a month.
+
+Format: `expiringpolicy`
+
 
 ### Exiting the program : `exit`
 
@@ -169,5 +175,6 @@ Action | Format, Examples
 **List Person's Policies** | `clientpolicy PERSON_INDEX`
 **Clear Person's Policies** | `clearpolicy PERSON_INDEX`
 **Clear All** | `clear`
+**Show Expiring Policies** | `expiringpolicy`
 **Help** | `help`
 **Exit** | `exit`
