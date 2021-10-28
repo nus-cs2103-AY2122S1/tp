@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.ExpiryDate;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
 
 
@@ -24,22 +24,23 @@ public class JsonAdaptedPolicy {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Policy's %s field is missing!";
 
     private final String title;
-    private final String price;
-    private final String expiryDate;
-    private final String commission;
+    private final JsonAdaptedPaymentStructure paymentStructure;
+    private final String coverageExpiryDate;
+    private final JsonAdaptedCommission commission;
     private final JsonAdaptedPerson owner;
 
     /**
      * Constructs a {@code JsonAdaptedPolicy} with the given policy details.
      */
     @JsonCreator
-    public JsonAdaptedPolicy(@JsonProperty("title") String title, @JsonProperty("price") String price,
-                             @JsonProperty("expiryDate") String expiryDate,
-                             @JsonProperty("commission") String commission,
+    public JsonAdaptedPolicy(@JsonProperty("title") String title,
+                             @JsonProperty("paymentStructure") JsonAdaptedPaymentStructure paymentStructure,
+                             @JsonProperty("coverageExpiryDate") String coverageExpiryDate,
+                             @JsonProperty("commission") JsonAdaptedCommission commission,
                              @JsonProperty("owner") JsonAdaptedPerson owner) {
         this.title = title;
-        this.price = price;
-        this.expiryDate = expiryDate;
+        this.paymentStructure = paymentStructure;
+        this.coverageExpiryDate = coverageExpiryDate;
         this.commission = commission;
         this.owner = owner;
     }
@@ -49,9 +50,9 @@ public class JsonAdaptedPolicy {
      */
     public JsonAdaptedPolicy(Policy source) {
         title = source.getTitle().toString();
-        price = Integer.toString(source.getPrice().priceInCents);
-        expiryDate = source.getExpiryDate().toString();
-        commission = Integer.toString(source.getCommission().commissionPercentage);
+        paymentStructure = new JsonAdaptedPaymentStructure(source.getPaymentStructure());
+        coverageExpiryDate = source.getCoverageExpiryDate().toString();
+        commission = new JsonAdaptedCommission(source.getCommission());
         owner = new JsonAdaptedPerson(source.getOwner());
     }
 
@@ -73,58 +74,40 @@ public class JsonAdaptedPolicy {
         }
         final Title modelTitle = new Title(title);
 
-        try {
-            if (price == null) {
-                throw new IllegalValueException(
-                        String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
-            }
-            if (!Price.isValidPrice(Integer.parseInt(price))) {
-                throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
-            }
-        } catch (IllegalValueException | NumberFormatException e) {
-            throw new IllegalValueException(e.getMessage());
+        if (paymentStructure == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, PaymentStructure.class.getSimpleName()));
         }
 
-        final Price modelPrice = new Price(Integer.parseInt(price));
+        final PaymentStructure modelPaymentStructure = paymentStructure.toModelType();
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            if (expiryDate == null) {
+            if (coverageExpiryDate == null) {
                 throw new IllegalValueException(
-                        String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, CoverageExpiryDate.class.getSimpleName()));
             }
-            LocalDate date = LocalDate.parse(expiryDate, formatter);
-            /*
-            if (!ExpiryDate.isValidExpiryDate(date)) {
-                throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
-            }
-            */
+            LocalDate date = LocalDate.parse(coverageExpiryDate, formatter);
+
         } catch (IllegalValueException | DateTimeParseException e) {
             throw new IllegalValueException(e.getMessage());
         }
 
-        LocalDate date = LocalDate.parse(expiryDate, formatter);
-        final ExpiryDate modelExpiryDate = new ExpiryDate(date);
+        LocalDate date = LocalDate.parse(coverageExpiryDate, formatter);
+        final CoverageExpiryDate modelCoverageExpiryDate = new CoverageExpiryDate(date);
 
-        try {
-            if (commission == null) {
-                throw new IllegalValueException(
-                        String.format(MISSING_FIELD_MESSAGE_FORMAT, Commission.class.getSimpleName()));
-            }
-            if (!Commission.isValidCommission(Integer.parseInt(commission))) {
-                throw new IllegalValueException(Commission.MESSAGE_CONSTRAINTS);
-            }
-        } catch (IllegalValueException | NumberFormatException e) {
-            throw new IllegalValueException(e.getMessage());
+        if (commission == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Commission.class.getSimpleName()));
         }
 
-        final Commission modelCommission = new Commission(Integer.parseInt(commission));
+        final Commission modelCommission = commission.toModelType(modelPaymentStructure);
 
         if (policyOwner == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
-        return new Policy(modelTitle, modelPrice, modelExpiryDate, modelCommission, policyOwner);
+        return new Policy(modelTitle, modelPaymentStructure, modelCoverageExpiryDate, modelCommission, policyOwner);
     }
 }

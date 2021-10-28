@@ -8,9 +8,16 @@
   } ],
   "policies" : [ {
     "title" : "Full Life Plan",
-    "price" : "100",
-    "expiryDate" : "2022-10-17",
-    "commission" : "10",
+    "paymentStructure" : {
+      "paymentAmount" : "100",
+      "paymentFrequency" : "12",
+      "numberOfPayments" : "12"
+    },
+    "coverageExpiryDate" : "2021-12-12",
+    "commission" : {
+      "commissionPercentage" : "10",
+      "numberOfPayments" : "12"
+    },
     "owner" : {
       "name" : "Alice Pauline",
       "phone" : "94351253",
@@ -20,9 +27,16 @@
     }
   }, {
     "title" : "Full Life Plan",
-    "price" : "100",
-    "expiryDate" : "2022-10-17",
-    "commission" : "10",
+    "paymentStructure" : {
+      "paymentAmount" : "100",
+      "paymentFrequency" : "12",
+      "numberOfPayments" : "12"
+    },
+    "coverageExpiryDate" : "2021-12-12",
+    "commission" : {
+      "commissionPercentage" : "10",
+      "numberOfPayments" : "12"
+    },
     "owner" : {
       "name" : "Alice Pauline",
       "phone" : "94351253",
