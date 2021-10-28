@@ -142,7 +142,6 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
-
     /**
      * Sets the default size based on {@code guiSettings}.
      */
@@ -201,10 +200,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleDashboard() {
         if (dashboardWindow.isShowing()) {
-            // Refresh the dashboard window
-            dashboardWindow.hide();
-            dashboardWindow = new DashboardWindow(logic);
-            dashboardWindow.show();
+            dashboardWindow.update();
+            dashboardWindow.focus();
             return;
         }
 
@@ -345,7 +342,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -358,12 +354,14 @@ public class MainWindow extends UiPart<Stage> {
                 handleShowResult();
             } else if (commandResult instanceof DownloadCommandResult) {
                 handleDownload();
-            } else if (commandResult instanceof UploadCommandResult) {
-                handleUpload();
             } else if (commandResult instanceof DashboardCommandResult) {
                 handleDashboard();
+            } else if (commandResult instanceof UploadCommandResult) {
+                handleUpload();
             }
-
+            if (dashboardWindow.isShowing()) {
+                dashboardWindow.update();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
