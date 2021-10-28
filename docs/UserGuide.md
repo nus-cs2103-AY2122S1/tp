@@ -117,8 +117,6 @@ In this guide, the syntax / format of a command is shown like this:
 
 # 3. Quick Start
 
-If you've just decided to give TutorAid a try, relax. This is going to be easy.
-
 1. Ensure that you have Java `11` or above installed in your Computer.
 
 2. Download the latest `tutoraid.jar` from [here](https://github.com/AY2122S1-CS2103T-W16-3/tp/releases).
