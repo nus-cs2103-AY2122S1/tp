@@ -169,4 +169,9 @@ public class Applicant {
     public String getApplicationSummary() {
         return "Applied for: " + application.getDescription();
     }
+
+    public Applicant getCopiedApplicant() {
+        return new Applicant(name.getCopiedName(), phone.getCopiedPhone(), email.getCopiedEmail(),
+                address.getCopiedAddress(), application.getCopiedApplication());
+    }
 }
