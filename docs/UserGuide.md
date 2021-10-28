@@ -452,9 +452,10 @@ exit
 2. <kbd>⌘</kbd> + <kbd>2</kbd>: To Switch to Favorites Tab.
 3. <kbd>⌘</kbd> + <kbd>3</kbd>: To Switch to Events Tab.
 4. <kbd>⌘</kbd> + <kbd>4</kbd>: To Switch to Find a Buddy Tab.
-5. <kbd>↑</kbd>: To Retrieve the Last Entered Command (Similar to Terminal).
-6. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
-7. <kbd>F1</kbd>: To Launch the Help Window.
+5. <kbd>⌘</kbd> + <kbd>P</kbd>: To Launch the Profile Window.
+6. <kbd>↑</kbd>: To Retrieve the Last Entered Command (Similar to Terminal).
+7. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
+8. <kbd>F1</kbd>: To Launch the Help Window.
 
 > TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
 
