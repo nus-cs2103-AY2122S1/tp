@@ -3,6 +3,8 @@ package seedu.siasa.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
 
+import seedu.siasa.commons.util.StringUtil;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -36,6 +38,13 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if full names have edit distance of zero or one (case insensitive).
+     */
+    public boolean isSimilarTo(Name other) {
+        return StringUtil.isSimilar(this.fullName, other.fullName);
     }
 
 

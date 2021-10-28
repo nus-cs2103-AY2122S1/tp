@@ -14,7 +14,7 @@ import seedu.siasa.model.policy.Title;
 public class PolicyBuilder {
     public static final int DEFAULT_COMMISSION = 10;
     public static final int DEFAULT_PRICE = 100;
-    public static final LocalDate DEFAULT_EXPIRY_DATE = LocalDate.now().plusYears(1);
+    public static final LocalDate DEFAULT_EXPIRY_DATE = LocalDate.of(2021, 12, 03);
     public static final String DEFAULT_TITLE = "Full Life Plan";
 
     private Title title;

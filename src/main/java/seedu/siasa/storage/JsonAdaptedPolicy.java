@@ -95,9 +95,11 @@ public class JsonAdaptedPolicy {
                         String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
             }
             LocalDate date = LocalDate.parse(expiryDate, formatter);
+            /*
             if (!ExpiryDate.isValidExpiryDate(date)) {
                 throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
             }
+            */
         } catch (IllegalValueException | DateTimeParseException e) {
             throw new IllegalValueException(e.getMessage());
         }

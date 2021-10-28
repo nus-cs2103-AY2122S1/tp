@@ -1,6 +1,7 @@
 package seedu.siasa.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -60,6 +61,13 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with a similar full name as {@code person}
+     * exists in SIASA. Similar is defined as full names having an edit distance of zero
+     * or one (case insensitive).
+     */
+    Optional<Person> getSimilarPerson(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the SIASA.
      */
@@ -91,6 +99,13 @@ public interface Model {
      * Returns true if a policy with the same identity as {@code policy} exists in the SIASA.
      */
     boolean hasPolicy(Policy policy);
+
+    /**
+     * Returns true if a policy with similar title and the same owner as {@code policy}
+     * exists in the SIASA. Similar titles are defined as having edit distance of zero or
+     * one (case insensitive).
+     */
+    Optional<Policy> getSimilarPolicy(Policy policy);
 
     /**
      * Deletes the given policy.

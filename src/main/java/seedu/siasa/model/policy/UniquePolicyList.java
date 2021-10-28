@@ -5,6 +5,7 @@ import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,16 @@ public class UniquePolicyList implements Iterable<Policy> {
     public boolean contains(Policy toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePolicy);
+    }
+
+    /**
+     * Returns true if the list contains a policy with a similar title and same
+     * owner as {@code toCheck}. Similar is defined as the policy titles having an
+     * edit distance of zero or one (case insensitive).
+     */
+    public Optional<Policy> getSimilar(Policy toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().filter(toCheck::isSimilarPolicy).findFirst();
     }
 
     /**
