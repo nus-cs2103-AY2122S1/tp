@@ -30,6 +30,7 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
         <ImageView fx:id="fav" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="userProfile" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
       </HBox>
       <FlowPane fx:id="mods" />
       <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
