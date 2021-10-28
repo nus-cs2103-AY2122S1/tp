@@ -158,6 +158,13 @@ public interface Model {
     boolean hasAssignmentInCurrentModule(Assignment assignment);
 
     /**
+     * Returns true if any existing grade of the original assignment {@code current} is
+     * higher than the maximum score of {@code editedAssignment}. Both assignments
+     * must be under the currently selected module.
+     */
+    boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment);
+
+    /**
      * Adds the given assignment to the currently selected module.
      * {@code assignment} must not already exist under the currently selected module.
      */

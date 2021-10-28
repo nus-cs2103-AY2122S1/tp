@@ -7,7 +7,7 @@ import static seedu.edrecord.commons.util.AppUtil.checkArgument;
  * Represents an Assignment's weightage in edrecord.
  * Guarantees: immutable; is valid as declared in {@link #isValidMaxScore(String)}
  */
-public class MaxScore {
+public class MaxScore implements Comparable<MaxScore> {
     public static final String MESSAGE_CONSTRAINTS = "Assignment maximum score should be a non-negative integer";
 
     public final Float maxScore;
@@ -52,4 +52,8 @@ public class MaxScore {
         return maxScore.hashCode();
     }
 
+    @Override
+    public int compareTo(MaxScore o) {
+        return this.maxScore.compareTo(o.maxScore);
+    }
 }

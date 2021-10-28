@@ -5,6 +5,8 @@ import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.edrecord.model.person.PartOfModulePredicate.PREDICATE_SHOW_ALL_MODULES;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -15,6 +17,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.commons.core.LogsCenter;
 import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.assignment.MaxScore;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
@@ -242,6 +245,18 @@ public class ModelManager implements Model {
     @Override
     public boolean hasAssignmentInCurrentModule(Assignment assignment) {
         return hasSelectedModule() && selectedModule.hasAssignment(assignment);
+    }
+
+    @Override
+    public boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment) {
+        if (!hasSelectedModule()) {
+            return false;
+        }
+        MaxScore editedMaxScore = editedAssignment.getMaxScore();
+        List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
+        return allPersons.stream()
+                .filter(selectedModulePredicate)
+                .anyMatch(person -> person.getGrade(current).compareTo(editedMaxScore) > 0);
     }
 
     @Override

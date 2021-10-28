@@ -40,6 +40,8 @@ public class EditAssignmentCommand extends Command {
     public static final String MESSAGE_EDIT_ASSIGNMENT_SUCCESS = "Edited Assignment: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in this module.";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_MAX_SCORE = "The new maximum score is lower than "
+            + "some existing grades.";
 
     private final Index index;
     private final EditAssignmentDescriptor editDescriptor;
@@ -73,6 +75,10 @@ public class EditAssignmentCommand extends Command {
 
         if (model.hasAssignmentInCurrentModule(editedAsg)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
+        }
+
+        if (model.hasHigherGradeInCurrentModule(asgToEdit, editedAsg)) {
+            throw new CommandException(MESSAGE_INVALID_ASSIGNMENT_MAX_SCORE);
         }
 
         // TODO integrate with assignment view
