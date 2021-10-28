@@ -37,16 +37,16 @@ public class TaskUtil {
      * Returns a task delete command string for deleting the {@code task}
      * from the member with {@code memberId}.
      */
-    public static String getTdelCommand(Index taskID, Index memberId) {
-        return TdelCommand.COMMAND_WORD + " " + getTaskIdDetails(taskID, memberId);
+    public static String getTdelCommand(Index taskId) {
+        return TdelCommand.COMMAND_WORD + " " + PREFIX_TASK_ID + Integer.toString(taskId.getOneBased());
     }
 
     /**
-     * Returns the part of command string for the given {@code taskID} and {@code memberId}'s details.
+     * Returns the part of command string for the given {@code taskId} and {@code memberId}'s details.
      */
-    public static String getTaskIdDetails(Index taskID, Index memberId) {
+    public static String getTaskIdDetails(Index taskId, Index memberId) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_TASK_ID + Integer.toString(taskID.getOneBased()) + " ");
+        sb.append(PREFIX_TASK_ID + Integer.toString(taskId.getOneBased()) + " ");
         sb.append(PREFIX_MEMBER_ID_DEL + Integer.toString(memberId.getOneBased()));
         return sb.toString();
     }

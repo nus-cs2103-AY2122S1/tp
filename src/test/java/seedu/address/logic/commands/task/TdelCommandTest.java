@@ -37,7 +37,7 @@ import seedu.address.testutil.TaskBuilder;
 class TdelCommandTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TdelCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new TdelCommand(null));
     }
 
     @Test
@@ -45,28 +45,29 @@ class TdelCommandTest {
         Index validMemberId = Index.fromOneBased(1);
         Set<Index> validMemberIdList = new HashSet<>();
         validMemberIdList.add(validMemberId);
-        Index validTaskID = Index.fromOneBased(1);
+        Index validTaskId = Index.fromOneBased(1);
         Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
         ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberId);
         tAddCommand.execute(modelStub);
-        CommandResult commandResult = new TdelCommand(validMemberId, validTaskID).execute(modelStub);
+        CommandResult commandResult = new TdelCommand(validTaskId).execute(modelStub);
 
         assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getName()),
                 commandResult.getFeedbackToUser());
     }
 
     @Test
-    public void execute_taskNotPresent_throwsTaskNotFoundException() {
+    public void execute_taskNotPresent_throwsTaskNotFoundException() throws CommandException {
         Index validMemberId = Index.fromOneBased(1);
-        Index validTaskID = Index.fromOneBased(1);
+        Index validTaskId = Index.fromOneBased(1);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand = new TdelCommand(validMemberId, validTaskID);
+        TdelCommand tDelCommand = new TdelCommand(validTaskId);
         ModelStubWithoutTask modelStub = new ModelStubWithoutTask(addressBook, validMemberId);
-
+        TlistCommand tlistCommand = new TlistCommand(validMemberId);
+        tlistCommand.execute(modelStub);
         assertThrows(CommandException.class, TdelCommand.MESSAGE_TASK_NOT_FOUND, () ->
                 tDelCommand.execute(modelStub));
     }
@@ -75,18 +76,18 @@ class TdelCommandTest {
     @Test
     void equals() {
         Index validMemberId = Index.fromOneBased(1);
-        Index validTaskID1 = Index.fromOneBased(1);
-        Index validTaskID2 = Index.fromOneBased(2);
+        Index validTaskId1 = Index.fromOneBased(1);
+        Index validTaskId2 = Index.fromOneBased(2);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand1 = new TdelCommand(validMemberId, validTaskID1);
-        TdelCommand tDelCommand2 = new TdelCommand(validMemberId, validTaskID2);
+        TdelCommand tDelCommand1 = new TdelCommand(validTaskId1);
+        TdelCommand tDelCommand2 = new TdelCommand(validTaskId2);
 
         // same object -> returns true
         assertTrue(tDelCommand1.equals(tDelCommand1));
 
         // same values -> returns true
-        TdelCommand tDelCommand1Copy = new TdelCommand(validMemberId, validTaskID1);
+        TdelCommand tDelCommand1Copy = new TdelCommand(validTaskId1);
         assertTrue(tDelCommand1.equals(tDelCommand1Copy));
 
         // different types -> returns false
@@ -290,6 +291,8 @@ class TdelCommandTest {
         private final Task task;
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
+        // The current selected member
+        private Member currentMember;
 
         ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberId) {
             this.addressBook = new AddressBook(addressBook);
@@ -329,6 +332,7 @@ class TdelCommandTest {
             requireNonNull(member);
             if (this.taskListManager != member.getTaskList()) {
                 this.taskListManager = member.getTaskList();
+                this.currentMember = member;
             }
         }
 
@@ -336,6 +340,11 @@ class TdelCommandTest {
         public void deleteTask(Member member, int index) {
             loadTaskList(member);
             taskListManager.remove(index);
+        }
+
+        @Override
+        public Optional<Member> getCurrentMember() {
+            return Optional.ofNullable(currentMember);
         }
     }
 
@@ -347,6 +356,9 @@ class TdelCommandTest {
         private final Member member;
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
+        // The current selected member
+        private Member currentMember;
+        private FilteredList<Task> filteredTasks;
 
         ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberId) {
             this.addressBook = new AddressBook(addressBook);
@@ -354,6 +366,7 @@ class TdelCommandTest {
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
             this.member = filteredMembers.get(memberId.getZeroBased());
             this.taskListManager = new TaskList();
+            filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
         }
 
         @Override
@@ -384,6 +397,7 @@ class TdelCommandTest {
             requireNonNull(member);
             if (this.taskListManager != member.getTaskList()) {
                 this.taskListManager = member.getTaskList();
+                this.currentMember = member;
             }
         }
 
@@ -391,6 +405,18 @@ class TdelCommandTest {
         public void deleteTask(Member member, int index) {
             loadTaskList(member);
             taskListManager.remove(index);
+        }
+
+        @Override
+        public Optional<Member> getCurrentMember() {
+            return Optional.ofNullable(currentMember);
+        }
+
+        @Override
+        public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
+            requireNonNull(predicate);
+            loadTaskList(member);
+            filteredTasks.setPredicate(predicate);
         }
     }
 }

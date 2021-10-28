@@ -27,43 +27,35 @@ public class TdelCommand extends Command {
             + PREFIX_TASK_ID + "TASK_ID "
             + PREFIX_MEMBER_ID_DEL + "MEMBER_ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "3 "
-            + PREFIX_MEMBER_ID_DEL + "2";
+            + PREFIX_TASK_ID + "3 ";
 
     public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
-    public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
-    public final Index targetMemberId;
-    public final Index targetTaskID;
+    public final Index targetTaskId;
 
     /**
-     * Creates an TdelCommand to delete the task with specified {@code TaskID}
+     * Creates an TdelCommand to delete the task with specified {@code TaskId}
      * from the member with specified {@code MemberId}.
      */
-    public TdelCommand(Index memberId, Index taskID) {
-        requireAllNonNull(memberId, taskID);
-        targetMemberId = memberId;
-        targetTaskID = taskID;
+    public TdelCommand(Index taskId) {
+        requireAllNonNull(taskId);
+        targetTaskId = taskId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Member> members = model.getFilteredMemberList();
-        int memberId = targetMemberId.getZeroBased();
-        if (targetMemberId.getZeroBased() >= members.size()) {
-            throw new CommandException(MESSAGE_MEMBER_NOT_FOUND);
-        }
-        Member targetMember = members.get(memberId);
+        Member targetMember = model.getCurrentMember().get();
 
-        int taskId = targetTaskID.getZeroBased();
+        int taskId = targetTaskId.getZeroBased();
         TaskList taskList = targetMember.getTaskList();
         ObservableList<Task> tasks = taskList.asUnmodifiableObservableList();
-        if (targetTaskID.getZeroBased() >= tasks.size()) {
+        System.out.println(taskId);
+        if (taskId >= tasks.size()) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
-        Task targetTask = tasks.get(targetTaskID.getZeroBased());
+        Task targetTask = tasks.get(targetTaskId.getZeroBased());
         Name deletedTaskName = targetTask.getName();
         model.deleteTask(targetMember, taskId);
 
@@ -75,6 +67,6 @@ public class TdelCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TdelCommand // instanceof handles nulls
-                && targetTaskID.equals(((TdelCommand) other).targetTaskID));
+                && targetTaskId.equals(((TdelCommand) other).targetTaskId));
     }
 }
