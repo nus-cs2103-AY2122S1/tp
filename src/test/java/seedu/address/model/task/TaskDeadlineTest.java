@@ -22,6 +22,12 @@ class TaskDeadlineTest {
     }
 
     @Test
+    public void constructor_invalidDeadline_throwsIllegalArgumentException() {
+        String invalidDeadline = " ";
+        assertThrows(IllegalArgumentException.class, () -> new TaskDeadline(invalidDeadline));
+    }
+
+    @Test
     void isValidTaskDeadline() {
         // only contains alphanumeric characters -> returns true
         assertTrue(TaskDeadline.isValidTaskDeadline(VALID_TASK_DEADLINE_1));
