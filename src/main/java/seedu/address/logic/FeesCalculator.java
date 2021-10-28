@@ -94,7 +94,7 @@ public class FeesCalculator implements Calculator {
         Date copiedDate = new Date(lesson.getStartDate().value);
         Date copiedEndDate = new Date(lesson.getEndDate().value);
         TimeRange copiedTimeRange = new TimeRange(lesson.getTimeRange().value);
-        Subject copiedSubject = new Subject(lesson.getSubject().subject);
+        Subject copiedSubject = new Subject(lesson.getSubject().value);
         LessonRates copiedLessonRates = new LessonRates(lesson.getLessonRates().value);
         Set<Homework> copiedHomework = lesson.getHomework() == null
                 ? null
