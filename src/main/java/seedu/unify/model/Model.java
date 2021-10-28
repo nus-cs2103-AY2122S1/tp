@@ -64,6 +64,7 @@ public interface Model {
      */
     void deleteTask(Task target);
 
+
     /**
      * Adds the given task.
      * {@code task} must not already exist in the unify.
@@ -94,4 +95,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateWeeklyTaskList(Integer week);
+
+    /**
+     * Updates the state of the weekly tasks.
+     */
+    void updateWeeklyTasksState();
 }

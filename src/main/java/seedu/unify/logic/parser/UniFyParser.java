@@ -10,12 +10,15 @@ import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.commands.ClearCommand;
 import seedu.unify.logic.commands.Command;
 import seedu.unify.logic.commands.DeleteCommand;
+import seedu.unify.logic.commands.DoneCommand;
 import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.ExitCommand;
 import seedu.unify.logic.commands.FindCommand;
 import seedu.unify.logic.commands.HelpCommand;
 import seedu.unify.logic.commands.ListCommand;
 import seedu.unify.logic.commands.ShowCommand;
+import seedu.unify.logic.commands.TagCommand;
+import seedu.unify.logic.commands.UndoneCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 
 /**
@@ -45,6 +48,9 @@ public class UniFyParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -53,6 +59,12 @@ public class UniFyParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
+
+        case UndoneCommand.COMMAND_WORD:
+            return new UndoneCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -74,7 +86,12 @@ public class UniFyParser {
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
         }
     }
-
 }
+
+
+
+
+
