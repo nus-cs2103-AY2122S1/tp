@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.game.*;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.ui.util.SampleStyles;
 

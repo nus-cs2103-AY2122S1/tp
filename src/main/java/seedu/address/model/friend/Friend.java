@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.game.Game;
