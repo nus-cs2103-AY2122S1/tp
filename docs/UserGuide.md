@@ -280,7 +280,21 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PlaceBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+the data of your previous PlaceBook home folder.
+
+**Q**: Will I be notified if I edit an appointment and the timing clashes with another appointment?<br>
+**A**: Yes, there will be a message saying that there is an existing conflicting appointment.
+
+**Q**: Can I still use my mouse when using PlaceBook?<br>
+**A**: Yes, you are still able to use your mouse for certain functionalities such as scrolling lists.
+
+**Q**: Is there a way for me to share my PlaceBook data with other people?<br>
+**A**: Yes, similarly to how you transfer data from one computer to another, you can simply send the data file to 
+others, and then get them to download another PlaceBook jar file, then replace the data file with the one you sent.
+
+**Q**: Is there a way we can see all our appointments in a calendar grid view?<br>
+**A**: We do not currently have a calendar view function, but we are looking into implementing it in the future.
 
 --------------------------------------------------------------------------------------------------------------------
 
