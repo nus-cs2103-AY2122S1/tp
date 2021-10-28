@@ -15,7 +15,7 @@ public class FilterInterviewPastCommand extends FilterInterviewCommand {
         requireNonNull(model);
 
         model.updateFilteredPersonList((person) -> {
-            Interview interview = person.getInterview().get();
+            Interview interview = person.getInterview().orElse(Interview.EMPTY_INTERVIEW);
             return !interview.isEmptyInterview() && interview.hasInterviewPassed();
         });
 
