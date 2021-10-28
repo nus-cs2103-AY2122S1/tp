@@ -34,8 +34,20 @@ public class CommandTestUtil {
     public static final String VALID_TELE_HANDLE_AMY = "@AmyBee";
     public static final String VALID_TELE_HANDLE_BOB = "@bobchoo";
 
+    public static final String VALID_TASK_NAME_1 = "Assignment1";
+    public static final String VALID_TASK_NAME_2 = "Assignment2";
+    public static final String VALID_TASK_NAME_3 = "Assignment3";
+    public static final String VALID_TASK_NAME_4 = "Assignment4";
+    public static final String VALID_TASK_DEADLINE_1 = "today";
+    public static final String VALID_TASK_DEADLINE_2 = "30-10-2021";
+    public static final String VALID_TASK_DEADLINE_3 = "2021-10-1";
+    public static final String VALID_TASK_ID_1 = "T1";
+    public static final String VALID_TASK_ID_2 = "T010";
+    public static final String VALID_TASK_ID_3 = "T333";
+
     public static final String MODULE_NAME_DESC_0 = " " + PREFIX_MODULE_NAME + MODULE_NAME_0;
     public static final String MODULE_NAME_DESC_1 = " " + PREFIX_MODULE_NAME + MODULE_NAME_1;
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_AMY;
@@ -50,6 +62,7 @@ public class CommandTestUtil {
             + "1234567"; // missing the first and last letter
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "teleHandle"; // missing @
+
     public static final String INVALID_MODULE_NAME_DESC = " " + PREFIX_MODULE_NAME
             + "modulE@"; // '@' not allowed in module names
 
