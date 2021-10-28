@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Name;
@@ -231,4 +232,26 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
 
     void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
+
+
+    /**
+     * Returns a deep-copied model.
+     */
+    Model getCopiedModel();
+
+    /**
+     * Records the modification history.
+     */
+    void addToHistory(Command command);
+
+    /**
+     * Returns true if there exists history to recover.
+     */
+    boolean hasHistory();
+
+    /**
+     * Undoes the previous modification.
+     */
+    String recoverHistory();
+
 }
