@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -143,4 +144,22 @@ public interface Model {
      * @param personToDelete the given person to delete.
      */
     void removePersonFromAppointments(Person personToDelete);
+
+    /**
+     * Check whether there are appointments that has time conflicts
+     * with the given appointment in the current appointment list.
+     * @param appointment The given appointment to check.
+     * @return A list of appointments, the appointments that has time conflicts
+     * with the given appointment.
+     */
+    List<Appointment> getClashingAppointments(Appointment appointment);
+
+    /**
+     * Returns the String representation of the appointments that have time conflict with the
+     * given appointment.
+     * @param appointment The given appointment to check.
+     * @return The String representation of the appointments that have time conflict with the
+     * given appointment.
+     */
+    String getClashingAppointmentsAsString(Appointment appointment);
 }

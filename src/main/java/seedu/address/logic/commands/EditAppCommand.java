@@ -73,6 +73,11 @@ public class EditAppCommand extends Command {
         Appointment appointmentToEdit = lastShownList.get(appIndex.getZeroBased());
         Appointment editedAppointment =
                 new Appointment(appointmentToEdit.getClients(), location, timePeriod, description);
+        if (!model.getClashingAppointments(editedAppointment).isEmpty()) {
+            String clashingAppointments = model.getClashingAppointmentsAsString(editedAppointment);
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED
+                + '\n' + clashingAppointments);
+        }
         model.deleteAppointment(appointmentToEdit);
         model.addAppointment(editedAppointment);
 

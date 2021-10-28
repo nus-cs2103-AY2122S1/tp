@@ -267,4 +267,39 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredAppointments.equals(other.filteredAppointments);
     }
+
+    /**
+     * Check whether there are appointments that has time conflicts
+     * with the given appointment in the current appointment list.
+     * @param appointment The given appointment to check.
+     * @return A list of appointments, the appointments that has time conflicts
+     * with the given appointment.
+     */
+    @Override
+    public List<Appointment> getClashingAppointments(Appointment appointment) {
+        List<Appointment> clashingAppointments = new ArrayList<>();
+        for (Appointment app : this.schedule) {
+            if (app.getTimePeriod().hasConflictWith(appointment.getTimePeriod())) {
+                clashingAppointments.add(app);
+            }
+        }
+        return clashingAppointments;
+    }
+
+    /**
+     * Returns the String representation of the appointments that have time conflict with the
+     * given appointment.
+     * @param appointment The given appointment to check.
+     * @return The String representation of the appointments that have time conflict with the
+     * given appointment.
+     */
+    @Override
+    public String getClashingAppointmentsAsString(Appointment appointment) {
+        List<Appointment> clashingAppointments = getClashingAppointments(appointment);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Appointment app : clashingAppointments) {
+            stringBuilder.append(app + "\n");
+        }
+        return stringBuilder.toString();
+    }
 }

@@ -90,11 +90,15 @@ public class AddAppCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED);
             }
         }
+        Appointment appointmentToAdd = new Appointment(clients, location, timePeriod, description);
+        if (!model.getClashingAppointments(appointmentToAdd).isEmpty()) {
+            String clashingAppointments = model.getClashingAppointmentsAsString(appointmentToAdd);
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED
+                    + '\n' + clashingAppointments);
+        }
 
-        Appointment newAppointment = new Appointment(clients, location, timePeriod, description);
-
-        model.addAppointment(newAppointment);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, newAppointment));
+        model.addAppointment(appointmentToAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToAdd));
     }
 
     @Override
