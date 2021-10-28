@@ -35,19 +35,7 @@ In the [Table of Contents](), each item listed is a link which you can click on 
 
 ## Quick Start
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: JDK Installation Guide**
-
-You can install the required JDK and JRE from the
-[Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
-
-Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-to help you with the installation. Follow the guide for your operating system for detailed instructions.
-</div>
-
-
-1. Ensure you have **Java 11** or above installed on your computer.
+1. Ensure you have **Java 11** or above installed on your computer. If you need help with installation, you can visit this [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for more details.
 
 2. Download the latest **TAB.jar** from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
 
