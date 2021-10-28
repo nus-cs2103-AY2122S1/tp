@@ -156,6 +156,21 @@ Examples:
 * `mfind alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'mfind alex david'](images/findAlexDavid.png)
 
+#### Locating members by their tasks : `mtfind`
+
+Finds members whose tasks' names contains the given keyword.
+
+Format: `mtfind KEY_WORD`
+
+* The search is case-insensitive. e.g. `form` will match `Form`
+* Only the name of the task is searched.
+* Only full words will be matched e.g. `form` will not match `forms`
+* Members with at least one task matching the given keyword will be returned.
+
+Examples:
+* `mtfind form` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Irfan Ibrahim` because task `submit form` was assigned to them.
+ ![result for 'mtfind form'](images/mtfind_example.png)
+
 #### Deleting a member : `mdel`
 
 Deletes the specified member from Ailurus.
