@@ -68,7 +68,6 @@ To know what you can do with ModuLink, and what ModuLink can do for you, refer t
 1. [Profiles](#1-profiles) <br/>
    1.1. [Create your own profile](#11-create-your-own-profile--create) <br/>
    1.2. [Edit your profile](#12-edit-your-profile--edit) <br/>
-   1.3. [View a profile in a different window](#13-view-a-profile-in-a-different-window--view) <br/>
 2. [Manage module tags](#2-manage-module-tags) <br/>
    2.1. [Add modules to your profile](#21-add-modules-to-your-profile--addmod) <br/>
    2.2. [Edit the group status of existing modules on your profile](#22-edit-the-group-status-of-existing-modules-on-your-profile--editgroupstatus) <br/>
@@ -146,20 +145,6 @@ Examples:
     <br>
   <br>
 ![result for 'edit p/99881234'](images/screenshots/editProfile.png)
-
-
-#### 1.3 View a profile in a different window : `view`
-
-Displays the user-specified profile in a pop-up window.
-
-Format: `view STUDENT_ID`
-
-Examples:
-* `view A0123456L`
-* `view A1122334F`
-  <br>
-  <br>
-  (Insert screenshots here)
 
 ### 2. Manage module tags
 
