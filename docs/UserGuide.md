@@ -39,6 +39,7 @@ Manage large groups of contacts with advanced features such as **Import** for a 
     - [Open GitHub of Current User - g](#OpenGithub)
     - [Retrieve Command History - ↑ / ↓](#CommandHistory)
     - [Exiting the App - exit](#Exit)
+ - [Keyboard Mappings](#KeyboardMappings)
  - [Coming Soon](#ComingSoon)
  - [FAQ](#FAQ)
  - [Command Summary](#CommandSummary)
@@ -442,6 +443,20 @@ Example:
 ```
 exit
 ```
+
+<h2 id = "KeyboardMappings"> </h2>
+
+## Keyboard Mappings
+
+1. <kbd>⌘</kbd> + <kbd>1</kbd>: To Switch to Contacts Tab.
+2. <kbd>⌘</kbd> + <kbd>2</kbd>: To Switch to Favorites Tab.
+3. <kbd>⌘</kbd> + <kbd>3</kbd>: To Switch to Events Tab.
+4. <kbd>⌘</kbd> + <kbd>4</kbd>: To Switch to Find a Buddy Tab.
+5. <kbd>↑</kbd>: To Retrieve the Last Entered Command (Similar to Terminal).
+6. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
+7. <kbd>F1</kbd>: To Launch the Help Window.
+
+> TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
 
 <h2 id = "ComingSoon"> </h2>
 
