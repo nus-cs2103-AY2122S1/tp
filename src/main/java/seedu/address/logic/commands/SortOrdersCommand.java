@@ -20,7 +20,7 @@ public class SortOrdersCommand extends Command {
             + "in either ascending or descending order and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_SORT_FIELD + "FIELD "
-            + PREFIX_SORT_ORDERING + "ORDERING "
+            + PREFIX_SORT_ORDERING + "[ORDERING] "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT_FIELD + "amount "
             + PREFIX_SORT_ORDERING + "desc";
@@ -49,8 +49,20 @@ public class SortOrdersCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SortOrdersCommand); // instanceof handles nulls
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortOrdersCommand)) {
+            return false;
+        }
+
+        // state check
+        SortOrdersCommand e = (SortOrdersCommand) other;
+
+        return sortField.equals(e.sortField) && sortOrdering.equals(e.sortOrdering);
     }
 }
 

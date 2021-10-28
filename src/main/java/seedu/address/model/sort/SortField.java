@@ -34,10 +34,10 @@ public class SortField {
     }
 
     private SortFieldType getSortFieldType(String input) {
-        String gender = input.toLowerCase();
-        if (gender.equals("d") || gender.equals("date")) {
+        String sortField = input.toLowerCase();
+        if (sortField.equals("d") || sortField.equals("date")) {
             return SortFieldType.DATE;
-        } else if (gender.equals("a") || gender.equals("amount")) {
+        } else if (sortField.equals("a") || sortField.equals("amount")) {
             return SortFieldType.AMOUNT;
         } else {
             return null;
