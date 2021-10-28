@@ -298,12 +298,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [h/HEALTH_CONDITION]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 18:00 v/2021-11-08 17:00`
+**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [f/FREQUENCY o/OCCURRENCE] [h/HEALTH_CONDITION]…​` <br> e.g., `add n/James Ho p/22224444 l/english a/123, Clementi Rd, 1234665 lv/1900-11-08 18:00 v/2021-11-08 17:00`
 **delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
-**visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/1900-11-08 f/Weekly o/2`
+**visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/2021-11-12 16:30 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
-**list** | `list [w/] [m/]`
+**list** | `list [w/] [m/]` <br> e.g., `list`<br> e.g., `list m/`<br> e.g., `list m/`
 **sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
 **summary** | `summary`
 **clear** | `clear`
