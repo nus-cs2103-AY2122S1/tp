@@ -183,13 +183,12 @@ and a `ModelManager`. `StorageManager` contains an `AddressBookStorage` an a `Sc
 the specific saved data. `StorageManager` will attempt to read data from a saved json file and loads the 
 data into `ModelManager` when the class is initialized
 
-##INSERT UML HERE
+![AddAppStep1](images/AddAppStep1.png)
 
 Step 2. The user inputs the addApp command with `addApp id/1,2,3 a/Starbucks @ Raffles City start/01-01-2021 1400 end/01-01-2021 1500 ds/discuss marketing strategies`
-The `logicManager`, which has been initialized with an `AddressBookParser`, will use that class to parse the
-addApp command and return an addApp command with the appropriate inputs to be executed by `LogicManger`
+The `logicManager`, which has been initialized with an `AddressBookParser`, will use that class to create and return an `addAppCommand` with the appropriate inputs to be executed by `LogicManger`
 
-##INSERT UML HERE
+![AddAppStep2](images/AddAppStep2.png)
 
 Step 3. On the execution of the command, the command will retrieve the list of persons and appointments from
 `ModelManager` and create a new `UniquePersonList`. The new `UniquePersonList` will then be populated with the
@@ -204,6 +203,9 @@ and update the display to match the updated model
 
 ##@Yanyu im not 100% sure how the UI interacts with the overall model, if you see any issues could you help me correct them?
 
+The following sequence diagram shows how the addAppCommand operation works:
+
+![AddAppSequenceDiagram](images/AddAppSequenceDiagram.png)
 
 ####Design considerations
 * **Alternative 1 (current choice):** User selects `Person` in `Appointment` through indexes of the displayed list.

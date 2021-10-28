@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR
+Participant ":AddAppCommandParser" as addAppCommandParser LOGIC_COLOR
+
+user -[USER_COLOR]> ui : "addApp ..."
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : executeCommand("addApp ...")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> addressBookParser : parseCommand("addApp ...")
+activate addressBookParser LOGIC_COLOR
+
+addressBookParser -[LOGIC_COLOR]> addAppCommandParser : parse("...")
+activate addAppCommandParser LOGIC_COLOR
+
+addAppCommandParser --[LOGIC_COLOR]> addressBookParser: AddAppCommand
+deactivate addAppCommandParser LOGIC_COLOR
+
+addressBookParser --[LOGIC_COLOR]> logic: AddAppCommand
+deactivate addressBookParser LOGIC_COLOR
+
+@enduml
