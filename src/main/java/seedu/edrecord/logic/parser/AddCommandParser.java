@@ -59,6 +59,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        if (!Module.MODULE_SYSTEM.hasModule(module.getCode())) {
+            throw new ParseException(Module.MESSAGE_DOES_NOT_EXIST);
+        }
+
         module.addGroup(group);
         ModuleGroupMap moduleGroupMap = new ModuleGroupMap();
         moduleGroupMap.add(module, group);

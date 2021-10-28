@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.edrecord.commons.core.Messages.MESSAGE_NO_MODULE_SELECTED;
 import static seedu.edrecord.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -51,7 +53,7 @@ public class AddAssignmentCommandTest {
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(validAssignment);
 
         assertThrows(CommandException.class,
-                AddAssignmentCommand.MESSAGE_NO_MODULE_SELECTED, () -> addAssignmentCommand.execute(modelStub));
+                MESSAGE_NO_MODULE_SELECTED, () -> addAssignmentCommand.execute(modelStub));
     }
 
     @Test
@@ -252,6 +254,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public List<Assignment> getAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Optional<Assignment> searchAssignment(Name name) {
             throw new AssertionError("This method should not be called.");
         }
@@ -263,6 +270,11 @@ public class AddAssignmentCommandTest {
 
         @Override
         public void addAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Assignment target) {
             throw new AssertionError("This method should not be called.");
         }
 

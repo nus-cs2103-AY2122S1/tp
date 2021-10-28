@@ -35,6 +35,7 @@ public class RemoveCommand extends Command {
     public static final String MESSAGE_MODULE_DOES_NOT_EXIST_IN_PERSON = "%1$s is not under %2$s!";
     public static final String MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON = "%1$s is not under %2$s!";
     public static final String MESSAGE_MOVE_PERSON_SUCCESS = "Removed %1$s from %2$s/%3$s";
+    public static final String MESSAGE_MOVE_PERSON_FAILURE = "Removing %1$s from %2$s/%3$s was unsuccessful!";
 
     private final Index index;
     private final Module module;
@@ -83,7 +84,10 @@ public class RemoveCommand extends Command {
                     String.format(MESSAGE_GROUP_DOES_NOT_EXIST_IN_PERSON, personToMove.getName(), group));
         }
 
-        personToMove.getModules().removeGroup(savedMod, group);
+        if (!personToMove.getModules().removeGroup(savedMod, group)) {
+            throw new CommandException(
+                    String.format(MESSAGE_MOVE_PERSON_FAILURE, personToMove.getName(), savedMod, group));
+        }
         model.setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_MOVE_PERSON_SUCCESS, personToMove.getName(), savedMod, group));
     }

@@ -91,6 +91,13 @@ public class Module {
     }
 
     /**
+     * Returns a view of this module's class list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Group> getGroupList() {
+        return groupSystem.getGroupList();
+    }
+
+    /**
      * Returns true if a given string is a valid module code.
      */
     public static boolean isValidModuleCode(String test) {
@@ -161,6 +168,14 @@ public class Module {
      */
     public void addAssignment(Assignment a) {
         assignmentList.add(a);
+    }
+
+    /**
+     * Removes Assignment {@code key} from this {@code Module}.
+     * {@code key} must exist in this module.
+     */
+    public void deleteAssignment(Assignment key) {
+        assignmentList.remove(key);
     }
 
     /**
