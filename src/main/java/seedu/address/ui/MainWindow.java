@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -72,9 +74,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
 
     @FXML
     private HBox mainCard;
@@ -156,14 +155,31 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         showFriendBox();
         showGameBox();
+
+        setListeners();
+    }
+
+    private void setListeners() {
+        friendListPanel.setListener(new ChangeListener<Friend>() {
+            @Override
+            public void changed(ObservableValue<? extends Friend> observable, Friend oldFriend,
+                                Friend newFriend) {
+                handleFriendGet(newFriend);
+            }
+        });
+
+        gameListPanel.setListener(new ChangeListener<Game>() {
+            @Override
+            public void changed(ObservableValue<? extends Game> observable, Game oldGame, Game newGame) {
+
+                handleGameGet(newGame);
+            }
+        });
     }
 
     /**
@@ -228,9 +244,22 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    private void removeFriendListPanelToFriendsPlaceholder() {
+        // only remove friend list if currently shown
+        if (friendsPlaceholder.getChildren().contains(friendListPanel.getRoot())) {
+            friendsPlaceholder.getChildren().remove(friendListPanel.getRoot());
+        }
+    }
+
     private void addGameListPanelToGamesPlaceholder() {
         if (!gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
             gamesPlaceholder.getChildren().add(gameListPanel.getRoot());
+        }
+    }
+
+    private void removeGameListPanelToGamesPlaceholder() {
+        if (gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
+            gamesPlaceholder.getChildren().remove(gameListPanel.getRoot());
         }
     }
 
@@ -247,6 +276,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleFriendGet(Friend friendToGet) {
+        removeGameListPanelToGamesPlaceholder();
+        gameListPanel = new GameListPanel(logic.getGamesBook().getGamesList());
+        addGameListPanelToGamesPlaceholder();
         currentFriendToGet = friendToGet;
         leftMainCard.getChildren().clear();
         rightMainCard.getChildren().clear();
@@ -271,6 +303,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleGameGet(Game gameToGet) {
+        removeFriendListPanelToFriendsPlaceholder();
+        friendListPanel = new FriendListPanel(logic.getFriendsBook().getFriendsList());
+        addFriendListPanelToFriendsPlaceholder();
         currentGameToGet = gameToGet;
         leftMainCard.getChildren().clear();
         rightMainCard.getChildren().clear();
@@ -290,26 +325,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-
-    /**
-     * Handles the mounting and dismounting of UI Regions when a {@Code friend}
-     * command is run.
-     *
-     * @param commandResult The {@Code commandResult} from the {@Code friend} command.
-     */
-    private void handleFriendCommand(CommandResult commandResult) {
-    }
-
-
-    /**
-     * Handles the mounting and dismounting of UI Regions when a {@Code game}
-     * command is run.
-     *
-     * @param commandResult The {@Code commandResult} from the {@Code game} command.
-     */
-    private void handleGameCommand(CommandResult commandResult) {
-    }
-
     /**
      * Executes the command based on the {@Code CommandType}
      * enumeration.
@@ -323,7 +338,12 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             switch (commandResult.getCommandType()) {
+            case FRIEND_SCHEDULE:
             case FRIEND_GET:
+            case FRIEND_ADD:
+            case FRIEND_EDIT:
+            case FRIEND_LINK:
+            case FRIEND_UNLINK:
                 isFriendTable = true;
                 handleFriendGet(commandResult.getFriendToGet());
                 break;
@@ -331,17 +351,11 @@ public class MainWindow extends UiPart<Stage> {
                 isFriendTable = false;
                 handleGameGet(commandResult.getGameToGet());
                 break;
-            case FRIEND_ADD:
-            case FRIEND_EDIT:
+
             case FRIEND_DELETE:
-            case FRIEND_LINK:
-            case FRIEND_UNLINK:
             case FRIEND_ADD_GAME_SKILL:
-            case FRIEND_LIST:
-            case FRIEND_SCHEDULE:
             case GAME_ADD:
             case GAME_DELETE:
-            case GAME_LIST:
             case CLEAR:
                 if (isFriendTable) {
                     handleFriendGet(this.currentFriendToGet);

@@ -112,26 +112,6 @@ public class CommandResult {
         return commandType;
     }
 
-    /** Returns true if the command is a {@Code help} command. */
-    public boolean isShowHelp() {
-        return showHelp;
-    }
-
-    /** Returns true if the command is a {@Code help} command. */
-    public boolean isExit() {
-        return exit;
-    }
-
-    /** Returns true if the command is a {@Code friend --get} command. */
-    public boolean isFriendGet() {
-        return commandType.equals(CommandType.FRIEND_GET);
-    }
-
-    /** Returns true if the command is a {@Code game --get} command. */
-    public boolean isGameGet() {
-        return commandType.equals(CommandType.GAME_GET);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

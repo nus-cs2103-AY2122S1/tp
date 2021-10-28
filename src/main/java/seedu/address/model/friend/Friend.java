@@ -75,6 +75,12 @@ public class Friend {
         gameFriendLinks.get(gameId).setSkillValue(skillValue);
     }
 
+    public Integer getSkillValue(GameId gameId) {
+        GameFriendLink gfl = gameFriendLinks.get(gameId);
+        int skillVal = gfl.getSkillValue().getSkillVal();
+        return skillVal;
+    }
+
     public FriendId getFriendId() {
         return friendId;
     }

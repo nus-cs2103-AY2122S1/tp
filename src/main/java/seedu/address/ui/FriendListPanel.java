@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -22,12 +23,21 @@ public class FriendListPanel extends UiPart<Region> {
     private ListView<Friend> personListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code FriendListPanel} with the given {@code ObservableList}.
      */
     public FriendListPanel(ObservableList<Friend> friendList) {
         super(FXML);
         personListView.setItems(friendList);
         personListView.setCellFactory(listView -> new FriendListViewCell());
+    }
+
+    public void setListener(ChangeListener<Friend> friendChangeListener) {
+        personListView.getSelectionModel().selectedItemProperty()
+                .addListener(friendChangeListener);
+    }
+
+    public void requestFocus() {
+        personListView.requestFocus();
     }
 
     /**

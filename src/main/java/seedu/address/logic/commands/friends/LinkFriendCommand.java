@@ -59,14 +59,14 @@ public class LinkFriendCommand extends Command {
         }
 
         // Obtain a Friend object from the model that matches friendId
-        Friend friendToEdit = model.getFriend(friendId);
+        Friend friendToLink = model.getFriend(friendId);
         Game gameToLink = model.getGame(gameId);
-        GameFriendLink gameFriendLink = new GameFriendLink(gameToLink.getGameId(), friendToEdit.getFriendId(),
+        GameFriendLink gameFriendLink = new GameFriendLink(gameToLink.getGameId(), friendToLink.getFriendId(),
                 userName, new SkillValue(0));
 
-        model.linkFriend(friendToEdit, gameFriendLink);
+        model.linkFriend(friendToLink, gameFriendLink);
         model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
-        return new CommandResult(generateSuccessMessage(friendToEdit), CommandType.FRIEND_LINK);
+        return new CommandResult(generateSuccessMessage(friendToLink), CommandType.FRIEND_LINK);
     }
 
     /**
