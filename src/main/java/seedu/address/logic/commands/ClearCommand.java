@@ -13,7 +13,7 @@ import seedu.address.model.TaskBook;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "All data have been cleared!";
+    public static final String MESSAGE_SUCCESS = "All data has been cleared!";
 
 
     @Override
