@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/wanninglim)]
 [[portfolio](team/wanninglim.md)]
 
-* Role: Documentation
+* Role: Developer
 * Responsibilities: UI
 
 ### Ngai Win Lynn
@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/weenleen)] [[portfolio](team/johndoe.md)]
 
-* Role: Testing
+* Role: Developer
 * Responsibilities: Ensures the testing of the project is done properly and on time.
 
 ### Raveen Prabhu
@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/itsraveen)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Code quality
+* Role: Developer
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 
@@ -56,5 +56,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/somekoreanboi)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Deliverables and deadlines
+* Role: Developer
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
