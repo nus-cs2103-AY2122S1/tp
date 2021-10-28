@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_ID;
+import static seedu.address.logic.parser.CliSyntax.FLAG_TIME;
 
 import java.time.DayOfWeek;
 import java.util.Comparator;
@@ -21,13 +23,12 @@ import seedu.address.model.time.HourOfDay;
  */
 public class RecommendCommand extends Command {
     public static final String COMMAND_WORD = "recommend";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Recommends friends sorted by the highest skill value "
-            + "for the given game GAME_ID and available within the provided time to play with.\n"
-            + "Parameters: -g GAME_ID -t HOUR DAY\n"
-            + "Example: recommend -g Valorant -t 10 6";
+    public static final String MESSAGE_USAGE = "Format: "
+        + COMMAND_WORD + " " + FLAG_GAME_ID + "GAME_ID " + FLAG_TIME + " HOUR DAY\n"
+        + "Example: " + COMMAND_WORD + " " + FLAG_GAME_ID + "Valorant " + FLAG_TIME + " 10 6";
     public static final String MESSAGE_GAME_NOT_FOUND = "Game with provided GAME_ID not found in games list.";
-    public static final String MESSAGE_SUCCESS = "Displaying friend recommendations sorted by highest skill for "
-        + "GAME_ID: %1$s available weekly on %2$s, %3$s";
+    public static final String MESSAGE_SUCCESS = "Listing friend recommendations - sorted by highest skill "
+        + "for GAME_ID: %1$s, available weekly on: %2$s, %3$s";
 
     private final GameId gameFilter;
     private final HourOfDay hourFilter;

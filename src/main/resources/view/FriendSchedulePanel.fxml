@@ -5,27 +5,33 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <HBox prefHeight="42.0" prefWidth="225.0" spacing="5.0">
-            <children>
-                <Label fx:id="friendName" text="friendName">
-                    <HBox.margin>
-                        <Insets left="5.0"/>
-                    </HBox.margin>
-                </Label>
-            </children>
-        </HBox>
-        <Label text="Schedule:">
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0"/>
-            </VBox.margin>
-        </Label>
-        <ListView fx:id="dayListView" prefHeight="342.0">
-            <VBox.margin>
-                <Insets left="5.0" right="5.0"/>
-            </VBox.margin>
-        </ListView>
-    </children>
+      prefWidth="340.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="42.0" prefWidth="225.0" spacing="5.0">
+         <children>
+            <Label fx:id="friendName" text="friendName">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin></Label>
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin>
+      </HBox>
+      <Label text="Schedule:">
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" />
+         </VBox.margin>
+      </Label>
+      <HBox prefHeight="335.0" prefWidth="225.0">
+         <children>
+            <ListView fx:id="dayListView" prefHeight="152.0" prefWidth="225.0" HBox.hgrow="ALWAYS" />
+         </children>
+         <VBox.margin>
+            <Insets left="10.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
 </VBox>

@@ -1,6 +1,15 @@
+.root {
+   -light-gray: #393E46;
+   -dark-gray: #222831;
+   -list-cell-odd: #808080;
+   -list-cell-even: #3c3e3f;
+   -blurple: #7289DA;
+   -light-primary: #eeeeee;
+}
+
 .background {
-    -fx-background-color: #393E46;
-    background-color: #393E46; /* Used in the default.html file */
+    -fx-background-color: -light-gray;
+    background-color: -light-gray; /* Used in the default.html file */
 }
 
 .label {
@@ -63,20 +72,14 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: #393E46;
+    -fx-background-color: -light-gray;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: #393E46;
-}
-
-.list-view {
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: #393E46;
+    -fx-background-color: -light-gray;
 }
 
 .list-cell {
@@ -86,18 +89,32 @@
 }
 
 .list-cell:filled {
-    -fx-background-color: #393E46;
-    -fx-border-color: #222831;
+    -fx-background-color: -light-gray;
+    -fx-border-color: -dark-gray;
     -fx-border-width: 1;
+}
+
+.list-cell:filled #gameCardPane {
+    -fx-border-color: -dark-gray;
+    -fx-border-width: 0.5;
+}
+
+.list-cell:filled:even #gameCardPane {
+    -fx-background-color: -list-cell-even;
+}
+
+.list-cell:filled:odd #gameCardPane {
+    -fx-background-color: -list-cell-odd;
+}
+
+.list-cell:filled:selected #gameCardPane {
+    -fx-background-color: #4f609c;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-color: -blurple;
+    -fx-border-width: 0.75;
+    -fx-background-color: #4f609c;
 }
 
 .list-cell .label {
@@ -117,11 +134,11 @@
 }
 
 .stack-pane {
-     -fx-background-color: #393E46;
+     -fx-background-color: -light-gray;
 }
 
 .pane-with-border {
-     -fx-background-color: #393E46;
+     -fx-background-color: -light-gray;
      -fx-border-color: transparent;
      -fx-border-top-width: 1px;
 }
@@ -134,8 +151,6 @@
     -fx-background-color: transparent;
     -fx-font-family: "Monaco";
     -fx-font-size: 13pt;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
     -fx-text-fill: black;
 }
 
@@ -185,7 +200,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: #393E46;
+    -fx-background-color: -light-gray;
 }
 
 .menu-bar .label {
@@ -274,7 +289,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: #393E46;
+    -fx-background-color: -light-gray;
 }
 
 .scroll-bar .thumb {
@@ -299,10 +314,6 @@
     -fx-padding: 8 1 8 1;
 }
 
-#cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
-}
 
 #commandTypeLabel {
     -fx-font-size: 11px;
@@ -310,11 +321,11 @@
 }
 
 #commandTextField {
-    -fx-background-color: #eeeeee;
+    -fx-background-color: -light-primary;
     -fx-background-insets: 0;
-    -fx-border-color: #eeeeee;
+    -fx-border-color: black;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
+    -fx-border-width: 0.5;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-font-family: "Monaco";
@@ -322,20 +333,18 @@
     -fx-text-fill: black;
 }
 
-#filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+#commandTextField:focused {
+    -fx-effect: dropshadow(gaussian, -blurple, 20, 0.6, 0.0, 0.0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: #eeeeee;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
+    -fx-background-color: -light-primary;
     -fx-text-fill: black;
 }
 
 #mainCard {
-    -fx-background-color: #222831;
-    -fx-text-fill: #eeeeee;
+    -fx-background-color: -dark-gray;
+    -fx-text-fill: -light-primary;
     -fx-background-radius: 10px;
 }
 
@@ -348,12 +357,18 @@
 }
 
 .main-card-title {
-    -fx-text-fill: #eeeeee;
+    -fx-text-fill: -light-primary;
     -fx-font-size: 15px;
 }
 
 .items-list {
-    -fx-border-width: 2;
     -fx-border-color: black;
-    -fx-border-radius: 10px;
+    -fx-border-width: 1;
+    -fx-background-color: -dark-gray;
+    -fx-padding: 0 0 0 0;
 }
+
+.items-list:focused {
+    -fx-effect: dropshadow(gaussian, -blurple, 20, 0.5, 0.0, 0.0);
+    }
+

@@ -15,7 +15,8 @@ import seedu.address.model.time.HourOfDay;
  * Represents a {@code Parser} which parses user input to produce a {@code RecommendCommand}.
  */
 class RecommendCommandParser implements Parser<RecommendCommand> {
-    public static final String MESSAGE_INVALID_TIME_FLAG = "\"-t\" flag should be in the format \"-t HOUR DAY\"";
+    public static final String MESSAGE_INVALID_TIME_FLAG = "Time flag \"" + FLAG_TIME + "\" should be in the format "
+        + "\" " + FLAG_TIME + "HOUR DAY\".";
 
     @Override
     public RecommendCommand parse(String userInput) throws ParseException {

@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -28,6 +29,11 @@ public class GameListPanel extends UiPart<Region> {
         super(FXML);
         gameListView.setItems(gameList);
         gameListView.setCellFactory(listView -> new GameListViewCell());
+    }
+
+    public void setListener(ChangeListener<Game> gameChangeListener) {
+        gameListView.getSelectionModel().selectedItemProperty()
+                .addListener(gameChangeListener);
     }
 
     /**

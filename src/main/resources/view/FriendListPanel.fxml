@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
-<HBox prefHeight="440.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="personListView" styleClass="items-list" HBox.hgrow="ALWAYS"/>
+
+<HBox prefHeight="440.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <ListView fx:id="personListView" prefHeight="440.0" prefWidth="507.0" styleClass="items-list" HBox.hgrow="NEVER" />
 </HBox>
