@@ -33,6 +33,8 @@ public class ModelManager implements Model {
 
     // The current selected member
     private Member currentMember;
+    // The current selected event
+    private Event currentEvent;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -118,7 +120,7 @@ public class ModelManager implements Model {
     public void deleteMember(Member target) {
         addressBook.removeMember(target);
 
-        // If the deleted member is the current selected member
+        // If the deleted member is the currently selected member
         if (getCurrentMember().isPresent() && target.isSameType(getCurrentMember().get())) {
             currentMember = null;
             this.taskListManager = new TaskList();
@@ -129,6 +131,10 @@ public class ModelManager implements Model {
     @Override
     public void deleteEvent(Event target) {
         addressBook.removeEvent(target);
+
+        if (getCurrentEvent().isPresent() && target.isSameType(getCurrentEvent().get())) {
+            currentEvent = null;
+        }
     }
 
     @Override
@@ -323,6 +329,22 @@ public class ModelManager implements Model {
         return Optional.ofNullable(currentMember);
     }
 
+    /**
+     * Sets the currently selected event.
+     */
+    @Override
+    public void setCurrentEvent(Event currentEvent) {
+        this.currentEvent = currentEvent;
+    }
+
+    /**
+     * Returns the currently selected event.
+     */
+    @Override
+    public Optional<Event> getCurrentEvent() {
+        return Optional.ofNullable(currentEvent);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -342,7 +364,8 @@ public class ModelManager implements Model {
                 && filteredMembers.equals(other.filteredMembers)
                 && filteredEvents.equals(other.filteredEvents)
                 && filteredTasks.equals(other.filteredTasks)
-                && getCurrentMember().equals(other.getCurrentMember());
+                && getCurrentMember().equals(other.getCurrentMember())
+                && getCurrentEvent().equals(other.getCurrentEvent());
     }
 
 }
