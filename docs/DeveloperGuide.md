@@ -210,6 +210,31 @@ these changes in the `AddressBook`.
     unnatural modelling of the real world since `Group` contains students and not the other way around.
 
 
+### Find Command
+
+The find command can be executed for two main features in tApp: students and groups.
+
+#### Implementation
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+In this example, we explore the `findStudent` command.
+
+1. The user executes a `findStudent alex ber` command to find students whose names contain the name word `alex` or `ber`.
+1. `LogicManager` handles this command by calling its `execute(String)` method.
+1. `LogicManager` then calls and passes this command to `AddressBookParser` to parse the command through its `parseCommand(String)` method.
+1. The `AddressBookParser` creates a new `FindStudentCommandParser` which will parse the arguments `parse(alex ber)`. This in turns create a new `NameContainsKeywordPredicate` instance that checks if a `Student` contains the predicates `alex` or `ber`.
+1. A new `FindStudentCommand` is created by `FindStudentCommandParser` and is returned to `LogicManager` with the predicate as one of its fields.
+1. The `LogicManager` calls the `execute()` method in `FindStudentCommand`.
+1. The `FindStudentCommand` calls the `Model#updateFilteredStudentList()` method, passing in the previously returned predicate as its argument.
+1. The filtered student list is updated by checking all the students in the filtered task list with the `NameContainsKeywordPredicate` instance.
+1. In this case, the filtered student list should return the students: Alex and Bernice as in the sample data.
+1. A new `CommandResult` is returned, switching the current display to the filtered student list. The result is returned to `LogicManager`.
+
+The above process is shown in the following sequence diagram:
+
+![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
+
+ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
     
 --------------------------------------------------------------------------------------------------------------------
