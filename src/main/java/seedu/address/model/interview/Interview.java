@@ -63,10 +63,14 @@ public class Interview {
      */
     public boolean hasInterviewPassed() {
         assert isValidInterviewTime(this.parseTime) : "Not a valid interview time";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
-        LocalDate interview = LocalDate.parse(this.parseTime, formatter);
-        return interview.isBefore(LocalDate.now());
+        try {
+            DateFormat parseFormat = new SimpleDateFormat(PARSE_FORMAT);
+            Date interview = parseFormat.parse(parseTime);
+            return interview.before(java.util.Calendar.getInstance().getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
