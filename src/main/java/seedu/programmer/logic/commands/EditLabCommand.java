@@ -1,9 +1,9 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 
 import java.util.List;
 
@@ -20,15 +20,15 @@ public class EditLabCommand extends Command {
 
     public static final String COMMAND_WORD = "editlab";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lab number or total score."
-            + "\nParameters: "
-            + PREFIX_INDEX + "<Index> "
-            + PREFIX_LAB_NUM + " <Lab Title> "
-            + PREFIX_LAB_RESULT + " <Score>"
-            + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_INDEX + "1 "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lab number and/or total score.\n"
+            + "Parameters: "
+            + PREFIX_LAB_NUM + "<LAB_NUMBER> "
+            + "[" + PREFIX_LAB_NEW_LAB_NUM + " <NEW_LAB_NUMBER>] "
+            + "[" + PREFIX_LAB_TOTAL + " <NEW_TOTAL_SCORE>]\n"
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_LAB_NUM + "1 "
-            + PREFIX_LAB_RESULT + "15";
+            + PREFIX_LAB_NEW_LAB_NUM + "2 "
+            + PREFIX_LAB_TOTAL + "15";
 
     public static final String MESSAGE_EDIT_LAB_SUCCESS = "Updated %1$s!";
 

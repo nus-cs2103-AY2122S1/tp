@@ -17,12 +17,12 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the ProgrammerError. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the ProgrammerError.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_STUDENT_ID + "STUDENT_ID "
-            + PREFIX_CLASS_ID + "CLASS_ID "
-            + PREFIX_EMAIL + "email "
+            + PREFIX_NAME + "<NAME> "
+            + PREFIX_STUDENT_ID + "<STUDENT_ID> "
+            + PREFIX_CLASS_ID + "<CLASS_ID> "
+            + PREFIX_EMAIL + "<EMAIL>\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_STUDENT_ID + "A0121234H "

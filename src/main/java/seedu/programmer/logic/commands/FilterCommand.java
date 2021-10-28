@@ -18,13 +18,13 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose fields contain any of "
             + "the specified arguments (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: [" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_STUDENT_ID + "STUDENTID] "
-            + "[" + PREFIX_CLASS_ID + "CLASSID] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "Example: " + COMMAND_WORD + " -n alice -cid B01 -sid A1234567X -email e0123456@u.nus.edu";
+            + "Parameters: [" + PREFIX_NAME + "<NAME>] "
+            + "[" + PREFIX_STUDENT_ID + "<STUDENT_ID>] "
+            + "[" + PREFIX_CLASS_ID + "<CLASS_ID>] "
+            + "[" + PREFIX_EMAIL + "<EMAIL>]\n"
+            + "Example: " + COMMAND_WORD + " -cid B01";
 
     private final StudentDetailContainsQueryPredicate predicate;
 
