@@ -29,7 +29,7 @@ public class RosterCommand extends Command {
             + "\nExample: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_ROSTER_LESSON_SUCCESS = "✔\tSuccess:\n\nRoster of %s is displayed.\n"
             + "A total of %s student(s) found.";
-    private static final String MESSAGE_ENROLLED_STUDENT_HEADER = "\nStudent(s): ";
+    public static final String MESSAGE_ENROLLED_STUDENT_HEADER = "\nStudent(s): ";
 
     private final Index targetIndex;
 

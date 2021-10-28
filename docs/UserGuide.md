@@ -7,9 +7,10 @@ title: User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## **Introduction**
 
-Welcome to the User Guide of **TuitiONE**! <br>
+Welcome to the User Guide of **TuitiONE**!
 
 **TuitiONE** is a Command Line Interface (CLI) based application that aims to **simplify the work of Customer Servicing Officers (CSO) in a tuition centre**.
 The application also incorporates the benefits of a Graphical User Interface (GUI).
@@ -29,22 +30,25 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
 
 1. Ensure you have Java 11 or above installed in your Computer. You may follow the instructions and install it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-1. Download the latest `TuitiONE.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases).
+2. Download the latest `TuitiONE.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TuitiONE.
+3. Copy the file to the folder you want to use as the _home folder_ for your TuitiONE.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. _Note how the app contains some sample data_.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+  _Note how the app contains some sample data_.<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   ![Ui](images/Ui.png)<br>
+   _Image: **TuitiONE** upon loading for the first time._<br>
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
    Some example commands you can try:
 
    * **`list`** : Lists all students and lessons.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the TuitiONE app.
+   * **`add`** `n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the **TuitiONE** app.
 
-   * **`delete`**`3` : Deletes the 3rd student shown in the student list.
+   * **`delete`** `3` : Deletes the 3rd student shown in the student list.
 
    * **`clear`** : Deletes all data (students and lessons).
 
@@ -104,6 +108,22 @@ The [Command summary](#command-summary) lists a table with all the commands pres
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Application Layout**
+
+This section presents the various elements in our **TuitiONE** application.
+
+![Result of `list`](images/UserGuideImage/default.png)
+
+**No.** | **Section** | **Description**
+--------|-------------|----------------
+1 | Toolbar pane | Here you can select the quit button or view the help window.
+2 | Student panel | Here you can see the list of students present in your application. This list can be skimmed down using commands such as [`find`](#locating-students-by-name-find) and [`filter`](#filtering-of-list-filter).
+3 | Lesson panel | Here you can see the list of lessons present in your application. This list can be skimmed down using commands such as [`filter`](#filtering-of-list-filter) and [`roster`](#viewing-of-lesson-roster-roster).
+4 | Result panel | Here is where you will receive the various messages from the application after running your commands. There are a variety of messages, ranging from success messages to error messages.
+5 | Command input box | Here is where you type your commands to run in the application.
+6 | Send button | A button that helps submit your input command to run. Using the `Enter`-key on your keyboard after typing in the **Command input box** performs the same job here.
+7 | Storage file indicator | This portion displays the location of your saved **TuitiONE** data file in your device.
+
 ## **Features**
 
 This section outlines all the features that **TuitiONE** has. You will be able to see the purpose of each feature, the format of each command and possible examples and images of what you should expect to see.
@@ -138,15 +158,17 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 
 TuitiONE will display the help panel which shows you a summary of the command syntax that is usable to the current version of TuitiONE.
 
-[comment]: <> (![help message]&#40;images/helpMessage.png&#41;)
-
 Command Format: `help`
 
 #### Listing all students: `list`
 
-Shows you a list of all students and lessons in the TuitiONE. Students will be sorted in ascending alphabetical order by their name. Lessons will be sorted by grade, from P1 to S4.
+Shows you a list of all students and lessons in the **TuitiONE**. Students will be sorted in ascending alphabetical order by their name. Lessons will be sorted by grade, from `P1` to `S4`.
 
 Command Format: `list`
+
+![Result of `list`](images/UserGuideImage/list.png)
+
+Upon entering the `list` command, both student and lesson panels will be updated to show all the students and lessons present.
 
 #### Filtering of list: `filter`
 
@@ -154,19 +176,25 @@ Filter the respective list(s) to display entries that correspond to the conditio
 
 Command Format: `filter [g/GRADE] [s/SUBJECT]`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * You can filter by `GRADE`, `SUBJECT`, or both.
+
     * If you are only filtering by `GRADE`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` as specified.
+  
     * If you are only filtering by `SUBJECT`, only the lesson list will be filtered to display the respective lessons that correspond to the `SUBJECT` as specified.
+  
     * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
 Example(s):
 
 * `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective lists.
+
 * `filter s/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
-* `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student
- list by grade of `P2`, and display the corresponding entries in the respective lists.
+
+* `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student list by grade of `P2`, and display the corresponding entries in the respective lists.
+
+![Result of `filter`](images/UserGuideImage/filter.png)
 
 ### Managing Students
 
@@ -176,7 +204,7 @@ Adds a student to the TuitiONE.
 
 Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).
 
@@ -185,7 +213,10 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 Example(s):
 
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
+
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
+
+![Outcome of `add`](images/UserGuideImage/add.png)
 
 #### Locating students by name: `find`
 
@@ -193,21 +224,26 @@ Finds students whose names contain any of the given keywords.
 
 Command Format: `find KEYWORD [MORE_KEYWORDS]`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
+
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+
 * Only keywords based on name will be searched.
+
 * Prefixed matching words will be supported e.g. `Han` will match `Hans`.
+
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Example(s):
 
 * `find John` returns `john` and `John Doe`
+
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-![result for 'find alex david'](images/UserGuideImage/findAlexDavidResult.png)
+![Result of `find alex`](images/UserGuideImage/find.png)
 
 #### Deleting a student : `delete`
 
@@ -215,16 +251,23 @@ Deletes a student from the TuitiONE.
 
 Command Format: `delete INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Deletes the student at the specified `INDEX`.
+
 * The index refers to the index number shown in the displayed student list.
+
+* Deleting a student also unenrolls (see [`unenroll`](#unenrolling-a-student-from-lesson-unenroll)) themselves from their lessons.
+
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
 Example(s):
 
 * `list` followed by `delete 2` deletes the student indexed `2` in the TuitiONE.
+
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+![Outcome of `delete`](images/UserGuideImage/delete.png)
 
 #### Editing a student : `edit`
 
@@ -232,24 +275,37 @@ Deletes a student from the TuitiONE.
 
 Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK_TO_ADD]... [dr/REMARK_TO_DELETE]...`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Edits the student at the specified `INDEX` based on the fields given.
+
 * You can edit any number of fields.
+
 * The index refers to the index number shown in the displayed student list.
+
 * The index **must be a positive integer** `1`, `2`, `3`, …
-* You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.<br>
+
+* You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.
+
 * If you enter `edit r/[REMARK_TO_ADD]`, TuitiONE will add on the given `REMARK` to the existing set of remarks.
+
 * If you enter `edit dr/[REMARK_TO_DELETE]`, TuitiONE will delete the `REMARK` from the existing set of remarks, if it is present in the set.
+
 * If you were to add and remove remarks in the same command, TuitiONE will remove specified remarks before adding the new ones.
+
 * **Note that if you change a student's grade, TuitiONE will unenroll the student from all the classes he or she was previously taking in the previous grade**.
 
 Example(s):
 
 * `edit 2 p/98765432` changes the parent contact number information of the second student in the student list.
+
 * `edit 2 g/S2` changes the grade of the second student in the student list from its current grade to `S2`, and he or she will be unenrolled from all classes in his or her previous grade.
+
 * `edit 2 n/Ben Lim e/benlim@gmail.com` changes the name and email of the second student in the student list.
+
 * `edit 2 r/discounted dr/unpaid` removes the `unpaid` remark from the second student's set of remarks, before adding the `discounted` remark.
+
+![Outcome of `edit 2 r/discounted`](images/UserGuideImage/edit.png)
 
 #### Enrolling a student from lesson: `enroll`
 
@@ -257,21 +313,30 @@ Enroll a specified student to a given TuitiONE lesson.
 
 Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Enroll the student identified by `STUDENT_INDEX` in the displayed student list to the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
+
 * Enrolling a student is only possible if the student:
   1. has the same `grade` as the lesson,
+  
   2. is not enrolled to the lesson and,
+  
   3. has no other lessons with conflicting timing.
+  
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
+
 * Both indexes **must be a positive integer** `1`, `2`, `3`, …
+
 * Students can only be enrolled to a **maximum of 10 lessons**.
 
 Example(s):
 
 * `enroll 1 l/1` will enroll the student indexed at `1` in the displayed student list to the lesson indexed at `1` in the displayed lesson list.
+
+![Outcome of `enroll 1 l/1`](images/UserGuideImage/enroll.png)
 
 #### Unenrolling a student from lesson: `unenroll`
 
@@ -279,16 +344,21 @@ Unenroll a student from a given TuitiONE lesson.
 
 Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Unenroll the student identified by `STUDENT_INDEX` in the displayed student list from the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
+
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
+
 * Both indexes **must be a positive integer** `1`, `2`, `3`, …
 
 Example(s):
 
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
+
+![Outcome of `unenroll 1 l/1`](images/UserGuideImage/unenroll.png)
 
 ### Managing Lessons
 
@@ -298,7 +368,7 @@ Adds a lesson to the TuitiONE with the specified prefixes.
 
 Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * `GRADE` here follows the similar requirements when adding a student.
 
@@ -315,7 +385,10 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 Example(s):
 
 * `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
+
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
+
+![Outcome of `add-l`](images/UserGuideImage/add-l.png)
 
 #### Deleting a lesson: `delete-l`
 
@@ -323,15 +396,19 @@ Deletes a lesson from the TuitiONE.
 
 Command Format: `delete-l INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Deletes the lesson of the specified `INDEX`.
+
 * The index refers to the index number shown in the displayed lesson list.
+
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
 Example(s):
 
 * `delete-l 1` deletes the lesson with corresponding index `1`.
+
+![Outcome of `delete-l`](images/UserGuideImage/delete-l.png)
 
 #### Viewing of lesson roster: `roster`
 
@@ -339,14 +416,18 @@ Shows you the student roster of a specified lesson in the student panel. The nam
 
 Command Format: `roster LESSON_INDEX`
 
-:bulb: **Tip:**
+:information_source: **Details:**
 
 * Displays the student roster of the lesson of the specified `LESSON_INDEX`.
+
 * The index refers to the index number shown in the displayed lesson list.
+
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
 Examples:
 * `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
+
+![Outcome of `roster 1`](images/UserGuideImage/roster.png)
 
 ### Others
 
@@ -361,6 +442,8 @@ Command Format: `clear`
 :exclamation: **Caution:**
 
 Using this command removes all data from TuitiONE. Only use this command if you want to reset all information on the application and start anew.
+
+![Outcome of `clear`](images/UserGuideImage/clear.png)
 
 </div>
 
@@ -414,7 +497,9 @@ Action | Format | Examples
 ## **Glossary**
 
 * **Java**: A widely used programming language
+
 * **JAR**: An executable java file for you to open the app
+
 * **GUI**: Graphical User Interface
 
 --------------------------------------------------------------------------------------------------------------------
