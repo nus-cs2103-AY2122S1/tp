@@ -29,7 +29,6 @@ public interface Model {
      */
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
 
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -188,6 +187,8 @@ public interface Model {
      * Returns an unmodifiable view of the clients filtered by next meetings for current user.
      */
     ObservableList<Client> getSortedNextMeetingList();
+
+    void filterSortedNextMeetingList(LocalDate date);
 
     /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.

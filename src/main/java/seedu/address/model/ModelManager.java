@@ -244,6 +244,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void filterSortedNextMeetingList(LocalDate date) {
+        if (date == null) {
+            shownNextMeetings.setPredicate(PREDICATE_SHOW_ALL_CLIENTS);
+        } else {
+            shownNextMeetings.setPredicate((client) -> client.isSameDayMeeting(date));
+        }
+    }
+
+    @Override
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);

@@ -223,6 +223,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void filterSortedNextMeetingList(LocalDate date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredClientList(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }

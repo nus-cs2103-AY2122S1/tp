@@ -99,6 +99,10 @@ public class Client {
         return !nextMeeting.isNullMeeting();
     }
 
+    public boolean isSameDayMeeting(LocalDate date) {
+        return nextMeeting.isSameDay(date);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
