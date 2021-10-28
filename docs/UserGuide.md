@@ -163,6 +163,31 @@ The modification command includes: `add-position` `add-applicant` `edit-position
 
 Format: `undo`
 
+### Filtering applicants: `filter-applicant`
+
+Filter the list of applicants by specific criteria.
+
+Format: `filter-applicant [pos/POSITION] [status/STATUS]​`
+
+* The position filter is case-sensitive. e.g `software engineer` will not match `Software Engineer`
+* The status filter is case-insensitive. e.g. `accepted` or `ACCEPTED` will both match the `"Accepted"` application status.
+* A variable number of filters can be specified.
+* The filtering uses a logical `AND`. e.g. `filter-applicant pos/software engineer status/accepted` will match all applicants applying to the `software engineer` position AND with application status `"Accepted"`.
+* Consecutive calls are independent of one another (i.e. the filters do not stack).
+
+Examples:
+* `filter-applicant status/rejected` displays a list of all rejected applicants.
+* `filter-applicant pos/database administrator status/accepted` displays a list of all applicants to the `database administrator` position, that have been accepted.
+
+### Visualizing a position with a pie chart: `visualize`
+
+Displays a pie chart breakdown of a position and the statuses of its applicants.
+Hovering over a pie chart slice will display its percentage value. 
+
+Format: `visualize POSITION_TITLE​`
+
+* `POSITION_TITLE` is case-insensitive. e.g. `visualize software engineer` will display the pie chart for the position `SOFTWARE ENGINEER`.
+
 ### Searching for applicants using keywords: `find` [coming soon]
 
 Finds all applicants whose categorical information match the specified search terms.
@@ -200,6 +225,9 @@ Data is saved as a JSON file `[JAR file location]/data/POSITION-TITLE.json`. Adv
 If your changes to the data file makes its format invalid, MrTechRecruiter will discard all data and start with an empty data file at the next run.
 </div>
 
+### Viewing command history
+Using the up and down arrow keys, you can navigate your command history to view your most recent commands.
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -222,6 +250,8 @@ Action | Format, Examples
 **Delete Applicant** | `delete-applicant n/NAME`<br> e.g., `delete-applicant John Doe`
 **Clear [coming soon]** | `clear`
 **Edit [coming soon]** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
+**Visualize Positions** | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List [coming soon]** | `list`
 **Help [coming soon]** | `help`
