@@ -68,7 +68,9 @@ public class PersonAdditionalCard extends UiPart<Region> {
         events.setText(EVENTS_DESC + (eventList.isEmpty() ? "None" : eventList
                 .stream()
                 .map(event -> event.getEventName().eventName)
-                .reduce("", (name, acc) -> name + acc)));
+                .reduce("", (name, acc) -> name.equals("")
+                        ? name + acc
+                        : name + ", " + acc)));
 
         if (person.hasMissedDeadline()) {
             Label textBox = new Label("Fet late by: ");
