@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalTasks.PROJECT;
 
 import java.nio.file.Path;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -268,6 +269,11 @@ class TaddCommandTest {
 
         @Override
         public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Member> getCurrentMember() {
             throw new AssertionError("This method should not be called.");
         }
     }

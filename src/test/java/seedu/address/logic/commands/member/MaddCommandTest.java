@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -241,6 +242,11 @@ public class MaddCommandTest {
 
         @Override
         public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Member> getCurrentMember() {
             throw new AssertionError("This method should not be called.");
         }
     }

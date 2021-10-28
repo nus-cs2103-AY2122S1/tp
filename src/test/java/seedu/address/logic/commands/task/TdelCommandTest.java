@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -263,6 +264,11 @@ class TdelCommandTest {
         public void updateFilteredTaskList(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Optional<Member> getCurrentMember() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -275,11 +281,11 @@ class TdelCommandTest {
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
-        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
+        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberId) {
             this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
+            requireNonNull(memberId);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
+            this.member = filteredMembers.get(memberId.getZeroBased());
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskList();
@@ -332,11 +338,11 @@ class TdelCommandTest {
         private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
-        ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberID) {
+        ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberId) {
             this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
+            requireNonNull(memberId);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
+            this.member = filteredMembers.get(memberId.getZeroBased());
             this.taskListManager = new TaskList();
         }
 

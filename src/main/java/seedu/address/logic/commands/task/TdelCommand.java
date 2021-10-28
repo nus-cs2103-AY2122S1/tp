@@ -40,9 +40,9 @@ public class TdelCommand extends Command {
      * Creates an TdelCommand to delete the task with specified {@code TaskID}
      * from the member with specified {@code MemberId}.
      */
-    public TdelCommand(Index memberID, Index taskID) {
-        requireAllNonNull(memberID, taskID);
-        targetMemberId = memberID;
+    public TdelCommand(Index memberId, Index taskID) {
+        requireAllNonNull(memberId, taskID);
+        targetMemberId = memberId;
         targetTaskID = taskID;
     }
 
