@@ -161,7 +161,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
 * `find alex` returns `Alex Yeoh`<br>
   
 ![result for 'find alex'](images/findAlexResult.png)
@@ -224,7 +223,7 @@ appointment list.
 Format: `addApp id/INDEX[INDEX,INDEX,INDEX...] a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION`
 
 Examples:
-* `addApp id/1,2,3 a/Starbucks @ Raffles City start/2021-01-01 1400 end/2021-01-01 1500 ds/discuss marketing strategies`
+* `addApp id/1,5 a/Starbucks @ Raffles City start/14-12-2021 1400 end/14-12-2021 1500 ds/discuss marketing strategies`
 creates an appointment with Alex Yeoh and Irfan Ibrahim on 14-12-2021 at 1400 hrs to discuss marketing strategies
 
 Error messages:
@@ -249,7 +248,7 @@ Format: `editApp ai/INDEX a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION`
 * The persons in the appointment will remain the same.
 
 Examples:
-* `editApp ai/1 a/Starbucks @ Raffles City start/14-12-2021 1600 end/14-12-2021 1800 ds/discuss marketing strategies`
+* `editApp ai/1 a/Utown start/28-12-2021 1400 end/28-12-2021 1500 ds/discuss marketing strategies`
   edits the details of a prior created group appointment, changing it to meet at UTown on 28-12-2021 at 1400 hrs
 
 Error messages:
@@ -280,7 +279,7 @@ After:
 Format: delApp INDEX
 
 Examples:
-* `delApp 2` and the user selects 'OK' in the popup
+* `delApp 1` and the user selects 'OK' in the popup
 
 Error messages:
 * The appointment index provided is invalid.
