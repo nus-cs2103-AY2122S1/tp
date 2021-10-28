@@ -92,7 +92,7 @@ Examples:
 
 Edits an existing student in the record.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [c/CLASS] [i/INFO] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [i/INFO] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -114,7 +114,7 @@ Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
-- The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
@@ -135,11 +135,19 @@ Format: `cd MODULE`
 
 * Alternatively, the user can use `*` to list all modules
 
-### Moving students into modules : `mv`
+### Moving students into an existing class and module : `mv`
 
 Move a particular student into a particular module and class.
 
 Format: `mv INDEX m/MODULE c/CLASS`
+
+* Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+
+### Removing students from an existing class and module : `rm`
+
+Remove a particular student into a particular module and class.
+
+Format: `rm INDEX m/MODULE c/CLASS`
 
 * Edits the module and class of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 
@@ -225,19 +233,21 @@ Examples:
 
 ### Grade a student's assignment : `grade`
 
-Format: `grade INDEX c/ASSIGNMENT st/STATUS [s/SCORE]`
+Format: `grade INDEX n/ASSIGNMENT st/STATUS [s/SCORE]`
 
 * This command can only be made after listing a particular module (i.e `cd MODULE`)
 * Assigns a grade to the student identified specified `INDEX` used in the displayed student list. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* `ASSIGNMENT` refers to the name of the assignment that this grade should be assigned to. The name of the assignment is **case sensitive**.
 * Status has 3 possible inputs: Not submitted, Submitted or Graded
 * Score must be equal or less than the assignment's maximum score
 
 ### Delete a student's grade : `dlgrade`
 
-Format: `dlgrade INDEX c/ASSIGNMENT`
+Format: `dlgrade INDEX n/ASSIGNMENT`
 
 * This command can only be made after listing a particular module (i.e `cd MODULE`)
-* Deletes a grade from the student at the specified `INDEX` used in the displayed student list.
+* `ASSIGNMENT` refers to the name of the assignment that the grade was assigned to. The name of the assignment is **case sensitive**.
+* Deletes a grade for the specified assignment from the student at the specified `INDEX` used in the displayed student list.
 
 ### Locating students by name: `find`
 
@@ -308,9 +318,10 @@ _Details coming soon ..._
 | **Delete Class**| `dlclass m/MODULE c/CLASS`<br> e.g., `dlclass m/CS2103 c/T09`|
 | **Create Assigment**| `mkasg n/ASSIGNMENT w/WEIGHTAGE s/MAXSCORE`<br> e.g., `mkasg n/Side quest 10 w/20 s/50`|
 | **Delete Assignment**| `dlasg INDEX`<br> e.g., `dlasg 1`|
-| **Move Student into Module**| `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`|
-| **Grade an Assignment**| `grade INDEX c/ASSIGNMENT st/STATUS [s/SCORE]`<br> e.g.,`grade 4 c/Attendance st/Graded s/1`|
-| **Delete student's grade**| `dlgrade INDEX c/ASSIGNMENT`<br> e.g.,`mv 2 m/CS2103 c/T10`|
+| **Move Student into Class in Module**| `mv INDEX m/MODULE c/CLASS`<br> e.g.,`mv 2 m/CS2103 c/T10`|
+| **Remove Student from Class in Module**| `rm INDEX m/MODULE c/CLASS`<br> e.g.,`rm 2 m/CS2103 c/T10`|
+| **Grade an Assignment**| `grade INDEX n/ASSIGNMENT st/STATUS [s/SCORE]`<br> e.g.,`grade 4 n/Attendance st/Graded s/1`|
+| **Delete student's grade**| `dlgrade INDEX n/ASSIGNMENT`<br> e.g.,`dlgrade 3 n/Midterm`|
 | **Toggle view** | `view (contacts/asg)`<br> e.g.,`view contacts`|
 | **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`|
 | **List** | `list [TAG]…​`|
