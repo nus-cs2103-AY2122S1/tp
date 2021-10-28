@@ -129,9 +129,11 @@ public class MainWindow extends UiPart<Stage> {
          * not work when the focus is in them because the key event is consumed by
          * the TextInputControl(s).
          *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * ListViews will also consume F2 function key events.
+         *
+         * For now, we add following event filter to capture such key events
+         * purposely so to support accelerators even when focus is
+         * in CommandBox, ResultDisplay, or CenterPanel.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (keyCombination.match(event)) {
