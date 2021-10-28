@@ -69,6 +69,9 @@ class JsonAdaptedModule {
         if (!Module.isValidModuleCode(code)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
+        if (!Module.isValidSavedModuleCode(code)) {
+            throw new IllegalValueException(Module.MESSAGE_INVALID_JSON);
+        }
         if (Module.MODULE_SYSTEM.hasModule(code)) {
             throw new IllegalValueException(Module.MESSAGE_DUPLICATE);
         }

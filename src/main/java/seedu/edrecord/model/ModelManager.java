@@ -17,12 +17,13 @@ import javafx.collections.transformation.FilteredList;
 import seedu.edrecord.commons.core.GuiSettings;
 import seedu.edrecord.commons.core.LogsCenter;
 import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.assignment.MaxScore;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.module.ModuleSystem;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
+import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 
@@ -248,11 +249,16 @@ public class ModelManager implements Model {
         if (!hasSelectedModule()) {
             return false;
         }
-        MaxScore editedMaxScore = editedAssignment.getMaxScore();
+        Score editedMaxScore = editedAssignment.getMaxScore();
         List<Person> allPersons = new ArrayList<>(edRecord.getPersonList());
         return allPersons.stream()
                 .filter(selectedModulePredicate)
                 .anyMatch(person -> person.getGrade(current).compareTo(editedMaxScore) > 0);
+    }
+
+    @Override
+    public Optional<Assignment> searchAssignment(Name name) {
+        return selectedModule.searchAssignment(name);
     }
 
     @Override

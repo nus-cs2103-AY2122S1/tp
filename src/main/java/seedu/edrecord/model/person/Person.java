@@ -30,11 +30,13 @@ public class Person {
     private final Info info;
     private final ModuleGroupMap modules = new ModuleGroupMap();
     private final Set<Tag> tags = new HashSet<>();
+    private final AssignmentGradeMap grades = new AssignmentGradeMap();
 
     /**
      * Every field must be present and cannot be null.
      */
-    public Person(Name name, Phone phone, Email email, Info info, ModuleGroupMap modules, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Info info, ModuleGroupMap modules,
+                  Set<Tag> tags, AssignmentGradeMap grades) {
         requireAllNonNull(name, phone, email, info, tags);
         this.name = name;
         this.phone = phone;
@@ -42,6 +44,7 @@ public class Person {
         this.info = info;
         this.modules.addAll(modules);
         this.tags.addAll(tags);
+        this.grades.addAll(grades);
     }
 
     public Name getName() {
@@ -79,6 +82,15 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns a copy of the student's AssignmentGradeMap.
+     */
+    public AssignmentGradeMap getGrades() {
+        AssignmentGradeMap gradesCopy = new AssignmentGradeMap();
+        gradesCopy.addAll(grades);
+        return gradesCopy;
     }
 
     /**
@@ -120,7 +132,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, info, modules, tags);
+        return Objects.hash(name, phone, email, info, modules, tags, grades);
     }
 
     @Override
@@ -144,6 +156,12 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        if (!grades.isEmpty()) {
+            builder.append("; Grades: ");
+            builder.append(grades);
+        }
+
         return builder.toString();
     }
 

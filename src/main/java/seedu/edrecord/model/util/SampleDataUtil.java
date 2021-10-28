@@ -13,6 +13,7 @@ import seedu.edrecord.model.module.ModuleGroupMap;
 import seedu.edrecord.model.module.ModuleSystem;
 import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.name.Name;
+import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
 import seedu.edrecord.model.person.Person;
@@ -38,18 +39,23 @@ public class SampleDataUtil {
         personSixMapping.add(new Module("CS2103T"), new Group("T07"));
 
         return new Person[] {
+            // TODO change AssignmentGradeMap() to sample grades
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Info("Hardworking and helpful"), personOneMapping, getTagSet("weak")),
+                    new Info("Hardworking and helpful"), personOneMapping, getTagSet("weak"),
+                    new AssignmentGradeMap()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Info("Participates actively"), personTwoMapping, getTagSet("strong", "rude")),
+                    new Info("Participates actively"), personTwoMapping, getTagSet("strong", "rude"),
+                    new AssignmentGradeMap()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Info("Needs help with Tutorial 3 Q5"), personThreeMapping, getTagSet("average")),
+                    new Info("Needs help with Tutorial 3 Q5"), personThreeMapping, getTagSet("average"),
+                    new AssignmentGradeMap()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Info("Currently on SHN"), personFourMapping, getTagSet("strong")),
+                    new Info("Currently on SHN"), personFourMapping, getTagSet("strong"), new AssignmentGradeMap()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Info("Will not be attending tutorial this week"), personFiveMapping, getTagSet("weak", "shy")),
+                    new Info("Will not be attending tutorial this week"), personFiveMapping, getTagSet("weak", "shy"),
+                    new AssignmentGradeMap()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Info("Smart and diligent"), personSixMapping, getTagSet("average"))
+                    new Info("Smart and diligent"), personSixMapping, getTagSet("average"), new AssignmentGradeMap())
         };
     }
 
