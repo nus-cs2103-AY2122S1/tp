@@ -56,9 +56,7 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
 
 <div markdown="span" class="alert alert-warning">
 
-:exclamation: **Caution:**<br>
-
-After running **TuitiONE**, you will notice there are some additional files created in the _home folder_. Please do not delete these files, as they contain your data and important configurations for **TuitiONE** to run smoothly.
+:exclamation: **Caution:** After running **TuitiONE**, you will notice there are some additional files created in the _home folder_. Please do not delete these files, as they contain your data and important configurations for **TuitiONE** to run smoothly.
 
 </div>
 
@@ -113,7 +111,9 @@ The [Command summary](#command-summary) lists a table with all the commands pres
 This section presents the various elements in our **TuitiONE** application.
 
 ![Result of `list`](images/UserGuideImage/default.PNG)
-<center><i>Image: Layout of <b>TuitiONE</b>.<br></i></center>
+
+<center><i>Image: Layout of <b>TuitiONE</b>.</i></center><br>
+<br>
 
 **No.** | **Section** | **Description**
 --------|-------------|----------------
@@ -171,7 +171,8 @@ Command Format: `list`
 
 ![Result of `list`](images/UserGuideImage/list.PNG)
 
-<center><i>Image: Expected output of <code>list</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>list</code> command.</i></center><br>
+<br>
 
 Upon entering the `list` command, both student and lesson panels will be updated to show all the students and lessons present.
 
@@ -201,7 +202,8 @@ Example(s):
 
 ![Result of `filter`](images/UserGuideImage/filter.PNG)
 
-<center><i>Image: Expected output of <code>filter g/P5 s/Science</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>filter g/P5 s/Science</code> command.</i></center><br>
+<br>
 
 ### Managing Students
 
@@ -224,7 +226,8 @@ Example(s):
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
 ![Outcome of `add`](images/UserGuideImage/add.PNG)
-<center><i>Image: Expected output of <code>add</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>add</code> command.</i></center><br>
+<br>
 
 #### Locating students by name: `find`
 
@@ -252,7 +255,8 @@ Example(s):
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ![Result of `find alex`](images/UserGuideImage/find.PNG)
-<center><i>Image: Expected output of <code>find tan</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>find tan</code> command.</i></center><br>
+<br>
 
 #### Deleting a student : `delete`
 
@@ -278,7 +282,8 @@ Example(s):
 
 ![Outcome of `delete`](images/UserGuideImage/delete.PNG)
 
-<center><i>Image: Expected output of <code>delete 1</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>delete 1</code> command.</i></center><br>
+<br>
 
 #### Editing a student : `edit`
 
@@ -318,7 +323,8 @@ Example(s):
 
 ![Outcome of `edit 2 r/discounted`](images/UserGuideImage/edit.PNG)
 
-<center><i>Image: Expected output of <code>edit</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>edit</code> command.</i></center><br>
+<br>
 
 #### Enrolling a student from lesson: `enroll`
 
@@ -351,7 +357,8 @@ Example(s):
 
 ![Outcome of `enroll 1 l/2`](images/UserGuideImage/enroll.PNG)
 
-<center><i>Image: Expected output of <code>enroll 1 l/2</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>enroll 1 l/2</code> command.</i></center><br>
+<br>
 
 #### Unenrolling a student from lesson: `unenroll`
 
@@ -375,7 +382,8 @@ Example(s):
 
 ![Outcome of `unenroll 1 l/1`](images/UserGuideImage/unenroll.PNG)
 
-<center><i>Image: Expected output of <code>unenroll 1 l/1</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>unenroll 1 l/1</code> command.</i></center><br>
+<br>
 
 ### Managing Lessons
 
@@ -407,7 +415,8 @@ Example(s):
 
 ![Outcome of `add-l`](images/UserGuideImage/add-l.PNG)
 
-<center><i>Image: Expected output of <code>add-l</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>add-l</code> command.</i></center><br>
+<br>
 
 #### Deleting a lesson: `delete-l`
 
@@ -429,7 +438,8 @@ Example(s):
 
 ![Outcome of `delete-l`](images/UserGuideImage/delete-l.PNG)
 
-<center><i>Image: Expected output of <code>delete-l 1</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>delete-l 1</code> command.</i></center><br>
+<br>
 
 #### Viewing of lesson roster: `roster`
 
@@ -450,7 +460,8 @@ Examples:
 
 ![Outcome of `roster 1`](images/UserGuideImage/roster.PNG)
 
-<center><i>Image: Expected output of <code>roster 1</code> command.<br></i></center>
+<center><i>Image: Expected output of <code>roster 1</code> command.</i></center><br>
+<br>
 
 ### Others
 
@@ -460,16 +471,15 @@ Clears all students and lessons data stored in TuitiONE.
 
 Command Format: `clear`
 
+![Outcome of `clear`](images/UserGuideImage/clear.PNG)
+
+<center><i>Image: Expected output of <code>clear</code> command.</i></center><br>
+<br>
+
 <div markdown="span" class="alert alert-warning">
 
-:exclamation: **Caution:**
-
-Using this command removes all data from TuitiONE. Only use this command if you want to reset all information on the application and start anew.
-
-![Outcome of `clear`](images/UserGuideImage/clear.png)
-
-<center><i>Image: Expected output of <code>clear</code> command.<br></i></center>
-
+:exclamation: **Caution:** Using this command removes all data from <b>TuitiONE</b>. Only use this command if you want to reset all information on the application and start anew.
+  
 </div>
 
 #### Exiting the program : `exit`
@@ -482,17 +492,17 @@ Command Format: `exit`
 
 #### Saving the data
 
-TuitiONE data is saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
+<b>TuitiONE</b> data is saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
 #### Editing the data file
 
-TuitiONE data is saved as a `.json` file `[JAR file location]/data/TuitiONE.json`. Advanced users are welcome to update data directly by editing that data file.
+<b>TuitiONE</b> data is saved as a `.json` file `[JAR file location]/data/TuitiONE.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:**
 
-If the changes you made to the data file render its format invalid, TuitiONE will discard all data and start with an empty data file at the next run.
+If the changes you made to the data file render its format invalid, <b>TuitiONE</b> will discard all data and start with an empty data file at the next run.
 
 </div>
 
