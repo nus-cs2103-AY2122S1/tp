@@ -82,7 +82,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 | `jt/`  | Job Title           |
 | `sal/` | Salary              |
 | `st/`  | Supply Type         | Supply types should only contain alphanumeric characters and spaces, and it should not be blank
-| `dd/`  | Delivery Details    | Refer [here](#Adding-a-supplier-addS) for more details
+| `dd/`  | Delivery Details    | Refer [here](#adding-a-supplier-addS) for more details
 | `at/`  | Reserving Date Time | Format: `yyyy-MM-dd HHmm`, e.g. `2021-12-24 2000` |
 |  `r/`  | Remark (Optional)   | Contains alphanumeric characters.<br> If you want to remove the remark, you can use edit command with `r/`, without specifying any remark after it.
 
@@ -430,6 +430,7 @@ Find suppliers that have fields that contain all specified keywords cumulatively
 
 Format: 
 * `findS KEYWORD [MORE_KEYWORDS...]`: Displays all suppliers that contain all specified keywords
+
 Examples:
 * `findS Oct AM`: Finds suppliers that have both keywords `Oct` and `AM` in their fields
 
