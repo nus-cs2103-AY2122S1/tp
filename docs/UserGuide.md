@@ -255,7 +255,6 @@ Fields that you can search for are:
 | School           | sch/SCHOOL_KEYWORDS         | Students whose school contain the keywords              |
 | Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contain the keywords     |
 | Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contain the keywords      |
-| Outstanding Fees [COMING SOON] | [COMING SOON] | [COMING SOON]                                           |
 | Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contain the keywords         |
 | Tags             | t/TAG                           | Students who have the specified tag                 |
 | Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students with lessons that match the keywords       |
