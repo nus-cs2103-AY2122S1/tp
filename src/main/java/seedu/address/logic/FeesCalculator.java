@@ -200,7 +200,7 @@ public class FeesCalculator implements Calculator {
         }
 
         // Check the case for lesson falls on lastUpdatedDay or currentDay
-        boolean startBeforeLastUpdatedOnSameDay = laterStart.equals(lastUpdated.getLastUpdatedLocalDate())
+        boolean endBeforeLastUpdatedOnSameDay = laterStart.equals(lastUpdated.getLastUpdatedLocalDate())
             && lastUpdatedDay == updateDay.getValue()
             && lastUpdated.getLastUpdatedLocalTime().isAfter(endTime);
 
@@ -209,7 +209,7 @@ public class FeesCalculator implements Calculator {
             && currentDateTime.toLocalTime().isBefore(endTime);
 
         // Only minus once if start and end dates of lesson on the same date
-        if (startBeforeLastUpdatedOnSameDay || endAfterCurrentDateTimeOnSameDay) {
+        if (endBeforeLastUpdatedOnSameDay || endAfterCurrentDateTimeOnSameDay) {
             numLessons -= 1;
         }
 
