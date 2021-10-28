@@ -23,7 +23,7 @@ public class AddToOrgCommand extends Command {
             + "Parameters: "
             + "INDEX (must be a positive integer, refers to person in list) "
             + PREFIX_NAME + "NAME \n"
-            + "Example: " + COMMAND_WORD + " 1 /n Facebook";
+            + "Example: " + COMMAND_WORD + " 1 n/Facebook";
 
     public static final String MESSAGE_SUCCESS = "New person added to %1$s: %2$s";
 
@@ -46,7 +46,6 @@ public class AddToOrgCommand extends Command {
         if (targetIndex.getZeroBased() >= personList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         Person personToAdd = personList.get(targetIndex.getZeroBased());
         model.addToOrganisation(personToAdd, organisationName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, organisationName, personToAdd));

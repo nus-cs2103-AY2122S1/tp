@@ -9,8 +9,10 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.organisation.Organisation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Deletes a person from an organisation.
@@ -41,15 +43,20 @@ public class DeleteFromOrgCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> personList = model.getFilteredPersonList();
+
+        Organisation organisation = model.getOrganisationByName(organisationName);
+        UniquePersonList persons = organisation.getPersons();
+        List<Person> personList = persons.asUnmodifiableObservableList();
 
         if (targetIndex.getZeroBased() >= personList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = personList.get(targetIndex.getZeroBased());
-        model.deleteFromOrganisation(personToDelete, organisationName);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, personToDelete, organisationName));
+        Person person = personList.get(targetIndex.getZeroBased());
+
+        model.deleteFromOrganisation(person, organisation);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, person, organisationName));
     }
 
     @Override

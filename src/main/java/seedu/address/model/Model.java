@@ -71,13 +71,13 @@ public interface Model {
      * Deletes the given person.
      * The person must exist in the organisation.
      */
-    void deleteFromOrganisation(Person person, Name name);
+    void deleteFromOrganisation(Person person, Organisation organisation);
 
     /**
      * Deletes the given organisation.
      * The organisation must exist in the organisation list.
      */
-    void deleteOrganisation(Organisation target);
+    void deleteOrganisation(Organisation organisation);
 
     /**
      * Adds the given person.
@@ -91,6 +91,11 @@ public interface Model {
      * {@code person} must not already exist in the organisation.
      */
     void addToOrganisation(Person person, Name name);
+
+    /**
+     * Gets the organisation by its name.
+     */
+    Organisation getOrganisationByName(Name name);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
