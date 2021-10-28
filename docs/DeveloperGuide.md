@@ -141,7 +141,7 @@ The `Model` component,
 
 #### Student and Group component
 
-<img src="images/StudentGroupClassDiagram.png" width="450" />
+<img src="images/StudentGroupClassDiagram.png"/>
 
 The `Student` component,
 
@@ -181,12 +181,12 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implmentation
 
-<img src="images/AddMemberSequenceDiagram.png" width="550" />
+<img src="images/AddMemberSequenceDiagram.png"/>
 
 As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
 The main difference between the addMember command lies not in the way the `Logic` class is activated but in the way the `Model` class processes this command.
 
-<img src="images/AddMemberRefSequenceDiagram.png" width="550" />
+<img src="images/AddMemberRefSequenceDiagram.png"/>
 
 The command first gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
 It then calls the `get` command to get a reference of the `Student` to be added using the index supplied by the user.
