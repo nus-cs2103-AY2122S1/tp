@@ -49,6 +49,9 @@ inventory management tasks done faster than traditional GUI apps.
 
 - Words in `{}` are the parameters to be supplied by the user.<br>
   e.g. in `add {name}`, `name` is a parameter which can be used as `add milk`.
+   
+- Parameters in `()` are optional.<br>
+  e.g. in `add {name} (c/{count}), the `count` parameter can be omitted from the command.
 
 - Items in square brackets with pipes are exclusively optional (user must specify at least one of the option).<br>
   e.g `delete [{name} | id/{id_number}]` should be supplied with either `name` or `id number`.
@@ -69,28 +72,38 @@ inventory management tasks done faster than traditional GUI apps.
 
 </div>
 
-### Viewing help : `help` [Coming soon]
+### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
+If a command word is specified, explains how to use the specified command.
 
 **TODO: Replace help ui image**
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: 
+- `help`: Shows help page url.
+- `help {command}` : Explains how to use the specified command.
 
-### Adding an item: `add` [Coming soon]
+Examples:
+```
+help sorder // Explains how to use sorder command
+```
+
+### Adding an item: `add`
 
 Adds an item to the inventory.
 
-Format: `add {name} id/{id number} c/{count} cp/{cost price} sp/{sell price}`
+Format: `add [{name} | id/{id number}] (c/{count}) (cp/{cost price}) (sp/{sell price})`
 
-Flag    |  Argument    | Description
---------|--------------|-------------
-&nbsp;  | name          | name of the item to add.
-`id/`   | id number     | Id number of item to add.
-`c/`    | count         | Quantity of the item to add.
-`cp/`   | cost price    | Cost price of the item to add.
-`sp/`   | sell price    | Sell price of the item to add.
+Flag    |  Argument     | Description                   | Remarks                                 |
+--------|-------------- |-------------------------------|-----------------------------------------|
+&nbsp;  | name          | Name of the item to add.      | Only alphanumeric characters allowed.   |
+`id/`   | id number     | Id number of item to add.     | Must be a 6 digit number.               |
+`c/`    | count         | Quantity of the item to add.  | If omitted, value defaulted as 1.       |
+`cp/`   | cost price    | Cost price of the item to add.|                                         |
+`sp/`   | sell price    | Sell price of the item to add.|                                         |
+
+- name, id number, cost price, and sales price are compulsory when adding an item for the first time.
 
 Examples:
 
@@ -99,9 +112,10 @@ add apple id/192028 c/2 cp/1.1 sp/2.4
 add banana id/192023 c/5 cp/1.0 sp/2.2
 ```
 
-### Deleting an item : `delete` [coming soon]
+### Deleting an item : `delete`
 
 Deletes the specified item from the inventory.
+Use this command to delete items wrongly keyed into the inventory. Costs initially incurred from the item is removed too.
 
 Format: `delete [{name} | id/{id number}]`
 
@@ -121,21 +135,20 @@ delete Apple // delete by name
 delete id/181817  // delete by serial number
 ```
 
-### Removing an item : `remove` [coming soon]
+### Removing an item : `remove`
 
 Removes a specified amount of a particular item from the inventory.
 
 Format: `remove [{name} | id/{id number}] c/{count}`
 
-Flag    |  Argument      | Description
---------|----------------|-------------
-`n/`    | name           | Name of the item to remove.
-`id/`   | id number      | Id number of the item to remove.
-`c/`    | count          | Quantity of the item to remove.
+Flag    |  Argument      | Description                      | Remarks                           |
+--------|----------------|----------------------------------|-----------------------------------|
+`n/`    | name           | Name of the item to remove.      |                                   |
+`id/`   | id number      | Id number of the item to remove. |                                   |
+`c/`    | count          | Quantity of the item to remove.  | If omitted, value defaulted to 1. |
 
 - An item can be specified by either name or serial number.
 - If both name and serial number are specified, the command will take the name as reference.
-- Count must be positive integer
 
 Examples:
 
@@ -144,7 +157,7 @@ remove Apple c/2 // remove 2 apples from inventory
 remove id/181817 c/5 // remove 5 items with id 181817
 ```
 
-### Editing an item : `edit` [coming soon]
+### Editing an item : `edit`
 
 Edit a particular item in the inventory.
 
@@ -159,7 +172,7 @@ Flag    |  Argument    | Description
 `sp/`   | sell price    | new sell price for the item.
 `t/`    | tag           | new tag for the item.
 
-- Count cannot be edited
+- Count cannot be edited, use add, delete or remove instead.
 
 Examples:
 
@@ -168,24 +181,48 @@ edit 1 id/192028  // edit first item's id to 192028
 edit 2 n/Panadol  // edit second item's name to Panadol
 ```
 
-### Get quantity of the item: `count` [Coming soon]
+### Listing items: `list`
 
-Gets the quantity of the item specified.
+List items in the inventory, current order, or past transactions.
 
-Format: `count [-n {name} | -s {serial number}]`
+Format: 
 
-Flag    |  Argument      | Description
---------|----------------|-------------
-`-n`    | name           | Name of the item to delete.
-`-s`    | serial number  | Serial number of the item to delete.
-`-c`    | count          | Quantity of the item to delete.
+ - `list`: List items in the inventory.
+ - `list order`: List items in the current order (if any).
+ - `list txns`: List past transactions.
+ - `list txns {id}`: List items in the specified transaction.
 
-Examples:
+### Sorting items: `sort`
+
+Sort items in the inventory.
+Note that display must be in inventory mode (see `list`).
+
+Format: 
+
+ - `sort n/`: Sort items in the inventory by name.
+ - `list id/`: Sort items in the inventory by id.
+
+### Finding items: `find`
+
+Find items in the inventory.
+Note that display must be in inventory mode (see `list`).
+
+Format: `find [ n/{name}... | id/{id}... ]`
+
+Searching by 1 or more names, or 1 or more ids is supported. However, searching by names and ids simultaneously is not supported.
+
+Examples: 
 
 ```
-count milk  // count by name
-count A01111  // count by serial number
+find n/Cookie n/Apple  // find and list items with names "Cookie" and "Apple"
+find id/123456  // find item with id 123456
 ```
+
+### Clearing items: `clear`
+
+Clears the entire inventory.
+
+Format: `clear`
 
 ### Manage orders
 
@@ -207,52 +244,49 @@ sorder
 >> Please enter item name and quantity.
 ```
 
-### Input an item into order: `iorder`
+### Inputting an item into order: `iorder`
 
-Add an item into the current list of orders.
+Add an item into the current order.
 
 Format:
-`iorder n/{name} c/{count}`
+`iorder [ {name} | id/{id} ] (c/{count})`
 
-`iorder [-n {name} | -s {serial number}] -c {count}`
-
-Flag    |  Argument      | Description
---------|----------------|-------------
-`-n`    | name           | Name of the item to add.
-`-s`    | serial number  | Serial number of the item to add.
-`-c`    | count          | Quantity of the item to add.
+Flag    |  Argument      | Description                            | Remarks                           |
+--------|----------------|----------------------------------------|-----------------------------------|
+&nbsp;  | name           | Name of the item to add to order.      |                                   |
+`id/`   | id number      | Id number of the item to add to order. |                                   |
+`c/`    | count          | Quantity of the item to add to order.  | If omitted, value defaulted to 1. |
 
 Example:
 
 ```
-iorder -n milk -c 5  // Input order of item named milk
-iorder -s 12345 -c 5  // Input order of item with serial no.12345
+iorder milk c/5  // Add 5x milk into order
+iorder id/12345  // Add 1x item with id 12345 into order
 ```
 
-### Cancel an item from order: `corder`
+### Cancelling an item in the order: `corder`
 
-Cancels the specified order from the current list of orders.
+Cancels the specified order from the current order.
 
 Format:
-`corder n/{name}`
+`corder [ {name} | id/{serial number}]`
 
-`corder [-n {name} | -s {serial number}]`
-
-Flag    |  Argument      | Description
---------|----------------|-------------
-`-n`    | name           | Name of the item to add.
-`-s`    | serial number  | Serial number of the item to add.
+Flag    |  Argument      | Description                                 | Remarks                           |
+--------|----------------|---------------------------------------------|-----------------------------------|
+&nbsp;  | name           | Name of the item to remove from order.      |                                   |
+`id/`   | id number      | Id number of the item to remove from order. |                                   |
+`c/`    | count          | Quantity of the item to remove from order.  | If omitted, value defaulted to 1. |
 
 Example:
 
 ```
-corder -n milk  // Cancel order of item named milk
-corder -s 12345  // Cancel order of item with serial no. 12345
+corder milk c/5  // Remove 5x milk from the order
+corder id/12345  // Remove 1x item with id 12345 from the order
 ```
 
 ### End ordering: `eorder`
 
-Saves the current list of orders
+Process the current order and save it.
 
 Format: `eorder`
 
@@ -260,7 +294,7 @@ Example:
 
 ```
 eorder
->> Order is placed!
+>> Order is placed.
 ```
 
 ### Archiving data files `[coming in v2.0]`
