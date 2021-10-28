@@ -114,6 +114,10 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void addOrganisation(Organisation organisation) {
+            throw new AssertionError("This method should not be called");
+        }
 
         @Override
         public void addToOrganisation(Person person, Name name) {
@@ -132,6 +136,10 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasOrganisation(Organisation organisation) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -159,6 +167,10 @@ public class AddCommandTest {
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public ObservableList<Organisation> getFilteredOrganisationList() {
+            throw new AssertionError("This method should not be called");
+        }
 
         @Override
         public ObservableList<Organisation> getFilteredOrganisationList() {
@@ -173,6 +185,10 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateFilteredOrganisationList(Predicate<Organisation> predicate) {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override

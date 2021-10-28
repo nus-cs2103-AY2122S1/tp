@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddToOrgCommand;
+import seedu.address.logic.commands.AddOrgCommand;
 import seedu.address.logic.commands.AppendCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -54,13 +55,12 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-
+        case AddOrgCommand.COMMAND_WORD:
+            return new AddOrgCommandParser().parse(arguments);
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-
         case InteractionCommand.COMMAND_WORD:
             return new InteractionCommandParser().parse(arguments);
 
@@ -81,7 +81,6 @@ public class AddressBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
-
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
@@ -108,9 +107,6 @@ public class AddressBookParser {
 
         case DeleteFromOrgCommand.COMMAND_WORD:
             return new DeleteFromOrgCommandParser().parse(arguments);
-
-
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
