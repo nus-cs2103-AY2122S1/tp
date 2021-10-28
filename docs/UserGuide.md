@@ -591,7 +591,7 @@ This also allows you to keep track of the number of completed appointments with 
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 If you have accidentally marked an appointment as completed, fret not! You can always undo it! 
-<br>Refer to [unmarkappointment](#undo-marking-of-completed-appointment) for more information.
+<br>Refer to [Undo marking of completed appointment](#undo-marking-of-completed-appointment-ua) for more information.
 </div>
 
 
