@@ -1,6 +1,7 @@
 package seedu.modulink.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,10 @@ import seedu.modulink.model.tag.Mod;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
+            new Person(new Name("Your name"), new StudentId("A0000000A"), new Phone("81234567"),
+                new Email("youremail@email.com"), new GitHubUsername("your_github_user"),
+                new TelegramHandle("yourtelehandle"), false,
+                new HashSet<>(), true),
             new Person(new Name("Alex Yeoh"), new StudentId("A1234567R"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"), new GitHubUsername("alex_yeoh_y"),
                 new TelegramHandle("alexyeoh"), false,

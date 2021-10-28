@@ -112,8 +112,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void createProfile(Person person) {
-        addressBook.addPerson(person);
+    public void addProfile(Person person) {
+        addressBook.addPersonToTop(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 

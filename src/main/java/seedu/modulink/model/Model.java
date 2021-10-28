@@ -72,10 +72,9 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Creates a user profile.
-     * {@code person} must not already exist in the address book.
+     * Adds a user profile.
      */
-    void createProfile(Person person);
+    void addProfile(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

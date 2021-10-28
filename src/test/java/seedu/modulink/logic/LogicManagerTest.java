@@ -4,15 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.modulink.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.modulink.logic.LogicManager.PROFILE_CREATED_ERROR_MESSAGE;
-import static seedu.modulink.logic.LogicManager.PROFILE_NOT_CREATED_ERROR_MESSAGE;
-import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.modulink.testutil.Assert.assertThrows;
-import static seedu.modulink.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.modulink.logic.commands.CommandResult;
-import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.logic.commands.EditCommand;
 import seedu.modulink.logic.commands.ListCommand;
 import seedu.modulink.logic.commands.exceptions.CommandException;
@@ -31,11 +22,9 @@ import seedu.modulink.model.Model;
 import seedu.modulink.model.ModelManager;
 import seedu.modulink.model.ReadOnlyAddressBook;
 import seedu.modulink.model.UserPrefs;
-import seedu.modulink.model.person.Person;
 import seedu.modulink.storage.JsonAddressBookStorage;
 import seedu.modulink.storage.JsonUserPrefsStorage;
 import seedu.modulink.storage.StorageManager;
-import seedu.modulink.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -56,60 +45,27 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalidCommandFormat_throwsParseException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
-        logic.execute(createProfileCommand);
+    public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
-        logic.execute(createProfileCommand);
-        String deleteCommand = "delete 9";
+    public void execute_commandExecutionError_throwsCommandException() {
+        String deleteCommand = "delete 109";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
-        logic.execute(createProfileCommand);
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
-    public void execute_myProfileNotCreated_throwsCommandException() {
-        String editCommand = "edit";
-        assertCommandException(editCommand, PROFILE_NOT_CREATED_ERROR_MESSAGE + "\n" + CreateCommand.MESSAGE_USAGE);
-    }
-
-    @Test
-    public void execute_profileAlreadyCreated_throwsCommandException() throws CommandException, ParseException {
+    public void execute_profileAlreadyCreated_throwsCommandException() {
         String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
-        logic.execute(createProfileCommand);
         assertCommandException(createProfileCommand, PROFILE_CREATED_ERROR_MESSAGE + "\n" + EditCommand.MESSAGE_USAGE);
-    }
-
-    @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
-
-        // Execute add command
-        String addCommand = CreateCommand.COMMAND_WORD + NAME_DESC_AMY + ID_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + GITHUB_USERNAME_DESC_AMY + TELEGRAM_HANDLE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test

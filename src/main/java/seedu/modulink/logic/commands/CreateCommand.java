@@ -69,7 +69,12 @@ public class CreateCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
         }
 
-        model.createProfile(myProfile);
+        // deletes the placeholder and adds the user profile
+        if (!model.getFilteredPersonList().isEmpty()) {
+            Person placeholder = model.getFilteredPersonList().get(0);
+            model.deletePerson(placeholder);
+        }
+        model.addProfile(myProfile);
         return new CommandResult(String.format(MESSAGE_SUCCESS, myProfile));
     }
 

@@ -14,6 +14,11 @@ import seedu.modulink.model.tag.Mod;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    private static final Person placeholder = new Person(new Name("Your name"),
+            new StudentId("A0000000A"), new Phone("81234567"),
+            new Email("youremail@email.com"), new GitHubUsername("your_github_user"),
+            new TelegramHandle("yourtelehandle"), false,
+            new HashSet<>(), true);
 
     // Identity fields
     private final Name name;
@@ -43,6 +48,10 @@ public class Person {
         this.isFavourite = isFavourite;
         this.mods.addAll(mods);
         this.isMyProfile = isMyProfile;
+    }
+
+    public static Person getPlaceholder() {
+        return placeholder;
     }
 
     public Name getName() {
