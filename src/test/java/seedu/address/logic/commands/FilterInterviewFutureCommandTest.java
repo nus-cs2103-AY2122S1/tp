@@ -41,7 +41,7 @@ public class FilterInterviewFutureCommandTest {
 
         FilterInterviewFutureCommand filterInterviewFutureCommand = new FilterInterviewFutureCommand();
 
-        String expectedMessage = FilterInterviewFutureCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(FilterInterviewFutureCommand.MESSAGE_SUCCESS, 1);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         // First person is the only applicant with passed interview in Typical Persons
@@ -57,7 +57,7 @@ public class FilterInterviewFutureCommandTest {
 
         FilterInterviewFutureCommand filterInterviewFutureCommand = new FilterInterviewFutureCommand();
 
-        String expectedMessage = FilterInterviewFutureCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(FilterInterviewFutureCommand.MESSAGE_SUCCESS, 1);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         // First person is the only applicant with passed interview in Typical Persons
