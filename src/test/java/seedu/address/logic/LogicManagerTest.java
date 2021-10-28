@@ -100,7 +100,6 @@ public class LogicManagerTest {
         assertEquals("", result.getFeedbackToUser());
     }
 
-
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub

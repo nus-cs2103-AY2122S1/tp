@@ -68,13 +68,11 @@ public class SystemCommandTest {
         assertSystemCommandSuccess(TagCommand.COMMAND_WORD, expectedCommandResult);
     }
 
-
     @Test
     public void execute_unpinCommand_success() {
         CommandResult expectedCommandResult = new CommandResult(UnpinCommand.COMMAND_EXAMPLE, false, false);
         assertSystemCommandSuccess(UnpinCommand.COMMAND_WORD, expectedCommandResult);
     }
-
 
     @Test
     public void execute_untagCommand_success() {

@@ -4,8 +4,9 @@ public class SystemCommand {
 
     /**
      * Executes help message when user is typing
+     *
      * @param userInput
-     * @return
+     * @return feedback message of the operation result for display
      */
     public static CommandResult execute(String userInput) {
         String[] parsedInput = userInput.split(" ");
