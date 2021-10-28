@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Name;
@@ -94,6 +95,12 @@ public interface Model {
     boolean hasApplicantWithName(Name applicantName);
 
     /**
+     * Returns the applicant with the specified name, if any.
+     */
+    Applicant getApplicantByNameIgnoreCase(Name applicantName);
+
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -180,6 +187,7 @@ public interface Model {
     void updateFilteredPositionList(Predicate<Position> predicate);
 
     //=========== Applicant related methods =============================================================
+
     /**
      * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in MrTechRecruiter.
@@ -206,7 +214,6 @@ public interface Model {
      */
     void deleteApplicant(Applicant target);
 
-    // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();
 
     /**
@@ -231,4 +238,26 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
 
     void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
+
+
+    /**
+     * Returns a deep-copied model.
+     */
+    Model getCopiedModel();
+
+    /**
+     * Records the modification history.
+     */
+    void addToHistory(Command command);
+
+    /**
+     * Returns true if there exists history to recover.
+     */
+    boolean hasHistory();
+
+    /**
+     * Undoes the previous modification.
+     */
+    String recoverHistory();
+
 }

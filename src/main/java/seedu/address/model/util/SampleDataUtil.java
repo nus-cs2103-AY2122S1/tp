@@ -15,6 +15,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
@@ -74,11 +75,13 @@ public class SampleDataUtil {
         return new Applicant[] {
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Position(new Title("software engineer"),
-                    new Description("work in a team that builds a facial recognition application"))),
+                    new Description("work in a team that builds a facial recognition application")),
+                    ProfileUrl.emptyProfileUrl()),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     new Position(new Title("database administrator"),
-                            new Description("handles database administration matters")))
+                    new Description("handles database administration matters")),
+                    new ProfileUrl("https://github.com/yumorishita"))
         };
     }
 
