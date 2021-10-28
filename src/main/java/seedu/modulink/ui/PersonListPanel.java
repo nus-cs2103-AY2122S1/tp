@@ -6,9 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.Region;
-import javafx.scene.text.TextAlignment;
 import seedu.modulink.commons.core.LogsCenter;
 import seedu.modulink.model.person.Person;
 
@@ -44,7 +42,6 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else if (person.getIsMyProfile()) {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
-//                setStyle("-fx-background-radius: 30px;");
                 setStyle("-fx-background-radius: 20px");
             } else {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());

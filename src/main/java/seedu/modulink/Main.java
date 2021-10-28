@@ -19,6 +19,10 @@ import javafx.application.Application;
  * to be the entry point of the application, we avoid this issue.
  */
 public class Main {
+    /**
+     * Main method.
+     * @param args parameter for main method.
+     */
     public static void main(String[] args) {
 
         assert false;
