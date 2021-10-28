@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ComputingConnection User Guide
+title: User Guide
 ---
 
 ## Product overview
@@ -16,29 +16,37 @@ You can use *ComputingConnection* to efficiently record information such as facu
 ## About (using this user guide)
 In this section, you will learn how to use the *ComputingConnection* user guide efficiently and effectively.
 
-### Navigating
+### Navigating this guide
 1. Chronological navigation by scrolling 
 - If this is your first time using ComputingConnection, we recommend this for a comprehensive walkthrough.
-
+<br><br/>
 2. Targeted search by jumping 
 - If you know what you're looking for and want to be efficient. 
-- Skip to sections via the Table of Contents or navigable texts.
+- Skip to specific sections via the Table of Contents or navigable texts.
 - CTRL + F to find specific keywords. 
 
-### Text formatting
+### Text conventions
 This user guide is formatted using the following conventions:
 
 Syntax          | Interpretation
 ----------------|-------------
-*Italic text*   | 
-**Bold text**   |
-```Block text```| 
+*Italic text*   | The name of the application, *ComputingConnection*
+**Bold text**   | Keywords for **emphasis** 
+`Block text`    | `command syntax` or `technical references` 
 Orange text     | Headings and subheadings of various size
+------          | Dividers for section breaks
 
-### Icons and symbols
+### Meaning of icons and symbols
+:information_source: : Additional information <br/>
+:bulb: Tip <br/>
+:exclamation: Important message <br/>
+:x: Error or danger to avoid <br/>
 
-> :bulb: Call out bar with light bulb for tips
-
+<div markdown="block" class="alert alert-info">
+:bulb: Call out bar for a tip
+* These blocks of text are here to aid the readability of this user guide! 
+* They can be tagged with different icons for different purposes. 
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +66,7 @@ Orange text     | Headings and subheadings of various size
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe e/johnd@example.com f/computing m/computer science` : Adds a contact named `John Doe` to the address book, with the respective email, faculty and major fields.
+   * **`add`**`n/Dion Neo e/dion@example.com f/computing m/computer science` : Adds a contact named `Dion Neo` to the ComputingConnection, with the respective email, faculty and major fields.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -70,23 +78,51 @@ Orange text     | Headings and subheadings of various size
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Understanding the features section
+## Understanding the 'Features' section
 In this section, you will learn how to utilise the features and commands available in *ComputingConnection*, as seen in the [Features](#features) section. 
 
 ### Terminologies used
-```TODO: Explain...? ```
+Unique terms specific to *ComputingConnection*
 
-### Contact
-Understanding the structure of a **contact** in ComputingConnection is important in enabling you to do more.
+Term            | Meaning
+----------------|-----------------
+Contact         | Represents a person in ComputingConnection
+Data field      | Categories that you can assign to a contact <br/> See [Structure of a contact](#structure-of-a-contact) for the full list of data fields 
+
+### Structure of a contact
+Understanding the structure of a **contact** in *ComputingConnection* is important in enabling you to be more productive.
 
 Category        | Specific fields | Description
 ----------------|-----------------|-----------------
-Personal data fields  | 1. ```n/```: Name <br /> 2. ```e/```: Email | Cannot be empty
-University data fields   | 3. ```f/:``` Faculty <br /> 4. ```m/:``` Major | Cannot be empty
-Skill data fields | 5. ```s/```:Skill <br /> 6. ```l/```: Programming Language <br /> 7. ```fr/```: Framework | Each field can have 0 or more values 
-Miscellaneous data fields| 8. ```r/```: Remark <br /> 9. ```int/```: Interaction | Each field can have 0 or more values
+Personal data fields  | 1. `n/`: Name <br /> 2. `e/`: Email | Compulsory fields
+University data fields   | 3. `f/`: Faculty <br /> 4. `m/:` Major | Compulsory fields
+Skill data fields | 5. `s/`:Skill <br /> 6. `l/`: Programming Language <br /> 7. `fr/`: Framework | Optional fields that can have 0 or more values 
+Miscellaneous data fields| 8. `r/`: Remark <br /> 9. `int/`: Interaction | Optional fields that can have 0 or more values
 
+### ComputingConnection command formats
+<div markdown="block" class="alert alert-info">
 
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Jason Ang`.
+
+* Items in square brackets are optional.<br>
+  e.g. `n/NAME [t/TAG]` can be used as `n/Shivam Tiwari t/friend` or as `n/Shivam Tiwari`.
+
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[s/SKILL]…​` can be used as ` ` (i.e. 0 times), `s/frontend`, `s/frontend s/backend` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
+
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `sort`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -96,64 +132,84 @@ Features and commands are categorised based on
 2. Contact-specific commands
 3. Organisation-specific commands
 
-> The table below consists of important syntax regarding commands available
-
 ### System commands
-```TODO: Categorise here```
+Commands that are related to the whole ComputingConnection system or database. 
 
 ##### Viewing help: `help`
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the help page. <br/>
+
 Format: `help`
 
+##### Listing all contacts : `list`
+Shows a list of all contacts in the address book. <br/>
+
+Format: `list`
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Sorting contacts : `sort`
+Sorts all contacts and shows the list in alphabetical order. <br/>
+
+Format: `sort`
+![result for 'sort'](images/sortscreenshot.png)
+
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Filtering contacts : `filter`
+Filters the contacts by tags.
+
+Format: `filter f/FACULTY [t/TAG]`
+
+* Filters a contact according to a tag
+  Examples:
+* `filter f/computing` returns all users who have been assigned the f/computing tag.
+* `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
+  ![result for 'filter f/computing'](images/filterscreenshot.png)
+
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+
+##### Clearing all entries : `clear`
+Clears all contacts from ComputingConnection.
+
+Format: `clear`
+
+<div markdown="block" class="alert alert-info">
+:exclamation: Be **careful**
+* The confirmation for clearing data will be implemented in future releases. 
+</div>
+
 ### Contact-specific commands
-```TODO: Categorise here```
+Commands that are related to a specific contact
 
 ##### Adding a contact: `add`
 Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE f/FACULTY m/MAJOR  [t/TAG]...`
-
-A contact may have any number of tags (including 0)
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE f/FACULTY m/MAJOR [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
 
 Examples: 
 
-* `add n/John Doe p/98765432 e/johnd@nus.edu.sg r/staff f/computing m/computer science mod/CS2040S`
-* `add n/Seth r/student f/computing m/computer science mod/CS2103T`
+* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science`
+* `add n/Timothy Wong e/timothy@nus.edu.sg f/computing m/computer science s/frontend l/javascript`
 
-### Search Contacts : `search`
-Search for contacts with specified keyword.
-Format: `search KEYWORD`
-Examples:
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* A contact must have one and only one name, email, faculty and major.
+* You can always add optional data fields later on! 
+</div>
 
-Skill data fields
-* s/: skill
-* l/: programming language
-* fr/: framework
-
-Miscellaneous data fields
-* t/: tags
-* r/: remarks
-
-### Viewing help: `help`
-Shows a message explaining how to access the help page.
-Format: `help`
-
-### Adding a Person to ComputingConnection: `add`
-Adds a Person to the address book.
-
-Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
-
-* A Person must have one and only one name, email, faculty and major.
-* A Person may have any number of skills, languages, frameworks and tags (including 0).
-
-Examples:
-* `add n/John Doe e/johnd@nus.edu.sg f/computing m/computer science`
-* `add n/Seth e/seth@nus.edu.sg f/computing m/computer science s/frontend l/javascript t/friend`
-
-### Editing a contact : `edit`
+##### Editing a contact : `edit`
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -162,7 +218,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] 
 * You can remove all the contact’s tags by typing `t/` without
   specifying any tags after it.
 
-### Appending multiple data fields: `append`
+##### Appending multiple data fields: `append`
 Appends a new element to data fields that support multiple elements.
 
 Format: `append 1 [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
@@ -170,10 +226,15 @@ Format: `append 1 [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
 Examples:
 * `append 3 s/webdev l/python t/classmate` Appends 'webdev' to the skill data field, 'python' to the language data field, and 'classmate' to the tag data field of the Person at index 3 in the list.
 
-### Removing data fields: `remove`
+##### Removing data fields: `remove`
 Removes an element from a data field at a specified index.
 
 Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX] [int/INDEX]`
@@ -181,7 +242,13 @@ Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX] [int/INDEX]`
 * The index refers to the index of the specific element in the non-single data field.
 * Applicable to skill and miscellaneous data fields.
 
-### Adding an interaction with a contact : `interaction`
+
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Adding an interaction with a contact : `interaction`
 Adds an interaction record to a specific contact in the address book.
 
 Format: `interaction INDEX [int/DESCRIPTION] [on/DATE]`
@@ -194,18 +261,7 @@ interaction 1 int/We talked. on/1990-01-20
 Examples:
 * `interaction 1 int/We talked. on/1990-01-20` Adds an interaction with description 'We talked' and date '1990-01-20' to the Person at index 1 of the list.
 
-### Listing all contacts : `list`
-Shows a list of all contacts in the address book.
-
-Format: `list`
-
-### Sorting contacts : `sort`
-Sorts contacts and shows the list of contacts in alphabetical order.
-
-Format: `sort`
-![result for 'sort'](images/sortscreenshot.png)
-
-### Viewing a specific contact in detail : `view`
+##### Viewing a specific contact in detail : `view`
 Get a detailed view of specific contact(s).
 Format: `view n/NAME`
 Examples:
@@ -213,7 +269,12 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-### Locating contacts by name: `find`
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+##### Locating contacts by name: `find`
 Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -230,18 +291,33 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filtering contacts : `filter`
-Filters the contacts by tags.
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
 
-Format: `filter f/FACULTY [t/TAG]`
+##### Deleting a contact : `delete`
+Deletes the specified contact from the address book.
 
-* Filters a contact according to a tag
+Format: `delete INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
 Examples:
-* `filter f/computing` returns all users who have been assigned the f/computing tag.
-* `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
-  ![result for 'filter f/computing'](images/filterscreenshot.png)
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
-### Adding an organisation: `add org`
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
+
+### Organisation-specific commands
+Commands that are related to organisations
+
+##### Adding an organisation: `add org`
 Adds an organisation to the address book.
 
 Format: `add org n/NAME e/EMAIL p/PERSON`
@@ -262,27 +338,17 @@ List of personal detail tags:
 List of members:
 * p/: persons in the organisation
 
-### Deleting a contact : `delete`
-Deletes the specified contact from the address book.
+<div markdown="block" class="alert alert-info">
+:bulb: Insert tips
+* `INSERT HERE` 
+</div>
 
-Format: `delete INDEX`
+### Future commands
+Commands to be implemented in future versions
 
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-* `view John` returns John’s profile, with his categories, tags, particulars and details
-* `view David` returns all profiles named David. Assuming there are two profiles named David, it would return both detailed views, with each contact’s particulars and details.
-
-### Archiving data files `[coming in v2.0]`
-
+##### Archiving data files `[coming in v2.0]`
 _Details coming soon ..._
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -295,18 +361,24 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
+System Command | Format, Examples
 --------|------------------
 **Help** | `help`
+**List** | `list`
+**Sort** | details coming soon
+**Filter** | details coming soon
+**Clear** | `clear`|
+
+Contact-specific Command | Format, Examples
+--------|------------------
 **Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com s/marketing t/colleague`
 **Edit** | `edit INDEX n/NAME e/EMAIL f/FACULTY [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Append** | `append INDEX [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
 **Remove** | `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
-**List** | `list`
-**Sort** | details coming soon
 **View** | details coming soon
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | details coming soon
-**Add Org** | `add org n/NAME e/EMAIL p/PERSON`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Clear** | `clear`
+
+Organisation-specific Command | Format, Examples
+--------|------------------
+**Add Org** | `add org n/NAME e/EMAIL p/PERSON`
