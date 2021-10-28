@@ -18,7 +18,7 @@ import seedu.address.storage.JsonAddressBookStorage;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
-    public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file";
     public static final String MESSAGE_SUCCESS = "Exported last searched contacts list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -34,6 +34,10 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        return execute(model, new JsonAddressBookStorage(filePath));
+    }
+
+    CommandResult execute(Model model, JsonAddressBookStorage storage) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -41,15 +45,14 @@ public class ExportCommand extends Command {
         tempData = new AddressBook();
         tempData.setPersons(lastShownList);
 
-        JsonAddressBookStorage tempStorage = new JsonAddressBookStorage(filePath);
         try {
-            tempStorage.saveAddressBook(tempData);
+            storage.saveAddressBook(tempData);
         } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE);
         }
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS + " to " + filePath));
+            String.format(MESSAGE_SUCCESS + " to " + filePath));
     }
 
     @Override
