@@ -109,7 +109,7 @@ public class ImportCommand extends Command {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         } catch (ParseException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(e.getMessage() + "\nPlease fix the error in the CSV file and try again");
         }
     }
 
