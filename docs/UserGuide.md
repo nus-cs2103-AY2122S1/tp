@@ -442,21 +442,21 @@ Note:
 
 Updates the start time and end time of a specific shift of a specific staff.
 
-* If no date input is provided, this week is taken as default.
+* If no date input is provided, this week is taken as default.  
 * If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
-`setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
-`setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
+`setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
+`setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`  
 
 * Start time and end time must follow the format (hh:mm).
 * Start time must be earlier than end time.
 * Both start time and end time must be within the bound (10:00-16:00 for morning slot, 16:00-22:00 for afternoon slot).
 * If the shift does not exist in the staff's schedule, it will be created.
 
-Examples:  
-`setShiftTime -n Candice d/Monday-0 st/10:30-12:30 da/2021-10-01`
-`setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`
+Examples:   
+`setShiftTime -n Candice d/Monday-0 st/10:30-12:30 da/2021-10-01`  
+`setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`  
 
 
 #### Deleting a shift from a staff : `deleteShift`
@@ -492,8 +492,8 @@ Action | Format, Examples
 **Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **View shift** | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
-**Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END DATE]`
-**Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END DATE]`
+**Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END_DATE]`
+**Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/START_DATE] [d/END_DATE]`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
