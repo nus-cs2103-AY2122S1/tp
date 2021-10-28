@@ -19,7 +19,7 @@ public class LoginScreen extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
-    private PasswordField userInput;
+    private PasswordField userInputPassword;
 
     @FXML
     private Label responseDisplay;
@@ -61,13 +61,13 @@ public class LoginScreen extends UiPart<Stage> {
 
     private void handlePassword() {
         try {
-            boolean isCorrectPassword = app.logIn(userInput.getText());
+            boolean isCorrectPassword = app.logIn(userInputPassword.getText());
             if (!isCorrectPassword) {
                 responseDisplay.setText("Wrong password, try again!");
             }
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
                 | InvalidAlgorithmParameterException e) {
-            userInput.clear();
+            userInputPassword.clear();
             responseDisplay.setText("Something went wrong, try again!");
         }
     }

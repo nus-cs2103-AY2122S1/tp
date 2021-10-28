@@ -22,10 +22,10 @@ public class SetUpScreen extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
-    private PasswordField firstPassword;
+    private PasswordField userInputPassword;
 
     @FXML
-    private PasswordField userInput;
+    private PasswordField userConfirmPassword;
 
     @FXML
     private Label responseDisplay;
@@ -62,24 +62,24 @@ public class SetUpScreen extends UiPart<Stage> {
     }
 
     private void handleUserInputPassword() {
-        if (userInput.getText().equals(firstPassword.getText())) {
+        if (userConfirmPassword.getText().equals(userInputPassword.getText())) {
             handleNewPassword();
         } else {
             responseDisplay.setText(PASSWORDS_DO_NOT_MATCH);
-            firstPassword.clear();
-            userInput.clear();
+            userInputPassword.clear();
+            userConfirmPassword.clear();
         }
     }
 
     private void handleNewPassword() {
-        if (!PasswordCommandParser.passwordValidation(userInput.getText())) {
+        if (!PasswordCommandParser.passwordValidation(userInputPassword.getText())) {
             responseDisplay.setText(PasswordCommand.CORRECT_PASSWORD_FORMAT);
-            firstPassword.clear();
-            userInput.clear();
+            userInputPassword.clear();
+            userConfirmPassword.clear();
             return;
         }
         try {
-            app.logIn(userInput.getText());
+            app.logIn(userInputPassword.getText());
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
                 | InvalidAlgorithmParameterException e) {
             responseDisplay.setText("Something went wrong, try again!");
