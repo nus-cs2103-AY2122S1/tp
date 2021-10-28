@@ -50,38 +50,6 @@ Dangerous or potentially negative actions are displayed here
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
-**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
-**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/19-12-2021 08:00`
-**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
-**Create reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
-**Delete Employee** | `deleteE INDEX`<br> e.g., `delete 1`
-**Delete Supplier** | `deleteS INDEX`<br> e.g., `delete 2`
-**Delete Customer** | `deleteC INDEX`<br> e.g., `delete 3`
-**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
-**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
-**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
-**Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
-**Find Employee** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findE `
-**Find Supplier** | `findS KEYWORD [MORE_KEYWORDS]`<br> e.g., `findS Oct AM`
-**Sort Customer** | `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortC by/n o/d`
-**Sort Employee** | `sortE by/PREFIX_OF_EMPLOYEE_FIELD o/ORDER_OF_SORT` <br> e.g. `sortE by/sal o/a`
-**Sort Supplier** | `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortS by/dd o/a`
-**Reset Customer Sorting** | `resetC`
-**Reset Employee Sorting** | `resetE`
-**Reset Supplier Sorting** | `resetS`
-**List Customer** | `listC`
-**List Employee** | `listE`
-**List Supplier** | `listS`
-**Clear** | `clear`
-**Help** | `help`
-**Exit** | `exit`
-
 ### Command syntax
 
 Commands in RHRH has the syntax: `COMMAND_WORD + [PREAMBLE] + [PREFIX + PARAMETER]...`, where:
@@ -126,6 +94,38 @@ This is the list of some repeatedly used preambles used in RHRH, as well as ther
 | `KEYWORD`             | 
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Add Customer** | `addC n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
+**Add Employee** | `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
+**Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/19-12-2021 08:00`
+**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Create reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
+**Delete Employee** | `deleteE INDEX`<br> e.g., `delete 1`
+**Delete Supplier** | `deleteS INDEX`<br> e.g., `delete 2`
+**Delete Customer** | `deleteC INDEX`<br> e.g., `delete 3`
+**Edit Employee** | `editE INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editS INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Customer** | `editC INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
+**Find Customer** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findC Chetwin everything`
+**Find Employee** | `findC KEYWORD [MORE_KEYWORDS]`<br> e.g., `findE `
+**Find Supplier** | `findS KEYWORD [MORE_KEYWORDS]`<br> e.g., `findS Oct AM`
+**Sort Customer** | `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortC by/n o/d`
+**Sort Employee** | `sortE by/PREFIX_OF_EMPLOYEE_FIELD o/ORDER_OF_SORT` <br> e.g. `sortE by/sal o/a`
+**Sort Supplier** | `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT` <br> e.g. `sortS by/dd o/a`
+**Reset Customer Sorting** | `resetC`
+**Reset Employee Sorting** | `resetE`
+**Reset Supplier Sorting** | `resetS`
+**List Customer** | `listC`
+**List Employee** | `listE`
+**List Supplier** | `listS`
+**Clear** | `clear`
+**Help** | `help`
+**Exit** | `exit`
 
 ## Features
 
