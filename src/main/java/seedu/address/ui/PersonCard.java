@@ -58,7 +58,6 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        email.setText(person.getEmail().value);
         faculty.setText(person.getFaculty().value);
         major.setText(person.getMajor().value);
         AtomicInteger index = new AtomicInteger(1);
