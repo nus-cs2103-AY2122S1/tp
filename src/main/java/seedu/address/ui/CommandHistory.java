@@ -8,11 +8,17 @@ public class CommandHistory {
     private final List<String> history;
     private int historyIndex;
 
+    /**
+     * Constructs the CommandHistory Class
+     */
     public CommandHistory() {
         this.history = new ArrayList<>();
         this.historyIndex = 0;
     }
 
+    /**
+     * Adds the command to the history
+     */
     public void addCommand(String commandString) {
         history.add(commandString);
         historyIndex = history.size();
