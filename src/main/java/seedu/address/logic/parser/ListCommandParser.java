@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListInventoryCommand;
+import seedu.address.logic.commands.ListTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.display.DisplayMode;
 
@@ -20,21 +22,28 @@ public class ListCommandParser implements Parser<ListCommand> {
     public ListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        switch (trimmedArgs) {
-        case ListCommand.ORDER_KEYWORD:
-            return new ListCommand(DisplayMode.DISPLAY_OPEN_ORDER);
-
-        case ListCommand.TRANSACTIONS_KEYWORD:
-            return new ListCommand(DisplayMode.DISPLAY_TRANSACTIONS);
-
-        case "":
-            return new ListCommand(DisplayMode.DISPLAY_INVENTORY);
-
-        default:
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE)
-            );
-
+        // Listing Inventory or Order
+        if (trimmedArgs.equals("")) {
+            // Display all items
+            return new ListInventoryCommand(DisplayMode.DISPLAY_INVENTORY);
+        } else if (trimmedArgs.equals(ListInventoryCommand.ORDER_KEYWORD)) {
+            //Display current order
+            return new ListInventoryCommand(DisplayMode.DISPLAY_OPEN_ORDER);
         }
+
+        // Listing Transactions
+        if (trimmedArgs.startsWith(ListTransactionCommand.TRANSACTIONS_KEYWORD)) {
+            String id = args.substring(ListTransactionCommand.TRANSACTIONS_KEYWORD.length()).trim();
+
+            return new ListTransactionCommand(id);
+        }
+
+        // Unrecognised keyword
+        String messageUsage = ListInventoryCommand.MESSAGE_USAGE + "\n"
+                + ListTransactionCommand.MESSAGE_USAGE;
+
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage )
+        );
     }
 }

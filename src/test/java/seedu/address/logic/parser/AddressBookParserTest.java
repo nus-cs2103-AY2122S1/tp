@@ -27,6 +27,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListInventoryCommand;
+import seedu.address.logic.commands.ListTransactionCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
@@ -112,10 +114,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(
-                ListCommand.COMMAND_WORD + " " + ListCommand.TRANSACTIONS_KEYWORD) instanceof ListCommand
-        );
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListInventoryCommand);
+
+        String listTransactionInput = ListCommand.COMMAND_WORD + " " + ListTransactionCommand.TRANSACTIONS_KEYWORD;
+        assertTrue(parser.parseCommand(listTransactionInput) instanceof ListTransactionCommand);
 
     }
 

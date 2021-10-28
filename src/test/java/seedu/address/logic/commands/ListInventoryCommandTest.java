@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
@@ -23,7 +24,7 @@ import seedu.address.testutil.TypicalOrders;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListCommandTest {
+public class ListInventoryCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -36,15 +37,15 @@ public class ListCommandTest {
 
     @Test
     public void executeInventory_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(DISPLAY_INVENTORY), model,
-                ListCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
+        assertCommandSuccess(new ListInventoryCommand(DISPLAY_INVENTORY), model,
+                ListInventoryCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
     }
 
     @Test
     public void executeInventory_listIsFiltered_showsEverything() {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
-        assertCommandSuccess(new ListCommand(DISPLAY_INVENTORY), model,
-                ListCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
+        assertCommandSuccess(new ListInventoryCommand(DISPLAY_INVENTORY), model,
+                ListInventoryCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
     }
 
     @Test
@@ -54,14 +55,14 @@ public class ListCommandTest {
 
         expectedModel.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
         expectedModel.setOrder(new Order());
-        assertCommandSuccess(new ListCommand(DISPLAY_INVENTORY), model,
-                ListCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
+        assertCommandSuccess(new ListInventoryCommand(DISPLAY_INVENTORY), model,
+                ListInventoryCommand.MESSAGE_SUCCESS_INVENTORY, expectedModel);
     }
 
     @Test
     public void executeOrder_noUnclosedOrder_failure() {
-        assertCommandFailure(new ListCommand(DISPLAY_OPEN_ORDER), model,
-                ListCommand.MESSAGE_NO_UNCLOSED_ORDER);
+        assertCommandFailure(new ListInventoryCommand(DISPLAY_OPEN_ORDER), model,
+                ListInventoryCommand.MESSAGE_NO_UNCLOSED_ORDER);
     }
 
     @Test
@@ -71,8 +72,8 @@ public class ListCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
 
-        assertCommandSuccess(new ListCommand(DISPLAY_OPEN_ORDER), model,
-                ListCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
+        assertCommandSuccess(new ListInventoryCommand(DISPLAY_OPEN_ORDER), model,
+                ListInventoryCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
         assertEquals(model.getFilteredDisplayList(), TypicalOrders.getTypicalOrder().getOrderItems());
     }
 
@@ -84,35 +85,13 @@ public class ListCommandTest {
         expectedModel.setOrder(TypicalOrders.getTypicalOrder());
         expectedModel.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
 
-        assertCommandSuccess(new ListCommand(DISPLAY_OPEN_ORDER), model,
-                ListCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
+        assertCommandSuccess(new ListInventoryCommand(DISPLAY_OPEN_ORDER), model,
+                ListInventoryCommand.MESSAGE_SUCCESS_ORDER, expectedModel);
         assertEquals(model.getFilteredDisplayList(),
                 TypicalOrders.getTypicalOrder().getOrderItems());
     }
 
-    @Test
-    public void executeTransactions_displayInInventory_showsSameList() {
-        model.setOrder(TypicalOrders.getTypicalOrder());
-        model.updateFilteredDisplayList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
-
-        expectedModel.setOrder(TypicalOrders.getTypicalOrder());
-        expectedModel.updateFilteredDisplayList(DISPLAY_TRANSACTIONS, PREDICATE_SHOW_ALL_ITEMS);
-
-        assertCommandSuccess(new ListCommand(DISPLAY_TRANSACTIONS), model,
-                ListCommand.MESSAGE_SUCCESS_TXNS, expectedModel);
-        // TODO: compare transactions with typical transactions
-    }
-
-    @Test
-    public void executeTransactions_displayTransactionMode_showsSameList() {
-        model.setOrder(TypicalOrders.getTypicalOrder());
-        model.updateFilteredDisplayList(DISPLAY_TRANSACTIONS, PREDICATE_SHOW_ALL_ITEMS);
-
-        expectedModel.setOrder(TypicalOrders.getTypicalOrder());
-        expectedModel.updateFilteredDisplayList(DISPLAY_TRANSACTIONS, PREDICATE_SHOW_ALL_ITEMS);
-
-        assertCommandSuccess(new ListCommand(DISPLAY_TRANSACTIONS), model,
-                ListCommand.MESSAGE_SUCCESS_TXNS, expectedModel);
-        // TODO: compare transactions with typical transactions
+    @Test void constructor_invalidDisplayMode_throwAssertion() {
+        assertThrows(AssertionError.class, () -> new ListInventoryCommand(DISPLAY_TRANSACTIONS));
     }
 }
