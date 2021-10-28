@@ -92,26 +92,6 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
         internalList.add(toAdd);
     }
 
-    //    /**
-    //     * Replaces the person {@code target} in the list with {@code editedPerson}.
-    //     * {@code target} must exist in the list.
-    //     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
-    //     */
-    //    public void setPerson(Person target, Person editedPerson) {
-    //        requireAllNonNull(target, editedPerson);
-    //
-    //        int index = internalList.indexOf(target);
-    //        if (index == -1) {
-    //            throw new PersonNotFoundException();
-    //        }
-    //
-    //        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-    //            throw new DuplicatePersonException();
-    //        }
-    //
-    //        internalList.set(index, editedPerson);
-    //    }
-
     /**
      * Removes the equivalent organisation from the list.
      * The organisation must exist in the list.
@@ -135,24 +115,6 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
         }
         return o;
     }
-
-    //    public void setPersons(seedu.address.model.person.UniquePersonList replacement) {
-    //        requireNonNull(replacement);
-    //        internalList.setAll(replacement.internalList);
-    //    }
-    //
-    //    /**
-    //     * Replaces the contents of this list with {@code persons}.
-    //     * {@code persons} must not contain duplicate persons.
-    //     */
-    //    public void setPersons(List<Person> persons) {
-    //        requireAllNonNull(persons);
-    //        if (!personsAreUnique(persons)) {
-    //            throw new DuplicatePersonException();
-    //        }
-    //
-    //        internalList.setAll(persons);
-    //    }
 
     /**
      * Sort organisation list alphabetically

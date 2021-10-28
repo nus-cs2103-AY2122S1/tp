@@ -391,11 +391,6 @@ Examples:
 * `deleteorg 1`
 > Deletes the 1st organisation from the organisation list.
 
-<div markdown="block" class="alert alert-info">
-:bulb: Insert tips
-* `INSERT HERE` 
-</div>
-
 ##### Adding person to an organisation: `addtoorg`
 Adds the person at the specified index in the displayed list to an organisation with the specified name.
 
@@ -457,9 +452,13 @@ Contact-specific Command | Format, Examples
 **Interaction** | `interaction INDEX int/DESCRIPTION on/DATE`
 **View** | details coming soon
 **Find** | `find KEYWORD [MORE_KEYWORDS]…​`<br><br> e.g., `find James Jake`
-**Filter** | `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`
+**Filter** | `filter [f/FACULTY]…​ [m/MAJOR]…​ [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​`<br><br> e.g., `filter f/computing`
 **Delete** | `delete INDEX`<br><br> e.g., `delete 3`
 
 Organisation-specific Command | Format, Examples
 --------|------------------
-**Add Org** | `addorg n/NAME e/EMAIL`
+**Add Org** | `addorg n/NAME e/EMAIL`<br><br> e.g., `addorg n/Shopee e/shopee.org@gmail.com`
+**List Org** | `listorg`
+**Delete Org** | `deleteorg INDEX`<br><br> e.g., `deleteorg 1`
+**Add to Org** | `addtoorg INDEX NAME`<br><br> e.g., `addtoorg 1 n/Facebook`
+**Delete from Org** | `deletefromorg INDEX NAME`<br><br> e.g., `deletefromorg 1 n/Facebook`

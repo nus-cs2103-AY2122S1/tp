@@ -46,8 +46,8 @@ public class Organisation {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both Organisations have the same name.
+     * This defines a weaker notion of equality between two organisations.
      */
     public boolean isSameOrganisation(Organisation otherOrganisation) {
         if (otherOrganisation == this) {

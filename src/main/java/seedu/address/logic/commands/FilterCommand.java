@@ -27,8 +27,8 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Finds and lists all persons in ComputingConnection which have the specified tags attached to them.
- * tag matching is case insensitive.
+ * Filters and lists all persons in ComputingConnection which have the specified tags attached to them.
+ * tag matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 

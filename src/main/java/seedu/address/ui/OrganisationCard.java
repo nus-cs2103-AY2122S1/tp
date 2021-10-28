@@ -32,23 +32,13 @@ public class OrganisationCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane persons;
-    @FXML
-    private Label faculty;
-    @FXML
-    private Label major;
-    @FXML
-    private FlowPane skills;
-    @FXML
-    private FlowPane languages;
-    @FXML
-    private FlowPane frameworks;
 
     @FXML
     private FlowPane tags;
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code OrganisationCard} with the given {@code Organisation} and index to display.
      */
     public OrganisationCard(Organisation organisation, int displayedIndex) {
         super(FXML);
