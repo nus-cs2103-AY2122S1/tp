@@ -94,7 +94,7 @@ public class RecurringLesson extends Lesson {
         Set<Date> otherCancelledDates = other.getCancelledDates();
 
         // get the intersection
-        // https://stackoverflow.com/questions/60785426/
+        // Code reuse from https://stackoverflow.com/questions/60785426/
         LocalDate laterStart = Collections.max(Arrays.asList(getLocalDate(), other.getLocalDate()));
         LocalDate earlierEnd = Collections.min(Arrays.asList(getEndDate().getLocalDate(),
                 other.getEndDate().getLocalDate()));
@@ -103,13 +103,16 @@ public class RecurringLesson extends Lesson {
         LocalDate earlierEndDate = earlierEnd.with(TemporalAdjusters.previousOrSame(getDayOfWeek()));
         long numberOfOverlappingDates = ChronoUnit.WEEKS.between(laterStart, earlierEndDate) + 1;
 
-        Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream().sorted()
+        // Get the number of cancelled dates from this lesson within this intersection
+        // minus the duplicates with the other lesson
+        Set<Date> cancelledDatesWithinIntersection = cancelledDates.stream()
                 .filter(date -> !date.getLocalDate().isBefore(laterStart)
                     && !date.getLocalDate().isAfter(earlierEnd))
                 .filter(date -> !otherCancelledDates.contains(date))
                 .collect(Collectors.toSet());
 
-        Set<Date> otherCancelledDatesWithinIntersection = otherCancelledDates.stream().sorted()
+        // get the number of cancelled dates fro mthe other lesson within this intersection
+        Set<Date> otherCancelledDatesWithinIntersection = otherCancelledDates.stream()
             .filter(date -> date.getLocalDate().compareTo(laterStart) >= 0
                 && date.getLocalDate().compareTo(earlierEnd) <= 0)
             .collect(Collectors.toSet());
