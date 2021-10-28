@@ -1,4 +1,4 @@
 package seedu.address.logic.parser;
 
-public class EditTaskCommandParser {
+public class EditTaskCommandParserTest {
 }
