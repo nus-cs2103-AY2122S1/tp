@@ -72,7 +72,7 @@ public class StatsDisplay extends UiPart<Stage> {
         observer = o;
 
         KeyCombination closeStatsDisplayHotKey = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
-        Runnable closeStatsDisplayRunnable= () -> {this.hide();};
+        Runnable closeStatsDisplayRunnable= () -> {this.hide(); onStatsExit.run();};
         getRoot().getScene().getAccelerators().put(closeStatsDisplayHotKey, closeStatsDisplayRunnable);
     }
 
