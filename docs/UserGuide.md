@@ -326,6 +326,7 @@ The essential fields for a lesson are:
 * Rate
 
 Additional fields for a lesson:
+* Homework
 * Cancelled dates
 
 <div markdown="block" class="alert alert-info">
@@ -336,8 +337,6 @@ This rate will be used in the calculation of fees due after each lesson.
 *  A lesson can be identified by the index number shown in the lesson list of the student.
 </div>
 
-An optional field for a lesson is:
-* Homework
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
