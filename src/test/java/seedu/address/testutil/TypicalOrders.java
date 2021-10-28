@@ -19,9 +19,9 @@ public class TypicalOrders {
     public static final Order SALESORDER1 = new OrderBuilder().withCustomer("Josh")
             .withDate("2021-09-18").withAmount("10").build();
     public static final Order SALESORDER2 = new OrderBuilder().withCustomer("Mac")
-            .withDate("2021-09-19").withAmount("15").build();
+            .withDate("2021-09-19").withAmount("15").withIsComplete(true).build();
     public static final Order SALESORDER3 = new OrderBuilder().withCustomer("Clark")
-            .withDate("2021-09-20").withAmount("20").build();
+            .withDate("2021-09-20").withAmount("20").withIsComplete(true).build();
 
     // Manually added - Order's details found in {@code CommandTestUtil}
     public static final Order ORDER = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE1)
@@ -43,4 +43,5 @@ public class TypicalOrders {
     public static List<Order> getTypicalOrder() {
         return new ArrayList<>(Arrays.asList(SALESORDER1, SALESORDER2, SALESORDER3));
     }
+
 }
