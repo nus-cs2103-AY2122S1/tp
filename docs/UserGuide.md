@@ -228,7 +228,7 @@ The following table shows the acceptable formats and relevant examples for `Deli
 
 </div>
 
-### Adding a reservation: `addr`
+### Adding a reservation: `addR`
 
 Adds a new reservation to RHRH
 
@@ -406,7 +406,6 @@ Examples:
 * Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
-<<<<<<< HEAD
 
 <div markdown="block" class="alert alert-warning">
 :information_source: **Notes:**<br>
@@ -503,29 +502,6 @@ Format: `listS`
 * RHRH will switch to the supplier list and list all suppliers no matter which list you are current viewing
 * You can also switch to the supplier list manually by clicking the `View` tab in the menu bar and selecting 
   `Suppliers`
-
-</div>
-
-### Searching for reservation's made: `check`
-
-Displays the reservations made at the specified date and/or time
-
-Format:
-* `check DATE TIME`: Returns all reservations on `DATE TIME`
-* `check DATE`: Returns all reservations on `DATE`, for **all timings**
-* `check TIME`: Returns all reservations on **today's date**, at `TIME` 
-  * `DATE` is formatted as `yyyy-MM-dd`
-  * `TIME` is formatted as `HH00`
-
-Examples:
-* `check 2021-09-19 1800`
-* `check 2021-09-19`
-* `check 1800`
-
-<div markdown="block" class="alert alert-warning">
-:information_source: **Notes:**<br>
-
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
 
 </div>
 
