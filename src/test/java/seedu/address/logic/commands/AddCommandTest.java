@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -47,6 +46,16 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personWithLongName_throwsCommandException() {
+        String longName = "NameOverThirtyCharactersIsTooLong";
+        Person validPerson = new PersonBuilder().withName(longName).build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -88,7 +97,7 @@ public class AddCommandTest {
 
         @Override
         public void deletePersonFromFolder(
-                Index targetIndex,
+                Person personToRemove,
                 Folder targetFolder) {
             throw new AssertionError("This method should not be called.");
         }

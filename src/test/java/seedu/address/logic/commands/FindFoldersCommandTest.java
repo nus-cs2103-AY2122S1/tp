@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_FOLDERS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.getMessageFoldersListedOverview;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFolders.CCA;
 import static seedu.address.testutil.TypicalFolders.CS2103;
@@ -56,7 +56,7 @@ public class FindFoldersCommandTest {
 
     @Test
     public void execute_zeroKeywords_noFolderFound() {
-        String expectedMessage = String.format(MESSAGE_FOLDERS_LISTED_OVERVIEW, 0);
+        String expectedMessage = getMessageFoldersListedOverview(0);
         FolderNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindFoldersCommand command = new FindFoldersCommand(predicate);
         expectedModel.updateFilteredFolderList(predicate);
@@ -66,7 +66,7 @@ public class FindFoldersCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleFoldersFound() {
-        String expectedMessage = String.format(MESSAGE_FOLDERS_LISTED_OVERVIEW, 3);
+        String expectedMessage = getMessageFoldersListedOverview(3);
         FolderNameContainsKeywordsPredicate predicate = preparePredicate("CS2103 Project CCA");
         FindFoldersCommand command = new FindFoldersCommand(predicate);
         expectedModel.updateFilteredFolderList(predicate);

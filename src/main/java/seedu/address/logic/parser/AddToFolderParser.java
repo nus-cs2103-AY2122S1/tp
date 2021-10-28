@@ -59,8 +59,11 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
     private List<Index> extractContactIndex(List<String> allValues) throws ParseException {
         List<Index> contactsToAdd = new ArrayList<>();
         for (int i = 1; i < allValues.size(); i++) {
+            String currString = allValues.get(i);
+            if (currString.equals(">>")) {
+                break;
+            }
             try {
-                String currString = allValues.get(i);
                 int intValue = Integer.parseInt(currString);
                 Index contactIndex = ParserUtil.parseIndex(Integer.toString(intValue));
                 contactsToAdd.add(contactIndex);

@@ -21,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.testutil.TypicalPersons;
 
 public class DeletePersonFromFolderCommandTest {
 
@@ -35,7 +36,7 @@ public class DeletePersonFromFolderCommandTest {
     }
 
     @Test
-    public void constructor_nullIndex_throwsNullPointerException() throws ParseException {
+    public void constructor_nullIndex_throwsNullPointerException() {
         Folder validFolder = new Folder(new FolderName("folder 1"));
         assertThrows(NullPointerException.class, () -> new DeletePersonFromFolderCommand(null, validFolder));
     }
@@ -54,6 +55,13 @@ public class DeletePersonFromFolderCommandTest {
     public void execute_removeNonExistingContactExistingFolder_failure() throws ParseException {
         Folder validFolder = new Folder(new FolderName("folder 1"));
         model.addFolder(validFolder);
+        Person validPerson = new Person(
+                new Name("Charlotte Oliveiro"),
+                new Phone("93210283"),
+                new Email("charlotte@example.com"),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                SampleDataUtil.getTagSet("neighbours"));
+        model.addPerson(validPerson);
         Index validIndex = ParserUtil.parseIndex(stringIndex);
         DeletePersonFromFolderCommand deletePersonFromFolderCommand = new DeletePersonFromFolderCommand(
                 validIndex, validFolder);
@@ -78,22 +86,17 @@ public class DeletePersonFromFolderCommandTest {
     }
 
     @Test
-    public void execute_removeContactFromExistingFolder_success() throws CommandException,
-            ParseException {
+    public void execute_removeContactFromExistingFolder_success() throws ParseException {
         Folder validFolder = new Folder(new FolderName("folder 1"));
         Folder validFolder2 = new Folder(new FolderName("folder 1"));
-        Person validPerson = new Person(
-                new Name("Charlotte Oliveiro"),
-                new Phone("93210283"),
-                new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                SampleDataUtil.getTagSet("neighbours"));
-        validFolder.addContacts(validPerson);
-        model.addFolder(validFolder);
-        Index validIndex = ParserUtil.parseIndex(stringIndex);
 
+        validFolder.addContacts(TypicalPersons.ALICE);
+        model.addFolder(validFolder);
+
+        Index validIndex = ParserUtil.parseIndex(stringIndex);
         DeletePersonFromFolderCommand deletePersonFromFolderCommand = new DeletePersonFromFolderCommand(
-                validIndex, validFolder);
+                validIndex, validFolder2);
+
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.addFolder(validFolder2);

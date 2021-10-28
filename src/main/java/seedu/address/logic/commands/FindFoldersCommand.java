@@ -33,8 +33,7 @@ public class FindFoldersCommand extends Command {
         model.updateFilteredFolderList(predicate);
         ObservableList<Folder> filteredFolders = model.getFilteredFolderList();
         assert filteredFolders != null : "filteredFolders should not be null";
-        return new CommandResult(
-                String.format(Messages.MESSAGE_FOLDERS_LISTED_OVERVIEW, filteredFolders.size()));
+        return new CommandResult(Messages.getMessageFoldersListedOverview(filteredFolders.size()));
     }
 
     @Override
