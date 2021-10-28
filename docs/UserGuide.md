@@ -303,17 +303,13 @@ To find a student, you may enter `find a/serangoon n/Bern` into the command box.
 
 All students in TAB whose address matches `serangoon` and whose name matches `Bern` will be returned. The figure below shows the list after the find command is executed.
 
-<div align="center">
-  <img class="figure" src="images/FindStudents2.png" width="400px" alt="find eg1"/>
-</div>
+![findAll](images/findAll.png)
 <div class="caption">TAB displays one student after the find command.</div>
 
 To find students without the `unpaid` tag and whose school is not `NYJC`, you may enter the command `find cond/none t/unpaid sch/NYJC`. The figure below shows the list after this find command is executed.
 
-<div align="center">
-  <img class="figure" src="images/FindStudents3.png" width="400px" alt="find eg2"/>
-</div>
-<div class="caption">TAB displays two students after the find command.</div>
+![findNone](images/findNone.png)
+<div class="caption">TAB displays three students after the find command.</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -423,7 +419,9 @@ Format: `view INDEX`
 
 Examples:
 
-* `view 2` Displays the list of lessons for the 2nd student in the displayed student list.
+* `view 1` displays the list of lessons for the 1st student in the displayed student list.
+  ![viewLessons](images/viewLessons.png)
+  <div class="caption">A list of lessons for the 1st student is shown on the lesson panel.</div>
 
 * `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
 
@@ -432,6 +430,8 @@ Examples:
 Displays a list of upcoming lessons within the next 48 hours.
 
 Format: `remind`
+
+![remind](images/remind.png)
 
 <div class="caption">Reminder window interface.</div>
 
