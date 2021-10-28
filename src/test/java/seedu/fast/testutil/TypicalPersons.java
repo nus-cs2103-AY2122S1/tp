@@ -90,8 +90,8 @@ public class TypicalPersons {
         .withPhone("9482427")
         .withEmail("lydia@example.com")
         .withAddress("little tokyo")
-        .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE)
-        .withAppointmentCount(INITIAL_COUNT)
+        .withAppointment("11 Oct 2021", NO_APPT_TIME, NO_APPT_VENUE)
+        .withAppointmentCount("1")
         .build();
 
     public static final Person GEORGE = new PersonBuilder()
@@ -100,7 +100,7 @@ public class TypicalPersons {
         .withEmail("anna@example.com")
         .withAddress("4th street")
         .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE)
-        .withAppointmentCount(INITIAL_COUNT)
+        .withAppointmentCount("3")
         .build();
 
     //----------Manually added persons, not in TypicalPersons --------------
