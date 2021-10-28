@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -16,11 +18,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +34,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -147,6 +154,15 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_alias() throws Exception {
+        assertTrue(parser.parseCommand(
+                AliasCommand.COMMAND_WORD + " "
+                + PREFIX_COMMAND + ExitCommand.COMMAND_WORD + " "
+                + PREFIX_ALIAS + "aliasWord")
+                instanceof AliasCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -155,5 +171,72 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void addAliases() throws Exception {
+        AddressBookParser parser = new AddressBookParser();
+        Map<String, String> aliases = new HashMap<>();
+        aliases.put("bye", ExitCommand.COMMAND_WORD);
+        aliases.put("purge", ClearCommand.COMMAND_WORD);
+        parser.addAliases(aliases);
+
+        assertTrue(parser.parseCommand("bye") instanceof ExitCommand);
+        assertTrue(parser.parseCommand("purge") instanceof ClearCommand);
+    }
+
+    @Test
+    public void addAlias() throws Exception {
+        AddressBookParser parser = new AddressBookParser();
+        Alias alias = new Alias("bye", ExitCommand.COMMAND_WORD);
+        parser.addAlias(alias);
+
+        assertTrue(parser.parseCommand("bye") instanceof ExitCommand);
+    }
+
+    @Test
+    public void removeAlias() throws Exception {
+        AddressBookParser parser = new AddressBookParser();
+        Alias alias = new Alias("bye", ExitCommand.COMMAND_WORD);
+        parser.addAlias(alias);
+
+        assertTrue(parser.parseCommand("bye") instanceof ExitCommand);
+        parser.removeAlias(alias.getAliasWord());
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("bye"));
+    }
+
+    @Test
+    public void getAlias() {
+        AddressBookParser parser = new AddressBookParser();
+        Alias alias = new Alias("bye", ExitCommand.COMMAND_WORD);
+        parser.addAlias(alias);
+
+        assertTrue(parser.getAlias("bye").isPresent());
+        assertSame(parser.getAlias("bye").get(), alias);
+    }
+
+    @Test
+    public void equals() {
+        // same object
+        AddressBookParser parser1 = new AddressBookParser();
+        assertEquals(parser1, parser1);
+
+        // same new object
+        AddressBookParser parser2 = new AddressBookParser();
+        assertEquals(parser1, parser2);
+
+        // different aliases
+        parser1.addAlias(new Alias("bye", ExitCommand.COMMAND_WORD));
+        assertNotEquals(parser1, parser2);
+
+        // same aliases
+        parser2.addAlias(new Alias("bye", ExitCommand.COMMAND_WORD));
+        assertEquals(parser1, parser2);
+
+        // null
+        assertNotEquals(parser1, null);
+
+        // different types
+        assertNotEquals(parser1, 5);
     }
 }
