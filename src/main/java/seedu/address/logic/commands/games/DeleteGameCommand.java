@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.games;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_DELETE;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -8,16 +10,17 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 
 
 public class DeleteGameCommand extends Command {
     public static final String COMMAND_WORD = "--delete";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the game identified by the game id"
-            + ".\n"
-            + "Parameters: GAME_ID (must be an existing game id)\n"
-            + "Example: " + COMMAND_WORD + " CSGO";
-    public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game: %1$s";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_GAME + " " + FLAG_DELETE + "GAME_ID\n"
+            + "Example: "
+            + CMD_GAME + " " + FLAG_DELETE + "CSGO";
+    public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game - GAME_ID: %1$s";
 
     private GameId gameToDeleteId;
 
@@ -43,7 +46,8 @@ public class DeleteGameCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_GAME_ID);
         }
 
-        model.removeLinkAllFriends(gameToDeleteId);
+        Game gameToDelete = model.getGame(gameToDeleteId);
+        model.removeLinkAllFriends(gameToDelete);
         model.deleteGame(gameToDeleteId);
         return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, gameToDeleteId),
                 CommandType.GAME_DELETE);

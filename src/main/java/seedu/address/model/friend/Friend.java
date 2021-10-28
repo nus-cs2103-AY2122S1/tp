@@ -2,11 +2,12 @@ package seedu.address.model.friend;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.game.Game;
@@ -26,7 +27,7 @@ public class Friend {
     private final Schedule schedule;
 
     // Data fields
-    private final Set<GameFriendLink> gameFriendLinks = new HashSet<>();
+    private final Map<GameId, GameFriendLink> gameFriendLinks = new HashMap<>();
 
     /**
      * Constructs a {@code Friend}.
@@ -34,14 +35,15 @@ public class Friend {
      *
      * @param friendId        a valid friend id.
      * @param friendName      a valid friend name.
-     * @param gameFriendLinks a set of game-friend links of this friend.
+     * @param gameFriendLinks a map of game-friend links of this friend.
      * @param schedule        Schedule of friend.
      */
-    public Friend(FriendId friendId, FriendName friendName, Set<GameFriendLink> gameFriendLinks, Schedule schedule) {
+    public Friend(FriendId friendId, FriendName friendName, Map<GameId, GameFriendLink> gameFriendLinks,
+                  Schedule schedule) {
         requireAllNonNull(friendId, gameFriendLinks);
         this.friendId = friendId;
         this.friendName = friendName == null ? FriendName.DEFAULT_FRIEND_NAME : friendName;
-        this.gameFriendLinks.addAll(gameFriendLinks);
+        this.gameFriendLinks.putAll(gameFriendLinks);
         this.schedule = schedule;
     }
 
@@ -67,20 +69,17 @@ public class Friend {
      * @throws GameLinkNotFoundException thrown when gameId provided is not linked to this friend.
      */
     public void updateGameFriendLinkSkillValue(GameId gameId, SkillValue skillValue) throws GameLinkNotFoundException {
-        Optional<GameFriendLink> linkToUpdate = gameFriendLinks.stream().filter(
-            gfl -> gfl.getGameId().equals(gameId)).findFirst();
-
-        if (linkToUpdate.isEmpty()) {
+        if (!gameFriendLinks.containsKey(gameId)) {
             throw new GameLinkNotFoundException();
         }
 
-        linkToUpdate.get().setSkillValue(skillValue);
+        gameFriendLinks.get(gameId).setSkillValue(skillValue);
     }
 
     public Integer getSkillValue(GameId gameId) {
-        Optional<GameFriendLink> linkWithGame = gameFriendLinks.stream().filter(
-            gfl -> gfl.getGameId().equals(gameId)).findFirst();
-        return linkWithGame.get().getSkillValue().skillVal;
+        GameFriendLink gfl = gameFriendLinks.get(gameId);
+        int skillVal = gfl.getSkillValue().getSkillVal();
+        return skillVal;
     }
 
     public FriendId getFriendId() {
@@ -96,11 +95,11 @@ public class Friend {
     }
 
     /**
-     * Returns an immutable game set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable game-friend-link map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<GameFriendLink> getGameFriendLinks() {
-        return Collections.unmodifiableSet(gameFriendLinks);
+    public Map<GameId, GameFriendLink> getGameFriendLinks() {
+        return Collections.unmodifiableMap(gameFriendLinks);
     }
 
     /**
@@ -109,13 +108,7 @@ public class Friend {
      * @return True if the friend is associated with the game.
      */
     public boolean hasGameAssociation(Game game) {
-        Set<GameFriendLink> gameFriendLinks = this.getGameFriendLinks();
-        if (gameFriendLinks.stream().filter(gameFriendLink -> gameFriendLink
-                .getGameId().equals(game.getGameId())).count() == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return gameFriendLinks.containsKey(game.getGameId());
     }
 
     /**
@@ -160,10 +153,10 @@ public class Friend {
                 .append("; Name: ")
                 .append(getFriendName());
 
-        Set<GameFriendLink> gameSet = getGameFriendLinks();
-        if (!gameSet.isEmpty()) {
+        Collection<GameFriendLink> gameFriendLinks = getGameFriendLinks().values();
+        if (!gameFriendLinks.isEmpty()) {
             builder.append("; Games: ");
-            gameSet.forEach(builder::append);
+            gameFriendLinks.forEach(builder::append);
             builder.append(" ");
         }
         builder.append(schedule);

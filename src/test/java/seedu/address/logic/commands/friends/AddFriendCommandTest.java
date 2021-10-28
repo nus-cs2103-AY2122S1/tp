@@ -35,13 +35,13 @@ public class AddFriendCommandTest {
         Friend validFriendBobId = new FriendBuilder().withFriendId(VALID_FRIEND_ID_BOB).build();
 
         CommandResult commandResult = new AddFriendCommand(validFriendBobId).execute(modelStub);
-        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendBobId),
+        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendBobId.getFriendId()),
                 commandResult.getFeedbackToUser());
         assertEquals(Collections.singletonList(validFriendBobId), modelStub.friendsAdded);
 
         Friend validFriendAmyId = new FriendBuilder().withFriendId(VALID_FRIEND_ID_AMY).build();
         CommandResult commandResultAddAnother = new AddFriendCommand(validFriendAmyId).execute(modelStub);
-        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendAmyId),
+        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendAmyId.getFriendId()),
                 commandResultAddAnother.getFeedbackToUser());
         assertEquals(Arrays.asList(validFriendBobId, validFriendAmyId), modelStub.friendsAdded);
     }

@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="340.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="42.0" prefWidth="225.0" spacing="5.0">
          <children>

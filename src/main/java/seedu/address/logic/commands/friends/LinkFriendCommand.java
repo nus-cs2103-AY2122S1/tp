@@ -1,6 +1,10 @@
 package seedu.address.logic.commands.friends;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LINK;
+import static seedu.address.logic.parser.CliSyntax.FLAG_USERNAME;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -24,11 +28,11 @@ public class LinkFriendCommand extends Command {
 
     public static final String COMMAND_WORD = "--link";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Links a game and the associated in-game username "
-            + "to a friend. \n"
-            + "Parameters: --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME...\n"
-            + "Example: " + COMMAND_WORD + " --friend Draco --game Valorant --user SmurfLord";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_LINK + "FRIEND_ID " + FLAG_GAME + "GAME_NAME "
+            + FLAG_USERNAME + "IN_GAME_USERNAME\n"
+            + "Example: "
+            + CMD_FRIEND + " " + FLAG_LINK + "Draco " + FLAG_GAME + "Valorant " + FLAG_USERNAME + "SmurfLord";
 
     private final FriendId friendId;
     private final GameId gameId;
@@ -55,21 +59,22 @@ public class LinkFriendCommand extends Command {
         }
 
         // Obtain a Friend object from the model that matches friendId
-        Friend friendToEdit = model.getFriend(friendId);
+        Friend friendToLink = model.getFriend(friendId);
         Game gameToLink = model.getGame(gameId);
-        GameFriendLink gameFriendLink = new GameFriendLink(gameToLink.getGameId(), friendToEdit.getFriendId(),
+        GameFriendLink gameFriendLink = new GameFriendLink(gameToLink.getGameId(), friendToLink.getFriendId(),
                 userName, new SkillValue(0));
 
-        model.linkFriend(friendToEdit, gameFriendLink);
+        model.linkFriend(friendToLink, gameFriendLink);
         model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
-        return new CommandResult(generateSuccessMessage(friendToEdit), CommandType.FRIEND_LINK);
+        return new CommandResult(generateSuccessMessage(friendToLink), CommandType.FRIEND_LINK);
     }
 
     /**
      * Generates a success message referencing the friend and the games linked to him.
      */
     public String generateSuccessMessage(Friend friend) {
-        return friend.getFriendId() + " is now linked to " + gameId + " with username " + userName + ".";
+        return "Linked friend to game - FRIEND_ID: " + friend.getFriendId()
+                + ", GAME_ID: " + gameId + ", IN_GAME_USERNAME: " + userName;
     }
 
     @Override

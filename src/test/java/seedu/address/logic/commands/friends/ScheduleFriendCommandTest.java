@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.time.DayOfWeek;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -31,8 +33,8 @@ class ScheduleFriendCommandTest {
     public void execute_updateSchedule_success() throws InvalidDayTimeException {
         // Set up Schedule
         int day = 7;
-        String startTime = "0000";
-        String endTime = "2300";
+        String startTime = "0";
+        String endTime = "23";
         boolean isFree = true;
         Schedule updatedSchedule = new Schedule();
         updatedSchedule.setScheduleDay(day, startTime, endTime, isFree);
@@ -48,7 +50,7 @@ class ScheduleFriendCommandTest {
         ScheduleFriendCommand scheduleFriendCommand =
                 new ScheduleFriendCommand(friendToEdit.getFriendId(), day, startTime, endTime, isFree);
         String expectedMessage = String.format(ScheduleFriendCommand.MESSAGE_SCHEDULE_FRIEND_SUCCESS,
-                editedFriend.getFriendId());
+                editedFriend.getFriendId(), startTime, endTime, DayOfWeek.of(day).name(), isFree);
         assertCommandSuccess(scheduleFriendCommand, model, expectedMessage, expectedModel);
     }
 
@@ -65,7 +67,7 @@ class ScheduleFriendCommandTest {
     public void execute_invalidDayTime_failure() {
         ScheduleFriendCommand scheduleFriendCommand =
                 new ScheduleFriendCommand(model.getFriendsList().getFriendsList().get(0).getFriendId(),
-                        1, "2000", "1000", true);
+                        1, "20", "10", true);
         assertCommandFailure(scheduleFriendCommand, model,
                 String.format(Messages.MESSAGE_INVALID_DAY_TIME_FORMAT,
                         Messages.MESSAGE_END_TIME_ORDER));
@@ -75,8 +77,8 @@ class ScheduleFriendCommandTest {
     public void equals() {
         // Set up Schedule
         int day = 7;
-        String startTime = "0000";
-        String endTime = "2300";
+        String startTime = "0";
+        String endTime = "23";
         boolean isFree = true;
         FriendId friendId = model.getFriendsList().getFriendsList().get(0).getFriendId();
         ScheduleFriendCommand scheduleFriendCommand =

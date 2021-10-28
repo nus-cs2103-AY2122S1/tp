@@ -39,7 +39,7 @@ public class FriendMainCardTable extends UiPart<Region> {
     public FriendMainCardTable(Friend friend) {
         super(FXML);
 
-        tableView.setItems(FXCollections.observableList(new ArrayList<>(friend.getGameFriendLinks())));
+        tableView.setItems(FXCollections.observableList(new ArrayList<>(friend.getGameFriendLinks().values())));
 
         gameCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getGameId().toString()));
         usernameCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getUserName().toString()));

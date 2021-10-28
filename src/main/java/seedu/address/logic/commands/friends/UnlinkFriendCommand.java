@@ -1,6 +1,9 @@
 package seedu.address.logic.commands.friends;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.CMD_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_UNLINK;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.Command;
@@ -17,10 +20,10 @@ public class UnlinkFriendCommand extends Command {
 
     public static final String COMMAND_WORD = "--unlink";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unlinks friend with the associated game. \n"
-            + "Parameters: --friend FRIEND_ID --game GAME_NAME...\n"
-            + "Example: " + COMMAND_WORD + " --friend Draco --game Valorant";
+    public static final String MESSAGE_USAGE = "Format: "
+            + CMD_FRIEND + " " + FLAG_UNLINK + "FRIEND_ID " + FLAG_GAME + "GAME_NAME\n"
+            + "Example: "
+            + CMD_FRIEND + " " + FLAG_UNLINK + "Draco " + FLAG_GAME + "Valorant";
 
     private final FriendId friendId;
     private final GameId gameId;
@@ -45,23 +48,23 @@ public class UnlinkFriendCommand extends Command {
         }
 
         // Obtain a Friend object from the model that matches friendId
-        Friend friendToEdit = model.getFriend(friendId);
+        Friend friendToUnlink = model.getFriend(friendId);
         Game gameToUnlink = model.getGame(gameId);
-        if (!friendToEdit.hasGameAssociation(gameToUnlink)) {
+        if (!friendToUnlink.hasGameAssociation(gameToUnlink)) {
             throw new CommandException(Messages.MESSAGE_GAME_NOT_ASSOCIATED);
         }
 
-        model.unlinkFriend(friendToEdit, gameToUnlink);
+        model.unlinkFriend(friendToUnlink, gameToUnlink);
         model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
 
-        return new CommandResult(generateSuccessMessage(friendToEdit), CommandType.FRIEND_UNLINK);
+        return new CommandResult(generateSuccessMessage(friendToUnlink), CommandType.FRIEND_UNLINK);
     }
 
     /**
      * Generates a success message referencing the friend and the games unlinked.
      */
     public String generateSuccessMessage(Friend friend) {
-        return friend.getFriendId() + " is now unlinked to " + gameId + ".";
+        return "Unlinked friend from game - FRIEND_ID: " + friend.getFriendId() + ", GAME_ID: " + gameId;
     }
 
     @Override

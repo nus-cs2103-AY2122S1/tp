@@ -28,7 +28,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
-import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.storage.FriendsListStorage;
 import seedu.address.storage.GamesListStorage;
 import seedu.address.storage.JsonFriendsListStorage;
@@ -146,8 +145,8 @@ public class MainApp extends Application {
         List<GameId> includedGameIds = gamesList.getGamesList().stream().map(Game::getGameId)
                 .collect(Collectors.toList());
         for (Friend friend : friendsList.getFriendsList()) {
-            for (GameFriendLink gameFriendLink : friend.getGameFriendLinks()) {
-                if (!includedGameIds.contains(gameFriendLink.getGameId())) {
+            for (GameId gameId : friend.getGameFriendLinks().keySet()) {
+                if (!includedGameIds.contains(gameId)) {
                     return false;
                 }
             }

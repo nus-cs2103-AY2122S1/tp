@@ -30,7 +30,8 @@ public class JsonAdaptedGameFriendLinkTest {
     private static final String VALID_GAME_ID_VALORANT = VALORANT.getGameId().value;
     private static final String VALID_GAME_ID_GENSHIN = GENSHIN_IMPACT.getGameId().value;
     private static final String INVALID_GAME_ID = "GAMEWITH***SPECIALCH@R";
-    private static final List<JsonAdaptedGameFriendLink> VALID_GAME_FRIEND_LINK = BENSON.getGameFriendLinks().stream()
+    private static final List<JsonAdaptedGameFriendLink> VALID_GAME_FRIEND_LINK = BENSON.getGameFriendLinks()
+            .values().stream()
             .map(JsonAdaptedGameFriendLink::new)
             .collect(Collectors.toList());
     private static final String VALID_SKILL_VALUE_STRING_ONE = "1";

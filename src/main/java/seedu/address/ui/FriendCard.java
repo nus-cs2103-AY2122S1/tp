@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -12,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.game.*;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.ui.util.SampleStyles;
 
@@ -50,9 +52,10 @@ public class FriendCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         friendName.setText(formatFriendNameId(friend));
         List<GameFriendLink> toSort = new ArrayList<>();
-        for (GameFriendLink game : friend.getGameFriendLinks()) {
-            toSort.add(game);
+        for (Map.Entry<GameId, GameFriendLink> game : friend.getGameFriendLinks().entrySet()) {
+            toSort.add(game.getValue());
         }
+
         toSort.sort(Comparator.comparing(game -> game.getGameId().value));
         for (int i = 0; i < toSort.size(); i++) {
             if (i < 2) {
@@ -66,7 +69,6 @@ public class FriendCard extends UiPart<Region> {
             } else {
                 break;
             }
-
         }
     }
 

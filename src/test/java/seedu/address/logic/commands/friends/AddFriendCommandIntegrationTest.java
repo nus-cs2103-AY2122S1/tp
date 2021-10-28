@@ -35,7 +35,7 @@ public class AddFriendCommandIntegrationTest {
         expectedModel.addFriend(validFriend);
 
         assertCommandSuccess(new AddFriendCommand(validFriend), model,
-                String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriend), expectedModel);
+                String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriend.getFriendId()), expectedModel);
     }
 
     @Test

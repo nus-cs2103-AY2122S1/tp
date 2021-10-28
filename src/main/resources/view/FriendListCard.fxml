@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="106.0" prefWidth="122.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="106.0" prefWidth="122.0"
+      xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />

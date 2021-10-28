@@ -276,7 +276,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleFriendGet(Friend friendToGet) {
-        System.out.println("handleFriendGet Called");
         removeGameListPanelToGamesPlaceholder();
         gameListPanel = new GameListPanel(logic.getGamesBook().getGamesList());
         addGameListPanelToGamesPlaceholder();
@@ -339,7 +338,12 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             switch (commandResult.getCommandType()) {
+            case FRIEND_SCHEDULE:
             case FRIEND_GET:
+            case FRIEND_ADD:
+            case FRIEND_EDIT:
+            case FRIEND_LINK:
+            case FRIEND_UNLINK:
                 isFriendTable = true;
                 handleFriendGet(commandResult.getFriendToGet());
                 break;
@@ -347,17 +351,11 @@ public class MainWindow extends UiPart<Stage> {
                 isFriendTable = false;
                 handleGameGet(commandResult.getGameToGet());
                 break;
-            case FRIEND_ADD:
-            case FRIEND_EDIT:
+
             case FRIEND_DELETE:
-            case FRIEND_LINK:
-            case FRIEND_UNLINK:
             case FRIEND_ADD_GAME_SKILL:
-            case FRIEND_LIST:
-            case FRIEND_SCHEDULE:
             case GAME_ADD:
             case GAME_DELETE:
-            case GAME_LIST:
             case CLEAR:
                 if (isFriendTable) {
                     handleFriendGet(this.currentFriendToGet);

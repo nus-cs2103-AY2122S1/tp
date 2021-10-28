@@ -3,10 +3,10 @@ package seedu.address.model.friend;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -113,43 +113,44 @@ public class UniqueFriendsList implements Iterable<Friend> {
     public void link(Friend toLink, GameFriendLink gameFriendLink) {
         requireAllNonNull(toLink, gameFriendLink);
 
-        // Get a modifiable copy of the current games in toLink
-        Set<GameFriendLink> currentGames = new HashSet<>(toLink.getGameFriendLinks());
+        // Get a modifiable copy of the current game-friend-links in toLink
+        Map<GameId, GameFriendLink> currentLinks = new HashMap<>(toLink.getGameFriendLinks());
         GameId gameId = gameFriendLink.getGameId();
-        currentGames.removeIf(game -> game.getGameId().equals(gameId));
-        currentGames.add(gameFriendLink);
+        currentLinks.put(gameId, gameFriendLink);
 
         Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getFriendName(),
-                currentGames, toLink.getSchedule());
+                currentLinks, toLink.getSchedule());
         this.setFriend(toLink, editedFriend);
     }
 
     /**
-     * Removes the {@code GameFriendLink} from all friends that are associated with the game of {@code gameId}.
+     * Removes the {@code GameFriendLink} from all friends that are associated with {@code game}.
      */
-    public void removeLinkAllFriends(GameId gameId) {
-        for (Friend currFriend : internalList) {
-            Set<GameFriendLink> currSet = new HashSet<>(currFriend.getGameFriendLinks());
-            currSet.removeIf(gameFriendLink -> gameFriendLink.getGameId().equals(gameId));
-            Friend editedFriend = new Friend(currFriend.getFriendId(), currFriend.getFriendName(),
-                    currSet, currFriend.getSchedule());
-            this.setFriend(currFriend, editedFriend);
-        }
+    public void removeLinkAllFriends(Game game) {
+        requireNonNull(game);
+
+        internalList.forEach(friend -> unlink(friend, game));
     }
 
     /**
-     * Unlinks a Friend {@code friendtoUnlink} with game {@code gameToUnlink}.
+     * Unlinks a Friend {@code friendToUnlink} with game {@code gameToUnlink}.
      * The friend must exist in the list.
      */
     public void unlink(Friend friendToUnlink, Game gameToUnlink) {
         requireAllNonNull(friendToUnlink, gameToUnlink);
 
+        if (!friendToUnlink.hasGameAssociation(gameToUnlink)) {
+            // short-circuit if friend is not associated with the game
+            return;
+        }
+
         // Get a modifiable copy of the current games in toUnlink
-        Set<GameFriendLink> currentGames = new HashSet<>(friendToUnlink.getGameFriendLinks());
+        Map<GameId, GameFriendLink> currentLinks = new HashMap<>(friendToUnlink.getGameFriendLinks());
         GameId gameId = gameToUnlink.getGameId();
-        currentGames.removeIf(game -> game.getGameId().equals(gameId));
+        currentLinks.remove(gameId);
+
         Friend editedFriend = new Friend(friendToUnlink.getFriendId(), friendToUnlink.getFriendName(),
-                currentGames, friendToUnlink.getSchedule());
+                currentLinks, friendToUnlink.getSchedule());
         this.setFriend(friendToUnlink, editedFriend);
     }
 
