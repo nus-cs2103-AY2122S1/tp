@@ -27,5 +27,4 @@ public class NameContainsKeywordsPredicate<T extends Module> implements Predicat
                 || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((NameContainsKeywordsPredicate<?>) other).keywords)); // state check
     }
-
 }
