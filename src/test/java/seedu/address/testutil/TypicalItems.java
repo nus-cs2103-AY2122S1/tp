@@ -19,7 +19,6 @@ import java.util.List;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.Inventory;
 import seedu.address.model.item.Item;
-import seedu.address.model.order.TransactionRecord;
 
 /**
  * A utility class containing a list of {@code Item} objects to be used in tests.

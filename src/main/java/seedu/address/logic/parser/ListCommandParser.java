@@ -45,7 +45,7 @@ public class ListCommandParser implements Parser<ListCommand> {
                 + ListTransactionCommand.MESSAGE_USAGE;
 
         throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage )
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage)
         );
     }
 }
