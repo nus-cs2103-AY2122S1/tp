@@ -54,6 +54,14 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code endDate} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withEndDate(String date) {
+        descriptor.setEndDate(new Date(StringUtil.stripLeadingZeroes(date)));
+        return this;
+    }
+
+    /**
      * Sets the {@code TimeRange} of the {@code EditLessonDescriptor} that we are building.
      */
     public EditLessonDescriptorBuilder withTimeRange(String timeRange) {

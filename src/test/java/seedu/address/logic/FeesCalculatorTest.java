@@ -85,6 +85,54 @@ class FeesCalculatorTest {
 
         assertEquals(expected,
             feesCalculator.updateLessonOutstandingFeesField(withEndDateBetween));
+
+        // With end date as last updated, no lesson between- should not change
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-17T12:00"),
+            LocalDateTime.parse("2021-10-28T12:00"));
+
+        Lesson withEndDateAsLastUpdated = new LessonBuilder()
+            .withDate("13 OCT 2021")
+            .withEndDate("17 OCT 2021")
+            .buildRecurring();
+
+        assertEquals(withEndDateAsLastUpdated,
+            feesCalculator.updateLessonOutstandingFeesField(withEndDateAsLastUpdated));
+
+        // With end date as last updated, lesson between- should update
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-13T12:00"),
+            LocalDateTime.parse("2021-10-28T12:00"));
+
+        Lesson withEndDateAsLastUpdated2 = new LessonBuilder()
+                .withDate("13 OCT 2021")
+                .withEndDate("17 OCT 2021")
+                .buildRecurring();
+
+        expected = new LessonBuilder()
+                .withDate("13 OCT 2021")
+                .withEndDate("17 OCT 2021")
+                .withOutstandingFees("150")
+                .buildRecurring();
+
+        assertEquals(expected,
+            feesCalculator.updateLessonOutstandingFeesField(withEndDateAsLastUpdated2));
+
+        // With end date as current date, lesson after current - should not update with 2nd lesson
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-13T12:00"),
+            LocalDateTime.parse("2021-10-28T12:00"));
+
+        Lesson withEndDateAsCurrentDate = new LessonBuilder()
+            .withDate("21 OCT 2021")
+            .withEndDate("28 OCT 2021")
+            .buildRecurring();
+
+        expected = new LessonBuilder()
+                .withDate("21 OCT 2021")
+                .withEndDate("28 OCT 2021")
+                .withOutstandingFees("150")
+                .buildRecurring();
+
+        assertEquals(expected,
+            feesCalculator.updateLessonOutstandingFeesField(withEndDateAsCurrentDate));
     }
 
     @Test
