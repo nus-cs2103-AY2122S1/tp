@@ -321,6 +321,10 @@ Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_ass
 
 </div>
 
+An example of how the CSV should be formatted is shown below: 
+
+![CsvFormatExample](images/CsvFormatExample.png)
+
 Examples:
 * `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1` imports from the absolute path and database has 2 group columns, 10 assessments, and 1 tag column. 
 * `import -f student_data.csv -g 5 -a 20` imports from the relative path and database has 5 group columns, 20 assessments.
@@ -478,6 +482,7 @@ Word | Meaning
 -------|--------
 Alphanumeric | character that is either an alphabet (capitalised and non-capitalised) or a numerical number. 
 JSON | JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
+CSV | CSV is a delimited text file format that uses a comma to separate values. It is generally used to move data to and from programs such as Microsoft Excel and Google Sheets.
 Command Line Interface (CLI) | a text-based interface that is used to operate software, allowing the user to respond to visual prompts via typing commands.
 Graphic User Interface (GUI) | a system of interactive visual components for computer software, which allows users to interact via many visual components. 
 Java | a computing platform for application development. Source Control runs on Java. 
