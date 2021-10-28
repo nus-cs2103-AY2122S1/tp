@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Amount implements Comparable<Amount> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Sales order amount should only contain numbers, and optionally, at most one block starting with a dot"
-            + "followed by between one or or two numbers";
+            "Sales order amount should only contain numbers, and optionally, at most one block starting with a dot "
+            + "followed by between one or two numbers";
     public static final String VALIDATION_REGEX = "^\\d+(\\.?\\d{1,2})?";
     public final String amount;
 
