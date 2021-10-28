@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.student.Classes;
-
 /**
  * Represents students who are in this tuition class
  */
@@ -36,7 +34,7 @@ public class StudentList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Classes // instanceof handles nulls
+                || (other instanceof StudentList // instanceof handles nulls
                 && equalClasses(((StudentList) other).students)); // state check
     }
 

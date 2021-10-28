@@ -244,4 +244,32 @@ public class AddToClassCommand extends Command {
         }
         return message;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !getClass().equals(o.getClass())) {
+            return false;
+        }
+        AddToClassCommand that = (AddToClassCommand) o;
+
+        if (isUsingIndex != that.isUsingIndex) {
+            return false;
+        }
+        if (isUsingIndex) {
+            if (!studentIndex.equals(that.studentIndex)) {
+                return false;
+            }
+        } else {
+            if (!studentList.equals(that.studentList)) {
+                return false;
+            }
+        }
+        if (!classIndex.equals(that.classIndex)) {
+            return false;
+        }
+        return true;
+    }
 }

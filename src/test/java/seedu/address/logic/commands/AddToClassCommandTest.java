@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithoutException;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -177,6 +179,48 @@ public class AddToClassCommandTest {
                 "[" + studentToAdd.getNameString() + "]") + "\n";
         assertCommandSuccess(addToClassCommand, model, message, expectedModel);
     }
+
+    @Test
+    public void equals() {
+        Student alice = new StudentBuilder().withName("Alice").build();
+        StudentList aliceList = new StudentList(new ArrayList<>() {{
+                add(alice.getNameString()); }
+        });
+        Student bob = new StudentBuilder().withName("Bob").build();
+        StudentList bobList = new StudentList(new ArrayList<>() {{
+                add(bob.getNameString()); }
+        });
+        AddToClassCommand addAliceToFirstClass = new AddToClassCommand(aliceList, INDEX_FIRST);
+        AddToClassCommand addBobToFirstClass = new AddToClassCommand(bobList, INDEX_FIRST);
+        AddToClassCommand addAliceToSecondClass = new AddToClassCommand(aliceList, INDEX_SECOND);
+        AddToClassCommand addIndexToFirstClass = new AddToClassCommand(getIndexes(), INDEX_FIRST);
+        AddToClassCommand addIndexToSecondClass = new AddToClassCommand(getIndexes(), INDEX_SECOND);
+
+        // same object -> returns true
+        assertTrue(addAliceToFirstClass.equals(addAliceToFirstClass));
+
+        // same values -> returns true
+        AddToClassCommand addAliceToFirstClassCopy = new AddToClassCommand(aliceList, INDEX_FIRST);
+        assertTrue(addAliceToFirstClass.equals(addAliceToFirstClassCopy));
+
+        // different types -> returns false
+        assertFalse(addIndexToFirstClass.equals(1));
+
+        // null -> returns false
+        assertFalse(addAliceToFirstClass.equals(null));
+
+        // different student -> returns false
+        assertFalse(addAliceToFirstClass.equals(addBobToFirstClass));
+
+        //add index and add student -> return false
+        assertFalse(addAliceToFirstClass.equals(addIndexToFirstClass));
+
+        //different tuition classes -> return false
+        assertFalse(addAliceToFirstClass.equals(addAliceToSecondClass));
+        assertFalse(addIndexToFirstClass.equals(addIndexToSecondClass));
+
+    }
+
 
     private static List<Index> getIndexes() {
         List<Index> indexList = new ArrayList<>();
