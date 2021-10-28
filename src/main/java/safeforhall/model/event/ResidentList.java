@@ -269,6 +269,13 @@ public class ResidentList {
         return this.isEmpty;
     }
 
+    /**
+     * Returns the number of residents currently in the event.
+     */
+    public int getResidentListSize() {
+        return this.residentList.size();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

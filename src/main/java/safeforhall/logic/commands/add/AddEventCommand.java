@@ -16,7 +16,7 @@ import safeforhall.model.person.Person;
 public class AddEventCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    public static final String PARAMETERS = "n/NAME d/DATE v/VENUE c/CAPACITY r/RESIDENTS";
+    public static final String PARAMETERS = "n/NAME d/DATE t/TIME v/VENUE c/CAPACITY r/RESIDENTS";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_NAME + "NAME "
