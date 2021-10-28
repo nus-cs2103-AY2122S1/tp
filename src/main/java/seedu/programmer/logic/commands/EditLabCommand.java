@@ -1,10 +1,8 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 
 import java.util.List;
