@@ -6,5 +6,7 @@ package seedu.address.model.display;
 public enum DisplayMode {
     DISPLAY_INVENTORY,
     DISPLAY_OPEN_ORDER,
-    DISPLAY_TRANSACTIONS
+    DISPLAY_TRANSACTION_LIST,
+    DISPLAY_TRANSACTION
 }
+

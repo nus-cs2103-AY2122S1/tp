@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.model.display.DisplayMode.DISPLAY_OPEN_ORDER;
-import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTIONS;
+import static seedu.address.model.display.DisplayMode.DISPLAY_TRANSACTION_LIST;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,7 +26,6 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
-import seedu.address.model.order.TransactionTimeComparator;
 import seedu.address.storage.BookKeepingStorage;
 import seedu.address.storage.TransactionStorage;
 
@@ -215,11 +214,29 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
 
-        if (mode == DISPLAY_TRANSACTIONS) {
+        if (mode == DISPLAY_TRANSACTION_LIST) {
             throw new ClassCastException("Cannot filter transactions with Predicate<Item>");
         }
 
         updateFilteredDisplayList(mode, x -> predicate.test((Item) x));
+    }
+
+    @Override
+    public boolean openTransaction(String id) {
+        // Attempt to find transaction with matching id
+        Optional<TransactionRecord> transactionOptional = transactions.stream()
+                .filter(txn -> txn.getId().equals(id))
+                .findFirst();
+
+        // If transaction found, return false
+        if (transactionOptional.isEmpty()) {
+            return false;
+        }
+
+        // Display transaction
+        currentDisplay = DISPLAY_TRANSACTION_LIST;
+        displayList.setItems(transactionOptional.get().getOrderItems());
+        return true;
     }
 
     @Override
@@ -310,11 +327,11 @@ public class ModelManager implements Model {
         optionalOrder = Optional.empty();
         transactions.add(transaction);
 
-        if (transaction.getItems().size() == 0) {
+        if (transaction.getOrderItems().size() == 0) {
             return;
         }
 
-        Double totalRevenue = transaction.getItems().stream()
+        Double totalRevenue = transaction.getOrderItems().stream()
                 .map(i -> i.getCount() * i.getSalesPrice())
                 .reduce(0.0, (subTotal, next) -> subTotal + next);
 
@@ -331,21 +348,9 @@ public class ModelManager implements Model {
         logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
     }
 
-    /**
-     * Return a list of {@code TransactionRecord} sorted according to given comparator.
-     */
-    public List<TransactionRecord> getTransactions(Comparator<TransactionRecord> comparator) {
-        requireNonNull(comparator);
-
-        List<TransactionRecord> resultList = new ArrayList<>(transactions);
-        resultList.sort(comparator);
-
-        return resultList;
-    }
-
     @Override
     public List<TransactionRecord> getTransactions() {
-        return getTransactions(new TransactionTimeComparator());
+        return new ArrayList<>(transactions);
     }
 
     //=========== BookKeeping ================================================================================

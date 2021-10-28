@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.display.DisplayMode.DISPLAY_INVENTORY;
@@ -125,18 +126,15 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_displayOrderMode_setDisplayInventoryMode() {
-        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
+    public void execute_displayNotInInventoryMode_failure() {
         IdContainsNumberPredicate predicate = preparePredicateId("444444 555555");
         FindCommand command = new FindCommand(predicate);
 
         model.setOrder(new Order());
         model.updateFilteredDisplayList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
-        expectedModel.setOrder(new Order());
-        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, predicate);
+        String expectedMessage = FindCommand.MESSAGE_INVENTORY_NOT_DISPLAYED;
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CHOCOCHIP, DALGONA_COFFEE), model.getFilteredDisplayList());
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     /**

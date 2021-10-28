@@ -172,12 +172,20 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered display list to filter by the given {@code predicate}.
-     * The display list must be display items.
+     * {@code mode} cannot be DISPLAY_TRANSACTIONS.
+     * If displaying transactions, use {@code updateFilteredDisplayList} instead.
      *
      * @throws NullPointerException if {@code predicate} is null.
      * @throws ClassCastException if current displayed list is not displaying items.
      */
     void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate);
+
+    /**
+     * Opens the past transaction that has the given {@code id}.
+     *
+     * @Returns true if transaction found, and false otherwise.
+     */
+    boolean openTransaction(String id);
 
     /**
      * Returns the model's current {@code DisplayMode}.
