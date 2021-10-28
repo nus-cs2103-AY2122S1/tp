@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class EventDate {
+
+public class EventDate implements Comparable<EventDate> {
     public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy format";
     public static final String DESC = "Date: ";
 
@@ -66,5 +67,10 @@ public class EventDate {
     @Override
     public String toString() {
         return eventDate;
+    }
+
+    @Override
+    public int compareTo(EventDate date) {
+        return toLocalDate().compareTo(date.toLocalDate());
     }
 }

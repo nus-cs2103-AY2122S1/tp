@@ -7,7 +7,7 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Comparable<Name> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphabetic characters and spaces, and it should not be blank";
@@ -58,4 +58,8 @@ public class Name {
         return fullName.hashCode();
     }
 
+    @Override
+    public int compareTo(Name name) {
+        return this.fullName.toLowerCase().compareTo(name.fullName.toLowerCase());
+    }
 }

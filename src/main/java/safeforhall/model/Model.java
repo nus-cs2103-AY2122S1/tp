@@ -2,6 +2,7 @@ package safeforhall.model;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -158,6 +159,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    ObservableList<Person> getSortedPersonList();
+
+    ObservableList<Event> getSortedEventList();
+
+    void updateSortedPersonList(Comparator<Person> comparator);
+
+    void updateSortedEventList(Comparator<Event> comparator);
 
     /**
      * Returns an array list of events the specified person is in.

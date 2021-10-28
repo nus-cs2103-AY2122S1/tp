@@ -5,12 +5,14 @@ import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
 import safeforhall.logic.commands.exceptions.CommandException;
@@ -29,7 +31,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
     private final FilteredList<Event> filteredEvents;
+    private final SortedList<Event> sortedEvents;
     private FilteredList<Person> singlePerson;
     private FilteredList<Event> singleEvent;
 
@@ -46,6 +50,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        sortedPersons = new SortedList<>(filteredPersons);
+        sortedEvents = new SortedList<>(filteredEvents);
         singlePerson = new FilteredList<>(this.addressBook.getPersonList());
         singleEvent = new FilteredList<>(this.addressBook.getEventList());
     }
@@ -241,12 +247,16 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Event> getFilteredEventList() {
-        return filteredEvents;
+        return sortedEvents;
     }
 
     @Override
@@ -300,6 +310,35 @@ public class ModelManager implements Model {
             }
         }
         return events;
+    }
+
+    //=========== Sorted List =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getSortedPersonList() {
+        return sortedPersons;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Event> getSortedEventList() {
+        return sortedEvents;
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Person> comparator) {
+        sortedPersons.setComparator(comparator);
+    }
+
+    @Override
+    public void updateSortedEventList(Comparator<Event> comparator) {
+        sortedEvents.setComparator(comparator);
     }
 
     @Override
