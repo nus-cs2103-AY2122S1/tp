@@ -13,11 +13,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddStudentGroupCommand;
+import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.model.group.GroupName;
 
-public class AddStudentGroupCommandParserTest {
-    private AddStudentGroupCommandParser parser = new AddStudentGroupCommandParser();
+public class AddMemberCommandParserTest {
+    private AddMemberCommandParser parser = new AddMemberCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -25,16 +25,16 @@ public class AddStudentGroupCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + INDEX_FIRST_STUDENT.getOneBased() + GROUPNAME_DESC_G1,
-                new AddStudentGroupCommand(INDEX_FIRST_STUDENT, expectedGroupName));
+                new AddMemberCommand(INDEX_FIRST_STUDENT, expectedGroupName));
 
         // multiple group names - last name accepted
         assertParseSuccess(parser, INDEX_FIRST_STUDENT.getOneBased() + GROUPNAME_DESC_G2 + GROUPNAME_DESC_G1,
-                new AddStudentGroupCommand(INDEX_FIRST_STUDENT, expectedGroupName));
+                new AddMemberCommand(INDEX_FIRST_STUDENT, expectedGroupName));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentGroupCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE);
 
         // missing group prefix
         assertParseFailure(parser, INDEX_FIRST_STUDENT + VALID_GROUPNAME_G1, expectedMessage);
@@ -48,10 +48,10 @@ public class AddStudentGroupCommandParserTest {
 
         // invalid index
         assertParseFailure(parser, "a" + GROUPNAME_DESC_G1,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentGroupCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + INDEX_FIRST_STUDENT.getOneBased() + GROUPNAME_DESC_G1,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentGroupCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMemberCommand.MESSAGE_USAGE));
     }
 }

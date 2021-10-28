@@ -21,11 +21,6 @@ Class LinkYear
 Class Members
 }
 
-Package RepoName <<Rectangle>> {
-}
-
-Package Tag <<Rectangle>> {
-}
 
 Student *-down-> "1" Name
 Student *-down-> "1" Attendance
@@ -33,7 +28,7 @@ Student *-down-> "1" Participation
 Student *-down-> "1" Email
 Student *-down-> "1" StudentNumber
 Student *-down-> "0..1" UserName
-Student *-up--> "0..1" RepoName
+Student *-up---> "0..1" RepoName
 Student -up--> "*" Tag
 Student *-right--> "0..1" GroupName
 
@@ -43,5 +38,5 @@ Group *-down-> "0..1" LinkYear
 Group *-up--> "0..1" RepoName
 Group -up--> "*" Tag
 
-Members *-left--> "*" Student
+Members -left--> "*" Student
 @enduml
