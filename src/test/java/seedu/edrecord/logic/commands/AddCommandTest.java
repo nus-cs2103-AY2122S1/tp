@@ -240,7 +240,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssignment(Assignment target, Assignment editedAssignment) {
             throw new AssertionError("This method should not be called.");
         }
     }

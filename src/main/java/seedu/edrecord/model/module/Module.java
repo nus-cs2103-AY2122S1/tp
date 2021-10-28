@@ -163,6 +163,15 @@ public class Module {
         assignmentList.add(a);
     }
 
+    /**
+     * Replaces the given Assignment {@code target} in the list with {@code editedAssignment}.
+     * {@code target} must exist in EdRecord under this module.
+     * The identity of {@code editedAssignment} must not be the same as any existing assignment under the same module.
+     */
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        assignmentList.setAssignment(target, editedAssignment);
+    }
+
     @Override
     public String toString() {
         return code;

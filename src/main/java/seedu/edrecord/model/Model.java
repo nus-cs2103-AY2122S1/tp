@@ -162,6 +162,13 @@ public interface Model {
     boolean hasAssignmentInCurrentModule(Assignment assignment);
 
     /**
+     * Returns true if any existing grade of the original assignment {@code current} is
+     * higher than the maximum score of {@code editedAssignment}. Both assignments
+     * must be under the currently selected module.
+     */
+    boolean hasHigherGradeInCurrentModule(Assignment current, Assignment editedAssignment);
+
+    /**
      * Returns the assignment that matches the given name.
      */
     Optional<Assignment> searchAssignment(Name name);
@@ -171,6 +178,13 @@ public interface Model {
      * {@code assignment} must not already exist under the currently selected module.
      */
     void addAssignment(Assignment assignment);
+
+    /**
+     * Replaces the given assignment {@code target} with {@code editedAssignment}.
+     * {@code target} must exist under the currently selected module in EdRecord.
+     * The identity of {@code editedAssignment} must not be the same as another existing assignment.
+     */
+    void setAssignment(Assignment target, Assignment editedAssignment);
 
     /**
      * Updates the search filter of the filtered person list to filter by the given {@code predicate}.

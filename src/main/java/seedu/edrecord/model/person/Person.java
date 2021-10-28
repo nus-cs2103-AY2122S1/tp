@@ -7,6 +7,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.assignment.Grade;
+import seedu.edrecord.model.assignment.Grade.GradeStatus;
+import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
@@ -84,6 +88,20 @@ public class Person {
         AssignmentGradeMap gradesCopy = new AssignmentGradeMap();
         gradesCopy.addAll(grades);
         return gradesCopy;
+    }
+
+    /**
+     * Returns true if this person has a score for assignment {@code currentAssignment},
+     * and this score is higher than the maximum score of {@code editedAssignment}.
+     */
+    public boolean hasHigherScoreThanMaxScore(Assignment currentAssignment, Assignment editedAssignment) {
+        Grade currentGrade = grades.findGrade(currentAssignment);
+        if (currentGrade == null || currentGrade.getStatus() != GradeStatus.GRADED) {
+            return false;
+        }
+        Score currentScore = currentGrade.getScore().get();
+        Score editedMaxScore = editedAssignment.getMaxScore();
+        return currentScore.compareTo(editedMaxScore) > 0;
     }
 
     /**
