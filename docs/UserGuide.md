@@ -35,7 +35,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `sourcecontrol.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases).
+1. Download the latest `sourceControl.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for Source Control.
 
@@ -406,7 +406,7 @@ Examples:
 
 ### Saving the data
 
-SourceControl data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
 
@@ -415,10 +415,10 @@ If you wish to back up the data, you can use the `export` command. The `import` 
 
 ### Editing the data file
 
-SourceControl data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
+Source Control data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, SourceControl will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Source Control will discard all data and start with an empty data file at the next run.
 </div>
 
 [Return to table of contents](#table-of-contents)
