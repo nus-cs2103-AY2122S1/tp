@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="ComputingConnection" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -41,11 +42,23 @@
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="150" maxHeight="150">
+                   minHeight="100" prefHeight="130" maxHeight="130">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
+
+        <SplitPane VBox.vgrow="NEVER" minHeight="30 " maxHeight="30">
+          <VBox styleClass="pane-with-border" style="-fx-background-color: grey;" minWidth="340" prefWidth="340">
+            <Label styleClass="" text=" Contact list"/>
+          </VBox>
+          <VBox styleClass="pane-with-border" style="-fx-background-color: grey;" minWidth="340" prefWidth="340">
+            <Label text=" Detailed Person View"/>
+          </VBox>
+          <VBox styleClass="pane-with-border" style="-fx-background-color: grey;" minWidth="340" prefWidth="340">
+            <Label text=" Organisation list"/>
+          </VBox>
+        </SplitPane>
 
         <SplitPane VBox.vgrow="ALWAYS">
           <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
