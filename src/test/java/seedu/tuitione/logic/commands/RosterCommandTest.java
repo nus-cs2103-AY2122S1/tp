@@ -10,6 +10,7 @@ import static seedu.tuitione.logic.commands.RosterCommand.MESSAGE_ROSTER_LESSON_
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIFTH_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_LESSON;
 import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
 
 import java.util.List;
@@ -47,9 +48,9 @@ public class RosterCommandTest {
 
     @Test
     public void execute_validLessonIndexWithStudents_success() {
-        Lesson lesson = model.getFilteredLessonList().get(INDEX_FIFTH_LESSON.getZeroBased());
+        Lesson lesson = model.getFilteredLessonList().get(INDEX_THIRD_LESSON.getZeroBased());
         LessonCode lc = lesson.getLessonCode();
-        RosterCommand rosterCommand = new RosterCommand(INDEX_FIFTH_LESSON);
+        RosterCommand rosterCommand = new RosterCommand(INDEX_THIRD_LESSON);
 
         Model expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lc));
