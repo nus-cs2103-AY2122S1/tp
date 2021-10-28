@@ -97,7 +97,7 @@ public class EditCommandParserTest {
 
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
                 .withId(VALID_ID_BAGEL).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -109,7 +109,7 @@ public class EditCommandParserTest {
 
         ItemDescriptor descriptor = new ItemDescriptorBuilder()
                 .withId(VALID_ID_BAGEL).withTags(VALID_TAG_POPULAR).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -120,19 +120,19 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_ITEM;
         String userInput = targetIndex.getOneBased() + NAME_DESC_BAGEL;
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // id
         userInput = targetIndex.getOneBased() + ID_DESC_BAGEL;
         descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_POPULAR;
         descriptor = new ItemDescriptorBuilder().withTags(VALID_TAG_POPULAR).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -145,7 +145,7 @@ public class EditCommandParserTest {
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT)
                 .withId(VALID_ID_DONUT).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
                 .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -156,7 +156,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + INVALID_NAME_DESC + NAME_DESC_BAGEL;
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
@@ -164,7 +164,7 @@ public class EditCommandParserTest {
                 + TAG_DESC_POPULAR;
         descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).withId(VALID_ID_DONUT)
                 .withTags(VALID_TAG_POPULAR).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -174,7 +174,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor, true);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

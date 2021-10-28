@@ -67,7 +67,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COUNT_INDEX, EditCommand.MESSAGE_USAGE), pe);
         }
-        return new EditCommand(index, itemDescriptor, editId);
+        return new EditCommand(index, itemDescriptor);
     }
 
     /**
