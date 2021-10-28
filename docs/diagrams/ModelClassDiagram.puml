@@ -27,10 +27,10 @@ Class Tag
 
 Class UniquePolicyList
 Class Policy
-Class Price
+Class PaymentStructure
 Class Commission
 Class Title
-Class ExpiryDate
+Class CoverageExpiryDate
 }
 
 Class HiddenOutside #FFFFFF
@@ -56,15 +56,24 @@ Person *--> "*" Tag
 AddressBook *--> "1" UniquePolicyList
 UniquePolicyList --> "~* all" Policy
 UniquePolicyList ..> Person
-Policy *--> Price
+Policy *--> PaymentStructure
 Policy *--> Commission
 Policy *--> Title
-Policy *--> ExpiryDate
+Policy *--> "*" Tag
+Policy *--> CoverageExpiryDate
 Policy -right->"owner" Person
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]down-> Phone
+Name -[hidden]down-> Address
+Name -[hidden]down-> Email
+
+
+PaymentStructure -[hidden]down-> Title
+PaymentStructure -[hidden]down-> CoverageExpiryDate
+PaymentStructure -[hidden]down-> Commission
+
+
+
 
 ModelManager -->"~* filtered" Person
 ModelManager -->"~* filtered" Policy
