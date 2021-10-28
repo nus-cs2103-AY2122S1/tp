@@ -116,8 +116,10 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList(), logic.getUserInfo());
         moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        if(resultDisplay == null) {
+            resultDisplay = new ResultDisplay();
+            resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        }
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getModuleTrackerFilePath(), logic.getUserInfo());
 

@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -49,10 +52,12 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.updateFilteredModuleList(predicate);
         ObservableList<Module> filteredList = model.getFilteredModuleList();
-        model.updateFilteredModuleList(x->true);
-        for (Module module : filteredList) {
+        List<Module> list = new ArrayList<>();
+        for(int i=0; i<filteredList.size(); i++) {
+            list.add(filteredList.get(i));
+        }
+        for (Module module : list) {
             assert module != null;
-
             Code currCode = module.getCode();
             Title currTitle = module.getTitle();
             Description currDescription = module.getDescription();
@@ -60,6 +65,7 @@ public class ClearCommand extends Command {
             Set<Tag> currTags = module.getTags();
             model.setModule(module, new Module(currCode, currTitle, currDescription, currMc, currTags));
         }
+        model.updateFilteredModuleList(x->true);
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, academicCalendar));
     }
