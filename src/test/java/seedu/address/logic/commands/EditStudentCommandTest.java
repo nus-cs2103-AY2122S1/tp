@@ -128,7 +128,7 @@ public class EditStudentCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
 
-        // invalid descriptor student Id -> returns false
+        // different edit student descriptor -> return false
         EditStudentDescriptor descriptor2 = new EditStudentDescriptorBuilder().withStudentId("A1234567A")
                 .withName(VALID_NAME_AMY).withEmail(VALID_EMAIL_AMY).withTeleHandle(VALID_TELE_HANDLE_AMY).build();
         assertFalse(standardCommand.equals(new EditStudentCommand(moduleName, descriptor2)));

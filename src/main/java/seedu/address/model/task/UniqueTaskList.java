@@ -100,7 +100,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public Task getTask(int taskNum) throws TaskNotFoundException {
         requireAllNonNull(taskNum);
-        if (taskNum < internalList.size() & taskNum >= 0) {
+        if (taskNum < internalList.size() && taskNum >= 0) {
             return internalList.get(taskNum);
         } else {
             throw new TaskNotFoundException();
