@@ -50,7 +50,6 @@ public class TagCommandParser implements Parser<TagCommand> {
                 }
             }
         } catch (IllegalArgumentException e) {
-            //TODO: logging
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 

@@ -71,6 +71,34 @@ public class TagComponent extends HBox {
             temp.setStyle(Colors.GREEN);
             break;
 
+        case TagUtil.HEALTH_INSURANCE:
+            temp.setStyle(Colors.CRIMSON);
+            break;
+
+        case TagUtil.LIFE_INSURANCE:
+            temp.setStyle(Colors.LIME);
+            break;
+
+        case TagUtil.MOTOR_INSURANCE:
+            temp.setStyle(Colors.MAGENTA);
+            break;
+
+        case TagUtil.PROPERTY_INSURANCE:
+            temp.setStyle(Colors.DARK_BLUE);
+            break;
+
+        case TagUtil.TRAVEL_INSURANCE:
+            temp.setStyle(Colors.PINK);
+            break;
+
+        case TagUtil.INVESTMENT:
+            temp.setStyle(Colors.TEAL);
+            break;
+
+        case TagUtil.SAVINGS:
+            temp.setStyle(Colors.PURPLE);
+            break;
+
         default:
             temp.setStyle(Colors.GREY);
         }

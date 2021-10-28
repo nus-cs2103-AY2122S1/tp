@@ -1,6 +1,7 @@
 package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 
 import java.util.function.Predicate;
 
@@ -29,7 +30,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) or priority tags, \n"
             + "tags or remarks and displays them as a list with index numbers.\n\n"
             + "Parameters: \nQUERY [MORE_QUERIES]...\n"
-            + " OR \n" + PriorityTag.PRIORITY_TAG_PREFIX
+            + " OR \n" + PREFIX_PRIORITY_TAG
             + "PRIORITY [MORE_PRIORITIES]...\n"
             + " OR \n" + FindCommand.TAG_PREFIX
             + "TAG [MORE_TAGS]...\n"
@@ -37,7 +38,7 @@ public class FindCommand extends Command {
             + "REMARK [MORE_REMARKS]...\n\n"
             + "Examples: \n" + COMMAND_WORD + " alice bob charlie\n"
             + COMMAND_WORD + " "
-            + PriorityTag.PRIORITY_TAG_PREFIX
+            + PREFIX_PRIORITY_TAG
             + PriorityTag.LowPriority.TERM + " " + PriorityTag.MediumPriority.TERM + "\n"
             + COMMAND_WORD + " "
             + FindCommand.TAG_PREFIX + "friends\n"

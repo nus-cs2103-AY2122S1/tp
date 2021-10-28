@@ -1,0 +1,23 @@
+@startuml
+start
+title Fast Appointment Activity Diagram
+
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([recognised command])
+    :Parse command;
+    if () then ([is appointment-related])
+    :Create new appointment
+    (with respective data, time, venue);
+    :Save Fast to
+    fastStateList;
+    else ([other command])
+    endif
+else ([unknown command])
+  -Throw exception
+endif
+stop
+@enduml

@@ -17,6 +17,7 @@
     -fx-opacity: 1;
 }
 
+
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Open Sans Light";
@@ -29,14 +30,15 @@
 }
 
 .chart-title {
-  -fx-text-fill: white;
-  -fx-font-size: 1.6em;
+  -fx-text-fill: #fafafa;
+  -fx-font-size: 1.7em;
+  -fx-underline: true;
 }
 
 .chart-pie-label {
     -fx-fill: white;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 10pt;
+    -fx-font-size: 11pt;
 }
 
 .default-color0.chart-pie { -fx-pie-color: red; }

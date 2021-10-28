@@ -5,13 +5,16 @@ import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.tag.Tag;
+import seedu.fast.storage.JsonFastStorage;
 
 /**
  * Edits the tag(s) of an existing person in FAST.
@@ -33,6 +36,8 @@ public class TagCommand extends Command {
     public static final String MESSAGE_TAGS_ARE_REPEATED = "A tag with the name %1$s already exists!";
     public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag %1$s does not exist!";
     public static final String MESSAGE_MULTIPLE_PRIORITY_TAGS = "Each client can only have one Priority tag!";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonFastStorage.class);
 
     private final Index index;
     private Set<Tag> addTags;
@@ -58,6 +63,7 @@ public class TagCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.info("Input index is not within range.");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -67,18 +73,21 @@ public class TagCommand extends Command {
 
         for (Tag tag: deleteTags) {
             if (!newTags.remove(tag)) {
+                logger.info("Tag to be deleted does not exist.");
                 throw new CommandException(String.format(MESSAGE_TAG_DOES_NOT_EXIST, tag.tagName));
             }
         }
 
         for (Tag tag: addTags) {
             if (!newTags.add(tag)) {
+                logger.info("Tag to be added already exists.");
                 throw new CommandException(String.format(MESSAGE_TAGS_ARE_REPEATED, tag.tagName));
             }
         }
 
         //add any additional tag constraint checks here, for priority and investment plan tags
         if (TagCommandUtils.hasMultiplePriorityTags(newTags)) {
+            logger.info("Attempted to add more than one priority tag.");
             throw new CommandException(MESSAGE_MULTIPLE_PRIORITY_TAGS);
         }
 

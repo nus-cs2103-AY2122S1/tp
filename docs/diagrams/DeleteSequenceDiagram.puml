@@ -43,7 +43,7 @@ DeleteCommandParser -[hidden]-> FastParser
 destroy DeleteCommandParser
 
 FastParser --> LogicManager : d
-deactivate FastkParser
+deactivate FastParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand

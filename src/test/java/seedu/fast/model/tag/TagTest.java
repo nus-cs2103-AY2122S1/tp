@@ -2,6 +2,7 @@ package seedu.fast.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 import static seedu.fast.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -91,11 +92,11 @@ public class TagTest {
     @Test
     public void getPriority() {
         //individual cases for each PriorityTag
-        assertTrue(Tag.createTag(PriorityTag.PRIORITY_TAG_PREFIX + PriorityTag.HighPriority.TERM)
+        assertTrue(Tag.createTag(PREFIX_PRIORITY_TAG.getPrefix() + PriorityTag.HighPriority.TERM)
                 .getPriority() == PriorityTag.HighPriority.PRIORITY);
-        assertTrue(Tag.createTag(PriorityTag.PRIORITY_TAG_PREFIX + PriorityTag.MediumPriority.TERM)
+        assertTrue(Tag.createTag(PREFIX_PRIORITY_TAG.getPrefix() + PriorityTag.MediumPriority.TERM)
                 .getPriority() == PriorityTag.MediumPriority.PRIORITY);
-        assertTrue(Tag.createTag(PriorityTag.PRIORITY_TAG_PREFIX + PriorityTag.LowPriority.TERM)
+        assertTrue(Tag.createTag(PREFIX_PRIORITY_TAG.getPrefix() + PriorityTag.LowPriority.TERM)
                 .getPriority() == PriorityTag.LowPriority.PRIORITY);
 
         //case for a normal tag
