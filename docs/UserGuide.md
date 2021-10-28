@@ -322,7 +322,7 @@ Removes a specific task that has been added to your app.
 <div style="page-break-after: always;"></div>
 
 
-![delete_command](images/User%20Guide/deleteCommand.png)
+![delete_command](images/userguide/deleteCommandBefore.png)
 
 
 After running the delete command, the task at that particular index gets deleted as shown below:
