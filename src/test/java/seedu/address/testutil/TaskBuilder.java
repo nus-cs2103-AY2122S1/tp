@@ -11,7 +11,7 @@ import seedu.address.model.task.Task;
 public class TaskBuilder {
 
     public static final String DEFAULT_LABEL = "Get new cloth";
-    public static final String DEFAULT_DATE = "20th September 2021";
+    public static final String DEFAULT_DATE = "2021-09-20";
     public static final String DEFAULT_TASKTAG = "General";
     public static final boolean DEFAULT_IS_DONE = false;
 

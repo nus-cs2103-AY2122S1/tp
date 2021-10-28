@@ -11,7 +11,7 @@ public class OrderBuilder {
     public static final String DEFAULT_LABEL = "Blue Shirt";
     public static final String DEFAULT_CUSTOMER = "Johnson";
     public static final String DEFAULT_AMOUNT = "99.99";
-    public static final String DEFAULT_DATE = "20th October 2021";
+    public static final String DEFAULT_DATE = "2021-10-20";
     public static final boolean DEFAULT_IS_COMPLETE = false;
     public static final long DEFAULT_ID = 2021;
 
