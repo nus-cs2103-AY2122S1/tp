@@ -11,7 +11,6 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
-import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.person.Person;
 
@@ -65,11 +64,12 @@ public class AddCommand extends Command {
             throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
         }
 
-        Module savedMod = model.getModule(toAdd.getModule());
-        if (!savedMod.hasGroup(toAdd.getGroup())) {
-            throw new CommandException(Group.MESSAGE_DOES_NOT_EXIST);
-        }
-
+        // TODO: By Fergus, in #121
+        /*  Module savedMod = model.getModule(toAdd.getModule());
+            if (!savedMod.hasGroup(toAdd.getGroup())) {
+                throw new CommandException(Group.MESSAGE_DOES_NOT_EXIST);
+            }
+         */
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

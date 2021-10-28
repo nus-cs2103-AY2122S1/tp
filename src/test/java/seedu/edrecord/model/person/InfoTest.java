@@ -15,20 +15,18 @@ public class InfoTest {
 
     @Test
     public void constructor_invalidInfo_throwsIllegalArgumentException() {
-        String invalidInfo = "";
+        String invalidInfo = " ";
         assertThrows(IllegalArgumentException.class, () -> new Info(invalidInfo));
     }
 
     @Test
     public void isValidInfo() {
-        // null info
-        assertThrows(NullPointerException.class, () -> Info.isValidInfo(null));
-
         // invalid info
-        assertFalse(Info.isValidInfo("")); // empty string
-        assertFalse(Info.isValidInfo(" ")); // spaces only
+        assertFalse(Info.isValidInfo(null)); // null string only
+        assertFalse(Info.isValidInfo("  ")); // spaces only
 
         // valid info
+        assertTrue(Info.isValidInfo("")); // empty string
         assertTrue(Info.isValidInfo("A hardworking student"));
         assertTrue(Info.isValidInfo("-")); // one character
         assertTrue(Info.isValidInfo("This student is very hardworking, and is projected to get FCH")); // long info
