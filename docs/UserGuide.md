@@ -115,8 +115,13 @@ A person can have any number of tags (including 0)
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-Format birthday as ddMMyyyy
+Format birthday as ddMMyyyy.
 </div>
+
+Notes:
+* Phone number must be unique.
+* Birthdays are optional and can be added in future with `edit` command.
+* Future dates as birthdays are not allowed.
 
 **Sample Usage:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
