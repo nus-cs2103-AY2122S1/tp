@@ -73,7 +73,7 @@ public class RemoveCommand extends Command {
         requireNonNull(removePersonDescriptor);
 
         this.index = index;
-        this.removePersonDescriptor = removePersonDescriptor;
+        this.removePersonDescriptor = new RemovePersonDescriptor(removePersonDescriptor);
     }
 
     @Override
