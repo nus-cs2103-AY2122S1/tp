@@ -325,6 +325,9 @@ The essential fields for a lesson are:
 * Subject
 * Rate
 
+Additional fields for a lesson:
+* Cancelled dates
+
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
 * The lesson's rate refers to the fee of the lesson per hour.
@@ -368,22 +371,32 @@ Examples:
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]…​`
+Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
-
-* You can edit all fields of a lesson except the start date.
-
-* You cannot change the lesson's type (i.e. recurring and makeup).
 
 * The index must be a valid index number shown in the displayed student list.
 
 * The lesson index must be a valid index number shown in the lesson list of the student.
 
+* You can edit all fields of a lesson except the start date.
+
+* You cannot change the lesson's type (i.e. recurring and makeup).
+
+* The date to cancel must be a valid lesson date.<br>
+  e.g. If the start date of a recurring lesson is `1 Oct 2021`, you can cancel `8 Oct 2021` but not `2 Oct 2021`.
+  
+* The date to uncancel must be an already cancelled date.
+
+* When the start date is changed, cancelled dates that are invalid will be removed.
+
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
 * `ledit 2 3 rates/35.85 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
 * `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
+* `ledit 1 2 date/1 Oct 2021 cancel/15 Oct 2021 cancel/03 Dec 2021`. Cancels the specific lessons on `15 Oct 2021` and `03 Dec 2021` for the 1st lesson (recurring) of the 2nd student.
+* `ledit 2 2 uncancel/10 Oct 2021` Uncancels the specific lesson on `10 Oct 2021`, which was previously cancelled, for the 2nd lesson of the 2nd student.
+
 
 #### Deleting a lesson : `ldelete`
 
