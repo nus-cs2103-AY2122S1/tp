@@ -2,7 +2,6 @@ package seedu.programmer.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Locale;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -47,7 +46,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = programmerErrorParser.parseCommand(commandText.toLowerCase());
+        Command command = programmerErrorParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
