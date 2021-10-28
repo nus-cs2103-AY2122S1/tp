@@ -25,7 +25,7 @@ import seedu.notor.ui.PersonListPanel;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    PersonListPanel personListPanel;
+    private PersonListPanel personListPanel;
 
     private final Notor notor;
     private final UserPrefs userPrefs;

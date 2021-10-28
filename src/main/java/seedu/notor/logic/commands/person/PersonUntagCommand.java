@@ -22,6 +22,9 @@ public class PersonUntagCommand extends PersonCommand {
     public static final String COMMAND_WORD = "untag";
     public static final List<String> COMMAND_WORDS = Arrays.asList("untag", "ut");
 
+    public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
+    public static final String MESSAGE_TAG_REQUIREMENTS = "Tags are required to be alphanumeric";
+
     private static final String COMMAND_DESCRIPTION =
             ": Removes tags from the person identified by the index number used in the displayed person list, if they"
                     + " exist. You may list multiple tags separated by commas.\n";
@@ -33,10 +36,6 @@ public class PersonUntagCommand extends PersonCommand {
             + "Example: " + PersonCommand.COMMAND_WORD
             + " 1 /" + COMMAND_WORD + " "
             + PREFIX_TAG + "important";
-
-    public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
-
-    public static final String MESSAGE_TAG_REQUIREMENTS = "Tags are required to be alphanumeric";
 
     private final PersonExecutor executor;
 

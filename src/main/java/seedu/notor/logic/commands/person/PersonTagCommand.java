@@ -21,6 +21,8 @@ public class PersonTagCommand extends PersonCommand {
 
     public static final String COMMAND_WORD = "tag";
     public static final List<String> COMMAND_WORDS = Arrays.asList("tag", "t");
+    public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
+    public static final String MESSAGE_TAG_REQUIREMENTS = "Tags are required to be alphanumeric";
 
     private static final String COMMAND_DESCRIPTION =
             ": Adds tags to the person identified by theindex number used in the displayed person list, if they do "
@@ -33,10 +35,6 @@ public class PersonTagCommand extends PersonCommand {
             + "Example: " + PersonCommand.COMMAND_WORD
             + " 1 /" + COMMAND_WORD + " "
             + PREFIX_TAG + "important, needsSupport";
-
-    public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
-
-    public static final String MESSAGE_TAG_REQUIREMENTS = "Tags are required to be alphanumeric";
 
     private final PersonExecutor executor;
 
