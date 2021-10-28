@@ -770,7 +770,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-       
+
 ## Student
 
 ### Adding a student
@@ -948,7 +948,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all groups using the `tasks` command. Multiple tasks in the list.
 
     1. Test case: `deadline n/Prepare for Tutorial by/2021-11-01`<br>
-       Expected: Creates a new deadline task named "Prepare for Tutorial" with a deadline "2021-11-01", 
+       Expected: Creates a new deadline task named "Prepare for Tutorial" with a deadline "2021-11-01",
        and adds it to the list of tasks and displays all the tasks.
 
     1. Test case: `deadline n/Prepare for Tutorial`<br>
@@ -1021,21 +1021,21 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
 
     1. Test case: `taskDone`<br>
-       Expected: First task in the last filtered task list is marked as complete. Status message shows details of tasks. 
+       Expected: First task in the last filtered task list is marked as complete. Status message shows details of tasks.
        Updated task list is shown.
-       
+
 1. Marking multiple tasks
 
     1. Test case: `taskDone 1 2 3`<br>
        Expected: Tasks 1, 2 and 3 are marked as completed in the list. Status message shows details of tasks.
-       
+
 
 ### Clearing task list
 
 1. Clearing the tasks list
 
     1. Test case: `clearTasks`<br>
-       Expected: All tasks cleared from task list. 
+       Expected: All tasks cleared from task list.
 
 ### Clearing all data from tApp
 

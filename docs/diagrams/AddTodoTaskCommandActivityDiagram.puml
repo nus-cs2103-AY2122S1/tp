@@ -9,7 +9,7 @@ if () then ([user command is valid])
     :Parse arguments from command;
     if () then ([required prefixed are missing])
         :Show error message to the user;
-    endif   
+    endif
     :Extract keywords from arguments;
     if () then ([priority level specified])
         :Assign specified priority level to task;
@@ -21,7 +21,7 @@ if () then ([user command is valid])
     :Display list of tasks to user;
 else ([user command is invalid])
     :Show error message to user;
-    
+
 endif
 
 stop
