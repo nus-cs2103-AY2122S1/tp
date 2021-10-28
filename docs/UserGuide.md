@@ -34,13 +34,10 @@ If you are using ModuLink for the first time, we will first walk you through a o
 1. Ensure you have Java 11 or above installed on your computer. You can easily do this via the **Terminal** app for Mac users, or the **Command Prompt** app for Windows users, and simply type and enter `java -version`. 
 <br> <br>
 Alternatively, if you prefer, you could also check the version via the GUI for both Mac and Windows systems, as mentioned in this [guide](https://phoenixnap.com/kb/check-java-version-on-mac-windows). 
+   <br><br>
+   ❗**ModuLink will not run on older versions of Java! If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/downloads/#java11JDK11.0.13=).**
    <br>
-   <div markdown="span" class="alert alert-warning">
-  **:exclamation: Caution:
-   ModuLink will not run on older versions of Java!**
-   </div>
-   
-   If you do not have Java 11 installed, please install it by following the instructions in the official [guide](https://www.oracle.com/java/technologies/downloads/#java11?JDK11.0.13=).
+   <br>
 2. Download the latest `modulink.jar` from our website [here](https://github.com/AY2122S1-CS2103T-W12-4/tp/releases).
 3. Move the file to the folder you want to use as the home folder for ModuLink on your computer.
 
