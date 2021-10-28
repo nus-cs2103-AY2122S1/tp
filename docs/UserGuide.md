@@ -111,7 +111,7 @@ Follow the getting started tutorial steps below to learn more about what SPAM pr
    set a password. Type in a password and press `enter` to continue.
    
    <figure class="figure">
-       <img src="images/setupPassword.png" class="figure-img img-fluid rounded" alt="Set Password Prompt Display">
+       <img src="images/setUpPassword.png" class="figure-img img-fluid rounded" alt="Set Password Prompt Display">
        <figcaption class="figure-caption">Figure 1: Set Password Prompt Display</figcaption>
    </figure>
 
@@ -123,12 +123,20 @@ Follow the getting started tutorial steps below to learn more about what SPAM pr
        This password, which should be known only to you, will be used to encrypt all the information stored in the app.
    </div>
    </div>
+Note that the password needs to follow the requirements stated in the [`password`](#password) section.
+
+3. Once you have set up the password, you will be prompted to enter the same password for subsequent logins.
+
+   <figure class="figure">
+       <img src="images/loginPassword.png" class="figure-img img-fluid rounded" alt="Enter Password Prompt Display">
+       <figcaption class="figure-caption">Figure 2: Enter Password Prompt Display</figcaption>
+   </figure>
    
-3. After a brief period of loading, the GUI similar to the picture below should appear.
+5. After a brief period of loading, the GUI similar to the picture below should appear.
    
    ![Ui](images/Ui.png)
 
-4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all contacts.
@@ -141,7 +149,7 @@ Follow the getting started tutorial steps below to learn more about what SPAM pr
 
    - `exit` : Exits the app.
 
-5. Refer below for details of each command.
+7. Refer below for details of each command.
 
 ---
 
@@ -165,7 +173,7 @@ on any command below to learn more about that particular command.
 | [`unselect`](#unselect)  | Unselects contacts |
 | [`export`](#export)  | Exports a list of contacts into a _.csv_ file |
 | [`exit`](#exit)  | Exits the application |
-| [`password`](#password)  | Sets a new password |
+| [`password`](#password)  | Changes the password of the application |
 | [`help`](#help)  | Opens up a window that contains this user guide |
 
 <div class="d-flex alert alert-info pb-0">
@@ -563,7 +571,14 @@ exit
 
 ### `password`
 
-Sets a new password.
+Changes the current password.
+
+The flags used in `passord` are as follows:
+
+| Flag | Description |
+| ---- | ----------- |
+| `-o` | **Compulsory** flag. The current password of the application. |
+| `-n` | **Compulsory** flag. The new password that the user wish to use. |
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">
@@ -573,6 +588,10 @@ Sets a new password.
 ```text
 password
 ```
+
+Do note that the password needs to be between **8** and **32** characters long, consisting of **LETTERS**, **NUMBERS** **AND** **SYMBOLS**.
+
+The accepted symbols are : !@#$%&*()_+=|<>?{}[]/~-
 
 <div class="d-flex alert alert-light pb-0">
 <div class="mr-2">
