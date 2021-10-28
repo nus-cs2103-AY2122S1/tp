@@ -23,6 +23,7 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     // Time fields
     private final Date startDate;
+    private final Date endDate;
     private final TimeRange timeRange;
 
     // Data fields
@@ -45,11 +46,11 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param fees Outstanding fees that student has not paid for this lesson.
      * @param cancelledDates Cancelled dates of the lesson.
      */
-    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework,
+    public Lesson(Date date, Date endDate, TimeRange timeRange, Subject subject, Set<Homework> homework,
                   LessonRates rates, OutstandingFees fees, Set<Date> cancelledDates) {
-        requireAllNonNull(date, timeRange, subject, homework, rates, fees, cancelledDates);
-
+        requireAllNonNull(date, endDate, timeRange, subject, homework, rates, fees, cancelledDates);
         this.startDate = date;
+        this.endDate = endDate;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
@@ -64,6 +65,10 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public Date getStartDate() {
         return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
     public LocalDate getLocalDate() {
@@ -168,13 +173,6 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     public abstract boolean isClashing(Lesson otherLesson);
 
-
-    /**
-     * Returns false by default for recurring lessons until EndDateTime is added.
-     * Meant for MakeupLessons to override.
-     */
-    public abstract boolean hasEnded();
-
     /**
      * Checks if this lesson occurs on a given date.
      *
@@ -210,6 +208,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         Lesson otherLesson = (Lesson) other;
 
         return otherLesson.getStartDate().equals(getStartDate())
+                && otherLesson.getEndDate().equals(getEndDate())
                 && otherLesson.getTimeRange().equals(getTimeRange())
                 && otherLesson.getSubject().equals(getSubject())
                 && otherLesson.getHomework().equals(getHomework())
@@ -221,29 +220,42 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startDate, timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
+        return Objects.hash(startDate, endDate, timeRange, subject, homework,
+                lessonRates, outstandingFees, cancelledDates);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTypeOfLesson())
-            .append(" ")
-            .append(getDisplayDate())
-            .append("; Time: ")
-            .append(getTimeRange())
-            .append("; Subject: ")
-            .append(getSubject())
-            .append("; Outstanding Fees: ")
-            .append(getOutstandingFees())
-            .append("; Lesson Rates: ")
-            .append(getLessonRates());
+        String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
+
+        builder.append(typeOfLesson)
+                .append("Start date: ")
+                .append(getStartDate());
+
+        if (!getEndDate().equals(Date.MAX_DATE)) {
+            builder.append("; End date: ")
+                   .append(getEndDate());
+        }
+
+
+        builder.append("; Date: ")
+                .append(getDisplayDate())
+                .append("; Time: ")
+                .append(getTimeRange())
+                .append("; Subject: ")
+                .append(getSubject())
+                .append("; Outstanding Fees: ")
+                .append(getOutstandingFees())
+                .append("; Lesson Rates: ")
+                .append(getLessonRates());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
             builder.append("; Homework: ");
             homework.forEach(x -> builder.append(x + "; "));
+        } else {
+            builder.append("; ");
         }
         if (isCancelled()) {
             builder.append("(Cancelled)");

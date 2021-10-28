@@ -41,6 +41,10 @@ public class CalendarEntryList {
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
     private final ObservableList<Entry<Lesson>> upcomingLessons = FXCollections.observableArrayList();
 
+    public CalendarEntryList() {
+        calendar.setStyle(Calendar.Style.STYLE3);
+    }
+
     public Calendar getCalendar() {
         return calendar;
     }
@@ -286,7 +290,7 @@ public class CalendarEntryList {
             interval = interval.withDates(startDate, startDate);
 
         }
-        entryList.add(convertToRecurringEntry(owner, lesson, interval));
+        entryList.add(convertToRecurringEntryWithEnd(owner, lesson, interval, lesson.getEndDate().getLocalDate()));
 
         return entryList;
     }

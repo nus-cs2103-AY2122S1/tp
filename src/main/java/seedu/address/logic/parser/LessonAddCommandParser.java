@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -54,7 +55,11 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE), pe);
         }
 
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        if (date.isEmpty()) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+
         TimeRange timeRange = ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Homework> homework = ParserUtil.parseHomeworkList(argMultimap.getAllValues(PREFIX_HOMEWORK));
@@ -63,12 +68,26 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
                 .orElse("0.00"));
 
 
+        // Is a recurring lesson
+        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
+            // If no date is specified, use max date
+            Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
+                    .orElse(Date.MAX_DATE);
+
+            // initialise empty set of cancelledDates
+            Set<Date> cancelledDates = new HashSet<>();
+
+            RecurringLesson lesson = new RecurringLesson(date.get(), endDate,
+                    timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
+            return new LessonAddCommand(index, lesson);
+        }
+
         // initialise empty set of cancelledDates
         Set<Date> cancelledDates = new HashSet<>();
 
-        Lesson lesson = argMultimap.getValue(PREFIX_RECURRING).isPresent()
-                ? new RecurringLesson(date, timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates)
-                : new MakeUpLesson(date, timeRange, subject, homework, lessonRates, outstandingFees, cancelledDates);
+        Lesson lesson = new MakeUpLesson(date.get(), timeRange, subject, homework, lessonRates,
+            outstandingFees, cancelledDates);
+
         return new LessonAddCommand(index, lesson);
     }
 
