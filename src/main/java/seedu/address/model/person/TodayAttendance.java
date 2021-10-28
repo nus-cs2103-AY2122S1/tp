@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+
 /**
  * Represents attendance for today of a member.
  */

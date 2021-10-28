@@ -116,10 +116,10 @@ documentation.
   and `PHONE_NUMBER` respectively.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `findm KEYWORD`, `KEYWORD` is a parameter which can be used as `findm Ben`.
+  e.g. in `deletem INDEX`, `INDEX` is a parameter which can be used as `deletem 1`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` can be used as `n/Ben p/91111111 d/1` or as `n/John p/91111111` or
+  e.g. `n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...` can be used as `n/Ben p/91111111 d/1` or as `n/John p/91111111` or
   as `n/John p/91111111 t/exco`.
 
 * Items with `...` after them can be used multiple times including zero times.<br>
@@ -192,7 +192,7 @@ Format: `deletem INDEX`
 Examples:
 
 * `listm` followed by `deletem 2` deletes the member at index 2 of the member list
-* `findm John` followed by `deletem 1` deletes the 1st member in the results of the `findm` command
+* `findm n/John` followed by `deletem 1` deletes the 1st member in the results of the `findm` command
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -200,7 +200,7 @@ Examples:
 
 Edits an existing member from your member list.
 
-Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/tags]`
+Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...`
 
 * Edits the member at the specified `INDEX`
 * `INDEX` refers to the index number shown in the displayed member list
@@ -238,21 +238,23 @@ Examples:
 [Back to Table of Contents](#table-of-contents)
 
 #### Finding a member: `findm`
+If you are looking for specific members,`findm` lets you find and filter members based on any of the
+specified field keywords.
 
-If you want to see specific members you are looking for,`findm` lets you find and filter members whose name contains any of the
-given keywords.
+Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...`
 
-Format: `findm KEYWORD [MORE_KEYWORDS]`
-
-* `KEYWORD` is case-insensitive. e.g. `John` will match `john`
-* Only the name of the member is searched
-* Only full words will be matched e.g. `Johnny` will not match `John`
-* Names matching at least one keyword will be returned (i.e. OR search) e.g `John Henry` will return `John, Henry`
+* `findm` is case-insensitive. e.g. `n/john` will match `John`
+* Other than `[t/TAG]...`, only the last argument supplied is searched. <br> e.g. `findm n/John n/Amy tta/0 tta/2` will list the member `Amy` with a total attendance of `2`
+* For `[t/TAG]`... , all arguments supplied will be used to find members, members with at least one matching tag will be listed. <br> e.g. `findm t/exco t/y2` will list members with tags `exco` `y2`, and also members with only one matching tag `y2` or `exco`.
+* Only full words will be matched e.g. `n/Johnny` will not match `John`, and `n/John Doe` will not match `John Lim`
+* At least one of the optional fields **must** be supplied.
+* If multiple fields are supplied, only members that match all of the given field keywords will be listed. <br>
+e.g. `findm n/Amy t/exco` will match `Amy` with the tag `exco` but not `John` with the tag `exco`.
 
 Examples:
 
-* `findm Bob` returns `bob` and `Bob Doe`
-* `findm alex irfan` returns `Alex Yeoh`, `Irfan Ibrahim` :camera:
+* `findm n/Bob` returns `bob`
+* `findm t/exco t/y2` returns members with either tags `exco` `y2`, or both.
 
 <p align="center">
    <img src="images/findmExample.png" height="400" align="center"/>
@@ -262,9 +264,15 @@ Examples:
 
 #### Sorting member list: `sortm`
 
-Shows a list of all members, sorted alphabetically.
+Shows a list of all members, sorted in your specified order.
 
-Format: `sortm`
+Format: `sortm by/SORT_ORDER`
+* `SORT_ORDER` is a compulsory field and must be a valid `SORT_ORDER`
+* Valid `SORT_ORDER`: `name`, `tag`
+
+Examples:
+* `sortm by/name` returns a member list sorted alphabetically by their names.
+* `sortm by/tag` returns a member list sorted by tag. <br> Members with more tags are displayed first.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -700,11 +708,11 @@ and follow the instructions specific to your operating system. You may have to d
 
 Action | Format, Examples
 --------|------------------
-**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> e.g. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
+**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...` <br> e.g. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
 **List members**| `listm`
 **Delete member**| `deletem INDEX` <br> e.g. `deletem 1`
 **Edit member**| `editm INDEX [n/NAME] [p/PHONE_NUMBER] [d/DAYS]` <br> e.g. `editm 1 n/Jonathan p/93837283`
-**Find member**| `findm KEYWORD` <br> e.g. `findm John`, `findm John Bob`
+**Find member**| `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...` <br> e.g. `findm n/John`, `findm t/exco t/y2`
 **Sort members**| `sortm by/SORT_ORDER` <br> e.g. `sortm by/name`, `sortm by/tag`
 **Mark member attendance**| `mark INDEX/INDICES` <br> e.g. `mark 1 2`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> e.g.`setm 1 2 3 d/Tue Wed`
