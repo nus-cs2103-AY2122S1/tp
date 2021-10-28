@@ -101,7 +101,7 @@ Category        | Specific fields | Valid entires | Description
 Personal data fields  | 1. `n/`: Name <br><br> 2. `e/`: Email |1. Alphanumeric <br><br> 2. Email Regex | Compulsory
 University data fields   | 3. `f/`: Faculty <br><br>  4. `m/:` Major | 3. NUS Faculties: <br> fass <br> business <br> computing <br> dentistry <br> sde <br> engineering <br> medicine <br> science <br> law <br><br> 4. Alphanumeric |Compulsory
 Skill data fields | 5. `s/`:Skill <br><br> 6. `l/`: Programming Language <br><br> 7. `fr/`: Framework | 5. Alphanumeric <br><br> 6. Alphanumeric <br><br> 7. Alphanumeric| Optional
-Miscellaneous data fields| 8. `r/`: Remark <br><br> 9. `int/`: Interaction | 8. Alphanumeric <br><br> 9. Alphanumeric, Date | Optional
+Miscellaneous data fields| 8. `r/`: Remark <br><br> 9. `int/`: Interaction <br><br> 10. `compat/`: Compatability | 8. Alphanumeric <br><br> 9. Alphanumeric, Date | Optional <br><br> 9. Integer
 
 Category | Specific data field | Valid entries | Description
 ----------------|----------------|-----------------|-----------------
@@ -217,7 +217,7 @@ Commands that are related to a specific contact
 ##### Adding a contact : `add`
 Adds a contact to the address book.
 
-Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [compat/COMPATABILITY] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 Examples: 
 
@@ -233,7 +233,7 @@ Examples:
 ##### Editing a contact : `edit`
 Edits an existing contact at the specified `INDEX`.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [f/FACULTY] [m/MAJOR] compat/COMPATABILITY [s/SKILL]…​ [l/LANGUAGE]…​ [fr/FRAMEWORK]…​ [t/TAG]…​ [r/REMARK]…​`
 
 <div markdown="block" class="alert alert-info">
 :bulb: Easy editing!
@@ -285,7 +285,7 @@ Examples:
 ##### Adding an interaction with a contact : `interaction`
 Adds an interaction record to a specific contact in the address book.
 
-Format: `interaction INDEX [int/DESCRIPTION] [on/DATE]`
+Format: `interaction INDEX int/DESCRIPTION on/DATE`
 interaction 1 int/We talked. on/1990-01-20
 * Adds an interaction record to the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. 
   The index **must be a positive    integer** 1, 2, 3, …​
