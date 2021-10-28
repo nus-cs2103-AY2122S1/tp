@@ -55,8 +55,10 @@ public class ModuleGroupMap {
      * @return boolean to show if the mapping contains the given group in given module.
      */
     public boolean containsGroup(Module mod, Group grp) {
-        if (mapping.containsKey(mod)) {
-            return mapping.get(mod).isSameGroup(grp);
+        for (Map.Entry<Module, Group> modGroupMapping : mapping.entrySet()) {
+            if (modGroupMapping.getKey().isSameModule(mod) && modGroupMapping.getValue().isSameGroup(grp)) {
+                return true;
+            }
         }
         return false;
     }
