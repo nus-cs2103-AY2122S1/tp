@@ -38,7 +38,7 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
   _Note how the app contains some sample data_.<br>
 
    ![Ui](images/Ui.png)<br>
-   _Image: **TuitiONE** upon loading for the first time._<br>
+   <center><i>Image: <b>TuitiONE</b> upon loading for the first time.<br></i></center>
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -113,6 +113,7 @@ The [Command summary](#command-summary) lists a table with all the commands pres
 This section presents the various elements in our **TuitiONE** application.
 
 ![Result of `list`](images/UserGuideImage/default.png)
+<center><i>Image: Layout of <b>TuitiONE</b>.<br></i></center>
 
 **No.** | **Section** | **Description**
 --------|-------------|----------------
@@ -123,6 +124,8 @@ This section presents the various elements in our **TuitiONE** application.
 5 | Command input box | Here is where you type your commands to run in the application.
 6 | Send button | A button that helps submit your input command to run. Using the `Enter`-key on your keyboard after typing in the **Command input box** performs the same job here.
 7 | Storage file indicator | This portion displays the location of your saved **TuitiONE** data file in your device.
+
+<center><i>Table: <b>Legend of TuitiONE</b>.<br></i></center>
 
 ## **Features**
 
@@ -168,6 +171,8 @@ Command Format: `list`
 
 ![Result of `list`](images/UserGuideImage/list.png)
 
+<center><i>Image: Expected output of <code>list</code> command.<br></i></center>
+
 Upon entering the `list` command, both student and lesson panels will be updated to show all the students and lessons present.
 
 #### Filtering of list: `filter`
@@ -196,6 +201,8 @@ Example(s):
 
 ![Result of `filter`](images/UserGuideImage/filter.png)
 
+<center><i>Image: Expected output of <code>filter g/P5 s/Science</code> command.<br></i></center>
+
 ### Managing Students
 
 #### Adding a student: `add`
@@ -217,6 +224,7 @@ Example(s):
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
 ![Outcome of `add`](images/UserGuideImage/add.png)
+<center><i>Image: Expected output of <code>add</code> command.<br></i></center>
 
 #### Locating students by name: `find`
 
@@ -244,6 +252,7 @@ Example(s):
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ![Result of `find alex`](images/UserGuideImage/find.png)
+<center><i>Image: Expected output of <code>find tan</code> command.<br></i></center>
 
 #### Deleting a student : `delete`
 
@@ -268,6 +277,8 @@ Example(s):
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ![Outcome of `delete`](images/UserGuideImage/delete.png)
+
+<center><i>Image: Expected output of <code>delete 1</code> command.<br></i></center>
 
 #### Editing a student : `edit`
 
@@ -307,6 +318,8 @@ Example(s):
 
 ![Outcome of `edit 2 r/discounted`](images/UserGuideImage/edit.png)
 
+<center><i>Image: Expected output of <code>edit</code> command.<br></i></center>
+
 #### Enrolling a student from lesson: `enroll`
 
 Enroll a specified student to a given TuitiONE lesson.
@@ -334,9 +347,11 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
 Example(s):
 
-* `enroll 1 l/1` will enroll the student indexed at `1` in the displayed student list to the lesson indexed at `1` in the displayed lesson list.
+* `enroll 1 l/2` will enroll the student indexed at `2` in the displayed student list to the lesson indexed at `2` in the displayed lesson list.
 
-![Outcome of `enroll 1 l/1`](images/UserGuideImage/enroll.png)
+![Outcome of `enroll 1 l/2`](images/UserGuideImage/enroll.png)
+
+<center><i>Image: Expected output of <code>enroll 1 l/2</code> command.<br></i></center>
 
 #### Unenrolling a student from lesson: `unenroll`
 
@@ -359,6 +374,8 @@ Example(s):
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
 ![Outcome of `unenroll 1 l/1`](images/UserGuideImage/unenroll.png)
+
+<center><i>Image: Expected output of <code>unenroll 1 l/1</code> command.<br></i></center>
 
 ### Managing Lessons
 
@@ -390,6 +407,8 @@ Example(s):
 
 ![Outcome of `add-l`](images/UserGuideImage/add-l.png)
 
+<center><i>Image: Expected output of <code>add-l</code> command.<br></i></center>
+
 #### Deleting a lesson: `delete-l`
 
 Deletes a lesson from the TuitiONE.
@@ -410,6 +429,8 @@ Example(s):
 
 ![Outcome of `delete-l`](images/UserGuideImage/delete-l.png)
 
+<center><i>Image: Expected output of <code>delete-l 1</code> command.<br></i></center>
+
 #### Viewing of lesson roster: `roster`
 
 Shows you the student roster of a specified lesson in the student panel. The names of the students will also be displayed in the result panel.
@@ -429,6 +450,8 @@ Examples:
 
 ![Outcome of `roster 1`](images/UserGuideImage/roster.png)
 
+<center><i>Image: Expected output of <code>roster 1</code> command.<br></i></center>
+
 ### Others
 
 #### Clearing all entries : `clear`
@@ -444,6 +467,8 @@ Command Format: `clear`
 Using this command removes all data from TuitiONE. Only use this command if you want to reset all information on the application and start anew.
 
 ![Outcome of `clear`](images/UserGuideImage/clear.png)
+
+<center><i>Image: Expected output of <code>clear</code> command.<br></i></center>
 
 </div>
 
