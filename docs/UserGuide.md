@@ -394,7 +394,7 @@ Action | Summary | Format, Examples
 **FindAny** | Locates persons by name and tags (Results fulfill at least one search term)| `findAny n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
 **Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
 **Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
-**Help** | Displays help information | `help [COMMAND]`
+**Help** | Displays help information | `help [COMMAND]`<br> e.g., `help`, `help add`, `help more`
 **List** | Lists all persons | `list`
 **Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
 **Untag** | Untags a person | `untag INDEX [t/TAG]…​`<br> e.g., `untag 2 t/colleague`
