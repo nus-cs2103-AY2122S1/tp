@@ -28,13 +28,22 @@ public interface ReadOnlyAddressBook {
     String getClientCounter();
 
     /**
+     * Sets the client counter to {@code s}.
+     */
+    void setClientCounter(String s);
+
+    /**
      * Increments the clientCounter of the address book by 1 {@code clientCounter}.
      */
     void incrementClientCounter();
 
-    void setClientCounter(String s);
-
+    /**
+     * Returns sorted next meeting list.
+     */
     ObservableList<NextMeeting> getSortedNextMeetingsList();
 
+    /**
+     * Returns tag list.
+     */
     ObservableList<Tag> getTagList();
 }

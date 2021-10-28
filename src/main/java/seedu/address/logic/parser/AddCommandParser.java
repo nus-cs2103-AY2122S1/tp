@@ -47,8 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
      * @return
+     * @throws ParseException if the user input does not conform the expected format
      */
     @Override
     public AddCommand parse(String args, Model model) throws ParseException {
@@ -74,6 +74,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             .orElse(NextMeeting.NO_NEXT_MEETING));
         nextMeeting.setWithWho(name);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG), model);
+
 
         Function<ClientId, Client> client = clientId -> new Client(clientId, name, phone, email, address, riskAppetite,
             disposableIncome, currentPlan, lastMet, nextMeeting, tagList);

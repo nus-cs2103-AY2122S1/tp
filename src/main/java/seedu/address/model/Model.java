@@ -76,15 +76,14 @@ public interface Model {
     ObservableList<ThemeType> getThemeList();
 
     /**
-     * Sets the theme of the GUI.
-     */
-    void setTheme(ThemeType theme);
-
-
-    /**
      * Returns the current theme for the GUI.
      */
     ThemeType getTheme();
+
+    /**
+     * Sets the theme of the GUI.
+     */
+    void setTheme(ThemeType theme);
 
     /**
      * Returns the user prefs' address book file path wrapped object.
@@ -142,7 +141,7 @@ public interface Model {
     void deleteMeetingsByClients(List<Client> toDelete);
 
     /**
-     * Adds the given client..
+     * Adds the given client.
      * {@code client} must not already exist in the address book.
      */
     void addClient(Client client);

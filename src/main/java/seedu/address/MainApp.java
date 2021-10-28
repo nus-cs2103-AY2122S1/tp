@@ -15,6 +15,7 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -65,6 +66,22 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        logger.info("Starting AddressBook " + MainApp.VERSION);
+        ui.start(primaryStage);
+    }
+
+    @Override
+    public void stop() {
+        logger.info("============================ [ Stopping Address Book ] =============================");
+        try {
+            storage.saveUserPrefs(model.getUserPrefs());
+        } catch (IOException e) {
+            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+        }
     }
 
     /**
@@ -165,21 +182,5 @@ public class MainApp extends Application {
         }
 
         return new ModelManager(initialData, userPrefs);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
-    }
-
-    @Override
-    public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
-        try {
-            storage.saveUserPrefs(model.getUserPrefs());
-        } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
-        }
     }
 }
