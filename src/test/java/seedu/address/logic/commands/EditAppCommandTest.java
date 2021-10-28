@@ -29,8 +29,7 @@ public class EditAppCommandTest {
         editAppDescriptor.setTimePeriod(VALID_TIME_PERIOD);
         editAppDescriptor.setDescription("description");
         EditAppCommand editAppCommand = new EditAppCommand(outOfBoundIndex, editAppDescriptor);
-
-//      assertCommandFailure(editAppCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
+//        assertCommandFailure(editAppCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
     }
 
 }
