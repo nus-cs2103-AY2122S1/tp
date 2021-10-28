@@ -5,18 +5,18 @@ import static seedu.siasa.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 
-public class ExpiryDate {
+public class CoverageExpiryDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Expiry Date should be a date in the future.";
 
     public final LocalDate value;
 
     /**
-     * Constructs an {@code ExpiryDate}.
+     * Constructs an {@code CoverageExpiry}.
      *
      * @param expiryDate A valid expiry date.
      */
-    public ExpiryDate(LocalDate expiryDate) {
+    public CoverageExpiryDate(LocalDate expiryDate) {
         requireNonNull(expiryDate);
         checkArgument(isValidExpiryDate(expiryDate), MESSAGE_CONSTRAINTS);
         value = expiryDate;
@@ -37,8 +37,8 @@ public class ExpiryDate {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ExpiryDate // instanceof handles nulls
-                && value.equals(((ExpiryDate) other).value)); // state check
+                || (other instanceof CoverageExpiryDate // instanceof handles nulls
+                && value.equals(((CoverageExpiryDate) other).value)); // state check
     }
 
     @Override

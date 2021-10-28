@@ -5,7 +5,7 @@ import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.List;
@@ -18,9 +18,9 @@ import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.ExpiryDate;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
 
 
@@ -35,35 +35,36 @@ public class AddPolicyCommand extends Command {
             + "Parameters: "
             + PREFIX_TITLE + "TITLE "
             + PREFIX_EXPIRY + "EXPIRY "
-            + PREFIX_PRICE + "PRICE "
-            + PREFIX_COMMISSION + "COMMISSION "
+            + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT) "
+            + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM "
             + PREFIX_CLIENT_INDEX + "CLIENT_INDEX "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Life Policy "
             + PREFIX_EXPIRY + "2021-06-13 "
-            + PREFIX_PRICE + "1000 "
-            + PREFIX_COMMISSION + "20 "
+            + PREFIX_PAYMENT + "1000 12 120"
+            + PREFIX_COMMISSION + "20 12"
             + PREFIX_CLIENT_INDEX + "1";
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
     public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified user";
 
     private final Title title;
-    private final Price price;
-    private final ExpiryDate expiryDate;
-    private final Commission commission;
+    private final PaymentStructure paymentStructure;
+    private final CoverageExpiryDate coverageExpiryDate;
     private final Index index;
+    private final Commission commission;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddPolicyCommand(Title title, Price price, ExpiryDate expiryDate, Commission commission, Index index) {
-        requireAllNonNull(title, price, expiryDate, commission, index);
+    public AddPolicyCommand(Title title, PaymentStructure paymentStructure, CoverageExpiryDate coverageExpiryDate,
+                            Commission commission, Index index) {
+        requireAllNonNull(title, paymentStructure, coverageExpiryDate, index);
         this.title = title;
-        this.price = price;
-        this.expiryDate = expiryDate;
-        this.commission = commission;
+        this.paymentStructure = paymentStructure;
+        this.coverageExpiryDate = coverageExpiryDate;
         this.index = index;
+        this.commission = commission;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class AddPolicyCommand extends Command {
 
         Person owner = lastShownList.get(index.getZeroBased());
 
-        Policy toAdd = new Policy(title, price, expiryDate, commission, owner);
+        Policy toAdd = new Policy(title, paymentStructure, coverageExpiryDate, commission, owner);
 
         if (model.hasPolicy(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
@@ -93,8 +94,8 @@ public class AddPolicyCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddPolicyCommand // instanceof handles nulls
                 && title.equals(((AddPolicyCommand) other).title)
-                && price.equals(((AddPolicyCommand) other).price)
-                && expiryDate.equals(((AddPolicyCommand) other).expiryDate)
+                && paymentStructure.equals(((AddPolicyCommand) other).paymentStructure)
+                && coverageExpiryDate.equals(((AddPolicyCommand) other).coverageExpiryDate)
                 && commission.equals(((AddPolicyCommand) other).commission));
     }
 }
