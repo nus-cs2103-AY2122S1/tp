@@ -111,13 +111,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSelectedView());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(),
+                logic.getSelectedView(), logic.getSelectedModule());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        statusBarFooter = new StatusBarFooter(logic.getSelectedView());
+        statusBarFooter = new StatusBarFooter(logic.getSelectedModule(), logic.getSelectedView());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -178,7 +179,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            statusBarFooter.setSelectedModule(logic.getSelectedModule());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -30,6 +31,7 @@ import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.testutil.PersonBuilder;
+import seedu.edrecord.ui.PersonListPanel;
 
 public class AddCommandTest {
 
@@ -202,12 +204,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableValue<PersonListPanel.View> getSelectedView() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedView(PersonListPanel.View newView) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setModuleFilter(PartOfModulePredicate predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Module getSelectedModule() {
+        public ObservableValue<Module> getSelectedModule() {
             throw new AssertionError("This method should not be called.");
         }
 

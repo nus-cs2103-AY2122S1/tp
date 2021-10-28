@@ -47,7 +47,7 @@ public interface Logic {
     /**
      * Returns the currently selected module.
      */
-    Module getSelectedModule();
+    ObservableValue<Module> getSelectedModule();
 
     /**
      * Returns the user prefs' GUI settings.

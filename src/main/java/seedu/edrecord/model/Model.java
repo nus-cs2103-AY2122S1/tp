@@ -149,7 +149,7 @@ public interface Model {
     /**
      * Returns the current selected module.
      */
-    Module getSelectedModule();
+    ObservableValue<Module> getSelectedModule();
 
     /**
      * Returns true if there is a currently selected module.

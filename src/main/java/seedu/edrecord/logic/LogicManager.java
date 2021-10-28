@@ -80,7 +80,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Module getSelectedModule() {
+    public ObservableValue<Module> getSelectedModule() {
         return model.getSelectedModule();
     }
 

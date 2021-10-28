@@ -39,7 +39,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private PartOfModulePredicate selectedModulePredicate;
-    private Module selectedModule;
+    private final ObjectProperty<Module> selectedModule = new SimpleObjectProperty<>();
     private final ObjectProperty<PersonListPanel.View> selectedView =
             new SimpleObjectProperty<>(PersonListPanel.View.CONTACTS);
 
@@ -58,7 +58,6 @@ public class ModelManager implements Model {
         this.moduleSystem.resetData(moduleSystem);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.edRecord.getPersonList());
-        selectedModule = null;
     }
 
     public ModelManager() {
@@ -215,7 +214,7 @@ public class ModelManager implements Model {
         this.selectedModulePredicate = modulePredicate;
 
         String currentModuleCode = modulePredicate.getModuleCode();
-        this.selectedModule = moduleSystem.getModule(currentModuleCode);
+        this.selectedModule.set(moduleSystem.getModule(currentModuleCode));
 
         filteredPersons.setPredicate(modulePredicate);
 
@@ -233,28 +232,28 @@ public class ModelManager implements Model {
     //=========== Current Module =============================================================================
 
     @Override
-    public Module getSelectedModule() {
+    public ObservableValue<Module> getSelectedModule() {
         return this.selectedModule;
     }
 
     @Override
     public boolean hasSelectedModule() {
-        return selectedModule != null;
+        return selectedModule.get() != null;
     }
 
     @Override
     public boolean hasAssignmentInCurrentModule(Assignment assignment) {
-        return hasSelectedModule() && selectedModule.hasAssignment(assignment);
+        return hasSelectedModule() && selectedModule.get().hasAssignment(assignment);
     }
 
     @Override
     public Optional<Assignment> searchAssignment(Name name) {
-        return selectedModule.searchAssignment(name);
+        return selectedModule.get().searchAssignment(name);
     }
 
     @Override
     public void addAssignment(Assignment assignment) {
-        selectedModule.addAssignment(assignment);
+        selectedModule.get().addAssignment(assignment);
         setSearchFilter(PREDICATE_SHOW_ALL_PERSONS);
     }
 

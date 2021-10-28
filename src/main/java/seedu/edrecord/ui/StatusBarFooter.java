@@ -23,10 +23,12 @@ public class StatusBarFooter extends UiPart<Region> {
     /**
      * Creates a {@code StatusBarFooter}.
      */
-    public StatusBarFooter(ObservableValue<PersonListPanel.View> selectedView) {
+    public StatusBarFooter(ObservableValue<Module> selectedModule,
+                           ObservableValue<PersonListPanel.View> selectedView) {
         super(FXML);
-        setSelectedModule(null);
+        setSelectedModule(selectedModule.getValue());
         setSelectedView(selectedView.getValue());
+        selectedModule.addListener((unused, oldModule, newModule) -> setSelectedModule(newModule));
         selectedView.addListener((unused, oldView, newView) -> setSelectedView(newView));
     }
 

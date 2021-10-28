@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.edrecord.commons.core.LogsCenter;
 import seedu.edrecord.model.person.Person;
+import seedu.edrecord.model.module.Module;
 
 /**
  * Panel containing the list of persons.
@@ -24,6 +25,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     private View selectedView;
+    private ObservableValue<Module> selectedModule;
 
     @FXML
     private ListView<Person> personListView;
@@ -33,8 +35,11 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, ObservableValue<View> selectedView) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableValue<View> selectedView,
+                           ObservableValue<Module> selectedModule) {
         super(FXML);
+
+        this.selectedModule = selectedModule;
 
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -83,7 +88,9 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new AssignmentCard(person, getIndex() + 1).getRoot());
+                AssignmentListCard a = new AssignmentListCard(person, getIndex() + 1,
+                        PersonListPanel.this.selectedModule);
+                setGraphic(a.getRoot());
             }
         }
     }
