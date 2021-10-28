@@ -39,7 +39,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: <index> (must be a positive integer) "
             + "[" + PREFIX_NAME + "<student_name>] "
             + "[" + PREFIX_ID + "<student_id>] "
             + "[" + PREFIX_GROUP + "<group_name>]... "
