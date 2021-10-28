@@ -18,5 +18,9 @@
         </padding></Label>
     </children>
   </HBox>
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+  <ListView fx:id="personListView" VBox.vgrow="ALWAYS">
+    <placeholder>
+      <Label fx:id="placeholder" wrapText="true"/>
+    </placeholder>
+  </ListView>
 </VBox>

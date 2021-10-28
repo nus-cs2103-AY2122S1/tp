@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,11 +34,23 @@ public class EditLessonDescriptorBuilder {
     public EditLessonDescriptorBuilder(Lesson lesson) {
         descriptor = new EditLessonDescriptor();
         descriptor.setDate(lesson.getStartDate());
+        descriptor.setEndDate(lesson.getEndDate());
         descriptor.setTimeRange(lesson.getTimeRange());
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
+        descriptor.setCancelDates(lesson.getCancelledDates());
+        descriptor.setUncancelDates(new HashSet<>());
+        descriptor.setRecurring(lesson.isRecurring());
         descriptor.setLessonRate(lesson.getLessonRates());
         descriptor.setOutstandingFees(lesson.getOutstandingFees());
+    }
+
+    /**
+     * Sets the {@code isRecurring} flag of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withRecurrence() {
+        descriptor.setRecurring(true);
+        return this;
     }
 
     /**
@@ -45,6 +58,14 @@ public class EditLessonDescriptorBuilder {
      */
     public EditLessonDescriptorBuilder withDate(String date) {
         descriptor.setDate(new Date(StringUtil.stripLeadingZeroes(date)));
+        return this;
+    }
+
+    /**
+     * Sets the {@code endDate} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withEndDate(String date) {
+        descriptor.setEndDate(new Date(StringUtil.stripLeadingZeroes(date)));
         return this;
     }
 
