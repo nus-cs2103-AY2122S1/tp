@@ -429,4 +429,102 @@ class FeesCalculatorTest {
             lesson.getDayOfWeek(), lesson.getStartDate().getLocalDate(), lesson.getEndDate().getLocalDate(),
             lesson.getTimeRange().getEnd(), cancelledDates));
     }
+
+    @Test
+    public void lastUpdatedAfterEndDate_noUpdate() {
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-28T17:00"),
+            LocalDateTime.parse("2021-10-28T19:00"));
+
+        Lesson withEndDateBeforeLastUpdated = new LessonBuilder()
+            .withDate("21 OCT 2021")
+            .withEndDate("28 OCT 2021")
+            .buildRecurring();
+
+        assertEquals(withEndDateBeforeLastUpdated,
+            feesCalculator.updateLessonOutstandingFeesField(withEndDateBeforeLastUpdated));
+    }
+
+    @Test
+    public void lastUpdatedBeforeEndTimeEndDate_noUpdate() {
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-28T11:00"),
+            LocalDateTime.parse("2021-10-28T19:00"));
+
+        Lesson withEndDateSameAsEndTimeBeforeLastUpdated = new LessonBuilder()
+            .withDate("21 OCT 2021")
+            .withEndDate("28 OCT 2021")
+            .buildRecurring();
+
+        Lesson expected = new LessonBuilder()
+            .withDate("21 OCT 2021")
+            .withEndDate("28 OCT 2021")
+            .withOutstandingFees("150")
+            .buildRecurring();
+
+        assertEquals(expected,
+            feesCalculator.updateLessonOutstandingFeesField(withEndDateSameAsEndTimeBeforeLastUpdated));
+    }
+
+    @Test
+    public void startAndEndSameAndIsCancelled_noUpdate() {
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-20T14:30"),
+            LocalDateTime.parse("2021-10-21T14:45"));
+
+        Lesson withSameStartAndEndAndCancelled = new LessonBuilder()
+            .withDate("21 OCT 2021")
+            .withEndDate("21 OCT 2021")
+            .withCancelledDatesSet("21 OCT 2021")
+            .buildRecurring();
+
+        assertEquals(withSameStartAndEndAndCancelled,
+            feesCalculator.updateLessonOutstandingFeesField(withSameStartAndEndAndCancelled));
+    }
+
+    /**
+     * Considers singular cancelled date only.
+     */
+    @Test
+    public void cancelledDatesTests() {
+        // starts before last updated and end after current
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T14:30"),
+            LocalDateTime.parse("2021-10-21T14:45"));
+
+        Lesson startsBeforeLastUpdatedEndsAfterCurrent = new LessonBuilder()
+            .withDate("7 OCT 2021")
+            .withEndDate("28 OCT 2021")
+            .withCancelledDatesSet("21 OCT 2021")
+            .buildRecurring();
+
+        // no update
+        assertEquals(startsBeforeLastUpdatedEndsAfterCurrent,
+            feesCalculator.updateLessonOutstandingFeesField(startsBeforeLastUpdatedEndsAfterCurrent));
+
+        // starts before last updated and end before current
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T14:30"),
+            LocalDateTime.parse("2021-10-21T15:45"));
+
+        Lesson startsBeforeLastUpdatedEndsBeforeCurrent = new LessonBuilder()
+            .withDate("7 OCT 2021")
+            .withEndDate("28 OCT 2021")
+            .withCancelledDatesSet("21 OCT 2021")
+            .buildRecurring();
+
+        // no update since cancelled
+        assertEquals(startsBeforeLastUpdatedEndsBeforeCurrent,
+            feesCalculator.updateLessonOutstandingFeesField(startsBeforeLastUpdatedEndsBeforeCurrent));
+
+        // starts after last updated and ends after current
+        feesCalculator = new FeesCalculator(new LastUpdatedDate("2021-10-21T13:30"),
+            LocalDateTime.parse("2021-10-21T14:45"));
+
+        Lesson startsAfterLastUpdatedEndsAfterCurrent = new LessonBuilder()
+            .withDate("7 OCT 2021")
+            .withEndDate("28 OCT 2021")
+            .withCancelledDatesSet("21 OCT 2021")
+            .buildRecurring();
+
+        // no update
+        assertEquals(startsAfterLastUpdatedEndsAfterCurrent,
+            feesCalculator.updateLessonOutstandingFeesField(startsAfterLastUpdatedEndsAfterCurrent));
+    }
+
 }

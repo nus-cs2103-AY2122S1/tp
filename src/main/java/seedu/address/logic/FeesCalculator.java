@@ -174,28 +174,43 @@ public class FeesCalculator implements Calculator {
         // Number of Days between last updated and current date excluding these both days
         LocalDate laterStart = Collections.max(Arrays.asList(startDate, lastUpdated.getLastUpdatedLocalDate()));
         LocalDate earlierEnd = Collections.min(Arrays.asList(endDate, currentDateTime.toLocalDate()));
+
+        if (laterStart.isAfter(earlierEnd)) {
+            return 0;
+        }
+
         LocalDate start = laterStart.with(TemporalAdjusters.previous(updateDay));
         LocalDate end = earlierEnd.with(TemporalAdjusters.next(updateDay));
 
         // get lessons in between
         int numLessons = (int) ChronoUnit.WEEKS.between(start, end) - 1;
-
-        if (laterStart.equals(lastUpdated.getLastUpdatedLocalDate())
-                && lastUpdatedDay == updateDay.getValue()
-                && lastUpdated.getLastUpdatedLocalTime().isAfter(endTime)) {
-            numLessons -= 1;
-        }
-
-        if (earlierEnd.equals(currentDateTime.toLocalDate())
-                && currentUpdatedDay == updateDay.getValue()
-                && currentDateTime.toLocalTime().isBefore(endTime)) {
-            numLessons -= 1;
-        }
+        assert numLessons >= 0;
 
         for (Date cancelledDate : cancelledDates) {
             if (cancelledDate.isDateBetween(lastUpdated.getLastUpdatedLocalDate(), currentDateTime.toLocalDate())) {
                 numLessons -= 1;
             }
+        }
+
+        assert numLessons >= 0;
+
+        // all lessons between this range is cancelled
+        if (numLessons == 0) {
+            return numLessons;
+        }
+
+        // Check the case for lesson falls on lastUpdatedDay or currentDay
+        boolean startBeforeLastUpdatedOnSameDay = laterStart.equals(lastUpdated.getLastUpdatedLocalDate())
+            && lastUpdatedDay == updateDay.getValue()
+            && lastUpdated.getLastUpdatedLocalTime().isAfter(endTime);
+
+        boolean endAfterCurrentDateTimeOnSameDay = earlierEnd.equals(currentDateTime.toLocalDate())
+            && currentUpdatedDay == updateDay.getValue()
+            && currentDateTime.toLocalTime().isBefore(endTime);
+
+        // Only minus once if start and end dates of lesson on the same date
+        if (startBeforeLastUpdatedOnSameDay || endAfterCurrentDateTimeOnSameDay) {
+            numLessons -= 1;
         }
 
         return numLessons;
