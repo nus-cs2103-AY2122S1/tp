@@ -28,6 +28,7 @@ public class FillCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.setLabsTracker(model.getFilteredStudentList().get(0).getFreshLabList());
         return new CommandResult(MESSAGE_FAIL);
     }
 

@@ -135,6 +135,20 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.clearSelectedLabs();
     }
 
+    /**
+     * Sets the lab tracker to the specified list of labs.
+     */
+    public void setLabsTracker(List<Lab> labs) {
+        students.setLabsTracker(labs);
+    }
+
+    /**
+     * Clears the lab tracker
+     */
+    public void clearLabsTracker() {
+        students.clearLabsTracker();
+    }
+
     //// util methods
 
     @Override

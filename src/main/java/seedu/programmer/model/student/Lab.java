@@ -105,7 +105,6 @@ public class Lab {
      * @return
      */
     public Lab copy() {
-        Lab labCopy = new Lab(labNum, actualScore, totalScore);
-        return labCopy;
+        return new Lab(labNum, actualScore, totalScore);
     }
 }

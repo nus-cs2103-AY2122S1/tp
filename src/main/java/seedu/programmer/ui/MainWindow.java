@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
-    private StudentListPanel studentParticular;
+    private StudentParticularPanel studentParticular;
     private LabResultListPanel labResultListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -74,6 +74,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Button downloadButton;
+
+    @FXML
+    private Button uploadButton;
+
+    @FXML
+    private Button dashboardButton;
 
     @FXML
     private StackPane studentListPanelPlaceholder;
@@ -151,6 +157,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(KeyCombination.valueOf("F2"), this::handleHelp);
         setAccelerator(KeyCombination.valueOf("F3"), this::handleDownload);
         setAccelerator(KeyCombination.valueOf("F4"), this::handleUpload);
+        setAccelerator(KeyCombination.valueOf("F5"), this::handleDashboard);
     }
 
     /**
@@ -227,13 +234,17 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleShowResult() {
-        studentParticular = new StudentListPanel(logic.getSelectedStudentWrapper());
+        studentParticular = new StudentParticularPanel(logic.getSelectedStudentWrapper());
         studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
 
         labResultListPanel = new LabResultListPanel(logic.getSelectedLabs());
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
 
+    /**
+     * Display the dashboard.
+     */
+    @FXML
     private void handleDashboard() {
         if (dashboardWindow.isShowing()) {
             dashboardWindow.update();
