@@ -23,6 +23,7 @@ import seedu.edrecord.model.module.Module;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static seedu.edrecord.model.assignment.Grade.GradeStatus.NOT_SUBMITTED;
 
@@ -78,7 +79,7 @@ public class AssignmentListCard extends UiPart<Region> {
         if (m != null) {
             for (Assignment a : m.getAssignmentList()) {
                 if (!map.containsKey(a)) {
-                    map.put(a, new Grade(new Score("0"), NOT_SUBMITTED));
+                    map.put(a, new Grade(Optional.of(new Score("0")), NOT_SUBMITTED));
                 }
             }
         }
@@ -105,7 +106,8 @@ public class AssignmentListCard extends UiPart<Region> {
         scoreCol.setCellValueFactory(c -> {
             Assignment a = c.getValue().getKey();
             Grade g = map.get(a);
-            return new SimpleStringProperty(g.getScore().toString() + " / " + a.getMaxScore().toString());
+            Score s = g.getScore().orElse(new Score("0"));
+            return new SimpleStringProperty(s + " / " + a.getMaxScore().toString());
         });
 
         ObservableList<Map.Entry<Assignment, Grade>> items = FXCollections.observableArrayList(map.entrySet());
