@@ -27,8 +27,8 @@
                 </Label>
                 <Label fx:id="title" text="\$first" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="dateRange" styleClass="cell_small_label" text="\$date range" wrapText="true"/>
             <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-            <Label fx:id="endDate" styleClass="cell_small_label" text="\$end date" />
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" />
             <Label fx:id="outstandingFees" styleClass="cell_small_label" text="\$outstandingFees" />
