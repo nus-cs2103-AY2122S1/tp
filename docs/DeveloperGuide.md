@@ -910,8 +910,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `findStudent al`<br>
        Expected: Students whose name contains "al" will be shown (e.g. Alex). Status message shows how many students has been found.
 
-    1. Test case: `findStudent !alex!`<br>
-       Expected: Students whose name contains "alex" will be shown (e.g. Alex). Special characters and numbers ignored. Status message shows how many students has been found.
+    1. Test case: `findStudent !alex! ben123`<br>
+       Expected: Students whose name contains "alex" OR "ben" will be shown (e.g. Alex, Ben). Special characters and numbers ignored. Status message shows how many students has been found.
 
     1. Other incorrect findStudent commands to try: `findStudent`, `findStudent !` <br>
        Expected: No student found. Error details shown in the status message.
@@ -922,7 +922,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Clearing student list
 
-1. 
+1. Clearing the student list
+
+    1. Test case: `clearStudents`<br>
+       Expected: All students cleared from student list. Existing students in groups will also be cleared, leaving empty groups.
 
 ### Adding a group 
 
@@ -939,8 +942,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `findGroup w14`<br>
        Expected: Groups whose name contains "w14" will be shown (e.g. W14-4). Case-insensitive. Status message shows how many groups has been found.
 
-    1. Test case: `findGroup w14`<br>
-       Expected: Groups whose name contains "w14" will be shown (e.g. W14-2, W14-4). Case-insensitive. Status message shows how many groups has been found.
+    1. Test case: `findGroup w14 w15-2`<br>
+       Expected: Groups whose name contains "w14" OR "w15-2" will be shown (e.g. W14-2, W14-4, W15-2). Ignores all special characters except dashes. Case-insensitive. Status message shows how many groups has been found.
 
     1. Other incorrect findGroup commands to try: `findGroup`, `findGroup !` <br>
        Expected: No groups found. Error details shown in the status message.
@@ -951,7 +954,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Clearing group list
 
-1. 
+1. Clearing the group list
+
+    1. Test case: `clearGroups`<br>
+       Expected: All groups cleared from group list. Existing students in groups will be removed from their group (students will have no group).
 
 ### Adding a todo
 
