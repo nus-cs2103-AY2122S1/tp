@@ -260,6 +260,7 @@ Action | Format, Examples
 --------|------------------
 **Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 **Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
+**Update Applicant status** | `mark NAME` <br> e.g.,  `mark john doe status/accepted`
 **Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Applicants** | `list-applicant`
 **Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
