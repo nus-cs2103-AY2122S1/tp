@@ -10,8 +10,8 @@ import static tutoraid.commons.util.AppUtil.checkArgument;
 public class Capacity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Capacity should only contain numbers, and it should be at least 1 digit long";
-    public static final String VALIDATION_REGEX = "\\d+";
+            "Capacity should be a positive integer, and it should be at least 1 digit long";
+    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
     public final String capacity;
 
     /**
@@ -21,7 +21,9 @@ public class Capacity {
      */
     public Capacity(String capacity) {
         requireNonNull(capacity);
-        checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
+        if (!capacity.equals("")) {
+            checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
+        }
         this.capacity = capacity;
     }
 
@@ -32,8 +34,21 @@ public class Capacity {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the capacity in integer.
+     */
+    public int getCapacity() {
+        if (capacity.equals("")) {
+            return Integer.MAX_VALUE;
+        }
+        return Integer.parseInt(capacity);
+    }
+
     @Override
     public String toString() {
+        if (capacity.equals("")) {
+            return "No capacity";
+        }
         return capacity;
     }
 

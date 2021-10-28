@@ -130,7 +130,7 @@ public class ProgressList {
 
         for (int i = 1; i < progressList.size() + 1; i++) {
             String progressToPrint = progressList.get(i - 1).toString();
-            allProgress = allProgress + i + ". " + progressToPrint + "\n";
+            allProgress = allProgress + "\t" + i + ". " + progressToPrint + "\n";
         }
         return allProgress;
     }

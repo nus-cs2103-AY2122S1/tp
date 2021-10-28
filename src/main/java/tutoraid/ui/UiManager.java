@@ -1,5 +1,9 @@
 package tutoraid.ui;
 
+import static tutoraid.ui.DetailLevel.HIGH;
+import static tutoraid.ui.DetailLevel.LOW;
+import static tutoraid.ui.DetailLevel.MED;
+
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -87,20 +91,32 @@ public class UiManager implements Ui {
     }
 
     /**
-     * Shows full view of student's details
+     * Shows full view details of students and lessons
      */
-    public static void showViewWindow() {
+    public static void showFullDetails() {
         if (mainWindow != null) {
-            mainWindow.fillStudentCard(true);
+            mainWindow.fillStudentCard(HIGH);
+            mainWindow.fillLessonCard(HIGH);
         }
     }
 
     /**
-     * Hides full view of student's details
+     * Shows most view details of students and lessons: only one progress entry for each student is displayed
      */
-    public static void hideViewWindow() {
+    public static void showMediumDetails() {
         if (mainWindow != null) {
-            mainWindow.fillStudentCard(false);
+            mainWindow.fillStudentCard(MED);
+            mainWindow.fillLessonCard(MED);
+        }
+    }
+
+    /**
+     * Shows only the necessary details of students and lessons
+     */
+    public static void showMinimalDetails() {
+        if (mainWindow != null) {
+            mainWindow.fillStudentCard(LOW);
+            mainWindow.fillLessonCard(LOW);
         }
     }
 }

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
+import tutoraid.ui.DetailLevel;
 
 /**
  * The API of the Model component.
@@ -123,6 +124,24 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
+     * Deletes lesson from student(s).
+     */
+    void deleteLessonFromStudents(Lesson lesson);
+
+    /**
+     * Deletes student from lesson(s).
+     */
+    void deleteStudentFromLessons(Student student);
+
+    /*
+     * Replaces the given lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in the lesson book.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the
+     * lesson book.
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
+
+    /**
      * Views the given lesson.
      * {@code lesson} must exist in the lesson book.
      */
@@ -131,7 +150,7 @@ public interface Model {
     /**
      * Views the list of students in the database. The viewAll flag determines whether student details should be shown.
      */
-    void viewList(boolean viewAll);
+    void viewList(DetailLevel detailLevel);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();

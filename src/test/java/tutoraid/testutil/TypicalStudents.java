@@ -31,6 +31,7 @@ public class TypicalStudents {
             .withParentPhone("94351253")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
     public static final Student BENSON = new StudentBuilder()
             .withStudentName("Benson Meier")
@@ -39,6 +40,7 @@ public class TypicalStudents {
             .withParentPhone("98765432")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(true)
+            .withLessons(new ArrayList<>())
             .build();
     public static final Student CARL = new StudentBuilder()
             .withStudentName("Carl Kurz")
@@ -47,6 +49,7 @@ public class TypicalStudents {
             .withParentPhone("95352567")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
     public static final Student DANIEL = new StudentBuilder()
             .withStudentName("Daniel Meier")
@@ -55,6 +58,7 @@ public class TypicalStudents {
             .withParentPhone("98765432")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
     public static final Student ELLE = new StudentBuilder()
             .withStudentName("Elle Meyer")
@@ -62,6 +66,7 @@ public class TypicalStudents {
             .withParentName("Mrs Meyer")
             .withParentPhone("9482290")
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
     public static final Student FIONA = new StudentBuilder()
             .withStudentName("Fiona Kunz")
@@ -70,6 +75,7 @@ public class TypicalStudents {
             .withParentPhone("9482423")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
     public static final Student GEORGE = new StudentBuilder()
             .withStudentName("George Best")
@@ -78,6 +84,7 @@ public class TypicalStudents {
             .withParentPhone("94824432")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
 
     // Manually added
@@ -88,6 +95,7 @@ public class TypicalStudents {
             .withParentPhone("98765432")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
     public static final Student IDA = new StudentBuilder()
             .withStudentName("Ida Mueller")
@@ -96,6 +104,7 @@ public class TypicalStudents {
             .withParentPhone("8482155")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>())
             .build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}

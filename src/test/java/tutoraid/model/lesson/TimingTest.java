@@ -16,7 +16,7 @@ public class TimingTest {
 
     @Test
     public void constructor_invalidTiming_throwsIllegalArgumentException() {
-        String invalidTiming = "";
+        String invalidTiming = "123*";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Timing(invalidTiming));
     }
 

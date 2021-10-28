@@ -15,6 +15,7 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
+import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
@@ -25,12 +26,12 @@ import tutoraid.model.student.StudentName;
 /**
  * Edits the details of an existing student in the address book.
  */
-public class EditStudentCommand extends Command {
+public class EditStudentCommand extends EditCommand {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_FLAG = "-s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the index number used in the displayed student list. "
+            + "by the index number used in the Student Panel. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_STUDENT_NAME + "STUDENT NAME "
@@ -80,6 +81,7 @@ public class EditStudentCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
@@ -97,9 +99,10 @@ public class EditStudentCommand extends Command {
 
         ProgressList studentProgress = studentToEdit.getProgressList();
         PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
+        Lessons lessons = studentToEdit.getLessons();
 
         return new Student(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
-                studentProgress, paymentStatus);
+                studentProgress, paymentStatus, lessons);
     }
 
     @Override

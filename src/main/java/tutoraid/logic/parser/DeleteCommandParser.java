@@ -5,17 +5,20 @@ import java.util.regex.Pattern;
 
 import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.DeleteCommand;
+import tutoraid.logic.commands.DeleteLessonCommand;
 import tutoraid.logic.commands.DeleteProgressCommand;
 import tutoraid.logic.commands.DeleteStudentCommand;
+import tutoraid.logic.commands.DeleteStudentsFromLessonsCommand;
 import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
- * Checks if a given delete command is to delete a student from TutorAid or to delete the progress note of a student.
+ * Checks if a given delete command is to delete a student/lesson from TutorAid
+ * or to delete the progress note of a student or to delete students from lessons.
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
-     * Used for initial separation of command flag ('-s' or '-p') and args.
+     * Used for initial separation of command flag ('-s', '-l', -p' or '-sl') and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandFlag>\\S+)(?<arguments>.*)");
@@ -47,6 +50,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         case DeleteProgressCommand.COMMAND_FLAG:
             return new DeleteProgressCommandParser().parse(arguments);
+
+        case DeleteStudentsFromLessonsCommand.COMMAND_FLAG:
+            return new DeleteStudentsFromLessonsCommandParser().parse(arguments);
+
+        case DeleteLessonCommand.COMMAND_FLAG:
+            return new DeleteLessonCommandParser().parse(arguments);
 
         default:
             throw new ParseException(Messages.MESSAGE_INVALID_DELETE_COMMAND);
