@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -11,7 +13,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.function.Predicate;
 
@@ -32,12 +36,16 @@ public class FindCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] \n                      "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
             + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
-            + "[" + PREFIX_TAG + "TAG]...";
+            + "[" + PREFIX_TAG + "TAG]...\n                      "
+            + "[" + PREFIX_SUBJECT + "LESSON_SUBJECT] "
+            + "[" + PREFIX_TIME + "LESSON_TIME] "
+            + "[" + PREFIX_DATE + "LESSON_DATE] "
+            + "[" + PREFIX_CANCEL + "CANCELLED_DATE] ";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
