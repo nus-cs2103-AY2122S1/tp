@@ -1,0 +1,21 @@
+@startuml
+!include <office/Users/user>
+!include style.puml
+
+Package " "<<Rectangle>>{
+    Class UiManager UI_COLOR
+    Class LogicManager LOGIC_COLOR
+    Class StorageManager STORAGE_COLOR
+    Class ModelManager MODEL_COLOR
+    Class Main #grey
+}
+
+Class "<$user>" as User MODEL_COLOR_T2
+
+Main -[#grey]-> UiManager
+Main -[#grey]-> LogicManager
+Main -[#grey]-> StorageManager
+Main -[#grey]-> ModelManager
+
+User -> Main
+@enduml
