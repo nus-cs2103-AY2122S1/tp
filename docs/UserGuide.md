@@ -248,7 +248,7 @@ Format: `editApp ai/INDEX a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION`
 * The persons in the appointment will remain the same.
 
 Examples:
-* `editApp ai/1 a/Utown start/28-12-2021 1400 end/28-12-2021 1500 ds/discuss marketing strategies`
+* `editApp 6 a/Utown start/28-12-2021 1400 end/28-12-2021 1500 ds/discuss marketing strategies`
   edits the details of a prior created group appointment, changing it to meet at UTown on 28-12-2021 at 1400 hrs
 
 Error messages:
@@ -279,7 +279,7 @@ After:
 Format: delApp INDEX
 
 Examples:
-* `delApp 1` and the user selects 'OK' in the popup
+* `delApp 6` and the user selects 'OK' in the popup
 
 Error messages:
 * The appointment index provided is invalid.
@@ -345,6 +345,10 @@ You may notice the 'sun' or 'moon' button located at the top right of PlaceBook.
 Simply click that to toggle PlaceBook between Dark and Light Theme.
 PlaceBook aims to support your work in different lighting environments and boost your productivity.
 
+ light theme
+ ![light theme](images/lightTheme.png)
+ dark theme
+ ![dark theme](images/darkTheme.png)
 ### Exiting the program : `exit`
 
 Exits the program.
