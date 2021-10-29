@@ -267,7 +267,7 @@ Examples:
 * `addc c/G06 s/Tuesday 2 to 4pm, Friday 2 to 4pm`
 * `addc c/G01 s/Monday 10am to 12pm, thursday 10am to 12pm`
 
-### Viewing a class
+### Viewing a class: `viewc`
 
 ![viewing a class](images/viewc.png)
 
