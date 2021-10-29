@@ -358,22 +358,52 @@ Reverts your previous command which modified the task list of Uni-Fy.
 
 </div>
 
-### 4.9 Exiting the program : `exit`
+### 4.9 Undoing the previous command : `undo` `[coming in v1.3]`
+
+Reverts your previous command which modified the task list of Uni-Fy.
+
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- `undo`
+
+</div>
+
+### 4.10 Sorting the tasts : `sort`
 
 Exits the program.
 
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `exit`
+- `sort x/(time or priority) o/(asc or desc)`
+</div>
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
+* Sorts the tasks in the tasklist based on either `time` or `priority` in ascending or descending order as entered after the `o/` flag
 
 </div>
 
-### 4.10 Saving the data
+
+<div markdown="block" class="alert alert-success">
+:green_book: **Examples:**
+
+* `sort x/time o/asc` sorts the tasks in ascending order of time
+* `sort x/priority o/desc` sorts the tasks in the descending order of priority i.e. from `HIGH` to `LOW`
+</div>
+
+
+
+
+
+### 4.11 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 4.11 Editing the data file
+### 4.12 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -381,7 +411,7 @@ Exits the program.
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 4.12 Retrieving past commands `[coming in v1.3]`
+### 4.13 Retrieving past commands `[coming in v1.3]`
 
 Shows the past commands run on **Uni-Fy**.
 
