@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -65,6 +66,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Set dependencies
         this.primaryStage = primaryStage;
+
         this.logic = logic;
 
         // Configure the UI
@@ -85,6 +87,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -109,6 +112,12 @@ public class MainWindow extends UiPart<Stage> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
+            } else if (event.getCode() == KeyCode.UP) {
+                try {
+                    executeCommand("/prev");
+                } catch (CommandException | ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -134,6 +143,8 @@ public class MainWindow extends UiPart<Stage> {
         UniFy uniFy = new UniFy(logic.getUniFy());
         weeklyPanel = new WeeklyPanel(logic.getWeeklyTaskList());
         weeklyPanelPlaceholder.getChildren().add(weeklyPanel.getRoot());
+
+
     }
 
     /**
@@ -170,7 +181,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+            (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
