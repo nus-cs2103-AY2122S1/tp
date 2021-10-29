@@ -94,6 +94,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
+
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
@@ -197,11 +198,9 @@ The following activity diagram summarises what happens when a user executes a `c
 - **Alternative 1 (current choice):** Have two side-by-side panels, left for person list and right for task list.
 
   * Pros:
-
     * User is able to concurrently view more information.
 
   * Cons:
-
     * More work to create and optimize the split panel.
     * Content wrapping can was tricky since there is a slider in the middle to resize either panels.
 
@@ -210,10 +209,8 @@ The following activity diagram summarises what happens when a user executes a `c
   * Pros: More convenient to implement.
 
   * Cons:
-
     * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
       which reduces efficiency).
-
     * Lesser view of information.
 
 ### Command Cache
@@ -255,40 +252,31 @@ be only one cache existing.
 #### Design Consideration
 ##### Aspect: Accessing cache
 * **Alternative 1** : Have cache stored in model and piggyback on existing command code.
-
     * Pros:
-
         * A relatively simple design with less possibility of bug
         * Less effort needed
         * Still maintain cohesion and separation of responsibility
 
     * Cons:
-
         * Could not differentiate between internal and external input command. This leads to either the possibility
           for user to input the internal commands accidentally, causing bug, or some commands being blocked from running
 
 * **Alternative 2 (current choice):** Have cache stored in model and create new internal command.
-
     * Pros:
-
         * No need for command blocking and no possibility for user to accidentally type in the command
         * Still maintain cohesion and separation of responsibility
 
     * Cons:
-
         * Increased avenue for bugs
         * More coding to be done
         * Relatively worse in terms of "repeating yourself"
 
 * **Alternative 3:** Have cache stored in UI.
-
     * Pros:
-
         * No need for extraction using commands
         * Simple implementation
 
     * Cons:
-
         * Breaks the MVC pattern as UI now saves things
         * Decreased cohesion
 
