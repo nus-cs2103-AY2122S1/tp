@@ -73,7 +73,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setConthacksFilePath(Paths.get("data/conthacks.json"));
+        userPrefs.setConthacksFilePath(Paths.get("data/contHACKS.json"));
         return userPrefs;
     }
 
