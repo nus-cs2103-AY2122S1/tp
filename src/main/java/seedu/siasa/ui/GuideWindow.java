@@ -39,7 +39,8 @@ public class GuideWindow extends UiPart<Stage> {
             new Image("file:src/main/resources/images/guide/page_four.png")),
         FIVE("User Guide - Policies",
             "addpolicy: Adds a policy that is linked to a contact to your Siasa address book.\n"
-                + "addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% [NUM_OF_PMT] cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
+                + "addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% "
+                + "[NUM_OF_PMT] cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
                 + "Example: addpolicy n/Life Policy e/2021-12-13 p/1000 12 50 c/20 10 cl/1 ",
             new Image("file:src/main/resources/images/guide/page_five.png")),
         SIX("User Guide - Policies",
