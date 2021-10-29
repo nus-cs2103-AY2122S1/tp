@@ -157,17 +157,14 @@ Format: **`help`**
 
 You can add a person to the contact book.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-Name of a person must be provided!
-</div>
-
 Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
 </div>
 
-* The order of the fields does not matter
+* Only the `NAME` field of a person is _compulsory_, other fields are _optional_.
+* The order of the fields does not matter.
 * The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name and `HANDLENAME` is the identifying username for that platform.
 * Supported `PLATFORM` 
   * `ig` for Instagram
@@ -193,13 +190,6 @@ Examples:
 
 You can edit an existing person in the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-At least one field of the person must be changed!
-</div>
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-Index must be provided!
-</div>
-
 Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 
 * `FIELD_PREFIX/VALUE` can be any of the following:
@@ -213,9 +203,10 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
   * `r/REMARK`
   * `t/TAG`
 
+* At least one field of the person must be changed.
 * Edits the person at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed person list. 
-* The index **must be a positive integer** 1, 2, 3, …​
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
 * If duplicated fields are given, only the latest one will be taken, except for `s/SOCIAL_HANDLE` and `t/TAG`.
 * When editing tags, the existing tags of the person will be replaced (i.e adding of tags is not cumulative).
@@ -236,14 +227,10 @@ Examples:
 
 You can add a remark to a person in the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-Index must be provided!
-</div>
-
 Format: **`remark`** `INDEX r/VALUE`
 * Add a remark to the person at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing remark will be updated to the input remark.
 * If duplicated remarks are given, only the latest one will be taken.
 * You can remove a person’s remark by typing ` ` (i.e. empty) or `r/` without specifying any remark after it.
@@ -257,15 +244,11 @@ Examples:
 
 You can delete the specified person from the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-Index must be provided!
-</div>
-
 Format: **`delete`** `INDEX`
 
 * Deletes the person at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed person list. 
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
@@ -275,10 +258,6 @@ Examples:
 ### Deleting multiple person: `deletem`
 
 You can delete multiple person from the contact book using `KEYWORD`.
-
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-At least one keyword must be provided!
-</div>
 
 Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
@@ -293,7 +272,8 @@ Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
   * `r/REMARK`
   * `t/TAG`
 
-* The `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
+* At least one `KEYWORD` must be provided.
+* `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
 * As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
 * Persons matching at least one keyword will be deleted (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
   return `Hans Gruber`, `Bo Yang`)
@@ -319,10 +299,6 @@ Format: **`list`**
 
 You can find the specified persons using `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-At least one keyword must be provided!
-</div>
-
 Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
 * `FIELD_PREFIX/KEYWORD` can be any of the following:
@@ -336,6 +312,7 @@ Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
      * `r/REMARK`
      * `t/TAG`
 
+* At least one `KEYWORD` must be provided.
 * The `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
 * As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
 * Persons matching at least one keyword will be returned (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
@@ -353,10 +330,6 @@ Examples:
 
 You can sort all persons in the contact book by a specified field.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-Exactly one field must be provided!
-</div>
-
 Format: **`sort`** `FIELD_PREFIX/`
 
 * `FIELD_PREFIX/` can be any of the following:
@@ -370,6 +343,7 @@ Format: **`sort`** `FIELD_PREFIX/`
   * `r/`
   * `t/`
 
+* Exactly one field must be provided.
 * If field contains words, sort persons in ascending alphabetical order.
 * If field contains numbers, sort persons in ascending numeric order.
 
@@ -392,14 +366,10 @@ Examples:
 
 You can import your friends' contact book into your application.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-File must be in JSON format!
-</div>
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-File must be located in the `./data` directory in the same directory as `Socius.jar`.
-</div>
-
 Format: **`import`** `FILE_NAME.json`
+
+* File must be in JSON format!
+* File must be located in the `./data` directory in the same directory as `Socius.jar`.
 
 Examples:
 * **`import`** `amy.json` import a contact book via a file named `amy.json` into your existing application.
@@ -408,14 +378,10 @@ Examples:
 
 You can export your contact book and share it with your friends.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-File must be in JSON format!
-</div>
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-File must be located in the `./data` directory in the same directory as `Socius.jar`.
-</div>
-
 Format: **`export`** `FILE_NAME.json`
+
+* File must be in JSON format!
+* File must be located in the `./data` directory in the same directory as `Socius.jar`.
 
 Examples:
 
@@ -425,12 +391,9 @@ Examples:
 
 You can create command shortcut by aliasing it with custom `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
-Exactly one keyword must be provided!
-</div>
-
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
+* Exactly one `KEYWORD` must be provided.
 * The order of `KEYWORD` and `COMMAND` does not matter.
 * If `KEYWORD` coincides with command keyword such as `add`, it will not override the original command.
 
