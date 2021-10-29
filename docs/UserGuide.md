@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+<img src="images/contHACKS_logo.png" alt="logo"/>
+
 contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing your workload to focus on the more important task - teaching.
 
 ## Table of Contents
@@ -16,7 +18,9 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 * [Walk-through](#walkthrough)
 
 * [Features](#features)
-
+  * [General](#general)
+    * [Accessing the help page: `help`](#help)
+    * [Exiting the app: `exit`](#exit)
   * [Managing contacts](#managing-contacts)
     * [Adding a contact: `add`](#add)
     * [Editing a contact: `edit`](#edit)
@@ -33,12 +37,9 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
     * [Listing all lessons: `listc`](#listc)
     * [Clearing all lessons: `clearc`](#clearc)
 
-  * [Accessing the help page: `help`](#help)
-  * [Exiting the app: `exit`](#exit)
-
-* [Saving the data](#saving-data)
-
-* [Editing the data file](#editing-data)
+  * [Managing data](#managing-data)
+    * [Saving the data](#saving-data)
+    * [Editing the data file](#editing-data)
 
 * [Command Summary](#summary)
 
@@ -49,6 +50,11 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 ### How to navigate <a name="how-to-navigate"></a>
 
 ### Meaning of icons <a name="meaning-of-icons"></a>
+
+| Icon | Description |
+|---|---|
+|:information_source:| This icon indicates that some extra information is provided.|
+|:exclamation:| This icon indicates that the information provided is **important**. |
 
 ### Formatting used <a name="formatting"></a>
 
@@ -123,6 +129,28 @@ Some example commands you can try:
 
 ## Features <a name="features"></a>
 
+### General <a name="general"></a>
+
+#### Accessing the help page : `help` <a name="help"></a>
+
+Shows a message explaining how to access the help page.
+
+Format: `help`
+
+Command aliases: `man` `h`
+
+<img src="images/HelpCommand.png" width="800px">
+
+#### Exiting the program : `exit` <a name="exit"></a>
+
+Exits the program.
+
+Format: `exit`
+
+Command aliases: `quit` `q`
+
+***
+
 ### Managing contacts <a name="managing-contacts"></a>
 
 #### Adding a contact: `add` <a name="add"></a>
@@ -173,17 +201,19 @@ Delete the specified contact(s) from contHACKS.
 
 Format: `delete INDEX`/ `delete INDEX_START-INDEX_END`
 
-* Deletes the specified contact(s) at the specified index(es) (inclusive)
-* `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`
+* Deletes the specified contact(s) at the specified index(es) including `INDEX_END` and `INDEX_START`.
+* `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`.
 
-Format: `delete m/MODULE_CODE`
+Format: `delete m/MODULE_CODE`/`delete m/MODULE_CODE LESSONS_CODE`
 
 * Delete all contacts associated with a module code using `m/MODULE_CODE`.
+* Delete all contact associated with a lesson code under the module using `m/MODULE_CODE LESSONS_CODE`.
 
 Examples:
-* `delete 2`: deletes the 2nd contact
-* `delete 2-5`: deletes the 2nd, 3rd, 4th and 5th contacts
-* `delete m/CS2103T`: deletes all the contacts from CS2103T
+* `delete 2`: Deletes the 2nd contact in the displayed list.
+* `delete 2-5`: Deletes the 2nd, 3rd, 4th and 5th contacts in the displayed list.
+* `delete m/CS2103T`: Deletes all the contacts with the module code CS2103T.
+* `delete m/CS2103T T10`: Deletes all the contacts with both the module code CS2103T and lesson code T10.
 
 Command aliases: `del` `rm` `d`
 
@@ -194,7 +224,7 @@ Command aliases: `del` `rm` `d`
 Finds a contact by specifying either the name/module code(s).
 
 Format: `find n/NAME`/`find m/MODULE_CODE(S)`
-* Can only search by name or module code(s), but not both at once <br> e.g. You cannot perform `find n/Ben m/CS2040S`
+* Can only search by name or module code(s), but not both at once <br> i.e. You cannot perform `find n/Ben m/CS2040S`
 * The search is case-insensitive <br> e.g `ben` will match `Ben`
 * The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
 * Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
@@ -240,13 +270,11 @@ Adds a lesson to contHACKS.
 Format: `addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`
 
 * All the parameters are **compulsory** except for remark
-
-* Day is in ISO week format <br> e.g. 2 equals Tuesday, 5 equals Friday
-
-* Start time and end time are in HH:MM format
+* Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
+* Start time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Module code and lesson code are seperated by white spaces. The lesson start time and end time are seperated by white spaces as well.
+Module code and lesson code are seperated by white spaces. Lesson start time and end time are seperated by white spaces as well.
 </div>
 
 Examples:
@@ -259,13 +287,12 @@ Command alias: `ac`
 
 #### Editing a lesson: `editc` <a name="editc"></a>
 
-Updates the information of a lesson.
-
 Edits the lesson at the specified index in the currently viewed list.
-* At least one of the fields must be provided.
-* Existing values of the fields specified will be erased and updated to the input values
 
 Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`
+
+* At least one of the fields must be provided.
+* Existing values of the fields specified will be erased and updated to the input values
 
 Examples:
 * `editc 1 m/CS2100 B05`: Edits the module of the 1st lesson to be `CS2100 B05`
@@ -280,9 +307,46 @@ Command aliases: `updatec` `ec`
 
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
 
+Deletes the specified lesson(s) from contHACKS.
+
+Format: `deletec INDEX`/`deletec INDEX_START-INDEX_END`
+
+* Deletes the specified lesson(s) at the specified index(es) including the `INDEX_START` and `INDEX_END`.
+* `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`.
+
+Format: `deletec m/MODULE_CODE`
+
+* Deletes all contacts associated with a module code using `m/MODULE_CODE`.
+
+Examples:
+* `deletec 1`: Deletes the 1st lesson in the displayed list.
+* `deletec 1-3`: Deletes 1st, 2nd and 3rd lesson in the displayed list.
+* `deletec m/CS2103T`: Deletes all the lessons with CS2103T module code.
+
+Command aliases: `delc` `rmc` `dc`
+
 <img src="images/DeleteLessonCommand.png" width="800px">
 
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
+
+Finds a contact by specifying the module code(s)/day(s)/start time(s).
+
+Format: `findc m/MODULE_CODE(S)`/`findc d/DAY(S)`/`findc t/START_TIME(S)`
+* Can only search using one prefix at a time <br> i.e. You cannot perform `findc m/CS2040S d/2`
+* The search is case-insensitive <br> e.g `cs2040` will match `CS2040`
+* Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
+* Start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
+* If multiple keywords are specified for the search, any lesson that matches at least one of the keywords will be returned <br>
+  e.g. `findc m/CS2030 CS2040` will return lessons that are of module `CS2030` or `CS2040` <br>
+  e.g. `findc d/2 3` will return lessons that are on Tuesday or Wednesday <br>
+  e.g. `findc t/10:00 15:00` will return lessons that start at either timings `10:00` or `15:00`
+
+Examples:
+* `findc m/CS2030 CS2040`: Search lessons of modules `CS2030` or `CS2040`
+* `findc d/2`: Search lessons that falls on Tuesdays
+* `findc t/14:00`: Search lessons that starts at `14:00`
+
+Command alias: `fc`
 
 <img src="images/FindLessonCommand.png" width="800px">
 
@@ -306,31 +370,13 @@ Command aliases: `clrc` `cc`
 
 ***
 
-### Accessing the help page : `help` <a name="help"></a>
+### Managing Data <a name="managing-data"></a>
 
-Shows a message explaining how to access the help page.
-
-Format: `help`
-
-Command aliases: `man` `h`
-
-<img src="images/HelpCommand.png" width="800px">
-
-### Exiting the program : `exit` <a name="exit"></a>
-
-Exits the program.
-
-Format: `exit`
-
-Command aliases: `quit` `q`
-
-***
-
-### Saving the data <a name="saving-data"></a>
+#### Saving the data <a name="saving-data"></a>
 
 Contact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file <a name="editing-data"></a>
+#### Editing the data file <a name="editing-data"></a>
 
 contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -338,15 +384,161 @@ contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json
 If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file at the next run.
 </div>
 
+***
+
 ## Command Summary <a name="summary"></a>
 
-| Command           | Format                                                                                                       | Example                   |
-|-------------------|--------------------------------------------------------------------------------------------------------------| --------------------------|
-| `help` <br>`man` <br> `h`   | `help`                                                                                             | `help`                    |
-| `add` <br> `a`           | `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`          | `add n/Ben            e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`|
-| `list` <br> `ls`         | `list`                                                                                                | `list`                |
-| `find` <br> `f`          | `find n/NAME`<br>`find m/MODULE_CODE(S)`                                                              | `find n/Ben`<br>`find m/CS2103T` |
-| `edit` <br> `update`<br> `e` | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
-| `delete`<br> `del` <br> `rm` <br>`d`  | `delete INDEX`<br>`delete INDEX_START-INDEX_END`<br>`delete m/MODULE_CODE`               | `delete 2`<br>`delete 2-5`<br>`delete m/CS2103T`|
-| `clear` <br> `clr`       | `clear`                                                                                               | `clear`                    |
-| `exit` <br> `quit` <br> `q`   | `exit`                                                                                           | `exit`                     |
+<table> 
+  <tr>
+    <th> Category</th>
+    <th> Action  </th>
+    <th> Command </th>
+    <th width="350"> Format  </th>
+    <th width="350"> Example </th>
+  </tr>
+
+  <tr>
+    <td rowspan="2"> General</td>
+    <td> Accessing the help page</td>
+    <td>
+
+`help`<br>`man`<br>`h`</td>
+    <td>
+
+`help`</td>
+    <td>
+
+`help`</td>
+  </tr>
+
+  <tr>
+    <td> Exiting the app</td>
+    <td>
+    
+`exit`<br>`quit`<br>`q`</td>
+    <td>
+
+`exit`</td>
+    <td>
+
+`exit`</td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Managing contacts</td>
+    <td> Adding a contact</td>
+    <td>
+
+`add`<br>`a`</td>
+    <td>`add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`</td>
+    <td>`add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`</td>
+  </tr>
+
+  <tr>
+      <td> Editing a contact</td>
+      <td>
+
+`edit`<br>`update`<br>`e`</td>
+      <td>`edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`</td>
+      <td>`edit 1 p/91234567 e/ben321@gmail.com`</td>
+  </tr>
+
+  <tr>
+      <td> Deleting a contact / contacts</td>
+      <td>
+
+`delete`<br>`del`<br>`rm`<br>`d`</td>
+      <td>`delete INDEX`<br>`delete INDEX_START-INDEX_END`<br>`delete m/MODULE_CODE`</td>
+      <td>`delete 2`<br>`delete 2-5`<br>`delete m/CS2103T`</td>
+  </tr>
+
+  <tr>
+      <td> Finding a contact / contacts</td>
+      <td>
+
+`find`<br>`f`<br></td>
+      <td>`find n/NAME`<br>`find m/MODULE_CODE(S)`</td>
+      <td>`find n/Ben`<br>`find m/CS2103T`</td>
+  </tr>
+
+  <tr>
+      <td> Listing all contacts</td>
+      <td>
+
+`list`<br>`ls`</td>
+      <td>
+
+`list`</td>
+      <td>
+
+`list`</td>
+  </tr>
+
+  <tr>
+      <td> Clearing all contacts</td>
+      <td>
+
+`clear`<br>`clr`<br>`c`</td>
+      <td>
+
+`clear`</td>
+      <td>
+
+`clear`</td>
+  </tr>
+
+<tr>
+    <td rowspan="6"> Managing lesson</td>
+    <td> Adding a lesson</td>
+    <td>
+
+`addc`<br>`ac`</td>
+    <td>`addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`</td>
+    <td>`addc m/CS2103T T12 d/4 t/09:00 10:00 r/Online`</td>
+  </tr>
+  <tr>
+      <td> Editing a lesson</td>
+      <td>
+
+`editc`<br>`updatec`<br>`ec`</td>
+      <td>`editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`</td>
+      <td>`editc 5 m/CS2100 B05 d/3 t/10:00 12:00 r/COM01-0120`</td>
+  </tr>
+  <tr>
+      <td> Deleting a lesson / lessons</td>
+      <td>
+
+`deletec`<br>`delc`<br>`rmc`<br>`dc`</td>
+      <td>
+`deletec INDEX`<br>
+`deletec INDEX_START-INDEX_END`<br>
+`deletec m/MODULE_CODE`</td>
+      <td>`deletec 1`<br>`deletec 1-3`<br>`deletec m/CS2103T`</td>
+  </tr>
+  <tr>
+      <td> Finding a lesson / lessons</td>
+      <td>
+
+`findc`<br>`fc`</td>
+      <td>`findc m/MODULE_CODE(S)`
+`findc d/DAY(S)`<br>
+`findc t/START_TIME(S)`</td>
+      <td>`findc m/CS2030 CS2040`<br>`findc d/2 3`<br>`findc t/10:00 15:00`</td>
+  </tr>
+  <tr>
+      <td> Listing all lessons</td>
+      <td>
+
+`listc`<br>`lc`</td>
+      <td>`listc`</td>
+      <td>`listc`</td>
+  </tr>
+  <tr>
+      <td> Clearing all lessons</td>
+      <td>
+
+`clearc`<br>`clrc`<br>`cc`</td>
+      <td>`clearc`</td>
+      <td>`clearc`</td>
+  </tr>
+</table>
