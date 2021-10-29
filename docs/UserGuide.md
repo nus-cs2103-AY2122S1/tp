@@ -324,8 +324,7 @@ fav 1
 
 ## Setting a Contact as Unfavourite - `unfav`
 
-Helps to set a particular Student Contact as an Unfavourite, only if it
-was set as a Favourite earlier.
+Helps to set a particular Student Contact as an Unfavourite.
 
 Format:
 
