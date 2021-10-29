@@ -15,29 +15,29 @@ This project is based on the AB3 project created by the [SE-EDU initiative](http
         - [Viewing help : `help`](#viewing-help--help)
         - [Client Commands](#client-commands)
             - [Listing all clients : `list`](#listing-all-clients--list)
-            - [Adding a client : `add`](#adding-a-client-add)
+            - [Adding a client : `add`](#adding-a-client--add)
             - [Deleting a client : `delete`](#deleting-a-client--delete)  
             - [Editing a client : `edit`](#editing-a-client--edit)
-            - [Locating clients by name : `find`](#locating-clients-by-name-find)
+            - [Locating clients by name : `find`](#locating-clients-by-name--find)
         - [Task Commands](#task-commands)
             - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
             - [Adding a task : `addtask`](#adding-a-task--addtask)
             - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
             - [Editing a task : `edittask`](#editing-a-task--edittask)
             - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
-            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords-findtask)
-            - [Listing completed tasks : `completedtasks`](#listing-completed-tasks-completedtasks)
-            - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks-incompletetasks)
+            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
+            - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
+            - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
         - [Order Commands](#order-commands)
-            - [Listing all orders : `listorder`](#listing-all-orders-listorder)
-            - [Adding an order : `addorder`](#adding-an-order-addorder)
-            - [Deleting an order : `deleteorder`](#deleting-an-order-deleteorder)
-            - [Marking an order as complete : `markorder`](#marking-an-order-as-complete-markorder)
-            - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords-findorder)
-            - [Listing completed orders : `completedorders`](#listing-completed-orders-completedorders)
-            - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders-incompleteorders)
-            - [Sorting orders : `sortorders`](#sorting-orders-sortorders)
-            - [Viewing total orders : `totalorders`](#viewing-total-orders-totalorders)
+            - [Listing all orders : `listorder`](#listing-all-orders--listorder)
+            - [Adding an order : `addorder`](#adding-an-order--addorder)
+            - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
+            - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
+            - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords--findorder)
+            - [Listing completed orders : `completedorders`](#listing-completed-orders--completedorders)
+            - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders--incompleteorders)
+            - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
+            - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
         - [Clearing all entries : `clear`](#clearing-all-entries--clear)
         - [Exiting the program : `exit`](#exiting-the-program--exit)
         - [Saving the data](#saving-the-data)
@@ -123,7 +123,7 @@ Shows a list of all clients in the application.
 
 Format: `list`
 
-### Adding a client: `add`
+### Adding a client : `add`
 
 Adds a client to the application.
 
@@ -168,7 +168,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Locating clients by name: `find`
+### Locating clients by name : `find`
 
 Finds clients whose names contain any of the given keywords.
 
@@ -257,7 +257,7 @@ Format: `marktask INDEX`
 Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd client in the application.
 
-### Finding tasks by keywords: `findtask`
+### Finding tasks by keywords : `findtask`
 
 Finds tasks whose label, date or task tag contain any of the given keywords.
 
@@ -274,13 +274,13 @@ Examples:
 
 ![result for 'findtask SO1'](images/findtaskSO1.png)
 
-### Listing completed tasks: `completedtasks`
+### Listing completed tasks : `completedtasks`
 
 List all the completed tasks.
 
 Format: `completedtasks`
 
-### Listing incomplete tasks: `incompletetasks`
+### Listing incomplete tasks : `incompletetasks`
 
 List all the incomplete tasks.
 
@@ -290,11 +290,11 @@ Format: `incompletetasks`
 
 ## Order Commands
 
-### Listing all orders: `listorder`
+### Listing all orders : `listorder`
 
 Shows a list of all orders in the application.
 
-### Adding an order: `addorder`
+### Adding an order : `addorder`
 
 Adds an order to the application.
 
@@ -304,7 +304,7 @@ Examples:
 * `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
 * `addorder l/school uniform c/John a/15.00 d/15 October 2021`
 
-### Deleting an order: `deleteorder`
+### Deleting an order : `deleteorder`
 
 Deletes an order from the application.
 
@@ -316,14 +316,14 @@ Format: `deleteorder INDEX`
 
 Note that this will also delete all tasks tagged to the deleted order.
 
-### Marking an order as complete: `markorder`
+### Marking an order as complete : `markorder`
 
 Format: `markorder INDEX`
 * Marks the order at the specified `INDEX` as completed
 * The index refers to the index number shown in the displayed order list.
 * The index must be a positive integer 1, 2, 3
 
-### Finding orders by keywords: `findorder`
+### Finding orders by keywords : `findorder`
 
 Finds orders whose customer, label, date or sales id contain any of the given keywords.
 
@@ -339,19 +339,19 @@ Examples:
 * `findorder SO1` returns order with id of `SO1`
 
 
-### Listing completed orders: `completedorders`
+### Listing completed orders : `completedorders`
 
 List all the completed orders.
 
 Format: `completedorders`
 
-### Listing incomplete orders: `incompleteorders`
+### Listing incomplete orders : `incompleteorders`
 
 List all the incomplete orders.
 
 Format: `incompleteorders`
 
-### Sorting orders: `sortorders`
+### Sorting orders : `sortorders`
 
 Sorts all orders based on a chosen field and arrangement.
 
@@ -365,11 +365,12 @@ Format: `sortorders f/FIELD o/ORDERING`
   * Ascending, identified with an "asc" or "ascending".
   * Descending, identified with a "desc" or "descending".
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Adding / Deleting an order reverts the list to the default ordering.</div>
+<div markdown="span" class="alert alert-primary">
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
-The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
+**:information_source: Note:** <br>
+* Adding / Deleting an order reverts the list to the default ordering.
+* The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
+
 </div>
 
 Examples:
@@ -378,7 +379,7 @@ Examples:
 * `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 * `sortorders f/amount` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 
-### Viewing total orders: `totalorders`
+### Viewing total orders : `totalorders`
 
 Shows the total orders for each client in the application.
 
