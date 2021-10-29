@@ -184,6 +184,65 @@ Examples:
 * `liststu` followed by `deletestu 2` deletes the 2nd student in the student list.
 * `findstu Betsy` followed by `deletestu 1` deletes the 1st student in the results of the `findstu` command.
 
+## Student Marks Commands
+
+There are 6 types of Marks that can be assigned to a student, for the numerous sessions that the students attends. It is meant to be a class participation score, but its use can be flexible. The marks that can be assigned are:
+
+* Poor
+* Low
+* Avg
+* Good
+* High
+* Excellent
+
+### Adding Latest Mark: `addlm`
+
+Adds the mark for latest session.
+
+Format: `addlm INDEX m/Mark`
+
+* Adds mark as the mark for latest session.
+* Mark is not case-sensitive.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `liststu` followed by`addlm 2 m/Low` assigns LOW mark to the latest session for 2nd student in the student list.
+* `findstu Betsy` followed by `addlm 1 m/excellent` assigns EXCELLENT mark to the latest session for 1st student in the results of `findstu`.
+
+### Deleting Latest Mark: `deletelm`
+
+Deletes the mark for latest session.
+
+Format: `deletelm INDEX`
+
+* Deletes mark as the mark for latest session.
+* Student has to have some marks assigned previously.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `liststu` followed by `addlm 2 m/Low`  and `deletelm 2` deletes the LOW mark assigned to the 2nd student in the student list.
+* `findstu Betsy` followed by `deletelm 1` deletes latest sessions' mark for 1st student in the results of `findstu`.
+
+### Deleting All Marks: `deleteam`
+
+Deletes the all marks for student.
+
+Format: `deleteam INDEX`
+
+* Deletes all marks.
+* Student has to have some marks assigned previously.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `liststu` followed by `addlm 2 m/Low`  and `deleteam 2` deletes all marks assigned to the 2nd student in the student list.
+* `findstu Betsy` followed by `deleteam 1` deletes all sessions' mark for 1st student in the results of `findstu`.
+
 ### Clearing all students : `clear`
 
 Clears all students from ClassMATE. Below is how it would look like.
@@ -244,8 +303,8 @@ Format: `findc KEYWORD [MORE_KEYWORDS]`
 * The search is not absolute. e.g `G0` will match `G06`
 
 Examples:
-* `findc A02` returns `A02` if it exists
-* `findc E` returns `E01`, `E02`, `E03`<br>
+* `findc G02` returns `G02` if it exists
+* `findc G` returns `G01`, `G02`, `G03`<br>
 
 ### Deleting a class: `deletec`
 
@@ -264,6 +323,14 @@ Examples:
 ## Tutorial Group Commands
 
 These are the commands that involve tutorial groups!
+### Adding a group: `addcg`
+
+Adds a group to a particular tutorial class
+
+Format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
+
+Examples:
+* `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
 * Group Type refers to the assignment that the group will work together for
 
@@ -294,17 +361,30 @@ Format: `deletecg c/CLASS_CODE tp/GROUP_TYPE gn/GROUP_NUMBER`
 Examples:
 * `deletecg c/G06 type/OP2 gn/1` deletes the `OP2` Group `1` of class `G06`
 
-## Adding Student to a group: `addsg`
+### Adding Student to a group: `addsg`
 
 Adds student to a group.
 
-Format: `addsg INDEX c/CLASS_CODE tp/GROUP_TYPE gn/GROUP_NUMBER`
+Format: `addsg INDEX gn/GROUP_NUMBER c/CLASSCODE type/TYPE`
 
 * Adds the student to a group in the class
 
 Example:
-* `liststu c/G06`shows the students in class G06.
-  `addsg 1 c/G06 tp/OP1 g/2` then adds the first student to `OP1` Group `2` in class `G06`
+* `liststu c/G06`shows that Betsy is a student in class G06, with Index 1.
+  `addsg 1 g/A c/G06 type/OP1` then adds the student at Index 1, Betsy, to OP1 Group A in class G06
+
+### Deleting Student from a group: `deletesg`
+
+Deletes a student from a group.
+
+Format: `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE`
+
+* Deletes the student from a group in the class
+* Type refers to the assignment that the group will work together for
+
+Example:
+* `liststu c/G06`shows that Betsy is a student in class G06 with Index 1.
+  `deletesg 1 g/A c/G06 type/OP1` then removes Betsy from OP1 Group A in class G06
 
 
 ### Exiting the program : `exit`
@@ -350,14 +430,16 @@ Action | Format, Examples
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
-**Add Tutorial Group** | `addcg gn/GROUP_NAME c/CLASS_CODE type/TYPE` <br> e.g.,`addsg n/Betsy tp/OP1 g/A`
-**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2` 
+**Add Tutorial Group** | `addcg gn/GROUP_NUMBER c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
+**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
+
 **List Tutorial Group** | `listg`
-**Add Student to Group** | `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]` <br> e.g., `addcg gn/Group 1 c/G01 type/OP1`
+**Add Student to Group** | `addsg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/1 c/G01 type/OP1`
+**Delete Student from Group** | `deletesg INDEX g/GROUP_NUMBER c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/1 c/G01 type/OP1`
 **Clear all students** | `clear`
 **Exit ClassMATE** | `exit`
 
 ## Glossary
 
 **Java 11** | Java is a programming language, more on it [here](https://en.wikipedia.org/wiki/Java_(programming_language)).
-**JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).
+**JSON** | a JSON file is an open standard file format, more on it [here](https://en.wikipedia.org/wiki/JSON).3
