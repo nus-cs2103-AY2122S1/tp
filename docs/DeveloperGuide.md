@@ -480,6 +480,7 @@ Use case ends.
 * `DelAppCommand`
 * `EditAppCommand`
 * `FindAppCommand`
+* `ListAppCommand`
 
 
 
