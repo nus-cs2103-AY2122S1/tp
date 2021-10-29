@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
 import seedu.address.commons.core.index.Index;
@@ -25,16 +24,15 @@ public class TdelCommandParser implements Parser<TdelCommand> {
     public TdelCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_TASK_ID, PREFIX_MEMBER_ID_DEL);
+                        args, PREFIX_TASK_ID);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TASK_ID, PREFIX_MEMBER_ID_DEL)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TASK_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TdelCommand.MESSAGE_USAGE));
         }
 
-        Index taskID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_ID).get());
-        Index memberId = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID_DEL).get());
+        Index taskId = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_ID).get());
 
-        return new TdelCommand(memberId, taskID);
+        return new TdelCommand(taskId);
     }
 }

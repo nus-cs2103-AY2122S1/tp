@@ -62,9 +62,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_del_task() throws Exception {
         Index validMemberId = Index.fromOneBased(1);
-        Index validTaskID = Index.fromOneBased(1);
-        TdelCommand command = (TdelCommand) parser.parseCommand(TaskUtil.getTdelCommand(validTaskID, validMemberId));
-        assertEquals(new TdelCommand(validMemberId, validTaskID), command);
+        Index validTaskId = Index.fromOneBased(1);
+        TdelCommand command = (TdelCommand) parser.parseCommand(TaskUtil.getTdelCommand(validTaskId));
+        assertEquals(new TdelCommand(validTaskId), command);
     }
 
     @Test
