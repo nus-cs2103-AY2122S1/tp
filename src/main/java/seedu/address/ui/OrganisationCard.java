@@ -51,7 +51,9 @@ public class OrganisationCard extends UiPart<Region> {
             persons.getChildren().add(new Label(index + ". " + person.getName() + " "));
             index.addAndGet(1);
         });
+        System.out.println(index);
         index.set(1);
+        System.out.println(index);
     }
 
     @Override
