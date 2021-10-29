@@ -344,13 +344,157 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 
 ## Command Summary <a name="summary"></a>
 
-| Command           | Format                                                                                                       | Example                   |
-|-------------------|--------------------------------------------------------------------------------------------------------------| --------------------------|
-| `help` <br>`man` <br> `h`   | `help`                                                                                             | `help`                    |
-| `add` <br> `a`           | `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`          | `add n/Ben            e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`|
-| `list` <br> `ls`         | `list`                                                                                                | `list`                |
-| `find` <br> `f`          | `find n/NAME`<br>`find m/MODULE_CODE(S)`                                                              | `find n/Ben`<br>`find m/CS2103T` |
-| `edit` <br> `update`<br> `e` | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
-| `delete`<br> `del` <br> `rm` <br>`d`  | `delete INDEX`<br>`delete INDEX_START-INDEX_END`<br>`delete m/MODULE_CODE`               | `delete 2`<br>`delete 2-5`<br>`delete m/CS2103T`|
-| `clear` <br> `clr`       | `clear`                                                                                               | `clear`                    |
-| `exit` <br> `quit` <br> `q`   | `exit`                                                                                           | `exit`                     |
+<table> 
+  <tr>
+    <th> Category</th>
+    <th> Action  </th>
+    <th> Command </th>
+    <th width="350"> Format  </th>
+    <th width="350"> Example </th>
+  </tr>
+
+  <tr>
+    <td rowspan="2"> General</td>
+    <td> Accessing the help page</td>
+    <td>
+
+`help`<br>`man`<br>`h`</td>
+    <td>
+
+`help`</td>
+    <td>
+
+`help`</td>
+  </tr>
+
+  <tr>
+    <td> Exiting the app</td>
+    <td>
+    
+`exit`<br>`quit`<br>`q`</td>
+    <td>
+
+`exit`</td>
+    <td>
+
+`exit`</td>
+  </tr>
+
+  <tr>
+    <td rowspan="6"> Managing contacts</td>
+    <td> Adding a contact</td>
+    <td>
+
+`add`<br>`a`</td>
+    <td>`add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`</td>
+    <td>`add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`</td>
+  </tr>
+
+  <tr>
+      <td> Editing a contact</td>
+      <td>
+
+`edit`<br>`update`<br>`e`</td>
+      <td>`edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`</td>
+      <td>`edit 1 p/91234567 e/ben321@gmail.com`</td>
+  </tr>
+
+  <tr>
+      <td> Deleting a contact / contacts</td>
+      <td>
+
+`delete`<br>`del`<br>`rm`<br>`d`</td>
+      <td>`delete INDEX`<br>`delete INDEX_START-INDEX_END`<br>`delete m/MODULE_CODE`</td>
+      <td>`delete 2`<br>`delete 2-5`<br>`delete m/CS2103T`</td>
+  </tr>
+
+  <tr>
+      <td> Finding a contact / contacts</td>
+      <td>
+
+`find`<br>`f`<br></td>
+      <td>`find n/NAME`<br>`find m/MODULE_CODE(S)`</td>
+      <td>`find n/Ben`<br>`find m/CS2103T`</td>
+  </tr>
+
+  <tr>
+      <td> Listing all contacts</td>
+      <td>
+
+`list`<br>`ls`</td>
+      <td>
+
+`list`</td>
+      <td>
+
+`list`</td>
+  </tr>
+
+  <tr>
+      <td> Clearing all contacts</td>
+      <td>
+
+`clear`<br>`clr`<br>`c`</td>
+      <td>
+
+`clear`</td>
+      <td>
+
+`clear`</td>
+  </tr>
+
+<tr>
+    <td rowspan="6"> Managing lesson</td>
+    <td> Adding a lesson</td>
+    <td>
+
+`addc`<br>`ac`</td>
+    <td>`addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`</td>
+    <td>`addc m/CS2103T T12 d/4 t/09:00 10:00 r/Online`</td>
+  </tr>
+  <tr>
+      <td> Editing a lesson</td>
+      <td>
+
+`editc`<br>`updatec`<br>`ec`</td>
+      <td>`editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`</td>
+      <td>`editc 5 m/CS2100 B05 d/3 t/10:00 12:00 r/COM01-0120`</td>
+  </tr>
+  <tr>
+      <td> Deleting a lesson / lessons</td>
+      <td>
+
+`deletec`<br>`delc`<br>`rmc`<br>`dc`</td>
+      <td>
+`deletec INDEX`<br>
+`deletec INDEX_START-INDEX_END`<br>
+`deletec m/MODULE_CODE`</td>
+      <td>`deletec 1`<br>`deletec 1-3`<br>`deletec m/CS2103T`</td>
+  </tr>
+  <tr>
+      <td> Finding a lesson / lessons</td>
+      <td>
+
+`findc`<br>`fc`</td>
+      <td>`findc m/MODULE_CODE(S)`
+`findc d/DAY(S)`<br>
+`findc t/START_TIME(S)`</td>
+      <td>`findc m/CS2030 CS2040`<br>`findc d/2 3`<br>`findc t/10:00 15:00`</td>
+  </tr>
+  <tr>
+      <td> Listing all lessons</td>
+      <td>
+
+`listc`<br>`lc`</td>
+      <td>`listc`</td>
+      <td>`listc`</td>
+  </tr>
+  <tr>
+      <td> Clearing all lessons</td>
+      <td>
+
+`clearc`<br>`clrc`<br>`cc`</td>
+      <td>`clearc`</td>
+      <td>`clearc`</td>
+  </tr>
+</table>
