@@ -69,7 +69,7 @@ If your command is of the wrong [format](#23-command-format), TutorAid will try 
 The Console is used by TutorAid to communicate with you. Whenever a command is carried out, TutorAid will let you know whether the operation was successful. It may also provide you with details about the changes made during the operation.
 
 #### Student Panel
-The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their name and their index number. These modes can be set via [the list command](#listing-all-students--list). In the labelled screenshot, the Student Panel is in Minimal view.
+The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their name and their index number. These modes can be set via [the list command](#listing-all-students-and-lessons-list). In the labelled screenshot, the Student Panel is in Minimal view.
 
 > :bulb: The **index number** is important for many commands in TutorAid.
 
@@ -413,9 +413,10 @@ Examples:
 
 # 6. Command summary
 
-## 6.1 Student commands
+### 6.1 Student commands
 
-Action | Format, Examples
+|---
+Action | Format and Examples
 --------|------------------
 **[Add student](#adding-a-student-add)** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **[Delete student](#deleting-a-student--delete)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
@@ -426,26 +427,31 @@ Action | Format, Examples
 **[Unset payment made](#unsetting-payment-made-unpaid)** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **[Add Progress](#adding-progress-for-a-student--add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **[Delete Progress](#deleting-progress-from-a-student--del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
-***
-## 6.2 Lesson commands
-Action | Format, Examples
+
+### 6.2 Lesson commands
+
+|---
+Action | Format and Examples
 --------|------------------
 **[Add lesson](#adding-a-lesson-add--l)** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
 **[Delete lesson](#deleting-a-lesson--del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
 **[Edit lesson](#editing-a-lesson-edit--l)** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
 **[View lesson](#viewing-a-lesson--view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
 **[Find lesson](#locating-students-or-lessons-by-name-find--s--find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
-***
-## 6.3 Student and Lesson commands
-Action | Format, Examples
+
+### 6.3 Student and Lesson commands
+
+|---
+Action | Format and Examples
 --------|------------------
 **[List](#listing-all-students-and-lessons-list)** | `list [-a]`<br>e.g., `list`, `list -a`
 **[Add students to lessons](#adding-students-to-lessons-add--sl)** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
 **[Delete students from lessons](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
 **[Clear](#clearing-all-entries--clear)** | `clear`
-***
-## 6.4 Other commands
-Action | Format, Examples
+
+### 6.4 Other commands
+|---
+Action | Format and Examples
 --------|------------------
 **[Help](#viewing-help--help)** | `help`
 **[Exit](#exiting-the-program--exit)** | `exit`
