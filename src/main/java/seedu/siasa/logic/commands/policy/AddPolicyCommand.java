@@ -121,7 +121,7 @@ public class AddPolicyCommand extends Command {
                 && title.equals(((AddPolicyCommand) other).title)
                 && price.equals(((AddPolicyCommand) other).price)
                 && expiryDate.equals(((AddPolicyCommand) other).expiryDate)
-                && commission.equals(((AddPolicyCommand) other).commission))
+                && commission.equals(((AddPolicyCommand) other).commission)
                 && index.equals(((AddPolicyCommand) other).index)
                 && paymentStructure.equals(((AddPolicyCommand) other).paymentStructure)
                 && coverageExpiryDate.equals(((AddPolicyCommand) other).coverageExpiryDate)
