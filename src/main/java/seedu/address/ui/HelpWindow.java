@@ -50,10 +50,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
-/**
- * Creates a window to show the user a table of commands.
- * Inspired by the HelpPage in https://github.com/greyguy21/ip/
- */
 public class HelpWindow extends AnchorPane {
     public static final String USER_GUIDE_URL = "https://ay2122s1-cs2103t-w10-1.github.io/tp/UserGuide.html";
     public static final String USER_GUIDE_MESSAGE = "For full details, refer to the user guide: " + USER_GUIDE_URL;
