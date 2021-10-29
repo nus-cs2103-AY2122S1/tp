@@ -557,7 +557,7 @@ the newly edited lesson rates.
 * **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the Fees Calculator will not deduct
 the fees of the cancelled lesson for you. Same for uncancelling a lesson that has passed, the fees will not be added back for you.
 * **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
-* **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date has passes,
+* **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
 the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
 
 <div style="page-break-after: always;"></div>
