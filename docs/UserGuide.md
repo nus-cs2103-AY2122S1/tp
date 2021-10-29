@@ -244,8 +244,8 @@ Format: `findc KEYWORD [MORE_KEYWORDS]`
 * The search is not absolute. e.g `G0` will match `G06`
 
 Examples:
-* `findc A02` returns `A02` if it exists
-* `findc E` returns `E01`, `E02`, `E03`<br>
+* `findc G02` returns `G02` if it exists
+* `findc G` returns `G01`, `G02`, `G03`<br>
 
 ### Deleting a class: `deletec`
 
@@ -269,7 +269,8 @@ Adds a group to a particular tutorial class
 
 Format: `addcg gn/GROUP_NAME c/CLASS_CODE type/GROUP_TYPE`
 
-Examples: `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
+Examples:
+* `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
 ### Listing all groups : `listg` [Coming Soon]
 
@@ -307,18 +308,31 @@ Format: `deletecg INDEX`
 Examples:
 * `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
 
-## Adding Student to a group: `addsg` [Coming Soon]
+### Adding Student to a group: `addsg`
 
 Adds student to a group.
 
-Format: `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]`
+Format: `addsg INDEX gn/GROUP_NAME c/CLASSCODE type/TYPE`
 
 * Adds the student to a group in the class
 * Type refers to the assignment that the group will work together for
 
 Example:
-* `liststu c/G06`shows that Betsy is a student in class G06.
-  `addsg n/Betsy tp/OP1 g/A` then adds a student called Betsy to OP1 Group A in class G06
+* `liststu c/G06`shows that Betsy is a student in class G06, with Index 1.
+  `addsg 1 g/A c/G06 type/OP1` then adds the student at Index 1, Betsy, to OP1 Group A in class G06
+
+### Deleting Student from a group: `deletesg`
+
+Deletes a student from a group.
+
+Format: `deletesg INDEX g/GROUP_NAME c/CLASSCODE type/TYPE`
+
+* Deletes the student from a group in the class
+* Type refers to the assignment that the group will work together for
+
+Example:
+* `liststu c/G06`shows that Betsy is a student in class G06 with Index 1.
+  `deletesg 1 g/A c/G06 type/OP1` then removes Betsy from OP1 Group A in class G06
 
 
 ### Exiting the program : `exit`
@@ -364,10 +378,11 @@ Action | Format, Examples
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
-**Add Tutorial Group** | `addcg gn/GROUP_NAME c/CLASS_CODE type/TYPE` <br> e.g.,`addsg n/Betsy tp/OP1 g/A`
+**Add Tutorial Group** | `addcg gn/GROUP_NAME c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
 **Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2` 
 **List Tutorial Group** | `listg`
-**Add Student to Group** | `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]` <br> e.g., `addcg gn/Group 1 c/G01 type/OP1`
+**Add Student to Group** | `addsg INDEX g/GROUP_NAME c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/Group 1 c/G01 type/OP1`
+**Delete Student from Group** | `deletesg INDEX g/GROUP_NAME c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/Group 1 c/G01 type/OP1`
 **Clear all students** | `clear`
 **Exit ClassMATE** | `exit`
 

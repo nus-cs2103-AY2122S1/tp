@@ -20,7 +20,7 @@ import seedu.address.model.tutorialgroup.TutorialGroup;
 
 
 public class DeleteStudentFromGroupCommand extends Command {
-    public static final String COMMAND_WORD = "removesg";
+    public static final String COMMAND_WORD = "deletesg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a student from a group in Classmate "
             + "by the index number used in the last person listing. "
