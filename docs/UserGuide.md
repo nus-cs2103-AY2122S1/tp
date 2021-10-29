@@ -139,10 +139,13 @@ Examples:
 </details>
 
 ### Listing all students : `list`
-
+<details markdown="1">
+<summary>
 Shows a list of all students in the students list.
+</summary>
 
 Format: `list`
+</details>
 
 ### Locating students by name: `student -f`
 <details markdown="1">
@@ -239,16 +242,16 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 Groups students by their names together.
 </summary>
 
-Format: `student -ag INDEX…​ n/GROUPNAME`
+Format: `student -a INDEX…​ n/GROUPNAME`
 
 * Groups students into a group specified at `GROUPNAME`
-* `-ag` refers to the add group command
+* `-a` refers to the add group command
 * You can specify as many index numbers as required.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -ag 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
+* `student -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
 </details>
 
 ### Deleting a group
@@ -257,15 +260,15 @@ Examples:
 Deletes a group of students.
 </summary>
 
-Format: `student -dg INDEX`
+Format: `student -d INDEX`
 
 * Deletes a group of students specified at `INDEX`
-* `-dg` refers to delete group command.
+* `-d` refers to delete group command.
 * The index refers to the index number shown in the displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -dg 5` deletes the group specified at the index 5.
+* `student -d 5` deletes the group specified at the index 5.
 </details>
 
 ### Adding a lesson to a group: `group -al`
@@ -306,8 +309,10 @@ Example:
 </details>
 
 ### Adding a task
-
+<details markdown="1">
+<summary>
 Adds a task to the task list.
+</summary>
 
 Format: `task -a n/NAME d/DEADLINE`
 
@@ -317,22 +322,13 @@ Format: `task -a n/NAME d/DEADLINE`
 
 Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
-
-### Viewing a task `[coming in v1.3]`
-
-Views a task in the task list.
-
-Format: `task -v INDEX`
-
-* Views a task with the index `INDEX`
-* `-v` refers to the view command
-
-Examples:
-* `task -v 2` shows the attributes of the 2nd task on the student’s task list
+</details>
 
 ### Editing a task `[coming in v1.3]`
-
+<details markdown="1">
+<summary>
 Edits a task in the task list.
+</summary>
 
 Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
@@ -342,11 +338,14 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/2021-12-31` edits the deadline to 20211231
+* `task -e 4 d/2021-12-31` edits the deadline to 31 December 2021
+</details>
 
-### Deleting a task `[coming in v1.3]`
-
-Deletes the specific task from the students' task list.
+### Deleting a task: `task -d`
+<details markdown="1">
+<summary>
+Deletes the specific task from the addressbook.
+</summary>
 
 Format: `task -d INDEX`
 
@@ -355,11 +354,44 @@ Format: `task -d INDEX`
 * The index refers to the index number shown in the displayed task list.
 
 Examples:
+
 * `task -d 1` deletes the task at index 1
+</details>
+
+### Listing all tasks `[coming in v1.3]`
+<details markdown="1">
+<summary>
+Shows a list of all the tasks in the task list. 
+</summary>
+
+Format: `task -l`
+</details>
+
+### Finding a task by name`[coming in v1.3]`
+<details markdown="1">
+<summary>
+Find tasks whose names contain any of the given keywords.
+</summary>
+
+Format: `task -f KEYWORD…​`
+
+* The search is case-insensitive. e.g `report` will match `Report`
+* The order of the keywords does not matter. e.g. `Report Lab` will match `Lab Report`
+* Only the name is searched.
+* Only full words will be matched e.g. `Rep` will not match `Report`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Report Submission` will return `Report 1`, `Lab Submission`
+
+Examples:
+* `student -f Report` returns `Report 1` and `Report Submission`
+* `student -f lab submission` returns `Lab Submission`, `Report Submission`<br>
+</details>
 
 ### Assigning tasks to students
-
+<details markdown="1">
+<summary>
 Assigns a specific task to students’ task list.
+</summary>
 
 Format: `task -as STUDENTINDEX TASKINDEX`
 
@@ -368,10 +400,13 @@ Format: `task -as STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -as 2 4` adds the task at the index 4 to the student at the index 2
+</details>
 
 ### Assigning tasks to groups
-
+<details markdown="1">
+<summary>
 Assigns a specific task to groups’ task list.
+</summary>
 
 Format: `task -ag GROUPINDEX TASKINDEX`
 
@@ -380,10 +415,13 @@ Format: `task -ag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -ag 2 4` adds the task at the index 4 to the group at the index 2
+</details>
 
 ### Unassigning tasks to students
-
+<details markdown="1">
+<summary>
 Unassigns a specific task from students’ task list.
+</summary>
 
 Format: `task -unas STUDENTINDEX TASKINDEX`
 
@@ -392,10 +430,13 @@ Format: `task -unas STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -unas 2 4` removes the task at the index 4 from the student at the index 2
+</details>
 
 ### Unassigning tasks to groups
-
+<details markdown="1">
+<summary>
 Unassigns a specific task from groups’ task list.
+</summary>
 
 Format: `task -unag GROUPINDEX TASKINDEX`
 
@@ -404,6 +445,37 @@ Format: `task -unag GROUPINDEX TASKINDEX`
 
 Examples:
 * `task -unag 2 4` removes the task at the index 4 from the group at the index 2
+</details>
+
+### Mark task as done by student
+<details markdown="1">
+<summary>
+Marks that a student has done a task.
+</summary>
+
+Format: `task -do STUDENTINDEX TASKINDEX`
+
+* Marks the task specified at index `TASKINDEX` as done by the “Student” object specified at index `STUDENTINDEX`.
+* `-do` refers to the "mark as done" command.
+
+Examples:
+* `task -do 2 4` marks the task at the index 4 as done by the student at the index 2
+</details>
+
+### Mark task as not done by student
+<details markdown="1">
+<summary>
+Marks that a student has not done a task.
+</summary>
+
+Format: `task -undo STUDENTINDEX TASKINDEX`
+
+* Marks the task specified at index `TASKINDEX` as not done by the “Student” object specified at index `STUDENTINDEX`.
+* `-undo` refers to the "mark as undone" command.
+
+Examples:
+* `task -undo 2 4` marks the task at the index 4 as not done by the student at the index 2
+</details>
 
 ### Clearing all entries : `clear`
 
@@ -467,5 +539,7 @@ Action | Format, Examples
 **Assign a task to a group** | `task -ag GROUPINDEX TASKINDEX​` <br> e.g., `task -ag 2 4`
 **Unassign a task from a student** | `task -unas STUDENTINDEX TASKINDEX​` <br> e.g., `task -unas 2 4`
 **Unassign a task from a group** | `task -unag GROUPINDEX TASKINDEX​` <br> e.g., `task -unag 2 4`
+**Mark task as done by student** | `task -do STUDENTINDEX TASKINDEX​` <br> e.g., `task -do 2 4`
+**Mark task as not done by student** | `task -undo STUDENTINDEX TASKINDEX​` <br> e.g., `task -undo 2 4`
 **Clear all entries** | `clear`
 **Exit** | `exit`
