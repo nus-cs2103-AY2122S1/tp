@@ -12,10 +12,16 @@ Notor is a desktop application for mentors to keep tabs on their mentees, **opti
 
 If you're new to Notor, hop over to [Quick Start](#Quick Start) to install and begin using it. If you already know what you want, use the Table of Contents to find the feature you are looking for, or the [Command Summary](#Command Summary) to view all commands available. If you've used Notor for a while and are looking to get the best out of Notor, 'level-up' by reading our [Tips on Using Notor](#Tips on Using Notor).
 
+Some terminology that might help:
+1. **List pane** : The panel located on the right, which is used to display the a list of persons or groups
+2. **View pane** : The panel on the left, used to view notes, such as general notes
+3. **Note Window**: The pop up window you may use to edit and add notes
+4. **Command Box**: The box on the left pane, underneath the view pane, where you may type commands.
+
 <div markdown="block" class="alert alert-info">
 This block is used to highlight information you shold pay attention to
 
-**information_source: Used when the following is information**<br> 
+**information_source: Used when the following is information**<br>
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -225,7 +231,7 @@ Examples:
 * `person 1 /remove g:Orbital sg:GroupA`
 * `p 1 /r g:Orbital sg:GroupA`
 
-#### Taking notes for a person: 
+#### Taking notes for a person:
 
 Pops up a note window to take note for an existing person.
 
@@ -268,7 +274,7 @@ Archive every person displayed in the list panel.
 Format: `person /archive`
 Advanced user Format: `p /ar`
 
-#### List Archived Persons** 
+#### List Archived Persons
 Show the list of archived Persons.
 
 Format: `person /listarchive`
@@ -424,8 +430,8 @@ Examples:
 
 ### _Find a group or subgroup_ : `group /find (g:KEYWORD)`
 
-Find all the groups with the keyword specified. This will search for the keyword within the group's name. 
-Only works when group/s are shown.
+Find all the groups with the keyword specified. This will search for the keyword within the group's name.
+Only works when group/s are shown in the list panel.
 
 Format:  `group /find n:QUERY_NAME`<br>
 Advanced user Format: `g /f n:QUERY_NAME`
