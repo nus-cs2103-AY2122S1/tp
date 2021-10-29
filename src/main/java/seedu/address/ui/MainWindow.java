@@ -192,6 +192,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private boolean isPunctuationKey(KeyCode keyCode) {
         KeyCode[] punctuationKeyCodes = {
+            KeyCode.SPACE, KeyCode.BACK_SPACE,
             KeyCode.BACK_QUOTE, KeyCode.MINUS, KeyCode.EQUALS, KeyCode.SLASH, // first row
             KeyCode.OPEN_BRACKET, KeyCode.CLOSE_BRACKET, KeyCode.BACK_SLASH, // second row
             KeyCode.SEMICOLON, KeyCode.QUOTE, KeyCode.COMMA, KeyCode.PERIOD, KeyCode.SLASH, // third row
@@ -207,7 +208,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private boolean isTextInputKeyCode(KeyCode keyCode) {
         return keyCode.isLetterKey() || keyCode.isDigitKey()
-                || keyCode.isWhitespaceKey() || keyCode.equals(KeyCode.BACK_SPACE)
                 || isPunctuationKey(keyCode);
     }
 
