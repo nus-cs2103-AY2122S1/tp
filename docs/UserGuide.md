@@ -155,6 +155,18 @@ Clear all policies from a person.
 
 Format: `clearpolicy PERSON_INDEX`
 
+### Download useful statistics as CSV : `download` 
+
+Download a CSV file containing useful statistics for the user. This includes
+- Most valuable clients + commission from them
+- Number of policies per customer
+- Average number of policies per customer
+- Total commission
+
+The file is stored in '/data' folder
+
+Format: `download`
+
 ### Show Expiring Policies: `expiringpolicy`
 
 Show policies that are expiring in a month.
@@ -195,6 +207,7 @@ Action | Format, Examples
 **List Person's Policies** | `clientpolicy PERSON_INDEX`
 **Clear Person's Policies** | `clearpolicy PERSON_INDEX`
 **Clear All** | `clear`
+**Download** | `download`
 **Show Expiring Policies** | `expiringpolicy`
 **Help** | `help`
 **Exit** | `exit`

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.siasa.logic.commands.ClearCommand;
 import seedu.siasa.logic.commands.Command;
+import seedu.siasa.logic.commands.DownloadCommand;
 import seedu.siasa.logic.commands.EditCommand;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
@@ -94,6 +95,9 @@ public class SiasaParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case DownloadCommand.COMMAND_WORD:
+            return new DownloadCommand();
 
         case ShowExpiringPolicyCommand.COMMAND_WORD:
             return new ShowExpiringPolicyCommand();

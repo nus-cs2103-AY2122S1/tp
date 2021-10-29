@@ -2,7 +2,9 @@ package seedu.siasa.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -129,6 +131,21 @@ public class Siasa implements ReadOnlySiasa {
         policies.removeBelongingTo(key);
     }
 
+    public Map<Person, Integer> getNumberPoliciesPerPerson() {
+        HashMap<Person, Integer> treeMap = new HashMap<>();
+        persons.forEach(person -> {
+            treeMap.put(person, 0);
+        });
+        policies.forEach(policy -> {
+            Person owner = policy.getOwner();
+            int currentCount = treeMap.get(owner);
+            treeMap.put(owner, currentCount + 1);
+        });
+        return treeMap;
+    }
+
+    /// policy-level operations
+
     /**
      * Returns true if a policy with the same identity as {@code policy} exists in SIASA.
      */
@@ -176,6 +193,9 @@ public class Siasa implements ReadOnlySiasa {
         this.policies.setPolicies(policies);
     }
 
+    public int getTotalCommission() {
+        return policies.getTotalCommission();
+    }
 
     //// util methods
 
