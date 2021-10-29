@@ -16,7 +16,7 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 Here are some important syntax which are used throughout this document:
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
 
 **:information_source: Notes:**<br>
 Useful information or tips are displayed here
