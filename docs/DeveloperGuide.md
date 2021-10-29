@@ -309,7 +309,7 @@ The following sequence diagram show how the find operation works:
 ![ViewTaskListSequenceDiagram](images/FindSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the user does not provide any keywords or uses an invalid flag, ParseException will be thrown and an error message providing the correct format will be shown.
-
+</div>
 The following activity diagram summarises what happens when a user executes a `find -n Alex` command:
 
 ![ViewTaskListActivityDiagram](images/FindActivityDiagram.png)
