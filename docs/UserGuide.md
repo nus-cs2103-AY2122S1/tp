@@ -95,6 +95,17 @@ Examples:
 * `listclient` followed by `deleteclient 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `deleteclient 1` deletes the 1st person in the results of the `find` command.
 
+### Sorting a person : `sortclient`
+
+Sorts the client list alphabetically by the order specified.
+
+Format: `sortclient SORTER`
+
+These are the current sorters implemented:
+* `asc`: Sorts the clients in ascending order based on the saved name
+* `dsc`: Sorts the clients in descending order based on the saved name
+
+
 ### Clearing all entries : `clear`
 
 Clears all persons and policies from the application.
@@ -127,11 +138,28 @@ A policy can have any number of tags (including 0)
 Examples:
 * `addpolicy n/full life e/2021-12-12 p/10000 c/10 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10%, tagged Aviva, belonging to client with index 1.
 * `addpolicy n/critical illness p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
+
 ### Deleting A Policy : `deletepolicy`
 
 Deletes a policy from the policy list.
 
 Format: `deletepolicy INDEX`
+
+### Sorting a Policy: `sortpolicy`
+
+Sorts the policy list alphabetically by the order specified.
+
+Format: `sortpolicy SORTER`
+
+These are the current sorts implemented:
+* `titleasc`: Sorts the clients in ascending order based on the saved title
+* `titledsc`: Sorts the clients in descending order based on the saved title
+* `priceasc`: Sorts the clients in ascending order based on the saved payment
+* `pricedsc`: Sorts the clients in descending order based on the saved payment
+* `commasc`: Sorts the clients in ascending order based on the saved commission
+* `commdsc`: Sorts the clients in descending order based on the saved commission
+* `dateasc`: Sorts the clients in ascending order based on the saved expiry date
+* `datedsc`: Sorts the clients in descending order based on the saved expiry date
 
 ### Listing All Policies : `listpolicy`
 
