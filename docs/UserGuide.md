@@ -286,17 +286,15 @@ Examples:
 
 Deletes the specified task of a specified member from Ailurus. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
-Format: `tdel /t TASK_ID [/t MORE_TASK_ID]…​`
+Format: `tdel /t TASK_ID`
 
 * Can **only be used when task list has entries**.
-* Multiple tasks can be deleted when there are more than one `TASK_ID` provided.
 * `TASK_ID` **must be a positive integer** 1, 2, 3, …​
 * Deletes the task according to the specified `TASK_ID`.
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Examples:
 * `tdel /t 3` deletes the 3rd task on the displayed task list in Ailurus.
-* `tdel /t 1 /t 2` deletes the 1st and 2nd task on the displayed task list in Ailurus.
 
 #### Locating tasks by name: `tfind`
 
@@ -338,15 +336,14 @@ Examples:
 
 Deletes the specified event from Ailurus.
 
-Format: `edel /e EVENT_ID [/e MORE_EVENT_ID]…​`
+Format: `edel /e EVENT_ID`
 
 * `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
-* Multiple events can be deleted when more than one `EVENT_ID` is provided.
 * Deletes the event at the specified `EVENT_ID`.
 * `EVENT_ID` refers to the index number shown in the displayed member list.
 
 Examples:
-* `edel /e 10 /e 13` deletes the 10th and 13th event in Ailurus.
+* `edel /e 10` deletes the 10th event in Ailurus.
 
 #### Listing all events : `elist`
 
@@ -497,16 +494,16 @@ Action | Format, Examples
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
 **mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind form`
 **pfind** | `pfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `pfind colleague`
-**mdel** | `mdel /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g., `mdel /m 5 /m 6`
+**mdel** | `mdel /m MEMBER_ID` <br> e.g., `mdel /m 5`
 **tadd** | `tadd /n TASKNAME /m MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /m 3`
 **tfind** | `tfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `tfind form`
 **tlist** | `tlist /m MEMBER_ID [/dn OPTION] [/ovd]` <br> e.g., `tlist /m 2 /dn y`
 **tdone** | `tdone /t TASK_ID [/t MORE_TASK_ID]…​`<br> e.g. `tdone /t 3 /t 4`
 **tundone** | `tundone /t TASK_ID [/t MORE_TASK_ID]…​`<br> e.g. `tundone /t 3 /t 4`
 **tedit** | `tedit /t TASK_ID [/n TASK_NAME] [/d TASK_DEADLINE]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
-**tdel** | `tdel /t TASK_ID [/t MORE_TASK_ID]…​` <br> e.g., `tdel /t 1 /t 4`
+**tdel** | `tdel /t TASK_ID` <br> e.g., `tdel /t 1`
 **eadd** | `eadd /n EVENTNAME [/m MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
-**edel** | `edel /e EVENT_ID [/e MORE_EVENT_ID]…​` <br> e.g., `edel /e 7 /e 9`
+**edel** | `edel /e EVENT_ID ` <br> e.g., `edel /e 7`
 **elist** | `elist`
 **emark** | `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emark /e 1 /m 2 /m 3`
 **emarkall** | `emarkall /e EVENT_ID` <br> e.g. `emarkall /e 5`

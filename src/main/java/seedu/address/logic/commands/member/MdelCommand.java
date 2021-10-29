@@ -22,7 +22,7 @@ public class MdelCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the member identified by the index number used in the displayed member list.\n"
-            + "Parameters:" + PREFIX_MEMBER_ID + "MEMBER_ID (must be a positive integer)\n"
+            + "Parameters: " + PREFIX_MEMBER_ID + "MEMBER_ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_MEMBER_ID + "1\n";
 
     public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Deleted Member: %1$s";
