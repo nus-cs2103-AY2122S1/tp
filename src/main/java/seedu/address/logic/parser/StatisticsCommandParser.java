@@ -15,7 +15,7 @@ public class StatisticsCommandParser implements Parser<StatisticsCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public StatisticsCommand parse(String args) throws ParseException {
-        TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(args.trim());
+        TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(args.trim().toUpperCase());
         return new StatisticsCommand(tutorialGroup);
     }
 

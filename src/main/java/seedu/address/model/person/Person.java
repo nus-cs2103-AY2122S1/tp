@@ -152,18 +152,34 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Gender: ").append(getGender())
-                .append("; Phone: ").append(getPhone())
-                .append("; Email: ").append(getEmail())
-                .append("; Nationality: ").append(getNationality())
-                .append("; Tutorial Group: ").append(getTutorialGroup())
-                .append("; Remark: ").append(getRemark());
+        builder.append(getName());
+        if (!getGender().toString().isEmpty()) {
+            builder.append("; Gender: ").append(getGender());
+        }
+        if (!getPhone().toString().isEmpty()) {
+            builder.append("; Phone: ").append(getPhone());
+        }
+        if (!getEmail().toString().isEmpty()) {
+            builder.append("; Email: ").append(getEmail());
+        }
+        if (!getNationality().toString().isEmpty()) {
+            builder.append("; Nationality: ").append(getNationality());
+        }
+        if (!getTutorialGroup().toString().isEmpty()) {
+            builder.append("; Tutorial Group: ").append(getTutorialGroup());
+        }
 
         Set<SocialHandle> socialHandles = getSocialHandles();
         if (!socialHandles.isEmpty()) {
             builder.append("; Social Handles: ");
             socialHandles.forEach(builder::append);
+        }
+
+        if (!getRemark().toString().isEmpty()) {
+            builder.append("; Remark: ").append(getRemark());
+        }
+        if (!getGender().toString().isEmpty()) {
+            builder.append("; Gender: ").append(getGender());
         }
 
         Set<Tag> tags = getTags();

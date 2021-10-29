@@ -11,12 +11,12 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteMultipleCommand;
-import seedu.address.model.person.MultiplePredicates;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.NationalityContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.TutorialGroupContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.MultiplePredicates;
+import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.NationalityContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.TutorialGroupContainsKeywordsPredicate;
 
 public class DeleteMultipleCommandParserTest {
 
