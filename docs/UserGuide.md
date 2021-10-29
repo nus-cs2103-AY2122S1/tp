@@ -585,8 +585,6 @@ All the other commands in this [Viewing your Calendar](#viewing-your-calendar) s
 For example, the `day` command bellow opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
-![calendar](images/calendar.png)
-
 <div class="caption">Calendar interface.</div>
 
 #### Viewing your daily calendar: `day`
