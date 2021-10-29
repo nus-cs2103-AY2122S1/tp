@@ -37,9 +37,9 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
     * [Listing all lessons: `listc`](#listc)
     * [Clearing all lessons: `clearc`](#clearc)
 
-* [Saving the data](#saving-data)
-
-* [Editing the data file](#editing-data)
+  * [Managing data](#managing-data)
+    * [Saving the data](#saving-data)
+    * [Editing the data file](#editing-data)
 
 * [Command Summary](#summary)
 
@@ -328,11 +328,13 @@ Command aliases: `clrc` `cc`
 
 ***
 
-### Saving the data <a name="saving-data"></a>
+### Managing Data <a name="managing-data"></a>
+
+#### Saving the data <a name="saving-data"></a>
 
 Contact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file <a name="editing-data"></a>
+#### Editing the data file <a name="editing-data"></a>
 
 contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json`. Advanced users are welcome to update data directly by editing that data file.
 
