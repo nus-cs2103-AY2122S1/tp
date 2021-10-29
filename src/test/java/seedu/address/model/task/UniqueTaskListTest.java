@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_1;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -89,7 +88,7 @@ class UniqueTaskListTest {
     @Test
     public void setTask_editedTaskHasSameIdentity_success() {
         uniqueTaskList.add(TASK1);
-        Task editedTask = new TaskBuilder(TASK1).withDeadline(VALID_TASK_DEADLINE_2).build();
+        Task editedTask = new TaskBuilder(TASK1).withName("t1").withDeadline("ddl").build();
         uniqueTaskList.setTask(TASK1, editedTask);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
         expectedUniqueTaskList.add(editedTask);
@@ -130,19 +129,19 @@ class UniqueTaskListTest {
         assertEquals(expectedUniqueTaskList, uniqueTaskList);
     }
 
-//    @Test
-//    public void setTasks_nullUniqueTaskList_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> uniqueTaskList.setTasks((UniqueTaskList) null));
-//    }
+    @Test
+    public void setTasks_nullUniqueTaskList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTaskList.setTasks((UniqueTaskList) null));
+    }
 
-//    @Test
-//    public void setTasks_uniqueTaskList_replacesOwnListWithProvidedUniqueTaskList() {
-//        uniqueTaskList.add(TASK1);
-//        UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
-//        expectedUniqueTaskList.add(TASK2);
-//        uniqueTaskList.setTasks(expectedUniqueTaskList);
-//        assertEquals(expectedUniqueTaskList, uniqueTaskList);
-//    }
+    @Test
+    public void setTasks_uniqueTaskList_replacesOwnListWithProvidedUniqueTaskList() {
+        uniqueTaskList.add(TASK1);
+        UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
+        expectedUniqueTaskList.add(TASK2);
+        uniqueTaskList.setTasks(expectedUniqueTaskList);
+        assertEquals(expectedUniqueTaskList, uniqueTaskList);
+    }
 
     @Test
     public void setTasks_nullList_throwsNullPointerException() {
@@ -167,7 +166,7 @@ class UniqueTaskListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> uniqueTaskList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, ()
+            -> uniqueTaskList.asUnmodifiableObservableList().remove(0));
     }
 }
