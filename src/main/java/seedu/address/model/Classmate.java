@@ -11,6 +11,7 @@ import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialclass.UniqueTutorialClassList;
 import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.UniqueTutorialGroupList;
 
 /**
  * Wraps all data at the address-book level
@@ -22,6 +23,7 @@ public class Classmate implements ReadOnlyClassmate {
 
     private final UniqueStudentList students;
     private final UniqueTutorialClassList tutorialClasses;
+    private final UniqueTutorialGroupList tutorialGroups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -33,6 +35,7 @@ public class Classmate implements ReadOnlyClassmate {
     {
         students = new UniqueStudentList();
         tutorialClasses = new UniqueTutorialClassList();
+        tutorialGroups = new UniqueTutorialGroupList();
     }
 
     public Classmate() {}
@@ -155,7 +158,7 @@ public class Classmate implements ReadOnlyClassmate {
      * {@code key} must exist in the ClassMATE.
      */
     public void removeTutorialGroup(TutorialGroup key) {
-        tutorialClasses.remove(key);
+        tutorialGroups.remove(key);
     }
 
     /**
@@ -163,7 +166,7 @@ public class Classmate implements ReadOnlyClassmate {
      */
     public boolean hasTutorialGroup(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
-        return tutorialClasses.contains(tutorialGroup);
+        return tutorialGroups.contains(tutorialGroup);
     }
 
     /**
@@ -171,14 +174,14 @@ public class Classmate implements ReadOnlyClassmate {
      * The tutorial group must not already exist in the ClassMATE.
      */
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
-        tutorialClasses.add(tutorialGroup);
+        tutorialGroups.add(tutorialGroup);
     }
 
     /**
      * Sorts the tutorial groups in ClassMATE.
      */
     public void sortTutorialGroups() {
-        tutorialClasses.sort();
+        tutorialGroups.sort();
     }
 
 

@@ -27,6 +27,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ViewClassCommand;
+import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -96,6 +97,9 @@ public class ClassmateParser {
 
         case ViewClassCommand.COMMAND_WORD:
             return new ViewClassCommandParser().parse(arguments);
+
+        case ViewGroupCommand.COMMAND_WORD:
+            return new ViewGroupCommandParser().parse(arguments);
 
         case ViewStudentCommand.COMMAND_WORD:
             return new ViewStudentCommandParser().parse(arguments);
