@@ -186,6 +186,9 @@ public class HelpWindow extends AnchorPane {
         copyButton.setOnMousePressed(event -> copyUrl());
     }
 
+    // @@author kflim-reused
+    // Reused from https://github.com/greyguy21/ip/
+    // with minor modifications
     private void setupColumns() {
         command.setCellValueFactory(
                 new PropertyValueFactory<>("command")
