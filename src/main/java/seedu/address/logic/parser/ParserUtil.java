@@ -14,6 +14,7 @@ import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialgroup.GroupName;
@@ -70,6 +71,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String mark} into a {@code StudentMark}.
+     *
+     * @throws ParseException if the given {@code mark} is invalid.
+     */
+    public static StudentMark parseMark(String mark) throws ParseException {
+        requireNonNull(mark);
+        String trimmedMark = mark.trim().toUpperCase();
+        StudentMark newMark;
+        try {
+            newMark = StudentMark.valueOf(trimmedMark);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(StudentMark.MESSAGE_CONSTRAINTS);
+        }
+        return newMark;
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -103,12 +121,15 @@ public class ParserUtil {
      * Parses a string to return a ClassCode
      * @param classCode String of classCode
      * @return ClassCode
-     * @throws ParseException
+     * @throws ParseException if the given {@code classCode} is invalid.
      */
     public static ClassCode parseClassCode(String classCode) throws ParseException {
         requireNonNull(classCode);
-        String trimmedRemark = classCode.trim();
-        return new ClassCode(trimmedRemark);
+        String trimmedClassCode = classCode.trim();
+        if (!ClassCode.isValidClassCode(trimmedClassCode)) {
+            throw new ParseException(ClassCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassCode(trimmedClassCode);
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,6 +13,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,6 +42,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setAddress(student.getAddress());
         descriptor.setClassCode(student.getClassCode());
         descriptor.setTags(student.getTags());
+        descriptor.setMarks(student.getMarks());
     }
 
     /**
@@ -89,6 +92,16 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code marks} into a {@code List<StudentMark>} and set it to the {@code EditStudentDescriptor}
+     * that we are building.
+     */
+    public EditStudentDescriptorBuilder withMarks(String... marks) {
+        List<StudentMark> markList = Stream.of(marks).map(StudentMark::valueOf).collect(Collectors.toList());
+        descriptor.setMarks(markList);
         return this;
     }
 

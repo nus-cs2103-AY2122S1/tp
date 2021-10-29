@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalTutorialClasses.G02;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,10 +29,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyClassmate;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Student;
+import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.storage.JsonClassmateStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TutorialClassBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -76,7 +79,10 @@ public class LogicManagerTest {
                 new JsonClassmateIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionClassmate.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+
+        TutorialClass amyTutorialClass = new TutorialClassBuilder(G02).build();
         StorageManager storage = new StorageManager(classmateStorage, userPrefsStorage);
+        model.addTutorialClass(amyTutorialClass);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -84,6 +90,7 @@ public class LogicManagerTest {
                 + ADDRESS_DESC_AMY + CLASSCODE_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
+        expectedModel.addTutorialClass(amyTutorialClass);
         expectedModel.addStudent(expectedStudent);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,7 +27,10 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialclass.Schedule;
+import seedu.address.model.tutorialclass.TutorialClass;
 
 /**
  * Edits the details of an existing student in the ClassMATE.
@@ -52,6 +56,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE.";
+    public static final String MESSAGE_CLASS_NOT_EXIST = "The classCode is invalid as the tutorial class "
+            + "has not been created yet.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -84,6 +90,12 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
+        TutorialClass toCheckTutorialClass = new TutorialClass(editedStudent.getClassCode(),
+                new Schedule("dummy, dummy"), new HashSet<Tag>());
+        if (!model.hasTutorialClass(toCheckTutorialClass)) {
+            throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
+        }
+
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
@@ -103,7 +115,14 @@ public class EditCommand extends Command {
         ClassCode updatedClassCode = editStudentDescriptor.getClassCode().orElse(studentToEdit.getClassCode());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedClassCode, updatedTags);
+        return new Student(
+                updatedName,
+                updatedPhone,
+                updatedEmail,
+                updatedAddress,
+                updatedClassCode,
+                updatedTags,
+                studentToEdit.getMarks());
     }
 
     @Override
@@ -135,6 +154,7 @@ public class EditCommand extends Command {
         private Address address;
         private ClassCode classCode;
         private Set<Tag> tags;
+        private List<StudentMark> marks;
 
         public EditStudentDescriptor() {}
 
@@ -149,6 +169,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setClassCode(toCopy.classCode);
             setTags(toCopy.tags);
+            setMarks(toCopy.marks);
         }
 
         /**
@@ -213,6 +234,23 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code marks} to this object's {@code marks}.
+         * A defensive copy of {@code marks} is used internally.
+         */
+        public void setMarks(List<StudentMark> marks) {
+            this.marks = (marks != null) ? new ArrayList<>(marks) : null;
+        }
+
+        /**
+         * Returns an unmodifiable mark list, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code marks} is null.
+         */
+        public Optional<List<StudentMark>> getMarks() {
+            return (marks != null) ? Optional.of(Collections.unmodifiableList(marks)) : Optional.empty();
         }
 
         @Override

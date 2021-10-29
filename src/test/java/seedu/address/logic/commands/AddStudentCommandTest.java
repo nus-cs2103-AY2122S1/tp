@@ -14,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Classmate;
 import seedu.address.model.ReadOnlyClassmate;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Student;
+import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.StudentBuilder;
 
@@ -108,6 +110,16 @@ public class AddStudentCommandTest {
         public void addStudent(Student student) {
             requireNonNull(student);
             studentsAdded.add(student);
+        }
+
+        @Override
+        public boolean hasTutorialClass(TutorialClass tutorialClass) {
+            ClassCode validClassCode = new ClassCode("G06");
+            if (tutorialClass.getClassCode().equals(validClassCode)) {
+                return true;
+            } else {
+                throw new UnsupportedOperationException();
+            }
         }
 
         @Override
