@@ -321,6 +321,16 @@ Format: `listapp` Optional: `listapp Time` or `listapp Description`
 
 ## **Other Features**
 
+### Command history navigation
+
+Using the keyboard `UP` and `DOWN` arrow buttons, you can easily navigate through the command that you previously entered.
+This can be very helpful when you are doing repetitive task such as adding multiple person or appointment.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Please note that the command history will not be saved in the data file. 
+So you will not be able to get your command history if you exit PlaceBook and open it again.
+</div>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -328,6 +338,12 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Changing Dark and Light Theme
+
+You may notice the 'sun' or 'moon' button located at the top right of PlaceBook.
+Simply click that to toggle PlaceBook between Dark and Light Theme.
+PlaceBook aims to support your work in different lighting environments and boost your productivity.
 
 ### Exiting the program : `exit`
 
