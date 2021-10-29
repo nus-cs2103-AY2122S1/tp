@@ -759,7 +759,7 @@ Action | Format, Examples
 **Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
-**View Schedule** | `schedule`
+**View Calendar** | `calendar`
 **View Schedule of Particular Day** | `day`
 **View Schedule of Today** | `today`
 **View Schedule of Week** | `week`
