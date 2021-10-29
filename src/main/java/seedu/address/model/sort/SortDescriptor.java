@@ -47,7 +47,13 @@ public class SortDescriptor {
             assert(orderingType.equals(DESCENDING));
             return comparator.reversed();
         }
+    }
 
+    /**
+     * Returns a success message for the {@code SortDescriptor}.
+     */
+    public String generateSuccessMessage() {
+        return "Sorted by " + sortField + "in " + sortOrdering;
     }
 
 }

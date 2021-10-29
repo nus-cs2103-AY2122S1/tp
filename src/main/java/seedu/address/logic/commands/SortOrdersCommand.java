@@ -44,7 +44,8 @@ public class SortOrdersCommand extends Command {
         requireNonNull(model);
         SortDescriptor sortDescriptor = new SortDescriptor(sortField, sortOrdering);
         model.sortOrderList(sortDescriptor);
-        return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayState.ORDER);
+        String successMessage = sortDescriptor.generateSuccessMessage();
+        return new CommandResult(successMessage, CommandResult.DisplayState.ORDER);
     }
 
     @Override
