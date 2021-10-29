@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.module.Module;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
-
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -83,6 +83,9 @@ public class CommandTestUtil {
 
     public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_0;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_TASK_1;
+
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -90,6 +93,12 @@ public class CommandTestUtil {
                 .build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withStudentId(VALID_STUDENT_ID_AMY).withEmail(VALID_EMAIL_BOB).withTeleHandle(VALID_TELE_HANDLE_BOB)
+                .build();
+        DESC_TASK_0 = new EditTaskDescriptorBuilder().withTaskName(VALID_TASK_NAME_0)
+                .withTaskId(VALID_TASK_ID_0).withTaskDeadline(VALID_TASK_DEADLINE_0)
+                .build();
+        DESC_TASK_1 = new EditTaskDescriptorBuilder().withTaskName(VALID_TASK_NAME_1)
+                .withTaskId(VALID_TASK_ID_1).withTaskDeadline(VALID_TASK_DEADLINE_1)
                 .build();
     }
 

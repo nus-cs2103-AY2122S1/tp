@@ -94,6 +94,20 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns the task in the task list as specified by {@code taskNum}.
+     * @param taskNum The position of the task in the task list to retrieve the task from.
+     * @return The task specified by {@code taskNum}.
+     */
+    public Task getTask(int taskNum) throws TaskNotFoundException {
+        requireAllNonNull(taskNum);
+        if (taskNum < internalList.size() && taskNum >= 0) {
+            return internalList.get(taskNum);
+        } else {
+            throw new TaskNotFoundException();
+        }
+    }
+
+    /**
      * Returns the backing list as an modifiable {@code ObservableList}.
      */
     public ObservableList<Task> asModifiableObservableList() {

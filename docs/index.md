@@ -7,7 +7,7 @@ title: TAB
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103-F09-1/tp/branch/master/graph/badge.svg?token=MM1HAG6H5T)](https://codecov.io/gh/AY2122S1-CS2103-F09-1/tp)
 ![Ui](images/Ui.png)
 
-Teaching Assistant’s Buddy (TAB) is a **desktop app for managing tutees**, optimized for use via a Command Line Interface.
+Teaching Assistant’s Buddy (TAB) is a **desktop app for managing students**, optimized for use via a Command Line Interface.
 
 * If you are interested in using TAB, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing TAB, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
