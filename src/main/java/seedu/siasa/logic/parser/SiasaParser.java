@@ -9,29 +9,32 @@ import java.util.regex.Pattern;
 import seedu.siasa.logic.commands.ClearCommand;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.DownloadCommand;
-import seedu.siasa.logic.commands.EditCommand;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
 import seedu.siasa.logic.commands.client.AddClientCommand;
 import seedu.siasa.logic.commands.client.ClearClientPolicyCommand;
 import seedu.siasa.logic.commands.client.DeleteClientCommand;
+import seedu.siasa.logic.commands.client.EditClientCommand;
 import seedu.siasa.logic.commands.client.ListClientCommand;
 import seedu.siasa.logic.commands.client.ListClientPolicyCommand;
 import seedu.siasa.logic.commands.client.SortClientCommand;
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
 import seedu.siasa.logic.commands.policy.DeletePolicyCommand;
+import seedu.siasa.logic.commands.policy.EditPolicyCommand;
 import seedu.siasa.logic.commands.policy.ListPolicyCommand;
 import seedu.siasa.logic.commands.policy.ShowExpiringPolicyCommand;
 import seedu.siasa.logic.commands.policy.SortPolicyCommand;
 import seedu.siasa.logic.parser.client.AddClientCommandParser;
 import seedu.siasa.logic.parser.client.ClearClientPolicyCommandParser;
 import seedu.siasa.logic.parser.client.DeleteClientCommandParser;
+import seedu.siasa.logic.parser.client.EditClientCommandParser;
 import seedu.siasa.logic.parser.client.ListClientPolicyCommandParser;
 import seedu.siasa.logic.parser.client.SortClientCommandParser;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.logic.parser.policy.AddPolicyCommandParser;
 import seedu.siasa.logic.parser.policy.DeletePolicyCommandParser;
+import seedu.siasa.logic.parser.policy.EditPolicyCommandParser;
 import seedu.siasa.logic.parser.policy.SortPolicyCommandParser;
 
 /**
@@ -67,8 +70,11 @@ public class SiasaParser {
         case AddPolicyCommand.COMMAND_WORD:
             return new AddPolicyCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditClientCommand.COMMAND_WORD:
+            return new EditClientCommandParser().parse(arguments);
+
+        case EditPolicyCommand.COMMAND_WORD:
+            return new EditPolicyCommandParser().parse(arguments);
 
         case DeleteClientCommand.COMMAND_WORD:
             return new DeleteClientCommandParser().parse(arguments);

@@ -16,7 +16,7 @@ public class Commission {
     /**
      * Constructs an {@code Commission}.
      *
-     * @param percentage A valid commission percentage.
+     * @param percentage A valid commission.
      */
     public Commission(int percentage, int numberOfPayments) {
         requireAllNonNull(percentage, numberOfPayments);

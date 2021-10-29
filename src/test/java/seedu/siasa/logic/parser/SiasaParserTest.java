@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.siasa.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.siasa.testutil.Assert.assertThrows;
-import static seedu.siasa.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,17 +13,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.siasa.logic.commands.ClearCommand;
-import seedu.siasa.logic.commands.EditCommand;
-import seedu.siasa.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.person.NameContainsKeywordsPredicate;
-import seedu.siasa.model.person.Person;
-import seedu.siasa.testutil.EditPersonDescriptorBuilder;
-import seedu.siasa.testutil.PersonBuilder;
-import seedu.siasa.testutil.PersonUtil;
 
 public class SiasaParserTest {
 
@@ -54,6 +47,7 @@ public class SiasaParserTest {
     }
      */
 
+    /*
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
@@ -62,6 +56,7 @@ public class SiasaParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
+     */
 
     @Test
     public void parseCommand_exit() throws Exception {

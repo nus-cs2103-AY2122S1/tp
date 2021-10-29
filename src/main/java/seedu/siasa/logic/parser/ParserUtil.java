@@ -31,8 +31,8 @@ public class ParserUtil {
             "Payment structure expects numerical inputs of payment amount, payment freq (optional) "
                     + "and num of payments (optional).";
     public static final String MESSAGE_INVALID_COMMISSION =
-            "Commission requires numerical inputs of commission percentage"
-                    + "and number of payments with commission (optional).";
+            "Commission requires numerical inputs of commission percentage "
+                    + "and number of payments with commission.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -213,16 +213,38 @@ public class ParserUtil {
         requireAllNonNull(commission, paymentStructure);
 
         String[] commissionDetails = commission.split(" ");
-        if (commissionDetails.length > 2 || commissionDetails.length == 0) {
+        if (commissionDetails.length != 2) {
             throw new ParseException(MESSAGE_INVALID_COMMISSION);
         }
         try {
             int commissionPercentage = Integer.parseInt(commissionDetails[0]);
-            int numberOfPaymentsCommission = paymentStructure.numberOfPayments;
-            if (commissionDetails.length == 2) {
-                numberOfPaymentsCommission = Integer.parseInt(commissionDetails[1]);
-            }
+            int numberOfPaymentsCommission = Integer.parseInt(commissionDetails[1]);
             if (!Commission.isValidCommission(commissionPercentage, numberOfPaymentsCommission, paymentStructure)) {
+                throw new ParseException(Commission.MESSAGE_CONSTRAINTS);
+            }
+            return new Commission(commissionPercentage, numberOfPaymentsCommission);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Commission.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String commission} into a {@code Commission}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code commission} is invalid.
+     */
+    public static Commission parseCommission(String commission) throws ParseException {
+        requireAllNonNull(commission);
+
+        String[] commissionDetails = commission.split(" ");
+        if (commissionDetails.length != 2) {
+            throw new ParseException(MESSAGE_INVALID_COMMISSION);
+        }
+        try {
+            int commissionPercentage = Integer.parseInt(commissionDetails[0]);
+            int numberOfPaymentsCommission = Integer.parseInt(commissionDetails[1]);
+            if (!Commission.isValidCommission(commissionPercentage, numberOfPaymentsCommission)) {
                 throw new ParseException(Commission.MESSAGE_CONSTRAINTS);
             }
             return new Commission(commissionPercentage, numberOfPaymentsCommission);

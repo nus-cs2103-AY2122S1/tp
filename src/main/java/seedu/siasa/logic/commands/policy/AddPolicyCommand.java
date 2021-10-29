@@ -6,6 +6,7 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.HashSet;
@@ -42,12 +43,14 @@ public class AddPolicyCommand extends Command {
             + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT) "
             + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM "
             + PREFIX_CLIENT_INDEX + "CLIENT_INDEX "
+            + PREFIX_TAG + "TAG... "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Life Policy "
             + PREFIX_EXPIRY + "2021-06-13 "
             + PREFIX_PAYMENT + "1000 12 120"
             + PREFIX_COMMISSION + "20 12"
-            + PREFIX_CLIENT_INDEX + "1";
+            + PREFIX_CLIENT_INDEX + "1"
+            + PREFIX_TAG + "AIA";
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
     public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified user";
@@ -119,9 +122,10 @@ public class AddPolicyCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddPolicyCommand // instanceof handles nulls
                 && title.equals(((AddPolicyCommand) other).title)
+                && commission.equals(((AddPolicyCommand) other).commission)
+                && index.equals(((AddPolicyCommand) other).index)
                 && paymentStructure.equals(((AddPolicyCommand) other).paymentStructure)
                 && coverageExpiryDate.equals(((AddPolicyCommand) other).coverageExpiryDate)
-                && commission.equals(((AddPolicyCommand) other).commission)
                 && tagList.equals(((AddPolicyCommand) other).tagList));
     }
 }
