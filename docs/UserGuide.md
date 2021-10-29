@@ -194,7 +194,7 @@ Command aliases: `del` `rm` `d`
 Finds a contact by specifying either the name/module code(s).
 
 Format: `find n/NAME`/`find m/MODULE_CODE(S)`
-* Can only search by name or module code(s), but not both at once <br> e.g. You cannot perform `find n/Ben m/CS2040S`
+* Can only search by name or module code(s), but not both at once <br> i.e. You cannot perform `find n/Ben m/CS2040S`
 * The search is case-insensitive <br> e.g `ben` will match `Ben`
 * The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
 * Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
@@ -280,6 +280,25 @@ Command aliases: `updatec` `ec`
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
 
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
+
+Finds a contact by specifying the module code(s)/lesson day(s)/lesson start time(s).
+
+Format: `findc m/MODULE_CODE(S)`/`findc d/LESSON_DAY(S)`/`findc t/LESSON_START_TIME(S)`
+* Can only search using one prefix at a time <br> i.e. You cannot perform `findc m/CS2040S d/2`
+* The search is case-insensitive <br> e.g `cs2040` will match `CS2040`
+* Lesson day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
+* Lesson start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
+* If multiple keywords are specified for the search, any lesson that matches at least one of the keywords will be returned <br>
+  e.g. `findc m/CS2030 CS2040` will return lessons that are of module `CS2030` or `CS2040` <br>
+  e.g. `findc d/2 3` will return lessons that are on Tuesday or Wednesday <br>
+  e.g. `findc t/10:00 15:00` will return lessons that start at either words `10:00` or `15:00`
+
+Examples:
+* `findc m/CS2030 CS2040`: Search lessons of modules `CS2030` or `CS2040`
+* `findc d/2`: Search lessons that falls on Tuesdays
+* `findc t/14:00`: Search lessons that starts at `14:00`
+
+Command alias: `fc`
 
 #### Listing all lessons: `listc` <a name="listc"></a>
 
