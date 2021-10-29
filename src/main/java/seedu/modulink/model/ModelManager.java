@@ -154,6 +154,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void refreshFilteredPersonList() {
+        @SuppressWarnings("unchecked")
+        Predicate<Person> predicate = (Predicate<Person>) filteredPersons.getPredicate();
+        Predicate<Person> updatePredicate = unused -> false;
+        updateFilteredPersonList(updatePredicate);
+        updateFilteredPersonList(predicate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
