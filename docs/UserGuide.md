@@ -283,7 +283,7 @@ Examples:
 
 Command alias: `ac`
 
-<img src="images/AddCommand.png" width="800px">
+<img src="images/AddLessonCommand.png" width="800px">
 
 #### Editing a lesson: `editc` <a name="editc"></a>
 
@@ -303,6 +303,7 @@ Examples:
 
 Command aliases: `updatec` `ec`
 
+<img src="images/EditLessonCommand.png" width="800px">
 
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
 
@@ -323,6 +324,8 @@ Examples:
 * `deletec m/CS2103T`: Deletes all the lessons with CS2103T module code.
 
 Command aliases: `delc` `rmc` `dc`
+
+<img src="images/DeleteLessonCommand.png" width="800px">
 
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
 
@@ -345,6 +348,8 @@ Examples:
 
 Command alias: `fc`
 
+<img src="images/FindLessonCommand.png" width="800px">
+
 #### Listing all lessons: `listc` <a name="listc"></a>
 
 Shows a list of all lessons in contHACKS.
@@ -360,6 +365,8 @@ Purges **all** existing lesson from contHACKS. **Use with caution.**
 Format: `clearc`
 
 Command aliases: `clrc` `cc`
+
+<img src="images/ClearLessonCommand.png" width="800px">
 
 ***
 
