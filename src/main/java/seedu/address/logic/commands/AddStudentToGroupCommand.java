@@ -23,7 +23,7 @@ public class AddStudentToGroupCommand extends Command {
     public static final String COMMAND_WORD = "addsg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a group to Classmate "
-            + "by the index number used in the last person listing. "
+            + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_GROUPNUMBER + "GROUPNUMBER "
             + PREFIX_CLASSCODE + "CLASSCODE "
