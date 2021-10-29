@@ -93,7 +93,6 @@ This is the list of some repeatedly used preambles in RHRH, as well as there cor
 | :-------------------: | ---------------------------------------------|
 | `INDEX`               | Must be a positive integer 1, 2, 3, …
 | `KEYWORD`             | 
-| `LIST_OF_TABLE_SIZES` | 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -253,7 +252,7 @@ Examples:
 
 :information_source: **Notes:**<br>
 
-* Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant-settables)
+* Tables must be set before reservations can be made. See [settables](#setting-the-tables-for-the-restaurant-settables)
 
 * Phone number has to be a valid phone number from a customer in the database
 
