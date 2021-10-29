@@ -177,7 +177,6 @@ Other available optional fields for a student are:
 * Academic level
 * Academic stream
 * School
-* Outstanding fees
 * Remarks
 * Tags
 * Lessons
@@ -193,7 +192,7 @@ A student can be identified by the index number shown in the displayed list of s
 
 Adds a student to TAB.
 
-Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0).
@@ -206,13 +205,13 @@ A student can have any number of tags (including 0).
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
-* `add n/Betsy Crowe t/cousin a/Newgate p/91234567 f/150.50 r/hasnt pay tuition fee for Aug t/retainee`
+* `add n/Betsy Crowe t/cousin a/Newgate p/91234567 r/hasnt pay tuition fee for Aug t/retainee`
 
 #### Editing a student: `edit`
 
 Edits an existing student in TAB.
 
-Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. <br>
   e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
@@ -366,6 +365,7 @@ The essential fields for a lesson are:
 
 An optional field for both types of lesson is:
 * Homework
+* Outstanding Fees (refer to more details in this [section](#managing-lesson-fees))
 
 Optional fields for a **recurring** lesson is:
 * End date
@@ -417,7 +417,7 @@ starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displaye
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/START_DATE] [time/TIMERANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
@@ -425,7 +425,7 @@ Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT
 
 * The lesson index must be a valid index number shown in the lesson list of the student.
 
-* You can edit all fields of a lesson except the start date.
+* You can edit all fields of a lesson.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
 
@@ -484,7 +484,7 @@ Examples:
 
 #### Viewing upcoming lessons : `remind`
 
-Displays a list of upcoming lessons within the next 48 hours.
+Displays a list of upcoming lessons with end date time within the next 48 hours
 
 Format: `remind`
 
@@ -492,6 +492,77 @@ Format: `remind`
 
 <div class="caption">Reminder window interface.</div>
 
+<div style="page-break-after: always;"></div>
+
+### Managing Lesson Fees
+
+This section guides you on how to use the commands for managing the lesson fees of your students in TAB and the behaviour of the Fees Calculator feature of TAB.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+* Outstanding fees can only be added and edited using Lesson Commands.
+* Outstanding fee displayed in Student details is the sum of all the student's lesson's outstanding fees.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Adding a Lesson's Outstanding Fees : `ladd`
+
+Adds outstanding fees to specific lesson. Uses the Lesson Add command as seen in [Adding a lesson](#adding-a-lesson-ladd).
+
+In the event that you have existing outstanding fees for the lesson prior to adding the lesson, you can add outstanding fees as a field when adding lesson.
+Outstanding fee is an optional field and if not added with lesson, TAB will assume outstanding fees for the newly added lesson as $0.00.
+
+Format: `ladd 1 COMPULSORY_FIELDS f/OUTSTANDING_AMOUNT`
+
+Examples:
+
+* `ladd 1 recurring/23 Nov 2022 date/30 jan 2022 time/0900-1100 subject/Math rates/37.50` adds the recurring lesson with the specified details and outstanding fees is assumed to be `$0.00`.
+
+* `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50 f/250`
+  adds the recurring lesson with an outstanding fee of `$250.00`.
+
+#### Editing a Lesson's Outstanding Fees: `ledit`
+
+Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
+
+In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
+Refer to [Behaviours of the Fees Calculator](#Behaviours-of-the-Fees-Calculator) for cases the Fees Calculator will not account for.
+
+Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
+
+Examples:
+* `ledit 2 1 f/250` Edits the outstanding fees to `$100.00`.
+* `ledit 1 1 time/1100-1200 f/100` Edits the time range to `1100-1200` and outstanding fees to `$100.00`.
+* `ledit 1 1 rates/50 f/0` Edits the rates to be `$50.00` and outstanding fees to be `$0.00`.
+
+#### Paying a Lesson's Outstanding Fees: `paid`
+
+Pays for a specific lesson.
+
+The amount paid would be deducted from the outstanding fees field. The amount paid should not be greater than the current outstanding fees.
+
+Format: `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+
+Examples:
+* `paid 1 1 amt/70` The 1st student has paid `$70.00` for his or her 1st lesson.
+* `paid 3 2 amt/480.50` The 3rd student has paid `$480.50` for his or her 2nd lesson.
+
+#### Behaviours of the Fees Calculator
+
+TAB will automatically update your lesson's outstanding fees once the lesson has ended using Fees Calculator feature. 
+The Fees Calculator will account for cancelled dates and ensure that lesson fees on these dates will not be added.
+
+However, the Fees Calculator will not account for any changes to lessons that have passed. Such cases include:
+
+* **Lesson rates increment.** In the event that you want to increase your lesson rates, the current outstanding fees will not change according to the newly edited lesson rates.
+* **Incorrect lesson rates entry.** Similarly, in the event that you have entered your lesson rates incorrectly and only realised it after your lesson has passed, the current outstanding fees will not change according to 
+the newly edited lesson rates.
+* **Cancelling or uncancelling a date in the past.** In the event that you did not cancel your lesson and the fees for that particular cancelled lesson has been added to outstanding fees, the Fees Calculator will not deduct
+the fees of the cancelled lesson for you. Same for uncancelling a lesson that has passed, the fees will not be added back for you.
+* **Shifting the end date of a recurring lesson.** In the event that the end date of the lesson is shifted to an earlier date and lessons after that new end date have already passed, the outstanding fees will not change.
+* **Shifting the start date of a recurring lesson.** In the event that the start date of the lesson is shifted to an earlier date and lessons between the edited start date and original start date have passed,
+the fees of these lessons will not be deducted for you. Same for shifting start date to a later date after the original start date has passed and fees have been updated prior.
 
 <div style="page-break-after: always;"></div>
 
@@ -704,16 +775,25 @@ This section lists all available commands in TAB, along with examples on how you
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add Student** | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 f/50 r/retainee t/cousin`
-**Edit Student** | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
+**Add Student** | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 r/retainee t/cousin`
+**Edit Student** | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
 **Delete Student** | `delete INDEX`<br><br> e.g. `delete 3`
 **List Students** | `list`
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 **View Tags** | `tag`
-**Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math`
-**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+**Add Lesson** | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
+**Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
-**View Schedule** | `schedule`
+**Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
+**View Calendar** | `calendar`
+**View Schedule of Particular Day** | `day`
+**View Schedule of Today** | `today`
+**View Schedule of Week** | `week`
+**View Schedule of Month** | `month`
+**View Schedule of Year** | `year`
+**Navigate forward in Schedule** | `next`
+**Navigate backward in Schedule** | `back`
+**View Reminders** | `remind`
 **Clear** |`clear`
 **Undo** | `undo`
 **Redo** | `redo`
