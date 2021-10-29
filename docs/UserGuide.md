@@ -407,10 +407,10 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **ListTasks** | `listtask`
-**AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20 August 2021`
+**AddTask** | `addtask l/LABEL d/DATE [t/TASKTAG]` e.g. `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1`
 **DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19 September 2021`
-**MarkDone** | `markdone INDEX` e.g. `markdone 2`
+**EditTask** | `edittask INDEX l/LABEL d/DATE [t/TASKTAG]` e.g. `edittask 1 l/order cloth d/19 September 2021 t/General`
+**MarkTask** | `marktask INDEX` e.g. `marktask 2`
 **CompletedTasks** | `completedtasks`
 **IncompleteTasks** | `incompletetasks`
 
@@ -424,12 +424,12 @@ Action | Format, Examples
 **MarkOrder** | `markorder INDEX` e.g. `markorder 2`
 **CompletedOrders** | `completedorders`
 **IncompleteOrders** | `incompleteorders`
-**SortOrders** | `sortorders f/FIELD o/ORDERING` e.g. `sortorders f/date o/descending`
+**SortOrders** | `sortorders f/FIELD [o/ORDERING]` e.g. `sortorders f/date o/descending`
 **ViewTotalOrders** | `totalorders`
 
 ### General Commands
 
 Action | Format
 --------|------------------
-**Clear** | `clear`
 **Help** | `help`
+**Clear** | `clear`
