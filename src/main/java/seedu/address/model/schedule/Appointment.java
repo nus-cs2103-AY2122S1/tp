@@ -107,6 +107,17 @@ public class Appointment {
     public void addClient(Person personToAdd) {
         this.clients.add(personToAdd);
     }
+
+    /**
+     * Sets the Client in the client list to the Edited Client.
+     *
+     * @param personToEdit the client to be edited.
+     * @param editedPerson the edited client.
+     */
+    public void setClient(Person personToEdit, Person editedPerson) {
+        clients.setPerson(personToEdit, editedPerson);
+    }
+
     /**
      * Returns true if both Appointments have the same fields.
      */

@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.schedule.exceptions.AppointmentNotFoundException;
 import seedu.address.model.schedule.exceptions.DuplicateAppointmentException;
 
@@ -138,7 +139,11 @@ public class Schedule implements Iterable<Appointment>, ReadOnlySchedule {
         requireNonNull(appointmentToEdit);
         requireNonNull(editedAppointment);
 
-        appointmentList.remove(appointmentToEdit);
-        appointmentList.add(editedAppointment);
+        int index = appointmentList.indexOf(appointmentToEdit);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        appointmentList.set(index, editedAppointment);
     }
 }

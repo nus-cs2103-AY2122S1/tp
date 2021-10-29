@@ -104,6 +104,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
+
         return addressBook.hasPerson(person);
     }
 
@@ -115,6 +116,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -128,13 +130,22 @@ public class ModelManager implements Model {
     @Override
     public void addAppointment(Appointment a) {
         requireNonNull(a);
+
         schedule.addAppointment(a);
     }
 
     @Override
     public void deleteAppointment(Appointment a) {
         requireNonNull(a);
+
         schedule.deleteAppointment(a);
+    }
+
+    @Override
+    public void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment) {
+        requireAllNonNull(appointmentToEdit, editedAppointment);
+
+        schedule.setAppointment(appointmentToEdit, editedAppointment);
     }
 
     //=========== Query Operations =============================================================
@@ -146,9 +157,11 @@ public class ModelManager implements Model {
     public String getRelatedAppointmentsAsString(Person client) {
         StringBuilder stringBuilder = new StringBuilder();
         List<Appointment> relatedAppointment = getRelatedAppointments(client);
+
         for (Appointment appointment : relatedAppointment) {
             stringBuilder.append(appointment + "\n");
         }
+
         return stringBuilder.toString();
     }
 
@@ -160,10 +173,12 @@ public class ModelManager implements Model {
                 appointmentsThatOnlyHaveThisClient.add(appointment);
             }
         }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (Appointment appointment : appointmentsThatOnlyHaveThisClient) {
             stringBuilder.append(appointment + "\n");
         }
+
         return stringBuilder.toString();
     }
 
@@ -177,8 +192,7 @@ public class ModelManager implements Model {
     public void updateEditedClientInAppointments(Person personToEdit, Person editedPerson) {
         List<Appointment> relatedAppointments = getRelatedAppointments(personToEdit);
         for (Appointment appointment : relatedAppointments) {
-            appointment.removeClient(personToEdit);
-            appointment.addClient(editedPerson);
+            appointment.setClient(personToEdit, editedPerson);
         }
     }
 
@@ -219,6 +233,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+
         filteredPersons.setPredicate(predicate);
     }
 
@@ -302,12 +317,4 @@ public class ModelManager implements Model {
         }
         return stringBuilder.toString();
     }
-
-    @Override
-    public void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment) {
-        requireAllNonNull(appointmentToEdit, editedAppointment);
-
-        schedule.setAppointment(appointmentToEdit, editedAppointment);
-    }
-
 }
