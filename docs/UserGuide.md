@@ -16,7 +16,9 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 * [Walk-through](#walkthrough)
 
 * [Features](#features)
-
+  * [General](#general)
+    * [Accessing the help page: `help`](#help)
+    * [Exiting the app: `exit`](#exit)
   * [Managing contacts](#managing-contacts)
     * [Adding a contact: `add`](#add)
     * [Editing a contact: `edit`](#edit)
@@ -32,9 +34,6 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
     * [Finding a lesson / lessons: `findc`](#findc)
     * [Listing all lessons: `listc`](#listc)
     * [Clearing all lessons: `clearc`](#clearc)
-
-  * [Accessing the help page: `help`](#help)
-  * [Exiting the app: `exit`](#exit)
 
 * [Saving the data](#saving-data)
 
@@ -122,6 +121,28 @@ Some example commands you can try:
 ***
 
 ## Features <a name="features"></a>
+
+### General <a name="general"></a>
+
+#### Accessing the help page : `help` <a name="help"></a>
+
+Shows a message explaining how to access the help page.
+
+Format: `help`
+
+Command aliases: `man` `h`
+
+<img src="images/HelpCommand.png" width="800px">
+
+#### Exiting the program : `exit` <a name="exit"></a>
+
+Exits the program.
+
+Format: `exit`
+
+Command aliases: `quit` `q`
+
+***
 
 ### Managing contacts <a name="managing-contacts"></a>
 
@@ -299,26 +320,6 @@ Command aliases: `clrc` `cc`
 
 ***
 
-### Accessing the help page : `help` <a name="help"></a>
-
-Shows a message explaining how to access the help page.
-
-Format: `help`
-
-Command aliases: `man` `h`
-
-<img src="images/HelpCommand.png" width="800px">
-
-### Exiting the program : `exit` <a name="exit"></a>
-
-Exits the program.
-
-Format: `exit`
-
-Command aliases: `quit` `q`
-
-***
-
 ### Saving the data <a name="saving-data"></a>
 
 Contact data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -330,6 +331,8 @@ contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json
 <div markdown="span" class="alert alert-warning">:exclamation: Caution:
 If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file at the next run.
 </div>
+
+***
 
 ## Command Summary <a name="summary"></a>
 
