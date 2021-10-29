@@ -1,6 +1,7 @@
 package seedu.siasa.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -90,10 +91,16 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the comparator of the person list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateFilteredPersonList(Comparator<Person> comparator);
 
     /**
      * Returns true if a policy with the same identity as {@code policy} exists in the SIASA.
@@ -136,8 +143,14 @@ public interface Model {
     ObservableList<Policy> getFilteredPolicyList();
 
     /**
-     * Updates the filter of the filtered policy list to filter by the given {@code predicate}.
+     * Updates the filter of the policy list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPolicyList(Predicate<Policy> predicate);
+
+    /**
+     * Updates the comparator of the policy list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateFilteredPolicyList(Comparator<Policy> predicate);
 }
