@@ -16,7 +16,7 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 Here are some important syntax which are used throughout this document:
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 **:information_source: Notes:**<br>
 Useful information or tips are displayed here
@@ -180,8 +180,7 @@ Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTY POINTS [alg/ALL
 * `ALLERGIES`, `SPECIAL REQUESTS` and `TAG` are optional fields that can be omitted.
 
 Examples: 
-* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/1000 alg/Kiwi sr/NoAirCon t/friendly` adds a customer with the respective fields.
-<br></br>
+* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/1000 alg/Kiwi sr/NoAirCon t/friendly` adds a customer with the respective fields.<br>
 * `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/10000` adds a customer without any optional fields.
 
 
@@ -195,11 +194,10 @@ Format: `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOB
 * `TAG` & `SHIFT` are optional fields that can be omitted.
 
 Examples: 
-* `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Head Chef t/Team A sh/2021-12-08 0800` adds an employee with the respective fields.
-<br></br>
+* `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Head Chef t/Team A sh/2021-12-08 0800` adds an employee with the respective fields.<br>
 * `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Chef` adds an employee without any optional fields.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * When adding a `SHIFT`, `yyyy-MM-dd HHmm` format must be followed strictly<br>
@@ -218,12 +216,11 @@ Format: `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYD
 
 Examples:
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/2021-11-19 15:00 t/Regular` 
-  adds a supplier with the respective fields.
-<br></br>
+  adds a supplier with the respective fields.<br>
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/08:00 24-12-2021` adds a 
   supplier without any optional fields.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * Order of the `date` and `time` in `DeliveryDetails` does not matter but `time` has to be in `24 hour` 
@@ -249,11 +246,10 @@ Format: `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]…`
 * Date-time format is `yyyy-MM-dd HH00`, e.g. `2021-11-11 2000`
 
 Examples:
-* `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with
-<br></br>
+* `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with<br>
 * `addR 5 p/12345668 at/2021-02-14 1200`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 :information_source: **Notes:**<br>
 
@@ -274,11 +270,10 @@ Format: `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [s
 * Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list.
 
 Examples:
-* `editC 1 alg/Kiwi sr/no air con` Replaces the existing allergies and special requests of the 1st customer to `Kiwi` and `no air con` respectively.
-<br></br> 
+* `editC 1 alg/Kiwi sr/no air con` Replaces the existing allergies and special requests of the 1st customer to `Kiwi` and `no air con` respectively.<br> 
 * `editC 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 :information_source: **Notes:**<br>
 
@@ -300,11 +295,10 @@ Format: `editE INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SA
 
 
 Examples:
-* `editE 1 sal/4000` Edits the salary of the 1st employee to be `4000`.
-<br></br> 
+* `editE 1 sal/4000` Edits the salary of the 1st employee to be `4000`.<br> 
 * `editE 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -324,11 +318,10 @@ Format: `editS INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [d
 * Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list.
 
 Examples:
-* `editS 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.
-<br></br>
+* `editS 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.<br>
 * `editS 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -374,7 +367,7 @@ Format: `deleteC INDEX`
 Example:
 * `deleteC 2` deletes the 2nd customer displayed in the address book.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed customer list.
@@ -477,6 +470,7 @@ Examples:
 * `getC 1`: Gets the customer who made the 1st display reservation.
 
 <div markdown="block" class="alert alert-warning">
+  
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed reservation list.
@@ -515,10 +509,8 @@ Format: `findE KEYWORDS`
 * Displays all employees that contain the specified keywords **together**.
 
 Examples:
-* `findE 2021-12-08 0800`: Finds employees that have `2021-12-08 0800` in any of their fields.
-<br></br>
-* `findE Team A`: Finds all employees that have `Team A` in any of their fields.
-<br></br>
+* `findE 2021-12-08 0800`: Finds employees that have `2021-12-08 0800` in any of their fields.<br>
+* `findE Team A`: Finds all employees that have `Team A` in any of their fields.<br>
 * `findE Team A`: **DOES NOT** find employees that have `Team` and `A` in different fields or different shifts/tags
 
 <div markdown="block" class="alert alert-warning">
@@ -565,8 +557,7 @@ Format: `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT`
 * Sorts and displays the list of customers based on the sort type and order.
 
 Examples:
-* `sortC by/n o/d`: sorts the list of customers by `NAME` in `descending` order
-<br></br>
+* `sortC by/n o/d`: sorts the list of customers by `NAME` in `descending` order<br>
 * `sortC by/alg o/a`: sorts the list of customers by `ALLERGIES` in `ascending` order
 
 <div markdown="block" class="alert alert-warning">
@@ -588,8 +579,7 @@ Format: `sortE by/PREFIX_OF_EMMPLOYEE_FIELD o/ORDER_OF_SORT`
   and order.
 
 Examples:
-* `sortE by/sal o/a`: Sorts the list of employees by `SALARY` in `ascending` order
-<br></br>
+* `sortE by/sal o/a`: Sorts the list of employees by `SALARY` in `ascending` order<br>
 * `sortE by/n o/d`: Sorts the list of employees by `NAME` in `descending` order
 
 <div markdown="block" class="alert alert-warning">
@@ -612,8 +602,7 @@ Format: `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`
   and order.
 
 Examples:
-* `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERYDETAILS` in `ascending` order
-<br></br>
+* `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERYDETAILS` in `ascending` order<br>
 * `sorts by/N o/d`: Sorts the list of suppliers by `NAME` in `descending` order
 
 <div markdown="block" class="alert alert-warning">
@@ -724,7 +713,7 @@ Format: `settables LIST_OF_TABLE_SIZES`
 Examples:
 * `settables 10,8,8,4,4,2x6,1x4`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 :information_source: **Notes:**<br>
 
