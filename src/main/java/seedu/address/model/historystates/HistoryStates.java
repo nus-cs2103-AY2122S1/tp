@@ -1,8 +1,8 @@
-package seedu.address.model.history_states;
+package seedu.address.model.historystates;
 
 import java.util.LinkedList;
 
-import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
+import seedu.address.model.historystates.exceptions.NoHistoryStatesException;
 
 public class HistoryStates {
     private LinkedList<State> historyStates;

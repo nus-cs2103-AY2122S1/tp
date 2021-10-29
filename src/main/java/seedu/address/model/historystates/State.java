@@ -1,4 +1,4 @@
-package seedu.address.model.history_states;
+package seedu.address.model.historystates;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.schedule.Schedule;
