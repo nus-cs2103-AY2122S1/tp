@@ -9,41 +9,42 @@ than from traditional GUI apps. The application and guide are based on AB3 with 
 
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Table of Contents
-    - [Quick Start](#quick-start)
-    - [Features](#features)
-        - [Viewing help : `help`](#viewing-help--help)
-        - [Client Commands](#client-commands)
-            - [Listing all clients : `list`](#listing-all-clients--list)
-            - [Adding a client : `add`](#adding-a-client--add)
-            - [Deleting a client : `delete`](#deleting-a-client--delete)  
-            - [Editing a client : `edit`](#editing-a-client--edit)
-            - [Locating clients by name : `find`](#locating-clients-by-name--find)
-        - [Task Commands](#task-commands)
-            - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
-            - [Adding a task : `addtask`](#adding-a-task--addtask)
-            - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
-            - [Editing a task : `edittask`](#editing-a-task--edittask)
-            - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
-            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
-            - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
-            - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
-        - [Order Commands](#order-commands)
-            - [Listing all orders : `listorder`](#listing-all-orders--listorder)
-            - [Adding an order : `addorder`](#adding-an-order--addorder)
-            - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
-            - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
-            - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords--findorder)
-            - [Listing completed orders : `completedorders`](#listing-completed-orders--completedorders)
-            - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders--incompleteorders)
-            - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
-            - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
-        - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-        - [Exiting the program : `exit`](#exiting-the-program--exit)
-        - [Saving the data](#saving-the-data)
-        - [Editing the data file](#editing-the-data-file)
-    - [FAQ](#faq)
-    - [Command Summary](#command-summary)
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Client Commands](#client-commands)
+        - [Listing all clients : `list`](#listing-all-clients--list)    
+        - [Adding a client : `add`](#adding-a-client--add)
+        - [Deleting a client : `delete`](#deleting-a-client--delete)
+        - [Editing a client : `edit`](#editing-a-client--edit)
+        - [Locating clients by name : `find`](#locating-clients-by-name--find)
+    - [Task Commands](#task-commands)
+        - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
+        - [Adding a task : `addtask`](#adding-a-task--addtask)
+        - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
+        - [Editing a task : `edittask`](#editing-a-task--edittask)
+        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
+        - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
+        - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
+        - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
+    - [Order Commands](#order-commands)
+        - [Listing all orders : `listorder`](#listing-all-orders--listorder)
+        - [Adding an order : `addorder`](#adding-an-order--addorder)
+        - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
+        - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
+        - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords--findorder)
+        - [Listing completed orders : `completedorders`](#listing-completed-orders--completedorders)
+        - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders--incompleteorders)
+        - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
+        - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
             
             
 
@@ -377,6 +378,7 @@ Format: `sortorders f/FIELD o/ORDERING`
 <div markdown="span" class="alert alert-primary">
 
 **:information_source: Note:** <br>
+
 * Adding / Deleting an order reverts the list to the default ordering.
 * The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
 
