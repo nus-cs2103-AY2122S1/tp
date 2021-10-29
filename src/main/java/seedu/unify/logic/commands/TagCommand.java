@@ -84,7 +84,7 @@ public class TagCommand extends Command {
         assert taskToTag != null;
         Set<Tag> updatedTags = tagTaskDescriptor.getTags().orElse(taskToTag.getTags());
         return new Task(taskToTag.getName(), taskToTag.getTime(),
-                taskToTag.getDate(), updatedTags, taskToTag.getState());
+                taskToTag.getDate(), updatedTags, taskToTag.getState(), taskToTag.getPriority());
     }
 
     @Override

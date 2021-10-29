@@ -15,10 +15,12 @@ import javafx.collections.transformation.FilteredList;
  * Supports a minimal set of list operations.
  */
 public class WeeklyTasks implements Iterable<Task> {
+    private static final Integer ACADEMIC_WEEK_OFFSET = 32;
     private static final Integer INITIAL_WEEK = 1;
     private static final Integer YEAR = 2021;
     private static final Integer YEAR_OFFSET = 3; // The first full week of 2021 begins on the 4th
     private static final Integer DAYS_IN_WEEK = 7;
+
 
     private final SimpleIntegerProperty weekNumber;
     private final SimpleIntegerProperty totalWeeklyTasks;
@@ -76,7 +78,8 @@ public class WeeklyTasks implements Iterable<Task> {
      * Returns the local date of the first day of the week
      */
     public LocalDate getFirstDayOfWeek() {
-        LocalDate firstDay = LocalDate.ofYearDay(YEAR, getWeekNumber() * DAYS_IN_WEEK - YEAR_OFFSET);
+        LocalDate firstDay = LocalDate.ofYearDay(
+                YEAR, (getWeekNumber() + ACADEMIC_WEEK_OFFSET) * DAYS_IN_WEEK - YEAR_OFFSET);
         return firstDay;
     }
 

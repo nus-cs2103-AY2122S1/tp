@@ -1,36 +1,82 @@
 package seedu.unify.model.task;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static seedu.unify.commons.util.AppUtil.checkArgument;
 
-public class Priority {
-    private static final Integer PRIORITY = Integer.MIN_VALUE;
-    private static final Integer YEAR = 2021;
-    private static final Integer YEAR_OFFSET = 3; // The first full week of 2021 begins on the 4th
-    private static final Integer DAYS_IN_WEEK = 7;
+public class Priority implements Comparable<Priority> {
 
-    private final SimpleIntegerProperty priorityNumber;
-    private final ObservableList<Task> allTaskList;
+    public enum ObjectPriority {
+        LOW,
+        MEDIUM,
+        HIGH
+    }
+
+    public static final String MESSAGE_CONSTRAINTS = "Priority should be LOW, MEDIUM or HIGH";
+
+    private ObjectPriority priority;
+
 
     /**
-     * Constructs a {@code WeeklyTasks}.
-     * For the INITIAL_WEEK of the YEAR.
+     * Constructs a {@code Priority}.
      *
-     * @param taskList A valid task list.
      */
-    public Priority(ObservableList<Task> taskList) {
-        this(taskList, PRIORITY);
+    public Priority() {
+        priority = ObjectPriority.LOW;
     }
 
     /**
-     * Constructs a {@code WeeklyTasks}.
-     * For the given week of the YEAR.
+     * Constructs a {@code Priority}.
      *
-     * @param taskList A valid task list.
-     * @param priority A valid default priority of the class.
      */
-    public Priority(ObservableList<Task> taskList, Integer priority) {
-        allTaskList = taskList;
-        priorityNumber = new SimpleIntegerProperty(priority);
+    public Priority(ObjectPriority priority) {
+        this.priority = priority;
+    }
+
+    /**
+     * Constructs a {@code Priority}.
+     *
+     */
+    public Priority(String priority) {
+        requireNonNull(priority);
+        checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
+        this.priority = ObjectPriority.valueOf(priority);
+    }
+
+    public ObjectPriority getPriority() {
+        return priority;
+    }
+
+    /**
+     * Returns true if a given string is a valid date.
+     */
+    public static boolean isValidPriority(String test) {
+        try {
+            ObjectPriority.valueOf(test);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public int compareTo(Priority other) {
+        return priority.compareTo(other.priority);
+    }
+
+    @Override
+    public String toString() {
+        return priority.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Priority // instanceof handles nulls
+                && priority.equals(((Priority) other).priority)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return priority.hashCode();
     }
 }

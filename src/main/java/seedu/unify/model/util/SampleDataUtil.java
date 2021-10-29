@@ -9,6 +9,7 @@ import seedu.unify.model.UniFy;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Priority;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 
@@ -21,22 +22,22 @@ public class SampleDataUtil {
         return new Task[] {
             new Task(new Name("Alex Yeoh"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("friends")),
+                getTagSet("friends"), new Priority()),
             new Task(new Name("Bernice Yu"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("colleagues", "friends"), new Priority()),
             new Task(new Name("Charlotte Oliveiro"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("neighbours")),
+                getTagSet("neighbours"), new Priority()),
             new Task(new Name("David Li"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("family")),
+                getTagSet("family"), new Priority()),
             new Task(new Name("Irfan Ibrahim"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("classmates")),
+                getTagSet("classmates"), new Priority()),
             new Task(new Name("Roy Balakrishnan"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("colleagues"))
+                getTagSet("colleagues"), new Priority())
         };
     }
 

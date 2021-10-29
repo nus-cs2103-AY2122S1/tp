@@ -1,29 +1,20 @@
 package seedu.unify.model.task;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.unify.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Task's State  in the Task list.
  */
 public class State {
 
     public enum ObjectState {
-        TODO {
-            public String toString() {
-                return "TODO";
-            }
-        },
-        DONE {
-            public String toString() {
-                return "DONE";
-            }
-        },
-        OVERDUE {
-            public String toString() {
-                return "OVERDUE";
-            }
-        }
+        TODO,
+        DONE,
+        OVERDUE
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "State should be todo, done or overdue";
+    public static final String MESSAGE_CONSTRAINTS = "State should be TODO, DONE or OVERDUE";
 
     private ObjectState value;
 
@@ -35,14 +26,28 @@ public class State {
         value = ObjectState.TODO;
     }
 
-    public State(ObjectState value) {
-        this.value = value;
+    /**
+     * Constructs a {@code State}.
+     *
+     */
+    public State(ObjectState state) {
+        this.value = state;
     }
 
-    public State(String string) {
-        this.value = ObjectState.valueOf(string);
+    /**
+     * Constructs a {@code State}.
+     *
+     */
+    public State(String state) {
+        requireNonNull(state);
+        checkArgument(isValidState(state), MESSAGE_CONSTRAINTS);
+        this.value = ObjectState.valueOf(state);
     }
 
+    /**
+     * Returns the object state.
+     *
+     */
     public ObjectState getState() {
         return value;
     }

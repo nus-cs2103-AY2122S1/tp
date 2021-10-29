@@ -3,6 +3,7 @@ package seedu.unify.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -27,8 +28,8 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "Assignment 1 "
             + PREFIX_DATE + "2021-12-12 "
             + PREFIX_TIME + "16:40 "
-            + PREFIX_TAG + "important"
-            + PREFIX_TAG + "graded";
+            + PREFIX_TAG + "graded "
+            + PREFIX_PRIORITY + "LOW ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Uni-Fy app";

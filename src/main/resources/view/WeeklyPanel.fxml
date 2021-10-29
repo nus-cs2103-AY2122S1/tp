@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="weekLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" styleClass="label-header-medium" text="week" textAlignment="CENTER" textFill="WHITE" />
       <StackPane fx:id="progressPanelPlaceholder" />

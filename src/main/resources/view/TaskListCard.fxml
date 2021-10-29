@@ -31,6 +31,7 @@
       <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
       <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
       <Label fx:id="state" styleClass="label-padded" text="\$state" />
+      <Label fx:id="priority" styleClass="label-padded" text="\$priority" />
     </VBox>
       <rowConstraints>
          <RowConstraints />
