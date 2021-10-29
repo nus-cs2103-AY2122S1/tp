@@ -1,6 +1,7 @@
 package seedu.siasa.model;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -96,6 +97,11 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Returns a map of persons and the number of policies each of them has.
+     */
+    Map<Person, Integer> getNumberPoliciesPerPerson();
+
+    /**
      * Returns true if a policy with the same identity as {@code policy} exists in the SIASA.
      */
     boolean hasPolicy(Policy policy);
@@ -125,6 +131,11 @@ public interface Model {
      * The policy identity of {@code editedPolicy} must not be the same as another existing policy in the SIASA.
      */
     void setPolicy(Policy target, Policy editedPolicy);
+
+    /**
+     * Returns the total commission of the policy list.
+     */
+    int getTotalCommission();
 
     /**
      * Removes all policies belonging to the given person {@code target}.

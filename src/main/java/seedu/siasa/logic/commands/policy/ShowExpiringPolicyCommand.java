@@ -25,7 +25,7 @@ public class ShowExpiringPolicyCommand extends Command {
 
         while (policyListIterator.hasNext()) {
             Policy policy = policyListIterator.next();
-            if (policy.getExpiryDate().value.isBefore(LocalDate.now().plusMonths(1))) {
+            if (policy.getCoverageExpiryDate().value.isBefore(LocalDate.now().plusMonths(1))) {
                 listOfPolicies.append(policy);
             }
         }

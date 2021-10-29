@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -124,6 +125,11 @@ public class ModelManager implements Model {
         siasa.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Map<Person, Integer> getNumberPoliciesPerPerson() {
+        return siasa.getNumberPoliciesPerPerson();
+    }
+
     //=========== Policy CRUD ================================================================================
 
     @Override
@@ -159,6 +165,11 @@ public class ModelManager implements Model {
     @Override
     public void removePoliciesBelongingTo(Person target) {
         siasa.removePoliciesBelongingTo(target);
+    }
+
+    @Override
+    public int getTotalCommission() {
+        return siasa.getTotalCommission();
     }
 
     //=========== Filtered Person List Accessors =============================================================
