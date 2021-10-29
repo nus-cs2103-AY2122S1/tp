@@ -350,6 +350,7 @@ Examples:
 * **`find`** `nat/Singaporean` <br>
 ![result for 'find n/alex n/david'](images/findAlexAndDavid.png)
 *Find Command: n/alex n/david*
+
 ![result for 'find nat/Singapore'](images/findSingaporean.png)
 *Find Command: nat/Singaporean*
 
