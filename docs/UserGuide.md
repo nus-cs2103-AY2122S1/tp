@@ -173,17 +173,19 @@ Delete the specified contact(s) from contHACKS.
 
 Format: `delete INDEX`/ `delete INDEX_START-INDEX_END`
 
-* Deletes the specified contact(s) at the specified index(es) (inclusive)
-* `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`
+* Deletes the specified contact(s) at the specified index(es) including `INDEX_END` and `INDEX_START`.
+* `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`.
 
-Format: `delete m/MODULE_CODE`
+Format: `delete m/MODULE_CODE`/`delete m/MODULE_CODE LESSONS_CODE`
 
 * Delete all contacts associated with a module code using `m/MODULE_CODE`.
+* Delete all contact associated with a lesson code under the module using `m/MODULE_CODE LESSONS_CODE`.
 
 Examples:
-* `delete 2`: deletes the 2nd contact
-* `delete 2-5`: deletes the 2nd, 3rd, 4th and 5th contacts
-* `delete m/CS2103T`: deletes all the contacts from CS2103T
+* `delete 2`: Deletes the 2nd contact in the displayed list.
+* `delete 2-5`: Deletes the 2nd, 3rd, 4th and 5th contacts in the displayed list.
+* `delete m/CS2103T`: Deletes all the contacts with the module code CS2103T.
+* `delete m/CS2103T T10`: Deletes all the contacts with both the module code CS2103T and lesson code T10.
 
 Command aliases: `del` `rm` `d`
 
@@ -278,6 +280,24 @@ Command aliases: `updatec` `ec`
 
 
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
+
+Deletes the specified lesson(s) from contHACKS.
+
+Format: `deletec INDEX`/`deletec INDEX_START-INDEX_END`
+
+* Deletes the specified lesson(s) at the specified index(es) including the `INDEX_START` and `INDEX_END`.
+* `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`.
+
+Format: `deletec m/MODULE_CODE`
+
+* Deletes all contacts associated with a module code using `m/MODULE_CODE`.
+
+Examples:
+* `deletec 1`: Deletes the 1st lesson in the displayed list.
+* `deletec 1-3`: Deletes 1st, 2nd and 3rd lesson in the displayed list.
+* `deletec m/CS2103T`: Deletes all the lessons with CS2103T module code.
+
+Command aliases: `delc` `rmc` `dc`
 
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
 
