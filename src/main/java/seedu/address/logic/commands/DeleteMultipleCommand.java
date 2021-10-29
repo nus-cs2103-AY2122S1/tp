@@ -52,9 +52,6 @@ public class DeleteMultipleCommand extends Command {
         this.startIndex = 0;
         this.endIndex = lastShownList.size();
 
-        StringBuilder result = new StringBuilder(
-                );
-
         for (int i = startIndex; i < endIndex; i++) {
             Person personToDelete = lastShownList.get(startIndex);
             model.deletePerson(personToDelete);

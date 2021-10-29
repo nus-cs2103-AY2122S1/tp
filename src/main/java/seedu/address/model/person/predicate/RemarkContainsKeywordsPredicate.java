@@ -17,9 +17,10 @@ public class RemarkContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> person.getRemark().value.toLowerCase()
-                        .contains(keyword.toLowerCase()));
+        return !keywords.isEmpty()
+                 && keywords.stream()
+                .allMatch(keyword -> !keyword.trim().isEmpty() && person.getRemark().value.trim().toLowerCase()
+                .contains(keyword.trim().toLowerCase()));
     }
 
     @Override
