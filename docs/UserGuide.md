@@ -148,14 +148,7 @@ In this guide, the syntax / format of a command is shown like this:
 
 This section lists the types of commands that TutorAid can execute. For more information about how to interpret these commands, check out the [Command Format](#23-command-format) and [Command Syntax](#231-command-syntax-in-this-guide) sections.
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpWindow.png)
-
-Format: `help`
-
+## 4.1 Student Commands
 ### Adding a student: `add`
 Adds a new student to TutorAid.
 
@@ -165,18 +158,6 @@ Examples:
 * `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 
 > :bulb: The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
-
-
-### Listing all students and lessons: `list`
-
-Shows a list of all students and lessons in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise most fields are hidden by default.
-
-Format: `list [-a]`
-
-Examples:
-
-- `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
-- `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
 ### Deleting a student : `delete`
 Deletes the specified student with the given student index from TutorAid.
@@ -219,69 +200,22 @@ Format: `view -s STUDENT_INDEX`
 Example:
 * `view -s 2` shows the details associated with the 2nd student
 
-### Viewing a lesson : `view -l`
+### Locating students by name: `find -s`
 
-Displays the specified lesson’s name, capacity, price and timing, along with names of students who have the specified lesson.
+Finds students whose names contain any of the given keywords.
 
-Format: `view -l LESSON_INDEX`
+Format: `find -s KEYWORD [MORE_KEYWORDS]`
 
-* Display details of the lesson at the specified LESSON_INDEX.
-* Display details of the students that have the lesson at the specified LESSON_INDEX.
-* The index refers to the index number shown in the displayed lesson list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example:
-* `view -l 2` shows the details associated with the 2nd lesson
-
-### Clearing all entries : `clear`
-
-Clears all entries from TutorAid.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-TutorAid data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`. Advanced users are welcome to update data directly by editing that data file.
-
-
-> :exclamation: **If your changes to the data file makes its format invalid, TutorAid will discard all data and start with an empty data file at the next run.**
-
-
-### Adding progress for a student : `add -p`
-
-Adds a given string representing progress to a student with a given student index.
-
-Format: `add -p STUDENT_INDEX PROGRESS`
-
-* Adds `PROGRESS` for the student at the specified `STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Partial keywords will be matched e.g. `Han` will match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student in the list.
-
-### Deleting progress from a student : `del -p`
-
-Removes the string representing progress from the student with a given student index.
-
-Format: `del -p STUDENT_INDEX`
-
-* Deletes the `PROGRESS` for the student at the specified `STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
+* `find -s John` returns `john`, `John Doe` and `Johnny Liu`
+* `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Setting payment made: `paid`
 
@@ -310,6 +244,34 @@ Format: `unpaid STUDENT_INDEX`
 Examples:
 
 - `unpaid 3` updates the 3rd student's payment status to `Has not paid for the current month`.
+
+### Adding progress for a student : `add -p`
+
+Adds a given string representing progress to a student with a given student index.
+
+Format: `add -p STUDENT_INDEX PROGRESS`
+
+* Adds `PROGRESS` for the student at the specified `STUDENT_INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student in the list.
+
+### Deleting progress from a student : `del -p`
+
+Removes the string representing progress from the student with a given student index.
+
+Format: `del -p STUDENT_INDEX`
+
+* Deletes the `PROGRESS` for the student at the specified `STUDENT_INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
+
+## 4.2 Lesson Commands
 
 ### Adding a lesson: `add -l`
 
@@ -353,6 +315,48 @@ Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRIC
 Examples:
 * `edit -l c/20 p/80`
 
+### Viewing a lesson : `view -l`
+
+Displays the specified lesson’s name, capacity, price and timing, along with names of students who have the specified lesson.
+
+Format: `view -l LESSON_INDEX`
+
+* Display details of the lesson at the specified LESSON_INDEX.
+* Display details of the students that have the lesson at the specified LESSON_INDEX.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `view -l 2` shows the details associated with the 2nd lesson
+
+### Locating lessons by name: `find -l`
+
+Finds lessons whose names contain any of the given keywords.
+
+Format: `find -l KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `math` will match `Math`
+* The order of the keywords does not matter. e.g. `Math Upper` will match `Upper Math`
+* Only the name is searched.
+* Partial keywords will be matched e.g. `Sci` will match `Science`
+* Lessons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Mathematics Upper` will return `Mathematics Lower`, `Math Upper`
+
+Examples:
+* `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
+
+## 4.3 Student and Lesson Commands
+### Listing all students and lessons: `list`
+
+Shows a list of all students and lessons in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise most fields are hidden by default.
+
+Format: `list [-a]`
+
+Examples:
+
+- `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
+- `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
+
 ### Adding students to lessons: `add -sl`
 
 Adds students to lessons in TutorAid.
@@ -383,24 +387,39 @@ Examples:
 
 > :exclamation: All of these students must be attending all the lessons provided for this command to work.
 
-### Locating students or lessons by name: `find -s` / `find -l`
+## 4.4 Other Commands
+### Viewing help : `help`
 
-Finds students or lessons whose names contain any of the given keywords. Use `-s` flag to search for students and
-`-l` to search for lessons.
+Shows a message explaining how to access the help page.
 
-Format: `find FLAG KEYWORD [MORE_KEYWORDS]`
+![help message](images/helpWindow.png)
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Partial keywords will be matched e.g. `Han` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `help`
 
-Examples:
-* `find -s John` returns `john`, `John Doe` and `Johnny Liu`
-* `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
-* `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
+### Clearing all entries : `clear`
+
+Clears all entries from TutorAid.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+## 4.5 Saving and Editing Data
+
+### Saving the data
+
+TutorAid data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`. Advanced users are welcome to update data directly by editing that data file.
+
+
+> :exclamation: **If your changes to the data file makes its format invalid, TutorAid will discard all data and start with an empty data file at the next run.**
 
 ***
 
@@ -455,4 +474,5 @@ Action | Format and Examples
 Action | Format and Examples
 --------|------------------
 **[Help](#viewing-help--help)** | `help`
+**[Clear](#clearing-all-entries--clear)** | `clear`
 **[Exit](#exiting-the-program--exit)** | `exit`
