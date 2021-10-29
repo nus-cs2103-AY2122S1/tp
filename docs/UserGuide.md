@@ -347,11 +347,7 @@ Format: `deletecg INDEX`
 Examples:
 * `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
 
-<<<<<<< HEAD
 ### Adding Student to a group: `addsg`
-=======
-### Adding Student to a group: `addsg` [Coming Soon]
->>>>>>> 26bc37482e0c6a7ebb59d6753eae335409cadb55
 
 Adds student to a group.
 
@@ -430,13 +426,8 @@ Action | Format, Examples
 **View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
 **List all classes** | `listc`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
-<<<<<<< HEAD
 **Add Tutorial Group** | `addcg gn/GROUP_NAME c/CLASS_CODE type/TYPE` <br> e.g.,`addcg gn/1 c/G11 type/OP1`
-**Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2` 
-=======
-**Add Tutorial Group** | `addcg gn/GROUP_NAME c/CLASS_CODE type/TYPE` <br> e.g.,`addsg n/Betsy tp/OP1 g/A`
 **Delete Tutorial Group** | `deletecg INDEX` <br> e.g., `deletecg 2`
->>>>>>> 26bc37482e0c6a7ebb59d6753eae335409cadb55
 **List Tutorial Group** | `listg`
 **Add Student to Group** | `addsg INDEX g/GROUP_NAME c/CLASSCODE type/TYPE` <br> e.g., `addsg  1 gn/Group 1 c/G01 type/OP1`
 **Delete Student from Group** | `deletesg INDEX g/GROUP_NAME c/CLASSCODE type/TYPE` <br> e.g., `deletesg  1 gn/Group 1 c/G01 type/OP1`
