@@ -12,7 +12,6 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 ## Table of Contents
 
 * Table of Contents
-
 {:toc}
 
 <!---
