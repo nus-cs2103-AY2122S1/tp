@@ -185,7 +185,9 @@ Find tasks with matching keywords and show them in the task list.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `find keyword (more_keywords) (d/date)`
+- `find keyword (more_keywords)`
+- <code> find <i>d/date</i> </code>
+- <code> find <i>t/tag</i> </code>
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -193,19 +195,17 @@ Find tasks with matching keywords and show them in the task list.
 **:information_source: Interpretation:**<br>
 * The search is case-insensitive.
 * The order of the keywords does not matter.
-* Only the name of the task is searched.
+* Only the name,date or tag of the task is searched.
 * Incomplete keywords will be matched e.g. Qu will match Quiz
 * Only tasks containing all keywords will be shown
-* if `d/date` field is provided:
-  * Only tasks due on that date is searched.
 
 </div>
   
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
-* `find Quiz GEQ1000` returns GEQ1000 Quiz 1,  GEQ1000 Quiz 2
-* `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
+* `find d/2021-10-10` returns all tasks that is due by 2021-10-10
+* `find t/GEQ1000` returns all tasks tagged with GEQ1000
 </div>
 
 ![find_command](images/findCommand.jpeg)
@@ -433,7 +433,7 @@ Action | Format, Examples
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
 **Show** | `show week_number `
 **Edit** | :warning:`WORK_IN_PROGRESS`
-**Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
+**Find** | <code>find <i>keyword (more_keywords)</i></code> <br><code> find <i> d/date</i></code> <br><code> find <i> t/tag</i></code> <br> e.g. `find Quiz` <br> e.g. `find d/2021-12-12` <br> e.g. `find t/GEQ1000`
 **Tag** | :warning:`WORK_IN_PROGRESS`
 **Help** | `help`
 **Retrieve past Commands** | `history`
