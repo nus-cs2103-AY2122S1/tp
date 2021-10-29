@@ -2,7 +2,13 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Objects;
 
 /**
  * Represents a Person's social handle in the address book.
@@ -10,19 +16,43 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SocialHandle {
 
-    public static final String MESSAGE_CONSTRAINTS = "Social handle should be "
-            + "a single string without whitespaces, should starts with "
-            + "the platform name in 2 character, followed by a colon (:), and followed "
-            + "by the handle name"
-            + "and handle name should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Social handle should be in PLATFORM:USERNAME format.\n"
+            + "Supported PLATFORM: "
+            + "Instagram (ig), "
+            + "Telegram (tg), "
+            + "Linkedin (in), "
+            + "Facebook (fb), "
+            + "Snapchat (sc), "
+            + "Twitter (tw), "
+            + "Github (gh), "
+            + "Discord (dc)"
+            + "\n"
+            + "(e.g. tg:tanjj3298)\n";
+
+    public static final String PLATFORM_CONSTRAINTS = "Only the following platforms are supported: "
+            + "Instagram (ig), "
+            + "Telegram (tg), "
+            + "Linkedin (in), "
+            + "Facebook (fb), "
+            + "Snapchat (sc), "
+            + "Twitter (tw), "
+            + "Github (gh), "
+            + "Discord (dc)";
+
+    public static final String USERNAME_CONSTRAINTS = "USERNAME should not contain whitespaces.";
+
+    public static final String CLEAR_CONSTRAINTS = "Unable to clear social handles if there are"
+            + " multiple social handle fields.";
 
     /*
-     * The first 2 characters of the social handle should be the platform name
-     * in shorthand form, followed by a colon (:), and followed by the handle name.
-     * Handle name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * The value should not contain whitespace,
+     * and it should not be blank.
      */
-    public static final String VALIDATION_REGEX = "[a-z]{2}:\\S*";
+    public static final String VALIDATION_REGEX = "\\S+";
+
+    private static final HashSet<String> SUPPORTED_PLATFORMS = getSupportedPlatforms();
+
+    private static final Hashtable<String, String> PLATFORM_MAPPING = getPlatformMapping();
 
     public final String platform;
     public final String value;
@@ -39,45 +69,110 @@ public class SocialHandle {
             this.value = "";
             return;
         }
-        checkArgument(isValidSocialHandle(socialHandle), MESSAGE_CONSTRAINTS);
-        assert socialHandle.contains(":") : "String does not contain :," + socialHandle;
+        checkArgument(socialHandle.contains(":"), MESSAGE_CONSTRAINTS);
+        assert socialHandle.contains(":") : "String does not contain colon (:), " + socialHandle;
         String[] s = socialHandle.split(":", 2);
         assert s.length == 2 : "Length of split string not 2:" + socialHandle;
-        this.platform = s[0];
-        this.value = s[1];
+        String platform = parsePlatform(s[0]);
+        checkArgument(isValidPlatform(platform), PLATFORM_CONSTRAINTS);
+        String value = s[1].strip();
+        checkArgument(isValidValue(value), "Invalid social handle: " + socialHandle
+                + "\n" + USERNAME_CONSTRAINTS);
+        this.platform = platform;
+        this.value = value;
     }
 
     /**
-     * Constructs a {@SocialHandle}
-     *
-     * @param platform
-     * @param value
+     * Constructs a {@code SocialHandle}
      */
     public SocialHandle(String platform, String value) {
+        requireAllNonNull(platform, value);
+        if (value.isEmpty()) {
+            this.value = "";
+            if (platform.isEmpty()) {
+                this.platform = "";
+                return;
+            } else {
+                checkArgument(isValidPlatform(platform), PLATFORM_CONSTRAINTS);
+                this.platform = platform;
+                return;
+            }
+        }
         checkArgument(isValidSocialHandle(platform, value), MESSAGE_CONSTRAINTS);
         this.platform = platform;
         this.value = value;
     }
 
     /**
+     * Constructs an empty {@code SocialHandle}
+     */
+    public SocialHandle() {
+        this.platform = "";
+        this.value = "";
+    }
+
+    /**
      * Returns true if a given string is a valid social handle.
      */
     public static boolean isValidSocialHandle(String test) {
-        if (test.isEmpty()) {
-            return true;
+        if (!test.contains(":")) {
+            return false;
         }
-        return test.matches(VALIDATION_REGEX);
+        String[] s = test.split(":", 2);
+        assert s.length == 2 : "Length of split string not 2: " + test;
+        return isValidPlatform(parsePlatform(s[0])) && isValidValue(s[1]);
     }
 
     /**
      * Returns true if a given {@code platform} and {@code value} is a valid social handle.
      */
     public static boolean isValidSocialHandle(String platform, String value) {
-        if (platform.isEmpty() && value.isEmpty()) {
-            return true;
+        return isValidPlatform(platform) && isValidValue(value);
+    }
+
+    /**
+     * Returns true if a given {@code platform} is valid.
+     */
+    public static boolean isValidPlatform(String platform) {
+        return SUPPORTED_PLATFORMS.contains(platform);
+    }
+
+    /**
+     * Returns true if a given {@code value} is valid.
+     */
+    public static boolean isValidValue(String value) {
+        return value.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Parse platform to a standardized form
+     */
+    public static String parsePlatform(String platform) {
+        String formattedPlatform = platform.strip().toLowerCase();
+        if (PLATFORM_MAPPING.containsKey(formattedPlatform)) {
+            return PLATFORM_MAPPING.get(formattedPlatform);
         }
-        String test = platform + ":" + value;
-        return test.matches(VALIDATION_REGEX);
+        return formattedPlatform;
+    }
+
+    private static Hashtable<String, String> getPlatformMapping() {
+        Hashtable<String, String> tmp = new Hashtable<>();
+        tmp.put("instagram", "ig");
+        tmp.put("telegram", "tg");
+        tmp.put("tl", "tg");
+        tmp.put("linkedin", "in");
+        tmp.put("ln", "in");
+        tmp.put("facebook", "fb");
+        tmp.put("snapchat", "sc");
+        tmp.put("twitter", "tw");
+        tmp.put("github", "gh");
+        tmp.put("discord", "dc");
+        return tmp;
+    }
+
+    private static HashSet<String> getSupportedPlatforms() {
+        return new HashSet<>(new ArrayList<>(Arrays.asList(
+                "ig", "gh", "in", "dc", "fb", "sc", "tg", "tw")));
     }
 
     /**
@@ -86,6 +181,13 @@ public class SocialHandle {
     public boolean isSamePlatform(SocialHandle other) {
         return other == this // short circuit if same object
                 || this.platform.equals(other.platform); // state check
+    }
+
+    /**
+     * Returns true if {@code platform} and {@code value} are valid.
+     */
+    public boolean isValid() {
+        return isValidPlatform(platform) && isValidValue(value);
     }
 
     @Override
@@ -102,7 +204,7 @@ public class SocialHandle {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return Objects.hash(platform, value);
     }
 
 }
