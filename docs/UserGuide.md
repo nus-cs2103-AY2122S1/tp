@@ -12,7 +12,7 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 ## Table of Contents
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 <!---
 ## Table of Contents
@@ -50,10 +50,10 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 Socius is a desktop application that can help you, as a CS2103T Software Engineering student, to 
 * manage your classmates’ contacts
 * make friends and
-* find teammates
+* find teammates!
 
-The **Socius User Guide** helps you get started with using **Socius**.
-This User Guide hopes to get you familarized with the commands of **Socius** and the flow of using the program, taking you from zero to hero. 
+The Socius User Guide helps you get started with using Socius.
+This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, taking you from zero to hero. 
 Don't like reading? A summary table is available at the end for quick reference!
 
 We hope that you will have a great time using Socius! :)
@@ -73,13 +73,13 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 ## Using this guide
 
-Before diving into **Socius** and getting to know its features, lets get familiar with the symbols used in this user guide.
+Before diving into Socius and getting to know its features, lets get familiar with the symbols used in this user guide.
 
 :information_source: This symbol represents important information
 
-:exclamation: This symbol represents warnings
+:exclamation: This symbol represents warnings or cautions
 
-:bulb: This symbol represents additional information
+:bulb: This symbol represents additional information such as tips
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -95,7 +95,7 @@ Here is a quick start on how you can start using our app in your own computer.
 
 4. Double-click the file to start the app. A GUI similar to the one below should appear within a few seconds.
 
-   ![Ui](images/Ui.png)
+   ![Ui](images/Quickstart.png)
 
 * If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
 
@@ -105,9 +105,9 @@ Here is a quick start on how you can start using our app in your own computer.
 Some example commands you can try:
     * **`list`** : Lists all contacts.
 
-    * **`add`** `n/John Doe tg/W08 nat/Singaporean` : Adds a contact named `John Doe` to Socius.
+    * **`add`** `n/Amy Tan tg/W08 nat/Singaporean` : Adds a contact named `Amy Tan` to Socius, together with her tutorial group and nationality.
 
-    * **`delete`** `3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`** `3` : Deletes the person at index 3 in the current list.
 
     * **`clear`** : Deletes all contacts.
 
@@ -146,7 +146,8 @@ Some example commands you can try:
 
 ### Viewing help: `help`
 
-If you want to see a step-by-step guide for all Socius commands, you can get the URL to the Socius user guide by using the help command.
+You can view the full list of commands.
+Additionally, if you want to see a step-by-step guide for all Socius commands, you can get the URL to the Socius user guide by using the help command.
 
 ![help message](images/helpWindow.png)
 
@@ -156,15 +157,14 @@ Format: **`help`**
 
 You can add a person to the contact book.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Name of a person must be provided!</div>
-
 Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
 </div>
 
-* The order of the fields does not matter
+* Only the `NAME` field of a person is _compulsory_, other fields are _optional_.
+* The order of the fields does not matter.
 * The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name and `HANDLENAME` is the identifying username for that platform.
 * Supported `PLATFORM` 
   * `ig` for Instagram
@@ -185,13 +185,12 @@ Examples:
 * **`add`** `n/Cindy t/friend e/cindy@example.com p/1234567 tg/T07` adds `Cindy` to the list together with her tag, email, phone number and tutorial group.
 * **`add`** `n/David Lim nat/Singapore s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds `Ernest` to the list together with his Telegram and Instagram handles.
+![Add Command Example](images/AddEnerst.png)
+*Add Command: n/Ernest s/tg:ernest2334 s/ig:ernessst* 
 
 ### Editing a person: `edit`
 
 You can edit an existing person in the contact book by `INDEX`.
-
-<div markdown="block" class="alert alert-danger">:exclamation: At least one field of the person must be changed!</div>
-<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
 
 Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 
@@ -206,9 +205,10 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
   * `r/REMARK`
   * `t/TAG`
 
+* At least one field of the person must be changed.
 * Edits the person at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed person list. 
-* The index **must be a positive integer** 1, 2, 3, …​
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
 * If duplicated fields are given, only the latest one will be taken, except for `s/SOCIAL_HANDLE` and `t/TAG`.
 * When editing tags, the existing tags of the person will be replaced (i.e adding of tags is not cumulative).
@@ -229,12 +229,10 @@ Examples:
 
 You can add a remark to a person in the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
-
 Format: **`remark`** `INDEX r/VALUE`
 * Add a remark to the person at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing remark will be updated to the input remark.
 * If duplicated remarks are given, only the latest one will be taken.
 * You can remove a person’s remark by typing ` ` (i.e. empty) or `r/` without specifying any remark after it.
@@ -248,13 +246,11 @@ Examples:
 
 You can delete the specified person from the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
-
 Format: **`delete`** `INDEX`
 
 * Deletes the person at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed person list. 
+* Index must be provided and **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
@@ -264,8 +260,6 @@ Examples:
 ### Deleting multiple person: `deletem`
 
 You can delete multiple person from the contact book using `KEYWORD`.
-
-<div markdown="block" class="alert alert-danger">:exclamation: At least one keyword must be provided!</div>
 
 Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
@@ -280,7 +274,8 @@ Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
   * `r/REMARK`
   * `t/TAG`
 
-* The `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
+* At least one `KEYWORD` must be provided.
+* `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
 * As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
 * Persons matching at least one keyword will be deleted (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
   return `Hans Gruber`, `Bo Yang`)
@@ -306,8 +301,6 @@ Format: **`list`**
 
 You can find the specified persons using `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: At least one keyword must be provided!</div>
-
 Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
 * `FIELD_PREFIX/KEYWORD` can be any of the following:
@@ -321,6 +314,7 @@ Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
      * `r/REMARK`
      * `t/TAG`
 
+* At least one `KEYWORD` must be provided.
 * The `KEYWORD` is case-insensitive. (e.g `hans` will match `Hans`)
 * As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
 * Persons matching at least one keyword will be returned (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
@@ -330,15 +324,15 @@ Examples:
 
 * **`find`** `n/Alex` returns `alex` and `Alexandra`.
 * **`find`** `n/alex n/david` returns `Alex Yeoh`, `David Li`.<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* **`find`** `nat/Singapore` <br>
-  ![result for 'find nat/Singapore'](images/findNatSingapore.png)
+* **`find`** `nat/Singaporean` <br>
+![result for 'find n/alex n/david'](images/FindAlexAndDavid.png)
+*Find Command: n/alex n/david*
+![result for 'find nat/Singapore'](images/FindSingaporean.png)
+*Find Command: nat/Singaporean*
 
 ### Sorting all persons: `sort`
 
 You can sort all persons in the contact book by a specified field.
-
-<div markdown="block" class="alert alert-danger">:exclamation: Exactly one field must be provided!</div>
 
 Format: **`sort`** `FIELD_PREFIX/`
 
@@ -353,6 +347,7 @@ Format: **`sort`** `FIELD_PREFIX/`
   * `r/`
   * `t/`
 
+* Exactly one field must be provided.
 * If field contains words, sort persons in ascending alphabetical order.
 * If field contains numbers, sort persons in ascending numeric order.
 
@@ -375,10 +370,10 @@ Examples:
 
 You can import your friends' contact book into your application.
 
-<div markdown="block" class="alert alert-danger">:exclamation: File must be in JSON format!</div>
-<div markdown="block" class="alert alert-danger">:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.</div>
-
 Format: **`import`** `FILE_NAME.json`
+
+* File must be in JSON format!
+* File must be located in the `./data` directory in the same directory as `Socius.jar`.
 
 Examples:
 * **`import`** `amy.json` import a contact book via a file named `amy.json` into your existing application.
@@ -387,10 +382,10 @@ Examples:
 
 You can export your contact book and share it with your friends.
 
-<div markdown="block" class="alert alert-danger">:exclamation: File must be in JSON format!</div>
-<div markdown="block" class="alert alert-danger">:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.</div>
-
 Format: **`export`** `FILE_NAME.json`
+
+* File must be in JSON format!
+* File must be located in the `./data` directory in the same directory as `Socius.jar`.
 
 Examples:
 
@@ -400,10 +395,9 @@ Examples:
 
 You can create command shortcut by aliasing it with custom `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Exactly one keyword must be provided!</div>
-
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
+* Exactly one `KEYWORD` must be provided.
 * The order of `KEYWORD` and `COMMAND` does not matter.
 * If `KEYWORD` coincides with command keyword such as `add`, it will not override the original command.
 
