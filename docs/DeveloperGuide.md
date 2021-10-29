@@ -393,15 +393,15 @@ earliest birthday and display remaining people in sorted order.
 
 ### Mailing List feature
 Allows user to download a CSV file mailing list of the current view
-User can specify which fields to download using arguments
+Users can use arguments to specify which fields to include in their download
 
 #### Implementation
 
-Step 1. The user filters the contacts using some other command, such as `find`
+Step 1. The user filters the contacts using other commands, eg. `find`
 
-Step 2. The user provides a series of prefixes to `mailingList` to pick the fields, if none are provided, proceed using the defaults
+Step 2. The user provides a series of prefixes to `mailingList` to pick the fields. If no arguments are provided, default selectors are used.
 
-Step 3. The user is prompted to pick the name and location of their CSV file.
+Step 3. The user is prompted to pick the name and download location of their generated CSV file.
 
 #### Design considerations:
 * Arguments for the command should follow the standard used in other parts of the software.

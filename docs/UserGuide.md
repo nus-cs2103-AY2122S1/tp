@@ -19,7 +19,7 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
   * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findAny)
   * [Pinning a person: `pin`](#pinning-a-person--pin)
-  * [Unpinning a person: `unpin`](#pinning-a-person--unpin)
+  * [Unpinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
   * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
   * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailingList)
@@ -254,7 +254,7 @@ Notes:
 * `find Betsy` followed by `pin 1`
   * pins the 1st person in the results of the `find` command.
 
-### Pinning a person : `unpin`
+### Unpinning a person : `unpin`
 
 ### Format:
 * `unpin INDEX`
