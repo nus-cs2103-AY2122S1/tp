@@ -1,16 +1,22 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySchedule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.schedule.Appointment;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.TimePeriod;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,12 +46,56 @@ public class SampleDataUtil {
         };
     }
 
+    private static UniquePersonList getFromSamplePersons(int... index) {
+        UniquePersonList personList = new UniquePersonList();
+        for (int i : index) {
+            personList.add(getSamplePersons()[i]);
+        }
+        return personList;
+    }
+
+    /**
+     * Returns the list of sample appointments
+     * This depends on the above getSamplePersons() for the app the work correctly
+     *
+     * @return list of appointment
+     */
+    private static Appointment[] getSampleAppointment() {
+        TimePeriod urgent =
+                new TimePeriod(LocalDateTime.now().plusHours(2), LocalDateTime.now().plusHours(4));
+        TimePeriod medium =
+                new TimePeriod(LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3).plusHours(2));
+        TimePeriod low =
+                new TimePeriod(LocalDateTime.now().plusDays(9), LocalDateTime.now().plusDays(9).plusHours(2));
+
+        return new Appointment[] {
+            new Appointment(getFromSamplePersons(0, 1, 2),
+                    new Address("Vivo City"), urgent, "Team meeting"),
+            new Appointment(getFromSamplePersons(5),
+                    new Address("ABC Office"), medium, "Team meeting"),
+            new Appointment(getFromSamplePersons(4),
+                    new Address("Zoom"), medium, "Sales Update"),
+            new Appointment(getFromSamplePersons(3, 4),
+                    new Address("XYZ Company"), low, "Project meeting"),
+            new Appointment(getFromSamplePersons(2, 4, 5),
+                    new Address("XYZ School"), low, "Talk"),
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlySchedule getSampleSchedule() {
+        Schedule sampleSch = new Schedule();
+        for (Appointment sampleAppointment : getSampleAppointment()) {
+            sampleSch.addAppointment(sampleAppointment);
+        }
+        return sampleSch;
     }
 
     /**
