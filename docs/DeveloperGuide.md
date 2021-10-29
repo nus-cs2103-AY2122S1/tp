@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -186,6 +186,8 @@ This section describes some noteworthy details on how certain features are imple
 As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
 The main difference between the addMember command lies not in the way the `Logic` class is activated but in the way the `Model` class processes this command.
 
+The above process is shown in the following sequence diagram:
+
 <img src="images/AddMemberRefSequenceDiagram.png"/>
 
 The command first gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
@@ -193,7 +195,7 @@ It then calls the `get` command to get a reference of the `Student` to be added 
 The group to be added to is referenced to by its unique name by the user, and the command gets a reference to this `Group` by finding a group with the same name in the list.
 
 `addMembers` then updates the hidden `groupName` field of the `Student` to be added, and adds the said student to the `Group` specified by updating its `Members` class.
-Both the updated `Student` and `Group` are then set in `AddressBook`. 
+Both the updated `Student` and `Group` are then set in `AddressBook`.
 
 Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
 these changes in the `AddressBook`.
@@ -203,7 +205,7 @@ these changes in the `AddressBook`.
 * Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
     * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
     * Cons: Increases coupling between `Student` and `Group` classes.
-    
+
 * Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
   * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
   * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
@@ -244,6 +246,59 @@ The above process is further summarised in the following sequence diagram:
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
 ℹ️ **Note:** The lifeline for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+### Tasks
+
+tApp allows TAs to manage their tasks for his or her professional or personal use.
+
+The different types of lists include:
+1. Todo Tasks - Just a task to be completed in the future
+2. Deadline - A task to be completed in the future by a specified deadline
+3. Event - A task to be completed on a specified date
+
+Common commands for the task model:
+
+* `add` - Creates a new task item
+* `edit` - Modifies an existing task
+* `delete` - Removes an existing task from the list of tasks
+* `list` - Shows all tasks in the list
+* `clear` - Removes all the tasks in the list
+
+#### Rationale
+
+The tApp is supposed to cater to TA, who are very busy. They have their own modules to prepare for and as well as prepare for weekly tutorial sessions. Hence, they have lots of things to keep track and a task manager feature is necessary. And there are primarily 3 types of tasks - todos, deadlines and events. tApp has supports all of these features to assist TAs in performing their tasks more efficiently and accurately.
+
+#### Current Implementation
+
+To adhere to Object Oriented Programming priciples, we have decided to make the `Task` class as the parent class and `TodoTasks`, `DeadlineTask` and `EventTask` classes a subclass of `Task` class. The class diagram below shows in detail how the task model is being implemented.
+
+**Insert Tasks Class Diagram**
+
+#### Adding Todo Task
+
+Given below is an example usage scenario and how the adding a todo task mechanism behaves at each step.
+
+1. The user executes the `todo n/Complete tp p/H t/CS2103 t/Work` do add a Todo Task named 'Complete tp' with the tags
+   'CS2103' and 'Work' to the list of tasks and marks this task as High Priority.
+2. The command is handled by `LogicManager#execute(String)`, which then calls and passes this command to the `AddressBookParser#parseCommand(String)` method.
+3. The `AddressBookParser` detects the command word `todo` in the string and extracts the argument string `n/Complete tp p/H t/CS2103 t/Work`.
+4. The `AddressBookParser` creates a new `AddTodoTaskCommandParser` instance to parse the argument string according to the format specified for `AddTodoTaskCommand`.
+5. The argument string is parsed to create new tags and keep them in a `Set<Tags>` and the Priority of the task is set to high. These are done using the `AddTodoTaskCommandParser#parse(String)` method, which also performs validation.
+6. The `AddTodoTaskCommandParser` creates a new `AddTodoTaskCommand` and returns it to AddressBookParser, which in turn returns it to `LogicManager`.
+7. The LogicManager calls the `AddTodoTaskCommand#execute(Model)` method.
+8. The AddTodoTaskCommand calls the `Model#addTask(Task)` method.
+9. The tasks is added to the list of tasks and the updated list of task is displayed.
+9. Lastly, the `AddTodoTaskCommand` creates a `CommandResult` with a success message and returns it to `LogicManager`.
+
+The above process is shown in the following sequence diagram:
+
+<img src=“images/AddTodoTaskSequenceDiagram.png”/>
+**Sequence diagram showcasing the add todo task process**
+
+The following activity diagram summarizes what happens when a user executes a new command to find the members by keywords:
+
+<img src=“images/AddTodoTaskCommandActivityDiagram.png”/>
+**Activity diagram showcasing the  add todo task execution flow**
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -515,14 +570,14 @@ Similar to UC5, except the student's participation is marked instead of attendan
 * 1a. The group name is empty.
 
     * 1a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
-    
-    Use case ends.
+
+  Use case ends.
 
 * 1b. The group name is invalid.
 
     * 1b1. tApp displays an error message stating that the group name is invalid and to follow the correct format
 
-    Use case ends.
+  Use case ends.
 
 **Use case: UC11 - Edit a group**
 
@@ -753,6 +808,8 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+## Student
+
 ### Adding a student
 
 1. Adding a student while all students are being shown
@@ -866,6 +923,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `clearStudents`<br>
        Expected: All students cleared from student list. Existing students in groups will also be cleared, leaving empty groups.
 
+## Groups
+
 ### Adding a group
 
 ### Deleting a group
@@ -898,19 +957,122 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `clearGroups`<br>
        Expected: All groups cleared from group list. Existing students in groups will be removed from their group (students will have no group).
 
+## Tasks
+
 ### Adding a todo
+
+1. Adding a todo task while all tasks are being shown.
+
+    1. Prerequisites: List all groups using the `tasks` command. Multiple tasks in the list.
+
+    1. Test case: `todo n/Prepare for Tutorial`<br>
+       Expected: Creates a new todo task named "Prepare for Tutorial", adds it to the list of tasks and displays all the tasks.
+
+    1. Test case: `todo n/Prepare for Tutorial by/2021-11-01`<br>
+       Expected: No new todo task created. Error details shown in the status message.
+
+    1. Other incorrect findGroup commands to try: `todo`, `todo !` <br>
+       Expected: No new todo task created. Error details shown in the status message.
+
+1. Adding a todo task while in another directory
+
+   Expected: Similar to previous.
 
 ### Adding a deadline task
 
+1. Adding a deadline task while all tasks are being shown.
+
+    1. Prerequisites: List all groups using the `tasks` command. Multiple tasks in the list.
+
+    1. Test case: `deadline n/Prepare for Tutorial by/2021-11-01`<br>
+       Expected: Creates a new deadline task named "Prepare for Tutorial" with a deadline "2021-11-01",
+       and adds it to the list of tasks and displays all the tasks.
+
+    1. Test case: `deadline n/Prepare for Tutorial`<br>
+       Expected: No new deadline task created. Error details shown in the status message.
+
+    1. Other incorrect findGroup commands to try: `deadline n/Prepare for Tutorial on/2021-11-01`,
+       `deadline`, `deadline !` <br>
+       Expected: No new todo task created. Error details shown in the status message.
+
+1. Adding a deadline task while in another directory
+
+   Expected: Similar to previous.
+
 ### Adding an event task
+
+1. Adding an event task while all tasks are being shown.
+
+    1. Prerequisites: List all groups using the `tasks` command. Multiple tasks in the list.
+
+    1. Test case: `event n/Conduct Tutorial on/2021-11-01`<br>
+       Expected: Creates a new deadline task named "Conduct Tutorial" on "2021-11-01",
+       and adds it to the list of tasks and displays all the tasks.
+
+    1. Test case: `event n/Conduct Tutorial`<br>
+       Expected: No new deadline task created. Error details shown in the status message.
+
+    1. Other incorrect findGroup commands to try: `event n/Conduct Tutorial by/2021-11-01`,
+       `event`, `event !` <br>
+       Expected: No new todo task created. Error details shown in the status message.
+
+1. Adding a event task while in another directory
+
+   Expected: Similar to previous.
 
 ### Editing a task
 
 ### Deleting a task
 
+1. Deleting a tasks while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `tasks` command. Multiple students in the list.
+
+    1. Test case: `deleteTask 1`<br>
+       Expected: First tasks is deleted from the list. Details of the deleted task shown in the status message.
+
+    1. Test case: `deleteTask 0`<br>
+       Expected: No student is deleted. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `deleteTask`, `deleteTask x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
 ### Marking a task as done
 
+1. Marking a task as done while all tasks are being shown
+
+    1. Prerequisites: List all tasks using the `tasks` command. Multiple tasks in the list.
+
+    1. Test case: `taskDone 1`<br>
+       Expected: First task is marked as completed. Status message shows details of the task.
+
+    1. Test case: `taskDone 0`<br>
+       Expected: No student is marked. Error details shown in the status message.
+
+    1. Other incorrect mark participation commands to try: `taskDone`, `taskDone x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Marking a task as done while on another directory
+
+    1. Prerequisites: Perform a `findStudent` command: e.g. `find David`.
+
+    1. Test case: `taskDone`<br>
+       Expected: First task in the last filtered task list is marked as complete. Status message shows details of tasks.
+       Updated task list is shown.
+
+1. Marking multiple tasks
+
+    1. Test case: `taskDone 1 2 3`<br>
+       Expected: Tasks 1, 2 and 3 are marked as completed in the list. Status message shows details of tasks.
+
+
 ### Clearing task list
+
+1. Clearing the tasks list
+
+    1. Test case: `clearTasks`<br>
+       Expected: All tasks cleared from task list.
 
 ### Clearing all data from tApp
 
@@ -919,7 +1081,7 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-    
+
 --------------------------------------------------------------------------------------------------------------------
 
 [comment]: <> (TODO)

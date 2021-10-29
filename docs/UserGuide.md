@@ -5,7 +5,7 @@ title: User Guide
 
 tApp is a **desktop app for managing tutorial groups and personal tasks, optimized for use via a Command Line Interface** (CLI). If you are a TA that is looking for an app that integrates different tools into a centralised platform and tracks your TA tasks, tApp is the app for you.
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -459,7 +459,7 @@ Commands | Format and Examples
 
 ## [Groups](#groups)
 Commands | Format and Examples
---------|-----------------
+--------|-----------------------------
 [**List Groups**](#list-all-groups-groups) | `groups`
 [**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​` <br> e.g., `addGroup g/W14-5 r/tp y/AY20222023`
 [**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​` <br> e.g., `editGroup 2 g/W14-4 r/tp y/AY20212022`
@@ -471,7 +471,7 @@ Commands | Format and Examples
 
 ## [Tasks](#tasks)
 Commands | Format and Examples
---------|------------------|
+--------|-----------------------------
 [**List Tasks**](#list-all-tasks-tasks) | `tasks`
 [**Add Todo Task**](#add-a-todo-task-todo) | `todo n/TASK_NAME [t/TAG]…​` <br> e.g., `todo n/tP t/CS2103`
 [**Add Event Task**](#add-an-event-task-event) | `event n/TASK_NAME on/DATE [t/TAG]…​` <br> e.g., `event n/Final Exam on/2021-10-31 t/CS2103`
@@ -483,7 +483,7 @@ Commands | Format and Examples
 
 ## General
 Action | Format, Examples
---------|------------------
+--------|-----------------------------
 [**Clear Address Book**](#clearing-all-entries-from-tapp-clear) | `clearAll`
 [**Help**](#viewing-help--help) | `help`
 [**Exit**](#exiting-the-program--exit) | `exit`

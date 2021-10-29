@@ -11,7 +11,7 @@ public class Description {
             "Descriptions should only contain alphanumeric characters and spaces.";
 
     public static final Description NO_DESCRIPTION =
-            new Description("No Description");
+            new Description("");
 
     public final String description;
 
