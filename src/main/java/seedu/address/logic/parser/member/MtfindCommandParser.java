@@ -2,6 +2,7 @@ package seedu.address.logic.parser.member;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -26,14 +27,19 @@ public class MtfindCommandParser implements Parser<MtfindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MtfindCommand.MESSAGE_USAGE));
         }
+
+        String[] keywords = trimmedArg.split("\\s+");
+
         Predicate<Member> resultPredicate = member -> {
             TaskList taskList = member.getTaskList();
-            for (Task task : taskList) {
-                if (StringUtil.containsWordIgnoreCase(task.getName().fullName, trimmedArg)) {
-                    return true;
+            return Arrays.stream(keywords).anyMatch(keyword -> {
+                for (Task task : taskList) {
+                    if (StringUtil.containsWordIgnoreCase(task.getName().fullName, keyword)) {
+                        return true;
+                    }
                 }
-            }
-            return false;
+                return false;
+            });
         };
         return new MtfindCommand(resultPredicate);
     }
