@@ -147,7 +147,10 @@ public class Task implements Comparable<Task>, Cloneable {
         builder.append(getName())
                 .append("\nStatus: ")
                 .append(getStatusString());
-
+        if (!this.getDescription().isEmpty()) {
+            builder.append("\nDescription: ")
+                    .append(getDescription());
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");

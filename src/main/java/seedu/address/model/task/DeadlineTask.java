@@ -60,15 +60,16 @@ public class DeadlineTask extends Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("\nDescription: ")
-                .append(getDescription().toString())
                 .append("\nTaskDate: ")
                 .append(getDeadline().toString())
                 .append("\nStatus: ")
                 .append(getStatusString())
                 .append("\nPriority: ")
                 .append(getPriorityAsString());
-
+        if (!this.getDescription().isEmpty()) {
+            builder.append("\nDescription: ")
+                    .append(getDescription());
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");

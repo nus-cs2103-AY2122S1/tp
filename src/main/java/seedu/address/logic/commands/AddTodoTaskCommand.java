@@ -24,7 +24,7 @@ public class AddTodoTaskCommand extends Command {
             + PREFIX_TAG + "W1404";
 
     //TODO todo task description
-    public static final String MESSAGE_SUCCESS = "New todo task added: %1$s + \nDescription: ";
+    public static final String MESSAGE_SUCCESS = "New todo task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp";
 
     public final Task toAdd;

@@ -1,0 +1,28 @@
+@startuml
+start
+:User executes command starting with todo;
+:Check command;
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user command is valid])
+    :Parse arguments from command;
+    if () then ([required prefixed are missing])
+        :Show error message to the user;
+    endif
+    :Extract keywords from arguments;
+    if () then ([priority level specified])
+        :Assign specified priority level to task;
+    else ([priority level not specified])
+        :Assign low priority level to task;
+    endif
+    :Create a task object;
+    :Add new task to list of tasks;
+    :Display list of tasks to user;
+else ([user command is invalid])
+    :Show error message to user;
+
+endif
+
+stop
+@enduml
