@@ -43,10 +43,10 @@ Dangerous or potentially negative actions are displayed here
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
    Some example commands you can try:
-
     - `addC`: Add a customer
     - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
+
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
@@ -74,8 +74,8 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
 |  `a/`  | Address             | Addresses can take any values, and it should not be blank
 |  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
-|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. One entity can have multiple tags<br>When editing tags, the existing values of these fields will be replaced, i.e editing of these fields are not cumulative<br> If you want to remove all tags from an entity, you can use edit command with `r/` without specifying any tag after it
-| `lp/`  | Loyalty Point       |
+|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. <br>One entity can have multiple tags.
+| `lp/`  | Loyalty Point       | 
 | `alg/` | Allergy (Optional)  | Similar to `t/`
 | `sr/`  | Special Request (Optional) | Similar to `t/`
 |  `l/`  | Leaves              | Leaves should only contain numbers
@@ -92,7 +92,7 @@ This is the list of some repeatedly used preambles in RHRH, as well as there cor
 | Preamble              | Parameter constraints
 | :-------------------: | ---------------------------------------------|
 | `INDEX`               | Must be a positive integer 1, 2, 3, …
-| `KEYWORD`             | 
+| `KEYWORD`             | There must be at least 1 keyword or more.
 
 --------------------------------------------------------------------------------------------------------------------
 
