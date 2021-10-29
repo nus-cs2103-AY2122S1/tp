@@ -2,6 +2,9 @@ package seedu.address.model.statistic;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * Represents a GenderStatistic in the address book.
@@ -27,6 +30,15 @@ public class GenderStatistic {
         this.numberOfFemales = numberOfFemales;
         this.numberOfOthers = numberOfOthers;
         this.total = numberOfMales + numberOfFemales + numberOfOthers;
+    }
+
+    public Map<String, Integer> getGenderCount() {
+        Map<String, Integer> genderCount = new HashMap<>();
+        genderCount.put("Females", numberOfFemales);
+        genderCount.put("Males", numberOfMales);
+        genderCount.put("Others", numberOfOthers);
+
+        return genderCount;
     }
 
     private float computePercentage(int amount) {
