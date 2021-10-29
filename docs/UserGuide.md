@@ -348,10 +348,10 @@ Examples:
 * **`find`** `n/Alex` returns `alex` and `Alexandra`.
 * **`find`** `n/alex n/david` returns `Alex Yeoh`, `David Li`.<br>
 * **`find`** `nat/Singaporean` <br>
-  ![result for 'find n/alex n/david'](images/findAlexAndDavid.png)
-  *Find Command: n/alex n/david*
-  ![result for 'find nat/Singapore'](images/findSingaporean.png)
-  *Find Command: nat/Singaporean*
+![result for 'find n/alex n/david'](images/findAlexAndDavid.png)
+*Find Command: n/alex n/david*
+![result for 'find nat/Singapore'](images/findSingaporean.png)
+*Find Command: nat/Singaporean*
 
 ### Sorting all persons: `sort`
 
