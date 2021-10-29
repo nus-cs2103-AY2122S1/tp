@@ -145,7 +145,7 @@ public class UniqueTagList {
      */
     private void sortTags() {
         List<Tag> sortedList = internalList.stream()
-                .sorted(Comparator.comparing(Tag::getTagName))
+                .sorted(Comparator.comparing(Tag::toString))
                 .collect(Collectors.toList());
         internalList.setAll(sortedList);
     }
