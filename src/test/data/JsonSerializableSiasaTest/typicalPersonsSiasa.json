@@ -44,9 +44,16 @@
   } ],
   "policies" : [ {
     "title" : "Full Life Plan",
-    "price" : "100",
-    "expiryDate" : "2021-12-03",
-    "commission" : "10",
+    "paymentStructure" : {
+      "paymentAmount" : "100",
+      "paymentFrequency" : "1",
+      "numberOfPayments" : "10"
+    },
+    "coverageExpiryDate" : "2021-12-12",
+    "commission" : {
+      "commissionPercentage" : "10",
+      "numberOfPayments" : "10"
+    },
     "owner" : {
       "name" : "Alice Pauline",
       "phone" : "94351253",
@@ -56,15 +63,23 @@
     }
   }, {
     "title" : "Critical Illness Plan",
-    "price" : "1000",
-    "expiryDate" : "2020-10-20",
-    "commission" : "20",
+    "paymentStructure" : {
+      "paymentAmount" : "1000",
+      "paymentFrequency" : "12",
+      "numberOfPayments" : "120"
+    },
+    "coverageExpiryDate" : "2021-03-12",
+    "commission" : {
+      "commissionPercentage" : "20",
+      "numberOfPayments" : "20"
+    },
     "owner" : {
       "name" : "Alice Pauline",
       "phone" : "94351253",
       "email" : "alice@example.com",
       "address" : "123, Jurong West Ave 6, #08-111",
       "tagged" : [ "friends" ]
-    }
+    },
+    "tagged" : [ "term" ]
   } ]
 }

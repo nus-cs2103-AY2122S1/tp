@@ -64,11 +64,11 @@ Shows a list of all persons in the application.
 
 Format: `listclient`
 
-### Editing a person : `edit`
+### Editing a person : `editclient`
 
 Edits an existing person in the application.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -78,8 +78,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editclient 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `editclient 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Deleting a person : `deleteclient`
 
@@ -105,8 +105,28 @@ Format: `clear`
 
 Adds a policy to the policy list.
 
-Format: `addpolicy n/NAME_OF_POLICY e/EXPIRY_DATE p/PRICE c/COMMISSION cl/PERSON_INDEX`
+Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% [NUM_OF_PMT] cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A policy can have any number of tags (including 0)
+</div>
+
+* `COVERAGE_EXPIRY_DATE` refers to the date that the coverage expires, optional.
+* Payment structure of the policy is defined by:
+  * `PMT_AMOUNT`: fixed amount per payment
+  * `PMT_FREQ` (optional): number of payments per year
+  * `NUM_OF_PMT` (optional): total number of payments required
+  * If only `PMT_AMOUNT` is provided, single lump sum payment is assumed
+  * If only `PMT_AMOUNT` and `PMT_FREQ` is provided, indefinite fixed periodic payments is assumed.
+  * If all three are provided, this represents periodic payments up till `NUM_OF_PMT`
+* Commission structure of the policy is defined by:
+  * `COMMISSION_%`: percentage of each payment that goes to commission
+  * `NUM_OF_PMT` (optional): number of payments that the agent will receive commission for
+  * If only `COMMISION_%` is provided, assumed that agent will receive commission for all payments.
+
+Examples:
+* `addpolicy n/full life e/2021-12-12 p/10000 c/10 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10%, tagged Aviva, belonging to client with index 1.
+* `addpolicy n/critical illness p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
 ### Deleting A Policy : `deletepolicy`
 
 Deletes a policy from the policy list.
@@ -135,6 +155,24 @@ Clear all policies from a person.
 
 Format: `clearpolicy PERSON_INDEX`
 
+### Download useful statistics as CSV : `download` 
+
+Download a CSV file containing useful statistics for the user. This includes
+- Most valuable clients + commission from them
+- Number of policies per customer
+- Average number of policies per customer
+- Total commission
+
+The file is stored in '/data' folder
+
+Format: `download`
+
+### Show Expiring Policies: `expiringpolicy`
+
+Show policies that are expiring in a month.
+
+Format: `expiringpolicy`
+
 
 ### Exiting the program : `exit`
 
@@ -161,13 +199,15 @@ Action | Format, Examples
 --------|------------------
 **Add Person** | `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Delete Person** | `deleteclient INDEX`<br> e.g., `delete 3`
-**Edit Person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Person** | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **List Persons** | `listclient`
-**Add Policy** | `addpolicy [n/NAME_OF_POLICY] [e/EXPIRY_DATE] [p/PRICE] [c/COMMISSION] [cl/PERSON_INDEX]`
+**Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% [NUM_OF_PMT] cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 **Delete Policy** | `deletepolicy INDEX`
 **List Policies** | `listpolicy`
 **List Person's Policies** | `clientpolicy PERSON_INDEX`
 **Clear Person's Policies** | `clearpolicy PERSON_INDEX`
 **Clear All** | `clear`
+**Download** | `download`
+**Show Expiring Policies** | `expiringpolicy`
 **Help** | `help`
 **Exit** | `exit`

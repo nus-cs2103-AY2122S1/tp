@@ -1,7 +1,10 @@
 package seedu.siasa.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.siasa.model.policy.Policy;
@@ -28,6 +31,8 @@ public class PolicyCard extends UiPart<Region> {
     private Label commission;
     @FXML
     private Label owner;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PolicyCard} with the given {@code Policy} and index to display.
@@ -37,10 +42,13 @@ public class PolicyCard extends UiPart<Region> {
         this.policy = policy;
         id.setText(displayedIndex + ". ");
         title.setText(policy.getTitle().value);
-        price.setText(String.valueOf(policy.getPrice()));
-        expiryDate.setText(String.valueOf(policy.getExpiryDate()));
+        price.setText(String.valueOf(policy.getPaymentStructure()));
+        expiryDate.setText(String.valueOf(policy.getCoverageExpiryDate()));
         commission.setText(String.valueOf(policy.getCommission()));
         owner.setText(String.valueOf(policy.getOwner().getName()));
+        policy.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

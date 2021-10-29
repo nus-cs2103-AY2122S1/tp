@@ -1,44 +1,65 @@
 package seedu.siasa.model.policy;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
+import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 public class Commission {
     public static final String MESSAGE_CONSTRAINTS =
-            "Commission should be a number from 0-100 representing the percentage.";
-
-
+            "Commission percentage should be a number from 0 to 100 representing the percentage; "
+                    + "Num of payments with commission >= 0 and <= num of payments in the payment structure.";
     public final int commissionPercentage;
+    // number of payments with commission
+    public final int numberOfPayments;
 
     /**
      * Constructs an {@code Commission}.
      *
      * @param percentage A valid commission percentage.
      */
-    public Commission(int percentage) {
-        requireNonNull(percentage);
-        checkArgument(isValidCommission(percentage), MESSAGE_CONSTRAINTS);
-        commissionPercentage = percentage;
+    public Commission(int percentage, int numberOfPayments) {
+        requireAllNonNull(percentage, numberOfPayments);
+        checkArgument(isValidCommission(percentage, numberOfPayments), MESSAGE_CONSTRAINTS);
+        this.commissionPercentage = percentage;
+        this.numberOfPayments = numberOfPayments;
     }
 
-    public static boolean isValidCommission(int percentage) {
-        return 0 <= percentage && percentage <= 100;
+    /**
+     * Returns if {@code percentage} and {@code numberOfPayments} are valid for Commission.
+     */
+    public static boolean isValidCommission(int percentage, int numberOfPayments) {
+        boolean percentageWithinRange = 0 <= percentage && percentage <= 100;
+        boolean validNumberOfPayments = numberOfPayments >= 0;
+        return percentageWithinRange && validNumberOfPayments;
+    }
+
+    /**
+     * Returns if {@code percentage}, {@code numberOfPayments} and {@code paymentStructure} are valid for Commission.
+     */
+    public static boolean isValidCommission(int percentage, int numberOfPayments, PaymentStructure paymentStructure) {
+        return isValidCommission(percentage, numberOfPayments) && numberOfPayments <= paymentStructure.numberOfPayments;
     }
 
     @Override
     public String toString() {
-        return Integer.toString(commissionPercentage) + "%";
+        String numberOfPaymentsStr = " [" + Integer.toString(numberOfPayments) + " payment(s)]";
+        if (numberOfPayments == PaymentStructure.INDEFINITE_NUMBER_OF_PAYMENTS) {
+            numberOfPaymentsStr = "";
+        }
+        return Integer.toString(commissionPercentage) + "%" + numberOfPaymentsStr;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.siasa.model.policy.Commission // instanceof handles nulls
-                && commissionPercentage == ((seedu.siasa.model.policy.Commission) other).commissionPercentage);
+                || (other instanceof Commission // instanceof handles nulls
+                && commissionPercentage == ((Commission) other).commissionPercentage
+                && numberOfPayments == ((Commission) other).numberOfPayments);
     }
 
     @Override
     public int hashCode() {
-        return commissionPercentage;
+        return Objects.hash(commissionPercentage, numberOfPayments);
     }
 }

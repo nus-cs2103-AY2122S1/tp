@@ -7,6 +7,7 @@ import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_ALPHA_ASC
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -137,6 +138,11 @@ public class ModelManager implements Model {
         siasa.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Map<Person, Integer> getNumberPoliciesPerPerson() {
+        return siasa.getNumberPoliciesPerPerson();
+    }
+
     //=========== Policy CRUD ================================================================================
 
     @Override
@@ -172,6 +178,11 @@ public class ModelManager implements Model {
     @Override
     public void removePoliciesBelongingTo(Person target) {
         siasa.removePoliciesBelongingTo(target);
+    }
+
+    @Override
+    public int getTotalCommission() {
+        return siasa.getTotalCommission();
     }
 
     //=========== Filtered Person List Accessors =============================================================

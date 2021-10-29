@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -205,6 +206,15 @@ public class AddCommandTest {
         public void updateFilteredPolicyList(Comparator<Policy> comparator) {
             throw new AssertionError("This method should not be called.");
         }
+
+        public int getTotalCommission() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Map<Person, Integer> getNumberPoliciesPerPerson() {
+            throw new AssertionError("This method should not be called.");
+        };
     }
 
     /**

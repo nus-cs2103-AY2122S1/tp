@@ -5,10 +5,12 @@ import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
@@ -19,10 +21,11 @@ import seedu.siasa.logic.commands.warnings.Warning;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.ExpiryDate;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.model.tag.Tag;
 
 
 /**
@@ -36,14 +39,14 @@ public class AddPolicyCommand extends Command {
             + "Parameters: "
             + PREFIX_TITLE + "TITLE "
             + PREFIX_EXPIRY + "EXPIRY "
-            + PREFIX_PRICE + "PRICE "
-            + PREFIX_COMMISSION + "COMMISSION "
+            + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT) "
+            + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM "
             + PREFIX_CLIENT_INDEX + "CLIENT_INDEX "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Life Policy "
             + PREFIX_EXPIRY + "2021-06-13 "
-            + PREFIX_PRICE + "1000 "
-            + PREFIX_COMMISSION + "20 "
+            + PREFIX_PAYMENT + "1000 12 120"
+            + PREFIX_COMMISSION + "20 12"
             + PREFIX_CLIENT_INDEX + "1";
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
@@ -52,21 +55,24 @@ public class AddPolicyCommand extends Command {
     public static final String MESSAGE_SIMILAR_POLICY = "A similar policy: %1$s already exists in the address book.";
 
     private final Title title;
-    private final Price price;
-    private final ExpiryDate expiryDate;
-    private final Commission commission;
+    private final PaymentStructure paymentStructure;
+    private final CoverageExpiryDate coverageExpiryDate;
     private final Index index;
+    private final Commission commission;
+    private final Set<Tag> tagList = new HashSet<>();
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPolicyCommand that adds a policy with the following fields.
      */
-    public AddPolicyCommand(Title title, Price price, ExpiryDate expiryDate, Commission commission, Index index) {
-        requireAllNonNull(title, price, expiryDate, commission, index);
+    public AddPolicyCommand(Title title, PaymentStructure paymentStructure, CoverageExpiryDate coverageExpiryDate,
+                            Commission commission, Index index, Set<Tag> tagList) {
+        requireAllNonNull(title, paymentStructure, coverageExpiryDate, index, tagList);
         this.title = title;
-        this.price = price;
-        this.expiryDate = expiryDate;
-        this.commission = commission;
+        this.paymentStructure = paymentStructure;
+        this.coverageExpiryDate = coverageExpiryDate;
         this.index = index;
+        this.commission = commission;
+        this.tagList.addAll(tagList);
     }
 
     @Override
@@ -79,7 +85,7 @@ public class AddPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (!expiryDate.isFutureExpiryDate()) {
+        if (!CoverageExpiryDate.isFutureExpiryDate(coverageExpiryDate.value)) {
             boolean response = Warning.warnUser(MESSAGE_PAST_EXPIRY_DATE);
             if (!response) {
                 return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
@@ -88,7 +94,7 @@ public class AddPolicyCommand extends Command {
 
         Person owner = lastShownList.get(index.getZeroBased());
 
-        Policy toAdd = new Policy(title, price, expiryDate, commission, owner);
+        Policy toAdd = new Policy(title, paymentStructure, coverageExpiryDate, commission, owner, tagList);
 
         if (model.hasPolicy(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
@@ -113,8 +119,9 @@ public class AddPolicyCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddPolicyCommand // instanceof handles nulls
                 && title.equals(((AddPolicyCommand) other).title)
-                && price.equals(((AddPolicyCommand) other).price)
-                && expiryDate.equals(((AddPolicyCommand) other).expiryDate)
-                && commission.equals(((AddPolicyCommand) other).commission));
+                && paymentStructure.equals(((AddPolicyCommand) other).paymentStructure)
+                && coverageExpiryDate.equals(((AddPolicyCommand) other).coverageExpiryDate)
+                && commission.equals(((AddPolicyCommand) other).commission)
+                && tagList.equals(((AddPolicyCommand) other).tagList));
     }
 }
