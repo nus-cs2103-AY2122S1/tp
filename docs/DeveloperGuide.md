@@ -161,6 +161,7 @@ The `Model` component
 <img src="images/StorageClassDiagram.png" width="550" />
 
 *Figure A.4.1: Class Diagram of Storage Component*
+<br>
 
 The `Storage` component
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -181,18 +182,18 @@ This section describes some noteworthy details on how certain features are imple
 
 Lessons refer to the recurring or makeup lessons added by the user to TAB. These lessons can be added to any particular
 in TAB. Added lessons can also be edited and deleted.
-
-**_[Coming soon]_** Chosen dates of recurring lessons can be marked as cancelled. User will be able to specify an end date to their recurring
-lessons to be able to add another recurring lessons in the same timeslot without having to delete the previous one. This is
-for the sake of keeping records of past lessons.
+<br/>
 
 A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, a `TimeRange` for the
 `Lesson`, a `Subject` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
 represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.
 
+<br/>
+
 ![LessonClassDiagram](images/LessonClassDiagram.png)
 
 *Figure I.3.1: Class Diagram of Lessons*
+<br/>
 
 The model checks for clashing lessons to ensure that TAB does not contain any duplicate `Lesson` objects as well as `Lesson`
 objects with overlapping time ranges.
@@ -200,50 +201,67 @@ objects with overlapping time ranges.
 Operations on lessons can be done using the `LessonAddCommand`, `LessonEditCommand` and `LessonDeleteCommand` commands.
 The class diagram given below shows how these commands are part of the `Logic` Component.
 
+<br/>
+
 ![LessonLogicDiagram](images/LessonLogic.png)
 
 *Figure I.3.2: Class Diagram of Logic Component with Lesson implementation details*
 
+<br/>
 These commands are described in greater detail in the sections below.
 
 #### Adding Lessons
 The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
 
+<br/>
 A simple illustration of how TAB might interact with the user for `LessonAddCommand` is shown below.
 
 ![LessonAddActivityDiagram](images/LessonAddActivityDiagram.png)
+
 *Figure I.3.3.1: Activity diagram of `LessonAddCommand`*
 
+<br/>
 The lesson added will be displayed in the `LessonListPanel` in TAB.
+<br/>
 
 The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
+
 *Figure I.3.3.2: Sequence Diagram of `LessonAddCommand`*
 
+<br/>
+
 ![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
+
 *Figure I.3.3.3: Continued Sequence Diagram of `LessonAddCommand`*
 
+<br/>
 The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
 by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
 existing lesson with a clashing date and timeslot.
+<br/>
 
 #### Editing Lessons
 The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
 with this lesson. The lesson will be edited per the given information input by the user.
 
+<br/>
 A simple illustration of how TAB might interact with the user for `LessonEditCommand` is shown below.
 Note that edits involving dates include changes made to the start or end dates of the lesson and/or edits to the cancelled dates of the lesson.
 
 ![LessonEditActivityDiagram](images/LessonEditActivityDiagram.png)
+
 *Figure I.3.4.1: Activity diagram of `LessonEditCommand`*
 
+<br/>
 The figure below shows the sequence diagram for editing a lesson.
 
 ![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
 
 *Figure I.3.4.2: Sequence Diagram of Lesson Edit Command*
 
+<br/>
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
 object to create the `editedLesson` object. The detailed sequence diagram for LessonEditCommand is the similar to LessonAddCommand's
@@ -252,30 +270,33 @@ with an additional step for retrieving the lesson to edit from the student of in
 The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
 the changes made to the specified lesson.
+<br/>
 
 #### Deleting Lessons
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
 student with this lesson.
 
-The figure below shows the sequence diagram for deleting a lesson.
+The logic for `LessonDeleteCommand` is similar to that of the `DeleteCommand`. The only exception is that a `Person` with the updated lesson
+list without the deleted lesson will be created and will replace the original `Person` in the model (same as with `LessonAddCommand` and 
+`LessonEditCommand`.
 
-![LessonDeleteSequenceDiagram](images/LessonDeleteSequenceDiagram.png)
-
-*Figure I.3.5: Sequence Diagram of Lesson Delete Command*
-
+<br />
 The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.
+<br/>
 
 #### Storing Lessons
 The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
 to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the
 `Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
 into `model`-friendly `Lesson` objects.
+<br/>
 
 #### Displaying Lessons in GUI
 A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
 the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
 The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
 list of lessons to view. The `PersonListPanel` also has a listener that displays the selected student's list of lesson.
+<br/>
 
 #### Design considerations:
 
@@ -1042,7 +1063,32 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a lesson
+
+1. Adding a lesson to a person while all persons are being shown
+
+  Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+  * Test case: `ladd 1 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
+     Expected: A lesson with the corresponding details will be added to the lesson list of the 1st person in the displayed list.
+     Details of the added lesson, and the person with the lesson will be shown in the status message.
+
+  * Test case: `ladd 1 time/1100-1200 subject/Science rates/40`<br>
+     Expected: Missing start date for lesson. Error details will be shown in the status message.
+
+2. Adding a lesson to a person after a `find` command is executed.
+  
+  * Test case: `ladd 2 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
+    Expected: A lesson with the corresponding details will be added to the lesson list of the 2nd person in the resulting list after `find`.
+    Details of the added lesson, and the person with the lesson will be shown in the status message.
+
+* Incorrect ladd commands to try: `ladd...`
+
+1. `ladd 2 date/32 Oct 2021 time/1100-1200 subject/Science rates/40` (Invalid date)
+2. `ladd 2 date/32 Oct 2021 time/2100-2230 subject/Science rates/40` (Invalid time range; must be between 0800h - 2200h)
+3. `ladd 2 date/32 Oct 2021 time/1100-1200 subject/Science rates/12.2.21.3` (Invalid rates)
+4. `ladd x ...` where x > number of persons in the displayed list or x <= 0
+5. `ladd ...` where the index number of the person is not specified.
 
 ### Saving data
 
