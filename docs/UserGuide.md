@@ -488,6 +488,8 @@ Displays a list of upcoming lessons with end date time within the next 48 hours
 
 Format: `remind`
 
+Shortcut: `F5`
+
 ![remind](images/remind.png)
 
 <div class="caption">Reminder window interface.</div>
@@ -717,6 +719,7 @@ Shortcut | Action
 <kbd>F2</kbd> | **View Students** <br /> Brings you to your list of students.
 <kbd>F3</kbd> | **View Calendar** <br /> Brings you to the calendar interface.
 <kbd>F4</kbd> | **View Tags** <br /> Brings you to your list of tags.
+<kbd>F5</kbd> | **View Reminders** <br /> Opens the reminder window.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
