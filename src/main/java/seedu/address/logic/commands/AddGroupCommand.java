@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CLASS_DOES_NOT_EXIST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
@@ -16,8 +17,8 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to a class to Classmate. "
             + "Parameters: "
             + PREFIX_CLASSCODE + "CLASSCODE "
-            + PREFIX_GROUPNAME + "GROUPNAME "
             + PREFIX_TYPE + "TYPE "
+            + PREFIX_GROUPNUMBER + "GROUPNUMBER "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUPNUMBER + "1 "
             + PREFIX_CLASSCODE + "G06 "
@@ -25,7 +26,6 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in Classmate";
-    public static final String MESSAGE_CLASS_DOES_NOT_EXIST = "The class does not exist in Classmate";
 
     private final TutorialGroup toAdd;
     private final TutorialClass toAddTutorialClass;

@@ -2,13 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.ClassMemberPredicate;
-import seedu.address.model.tutorialgroup.TutorialGroupContainsKeywordsPredicate;
+import seedu.address.model.student.GroupMemberPredicate;
+import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * Lists all students in a tutorial group in ClassMATE given a class code, tutorial group type and tutorial group name
@@ -23,26 +25,38 @@ public class ViewGroupCommand extends Command {
             + "with index numbers.\n"
             + "Parameters: "
             + PREFIX_CLASSCODE + "CLASSCODE "
-            + PREFIX_GROUPNAME + "GROUPNAME "
             + PREFIX_TYPE + "TYPE "
+            + PREFIX_GROUPNUMBER + "GROUPNUMBER "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUPNAME + "3 "
+            + PREFIX_GROUPNUMBER + "3 "
             + PREFIX_CLASSCODE + "G06 "
             + PREFIX_TYPE + "OP2 ";
 
-    private final TutorialGroupContainsKeywordsPredicate predicate;
+    private final TutorialGroup toView;
+    private final TutorialClass toViewTutorialClass;
 
-    public ViewGroupCommand(TutorialGroupContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    /**
+     * Creates a ViewGroupCommand to show the students in the specified {@code TutorialGroup}
+     */
+    public ViewGroupCommand(TutorialGroup tutorialGroup) {
+        requireNonNull(tutorialGroup);
+        toView = tutorialGroup;
+        // new class with the same class code created to check whether it exists in ClassMATE
+        toViewTutorialClass = TutorialClass.createTestTutorialClass(toView.getClassCode());
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredTutorialGroupList(predicate);
+
+        // check if tutorial class exists in ClassMATE
+        if (!model.hasTutorialClass(toViewTutorialClass)) {
+            throw new CommandException(Messages.MESSAGE_CLASS_DOES_NOT_EXIST);
+        }
 
 
-        model.updateFilteredStudentList(new ClassMemberPredicate(targetClassCode));
+
+        model.updateFilteredStudentList(new GroupMemberPredicate(toView));
         return new CommandResult(
                 String.format(Messages.MESSAGE_TUTORIAL_GROUP_LISTED_OVERVIEW,
                         model.getFilteredStudentList().size()));
@@ -52,6 +66,6 @@ public class ViewGroupCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewGroupCommand // instanceof handles nulls
-                && predicate.equals(((ViewGroupCommand) other).predicate)); // state check
+                && toView.equals(((ViewGroupCommand) other).toView)); // state check
     }
 }
