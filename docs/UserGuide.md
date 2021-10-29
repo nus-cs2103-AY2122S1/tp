@@ -418,7 +418,7 @@ Shows the past commands run on **Uni-Fy**.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `history`
+- `/prev`
 
 </div>
 
