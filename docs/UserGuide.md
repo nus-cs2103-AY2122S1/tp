@@ -468,3 +468,4 @@ Action | Format
 --------|------------------
 **Help** | `help`
 **Clear** | `clear`
+**Exit** | `exit`
