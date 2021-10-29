@@ -106,6 +106,7 @@ Action | Format, Examples
 **Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/19-12-2021 08:00`
 **Add reservation** | `addr number_of_people p/phone at/date_time [r/remark] [t/tag]` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
 **Check Reservation Availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Get Customer Reserving** | `getC INDEX`<br> e.g. `getc 1`
 **Delete Employee** | `deleteE INDEX`<br> e.g., `delete 1`
 **Delete Supplier** | `deleteS INDEX`<br> e.g., `delete 2`
 **Delete Customer** | `deleteC INDEX`<br> e.g., `delete 3`
@@ -325,8 +326,24 @@ Examples:
 Edits an existing reservation in RHRH
 
 Format: `editR INDEX [r/REMARK] [t/TAG]…`
+* Edits the reservation at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed supplier list. 
+* The index **must be a positive integer** 1, 2, 3, … 
 
-* Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list. The index **must be a positive integer** 1, 2, 3, … 
+Examples:
+* `editR 2 r/have kids t/10 percent off`: Edits the remark and tags of the 2nd display reservation to `have kids` and `10 percent off`, respectively.
+* `editR 1 r/ t/chetwin t/20 percent off`: Removes the remark and edits the tags of the 1st display reservation to `chetwin`, `10 percent off`.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
+* You can remove all the reservation’s tags by typing `t/` without specifying any tags after it.
+
+</div>
 
 ### Deleting a customer : `deleteC`
 
@@ -414,6 +431,18 @@ Examples:
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
+
+### Get customer who made the reservation: `getC`
+
+Gets the customer who made a specified reservation
+
+Format: `getC INDEX`
+* The customer who made the reservation at the specified `INDEX`
+* The index refers to the index number shown in the display reservation list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `getC 1`: Gets the customer who made the 1st display reservation.
 
 ### Finding customers based on keywords: `findC`
 
