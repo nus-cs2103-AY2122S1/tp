@@ -19,16 +19,16 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Locating persons by name and tag(s): `find`](#locating-persons-by-name-and-tags-find)
   * [Locating persons by name or tag(s): `findAny`](#locating-persons-by-name-or-tags-findAny)
   * [Pinning a person: `pin`](#pinning-a-person--pin)
-  * [Pinning a person: `unpin`](#unpinning-a-person--unpin)
+  * [Unpinning a person: `unpin`](#unpinning-a-person--unpin)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
   * [Deleting multiple person : `deletem`](#deleting-multiple-people--deletem)
+  * [Exporting a mailing list of contacts: `mailingList`](#exporting-a-mailing-list-of-contacts--mailingList)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
   * [Command Assistant](#command-assistant)
   * [Command History](#command-history)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -115,8 +115,13 @@ A person can have any number of tags (including 0)
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-Format birthday as ddMMyyyy
+Format birthday as ddMMyyyy.
 </div>
+
+Notes:
+* Phone number must be unique.
+* Birthdays are optional and can be added in future with `edit` command.
+* Future dates as birthdays are not allowed.
 
 **Sample Usage:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -191,7 +196,8 @@ Finds all persons whose names **and** tags matches ALL keywords provided.
 
 Notes:
 * `find` is case-insensitive by default. e.g. `hans` will match `Hans`
-  * However, users can opt for case-sensitive search by including the `c/` flag after the command word
+  * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
+  * `c/` case-sensitive search applies **ONLY** to tags
 * The order of the keywords does not matter. e.g. `n/Hans t/football` will return the same result as
   `t/friends n/Hans`
 * Both name and tags are searched.
@@ -220,6 +226,8 @@ Finds all persons whose names **or** tags contain ANY of the given keywords.
 
 Notes:
 * `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`
+  * However, users can opt for case-sensitive search by including the `c/` flag **after** the command word.
+  * `c/` case-sensitive search applies **ONLY** to tags
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Both name and tags are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -254,7 +262,7 @@ Notes:
 * `find Betsy` followed by `pin 1`
   * pins the 1st person in the results of the `find` command.
 
-### Pinning a person : `unpin`
+### Unpinning a person : `unpin`
 
 ### Format:
 * `unpin INDEX`
@@ -306,6 +314,30 @@ Notes:
   * deletes the 2nd and 3rd person in the address book.
 * `find Betsy` followed by `deletem 1 - 5`
   * deletes the 1st and 2nd person in the results of the `find` command.
+
+### Exporting a mailing list of contacts : `mailingList`
+
+Exports a CSV file of the current view containing specified fields
+
+#### Format:
+* `mailingList [p/] [e/] [a/] [b/] [t/]`
+
+Notes:
+* Name is always the first column in the CSV file
+* The default exported fields are name, phone, email
+* Invalid prefixes are ignored
+* Opens a file selector for you to pick the export location and file name
+
+**Sample Usage:**
+* `mailingList`
+  * Prepares a CSV of the current view containing Name, Phone and Email as the fields
+
+* `mailingList p/`
+  * Prepares a CSV of the current view containing Name and Phone as the fields
+
+* `mailingList j/`
+  * Invalid Prefix j/ is ignored
+  * Prepares a CSV of the current view containing Name, Phone and Email as the fields
 
 ### Clearing all entries : `clear`
 
@@ -389,7 +421,8 @@ Action | Summary | Format, Examples
 **FindAny** | Locates persons by name and tags (Results fulfill at least one search term)| `findAny n/NAME [n/NAME] t/TAG [t/TAG]`<br> e.g., `findAny n/James t/NUS`
 **Pin** | Pins a person | `pin INDEX`<br> e.g., `pin 1`
 **Unpin** | Unpins a person | `unpin INDEX`<br> e.g., `unpin 1`
-**Help** | Displays help information | `help [COMMAND] [/d]`
+**Help** | Displays help information | `help [COMMAND]`<br> e.g., `help`, `help add`, `help more`
 **List** | Lists all persons | `list`
 **Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
 **Untag** | Untags a person | `untag INDEX [t/TAG]…​`<br> e.g., `untag 2 t/colleague`
+**MailingList**| Exports a mailing list | `mailingList [p/] [e/] [a/] [b/] [t/]`
