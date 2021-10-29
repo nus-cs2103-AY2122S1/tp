@@ -20,4 +20,5 @@ public class Messages {
     public static final String MESSAGE_FIND_TASK_SUCCESS = "Task %1$s is found!";
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task %1$s is edited!";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Module %1$s is edited!";
+    public static final String MESSAGE_DUPLICATE_MODULE = "Operation would result in duplicate module %1$s!";
 }

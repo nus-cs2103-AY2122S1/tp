@@ -36,7 +36,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(1, 3, 0, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -57,7 +57,7 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         TeachingAssistantBuddyStorage teachingAssistantBuddyStorage =
-                new JsonTeachingAssistantBuddyStorage(userPrefs.getAddressBookFilePath());
+                new JsonTeachingAssistantBuddyStorage(userPrefs.getAssistantBuddyFilePath());
         storage = new StorageManager(teachingAssistantBuddyStorage, userPrefsStorage);
 
         initLogging(config);
@@ -82,7 +82,7 @@ public class MainApp extends Application {
             if (!tabOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TeachingAssistantBuddy");
             }
-            initialData = tabOptional.orElseGet(SampleDataUtil::getSampleModule);
+            initialData = tabOptional.orElseGet(SampleDataUtil::getSampleTeachingAssistantBuddy);
         } catch (DataConversionException e) {
             logger.warning(
                     "Data file not in the correct format. Will be starting with an empty TeachingAssistantBuddy");

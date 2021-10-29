@@ -73,14 +73,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getAssistantBuddyFilePath() {
+        return userPrefs.getAssistantBuddyFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setAssistantBuddyFilePath(Path assistantBuddyFilePath) {
+        requireNonNull(assistantBuddyFilePath);
+        userPrefs.setAssistantBuddyFilePath(assistantBuddyFilePath);
     }
 
     //=========== TeachingAssistantBuddy ==================================================================

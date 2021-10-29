@@ -100,7 +100,8 @@ public class EditTaskCommand extends EditCommand {
                 logger.log(Level.INFO, "editing task: " + task.getTaskId()
                         + " of all students in module: " + task.getModuleNameString());
                 studentTaskList.setTask(task, editedTask);
-                return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
+                // return a CommandResult using the unmodifiable taskId
+                return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskId()));
             }
         }
         throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, editTaskDescriptor.taskId));
@@ -123,7 +124,8 @@ public class EditTaskCommand extends EditCommand {
                 logger.log(Level.INFO, "editing task: " + task.getTaskId()
                         + " of module: " + module.getName());
                 moduleTaskList.setTask(task, editedTask);
-                return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
+                // return a CommandResult using the unmodifiable taskId
+                return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskId()));
             }
         }
         throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, editTaskDescriptor.taskId));
@@ -248,6 +250,7 @@ public class EditTaskCommand extends EditCommand {
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return getTaskName().equals(e.getTaskName())
+                    && getTaskId().equals(e.getTaskId())
                     && getTaskDeadline().equals(e.getTaskDeadline())
                     && getIsComplete().equals(e.getIsComplete());
         }
