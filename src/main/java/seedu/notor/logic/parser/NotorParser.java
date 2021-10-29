@@ -33,6 +33,7 @@ import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonFindCommand;
+import seedu.notor.logic.commands.person.PersonGroupListCommand;
 import seedu.notor.logic.commands.person.PersonListCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
@@ -58,6 +59,7 @@ import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
 import seedu.notor.logic.parser.person.PersonFindCommandParser;
+import seedu.notor.logic.parser.person.PersonGroupListCommandParser;
 import seedu.notor.logic.parser.person.PersonListCommandParser;
 import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
@@ -160,6 +162,8 @@ public class NotorParser {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
                 } else if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
+                } else if (PersonGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonGroupListCommandParser(index).parse();
                 } else if (PersonTagCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonTagCommandParser(index, arguments).parse();
                 } else if (PersonUntagCommand.COMMAND_WORDS.contains(subCommandWord)) {
@@ -170,6 +174,8 @@ public class NotorParser {
                     return new PersonArchiveCommandParser(index).parse();
                 } else if (PersonUnarchiveCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonUnarchiveCommandParser(index).parse();
+                } else if (PersonGroupListCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonGroupListCommandParser(index).parse();
                 } else {
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }

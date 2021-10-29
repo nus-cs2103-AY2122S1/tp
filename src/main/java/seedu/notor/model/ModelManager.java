@@ -34,6 +34,7 @@ public class ModelManager implements Model {
     private FilteredList<? extends Group> filteredGroups;
     private boolean isPersonList;
     private boolean isSuperGroupList;
+    private boolean isGroupList;
     private boolean isArchiveView = false;
 
     /**
@@ -219,10 +220,11 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
-        // TODO: I am using levraging this method for list. Should we consider new method?
+        // TODO: I am using leveraging this method for list. Should we consider new method?
         requireNonNull(predicate);
         isPersonList = true;
         isSuperGroupList = false;
+        isGroupList = false;
         filteredPersons.setPredicate(predicate);
     }
 
@@ -241,6 +243,7 @@ public class ModelManager implements Model {
     public void listSuperGroup() {
         isPersonList = false;
         isSuperGroupList = true;
+        isGroupList = true;
         isArchiveView = false;
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
     }
@@ -248,6 +251,7 @@ public class ModelManager implements Model {
     @Override
     public void displayPersons() {
         isPersonList = true;
+        isSuperGroupList = false;
         isArchiveView = false;
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

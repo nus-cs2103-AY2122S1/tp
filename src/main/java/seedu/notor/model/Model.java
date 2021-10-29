@@ -164,7 +164,7 @@ public interface Model {
     void listSuperGroup();
 
     /**
-     * Updates the list to all SuperGroups.
+     * Updates the list to all Subgroups.
      */
     void listSubGroup(Index i);
 

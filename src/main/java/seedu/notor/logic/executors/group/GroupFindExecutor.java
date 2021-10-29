@@ -26,7 +26,11 @@ public class GroupFindExecutor extends GroupExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         requireNonNull(model);
-        model.updateFilteredGroupList(predicate);
+        if (model.isPersonList() || model.isArchiveView()) {
+            throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
+        } else {
+            model.updateFilteredGroupList(predicate);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW, model.getFilteredGroupList().size()));
     }
