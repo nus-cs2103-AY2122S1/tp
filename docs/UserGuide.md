@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+<img src="images/contHACKS_logo.png" alt="logo"/>
+
 contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing your workload to focus on the more important task - teaching.
 
 ## Table of Contents
