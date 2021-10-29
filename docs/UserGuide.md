@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-# Welcome to Socius User Guide! 
+# Welcome to Socius User Guide!
 
-This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4. 
+This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,13 +47,13 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 
 ## Introduction to Socius
 
-Socius is a desktop application that can help you, as a CS2103T Software Engineering student, to 
+Socius is a desktop application that can help you, as a CS2103T Software Engineering student, to
 * manage your classmates’ contacts
 * make friends and
 * find teammates!
 
 The Socius User Guide helps you get started with using Socius.
-This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, taking you from zero to hero. 
+This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, taking you from zero to hero.
 Don't like reading? A summary table is available at the end for quick reference!
 
 We hope that you will have a great time using Socius! :)
@@ -101,7 +101,7 @@ Here is a quick start on how you can start using our app in your own computer.
 
 * Note that the app comes with some sample data by default. Type **`clear`** in the command box to remove those sample data.
 
-5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window. 
+5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.
 Some example commands you can try:
     * **`list`** : Lists all contacts.
 
@@ -166,7 +166,7 @@ The [Parameter Constraints](#parameter-constraints) section shows the constaints
 * Only the `NAME` field of a person is _compulsory_, other fields are _optional_.
 * The order of the fields does not matter.
 * The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name and `HANDLENAME` is the identifying username for that platform.
-* Supported `PLATFORM` 
+* Supported `PLATFORM`
   * `ig` for Instagram
   * `tg` for Telegram
   * `fb` for Facebook
@@ -186,7 +186,7 @@ Examples:
 * **`add`** `n/David Lim nat/Singapore s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds `Ernest` to the list together with his Telegram and Instagram handles.
 ![Add Command Example](images/AddEnerst.png)
-*Add Command: n/Ernest s/tg:ernest2334 s/ig:ernessst* 
+*Add Command: n/Ernest s/tg:ernest2334 s/ig:ernessst*
 
 ### Editing a person: `edit`
 
@@ -206,8 +206,8 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
   * `t/TAG`
 
 * At least one field of the person must be changed.
-* Edits the person at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list. 
+* Edits the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
 * If duplicated fields are given, only the latest one will be taken, except for `s/SOCIAL_HANDLE` and `t/TAG`.
@@ -230,7 +230,7 @@ Examples:
 You can add a remark to a person in the contact book by `INDEX`.
 
 Format: **`remark`** `INDEX r/VALUE`
-* Add a remark to the person at the specified `INDEX`. 
+* Add a remark to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * Index must be provided and **must be a positive integer** 1, 2, 3, …​
 * Existing remark will be updated to the input remark.
@@ -248,8 +248,8 @@ You can delete the specified person from the contact book by `INDEX`.
 
 Format: **`delete`** `INDEX`
 
-* Deletes the person at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list. 
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * Index must be provided and **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -494,8 +494,8 @@ Example: `t/friends:#FF0000` for a red colour tag
 the data of your previous Socius home folder.
 
 **Q**: Can I edit the data file directly?<br>
-**A**: Socius data are saved as a JSON file (i.e. `JAR_FILE_LOCATION/data/addressbook.json`). 
-Advanced users are welcome to update data directly by editing that data file. 
+**A**: Socius data are saved as a JSON file (i.e. `JAR_FILE_LOCATION/data/addressbook.json`).
+Advanced users are welcome to update data directly by editing that data file.
 However, be warned that changes that make the data format invalid will cause Socius to discard the data file and start with a new empty data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
