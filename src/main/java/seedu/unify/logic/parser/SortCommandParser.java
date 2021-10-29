@@ -43,7 +43,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (argumentMultimap.getValue(CliSyntax.PREFIX_TYPE).isPresent()) {
             String sortType = argumentMultimap.getValue(CliSyntax.PREFIX_TYPE).get();
             if (sortType.equalsIgnoreCase("priority")) {
-                func = Task::getPriority;
+                func = x -> x.getPriority().getObjectPriority().getValue();
             } else if (!sortType.equalsIgnoreCase("time")) {
                 // throw error
             }
