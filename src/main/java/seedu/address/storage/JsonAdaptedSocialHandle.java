@@ -16,7 +16,7 @@ public class JsonAdaptedSocialHandle {
      */
     @JsonCreator
     public JsonAdaptedSocialHandle(@JsonProperty("platform") String platform, @JsonProperty("value") String value) {
-        this.platform = platform;
+        this.platform = SocialHandle.parsePlatform(platform);
         this.value = value;
     }
 
