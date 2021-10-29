@@ -48,7 +48,7 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
+    public void execute_duplicateTask_throwsCommandException() {
         ModuleName moduleName = new ModuleName(MODULE_NAME_0);
         Task duplicateTask = new TaskBuilder().withId("T1").build();
         AddTaskCommand addTaskCommand = new AddTaskCommand(moduleName, duplicateTask);
