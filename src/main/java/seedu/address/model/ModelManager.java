@@ -116,12 +116,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteFromOrganisation(Person person, Organisation organisation) {
-        addressBook.deleteFromOrganisation(person, organisation);
-        updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
-    }
-
-    @Override
     public void deleteOrganisation(Organisation organisation) {
         addressBook.deleteOrganisation(organisation);
         updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
@@ -145,15 +139,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addToOrganisation(Person person, Name name) {
-        addressBook.addToOrganisation(person, name);
-        updateFilteredOrganisationList(PREDICATE_SHOW_ALL_ORGANISATIONS);
-    }
-
-    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setOrganisation(Organisation target, Organisation editedOrganisation) {
+        requireAllNonNull(target, editedOrganisation);
+        addressBook.setOrganisation(target, editedOrganisation);
     }
 
     //=========== Filtered Person List Accessors =============================================================

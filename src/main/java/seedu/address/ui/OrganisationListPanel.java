@@ -14,7 +14,7 @@ public class OrganisationListPanel extends UiPart<Region> {
     private static final String FXML = "OrganisationListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(OrganisationListPanel.class);
 
-    @javafx.fxml.FXML
+    @FXML
     private ListView<Organisation> organisationListView;
 
     /**
@@ -23,7 +23,7 @@ public class OrganisationListPanel extends UiPart<Region> {
     public OrganisationListPanel(ObservableList<Organisation> organisationList) {
         super(FXML);
         organisationListView.setItems(organisationList);
-        organisationListView.setCellFactory(listView -> new OrganisationListPanel.OrganisationListViewCell());
+        organisationListView.setCellFactory(listView -> new OrganisationListViewCell());
     }
 
     /**
@@ -32,6 +32,7 @@ public class OrganisationListPanel extends UiPart<Region> {
     class OrganisationListViewCell extends ListCell<Organisation> {
         @Override
         protected void updateItem(Organisation organisation, boolean empty) {
+            System.out.print("update pls");
             super.updateItem(organisation, empty);
 
             if (empty || organisation == null) {

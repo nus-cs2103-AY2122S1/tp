@@ -120,11 +120,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addToOrganisation(Person person, Name name) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public Organisation getOrganisationByName(Name name) {
             throw new AssertionError("This method should not be called.");
         }
@@ -159,12 +154,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteFromOrganisation(Person person, Organisation organisation) {
+        public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setOrganisation(Organisation target, Organisation editedOrganisation) {
             throw new AssertionError("This method should not be called.");
         }
 

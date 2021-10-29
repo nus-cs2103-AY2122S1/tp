@@ -33,9 +33,6 @@ public class OrganisationCard extends UiPart<Region> {
     @FXML
     private FlowPane persons;
 
-    @FXML
-    private FlowPane tags;
-
 
     /**
      * Creates a {@code OrganisationCard} with the given {@code Organisation} and index to display.

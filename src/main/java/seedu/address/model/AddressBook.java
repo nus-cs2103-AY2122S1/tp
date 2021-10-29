@@ -108,23 +108,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to an organisation.
-     * The person must not already exist in the organisation.
-     */
-    public void addToOrganisation(Person person, Name name) {
-        Organisation organisation = organisations.getByName(name);
-        organisation.addPerson(person);
-    }
-
-    /**
-     * Deletes a person from an organisation.
-     * The person must exist in the organisation.
-     */
-    public void deleteFromOrganisation(Person person, Organisation organisation) {
-        organisation.removePerson(person);
-    }
-
-    /**
      * Gets organisation by name.
      * The organisation must exist in the organisation list.
      */
@@ -149,6 +132,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Replaces the given organisation {@code target} with {@code editedOrganisation}.
+     * {@code target} must exist in the address book.
+     * The organisation identity of {@code editedOrganisation} must not be the same as another
+     * existing organisation in the address book.
+     */
+    public void setOrganisation(Organisation target, Organisation editedOrganisation) {
+        requireNonNull(editedOrganisation);
+
+        organisations.setOrganisation(target, editedOrganisation);
     }
 
     /**
