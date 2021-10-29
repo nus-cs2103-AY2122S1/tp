@@ -444,7 +444,7 @@ Format: `emadd /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 Examples:
 * `emadd /e 1 /m 2 /m 3` adds the 2nd and 3rd person in the member list to Event 1.
 
-#### Adding participants to an event : `emdel`
+#### Deleting participants from an event : `emdel`
 
 Deletes selected participant(s) to a specific event.
 
