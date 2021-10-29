@@ -132,16 +132,8 @@ This section highlights all the commands that Uni-Fy supports. These include det
     * Time is represented in HH:MM format
 </div>
 
-### 4.1 Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
-### 4.2 Adding a task: `add` 
+### 4.1 Adding a task: `add` 
 
 Add a task to the task list. The tags for the command can be input in any order.
 
@@ -177,7 +169,48 @@ After running the add command the task gets added to the task list as shown belo
 ![add_command_after](images/addCommandAfter.jpeg)
 
 
-### 4.3 Locating a task by name: `find`
+### 4.2 Tagging Tasks: `tag`
+
+Set a task's priority.
+
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- <code> tag  <i>task_id tg/tag (tg/tag) </i> </code>
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Examples:**
+* `tag 5 tg/Assignment` sets the tag of task 5 in the task list to `Assignment`
+* `tag 4 tg/Assignment tg/tough` sets the tags of task 4 in the task list to `Assignment` and `tough`
+</div>
+
+
+### 4.3 Mark your tasks as DONE : `done`
+
+Marks your task as DONE or finished
+
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- <code>done <i>task_id</i></code>
+
+</div>
+
+### 4.4 Mark your tasks as TODO : `undone`
+
+Marks your task as TODO or pending
+
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- <code>undone <i>task_id</i></code>
+
+</div>
+
+
+### 4.5 Locating a task by name: `find`
 
 Find tasks with matching keywords and show them in the task list.
 
@@ -214,8 +247,8 @@ After running the find command, the tasks having the mentioned keyword are displ
 
 ![find_command_after](images/findCommandAfter.jpeg)
 
-### 4.4 Showing Tasks: `show`
 
+### 4.6 Showing Tasks: `show`
 
 Show all tasks that have been added to the app in a specific week.
 
@@ -249,25 +282,35 @@ Examples:
 
 ![show_command](images/showCommand41.jpeg)
 
-### 4.5 Tagging Tasks: `tag` 
 
-Set a task's priority.
+### 4.7 Sorting the tasks : `sort`
+
+Sorts the tasks in the task list of Uni-Fy.
 
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- <code> tag  <i>task_id tg/tag (tg/tag) </i> </code>
+- `sort x/(time or priority) o/(asc or desc)`
 </div>
+
 
 <div markdown="block" class="alert alert-info">
 
-<div markdown="block" class="alert alert-success">
-:green_book: **Examples:**
-* `tag 5 tg/Assignment` sets the tag of task 5 in the task list to `Assignment`
-* `tag 4 tg/Assignment tg/tough` sets the tags of task 4 in the task list to `Assignment` and `tough`
+**:information_source: Interpretation:**<br>
+* Sorts the tasks in the tasklist based on either `time` or `priority` in ascending or descending order as entered after the `o/` flag
+
 </div>
 
-### 4.6 Deleting tasks : `delete`
+
+<div markdown="block" class="alert alert-success">
+:green_book: **Examples:**
+
+* `sort x/time o/asc` sorts the tasks in ascending order of time
+* `sort x/priority o/desc` sorts the tasks in the descending order of priority i.e. from `HIGH` to `LOW`
+</div>
+
+
+### 4.8 Deleting tasks : `delete`
 
 Removes a specific task that has been added to your app.
 
@@ -298,7 +341,7 @@ Removes a specific task that has been added to your app.
 
 </div>
 
-#### Demonstration:
+**Demonstration:**
 
 
 <div style="page-break-after: always;"></div>
@@ -311,7 +354,8 @@ After running the delete command, the task at that particular index gets deleted
 
 ![delete_command_after](images/userguide/deleteCommandAfter.png)
 
-### 4.7 Deleting all tasks : `clear`
+
+### 4.9 Deleting all tasks : `clear`
 
 Clears all entries from the Uni-Fy app.
 
@@ -330,60 +374,7 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 ![clear_command_after](images/clearCommandAfter.jpeg)
 
 
-### 4.9 Mark your tasks as TODO : `undone` 
-
-Marks your task as TODO or pending
-
-<div markdown="block" class="alert alert-primary">
-
-**:clipboard: Format:**<br>
-- <code>undone <i>task_id</i></code>
-
-</div>
-
-### 4.10 Sorting the tasks : `sort`
-
-Sorts the tasks in the task list of Uni-Fy.
-
-<div markdown="block" class="alert alert-primary">
-
-**:clipboard: Format:**<br>
-- `sort x/(time or priority) o/(asc or desc)`
-</div>
-
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Interpretation:**<br>
-* Sorts the tasks in the tasklist based on either `time` or `priority` in ascending or descending order as entered after the `o/` flag
-
-</div>
-
-
-<div markdown="block" class="alert alert-success">
-:green_book: **Examples:**
-
-* `sort x/time o/asc` sorts the tasks in ascending order of time
-* `sort x/priority o/desc` sorts the tasks in the descending order of priority i.e. from `HIGH` to `LOW`
-</div>
-
-
-
-
-
-### 4.11 Saving the data
-
-**Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### 4.12 Editing the data file
-
-**Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:warning: **Caution:**
-If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
-</div>
-
-### 4.13 Retrieving past commands
+### 4.10 Retrieving past commands
 
 Shows the past commands run on **Uni-Fy**.
 
@@ -399,21 +390,33 @@ Shows the past commands run on **Uni-Fy**.
 Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
 </div>
 
-### 4.13 Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+### 4.11 Viewing help : `help`
 
-### 4.14 Mark your tasks as DONE : `done`
+Shows a message explaining how to access the help page.
 
-Marks your task as DONE or finished
+![help message](images/helpMessage.png)
 
-<div markdown="block" class="alert alert-primary">
+Format: `help`
 
-**:clipboard: Format:**<br>
-- <code>done <i>task_id</i></code>
 
+### 4.12 Saving the data
+
+**Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+
+### 4.13 Editing the data file
+
+**Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:warning: **Caution:**
+If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
+
+### 4.14 Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -437,21 +440,19 @@ Marks your task as DONE or finished
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ## 6. Command summary
 
 Action | Format, Examples
 --------|------------------
 **Add** | <code>add <i>n/task_name (t/time) d/date (tg/tag) (p/level)</i></code> <br>e.g `add n/Assignment 1 t/13:00 d/2021-12-12 tg/CS2103 p/HIGH`
-**Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
-**Show** | `show week_number ` <br>e.g `show 13`
-**Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
-**Edit** | <code>edit <i>task_id n/task_name d/date</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
+**Tag** | <code>tag <i>task_id tg/tag (tg/tag)</code> <br>e.g `tag 2 tg/assignment tg/tough` <br>e.g `tag 3 tg/meeting`
 **Done** | <code>done <i>task_id</i></code> <br>e.g `done 1`
 **Undone** | <code>undone <i>task_id</i></code> <br>e.g `undone 1`
+**Edit** | <code>edit <i>task_id n/task_name d/date</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
 **Find** | <code>find <i>keyword (more_keywords)</i></code> <br><code> find <i> d/date</i></code> <br><code> find <i> t/tag</i></code> <br> e.g. `find Quiz` <br> e.g. `find d/2021-12-12` <br> e.g. `find t/GEQ1000`
-**Tag** | <code>tag <i>task_id tg/tag (tg/tag)</code> <br>e.g `tag 2 tg/assignment tg/tough` <br>e.g `tag 3 tg/meeting`
+**Show** | `show week_number ` <br>e.g `show 13`
+**Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
+**Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
+**Clear** | <code>clear</i></code> <br> 
+**Command History** | <code>/prev</code> or <code>&#8593;</code><br>
 **Help** | `help`
-**Command History** | `/prev` or use the up &#8593; arrow key
-**List** | `list`
-**Clear** | `clear`
