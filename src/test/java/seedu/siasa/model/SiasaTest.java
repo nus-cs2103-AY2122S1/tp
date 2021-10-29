@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_AMOUNT_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.siasa.testutil.Assert.assertThrows;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
@@ -94,8 +94,8 @@ public class SiasaTest {
     public void resetData_withDuplicatePolicy_throwsDuplicatePolicyException() {
         // Two policies with the same identity fields (name and owner)
         Policy editedLifePlan = new PolicyBuilder(FULL_LIFE)
-                .withPrice(VALID_POLICY_PRICE_CRITICAL)
-                .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
+                .withPaymentStructure(VALID_POLICY_PAYMENT_AMOUNT_CRITICAL)
+                .withCommission(VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL)
                 .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
                 .build();
         List<Policy> policies = Arrays.asList(FULL_LIFE, editedLifePlan);
@@ -125,8 +125,8 @@ public class SiasaTest {
     public void hasPolicy_policyWithSameIdentityFieldsInSiasa_returnsTrue() {
         siasa.addPolicy(FULL_LIFE);
         Policy editedFullLife = new PolicyBuilder(FULL_LIFE)
-                .withPrice(VALID_POLICY_PRICE_CRITICAL)
-                .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
+                .withPaymentStructure(VALID_POLICY_PAYMENT_AMOUNT_CRITICAL)
+                .withCommission(VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL)
                 .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
                 .build();
         assertTrue(siasa.hasPolicy(editedFullLife));

@@ -21,6 +21,8 @@ Class JsonSerializableSiasa
 Class JsonAdaptedPerson
 Class JsonAdaptedPolicy
 Class JsonAdaptedTag
+Class JsonAdaptedCommission
+Class JsonAdaptedPaymentStructure
 }
 
 }
@@ -40,7 +42,13 @@ JsonSiasaStorage .up.|> SiasaStorage
 JsonSiasaStorage ..> JsonSerializableSiasa
 JsonSerializableSiasa --> "*" JsonAdaptedPerson
 JsonSerializableSiasa --> "*" JsonAdaptedPolicy
-JsonAdaptedPolicy --> "1" JsonAdaptedPerson
+JsonAdaptedPolicy -right-> "1" JsonAdaptedPerson
+JsonAdaptedPolicy --> "1" JsonAdaptedCommission
+JsonAdaptedPolicy --> "1" JsonAdaptedPaymentStructure
+JsonAdaptedTag -[hidden]down-> JsonAdaptedPaymentStructure
+
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPolicy --> "*" JsonAdaptedTag
+
 
 @enduml

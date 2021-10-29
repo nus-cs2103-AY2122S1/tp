@@ -2,9 +2,9 @@ package seedu.siasa.model.policy;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_AMOUNT_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
 import static seedu.siasa.testutil.TypicalPersons.BOB;
@@ -29,8 +29,8 @@ class PolicyTest {
 
         // same title and owner, all other attributes different -> returns true
         Policy editedFullLife = new PolicyBuilder(FULL_LIFE)
-                .withPrice(VALID_POLICY_PRICE_CRITICAL)
-                .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
+                .withPaymentStructure(VALID_POLICY_PAYMENT_AMOUNT_CRITICAL)
+                .withCommission(VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL)
                 .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
                 .build();
         assertTrue(FULL_LIFE.isSamePolicy(editedFullLife));
@@ -88,11 +88,13 @@ class PolicyTest {
         assertFalse(FULL_LIFE.equals(editedFullLife));
 
         // different price -> returns false
-        editedFullLife = new PolicyBuilder(FULL_LIFE).withPrice(VALID_POLICY_PRICE_CRITICAL).build();
+        editedFullLife =
+                new PolicyBuilder(FULL_LIFE).withPaymentStructure(VALID_POLICY_PAYMENT_AMOUNT_CRITICAL).build();
         assertFalse(FULL_LIFE.equals(editedFullLife));
 
         // different commission -> returns false
-        editedFullLife = new PolicyBuilder(FULL_LIFE).withCommission(VALID_POLICY_COMMISSION_CRITICAL).build();
+        editedFullLife =
+                new PolicyBuilder(FULL_LIFE).withCommission(VALID_POLICY_COMMISSION_PERCENTAGE_CRITICAL).build();
         assertFalse(FULL_LIFE.equals(editedFullLife));
 
         // different expiry date -> returns false

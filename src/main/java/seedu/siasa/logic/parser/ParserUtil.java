@@ -1,6 +1,7 @@
 package seedu.siasa.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -15,8 +16,8 @@ import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Name;
 import seedu.siasa.model.person.Phone;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.ExpiryDate;
-import seedu.siasa.model.policy.Price;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
@@ -26,6 +27,12 @@ import seedu.siasa.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_PAYMENT_STRUCTURE =
+            "Payment structure expects numerical inputs of payment amount, payment freq (optional) "
+                    + "and num of payments (optional).";
+    public static final String MESSAGE_INVALID_COMMISSION =
+            "Commission requires numerical inputs of commission percentage"
+                    + "and number of payments with commission (optional).";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -143,21 +150,21 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String expiryDate} into a {@code ExpiryDate}.
+     * Parses a {@code String expiryDate} into a {@code overageExpiryDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code expiryDate} is invalid.
      */
-    public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
+    public static CoverageExpiryDate parseCoverageExpiryDate(String expiryDate) throws ParseException {
         requireNonNull(expiryDate);
         LocalDate date;
         try {
             date = LocalDate.parse(expiryDate.trim());
         } catch (Exception e) {
-            throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
+            throw new ParseException(CoverageExpiryDate.MESSAGE_CONSTRAINTS);
         }
 
-        return new ExpiryDate(date);
+        return new CoverageExpiryDate(date);
     }
 
     /**
@@ -166,13 +173,33 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code Price} is invalid.
      */
-    public static Price parsePrice(String price) throws ParseException {
-        requireNonNull(price);
-        int intPrice = Integer.parseInt(price.trim());
-        if (!Price.isValidPrice(intPrice)) {
-            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+    public static PaymentStructure parsePaymentStructure(String paymentStructure) throws ParseException {
+        requireNonNull(paymentStructure);
+        String[] paymentDetails = paymentStructure.split(" ");
+        if (paymentDetails.length > 3 || paymentDetails.length == 0) {
+            throw new ParseException(MESSAGE_INVALID_PAYMENT_STRUCTURE);
         }
-        return new Price(intPrice);
+        try {
+            int paymentAmount = Integer.parseInt(paymentDetails[0]);
+            int paymentFrequency = 1;
+            int numberOfPayments = 1;
+            if (paymentDetails.length > 1) {
+                paymentFrequency = Integer.parseInt(paymentDetails[1]);
+            }
+            if (paymentDetails.length == 2) {
+                numberOfPayments = PaymentStructure.INDEFINITE_NUMBER_OF_PAYMENTS;
+            } else if (paymentDetails.length > 2) {
+                numberOfPayments = Integer.parseInt(paymentDetails[2]);
+            }
+
+            if (!PaymentStructure.isValidPaymentStructure(paymentAmount, paymentFrequency, numberOfPayments)) {
+                throw new ParseException(PaymentStructure.MESSAGE_CONSTRAINTS);
+            }
+
+            return new PaymentStructure(paymentAmount, paymentFrequency, numberOfPayments);
+        } catch (NumberFormatException e) {
+            throw new ParseException(PaymentStructure.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
@@ -181,12 +208,26 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code commission} is invalid.
      */
-    public static Commission parseCommission(String commission) throws ParseException {
-        requireNonNull(commission);
-        int intCommission = Integer.parseInt(commission.trim());
-        if (!Commission.isValidCommission(intCommission)) {
+    public static Commission parseCommission(String commission,
+                                             PaymentStructure paymentStructure) throws ParseException {
+        requireAllNonNull(commission, paymentStructure);
+
+        String[] commissionDetails = commission.split(" ");
+        if (commissionDetails.length > 2 || commissionDetails.length == 0) {
+            throw new ParseException(MESSAGE_INVALID_COMMISSION);
+        }
+        try {
+            int commissionPercentage = Integer.parseInt(commissionDetails[0]);
+            int numberOfPaymentsCommission = paymentStructure.numberOfPayments;
+            if (commissionDetails.length == 2) {
+                numberOfPaymentsCommission = Integer.parseInt(commissionDetails[1]);
+            }
+            if (!Commission.isValidCommission(commissionPercentage, numberOfPaymentsCommission, paymentStructure)) {
+                throw new ParseException(Commission.MESSAGE_CONSTRAINTS);
+            }
+            return new Commission(commissionPercentage, numberOfPaymentsCommission);
+        } catch (NumberFormatException e) {
             throw new ParseException(Commission.MESSAGE_CONSTRAINTS);
         }
-        return new Commission(intCommission);
     }
 }
