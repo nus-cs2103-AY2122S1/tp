@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.FlowPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -30,6 +31,7 @@
             <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
             <Label fx:id="expiryDate" styleClass="cell_small_label" text="\$expiryDate" />
             <Label fx:id="commission" styleClass="cell_small_label" text="\$commission" />
+            <FlowPane fx:id="tags" />
         </VBox>
     </GridPane>
 </HBox>

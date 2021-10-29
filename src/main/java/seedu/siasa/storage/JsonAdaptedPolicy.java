@@ -3,6 +3,11 @@ package seedu.siasa.storage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +19,7 @@ import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.model.tag.Tag;
 
 
 /**
@@ -28,6 +34,7 @@ public class JsonAdaptedPolicy {
     private final String coverageExpiryDate;
     private final JsonAdaptedCommission commission;
     private final JsonAdaptedPerson owner;
+    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPolicy} with the given policy details.
@@ -37,12 +44,16 @@ public class JsonAdaptedPolicy {
                              @JsonProperty("paymentStructure") JsonAdaptedPaymentStructure paymentStructure,
                              @JsonProperty("coverageExpiryDate") String coverageExpiryDate,
                              @JsonProperty("commission") JsonAdaptedCommission commission,
-                             @JsonProperty("owner") JsonAdaptedPerson owner) {
+                             @JsonProperty("owner") JsonAdaptedPerson owner,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.title = title;
         this.paymentStructure = paymentStructure;
         this.coverageExpiryDate = coverageExpiryDate;
         this.commission = commission;
         this.owner = owner;
+        if (tagged != null) {
+            this.tagged.addAll(tagged);
+        }
     }
 
     /**
@@ -54,6 +65,9 @@ public class JsonAdaptedPolicy {
         coverageExpiryDate = source.getCoverageExpiryDate().toString();
         commission = new JsonAdaptedCommission(source.getCommission());
         owner = new JsonAdaptedPerson(source.getOwner());
+        tagged.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     public JsonAdaptedPerson getOwner() {
@@ -66,6 +80,11 @@ public class JsonAdaptedPolicy {
      * @throws IllegalValueException if there were any data constraints violated in the adapted policy.
      */
     public Policy toModelType(Person policyOwner) throws IllegalValueException {
+        final List<Tag> policyTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tagged) {
+            policyTags.add(tag.toModelType());
+        }
+
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Title.class.getSimpleName()));
         }
@@ -108,6 +127,9 @@ public class JsonAdaptedPolicy {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
-        return new Policy(modelTitle, modelPaymentStructure, modelCoverageExpiryDate, modelCommission, policyOwner);
+
+        final Set<Tag> modelTags = new HashSet<>(policyTags);
+        return new Policy(modelTitle, modelPaymentStructure, modelCoverageExpiryDate, modelCommission, policyOwner,
+                modelTags);
     }
 }

@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private PolicyListPanel policyListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private GuideWindow guideWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -69,7 +69,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        guideWindow = new GuideWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
+    void fillInnerParts() throws CommandException, ParseException {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
@@ -122,6 +122,7 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        executeCommand("expiringpolicy");
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -143,14 +144,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the guide window or focuses on it if it's already opened.
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+        if (!guideWindow.isShowing()) {
+            Stage stage = guideWindow.getRoot();
+            stage.show();
         } else {
-            helpWindow.focus();
+            guideWindow.focus();
         }
     }
 
@@ -177,7 +179,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
+        guideWindow.hide();
         primaryStage.hide();
     }
 

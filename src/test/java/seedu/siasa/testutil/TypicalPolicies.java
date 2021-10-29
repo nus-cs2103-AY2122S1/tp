@@ -7,6 +7,7 @@ import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_NUMBER_OF_
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_AMOUNT_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_FREQUENCY_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_TAG_TERM_INSURANCE;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class TypicalPolicies {
             .withPaymentStructure(VALID_POLICY_PAYMENT_AMOUNT_CRITICAL,
                     VALID_POLICY_PAYMENT_FREQUENCY_CRITICAL,
                     VALID_POLICY_NUMBER_OF_PAYMENTS_CRITICAL)
+            .withTags(VALID_TAG_TERM_INSURANCE)
             .build();
 
     private TypicalPolicies() {} // prevents instantiation

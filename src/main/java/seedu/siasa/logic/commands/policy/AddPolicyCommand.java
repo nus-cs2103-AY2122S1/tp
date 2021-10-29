@@ -8,7 +8,9 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
@@ -23,6 +25,7 @@ import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.model.tag.Tag;
 
 
 /**
@@ -56,18 +59,20 @@ public class AddPolicyCommand extends Command {
     private final CoverageExpiryDate coverageExpiryDate;
     private final Index index;
     private final Commission commission;
+    private final Set<Tag> tagList = new HashSet<>();
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPolicyCommand that adds a policy with the following fields.
      */
     public AddPolicyCommand(Title title, PaymentStructure paymentStructure, CoverageExpiryDate coverageExpiryDate,
-                            Commission commission, Index index) {
-        requireAllNonNull(title, paymentStructure, coverageExpiryDate, index);
+                            Commission commission, Index index, Set<Tag> tagList) {
+        requireAllNonNull(title, paymentStructure, coverageExpiryDate, index, tagList);
         this.title = title;
         this.paymentStructure = paymentStructure;
         this.coverageExpiryDate = coverageExpiryDate;
         this.index = index;
         this.commission = commission;
+        this.tagList.addAll(tagList);
     }
 
     @Override
@@ -89,7 +94,7 @@ public class AddPolicyCommand extends Command {
 
         Person owner = lastShownList.get(index.getZeroBased());
 
-        Policy toAdd = new Policy(title, paymentStructure, coverageExpiryDate, commission, owner);
+        Policy toAdd = new Policy(title, paymentStructure, coverageExpiryDate, commission, owner, tagList);
 
         if (model.hasPolicy(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
@@ -116,6 +121,7 @@ public class AddPolicyCommand extends Command {
                 && title.equals(((AddPolicyCommand) other).title)
                 && paymentStructure.equals(((AddPolicyCommand) other).paymentStructure)
                 && coverageExpiryDate.equals(((AddPolicyCommand) other).coverageExpiryDate)
-                && commission.equals(((AddPolicyCommand) other).commission));
+                && commission.equals(((AddPolicyCommand) other).commission)
+                && tagList.equals(((AddPolicyCommand) other).tagList));
     }
 }
