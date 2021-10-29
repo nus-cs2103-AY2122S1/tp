@@ -72,8 +72,6 @@ Some example commands you can try:
 
 </div>
 
-## Person Commands
-
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
