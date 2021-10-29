@@ -350,7 +350,6 @@ Edits an existing reservation in RHRH
 Format: `editR INDEX [r/REMARK] [t/TAG]…`
 * Edits the reservation at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed supplier list. 
-* The index **must be a positive integer** 1, 2, 3, … 
 
 Examples:
 * `editR 2 r/have kids t/10 percent off`: Edits the remark and tags of the 2nd display reservation to `have kids` and `10 percent off`, respectively.
