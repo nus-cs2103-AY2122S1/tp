@@ -433,6 +433,7 @@ Examples: `g/M`, `g/f`
 
 ### `p/PHONE`
 `PHONE` should only contain numbers, and it should be at least 3 digits long.
+
 Example: `98739283`
 
 ### `e/EMAIL`
