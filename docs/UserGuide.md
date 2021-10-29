@@ -14,9 +14,9 @@ title: Uni-Fy User Guide
 
 Welcome to the Uni-Fy User Guide!
 
-Uni-Fy is a **desktop app for managing your university workload** and it is designed **by university students for university students**. 
-This application is optimized for use via a **Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). 
+Uni-Fy is a **desktop app for managing your university workload** and it is designed **by university students for university students**.
+This application is optimized for use via a **Command Line Interface** (CLI)
+while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
 
 Interested to jump right in? Take a look at [**3. Getting started**](#3-getting-started). Enjoy!
@@ -34,7 +34,7 @@ GUI Components:
 3. **Result Box**: Displays the result of your commands
 4. **Status Bar Footer**: Displays the file which your data is saved at
 5. **Weekly Panel**: Represents the specified week, holding that week's daily panels
-6. **Daily Panel**: Represents a day in the specified week, displaying the tasks in that day 
+6. **Daily Panel**: Represents a day in the specified week, displaying the tasks in that day
 
 --------------------------------------------------------------------------------------------------------------------
 ## 2. About this document
@@ -57,7 +57,7 @@ Additionally, here are the relevant places you can go to if you would like to se
 ### 2.2 Formatting
 
 The Uni-Fy user guide contains different formatting used throughout the document which is used to convey different meanings.
-This table below illustrates what each formatting means. 
+This table below illustrates what each formatting means.
 
 | Formatting    | What                            | Meaning   | Example                     |
 | ----------    |-------------------------------------|-----------|--------------------------|
@@ -69,7 +69,7 @@ This table below illustrates what each formatting means.
 
 ### 2.3 Icons
 
-The Uni-Fy user guide uses icons to differentiate the type of information presented. 
+The Uni-Fy user guide uses icons to differentiate the type of information presented.
 Here are the meanings behind the icons used in this document.
 
 |Icons | Explanation |
@@ -113,7 +113,7 @@ Here is a table of commonly used terms in this document along with their meaning
 
 <div markdown="block" class="alert alert-info">
 
-This section highlights all the commands that Uni-Fy supports. These include details about the format of the command and example scenarios of each command. 
+This section highlights all the commands that Uni-Fy supports. These include details about the format of the command and example scenarios of each command.
 
 **:information_source: Notes about the command format:**<br>
 
@@ -133,7 +133,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
 </div>
 
 
-### 4.1 Adding a task: `add` 
+### 4.1 Adding a task: `add`
 
 Add a task to the task list. The tags for the command can be input in any order.
 
@@ -146,7 +146,7 @@ Add a task to the task list. The tags for the command can be input in any order.
 
 **:information_source: Interpretation:**<br>
 * Adds task with the name <code><i>n/task_name</i></code>
-* Adds task with the time <code><i>t/time</i></code> 
+* Adds task with the time <code><i>t/time</i></code>
   * The format should be as follows <code><i>t/hh:mm</i></code>
 * Adds task with the date <code><i>d/date</i></code>
   * The format should be as follows <code><i>d/yyyy-mm-dd</i></code>
@@ -233,7 +233,7 @@ Find tasks with matching keywords and show them in the task list.
 * Only tasks containing all keywords will be shown
 
 </div>
-  
+
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
@@ -453,6 +453,6 @@ Action | Format, Examples
 **Show** | `show week_number ` <br>e.g `show 13`
 **Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
-**Clear** | <code>clear</i></code> <br> 
+**Clear** | <code>clear</i></code> <br>
 **Command History** | <code>/prev</code> or <code>&#8593;</code><br>
 **Help** | `help`
