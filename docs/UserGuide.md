@@ -271,7 +271,7 @@ Format: `addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`
 
 * All the parameters are **compulsory** except for remark
 * Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
-* Start time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
+* Start and end time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Module code and lesson code are seperated by white spaces. Lesson start time and end time are seperated by white spaces as well.
@@ -360,7 +360,7 @@ Command alias: `lc`
 
 #### Clearing all lessons: `clearc` <a name="clearc"></a>
 
-Purges **all** existing lesson from contHACKS. **Use with caution.**
+Purges **all** existing lessons from contHACKS. **Use with caution.**
 
 Format: `clearc`
 
