@@ -12,8 +12,17 @@ import seedu.academydirectory.logic.commands.FilterCommand;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
+import seedu.academydirectory.logic.commands.HistoryCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
+import seedu.academydirectory.logic.commands.RedoCommand;
+import seedu.academydirectory.logic.commands.RevertCommand;
+import seedu.academydirectory.logic.commands.ShowCommand;
+import seedu.academydirectory.logic.commands.SortCommand;
+import seedu.academydirectory.logic.commands.TagCommand;
+import seedu.academydirectory.logic.commands.UndoCommand;
+import seedu.academydirectory.logic.commands.ViewCommand;
+import seedu.academydirectory.logic.commands.VisualizeCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
 public class HelpCommandParser implements Parser<HelpCommand> {
@@ -63,6 +72,33 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case ParticipationCommand.COMMAND_WORD:
             return new HelpCommand(userInput, ParticipationCommand.HELP_MESSAGE);
+
+        case ShowCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, ShowCommand.HELP_MESSAGE);
+
+        case SortCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, SortCommand.HELP_MESSAGE);
+
+        case TagCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, TagCommand.HELP_MESSAGE);
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, HistoryCommand.HELP_MESSAGE);
+
+        case RevertCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, RevertCommand.HELP_MESSAGE);
+
+        case UndoCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, UndoCommand.HELP_MESSAGE);
+
+        case RedoCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, RedoCommand.HELP_MESSAGE);
+
+        case ViewCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, ViewCommand.HELP_MESSAGE);
+
+        case VisualizeCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, VisualizeCommand.HELP_MESSAGE);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

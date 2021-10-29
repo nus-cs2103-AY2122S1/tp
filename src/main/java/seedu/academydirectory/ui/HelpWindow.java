@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import com.sandec.mdfx.MarkdownView;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
@@ -23,8 +26,9 @@ import seedu.academydirectory.commons.core.Messages;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t15-3.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "### User guide link to copy:\n##### " + USERGUIDE_URL
-            + "\n##### Type in 'help' + COMMAND_NAME for more info of each command.\n";
+    public static final String HELP_MESSAGE = "#### Copy user guide:\n##### " + USERGUIDE_URL
+            + "\n##### Type in 'help' + COMMAND_NAME for more info of each command.\n"
+            + "##### Press ESC to exit window otherwise\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -47,6 +51,14 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         this.root = root;
+        root.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ESCAPE)) {
+                    hide();
+                }
+            }
+        });
         this.markdownView = new MarkdownView();
         markdownView.getStylesheets().clear();
         markdownView.getStylesheets().add(MARKDOWN_CSS);

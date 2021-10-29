@@ -205,15 +205,29 @@ public class ModelManager implements VersionedModel {
     }
 
     //=========== Additional Information View =============================================================
+
+    /**
+     * Set additional view type for shown in visualizer
+     * @param additionalViewType additional view
+     */
     @Override
     public void setAdditionalViewType(AdditionalViewType additionalViewType) {
         this.additionalViewModel.setAdditionalViewType(additionalViewType);
     }
+
+    /**
+     * Set Additional Info for visualizer
+     * @param additionalInfo additional info
+     */
     @Override
     public void setAdditionalInfo(AdditionalInfo<? extends Object> additionalInfo) {
         this.additionalViewModel.setAdditionalInfo(additionalInfo);
     }
 
+    /**
+     * Get Additional View Model
+     * @return view model
+     */
     @Override
     public AdditionalViewModel getAdditionalViewModel() {
         return this.additionalViewModel;

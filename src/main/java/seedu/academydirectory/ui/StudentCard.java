@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -49,6 +51,8 @@ public class StudentCard extends UiPart<Region> {
     private Label assessment;
     @FXML
     private FlowPane tags;
+    @FXML
+    private ImageView image;
 
     private int displayedIndex;
     private Label temp;
@@ -73,7 +77,11 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        // test new visual for this, will be decided later if have time. To
+        // revert back to the previous view, remove the below line.
+        container.getChildren().removeAll(studioRecord, assessment, telegram);
         temp = new Label("Clicked");
+        image.setImage(new Image("/images/student.png"));
         this.commandBox = commandBox;
     }
 

@@ -3,6 +3,8 @@ package seedu.academydirectory.ui;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.academydirectory.logic.AdditionalViewType;
+import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.ui.creator.Creator;
 import seedu.academydirectory.ui.creator.DefaultCreator;
@@ -19,8 +21,12 @@ public class VisualizerDisplay extends UiPart<Region> {
     @FXML
     private StackPane placeHolder;
 
+    /**
+     * Constructor for a Visualizer Display
+     */
     public VisualizerDisplay() {
         super(FXML);
+        handleAdditionalInfo(new AdditionalViewModel(AdditionalViewType.DEFAULT, AdditionalInfo.empty()));
     }
 
     private void setVisualizer(Creator creator) {
@@ -35,15 +41,19 @@ public class VisualizerDisplay extends UiPart<Region> {
     public void handleAdditionalInfo(AdditionalViewModel additionalViewModel) {
         switch (additionalViewModel.getAdditionalViewType()) {
         case VIEW:
+            placeHolder.setVisible(true);
             setVisualizer(new ViewCreator(additionalViewModel.getAdditionalInfo()));
             break;
         case VISUALIZE:
+            placeHolder.setVisible(true);
             setVisualizer(new GraphCreator(additionalViewModel.getAdditionalInfo()));
             break;
         case HISTORY:
+            placeHolder.setVisible(true);
             setVisualizer(new HistoryCreator(additionalViewModel.getAdditionalInfo()));
             break;
         default:
+            placeHolder.setVisible(true);
             setVisualizer(new DefaultCreator(additionalViewModel.getAdditionalInfo()));
             break;
         }
