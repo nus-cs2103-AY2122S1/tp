@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
@@ -52,6 +55,28 @@ public class CommandTestUtil {
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "teleHandle"; // missing @
     public static final String INVALID_MODULE_NAME_DESC = " " + PREFIX_MODULE_NAME
             + "modulE@"; // '@' not allowed in module names
+
+    public static final String VALID_TASK_NAME_0 = "Assignment 1";
+    public static final String VALID_TASK_NAME_1 = "Lab 7";
+    public static final String VALID_TASK_ID_0 = "T1";
+    public static final String VALID_TASK_ID_1 = "T77";
+    public static final String VALID_TASK_DEADLINE_0 = "2021-10-28";
+    public static final String VALID_TASK_DEADLINE_1 = "2022-11-11";
+
+    public static final String TASK_NAME_DESC_0 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_0;
+    public static final String TASK_NAME_DESC_1 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_1;
+    public static final String TASK_ID_DESC_0 = " " + PREFIX_TASK_ID + VALID_TASK_ID_0;
+    public static final String TASK_ID_DESC_1 = " " + PREFIX_TASK_ID + VALID_TASK_ID_1;
+    public static final String TASK_DEADLINE_DESC_0 = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_0;
+    public static final String TASK_DEADLINE_DESC_1 = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_1;
+
+    public static final String INVALID_TASK_NAME_DESC = " " + PREFIX_TASK_NAME
+            + "Midterm @ SoC"; // only alphanumeric characters and spaces are allowed in taskName
+    public static final String INVALID_TASK_ID_DESC = " " + PREFIX_TASK_ID
+            + "t100"; // taskId must begin with a capital 'T'
+    public static final String INVALID_TASK_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE
+            + "18th November, 2021"; // only alphanumeric characters and dashes are allowed in taskDeadline
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
