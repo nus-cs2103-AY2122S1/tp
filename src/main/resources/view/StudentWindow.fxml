@@ -39,6 +39,7 @@
                         <Label fx:id="phone" styleClass="student_view_small_label" />
                         <Label fx:id="address" styleClass="student_view_small_label" />
                         <Label fx:id="email" styleClass="student_view_small_label" />
+                  <FlowPane fx:id="tutorialGroups" hgap="5" layoutX="26.0" layoutY="175.0" />
                   <FlowPane fx:id="marks" hgap="5" layoutX="26.0" layoutY="99.0" />
                     </VBox>
                <rowConstraints>
