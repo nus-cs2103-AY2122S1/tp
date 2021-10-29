@@ -7,15 +7,10 @@ title: User Guide
 
 contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing your workload to focus on the more important task - teaching.
 
-## Table of Contents
-* [How to use this User Guide](#how-to-use)
-  * [How to navigate](#how-to-navigate)
-  * [Meaning of icons](#meaning-of-icons)
-  * [Formatting used](#formatting)
-
+## Table of Contents <a name="table-of-contents"></a>
 * [Quick start](#quick-start)
 
-* [Walk-through](#walkthrough)
+* [How to use this User Guide](#how-to-use)
 
 * [Features](#features)
   * [General](#general)
@@ -45,16 +40,11 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 --------------------------------------------------------------------------------------------------------------------
 
-## How to use this User Guide <a name="how-to-use"></a>
+
 
 ### How to navigate <a name="how-to-navigate"></a>
 
-### Meaning of icons <a name="meaning-of-icons"></a>
 
-| Icon | Description |
-|---|---|
-|:information_source:| This icon indicates that some extra information is provided.|
-|:exclamation:| This icon indicates that the information provided is **important**. |
 
 ### Formatting used <a name="formatting"></a>
 
@@ -73,9 +63,22 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 <img src="images/MainApp.png" width="800px">
 
 --------------------------------------------------------------------------------------------------------------------
-## Walk-through <a name = "walkthrough"></a>
+## How to use this User Guide <a name="how-to-use"></a>
+
+This section provides tips on reading this document, as well as how to navigate it.
+
+This User Guide is structured so that it is easy for you to find what you need. If this is your first time using contHACKS, we recommend reading the User Guide in order, starting from this section. If you are ever lost, head over to [table of contents](#table-of-contents) to orientate yourself.
 
 Here are some of the things you will need to know before you get started! 
+
+### Meaning of icons <a name="meaning-of-icons"></a>
+
+| Icon | Description |
+|---|---|
+|:information_source:| This icon indicates that some extra information is provided.|
+|:exclamation:| This icon indicates that the information provided is **important**. |
+
+### Key terms <a name="key-terms"></a>
 
 These are the key terms defined for usage of the commands:
 
@@ -91,12 +94,15 @@ These are the key terms defined for usage of the commands:
 
 Refer to the image below for more information on the different components of ContHACKS!
 
+### GUI <a name="gui"></a>
+
 <img src="images/Walkthrough_1.png" width="1000px">
 
 <img src="images/Walkthrough_2.png" width="1000px">
 
 <img src="images/Walkthrough_3.png" width="1000px">
 
+### Command format <a name="command-format"></a>
 Notes about the command format:<br>
 
 * Command words are case insensitive <br>
