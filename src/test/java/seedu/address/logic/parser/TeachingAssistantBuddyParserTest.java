@@ -8,20 +8,20 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_NAME_DESC_0;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_0;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_1;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_ID_DESC_1;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_0;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_1;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.TELE_HANDLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_0;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_0;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
@@ -150,13 +150,13 @@ public class TeachingAssistantBuddyParserTest {
     public void parseCommand_editTask() throws Exception {
         ModuleName moduleName = new ModuleName(MODULE_NAME_0);
         EditTaskCommand.EditTaskDescriptor editedTask = new EditTaskCommand.EditTaskDescriptor();
-        editedTask.setTaskName(new TaskName(VALID_TASK_NAME_2));
+        editedTask.setTaskName(new TaskName(VALID_TASK_NAME_0));
         editedTask.setTaskId(new TaskId(VALID_TASK_ID_1));
-        editedTask.setTaskDeadline(new TaskDeadline(VALID_TASK_DEADLINE_2));
+        editedTask.setTaskDeadline(new TaskDeadline(VALID_TASK_DEADLINE_0));
         Task task = new TaskBuilder().withName(VALID_TASK_NAME_1).withId(VALID_TASK_ID_1)
                 .withDeadline(VALID_TASK_DEADLINE_1).build();
         EditTaskCommand command = (EditTaskCommand) parser.parseCommand(EditTaskCommand.COMMAND_WORD
-                + MODULE_NAME_DESC_0 + TASK_ID_DESC_1 + TASK_NAME_DESC_2 + TASK_DEADLINE_DESC_2);
+                + MODULE_NAME_DESC_0 + TASK_ID_DESC_1 + TASK_NAME_DESC_0 + TASK_DEADLINE_DESC_0);
         assertEquals(new EditTaskCommand(moduleName, editedTask), command);
     }
 

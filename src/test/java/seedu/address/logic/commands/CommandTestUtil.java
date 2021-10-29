@@ -36,12 +36,6 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_TELE_HANDLE_AMY = "@AmyBee";
     public static final String VALID_TELE_HANDLE_BOB = "@bobchoo";
-    public static final String VALID_TASK_NAME_1 = "TaskName1";
-    public static final String VALID_TASK_NAME_2 = "TaskName2";
-    public static final String VALID_TASK_DEADLINE_1 = "Deadline1";
-    public static final String VALID_TASK_DEADLINE_2 = "Deadline2";
-    public static final String VALID_TASK_ID_1 = "T1";
-    public static final String VALID_TASK_ID_2 = "T2";
 
     public static final String MODULE_NAME_DESC_0 = " " + PREFIX_MODULE_NAME + MODULE_NAME_0;
     public static final String MODULE_NAME_DESC_1 = " " + PREFIX_MODULE_NAME + MODULE_NAME_1;
@@ -53,12 +47,6 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String TELE_HANDLE_DESC_AMY = " " + PREFIX_TELE_HANDLE + VALID_TELE_HANDLE_AMY;
     public static final String TELE_HANDLE_DESC_BOB = " " + PREFIX_TELE_HANDLE + VALID_TELE_HANDLE_BOB;
-    public static final String TASK_ID_DESC_1 = " " + PREFIX_TASK_ID + VALID_TASK_ID_1;
-    public static final String TASK_ID_DESC_2 = " " + PREFIX_TASK_ID + VALID_TASK_ID_2;
-    public static final String TASK_NAME_DESC_1 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_1;
-    public static final String TASK_NAME_DESC_2 = " " + PREFIX_TASK_NAME + VALID_TASK_NAME_2;
-    public static final String TASK_DEADLINE_DESC_1 = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_1;
-    public static final String TASK_DEADLINE_DESC_2 = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID
@@ -67,12 +55,6 @@ public class CommandTestUtil {
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "teleHandle"; // missing @
     public static final String INVALID_MODULE_NAME_DESC = " " + PREFIX_MODULE_NAME
             + "modulE@"; // '@' not allowed in module names
-    public static final String INVALID_TASK_ID_DESC = " " + PREFIX_TASK_ID
-            + "!??"; // special characters are not allowed
-    public static final String INVALID_TASK_NAME_DESC = " " + PREFIX_TASK_NAME
-            + "!??"; // special characters are not allowed
-    public static final String INVALID_TASK_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE
-            + "???"; // special characters are not allowed
 
     public static final String VALID_TASK_NAME_0 = "Assignment 1";
     public static final String VALID_TASK_NAME_1 = "Lab 7";

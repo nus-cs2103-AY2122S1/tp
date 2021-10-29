@@ -8,12 +8,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_NAME_DES
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_NAME_DESC_0;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_NAME_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_0;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_1;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_ID_DESC_0;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_ID_DESC_1;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_ID_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_0;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_1;
-import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_1;
@@ -50,16 +50,16 @@ public class AddTaskCommandParserTest {
                 + TASK_DEADLINE_DESC_1, new AddTaskCommand(moduleName, testTask));
 
         // multiple task ids - last task id accepted
-        assertParseSuccess(parser, MODULE_NAME_DESC_0 + TASK_ID_DESC_2 + TASK_ID_DESC_1 + TASK_NAME_DESC_1
+        assertParseSuccess(parser, MODULE_NAME_DESC_0 + TASK_ID_DESC_0 + TASK_ID_DESC_1 + TASK_NAME_DESC_1
                 + TASK_DEADLINE_DESC_1, new AddTaskCommand(moduleName, testTask));
 
         // multiple task names - last task name accepted
-        assertParseSuccess(parser, MODULE_NAME_DESC_0 + TASK_ID_DESC_1 + TASK_NAME_DESC_2 + TASK_NAME_DESC_1
+        assertParseSuccess(parser, MODULE_NAME_DESC_0 + TASK_ID_DESC_1 + TASK_NAME_DESC_0 + TASK_NAME_DESC_1
                 + TASK_DEADLINE_DESC_1, new AddTaskCommand(moduleName, testTask));
 
         // multiple task deadlines - last task deadline accepted
         assertParseSuccess(parser, MODULE_NAME_DESC_0 + TASK_ID_DESC_1 + TASK_NAME_DESC_1
-                + TASK_DEADLINE_DESC_2 + TASK_DEADLINE_DESC_1, new AddTaskCommand(moduleName, testTask));
+                + TASK_DEADLINE_DESC_0 + TASK_DEADLINE_DESC_1, new AddTaskCommand(moduleName, testTask));
     }
 
     @Test
