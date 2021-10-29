@@ -29,7 +29,11 @@ public class Salary implements Field {
      * Returns if a given string is a valid salary.
      */
     public static boolean isValidSalary(String test) {
-        return test.matches("\\d+");
+        if (!test.matches("\\d+")) {
+            return false;
+        }
+        int testInt = Integer.parseInt(test);
+        return testInt >= 0;
     }
 
     @Override
