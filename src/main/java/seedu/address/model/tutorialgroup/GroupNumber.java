@@ -5,9 +5,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class GroupNumber implements Comparable<GroupNumber> {
-    public static final String MESSAGE_CONSTRAINTS = "GroupName must be a single digit, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "GroupNumber must be a single digit, and it should not be blank";
 
-    private static final String GROUPNAME_REGEX = "\\d";
+    private static final String GROUPNUMBER_REGEX = "\\d";
 
     public final String value;
 
@@ -18,7 +18,7 @@ public class GroupNumber implements Comparable<GroupNumber> {
      */
     public GroupNumber(String groupName) {
         requireNonNull(groupName);
-        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGroupNumber(groupName), MESSAGE_CONSTRAINTS);
         value = groupName;
     }
 
@@ -26,10 +26,10 @@ public class GroupNumber implements Comparable<GroupNumber> {
      * Checks validity of input string.
      *
      * @param test Test string.
-     * @return Validity of input GroupName string.
+     * @return Validity of input GroupNumber string.
      */
-    public static boolean isValidGroupName(String test) {
-        return test.matches(GROUPNAME_REGEX);
+    public static boolean isValidGroupNumber(String test) {
+        return test.matches(GROUPNUMBER_REGEX);
     }
 
     private Integer parseGroupName(String groupName) {
