@@ -95,7 +95,7 @@ Here is a quick start on how you can start using our app in your own computer.
 
 4. Double-click the file to start the app. A GUI similar to the one below should appear within a few seconds.
 
-   ![Ui](images/Ui.png)
+   ![Ui](images/Quickstart.png)
 
 * If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
 
@@ -146,7 +146,8 @@ Some example commands you can try:
 
 ### Viewing help: `help`
 
-If you want to see a step-by-step guide for all Socius commands, you can get the URL to the Socius user guide by using the help command.
+You can view the full list of commands.
+Additionally, if you want to see a step-by-step guide for all Socius commands, you can get the URL to the Socius user guide by using the help command.
 
 ![help message](images/helpWindow.png)
 
@@ -187,6 +188,8 @@ Examples:
 * **`add`** `n/Cindy t/friend e/cindy@example.com p/1234567 tg/T07` adds `Cindy` to the list together with her tag, email, phone number and tutorial group.
 * **`add`** `n/David Lim nat/Singapore s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds `Ernest` to the list together with his Telegram and Instagram handles.
+![Add Command Example](images/AddEnerst.png)
+*Add Command: n/Ernest s/tg:ernest2334 s/ig:ernessst* 
 
 ### Editing a person: `edit`
 
@@ -344,9 +347,11 @@ Examples:
 
 * **`find`** `n/Alex` returns `alex` and `Alexandra`.
 * **`find`** `n/alex n/david` returns `Alex Yeoh`, `David Li`.<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* **`find`** `nat/Singapore` <br>
-  ![result for 'find nat/Singapore'](images/findNatSingapore.png)
+* **`find`** `nat/Singaporean` <br>
+  ![result for 'find n/alex n/david'](images/findAlexAndDavid.png)
+  *Find Command: n/alex n/david*
+  ![result for 'find nat/Singapore'](images/findSingaporean.png)
+  *Find Command: nat/Singaporean*
 
 ### Sorting all persons: `sort`
 
