@@ -43,10 +43,10 @@ Dangerous or potentially negative actions are displayed here
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>  
    Some example commands you can try:
-
     - `addC`: Add a customer
     - Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]...`
     - Example: `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Clementi lp/1000`
+
 
 6. Refer to the [Features](#features) below for details of each command. If you want to have an overview of all the commands, you can refer to [Command Summary](#command-summary) section.
 
@@ -74,8 +74,8 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `p/`  | Phone               | Phone numbers should only contain numbers, and it should be at least 3 digits long
 |  `a/`  | Address             | Addresses can take any values, and it should not be blank
 |  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
-|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. One entity can have multiple tags<br>When editing tags, the existing values of these fields will be replaced, i.e editing of these fields are not cumulative<br> If you want to remove all tags from an entity, you can use edit command with `r/` without specifying any tag after it
-| `lp/`  | Loyalty Point       |
+|  `t/`  | Tag (Optional)      | Contains alphanumeric characters. <br>One entity can have multiple tags.
+| `lp/`  | Loyalty Point       | 
 | `alg/` | Allergy (Optional)  | Similar to `t/`
 | `sr/`  | Special Request (Optional) | Similar to `t/`
 |  `l/`  | Leaves              | Leaves should only contain numbers
@@ -92,7 +92,7 @@ This is the list of some repeatedly used preambles in RHRH, as well as there cor
 | Preamble              | Parameter constraints
 | :-------------------: | ---------------------------------------------|
 | `INDEX`               | Must be a positive integer 1, 2, 3, …
-| `KEYWORD`             | 
+| `KEYWORD`             | There must be at least 1 keyword or more.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -105,6 +105,7 @@ Action | Format, Examples
 **Add supplier** | `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/10 Balestier Rd st/Chicken dd/19-12-2021 08:00`
 **Add reservation** | `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]` <br> e.g. `addR 2 p/98765432 at/2021-12-24 2000`
 **Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Get Customer Reserving** | `getC INDEX`<br> e.g. `getc 1`
 **Delete Customer** | `deleteC INDEX`<br> e.g., `deleteC 3`
 **Delete Employee** | `deleteE INDEX`<br> e.g., `deleteE 1`
 **Delete Supplier** | `deleteS INDEX`<br> e.g., `deleteS 2`
@@ -336,8 +337,24 @@ Examples:
 Edits an existing reservation in RHRH
 
 Format: `editR INDEX [r/REMARK] [t/TAG]…`
+* Edits the reservation at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed supplier list. 
+* The index **must be a positive integer** 1, 2, 3, … 
 
-* Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list. The index **must be a positive integer** 1, 2, 3, … 
+Examples:
+* `editR 2 r/have kids t/10 percent off`: Edits the remark and tags of the 2nd display reservation to `have kids` and `10 percent off`, respectively.
+* `editR 1 r/ t/chetwin t/20 percent off`: Removes the remark and edits the tags of the 1st display reservation to `chetwin`, `10 percent off`.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
+* You can remove all the reservation’s tags by typing `t/` without specifying any tags after it.
+
+</div>
 
 ### Deleting a customer : `deleteC`
 
@@ -369,7 +386,8 @@ Format: `deleteE INDEX`
 Example:
 * `deleteE 2` deletes the 2nd employee in the address book.
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed employee list.
@@ -388,7 +406,8 @@ Format: `deleteS INDEX`
 Example:
 * `deleteS 2` deletes the 2nd supplier in the address book.
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed supplier list.
@@ -407,7 +426,8 @@ Format: `deleteR INDEX`
 Example: 
 * `deleteR 1` deletes the 1st reservation in the display reservation list.
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed reservation list.
@@ -431,11 +451,30 @@ Examples:
 * `check 2021-09-19`
 * `check 1800`
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
 
 :information_source: **Notes:**<br>
 
 * Time has to be formatted on the hour (i.e. minutes of the time is **00**)
+
+</div>
+
+### Get customer who made the reservation: `getC`
+
+Gets the customer who made a specified reservation
+
+Format: `getC INDEX`
+* The customer who made the reservation at the specified `INDEX`
+
+Examples:
+* `getC 1`: Gets the customer who made the 1st display reservation.
+
+<div markdown="block" class="alert alert-warning">
+  
+:information_source: **Notes:**<br>
+
+* The index refers to the index number shown in the displayed reservation list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
 
@@ -450,7 +489,8 @@ Format: `findC KEYWORD [MORE_KEYWORD...]`
 Example:
 * `findC Chetwin Everything`: Finds customers that have both the keywords 'Chetwin' and 'Everything' in their fields.
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * At least one `KEYWORD` must be provided
@@ -473,7 +513,8 @@ Examples:
 * `findE Team A`: Finds all employees that have `Team A` in any of their fields.<br>
 * `findE Team A`: **DOES NOT** find employees that have `Team` and `A` in different fields or different shifts/tags
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * `KEYWORDS` must not be empty
@@ -495,7 +536,8 @@ Format: `findS KEYWORD [MORE_KEYWORDS...]`
 Example:
 * `findS Oct AM`: Finds suppliers that have both keywords `Oct` and `AM` in their fields.
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * At least one `KEYWORD` must be provided
@@ -518,7 +560,8 @@ Examples:
 * `sortC by/n o/d`: sorts the list of customers by `NAME` in `descending` order<br>
 * `sortC by/alg o/a`: sorts the list of customers by `ALLERGIES` in `ascending` order
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting a customer.
@@ -539,7 +582,8 @@ Examples:
 * `sortE by/sal o/a`: Sorts the list of employees by `SALARY` in `ascending` order<br>
 * `sortE by/n o/d`: Sorts the list of employees by `NAME` in `descending` order
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting an employee.
@@ -561,7 +605,8 @@ Examples:
 * `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERYDETAILS` in `ascending` order<br>
 * `sorts by/N o/d`: Sorts the list of suppliers by `NAME` in `descending` order
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting a supplier.
@@ -600,7 +645,8 @@ Shows a list of all customers in RHRH.
 
 Format: `listC`
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * RHRH will switch to the customer list and list all customers no matter which list you are current viewing
@@ -618,7 +664,8 @@ Shows a list of all employees in RHRH.
 
 Format: `listE`
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * RHRH will switch to the employee list and list all employees no matter which list you are current viewing
@@ -635,7 +682,8 @@ Shows a list of all suppliers in RHRH.
 
 Format: `listS`
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
+
 :information_source: **Notes:**<br>
 
 * RHRH will switch to the supplier list and list all suppliers no matter which list you are current viewing
