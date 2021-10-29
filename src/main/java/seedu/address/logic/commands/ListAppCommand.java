@@ -24,6 +24,7 @@ public class ListAppCommand extends Command {
         requireNonNull(model);
         model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         model.sortFilteredAppointmentList(sortBy);
+        model.updateState();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

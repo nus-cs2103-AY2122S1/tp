@@ -80,6 +80,7 @@ public class EditAppCommand extends Command {
         }
         model.deleteAppointment(appointmentToEdit);
         model.addAppointment(editedAppointment);
+        model.updateState();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToEdit));
     }
