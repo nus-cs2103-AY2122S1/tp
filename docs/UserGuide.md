@@ -58,27 +58,33 @@ This section details the various components in TutorAid and how they will be ref
 ![Labelled Ui](images/labelled-ui.jpg)
 
 #### Menu Bar
+{:.no_toc}
 This is an area where some features can be found. As TutorAid primarily interacts with you through the command box, this area is infrequently used.
 
 #### Command Box
+{:.no_toc}
 The Command Box is a field in which you can type instructions (commands) to TutorAid. Text in this user guide that is `highlighted` should typically be copied into the command box exactly (including spaces). After you have typed a command into this box, you can press ENTER :leftwards_arrow_with_hook: on your keyboard to tell TutorAid to execute your command.
 
 If your command is of the wrong [format](#23-command-format), TutorAid will try to show you the correct format using the Console if it is able to guess what command you had intended to provide.
 
 #### Console
+{:.no_toc}
 The Console is used by TutorAid to communicate with you. Whenever a command is carried out, TutorAid will let you know whether the operation was successful. It may also provide you with details about the changes made during the operation.
 
 #### Student Panel
+{:.no_toc}
 The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their name and their index number. These modes can be set via [the list command](#listing-all-students-and-lessons-list). In the labelled screenshot, the Student Panel is in Minimal view.
 
 > :bulb: The **index number** is important for many commands in TutorAid.
 
 #### Lesson Panel
+{:.no_toc}
 The Lesson Panel is where your lessons are listed. Just like the Student Panel, there are the **Full** and **Minimal** modes which determine how much information is displayed. In the labelled screenshot, the Lesson Panel is in Full view.
 
 > :bulb: The **index number** of a lesson is important too, and is used in commands just like the index number for students.
 
 #### Status Bar
+{:.no_toc}
 The status bar shows the path where you can find the save file for TutorAid.
 
 ***
@@ -89,21 +95,25 @@ Commands are text that you can enter into the Command Box to tell TutorAid to pe
 ![](images/command-syntax.png)
 
 #### Command Word
+{:.no_toc}
 The command word is how you can tell TutorAid what kind of operation you want to do. These command words are listed [here](#6-command-summary). All commands must contain a command word.
 
 In the example above, `edit` tells TutorAid to perform an *edit* operation.
 
 #### Flag
+{:.no_toc}
 The flag is used to differentiate between variants of the same operation. For example, the `edit` command word can be used to edit the details of a student or a lesson. To differentiate between these usages, you should pass a flag to TutorAid - `edit -s` to edit a student, or `edit -l` to edit a lesson.
 
 In the example above, `-s` tells TutorAid to perform the edit operation on *students*.
 
 #### Index Number
+{:.no_toc}
 Some commands perform operations on a specific student or lesson. You should give TutorAid an index number to specify a student or a lesson. The index number can be found by looking at the respective panels - the [Student Panel](#student-panel) or the [Lesson Panel](#lesson-panel).
 
 In the example above, `3` tells TutorAid to perform the edit operation on the *third student*.
 
 #### Parameter
+{:.no_toc}
 A parameter contains the *specifics* of the command to be executed. There can be **multiple** parameters for a single command, depending on the type of command that you wish to perform. Arguments are prefixed with a few characters followed by a slash (`sn/` and `sp/` for this example). These prefixes help TutorAid to differentiate parameters.
 
 > :bulb: `sn/` is the prefix for Student Name and `sp/` is the prefix for Student Phone.
@@ -150,6 +160,7 @@ This section lists the types of commands that TutorAid can execute. For more inf
 
 ## 4.1 Student Commands
 ### Adding a student: `add`
+{:.no_toc}
 Adds a new student to TutorAid.
 
 Format: `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
@@ -160,6 +171,7 @@ Examples:
 > :bulb: The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
 
 ### Deleting a student : `delete`
+{:.no_toc}
 Deletes the specified student with the given student index from TutorAid.
 
 Format: `del -s STUDENT_INDEX`
@@ -172,7 +184,7 @@ Example:
 * `del -s 2` deletes the 2nd student in TutorAid.
 
 ### Editing a student : `edit -s`
-
+{:.no_toc}
 Edits the specified student with the given student index from TutorAid.
 
 Format: `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
@@ -187,7 +199,7 @@ Example:
 * `edit 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
 
 ### Viewing a student : `view -s`
-
+{:.no_toc}
 Displays the specified student’s name, phone number, progress, lessons and payment status, along with their parent’s name and phone number.
 
 Format: `view -s STUDENT_INDEX`
@@ -201,7 +213,7 @@ Example:
 * `view -s 2` shows the details associated with the 2nd student
 
 ### Locating students by name: `find -s`
-
+{:.no_toc}
 Finds students whose names contain any of the given keywords.
 
 Format: `find -s KEYWORD [MORE_KEYWORDS]`
@@ -218,7 +230,7 @@ Examples:
 * `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Setting payment made: `paid`
-
+{:.no_toc}
 Sets the payment status of the specified student to `Paid for the current month`.
 
 Format: `paid STUDENT_INDEX`
@@ -232,7 +244,7 @@ Example:
 - `paid 3` updates the 3rd student's payment status to `Paid for the current month`.
 
 ### Unsetting payment made: `unpaid`
-
+{:.no_toc}
 Sets the payment status of the specified student to `Has not paid for the current month`.
 
 Format: `unpaid STUDENT_INDEX`
@@ -246,7 +258,7 @@ Examples:
 - `unpaid 3` updates the 3rd student's payment status to `Has not paid for the current month`.
 
 ### Adding progress for a student : `add -p`
-
+{:.no_toc}
 Adds a given string representing progress to a student with a given student index.
 
 Format: `add -p STUDENT_INDEX PROGRESS`
@@ -259,7 +271,7 @@ Examples:
 * `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student in the list.
 
 ### Deleting progress from a student : `del -p`
-
+{:.no_toc}
 Removes the string representing progress from the student with a given student index.
 
 Format: `del -p STUDENT_INDEX`
@@ -274,6 +286,7 @@ Examples:
 ## 4.2 Lesson Commands
 
 ### Adding a lesson: `add -l`
+{:.no_toc}
 
 Adds a new lesson to TutorAid.
 
@@ -289,6 +302,7 @@ Examples:
 > :bulb: The lesson's capacity, price and timing are optional details for tutors to include.
 
 ### Deleting a lesson : `del -l`
+{:.no_toc}
 
 Deletes the specified lesson with the given lesson index from TutorAid.
 
@@ -302,6 +316,7 @@ Examples:
 * `del -l 3`
 
 ### Editing a lesson: `edit -l`
+{:.no_toc}
 
 Edits the specified lesson by updating its fields
 
@@ -316,6 +331,7 @@ Examples:
 * `edit -l c/20 p/80`
 
 ### Viewing a lesson : `view -l`
+{:.no_toc}
 
 Displays the specified lesson’s name, capacity, price and timing, along with names of students who have the specified lesson.
 
@@ -330,6 +346,7 @@ Example:
 * `view -l 2` shows the details associated with the 2nd lesson
 
 ### Locating lessons by name: `find -l`
+{:.no_toc}
 
 Finds lessons whose names contain any of the given keywords.
 
@@ -347,6 +364,7 @@ Examples:
 
 ## 4.3 Student and Lesson Commands
 ### Listing all students and lessons: `list`
+{:.no_toc}
 
 Shows a list of all students and lessons in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise most fields are hidden by default.
 
@@ -358,6 +376,7 @@ Examples:
 - `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
 ### Adding students to lessons: `add -sl`
+{:.no_toc}
 
 Adds students to lessons in TutorAid.
 
@@ -373,6 +392,7 @@ Examples:
 > :exclamation: All of these students must not be attending any of the lessons provided for this command to work.
 
 ### Deleting students from lessons: `del -sl`
+{:.no_toc}
 
 Deletes students from lessons in TutorAid.
 
@@ -389,6 +409,7 @@ Examples:
 
 ## 4.4 Other Commands
 ### Viewing help : `help`
+{:.no_toc}
 
 Shows a message explaining how to access the help page.
 
@@ -397,12 +418,14 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ### Clearing all entries : `clear`
+{:.no_toc}
 
 Clears all entries from TutorAid.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
+{:.no_toc}
 
 Exits the program.
 
@@ -411,10 +434,12 @@ Format: `exit`
 ## 4.5 Saving and Editing Data
 
 ### Saving the data
+{:.no_toc}
 
 TutorAid data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
+{:.no_toc}
 
 TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`. Advanced users are welcome to update data directly by editing that data file.
 
