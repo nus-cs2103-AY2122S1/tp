@@ -55,4 +55,21 @@ public class Time {
         return value.hashCode();
     }
 
+    private int getValueFromString(String x) {
+        int value = 0;
+
+        for (char c : x.toCharArray()) {
+            value = value * 10 + (c - '0');
+        }
+
+        return value;
+    }
+
+    public int getTimeInMinutesFromStartOfDay() {
+        return getValueFromString(value.substring(0, 2)) * 60 + getValueFromString(value.substring(3, 5));
+    }
+
+    public int subtractAsMinutes(Time time) {
+        return this.getTimeInMinutesFromStartOfDay() - time.getTimeInMinutesFromStartOfDay();
+    }
 }

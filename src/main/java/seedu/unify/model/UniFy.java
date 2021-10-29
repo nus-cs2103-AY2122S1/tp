@@ -2,6 +2,7 @@ package seedu.unify.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -22,12 +23,12 @@ public class UniFy implements ReadOnlyUniFy {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+    */ {
         tasks = new UniqueTaskList();
     }
 
-    public UniFy() {}
+    public UniFy() {
+    }
 
     /**
      * Creates an UniFy using the Tasks in the {@code toBeCopied}
@@ -91,6 +92,10 @@ public class UniFy implements ReadOnlyUniFy {
      */
     public void removeTask(Task key) {
         tasks.remove(key);
+    }
+
+    public void sortTasks(Comparator<Task> f) {
+        tasks.sort(f);
     }
 
 

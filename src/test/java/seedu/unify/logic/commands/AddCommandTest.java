@@ -9,6 +9,7 @@ import static seedu.unify.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -41,6 +42,7 @@ public class AddCommandTest {
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
+
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
@@ -138,6 +140,12 @@ public class AddCommandTest {
         public void setTask(Task target, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortTasks(Comparator<Task> f) {
+
+        }
+
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {

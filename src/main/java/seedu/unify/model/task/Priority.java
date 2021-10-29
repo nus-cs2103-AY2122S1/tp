@@ -6,9 +6,19 @@ import static seedu.unify.commons.util.AppUtil.checkArgument;
 public class Priority implements Comparable<Priority> {
 
     public enum ObjectPriority {
-        LOW,
-        MEDIUM,
-        HIGH
+        LOW(1),
+        MEDIUM(2),
+        HIGH(3);
+
+        private final int value;
+
+        ObjectPriority(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Priority should be LOW, MEDIUM or HIGH";
@@ -18,7 +28,6 @@ public class Priority implements Comparable<Priority> {
 
     /**
      * Constructs a {@code Priority}.
-     *
      */
     public Priority() {
         priority = ObjectPriority.LOW;
@@ -26,7 +35,6 @@ public class Priority implements Comparable<Priority> {
 
     /**
      * Constructs a {@code Priority}.
-     *
      */
     public Priority(ObjectPriority priority) {
         this.priority = priority;
@@ -34,7 +42,6 @@ public class Priority implements Comparable<Priority> {
 
     /**
      * Constructs a {@code Priority}.
-     *
      */
     public Priority(String priority) {
         requireNonNull(priority);
@@ -42,7 +49,7 @@ public class Priority implements Comparable<Priority> {
         this.priority = ObjectPriority.valueOf(priority);
     }
 
-    public ObjectPriority getPriority() {
+    public ObjectPriority getObjectPriority() {
         return priority;
     }
 
@@ -63,6 +70,7 @@ public class Priority implements Comparable<Priority> {
         return priority.compareTo(other.priority);
     }
 
+
     @Override
     public String toString() {
         return priority.toString();
@@ -71,8 +79,8 @@ public class Priority implements Comparable<Priority> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Priority // instanceof handles nulls
-                && priority.equals(((Priority) other).priority)); // state check
+            || (other instanceof Priority // instanceof handles nulls
+            && priority.equals(((Priority) other).priority)); // state check
     }
 
     @Override
