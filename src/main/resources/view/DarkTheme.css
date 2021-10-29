@@ -358,3 +358,11 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#generalNote {
+    -fx-control-inner-background: #000000;
+    -fx-text-fill: #FFFFFF;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
+    -fx-font-size: 20px;
+}
