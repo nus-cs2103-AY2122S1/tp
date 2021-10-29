@@ -1,11 +1,20 @@
----
-layout: page
-title: User Guide
----
+###ContactSh - UserGuide
 
 ![Logo](images/ContactSh_Ug_logo.png)
 
-ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management tasks done faster than traditional GUI apps.
+As a student entrepreneur with a busy schedule, do you always find yourself missing an appointment/meeting with
+your clients or friends? Or can't seem to find a way to easily recall details of a certain someone
+who is probably stored as one of your many contacts in your Excel sheet? Fret not,
+as we have designed an application called **ContactSh** just for you! It is a Desktop application for managing your contacts
+as well as tasks related to each of them. It boasts a highly effective search function and contact-task tracking system.
+It is also optimized for use via a Command Line Interface(CLI) that is similar in style as Linux CLIs,
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you will be able to manage
+business tasks related to your contacts more efficiently than using other traditional GUI apps.
+
+The [Quick Start](#quick-start) section shows you how to quickly get ContactSh up and running on your computer.
+If you are a new user, it is recommended to go through the instructions under [Features](#features) one by one.
+If you are an experienced user, and just want to refer to the list of features, you may use the [Table of contents](#table-of-contents)
+to quickly navigate to the command of your choice.
 
 ---
 
@@ -278,7 +287,7 @@ Format: `clear`
    Examples:
 
    * `ls` followed by delete 2 deletes the 2nd person in the address book.
-   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command. 
+   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.
 
 2. Shows you a filtered list of tasks that has been attached to a specific person.
 
@@ -286,7 +295,7 @@ Format: `clear`
 
    * Displays a filtered lists of tasks for a specific person according to the keywords provided.
    * Only tasks that matches the keywords will be shown.
-   
+
    Examples:
 
    * Alex is the first person in the address book and has the tasks [Work, project meeting at NUS]. `cat 1 -f nus` will display the task "project meeting at NUS"
