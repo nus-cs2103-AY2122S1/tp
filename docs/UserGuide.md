@@ -413,7 +413,7 @@ starts on 30 Jan 2022 and ends on 23 Nov 2022 to the 1st student in the displaye
 
 Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
 
-Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
+Format: `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [time/TIMERANGE] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
