@@ -3,12 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## Introduction
+## **Introduction**
 
 Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take
 quick, efficient notes to facillitate effective and efficient mentoring of many mentees. The design principles
@@ -24,18 +19,25 @@ In particular, we tackle the needs of mentor professors, who tend to be busy and
 to personally know or even contact often outside of the mentor relationship. Key features of Notor which scaffold this
 are:
 
-1. Powerful Organisation which is up to the user
-    - useful for managing many mentees
+1. Powerful Organisation which is up to the user to manage many mentees
+    - Group mentees, and place groups into subgroups for greater control
+    - Add tags to mentees and sort by tags to easily identify meta-data
+    - Archive contacts you're no longer speaking to
 2. A clean note-taking system
     - designed so that they can take notes concurrently with meeting the mentee so no information is forgotten
-3. A last-contact / next-contact model
-    - helps them contact the mentee regularly
 
 ### **Acknowledgements**
 
-This project is a further iteration of the [_Notor-Level 3 (
+This project is a further iteration of the [_AddressBook-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
 those already present in AB-3. Removed features may or may not be listed as well.
+
+
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,9 +47,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+## **Glossary**
 
-* **Autocomplete**: A functionality to complete a `Tag` or a `Command` without users typing the complete strings
 * **Command structure**: The order in which parameters and command words must be written in order for the command to be
   correctly parsed
 * **Dummy data**: Sample data used in testing or example data present on first launch of application
@@ -77,8 +78,7 @@ section for the general Architectural design of the app. Only changes will be li
 #### Command Changes
 
 ![CommandClassDiagram](images/ParserClasses.png)
-Due to the addition of many new commands and refactoring of the command structure, we have had to create a better class
-system to handle them.
+Due to the addition of many new commands and refactoring of the command structure, we have amended the classes related to managing commands.
 
 * `Parser` now takes in generic `T extends Command` since we have multiple types of commands, each with their own unique
   parser
@@ -91,7 +91,7 @@ system to handle them.
 * `Parser` and `Executor` classes come in the same 3 categories as `Command` classes
 * `NotorParser` now parses both the `commandWord` and `subCommandWord` for user commands
     * `commandWord` refers to either `Person`, `Group` or one of the object agnostic commands
-    * `subCommandWord` refers to an operation that can be carried out on a `Person` or `Group`
+    * `subCommandWord` refers to an operation that can be carried out on a `Person` or `Group`, such as `find` or `tag`
 
 New Workflow for Adding Commands:
 
@@ -100,6 +100,12 @@ New Workflow for Adding Commands:
 3. Add the new `XYZCommandParser` to the `parse()` method in `NotorParser`.
 4. Create a `XYZCommandExecutor` class that extends the same type of `Executor` as the `Command` from step 1.
 5. Implement all required methods and ensure all fields used by the methods are present.
+
+#### In-depth example of Command workflow, using the Find Command
+
+Notor allows you to search for groups and people, and both searches have slightly different requirements.
+
+Lets break down what happens to call a person comamnd.
 
 ### Model Changes
 
