@@ -318,22 +318,6 @@ Examples :
 * `group 1 /delete` will delete the group at index 1.
 * `g 1 /d`
 
-### Editing a group: `group (INDEX) /edit [n:NEW_NAME]`
-
-Edits the name of an existing group.
-
-Format: `group (INDEX) /edit [n:NEW_NAME]`<br>
-Advanced user Format: `group (INDEX) /e [n:NEW_NAME]`
-
-* Renames an existing group at the index specified to `NEW_NAME` .
-* The new group must not have a same name with other existing groups.
-* The new group's name must not include backslash (`/`) or underscore (`_`).
-
-Examples :
-
-* `group 1 /edit n:ClassA` will rename the group at index 1 to ClassA.
-* `g 1 /e ClassA`
-
 ### Creating a subgroup: `group (INDEX) /create n:SUBGROUP_NAME`
 Creates a new subgroup. **This command only works when group are listed and not when subgroups are listed.**
 
@@ -441,6 +425,7 @@ Examples:
 ### _Find a group or subgroup_ : `group /find (g:KEYWORD)`
 
 Find all the groups with the keyword specified. This will search for the keyword within the group's name. 
+Only works when group/s are shown.
 
 Format:  `group /find n:QUERY_NAME`<br>
 Advanced user Format: `g /f n:QUERY_NAME`
@@ -451,9 +436,9 @@ Advanced user Format: `g /f n:QUERY_NAME`
 
 Examples of finding group:
 
-* `group /find n:Orbital_Team_1`
-* `g /f n:W08`
-* `group /f n:CS2103T`
+* `group /find n:Artemis`
+* `g /f n:GroupA`
+* `group /f n:Test`
 
 ## Miscellaneous information
 
@@ -543,7 +528,6 @@ Action                 | Format                                         | Short 
 -----------------------|------------------------------------------------|---------------------------------------
 **Create Group**       | `group (GROUP_NAME) /create` | `g (GROUP_NAME) /c`
 **Create Subgroup**    | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
-**Edit**               | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
 **Delete**             | `group (INDEX) /delete`                        | `g (INDEX) /d`
 **Note**               | `group (INDEX) /note`                          | `g (INDEX) /n`
 **List Groups**        | `group /list`                                  | `g /l`
