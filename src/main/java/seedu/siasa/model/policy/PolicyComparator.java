@@ -11,10 +11,10 @@ public class PolicyComparator {
             a, b) -> -String.CASE_INSENSITIVE_ORDER.compare(a.getTitle().toString(), b.getTitle().toString());
 
     public static final Comparator<Policy> POLICY_SORT_BY_PRICE_ASC = (
-            a, b) -> Integer.compare(a.getPrice().priceInCents, b.getPrice().priceInCents);
+            a, b) -> Integer.compare(a.getPaymentStructure().paymentAmount, b.getPaymentStructure().paymentAmount);
 
     public static final Comparator<Policy> POLICY_SORT_BY_PRICE_DSC = (
-            a, b) -> -Integer.compare(a.getPrice().priceInCents, b.getPrice().priceInCents);
+            a, b) -> -Integer.compare(a.getPaymentStructure().paymentAmount, b.getPaymentStructure().paymentAmount);
 
     public static final Comparator<Policy> POLICY_SORT_BY_COMMISSION_ASC = (
             a, b) -> Integer.compare(a.getCommission().commissionPercentage, b.getCommission().commissionPercentage);
@@ -23,8 +23,10 @@ public class PolicyComparator {
             a, b) -> -Integer.compare(a.getCommission().commissionPercentage, b.getCommission().commissionPercentage);
 
     public static final Comparator<Policy> POLICY_SORT_BY_DATE_ASC = (
-            a, b) -> ChronoLocalDate.timeLineOrder().compare(a.getExpiryDate().value, b.getExpiryDate().value);
+            a, b) -> ChronoLocalDate.timeLineOrder().compare(a.getCoverageExpiryDate().value,
+            b.getCoverageExpiryDate().value);
 
     public static final Comparator<Policy> POLICY_SORT_BY_DATE_DSC = (
-            a, b) -> -ChronoLocalDate.timeLineOrder().compare(a.getExpiryDate().value, b.getExpiryDate().value);
+            a, b) -> -ChronoLocalDate.timeLineOrder().compare(a.getCoverageExpiryDate().value,
+            b.getCoverageExpiryDate().value);
 }
