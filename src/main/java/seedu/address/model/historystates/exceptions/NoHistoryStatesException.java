@@ -1,4 +1,4 @@
-package seedu.address.model.history_states.exceptions;
+package seedu.address.model.historystates.exceptions;
 
 public class NoHistoryStatesException extends RuntimeException {
     public NoHistoryStatesException(String message) {

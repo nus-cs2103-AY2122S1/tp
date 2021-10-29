@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
+import seedu.address.model.historystates.exceptions.NoHistoryStatesException;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
 
@@ -51,7 +51,7 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces PlaceBook data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
@@ -62,26 +62,26 @@ public interface Model {
     ReadOnlySchedule getSchedule();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in PlaceBook.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in PlaceBook.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in PlaceBook.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in PlaceBook.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -163,6 +163,14 @@ public interface Model {
      * given appointment.
      */
     String getClashingAppointmentsAsString(Appointment appointment);
+
+    /**
+     * Replaces the given appointment {@code target} with {@code editedAppointment}.
+     * {@code target} must exist in the address book.
+     * The appointment identity of {@code editedAppointment}
+     * must not be the same as another existing appointment in PlaceBook.
+     */
+    void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment);
 
     /**
      * Go back to the previous state before executing a certain command.

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
+import seedu.address.model.historystates.exceptions.NoHistoryStatesException;
 
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";

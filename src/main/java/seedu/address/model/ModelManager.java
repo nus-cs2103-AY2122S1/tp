@@ -13,9 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.history_states.HistoryStates;
-import seedu.address.model.history_states.State;
-import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
+import seedu.address.model.historystates.HistoryStates;
+import seedu.address.model.historystates.State;
+import seedu.address.model.historystates.exceptions.NoHistoryStatesException;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
 import seedu.address.model.schedule.Schedule;
@@ -129,6 +129,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
+
         return addressBook.hasPerson(person);
     }
 
@@ -140,6 +141,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -153,13 +155,22 @@ public class ModelManager implements Model {
     @Override
     public void addAppointment(Appointment a) {
         requireNonNull(a);
+
         schedule.addAppointment(a);
     }
 
     @Override
     public void deleteAppointment(Appointment a) {
         requireNonNull(a);
+
         schedule.deleteAppointment(a);
+    }
+
+    @Override
+    public void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment) {
+        requireAllNonNull(appointmentToEdit, editedAppointment);
+
+        schedule.setAppointment(appointmentToEdit, editedAppointment);
     }
 
     //=========== Query Operations =============================================================
@@ -171,9 +182,11 @@ public class ModelManager implements Model {
     public String getRelatedAppointmentsAsString(Person client) {
         StringBuilder stringBuilder = new StringBuilder();
         List<Appointment> relatedAppointment = getRelatedAppointments(client);
+
         for (Appointment appointment : relatedAppointment) {
             stringBuilder.append(appointment + "\n");
         }
+
         return stringBuilder.toString();
     }
 
@@ -185,10 +198,12 @@ public class ModelManager implements Model {
                 appointmentsThatOnlyHaveThisClient.add(appointment);
             }
         }
+
         StringBuilder stringBuilder = new StringBuilder();
         for (Appointment appointment : appointmentsThatOnlyHaveThisClient) {
             stringBuilder.append(appointment + "\n");
         }
+
         return stringBuilder.toString();
     }
 
@@ -202,8 +217,7 @@ public class ModelManager implements Model {
     public void updateEditedClientInAppointments(Person personToEdit, Person editedPerson) {
         List<Appointment> relatedAppointments = getRelatedAppointments(personToEdit);
         for (Appointment appointment : relatedAppointments) {
-            appointment.removeClient(personToEdit);
-            appointment.addClient(editedPerson);
+            appointment.setClient(personToEdit, editedPerson);
         }
     }
 
@@ -244,6 +258,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+
         filteredPersons.setPredicate(predicate);
     }
 
