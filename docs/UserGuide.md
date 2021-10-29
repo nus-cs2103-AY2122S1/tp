@@ -206,7 +206,7 @@ Examples:
 
 #### Adding a task: `tadd`
 
-Adds a task to a member in Ailurus.
+Adds a task to the specified members in Ailurus.
 
 Format: `tadd /n TASKNAME /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
@@ -240,7 +240,7 @@ Example:
 * `tlist /m 2` lists all tasks of the member with index number 2.
 
 #### Mark a task as done : `tdone`
-Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
+Marks the specified tasks of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
 Format: `tdone /t TASK_ID [/t MORE_TASK_ID]…​`
 
@@ -348,14 +348,14 @@ Format: `edel /e EVENT_ID [/e MORE_EVENT_ID]…​`
 Examples:
 * `edel /e 10 /e 13` deletes the 10th and 13th event in Ailurus.
 
-#### Listing all members : `elist`
+#### Listing all events : `elist`
 
 Shows a list of all events.
 
 Format: `elist`
 
 Example:
-* `mlist` lists all events in Ailurus.
+* `elist` lists all events in Ailurus.
 
 #### Marking participants as attended : `emark`
 

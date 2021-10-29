@@ -17,8 +17,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MdelCommandParser implements Parser<MdelCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MdelCommand
+     * and returns a MdelCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MdelCommand parse(String args) throws ParseException {
