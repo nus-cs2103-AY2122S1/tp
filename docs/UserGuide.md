@@ -709,7 +709,7 @@ Exits the program.
 
 Format: `exit`
 
-### Shortcuts:
+### Shortcuts
 
 TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
 
