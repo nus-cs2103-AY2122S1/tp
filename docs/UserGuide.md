@@ -40,16 +40,6 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-
-### How to navigate <a name="how-to-navigate"></a>
-
-
-
-### Formatting used <a name="formatting"></a>
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Quick start <a name="quick-start"></a>
 
 1. Ensure you have Java `11` or above installed in your computer
