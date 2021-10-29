@@ -2,8 +2,8 @@ package seedu.address.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_0;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_ID_2;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 class TaskIdTest {
 
-    private final TaskId taskId1 = new TaskId(VALID_TASK_ID_1);
-    private final TaskId taskId2 = new TaskId(VALID_TASK_ID_2);
+    private final TaskId taskId1 = new TaskId(VALID_TASK_ID_0);
+    private final TaskId taskId2 = new TaskId(VALID_TASK_ID_1);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -28,7 +28,7 @@ class TaskIdTest {
     @Test
     void isValidTaskId() {
         // capital T followed by a number -> return true
-        assertTrue(TaskId.isValidTaskId(VALID_TASK_ID_1));
+        assertTrue(TaskId.isValidTaskId(VALID_TASK_ID_0));
 
         // not start with capital T -> return false
         assertFalse(TaskId.isValidTaskId("01"));
@@ -46,10 +46,10 @@ class TaskIdTest {
         assertTrue(taskId1.equals(taskId1));
 
         // not a TaskId object -> returns false
-        assertFalse(taskId1.equals(VALID_TASK_ID_1));
+        assertFalse(taskId1.equals(VALID_TASK_ID_0));
 
         // same String -> returns true
-        assertTrue(taskId1.equals(new TaskId(VALID_TASK_ID_1)));
+        assertTrue(taskId1.equals(new TaskId(VALID_TASK_ID_0)));
 
         // null -> returns false
         assertFalse(taskId1.equals(null));

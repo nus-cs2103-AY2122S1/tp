@@ -3,9 +3,9 @@ package seedu.address.model.task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DEADLINE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_0;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_3;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 class TaskDeadlineTest {
 
-    private final TaskDeadline taskDeadline1 = new TaskDeadline(VALID_TASK_DEADLINE_1);
-    private final TaskDeadline taskDeadline2 = new TaskDeadline(VALID_TASK_DEADLINE_2);
+    private final TaskDeadline taskDeadline1 = new TaskDeadline(VALID_TASK_DEADLINE_0);
+    private final TaskDeadline taskDeadline2 = new TaskDeadline(VALID_TASK_DEADLINE_1);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -30,13 +30,13 @@ class TaskDeadlineTest {
     @Test
     void isValidTaskDeadline() {
         // only contains alphanumeric characters -> returns true
-        assertTrue(TaskDeadline.isValidTaskDeadline(VALID_TASK_DEADLINE_1));
+        assertTrue(TaskDeadline.isValidTaskDeadline(VALID_TASK_DEADLINE_0));
 
         // only contains alphanumeric characters and dashes -> returns true
-        assertTrue(TaskDeadline.isValidTaskDeadline(VALID_TASK_DEADLINE_2));
+        assertTrue(TaskDeadline.isValidTaskDeadline(VALID_TASK_DEADLINE_1));
 
         // different time format -> returns true
-        assertTrue(TaskDeadline.isValidTaskDeadline(VALID_TASK_DEADLINE_3));
+        assertTrue(TaskDeadline.isValidTaskDeadline(VALID_TASK_DEADLINE_2));
 
         // contains others symbols -> returns false
         assertFalse(TaskDeadline.isValidTaskDeadline(INVALID_TASK_DEADLINE_1));
@@ -48,10 +48,10 @@ class TaskDeadlineTest {
         assertTrue(taskDeadline1.equals(taskDeadline1));
 
         // not a TaskDeadline object -> returns false
-        assertFalse(taskDeadline1.equals(VALID_TASK_DEADLINE_1));
+        assertFalse(taskDeadline1.equals(VALID_TASK_DEADLINE_0));
 
         // same String -> returns true
-        assertTrue(taskDeadline1.equals(new TaskDeadline(VALID_TASK_DEADLINE_1)));
+        assertTrue(taskDeadline1.equals(new TaskDeadline(VALID_TASK_DEADLINE_0)));
 
         // null -> returns false
         assertFalse(taskDeadline1.equals(null));

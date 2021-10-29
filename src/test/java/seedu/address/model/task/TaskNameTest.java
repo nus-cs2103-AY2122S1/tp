@@ -2,8 +2,8 @@ package seedu.address.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_0;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_2;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 class TaskNameTest {
 
-    private final TaskName taskName1 = new TaskName(VALID_TASK_NAME_1);
-    private final TaskName taskName2 = new TaskName(VALID_TASK_NAME_2);
+    private final TaskName taskName1 = new TaskName(VALID_TASK_NAME_0);
+    private final TaskName taskName2 = new TaskName(VALID_TASK_NAME_1);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -28,7 +28,7 @@ class TaskNameTest {
     @Test
     void isValidTaskName() {
         // contains only alphanumeric characters and spaces, not blank -> returns true
-        assertTrue(TaskName.isValidTaskName(VALID_TASK_NAME_1));
+        assertTrue(TaskName.isValidTaskName(VALID_TASK_NAME_0));
 
         // blank -> returns false
         assertFalse(TaskName.isValidTaskName(" "));
@@ -46,10 +46,10 @@ class TaskNameTest {
         assertTrue(taskName1.equals(taskName1));
 
         // not a TaskName object -> returns false
-        assertFalse(taskName1.equals(VALID_TASK_NAME_1));
+        assertFalse(taskName1.equals(VALID_TASK_NAME_0));
 
         // same String -> returns true
-        assertTrue(taskName1.equals(new TaskName(VALID_TASK_NAME_1)));
+        assertTrue(taskName1.equals(new TaskName(VALID_TASK_NAME_0)));
 
         // null -> returns false
         assertFalse(taskName1.equals(null));
