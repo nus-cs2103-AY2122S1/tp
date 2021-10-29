@@ -13,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.history_states.HistoryStates;
+import seedu.address.model.history_states.State;
+import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
 import seedu.address.model.schedule.Schedule;
@@ -23,14 +26,15 @@ import seedu.address.model.schedule.Schedule;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final Schedule schedule;
-    private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Appointment> filteredAppointments;
+    private Schedule schedule;
+    private FilteredList<Person> filteredPersons;
+    private FilteredList<Appointment> filteredAppointments;
+    private final HistoryStates historyStates;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs and schedule.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlySchedule schedule) {
         super();
@@ -43,6 +47,27 @@ public class ModelManager implements Model {
         this.schedule = new Schedule(schedule);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredAppointments = new FilteredList<>(this.schedule.getSchedule());
+        this.historyStates = new HistoryStates();
+        State originState = new State(this.addressBook, this.schedule);
+        this.historyStates.addNewState(originState);
+    }
+
+    /**
+     * Initializes a ModelManager with the given addressBook, userPrefs, schedule and history states.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlySchedule schedule, HistoryStates historyStates) {
+        super();
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        this.schedule = new Schedule(schedule);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredAppointments = new FilteredList<>(this.schedule.getSchedule());
+        this.historyStates = historyStates;
     }
 
     public ModelManager() {
@@ -316,5 +341,32 @@ public class ModelManager implements Model {
             stringBuilder.append(app + "\n");
         }
         return stringBuilder.toString();
+    }
+
+    /**
+     * Go back to the previous state before executing a certain command.
+     * @throws NoHistoryStatesException Throw exception if there is no previous state.
+     */
+    @Override
+    public void undo() throws NoHistoryStatesException {
+        if (!this.historyStates.hasHistoryStates()) {
+            throw new NoHistoryStatesException();
+        } else {
+            this.historyStates.undo();
+            State previousState = this.historyStates.getCurrentState();
+            this.schedule = previousState.getSchedule();
+            this.addressBook = previousState.getAddressBook();
+            filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+            filteredAppointments = new FilteredList<>(this.schedule.getSchedule());
+            System.out.println(this.addressBook.getPersonList().size() + " " + this.schedule.hashCode());
+        }
+    }
+
+    /**
+     * Add the current state into the history states.
+     */
+    public void updateState() {
+        State stateToUpdate = new State(this.addressBook, this.schedule);
+        this.historyStates.addNewState(stateToUpdate);
     }
 }

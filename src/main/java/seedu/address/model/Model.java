@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.history_states.exceptions.NoHistoryStatesException;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Appointment;
 
@@ -171,4 +172,14 @@ public interface Model {
      */
     void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment);
 
+    /**
+     * Go back to the previous state before executing a certain command.
+     * @throws NoHistoryStatesException Throw exception if there is no previous state.
+     */
+    void undo() throws NoHistoryStatesException;
+
+    /**
+     * Add the current state into the history states.
+     */
+    public void updateState();
 }
