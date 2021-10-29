@@ -80,48 +80,48 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-## Person Commands
+## Client Commands
 
-### Adding a person: `add`
+### Adding a client: `add`
 
-Adds a person to the application.
+Adds a client to the application.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0). The remark is also optional.
+A client can have any number of tags (including 0). The remark is also optional.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
 * `add n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F d/160_85_35_81`
 
-### Listing all persons : `list`
+### Listing all clients : `list`
 
-Shows a list of all persons in the application.
+Shows a list of all clients in the application.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a client : `edit`
 
-Edits an existing person in the application.
+Edits an existing client in the application.
 
 Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating clients by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -129,7 +129,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -137,19 +137,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a client : `delete`
 
-Deletes the specified person from the application.
+Deletes the specified client from the application.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the application.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd client in the application.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ## Task Commands
 
@@ -237,7 +237,7 @@ Format: `marktask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
+* `listtask` followed by `deletetask 2` deletes the 2nd client in the application.
 
 ### Listing completed tasks: `completedtasks`
 
@@ -330,11 +330,11 @@ Examples:
 
 ### Viewing total orders: `totalorders`
 
-Shows the total orders for each person in the application.
+Shows the total orders for each client in the application.
 
 <div markdown="block" class="alert alert-info">
-:information_source: The total orders displayed are based on the persons in the application.
-If the customer of an order cannot be found among the persons, the order will not be shown.
+:information_source: The total orders displayed are based on the clients in the application.
+If the customer of an order cannot be found among the clients, the order will not be shown.
 </div>
 
 ![TotalOrdersWindow](images/TotalOrdersWindow.png)
