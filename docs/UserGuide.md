@@ -209,19 +209,19 @@ Command alias: `f`
 
 #### Listing all contacts : `list` <a name="list"></a>
 
-Shows a list of all contacts in the address book.
+Shows a list of all contacts in contHACKS.
 
 Format: `list`
 
-Command alias: `ls`
+Command alias: `ls` 
 
 #### Clearing all contacts: `clear` <a name="clear"></a>
 
-Purges **all** existing contacts from the address book. **Use with caution.**
+Purges **all** existing contacts from contHACKS. **Use with caution.**
 
 Format: `clear`
 
-Command alias: `clr`
+Command aliases: `clr` `c`
 
 <img src="images/ClearCommand.png" width="800px">
 
@@ -233,13 +233,43 @@ Command alias: `clr`
 
 #### Editing a lesson: `editc` <a name="editc"></a>
 
+Updates the information of a lesson.
+
+Edits the lesson at the specified index in the currently viewed list.
+* At least one of the fields must be provided.
+* Existing values of the fields specified will be erased and updated to the input values
+
+Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`
+
+Examples:
+* `editc 1 m/CS2100 B05`: Edits the module of the 1st lesson to be `CS2100 B05`
+* `editc 2 d/3`: Edits the day of the 2nd lesson to be Wednesday
+* `editc 3 t/10:00 12:00`: Edits the start time and end time of the 3rd lesson to be 10AM and 12PM respectively
+* `editc 4 r/COM01-0120`: Edits the remark of the 4th lesson to `COM01-0120`
+* `editc 5 m/CS2100 B05 d/3 t/10:00 12:00 r/COM01-0120`: All fields present in one command
+
+Command aliases: `updatec` `ec`
+
+
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
 
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
 
 #### Listing all lessons: `listc` <a name="listc"></a>
 
+Shows a list of all lessons in contHACKS.
+
+Format: `listc`
+
+Command alias: `lc`
+
 #### Clearing all lessons: `clearc` <a name="clearc"></a>
+
+Purges **all** existing lesson from contHACKS. **Use with caution.**
+
+Format: `clearc`
+
+Command aliases: `clrc` `cc`
 
 ***
 
