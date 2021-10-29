@@ -36,12 +36,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             switch (flagAndKeywords[0]) {
             case "-n":
                 return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            case "-p":
+                return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
             case "-e":
                 return new FindCommand(new EmailContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
             case "-a":
                 return new FindCommand(new AddressContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-            case "-p":
-                return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
             case "-l":
                 return new FindCommand(new TagsContainKeywordsPredicate(Arrays.asList(nameKeywords)));
             case "-d":
