@@ -1,4 +1,7 @@
-### ContactSh - UserGuide
+---
+layout: page
+title: User Guide
+---
 
 ![Logo](images/ContactSh_Ug_logo.png)
 
@@ -338,8 +341,10 @@ Examples:
 
    * reminder -s 10
 
+<div markdown="span" class="alert alert-primary">
 :memo:**Note**: A task will turn orange in colour as a reminder that it is due soon
 when the system date is later than or the same as (task's date - `DAYS`), and earlier than task's date.
+</div>
 
 ### Clearing the screen: `clear`
 
