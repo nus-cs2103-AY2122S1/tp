@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class LoyaltyPoints {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Loyalty points should only contain numbers, and in multiples of 1000";
+            "Loyalty points is a non-negative number with at least 4 digits";
     public static final String VALIDATION_REGEX = "\\d{4,}";
     public final String value;
 

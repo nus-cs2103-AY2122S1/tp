@@ -75,7 +75,7 @@ This is the list of all prefixes used in RHRH, as well as their corresponding pa
 |  `a/`  | Address             | Addresses can take any values, and it should not be blank
 |  `e/`  | Email               | Email follows the format of xxxx@EMAIL.com
 |  `t/`  | Tag (Optional)      | Contains alphanumeric characters. <br>One entity can have multiple tags.
-| `lp/`  | Loyalty Point       | 
+| `lp/`  | Loyalty Point       | A non-negative number with at least 4 digits
 | `alg/` | Allergy (Optional)  | Similar to `t/`
 | `sr/`  | Special Request (Optional) | Similar to `t/`
 |  `l/`  | Leaves              | Leaves should only contain numbers
@@ -449,49 +449,6 @@ Example:
 
 </div>
 
-### Searching for reservation's made : `check`
-
-Displays the reservations made at the specified date and/or time
-
-Format:
-* `check DATE TIME`: Returns all reservations on `DATE TIME`
-* `check DATE`: Returns all reservations on `DATE`, for **all timings**
-* `check TIME`: Returns all reservations on **today's date**, at `TIME` 
-  * `DATE` is formatted as `yyyy-MM-dd`
-  * `TIME` is formatted as `HH00`
-
-Examples:
-* `check 2021-09-19 1800`
-* `check 2021-09-19`
-* `check 1800`
-
-<div markdown="block" class="alert alert-warning">
-
-:information_source: **Notes:**<br>
-
-* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
-
-</div>
-
-### Get customer who made the reservation: `getC`
-
-Gets the customer who made a specified reservation
-
-Format: `getC INDEX`
-* The customer who made the reservation at the specified `INDEX`
-
-Example:
-* `getC 1`: Gets the customer who made the 1st display reservation.
-
-<div markdown="block" class="alert alert-warning">
-  
-:information_source: **Notes:**<br>
-
-* The index refers to the index number shown in the displayed reservation list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-</div>
-
 ### Finding customers based on keywords: `findC`
 
 Find customers that have fields that contain all specified keywords cumulatively
@@ -561,6 +518,49 @@ Example:
 * The search is case-insensitive. e.g. `oct` will match `OCT`
 * Partial words can be matched. e.g. `oct` will match `October`
 * Only suppliers that contain **all** provided keywords will be displayed.
+
+</div>
+
+### Searching for reservation's made : `check`
+
+Displays the reservations made at the specified date and/or time
+
+Format:
+* `check DATE TIME`: Returns all reservations on `DATE TIME`
+* `check DATE`: Returns all reservations on `DATE`, for **all timings**
+* `check TIME`: Returns all reservations on **today's date**, at `TIME`
+    * `DATE` is formatted as `yyyy-MM-dd`
+    * `TIME` is formatted as `HH00`
+
+Examples:
+* `check 2021-09-19 1800`
+* `check 2021-09-19`
+* `check 1800`
+
+<div markdown="block" class="alert alert-warning">
+
+:information_source: **Notes:**<br>
+
+* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
+
+</div>
+
+### Get customer who made the reservation: `getC`
+
+Gets the customer who made a specified reservation
+
+Format: `getC INDEX`
+* The customer who made the reservation at the specified `INDEX`
+
+Example:
+* `getC 1`: Gets the customer who made the 1st display reservation.
+
+<div markdown="block" class="alert alert-warning">
+
+:information_source: **Notes:**<br>
+
+* The index refers to the index number shown in the displayed reservation list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
 
@@ -778,7 +778,7 @@ RHRH data are saved in the hard disk automatically after any command that change
 
 RHRH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="span" class="alert alert-danger">
 
 :bangbang: **Caution:**
 
