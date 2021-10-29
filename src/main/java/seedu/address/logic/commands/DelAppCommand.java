@@ -52,6 +52,7 @@ public class DelAppCommand extends Command {
 
         if (UiManager.showDeleteDialogAndWait(deleteWarning)) {
             model.deleteAppointment(appointmentToDelete);
+            model.updateState();
             return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToDelete));
         } else {
             return new CommandResult("No appointment deleted.");
