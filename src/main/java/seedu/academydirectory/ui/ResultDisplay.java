@@ -20,6 +20,10 @@ public class ResultDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Set feedback to user on display, as a logger of the command just executed
+     * @param feedbackToUser feedback to be sent
+     */
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setWrapText(true);

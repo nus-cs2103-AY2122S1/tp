@@ -18,6 +18,7 @@
                 <Image url="@/images/file.png" />
             </ImageView>
         </graphic>
+        <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
     </Menu>
     <Menu mnemonicParsing="false">
         <graphic>
@@ -59,7 +60,6 @@
                 <Image url="@/images/help_icon.png" />
             </ImageView>
         </graphic>
-        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" text="Show help" onAction="#showHelp"/>
-        <MenuItem fx:id="about" mnemonicParsing="false" text="About" />
+        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" text="Help" onAction="#showHelp"/>
     </Menu>
 </MenuBar>
