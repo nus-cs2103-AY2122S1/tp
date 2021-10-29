@@ -4,7 +4,11 @@ layout: page title: User Guide
 
 BogoBogo is a **desktop app for managing inventories, optimized for use via a Command Line Interface** (CLI)
 while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BogoBogo can get your
-inventory management tasks done faster than traditional GUI apps.
+inventory management tasks done faster than traditional GUI apps. You can use Bogo Bogo as your personal inventory 
+manager which helps you:
+1. track your transactions
+2. track your stock items
+3. book keep 
 
 * Table of Contents {:toc}
 
