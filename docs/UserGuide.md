@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-* Table of Contents
-  {:toc}
+* TOC 
+{:toc}
 
 # 1. Introduction
 Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to track their students' contacts**.
@@ -17,7 +17,9 @@ The main features of TutorAid include:
 
 With TutorAid, you have a one-stop solution for keeping track of your students' contacts and staying up-to-date on their progress. TutorAid is optimised for use via a **Command Line Interface** (CLI) while retaining the benefits of a visually-appealing Graphical User Interface (GUI). If you can type fast, TutorAid can help you to manage your tutoring tasks more efficiently than traditional GUI apps.
 
-We hope that TutorAid will be helpful in adding more organisation to your tutoring career. To get TutorAid up and running, check out the [Quick Start](#3-quick-start) section.<hr>
+We hope that TutorAid will be helpful in adding more organisation to your tutoring career. To get TutorAid up and running, check out the [Quick Start](#3-quick-start) section.
+
+***
 
 # 2. About
 This section contains information and terms that may help you to understand the user guide.
@@ -42,7 +44,9 @@ Warnings can inform you of things that should be followed carefully to prevent u
 
 Commands in these highlighted boxes are typically used to show what you should enter into TutorAid.
 
-`command`<hr>
+`command`
+
+***
 
 ## 2.2 TutorAid visual components
 This section details the various components in TutorAid and how they will be referred to throughout the guide.
@@ -70,7 +74,9 @@ The Lesson Panel is where your lessons are listed. Just like the Student Panel, 
 > :bulb: The **index number** of a lesson is important too, and is used in commands just like the index number for students.
 
 #### Status Bar
-The status bar shows the path where you can find the save file for TutorAid.<hr>
+The status bar shows the path where you can find the save file for TutorAid.
+
+***
 
 ## 2.3 Command Format
 Commands are text that you can enter into the Command Box to tell TutorAid to perform an operation. Some commands have many components, each of which serve different purposes. The following diagram depicts the components of a command.
@@ -113,7 +119,8 @@ In this guide, the syntax / format of a command is shown like this:
   e.g. if the format of a command has `s/STUDENT_INDEX...` then both `s/1 2 3` and `s/1` are acceptable inputs, but not `s/ `.
 * Extraneous parameters for commands that do not take in parameters will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-<hr>
+
+***
 
 # 3. Quick Start
 
@@ -129,7 +136,8 @@ In this guide, the syntax / format of a command is shown like this:
 5. Type the command in the Command Box and press ENTER to execute it. For example, typing `help` and pressing ENTER will open the help window.<br>
 
 6. Refer to the [Features](#6-command-summary) below to see which commands TutorAid understands.
-<hr>
+
+***
 
 # 4. Features
 
@@ -154,9 +162,9 @@ Examples:
 > :bulb: The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
 
 
-### Listing all students : `list`
+### Listing all students and lessons: `list`
 
-Shows a list of all students in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise fields are hidden by default.
+Shows a list of all students and lessons in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise most fields are hidden by default.
 
 Format: `list [-a]`
 
@@ -388,34 +396,51 @@ Examples:
 * `find -s John` returns `john`, `John Doe` and `Johnny Liu`
 * `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
 * `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
-<hr>
+
+***
 
 # 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorAid home folder.<hr>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorAid home folder.
+
+***
 
 # 6. Command summary
 
+## 6.1 Student commands
+
 Action | Format, Examples
 --------|------------------
-**Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
-**Clear** | `clear`
-**Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
-**Edit student** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
-**List** | `list [-a]`<br>e.g., `list`, `list -a`
-**Help** | `help`
-**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
-**Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
-**Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
-**Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
-**Viewing a student** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
-**Viewing a lesson** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
-**Add lesson** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
-**Delete lesson** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
-**Edit lesson** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
-**Add students to lessons** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
-**Delete students from lessons** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
-**Find student** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
-**Find lesson** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
-**Exit** | `exit`
+**[Add student](#adding-a-student-add)** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
+**[Delete student](#deleting-a-student--delete)** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
+**[Edit student](#editing-a-student--edit--s)** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
+**[View student](#viewing-a-student--view--s)** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`
+**[Find student](#locating-students-or-lessons-by-name-find--s--find--l)** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
+**[Set payment made](#setting-payment-made-paid)** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
+**[Unset payment made](#unsetting-payment-made-unpaid)** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
+**[Add Progress](#adding-progress-for-a-student--add--p)** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
+**[Delete Progress](#deleting-progress-from-a-student--del--p)** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
+***
+## 6.2 Lesson commands
+Action | Format, Examples
+--------|------------------
+**[Add lesson](#adding-a-lesson-add--l)** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+**[Delete lesson](#deleting-a-lesson--del--l)** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
+**[Edit lesson](#editing-a-lesson-edit--l)** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
+**[View lesson](#viewing-a-lesson--view--l)** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
+**[Find lesson](#locating-students-or-lessons-by-name-find--s--find--l)** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
+***
+## 6.3 Student and Lesson commands
+Action | Format, Examples
+--------|------------------
+**[List](#listing-all-students-and-lessons-list)** | `list [-a]`<br>e.g., `list`, `list -a`
+**[Add students to lessons](#adding-students-to-lessons-add--sl)** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
+**[Delete students from lessons](#deleting-students-from-lessons-del--sl)** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
+**[Clear](#clearing-all-entries--clear)** | `clear`
+***
+## 6.4 Other commands
+Action | Format, Examples
+--------|------------------
+**[Help](#viewing-help--help)** | `help`
+**[Exit](#exiting-the-program--exit)** | `exit`
