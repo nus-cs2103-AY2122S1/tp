@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_GROUP_DOES_NOT_EXIST;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
@@ -25,16 +26,15 @@ public class AddStudentToGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a group to Classmate "
             + "by the index number used in the last person listing. "
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_GROUPNUMBER + "GROUPNUMBER "
-            + PREFIX_CLASSCODE + "CLASSCODE "
-            + PREFIX_TYPE + "TYPE "
+            + PREFIX_CLASSCODE + "CLASS_CODE "
+            + PREFIX_TYPE + "GROUP_TYPE "
+            + PREFIX_GROUPNUMBER + "GROUP_NUMBER "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GROUPNUMBER + "1 "
             + PREFIX_CLASSCODE + "G06 "
             + PREFIX_TYPE + "OP1 ";
 
     public static final String MESSAGE_SUCCESS = "Index: %1$d added to Group: %2$s";
-    public static final String MESSAGE_GROUP_NOT_EXIST = "The group does not exist in Classmate";
     public static final String MESSAGE_DUPLICATE_GROUP = "The student has already been added to an %1$s group";
     public static final String MESSAGE_NOT_SAME_CLASS = "The student and the tutorial group "
             + "do not belong to the same tutorial class";
@@ -64,7 +64,7 @@ public class AddStudentToGroupCommand extends Command {
 
         // check if tutorial group already exists in ClassMATE
         if (!model.hasTutorialGroup(toAddTutorialGroup)) {
-            throw new CommandException(MESSAGE_GROUP_NOT_EXIST);
+            throw new CommandException(MESSAGE_GROUP_DOES_NOT_EXIST);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());

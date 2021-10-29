@@ -263,62 +263,48 @@ Examples:
 
 ## Tutorial Group Commands
 
+These are the commands that involve tutorial groups!
+
+* Group Type refers to the assignment that the group will work together for
+
 ### Adding a group: `addcg`
 
 Adds a group to a particular tutorial class
 
-Format: `addcg gn/GROUP_NAME c/CLASS_CODE type/GROUP_TYPE`
+Format: `addcg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
-Examples: `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
+Examples: `addcg gn/1 c/G01 type/OP1` adds `OP1` Group `1` to class `G01`
 
-### Listing all groups : `listg` [Coming Soon]
+### Viewing a Group: `viewg`
 
-Shows a list of all groups in a specific class in ClassMATE.
+Lists students in a particular tutorial group in ClassMATE
 
-Format: `listg c/CLASS_CODE`
-
-Examples:
-* `listg c/G06` Lists all groups in the class `G06`
-
-### Viewing a Group: `viewcg` [Coming Soon]
-
-Views a group's details in ClassMATE
-
-Format: `viewcg INDEX`
-
-* Views the group's details at the specified INDEX.
-* The index refers to the index number shown in the displayed group list.
-* The index must be a positive integer 1, 2, 3...
+Format: `viewg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
 Examples:
-* `listg c/G06` followed by `viewcg 2` shows the 2nd group in the list of group in class G06
+* `viewg c/G06 type/OP2 gn/1` lists the students in `OP2` Group `1` of class `G06`
 
 
 ### Deleting a Group: `deletecg`
 
-Deletes a group from ClassMATE by their index in the group list
+Deletes a group from ClassMATE
 
-Format: `deletecg INDEX`
-
-* Deletes the group at the specified INDEX.
-* The INDEX refers to the index number shown in the displayed group list.
-* The index you use must be a positive integer 1, 2, 3...
+Format: `deletecg c/CLASS_CODE tp/GROUP_TYPE gn/GROUP_NUMBER`
 
 Examples:
-* `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
+* `deletecg c/G06 type/OP2 gn/1` deletes the `OP2` Group `1` of class `G06`
 
-## Adding Student to a group: `addsg` [Coming Soon]
+## Adding Student to a group: `addsg`
 
 Adds student to a group.
 
-Format: `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]`
+Format: `addsg INDEX c/CLASS_CODE tp/GROUP_TYPE gn/GROUP_NUMBER`
 
 * Adds the student to a group in the class
-* Type refers to the assignment that the group will work together for
 
 Example:
-* `liststu c/G06`shows that Betsy is a student in class G06.
-  `addsg n/Betsy tp/OP1 g/A` then adds a student called Betsy to OP1 Group A in class G06
+* `liststu c/G06`shows the students in class G06.
+  `addsg 1 c/G06 tp/OP1 g/2` then adds the first student to `OP1` Group `2` in class `G06`
 
 
 ### Exiting the program : `exit`

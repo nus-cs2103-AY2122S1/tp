@@ -16,9 +16,9 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to a class to Classmate. "
             + "Parameters: "
-            + PREFIX_CLASSCODE + "CLASSCODE "
-            + PREFIX_TYPE + "TYPE "
-            + PREFIX_GROUPNUMBER + "GROUPNUMBER "
+            + PREFIX_CLASSCODE + "CLASS_CODE "
+            + PREFIX_TYPE + "GROUP_TYPE "
+            + PREFIX_GROUPNUMBER + "GROUP_NUMBER "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUPNUMBER + "1 "
             + PREFIX_CLASSCODE + "G06 "
