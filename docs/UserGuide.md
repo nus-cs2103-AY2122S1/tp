@@ -138,28 +138,6 @@ Examples:
 * `addpolicy n/full life e/2021-12-12 p/10000 c/10 12 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10% on 12 payments, tagged Aviva, belonging to client with index 1.
 * `addpolicy n/critical illness p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
 
-### Deleting A Policy : `deletepolicy`
-
-Deletes a policy from the policy list.
-
-Format: `deletepolicy INDEX`
-
-### Sorting a Policy: `sortpolicy`
-
-Sorts the policy list alphabetically by the order specified.
-
-Format: `sortpolicy SORTER`
-
-These are the current sorts implemented:
-* `titleasc`: Sorts the clients in ascending order based on the saved title
-* `titledsc`: Sorts the clients in descending order based on the saved title
-* `priceasc`: Sorts the clients in ascending order based on the saved payment
-* `pricedsc`: Sorts the clients in descending order based on the saved payment
-* `commasc`: Sorts the clients in ascending order based on the saved commission
-* `commdsc`: Sorts the clients in descending order based on the saved commission
-* `dateasc`: Sorts the clients in ascending order based on the saved expiry date
-* `datedsc`: Sorts the clients in descending order based on the saved expiry date
-
 ### Listing All Policies : `listpolicy`
 
 Shows a list of all policies.
@@ -175,6 +153,45 @@ Format: `clientpolicy PERSON_INDEX`
 - List policies for the person at the specified PERSON_INDEX.
 - The index refers to the index number shown in the displayed persons list.
 - The index must be a positive integer 1, 2, 3, …​
+
+### Editing a policy : `editpolicy`
+
+Edits an existing policy in the application.
+
+Format: `editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] [c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAG] [e/COVERAGE_EXPIRY_DATE] …​`
+
+* Edits the policy at the specified `INDEX`. The index refers to the index number shown in the displayed policy list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the policy will be removed i.e adding of tags is not cumulative.
+* You can remove all the policy’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `editpolicy 1 p/100 c/20` Edits the payment amount and commission of the 1st policy to be `100` and `20%` respectively.
+*  `editpolicy 2 n/Life Policy t/` Edits the name of the 2nd policy to be `Life Policy` and clears all existing tags.
+
+### Deleting A Policy : `deletepolicy`
+
+Deletes a policy from the policy list.
+
+Format: `deletepolicy INDEX`
+
+### Sorting a Policy: `sortpolicy`
+
+Sorts the policy list alphabetically by the order specified.
+
+Format: `sortpolicy SORTER`
+
+These are the current sorts implemented:
+* `titleasc`: Sorts the policies in ascending order based on the saved title
+* `titledsc`: Sorts the policies in descending order based on the saved title
+* `priceasc`: Sorts the policies in ascending order based on the saved payment
+* `pricedsc`: Sorts the policies in descending order based on the saved payment
+* `commasc`: Sorts the policies in ascending order based on the saved commission
+* `commdsc`: Sorts the policies in descending order based on the saved commission
+* `dateasc`: Sorts the policies in ascending order based on the saved expiry date
+* `datedsc`: Sorts the policies in descending order based on the saved expiry date
 
 ### Clear Person's Policy : `clearpolicy`
 
