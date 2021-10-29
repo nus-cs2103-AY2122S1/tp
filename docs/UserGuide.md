@@ -527,7 +527,7 @@ Examples:
 Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
 
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
-Refer to [Behaviours of the Fees Calculator](#Behaviours-of-the-Fees-Calculator) for cases the Fees Calculator will not account for.
+Refer to [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
 Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
 
