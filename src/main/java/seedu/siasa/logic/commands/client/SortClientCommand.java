@@ -10,7 +10,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
 
 /**
- * Lists all persons in the address book to the user.
+ * Sorts the client list.
  */
 public class SortClientCommand extends Command {
 
