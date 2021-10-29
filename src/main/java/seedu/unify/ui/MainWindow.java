@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.commons.core.LogsCenter;
+import seedu.unify.logic.CommandHistory;
 import seedu.unify.logic.Logic;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private WeeklyPanel weeklyPanel;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -124,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         // pass in date into weeklyPanel constructor instead of
@@ -185,9 +187,18 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            if (commandText.trim().startsWith("/prev")) {
+                CommandHistory commandHistory = CommandHistory.getInstance();
+                String result = commandHistory.retrievePreviousCommand();
+                resultDisplay.setFeedbackToUser("");
+                commandBox.setCommandTextField(result);
+                return new CommandResult("");
+            }
+            CommandHistory.getInstance().addCommandToHistory(commandText);
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            this.commandBox.setCommandTextField("");
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
