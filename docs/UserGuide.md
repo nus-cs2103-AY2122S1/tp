@@ -255,7 +255,7 @@ Examples:
 
 Command alias: `ac`
 
-<img src="images/AddCommand.png" width="800px">
+<img src="images/AddLessonCommand.png" width="800px">
 
 #### Editing a lesson: `editc` <a name="editc"></a>
 
@@ -276,10 +276,15 @@ Examples:
 
 Command aliases: `updatec` `ec`
 
+<img src="images/EditLessonCommand.png" width="800px">
 
 #### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
 
+<img src="images/DeleteLessonCommand.png" width="800px">
+
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
+
+<img src="images/FindLessonCommand.png" width="800px">
 
 #### Listing all lessons: `listc` <a name="listc"></a>
 
@@ -296,6 +301,8 @@ Purges **all** existing lesson from contHACKS. **Use with caution.**
 Format: `clearc`
 
 Command aliases: `clrc` `cc`
+
+<img src="images/ClearLessonCommand.png" width="800px">
 
 ***
 
