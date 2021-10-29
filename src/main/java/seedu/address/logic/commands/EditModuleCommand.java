@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_MODULE_NAME;
 
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -13,6 +12,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.student.UniqueStudentList;
+import seedu.address.model.task.UniqueTaskList;
 
 
 /**
@@ -53,6 +54,10 @@ public class EditModuleCommand extends EditCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Module> lastShownList = model.getFilteredModuleList();
+        ModuleName updatedName = editModuleDescriptor.getModuleName();
+        if (model.hasModuleName(updatedName)) {
+            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_MODULE, updatedName.getModuleName()));
+        }
         for (Module module : lastShownList) {
             if (module.getName().equals(moduleName)) {
                 return editModuleInformation(model, module);
@@ -77,12 +82,15 @@ public class EditModuleCommand extends EditCommand {
     }
 
     private static Module createEditedModule(Module moduleToEdit,
-                                              EditModuleCommand.EditModuleDescriptor editModuleDescriptor) {
+                                             EditModuleCommand.EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;
 
-        ModuleName updatedName = editModuleDescriptor.getModuleName().orElse(moduleToEdit.getName());
+        ModuleName updatedName = editModuleDescriptor.getModuleName();
 
-        return new Module(updatedName);
+        UniqueStudentList studentList = moduleToEdit.getUniqueStudentList();
+        UniqueTaskList taskList = moduleToEdit.getTaskList();
+
+        return new Module(updatedName, studentList, taskList);
     }
 
     @Override
@@ -132,8 +140,8 @@ public class EditModuleCommand extends EditCommand {
             this.name = name;
         }
 
-        public Optional<ModuleName> getModuleName() {
-            return Optional.ofNullable(name);
+        public ModuleName getModuleName() {
+            return this.name;
         }
 
         @Override

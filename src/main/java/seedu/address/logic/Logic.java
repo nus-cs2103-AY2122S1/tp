@@ -29,9 +29,9 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getBuddy()
      */
-    ReadOnlyTeachingAssistantBuddy getAddressBook();
+    ReadOnlyTeachingAssistantBuddy getAssistantBuddy();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of modules */

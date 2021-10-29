@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103-F09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -163,9 +163,9 @@ This section describes some noteworthy details on how certain features are imple
 5. This results in a `DeleteModuleCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
 
 ![How the command `delete module m/CS2103` is parsed in the Logic component](images/DeleteModuleSequenceDiagram1.png)
-7. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
-8. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
-9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+6. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 ![How the `DeleteModuleCommand` is executed](images/DeleteModuleSequenceDiagram2.png)
 
@@ -193,6 +193,20 @@ This section describes some noteworthy details on how certain features are imple
 7. The `Model` will add a new `Module` with the new `ModuleName`. 
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
+### Add Student
+
+1. When the `Logic` is called upon to execute `add student m/CS2103 i/A1234567A n/Amy bee t/@amybee e/amybee@gmail.com`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to a `AddCommandParser`.
+3. The `AddCommandParser` then figures out the type of object to add, in this case a `Student` object as indicated by `student`.
+4. The `AddStudentCommandParser` will wrap the module name in a `ModuleName` object and the student's information in a `Student` object and pass it into a `AddStudentCommand`.
+5. This results in a `AddStudentCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic Manager`.
+![How the command `add student m/CS2103 i/A1234567A n/Amy bee t/@amybee e/amybee@gmail.com` is parsed in the Logic component](images/AddStudentSequenceDiagram1.png)
+6. The `AddStudentCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified `ModuleName`.
+8. The `Module` with the specified `ModuleName` will then add the new `Student` object to its student list.
+9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+![How the `AddStudentCommand` is executed](images/AddStudentSequenceDiagram2.png)
+
 ### Delete Student
 
 1. When the `Logic` is called upon to execute `delete student m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
@@ -200,12 +214,43 @@ This section describes some noteworthy details on how certain features are imple
 3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Student` object as indicated by `student`.
 4. The `DeleteStudentCommandParser` will wrap the module name in a `ModuleName` object and the student ID in a `StudentId` object and pass them into a `DeleteStudentCommand`.
 5. This results in a `DeleteStudentCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
+![How the command `delete student m/CS2103 i/A1234567A` is parsed in the Logic component](images/DeleteStudentSequenceDiagram1.png)
 6. The `DeleteStudentCommand` communicates with the `Model` when it is executed.
 7. The `Model` will look for a `Module` with the specified `ModuleName`.
 8. The `Module` with the specified `ModuleName` will then look for the student with the specified `StudentId` and delete the student.
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+![How the `DeleteStudentCommand` is executed](images/DeleteStudentSequenceDiagram2.png)
 
-![Interactions Inside the Logic Component for the `delete student` Command](images/DeleteStudentSequenceDiagram.png)
+### Edit Student
+
+1. When `Logic` is called upon to execute the user input `edit student m/CS2103 i/A1234567A n/Amy Lee`, it uses the
+   `TeachingAssistantBuddyParser` class to parse the user command.
+2. `TeachingAssistantBuddyParser` parses the first command word `edit`, and pass the rest of the input to `EditCommandParser`.
+3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Student` object as indicated by `student`.
+4. The `EditStudentCommandParser` will then parse the tokens, `m/CS2103`, `i/A1234567A` and `n/Amy Lee` in this case, to determine the moduleName (`CS2103`in this case),
+   and to create an `EditStudentDescriptor` with the student ID `A1234567A` and the name `Amy Lee`, and pass these `ModuleName` and `EditStudentDescriptor` objects into an `EditStudentCommand`.
+5. This results in a `EditStudentCommand` object (which is a subclass of `EditCommand`), which is executed by the `Logic
+   Manager`.
+![How the command `edit student m/CS2103 i/A1234567A n/Amy Lee` is parsed in the Logic component](images/EditStudentSequenceDiagram1.png)
+6. The `EditStudentCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for the `Student` with the specified student id, `A1234567A` in this case,  inside the `Module` specified by
+   the module name, `CS2103` in this case, and then replacing the old editable fields (such as student name, tele handle and email)
+   of that `Student` using any optionally provided new fields.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+![How the `EditStudentCommand` is executed](images/EditStudentSequenceDiagram2.png)
+
+### Find Student
+
+1. When the `Logic` is called upon to execute `find m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `find`, and pass the rest of the input to a `FindStudentCommandParser`.
+3. The `FindStudentCommandParser` will wrap the module name in a `ModuleName` object and the student's ID in a `StudentId` object and pass it into a `FindStudentCommand`.
+4. This results in a `FindStudentCommand` object, which is executed by the `Logic Manager`.
+![How the command `find m/CS2103 i/A1234567A` is parsed in the Logic component](images/FindStudentSequenceDiagram1.png)
+5. The `FindStudentCommand` communicates with the `Model` when it is executed.
+6. The `Model` will look for a `Module` with the specified `ModuleName`.
+7. The `Module` with the specified `ModuleName` will then look for the `Student` with the specified `StudentId` and update the module's filtered student's list to only contain this specific student.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+![How the `FindStudentCommand` is executed](images/FindStudentSequenceDiagram2.png)
 
 ### Add Task
 
@@ -375,14 +420,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                 | I want to …​                | So that I can…​                                                     |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | create a new student           |                                                                        |
-| `* * *`  | new user                                   | add a student's information    |                                                                        |
-| `* * *`  | new user                                   | delete a student from a module |                                                                        |
-| `* * *`  | new user                                   | get a student's information    |                                                                        |
+| `* * *`  | new user                                   | add a student to a module      |                                                                        |
+| `* * *`  | new user                                   | delete a student from a module | remove data that I no longer need                                      |
+| `* * *`  | new user                                   | edit a student's information   | change and update the student's information easily                     |
+| `* * *`  | new user                                   | get a student's information    | find and check a student's progress easily                             |
 | `* * *`  | new user                                   | create a new module            |                                                                        |
 | `* * *`  | new user                                   | delete a module                | remove data that I no longer need                                      |
+| `* * *`  | new user                                   | edit a module's name           | change and update the module's name easily                             |
 | `* * *`  | new user                                   | add task to a module           |                                                                        |
+| `* * *`  | new user                                   | delete task from a module      | remove data that I no longer need                                      |
+| `* * *`  | new user                                   | edit a task's information      | change and update information about the task easily                    |
 | `* * *`  | new user                                   | mark a task as done            | track my students' progress                                            |
+| `* * *`  | new user                                   | mark a task as undone          | track my students' progress                                            |
 
 *{More to be added}*
 
@@ -390,35 +439,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `Teaching Assistant’s Buddy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Create a new student**
+**Use case: Add a student to a module**
 
 **MSS**
 
-1. User requests to create a new student by listing down the student's information
-2. System creates the student
+1. User requests to add a student to a module by listing down the module's and student's information
+2. System finds the module
+3. System adds the student into the module's student's list
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Student's ID is already in system.
+* 1a. Module is not found.
     * 1a1. System shows an error message.
 
       Use case ends.
-
-**Use case: Delete a student**
-
-**MSS**
-
-1. User requests to delete a specific student using the student's ID in system
-2. System deletes the student
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. Student's ID is not found.
-    * 1a1. System shows an error message.
+* 1b. Student's ID is already in the module student's list.
+    * 1b1. System shows an error message.
 
       Use case ends.
 
@@ -427,20 +465,65 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to delete a specific student from a module in system
-2. System deletes the student from the module
+2. System finds the module
+3. System deletes the student from the module
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Student's ID is not found.
+* 1a. Module is not found.
     * 1a1. System shows an error message.
 
       Use case ends.
-* 1b. Module is not found.
+* 1b. Student's ID is not found in the module's student's list.
     * 1b1. System shows an error message.
 
       Use case ends.
+
+**Use case: Edit a student's information**
+
+**MSS**
+
+1. User requests to edit a specific student's information in a module
+2. System finds the module
+3. System finds the student with the specified student ID
+4. System edits the student's information
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+* 1b. Student's ID is not found in the module's student's list.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Get a student's information**
+
+**MSS**
+
+1. User requests to find a student in a module and get his/her information
+2. System finds the module
+3. System finds the student and shows his/her information
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+* 1b. Student is not found.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
 
 **Use case: Create a new module**
 
@@ -474,12 +557,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Edit a module's name**
+
+**MSS**
+
+1. User requests to edit a module's name
+2. System finds the module
+3. System edits the module's name 
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
 **Use case: Add task to a module**
 
 **MSS**
 
 1. User requests to add a task to a module in System
-2. System deletes the task from the module
+2. System adds the task to the module and its students
 
    Use case ends.
 
@@ -494,12 +594,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Mark task as done**
+**Use case: Delete task from a module**
 
 **MSS**
 
-1. User requests to mark a task as done
-2. System marks the task as done
+1. User requests to delete a task from a module in System
+2. System deletes the task from the module and its students
 
    Use case ends.
 
@@ -509,8 +609,80 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System shows an error message.
 
       Use case ends.
+* 1b. Module is not found.
+    * 1b1. System shows an error message.
 
-*{More to be added}*
+      Use case ends.
+
+
+**Use case: Mark task as done**
+
+**MSS**
+
+1. User requests to mark a task of a student in a module as done
+2. System marks the task as done
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+* 1b. Student is not found.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+* 1c. Task is not found.
+    * 1c1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Mark task as not done**
+
+**MSS**
+
+1. User requests to mark a task of a student in a module as not done
+2. System marks the task as not done
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+* 1b. Student is not found.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+* 1c. Task is not found.
+    * 1c1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Edit a task's information**
+
+**MSS**
+
+1. User requests to edit a task's information
+2. System finds the module and students that have the specified task
+3. System edits the task's information
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+* 1b. Task is not found.
+    * 1b1. System shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 

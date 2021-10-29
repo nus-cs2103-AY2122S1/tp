@@ -23,7 +23,6 @@ import seedu.address.model.module.Module;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
-
 /**
  * Contains helper methods for testing commands.
  */
