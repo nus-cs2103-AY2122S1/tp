@@ -24,16 +24,16 @@ This project is based on the AB3 project created by the [SE-EDU initiative](http
             - [Adding a task : `addtask`](#adding-a-task--addtask)
             - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
             - [Editing a task : `edittask`](#editing-a-task--edittask)
-            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords-findtask)
             - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
+            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords-findtask)
             - [Listing completed tasks : `completedtasks`](#listing-completed-tasks-completedtasks)
             - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks-incompletetasks)
         - [Order Commands](#order-commands)
             - [Listing all orders : `listorder`](#listing-all-orders-listorder)
             - [Adding an order : `addorder`](#adding-an-order-addorder)
             - [Deleting an order : `deleteorder`](#deleting-an-order-deleteorder)
-            - [Finding orders by keywords : `findorder`](#fi)
             - [Marking an order as complete : `markorder`](#marking-an-order-as-complete-markorder)
+            - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords-findorder)
             - [Listing completed orders : `completedorders`](#listing-completed-orders-completedorders)
             - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders-incompleteorders)
             - [Sorting orders : `sortorders`](#sorting-orders-sortorders)
@@ -230,23 +230,6 @@ Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd task in the application.
 * `findtask sew` followed by `deletetask 1` deletes the 1st task in the results of the `findtask` command.
 
-### Finding tasks by keywords: `findtask`
-
-Finds tasks whose label, date or task tag contain any of the given keywords.
-
-Format: `findtask KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g. `orders` will match `Orders`
-* The order of the keywords does not matter. e.g. `Cloth Orders` will match `Orders Cloth`
-* Only full words will be matched. e.g. `Order` will not match `Orders`
-* Tasks matching at least one keyword will be returned (i.e. OR search). e.g. `Order clothes` will return `Order scissors`, `Sew clothes`.
-
-Examples:
-* `findtask buttons` returns `order buttons` and `deliver red buttons`
-* `findtask SO1` returns order with id of `SO1`
-
-![result for 'findtask SO1'](images/findtaskSO1.png)
-
 ### Editing a task : `edittask`
 
 Edits an existing task in the application.
@@ -273,6 +256,23 @@ Format: `marktask INDEX`
 
 Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd client in the application.
+
+### Finding tasks by keywords: `findtask`
+
+Finds tasks whose label, date or task tag contain any of the given keywords.
+
+Format: `findtask KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `orders` will match `Orders`
+* The order of the keywords does not matter. e.g. `Cloth Orders` will match `Orders Cloth`
+* Only full words will be matched. e.g. `Order` will not match `Orders`
+* Tasks matching at least one keyword will be returned (i.e. OR search). e.g. `Order clothes` will return `Order scissors`, `Sew clothes`.
+
+Examples:
+* `findtask buttons` returns `order buttons` and `deliver red buttons`
+* `findtask SO1` returns task with task tag of `SO1`
+
+![result for 'findtask SO1'](images/findtaskSO1.png)
 
 ### Listing completed tasks: `completedtasks`
 
@@ -322,6 +322,21 @@ Format: `markorder INDEX`
 * Marks the order at the specified `INDEX` as completed
 * The index refers to the index number shown in the displayed order list.
 * The index must be a positive integer 1, 2, 3
+
+### Finding orders by keywords: `findorder`
+
+Finds orders whose customer, label, date or sales id contain any of the given keywords.
+
+Format: `findorder KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `green` will match `Green`
+* The order of the keywords does not matter. e.g. `Blue Blazer` will match `Blazer Blue`
+* Only full words will be matched. e.g. `Blazer` will not match `Blazers`
+* Orders matching at least one keyword will be returned (i.e. OR search). e.g. `Blue Blazer` will return `Blue Shirt`, `Black Blazer`.
+
+Examples:
+* `findorder blue` returns `blue blazer` and `blue shirt`
+* `findorder SO1` returns order with id of `SO1`
 
 
 ### Listing completed orders: `completedorders`
@@ -435,17 +450,18 @@ Action | Format, Examples
 **AddClient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
 **DeleteClient** | `delete INDEX`<br> e.g., `delete 3`
 **EditClient** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**FindClient** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindClients** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
 ### Task Commands
 
 Action | Format, Examples
 --------|------------------
 **ListTasks** | `listtask`
-**AddTask** | `addtask l/LABEL d/DATE [t/TASKTAG]` e.g. `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1`
-**DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE [t/TASKTAG]` e.g. `edittask 1 l/order cloth d/19 September 2021 t/General`
-**MarkTask** | `marktask INDEX` e.g. `marktask 2`
+**AddTask** | `addtask l/LABEL d/DATE [t/TASKTAG]` e.g., `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1`
+**DeleteTask** | `deletetask INDEX` e.g., `deletetask 1`
+**EditTask** | `edittask INDEX l/LABEL d/DATE [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
+**MarkTask** | `marktask INDEX` e.g., `marktask 2`
+**FindTasks** | `findtask KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtask buttons`
 **CompletedTasks** | `completedtasks`
 **IncompleteTasks** | `incompletetasks`
 
@@ -454,12 +470,13 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **ListOrders** | `listorder`
-**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
-**DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
-**MarkOrder** | `markorder INDEX` e.g. `markorder 2`
+**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g., `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
+**DeleteOrder** | `deleteorder INDEX` e.g., `deleteorder 1`
+**MarkOrder** | `markorder INDEX` e.g., `markorder 2`
+**FindOrders** | `findorder KEYWORD [MORE_KEYWORDS]`<br> e.g., `findorder blazer`
 **CompletedOrders** | `completedorders`
 **IncompleteOrders** | `incompleteorders`
-**SortOrders** | `sortorders f/FIELD [o/ORDERING]` e.g. `sortorders f/date o/descending`
+**SortOrders** | `sortorders f/FIELD [o/ORDERING]` e.g., `sortorders f/date o/descending`
 **ViewTotalOrders** | `totalorders`
 
 ### General Commands
