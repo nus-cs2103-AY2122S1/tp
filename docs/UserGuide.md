@@ -156,8 +156,8 @@ Action | Format, Examples
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `resetC`, `resetE`, `resetS`, `listC`, `listE`, `listS`, `listR`, `exit` and `clear`) will be ignored.<br>
+ e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
@@ -350,6 +350,7 @@ Edits an existing reservation in RHRH
 Format: `editR INDEX [r/REMARK] [t/TAG]…`
 * Edits the reservation at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed supplier list. 
+* The index **must be a positive integer** 1, 2, 3, … 
 
 Examples:
 * `editR 2 r/have kids t/10 percent off`: Edits the remark and tags of the 2nd display reservation to `have kids` and `10 percent off`, respectively.
