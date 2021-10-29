@@ -209,34 +209,40 @@ These commands are described in greater detail in the sections below.
 #### Adding Lessons
 The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
 
+A simple illustration of how TAB might interact with the user for `LessonAddCommand` is shown below.
+
+![LessonAddActivityDiagram](images/LessonAddActivityDiagram.png)
+*Figure I.3.3.1: Activity diagram of `LessonAddCommand`*
+
+The lesson added will be displayed in the `LessonListPanel` in TAB.
+
 The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
-*Figure I.3.3.1: Sequence Diagram of `LessonAddCommand`*
+*Figure I.3.3.2: Sequence Diagram of `LessonAddCommand`*
 
 ![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
-*Figure I.3.3.2: Continued Sequence Diagram of `LessonAddCommand`*
+*Figure I.3.3.3: Continued Sequence Diagram of `LessonAddCommand`*
 
 The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
 by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
-existing lesson with a clashing date and timeslot. 
-
-A simple illustration of how TAB might interact with the user is shown below.
-
-![LessonAddActivityDiagram](images/LessonAddAcitivityDiagram.png)
-*Figure I.3.3.3: Activity diagram of `LessonAddCommand`*
-
-The lesson added will be displayed in the `LessonListPanel` in TAB.
+existing lesson with a clashing date and timeslot.
 
 #### Editing Lessons
 The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
 with this lesson. The lesson will be edited per the given information input by the user.
 
+A simple illustration of how TAB might interact with the user for `LessonEditCommand` is shown below.
+Note that edits involving dates include changes made to the start or end dates of the lesson and/or edits to the cancelled dates of the lesson.
+
+![LessonEditActivityDiagram](images/LessonEditActivityDiagram.png)
+*Figure I.3.4.1: Activity diagram of `LessonEditCommand`*
+
 The figure below shows the sequence diagram for editing a lesson.
 
 ![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
 
-*Figure I.3.4: Sequence Diagram of Lesson Edit Command*
+*Figure I.3.4.2: Sequence Diagram of Lesson Edit Command*
 
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
@@ -289,7 +295,7 @@ list of lessons to view. The `PersonListPanel` also has a listener that displays
 * **Alternative 1 (current choice):** Only allow weekly recurrence
     * Pros: Easy to implement and allow room for other features (such as detecting of clashes). Weekly recurring lessons are
       common for private 1-to-1 tuition in Singapore.
-    * Cons: Users cannot set their own recurrence rule. Workaround for schedule keeping possible through adding singular lessons
+    * Cons: Users cannot set their own recurrence rule. Workaround for schedule-keeping possible through adding singular lessons
       when needed.
 
 * **Alternative 2:** Allow user to define their own recurrence rule.
