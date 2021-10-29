@@ -22,7 +22,7 @@ public class EdelCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the event identified by the index number used in the displayed event list.\n"
-            + "Parameters: [" + PREFIX_EVENT_ID + " EVENT_ID (must be a positive integer)]\n"
+            + "Parameters: " + PREFIX_EVENT_ID + " EVENT_ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_ID + " 1";
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
