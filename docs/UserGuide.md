@@ -322,6 +322,7 @@ Examples:
 
 ## Tutorial Group Commands
 
+These are the commands that involve tutorial groups!
 ### Adding a group: `addcg`
 
 Adds a group to a particular tutorial class
@@ -331,41 +332,34 @@ Format: `addcg gn/GROUP_NUMBER c/CLASS_CODE type/GROUP_TYPE`
 Examples:
 * `addcg gn/Group 1 c/G01 type/OP1` adds Group 1 to class `G01` assigned to the task `OP1`
 
-### Listing all groups : `listg` [Coming Soon]
+* Group Type refers to the assignment that the group will work together for
 
-Shows a list of all groups in a specific class in ClassMATE.
+### Adding a group: `addcg`
 
-Format: `listg c/CLASS_CODE`
+Adds a group to a particular tutorial class
 
-Examples:
-* `listg c/G06` Lists all groups in the class `G06`
+Format: `addcg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
-### Viewing a Group: `viewcg` [Coming Soon]
+Examples: `addcg gn/1 c/G01 type/OP1` adds `OP1` Group `1` to class `G01`
 
-Views a group's details in ClassMATE
+### Viewing a Group: `viewg`
 
-Format: `viewcg INDEX`
+Lists students in a particular tutorial group in ClassMATE
 
-* Views the group's details at the specified INDEX.
-* The index refers to the index number shown in the displayed group list.
-* The index must be a positive integer 1, 2, 3...
+Format: `viewg c/CLASS_CODE type/GROUP_TYPE gn/GROUP_NUMBER`
 
 Examples:
-* `listg c/G06` followed by `viewcg 2` shows the 2nd group in the list of group in class G06
+* `viewg c/G06 type/OP2 gn/1` lists the students in `OP2` Group `1` of class `G06`
 
 
 ### Deleting a Group: `deletecg`
 
-Deletes a group from ClassMATE by their index in the group list
+Deletes a group from ClassMATE
 
-Format: `deletecg INDEX`
-
-* Deletes the group at the specified INDEX.
-* The INDEX refers to the index number shown in the displayed group list.
-* The index you use must be a positive integer 1, 2, 3...
+Format: `deletecg c/CLASS_CODE tp/GROUP_TYPE gn/GROUP_NUMBER`
 
 Examples:
-* `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
+* `deletecg c/G06 type/OP2 gn/1` deletes the `OP2` Group `1` of class `G06`
 
 ### Adding Student to a group: `addsg`
 
@@ -374,7 +368,6 @@ Adds student to a group.
 Format: `addsg INDEX gn/GROUP_NUMBER c/CLASSCODE type/TYPE`
 
 * Adds the student to a group in the class
-* Type refers to the assignment that the group will work together for
 
 Example:
 * `liststu c/G06`shows that Betsy is a student in class G06, with Index 1.

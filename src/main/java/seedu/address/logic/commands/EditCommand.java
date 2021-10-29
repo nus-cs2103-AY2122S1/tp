@@ -56,9 +56,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE.";
-    public static final String MESSAGE_CLASS_NOT_EXIST = "The classCode is invalid as the tutorial class "
-            + "has not been created yet.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -88,13 +85,13 @@ public class EditCommand extends Command {
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_STUDENT);
         }
 
         TutorialClass toCheckTutorialClass = new TutorialClass(editedStudent.getClassCode(),
                 new Schedule("dummy, dummy"), new HashSet<Tag>());
         if (!model.hasTutorialClass(toCheckTutorialClass)) {
-            throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
+            throw new CommandException(Messages.MESSAGE_CLASS_DOES_NOT_EXIST);
         }
 
         model.setStudent(studentToEdit, editedStudent);
