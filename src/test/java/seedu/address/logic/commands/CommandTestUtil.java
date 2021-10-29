@@ -21,10 +21,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Classmate;
 import seedu.address.model.Model;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.ClassCodeContainsKeywordsPredicate;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.GroupNumber;
+import seedu.address.model.tutorialgroup.GroupType;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -57,6 +61,12 @@ public class CommandTestUtil {
     public static final String VALID_SCHEDULE_G02 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
     public static final String VALID_SCHEDULE_G06 = "Tuesday 12pm to 2pm, Friday 12pm to 2pm";
     public static final String VALID_MARK = "GOOD";
+    public static final TutorialGroup VALID_GROUP_G01_OP1 = new TutorialGroup(new GroupNumber("1"),
+            new ClassCode("G01"), new GroupType("OP1"));
+    public static final TutorialGroup VALID_GROUP_G06_OP1 = new TutorialGroup(new GroupNumber("3"),
+            new ClassCode("G01"), new GroupType("OP1"));
+    public static final TutorialGroup VALID_GROUP_G06_OP2 = new TutorialGroup(new GroupNumber("1"),
+            new ClassCode("G01"), new GroupType("OP1"));
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

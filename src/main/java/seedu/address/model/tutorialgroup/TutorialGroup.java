@@ -82,4 +82,16 @@ public class TutorialGroup {
 
         return builder.toString();
     }
+
+    /**
+     * Returns a short string to be displayed on StudentCard
+     */
+    public String toDisplayString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getGroupType())
+                .append(" Grp: ")
+                .append(getGroupNumber());
+
+        return builder.toString();
+    }
 }

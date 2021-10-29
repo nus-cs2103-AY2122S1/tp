@@ -31,6 +31,7 @@ import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * Edits the details of an existing student in the ClassMATE.
@@ -122,7 +123,8 @@ public class EditCommand extends Command {
                 updatedAddress,
                 updatedClassCode,
                 updatedTags,
-                studentToEdit.getMarks());
+                studentToEdit.getMarks(),
+                studentToEdit.getTutorialGroups());
     }
 
     @Override
@@ -155,6 +157,7 @@ public class EditCommand extends Command {
         private ClassCode classCode;
         private Set<Tag> tags;
         private List<StudentMark> marks;
+        private Set<TutorialGroup> tutorialGroups;
 
         public EditStudentDescriptor() {}
 
@@ -170,6 +173,7 @@ public class EditCommand extends Command {
             setClassCode(toCopy.classCode);
             setTags(toCopy.tags);
             setMarks(toCopy.marks);
+            setTutorialGroups(toCopy.tutorialGroups);
         }
 
         /**
@@ -251,6 +255,24 @@ public class EditCommand extends Command {
          */
         public Optional<List<StudentMark>> getMarks() {
             return (marks != null) ? Optional.of(Collections.unmodifiableList(marks)) : Optional.empty();
+        }
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTutorialGroups(Set<TutorialGroup> tutorialGroups) {
+            this.tutorialGroups = (tutorialGroups != null) ? new HashSet<>(tutorialGroups) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<TutorialGroup>> getTutorialGroups() {
+            return (tutorialGroups != null)
+                    ? Optional.of(Collections.unmodifiableSet(tutorialGroups))
+                    : Optional.empty();
         }
 
         @Override

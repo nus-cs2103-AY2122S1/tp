@@ -13,6 +13,7 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -33,6 +34,7 @@ public class StudentBuilder {
     private ClassCode classCode;
     private Set<Tag> tags;
     private List<StudentMark> marks;
+    private Set<TutorialGroup> tutorialGroups;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -45,6 +47,7 @@ public class StudentBuilder {
         classCode = new ClassCode(DEFAULT_CLASSCODE);
         tags = new HashSet<>();
         marks = new ArrayList<>();
+        tutorialGroups = new HashSet<>();
     }
 
     /**
@@ -58,6 +61,7 @@ public class StudentBuilder {
         classCode = studentToCopy.getClassCode();
         tags = new HashSet<>(studentToCopy.getTags());
         marks = new ArrayList<>(studentToCopy.getMarks());
+        tutorialGroups = new HashSet<>(studentToCopy.getTutorialGroups());;
     }
 
     /**
@@ -73,6 +77,15 @@ public class StudentBuilder {
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tutorialGroups} into a {@code Set<TutorialGroup>} and
+     * set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withTutorialGroups(TutorialGroup... tutorialGroups) {
+        this.tutorialGroups = SampleDataUtil.getTutorialGroupSet(tutorialGroups);
         return this;
     }
 
@@ -116,8 +129,10 @@ public class StudentBuilder {
         return this;
     }
 
+
+
     public Student build() {
-        return new Student(name, phone, email, address, classCode, tags, marks);
+        return new Student(name, phone, email, address, classCode, tags, marks, tutorialGroups);
     }
 
 }

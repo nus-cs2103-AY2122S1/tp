@@ -76,7 +76,8 @@ public class DeleteLastMarkCommand extends Command {
                 studentToEdit.getAddress(),
                 studentToEdit.getClassCode(),
                 studentToEdit.getTags(),
-                updatedMarks);
+                updatedMarks,
+                studentToEdit.getTutorialGroups());
     }
 
     @Override
