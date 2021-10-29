@@ -60,7 +60,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -188,6 +188,7 @@ The following sequence diagram show how the view task list operation works:
 The following activity diagram summarises what happens when a user executes a `cat` command:
 
 ![ViewTaskListActivityDiagram](images/ViewTaskListActivityDiagram.png)
+</div>
 
 #### Design consideration:
 
@@ -195,22 +196,25 @@ The following activity diagram summarises what happens when a user executes a `c
 
 - **Alternative 1 (current choice):** Have two side-by-side panels, left for person list and right for task list.
 
-  - Pros: User is able to concurrently view more information.
-  - Cons:
-    - More work to create and optimize the split panel.
-    - Content wrapping can was tricky since there is a slider in the middle to resize either panels.
+  * Pros:
 
-- **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
+    * User is able to concurrently view more information.
 
-  - Pros: More convenient to implement.
+  * Cons:
 
-  - Cons:
+    * More work to create and optimize the split panel.
+    * Content wrapping can was tricky since there is a slider in the middle to resize either panels.
 
-    - `list` has to be executed again if user wants to redirect back to the person list (extra overhead
+* **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
 
+  * Pros: More convenient to implement.
+
+  * Cons:
+
+    * `list` has to be executed again if user wants to redirect back to the person list (extra overhead
       which reduces efficiency).
 
-    - Lesser view of information.
+    * Lesser view of information.
 
 ### Command Cache
 
@@ -226,8 +230,9 @@ This function is facilitated by 3 aspects of the program:
 The following sequence diagram demonstrates how the caching mechanism in the Model and Logic unit:
 ![CachingModelAndLogic](images/CachingModelAndLogic.png)
 
-:information_source: **Note:** The execution of the command happens after the caching
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The execution of the command happens after the caching
 (and is omitted in the above diagram). This means invalid commands are also stored.
+</div>
 
 The following activity diagram illustrates how the storage in the cache is handled:
 ![CacheAddCommandActivityDiagram](images/CacheAddCommandActivityDiagram.png)
@@ -634,13 +639,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `rm 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `rm 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `rm`, `rm x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
