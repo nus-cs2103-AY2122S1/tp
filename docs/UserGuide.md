@@ -214,7 +214,7 @@ After running the find command, the tasks having the mentioned keyword are displ
 
 ![find_command_after](images/findCommandAfter.jpeg)
 
-### 4.4 Showing Tasks: `show` (coming soon)
+### 4.4 Showing Tasks: `show`
 
 
 Show all tasks that have been added to the app in a specific week.
@@ -249,40 +249,22 @@ Examples:
 
 ![show_command](images/showCommand41.jpeg)
 
-### 4.5 Tagging Tasks: `tag` (coming soon)
+### 4.5 Tagging Tasks: `tag` 
 
 Set a task's priority.
 
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- <code> tag  <i>n/task_name (d/date) tg/level </i> </code>
-- <code>  tag<i> task_id (d/date) tg/level </i> </code>
+- <code> tag  <i>task_id tg/tag (tg/tag) </i> </code>
 </div>
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Interpretation:**<br>
-* If <code><i>n/task_name</i></code> field is provided:
-  * Depending on the <code><i>tg/level </i></code> provided it sets priority of the task with the name exactly matching the <code><i>n/task_name </i></code> or <code><i>task_id</i></code> to
-    * Urgent
-    * Important
-    * Medium
-    * Low
-  * The <code><i>tg/level</i></code> field is case-insensitive
-  * If <code><i>date</i></code> field is provided, it sets priority for the task in the given date
-    * Useful in cases when there are multiple copies of the same task , recurring tasks, etc.
-  * If <code><i>d/date</i></code> field is not provided, it sets priority for every occurrence of tasks matching the given name
-
-* If <code><i>task_id</i></code> is provided:
-
-</div>
-
-
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
-* `tag 5 tg/Urgent` sets the priority of task 5 in the task list to `Urgent`
-* `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
+* `tag 5 tg/Assignment` sets the tag of task 5 in the task list to `Assignment`
+* `tag 4 tg/Assignment tg/tough` sets the tags of task 4 in the task list to `Assignment` and `tough`
 </div>
 
 ### 4.6 Deleting tasks : `delete`
@@ -347,25 +329,15 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 
 ![clear_command_after](images/clearCommandAfter.jpeg)
 
-### 4.8 Undoing the previous command : `undo` `[coming in v1.3]`
 
-Reverts your previous command which modified the task list of Uni-Fy.
+### 4.9 Mark your tasks as TODO : `undone` 
 
-<div markdown="block" class="alert alert-primary">
-
-**:clipboard: Format:**<br>
-- `undo`
-
-</div>
-
-### 4.9 Undoing the previous command : `undo` `[coming in v1.3]`
-
-Reverts your previous command which modified the task list of Uni-Fy.
+Marks your task as TODO or pending
 
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `undo`
+- <code>undone <i>task_id</i></code>
 
 </div>
 
@@ -411,14 +383,14 @@ Sorts the tasks in the task list of Uni-Fy.
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 4.13 Retrieving past commands `[coming in v1.3]`
+### 4.13 Retrieving past commands
 
 Shows the past commands run on **Uni-Fy**.
 
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-- `/prev`
+- `/prev` or &#8593;
 
 </div>
 
@@ -430,6 +402,17 @@ Your history is erased when you close and reopen the app. Do not close the app i
 ### 4.13 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+### 4.14 Mark your tasks as DONE : `done`
+
+Marks your task as DONE or finished
+
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- <code>done <i>task_id</i></code>
+
+</div>
 
 
 
@@ -461,11 +444,14 @@ Action | Format, Examples
 --------|------------------
 **Add** | <code>add <i>n/task_name (t/time) d/date (tg/tag) (p/level)</i></code> <br>e.g `add n/Assignment 1 t/13:00 d/2021-12-12 tg/CS2103 p/HIGH`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
-**Show** | `show week_number `
-**Edit** | :warning:`WORK_IN_PROGRESS`
+**Show** | `show week_number ` <br>e.g `show 13`
+**Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
+**Edit** | <code>edit <i>task_id n/task_name d/date</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
+**Done** | <code>done <i>task_id</i></code> <br>e.g `done 1`
+**Undone** | <code>undone <i>task_id</i></code> <br>e.g `undone 1`
 **Find** | <code>find <i>keyword (more_keywords)</i></code> <br><code> find <i> d/date</i></code> <br><code> find <i> t/tag</i></code> <br> e.g. `find Quiz` <br> e.g. `find d/2021-12-12` <br> e.g. `find t/GEQ1000`
-**Tag** | :warning:`WORK_IN_PROGRESS`
+**Tag** | <code>tag <i>task_id tg/tag (tg/tag)</code> <br>e.g `tag 2 tg/assignment tg/tough` <br>e.g `tag 3 tg/meeting`
 **Help** | `help`
-**Retrieve past Commands** | `history`
+**Command History** | `/prev` or use the up &#8593; arrow key
+**List** | `list`
 **Clear** | `clear`
-**Undo** | :warning:`WORK_IN_PROGRESS`
