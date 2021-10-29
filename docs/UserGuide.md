@@ -711,7 +711,7 @@ Format: `exit`
 
 ### Shortcuts:
 
-TAB has keyboard shortcuts for navigating between its various panels to help you stay more productive by keeping your hands on the keyboard.
+TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
 
 Shortcut | Action
 --------|------------------
