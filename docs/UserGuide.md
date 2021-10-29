@@ -11,33 +11,38 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 
 ## Table of Contents
 
-1. [Introduction to Socius](#introduction-to-socius)
-2. [Using this guide](#using-this-guide)
-3. [Quick Start](#quick-start)
-4. [Features](#features)
-     1. [Viewing help](#viewing-help-help)
+* Table of Contents
+
+{:toc}
+
+<!---
+## Table of Contents
+1. Quick Start
+2. Features
+     1. Viewing help `help`
      2. Modify
-          1. [Adding a person](#adding-a-person-add)
-          2. [Editing a person](#editing-a-person-edit)
-          3. [Adding a remark](#adding-remark-to-a-person-remark)
-          4. [Deleting a person](#deleting-a-person-delete)
-          5. [Deleting multiple person](#deleting-multiple-person-deletem)
-          6. [Clearing all entries](#clearing-all-persons-clear)
+          1. Adding a person `add`
+          2. Editing a person `edit`
+          3. Adding a remark `remark`
+          4. Deleting a person `delete`
+          5. Deleting multiple person `deletem`
+          6. Clearing all entries `clear`
      3. View
-          1. [Listing all persons](#listing-all-persons-list)
-          2. [Finding persons](#finding-persons-find)
-          3. [Sorting persons](#sorting-all-persons-sort)
-          4. [Viewing statistics](#viewing-statistics-stat)
+          1. Listing all persons `list`
+          2. Finding persons `find`
+          3. Sorting persons `sort`
+          4. Viewing statistics `stat`
      4. Share
-          1. [Importing contacts](#importing-contacts-import)
-          2. [Exporting contacts](#exporting-contacts-export)
+          1. Importing contacts `import`
+          2. Exporting contacts `export`
      5. Advance
-          1. [Aliasing commands](#aliasing-commands-alias)
-     6. [Exiting the program](#exiting-the-program-exit)
-     7. [Saving the data](#saving-the-data)
-5. [Parameters constraints](#parameter-constraints)
-6. [FAQ](#faq)
-7. [Command Summary](#command-summary)
+          1. Aliasing commands `alias`
+     6. Exiting the program `exit`
+     7. Saving the data
+3. Arguments constraints
+3. FAQ
+4. Command Summary
+--->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -73,9 +78,9 @@ Before diving into Socius and getting to know its features, lets get familiar wi
 
 :information_source: This symbol represents important information
 
-:exclamation: This symbol represents warnings
+:exclamation: This symbol represents warnings or cautions
 
-:bulb: This symbol represents additional information
+:bulb: This symbol represents additional information such as tips
 
 --------------------------------------------------------------------------------------------------------------------
 
