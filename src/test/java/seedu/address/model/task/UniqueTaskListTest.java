@@ -68,6 +68,7 @@ class UniqueTaskListTest {
 
     @Test
     public void setTask_nullEditedTask_throwsNullPointerException() {
+        uniqueTaskList.add(TASK1);
         assertThrows(NullPointerException.class, () -> uniqueTaskList.setTask(TASK1, null));
     }
 
