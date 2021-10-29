@@ -732,7 +732,7 @@ Format: `settables LIST_OF_TABLE_SIZES`
 Example:
 * `settables 10,8,8,4,4,2x6,1x4`
 
-<div markdown="block" class="alert alert-warning"><br>
+<div markdown="block" class="alert alert-warning">
 
 :information_source: **Notes:**<br>
 
