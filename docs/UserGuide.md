@@ -10,7 +10,42 @@ than from traditional GUI apps. The application and guide are based on AB3 with 
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
 
 * Table of Contents
-{:toc}
+    - [Quick Start](#quick-start)
+    - [Features](#features)
+        - [Viewing help : `help`](#viewing-help--help)
+        - [Client Commands](#client-commands)
+            - [Adding a client : `add`](#adding-a-client-add)
+            - [Listing all clients : `list`](#listing-all-clients--list)
+            - [Editing a client : `edit`](#editing-a-client--edit)
+            - [Locating clients by name : `find`](#locating-clients-by-name-find)
+            - [Deleting a client : `delete`](#deleting-a-client--delete)
+        - [Task Commands](#task-commands)
+            - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
+            - [Adding a task : `addtask`](#adding-a-task--addtask)
+            - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
+            - [Editing a task : `edittask`](#editing-a-task--edittask)
+            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords-findtask)
+            - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
+            - [Listing completed tasks : `completedtasks`](#listing-completed-tasks-completedtasks)
+            - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks-incompletetasks)
+        - [Order Commands](#order-commands)
+            - [Listing all orders : `listorder`](#listing-all-orders-listorder)
+            - [Adding an order : `addorder`](#adding-an-order-addorder)
+            - [Deleting an order : `deleteorder`](#deleting-an-order-deleteorder)
+            - [Finding orders by keywords : `findorder`](#fi)
+            - [Marking an order as complete : `markorder`](#marking-an-order-as-complete-markorder)
+            - [Listing completed orders : `completedorders`](#listing-completed-orders-completedorders)
+            - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders-incompleteorders)
+            - [Sorting orders : `sortorders`](#sorting-orders-sortorders)
+            - [Viewing total orders : `totalorders`](#viewing-total-orders-totalorders)
+        - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+        - [Exiting the program : `exit`](#exiting-the-program--exit)
+        - [Saving the data](#saving-the-data)
+        - [Editing the data file](#editing-the-data-file)
+    - [FAQ](#faq)
+    - [Command Summary](#command-summary)
+            
+            
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,7 +230,7 @@ Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd task in the application.
 * `findtask sew` followed by `deletetask 1` deletes the 1st task in the results of the `findtask` command.
 
-### Finding a task: `findtask`
+### Finding tasks by keywords: `findtask`
 
 Finds tasks whose label, date or task tag contain any of the given keywords.
 
