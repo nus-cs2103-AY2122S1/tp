@@ -16,6 +16,6 @@ public class SortCommandRating extends SortCommand {
         requireNonNull(model);
         model.sortList("rating");
         return new CommandResult(String.format(MESSAGE_SORT_CONTACT_SUCCESS, MESSAGE_SORTED_BY_SUCCESS));
-
     }
+
 }
