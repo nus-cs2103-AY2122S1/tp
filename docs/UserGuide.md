@@ -127,7 +127,7 @@ Some example commands you can try:
 
 #### Adding a contact: `add` <a name="add"></a>
 
-Adds a contact to the address book. 
+Adds a contact to contHACKS. 
 
 Format: `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`
 
@@ -158,7 +158,7 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 * Existing values of the fields specified will be erased and updated to the input values
 
 Examples:
-* `edit 1 p/91234567 e/ben321@gmail.com`: Edits the phone number and email address of the 1st contact to be `91234567` and `ben321@gmail.com` respectively
+* `edit 1 p/91234567 e/ben321@gmail.com`: Edits the phone number and email of the 1st contact to be `91234567` and `ben321@gmail.com` respectively
 * `edit 2 n/Ben m/CS2100 T09 B09`: Edits the name and module of the 2nd contact to be `Ben` and `CS2100 T09 B09` respectively
 * `edit 3 h/@BenWasHere r/Overseas`: Edits the telegram handle and remark of the 3rd contact to be `@BenWasHere` and `Overseas` respectively
 * `edit 4 n/Ben m/CS2100 T09 B09 p/91234567 e/ben321@gmail.com h/@BenWasHere r/Overseas`: All fields present in one command
@@ -169,7 +169,7 @@ Command aliases: `update` `e`
 
 #### Deleting a contact / contacts: `delete` <a name="delete"></a>
 
-Delete the specified contact(s) from the address book.
+Delete the specified contact(s) from contHACKS.
 
 Format: `delete INDEX`/ `delete INDEX_START-INDEX_END`
 
