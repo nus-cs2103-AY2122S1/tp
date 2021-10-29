@@ -186,7 +186,15 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            resultDisplay.clearCharts();
+
+            if (commandResult.isShowFeedback()) {
+                resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            } else if (commandResult.isShowPieChart()) {
+                resultDisplay.setChartToUser(commandResult.getPieChartDatas(), commandResult.getPieChartTitles());
+            }
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

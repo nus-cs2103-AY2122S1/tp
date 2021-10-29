@@ -3,11 +3,12 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+
+import seedu.address.MainApp;
 
 /**
  * Represents a Person's nationality in the address book.
@@ -15,7 +16,7 @@ import java.util.Scanner;
  */
 public class Nationality {
 
-    public static final List<String> VALID_NATIONALITIES = new ArrayList<>();
+    public static final List<String> VALID_NATIONALITIES = readValidNationalities();
     public static final String MESSAGE_CONSTRAINTS = "Nationality can take any values, and it should not be blank";
 
     /*
@@ -23,6 +24,8 @@ public class Nationality {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+
+    private static final HashSet<String> NATIONALITIES_SET = new HashSet<>(VALID_NATIONALITIES);
 
     public final String value;
 
@@ -47,31 +50,37 @@ public class Nationality {
             return true;
         }
 
-        if (VALID_NATIONALITIES.size() == 0) {
-            readValidNationalities();
-        }
+        return NATIONALITIES_SET.contains(test.trim().toLowerCase());
 
+        // Previous validating mechanism
+        /*
         return VALID_NATIONALITIES.size() > 0
                 ? VALID_NATIONALITIES.contains(test.trim().toLowerCase())
                 : test.matches(VALIDATION_REGEX);
+        */
+    }
+
+    // This method is for debugging
+    private static boolean isNationalitySetEmpty() {
+        return NATIONALITIES_SET.isEmpty();
     }
 
     /**
      * Reads a txt file located in data/nationalities.txt containing a list of nationalities and
      * puts it into {@code validNationalities}
      */
-    public static void readValidNationalities() {
-        try {
-            Scanner sc = new Scanner(new File("data/nationalities.txt"));
+    public static List<String> readValidNationalities() {
+        List<String> tmp = new ArrayList<>();
 
-            while (sc.hasNext()) {
-                VALID_NATIONALITIES.add(sc.nextLine().toLowerCase());
-            }
+        // WARNING: MainApp.class.getResourceAsStream could return null
+        Scanner sc = new Scanner(MainApp.class.getResourceAsStream("/data/nationalities.txt"));
 
-            sc.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
+        while (sc.hasNext()) {
+            tmp.add(sc.nextLine().toLowerCase());
         }
+        sc.close();
+
+        return tmp;
     }
 
     @Override
@@ -88,7 +97,7 @@ public class Nationality {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value.toLowerCase().hashCode();
     }
 
 }
