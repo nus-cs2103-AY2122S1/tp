@@ -11,37 +11,33 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 
 ## Table of Contents
 
-* Table of Contents
-  {:toc}
-
-<!---
-## Table of Contents
-1. Quick Start
-2. Features
-     1. Viewing help `help`
+1. [Introduction to Socius](#introduction-to-socius)
+2. [Using this guide](#using-this-guide)
+3. [Quick Start](#quick-start)
+4. [Features](#features)
+     1. [Viewing help](#viewing-help-help)
      2. Modify
-          1. Adding a person `add`
-          2. Editing a person `edit`
-          3. Adding a remark `remark`
-          4. Deleting a person `delete`
-          5. Deleting multiple person `deletem`
-          6. Clearing all entries `clear`
+          1. [Adding a person](#adding-a-person-add)
+          2. [Editing a person](#editing-a-person-edit)
+          3. [Adding a remark](#adding-remark-to-a-person-remark)
+          4. [Deleting a person](#deleting-a-person-delete)
+          5. [Deleting multiple person](#deleting-multiple-person-deletem)
+          6. [Clearing all entries](#clearing-all-persons-clear)
      3. View
-          1. Listing all persons `list`
-          2. Finding persons `find`
-          3. Sorting persons `sort`
-          4. Viewing statistics `stat`
+          1. [Listing all persons](#listing-all-persons-list)
+          2. [Finding persons](#finding-persons-find)
+          3. [Sorting persons](#sorting-all-persons-sort)
+          4. [Viewing statistics](#viewing-statistics-stat)
      4. Share
-          1. Importing contacts `import`
-          2. Exporting contacts `export`
+          1. [Importing contacts](#importing-contacts-import)
+          2. [Exporting contacts](#exporting-contacts-export)
      5. Advance
-          1. Aliasing commands `alias`
-     6. Exiting the program `exit`
-     7. Saving the data
-3. Arguments constraints
-3. FAQ
-4. Command Summary
---->
+          1. [Aliasing commands](#aliasing-commands-alias)
+     6. [Exiting the program](#exiting-the-program-exit)
+     7. [Saving the data](#saving-the-data)
+5. [Parameters constraints](#parameter-constraints)
+6. [FAQ](#faq)
+7. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,10 +46,10 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 Socius is a desktop application that can help you, as a CS2103T Software Engineering student, to 
 * manage your classmates’ contacts
 * make friends and
-* find teammates
+* find teammates!
 
-The **Socius User Guide** helps you get started with using **Socius**.
-This User Guide hopes to get you familarized with the commands of **Socius** and the flow of using the program, taking you from zero to hero. 
+The Socius User Guide helps you get started with using Socius.
+This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, taking you from zero to hero. 
 Don't like reading? A summary table is available at the end for quick reference!
 
 We hope that you will have a great time using Socius! :)
@@ -73,7 +69,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 ## Using this guide
 
-Before diving into **Socius** and getting to know its features, lets get familiar with the symbols used in this user guide.
+Before diving into Socius and getting to know its features, lets get familiar with the symbols used in this user guide.
 
 :information_source: This symbol represents important information
 
@@ -105,9 +101,9 @@ Here is a quick start on how you can start using our app in your own computer.
 Some example commands you can try:
     * **`list`** : Lists all contacts.
 
-    * **`add`** `n/John Doe tg/W08 nat/Singaporean` : Adds a contact named `John Doe` to Socius.
+    * **`add`** `n/Amy Tan tg/W08 nat/Singaporean` : Adds a contact named `Amy Tan` to Socius, together with her tutorial group and nationality.
 
-    * **`delete`** `3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`** `3` : Deletes the person at index 3 in the current list.
 
     * **`clear`** : Deletes all contacts.
 
@@ -156,7 +152,9 @@ Format: **`help`**
 
 You can add a person to the contact book.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Name of a person must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+Name of a person must be provided!
+</div>
 
 Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
 
@@ -190,8 +188,12 @@ Examples:
 
 You can edit an existing person in the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: At least one field of the person must be changed!</div>
-<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+At least one field of the person must be changed!
+</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+Index must be provided!
+</div>
 
 Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 
@@ -229,7 +231,9 @@ Examples:
 
 You can add a remark to a person in the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+Index must be provided!
+</div>
 
 Format: **`remark`** `INDEX r/VALUE`
 * Add a remark to the person at the specified `INDEX`. 
@@ -248,7 +252,9 @@ Examples:
 
 You can delete the specified person from the contact book by `INDEX`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Index must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+Index must be provided!
+</div>
 
 Format: **`delete`** `INDEX`
 
@@ -265,7 +271,9 @@ Examples:
 
 You can delete multiple person from the contact book using `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: At least one keyword must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+At least one keyword must be provided!
+</div>
 
 Format: **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
@@ -306,7 +314,9 @@ Format: **`list`**
 
 You can find the specified persons using `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: At least one keyword must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+At least one keyword must be provided!
+</div>
 
 Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
@@ -338,7 +348,9 @@ Examples:
 
 You can sort all persons in the contact book by a specified field.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Exactly one field must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+Exactly one field must be provided!
+</div>
 
 Format: **`sort`** `FIELD_PREFIX/`
 
@@ -375,8 +387,12 @@ Examples:
 
 You can import your friends' contact book into your application.
 
-<div markdown="block" class="alert alert-danger">:exclamation: File must be in JSON format!</div>
-<div markdown="block" class="alert alert-danger">:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+File must be in JSON format!
+</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+File must be located in the `./data` directory in the same directory as `Socius.jar`.
+</div>
 
 Format: **`import`** `FILE_NAME.json`
 
@@ -387,8 +403,12 @@ Examples:
 
 You can export your contact book and share it with your friends.
 
-<div markdown="block" class="alert alert-danger">:exclamation: File must be in JSON format!</div>
-<div markdown="block" class="alert alert-danger">:exclamation: File must be located in the `./data` directory in the same directory as `Socius.jar`.</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+File must be in JSON format!
+</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+File must be located in the `./data` directory in the same directory as `Socius.jar`.
+</div>
 
 Format: **`export`** `FILE_NAME.json`
 
@@ -400,7 +420,9 @@ Examples:
 
 You can create command shortcut by aliasing it with custom `KEYWORD`.
 
-<div markdown="block" class="alert alert-danger">:exclamation: Exactly one keyword must be provided!</div>
+<div markdown="block" class="alert alert-danger">:exclamation: **Caution:**
+Exactly one keyword must be provided!
+</div>
 
 Format: **`alias`** `a/KEYWORD c/COMMAND`.
 
