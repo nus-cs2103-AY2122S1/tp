@@ -213,7 +213,7 @@ Shows a list of all contacts in contHACKS.
 
 Format: `list`
 
-Command alias: `ls` 
+Command alias: `ls`
 
 #### Clearing all contacts: `clear` <a name="clear"></a>
 
