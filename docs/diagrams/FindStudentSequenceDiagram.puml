@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindStudentCommandParser" as FindStudentCommandParser LOGIC_COLOR
+participant "p:NameContainsKeywordPredicate" as NameContainsKeywordPredicate LOGIC_COLOR
+participant "s:FindStudentCommand" as FindStudentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findStudent alex ber")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findStudent alex ber")
+activate AddressBookParser
+
+create FindStudentCommandParser
+AddressBookParser -> FindStudentCommandParser
+activate FindStudentCommandParser
+
+FindStudentCommandParser --> AddressBookParser
+deactivate FindStudentCommandParser
+
+AddressBookParser -> FindStudentCommandParser : parse("alex ber")
+activate FindStudentCommandParser
+
+create NameContainsKeywordPredicate
+FindStudentCommandParser -> NameContainsKeywordPredicate
+activate NameContainsKeywordPredicate
+
+NameContainsKeywordPredicate --> FindStudentCommandParser : pred
+deactivate NameContainsKeywordPredicate
+
+create FindStudentCommand
+FindStudentCommandParser -> FindStudentCommand
+activate FindStudentCommand
+
+FindStudentCommand --> FindStudentCommandParser : s
+deactivate FindStudentCommand
+
+FindStudentCommandParser --> AddressBookParser : s
+deactivate FindStudentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindStudentCommandParser -[hidden]-> AddressBookParser
+destroy FindStudentCommandParser
+
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> FindStudentCommand : execute()
+activate FindStudentCommand
+
+FindStudentCommand -> Model : updateFilteredStudentList(p)
+activate Model
+
+Model --> FindStudentCommand
+deactivate Model
+
+create CommandResult
+FindStudentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindStudentCommand
+deactivate CommandResult
+
+FindStudentCommand --> LogicManager : result
+deactivate FindStudentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
