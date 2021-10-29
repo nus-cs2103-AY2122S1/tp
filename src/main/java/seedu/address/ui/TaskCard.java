@@ -61,6 +61,11 @@ public class TaskCard extends UiPart<Region> {
                 vbox.getWidth() - vbox.getPadding().getLeft() - vbox.getPadding().getRight() - 1,
                 vbox.widthProperty(), vbox.paddingProperty()));
 
+        // Sets width property of Text to be dependent on VBox's width and padding property.
+        taskName.maxWidthProperty().bind(Bindings.createDoubleBinding(()->
+                vbox.getWidth() - vbox.getPadding().getLeft() - vbox.getPadding().getRight() - value,
+                vbox.widthProperty(), vbox.paddingProperty()));
+
         id.setText(displayedIndex + ". ");
 
         taskDate.setBackground(new Background(
