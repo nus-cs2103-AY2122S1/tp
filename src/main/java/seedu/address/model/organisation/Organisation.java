@@ -1,5 +1,6 @@
 package seedu.address.model.organisation;
 
+import java.util.List;
 
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -43,6 +44,10 @@ public class Organisation {
 
     public UniquePersonList getPersons() {
         return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons.setPersons(persons);
     }
 
     /**

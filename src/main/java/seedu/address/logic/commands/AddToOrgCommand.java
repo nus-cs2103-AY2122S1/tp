@@ -9,8 +9,10 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.organisation.Organisation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Adds a person to an organisation.
@@ -46,8 +48,18 @@ public class AddToOrgCommand extends Command {
         if (targetIndex.getZeroBased() >= personList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
         Person personToAdd = personList.get(targetIndex.getZeroBased());
-        model.addToOrganisation(personToAdd, organisationName);
+
+        Organisation organisation = model.getOrganisationByName(organisationName);
+        UniquePersonList persons = organisation.getPersons();
+        persons.add(personToAdd);
+        List<Person> organisationPersonList = persons.asUnmodifiableObservableList();
+
+        Organisation newOrganisation = new Organisation(organisation.getName(), organisation.getEmail());
+        newOrganisation.setPersons(organisationPersonList);
+        model.setOrganisation(organisation, newOrganisation);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, organisationName, personToAdd));
     }
 

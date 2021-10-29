@@ -1,6 +1,7 @@
 package seedu.address.model.organisation;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.organisation.exceptions.DuplicateOrganisationException;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of organisations that enforces uniqueness between its elements and does not allow nulls.
@@ -70,6 +72,27 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
             throw new DuplicateOrganisationException();
         }
         internalList.setAll(organisations);
+    }
+
+    /**
+     * Replaces the given organisation {@code target} with {@code editedOrganisation}.
+     * {@code target} must exist in the address book.
+     * The organisation identity of {@code editedOrganisation} must not be the same as
+     * another existing organisation in the address book.
+     */
+    public void setOrganisation(Organisation target, Organisation editedOrganisation) {
+        requireAllNonNull(target, editedOrganisation);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        if (!target.isSameOrganisation(editedOrganisation) && contains(editedOrganisation)) {
+            throw new DuplicateOrganisationException();
+        }
+
+        internalList.set(index, editedOrganisation);
     }
 
     /**

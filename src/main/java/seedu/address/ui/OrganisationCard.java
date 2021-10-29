@@ -33,9 +33,6 @@ public class OrganisationCard extends UiPart<Region> {
     @FXML
     private FlowPane persons;
 
-    @FXML
-    private FlowPane tags;
-
 
     /**
      * Creates a {@code OrganisationCard} with the given {@code Organisation} and index to display.
@@ -51,9 +48,7 @@ public class OrganisationCard extends UiPart<Region> {
             persons.getChildren().add(new Label(index + ". " + person.getName() + " "));
             index.addAndGet(1);
         });
-        System.out.println(index);
         index.set(1);
-        System.out.println(index);
     }
 
     @Override

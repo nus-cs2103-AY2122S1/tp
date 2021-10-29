@@ -68,12 +68,6 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the organisation.
-     */
-    void deleteFromOrganisation(Person person, Organisation organisation);
-
-    /**
      * Deletes the given organisation.
      * The organisation must exist in the organisation list.
      */
@@ -87,12 +81,6 @@ public interface Model {
     void addOrganisation(Organisation organisation);
 
     /**
-     * Adds the given person to an organisation.
-     * {@code person} must not already exist in the organisation.
-     */
-    void addToOrganisation(Person person, Name name);
-
-    /**
      * Gets the organisation by its name.
      */
     Organisation getOrganisationByName(Name name);
@@ -103,6 +91,14 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Replaces the given organisation {@code target} with {@code editedOrganisation}.
+     * {@code target} must exist in the address book.
+     * The organisation identity of {@code editedOrganisation} must not be the same as
+     * another existing organisation in the address book.
+     */
+    void setOrganisation(Organisation target, Organisation editedOrganisation);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

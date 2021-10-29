@@ -53,8 +53,12 @@ public class DeleteFromOrgCommand extends Command {
         }
 
         Person person = personList.get(targetIndex.getZeroBased());
+        persons.remove(person);
+        personList = persons.asUnmodifiableObservableList();
 
-        model.deleteFromOrganisation(person, organisation);
+        Organisation newOrganisation = new Organisation(organisation.getName(), organisation.getEmail());
+        newOrganisation.setPersons(personList);
+        model.setOrganisation(organisation, newOrganisation);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, person, organisationName));
     }
