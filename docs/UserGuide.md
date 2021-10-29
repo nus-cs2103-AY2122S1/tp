@@ -14,11 +14,11 @@ This project is based on the AB3 project created by the [SE-EDU initiative](http
     - [Features](#features)
         - [Viewing help : `help`](#viewing-help--help)
         - [Client Commands](#client-commands)
-            - [Adding a client : `add`](#adding-a-client-add)
             - [Listing all clients : `list`](#listing-all-clients--list)
+            - [Adding a client : `add`](#adding-a-client-add)
+            - [Deleting a client : `delete`](#deleting-a-client--delete)  
             - [Editing a client : `edit`](#editing-a-client--edit)
             - [Locating clients by name : `find`](#locating-clients-by-name-find)
-            - [Deleting a client : `delete`](#deleting-a-client--delete)
         - [Task Commands](#task-commands)
             - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
             - [Adding a task : `addtask`](#adding-a-task--addtask)
@@ -117,6 +117,12 @@ Format: `help`
 
 ## Client Commands
 
+### Listing all clients : `list`
+
+Shows a list of all clients in the application.
+
+Format: `list`
+
 ### Adding a client: `add`
 
 Adds a client to the application.
@@ -131,11 +137,19 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
 * `add n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F d/160_85_35_81`
 
-### Listing all clients : `list`
+### Deleting a client : `delete`
 
-Shows a list of all clients in the application.
+Deletes the specified client from the application.
 
-Format: `list`
+Format: `delete INDEX`
+
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd client in the application.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ### Editing a client : `edit`
 
@@ -171,20 +185,6 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a client : `delete`
-
-Deletes the specified client from the application.
-
-Format: `delete INDEX`
-
-* Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd client in the application.
-* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 ## Task Commands
 
