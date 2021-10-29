@@ -52,13 +52,17 @@ public class RemarkContainsKeywordsPredicateTest {
         predicate = new RemarkContainsKeywordsPredicate(Arrays.asList("likes", "coding"));
         assertTrue(predicate.test(new PersonBuilder().withRemark("She likes coding").build()));
 
-        // Only one matching keyword
-        predicate = new RemarkContainsKeywordsPredicate(Arrays.asList("dislikes", "coding"));
-        assertTrue(predicate.test(new PersonBuilder().withRemark("She likes coding").build()));
-
         // Mixed-case keywords
         predicate = new RemarkContainsKeywordsPredicate(Arrays.asList("lIkeS", "CoDinG"));
         assertTrue(predicate.test(new PersonBuilder().withRemark("She likes coding").build()));
+    }
+
+    @Test
+    public void test_remarkContainsMultipleKeywords_returnFalse() {
+        // Only one matching keyword
+        RemarkContainsKeywordsPredicate predicate =
+                new RemarkContainsKeywordsPredicate(Arrays.asList("dislikes", "coding"));
+        assertFalse(predicate.test(new PersonBuilder().withRemark("She likes coding").build()));
     }
 
     @Test

@@ -18,7 +18,7 @@ public class MultiplePredicates implements Predicate<Person> {
     public boolean test(Person person) {
         return predicateList
                 .stream()
-                .anyMatch(predicate -> predicate.test(person));
+                .allMatch(predicate -> predicate.test(person));
     }
 
     @Override

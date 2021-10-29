@@ -46,17 +46,21 @@ public class EmailContainsKeywordsPredicateTest {
                 new EmailContainsKeywordsPredicate(Collections.singletonList("hibro@hotmail.com"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("hibro@hotmail.com").build()));
 
-        // Only one matching keyword
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("hibro@hotmail.com", "hisis@gmail.com"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("hisis@gmail.com").build()));
-
         // Mixed-case keyword
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("hIbRo@HoTmAiL.CoM"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("hibro@hotmail.com").build()));
+    }
+
+    @Test
+    public void test_predicateHasMultipleKeywords_returnsFalse() {
+        // Only one matching keyword
+        EmailContainsKeywordsPredicate predicate =
+                new EmailContainsKeywordsPredicate(Arrays.asList("hibro@hotmail.com", "hisis@gmail.com"));
+        assertFalse(predicate.test(new PersonBuilder().withEmail("hisis@gmail.com").build()));
 
         // Multiple keywords
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("hibro@hotmail.com", "hisis@gmail.com"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("hibro@hotmail.comhisisgmail.com").build()));
+        assertFalse(predicate.test(new PersonBuilder().withEmail("hibro@hotmail.comhisisgmail.com").build()));
     }
 
     @Test

@@ -15,9 +15,10 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> person.getPhone().value.toLowerCase()
-                .contains(keyword.toLowerCase()));
+        return !keywords.isEmpty()
+                && keywords.stream()
+                .allMatch(keyword -> !keyword.trim().isEmpty() && person.getPhone().value.trim().toLowerCase()
+                .contains(keyword.trim().toLowerCase()));
     }
 
     @Override
