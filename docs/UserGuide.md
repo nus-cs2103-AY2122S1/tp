@@ -94,7 +94,7 @@ Some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Date inputs should follow one of the formats below
+* Date inputs should follow one of the formats below.
 
   Format | Example
   --------|------------------
@@ -116,6 +116,15 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ## Client Commands
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the client commands:**<br>
+
+* A male's body measurements should be of the format height_waist_shoulder in cm, and it should not be blank.
+* A female's body measurements should be of the format height_waist_shoulder_bust in cm, and it should not be blank.
+
+</div>
 
 ### Listing all clients : `list`
 
