@@ -1065,9 +1065,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a lesson
 
-1. Adding a lesson to a person while all persons are being shown
+1. Adding a lesson to a students while all students are being shown
 
-  Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  Prerequisites: List all students using the `list` command. Multiple students in the list.
 
   * Test case: `ladd 1 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
      Expected: A lesson with the corresponding details will be added to the lesson list of the 1st person in the displayed list.
@@ -1076,19 +1076,45 @@ testers are expected to do more *exploratory* testing.
   * Test case: `ladd 1 time/1100-1200 subject/Science rates/40`<br>
      Expected: Missing start date for lesson. Error details will be shown in the status message.
 
-2. Adding a lesson to a person after a `find` command is executed.
+2. Adding a lesson to a student after a `find` command is executed.
   
   * Test case: `ladd 2 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
-    Expected: A lesson with the corresponding details will be added to the lesson list of the 2nd person in the resulting list after `find`.
-    Details of the added lesson, and the person with the lesson will be shown in the status message.
+    Expected: A lesson with the corresponding details will be added to the lesson list of the 2nd student in the resulting list after `find`.
+    Details of the added lesson, and the student with the lesson will be shown in the status message.
 
-* Incorrect ladd commands to try: `ladd...`
+* Incorrect `ladd` commands to try: `ladd...`
 
 1. `ladd 2 date/32 Oct 2021 time/1100-1200 subject/Science rates/40` (Invalid date)
 2. `ladd 2 date/32 Oct 2021 time/2100-2230 subject/Science rates/40` (Invalid time range; must be between 0800h - 2200h)
 3. `ladd 2 date/32 Oct 2021 time/1100-1200 subject/Science rates/12.2.21.3` (Invalid rates)
-4. `ladd x ...` where x > number of persons in the displayed list or x <= 0
-5. `ladd ...` where the index number of the person is not specified.
+4. `ladd x ...` where x > number of students in the displayed list or x <= 0
+5. `ladd ...` where the index number of the student is not specified.
+
+Expected: Error details will be shown in the status message.
+
+### Deleting a lesson from a person
+
+1. Deleting a lesson from a person while all persons are being shown
+
+  Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+  * Test case: `ldelete 1 1`<br>
+     Expected: First lesson of the first student is deleted from the lesson list of the student. 
+     Details of the deleted lesson will be shown in the status message.
+
+  * Test case: `ldelete 0 1`<br>
+     Expected: No lesson is deleted. Error details shown in the status message.
+    
+  * Test case: `ldelete 1 0`<br>
+    Expected: No lesson is deleted. Error details shown in the status message.
+
+* Incorrect `ldelete` commands to try: `ldelete...`
+
+1. `ldelete 1 x` where x > the number of lessons that the 1st student has or x <= 0.
+2. `ldelete x 1` where x > the number of students in the displayed list or x <= 0.
+3. `ldelete x` where either the student index or lesson index is not specified.
+
+Expected: Error details will be shown in the status message.
 
 ### Saving data
 
