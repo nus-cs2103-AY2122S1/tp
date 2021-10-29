@@ -16,7 +16,7 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 Here are some important syntax which are used throughout this document:
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 **:information_source: Notes:**<br>
 Useful information or tips are displayed here
@@ -196,7 +196,7 @@ Examples:
 * `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Head Chef t/Team A sh/2021-12-08 0800` adds an employee with the respective fields.<br>
 * `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Chef` adds an employee without any optional fields.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * When adding a `SHIFT`, `yyyy-MM-dd HHmm` format must be followed strictly<br>
@@ -219,7 +219,7 @@ Examples:
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/08:00 24-12-2021` adds a 
   supplier without any optional fields.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * Order of the `date` and `time` in `DeliveryDetails` does not matter but `time` has to be in `24 hour` 
@@ -248,7 +248,7 @@ Examples:
 * `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with<br>
 * `addR 5 p/12345668 at/2021-02-14 1200`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 :information_source: **Notes:**<br>
 
@@ -272,7 +272,7 @@ Examples:
 * `editC 1 alg/Kiwi sr/no air con` Replaces the existing allergies and special requests of the 1st customer to `Kiwi` and `no air con` respectively.<br> 
 * `editC 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 :information_source: **Notes:**<br>
 
@@ -297,7 +297,7 @@ Examples:
 * `editE 1 sal/4000` Edits the salary of the 1st employee to be `4000`.<br> 
 * `editE 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -320,7 +320,7 @@ Examples:
 * `editS 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.<br>
 * `editS 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -350,7 +350,7 @@ Format: `deleteC INDEX`
 Example:
 * `deleteC 2` deletes the 2nd customer displayed in the address book.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed customer list.
@@ -369,7 +369,7 @@ Format: `deleteE INDEX`
 Example:
 * `deleteE 2` deletes the 2nd employee in the address book.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed employee list.
@@ -388,7 +388,7 @@ Format: `deleteS INDEX`
 Example:
 * `deleteS 2` deletes the 2nd supplier in the address book.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed supplier list.
@@ -407,7 +407,7 @@ Format: `deleteR INDEX`
 Example: 
 * `deleteR 1` deletes the 1st reservation in the display reservation list.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The index refers to the index number shown in the displayed reservation list.
@@ -431,7 +431,7 @@ Examples:
 * `check 2021-09-19`
 * `check 1800`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 :information_source: **Notes:**<br>
 
@@ -450,7 +450,7 @@ Format: `findC KEYWORD [MORE_KEYWORD...]`
 Example:
 * `findC Chetwin Everything`: Finds customers that have both the keywords 'Chetwin' and 'Everything' in their fields.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * At least one `KEYWORD` must be provided
@@ -473,7 +473,7 @@ Examples:
 * `findE Team A`: Finds all employees that have `Team A` in any of their fields.<br>
 * `findE Team A`: **DOES NOT** find employees that have `Team` and `A` in different fields or different shifts/tags
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * `KEYWORDS` must not be empty
@@ -494,7 +494,7 @@ Format: `findS KEYWORD [MORE_KEYWORDS...]`
 Example:
 * `findS Oct AM`: Finds suppliers that have both keywords `Oct` and `AM` in their fields.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * At least one `KEYWORD` must be provided
@@ -516,7 +516,7 @@ Examples:
 * `sortC by/n o/d`: sorts the list of customers by `NAME` in `descending` order<br>
 * `sortC by/alg o/a`: sorts the list of customers by `ALLERGIES` in `ascending` order
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting a customer.
@@ -537,7 +537,7 @@ Examples:
 * `sortE by/sal o/a`: Sorts the list of employees by `SALARY` in `ascending` order<br>
 * `sortE by/n o/d`: Sorts the list of employees by `NAME` in `descending` order
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting an employee.
@@ -559,7 +559,7 @@ Examples:
 * `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERYDETAILS` in `ascending` order<br>
 * `sorts by/N o/d`: Sorts the list of suppliers by `NAME` in `descending` order
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting a supplier.
@@ -598,7 +598,7 @@ Shows a list of all customers in RHRH.
 
 Format: `listC`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * RHRH will switch to the customer list and list all customers no matter which list you are current viewing
@@ -616,7 +616,7 @@ Shows a list of all employees in RHRH.
 
 Format: `listE`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * RHRH will switch to the employee list and list all employees no matter which list you are current viewing
@@ -633,7 +633,7 @@ Shows a list of all suppliers in RHRH.
 
 Format: `listS`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 :information_source: **Notes:**<br>
 
 * RHRH will switch to the supplier list and list all suppliers no matter which list you are current viewing
@@ -663,7 +663,7 @@ Format: `settables LIST_OF_TABLE_SIZES`
 Examples:
 * `settables 10,8,8,4,4,2x6,1x4`
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning"><br>
 
 :information_source: **Notes:**<br>
 
