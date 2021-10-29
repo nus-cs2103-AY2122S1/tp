@@ -24,13 +24,12 @@ class DateTest {
     public void isValidLabel() {
         assertThrows(NullPointerException.class, () -> Date.isValidDate(null));
 
-        //invalid Labels
-        assertFalse(Date.isValidDate(tooLong)); //label is too long
-        assertFalse(Date.isValidDate(" 20th august 2020")); //starts with a space
+        //invalid dates
+        assertFalse(Date.isValidDate(" 2020-08-20")); //starts with a space
+        assertFalse(Date.isValidDate("2020- 08-  20")); //multiple spaces
 
-        //valid labels
-        assertTrue(Date.isValidDate("20th august 2020"));
-        assertTrue(Date.isValidDate("20th    august 2020")); //multiple spaces
+        //valid dates
+        assertTrue(Date.isValidDate("2020-08-20"));
     }
 
 }

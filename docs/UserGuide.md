@@ -24,13 +24,13 @@ You may install Java `11` from [here](https://www.oracle.com/java/technologies/d
 The app provides some sample data to help you get started.
 ![Ui](images/UiFirstLaunch.png)
 5. Type the command in the command box and press Enter to execute it.
-e.g. typing `**listtask**` and pressing Enter will list all tasks.
+e.g. typing **`listtask`** and pressing Enter will list all tasks.
 Some example commands you can try:
-   * `**list**`: List all clients.
-   * `**add** n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
-   * `**delete** 2`: Deletes the 2nd client shown in the current client list.
-   * `**clear**`: Deletes all clients.
-   * `**exit**`: Exits the app.
+   * **`list`**: List all clients.
+   * **`add`**`n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
+   * **`delete`**`2`: Deletes the 2nd client shown in the current client list.
+   * **`clear`**: Deletes all existing data.
+   * **`exit`**: Exits the app.
 6. Refer to the [Features](#features) below to learn more about the commands.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -59,6 +59,17 @@ Some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Date inputs should follow one of the formats below
+
+  Format | Example
+  --------|------------------
+  **dd mmmm yyyy** | `08 November 2001`
+  **dd mmm yyyy** | `08 Nov 2021`
+  **yyyy mm dd** | `2021 11 08`
+  **dd-mm-yyyy** | `08-11-2021`
+  **yyyy/mm/dd** | `2021/11/08`
+  **dd/mm/yyyy** | `08/11/2021`
+
 </div>
 
 ## Person Commands
@@ -71,6 +82,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+## Person Commands
 
 ### Adding a person: `add`
 
@@ -169,7 +181,7 @@ The new task will automatically be assigned the 'General' tag if the task tag pa
 </div>
 
 Examples:
-* `addtask l/sew buttons onto blazer d/20th August 2021 t/SO1` adds the task to the application if there is an order with the id of SO1.
+* `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1` adds the task to the application if there is an order with the id of SO1.
 
 ### Deleting a task : `deletetask`
 
@@ -213,7 +225,7 @@ Format: `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]`
 * Existing values will be updated to the input values.
 
 Examples:
-* `edittask 1 l/order cloth d/19th September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
+* `edittask 1 l/order cloth d/19 September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
 * `edittask 2 t/General` edits the tag of the 2nd task to be `General`
 
 ### Marking a task as done : `marktask`
@@ -227,7 +239,115 @@ Format: `marktask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtask` followed by `marktask 2` marks the 2nd task in the application as done.
+* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
+
+### Listing completed tasks: `completedtasks`
+
+List all the completed tasks.
+
+Format: `completedtasks`
+
+### Listing incomplete tasks: `incompletetasks`
+
+List all the incomplete tasks.
+
+Format: `incompletetasks`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Order Commands
+
+### Listing all orders: `listorder`
+
+Shows a list of all orders in the application.
+
+### Adding an order: `addorder`
+
+Adds an order to the application.
+
+Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
+
+Examples:
+* `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
+* `addorder l/school uniform c/John a/15.00 d/15 October 2021`
+
+### Deleting an order: `deleteorder`
+
+Deletes an order from the application.
+
+Format: `deleteorder INDEX`
+
+* Deletes the order at the specified `INDEX`
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
+
+Note that this will also delete all tasks tagged to the deleted order.
+
+### Marking an order as complete: `markorder`
+
+Format: `markorder INDEX`
+* Marks the order at the specified `INDEX` as completed
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
+
+
+### Listing completed orders: `completedorders`
+
+List all the completed orders.
+
+Format: `completedorders`
+
+### Listing incomplete orders: `incompleteorders`
+
+List all the incomplete orders.
+
+Format: `incompleteorders`
+
+### Sorting orders: `sortorders`
+
+Sorts all orders based on a chosen field and arrangement.
+
+Format: `sortorders f/FIELD o/ORDERING`
+
+* Your orders are sorted based on the `FIELD` chosen. You may choose between:
+  * The Date field, identified with a "d" or "date".
+  * The Amount field, identified with an "a" or "amount".
+* By default, the orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
+* The direction of the arrangement depends on the `ORDERING`, which is either:
+  * Ascending, identified with an "asc" or "ascending".
+  * Descending, identified with a "desc" or "descending".
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+Adding / Deleting an order reverts the list to the default ordering.</div>
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
+</div>
+
+Examples:
+* `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
+* `sortorders f/d o/asc` sorts your orders in ascending order of date (orders with earlier dates shown first).
+* `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
+* `sortorders f/amount` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
+
+### Viewing total orders: `totalorders`
+
+Shows the total orders for each person in the application.
+
+<div markdown="block" class="alert alert-info">
+:information_source: The total orders displayed are based on the persons in the application.
+If the customer of an order cannot be found among the persons, the order will not be shown.
+</div>
+
+![TotalOrdersWindow](images/TotalOrdersWindow.png)
+
+Format: `totalorders`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Press the ESCAPE key to close the total orders window
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
 
@@ -274,18 +394,44 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 ## Command summary
 
+###Client Commands
+
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-**ListTask** | `listtask`
-**AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20th August 2021`
-**DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19th September 2021`
-**MarkDone** | `markdone INDEX` e.g. `markdone 2`
+**ListClient** | `list`
+**AddClient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
+**DeleteClient** | `delete INDEX`<br> e.g., `delete 3`
+**EditClient** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**FindClient** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
+###Task Commands
+
+Action | Format, Examples
+--------|------------------
+**ListTasks** | `listtask`
+**AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20 August 2021`
+**DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
+**EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19 September 2021`
+**MarkDone** | `markdone INDEX` e.g. `markdone 2`
+**CompletedTasks** | `completedtasks`
+**IncompleteTasks** | `incompletetasks`
+
+###Order Commands
+
+Action | Format, Examples
+--------|------------------
+**ListOrders** | `listorder`
+**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
+**DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
+**MarkOrder** | `markorder INDEX` e.g. `markorder 2`
+**CompletedOrders** | `completedorders`
+**IncompleteOrders** | `incompleteorders`
+**SortOrders** | `sortorders f/FIELD o/ORDERING` e.g. `sortorders f/date o/descending`
+**ViewTotalOrders** | `totalorders`
+
+###General Commands
+
+Action | Format
+--------|------------------
+**Clear** | `clear`
+**Help** | `help`

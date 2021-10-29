@@ -1,13 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -18,7 +18,10 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
     Predicate<Order> PREDICATE_SHOW_ALL_ORDERS = unused -> true;
-
+    Predicate<Task> PREDICATE_SHOW_INCOMPLETE_TASKS = t -> !t.getIsDone();
+    Predicate<Task> PREDICATE_SHOW_COMPLETED_TASKS = Task::getIsDone;
+    Predicate<Order> PREDICATE_SHOW_INCOMPLETE_ORDERS = o -> !o.getIsComplete();
+    Predicate<Order> PREDICATE_SHOW_COMPLETED_ORDERS = Order::getIsComplete;
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -162,7 +165,7 @@ public interface Model {
      */
     void setOrderBook(ReadOnlyOrderBook orderBook);
 
-    /** Returns the TaskList */
+    /** Returns the OrderBook */
     ReadOnlyOrderBook getOrderBook();
 
 
@@ -197,7 +200,7 @@ public interface Model {
 
     void markOrder(Order order);
 
-    void sortOrderList(Comparator<Order> comparator);
+    void sortOrderList(SortDescriptor sortDescriptor);
 
     /** Resets the order list to its regular ordering based on id */
     void resetOrderView();

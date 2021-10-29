@@ -22,7 +22,7 @@ title: Developer Guide
         - [Glossary](#glossary)
     - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
         - [Launch and shutdown](#launch-and-shutdown)
-        - [Deleting a person](#deleting-a-client)
+        - [Deleting a client](#deleting-a-client)
         - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -237,6 +237,17 @@ is below:
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Sort orders by amount feature
+
+#### Implementation
+
+The feature sorts all the orders in the addressbook by their amount in descending order. 
+
+To ensure that the orders can be sorted, both `Order` and its attribute `Amount` implement the `Comparable` interface. 
+Order uses its `id` field to produce the default ordering of the `OrderList`. 
+
+{to be completed}
 
 ### Display client's total orders feature
 
@@ -538,7 +549,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: A customer in the database, identified by their name. 
+* **Order**: A sales order from a customer scheduled for a target date.
+* **Task**: A task for the user that has a due date and a completion status.
 
 --------------------------------------------------------------------------------------------------------------------
 

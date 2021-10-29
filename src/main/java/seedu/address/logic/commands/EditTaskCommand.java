@@ -32,10 +32,10 @@ public class EditTaskCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_LABEL + "LABEL] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_TASK_TAG + "TASKTAG]...\n"
+            + "[" + PREFIX_TASK_TAG + "TASKTAG]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LABEL + "Order cloth "
-            + PREFIX_DATE + "19th September 2021"
+            + PREFIX_DATE + "19 September 2021"
             + PREFIX_TASK_TAG + "SO2100";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";

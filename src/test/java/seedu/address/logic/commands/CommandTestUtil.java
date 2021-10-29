@@ -54,8 +54,8 @@ public class CommandTestUtil {
 
     public static final String VALID_LABEL_ORDER = "Order Cloth";
     public static final String VALID_LABEL_SEW = "Sew buttons onto blazer";
-    public static final String VALID_DATE_SEPT = "19th September 2021";
-    public static final String VALID_DATE_OCT = "12th October 2021";
+    public static final String VALID_DATE_SEPT = "2021-09-19";
+    public static final String VALID_DATE_OCT = "2021-10-12";
     public static final String VALID_TASKTAG_ORDER = "SO1000";
     public static final String VALID_TASKTAG_SEW = "SO1";
 
@@ -104,6 +104,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_LABEL_DESC = " " + PREFIX_LABEL; // empty string not allowed for labels
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE; // empty string not allowed for date
+    //more invalid date formats to be added
     public static final String INVALID_TASKTAG_DESC = " " + PREFIX_TASK_TAG + "SOSO"; // wrong prefix and missing id
 
     public static final String INVALID_CUSTOMER_DESC = " " + PREFIX_CUSTOMER; // empty string not allowed for customers

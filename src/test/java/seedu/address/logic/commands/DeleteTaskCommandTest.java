@@ -21,7 +21,7 @@ import seedu.address.model.task.Task;
 
 class DeleteTaskCommandTest {
     private static final Task testTask = new Task(new Label("test label"),
-            new Date("test date"), new TaskTag("SO100"));
+            new Date("2001-10-12"), new TaskTag("SO100"));
 
     //I followed the style of AddCommand test instead of DeleteCommand test since I thought using a modelStub
     //was more stylistically appropriate for testing.

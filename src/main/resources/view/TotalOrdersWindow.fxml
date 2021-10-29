@@ -17,6 +17,7 @@
     <Scene>
       <stylesheets>
         <URL value="@Fonts.css" />
+        <URL value="@Extensions.css"/>
       </stylesheets>
 
       <HBox alignment="CENTER">

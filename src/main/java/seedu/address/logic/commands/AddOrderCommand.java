@@ -24,7 +24,7 @@ public class AddOrderCommand extends Command {
             + PREFIX_LABEL + "School uniform "
             + PREFIX_CUSTOMER + "Alice "
             + PREFIX_AMOUNT + "10.90 "
-            + PREFIX_DATE + "20th August 2021";
+            + PREFIX_DATE + "20 August 2021";
 
     public static final String MESSAGE_SUCCESS = "New order added: %1$s";
 
