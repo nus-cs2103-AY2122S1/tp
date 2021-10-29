@@ -8,7 +8,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
-    public static final String MESSAGE_HELP_NOT_EXIST = "Error: No instruction exist for the command %1$s";
+    public static final String MESSAGE_HELP_NOT_EXIST = "Error: No instruction exist for the command %1$s\n"
+            + "Please type in `help` for more assistance.";
 
     public static final String GENERAL_HELP_MESSAGE = "### Command Summary\n"
             + "This subsection provides a summary for all the commands used in Academy Directory\n"

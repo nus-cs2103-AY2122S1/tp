@@ -55,7 +55,6 @@ public class StudentCard extends UiPart<Region> {
     private ImageView image;
 
     private int displayedIndex;
-    private Label temp;
     private CommandBox commandBox;
 
     /**
@@ -77,10 +76,8 @@ public class StudentCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        // test new visual for this, will be decided later if have time. To
-        // revert back to the previous view, remove the below line.
+        // Studio Record, Assessment, and Telegram will be removed for better aesthetics
         container.getChildren().removeAll(studioRecord, assessment, telegram);
-        temp = new Label("Clicked");
         image.setImage(new Image("/images/student.png"));
         this.commandBox = commandBox;
     }
@@ -104,7 +101,7 @@ public class StudentCard extends UiPart<Region> {
     }
 
     /**
-     * View full information of the student in mention
+     * Execute the equivalent command of `view INDEX` by clicking on the student
      */
     @FXML
     public void viewFullInformation() {

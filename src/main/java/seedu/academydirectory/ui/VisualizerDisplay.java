@@ -29,6 +29,10 @@ public class VisualizerDisplay extends UiPart<Region> {
         handleAdditionalInfo(new AdditionalViewModel(AdditionalViewType.DEFAULT, AdditionalInfo.empty()));
     }
 
+    /**
+     * Set visualizer by adding creator inside the container.
+     * @param creator creator
+     */
     private void setVisualizer(Creator creator) {
         placeHolder.getChildren().clear();
         placeHolder.getChildren().add(creator.create());
@@ -41,19 +45,15 @@ public class VisualizerDisplay extends UiPart<Region> {
     public void handleAdditionalInfo(AdditionalViewModel additionalViewModel) {
         switch (additionalViewModel.getAdditionalViewType()) {
         case VIEW:
-            placeHolder.setVisible(true);
             setVisualizer(new ViewCreator(additionalViewModel.getAdditionalInfo()));
             break;
         case VISUALIZE:
-            placeHolder.setVisible(true);
             setVisualizer(new GraphCreator(additionalViewModel.getAdditionalInfo()));
             break;
         case HISTORY:
-            placeHolder.setVisible(true);
             setVisualizer(new HistoryCreator(additionalViewModel.getAdditionalInfo()));
             break;
         default:
-            placeHolder.setVisible(true);
             setVisualizer(new DefaultCreator(additionalViewModel.getAdditionalInfo()));
             break;
         }

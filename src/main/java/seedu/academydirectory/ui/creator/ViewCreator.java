@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.student.StudioRecord;
@@ -15,7 +16,7 @@ import seedu.academydirectory.model.tag.Tag;
 
 public class ViewCreator extends Creator {
 
-    private static final String FXML = "StudentFullInformation.fxml";
+    private static final String FXML = "creator/ViewCreator.fxml";
 
     private final Student student;
 
@@ -23,10 +24,10 @@ public class ViewCreator extends Creator {
     private StackPane placeHolder;
 
     @FXML
-    private Label name;
+    private Label fullName;
 
     @FXML
-    private FlowPane tagContainer;
+    private FlowPane tags;
 
     @FXML
     private ScrollPane participation;
@@ -50,15 +51,15 @@ public class ViewCreator extends Creator {
     public ViewCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
         this.student = (Student) additionalInfo.get();
-        name.setText(student.getName().fullName);
+        fullName.setText(student.getName().fullName);
+        fullName.setFont(Font.font(35));
         phone.setText("- Phone number: " + student.getPhone().toString());
         email.setText("- Email address: " + student.getEmail().value);
         telegram.setText("- Telegram handle: " + student.getTelegram().value);
-        Set<Tag> tags = student.getTags();
-        for (Tag tag : tags) {
-            Label checkBox = new Label(tag.tagName + " ");
-            checkBox.getStyleClass().add("cell_small_label");
-            tagContainer.getChildren().add(checkBox);
+        Set<Tag> tagsList = student.getTags();
+        for (Tag tag : tagsList) {
+            Label tagWrapper = new Label(tag.tagName + " ");
+            tags.getChildren().add(tagWrapper);
         }
         StudioRecord studioRecord = student.getStudioRecord();
         Label displayInfoPlaceHolder = new Label(studioRecord.getExtendedStudioRecords());

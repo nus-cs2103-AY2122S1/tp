@@ -140,10 +140,10 @@ https://stackoverflow.com/questions/65929630/after-adding-a-drop-shadow-to-a-lis
     -fx-text-fill: #CED1DC;
 }
 
-.cell_big_label #fullinfoname {
+.cell_full_name {
     -fx-font-family: "Arial";
     -fx-font-size: 25px;
-    -fx-text-fill: #C5CEF0;
+    -fx-text-fill: #CED1DC;
 }
 
 .cell_small_label {
@@ -369,4 +369,10 @@ https://stackoverflow.com/questions/65929630/after-adding-a-drop-shadow-to-a-lis
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#fullName .label {
+    -fx-text-fill: white;
+    -fx-font-size: 40pt;
+    -fx-font-family: "Open-Sans";
 }

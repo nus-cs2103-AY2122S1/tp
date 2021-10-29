@@ -1,6 +1,7 @@
 package seedu.academydirectory.logic;
 
 import seedu.academydirectory.logic.commands.Command;
+import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.HistoryCommand;
 import seedu.academydirectory.logic.commands.ViewCommand;
 import seedu.academydirectory.logic.commands.VisualizeCommand;
@@ -23,6 +24,9 @@ public enum AdditionalViewType {
         }
         if (command instanceof HistoryCommand) {
             return AdditionalViewType.HISTORY;
+        }
+        if (command instanceof HelpCommand) {
+            return AdditionalViewType.HELP;
         }
         return AdditionalViewType.DEFAULT;
     }

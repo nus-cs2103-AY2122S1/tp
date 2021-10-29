@@ -94,7 +94,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
 
         appMenu = new AppMenu(commandBox);
-        container.getChildren().add(appMenu.getRoot());
 
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), commandBox);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
@@ -139,6 +138,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Show the main window of the application
+     */
     void show() {
         primaryStage.show();
     }
