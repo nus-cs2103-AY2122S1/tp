@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_FIND_STUDENT_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -13,7 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
-import seedu.address.model.module.ModuleNameEqualsKeywordsPredicate;
+import seedu.address.model.module.ModuleNameEqualsKeywordPredicate;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.StudentIdEqualsKeywordPredicate;
@@ -55,9 +54,8 @@ public class FindStudentCommand extends Command {
 
         for (Module module : lastShownList) {
             if (module.getName().equals(moduleName)) {
-                String[] moduleNameKeywords = new String[]{moduleName.getModuleName()};
-                ModuleNameEqualsKeywordsPredicate predicate =
-                        new ModuleNameEqualsKeywordsPredicate(Arrays.asList(moduleNameKeywords));
+                ModuleNameEqualsKeywordPredicate predicate =
+                        new ModuleNameEqualsKeywordPredicate(moduleName.getModuleName());
                 model.updateFilteredModuleList(predicate);
                 findStudentFromModule(module, model);
                 return new CommandResult(String.format(MESSAGE_FIND_STUDENT_SUCCESS, studentId));
