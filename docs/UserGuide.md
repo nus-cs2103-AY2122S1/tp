@@ -149,7 +149,7 @@ Some example commands you can try:
 You can view the full list of commands.
 Additionally, if you want to see a step-by-step guide for all Socius commands, you can get the URL to the Socius user guide by using the help command.
 
-![help message](images/helpWindow.png)
+![help message](images/helpMessage.png)
 
 Format: **`help`**
 
