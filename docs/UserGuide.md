@@ -116,7 +116,7 @@ add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS
 Example:
 
 ```
-add n/John Doe te/@johndoe123 g/john-doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com a/John Street, Blk 12, #01-01
 ```
 
 <h3 id = "Delete"> </h3>
@@ -324,8 +324,7 @@ fav 1
 
 ## Setting a Contact as Unfavourite - `unfav`
 
-Helps to set a particular Student Contact as an Unfavourite, only if it
-was set as a Favourite earlier.
+Helps to set a particular Student Contact as an Unfavourite.
 
 Format:
 
