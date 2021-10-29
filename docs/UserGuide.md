@@ -53,6 +53,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 | Icon | Description |
 |---|---|
+|:information_source:| This icon indicates that some extra information is provided.|
 |:exclamation:| This icon indicates that the information provided is **important**. |
 
 ### Formatting used <a name="formatting"></a>
