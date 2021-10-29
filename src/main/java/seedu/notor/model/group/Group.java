@@ -101,8 +101,8 @@ public abstract class Group implements Notable {
 
     public UniqueList<Person> getPersons() {
         UniqueList<Person> persons = new UniqueList<>();
-        for(int i = 0; i < people.size(); i++) {
-               persons.add(people.get(i));
+        for (int i = 0; i < people.size(); i++) {
+            persons.add(people.get(i));
         }
         return persons;
     }
@@ -120,7 +120,7 @@ public abstract class Group implements Notable {
     }
 
     /**
-     * Remvoes the person from the group.
+     * Removes the person from the group.
      *
      * @param p The person object to be removed.
      * @throws ItemNotFoundException if Person is not found.

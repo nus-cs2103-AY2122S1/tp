@@ -1,5 +1,7 @@
 package seedu.notor.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -8,8 +10,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.SubGroup;
-
-import java.util.Comparator;
 
 
 /**

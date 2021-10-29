@@ -8,7 +8,7 @@ import java.util.List;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.logic.executors.person.PersonGroupListExecutor;
+import seedu.notor.logic.executors.group.PersonGroupListExecutor;
 
 /**
  * List all persons in a particular group.

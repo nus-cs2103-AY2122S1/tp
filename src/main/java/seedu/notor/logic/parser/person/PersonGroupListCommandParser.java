@@ -5,7 +5,7 @@ import seedu.notor.logic.commands.person.PersonGroupListCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCommand object. Note that this index is a group index
  */
 public class PersonGroupListCommandParser extends PersonCommandParser {
     public PersonGroupListCommandParser(String unparsedIndex) throws ParseException {

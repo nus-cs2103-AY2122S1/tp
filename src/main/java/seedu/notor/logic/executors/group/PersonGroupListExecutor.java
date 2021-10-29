@@ -1,4 +1,4 @@
-package seedu.notor.logic.executors.person;
+package seedu.notor.logic.executors.group;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,11 +6,13 @@ import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
+import seedu.notor.model.group.PeopleInGroupPredicate;
 
 /**
  * Executor for a PersonGroupListCommand.
  */
-public class PersonGroupListExecutor extends PersonExecutor {
+public class PersonGroupListExecutor extends GroupExecutor {
+    private PeopleInGroupPredicate peopleInGroupPredicate;
 
     public PersonGroupListExecutor(Index index) {
         super(index);
@@ -22,10 +24,11 @@ public class PersonGroupListExecutor extends PersonExecutor {
         if (!model.isSuperGroupList()) {
             throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
         }
+        peopleInGroupPredicate = new PeopleInGroupPredicate(super.getGroup());
         // TODO: Should we create a new method lol in model.
-        model.listPersonInGroup(super.index);
+        model.updateFilteredPersonList(peopleInGroupPredicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredGroupList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
