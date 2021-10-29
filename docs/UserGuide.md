@@ -369,9 +369,9 @@ Reverts your previous command which modified the task list of Uni-Fy.
 
 </div>
 
-### 4.10 Sorting the tasts : `sort`
+### 4.10 Sorting the tasks : `sort`
 
-Exits the program.
+Sorts the tasks in the task list of Uni-Fy.
 
 <div markdown="block" class="alert alert-primary">
 
