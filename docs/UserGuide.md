@@ -392,7 +392,7 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 ## Command summary
 
-###Client Commands
+### Client Commands
 
 Action | Format, Examples
 --------|------------------
@@ -402,7 +402,7 @@ Action | Format, Examples
 **EditClient** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **FindClient** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
-###Task Commands
+### Task Commands
 
 Action | Format, Examples
 --------|------------------
@@ -414,7 +414,7 @@ Action | Format, Examples
 **CompletedTasks** | `completedtasks`
 **IncompleteTasks** | `incompletetasks`
 
-###Order Commands
+### Order Commands
 
 Action | Format, Examples
 --------|------------------
@@ -427,7 +427,7 @@ Action | Format, Examples
 **SortOrders** | `sortorders f/FIELD o/ORDERING` e.g. `sortorders f/date o/descending`
 **ViewTotalOrders** | `totalorders`
 
-###General Commands
+### General Commands
 
 Action | Format
 --------|------------------
