@@ -46,7 +46,7 @@ public class LessonEditCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "ledit";
 
     public static final String COMMAND_PARAMETERS = "INDEX "
-            + "LESSON_INDEX\n"
+            + "LESSON_INDEX "
             + "[" + PREFIX_RECURRING + "[END_DATE]]"
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TIME + "HHmm-HHmm] "
