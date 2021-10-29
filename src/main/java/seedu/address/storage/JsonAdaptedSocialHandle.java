@@ -16,7 +16,7 @@ public class JsonAdaptedSocialHandle {
      */
     @JsonCreator
     public JsonAdaptedSocialHandle(@JsonProperty("platform") String platform, @JsonProperty("value") String value) {
-        this.platform = platform;
+        this.platform = SocialHandle.parsePlatform(platform);
         this.value = value;
     }
 
@@ -26,20 +26,15 @@ public class JsonAdaptedSocialHandle {
      * @param socialHandle A valid handle.
      */
     public JsonAdaptedSocialHandle(String socialHandle) {
-        if (socialHandle.isEmpty()) {
+        if (socialHandle.isEmpty() || !socialHandle.contains(":")) {
             this.platform = "";
             this.value = "";
             return;
         }
-        if (!socialHandle.contains(":")) {
-            this.platform = "";
-            this.value = socialHandle;
-            return;
-        }
         String[] s = socialHandle.split(":", 2);
         assert s.length == 2 : "Length of split string not 2:" + socialHandle;
-        this.platform = s[0];
-        this.value = s[1];
+        this.platform = SocialHandle.parsePlatform(s[0]);
+        this.value = s[1].strip();
     }
 
     /**
