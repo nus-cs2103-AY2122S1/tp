@@ -673,6 +673,31 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
+### Commands
+
+
+`GeneralCommands`
+* `ClearCommand`
+* `ExitCommand`
+* `HelpCommand`
+
+`PersonCommands`
+* `AddCommand`
+* `DeleteCommand`
+* `EditCommand`
+* `FindCommand`
+* `FindTagsCommand`
+* `ListCommand`
+
+`AppointmentCommands`
+* `AddAppCommand`
+* `DelAppCommand`
+* `EditAppCommand`
+* `FindAppCommand`
+* `ListAppCommand`
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

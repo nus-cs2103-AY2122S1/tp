@@ -40,20 +40,35 @@ It is most beneficial to Sales or Marketing staff who have to manage various app
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Reading the document
 
-<div markdown="block" class="alert alert-info">
+This purpose of this section is to provide you with definitions of syntax, data formats that would be used in 
+the next section [Features](#features) which contains detailed information on all the commands provided in PlaceBook.
 
-**:information_source: Notes about the command format:**<br>
+### Syntax and symbols
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+The table below contains definitions of syntax used in the command format.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+Syntax | Definition
+-------|-----------
+`n/, p/, etc...` | Words or letters followed by a slash refer to parameter tags. <br> e.g. `n/` refers to the name parameter.
+`UPPER_CASE` | Words in `UPPER_CASE` are the parameters to be supplied by the user. <br> e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+`[]` | Words in square brackets are optional. <br>  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+`...` | Items with `…`​ after them can be used multiple times including zero times.<br> e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+### Data format
+
+The table below contains definitions of data formats used in various parameters in the command format.
+
+Parameter | Data format
+----------|------------
+`INDEX` | Positive integers, e.g. 1,2,3, ...
+`DATETIME` | dd-MM-yyyy HHmm, e.g. 03-11-2021 1730 represents 3 November 2021 5.30 pm <br> **Notes:** The format uses the 24 hour clock formats.
+`EMAIL` | Emails should be of the format local-part@domain. e.g. Johnny@gmail.com
+`Others` | All other parameters will take any alphanumeric characters and special characters as input. 
+
+### Additional notes
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -63,17 +78,16 @@ It is most beneficial to Sales or Marketing staff who have to manage various app
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* If there is any error in command format, PlaceBook will notify you and show you the correct format, and provide an example.
+* Some commands will have some command specific errors, which will be elaborated on in [Features](#features), to help you troubleshoot.
+  
+--------------------------------------------------------------------------------------------------------------------
 
-</div>
+## Features
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
+## **Contact Features**
+This section contains information on features related to adding contacts to the contact list.
 
 ### Adding a person: `add`
 
@@ -88,6 +102,15 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+Error Messages:
+* Emails should be of the format local-part@domain...
+    * This error occurs when an invalid email format is entered. 
+    * Please enter the correct email format, e.g. Johnny@gmail.com.
+    
+* Tag names should be alphanumeric
+    * There may be some special characters in the tag input, e.g.!@#*
+    * There should be no spaces in tags, e.g. close friend, is invalid.
 
 ### Listing all persons : `list`
 
@@ -112,6 +135,18 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+Error Messages:
+* Emails should be of the format local-part@domain...
+    * This error occurs when an invalid email format is entered.
+    * Please enter the correct email format, e.g. Johnny@gmail.com.
+
+* Tag names should be alphanumeric
+    * There may be some special characters in the tag input, e.g.!@#*
+    * There should be no spaces in tags, e.g. close friend, is invalid.
+    
+* The person index provided is invalid.
+    * The index inputted may be out of the range of the displayed list indexes.
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -126,7 +161,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
 * `find alex` returns `Alex Yeoh`<br>
   
 ![result for 'find alex'](images/findAlexResult.png)
@@ -159,12 +193,26 @@ Deletes the specified person from the PlaceBook.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+Error messages:
+* The person index provided is invalid.
+    * The index inputted may be out of the range of the displayed list indexes.
+
+> **Note:** The index refers to the index number shown in the displayed person list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the PlaceBook.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Clearing all entries : `clear`
+
+Clears all contacts from PlaceBook.
+
+Format: `clear`
+
+## **Appointment Features**
+This section contains information on features related to adding appointments to the appointment list.
 
 ### Adding an appointment: `addApp`
 
@@ -175,8 +223,17 @@ appointment list.
 Format: `addApp id/INDEX[INDEX,INDEX,INDEX...] a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION`
 
 Examples:
-* `addApp id/1,2,3 a/Starbucks @ Raffles City start/2021-01-01 1400 end/2021-01-01 1500 ds/discuss marketing strategies`
+* `addApp id/1,5 a/Starbucks @ Raffles City start/14-12-2021 1400 end/14-12-2021 1500 ds/discuss marketing strategies`
 creates an appointment with Alex Yeoh and Irfan Ibrahim on 14-12-2021 at 1400 hrs to discuss marketing strategies
+
+Error messages:
+* The person index provided is invalid.
+    * The index inputted may be out of the range of the displayed list indexes.
+*  DateTime format should be "dd-MM-yyyy HHmm"
+    * A common error would be not putting a 0 before numbers less than 10, e.g. 3rd March 2022 9.05 am should be represented as 03-03-2022 0905.
+    * Ensure there is a space between the date section and the time section.
+* Clashing appointment Timings
+    * The appointment you are trying to add clashes with an existing appointment.
 
 ![result for 'addApp'](images/addAppResult.png)
 
@@ -191,8 +248,19 @@ Format: `editApp ai/INDEX a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION`
 * The persons in the appointment will remain the same.
 
 Examples:
-* `editApp ai/1 a/Starbucks @ Raffles City start/14-12-2021 1600 end/14-12-2021 1800 ds/discuss marketing strategies`
+* `editApp ai/1 a/Utown start/28-12-2021 1400 end/28-12-2021 1500 ds/discuss marketing strategies`
   edits the details of a prior created group appointment, changing it to meet at UTown on 28-12-2021 at 1400 hrs
+
+Error messages:
+* The person index provided is invalid.
+    * The index inputted may be out of the range of the displayed list indexes.
+* The appointment index provided is invalid.
+    * The index inputted may be out of the range of the displayed list indexes.
+*  DateTime format should be "dd-MM-yyyy HHmm"
+    * A common error would be not putting a 0 before numbers less than 10, e.g. 3rd March 2022 9.05 am should be represented as 03-03-2022 0905.
+    * Ensure there is a space between the date section and the time section.
+* Clashing appointment Timings
+    * The appointment you are trying to add clashes with an existing appointment.
 
 Before:
 ![result for 'editApp' before change](images/editAppResultBefore.png)
@@ -211,7 +279,11 @@ After:
 Format: delApp INDEX
 
 Examples:
-* `delApp 2` and the user selects 'OK' in the popup
+* `delApp 1` and the user selects 'OK' in the popup
+
+Error messages:
+* The appointment index provided is invalid.
+    * The index inputted may be out of the range of the displayed list indexes.
 
 Before:
 ![result for 'delApp' before change](images/delAppResultBefore.png)
@@ -239,12 +311,6 @@ Examples:
 * `findApp zoom` returns `Zoom` and `Zoom meeting`
 * `findApp meeting talk` returns `sales talk`, `urgent meeting`<br>
 
-### Clearing all entries : `clear`
-
-Clears all entries from the PlaceBook.
-
-Format: `clear`
-
 ### Listing all appointments : `listapp` 
 
 Show all the appointments in the appointment list currently.
@@ -252,6 +318,16 @@ List is sorted by Date, Time and Description baseline. Can optionally add a cond
 to sort List by, if an invalid condition is input, it will sort by baseline conditions
 
 Format: `listapp` Optional: `listapp Time` or `listapp Description`
+
+## **Other Features**
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
 
 ### Exiting the program : `exit`
 
