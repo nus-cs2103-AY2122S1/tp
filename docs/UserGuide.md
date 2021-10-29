@@ -470,6 +470,7 @@ Examples:
 :information_source: **Notes:**<br>
 
 * `KEYWORDS` must not be empty
+* Entering just whitespaces or no keywords after the `findE` command word will be flagged as an invalid command.
 * The search is case-insensitive. e.g. `oct` will match `OCT`
 * Partial words can be matched. e.g. `oct` will match `October`
 * `findE` **DOES NOT** filter lists the same way as `findC` and `findS`. `findE` filters based on the entire phrase instead of filtering based on whether an employee has fields that contains all keywords cumulatively.
@@ -490,6 +491,7 @@ Example:
 :information_source: **Notes:**<br>
 
 * At least one `KEYWORD` must be provided
+* Entering just whitespaces or no keywords after the `findS` command word will be flagged as an invalid command.
 * The search is case-insensitive. e.g. `oct` will match `OCT`
 * Partial words can be matched. e.g. `oct` will match `October`
 * Only suppliers that contain **all** provided keywords will be displayed.
