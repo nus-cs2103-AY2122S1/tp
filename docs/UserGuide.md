@@ -242,13 +242,11 @@ Adds a lesson to contHACKS.
 Format: `addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`
 
 * All the parameters are **compulsory** except for remark
-
-* Day is in ISO week format <br> e.g. 2 equals Tuesday, 5 equals Friday
-
-* Start time and end time are in HH:MM format
+* Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
+* Start time input is only accepted in the `HH:mm` format <br> e.g. `09:00`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Module code and lesson code are seperated by white spaces. The lesson start time and end time are seperated by white spaces as well.
+Module code and lesson code are seperated by white spaces. Lesson start time and end time are seperated by white spaces as well.
 </div>
 
 Examples:
@@ -261,13 +259,12 @@ Command alias: `ac`
 
 #### Editing a lesson: `editc` <a name="editc"></a>
 
-Updates the information of a lesson.
-
 Edits the lesson at the specified index in the currently viewed list.
-* At least one of the fields must be provided.
-* Existing values of the fields specified will be erased and updated to the input values
 
 Format: `editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`
+
+* At least one of the fields must be provided.
+* Existing values of the fields specified will be erased and updated to the input values
 
 Examples:
 * `editc 1 m/CS2100 B05`: Edits the module of the 1st lesson to be `CS2100 B05`
@@ -301,17 +298,17 @@ Command aliases: `delc` `rmc` `dc`
 
 #### Finding a lesson / lessons: `findc` <a name="findc"></a>
 
-Finds a contact by specifying the module code(s)/lesson day(s)/lesson start time(s).
+Finds a contact by specifying the module code(s)/day(s)/start time(s).
 
-Format: `findc m/MODULE_CODE(S)`/`findc d/LESSON_DAY(S)`/`findc t/LESSON_START_TIME(S)`
+Format: `findc m/MODULE_CODE(S)`/`findc d/DAY(S)`/`findc t/START_TIME(S)`
 * Can only search using one prefix at a time <br> i.e. You cannot perform `findc m/CS2040S d/2`
 * The search is case-insensitive <br> e.g `cs2040` will match `CS2040`
-* Lesson day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
-* Lesson start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
+* Day input is only accepted in integer form <br> e.g. `1` for Monday, `7` for Sunday
+* Start time input is only accepted in the `HH:mm` format <br> e.g. `15:00` `09:00`
 * If multiple keywords are specified for the search, any lesson that matches at least one of the keywords will be returned <br>
   e.g. `findc m/CS2030 CS2040` will return lessons that are of module `CS2030` or `CS2040` <br>
   e.g. `findc d/2 3` will return lessons that are on Tuesday or Wednesday <br>
-  e.g. `findc t/10:00 15:00` will return lessons that start at either words `10:00` or `15:00`
+  e.g. `findc t/10:00 15:00` will return lessons that start at either timings `10:00` or `15:00`
 
 Examples:
 * `findc m/CS2030 CS2040`: Search lessons of modules `CS2030` or `CS2040`
