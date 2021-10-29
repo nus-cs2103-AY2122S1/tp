@@ -225,36 +225,31 @@ Step 3. If the parameters entered by the user is valid, the application will ret
 
 The following sequence diagram show how the find operation works:
 
-![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png)
+![ViewTaskListSequenceDiagram](images/FindSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the parameters provided by the user is of non-integer form, ParseException will be thrown and an error message providing the correct format will be shown. Also, if the provided INDEX does not exists within the indices of the displayed person list, CommandException is thrown and an error message that warns of invalid INDEX will be shown.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user does not provide any keywords or uses an invalid flag, ParseException will be thrown and an error message providing the correct format will be shown.
 
-The following activity diagram summarises what happens when a user executes a `cat` command:
+The following activity diagram summarises what happens when a user executes a `find -n Alex` command:
 
-![ViewTaskListActivityDiagram](images/ViewTaskListActivityDiagram.png)
+![ViewTaskListActivityDiagram](images/FindActivityDiagram.png)
 
 #### Design consideration:
 
-##### Aspect: How to display the task list on the GUI
+##### Aspect: How to find based on the keywords
 
-- **Alternative 1 (current choice):** Have two side-by-side panels, left for person list and right for task list.
+- **Alternative 1 (current choice):** Check that the order of the keywords matches the order they appear in for any person's attribute (e.g. name) and whether each separate word of a person's attribute starts with the keywords, ignoring case.
 
-    - Pros: User is able to concurrently view more information.
+    - Pros: The user is able to use abbreviations for certain attributes to find people and not have to worry about exact matching
     - Cons:
-        - More work to create and optimize the split panel.
-        - Content wrapping can was tricky since there is a slider in the middle to resize either panels.
+        - The user can no longer find multiple people (using different keywords) and even if at least one of the keywords matches a person's attribute, it will not display the person if the keywords are out of order and do not all appear in the person's attribute.
 
-- **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
+- **Alternative 2:** Use exact matching and check if any of the keywords matches a person's attribute
 
-    - Pros: More convenient to implement.
+    - Pros: Easier to implement.
 
     - Cons:
 
-        - `list` has to be executed again if user wants to redirect back to the person list (extra overhead
-
-          which reduces efficiency).
-
-        - Lesser view of information.
+        - Keywords provided must be exact, so even if the user is missing one letter, it will not display the expected person
 
 ### \[Proposed\] Undo/redo feature
 
