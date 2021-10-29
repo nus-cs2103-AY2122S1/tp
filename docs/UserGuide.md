@@ -271,25 +271,25 @@ Finds all students whose fields match the given keyword(s), based on the specifi
 
 Fields that you can search for are:
 
-| Field            | Parameter                   | Result                                                  |
-|------------------|-----------------------------|---------------------------------------------------------|
-| Student Name     | n/NAME_KEYWORDS             | Students whose name contain the keywords                |
-| Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contain the keywords             |
-| Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contain the keywords        |
-| Student Email    | e/EMAIL_KEYWORDS            | Students whose email contain the keywords               |
-| Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contain the keywords |
-| Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contain the keywords        |
-| School           | sch/SCHOOL_KEYWORDS         | Students whose school contain the keywords              |
-| Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contain the keywords     |
-| Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contain the keywords      |
-| Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contain the keywords         |
-| Tags             | t/TAG                           | Students who have the specified tag                 |
-| Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students with lessons that match the keywords       |
-| Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date              |
-| Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range        |
-| Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date |
-| Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword|
-| Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contain the keywords    |                                           |
+Field            | Parameter                   | Result                                              
+------------------|-----------------------------|---------------------------------------------------------
+Student Name     | n/NAME_KEYWORDS             | Students whose name contains all the keywords
+Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contains all the keywords
+Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contains all the keywords
+Student Email    | e/EMAIL_KEYWORDS            | Students whose email contains all the keywords
+Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contains all the keywords
+Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contains all the keywords
+School           | sch/SCHOOL_KEYWORDS         | Students whose school contains all the keywords
+Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contains all the keywords
+Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contains all the keywords
+Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contains all the keywords
+Tags             | t/TAG                           | Students who have the specified tag
+Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students who have lessons with subject that contains all the keywords
+Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date
+Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range
+Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date
+Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
+Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contains all the keywords
 
 Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS]`
 
