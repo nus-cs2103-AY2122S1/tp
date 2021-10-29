@@ -28,6 +28,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPersonCommandParser implements Parser<EditPersonCommand> {
 
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditPersonCommand
      * and returns an EditPersonCommand object for execution.
@@ -66,7 +68,7 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
             throw new ParseException(EditPersonCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditPersonCommand(index, editPersonDescriptor);
+        return new EditPersonCommand(index, editPersonDescriptor, MESSAGE_EDIT_PERSON_SUCCESS);
     }
 
     /**

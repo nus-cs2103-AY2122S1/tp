@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalLessons.MON_16_18_MATH;
 import static seedu.address.testutil.TypicalLessons.TUE_16_18_ENGLISH;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ class LessonTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null));
     }
 
     @Test
@@ -53,8 +52,8 @@ class LessonTest {
 
     @Test
     void testEquals_sameDetails_returnsTrue() {
-        Lesson l1 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5), new ArrayList<>());
-        Lesson l2 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5), new ArrayList<>());
+        Lesson l1 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5));
+        Lesson l2 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5));
         assertTrue(l1.equals(l2));
     }
 }

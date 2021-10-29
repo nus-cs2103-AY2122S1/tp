@@ -35,8 +35,7 @@ public class ViewPersonCommandTest {
         String expectedMessage = String.format(ViewPersonCommand.MESSAGE_VIEW_PERSON_SUCCESS, personToView);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        //expectedModel.viewPerson(personToView);
-
+        expectedModel.setPersonToView(personToView);
         assertCommandSuccess(viewPersonCommand, model, expectedMessage, expectedModel);
     }
 

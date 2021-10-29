@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.persons.EditPersonCommandParser.MESSAGE_EDIT_PERSON_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -17,6 +19,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.groups.ViewGroupCommand;
 import seedu.address.logic.commands.persons.AddPersonCommand;
 import seedu.address.logic.commands.persons.DeletePersonCommand;
 import seedu.address.logic.commands.persons.EditPersonCommand;
@@ -24,6 +27,7 @@ import seedu.address.logic.commands.persons.EditPersonCommand.EditPersonDescript
 import seedu.address.logic.commands.persons.FindPersonCommand;
 import seedu.address.logic.commands.persons.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.groups.GroupCommandsParser;
 import seedu.address.logic.parser.persons.PersonCommandsParser;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -60,7 +64,10 @@ public class AddressBookParserTest {
     public void parseCommand_view() throws Exception {
         ViewPersonCommand command = (ViewPersonCommand) parser.parseCommand(PersonCommandsParser.COMMAND_WORD + " "
                 + ViewPersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        ViewGroupCommand groupCommand = (ViewGroupCommand) parser.parseCommand(GroupCommandsParser.COMMAND_WORD + " "
+                + ViewGroupCommand.COMMAND_WORD + " " + INDEX_FIRST_GROUP.getOneBased());
         assertEquals(new ViewPersonCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new ViewGroupCommand(INDEX_FIRST_GROUP), groupCommand);
     }
 
     @Test
@@ -70,7 +77,7 @@ public class AddressBookParserTest {
         EditPersonCommand command = (EditPersonCommand) parser.parseCommand(PersonCommandsParser.COMMAND_WORD + " "
                 + EditPersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditPersonCommand(INDEX_FIRST_PERSON, descriptor, MESSAGE_EDIT_PERSON_SUCCESS), command);
     }
 
     @Test

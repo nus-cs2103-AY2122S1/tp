@@ -40,7 +40,12 @@
           </padding>
         </StackPane>
 
-
+        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                   minHeight="80" prefHeight="80" maxHeight="100">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+        </StackPane>
 
         <BorderPane>
 
@@ -79,7 +84,7 @@
           </center>
 
           <right>
-            <StackPane fx:id="resultDisplayPlaceholder" maxWidth = "230" prefWidth="230" minHeight="400" prefHeight="400" styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <StackPane fx:id="viewingPanelPlaceholder" maxWidth = "300" prefWidth="250" minHeight="400" prefHeight="400" styleClass="pane-with-border" VBox.vgrow="NEVER">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>

@@ -17,6 +17,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -115,6 +117,25 @@ public class ModelManagerTest {
     @Test
     public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void setViewingType_changeViewingType_updatesObservableFromGetViewingType() {
+        ObservableValue<ViewingType> observableValue = modelManager.getViewingType();
+        modelManager.setViewingType(ViewingType.SCHEDULE);
+        final boolean[] isUpdatedHolder = new boolean[] {false};
+        ChangeListener<? super ViewingType> changeListener = new ChangeListener<ViewingType>() {
+            @Override
+            public void changed(ObservableValue<? extends ViewingType> observable,
+                                ViewingType oldValue, ViewingType newValue) {
+                isUpdatedHolder[0] = true;
+            }
+        };
+        observableValue.addListener(changeListener);
+        assertFalse(isUpdatedHolder[0]);
+        modelManager.setViewingType(ViewingType.PERSON);
+        assertTrue(isUpdatedHolder[0]);
+
     }
 
     @Test

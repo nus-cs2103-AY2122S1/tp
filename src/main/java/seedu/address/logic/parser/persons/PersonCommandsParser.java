@@ -12,8 +12,6 @@ import seedu.address.logic.commands.persons.AddPersonCommand;
 import seedu.address.logic.commands.persons.DeletePersonCommand;
 import seedu.address.logic.commands.persons.EditPersonCommand;
 import seedu.address.logic.commands.persons.FindPersonCommand;
-import seedu.address.logic.commands.persons.PersonAddLessonCommand;
-import seedu.address.logic.commands.persons.PersonRemoveLessonCommand;
 import seedu.address.logic.commands.persons.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -56,14 +54,20 @@ public class PersonCommandsParser {
         case FindPersonCommand.COMMAND_WORD:
             return new FindPersonCommandParser().parse(arguments);
 
-        case PersonAddLessonCommand.COMMAND_WORD:
+        case PersonAddLessonParser.COMMAND_WORD:
             return new PersonAddLessonParser().parse(arguments);
 
-        case PersonRemoveLessonCommand.COMMAND_WORD:
+        case PersonRemoveLessonParser.COMMAND_WORD:
             return new PersonRemoveLessonParser().parse(arguments);
 
         case ViewPersonCommand.COMMAND_WORD:
             return new ViewPersonCommandParser().parse(arguments);
+
+        case PersonAddExamParser.COMMAND_WORD:
+            return new PersonAddExamParser().parse(arguments);
+
+        case PersonRemoveExamParser.COMMAND_WORD:
+            return new PersonRemoveExamParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

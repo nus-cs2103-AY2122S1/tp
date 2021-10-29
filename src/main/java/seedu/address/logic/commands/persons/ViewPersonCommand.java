@@ -10,11 +10,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ViewingType;
 import seedu.address.model.person.Person;
 
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Views a person identified using it's displayed index from the address book.
  */
 public class ViewPersonCommand extends Command {
 
@@ -43,6 +44,8 @@ public class ViewPersonCommand extends Command {
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        model.setPersonToView(personToView);
+        model.setViewingType(ViewingType.PERSON);
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, personToView));
     }
 

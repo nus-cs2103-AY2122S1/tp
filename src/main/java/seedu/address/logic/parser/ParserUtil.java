@@ -10,6 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.TUESDAY;
 import static seedu.address.logic.parser.CliSyntax.WEDNESDAY;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,6 +23,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Timeslot;
 import seedu.address.model.person.Address;
@@ -39,6 +43,9 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DAY = "Day is not recognized, it should be the short form of each day. "
             + String.format("%s,%s,%s for example.", MONDAY, WEDNESDAY, SATURDAY);
     public static final String MESSAGE_INVALID_TWO_INDICES = "Exactly two non-zero unsigned integers expected";
+    public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm";
+    public static final String INVALID_DATE_TIME_FORMAT = "Date time format not recognized, please use: "
+            + DATE_TIME_FORMAT;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -286,5 +293,42 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_DAY);
         }
         return DayOfWeek.of(dayNum);
+    }
+
+    /**
+     * Local date time parser
+     * @param str string to parse, it will be trimmed
+     * @return LocalDateTime represented by string
+     * @throws ParseException if date_time_format is not valid
+     */
+    public static LocalDateTime parseLocalDateTime(String str) throws ParseException {
+        requireNonNull(str);
+        str = str.trim();
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+            return dateTime;
+        } catch (DateTimeParseException p) {
+            System.out.println(p.getMessage());
+            throw new ParseException(INVALID_DATE_TIME_FORMAT);
+        }
+    }
+
+    public static String localDateTimeAsString(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static GroupName parseGroupName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!GroupName.isValidName(trimmedName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupName(trimmedName);
     }
 }

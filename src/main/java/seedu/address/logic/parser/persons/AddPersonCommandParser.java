@@ -8,8 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.logic.commands.persons.AddPersonCommand;
@@ -53,10 +55,13 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<UniqueId> assignedTaskIds = new HashSet<>(); // add command does not allow assigning tasks straight away
+        Map<UniqueId, Boolean> tasksCompletion = new HashMap<>(); // add command does not assign tasks straight away
         NoOverlapLessonList noLessons = new NoOverlapLessonList();
         List<Exam> noExams = new ArrayList<>();
+        Set<UniqueId> noGroups = new HashSet<>();
         // default empty lessons list
-        Person person = new Person(name, phone, email, address, tagList, assignedTaskIds, noLessons, noExams);
+        Person person = new Person(name, phone, email, address, tagList, assignedTaskIds, tasksCompletion,
+                noLessons, noExams, noGroups);
 
         return new AddPersonCommand(person);
     }

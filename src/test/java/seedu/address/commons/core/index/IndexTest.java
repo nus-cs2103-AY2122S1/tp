@@ -38,6 +38,20 @@ public class IndexTest {
     }
 
     @Test
+    public void createIsGreaterThan() {
+        // check equality using the same base
+        assertEquals(true, Index.fromZeroBased(10).isGreaterThan(Index.fromZeroBased(0)));
+        assertEquals(false, Index.fromZeroBased(10).isGreaterThan(Index.fromZeroBased(10)));
+    }
+
+    @Test
+    public void createIsLesserThan() {
+        // check equality using the same base
+        assertEquals(false, Index.fromZeroBased(10).isLesserThan(Index.fromZeroBased(10)));
+        assertEquals(true, Index.fromZeroBased(0).isLesserThan(Index.fromZeroBased(10)));
+    }
+
+    @Test
     public void equals() {
         final Index fifthPersonIndex = Index.fromOneBased(5);
 
@@ -56,5 +70,25 @@ public class IndexTest {
 
         // different index -> returns false
         assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void compare() {
+        final Index firstIndex = Index.fromOneBased(5);
+        final Index secondIndex = Index.fromOneBased(6);
+
+        Index.SortDescending sortDescending = new Index.SortDescending();
+
+        assertEquals(-1, sortDescending.compare(secondIndex, firstIndex));
+        assertEquals(1, sortDescending.compare(firstIndex, secondIndex));
+        assertEquals(0, sortDescending.compare(firstIndex, firstIndex));
+    }
+
+    @Test
+    public void hashCode_sameNumber_sameHashCode() {
+        Index oneIndex1 = Index.fromOneBased(1);
+        Index oneIndex2 = Index.fromOneBased(1);
+
+        assertEquals(oneIndex1.hashCode(), oneIndex2.hashCode());
     }
 }

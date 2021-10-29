@@ -23,9 +23,12 @@ import seedu.address.logic.commands.persons.EditPersonCommand;
 import seedu.address.logic.commands.tasks.EditTaskCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
@@ -55,6 +58,9 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_QUIZ2 = "Maths Quiz 2";
     public static final String VALID_DEADLINE_QUIZ1 = "2021-11-10";
     public static final String VALID_DEADLINE_QUIZ2 = "2021-11-20";
+    public static final String VALID_DATE_TIME_1 = "2021-02-03 10:00";
+    public static final String VALID_DATE_TIME_2 = "2021-12-20 23:43";
+    public static final String VALID_GROUP_TUTORIAL = "Tutorial";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -76,6 +82,9 @@ public class CommandTestUtil {
             + VALID_TIME_14;
     public static final String DAY_MON = " " + PREFIX_DAY + VALID_DAY_MON;
     public static final String DAY_TUE = " " + PREFIX_DAY + VALID_DAY_TUE;
+    public static final String DATE_TIME_DESC1 = " " + PREFIX_DAY + VALID_DATE_TIME_1;
+    public static final String DATE_TIME_DESC2 = " " + PREFIX_DAY + VALID_DATE_TIME_2;
+    public static final String GROUP_DESC_TUTORIAL = " " + PREFIX_NAME + VALID_GROUP_TUTORIAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -86,6 +95,8 @@ public class CommandTestUtil {
     public static final String INVALID_TIMESLOT_DESC = " " + PREFIX_START_TIME + "1345" + " " + PREFIX_END_TIME
             + " 0001";
     public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "Tuesday";
+    public static final String INVALID_DATE_TIME_DESC = " " + PREFIX_DAY + "1999/19/10";
+    public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "!@#AD";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -145,7 +156,6 @@ public class CommandTestUtil {
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
-
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
@@ -173,12 +183,37 @@ public class CommandTestUtil {
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
-
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitDescription = task.getDescription().description.split("\\s+");
+        model.updateFilteredTaskList(new TaskNameContainsKeywordsPredicate(Arrays.asList(splitDescription[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the group at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showGroupAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
+        Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
+        final String[] splitName = group.getName().name.split("\\s+");
+        model.updateFilteredGroupList(new GroupNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredGroupList().size());
     }
 
 }
