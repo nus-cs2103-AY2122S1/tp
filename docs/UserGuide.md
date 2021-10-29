@@ -10,7 +10,42 @@ than from traditional GUI apps. The application and guide are based on AB3 with 
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
 
 * Table of Contents
-{:toc}
+    - [Quick Start](#quick-start)
+    - [Features](#features)
+        - [Viewing help : `help`](#viewing-help--help)
+        - [Client Commands](#client-commands)
+            - [Listing all clients : `list`](#listing-all-clients--list)
+            - [Adding a client : `add`](#adding-a-client--add)
+            - [Deleting a client : `delete`](#deleting-a-client--delete)  
+            - [Editing a client : `edit`](#editing-a-client--edit)
+            - [Locating clients by name : `find`](#locating-clients-by-name--find)
+        - [Task Commands](#task-commands)
+            - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
+            - [Adding a task : `addtask`](#adding-a-task--addtask)
+            - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
+            - [Editing a task : `edittask`](#editing-a-task--edittask)
+            - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
+            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
+            - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
+            - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
+        - [Order Commands](#order-commands)
+            - [Listing all orders : `listorder`](#listing-all-orders--listorder)
+            - [Adding an order : `addorder`](#adding-an-order--addorder)
+            - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
+            - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
+            - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords--findorder)
+            - [Listing completed orders : `completedorders`](#listing-completed-orders--completedorders)
+            - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders--incompleteorders)
+            - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
+            - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
+        - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+        - [Exiting the program : `exit`](#exiting-the-program--exit)
+        - [Saving the data](#saving-the-data)
+        - [Editing the data file](#editing-the-data-file)
+    - [FAQ](#faq)
+    - [Command Summary](#command-summary)
+            
+            
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -29,7 +64,7 @@ Some example commands you can try:
    * **`list`**: List all clients.
    * **`add`**`n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
    * **`delete`**`2`: Deletes the 2nd client shown in the current client list.
-   * **`clear`**: Deletes all clients.
+   * **`clear`**: Deletes all existing data.
    * **`exit`**: Exits the app.
 6. Refer to the [Features](#features) below to learn more about the commands.
 
@@ -59,7 +94,7 @@ Some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Date inputs should follow one of the formats below
+* Date inputs should follow one of the formats below.
 
   Format | Example
   --------|------------------
@@ -72,8 +107,6 @@ Some example commands you can try:
 
 </div>
 
-## Person Commands
-
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -82,48 +115,71 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-## Person Commands
+## Client Commands
 
-### Adding a person: `add`
+<div markdown="block" class="alert alert-info">
 
-Adds a person to the application.
+**:information_source: Notes about the client commands:**<br>
+
+* A male's body measurements should be of the format height_waist_shoulder in cm, and it should not be blank.
+* A female's body measurements should be of the format height_waist_shoulder_bust in cm, and it should not be blank.
+
+</div>
+
+### Listing all clients : `list`
+
+Shows a list of all clients in the application.
+
+Format: `list`
+
+### Adding a client : `add`
+
+Adds a client to the application.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0). The remark is also optional.
+A client can have any number of tags (including 0). The remark is also optional.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
 * `add n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F d/160_85_35_81`
 
-### Listing all persons : `list`
+### Deleting a client : `delete`
 
-Shows a list of all persons in the application.
+Deletes the specified client from the application.
 
-Format: `list`
+Format: `delete INDEX`
 
-### Editing a person : `edit`
+* Deletes the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
-Edits an existing person in the application.
+Examples:
+* `list` followed by `delete 2` deletes the 2nd client in the application.
+* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+
+### Editing a client : `edit`
+
+Edits an existing client in the application.
 
 Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating clients by name : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -131,27 +187,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the application.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the application.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ## Task Commands
 
@@ -197,23 +239,6 @@ Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd task in the application.
 * `findtask sew` followed by `deletetask 1` deletes the 1st task in the results of the `findtask` command.
 
-### Finding a task: `findtask`
-
-Finds tasks whose label, date or task tag contain any of the given keywords.
-
-Format: `findtask KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g. `orders` will match `Orders`
-* The order of the keywords does not matter. e.g. `Cloth Orders` will match `Orders Cloth`
-* Only full words will be matched. e.g. `Order` will not match `Orders`
-* Tasks matching at least one keyword will be returned (i.e. OR search). e.g. `Order clothes` will return `Order scissors`, `Sew clothes`.
-
-Examples:
-* `findtask buttons` returns `order buttons` and `deliver red buttons`
-* `findtask SO1` returns order with id of `SO1`
-
-![result for 'findtask SO1'](images/findtaskSO1.png)
-
 ### Editing a task : `edittask`
 
 Edits an existing task in the application.
@@ -239,15 +264,32 @@ Format: `marktask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
+* `listtask` followed by `deletetask 2` deletes the 2nd client in the application.
 
-### Listing completed tasks: `completedtasks`
+### Finding tasks by keywords : `findtask`
+
+Finds tasks whose label, date or task tag contain any of the given keywords.
+
+Format: `findtask KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `orders` will match `Orders`
+* The order of the keywords does not matter. e.g. `Cloth Orders` will match `Orders Cloth`
+* Only full words will be matched. e.g. `Order` will not match `Orders`
+* Tasks matching at least one keyword will be returned (i.e. OR search). e.g. `Order clothes` will return `Order scissors`, `Sew clothes`.
+
+Examples:
+* `findtask buttons` returns `order buttons` and `deliver red buttons`
+* `findtask SO1` returns task with task tag of `SO1`
+
+![result for 'findtask SO1'](images/findtaskSO1.png)
+
+### Listing completed tasks : `completedtasks`
 
 List all the completed tasks.
 
 Format: `completedtasks`
 
-### Listing incomplete tasks: `incompletetasks`
+### Listing incomplete tasks : `incompletetasks`
 
 List all the incomplete tasks.
 
@@ -257,11 +299,11 @@ Format: `incompletetasks`
 
 ## Order Commands
 
-### Listing all orders: `listorder`
+### Listing all orders : `listorder`
 
 Shows a list of all orders in the application.
 
-### Adding an order: `addorder`
+### Adding an order : `addorder`
 
 Adds an order to the application.
 
@@ -271,7 +313,7 @@ Examples:
 * `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
 * `addorder l/school uniform c/John a/15.00 d/15 October 2021`
 
-### Deleting an order: `deleteorder`
+### Deleting an order : `deleteorder`
 
 Deletes an order from the application.
 
@@ -283,27 +325,42 @@ Format: `deleteorder INDEX`
 
 Note that this will also delete all tasks tagged to the deleted order.
 
-### Marking an order as complete: `markorder`
+### Marking an order as complete : `markorder`
 
 Format: `markorder INDEX`
 * Marks the order at the specified `INDEX` as completed
 * The index refers to the index number shown in the displayed order list.
 * The index must be a positive integer 1, 2, 3
 
+### Finding orders by keywords : `findorder`
 
-### Listing completed orders: `completedorders`
+Finds orders whose customer, label, date or sales id contain any of the given keywords.
+
+Format: `findorder KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `green` will match `Green`
+* The order of the keywords does not matter. e.g. `Blue Blazer` will match `Blazer Blue`
+* Only full words will be matched. e.g. `Blazer` will not match `Blazers`
+* Orders matching at least one keyword will be returned (i.e. OR search). e.g. `Blue Blazer` will return `Blue Shirt`, `Black Blazer`.
+
+Examples:
+* `findorder blue` returns `blue blazer` and `blue shirt`
+* `findorder SO1` returns order with id of `SO1`
+
+
+### Listing completed orders : `completedorders`
 
 List all the completed orders.
 
 Format: `completedorders`
 
-### Listing incomplete orders: `incompleteorders`
+### Listing incomplete orders : `incompleteorders`
 
 List all the incomplete orders.
 
 Format: `incompleteorders`
 
-### Sorting orders: `sortorders`
+### Sorting orders : `sortorders`
 
 Sorts all orders based on a chosen field and arrangement.
 
@@ -317,11 +374,12 @@ Format: `sortorders f/FIELD o/ORDERING`
   * Ascending, identified with an "asc" or "ascending".
   * Descending, identified with a "desc" or "descending".
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
-Adding / Deleting an order reverts the list to the default ordering.</div>
+<div markdown="span" class="alert alert-primary">
 
-<div markdown="span" class="alert alert-primary">:information_source: **Note:**
-The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
+**:information_source: Note:** <br>
+* Adding / Deleting an order reverts the list to the default ordering.
+* The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
+
 </div>
 
 Examples:
@@ -330,13 +388,13 @@ Examples:
 * `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 * `sortorders f/amount` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 
-### Viewing total orders: `totalorders`
+### Viewing total orders : `totalorders`
 
-Shows the total orders for each person in the application.
+Shows the total orders for each client in the application.
 
 <div markdown="block" class="alert alert-info">
-:information_source: The total orders displayed are based on the persons in the application.
-If the customer of an order cannot be found among the persons, the order will not be shown.
+:information_source: The total orders displayed are based on the clients in the application.
+If the customer of an order cannot be found among the clients, the order will not be shown.
 </div>
 
 ![TotalOrdersWindow](images/TotalOrdersWindow.png)
@@ -394,7 +452,7 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 ## Command summary
 
-###Client Commands
+### Client Commands
 
 Action | Format, Examples
 --------|------------------
@@ -402,36 +460,39 @@ Action | Format, Examples
 **AddClient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
 **DeleteClient** | `delete INDEX`<br> e.g., `delete 3`
 **EditClient** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**FindClient** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindClients** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
-###Task Commands
+### Task Commands
 
 Action | Format, Examples
 --------|------------------
 **ListTasks** | `listtask`
-**AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20 August 2021`
-**DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19 September 2021`
-**MarkDone** | `markdone INDEX` e.g. `markdone 2`
+**AddTask** | `addtask l/LABEL d/DATE [t/TASKTAG]` e.g., `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1`
+**DeleteTask** | `deletetask INDEX` e.g., `deletetask 1`
+**EditTask** | `edittask INDEX l/LABEL d/DATE [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
+**MarkTask** | `marktask INDEX` e.g., `marktask 2`
+**FindTasks** | `findtask KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtask buttons`
 **CompletedTasks** | `completedtasks`
 **IncompleteTasks** | `incompletetasks`
 
-###Order Commands
+### Order Commands
 
 Action | Format, Examples
 --------|------------------
 **ListOrders** | `listorder`
-**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
-**DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
-**MarkOrder** | `markorder INDEX` e.g. `markorder 2`
+**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g., `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
+**DeleteOrder** | `deleteorder INDEX` e.g., `deleteorder 1`
+**MarkOrder** | `markorder INDEX` e.g., `markorder 2`
+**FindOrders** | `findorder KEYWORD [MORE_KEYWORDS]`<br> e.g., `findorder blazer`
 **CompletedOrders** | `completedorders`
 **IncompleteOrders** | `incompleteorders`
-**SortOrders** | `sortorders f/FIELD o/ORDERING` e.g. `sortorders f/date o/descending`
+**SortOrders** | `sortorders f/FIELD [o/ORDERING]` e.g., `sortorders f/date o/descending`
 **ViewTotalOrders** | `totalorders`
 
-###General Commands
+### General Commands
 
 Action | Format
 --------|------------------
-**Clear** | `clear`
 **Help** | `help`
+**Clear** | `clear`
+**Exit** | `exit`

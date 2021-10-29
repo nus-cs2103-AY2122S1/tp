@@ -7,7 +7,7 @@ public class TaskTag {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Task tags names should either be 'General' or "
-                    + "have prefix 'SO' followed by at least 1 digit.";
+                    + "have prefix 'SO' followed by at least 1 digit";
     public static final String VALIDATION_REGEX = "SO[\\d]+|General";
 
     public final String tagName;

@@ -19,8 +19,10 @@ import seedu.address.model.tag.TaskTag;
 import seedu.address.model.task.Task;
 
 class MarkTaskCommandTest {
+    private static final String TEST_DATE = "04 July 2020";
+
     private static final Task testTask = new Task(new Label("test label"),
-            new Date("1918-04-12"), new TaskTag("SO100"));
+            new Date(TEST_DATE), new TaskTag("SO100"));
 
     //I followed the style of AddCommand test instead of DeleteCommand test since I thought using a modelStub
     //was more stylistically appropriate for testing.
@@ -32,7 +34,7 @@ class MarkTaskCommandTest {
         assertFalse(testTask.getIsDone());
 
         Task secondTestTask = new Task(new Label("test label"),
-                new Date("1918-04-12"), new TaskTag("SO100"));
+                new Date(TEST_DATE), new TaskTag("SO100"));
         secondTestTask.setIsDone(true);
 
         CommandResult commandResult = new MarkTaskCommand(targetIndex).execute(modelStub);

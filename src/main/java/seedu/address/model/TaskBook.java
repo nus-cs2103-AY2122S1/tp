@@ -86,12 +86,23 @@ public class TaskBook implements ReadOnlyTaskBook {
     @Override
     public String toString() {
         return tasks.asUnmodifiableObservableList().size() + " tasks";
-        // TODO: refine later
     }
 
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TaskBook // instanceof handles nulls
+                && tasks.equals(((TaskBook) other).tasks));
+    }
+
+    @Override
+    public int hashCode() {
+        return tasks.hashCode();
     }
 
 }

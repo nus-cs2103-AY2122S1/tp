@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Customer {
     public static final String MESSAGE_CONSTRAINTS =
-            "Customer name should be non-empty, and contain one or more blocks of alphanumeric characters, "
+            "Customer names should be non-empty, and contain one or more blocks of alphanumeric characters, "
             + "separated by at most one space";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+( \\p{Alnum}+)*";
     public final String name;
