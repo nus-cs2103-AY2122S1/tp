@@ -173,14 +173,15 @@ Format: `help`
 
 Adds a customer to RHRH.
 
-Format:
-* `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTY POINTS [alg/ALLERGIES] [sr/SPECIAL REQUESTS] [t/TAG]`: 
-Adds a customer with all specified fields, where `LOYALTY POINTS`, `ALLERGIES` and `SPECIAL REQUESTS` are fields specific to customers.
-  * `ALLERGIES`, `SPECIAL REQUESTS` and `TAG` are optional fields that can be omitted.
+Format: `addC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTY POINTS [alg/ALLERGIES] [sr/SPECIAL REQUESTS] [t/TAG]`
+
+* Adds a customer with all specified fields, where `LOYALTY POINTS`, `ALLERGIES` and `SPECIAL REQUESTS` are fields specific to customers.
+* `ALLERGIES`, `SPECIAL REQUESTS` and `TAG` are optional fields that can be omitted.
 
 Examples: 
-* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/1000 alg/Kiwi sr/NoAirCon t/friendly`
-* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/10000`
+* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/1000 alg/Kiwi sr/NoAirCon t/friendly` adds a customer with the respective fields.
+<br></br>
+* `addC n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/10000` adds a customer without any optional fields.
 
 
 ### Adding an employee: `addE`
@@ -194,6 +195,7 @@ Format: `addE n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOB
 
 Examples: 
 * `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Head Chef t/Team A sh/2021-12-08 0800` adds an employee with the respective fields.
+<br></br>
 * `addE n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Chef` adds an employee without any optional fields.
 
 <div markdown="block" class="alert alert-warning">
@@ -216,6 +218,7 @@ Format: `addS n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYD
 Examples:
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/2021-11-19 15:00 t/Regular` 
   adds a supplier with the respective fields.
+<br></br>
 * `addS n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/08:00 24-12-2021` adds a 
   supplier without any optional fields.
 
@@ -246,6 +249,7 @@ Format: `addR NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME [r/REMARK] [t/TAG]…`
 
 Examples:
 * `addR 2 p/98765432 at/2021-12-24 2000 r/birthday party t/10 Percent Off t/Free cake` adds a new reservation of 2 pax for customer with
+<br></br>
 * `addR 5 p/12345668 at/2021-02-14 1200`
 
 <div markdown="block" class="alert alert-warning">
@@ -264,26 +268,24 @@ Examples:
 
 Edits an existing customer in RHRH.
 
-Format:
-* `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`: Edits
-    the customer at the specified `INDEX`.
-  * `INDEX` refers to the index number shown in the displayed customer list. 
-  * `INDEX` **must be a positive integer** 1, 2, 3, …​
-  * At least one of the optional fields must be provided.
-  * Existing values will be updated to the input values.
+Format: `editC INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`
+
+* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list.
 
 Examples:
-*  `editC 1 alg/Kiwi sr/no air con` Replaces the existing allergies and special requests of the 1st customer to `Kiwi` and `no air con` respectively.
-*  `editC 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
+* `editC 1 alg/Kiwi sr/no air con` Replaces the existing allergies and special requests of the 1st customer to `Kiwi` and `no air con` respectively.
+<br></br> 
+* `editC 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
 
 <div markdown="block" class="alert alert-warning">
 
 :information_source: **Notes:**<br>
 
-* For Allergies, Special Requests and Tags
-  * the existing values of these fields will be replaced i.e. editing of these fields are not cumulative.
-  * You can remove the customer's tags by typing `t/` without
-    specifying any tags after it. Similar for allergies by typing `alg/` and special requests by typing `sr/`.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, allergies and special requests, the existing tags, allergies and special requests of the customer will be removed<br> i.e. adding of tags is not cumulative.
+* You can remove all the customer’s tags, allergies or special requests by typing `t/` or `alg/` or `sr/` respectively without specifying any tags, allergies or special requests after it.
 
 </div>
 
@@ -297,8 +299,9 @@ Format: `editE INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SA
 
 
 Examples:
-*  `editE 1 sal/4000` Edits the salary of the 1st employee to be `4000`.
-*  `editE 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
+* `editE 1 sal/4000` Edits the salary of the 1st employee to be `4000`.
+<br></br> 
+* `editE 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
 <div markdown="block" class="alert alert-warning">
 :information_source: **Notes:**<br>
@@ -321,6 +324,7 @@ Format: `editS INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [d
 
 Examples:
 * `editS 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.
+<br></br>
 * `editS 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
 
 <div markdown="block" class="alert alert-warning">
@@ -346,8 +350,9 @@ Format: `editR INDEX [r/REMARK] [t/TAG]…`
 
 Deletes the specified customer from RHRH.
 
-Format:
-* `deleteC INDEX`: Deletes the customer at the specified `INDEX`.
+Format: `deleteC INDEX`
+
+* Deletes the customer at the specified `INDEX`.
 
 Example:
 * `deleteC 2` deletes the 2nd customer displayed in the address book.
@@ -404,7 +409,7 @@ Deletes the specified reservation from RHRH
 
 Format: `deleteR INDEX`
 
-* Deletes the reservation at the specified `INDEX`
+* Deletes the reservation at the specified `INDEX`.
 
 Example: 
 * `deleteR 1` deletes the 1st reservation in the display reservation list.
@@ -445,25 +450,36 @@ Examples:
 
 Find customers that have fields that contain all specified keywords cumulatively
 
-Format:
-* `findC KEYWORD [MORE_KEYWORD...]`: Displays all customers that match specified keywords
-  * At least one `KEYWORD` must be provided.
-  * Only customers that match **all** provided keywords will be returned.
+Format: `findC KEYWORD [MORE_KEYWORD...]`
 
+* Displays all customers that match specified keywords
 
 Example:
 * `findC Chetwin Everything`: Finds customers that have both the keywords 'Chetwin' and 'Everything' in their fields.
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* At least one `KEYWORD` must be provided
+* The search is case-insensitive. e.g. `cHeTwIn` will match `Chetwin`
+* Partial words can be matched. e.g. `chet` will match `Chetwin`
+* Only customers that contain **all** provided keywords will be displayed.
+
+</div>
 
 ### Finding Employees based on keywords: `findE`
 
 Find employees that have a field that contains the whole phrase of keywords consecutively.
 
-Format:
-* `findE KEYWORDS`: Displays all employees that contain the specified keywords **together**.
+Format: `findE KEYWORDS`
+
+* Displays all employees that contain the specified keywords **together**.
 
 Examples:
 * `findE 2021-12-08 0800`: Finds employees that have `2021-12-08 0800` in any of their fields.
+<br></br>
 * `findE Team A`: Finds all employees that have `Team A` in any of their fields.
+<br></br>
 * `findE Team A`: **DOES NOT** find employees that have `Team` and `A` in different fields or different shifts/tags
 
 <div markdown="block" class="alert alert-warning">
@@ -480,8 +496,9 @@ Examples:
 
 Find suppliers that have fields that contain all specified keywords cumulatively.
 
-Format: 
-* `findS KEYWORD [MORE_KEYWORDS...]`: Displays all suppliers that contain all specified keywords
+Format: `findS KEYWORD [MORE_KEYWORDS...]`
+
+* Displays all suppliers that contain all specified keywords
 
 Example:
 * `findS Oct AM`: Finds suppliers that have both keywords `Oct` and `AM` in their fields.
@@ -500,25 +517,35 @@ Example:
 
 Sorts and displays the list of customers based on a given field in either ascending or descending order.
 
-Format:
-* `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT`: Sorts and displays the list of customers based on provided 
-  arguments
-    * `PREFIX_OF_CUSTOMER_FIELD` is the prefix of the field you wish to sort the list of customers by, i.e. lp for loyaltyPoints and alg for allergies
-    * `ORDER_OF_SORT` can be set to 'a' for ascending order or 'd' for descending order
+Format: `sortC by/PREFIX_OF_CUSTOMER_FIELD o/ORDER_OF_SORT`
+
+* Sorts and displays the list of customers based on the sort type and order.
 
 Examples:
-* `sortC by/n o/d`: sorts the list of customers by `NAME` in descending order.
-* `sortC by/alg o/a`: sorts the list of customers by `ALLERGIES` in ascending order.
+* `sortC by/n o/d`: sorts the list of customers by `NAME` in `descending` order
+<br></br>
+* `sortC by/alg o/a`: sorts the list of customers by `ALLERGIES` in `ascending` order
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* The prefixes used for the parameter `PREFIX_OF_SORT_KEY` is the same as that when adding or deleting a customer.
+    * For example `n` for name and `lp` for loyalty points
+* The only acceptable inputs for the `ORDER_OF_SORT` parameter are `a` for `ascending` and `d` for `descending`.
+* `ALLERGIES`, `SPECIAL REQUESTS` & `TAG` are not fields that can be used to sort customers.
+
+</div>
 
 ### Displaying a sorted list of employees: `sortE`
 Sorts and displays the list of employees based on a given field in either ascending or descending order.
 
-Format:
-* `sortE by/PREFIX_OF_EMMPLOYEE_FIELD o/ORDER_OF_SORT`: Sorts and displays the list of employees based on the sort type
+Format: `sortE by/PREFIX_OF_EMMPLOYEE_FIELD o/ORDER_OF_SORT`
+* Sorts and displays the list of employees based on the sort type
   and order.
 
 Examples:
 * `sortE by/sal o/a`: Sorts the list of employees by `SALARY` in `ascending` order
+<br></br>
 * `sortE by/n o/d`: Sorts the list of employees by `NAME` in `descending` order
 
 <div markdown="block" class="alert alert-warning">
@@ -534,12 +561,14 @@ Examples:
 ### Displaying a sorted list of suppliers: `sortS`
 Sorts and displays the list of suppliers based on a given field in either ascending or descending order.
 
-Format:
-* `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`: Sorts and displays the list of suppliers based on the sort type 
+Format: `sortS by/PREFIX_OF_SUPPLIER_FIELD o/ORDER_OF_SORT`
+
+* Sorts and displays the list of suppliers based on the sort type 
   and order.
 
 Examples:
 * `sortS by/dd o/a`: Sorts the list of suppliers by `DELIVERYDETAILS` in `ascending` order
+<br></br>
 * `sorts by/N o/d`: Sorts the list of suppliers by `NAME` in `descending` order
 
 <div markdown="block" class="alert alert-warning">
@@ -552,6 +581,13 @@ Examples:
 
 
 </div>
+
+### Resetting a sorted customer list: `resetC`
+
+Resets the sorting of the customer list to its default state (sorted by name)
+
+Format:
+* `resetC`
 
 ### Resetting a sorted employee list: `resetE`
 
@@ -567,6 +603,24 @@ Resets the sorting of the supplier list to its default state (sorted by name)
 
 Format:
 * `resetS`
+
+### Listing all customers: `listC`
+
+Shows a list of all customers in RHRH.
+
+Format: `listC`
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* RHRH will switch to the customer list and list all customers no matter which list you are current viewing
+* You can also switch to the customer list manually by clicking the `View` tab in the menu bar and selecting
+  `Customers`
+* `listC` can be used to get the entire list of customers again after using `findC` to filter.
+
+
+</div>
+
 
 ### Listing all employees: `listE`
 
