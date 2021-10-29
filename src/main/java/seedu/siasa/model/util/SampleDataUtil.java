@@ -1,5 +1,6 @@
 package seedu.siasa.model.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +12,11 @@ import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Name;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.Phone;
+import seedu.siasa.model.policy.Commission;
+import seedu.siasa.model.policy.ExpiryDate;
 import seedu.siasa.model.policy.Policy;
+import seedu.siasa.model.policy.Price;
+import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
 /**
@@ -42,7 +47,18 @@ public class SampleDataUtil {
     }
 
     public static Policy[] getSamplePolicies() {
-        return new Policy[] {};
+        return new Policy[] {
+            new Policy(new Title("Sample Life Policy"), new Price(100),
+                new ExpiryDate(LocalDate.now().plusMonths(1)), new Commission(10),
+                new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                    new Address("Blk 30 Geylang Street 29, #06-40"),
+                    getTagSet("friends"))),
+            new Policy(new Title("Sample Insurance Policy"), new Price(500),
+                new ExpiryDate(LocalDate.now().plusMonths(10)), new Commission(15),
+                new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                    getTagSet("colleagues", "friends")))
+        };
     }
 
     public static ReadOnlySiasa getSampleSiasa() {
@@ -62,8 +78,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
 }
