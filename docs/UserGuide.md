@@ -116,11 +116,8 @@ add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS
 Example:
 
 ```
-add n/John Doe te/@johndoe g/john-doe p/98765432 e/johnd@eg.com a/John Street, Blk 12, #01-01
+add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com a/John Street, Blk 12, #01-01
 ```
-
-Expected output:
-
 
 <h3 id = "Delete"> </h3>
 
