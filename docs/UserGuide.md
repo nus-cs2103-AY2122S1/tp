@@ -105,7 +105,7 @@ Format: `clear`
 
 Adds a policy to the policy list.
 
-Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% [NUM_OF_PMT] cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
+Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A policy can have any number of tags (including 0)
@@ -121,11 +121,10 @@ A policy can have any number of tags (including 0)
   * If all three are provided, this represents periodic payments up till `NUM_OF_PMT`
 * Commission structure of the policy is defined by:
   * `COMMISSION_%`: percentage of each payment that goes to commission
-  * `NUM_OF_PMT` (optional): number of payments that the agent will receive commission for
-  * If only `COMMISION_%` is provided, assumed that agent will receive commission for all payments.
+  * `NUM_OF_PMT`: number of payments that the agent will receive commission for
 
 Examples:
-* `addpolicy n/full life e/2021-12-12 p/10000 c/10 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10%, tagged Aviva, belonging to client with index 1.
+* `addpolicy n/full life e/2021-12-12 p/10000 c/10 12 cl/1 t/Aviva` Adds a policy titled full life, coverage till 2021-12-12, lump sum payment of $100, commission of 10% on 12 payments, tagged Aviva, belonging to client with index 1.
 * `addpolicy n/critical illness p/30000 12 120 c/10 12 cl/2` Adds a policy titled critical illness, monthly payments of $3000, 120 total payments, commission of 10% on 12 payments, belonging to client with index 2.
 ### Deleting A Policy : `deletepolicy`
 
@@ -201,7 +200,7 @@ Action | Format, Examples
 **Delete Person** | `deleteclient INDEX`<br> e.g., `delete 3`
 **Edit Person** | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **List Persons** | `listclient`
-**Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% [NUM_OF_PMT] cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
+**Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 **Delete Policy** | `deletepolicy INDEX`
 **List Policies** | `listpolicy`
 **List Person's Policies** | `clientpolicy PERSON_INDEX`

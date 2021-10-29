@@ -5,7 +5,7 @@ import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import seedu.siasa.commons.core.index.Index;
@@ -33,7 +33,7 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
                         args,
                         PREFIX_TITLE,
                         PREFIX_EXPIRY,
-                        PREFIX_PRICE,
+                        PREFIX_PAYMENT,
                         PREFIX_COMMISSION,
                         PREFIX_CLIENT_INDEX);
 
@@ -52,16 +52,22 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
                     argMultimap.getValue(PREFIX_TITLE).get()));
         }
         if (argMultimap.getValue(PREFIX_EXPIRY).isPresent()) {
-            editPolicyDescriptor.setExpiryDate(ParserUtil.parseExpiryDate(
+            editPolicyDescriptor.setCoverageExpiryDate(ParserUtil.parseCoverageExpiryDate(
                     argMultimap.getValue(PREFIX_EXPIRY).get()));
         }
-        if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            editPolicyDescriptor.setPrice(ParserUtil.parsePrice(
-                    argMultimap.getValue(PREFIX_PRICE).get()));
+        if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
+            editPolicyDescriptor.setPaymentStructure(ParserUtil.parsePaymentStructure(
+                    argMultimap.getValue(PREFIX_PAYMENT).get()));
         }
         if (argMultimap.getValue(PREFIX_COMMISSION).isPresent()) {
-            editPolicyDescriptor.setCommission(ParserUtil.parseCommission(
-                    argMultimap.getValue(PREFIX_COMMISSION).get()));
+            if (editPolicyDescriptor.getPaymentStructure().isPresent()) {
+                editPolicyDescriptor.setCommission(ParserUtil.parseCommission(
+                        argMultimap.getValue(PREFIX_COMMISSION).get(),
+                        editPolicyDescriptor.getPaymentStructure().get()));
+            } else {
+                editPolicyDescriptor.setCommission(ParserUtil.parseCommission(
+                        argMultimap.getValue(PREFIX_COMMISSION).get()));
+            }
         }
         if (argMultimap.getValue(PREFIX_CLIENT_INDEX).isPresent()) {
             editPolicyDescriptor.setOwnerIndex(ParserUtil.parseIndex(

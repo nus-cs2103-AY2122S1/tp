@@ -2,14 +2,21 @@ package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.siasa.model.Model.PREDICATE_SHOW_ALL_POLICIES;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
@@ -20,10 +27,11 @@ import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.ExpiryDate;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
+import seedu.siasa.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -36,14 +44,14 @@ public class EditPolicyCommand extends Command {
             + "by the index number used in the displayed policy list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TITLE + "TITLE] "
+            + "[" + PREFIX_EXPIRY + "EXPIRY] "
+            + "[" + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT)] "
+            + "[" + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_TITLE + "Full Life "
+            + PREFIX_EXPIRY + "2021-06-13";
 
     public static final String MESSAGE_EDIT_POLICY_SUCCESS = "Edited Policy: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -97,10 +105,16 @@ public class EditPolicyCommand extends Command {
         assert policyToEdit != null;
 
         Title updatedTitle = editPolicyDescriptor.getTitle().orElse(policyToEdit.getTitle());
-        Price updatedPrice = editPolicyDescriptor.getPrice().orElse(policyToEdit.getPrice());
-        ExpiryDate updatedExpiryDate = editPolicyDescriptor.getExpiryDate().orElse(policyToEdit.getExpiryDate());
+        PaymentStructure updatedPaymentStructure = editPolicyDescriptor.getPaymentStructure()
+                .orElse(policyToEdit.getPaymentStructure());
+        CoverageExpiryDate updatedCoverageExpiryDate = editPolicyDescriptor.getCoverageExpiryDate()
+                .orElse(policyToEdit.getCoverageExpiryDate());
         Commission updatedCommission = editPolicyDescriptor.getCommission().orElse(policyToEdit.getCommission());
+        Set<Tag> updatedTags = editPolicyDescriptor.getTags().orElse(policyToEdit.getTags());
 
+        if (updatedCommission.numberOfPayments > updatedPaymentStructure.numberOfPayments) {
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMISSION_NUM_OF_PMT);
+        }
         Person updatedOwner;
         if (editPolicyDescriptor.getOwnerIndex().isEmpty()) {
             updatedOwner = policyToEdit.getOwner();
@@ -112,7 +126,8 @@ public class EditPolicyCommand extends Command {
             updatedOwner = lastShownList.get(editPolicyDescriptor.getOwnerIndex().get().getZeroBased());
         }
 
-        return new Policy(updatedTitle, updatedPrice, updatedExpiryDate, updatedCommission, updatedOwner);
+        return new Policy(updatedTitle, updatedPaymentStructure, updatedCoverageExpiryDate, updatedCommission,
+                updatedOwner, updatedTags);
     }
 
     @Override
@@ -139,10 +154,11 @@ public class EditPolicyCommand extends Command {
      */
     public static class EditPolicyDescriptor {
         private Title title;
-        private Price price;
-        private ExpiryDate expiryDate;
+        private PaymentStructure paymentStructure;
+        private CoverageExpiryDate expiryDate;
         private Commission commission;
         private Index ownerIndex;
+        private Set<Tag> tags;
 
         public EditPolicyDescriptor() {}
 
@@ -152,17 +168,18 @@ public class EditPolicyCommand extends Command {
          */
         public EditPolicyDescriptor(EditPolicyDescriptor toCopy) {
             setTitle(toCopy.title);
-            setExpiryDate(toCopy.expiryDate);
-            setPrice(toCopy.price);
+            setCoverageExpiryDate(toCopy.expiryDate);
+            setPaymentStructure(toCopy.paymentStructure);
             setCommission(toCopy.commission);
             setOwnerIndex(toCopy.ownerIndex);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(title, expiryDate, price, commission, ownerIndex);
+            return CollectionUtil.isAnyNonNull(title, expiryDate, paymentStructure, commission, ownerIndex, tags);
         }
 
         public void setTitle(Title title) {
@@ -173,19 +190,19 @@ public class EditPolicyCommand extends Command {
             return Optional.ofNullable(title);
         }
 
-        public void setPrice(Price price) {
-            this.price = price;
+        public void setPaymentStructure(PaymentStructure paymentStructure) {
+            this.paymentStructure = paymentStructure;
         }
 
-        public Optional<Price> getPrice() {
-            return Optional.ofNullable(price);
+        public Optional<PaymentStructure> getPaymentStructure() {
+            return Optional.ofNullable(paymentStructure);
         }
 
-        public void setExpiryDate(ExpiryDate expiryDate) {
+        public void setCoverageExpiryDate(CoverageExpiryDate expiryDate) {
             this.expiryDate = expiryDate;
         }
 
-        public Optional<ExpiryDate> getExpiryDate() {
+        public Optional<CoverageExpiryDate> getCoverageExpiryDate() {
             return Optional.ofNullable(expiryDate);
         }
 
@@ -195,6 +212,23 @@ public class EditPolicyCommand extends Command {
 
         public Optional<Commission> getCommission() {
             return Optional.ofNullable(commission);
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Tag>> getTags() {
+            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         public void setOwnerIndex(Index ownerIndex) {
@@ -221,8 +255,8 @@ public class EditPolicyCommand extends Command {
             EditPolicyDescriptor e = (EditPolicyDescriptor) other;
 
             return getTitle().equals(e.getTitle())
-                    && getExpiryDate().equals(e.getExpiryDate())
-                    && getPrice().equals(e.getPrice())
+                    && getCoverageExpiryDate().equals(e.getCoverageExpiryDate())
+                    && getPaymentStructure().equals(e.getPaymentStructure())
                     && getCommission().equals(e.getCommission())
                     && getOwnerIndex().equals(e.getOwnerIndex());
         }
