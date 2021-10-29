@@ -15,14 +15,14 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.MultiplePredicates;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.NationalityContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
-import seedu.address.model.person.TutorialGroupContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.MultiplePredicates;
+import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.NationalityContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.predicate.TutorialGroupContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new DeleteMultipleCommand object

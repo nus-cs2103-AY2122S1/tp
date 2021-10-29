@@ -28,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_GENDER = "N";
     private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_NATIONALITY = "SoCIAN";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TUTORIAL_GROUP = "B";
     private static final String INVALID_SOCIAL_HANDLE = "tg:rachel walker";
@@ -114,6 +115,11 @@ public class ParserUtilTest {
     @Test
     public void parseNationality_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseNationality((String) null));
+    }
+
+    @Test
+    public void parseNationality_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNationality(INVALID_NATIONALITY));
     }
 
     @Test

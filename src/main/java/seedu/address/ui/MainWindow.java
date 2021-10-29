@@ -80,6 +80,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -141,7 +142,6 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the name on title bar.
      */
     private void setTitleBar(String title) {
-        //primaryStage.getIcons().add(iconImage);
         primaryStage.setTitle(title);
     }
 
@@ -150,11 +150,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        helpWindow.hide();
     }
 
     void show() {

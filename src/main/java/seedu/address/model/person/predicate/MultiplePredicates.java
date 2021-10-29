@@ -1,7 +1,9 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicate;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
+
+import seedu.address.model.person.Person;
 
 /**
  * Combine two or more Predicates together.

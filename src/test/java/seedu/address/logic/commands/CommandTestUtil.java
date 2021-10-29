@@ -23,8 +23,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -91,7 +91,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TUTORIAL_GROUP_DESC = " "
-            + PREFIX_TUTORIAL_GROUP + "B"; // Alphabets not allowed in tutorial groups
+            + PREFIX_TUTORIAL_GROUP + "B"; // alphabets not allowed in tutorial groups
     public static final String INVALID_SOCIAL_HANDLE_DESC = " "
             + PREFIX_SOCIAL_HANDLE + "igjewfewij"; // missing ':' to delimit platform and value
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
