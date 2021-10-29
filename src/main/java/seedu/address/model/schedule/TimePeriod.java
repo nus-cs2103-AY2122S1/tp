@@ -91,10 +91,18 @@ public class TimePeriod implements Comparable<TimePeriod> {
         }
     }
 
+    /**
+     * Get the startDateTime of this {@Code TimePeriod}.
+     * @return A LocalDateTime, the startDateTime of this {@Code TimePeriod}.
+     */
     public LocalDateTime getStartDateTime() {
         return LocalDateTime.of(this.startDateTime.toLocalDate(), this.startDateTime.toLocalTime());
     }
 
+    /**
+     * Get the endDateTime of this {@Code TimePeriod}.
+     * @return Get the endDateTime of this {@Code TimePeriod}.
+     */
     public LocalDateTime getEndDateTime() {
         return LocalDateTime.of(this.endDateTime.toLocalDate(), this.endDateTime.toLocalTime());
     }

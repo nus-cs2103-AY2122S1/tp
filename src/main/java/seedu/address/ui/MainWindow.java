@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ThemeManager themeManager;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -54,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private Button themeButton;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -70,6 +75,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        themeManager = new ThemeManager();
     }
 
     public Stage getPrimaryStage() {
@@ -154,6 +160,14 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleThemeChange() {
+        themeManager.changeTheme(primaryStage, themeButton);
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -193,6 +207,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isUndo()) {
+                fillInnerParts();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

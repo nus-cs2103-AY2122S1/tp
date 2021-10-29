@@ -37,8 +37,8 @@ public class AddAppCommand extends Command {
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_INDEXES + "1,2,3 "
             + PREFIX_ADDRESS + "Starbucks @ Raffles City "
-            + PREFIX_STARTDATETIME + "01-01-2021 1400 "
-            + PREFIX_ENDDATETIME + "01-01-2021 1500 "
+            + PREFIX_STARTDATETIME + "01-11-2021 1400 "
+            + PREFIX_ENDDATETIME + "01-11-2021 1500 "
             + PREFIX_DESCRIPTION + "discuss marketing strategies";
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
@@ -98,6 +98,7 @@ public class AddAppCommand extends Command {
         }
 
         model.addAppointment(appointmentToAdd);
+        model.updateState();
         return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToAdd));
     }
 
