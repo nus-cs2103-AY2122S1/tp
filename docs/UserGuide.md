@@ -767,7 +767,7 @@ Action | Format, Examples
 **View Schedule of Year** | `year`
 **Navigate forward in Schedule** | `next`
 **Navigate backward in Schedule** | `back`
-**View Reminders** | `reminder`
+**View Reminders** | `remind`
 **Clear** |`clear`
 **Undo** | `undo`
 **Redo** | `redo`
