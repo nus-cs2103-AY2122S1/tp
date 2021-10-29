@@ -172,6 +172,7 @@ public interface Model {
      */
     void setAppointment(Appointment appointmentToEdit, Appointment editedAppointment);
 
+    /**
      * Go back to the previous state before executing a certain command.
      * @throws NoHistoryStatesException Throw exception if there is no previous state.
      */
