@@ -450,6 +450,7 @@ Action | Format and Examples
 **[Clear](#clearing-all-entries--clear)** | `clear`
 
 ### 6.4 Other commands
+
 |---
 Action | Format and Examples
 --------|------------------
