@@ -22,7 +22,7 @@ to quickly navigate to the command of your choice.
 
 [Quick Start](#quick-start) <br>
 [Features](#features)
-* [Give a list of instructions : `man`](#give-a-list-of-instructions-man)
+* [Viewing details of instructions : `man`](#viewing-details-of-instructions-man)
 * [Adding a person : `add`](#adding-a-person-add)
 * [Listing all persons : `ls`](#listing-all-persons-ls)
 * [Editing a person : `edit`](#editing-a-person-edit)
