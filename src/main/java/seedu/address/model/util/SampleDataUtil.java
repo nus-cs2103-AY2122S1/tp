@@ -46,7 +46,7 @@ public class SampleDataUtil {
                     new Remark("likes to bake"), getTagSet("classmates"),
                     getSocialHandleSet("tg:irfani")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Nationality("Korean"), new TutorialGroup("T07"), new Gender("M"),
+                    new Nationality("South Korean"), new TutorialGroup("T07"), new Gender("M"),
                     new Remark("likes to run"), getTagSet("colleagues"),
                     getSocialHandleSet("tg:royb"))
         };
