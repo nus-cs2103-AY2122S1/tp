@@ -3,36 +3,54 @@ layout: page
 title: User Guide
 ---
 
-contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing their workload to focus on the more important task - teaching.
+contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing your workload to focus on the more important task - teaching.
 
 ## Table of Contents
+* [How to use this User Guide](#how-to-use)
+  * [How to navigate](#how-to-navigate)
+  * [Meaning of icons](#meaning-of-icons)
+  * [Formatting used](#formatting)
+
 * [Quick start](#quick-start)
 
 * [Walk-through](#walkthrough)
 
-* [Commands](#commands)
+* [Features](#features)
 
-   * [Accessing the help page: `help`](#help)
+  * [Managing contacts](#managing-contacts)
+    * [Adding a contact: `add`](#add)
+    * [Editing a contact: `edit`](#edit)
+    * [Deleting a contact / contacts: `delete`](#delete)
+    * [Finding a contact / contacts: `find`](#find)
+    * [Listing all contacts: `list`](#list)
+    * [Clearing all contacts: `clear`](#clear)
 
-   * [Adding a contact: `add`](#add)
+  * [Managing lessons](#manaaging-lessons)
+    * [Adding a lesson: `addc`](#addc)
+    * [Editing a lesson: `editc`](#editc)
+    * [Deleting a lesson / lessons: `deletec`](#deletec)
+    * [Finding a lesson / lessons: `findc`](#findc)
+    * [Listing all lessons: `listc`](#listc)
+    * [Clearing all lessons: `clearc`](#clearc)
 
-   * [Listing all contacts: `list`](#list)
-
-   * [Finding contacts by name / module code: `find`](#find)
-
-   * [Editing contact: `edit`](#edit)
-
-   * [Deleting contact individually / in batches: `delete`](#delete)
-
-   * [Clearing all contacts: `clear`](#clear)
-
-   * [Exiting the app: `exit`](#exit)
+  * [Accessing the help page: `help`](#help)
+  * [Exiting the app: `exit`](#exit)
 
 * [Saving the data](#saving-data)
 
 * [Editing the data file](#editing-data)
 
 * [Command Summary](#summary)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## How to use this User Guide <a name="how-to-use"></a>
+
+### How to navigate <a name="how-to-navigate"></a>
+
+### Meaning of icons <a name="meaning-of-icons"></a>
+
+### Formatting used <a name="formatting"></a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,21 +121,11 @@ Some example commands you can try:
 
 ***
 
-## Commands <a name="commands"></a>
+## Features <a name="features"></a>
 
-### Accessing the help page : `help` <a name="help"></a>
+### Managing contacts <a name="managing-contacts"></a>
 
-Shows a message explaining how to access the help page.
-
-Format: `help`
-
-Command aliases: `man` `h`
-
-<img src="images/HelpCommand.png" width="800px">
-
-***
-
-### Adding a contact: `add` <a name="add"></a>
+#### Adding a contact: `add` <a name="add"></a>
 
 Adds a contact to the address book. 
 
@@ -139,43 +147,7 @@ Command alias: `a`
 
 <img src="images/AddCommand.png" width="800px">
 
-***
-
-### Listing all contacts : `list` <a name="list"></a>
-
-Shows a list of all contacts in the address book.
-
-Format: `list`
-
-Command alias: `ls`
-
-***
-
-### Finding contacts by name / module code: `find` <a name="find"></a>
-
-Finds a contact by specifying either the name/module code(s).
-* Can only search by name or module code(s), but not both at once <br> e.g. You cannot perform `find n/Ben m/CS2040S` 
-* The search is case-insensitive <br> e.g `ben` will match `Ben`
-* The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
-* Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
-* If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
-  e.g `find n/Bernice Yu` will only return contacts that have both words `Bernice` and `Yu`
-* Similarly, if multiple module codes are specified, only results matching all the module codes specified will be returned <br> e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
-
-Format: `find n/NAME`/`find m/MODULE_CODE(S)`
-
-Examples:
-* `find n/Ben`: Search contacts with name containing `Ben`
-* `find n/Ben Bernice Mary`: Search contacts with names containing either `Ben`, `Bernice` or `Mary` 
-* `find m/CS2103T CS2100`: Search contacts with the inputted module code
-
-Command alias: `f`
-
-<img src="images/FindCommand.png" width="800px">
-
-***
-
-### Editing contact: `edit` <a name="edit"></a>
+#### Editing a contact: `edit` <a name="edit"></a>
 
 Updates the information of a contact.
 
@@ -195,9 +167,7 @@ Command aliases: `update` `e`
 
 <img src="images/EditCommand.png" width="800px">
 
-***
-
-### Deleting contact individually / in batches: `delete` <a name="delete"></a>
+#### Deleting a contact / contacts: `delete` <a name="delete"></a>
 
 Delete the specified contact(s) from the address book. It can also be used to delete all contacts associated with a module code using `m/MODULE_CODE`.
 
@@ -211,13 +181,41 @@ Examples:
 * `delete 2-5` deletes the 2nd, 3rd, 4th and 5th contacts
 * `delete m/CS2103T` deletes all the contacts from CS2103T
 
-Command aliases: `del` `rm` `d` 
+Command aliases: `del` `rm` `d`
 
 <img src="images/DeleteCommand.png" width="800px">
 
-***
+#### Finding contacts by name / module code: `find` <a name="find"></a>
 
-### Deleting all contacts: `clear` <a name="clear"></a>
+Finds a contact by specifying either the name/module code(s).
+* Can only search by name or module code(s), but not both at once <br> e.g. You cannot perform `find n/Ben m/CS2040S`
+* The search is case-insensitive <br> e.g `ben` will match `Ben`
+* The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
+* Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
+* If multiple words are specified for the name search, only results matching all the words specified will be returned <br>
+  e.g `find n/Bernice Yu` will only return contacts that have both words `Bernice` and `Yu`
+* Similarly, if multiple module codes are specified, only results matching all the module codes specified will be returned <br> e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
+
+Format: `find n/NAME`/`find m/MODULE_CODE(S)`
+
+Examples:
+* `find n/Ben`: Search contacts with name containing `Ben`
+* `find n/Ben Bernice Mary`: Search contacts with names containing either `Ben`, `Bernice` or `Mary`
+* `find m/CS2103T CS2100`: Search contacts with the inputted module code
+
+Command alias: `f`
+
+<img src="images/FindCommand.png" width="800px">
+
+#### Listing all contacts : `list` <a name="list"></a>
+
+Shows a list of all contacts in the address book.
+
+Format: `list`
+
+Command alias: `ls`
+
+#### Clearing all contacts: `clear` <a name="clear"></a>
 
 Purges **all** existing contacts from the address book. **Use with caution.**
 
@@ -228,6 +226,32 @@ Command alias: `clr`
 <img src="images/ClearCommand.png" width="800px">
 
 ***
+
+### Managing lessons <a name="managing-lessons"></a>
+
+#### Adding a lesson: `addc` <a name="addc"></a>
+
+#### Editing a lesson: `editc` <a name="editc"></a>
+
+#### Deleting a lesson / lessons: `deletec` <a name="deletec"></a>
+
+#### Finding a lesson / lessons: `findc` <a name="findc"></a>
+
+#### Listing all lessons: `listc` <a name="listc"></a>
+
+#### Clearing all lessons: `clearc` <a name="clearc"></a>
+
+***
+
+### Accessing the help page : `help` <a name="help"></a>
+
+Shows a message explaining how to access the help page.
+
+Format: `help`
+
+Command aliases: `man` `h`
+
+<img src="images/HelpCommand.png" width="800px">
 
 ### Exiting the program : `exit` <a name="exit"></a>
 
