@@ -35,7 +35,7 @@ to quickly navigate to the command of your choice.
 * [Marking a task as done : `donetask`](#marking-a-task-as-done-donetask)
 * [Marking a task as not done : `undotask`](#marking-a-task-as-not-done-undotask)
 * [Viewing tasks : `cat`](#viewing-tasks-cat)
-* [Reminder for tasks that are due soon: `reminder `](#reminder-for-tasks-that-are-due-soon-reminder)
+* [Setting the number of days before tasks are considered due soon : `reminder `](#setting-the-number-of-days-before-tasks-are-considered-due-soon-reminder)
 * [Clearing the screen : `clear`](#clearing-the-screen-clear)
 * [Accessing the cache](#accessing-the-cache)
 * [Saving the data](#saving-the-data)
@@ -318,18 +318,20 @@ Examples:
     Alternatively, you could also click on the person in the GUI to open said person's tasks!
     </div>
 
-### Reminder for tasks that are due soon: `reminder`
+### Setting the number of days before tasks are considered due soon: `reminder`
 
-1. Shows a numerical value in days. The value is the number of days prior to a task's date to remind that it is due soon.
+1. Displays the current number of days prior to a task's date for the task to be considered due soon.
 
    Format: `reminder`
+
+    * The default value is 3 days.
 
 
 2. Sets the number of days prior to a task's date to remind that it is due soon.
 
    Format: `reminder -s DAYS`
 
-   * DAYS refer to the number of days prior to a task's date.
+   * `DAYS` refer to the number of days prior to a task's date.
      The day **must be a positive integer** 1, 2, 3, ...
 
    Example:
@@ -337,7 +339,7 @@ Examples:
    * reminder -s 10
 
 :memo:**Note**: A task will turn orange in colour as a reminder that it is due soon
-when the system date is later than or same as (task's date - DAYS) and earlier than task's date.
+when the system date is later than or the same as (task's date - `DAYS`), and earlier than task's date.
 
 ### Clearing the screen: `clear`
 
