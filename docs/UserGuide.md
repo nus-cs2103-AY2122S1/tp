@@ -93,7 +93,7 @@ This section provides instructions to begin using Academy Directory.
 2. Download the file _(link to the latest JAR will be available upon completion of v1.3)_ to the folder you want to use as the _home folder_ for your Academy Directory.
 
 3. From the command line, navigate to the folder used as *home folder* for academy directory and run `java -jar academydirectory.jar`. 
-A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+A GUI similar to the below image should appear in a few seconds. Note how the app already contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 4. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -101,11 +101,11 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
    * **`list`** : Lists all contacts. For new users, the list will contain some sample data which users can delete.
 
-   * **`visualize`** : Visualize grades of students. For new users, an empty whisker box plot diagram will be shown.
+   * **`visualize`** : Visualize grades of students. For new users, an empty whisker box plot diagram will be shown. Otherwise, the above image will be shown.
 
    * **`exit`** : Exits the app.
 
-5. Refer to the [Features](#features) below for the set of features supported by Academy Directory and the details for each command.
+5. You may refer to the [Features](#features) below for the set of features supported by Academy Directory and the details for each command.
 
 Notes:
 - While it is possible to open `academydirectory.jar` by double-clicking it, this may cause Academy Directory
@@ -487,7 +487,10 @@ to Academy Directory, including commit message. Only commands that change the Ac
 
 **Q**: Can I edit the version control files?<br>
 **A**: Version control related files are saved as text files at `[JAR file location]/data/vc/`. Advanced users are welcome to
-look at the files in this folder. 
+look at the files in this folder.
+
+**Q**: When I run Academy Directory via Command Prompt, a warning message appears that there are unsupported JavaFX configurations. Do I need to be concerned about this?
+**A**: **No, both usability and functionality wise.** Academy Directory was not developed as a modular-based application, however, some features of our app do implement external modules not declared, and thus is the warning message. The problem has been addressed while our application was developed, but we have decided to left the warning as it is as addressing the warning is outside the scope of CS2103T and our project requirement itself.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Invalid changes to any of the version control files may result in undefined behavior as this is not an intended use case. Proceed at your own risk.
