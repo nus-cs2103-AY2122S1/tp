@@ -1,13 +1,9 @@
 package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.siasa.model.Model.PREDICATE_SHOW_ALL_POLICIES;

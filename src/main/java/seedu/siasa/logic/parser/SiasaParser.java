@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import seedu.siasa.logic.commands.ClearCommand;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.DownloadCommand;
-import seedu.siasa.logic.commands.EditCommand;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;

@@ -213,7 +213,7 @@ public class ParserUtil {
         requireAllNonNull(commission, paymentStructure);
 
         String[] commissionDetails = commission.split(" ");
-        if (commissionDetails.length != 2 ) {
+        if (commissionDetails.length != 2) {
             throw new ParseException(MESSAGE_INVALID_COMMISSION);
         }
         try {
