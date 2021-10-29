@@ -65,6 +65,7 @@ public class UniqueStudentListTest {
 
     @Test
     public void setStudent_nullEditedStudent_throwsNullPointerException() {
+        uniqueStudentList.add(AMY);
         assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(AMY, null));
     }
 
