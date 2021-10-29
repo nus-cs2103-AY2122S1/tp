@@ -39,8 +39,8 @@ public class GuideWindow extends UiPart<Stage> {
             new Image("file:src/main/resources/images/guide/page_four.png")),
         FIVE("User Guide - Policies",
             "addpolicy: Adds a policy that is linked to a contact to your Siasa address book.\n"
-                + "addpolicy n/NAME_OF_POLICY e/EXPIRY_DATE p/PRICE c/COMMISSION cl/PERSON_INDEX\n"
-                + "Example: addpolicy n/Life Policy e/2021-06-13 p/1000 c/20 cl/1",
+                + "addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% [NUM_OF_PMT] cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
+                + "Example: addpolicy n/Life Policy e/2021-12-13 p/1000 12 50 c/20 10 cl/1 ",
             new Image("file:src/main/resources/images/guide/page_five.png")),
         SIX("User Guide - Policies",
             "deletepolicy: Removes a policy from your Siasa address book based on the index provided.\n"
@@ -48,15 +48,22 @@ public class GuideWindow extends UiPart<Stage> {
                 + "Example: deletepolicy 2",
             new Image("file:src/main/resources/images/guide/page_six.png")),
         SEVEN("User Guide - Policies",
+                "editpolicy: Edits a policy from your Siasa address book based on the index provided. "
+                + "At least one of the optional fields should be filled.\n"
+                + "Format: editpolicy INDEX [n/NAME_OF_POLICY] [p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT]] "
+                + "[c/COMMISSION_% [NUM_OF_PMT]] [cl/PERSON_INDEX] [t/TAGS] [e/COVERAGE_EXPIRY_DATE]\n"
+                + "Example: editpolicy 2 n/Life Policy 2 c/20 20 e/2022-10-22",
+            new Image("file:src/main/resources/images/guide/page_seven.png")),
+        EIGHT("User Guide - Policies",
             "clientpolicy: List the policies belonging to the client based on the index provided.\n"
                 + "clientpolicy INDEX\n"
                 + "Example: clientpolicy 1",
-            new Image("file:src/main/resources/images/guide/page_seven.png")),
-        EIGHT("User Guide - Policies",
+            new Image("file:src/main/resources/images/guide/page_eight.png")),
+        NINE("User Guide - Policies",
             "listpolicy: List all policies in your Siasa address book.\n"
                 + "listpolicy\n"
                 + "Example: listpolicy",
-            new Image("file:src/main/resources/images/guide/page_eight.png"));
+            new Image("file:src/main/resources/images/guide/page_nine.png"));
 
         private final String title;
         private final String description;
