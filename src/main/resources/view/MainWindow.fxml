@@ -68,7 +68,7 @@
               <items>
                   <VBox alignment="BOTTOM_CENTER" styleClass="splitpane-background">
                      <children>
-                        <StackPane fx:id="notePanePlaceholder" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="notePanePlaceholder" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS"/>
                         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" />
                         <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100.0" minHeight="50.0" />
                      </children>
