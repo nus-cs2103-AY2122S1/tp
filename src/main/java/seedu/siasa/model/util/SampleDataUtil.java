@@ -13,9 +13,9 @@ import seedu.siasa.model.person.Name;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.Phone;
 import seedu.siasa.model.policy.Commission;
-import seedu.siasa.model.policy.ExpiryDate;
+import seedu.siasa.model.policy.CoverageExpiryDate;
+import seedu.siasa.model.policy.PaymentStructure;
 import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
@@ -48,16 +48,16 @@ public class SampleDataUtil {
 
     public static Policy[] getSamplePolicies() {
         return new Policy[] {
-            new Policy(new Title("Sample Life Policy"), new Price(100),
-                new ExpiryDate(LocalDate.now().plusMonths(1)), new Commission(10),
+            new Policy(new Title("Sample Life Policy"), new PaymentStructure(1000, 1, 1),
+                new CoverageExpiryDate(LocalDate.now().plusMonths(1)), new Commission(10, 1),
                 new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
-                    getTagSet("friends"))),
-            new Policy(new Title("Sample Insurance Policy"), new Price(500),
-                new ExpiryDate(LocalDate.now().plusMonths(10)), new Commission(15),
+                    getTagSet("friends")), getTagSet("AIA")),
+            new Policy(new Title("Sample Insurance Policy"), new PaymentStructure(500, 1, 1),
+                new CoverageExpiryDate(LocalDate.now().plusMonths(10)), new Commission(15, 1),
                 new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    getTagSet("colleagues", "friends")))
+                    getTagSet("colleagues", "friends")), getTagSet("AIA"))
         };
     }
 
