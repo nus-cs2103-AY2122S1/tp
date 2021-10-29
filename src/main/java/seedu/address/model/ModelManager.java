@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -25,7 +26,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<TutorialClass> filteredTutorialClasses;
-    private final FilteredList<TutorialGroup> filteredTutorialGroups;
 
     /**
      * Initializes a ModelManager with the given classmate and userPrefs.
@@ -40,7 +40,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.classmate.getStudentList());
         filteredTutorialClasses = new FilteredList<>(this.classmate.getTutorialClassList());
-        filteredTutorialGroups = new FilteredList<>(this.classmate.getTutorialGroupList());
     }
 
     public ModelManager() {
@@ -136,13 +135,16 @@ public class ModelManager implements Model {
     @Override
     public void addTutorialClass(TutorialClass tutorialClass) {
         classmate.addTutorialClass(tutorialClass);
-
     }
 
     @Override
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
         classmate.addTutorialGroup(tutorialGroup);
+    }
 
+    @Override
+    public void sortTutorialGroups() {
+        classmate.sortTutorialGroups();
     }
 
     @Override
@@ -153,15 +155,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Student> getUnfilteredStudentList() {
+        return classmate.getStudentList();
+    }
+
+    @Override
     public ObservableList<TutorialClass> getFilteredTutorialClassList() {
         return filteredTutorialClasses;
     }
 
     @Override
-    public ObservableList<TutorialGroup> getFilteredTutorialGroupList() {
-        return filteredTutorialGroups;
+    public void updateUnfilteredStudentList(List<Student> students) {
+        classmate.setStudents(students);
     }
-
 
     //=========== Filtered Student List Accessors =============================================================
 
@@ -184,12 +190,6 @@ public class ModelManager implements Model {
     public void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate) {
         requireNonNull(predicate);
         filteredTutorialClasses.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateFilteredTutorialGroupList(Predicate<TutorialGroup> predicate) {
-        requireNonNull(predicate);
-        filteredTutorialGroups.setPredicate(predicate);
     }
 
     @Override

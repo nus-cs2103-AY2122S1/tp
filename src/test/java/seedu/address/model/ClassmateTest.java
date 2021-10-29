@@ -111,10 +111,6 @@ public class ClassmateTest {
             return tutorialClasses;
         }
 
-        @Override
-        public ObservableList<TutorialGroup> getTutorialGroupList() {
-            return tutorialGroups;
-        }
     }
 
 }

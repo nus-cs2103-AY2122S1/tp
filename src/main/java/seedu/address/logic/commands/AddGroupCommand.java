@@ -2,15 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
-
-import java.util.HashSet;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
@@ -23,7 +19,7 @@ public class AddGroupCommand extends Command {
             + PREFIX_GROUPNAME + "GROUPNAME "
             + PREFIX_TYPE + "TYPE "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUPNAME + "1 "
+            + PREFIX_GROUPNUMBER + "1 "
             + PREFIX_CLASSCODE + "G06 "
             + PREFIX_TYPE + "OP1 ";
 
@@ -35,14 +31,13 @@ public class AddGroupCommand extends Command {
     private final TutorialClass toAddTutorialClass;
 
     /**
-     * Creates an AddClassCommand to add the specified {@code Student}
+     * Creates an AddClassCommand to add the specified {@code TutorialGroup}
      */
     public AddGroupCommand(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
         toAdd = tutorialGroup;
         // new class with the same class code created to check whether it already exists in ClassMATE
-        toAddTutorialClass = new TutorialClass(tutorialGroup.getClassCode(),
-                new Schedule("dummy, dummy"), new HashSet<Tag>());
+        toAddTutorialClass = TutorialClass.createTestTutorialClass(toAdd.getClassCode());
     }
 
     @Override
@@ -59,6 +54,9 @@ public class AddGroupCommand extends Command {
         }
 
         model.addTutorialGroup(toAdd);
+
+        // rearrange tutorial groups in order after adding
+        model.sortTutorialGroups();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

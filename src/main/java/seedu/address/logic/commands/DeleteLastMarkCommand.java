@@ -14,7 +14,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentMark;
 
 /**
- * Edits the details of an existing student in the ClassMATE.
+ * Deletes the latest mark of an existing student in the ClassMATE.
  */
 public class DeleteLastMarkCommand extends Command {
 
@@ -76,7 +76,8 @@ public class DeleteLastMarkCommand extends Command {
                 studentToEdit.getAddress(),
                 studentToEdit.getClassCode(),
                 studentToEdit.getTags(),
-                updatedMarks);
+                updatedMarks,
+                studentToEdit.getTutorialGroups());
     }
 
     @Override

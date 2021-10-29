@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.model.util.SampleDataUtil;
 
 
@@ -17,6 +20,7 @@ public class TutorialClassBuilder {
 
     private ClassCode classCode;
     private Schedule schedule;
+    private List<TutorialGroup> tutorialGroups;
     private Set<Tag> tags;
 
     /**
@@ -25,6 +29,8 @@ public class TutorialClassBuilder {
     public TutorialClassBuilder() {
         classCode = new ClassCode(DEFAULT_CLASSCODE);
         schedule = new Schedule(DEFAULT_SCHEDULE);
+        tutorialGroups = new ArrayList<>();
+        tutorialGroups.add(new TutorialGroupBuilder().build());
         tags = new HashSet<>();
     }
 
@@ -34,6 +40,7 @@ public class TutorialClassBuilder {
     public TutorialClassBuilder(TutorialClass tutorialClassToCopy) {
         classCode = tutorialClassToCopy.getClassCode();
         schedule = tutorialClassToCopy.getSchedule();
+        tutorialGroups = tutorialClassToCopy.getTutorialGroupsAsList();
         tags = tutorialClassToCopy.getTags();
     }
 
@@ -54,6 +61,14 @@ public class TutorialClassBuilder {
     }
 
     /**
+     * Sets the {@code TutorialGroups} of the {@code TutorialClass} that we are building.
+     */
+    public TutorialClassBuilder withTutorialGroups(TutorialGroup tutorialGroups) {
+        this.tutorialGroups.add(tutorialGroups);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code TutorialClass} that we are building.
      */
     public TutorialClassBuilder withTags(String ... tags) {
@@ -62,6 +77,6 @@ public class TutorialClassBuilder {
     }
 
     public TutorialClass build() {
-        return new TutorialClass(classCode, schedule, tags);
+        return new TutorialClass(classCode, schedule, tutorialGroups, tags);
     }
 }

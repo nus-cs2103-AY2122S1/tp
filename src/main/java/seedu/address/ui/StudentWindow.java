@@ -52,6 +52,9 @@ public class StudentWindow extends UiPart<Stage> {
     @FXML
     private FlowPane marks;
 
+    @FXML
+    private FlowPane tutorialGroups;
+
     /**
      * Creates a new StudentWindow.
      *
@@ -89,6 +92,7 @@ public class StudentWindow extends UiPart<Stage> {
     public void show(Student student) {
         tags.getChildren().clear();
         marks.getChildren().clear();
+        tutorialGroups.getChildren().clear();
         logger.fine("Showing student information.");
         message.setText(VIEW_MESSAGE);
         name.setText(student.getName().fullName);
@@ -99,6 +103,9 @@ public class StudentWindow extends UiPart<Stage> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getTutorialGroups().stream()
+                .sorted(Comparator.comparing(tutorialGroup -> tutorialGroup.toDisplayString()))
+                .forEach(tutorialGroup -> tutorialGroups.getChildren().add(new Label(tutorialGroup.toDisplayString())));
         List<StudentMark> studentMarkList = student.getMarks();
         int marksCount = studentMarkList.size();
         for (int i = marksCount; i > 0; i--) {

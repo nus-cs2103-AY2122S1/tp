@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTutorialClassAtIndex;
+import static seedu.address.testutil.TypicalClassmate.getTypicalClassmate;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TUTORIALCLASS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TUTORIALCLASS;
-import static seedu.address.testutil.TypicalTutorialClasses.getTypicalClassmate;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +19,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.ClassCode;
+import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
+
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -36,7 +43,8 @@ public class DeleteClassCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getClassmate(), new UserPrefs());
         expectedModel.deleteTutorialClass(tutorialClassToDelete);
-
+        List<Student> newStudentList = updateClassCode(expectedModel, tutorialClassToDelete.getClassCode());
+        expectedModel.updateUnfilteredStudentList(newStudentList);
         assertCommandSuccess(deleteClassCommand, model, expectedMessage, expectedModel);
     }
 
@@ -62,6 +70,8 @@ public class DeleteClassCommandTest {
         Model expectedModel = new ModelManager(model.getClassmate(), new UserPrefs());
         expectedModel.deleteTutorialClass(tutorialClassToDelete);
         showNoTutorialClass(expectedModel);
+        List<Student> newStudentList = updateClassCode(expectedModel, tutorialClassToDelete.getClassCode());
+        expectedModel.updateUnfilteredStudentList(newStudentList);
 
         assertCommandSuccess(deleteClassCommand, model, expectedMessage, expectedModel);
     }
@@ -110,6 +120,12 @@ public class DeleteClassCommandTest {
         model.updateFilteredStudentList(p -> false);
 
         assertTrue(model.getFilteredStudentList().isEmpty());
+    }
+
+    private List<Student> updateClassCode(Model expectedModel, ClassCode classToDelete) {
+        return expectedModel.getUnfilteredStudentList().stream()
+                .map(s -> DeleteClassCommand.removeStudentFromClass(s, classToDelete))
+                .collect(Collectors.toList());
     }
 
     /**

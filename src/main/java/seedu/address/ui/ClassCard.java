@@ -34,10 +34,19 @@ public class ClassCard extends UiPart<Region> {
         this.tutorialClass = tutorialClass;
         id.setText(displayedIndex + ". ");
         classCode.setText(tutorialClass.getClassCode().value);
-        schedule.setText(tutorialClass.getSchedule().value);
+        schedule.setText(formatSchedule(tutorialClass.getSchedule().value));
         tutorialClass.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new javafx.scene.control.Label(tag.tagName)));
+    }
+
+    private String formatSchedule(String input) {
+        String finalSchedule = "";
+        String[] lessonTimings = input.split(",");
+        for (String lesson : lessonTimings) {
+            finalSchedule += lesson.trim() + "\n";
+        }
+        return finalSchedule;
     }
 
     @Override

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -22,6 +23,7 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -50,8 +52,9 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         ClassCode classCode = ParserUtil.parseClassCode(argMultimap.getValue(PREFIX_CLASSCODE).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         ArrayList<StudentMark> marks = new ArrayList<>();
+        Set<TutorialGroup> tutorialGroups = new HashSet<>();
 
-        Student student = new Student(name, phone, email, address, classCode, tagList, marks);
+        Student student = new Student(name, phone, email, address, classCode, tagList, marks, tutorialGroups);
 
 
         return new AddStudentCommand(student);

@@ -23,7 +23,7 @@ public class Schedule {
     public Schedule(String value) {
         requireNonNull(value);
         checkArgument(isValidSchedule(value), MESSAGE_CONSTRAINTS);
-        this.value = parseSchedule(value);
+        this.value = value;
     }
 
     /**
@@ -34,15 +34,6 @@ public class Schedule {
      */
     public static boolean isValidSchedule(String test) {
         return (test.split(VALIDATION_REGEX).length == 2);
-    }
-
-    private String parseSchedule(String input) {
-        String finalSchedule = "";
-        String[] lessonTimings = input.split(",");
-        for (String lesson : lessonTimings) {
-            finalSchedule += lesson.trim() + "\n";
-        }
-        return finalSchedule;
     }
 
     @Override

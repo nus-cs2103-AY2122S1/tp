@@ -6,23 +6,23 @@ import seedu.address.model.student.ClassCode;
 
 public class TutorialGroup {
 
-    private final GroupName groupName;
+    private final GroupNumber groupNumber;
     private final ClassCode classCode;
     private final GroupType groupType;
 
     /**
-     * @param groupName GroupName of Tutorial Group.
+     * @param groupNumber GroupName of Tutorial Group.
      * @param classCode ClassCode of Tutorial Group.
      */
-    public TutorialGroup(GroupName groupName, ClassCode classCode, GroupType groupType) {
-        this.groupName = groupName;
+    public TutorialGroup(GroupNumber groupNumber, ClassCode classCode, GroupType groupType) {
+        this.groupNumber = groupNumber;
         this.classCode = classCode;
         this.groupType = groupType;
 
     }
 
-    public GroupName getGroupName() {
-        return groupName;
+    public GroupNumber getGroupNumber() {
+        return groupNumber;
     }
 
     public ClassCode getClassCode() {
@@ -43,7 +43,7 @@ public class TutorialGroup {
         }
 
         return otherGroup != null
-                && otherGroup.getGroupName().equals(getGroupName())
+                && otherGroup.getGroupNumber().equals(getGroupNumber())
                 && otherGroup.getClassCode().equals(getClassCode())
                 && otherGroup.getGroupType().equals(getGroupType());
 
@@ -60,25 +60,37 @@ public class TutorialGroup {
         }
 
         TutorialGroup otherGroup = (TutorialGroup) other;
-        return otherGroup.getGroupName().equals(getGroupName())
+        return otherGroup.getGroupNumber().equals(getGroupNumber())
                 && otherGroup.getClassCode().equals(getClassCode())
                 && otherGroup.getGroupType().equals(getGroupType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName, classCode, groupType);
+        return Objects.hash(groupNumber, classCode, groupType);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("name: ")
-                .append(getGroupName())
+                .append(getGroupNumber())
                 .append("; class: ")
                 .append(getClassCode())
                 .append("; type: ")
                 .append(getGroupType());
+
+        return builder.toString();
+    }
+
+    /**
+     * Returns a short string to be displayed on StudentCard
+     */
+    public String toDisplayString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getGroupType())
+                .append(" Grp: ")
+                .append(getGroupNumber());
 
         return builder.toString();
     }

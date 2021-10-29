@@ -13,7 +13,6 @@ import seedu.address.model.Classmate;
 import seedu.address.model.ReadOnlyClassmate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
-import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * An Immutable Classmate that is serializable to JSON format.
@@ -29,18 +28,15 @@ class JsonSerializableStudent {
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedTutorialClass> tutorialClasses = new ArrayList<>();
-    private final List<JsonAdaptedTutorialGroup> tutorialGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableStudent} with the given students.
      */
     @JsonCreator
     public JsonSerializableStudent(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                   @JsonProperty("tutorialClasses") List<JsonAdaptedTutorialClass> tutorialClasses,
-                                   @JsonProperty("tutorialGroups") List<JsonAdaptedTutorialGroup> tutorialGroups) {
+                                   @JsonProperty("tutorialClasses") List<JsonAdaptedTutorialClass> tutorialClasses) {
         this.students.addAll(students);
         this.tutorialClasses.addAll(tutorialClasses);
-        this.tutorialGroups.addAll(tutorialGroups);
     }
 
     /**
@@ -54,11 +50,6 @@ class JsonSerializableStudent {
                 .getTutorialClassList()
                 .stream()
                 .map(JsonAdaptedTutorialClass::new)
-                .collect(Collectors.toList()));
-        tutorialGroups.addAll(source
-                .getTutorialGroupList()
-                .stream()
-                .map(JsonAdaptedTutorialGroup::new)
                 .collect(Collectors.toList()));
     }
 
@@ -82,13 +73,6 @@ class JsonSerializableStudent {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL_CLASS);
             }
             classmate.addTutorialClass(tutorialClass);
-        }
-        for (JsonAdaptedTutorialGroup jsonAdaptedTutorialGroup : tutorialGroups) {
-            TutorialGroup tutorialGroup = jsonAdaptedTutorialGroup.toModelType();
-            if (classmate.hasTutorialGroup(tutorialGroup)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL_GROUP);
-            }
-            classmate.addTutorialGroup(tutorialGroup);
         }
         return classmate;
     }

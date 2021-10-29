@@ -14,7 +14,7 @@ public class DeleteLastMarkCommandParser implements Parser<DeleteLastMarkCommand
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteLastMarkCommand
-     * and returns an DeleteLastMarkCommadnd object for execution.
+     * and returns an DeleteLastMarkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteLastMarkCommand parse(String args) throws ParseException {
