@@ -91,7 +91,11 @@ These are the key terms defined for usage of the commands:
 
 Refer to the image below for more information on the different components of ContHACKS!
 
-<img src="images/Walkthrough.png" width="1000px">
+<img src="images/Walkthrough_1.png" width="1000px">
+
+<img src="images/Walkthrough_2.png" width="1000px">
+
+<img src="images/Walkthrough_3.png" width="1000px">
 
 Notes about the command format:<br>
 
