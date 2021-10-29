@@ -98,6 +98,7 @@ public class AddAppCommand extends Command {
         }
 
         model.addAppointment(appointmentToAdd);
+        model.updateState();
         return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToAdd));
     }
 
