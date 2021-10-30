@@ -222,7 +222,12 @@ After being parsed, the implementation for deleting friends and games is similar
 called, resulting in the deletion of a friend or a game.The following sequence diagram 
 illustrates the description for deleting **games**:
 
-<img src="images/DeleteGameSequenceDiagram.png" width="280" />
+<img src="images/DeleteGameSequenceDiagram.png" width="574" />
+
+#### Special considerations:
+
+The games of each friend is stored inside a `Map<GameId, GameFriendLinks>`. Before deleting a game, the links a 
+friend has to a game has to be removed, before deleting the game from the list of games.  
 
 #### Design considerations:
 
