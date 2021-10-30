@@ -246,7 +246,9 @@ Format: `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_A
 * `findm` is case-insensitive. e.g. `n/john` will match `John`
 * Other than `[t/TAG]...`, only the last argument supplied is searched. <br> e.g. `findm n/John n/Amy tta/0 tta/2` will list the member `Amy` with a total attendance of `2`
 * For `[t/TAG]`... , all arguments supplied will be used to find members, members with at least one matching tag will be listed. <br> e.g. `findm t/exco t/y2` will list members with tags `exco` `y2`, and also members with only one matching tag `y2` or `exco`.
-* Only full words will be matched e.g. `n/Johnny` will not match `John`, and `n/John Doe` will not match `John Lim`
+* Only full words will be matched e.g. `n/Johnny` will not match `John`, and `n/John Doe` will not match `John Lim`.
+* `TODAY_ATTENDANCE` must be either `true` or `false`, true being present and false being absent.
+* `TOTAL_ATTENDANCE` must be a **non-negative integer** 0, 1, 2, 3...
 * At least one of the optional fields **must** be supplied.
 * If multiple fields are supplied, only members that match all of the given field keywords will be listed. <br>
 e.g. `findm n/Amy t/exco` will match `Amy` with the tag `exco` but not `John` with the tag `exco`.
@@ -293,7 +295,7 @@ Format: `setm INDEX/INDICES d/DAY(S)`
 
 Examples:
 
-* `findm John` followed by `setm 2 d/1` sets the availability of the person at index 2 in the results of the `findm`
+* `findm n/John` followed by `setm 2 d/1` sets the availability of the person at index 2 in the results of the `findm`
   command to be Monday
 * `listm` followed by `setm 5 d/1 2` sets the availability of the person at index 5 in the member list to be Monday and
   Tuesday
