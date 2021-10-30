@@ -695,6 +695,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a doctor <a name="edit-doctor"/>
 
+1. Editing a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
+
+    2. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited contact are shown in the status message.
+
+    3. Test case: `edit 0 hp/91234567`<br>
+       Expected: No doctor is edited. Error details are shown in the status message.
+
+    4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Editing a doctor while some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+
 ### Finding a doctor <a name="find-doctor"/>
 
 ### Listing all doctors <a name="list-doctors"/>
@@ -704,6 +723,28 @@ testers are expected to do more *exploratory* testing.
 ### Deleting an appointment  <a name="delete-appointment"/>
 
 ### Editing an appointment <a name="edit-appointment"/>
+
+1. Editing an appointment while all appointments are being shown
+
+    1. Prerequisites: Use `appt -f` to list all appointments.
+
+    2. Test case: `appt -e 1 p/1 s/31/12/2021 10:00 dur/30`<br>
+       Expected: First appointment's patient is edited to the first patient in the filtered patient list. The date and session are edited to `31 Dec 21, Fri` and `10:00 - 10:30` respectively. Details of the edited appointment are shown in the status message.
+
+    3. Test case: `appt -e 0 dur/30`<br>
+       Expected: No appointment is edited. Error details are shown in the status message.
+
+    4. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+    5. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
+        Expected: Similar to previous.
+
+3. Editing an appointment while some appointments are being shown
+
+    1. Prerequisites: Use `appt -f [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD] [s/START_DATE] [e/END_DATE]` to list only some appointments. E.g., `appt -f s/01/11/2021` to list only appointments after `01/11/2021`.
+
+    2. Test cases are similar to those above.
 
 ### Filtering all appointments <a name="filter-all-appointments"/>
 
