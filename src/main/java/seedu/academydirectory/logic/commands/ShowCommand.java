@@ -3,6 +3,8 @@ package seedu.academydirectory.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
+import seedu.academydirectory.logic.AdditionalViewType;
+import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 
@@ -69,7 +71,9 @@ public class ShowCommand extends Command {
         requireNonNull(model);
         ObservableList<Student> students = model.getFilteredStudentList();
         String result = displayResult(students, this.assessment);
-        return new CommandResult(result);
+        model.setAdditionalViewType(AdditionalViewType.SHOW);
+        model.setAdditionalInfo(AdditionalInfo.of(result));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, assessment));
     }
 
     @Override

@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.student.StudioRecord;
@@ -52,7 +51,6 @@ public class ViewCreator extends Creator {
         super(additionalInfo, FXML);
         this.student = (Student) additionalInfo.get();
         fullName.setText(student.getName().fullName);
-        fullName.setFont(Font.font(35));
         phone.setText("- Phone number: " + student.getPhone().toString());
         email.setText("- Email address: " + student.getEmail().value);
         telegram.setText("- Telegram handle: " + student.getTelegram().value);
