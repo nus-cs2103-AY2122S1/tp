@@ -95,7 +95,7 @@ public class JsonAdaptedLesson {
         if (timing == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName()));
         }
-        if (!Timing.isValidTiming(timing)) {
+        if (!timing.equals("") && !Timing.isValidTiming(timing)) {
             throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
         }
         final Timing modelLessonTiming = new Timing(timing);

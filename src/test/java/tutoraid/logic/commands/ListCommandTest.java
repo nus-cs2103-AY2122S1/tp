@@ -3,6 +3,7 @@ package tutoraid.logic.commands;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tutoraid.commons.core.Messages;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
@@ -27,12 +28,12 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, Messages.MESSAGE_LIST_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        CommandTestUtil.showStudentAtIndex(model, TypicalIndexes.INDEX_FIRST_STUDENT);
-        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.showStudentAtIndex(model, TypicalIndexes.INDEX_FIRST_ITEM);
+        CommandTestUtil.assertCommandSuccess(new ListCommand(), model, Messages.MESSAGE_LIST_SUCCESS, expectedModel);
     }
 }

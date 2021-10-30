@@ -24,6 +24,7 @@ import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.StudentBuilder;
+import tutoraid.ui.DetailLevel;
 
 public class AddStudentCommandTest {
 
@@ -152,12 +153,27 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public void setLesson(Lesson target, Lesson editedLesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void viewStudent(Student student) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void viewList(boolean viewAll) {
+        public void viewList(DetailLevel detailLevel) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteStudentFromLessons(Student student) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLessonFromStudents(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

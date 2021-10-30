@@ -6,48 +6,55 @@
     "parentName" : "Mrs Tan",
     "parentPhone" : "94351253",
     "progressList" : [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   }, {
     "studentName" : "Benson Meier",
     "studentPhone" : "98765423",
     "parentName" : "Mrs Meier",
     "parentPhone" : "98765432",
     "progressList" : [],
-    "paymentStatus": true
+    "paymentStatus": true,
+    "lessons" : []
   }, {
     "studentName" : "Carl Kurz",
     "studentPhone" : "95352563",
     "parentName" : "Mr Kurz",
     "parentPhone" : "95352567",
     "progressList" : [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   }, {
     "studentName" : "Daniel Meier",
     "studentPhone" : "87652533",
     "parentName" : "Mrs Meier",
     "parentPhone" : "98765432",
     "progressList" : [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   }, {
     "studentName" : "Elle Meyer",
     "studentPhone" : "9482224",
     "parentName" : "Mrs Meyer",
     "parentPhone" : "9482290",
     "progressList" : [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   }, {
     "studentName" : "Fiona Kunz",
     "studentPhone" : "9482427",
     "parentName" : "Mr Daniel",
     "parentPhone" : "9482423",
     "progressList" : [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   }, {
     "studentName" : "George Best",
     "studentPhone" : "9482442",
     "parentName" : "Mrs Kayla",
     "parentPhone" : "94824432",
     "progressList" : [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   } ]
 }

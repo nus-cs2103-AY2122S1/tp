@@ -6,8 +6,6 @@ import static tutoraid.logic.commands.CommandTestUtil.VALID_LESSON_NAME_MATHS_TW
 import static tutoraid.logic.commands.CommandTestUtil.VALID_LESSON_NAME_SCIENCE_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PRICE_MATHS_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PRICE_SCIENCE_TWO;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENTS_MATHS_TWO;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENTS_SCIENCE_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_TIMING_MATHS_TWO;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_TIMING_SCIENCE_TWO;
 
@@ -31,6 +29,7 @@ public class TypicalLessons {
             .withParentPhone("94351253")
             .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
+            .withLessons(new ArrayList<>(Arrays.asList("Maths 1", "Science 1")))
             .build();
 
     public static final Lesson MATHS_ONE = new LessonBuilder()
@@ -69,15 +68,22 @@ public class TypicalLessons {
             .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
             .withCapacity(VALID_CAPACITY_MATHS_TWO)
             .withPrice(VALID_PRICE_MATHS_TWO)
-            .withStudents(VALID_STUDENTS_MATHS_TWO)
             .withTiming(VALID_TIMING_MATHS_TWO)
+            .withStudents(new ArrayList<>())
             .build();
     public static final Lesson SCIENCE_TWO = new LessonBuilder()
             .withLessonName(VALID_LESSON_NAME_SCIENCE_TWO)
             .withCapacity(VALID_CAPACITY_SCIENCE_TWO)
             .withPrice(VALID_PRICE_SCIENCE_TWO)
-            .withStudents(VALID_STUDENTS_SCIENCE_TWO)
             .withTiming(VALID_TIMING_SCIENCE_TWO)
+            .withStudents(new ArrayList<>())
+            .build();
+
+    public static final Lesson MATHS_TWO_NO_STUDENTS = new LessonBuilder()
+            .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+            .withCapacity(VALID_CAPACITY_MATHS_TWO)
+            .withPrice(VALID_PRICE_MATHS_TWO)
+            .withTiming(VALID_TIMING_MATHS_TWO)
             .build();
 
     private TypicalLessons() {
@@ -94,7 +100,22 @@ public class TypicalLessons {
         return lb;
     }
 
+    /**
+     * Returns an {@code LessonBook} with all the typical lessons but no students.
+     */
+    public static LessonBook getTypicalLessonBookWithoutStudents() {
+        LessonBook lb = new LessonBook();
+        for (Lesson lesson : getTypicalLessonsWithoutStudents()) {
+            lb.addLesson(lesson);
+        }
+        return lb;
+    }
+
     public static List<Lesson> getTypicalLessons() {
         return new ArrayList<>(Arrays.asList(MATHS_ONE, SCIENCE_ONE));
+    }
+
+    public static List<Lesson> getTypicalLessonsWithoutStudents() {
+        return new ArrayList<>(List.of(MATHS_TWO_NO_STUDENTS));
     }
 }

@@ -5,13 +5,15 @@
     "parentName": "Mrs Koh",
     "parentPhone": "94351238",
     "progressList": [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   }, {
     "studentName": "Alice Pauline",
     "studentPhone": "94351253",
     "parentName": "Mr Koh",
     "parentPhone": "86351238",
     "progressList": [],
-    "paymentStatus": false
+    "paymentStatus": false,
+    "lessons" : []
   } ]
 }

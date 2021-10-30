@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static tutoraid.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
+import static tutoraid.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
@@ -32,10 +32,10 @@ public class UnpaidCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Student studentToEdit = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_SECOND_ITEM.getZeroBased());
         Student editedStudent = new StudentBuilder(studentToEdit).withPaymentStatus(false).build();
 
-        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_SECOND_STUDENT);
+        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_SECOND_ITEM);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_SET_TO_UNPAID_SUCCESS, editedStudent);
 
@@ -56,9 +56,9 @@ public class UnpaidCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
-        Index outOfBoundIndex = INDEX_SECOND_STUDENT;
+        Index outOfBoundIndex = INDEX_SECOND_ITEM;
         // ensures that outOfBoundIndex is still in bounds of student book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
@@ -69,14 +69,14 @@ public class UnpaidCommandTest {
 
     @Test
     public void equals() {
-        UnpaidCommand unpaidFirstCommand = new UnpaidCommand(INDEX_FIRST_STUDENT);
-        UnpaidCommand unpaidSecondCommand = new UnpaidCommand(INDEX_THIRD_STUDENT);
+        UnpaidCommand unpaidFirstCommand = new UnpaidCommand(INDEX_FIRST_ITEM);
+        UnpaidCommand unpaidSecondCommand = new UnpaidCommand(INDEX_THIRD_ITEM);
 
         // same object -> returns true
         assertTrue(unpaidFirstCommand.equals(unpaidFirstCommand));
 
         // same values -> returns true
-        UnpaidCommand unpaidFirstCommandCopy = new UnpaidCommand(INDEX_FIRST_STUDENT);
+        UnpaidCommand unpaidFirstCommandCopy = new UnpaidCommand(INDEX_FIRST_ITEM);
         assertTrue(unpaidFirstCommand.equals(unpaidFirstCommandCopy));
 
         // different types -> returns false

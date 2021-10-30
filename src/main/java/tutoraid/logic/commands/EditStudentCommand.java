@@ -5,7 +5,7 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
-import static tutoraid.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static tutoraid.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +15,8 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
+import tutoraid.model.lesson.Lesson;
+import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
@@ -25,12 +27,12 @@ import tutoraid.model.student.StudentName;
 /**
  * Edits the details of an existing student in the address book.
  */
-public class EditStudentCommand extends Command {
+public class EditStudentCommand extends EditCommand {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_FLAG = "-s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the index number used in the displayed student list. "
+            + "by the index number used in the Student Panel. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_STUDENT_NAME + "STUDENT NAME "
@@ -51,7 +53,7 @@ public class EditStudentCommand extends Command {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param targetIndex of the student in the filtered student list to edit
+     * @param targetIndex           of the student in the filtered student list to edit
      * @param editStudentDescriptor details to edit the student with
      */
     public EditStudentCommand(Index targetIndex, EditStudentDescriptor editStudentDescriptor) {
@@ -65,13 +67,15 @@ public class EditStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        List<Lesson> lessonList = model.getFilteredLessonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToEdit = lastShownStudentList.get(targetIndex.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
@@ -79,7 +83,10 @@ public class EditStudentCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        Lesson.updateStudentLessonLink(lessonList, studentToEdit, editedStudent);
+        model.viewStudent(editedStudent);
+        model.updateFilteredLessonList(editedStudent::hasLesson);
+
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
@@ -97,9 +104,10 @@ public class EditStudentCommand extends Command {
 
         ProgressList studentProgress = studentToEdit.getProgressList();
         PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
+        Lessons lessons = studentToEdit.getLessons();
 
         return new Student(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
-                studentProgress, paymentStatus);
+                studentProgress, paymentStatus, lessons);
     }
 
     @Override

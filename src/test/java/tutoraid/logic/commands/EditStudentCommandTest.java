@@ -9,8 +9,8 @@ import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
@@ -36,13 +36,15 @@ public class EditStudentCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
-        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_STUDENT, descriptor);
+        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM, descriptor);
 
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        expectedModel.viewStudent(editedStudent);
+        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -67,32 +69,36 @@ public class EditStudentCommandTest {
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
+        expectedModel.viewStudent(editedStudent);
+        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_STUDENT, new EditStudentDescriptor());
-        Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM, new EditStudentDescriptor());
+        Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
 
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
+        expectedModel.viewStudent(editedStudent);
+        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_filteredList_success() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
-        Student personInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student personInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         Student editedStudent = new StudentBuilder(personInFilteredList)
                 .withStudentName(VALID_STUDENT_NAME_BOB)
                 .build();
-        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_STUDENT,
+        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
                 new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_BOB).build());
 
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
@@ -100,26 +106,28 @@ public class EditStudentCommandTest {
         Model expectedModel = new ModelManager(
                 new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        expectedModel.viewStudent(editedStudent);
+        expectedModel.updateFilteredLessonList(editedStudent::hasLesson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {
-        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
-        EditStudentCommand editCommand = new EditStudentCommand(INDEX_SECOND_STUDENT, descriptor);
+        EditStudentCommand editCommand = new EditStudentCommand(INDEX_SECOND_ITEM, descriptor);
 
         assertCommandFailure(editCommand, model, EditStudentCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
     @Test
     public void execute_duplicateStudentFilteredList_failure() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
         // edit person in filtered list into a duplicate in address book
-        Student personInList = model.getStudentBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
-        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_STUDENT,
+        Student personInList = model.getStudentBook().getStudentList().get(INDEX_SECOND_ITEM.getZeroBased());
+        EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
                 new EditStudentDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editCommand, model, EditStudentCommand.MESSAGE_DUPLICATE_STUDENT);
@@ -142,9 +150,10 @@ public class EditStudentCommandTest {
      */
     @Test
     public void execute_invalidStudentIndexFilteredList_failure() {
-        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
-        Index outOfBoundIndex = INDEX_SECOND_STUDENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
+        Index outOfBoundIndex = INDEX_SECOND_ITEM;
+
+        // ensures that outOfBoundIndex is still in bounds of student book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
         EditStudentCommand editCommand = new EditStudentCommand(outOfBoundIndex,
@@ -155,11 +164,11 @@ public class EditStudentCommandTest {
 
     @Test
     public void equals() {
-        final EditStudentCommand standardCommand = new EditStudentCommand(INDEX_FIRST_STUDENT, DESC_AMY);
+        final EditStudentCommand standardCommand = new EditStudentCommand(INDEX_FIRST_ITEM, DESC_AMY);
 
         // same values -> returns true
         EditStudentDescriptor copyDescriptor = new EditStudentDescriptor(DESC_AMY);
-        EditStudentCommand commandWithSameValues = new EditStudentCommand(INDEX_FIRST_STUDENT, copyDescriptor);
+        EditStudentCommand commandWithSameValues = new EditStudentCommand(INDEX_FIRST_ITEM, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -172,10 +181,10 @@ public class EditStudentCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditStudentCommand(INDEX_SECOND_STUDENT, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditStudentCommand(INDEX_SECOND_ITEM, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditStudentCommand(INDEX_FIRST_STUDENT, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditStudentCommand(INDEX_FIRST_ITEM, DESC_BOB)));
     }
 
 }

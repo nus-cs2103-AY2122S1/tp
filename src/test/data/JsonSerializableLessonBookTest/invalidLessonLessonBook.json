@@ -9,7 +9,8 @@
       "parentName" : "Mrs Tan",
       "parentPhone" : "94351253",
       "progress" : "No Progress",
-      "hasPaid" : false
+      "hasPaid" : false,
+      "lessons" : []
     } ],
     "timing" : "1000-1200"
   } ]

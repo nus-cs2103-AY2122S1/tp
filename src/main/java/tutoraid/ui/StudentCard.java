@@ -6,7 +6,7 @@ import javafx.scene.layout.HBox;
 import tutoraid.model.student.Student;
 
 /**
- * A UI component that displays information of a {@code Student}.
+ * A UI component that displays information of a {@code Student}. This variant displays only the latest progress entry.
  */
 public class StudentCard extends Card<Student> {
 
@@ -16,8 +16,9 @@ public class StudentCard extends Card<Student> {
     private static final String LABEL_STUDENT_PHONE = "Mobile";
     private static final String LABEL_PARENT_NAME = "Parent";
     private static final String LABEL_PARENT_PHONE = "Parent Mobile";
-    private static final String LABEL_PROGRESS = "Progress";
-    private static final String LABEL_PAYMENT_STATUS = "";
+    private static final String LABEL_PROGRESS = "Latest Progress";
+    private static final String LABEL_PAYMENT_STATUS = "Payment Status";
+    private static final String LABEL_LESSONS = "Lessons";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -43,7 +44,8 @@ public class StudentCard extends Card<Student> {
     private Label progress;
     @FXML
     private Label paymentStatus;
-
+    @FXML
+    private Label lessons;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -56,6 +58,8 @@ public class StudentCard extends Card<Student> {
         parentName.setText(formatCardLabel(LABEL_PARENT_NAME, student.getParentName().fullName));
         parentPhone.setText(formatCardLabel(LABEL_PARENT_PHONE, student.getParentPhone().value));
         progress.setText(formatCardLabel(LABEL_PROGRESS, student.getLatestProgress().toString()));
+        lessons.setText(formatCardLabel(LABEL_LESSONS, student.getLessons().toString()));
         paymentStatus.setText(formatCardLabel(LABEL_PAYMENT_STATUS, student.getPaymentStatus().toString()));
+        lessons.setText(formatCardLabel(LABEL_LESSONS, student.getLessons().toString()));
     }
 }

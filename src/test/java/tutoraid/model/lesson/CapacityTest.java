@@ -15,9 +15,15 @@ public class CapacityTest {
     }
 
     @Test
-    public void constructor_invalidCapacity_throwsIllegalArgumentException() {
-        String invalidCapacity = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Capacity(invalidCapacity));
+    public void constructor_negativeCapacity_throwsIllegalArgumentException() {
+        String negativeCapacity = "-20";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Capacity(negativeCapacity));
+    }
+
+    @Test
+    public void constructor_zeroCapacity_throwsIllegalArgumentException() {
+        String zeroCapacity = "0";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Capacity(zeroCapacity));
     }
 
     @Test

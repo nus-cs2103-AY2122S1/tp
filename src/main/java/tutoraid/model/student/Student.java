@@ -1,8 +1,10 @@
 package tutoraid.model.student;
 
+import java.util.List;
 import java.util.Objects;
 
 import tutoraid.commons.util.CollectionUtil;
+import tutoraid.model.lesson.Lesson;
 
 /**
  * Represents a Student in the TutorAid.
@@ -19,19 +21,37 @@ public class Student {
     // Data fields
     private final ProgressList progressList;
     private final PaymentStatus paymentStatus;
+    private final Lessons lessons;
 
     /**
      * Every field must be present and not null.
      */
     public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
-                   ProgressList progressList, PaymentStatus paymentStatus) {
-        CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
+                   ProgressList progressList, PaymentStatus paymentStatus, Lessons lessons) {
+        CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone, progressList,
+                paymentStatus, lessons);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.progressList = progressList;
         this.paymentStatus = paymentStatus;
+        this.lessons = lessons;
+    }
+
+    /**
+     * Updates the dependency between each lesson and a student if the lesson gets edited
+     * @param studentList A list containing all students in TutorAid
+     * @param lessonToEdit The lesson being edited
+     * @param editedLesson The edited lesson
+     */
+    public static void updateStudentLessonLink(List<Student> studentList, Lesson lessonToEdit, Lesson editedLesson) {
+        for (Student student : studentList) {
+            if (student.hasLesson(lessonToEdit)) {
+                student.removeLesson(lessonToEdit);
+                student.addLesson(editedLesson);
+            }
+        }
     }
 
     public StudentName getStudentName() {
@@ -62,12 +82,28 @@ public class Student {
         return paymentStatus;
     }
 
+    public Lessons getLessons() {
+        return lessons;
+    }
+
     public void addProgress(Progress toAdd) {
         progressList.addProgress(toAdd);
     }
 
     public Progress deleteLatestProgress() {
         return progressList.deleteLatestProgress();
+    }
+
+    public void addLesson(Lesson toAttend) {
+        lessons.addLesson(toAttend);
+    }
+
+    public void removeLesson(Lesson toQuit) {
+        lessons.deleteLesson(toQuit);
+    }
+
+    public boolean hasLesson(Lesson lesson) {
+        return lessons.hasLesson(lesson);
     }
 
     /**
@@ -103,13 +139,14 @@ public class Student {
                 && otherStudent.getParentName().equals(getParentName())
                 && otherStudent.getParentPhone().equals(getParentPhone())
                 && otherStudent.getProgressList().equals(getProgressList())
-                && otherStudent.getPaymentStatus().equals(getPaymentStatus());
+                && otherStudent.getPaymentStatus().equals(getPaymentStatus())
+                && otherStudent.getLessons().equals(getLessons());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progressList, paymentStatus);
+        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progressList, paymentStatus, lessons);
     }
 
     /**
@@ -146,7 +183,9 @@ public class Student {
         builder.append("; Progress: ")
                 .append(getLatestProgress())
                 .append("; Payment Status: ")
-                .append(getPaymentStatus());
+                .append(getPaymentStatus())
+                .append("; Lessons: ")
+                .append(getLessons());
 
         return builder.toString();
     }

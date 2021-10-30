@@ -1,6 +1,8 @@
 package tutoraid.model;
 
 import static java.util.Objects.requireNonNull;
+import static tutoraid.ui.DetailLevel.HIGH;
+import static tutoraid.ui.DetailLevel.MED;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -13,6 +15,7 @@ import tutoraid.commons.core.LogsCenter;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
+import tutoraid.ui.DetailLevel;
 import tutoraid.ui.UiManager;
 
 /**
@@ -134,16 +137,30 @@ public class ModelManager implements Model {
     public void viewStudent(Student targetStudent) {
         requireNonNull(targetStudent);
         filteredStudents.setPredicate(student -> student.equals(targetStudent));
-        UiManager.showViewWindow();
+        filteredLessons.setPredicate(lesson ->
+                targetStudent.getLessons().getAllLessonNamesAsStringArrayList().contains(lesson.nameAsString()));
+        UiManager.showFullDetails();
     }
 
     @Override
-    public void viewList(boolean viewAll) {
-        if (viewAll) {
-            UiManager.showViewWindow();
+    public void viewList(DetailLevel detailLevel) {
+        if (detailLevel == HIGH) {
+            UiManager.showFullDetails();
+        } else if (detailLevel == MED) {
+            UiManager.showMediumDetails();
         } else {
-            UiManager.hideViewWindow();
+            UiManager.showMinimalDetails();
         }
+    }
+
+    @Override
+    public void deleteLessonFromStudents(Lesson lesson) {
+        for (Student student : studentBook.getStudentList()) {
+            if (student.hasLesson(lesson)) {
+                student.getLessons().deleteLesson(lesson);
+            }
+        }
+        studentBook.refreshStudentBook();
     }
 
     //=========== LessonBook ================================================================================
@@ -176,10 +193,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        CollectionUtil.requireAllNonNull(target, editedLesson);
+        lessonBook.setLesson(target, editedLesson);
+    }
+
+    @Override
     public void viewLesson(Lesson targetLesson) {
         requireNonNull(targetLesson);
         filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
-        UiManager.showViewWindow();
+        filteredStudents.setPredicate(student ->
+                targetLesson.getStudents().getAllStudentNamesAsStringArrayList().contains(student.toNameString()));
+        UiManager.showFullDetails();
+    }
+
+    @Override
+    public void deleteStudentFromLessons(Student student) {
+        for (Lesson lesson : lessonBook.getLessonList()) {
+            if (lesson.hasStudent(student)) {
+                lesson.removeStudent(student);
+            }
+        }
+        lessonBook.refreshLessonBook();
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -196,6 +231,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+        studentBook.refreshStudentBook();
         filteredStudents.setPredicate(predicate);
     }
 
@@ -213,6 +249,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
+        lessonBook.refreshLessonBook();
         filteredLessons.setPredicate(predicate);
     }
 

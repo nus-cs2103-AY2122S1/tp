@@ -125,14 +125,13 @@ public class ProgressList {
         if (progressList.size() == 0) {
             return "No Progress";
         }
-
         String allProgress = "";
 
         for (int i = 1; i < progressList.size() + 1; i++) {
             String progressToPrint = progressList.get(i - 1).toString();
-            allProgress = allProgress + i + ". " + progressToPrint + "\n";
+            allProgress = allProgress + "\t" + i + ". " + progressToPrint + "\n";
         }
-        return allProgress;
+        return "\n" + allProgress;
     }
 
     @Override

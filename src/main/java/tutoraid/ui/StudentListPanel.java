@@ -1,5 +1,8 @@
 package tutoraid.ui;
 
+import static tutoraid.ui.DetailLevel.HIGH;
+import static tutoraid.ui.DetailLevel.MED;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -16,7 +19,7 @@ import tutoraid.model.student.Student;
 public class StudentListPanel extends UiPart<Region> {
     private static final String FXML = "StudentListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
-    private final boolean viewAll;
+    private final DetailLevel detailLevel;
 
     @FXML
     private ListView<Student> studentListView;
@@ -24,11 +27,11 @@ public class StudentListPanel extends UiPart<Region> {
     /**
      * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
      */
-    public StudentListPanel(ObservableList<Student> studentList, boolean viewAll) {
+    public StudentListPanel(ObservableList<Student> studentList, DetailLevel detailLevel) {
         super(FXML);
         studentListView.setItems(studentList);
         studentListView.setCellFactory(listView -> new StudentListViewCell());
-        this.viewAll = viewAll;
+        this.detailLevel = detailLevel;
     }
 
     /**
@@ -42,7 +45,9 @@ public class StudentListPanel extends UiPart<Region> {
             if (empty || student == null) {
                 setGraphic(null);
                 setText(null);
-            } else if (viewAll) {
+            } else if (detailLevel == HIGH) {
+                setGraphic(new FullStudentCard(student, getIndex() + 1).getRoot());
+            } else if (detailLevel == MED) {
                 setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
             } else {
                 setGraphic(new MinimalStudentCard(student, getIndex() + 1).getRoot());

@@ -1,5 +1,9 @@
 package tutoraid.ui;
 
+import static tutoraid.ui.DetailLevel.HIGH;
+import static tutoraid.ui.DetailLevel.LOW;
+import static tutoraid.ui.DetailLevel.MED;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -25,6 +29,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     private static StudentListPanel fullStudentPanel = null;
+    private static StudentListPanel mediumStudentPanel = null;
     private static StudentListPanel minimalStudentPanel = null;
     private static LessonListPanel fullLessonPanel = null;
     private static LessonListPanel minimalLessonPanel = null;
@@ -69,10 +74,11 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        fullStudentPanel = new StudentListPanel(logic.getFilteredStudentList(), true);
-        minimalStudentPanel = new StudentListPanel(logic.getFilteredStudentList(), false);
-        fullLessonPanel = new LessonListPanel(logic.getFilteredLessonList(), true);
-        minimalLessonPanel = new LessonListPanel(logic.getFilteredLessonList(), false);
+        fullStudentPanel = new StudentListPanel(logic.getFilteredStudentList(), HIGH);
+        mediumStudentPanel = new StudentListPanel(logic.getFilteredStudentList(), MED);
+        minimalStudentPanel = new StudentListPanel(logic.getFilteredStudentList(), LOW);
+        fullLessonPanel = new LessonListPanel(logic.getFilteredLessonList(), HIGH);
+        minimalLessonPanel = new LessonListPanel(logic.getFilteredLessonList(), LOW);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -124,9 +130,11 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the student's particulars of this window.
      */
-    void fillStudentCard(boolean viewAll) {
-        studentListPanel = viewAll
+    void fillStudentCard(DetailLevel detailLevel) {
+        studentListPanel = detailLevel == HIGH
                 ? fullStudentPanel
+                : detailLevel == MED
+                ? mediumStudentPanel
                 : minimalStudentPanel;
         studentListPanelPlaceholder.getChildren().clear();
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
@@ -135,10 +143,10 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the lesson's particulars of this window.
      */
-    void fillLessonCard(boolean viewAll) {
-        lessonListPanel = viewAll
-                ? fullLessonPanel
-                : minimalLessonPanel;
+    void fillLessonCard(DetailLevel detailLevel) {
+        lessonListPanel = detailLevel == LOW
+                ? minimalLessonPanel
+                : fullLessonPanel;
         lessonListPanelPlaceholder.getChildren().clear();
         lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
     }
@@ -147,8 +155,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        fillStudentCard(false);
-        fillLessonCard(false);
+        fillStudentCard(MED); // display more detail on launch
+        fillLessonCard(MED);
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
