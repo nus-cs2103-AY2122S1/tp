@@ -1,5 +1,7 @@
 package seedu.plannermd.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -7,15 +9,20 @@ import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_CARL;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
 
+import java.time.LocalDate;
+import java.util.Collections;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.appointment.Appointment;
+import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.testutil.appointment.AddAppointmentDescriptorBuilder;
@@ -36,6 +43,8 @@ public class AddAppointmentCommandIntegrationTest {
         Doctor doctor = validAppointment.getDoctor();
         Index doctorIndex = Index.fromZeroBased(1);
         Index patientIndex = Index.fromOneBased(1);
+        LocalDate apptDate = validAppointment.getAppointmentDate().date;
+
         for (Patient pt : model.getPlannerMd().getPatientList()) {
             if (pt.equals(patient)) {
                 patientIndex = Index.fromZeroBased(model.getPlannerMd().getPatientList().indexOf(pt));
@@ -53,8 +62,13 @@ public class AddAppointmentCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getPlannerMd(), new UserPrefs());
         expectedModel.addAppointment(validAppointment);
+        expectedModel.updateFilteredAppointmentList(AppointmentFilters.appointmentFiltersAtDate(apptDate)
+                .collectAllFilters());
         assertCommandSuccess(new AddAppointmentCommand(patientIndex, doctorIndex, descriptor), model,
-                String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment), expectedModel);
+                String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment,
+                        AppointmentDate.DISPLAYED_DATE_FORMATTER.format(validAppointment.getAppointmentDate().date)),
+                expectedModel);
+        assertTrue(model.getFilteredAppointmentList().contains(validAppointment));
     }
 
     @Test
@@ -81,6 +95,7 @@ public class AddAppointmentCommandIntegrationTest {
                 new AddAppointmentDescriptorBuilder(appointmentInList).build();
         assertCommandFailure(new AddAppointmentCommand(patientIndex, doctorIndex, descriptor), model,
                 AddAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT);
+        assertEquals(Collections.singletonList(appointmentInList), model.getFilteredAppointmentList());
     }
 
 
@@ -103,5 +118,7 @@ public class AddAppointmentCommandIntegrationTest {
 
         assertCommandFailure(new AddAppointmentCommand(patientIndex, doctorIndex, descriptor), model,
                 AddAppointmentCommand.MESSAGE_CONFLICTING_APPOINTMENT);
+
+        assertEquals(Collections.singletonList(appointmentInList), model.getFilteredAppointmentList());
     }
 }
