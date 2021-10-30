@@ -528,7 +528,7 @@ Unselect contacts at indexes `1` of the selected list.
 
 ### `export`
 
-Exports all selected contacts to a _csv_ file. Generated file can be found in a folder named _exports_ located in the _home folder_.
+Exports all selected contacts to a _csv_ file. The generated file can be found in a folder named _exports_ located in the _home folder_.
 
 <div class="d-flex alert alert-secondary pb-0">
 <div class="mr-2">

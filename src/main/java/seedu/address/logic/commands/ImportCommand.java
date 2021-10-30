@@ -16,6 +16,8 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Contacts added successfully";
+    public static final String MESSAGE_DUPLICATE = "There were some duplicate contacts "
+            + "that already existed in your database";
 
     private List<Person> personsToAdd;
 
@@ -30,6 +32,7 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        int count = 0;
 
         for (int i = 0; i < personsToAdd.size(); i++) {
             Person person = personsToAdd.get(i);
@@ -37,8 +40,13 @@ public class ImportCommand extends Command {
                 continue;
             }
             model.addPerson(person);
+            count++;
         }
-        return new CommandResult(personsToAdd.size() + " " + MESSAGE_SUCCESS);
+
+        if (count < personsToAdd.size()) {
+            return new CommandResult(count + " " + MESSAGE_SUCCESS + ". " + MESSAGE_DUPLICATE);
+        }
+        return new CommandResult(count + " " + MESSAGE_SUCCESS);
     }
 
     @Override
