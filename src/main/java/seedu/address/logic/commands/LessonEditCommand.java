@@ -329,6 +329,7 @@ public class LessonEditCommand extends UndoableCommand {
          * A defensive copy of {@code homeworkSet} is used internally.
          */
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
+            setRecurring(toCopy.isRecurring);
             setDate(toCopy.date);
             setEndDate(toCopy.endDate);
             setTimeRange(toCopy.timeRange);
