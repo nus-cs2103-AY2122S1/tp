@@ -66,6 +66,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             startIndex = ParserUtil.parseIndex(args[0]);
             endIndex = ParserUtil.parseIndex(args[1]);
+
+            if (!isValidRange(startIndex, endIndex)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
+
             result = new Index[endIndex.getOneBased() - startIndex.getOneBased() + 1];
         } catch (ParseException | NegativeArraySizeException e) {
             throw new ParseException(
@@ -83,5 +89,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     private long countDash(String str) {
         long count = str.chars().filter(c -> c == '-').count();
         return count;
+    }
+
+    private boolean isValidRange(Index start, Index end) {
+        return end.getOneBased() - start.getOneBased() >= 0;
     }
 }
