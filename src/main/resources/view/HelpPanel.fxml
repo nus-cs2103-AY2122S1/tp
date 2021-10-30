@@ -9,15 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToWidth="true">
-    <VBox styleClass="help-menu" fx:id="container" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-        <VBox>
-            <GridPane fx:id="commandContainer" VBox.vgrow="ALWAYS" hgap="10">
+<VBox styleClass="help-menu" fx:id="container" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      minWidth="400" >
+    <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="ALWAYS" fitToWidth="true">
+        <VBox styleClass="help-menu">
+        <GridPane fx:id="commandContainer" VBox.vgrow="SOMETIMES" hgap="10" >
                 <padding>
-                    <Insets top="5" right="10" bottom="5" left="10"/>
+                    <Insets top="5" right="25" bottom="5" left="25"/>
                 </padding>
                 <children>
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="bannerLabel"></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text=""></Label>
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text=" General " styleClass="helpHeader"></Label>
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text=" "></Label>
                     <Label GridPane.columnIndex="0" GridPane.rowIndex="4" text=" Contacts " styleClass="helpHeader"></Label>
@@ -44,7 +45,7 @@
                 </columnConstraints>
             </GridPane>
         </VBox>
-    </VBox>
-</ScrollPane>
+    </ScrollPane>
+</VBox>
 
 

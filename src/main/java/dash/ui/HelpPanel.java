@@ -59,7 +59,7 @@ public class HelpPanel extends UiPart<Region> {
     private static final String CONTACTS_CLEAR_DESC = "Clears all contacts from the contacts list.";
 
     private static final String CONTACTS_TAG_HEADER = "tag INDEX [t/TAG]";
-    private static final String CONTACTS_TAG_DESC = "Replaces the tags of the given contact with the given tags.";
+    private static final String CONTACTS_TAG_DESC = "Add the tags of the given contact with the given tags.";
 
     private static final String TASKS_ADD_HEADER = "add d/DESCRIPTION [dt/DATE,TIME] [t/TAG]";
     private static final String TASKS_ADD_DESC = "Adds a task with the specified fields.";
@@ -78,7 +78,7 @@ public class HelpPanel extends UiPart<Region> {
     private static final String TASKS_CLEAR_DESC = "Clears all tasks from the task list.";
 
     private static final String TASKS_TAG_HEADER = "tag INDEX [t/TAG]";
-    private static final String TASKS_TAG_DESC = "Replaces the tags of the given task with the given tags.";
+    private static final String TASKS_TAG_DESC = "Add the tags of the given task with the given tags.";
 
     private static final String TASKS_ASSIGN_HEADER = "assign INDEX [p/INDEX]";
     private static final String TASKS_ASSIGN_DESC = "Assign a given contact to a task.";
@@ -86,13 +86,16 @@ public class HelpPanel extends UiPart<Region> {
     private static final String TASKS_COMPLETE_HEADER = "complete INDEX";
     private static final String TASKS_COMPLETE_DESC = "Mark a task as complete.";
 
+    private static final String TASKS_UPCOMING_HEADER = "upcoming";
+    private static final String TASKS_UPCOMING_DESC = "Finds all incomplete tasks whose Date/Time are after the " +
+            "current Date/Time (as determined locally on your computer). These tasks will be sorted chronologically, " +
+            "with tasks that are closer to the current Date/Time first.";
+
     private static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w15-2.github.io/tp/UserGuide.html";
 
     private static final String DEVGUIDE_URL = "https://ay2122s1-cs2103t-w15-2.github.io/tp/DeveloperGuide.html";
 
     private final Logger logger = LogsCenter.getLogger(HelpPanel.class);
-
-    private Image banner = new Image("/images/banner.png");
 
     private ResultDisplay resultDisplay;
 
@@ -122,9 +125,6 @@ public class HelpPanel extends UiPart<Region> {
         super(FXML);
         this.resultDisplay = resultDisplay;
         helpContent.setText(HELP_CONTENT);
-        ImageView bannerImageView = new ImageView(banner);
-        bannerLabel.setText(" ");
-        bannerLabel.setGraphic(bannerImageView);
     }
 
     /**
@@ -169,6 +169,7 @@ public class HelpPanel extends UiPart<Region> {
         taskList.add(new HelpCommand(TASKS_TAG_HEADER, TASKS_TAG_DESC));
         taskList.add(new HelpCommand(TASKS_ASSIGN_HEADER, TASKS_ASSIGN_DESC));
         taskList.add(new HelpCommand(TASKS_COMPLETE_HEADER, TASKS_COMPLETE_DESC));
+        taskList.add(new HelpCommand(TASKS_UPCOMING_HEADER, TASKS_UPCOMING_DESC));
         return taskList;
     }
 

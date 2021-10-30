@@ -71,6 +71,7 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
+
         ImageView tagIcon = new ImageView(tag);
         tagImage.setText(" ");
         tagImage.setGraphic(tagIcon);
