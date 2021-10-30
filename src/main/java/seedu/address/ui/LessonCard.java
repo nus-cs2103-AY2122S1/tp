@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 
@@ -28,6 +28,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label dateRangePlaceholder;
+    @FXML
     private Label dateRange;
     @FXML
     private Label time;
@@ -36,9 +38,11 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label outstandingFees;
     @FXML
+    private Label cancelPlaceholder;
+    @FXML
     private Label cancelledDates;
     @FXML
-    private FlowPane homeworkList;
+    private VBox homeworkList;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,37 +52,45 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
         title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
+        date.setText(lesson.getDisplayDate().toString());
+        time.setText(lesson.getTimeRange().toString());
+        rates.setText(lesson.getLessonRates().toString());
+        outstandingFees.setText(lesson.getOutstandingFees().toString());
 
-        String endDateString = lesson.getEndDate().equals(Date.MAX_DATE) ? "-" : lesson.getEndDate().toString();
+        dateRangePlaceholder.setManaged(lesson.isRecurring());
+        dateRange.setManaged(lesson.isRecurring());
+        String endDateString = lesson.getEndDate().equals(Date.MAX_DATE) ? "∞" : lesson.getEndDate().toString();
         String dateRangeString =
-                String.format("Starts on: %1$s | Ends on: %2$s",
-                        lesson.getStartDate().toString(), endDateString);
+                String.format("%1$s - %2$s", lesson.getStartDate().toString(), endDateString);
         dateRange.setText(dateRangeString);
 
-        date.setText("Date: " + lesson.getDisplayDate().toString());
-        time.setText("Time: " + lesson.getTimeRange().toString());
-        rates.setText("Rates: " + lesson.getLessonRates().toString());
-        outstandingFees.setText("Outstanding Fees: " + lesson.getOutstandingFees().toString());
+        homeworkList.setManaged(!lesson.getHomework().isEmpty());
         lesson.getHomework().stream()
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()
-                        .add(homeworkLabel(homework.toString())));
+                        .add(createHomeworkLabel(homework.toString())));
 
+        setCancelledDated(lesson);
+    }
+
+    private void setCancelledDated(Lesson lesson) {
         Set<Date> lessonCancelledDates = lesson.getCancelledDates();
         if (lessonCancelledDates.isEmpty()) {
+            cancelPlaceholder.setManaged(false);
             cancelledDates.setManaged(false);
             return;
         }
         if (lesson.isRecurring()) {
             List<String> dates = lesson.getCancelledDates().stream().sorted()
                     .map(Date::toString).collect(Collectors.toList());
-            cancelledDates.setText("Cancelled Dates:\n" + String.join(",\n", dates));
+            cancelledDates.setText(String.join(",\n", dates));
         } else if (lesson.getCancelledDates().size() > 0) {
-            cancelledDates.setText("Cancelled!");
+            cancelledDates.setManaged(false);
+            cancelPlaceholder.setText("Cancelled!");
         }
     }
 
-    private Label homeworkLabel(String homework) {
+    private Label createHomeworkLabel(String homework) {
         Label label = new Label(homework);
         label.setWrapText(true);
         return label;

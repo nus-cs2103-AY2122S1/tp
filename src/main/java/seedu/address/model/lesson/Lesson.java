@@ -254,6 +254,8 @@ public abstract class Lesson implements Comparable<Lesson> {
         if (!homework.isEmpty()) {
             builder.append("; Homework: ");
             homework.forEach(x -> builder.append(x + "; "));
+        } else {
+            builder.append("; ");
         }
         if (isCancelled()) {
             builder.append("(Cancelled)");

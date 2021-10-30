@@ -25,8 +25,8 @@ public class LessonDeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "ldelete";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
-            + "LESSON_INDEX (must be a positive integer)";
+    public static final String COMMAND_PARAMETERS = "INDEX "
+            + "LESSON_INDEX";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 

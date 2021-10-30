@@ -41,6 +41,7 @@ public class Date implements Comparable<Date> {
     public final String value;
 
     private final LocalDate localDate;
+
     /**
      * Constructs an {@code Date}.
      *
@@ -76,6 +77,11 @@ public class Date implements Comparable<Date> {
         return localDate;
     }
 
+    /**
+     * Returns the day of the week of this date.
+     *
+     * @return Day of the week of this date.
+     */
     public DayOfWeek getDayOfWeek() {
         return localDate.getDayOfWeek();
     }

@@ -73,7 +73,7 @@ class JsonAdaptedLesson {
         date = source.getStartDate().value;
         endDate = source.getEndDate().value;
         timeRange = source.getTimeRange().value;
-        subject = source.getSubject().subject;
+        subject = source.getSubject().value;
         lessonRates = source.getLessonRates().value;
         outstandingFees = source.getOutstandingFees().value;
         homework.addAll(source.getHomework().stream()
