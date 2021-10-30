@@ -329,7 +329,7 @@ Finds a product in Sellah.
 
 Format : `find -p NAME`
 
-Example : `find -c phone` Shows a list of all products with the `NAME` `phone` in Sellah.
+Example : `find -p phone` Shows a list of all products with the `NAME` `phone` in Sellah.
 
 Expected Output:
 ![Ui](images/UIFindProductCommand.png)
