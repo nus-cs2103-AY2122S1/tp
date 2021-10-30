@@ -361,8 +361,7 @@ Optional fields for a **recurring** lesson is:
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
-* The lesson's rate refers to the fee of the lesson per hour.
-This rate will be used in the calculation of fees due after each lesson.
+* The lesson's rate refers to the fee of the lesson per hour. This rate will be used in the calculation of fees due after each lesson.<br>
 
 * A lesson can be identified by the index number shown in the lesson list of the student.
 </div>
