@@ -12,7 +12,8 @@ https://github.com/AY2021S1-CS2103T-W16-3/tp/pull/179/commits/aec461182c194c9ca2
   * Table of Contents
   {:toc}
 </div>
-<!--@@author>
+<!--@@author
+-->
 
 # 1. Introduction
 Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to track their students' contacts**.
