@@ -55,6 +55,8 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
+    public static final String MESSAGE_EDIT_GENDER_ONLY_FAILURE = "Please edit the body measurements "
+            + "when you modify the client's gender.";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
@@ -92,9 +94,12 @@ public class EditCommand extends Command {
 
         if (!Measurement.isValidMeasurement(editedPerson.getMeasurement().value,
                 editedPerson.getGender().value)) {
-            throw new CommandException(Measurement.getMessageConstraints(
-                    editedPerson.getGender().value)
-            );
+            String response = Measurement.getMessageConstraints(editedPerson.getGender().value);
+
+            if (!personToEdit.getGender().equals(editedPerson.getGender())) {
+                response = MESSAGE_EDIT_GENDER_ONLY_FAILURE + "\n" + response;
+            }
+            throw new CommandException(response);
         }
 
         model.setPerson(personToEdit, editedPerson);
