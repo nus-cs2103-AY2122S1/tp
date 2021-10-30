@@ -16,9 +16,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.stage.Stage;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -29,6 +31,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.UserProfileWatcher;
+import seedu.address.ui.MainWindow;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -60,6 +64,8 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
+    private List<UserProfileWatcher> userProfileWatchers;
+
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
@@ -80,7 +86,18 @@ public class EditCommand extends Command {
         Person currentProfile = model.getUserProfile();
         Person editedProfile = createEditedPerson(currentProfile, editPersonDescriptor);
         model.setUserProfile(editedProfile);
+        notifyUserProfileWatchers();
         return new CommandResult(String.format(MESSAGE_EDIT_PROFILE_SUCCESS, editedProfile));
+    }
+
+    public void addUserProfileWatcher(UserProfileWatcher userProfileWatcher) {
+        userProfileWatchers.add(userProfileWatcher);
+    }
+
+    public void notifyUserProfileWatchers() {
+        for (UserProfileWatcher userProfileWatcher : userProfileWatchers) {
+            userProfileWatcher.updateUserProfile();
+        }
     }
 
     /**
