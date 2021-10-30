@@ -36,7 +36,7 @@ public class EditClassCommand extends Command {
             + PREFIX_TIMESLOT + "Mon 11:00-11:30 "
             + PREFIX_LIMIT + "20";
 
-    public static final String MESSAGE_EDIT_CLASS_SUCCESS = "Edited: %1$s";
+    public static final String MESSAGE_EDIT_CLASS_SUCCESS = "Edited Class:\n %1$s";
     public static final String MESSAGE_NO_CLASS_CHANGES = "Class details are already up to date.";
     public static final String MESSAGE_INVALID_CLASS_LIMIT = "Minimum limit of class is %1$s.";
     public static final String MESSAGE_INVALID_CLASS_SLOT = "This timeslot is already taken. Check timetable!";

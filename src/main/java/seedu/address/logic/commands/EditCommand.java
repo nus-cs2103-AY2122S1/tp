@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student:\n %1$s";
     public static final String MESSAGE_NO_STUDENT_CHANGES = "Student details are already up to date.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
 

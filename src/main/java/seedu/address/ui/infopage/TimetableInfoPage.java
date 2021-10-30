@@ -24,16 +24,13 @@ public class TimetableInfoPage extends InfoPage {
     private static final String PANE_BORDER = "-fx-border-width:0.3px;-fx-border-color:black";
     private static final String PANE_NO_BORDER = "-fx-border-width:0px;";
     private static final Logger logger = LogsCenter.getLogger(TimetableInfoPage.class);
-    private static final String[] days = new String[]{"Monday", "Tuesday", "Wednesday",
-        "Thursday", "Friday", "Saturday", "Sunday"};
+    private static final String[] days = new String[]{"Mon", "Tue", "Wed",
+        "Thu", "Fri", "Sat", "Sun"};
     private final int numCols = 8;
     private Timetable timetable;
 
     @FXML
     private GridPane timetableShown;
-
-    @FXML
-    private ScrollPane scrollPane;
 
     /**
      * Displays a timetable on screen to user.
@@ -44,8 +41,6 @@ public class TimetableInfoPage extends InfoPage {
     public TimetableInfoPage(ObservableList<TuitionClass> tuitionClasses, ResultDisplay resultDisplay) {
         super(FXML);
         logger.info("Starting construction of timetable.");
-        scrollPane.setStyle(" -fx-background:dark; -fx-border-color:dark;");
-        scrollPane.setPadding(new Insets(0, 0, 0, 20));
         this.timetable = new Timetable(tuitionClasses, resultDisplay, this);
         setTableDay();
         timetable.showTimetable();
