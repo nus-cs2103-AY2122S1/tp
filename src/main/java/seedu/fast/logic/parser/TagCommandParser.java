@@ -53,6 +53,17 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 
+        //checks if special tags were manually entered
+        for (Tag tag: addTags) {
+            if (Tag.isSpecialTag(tag.tagName)) {
+                throw new ParseException(Tag.MESSAGE_SPECIAL_TAG_ENTERED);
+            }
+        }
+        for (Tag tag: deleteTags) {
+            if (Tag.isSpecialTag(tag.tagName)) {
+                throw new ParseException(Tag.MESSAGE_SPECIAL_TAG_ENTERED);
+            }
+        }
 
         return new TagCommand(index, addTags, deleteTags);
     }

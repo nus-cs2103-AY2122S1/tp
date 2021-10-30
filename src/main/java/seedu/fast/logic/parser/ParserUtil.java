@@ -154,6 +154,9 @@ public class ParserUtil {
         if (!Tag.isValidTagTerm(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (Tag.isSpecialTag(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_SPECIAL_TAG_ENTERED);
+        }
         return Tag.createTag(trimmedTag);
     }
 

@@ -28,6 +28,10 @@ public class PriorityTag extends Tag {
             + MediumPriority.COMMAND + "|"
             + HighPriority.COMMAND;
 
+    public static final String[] LOWERCASE_PRIORITY_TAG_NAMES = new String[] {LowPriority.NAME.toLowerCase(),
+            MediumPriority.NAME.toLowerCase(),
+            HighPriority.NAME.toLowerCase()};
+
     /**
      * Constructs a {@code PriorityTag}.
      * @param tagName A valid tag name.
