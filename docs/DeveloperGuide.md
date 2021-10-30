@@ -204,11 +204,11 @@ Step 1. A valid command `filter_interview past` is given as user input. This inv
 Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
 to identify the user input ` past`.
 
-Step 3. Upon identifying the user input ` past`, `FilterInterviewCommandParser#parse` will then call methods of 
-`ValidFilterInterviewArgs` from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
+Step 3. Upon identifying the user input ` past`, `FilterInterviewCommandParser#parse` will then call methods of the
+`ValidFilterInterviewArgs` class from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
 The details of this step are omitted from the sequence diagram below for brevity.
 
-Step 4. `FilterInterviewCommandParser#parse` then calls the method `ValidFilterInterviewArgs#getFilterInterviewCommand()` to obtain
+Step 4. `FilterInterviewCommandParser#parse` calls the method `ValidFilterInterviewArgs#getFilterInterviewCommand()` to obtain
 an object of the appropriate subclass of `FilterInterviewCommand`, which in this case is an instance of `FilterInterviewPastCommand`. 
 This instance is returned and propagated back to `LogicManager`. 
 
