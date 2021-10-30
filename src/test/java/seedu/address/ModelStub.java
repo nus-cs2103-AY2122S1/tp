@@ -166,7 +166,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void markOrder(Order order) {
+    public boolean markOrder(Order order) {
         throw new AssertionError("This method should not be called.");
     }
 
