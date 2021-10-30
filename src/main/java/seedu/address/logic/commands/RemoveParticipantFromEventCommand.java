@@ -17,6 +17,7 @@ public class RemoveParticipantFromEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes the Participant with specified index from an event with another specified index.\n"
+            + "Index should be positive integer.\n"
             + "Parameters: "
             + "PARTICIPANT_INDEX "
             + "EVENT_INDEX\n"

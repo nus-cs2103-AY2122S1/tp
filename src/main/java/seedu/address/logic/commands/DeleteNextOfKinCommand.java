@@ -17,6 +17,7 @@ public class DeleteNextOfKinCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the next-of-kin with specified index from a "
             + "participant with another specified index.\n"
+            + "Index should be positive integer.\n"
             + "Parameters: \n"
             + "NOK_INDEX "
             + "PARTICIPANT_INDEX\n"
