@@ -32,8 +32,8 @@ public class MaddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_POSITION + "friends "
-            + PREFIX_POSITION + "owesMoney";
+            + PREFIX_POSITION + "Admin Assistant "
+            + PREFIX_POSITION + "Logistics Assistant";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book";

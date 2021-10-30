@@ -38,7 +38,7 @@ public class MlistCommand extends Command {
 
     private Index eventIndex = null;
 
-    private String hasAttended = null;
+    private Boolean hasAttended = null;
 
     public MlistCommand() {}
 
@@ -57,7 +57,7 @@ public class MlistCommand extends Command {
      * @param eventIndex is the index of the event
      * @param hasAttended is string to indicate if checking for absence or attendance
      */
-    public MlistCommand(Index eventIndex, String hasAttended) {
+    public MlistCommand(Index eventIndex, boolean hasAttended) {
         this.eventIndex = eventIndex;
         this.hasAttended = hasAttended;
     }
@@ -75,30 +75,16 @@ public class MlistCommand extends Command {
             model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
             model.setCurrentEvent(null);
             return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(), ""));
-        } else if (hasAttended == null) {
-            Event eventToList = lastShownList.get(eventIndex.getZeroBased());
-            Set<Member> memberList = eventToList.getParticipants();
-            model.setCurrentEvent(eventToList);
-            model.updateFilteredMemberList(memberList::contains);
-
-            return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(),
-                    "for event: " + eventToList));
-        } else if (hasAttended.equals("true")) {
-            Event eventToList = lastShownList.get(eventIndex.getZeroBased());
-            Set<Member> memberList = eventToList.getAttended();
-            model.setCurrentEvent(eventToList);
-            model.updateFilteredMemberList(memberList::contains);
-
-            return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(),
-                    "attended the event: " + eventToList));
         } else {
             Event eventToList = lastShownList.get(eventIndex.getZeroBased());
-            Set<Member> memberList = eventToList.getAbsent();
+            Set<Member> memberList = eventToList.getParticipants(hasAttended);
             model.setCurrentEvent(eventToList);
             model.updateFilteredMemberList(memberList::contains);
 
+            String attend;
+
             return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredMemberList().size(),
-                    "did not attend the event: " + eventToList));
+                    "for the event: " + eventToList));
         }
     }
 }

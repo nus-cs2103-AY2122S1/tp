@@ -30,7 +30,10 @@ public class TaskListPanel extends UiPart<Region> {
      */
     public TaskListPanel(ObservableList<Task> taskList, Optional<Member> member) {
         super(FXML);
-        taskListTitle.setText("Task List");
+        String titleText = member.isPresent()
+                ? member.get().getName().fullName + "'s Tasks"
+                : "Task List";
+        taskListTitle.setText(titleText);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }

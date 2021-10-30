@@ -26,7 +26,7 @@ public class TdoneCommand extends Command {
             + "by the index numbers used in the displayed task list of the task identified\n"
             + "Parameters: " + PREFIX_TASK_ID + "TASK_ID... (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "1"
+            + PREFIX_TASK_ID + "1 "
             + PREFIX_TASK_ID + "2";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Marked task: %1$s as done\n";

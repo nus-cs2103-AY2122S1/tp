@@ -42,9 +42,9 @@ public class EeditCommand extends Command {
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_MEMBER_ID + "MEMBER_ID]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_ID + " 1"
-            + PREFIX_NAME + "Freshman Orientation Project "
-            + PREFIX_DATE + "11/11/2021"
-            + PREFIX_MEMBER_ID + "1" + PREFIX_MEMBER_ID + "2";
+            + PREFIX_NAME + "Freshman Orientation Week "
+            + PREFIX_DATE + "11/11/2021 "
+            + PREFIX_MEMBER_ID + "1 " + PREFIX_MEMBER_ID + "2";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

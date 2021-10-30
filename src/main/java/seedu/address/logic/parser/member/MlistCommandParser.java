@@ -34,10 +34,11 @@ public class MlistCommandParser implements Parser<MlistCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MlistCommand.MESSAGE_USAGE));
         }
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
+
         if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ATTEND)) {
-            return new MlistCommand(index, "true");
+            return new MlistCommand(index, true);
         } else if (ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ABSENT)) {
-            return new MlistCommand(index, "false");
+            return new MlistCommand(index, false);
         } else {
             return new MlistCommand(index);
         }
