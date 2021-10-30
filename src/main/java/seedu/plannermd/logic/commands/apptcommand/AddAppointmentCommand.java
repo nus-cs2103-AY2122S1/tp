@@ -29,7 +29,7 @@ public class AddAppointmentCommand extends AppointmentCommand {
             + PREFIX_START + "DATE_AND_TIME" + " [" + PREFIX_DURATION + "DURATION" + "] " + "["
             + PREFIX_REMARK + " REMARK" + "]\n" + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " "
             + PREFIX_PATIENT + "1 "
-            + PREFIX_DOCTOR + "2 " + PREFIX_START + "2/2/2022 12:00 "
+            + PREFIX_DOCTOR + "2 " + PREFIX_START + "12/11/2021 20:00 "
             + PREFIX_DURATION + "45 " + PREFIX_REMARK + "Patient wants a blood test";
 
 
