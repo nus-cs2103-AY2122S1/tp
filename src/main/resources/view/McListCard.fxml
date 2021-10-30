@@ -26,21 +26,10 @@
                 </minWidth>
             </Label>
             <HBox spacing="5" alignment="CENTER_LEFT">
-<!--                <Label fx:id="title" styleClass="cell_big_label">-->
-<!--                    <minWidth>-->
-<!--                        &lt;!&ndash; Ensures that the label text is never truncated &ndash;&gt;-->
-<!--                        <Region fx:constant="USE_PREF_SIZE" />-->
-<!--                    </minWidth>-->
-<!--                </Label>-->
                 <Label fx:id="currMc" text="\$first" styleClass="cell_small_label" />
                 <Label fx:id="targetMc" text="\$first" styleClass="cell_small_label" />
             </HBox>
             <ProgressBar fx:id="progressBar" styleClass="mc_progress" />
-<!--            <FlowPane fx:id="tags" />-->
-<!--            <FlowPane fx:id="academicCalendar" />-->
-<!--            <Label fx:id="title" styleClass="cell_small_label" text="\$title" />-->
-<!--            <Label fx:id="mc" styleClass="cell_small_label" text="\$mc" />-->
-<!--            <Label fx:id="description" styleClass="cell_small_label" text="\$description" />-->
         </VBox>
     </GridPane>
 </HBox>

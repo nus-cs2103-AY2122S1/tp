@@ -39,6 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Code code = ParserUtil.parseCode(argMultimap.getValue(PREFIX_CODE).get());
+        System.out.println(argMultimap.getValue(PREFIX_TITLE).get());
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Mc mc = ParserUtil.parseMc(argMultimap.getValue(PREFIX_MC).get());
