@@ -16,6 +16,8 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Contacts added successfully";
+    public static final String MESSAGE_DUPLICATE = "There were some duplicate contacts "
+            + "that already existed in your database";
 
     private List<Person> personsToAdd;
 
@@ -39,6 +41,10 @@ public class ImportCommand extends Command {
             }
             model.addPerson(person);
             count++;
+        }
+
+        if (count < personsToAdd.size()) {
+            return new CommandResult(count + " " + MESSAGE_SUCCESS + ". " + MESSAGE_DUPLICATE);
         }
         return new CommandResult(count + " " + MESSAGE_SUCCESS);
     }

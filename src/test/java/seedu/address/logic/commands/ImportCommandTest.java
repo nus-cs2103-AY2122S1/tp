@@ -45,7 +45,9 @@ public class ImportCommandTest {
 
         assertEquals(typicalPersons.size() - 1
                 + " "
-                + ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
+                + ImportCommand.MESSAGE_SUCCESS
+                + ". "
+                + ImportCommand.MESSAGE_DUPLICATE, commandResult.getFeedbackToUser());
         assertEquals(typicalPersons, modelStub.getPersonsAdded());
     }
 }
