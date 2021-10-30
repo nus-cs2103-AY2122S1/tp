@@ -429,7 +429,7 @@ Can be used to delete up to **10** contacts in a single `del` command by supplyi
 
 <div markdown="span" class="alert alert-primary">:exclamation: Warning:
 If *Format 1* is used, there should be a space in between each `INDEX` if multiple `INDEX` are input. <br>
-If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'.
+If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`.
 </div>
 
 **Examples**:

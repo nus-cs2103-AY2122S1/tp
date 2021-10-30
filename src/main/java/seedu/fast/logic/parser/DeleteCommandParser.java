@@ -47,7 +47,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     }
 
     private boolean isRangeInput(String args) {
-        return args.contains("-") && args.trim().length() == 3;
+        String testArgs = args.trim().replace(" ", "");
+        return testArgs.length() >= 3 && countDash(testArgs) == 1;
     }
 
     // should return a string array of length 2
@@ -66,9 +67,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             startIndex = ParserUtil.parseIndex(args[0]);
             endIndex = ParserUtil.parseIndex(args[1]);
             result = new Index[endIndex.getOneBased() - startIndex.getOneBased() + 1];
-        } catch (ParseException pe) {
+        } catch (ParseException | NegativeArraySizeException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
         }
 
         int count = 0;
@@ -77,5 +78,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
         return result;
+    }
+
+    private long countDash(String str) {
+        long count = str.chars().filter(c -> c == '-').count();
+        return count;
     }
 }
