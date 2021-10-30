@@ -65,7 +65,7 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-       return this.equals(otherPerson);
+        return this.equals(otherPerson);
     }
 
     /**

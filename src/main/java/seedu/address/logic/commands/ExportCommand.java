@@ -27,9 +27,8 @@ public class ExportCommand extends Command {
             + "Parameters: FILENAME (Must be a valid filename and be in the csv format)"
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " myContacts.csv";
-    public static final String MESSAGE_SUCCESS = "Contacts exported successfully";
+    public static final String MESSAGE_SUCCESS = "contacts successfully exported to";
     public static final String MSG_FILE_WRITE_ERROR = "File cannot be written to";
-    public static final String MSG_NO_CONTACTS = "No contacts are selected";
 
     private final String[] fieldHeaders = new String[]{"name", "phone", "email", "address", "tags"};
     private final Map<String, List<String>> data = new HashMap<>();
@@ -67,7 +66,7 @@ public class ExportCommand extends Command {
         } catch (IOException e) {
             throw new CommandException(MSG_FILE_WRITE_ERROR);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(personList.size() + " " + MESSAGE_SUCCESS + " " + filePath);
     }
 
     private void convertFieldsToString(List<Person> personList) {
