@@ -210,6 +210,10 @@ using an _Edit Command_ to edit the phone number and email parameters of a conta
 
 :page_with_curl: Format: ```tag INDEX [t/TAG]...```
 
+<div markdown="block" class="alert alert-info">
+**:warning: Tag Limitations:**<br>
+Tag names are only limited to 20 characters!
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -333,6 +337,11 @@ an _Edit Command_ to edit a task's date/time and assignee.
 :orange_book: The _Tag Command_ lets you add extra tags to a task without wiping/replacing the old tags.
 
 :page_with_curl: Format: ```tag INDEX [t/TAG]...```
+
+<div markdown="block" class="alert alert-info">
+**:warning: Tag Limitations:**<br>
+Tag names are only limited to 20 characters!
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
