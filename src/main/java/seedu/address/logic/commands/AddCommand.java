@@ -19,7 +19,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String SHORTCUT = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TutAssistor. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_REMARK + "Weak in geometry.";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutAssistor";
 
     private final Student toAdd;
 
