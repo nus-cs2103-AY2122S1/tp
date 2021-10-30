@@ -402,8 +402,8 @@ All member data will be removed immediately after this command is executed. This
 * Facilities are assumed to be available on every day of the week.
 * `NAME` specifies the name of the facility.
 * `LOCATION` specifies the general location of the facility.
-* `NAME` and `LOCATION` each accept up to 50 alphanumeric characters (including spaces).
-* Facilities with the same `NAME` and `LOCATION` are considered duplicates
+* `NAME` and `LOCATION` each accept **up to 50 alphanumeric characters (including spaces)**.
+* Facilities with the same `NAME` and `LOCATION` are considered duplicates.
 * `TIME` specifies the start time of the training session at the facility and **must be in the 24-hour format** `HHmm`.
 * `CAPACITY` refers to the maximum number of people allowed at the facility and **must be a positive integer from 1 to 50**.
 </div>
