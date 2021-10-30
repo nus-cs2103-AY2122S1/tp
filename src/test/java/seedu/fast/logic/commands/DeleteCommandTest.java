@@ -135,14 +135,12 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidMultipleIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, outOfBoundIndex});
 
         ModelManager expectedModel = new ModelManager(model.getFast(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED,
-                1, outOfBoundIndex.getOneBased());
+                outOfBoundIndex.getOneBased());
 
         assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
     }

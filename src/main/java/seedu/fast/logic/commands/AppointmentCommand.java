@@ -27,7 +27,7 @@ public class AppointmentCommand extends Command {
             + "Parameters (to add an appointment): \nINDEX (must be a positive integer), "
             + PREFIX_APPOINTMENT + "DATE (must be yyyy-mm-dd), "
             + "[" + PREFIX_APPOINTMENT_TIME + "TIME] (must be hh:mm (24-hour format)), "
-            + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 30 characters long)." + "\n\n"
+            + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 20 characters long)." + "\n\n"
             + "Examples: \n" + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_TIME + "22:15 "

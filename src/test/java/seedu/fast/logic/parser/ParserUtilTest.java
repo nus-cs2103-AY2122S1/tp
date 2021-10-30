@@ -33,11 +33,12 @@ public class ParserUtilTest {
     private static final String INVALID_HELP_ARG_2 = "archive";
     private static final String INVALID_HELP_COMMAND_1 = "help archive";
     private static final String INVALID_HELP_COMMAND_2 = "help random command";
-    private static final String INVALID_DATE_INPUT = "10-10-2021";
-    private static final String INVALID_DATE_INPUT_2 = "10-Oct-2021";
-    private static final String INVALID_DATE_INPUT_3 = "10102021";
-    private static final String INVALID_DATE_MONTH_INPUT = "2021-20-01";
-    private static final String INVALID_DATE_DAY_INPUT = "2021-10-45";
+    private static final String INVALID_DATE_INPUT = "10-10-2025";
+    private static final String INVALID_DATE_INPUT_2 = "10-Oct-2025";
+    private static final String INVALID_DATE_INPUT_3 = "10102025";
+    private static final String INVALID_DATE_INPUT_4 = "10-10-2021";
+    private static final String INVALID_DATE_MONTH_INPUT = "2025-20-01";
+    private static final String INVALID_DATE_DAY_INPUT = "2025-10-45";
     private static final String INVALID_TIME_INPUT = "8pm";
     private static final String INVALID_TIME_INPUT_2 = "8";
     private static final String INVALID_TIME_HOUR_INPUT = "26:00";
@@ -60,8 +61,8 @@ public class ParserUtilTest {
     private static final String VALID_HELP_COMMAND_2 = "help priority tag";
     private static final String VALID_HELP_COMMAND_OUTPUT_1 = "Help";
     private static final String VALID_HELP_COMMAND_OUTPUT_2 = "Priority Tag";
-    private static final String VALID_DATE_INPUT = "2021-10-10";
-    private static final String FORMATTED_DATE = "10 Oct 2021";
+    private static final String VALID_DATE_INPUT = "2025-10-10";
+    private static final String FORMATTED_DATE = "10 Oct 2025";
     private static final String VALID_TIME_INPUT = "20:00";
     private static final String FORMATTED_TIME = "2000";
     private static final String VALID_VENUE_INPUT = "Clementi Mall";
@@ -312,6 +313,9 @@ public class ParserUtilTest {
 
         // without dash
         assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(INVALID_DATE_INPUT_3));
+
+        // past date
+        assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(INVALID_DATE_INPUT_4));
     }
 
     @Test

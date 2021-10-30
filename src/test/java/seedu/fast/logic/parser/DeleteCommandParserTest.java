@@ -50,6 +50,9 @@ public class DeleteCommandParserTest {
     public void parse_rangeArgs_returnsDeleteCommand() {
         assertParseSuccess(parser, "1-3",
                 new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
+
+        assertParseSuccess(parser, "1 - 3",
+                new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
     }
 
     @Test
@@ -61,6 +64,9 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_reversedRangeArgs_throwsParseException() {
         assertParseFailure(parser, "10-8", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "6-5", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
 
@@ -75,7 +81,8 @@ public class DeleteCommandParserTest {
         assertParseFailure(parser, "1-", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
 
-        assertParseFailure(parser, "1 - 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "1--3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
+
     }
 }
