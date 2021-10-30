@@ -9,4 +9,4 @@ has_children: true
 {: .no_toc }
 
 Contribute to BogoBogo! 
-Take a look at our Developer's Guide for an insight into our source code. Or you can look at our other guides to learn about our project conventions. 
+Take a look at our Developer's Guide for an insight into our source code. Or you can look at our other guides to learn about our project conventions.
