@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Salary implements Field {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Salaries have to be a positive integer (or 0) representing the pay in dollars. Cents can be added by"
-            + "adding it after a \".\", but a positive integer (or 0) value is required after the period if it is"
+            "Salaries have to be a positive integer (or 0) representing the pay in dollars. Cents can be added by "
+            + "adding it after a \".\", but a positive integer (or 0) value is required after the period if it is "
             + "included.";
 
     public final Integer value; //
