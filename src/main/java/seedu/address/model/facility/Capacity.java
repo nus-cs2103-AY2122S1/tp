@@ -1,6 +1,7 @@
 package seedu.address.model.facility;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Facility's capacity.
@@ -19,6 +20,7 @@ public class Capacity {
      */
     public Capacity(String capacity) {
         requireNonNull(capacity);
+        checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
         this.capacity = capacity;
     }
 

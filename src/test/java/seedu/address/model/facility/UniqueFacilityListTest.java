@@ -26,7 +26,7 @@ public class UniqueFacilityListTest {
     public final Facility facility = new Facility(
             new FacilityName("Court 1"),
             new Location("Kent Ridge Sports Hall"),
-            new Time("13:00"),
+            new Time("1300"),
             new Capacity("5"));
 
     @Test

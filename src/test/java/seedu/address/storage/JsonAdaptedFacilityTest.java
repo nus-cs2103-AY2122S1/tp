@@ -25,7 +25,7 @@ public class JsonAdaptedFacilityTest {
 
     private static final String VALID_FACILITY_NAME = KENT_RIDGE_SPORT_HALL_5_COURT_1.getName().toString();
     private static final String VALID_LOCATION = KENT_RIDGE_SPORT_HALL_5_COURT_1.getLocation().toString();
-    private static final String VALID_TIME = KENT_RIDGE_SPORT_HALL_5_COURT_1.getTime().toString();
+    private static final String VALID_TIME = KENT_RIDGE_SPORT_HALL_5_COURT_1.getTime().time;
     private static final String VALID_CAPACITY = KENT_RIDGE_SPORT_HALL_5_COURT_1.getCapacity().toString();
 
     private static final List<JsonAdaptedPerson> EMPTY_ALLOCATION_LIST = new ArrayList<>();

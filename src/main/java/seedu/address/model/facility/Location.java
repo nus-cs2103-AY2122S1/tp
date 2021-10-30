@@ -1,6 +1,7 @@
 package seedu.address.model.facility;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Facility's location.
@@ -22,13 +23,14 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
+        checkArgument(isValidTime(location), MESSAGE_CONSTRAINTS);
         this.location = location;
     }
 
     /**
      * Returns true if a given string is a valid location.
      */
-    public static boolean isValidLocation(String test) {
+    public static boolean isValidTime(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

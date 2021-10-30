@@ -2,6 +2,7 @@ package seedu.address.model.facility;
 
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Facility's name in the address book.
@@ -23,6 +24,7 @@ public class FacilityName {
      */
     public FacilityName(String facilityName) {
         requireNonNull(facilityName);
+        checkArgument(isValidFacilityName(facilityName), MESSAGE_CONSTRAINTS);
         this.facilityName = facilityName;
     }
 

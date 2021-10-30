@@ -1,6 +1,7 @@
 package seedu.address.model.facility;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +25,7 @@ public class Time {
      */
     public Time(String time) {
         requireNonNull(time);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.time = time;
     }
 

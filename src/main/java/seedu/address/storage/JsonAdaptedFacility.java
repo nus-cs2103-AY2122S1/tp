@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class JsonAdaptedFacility {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Location.class.getSimpleName()));
         }
-        if (!Location.isValidLocation(location)) {
+        if (!Location.isValidTime(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
         }
 
