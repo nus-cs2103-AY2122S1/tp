@@ -139,7 +139,7 @@ are all sample data! Here are some commands you can try to see what they do:
    * `add n/John Doe`
     
 2. Delete the 3rd contact in FAST
-    * `delete 3`
+    * `del 3`
     
 3. View all your saved contacts
     *  `list`
