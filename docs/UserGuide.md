@@ -19,28 +19,40 @@ This User Guide will help you set up your contact list and familiarise yourself 
 ## Table of Contents
 
 * [Quick Start](#quick-start)
+* [About](#about)
 * [Features](#features)
-    * [Viewing help: `help`](#viewing-help-help)
+  * [Restrictions](#restrictions)
+  * Modifying Contacts
     * [Adding a contact: `add`](#adding-a-contact-add)
-    * [Listing all contacts: `list`](#listing-all-contacts-list)
     * [Editing a contact: `edit`](#editing-a-contact-edit)
-    * [Locating contacts: `find`](#locating-contacts-find)
     * [Deleting a contact: `delete`](#deleting-a-contact-delete)
+  * Viewing Contacts
+    * [Listing all contacts: `list`](#listing-all-contacts-list)
+    * [Locating contacts: `find`](#locating-contacts-find)
     * [Filtering by category: `filter`](#filtering-contacts-filter)
-    * [Undoing operations : `undo`](#undoing-operations-undo)
-    * [Redoing operations : `redo`](#redoing-operations-redo)
     * [Sorting contacts: `sort`](#sorting-the-contacts-sort)
     * [Summarizing contacts: `sum`](#summarizing-contacts-sum)
     * [Viewing a contact : `view`](#viewing-a-contact-view)
-    * [Exporting data: `export`](#exporting-data-export)
-    * [Displaying commands: `cmd`](#displaying-commands-cmd)
-    * [Clearing all entries : `clear`](#clearing-all-entries-clear)
-    * [Exiting the program : `exit`](#exiting-the-program-exit)
+    *
+  * Others
+    * [Undoing operations : `undo`](#undoing-operations-undo)
+    * [Redoing operations : `redo`](#redoing-operations-redo)
     * [Navigating input history](#navigating-input-history)
+    
+  * Help
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Displaying commands: `cmd`](#displaying-commands-cmd)
+  * Managing Data
+    * [Exporting data: `export`](#exporting-data-export)
+    * [Clearing all entries : `clear`](#clearing-all-entries-clear)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
+  * [Exiting the program : `exit`](#exiting-the-program-exit)
+
+    
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
