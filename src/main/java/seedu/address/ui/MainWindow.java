@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -23,7 +22,6 @@ import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.util.UserProfileWatcher;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -104,14 +102,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private HBox userDetails;
-
-    /*
-    @FXML
-    private ImageView userProfile;
-
-    @FXML
-    private Label userName;
-*/
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -223,26 +213,11 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         if (logic.isProfilePresent()) {
-            //setUserProfileOnMenuBar();
             UserProfileInMenuBar userProfileInMenuBar = new UserProfileInMenuBar(logic);
             userDetails.getChildren().add(userProfileInMenuBar.getRoot());
         }
     }
-/*
-    public void updateUserProfile() {
-        setUserProfileOnMenuBar();
-    }
-*/
-    /**
-     * Sets the {@code userName} and {@code userProfile}
-     * to be displayed on the Menu Bar.
-     */
-    /*
-    public void setUserProfileOnMenuBar() {
-        userProfile.setImage(logic.getUserProfile().getProfilePicture());
-        userName.setText(logic.getUserProfile().getName().toString());
-    }
-*/
+
     /**
      * Sets the default size based on {@code guiSettings}.
      */
