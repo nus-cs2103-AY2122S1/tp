@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DecimalFormat;
+
 /**
  * Represents a Person's body measurements in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidMeasurement(String, GenderType)}
@@ -16,7 +18,6 @@ public class Measurement {
     public static final String FEMALE_MESSAGE_CONSTRAINTS =
             "A female's body measurements should be of the format height_waist_shoulder_bust in cm,"
                     + " and it should not be blank";
-    public static final String IS_NUMBER_REGEX = "\\d+";
     public final String value;
 
     /**
@@ -28,6 +29,20 @@ public class Measurement {
         requireNonNull(measurement);
         checkArgument(isValidMeasurement(measurement), GENERAL_MESSAGE_CONSTRAINTS);
         value = measurement;
+    }
+
+    public String getValue() {
+        String[] measurements = value.split("_");
+        formatMeasurements(measurements);
+        return String.join("_", measurements);
+    }
+
+    private void formatMeasurements(String[] args) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        for (int i = 0; i < args.length; i++) {
+            double value = Double.parseDouble(args[i]);
+            args[i] = df.format(value);
+        }
     }
 
     /**
@@ -64,7 +79,9 @@ public class Measurement {
 
     private static boolean isNumber(String[] args) {
         for (String i: args) {
-            if (!i.matches(IS_NUMBER_REGEX)) {
+            try {
+                Double.parseDouble(i);
+            } catch (NumberFormatException e) {
                 return false;
             }
         }
