@@ -283,7 +283,7 @@ Format: `deleteNok INDEX_1 INDEX_2`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `deleteNok 2 1` - Removes the 2nd Next-of-Kin from th1st Participant.
+* `deleteNok 2 1` - Removes the 2nd Next-of-Kin from the 1st Participant.
 
 <br>![result for 'deleteNok 1 2'](images/deleteNokSecondFirstResult.png)
 
