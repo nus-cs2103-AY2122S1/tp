@@ -233,6 +233,10 @@ add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks
 ```
 
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: `James Yeoh` and  `james &nbsp;  yeoh` are considered the same person, namely `Name` is case-insensitive and the differences in whitespaces would not be considered.
+</div>
+
 #### Adding a tuition class: `addclass` | `ac`
 Adds a tuition class with a set limit of students at a specified [timeslot](#44-timeslot). TutAssistor will notify you if there are any conflicting timeslots.
 

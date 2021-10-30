@@ -169,8 +169,13 @@ public class Student implements Nameable {
             return true;
         }
 
-        return otherStudent != null
-                && otherStudent.getName().equals(getName());
+        if (otherStudent == null || !(otherStudent instanceof Student)) {
+            return false;
+        }
+
+        String thisName = this.getNameString().trim().replaceAll(" +", " ").toLowerCase();
+        String otherName = otherStudent.getNameString().trim().replaceAll(" +", " ").toLowerCase();
+        return thisName.equals(otherName);
     }
 
     public Student getSameNameStudent(Student otherStudent) {
