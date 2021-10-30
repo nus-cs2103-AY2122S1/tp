@@ -68,7 +68,12 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         }
 
         Session session = new Session(time, duration);
-        addAppointmentDescriptor.setSession(session);
+        if (session.isEndWithinSameDay()) {
+            addAppointmentDescriptor.setSession(session);
+        } else {
+            throw new ParseException(Session.MESSAGE_END_WITHIN_SAME_DAY);
+        }
+
         Index patientIndex;
         Index doctorIndex;
         try {
