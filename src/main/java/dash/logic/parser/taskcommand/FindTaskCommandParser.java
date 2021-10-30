@@ -9,8 +9,8 @@ import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
