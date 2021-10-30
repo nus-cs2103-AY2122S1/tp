@@ -170,6 +170,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] 
 * You can remove all the elderly’s health conditions by typing `h/` without
     specifying any health conditions after it.
 * You can remove the elderly's last visit by typing `lv/` without specifying any datetime after it.
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
 *  `edit 1 p/91234567 l/English`
@@ -185,10 +186,11 @@ Examples:
 Shows a list of all the elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
 Format: `list [w/] [m/]`
-- `list` without any prefix displays all the elderly in the alphabetical order of their names.
-- `list w/` displays all the elderly with an incoming visit in the next week.
-- `list m/` displays all the elderly with an incoming visit in the next month.
-- `w/` and `m/` fields cannot be both present.
+
+* `list` without any prefix displays all the elderly in the alphabetical order of their names.
+* `list w/` displays all the elderly with an incoming visit in the next week.
+* `list m/` displays all the elderly with an incoming visit in the next month.
+* `w/` and `m/` fields cannot be both present.
 
 Examples:
 * `list`
@@ -208,11 +210,14 @@ Format: `sort [FIELD_TO_BE_SORTED]`
 * `sort v/` sorts elderly in ascending order of their next `visit` date (the earliest first).
 * There should be exactly one `FIELD_TO_BE_SORTED` at any time.
 * `sort` acts on the list currently being displayed.
-* Currently, `sort` only supports fields of `last visit` or `visit`.
+* Currently, `sort` only supports flags of `last visit` or `visit`.
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Example: 
 * `sort lv/`
   > Sorts the elderly list in descending order of `last visit` date.
+* `sort v/`
+  > Sorts the elderly list in ascending order of `visit` date.
 
 ### Find elderly by attribute : `find`
 
@@ -221,11 +226,12 @@ Finds elderly whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* All attributes are searched (`NAME`, `PHONE`, `LANGUAGE`, `ADDRESS`, `VISIT`, `LAST_VISIT`)
-* Partial words will be matched, and will return any elderly who has the partial word as a substring of any attribute e.g. `Han` will match `Hans Bo` and `Rohan Tan`
-* `VISIT` and `LAST_VISIT` are in the `yyyy-MM-dd HH:mm` format.
+* All elderly attributes are searched. (`NAME`, `PHONE`, `LANGUAGE`, `ADDRESS`, `VISIT`, `LAST_VISIT`)
+* Partial words will be matched, and will return any elderly who has the partial word as a substring of any attribute. e.g. `Han` will match `Hans Bo` and `Rohan Tan`
+* `VISIT` and `LAST_VISIT` are in the `yyyy-MM-dd HH:mm` [format](#structure-of-an-elderly-contact).
 * Elderly matching all given keywords will be returned (i.e. `AND` search).
   e.g. `Hans English` will return `Hans Gruber`, `Hanson Lim`, both of which have `LANGUAGE` English
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
 * `find John`
@@ -243,9 +249,8 @@ Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 * `INDEX` corresponds to the elderly’s index in the address book. It is a **strictly positive integer, and must be included.**
 * The `VISIT` is in the format of `yyyy-mm-dd HH:mm`, and it must be included.
 * The `FREQUENCY` and `OCCURRENCE` are optional parameters, and must both be included or excluded.
-* `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
-* `OCCURRENCE` is a **strictly positive integer**.
 * If there is already a next visit scheduled for the elderly, this command will schedule a new visit that overwrites the existing one.
+*  A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
 * `visit 1 at/2021-12-31 17:00`
@@ -261,7 +266,7 @@ Marks a scheduled visit to an elderly as done.
 Format: `done INDEX`
 
 * `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.** There must be a scheduled visit for the elderly before the visit can be marked as done.
-* Once a scheduled visit is marked as done, it will update the last visited time of the elderly, and now there is no longer a scheduled next visit for the elderly.
+* Once a scheduled visit is marked as done, it will update the last visited time of the elderly. If the visit is not recurring or is on its last occurrence, there will be no next visit. Otherwise, the next visit will be updated to reflect the next visit date.
 
 Example:
 * `done 1`
@@ -315,11 +320,6 @@ SeniorLove data are saved as a JSON file `[JAR file location]/data/addressbook.j
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SeniorLove will discard all data and start with an empty data file at the next run.
 </div>
-
-
-### Archive data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
