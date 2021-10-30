@@ -1,13 +1,13 @@
 {
   "currentSemester" : {
     "year" : {
-      "value" : 1
+      "value" : 4
     },
     "semester" : {
-      "value" : 1
+      "value" : 2
     }
   },
   "mcGoal" : {
-    "value" : 160
+    "value" : 190
   }
 }

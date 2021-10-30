@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
+import static seedu.tracker.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
@@ -19,7 +20,7 @@ public class SetCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets current semester or mc goal. \n"
             + "Only one set of field should be specified\n"
             + "Parameters: "
-            + "[" + PREFIX_ACADEMIC_YEAR + "YEAR"
+            + "[" + PREFIX_ACADEMIC_YEAR + "YEAR "
             + PREFIX_SEMESTER + "SEMESTER]"
             + "[" + PREFIX_MC + "MC]\n"
             + "Example 1: " + COMMAND_WORD + " "
@@ -61,6 +62,8 @@ public class SetCommand extends Command {
         if (isSemChanged) {
             //model.setCurrentSemester(currentSemester);
             model.setCurrentSemester(toBeUpdated.getCurrentSemester());
+            //update module list so that module color can change accordingly when the semester is changed
+            model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_SEM, model.getCurrentSemester()));
         } else {

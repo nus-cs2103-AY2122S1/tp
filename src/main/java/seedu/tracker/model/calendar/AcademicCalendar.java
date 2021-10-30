@@ -86,7 +86,7 @@ public class AcademicCalendar implements Comparable<AcademicCalendar> {
         final StringBuilder builder = new StringBuilder();
         builder.append("year ")
                 .append(getAcademicYear())
-                .append(",   semester ")
+                .append(", semester ")
                 .append(getSemester());
         return builder.toString();
     }
