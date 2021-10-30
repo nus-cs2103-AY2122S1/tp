@@ -20,7 +20,7 @@ public class SetCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets current semester or mc goal. \n"
             + "Only one set of field should be specified\n"
             + "Parameters: "
-            + "[" + PREFIX_ACADEMIC_YEAR + "YEAR"
+            + "[" + PREFIX_ACADEMIC_YEAR + "YEAR "
             + PREFIX_SEMESTER + "SEMESTER]"
             + "[" + PREFIX_MC + "MC]\n"
             + "Example 1: " + COMMAND_WORD + " "
