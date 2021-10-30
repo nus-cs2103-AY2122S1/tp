@@ -13,7 +13,7 @@ public class Mc {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "MC credit should only be an Integer, and it should not be less than 0.";
+            "MC credit should only be an Integer, and it should not be less than or equal to 0.";
     public final int value;
 
     /**
