@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         Summary summary = new Summary(model.getAddressBook());
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), summary);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), editedPerson);
     }
 
     /**
