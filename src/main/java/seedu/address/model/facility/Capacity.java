@@ -1,6 +1,7 @@
 package seedu.address.model.facility;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Facility's capacity.
@@ -8,8 +9,8 @@ import static java.util.Objects.requireNonNull;
 public class Capacity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Capacity should only contain numbers and it should be at least 1 digit long";
-    public static final String VALIDATION_REGEX = "\\d+";
+            "Capacity should be a positive integer which is less than or equal to 50";
+    public static final String VALIDATION_REGEX = "^([1-9]|[1-4]\\d|50)$";
     public final String capacity;
 
     /**
@@ -19,6 +20,7 @@ public class Capacity {
      */
     public Capacity(String capacity) {
         requireNonNull(capacity);
+        checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
         this.capacity = capacity;
     }
 

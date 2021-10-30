@@ -398,7 +398,14 @@ All member data will be removed immediately after this command is executed. This
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** Facilities are assumed to be available on every day of the week.
+**:information_source: Note:** 
+* Facilities are assumed to be available on every day of the week.
+* `NAME` specifies the name of the facility.
+* `LOCATION` specifies the general location of the facility.
+* `NAME` and `LOCATION` each accept **up to 50 alphanumeric characters (including spaces)**.
+* Facilities with the same `NAME` and `LOCATION` are considered duplicates.
+* `TIME` specifies the start time of the training session at the facility and **must be in the 24-hour format** `HHmm`.
+* `CAPACITY` refers to the maximum number of people allowed at the facility and **must be a positive integer from 1 to 50**.
 </div>
 
 #### Adding a facility: `addf`
@@ -406,9 +413,6 @@ All member data will be removed immediately after this command is executed. This
 Adds a facility to your facility list.
 
 Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
-
-* `TIME` specifies the start time and is to be inputted in the format HHMM
-* `CAPACITY` specifies the maximum allowed people in the facility
 
 <div markdown="block" class="alert alert-info">
 
@@ -455,7 +459,7 @@ Examples:
 
 #### Editing a facility: `editf`
 
-Edits an existing facility from your facility list.
+Edits an existing facility in your facility list.
 
 Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
 
