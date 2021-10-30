@@ -324,7 +324,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `VENUE`
 * The location of an appointment with your client
-* Should not be longer than **30** characters long
+* Should not be longer than **20** characters long
 <br> <br>
 
 ### **Managing a client**
