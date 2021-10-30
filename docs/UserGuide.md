@@ -24,14 +24,45 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 ## Table of Contents
 
-* Table of Contents
-{:toc}
+* [Overview](#)
+* [Table of Contents](#table-of-contents)
+* [Quick Start](#quick-start)
+* Features
+  * [Notes on command format](#features)
+  * Adding data
+    * [Adding a student : `add student`](#adding-a-student--add-student)
+    * [Creating a new group : `add group`](#creating-a-new-group--add-group)
+    * [Adding a student into a group : `add alloc`](#adding-a-student-into-a-group--add-alloc)
+    * [Adding an assessment : `add assessment`](#adding-an-assessment--add-assessment)
+    * [Adding a score : `add score`](#adding-a-score--add-score)
+  * Searching Data
+    * [Listing all students : `list`](#listing-all-students--list)
+    * [Searching for students : `search`](#searching-for-students--search)
+  * Editing Data
+    * [Editing a student : `edit`](#editing-a-student--edit)
+    * [Deleting a student : `delete`](#deleting-a-student--delete)
+  * Analysing Data
+    * [Showing assessment result analysis : `show`](#showing-assessment-result-analysis--show)
+  * Import and Export
+    * [Importing data : `import`](#importing-data--import)
+    * [Exporting data : `export`](#exporting-data--export)
+  * General features
+    * [Resetting all data : `clear`](#resetting-all-data--clear)
+    * [Closing the app : `exit`](#closing-the-app--exit)
+    * [Viewing Help : `help`](#viewing-help--help)
+    * [Accessing command history](#accessing-command-history)
+  * Advanced Features
+    * [Setting customised aliases for commands: `alias`](#setting-customised-aliases-for-commands--alias)
+    * [Editing the data file](#editing-the-data-file)
+* [FAQ](#faq)
+* [Glossary](#glossary)
+* [Command Summary](#command-summary)
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -181,7 +212,7 @@ Examples:
 Adds a new assessment into the database.
 
 Format: `add assessment -a <assessment_name>`
-* Assessment should not already in the database.
+* Assessment should not already exist in database.
 * Group name can be any number of alphanumeric words.
 
 Examples:
@@ -333,7 +364,7 @@ Examples:
 [Return to table of contents](#table-of-contents)
 
 
-### Exporting data: `export`
+### Exporting data : `export`
 
 Exports data into a CSV file. Can be used to backup the data, or to send the data to colleagues for them to load into their copy of Source Control.
 
@@ -360,7 +391,7 @@ Examples:
 [Return to table of contents](#table-of-contents)
 
 
-### Resetting all data: `clear`
+### Resetting all data : `clear`
 
 Clears all existing data.
 
@@ -373,7 +404,7 @@ Format: `clear`
 [Return to table of contents](#table-of-contents)
 
 
-### Closing the app: `exit`
+### Closing the app : `exit`
 
 Exits the application.
 
@@ -381,8 +412,14 @@ Format: `exit`
 
 [Return to table of contents](#table-of-contents)
 
+### Accessing command history
 
-### Setting customised aliases for commands: `alias`
+Using the up and down arrow keys on the keyboard retrieves past command lines entered. 
+
+[Return to table of contents](#table-of-contents)
+
+
+### Setting customised aliases for commands : `alias`
 
 Sets up an alias that can be used instead of a command.
 
@@ -407,15 +444,6 @@ Examples:
 [Return to table of contents](#table-of-contents)
 
 
-### Saving the data
-
-Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
-
-[Return to table of contents](#table-of-contents)
-
-
 ### Editing the data file
 
 Source Control data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -430,7 +458,7 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ `[coming soon]`
+## FAQ
 
 ### Double clicking isn't opening the app! What can I do?
 Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
@@ -438,6 +466,16 @@ Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate 
 Run the JAR file by using the command `java -jar sourceControl.jar`.
 
 [Return to table of contents](#table-of-contents)
+
+
+### How can I back up my data? 
+Source Control data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+If you wish to back up the data, you can use the `export` command. The `import` command can then load the data from the csv file created.
+
+[Return to table of contents](#table-of-contents)
+
+
 
 <br>
 
@@ -500,7 +538,7 @@ JSON | JavaScript Object Notation (JSON) is an open standard file format and dat
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action | Format | Examples
 --------|--------|----------
