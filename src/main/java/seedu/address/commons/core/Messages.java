@@ -17,4 +17,5 @@ public class Messages {
     public static final String MESSAGE_NOT_EDITED = "Minimum one field to edit must be provided.";
     public static final String MESSAGE_TIMESLOT_FORMAT = "The format for time slot should be Ddd HH:MM-HH:MM \n"
             + "Example: Mon 11:00-14:00";
+
 }
