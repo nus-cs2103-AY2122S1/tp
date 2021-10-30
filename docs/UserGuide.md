@@ -44,7 +44,7 @@ contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing conta
 
 1. Ensure you have Java `11` or above installed in your computer
 
-2. Download the latest `contHACKS.jar` from here
+2. Download the latest `contHACKS.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-2/tp/releases)
 
 3. Copy the file to the folder you want to use as the home folder
 
