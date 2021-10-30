@@ -75,7 +75,7 @@ Attribute | Data that is assigned to an elderly
 Category        | Specific flags | Details | Valid inputs | Requirement
 ----------------|-----------------|------------|----------|-----------------
 Elderly personal attributes | 1. `n/`: Name <br><br> 2. `p/`: Phone number <br><br> 3. `l/`: Language <br><br> 4. `a/`: Address | 1. Elderly's name <br><br> 2. Elderly's contact number <br><br> 3. Elderly's preferred language 4. Elderly's residential address | 1. Alphanumeric characters and spaces <br><br> 2. 8 digits, local (No country codes) <br><br> 3. Any string <br><br> 4. Any string | Compulsory
-Elderly visit attributes | 1. `v/`: Visit <br><br> 2. `lv`: Last visit Datetime formatted as `yyyy-MM-dd` <br><br> 3. `f/`: Frequency <br><br> 4. `o/`: Occurrence | 1. Elderly's next visit <br><br> 2. Last time elderly was visited <br><br> 3. Frequency at which elderly is being visited (if recurring) 4. Number of times elderly has to be visited (if recurring) | 1. Datetime formatted as `yyyy-MM-dd` <br><br> 2. Datetime formatted as `yyyy-MM-dd` <br><br> 3. One of the following enumerations: `Daily`, `Weekly`, `Biweekly`, `Monthly`, `Quarterly` <br><br> 4. Positive integer | Optional
+Elderly visit attributes | 1. `v/`: Visit <br><br> 2. `lv`: Last visit Datetime formatted as `yyyy-MM-dd` <br><br> 3. `f/`: Frequency <br><br> 4. `o/`: Occurrence | 1. Elderly's next visit <br><br> 2. Last time elderly was visited <br><br> 3. Frequency at which elderly is being visited (if recurring) 4. Number of times elderly has to be visited (if recurring) | 1. Datetime formatted as `yyyy-MM-dd` <br><br> 2. Datetime formatted as `yyyy-MM-dd` <br><br> 3. One of the following enumerations: `Daily`, `Weekly`, `Biweekly`, `Monthly`, `Quarterly` <br><br> 4. Strictly positive integer | Optional
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -129,18 +129,8 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`.
 * `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
-* `NAME` is the elderly’s name. It must consist only of alphanumeric characters and spaces. **This must be included.**
-* `PHONE_NUMBER` is the elderly’s phone number. **This must be included.**
-* `LANGUAGE` is the elderly’s preferred language for communication. **This must be included.**
-* `ADDRESS` is the elderly’s address to be visited. **This must be included.**
-* `LAST_VISIT` is the last datetime that the user has visited the elderly. **This is optional to include.**
-* `VISIT` is the next scheduled datetime for the elderly’s visit. **This is optional to include.**
-* `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include.**
 * `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
-* `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
-* `OCCURRENCE` is the occurrence of the next scheduled visit for the elderly. **This is optional to include.**
-* `OCCURRENCE` is a **strictly positive integer**.
-* `HEALTH_CONDITION` is the elderly's health condition. **This is optional to include.**
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
 * `add n/John p/12345678 l/English a/College Avenue East 18, New College`
@@ -173,7 +163,7 @@ Edits an existing elderly's attributes in SeniorLove.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] [h/HEALTH_CONDITION]…​`
 
-* Edits the elderly at the specified `INDEX`. The index refers to the index number shown in the displayed elderly list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the elderly at the specified `INDEX`. The index refers to the index number shown in the displayed elderly list. The index **must be a positive integer**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing health conditions, the existing health conditions of the elderly will be removed i.e adding of health conditions is not cumulative.
