@@ -48,9 +48,17 @@ public class TutorialGroupContainsKeywordsPredicateTest {
                 new TutorialGroupContainsKeywordsPredicate(Collections.singletonList("T19"));
         assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
 
+        // Mixed-Case Keywords
+        predicate = new TutorialGroupContainsKeywordsPredicate(Collections.singletonList("f19"));
+        assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("F19").build()));
+    }
+
+    @Test
+    public void test_tutorialGroupContainsMultipleKeywords_returnsFalse() {
         // Only one matching keyword
-        predicate = new TutorialGroupContainsKeywordsPredicate(Arrays.asList("T19", "T32"));
-        assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
+        TutorialGroupContainsKeywordsPredicate predicate =
+                new TutorialGroupContainsKeywordsPredicate(Arrays.asList("T19", "T32"));
+        assertFalse(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
     }
 
     @Test

@@ -47,13 +47,18 @@ public class GenderContainsKeywordsPredicateTest {
         GenderContainsKeywordsPredicate predicate = new GenderContainsKeywordsPredicate(Collections.singletonList("F"));
         assertTrue(predicate.test(new PersonBuilder().withGender("F").build()));
 
-        // Only one matching keyword
-        predicate = new GenderContainsKeywordsPredicate(Arrays.asList("O", "F"));
-        assertTrue(predicate.test(new PersonBuilder().withGender("O").build()));
+
 
         // Mixed-case keyword
-        predicate = new GenderContainsKeywordsPredicate(Arrays.asList("f", "m"));
+        predicate = new GenderContainsKeywordsPredicate(Arrays.asList("f"));
         assertTrue(predicate.test(new PersonBuilder().withGender("F").build()));
+    }
+
+    @Test
+    public void test_genderContainsMultipleKeyword_returnFalse() {
+        // Only one matching keyword
+        GenderContainsKeywordsPredicate predicate = new GenderContainsKeywordsPredicate(Arrays.asList("O", "F"));
+        assertFalse(predicate.test(new PersonBuilder().withGender("O").build()));
     }
 
     @Test

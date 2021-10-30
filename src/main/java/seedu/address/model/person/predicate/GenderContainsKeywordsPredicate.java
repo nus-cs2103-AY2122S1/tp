@@ -1,7 +1,6 @@
 package seedu.address.model.person.predicate;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Predicate;
 
 import seedu.address.model.person.Person;
@@ -18,9 +17,10 @@ public class GenderContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> person.getGender().gender.toLowerCase(Locale.ROOT)
-                        .contains(keyword.toLowerCase()));
+        return !keywords.isEmpty()
+                && keywords.stream()
+                .allMatch(keyword -> !keyword.trim().isEmpty() && person.getGender().gender.trim().toLowerCase()
+                        .contains(keyword.trim().toLowerCase()));
     }
 
     @Override

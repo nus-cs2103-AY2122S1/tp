@@ -24,6 +24,10 @@ public class NationalityStatistic {
         this.nationalitiesCount = nationalitiesCount;
     }
 
+    public HashMap<String, Integer> getNationalitiesCount() {
+        return nationalitiesCount;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

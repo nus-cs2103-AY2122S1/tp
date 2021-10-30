@@ -46,13 +46,17 @@ public class PhoneContainsKeywordsPredicateTest {
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("912345"));
         assertTrue(predicate.test(new PersonBuilder().withPhone("912345").build()));
 
-        // Only one matching keyword
-        predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("9123456", "908976"));
-        assertTrue(predicate.test(new PersonBuilder().withPhone("908976").build()));
-
         // Non-matching keyword
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("908976", "9123456"));
         assertTrue(predicate.test(new PersonBuilder().withPhone("9123456908976").build()));
+    }
+
+    @Test
+    public void test_phoneContainsMultipleKeywords_returnsFalse() {
+        // Only one matching keyword
+        PhoneContainsKeywordsPredicate predicate =
+                new PhoneContainsKeywordsPredicate(Arrays.asList("9123456", "908976"));
+        assertFalse(predicate.test(new PersonBuilder().withPhone("908976").build()));
     }
 
     @Test

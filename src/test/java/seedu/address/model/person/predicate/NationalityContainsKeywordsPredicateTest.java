@@ -48,17 +48,17 @@ public class NationalityContainsKeywordsPredicateTest {
                 new NationalityContainsKeywordsPredicate(Collections.singletonList("Singaporean"));
         assertTrue(predicate.test(new PersonBuilder().withNationality("Singaporean").build()));
 
-        // Multiple keywords
-        predicate = new NationalityContainsKeywordsPredicate(Arrays.asList("Singaporean", "Malaysian"));
-        assertTrue(predicate.test(new PersonBuilder().withNationality("Singaporean").build()));
-
         // Mixed-case keyword
         predicate = new NationalityContainsKeywordsPredicate(Arrays.asList("Singaporean"));
         assertTrue(predicate.test(new PersonBuilder().withNationality("singaporean").build()));
+    }
 
-        // Only one matching keyword
-        predicate = new NationalityContainsKeywordsPredicate(Arrays.asList("Singaporean", "Malaysia"));
-        assertTrue(predicate.test(new PersonBuilder().withNationality("Singaporean").build()));
+    @Test
+    public void test_nationalityContainsMultipleKeywords_returnFalse() {
+        // Multiple keywords
+        NationalityContainsKeywordsPredicate predicate =
+                new NationalityContainsKeywordsPredicate(Arrays.asList("Singaporean", "Malaysian"));
+        assertFalse(predicate.test(new PersonBuilder().withNationality("Singaporean").build()));
     }
 
     @Test

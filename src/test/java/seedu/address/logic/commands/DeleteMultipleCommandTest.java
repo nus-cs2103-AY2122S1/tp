@@ -84,13 +84,11 @@ public class DeleteMultipleCommandTest {
 
     @Test
     public void execute_multipleNameKeywords_multiplePersonsDeleted() {
-        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("Alice Benson");
         DeleteMultipleCommand command = new DeleteMultipleCommand(predicate);
-        expectedModel.deletePerson(ALICE);
-        expectedModel.deletePerson(BENSON);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
     @Test
@@ -111,14 +109,11 @@ public class DeleteMultipleCommandTest {
 
     @Test
     public void execute_multipleEmailKeywords_multiplePersonsDeleted() {
-        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 0);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate("johnd heinz cornelia");
         DeleteMultipleCommand command = new DeleteMultipleCommand(predicate);
-        expectedModel.deletePerson(BENSON);
-        expectedModel.deletePerson(CARL);
-        expectedModel.deletePerson(DANIEL);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
     @Test
@@ -135,18 +130,11 @@ public class DeleteMultipleCommandTest {
 
     @Test
     public void execute_multipleGenderKeyword_multiplePersonsDeleted() {
-        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 0);
         GenderContainsKeywordsPredicate predicate = prepareGenderPredicate("F M");
         DeleteMultipleCommand command = new DeleteMultipleCommand(predicate);
-        expectedModel.deletePerson(ALICE);
-        expectedModel.deletePerson(BENSON);
-        expectedModel.deletePerson(CARL);
-        expectedModel.deletePerson(DANIEL);
-        expectedModel.deletePerson(ELLE);
-        expectedModel.deletePerson(FIONA);
-        expectedModel.deletePerson(GEORGE);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
     @Test
@@ -163,14 +151,12 @@ public class DeleteMultipleCommandTest {
 
     @Test
     public void execute_multipleTagKeywords_multiplePersonsDeleted() {
-        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 1);
         TagContainsKeywordsPredicate predicate = prepareTagPredicate("owesMoney friends");
         DeleteMultipleCommand command = new DeleteMultipleCommand(predicate);
-        expectedModel.deletePerson(ALICE);
         expectedModel.deletePerson(BENSON);
-        expectedModel.deletePerson(DANIEL);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
     /**

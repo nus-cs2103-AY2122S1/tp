@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Person;
@@ -51,12 +52,30 @@ public class Statistic {
 
         for (Person p: list) {
             String nationality = p.getNationality().toString();
+            nationality = nationality.substring(0, 1).toUpperCase() + nationality.substring(1);
             int currCount = nationalitiesCount.getOrDefault(nationality, 0);
 
             nationalitiesCount.put(nationality, currCount + 1);
         }
 
         return new NationalityStatistic(nationalitiesCount);
+    }
+
+    /**
+     * Returns a map of map with the key being the grouping condition and the value being the statistics
+     * based on the grouping condition
+     *
+     * @return a map of map of statistics
+     */
+    public Map<String, Map<String, Integer>> getRawData() {
+        Map<String, Map<String, Integer>> rawData = new HashMap<>();
+        Map<String, Integer> nationalitiesCount = computeNationalityStatistic().getNationalitiesCount();
+        Map<String, Integer> gendersCount = computeGenderStatistic().getGenderCount();
+
+        rawData.put("Nationality Statistics", nationalitiesCount);
+        rawData.put("Gender Statistics", gendersCount);
+
+        return rawData;
     }
 
     @Override
