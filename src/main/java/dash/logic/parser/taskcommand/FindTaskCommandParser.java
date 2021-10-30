@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Set;
 
 import dash.commons.core.index.Index;
-import dash.logic.commands.taskcommand.AssignPeopleCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand.FindTaskDescriptor;
 import dash.logic.parser.ArgumentMultimap;
