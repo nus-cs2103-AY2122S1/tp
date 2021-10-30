@@ -42,6 +42,11 @@ public class FriendTest {
     }
 
     @Test
+    public void getSkillValue() {
+        //
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Friend aliceCopy = new FriendBuilder(ALICE).build();
