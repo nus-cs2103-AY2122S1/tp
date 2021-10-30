@@ -174,6 +174,7 @@ Commands enters only applies on the currently displayed tab. (eg. If the current
 Format: `toggle`
 * toggles to the other tab (eg. if the currently displayed tab is the patient tab, `toggle` switches the displayed tab to the doctor tab)
 
+![toggleTabs](images/toggleTabs.png)
 
 ### Clearing all entries : `clear` <a name="clear"/>
 
@@ -193,6 +194,9 @@ Format: `exit`
 ---
 
 ## Managing Patients <a name="managing-patients"/>
+To use commands for managing patients, toggle the displayed list to the patient list using the [toggle](#toggle) command. <br>
+
+![patient tab'](images/patientTab.png)
 
 ### Adding a patient: `add` <a name="add-patient"/>
 
@@ -317,6 +321,9 @@ Examples:
 ---
 
 ## Managing Doctors <a name="managing-doctors"/>
+To use commands for managing patients, toggle the displayed list to the patient list using the [toggle](#toggle) command.
+
+![doctor tab'](images/doctorTab.png)
 
 ### Adding a doctor: `add` <a name="add-doctor"/>
 
