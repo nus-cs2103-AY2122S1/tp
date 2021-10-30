@@ -36,7 +36,7 @@ public class ClientContainsKeywordsPredicate implements Predicate<Client> {
 
             boolean checkTags = client.getTags().stream()
                     .map(Tag::getName)
-                    .anyMatch(tagName -> tagName.equals(keyword));
+                    .anyMatch(tagName -> containsStringIgnoreCase(tagName, keyword));
 
             return checkAttributesLessTag || checkTags;
         });
@@ -54,7 +54,7 @@ public class ClientContainsKeywordsPredicate implements Predicate<Client> {
                 .map(Tag::getName)
                 .map(tagName -> (Function<String, Boolean>) x -> containsStringIgnoreCase(tagName, x))
                 .map(f -> keywords.getValue(PREFIX_TAG).map(f))
-                .allMatch(o -> o.orElse(true));
+                .anyMatch(o -> o.orElse(true));
 
         return checkGeneral && checkAttributes && checkTags;
     }
