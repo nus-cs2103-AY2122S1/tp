@@ -43,11 +43,11 @@ public class CommandTestUtil {
     public static final String VALID_RISKAPPETITE_BOB = "4";
     public static final String VALID_DISPOSABLEINCOME_AMY = "300";
     public static final String VALID_DISPOSABLEINCOME_BOB = "400";
-    public static final String VALID_NEXTMEETING_DATE_AMY = "24-09-2051";
+    public static final String VALID_NEXTMEETING_DATE_AMY = "24-09-2022";
     public static final String VALID_NEXTMEETING_STARTTIME_AMY = "12:00";
     public static final String VALID_NEXTMEETING_ENDTIME_AMY = "13:00";
     public static final String VALID_NEXTMEETING_LOCATION_AMY = "Zoom";
-    public static final String VALID_NEXTMEETING_DATE_BOB = "24-09-2051";
+    public static final String VALID_NEXTMEETING_DATE_BOB = "24-09-2022";
     public static final String VALID_NEXTMEETING_STARTTIME_BOB = "12:00";
     public static final String VALID_NEXTMEETING_ENDTIME_BOB = "13:00";
     public static final String VALID_NEXTMEETING_LOCATION_BOB = "Zoom";

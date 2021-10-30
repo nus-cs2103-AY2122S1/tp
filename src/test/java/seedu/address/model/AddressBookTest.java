@@ -88,7 +88,7 @@ public class AddressBookTest {
 
     @Test
     public void updateLastMetDate_updatesCorrectly() {
-        Client expectedAlice = new ClientBuilder(ALICE).withNextMeeting("No next meeting").build();
+        Client expectedAlice = new ClientBuilder(ALICE).withNextMeeting(NextMeeting.NO_NEXT_MEETING).build();
         addressBook.addClient(ALICE);
         addressBook.updateLastMetDate();
         assertEquals(addressBook.getClient(new ClientId("0")), expectedAlice);

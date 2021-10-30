@@ -54,7 +54,7 @@ public class ParserUtilTest {
     private static final String VALID_DISPOSABLEINCOME = "5000";
     private static final String VALID_CURRENTPLAN = "Prudential Prolife";
     private static final String VALID_LASTMET = "05-10-2021";
-    private static final String VALID_NEXTMEETING = "24-09-2021 (10:00~12:00), Starbucks @ UTown";
+    private static final String VALID_NEXTMEETING = "24-09-2022 (10:00~12:00), Starbucks @ UTown";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -293,7 +293,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseNextMeeting_validValueWithoutWhitespace_returnsNextMeeting() throws Exception {
-        NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
+        NextMeeting expectedNextMeeting = new NextMeeting("24-09-2022", "10:00", "12:00",
                 "Starbucks @ UTown", "");
         assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(VALID_NEXTMEETING));
     }
@@ -301,7 +301,7 @@ public class ParserUtilTest {
     @Test
     public void parseNextMeeting_validValueWithWhitespace_returnsTrimmedNextMeeting() throws Exception {
         String nextMeetingWithWhitespace = WHITESPACE + VALID_NEXTMEETING + WHITESPACE;
-        NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
+        NextMeeting expectedNextMeeting = new NextMeeting("24-09-2022", "10:00", "12:00",
                 "Starbucks @ UTown", "");
         assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(nextMeetingWithWhitespace));
     }

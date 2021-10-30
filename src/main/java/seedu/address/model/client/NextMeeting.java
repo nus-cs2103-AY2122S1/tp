@@ -20,6 +20,7 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
             + "where Hour and Minutes should be numerical values.";
     public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct";
     public static final String MESSAGE_INVALID_TIME_DURATION = "End Time should be after Start Time";
+    public static final String MESSAGE_INVALID_MEETING_DATE_OVER = "NextMeeting should not be in the past";
     public static final String NO_NEXT_MEETING = "No meeting planned";
     public static final NextMeeting NULL_MEETING = new NextMeeting(null, null, null,
         null, null);
@@ -71,6 +72,10 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
         if (!startTime.isEmpty() && !endTime.isEmpty()) {
             checkArgument(this.endTime.isAfter(this.startTime), MESSAGE_INVALID_TIME_DURATION);
         }
+
+        if (!date.isEmpty() && !startTime.isEmpty() && !endTime.isEmpty()) {
+            checkArgument(!isMeetingOver(LocalDate.now(), LocalTime.now()), MESSAGE_INVALID_MEETING_DATE_OVER);
+        }
     }
 
     public Name getWithWho() {
@@ -92,12 +97,15 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
     public static NextMeeting getNullMeeting() {
         return NULL_MEETING;
     }
+
     public LocalDate getDate() {
         return date;
     }
+
     public static boolean isValidNextMeeting(String test) {
         return test.matches(VALID_MEETING_STRING);
     }
+
     public boolean isSameDay(LocalDate comparison) {
         return comparison.equals(this.date);
     }
