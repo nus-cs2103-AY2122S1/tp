@@ -9,8 +9,6 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Objects;
 
-import seedu.plannermd.logic.commands.exceptions.CommandException;
-
 /**
  * Represents an Appointment's session in the plannermd.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
