@@ -177,7 +177,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandBox.getCommandTextField().isFocused()) {
                 return; // Don't filter if already in focus
             }
-            if (isTextInputKeyCode(event.getCode())) {
+            if (!event.isShortcutDown() && isTextInputKeyCode(event.getCode())) {
                 commandBox.getCommandTextField().requestFocus();
                 commandBox.getCommandTextField().selectEnd();
             }
