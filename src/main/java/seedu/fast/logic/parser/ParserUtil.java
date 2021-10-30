@@ -260,21 +260,33 @@ public class ParserUtil {
      */
     public static String parseDateString(String date) throws ParseException {
         try {
-            LocalDate localDate = LocalDate.parse(date);
-            LocalDate now = LocalDate.now();
+            checkDate(date);
 
-            if (localDate.isBefore(now)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        Appointment.PREVIOUS_DATE_INPUT));
-            }
             // converts the date to the specified format
-            date = localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (DateTimeParseException dtpe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     Appointment.INVALID_DATE_INPUT), dtpe);
         }
 
         return date.trim();
+    }
+
+    /**
+     * Checks if the date input has already passed.
+     * If date input is in the past, date is invalid, throws an error.
+     *
+     * @param date Input date string.
+     * @throws ParseException Date input has passed.
+     */
+    private static void checkDate(String date) throws ParseException {
+        LocalDate localDate = LocalDate.parse(date);
+        LocalDate now = LocalDate.now();
+
+        if (localDate.isBefore(now)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Appointment.PREVIOUS_DATE_INPUT));
+        }
     }
 
     /**
