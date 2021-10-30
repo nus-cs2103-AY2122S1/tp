@@ -151,6 +151,9 @@ The table below explains the general syntax used throughout the user guide.
 * Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
+* Extraneous parameters for commands that do take in parameters (such as `edit`) will be ignored.<br>
+  e.g. if the command specifies `edit -c 1 -a asdf -id 5`, the resulting address will be changed to `asdf -id 5`.
+
 #### 3.2.3 Defining Client and Product
 
 **Client** refers to the clients that have bought your products before. Each client must have a **Name** and a
