@@ -85,7 +85,7 @@ public class CommandTestUtil {
     public static final String INVALID_SORT_ORDER_DESC = " " + PREFIX_SORT_ORDER + "aa bb cc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String INVALID_PREAMBLE = "NonEmptyPreamble";
 
     public static final String SORT_ORDER_DESC_TAG = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_TAG;
     public static final String SORT_ORDER_DESC_NAME = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_NAME;

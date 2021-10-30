@@ -320,8 +320,25 @@ The split mechanism is facilitated by `AddressBookParser`. More details to be ad
     * Cons: Difficult to parse user input as a complicated regular expression is needed to ensure names of days are in
       the correct format. Less user-friendly due to need to type out the names of the days. More difficult to sort.
 
-> > > > > > > master
+### Find member feature
 
+#### Implementation
+The `findm` command filters the member list by the keywords specified.
+We extended the functionality of the `FindCommand` from the standard AB3, the `FindMemberCommand` in SportsPA can now find members with multiple attributes.
+Each attribute has its own predicate class to generate a unique predicate, which is then chained together in the new `PersonMatchesKeywordsPredicate` using the `Predicate#and` method.
+The final predicate is stored in `PersonMatchesKeywordPredicate` and then passed to the `FindMemberCommand` class to filter the member list with.
+
+* More details and diagrams to be added later
+
+#### Design considerations
+**Aspect: Implementation of `findm`**
+
+* **Alternative 1 (current choice):** User is able to `findm` by multiple attribute keywords
+    * Pros: Allows users to find members in a more precise manner e.g. Users can find members who are available on Monday and are EXCO members.
+    * Cons: More complex implementation due to parsing of multiple prefixes and chaining predicates, this alternative is more prone to bugs.
+* ** Alternative 2: User can only `findm` by specifying one attribute
+    * Pros: Simpler to parse a single prefix and thus less prone to bugs
+    * Cons: Not maximising user experience as finding a member with only one attribute may generate a large list if there are many matching members.
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

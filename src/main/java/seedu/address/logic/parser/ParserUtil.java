@@ -26,6 +26,8 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TodayAttendance;
+import seedu.address.model.person.TotalAttendance;
 import seedu.address.model.sort.SortOrder;
 import seedu.address.model.tag.Tag;
 
@@ -34,7 +36,12 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer,"
+            + "and it should not be blank.";
+    private static final String MESSAGE_INVALID_TODAY_ATTENDANCE = "Today Attendance should be 'true' or false',"
+            + "and it should not be blank.";
+    private static final String MESSAGE_INVALID_TOTAL_ATTENDANCE = "Total Attendance should be a "
+            + "non-negative unsigned integer, and it should not be blank.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -49,6 +56,33 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses a {@code String todayAttendance} into a {@code TodayAttendance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code todayAttendance} is invalid.
+     */
+    public static TodayAttendance parseTodayAttendance(String todayAttendance) throws ParseException {
+        String trimmedTodayAttendance = todayAttendance.trim();
+        if (!StringUtil.isValidBooleanValue(trimmedTodayAttendance)) {
+            throw new ParseException(MESSAGE_INVALID_TODAY_ATTENDANCE);
+        }
+        return new TodayAttendance(Boolean.parseBoolean(trimmedTodayAttendance));
+    }
+
+    /**
+     * Parses a {@code String totalAttendance} into a {@code TotalAttendance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code totalAttendance} is invalid.
+     */
+    public static TotalAttendance parseTotalAttendance(String totalAttendance) throws ParseException {
+        String trimmedTotalAttendance = totalAttendance.trim();
+        if (!StringUtil.isNonNegativeUnsignedInteger(trimmedTotalAttendance)) {
+            throw new ParseException(MESSAGE_INVALID_TOTAL_ATTENDANCE);
+        }
+        return new TotalAttendance(Integer.parseInt(trimmedTotalAttendance));
+    }
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.

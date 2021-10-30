@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -43,8 +44,10 @@ import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.FacilityBuilder;
@@ -139,10 +142,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        Name name = new Name("baz");
         FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
-                FindMemberCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")), aliases);
-        assertEquals(new FindMemberCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindMemberCommand.COMMAND_WORD + " n/baz", aliases);
+        Predicate<Person> predicate = x -> true;
+        predicate = predicate.and(new NameContainsKeywordsPredicate(Arrays.asList("baz")));
+        PersonMatchesKeywordsPredicate testPredicate =
+                new PersonMatchesKeywordsPredicate.Builder().setName(name).setPredicate(predicate).build();
+        assertEquals(new FindMemberCommand(testPredicate), command);
     }
 
     @Test

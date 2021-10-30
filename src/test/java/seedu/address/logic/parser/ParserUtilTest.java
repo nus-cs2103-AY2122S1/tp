@@ -24,7 +24,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TodayAttendance;
+import seedu.address.model.person.TotalAttendance;
 import seedu.address.model.tag.Tag;
+
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -32,6 +35,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TODAY_ATTENDANCE = "f";
+    private static final String INVALID_TOTAL_ATTENDANCE = "-10";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -39,6 +44,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TODAY_ATTENDANCE = "false";
+    private static final String VALID_TOTAL_ATTENDANCE = "3";
 
     private static final String INVALID_FACILITY_NAME = "Cour+";
     private static final String INVALID_FACILITY_LOCATION = "University H@ll";
@@ -298,6 +305,52 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTodayAttendance_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTodayAttendance((String) null));
+    }
+
+    @Test
+    public void parseTodayAttendance_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTodayAttendance(INVALID_TODAY_ATTENDANCE));
+    }
+
+    @Test
+    public void parseTodayAttendance_validValueWithoutWhitespace_returnsTodayAttendance() throws Exception {
+        TodayAttendance expectedTodayAttendance = new TodayAttendance(false);
+        assertEquals(expectedTodayAttendance, ParserUtil.parseTodayAttendance(VALID_TODAY_ATTENDANCE));
+    }
+
+    @Test
+    public void parseTodayAttendance_validValueWithWhitespace_returnsTodayAttendance() throws Exception {
+        String todayAttendanceWithWhiteSpace = WHITESPACE + VALID_TODAY_ATTENDANCE + WHITESPACE;
+        TodayAttendance expectedTodayAttendance = new TodayAttendance(false);
+        assertEquals(expectedTodayAttendance, ParserUtil.parseTodayAttendance(todayAttendanceWithWhiteSpace));
+    }
+
+    @Test
+    public void parseTotalAttendance_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTotalAttendance((String) null));
+    }
+
+    @Test
+    public void parseTotalAttendance_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTotalAttendance(INVALID_TOTAL_ATTENDANCE));
+    }
+
+    @Test
+    public void parseTotalAttendance_validValueWithoutWhitespace_returnsTotalAttendance() throws Exception {
+        TotalAttendance expectedTotalAttendance = new TotalAttendance(3);
+        assertEquals(expectedTotalAttendance, ParserUtil.parseTotalAttendance(VALID_TOTAL_ATTENDANCE));
+    }
+
+    @Test
+    public void parseTotalAttendance_validValueWithWhitespace_returnsTotalAttendance() throws Exception {
+        String totalAttendanceWithWhiteSpace = WHITESPACE + VALID_TOTAL_ATTENDANCE + WHITESPACE;
+        TotalAttendance expectedTotalAttendance = new TotalAttendance(3);
+        assertEquals(expectedTotalAttendance, ParserUtil.parseTotalAttendance(totalAttendanceWithWhiteSpace));
     }
 
     @Test
