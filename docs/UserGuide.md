@@ -1,47 +1,53 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
 
-BogoBogo is a **desktop app for managing inventories, optimized for use via a Command Line Interface** (CLI)
-while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BogoBogo can get your
-inventory management tasks done faster than traditional GUI apps. You can use Bogo Bogo as your personal inventory 
-manager which helps you:
-1. track your transactions
-2. track your stock items
-3. book keep 
+<h3><i>What is BogoBogo?</i></h3>
 
-* Table of Contents {:toc}
+BogoBogo is a **desktop app for small business owners to manage inventories, optimized for use via a Command Line Interface (CLI)**
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BogoBogo can get your
+inventory management tasks done faster than traditional GUI apps.
+
+With BogoBogo, business owners can:
+1. easily manage their inventories
+2. record customer orders
+3. track profit, costs, and revenue
+
+<b>Table of Contents</b>
+
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Getting started
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
 2. Download the latest `BogoBogo.jar` from [here](https://github.com/AY2122S1-CS2103-F10-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for the application.
+3. Move the file to the folder you want to use as the _home folder_ for the application.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
-![Ui](images/Ui.png)
+{/% include tip.html
+content="You might have to give your device permission to open BogoBogo. [See FAQ](#FAQ) for more info." %}
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-   open the help window.<br>
-   Some example commands you can try:
+6. Let's try adding a new item! Enter the command in the command box.<br>
 
-    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds apple with id 139827, quantity 3, 
+    - **`add`** `Apple id/139827 c/3 cp/1.3 sp/2.4` : Adds an apple with id 139827, 
       cost price 1.3, and sales price 2.4, into the inventory.
 
-    - **`delete`**` cookie` : Deletes the cookie item from inventory.
+7. Congrats on setting up BogoBogo! Read our [features](#Features) to learn about the different things you can do on the application.
 
-    - **`clear`** : Deletes all items in inventory.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+* For Mac users, method 2 is the recommended way to open your files to ensure that you are able to see the save data for _PH_
+</div>
 
-    - **`exit`** : Exits the app.
-
-7. Refer to the [Features](#features) below for details of each command.
-
+   {/%include tip.html
+   content="Ready to jump right into recording your inventory? Use `clear` to clear the sample data!" %}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -52,6 +58,8 @@ manager which helps you:
 
 - Words in `{}` are the parameters to be supplied by the user.<br>
   e.g. in `add {name}`, `name` is a parameter which can be used as `add milk`.
+
+- Parameter prefixes such as sp/ and cp/ are special keywords that indicate a start of a parameter.
    
 - Parameters in `()` are optional.<br>
   e.g. in `add {name} (c/{count}), the `count` parameter can be omitted from the command.
@@ -59,13 +67,13 @@ manager which helps you:
 - Items in square brackets with pipes are exclusively optional (user must specify at least one of the option).<br>
   e.g `delete [{name} | id/{id_number}]` should be supplied with either `name` or `id number`.
 
-- Items with `…`​ after them can be used multiple times including zero times.<br>
+- Items with `…`​ after them can be zero or more times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/popular`, `t/popular t/baked` etc.
 
-- Parameters can be in any order.<br>
+- Prefixed parameters can be in any order.<br>
   e.g. if the command specifies `id/{id_number} cp/{cost_price}`, `cp/{cost_price} id/{id_number}` is also acceptable.
 
-- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
+- If a parameter is expected only once in the command is specified multiple times, only the last occurrence of
   the parameter will be taken.<br>
   e.g. if you specify `id/123413 id/567856`, only `id/567856` will be taken.
 
@@ -77,19 +85,15 @@ manager which helps you:
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-If a command word is specified, explains how to use the specified command.
+Gives a quick link to this user guide.
+If a command word is specified, it'll explain how to use the specified command instead.
 
 Format: 
 - `help`: Shows help page url.
 - `help {command}` : Explains how to use the specified command.
 
 Examples:
-```
-help sorder // Explains how to use sorder command
-```
-
-Screenshot:
+- **`help list`** offers information regarding our `list` command.
 
 ![help message](images/helpMessage.png)
 
@@ -99,35 +103,36 @@ Adds an item to the inventory.
 
 Format: `add [{name} | id/{id number}] (c/{count}) (cp/{cost price}) (sp/{sell price})`
 
-Flag    |  Argument     | Description                   | Remarks                                 |
+Prefix  |  Argument     | Description                   | Remarks                                 |
 --------|-------------- |-------------------------------|-----------------------------------------|
 &nbsp;  | name          | Name of the item to add.      | Only alphanumeric characters allowed.   |
 `id/`   | id number     | Id number of item to add.     | Must be a 6 digit number.               |
 `c/`    | count         | Quantity of the item to add.  | If omitted, value defaulted as 1.       |
-`cp/`   | cost price    | Cost price of the item to add.|                                         |
-`sp/`   | sell price    | Sell price of the item to add.|                                         |
+`cp/`   | cost price    | Cost price of the item to add.| Must be a positive number.              |
+`sp/`   | sell price    | Sell price of the item to add.| Must be a positive number.              |
 
-- name, id number, cost price, and sales price are compulsory when adding an item for the first time.
+{/% include note.html
+content="When adding an item for the first time, the name, id, cost price, and sales prices must be specified." %}
 
 Examples:
 
-```
-add apple id/192028 c/2 cp/1.1 sp/2.4
-add banana id/192023 c/5 cp/1.0 sp/2.2
-```
+- `add apple` adds an apple into the inventory
+- `add id/111111` adds 2 of item with id #111111 into the inventory
+- `add banana id/192023 cp/1.0 sp/2.2` adds a banana with id #192023, cost price $1 and sales price $2.20 into the inventory.
 
-Screenshot:
+{/% include tip.html
+  content="BogoBogo will get confused if different items have matching names or id. Hence, adding different items with clashing names/ids are is not allowed." %}
 
 ![add](images/screenshots/add_item.png)
 
 ### Deleting an item : `delete`
 
 Deletes the specified item from the inventory.
-Use this command to delete items wrongly keyed into the inventory. Costs initially incurred from the item is removed too.
+Use this command to delete items wrongly keyed into the inventory. Costs initially incurred from the item will be removed too.
 
 Format: `delete [{name} | id/{id number}]`
 
-Flag    |  Argument      | Description
+Prefix  |  Argument      | Description
 --------|----------------|-------------
 `n/`    | name           | Name of the item to delete.
 `id/`   | id number      | Serial number of the item to delete.
@@ -135,8 +140,6 @@ Flag    |  Argument      | Description
 - Delete the specified item entirely from the inventory.
 - An item can be specified by either name or serial number.
 - If both name and serial number are specified, the command will take the name as reference.
-
-Examples:
 
 ```
 delete Apple // delete by name
