@@ -18,7 +18,7 @@ public class NotesContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getNotes().get().toString().toLowerCase().contains(keyword.toLowerCase());
+        return person.getNotes().orElse(Notes.EMPTY_NOTES).toString().toLowerCase().contains(keyword.toLowerCase());
     }
 
 

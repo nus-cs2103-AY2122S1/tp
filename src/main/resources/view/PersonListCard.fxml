@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
 
-<HBox id="cardPane" fx:id="cardPane" minWidth="750" prefWidth="750" fillHeight="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" prefWidth="745" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="745" prefWidth="745" />
+      <ColumnConstraints hgrow="SOMETIMES" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" HBox.hgrow="ALWAYS">
       <padding>
         <Insets bottom="25" left="15" right="5" top="5" />
       </padding>
@@ -31,9 +31,9 @@
       <FlowPane fx:id="done" />
       <FlowPane fx:id="notDone" />
       <FlowPane fx:id="tags" />
-         <HBox minWidth="725" maxWidth="725" prefHeight="100.0">
+         <HBox HBox.hgrow="ALWAYS">
             <children>
-               <VBox HBox.hgrow="NEVER" minWidth="357.5" maxWidth="357.5">
+               <VBox HBox.hgrow="ALWAYS" prefWidth="362.5">
                    <padding>
                        <Insets bottom="0" left="0" right="5" top="0" />
                    </padding>
@@ -47,7 +47,7 @@
                     <TextFlow fx:id="experience" styleClass="cell_small_label" />
                   </children>
                </VBox>
-               <VBox HBox.hgrow="NEVER" minWidth="357.5" maxWidth="357.5">
+               <VBox HBox.hgrow="ALWAYS" prefWidth="362.5">
                    <style>
                        -fx-border-style: hidden hidden hidden solid;
                        -fx-border-color: rgba(225,221,221,0.37);

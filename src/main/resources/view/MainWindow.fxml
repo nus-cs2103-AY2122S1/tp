@@ -47,11 +47,11 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="785" prefWidth="785" maxWidth="785" VBox.vgrow="ALWAYS">
+        <VBox fx:id="personList" styleClass="pane-with-border" prefWidth="784" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-background: #00102b;"/>
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
