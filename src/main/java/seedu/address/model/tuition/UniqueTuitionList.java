@@ -201,9 +201,9 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         public int compare(TuitionClass o1, TuitionClass o2) {
             switch (order) {
             case ASCENDING:
-                return o1.getName().getName().compareTo(o2.getName().getName());
+                return o1.getName().getName().compareToIgnoreCase(o2.getName().getName());
             case DESCENDING:
-                return o2.getName().getName().compareTo(o1.getName().getName());
+                return o2.getName().getName().compareToIgnoreCase(o1.getName().getName());
             case TIME:
                 return o1.getTimeslot().compareTimeOrder(o2.getTimeslot());
             default:

@@ -506,7 +506,10 @@ Sorts tuition class list according to time or alphabetical order.
   * After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
   
   * The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
-  
+
+  * For alphabetical order, the sorting is case-insensitive. For example, `chem` is considered the same as `Chem`.
+
+
 </div>
 
 The possible usages of `sort` are given below:
