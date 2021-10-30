@@ -10,7 +10,9 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Student ID should only contain 9 alphanumeric characters, and it should not be blank";
+            "Student ID should only contain 9 alphanumeric characters, where the first and last characters " +
+                    " should be alphabets and the rest are numbers. And it should not be blank."
+                    + "\nFor example: A0212345T";
 
     /*
      * A student ID must start and end with an alphabet, and has exactly 7 numbers between the two letters
