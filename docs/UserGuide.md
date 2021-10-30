@@ -116,8 +116,8 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include.**
 * `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
 * `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
+* `OCCURRENCE` is the occurrence of the next scheduled visit for the elderly. **This is optional to include.**
 * `OCCURRENCE` is a **strictly positive integer**.
-* `OCCURRENCE` is the occurrence of the next scheduled visit for the elderly. **This is optional to include**
 * `HEALTH_CONDITION` is the elderly's health condition. **This is optional to include.**
 
 Examples:
