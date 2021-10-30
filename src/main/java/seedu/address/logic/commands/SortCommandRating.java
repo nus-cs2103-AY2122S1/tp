@@ -18,4 +18,9 @@ public class SortCommandRating extends SortCommand {
         return new CommandResult(String.format(MESSAGE_SORT_CONTACT_SUCCESS, MESSAGE_SORTED_BY_SUCCESS));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this || other instanceof SortCommandRating;
+    }
+
 }

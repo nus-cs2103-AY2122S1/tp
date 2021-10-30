@@ -193,4 +193,23 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseSortCmd_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortCommand(null));
+    }
+
+    @Test
+    public void parseSortCmd_validValueWithoutWhitespace_returnsCmd() {
+        String expectedCmd = "name";
+        assertEquals(expectedCmd, ParserUtil.parseSortCommand("name"));
+    }
+
+    @Test
+    public void parseTag_validValueWithWhitespace_returnsTrimmedCmd() {
+        String cmdWithWhitespace = WHITESPACE + "rating" + WHITESPACE;
+        String expectedCmd = "rating";
+        assertEquals(expectedCmd, ParserUtil.parseSortCommand(cmdWithWhitespace));
+    }
+
 }
