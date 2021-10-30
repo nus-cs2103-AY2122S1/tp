@@ -76,7 +76,7 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return id.equals(otherOrder.id) && quantity.equals(otherOrder.quantity) && time.equals(otherOrder.time);
+        return id.equals(otherOrder.id);
     }
 
     @Override

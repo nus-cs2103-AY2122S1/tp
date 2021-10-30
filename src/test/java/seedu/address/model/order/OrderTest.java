@@ -15,6 +15,7 @@ public class OrderTest {
     private final LocalDate now = LocalDate.now();
     private final Order oneIphone = new Order(IPHONE.getId(), new Quantity("1"), now);
     private final Order oneIphoneCopy = new Order(IPHONE.getId(), new Quantity("1"), now);
+    private final Order oneIphoneDuplicate = new Order(IPHONE.getId(), new Quantity("3"), now);
     private final Order twoAirpods = new Order(AIRPODS.getId(), new Quantity("2"), LocalDate.MAX);
 
     @Test
@@ -27,6 +28,9 @@ public class OrderTest {
 
         // different objects with the same values
         assertEquals(oneIphone, oneIphoneCopy);
+
+        // different objects with the same id
+        assertEquals(oneIphone, oneIphoneDuplicate);
 
         // two different orders
         assertNotEquals(oneIphone, twoAirpods);
