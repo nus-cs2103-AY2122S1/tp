@@ -520,6 +520,7 @@ Score | Score is in percentage, recorded up to 2 decimal places. | `67.75`
 Tag | Tag can be a single alphanumeric word. | `Beginner1`
 
 [Return to table of contents](#table-of-contents)
+
 <br>
 
 Below is a table explaining some terms used in this document.
@@ -535,6 +536,7 @@ Java | a computing platform for application development. Source Control runs on 
 JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
 [Return to table of contents](#table-of-contents)
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -543,13 +545,12 @@ JSON | JavaScript Object Notation (JSON) is an open standard file format and dat
 
 Action | Format | Examples
 --------|--------|----------
-**Help** | `help` |
-**List** | `list` |
 **Add Student** | `add student -n <student_name> -i <student_id> [-g <group_name>]... [-t <tag>]...` | e.g. `add student -n Jonas Chow -i E0123456 -g T01A -g R01A -t beginner`
 **Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` | e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` | e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
 **Add Assessment** | `add assessment -a <assessment_name>` | e.g. `add assessment -a P01`
 **Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
+**List** | `list` |
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | e.g. `search -n John Doe`, `search -g T02B R04D`
 **Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f <export_file_path>]` | e.g. `show -n Alex Yeoh`, `show -a P01`
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
@@ -558,6 +559,7 @@ Action | Format | Examples
 **Export Data** | `export [-f <file_path>]` | e.g. `export -f save_data.csv`
 **Clear Data** | `clear` |
 **Exit App** | `exit` |
-**Add Alias** | `alias -c <existing_command> -as <new_alias>` | e.g. `alias -c add student -as as`
+**Help** | `help` |
+**Set Alias** | `alias -c <existing_command> -as <new_alias>` | e.g. `alias -c add student -as as`
 
 [Return to table of contents](#table-of-contents)
