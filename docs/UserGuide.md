@@ -259,7 +259,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * The email address of your client
 * Should be in this format: `local-part@domain`
 * `local-part`: 
-  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?{|}~^.-`).
+  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?\{\}\|~^.-`).
   * should not start and end with special characters,
 * `domain`: 
   * must be at least **2** characters long. 
