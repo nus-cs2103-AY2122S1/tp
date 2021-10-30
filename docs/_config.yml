@@ -1,9 +1,9 @@
 title: "BogoBogo"
-theme: minima
+theme: "just-the-docs"
 
 header_pages:
   - UserGuide.md
-  - DeveloperGuide - AB3.md
+  - DeveloperGuide.md
   - AboutUs.md
 
 markdown: kramdown
