@@ -70,7 +70,8 @@ public class EditTaskCommandParser implements ParserRequiringPersonList<EditTask
             Set<Person> people = new HashSet<>();
             for (Index i : personIndices) {
                 if (i.getZeroBased() < 0 || i.getZeroBased() >= filteredPersonList.size()) {
-                    throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + EditTaskCommand.MESSAGE_USAGE);
+                    throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
+                            + EditTaskCommand.MESSAGE_USAGE);
                 }
                 people.add(filteredPersonList.get(i.getZeroBased()));
             }
