@@ -16,6 +16,16 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_ADDRESS_PREFIX_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_ADDRESS_PREFIX_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_EMAIL_PREFIX_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_EMAIL_PREFIX_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_NAME_PREFIX_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_NAME_PREFIX_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_PHONE_PREFIX_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_PHONE_PREFIX_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_TAG_PREFIX_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.STRAY_TAG_PREFIX_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -39,6 +49,8 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+    private static final String INVALID_COMMAND_EXPECTED_MESSAGE =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -101,11 +113,9 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+                INVALID_COMMAND_EXPECTED_MESSAGE);
     }
 
     @Test
@@ -137,6 +147,18 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+               INVALID_COMMAND_EXPECTED_MESSAGE);
+    }
+
+    // Test for issue #150, where parser should reject stray prefixes such as -name, -phone, etc.
+    @Test
+    public void parse_strayPrefixes_failure() {
+        assertParseFailure(parser, STRAY_NAME_PREFIX_DESC_AMY + STRAY_PHONE_PREFIX_DESC_AMY
+                + STRAY_ADDRESS_PREFIX_DESC_AMY + STRAY_EMAIL_PREFIX_DESC_AMY + STRAY_TAG_PREFIX_DESC_FRIEND,
+                INVALID_COMMAND_EXPECTED_MESSAGE);
+
+        assertParseFailure(parser, STRAY_NAME_PREFIX_DESC_BOB + STRAY_PHONE_PREFIX_DESC_BOB
+                        + STRAY_ADDRESS_PREFIX_DESC_BOB + STRAY_EMAIL_PREFIX_DESC_BOB + STRAY_TAG_PREFIX_DESC_HUSBAND,
+                INVALID_COMMAND_EXPECTED_MESSAGE);
     }
 }

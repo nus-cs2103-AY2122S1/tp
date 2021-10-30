@@ -64,6 +64,35 @@ public class CommandTestUtil {
     // '*' not allowed in tags
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + " " + String.format("\"%s\"", "hubby*");
 
+    // For issue #150
+    public static final String STRAY_NAME_PREFIX = "-name";
+    public static final String STRAY_PHONE_PREFIX = "-phone";
+    public static final String STRAY_EMAIL_PREFIX = "-email";
+    public static final String STRAY_ADDRESS_PREFIX = "-address";
+    public static final String STRAY_TAG_PREFIX = "-tag";
+
+    public static final String STRAY_NAME_PREFIX_DESC_AMY = " " + STRAY_NAME_PREFIX + " "
+            + String.format("\"%s\"", VALID_NAME_AMY);
+    public static final String STRAY_PHONE_PREFIX_DESC_AMY = " " + STRAY_PHONE_PREFIX + " "
+            + String.format("\"%s\"", VALID_PHONE_AMY);
+    public static final String STRAY_EMAIL_PREFIX_DESC_AMY = " " + STRAY_EMAIL_PREFIX + " "
+            + String.format("\"%s\"", VALID_EMAIL_AMY);
+    public static final String STRAY_ADDRESS_PREFIX_DESC_AMY = " " + STRAY_ADDRESS_PREFIX + " "
+            + String.format("\"%s\"", VALID_ADDRESS_AMY);
+    public static final String STRAY_TAG_PREFIX_DESC_FRIEND = " " + STRAY_TAG_PREFIX + " "
+            + String.format("\"%s\"", VALID_TAG_FRIEND);
+
+    public static final String STRAY_NAME_PREFIX_DESC_BOB = " " + STRAY_NAME_PREFIX + " "
+            + String.format("\"%s\"", VALID_NAME_BOB);
+    public static final String STRAY_PHONE_PREFIX_DESC_BOB = " " + STRAY_PHONE_PREFIX + " "
+            + String.format("\"%s\"", VALID_PHONE_BOB);
+    public static final String STRAY_EMAIL_PREFIX_DESC_BOB = " " + STRAY_EMAIL_PREFIX + " "
+            + String.format("\"%s\"", VALID_EMAIL_BOB);
+    public static final String STRAY_ADDRESS_PREFIX_DESC_BOB = " " + STRAY_ADDRESS_PREFIX + " "
+            + String.format("\"%s\"", VALID_ADDRESS_BOB);
+    public static final String STRAY_TAG_PREFIX_DESC_HUSBAND = " " + STRAY_TAG_PREFIX + " "
+            + String.format("\"%s\"", VALID_TAG_HUSBAND);
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
