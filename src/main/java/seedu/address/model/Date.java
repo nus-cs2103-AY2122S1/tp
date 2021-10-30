@@ -12,7 +12,7 @@ import seedu.address.model.util.DatePattern;
 
 public class Date implements Comparable<Date> {
     public static final String MESSAGE_CONSTRAINTS =
-            "The date should be specified in one of the following formats:\n"
+            "Please ensure that the date is valid and follows one of the formats below:\n"
             + DatePattern.printPatterns();
 
     public final String dateString;
