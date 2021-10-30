@@ -59,10 +59,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
+    private static List<UserProfileWatcher> userProfileWatchers = new ArrayList<>();
+
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
-
-    private static List<UserProfileWatcher> userProfileWatchers = new ArrayList<>();
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -88,10 +88,20 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PROFILE_SUCCESS, editedProfile));
     }
 
+    /**
+     * Adds a {@code UserProfileWatcher} Component to the
+     * User Profile Watcher List.
+     *
+     * @param userProfileWatcher The Component to be added to the Watcher List.
+     */
     public static void addUserProfileWatcher(UserProfileWatcher userProfileWatcher) {
         userProfileWatchers.add(userProfileWatcher);
     }
 
+    /**
+     * Notifies all the {@code UserProfileWatcher} Components in the Watcher List
+     * about the changes in the User Profile Credentials.
+     */
     public void notifyUserProfileWatchers() {
         if (userProfileWatchers.size() == 0) {
             return;
