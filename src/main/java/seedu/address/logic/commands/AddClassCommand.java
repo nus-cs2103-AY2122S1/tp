@@ -56,6 +56,8 @@ public class AddClassCommand extends Command {
         String message = this.getMessage(students[1], students[3]);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + "\n" + message);
     }
+
+
     private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Student> validStudentsAsPerson, Model model) {
         for (Student person: validStudentsAsPerson) {
             Student studentToChange = person;
@@ -65,6 +67,8 @@ public class AddClassCommand extends Command {
             model.setStudent(studentToChange, person);
         }
     }
+
+
     private ArrayList[] getStudents(Model model, ArrayList<String> nowStudents, int limit) {
         ArrayList<String> newStudents = new ArrayList<>();
         ArrayList<String> invalidStudents = new ArrayList<>();
