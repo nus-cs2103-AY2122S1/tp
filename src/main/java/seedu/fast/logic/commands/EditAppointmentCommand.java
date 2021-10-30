@@ -95,7 +95,7 @@ public class EditAppointmentCommand extends Command {
         assert appointmentToEdit != null;
 
         String updatedDate = editAppointmentDescriptor.getDate().orElse(appointmentToEdit.getDate());
-        String updatedTime = editAppointmentDescriptor.getTime().orElse(appointmentToEdit.getTimeFormatted());
+        String updatedTime = editAppointmentDescriptor.getTime().orElse(appointmentToEdit.getTime());
         String updatedVenue = editAppointmentDescriptor.getVenue().orElse(appointmentToEdit.getVenue());
 
         return new Appointment(updatedDate, updatedTime, updatedVenue);
