@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's rating in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRating(String)}
  */
-public class Rating {
+public class Rating implements Comparable<Rating> {
 
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -50,4 +50,8 @@ public class Rating {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Rating r) {
+        return this.value.compareTo(r.value);
+    }
 }

@@ -55,7 +55,8 @@ class FilterCommandParserTest {
     public void parse_oneCategoryCode_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(Collections.singleton(new CategoryCode("att")), new Rating("0"));
+                new FilterCommand(Collections.singleton(new CategoryCode("att")), new Rating("0"),
+                        Collections.emptySet());
         assertParseSuccess(parser, CATEGORY_DESC_ATT, expectedFilterCommand);
 
         // multiple whitespaces between keywords
@@ -67,7 +68,7 @@ class FilterCommandParserTest {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
                 new FilterCommand(new HashSet<>(Arrays.asList(new CategoryCode("att"), new CategoryCode("fnb"))),
-                    new Rating("0"));
+                    new Rating("0"), Collections.emptySet());
         assertParseSuccess(parser, CATEGORY_DESC_FNB + CATEGORY_DESC_ATT, expectedFilterCommand);
 
         // multiple whitespaces between keywords
@@ -79,11 +80,13 @@ class FilterCommandParserTest {
     public void parse_noCategoryCode_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-            new FilterCommand(Collections.emptySet(), new Rating("3"));
+            new FilterCommand(Collections.emptySet(), new Rating("3"), Collections.emptySet());
         assertParseSuccess(parser, CATEGORY_EMPTY + RATING_DESC_BOB, expectedFilterCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_EMPTY + "        " + RATING_DESC_BOB,
             expectedFilterCommand);
     }
+
+    // TODO: add test cases for tags filtering
 }

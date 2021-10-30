@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 
 /**
  * The API of the Model component.
@@ -59,7 +60,7 @@ public interface Model {
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * {@code person} must exist in the address book.
      */
     void deletePerson(Person target);
 
@@ -84,4 +85,45 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Exports the given person.
+     * {@code person} must exist in the address book.
+     */
+    void exportPerson(Person person);
+
+    /**
+     * Returns summary of AddressBook.
+     */
+    Summary getSummary();
+
+    /**
+     * Updates the address book history with the latest address book.
+     */
+    void commit();
+
+    /**
+     * Returns true if undo operation is possible.
+     */
+    boolean isUndoable();
+
+    /**
+     * Returns true if redo operation is possible.
+     */
+    boolean isRedoable();
+
+    /**
+     * Undoes the last changes made to the contact list.
+     */
+    void undo();
+
+    /**
+     * Redoes the last changes undid by the undo command.
+     */
+    void redo();
+
+    /**
+     * Sorts the person list based on {@code sortBy}.
+     */
+    void sortList(String sortBy);
 }

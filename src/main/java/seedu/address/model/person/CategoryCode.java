@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * Represents the category of the Contact
+ * Represents the category of the Contact.
  */
 public class CategoryCode {
     public static final String MESSAGE_CONSTRAINTS =
@@ -16,17 +16,16 @@ public class CategoryCode {
 
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public static final List<String> CATEGORY_VALUES = Arrays.asList("att", "fnb", "com", "acc", "tpt", "oth");
+    private static final List<String> CATEGORY_VALUES = Arrays.asList("att", "fnb", "com", "acc", "tpt", "oth");
 
-    private enum Category { ATT, FNB, COM, ACC, TPT, OTH }
+    private enum Category { ATT, FNB, COM, ACC, TPT, OTH, ERR }
 
 
-    //TODO(HK): Re-look at VALIDATION_REGEX
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    private Category category;
+    private final Category category;
     /**
      * Constructs a {@code CategoryCode}.
      *
@@ -47,9 +46,9 @@ public class CategoryCode {
     }
 
     /**
-     * Converts the given category code into a Category object
-     * @param code to be turned into enum object
-     * @return Category object
+     * Converts the given category code into a Category object.
+     * @param code to be turned into enum object.
+     * @return Category object.
      */
     private Category stringToCategory(String code) {
         int category = CATEGORY_VALUES.indexOf(code.toLowerCase());
@@ -66,29 +65,30 @@ public class CategoryCode {
         } else if (category == 5) {
             return Category.OTH;
         } else {
-            // Remove this portion in next iteration
-            throw new RuntimeException("PROBLEM WITH CATEGORY CODES");
+            return Category.ERR;
         }
     }
 
     /**
-     * Returns the category code in non-abbreviated format
-     * @return non-abbreviated category
+     * Returns the category code in non-abbreviated format.
+     * @return non-abbreviated category.
      */
     public String getFullCode() {
         switch (category) {
         case ATT:
             return "Attractions";
         case ACC:
-            return "Accomodation";
+            return "Accommodation";
         case FNB:
-            return "Food & Beverages";
+            return "Food & Beverage";
         case TPT:
             return "Transport";
         case COM:
             return "Commerce";
-        default:
+        case OTH:
             return "Others";
+        default:
+            return "ERROR";
         }
     }
 

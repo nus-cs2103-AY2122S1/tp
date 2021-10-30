@@ -35,6 +35,9 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
+        if (trimmedIndex.charAt(0) == '0') {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
@@ -184,5 +187,15 @@ public class ParserUtil {
             throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
         }
         return new Rating(trimmedRating);
+    }
+
+    /**
+     * Parses a {@code String command} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseSortCommand(String command) {
+        requireNonNull(command);
+        String trimmedCmd = command.trim();
+        return trimmedCmd;
     }
 }

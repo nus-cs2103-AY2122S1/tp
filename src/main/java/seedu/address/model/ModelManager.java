@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -24,6 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final Summary summary;
+    private final List<ReadOnlyAddressBook> history;
+    private int current;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +41,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        summary = new Summary(this.addressBook);
+        summary = new Summary(addressBook);
+        history = new ArrayList<ReadOnlyAddressBook>();
+        history.add(addressBook);
+        int current = 0;
+
     }
 
     public ModelManager() {
@@ -85,6 +93,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        this.commit();
     }
 
     @Override
@@ -101,12 +110,14 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        this.commit();
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        this.commit();
     }
 
     @Override
@@ -114,6 +125,17 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        this.commit();
+    }
+
+    @Override
+    public void sortList(String sortBy) {
+        addressBook.sortList(sortBy);
+    }
+
+    @Override
+    public void exportPerson(Person person) {
+        addressBook.exportPerson(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -131,6 +153,41 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Summary getSummary() {
+        return this.summary;
+    }
+
+    @Override
+    public void commit() {
+        //clear history list after current, then add new address book
+        history.subList(current + 1, history.size()).clear();
+        history.add(new AddressBook(addressBook));
+        current += 1;
+    }
+
+    @Override
+    public boolean isUndoable() {
+        return current > 0;
+    }
+
+    @Override
+    public boolean isRedoable() {
+        return current < history.size() - 1;
+    }
+
+    @Override
+    public void undo() {
+        current -= 1;
+        addressBook.resetData(history.get(current));
+    }
+
+    @Override
+    public void redo() {
+        current += 1;
+        addressBook.resetData(history.get(current));
     }
 
     @Override

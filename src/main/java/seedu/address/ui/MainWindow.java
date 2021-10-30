@@ -18,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.util.Help;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -81,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -113,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSummary());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -132,6 +133,8 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
+        primaryStage.setMinHeight(guiSettings.getWindowHeight());
+        primaryStage.setMinWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -139,7 +142,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Online User Guide if possible, else open the internal help window
+     * Opens the Online User Guide if possible, else opens the secondary internal help window.
      */
     public void handleHelp() {
         if (Desktop.isDesktopSupported()) {
@@ -154,9 +157,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else open the internal help window
+     * Opens the Command Summary if possible, else opens the secondary internal help window.
      */
-    public void openCommandSummary() {
+    public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
             try {
                 helpWindow.openCommandSummary();
@@ -169,7 +172,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the secondary help window in that case that user's computer does not support Desktop operations
+     * Opens the secondary help window.
      */
     @FXML
     public void handleBackUpHelp() {
@@ -210,12 +213,24 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowCommandSummary()) {
+                handleCommandSummary();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isDisplayPerson()) {
+                personListPanel.handleDisplay(commandResult.getPersonToDisplay());
+            }
+
+            if (commandResult.isDisplaySummary()) {
+                personListPanel.handleDisplay(commandResult.getSummaryToDisplay());
             }
 
             return commandResult;

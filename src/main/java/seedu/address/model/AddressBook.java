@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.storage.ExportStorage;
 
 /**
  * Wraps all data at the address-book level
@@ -93,12 +94,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Exports {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void exportPerson(Person key) {
+        // Write to file
+        ExportStorage.addToStorage(key.toString());
+    }
+
     //// util methods
+
+    /**
+     * Sorts {@code AddressBook} by {@code sortBy}.
+     */
+    public void sortList(String sortBy) {
+        persons.sortList(sortBy);
+    }
 
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
+    }
+
+    public UniquePersonList getPersons() {
+        return persons;
     }
 
     @Override

@@ -1,11 +1,9 @@
 package seedu.address.model.summary;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.CategoryCode;
-
+import seedu.address.testutil.PersonBuilder;
 
 public class SummaryTest {
 
@@ -32,21 +29,63 @@ public class SummaryTest {
     }
 
     @Test
-    public void execute_getPercentageReviews_success() {
-        Summary summary = new Summary(getTypicalAddressBook());
-        int summarySize = summary.getPercentageReviews();
-        assertTrue(summarySize > 0);
+    public void execute_getPercentageCategory_successAfterUpdate() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        Summary summary = new Summary(addressBook);
+        HashMap<String, Integer> summaryCategory = summary.getPercentageCategory();
+
+        String category = PersonBuilder.DEFAULT_CATEGORY_CODE;
+        model.addPerson(new PersonBuilder().withName("Alice").build());
+
+
+        ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
+        Summary summaryAfterAdd = new Summary(addressBookAfterAdd);
+        HashMap<String, Integer> summaryCategoryAfterAdd = summaryAfterAdd.getPercentageCategory();
+
+        assertEquals(summaryCategory.size(), summaryCategoryAfterAdd.size());
+
+        for (String i : summaryCategoryAfterAdd.keySet()) {
+            Integer afterAdd = summaryCategoryAfterAdd.get(i);
+            Integer beforeAdd = summaryCategory.get(i);
+            Integer afterAddAtt = afterAdd - 1;
+
+            if (i.equals(category)) {
+                assertEquals(afterAddAtt, beforeAdd);
+            } else {
+                assertEquals(afterAdd, beforeAdd);
+            }
+        }
+
     }
 
     @Test
-    public void execute_getNumberCategory_success() {
-        Summary summary = new Summary(getTypicalAddressBook());
-        HashMap<String, Integer> summarySize = summary.getNumberCategory();
-        List<String> categoryValues = CategoryCode.CATEGORY_VALUES;
-        assertEquals(categoryValues.size(), summarySize.size());
+    public void execute_getPercentageRating_successAfterUpdate() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        Summary summary = new Summary(addressBook);
+        HashMap<String, Integer> summaryRating = summary.getPercentageRatings();
 
-        for (String key : categoryValues) {
-            assertTrue(summarySize.containsKey(key));
+        String category = PersonBuilder.DEFAULT_RATING;
+        model.addPerson(new PersonBuilder().withName("Alice").build());
+
+
+        ReadOnlyAddressBook addressBookAfterAdd = model.getAddressBook();
+        Summary summaryAfterAdd = new Summary(addressBookAfterAdd);
+        HashMap<String, Integer> summaryRatingAfterAdd = summaryAfterAdd.getPercentageRatings();
+
+        assertEquals(summaryRating.size(), summaryRatingAfterAdd.size());
+
+        for (String i : summaryRatingAfterAdd.keySet()) {
+            Integer afterAdd = summaryRatingAfterAdd.get(i);
+            Integer beforeAdd = summaryRating.get(i);
+            Integer afterAddAtt = afterAdd - 1;
+
+            if (i.equals(category)) {
+                assertEquals(afterAddAtt, beforeAdd);
+            } else {
+                assertEquals(afterAdd, beforeAdd);
+            }
         }
     }
 

@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 
 /**
  * Panel containing the list of persons.
@@ -23,6 +24,8 @@ public class PersonListPanel extends UiPart<Region> {
 
     private SelectedPersonCard selected = new SelectedPersonCard();
 
+    private ObservableList<Person> personList;
+
     @FXML
     private ListView<Person> personListView;
 
@@ -32,9 +35,13 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, Summary summary) {
         super(FXML);
+        this.personList = personList;
+
         setSelectedPersonPanel();
+        selected.updateSummary(summary);
+        selected.setSummary();
         selectedPersonPanelPlaceholder.setContent(selected.getRoot());
         updateDetailsIfChanged(personList);
         personListView.setItems(personList);
@@ -49,6 +56,22 @@ public class PersonListPanel extends UiPart<Region> {
                 selected.setPersonDetails();
             }
         });
+    }
+
+    /**
+     * Displays the details of the specified contact in the selectedPersonPanel.
+     */
+    public void handleDisplay(Person personToDisplay) {
+        selected.updatePerson(personToDisplay);
+        selected.setPersonDetails();
+    }
+
+    /**
+     * Displays the details of the specified contact in the selectedPersonPanel.
+     */
+    public void handleDisplay(Summary summary) {
+        selected.updateSummary(summary);
+        selected.setSummary();
     }
 
     public void setSelectedPersonPanel() {

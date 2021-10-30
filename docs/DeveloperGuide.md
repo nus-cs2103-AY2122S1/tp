@@ -156,7 +156,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Category feature
 
 #### Implementation
-The category feature adds to the attributes of the `Person` object. Similar to the other fields of the `Person` object, 
+The category feature adds to the attributes of the `Person` object. Similar to the other fields of the `Person` object,
 it can be added and edited by calling the relevant `add` and `edit` commands by using `c/` prefix.
 
 Additionally, it implements the following operations:
@@ -172,7 +172,7 @@ Given below is an example usage scenario and how category mechanism behaves at e
 Step 1. The user executes the command `filter c/oth` to filter all "others" category contacts in the address book. And
 gets a list of all contacts with the category "others".
 
-Step 2. The user executes the command `edit 1 c/att` which changes the category of the 1st contact from "others" to 
+Step 2. The user executes the command `edit 1 c/att` which changes the category of the 1st contact from "others" to
 "attraction".
 
 
@@ -277,7 +277,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 1 (current choice):** Filters one or multiple categories.
     * Pros: More flexible usage as users can choose to enter one or more category codes.
-    * Cons: May need to use a more complex data structure such as a `Set` to store the category codes entered by user. 
+    * Cons: May need to use a more complex data structure such as a `Set` to store the category codes entered by user.
 
 * **Alternative 2:** Only handles filter by one category.
     * Pros: More targeted results.
@@ -292,7 +292,7 @@ The Ratings feature is implemented as an additional field in the `Person` object
 * `AddCommand#execute()` —  Optionally initialises rating of contact added.
 * `EditCommand#execute()` —  Optionally modifies rating of contact added.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The ratings field is not compulsory. If the `add` command is used without specifying a rating for the new contact, the contact will be 'unrated' and assigned a default value of 0. Similarly, when a contact's rating is cleared using `edit` command, it is also assigned a default value of 0.   
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The ratings field is not compulsory. If the `add` command is used without specifying a rating for the new contact, the contact will be 'unrated' and assigned a default value of 0. Similarly, when a contact's rating is cleared using `edit` command, it is also assigned a default value of 0.
 
 </div>
 
@@ -305,7 +305,7 @@ Step 2. The user executes `add ... ra/3` to add a new contact. The `add` command
 Step 3. The user executes `edit 1 ... ra/5` to update the 1st contact's rating. The `edit` command calls `ParserUtil#ParseRating()`, creating a `Rating` object if a valid input rating is received.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the input rating is invalid (i.e. a non-integer or outside of the range 1 to 5), the parsers use `Rating#isValidRating()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the modification on rating.  
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the input rating is invalid (i.e. a non-integer or outside of the range 1 to 5), the parsers use `Rating#isValidRating()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the modification on rating.
 
 </div>
 
@@ -323,7 +323,7 @@ The following activity diagram summarizes what happens when a user executes an `
 
 * **Alternative 1 (current choice):** As a field written by `AddCommand` and `EditCommand`.
     * Pros: Easy to implement.
-    * Cons: Rating a contact is less straightforward. 
+    * Cons: Rating a contact is less straightforward.
       Ratings do not stand out among another features.
 
 * **Alternative 2:** As an individual command `RateCommand`.
@@ -458,7 +458,7 @@ Step 2. The user can click on the contact on the GUI to expand it and display th
 
 #### Implementation
 
-The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to 
+The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to
 obtain a read-only copy of `AddressBook` to summarise the data within. It implements the following operations:
 * `setNumberOfContacts`  — Calculates and sets the number of contacts in the addressbook.
 * `setPercentageReviews()`  — Calculates and sets the percentage of contacts that have a review.
