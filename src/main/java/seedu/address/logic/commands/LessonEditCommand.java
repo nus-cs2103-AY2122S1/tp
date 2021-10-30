@@ -143,7 +143,9 @@ public class LessonEditCommand extends UndoableCommand {
             throws CommandException {
         assert lessonToEdit != null;
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getStartDate());
-        Date updatedEndDate = editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate());
+        Date updatedEndDate = lessonToEdit.isRecurring()
+                ? editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate())
+                : updatedDate;
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange().orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
