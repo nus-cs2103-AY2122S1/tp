@@ -129,7 +129,7 @@ public class ModelManager implements Model {
     //=========== Task Management ==================================================================================
 
     @Override
-    public Path getTaskListFilePath() {
+    public Path getTaskBookFilePath() {
         return userPrefs.getTaskBookPath();
     }
 
@@ -208,7 +208,7 @@ public class ModelManager implements Model {
     //=========== Order Management ==================================================================================
 
     @Override
-    public Path getOrderPath() {
+    public Path getOrderBookPath() {
         return userPrefs.getOrderBookFilePath();
     }
 

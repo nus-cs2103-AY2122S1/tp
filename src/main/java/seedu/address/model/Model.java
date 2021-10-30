@@ -97,7 +97,7 @@ public interface Model {
     /**
      * Returns the user prefs' TaskList file path.
      */
-    Path getTaskListFilePath();
+    Path getTaskBookFilePath();
 
     /**
      * Sets the user prefs' TaskList file path.
@@ -153,7 +153,7 @@ public interface Model {
     /**
      * Returns the user prefs' Order books  file path.
      */
-    Path getOrderPath();
+    Path getOrderBookPath();
 
     /**
      * Sets the user prefs' Order books  file path.

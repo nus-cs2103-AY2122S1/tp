@@ -86,6 +86,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Path getTaskBookFilePath() {
+        return model.getTaskBookFilePath();
+    }
+
+    @Override
+    public Path getOrderBookFilePath() {
+        return model.getOrderBookPath();
+    }
+
+    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
