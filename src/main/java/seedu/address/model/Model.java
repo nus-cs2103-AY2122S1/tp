@@ -95,12 +95,12 @@ public interface Model {
 
     //======================================== TASK FUNCTIONALITIES =================================================
     /**
-     * Returns the user prefs' TaskList file path.
+     * Returns the user prefs' UniqueTaskList file path.
      */
     Path getTaskListFilePath();
 
     /**
-     * Sets the user prefs' TaskList file path.
+     * Sets the user prefs' UniqueTaskList file path.
      */
     void setTaskListFilePath(Path taskListFilePath);
 
@@ -109,7 +109,7 @@ public interface Model {
      */
     void setTaskBook(ReadOnlyTaskBook taskBook);
 
-    /** Returns the TaskList */
+    /** Returns the UniqueTaskList */
     ReadOnlyTaskBook getTaskBook();
 
 

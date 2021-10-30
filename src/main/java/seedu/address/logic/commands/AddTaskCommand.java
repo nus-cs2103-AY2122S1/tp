@@ -25,6 +25,7 @@ public class AddTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_UNFOUND_ORDERID = "The sales order with the given Id cannot be found.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
     private final Task toAdd;
 
@@ -42,6 +43,10 @@ public class AddTaskCommand extends Command {
         long tagId = toAdd.getTagId();
         if (tagId != -1 && !model.hasOrder(tagId)) {
             throw new CommandException(MESSAGE_UNFOUND_ORDERID);
+        }
+
+        if (model.hasTask(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         model.addTask(toAdd);
