@@ -178,7 +178,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing h
 
 Some example commands you can try:
 
-* `view 1`: Views the first student show in the student list.
+* `student 1`: Views the first student show in the student list.
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a student named `John Doe` to the TutAssistor.
 * `addtoclass si/3 tc/1`: Adds the 3rd student in the student list to the 1st class in the tuition class list.
 * `deleteclass 2`: Deletes the 2nd class shown in the tuition class list.
@@ -502,7 +502,10 @@ Sorts tuition class list according to time or alphabetical order.
   * After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
   
   * The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
-  
+
+  * For alphabetical order, the sorting is case-insensitive. For example, `chem` is considered the same as `Chem`.
+
+
 </div>
 
 The possible usages of `sort` are given below:
