@@ -68,7 +68,7 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index"
             + " of the student identified by the index number used in the displayed student list.\n"
-            + "Note that you cannot change the type of lesson."
+            + "Note that you cannot change the type of lesson.\n"
             + "Besides cancelled lessons, existing values of other fields will be overwritten by the input values.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
