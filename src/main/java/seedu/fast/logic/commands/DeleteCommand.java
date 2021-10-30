@@ -2,6 +2,7 @@ package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -41,8 +42,8 @@ public class DeleteCommand extends Command {
         + "you want to delete cannot be more than the number of clients you currently have!";
     public static final String MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT = "You cannot delete more than "
         + MULTIPLE_DELETE_LIMIT + " clients at one time!";
-    public static final String MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED = "%1$s client(s) has been deleted"
-        + " before the invalid index at 'index %2$s' is detected.";
+    public static final String MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED = "Unable to execute command!\n"
+            + "One or more invalid index detected at: %1$s\n" + MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT;
 
     private static final Logger logger = LogsCenter.getLogger(JsonFastStorage.class);
 
@@ -100,8 +101,39 @@ public class DeleteCommand extends Command {
         }
     }
 
+    private void sortOrder() {
+        Arrays.sort(indexArray, Index::compareTo);
+    }
+
+    private ArrayList<Index> getInvalidIndex(List<Person> lastShownList) {
+        ArrayList<Index> outOfBoundIndexArray = new ArrayList<>();
+
+        for (Index index : indexArray) {
+            if (index.getOneBased() > lastShownList.size()) {
+                outOfBoundIndexArray.add(index);
+            }
+        }
+
+        return outOfBoundIndexArray;
+    }
+
+    private String getInvalidIndexMessage(ArrayList<Index> arrayList) {
+        String msg = "";
+        for (Index index : arrayList) {
+            msg = msg + index.getOneBased() + " ";
+        }
+
+        return msg.trim().replace(" ", ", ");
+    }
+
+    private void checkIndex(ArrayList<Index> indexArrayList, String message) throws CommandException {
+        if (indexArrayList.size() > 0) {
+            throw new CommandException(message);
+        }
+    }
+
     private void checkIndex(Index index, List<Person> lastShownList, String message) throws CommandException {
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getOneBased() > lastShownList.size()) {
             throw new CommandException(message);
         }
     }
@@ -126,15 +158,16 @@ public class DeleteCommand extends Command {
     }
 
     private CommandResult executeMultipleDelete(List<Person> lastShownList, Model model) throws CommandException {
+        ArrayList<Index> invalidIndexList = getInvalidIndex(lastShownList);
+        String invalidIndexString = getInvalidIndexMessage(invalidIndexList);
+        String errorMsg = String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED, invalidIndexString);
+        checkIndex(invalidIndexList, errorMsg);
         checkDuplicates(indexArray);
+        sortOrder();
 
         Index targetIndex;
         for (int i = 0; i < indexArray.length; i++) {
-            targetIndex = Index.indexModifier(indexArray[i], i);
-            String errorMsg = String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED, i,
-                indexArray[i].getOneBased());
-
-            checkIndex(targetIndex, lastShownList, errorMsg);
+            targetIndex = indexArray[i];
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
             model.deletePerson(personToDelete);

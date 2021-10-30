@@ -27,7 +27,7 @@ public class EditAppointmentCommand extends Command {
             + "Parameters: \nINDEX (must be a positive integer), "
             + "[" + PREFIX_APPOINTMENT + "DATE] (must be yyyy-mm-dd), "
             + "[" + PREFIX_APPOINTMENT_TIME + "TIME] (must be hh:mm (24-hour format), 'leave blank' to remove it), "
-            + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 30 characters long), 'leave blank' to remove it."
+            + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 20 characters long), 'leave blank' to remove it."
             + "\n\nExamples: \n" + "To edit the entire appointment: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_TIME + "22:15 "
@@ -95,7 +95,7 @@ public class EditAppointmentCommand extends Command {
         assert appointmentToEdit != null;
 
         String updatedDate = editAppointmentDescriptor.getDate().orElse(appointmentToEdit.getDate());
-        String updatedTime = editAppointmentDescriptor.getTime().orElse(appointmentToEdit.getTimeFormatted());
+        String updatedTime = editAppointmentDescriptor.getTime().orElse(appointmentToEdit.getTime());
         String updatedVenue = editAppointmentDescriptor.getVenue().orElse(appointmentToEdit.getVenue());
 
         return new Appointment(updatedDate, updatedTime, updatedVenue);

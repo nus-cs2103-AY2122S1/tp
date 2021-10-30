@@ -121,7 +121,7 @@ on any operating system including Windows, macOS or Linux
 ### User interface
 
 ![UiAnnotated](images/UiAnnotated.png)
-Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
+<br> Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
 FAST. <br><br>
 Next, the _Results display_ is where FAST gives you feedback to your commands. For example, if you make a typo
 in your command, FAST will inform you here! <br><br>
@@ -136,10 +136,10 @@ are all sample data! Here are some commands you can try to see what they do:
 
     
 1. Add a contact named "John Doe" to FAST
-   * `add n/John Doe`
+   * `add n/Matthew Shen p/91087657 e/matthew@example.com a/511 Seletar Road 12`
     
 2. Delete the 3rd contact in FAST
-    * `delete 3`
+    * `del 3`
     
 3. View all your saved contacts
     *  `list`
@@ -226,8 +226,8 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * The date of an appointment with your client
 * Should be in this format: `yyyy-mm-dd` 
   * e.g. `2023-05-15` 
-* Should be a valid date where:
-  * `yyyy` (year): should be a non-negative 4-digit number
+* Should be a valid date (cannot be a date in the past) where:
+  * `yyyy` (year): should be a positive 4-digit number 
   * `mm` (month): should be a valid calendar month between 01 and 12
   * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
 
@@ -324,7 +324,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `VENUE`
 * The location of an appointment with your client
-* Should not be longer than **30** characters long
+* Should not be longer than **20** characters long
 <br> <br>
 
 ### **Managing a client**
@@ -431,7 +431,7 @@ Can be used to delete up to **10** contacts in a single `del` command by supplyi
 
 <div markdown="span" class="alert alert-primary">:exclamation: Warning:
 If *Format 1* is used, there should be a space in between each `INDEX` if multiple `INDEX` are input. <br>
-If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'.
+If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`.
 </div>
 
 **Examples**:
