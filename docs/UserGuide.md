@@ -7,10 +7,13 @@ title: User Guide
 
 ## Table of Contents
 - [Quick start](#quick-start)
+- [Glossary](#glossary) 
+  - [Terminology used](#terminology-used)
+  - [Structure of an elderly contact](#structure-of-an-elderly-contact)
 - [Features](#features)
   - [Add elderly details](#add-elderly-details--add)
   - [Delete an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
-  - [Edit a person](#edit-a-person--edit)
+  - [Edit an elderly](#edit-an-elderly--edit)
   - [List all elderly](#list-elderly--list)
   - [Sort elderly by visit](#sort-elderly-by-visit--sort)
   - [Find elderly by attribute](#find-elderly-by-attribute--find)
@@ -41,25 +44,45 @@ title: User Guide
    Some example commands you can try:
 
 
-   * **`add`**`n/John Doe p/98765432 l/Chinese a/John street, block 123, #01-01` : Adds an elderly contact named `John Doe` to the SeniorLove.
+   * `add n/John Doe p/98765432 l/Chinese a/John street, block 123, #01-01` : Adds an elderly contact named `John Doe` to the SeniorLove.
 
-   * **`delete`**`3` : Deletes the 3rd elderly shown in the current list.
+   * `delete 3` : Deletes the 3rd elderly shown in the current list.
 
-   * **`list`** : Lists all elderly.
+   * `list` : Lists all elderly.
 
-   * **`find`**`Hans` : Find all elderly whose attributes start with Hans.(Case insensitive)
+   * `find Hans` : Find all elderly whose attributes start with Hans.(Case insensitive)
 
-   * **`clear`** : Deletes all elderly.
+   * `clear` : Deletes all elderly.
 
-   * **`exit`** : Exits the app.
+   * `exit` : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+This section provides information on commonly used terms throughout SeniorLove.
+
+### Terminology used
+
+Term            | Meaning
+----------------|-----------------
+Elderly | A person in SeniorLove
+Attribute | Data that is assigned to an elderly
+Visit | A visit from a social worker to an elderly
+
+### Structure of an elderly contact
+
+Category        | Specific flags | Details | Valid inputs | Requirement
+----------------|-----------------|------------|----------|-----------------
+Elderly personal attributes | 1. `n/`: Name <br><br> 2. `p/`: Phone number <br><br> 3. `l/`: Language <br><br> 4. `a/`: Address | 1. Elderly's name <br><br> 2. Elderly's contact number <br><br> 3. Elderly's preferred language 4. Elderly's residential address | 1. Alphanumeric characters and spaces <br><br> 2. 8 digits, local (No country codes) <br><br> 3. Any string <br><br> 4. Any string | Compulsory
+Elderly visit attributes | 1. `v/`: Visit <br><br> 2. `lv`: Last visit <br><br> 3. `f/`: Frequency <br><br> 4. `o/`: Occurrence | 1. Elderly's next visit <br><br> 2. Last time elderly was visited <br><br> 3. Frequency at which elderly is being visited (if recurring) 4. Number of times elderly has to be visited (if recurring) | 1. Datetime formatted as `yyyy-MM-dd` <br><br> 2. Datetime formatted as `yyyy-MM-dd` <br><br> 3. One of the following enumerations: `Daily`, `Weekly`, `Biweekly`, `Monthly`, `Quarterly` <br><br> 4. Strictly positive integer | Optional
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 * Add elderly with contact details 
 * Delete an elderly or corresponding visit 
-* Edit a person 
+* Edit an elderly 
 * List all elderly
 * Sort elderly by visit or last visit 
 * Find elderly by attribute 
@@ -107,23 +130,16 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`.
 * `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
-* `NAME` is the elderly’s name. It must consist only of alphanumeric characters and spaces. **This must be included.**
-* `PHONE_NUMBER` is the elderly’s phone number. **This must be included.**
-* `LANGUAGE` is the elderly’s preferred language for communication. **This must be included.**
-* `ADDRESS` is the elderly’s address to be visited. **This must be included.**
-* `LAST_VISIT` is the last datetime that the user has visited the elderly. **This is optional to include.**
-* `VISIT` is the next scheduled datetime for the elderly’s visit. **This is optional to include.**
-* `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include.**
 * `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
-* `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
-* `OCCURRENCE` is the occurrence of the next scheduled visit for the elderly. **This is optional to include.**
-* `OCCURRENCE` is a **strictly positive integer**.
-* `HEALTH_CONDITION` is the elderly's health condition. **This is optional to include.**
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
-* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`, without `FREQUENCY` and `OCCURRENCE`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 f/weekly o/3 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE` .
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College`
+  > Adds an elderly and details without the `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 h/dementia`
+  > Adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`, without `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 f/weekly o/3 h/dementia`
+  > Adds an elderly and details with `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
 
 
 ### Delete an elderly or corresponding visit : `delete`
@@ -136,28 +152,34 @@ Format: `delete [v/] INDEX`
 * `v/` denotes if the item to be deleted is an elderly’s details or the elderly’s corresponding visit. **This is optional to include.** The presence of v/ indicates that it is the elderly’s visit that is to be deleted, while its exclusion indicates that it is the elderly’s details that is to be deleted.
 
 Examples:
-* `delete 1` deletes the elderly’s details of the elderly at list index 1.
-* `delete v/ 1` deletes the elderly’s visit of the elderly at list index 1.
+* `delete 1`
+  > Deletes the elderly’s details of the elderly at list index 1.
+* `delete v/ 1`
+  > Deletes the elderly’s visit of the elderly at list index 1.
 
 
-### Edit a person : `edit`
+### Edit an elderly : `edit`
 
 Edits an existing elderly's attributes in SeniorLove.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] [h/HEALTH_CONDITION]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the elderly at the specified `INDEX`. The index refers to the index number shown in the displayed elderly list. The index **must be a positive integer**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing health conditions, the existing health conditions of the person will be removed i.e adding of health conditions is not cumulative.
-* You can remove all the person’s health conditions by typing `h/` without
+* When editing health conditions, the existing health conditions of the elderly will be removed i.e adding of health conditions is not cumulative.
+* You can remove all the elderly’s health conditions by typing `h/` without
     specifying any health conditions after it.
-* You can remove the person's last visit by typing `lv/` without specifying any datetime after it.
+* You can remove the elderly's last visit by typing `lv/` without specifying any datetime after it.
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
-*  `edit 1 p/91234567 l/English` Edits the phone number and language of the 1st person to be `91234567` and `English` respectively. All other attributes are not modified.
-*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
-*  `edit 1 lv/` Removes the last visit for the 1st person. All other attributes are not modified.
+*  `edit 1 p/91234567 l/English`
+   > Edits the phone number and language of the 1st elderly to be `91234567` and `English` respectively. All other attributes are not modified.
+*  `edit 2 n/Betsy Crower h/`
+   > Edits the name of the 2nd elderly to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
+*  `edit 1 lv/`
+   > Removes the last visit for the 1st elderly. All other attributes are not modified.
 
 
 ### List elderly : `list`
@@ -165,12 +187,19 @@ Examples:
 Shows a list of all the elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
 Format: `list [w/] [m/]`
-- `list` without any prefix displays all the elderly in the alphabetical order of their names.
-- `list w/` displays all the elderly with an incoming visit in the next week.
-- `list m/` displays all the elderly with an incoming visit in the next month.
-- `w/` and `m/` fields cannot be both present.
 
-Example: `list m/` displays all the elderly with an incoming visit in the next month. 
+* `list` without any prefix displays all the elderly in the alphabetical order of their names.
+* `list w/` displays all the elderly with an incoming visit in the next week.
+* `list m/` displays all the elderly with an incoming visit in the next month.
+* `w/` and `m/` fields cannot be both present.
+
+Examples:
+* `list`
+  > Displays all the elderly.
+* `list m/`
+  > Displays all the elderly with an incoming visit in the next month. 
+* `list w/`
+  > Displays all elderly with an in
 
 ### Sort elderly by visit : `sort`
 
@@ -181,9 +210,15 @@ Format: `sort [FIELD_TO_BE_SORTED]`
 * `sort lv/` sorts elderly in descending order of their `last visit` date (the latest first).
 * `sort v/` sorts elderly in ascending order of their next `visit` date (the earliest first).
 * There should be exactly one `FIELD_TO_BE_SORTED` at any time.
-* Currently, `sort` only supports fields of `last visit` or `visit`.
+* `sort` acts on the list currently being displayed.
+* Currently, `sort` only supports flags of `last visit` or `visit`.
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
-Example: `sort lv/` sorts the person list in descending order of `last visit` date.
+Example: 
+* `sort lv/`
+  > Sorts the elderly list in descending order of `last visit` date.
+* `sort v/`
+  > Sorts the elderly list in ascending order of `visit` date.
 
 ### Find elderly by attribute : `find`
 
@@ -192,15 +227,18 @@ Finds elderly whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* All attributes are searched (`NAME`, `PHONE`, `LANGUAGE`, `ADDRESS`, `VISIT`, `LAST_VISIT`)
-* Partial words will be matched, and will return any person who has the partial word as a substring of any attribute e.g. `Han` will match `Hans Bo` and `Rohan Tan`
-* `VISIT` and `LAST_VISIT` are in the `yyyy-MM-dd HH:mm` format.
-* Persons matching all given keywords will be returned (i.e. `AND` search).
+* All elderly attributes are searched. (`NAME`, `PHONE`, `LANGUAGE`, `ADDRESS`, `VISIT`, `LAST_VISIT`)
+* Partial words will be matched, and will return any elderly who has the partial word as a substring of any attribute. e.g. `Han` will match `Hans Bo` and `Rohan Tan`
+* `VISIT` and `LAST_VISIT` are in the `yyyy-MM-dd HH:mm` [format](#structure-of-an-elderly-contact).
+* Elderly matching all given keywords will be returned (i.e. `AND` search).
   e.g. `Hans English` will return `Hans Gruber`, `Hanson Lim`, both of which have `LANGUAGE` English
+* A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex English` returns `Alex Yeoh`, `Alex Lim`, both with `LANGUAGE` English.<br>
+* `find John`
+  > Returns `john` and `John Doe`
+* `find alex English`
+  > Returns `Alex Yeoh`, `Alex Lim`, both with `LANGUAGE` English.<br>
 
 
 ### Schedule a visit to an elderly : `visit`
@@ -212,13 +250,14 @@ Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 * `INDEX` corresponds to the elderly’s index in the address book. It is a **strictly positive integer, and must be included.**
 * The `VISIT` is in the format of `yyyy-mm-dd HH:mm`, and it must be included.
 * The `FREQUENCY` and `OCCURRENCE` are optional parameters, and must both be included or excluded.
-* `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
-* `OCCURRENCE` is a **strictly positive integer**.
-* If there is already an existing visit scheduled for the elderly, this command will schedule a new visit that overwrites the existing one.
+* If there is already a next visit scheduled for the elderly, this command will schedule a new visit that overwrites the existing one.
+*  A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
 
 Examples:
-* `visit 1 at/2021-12-31 17:00` schedules a meeting to the first elderly in the address book on 31th December 2021, 5PM.
-* `visit 1 at/2021-12-31 17:00 f/weekly o/3` schedules a recurring weekly meeting for 3 times to the first elderly in the address book on 31th December 2021, 5PM.
+* `visit 1 at/2021-12-31 17:00`
+  > Schedules a meeting to the first elderly in the address book on 31th December 2021, 5PM.
+* `visit 1 at/2021-12-31 17:00 f/weekly o/3`
+  > Schedules a recurring weekly meeting for 3 times to the first elderly in the address book on 31th December 2021, 5PM.
 
 
 ### Mark one visit as done : `done`
@@ -228,10 +267,11 @@ Marks a scheduled visit to an elderly as done.
 Format: `done INDEX`
 
 * `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.** There must be a scheduled visit for the elderly before the visit can be marked as done.
-* Once a scheduled visit is marked as done, it will update the last visited time of the elderly, and now there is no longer a scheduled next visit for the elderly.
+* Once a scheduled visit is marked as done, it will update the last visited time of the elderly. If the visit is not recurring or is on its last occurrence, there will be no next visit. Otherwise, the next visit will be updated to reflect the next visit date.
 
-Examples:
-* `done 1` marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
+Example:
+* `done 1`
+  > Marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
 
 
 ### View summary statistics : `summary`
@@ -281,11 +321,6 @@ SeniorLove data are saved as a JSON file `[JAR file location]/data/addressbook.j
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, SeniorLove will discard all data and start with an empty data file at the next run.
 </div>
-
-
-### Archive data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
