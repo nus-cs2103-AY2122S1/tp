@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
-import static seedu.address.model.student.Name.MESSAGE_CONSTRAINTS_ADD_STUDENT_TO_CLASS;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
