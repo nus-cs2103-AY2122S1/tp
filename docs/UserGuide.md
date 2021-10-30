@@ -498,8 +498,8 @@ Format: `appt -d INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `appt -l` followed by `delete 2` deletes the 2nd appointment in the appointment list.
-* `appt -f p/Betsy` followed by `delete 1` deletes the 1st appointment in the results of the filter command.
+* `appt -l` followed by `appt -d 2` deletes the 2nd appointment in the appointment list.
+* `appt -f p/Betsy` followed by `appt -d 1` deletes the 1st appointment in the results of the filter command.
 
 ### Filtering all appointments: `appt -f` <a name="find-appointments"/>
 Searches and lists all appointments in the appointment records that match the given filter conditions.
