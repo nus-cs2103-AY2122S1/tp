@@ -145,7 +145,7 @@ A client can have any number of tags (including 0). The remark is also optional.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
-* `add n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F d/160_85_35_81`
+* `add n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F m/160_85_35_81`
 
 ### Deleting a client : `delete`
 
