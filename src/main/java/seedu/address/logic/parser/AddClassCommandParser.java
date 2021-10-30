@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
+import static seedu.address.model.student.Name.MESSAGE_CONSTRAINTS_ADD_STUDENT_TO_CLASS;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -56,7 +57,7 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
 
         } catch (ParseException pe) {
             String displayMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage())
-                    + AddClassCommand.MESSAGE_USAGE;
+                    + "\n" + AddClassCommand.MESSAGE_USAGE;
             throw new ParseException(displayMessage);
         }
     }
