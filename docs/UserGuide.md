@@ -406,9 +406,11 @@ All member data will be removed immediately after this command is executed. This
 Adds a facility to your facility list.
 
 Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
-
-* `TIME` specifies the start time and is to be inputted in the format HHMM
-* `CAPACITY` specifies the maximum allowed people in the facility
+<a name="addf"></a>
+* `NAME` specifies the name of the facility. **It must only consist of up to 50 alphanumeric characters and spaces and should not be blank**
+* `TIME` specifies the start time and **must be in the 24-hour format `HHMM`** 
+* `LOCATION` specifies the general location of the facility. **It must only consist of up to 50 alphanumeric characters and spaces and should not be blank** 
+* `CAPACITY` specifies the maximum number of people allowed in the facility and **must be a positive integer from 1 to 50**
 
 <div markdown="block" class="alert alert-info">
 
@@ -464,6 +466,7 @@ Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
 * `INDEX` **must be a positive integer** 1, 2, 3…
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
+* The same constraints apply to the parameters as in [adding a facility](#addf)
 
 <div markdown="block" class="alert alert-info">
 
