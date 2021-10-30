@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Lesson;
@@ -117,11 +118,7 @@ public class LessonAddCommand extends UndoableCommand {
             throws CommandException {
         if (model.hasClashingLesson(toAdd)) {
             Set<Lesson> clashes = model.getClashingLessons(toAdd);
-
-            String clashingLessons = clashes.stream()
-                .map(x -> x.toString())
-                .reduce("Clashing Lesson(s):\n", (x, y) -> "\n" + x + y);
-
+            String clashingLessons = StringUtil.lessonsToString(clashes);
             throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
         }
 

@@ -6,6 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.Set;
+
+import seedu.address.model.lesson.Lesson;
 
 /**
  * Helper functions for handling strings.
@@ -104,5 +107,18 @@ public class StringUtil {
     public static String stripLeadingZeroes(String s) {
         String regex = "^0+(?!$)";
         return s.replaceAll(regex, "");
+    }
+
+    /**
+     * Return a string representation of all the lessons in the set.
+     *
+     * @param lessons Set of lessons.
+     * @return String representation of the lessons in the set.
+     */
+    public static String lessonsToString(Set<Lesson> lessons) {
+        String lessonString = lessons.stream()
+            .map(x -> x.toString())
+            .reduce("\nClashing Lesson(s):", (x, y) -> x + "\n" + y);
+        return lessonString;
     }
 }

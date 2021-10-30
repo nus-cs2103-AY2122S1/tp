@@ -103,6 +103,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if any of the specified lessons clashes with existing lesson in the address book.
+     */
+    public boolean hasClashingLesson(Iterable<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        return entries.hasClashes(lessons);
+    }
+
+    /**
      * Returns {@code Set<Lesson>} of existing lessons in the address book that are clashing with the lesson.
      */
     public Set<Lesson> getClashingLessons(Lesson lesson) {
@@ -116,14 +124,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Set<Lesson> getClashingLessons(Lesson lesson, Lesson lessonToIgnore) {
         requireNonNull(lesson);
         return entries.getClashes(lesson, lessonToIgnore);
-    }
-
-    /**
-     * Returns true if any of the specified lessons clashes with existing lesson in the address book.
-     */
-    public boolean hasClashingLesson(Iterable<Lesson> lessons) {
-        requireAllNonNull(lessons);
-        return entries.hasClashes(lessons);
     }
 
     /**

@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -481,7 +482,8 @@ class LessonEditCommandTest {
         LessonEditCommand lessonEditCommand =
                 prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_SECOND_LESSON, descriptor);
 
-        assertCommandFailure(lessonEditCommand, model, MESSAGE_CLASHING_LESSON);
+        assertCommandFailure(lessonEditCommand, model, MESSAGE_CLASHING_LESSON
+                + StringUtil.lessonsToString(model.getClashingLessons(makeupLesson)));
     }
 
     @Test

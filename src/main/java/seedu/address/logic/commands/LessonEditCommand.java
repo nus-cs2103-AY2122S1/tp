@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Date;
@@ -258,11 +259,7 @@ public class LessonEditCommand extends UndoableCommand {
         // Checks if the edited lesson clashes with any existing lessons apart from the one to be edited.
         if (model.hasClashingLesson(edited, toEdit)) {
             Set<Lesson> clashes = model.getClashingLessons(edited, toEdit);
-
-            String clashingLessons = clashes.stream()
-                .map(x -> x.toString())
-                .reduce("Clashing Lesson(s):\n", (x, y) -> "\n" + x + y);
-
+            String clashingLessons = StringUtil.lessonsToString(clashes);
             throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
         }
         lessonList.remove(toEdit);
