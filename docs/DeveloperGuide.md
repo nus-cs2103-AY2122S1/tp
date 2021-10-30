@@ -1,5 +1,8 @@
 ---
-layout: page title: Developer Guide
+layout: page
+title: Developer Guide
+parent: For Developers
+nav_order: 1
 ---
 
 * Table of Contents {:toc}

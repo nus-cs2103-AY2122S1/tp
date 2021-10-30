@@ -1,5 +1,7 @@
 ---
-layout: page title: Developer Guide
+layout: page 
+title: Developer Guide
+nav_exclude: true
 ---
 
 * Table of Contents {:toc}

@@ -1,6 +1,8 @@
 ---
 layout: page 
 title: User Guide
+parent: For Users
+nav_order: 2
 ---
 
 <h3><i>What is BogoBogo?</i></h3>

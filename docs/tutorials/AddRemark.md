@@ -1,6 +1,8 @@
 ---
 layout: page
 title: "Tutorial: Adding a command"
+parent: Tutorials
+grand_parent: For Users
 ---
 
 Let's walk you through the implementation of a new command — `remark`.
