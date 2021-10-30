@@ -7,6 +7,9 @@ title: User Guide
 
 ## Table of Contents
 - [Quick start](#quick-start)
+- [Glossary](#glossary) 
+  - [Terminology used](#terminology-used)
+  - [Structure of an elderly contact](#structure-of-an-elderly-contact)
 - [Features](#features)
   - [Add elderly details](#add-elderly-details--add)
   - [Delete an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
@@ -54,6 +57,25 @@ title: User Guide
    * `exit` : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+This section provides information on commonly used terms throughout SeniorLove.
+
+### Terminology used
+
+Term            | Meaning
+----------------|-----------------
+Elderly | A person in SeniorLove
+Attribute | Data that is assigned to an elderly
+
+### Structure of an elderly contact
+
+Category        | Specific flags | Details | Valid inputs | Requirement
+----------------|-----------------|------------|----------|-----------------
+Elderly personal attributes | 1. `n/`: Name <br><br> 2. `p/`: Phone number <br><br> 3. `l/`: Language <br><br> 4. `a/`: Address | 1. Elderly's name <br><br> 2. Elderly's contact number <br><br> 3. Elderly's preferred language 4. Elderly's residential address | 1. Alphanumeric characters and spaces <br><br> 2. 8 digits, local (No country codes) <br><br> 3. Any string <br><br> 4. Any string | Compulsory
+Elderly visit attributes | 1. `v/`: Visit <br><br> 2. `lv`: Last visit Datetime formatted as `yyyy-MM-dd` <br><br> 3. `f/`: Frequency <br><br> 4. `o/`: Occurrence | 1. Elderly's next visit <br><br> 2. Last time elderly was visited <br><br> 3. Frequency at which elderly is being visited (if recurring) 4. Number of times elderly has to be visited (if recurring) | 1. Datetime formatted as `yyyy-MM-dd` <br><br> 2. Datetime formatted as `yyyy-MM-dd` <br><br> 3. One of the following enumerations: `Daily`, `Weekly`, `Biweekly`, `Monthly`, `Quarterly` <br><br> 4. Positive integer | Optional
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
