@@ -86,9 +86,10 @@ public class CsvParser {
                 data.get(inputtedHeaders[i]).add(entry);
             }
 
-            // Case whereby final column was left blank
-            if (values.length == inputtedHeaders.length - 1) {
-                data.get(inputtedHeaders[inputtedHeaders.length - 1]).add("");
+            // Fill up blank columns
+            if (values.length < inputtedHeaders.length) {
+                for (int i = values.length; i < inputtedHeaders.length; i++)
+                data.get(inputtedHeaders[i]).add("");
             }
 
         }
