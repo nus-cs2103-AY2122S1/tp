@@ -50,13 +50,12 @@ public class ClientContainsKeywordsPredicate implements Predicate<Client> {
                 })
                 .reduce(true, Boolean::logicalAnd);
 
-        boolean checkTags = client.getTags().stream()
-                .map(Tag::getName)
-                .map(tagName -> (Function<String, Boolean>) x -> containsStringIgnoreCase(tagName, x))
-                .map(f -> keywords.getValue(PREFIX_TAG).map(f))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .reduce(true, Boolean::logicalOr);
+        boolean checkTags = keywords.getValue(PREFIX_TAG)
+                .map(tagKeyword -> client.getTags().stream()
+                        .map(Tag::getName)
+                        .filter(tagName -> !tagName.isEmpty())
+                        .anyMatch(tagName -> containsStringIgnoreCase(tagName, tagKeyword)))
+                .orElse(true);
 
         return checkGeneral && checkAttributes && checkTags;
     }
