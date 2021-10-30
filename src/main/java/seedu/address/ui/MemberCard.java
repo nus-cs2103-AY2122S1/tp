@@ -60,7 +60,12 @@ public class MemberCard extends UiPart<Region> {
         }, () -> email.setVisible(false));
         member.getPositions().stream()
                 .sorted(Comparator.comparing(position -> position.positionName))
-                .forEach(position -> positions.getChildren().add(new Label(position.positionName)));
+                .forEach(position -> {
+                    Label positionLabel = new Label(position.positionName);
+                    positionLabel.setMaxWidth(100);
+                    positionLabel.setWrapText(true);
+                    positions.getChildren().add(positionLabel);
+                });
         member.getTaskList().asUnmodifiableObservableList().stream()
                 .sorted(Comparator.comparing(task -> task.getName().toString()))
                 .forEach(task -> {
