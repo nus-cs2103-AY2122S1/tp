@@ -132,6 +132,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the footer semester and Mc goal.
+     */
+    void updateFooter() {
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getModuleTrackerFilePath(), logic.getUserInfo());
+        statusbarPlaceholder.getChildren().addAll(statusBarFooter.getRoot());
+    }
+
+    /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
@@ -185,9 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            // update GUI
-            fillInnerParts();
+            updateFooter();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

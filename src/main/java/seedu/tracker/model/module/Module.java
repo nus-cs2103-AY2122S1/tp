@@ -143,7 +143,7 @@ public class Module {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getCode())
-                .append(": ")
+                .append("; ")
                 .append(getTitle())
                 .append("; Description: ")
                 .append(getDescription())
