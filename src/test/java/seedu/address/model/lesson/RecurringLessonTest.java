@@ -66,6 +66,70 @@ class RecurringLessonTest {
     }
 
     @Test
+    public void getDisplayStartLocalDateTime_dateNotOver_sameDate() {
+        Date dateCurrentWeek = DateUtil.build(LocalDate.now());
+        Lesson lesson = new LessonBuilder().withDate(dateCurrentWeek).withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getStart().atDate(dateCurrentWeek.getLocalDate()),
+                lesson.getDisplayStartLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayStartLocalDateTime_dateOver_showNextDate() {
+        Date currentWeek = DateUtil.build(LocalDate.now());
+        Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
+        Lesson lesson = new LessonBuilder().withDate(dateOneWeekAgo).withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getStart().atDate(currentWeek.getLocalDate()),
+                lesson.getDisplayStartLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayStartLocalDateTime_dateOver_showNextUncancelledDate() {
+        Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
+        Date dateCurrentWeek = DateUtil.build(LocalDate.now());
+        Date dateOneWeekLater = DateUtil.build(LocalDate.now().plusWeeks(1));
+        Lesson lesson = new LessonBuilder().withDate(dateOneWeekAgo).withTimeRange(VALID_TIME_RANGE)
+                .withCancelledDatesSet(dateCurrentWeek).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+
+        assertEquals(timeRange.getStart().atDate(dateOneWeekLater.getLocalDate()),
+                lesson.getDisplayStartLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayEndLocalDateTime_dateNotOver_sameDate() {
+        Date dateCurrentWeek = DateUtil.build(LocalDate.now());
+        Lesson lesson = new LessonBuilder().withDate(dateCurrentWeek).withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getEnd().atDate(dateCurrentWeek.getLocalDate()),
+                lesson.getDisplayEndLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayEndLocalDateTime_dateOver_showNextDate() {
+        Date currentWeek = DateUtil.build(LocalDate.now());
+        Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
+        Lesson lesson = new LessonBuilder().withDate(dateOneWeekAgo).withTimeRange(VALID_TIME_RANGE).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+        assertEquals(timeRange.getEnd().atDate(currentWeek.getLocalDate()),
+                lesson.getDisplayEndLocalDateTime());
+    }
+
+    @Test
+    public void getDisplayEndLocalDateTime_dateOver_showNextUncancelledDate() {
+        Date dateOneWeekAgo = DateUtil.build(LocalDate.now().minusWeeks(1));
+        Date dateCurrentWeek = DateUtil.build(LocalDate.now());
+        Date dateOneWeekLater = DateUtil.build(LocalDate.now().plusWeeks(1));
+        Lesson lesson = new LessonBuilder().withDate(dateOneWeekAgo).withTimeRange(VALID_TIME_RANGE)
+                .withCancelledDatesSet(dateCurrentWeek).buildRecurring();
+        TimeRange timeRange = new TimeRange(VALID_TIME_RANGE);
+
+        assertEquals(timeRange.getEnd().atDate(dateOneWeekLater.getLocalDate()),
+                lesson.getDisplayEndLocalDateTime());
+    }
+
+    @Test
     public void isClashing_withMakeupLessonD_returnsFalse() {
         // does not clash with makeup lesson on same day and non-clashing time
         Lesson recurringLesson = new LessonBuilder().withTimeRange(VALID_TIME_RANGE).buildRecurring();

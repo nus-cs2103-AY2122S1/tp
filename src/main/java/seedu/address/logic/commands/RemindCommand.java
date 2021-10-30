@@ -17,6 +17,7 @@ public class RemindCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        model.updateUpcomingLessons();
         return new CommandResult(SHOWING_REMIND_MESSAGE, CommandResult.DisplayType.REMINDER);
     }
 }

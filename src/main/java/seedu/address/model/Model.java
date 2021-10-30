@@ -101,7 +101,17 @@ public interface Model {
      */
     Calendar getCalendar();
 
+    /**
+     * Returns a list of upcoming lessons within the next two days.
+     *
+     * @return List of upcoming lessons within the next two days.
+     */
     ObservableList<Entry<Lesson>> getUpcomingLessons();
+
+    /**
+     * Updates the list of upcoming lessons.
+     */
+    void updateUpcomingLessons();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

@@ -157,6 +157,15 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
     /**
+     * Gets the start {@code LocalDateTime} to be displayed.
+     *
+     * @return start {@code LocalDateTime} to be displayed.
+     */
+    public LocalDateTime getDisplayStartLocalDateTime() {
+        return timeRange.getStart().atDate(getDisplayLocalDate());
+    }
+
+    /**
      * Gets the end {@code LocalDateTime} to be displayed.
      *
      * @return End {@code LocalDateTime} to be displayed.
