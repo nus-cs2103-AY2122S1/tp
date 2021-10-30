@@ -10,17 +10,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javafx.stage.Stage;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -32,7 +31,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.UserProfileWatcher;
-import seedu.address.ui.MainWindow;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -64,7 +62,7 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
-    private List<UserProfileWatcher> userProfileWatchers;
+    private static List<UserProfileWatcher> userProfileWatchers = new ArrayList<>();
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -90,11 +88,15 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PROFILE_SUCCESS, editedProfile));
     }
 
-    public void addUserProfileWatcher(UserProfileWatcher userProfileWatcher) {
+    public static void addUserProfileWatcher(UserProfileWatcher userProfileWatcher) {
         userProfileWatchers.add(userProfileWatcher);
     }
 
     public void notifyUserProfileWatchers() {
+        if (userProfileWatchers.size() == 0) {
+            return;
+        }
+
         for (UserProfileWatcher userProfileWatcher : userProfileWatchers) {
             userProfileWatcher.updateUserProfile();
         }

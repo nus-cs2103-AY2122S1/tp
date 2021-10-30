@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.util.UserProfileWatcher;
 
 public class UserProfileInMenuBar extends UiPart<Region> implements UserProfileWatcher {
@@ -23,11 +24,16 @@ public class UserProfileInMenuBar extends UiPart<Region> implements UserProfileW
         super(FXML);
         this.logic = logic;
         setUserProfileOnMenuBar();
+        addToUserProfileWatcherList();
     }
 
     @Override
     public void updateUserProfile() {
         setUserProfileOnMenuBar();
+    }
+
+    public void addToUserProfileWatcherList() {
+        EditCommand.addUserProfileWatcher(this);
     }
 
     /**
