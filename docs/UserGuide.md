@@ -223,7 +223,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 
 #### `COMMAND`
-* The type of command available in FAST:
+* The type of `COMMAND` parameters available in FAST:
   * `Quick Start`
   * `Add`
   * `Appointment`
