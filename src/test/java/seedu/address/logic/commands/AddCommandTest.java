@@ -170,12 +170,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Set<Lesson> getClashingLessons(Lesson lesson) {
+        public Set<String> getClashingLessonsString(Lesson lesson) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
-        public Set<Lesson> getClashingLessons(Lesson lesson, Lesson lessonToIgnore) {
+        public Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 

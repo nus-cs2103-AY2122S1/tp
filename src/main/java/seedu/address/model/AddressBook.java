@@ -111,17 +111,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns {@code Set<Lesson>} of existing lessons in the address book that are clashing with the lesson.
+     * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
      */
-    public Set<Lesson> getClashingLessons(Lesson lesson) {
+    public Set<String> getClashingLessonsString(Lesson lesson) {
         requireNonNull(lesson);
         return entries.getClashes(lesson);
     }
 
     /**
-     * Returns {@code Set<Lesson>} of existing lessons in the address book that are clashing with the lesson.
+     * Returns {@code Set<String>} of existing lessons in the address book that are clashing with the lesson.
      */
-    public Set<Lesson> getClashingLessons(Lesson lesson, Lesson lessonToIgnore) {
+    public Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore) {
         requireNonNull(lesson);
         return entries.getClashes(lesson, lessonToIgnore);
     }

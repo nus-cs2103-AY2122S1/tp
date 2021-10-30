@@ -8,8 +8,6 @@ import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.Set;
 
-import seedu.address.model.lesson.Lesson;
-
 /**
  * Helper functions for handling strings.
  */
@@ -115,9 +113,8 @@ public class StringUtil {
      * @param lessons Set of lessons.
      * @return String representation of the lessons in the set.
      */
-    public static String lessonsToString(Set<Lesson> lessons) {
+    public static String lessonsToString(Set<String> lessons) {
         String lessonString = lessons.stream()
-            .map(x -> x.toString())
             .reduce("\nClashing Lesson(s):", (x, y) -> x + "\n" + y);
         return lessonString;
     }

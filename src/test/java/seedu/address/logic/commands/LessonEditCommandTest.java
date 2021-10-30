@@ -483,7 +483,7 @@ class LessonEditCommandTest {
                 prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_SECOND_LESSON, descriptor);
 
         assertCommandFailure(lessonEditCommand, model, MESSAGE_CLASHING_LESSON
-                + StringUtil.lessonsToString(model.getClashingLessons(makeupLesson)));
+                + StringUtil.lessonsToString(model.getClashingLessonsString(makeupLesson)));
     }
 
     @Test

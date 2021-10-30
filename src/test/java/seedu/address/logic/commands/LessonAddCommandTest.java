@@ -111,7 +111,7 @@ public class LessonAddCommandTest {
         LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON
-            + StringUtil.lessonsToString(model.getClashingLessons(clashingLesson)));
+            + StringUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
     }
 
     @Test
@@ -230,7 +230,7 @@ public class LessonAddCommandTest {
         LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON
-            + StringUtil.lessonsToString(model.getClashingLessons(clashingLesson)));
+            + StringUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
     }
 
     @Test
@@ -250,7 +250,7 @@ public class LessonAddCommandTest {
         LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON
-            + StringUtil.lessonsToString(model.getClashingLessons(clashingLesson)));
+            + StringUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
     }
 
     @Test

@@ -224,6 +224,23 @@ public abstract class Lesson implements Comparable<Lesson> {
                 lessonRates, outstandingFees, cancelledDates);
     }
 
+    public String getLessonDetails() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("Start date: ")
+                .append(getStartDate());
+
+        if (!getEndDate().equals(Date.MAX_DATE)) {
+            builder.append("; End date: ")
+                .append(getEndDate());
+        }
+
+        builder.append("; Time: ")
+                .append(getTimeRange());
+
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

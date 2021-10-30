@@ -258,7 +258,7 @@ public class LessonEditCommand extends UndoableCommand {
             throws CommandException {
         // Checks if the edited lesson clashes with any existing lessons apart from the one to be edited.
         if (model.hasClashingLesson(edited, toEdit)) {
-            Set<Lesson> clashes = model.getClashingLessons(edited, toEdit);
+            Set<String> clashes = model.getClashingLessonsString(edited, toEdit);
             String clashingLessons = StringUtil.lessonsToString(clashes);
             throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
         }

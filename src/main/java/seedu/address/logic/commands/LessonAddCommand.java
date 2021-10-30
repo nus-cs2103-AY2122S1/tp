@@ -117,7 +117,7 @@ public class LessonAddCommand extends UndoableCommand {
     private Set<Lesson> createUpdatedLessons(Set<Lesson> lessons, Lesson toAdd)
             throws CommandException {
         if (model.hasClashingLesson(toAdd)) {
-            Set<Lesson> clashes = model.getClashingLessons(toAdd);
+            Set<String> clashes = model.getClashingLessonsString(toAdd);
             String clashingLessons = StringUtil.lessonsToString(clashes);
             throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
         }

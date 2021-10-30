@@ -138,11 +138,11 @@ public class CalendarEntryList {
      * @param toIgnore The lesson to ignore.
      * @return The set of lessons that are clashing with toCheck.
      */
-    public Set<Lesson> getClashes(Lesson toCheck, Lesson toIgnore) {
+    public Set<String> getClashes(Lesson toCheck, Lesson toIgnore) {
         requireAllNonNull(toCheck, toIgnore);
         return entryList.stream()
                 .filter(entry-> !entry.getUserObject().equals(toIgnore) && entry.getUserObject().isClashing(toCheck))
-                .map(entry -> entry.getUserObject())
+                .map(entry -> entry.getTitle() + " " + entry.getUserObject().getLessonDetails())
                 .collect(Collectors.toSet());
     }
 
@@ -152,11 +152,11 @@ public class CalendarEntryList {
      * @param toCheck The lesson to check.
      * @return The set of lessons that are clashing with toCheck.
      */
-    public Set<Lesson> getClashes(Lesson toCheck) {
+    public Set<String> getClashes(Lesson toCheck) {
         requireAllNonNull(toCheck);
         return entryList.stream()
                 .filter(entry -> entry.getUserObject().isClashing(toCheck))
-                .map(entry -> entry.getUserObject())
+                .map(entry -> entry.getTitle() + " " + entry.getUserObject().getLessonDetails())
                 .collect(Collectors.toSet());
     }
 

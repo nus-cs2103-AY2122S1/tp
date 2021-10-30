@@ -79,12 +79,12 @@ public interface Model {
     /**
      * Returns the set of clashing lessons for {@code lesson}in the address book.
      */
-    Set<Lesson> getClashingLessons(Lesson lesson);
+    Set<String> getClashingLessonsString(Lesson lesson);
 
     /**
      * Returns the set of clashing lessons for {@code lesson}in the address book.
      */
-    Set<Lesson> getClashingLessons(Lesson lesson, Lesson lessonToIgnore);
+    Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore);
 
     /**
      * Deletes the given person.
