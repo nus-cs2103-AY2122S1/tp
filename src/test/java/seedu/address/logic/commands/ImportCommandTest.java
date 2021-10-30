@@ -43,7 +43,7 @@ public class ImportCommandTest {
 
         CommandResult commandResult = new ImportCommand(typicalPersons).execute(modelStub);
 
-        assertEquals(typicalPersons.size()
+        assertEquals(typicalPersons.size() - 1
                 + " "
                 + ImportCommand.MESSAGE_SUCCESS, commandResult.getFeedbackToUser());
         assertEquals(typicalPersons, modelStub.getPersonsAdded());

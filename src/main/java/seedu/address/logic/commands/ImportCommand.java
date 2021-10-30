@@ -30,6 +30,7 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        int count = 0;
 
         for (int i = 0; i < personsToAdd.size(); i++) {
             Person person = personsToAdd.get(i);
@@ -37,8 +38,9 @@ public class ImportCommand extends Command {
                 continue;
             }
             model.addPerson(person);
+            count++;
         }
-        return new CommandResult(personsToAdd.size() + " " + MESSAGE_SUCCESS);
+        return new CommandResult(count + " " + MESSAGE_SUCCESS);
     }
 
     @Override
