@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import dash.commons.util.StringUtil;
 import dash.model.person.Person;
 
 /**
