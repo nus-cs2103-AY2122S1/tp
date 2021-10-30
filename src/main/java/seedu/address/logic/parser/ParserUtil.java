@@ -159,7 +159,10 @@ public class ParserUtil {
         requireNonNull(limit);
         String trimmedLimit = limit.trim();
         try {
-            Integer myLimit = Integer.valueOf(trimmedLimit);
+            int myLimit = Integer.parseInt(trimmedLimit);
+            if (!ClassLimit.isValidLimit(myLimit)) {
+                throw new ParseException(ClassLimit.MESSAGE_CONSTRAINTS);
+            }
             return new ClassLimit(myLimit);
         } catch (NumberFormatException e) {
             throw new ParseException(ClassLimit.MESSAGE_CONSTRAINTS);

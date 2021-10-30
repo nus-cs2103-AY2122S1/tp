@@ -240,6 +240,7 @@ Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
 * It is optional to add students into the class when creating a tuition class.
 * The [timeslot](#44-timeslot) should follow the format "Ddd HH:mm-HH:mm".
+* The limit of a class should not exceed 1000.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There should not be a space after each comma when listing multiple students.
