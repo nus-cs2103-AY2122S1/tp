@@ -249,8 +249,8 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * The date of an appointment with your client
 * Should be in this format: `yyyy-mm-dd` 
   * e.g. `2023-05-15` 
-* Should be a valid date where:
-  * `yyyy` (year): should be a non-negative 4-digit number
+* Should be a valid date (cannot be a date in the past) where:
+  * `yyyy` (year): should be a positive 4-digit number 
   * `mm` (month): should be a valid calendar month between 01 and 12
   * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
 

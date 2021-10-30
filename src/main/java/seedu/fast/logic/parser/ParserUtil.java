@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -260,8 +261,15 @@ public class ParserUtil {
      */
     public static String parseDateString(String date) throws ParseException {
         try {
+            LocalDate localDate = LocalDate.parse(date);
+            LocalDate now = LocalDate.now();
+
+            if (localDate.isBefore(now)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        Appointment.PREVIOUS_DATE_INPUT));
+            }
             // converts the date to the specified format
-            date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            date = localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (DateTimeParseException dtpe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     Appointment.INVALID_DATE_INPUT), dtpe);

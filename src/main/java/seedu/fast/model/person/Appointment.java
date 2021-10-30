@@ -21,6 +21,8 @@ public class Appointment {
 
     public static final String INVALID_DATE_INPUT = "Date field must be yyyy-mm-dd, "
             + "with valid calendar year, month and days";
+    public static final String PREVIOUS_DATE_INPUT = "You cannot schedule your appointment on a date/time that "
+            + "has already passed!";
     public static final String INVALID_TIME_INPUT = "Time field must be hh:mm, "
             + "in 24-hour format, with valid hour and minute";
     public static final String INVALID_VENUE_INPUT = "Venue field must not be greater than 20 characters, "

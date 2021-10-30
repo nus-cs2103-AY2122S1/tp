@@ -126,12 +126,12 @@ public class FastParserTest {
 
     @Test
     public void parseCommand_appointment() throws Exception {
-        final LocalDate date = LocalDate.parse("2021-10-10");
+        final LocalDate date = LocalDate.parse("2025-10-10");
         final String dateString = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         final Appointment appt = new Appointment(dateString, Appointment.NO_TIME, Appointment.NO_VENUE);
         AppointmentCommand command = (AppointmentCommand) parser.parseCommand(
                 AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PREFIX_APPOINTMENT + "2021-10-10");
+                        + PREFIX_APPOINTMENT + "2025-10-10");
         assertEquals(new AppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 
@@ -154,7 +154,7 @@ public class FastParserTest {
 
     @Test
     public void parseCommand_editAppointment() throws Exception {
-        final LocalDate date = LocalDate.parse("2021-10-10");
+        final LocalDate date = LocalDate.parse("2025-10-10");
         final String dateString = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         final String venue = "Clementi Mall";
 
@@ -164,7 +164,7 @@ public class FastParserTest {
 
         EditAppointmentCommand command = (EditAppointmentCommand) parser.parseCommand(
                 EditAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PREFIX_APPOINTMENT + "2021-10-10" + " " + PREFIX_APPOINTMENT_VENUE + venue);
+                        + PREFIX_APPOINTMENT + "2025-10-10" + " " + PREFIX_APPOINTMENT_VENUE + venue);
         assertEquals(new EditAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 
