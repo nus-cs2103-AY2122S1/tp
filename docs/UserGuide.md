@@ -121,7 +121,7 @@ on any operating system including Windows, macOS or Linux
 ### User interface
 
 ![UiAnnotated](images/UiAnnotated.png)
-Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
+<br> Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
 FAST. <br><br>
 Next, the _Results display_ is where FAST gives you feedback to your commands. For example, if you make a typo
 in your command, FAST will inform you here! <br><br>
