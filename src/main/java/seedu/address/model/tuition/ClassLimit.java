@@ -1,13 +1,13 @@
 package seedu.address.model.tuition;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represent the limit of the participant
  */
 public class ClassLimit {
-    public static final String MESSAGE_CONSTRAINTS = "The limit is not correct, should be a positive integer and no more than 1000\n";
+    public static final String MESSAGE_CONSTRAINTS =
+            "The limit is not correct, should be a positive integer and no more than 1000\n";
     public final int limit;
 
     /**
