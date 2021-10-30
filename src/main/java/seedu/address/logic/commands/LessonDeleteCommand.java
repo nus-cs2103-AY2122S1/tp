@@ -39,7 +39,7 @@ public class LessonDeleteCommand extends UndoableCommand {
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson for student %1$s:\n%2$s";
 
-    private final Index index;
+    private Index index;
     private final Index lessonIndex;
     private Person personBeforeLessonDelete;
     private Person personAfterLessonDelete;
@@ -60,6 +60,9 @@ public class LessonDeleteCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         personBeforeLessonDelete = CommandUtil.getPerson(lastShownList, index);
+
+        // set with index from mainList
+        index = setToDefinitiveIndex(personBeforeLessonDelete);
 
         List<Lesson> lessonList = new ArrayList<>(personBeforeLessonDelete.getLessons());
         Lesson toRemove = CommandUtil.getLesson(lessonList, lessonIndex);
@@ -89,21 +92,23 @@ public class LessonDeleteCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() throws AssertionError {
         requireNonNull(model);
 
+        checkValidity(personAfterLessonDelete);
+
         model.setPerson(personAfterLessonDelete, personBeforeLessonDelete);
+        return personBeforeLessonDelete;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() throws AssertionError {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(personBeforeLessonDelete);
+
+        model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
+        return personAfterLessonDelete;
     }
 
     @Override

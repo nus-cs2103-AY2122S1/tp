@@ -88,7 +88,6 @@ public class PaidCommand extends UndoableCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
-
         List<Lesson> lessonList = new ArrayList<>(lessons);
         Lesson toPay = lessonList.get(indexToEdit.getZeroBased());
         Lesson paidLesson = createEditedLesson(toPay, payment);
@@ -145,22 +144,23 @@ public class PaidCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() {
         requireNonNull(model);
 
+        checkValidity(personAfterLessonPaid);
+
         model.setPerson(personAfterLessonPaid, personBeforeLessonPaid);
+        return personBeforeLessonPaid;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(personBeforeLessonPaid);
 
+        model.setPerson(personBeforeLessonPaid, personAfterLessonPaid);
+        return personAfterLessonPaid;
     }
 
     @Override

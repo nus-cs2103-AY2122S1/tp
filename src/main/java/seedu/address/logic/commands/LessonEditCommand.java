@@ -88,7 +88,7 @@ public class LessonEditCommand extends UndoableCommand {
             "Failed to uncancel lesson! This lesson does not have a cancelled lesson on %1$s.";
 
 
-    private final Index index;
+    private Index index;
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
     private Person personBeforeLessonEdit;
@@ -115,6 +115,8 @@ public class LessonEditCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         personBeforeLessonEdit = CommandUtil.getPerson(lastShownList, index);
+
+        index = setToDefinitiveIndex(personBeforeLessonEdit);
 
         List<Lesson> lessonList = personBeforeLessonEdit.getLessons().stream().sorted().collect(Collectors.toList());
         Lesson lessonToEdit = CommandUtil.getLesson(lessonList, lessonIndex);
@@ -265,22 +267,19 @@ public class LessonEditCommand extends UndoableCommand {
     }
 
     @Override
-    protected void undo() {
+    protected Person undo() {
         requireNonNull(model);
 
         model.setPerson(personAfterLessonEdit, personBeforeLessonEdit);
+        return personBeforeLessonEdit;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
-
+        model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
+        return personAfterLessonEdit;
     }
 
     @Override

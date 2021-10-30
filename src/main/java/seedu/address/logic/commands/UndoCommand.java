@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 public class UndoCommand extends Command {
 
@@ -23,8 +24,8 @@ public class UndoCommand extends Command {
         if (!undoRedoStack.canUndo()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        undoRedoStack.popUndo().undo();
-        return new CommandResult(MESSAGE_SUCCESS);
+        Person studentModified = undoRedoStack.popUndo().undo();
+        return new CommandResult(MESSAGE_SUCCESS, studentModified);
     }
 
     @Override

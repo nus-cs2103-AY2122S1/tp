@@ -212,8 +212,12 @@ class RedoCommandTest {
             return new CommandResult("");
         }
         @Override
-        protected void undo() {}
+        protected Person undo() {
+            return null;
+        }
         @Override
-        protected void redo() {}
+        protected Person redo() {
+            return null;
+        }
     }
 }

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
@@ -22,8 +23,8 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        undoRedoStack.popRedo().redo();
-        return new CommandResult(MESSAGE_SUCCESS);
+        Person studentModified = undoRedoStack.popRedo().redo();
+        return new CommandResult(MESSAGE_SUCCESS, studentModified);
     }
 
     @Override

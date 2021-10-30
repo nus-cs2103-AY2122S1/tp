@@ -99,6 +99,7 @@ public class EditCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         personBeforeEdit = CommandUtil.getPerson(lastShownList, index);
+
         personAfterEdit = createEditedPerson(personBeforeEdit, editPersonDescriptor);
 
         if (!personBeforeEdit.isSamePerson(personAfterEdit) && model.hasPerson(personAfterEdit)) {
@@ -140,21 +141,22 @@ public class EditCommand extends UndoableCommand {
     }
 
     @Override
-    public void undo() {
+    public Person undo() {
         requireNonNull(model);
 
+        checkValidity(personAfterEdit);
+
         model.setPerson(personAfterEdit, personBeforeEdit);
+        return personBeforeEdit;
     }
 
     @Override
-    protected void redo() {
+    protected Person redo() {
         requireNonNull(model);
 
-        try {
-            executeUndoableCommand();
-        } catch (CommandException ce) {
-            throw new AssertionError(MESSAGE_REDO_FAILURE);
-        }
+        checkValidity(personBeforeEdit);
+        model.setPerson(personBeforeEdit, personAfterEdit);
+        return personAfterEdit;
     }
 
     @Override
