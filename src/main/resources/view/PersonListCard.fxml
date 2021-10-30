@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane fx:id="innerPane" HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -29,9 +31,27 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <FlowPane fx:id="healthConditions" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="language" styleClass="cell_small_label" text="\$language" />
+      <HBox alignment="CENTER_LEFT" spacing="5">
+        <ImageView preserveRatio="true" fitHeight="15">
+          <Image url="@/images/phone_icon.png" />
+        </ImageView>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" spacing="5">
+        <ImageView preserveRatio="true" fitHeight="15">
+          <Image url="@/images/address_icon.png" />
+        </ImageView>
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" spacing="5">
+        <ImageView preserveRatio="true" fitHeight="15">
+          <Image url="@/images/language_icon.png" />
+        </ImageView>
+        <Label fx:id="language" styleClass="cell_small_label" text="\$language" />
+      </HBox>
+
       <Label fx:id="visit" styleClass="cell_small_label" text="\$visit" />
       <Label fx:id="lastVisit" styleClass="cell_small_label" text="\$lastVisit" />
 
