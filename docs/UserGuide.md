@@ -331,7 +331,7 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
 * Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
 * `-e` refers to the edit command
-* It is a requirement that **at least one of the optional fields should be provided**
+* It is a requirement that **at least one of the optional fields should be provided!**
 * The current value will be updated to the value input by the user
 
 Examples:
