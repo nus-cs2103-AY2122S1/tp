@@ -78,7 +78,7 @@ public class TaskTabParser {
             return new ExitCommand();
 
         case FindTaskCommand.COMMAND_WORD:
-            return new FindTaskCommandParser().parse(arguments);
+            return new FindTaskCommandParser().parse(arguments, filteredPersonList);
 
         case ListTaskCommand.COMMAND_WORD:
             return new ListTaskCommand();
