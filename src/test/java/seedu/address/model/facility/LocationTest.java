@@ -28,18 +28,18 @@ public class LocationTest {
     @Test
     public void isValidLocation() {
         // null location
-        assertThrows(NullPointerException.class, () -> Location.isValidTime(null));
+        assertThrows(NullPointerException.class, () -> Location.isValidLocation(null));
 
         // valid location
-        assertTrue(Location.isValidTime("1")); // 1 character(lower boundary)
-        assertTrue(Location.isValidTime("1111111111111"
+        assertTrue(Location.isValidLocation("1")); // 1 character(lower boundary)
+        assertTrue(Location.isValidLocation("1111111111111"
                 + "1111111111111111111111111111111111111")); // 50 characters(upper boundary)
-        assertTrue(Location.isValidTime("25"));
+        assertTrue(Location.isValidLocation("25"));
 
         // invalid location
-        assertFalse(Location.isValidTime("")); // empty string
-        assertFalse(Location.isValidTime("")); // // below 1 character
-        assertFalse(Location.isValidTime("1111111111111"
+        assertFalse(Location.isValidLocation("")); // empty string
+        assertFalse(Location.isValidLocation("")); // // below 1 character
+        assertFalse(Location.isValidLocation("1111111111111"
                 + "11111111111111111111111111111111111111")); // more than 50 characters
     }
 

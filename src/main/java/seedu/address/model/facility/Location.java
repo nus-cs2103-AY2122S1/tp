@@ -23,14 +23,14 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
-        checkArgument(isValidTime(location), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
         this.location = location;
     }
 
     /**
      * Returns true if a given string is a valid location.
      */
-    public static boolean isValidTime(String test) {
+    public static boolean isValidLocation(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
