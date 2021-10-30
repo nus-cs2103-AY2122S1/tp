@@ -10,7 +10,7 @@ title: User Guide
 - [Features](#features)
   - [Add elderly details](#add-elderly-details--add)
   - [Delete an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
-  - [Edit a person](#edit-a-person--edit)
+  - [Edit an elderly](#edit-an-elderly--edit)
   - [List all elderly](#list-elderly--list)
   - [Sort elderly by visit](#sort-elderly-by-visit--sort)
   - [Find elderly by attribute](#find-elderly-by-attribute--find)
@@ -41,17 +41,17 @@ title: User Guide
    Some example commands you can try:
 
 
-   * **`add`**`n/John Doe p/98765432 l/Chinese a/John street, block 123, #01-01` : Adds an elderly contact named `John Doe` to the SeniorLove.
+   * `add n/John Doe p/98765432 l/Chinese a/John street, block 123, #01-01` : Adds an elderly contact named `John Doe` to the SeniorLove.
 
-   * **`delete`**`3` : Deletes the 3rd elderly shown in the current list.
+   * `delete 3` : Deletes the 3rd elderly shown in the current list.
 
-   * **`list`** : Lists all elderly.
+   * `list` : Lists all elderly.
 
-   * **`find`**`Hans` : Find all elderly whose attributes start with Hans.(Case insensitive)
+   * `find Hans` : Find all elderly whose attributes start with Hans.(Case insensitive)
 
-   * **`clear`** : Deletes all elderly.
+   * `clear` : Deletes all elderly.
 
-   * **`exit`** : Exits the app.
+   * `exit` : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -59,7 +59,7 @@ title: User Guide
 ## Features
 * Add elderly with contact details 
 * Delete an elderly or corresponding visit 
-* Edit a person 
+* Edit an elderly 
 * List all elderly
 * Sort elderly by visit or last visit 
 * Find elderly by attribute 
@@ -140,24 +140,24 @@ Examples:
 * `delete v/ 1` deletes the elderly’s visit of the elderly at list index 1.
 
 
-### Edit a person : `edit`
+### Edit an elderly : `edit`
 
 Edits an existing elderly's attributes in SeniorLove.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] [h/HEALTH_CONDITION]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the elderly at the specified `INDEX`. The index refers to the index number shown in the displayed elderly list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing health conditions, the existing health conditions of the person will be removed i.e adding of health conditions is not cumulative.
-* You can remove all the person’s health conditions by typing `h/` without
+* When editing health conditions, the existing health conditions of the elderly will be removed i.e adding of health conditions is not cumulative.
+* You can remove all the elderly’s health conditions by typing `h/` without
     specifying any health conditions after it.
-* You can remove the person's last visit by typing `lv/` without specifying any datetime after it.
+* You can remove the elderly's last visit by typing `lv/` without specifying any datetime after it.
 
 Examples:
-*  `edit 1 p/91234567 l/English` Edits the phone number and language of the 1st person to be `91234567` and `English` respectively. All other attributes are not modified.
-*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
-*  `edit 1 lv/` Removes the last visit for the 1st person. All other attributes are not modified.
+*  `edit 1 p/91234567 l/English` Edits the phone number and language of the 1st elderly to be `91234567` and `English` respectively. All other attributes are not modified.
+*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd elderly to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
+*  `edit 1 lv/` Removes the last visit for the 1st elderly. All other attributes are not modified.
 
 
 ### List elderly : `list`
@@ -181,9 +181,10 @@ Format: `sort [FIELD_TO_BE_SORTED]`
 * `sort lv/` sorts elderly in descending order of their `last visit` date (the latest first).
 * `sort v/` sorts elderly in ascending order of their next `visit` date (the earliest first).
 * There should be exactly one `FIELD_TO_BE_SORTED` at any time.
+* `sort` acts on the list currently being displayed.
 * Currently, `sort` only supports fields of `last visit` or `visit`.
 
-Example: `sort lv/` sorts the person list in descending order of `last visit` date.
+Example: `sort lv/` sorts the elderly list in descending order of `last visit` date.
 
 ### Find elderly by attribute : `find`
 
@@ -193,9 +194,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * All attributes are searched (`NAME`, `PHONE`, `LANGUAGE`, `ADDRESS`, `VISIT`, `LAST_VISIT`)
-* Partial words will be matched, and will return any person who has the partial word as a substring of any attribute e.g. `Han` will match `Hans Bo` and `Rohan Tan`
+* Partial words will be matched, and will return any elderly who has the partial word as a substring of any attribute e.g. `Han` will match `Hans Bo` and `Rohan Tan`
 * `VISIT` and `LAST_VISIT` are in the `yyyy-MM-dd HH:mm` format.
-* Persons matching all given keywords will be returned (i.e. `AND` search).
+* Elderly matching all given keywords will be returned (i.e. `AND` search).
   e.g. `Hans English` will return `Hans Gruber`, `Hanson Lim`, both of which have `LANGUAGE` English
 
 Examples:
