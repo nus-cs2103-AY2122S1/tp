@@ -82,7 +82,7 @@ public class TaskDate {
         }
 
         if (detectedTimeFormat != null) {
-            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat);
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat, Locale.US);
             this.time = Optional.of(LocalTime.parse(taskTimeString, timeFormat));
         }
     }
