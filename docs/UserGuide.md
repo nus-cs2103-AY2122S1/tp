@@ -378,13 +378,15 @@ This can be used if the client's information has changed, or if you entered an i
 
 * Edits the client at the specified `INDEX`
 
-<div markdown="block" class="alert alert-info"> :information_source: 
+<div markdown="block" class="alert alert-info"> :information_source:
+
 * Only the edited fields will be updated to the input values, while the unedited values are unchanged.
 * You can remove all the client’s tags by typing `t/` without specifying any tags after it.
 * For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
 </div>
 
-<div markdown="span" class="alert alert-warning"> :exclamation: 
+<div markdown="span" class="alert alert-warning"> :exclamation:
+
 * At least one of the optional fields must be provided.
 * When editing tags, all existing tags of the client will be replaced with the new tags.
 </div>
@@ -589,23 +591,16 @@ This also allows you to keep track of the number of completed appointments with 
 ![result for `done 1`](images/appointmentDone.PNG)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
-
-<div markdown="span" class="alert alert-primary">:bulb: Tip:
-If you have accidentally marked an appointment as completed, fret not! You can always undo it! 
-<br>Refer to [Undo marking of completed appointment](#undo-marking-of-completed-appointment-ua) for more information.
-</div>
-
-
-<br>
+  
 
 ##### Undo marking of completed appointment: `ua`
 
-You can unmark the appointment with your client as completed. <br>
-This also allows you to undo your mistake if you have accidentally marked an appointment as completed.
+You can reduce the appointment count of your client as needed. <br>
 
 **Format**: `ua INDEX`
-* Decreases the completed appointment count with the client at the specified `INDEX` if the appointment does not exist.
-* The current appointment count will have to be greater than 0!
+* Decreases the completed appointment count of the client at the specified `INDEX` by 1, if no appointment is 
+  currently scheduled with the client.
+* The current appointment count has to be greater than 0.
 
 **Parameter**:
 * [`INDEX`](#index)
