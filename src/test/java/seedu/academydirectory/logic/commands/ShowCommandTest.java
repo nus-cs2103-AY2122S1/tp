@@ -31,7 +31,8 @@ public class ShowCommandTest {
     @Test
     void execute_showGrade_success() {
         ShowCommand showCommand = new ShowCommand(validAssessmentName1);
-        String expectedMessage = ShowCommand.displayResult(model.getFilteredStudentList(), validAssessmentName1);
+        String content = ShowCommand.displayResult(model.getFilteredStudentList(), validAssessmentName1);
+        String expectedMessage = String.format(ShowCommand.MESSAGE_SUCCESS, validAssessmentName1);
         VersionedModel expectedModel = new ModelManager(
                 new AcademyDirectory(model.getAcademyDirectory()), new UserPrefs());
         assertCommandSuccess(showCommand, model, expectedMessage, expectedModel);

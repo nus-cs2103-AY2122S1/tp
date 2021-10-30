@@ -36,4 +36,19 @@ public class AdditionalViewModel {
     public AdditionalViewType getAdditionalViewType() {
         return additionalViewType;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (! (obj instanceof AdditionalViewModel)) {
+            return false;
+        }
+
+        AdditionalViewModel otherAdditionalViewModel = (AdditionalViewModel) obj;
+        return additionalInfo.equals(otherAdditionalViewModel.additionalInfo)
+                && additionalViewType.equals(otherAdditionalViewModel.additionalViewType);
+    }
 }

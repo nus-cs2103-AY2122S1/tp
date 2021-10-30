@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.Messages;
+import seedu.academydirectory.logic.AdditionalViewType;
+import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Information;
@@ -43,6 +45,8 @@ public class GetCommand extends Command {
             + PREFIX_TELEGRAM + " | " + PREFIX_PHONE + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + " " + PREFIX_NAME + "Alex";
 
+    public static final String MESSAGE_SUCCESS = "Retrieved information successfully";
+
     private final List<InformationWantedFunction> filterList;
 
     public GetCommand(List<InformationWantedFunction> filterList) {
@@ -69,8 +73,10 @@ public class GetCommand extends Command {
     @Override
     public CommandResult execute(VersionedModel model) {
         requireNonNull(model);
-        return new CommandResult(filterList.stream().parallel().map(x -> executeFilter(model, x))
-                .collect(Collectors.joining("\n")));
+        model.setAdditionalViewType(AdditionalViewType.GET);
+        model.setAdditionalInfo(AdditionalInfo.of(filterList.stream().parallel().map(x -> executeFilter(model, x))
+                .collect(Collectors.joining("\n"))));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

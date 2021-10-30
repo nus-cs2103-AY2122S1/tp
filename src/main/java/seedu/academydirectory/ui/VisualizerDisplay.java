@@ -9,7 +9,7 @@ import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.ui.creator.Creator;
 import seedu.academydirectory.ui.creator.DefaultCreator;
 import seedu.academydirectory.ui.creator.GraphCreator;
-import seedu.academydirectory.ui.creator.HistoryCreator;
+import seedu.academydirectory.ui.creator.TextAreaCreator;
 import seedu.academydirectory.ui.creator.ViewCreator;
 
 /**
@@ -51,7 +51,9 @@ public class VisualizerDisplay extends UiPart<Region> {
             setVisualizer(new GraphCreator(additionalViewModel.getAdditionalInfo()));
             break;
         case HISTORY:
-            setVisualizer(new HistoryCreator(additionalViewModel.getAdditionalInfo()));
+        case GET:
+        case SHOW:
+            setVisualizer(new TextAreaCreator(additionalViewModel.getAdditionalInfo()));
             break;
         default:
             setVisualizer(new DefaultCreator(additionalViewModel.getAdditionalInfo()));

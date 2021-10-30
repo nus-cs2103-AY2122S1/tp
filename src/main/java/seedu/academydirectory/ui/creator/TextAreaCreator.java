@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import seedu.academydirectory.model.AdditionalInfo;
 
-public class HistoryCreator extends Creator {
+public class TextAreaCreator extends Creator {
 
     private static final String FXML = "creator/HistoryCreator.fxml";
 
@@ -17,7 +17,7 @@ public class HistoryCreator extends Creator {
      *
      * @param additionalInfo information to be passed in
      */
-    public HistoryCreator(AdditionalInfo<?> additionalInfo) {
+    public TextAreaCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
         String history = (String) additionalInfo.get();
 

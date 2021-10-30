@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.parser.Prefix;
 import seedu.academydirectory.model.ModelManager;
 import seedu.academydirectory.model.UserPrefs;
@@ -90,10 +89,10 @@ public class GetCommandTest {
                     return null;
                 })
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
-        String expectedMessage = expectedResponse.stream()
+        String content = expectedResponse.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining("\n"));
-
+        String expectedMessage = (GetCommand.MESSAGE_SUCCESS);
         GetCommand command = new GetCommand(function);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -101,7 +100,7 @@ public class GetCommandTest {
     @Test
     public void execute_singlePrefixEmptyModel() {
         VersionedModel emptyModel = new ModelManager();
-        String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = (GetCommand.MESSAGE_SUCCESS);
 
         InformationWantedFunction.SUPPORTED_PREFIX.forEach(prefix -> {
             InformationWantedFunction function = new InformationWantedFunction(prefix);
