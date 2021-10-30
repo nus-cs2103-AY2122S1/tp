@@ -32,10 +32,12 @@ public class FindTaskCommandParserTest {
         findTaskDescriptor.setDesc(Arrays.asList("Desc1", "Desc2"));
         FindTaskCommand expectedFindTaskCommand =
                 new FindTaskCommand(findTaskDescriptor);
-        CommandParserTestUtil.assertParseSuccessWithPersonList(parser, "Desc1 Desc2", people, expectedFindTaskCommand);
+        CommandParserTestUtil.assertParseSuccessWithPersonList(parser, "Desc1 Desc2", people,
+                expectedFindTaskCommand);
 
         // multiple whitespaces between keywords
-        CommandParserTestUtil.assertParseSuccessWithPersonList(parser, " \n Desc1 \n \t Desc2  \t", people, expectedFindTaskCommand);
+        CommandParserTestUtil.assertParseSuccessWithPersonList(parser, " \n Desc1 \n \t Desc2  \t", people,
+                expectedFindTaskCommand);
     }
 
 }
