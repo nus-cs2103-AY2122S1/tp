@@ -46,8 +46,8 @@ public class EditPersonCommand extends Command {
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
             + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: edit 1 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_MODULE_CODE + "CS2103T T09"
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_MODULE_CODE + "CS2103T T09 "
             + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
