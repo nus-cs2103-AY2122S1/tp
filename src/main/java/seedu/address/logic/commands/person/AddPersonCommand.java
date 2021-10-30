@@ -20,13 +20,13 @@ import seedu.address.model.person.Person;
 public class AddPersonCommand extends Command {
 
     public static final String MESSAGE_USAGE = "add: Adds a person to the address book. "
-            + "Parameters: "
+            + "\nParameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_MODULE_CODE + "MODULE_INFO... "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
-            + "[" + PREFIX_REMARK + "REMARK]\n "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: add "
             + PREFIX_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
