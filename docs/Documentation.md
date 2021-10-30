@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Documentation guide
+parent: For Developers
 ---
 
 **Setting up and maintaining the project website:**

@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Logging guide
+parent: For Developers
 ---
 
 * We are using `java.util.logging` package for logging.

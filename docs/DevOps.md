@@ -1,6 +1,7 @@
 ---
 layout: page
 title: DevOps guide
+parent: For Developers
 ---
 
 * Table of Contents

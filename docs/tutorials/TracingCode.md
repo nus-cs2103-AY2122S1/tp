@@ -1,6 +1,8 @@
 ---
 layout: page
 title: "Tutorial: Tracing code"
+parent: Tutorials
+grand_parent: For Users
 ---
 
 > Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. …​\[Therefore,\] making it easy to read makes it easier to write.
@@ -25,7 +27,7 @@ It also has a sequence diagram (reproduced below) that tells us how a command pr
 Note how the diagram shows only the execution flows _between_ the main components. That is, it does not show details of the execution path *inside* each component. By hiding those details, the diagram aims to inform the reader about the overall execution path of a command without overwhelming the reader with too much details. In this tutorial, you aim to find those omitted details so that you get a more in-depth understanding of how the code works.
 
 Before we proceed, ensure that you have done the following:
-1. Read the [*Architecture* section of the DG](../DeveloperGuide - AB3.md#architecture)
+1. Read the [*Architecture* section of the DG](../DeveloperGuide.md#architecture)
 1. Set up the project in Intellij IDEA
 1. Learn basic debugging features of Intellij IDEA
    * If you are using a different IDE, we'll leave it to you to figure out the equivalent feature to use in your IDE.
