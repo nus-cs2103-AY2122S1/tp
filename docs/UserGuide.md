@@ -4,13 +4,15 @@ title: User Guide
 ---
 # Table of Contents
 {:.no_toc}
-<!-- TOC adapted from
+<!-- @@author wpinrui-reused
+Table of Contents from AY2021S1-CS2103T-W16-3/tp
 https://github.com/AY2021S1-CS2103T-W16-3/tp/pull/179/commits/aec461182c194c9ca2c67d7c407fcabb376191ff
 -->
 <div class="toc-no-bullet-points">
   * Table of Contents
   {:toc}
 </div>
+<!--@@author>
 
 # 1. Introduction
 Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to track their students' contacts**.
