@@ -152,7 +152,7 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
+        builder.append("; Name: ").append(getName());
         if (!getGender().toString().isEmpty()) {
             builder.append("; Gender: ").append(getGender());
         }
@@ -174,14 +174,9 @@ public class Person {
             builder.append("; Social Handles: ");
             socialHandles.forEach(builder::append);
         }
-
         if (!getRemark().toString().isEmpty()) {
             builder.append("; Remark: ").append(getRemark());
         }
-        if (!getGender().toString().isEmpty()) {
-            builder.append("; Gender: ").append(getGender());
-        }
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

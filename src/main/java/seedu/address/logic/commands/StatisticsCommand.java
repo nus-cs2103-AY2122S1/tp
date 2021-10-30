@@ -52,7 +52,7 @@ public class StatisticsCommand extends Command {
 
         Statistic statistic = new Statistic(filteredPersonList);
 
-        return new CommandResult(String.format(MESSAGE_STATISTICS, statistic.toString()));
+        return new CommandResult(String.format(MESSAGE_STATISTICS, statistic.toString()), statistic.getRawData());
     }
 
     @Override

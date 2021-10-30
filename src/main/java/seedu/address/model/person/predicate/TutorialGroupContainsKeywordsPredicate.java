@@ -17,9 +17,10 @@ public class TutorialGroupContainsKeywordsPredicate implements Predicate<Person>
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> person.getTutorialGroup().value.toLowerCase()
-                .contains(keyword.toLowerCase()));
+        return !keywords.isEmpty()
+                && keywords.stream()
+                .allMatch(keyword -> !keyword.trim().isEmpty() && person.getTutorialGroup().value.trim().toLowerCase()
+                .contains(keyword.trim().toLowerCase()));
     }
 
     @Override

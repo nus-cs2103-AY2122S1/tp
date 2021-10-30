@@ -48,13 +48,17 @@ public class SocialHandleContainsKeywordsPredicateTest {
                 new SocialHandleContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
 
-        // Only one matching keyword
-        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Carol").build()));
-
         // Mixed-case keywords
-        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("aLIce"));
         assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
+    }
+
+    @Test
+    public void test_socialHandleContainsMultipleKeywords_returnFalse() {
+        // Only one matching keyword
+        SocialHandleContainsKeywordsPredicate predicate =
+                new SocialHandleContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        assertFalse(predicate.test(new PersonBuilder().withSocialHandles("tg:Carol").build()));
     }
 
     @Test
