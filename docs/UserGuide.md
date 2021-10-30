@@ -39,7 +39,7 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 
 1. Copy the file to the folder you want to use as the _home folder_ for Source Control.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI shown in the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/StartingUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -144,9 +144,8 @@ Creates a new group and adds students into the group.
 
 Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 
-* Creates a new group with the given group name.
+* Creates a new group with the given group name. Group should not already exist.
 * Group name can be any number of alphanumeric words.
-* Group must not already exist, and student should not already exist in group.
 * Students can be identified by their name or NUSNET ID.
 Name is case-sensitive and only allows exact match e.g. `Jonas` will not match `Jonas Chow`.
 * If multiple students have the same name, NUSNET ID needs to be used to identify them. 
