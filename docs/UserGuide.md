@@ -389,156 +389,236 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 ## Command Summary <a name="summary"></a>
 
 <table> 
-  <tr>
+
+<tr>
     <th> Category</th>
     <th> Action  </th>
     <th> Command </th>
-    <th width="350"> Format  </th>
-    <th width="350"> Example </th>
-  </tr>
+    <th> Format  </th>
+    <th> Example </th>
+</tr>
 
-  <tr>
+<tr>
     <td rowspan="2"> General</td>
     <td> Accessing the help page</td>
     <td>
-
-`help`<br>`man`<br>`h`</td>
+        <code>help</code>
+        <code>man</code><br>
+        <code>h</code>
+    </td>
     <td>
-
-`help`</td>
+        <code>help</code>
+    </td>
     <td>
+        <code>help</code>
+    </td>
+</tr>
 
-`help`</td>
-  </tr>
-
-  <tr>
+<tr>
     <td> Exiting the app</td>
     <td>
-    
-`exit`<br>`quit`<br>`q`</td>
+        <code>exit</code>
+        <code>quit</code><br>
+        <code>q</code>
+    </td>
     <td>
-
-`exit`</td>
+        <code>exit</code>
+    </td>
     <td>
+        <code>exit</code>
+    </td>
+</tr>
 
-`exit`</td>
-  </tr>
-
-  <tr>
+<tr>
     <td rowspan="6"> Managing contacts</td>
     <td> Adding a contact</td>
     <td>
+        <code>add</code><br>
+        <code>a</code>
+    </td>
+    <td>
+        <code>add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]</code>
+    </td>
+    <td>
+        <code>add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas</code>
+    </td>
+</tr>
 
-`add`<br>`a`</td>
-    <td>`add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`</td>
-    <td>`add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`</td>
-  </tr>
+<tr>
+    <td> Editing a contact</td>
+    <td>
+        <code>edit</code><br>
+        <code>update</code><br>
+        <code>e</code>
+    </td>
+    <td>
+        <code>`edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`</code>
+    </td>
+    <td>
+        <code>`edit 1 p/91234567 e/ben321@gmail.com`</code>
+    </td>
+</tr>
 
-  <tr>
-      <td> Editing a contact</td>
-      <td>
+<tr>
+    <td> Deleting a contact / contacts</td>
+    <td>
+        <code>delete</code><br>
+        <code>del</code><br>
+        <code>rm</code><br>
+        <code>d</code>
+    </td>
+    <td>
+        <code>delete INDEX</code><br>
+        <code>delete INDEX_START-INDEX_END</code><br>
+        <code>delete m/MODULE_CODE</code>
+    </td>
+    <td>
+        <code>delete 2</code><br>
+        <code>delete 2-5</code><br>
+        <code>delete m/CS2103T</code>
+    </td>
+</tr>
 
-`edit`<br>`update`<br>`e`</td>
-      <td>`edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`</td>
-      <td>`edit 1 p/91234567 e/ben321@gmail.com`</td>
-  </tr>
+<tr>
+    <td> Finding a contact / contacts</td>
+    <td>
+        <code>find</code><br>
+        <code>f</code>
+    </td>
+    <td>
+        <code>find n/NAME</code><br>
+        <code>find m/MODULE_CODE(S)</code>
+    </td>
+    <td>
+        <code>find n/Ben</code><br>
+        <code>find m/CS2103T</code>
+    </td>
+</tr>
 
-  <tr>
-      <td> Deleting a contact / contacts</td>
-      <td>
+<tr>
+    <td> Listing all contacts</td>
+    <td>
+        <code>list</code><br>
+        <code>ls</code>
+    </td>
+    <td>
+        <code>list</code>
+    </td>
+    <td>
+        <code>list</code>
+    </td>
+</tr>
 
-`delete`<br>`del`<br>`rm`<br>`d`</td>
-      <td>`delete INDEX`<br>`delete INDEX_START-INDEX_END`<br>`delete m/MODULE_CODE`</td>
-      <td>`delete 2`<br>`delete 2-5`<br>`delete m/CS2103T`</td>
-  </tr>
-
-  <tr>
-      <td> Finding a contact / contacts</td>
-      <td>
-
-`find`<br>`f`<br></td>
-      <td>`find n/NAME`<br>`find m/MODULE_CODE(S)`</td>
-      <td>`find n/Ben`<br>`find m/CS2103T`</td>
-  </tr>
-
-  <tr>
-      <td> Listing all contacts</td>
-      <td>
-
-`list`<br>`ls`</td>
-      <td>
-
-`list`</td>
-      <td>
-
-`list`</td>
-  </tr>
-
-  <tr>
-      <td> Clearing all contacts</td>
-      <td>
-
-`clear`<br>`clr`<br>`c`</td>
-      <td>
-
-`clear`</td>
-      <td>
-
-`clear`</td>
-  </tr>
+<tr>
+    <td> Clearing all contacts</td>
+    <td>
+        <code>clear</code><br>
+        <code>clr</code><br>
+        <code>c</code>
+    </td>
+    <td>
+        <code>clear</code>
+    </td>
+    <td>
+        <code>clear</code>
+    </td>
+</tr>
 
 <tr>
     <td rowspan="6"> Managing lesson</td>
     <td> Adding a lesson</td>
     <td>
+        <code>addc</code><br>
+        <code>ac</code>
+    </td>
+    <td>
+        <code>addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]</code>
+    </td>
+    <td>
+        <code>addc m/CS2103T T12 d/4 t/09:00 10:00 r/Online</code>
+    </td>
+</tr>
 
-`addc`<br>`ac`</td>
-    <td>`addc m/MODULE_CODE LESSON_CODE d/DAY t/START_TIME END_TIME [r/REMARK]`</td>
-    <td>`addc m/CS2103T T12 d/4 t/09:00 10:00 r/Online`</td>
-  </tr>
-  <tr>
-      <td> Editing a lesson</td>
-      <td>
+<tr>
+    <td> Editing a lesson</td>
+    <td>
+        <code>editc</code><br>
+        <code>updatec</code><br>
+        <code>ec</code>
+    </td>
+    <td>
+        <code>editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]</code>
+    </td>
+    <td>
+        <code>editc 5 m/CS2100 B05 d/3 t/10:00 12:00 r/COM01-0120</code>
+    </td>
+</tr>
 
-`editc`<br>`updatec`<br>`ec`</td>
-      <td>`editc INDEX [m/MODULE_CODE LESSON_CODE] [d/DAY] [t/START_TIME END_TIME] [r/REMARK]`</td>
-      <td>`editc 5 m/CS2100 B05 d/3 t/10:00 12:00 r/COM01-0120`</td>
-  </tr>
-  <tr>
-      <td> Deleting a lesson / lessons</td>
-      <td>
+<tr>
+    <td> Deleting a lesson / lessons</td>
+    <td>
+        <code>deletec</code><br>
+        <code>delc</code><br>
+        <code>rmc</code><br>
+        <code>dc</code><br>
+    </td>
+    <td>
+        <code>deletec INDEX</code><br>
+        <code>deletec INDEX_START-INDEX_END</code><br>
+        <code>deletec m/MODULE_CODE</code>
+    </td>
+    <td>
+        <code>deletec 1</code><br>
+        <code>deletec 1-3</code><br>
+        <code>deletec m/CS2103T</code>
+    </td>
+</tr>
 
-`deletec`<br>`delc`<br>`rmc`<br>`dc`</td>
-      <td>
-`deletec INDEX`<br>
-`deletec INDEX_START-INDEX_END`<br>
-`deletec m/MODULE_CODE`</td>
-      <td>`deletec 1`<br>`deletec 1-3`<br>`deletec m/CS2103T`</td>
-  </tr>
-  <tr>
-      <td> Finding a lesson / lessons</td>
-      <td>
+<tr>
+    <td> Finding a lesson / lessons</td>
+    <td>
+        <code>findc</code><br>
+        <code>fc</code>
+    </td>
+    <td>
+        <code>findc m/MODULE_CODE(S)</code><br>
+        <code>findc d/DAY(S)</code><br>
+        <code>findc t/START_TIME(S)</code>
+    </td>
+    <td>
+        <code>findc m/CS2030 CS2040</code><br>
+        <code>findc d/2 3</code><br>
+        <code>findc t/10:00 15:00</code>
+    </td>
+</tr>
 
-`findc`<br>`fc`</td>
-      <td>`findc m/MODULE_CODE(S)`
-`findc d/DAY(S)`<br>
-`findc t/START_TIME(S)`</td>
-      <td>`findc m/CS2030 CS2040`<br>`findc d/2 3`<br>`findc t/10:00 15:00`</td>
-  </tr>
-  <tr>
-      <td> Listing all lessons</td>
-      <td>
+<tr>
+    <td> Listing all lessons</td>
+    <td>
+        <code>listc</code><br>
+        <code>lc</code>
+    </td>
+    <td>
+        <code>listc</code>
+    </td>
+    <td>
+        <code>listc</code>
+    </td>
+</tr>
 
-`listc`<br>`lc`</td>
-      <td>`listc`</td>
-      <td>`listc`</td>
-  </tr>
-  <tr>
-      <td> Clearing all lessons</td>
-      <td>
+<tr>
+    <td> Clearing all lessons</td>
+    <td>
+        <code>clear</code><br>
+        <code>clrc</code><br>
+        <code>cc</code>
+    </td>
+    <td>
+        <code>clearc</code>
+    </td>
+    <td>
+        <code>clearc</code>
+    </td>
+</tr>
 
-`clearc`<br>`clrc`<br>`cc`</td>
-      <td>`clearc`</td>
-      <td>`clearc`</td>
-  </tr>
 </table>
