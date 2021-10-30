@@ -18,6 +18,8 @@ public class Measurement {
     public static final String FEMALE_MESSAGE_CONSTRAINTS =
             "A female's body measurements should be of the format height_waist_shoulder_bust in cm,"
                     + " and it should not be blank";
+    public static final String RANGE_MESSAGE_CONSTRAINTS =
+            "The measurement of each dimension must be a positive value and not larger than 300cm";
     public final String value;
 
     /**
@@ -28,6 +30,7 @@ public class Measurement {
     public Measurement(String measurement) {
         requireNonNull(measurement);
         checkArgument(isValidMeasurement(measurement), GENERAL_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidRange(measurement), RANGE_MESSAGE_CONSTRAINTS);
         value = measurement;
     }
 
@@ -63,6 +66,25 @@ public class Measurement {
         String[] args = test.split("_");
         boolean isArgsNumber = isNumber(args);
         return isArgsNumber && (args.length == 3 || args.length == 4);
+    }
+
+    /**
+     * Returns true if the measurements is within a valid range.
+     */
+    public static boolean isValidRange(String test) {
+        requireNonNull(test);
+        String[] args = test.split("_");
+        return isValidRange(args);
+    }
+
+    private static boolean isValidRange(String[] args) {
+        for (String i: args) {
+            double value = Double.parseDouble(i);
+            if (value <= 0 || value > 300) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
