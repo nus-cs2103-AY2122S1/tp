@@ -149,6 +149,8 @@ Shows a command summary table as well as a link to access this user guide page.
 
 Format: `help`
 
+Shortcut: <kbd>F1</kbd>
+
 - You can select a cell and press <kbd>CONTROL</kbd> + <kbd>C</kbd> or <kbd>COMMAND</kbd> + <kbd>C</kbd> on your keyboard to copy the selected cell value.
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
@@ -258,6 +260,8 @@ Shows a list of all students in TAB.
 
 Format: `list`
 
+Shortcut: <kbd>F2</kbd>
+
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
@@ -271,25 +275,25 @@ Finds all students whose fields match the given keyword(s), based on the specifi
 
 Fields that you can search for are:
 
-| Field            | Parameter                   | Result                                                  |
-|------------------|-----------------------------|---------------------------------------------------------|
-| Student Name     | n/NAME_KEYWORDS             | Students whose name contain the keywords                |
-| Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contain the keywords             |
-| Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contain the keywords        |
-| Student Email    | e/EMAIL_KEYWORDS            | Students whose email contain the keywords               |
-| Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contain the keywords |
-| Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contain the keywords        |
-| School           | sch/SCHOOL_KEYWORDS         | Students whose school contain the keywords              |
-| Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contain the keywords     |
-| Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contain the keywords      |
-| Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contain the keywords         |
-| Tags             | t/TAG                           | Students who have the specified tag                 |
-| Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students with lessons that match the keywords       |
-| Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date              |
-| Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range        |
-| Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date |
-| Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword|
-| Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contain the keywords    |                                           |
+Field            | Parameter                   | Result                                              
+------------------|-----------------------------|---------------------------------------------------------
+Student Name     | n/NAME_KEYWORDS             | Students whose name contains all the keywords
+Student Address  | a/ADDRESS_KEYWORDS          | Students whose address contains all the keywords
+Student Phone    | p/PHONE_KEYWORDS            | Students whose phone number contains all the keywords
+Student Email    | e/EMAIL_KEYWORDS            | Students whose email contains all the keywords
+Parent Phone     | pp/PARENT_PHONE_KEYWORDS    | Students whose parent phone number contains all the keywords
+Parent Email     | pe/PARENT_EMAIL_KEYWORDS    | Students whose parent email contains all the keywords
+School           | sch/SCHOOL_KEYWORDS         | Students whose school contains all the keywords
+Academic Stream  | stream/ACAD_STREAM_KEYWORDS | Students whose academic stream contains all the keywords
+Academic Level   | lvl/ACAD_LEVEL_KEYWORDS     | Students whose academic level contains all the keywords
+Remarks          | r/REMARK_KEYWORDS               | Students whose remarks contains all the keywords
+Tags             | t/TAG                           | Students who have the specified tag
+Lesson Subject   | subject/LESSON_SUBJECT_KEYWORDS | Students who have lessons with subject that contains all the keywords
+Lesson Date      | date/LESSON_DATE | Students with lessons that fall on the specified date
+Lesson Time      | time/LESSON_TIME | Students with lessons that fall in the specified time range
+Cancelled Dates  | cancel/CANCELLED_DATE     | Students who have lessons cancelled on the specified date
+Lesson Rates     | rate/LESSON_RATE_KEYWORDS | Students whose lessons have rates that contain the keyword
+Lesson Homework  | hw/LESSON_HOMEWORK_KEYWORDS | Students who have homework that contains all the keywords
 
 Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [r/REMARK_KEYWORDS] [t/TAG_KEYWORD]…​ [subject/LESSON_SUBJECT_KEYWORDS] [time/LESSON_TIME] [date/LESSON_DATE] [cancel/CANCELLED_DATE] [rates/LESSON_RATE_KEYWORDS] [hw/LESSON_HOMEWORK_KEYWORDS]`
 
@@ -484,6 +488,8 @@ Displays a list of upcoming lessons with end date time within the next 48 hours
 
 Format: `remind`
 
+Shortcut: `F5`
+
 ![remind](images/remind.png)
 
 <div class="caption">Reminder window interface.</div>
@@ -523,7 +529,7 @@ Examples:
 Edits the outstanding fees to specific lesson. Uses the Lesson Edit command as seen in [Editing a lesson](#editing-a-lesson--ledit).
 
 In the event that you disagree with the outcomes of the Fees Calculator, you can edit outstanding fees using `ledit` command.
-Refer to [Behaviours of the Fees Calculator](#Behaviours-of-the-Fees-Calculator) for cases the Fees Calculator will not account for.
+Refer to [Behaviours of the Fees Calculator](#behaviours-of-the-fees-calculator) for cases the Fees Calculator will not account for.
 
 Format: `ledit INDEX LESSON_INDEX OTHER_FIElDS_TO_EDIT f/OUTSTANDING_AMOUNT`
 
@@ -574,13 +580,12 @@ Brings you to TAB's calendar interface for you to see all your scheduled lessons
 
 Format: `calendar`
 
+Shortcut: <kbd>F3</kbd>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You don't always have to type `calendar` to switch to the calendar interface. All the other calendar commands in this section act as a shortcut that opens the calendar as well! 
+All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
+For example, the `day` command bellow opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
-
-![calendar](images/calendar.png)
-
-<div class="caption">Calendar interface.</div>
 
 #### Viewing your daily calendar: `day`
 
@@ -679,6 +684,8 @@ Shows all the tags that you have created together with the number of students la
 
 Format: `tag`
 
+Shortcut: <kbd>F4</kbd>
+
 ![tag](images/tag.png)
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
@@ -702,10 +709,28 @@ Exits the program.
 
 Format: `exit`
 
+### Shortcuts
+
+TAB has keyboard shortcuts for navigating between its various views to help you stay more productive by keeping your hands on the keyboard.
+
+Shortcut | Action
+--------|------------------
+<kbd>F1</kbd> | **Help** <br /> Opens the help window.
+<kbd>F2</kbd> | **View Students** <br /> Brings you to your list of students.
+<kbd>F3</kbd> | **View Calendar** <br /> Brings you to the calendar interface.
+<kbd>F4</kbd> | **View Tags** <br /> Brings you to your list of tags.
+<kbd>F5</kbd> | **View Reminders** <br /> Opens the reminder window.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can immediately go back to typing commands from anywhere in TAB even if your cursor is not in the Command Box.
+This means that after clicking any button in the GUI, you do not have to click in the Command Box again to continue. Just type away!
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## FAQ
+
 This section records frequently asked questions from users of TAB.
 
 **Q**: How do I transfer my data to another Computer?<br>
