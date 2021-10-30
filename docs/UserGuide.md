@@ -379,10 +379,10 @@ If any of the details were not specified, a placeholder value will be displayed 
 
 Format : `view -c INDEX`
 
-Example : `view -c 20` Views all the details of the client with `INDEX` of `20`.
+Example : `view -c 2` Views all the details of the client with `INDEX` of `2`.
 
 Expected Output:
-![Ui](images/UIViewCommand.png)
+![Ui](images/UiViewCommand.png)
 
 #### 4.7.2 Viewing a Product
 
