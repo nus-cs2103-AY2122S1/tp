@@ -53,7 +53,6 @@ public class ClientContainsKeywordsPredicate implements Predicate<Client> {
         boolean checkTags = keywords.getValue(PREFIX_TAG)
                 .map(tagKeyword -> client.getTags().stream()
                         .map(Tag::getName)
-                        .filter(tagName -> !tagName.isEmpty())
                         .anyMatch(tagName -> containsStringIgnoreCase(tagName, tagKeyword)))
                 .orElse(true);
 
