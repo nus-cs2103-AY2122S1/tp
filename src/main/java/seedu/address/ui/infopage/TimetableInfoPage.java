@@ -24,8 +24,8 @@ public class TimetableInfoPage extends InfoPage {
     private static final String PANE_BORDER = "-fx-border-width:0.3px;-fx-border-color:black";
     private static final String PANE_NO_BORDER = "-fx-border-width:0px;";
     private static final Logger logger = LogsCenter.getLogger(TimetableInfoPage.class);
-    private static final String[] days = new String[]{"Mon", "Tue", "Wed",
-        "Thu", "Fri", "Sat", "Sun"};
+    private static final String[] days = convertDays();
+
     private final int numCols = 8;
     private Timetable timetable;
 
@@ -117,5 +117,20 @@ public class TimetableInfoPage extends InfoPage {
         label.setAlignment(Pos.CENTER);
         pane.getChildren().add(label);
         return pane;
+    }
+
+    private static String[] convertDays() {
+        String[] dayOfWeek = new String[]{"Mon", "Tue", "Wed",
+            "Thu", "Fri", "Sat", "Sun"};
+        String sixSpaces = "      ";
+        String fiveSpaces = "     ";
+        for (int i = 0; i < dayOfWeek.length; i++) {
+            if (i == 0 || i == 2) {
+                dayOfWeek[i] = sixSpaces + dayOfWeek[i] + fiveSpaces;
+            } else {
+                dayOfWeek[i] = sixSpaces + dayOfWeek[i] + sixSpaces;
+            }
+        }
+        return dayOfWeek;
     }
 }

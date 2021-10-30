@@ -24,7 +24,7 @@ public class AddClassCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add tuition class given name, limit, sessions, timeslot, and student \n"
             + "Parameters: NAME LIMIT TIMESLOT STUDENT\n"
-            + "Example: " + COMMAND_WORD + " n/Physics l/10 ts/Mon 11:00-14:00 s/Alex Yeoh";
+            + "Example: " + COMMAND_WORD + " n/Physics l/10 ts/Mon 11:00-14:00 s/Alex Yeoh,Bernice Yu";
 
     private static final String MESSAGE_CLASS_LIMIT_EXCEEDED = "The following students are not "
             + "added due to class limit: ";
@@ -56,6 +56,8 @@ public class AddClassCommand extends Command {
         String message = this.getMessage(students[1], students[3]);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + "\n" + message);
     }
+
+
     private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Student> validStudentsAsPerson, Model model) {
         for (Student person: validStudentsAsPerson) {
             Student studentToChange = person;
@@ -65,6 +67,8 @@ public class AddClassCommand extends Command {
             model.setStudent(studentToChange, person);
         }
     }
+
+
     private ArrayList[] getStudents(Model model, ArrayList<String> nowStudents, int limit) {
         ArrayList<String> newStudents = new ArrayList<>();
         ArrayList<String> invalidStudents = new ArrayList<>();

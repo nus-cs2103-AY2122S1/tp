@@ -120,7 +120,7 @@ The features in this guide are formatted with the following conventions:
 * **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the <code>&#124;</code> symbol. You can use the command shortcuts to reduce typing. 
 * **Command Format** - Each command is accompanied by a set of information that you provide. Refer to the [Features](#3-features) below for details of each command.
 * **Examples** - Possible usage of each features are provided. You may follow these examples when familiarising with the app. 
-* **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
+* **Screenshots** - A visualisation of the expected outcome is provided for some features.
 
 
 #### General symbols and syntax used in this guide
@@ -167,7 +167,7 @@ Jump right in to the next section: [2 Get Started](#2-get-started) to get you st
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
 ![Ui](images/ui_ug.png)
-<p align="center"><i>Figure 1: CLI of TutAssistor</i></p>
+<p align="center"><i>Figure 1: GUI of TutAssistor</i></p>
 
 
 ### 2.2 Try it yourself!
@@ -178,7 +178,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing h
 
 Some example commands you can try:
 
-* `view 1`: Views the first student show in the student list.
+* `student 1`: Views the first student show in the student list.
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a student named `John Doe` to the TutAssistor.
 * `addtoclass si/3 tc/1`: Adds the 3rd student in the student list to the 1st class in the tuition class list.
 * `deleteclass 2`: Deletes the 2nd class shown in the tuition class list.
@@ -240,6 +240,7 @@ Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
 * It is optional to add students into the class when creating a tuition class.
 * The [timeslot](#44-timeslot) should follow the format "Ddd HH:mm-HH:mm".
+* The limit of a class should not exceed 1000.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There should not be a space after each comma when listing multiple students.
@@ -286,6 +287,10 @@ vc 3
 
 ### 3.3 Edit student/tuition class
 Edits an existing student or tuition class.
+
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: At least one parameter must be provided.
+</div>
 
 #### Editing a student: `edit` | `e`
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
@@ -502,7 +507,10 @@ Sorts tuition class list according to time or alphabetical order.
   * After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
   
   * The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
-  
+
+  * For alphabetical order, the sorting is case-insensitive. For example, `chem` is considered the same as `Chem`.
+
+
 </div>
 
 The possible usages of `sort` are given below:
@@ -632,7 +640,7 @@ hence you do not lose any data.<br>
 
 Action | Format | Shortcut
 -------|--------|---------
-[**Add Student**](#31-add-studenttuition-class) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
+[***Add Student***](#31-add-studenttuition-class) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
 [***Add Class***](#31-add-studenttuition-class) |`addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]` | `ac`
 [***View Student***](#32-view-studenttuition-class) | `student INDEX` | `vs`
 [***View Class***](#32-view-studenttuition-class) | `class INDEX` | `vc`
