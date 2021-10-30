@@ -25,7 +25,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Task> {
                     boolean condition = false;
                     for (Person p : personSet) {
                         String i = p.getName().fullName;
-                        condition = StringUtil.containsWordIgnoreCase(i, keyword);
+                        condition = keyword.equals(i);
                         if (condition) {
                             break;
                         }

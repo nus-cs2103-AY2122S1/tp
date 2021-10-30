@@ -1,6 +1,7 @@
 package dash.logic.parser.taskcommand;
 
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static dash.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static dash.logic.parser.CliSyntax.PREFIX_COMPLETION_STATUS;
 import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
@@ -8,22 +9,26 @@ import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
+import java.util.*;
 
+import dash.commons.core.index.Index;
+import dash.logic.commands.taskcommand.AssignPeopleCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand.FindTaskDescriptor;
 import dash.logic.parser.ArgumentMultimap;
 import dash.logic.parser.ArgumentTokenizer;
-import dash.logic.parser.Parser;
+import dash.logic.parser.ParserRequiringPersonList;
 import dash.logic.parser.ParserUtil;
 import dash.logic.parser.exceptions.ParseException;
+import dash.model.person.Person;
 import dash.model.task.TaskDate;
+import javafx.collections.ObservableList;
 
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindTaskCommandParser implements Parser<FindTaskCommand> {
+public class FindTaskCommandParser implements ParserRequiringPersonList<FindTaskCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -31,12 +36,13 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindTaskCommand parse(String args) throws ParseException {
+    public FindTaskCommand parse(String args, ObservableList<Person> filteredPersonList) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_DATE, PREFIX_TAG, PREFIX_PERSON,
                         PREFIX_COMPLETION_STATUS);
         String preamble = argMultimap.getPreamble();
+        Index index;
 
         FindTaskDescriptor findTaskDescriptor = new FindTaskDescriptor();
         boolean descPresent = argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent();
@@ -78,8 +84,30 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
             if (argMultimap.getValue(PREFIX_PERSON).get().isEmpty()) {
                 throw new ParseException("Arguments cannot be empty");
             }
-            String[] personKeywords = argMultimap.getValue(PREFIX_PERSON).get().split("\\s+");
-            findTaskDescriptor.setPerson(Arrays.asList(personKeywords));
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindTaskCommand.MESSAGE_USAGE),
+                        pe);
+            }
+
+            List<String> personKeywords = new ArrayList<>();
+            if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
+                Set<Index> personIndices = ParserUtil.parsePersonIndex(argMultimap.getAllValues(PREFIX_PERSON));
+                Set<String> peopleNames = new HashSet<>();
+                for (Index i : personIndices) {
+                    if (i.getZeroBased() < 0 || i.getZeroBased() >= filteredPersonList.size()) {
+                        throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
+                                + AssignPeopleCommand.MESSAGE_USAGE);
+                    }
+                    Person person = (filteredPersonList.get(i.getZeroBased()));
+                    peopleNames.add(person.getName().fullName);
+                }
+                personKeywords = new ArrayList<>(peopleNames);
+            }
+
+            findTaskDescriptor.setPerson(personKeywords);
         }
         if (completionStatusPresent) {
             if (argMultimap.getValue(PREFIX_COMPLETION_STATUS).get().isEmpty()) {
@@ -92,6 +120,11 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
 
         return new FindTaskCommand(findTaskDescriptor);
 
+    }
+
+    @Override
+    public FindTaskCommand parse(String userInput) throws ParseException {
+        return null;
     }
 
 }
