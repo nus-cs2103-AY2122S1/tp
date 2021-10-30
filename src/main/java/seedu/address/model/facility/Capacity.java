@@ -25,15 +25,14 @@ public class Capacity {
     }
 
     /**
-     * Returns true if number of members allocated is within
-     * capacity.
+     * Returns true if the facility is at max capacity.
      *
      * @param numberOfPerson Current number of persons allocated.
      * @return Boolean value of whether capacity has been reached.
      */
-    public boolean isWithinCapacity(int numberOfPerson) {
+    public boolean isMaxCapacity(int numberOfPerson) {
         Integer max = Integer.parseInt(capacity);
-        return numberOfPerson <= max;
+        return numberOfPerson >= max;
     }
 
     /**

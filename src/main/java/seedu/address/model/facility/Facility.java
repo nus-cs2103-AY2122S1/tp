@@ -56,7 +56,7 @@ public class Facility {
     }
 
     public boolean isMaxCapacity() {
-        return !capacity.isWithinCapacity(personAllocatedList.size());
+        return capacity.isMaxCapacity(personAllocatedList.size());
     }
 
     public void clearAllocationList() {
@@ -77,11 +77,8 @@ public class Facility {
         if (personAllocatedList == null) {
             return "No person allocated";
         }
-        return personAllocatedList.stream().map(p -> p.getName().fullName).collect(Collectors.joining(", "));
-    }
-
-    public boolean isWithinMaxCapacity(int numberOfPersons) {
-        return capacity.isWithinCapacity(numberOfPersons);
+        return personAllocatedList.stream().map(p -> p.getName().fullName)
+                .sorted().collect(Collectors.joining(", "));
     }
 
     public void addPersonToFacility(Person person) {

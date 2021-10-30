@@ -51,7 +51,7 @@ public class FacilityListCard extends UiPart<Region> {
         time.setText("Start time: " + facility.getTime().toString());
         capacity.setText("Capacity: " + facility.getPersonAllocatedList().size()
                 + "/" + facility.getCapacity().toString());
-        personAllocated.setText(facility.getPersonsAsString());
+        personAllocated.setText("Members: " + facility.getPersonsAsString());
     }
 
 }

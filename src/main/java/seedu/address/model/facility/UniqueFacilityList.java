@@ -135,8 +135,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
 
             int facilityCount = 0;
 
-            while (toEdit.isWithinMaxCapacity(facilityCount + 1)
-                    && !(index > members.size() - 1)) {
+            while (!toEdit.isMaxCapacity() && !(index > members.size() - 1)) {
                 toEdit.addPersonToFacility(members.get(index));
                 facilityCount++;
                 index++;
