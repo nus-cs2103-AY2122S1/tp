@@ -80,9 +80,9 @@ class JsonAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Isdone"));
         }
         if (isDone.equals("true")) {
-            newTask.setIsDone(true);
+            newTask.markDone();
         } else if (isDone.equals("false")) {
-            newTask.setIsDone(false);
+            // intentionally allow fall through
         } else {
             throw new IllegalValueException(Label.MESSAGE_CONSTRAINTS);
         }

@@ -141,7 +141,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void markTask(Task task) {
+    public boolean markTask(Task task) {
         throw new AssertionError("This method should not be called.");
     }
 

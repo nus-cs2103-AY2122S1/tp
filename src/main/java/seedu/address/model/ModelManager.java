@@ -199,8 +199,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markTask(Task toMark) {
-        taskBook.markDone(toMark);
+    public boolean markTask(Task toMark) {
+        return taskBook.markDone(toMark);
 
     }
 

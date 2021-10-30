@@ -79,7 +79,9 @@ public class TaskBuilder {
      */
     public Task build() {
         Task task = new Task(label, date, taskTag);
-        task.setIsDone(isDone);
+        if (isDone) {
+            task.markDone();
+        }
         return task;
     }
 }

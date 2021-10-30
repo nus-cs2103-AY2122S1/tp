@@ -145,7 +145,7 @@ public interface Model {
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
-    void markTask(Task toMark);
+    boolean markTask(Task toMark);
 
     //======================================== ORDER FUNCTIONALITIES =================================================
 
