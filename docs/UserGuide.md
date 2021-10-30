@@ -281,15 +281,16 @@ Expected Output:
 
 **:bulb: Notes on `ORDER`:**
 
-* If the client has an order with same `ID`, then that order's other information will be updated with the information
-  in `ORDER`.
-* If the client does not have an order with same `ID`, then that `ORDER` will be added.
-* If the `ORDER`'s `QUANTITY` is 0, then that `ORDER` will be removed.
-* For example, assuming client already has an order `[ ID = 1, QUANTITY = 3, (other information)... ]`, and the
-  input `ORDER`s are `[ ID = 1, QUANTITY = 0, ... ]` and `[ ID = 2, QUANTITY = 10, ... ]`:
-* `[ ID = 1, QUANTITY = 3, ... ]` will be updated to `[ ID = 1, QUANTITY = 0, ... ]` as they have the same `ID`, and
-  since `QUANTITY` is now 0, this `ORDER` will be removed.
-* `[ ID = 2, QUANTITY = 10, ... ]` will be added as the client does not have an order with the same `ID`.
+* If the client has an order with same `Product ID`, then that order's other information will be updated with the
+  information in `ORDER`.
+* If the client does not have an order with same `Product ID`, then that `ORDER` will be added.
+* If the `ORDER`'s `Quantity` is 0, then that `ORDER` will be removed.
+* For example, assuming client already has an order `[ Product ID = 1, Quantity = 3, (other information)... ]`, and the
+  input `ORDER`s are `[ Product ID = 1, Quantity = 0, ... ]` and `[ Product ID = 2, Quantity = 10, ... ]`:
+* `[ Product ID = 1, Quantity = 3, ... ]` will be updated to `[ Product ID = 1, Quantity = 0, ... ]` as they have the
+  same `Product ID`, and since `Quantity` is now 0, this `ORDER` will be removed.
+* `[ Product ID = 2, Quantity = 10, ... ]` will be added as the client does not have an order with the same
+  `Product ID`.
 
 </div>
 
