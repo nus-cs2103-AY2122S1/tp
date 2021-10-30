@@ -19,7 +19,7 @@ public class Help {
     /**
      * Opens an online Command Summary if possible, throw IOException otherwise.
      * @throws IOException if the user default browser is not found, or it fails to be launched, or the default handler
-     *      * application failed to be launched.
+     * application failed to be launched.
      */
     public void openCommandSummary() throws IOException {
         Desktop.getDesktop().browse(
