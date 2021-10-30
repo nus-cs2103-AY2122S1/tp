@@ -452,10 +452,10 @@ If your changes to the data file makes its format invalid, contHACKS will discar
         <code>e</code>
     </td>
     <td>
-        <code>`edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`</code>
+        <code>edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]</code>
     </td>
     <td>
-        <code>`edit 1 p/91234567 e/ben321@gmail.com`</code>
+        <code>edit 1 p/91234567 e/ben321@gmail.com</code>
     </td>
 </tr>
 
