@@ -476,7 +476,7 @@ Format: `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [d
 * Existing values will be updated to the input values.
 * `PATIENT_INDEX` refers to the index of the patient in the displayed patient list.
 * `DOCTOR_INDEX` refers to the index of the doctor in the displayed doctor list.
-* `START_DATE_TIME` accepts a format of `DD/MM/YYYY HH:MM`.
+* `START_DATE_TIME` accepts a format of `DD/MM/YYYY HH:MM`, e.g. `31/12/2022 15:00`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
