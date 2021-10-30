@@ -60,11 +60,21 @@ public class Appointment {
         if (date.equals(NO_APPOINTMENT)) {
             return temp;
         }
-        try {
-            temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (time.equals(NO_TIME)) {
+            try {
+                temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                String source = date + " " + time;
+                temp = new SimpleDateFormat("dd MMM yyyy HHmm").parse(source);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
+
         return temp;
     }
 
