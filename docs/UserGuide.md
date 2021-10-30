@@ -447,11 +447,11 @@ This CANNOT be undone!
 
 #### Adding a remark to your client: `rmk`
 
-You can add a remark to an existing client in FAST. <br>
+You can add a remark to an existing client in FAST, or update the current remark if they already have one. <br>
 This is useful for adding additional client notes such as their preferred meeting timing, allowing you to better serve your clients!
 
-<div markdown="block" class="alert alert-info">
-:information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
+<div markdown="block" class="alert alert-info"> :information_source: 
+Remarks should be used to annotate contacts with longer and more specific things compared to tags,
 which should mostly be one or two words.<br>
 </div>
 
@@ -471,8 +471,13 @@ To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
 * `rmk 1 r/loves to eat pizza` adds a remark `loves to eat pizza` to the first client.
 ![result for `rmk 1 r/loves to eat pizza`](images/remarkResult.png)
 * `rmk 1` removes the remark from the first client.<br>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Try to add remarks with specific keywords so that it is easier to [search](#searching-for-clients-find) for them.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Adding a remark will overwrite any previous remarks that were made for the client!
 </div>
 
 #### Appointments
