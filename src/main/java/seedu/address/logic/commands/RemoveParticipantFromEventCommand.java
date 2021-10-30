@@ -61,7 +61,8 @@ public class RemoveParticipantFromEventCommand extends Command {
         }
 
         if (!selectedEvent.hasParticipant(participantToRemove)) {
-            throw new CommandException(Messages.showParticipantDoesNotExist(participantToRemove.getFullName()));
+            throw new CommandException(Messages.showParticipantDoesNotExist(
+                    participantToRemove.getFullName(), selectedEvent.getNameString()));
         }
 
         // remove participant

@@ -60,7 +60,8 @@ public class AddParticipantToEventCommand extends Command {
         }
 
         if (selectedEvent.hasParticipant(participantToAdd)) {
-            throw new CommandException(Messages.showParticipantExists(participantToAdd.getFullName()));
+            throw new CommandException(Messages.showParticipantAlreadyEnrolled(
+                    participantToAdd.getFullName(), selectedEvent.getNameString()));
         }
 
         // add participant
