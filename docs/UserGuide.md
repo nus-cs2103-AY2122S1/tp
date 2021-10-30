@@ -121,9 +121,12 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `HEALTH_CONDITION` is the elderly's health condition. **This is optional to include.**
 
 Examples:
-* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`, without `FREQUENCY` and `OCCURRENCE`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 f/weekly o/3 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE` .
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College`
+  > Adds an elderly and details without the `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 h/dementia`
+  > Adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`, without `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 f/weekly o/3 h/dementia`
+  > Adds an elderly and details with `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
 
 
 ### Delete an elderly or corresponding visit : `delete`
@@ -136,8 +139,10 @@ Format: `delete [v/] INDEX`
 * `v/` denotes if the item to be deleted is an elderly’s details or the elderly’s corresponding visit. **This is optional to include.** The presence of v/ indicates that it is the elderly’s visit that is to be deleted, while its exclusion indicates that it is the elderly’s details that is to be deleted.
 
 Examples:
-* `delete 1` deletes the elderly’s details of the elderly at list index 1.
-* `delete v/ 1` deletes the elderly’s visit of the elderly at list index 1.
+* `delete 1`
+  > Deletes the elderly’s details of the elderly at list index 1.
+* `delete v/ 1`
+  > Deletes the elderly’s visit of the elderly at list index 1.
 
 
 ### Edit an elderly : `edit`
@@ -155,9 +160,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] 
 * You can remove the elderly's last visit by typing `lv/` without specifying any datetime after it.
 
 Examples:
-*  `edit 1 p/91234567 l/English` Edits the phone number and language of the 1st elderly to be `91234567` and `English` respectively. All other attributes are not modified.
-*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd elderly to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
-*  `edit 1 lv/` Removes the last visit for the 1st elderly. All other attributes are not modified.
+*  `edit 1 p/91234567 l/English`
+   > Edits the phone number and language of the 1st elderly to be `91234567` and `English` respectively. All other attributes are not modified.
+*  `edit 2 n/Betsy Crower h/`
+   > Edits the name of the 2nd elderly to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
+*  `edit 1 lv/`
+   > Removes the last visit for the 1st elderly. All other attributes are not modified.
 
 
 ### List elderly : `list`
@@ -170,7 +178,13 @@ Format: `list [w/] [m/]`
 - `list m/` displays all the elderly with an incoming visit in the next month.
 - `w/` and `m/` fields cannot be both present.
 
-Example: `list m/` displays all the elderly with an incoming visit in the next month. 
+Examples:
+* `list`
+  > Displays all the elderly.
+* `list m/`
+  > Displays all the elderly with an incoming visit in the next month. 
+* `list w/`
+  > Displays all elderly with an in
 
 ### Sort elderly by visit : `sort`
 
@@ -184,7 +198,9 @@ Format: `sort [FIELD_TO_BE_SORTED]`
 * `sort` acts on the list currently being displayed.
 * Currently, `sort` only supports fields of `last visit` or `visit`.
 
-Example: `sort lv/` sorts the elderly list in descending order of `last visit` date.
+Example: 
+* `sort lv/`
+  > Sorts the elderly list in descending order of `last visit` date.
 
 ### Find elderly by attribute : `find`
 
@@ -200,8 +216,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans English` will return `Hans Gruber`, `Hanson Lim`, both of which have `LANGUAGE` English
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex English` returns `Alex Yeoh`, `Alex Lim`, both with `LANGUAGE` English.<br>
+* `find John`
+  > Returns `john` and `John Doe`
+* `find alex English`
+  > Returns `Alex Yeoh`, `Alex Lim`, both with `LANGUAGE` English.<br>
 
 
 ### Schedule a visit to an elderly : `visit`
@@ -215,11 +233,13 @@ Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 * The `FREQUENCY` and `OCCURRENCE` are optional parameters, and must both be included or excluded.
 * `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
 * `OCCURRENCE` is a **strictly positive integer**.
-* If there is already an existing visit scheduled for the elderly, this command will schedule a new visit that overwrites the existing one.
+* If there is already a next visit scheduled for the elderly, this command will schedule a new visit that overwrites the existing one.
 
 Examples:
-* `visit 1 at/2021-12-31 17:00` schedules a meeting to the first elderly in the address book on 31th December 2021, 5PM.
-* `visit 1 at/2021-12-31 17:00 f/weekly o/3` schedules a recurring weekly meeting for 3 times to the first elderly in the address book on 31th December 2021, 5PM.
+* `visit 1 at/2021-12-31 17:00`
+  > Schedules a meeting to the first elderly in the address book on 31th December 2021, 5PM.
+* `visit 1 at/2021-12-31 17:00 f/weekly o/3`
+  > Schedules a recurring weekly meeting for 3 times to the first elderly in the address book on 31th December 2021, 5PM.
 
 
 ### Mark one visit as done : `done`
@@ -231,8 +251,9 @@ Format: `done INDEX`
 * `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.** There must be a scheduled visit for the elderly before the visit can be marked as done.
 * Once a scheduled visit is marked as done, it will update the last visited time of the elderly, and now there is no longer a scheduled next visit for the elderly.
 
-Examples:
-* `done 1` marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
+Example:
+* `done 1`
+  > Marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
 
 
 ### View summary statistics : `summary`
