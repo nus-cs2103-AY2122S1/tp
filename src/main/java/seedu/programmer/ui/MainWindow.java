@@ -243,8 +243,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDashboard() {
+        dashboardWindow.update();
         if (dashboardWindow.isShowing()) {
-            dashboardWindow.update();
             dashboardWindow.focus();
             return;
         }
