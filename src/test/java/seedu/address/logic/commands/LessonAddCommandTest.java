@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -113,6 +114,7 @@ public class LessonAddCommandTest {
 
     @Test
     public void execute_nonClashingLessonUnfilteredList_success() {
+        // overlapping date ranges
         Lesson lesson = new LessonBuilder()
             .withDate(VALID_DATE_MON)
             .withEndDate("19 OCT 2021")
@@ -128,6 +130,72 @@ public class LessonAddCommandTest {
         Lesson nonClashingLesson = new LessonBuilder()
                 .withDate("18 Oct 2021")
                 .buildRecurring();
+
+        Person editedPerson = new PersonBuilder(person).withLessons(lesson, nonClashingLesson).build();
+
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, nonClashingLesson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+            editedPerson);
+
+        String expectedMessage = String.format(LessonAddCommand.MESSAGE_ADD_LESSON_SUCCESS,
+            editedPerson.getName(), nonClashingLesson);
+
+        assertCommandSuccess(lessonAddCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_nonOverlappingLessonUnfilteredList_success() {
+
+        // Non-overlapping date ranges
+        Lesson lesson = new LessonBuilder()
+            .withDate(VALID_DATE_MON)
+            .withEndDate("19 OCT 2021")
+            .withCancelledDatesSet("18 Oct 2021")
+            .buildRecurring();
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person = new PersonBuilder(firstPerson).withLessons(lesson).build();
+
+        model.setPerson(firstPerson, person);
+
+        // Add a different lesson on the same time slot but not clashing due to cancelled dates
+        Lesson nonClashingLesson = new LessonBuilder()
+            .withDate("18 Oct 2021")
+            .buildRecurring();
+
+        Person editedPerson = new PersonBuilder(person).withLessons(lesson, nonClashingLesson).build();
+
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, nonClashingLesson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+            editedPerson);
+
+        String expectedMessage = String.format(LessonAddCommand.MESSAGE_ADD_LESSON_SUCCESS,
+            editedPerson.getName(), nonClashingLesson);
+
+        assertCommandSuccess(lessonAddCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_overlappingParallelLessonsUnfilteredList_success() {
+
+        // Non-overlapping date ranges
+        Lesson lesson = new LessonBuilder()
+            .withDate(VALID_DATE_MON)
+            .buildRecurring();
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person = new PersonBuilder(firstPerson).withLessons(lesson).build();
+
+        model.setPerson(firstPerson, person);
+
+        // Add a different lesson on the same time slot but not clashing due to cancelled dates
+        Lesson nonClashingLesson = new LessonBuilder()
+            .withDate(VALID_DATE_TUE)
+            .buildRecurring();
 
         Person editedPerson = new PersonBuilder(person).withLessons(lesson, nonClashingLesson).build();
 
