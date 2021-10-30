@@ -141,7 +141,7 @@ public class AddressBookParser {
      * @param arguments raw arguments to extract from.
      * @return extracted arguments.
      */
-    private String extractArguments(String arguments) {
+    protected String extractArguments(String arguments) {
         int argumentsIndex = arguments.indexOf("-");
         if (argumentsIndex == -1) {
             return "";
@@ -157,7 +157,7 @@ public class AddressBookParser {
      * @param arguments arguments to retrieve second half of commandWord from.
      * @return full commandWord.
      */
-    private String extractFullCommandWord(String firstCommandWord, String arguments) {
+    protected String extractFullCommandWord(String firstCommandWord, String arguments) {
         int argumentsIndex = arguments.indexOf("-");
         if (argumentsIndex == -1) {
             String[] arr = arguments.split(" ", 3);
