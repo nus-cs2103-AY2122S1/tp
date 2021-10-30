@@ -9,9 +9,10 @@ import java.util.ArrayList;
 public class Participation {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Weeks should be between 1 and %1$s";
+            "Weeks should be a positive integer between %1$s and %2$s!";
 
-    public static final int NUMBER_OF_WEEKS = 13;
+    public static final int FIRST_WEEK_OF_SEM = 3;
+    public static final int LAST_WEEK_OF_SEM = 12;
 
     public final ArrayList<Integer> participationList;
 
@@ -20,7 +21,7 @@ public class Participation {
      */
     public Participation() {
         participationList = new ArrayList<>();
-        for (int i = 0; i < NUMBER_OF_WEEKS; i++) {
+        for (int i = FIRST_WEEK_OF_SEM; i <= LAST_WEEK_OF_SEM; i++) {
             participationList.add(0);
         }
     }
@@ -55,13 +56,6 @@ public class Participation {
      */
     public int checkParticipated(int week) {
         return participationList.get(week);
-    }
-
-    /**
-     * Returns true if a given string is a valid week.
-     */
-    public static boolean isValidWeek(int week) {
-        return week <= NUMBER_OF_WEEKS && week > 0;
     }
 
     @Override

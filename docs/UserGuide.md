@@ -131,13 +131,14 @@ Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 * Marks the person(s) as present in the specified `INDEX(ES)`.
 * The index must refer to the index number shown in the displayed students list.
-* The index and week number must be a positive number: 1, 2, 3…
+* The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
+* Duplicate index(es) are not allowed.  
 * If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
 Examples:
 
-* `students` followed by `marka 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as present in week 1.
-* Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
+* `students` followed by `marka 1 2 3 w/3` marks the 1st, 2nd and 3rd person in the students list as present in week 3.
+* Another `marka 1 w/3` instance will mark the 1st person in the student list as absent in week 3.
 
 ### Marking a student's participation: `markp`
 
@@ -147,13 +148,14 @@ Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
 * Marks the person(s) as participated in the specified `INDEX` for that week.
 * The index must refer to the index number shown in the displayed students list.
-* The index and week number must be a positive number: 1, 2, 3…
+* The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
+* Duplicate index(es) are not allowed.
 * If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
 Examples:
 
-* `students` followed by `markp 1 2 3 w/1` marks the 1st, 2nd and 3rd person in the students list as participated in week 1.
-* Another `markp 1 w/1` instance will mark the 1st person in the student list as not participated in week 1.
+* `students` followed by `markp 1 2 3 w/3` marks the 1st, 2nd and 3rd person in the students list as participated in week 3.
+* Another `markp 1 w/3` instance will mark the 1st person in the student list as not participated in week 3.
 
 ### Find student by name: `findStudent`
 
@@ -452,8 +454,8 @@ Commands | Format and Examples
 [**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​` <br> e.g., `addStudent n/Clara Ng s/A0221111W e/clara@example.com`
 [**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `editStudent 1 s/A0221111L e/johndoe@example.com`
 [**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` <br> e.g., `deleteStudent 1`
-[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/1`
-[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` <br> e.g., `markp 1 w/1`
+[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/3`
+[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` <br> e.g., `markp 1 w/3`
 [**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` <br> e.g., `findStudent John`
 [**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents`
 

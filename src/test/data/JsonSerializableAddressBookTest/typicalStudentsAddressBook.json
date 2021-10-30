@@ -7,8 +7,8 @@
     "username" : "paulice",
     "repo" : "ip",
     "tagged" : [ "friends" ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : null
   }, {
     "name" : "Benson Meier",
@@ -17,8 +17,8 @@
     "username" : "benben",
     "repo" : "ip",
     "tagged" : [ "owesMoney", "friends" ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     "groupName" : "W14-4"
   }, {
     "name" : "Carl Kurz",
@@ -27,8 +27,8 @@
     "username" : "cark",
     "repo" : "ip",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "W14-4"
   }, {
     "name" : "Daniel Meier",
@@ -37,8 +37,8 @@
     "username" : "danmei",
     "repo" : "ip",
     "tagged" : [ "friends" ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "W14-4"
   }, {
     "name" : "Elle Meyer",
@@ -47,8 +47,8 @@
     "username" : "em",
     "repo" : "ip",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "F01-3"
   }, {
     "name" : "Fiona Kunz",
@@ -57,8 +57,8 @@
     "username" : "fku",
     "repo" : "ip",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "F01-3"
   }, {
     "name" : "George Best",
@@ -67,8 +67,8 @@
     "username" : "user",
     "repo" : "ipppp",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : null
   } ],
   "tasks" : [ ],

@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkStudentPartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Participation;
 
 /**
  * Parses input arguments and creates a new MarkStudentPartCommand object
@@ -33,22 +33,15 @@ public class MarkStudentPartCommandParser implements Parser<MarkStudentPartComma
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentPartCommand.MESSAGE_USAGE));
         }
 
-        List<String> students = List.of(trimmedArgs.split("\\s+"));
-        List<Index> studentsToMark = new ArrayList<>();
-
-        try {
-            for (String str : students) {
-                Index index = ParserUtil.parseIndex(str);
-                studentsToMark.add(index);
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MarkStudentPartCommand.MESSAGE_USAGE), pe);
-        }
-
         if (argMultimap.getValue(PREFIX_WEEK).isPresent()) {
-            int week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
-            return new MarkStudentPartCommand(studentsToMark, week);
+            try {
+                List<Index> studentsToMark = ParserUtil.parseMultipleIndexWithoutDuplicates(trimmedArgs);
+                int zeroIndexWeek = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
+                return new MarkStudentPartCommand(studentsToMark, zeroIndexWeek);
+            } catch (NumberFormatException e) {
+                throw new ParseException(String.format(Participation.MESSAGE_CONSTRAINTS,
+                        Participation.FIRST_WEEK_OF_SEM, Participation.LAST_WEEK_OF_SEM));
+            }
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

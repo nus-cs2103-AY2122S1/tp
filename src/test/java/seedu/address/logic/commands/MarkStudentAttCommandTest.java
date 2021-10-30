@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -27,9 +28,9 @@ import seedu.address.testutil.StudentBuilder;
  */
 public class MarkStudentAttCommandTest {
 
-    private static final Integer[] MARK_ATTENDANCE_PRESENT_EXPECTED = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private static final Integer[] MARK_ATTENDANCE_ABSENT_EXPECTED = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private static final int FIRST_WEEK = 1;
+    private static final Integer[] MARK_ATTENDANCE_PRESENT_EXPECTED = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private static final Integer[] MARK_ATTENDANCE_ABSENT_EXPECTED = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private static final int FIRST_WEEK = Attendance.FIRST_WEEK_OF_SEM;
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -40,15 +41,17 @@ public class MarkStudentAttCommandTest {
         Student studentToMark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student attendance status
-        if (model.getStudentAttendance(studentToMark, FIRST_WEEK - 1) == "present") {
-            model.markStudentAttendance(studentToMark, FIRST_WEEK - 1);
+        if (model.getStudentAttendance(studentToMark,
+                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "present") {
+            model.markStudentAttendance(studentToMark,
+                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
 
         MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -66,15 +69,17 @@ public class MarkStudentAttCommandTest {
         Student studentToMark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student attendance status
-        if (model.getStudentAttendance(studentToMark, FIRST_WEEK - 1) == "absent") {
-            model.markStudentAttendance(studentToMark, FIRST_WEEK - 1);
+        if (model.getStudentAttendance(studentToMark,
+                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "absent") {
+            model.markStudentAttendance(studentToMark,
+                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withAttendance(MARK_ATTENDANCE_ABSENT_EXPECTED).build();
 
         MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -94,15 +99,17 @@ public class MarkStudentAttCommandTest {
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student attendance status
-        if (model.getStudentAttendance(studentInFilteredList, FIRST_WEEK - 1) == "present") {
-            model.markStudentAttendance(studentInFilteredList, FIRST_WEEK - 1);
+        if (model.getStudentAttendance(studentInFilteredList,
+                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "present") {
+            model.markStudentAttendance(studentInFilteredList,
+                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
 
         MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -122,15 +129,17 @@ public class MarkStudentAttCommandTest {
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student attendance status
-        if (model.getStudentAttendance(studentInFilteredList, FIRST_WEEK - 1) == "absent") {
-            model.markStudentAttendance(studentInFilteredList, FIRST_WEEK - 1);
+        if (model.getStudentAttendance(studentInFilteredList,
+                FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM) == "absent") {
+            model.markStudentAttendance(studentInFilteredList,
+                    FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withAttendance(MARK_ATTENDANCE_ABSENT_EXPECTED).build();
 
         MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - Attendance.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);

@@ -30,7 +30,9 @@ import seedu.address.logic.commands.MarkStudentAttCommand;
 import seedu.address.logic.commands.MarkStudentPartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
+import seedu.address.model.student.Attendance;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Participation;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
@@ -124,7 +126,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_markStudentAttendance() throws Exception {
-        int validWeek = 1;
+        int validWeek = Attendance.FIRST_WEEK_OF_SEM;
         MarkStudentAttCommand command = (MarkStudentAttCommand) parser.parseCommand(
                 MarkStudentAttCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_WEEK + validWeek);
@@ -134,7 +136,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_markStudentParticipation() throws Exception {
-        int validWeek = 1;
+        int validWeek = Participation.FIRST_WEEK_OF_SEM;
         MarkStudentPartCommand command = (MarkStudentPartCommand) parser.parseCommand(
                 MarkStudentPartCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_WEEK + validWeek);
