@@ -5,7 +5,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FilterInterviewCommandParser" as FilterInterviewCommandParser LOGIC_COLOR
-participant ":FilterInterviewPastCommand" as FilterInterviewPastCommand LOGIC_COLOR
+participant ":ValidFilterInterviewArgs" as ValidInterviewArgs LOGIC_COLOR
+participant "filterInterviewCommand:FilterInterviewPastCommand" as FilterInterviewPastCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -27,26 +28,24 @@ AddressBookParser -> FilterInterviewCommandParser: FilterInterviewCommandParser
 activate FilterInterviewCommandParser
 
 FilterInterviewCommandParser --> AddressBookParser
-
 deactivate FilterInterviewCommandParser
 
 AddressBookParser -> FilterInterviewCommandParser : parse(" past")
 activate FilterInterviewCommandParser
 
-create FilterInterviewPastCommand
-FilterInterviewCommandParser -> FilterInterviewPastCommand
-activate FilterInterviewPastCommand
+FilterInterviewCommandParser -> ValidInterviewArgs : getFilterInterviewCommand()
+activate ValidInterviewArgs
 
-FilterInterviewPastCommand --> FilterInterviewCommandParser :
-deactivate FilterInterviewPastCommand
+ValidInterviewArgs --> FilterInterviewCommandParser : filterInterviewCommand
+deactivate ValidInterviewArgs
 
-FilterInterviewCommandParser --> AddressBookParser :
+FilterInterviewCommandParser --> AddressBookParser : filterInterviewCommand
 deactivate FilterInterviewCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 FilterInterviewCommandParser -[hidden]-> AddressBookParser:
 destroy FilterInterviewCommandParser
 
-AddressBookParser --> LogicManager :
+AddressBookParser --> LogicManager : filterInterviewCommand
 deactivate AddressBookParser
 
 LogicManager -> FilterInterviewPastCommand : execute()

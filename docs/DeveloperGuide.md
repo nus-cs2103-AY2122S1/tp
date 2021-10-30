@@ -189,28 +189,36 @@ should not exceed the destroy marker X. This is a known limitation of PlantUML.<
 
 ### Filter interview feature
 
-The ```filter_interview``` command is facilitated by creating a ```FilterInterviewCommand``` depending on the given
-input. This command then updates the ```model``` accordingly. 
+The ```filter_interview``` command is facilitated by extending an abstract ```FilterInterviewCommand``` class, and executing the appropriate 
+subclass depending on the given input. This command then updates the ```model``` accordingly. 
 
 The following activity diagram summarizes what happens when a user executes a ```filter_interview``` command:
 ![images](images/FilterInterviewCommandActivityDiagram.png)
+
+
+Given below is an example usage scenario and how the filter interview operation behaves at each step.
 
 Step 1. A valid command `filter_interview past` is given as user input. This invokes `LogicManager#execute()`, which calls
 `AddressBookParser#parseCommand()` to parse `filter_interview past` into command word `filter_interview` and command argument ` past`.
 
 Step 2. `FilterInterviewCommandParser` is initialized based on the parse results and `FilterInterviewCommandParser#parse()` is called
-to identify the user input ` past`. `FilterInterviewCommandParser#parse` then initializes a
-`FilterInterviewPastCommand`.
+to identify the user input ` past`.
 
-Step 3. `FilterInterviewPastCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
+Step 3. Upon identifying the user input ` past`, `FilterInterviewCommandParser#parse` will then call  methods of 
+`ValidFilterInterviewArgs` from the enum type `ValidFilterInterviewArgs.PAST` instead of `ValidFilterInterviewArgs.FUTURE`.
+The details of this step are omitted from the sequence diagram below for brevity.
+
+Step 4. `FilterInterviewCommandParser#parse` then calls the method `ValidFilterInterviewArgs#getFilterInterviewCommand()` to obtain
+an object of the appropriate subclass of `FilterInterviewCommand`, which in this case is an instance of `FilterInterviewPastCommand`. 
+This instance is returned and propagated back to `LogicManager`. 
+
+Step 5. `FilterInterviewPastCommand#execute()` is then called by `LogicManager`, which will in turn call `Model#updateFilteredPersonList()`
 and filters for applicants that have interviews that have already passed. 
  
-Step 4. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
-have interviews that have passed. This `CommandResult` is then returned. 
+Step 6. Once the list has been filtered, `CommandResult` is initialized with `String` indicating how many applicants 
+have interviews that have passed. This `CommandResult` is then returned.
 
-Given below is an example usage scenario and how the show operation behaves at each step.
-
-The following sequence diagram shows how the show operation works.
+The following sequence diagram shows how the filter interview operation works.
 ![images](images/FilterInterviewCommandSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source:
  **Note:** The lifeline for `FilterInterviewCommandParser`
