@@ -60,7 +60,7 @@ public class SampleDataUtil {
         set.add(new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
                         new Email("royb@example.com"),
                         new Address("Blk 45 Aljunied Street 85, #11-31"),
-                        getPositionSet("colleagues")));
+                        getPositionSet("Program Head")));
         sampleAb.addEvent(new Event(new Name("Freshmen Orientation Camp Project"), new EventDate("11/07/2021"),
                         set));
         return sampleAb;

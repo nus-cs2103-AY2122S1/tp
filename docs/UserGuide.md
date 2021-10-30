@@ -103,7 +103,7 @@ Format: `madd /n NAME /ph PHONE_NUMBER /em EMAIL [/a ADDRESS] [/p POSITION]…�
 
 Examples:
 * `madd /n John Doe /ph 98765432 /em johnd@example.com`
-* `madd /n Betsy Crowe /p friend /em betsycrowe@example.com /a Newgate Prison /ph 1234567 /p Finance Assistant`
+* `madd /n Betsy Crowe /p Programs Head /em betsycrowe@example.com /a Newgate Prison /ph 1234567 /p Finance Assistant`
 
 #### Listing all members : `mlist`
 
@@ -124,7 +124,7 @@ Example:
 * `mlist` lists everyone in Ailurus.
 * `mlist /e 3` lists all members of the event with index number 3.
 * `mlist /e 3 /att` lists all members who attended the event with index number 3.
-* `mlist /e 3` lists all members who were absent from the event with index number 3.
+* `mlist /e 3 /abs` lists all members who were absent from the event with index number 3.
 
 #### Editing a member : `medit`
 
@@ -140,9 +140,8 @@ Format: `medit /m MEMBER_ID [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p P
 * You can remove all the member’s positions by typing `/p` without specifying any positions after it.
 
 Examples:
-* `medit /m 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-* `medit /m 2 /n Betsy Crower /p` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing 
-  positions.
+* `medit /m 1 /ph 91234567 /em johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+* `medit /m 2 /n Betsy Crower /p` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
 
 #### Locating members by name: `mfind`
 
@@ -208,7 +207,7 @@ Examples:
 
 Adds a task to the specified members in Ailurus.
 
-Format: `tadd /n TASKNAME /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
+Format: `tadd /n TASKNAME /d DATE_TIME /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
 <div markdown="span" class="alert alert-primary">
 :bulb: Note: A task must be assigned to a member.
@@ -216,11 +215,12 @@ Format: `tadd /n TASKNAME /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * Tasks can be added to multiple members if there is more than one `MEMBER_ID` provided.
+* `DATE_TIME` must be of format: `dd/MM/yyyy HH:mm`
 * `MEMBER_ID` refers to the index number shown in the displayed member list.
 
 Examples:
-* `tadd /n Collect payment from members /m 3` adds task `Collect payment from members` to the third member on the  member list.
-* `tadd /n Collect dogtag /m 1 /m 2 /m 3` adds task `Collect dogtag` to the first three members on the member list.
+* `tadd /n Collect payment from members /d 20/11/2021 11:30 /m 3` adds task `Collect payment from members` to the third member on the  member list.
+* `tadd /n Collect dogtag /d 20/11/2021 11:30 /m 1 /m 2 /m 3` adds task `Collect dogtag` to the first three members on the member list.
 
 #### Listing all tasks of a member : `tlist`
 

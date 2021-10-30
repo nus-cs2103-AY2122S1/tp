@@ -79,7 +79,7 @@ public class MlistCommand extends Command {
             Event eventToList = lastShownList.get(eventIndex.getZeroBased());
             Set<Member> memberList = eventToList.getParticipants(hasAttended);
             model.setCurrentEvent(eventToList);
-            model.updateFilteredMemberList(memberList::contains);
+            model.updateFilteredMemberList(member -> memberList.contains(member));
 
             String attend;
 
