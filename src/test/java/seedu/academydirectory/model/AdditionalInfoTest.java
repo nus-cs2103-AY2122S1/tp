@@ -18,7 +18,7 @@ import seedu.academydirectory.testutil.StudentBuilder;
 public class AdditionalInfoTest {
 
     @Test
-    public void test_empty_additional_info() {
+    public void testEmptyAdditionalInfo() {
         AdditionalInfo<?> emptyInfo1 = AdditionalInfo.empty();
         AdditionalInfo<String> emptyInfo2 = AdditionalInfo.empty();
         AdditionalInfo emptyInfo3 = AdditionalInfo.empty();
@@ -32,7 +32,7 @@ public class AdditionalInfoTest {
     }
 
     @Test
-    public void test_non_empty_additional_info() {
+    public void testNonEmptyAdditionalInfo() {
         AdditionalInfo<String> stringInfo = AdditionalInfo.of("Daenerys Targaryen");
 
         // two additional info are equal to each other if the info itself is equal
@@ -52,7 +52,7 @@ public class AdditionalInfoTest {
     }
 
     @Test
-    public void test_present_or_empty() {
+    public void testPresentOrEmpty() {
         AdditionalInfo<?> additionalInfo1 = AdditionalInfo.empty();
         AdditionalInfo<String> stringInfo = AdditionalInfo.of("Arya Stark");
         AdditionalInfo<Student> studentInfo = AdditionalInfo.of(new StudentBuilder().build());
@@ -66,7 +66,7 @@ public class AdditionalInfoTest {
     }
 
     @Test
-    public void test_getter() {
+    public void testGetter() {
         AdditionalInfo<?> additionalInfo1 = AdditionalInfo.empty();
         AdditionalInfo<String> stringInfo = AdditionalInfo.of("Arya Stark");
         AdditionalInfo<Student> studentInfo = AdditionalInfo.of(new StudentBuilder().build());

@@ -43,7 +43,7 @@ public class AdditionalViewModel {
             return true;
         }
 
-        if (! (obj instanceof AdditionalViewModel)) {
+        if (!(obj instanceof AdditionalViewModel)) {
             return false;
         }
 

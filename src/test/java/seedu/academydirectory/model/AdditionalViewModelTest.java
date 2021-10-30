@@ -1,6 +1,5 @@
 package seedu.academydirectory.model;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -11,7 +10,7 @@ import seedu.academydirectory.logic.AdditionalViewType;
 public class AdditionalViewModelTest {
 
     @Test
-    public void test_valid_additional_view_model() {
+    public void testValidModel() {
         AdditionalViewModel additionalViewModel1 = new AdditionalViewModel(
                 AdditionalViewType.VIEW, AdditionalInfo.of("View")
         );
@@ -53,7 +52,7 @@ public class AdditionalViewModelTest {
     }
 
     @Test
-    public void test_setter_and_getter() {
+    public void testSetterAndGetter() {
         AdditionalViewModel additionalViewModel = new AdditionalViewModel(
                 AdditionalViewType.DEFAULT, AdditionalInfo.empty()
         );

@@ -11,6 +11,7 @@ import seedu.academydirectory.logic.commands.Command;
 import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.HistoryCommand;
+import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.commands.RedoCommand;
 import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.commands.ViewCommand;
@@ -19,7 +20,7 @@ import seedu.academydirectory.model.student.InformationWantedFunction;
 
 public class AdditionalViewTypeTest {
     @Test
-    public void test_valid_additionalViewType() {
+    public void parse_additionalViewType() {
         Command viewCommand = new ViewCommand(INDEX_FIRST_STUDENT);
         Command visualizeCommand = new VisualizeCommand();
         Command historyCommand = new HistoryCommand();
@@ -27,7 +28,7 @@ public class AdditionalViewTypeTest {
         Command getCommand = new GetCommand(new InformationWantedFunction(null, null));
         Command showCommand = new ShowCommand("RA1");
         Command redoCommand = new RedoCommand();
-        Command addCommand = new AddCommand(null);
+        Command addCommand = new ListCommand();
 
         // Additional View Type works for View
         assertEquals(AdditionalViewType.parse(viewCommand), AdditionalViewType.VIEW);
