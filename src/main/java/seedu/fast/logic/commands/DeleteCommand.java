@@ -103,7 +103,6 @@ public class DeleteCommand extends Command {
 
     private void sortOrder() {
         Arrays.sort(indexArray, Index::compareTo);
-        System.out.println(indexArray);
     }
 
     private ArrayList<Index> getInvalidIndex(List<Person> lastShownList) {
