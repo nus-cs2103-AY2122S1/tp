@@ -12,7 +12,6 @@ import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.TransactionRecord;
 
 /**
  * The API of the Model component.
@@ -170,7 +169,7 @@ public interface Model {
     /**
      * Return a list of {@code TransactionRecord} sorted according to timestamp.
      */
-    List<TransactionRecord> getTransactions();
+    ReadOnlyTransactionList getTransactions();
 
     /**
      * Returns an unmodifiable view of the filtered list to be displayed.

@@ -9,8 +9,10 @@ import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalOrders;
 
@@ -21,8 +23,9 @@ public class ListTransactionCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalInventory(), new UserPrefs());
-        expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        model = new ModelManager(getTypicalInventory(), new UserPrefs(), new TransactionList(), new BookKeeping());
+        expectedModel = new ModelManager(model.getInventory(), new UserPrefs(),
+                new TransactionList(), new BookKeeping());
     }
 
     @Test

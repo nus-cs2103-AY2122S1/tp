@@ -12,7 +12,6 @@ import seedu.address.model.display.Displayable;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.TransactionRecord;
 
 /**
  * A default model stub that have all of its methods failing.
@@ -175,7 +174,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public List<TransactionRecord> getTransactions() {
+    public ReadOnlyTransactionList getTransactions() {
         throw new AssertionError("This method should not be called.");
     }
 

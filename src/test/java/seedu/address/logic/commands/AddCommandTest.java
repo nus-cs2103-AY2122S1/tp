@@ -26,11 +26,13 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.BookKeeping;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ModelStub;
 import seedu.address.model.ReadOnlyInventory;
+import seedu.address.model.TransactionList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.display.DisplayMode;
 import seedu.address.model.item.Item;
@@ -41,7 +43,8 @@ import seedu.address.testutil.ItemDescriptorBuilder;
 public class AddCommandTest {
 
     private ModelStubAcceptingItemAdded modelStub = new ModelStubAcceptingItemAdded();
-    private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs());
+    private ModelManager model = new ModelManager(getTypicalInventory(), new UserPrefs(),
+            new TransactionList(), new BookKeeping());
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -170,7 +173,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = AddCommand.MESSAGE_NAME_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                model.getTransactions(), model.getBookKeeping());
 
         assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
     }
@@ -184,7 +188,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = AddCommand.MESSAGE_ID_NOT_FOUND;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                model.getTransactions(), model.getBookKeeping());
 
         assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
     }
@@ -200,7 +205,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = AddCommand.MESSAGE_NAME_EXISTS;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                model.getTransactions(), model.getBookKeeping());
 
         assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
     }
@@ -216,7 +222,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(bagelDescriptor);
         String expectedMessage = AddCommand.MESSAGE_ID_EXISTS;
 
-        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs(),
+                model.getTransactions(), model.getBookKeeping());
 
         assertCommandFailure(addCommand, model, expectedModel, expectedMessage);
     }
