@@ -7,8 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.module.member.Address;
-import seedu.address.model.module.member.Email;
 import seedu.address.model.module.member.Member;
 
 /**
@@ -56,10 +54,10 @@ public class MemberCard extends UiPart<Region> {
         phone.setText("Phone: " + member.getPhone().value);
         member.getAddress().ifPresentOrElse(a -> {
             address.setText("Address: " + a.value);
-            }, () -> address.setVisible(false));
+        }, () -> address.setVisible(false));
         member.getEmail().ifPresentOrElse(e -> {
             email.setText("Email: " + e.value);
-            }, () -> email.setVisible(false));
+        }, () -> email.setVisible(false));
         member.getPositions().stream()
                 .sorted(Comparator.comparing(position -> position.positionName))
                 .forEach(position -> positions.getChildren().add(new Label(position.positionName)));
