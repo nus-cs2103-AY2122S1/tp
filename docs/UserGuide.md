@@ -128,9 +128,12 @@ This section describes the available features in TAB.
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `calendar`, `exit`, `clear` etc.) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
+
+* Chaining commands is not supported.<br>
+  e.g. A chain of commands like `next next back next` will only execute the `next` command once.
+
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
@@ -316,16 +319,10 @@ Notes about search keywords:
 
 * You must provide at least one keyword to search for.<br>
   e.g. entering just `find n/` alone is not a valid command as the keyword is empty.
-
-* Tags must only have one keyword.<br>
-  e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
   
 * The search is case-insensitive.<br>
   e.g. keyword `hans` will match `Hans`.
 
-* A keyword can match a word partially.<br>
-  e.g. keyword `math` will match `mathematics`.
-  
 * The order of the keywords do not matter.<br>
   e.g. keyword `west jurong` will match `jurong west`.
   
@@ -385,7 +382,7 @@ This rate will be used in the calculation of fees due after each lesson.
 
 #### Adding a lesson: `ladd`
 
-Adds a lesson to the specified student in TAB.
+Adds a lesson to the specified student in TAB, provided you do not have any other lessons scheduled at that time.
 
 Format: `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
 
@@ -584,7 +581,7 @@ Shortcut: <kbd>F3</kbd>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
-For example, the `day` command bellow opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
+For example, the `day` command below opens the calendar, **and** goes to the day page. You can skip typing `calendar`! 
 </div>
 
 #### Viewing your daily calendar: `day`
