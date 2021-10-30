@@ -10,14 +10,16 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAdjusters;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Lesson's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date implements Comparable<Date> {
-
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd MMM yyyy "
             + "and adhere to the following constraints:\n"
             + "1. dd and yyyy are numerical characters.\n"
@@ -34,9 +36,12 @@ public class Date implements Comparable<Date> {
             .toFormatter(Locale.ENGLISH)
             .withResolverStyle(ResolverStyle.STRICT);
 
+    public static final Date MAX_DATE = new Date(LocalDate.MAX.format(Date.FORMATTER));
+
     public final String value;
 
     private final LocalDate localDate;
+
     /**
      * Constructs an {@code Date}.
      *
@@ -72,29 +77,105 @@ public class Date implements Comparable<Date> {
         return localDate;
     }
 
+    /**
+     * Returns the day of the week of this date.
+     *
+     * @return Day of the week of this date.
+     */
     public DayOfWeek getDayOfWeek() {
         return localDate.getDayOfWeek();
     }
 
     /**
      * Update the lesson date to the same day on the most recent week
-     * that has yet to be pass.
+     * that has yet to pass and is not in {@code datesToSkip}.
      *
+     * @param datesToSkip Dates to skip.
      * @return newDate The date of the same day on the week that has yet to pass.
      */
-    public Date updateDate() {
-        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+    public Date updateDate(Set<Date> datesToSkip) {
+        LocalDate laterDate = getLocalDate().isAfter(LocalDate.now()) ? getLocalDate() : LocalDate.now();
+        LocalDate updatedDate = laterDate.with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+        List<LocalDate> dates = datesToSkip.stream().map(Date::getLocalDate).collect(Collectors.toList());
+        while (dates.contains(updatedDate)) {
+            updatedDate = updatedDate.plusWeeks(1);
+        }
+
         Date newDate = new Date(updatedDate.format(FORMATTER));
         return newDate;
     }
 
     /**
-     * Check if the date has passed.
+     * Returns the latest date on the given day of week before or equal to the date.
      *
-     * @return true if date is earlier than now.
+     * @return prevDate The latest passed date on the given day on the week.
+     */
+    public Date getPreviousDate(DayOfWeek dayOfWeek) {
+        LocalDate earlierDate = getLocalDate().isAfter(LocalDate.now()) ? LocalDate.now() : getLocalDate();
+        LocalDate updatedDate = earlierDate.with(TemporalAdjusters.previousOrSame(dayOfWeek));
+        Date prevDate = new Date(updatedDate.format(FORMATTER));
+        return prevDate;
+    }
+
+    /**
+     * Returns true if the date is between the start and end date, inclusive.
+     */
+    public boolean isDateBetween(LocalDate start, LocalDate end) {
+        boolean isAfterOrEqualsStart = getLocalDate().isAfter(start) || getLocalDate().isEqual(start);
+        boolean isBeforeOrEqualsEnd = getLocalDate().isBefore(end) || getLocalDate().isEqual(end);
+        return isAfterOrEqualsStart && isBeforeOrEqualsEnd;
+    }
+
+    /**
+     * Checks if the date has passed.
+     *
+     * @return True if date is earlier than now.
      */
     public boolean isOver() {
         return getLocalDate().isBefore(LocalDate.now());
+    }
+
+    /**
+     * Checks if this date is after the specified date.
+     *
+     * @return True if this date is after the specified date, false if same date or before.
+     */
+    public boolean isAfter(Date other) {
+        return localDate.isAfter(other.localDate);
+    }
+
+    public boolean isBefore(Date other) {
+        return localDate.isBefore(other.localDate);
+    }
+
+    /**
+     * Checks if this date is on the same day of the week as the specified date.
+     *
+     * @return True if this date is is on the same day of the week as the specified date, false otherwise.
+     */
+    public boolean isSameDayOfWeek(Date other) {
+        return localDate.getDayOfWeek().equals(other.getDayOfWeek());
+    }
+
+    /**
+     * Checks if this date occurs on a weekly recurring date.
+     *
+     * @param recurringStartDate The start date of the weekly recurrence.
+     * @return True if this date is on a recurring date, false otherwise.
+     */
+    public boolean isOnRecurringDate(Date recurringStartDate, Date recurringEndDate) {
+        if (recurringStartDate.isAfter(this)) {
+            return false;
+        }
+        if (!recurringStartDate.isSameDayOfWeek(this)) {
+            return false;
+        }
+
+        if (recurringEndDate.isBefore(this)) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

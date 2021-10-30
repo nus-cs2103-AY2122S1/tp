@@ -4,6 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandResult.DisplayType.EXIT;
+import static seedu.address.logic.commands.CommandResult.DisplayType.HELP;
+import static seedu.address.logic.commands.CommandResult.DisplayType.REMINDER;
+import static seedu.address.logic.commands.CommandResult.DisplayType.STUDENTS;
+import static seedu.address.logic.commands.CommandResult.DisplayType.TAGS;
+import static seedu.address.logic.commands.CommandResult.DisplayType.WEEK;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +20,9 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
+
         assertTrue(commandResult.equals(
-                new CommandResult("feedback", false, false, false)));
+                new CommandResult("feedback", STUDENTS)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,17 +36,25 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
-        // different showHelp value -> returns false
+        // different displayType enum value -> returns false
         assertFalse(commandResult.equals(
-                new CommandResult("feedback", true, false, false)));
+                new CommandResult("feedback", HELP)));
 
-        // different showSchedule value -> returns false
+        // different displayType enum value -> returns false
         assertFalse(commandResult.equals(
-                new CommandResult("feedback", false, true, false)));
+                new CommandResult("feedback", REMINDER)));
 
-        // different exit value -> returns false
+        // different displayType enum value -> returns false
         assertFalse(commandResult.equals(
-                new CommandResult("feedback", false, false, true)));
+                new CommandResult("feedback", TAGS)));
+
+        // different displayType enum value -> returns false
+        assertFalse(commandResult.equals(
+                new CommandResult("feedback", WEEK)));
+
+        // different displayType enum value -> returns false
+        assertFalse(commandResult.equals(
+                new CommandResult("feedback", EXIT)));
     }
 
     @Test
@@ -52,16 +67,24 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
-        // different showHelp value -> returns different hashcode
+        // different displayType enum value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", true, false, false).hashCode());
+                new CommandResult("feedback", HELP).hashCode());
 
-        // different showSchedule value -> returns different hashcode
+        // different displayType enum value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, true, false).hashCode());
+                new CommandResult("feedback", TAGS).hashCode());
 
-        // different exit value -> returns different hashcode
+        // different displayType enum value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, false, true).hashCode());
+                new CommandResult("feedback", REMINDER).hashCode());
+
+        // different displayType enum value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(),
+                new CommandResult("feedback", WEEK).hashCode());
+
+        // different displayType enum value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(),
+                new CommandResult("feedback", EXIT).hashCode());
     }
 }

@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_MON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -56,6 +59,44 @@ public class LessonAddCommandTest {
     }
 
     @Test
+    public void execute_validPersonValidLessonDateRange_success() {
+        Lesson sampleLesson = new LessonBuilder()
+                .withDate(VALID_DATE_PAST)
+                .withEndDate(VALID_DATE_FUTURE).buildRecurring();
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withLessons(sampleLesson).build();
+
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, sampleLesson);
+
+        String expectedMessage = String.format(LessonAddCommand.MESSAGE_ADD_LESSON_SUCCESS,
+                editedPerson.getName(), sampleLesson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+                editedPerson);
+
+        assertCommandSuccess(lessonAddCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validPersonInvalidLesson_success() {
+        Lesson sampleLesson = new LessonBuilder()
+                .withDate(VALID_DATE_FUTURE)
+                .withEndDate(VALID_DATE_PAST).buildRecurring();
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withLessons(sampleLesson).build();
+
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, sampleLesson);
+
+        String expectedMessage = String.format(LessonAddCommand.MESSAGE_INVALID_DATE_RANGE,
+            editedPerson.getName(), sampleLesson);
+
+        assertCommandFailure(lessonAddCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_clashingLessonUnfilteredList_failure() {
         Lesson lesson = new LessonBuilder().build();
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -71,8 +112,59 @@ public class LessonAddCommandTest {
     }
 
     @Test
+    public void execute_nonClashingLessonUnfilteredList_success() {
+        Lesson lesson = new LessonBuilder()
+            .withDate(VALID_DATE_MON)
+            .withEndDate("19 OCT 2021")
+            .withCancelledDatesSet("18 Oct 2021")
+            .buildRecurring();
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person = new PersonBuilder(firstPerson).withLessons(lesson).build();
+
+        model.setPerson(firstPerson, person);
+
+        // Add a different lesson on the same time slot but not clashing due to cancelled dates
+        Lesson nonClashingLesson = new LessonBuilder()
+                .withDate("18 Oct 2021")
+                .buildRecurring();
+
+        Person editedPerson = new PersonBuilder(person).withLessons(lesson, nonClashingLesson).build();
+
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, nonClashingLesson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+            editedPerson);
+
+        String expectedMessage = String.format(LessonAddCommand.MESSAGE_ADD_LESSON_SUCCESS,
+            editedPerson.getName(), nonClashingLesson);
+
+        assertCommandSuccess(lessonAddCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_clashingLessonFilteredList_failure() {
         Lesson lesson = new LessonBuilder().build();
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person person = new PersonBuilder(secondPerson).withLessons(lesson).build();
+
+        model.setPerson(secondPerson, person);
+
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        /*
+        Add a different lesson to the only person in the filtered list on a clashing time
+        slot as the second person in the unfiltered list.
+         */
+        Lesson clashingLesson = new LessonBuilder().withHomeworkSet("Test").buildRecurring();
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
+
+        assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON);
+    }
+
+    @Test
+    public void execute_clashingRecurringLessonFilteredList_failure() {
+        Lesson lesson = new LessonBuilder().buildRecurring();
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person person = new PersonBuilder(secondPerson).withLessons(lesson).build();
 

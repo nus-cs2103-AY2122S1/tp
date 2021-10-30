@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +18,7 @@ public class DeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer)";
+    public static final String COMMAND_PARAMETERS = "INDEX";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
@@ -48,11 +48,7 @@ public class DeleteCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDelete = CommandUtil.getPerson(lastShownList, targetIndex);
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, personToDelete));

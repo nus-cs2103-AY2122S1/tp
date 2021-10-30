@@ -15,7 +15,7 @@ import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_AVE;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_FRIENDS;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_FORGETFUL;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -84,7 +84,7 @@ public class FindCommandTest {
     public void execute_multipleFieldsAllCondition_multiplePersonsFound() {
         // Default condition
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-                .withAddress(KEYWORD_MATCHING_AVE).withTags(KEYWORD_MATCHING_FRIENDS).build();
+                .withAddress(KEYWORD_MATCHING_AVE).withTags(KEYWORD_MATCHING_FORGETFUL).build();
         List<Person> expectedPersons = Arrays.asList(ALICE, BENSON);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 2, predicate);
         FindCommand command = prepareFindCommand(predicate);
@@ -94,7 +94,7 @@ public class FindCommandTest {
 
         // Match all condition
         predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress(KEYWORD_MATCHING_AVE)
-                .withTags(KEYWORD_MATCHING_FRIENDS).withCondition(FindCondition.ALL).build();
+                .withTags(KEYWORD_MATCHING_FORGETFUL).withCondition(FindCondition.ALL).build();
         expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
         command = prepareFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -106,7 +106,7 @@ public class FindCommandTest {
     public void execute_multipleFieldsAnyCondition_multiplePersonsFound() {
         // Match any condition
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-                .withAddress("ave").withTags(KEYWORD_MATCHING_FRIENDS)
+                .withAddress("ave").withTags(KEYWORD_MATCHING_FORGETFUL)
                 .withCondition(FindCondition.ANY).build();
         List<Person> expectedPersons = Arrays.asList(ALICE, BENSON, DANIEL, ELLE);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
@@ -120,7 +120,7 @@ public class FindCommandTest {
     public void execute_multipleFieldsNoneCondition_multiplePersonsFound() {
         // Match none condition
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-                .withAddress(KEYWORD_MATCHING_AVE).withTags(KEYWORD_MATCHING_FRIENDS)
+                .withAddress(KEYWORD_MATCHING_AVE).withTags(KEYWORD_MATCHING_FORGETFUL)
                 .withCondition(FindCondition.NONE).build();
         List<Person> expectedPersons = Arrays.asList(CARL, FIONA, GEORGE);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);

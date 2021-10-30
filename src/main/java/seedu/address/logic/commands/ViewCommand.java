@@ -10,11 +10,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 public class ViewCommand extends Command {
-    public static final String COMMAND_ACTION = "View student's lessons";
+    public static final String COMMAND_ACTION = "View Student's Lessons";
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) ";
+    public static final String COMMAND_PARAMETERS = "INDEX";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 

@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ACAD_LEVEL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ACAD_STREAM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.FEE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
@@ -16,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SCHOOL_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalTags.TAG_ZOOM;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -89,7 +89,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + PARENT_PHONE_DESC_AMY + PARENT_EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + SCHOOL_DESC_AMY + ACAD_STREAM_DESC_AMY + ACAD_LEVEL_DESC_AMY + FEE_DESC_AMY + REMARK_DESC_AMY;
+                + SCHOOL_DESC_AMY + ACAD_STREAM_DESC_AMY + ACAD_LEVEL_DESC_AMY + REMARK_DESC_AMY;
 
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
@@ -101,6 +101,21 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getUpcomingLessons_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getUpcomingLessons().remove(0));
+    }
+
+    @Test
+    public void getObservableTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getObservableTagList().remove(0));
+    }
+
+    @Test
+    public void getTagCounter_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getTagCounter().put(TAG_ZOOM, 1));
     }
 
     /**

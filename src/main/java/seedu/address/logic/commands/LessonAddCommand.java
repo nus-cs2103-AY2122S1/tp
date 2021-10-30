@@ -13,22 +13,24 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
 
-
+/**
+ * Adds a lesson to a person in the address book.
+ */
 public class LessonAddCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Add Lesson";
 
     public static final String COMMAND_WORD = "ladd";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
-            + "[" + PREFIX_RECURRING + "] "
+    public static final String COMMAND_PARAMETERS = "INDEX "
+            + "[" + PREFIX_RECURRING + "[END_DATE]] "
             + PREFIX_DATE + "dd MMM yyyy "
             + PREFIX_TIME + "HHmm-HHmm "
             + PREFIX_RATES + "RATES "
@@ -68,6 +70,10 @@ public class LessonAddCommand extends UndoableCommand {
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson for student %1$s:\n%2$s";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
+    public static final String MESSAGE_INVALID_DATE_RANGE = "The end date cannot be earlier than the start date. Please"
+            + " specify a valid date range.\n"
+            + "You can specify the start date with " + PREFIX_DATE + "DATE and the end date with "
+            + PREFIX_RECURRING + "END_DATE";
 
     private final Index index;
     private final Lesson toAdd;
@@ -83,36 +89,44 @@ public class LessonAddCommand extends UndoableCommand {
         toAdd = lesson;
     }
 
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     */
-    private static Person createEditedPerson(Person personToEdit, Lesson toAdd) {
-        assert personToEdit != null;
-
-        Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
-        lessons.add(toAdd);
-
-        return PersonUtil.createdEditedPerson(personToEdit, lessons);
-    }
-
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-        if (model.hasClashingLesson(toAdd)) {
-            throw new CommandException(MESSAGE_CLASHING_LESSON);
-        }
-        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
-        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
+        personBeforeLessonAdd = CommandUtil.getPerson(lastShownList, index);
+        Set<Lesson> lessons = personBeforeLessonAdd.getLessons();
+        Set<Lesson> updatedLessons = createUpdatedLessons(lessons, toAdd);
+        personAfterLessonAdd = PersonUtil.createdEditedPerson(personBeforeLessonAdd, updatedLessons);
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, personAfterLessonAdd.getName(), toAdd),
                 personAfterLessonAdd);
+    }
+
+    /**
+     * Adds specified {@code Lesson} to the lessons for this person.
+     *
+     * @param lessons A list of lessons to update.
+     * @param toAdd The lesson to add.
+     * @return A set of updated lessons with the lesson added.
+     * @throws CommandException If the added lesson results in a clash.
+     */
+    private Set<Lesson> createUpdatedLessons(Set<Lesson> lessons, Lesson toAdd)
+            throws CommandException {
+        if (model.hasClashingLesson(toAdd)) {
+            throw new CommandException(MESSAGE_CLASHING_LESSON);
+        }
+
+        // Check date ranges
+        if (toAdd.getStartDate().isAfter(toAdd.getEndDate())) {
+            throw new CommandException(MESSAGE_INVALID_DATE_RANGE);
+        }
+
+        Set<Lesson> updatedLessons = new TreeSet<>(lessons);
+        updatedLessons.add(toAdd);
+        return updatedLessons;
     }
 
     @Override

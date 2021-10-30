@@ -3,31 +3,30 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
 
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for LessonDeleteCommand.
+ * Deletes a lesson from a person identified using their respective displayed index from the address book.
  */
-
 public class LessonDeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Delete Lesson";
 
     public static final String COMMAND_WORD = "ldelete";
 
-    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
-            + "LESSON_INDEX (must be a positive integer)";
+    public static final String COMMAND_PARAMETERS = "INDEX "
+            + "LESSON_INDEX";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
@@ -60,21 +59,13 @@ public class LessonDeleteCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
+        personBeforeLessonDelete = CommandUtil.getPerson(lastShownList, index);
 
-        personBeforeLessonDelete = lastShownList.get(index.getZeroBased());
+        List<Lesson> lessonList = new ArrayList<>(personBeforeLessonDelete.getLessons());
+        Lesson toRemove = CommandUtil.getLesson(lessonList, lessonIndex);
 
-        Set<Lesson> lessons = new TreeSet<>(personBeforeLessonDelete.getLessons());
-        if (lessonIndex.getZeroBased() >= lessons.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
-        List<Lesson> lessonList = lessons.stream().collect(Collectors.toList());
-        Lesson toRemove = lessonList.get(lessonIndex.getZeroBased());
-
-        personAfterLessonDelete = createEditedPerson(personBeforeLessonDelete, lessonList, toRemove);
+        Set<Lesson> updatedLessons = createUpdatedLessons(lessonList, toRemove);
+        personAfterLessonDelete = PersonUtil.createdEditedPerson(personBeforeLessonDelete, updatedLessons);
 
         model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -83,16 +74,18 @@ public class LessonDeleteCommand extends UndoableCommand {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * Removes specified {@code Lesson} from the updatedLessons for this person.
+     * Removes specified {@code Lesson} from the lesson list.
+     *
+     * @param lessonList The list of lessons.
+     * @param toRemove The lesson to remove from the list.
+     * @return An updated lesson set.
      */
-    private static Person createEditedPerson(Person personToEdit, List<Lesson> updatedLessons, Lesson toRemove) {
-        assert personToEdit != null;
+    private Set<Lesson> createUpdatedLessons(List<Lesson> lessonList, Lesson toRemove) {
+        assert lessonList != null;
 
-        updatedLessons.remove(toRemove);
-        TreeSet<Lesson> updatedLessonSet = new TreeSet<>(updatedLessons);
-
-        return PersonUtil.createdEditedPerson(personToEdit, updatedLessonSet);
+        lessonList.remove(toRemove);
+        TreeSet<Lesson> updatedLessonSet = new TreeSet<>(lessonList);
+        return updatedLessonSet;
     }
 
     @Override

@@ -4,18 +4,22 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -139,6 +143,24 @@ public class ModelManager implements Model {
         return addressBook.getCalendar();
     }
 
+    @Override
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return addressBook.getUpcomingLessons();
+    }
+
+    /**
+     * Returns an unmodifiable view of the observable tag list.
+     */
+    @Override
+    public ObservableList<Tag> getObservableTagList() {
+        return addressBook.getTagList();
+    }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return addressBook.getTagCounter();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -154,6 +176,23 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Last Updated Accessors =============================================================
+
+    @Override
+    public LastUpdatedDate getLastUpdatedDate() {
+        return addressBook.getLastUpdatedDate();
+    }
+
+    @Override
+    public void setLastUpdatedDate() {
+        addressBook.setLastUpdatedDate(new LastUpdatedDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressBook, userPrefs, filteredPersons);
     }
 
     @Override
