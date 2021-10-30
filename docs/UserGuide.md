@@ -33,16 +33,16 @@ feel free to skip to the [command summary](#command-summary) and experiment with
     * [Adding a student : `add student`](#adding-a-student--add-student)
     * [Creating a new group : `add group`](#creating-a-new-group--add-group)
     * [Adding a student into a group : `add alloc`](#adding-a-student-into-a-group--add-alloc)
-    * [Adding an assessment : `add assessment`](#adding-an-assessment--add-assessment)
+    * [Creating a new assessment : `add assessment`](#creating-a-new-assessment--add-assessment)
     * [Adding a score : `add score`](#adding-a-score--add-score)
   * Searching Data
     * [Listing all students : `list`](#listing-all-students--list)
     * [Searching for students : `search`](#searching-for-students--search)
+  * Analysing Data
+    * [Showing assessment result analysis : `show`](#showing-assessment-result-analysis--show)
   * Editing Data
     * [Editing a student : `edit`](#editing-a-student--edit)
     * [Deleting a student : `delete`](#deleting-a-student--delete)
-  * Analysing Data
-    * [Showing assessment result analysis : `show`](#showing-assessment-result-analysis--show)
   * Import and Export
     * [Importing data : `import`](#importing-data--import)
     * [Exporting data : `export`](#exporting-data--export)
@@ -130,26 +130,6 @@ feel free to skip to the [command summary](#command-summary) and experiment with
 [Return to table of contents](#table-of-contents)
 
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-[Return to table of contents](#table-of-contents)
-
-
-### Listing all students : `list`
-
-Displays a list of all students in the student list.
-
-Format: `list`
-
-[Return to table of contents](#table-of-contents)
-
-
 ### Adding a student : `add student`
 
 Adds a student into the database.
@@ -207,9 +187,9 @@ Examples:
 [Return to table of contents](#table-of-contents)
 
 
-### Adding an assessment : `add assessment`
+### Creating a new assessment : `add assessment`
 
-Adds a new assessment into the database.
+Creates a new assessment in the database.
 
 Format: `add assessment -a <assessment_name>`
 * Assessment should not already exist in database.
@@ -237,6 +217,15 @@ Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s
 Examples:
 * `add score -a Midterm -n Van Nhi -s 95` records score for `Van Nhi` in `Midterm` to be `95` percent.
 * `add score -a P01 -i E0123456 -s 75.25` records score for NUSNET ID `E0123456` in `P01` to be `75.25` percent.
+
+[Return to table of contents](#table-of-contents)
+
+
+### Listing all students : `list`
+
+Displays a list of all students in the student list.
+
+Format: `list`
 
 [Return to table of contents](#table-of-contents)
 
@@ -412,6 +401,16 @@ Format: `exit`
 
 [Return to table of contents](#table-of-contents)
 
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+[Return to table of contents](#table-of-contents)
+
 ### Accessing command history
 
 Using the up and down arrow keys on the keyboard retrieves past command lines entered. 
@@ -460,7 +459,7 @@ If your changes to the data file makes its format invalid, Source Control will d
 
 ## FAQ
 
-### Double clicking isn't opening the app! What can I do?
+### Double-clicking isn't opening the app! What can I do?
 Open your Command Prompt (Windows) or your Terminal (MacOS, Linux) and navigate to the folder your JAR file resides in.
 
 Run the JAR file by using the command `java -jar sourceControl.jar`.
@@ -505,6 +504,8 @@ In `import` command, `-g`, `-a`, `-t` are used differently from other commands. 
 Import command description.
 </div>
 
+[Return to table of contents](#table-of-contents)
+
 <br>
 
 Below is a table of the restrictions of data fields used in our application.
@@ -518,6 +519,7 @@ Assessment | Assessment name can be any alphanumeric words. | `Practical Assessm
 Score | Score is in percentage, recorded up to 2 decimal places. | `67.75`
 Tag | Tag can be a single alphanumeric word. | `Beginner1`
 
+[Return to table of contents](#table-of-contents)
 <br>
 
 Below is a table explaining some terms used in this document.
@@ -533,7 +535,6 @@ Java | a computing platform for application development. Source Control runs on 
 JSON | JavaScript Object Notation (JSON) is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
 [Return to table of contents](#table-of-contents)
-
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
