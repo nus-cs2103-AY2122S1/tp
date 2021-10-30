@@ -43,11 +43,11 @@ Staff’d helps food & beverage managers manage details and schedules of their s
   
 1. Joe has a flu and is now unable to work on the next monday which is on 25th October 2021.
 
-1. Mark Joe as absent with the `mark` command. <br> `mark -n Joe d/2021-10-25`
+1. Mark Joe as absent with the `mark` command. <br> `mark -n Joe da/2021-10-25`
 
 1. Joe has recovered faster than expected and is able to work on monday.
 
-1. Remove the mark from Joe with the `unmark` command. <br> `unmark -n Joe d/2021-10-25`
+1. Remove the mark from Joe with the `unmark` command. <br> `unmark -n Joe da/2021-10-25`
 
 1. On the first day of work, Joe has caused 10 customers food poisoning and is fired.
 
@@ -225,17 +225,17 @@ Format:
 
 Marking a period:  
 
-`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`  
+`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`  
 
 
 Possible to mark a single date:
 
-`mark -t TAG d/DATE`  
-`mark -n NAME d/DATE`
+`mark -t TAG da/DATE`  
+`mark -n NAME da/DATE`
 
 Examples:  
-`mark -i 1 d/2020-01-03 d/2021-01-03`  
-`mark -n Alex Yeoh d/2020-01-03`
+`mark -i 1 da/2020-01-03 da/2021-01-03`  
+`mark -n Alex Yeoh da/2020-01-03`
 
 
 #### Removing the absent mark : `unmark`
@@ -245,11 +245,11 @@ Removes the period that was marked by the `mark` command.
 The format of the input date is in: `YYYY-MM-DD`.
 
 Format:  
-`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
+`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`
 
 Examples:  
-`unmark -i 1 d/2020-01-03 d/2021-01-03`  
-`unmark -t friends d/2020-01-03`
+`unmark -i 1 da/2020-01-03 da/2021-01-03`  
+`unmark -t friends da/2020-01-03`
 
 #### Deleting a Staff : `delete`
 
