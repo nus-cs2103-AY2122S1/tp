@@ -38,8 +38,10 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList, Summary summary) {
         super(FXML);
         this.personList = personList;
-        selected.updateSummary(summary);
+
         setSelectedPersonPanel();
+        selected.updateSummary(summary);
+        selected.setSummary();
         selectedPersonPanelPlaceholder.setContent(selected.getRoot());
         updateDetailsIfChanged(personList);
         personListView.setItems(personList);

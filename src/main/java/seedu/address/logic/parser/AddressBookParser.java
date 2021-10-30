@@ -74,7 +74,10 @@ public class AddressBookParser {
             return new SortCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            if (arguments.equals("")) {
+                return new ListCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -86,7 +89,10 @@ public class AddressBookParser {
             return new ExportCommandParser().parse(arguments);
 
         case SummaryCommand.COMMAND_WORD:
-            return new SummaryCommand();
+            if (arguments.equals("")) {
+                return new SummaryCommand();
+            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE));
 
         case CmdCommand.COMMAND_WORD:
             return new CmdCommand();

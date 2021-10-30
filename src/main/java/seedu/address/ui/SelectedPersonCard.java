@@ -90,7 +90,7 @@ public class SelectedPersonCard extends UiPart<Region> {
      */
     public void setPersonDetails() {
         if (person == null) {
-            setSummary();
+
         } else {
             setPersonVisible();
             category.setText("Category: " + person.getCategoryCode().getFullCode());

@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.CategoryCode;
 import seedu.address.model.person.IsFilterablePredicate;
 import seedu.address.model.person.Rating;
+import seedu.address.model.summary.Summary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,8 +50,10 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        Summary summary = new Summary(model.getAddressBook());
         return new CommandResult(
-                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                        model.getFilteredPersonList().size()), summary);
     }
 
     @Override

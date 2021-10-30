@@ -30,7 +30,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommandName() {
-        assertParseSuccess(parser, "Alice Pauline", new DeleteCommandName(ALICE.getName()));
+        assertParseSuccess(parser, " n/  Alice Pauline", new DeleteCommandName(ALICE.getName()));
     }
 
     @Test
