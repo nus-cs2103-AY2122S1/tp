@@ -54,7 +54,9 @@ public class ClientContainsKeywordsPredicate implements Predicate<Client> {
                 .map(Tag::getName)
                 .map(tagName -> (Function<String, Boolean>) x -> containsStringIgnoreCase(tagName, x))
                 .map(f -> keywords.getValue(PREFIX_TAG).map(f))
-                .anyMatch(o -> o.orElse(true));
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .reduce(true, Boolean::logicalOr);
 
         return checkGeneral && checkAttributes && checkTags;
     }
