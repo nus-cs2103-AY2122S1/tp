@@ -86,6 +86,7 @@ public class EditCommand extends UndoableCommand {
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+        super(COMMAND_ACTION);
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 

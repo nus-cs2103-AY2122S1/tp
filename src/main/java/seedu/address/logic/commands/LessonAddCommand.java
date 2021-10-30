@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -84,6 +83,7 @@ public class LessonAddCommand extends UndoableCommand {
      * Creates a LessonAddCommand to add the specified {@code Lesson}
      */
     public LessonAddCommand(Index index, Lesson lesson) {
+        super(COMMAND_ACTION);
         requireNonNull(lesson);
         this.index = index;
         toAdd = lesson;

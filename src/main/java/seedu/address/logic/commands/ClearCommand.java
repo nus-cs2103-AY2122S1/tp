@@ -21,6 +21,10 @@ public class ClearCommand extends UndoableCommand {
 
     private ReadOnlyAddressBook previousAddressBook;
 
+    public ClearCommand() {
+        super(COMMAND_ACTION);
+    }
+
     @Override
     public CommandResult executeUndoableCommand() {
         requireNonNull(model);

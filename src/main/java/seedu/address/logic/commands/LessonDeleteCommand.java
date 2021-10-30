@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,8 @@ public class LessonDeleteCommand extends UndoableCommand {
      * @param index of the person in the filtered person list to delete lesson from
      */
     public LessonDeleteCommand(Index index, Index lessonIndex) {
+        super(COMMAND_ACTION);
+
         requireNonNull(index);
         requireNonNull(lessonIndex);
         this.index = index;

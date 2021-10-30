@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +64,7 @@ public class PaidCommand extends UndoableCommand {
      * @param payment amount to the lesson.
      */
     public PaidCommand(Index index, Index indexToEdit, Money payment) {
+        super(COMMAND_ACTION);
         requireAllNonNull(index, indexToEdit, payment);
 
         this.index = index;

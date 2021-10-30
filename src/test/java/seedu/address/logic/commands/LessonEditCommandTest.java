@@ -163,7 +163,7 @@ class LessonEditCommandTest {
                 formerLesson, editedLesson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+        expectedModel.setPerson(expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
                 personAfterLessonEdit);
 
         assertCommandSuccess(lessonEditCommand, model, expectedMessage, expectedModel);

@@ -14,7 +14,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Undoes the last Command that modified TAB data. \n";
 
-    public static final String MESSAGE_SUCCESS = "Undo success!";
+    public static final String MESSAGE_SUCCESS = "%1$s command for %2$s has been undone.";
     public static final String MESSAGE_FAILURE = "No commands to undo!";
 
     @Override
@@ -24,8 +24,19 @@ public class UndoCommand extends Command {
         if (!undoRedoStack.canUndo()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        Person studentModified = undoRedoStack.popUndo().undo();
-        return new CommandResult(MESSAGE_SUCCESS, studentModified);
+
+        UndoableCommand commandToUndo = undoRedoStack.popUndo();
+
+        Person studentModified = commandToUndo.undo();
+
+        if (commandToUndo.commandType.equals(ClearCommand.COMMAND_ACTION)
+                || commandToUndo.commandType.equals(AddCommand.COMMAND_ACTION)) {
+            String successMessage = commandToUndo.commandType + " command has been undone.";
+            return new CommandResult(successMessage);
+        }
+
+        String successMessage = String.format(MESSAGE_SUCCESS, commandToUndo.commandType, studentModified.getName());
+        return new CommandResult(successMessage, studentModified);
     }
 
     @Override

@@ -202,6 +202,9 @@ class UndoRedoStackTest {
     }
 
     private class DummyUndoableCommand extends UndoableCommand {
+        private DummyUndoableCommand() {
+            super("Dummy");
+        }
         @Override
         public CommandResult executeUndoableCommand() {
             return new CommandResult("");

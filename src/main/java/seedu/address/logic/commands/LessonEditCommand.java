@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -101,6 +100,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param lessonIndex to edit.
      */
     public LessonEditCommand(Index index, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
+        super(COMMAND_ACTION);
         requireNonNull(index);
         requireNonNull(lessonIndex);
 
@@ -115,8 +115,6 @@ public class LessonEditCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         personBeforeLessonEdit = CommandUtil.getPerson(lastShownList, index);
-
-        index = setToDefinitiveIndex(personBeforeLessonEdit);
 
         List<Lesson> lessonList = personBeforeLessonEdit.getLessons().stream().sorted().collect(Collectors.toList());
         Lesson lessonToEdit = CommandUtil.getLesson(lessonList, lessonIndex);

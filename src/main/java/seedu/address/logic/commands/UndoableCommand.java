@@ -16,6 +16,11 @@ import seedu.address.model.person.Person;
 public abstract class UndoableCommand extends Command {
     public static final String MESSAGE_FAILURE = "The command has been successfully executed previously; "
             + "it should not fail now.";
+    public final String commandType;
+
+    protected UndoableCommand(String commandType) {
+        this.commandType = commandType;
+    }
 
     protected abstract CommandResult executeUndoableCommand() throws CommandException;
 

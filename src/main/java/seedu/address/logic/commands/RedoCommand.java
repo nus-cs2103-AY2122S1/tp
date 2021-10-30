@@ -12,7 +12,7 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Redoes the last Command that has been undone. \n";
 
-    public static final String MESSAGE_SUCCESS = "Redo success!";
+    public static final String MESSAGE_SUCCESS = "%1$s command for %2$s has been redone.";
     public static final String MESSAGE_FAILURE = "No commands to redo!";
 
     @Override
@@ -23,8 +23,17 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        Person studentModified = undoRedoStack.popRedo().redo();
-        return new CommandResult(MESSAGE_SUCCESS, studentModified);
+        UndoableCommand commandToRedo = undoRedoStack.popRedo();
+        Person studentModified = commandToRedo.redo();
+
+        if (commandToRedo.commandType.equals(ClearCommand.COMMAND_ACTION)
+                || commandToRedo.commandType.equals(DeleteCommand.COMMAND_ACTION)) {
+            String successMessage = commandToRedo.commandType + " command has been redone.";
+            return new CommandResult(successMessage);
+        }
+
+        String successMessage = String.format(MESSAGE_SUCCESS, commandToRedo.commandType, studentModified.getName());
+        return new CommandResult(successMessage, studentModified);
     }
 
     @Override

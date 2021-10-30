@@ -72,7 +72,9 @@ public class AddCommand extends UndoableCommand {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Person person) {
+        super(COMMAND_ACTION);
         requireNonNull(person);
+
         toAdd = person;
     }
 

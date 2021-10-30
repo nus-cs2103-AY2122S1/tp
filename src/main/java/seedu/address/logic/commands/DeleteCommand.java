@@ -39,7 +39,11 @@ public class DeleteCommand extends UndoableCommand {
 
     private Person deletedPerson;
 
+    /**
+     * Constructs a Delete Command.
+     */
     public DeleteCommand(Index targetIndex) {
+        super(COMMAND_ACTION);
         this.targetIndex = targetIndex;
     }
 

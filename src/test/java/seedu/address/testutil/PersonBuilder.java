@@ -31,7 +31,6 @@ public class PersonBuilder {
     public static final String DEFAULT_SCHOOL = "";
     public static final String DEFAULT_ACAD_STREAM = "";
     public static final String DEFAULT_ACAD_LEVEL = "";
-    public static final String DEFAULT_FEE = "";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
