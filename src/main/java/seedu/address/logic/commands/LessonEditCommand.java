@@ -131,7 +131,6 @@ public class LessonEditCommand extends UndoableCommand {
         personAfterLessonEdit = PersonUtil.createdEditedPerson(personBeforeLessonEdit, updatedLessons);
 
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
                 String.format(MESSAGE_EDIT_LESSON_SUCCESS, personAfterLessonEdit.getName(), lessonToEdit, editedLesson),
                 personAfterLessonEdit);

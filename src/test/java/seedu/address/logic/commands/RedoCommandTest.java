@@ -30,7 +30,6 @@ import seedu.address.testutil.PersonBuilder;
 
 class RedoCommandTest {
     private static final Model DEFAULT_MODEL = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final DummyCommand dummyCommand = new DummyCommand();
     private final DummyUndoableCommand dummyUndoableCommandOne = new DummyUndoableCommand();
     private final DummyUndoableCommand dummyUndoableCommandTwo = new DummyUndoableCommand();
 

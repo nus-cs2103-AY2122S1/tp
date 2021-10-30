@@ -95,7 +95,6 @@ public class PaidCommand extends UndoableCommand {
         personAfterLessonPaid = createEditedPerson(personBeforeLessonPaid, toPay, paidLesson);
 
         model.setPerson(personBeforeLessonPaid, personAfterLessonPaid);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_PAID_LESSON_SUCCESS, personAfterLessonPaid.getName(),
                 toPay, paidLesson), personAfterLessonPaid);
     }
