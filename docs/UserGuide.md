@@ -167,6 +167,10 @@ Edits an existing client in the application.
 
 Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+Do not forget to edit the body measurements when you modify the client's gender.
+</div>
+
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -374,9 +378,9 @@ Format: `sortorders f/FIELD o/ORDERING`
   * Ascending, identified with an "asc" or "ascending".
   * Descending, identified with a "desc" or "descending".
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
-**:information_source: Note:** <br>
+**:information_source: Note:**<br>
 
 * Adding / Deleting an order reverts the list to the default ordering.
 * The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
