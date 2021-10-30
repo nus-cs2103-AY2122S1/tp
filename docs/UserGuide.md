@@ -71,12 +71,22 @@ Elderly | A person in SeniorLove
 Attribute | Data that is assigned to an elderly
 Visit | A visit from a social worker to an elderly
 
+
 ### Structure of an elderly contact
 
 Category        | Specific flags | Details | Valid inputs | Requirement
 ----------------|-----------------|------------|----------|-----------------
-Elderly personal attributes | 1. `n/`: Name <br><br> 2. `p/`: Phone number <br><br> 3. `l/`: Language <br><br> 4. `a/`: Address | 1. Elderly's name <br><br> 2. Elderly's contact number <br><br> 3. Elderly's preferred language 4. Elderly's residential address | 1. Alphanumeric characters and spaces <br><br> 2. 8 digits, local (No country codes) <br><br> 3. Any string <br><br> 4. Any string | Compulsory
-Elderly visit attributes | 1. `v/`: Visit <br><br> 2. `lv`: Last visit <br><br> 3. `f/`: Frequency <br><br> 4. `o/`: Occurrence | 1. Elderly's next visit <br><br> 2. Last time elderly was visited <br><br> 3. Frequency at which elderly is being visited (if recurring) 4. Number of times elderly has to be visited (if recurring) | 1. Datetime formatted as `yyyy-MM-dd` <br><br> 2. Datetime formatted as `yyyy-MM-dd` <br><br> 3. One of the following enumerations: `Daily`, `Weekly`, `Biweekly`, `Monthly`, `Quarterly` <br><br> 4. Strictly positive integer | Optional
+Elderly personal attributes | 1. `n/`: Name <br><br> 2. `p/`: Phone number <br><br> 3. `l/`: Language <br><br> 4. `a/`: Address | 1. Elderly's name <br><br> 2. Elderly's contact number <br><br> 3. Elderly's preferred language <br><br> 4. Elderly's residential address | 1. Alphanumeric characters and spaces <br><br> 2. 8 digits, local (No country codes) <br><br> 3. Any string <br><br> 4. Any string | Compulsory
+Elderly visit attributes | 1. `v/`: Visit <br><br> 2. `lv`: Last visit <br><br> 3. `f/`: Frequency <br><br> 4. `o/`: Occurrence | 1. Elderly's next visit <br><br> 2. Last time elderly was visited <br><br> 3. Frequency at which elderly is being visited (if recurring) <br><br> 4. Number of times elderly has to be visited (if recurring) | 1. Datetime formatted as `yyyy-MM-dd` <br><br> 2. Datetime formatted as `yyyy-MM-dd` <br><br> 3. One of the following enumerations: `Daily`, `Weekly`, `Biweekly`, `Monthly`, `Quarterly` <br><br> 4. Strictly positive integer | Optional
+
+### Definition of Date Range
+
+Date Range | Meaning
+----------------|-----------------
+Weekly | Every 7 days
+Biweekly | Every 14 days
+Monthly | Every 30 days
+Quarterly | Every 90 days
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
