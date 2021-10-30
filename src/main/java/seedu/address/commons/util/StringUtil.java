@@ -2,13 +2,10 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Helper functions for handling strings.
