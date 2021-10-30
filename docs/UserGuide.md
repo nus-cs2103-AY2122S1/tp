@@ -223,7 +223,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
   e.g. entering just `edit 2` alone is not a valid command. You need to include the field you wish to edit.
 
 * Existing values will be updated to the entered values.<br>
-  e.g. `edit 2 f/0` will override the outstanding fees of the 2nd student in the displayed list to `0`.
+  e.g. `edit 2 pp/81234567` will override the parent phone of the 2nd student in the displayed list to `81234567`.
 
 * When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
   e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
@@ -367,6 +367,8 @@ An optional field for both types of lesson is:
 Optional fields for a **recurring** lesson is:
 * End date
 * Cancelled dates
+
+TAB helps to prevent scheduling mistakes like having two lessons at the same time by ensuring that lessons never overlap.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -565,7 +567,7 @@ the fees of these lessons will not be deducted for you. Same for shifting start 
 
 <div style="page-break-after: always;"></div>
 
-### Viewing your Calendar
+### Managing Your Schedule
 
 This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
 
