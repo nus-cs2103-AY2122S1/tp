@@ -8,8 +8,8 @@ import static java.util.Objects.requireNonNull;
  *  Guarantees: immutable; is always valid
  */
 public class Remark {
-    public static final int MAX_LENGTH_REMARK = 75;
-    public static final String MESSAGE_CONSTRAINTS = "Remarks have a character limit of 75 characters.";
+    public static final int MAX_LENGTH_REMARK = 60;
+    public static final String MESSAGE_CONSTRAINTS = "Remarks have a character limit of 60 characters.";
 
     public final String value;
 
