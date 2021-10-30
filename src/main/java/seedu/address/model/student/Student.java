@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -169,8 +170,13 @@ public class Student implements Nameable {
             return true;
         }
 
-        return otherStudent != null
-                && otherStudent.getName().equals(getName());
+        if (otherStudent == null || !(otherStudent instanceof Student)) {
+            return false;
+        }
+
+        String thisName = this.getNameString().trim().replaceAll(" +", " ").toLowerCase();
+        String otherName = otherStudent.getNameString().trim().replaceAll(" +", " ").toLowerCase();
+        return thisName.equals(otherName);
     }
 
     public Student getSameNameStudent(Student otherStudent) {
