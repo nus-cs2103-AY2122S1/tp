@@ -13,10 +13,11 @@ A contact management desktop application which aims to facilitate community work
 ![Ui](docs/images/Ui.png)
 
 ## How to use
-User Guide can be found [here](docs/UserGuide.md) and Developer Guide can be found [here](docs/DeveloperGuide.md).
+User Guide can be found [here](https://ay2122s1-cs2103-t14-1.github.io/tp/UserGuide.html).
+Developer Guide can be found [here](https://ay2122s1-cs2103-t14-1.github.io/tp/DeveloperGuide.html).
 
 ## About us
-We are a group of Computer Science students who loves software engineering. More details can be found [here](docs/AboutUs.md).
+We are a group of Computer Science students who loves software engineering. More details can be found [here](https://ay2122s1-cs2103-t14-1.github.io/tp/AboutUs.html).
 
 ## Credit
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). For the detailed documentation of the original project, see the [Address Book Product Website](https://se-education.org/addressbook-level3).
