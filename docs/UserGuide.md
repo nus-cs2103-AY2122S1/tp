@@ -165,7 +165,7 @@ Examples:
 
 Edits an existing client in the application.
 
-Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -460,7 +460,7 @@ Action | Format, Examples
 **ListClient** | `list`
 **AddClient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
 **DeleteClient** | `delete INDEX`<br> e.g., `delete 3`
-**EditClient** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**EditClient** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **FindClients** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
 ### Task Commands
@@ -470,7 +470,7 @@ Action | Format, Examples
 **ListTasks** | `listtask`
 **AddTask** | `addtask l/LABEL d/DATE [t/TASKTAG]` e.g., `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1`
 **DeleteTask** | `deletetask INDEX` e.g., `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
+**EditTask** | `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]` e.g., `edittask 1 l/order cloth d/19 September 2021 t/General`
 **MarkTask** | `marktask INDEX` e.g., `marktask 2`
 **FindTasks** | `findtask KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtask buttons`
 **CompletedTasks** | `completedtasks`
