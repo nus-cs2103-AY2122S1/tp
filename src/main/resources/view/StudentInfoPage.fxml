@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="studentPagePane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="studentPagePane" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="name" styleClass="cell_big_label" text="Name" />
+      <Label fx:id="name" styleClass="cell_big_label" text="Name" wrapText="true" />
       <FlowPane fx:id="tags">
          <VBox.margin>
             <Insets bottom="5.0" top="5.0" />
@@ -18,8 +18,8 @@
       </FlowPane>
       <GridPane centerShape="false" gridLinesVisible="true" scaleShape="false" style="-fx-background-color: #303030;" VBox.vgrow="NEVER">
          <columnConstraints>
-            <ColumnConstraints fillWidth="false" hgrow="NEVER" />
-            <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints fillHeight="false" vgrow="ALWAYS" />
@@ -28,12 +28,12 @@
             <RowConstraints fillHeight="false" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
-            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Phone Number:">
+            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Phone Number:" wrapText="true">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="phone" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="phone number" GridPane.columnIndex="1">
+            <Label fx:id="phone" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="phone number" wrapText="true" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
@@ -43,7 +43,7 @@
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="address" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="address" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="address" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="address" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
@@ -53,7 +53,7 @@
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="email" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="email" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="email" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="email" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
@@ -63,7 +63,7 @@
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="remark" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="remark" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="remark" alignment="TOP_LEFT" centerShape="false" styleClass="cell_small_label" text="remark" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>

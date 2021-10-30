@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.ScrollPane?>
-<ScrollPane stylesheets="Timetable.css" fx:id="scrollPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
-<AnchorPane stylesheets="Timetable.css" maxHeight="400.0" maxWidth="600.0">
-   <children>
-      <GridPane fx:id="timetableShown" stylesheets="Timetable.css" layoutX="-1.0" layoutY="-1.0" maxHeight="400.0" maxWidth="600.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      </GridPane>
-</children>
-</AnchorPane>
-</ScrollPane>
 
+
+<GridPane fx:id="timetableShown" maxHeight="400.0" maxWidth="600.0" style="-fx-background-color: white;" stylesheets="Timetable.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+      </GridPane>

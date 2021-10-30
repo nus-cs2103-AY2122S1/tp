@@ -3,10 +3,8 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -25,14 +23,12 @@ public class TimetableInfoPage extends InfoPage {
     private static final String PANE_NO_BORDER = "-fx-border-width:0px;";
     private static final Logger logger = LogsCenter.getLogger(TimetableInfoPage.class);
     private static final String[] days = convertDays();
+
     private final int numCols = 8;
     private Timetable timetable;
 
     @FXML
     private GridPane timetableShown;
-
-    @FXML
-    private ScrollPane scrollPane;
 
     /**
      * Displays a timetable on screen to user.
@@ -43,8 +39,6 @@ public class TimetableInfoPage extends InfoPage {
     public TimetableInfoPage(ObservableList<TuitionClass> tuitionClasses, ResultDisplay resultDisplay) {
         super(FXML);
         logger.info("Starting construction of timetable.");
-        scrollPane.setStyle(" -fx-background:dark; -fx-border-color:dark;");
-        scrollPane.setPadding(new Insets(0, 0, 0, 20));
         this.timetable = new Timetable(tuitionClasses, resultDisplay, this);
         setTableDay();
         timetable.showTimetable();

@@ -140,7 +140,7 @@ public class TuitionClass implements Nameable {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Class: ")
+        builder.append("Name: ")
                 .append(getName())
                 .append("; Limit: ")
                 .append(getLimit())
