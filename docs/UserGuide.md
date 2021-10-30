@@ -151,6 +151,9 @@ The table below explains the general syntax used throughout the user guide.
 * Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
+* Extraneous parameters for commands that do take in parameters (such as `edit`) will be ignored.<br>
+  e.g. if the command specifies `edit -c 1 -a asdf -id 5`, the resulting address will be changed to `asdf -id 5`.
+
 #### 3.2.3 Defining Client and Product
 
 **Client** refers to the clients that have bought your products before. Each client must have a **Name** and a
@@ -162,7 +165,7 @@ An **Order** refers to a product that the client has ordered. For each order, th
 
 Parameter | Format |
 |:---:| --- |
-`-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alice Bob`.
+`-n` | Any valid name, only alphabets, numbers and spaces are allowed (applicable for Edit command only). <br> E.g.: `-n Alice Bob`.
 `-pn` | A series of 8 positive numbers from 0 to 9. <br> E.g.: `-pn 12345678`.
 `-e` | Any valid email. <br> E.g.: `-e abc@asdf.com`.
 `-a` | Any valid address, spaces are allowed. <br> E.g.: `-a 12 clementi road`.
@@ -174,7 +177,7 @@ in your inventory currently. Every product command requires a `-p` parameter.
 
 Parameter | Format |
 |:---:| --- |
-`-n` | Any valid name, only alphabets, numbers and spaces are allowed. <br> E.g.: `-n Alienware Aurora R12`.
+`-n` | Any valid name, only alphabets, numbers and spaces are allowed (applicable for Edit command only). <br> E.g.: `-n Alienware Aurora R12`.
 `-$` | A valid price, optional to specify the cents (2 decimal places). <br> E.g.: `-$ 10.00` and `-$ 10`.
 `-q` | Any positive integer to specify the quantity. <br> E.g.: `-q 15`.
 
@@ -379,7 +382,7 @@ Format : `view -c INDEX`
 Example : `view -c 20` Views all the details of the client with `INDEX` of `20`.
 
 Expected Output:
-![Ui](images/UIViewClientCommand.png)
+![Ui](images/UIViewCommand.png)
 
 #### 4.7.2 Viewing a Product
 
