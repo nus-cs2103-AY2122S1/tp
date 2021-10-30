@@ -379,7 +379,7 @@ Format : `view -c INDEX`
 Example : `view -c 20` Views all the details of the client with `INDEX` of `20`.
 
 Expected Output:
-![Ui](images/UIViewClientCommand.png)
+![Ui](images/UIViewCommand.png)
 
 #### 4.7.2 Viewing a Product
 
