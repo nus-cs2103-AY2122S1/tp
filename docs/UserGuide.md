@@ -483,8 +483,9 @@ You may save the date, time and venue of an appointment.
 ##### Adding an appointment: `aa`
 You can add a scheduled appointment with the client. An appointment includes a date, time and venue.
 This allows you to keep track of all your clients' appointment dates all within the same app.
-You can also [edit](#editing-an-appointment-ea), [delete](#deleting-an-appointment-da),
-or [mark as completed](#updating-completed-appointment-ma) an appointment.
+You can also [edit](#editing-an-appointment-ea), [delete](#deleting-an-appointment-da), 
+[mark as completed](#updating-completed-appointment-ma), or [undo marking of completed appointment](#undo-marking-of-completed-appointment-ua) 
+for an appointment.
 
 **Format**: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
@@ -516,7 +517,7 @@ The `DATE` of the appointment must at least be specified.
 
 ##### Editing an appointment: `ea`
 
-You can edit a scheduled [appointment](#appointments) with your client. 
+You can edit a scheduled appointment with your client. 
 This command is useful when your appointment has been rescheduled or has a change in location.
 
 **Format**: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
@@ -546,7 +547,7 @@ At least **one** of the optional fields must be present.
 
 ##### Deleting an appointment: `da`
 
-You can delete a scheduled [appointment](#appointments) with your client. 
+You can delete a scheduled appointment with your client. 
 This command should be used when the appointment has been cancelled with a client.
 
 **Format**: `da INDEX`
@@ -570,7 +571,7 @@ This CANNOT be undone!
 
 ##### Updating completed appointment: `ma`
 
-You can mark the appointment [appointment](#appointments) with your client as completed.
+You can mark the appointment with your client as completed.
 This also allows you to keep track of the number of completed appointments with your client.
 
 ![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
@@ -588,6 +589,38 @@ This also allows you to keep track of the number of completed appointments with 
 ![result for `done 1`](images/appointmentDone.PNG)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
+
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+If you have accidentally marked an appointment as completed, fret not! You can always undo it! 
+<br>Refer to [Undo marking of completed appointment](#undo-marking-of-completed-appointment-ua) for more information.
+</div>
+
+
+<br>
+
+##### Undo marking of completed appointment: `ua`
+
+You can unmark the appointment with your client as completed. <br>
+This also allows you to undo your mistake if you have accidentally marked an appointment as completed.
+
+**Format**: `ua INDEX`
+* Decreases the completed appointment count with the client at the specified `INDEX` if the appointment does not exist.
+* The current appointment count will have to be greater than 0!
+
+**Parameter**:
+* [`INDEX`](#index)
+
+**Examples**:
+
+Before undo:
+
+![FAST state before `ua 1`](images/UnmarkAppointmentBefore.png)
+
+* `ua 1` decreases the completed appointment counter of the first client by 1.
+
+![result for `ua 1`](images/UnmarkAppointmentAfter.png)
+* `find Matthew` followed by `ua 3` decreases the completed appointment counter of the third client in the result of
+  the `find` command by 1.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This CANNOT be undone!
@@ -862,6 +895,7 @@ Action | Format, Examples
 **Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br>
 **Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`<br>
 **Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
+**Undo Marked Appointment** | `ua INDEX` <br> e.g. `ua 1`
 
 ### Tag Management
 

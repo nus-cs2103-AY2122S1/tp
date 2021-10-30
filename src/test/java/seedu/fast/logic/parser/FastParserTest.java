@@ -36,6 +36,7 @@ import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.MarkAppointmentCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
+import seedu.fast.logic.commands.UnmarkAppointmentCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.NameContainsQueriesPredicate;
@@ -174,5 +175,14 @@ public class FastParserTest {
         MarkAppointmentCommand command = (MarkAppointmentCommand) parser.parseCommand(
                 MarkAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new MarkAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
+    }
+
+    @Test
+    public void parseCommand_unmarkAppointment() throws Exception {
+        final Appointment appt = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        UnmarkAppointmentCommand command = (UnmarkAppointmentCommand) parser.parseCommand(
+                UnmarkAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnmarkAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 }
