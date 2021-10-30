@@ -136,7 +136,7 @@ are all sample data! Here are some commands you can try to see what they do:
 
     
 1. Add a contact named "John Doe" to FAST
-   * `add n/John Doe`
+   * `add n/Matthew Shen p/91087657 e/matthew@example.com a/511 Seletar Road 12`
     
 2. Delete the 3rd contact in FAST
     * `del 3`
