@@ -40,6 +40,7 @@ public class FindTaskCommandParser implements ParserRequiringPersonList<FindTask
      *
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public FindTaskCommand parse(String args, ObservableList<Person> filteredPersonList) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -86,7 +87,8 @@ public class FindTaskCommandParser implements ParserRequiringPersonList<FindTask
         }
         if (personPresent) {
             if (argMultimap.getValue(PREFIX_PERSON).get().isEmpty()) {
-                throw new ParseException("Arguments cannot be empty");
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + "\n"
+                        + FindTaskCommand.MESSAGE_USAGE);
             }
             try {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
@@ -103,7 +105,7 @@ public class FindTaskCommandParser implements ParserRequiringPersonList<FindTask
                 for (Index i : personIndices) {
                     if (i.getZeroBased() < 0 || i.getZeroBased() >= filteredPersonList.size()) {
                         throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n"
-                                + AssignPeopleCommand.MESSAGE_USAGE);
+                                + FindTaskCommand.MESSAGE_USAGE);
                     }
                     Person person = (filteredPersonList.get(i.getZeroBased()));
                     peopleNames.add(person.getName().fullName);
