@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.ModuleTracker;

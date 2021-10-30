@@ -116,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList(), logic.getUserInfo());
         moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
 
-        if(resultDisplay == null) {
+        if (resultDisplay == null) {
             resultDisplay = new ResultDisplay();
             resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         }

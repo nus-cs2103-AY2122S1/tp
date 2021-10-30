@@ -6,7 +6,6 @@ import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
@@ -53,7 +52,7 @@ public class ClearCommand extends Command {
         model.updateFilteredModuleList(predicate);
         ObservableList<Module> filteredList = model.getFilteredModuleList();
         List<Module> list = new ArrayList<>();
-        for(int i=0; i<filteredList.size(); i++) {
+        for (int i = 0; i < filteredList.size(); i++) {
             list.add(filteredList.get(i));
         }
         for (Module module : list) {
