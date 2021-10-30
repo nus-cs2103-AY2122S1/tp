@@ -31,17 +31,17 @@ public class FindTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose description contain all of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters Type 1 (description search): KEYWORD\n"
-            + "Parameters Type 2: "
-            + "[" + CliSyntax.PREFIX_TASK_DESCRIPTION + "DESCRIPTION]\n"
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]... (at least 1)\n"
-            + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE]\n"
-            + "[" + CliSyntax.PREFIX_TASK_DATE + "TIME]\n"
-            + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE, TIME]\n"
-            + "[" + CliSyntax.PREFIX_PERSON + "PERSON]\n"
+            + "Parameters Type 1 (find by description): DESCRIPTION\n"
+            + "Parameters Type 2 (find by field): "
+            + "[" + CliSyntax.PREFIX_TASK_DESCRIPTION + "DESCRIPTION] "
+            + "[" + CliSyntax.PREFIX_TAG + "TAG]... (at least 1) "
+            + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE] "
+            + "[" + CliSyntax.PREFIX_TASK_DATE + "TIME] "
+            + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE, TIME] "
+            + "[" + CliSyntax.PREFIX_PERSON + "PERSON] "
             + "[" + CliSyntax.PREFIX_COMPLETION_STATUS + "TRUE/FALSE]\n"
             + "Example 1: " + COMMAND_WORD + " CS2103T Homework\n"
-            + "Example 2: " + COMMAND_WORD + " [" + CliSyntax.PREFIX_TAG + "] " + " Groupwork\n";
+            + "Example 2: " + COMMAND_WORD + " " + CliSyntax.PREFIX_TAG + "Groupwork\n";
 
     private final FindTaskDescriptor findTaskDescriptor;
     private final Predicate<Task> predicate;
