@@ -374,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
 | `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
 | `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many patients to manage| sort doctors by name      | locate a doctor easily                                                |
+| `* *`    | clinic receptionist with many doctors to manage| sort doctors by name      | locate a doctor easily                                                |
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
 | `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
@@ -384,7 +384,7 @@ These are some use cases to familiarise with the flow of our application:
 
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
-**Use case: Add a patient/doctor**
+**Use case: Adding a patient/doctor**
 
 **MSS**
 
@@ -407,7 +407,7 @@ These are some use cases to familiarise with the flow of our application:
 
     Use case resumes at step 1.
 
-**Use case: Delete a patient/doctor**
+**Use case: Deleting a patient/doctor**
 
 **MSS**
 
@@ -455,7 +455,7 @@ These are some use cases to familiarise with the flow of our application:
 
       Use case resumes at step 2.
 
-**Use case: Editing the risk profile of a patient (Coming soon)**
+**Use case: Editing the risk profile of a patient**
 
 **MSS**
 
@@ -536,14 +536,37 @@ These are some use cases to familiarise with the flow of our application:
 
       Use case resumes at step 2.
 
-**Use case: Editing personal details of a patient (Coming soon)**
+**Use case: Editing personal details of a patient**
 
 **MSS**
 
 1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
-3.  Receptionist requests to edit the personal details of a specific person in the list
+3.  Receptionist requests to edit the personal details of a specific patient in the list
 4.  PlannerMD edits the patient's personal details which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Editing personal details of a doctor**
+
+**MSS**
+
+1.  Receptionist requests to find a certain doctor by typing his/her name in the CLI
+2.  PlannerMD shows a list of doctors with that name
+3.  Receptionist requests to edit the personal details of a specific doctor in the list
+4.  PlannerMD edits the doctor's personal details which is reflected immediately
 
     Use case ends.
 
@@ -593,10 +616,10 @@ These are some use cases to familiarise with the flow of our application:
 **Use case: Deleting an appointment**
 
 **MSS**
-1.  Receptionist requests to list appointments
-2.  PlannerMD shows the list of appointments
-2.  Receptionist requests to delete an appointment
-3.  PlannerMD deletes the appointment from the appointment list which is reflected immediately
+1. Receptionist requests to list appointments
+2. PlannerMD shows the list of appointments
+3. Receptionist requests to delete an appointment
+4. PlannerMD deletes the appointment from the appointment list which is reflected immediately
 
     Use case ends.
 
@@ -605,6 +628,40 @@ These are some use cases to familiarise with the flow of our application:
 * 3a. The given index is invalid.
 
     * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Editing an appointment**
+
+**MSS**
+1. Receptionist requests to list appointments
+2. PlannerMD shows the list of appointments
+3. Receptionist requests to edit a specific appointment
+4. PlannerMD edits the appointment which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The appointment list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given parameters are invalid.
+
+    * 3b1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. The edited appointment date or time clashes with an existing appointment.
+
+    * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
       Use case resumes at step 2.
 
