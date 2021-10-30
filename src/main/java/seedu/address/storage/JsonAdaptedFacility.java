@@ -32,7 +32,7 @@ public class JsonAdaptedFacility {
      */
     @JsonCreator
     public JsonAdaptedFacility(@JsonProperty("name") String name, @JsonProperty("location") String location,
-                             @JsonProperty("time") String time, @JsonProperty("capacity") String capacity,
+                               @JsonProperty("time") String time, @JsonProperty("capacity") String capacity,
                                @JsonProperty("allocationList") List<JsonAdaptedPerson> allocationList) {
         this.name = name;
         this.location = location;

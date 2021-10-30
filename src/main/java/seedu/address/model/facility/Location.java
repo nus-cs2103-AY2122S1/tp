@@ -1,6 +1,7 @@
 package seedu.address.model.facility;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Facility's location.
@@ -8,13 +9,10 @@ import static java.util.Objects.requireNonNull;
 public class Location {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Locations should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Locations should only contain up to 50 alphanumeric characters and spaces,"
+                    + " and should not be blank.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]{1,50}";
 
     public final String location;
 
@@ -25,6 +23,7 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
+        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
         this.location = location;
     }
 
