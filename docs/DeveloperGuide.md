@@ -147,6 +147,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `PlannerMdParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `PlannerMdParser` returns back as a `Command` object.
+* If the `PlannerMdParser` parses an appointment command (e.g., `appt -a`, `appt -e`, ...), it first creates an `AppointmentCommandParser` to parse the flags given (e.g., `-a`, `-e`, ...). The `AppointmentCommandParser` then creates an `XYZCommandParser` (e.g., `AddAppointmentCommandParser`) to parse the remaining user command.
 * All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteDoctorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component <a name="model"/>
@@ -188,7 +189,7 @@ With the introduction of two types of `Person` (`Patient` and `Doctor`) and thei
 a state is used to determine which list should be interacted with.
 
 The state is maintained in `ModelManager`
-* Two possible states (`State.PATIENT` and `State.Doctor`)
+* Two possible states (`State.PATIENT` and `State.DOCTOR`)
 * `ModelManager::toggleState` is used to switch between states
 * The UI displays the list according to the state. (eg. if the state is `State.PATIENT`, UI displays the filtered list of patients)
 * Commands are parsed based on the state. (eg. if a valid 'add' command is parsed and the state is `State.PATIENT`, an `AddPatientCommand` is executed)
@@ -208,6 +209,28 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 ### Deleting an appointment
 
 ### Editing an appointment
+
+Edits the details of an existing appointment.
+
+The edit appointment command accepts at least one of the following parameters:
+* Patient index
+* Doctor index
+* Start date and time
+* Duration (in minutes)
+* Remark
+
+#### Implementation
+
+1. An `EditAppointmentCommandParser` is used to parse the edit appointment command. It checks if the patient and doctor indices are not out of bounds (based on the current filtered patient and doctor lists). The validity and format of the date and time as well as duration are also checked.
+2. If the inputs are valid, an `EditAppointmentCommand` is created. The command is executed and attempts to edit the fields as specified in the user input. The edited appointment will be reflected in the filtered appointment list in `Model`.
+3. Whenever an edited appointment results in a clash with existing appointments, the command is aborted and an error message is shown to the user.
+
+The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("appt -e 2 p/1 dur/30")` API call.
+
+![EditAppointmentSequenceDiagram](images/EditAppointmentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AppointmentCommandParser` and `EditAppointmentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ### Filtering appointments
 
