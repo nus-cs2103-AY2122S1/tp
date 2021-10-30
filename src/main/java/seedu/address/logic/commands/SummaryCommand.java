@@ -16,6 +16,9 @@ public class SummaryCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displaying Summary";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a summary of your Contact Book "
+            + "\nParameters: No parameters";
+
 
     @Override
     public CommandResult execute(Model model) {
