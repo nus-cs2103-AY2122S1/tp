@@ -29,6 +29,16 @@ public class Gender {
         value = getGenderType(gender);
     }
 
+    public String getSymbol() {
+        if (value.equals(GenderType.MALE)) {
+            return "M";
+        } else if (value.equals(GenderType.FEMALE)) {
+            return "F";
+        }
+        assert false : "value should be one of the GenderTypes";
+        return "";
+    }
+
     /**
      * Returns true if a given string is a valid gender.
      */
@@ -41,8 +51,10 @@ public class Gender {
         String gender = input.toLowerCase();
         if (gender.equals("m") || gender.equals("male")) {
             return GenderType.MALE;
-        } else {
+        } else if (gender.equals("f") || gender.equals("female")) {
             return GenderType.FEMALE;
+        } else {
+            return null;
         }
     }
 

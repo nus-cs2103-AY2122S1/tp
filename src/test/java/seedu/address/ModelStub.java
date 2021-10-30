@@ -5,10 +5,15 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.ClientTotalOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyOrderBook;
+import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortDescriptor;
 import seedu.address.model.task.Task;
 
 /**
@@ -76,12 +81,42 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasTask(Task task) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getTaskListFilePath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTaskListFilePath(Path taskListFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTaskBook(ReadOnlyTaskBook addressBook) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyTaskBook getTaskBook() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -106,7 +141,86 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void markDone(Task task) {
+    public void markTask(Task task) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getOrderPath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setOrderBookFilePath(Path orderBookFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setOrderBook(ReadOnlyOrderBook orderBook) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyOrderBook getOrderBook() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void markOrder(Order order) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Order> getFilteredOrderList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addOrder(Order order) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasOrder(Order order) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasOrder(long id) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setOrder(Order target, Order editedOrder) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteOrder(Order toDelete) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredOrderList(Predicate<Order> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void sortOrderList(SortDescriptor sortDescriptor) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void resetOrderView() {
+        throw new AssertionError("This method should not be called.");
+    }
+    @Override
+    public void deleteTaskIf(Predicate<Task> pred) {
         throw new AssertionError("This method should not be called.");
     }
 }

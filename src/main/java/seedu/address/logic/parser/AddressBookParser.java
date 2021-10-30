@@ -7,18 +7,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddOrderCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteOrderCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindOrderCommand;
+import seedu.address.logic.commands.FindTaskCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOrderCommand;
 import seedu.address.logic.commands.ListTaskCommand;
-import seedu.address.logic.commands.MarkDoneCommand;
+import seedu.address.logic.commands.MarkOrderCommand;
+import seedu.address.logic.commands.MarkTaskCommand;
+import seedu.address.logic.commands.ShowCompletedOrders;
+import seedu.address.logic.commands.ShowCompletedTasks;
+import seedu.address.logic.commands.ShowIncompleteOrders;
+import seedu.address.logic.commands.ShowIncompleteTasks;
+import seedu.address.logic.commands.SortOrdersCommand;
+import seedu.address.logic.commands.TotalOrdersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -48,6 +61,7 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        //======================================== PERSON COMMANDS ========================================
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -72,17 +86,61 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        //======================================== TASK COMMANDS ========================================
+
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
+
+        case EditTaskCommand.COMMAND_WORD:
+            return new EditTaskCommandParser().parse(arguments);
 
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(arguments);
 
+        case MarkTaskCommand.COMMAND_WORD:
+            return new MarkTaskCommandParser().parse(arguments);
+
         case ListTaskCommand.COMMAND_WORD:
             return new ListTaskCommand();
 
-        case MarkDoneCommand.COMMAND_WORD:
-            return new MarkDoneCommandParser().parse(arguments);
+        case ShowCompletedTasks.COMMAND_WORD:
+            return new ShowCompletedTasks();
+
+        case ShowIncompleteTasks.COMMAND_WORD:
+            return new ShowIncompleteTasks();
+
+        case FindTaskCommand.COMMAND_WORD:
+            return new FindTaskCommandParser().parse(arguments);
+
+        //======================================== ORDER COMMANDS ========================================
+
+        case MarkOrderCommand.COMMAND_WORD:
+            return new MarkOrderCommandParser().parse(arguments);
+
+        case AddOrderCommand.COMMAND_WORD:
+            return new AddOrderCommandParser().parse(arguments);
+
+        case ShowCompletedOrders.COMMAND_WORD:
+            return new ShowCompletedOrders();
+
+        case ShowIncompleteOrders.COMMAND_WORD:
+            return new ShowIncompleteOrders();
+
+        case DeleteOrderCommand.COMMAND_WORD:
+            return new DeleteOrderCommandParser().parse(arguments);
+
+        case TotalOrdersCommand.COMMAND_WORD:
+            return new TotalOrdersCommand();
+
+        case SortOrdersCommand.COMMAND_WORD:
+            return new SortOrdersCommandParser().parse(arguments);
+
+        case FindOrderCommand.COMMAND_WORD:
+            return new FindOrderCommandParser().parse(arguments);
+
+        case ListOrderCommand.COMMAND_WORD:
+            return new ListOrderCommand();
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

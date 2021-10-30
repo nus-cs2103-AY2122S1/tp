@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,12 +16,15 @@ public class AddTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the application. "
             + "Parameters: "
             + PREFIX_LABEL + "LABEL "
-            + PREFIX_DATE + "DATE\n"
+            + PREFIX_DATE + "DATE "
+            + "[" + PREFIX_TASK_TAG + "TASKTAG]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LABEL + "Sew buttons onto black blazer "
-            + PREFIX_DATE + "20th August 2021";
+            + PREFIX_DATE + "20 August 2021 "
+            + PREFIX_TASK_TAG + "SO2103";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_UNFOUND_ORDERID = "The sales order with the given Id cannot be found.";
 
     private final Task toAdd;
 
@@ -35,8 +39,13 @@ public class AddTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        long tagId = toAdd.getTagId();
+        if (tagId != -1 && !model.hasOrder(tagId)) {
+            throw new CommandException(MESSAGE_UNFOUND_ORDERID);
+        }
+
         model.addTask(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.TASK);
     }
 
     @Override

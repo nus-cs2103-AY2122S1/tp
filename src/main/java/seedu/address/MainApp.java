@@ -18,15 +18,23 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.OrderBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyOrderBook;
+import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonOrderBookStorage;
+import seedu.address.storage.JsonTaskBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.OrderBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TaskBookStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -36,7 +44,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 0, true);
+    public static final Version VERSION = new Version(1, 3, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -57,7 +65,11 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        TaskBookStorage taskBookStorage = new JsonTaskBookStorage(userPrefs.getTaskBookPath());
+        OrderBookStorage orderBookStorage =
+                new JsonOrderBookStorage(userPrefs.getOrderBookFilePath());
+        storage = new StorageManager(addressBookStorage, taskBookStorage, orderBookStorage, userPrefsStorage);
+
 
         initLogging(config);
 
@@ -75,22 +87,55 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialAddressBook;
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBook = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBook = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        ReadOnlyTaskBook initialTaskBook;
+        Optional<ReadOnlyTaskBook> taskBookOptional;
+        try {
+            taskBookOptional = storage.readTaskList();
+            if (!taskBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskBook");
+            }
+            initialTaskBook = taskBookOptional.orElseGet(SampleDataUtil::getSampleTaskBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
+            initialTaskBook = new TaskBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBook");
+            initialTaskBook = new TaskBook();
+        }
+
+        ReadOnlyOrderBook initialOrderBook;
+        Optional<ReadOnlyOrderBook> orderBookOptional;
+        try {
+            orderBookOptional = storage.readOrderBook();
+            if (!orderBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample OrderBook");
+            }
+            initialOrderBook = orderBookOptional.orElseGet(SampleDataUtil::getSampleOrderBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty OrderBook");
+            initialOrderBook = new OrderBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty OrderBook");
+            initialOrderBook = new OrderBook();
+        }
+
+        return new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
     }
 
     private void initLogging(Config config) {

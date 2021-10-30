@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEASUREMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
@@ -53,11 +54,15 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different measurement -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withMeasurement(VALID_MEASUREMENT_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different address -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different remark -> false
+        // different remark -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRemark(VALID_REMARK_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 

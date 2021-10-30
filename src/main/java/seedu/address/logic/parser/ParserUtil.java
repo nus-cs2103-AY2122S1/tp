@@ -9,15 +9,22 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Date;
+import seedu.address.model.Label;
+import seedu.address.model.order.Amount;
+import seedu.address.model.order.Customer;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Measurement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.sort.SortField;
+import seedu.address.model.sort.SortOrdering;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
-import seedu.address.model.task.Label;
+import seedu.address.model.tag.TaskTag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -82,6 +89,36 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String measurement} into a {@code Measurement}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code measurement} is invalid
+     */
+    public static Measurement parseMeasurement(String measurement, Gender gender) throws ParseException {
+        requireNonNull(measurement);
+        String trimmedMeasurement = measurement.trim();
+        if (!Measurement.isValidMeasurement(trimmedMeasurement, gender.value)) {
+            throw new ParseException(Measurement.getMessageConstraints(gender.value));
+        }
+        return new Measurement(trimmedMeasurement);
+    }
+
+    /**
+     * Parses a {@code String measurement} into a {@code Measurement}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code measurement} is invalid
+     */
+    public static Measurement parseMeasurement(String measurement) throws ParseException {
+        requireNonNull(measurement);
+        String trimmedMeasurement = measurement.trim();
+        if (!Measurement.isValidMeasurement(trimmedMeasurement)) {
+            throw new ParseException(Measurement.GENERAL_MESSAGE_CONSTRAINTS);
+        }
+        return new Measurement(trimmedMeasurement);
     }
 
     /**
@@ -158,7 +195,6 @@ public class ParserUtil {
 
     /**
      * Simple check that validates label is not empty string after trimming.
-     * @return
      */
     public static Label parseLabel(String label) throws ParseException {
         requireNonNull(label);
@@ -179,5 +215,81 @@ public class ParserUtil {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String taskTag} into an {@code TaskTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskTag} is invalid.
+     */
+    public static TaskTag parseTaskTag(String taskTag) throws ParseException {
+        requireNonNull(taskTag);
+        String trimmedTaskTag = taskTag.trim();
+        if (!TaskTag.isValidTagName(trimmedTaskTag)) {
+            throw new ParseException(TaskTag.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskTag(trimmedTaskTag);
+    }
+
+    /**
+     * Parses a {@code String customer} into a {@code Customer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code customer} is invalid.
+     */
+    public static Customer parseCustomer(String customer) throws ParseException {
+        requireNonNull(customer);
+        String trimmedCustomer = customer.trim();
+        if (!Customer.isValidCustomer(trimmedCustomer)) {
+            throw new ParseException(Customer.MESSAGE_CONSTRAINTS);
+        }
+        return new Customer(trimmedCustomer);
+    }
+
+    /**
+     * Parses a {@code String amount} into a {@code Amount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        if (!Amount.isValidAmount(trimmedAmount)) {
+            throw new ParseException(Amount.MESSAGE_CONSTRAINTS);
+        }
+        return new Amount(trimmedAmount);
+    }
+
+
+    /**
+     * Parses a {@code String sortOrder} into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortOrder} is invalid.
+     */
+    public static SortOrdering parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim();
+        if (!SortOrdering.isValidSortOrder(trimmedSortOrder)) {
+            throw new ParseException(SortOrdering.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrdering(trimmedSortOrder);
+    }
+
+    /**
+     * Parses a {@code String sortField} into a {@code sortField}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortField} is invalid.
+     */
+    public static SortField parseSortField(String sortField) throws ParseException {
+        requireNonNull(sortField);
+        String trimmedSortField = sortField.trim();
+        if (!SortField.isValidSortField(trimmedSortField)) {
+            throw new ParseException(SortField.MESSAGE_CONSTRAINTS);
+        }
+        return new SortField(trimmedSortField);
     }
 }
