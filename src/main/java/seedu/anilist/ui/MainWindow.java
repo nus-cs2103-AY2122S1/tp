@@ -82,7 +82,8 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(), logic.getCurrentTab(), this::executeCommand);
+        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(),
+                logic.getCurrentTab(), this::executeCommand);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -119,6 +120,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
         this.commandBox = commandBox;
+        animeListPanel.setCommandBox(commandBox);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
     }

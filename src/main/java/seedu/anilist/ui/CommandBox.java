@@ -20,6 +20,7 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
     private final AnimeListPanel animeListPanel;
+    private boolean executionState = false;
 
     @FXML
     private TextField commandTextField;
@@ -31,6 +32,7 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.animeListPanel = animeListPanel;
+        executionState = false;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -47,8 +49,10 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            executionState = true;
             commandTextField.setText("");
             animeListPanel.setActiveTab();
+            executionState = false;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -68,6 +72,10 @@ public class CommandBox extends UiPart<Region> {
     public void enableCommandTextField() {
         commandTextField.setDisable(false);
         commandTextField.setPromptText(PROMPT_TEXT_COMMAND_BOX_ENABLED);
+    }
+
+    public boolean isExecuting() {
+        return executionState;
     }
 
     /**
