@@ -186,7 +186,7 @@ public class LessonEditCommand extends UndoableCommand {
      * @param datesToCancel A set of lesson dates to add to cancelled dates.
      * @param datesToUncancel A set of lesson dates to remove from cancelled dates.
      * @return A set of updated cancelled dates.
-     * @throws CommandException
+     * @throws CommandException If any of the dates to cancel is invalid.
      */
     private static Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
                                                          Set<Date> datesToUncancel) throws CommandException {
