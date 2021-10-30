@@ -19,6 +19,7 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
     public static final String TIME_MESSAGE_CONSTRAINTS = "Next meeting time should be in the 24-hour format, "
             + "where Hour and Minutes should be numerical values.";
     public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct";
+    public static final String MESSAGE_INVALID_TIME_DURATION = "End Time should be after Start Time";
     public static final String NO_NEXT_MEETING = "No meeting planned";
     public static final NextMeeting NULL_MEETING = new NextMeeting(null, null, null,
         null, null);
@@ -66,6 +67,10 @@ public class NextMeeting implements OptionalNonStringBasedField, IgnoreNullCompa
         this.date = parseToLocalDate(date);
         this.startTime = parseToLocalTime(startTime);
         this.endTime = parseToLocalTime(endTime);
+
+        if (!startTime.isEmpty() && !endTime.isEmpty()) {
+            checkArgument(this.endTime.isAfter(this.startTime), MESSAGE_INVALID_TIME_DURATION);
+        }
     }
 
     public Name getWithWho() {
