@@ -30,7 +30,7 @@ title: User Guide
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `seniorlove.jar` from [here](https://github.com/AY2122S1-CS2103-T14-1/tp).
+2. Download the latest `seniorlove.jar` from [here](https://github.com/AY2122S1-CS2103-T14-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your SeniorLove.
 
@@ -105,15 +105,15 @@ Adds an elderly and all relevant details into SeniorLove.
 
 Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [f/FREQUENCY o/OCCURRENCE] [h/HEALTH_CONDITION]`
 
-* Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`, `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
-
-* `NAME` is the elderly’s name. **This must be included.**
+* Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`.
+* `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
+* `NAME` is the elderly’s name. It must consist only of alphanumeric characters and spaces. **This must be included.**
 * `PHONE_NUMBER` is the elderly’s phone number. **This must be included.**
 * `LANGUAGE` is the elderly’s preferred language for communication. **This must be included.**
 * `ADDRESS` is the elderly’s address to be visited. **This must be included.**
 * `LAST_VISIT` is the last datetime that the user has visited the elderly. **This is optional to include.**
 * `VISIT` is the next scheduled datetime for the elderly’s visit. **This is optional to include.**
-* `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include**
+* `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include.**
 * `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
 * `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
 * `OCCURRENCE` is a **strictly positive integer**.
@@ -305,7 +305,7 @@ Action | Format, Examples
 **visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/2021-11-12 16:30 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
-**list** | `list [w/] [m/]` <br> e.g., `list`<br> e.g., `list m/`<br> e.g., `list m/`
+**list** | `list [w/] [m/]` <br> e.g., `list`<br> e.g., `list w/`<br> e.g., `list m/`
 **sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
 **summary** | `summary`
 **clear** | `clear`
