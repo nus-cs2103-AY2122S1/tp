@@ -9,8 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.GridPane;
@@ -87,9 +85,9 @@ public class HelpPanel extends UiPart<Region> {
     private static final String TASKS_COMPLETE_DESC = "Mark a task as complete.";
 
     private static final String TASKS_UPCOMING_HEADER = "upcoming";
-    private static final String TASKS_UPCOMING_DESC = "Finds all incomplete tasks whose Date/Time are after the " +
-            "current Date/Time (as determined locally on your computer). These tasks will be sorted chronologically, " +
-            "with tasks that are closer to the current Date/Time first.";
+    private static final String TASKS_UPCOMING_DESC = "Finds all incomplete tasks whose Date/Time are after the "
+            + "current Date/Time (as determined locally on your computer). These tasks will be sorted chronologically, "
+            + "with tasks that are closer to the current Date/Time first.";
 
     private static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w15-2.github.io/tp/UserGuide.html";
 
