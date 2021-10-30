@@ -45,7 +45,8 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
-        date.setText(event.getDate().toString());
+        name.setWrapText(true);
+        date.setText("Date: " + event.getDate().toString());
         event.getParticipants().stream()
                 .sorted(Comparator.comparing(member -> member.getName().fullName))
                 .forEach(member -> {
@@ -55,6 +56,8 @@ public class EventCard extends UiPart<Region> {
                     } else {
                         participantLabel.setStyle("-fx-background-color: #7c0236");
                     }
+                    participantLabel.setMaxWidth(100);
+                    participantLabel.setWrapText(true);
                     participants.getChildren().add(participantLabel);
                 });
     }

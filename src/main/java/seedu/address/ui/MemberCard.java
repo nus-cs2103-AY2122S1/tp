@@ -53,9 +53,13 @@ public class MemberCard extends UiPart<Region> {
         this.member = member;
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().fullName);
-        phone.setText(member.getPhone().value);
-        address.setText(member.getAddress().orElse(new Address("Not provided")).value);
-        email.setText(member.getEmail().orElse(new Email("noprovide@email.com")).value);
+        phone.setText("Phone: " + member.getPhone().value);
+        member.getAddress().ifPresentOrElse(a -> {
+            address.setText("Address: " + a.value);
+            }, () -> address.setVisible(false));
+        member.getEmail().ifPresentOrElse(e -> {
+            email.setText("Email: " + e.value);
+            }, () -> email.setVisible(false));
         member.getPositions().stream()
                 .sorted(Comparator.comparing(position -> position.positionName))
                 .forEach(position -> positions.getChildren().add(new Label(position.positionName)));
@@ -68,6 +72,8 @@ public class MemberCard extends UiPart<Region> {
                     } else {
                         taskLabel.setStyle("-fx-background-color: #7c0236");
                     }
+                    taskLabel.setMaxWidth(100);
+                    taskLabel.setWrapText(true);
                     tasks.getChildren().add(taskLabel);
                 });
     }
