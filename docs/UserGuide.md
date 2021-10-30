@@ -222,29 +222,6 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * Can take any value (should not be *blank*)
 
 
-#### `COMMAND`
-* The type of command available in FAST:
-  * `Quick Start`
-  * `Add`
-  * `Appointment`
-  * `Edit Appointment`
-  * `Delete Appointment`
-  * `Mark Appointment`
-  * `Clear`
-  * `Delete`
-  * `Edit`
-  * `Find`
-  * `List`
-  * `Help`
-  * `Remark`
-  * `Sort`
-  * `Statistic`
-  * `Tag`
-  * `Investment Plan Tag`
-  * `Priority Tag`
-  * `Misc`
-
-
 #### `DATE`
 * The date of an appointment with your client
 * Should be in this format: `yyyy-mm-dd` 
@@ -265,6 +242,29 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * must be at least **2** characters long. 
   * each domain label must start and end with alphanumeric characters
   * each domain label is separated using hyphens (if any)
+
+  
+#### `HELP_TOPIC`
+* The Help topics available in FAST:
+  * `Quick Start`
+  * `Add`
+  * `Appointment`
+  * `Edit Appointment`
+  * `Delete Appointment`
+  * `Mark Appointment`
+  * `Clear`
+  * `Delete`
+  * `Edit`
+  * `Find`
+  * `List`
+  * `Help`
+  * `Remark`
+  * `Sort`
+  * `Statistic`
+  * `Tag`
+  * `Investment Plan Tag`
+  * `Priority Tag`
+  * `Misc`
 
 
 #### `INDEX`
@@ -795,10 +795,10 @@ In the help window, you can view all the command usages built-in right into FAST
 
 ![help window](images/helpWindow.png)
 
-**Format**: `help [COMMAND]`
+**Format**: `help [HELP_TOPIC]`
 
 **Parameters**:
-* [`COMMAND`](#command)
+* [`HELP_TOPIC`](#help-topics)
 
 **Examples**:
 * `help` will just open the default help window
@@ -917,7 +917,7 @@ Action | Format, Examples
 
 Action|Format, Examples
 --------|------------------
-**Help** | `help [COMMAND]` <br> e.g. `help add`
+**Help** | `help [HELP_TOPIC]` <br> e.g. `help add`
 **Clear** | `clear`
 **Exit** | `exit`
 
