@@ -135,13 +135,19 @@ Format: `list`
 
 ### Adding a client : `add`
 
-Adds a client to the application.
+Allows you to add a client to the application. 
+
+Note that two clients are regarded as their names are the same! As two individuals having the exact same name
+is quite a rare occurrence, we felt this was more likely to be a user mistake we wanted to guard against, then
+it was to be an intentional choice. If you happen to have two clients with the exact same name, our recommendation
+is to add a number, to be clear that this was intentional. (e.g., adding Jane Lim and Jane Lim1).
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0). The remark is also optional.
 </div>
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
