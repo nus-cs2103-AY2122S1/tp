@@ -270,6 +270,7 @@ Tip: Do take a good look at this section to understand the common terminologies 
 
 #### `TAG`
 * Represents the `module`'s tag component.
+* Tag names should not be more than 30 characters.
 
 #### `YEAR`
 * Represents Academic Year of the module that is being taken.
