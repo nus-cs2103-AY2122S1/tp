@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
@@ -99,6 +100,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
         requireNonNull(lesson);
         return entries.hasClashes(lesson, lessonToIgnore);
+    }
+
+    /**
+     * Returns {@code Set<Lesson>} of existing lessons in the address book that are clashing with the lesson.
+     */
+    public Set<Lesson> getClashingLessons(Lesson lesson) {
+        requireNonNull(lesson);
+        return entries.getClashes(lesson);
+    }
+
+    /**
+     * Returns {@code Set<Lesson>} of existing lessons in the address book that are clashing with the lesson.
+     */
+    public Set<Lesson> getClashingLessons(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return entries.getClashes(lesson, lessonToIgnore);
     }
 
     /**

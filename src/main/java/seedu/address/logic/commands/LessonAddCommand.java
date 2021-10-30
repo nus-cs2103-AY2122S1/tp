@@ -116,7 +116,13 @@ public class LessonAddCommand extends UndoableCommand {
     private Set<Lesson> createUpdatedLessons(Set<Lesson> lessons, Lesson toAdd)
             throws CommandException {
         if (model.hasClashingLesson(toAdd)) {
-            throw new CommandException(MESSAGE_CLASHING_LESSON);
+            Set<Lesson> clashes = model.getClashingLessons(toAdd);
+
+            String clashingLessons = clashes.stream()
+                .map(x -> x.toString())
+                .reduce("Clashing Lesson(s):\n", (x, y) -> "\n" + x + y);
+
+            throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
         }
 
         // Check date ranges

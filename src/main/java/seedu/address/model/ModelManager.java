@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -112,6 +113,18 @@ public class ModelManager implements Model {
     public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
         requireNonNull(lesson);
         return addressBook.hasClashingLesson(lesson, lessonToIgnore);
+    }
+
+    @Override
+    public Set<Lesson> getClashingLessons(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.getClashingLessons(lesson);
+    }
+
+    @Override
+    public Set<Lesson> getClashingLessons(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return addressBook.getClashingLessons(lesson, lessonToIgnore);
     }
 
     @Override
