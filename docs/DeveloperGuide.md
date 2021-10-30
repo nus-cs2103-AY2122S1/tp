@@ -399,8 +399,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User searches for the details of an item in the inventory by stating id, name or tag.
-2. BogoBogo find item from inventory that matches the keywords.
+1. User searches for an item in the inventory by stating id, name or tag.
+2. BogoBogo finds item from inventory that matches the keywords.
 
    Use case ends.
 
@@ -413,6 +413,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The specified item is not in the inventory.
     * 1b1. BogoBogo outputs an empty list.
+
+      Use case ends.
+  
+* 1c. User tries to find by 2 different fields at the same time.
+    * 1b1. BogoBogo notifies user that only one field can be inputted.
 
       Use case ends.
 
@@ -509,7 +514,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to know what are the commands available to the user.
+1. User requests to know what are the commands available.
 2. BogoBogo shows the commands available to the user.
 
    Use case ends.
@@ -518,6 +523,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User specifies which command exactly he wants to know how to use.
     * 1a1. BogoBogo notifies the user what that exact command does.
+
+      Use case ends.
+  
+* 1b. User specifies an inexistent command.
+    * 1a1. BogoBogo notifies the user that the command does not exist, then proceed to display URL to userguide.
 
       Use case ends.
 
@@ -564,20 +574,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to edit an item.
-2. User enters the item index and fields and new values to change.
-3. BogoBogo updates the new value of the specified fields of the item.
+2. User enters the item index, fields and new values to change.
+3. BogoBogo updates the fields of the item at the specified index with the new values given.
 
     Use case ends.
 
 **Extensions**
 
 * 3a. The edited item is a duplicate of another item in the inventory.
-    * 3a1. BogoBogo notifies user the duplication.
+    * 3a1. BogoBogo notifies user of the duplication.
   
       Use case ends
 
 * 3b. The specified index is invalid.
     * 3b1. BogoBogo notifies user the index is invalid.
+
+      Use case ends
+  
+* 3c. The specified change of the field is invalid.
+    * 3b1. BogoBogo notifies user that the new value specified is invalid.
 
       Use case ends
 
