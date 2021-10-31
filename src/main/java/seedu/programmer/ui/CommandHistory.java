@@ -42,10 +42,12 @@ public class CommandHistory {
             logger.info("There is no command history.");
             return DEFAULT_COMMAND;
         }
-        String result = commandHistory.get(counter);
+
         if (!isCounterAtFirst()) {
             counter--;
         }
+        String result = commandHistory.get(counter);
+
         logger.info("Previous Command retrieved: " + result);
         return result;
     }
@@ -61,10 +63,11 @@ public class CommandHistory {
             logger.info("There is no command history.");
             return DEFAULT_COMMAND;
         }
-        String result = commandHistory.get(counter);
         if (!isCounterAtLast()) {
             counter++;
         }
+        String result = commandHistory.get(counter);
+
         logger.info("Next Command retrieved: " + result);
         return result;
     }
@@ -91,13 +94,13 @@ public class CommandHistory {
         return commandHistory.size() == 0;
     }
 
-    private void resetCounterToLast() {
-        counter = commandHistory.size() - 1;
+    private void resetCounterToDefault() {
+        counter = commandHistory.size();
     }
 
     private void addCommandToHistory(String command) {
         commandHistory.add(command);
-        resetCounterToLast();
+        resetCounterToDefault();
     }
 
     private boolean isCounterAtLast() {
