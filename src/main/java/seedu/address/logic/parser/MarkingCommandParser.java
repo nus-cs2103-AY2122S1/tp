@@ -42,7 +42,7 @@ public class MarkingCommandParser implements Parser<MarkingCommand> {
         } catch (ParseException pe) {
             String errorMessage = typeOfMarking.equals(MarkCommand.COMMAND_WORD)
                     ? MarkCommand.MESSAGE_USAGE : UnmarkCommand.MESSAGE_USAGE;
-            String causeOfError = " \n" + pe.getMessage();
+            String causeOfError = "\n" + pe.getMessage();
 
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT + causeOfError, errorMessage), pe);

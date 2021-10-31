@@ -89,6 +89,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseMultipleIndex_duplicateInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleIndex("1 1 2"));
+    }
+
+    @Test
     public void parseMultipleIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
                 ParserUtil.parseMultipleIndex(Long.toString(Integer.MAX_VALUE + 1)));
