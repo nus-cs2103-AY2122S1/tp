@@ -106,9 +106,65 @@ public class SampleDataUtil {
                             + " geometric intuition with regard to vectors and matrices."), new Mc(4),
                     getTagSet("math and science")),
             new Module(new Code("ST2334"), new Title("Probability and Statistics"),
-                    new Description("This module introduces students to basic probability theory "
-                            + "and statistical inference."), new Mc(4),
-                    getTagSet("math and science")),
+                new Description("This module introduces students to basic probability theory "
+                    + "and statistical inference."), new Mc(4),
+                getTagSet("math and science")),
+            new Module(new Code("CS2104"), new Title("Programming Language Concepts"),
+                new Description("This module introduces the concepts that serve as a basis"
+                    + "for hundreds of programming languages."), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS3211"), new Title("Parallel and Concurrent Programming"),
+                new Description("This module introduces the design, development and debugging"
+                    + " of parallel programs."), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS4212"), new Title("Compiler Design"),
+                new Description("The objective of this module is to introduce the principal"
+                        + " ideas behind program compilation."), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS4215"), new Title("Programming Language Implementation"),
+                new Description("This module provides the students with theoretical knowledge"
+                        + " and practical skill in the implementation of programming languages."), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS3234"), new Title("Logic for Proofs and Programs"),
+                new Description("This module introduces logic as a means for specifying and "
+                        + "solving computational problems."), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS5232"), new Title("Formal Specification & Design Techniques"),
+                new Description("The objective of this course is to study various formal"
+                        + " specification and design techniques for modellings"), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS5218"), new Title("Principles and Practice of Program Analysis"),
+                new Description("This module enables students to address a broad spectrum "
+                        + "of program analysis in a practical way."), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS3219"), new Title("Software Engineering Principles and Patterns"),
+                new Description("This module provides an in-depth, hands-on experience in key aspects "
+                        + "of software engineering that accompany the development of software."), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS4211"), new Title("Formal Methods for Software Engineering"),
+                new Description("This module will cover formal specification and verification techniques for"
+                        + " accurately capturing and reasoning about requirements, model and code. "), new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS3216"), new Title("Software Development on Evolving Platforms"),
+                new Description("In this module, students will practice software product engineering ")
+                    , new Mc(5),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS3217"), new Title("Software Engineering on Modern Application Platforms"),
+                new Description("This module introduces students to the practice of software engineering on modern "
+                        + "application platforms such as mobile devices, the Web and cloud systems."), new Mc(5),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS5219"), new Title("Automatic Software Validation"),
+                new Description("This module will focus on automated validation techniques.")
+                    , new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS2220"), new Title("Introduction to Computational Biology"),
+                new Description("This course aims to develop flexible and logical problem solving skills")
+                    , new Mc(4),
+                getTagSet("breadth and depth")),
+            new Module(new Code("CS5233"), new Title("Simulation and Modeling Techniques"),
+                new Description("This module aims to provide students with a working knowledge of applying "
+                        +"simulation techniques to model, simulate and study complex systems."), new Mc(4),
+                getTagSet("breadth and depth")),
             new Module(new Code("CS3241"), new Title("Computer Graphics"),
                     new Description("This module teaches some graphics hardware devices, reviews the mathematics "
                             + "related to the understanding, and discusses the fundamental "
