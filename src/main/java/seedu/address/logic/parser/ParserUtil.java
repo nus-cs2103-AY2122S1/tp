@@ -190,6 +190,13 @@ public class ParserUtil {
     }
 
     /**
+     * Parses an {@code empty rating} into a {@code Rating}.
+     */
+    public static Rating parseRating() {
+        return new Rating();
+    }
+
+    /**
      * Parses a {@code String command} into a {@code String}.
      * Leading and trailing whitespaces will be trimmed.
      */

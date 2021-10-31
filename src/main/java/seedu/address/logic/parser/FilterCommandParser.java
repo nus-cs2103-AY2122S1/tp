@@ -35,8 +35,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        Rating rating = new Rating("0");
+        Rating rating = new Rating();
         if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
+            // Should not allow filtering for unrated contacts
+            if (argMultimap.getValue(PREFIX_RATING).get().equals("")) {
+                throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+            }
             rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get());
         }
         Set<CategoryCode> categoryCodes = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY_CODE));

@@ -1,12 +1,19 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.ThrowingSupplier;
 
 public class RatingTest {
+
+    @Test
+    public void constructor_noArguments_emptyRating() {
+        assertDoesNotThrow((ThrowingSupplier<Rating>) Rating::new);
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {

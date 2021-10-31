@@ -120,6 +120,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the empty {@code Rating} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRating() {
+        this.rating = new Rating();
+        return this;
+    }
+
+    /**
      * Sets the {@code Review} of the {@code Person} that we are building.
      */
     public PersonBuilder withReview(String review) {
