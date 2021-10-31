@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.logic.commands.ClearCommand;
 import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.HistoryCommand;
@@ -12,21 +13,31 @@ import seedu.academydirectory.logic.commands.RedoCommand;
 import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.commands.UndoCommand;
 import seedu.academydirectory.logic.commands.VisualizeCommand;
+import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
 public class AppMenu extends UiPart<Region> {
     public static final String FXML = "Menu.fxml";
 
     private final Logger logger = LogsCenter.getLogger(AppMenu.class);
 
-    private final CommandBox commandBox;
+    private final CommandExecutor commandExecutor;
 
     /**
      * Create an application Menu for Academy Directory
-     * @param commandBox command executor
+     * @param commandExecutor command executor
      */
-    public AppMenu(CommandBox commandBox) {
+    public AppMenu(CommandExecutor commandExecutor) {
         super(FXML);
-        this.commandBox = commandBox;
+        this.commandExecutor = commandExecutor;
+    }
+
+    private void handleButtons(String equivalentCommandText) {
+        try {
+            commandExecutor.execute(equivalentCommandText);
+        } catch (ParseException | CommandException e) {
+            logger.info("Button does not do anything");
+        }
     }
 
     /**
@@ -35,7 +46,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showRA1() {
         logger.info("Menu for Show RA1 clicked");
-        commandBox.execute(ShowCommand.COMMAND_WORD + " RA1");
+        handleButtons(ShowCommand.COMMAND_WORD + " RA1");
     }
 
     /**
@@ -44,7 +55,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showRA2() {
         logger.info("Menu for Show RA2 clicked");
-        commandBox.execute(ShowCommand.COMMAND_WORD + " RA2");
+        handleButtons(ShowCommand.COMMAND_WORD + " RA2");
     }
 
     /**
@@ -53,7 +64,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showMidterm() {
         logger.info("Menu for Show Midterm clicked");
-        commandBox.execute(ShowCommand.COMMAND_WORD + " MIDTERM");
+        handleButtons(ShowCommand.COMMAND_WORD + " MIDTERM");
     }
 
     /**
@@ -62,7 +73,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showPE() {
         logger.info("Menu for Show PE clicked");
-        commandBox.execute(ShowCommand.COMMAND_WORD + " PE");
+        handleButtons(ShowCommand.COMMAND_WORD + " PE");
     }
 
     /**
@@ -71,7 +82,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showFinal() {
         logger.info("Menu for Show Final clicked");
-        commandBox.execute(ShowCommand.COMMAND_WORD + " FINAL");
+        handleButtons(ShowCommand.COMMAND_WORD + " FINAL");
     }
 
     /**
@@ -80,7 +91,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showStatistics() {
         logger.info("Menu for Show statistics clicked");
-        commandBox.execute(VisualizeCommand.COMMAND_WORD);
+        handleButtons(VisualizeCommand.COMMAND_WORD);
     }
 
     /**
@@ -89,7 +100,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showHistory() {
         logger.info("Menu for Show history clicked");
-        commandBox.execute(HistoryCommand.COMMAND_WORD);
+        handleButtons(HistoryCommand.COMMAND_WORD);
     }
 
     /**
@@ -98,7 +109,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void undo() {
         logger.info("Menu for undo changes clicked");
-        commandBox.execute(UndoCommand.COMMAND_WORD);
+        handleButtons(UndoCommand.COMMAND_WORD);
     }
 
     /**
@@ -107,7 +118,7 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void redo() {
         logger.info("Menu for redo clicked");
-        commandBox.execute(RedoCommand.COMMAND_WORD);
+        handleButtons(RedoCommand.COMMAND_WORD);
     }
 
     /**
@@ -116,7 +127,16 @@ public class AppMenu extends UiPart<Region> {
     @FXML
     public void showHelp() {
         logger.info("Menu for Show help clicked");
-        commandBox.execute(HelpCommand.COMMAND_WORD);
+        handleButtons(HelpCommand.COMMAND_WORD);
+    }
+
+    /**
+     * A menu item that clears all entries
+     */
+    @FXML
+    public void clear() {
+        logger.info("Cleared");
+        handleButtons(ClearCommand.COMMAND_WORD);
     }
 
     /**
@@ -124,6 +144,6 @@ public class AppMenu extends UiPart<Region> {
      */
     @FXML
     public void exit() {
-        commandBox.execute(ExitCommand.COMMAND_WORD);
+        handleButtons(ExitCommand.COMMAND_WORD);
     }
 }

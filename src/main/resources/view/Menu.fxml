@@ -18,6 +18,7 @@
                 <Image url="@/images/file.png" />
             </ImageView>
         </graphic>
+        <MenuItem mnemonicParsing="false" text="Clear all entries" onAction="#clear"/>
         <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
     </Menu>
     <Menu mnemonicParsing="false">
