@@ -44,7 +44,7 @@ Alternatively, if you prefer, you could also check the version via the GUI for b
 ### Section 2.2 Working with ModuLink
 To run the app, simply double click the file. You should see a GUI similar to the one shown below in a few seconds. The app will already contain data. Here’s a quick look at the different elements in the app.
 
-![Ui](images/screenshots/Ui2.png) [To be updated]
+![Ui](images/screenshots/Ui2.png)
 
 As mentioned earlier, ModuLink works as a CLI, which means you will need to type and enter commands in the command box. To get accustomed to the interface, try the following commands (in the given the order).
 
@@ -61,7 +61,7 @@ As mentioned earlier, ModuLink works as a CLI, which means you will need to type
 ## Section 3: Features - Understanding what ModuLink can do for you
 
 To know what you can do with ModuLink, and what ModuLink can do for you, refer to the table of contents below to quickly navigate between sections.<br><br>
-(Need to put different icon here)<br><br>
+
 ❗**If you are a first-time user, we recommend starting with [Create your own profile](#11-create-your-own-profile--create). This is because you can only use other commands in ModuLink after creating your own profile.**
 
 
@@ -141,7 +141,7 @@ Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
 
 Examples:
 * `edit p/123321432 e/changedemail@example.com`
-* `edit github/alex_yeoh`  
+* `edit github/alex_tan`  
     <br>
   <br>
 ![result for 'edit p/99881234'](images/screenshots/editProfile.png)
@@ -161,22 +161,20 @@ Examples:
   <br>
   ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addMod.png)
   
-  ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addModProfile.png)
-  
 
 #### 2.2 Edit the group status of existing modules on your profile : `editGroupStatus`
 
-Edits the group status of user-specified module(s).
+Edits the group status of user-specified module.
 
 Format: `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION]`
 
 **:information_source: Notes:**
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
 
-Examples (Will update screenshot after javafx stuff done):
-* `editGroupStatus mod/CS2103T`
-* `editGroupStatus mod/CS2103T need group`
-* `editGroupStatus mod/CS2100 need member`
+Examples:
+* `editGroupStatus mod/CS2220`
+* `editGroupStatus mod/CS2030S need member`
+* `editGroupStatus mod/CS2100 need group`
   <br>
   <br>
   Original profile:
@@ -184,8 +182,6 @@ Examples (Will update screenshot after javafx stuff done):
 
   Updated profile:
   ![result for 'original'](images/screenshots/egsc.png)
-
-  ![result for 'original'](images/screenshots/editedGroupStatus.png)
 
 
 #### 2.3 Remove modules from your profile : `remMod`
@@ -197,11 +193,11 @@ Format: `remMod mod/MODULE [mod/MODULE]...`
 Examples:
 * `remMod mod/CS2103T`
 * `remMod mod/CS2220`
+* `remMod mod/CS1231S mod/CS2220`
   <br>
   <br>
   ![result for 'remMod mod/CS2220'](images/screenshots/remMod.png)
-  
-  ![result for 'remMod mod/CS2220'](images/screenshots/remModProfile.png)
+ 
   
 
 ### 3. Manage favorites
@@ -214,7 +210,7 @@ Format: `addFav STUDENT_ID`
 
 Examples:
 * `addFav A0222594A`
-* `addFav A1234568X`
+* `addFav A1234567R`
   <br>
   <br>
   ![result for 'addfav A1234967R'](images/screenshots/addFav.png)
@@ -227,7 +223,7 @@ Format: `remFav STUDENT_ID`
 
 Examples:
 * `remFav A0212345X`
-* `remFav A1234568X`
+* `remFav A1234567R`
   <br>
   <br>
   ![result for 'remfav A1234567R'](images/screenshots/remFav.png)
@@ -285,10 +281,10 @@ Format: `findId KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `findId A1204567S` returns the person whose student ID number matches A1204567S
-* `findId A0123456A A0654321A` returns the profiles whose student ID number matches either A0123456A or A0654321A.
+* `findId A1234567R A1234567H` returns the profiles whose student ID number matches either A1234567R or A1234567H.
   <br>
   <br>
-  ![result for 'findId A1204567S'](images/screenshots/findId.png)
+  ![result for 'findId A1234567R A1234567H'](images/screenshots/findId.png)
 
 #### 4.5 Filter profiles by module and group status : `filter`
 
@@ -300,15 +296,15 @@ Format: `filter mod/MODULE_CODE [GROUP_STATUS]`
 * `MODULE_CODE` is required for filtering by group status. The filter will return the profiles with the specified group status of the specified module.
 
 Examples (will change screenshot after javafx stuff done):
-* `filter mod/CS2030`
-* `filter mod/CS2030 need member`
-* `filter mod/CS2030 need group`
+* `filter mod/CS2100`
+* `filter mod/CS2100 need member`
+* `filter mod/CS2100 need group`
   <br>
   <br>
-  ![result for 'filter mod/CS2103T'](images/screenshots/filtermod.png)
+  ![result for 'filter mod/CS2100'](images/screenshots/filtermod.png)
   <br>
   <br>
-  ![result for 'filter mod/CS2101' group/SM](images/screenshots/filtermodgroup.png)
+  ![result for 'filter mod/CS210' need memmber](images/screenshots/filtermodgroup.png)
 
 
 ### 5. Utility commands
@@ -372,7 +368,7 @@ Action | Format, Examples
 -------|-----------------
 **Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
 **Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`, `edit p/123321432 e/changedemail@example.com`
-**Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`, `addMod mod/CS2103T Need a member mod/CS1231S`
+**Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`, `addMod mod/CS2103T need member mod/CS1231S`
 **Edit module group status** | `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...`, `editGroupStatus mod/CS2103T updateStatus/Need a member`
 **Remove module** | `remMod mod/MODULE [mod/MODULE]...`, `remMod mod/CS2100 mod/CS2103T`
 **Add Favourite** | `addFav STUDENT_ID` <br> e.g., `addFav A0222594A`
@@ -381,6 +377,6 @@ Action | Format, Examples
 **List favorites** | `listFav`
 **Find by name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
 **Find by student ID** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `findId A0222594A` returns person with student Id matching A0222594A.
-**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM`
+**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 need group`
 **Help** | `help`
 **Exit** | `exit`
