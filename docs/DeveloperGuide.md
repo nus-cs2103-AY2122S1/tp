@@ -234,6 +234,33 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ### Filtering appointments
 
+#### What it is
+
+Filters through the appointment records in PlannerMd and shows the appointments that matches the filter parameters.
+
+There are 4 possible parameters provided to a filter appointment command are:
+* Patient keywords (Filters appointments whose patient's name contains one of the keywords provided)
+* Doctor keywords (Filters appointments whose doctor's name contains one of the keywords provided)
+* Start date (Filters appointments which has a starting date greater or equal to the start date provided)
+* End date (Filters appointment which has a starting date lesser or equal to the end date provided)
+
+If no parameters are provided, the command simply lists all appointments in the appointment records.
+
+#### Implementation
+
+Upon entry of a filter appointment command, it is parsed by a `FilterAppointmentCommandParser` to check if the input parameters are valid (Dates are formatted correctly, `startDate` <= `endDate` if both parameters are provided). If the inputs are valid, an 'AppointmentFilters' is created and the filter parameters are stored in it. An 'AppointmentFilters' is an object that stores the different filter conditions a user can provide.
+
+After that, the filter is used to create a `FilterAppointmentCommand`. When executed, the `FilterAppointmentCommand` takes the `AppointmentFilters` and converts it into a single predicate based on the filter parameters provided. The predicate is then used to update the filtered appointment list in `Model`.
+
+Given below, is an example of a filter appointment command with the patient keywords and start date parameter provided.
+
+A clearer view of this sequence diagram can be found [here](images/AppointmentFilterSequenceDiagram.png).
+
+![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
+
+![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
+
+
 ### Storage
 
 --- 

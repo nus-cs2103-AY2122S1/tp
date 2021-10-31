@@ -29,7 +29,7 @@ public class AddAppointmentCommand extends AppointmentCommand {
             + PREFIX_START + "DATE_AND_TIME" + " [" + PREFIX_DURATION + "DURATION" + "] " + "["
             + PREFIX_REMARK + " REMARK" + "]\n" + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " "
             + PREFIX_PATIENT + "1 "
-            + PREFIX_DOCTOR + "2 " + PREFIX_START + "2/2/2022 12:00 "
+            + PREFIX_DOCTOR + "2 " + PREFIX_START + "12/11/2021 20:00 "
             + PREFIX_DURATION + "45 " + PREFIX_REMARK + "Patient wants a blood test";
 
 
@@ -40,11 +40,12 @@ public class AddAppointmentCommand extends AppointmentCommand {
             "This appointment already exists in PlannerMD";
     public static final String MESSAGE_WRONG_DATE_TIME = "Sessions should be of the format DD/MM/YYYY HH:MM "
             + "and adhere to the following constraints:\n"
-            + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
-            + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
-            + "3. Year must be 4 characters.\n"
-            + "4. Hour must be between 0-23 (0 in front of single digit is optional)\n"
-            + "5. Minute must be between 0-59 (0 in front of single digit is optional).";
+            + "1. Must be a valid date\n"
+            + "2. Day must be between 1-31 (0 in front of single digit is optional)\n"
+            + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
+            + "4. Year must be 4 characters.\n"
+            + "5. Hour must be between 0-23 (0 in front of single digit is optional)\n"
+            + "6. Minute must be between 0-59 (0 in front of single digit is optional).";
 
     private Index patientIndex;
     private Index doctorIndex;
