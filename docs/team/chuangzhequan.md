@@ -10,22 +10,33 @@ PlannerMD is an all-in-one desktop application to help clinic receptionists mana
 Given below are my contributions to the project.
 
 * **New Feature**: 
-
+  * Add Doctor functionality
+  * Add Appointment functionality
+  * Delete Appointment functionality
+  * Test builders for appointments
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
 
 * **Enhancements to existing features**:
-
+  * Added date of birth field to Person class
+  
 * **Documentation**:
   * User Guide:
     * Updated all commands relating to Patient's personal details with the Birth Date field
+    * Create add appointment command documentation
+    * Create delete appointment command documentation
+    * Add why CLI and how to use CLI
+    * Add introduction and table contents
   * Developer Guide:
     * Added target user profile
     * Added value propositions
     * Added user stories
     * Added use cases
-    * Added Birth Date field to Person class 
+    * Added Birth Date field to Person class
+    * Updated Architecture
+    * Add cases for manual testing for adding and deleting appointments
+    * Add implementation for adding and deleting appointments
 
 * **Community**:
 
