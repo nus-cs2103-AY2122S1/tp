@@ -41,7 +41,6 @@ Manage large groups of contacts with advanced features such as **Import** for a 
     - [Retrieve Command History - ↑ / ↓](#CommandHistory)
     - [Exiting the App - exit](#Exit)
  - [Keyboard Mappings](#KeyboardMappings)
- - [Coming Soon](#ComingSoon)
  - [FAQ](#FAQ)
  - [Command Summary](#CommandSummary)
 
@@ -466,16 +465,6 @@ exit
 8. <kbd>F1</kbd>: To Launch the Help Window.
 
 > TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
-
-<h2 id = "ComingSoon"> </h2>
-
-## Coming Soon
-
-1. Splash Screen
-2. Optional Fields and Telegram handle
-3. Find using Tags
-4. Import and Export Student Details 
-5. Show Function to display details
 
 <h2 id = "FAQ"> </h2>
 
