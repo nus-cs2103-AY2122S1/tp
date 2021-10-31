@@ -16,8 +16,9 @@ public class FindGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all groups whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Note: * All special characters except dashes (-) will be ignored, and partial names will be matched.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " W14-4";
+            + "Example: " + COMMAND_WORD + " W14-4 W15";
 
     private final GroupContainsKeywordsPredicate predicate;
 

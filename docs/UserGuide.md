@@ -80,6 +80,7 @@ Adds a student to the student list.
 
 Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO NAME] [t/TAG]...`
 
+* `NAME` should only contain alphabets and spaces.
 * GitHub link will only be shown if both `GITHUB USERNAME` and `REPO NAME` are specified.
 * `STUDENTNUMBER` must consist of a character, followed by 7 digits, followed by another character.
   Case of character does not matter.
@@ -173,7 +174,7 @@ Format: `findStudent KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Special characters will be ignored e.g. `Alice!` will match `Alice`
+* Numbers and special characters will be ignored e.g. `Alice!` will match `Alice`
 * Partial names will be matched e.g. `Han` will match `Hans`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -283,7 +284,7 @@ Format: `findGroup KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `w14-4` will match `W14-4`
 * The order of the keywords does not matter. e.g. `w14 w15` will match `w15 w14`
 * Only the group name is searched.
-* Most special characters will be ignored e.g. `w14!` will match `w14` except dashes: `-`
+* All special characters except dashes (`-`) will be ignored e.g. `w14!` will match `w14`
 * Partial group names will be matched e.g. `w14` will match `w14-4`
 * Groups matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `w14 w15` will return `w14-4`, `w14-3`, `w15-1`
@@ -291,7 +292,7 @@ Format: `findGroup KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findGroup w14` returns `W14-3` and `W14-4`
 * `findGroup w14 w15` returns `W14-3`, `W14-4`, `W15-2`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find group W14-4'](images/findGroupW14-4.png)
 
 
 ### Clearing all entries from group list: `clearGroups`
