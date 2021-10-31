@@ -208,7 +208,7 @@ Adding an appointment requires the user to input valid patient and doctor indexe
 ![AddAppointment](images/AddAppointmentActivityDiagram.png)
 1. After user enters the add appointment command `appt -a` with the relevant prefix, the input will be sent
    to `AddAppointmentCommandParser` for parsing.
-2. `AddAppointmentCommandParser` will check if the prefixes are relevant. If the prefixes are relevant, a new `AddAppointmentCommand`
+2. `AddAppointmentCommandParser` will check if the prefixes are relevant. If the prefixes are relevant, a new `AddAppointmentCommand` which extends `AppointmentCommand`
    is created. The `AddAppointmentCommand` implements the `execute()` method from the abstract class `Command`. If the prefixes are not relevant,
    a `ParseException` will be thrown, and the missing prefixes' error message will be shown.
 3. The `AddAppointmentCommand` will run `execute()`. First, it retrieves the `Patient` object and the `Doctor` object at the given index from the model. If the index is out of range of the
@@ -220,8 +220,8 @@ Deleting an appointment requires the user to input a valid index of the desired 
 #### Implementation
 1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
    to `DeleteAppointmentCommandParser` for parsing.
-2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` which extends
-   is created. If not, a `ParseException` will be thrown, and the invalid index message will be shown.
+2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` 
+   which extends `AppointmentCommand` is created. If not, a `ParseException` will be thrown, and the invalid index message will be shown.
 3. The `DeleteAppointmentCommand` will execute the command, removing the appointment at the inputted index. Then, it will return the
    success message as a `CommandResult` object.
 4. The UI will then display the result
