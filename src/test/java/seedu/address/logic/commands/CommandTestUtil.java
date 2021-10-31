@@ -145,7 +145,7 @@ public class CommandTestUtil {
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "32 Dec 2001"; // No such date
     public static final String INVALID_CANCEL_DATE_DESC = " " + PREFIX_CANCEL + "32 Dec 2001"; // No such date
     public static final String INVALID_UNCANCEL_DATE_DESC = " " + PREFIX_UNCANCEL + "32 Dec 2001"; // No such date
-    public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "01000-0800"; // Start after end
+    public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
     public static final String INVALID_LESSON_RATES_DESC =
             " " + PREFIX_RATES + "$50.50"; //'$' not allowed in lesson rates
     public static final String INVALID_OUTSTANDING_FEES_DESC =

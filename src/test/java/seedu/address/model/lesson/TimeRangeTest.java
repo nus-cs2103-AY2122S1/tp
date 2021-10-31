@@ -28,13 +28,14 @@ public class TimeRangeTest {
         // invalid time ranges
         assertFalse(TimeRange.isValidTimeRange("1200-1000")); // end time earlier than start time
         assertFalse(TimeRange.isValidTimeRange("1099-1200")); // not a time value
+        assertFalse(TimeRange.isValidTimeRange("0000-1200")); // before 8am
+        assertFalse(TimeRange.isValidTimeRange("2000-2359")); // after 10pm
         assertFalse(TimeRange.isValidTimeRange("2000:2359")); // invalid format
         assertFalse(TimeRange.isValidTimeRange("")); // empty string
-        assertFalse(TimeRange.isValidTimeRange(" ")); // empty string
 
         // valid time ranges
         assertTrue(TimeRange.isValidTimeRange("1300-1400"));
-        assertTrue(TimeRange.isValidTimeRange("0000-1400"));
+        assertTrue(TimeRange.isValidTimeRange("0800-1400"));
     }
 
     @Test

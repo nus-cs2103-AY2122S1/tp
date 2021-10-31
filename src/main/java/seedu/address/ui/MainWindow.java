@@ -212,7 +212,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void initListeners() {
-        // Add listeners that shows selected person's lessons
+        // Add listeners
         centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {

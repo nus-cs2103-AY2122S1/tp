@@ -189,15 +189,6 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isCancelled();
 
     /**
-     * Checks if this lesson lies outside typical working hours.
-     *
-     * @return True if lesson lies outside typical working hours.
-     */
-    public boolean isOddHours() {
-        return timeRange.isOddHours();
-    }
-
-    /**
      * Checks if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.
      *

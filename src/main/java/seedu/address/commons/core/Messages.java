@@ -10,8 +10,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX =
             "The lesson index provided is invalid for this student";
-    public static final String MESSAGE_ODD_HOURS = "NOTICE! You lessons lies outside of normal working hours!"
-            + " Please ensure that this is intentional!";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "There is another student with the same name!";
 
 }
