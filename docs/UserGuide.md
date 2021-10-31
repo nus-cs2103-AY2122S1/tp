@@ -376,14 +376,15 @@ Advanced user Format:`p /l`
 Format:  `group /list`<br>
 Advanced user Format: `g /l`
 
-#### _Listing all persons in a group_ : `group (INDEX) /list`
+#### _Listing all persons in a group or subgroup_ : `group (INDEX) /list`
 
-Use after you have listed out all groups (so you can select the index). Lists all persons in that group.
+Lists all persons in that group or subgroup.<br>
+Use after you have listed out all groups or subgroups (so you can select the index).<br>
 
 Format: `person (INDEX) /list`<br>
 Advanced user Format:`p (INDEX) /l`
 
-* Lists all persons of a group that is at the given `INDEX` .
+* Lists all persons of a group or subgroup that is at the given `INDEX` .
 * Do not confuse this with the list all subgroups command, whose first command word is `group`
 
 Examples:
