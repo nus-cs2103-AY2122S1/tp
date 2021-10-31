@@ -12,17 +12,16 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.ui.exceptions.CommandHistoryException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
  */
 public class CommandBox extends UiPart<Region> {
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     private final CommandExecutor commandExecutor;
     private final CommandHistory commandHistory = new CommandHistory();
 
@@ -77,6 +76,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         if (downAndAtLastCommand || upAndAtFirstCommand) {
+            logger.info("We are already at the oldest or newest command -> show current command");
             commandTextField.setText(commandHistory.getCurrentCommand());
         } else if (upPressed) {
             commandTextField.setText(commandHistory.getPrevCommand());

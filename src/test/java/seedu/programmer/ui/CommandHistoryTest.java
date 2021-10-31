@@ -2,85 +2,75 @@ package seedu.programmer.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.ui.exceptions.CommandHistoryException;
 
 public class CommandHistoryTest {
 
+    private CommandHistory commandHistory;
+
+    @BeforeEach
+    public void setUp() {
+        commandHistory = new CommandHistory();
+    }
+
     @Test
     public void add_sameInputs_equal() {
-        CommandHistory commandHistoryOne = new CommandHistory();
-        commandHistoryOne.add("test input one");
-        commandHistoryOne.add("test input two");
+        commandHistory.add("test input one");
+        commandHistory.add("test input two");
 
         CommandHistory commandHistoryTwo = new CommandHistory();
         commandHistoryTwo.add("test input one");
 
-        assertNotEquals(commandHistoryOne, commandHistoryTwo);
+        assertNotEquals(commandHistory, commandHistoryTwo);
 
         commandHistoryTwo.add("test input two");
-        assertEquals(commandHistoryOne, commandHistoryTwo);
+        assertEquals(commandHistory, commandHistoryTwo);
 
         commandHistoryTwo.add("test input three");
-        assertNotEquals(commandHistoryOne, commandHistoryTwo);
+        assertNotEquals(commandHistory, commandHistoryTwo);
     }
 
     @Test
     public void add_differentInputs_notEqual() {
-        CommandHistory commandHistoryOne = new CommandHistory();
-        commandHistoryOne.add("test input one");
-        commandHistoryOne.add("test input two");
+        commandHistory.add("test input one");
+        commandHistory.add("test input two");
 
         CommandHistory commandHistoryTwo = new CommandHistory();
         commandHistoryTwo.add("test input two");
         commandHistoryTwo.add("test input one");
 
-        assertNotEquals(commandHistoryOne, commandHistoryTwo);
-    }
-
-    @Test
-    public void getPrevCommand_emptyHistory_returnDefaultCommand() {
-        CommandHistory commandHistory = new CommandHistory();
-        assertThrows(CommandHistoryException.class, () -> commandHistory.getPrevCommand());
+        assertNotEquals(commandHistory, commandHistoryTwo);
     }
 
     @Test
     public void getPrevCommand_validHistory_success() throws CommandHistoryException {
-        CommandHistory commandHistory = new CommandHistory();
         commandHistory.add("one");
         commandHistory.add("two");
 
-        // Retrieve latest command
-        assertEquals(commandHistory.getPrevCommand(), "two");
-        // Retrieve next latest command
+        // Retrieve previous command
         assertEquals(commandHistory.getPrevCommand(), "one");
-        // Oldest command is returned when there is no older history
-        assertEquals(commandHistory.getPrevCommand(), "one");
-    }
 
-    @Test
-    public void getNextCommand_emptyHistory_returnDefaultCommand() throws CommandHistoryException {
-        CommandHistory commandHistory = new CommandHistory();
-        assertThrows(CommandHistoryException.class, () -> commandHistory.getNextCommand());
+        // Retrieve the next previous command -> return the current command
+        assertEquals(commandHistory.getCurrentCommand(), "one");
     }
 
     @Test
     public void getNextCommand_validHistory_success() throws CommandHistoryException {
-        CommandHistory commandHistory = new CommandHistory();
         commandHistory.add("one");
         commandHistory.add("two");
         commandHistory.add("three");
 
-        // getPrevCommand has not been executed --> expect the default empty command
-        assertThrows(CommandHistoryException.class, () -> commandHistory.getNextCommand());
+        // Pressing down key will return the current command if it is the most recent command
+        assertEquals(commandHistory.getCurrentCommand(), "three");
 
-        // Execute getPrevCommand to the oldest command
+        // Pressing up key thrice will return the first command
         commandHistory.getPrevCommand();
         commandHistory.getPrevCommand();
-        commandHistory.getPrevCommand();
+        assertEquals(commandHistory.getCurrentCommand(), "one");
 
         // Retrieve the next command
         assertEquals(commandHistory.getNextCommand(), "two");
@@ -89,7 +79,20 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void equals() throws CommandHistoryException {
+    public void getCurrentCommand_emptyHistory_returnsEmptyString() {
+        assertEquals(commandHistory.getCurrentCommand(), "");
+    }
+
+    @Test
+    public void getCurrentCommand_validHistory_returnsMostRecentCommand() {
+        commandHistory.add("first command");
+        commandHistory.add("second command");
+        commandHistory.add("third command");
+        assertEquals(commandHistory.getCurrentCommand(), "third command");
+    }
+
+    @Test
+    public void equals() {
         CommandHistory commandHistoryOne = new CommandHistory();
         commandHistoryOne.add("test");
         CommandHistory commandHistoryOneCopy = new CommandHistory();

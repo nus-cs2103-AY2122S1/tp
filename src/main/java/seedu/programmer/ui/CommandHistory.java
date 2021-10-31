@@ -86,6 +86,6 @@ public class CommandHistory {
     }
 
     public String getCurrentCommand() {
-        return commandHistory.get(currCommandIndex);
+        return isEmpty() ? "" : commandHistory.get(currCommandIndex);
     }
 }
