@@ -35,10 +35,10 @@ public class RemarkTest {
                 "this is a fourty-six chara string that fails. ")); // 46 chara
 
         // valid remarks
-        assertTrue(Remark.isValidRemark("")); // empty string
-        assertTrue(Remark.isValidRemark(" ")); // spaces only
+        assertTrue(Remark.isValidRemark(LengthUtil.EMPTY_STRING)); // empty string
+        assertTrue(Remark.isValidRemark(LengthUtil.WHITE_SPACE_STRING)); // spaces only
         assertTrue(Remark.isValidRemark("Likes to eat")); // less than 20 chara
-        assertTrue(Remark.isValidRemark("-")); // one character
+        assertTrue(Remark.isValidRemark(LengthUtil.ONE_CHARA)); // one character
         assertTrue(Remark.isValidRemark(
                 "this is a fourty-five chara string that pass.")); // 45 chara
 
