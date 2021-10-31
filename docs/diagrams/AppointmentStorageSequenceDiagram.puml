@@ -9,15 +9,17 @@ participant "t:JsonAdaptedTag" as JsonAdaptedTag STORAGE_COLOR
 participant "s:JsonAdaptedSession" as JsonAdaptedSession STORAGE_COLOR
 end box
 
+create JsonAdaptedAppointment
+[-> JsonAdaptedAppointment
 activate JsonAdaptedAppointment
 
 create JsonAdaptedPatient
-JsonAdaptedAppointment --> JsonAdaptedPatient
+JsonAdaptedAppointment -> JsonAdaptedPatient
 activate JsonAdaptedPatient
 
 loop number of tags for this patient
     create JsonAdaptedTag
-    JsonAdaptedPatient --> JsonAdaptedTag
+    JsonAdaptedPatient -> JsonAdaptedTag
     activate JsonAdaptedTag
     JsonAdaptedTag --> JsonAdaptedPatient : t
     deactivate JsonAdaptedTag
@@ -27,12 +29,12 @@ JsonAdaptedPatient --> JsonAdaptedAppointment : p
 deactivate JsonAdaptedPatient
 
 create JsonAdaptedDoctor
-JsonAdaptedAppointment --> JsonAdaptedDoctor
+JsonAdaptedAppointment -> JsonAdaptedDoctor
 activate JsonAdaptedDoctor
 
 loop number of tags for this doctor
     create JsonAdaptedTag
-    JsonAdaptedDoctor --> JsonAdaptedTag
+    JsonAdaptedDoctor -> JsonAdaptedTag
     activate JsonAdaptedTag
     JsonAdaptedTag --> JsonAdaptedDoctor : t
     deactivate JsonAdaptedTag
@@ -43,7 +45,7 @@ deactivate JsonAdaptedDoctor
 
 
 create JsonAdaptedSession
-JsonAdaptedAppointment --> JsonAdaptedSession
+JsonAdaptedAppointment -> JsonAdaptedSession
 activate JsonAdaptedSession
 
 JsonAdaptedSession --> JsonAdaptedAppointment : s

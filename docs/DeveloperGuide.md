@@ -211,7 +211,20 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 
 ### Filtering appointments
 
-### Storage
+### Storing an appointment
+
+The creation of a `JsonAdaptedAppointment` will create the respective `JsonAdaptedPatient` and `JsonAdaptedDoctor` involved in the appointment The creation of `JsonAdaptedPatient` and `JsonAdaptedDoctor` will create the number of tags that the respective `Patient` and `Doctor` objects have.
+
+We use `JsonAdaptedPatient` and `JsonAdaptedDoctor` that are used to store `Patient` and `Doctor` standalone objects 
+as json to ensure that these objects are stored in a consistent format, whether as a standalone `Patient`/`Doctor` or
+a `Patient`/`Doctor` in an `Appointment`.
+
+The creation of a `JsonAdaptedAppointment` will also create the `JsonAdaptedSession`
+which is synonymous to the `Session` object contained in an `Appointment`.
+
+The Sequence Diagram below illustrates the interactions within the Storage component for the creation of a `JsonAdaptedAppointment`.
+
+<img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
 
 --- 
 
