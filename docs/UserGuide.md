@@ -81,6 +81,22 @@ Refer to the [Features](#features) below for details of each command.
 
 </div>
 
+### Format for person details
+
+Field | Format
+------|------------------
+`NAME` | Names should only contain alphanumeric characters and spaces, and should not be blank.
+`PHONE_NUMBER` | Phone numbers should only contain numbers and should be at least 3 digits long.
+`EMAIL` | Emails should be of the format local-part@domain. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must end with a domain label at least 2 characters long, have each domain label start and end with alphanumeric characters and must have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+`CASE_NUMBER` | Case numbers should be input as positive integers with no leading zeros. Case numbers can be anywhere from 1 to 6 digits long. Note that case numbers are displayed in a fixed format of 6 digits, padded with zeros on the left, if needed.
+`HOME_ADDRESS` | Addresses can be any non-empty string.
+`WORK_ADDRESS` | Addresses can be any non-empty string.
+`QUARANTINE_ADDRESS` | Addresses can be any non-empty string.
+`SHN_PERIOD` | SHN periods should comprise two dates in the [ISO-8601 format](https://www.iso.org/iso-8601-date-and-time-format.html) (i.e. yyyy-MM-dd), separated by a space. The start date should be keyed before the end date, and must occur earlier than the end date by at least 1 day.
+`NEXT_OF_KIN_NAME` | Names should only contain alphanumeric characters and spaces, and should not be blank.
+`NEXT_OF_KIN_PHONE` | Phone numbers should only contain numbers and should be at least 3 digits long.
+`NEXT_OF_KIN_ADDRESS` | Addresses can be any non-empty string.
+
 ### Adding a person: `add`
 
 Adds a person to the persons list for tracking.
@@ -115,6 +131,7 @@ Format: `find FIELD_PREFIX KEYWORD [MORE_KEYWORDS]`
 * For find by name (`n/`),
   * search is case-insensitive. e.g `hans` will match `Hans`
   * full words will be matched e.g. Han will not match Hans
+  * individual words will be matched e.g. Alex Hans will match Alex Yeo and Hans Yeo
   * the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * For find by phone number (`p/`), phone numbers that start with the specified number will be matched e.g. `123` and `1234` will match `12345678`
 * For find by case number (`cn/`),
@@ -122,10 +139,10 @@ Format: `find FIELD_PREFIX KEYWORD [MORE_KEYWORDS]`
   * case number must be entered in the valid format
 * For find by SHN start date (`sh/start:`),
   * search will only match if SHN start date is equal, e.g. `2021-01-01` will match `2021-01-01`
-  * SHN start date must be entered in valid ISO-8601 date format
+  * SHN start date must be entered in valid yyyy-MM-dd (ISO-8601) date format
 * For find by SHN end date (`sh/end:`), 
   * search will only match if SHN end date is equal, e.g. `2021-01-02` will match `2021-01-02`
-  * SHN end date must be entered in valid ISO-8601 date format
+  * SHN end date must be entered in valid yyyy-MM-dd (ISO-8601) date format
 * Only one of the following can be searched at a time: name, phone number, case number, SHN start date and SHN end date
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -133,16 +150,17 @@ Examples:
 * `find n/John` will match the following names: `john` and `John Doe` 
 * `find n/alex david` will match the following names: `Alex Yeoh` and `David Li` 
 * `find p/123` will match the following phone numbers: `12345678` and `12387654` 
-* `find cn/1` will match the following case numbers: `111` and `111` 
-* `find sh/start:2021-01-01` will match the following SHN start dates: `2021-01-01` and `2021-01-02` 
-* `find sh/end:2021-01-02` will match the following SHN end dates: `2021-01-01` and `2021-01-02` 
+* `find cn/1` will only match the following case number: `1`
+* `find sh/start:2021-01-01` will only match the following SHN start date: `2021-01-01` 
+* `find sh/end:2021-01-02` will only match the following SHN end date: `2021-01-02` 
 
-### Finding persons by name: `tshift`
+### Shifting SHN End Dates: `tshift`
 
 Shifts all person's SHN end dates by the specified number of days.
 
 Format: `tshift [PLUS_MINUS_SIGN]DAYS`
 * `DAYS` should be a number between `1` and `90` inclusive
+* The shift will only be applied to the persons which are currently displayed in the UI
 * Postpones the SHN end date if the evaluated value is positive
 * Brings forward the SHN end date if the value is negative
 * The SHN end dates will only be brought forward up to and including a day after the person's SHN start date
@@ -180,9 +198,10 @@ Sorts the persons list based on the specified field prefixes.
 
 Format: `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTION]`
 
+* `DIRECTION` can either be `asc` or `dsc`.
+* Direction `asc` indicates ascending sort order and `dsc` indicates descending sort order.
 * Sorts the persons list from the first to the last specified field prefix.
 * At least one field prefix must be specified.
-* Direction "asc" indicates ascending order and "dsc" indicates descending order.
 * Specifying the sort direction is optional. By default, field prefixes are sorted in ascending order.
 
 Examples:
