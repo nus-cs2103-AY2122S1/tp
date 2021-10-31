@@ -6,16 +6,18 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
 Interface ReadOnlyInventory <<Interface>>
-Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
+Interface Displayable <<Interface>>
 Class Inventory
 Class ReadOnlyInventory
 Class Model
 Class ModelManager
-Class UserPrefs
-Class ReadOnlyUserPrefs
 Class Order
 Class UniqueItemList
+Class TransactionRecord
+Class Item
+Class ItemCard
+Class TransactionCard
 
 Class Item {
     -name: Name
@@ -28,20 +30,34 @@ Class Item {
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-Inventory .up.|> ReadOnlyInventory
+Model .right.> Displayable
+Model .left.> ReadOnlyInventory
 
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyInventory
 ModelManager -left-> "1" Inventory
-ModelManager -right-> "1" UserPrefs
-ModelManager -left-> "0..1" Order
+ModelManager -right-> "0..1" Order
+ModelManager --> "*" TransactionRecord
+
 Inventory .right.> Order
-UserPrefs .up.|> ReadOnlyUserPrefs
+
+Inventory .up.|> ReadOnlyInventory
 
 Order *--> "1" UniqueItemList
 Inventory *--> "1" UniqueItemList
-UniqueItemList -right-> "~* all" Item
 
-ModelManager -->"~* filtered" Item
+UniqueItemList -right-> "~* all" Item
+ModelManager -right->"~* filtered" Item
+
+
+Item .up.|> Displayable
+TransactionRecord -[hidden]right- Item
+TransactionRecord .up.|> Displayable
+
+TransactionRecord .up.|> Order
+Item .up.|> Order
+
+Item .down.> ItemCard
+TransactionRecord .down.> TransactionCard
+
+
 @enduml
