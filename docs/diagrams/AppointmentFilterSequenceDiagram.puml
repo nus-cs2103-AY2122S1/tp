@@ -31,16 +31,22 @@ create AppointmentCommandParser
 PlannerMdParser -> AppointmentCommandParser
 activate AppointmentCommandParser
 
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+AppointmentCommandParser -[hidden]-> PlannerMdParser
+AppointmentCommandParser -[hidden]-> PlannerMdParser
 AppointmentCommandParser --> PlannerMdParser
 deactivate AppointmentCommandParser
 
-PlannerMdParser -> AppointmentCommandParser : parse("-f p/Alice s/19/10/2021")
+PlannerMdParser -> AppointmentCommandParser : parse("appt -f p/Alice s/19/10/2021")
 activate AppointmentCommandParser
 
 create FilterAppointmentCommandParser
 AppointmentCommandParser -> FilterAppointmentCommandParser
 activate FilterAppointmentCommandParser
 
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+FilterAppointmentCommandParser -[hidden]-> PlannerMdParser
+FilterAppointmentCommand -[hidden]-> PlannerMdParser
 FilterAppointmentCommandParser --> AppointmentCommandParser
 deactivate FilterAppointmentCommandParser
 
@@ -62,6 +68,9 @@ create FilterAppointmentCommand
 FilterAppointmentCommandParser -> FilterAppointmentCommand : FilterAppointmentCommand(filter)
 activate FilterAppointmentCommand
 
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+FilterAppointmentCommand -[hidden]-> PlannerMdParser
+FilterAppointmentCommand -[hidden]-> PlannerMdParser
 FilterAppointmentCommand --> FilterAppointmentCommandParser : f
 deactivate FilterAppointmentCommand
 
@@ -105,6 +114,9 @@ create CommandResult
 FilterAppointmentCommand -> CommandResult
 activate CommandResult
 
+'Hidden arrow to increase the length of the activation bar so that the diagram is taller and easier to see
+CommandResult -[hidden]-> PlannerMdParser
+CommandResult -[hidden]-> PlannerMdParser
 CommandResult --> FilterAppointmentCommand : result
 deactivate CommandResult
 
