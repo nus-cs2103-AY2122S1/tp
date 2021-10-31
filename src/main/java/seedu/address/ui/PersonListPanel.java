@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -49,11 +50,14 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setOnMouseClicked(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
-                Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
+                MultipleSelectionModel<Person> selectedPersonModel = personListView.getSelectionModel();
+                Person selectedPerson = selectedPersonModel.getSelectedItem();
+                CommandBox.handleViewSelected(selectedPersonModel);
+                personListView.getSelectionModel().clearSelection();
                 logger.info("selected " + selectedPerson);
                 selectedPersonPanelPlaceholder.setVvalue(0.0);
-                selected.updatePerson(selectedPerson);
-                selected.setPersonDetails();
+//                selected.updatePerson(selectedPerson);
+//                selected.setPersonDetails();
             }
         });
     }
