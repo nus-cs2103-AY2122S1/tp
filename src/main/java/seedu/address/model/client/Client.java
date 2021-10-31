@@ -99,7 +99,7 @@ public class Client {
         }
 
         return otherClient.getName().equals(getName())
-                || otherClient.getEmail().equals(getEmail());
+                && otherClient.getEmail().equals(getEmail());
     }
 
     public Name getName() {
