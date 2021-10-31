@@ -261,7 +261,32 @@ A clearer view of this sequence diagram can be found [here](images/AppointmentFi
 ![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
 
 
-### Storage
+### Storing an appointment
+
+#### What it is
+
+Stores an Appointment object in the Json file by first creating the `JsonAdaptedAppointment` object, which is the Json representation of the `Appointment` object. 
+Then, the `JsonAdaptedAppointment` is then contained within the `JsonSerializablePlannerMd` object and `JsonSerializablePlannerMd` is passed as parameter to `JsonUtil.saveJsonFile` to write all records,
+including the `Appointment` object, into the file.
+
+The implementation focuses on the creation of a single `JsonAdapatedAppointment` object after the user keys in a command that changes the current records.
+
+#### Implementation
+
+The creation of a `JsonAdaptedAppointment` will create the respective `JsonAdaptedPatient` and `JsonAdaptedDoctor` involved in the appointment. 
+The creation of `JsonAdaptedPatient` and `JsonAdaptedDoctor` will create the number of tags that the respective `Patient` and `Doctor` objects have.
+
+We use `JsonAdaptedPatient` and `JsonAdaptedDoctor` that are used to store `Patient` and `Doctor` standalone objects 
+as Json to ensure that these objects are stored in a consistent format, whether as a standalone `Patient`/`Doctor` or
+a `Patient`/`Doctor` in an `Appointment`.
+
+The creation of a `JsonAdaptedAppointment` will also create the `JsonAdaptedSession`
+which is synonymous to the `Session` object contained in an `Appointment`.
+
+The Sequence Diagram below illustrates the interactions within the Storage component for the creation of a `JsonAdaptedAppointment`.
+
+<img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
+
 
 --- 
 
