@@ -19,6 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.student.Participation;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -29,7 +30,7 @@ public class MarkStudentPartCommandTest {
 
     private static final Integer[] MARK_PARTICIPATION_PRESENT_EXPECTED = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private static final Integer[] MARK_PARTICIPATION_ABSENT_EXPECTED = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private static final int FIRST_WEEK = 1;
+    private static final int FIRST_WEEK = Participation.FIRST_WEEK_OF_SEM;
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -40,15 +41,18 @@ public class MarkStudentPartCommandTest {
         Student studentToMark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student participation status
-        if (model.getStudentParticipation(studentToMark, FIRST_WEEK - 1) == "participated") {
-            model.markStudentParticipation(studentToMark, FIRST_WEEK - 1);
+        if (model.getStudentParticipation(studentToMark,
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM) == "participated") {
+            model.markStudentParticipation(studentToMark,
+                    FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withParticipation(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
 
         MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT),
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -66,15 +70,18 @@ public class MarkStudentPartCommandTest {
         Student studentToMark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student participation status
-        if (model.getStudentParticipation(studentToMark, FIRST_WEEK - 1) == "not participated") {
-            model.markStudentParticipation(studentToMark, FIRST_WEEK - 1);
+        if (model.getStudentParticipation(studentToMark,
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM) == "not participated") {
+            model.markStudentParticipation(studentToMark,
+                    FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withParticipation(MARK_PARTICIPATION_ABSENT_EXPECTED).build();
 
         MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT),
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -94,15 +101,18 @@ public class MarkStudentPartCommandTest {
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student participation status
-        if (model.getStudentParticipation(studentInFilteredList, FIRST_WEEK - 1) == "participated") {
-            model.markStudentParticipation(studentInFilteredList, FIRST_WEEK - 1);
+        if (model.getStudentParticipation(studentInFilteredList,
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM) == "participated") {
+            model.markStudentParticipation(studentInFilteredList,
+                    FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withParticipation(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
 
         MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT),
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -122,15 +132,18 @@ public class MarkStudentPartCommandTest {
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         // reset student participation status
-        if (model.getStudentParticipation(studentInFilteredList, FIRST_WEEK - 1) == "not participated") {
-            model.markStudentParticipation(studentInFilteredList, FIRST_WEEK - 1);
+        if (model.getStudentParticipation(studentInFilteredList,
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM) == "not participated") {
+            model.markStudentParticipation(studentInFilteredList,
+                    FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
         }
 
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withParticipation(MARK_PARTICIPATION_ABSENT_EXPECTED).build();
 
         MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
-                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
+                Collections.singletonList(INDEX_FIRST_STUDENT),
+                FIRST_WEEK - Participation.FIRST_WEEK_OF_SEM);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);

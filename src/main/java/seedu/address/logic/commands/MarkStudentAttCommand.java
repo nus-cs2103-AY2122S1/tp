@@ -10,6 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
 
 /**
@@ -25,24 +26,24 @@ public class MarkStudentAttCommand extends Command {
             + "Marking a student who is present will change his attendance to absent.\n"
             + "Parameters: INDEX [MORE_INDEXES] (must be positive integers)"
             + " [" + PREFIX_WEEK + "WEEK]\n"
-            + "Example: " + COMMAND_WORD + " 1 2 3 "
+            + "Example: " + COMMAND_WORD + " 3 4 5 "
             + PREFIX_WEEK + "1";
 
     public static final String MESSAGE_MARK_STUDENT_SUCCESS = "Student: %1$s is marked as %2$s for week %3$s!\n";
 
     private final List<Index> targetIndexList;
-    private final int week;
+    private final int zeroIndexWeek;
 
     /**
      * Marks student(s) attendance (present/absent)
      * @param targetIndexList The list of indexes of students' attendances to be marked.
      */
-    public MarkStudentAttCommand(List<Index> targetIndexList, int week) {
+    public MarkStudentAttCommand(List<Index> targetIndexList, int zeroIndexWeek) {
         requireNonNull(targetIndexList);
-        requireNonNull(week);
+        requireNonNull(zeroIndexWeek);
 
         this.targetIndexList = targetIndexList;
-        this.week = week;
+        this.zeroIndexWeek = zeroIndexWeek;
     }
 
     @Override
@@ -55,14 +56,17 @@ public class MarkStudentAttCommand extends Command {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
+        }
+
+        for (Index targetIndex : targetIndexList) {
             Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
 
-            model.markStudentAttendance(studentToUpdate, week);
-            String type = model.getStudentAttendance(studentToUpdate, week);
-            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            model.markStudentAttendance(studentToUpdate, zeroIndexWeek);
+            String type = model.getStudentAttendance(studentToUpdate, zeroIndexWeek);
             result.append(String.format(MESSAGE_MARK_STUDENT_SUCCESS,
-                    studentToUpdate.getName(), type, week + 1));
+                    studentToUpdate.getName(), type, zeroIndexWeek + Attendance.FIRST_WEEK_OF_SEM));
         }
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(result.toString());
     }
 

@@ -73,7 +73,7 @@ public class CommandTestUtil {
     public static final String REPONAME_DESC_BOB = " " + PREFIX_REPO + VALID_REPONAME_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String VALID_WEEK = " " + PREFIX_WEEK + 1;
+    public static final String VALID_WEEK = " " + PREFIX_WEEK + 3;
     public static final String GROUPNAME_DESC_G1 = " " + PREFIX_GROUP + VALID_GROUPNAME_G1;
     public static final String GROUPNAME_DESC_G2 = " " + PREFIX_GROUP + VALID_GROUPNAME_G2;
     public static final String YEAR_DESC_G1 = " " + PREFIX_YEAR + VALID_YEAR_G1;

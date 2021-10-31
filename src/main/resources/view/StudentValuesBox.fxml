@@ -18,18 +18,15 @@
             <ColumnConstraints hgrow="ALWAYS" minWidth="20" maxWidth="20" prefWidth="20" />
         </columnConstraints>
 
-        <Label text="1" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <Label text="2" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <Label text="3" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-        <Label text="4" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-        <Label text="5" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
-        <Label text="6" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
-        <Label text="7" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
-        <Label text="8" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="7" GridPane.rowIndex="0"/>
-        <Label text="9" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="8" GridPane.rowIndex="0"/>
-        <Label text="10" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="9" GridPane.rowIndex="0"/>
-        <Label text="11" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="10" GridPane.rowIndex="0"/>
-        <Label text="12" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="11" GridPane.rowIndex="0"/>
-        <Label text="13" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="12" GridPane.rowIndex="0"/>
+        <Label text="3" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label text="4" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label text="5" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <Label text="6" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+        <Label text="7" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+        <Label text="8" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+        <Label text="9" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="6" GridPane.rowIndex="0"/>
+        <Label text="10" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="7" GridPane.rowIndex="0"/>
+        <Label text="11" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="8" GridPane.rowIndex="0"/>
+        <Label text="12" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="9" GridPane.rowIndex="0"/>
     </GridPane>
 </fx:root>

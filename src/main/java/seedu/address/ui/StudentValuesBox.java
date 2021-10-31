@@ -38,9 +38,8 @@ public class StudentValuesBox extends VBox {
         }
         valueHeader.setText(header);
 
-
         ObservableList<Node> children = valueArrayGrid.getChildren();
-        for (int i = 0; i < children.size(); i++) {
+        for (int i = 0; i <= Attendance.LAST_WEEK_OF_SEM - Attendance.FIRST_WEEK_OF_SEM; i++) {
             if (attendance.checkPresent(i) == 1) {
                 children.get(i).getStyleClass().add("studentValuePositive");
             } else {
@@ -64,7 +63,7 @@ public class StudentValuesBox extends VBox {
         valueHeader.setText(header);
 
         ObservableList<Node> children = valueArrayGrid.getChildren();
-        for (int i = 0; i < children.size(); i++) {
+        for (int i = 0; i <= Participation.LAST_WEEK_OF_SEM - Participation.FIRST_WEEK_OF_SEM; i++) {
             if (participation.checkParticipated(i) == 1) {
                 children.get(i).getStyleClass().add("studentValuePositive");
             } else {

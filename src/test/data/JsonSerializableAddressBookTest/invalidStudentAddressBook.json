@@ -5,8 +5,8 @@
     "tagged" : [ ],
     "username" : "!!!",
     "repo" : "AA@@#",
-    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ],
-    "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1 ]
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 ]
   } ],
   "tasks" : [ ],
   "groups" : [ ]

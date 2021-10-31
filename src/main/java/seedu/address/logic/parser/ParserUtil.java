@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DUPLICATE_INDEX;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,6 +64,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndex} separated by any number of spaces into an array of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer) or duplicates are found.
+     */
+    public static ArrayList<Index> parseMultipleIndexWithoutDuplicates(String oneBasedIndex) throws ParseException {
+        ArrayList<Index> indexArray = parseMultipleIndex(oneBasedIndex);
+        boolean hasDuplicateIndex = indexArray.stream()
+                .map(i -> i.getZeroBased())
+                .distinct()
+                .count() != indexArray.size();
+        if (hasDuplicateIndex) {
+            throw new ParseException(MESSAGE_INVALID_DUPLICATE_INDEX);
+        }
+        return indexArray;
+    }
+
+    /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
@@ -70,9 +88,10 @@ public class ParserUtil {
     public static int parseWeek(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!Attendance.isValidWeek(Integer.parseInt(oneBasedIndex))) {
-            throw new ParseException(String.format(Attendance.MESSAGE_CONSTRAINTS, Attendance.NUMBER_OF_WEEKS));
+            throw new ParseException(String.format(Attendance.MESSAGE_CONSTRAINTS,
+                    Attendance.FIRST_WEEK_OF_SEM, Attendance.LAST_WEEK_OF_SEM));
         }
-        return Integer.parseInt(trimmedIndex) - 1;
+        return Integer.parseInt(trimmedIndex) - Attendance.FIRST_WEEK_OF_SEM;
     }
 
     /**
