@@ -53,7 +53,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        expectedModel.setClientByClientIds(List.of(clientId), descriptor);
+        expectedModel.setAllClients(List.of(clientId), descriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -74,7 +74,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setClientByClientIds(List.of(clientId), descriptor);
+        expectedModel.setAllClients(List.of(clientId), descriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -120,7 +120,7 @@ public class EditCommandTest {
             StringUtil.joinListToString(editClientList, "\n"));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setClientByClientIds(clientIdlist, editClientDescriptor);
+        expectedModel.setAllClients(clientIdlist, editClientDescriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

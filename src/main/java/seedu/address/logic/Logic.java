@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.tag.Tag;
 import seedu.address.ui.ThemeType;
 
 /**
@@ -95,7 +96,6 @@ public interface Logic {
      */
     void createAddressBook() throws CommandException;
 
-
     /**
      * Returns the list of all address book file path.
      */
@@ -107,12 +107,17 @@ public interface Logic {
     ObservableList<ThemeType> getThemeList();
 
     /**
+     * Returns the current theme.
+     */
+    ThemeType getTheme();
+
+    /**
      * Sets the theme of the GUI in user prefs.
      */
     void setTheme(ThemeType theme);
 
     /**
-     * Returns the current theme.
+     * Returns an unmodifiable view of the filtered list of tags
      */
-    ThemeType getTheme();
+    ObservableList<Tag> getFilteredTagList();
 }

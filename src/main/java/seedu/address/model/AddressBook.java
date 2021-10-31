@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.MainApp;
@@ -19,7 +20,6 @@ import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagIsUnreferenced;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -44,9 +44,17 @@ public class AddressBook implements ReadOnlyAddressBook {
          */
         clients = new UniqueClientList();
         tags = new UniqueTagList();
-    }
 
-    public AddressBook() {
+        clients.asUnmodifiableObservableList().addListener((ListChangeListener<Client>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    Client client = change.getRemoved().get(0);
+                    logger.fine(client.getName() + " was replaced/removed from UniqueClientList");
+                    client.delete();
+                    removeUnreferencedTags();
+                }
+            }
+        });
     }
 
     /**
@@ -57,45 +65,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
+    public AddressBook() {
+    }
+
     //// list overwrite operations
-
-    /**
-     * Replaces the contents of the client list with {@code clients}.
-     * {@code clients} must not contain duplicate clients.
-     */
-    public void setClients(List<Client> clients) {
-        this.clients.setClients(clients);
-        removeUnreferencedTags();
-    }
-
-    /**
-     * Replaces the clientCounter of the address book with {@code clientCounter}.
-     */
-    @Override
-    public void setClientCounter(String clientCounter) {
-        this.clientCounter = clientCounter;
-    }
-
-    /**
-     * Increments the clientCounter of the address book by 1 {@code clientCounter}.
-     */
-    @Override
-    public void incrementClientCounter() {
-        try {
-            int clientCounterInt = Integer.parseInt(this.clientCounter) + 1;
-            this.clientCounter = String.valueOf(clientCounterInt);
-        } catch (NumberFormatException e) {
-            this.clientCounter = "1";
-        }
-    }
-
-    /**
-     * Gets the clientCounter of the address book.
-     */
-    @Override
-    public String getClientCounter() {
-        return this.clientCounter;
-    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -103,12 +76,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setClients(newData.getClientList());
+        setTags(newData.getTagList());
         setClientCounter(newData.getClientCounter());
     }
 
-    //// person-level operations
+    /**
+     * Replaces the contents of the client list with {@code clients}.
+     * {@code clients} must not contain duplicate clients.
+     */
+    public void setClients(List<Client> clients) {
+        this.clients.setClients(clients);
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
+    }
 
     /**
+     * /**
      * Returns true if a client with the same identity as {@code client} exists in the address book.
      */
     public boolean hasClient(Client client) {
@@ -140,12 +125,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      * If the given client's next meeting is edited, {@code meetings} will be updated with the new NextMeeting
      *
-     * @return
+     * @return the given client {@code target} in the list with {@code editedClient}.
      */
-    public List<Client> setClientByClientIds(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
+    public List<Client> setAllClients(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireNonNull(clientIds);
         requireNonNull(editedClientDescriptor);
-        return clients.setClientByClientIds(clientIds, editedClientDescriptor);
+        return clients.setAll(clientIds, editedClientDescriptor);
     }
 
     /**
@@ -168,16 +153,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return clients.getClient(clientId);
     }
 
+    //// person-level operations
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removeClient(Client key) {
         clients.remove(key);
-        removeUnreferencedTags();
     }
-
-    //// tag-level operations
 
     public void addTag(Tag tag) {
         tags.add(tag);
@@ -185,17 +169,30 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes tags that are unreferenced from the list.
+     * This method should be invoked when
      */
     public void removeUnreferencedTags() {
-        logger.info("Cleaning unreferenced tags...");
+        Predicate<Tag> predicate = new TagIsUnreferenced();
         ArrayList<Predicate<Tag>> predicatesToDelete = new ArrayList<>();
-        predicatesToDelete.add(new TagIsUnreferenced());
-        try {
-            FilteredList<Tag> removedTags = removeTagByFields(predicatesToDelete);
-            logger.info(removedTags.size() + " unreferenced tags are cleared.");
-        } catch (TagNotFoundException ignored) {
-            logger.info("0 unreferenced tags are cleared.");
+        predicatesToDelete.add(predicate);
+
+        FilteredList<Tag> filteredList = getTagList().filtered(predicate);
+
+        if (filteredList.size() < 1) {
+            return;
         }
+
+        logger.info("Cleaning unreferenced tags...");
+        FilteredList<Tag> removedTags = removeTagByFields(predicatesToDelete);
+        logger.info(removedTags.size() + " unreferenced tags are cleared.");
+    }
+
+    /**
+     * Removes client with matching {@code clientId} and {@code email} from this {@code AddressBook}.
+     * Client with {@code clientId} and {@code email} must exist in the address book.
+     */
+    public FilteredList<Tag> removeTagByFields(List<Predicate<Tag>> predicates) {
+        return tags.removeByFields(predicates);
     }
 
     /**
@@ -219,24 +216,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.getTag(tagName);
     }
 
-
-    //// util methods
-
     /**
      * Removes client with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Client with {@code clientId} and {@code email} must exist in the address book.
      */
-    public List<Client> deleteClientByClientIds(List<ClientId> clientIds) {
-        return clients.deleteClientByClientIds(clientIds);
+    public List<Client> removeAllClients(List<ClientId> clientIds) {
+        return clients.removeAll(clientIds);
     }
 
-    /**
-     * Removes client with matching {@code clientId} and {@code email} from this {@code AddressBook}.
-     * Client with {@code clientId} and {@code email} must exist in the address book.
-     */
-    public FilteredList<Tag> removeTagByFields(List<Predicate<Tag>> predicates) {
-        return tags.removeByFields(predicates);
-    }
+    //// tag-level operations
 
     public void updateLastMetDate() {
         clients.updateLastMetDate();
@@ -248,14 +236,46 @@ public class AddressBook implements ReadOnlyAddressBook {
         return clients.asUnmodifiableObservableList();
     }
 
+    /**
+     * Gets the clientCounter of the address book.
+     */
+    @Override
+    public String getClientCounter() {
+        return this.clientCounter;
+    }
+
+    /**
+     * Replaces the clientCounter of the address book with {@code clientCounter}.
+     */
+    @Override
+    public void setClientCounter(String clientCounter) {
+        this.clientCounter = clientCounter;
+    }
+
+
+    //// util methods
+
+    /**
+     * Increments the clientCounter of the address book by 1 {@code clientCounter}.
+     */
+    @Override
+    public void incrementClientCounter() {
+        try {
+            int clientCounterInt = Integer.parseInt(this.clientCounter) + 1;
+            this.clientCounter = String.valueOf(clientCounterInt);
+        } catch (NumberFormatException e) {
+            this.clientCounter = "1";
+        }
+    }
+
+    @Override
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();
     }
 
     @Override
-    public String toString() {
-        return clients.asUnmodifiableObservableList().size() + " clients";
-        // TODO: refine later
+    public int hashCode() {
+        return clients.hashCode();
     }
 
     @Override
@@ -265,9 +285,10 @@ public class AddressBook implements ReadOnlyAddressBook {
             && clients.equals(((AddressBook) other).clients));
     }
 
-
     @Override
-    public int hashCode() {
-        return clients.hashCode();
+    public String toString() {
+        return clients.asUnmodifiableObservableList().size() + " clients";
+        // TODO: refine later
     }
+
 }

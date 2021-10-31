@@ -28,7 +28,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
-import seedu.address.model.client.NextMeeting;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.ui.ThemeType;
@@ -93,12 +92,12 @@ public class AddCommandTest {
      */
     public static class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -118,12 +117,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableValue<Path> getAddressBookFilePathObject() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookDirectory() {
+        public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -138,17 +132,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setTheme(ThemeType theme) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ThemeType getTheme() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setTheme(ThemeType theme) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableValue<Path> getAddressBookFilePathObject() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getAddressBookDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -168,17 +167,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addClient(Client client) {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -193,13 +187,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Client> deleteClientByClientIds(List<ClientId> clientIds) {
+        public List<Client> removeAllClients(List<ClientId> clientIds) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Client> setClientByClientIds(List<ClientId> clientIds,
-            EditClientDescriptor editedClientDescriptor) {
+        public void addClient(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Client> setAllClients(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -209,16 +207,37 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasTagName(String tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Tag getTag(String tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Client> getFilteredClientList() {
             throw new AssertionError("This method should not be called.");
         }
 
-        public void addNextMeeting(NextMeeting nextMeeting) {
-
+        @Override
+        public ObservableList<Tag> getFilteredTagList() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Client> getSortedNextMeetingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterSortedNextMeetingList(LocalDate date) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -254,34 +273,13 @@ public class AddCommandTest {
 
         @Override
         public List<Client> retrieveSchedule(LocalDate date) {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateClientToView(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public boolean hasTagName(String tagName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addTag(Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Tag getTag(String tagName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredTagList(Predicate<Tag> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
     }
 
     /**
@@ -296,14 +294,14 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasClient(Client client) {
-            requireNonNull(client);
-            return this.client.isSameClient(client);
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public boolean hasClient(Client client) {
+            requireNonNull(client);
+            return this.client.isSameClient(client);
         }
     }
 
@@ -312,6 +310,11 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingClientAdded extends ModelStub {
         final ArrayList<Client> clientsAdded = new ArrayList<>();
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
 
         @Override
         public boolean hasClient(Client client) {
@@ -323,11 +326,6 @@ public class AddCommandTest {
         public void addClient(Client client) {
             requireNonNull(client);
             clientsAdded.add(client);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
         }
     }
 }
