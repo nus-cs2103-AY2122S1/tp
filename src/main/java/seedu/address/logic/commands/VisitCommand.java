@@ -27,7 +27,7 @@ public class VisitCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the visit of the elderly identified "
             + "by the index number used in the last elderly listing. "
-            + "Existing visit will be overwritten by the input."
+            + "Existing visit will be overwritten by the input. "
             + "Or add a recurring visit using optional flags for frequency and occurrence\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "VISIT_DATE "
