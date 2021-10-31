@@ -16,6 +16,7 @@ bin/
 
 # Storage/log files
 /data/
+/exports/
 /config.json
 /preferences.json
 /*.log.*
