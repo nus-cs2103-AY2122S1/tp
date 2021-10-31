@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.programmer.ui.exceptions.CommandHistoryException;
-
 public class CommandHistoryTest {
 
     private CommandHistory commandHistory;
@@ -47,7 +45,7 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void getPrevCommand_validHistory_success() throws CommandHistoryException {
+    public void getPrevCommand_validHistory_success() {
         commandHistory.add("one");
         commandHistory.add("two");
 
@@ -59,7 +57,7 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void getNextCommand_validHistory_success() throws CommandHistoryException {
+    public void getNextCommand_validHistory_success() {
         commandHistory.add("one");
         commandHistory.add("two");
         commandHistory.add("three");
