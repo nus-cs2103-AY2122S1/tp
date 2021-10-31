@@ -7,10 +7,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents an amount associated with a Order.
  */
 public class Amount implements Comparable<Amount> {
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Sales order amount should only contain numbers, and optionally, at most one block starting with a dot "
-            + "followed by between one or two numbers";
-    public static final String VALIDATION_REGEX = "^\\d+(\\.?\\d{1,2})?";
+            "Sales order is any valid real number. Note that there may be small rounding errors for arbitrary "
+            + "real numbers, and the maximum amount for any single order is capped at 1 billion.";
+    private static final double MAXIMUM_AMOUNT = 1000000000;
     public final String amount;
 
     /**
@@ -24,8 +25,14 @@ public class Amount implements Comparable<Amount> {
         this.amount = amount;
     }
 
-    public static boolean isValidAmount(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidAmount(String test)  {
+        try {
+            double amount = Double.parseDouble(test);
+            return amount <= MAXIMUM_AMOUNT && amount >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
     }
 
     @Override

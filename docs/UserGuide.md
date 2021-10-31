@@ -94,6 +94,10 @@ Some example commands you can try:
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Amount accepts a real number for its input, with an upper limit of 1 billion, and no negative amounts allowed. Note 
+  that it supports accuracy of up to 15-17 decimal places, and accuracy may be lost beyond that point.
+
 
 * Date inputs should follow one of the formats below.
 
