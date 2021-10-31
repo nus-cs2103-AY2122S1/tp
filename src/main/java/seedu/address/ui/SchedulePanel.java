@@ -60,7 +60,7 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.setShowAddCalendarButton(false);
         calendarView.setShowSourceTrayButton(false);
         calendarView.setShowPageToolBarControls(false);
-        calendarView.setShowSearchField(false); // TODO: implement CLI entry search
+        calendarView.setShowSearchField(false);
 
         initialiseDayPage();
         initialiseWeekPage();
