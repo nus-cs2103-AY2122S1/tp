@@ -25,9 +25,9 @@ public class FindTaskCommandParserTest {
         // no leading and trailing whitespaces
         FindTaskCommand expectedFindTaskCommand =
                 new FindTaskCommand(new TaskContainsKeywordsPredicate(Arrays.asList("sew", "order")));
-        assertParseSuccess(parser, "order sew", expectedFindTaskCommand);
+        assertParseSuccess(parser, "sew order", expectedFindTaskCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n order \n \t sew  \t", expectedFindTaskCommand);
+        assertParseSuccess(parser, " \n sew \n \t order  \t", expectedFindTaskCommand);
     }
 }
