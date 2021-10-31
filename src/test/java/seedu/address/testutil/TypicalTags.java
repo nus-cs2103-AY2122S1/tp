@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class containing a list of {@code Tags} objects to be used in tests.
+ * A utility class containing a list of {@code Tag} objects to be used in tests.
  */
 public class TypicalTags {
     public static final Tag TAG_FORGETFUL = new Tag(VALID_TAG_FORGETFUL);

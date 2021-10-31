@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import seedu.address.model.lesson.Date;
 
 /**
- * A utility class containing a list of {@code Dates} objects to be used in tests.
+ * A utility class containing a list of {@code Date} objects to be used in tests.
  */
 public class TypicalDates {
     public static final Date DATE_CURRENT_WEEK = DateUtil.build(LocalDate.now());
