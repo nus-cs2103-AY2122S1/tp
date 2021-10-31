@@ -180,9 +180,9 @@ The `Telegram` class implements the following operation:
 
 Regex used in verifying the validity of telegram handle:
 
-`public static final String VALIDATION_REGEX = "\\w{5,64}";`
+`public static final String VALIDATION_REGEX = "\\w{5,32}";`
 * `\w` — **Word**. Any word character (alphanumeric & underscore)
-* `{5,64}` — **Quantifier**. Match between 5 and 64 of the preceding token.
+* `{5,32}` — **Quantifier**. Match between 5 and 32 of the preceding token.
 
 The `Telegram` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where every field, including the `Telegram` field, is compulsory except the `Tag` field.
 
