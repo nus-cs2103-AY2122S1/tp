@@ -113,7 +113,7 @@ public class PersonCard extends UiPart<Region> {
             text -> nextOfKinAddress.setText(text), () -> hideNode(nextOfKinAddressHBox));
 
         if (person.getNextOfKinName().isEmpty()
-                && person.getNextOfKinAddress().isEmpty()
+                && person.getNextOfKinPhone().isEmpty()
                 && person.getNextOfKinAddress().isEmpty()) {
             hideNode(nextOfKinBlock);
         }
