@@ -11,7 +11,7 @@ import seedu.address.model.order.OrderContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindOrderCommand object
  */
-public class FindOrderCommandParser {
+public class FindOrderCommandParser implements Parser<FindOrderCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindOrderCommand
