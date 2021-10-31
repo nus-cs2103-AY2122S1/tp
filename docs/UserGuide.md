@@ -132,7 +132,7 @@ This section describes the available features in TAB.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Chaining commands is not supported.<br>
-  e.g. A chain of commands like `next next back next` will only execute the `next` command once.
+  e.g. A chain of commands such as `next next back next` or `list calendar day` are not a valid commands.
 
 * There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
