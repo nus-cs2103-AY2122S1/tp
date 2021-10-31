@@ -37,7 +37,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_VISIT_DATE = "Visit date should be in the future.";
     public static final String MESSAGE_INVALID_FREQUENCY = "Frequency can only be daily, weekly, "
             + "biweekly, monthly or quarterly.";
-    public static final String MESSAGE_INVALID_OCCURRENCE = "Occurrence should be a positive number.";
+    public static final String MESSAGE_INVALID_OCCURRENCE =
+            "Occurrence should be positive integer and less than or equals to 999.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

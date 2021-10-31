@@ -82,16 +82,16 @@ public enum Frequency {
             nextDateTime = currentDateTime.plusDays(1);
             break;
         case WEEKLY:
-            nextDateTime = currentDateTime.plusWeeks(1);
+            nextDateTime = currentDateTime.plusDays(7);
             break;
         case BIWEEKLY:
-            nextDateTime = currentDateTime.plusWeeks(2);
+            nextDateTime = currentDateTime.plusDays(14);
             break;
         case MONTHLY:
-            nextDateTime = currentDateTime.plusMonths(1);
+            nextDateTime = currentDateTime.plusDays(30);
             break;
         case QUARTERLY:
-            nextDateTime = currentDateTime.plusMonths(3);
+            nextDateTime = currentDateTime.plusDays(90);
             break;
         default:
             break;
