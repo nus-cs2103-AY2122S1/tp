@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -40,7 +40,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
 
-        List<ClientId> clientIds = new ArrayList<>();
+        Set<ClientId> clientIds = new HashSet<>();
         try {
             String[] clientIdInput = argMultimap.getPreamble().split(" ");
             for (String s : clientIdInput) {
@@ -71,7 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(clientIds, editClientDescriptor);
+        return new EditCommand(new ArrayList<>(clientIds), editClientDescriptor);
     }
 
     /**
