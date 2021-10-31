@@ -36,7 +36,7 @@ public class TeditCommand extends Command {
             // + "[" + PREFIX_STATUS + "TASK_STATUS] "
             + "[" + PREFIX_DATE + "TASK_DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "1"
+            + PREFIX_TASK_ID + "1 "
             + PREFIX_NAME + "group meeting "
             + PREFIX_DATE + "24/10/2021 23:59";
 

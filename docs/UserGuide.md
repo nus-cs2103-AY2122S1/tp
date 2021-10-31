@@ -103,22 +103,28 @@ Format: `madd /n NAME /ph PHONE_NUMBER /em EMAIL [/a ADDRESS] [/p POSITION]…�
 
 Examples:
 * `madd /n John Doe /ph 98765432 /em johnd@example.com`
-* `madd /n Betsy Crowe /p friend /em betsycrowe@example.com /a Newgate Prison /ph 1234567 /p criminal`
+* `madd /n Betsy Crowe /p Programs Head /em betsycrowe@example.com /a Newgate Prison /ph 1234567 /p Finance Assistant`
 
 #### Listing all members : `mlist`
 
 Shows a list of all members (of an event optionally).
 
-Format: `mlist [/e EVENT_ID]`
+Format: `mlist [/e EVENT_ID] [/att] [/abs]`
 
 * `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
 * List everyone recorded in Ailurus if `EVENT_ID` is not given.
 * If  `EVENT_ID` is provided, list everyone who is participating in the event.
 * `EVENT_ID` refers to the index number shown in the displayed event list.
+* Only one of `/att` or `/abs` may be provided if EVENT_ID is present.
+* `/att` filters the list to those that attended the event.
+* `/abs` filters the list to those that were absent from the event.
+
 
 Example:
 * `mlist` lists everyone in Ailurus.
-* `mlist /e 3` lists all members of the event with index number 3.
+* `mlist /e 1` lists all members of the event with index number 1.
+* `mlist /e 1 /att` lists all members who attended the event with index number 1.
+* `mlist /e 1 /abs` lists all members who were absent from the event with index number 1.
 
 #### Editing a member : `medit`
 
@@ -134,9 +140,8 @@ Format: `medit /m MEMBER_ID [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p P
 * You can remove all the member’s positions by typing `/p` without specifying any positions after it.
 
 Examples:
-* `medit /m 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-* `medit /m 2 /n Betsy Crower /p` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing 
-  positions.
+* `medit /m 1 /ph 91234567 /em johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+* `medit /m 2 /n Betsy Crower /p` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
 
 #### Locating members by name: `mfind`
 
@@ -171,6 +176,21 @@ Examples:
 * `mtfind form` returns `Alex Yeoh`, `Charlotte Oliveiro`, `David Li` and `Irfan Ibrahim` because task `submit form` was assigned to them.
  ![result for 'mtfind form'](images/mtfind_example.png)
 
+#### Locating members by their positions: `pfind`
+
+Find positions whose names contain any of the given keywords.
+
+Format: `pfind KEYWORD [MORE_KEYWORDS]...`
+
+* The search is case-insensitive. e.g `friend` will match `Friend`
+* The order of the keywords does not matter. e.g. `work Buddies` will match `Buddies work`
+* Only the name of the position is searched.
+* Member with positions with names matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `work Buddies` will return `Best Buddies`, `workaholic`
+
+Examples:
+* `pfind assist` returns `David Li`, `Irfan Ibrahim` and `Betsy Crowe` because they have the following positions: `Logistics Assistant`, `Logistics Assistant` and `Finance Assistant` respectively.
+
 #### Deleting a member : `mdel`
 
 Deletes the specified member from Ailurus.
@@ -188,9 +208,9 @@ Examples:
 
 #### Adding a task: `tadd`
 
-Adds a task to a member in Ailurus.
+Adds a task to the specified members in Ailurus.
 
-Format: `tadd /n TASKNAME /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
+Format: `tadd /n TASKNAME /d DATE_TIME /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
 <div markdown="span" class="alert alert-primary">
 :bulb: Note: A task must be assigned to a member.
@@ -198,26 +218,32 @@ Format: `tadd /n TASKNAME /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * Tasks can be added to multiple members if there is more than one `MEMBER_ID` provided.
+* `DATE_TIME` must be of format: `dd/MM/yyyy HH:mm`
 * `MEMBER_ID` refers to the index number shown in the displayed member list.
 
 Examples:
-* `tadd /n Collect payment from members /m 3` adds task `Collect payment from members` to the third member on the  member list.
-* `tadd /n Collect dogtag /m 1 /m 2 /m 3` adds task `Collect dogtag` to the first three members on the member list.
+* `tadd /n Collect payment from members /d 20/11/2021 11:30 /m 3` adds task `Collect payment from members` to the third member on the  member list.
+* `tadd /n Collect dogtag /d 20/11/2021 11:30 /m 1 /m 2 /m 3` adds task `Collect dogtag` to the first three members on the member list.
 
 #### Listing all tasks of a member : `tlist`
 
-Shows a list of tasks of a member with the specified `MEMBER_ID`. 
+Shows a list of tasks of a member with the specified `MEMBER_ID`. Optional fields are provided to further filter the list
+to completed, uncompleted or overdue tasks.
 
-Format: `tlist /m MEMBER_ID`
+Format: `tlist /m MEMBER_ID [/dn OPTION] [/ovd]`
 
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * `MEMBER_ID` refers to the index number of the member of concern in the displayed member list.
+* `OPTION` must be either **y** or **n** to indicate yes or no respectively.
+* Only one of `/dn` or `/ovd` may be present when in use.
+* `/dn` filters the list of tasks to either done tasks or not done tasks based on `OPTION`.
+* `/ovd` filters the list to tasks that are overdue.
 
 Example:
 * `tlist /m 2` lists all tasks of the member with index number 2.
 
 #### Mark a task as done : `tdone`
-Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
+Marks the specified tasks of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
 Format: `tdone /t TASK_ID [/t MORE_TASK_ID]…​`
 
@@ -228,9 +254,9 @@ Format: `tdone /t TASK_ID [/t MORE_TASK_ID]…​`
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Example:
-* `tdone /t 2 /t 3` marks the 2nd and 3rd task on the displayed task list as done in Ailurus.
+* `tdone /t 1 /t 2` marks the 1st and 2nd task on the displayed task list as done in Ailurus.
 
-#### Mark a task as done : `tundone`
+#### Mark a task as undone : `tundone`
 Marks the specified completed task of the specified member as undone. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
 Format: `tundone /t TASK_ID [/t MORE_TASK_ID]…​`
@@ -242,7 +268,7 @@ Format: `tundone /t TASK_ID [/t MORE_TASK_ID]…​`
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Example:
-* `tundone /t 2 /t 3` marks the 2nd and 3rd completed task on the displayed task list as undone in Ailurus.
+* `tundone /t 1 /t 2` marks the 1st and 2nd completed task on the displayed task list as undone in Ailurus.
 
 #### Editing a task: `tedit`
 Edits an existing task within Ailurus.
@@ -263,21 +289,19 @@ Examples:
 
 Deletes the specified task of a specified member from Ailurus. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
-Format: `tdel /t TASK_ID [/t MORE_TASK_ID]…​`
+Format: `tdel /t TASK_ID`
 
 * Can **only be used when task list has entries**.
-* Multiple tasks can be deleted when there are more than one `TASK_ID` provided.
 * `TASK_ID` **must be a positive integer** 1, 2, 3, …​
 * Deletes the task according to the specified `TASK_ID`.
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Examples:
-* `tdel /t 3` deletes the 3rd task on the displayed task list in Ailurus.
-* `tdel /t 1 /t 2` deletes the 1st and 2nd task on the displayed task list in Ailurus.
+* `tdel /t 1` deletes the 1st task on the displayed task list in Ailurus.
 
 #### Locating tasks by name: `tfind`
 
-Finds tasks whose names contain any of the given keywords.
+Find tasks whose names contain any of the given keywords.
 
 Format: `tfind KEYWORD [MORE_KEYWORDS]...`
 
@@ -297,14 +321,41 @@ Examples:
 
 Adds an event to the Ailurus.
 
-Format: `eadd /n EVENTNAME [/m MEMBER_ID]…​`
+Format: `eadd /n EVENTNAME /d DATE [/m MEMBER_ID]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: Note:
 You can add multiple members to an event e.g. /m 2 /m 3 /m 4...
 </div>
 
+* `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* `DATE` must be of format: dd/MM/yyyy
+* `EVENT_ID` and `MEMBER_ID` are the INDEX of the event and member list respectively.
+* Multiple members can be added to an event when more than one `MEMBER_ID` is provided.
+
 Examples:
-* `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
+* `eadd /n Computing Freshmen Orientation Camp 2021 /d 22/11/2021 /m 4 /m 5 /m 6` adds a `Computing Freshmen Orientation Camp 2021` event dated `22/11/2021` and has the 4th, 5th and 6th members of the member list added to it.
+
+#### Deleting an event : `edel`
+
+Deletes the specified event from Ailurus.
+
+Format: `edel /e EVENT_ID`
+
+* `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+* Deletes the event at the specified `EVENT_ID`.
+* `EVENT_ID` refers to the index number shown in the displayed event list.
+
+Examples:
+* `edel /e 10` deletes the 10th event in Ailurus.
+
+#### Listing all events : `elist`
+
+Shows a list of all events.
+
+Format: `elist`
+
+Example:
+* `elist` lists all events in Ailurus.
 
 #### Marking participants as attended : `emark`
 
@@ -313,6 +364,7 @@ Marks the attendance of a participant in a specific event.
 Format: `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
 * `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_ID` and `MEMBER_ID` are the INDEX of the event and member list respectively.
 * Multiple members under the event can be marked when more than one `MEMBER_ID` is provided.
 * It is recommended for `emark` to be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
 * If the specified member is not participating in the event, an error is thrown to the user.
@@ -335,9 +387,10 @@ Examples:
 
 Undo the marking of the attendance of a participant in a specific event.
 
-Format: `unmark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
+Format: `eunmark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
 * `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_ID` and `MEMBER_ID` are the INDEX of the event and member list respectively.
 * Multiple members under the event can be unmarked when more than one `MEMBER_ID` is provided.
 * It is recommended for `eunmark` to be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
 * If the specified member is not participating in the event, an error is thrown to the user.
@@ -352,29 +405,57 @@ Edits an existing event in Ailurus.
 Format: `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID]…​`
 
 * `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+* `DATE` must be of format: dd/MM/yyyy
+* `EVENT_ID` and `MEMBER_ID` are the INDEX of the event and member list respectively.
 * Edits the member at the specified `EVENT_ID`. `EVENT_ID` refers to the index number shown in the displayed event list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing members, the command must be done in `mlist`, where all the members are visible to the user.
 * You can remove all the members by typing `/m` without specifying any members after it.
 
 Examples:
-* `eedit /e 1 /n Freshman Orientation Project Discussion` edits the event name of the 1st event on the event list to be `Freshman Orientation Project Discussion`.
+* `eedit /e 1 /n Freshman Orientation Project Discussion /d 22/11/2021` edits the event name of the 1st event on the event list to be `Freshman Orientation Project Discussion` and date to be `22/11/2021`.
 * `eedit /e 2 /m 1 /m 2 /m 3` edits the participants in the event to be the 1st, 2nd and 3rd members on the member list.
 
-#### Deleting an event : `edel`
+#### Locating events by their names: `efind`
 
-Deletes the specified event from Ailurus.
+Finds events whose names contain any of the given keywords.
 
-Format: `edel /e EVENT_ID [/e MORE_EVENT_ID]…​`
+Format: `efind KEYWORD [MORE_KEYWORDS]…​`
 
-* `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
-* Multiple events can be deleted when more than one `EVENT_ID` is provided.
-* Deletes the event at the specified `EVENT_ID`.
-* `EVENT_ID` refers to the index number shown in the displayed member list.
+* The search is case-insensitive. e.g. `cycling` will match `Cycling`
+* The order of the keywords does not matter. e.g. `Dance crazy` will match `crazy Dance`
+* Only the name of events is searched.
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Happy Cycling` will return `Happy Birthday Party`, `Cycling at Park`
+
+#### Adding participants to an event : `emadd`
+
+Adds selected participant(s) to a specific event.
+
+Format: `emadd /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
+
+* `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_ID` and `MEMBER_ID` are the INDEX of the event and member list respectively.
+* Multiple members can be added to the event when more than one `MEMBER_ID` is provided.
+* If the specified member already participating in the event, an error is thrown to the user.
 
 Examples:
-* `edel /e 10 /e 13` deletes the 10th and 13th event in Ailurus.
+* `emadd /e 1 /m 2 /m 3` adds the 2nd and 3rd person in the member list to Event 1.
+
+#### Deleting participants from an event : `emdel`
+
+Deletes selected participant(s) to a specific event.
+
+Format: `emdel /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
+
+* `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_ID` and `MEMBER_ID` are the INDEX of the event and member list respectively.
+* Multiple members can be deleted from the event when more than one `MEMBER_ID` is provided.
+* It is recommended for `emdel` to be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
+* If the specified member is not participating in the event, an error is thrown to the user.
+
+Examples:
+* `emdel /e 1 /m 2 /m 3` deletes the 2nd and 3rd person in the member list from Event 1.
 
 ### Exiting the program : `exit`
 
@@ -409,19 +490,27 @@ Action | Format, Examples
 --------|------------------
 **help** | `help`
 **madd** | `madd /n NAME /ph PHONE_NUMBER /em EMAIL /a ADDRESS [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
-**mlist** | `mlist [/e EVENT_ID]` <br> e.g., `mlist /e 3`
+**mlist** | `mlist [/e EVENT_ID] [/att] [/abs]` <br> e.g., `mlist /e 3 /att`
 **medit** | `medit /m MEMBER_ID [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mfind James Jake`
-**mdel** | `mdel /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g., `mdel /m 5 /m 6`
+**mtfind** | `mtfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `mtfind form`
+**pfind** | `pfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `pfind colleague`
+**mdel** | `mdel /m MEMBER_ID` <br> e.g., `mdel /m 5`
 **tadd** | `tadd /n TASKNAME /m MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /m 3`
-**tlist** | `tlist /m MEMBER_ID` <br> e.g., `tlist /m 2`
+**tfind** | `tfind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `tfind form`
+**tlist** | `tlist /m MEMBER_ID [/dn OPTION] [/ovd]` <br> e.g., `tlist /m 2 /dn y`
 **tdone** | `tdone /t TASK_ID [/t MORE_TASK_ID]…​`<br> e.g. `tdone /t 3 /t 4`
+**tundone** | `tundone /t TASK_ID [/t MORE_TASK_ID]…​`<br> e.g. `tundone /t 3 /t 4`
 **tedit** | `tedit /t TASK_ID [/n TASK_NAME] [/d TASK_DEADLINE]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
-**tdel** | `tdel /t TASK_ID [/t MORE_TASK_ID]…​` <br> e.g., `tdel /t 1 /t 4`
+**tdel** | `tdel /t TASK_ID` <br> e.g., `tdel /t 1`
 **eadd** | `eadd /n EVENTNAME [/m MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
+**edel** | `edel /e EVENT_ID ` <br> e.g., `edel /e 7`
+**elist** | `elist`
 **emark** | `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emark /e 1 /m 2 /m 3`
 **emarkall** | `emarkall /e EVENT_ID` <br> e.g. `emarkall /e 5`
 **eunmark** | `unmark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `eunmark /e 2 /m 2 /m 5`
 **eedit** | `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID]…​` <br> e.g. `eedit /e 1 /n Freshman Orientation Project Discussion`
-**edel** | `edel /e EVENT_ID [/e MORE_EVENT_ID]…​` <br> e.g., `edel /e 7 /e 9`
+**efind** | `efind KEYWORD [MORE_KEYWORDS]…​`<br> e.g., `efind competition`
+**emadd** | `emadd /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emadd /e 1 /m 2 /m 3`
+**emdel** | `emdel /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emdel /e 1 /m 2 /m 3`
 **exit** | `exit`

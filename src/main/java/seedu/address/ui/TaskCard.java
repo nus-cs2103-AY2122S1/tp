@@ -44,8 +44,8 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().toString());
         deadline.setText("Due: " + task.getTaskDeadline().toString());
         isDone.setText(task.isDone()
-                ? "Completed"
-                : "Incomplete");
+                ? "Progress: Completed"
+                : "Progress: Incomplete");
     }
 
     @Override

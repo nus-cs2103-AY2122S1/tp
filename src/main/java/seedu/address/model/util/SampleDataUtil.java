@@ -27,27 +27,27 @@ public class SampleDataUtil {
             new Member(new seedu.address.model.module.Name("Alex Yeoh"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getPositionSet("friends")),
+                getPositionSet("President")),
             new Member(new seedu.address.model.module.Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getPositionSet("colleagues", "friends")),
+                getPositionSet("Vice President", "Manpower Head")),
             new Member(new seedu.address.model.module.Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getPositionSet("neighbours")),
+                getPositionSet("Logistics Head")),
             new Member(new seedu.address.model.module.Name("David Li"), new Phone("91031282"),
                 new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getPositionSet("family")),
+                getPositionSet("Logistics Assistant")),
             new Member(new seedu.address.model.module.Name("Irfan Ibrahim"), new Phone("92492021"),
                 new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getPositionSet("classmates")),
+                getPositionSet("Logistics Assistant")),
             new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getPositionSet("colleagues"))
+                getPositionSet("Program Head"))
         };
     }
 
@@ -60,7 +60,7 @@ public class SampleDataUtil {
         set.add(new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
                         new Email("royb@example.com"),
                         new Address("Blk 45 Aljunied Street 85, #11-31"),
-                        getPositionSet("colleagues")));
+                        getPositionSet("Program Head")));
         sampleAb.addEvent(new Event(new Name("Freshmen Orientation Camp Project"), new EventDate("11/07/2021"),
                         set));
         return sampleAb;

@@ -84,35 +84,23 @@ public class Event extends Module {
     }
 
     /**
-     * Get the participants who attended the event.
+     * Get the participants who attended or did not attend the event.
      *
+     * @param attended whether participants attended or not attended
      * @return an immutable set of participants, which throws {@code UnsupportedOperationException}
      * if modification is attempted
      */
-    public Set<Member> getAttended() {
+    public Set<Member> getParticipants(Boolean attended) {
+        if (attended == null) {
+            return getParticipants();
+        }
         Set<Member> attendees = new HashSet<>();
         for (Member m : participants.keySet()) {
-            if (this.hasAttended(m)) {
+            if (this.hasAttended(m) == attended) {
                 attendees.add(m);
             }
         }
         return Collections.unmodifiableSet(attendees);
-    }
-
-    /**
-     * Get the participants who were absent from the event.
-     *
-     * @return an immutable set of participants, which throws {@code UnsupportedOperationException}
-     * if modification is attempted
-     */
-    public Set<Member> getAbsent() {
-        Set<Member> absentees = new HashSet<>();
-        for (Member m : participants.keySet()) {
-            if (!this.hasAttended(m)) {
-                absentees.add(m);
-            }
-        }
-        return Collections.unmodifiableSet(absentees);
     }
 
     /**

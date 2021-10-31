@@ -27,11 +27,13 @@ public class TaddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "TASKNAME "
             + PREFIX_DATE + "TASKDEADLINE "
-            + PREFIX_MEMBER_ID + "MEMBER_ID\n"
+            + PREFIX_MEMBER_ID + "MEMBER_ID "
+            + "[" + PREFIX_MEMBER_ID + "MEMBER_ID]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Submit form "
             + PREFIX_DATE + "21/10/2021 23:59 "
-            + PREFIX_MEMBER_ID + "2";
+            + PREFIX_MEMBER_ID + "2 "
+            + PREFIX_MEMBER_ID + "3 ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 
