@@ -129,6 +129,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public boolean isArchiveList() {
+        return model.isArchiveList();
+    }
+
+    @Override
     public boolean isSuperGroupList() {
         // TODO: BUG WHAT IF THERE IS NO ELEMENT.
         return model.isSuperGroupList();

@@ -17,7 +17,7 @@ public class PersonUnarchiveExecutor extends PersonExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        if (!model.isArchiveView()) {
+        if (!model.isArchiveList()) {
             throw new ExecuteException(Messages.MESSAGE_PERSONS_NOT_LISTED);
         }
         Person toBeUnarchivedPerson = super.getPerson();

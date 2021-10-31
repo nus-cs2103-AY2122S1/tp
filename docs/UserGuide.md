@@ -376,7 +376,7 @@ Advanced user Format:`p /l`
 Format:  `group /list`<br>
 Advanced user Format: `g /l`
 
-#### _Listing all persons in a group or subgroup_ : `group (INDEX) /list`
+#### _Listing all persons in a group or subgroup_ : `person (INDEX) /list`
 
 Lists all persons in that group or subgroup.<br>
 Use after you have listed out all groups or subgroups (so you can select the index).<br>

@@ -20,8 +20,6 @@ import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.group.Group;
-import seedu.notor.model.group.SubGroup;
-import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.ui.listpanel.GroupListPanel;
 import seedu.notor.ui.listpanel.ListPanel;
@@ -195,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleNote(Group group, Logic logic) {
-        NoteWindow noteWindow = new GroupNoteWindow(group, logic, resultDisplay);
+        NoteWindow noteWindow = new GroupNoteWindow(group, logic, resultDisplay, listPanelPlaceholder);
         manageNoteWindow(noteWindow);
     }
 
@@ -272,13 +270,13 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             if (logic.isPersonList()) {
-                ListPanel<Person> listPanel = new PersonListPanel(logic.getFilteredPersonList());
+                PersonListPanel listPanel = new PersonListPanel(logic.getFilteredPersonList());
                 listPanelPlaceholder.getChildren().add(listPanel.getRoot());
             } else if (logic.isSuperGroupList()) {
-                ListPanel<SuperGroup> listPanel = new GroupListPanel(logic.getFilteredSuperGroupList());
+                GroupListPanel listPanel = new GroupListPanel(logic.getFilteredSuperGroupList());
                 listPanelPlaceholder.getChildren().add(listPanel.getRoot());
             } else {
-                ListPanel<SubGroup> listPanel = new SubgroupListPanel(logic.getFilteredSubGroupList());
+                SubgroupListPanel listPanel = new SubgroupListPanel(logic.getFilteredSubGroupList());
                 listPanelPlaceholder.getChildren().add(listPanel.getRoot());
             }
             if (commandResult.isShowHelp()) {

@@ -62,6 +62,8 @@ public interface Logic {
 
     boolean isSuperGroupList();
 
+    boolean isArchiveList();
+
     /**
      * Returns an unmodifiable view of the filtered list of SubGroups
      */

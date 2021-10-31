@@ -21,7 +21,7 @@ public class PersonGroupListExecutor extends GroupExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         requireNonNull(model);
-        if (model.isPersonList() && model.isArchiveView()) {
+        if (model.isPersonList() && model.isArchiveList()) {
             throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
         }
         peopleInGroupPredicate = new PeopleInGroupPredicate(super.getGroup());

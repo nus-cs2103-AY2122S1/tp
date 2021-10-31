@@ -267,7 +267,7 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public boolean isArchiveView() {
+        public boolean isArchiveList() {
             throw new AssertionError("This method should not be called.");
         }
     }
