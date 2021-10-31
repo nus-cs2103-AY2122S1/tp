@@ -83,6 +83,19 @@ public class Task {
     }
 
     /**
+     * Returns true if both tasks have the same label and tag.
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getLabel().equals(getLabel())
+                && otherTask.getTaskTag().equals(getTaskTag());
+    }
+
+    /**
      * Override of toString to provide a user-friendly String representation of Task objects.
      *
      * @return A string representing the Task meant to be printed for the user.
