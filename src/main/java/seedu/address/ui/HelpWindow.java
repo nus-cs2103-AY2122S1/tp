@@ -27,11 +27,11 @@ public class HelpWindow extends UiPart<Stage> {
             + USERGUIDE_URL;
 
     private static final String ADD_NEW_CONTACT_FEATURE_NAME = "Add a New Contact";
-    private static final String ADD_NEW_CONTACT_FEATURE_COMMAND = "add n/ te/ [p/] [e/] [a/<ADDRESS>] [t/]";
+    private static final String ADD_NEW_CONTACT_FEATURE_COMMAND = "add n/ te/ g/ [p/] [e/] [a/] [t/]";
     private static final String DELETE_CONTACT_FEATURE_NAME = "Delete a Contact";
     private static final String DELETE_CONTACT_FEATURE_COMMAND = "delete <INDEX>";
     private static final String EDIT_CONTACT_FEATURE_NAME = "Edit a Contact";
-    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit [n/] [p/] [e/] [a/<ADDRESS>] [t/]";
+    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit [n/] [p/] [g/] [e/] [a/] [t/]";
     private static final String FIND_CONTACT_FEATURE_NAME_V1 = "Find a Contact (by Name)";
     private static final String FIND_CONTACT_FEATURE_COMMAND_V1 = "find <STRING>";
     private static final String FIND_CONTACT_FEATURE_NAME_V2 = "Find a Contact (by Tag)";
@@ -40,10 +40,21 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V1 = "show <NAME>";
     private static final String SHOW_CONTACT_FEATURE_NAME_V2 = "Show Contact Details (by Index)";
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V2 = "show <INDEX>";
-    private static final String IMPORT_CONTACT_FEATURE_NAME = "Import Contacts from JSON file";
-    private static final String IMPORT_CONTACT_FEATURE_COMMAND = "import filename.JSON";
-    private static final String EXPORT_CONTACT_FEATURE_NAME = "Export Contacts to JSON file";
-    private static final String EXPORT_CONTACT_FEATURE_COMMAND = "export filename.JSON";
+    private static final String IMPORT_CONTACT_JSON_FEATURE_NAME = "Import Contacts from JSON file";
+    private static final String IMPORT_CONTACT_JSON_FEATURE_COMMAND = "import <FILENAME>.JSON";
+    private static final String EXPORT_CONTACT_JSON_FEATURE_NAME = "Export Contacts to JSON file";
+    private static final String EXPORT_CONTACT_JSON_FEATURE_COMMAND = "export <FILENAME>.JSON";
+
+    private static final String EDIT_PROFILE_FEATURE_NAME = "Edit Your Profile";
+    private static final String EDIT_PROFILE_FEATURE_COMMAND = "edit profile [n/] [g/] [te/]";
+    private static final String FIND_CONTACT_FEATURE_NAME_V3 = "Find a Contact (by GitHub Username)";
+    private static final String FIND_CONTACT_FEATURE_COMMAND_V3 = "find g/<STRING>";
+    private static final String FIND_CONTACT_FEATURE_NAME_V4 = "Find a Contact (by Telegram Handle)";
+    private static final String FIND_CONTACT_FEATURE_COMMAND_V4 = "find te/<STRING>";
+    private static final String IMPORT_CONTACT_CSV_FEATURE_NAME = "Import Contacts from CSV file";
+    private static final String IMPORT_CONTACT_CSV_FEATURE_COMMAND = "import <FILENAME>.csv";
+    private static final String EXPORT_CONTACT_CSV_FEATURE_NAME = "Export Contacts to CSV file";
+    private static final String EXPORT_CONTACT_CSV_FEATURE_COMMAND = "export <FILENAME>.csv";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -156,10 +167,10 @@ public class HelpWindow extends UiPart<Stage> {
                 SHOW_CONTACT_FEATURE_COMMAND_V1);
         CommandDetails showContactByIndexCommandDetails = new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V2,
                 SHOW_CONTACT_FEATURE_COMMAND_V2);
-        CommandDetails importContactCommandDetails = new CommandDetails(IMPORT_CONTACT_FEATURE_NAME,
-                IMPORT_CONTACT_FEATURE_COMMAND);
-        CommandDetails exportContactCommandDetails = new CommandDetails(EXPORT_CONTACT_FEATURE_NAME,
-                EXPORT_CONTACT_FEATURE_COMMAND);
+        CommandDetails importContactCommandDetails = new CommandDetails(IMPORT_CONTACT_JSON_FEATURE_NAME,
+                IMPORT_CONTACT_JSON_FEATURE_COMMAND);
+        CommandDetails exportContactCommandDetails = new CommandDetails(EXPORT_CONTACT_JSON_FEATURE_NAME,
+                EXPORT_CONTACT_JSON_FEATURE_COMMAND);
 
         helpSectionCommandDetails.add(addNewContactCommandDetails);
         helpSectionCommandDetails.add(deleteContactCommandDetails);
