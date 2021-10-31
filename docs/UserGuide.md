@@ -142,7 +142,7 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 :bulb: What to include?
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`.
 * `LAST_VISIT`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
-* `PHONE_NUMBER` must be a 8 digit numeric value, and there should not be country code
+* `PHONE_NUMBER` must be a 8 digits numeric value for local phone number, with no country codes.
 * `FREQUENCY` and `OCCURRENCE` must both be included or excluded. 
 * `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
 * A detailed breakdown of the terms being used can be found [here](#structure-of-an-elderly-contact).
