@@ -24,7 +24,7 @@ public class ClassLimit {
      * Returns true if a given integer is a valid class limit.
      */
     public static boolean isValidLimit(int limit) {
-        return limit <= 100 && limit > 0;
+        return limit <= 1000 && limit > 0;
     }
 
     @Override
