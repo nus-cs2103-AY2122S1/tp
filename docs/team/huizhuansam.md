@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 * **New Feature**: Data encryption.
     * What it does: Secures data by encrypting files with a user-supplied password.
     * Justification: Marketers handle sensitive personal information of their leads. Adding a layer of security to
-protect against unauthorised users and data leaks will give users peace of mind.
+protect against unauthorised users and data leaks will give users a peace of mind.
     * Highlights: The encryption algorithm used is AES-256. 
     * Credits: [Encrypting and Decrypting Files in Java](https://www.baeldung.com/java-cipher-input-output-stream) by 
 Baeldung. Adapted and modified.
@@ -37,6 +37,6 @@ Baeldung. Adapted and modified.
         * Added implementation details of the data encryption feature. [\#92](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/92)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#112](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/112)
+    * PRs reviewed (with non-trivial review comments): [\#112](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/112), [\#74](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/74), [\#125](https://github.com/AY2122S1-CS2103T-W13-2/tp/pull/125)
     * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/207), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/1), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/7), [4](https://github.com/nus-cs2103-AY2122S1/forum/issues/46))
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/huizhuansam/ped/issues/1), [2](https://github.com/huizhuansam/ped/issues/5), [3](https://github.com/huizhuansam/ped/issues/7))
