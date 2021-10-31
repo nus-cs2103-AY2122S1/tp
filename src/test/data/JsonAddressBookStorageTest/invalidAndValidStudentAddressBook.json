@@ -1,7 +1,7 @@
 {
   "students": [ {
     "name": "Valid Student",
-    "email": "hans@example.com",
+    "email": "hans@u.nus.edu",
     "studentNumber" : "A0123456B",
     "username" : "user",
     "repo" : "ip",

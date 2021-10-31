@@ -41,8 +41,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_AMY = "amy@u.nus.edu";
+    public static final String VALID_EMAIL_BOB = "bob@u.nus.edu";
     public static final String VALID_STUDENTNUMBER_AMY = "A1112223B";
     public static final String VALID_STUDENTNUMBER_BOB = "C1102923T";
     public static final String VALID_USERNAME_AMY = "ai_mee";

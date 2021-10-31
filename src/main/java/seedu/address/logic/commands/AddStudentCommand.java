@@ -29,7 +29,7 @@ public class AddStudentCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EMAIL + "johnd@u.nus.edu "
             + PREFIX_STUDENTNUMBER + "A0123456B "
             + PREFIX_USERNAME + "user "
             + PREFIX_REPO + "ip "

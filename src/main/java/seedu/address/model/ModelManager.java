@@ -142,9 +142,13 @@ public class ModelManager implements Model {
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
-    @Override
-    public void setStudent(Student target, Student editedStudent) {
-        requireAllNonNull(target, editedStudent);
+    /**
+     * Updates when a member of a group changes.
+     *
+     * @param target current Student to be updated
+     * @param editedStudent updated Student object
+     */
+    public void updateGroup(Student target, Student editedStudent) {
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group updatedGroup = groupList.stream()
@@ -153,16 +157,21 @@ public class ModelManager implements Model {
                     .orElse(null);
             updatedGroup.updateMember(target, editedStudent);
         }
+    }
 
+    @Override
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        updateGroup(target, editedStudent);
         addressBook.setStudent(target, editedStudent);
     }
 
     @Override
     public void markStudentAttendance(Student target, int week) {
         requireAllNonNull(target, week);
-        Student newStudent = target;
+        Student newStudent = target.clone();
         newStudent.toggleAttendance(week);
-        setStudent(target, newStudent);
+        updateGroup(target, newStudent);
     }
 
     @Override
@@ -174,9 +183,9 @@ public class ModelManager implements Model {
     @Override
     public void markStudentParticipation(Student target, int week) {
         requireAllNonNull(target, week);
-        Student newStudent = target;
-        newStudent.getParticipation().toggleParticipation(week);
-        setStudent(target, newStudent);
+        Student newStudent = target.clone();
+        newStudent.toggleParticipation(week);
+        updateGroup(target, newStudent);
     }
 
     @Override
@@ -203,7 +212,6 @@ public class ModelManager implements Model {
         requireAllNonNull(student, group);
         addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);
-
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
@@ -232,7 +240,6 @@ public class ModelManager implements Model {
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-
         addressBook.setTask(target, editedTask);
     }
 

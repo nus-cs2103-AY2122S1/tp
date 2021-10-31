@@ -100,25 +100,25 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     /**
-     * Retrieve the attendance of the given person {@code target} for {@code week}.
+     * Retrieve the attendance of the given student {@code target} for {@code week}.
      * {@code target} must exist in the student list.
      */
     String getStudentAttendance(Student target, int week);
 
     /**
-     * Marks the attendance of the given person {@code target} for {@code week}.
+     * Marks the attendance of the given student {@code target} for {@code week}.
      * {@code target} must exist in the student list.
      */
     void markStudentAttendance(Student target, int week);
 
     /**
-     * Retrieve the attendance of the given person {@code target} for {@code week}.
+     * Retrieve the attendance of the given student {@code target} for {@code week}.
      * {@code target} must exist in the student list.
      */
     String getStudentParticipation(Student target, int week);
 
     /**
-     * Marks the attendance of the given person {@code target} for {@code week}.
+     * Marks the attendance of the given student {@code target} for {@code week}.
      * {@code target} must exist in the student list.
      */
     void markStudentParticipation(Student target, int week);

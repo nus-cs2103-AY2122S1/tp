@@ -46,8 +46,8 @@ public class EditStudentCommand extends Command {
             + "[" + PREFIX_USERNAME + "USERNAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_REPO + "johnrepo "
-            + PREFIX_USERNAME + "johndoe ";
+            + PREFIX_EMAIL + "johndoe@u.nus.edu"
+            + PREFIX_STUDENTNUMBER + "A0000000B";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

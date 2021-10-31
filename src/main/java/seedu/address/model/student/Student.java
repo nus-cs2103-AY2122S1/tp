@@ -32,7 +32,7 @@ public class Student {
 
     /**
      * Every field must be present and not null.
-     * Constructor for a new Person object
+     * Constructor for a new Student object
      */
     public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
                    Set<Tag> tags) {
@@ -57,7 +57,7 @@ public class Student {
     }
 
     /**
-     * Constructor for a re-stored Person object
+     * Constructor for a re-stored Student object
      */
 
     public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
@@ -162,6 +162,17 @@ public class Student {
 
     public boolean hasGroupName() {
         return !groupName.isNull();
+    }
+
+    /**
+     * Makes a shallow copy of a Student.
+     *
+     * @return a cloned Student with the exact same data fields as the original.
+     */
+    public Student clone() {
+        Student clone = new Student(name, email, studentNumber, userName, repoName, tags, attendance,
+                participation, groupName);
+        return clone;
     }
 
     /**

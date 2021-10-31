@@ -41,11 +41,7 @@ public class Attendance {
      */
     public void toggleAttendance(int week) {
         int isPresent = attendanceList.get(week);
-        if (isPresent == 1) {
-            attendanceList.set(week, 0);
-        } else {
-            attendanceList.set(week, 1);
-        }
+        attendanceList.set(week, 1 - isPresent);
     }
 
     /**
@@ -55,8 +51,7 @@ public class Attendance {
      * @return int specifying if student was present.
      */
     public int checkPresent(int week) {
-        int isPresent = attendanceList.get(week);
-        return isPresent;
+        return attendanceList.get(week);
     }
 
     /**
