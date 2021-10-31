@@ -2,13 +2,15 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.math.BigInteger;
+
 /**
  * Represents a Visit's occurrence.
  */
 public class Occurrence {
     public static final String MESSAGE_CONSTRAINTS =
-            "Occurrence should be a positive integer.";
-    public static final Occurrence EMPTY_OCCURENCE = new Occurrence(1);
+            "Occurrence should be positive integer and less than or equals to 999.";
+    public static final Occurrence EMPTY_OCCURRENCE = new Occurrence(1);
 
     public final int value;
 
@@ -34,7 +36,7 @@ public class Occurrence {
      * Returns true if a given int is a valid occurrence.
      */
     public static boolean isValidOccurrence(int occurrence) {
-        return occurrence > 0;
+        return occurrence > 0 && occurrence <= 999;
     }
 
     /**
@@ -42,12 +44,15 @@ public class Occurrence {
      */
     public static boolean isValidOccurrence(String occurrence) {
         try {
-            Integer.parseInt(occurrence);
+            new BigInteger(occurrence);
         } catch (NumberFormatException nfe) {
             return false;
         }
-        int intOccurrence = Integer.parseInt(occurrence);
-        return Occurrence.isValidOccurrence(intOccurrence);
+        BigInteger bigIntOccurrence = new BigInteger(occurrence);
+        if (bigIntOccurrence.compareTo(BigInteger.valueOf(1000)) == 1) {
+            return false;
+        }
+        return Occurrence.isValidOccurrence(bigIntOccurrence.intValue());
     }
 
     /**
