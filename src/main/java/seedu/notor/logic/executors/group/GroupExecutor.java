@@ -19,7 +19,7 @@ public abstract class GroupExecutor extends Executor {
         checkGroupView();
         List<? extends Group> lastShownList = model.getFilteredGroupList();
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new ExecuteException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         return lastShownList.get(index.getZeroBased());

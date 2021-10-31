@@ -37,8 +37,7 @@ public class SubGroupCreateExecutor extends GroupExecutor {
                     superGroup.addSubGroup(subGroup);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
                 } else {
-                    // TODO: stub error message, this is supposed to be for when index is out of bounds.
-                    throw new ExecuteException("");
+                    throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                 }
             }
             throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);

@@ -2,16 +2,15 @@ package seedu.notor.logic.executors.group;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
+import seedu.notor.model.group.Group;
 
 public class SubGroupListExecutor extends GroupExecutor {
-    public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
-    public static final String MESSAGE_DELETE_GROUP_CANCEL = "Deleting of Group: %1$s has been cancelled.";
-    public static final String CONFIRMATION_MESSAGE = "Do you want to proceed with deleting of Group: %1$s?";
-
 
     public SubGroupListExecutor(Index index) {
         super(index);
@@ -22,6 +21,10 @@ public class SubGroupListExecutor extends GroupExecutor {
         requireNonNull(model);
         if (!model.isSuperGroupList()) {
             throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
+        }
+        List<? extends Group> lastShownList = model.getFilteredGroupList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
         // TODO: Should we create a new method lol in model.
         model.listSubGroup(super.index);
