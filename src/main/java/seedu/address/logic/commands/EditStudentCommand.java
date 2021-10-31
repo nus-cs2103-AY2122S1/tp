@@ -40,7 +40,7 @@ public class EditStudentCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@u.nus.edu"
             + PREFIX_STUDENTNUMBER + "A0000000B";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";

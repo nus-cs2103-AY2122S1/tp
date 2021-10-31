@@ -85,12 +85,12 @@ Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO N
 * `STUDENTNUMBER` must consist of a character, followed by 7 digits, followed by another character.
   Case of character does not matter.
 * If only either `GITHUB USERNAME` or `REPO NAME` are specified, the data will still be saved but not shown.
-* If the same person is edited and the remaining empty data field is entered, a proper GitHub link will be shown.
+* If the same student is edited and the remaining empty data field is entered, a proper GitHub link will be shown.
 
 Examples:
-* `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user r/ip t/friends t/owesMoney` adds John Doe to the list
+* `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user r/ip t/friends t/owesMoney` adds John Doe to the list
   and displays a confirmation output with a proper GitHub link
-* `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user` adds John Doe to the list and displays a confirmation
+* `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user` adds John Doe to the list and displays a confirmation
   output without a proper GitHub link, but storing the `GITHUB USERNAME` in memory nonetheless.
 
 ### Edit a student : `editStudent`
@@ -102,13 +102,13 @@ Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK]
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
-* `editStudent 1 s/A0221111L e/johndoe@example.com` Edits the student number and email address of the 1st person to be `A0221111L` and `johndoe@example.com` respectively.
-* `editStudent 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `editStudent 1 s/A0221111L e/johndoe@u.nus.edu` Edits the student number and email address of the 1st student to be `A0221111L` and `johndoe@u.nus.edu` respectively.
+* `editStudent 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 ### Delete a student: `deleteStudent`
 
@@ -116,13 +116,13 @@ Deletes the specified student from the student list.
 
 Format: `deleteStudent INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the student at the specified `INDEX`.
 * The index must refer to the index number shown in the displayed students list.
-* The index and week number must be a positive number: 1, 2, 3…
+* The index number must be a positive number: 1, 2, 3…
 
 Examples:
 
-* `students` followed by `deleteStudent 1` removes the 1st person in the students list.
+* `students` followed by `deleteStudent 1` removes the 1st student in the students list.
 
 ### Marking a student's attendance: `marka`
 
@@ -130,16 +130,18 @@ Marks the specified student(s) in the student list as present or absent.
 
 Format: `marka INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
-* Marks the person(s) as present in the specified `INDEX(ES)`.
+* Marks the student(s) as present (or absent) in the specified `INDEX(ES)`.
 * The index must refer to the index number shown in the displayed students list.
+* Duplicate index(es) are not allowed.
 * The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
-* Duplicate index(es) are not allowed.  
-* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
+* Only one week number should be specified after the `w/` prefix.
+* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent, and vice versa.
 
 Examples:
 
-* `students` followed by `marka 1 2 3 w/3` marks the 1st, 2nd and 3rd person in the students list as present in week 3.
-* Another `marka 1 w/3` instance will mark the 1st person in the student list as absent in week 3.
+* `students` followed by `marka 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as present in week 3.
+* Another `marka 1 w/10` instance will mark the 1st student in the student list as absent in week 3.
+  ![result for 'marka'](images/marka.png)
 
 ### Marking a student's participation: `markp`
 
@@ -147,20 +149,22 @@ Marks the specified student(s) in the student list as participated or not partic
 
 Format: `markp INDEX [MORE_INDEXES] w/WEEK_NUMBER`
 
-* Marks the person(s) as participated in the specified `INDEX` for that week.
+* Marks the student(s) as participated in the specified `INDEX` for that week.
 * The index must refer to the index number shown in the displayed students list.
-* The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
 * Duplicate index(es) are not allowed.
-* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
+* The index and week number must be a positive number, and must correspond to the tutorial weeks of the semester: 3, 4... 12.
+* Only one week number should be specified after the `w/` prefix.
+* If the student at the specified `INDEX` is marked as participated, the command toggles the participation to not participated.
 
 Examples:
 
-* `students` followed by `markp 1 2 3 w/3` marks the 1st, 2nd and 3rd person in the students list as participated in week 3.
-* Another `markp 1 w/3` instance will mark the 1st person in the student list as not participated in week 3.
+* `students` followed by `markp 1 2 3 w/10` marks the 1st, 2nd and 3rd student in the students list as participated in week 3.
+* Another `markp 2 w/10` instance will mark the 1st student in the student list as not participated in week 3.
+  ![result for 'markp'](images/markp.png)
 
 ### Find student by name: `findStudent`
 
-Finds persons whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords.
 
 Format: `findStudent KEYWORD [MORE_KEYWORDS]`
 
@@ -176,14 +180,15 @@ Examples:
 * `findStudent Joh@` returns `john` and `John Doe`
 * `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
------
+  
 
 ### Clearing all entries from student list: `clearStudents`
 
 Clears all entries from the student list.
 
 Format: `clearStudents`
+
+-----
 
 ## Groups
 ### List all groups: `groups`
@@ -230,7 +235,7 @@ Deletes the specified group from the group list.
 
 Format: `deleteGroup INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed group list.
 * The index must be a positive integer 1, 2, 3, …​
 
@@ -244,7 +249,7 @@ Adds a student in student list to an existing group in the group list.
 Format: `addMember INDEX g/GROUP`
 
 * Adds the student specified at `INDEX` to the group with name specified by `GROUP`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed student list.
 * The index must be a positive integer 1, 2, 3, …​
 * `GROUP` must be an existing group in the displayed group list.
 
@@ -257,7 +262,7 @@ Deletes the specified group from the group list.
 
 Format: `deleteMember GROUP_INDEX STUDENT_INDEX`
 
-* Deletes the person at the specified `STUDENT_INDEX` in the group at the specified `GROUP_INDEX`.
+* Deletes the student at the specified `STUDENT_INDEX` in the group at the specified `GROUP_INDEX`.
 * The index refers to the index number shown in the respective displayed group list and group member list.
 * The index must be a positive integer 1, 2, 3, …​
 
@@ -282,13 +287,14 @@ Examples:
 * `findGroup w14` returns `W14-3` and `W14-4`
 * `findGroup w14 w15` returns `W14-3`, `W14-4`, `W15-2`<br>
   ![result for 'find group W14-4'](images/findGroupW14-4.png)
-
-
+  
 ### Clearing all entries from group list: `clearGroups`
 
 Clears all entries from the group list.
 
 Format: `clearGroups`
+
+-----
 
 ## Tasks
 ### List all tasks: `tasks`
@@ -364,7 +370,7 @@ Format: `editTask INDEX [n/NAME] [d/DESCRIPTION] [p/PRIORITY] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * If the task being edited is an `event`, the date of the event can be edited by applying the `on/` flag followed by a new date. i.e `editTask INDEX on/DATE`. The `on/` flag is invalid for other types of tasks.
 * If the task being edited is a `deadline`, the date of the deadline can be edited by applying the `by/` flag followed by a new date. i.e `editTask INDEX by/DATE`. The `by/` flag is invalid for other types of tasks.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all the task’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
@@ -452,15 +458,16 @@ If your changes to the data file makes its format invalid, tApp will discard all
 Commands | Format and Examples
 --------|-----------------------------
 [**List Students**](#list-all-students-students) | `students`
-[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​` <br> e.g., `addStudent n/Clara Ng s/A0221111W e/clara@example.com`
-[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `editStudent 1 s/A0221111L e/johndoe@example.com`
+[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​` <br> e.g., `addStudent n/Clara Ng s/A0221111W e/clara@u.nus.edu`
+[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `editStudent 1 s/A0221111L e/johndoe@u.nus.edu`
 [**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` <br> e.g., `deleteStudent 1`
-[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/3`
-[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` <br> e.g., `markp 1 w/3`
+[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/10`
+[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` <br> e.g., `markp 1 w/10`
 [**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` <br> e.g., `findStudent John`
 [**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents`
 
 ## [Groups](#groups)
+
 Commands | Format and Examples
 --------|-----------------------------
 [**List Groups**](#list-all-groups-groups) | `groups`
@@ -473,6 +480,7 @@ Commands | Format and Examples
 [**Clear Groups**](#clearing-all-entries-from-group-list-cleargroups) | `clearGroups`
 
 ## [Tasks](#tasks)
+
 Commands | Format and Examples
 --------|-----------------------------
 [**List Tasks**](#list-all-tasks-tasks) | `tasks`
@@ -485,6 +493,7 @@ Commands | Format and Examples
 [**Clear Tasks**](#clearing-all-entries-from-task-list-cleartasks) | `clearTasks`
 
 ## General
+
 Action | Format, Examples
 --------|-----------------------------
 [**Clear Address Book**](#clearing-all-entries-from-tapp-clear) | `clearAll`

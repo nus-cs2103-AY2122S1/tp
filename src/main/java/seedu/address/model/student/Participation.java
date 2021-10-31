@@ -40,12 +40,8 @@ public class Participation {
      * @param week participation for the week
      */
     public void toggleParticipation(int week) {
-        int isPresent = participationList.get(week);
-        if (isPresent == 1) {
-            participationList.set(week, 0);
-        } else {
-            participationList.set(week, 1);
-        }
+        int isParticipated = participationList.get(week);
+        participationList.set(week, 1 - isParticipated);
     }
 
     /**

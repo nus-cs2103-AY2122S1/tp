@@ -25,31 +25,31 @@ import seedu.address.model.student.Student;
  */
 public class TypicalStudentsWithoutGroups {
 
-    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline").withEmail("alice@example.com")
+    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline").withEmail("alice@u.nus.edu")
             .withStudentNumber("A0000000B").withUserName("paulice").withRepoName("ip").withTags("friends").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withStudentNumber("A0000000B")
-            .withEmail("johnd@example.com").withTags("owesMoney", "friends").withUserName("benben")
+            .withEmail("johnd@u.nus.edu").withTags("owesMoney", "friends").withUserName("benben")
             .withRepoName("ip").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withUserName("cark")
             .withRepoName("ip").withStudentNumber("A0000000B")
-            .withEmail("heinz@example.com").build();
-    public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withEmail("cornelia@example.com")
+            .withEmail("heinz@u.nus.edu").build();
+    public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withEmail("cornelia@u.nus.edu")
             .withStudentNumber("A0000000B").withUserName("danmei").withRepoName("ip")
             .withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withUserName("em")
             .withRepoName("ip").withStudentNumber("A0000000B")
-            .withEmail("werner@example.com").build();
+            .withEmail("werner@u.nus.edu").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withUserName("fku")
             .withRepoName("ip").withStudentNumber("A0000000B")
-            .withEmail("lydia@example.com").build();
+            .withEmail("lydia@u.nus.edu").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withUserName("user")
-            .withRepoName("ipppp").withStudentNumber("A0000000B").withEmail("anna@example.com").build();
+            .withRepoName("ipppp").withStudentNumber("A0000000B").withEmail("anna@u.nus.edu").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier")
-            .withEmail("stefan@example.com").withStudentNumber("B0584738B").build();
+            .withEmail("stefan@u.nus.edu").withStudentNumber("B0584738B").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller")
-            .withEmail("hans@example.com").withStudentNumber("B0584738B").build();
+            .withEmail("hans@u.nus.edu").withStudentNumber("B0584738B").build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withEmail(VALID_EMAIL_AMY)
