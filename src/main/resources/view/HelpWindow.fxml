@@ -36,7 +36,7 @@
                                  <Font name="Arial Black" size="11.0" />
                               </font>
                       </Label>
-                      <Button fx:id="copyButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#copyUrl" prefHeight="38.0" prefWidth="118.0" text="Copy URL">
+                      <Button fx:id="openButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#openUserGuide" prefHeight="38.0" prefWidth="118.0" text="Open User Guide">
                               <HBox.margin>
                                  <Insets left="20.0" right="20.0" />
                               </HBox.margin>
