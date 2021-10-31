@@ -245,7 +245,7 @@ Format: **`delete`** `INDEX`
 Examples:
 
 * **`list`** followed by **`delete`** `2` deletes the person at index 2 from the contact book.
-* **`find`** `Benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
+* **`find`** `n/benedict` followed by **`delete`** `1` deletes the person at index 1 from the results of the **`find`** command.
 
 ### Deleting multiple person: `deletem`
 
@@ -326,18 +326,7 @@ You can sort all persons in the contact book by a specified field.
 
 Format: **`sort`** `FIELD_PREFIX/`
 
-* `FIELD_PREFIX/` can be any of the following:
-  * `n/`
-  * `g/`
-  * `p/`
-  * `e/`
-  * `nat/`
-  * `tg/`
-  * `s/`
-  * `r/`
-  * `t/`
-
-* Exactly one field must be provided.
+* `FIELD_PREFIX/` can be any of the following: `n/`, `g/`, `p/`, `e/`, `nat/`, `tg/`, `s/`, `r/`, `t/`
 * If field contains words, sort persons in ascending alphabetical order.
 * If field contains numbers, sort persons in ascending numeric order.
 
@@ -350,7 +339,7 @@ Examples:
 
 You can view the gender and nationality statistics of a specified tutorial group.
 
-Format: **`stat`** `TUTORIAL_GROUP`
+Format: **`stat`** `TUTORIAL GROUP`
 
 Examples:
 
@@ -363,7 +352,7 @@ You can import your friends' contact book into your application.
 Format: **`import`** `FILE_NAME.json`
 
 * File must be in JSON format!
-* File must be located in the `./data` directory in the same directory as `Socius.jar`.
+* File must be located in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
 * **`import`** `amy.json` import a contact book via a file named `amy.json` into your existing application.
@@ -374,8 +363,7 @@ You can export your contact book and share it with your friends.
 
 Format: **`export`** `FILE_NAME.json`
 
-* File must be in JSON format!
-* File must be located in the `./data` directory in the same directory as `Socius.jar`.
+* File will be stored in the `./data` directory in relative to the directory of `Socius.jar`.
 
 Examples:
 
@@ -470,7 +458,7 @@ Example: `s/tg:alexx9384`
 Example: `r/Stays in PGP`
 
 ### `t/TAG`
-`TAG` names should be alphanumeric
+`TAG` names should be alphanumeric.
 
 Example:  `t/friends`
 
