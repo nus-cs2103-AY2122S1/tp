@@ -222,6 +222,7 @@ The ```find``` command is facilitated by creating a ```FindCommand``` depending 
 input. This command then updates the ```model``` accordingly.
 
 The following activity diagram summarizes what happens when a user executes a ```find``` command:
+
 ![images](images/FindCommandActivityDiagram.png)
 
 Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
@@ -241,8 +242,29 @@ and returned.
 
 ![images](images/FindCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source:
+ **Note:** The lifeline for `FindCommandParser`
+should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
+
+
 
 ### Datetime for interview 
+The `Interview` class accepts `y-M-d, H:m` as parsed time format and provides `MMM dd yyyy , HH:mm` as display format.
+- `y` : year-of-era, e.g. `2021`, `21`
+- `M` : month-of-year, e.g. `7`, `07`
+- `d` : day-of-month, e.g. `10`
+- `H` : hour-of-day (0-23), e.g. `0`
+- `m` : minute-of-hour, e.g. `30`
+
+`Interview#isValidInterviewTime` uses `java.time.format.DateTimeFormatter` to generate a formatter using `Interview#PARSE_FORMAT`,
+and checks for `DateTimeParseException` when parsing the input with the formatter via `LocalDate#parse()`. 
+
+The `display()` method uses `java.text.DateFormat` and returns the formatted time which is displayed GUI.
+
+For example, the add command `add n/John ... i/2021-01-01, 10:30` will add a person John with interview time shown as `Jan 01 2021, 10:30`.
+
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------
