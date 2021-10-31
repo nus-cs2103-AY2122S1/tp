@@ -10,8 +10,8 @@ import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 
 public class SubGroupCreateExecutor extends GroupExecutor {
-    public static final String MESSAGE_SUCCESS = "Subgroup %s created";
-    public static final String MESSAGE_DUPLICATE_GROUP = "Subgroup already exists";
+    public static final String MESSAGE_SUCCESS = "Subgroup %s created.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Subgroup %1$s already exists.";
 
     private final SubGroup subGroup;
 
@@ -30,12 +30,11 @@ public class SubGroupCreateExecutor extends GroupExecutor {
         try {
             if (model.getFilteredGroupList().size() >= index.getOneBased()) {
                 Group group = model.getFilteredGroupList().get(index.getZeroBased());
-                // TODO: Guard clause for if group is a SubGroup instead.
                 // Make it return its own type of error.
                 if (model.isSuperGroupList()) {
                     SuperGroup superGroup = (SuperGroup) group;
-                    superGroup.addSubGroup(subGroup);
                     subGroup.setParent(superGroup);
+                    superGroup.addSubGroup(subGroup);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
                 }
                 throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
@@ -44,7 +43,7 @@ public class SubGroupCreateExecutor extends GroupExecutor {
                 throw new ExecuteException("");
             }
         } catch (DuplicateItemException e) {
-            throw new ExecuteException(MESSAGE_DUPLICATE_GROUP);
+            throw new ExecuteException(String.format(MESSAGE_DUPLICATE_GROUP, subGroup));
         }
     }
 
