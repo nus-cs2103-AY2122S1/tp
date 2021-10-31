@@ -85,7 +85,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 
    * **`list`** : Lists all patients.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/25/12/2021` : Adds a patient named `John Doe` to the application.
+   * **`add`**`n/John Doe hp/98765432 eml/johnd@example.com a/John street, block 123, #01-01 dob/25/12/2021` : Adds a patient named `John Doe` to the application.
 
    * **`edit`**`3 a/Bob street, block 123, #01-01 dob/25/12/1964` : Edits 3rd patient's address and date of birth.
 
@@ -141,10 +141,10 @@ all the details!<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME hp/PHONE_NUMBER`, `hp/PHONE_NUMBER n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `hp/12341234 hp/56785678`, only `hp/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -576,15 +576,15 @@ Action | Format, Examples
 --------|------------------
 **Add appointment** | `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURATION] [r/REMARK]` <br> e.g., `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test`|
 **Add doctor** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`<br> e.g., `add n/John Doe hp/98765432 eml/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
-**Add patient** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
+**Add patient** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho hp/98989898 eml/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
 **Clear** | `clear`
 **Delete appointment** | `appt -d INDEX`<br> e.g., `appt -d 3`
 **Delete patient/doctor** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `tag -d id/INDEX t/TAG`<br> e.g, `tag -d id/1 t/Unvaccinated`
 **Edit appointment** | `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [dur/MINUTES] [r/REMARK]`<br> e.g., `appt -e 1 p/2 r/Blood test`
-**Edit doctor** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​`<br> e.g., `edit 2 hp/98989898 eml/john@example.com`
-**Edit patient** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​ [risk/RISK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit doctor** | `edit INDEX [n/NAME] [hp/PHONE] [eml/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​`<br> e.g., `edit 2 hp/98989898 eml/john@example.com`
+**Edit patient** | `edit INDEX [n/NAME] [hp/PHONE_NUMBER] [eml/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​ [risk/RISK]`<br> e.g.,`edit 2 n/James Lee eml/jameslee@example.com`
 **Exit** | `exit`
 **Filter all appointments** | `appt -f [p/PATIENT_KEYWORDS] [d/DOCTOR_KEYWORDS] [s/START_DATE] [e/END_DATE]` <br> e.g., `appt -f s/24/08/2021 e/24/09/2021 p/Alice d/Carl`
 **Filter upcoming appointments** | `appt -u [p/PATIENT_KEYWORDS] [d/DOCTOR_KEYWORDS]` <br> e.g., `appt -u p/Alice d/Carl`
