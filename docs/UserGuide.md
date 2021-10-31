@@ -367,6 +367,8 @@ Optional fields for a **recurring** lesson is:
 * Cancelled dates
 
 TAB helps to prevent scheduling mistakes like having two lessons at the same time by ensuring that lessons never overlap.
+Additionally, we will provide a notice if you schedule a lesson outside the usual 0800-2200 hours, 
+just to confirm that it was indeed intentional.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
