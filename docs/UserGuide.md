@@ -91,7 +91,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 
    * **`delete`**`2` : Deletes the 2nd patient as shown in the current list.
 
-   * **`clear`** : Deletes all patients, doctors and appointments.
+   * **`IWANTTOCLEAREVERYTHING`** : Deletes all patients, doctors and appointments.
    
    * **`toggle`** : Toggles between the patients and doctors tabs.
 
@@ -146,7 +146,7 @@ all the details!<br>
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `hp/12341234 hp/56785678`, only `hp/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `IWANTTOCLEAREVERYTHING`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -176,14 +176,19 @@ Format: `toggle`
 
 ![toggleTabs](images/toggleTabs.png)
 
-### Clearing all entries : `clear` <a name="clear"/>
+### Clearing all entries : `IWANTTOCLEAREVERYTHING` <a name="clear"/>
 
 Clears all patient, doctor and appointment entries.
 
-Format: `clear`
+Format: `IWANTTOCLEAREVERYTHING`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This command clears ALL patient, doctor and appointment records that you have on the application.
+Remember to do a backup in case you may need the data again. 
+</div>
 
 Examples:
-Typing `clear` in the removes all patient, doctor and appointment entries.
+Typing `IWANTTOCLEAREVERYTHING` in the removes all patient, doctor and appointment entries.
 
 ### Exiting the program : `exit` <a name="exit"/>
 
@@ -577,7 +582,7 @@ Action | Format, Examples
 **Add doctor** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`<br> e.g., `add n/John Doe hp/98765432 eml/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
 **Add patient** | `add n/NAME hp/PHONE_NUMBER eml/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho hp/98989898 eml/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
-**Clear** | `clear`
+**Clear** | `IWANTTOCLEAREVERYTHING`
 **Delete appointment** | `appt -d INDEX`<br> e.g., `appt -d 3`
 **Delete patient/doctor** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `tag -d id/INDEX t/TAG`<br> e.g, `tag -d id/1 t/Unvaccinated`
