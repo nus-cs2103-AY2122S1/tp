@@ -29,3 +29,5 @@ Given below are my contributions to the project.
     and existing stubs that created Students also needed to be modified to accommodate the new changes made. Furthermore, modifying the GUI to display groups also required a more in-depth understanding of JavaFX to nest scrollable content.
   - Credits: The Group class was based on the Student class of AB3, but was heavily modified to fit the needs of the application. The Tag class used for groups was adapted completely from the one used in AB3.
   
+
+
