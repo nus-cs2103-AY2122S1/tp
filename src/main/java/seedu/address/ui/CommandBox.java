@@ -22,7 +22,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
-    private static CommandExecutor commandExecutor;
+    private final CommandExecutor commandExecutor;
     private final InputHistory inputHistory;
 
     @FXML
@@ -33,7 +33,7 @@ public class CommandBox extends UiPart<Region> {
      */
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
-        CommandBox.commandExecutor = commandExecutor;
+        this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         inputHistory = InputHistory.getInstance();
@@ -83,7 +83,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Handles the View Selection.
      */
-    public static void handleViewSelected(MultipleSelectionModel<Person> selectedPersonModel) {
+    public void handleViewSelected(MultipleSelectionModel<Person> selectedPersonModel) {
         int index = selectedPersonModel.getSelectedIndices().get(0);
         int indexOneOff = index + 1;
         String commandText = "view " + indexOneOff;
@@ -91,7 +91,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
         } catch (CommandException | ParseException e) {
-
+            setStyleToIndicateCommandFailure();
         }
     }
 

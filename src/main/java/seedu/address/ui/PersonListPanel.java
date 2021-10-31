@@ -25,8 +25,6 @@ public class PersonListPanel extends UiPart<Region> {
 
     private SelectedPersonCard selected = new SelectedPersonCard();
 
-    private ObservableList<Person> personList;
-
     @FXML
     private ListView<Person> personListView;
 
@@ -36,9 +34,8 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, Summary summary) {
+    public PersonListPanel(ObservableList<Person> personList, Summary summary, CommandBox commandBox) {
         super(FXML);
-        this.personList = personList;
 
         setSelectedPersonPanel();
         selected.updateSummary(summary);
@@ -52,12 +49,14 @@ public class PersonListPanel extends UiPart<Region> {
             public void handle(Event event) {
                 MultipleSelectionModel<Person> selectedPersonModel = personListView.getSelectionModel();
                 Person selectedPerson = selectedPersonModel.getSelectedItem();
-                CommandBox.handleViewSelected(selectedPersonModel);
-                personListView.getSelectionModel().clearSelection();
-                logger.info("selected " + selectedPerson);
-                selectedPersonPanelPlaceholder.setVvalue(0.0);
-//                selected.updatePerson(selectedPerson);
-//                selected.setPersonDetails();
+                if (selectedPerson != null) {
+                    commandBox.handleViewSelected(selectedPersonModel);
+                    personListView.getSelectionModel().clearSelection();
+                    logger.info("selected " + selectedPerson);
+                    selectedPersonPanelPlaceholder.setVvalue(0.0);
+                    selected.updatePerson(selectedPerson);
+                    selected.setPersonDetails();
+                }
             }
         });
     }
