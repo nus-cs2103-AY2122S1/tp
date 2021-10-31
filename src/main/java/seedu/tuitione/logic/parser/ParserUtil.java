@@ -176,7 +176,7 @@ public class ParserUtil {
      */
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
-        String cleanedDay = StringUtil.capitalize(day.trim());
+        String cleanedDay = StringUtil.capitalizeFirstCharAndLowerRest(day.trim());
         return parseStringToDay(cleanedDay)
                 .orElseThrow(() -> new ParseException(MESSAGE_INVALID_DAY));
     }
@@ -242,13 +242,13 @@ public class ParserUtil {
      */
     public static Subject parseSubjectArgs(String args) throws ParseException {
         requireNonNull(args);
-        String trimmedSubject = args.trim();
+        String cleanedSubject = StringUtil.capitalizeFirstCharAndLowerRest(args.trim());
 
-        if (!isValidSubject(trimmedSubject)) {
+        if (!isValidSubject(cleanedSubject)) {
             throw new ParseException(SUBJECT_MESSAGE_CONSTRAINTS);
         }
 
-        return new Subject(args);
+        return new Subject(cleanedSubject);
     }
 
     /**
