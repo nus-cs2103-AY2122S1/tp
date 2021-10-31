@@ -56,6 +56,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the list of upcoming lessons within two days. */
     ObservableList<Entry<Lesson>> getUpcomingLessons();
 
+    /** Updates the list of upcoming lists within two days. */
+    void updateUpcomingLessons();
+
     /**
      * Returns the user prefs' address book file path.
      */

@@ -200,6 +200,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateUpcomingLessons() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }

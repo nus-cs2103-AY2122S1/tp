@@ -121,6 +121,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void updateUpcomingLessons() {
+        logger.info("Update upcoming lessons");
+        model.updateUpcomingLessons();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
