@@ -28,20 +28,20 @@ public class SubGroupCreateExecutor extends GroupExecutor {
 
     @Override public CommandResult execute() throws ExecuteException {
         try {
-            if (model.getFilteredGroupList().size() >= index.getOneBased()) {
-                Group group = model.getFilteredGroupList().get(index.getZeroBased());
-                // Make it return its own type of error.
-                if (model.isSuperGroupList()) {
+            if (model.isSuperGroupList()) {
+                if (model.getFilteredGroupList().size() >= index.getOneBased()) {
+                    Group group = model.getFilteredGroupList().get(index.getZeroBased());
+                    // Make it return its own type of error.
                     SuperGroup superGroup = (SuperGroup) group;
                     subGroup.setParent(superGroup);
                     superGroup.addSubGroup(subGroup);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
+                } else {
+                    // TODO: stub error message, this is supposed to be for when index is out of bounds.
+                    throw new ExecuteException("");
                 }
-                throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
-            } else {
-                // TODO: stub error message, this is supposed to be for when index is out of bounds.
-                throw new ExecuteException("");
             }
+            throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
         } catch (DuplicateItemException e) {
             throw new ExecuteException(String.format(MESSAGE_DUPLICATE_GROUP, subGroup));
         }
