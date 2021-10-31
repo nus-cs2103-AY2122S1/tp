@@ -7,6 +7,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
+// @@author samyipsh-reused
+// This feature to open user guide in the user's browser is borrowed from AY2122S1-CS2103T-T10-3.
+
 /**
  * Represents the user's browser to open url links.
  */
@@ -56,3 +59,4 @@ public class Browser {
         return true;
     }
 }
+// @@author

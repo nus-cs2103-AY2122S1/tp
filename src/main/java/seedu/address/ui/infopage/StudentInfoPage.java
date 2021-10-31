@@ -5,15 +5,13 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
 
 /**
- * TODO
+ * A container to contain student details.
  */
 public class StudentInfoPage extends InfoPage {
 
