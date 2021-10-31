@@ -75,13 +75,26 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 > * Welcome Splash Screen
 
 <p align="center">
-<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/ProfileWindowUi.png?raw=true">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/ProfileSetUpWindow.png?raw=true">
 </p>
 
 > * This Window is only displayed once, when the Student launches the App for the first time.
 1. Enter Your Name in the `Name Field`.
-2. Enter Your Telegram Handle in the `Telegram Field`.
-3. Enter Your GitHub Username in the `GitHub Field`.
+2. Enter Your __VALID__ Telegram Handle in the `Telegram Field`.
+3. Enter Your __VALID__ GitHub Username in the `GitHub Field`.
+
+> :bulb: TIP: 
+> 1. Telegram Handle Conventions: 
+> * Handles can use a-z, 0-9 and underscores. 
+> * Handles are case-insensitive,  
+> * Handles must be at least five characters long, and maximum is 39 characters.
+> 
+> 2. GitHub Username Conventions:
+> * Github username may only contain alphanumeric characters or hyphens.
+> * Github username cannot have multiple consecutive hyphens. 
+> * Github username cannot begin or end with a hyphen. 
+> * Maximum is 39 characters.
+
 
 <p align="center">
 <img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/MainWindow.png?raw=true">
@@ -99,7 +112,7 @@ Notes about command format:
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
+>:bulb: TIP: In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
 </div>
 
 <h3 id = "Nav"> </h3>
@@ -467,7 +480,7 @@ exit
 7. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
 8. <kbd>F1</kbd>: To Launch the Help Window.
 
-> TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
+> :bulb: TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
 
 <h2 id = "FAQ"> </h2>
 
