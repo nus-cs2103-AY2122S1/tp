@@ -417,6 +417,7 @@ Format: `delete INDEX...`
 * At least one `INDEX` must be given. (i.e. `delete ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `INDEX` uses **1-based indexing**.
+* Duplicate `INDEX`s are not allowed. (i.e. `delete 2 2` is not a valid command)
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
@@ -451,6 +452,7 @@ Format: `mark INDEX…​`
 * At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `INDEX` uses **1-based indexing**.
+* Duplicate `INDEX`s are not allowed. (i.e. `mark 2 2` is not a valid command)
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
@@ -469,6 +471,7 @@ Format: `unmark INDEX…​`
 * At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `INDEX` uses **1-based indexing**.
+* Duplicate `INDEX`s are not allowed. (i.e. `delete 2 2` is not a valid command)
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
