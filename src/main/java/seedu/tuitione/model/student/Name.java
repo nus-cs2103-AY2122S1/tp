@@ -9,8 +9,10 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
+    public static final int MAX_LENGTH = 200;
     public static final String MESSAGE_CONSTRAINTS =
-            "⚠\tAlert:\n\nNames should only contain alphanumeric characters and spaces, and it should not be blank";
+            "⚠\tAlert:\n\nNames should only contain alphanumeric characters and spaces, it should not be blank, "
+            + String.format("and it should not contain more than %1$d characters (whitespace included)", MAX_LENGTH);
 
     /*
      * The first character of the tuitione must not be a whitespace,
@@ -35,7 +37,9 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX)
+                && !test.isEmpty()
+                && test.length() <= MAX_LENGTH;
     }
 
 

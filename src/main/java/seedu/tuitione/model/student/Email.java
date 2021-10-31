@@ -9,13 +9,15 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
+    public static final int MAX_LENGTH = 100;
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "⚠\tAlert:\n\nEmails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
             + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
             + "characters.\n"
-            + "2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
+            + String.format("2. An email can have at most %1$d characters (whitespace included).\n", MAX_LENGTH)
+            + "3. This is followed by a '@' and then a domain name. The domain name is made up of domain labels "
             + "separated by periods.\n"
             + "The domain name must:\n"
             + "    - end with a domain label at least 2 characters long\n"
@@ -48,7 +50,9 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX)
+                && !test.isEmpty()
+                && test.length() <= MAX_LENGTH;
     }
 
     @Override
