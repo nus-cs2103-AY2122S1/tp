@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.UndoRedoStack;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -111,7 +111,7 @@ public class LessonAddCommandTest {
         LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON
-            + StringUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
+            + CommandUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
     }
 
     @Test
@@ -230,7 +230,7 @@ public class LessonAddCommandTest {
         LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON
-            + StringUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
+            + CommandUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
     }
 
     @Test
@@ -250,7 +250,7 @@ public class LessonAddCommandTest {
         LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON
-            + StringUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
+            + CommandUtil.lessonsToString(model.getClashingLessonsString(clashingLesson)));
     }
 
     @Test

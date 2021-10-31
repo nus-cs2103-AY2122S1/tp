@@ -224,6 +224,11 @@ public abstract class Lesson implements Comparable<Lesson> {
                 lessonRates, outstandingFees, cancelledDates);
     }
 
+    /**
+     * Get the lesson timing details in String.
+     *
+     * @return String representation for time fields for the Lesson.
+     */
     public String getLessonDetails() {
         final StringBuilder builder = new StringBuilder();
 
