@@ -217,7 +217,7 @@ Adding an appointment requires the user to input valid patient and doctor indexe
 4. The UI will then display the result
 ### Deleting an appointment
 Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
-####Implementation
+#### Implementation
 1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
    to `DeleteAppointmentCommandParser` for parsing.
 2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` which extends
@@ -700,20 +700,20 @@ testers are expected to do more *exploratory* testing.
 ### Listing all doctors <a name="list-doctors"/>
 
 ### Adding an appointment <a name="appointment"/>
-1. Add an appointment when appointment list is showing today's appointments
-    1. Prerequisites: list all appointments using the `appt -l` command. There must be multiple doctors and patients in the patient and doctor lists. There are less than 100 patients and doctors. 
+1. Add an appointment 
+    1. Prerequisites: There must be multiple doctors and patients in the patient and doctor lists. There are less than 100 patients and doctors. 
        
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:00 dur/5 r/Patient wants a blood test`<br>
-      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment does not show up in the appointment list.
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:05 r/Patient wants a blood test`<br>
-      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment does not show up in the appointment list.
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:30 dur/50`<br>
-      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment does not show up in the appointment list.
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/31/12/2050 14:00`<br>
-       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment does not show up in the appointment list.
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
 
     1. Test case: `appt -a p/1 d/1 s/DATE_AND_TIME dur/5 r/Patient wants a blood test,` where `DATE_AND_TIME` is today's date and any time<br>
        Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
@@ -743,7 +743,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting an appointment  <a name="delete-appointment"/>
 1. Deleting an appointment while all appointments are being shown
 
-    1. Prerequisites: list all appointments using the `appt -l` command. Multiple appointments in the list.
+    1. Prerequisites: list all appointments using the `appt -f` command. Multiple appointments in the list.
 
     1. Test case: `appt -d 1`<br>
        Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.

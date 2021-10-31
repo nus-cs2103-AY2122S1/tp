@@ -447,7 +447,7 @@ Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURAT
 
 * Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …​
 * `DATE_AND_TIME` accepts the format `DD/MM/YYYY HH:MM` e.g. `20/07/2022`.
-* Duration has to be an integer between 0 and 120 (minutes).
+* Duration has to be an integer between 1 and 120 (minutes).
 * If you did not include the duration, it will be automatically be set to **10** minutes.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
