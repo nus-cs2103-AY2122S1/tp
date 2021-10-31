@@ -49,15 +49,15 @@ Socius is a desktop application that can help you, as a CS2103T Software Enginee
 * find teammates!
 
 The Socius User Guide helps you get started with using Socius.
-This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, taking you from zero to hero.
-Don't like reading? A summary table is available at the end for quick reference!
+This User Guide hopes to get you familarized with the commands of Socius and the flow of using the program, helping you to achieve maximum efficiency so that you can get the most out of it.
+If you already have experience with using Socius, a summary table is available at the end for quick reference!
 
 We hope that you will have a great time using Socius! :)
 
 Here are some main features Socius provides:
 * Access details of coursemates taking CS2103T.
 * Find any coursemate(s) with their name, tutorial group, nationalities, tags and more.
-* Organize coursemates with suitable tags
+* Tag coursemates with suitable tags to categorize them.
 * View statistics on nationality and gender.
 
 <div markdown="block" class="alert alert-info">
