@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.programmer.commons.core.LogsCenter;
+import seedu.programmer.ui.exceptions.CommandHistoryException;
 
 public class CommandHistory {
     static final String DEFAULT_COMMAND = "";
@@ -36,10 +37,10 @@ public class CommandHistory {
      * Returns the least recent command if the {@code counter} is already pointer at the oldest command.
      * @return The string of the next most recent entered command.
      */
-    public String getPrevCommand() {
+    public String getPrevCommand() throws CommandHistoryException {
         if (isCommandHistoryEmpty()) {
             logger.info("There is no command history.");
-            return DEFAULT_COMMAND;
+            throw new CommandHistoryException("No command has been executed, there is no history to navigate.");
         }
 
         if (!isCounterAtFirst()) {
@@ -57,14 +58,14 @@ public class CommandHistory {
      * Returns the most recent command if the {@code counter} is already pointer at the latest command.
      * @return The string of the next least recent entered command.
      */
-    public String getNextCommand() {
+    public String getNextCommand() throws CommandHistoryException {
         if (isCommandHistoryEmpty()) {
             logger.info("There is no command history.");
-            return DEFAULT_COMMAND;
+            throw new CommandHistoryException("No command has been executed, there is no history to navigate.");
         }
         if (isCounterAtDefault()) {
             logger.info("Previous command has not been executed before. Empty command returned.");
-            return DEFAULT_COMMAND;
+            throw new CommandHistoryException("There is no more recent command to navigate");
         }
         if (!isCounterAtLast()) {
             counter++;

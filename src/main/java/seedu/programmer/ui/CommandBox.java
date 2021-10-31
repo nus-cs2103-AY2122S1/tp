@@ -1,5 +1,6 @@
 package seedu.programmer.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -8,6 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
+import seedu.programmer.ui.exceptions.CommandHistoryException;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -48,7 +50,7 @@ public class CommandBox extends UiPart<Region> {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
-            commandTextField.setText("");
+            setStyleToIndicateCommandFailure();
         }
     }
 
@@ -58,15 +60,22 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.UP) {
-            commandTextField.setText(commandHistory.getPrevCommand());
-        } else if (event.getCode() == KeyCode.DOWN) {
-            commandTextField.setText(commandHistory.getNextCommand());
-        } else {
-            return;
+        try {
+            if (event.getCode() == KeyCode.UP) {
+                commandTextField.setText(commandHistory.getPrevCommand());
+            }
+
+            if (event.getCode() == KeyCode.DOWN) {
+                commandTextField.setText(commandHistory.getNextCommand());
+            }
+
+//            event.consume(); // Consume Event
+        } catch (CommandHistoryException e) {
+            System.out.println("hi");
+        } finally {
+            commandTextField.end();
+
         }
-        commandTextField.end();
-        event.consume(); // Consume Event`
     }
 
     /**
@@ -74,6 +83,19 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Sets the command box style to indicate a failed command.
+     */
+    private void setStyleToIndicateCommandFailure() {
+        ObservableList<String> styleClass = commandTextField.getStyleClass();
+
+        if (styleClass.contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
+
+        styleClass.add(ERROR_STYLE_CLASS);
     }
 
     /**
