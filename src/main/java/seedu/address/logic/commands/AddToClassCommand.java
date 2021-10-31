@@ -30,8 +30,9 @@ public class AddToClassCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add students to existing class. "
             + "\n"
             + "Parameters: "
-            + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
-            + "[OR " + PREFIX_STUDENT + "STUDENT_NAME" + "] "
+            + PREFIX_STUDENT_INDEX + "STUDENT_INDEX [STUDENT_INDEX]..."
+            + PREFIX_TUITION_CLASS + "CLASS_INDEX or\n"
+            + PREFIX_STUDENT + "NAME[,NAME...] "
             + PREFIX_TUITION_CLASS + "CLASS_INDEX"
             + "\n" + "Example1: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 2 " + PREFIX_TUITION_CLASS + "2"
             + "\n" + "Example2: " + COMMAND_WORD + " " + PREFIX_STUDENT + "Felicia,James " + PREFIX_TUITION_CLASS + "3";

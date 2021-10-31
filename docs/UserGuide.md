@@ -199,10 +199,10 @@ Now that you are more familiar with our app, make it yours! Head over to section
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/student` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used zero or more times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `si/STUDENT_INDEX [STUDENT_INDEX]…​` can be used as ` ` (i.e. 0 times), `si/1`, `si/1 2 3` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -392,7 +392,7 @@ atc s/James tc/3
 
 Removes an existing student from a tuition class.
 
-Format: `remove si/INDEX_STUDENT [INDEX_STUDENT]... tc/CLASS_INDEX`
+Format: `remove si/STUDENT_INDEX [STUDENT_INDEX]... tc/CLASS_INDEX`
 
 Examples:
 ```
@@ -646,20 +646,22 @@ hence you do not lose any data.<br>
 
 ## 6 Command Summary
 
+Head back up to section [3 Features](#3-features) to refer to notes about the command format.
+
 Action | Format | Shortcut
 -------|--------|---------
 [***Add Student***](#31-add-studenttuition-class) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
-[***Add Class***](#31-add-studenttuition-class) |`addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]` | `ac`
+[***Add Class***](#31-add-studenttuition-class) |`addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,...] [r/REMARK]` | `ac`
 [***View Student***](#32-view-studenttuition-class) | `student INDEX` | `vs`
 [***View Class***](#32-view-studenttuition-class) | `class INDEX` | `vc`
 [***Edit Student***](#33-edit-studenttuition-class) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` | `e`
 [***Edit Class***](#33-edit-studenttuition-class) | `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]` | `ec`
-[***Delete Student***](#34-delete-studenttuition-class) | `delete INDEX_STUDENT [INDEX_STUDENT]...` | `del`
-[***Delete Class***](#34-delete-studenttuition-class) | `deleteclass INDEX_CLASS [INDEX_CLASS]...` | `delc`
-[***Add Student to Class***](#35-addremove-student-from-class) | `addtoclass si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS`<br>or<br>`addtoclass s/NAME[,NAME...] tc/INDEX_CLASS` | `atc`
-[***Remove Students from Class***](#35-addremove-student-from-class) | `remove si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS` | `rm`
-[***Add Remarks to Student***](#36-add-remark-to-studenttuition-class) | `remark INDEX_STUDENT` | `re`
-[***Add Remarks to Class***](#36-add-remark-to-studenttuition-class) | `remarkclass INDEX_CLASS` | `rec`
+[***Delete Student***](#34-delete-studenttuition-class) | `delete STUDENT_INDEX [STUDENT_INDEX]...` | `del`
+[***Delete Class***](#34-delete-studenttuition-class) | `deleteclass CLASS_INDEX [CLASS_INDEX]...` | `delc`
+[***Add Student to Class***](#35-addremove-student-from-class) | `addtoclass si/STUDENT_INDEX [STUDENT_INDEX]... tc/CLASS_INDEX`<br>or<br>`addtoclass s/NAME[,NAME...] tc/CLASS_INDEX` | `atc`
+[***Remove Students from Class***](#35-addremove-student-from-class) | `remove si/STUDENT_INDEX [STUDENT_INDEX]... tc/CLASS_INDEX` | `rm`
+[***Add Remarks to Student***](#36-add-remark-to-studenttuition-class) | `remark STUDENT_INDEX` | `re`
+[***Add Remarks to Class***](#36-add-remark-to-studenttuition-class) | `remarkclass CLASS_INDEX` | `rec`
 [***Find Student by Name***](#37-find-studenttuition-class) | `find KEYWORD [KEYWORD]...` | `f`
 [***Find Class by Name***](#37-find-studenttuition-class) | `findclass KEYWORD [KEYWORD]...` | `fc`
 [***List all Students***](#38-list-all-studentstuition-classes) | `list` | `l`

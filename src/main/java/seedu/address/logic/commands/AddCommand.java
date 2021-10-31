@@ -19,7 +19,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String SHORTCUT = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TutAssistor. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TutAssistor.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

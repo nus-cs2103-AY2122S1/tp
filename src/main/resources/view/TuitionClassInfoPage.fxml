@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="tuitionPagePane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="tuitionPagePane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="name" styleClass="cell_big_label" text="Name" wrapText="true" />
       <Label fx:id="timeSlot" styleClass="cell_small_label" text="Timeslot" wrapText="true">
@@ -15,7 +15,7 @@
             <Insets bottom="10.0" />
          </padding>
       </Label>
-      <GridPane centerShape="false" gridLinesVisible="true" scaleShape="false" style="-fx-background-color: #303030;" VBox.vgrow="NEVER">
+      <GridPane centerShape="false" gridLinesVisible="true" prefWidth="350.0" scaleShape="false" style="-fx-background-color: #303030;" VBox.vgrow="NEVER">
         <columnConstraints>
           <ColumnConstraints fillWidth="false" hgrow="NEVER" minWidth="150.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" />
@@ -27,7 +27,7 @@
             <RowConstraints fillHeight="false" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Maximum students: ">
+            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Maximum students: " textFill="WHITE" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
@@ -37,7 +37,7 @@
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="No. of students:" GridPane.rowIndex="1">
+            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="No. of students:" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
@@ -47,7 +47,7 @@
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Students:" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Students:" textFill="WHITE" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
@@ -57,7 +57,7 @@
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Remarks:" GridPane.rowIndex="3" GridPane.valignment="TOP">
+            <Label alignment="TOP_LEFT" centerShape="false" style="-fx-font-weight: bold;" styleClass="cell_small_label" text="Remarks:" textFill="WHITE" GridPane.rowIndex="3" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                </GridPane.margin>

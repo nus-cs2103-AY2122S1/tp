@@ -20,7 +20,8 @@ public class RemoveStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes a student from a tuition class.\n"
-            + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
+            + "Parameters: "
+            + PREFIX_STUDENT_INDEX + "STUDENT_INDEX [STUDENT_INDEX]... "
             + PREFIX_TUITION_CLASS + "CLASS_INDEX\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 2 " + PREFIX_TUITION_CLASS + "2";
 
