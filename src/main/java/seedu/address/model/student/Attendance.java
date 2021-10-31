@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Weeks should be a positive integer between %1$s and %2$s!";
+            "The week parameter should contain one positive integer between %1$s and %2$s!";
 
     public static final int FIRST_WEEK_OF_SEM = 3;
     public static final int LAST_WEEK_OF_SEM = 12;

@@ -87,6 +87,9 @@ public class ParserUtil {
      */
     public static int parseWeek(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.isBlank()) {
+            throw new ParseException("Week cannot be empty!");
+        }
         if (!Attendance.isValidWeek(Integer.parseInt(oneBasedIndex))) {
             throw new ParseException(String.format(Attendance.MESSAGE_CONSTRAINTS,
                     Attendance.FIRST_WEEK_OF_SEM, Attendance.LAST_WEEK_OF_SEM));
