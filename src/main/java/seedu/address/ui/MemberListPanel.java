@@ -31,9 +31,8 @@ public class MemberListPanel extends UiPart<Region> {
     public MemberListPanel(ObservableList<Member> memberList, Optional<Event> event) {
         super(FXML);
         String titleText = event.isPresent()
-                ? event.get().getName().fullName
-                : "Members";
-
+                ? event.get().getName().fullName + "'s Members"
+                : "Member List";
         memberListTitle.setText(titleText);
         memberListView.setItems(memberList);
         memberListView.setCellFactory(listView -> new MemberListViewCell());

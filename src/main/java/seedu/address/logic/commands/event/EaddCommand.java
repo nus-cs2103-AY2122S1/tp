@@ -32,8 +32,8 @@ public class EaddCommand extends Command {
             + PREFIX_DATE + "DATE (format: " + EventDate.DATE_TIME_FORMAT + ") "
             + "[" + PREFIX_MEMBER_ID + "MEMBER_INDEX (must be a positive integer)]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Freshmen Orientation Camp Project "
-            + PREFIX_DATE + "11/07/2021"
+            + PREFIX_NAME + "Freshmen Orientation Week "
+            + PREFIX_DATE + "11/07/2021 "
             + PREFIX_MEMBER_ID + "1 "
             + PREFIX_MEMBER_ID + "2";
 
