@@ -8,7 +8,6 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Map;
 import java.util.Set;
 
 import seedu.edrecord.logic.commands.AddCommand;
@@ -25,6 +24,7 @@ public class PersonUtil {
 
     /**
      * Returns an add command string for adding the {@code person}.
+     * This command will only work for tests with people that has 1 module, that has 1 class.
      */
     public static String getAddCommand(Person person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
@@ -39,9 +39,11 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_INFO + person.getInfo().value + " ");
-        for (Map.Entry<Module, Group> modGroupPair : person.getModules().getMapping().entrySet()) {
-            sb.append(PREFIX_MODULE + modGroupPair.getKey().getCode() + " ");
-            sb.append(PREFIX_GROUP + modGroupPair.getValue().getCode() + " ");
+        for (Module module : person.getModules().getModules()) {
+            sb.append(PREFIX_MODULE + module.getCode() + " ");
+            for (Group group : module.getGroupSystem().getGroupList()) {
+                sb.append(PREFIX_GROUP + group.getCode() + " ");
+            }
         }
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

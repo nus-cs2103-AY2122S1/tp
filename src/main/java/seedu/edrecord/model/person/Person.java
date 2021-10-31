@@ -13,7 +13,7 @@ import seedu.edrecord.model.assignment.Grade.GradeStatus;
 import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.tag.Tag;
 
@@ -30,14 +30,14 @@ public class Person {
 
     // Data fields
     private final Info info;
-    private final ModuleGroupMap modules = new ModuleGroupMap();
+    private final ModuleSet modules = new ModuleSet();
     private final Set<Tag> tags = new HashSet<>();
     private final AssignmentGradeMap grades = new AssignmentGradeMap();
 
     /**
      * Every field must be present and cannot be null.
      */
-    public Person(Name name, Phone phone, Email email, Info info, ModuleGroupMap modules,
+    public Person(Name name, Phone phone, Email email, Info info, ModuleSet modules,
                   Set<Tag> tags, AssignmentGradeMap grades) {
         requireAllNonNull(name, phone, email, info, tags);
         this.name = name;
@@ -65,7 +65,7 @@ public class Person {
         return info;
     }
 
-    public ModuleGroupMap getModules() {
+    public ModuleSet getModules() {
         return this.modules;
     }
 

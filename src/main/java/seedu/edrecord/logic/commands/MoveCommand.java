@@ -13,6 +13,7 @@ import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.person.Person;
 
 /**
@@ -57,7 +58,7 @@ public class MoveCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasModule(module)) {
-            throw new CommandException(Module.MESSAGE_DOES_NOT_EXIST);
+            throw new CommandException(String.format(Module.MESSAGE_DOES_NOT_EXIST, module));
         }
         Module savedMod = model.getModule(module);
         if (!savedMod.hasGroup(group)) {
@@ -71,6 +72,10 @@ public class MoveCommand extends Command {
             }
 
             Person personToMove = lastShownList.get(index.getZeroBased());
+            if (personToMove.getModules().containsGroupInModule(savedMod, group)) {
+                throw new CommandException(
+                        String.format(ModuleSet.MESSAGE_DUPLICATE_GROUP, personToMove.getName(), savedMod, group));
+            }
             personToMove.getModules().add(savedMod, group);
         }
 

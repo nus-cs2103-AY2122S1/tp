@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.module.ModuleSet;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.AssignmentGradeMap;
 import seedu.edrecord.model.person.Email;
@@ -31,7 +31,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Info info;
-    private ModuleGroupMap modules;
+    private ModuleSet modules;
     private Set<Tag> tags;
     private final AssignmentGradeMap grades = new AssignmentGradeMap();
 
@@ -45,9 +45,10 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         info = new Info(DEFAULT_INFO);
 
-        Module module = new Module(DEFAULT_MODULE, DEFAULT_GROUP);
-        modules = new ModuleGroupMap();
-        modules.add(module, new Group(DEFAULT_GROUP));
+        Module module = new Module(DEFAULT_MODULE);
+        Group group = new Group(DEFAULT_GROUP);
+        modules = new ModuleSet();
+        modules.add(module, group);
 
         tags = new HashSet<>();
     }
@@ -60,7 +61,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         info = personToCopy.getInfo();
-        modules = new ModuleGroupMap();
+        modules = new ModuleSet();
         modules.addAll(personToCopy.getModules());
         tags = new HashSet<>(personToCopy.getTags());
         grades.addAll(personToCopy.getGrades());
@@ -112,8 +113,7 @@ public class PersonBuilder {
     public PersonBuilder withModuleAndGroup(String mod, String grp) {
         Group group = new Group(grp);
         Module module = new Module(mod);
-        module.addGroup(group);
-        this.modules = new ModuleGroupMap();
+        this.modules = new ModuleSet();
         modules.add(module, group);
         return this;
     }

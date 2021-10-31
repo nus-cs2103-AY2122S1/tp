@@ -66,8 +66,8 @@ public class AssignmentGradeMap {
             return false;
         }
 
-        AssignmentGradeMap otherModuleGroupMap = (AssignmentGradeMap) other;
-        return this.grades.equals(otherModuleGroupMap.getGrades());
+        AssignmentGradeMap otherModuleSet = (AssignmentGradeMap) other;
+        return this.grades.equals(otherModuleSet.getGrades());
     }
 
     @Override
