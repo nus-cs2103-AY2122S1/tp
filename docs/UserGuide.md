@@ -170,7 +170,7 @@ Edits an existing Student Contact in the Address Book.
 Format 1: 
 
 ```
-edit <INDEX> [n/<NAME>] [te/TELEGRAM] [g/GITHUB] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example 1:
@@ -182,7 +182,7 @@ edit 1 n/John te/john_123 t/TA
 Format 2:
 
 ```
-edit profile [n/<NAME>] [te/TELEGRAM] [g/GITHUB]
+edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 ```
 
 Example 2:
@@ -218,19 +218,31 @@ find t/<TAG>
 Example 2:
 
 ```
-find friends
+find t/friends
 ```
 
 Format 3: 
 
 ```
-find @<TELEGRAM>
+find te/<TELEGRAM>
 ```
 
 Example 3:
 
 ```
-find @alex_1 bobx2
+find te/alex_1 bobx2
+```
+
+Format 4:
+
+```
+find g/<GITHUB>
+```
+
+Example 4:
+
+```
+find g/david_boss
 ```
 
 <h3 id = "Show"> </h3>
@@ -507,7 +519,7 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Favourite a Student Contact | `fav <INDEX>` |
 | Find a Student (by Name) | `find <STRING> ` |
 | Find a Student (by Tag) | `find t/<TAG>` |
-| Find a Student (by Telegram Handle) | `find @<TELEGRAM>` |
+| Find a Student (by Telegram Handle) | `find te/<TELEGRAM>` |
 | Import Student Contacts | `import <FILENAME>.json` <br> `import <FILENAME>.csv` |
 | List all the Student Contacts Present | `list` |
 | Show the Help Window | `help` |
