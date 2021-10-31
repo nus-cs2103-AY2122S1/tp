@@ -13,9 +13,12 @@ import seedu.modulink.model.person.Person;
 public class RemFavCommand extends Command {
     public static final String COMMAND_WORD = "remFav";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person as a favourite. \n "
-            + "Parameters: Student_ID \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person as a favourite.\n "
+            + "Parameters: Student_ID\n"
             + "Example: " + COMMAND_WORD + " A1234567X";
+
+    public static final String MULTIPLE_ID_ERROR =
+            "You can only remove one person from your Favourites list at a time.";
 
     private final String studentId;
 

@@ -14,12 +14,15 @@ public class AddFavCommand extends Command {
 
     public static final String COMMAND_WORD = "addFav";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person as a favourite. \n "
-            + "Parameters: Student_ID \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person as a favourite.\n "
+            + "Parameters: Student_ID\n"
             + "Example: " + COMMAND_WORD + " A1234567X";
 
     public static final String FAVOURITING_PROFILE_ERROR =
             "You cannot add your own profile to your Favourites list.";
+
+    public static final String MULTIPLE_ID_ERROR =
+            "You can only add one person to your Favourites list at a time.";
 
     private final String studentId;
 

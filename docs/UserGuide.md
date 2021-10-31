@@ -48,7 +48,7 @@ To run the app, simply double click the file. You should see a GUI similar to th
 
 As mentioned earlier, ModuLink works as a CLI, which means you will need to type and enter commands in the command box. To get accustomed to the interface, try the following commands (in the given the order).
 
-* **`create`**`n/John Doe id/A0123456A p/24680135 e/johndoe@example.com` : Creates your ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
+* **`create`** `n/John Doe id/A0123456A p/24680135 e/johndoe@example.com` : Creates your ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
 * **`addMod`** `mod/CS2103T need group mod/CS2101 need member`: Adds CS2103T and CS2101 module tags to your profile and indicates that you need to form or join a group for CS2103T and that you need member(s) for your CS2101 group.
 * **`list`**: Lists all the profiles on ModuLink.
 * **`filter mod/CS2101`**: Filters all profiles who have CS2101 as one of their module tags.
@@ -104,7 +104,7 @@ To know what you can do with ModuLink, and what ModuLink can do for you, refer t
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -366,17 +366,17 @@ Prefix | Parameter
 
 Action | Format, Examples
 -------|-----------------
-**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
-**Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`, `edit p/123321432 e/changedemail@example.com`
-**Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`, `addMod mod/CS2103T need member mod/CS1231S`
-**Edit module group status** | `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...`, `editGroupStatus mod/CS2103T updateStatus/Need a member`
-**Remove module** | `remMod mod/MODULE [mod/MODULE]...`, `remMod mod/CS2100 mod/CS2103T`
-**Add Favourite** | `addFav STUDENT_ID` <br> e.g., `addFav A0222594A`
-**Remove Favourite** | `remFav STUDENT_ID` <br> e.g., `remFav A0222594A`
+**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
+**Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]` <br> <br> e.g., `edit p/123321432 e/changedemail@example.com`
+**Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...` <br> <br> e.g., `addMod mod/CS2103T need member mod/CS1231S`
+**Edit module group status** | `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...` <br> <br> e.g., `editGroupStatus mod/CS2103T updateStatus/Need a member`
+**Remove module** | `remMod mod/MODULE [mod/MODULE]...` <br> <br> e.g., `remMod mod/CS2100 mod/CS2103T`
+**Add Favourite** | `addFav STUDENT_ID`  <br> <br> e.g., `addFav A0222594A`
+**Remove Favourite** | `remFav STUDENT_ID`  <br> <br> e.g., `remFav A0222594A`
 **List** | `list`
 **List favorites** | `listFav`
 **Find by name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
 **Find by student ID** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `findId A0222594A` returns person with student Id matching A0222594A.
-**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 need group`
+**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` <br> with group filter: `filter mod/CS2030 need group`
 **Help** | `help`
 **Exit** | `exit`

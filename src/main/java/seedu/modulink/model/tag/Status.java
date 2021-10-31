@@ -49,9 +49,10 @@ public enum Status {
      */
     public static Status parseStatusFromString(String s) {
         s = s.trim();
-        if (s.equals("need group")) {
+        if (s.equalsIgnoreCase("need group")) {
             return Status.NEED_GROUP;
-        } else if (s.equals("need member") || s.equals("need members")) {
+        } else if (s.equalsIgnoreCase("need member")
+                || s.equalsIgnoreCase("need members")) {
             return Status.NEED_MEMBER;
         } else {
             return Status.NONE;

@@ -10,7 +10,9 @@ import static seedu.modulink.commons.util.AppUtil.checkArgument;
 public class Mod {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Please enter a valid Module Code (e.g. CS2103T). You may also include your grouping status.";
+            "Please enter a valid Module Code (e.g. CS2103T). You may also include your grouping status.\n"
+                + "Available grouping statuses are: need member, need group. Please leave it blank to "
+                + "indicate you do not need a group.";
     public static final String VALIDATION_REGEX =
             "([A-Z]|[a-z]){2,3}[0-9]{4}([A-Z]|[a-z])?\\s?[\\p{Alnum}]?[\\p{Alnum} ]*";
 
@@ -26,6 +28,7 @@ public class Mod {
     public Mod(String modString) {
         requireNonNull(modString);
         checkArgument(isValidTagName(modString), MESSAGE_CONSTRAINTS);
+
 
         this.oriInput = modString;
         int i = modString.indexOf(' ');
