@@ -25,7 +25,11 @@ public class Amount implements Comparable<Amount> {
         this.amount = amount;
     }
 
-    public static boolean isValidAmount(String test)  {
+    /**
+     * Returns true if a given string is a valid amount.
+     * An amount is valid if it is less than 10^9 and non-negative.
+     */
+    public static boolean isValidAmount(String test) {
         try {
             double amount = Double.parseDouble(test);
             return amount <= MAXIMUM_AMOUNT && amount >= 0;
