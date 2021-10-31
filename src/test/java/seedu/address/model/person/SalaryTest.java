@@ -24,6 +24,7 @@ public class SalaryTest {
     public void constructor() {
         assertEquals(new Salary("0").toString(), "0.00");
         assertEquals(new Salary("1.99").toString(), "1.99");
+        assertEquals(new Salary("1.9").toString(), "1.90");
         assertEquals(new Salary("1.999").toString(), "1.99");
     }
 
@@ -73,6 +74,7 @@ public class SalaryTest {
         assertFalse(Salary.isValidSalary("0.-11")); // negative cents value
         assertFalse(Salary.isValidSalary(".999")); // empty input for dollars
         assertFalse(Salary.isValidSalary("1.")); // empty input for cents
+        assertFalse(Salary.isValidSalary(".")); // empty input for both dollars and cents
 
         // valid salary
         assertTrue(Salary.isValidSalary("1.99"));
