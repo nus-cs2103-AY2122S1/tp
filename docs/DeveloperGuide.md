@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation details
 
-The add command is used to add a person to SeniorLove.
+The add command is used to add an elderly to SeniorLove.
 It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
 - `AddCommand` extends `Command`
 - `AddCommandParser` implements `Parser<AddCommand>`
@@ -185,7 +185,7 @@ Given below is an example usage scenario:
 
 #### Implementation details
 
-The visit command is used to add a visit to an existing person in SeniorLove.
+The visit command is used to add a visit to an existing elderly in SeniorLove.
 It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
 - `VisitCommand` extends `Command`
 - `VisitCommandParser` implements `Parser<VisitCommand>`
@@ -206,11 +206,11 @@ Given below is an example usage scenario:
 
 - Overloading `edit` to add/change visit:
 
-  The `visit` command is similar to the `edit` command in the sense that they both alter the person's attributes, and it is possible to implement similar functionality without a new command.
+  The `visit` command is similar to the `edit` command in the sense that they both alter the elderly's attributes, and it is possible to implement similar functionality without a new command.
   However, we chose to implement the `visit` command since a visit can be added without having any visit previously, and overloading the `edit` command can make it confusing to use.
 
 
-- Replacing the existing person with a new instance with the visit changed:
+- Replacing the existing elderly with a new instance with the visit changed:
 
   We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with modified visit to replace the previous Person object.
 
@@ -224,7 +224,7 @@ Given below is an example usage scenario:
 
 #### Implementation details
 
-Delete command is used to delete an existing person or the next visit of a person in SeniorLove. It makes use of polymorphism and is similar to the other commands in SeniorLove:
+Delete command is used to delete an existing elderly or the next visit of a elderly in SeniorLove. It makes use of polymorphism and is similar to the other commands in SeniorLove:
 
 * `DeleteCommand` extends `Command`
 * `DeleteCommandParser` implements `Parser<DeleteCommand>`
@@ -238,16 +238,16 @@ The following sequence diagram illustrate how the components interact with each 
 Given below is an example usage scenario:
 1. User inputs the delete command, specifying the visit flag and the index of the elderly to be removed visit from. (If user wants to remove the entry of the elderly entirely instead of only removing the visit, she/he only needs to specify the index without the visit flag.)
 2. After successfully parsing the user input, the `DeleteCommand#execute(Model model)` method is called.
-3. The person which the user wants to delete visit from will be replaced by a new entry of a copy of person without the existing next visit.
+3. The elderly which the user wants to delete visit from will be replaced by a new entry of a copy of elderly without the existing next visit.
 4. Upon successfully deleting the visit from the corresponding elderly, a `CommandResult` object is instantiated and returned to `LogicManager`.
 
 #### Design choices
 
 - Overloading `delete` to remove visit:
 
-  Deleting person and deleting visits are overlapping functionalities dealing with removing information. It is possible to overload the `delete` command to achieve both functionalities without creating new command.
+  Deleting elderly and deleting visits are overlapping functionalities dealing with removing information. It is possible to overload the `delete` command to achieve both functionalities without creating new command.
 
-- Replace the existing person with a new instance (if deleting a visit):
+- Replace the existing elderly with a new instance (if deleting a visit):
 
   We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with visit removed to replace the previous Person object.
 
@@ -266,7 +266,7 @@ The following activity diagram illustrates the activity flow of the done command
 
 #### Design choices
 
-- Overloading `edit` to change person:
+- Overloading `edit` to change elderly:
 
     The `done` command makes use of the `edit` command to get a new copy of the `Person` object with the `Visit` and `LastVisit` fields being updated.
 
@@ -324,7 +324,7 @@ Given below is an example usage scenario:
 
 #### Implementation details
 
-Sort command is used to sort the list of people in SeniorLove. visit of a person in SeniorLove. It makes use of polymorphism and is similar to the other commands in SeniorLove:
+Sort command is used to sort the list of people in SeniorLove. visit of an elderly in SeniorLove. It makes use of polymorphism and is similar to the other commands in SeniorLove:
 
 * `SortCommand` extends `Command`
 * `SortCommandParser` implements `Parser<SortCommand>`
@@ -339,7 +339,7 @@ Given below is an example usage scenario:
 
 - Wrapping the `FilteredList` inside a `SortedList`:
     
-    We choose to add a wrapper for list of persons so that the original FilteredList remains immutable.
+    We choose to add a wrapper for list of elderly so that the original FilteredList remains immutable.
 
 - Implementing a class of `SortComparator`:
 
@@ -378,11 +378,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th elderly in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new elderly. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -390,7 +390,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the elderly was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -435,7 +435,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the elderly being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -481,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | social worker                              | add entries                                                                                   | keep track of new elderly who come under my care                       |
 | `* * *`  | social worker                              | delete entries                                                                                | keep track of elderly who are no longer under my care                  |
-| `* * *`  | social worker                              | see elderlies' contacts and home address                                                      | know how to contact them                                               |
+| `* * *`  | social worker                              | see elderly's contacts and home address                                                      | know how to contact them                                               |
 | `* * *`  | social worker                              | add deadlines to contact a elderly                                                            | remember to check in on them                                           |
 | `* * *`  | social worker                              | add an ‘until’ date for recurring deadlines                                                   | know when to stop visiting a elderly on a recurring basis              |
 | `* * *`  | social worker                              | see data from my previous session                                                             | save time spent importing entries each session                         |
@@ -506,7 +506,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `SeniorLove` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a person**
+**Use case: UC01 - Add an elderly**
 
 **MSS**
 
@@ -534,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: UC02 - Delete a person**
+**Use case: UC02 - Delete an elderly**
 
 **MSS**
 
@@ -578,14 +578,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 elderly without a noticeable sluggishness in performance for typical usage.
 3.  Should be usable by a novice who has never used the system.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Glossary
 
-* **User**: Refers to Social Worker, a community worker using the app to manage multiple elderlies.
-* **Social Worker**: Workers at community centres to provide supports for needy seniors. They manage multiple elderlies and visit them regularly.
+* **User**: Refers to Social Worker, a community worker using the app to manage multiple elderly.
+* **Social Worker**: Workers at community centres to provide supports for needy seniors. They manage multiple elderly and visit them regularly.
 * **Elderly**: The seniors who need social support due to limited family support. They are managed by social workers.
 * **Visit**: A visit to an elderly's home scheduled by the user.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
@@ -618,17 +618,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an elderly
 
-1. Deleting a person while all persons are being shown
+1. Deleting an elderly while all elderly are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all elderly using the `list` command. Multiple elderly in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No elderly is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

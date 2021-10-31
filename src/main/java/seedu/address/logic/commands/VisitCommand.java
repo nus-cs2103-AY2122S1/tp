@@ -25,9 +25,9 @@ public class VisitCommand extends Command {
 
     public static final String COMMAND_WORD = "visit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the visit of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Existing visit will be overwritten by the input."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the visit of the elderly identified "
+            + "by the index number used in the last elderly listing. "
+            + "Existing visit will be overwritten by the input. "
             + "Or add a recurring visit using optional flags for frequency and occurrence\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "VISIT_DATE "
@@ -40,9 +40,9 @@ public class VisitCommand extends Command {
             + PREFIX_FREQUENCY + "Weekly "
             + PREFIX_OCCURRENCE + "2";
 
-    public static final String MESSAGE_ADD_VISIT_SUCCESS = "Added visit to Person: %1$s";
-    public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Removed visit from Person: %1$s";
-    public static final String MESSAGE_ADD_RECURRING_VISIT_SUCCESS = "Added recurring visit to Person: %1$s";
+    public static final String MESSAGE_ADD_VISIT_SUCCESS = "Added visit to Elderly: %1$s";
+    public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Removed visit from Elderly: %1$s";
+    public static final String MESSAGE_ADD_RECURRING_VISIT_SUCCESS = "Added recurring visit to Elderly: %1$s";
     public static final String MESSAGE_INVALID_OPTIONAL_FLAG = "Frequency cannot be empty for multiple occurrence.";
 
     private final Index index;

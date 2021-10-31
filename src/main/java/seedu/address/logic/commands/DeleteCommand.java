@@ -25,13 +25,13 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list. "
-            + "Or delete the visit of that person using optional flag " + PREFIX_VISIT + ".\n"
+            + ": Deletes the elderly identified by the index number used in the displayed elderly list. "
+            + "Or delete the visit of that elderly using optional flag " + PREFIX_VISIT + ".\n"
             + "Parameters: [" + PREFIX_VISIT + "] INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "or " + COMMAND_WORD + " v/1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Deleted Visit for Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Elderly: %1$s";
+    public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Deleted Visit for Elderly: %1$s";
 
     private static final Optional<Visit> EMPTY_VISIT = Optional.ofNullable(new Visit(""));
 

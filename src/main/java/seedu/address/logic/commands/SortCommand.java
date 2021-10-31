@@ -15,19 +15,19 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
 /*
- * Sorts all persons in the address book to the user.
+ * Sorts all person in the address book to the user.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the displayed person lists either by increasing order of next visit using flag " + PREFIX_VISIT
+            + ": Sorts the displayed elderly lists either by increasing order of next visit using flag " + PREFIX_VISIT
             + " or by decreasing order of last visit using flag " + PREFIX_LAST_VISIT + "\n"
             + "Parameters: [" + PREFIX_VISIT + "] or [" + PREFIX_LAST_VISIT + "]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VISIT + " or " + COMMAND_WORD + " " + PREFIX_LAST_VISIT;
 
-    public static final String MESSAGE_SUCCESS = "Sorted listed persons successfully by %1$s";
+    public static final String MESSAGE_SUCCESS = "Sorted listed elderly successfully by %1$s";
 
     private final Comparator<Person> comparator;
     private final boolean isAscending;
