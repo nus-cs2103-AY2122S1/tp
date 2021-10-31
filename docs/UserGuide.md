@@ -167,7 +167,7 @@ Examples:
 * **`add`** `n/Amy Tan` adds `Amy Tan` to the list.
 * **`add`** `n/Benedict p/98765432 e/ben@example.com g/M` adds `Benedict`  to the list together with his phone number, email and gender.
 * **`add`** `n/Cindy t/friend e/cindy@example.com p/1234567 tg/T07` adds `Cindy` to the list together with her tag, email, phone number and tutorial group.
-* **`add`** `n/David Lim nat/Singapore s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
+* **`add`** `n/David Lim nat/Singaporean s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds `Ernest` to the list together with his Telegram and Instagram handles.
 ![Add Command Example](images/AddEnerst.png)
 *Add Command: n/Ernest s/tg:ernest2334 s/ig:ernessst*
