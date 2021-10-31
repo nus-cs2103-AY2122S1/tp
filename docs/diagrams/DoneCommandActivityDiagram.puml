@@ -6,7 +6,7 @@ start
 
 if () then ([Visit date is specified in correct format])
     if () then ([Index is the valid])
-        if () then ([There is an existing visit for the person])
+        if () then ([There is a next visit for the elderly])
             :executes DoneCommand;
         else ([else])
             :Throw CommandException;

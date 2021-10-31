@@ -161,7 +161,7 @@ Examples:
 
 ### Delete an elderly or corresponding visit : `delete`
 
-Deletes either an elderly’s details or the corresponding elderly’s visit at list index `INDEX` from SeniorLove.
+Deletes either an elderly’s details or the corresponding elderly’s next visit at list index `INDEX` from SeniorLove.
 
 Format: `delete [v/] INDEX`
 
@@ -306,11 +306,12 @@ Examples:
 
 ### Mark one visit as done : `done`
 
-Marks a scheduled visit to an elderly as done.
+Marks a next visit to an elderly as done.
 
 Format: `done INDEX`
 
-* `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.** There must be a scheduled visit for the elderly before the visit can be marked as done.
+* `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.** 
+  There must be a next visit for the elderly before the visit can be marked as done.
 
 <div markdown="block" class="alert alert-info">
 :information_source: Where does the marked visit go?
