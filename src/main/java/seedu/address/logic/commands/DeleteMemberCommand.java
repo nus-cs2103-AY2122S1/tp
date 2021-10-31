@@ -22,7 +22,7 @@ public class DeleteMemberCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a member from a group "
             + "by the index number used in the displayed group list and member list.\n"
-            + "Parameters: GROUP INDEX & MEMBER INDEX (must be a positive integers)\n"
+            + "Parameters: GROUP INDEX & MEMBER INDEX (both must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "1 ";
 
