@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class ClassLimit {
     public static final String MESSAGE_CONSTRAINTS =
-            "The limit is not correct, should be a positive integer and no more than 1000";
+            "The limit is invalid. It should be a positive integer and no more than 100.";
     public final int limit;
 
     /**

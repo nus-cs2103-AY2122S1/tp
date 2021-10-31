@@ -15,8 +15,9 @@ public class SortCommand extends Command {
     public static final String SHORTCUT = "s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sort the tuition class list.\n"
-            + "Parameters: [" + PREFIX_SORT_ORDER + "ORDER_TO_SORT] \n"
-            + "ORDER_TO_SORT includes 'o/time', 'o/asc' (for ascending), and 'o/desc' (for descending)\n"
+            + "Parameters: [" + PREFIX_SORT_ORDER + "ORDER] \n"
+            + "ORDER includes 'o/time', 'o/asc' (for ascending alphabetical order), "
+            + "and 'o/desc' (for descending alphabetical order)\n"
             + "Example1: " + COMMAND_WORD + " " + PREFIX_SORT_ORDER + "asc\n"
             + "Example2: " + COMMAND_WORD;
     public static final String MESSAGE_SORTED = "The tuition class list is now sorted by %1$s order";

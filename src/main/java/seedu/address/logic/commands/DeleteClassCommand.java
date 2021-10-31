@@ -18,7 +18,7 @@ public class DeleteClassCommand extends Command {
     public static final String SHORTCUT = "delc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes existing classes.\n"
-            + "Parameters: CLASS_INDEX CLASS_INDEX (must be a positive integer)\n"
+            + "Parameters: CLASS_INDEX [CLASS_INDEX]... (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_DELETE_CLASSES_SUCCESS = "Deleted Classes: %1$s.\n";

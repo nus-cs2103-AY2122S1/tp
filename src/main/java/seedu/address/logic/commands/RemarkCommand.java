@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
@@ -30,10 +29,8 @@ public class RemarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the student identified "
             + "by the index number used in the last student listing.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_REMARK + "[REMARK]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_REMARK + "Likes to swim.";
+            + "Parameters: STUDENT_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     private static final Logger logger = LogsCenter.getLogger(RemarkCommand.class);
 

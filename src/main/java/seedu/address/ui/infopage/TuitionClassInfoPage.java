@@ -8,6 +8,9 @@ import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tuition.TuitionClass;
 
+/**
+ * A container to contain tuition class details.
+ */
 public class TuitionClassInfoPage extends InfoPage {
 
     private static final String FXML = "TuitionClassInfoPage.fxml";

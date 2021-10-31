@@ -1,6 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +27,13 @@ public class AddClassCommand extends Command {
     public static final String MESSAGE_STUDENT_NOT_FOUND = "The following students are not found: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add tuition class given name, limit, sessions, timeslot, and student \n"
-            + "Parameters: NAME LIMIT TIMESLOT STUDENT\n"
+            + ": Adds tuition class given name, limit, timeslot, and student \n"
+            + "Parameters: "
+            + PREFIX_TUITION_CLASS + "NAME "
+            + PREFIX_LIMIT + "LIMIT "
+            + PREFIX_TIMESLOT + "TIMESLOT "
+            + "[" + PREFIX_STUDENT + "NAME,...] "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " n/Physics l/10 ts/Mon 11:00-14:00 s/Alex Yeoh,Bernice Yu";
 
     private static final String MESSAGE_CLASS_LIMIT_EXCEEDED = "The following students are not "

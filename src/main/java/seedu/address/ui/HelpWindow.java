@@ -48,9 +48,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import seedu.address.commons.core.Browser;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -59,13 +58,13 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL =
             "https://ay2122s1-cs2103t-t12-4.github.io/tp/UserGuide.html#command-summary";
-    public static final String HELP_MESSAGE = "Refer to the user guide for more information:\n";
+    public static final String HELP_MESSAGE = "Click the button to visit our user guide:\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Button openButton;
     @FXML
     private Label helpMessage;
 
@@ -258,13 +257,11 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Opens the URL to the user's desktop browser.
      */
     @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    private void openUserGuide() {
+        Browser.openUrl(USERGUIDE_URL);
     }
+
 }

@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
 
 /**
- * TODO
+ * A container to contain student details.
  */
 public class StudentInfoPage extends InfoPage {
 
