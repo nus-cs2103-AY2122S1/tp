@@ -136,6 +136,12 @@ public class ModelManager implements Model {
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
+    /**
+     * Updates when a member of a group changes.
+     *
+     * @param target current Student to be updated
+     * @param editedStudent updated Student object
+     */
     public void updateGroup(Student target, Student editedStudent) {
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
