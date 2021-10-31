@@ -27,13 +27,13 @@ public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks as done the visit for the person "
-            + "identified by the index number used in the displayed person list. "
-            + "There must be a visit scheduled for the person\n"
+            + ": Marks as done the visit for the elderly "
+            + "identified by the index number used in the displayed elderly list. "
+            + "There must be a next visit for the elderly\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_PERSON_SUCCESS = "Mark visit as done for Person: %1$s";
+    public static final String MESSAGE_DONE_PERSON_SUCCESS = "Mark visit as done for Elderly: %1$s";
 
     private final Index targetIndex;
 

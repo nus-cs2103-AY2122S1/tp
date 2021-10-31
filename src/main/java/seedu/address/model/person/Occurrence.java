@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Occurrence {
     public static final String MESSAGE_CONSTRAINTS =
-            "Occurrence should be positive number.";
+            "Occurrence should be a positive integer.";
     public static final Occurrence EMPTY_OCCURENCE = new Occurrence(1);
 
     public final int value;

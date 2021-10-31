@@ -15,11 +15,11 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose attributes start with all of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all elderly whose attributes start with all of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " alex English"
-            + "\nSearches for any person with alex and English as a substring of their attributes";
+            + "\nSearches for any elderly with alex and English as a substring of their attributes";
 
     private final PersonAttributesContainsKeywordsPredicate predicate;
 

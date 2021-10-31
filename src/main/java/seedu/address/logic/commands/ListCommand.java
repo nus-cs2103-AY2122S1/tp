@@ -11,14 +11,14 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all person in the address book to the user.
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays a list of all the persons in the system by default"
-            + " or display a list of all the persons with incoming visits in the next month (next 30 days) using "
+            + ": Displays a list of all the elderly in the system by default"
+            + " or display a list of all the elderly with incoming visits in the next month (next 30 days) using "
             + " flag " + PREFIX_INCOMING_MONTH
             + " or in the next week (next 7 days) using flag " + PREFIX_INCOMING_WEEK + "\n"
             + "Parameters: [" + PREFIX_INCOMING_MONTH + "] or [" + PREFIX_INCOMING_WEEK + "]\n"
@@ -26,8 +26,8 @@ public class ListCommand extends Command {
             + " or " + COMMAND_WORD + " " + PREFIX_INCOMING_MONTH
             + " or " + COMMAND_WORD + " " + PREFIX_INCOMING_WEEK;
 
-    public static final String MESSAGE_SUCCESS_ALL = "Listed all persons";
-    public static final String MESSAGE_SUCCESS_INCOMING = "Listed all persons with existing visits in next %1$s.";
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all elderly";
+    public static final String MESSAGE_SUCCESS_INCOMING = "Listed all elderly with existing visits in next %1$s.";
 
     public static final Predicate<Person> PREDICATE_HAS_VISIT_THIS_MONTH = (Person::hasVisitThisMonth);
     public static final Predicate<Person> PREDICATE_HAS_VISIT_THIS_WEEK = (Person::hasVisitThisWeek);
