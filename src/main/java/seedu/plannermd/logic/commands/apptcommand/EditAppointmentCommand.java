@@ -129,6 +129,9 @@ public class EditAppointmentCommand extends AppointmentCommand {
         Duration duration = editAppointmentDescriptor.getDuration()
                 .orElse(appointmentToEdit.getSession().duration);
         Session updatedSession = new Session(startTime, duration);
+        if (!updatedSession.isEndWithinSameDay()) {
+            throw new CommandException(Session.MESSAGE_END_WITHIN_SAME_DAY);
+        }
 
         Remark updatedRemark = editAppointmentDescriptor.getRemark().orElse(appointmentToEdit.getRemark());
 

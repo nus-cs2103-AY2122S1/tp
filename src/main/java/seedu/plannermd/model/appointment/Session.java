@@ -25,6 +25,8 @@ public class Session {
 
     public static final DateTimeFormatter DISPLAYED_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
+    public static final String MESSAGE_END_WITHIN_SAME_DAY = "The appointment should end within the same day.";
+
     public final LocalTime start;
     public final LocalTime end;
     public final Duration duration;
@@ -62,6 +64,13 @@ public class Session {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns if the starting and ending time are both in the same day.
+     */
+    public boolean isEndWithinSameDay() {
+        return end.isAfter(start);
     }
 
     /**
