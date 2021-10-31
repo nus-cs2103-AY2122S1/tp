@@ -16,7 +16,7 @@ import seedu.address.model.task.Task;
 
 public class TypicalTasks {
 
-    public static final Task TASK1 = new TaskBuilder().withLabel("Sew red button")
+    public static final Task TASK1 = new TaskBuilder().withLabel("Sew red buttons")
             .withDate("2021-09-18").build();
     public static final Task TASK2 = new TaskBuilder().withLabel("Buy green buttons")
             .withDate("2021-09-19").withIsDone(false).build();
