@@ -132,7 +132,7 @@ Adds an applicant to RecruitIn.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​`
 
 * To add multiple tags, multiple `t/` prefixes should be used.
-* Refer to [Add Input Specifications](#add-inputs) for detailed input specifications.
+* Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
@@ -152,7 +152,7 @@ remove tags from the applicant.
    * **note** : Giving more than 1 tag prefix input with 1 or more having no value like so `t/ t/smart` will instead lead
    to an error.
  * Prefix inputs for `edit` command must follow the same input specifications as `add` command. 
-Refer to [Add Input Specifications](#add-inputs) for detailed input specifications.
+Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
 Examples:
 * `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
@@ -175,7 +175,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMEN
 * If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
 * Input for each prefix can contain multiple **keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 * Inputs for all prefixes are **case-insensitive**.
-* Refer to [Find Input Specifications](#find-inputs) for detailed input specifications.
+* Refer to [**Find Input Specifications**](#find-inputs) for detailed input specifications.
 
 Examples:
 * `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
@@ -334,8 +334,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 ### Add Inputs
 
-* Return to [Add](#adding-an-applicant-add).
-* Return to [Edit](#editing-an-applicant--edit).
+* Return to [**Add**](#adding-an-applicant-add).
+* Return to [**Edit**](#editing-an-applicant--edit).
 
 * ##### NAME `n/`
     * A NAME should only contain alphanumeric characters. Spaces between words are allowed.
@@ -407,7 +407,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 ### Find Inputs
 
-* Return to [Find](#finding-an-applicant--find)
+* Return to [**Find**](#finding-an-applicant--find)
 
 * ##### NAME `n/`
     * A NAME is considered matching with a ***Name*** only if **at least 1** keyword is equal to **at least 1** word in the ***Name***.
