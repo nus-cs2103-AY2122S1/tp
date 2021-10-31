@@ -23,6 +23,7 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
     + [Viewing help : `help`](#viewing-help--help)
     + [Adding an applicant: `add`](#adding-an-applicant-add)
       - [Prefix Input Specifications ***{Advanced}***:](#prefix-input-specifications-advanced)
+    + [Editing an applicant: `edit`](#editing-an-applicant--edit)
     + [Listing all applicants : `list`](#listing-all-applicants--list)
     + [Finding an applicant : `find`](#finding-an-applicant--find)
       - [Prefix Input Specifications ***{Advanced}***:](#prefix-input-specifications-advanced-1)
@@ -131,8 +132,11 @@ Adds an applicant to RecruitIn.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​`
 
+* To add multiple tags, multiple `t/` prefixes should be used.
+
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
+* `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart t/helpful` to add a person named `John` with two tags `smart` and `helpful`
 
 #### Prefix Input Specifications ***{Advanced}***:
 
@@ -205,17 +209,24 @@ Examples:
     * For example:
         * NOTES inputs such as `This candidate is good!` and `@Applicant123 is suitab13 for th3 job!` are acceptable.
 
-### Editing an applicants : `edit`
+### Editing an applicant : `edit`
 
-Edits an applicant's data in RecruitIn.
+Edits an applicant's with specified index in RecruitIn.
 
-Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE]
- [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES] ```
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE]
+ [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]`
  
  * Edit command must take at least 1 prefix input.
- * If you input multiple of the same prefix, only the last prefix will be used for the search of that category.
- * Input for each prefix can contain multiple keywords separated by whitespace, e.g. n/John Mary, t/friend colleague
- * Inputs for all prefixes are case-insensitive.
+ * The `INDEX` refers to the index number shown in the displayed applicants list.
+ * For `t/` prefix in particular, if **only** a single tag prefix is provided like so `t/` with no values, it will erase
+remove tags from the applicant.
+   * **note** : Giving more than 1 tag prefix input with 1 or more having no value like so `t/ t/smart` will instead lead
+   to an error.
+
+Examples:
+* `edit 1 r/Software Engineer` will change the ***role*** of the applicant with the index number 1
+* `edit 1 t/` will remove all ***tags***s from the applicant with index number 1
+* `edit 1 n/John t/` will change the name of the applicant with index number 1 to `John` and remove all the applicant's ***tag***s
  
 #### Prefix Input Specifications ***{Advanced}***:
 
@@ -235,19 +246,19 @@ Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/E
   * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employment_type-et).
 
 * ##### EXPECTED_SALARY `s/`
-   * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
+  * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
 
 * ##### LEVEL_OF_EDUCATION `l/`
   * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
 
 * ##### YEARS_OF_EXPERIENCE `y/`
-    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#years_of_experience-y)..
+  * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#years_of_experience-y)..
 
 * ##### TAG `t/`
-    * All keywords provided as TAG input must comply with input specifications for add given [**here**](#tag-t).
+  * All keywords provided as TAG input must comply with input specifications for add given [**here**](#tag-t).
 
 * ##### INTERVIEW `i/`
-    * All keywords provided as INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
+  * All keywords provided as INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
 
 ### Listing all applicants : `list`
 
