@@ -89,7 +89,13 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedMc)) {
             throw new ParseException(Mc.MESSAGE_CONSTRAINTS);
         }
-        return new Mc(Integer.parseInt(trimmedMc));
+
+        int mcAsInt = Integer.parseInt(trimmedMc);
+        if (mcAsInt > 999 || mcAsInt < 1) {
+            throw new ParseException(Mc.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Mc(mcAsInt);
     }
 
     /**

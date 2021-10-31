@@ -13,11 +13,11 @@ public class Mc {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "MC credit should only be an Integer, and it should not be less than 0.";
+            "MC credit should only be an Integer from 1-999.";
     public final int value;
 
     /**
-     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * Constructs a dummy object only used by JsonUserInfoStorage and McProgressList.
      * This default constructor shouldn't be used anywhere else.
      */
     public Mc() {
