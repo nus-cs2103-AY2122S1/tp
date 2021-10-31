@@ -24,6 +24,7 @@ public class InvestmentPlanTag extends Tag {
         + "tag INDEX a/ ip/INVESTMENT_PLAN d/ ip/INVESTMENT_PLAN\n\n"
         + "Example: \n"
         + "tag 3 a/ ip/save d/ ip/property";
+
     public static final String INVESTMENT_PLAN_VALIDATION_REGEX = LifeInsurance.COMMAND + "|"
         + MotorInsurance.COMMAND + "|"
         + HealthInsurance.COMMAND + "|"
@@ -31,6 +32,15 @@ public class InvestmentPlanTag extends Tag {
         + PropertyInsurance.COMMAND + "|"
         + Investment.COMMAND + "|"
         + Savings.COMMAND;
+
+    public static final String[] LOWERCASE_INVESTMENT_PLAN_TAG_NAMES = new String[] {LifeInsurance.NAME.toLowerCase(),
+            MotorInsurance.NAME.toLowerCase(),
+            HealthInsurance.NAME.toLowerCase(),
+            TravelInsurance.NAME.toLowerCase(),
+            PropertyInsurance.NAME.toLowerCase(),
+            Investment.NAME.toLowerCase(),
+            Savings.NAME.toLowerCase()};
+
 
     /**
      * Constructs a {@code PriorityTag}.
