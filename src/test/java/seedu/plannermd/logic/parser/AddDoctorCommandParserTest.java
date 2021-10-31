@@ -1,6 +1,7 @@
 package seedu.plannermd.logic.parser;
 
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_DOCTOR_RISK_FIELD;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.BIRTH_DATE_DESC_AMY;
@@ -19,6 +20,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.plannermd.logic.commands.CommandTestUtil.RISK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -190,5 +192,11 @@ public class AddDoctorCommandParserTest {
                 PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + BIRTH_DATE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDoctorCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_riskField_failure() {
+        assertParseFailure(parser, RISK_DESC_AMY,
+                String.format(MESSAGE_INVALID_DOCTOR_RISK_FIELD, AddDoctorCommand.MESSAGE_USAGE));
     }
 }
