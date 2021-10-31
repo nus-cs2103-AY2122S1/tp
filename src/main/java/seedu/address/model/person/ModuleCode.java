@@ -18,7 +18,7 @@ public class ModuleCode {
             "Module codes should consists of a two- or three-letter prefix followed by a 4-digit number"
                     + " and optionally a one-letter suffix";
 
-    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}[\\d]{4}[a-zA-Z]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}[\\d]{4}[a-zA-Z]?";
     public final String value;
     public final Set<LessonCode> lessonCodes;
 
