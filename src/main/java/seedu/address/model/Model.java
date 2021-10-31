@@ -198,7 +198,7 @@ public interface Model {
 
     void updateFilteredOrderList(Predicate<Order> predicate);
 
-    void markOrder(Order order);
+    boolean markOrder(Order order);
 
     void sortOrderList(SortDescriptor sortDescriptor);
 
