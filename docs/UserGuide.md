@@ -59,6 +59,9 @@ If you are familiar with Unix commands, this is definitely for you!
 
 **Notes about the command format (Unix Command Syntax):**
 - Similar to Unix CLI, the up and down arrow keys can be used to navigate the history of commands executed.
+  - Up Arrow Key: Navigate to an older command.
+  - Down Arrow Key: Navigate to a more recent command.
+  - Command will only be stored after `Enter` has been pressed.
 - Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify
   a student's student ID.
 - Parameters can be in any order. <br> e.g. if the command specifies `-n NAME -sid STUDENT_ID`
