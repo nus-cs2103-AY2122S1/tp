@@ -506,20 +506,38 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 
 ## Command Summary
 
-| Action | Command | Format | Examples|
-|--------|---------|-------------------|----------------------------------------------------|
-| Help | **Help** | **`help`** | **`help`** |
-| Modify | **Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/T12 s/tg:friendlyjames r/Friendly t/colleague`|
-|  | **Edit** | **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​` | **`edit`** `1 s/tg:dogcatdonkey43 s/ig:applegrapeorange32 t/teammates e/wfeewf@gmail.com g/M nat/Singaporean` |
-|  | **Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
-|  | **Delete** | **`delete`** `INDEX` | **`delete`** `3`|
-|  | **Deletem** | **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`deletem`** `n/James g/f` |
-|  | **Clear** | **`clear`** | **`clear`** |
-| View | **List** | **`list`** | **`list`** |
-|  | **Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
-|  | **Sort** | **`sort`** `FIELD_PREFIX/` | **`sort`** `n/` |
-|  | **Stat** | **`stat`** `TUTORIAL_GROUP` | **`stat`** `T09`|
-| Share | **Import** | **`import`** | **`import`** `contactbook.json`|
-|  | **Export** | **`export`** | **`export`** `contactbook.json`|
-| Advance | **Alias** | **`alias`** `a/KEYWORD c/COMMAND` | **`alias`** `a/allFemales c/find g/f`|
-| Exit | **Exit** | **`exit`** | **`exit`** |
+### General
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Help** | **`help`** | **`help`** |
+| **Exit** | **`exit`** | **`exit`** |
+
+### Modify
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/T12 s/tg:friendlyjames r/Friendly t/colleague`|
+| **Edit** | **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​` | **`edit`** `1 s/tg:dogcatdonkey43 s/ig:applegrapeorange32 t/teammates e/wfeewf@gmail.com g/M nat/Singaporean` |
+| **Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
+| **Delete** | **`delete`** `INDEX` | **`delete`** `3`|
+| **Deletem** | **`deletem`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`deletem`** `n/James g/f` |
+| **Clear** | **`clear`** | **`clear`** |
+
+### View
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **List** | **`list`** | **`list`** |
+| **Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
+| **Sort** | **`sort`** `FIELD_PREFIX/` | **`sort`** `n/` |
+| **Stat** | **`stat`** `TUTORIAL_GROUP` | **`stat`** `T09`|
+
+### Share
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Import** | **`import`** | **`import`** `contactbook.json`|
+| **Export** | **`export`** | **`export`** `contactbook.json`|
+
+### Advance
+| Command | Format | Examples|
+|---------|-------------------|----------------------------------------------------|
+| **Alias** | **`alias`** `a/KEYWORD c/COMMAND` | **`alias`** `a/allFemales c/find g/f`|
+
