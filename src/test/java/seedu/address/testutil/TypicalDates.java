@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_NEXT_MON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUE;
-
 import java.time.LocalDate;
 
 import seedu.address.model.lesson.Date;
