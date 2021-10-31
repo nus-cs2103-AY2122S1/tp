@@ -1,6 +1,5 @@
 package seedu.programmer.ui;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -49,7 +48,7 @@ public class CommandBox extends UiPart<Region> {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
-            setStyleToIndicateCommandFailure();
+            commandTextField.setText("");
         }
     }
 
@@ -75,19 +74,6 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-    }
-
-    /**
-     * Sets the command box style to indicate a failed command.
-     */
-    private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextField.getStyleClass();
-
-        if (styleClass.contains(ERROR_STYLE_CLASS)) {
-            return;
-        }
-
-        styleClass.add(ERROR_STYLE_CLASS);
     }
 
     /**
