@@ -94,7 +94,7 @@ Exits ProgrammerError and closes the GUI.
 If no data present, fills it with sample data. Otherwise, throws an error message.
 
 ### <a name="purge-all-data"></a>2.2 Purge all Data: `purge`
-Purges all pre-existing sample data to start adding your own data or purge the user data. Clears all data in PE.
+Clears all data in PE. This can be used to delete pre-existing sample data or existing user data.
 
 ### <a name="download-data"></a>2.3 Download Data `download` or F3 on keyboard
 All current students' data can be downloaded to a CSV file. The TA will need to select the directory to download the
@@ -127,7 +127,7 @@ Example:
 Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to
 the displayed list.
 
-Format 1:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -email <EMAIL>`
+Format 1:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 
@@ -145,7 +145,7 @@ Format: `delete <STUDENT_INDEX>`
 - Deletes the student at `<STUDENT_INDEX>`. (1-indexed)
 
 Example:
-- `delete 23` Deletes the data of the student at index 1
+- `delete 23` Deletes the data of the student at index 23
 
 ### <a name="filter-student"></a>3.4 Filter Students: `filter`
 Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
