@@ -11,7 +11,7 @@ if () then ([required prefixes are present])
             : Create new AddAppointmentCommand;
             : Execute AddAppointmentCommand;
             : Generate success message;
-         else ([else]])
+         else ([else])
          : Generate Parse Exception\n describing invalid index for doctor;
          endif
       else ([else])
