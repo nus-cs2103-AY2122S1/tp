@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,6 +29,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static boolean isDone = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -315,6 +315,10 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
+    public static boolean isDone() {
+        return isDone;
+    }
+
     /**
      * Closes the application.
      */
@@ -332,7 +336,8 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         userProfileWindow.hide();
         primaryStage.hide();
-        ThreadProcessor.stopAllThreads();
+        tabPaneHeader.stopFabLoader();
+        isDone = true;
     }
 
     public PersonListPanel getPersonListPanel() {

@@ -61,6 +61,7 @@ public class Person implements Comparable<Person> {
         this.getProfilePicThread = new Thread(() -> {
             profilePicture = GitHubUtil.getProfilePicture(github.value);
         });
+        getProfilePicThread.setPriority(Thread.MAX_PRIORITY);
         getProfilePicThread.start();
         this.gitStats = new HashMap<>();
         startGetStatThread();
@@ -117,7 +118,6 @@ public class Person implements Comparable<Person> {
         this.getStatsThread = new Thread(() -> {
             this.gitStats = GitHubUtil.getUserStats(github.value);
             logger.info("Stats for " + name.fullName + ": " + gitStats);
-            ThreadProcessor.removeThread(getStatsThread);
         });
         ThreadProcessor.addThread(getStatsThread);
     }
@@ -167,13 +167,6 @@ public class Person implements Comparable<Person> {
     }
 
     public Image getProfilePicture() {
-        if (getProfilePicThread != null && getProfilePicThread.isAlive()) {
-            try {
-                getProfilePicThread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         return profilePicture;
     }
 

@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,6 +23,8 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 public class TabPaneHeader extends UiPart<Region> {
 
     private static final String FXML = "TabPane.fxml";
+
+    private final Thread fabLoader;
 
     @FXML
     private TabPane tabPane;
@@ -43,12 +47,14 @@ public class TabPaneHeader extends UiPart<Region> {
     public TabPaneHeader(Logic logic, ProgressIndicatorRegion indicator) {
         super(FXML);
 
-        Thread fabLoader = new Thread(() -> {
+        AtomicReference<AtomicBoolean> isFabLoaderRunning = new AtomicReference<>(new AtomicBoolean(false));
+
+        fabLoader = new Thread(() -> {
             while (tabPane.getSelectionModel().isSelected(3) && !ThreadProcessor.isEmpty()) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    //
                 }
             }
             if (tabPane.getSelectionModel().isSelected(3)) {
@@ -56,27 +62,35 @@ public class TabPaneHeader extends UiPart<Region> {
             }
         });
 
+
+
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(contacts)) {
                 logic.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 logic.getPersonList().getRoot().setVisible(true);
                 indicator.getRoot().setVisible(false);
                 logic.sort();
+                stopFabLoader();
             } else if (newValue.equals(favorite)) {
                 logic.updateFilteredPersonList(new IsFavouritePredicate(true));
                 logic.getPersonList().getRoot().setVisible(true);
                 indicator.getRoot().setVisible(false);
                 logic.sort();
+                stopFabLoader();
             } else if (newValue.equals(events)) {
                 logic.updateFilteredPersonList(
                         new TagContainsKeywordsPredicate(Collections.singletonList("colleagues")));
                 logic.getPersonList().getRoot().setVisible(true);
                 indicator.getRoot().setVisible(false);
                 logic.sort();
+                stopFabLoader();
             } else if (newValue.equals(findABuddy)) {
                 logic.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 if (!getFab(logic, indicator)) {
-                    fabLoader.start();
+                    if (!isFabLoaderRunning.get().get()) {
+                        fabLoader.start();
+                        isFabLoaderRunning.get().set(true);
+                    }
                 }
             }
         });
@@ -104,6 +118,13 @@ public class TabPaneHeader extends UiPart<Region> {
             logic.getPersonList().getRoot().setVisible(true);
         }
         return isDone;
+    }
+
+    /**
+     * Interrupt fab loader thread
+     */
+    public void stopFabLoader() {
+        fabLoader.interrupt();
     }
 
     /**

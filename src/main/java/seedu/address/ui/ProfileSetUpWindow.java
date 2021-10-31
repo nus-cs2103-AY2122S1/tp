@@ -65,6 +65,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         this.mainWindow = mainWindow;
         this.logic = logic;
         welcomeMessage.setText(WELCOME_MESSAGE);
+        submit.requestFocus();
     }
 
     /**
