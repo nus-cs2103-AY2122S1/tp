@@ -42,9 +42,20 @@ public class Task extends Module {
         this.taskDeadline = taskDeadline;
     }
 
+    /**
+     * Returns true if both tasks have the same name and the same deadline.
+     * This defines a weaker notion of equality between two tasks.
+     */
     @Override
-    public boolean isSameType(Module module) {
-        return this.equals(module);
+    public boolean isSameType(Module otherTask) {
+        if (otherTask == this) {
+            return true;
+        } else if (otherTask instanceof Task) {
+            return this.getName().equals(otherTask.getName())
+                    && this.getTaskDeadline().equals(((Task) otherTask).getTaskDeadline());
+        } else {
+            return false;
+        }
     }
 
     public boolean isDone() {

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Name;
+import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
 import seedu.address.model.module.task.TaskDeadline;
 
@@ -42,7 +44,7 @@ public class TeditCommand extends Command {
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member\n";
 
     private final Index targetTaskIndex;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -64,12 +66,18 @@ public class TeditCommand extends Command {
         List<Task> lastShownTasks = model.getFilteredTaskList();
 
         if (targetTaskIndex.getZeroBased() >= lastShownTasks.size()) {
-            throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+            throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, targetTaskIndex.getOneBased()));
         }
         Task taskToEdit = lastShownTasks.get(targetTaskIndex.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        model.setTask(targetTaskIndex.getZeroBased(), editedTask);
+        assert model.getCurrentMember().isPresent();
+        Member curMember = model.getCurrentMember().get();
+        if (!taskToEdit.isSameType(editedTask) && model.hasTask(curMember, editedTask)) {
+            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK, curMember.getName().toString()));
+        }
+
+        model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
