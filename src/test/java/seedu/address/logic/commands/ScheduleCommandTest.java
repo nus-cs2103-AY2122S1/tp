@@ -18,8 +18,8 @@ public class ScheduleCommandTest {
 
     @Test
     public void execute_validLocalDate_success() {
-        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULE_SUCCESS, "24 Nov 2021");
-        LocalDate scheduleDate = LocalDate.of(2021, 11, 24);
+        String expectedMessage = String.format(ScheduleCommand.MESSAGE_SCHEDULE_SUCCESS, "24 Nov 2022");
+        LocalDate scheduleDate = LocalDate.of(2022, 11, 24);
         ScheduleCommand command = new ScheduleCommand(scheduleDate);
         expectedModel.filterSortedNextMeetingList(scheduleDate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -29,7 +29,7 @@ public class ScheduleCommandTest {
     @Test
     public void execute_noMeetings_success() {
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_NO_SCHEDULE_ON_DATE_SUCCESS);
-        LocalDate scheduleDate = LocalDate.of(2021, 11, 20);
+        LocalDate scheduleDate = LocalDate.of(2022, 11, 20);
         ScheduleCommand command = new ScheduleCommand(scheduleDate);
         expectedModel.filterSortedNextMeetingList(scheduleDate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
