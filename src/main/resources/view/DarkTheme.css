@@ -139,6 +139,12 @@
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+}
+
+.cell_big_label_centered {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
     -fx-text-alignment: center;
 }
 
@@ -146,6 +152,13 @@
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.cell_small_label_centered {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+    -fx-text-alignment: center;
 }
 
 .stack-pane {
