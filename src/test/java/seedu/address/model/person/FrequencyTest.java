@@ -61,7 +61,7 @@ public class FrequencyTest {
     @Test
     public void nextVisit_monthly() {
         Frequency f = Frequency.MONTHLY;
-        Visit nextVisit = new Visit("2022-02-01 12:00");
+        Visit nextVisit = new Visit("2022-01-31 12:00");
         assertEquals(f.nextVisit(visit), nextVisit);
     }
 

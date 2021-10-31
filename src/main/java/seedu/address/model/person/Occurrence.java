@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import java.math.BigInteger;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.math.BigInteger;
 
 /**
  * Represents a Visit's occurrence.
