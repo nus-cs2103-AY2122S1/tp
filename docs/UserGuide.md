@@ -27,6 +27,7 @@ Manage large groups of contacts with advanced features such as **Import** for a 
     - [Adding a new Student - add](#Add)
     - [Delete a Student - delete](#Delete)
     - [Edit a Student - edit](#Edit)
+    - [Edit your Profile - edit](#EditProfile)
     - [Find a Student - find](#Find)
     - [Show a Student Contact - show](#Show)
     - [Importing Student Contacts - import ](#Import)
@@ -167,25 +168,31 @@ delete 7
 
 Edits an existing Student Contact in the Address Book.
 
-Format 1: 
+Format: 
 
 ```
 edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
-Example 1:
+Example:
 
 ```
 edit 1 n/John te/john_123 t/TA
 ```
 
-Format 2:
+<h3 id = "EditProfile"> </h3>
+
+## Edit your Profile - `edit profile`
+
+Edits the Profile linked to the Address Book.
+
+Format:
 
 ```
 edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 ```
 
-Example 2:
+Example:
 ```
 edit profile te/bob_osum
 ```
