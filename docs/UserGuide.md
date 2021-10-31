@@ -7,10 +7,6 @@ title: User Guide
 
 This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Table of Contents
-
 * Table of Contents
 {:toc}
 
@@ -58,11 +54,11 @@ Don't like reading? A summary table is available at the end for quick reference!
 
 We hope that you will have a great time using Socius! :)
 
-Here are some example usages you can derive from Socius:
-* Keep track of details of classmates who are also taking CS2103T
-* Delete details of less acquainted classmates
-* Tag classmates based on assigned project groups
-* Filter classmates based on different project groups
+Here are some main features Socius provides:
+* Access details of coursemates taking CS2103T.
+* Find any coursemate(s) with their name, tutorial group, nationalities, tags and more.
+* Organize coursemates with suitable tags
+* View statistics on nationality and gender.
 
 <div markdown="block" class="alert alert-info">
 Socius is optimized for use via a *Command Line Interface (CLI)* while still having the benefits of a *Graphical User Interface (GUI)*. If you can
@@ -87,21 +83,20 @@ Before diving into Socius and getting to know its features, lets get familiar wi
 
 Here is a quick start on how you can start using our app in your own computer.
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have [*Java 11*](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html) installed in your Computer. 
 
 2. Download the latest `Socius.jar` on our [Releases](https://github.com/AY2122S1-CS2103T-W08-4/tp/releases) page.
 
-3. Move the file `Socius.jar` to a folder you want to use as the _home folder_ for your Socius application.
+3. Move the file `Socius.jar` to a folder you want to use as the home folder for your Socius application.
 
 4. Double-click the file to start the app. A GUI similar to the one below should appear within a few seconds.
+   * If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
 
    ![Ui](images/Quickstart.png)
 
-* If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
-
 * Note that the app comes with some sample data by default. Type **`clear`** in the command box to remove those sample data.
 
-5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.
+* Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.
 Some example commands you can try:
     * **`list`** : Lists all contacts.
 
@@ -113,7 +108,7 @@ Some example commands you can try:
 
     * **`exit`** : Exits the app.
 
-6. Refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
+* Refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -146,18 +141,15 @@ Some example commands you can try:
 
 ### Viewing help: `help`
 
-You can view the full list of commands.
-Additionally, if you want to see a step-by-step guide for all Socius commands, you can get the URL to the Socius user guide by using the help command.
-
-![help message](images/helpWindow.png)
+You can view the full list of commands available on Socius with the `help` command.
 
 Format: **`help`**
 
 ### Adding a person: `add`
 
-You can add a person to the contact book.
+If you want to add a new person into *Socius*, you can use the 'add' command.
 
-Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`
+Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIAL HANDLE]…​ [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
@@ -165,14 +157,6 @@ The [Parameter Constraints](#parameter-constraints) section shows the constaints
 
 * Only the `NAME` field of a person is _compulsory_, other fields are _optional_.
 * The order of the fields does not matter.
-* The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name and `HANDLENAME` is the identifying username for that platform.
-* Supported `PLATFORM`
-  * `ig` for Instagram
-  * `tg` for Telegram
-  * `fb` for Facebook
-  * `tw` for Twitter
-  * `gh` for Github
-  * `ln` for Linkedin
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0) and social handles (including 0)
@@ -200,17 +184,23 @@ Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
   * `p/PHONE`
   * `e/EMAIL`
   * `nat/NATIONALITY`
-  * `tg/TUTORIAL_GROUP`
-  * `s/SOCIAL_HANDLE`
+  * `tg/TUTORIAL GROUP`
+  * `s/SOCIAL HANDLE`
   * `r/REMARK`
   * `t/TAG`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The [Parameter Constraints](#parameter-constraints) section shows the constaints for each parameter.
+</div>
+
 * At least one field of the person must be changed.
 * Edits the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* Index must be provided and **must be a positive integer** 1, 2, 3, …​
-* Existing values will be updated to the input values.
-* If duplicated fields are given, only the latest one will be taken, except for `s/SOCIAL_HANDLE` and `t/TAG`.
+* `INDEX` refers to the index number shown on the left of the name of a displayed person.
+* New input values will overwrite existing values.
+* To remove a field, simply leave the `VALUE` empty
+  * For `s/SOCIAL HANDLE`, you can specify which social handle to remove by only leaving the `USERID` part empty (i.e. `s/PLATFORM:`)
+* If duplicated fields are given, only the latest one will be taken
+  * This does not applies to `s/SOCIAL_HANDLE` and `t/TAG` as they can accept multiple values.
 * When editing tags, the existing tags of the person will be replaced (i.e adding of tags is not cumulative).
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
@@ -453,21 +443,24 @@ Example: `e/e3029834@u.nus.edu`
 
 Example: `nat/Singaporean`
 
-### `tg/TUTORIAL_GROUP`
-`TUTORIAL_GROUP` should only contain one letter that is either M/T/W/F followed by two digits.
+### `tg/TUTORIAL GROUP`
+`TUTORIAL GROUP` should only contain one letter that is either M/T/W/F followed by two digits.
 
 Example: `tg/T09`
 
-### `s/SOCIAL_HANDLE`
-`SOCIAL_HANDLE` should be of the format `platform:username` and adhere to the following constraints:
-* The platform should only contain the 2 letter shorthand for the social platform:
+### `s/SOCIAL HANDLE`
+`SOCIAL HANDLE` should be of the format `PLATFORM:USERID` and should adhere to the following constraints:
+* Only the following `PLATFORM` are supported: `Instagram`, `Telegram`, `Facebook`, `Twitter`, `Github`, `Linkedin`, `Snapchat`, `Discord`
+* The following 2 letter shorthand can be used to replace the full name of the social platform:
      * `ig` for Instagram
      * `tg` for Telegram
      * `fb` for Facebook
      * `tw` for Twitter
      * `gh` for Github
      * `ln` for Linkedin
-* The username should only contain alphanumeric characters
+     * `sc` for Snapchat
+     * `dc` for Discord
+* `USERID` should not contains whitespaces
 
 Example: `s/tg:alexx9384`
 
@@ -503,6 +496,11 @@ If the format of your data file is invalid, Socius will discard all data and sta
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+| Word | Meaning |
+|--------|---------|
+|        |           |
 
 ## Command Summary
 
