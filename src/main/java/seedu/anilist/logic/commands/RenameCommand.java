@@ -17,7 +17,6 @@ import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
-import seedu.anilist.ui.TabOption;
 
 public class RenameCommand extends Command {
     public static final String COMMAND_WORD = "rename";
@@ -52,7 +51,6 @@ public class RenameCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Anime> lastShownList = model.getFilteredAnimeList();
-        model.setCurrentTab(TabOption.TabOptions.ALL);
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
