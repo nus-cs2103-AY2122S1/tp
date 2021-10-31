@@ -219,17 +219,18 @@ Example:
 
 Command | Format & Examples
 --------| ----------------------
-**Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+**Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>` 
 **Add Lab** | `addlab -ln <LAB_NUM> -ts <TOTAL_SCORE>`
 **Delete** | `delete <INDEX_IN_LIST>`
 **Dashboard** | `dashboard`
 **Delete Lab** | `dellab -ln <LAB_NUM>`
 **Download** | `download`
-**Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID>`
+**Edit** | Format 1:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>` <br/> Format 2:`edit <INDEX_IN_LIST> -ln <LAB_NUMBER> -s <ACTUAL_SCORE>`
 **Edit Lab** | `editlab -ln <LAB_NUM> -nln <NEW_LAB_NUM> -ts <NEW_LAB_SCORE>`
 **Exit** | `exit`
-**Help** | `help`
 **Fill** | `fill`
 **Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
+**Help** | `help`
 **Purge** | `purge`
+**Show** | `show <INDEX_IN_LIST>`
 **Upload** | `upload`
