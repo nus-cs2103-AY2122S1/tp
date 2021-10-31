@@ -211,6 +211,18 @@ Format: `export email FILENAME`
 
 * Takes the current filtered list of contacts and writes them into `FILENAME`
 
+### Undoing a command: `undo`
+
+Undoes a previously executed command. `undo` can reverse any commands executed after the program was last started (except `undo`, `export`, and `exit`).
+
+Format: `undo`
+
+### Redoing a command: `redo`
+
+Re-performs a command that was undone. `redo` can redo any undone command up to the last executed command; executing a command that is not `undo` or `redo` will clear the redo history.
+
+Format: `redo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
