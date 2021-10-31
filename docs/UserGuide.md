@@ -270,7 +270,7 @@ Format: `marktask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtask` followed by `marktask 2` deletes the 2nd client in the application.
+* `listtask` followed by `marktask 2` marks the the 2nd task displayed as done.
 
 ### Finding tasks by keywords : `findtask`
 
