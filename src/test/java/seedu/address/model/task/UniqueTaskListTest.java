@@ -116,7 +116,7 @@ class UniqueTaskListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsTaskNotFoundException() {
+    public void remove_taskDoesNotExist_throwsTaskNotFoundException() {
         assertThrows(TaskNotFoundException.class, () -> uniqueTaskList.remove(TASK1));
     }
 
@@ -150,8 +150,8 @@ class UniqueTaskListTest {
     @Test
     public void setTasks_list_replacesOwnListWithProvidedList() {
         uniqueTaskList.add(TASK1);
-        List<Task> personList = Collections.singletonList(TASK2);
-        uniqueTaskList.setTasks(personList);
+        List<Task> taskList = Collections.singletonList(TASK2);
+        uniqueTaskList.setTasks(taskList);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
         expectedUniqueTaskList.add(TASK2);
         assertEquals(expectedUniqueTaskList, uniqueTaskList);
