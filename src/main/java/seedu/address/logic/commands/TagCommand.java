@@ -5,7 +5,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class TagCommand extends Command {
     public static final String COMMAND_ACTION = "View Tags";
 
-    public static final String COMMAND_WORD = "tag";
+    public static final String COMMAND_WORD = "tags";
 
     public static final String MESSAGE_SUCCESS = "Displayed all tags! \n"
             + "To view student list, type: \"list\".\n"
