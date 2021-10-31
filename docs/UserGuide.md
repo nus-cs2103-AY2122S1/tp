@@ -256,6 +256,9 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `CODE`
 * Represents the `module`'s code component.
 * `CODE` must follow the NUSMods module code format.
+  * `CODE` should start with 2-3 capital letters, followed by 4 numerical digits, and end with an optional capital letter
+  * Valid Examples: CJ1101K, CH1001, NMB1234
+  * Invalid Examples: CA300M, GEY10005, G1234M
 
 #### `TITLE`
 * Represents the `module`'s title component.
