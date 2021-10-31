@@ -122,9 +122,9 @@ Format: `mlist [/e EVENT_ID] [/att] [/abs]`
 
 Example:
 * `mlist` lists everyone in Ailurus.
-* `mlist /e 3` lists all members of the event with index number 3.
-* `mlist /e 3 /att` lists all members who attended the event with index number 3.
-* `mlist /e 3 /abs` lists all members who were absent from the event with index number 3.
+* `mlist /e 1` lists all members of the event with index number 1.
+* `mlist /e 1 /att` lists all members who attended the event with index number 1.
+* `mlist /e 1 /abs` lists all members who were absent from the event with index number 1.
 
 #### Editing a member : `medit`
 
@@ -187,7 +187,10 @@ Format: `pfind KEYWORD [MORE_KEYWORDS]...`
 * Only the name of the position is searched.
 * Member with positions with names matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `work Buddies` will return `Best Buddies`, `workaholic`
-  
+
+Examples:
+* `pfind assist` returns `David Li`, `Irfan Ibrahim` and `Betsy Crowe` because they have the following positions: `Logistics Assistant`, `Logistics Assistant` and `Finance Assistant` respectively.
+
 #### Deleting a member : `mdel`
 
 Deletes the specified member from Ailurus.
@@ -251,7 +254,7 @@ Format: `tdone /t TASK_ID [/t MORE_TASK_ID]…​`
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Example:
-* `tdone /t 2 /t 3` marks the 2nd and 3rd task on the displayed task list as done in Ailurus.
+* `tdone /t 1 /t 2` marks the 1st and 2nd task on the displayed task list as done in Ailurus.
 
 #### Mark a task as undone : `tundone`
 Marks the specified completed task of the specified member as undone. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
@@ -265,7 +268,7 @@ Format: `tundone /t TASK_ID [/t MORE_TASK_ID]…​`
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Example:
-* `tundone /t 2 /t 3` marks the 2nd and 3rd completed task on the displayed task list as undone in Ailurus.
+* `tundone /t 1 /t 2` marks the 1st and 2nd completed task on the displayed task list as undone in Ailurus.
 
 #### Editing a task: `tedit`
 Edits an existing task within Ailurus.
@@ -294,7 +297,7 @@ Format: `tdel /t TASK_ID`
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Examples:
-* `tdel /t 3` deletes the 3rd task on the displayed task list in Ailurus.
+* `tdel /t 1` deletes the 1st task on the displayed task list in Ailurus.
 
 #### Locating tasks by name: `tfind`
 
@@ -340,7 +343,7 @@ Format: `edel /e EVENT_ID`
 
 * `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
 * Deletes the event at the specified `EVENT_ID`.
-* `EVENT_ID` refers to the index number shown in the displayed member list.
+* `EVENT_ID` refers to the index number shown in the displayed event list.
 
 Examples:
 * `edel /e 10` deletes the 10th event in Ailurus.
@@ -407,7 +410,6 @@ Format: `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID]…​`
 * Edits the member at the specified `EVENT_ID`. `EVENT_ID` refers to the index number shown in the displayed event list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing members, the command must be done in `mlist`, where all the members are visible to the user.
 * You can remove all the members by typing `/m` without specifying any members after it.
 
 Examples:
@@ -435,7 +437,6 @@ Format: `emadd /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 * `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * `EVENT_ID` and `MEMBER_ID` are the INDEX of the event and member list respectively.
 * Multiple members can be added to the event when more than one `MEMBER_ID` is provided.
-* It is recommended for `emadd` to be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
 * If the specified member already participating in the event, an error is thrown to the user.
 
 Examples:
