@@ -14,7 +14,6 @@ import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.ReservationsManager;
 import seedu.address.model.table.Table;
-import seedu.address.model.table.TableList;
 import seedu.address.model.table.TableManager;
 
 /**
