@@ -12,7 +12,7 @@ import seedu.tracker.model.Model;
 import seedu.tracker.model.module.Module;
 
 /**
- * Adds a module to the address book.
+ * Adds a module to the module tracker.
  */
 public class AddCommand extends Command {
 
@@ -30,8 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_TITLE + "Software Engineering "
             + PREFIX_DESCRIPTION + "Covers the main areas of software development "
             + PREFIX_MC + "4 "
-            + PREFIX_TAG + "Core " //temp placeholder
-            + PREFIX_TAG + "UE"; //temp placeholder
+            + PREFIX_TAG + "foundation";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the module tracker";

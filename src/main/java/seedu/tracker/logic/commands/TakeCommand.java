@@ -20,6 +20,9 @@ import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.Title;
 import seedu.tracker.model.tag.Tag;
 
+/**
+ * Schedules the module identified using it's displayed index for a particular semester.
+ */
 public class TakeCommand extends Command {
     public static final String COMMAND_WORD = "take";
 

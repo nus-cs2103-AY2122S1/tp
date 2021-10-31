@@ -67,8 +67,15 @@ public interface Model {
     /** Returns the ModuleTracker */
     ReadOnlyModuleTracker getModuleTracker();
 
+    /**
+     * Returns the list of user's mc progress.
+     * @return
+     */
     ObservableList<McProgress> getMcProgressList();
 
+    /**
+     * Updates the user's mc progress.
+     */
     void updateMcProgress();
 
     /**
