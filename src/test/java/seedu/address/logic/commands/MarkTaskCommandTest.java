@@ -30,12 +30,12 @@ class MarkTaskCommandTest {
     @Test
     public void execute_validIndexMarkTask_success() throws Exception {
         Index targetIndex = Index.fromOneBased(1);
-        ModelStubWithOnePerson modelStub = new ModelStubWithOnePerson();
+        ModelStubWithOneTask modelStub = new ModelStubWithOneTask();
         assertFalse(testTask.getIsDone());
 
         Task secondTestTask = new Task(new Label("test label"),
                 new Date(TEST_DATE), new TaskTag("SO100"));
-        secondTestTask.setIsDone(true);
+        secondTestTask.markDone();
 
         CommandResult commandResult = new MarkTaskCommand(targetIndex).execute(modelStub);
         assertTrue(testTask.getIsDone());
@@ -44,21 +44,34 @@ class MarkTaskCommandTest {
     }
 
     @Test
+    public void execute_markAlreadyDone_notification() throws Exception {
+        Index targetIndex = Index.fromOneBased(1);
+        ModelStubWithOneTask modelStub = new ModelStubWithOneTask();
+
+        // mark the task twice, verify that notification is given.
+        new MarkTaskCommand(targetIndex).execute(modelStub);
+        CommandResult commandResult = new MarkTaskCommand(targetIndex).execute(modelStub);
+
+        assertEquals(String.format(MarkTaskCommand.MESSAGE_TASK_ALREADY_MARKED, testTask),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(2);
         MarkTaskCommand markTaskCommand = new MarkTaskCommand(outOfBoundIndex);
-        ModelStubWithOnePerson modelStub = new ModelStubWithOnePerson();
+        ModelStubWithOneTask modelStub = new ModelStubWithOneTask();
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, (
         ) -> markTaskCommand.execute(modelStub));
     }
 
-    private class ModelStubWithOnePerson extends ModelStub {
+    private class ModelStubWithOneTask extends ModelStub {
         private final ObservableList<Task> listWithOneTask = FXCollections.observableArrayList(testTask);
 
         @Override
-        public void markTask(Task task) {
-            listWithOneTask.get(0).setIsDone(true);
+        public boolean markTask(Task task) {
+            return listWithOneTask.get(0).markDone();
         }
 
         @Override

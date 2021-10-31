@@ -29,12 +29,16 @@ public class Task {
     }
 
     /**
-     * Method used to mark the task as done.
-     *
-     * @param isDone indicates whether the task is marked as done.
+     * Mark a task as done by setting isDone to true.
+     * @return a boolean indicating whether the value of isDone has been changed or not.
      */
-    public void setIsDone(boolean isDone) {
-        this.isDone = isDone;
+    public boolean markDone() {
+        if (isDone) {
+            return false;
+        } else {
+            isDone = true;
+            return true;
+        }
     }
 
     /**
