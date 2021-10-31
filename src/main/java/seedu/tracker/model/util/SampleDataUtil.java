@@ -141,24 +141,23 @@ public class SampleDataUtil {
                         + " accurately capturing and reasoning about requirements, model and code. "), new Mc(4),
                 getTagSet("breadth and depth")),
             new Module(new Code("CS3216"), new Title("Software Development on Evolving Platforms"),
-                new Description("In this module, students will practice software product engineering ")
-                    , new Mc(5),
+                new Description("In this module, students will practice software product engineering "),
+                    new Mc(5),
                 getTagSet("breadth and depth")),
             new Module(new Code("CS3217"), new Title("Software Engineering on Modern Application Platforms"),
                 new Description("This module introduces students to the practice of software engineering on modern "
                         + "application platforms such as mobile devices, the Web and cloud systems."), new Mc(5),
                 getTagSet("breadth and depth")),
             new Module(new Code("CS5219"), new Title("Automatic Software Validation"),
-                new Description("This module will focus on automated validation techniques.")
-                    , new Mc(4),
+                new Description("This module will focus on automated validation techniques."), new Mc(4),
                 getTagSet("breadth and depth")),
             new Module(new Code("CS2220"), new Title("Introduction to Computational Biology"),
-                new Description("This course aims to develop flexible and logical problem solving skills")
-                    , new Mc(4),
+                new Description("This course aims to develop flexible and logical problem solving skills"),
+                    new Mc(4),
                 getTagSet("breadth and depth")),
             new Module(new Code("CS5233"), new Title("Simulation and Modeling Techniques"),
                 new Description("This module aims to provide students with a working knowledge of applying "
-                        +"simulation techniques to model, simulate and study complex systems."), new Mc(4),
+                        + "simulation techniques to model, simulate and study complex systems."), new Mc(4),
                 getTagSet("breadth and depth")),
             new Module(new Code("CS3241"), new Title("Computer Graphics"),
                     new Description("This module teaches some graphics hardware devices, reviews the mathematics "
@@ -344,186 +343,187 @@ public class SampleDataUtil {
                     new Description("This course introduces fundamental principles behind"
                             + " data mining and efficient techniques for mining large databases."), new Mc(4),
                     getTagSet("breath and depth")),
-                new Module(new Code("CS3231"), new Title("Theory of Computation"),
-                        new Description("This module examines fundamental aspects of computation that every " +
-                                "computer scientist should know. This module introduces techniques for precisely " +
-                                "formulating problems and studying their properties using a variety of commonly " +
-                                "used reasoning techniques (e.g., model equivalence, non-determinism, " +
-                                "digitalisation, simulation and reduction)."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS3236"), new Title("Introduction to Information Theory"),
-                        new Description("This module introduces the basics of modern information theory. " +
-                                "It covers how information can be quantified, and what this quantification " +
-                                "tells us about how well we can compress and transmit information without error. " +
-                                "It discusses basic error correcting techniques, and information-theoretic " +
-                                "cryptography."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS4231"), new Title("Parallel and Distributed Algorithms"),
-                        new Description("This course will examine some fundamental issues in parallel programming " +
-                                "and distributed computing, and the relationships between the two."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS4234"), new Title("Optimisation Algorithms"),
-                        new Description("This module covers common algorithmic techniques for solving optimisation " +
-                                "problems, and introduces students to approaches for finding good-enough " +
-                                "solutions to NP-hard problems."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS3233"), new Title("Competitve Programming"),
-                        new Description("This module aims to prepare students in competitive problem solving. " +
-                                "It covers techniques for attacking and solving challenging computational " +
-                                "problems."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS4261"), new Title("Algorithmic Mechanism Design"),
-                        new Description("We will explore foundational topics at the intersection of economics and " +
-                                "computation, starting with the foundations of game theory: Nash equilibria, " +
-                                "the theory of cooperative games, before proceeding to covering more " +
-                                "advanced topics: matching algorithms, allocation of indivisible goods, " +
-                                "and mechanism design."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS4268"), new Title("Quantum Computing"),
-                        new Description("This module will introduce basics of quantum computing and cover various " +
-                                "well known algorithms e.g. Deutsch-Jozsa algorithm, Simon’s algorithms, " +
-                                "quantum Fourier transform, phase estimation, order finding, Shor’s algorithm and " +
-                                "Grover’s algorithm. The module will also cover some basics in quantum information " +
-                                "theory, cryptography and error correction."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS4269"), new Title("Fundamentals of Logic in Computer Science"),
-                        new Description("This module will formally introduce and prove some of the fundamental " +
-                                "results in logic to provide students with a rigorous introduction of syntax, " +
-                                "semantics, decision procedures, and complexity of propositional and " +
-                                "first-order logic."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS4330"), new Title("Combinatorial Methods in Bioinformatics"),
-                        new Description("After the complete sequencing of a number of genomes, we are in the stage " +
-                                "to understand the mystery of our body, that is, we need to understand the " +
-                                "information encoded in the genome and its relationship with RNA and protein. " +
-                                "This aim of this module is to cover algorithms related to this stage. In the " +
-                                "module, we will cover the algorithms related to genome annotation, " +
-                                "motif identification, proteomics, population genetics, " +
-                                "microarray, etc."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS5230"), new Title("Computational Complexity"),
-                        new Description("The aim of this module is to study the various measures of difficulty " +
-                                "of problem solving in computing, and to introduce some techniques in theoretical " +
-                                "computer science such as non-determinism, digitalisation, simulation, padding, " +
-                                "reduction, randomisation and interaction."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS5234"), new Title("Algorithms at Scale"),
-                        new Description("This course presents advanced techniques for the design and analysis of " +
-                                "algorithms and data structures, with emphasis on efficiency and scalability. " +
-                                "It will cover a variety of algorithmic topics that arise when coping with very " +
-                                "large data sets."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS5236"), new Title("Advanced Automata Theory"),
-                        new Description("This module covers automata theory in depth, describes the Chomsky hierarchy, " +
-                                "and introduces various advanced topics including automata structures, automata " +
-                                "on infinite words, automata on trees and the learnability of classes of regular " +
-                                "languages from queries and positive data."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS5330"), new Title("Randomized Algorithms"),
-                        new Description("The module will cover basic concepts in the design and analysis of " +
-                                "randomized algorithms. It will cover both basic techniques, such as Chernoff " +
-                                "bounds, random walks, and the probabilistic method, and a variety of practical " +
-                                "algorithmic applications, such as load balancing, hash functions, and graph/network " +
-                                "algorithms."), new Mc(4),
-                        getTagSet("breath and depth")),
-                new Module(new Code("CS2109S"), new Title("Introduction to AI and Machine Learning (CFM)"),
-                        new Description("This module introduces basic concepts in Artificial Intelligence (AI) " +
-                                "and Machine Learning (ML). It adopts the perspective that planning, games, " +
-                                "and learning are related types of search problems, and examines the " +
-                                "underlying issues, challenges and techniques."), new Mc(4),
-                        getTagSet("foundation")),
-                new Module(new Code("CS3243"), new Title("Introduction to Artificial Intelligence"),
-                        new Description("The module introduces the basic concepts in search and knowledge " +
-                                "representation as well as to a number of sub-areas of artificial intelligence. " +
-                                "It focuses on covering the essential concepts in AI."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS3244"), new Title("Machine Learning"),
-                        new Description("This module introduces basic concepts and algorithms in machine learning " +
-                                "and neural networks."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS4244"), new Title("Knowledge Representation and Reasoning"),
-                        new Description("This course will focus on core issues of representation and reasoning " +
-                                "of the knowledge in the context of design of intelligent machines."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS4246"), new Title("AI Planning and Decision Making"),
-                        new Description("This module introduces the major concepts and paradigms in planning and " +
-                                "decision making in complex environments."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS4248"), new Title("Natural Language Processing"),
-                        new Description("This module deals with computer processing of human languages, including " +
-                                "the use of neural networks and deep learning in natural language " +
-                                "processing."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS4277"), new Title("3D Computer Vision"),
-                        new Description("This module covers the mathematical concepts and algorithms that allow " +
-                                "us to recover the 3D geometry of the camera motions and the structures " +
-                                "in its environment."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS4278"), new Title("Intelligent Robots: Algorithms and Systems"),
-                        new Description("This module introduces the core algorithms and system architectures of " +
-                                "intelligent robots. It examines the main system components for sensing, decision " +
-                                "making, and motion control and importantly, their integration for core robot " +
-                                "capabilities, such as navigation and manipulation."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS5215"), new Title("Constraint Processing"),
-                        new Description("This module discusses the basic aspects of constraint programming, " +
-                                "focusing on how to model and solve the constraints."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS5242"), new Title("Neural Networks and Deep Learning"),
-                        new Description("This module provides students with the knowledge of deep neural network " +
-                                "and enables them to apply deep learning methods effectively on real world " +
-                                "problems."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS5260"), new Title("Neural Networks and Deep Learning II"),
-                        new Description("This module is a follow-up to CS5242 and covers advanced topics in " +
-                                "neural networks and deep learning. This module explores the underlying mechanism " +
-                                "of a variety of different types of learning models."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS5340"), new Title("Uncertainty Modelling in AI"),
-                        new Description("The module covers modelling methods that are suitable for reasoning with " +
-                                "uncertainty. The main focus will be on probabilistic models including Bayesian " +
-                                "networks and Markov networks."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS5339"), new Title("Theory and Algorithms for Machine Learning"),
-                        new Description("The module aims to provide a broad theoretical understanding of machine " +
-                                "learning and how the theory guides the development of algorithms and " +
-                                "applications."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS2108"), new Title("Introduction to Media Computing"),
-                        new Description("This module introduces students to (i) the fundamental principles, " +
-                                "theory, algorithms, and data structures behind digital representation, " +
-                                "compression, synchronization, and processing of image, audio, and video data " +
-                                "types, and (ii) challenges and issues in developing media-rich applications, " +
-                                "such as media streaming and media retrieval."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS3245"), new Title("Information Retrieval"),
-                        new Description("This module discusses the basic concepts and methods of information " +
-                                "retrieval including capturing, representing, storing, organizing, and " +
-                                "retrieving unstructured or loosely structured information."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS4242"), new Title("Social Media Computing"),
-                        new Description("This module aims to provide students with a good understanding of the " +
-                                "social network phenomena and computational skills for analysing the complex " +
-                                "social relation networks between users, the contents they shared, and the ways " +
-                                "contents and events are perceived and propagated through the social " +
-                                "networks."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS4347"), new Title("Sound and Music Computing"),
-                        new Description("This module introduces the fundamental technologies employed in Sound " +
-                                "and Music Computing focusing on three major categories: speech, music, " +
-                                "and environmental sound."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS5246"), new Title("Text Mining"),
-                        new Description("Topics include text classification, text clustering, sentiment analysis, " +
-                                "text summarization, information extraction (named entity recognition, relation " +
-                                "and event extraction), and question answering. The module will emphasize the use " +
-                                "of machine learning approaches to text mining."), new Mc(4),
-                        getTagSet("breadth and depth")),
-                new Module(new Code("CS5241"), new Title("Speech Processing"),
-                        new Description("This module exposes the graduate students to the fundamental theory of " +
-                                "speech processing, focusing primarily on automatic speech " +
-                                "recognition."), new Mc(4),
-                        getTagSet("breadth and depth"))
+            new Module(new Code("CS3231"), new Title("Theory of Computation"),
+                    new Description("This module examines fundamental aspects of computation that every "
+                            + "computer scientist should know. This module introduces techniques for precisely "
+                            + "formulating problems and studying their properties using a variety of commonly "
+                            + "used reasoning techniques (e.g., model equivalence, non-determinism, "
+                            + "digitalisation, simulation and reduction)."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS3236"), new Title("Introduction to Information Theory"),
+                    new Description("This module introduces the basics of modern information theory. "
+                            + "It covers how information can be quantified, and what this quantification "
+                            + "tells us about how well we can compress and transmit information without error. "
+                            + "It discusses basic error correcting techniques, and information-theoretic "
+                            + "cryptography."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS4231"), new Title("Parallel and Distributed Algorithms"),
+                    new Description("This course will examine some fundamental issues in parallel programming "
+                            + "and distributed computing, and the relationships between the two."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS4234"), new Title("Optimisation Algorithms"),
+                    new Description("This module covers common algorithmic techniques for solving optimisation "
+                            + "problems, and introduces students to approaches for finding good-enough "
+                            + "solutions to NP-hard problems."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS3233"), new Title("Competitve Programming"),
+                    new Description("This module aims to prepare students in competitive problem solving. "
+                            + "It covers techniques for attacking and solving challenging computational "
+                            + "problems."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS4261"), new Title("Algorithmic Mechanism Design"),
+                    new Description("We will explore foundational topics at the intersection of economics and "
+                            + "computation, starting with the foundations of game theory: Nash equilibria, "
+                            + "the theory of cooperative games, before proceeding to covering more "
+                            + "advanced topics: matching algorithms, allocation of indivisible goods, "
+                            + "and mechanism design."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS4268"), new Title("Quantum Computing"),
+                    new Description("This module will introduce basics of quantum computing and cover various "
+                            + "well known algorithms e.g. Deutsch-Jozsa algorithm, Simon’s algorithms, "
+                            + "quantum Fourier transform, phase estimation, order finding, Shor’s algorithm and "
+                            + "Grover’s algorithm. The module will also cover some basics in quantum information "
+                            + "theory, cryptography and error correction."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS4269"), new Title("Fundamentals of Logic in Computer Science"),
+                    new Description("This module will formally introduce and prove some of the fundamental "
+                            + "results in logic to provide students with a rigorous introduction of syntax, "
+                            + "semantics, decision procedures, and complexity of propositional and "
+                            + "first-order logic."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS4330"), new Title("Combinatorial Methods in Bioinformatics"),
+                    new Description("After the complete sequencing of a number of genomes, we are in the stage "
+                            + "to understand the mystery of our body, that is, we need to understand the "
+                            + "information encoded in the genome and its relationship with RNA and protein. "
+                            + "This aim of this module is to cover algorithms related to this stage. In the "
+                            + "module, we will cover the algorithms related to genome annotation, "
+                            + "motif identification, proteomics, population genetics, "
+                            + "microarray, etc."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS5230"), new Title("Computational Complexity"),
+                    new Description("The aim of this module is to study the various measures of difficulty "
+                            + "of problem solving in computing, and to introduce some techniques in theoretical "
+                            + "computer science such as non-determinism, digitalisation, simulation, padding, "
+                            + "reduction, randomisation and interaction."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS5234"), new Title("Algorithms at Scale"),
+                    new Description("This course presents advanced techniques for the design and analysis of "
+                            + "algorithms and data structures, with emphasis on efficiency and scalability. "
+                            + "It will cover a variety of algorithmic topics that arise when coping with very "
+                            + "large data sets."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS5236"), new Title("Advanced Automata Theory"),
+                    new Description("This module covers automata theory in depth, describes the Chomsky hierarchy, "
+                            + "and introduces various advanced topics including automata structures, automata "
+                            + "on infinite words, automata on trees and the learnability of classes of regular "
+                            + "languages from queries and positive data."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS5330"), new Title("Randomized Algorithms"),
+                    new Description("The module will cover basic concepts in the design and analysis of "
+                            + "randomized algorithms. It will cover both basic techniques, such as Chernoff "
+                            + "bounds, random walks, and the probabilistic method, and a variety of practical "
+                            + "algorithmic applications, such as load balancing, hash functions, and graph/network "
+                            + "algorithms."), new Mc(4),
+                    getTagSet("breath and depth")),
+            new Module(new Code("CS2109S"), new Title("Introduction to AI and Machine Learning (CFM)"),
+                    new Description("This module introduces basic concepts in Artificial Intelligence (AI) "
+                            + "and Machine Learning (ML). It adopts the perspective that planning, games, "
+                            + "and learning are related types of search problems, and examines the "
+                            + "underlying issues, challenges and techniques."), new Mc(4),
+                    getTagSet("foundation")),
+            new Module(new Code("CS3243"), new Title("Introduction to Artificial Intelligence"),
+                    new Description("The module introduces the basic concepts in search and knowledge "
+                            + "representation as well as to a number of sub-areas of artificial intelligence. "
+                            + "It focuses on covering the essential concepts in AI."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS3244"), new Title("Machine Learning"),
+                    new Description("This module introduces basic concepts and algorithms in machine learning "
+                            + "and neural networks."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4244"), new Title("Knowledge Representation and Reasoning"),
+                    new Description("This course will focus on core issues of representation "
+                            + "and reasoning of the knowledge in the context of design "
+                            + "of intelligent machines."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4246"), new Title("AI Planning and Decision Making"),
+                    new Description("This module introduces the major concepts and paradigms in planning and "
+                            + "decision making in complex environments."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4248"), new Title("Natural Language Processing"),
+                    new Description("This module deals with computer processing of human languages, including "
+                            + "the use of neural networks and deep learning in natural language "
+                            + "processing."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4277"), new Title("3D Computer Vision"),
+                    new Description("This module covers the mathematical concepts and algorithms that allow "
+                            + "us to recover the 3D geometry of the camera motions and the structures "
+                            + "in its environment."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4278"), new Title("Intelligent Robots: Algorithms and Systems"),
+                    new Description("This module introduces the core algorithms and system architectures of "
+                            + "intelligent robots. It examines the main system components for sensing, decision "
+                            + "making, and motion control and importantly, their integration for core robot "
+                            + "capabilities, such as navigation and manipulation."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5215"), new Title("Constraint Processing"),
+                    new Description("This module discusses the basic aspects of constraint programming, "
+                            + "focusing on how to model and solve the constraints."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5242"), new Title("Neural Networks and Deep Learning"),
+                    new Description("This module provides students with the knowledge of deep neural network "
+                            + "and enables them to apply deep learning methods effectively on real world "
+                            + "problems."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5260"), new Title("Neural Networks and Deep Learning II"),
+                    new Description("This module is a follow-up to CS5242 and covers advanced topics in "
+                            + "neural networks and deep learning. This module explores the underlying mechanism "
+                            + "of a variety of different types of learning models."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5340"), new Title("Uncertainty Modelling in AI"),
+                    new Description("The module covers modelling methods that are suitable for reasoning with "
+                            + "uncertainty. The main focus will be on probabilistic models including Bayesian "
+                            + "networks and Markov networks."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5339"), new Title("Theory and Algorithms for Machine Learning"),
+                    new Description("The module aims to provide a broad theoretical understanding of machine "
+                            + "learning and how the theory guides the development of algorithms and "
+                            + "applications."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS2108"), new Title("Introduction to Media Computing"),
+                    new Description("This module introduces students to (i) the fundamental principles, "
+                            + "theory, algorithms, and data structures behind digital representation, "
+                            + "compression, synchronization, and processing of image, audio, and video data "
+                            + "types, and (ii) challenges and issues in developing media-rich applications, "
+                            + "such as media streaming and media retrieval."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS3245"), new Title("Information Retrieval"),
+                    new Description("This module discusses the basic concepts and methods of information "
+                            + "retrieval including capturing, representing, storing, organizing, and "
+                            + "retrieving unstructured or loosely structured information."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4242"), new Title("Social Media Computing"),
+                    new Description("This module aims to provide students with a good understanding of the "
+                            + "social network phenomena and computational skills for analysing the complex "
+                            + "social relation networks between users, the contents they shared, and the ways "
+                            + "contents and events are perceived and propagated through the social "
+                            + "networks."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS4347"), new Title("Sound and Music Computing"),
+                    new Description("This module introduces the fundamental technologies employed in Sound "
+                            + "and Music Computing focusing on three major categories: speech, music, "
+                            + "and environmental sound."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5246"), new Title("Text Mining"),
+                    new Description("Topics include text classification, text clustering, sentiment analysis, "
+                            + "text summarization, information extraction (named entity recognition, relation "
+                            + "and event extraction), and question answering. The module will emphasize the use "
+                            + "of machine learning approaches to text mining."), new Mc(4),
+                    getTagSet("breadth and depth")),
+            new Module(new Code("CS5241"), new Title("Speech Processing"),
+                    new Description("This module exposes the graduate students to the fundamental theory of "
+                            + "speech processing, focusing primarily on automatic speech "
+                            + "recognition."), new Mc(4),
+                    getTagSet("breadth and depth"))
         };
     }
 

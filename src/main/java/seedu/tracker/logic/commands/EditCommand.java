@@ -50,8 +50,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the address book.";
-    public static final String MESSAGE_SAME_VALUE = "The given value for the filed(s) must be different from value" +
-            " that it is replacing.";
+    public static final String MESSAGE_SAME_VALUE = "The given value for the filed(s) must be different from value"
+            + " that it is replacing.";
 
     private final Index index;
     private final EditModuleDescriptor editModuleDescriptor;
@@ -80,7 +80,7 @@ public class EditCommand extends Command {
         Module moduleToEdit = lastShownList.get(index.getZeroBased());
         Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
 
-        if(editedModule.equals(moduleToEdit)) {
+        if (editedModule.equals(moduleToEdit)) {
             throw new CommandException(MESSAGE_SAME_VALUE);
         }
 
