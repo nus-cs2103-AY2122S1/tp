@@ -5,19 +5,17 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.programmer.commons.core.LogsCenter;
-import seedu.programmer.ui.exceptions.CommandHistoryException;
 
 public class CommandHistory {
     private final Logger logger = LogsCenter.getLogger(getClass());
     private List<String> commandHistory;
-    private int counter;
+    private int currCommandIndex;
 
     /**
      * Constructor to initialize a new {@code CommandHistory} object.
      */
     public CommandHistory() {
         commandHistory = new ArrayList<>();
-        counter = 0;
     }
 
     /**
@@ -25,21 +23,20 @@ public class CommandHistory {
      * @param command The string to be added to the history of commands.
      */
     public void add(String command) {
-        addCommandToHistory(command);
+        commandHistory.add(command);
+        currCommandIndex = commandHistory.size() - 1;
     }
 
     /**
      * Returns the next most recently entered command according to the {@code counter} pointer.
      * Returns the least recent command if the {@code counter} is already pointer at the oldest command.
      * @return The string of the next most recent entered command.
-     * @throws CommandHistoryException is thrown when the command history is empty.
      */
-    public String getPrevCommand() throws CommandHistoryException {
-        if (!isCounterAtFirst()) {
-            counter--;
-        }
-
-        String result = commandHistory.get(counter);
+    public String getPrevCommand() {
+        // We should not call getPrevCommand() if the counter is already at the oldest command.
+        assert !isCounterAtFirst();
+        currCommandIndex--;
+        String result = commandHistory.get(currCommandIndex);
         logger.info("Previous Command retrieved: " + result);
         return result;
     }
@@ -48,16 +45,12 @@ public class CommandHistory {
      * Returns the next least recent entered command according to the {@code counter} pointer.
      * Returns the most recent command if the {@code counter} is already pointer at the latest command.
      * @return The string of the next least recent entered command.
-     * @throws CommandHistoryException is thrown when the command history is empty or when {@code getPrevCommand}
-     * method has never been called yet.
      */
-    public String getNextCommand() throws CommandHistoryException {
-        if (!isCounterAtLast()) {
-            counter++;
-        }
-
-        String result = commandHistory.get(counter);
-
+    public String getNextCommand() {
+        // We should not call getNextCommand() if the counter is already at the latest command.
+        assert !isCounterAtLast();
+        currCommandIndex++;
+        String result = commandHistory.get(currCommandIndex);
         logger.info("Next Command retrieved: " + result);
         return result;
     }
@@ -77,30 +70,22 @@ public class CommandHistory {
         // state check
         CommandHistory e = (CommandHistory) other;
         return commandHistory.equals(e.commandHistory)
-                && counter == e.counter;
+                && currCommandIndex == e.currCommandIndex;
     }
 
-    public boolean isCounterAtDefault() {
-        return counter == commandHistory.size();
-    }
-    public boolean isCommandHistoryEmpty() {
+    public boolean isEmpty() {
         return commandHistory.size() == 0;
     }
 
-    private void resetCounterToDefault() {
-        counter = commandHistory.size();
-    }
-
-    private void addCommandToHistory(String command) {
-        commandHistory.add(command);
-        resetCounterToDefault();
-    }
-
     public boolean isCounterAtLast() {
-        return counter == commandHistory.size() - 1;
+        return currCommandIndex == commandHistory.size() - 1;
     }
 
     public boolean isCounterAtFirst() {
-        return counter == 0;
+        return currCommandIndex == 0;
+    }
+
+    public String getCurrentCommand() {
+        return commandHistory.get(currCommandIndex);
     }
 }

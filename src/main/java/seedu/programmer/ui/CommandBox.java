@@ -67,26 +67,24 @@ public class CommandBox extends UiPart<Region> {
         boolean upPressed = event.getCode() == KeyCode.UP;
         boolean downPressed = event.getCode() == KeyCode.DOWN;
         boolean isNotUpOrDown = !upPressed && !downPressed;
+        boolean noCommandHistoryPresent = commandHistory.isEmpty();
+        boolean downAndAtLastCommand = downPressed && commandHistory.isCounterAtLast();
+        boolean upAndAtFirstCommand = upPressed && commandHistory.isCounterAtFirst();
 
-        // Neither up nor down pressed or no command history
-        if (isNotUpOrDown || commandHistory.isCommandHistoryEmpty()) {
+        // Do nothing if neither up nor down pressed, or no command history
+        if (isNotUpOrDown || noCommandHistoryPresent) {
             return;
         }
 
-        try {
-            if (upPressed) {
-                commandTextField.setText(commandHistory.getPrevCommand());
-            } else {
-                commandTextField.setText(commandHistory.getNextCommand());
-            }
-        } catch (CommandHistoryException e) {
-            logger.info("Unable to get previous or next command!");
-            commandTextField.end();
-            return;
+        if (downAndAtLastCommand || upAndAtFirstCommand) {
+            commandTextField.setText(commandHistory.getCurrentCommand());
+        } else if (upPressed) {
+            commandTextField.setText(commandHistory.getPrevCommand());
+        } else {
+            commandTextField.setText(commandHistory.getNextCommand());
         }
 
-        setStyleToDefault();
-        commandTextField.end();
+        commandTextField.end(); // Move cursor to end of text field
         event.consume(); // Consume Event
     }
 
