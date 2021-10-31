@@ -42,7 +42,7 @@ public class ParserUtilTest {
     private static final String INVALID_LAST_VISIT_DATETIME = DateTimeUtil.getInvalidLastVisitString();
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_LANGUAGE = "English";
     private static final String VALID_HEALTH_CONDITION_1 = "high blood pressure";
