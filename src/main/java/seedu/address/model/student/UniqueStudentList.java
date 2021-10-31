@@ -42,7 +42,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public boolean containsAnother(Student toCheck, Student toIgnore) {
         requireAllNonNull(toCheck, toIgnore);
-        return internalList.stream().anyMatch( s -> s.isSameStudent(toCheck) && !s.equals(toIgnore));
+        return internalList.stream().anyMatch(s -> s.isSameStudent(toCheck) && !s.equals(toIgnore));
     }
 
     /**

@@ -80,7 +80,7 @@ public class EditStudentCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (model.hasAnotherStudent(editedStudent, studentToEdit) ) {
+        if (model.hasAnotherStudent(editedStudent, studentToEdit)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
