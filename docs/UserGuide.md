@@ -125,7 +125,7 @@ add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS
 Example:
 
 ```
-add n/John Doe te/@johndoe123 g/john-doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+add n/John Doe te/johndoe g/john-doe p/98765432 e/johnd@eg.com a/John Street, Blk 12, #01-01
 ```
 
 <h3 id = "Delete"> </h3>
@@ -333,8 +333,7 @@ fav 1
 
 ## Setting a Contact as Unfavourite - `unfav`
 
-Helps to set a particular Student Contact as an Unfavourite, only if it
-was set as a Favourite earlier.
+Helps to set a particular Student Contact as an Unfavourite.
 
 Format:
 
@@ -461,9 +460,10 @@ exit
 2. <kbd>⌘</kbd> + <kbd>2</kbd>: To Switch to Favorites Tab.
 3. <kbd>⌘</kbd> + <kbd>3</kbd>: To Switch to Events Tab.
 4. <kbd>⌘</kbd> + <kbd>4</kbd>: To Switch to Find a Buddy Tab.
-5. <kbd>↑</kbd>: To Retrieve the Last Entered Command (Similar to Terminal).
-6. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
-7. <kbd>F1</kbd>: To Launch the Help Window.
+5. <kbd>⌘</kbd> + <kbd>P</kbd>: To Launch the Profile Window.
+6. <kbd>↑</kbd>: To Retrieve the Last Entered Command (Similar to Terminal).
+7. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
+8. <kbd>F1</kbd>: To Launch the Help Window.
 
 > TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
 

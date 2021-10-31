@@ -50,17 +50,6 @@
                 </Menu>
               </MenuBar>
                    <HBox fx:id="userDetails" style="-fx-border-color: #313131 #313131 #313131 #313131;">
-                       <StackPane>
-                           <ImageView fx:id="userProfile" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"/>
-                           <padding>
-                               <Insets bottom="5" left="5" right="3" top="5" />
-                           </padding>
-                       </StackPane>
-                       <Label fx:id="userName" textAlignment="CENTER" alignment="CENTER" style="-fx-text-fill: white;  -fx-font-size: 16px;">
-                           <padding>
-                               <Insets bottom="0" left="4" right="10" top="8" />
-                           </padding>
-                       </Label>
                    </HBox>
                   <ImageView fx:id="eventsIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>

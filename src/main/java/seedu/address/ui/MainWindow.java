@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -104,12 +103,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private HBox userDetails;
 
-    @FXML
-    private ImageView userProfile;
-
-    @FXML
-    private Label userName;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -160,6 +153,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(favoritesMenuItem, KeyCombination.valueOf("Shortcut+2"));
         setAccelerator(eventsMenuItem, KeyCombination.valueOf("Shortcut+3"));
         setAccelerator(findABuddyMenuItem, KeyCombination.valueOf("Shortcut+4"));
+        setAccelerator(profileMenuItem, KeyCombination.valueOf("Shortcut+P"));
     }
 
     /**
@@ -219,17 +213,9 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         if (logic.isProfilePresent()) {
-            setUserProfileOnMenuBar();
+            UserProfileInMenuBar userProfileInMenuBar = new UserProfileInMenuBar(logic);
+            userDetails.getChildren().add(userProfileInMenuBar.getRoot());
         }
-    }
-
-    /**
-     * Sets the {@code userName} and {@code userProfile}
-     * to be displayed on the Menu Bar.
-     */
-    public void setUserProfileOnMenuBar() {
-        userProfile.setImage(logic.getUserProfile().getProfilePicture());
-        userName.setText(logic.getUserProfile().getName().toString());
     }
 
     /**

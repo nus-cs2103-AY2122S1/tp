@@ -143,7 +143,8 @@ public class GitHubUtil {
 
     /**
      * Returns the list of the most recently contributed repositories
-     * on a person's Github
+     * on a person's GitHub.
+     *
      * @param userName The name of the user.
      * @return a list of repository names
      * @throws RuntimeException If invalid username or the server did not respond well.
@@ -170,6 +171,14 @@ public class GitHubUtil {
         }
     }
 
+    /**
+     * Returns a {@code HashMap} consisting of the programming
+     * languages that the user has been using.
+     *
+     * @param userName The user whose data is to be obtained.
+     * @param repoName The repo from which the languages are to be obtained.
+     * @return A {@code HashMap} consisting of the languages.
+     */
     private static HashMap<String, Double> getRepoLanguages(String userName, String repoName) {
         if (!Github.isValidGithub(userName)) {
             throw new RuntimeException("Invalid GitHib Account");

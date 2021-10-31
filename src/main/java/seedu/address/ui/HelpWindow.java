@@ -18,7 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandDetails;
 
 /**
- * Controller for a help page
+ * Controller for the Help Window
  */
 public class HelpWindow extends UiPart<Stage> {
 
@@ -77,6 +77,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
+     *
      * @throws IllegalStateException
      * <ul>
      *     <li>
@@ -109,14 +110,14 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Hides the help window.
+     * Hides the Help Window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the Help Window.
      */
     public void focus() {
         getRoot().requestFocus();
