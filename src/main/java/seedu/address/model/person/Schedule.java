@@ -19,7 +19,7 @@ import seedu.address.model.person.exceptions.NoShiftException;
  */
 public class Schedule {
 
-    public static final String MESSAGE_CONSTRAINTS = "Schedule json string error! Invalid format."; //todo idek if need
+    public static final String MESSAGE_CONSTRAINTS = "Schedule JSON string error! Invalid format."; //todo idek if need
     public static final int HOURS_PER_SLOT = 6;
 
     private static final int DAY_OF_WEEK = 7;
