@@ -4,11 +4,11 @@
 start
 :User enters delete appointment command with index;
 :Parse command;
-if (index is valid) then (true)
+if () then ([index is valid])
   : Create new DeleteAppointmentCommand;
   : Execute DeleteAppointmentCommand;
   : Remove target appointment;
-else (false)
+else ([else])
     : Generate Command Exception;
 endif
 : Display result to user;

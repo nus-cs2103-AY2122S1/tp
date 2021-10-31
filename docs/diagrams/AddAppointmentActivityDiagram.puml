@@ -4,23 +4,23 @@
 start
 :User enters delete appointment command with index;
 :Parse command;
-if (required prefixes are present) then (true)
-  if (prefix arguments are valid) then (true)
-      if (patient index is valid) then (true)
-         if (doctor index is valid) then (true)
+if () then ([required prefixes are present])
+  if () then ([prefix arguments are valid])
+      if () then ([patient index is valid])
+         if () then ([doctor index is valid])
             :Create new AddAppointmentCommand;
             : Execute AddAppointmentCommand;
             : Generate success message;
-         else (false)
+         else ([else]])
          : Generate Parse Exception describing invalid index for doctor;
          endif
-      else (false)
+      else ([else])
       : Generate Parse Exception describing invalid index for patient;
       endif
-  else (false)
+  else ([else])
   : Generate Parse Exception describing invalid prefix arguments;
   endif
-else (false)
+else ([else])
 : Generate Parse Exception indicating missing prefixes;
 endif
 : Display result to user;
