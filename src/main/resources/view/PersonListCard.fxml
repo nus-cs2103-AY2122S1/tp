@@ -42,7 +42,7 @@
         <Label fx:id="appointmentHeader" styleClass="cell_small_label" text="Upcoming Appointment" style="-fx-font-weight: bold; -fx-font-size: 15;"/>
         <VBox fx:id="appointmentDate" prefHeight="1.0" prefWidth="1.0" />
         <VBox fx:id="appointmentTime" prefHeight="1.0" prefWidth="1.0" />
-        <VBox fx:id="appointmentVenue" prefHeight="1.0" prefWidth="1.0" />
+        <VBox fx:id="appointmentVenue"  maxHeight="105" maxWidth="220" VBox.vgrow="ALWAYS" />
         <Label fx:id="border" styleClass="cell_small_label" text="" />
         <Label fx:id="appointmentCount" styleClass="cell_small_label" text="\$count" />
       </VBox>
