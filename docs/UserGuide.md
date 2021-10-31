@@ -263,8 +263,6 @@ Shows a list of all students in TAB.
 
 Format: `list`
 
-Shortcut: <kbd>F2</kbd>
-
 <div style="page-break-after: always;"></div>
 
 ### Finding Students
