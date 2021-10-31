@@ -18,7 +18,7 @@ public class BirthDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Birth dates should be of the format DD/MM/YYYY "
             + "and adhere to the following constraints:\n"
-            + "1. Must be a valid birth date (before now)\n"
+            + "1. Must be a valid birth date (before now, cannot be 30/02/1988 etc)\n"
             + "2. Day must be between 1-31 (0 in front of single digit is optional)\n"
             + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "4. Year must be 4 characters.";
