@@ -18,7 +18,7 @@ If you are familiar with Unix commands, this is definitely for you!
         3. [Exit: `exit`](#exit)
     2. [Data Features](#data-features)
         1. [Fill Sample Data: `fill`](#fill-sample-data)
-        2. [Purge All Data: `purge`](#purge-all-data)
+        2. [Purge All Data: ``](#-all-data)
         3. [Download Data: `download`](#download-data)
         4. [Upload Data: `upload`](#upload-data)
     3. [Student Features](#student-features)
