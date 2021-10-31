@@ -224,17 +224,40 @@ public abstract class Lesson implements Comparable<Lesson> {
                 lessonRates, outstandingFees, cancelledDates);
     }
 
+    /**
+     * Get the lesson timing details in String.
+     *
+     * @return String representation for time fields for the Lesson.
+     */
+    public String getLessonDetails() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("Start date: ")
+                .append(getStartDate());
+
+        if (!getEndDate().equals(Date.MAX_DATE)) {
+            builder.append("; End date: ")
+                .append(getEndDate());
+        }
+
+        builder.append("; Time: ")
+                .append(getTimeRange());
+
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
 
         builder.append(typeOfLesson)
-                .append("Start date: ")
+                .append(" ")
+                .append("Start Date: ")
                 .append(getStartDate());
 
         if (!getEndDate().equals(Date.MAX_DATE)) {
-            builder.append("; End date: ")
+            builder.append("; End Date: ")
                    .append(getEndDate());
         }
 
