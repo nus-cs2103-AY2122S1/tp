@@ -72,6 +72,23 @@ public class StringUtil {
     }
 
     /**
+     * Returns a prepared String, where only the first character of each word is a capital letter
+     * while the rest are lower cased. Utilises {@code capitalizeFirstCharAndLowerRest} method.
+     */
+    public static String capitaliseFirstCharOfEachWord(String toPrepare) {
+        String[] wordArr = toPrepare.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int idx = 0; idx < wordArr.length; idx++) {
+            String word = wordArr[idx];
+            sb.append(StringUtil.capitalizeFirstCharAndLowerRest(word.trim()));
+            if (idx < wordArr.length - 1) {
+                sb.append(' ');
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
