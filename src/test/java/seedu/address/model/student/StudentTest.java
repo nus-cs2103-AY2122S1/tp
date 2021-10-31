@@ -32,21 +32,34 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSameStudent(null));
 
-        Student editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Student editedAlice = new StudentBuilder(ALICE).withRepoName(VALID_REPONAME_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // different name, all other attributes same -> returns false
+        // different student number, all other attributes same -> returns true
+        editedAlice = new StudentBuilder(ALICE).withStudentNumber(VALID_STUDENTNUMBER_BOB).build();
+        assertTrue(ALICE.isSameStudent(editedAlice));
+
+        // different email, all other attributes same -> returns true
+        editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(ALICE.isSameStudent(editedAlice));
+
+        // different name, all other attributes same -> returns true
         editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertTrue(ALICE.isSameStudent(editedAlice));
+
+        // different email and student number, all other attributes same -> returns false
+        editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withStudentNumber(VALID_STUDENTNUMBER_BOB)
+                .build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameStudent(editedBob));
+        // name differs in case, all other attributes same -> returns true
+        Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSameStudent(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new StudentBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameStudent(editedBob));
+        assertTrue(BOB.isSameStudent(editedBob));
     }
 
     @Test

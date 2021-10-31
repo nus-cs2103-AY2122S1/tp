@@ -149,6 +149,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a student with the same identity as {@code student} apart from the student {@toIgnore}
+     * exists in the address book.
+     */
+    public boolean hasAnotherStudent(Student student, Student toIgnore) {
+        requireAllNonNull(student, toIgnore);
+        return students.containsAnother(student, toIgnore);
+    }
+
+    /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      * @param s

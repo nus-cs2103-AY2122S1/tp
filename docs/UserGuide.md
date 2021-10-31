@@ -83,6 +83,12 @@ Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO N
 * GitHub link will only be shown if both `GITHUB USERNAME` and `REPO NAME` are specified.
 * `STUDENTNUMBER` must consist of a character, followed by 7 digits, followed by another character.
   Case of character does not matter.
+* `EMAIL` must be of the form `local-part@domain` where
+  * `local-part` should only contain alphanumeric characters and `+_.-`, and cannot start or end with `+_.-`.
+  * `domain` is made up of `domain labels` separated by periods and must:
+    - end with a `domain label` at least 2 characters long
+    - have each `domain label` start and end with alphanumeric characters
+    - have each `domain label` consist of alphanumeric characters, separated only by hyphens, if any
 * If only either `GITHUB USERNAME` or `REPO NAME` are specified, the data will still be saved but not shown.
 * If the same person is edited and the remaining empty data field is entered, a proper GitHub link will be shown.
 

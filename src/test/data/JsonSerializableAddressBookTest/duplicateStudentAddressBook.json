@@ -9,8 +9,8 @@
     "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0 ],
     "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0 ]
   }, {
-    "name": "Alice Pauline",
-    "email": "pauline@example.com",
+    "name": "A Pauline",
+    "email": "alice@example.com",
     "studentNumber" : "A0123456B",
     "username" : "user",
     "repo" : "ip",

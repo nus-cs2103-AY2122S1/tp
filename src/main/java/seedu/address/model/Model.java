@@ -74,6 +74,12 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if a student with the same identity as {@code student} apart from {@toIgnore} exists in
+     * the address book.
+     */
+    boolean hasAnotherStudent(Student student, Student toIgnore);
+
+    /**
      * Deletes the given student.
      * The student must exist in the address book.
      */
