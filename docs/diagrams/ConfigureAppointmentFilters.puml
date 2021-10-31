@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+participant ":FilterAppointmentCommandParser" as FilterAppointmentCommandParser LOGIC_COLOR
+participant ":AppointmentContainsPatientPredicate" as AppointmentContainsPatientPredicate LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant ":AppointmentIsAfterPredicate" as AppointmentIsAfterPredicate LOGIC_COLOR
+participant ":AppointmentFilters" as AppointmentFilters LOGIC_COLOR
+
+mainframe **sd** configure appointment filters
+
+activate FilterAppointmentCommandParser
+
+FilterAppointmentCommandParser -> FilterAppointmentCommandParser : stringToList("Alice")
+activate FilterAppointmentCommandParser
+
+FilterAppointmentCommandParser -> FilterAppointmentCommandParser : stringList
+deactivate FilterAppointmentCommandParser
+
+create AppointmentContainsPatientPredicate
+FilterAppointmentCommandParser -> AppointmentContainsPatientPredicate : AppointmentContainsPatientPredicate(stringList)
+activate AppointmentContainsPatientPredicate
+
+AppointmentContainsPatientPredicate --> FilterAppointmentCommandParser : containsPatientPredicate
+deactivate AppointmentContainsPatientPredicate
+
+FilterAppointmentCommandParser -> AppointmentFilters : setHasPatients(containsPatientPredicate)
+activate AppointmentFilters
+
+AppointmentFilters --> FilterAppointmentCommandParser
+deactivate AppointmentFilters
+
+FilterAppointmentCommandParser -> ParserUtil : stringToDate("19/10/2021")
+activate ParserUtil
+
+ParserUtil -> FilterAppointmentCommandParser : localDate
+deactivate ParserUtil
+
+create AppointmentIsAfterPredicate
+FilterAppointmentCommandParser -> AppointmentIsAfterPredicate : AppointmentIsAfterPredicate(localDate)
+activate AppointmentIsAfterPredicate
+
+AppointmentIsAfterPredicate --> FilterAppointmentCommandParser : isAfterPredicate
+deactivate AppointmentIsAfterPredicate
+
+FilterAppointmentCommandParser -> AppointmentFilters : setStartAfter(isAfterPredicate)
+activate AppointmentFilters
+
+AppointmentFilters --> FilterAppointmentCommandParser
+deactivate AppointmentFilters
+@enduml
