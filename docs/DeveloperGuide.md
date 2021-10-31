@@ -216,6 +216,18 @@ The following sequence diagram shows how the show operation works.
  **Note:** The lifeline for `FilterInterviewCommandParser`
 should not exceed the destroy marker X. This is a known limitation of PlantUML.</div>
 
+
+### Find feature
+The ```find``` command is facilitated by creating a ```FindCommand``` depending on the given
+input. This command then updates the ```model``` accordingly.
+
+The following activity diagram summarizes what happens when a user executes a ```find``` command:
+![images](images/FindCommandActivityDiagram.png)
+
+
+### Datetime for interview 
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
