@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.model.lesson.LessonCode.CODE_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 import static seedu.tuitione.testutil.LessonBuilder.DEFAULT_LESSON_CODE;
-import static seedu.tuitione.testutil.LessonBuilder.DEFAULT_LESSON_TIME;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,11 +51,6 @@ public class LessonCodeTest {
         for (String code : INVALID_CODES) {
             assertFalse(LessonCode.isValidLessonCode(code));
         }
-    }
-
-    @Test
-    public void getStartTimeFromCode() {
-        assertEquals(DEFAULT_LESSON_TIME, LessonCode.getLessonTimeFromCode(DEFAULT_LESSON_CODE));
     }
 
     @Test

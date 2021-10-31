@@ -68,17 +68,6 @@ public class LessonCode {
         return true;
     }
 
-    /**
-     * Provides the lesson time for a given lesson code.
-     */
-    public static LessonTime getLessonTimeFromCode(LessonCode code) {
-        String[] lessonFields = code.value.split("-");
-        return new LessonTime(
-                LessonTime.parseStringToDay(lessonFields[2]).orElseThrow(),
-                LocalTime.parse(lessonFields[3], LessonTime.TIME_FORMATTER)
-        );
-    }
-
     @Override
     public int hashCode() {
         return hash(value);

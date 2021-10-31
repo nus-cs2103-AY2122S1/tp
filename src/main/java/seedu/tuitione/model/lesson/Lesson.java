@@ -134,8 +134,7 @@ public class Lesson {
             return false;
         }
         for (Lesson lesson : student.getLessons()) {
-            LessonCode code = lesson.getLessonCode();
-            LessonTime time = LessonCode.getLessonTimeFromCode(code);
+            LessonTime time = lesson.getLessonTime();
             if (time.hasOverlappedTiming(lessonTime)) {
                 return false;
             }
