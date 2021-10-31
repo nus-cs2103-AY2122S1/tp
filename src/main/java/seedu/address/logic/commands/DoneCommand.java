@@ -60,7 +60,7 @@ public class DoneCommand extends Command {
         Visit newLastVisit = personToDone.getVisit().get();
         Optional<LastVisit> newLastVisited = Optional.of(new LastVisit(newLastVisitedDate));
 
-        Occurrence currentOccurrence = personToDone.getOccurrence().orElse(Occurrence.EMPTY_OCCURENCE);
+        Occurrence currentOccurrence = personToDone.getOccurrence().orElse(Occurrence.EMPTY_OCCURRENCE);
         Frequency currentFrequency = personToDone.getFrequency().orElse(Frequency.EMPTY);
 
         Optional<Occurrence> newOccurrence;
