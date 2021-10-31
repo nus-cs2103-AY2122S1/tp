@@ -69,6 +69,18 @@ public class PersonCard extends UiPart<Region> {
             noteLastModified.setManaged(false);
         }
         // TODO: Messy Code here
+        String groupsDisplayText = getGroupsDisplayText();
+        if (groupsDisplayText.toString().equals("")) {
+            groups.setManaged(false);
+        } else {
+            groups.setText(groupsDisplayText.toString());
+        }
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private String getGroupsDisplayText() {
         StringBuilder groupsDisplayText = new StringBuilder();
         int i = 0;
         for (String superGroup : person.getDisplaySuperGroups()) {
@@ -88,14 +100,7 @@ public class PersonCard extends UiPart<Region> {
             }
             i += 1;
         }
-        if (groupsDisplayText.toString().equals("")) {
-            groups.setManaged(false);
-        } else {
-            groups.setText(groupsDisplayText.toString());
-        }
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        return groupsDisplayText.toString();
     }
 
     @Override
