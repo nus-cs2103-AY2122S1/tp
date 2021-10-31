@@ -423,7 +423,9 @@ Examples:
 * `list` followed by `export 2` exports the second contact in the contact list
 * `find Mandarin Oriental` followed by `export  1` exports the first contact in the results of the find command
 
-ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!! (show exported file?)
+A sample of the exported text file:
+
+![export](images/export.png)
 
 ### Clearing all entries: `clear`
 
