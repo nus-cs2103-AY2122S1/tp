@@ -18,6 +18,8 @@ Class PatientListPanel
 Class PatientCard
 Class StatusBarFooter
 Class CommandBox
+Class AppointmentListPanel
+Class AppointmentCard
 }
 
 package Model <<Rectangle>> {
@@ -38,6 +40,9 @@ MainWindow *-down--> "1" ResultDisplay
 MainWindow *-down--> "1" PersonTab
 MainWindow -down--> "0..1" HelpWindow
 MainWindow *-down--> "1" StatusBarFooter
+MainWindow *-down--> "1" AppointmentListPanel
+
+AppointmentListPanel -down-> "*" AppointmentCard
 
 PersonTab -down-> "1" DoctorListPanel
 PersonTab -down-> "1" PatientListPanel
@@ -56,6 +61,8 @@ PatientCard ----|> UiPart
 DoctorCard ----|> UiPart
 StatusBarFooter ----|> UiPart
 HelpWindow -down---|> UiPart
+AppointmentListPanel ----|> UiPart
+AppointmentCard ------|> UiPart
 
 PatientCard .> Model
 DoctorCard .> Model

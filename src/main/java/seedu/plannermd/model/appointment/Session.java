@@ -17,13 +17,15 @@ public class Session {
 
     public static final String MESSAGE_CONSTRAINTS = "Times should be of the format HH:MM "
             + "and adhere to the following constraints:\n"
-            + "1. Hour must be between 0-23 (0 in front of single digit is optional)\n"
-            + "2. Minute must be between 0-59 (0 in front of single digit is optional).";
+            + "1. Hour must be between 0-23\n"
+            + "2. Minute must be between 0-59.";
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:m")
             .withResolverStyle(ResolverStyle.SMART);
 
     public static final DateTimeFormatter DISPLAYED_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
+    public static final String MESSAGE_END_WITHIN_SAME_DAY = "The appointment should end within the same day.";
 
     public final LocalTime start;
     public final LocalTime end;
@@ -62,6 +64,13 @@ public class Session {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns if the starting and ending time are both in the same day.
+     */
+    public boolean isEndWithinSameDay() {
+        return end.isAfter(start);
     }
 
     /**
