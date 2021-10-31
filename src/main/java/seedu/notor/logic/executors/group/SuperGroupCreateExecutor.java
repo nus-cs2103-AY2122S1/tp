@@ -1,5 +1,6 @@
 package seedu.notor.logic.executors.group;
 
+import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -25,6 +26,9 @@ public class SuperGroupCreateExecutor extends GroupExecutor {
 
     @Override public CommandResult execute() throws ExecuteException {
         try {
+            if (!model.isSuperGroupList()) {
+                throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
+            }
             model.addSuperGroup(superGroup);
             return new CommandResult(String.format(MESSAGE_SUCCESS, superGroup));
         } catch (DuplicateItemException e) {

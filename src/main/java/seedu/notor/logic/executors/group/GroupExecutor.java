@@ -26,7 +26,7 @@ public abstract class GroupExecutor extends Executor {
     }
 
     protected void checkGroupView() throws ExecuteException {
-        if (model.isPersonList()) {
+        if (model.isPersonList() || model.isArchiveView()) {
             throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
         }
     }
