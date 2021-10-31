@@ -79,6 +79,14 @@ public class OrderBuilder {
     }
 
     /**
+     * Sets the {@code Label} of the {@code Order} that we are building.
+     */
+    public OrderBuilder withLabel(String label) {
+        this.label = new Label(label);
+        return this;
+    }
+
+    /**
      * builds the Order.
      */
     public Order build() {
