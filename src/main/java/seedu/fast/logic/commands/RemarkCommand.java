@@ -24,7 +24,7 @@ public class RemarkCommand extends Command {
             + "Existing remark will be overwritten by the input.\n\n"
             + "Parameters: \nINDEX (must be a postive integer) "
             + "r/ [REMARK]\n"
-            + "[Remark] cannot exceed 75 characters \n\n"
+            + "[Remark] cannot exceed 45 characters \n\n"
             + "Example: \n" + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
 
