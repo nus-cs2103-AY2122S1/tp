@@ -129,7 +129,7 @@ public class FeesCalculator implements Calculator {
         boolean isBetween = makeUpLessonEnd.isAfter(lastUpdated.dateTime) && makeUpLessonEnd.isBefore(currentDateTime);
 
         if (isBetween) {
-            updatedFees.add(costPerLesson);
+            updatedFees = updatedFees.add(costPerLesson);
         }
 
         return new OutstandingFees(DECIMAL_FORMAT.format(updatedFees));
