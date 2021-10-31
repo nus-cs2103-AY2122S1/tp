@@ -2,8 +2,8 @@ package seedu.track2gather.model.util;
 
 import java.util.Optional;
 
-import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.ReadOnlyTrack2Gather;
+import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.person.Address;
 import seedu.track2gather.model.person.CaseNumber;
 import seedu.track2gather.model.person.Email;

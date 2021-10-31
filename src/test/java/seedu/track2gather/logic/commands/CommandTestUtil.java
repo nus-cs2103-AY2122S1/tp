@@ -21,8 +21,8 @@ import java.util.List;
 
 import seedu.track2gather.commons.core.index.Index;
 import seedu.track2gather.logic.commands.exceptions.CommandException;
-import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.Model;
+import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.person.Person;
 import seedu.track2gather.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.track2gather.testutil.EditPersonDescriptorBuilder;

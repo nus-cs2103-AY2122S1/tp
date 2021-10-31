@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.track2gather.commons.core.GuiSettings;
-import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.ReadOnlyTrack2Gather;
+import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.UserPrefs;
 
 public class StorageManagerTest {

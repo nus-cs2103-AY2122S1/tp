@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.track2gather.commons.exceptions.IllegalValueException;
-import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.ReadOnlyTrack2Gather;
+import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.person.Person;
 
 /**

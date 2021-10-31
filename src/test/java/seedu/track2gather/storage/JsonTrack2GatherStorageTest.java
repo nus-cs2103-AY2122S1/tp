@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.track2gather.commons.exceptions.DataConversionException;
-import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.ReadOnlyTrack2Gather;
+import seedu.track2gather.model.Track2Gather;
 
 public class JsonTrack2GatherStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonTrack2GatherStorageTest");

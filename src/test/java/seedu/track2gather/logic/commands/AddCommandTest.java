@@ -17,10 +17,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.track2gather.commons.core.GuiSettings;
 import seedu.track2gather.logic.commands.exceptions.CommandException;
-import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.Model;
 import seedu.track2gather.model.ReadOnlyTrack2Gather;
 import seedu.track2gather.model.ReadOnlyUserPrefs;
+import seedu.track2gather.model.Track2Gather;
 import seedu.track2gather.model.person.Person;
 import seedu.track2gather.testutil.PersonBuilder;
 
