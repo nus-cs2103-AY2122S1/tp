@@ -164,6 +164,17 @@ public class Student {
     }
 
     /**
+     * Makes a shallow copy of a Student.
+     *
+     * @return a cloned Student with the exact same data fields as the original.
+     */
+    public Student clone() {
+        Student clone = new Student(name, email, studentNumber, userName, repoName, tags, attendance,
+                participation, groupName);
+        return clone;
+    }
+
+    /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
      */

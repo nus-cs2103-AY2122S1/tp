@@ -154,7 +154,7 @@ public class ModelManager implements Model {
     @Override
     public void markStudentAttendance(Student target, int week) {
         requireAllNonNull(target, week);
-        Student newStudent = target;
+        Student newStudent = target.clone();
         newStudent.toggleAttendance(week);
         setStudent(target, newStudent);
     }
@@ -168,8 +168,8 @@ public class ModelManager implements Model {
     @Override
     public void markStudentParticipation(Student target, int week) {
         requireAllNonNull(target, week);
-        Student newStudent = target;
-        newStudent.getParticipation().toggleParticipation(week);
+        Student newStudent = target.clone();
+        newStudent.toggleParticipation(week);
         setStudent(target, newStudent);
     }
 
