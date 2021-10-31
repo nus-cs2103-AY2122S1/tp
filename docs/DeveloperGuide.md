@@ -224,6 +224,23 @@ input. This command then updates the ```model``` accordingly.
 The following activity diagram summarizes what happens when a user executes a ```find``` command:
 ![images](images/FindCommandActivityDiagram.png)
 
+Given below is an example usage scenario illustrated by a sequence diagram for ```find``` command.
+
+Step 1. A valid command `find n/Alex y/0` is given as user input. This invokes `LogicManager#execute()`, which calls
+`AddressBookParser#parseCommand()` to parse `find n/Alex y/0` into command word `find` and command argument ` n/Alex y/0`.
+
+Step 2. `FindCommandParser` is initialized based on the parse results and `FindCommandParser#parse()` is called
+to identify the predicates present in ` n/Alex y/0`. `FindCommandParser#parse()` then initializes a
+`FindCommand` with the predicates as argument.
+
+Step 3. `FindCommand#execute()` is then called, which will in turn call `Model#updateFilteredPersonList()`
+and filters for applicants that have `Alex` in their names and `0` year of experience.
+
+Step 4. Once the string of all applicant names is formed, `CommandResult` is initialized with this string as argument
+and returned.
+
+![images](images/FindCommandSequenceDiagram.png)
+
 
 ### Datetime for interview 
 
