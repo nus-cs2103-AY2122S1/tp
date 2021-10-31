@@ -250,12 +250,13 @@ The `Github` class implements the following operation:
 
 Regex used in verifying the validity of GitHub username:
 
-`public static final String VALIDATION_REGEX = "[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}";`
-* `[a-z\d]` — **Character set**. Match any character in the set.
+`public static final String VALIDATION_REGEX = "[a-zA-Z\d](?:[a-zA-Z\d]|-(?=[a-zA-Z\d])){0,38}";`
+* `[a-zA-Z\d]` — **Character set**. Match any character in the set.
 * `a-z` — **Range**. Matches a character in the range "a" to "z" (char code 97 to 122). Case sensitive.
+* `A-Z` — **Range**. Matches a character in the range "A" to "Z" (char code 65 to 90). Case sensitive.
 * `\d` — **Digit**. Matches any digit character (0-9).
-* `(?:[a-z\d]|-(?=[a-z\d]))` — **Non-capturing group**. Groups multiple tokens together without creating a capture group.
-* `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the **|**.
+* `(?:[a-zA-Z\d]|-(?=[a-zA-Z\d]))` — **Non-capturing group**. Groups multiple tokens together without creating a capture group.
+* `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the sign.
 * `-` — **Character**. Matches a "-" character (char code 45).
 * `{0,38}` — **Quantifier**. Match between 0 and 38 of the preceding token.
 
