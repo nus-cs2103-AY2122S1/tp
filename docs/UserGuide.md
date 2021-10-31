@@ -321,7 +321,7 @@ Examples:
 ---
 
 ## Managing Doctors <a name="managing-doctors"/>
-To use commands for managing patients, toggle the displayed list to the patient list using the [toggle](#toggle) command.
+To use commands for managing doctors, toggle the displayed list to the doctor list using the [toggle](#toggle) command.
 
 ![doctor tab'](images/doctorTab.png)
 
