@@ -8,6 +8,7 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.plannermd.commons.core.Messages;
@@ -33,11 +34,14 @@ public class AddAppointmentCommand extends AppointmentCommand {
             + PREFIX_DURATION + "45 " + PREFIX_REMARK + "Patient wants a blood test";
 
 
-    public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New appointment added: %s\nThe appointment list now shows "
+            + "all appointments on %s.";
     public static final String MESSAGE_CONFLICTING_APPOINTMENT =
-            "This appointment cannot be added due to a clash in timings";
+            "This appointment cannot be added due to a clash in timings.\n"
+                    + "The clashing appointments are shown in the appointment list.";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT =
-            "This appointment already exists in PlannerMD";
+            "This appointment already exists in PlannerMD.\n"
+                    + "The duplicate appointment is shown in the appointment list.";
     public static final String MESSAGE_WRONG_DATE_TIME = "Sessions should be of the format DD/MM/YYYY HH:MM "
             + "and adhere to the following constraints:\n"
             + "1. Must be a valid date\n"
@@ -87,15 +91,22 @@ public class AddAppointmentCommand extends AppointmentCommand {
                 addAppointmentDescriptor.getSession(), addAppointmentDescriptor.getRemark());
 
         if (model.hasAppointment(toAdd)) {
+            // Show the duplicate appointment to the user
+            model.updateFilteredAppointmentList(x -> x.isSameAppointment(toAdd));
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
 
         if (model.isClashAppointment(toAdd)) {
+            // Show the clashing appointment to the user
+            model.updateFilteredAppointmentList(x -> x.isClash(toAdd));
             throw new CommandException(MESSAGE_CONFLICTING_APPOINTMENT);
         }
 
         model.addAppointment(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        LocalDate apptDate = toAdd.getAppointmentDate().date;
+        model.updateFilteredAppointmentList(AppointmentFilters.appointmentFiltersAtDate(apptDate).collectAllFilters());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd,
+                AppointmentDate.DISPLAYED_DATE_FORMATTER.format(toAdd.getAppointmentDate().date)));
     }
 
     @Override
