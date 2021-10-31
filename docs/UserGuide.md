@@ -69,11 +69,15 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 Before diving into Socius and getting to know its features, lets get familiar with the symbols used in this user guide.
 
+<div markdown="block" class="alert alert-info">
+
 :information_source: This symbol represents important information
 
 :exclamation: This symbol represents warnings or cautions
 
 :bulb: This symbol represents additional information such as tips
+     
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
