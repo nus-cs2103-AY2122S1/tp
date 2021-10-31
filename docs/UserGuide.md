@@ -433,7 +433,7 @@ Example:
 clear
 ```
 
-> WARNING: Use With Caution!
+> :exclamation: WARNING: Use With Caution!
 
 <h3 id = "OpenTelegram"> </h3>
 
