@@ -129,9 +129,9 @@ For additional information accompanying each segment, look for the following sym
 
 Syntax | What it means 
 -------|--------
-&emsp; :information_source: | precedes information that are useful to remember
-&emsp; :bulb: | precedes information that serve as tips for a feature
-&emsp; :warning: | precedes information as an important warning
+&emsp; :information_source: | Precedes information that are useful to remember.
+&emsp; :bulb: | Precedes information that serve as tips for a feature.
+&emsp; :warning: | Precedes information as an important warning.
 
 
 Jump right in to the next section: [2 Get Started](#2-get-started) to get you started!
@@ -178,7 +178,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing h
 
 Some example commands you can try:
 
-* `student 1`: Views the first student show in the student list.
+* `student 1`: Views the first student shown in the student list.
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a student named `John Doe` to the TutAssistor.
 * `addtoclass si/3 tc/1`: Adds the 3rd student in the student list to the 1st class in the tuition class list.
 * `deleteclass 2`: Deletes the 2nd class shown in the tuition class list.
@@ -448,6 +448,10 @@ rec 1
 
 ### 3.7 Find student/tuition class
 Filters the list based on the given keywords. The keywords are case-insensitive.
+<div markdown="span" class="alert alert-primary">
+:information_source: Note: Keywords will be matched entirely. 
+Example: A command `findclass phys` will not filter physics classes. 
+</div>
 
 #### Finding students by name: `find` | `f`
 Displays a list of students whose name matches the given keywords.
