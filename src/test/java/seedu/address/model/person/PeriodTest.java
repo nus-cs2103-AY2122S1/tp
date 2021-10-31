@@ -53,8 +53,6 @@ public class PeriodTest {
         Period testPeriodBeforeMid = new Period(TEST_DATE, BEFORE_TEST_DATE);
         assertFalse(testPeriodBeforeMid.contains(PAST_TEST_DATE));
 
-
-
     }
 
 
@@ -148,11 +146,6 @@ public class PeriodTest {
 
     }
 
-
-
-
-
-
     private void assertNotEqual(Collection<Period> expected, Collection<Period> actual) {
         assertFalse(expected.containsAll(actual) && actual.containsAll(expected));
     }
@@ -162,9 +155,6 @@ public class PeriodTest {
         assertTrue(expected.containsAll(actual));
         assertTrue(actual.containsAll(expected));
     }
-
-
-
 
     @Test
     public void equals() {
