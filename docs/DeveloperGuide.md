@@ -205,7 +205,10 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 
 ### Adding an appointment
 Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.
+The diagram below illustrates the flow of adding an appointment:
 ![AddAppointment](images/AddAppointmentActivityDiagram.png)
+
+![AddAppointment](images/AddAppointmentSequenceDiagram.png)
 1. After user enters the add appointment command `appt -a` with the relevant prefix, the input will be sent
    to `AddAppointmentCommandParser` for parsing.
 2. `AddAppointmentCommandParser` will check if the prefixes are relevant. If the prefixes are relevant, a new `AddAppointmentCommand` which extends `AppointmentCommand`
@@ -217,16 +220,17 @@ Adding an appointment requires the user to input valid patient and doctor indexe
 4. The UI will then display the result
 ### Deleting an appointment
 Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
-#### Implementation
+The diagram below illustrates the flow of deleting an appointment:
+![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
+
+![DeleteAppointment](images/DeleteSequenceActivityDiagram.png)
 1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
    to `DeleteAppointmentCommandParser` for parsing.
 2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` 
    which extends `AppointmentCommand` is created. If not, a `ParseException` will be thrown, and the invalid index message will be shown.
-3. The `DeleteAppointmentCommand` will execute the command, removing the appointment at the inputted index. Then, it will return the
+3. The `DeleteAppointmentCommand` will run `execute()`, removing the appointment at the inputted index. Then, it will return the
    success message as a `CommandResult` object.
 4. The UI will then display the result
-
-![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
 
 
 
