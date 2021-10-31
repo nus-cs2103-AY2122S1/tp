@@ -34,6 +34,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
@@ -76,16 +77,16 @@ class LessonEditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative student index
-        assertParseFailure(parser, "-5 1" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5 1" + SUBJECT_DESC, MESSAGE_INVALID_INDEX);
 
         // zero student index
-        assertParseFailure(parser, "0 1" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0 1" + SUBJECT_DESC, MESSAGE_INVALID_INDEX);
 
         // negative lesson index
-        assertParseFailure(parser, "1 -7" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 -7" + SUBJECT_DESC, MESSAGE_INVALID_INDEX);
 
         // zero lesson index
-        assertParseFailure(parser, "1 0" + SUBJECT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 0" + SUBJECT_DESC, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -171,7 +172,7 @@ class LessonEditCommandParserTest {
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + PAST_DATE_DESC;
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withDate(VALID_DATE_PAST).build();
         LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
-        //assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
         // time range
         userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + TIME_RANGE_DESC;

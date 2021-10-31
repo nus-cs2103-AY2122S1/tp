@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -26,16 +27,16 @@ class PaidCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative student index
-        assertParseFailure(parser, "-5 1" + PAYMENT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5 1" + PAYMENT_DESC, MESSAGE_INVALID_INDEX);
 
         // zero student index
-        assertParseFailure(parser, "0 1" + PAYMENT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0 1" + PAYMENT_DESC, MESSAGE_INVALID_INDEX);
 
         // negative lesson index
-        assertParseFailure(parser, "1 -7" + PAYMENT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 -7" + PAYMENT_DESC, MESSAGE_INVALID_INDEX);
 
         // zero lesson index
-        assertParseFailure(parser, "1 0" + PAYMENT_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 0" + PAYMENT_DESC, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -50,8 +51,7 @@ class PaidCommandParserTest {
         assertParseFailure(parser, PAYMENT_DESC, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, "1 1", expectedMessage);
+        assertParseFailure(parser, "1 1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

@@ -36,9 +36,37 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+    /** Number of index arguments expected in preamble when parsing student index */
+    public static final int INDEX_ARGS_COUNT_STUDENT = 1;
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INSUFFICIENT_INDICES = "Specify a valid index for both the student and lesson.";
+    /** Number of index arguments expected in preamble when parsing student and lesson index */
+    public static final int INDEX_ARGS_COUNT_STUDENT_LESSON = 2;
+
+    /** Zero based position of student index in preamble */
+    public static final int STUDENT_INDEX_ZERO_BASED = 0;
+
+    /** Zero based position of lesson index in preamble */
+    public static final int LESSON_INDEX_ZERO_BASED = 1;
+
+    public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
+
+    /**
+     * Parses {@code preamble} into {@code String[]} and returns it.
+     * Leading and trailing whitespaces will be stripped and
+     * preamble string is split by whitespace into an array of strings.
+     *
+     * @param preamble
+     * @return
+     */
+    public static String[] parsePreamble(String preamble) {
+        String strippedPreamble = preamble.strip();
+        // required check as empty string split by whitespaces
+        // returns array with empty string instead of empty array.
+        if (strippedPreamble.isEmpty()) {
+            return new String[0];
+        }
+        return strippedPreamble.split("\\s+");
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -52,30 +80,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(strippedIndex));
-    }
-
-    /**
-     * Parses {@code oneBasedIndex} into an {@code Index[]} and returns it. Leading and trailing whitespaces will be
-     * stripped.
-     *
-     * @throws ParseException If the specified indices are invalid (not non-zero unsigned integer).
-     */
-    public static Index[] parseIndices(String args) throws ParseException {
-        // There will be 2 index arguments
-        // 1st is person, 2nd is lesson
-        String[] indices = args.trim().split(" ", 2);
-        if (indices.length < 2) {
-            throw new ParseException(MESSAGE_INSUFFICIENT_INDICES);
-        }
-        Index studentIndex = parseIndex(indices[0]);
-        /*
-        indices[1] would not be a valid index if more than 1 index is given
-        or if anything other than a single valid integer is given.
-        e.g. case "ldelete 1 2 3": indices[1] returns "2 3".
-        */
-        Index lessonIndex = parseIndex(indices[1]);
-        Index[] studentLessonIndices = {studentIndex, lessonIndex};
-        return studentLessonIndices;
     }
 
     /**

@@ -63,6 +63,18 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
+    public void parsePreamble_emptyString_returnsEmptyArray() {
+        assertTrue(ParserUtil.parsePreamble("  ").length == 0);
+    }
+
+    @Test
+    public void parsePreamble_nonEmptyString_returnsArray() {
+        assertTrue(ParserUtil.parsePreamble(" 1 ").length == 1);
+        assertTrue(ParserUtil.parsePreamble(" 1 2 ").length == 2);
+        assertTrue(ParserUtil.parsePreamble(" 1   2 ").length == 2);
+    }
+
+    @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
     }

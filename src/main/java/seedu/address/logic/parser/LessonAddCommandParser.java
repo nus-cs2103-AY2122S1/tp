@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.ParserUtil.INDEX_ARGS_COUNT_STUDENT;
+import static seedu.address.logic.parser.ParserUtil.STUDENT_INDEX_ZERO_BASED;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -47,13 +49,11 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE), pe);
+        String[] preamble = ParserUtil.parsePreamble(argMultimap.getPreamble());
+        if (preamble.length != INDEX_ARGS_COUNT_STUDENT) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
+        Index index = ParserUtil.parseIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
 
         Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         if (date.isEmpty()) {

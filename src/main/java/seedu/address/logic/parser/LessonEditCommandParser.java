@@ -11,6 +11,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
+import static seedu.address.logic.parser.ParserUtil.INDEX_ARGS_COUNT_STUDENT_LESSON;
+import static seedu.address.logic.parser.ParserUtil.LESSON_INDEX_ZERO_BASED;
+import static seedu.address.logic.parser.ParserUtil.STUDENT_INDEX_ZERO_BASED;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -41,18 +44,12 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
                     PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_OUTSTANDING_FEES,
                     PREFIX_CANCEL, PREFIX_UNCANCEL);
 
-        Index[] indices;
-
-        try {
-            indices = ParserUtil.parseIndices(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    LessonEditCommand.MESSAGE_USAGE), pe);
+        String[] preamble = ParserUtil.parsePreamble(argMultimap.getPreamble());
+        if (preamble.length != INDEX_ARGS_COUNT_STUDENT_LESSON) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
         }
-
-        assert indices.length == 2;
-        Index studentIndex = indices[0];
-        Index lessonIndex = indices[1];
+        Index studentIndex = ParserUtil.parseIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
+        Index lessonIndex = ParserUtil.parseIndex(preamble[LESSON_INDEX_ZERO_BASED]);
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
