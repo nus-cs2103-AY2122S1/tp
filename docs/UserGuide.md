@@ -5,8 +5,6 @@ title: User Guide
 
 # Welcome to Socius User Guide!
 
-This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
-
 * Table of Contents
 {:toc}
 
@@ -493,6 +491,10 @@ If the format of your data file is invalid, Socius will discard all data and sta
 | Word | Meaning |
 |--------|---------|
 |        |           |
+
+## Authors
+
+This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nathan. We are a group of Computer Science students from the National University of Singapore, and members of AY2021S1-CS2103T-W08-4.
 
 ## Command Summary
 
