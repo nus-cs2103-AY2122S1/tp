@@ -64,9 +64,9 @@ class FileManagerTest {
     @Test
     public void getStudentsFromCsv_invalidField_throwsIllegalArgumentException() {
         String expectedMessage = "Student ID should only contain 9 alphanumeric characters, "
-                                + "where the first and last characters "
-                                + " should be alphabets and the rest are numbers. And it should not be blank."
-                                + "\nFor example: A0212345T";
+                + "where the first and last characters "
+                + " should be alphabets and the rest are numbers. And it should not be blank."
+                + "\nFor example: A0212345T";
         File testFile = new File(INVALID_FIELD_CSV);
         assertThrows(IllegalArgumentException.class, expectedMessage, () -> fm.getStudentsFromCsv(testFile));
     }
