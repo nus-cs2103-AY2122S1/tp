@@ -395,6 +395,10 @@ Format: **`exit`**
 Socius data are automatically saved to the computer after any command that changes the data.
 Therefore, there is no need to save manually. The data will be automatically loaded back into the application the next time you use it.
 
+### Command History
+
+Use up/down arrow to navigate through command history. This is useful if the command you are going to type only differs slightly from a command you have previously typed.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Parameter Constraints
