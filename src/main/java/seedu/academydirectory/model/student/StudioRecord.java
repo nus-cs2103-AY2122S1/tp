@@ -6,7 +6,7 @@ import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNu
 public class StudioRecord implements Information {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Studio Session should only contain numbers, and it should range from 1 to 10.";
+            "Studio Session should only be an integer from 1 to 12.";
 
     private static final String VALIDATION_REGEX = "^-?\\d+$";
 

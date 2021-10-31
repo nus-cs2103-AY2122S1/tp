@@ -47,16 +47,13 @@ public class ParticipationCommandParserTest {
                 + participationCount;
         String userInputNoSession = targetIndex.getOneBased()
                 + " "
-                + PREFIX_STUDIO_SESSION
                 + " "
                 + PREFIX_ADD_PARTICIPATON
                 + participationCount;
         String userInputNoParticipationCount = targetIndex.getOneBased()
                 + " "
                 + PREFIX_STUDIO_SESSION
-                + nonEmptySession
-                + PREFIX_ADD_PARTICIPATON;
-
+                + nonEmptySession;
         // no parameters
         assertParseFailure(parser, ParticipationCommand.COMMAND_WORD, expectedMessage);
 

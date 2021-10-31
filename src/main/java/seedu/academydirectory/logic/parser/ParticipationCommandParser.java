@@ -38,14 +38,16 @@ public class ParticipationCommandParser implements Parser<ParticipationCommand> 
                 String strippedStr = str.trim();
                 indexArrayList.add(ParserUtil.parseIndex(strippedStr));
             }
-            participationUpdate = ParserUtil.parseParticipation(argMultimap.getValue(PREFIX_ADD_PARTICIPATON).get());
-            studioSession = ParserUtil.parseStudioRecord(argMultimap.getValue(PREFIX_STUDIO_SESSION).get());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParticipationCommand.MESSAGE_USAGE),
                     pe
             );
         }
+
+        participationUpdate = ParserUtil.parseParticipation(argMultimap.getValue(PREFIX_ADD_PARTICIPATON).get());
+        studioSession = ParserUtil.parseStudioRecord(argMultimap.getValue(PREFIX_STUDIO_SESSION).get());
+
         return new ParticipationCommand(participationUpdate, studioSession, indexArrayList);
     }
     /**
