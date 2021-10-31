@@ -23,11 +23,11 @@ public class FindOrderCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindOrderCommand expectedFindCommand =
+        FindOrderCommand expectedFindOrderCommand =
                 new FindOrderCommand(new OrderContainsKeywordsPredicate(Arrays.asList("Button", "SO1")));
-        assertParseSuccess(parser, "Button SO1", expectedFindCommand);
+        assertParseSuccess(parser, "Button SO1", expectedFindOrderCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Button \n \t SO1  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n Button \n \t SO1  \t", expectedFindOrderCommand);
     }
 }
