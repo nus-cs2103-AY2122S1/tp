@@ -21,7 +21,7 @@ public class StringUtil {
     public static final String TIME_VALIDATION_REGEX =
             "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String CLIENT_DELIMITER = "\n";
-    public static final String CLIENTID_DELIMITER = ", ";
+    public static final String COMMA_DELIMITER = ", ";
     public static final String JSON_FILE_PREFIX = ".json";
 
 

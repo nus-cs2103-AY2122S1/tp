@@ -252,8 +252,8 @@ Format: `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
   e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.
 
 Examples:
-* `search John` returns `john` and `John Doe`
-* `search alex david` returns `Alex Yeoh`, `David Li`<br>
+* `filter John` returns `john` and `John Doe`
+* `filter alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Clearing all entries : `clear`
 

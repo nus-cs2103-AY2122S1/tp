@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.StringUtil.CLIENTID_DELIMITER;
 import static seedu.address.commons.util.StringUtil.CLIENT_DELIMITER;
+import static seedu.address.commons.util.StringUtil.COMMA_DELIMITER;
 import static seedu.address.commons.util.StringUtil.joinListToString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
             .collect(Collectors.toList());
 
         if (!invalidClientIds.isEmpty()) {
-            String invalidClientIdsString = joinListToString(invalidClientIds, CLIENTID_DELIMITER);
+            String invalidClientIdsString = joinListToString(invalidClientIds, COMMA_DELIMITER);
             throw new CommandException(String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, invalidClientIdsString));
         }
 

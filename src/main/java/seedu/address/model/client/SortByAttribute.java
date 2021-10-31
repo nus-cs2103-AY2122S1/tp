@@ -46,7 +46,7 @@ public class SortByAttribute implements Comparator<Client> {
             resultList.add(getName(prefixIterator.next()) + " in " + sortDirectionIterator.next().toString());
         }
 
-        return StringUtil.joinListToString(resultList, StringUtil.CLIENTID_DELIMITER);
+        return StringUtil.joinListToString(resultList, StringUtil.COMMA_DELIMITER);
     }
 
     /**
