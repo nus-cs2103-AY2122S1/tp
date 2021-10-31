@@ -147,6 +147,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `PlannerMdParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `PlannerMdParser` returns back as a `Command` object.
+* If the `PlannerMdParser` parses an appointment command (e.g., `appt -a`, `appt -e`, ...), it first creates an `AppointmentCommandParser` to parse the flags given (e.g., `-a`, `-e`, ...). The `AppointmentCommandParser` then creates an `XYZCommandParser` (e.g., `AddAppointmentCommandParser`) to parse the remaining user command.
 * All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteDoctorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component <a name="model"/>
@@ -188,7 +189,7 @@ With the introduction of two types of `Person` (`Patient` and `Doctor`) and thei
 a state is used to determine which list should be interacted with.
 
 The state is maintained in `ModelManager`
-* Two possible states (`State.PATIENT` and `State.Doctor`)
+* Two possible states (`State.PATIENT` and `State.DOCTOR`)
 * `ModelManager::toggleState` is used to switch between states
 * The UI displays the list according to the state. (eg. if the state is `State.PATIENT`, UI displays the filtered list of patients)
 * Commands are parsed based on the state. (eg. if a valid 'add' command is parsed and the state is `State.PATIENT`, an `AddPatientCommand` is executed)
@@ -209,14 +210,74 @@ The Sequence Diagram below illustrates the interactions within the Model compone
 
 ### Editing an appointment
 
+Edits the details of an existing appointment.
+
+The edit appointment command accepts at least one of the following parameters:
+* Patient index
+* Doctor index
+* Start date and time
+* Duration (in minutes)
+* Remark
+
+#### Implementation
+
+1. An `EditAppointmentCommandParser` is used to parse the edit appointment command. It checks if the patient and doctor indices are not out of bounds (based on the current filtered patient and doctor lists). The validity and format of the date and time as well as duration are also checked.
+2. If the inputs are valid, an `EditAppointmentCommand` is created. The command is executed and attempts to edit the fields as specified in the user input. The edited appointment will be reflected in the filtered appointment list in `Model`.
+3. Whenever an edited appointment results in a clash with existing appointments, the command is aborted and an error message is shown to the user.
+
+The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("appt -e 2 p/1 dur/30")` API call.
+
+![EditAppointmentSequenceDiagram](images/EditAppointmentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AppointmentCommandParser` and `EditAppointmentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 ### Filtering appointments
+
+#### What it is
+
+Filters through the appointment records in PlannerMd and shows the appointments that matches the filter parameters.
+
+There are 4 possible parameters provided to a filter appointment command are:
+* Patient keywords (Filters appointments whose patient's name contains one of the keywords provided)
+* Doctor keywords (Filters appointments whose doctor's name contains one of the keywords provided)
+* Start date (Filters appointments which has a starting date greater or equal to the start date provided)
+* End date (Filters appointment which has a starting date lesser or equal to the end date provided)
+
+If no parameters are provided, the command simply lists all appointments in the appointment records.
+
+#### Implementation
+
+Upon entry of a filter appointment command, it is parsed by a `FilterAppointmentCommandParser` to check if the input parameters are valid (Dates are formatted correctly, `startDate` <= `endDate` if both parameters are provided). If the inputs are valid, an 'AppointmentFilters' is created and the filter parameters are stored in it. An 'AppointmentFilters' is an object that stores the different filter conditions a user can provide.
+
+After that, the filter is used to create a `FilterAppointmentCommand`. When executed, the `FilterAppointmentCommand` takes the `AppointmentFilters` and converts it into a single predicate based on the filter parameters provided. The predicate is then used to update the filtered appointment list in `Model`.
+
+Given below, is an example of a filter appointment command with the patient keywords and start date parameter provided.
+
+A clearer view of this sequence diagram can be found [here](images/AppointmentFilterSequenceDiagram.png).
+
+![FilterAppointmentCommand](images/AppointmentFilterSequenceDiagram.png)
+
+![ConfigureAppointmentFilters](images/ConfigureAppointmentFilters.png)
+
 
 ### Storing an appointment
 
-The creation of a `JsonAdaptedAppointment` will create the respective `JsonAdaptedPatient` and `JsonAdaptedDoctor` involved in the appointment The creation of `JsonAdaptedPatient` and `JsonAdaptedDoctor` will create the number of tags that the respective `Patient` and `Doctor` objects have.
+#### What it is
+
+Stores an Appointment object in the Json file by first creating the `JsonAdaptedAppointment` object, which is the Json representation of the `Appointment` object. 
+Then, the `JsonAdaptedAppointment` is then contained within the `JsonSerializablePlannerMd` object and `JsonSerializablePlannerMd` is passed as parameter to `JsonUtil.saveJsonFile` to write all records,
+including the `Appointment` object, into the file.
+
+The implementation focuses on the creation of a single `JsonAdapatedAppointment` object after the user keys in a command that changes the current records.
+
+#### Implementation
+
+The creation of a `JsonAdaptedAppointment` will create the respective `JsonAdaptedPatient` and `JsonAdaptedDoctor` involved in the appointment. 
+The creation of `JsonAdaptedPatient` and `JsonAdaptedDoctor` will create the number of tags that the respective `Patient` and `Doctor` objects have.
 
 We use `JsonAdaptedPatient` and `JsonAdaptedDoctor` that are used to store `Patient` and `Doctor` standalone objects 
-as json to ensure that these objects are stored in a consistent format, whether as a standalone `Patient`/`Doctor` or
+as Json to ensure that these objects are stored in a consistent format, whether as a standalone `Patient`/`Doctor` or
 a `Patient`/`Doctor` in an `Appointment`.
 
 The creation of a `JsonAdaptedAppointment` will also create the `JsonAdaptedSession`
@@ -225,6 +286,7 @@ which is synonymous to the `Session` object contained in an `Appointment`.
 The Sequence Diagram below illustrates the interactions within the Storage component for the creation of a `JsonAdaptedAppointment`.
 
 <img src="images/AppointmentStorageSequenceDiagram.png" width="550" />
+
 
 --- 
 
@@ -364,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
 | `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
 | `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many patients to manage| sort doctors by name      | locate a doctor easily                                                |
+| `* *`    | clinic receptionist with many doctors to manage| sort doctors by name      | locate a doctor easily                                                |
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
 | `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
@@ -374,7 +436,7 @@ These are some use cases to familiarise with the flow of our application:
 
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
-**Use case: Add a patient/doctor**
+**Use case: Adding a patient/doctor**
 
 **MSS**
 
@@ -397,7 +459,7 @@ These are some use cases to familiarise with the flow of our application:
 
     Use case resumes at step 1.
 
-**Use case: Delete a patient/doctor**
+**Use case: Deleting a patient/doctor**
 
 **MSS**
 
@@ -445,7 +507,7 @@ These are some use cases to familiarise with the flow of our application:
 
       Use case resumes at step 2.
 
-**Use case: Editing the risk profile of a patient (Coming soon)**
+**Use case: Editing the risk profile of a patient**
 
 **MSS**
 
@@ -526,14 +588,37 @@ These are some use cases to familiarise with the flow of our application:
 
       Use case resumes at step 2.
 
-**Use case: Editing personal details of a patient (Coming soon)**
+**Use case: Editing personal details of a patient**
 
 **MSS**
 
 1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
-3.  Receptionist requests to edit the personal details of a specific person in the list
+3.  Receptionist requests to edit the personal details of a specific patient in the list
 4.  PlannerMD edits the patient's personal details which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Editing personal details of a doctor**
+
+**MSS**
+
+1.  Receptionist requests to find a certain doctor by typing his/her name in the CLI
+2.  PlannerMD shows a list of doctors with that name
+3.  Receptionist requests to edit the personal details of a specific doctor in the list
+4.  PlannerMD edits the doctor's personal details which is reflected immediately
 
     Use case ends.
 
@@ -583,10 +668,10 @@ These are some use cases to familiarise with the flow of our application:
 **Use case: Deleting an appointment**
 
 **MSS**
-1.  Receptionist requests to list appointments
-2.  PlannerMD shows the list of appointments
-2.  Receptionist requests to delete an appointment
-3.  PlannerMD deletes the appointment from the appointment list which is reflected immediately
+1. Receptionist requests to list appointments
+2. PlannerMD shows the list of appointments
+3. Receptionist requests to delete an appointment
+4. PlannerMD deletes the appointment from the appointment list which is reflected immediately
 
     Use case ends.
 
@@ -595,6 +680,40 @@ These are some use cases to familiarise with the flow of our application:
 * 3a. The given index is invalid.
 
     * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Editing an appointment**
+
+**MSS**
+1. Receptionist requests to list appointments
+2. PlannerMD shows the list of appointments
+3. Receptionist requests to edit a specific appointment
+4. PlannerMD edits the appointment which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The appointment list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given parameters are invalid.
+
+    * 3b1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. The edited appointment date or time clashes with an existing appointment.
+
+    * 3c1. PlannerMD shows an error message and lists the clashing appointment(s).
 
       Use case resumes at step 2.
 
@@ -685,6 +804,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a doctor <a name="edit-doctor"/>
 
+1. Editing a doctor while all doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List all doctors using the `list` command.
+
+    2. Test case: `edit 1 hp/91234567 eml/johndoe@example.com`<br>
+       Expected: First doctor's phone and email are edited to `91234567` and `johndoe@example.com` respectively. Details of the edited contact are shown in the status message.
+
+    3. Test case: `edit 0 hp/91234567`<br>
+       Expected: No doctor is edited. Error details are shown in the status message.
+
+    4. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Editing a doctor while some doctors are being shown
+
+    1. Prerequisites: `toggle` to the `Doctors` tab. List some doctors using `find XYZ` (XYZ is the name of an existing doctor).
+
+    2. Test cases are similar to those above.
+
 ### Finding a doctor <a name="find-doctor"/>
 
 ### Listing all doctors <a name="list-doctors"/>
@@ -694,6 +832,28 @@ testers are expected to do more *exploratory* testing.
 ### Deleting an appointment  <a name="delete-appointment"/>
 
 ### Editing an appointment <a name="edit-appointment"/>
+
+1. Editing an appointment while all appointments are being shown
+
+    1. Prerequisites: Use `appt -f` to list all appointments.
+
+    2. Test case: `appt -e 1 p/1 s/31/12/2021 10:00 dur/30`<br>
+       Expected: First appointment's patient is edited to the first patient in the filtered patient list. The date and session are edited to `31 Dec 21, Fri` and `10:00 - 10:30` respectively. Details of the edited appointment are shown in the status message.
+
+    3. Test case: `appt -e 0 dur/30`<br>
+       Expected: No appointment is edited. Error details are shown in the status message.
+
+    4. Other incorrect edit appointment commands to try: `appt -e`, `appt -e x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+    5. Test case: Edit a patient/doctor's appointment to clash with their existing appointments (edit the date and time to be the same or overlapping with an existing appointment).<br>
+        Expected: Similar to previous.
+
+3. Editing an appointment while some appointments are being shown
+
+    1. Prerequisites: Use `appt -f [p/PATIENT_KEYWORD] [d/DOCTOR_KEYWORD] [s/START_DATE] [e/END_DATE]` to list only some appointments. E.g., `appt -f s/01/11/2021` to list only appointments after `01/11/2021`.
+
+    2. Test cases are similar to those above.
 
 ### Filtering all appointments <a name="filter-all-appointments"/>
 
