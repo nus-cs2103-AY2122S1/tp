@@ -172,7 +172,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void initKeyPressEventHandler(CommandBox commandBox) {
-        // Add event handlers
+        // Add handler to request focus on commandbox when user wants to type
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (commandBox.getCommandTextField().isFocused()) {
                 return; // Don't filter if already in focus
@@ -212,7 +212,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void initListeners() {
-        // Add listeners
+        // Add listeners that shows selected person's lessons
         centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {

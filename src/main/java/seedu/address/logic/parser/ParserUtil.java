@@ -194,7 +194,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code date} is invalid.
      */
     public static Optional<Date> parseDate(String date) throws ParseException {
-
         if (date == null || date.strip().isEmpty()) {
             return Optional.empty();
         }

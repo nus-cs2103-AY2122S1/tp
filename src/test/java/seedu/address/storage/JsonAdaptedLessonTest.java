@@ -23,7 +23,7 @@ import seedu.address.model.lesson.TimeRange;
 class JsonAdaptedLessonTest {
 
     private static final String INVALID_DATE = "29 Feb 2021";
-    private static final String INVALID_TIME_RANGE = "0100-0200";
+    private static final String INVALID_TIME_RANGE = "0200-0100";
     private static final String INVALID_LESSON_RATES = "$50.00";
     private static final String INVALID_SUBJECT = "1^739;";
     private static final String INVALID_HOMEWORK = INVALID_HOMEWORK_DESC;

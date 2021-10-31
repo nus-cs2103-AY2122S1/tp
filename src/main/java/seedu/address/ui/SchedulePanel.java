@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static com.calendarfx.view.DayViewBase.EarlyLateHoursStrategy.SHOW_COMPRESSED;
+import static com.calendarfx.view.DayViewBase.EarlyLateHoursStrategy.SHOW;
 import static com.calendarfx.view.DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT;
 
 import java.time.LocalDate;
@@ -60,7 +60,7 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.setShowAddCalendarButton(false);
         calendarView.setShowSourceTrayButton(false);
         calendarView.setShowPageToolBarControls(false);
-        calendarView.setShowSearchField(false); // TODO: implement CLI entry search
+        calendarView.setShowSearchField(false);
 
         initialiseDayPage();
         initialiseWeekPage();
@@ -75,14 +75,14 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.getDayPage().getYearMonthView().setShowWeekNumbers(false);
 
         calendarView.getDayPage().getDetailedDayView().setVisibleHours(15);
-        calendarView.getDayPage().getDetailedDayView().setEarlyLateHoursStrategy(SHOW_COMPRESSED);
+        calendarView.getDayPage().getDetailedDayView().setEarlyLateHoursStrategy(SHOW);
         calendarView.getDayPage().getDetailedDayView().setHoursLayoutStrategy(FIXED_HOUR_COUNT);
     }
 
     private void initialiseWeekPage() {
         calendarView.getWeekPage().getDetailedWeekView().setVisibleHours(15);
         calendarView.getWeekPage().getDetailedWeekView().setHoursLayoutStrategy(FIXED_HOUR_COUNT);
-        calendarView.getWeekPage().getDetailedWeekView().setEarlyLateHoursStrategy(SHOW_COMPRESSED);
+        calendarView.getWeekPage().getDetailedWeekView().setEarlyLateHoursStrategy(SHOW);
     }
 
     private void initialiseYearPage() {

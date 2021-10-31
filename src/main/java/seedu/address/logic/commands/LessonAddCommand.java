@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_ODD_HOURS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
@@ -101,8 +102,15 @@ public class LessonAddCommand extends UndoableCommand {
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, personAfterLessonAdd.getName(), toAdd),
-                personAfterLessonAdd);
+
+        String feedback = String.format(MESSAGE_ADD_LESSON_SUCCESS, personAfterLessonAdd.getName(), toAdd);
+
+        // Odd hour warning
+        if (toAdd.isOddHours()) {
+            feedback = MESSAGE_ODD_HOURS + "\n" + feedback;
+        }
+
+        return new CommandResult(feedback, personAfterLessonAdd);
     }
 
     /**
