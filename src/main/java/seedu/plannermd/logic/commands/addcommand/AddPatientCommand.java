@@ -25,7 +25,7 @@ public class AddPatientCommand extends AddCommand {
             + "[" + PREFIX_TAG + "TAG]... " + "[" + PREFIX_RISK + "RISK]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_BIRTH_DATE + "31/09/2021 " + PREFIX_TAG
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_BIRTH_DATE + "20/07/1964 " + PREFIX_TAG
             + "friends " + PREFIX_TAG + "owesMoney " + PREFIX_RISK + "LOW";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";

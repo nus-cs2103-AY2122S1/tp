@@ -12,6 +12,7 @@ import java.util.Set;
 
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.util.StringUtil;
+import seedu.plannermd.logic.parser.apptcommandparser.FilterAppointmentCommandParser;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.appointment.Duration;
