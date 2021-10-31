@@ -79,6 +79,9 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 </p>
 
 > * This Window is only displayed once, when the Student launches the App for the first time.
+1. Enter Your Name in the `Name Field`.
+2. Enter Your Telegram Handle in the `Telegram Field`.
+3. Enter Your GitHub Username in the `GitHub Field`.
 
 <p align="center">
 <img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/MainWindow.png?raw=true">
