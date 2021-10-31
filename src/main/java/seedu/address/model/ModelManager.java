@@ -136,9 +136,7 @@ public class ModelManager implements Model {
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
-    @Override
-    public void setStudent(Student target, Student editedStudent) {
-        requireAllNonNull(target, editedStudent);
+    public void updateGroup(Student target, Student editedStudent) {
         if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group updatedGroup = groupList.stream()
@@ -147,7 +145,12 @@ public class ModelManager implements Model {
                     .orElse(null);
             updatedGroup.updateMember(target, editedStudent);
         }
+    }
 
+    @Override
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        updateGroup(target, editedStudent);
         addressBook.setStudent(target, editedStudent);
     }
 
@@ -156,7 +159,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, week);
         Student newStudent = target.clone();
         newStudent.toggleAttendance(week);
-        setStudent(target, newStudent);
+        updateGroup(target, newStudent);
     }
 
     @Override
@@ -170,7 +173,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, week);
         Student newStudent = target.clone();
         newStudent.toggleParticipation(week);
-        setStudent(target, newStudent);
+        updateGroup(target, newStudent);
     }
 
     @Override
@@ -197,7 +200,6 @@ public class ModelManager implements Model {
         requireAllNonNull(student, group);
         addressBook.deleteStudentFromGroup(student, group);
         addressBook.removeGroupFromStudent(student);
-
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
@@ -226,7 +228,6 @@ public class ModelManager implements Model {
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-
         addressBook.setTask(target, editedTask);
     }
 
