@@ -255,7 +255,7 @@ Given below is an example usage scenario:
 ### Done Command
 
 #### Implementation details
-The done command is used to mark a person's existing visit as done, and update the person's `LastVisit` datetime value with that of the completed `Visit`.
+The done command is used to mark an elderly's next visit as done, and update the elderly's `LastVisit` datetime value with that of the completed `Visit`.
 The `Visit` field will also be updated or deleted depending on the `Occurrence` field's value.
 It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
 - `DoneCommand` extends `Command`
