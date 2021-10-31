@@ -109,8 +109,6 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         Telegram telegram;
 
         if (areUserCredentialsValid()) {
-            //errorMessage.setStyle("-fx-text-fill: green;");
-            //errorMessage.setText("Setting Up...");
             setErrorMessageText("Setting Up...");
 
             address = new Address("");
@@ -131,7 +129,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
                 logic.setUserProfile(user);
                 logger.info("User Data Set");
             } catch (IOException e) {
-                errorMessage.setText("Could Not Set Up User Profile");
+                setErrorMessageText("Could Not Set Up User Profile");
                 logger.severe("Could Not Set User Data.");
             }
 
@@ -141,8 +139,10 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Sets The {@code errorMessage} text to
+     * {@code message}.
      *
-     * @param message kkf
+     * @param message The message to be showed.
      */
     public void setErrorMessageText(String message) {
         errorMessage.setText(message);
