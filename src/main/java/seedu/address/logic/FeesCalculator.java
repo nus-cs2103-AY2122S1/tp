@@ -154,7 +154,7 @@ public class FeesCalculator implements Calculator {
         BigDecimal costPerLesson = getCostPerLesson(timeRange, lessonRates);
 
         // updatedFees = costPerLesson * numOfLessons + originalAmount
-        BigDecimal updatedFees  = costPerLesson
+        BigDecimal updatedFees = costPerLesson
                 .multiply(BigDecimal.valueOf(numberOfLessons))
                 .add(original.getMonetaryValue());
 

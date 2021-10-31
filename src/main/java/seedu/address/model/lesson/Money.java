@@ -1,10 +1,9 @@
 package seedu.address.model.lesson;
 
-import java.math.BigDecimal;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.math.BigDecimal;
 
 /**
  * Represents the amount of money and money-related fields in the address book.
