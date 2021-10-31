@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -64,7 +65,6 @@ public class AddCommand extends UndoableCommand {
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TAB!";
 
     private final Person toAdd; //the person to be added, should not be modified in execution of command
 
