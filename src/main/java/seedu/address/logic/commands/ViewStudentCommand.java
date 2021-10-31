@@ -16,7 +16,7 @@ public class ViewStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Finds and displays details of the student identified by the specified name (case-sensitive) \n"
         + "Parameters: NAME (case-sensitive)\n"
-        + "Example:" + COMMAND_WORD + " 2";
+        + "Example: " + COMMAND_WORD + " David Li";
 
     private static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Viewing details of %1$s";
 
