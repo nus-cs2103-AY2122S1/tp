@@ -12,7 +12,7 @@ public class ListOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "listorder";
 
-    public static final String MESSAGE_SUCCESS = "Listed all orders";
+    public static final String MESSAGE_SUCCESS = "Listed all order(s)";
 
     @Override
     public CommandResult execute(Model model) {
