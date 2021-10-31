@@ -152,8 +152,6 @@ Shows a command summary table as well as a link to access this user guide page.
 
 Format: `help`
 
-Shortcut: <kbd>F1</kbd>
-
 - You can select a cell and press <kbd>CONTROL</kbd> + <kbd>C</kbd> or <kbd>COMMAND</kbd> + <kbd>C</kbd> on your keyboard to copy the selected cell value.
 - You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
 - You can click the right end to each column to sort the rows alphabetically.
@@ -493,8 +491,6 @@ Displays a list of upcoming lessons with end date time within the next 48 hours
 
 Format: `remind`
 
-Shortcut: `F5`
-
 ![remind](images/remind.png)
 
 <div class="caption">Reminder window interface.</div>
@@ -584,8 +580,6 @@ This section guides you on how to use TAB's calendar interface. Typing any of th
 Brings you to TAB's calendar interface for you to see all your scheduled lessons.
 
 Format: `calendar`
-
-Shortcut: <kbd>F3</kbd>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 All the other commands in this [Viewing your Calendar](#viewing-your-calendar) section act as a shortcut that opens the calendar as well!
@@ -689,9 +683,8 @@ Shows all the tags that you have created together with the number of students la
 
 Format: `tags`
 
-Shortcut: <kbd>F4</kbd>
+![tag](images/tag.png)
 
-![tags](images/tag.png)
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
 <div style="page-break-after: always;"></div>
