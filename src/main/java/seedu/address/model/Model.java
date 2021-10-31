@@ -2,6 +2,7 @@ package seedu.address.model;
 
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import com.calendarfx.model.Calendar;
@@ -74,6 +75,16 @@ public interface Model {
      * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
      */
     boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore);
+
+    /**
+     * Returns the set of clashing lessons for {@code lesson}in the address book.
+     */
+    Set<String> getClashingLessonsString(Lesson lesson);
+
+    /**
+     * Returns the set of clashing lessons for {@code lesson}in the address book.
+     */
+    Set<String> getClashingLessonsString(Lesson lesson, Lesson lessonToIgnore);
 
     /**
      * Deletes the given person.
