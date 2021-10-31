@@ -80,6 +80,7 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         } else {
             logger.info("No User Profile Found, Launching Profile Window");
             getRoot().show();
+            submit.requestFocus();
         }
     }
 
@@ -108,6 +109,10 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         Telegram telegram;
 
         if (areUserCredentialsValid()) {
+            //errorMessage.setStyle("-fx-text-fill: green;");
+            //errorMessage.setText("Setting Up...");
+            setErrorMessageText("Setting Up...");
+
             address = new Address("");
 
             email = new Email("");
@@ -126,12 +131,21 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
                 logic.setUserProfile(user);
                 logger.info("User Data Set");
             } catch (IOException e) {
+                errorMessage.setText("Could Not Set Up User Profile");
                 logger.severe("Could Not Set User Data.");
             }
 
             close();
             mainWindow.start();
         }
+    }
+
+    /**
+     *
+     * @param message kkf
+     */
+    public void setErrorMessageText(String message) {
+        errorMessage.setText(message);
     }
 
     /**
@@ -148,21 +162,21 @@ public class ProfileSetUpWindow extends UiPart<Stage> {
         assert userName != null : "User Name Could Not Be Found";
         if (!Name.isValidName(userName)) {
             logger.info("Invalid Name Detected");
-            errorMessage.setText(INVALID_NAME_MESSAGE);
+            setErrorMessageText(INVALID_NAME_MESSAGE);
             return false;
         }
 
         assert userTelegram != null : "User Telegram Handle Could Not Be Found";
         if (!Telegram.isValidTelegram(userTelegram)) {
             logger.info("Invalid Telegram Handle Detected");
-            errorMessage.setText(INVALID_TELEGRAM_MESSAGE);
+            setErrorMessageText(INVALID_TELEGRAM_MESSAGE);
             return false;
         }
 
         assert userGitHub != null : "User GitHub Username Could Not Be Found";
         if (!Github.isValidGithub(userGitHub)) {
             logger.info("Invalid GitHub Username Detected");
-            errorMessage.setText(INVALID_GITHUB_MESSAGE);
+            setErrorMessageText(INVALID_GITHUB_MESSAGE);
             return false;
         }
 
