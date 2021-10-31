@@ -12,7 +12,7 @@
 
 <?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="PlannerMD" minWidth="1150" minHeight="650" onCloseRequest="#handleExit">
+         title="PlannerMD" minWidth="1500" minHeight="650" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/planner_md_icon.png" />
   </icons>
