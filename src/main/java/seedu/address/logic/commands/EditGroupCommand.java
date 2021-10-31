@@ -41,7 +41,9 @@ public class EditGroupCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GROUP + "w12-3 "
-            + PREFIX_YEAR + "AY20202021 ";
+            + PREFIX_REPO + "newreponame "
+            + PREFIX_YEAR + "AY2223S2 "
+            + PREFIX_TAG + "tApp2 ";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

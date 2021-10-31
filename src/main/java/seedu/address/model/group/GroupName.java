@@ -10,7 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GroupName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only an alphabet followed by 2 digits a - and another digit";
+            "Names should only contain an alphabet followed by 2 digits a - and another digit\n"
+            + "The format should be similar to \"W14-4\"";
 
     /*
      * The first character of the address must not be a whitespace,

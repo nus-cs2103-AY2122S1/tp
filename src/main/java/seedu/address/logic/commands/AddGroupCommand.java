@@ -20,9 +20,12 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to tApp. "
             + "Parameters: "
             + PREFIX_GROUP + "NAME "
+            + "[" + PREFIX_REPO + "REPO_NAME] "
+            + "[" + PREFIX_YEAR + "YEAR] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP + "W14-4 "
-            + PREFIX_YEAR + "AY20212022 "
+            + PREFIX_YEAR + "AY2122S1 "
             + PREFIX_REPO + "tp "
             + PREFIX_TAG + "tApp";
 

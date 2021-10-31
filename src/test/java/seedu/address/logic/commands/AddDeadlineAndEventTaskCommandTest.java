@@ -141,6 +141,11 @@ public class AddDeadlineAndEventTaskCommandTest {
         }
 
         @Override
+        public boolean hasAnotherStudent(Student student, Student toIgnore) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteStudent(Student target) {
             throw new AssertionError("This method should not be called.");
         }

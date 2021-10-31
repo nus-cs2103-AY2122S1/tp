@@ -117,6 +117,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAnotherStudent(Student student, Student toIgnore) {
+        requireAllNonNull(student, toIgnore);
+        return addressBook.hasAnotherStudent(student, toIgnore);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         requireNonNull(target);
         addressBook.deleteStudent(target);

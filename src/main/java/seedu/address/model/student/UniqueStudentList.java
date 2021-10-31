@@ -38,6 +38,14 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns true if the list contains an equivalent student as the given argument besides the one specified.
+     */
+    public boolean containsAnother(Student toCheck, Student toIgnore) {
+        requireAllNonNull(toCheck, toIgnore);
+        return internalList.stream().anyMatch(s -> s.isSameStudent(toCheck) && !s.equals(toIgnore));
+    }
+
+    /**
      * Adds a student to the list.
      * The student must not already exist in the list.
      */

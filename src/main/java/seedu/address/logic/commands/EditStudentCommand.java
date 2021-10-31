@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REPO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -38,6 +40,10 @@ public class EditStudentCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_STUDENTNUMBER + "STUDENT_NUMBER] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_REPO + "REPO_NAME] "
+            + "[" + PREFIX_USERNAME + "USERNAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@u.nus.edu"
@@ -74,7 +80,7 @@ public class EditStudentCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+        if (model.hasAnotherStudent(editedStudent, studentToEdit)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 

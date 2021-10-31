@@ -84,6 +84,12 @@ Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO N
 * GitHub link will only be shown if both `GITHUB USERNAME` and `REPO NAME` are specified.
 * `STUDENTNUMBER` must consist of a character, followed by 7 digits, followed by another character.
   Case of character does not matter.
+* `EMAIL` must be of the form `local-part@domain` where
+  * `local-part` should only contain alphanumeric characters and `+_.-`, and cannot start or end with `+_.-`.
+  * `domain` is made up of `domain labels` separated by periods and must:
+    - end with a `domain label` at least 2 characters long
+    - have each `domain label` start and end with alphanumeric characters
+    - have each `domain label` consist of alphanumeric characters, separated only by hyphens, if any
 * If only either `GITHUB USERNAME` or `REPO NAME` are specified, the data will still be saved but not shown.
 * If the same student is edited and the remaining empty data field is entered, a proper GitHub link will be shown.
 
@@ -97,7 +103,7 @@ Examples:
 
 Edits an existing student in the students list.
 
-Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK] [t/TAG]…​`
+Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO_NAME] [u/USERNAME] [t/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -105,6 +111,7 @@ Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK]
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
+* This command flags out missing fields first before ensuring the validity of the fields, and finally the index. (If an invalid index is entered with no or wrong fields, the command would not check the validity of the index)
 
 Examples:
 * `editStudent 1 s/A0221111L e/johndoe@u.nus.edu` Edits the student number and email address of the 1st student to be `A0221111L` and `johndoe@u.nus.edu` respectively.
@@ -202,20 +209,23 @@ Examples:
 
 ### Add a group: `addGroup`
 
-Adds a group to the group list. The group will only be initialized with a `GROUP NAME` and `TAG` if any.
+Adds a group to the group list. No members will be initialized. 
 
-Format: `addGroup g/GROUP NAME [t/TAG]...`
+Format: `addGroup g/GROUP_NAME [r/REPO_NAME] [y/YEAR] [t/TAG]...`
 
-* `GROUP NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit.
+* Similar to `addStudent`, GitHub link will only be shown if both `YEAR` and `REPO NAME` are specified, but either field will still be saved if specified alone.
+* `GROUP_NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit.
   The case of the character does not matter.
+* `YEAR` represents the year field used in CS2103 Github links and not an actual calendar year. Input is therefore flexible to allow for changes in year formatting 
 
 Examples:
-* `addGroup g/W14-4 t/tApp` adds group W14-4 to the list and displays a confirmation output with no GitHub link and
+* `addGroup g/W14-4 y/AY2122S1 r/tp t/tApp` adds group W14-4 to the list and displays a confirmation output with GitHub link and no
   group members
+* `addGroup g/f14-4 y/AY2122S1` adds group F14-4 to the list and displays a confirmation output with no GitHub link and group members
 
 ### Editing a group : `editGroup`
 
-Format: `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
+Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 
 * Edits the group at the specified `INDEX`. The index refers to the index number shown in the displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -224,6 +234,7 @@ Format: `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​`
 * When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
 * You can remove all the group’s tags by typing `t/` without
   specifying any tags after it.
+* Similiar to `editStudent` this command flags out missing fields first before ensuring the validity of the fields, and finally the index.
 
 Examples:
 * `editGroup 1 g/W14-4 r/tp` Edits the group name and repository name of the 1st group to be `W14-4` and `tp` respectively.
