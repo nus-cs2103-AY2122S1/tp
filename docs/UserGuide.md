@@ -71,11 +71,12 @@ Before diving into Socius and getting to know its features, lets get familiar wi
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: This symbol represents important information
-
-:exclamation: This symbol represents warnings or cautions
-
-:bulb: This symbol represents additional information such as tips
+| Symbol | Meaning |
+| :----: | ------- |
+| :information_source: | Important information |
+| :exclamation: | Warnings or cautions |
+| :bulb: | Additional information such as tips |
+| :wrench: | Help with common technical issues |
      
 </div>
 
@@ -92,7 +93,10 @@ Here is a quick start on how you can start using our app in your own computer.
 3. Move the file `Socius.jar` to a folder you want to use as the home folder for your Socius application.
 
 4. Double-click the file to start the app. A GUI similar to the one below should appear within a few seconds.
-   * If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
+
+<div markdown="block" class="alert alert-info"> :wrench: Help
+If double-click does not work, you can go to the terminal and type in `java -jar Socius.jar`. Ensure that the terminal is in the directory of the `Socius.jar` file.
+</div>
 
    ![Ui](images/Quickstart.png)
 
