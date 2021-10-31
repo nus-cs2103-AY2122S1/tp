@@ -9,13 +9,10 @@ import static seedu.tracker.commons.util.AppUtil.checkArgument;
  */
 public class Code {
     public static final String MESSAGE_CONSTRAINTS =
-            "Module codes should only contain letters and numbers, and it should not be blank";
+            "Module codes should start with 2-3 capital letters,\nfollowed by 4 numerical digits,\n" +
+                    "and end with an optional capital letter.\nIt also should not be blank";
 
-    /*
-     * The first character of the code must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[A-Z]{2,4}[0-9]{4}[A-Z]?";
 
     public final String value;
 
