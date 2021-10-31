@@ -8,7 +8,7 @@ import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_AM
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_FREQUENCY_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_TAG_TERM_INSURANCE;
-import static seedu.siasa.testutil.TypicalPersons.ALICE;
+import static seedu.siasa.testutil.TypicalContacts.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;

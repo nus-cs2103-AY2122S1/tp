@@ -2,7 +2,7 @@ package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
@@ -20,7 +20,7 @@ import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.commands.warnings.Warning;
 import seedu.siasa.model.Model;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
@@ -30,7 +30,7 @@ import seedu.siasa.model.tag.Tag;
 
 
 /**
- * Adds a person to the address book.
+ * Adds a policy to the address book.
  */
 public class AddPolicyCommand extends Command {
 
@@ -42,18 +42,18 @@ public class AddPolicyCommand extends Command {
             + PREFIX_EXPIRY + "EXPIRY "
             + PREFIX_PAYMENT + "PAYMENT_AMOUNT PAYMENT_FREQUENCY(OPT) NUM_OF_PAYMENTS(OPT) "
             + PREFIX_COMMISSION + "COMMISSION_PERCENTAGE NUM_OF_PAYMENTS_W_COMM "
-            + PREFIX_CLIENT_INDEX + "CLIENT_INDEX "
+            + PREFIX_CONTACT_INDEX + "CONTACT_INDEX "
             + PREFIX_TAG + "TAG... "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Life Policy "
             + PREFIX_EXPIRY + "2021-06-13 "
-            + PREFIX_PAYMENT + "1000 12 120"
-            + PREFIX_COMMISSION + "20 12"
-            + PREFIX_CLIENT_INDEX + "1"
+            + PREFIX_PAYMENT + "1000 12 120 "
+            + PREFIX_COMMISSION + "20 12 "
+            + PREFIX_CONTACT_INDEX + "1 "
             + PREFIX_TAG + "AIA";
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
-    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified user";
+    public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified contact";
     public static final String MESSAGE_PAST_EXPIRY_DATE = "Expiry Date is in the past.";
     public static final String MESSAGE_SIMILAR_POLICY = "A similar policy: %1$s already exists in the address book.";
 
@@ -82,10 +82,10 @@ public class AddPolicyCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Contact> lastShownList = model.getFilteredContactList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
         if (!CoverageExpiryDate.isFutureExpiryDate(coverageExpiryDate.value)) {
@@ -95,7 +95,7 @@ public class AddPolicyCommand extends Command {
             }
         }
 
-        Person owner = lastShownList.get(index.getZeroBased());
+        Contact owner = lastShownList.get(index.getZeroBased());
 
         Policy toAdd = new Policy(title, paymentStructure, coverageExpiryDate, commission, owner, tagList);
 

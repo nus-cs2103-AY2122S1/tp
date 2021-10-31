@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import seedu.siasa.logic.commands.AddCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
-import seedu.siasa.model.person.Address;
-import seedu.siasa.model.person.Email;
-import seedu.siasa.model.person.Name;
-import seedu.siasa.model.person.Person;
-import seedu.siasa.model.person.Phone;
+import seedu.siasa.model.contact.Address;
+import seedu.siasa.model.contact.Email;
+import seedu.siasa.model.contact.Name;
+import seedu.siasa.model.contact.Contact;
+import seedu.siasa.model.contact.Phone;
 import seedu.siasa.model.tag.Tag;
 
 /**
@@ -44,9 +44,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Contact contact = new Contact(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(contact);
     }
 
     /**

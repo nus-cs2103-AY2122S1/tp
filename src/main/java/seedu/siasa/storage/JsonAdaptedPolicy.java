@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.siasa.commons.exceptions.IllegalValueException;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
@@ -33,7 +33,7 @@ public class JsonAdaptedPolicy {
     private final JsonAdaptedPaymentStructure paymentStructure;
     private final String coverageExpiryDate;
     private final JsonAdaptedCommission commission;
-    private final JsonAdaptedPerson owner;
+    private final JsonAdaptedContact owner;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -44,7 +44,7 @@ public class JsonAdaptedPolicy {
                              @JsonProperty("paymentStructure") JsonAdaptedPaymentStructure paymentStructure,
                              @JsonProperty("coverageExpiryDate") String coverageExpiryDate,
                              @JsonProperty("commission") JsonAdaptedCommission commission,
-                             @JsonProperty("owner") JsonAdaptedPerson owner,
+                             @JsonProperty("owner") JsonAdaptedContact owner,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.title = title;
         this.paymentStructure = paymentStructure;
@@ -64,22 +64,22 @@ public class JsonAdaptedPolicy {
         paymentStructure = new JsonAdaptedPaymentStructure(source.getPaymentStructure());
         coverageExpiryDate = source.getCoverageExpiryDate().toString();
         commission = new JsonAdaptedCommission(source.getCommission());
-        owner = new JsonAdaptedPerson(source.getOwner());
+        owner = new JsonAdaptedContact(source.getOwner());
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
 
-    public JsonAdaptedPerson getOwner() {
+    public JsonAdaptedContact getOwner() {
         return owner;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Policy} object.
+     * Converts this Jackson-friendly adapted policy object into the model's {@code Policy} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted policy.
      */
-    public Policy toModelType(Person policyOwner) throws IllegalValueException {
+    public Policy toModelType(Contact policyOwner) throws IllegalValueException {
         final List<Tag> policyTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             policyTags.add(tag.toModelType());
@@ -125,7 +125,7 @@ public class JsonAdaptedPolicy {
 
         if (policyOwner == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Contact.class.getSimpleName()));
         }
 
         final Set<Tag> modelTags = new HashSet<>(policyTags);

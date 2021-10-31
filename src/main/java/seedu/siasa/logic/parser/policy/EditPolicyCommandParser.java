@@ -2,7 +2,7 @@ package seedu.siasa.logic.parser.policy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
@@ -17,13 +17,13 @@ import seedu.siasa.logic.parser.ParserUtil;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditPolicyCommand object
  */
 public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditPolicyCommand
+     * and returns an EditPolicyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditPolicyCommand parse(String args) throws ParseException {
@@ -35,7 +35,7 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
                         PREFIX_EXPIRY,
                         PREFIX_PAYMENT,
                         PREFIX_COMMISSION,
-                        PREFIX_CLIENT_INDEX);
+                    PREFIX_CONTACT_INDEX);
 
         Index index;
 
@@ -69,9 +69,9 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
                         argMultimap.getValue(PREFIX_COMMISSION).get()));
             }
         }
-        if (argMultimap.getValue(PREFIX_CLIENT_INDEX).isPresent()) {
+        if (argMultimap.getValue(PREFIX_CONTACT_INDEX).isPresent()) {
             editPolicyDescriptor.setOwnerIndex(ParserUtil.parseIndex(
-                    argMultimap.getValue(PREFIX_CLIENT_INDEX).get()));
+                    argMultimap.getValue(PREFIX_CONTACT_INDEX).get()));
         }
 
         if (!editPolicyDescriptor.isAnyFieldEdited()) {

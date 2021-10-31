@@ -1,8 +1,8 @@
 package seedu.siasa.logic.commands;
 
 import static seedu.siasa.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.siasa.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.siasa.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.siasa.logic.commands.CommandTestUtil.showContactAtIndex;
+import static seedu.siasa.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showContactAtIndex(model, INDEX_FIRST_CONTACT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

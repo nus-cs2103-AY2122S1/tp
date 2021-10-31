@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.exceptions.DuplicatePolicyException;
 import seedu.siasa.model.policy.exceptions.PolicyNotFoundException;
 
@@ -83,7 +83,7 @@ public class UniquePolicyList implements Iterable<Policy> {
     /**
      * Removes the policies belonging to the {@code owner} from the list.
      */
-    public void removeBelongingTo(Person owner) {
+    public void removeBelongingTo(Contact owner) {
         requireNonNull(owner);
         internalList.removeIf(policy -> policy.getOwner().equals(owner));
     }

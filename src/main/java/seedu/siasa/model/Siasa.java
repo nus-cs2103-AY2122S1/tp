@@ -9,18 +9,18 @@ import java.util.Objects;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
-import seedu.siasa.model.person.Person;
-import seedu.siasa.model.person.UniquePersonList;
+import seedu.siasa.model.contact.Contact;
+import seedu.siasa.model.contact.UniqueContactList;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.UniquePolicyList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameContact comparison)
  */
 public class Siasa implements ReadOnlySiasa {
 
-    private final UniquePersonList persons;
+    private final UniqueContactList contacts;
     private final UniquePolicyList policies;
 
     /*
@@ -31,7 +31,7 @@ public class Siasa implements ReadOnlySiasa {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        contacts = new UniqueContactList();
         policies = new UniquePolicyList();
     }
 
@@ -39,7 +39,7 @@ public class Siasa implements ReadOnlySiasa {
     }
 
     /**
-     * Creates an SIASA using the Persons and Policies in the {@code toBeCopied}
+     * Creates an SIASA using the Contacts and Policies in the {@code toBeCopied}
      */
     public Siasa(ReadOnlySiasa toBeCopied) {
         this();
@@ -54,7 +54,7 @@ public class Siasa implements ReadOnlySiasa {
     public void resetData(ReadOnlySiasa newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setContacts(newData.getContactList());
         setPolicies(newData.getPolicyList());
     }
 
@@ -66,60 +66,61 @@ public class Siasa implements ReadOnlySiasa {
         this.setPolicies(newData.getPolicyList());
     }
 
-    //// person-level operations
+    //// contact-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in SIASA.
+     * Returns true if a contact with the same identity as {@code contact} exists in SIASA.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return contacts.contains(contact);
     }
 
     /**
-     * Returns true if a person with a similar full name as {@code person}
+     * Returns true if a contact with a similar full name as {@code contact}
      * exists in SIASA. Similar is defined as full names having an edit distance of zero
      * or one (case insensitive).
      */
-    public Optional<Person> getSimilarPerson(Person person) {
-        requireNonNull(person);
-        return persons.getSimilar(person);
+    public Optional<Contact> getSimilarContact(Contact contact) {
+        requireNonNull(contact);
+        return contacts.getSimilar(contact);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a contact to the address book.
+     * The contact must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addContact(Contact p) {
+        contacts.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given contact {@code target} in the list with {@code editedContact}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The contact identity of {@code editedContact} must not be the same as another
+     * existing contact in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setContact(Contact target, Contact editedContact) {
+        requireNonNull(editedContact);
 
-        persons.setPerson(target, editedPerson);
+        contacts.setContact(target, editedContact);
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the contact list with {@code contacts}.
+     * {@code contacts} must not contain duplicate contacts.
      */
-    private void setPersons(List<Person> persons) {
+    private void setContacts(List<Contact> contacts) {
         // Note: Have to be careful that we do not orphan associated policies
-        this.persons.setPersons(persons);
+        this.contacts.setContacts(contacts);
     }
 
     /**
      * Removes {@code key} from this {@code Siasa} and removes associated policies.
      * {@code key} must exist in SIASA.
      */
-    public void removePersonAndAssociatedPolicies(Person key) {
-        persons.remove(key);
+    public void removeContactAndAssociatedPolicies(Contact key) {
+        contacts.remove(key);
         policies.removeBelongingTo(key);
     }
 
@@ -127,17 +128,17 @@ public class Siasa implements ReadOnlySiasa {
      * Removes all policies associated with {@code key}.
      * {@code key} must exist in SIASA.
      */
-    public void removePoliciesBelongingTo(Person key) {
+    public void removePoliciesBelongingTo(Contact key) {
         policies.removeBelongingTo(key);
     }
 
-    public Map<Person, Integer> getNumberPoliciesPerPerson() {
-        HashMap<Person, Integer> treeMap = new HashMap<>();
-        persons.forEach(person -> {
-            treeMap.put(person, 0);
+    public Map<Contact, Integer> getNumberPoliciesPerContact() {
+        HashMap<Contact, Integer> treeMap = new HashMap<>();
+        contacts.forEach(contact -> {
+            treeMap.put(contact, 0);
         });
         policies.forEach(policy -> {
-            Person owner = policy.getOwner();
+            Contact owner = policy.getOwner();
             int currentCount = treeMap.get(owner);
             treeMap.put(owner, currentCount + 1);
         });
@@ -201,13 +202,13 @@ public class Siasa implements ReadOnlySiasa {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons; "
+        return contacts.asUnmodifiableObservableList().size() + " persons; "
                 + policies.asUnmodifiableObservableList().size() + " policies;";
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Contact> getContactList() {
+        return contacts.asUnmodifiableObservableList();
     }
 
     @Override
@@ -219,12 +220,12 @@ public class Siasa implements ReadOnlySiasa {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Siasa // instanceof handles nulls
-                && persons.equals(((Siasa) other).persons)
+                && contacts.equals(((Siasa) other).contacts)
                 && policies.equals(((Siasa) other).policies));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, policies);
+        return Objects.hash(contacts, policies);
     }
 }

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.UserPrefs;
-import seedu.siasa.model.person.Person;
-import seedu.siasa.testutil.PersonBuilder;
+import seedu.siasa.model.contact.Contact;
+import seedu.siasa.testutil.ContactBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -26,20 +26,20 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_newContact_success() {
+        Contact validContact = new ContactBuilder().build();
 
         Model expectedModel = new ModelManager(model.getSiasa(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addContact(validContact);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddCommand(validContact), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, validContact), expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getSiasa().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateContact_throwsCommandException() {
+        Contact contactInList = model.getSiasa().getContactList().get(0);
+        assertCommandFailure(new AddCommand(contactInList), model, AddCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
 }

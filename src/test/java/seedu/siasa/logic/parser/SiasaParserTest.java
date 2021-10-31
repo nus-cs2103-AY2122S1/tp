@@ -17,7 +17,7 @@ import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
-import seedu.siasa.model.person.NameContainsKeywordsPredicate;
+import seedu.siasa.model.contact.NameContainsKeywordsPredicate;
 
 public class SiasaParserTest {
 

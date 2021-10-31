@@ -14,7 +14,7 @@ import java.util.Map;
 import javafx.collections.ObservableList;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
 
@@ -36,19 +36,19 @@ public class DownloadCommand extends Command {
 
         int totalCommission = model.getTotalCommission();
 
-        Map<Person, Integer> numberPoliciesPerPerson = model.getNumberPoliciesPerPerson();
+        Map<Contact, Integer> numberPoliciesPerContact = model.getNumberPoliciesPerContact();
 
-        List<Person> modifiablePersonList = new ArrayList<>(model.getFilteredPersonList());
+        List<Contact> modifiableContactList = new ArrayList<>(model.getFilteredContactList());
 
         // TODO: Abstract out when comparators for sorting policies are finished.
-        modifiablePersonList.sort(new Comparator<Person>() {
+        modifiableContactList.sort(new Comparator<Contact>() {
             @Override
-            public int compare(Person personA, Person personB) {
-                model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(personA));
+            public int compare(Contact contactA, Contact contactB) {
+                model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contactA));
                 ObservableList<Policy> personAPolicies = model.getFilteredPolicyList();
                 int commissionFromPersonA = getCommissionFromPolicyList(personAPolicies);
 
-                model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(personB));
+                model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(contactB));
                 ObservableList<Policy> personBPolicies = model.getFilteredPolicyList();
                 int commissionFromPersonB = getCommissionFromPolicyList(personBPolicies);
 
@@ -59,7 +59,7 @@ public class DownloadCommand extends Command {
         });
 
         List<String> listStringForTxt = stringListBuilderForTxt(
-                totalCommission, modifiablePersonList, numberPoliciesPerPerson);
+                totalCommission, modifiableContactList, numberPoliciesPerContact);
 
         try {
             writeToTxt(listStringForTxt);
@@ -82,32 +82,32 @@ public class DownloadCommand extends Command {
         return (int) total;
     }
 
-    private float getAvgPoliciesPerClient(Map<Person, Integer> numberPoliciesPerPerson) {
-        int countPersons = numberPoliciesPerPerson.size();
-        int countPolicies = numberPoliciesPerPerson.values()
+    private float getAvgPoliciesPerContact(Map<Contact, Integer> numberPoliciesPerContact) {
+        int countContacts = numberPoliciesPerContact.size();
+        int countPolicies = numberPoliciesPerContact.values()
                 .stream().mapToInt(Integer::intValue).sum();
-        return (float) countPolicies / countPersons;
+        return (float) countPolicies / countContacts;
     }
 
     private List<String> stringListBuilderForTxt(
-            int totalCommission, List<Person> sortedPersons, Map<Person, Integer> numberPoliciesPerPerson) {
+        int totalCommission, List<Contact> sortedContacts, Map<Contact, Integer> numberPoliciesPerContact) {
         List<String> stringList = new ArrayList<>();
 
         stringList.add("Statistics for " + CURRENT_DATE + "\n");
-        stringList.add("Most premium clients:\n" + TITLE_UNDERLINE);
-        for (Person person : sortedPersons) {
-            stringList.add(person.toString());
+        stringList.add("Most premium contacts:\n" + TITLE_UNDERLINE);
+        for (Contact contact : sortedContacts) {
+            stringList.add(contact.toString());
         }
         stringList.add("\n");
 
-        stringList.add("Number of policies per client:\n" + TITLE_UNDERLINE);
-        numberPoliciesPerPerson.forEach((person, count) -> {
-            stringList.add(String.format("%s: %d policies", person.getName().fullName, count));
+        stringList.add("Number of policies per contact:\n" + TITLE_UNDERLINE);
+        numberPoliciesPerContact.forEach((contact, count) -> {
+            stringList.add(String.format("%s: %d policies", contact.getName().fullName, count));
         });
         stringList.add("\n");
 
-        stringList.add("Average number of policies per client: "
-                + String.format("%.2f", getAvgPoliciesPerClient(numberPoliciesPerPerson)));
+        stringList.add("Average number of policies per contact: "
+                + String.format("%.2f", getAvgPoliciesPerContact(numberPoliciesPerContact)));
 
         stringList.add("Total Commission: " + centsToDollars(totalCommission));
         return stringList;

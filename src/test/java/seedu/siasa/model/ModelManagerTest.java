@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.testutil.Assert.assertThrows;
-import static seedu.siasa.testutil.TypicalPersons.ALICE;
+import static seedu.siasa.testutil.TypicalContacts.ALICE;
 import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
 import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.siasa.commons.core.GuiSettings;
-import seedu.siasa.model.person.NameContainsKeywordsPredicate;
+import seedu.siasa.model.contact.NameContainsKeywordsPredicate;
 
 public class ModelManagerTest {
 
@@ -75,24 +75,24 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasContact_nullContact_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasContact(null));
     }
 
     @Test
-    public void hasPerson_personNotInSiasa_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasContact_contactNotInSiasa_returnsFalse() {
+        assertFalse(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasPerson_personInSiasa_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasContact_contactInSiasa_returnsTrue() {
+        modelManager.addContact(ALICE);
+        assertTrue(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
 
     @Test
@@ -141,7 +141,7 @@ public class ModelManagerTest {
 
         // different filteredPersonList -> returns false
         String[] personKeywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(personKeywords)));
+        modelManager.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(personKeywords)));
         assertFalse(modelManager.equals(new ModelManager(siasa, userPrefs)));
 
         // different filteredPolicyList -> returns false

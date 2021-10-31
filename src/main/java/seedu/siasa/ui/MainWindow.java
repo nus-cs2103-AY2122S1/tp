@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ContactListPanel contactListPanel;
     private PolicyListPanel policyListPanel;
     private ResultDisplay resultDisplay;
     private GuideWindow guideWindow;
@@ -43,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contactsPanelPlaceholder;
 
     @FXML
     private StackPane policyListPanelPlaceholder;
@@ -114,8 +114,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() throws CommandException, ParseException {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        contactsPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
 
         policyListPanel = new PolicyListPanel(logic.getFilteredPolicyList());
         policyListPanelPlaceholder.getChildren().add(policyListPanel.getRoot());
@@ -183,8 +183,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ContactListPanel getContactListPanel() {
+        return contactListPanel;
     }
 
     public PolicyListPanel getPolicyListPanel() {

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.tag.Tag;
 
 /**
@@ -23,13 +23,13 @@ public class Policy {
     private final Set<Tag> tags = new HashSet<>();
 
     // Policy should always have an owner
-    private final Person owner;
+    private final Contact owner;
 
     /**
      * Every field must be present and not null.
      */
     public Policy(Title title, PaymentStructure paymentStructure, CoverageExpiryDate coverageExpiryDate,
-                  Commission commission, Person owner, Set<Tag> tags) {
+                  Commission commission, Contact owner, Set<Tag> tags) {
         requireAllNonNull(title, paymentStructure, coverageExpiryDate, commission, owner, tags);
         this.title = title;
         this.paymentStructure = paymentStructure;
@@ -55,7 +55,7 @@ public class Policy {
         return commission;
     }
 
-    public Person getOwner() {
+    public Contact getOwner() {
         return owner;
     }
 
@@ -79,7 +79,7 @@ public class Policy {
         // Note the use of isSamePerson instead of equals
         return otherPolicy != null
                 && otherPolicy.getTitle().equals(getTitle())
-                && otherPolicy.getOwner().isSamePerson(getOwner());
+                && otherPolicy.getOwner().isSameContact(getOwner());
     }
 
     /**
@@ -88,7 +88,7 @@ public class Policy {
      */
     public boolean isSimilarPolicy(Policy otherPolicy) {
         return otherPolicy != null
-                && otherPolicy.getOwner().isSamePerson(getOwner())
+                && otherPolicy.getOwner().isSameContact(getOwner())
                 && otherPolicy.getTitle().isSimilarTo(getTitle());
     }
 
@@ -108,7 +108,7 @@ public class Policy {
                 && otherPolicy.getPaymentStructure().equals(getPaymentStructure())
                 && otherPolicy.getCommission().equals(getCommission())
                 && otherPolicy.getCoverageExpiryDate().equals(getCoverageExpiryDate())
-                && otherPolicy.getOwner().isSamePerson(getOwner())
+                && otherPolicy.getOwner().isSameContact(getOwner())
                 && otherPolicy.getTags().equals(getTags());
     }
 

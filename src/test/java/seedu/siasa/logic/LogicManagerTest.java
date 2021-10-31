@@ -1,14 +1,14 @@
 package seedu.siasa.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
 import static seedu.siasa.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.siasa.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.siasa.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.siasa.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.siasa.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.siasa.testutil.Assert.assertThrows;
-import static seedu.siasa.testutil.TypicalPersons.AMY;
+import static seedu.siasa.testutil.TypicalContacts.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,19 +18,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.siasa.logic.commands.CommandResult;
-import seedu.siasa.logic.commands.client.AddClientCommand;
-import seedu.siasa.logic.commands.client.ListClientCommand;
+import seedu.siasa.logic.commands.contact.AddContactCommand;
+import seedu.siasa.logic.commands.contact.ListContactCommand;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.UserPrefs;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.storage.JsonSiasaStorage;
 import seedu.siasa.storage.JsonUserPrefsStorage;
 import seedu.siasa.storage.StorageManager;
-import seedu.siasa.testutil.PersonBuilder;
+import seedu.siasa.testutil.ContactBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -58,14 +58,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "deleteclient 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = "deletecontact 9";
+        assertCommandException(deleteCommand, MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListClientCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListClientCommand.MESSAGE_SUCCESS, model);
+        String listCommand = ListContactCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ListContactCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -80,18 +80,18 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddClientCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        String addCommand = AddContactCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Contact expectedContact = new ContactBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addContact(expectedContact);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredContactList().remove(0));
     }
 
     @Test
