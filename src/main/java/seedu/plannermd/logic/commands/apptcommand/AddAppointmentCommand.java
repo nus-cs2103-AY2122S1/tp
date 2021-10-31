@@ -48,8 +48,8 @@ public class AddAppointmentCommand extends AppointmentCommand {
             + "2. Day must be between 1-31 (0 in front of single digit is optional)\n"
             + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "4. Year must be 4 characters.\n"
-            + "5. Hour must be between 0-23 (0 in front of single digit is optional)\n"
-            + "6. Minute must be between 0-59 (0 in front of single digit is optional).";
+            + "5. Hour must be between 0-23\n"
+            + "6. Minute must be between 0-59.";
 
     private Index patientIndex;
     private Index doctorIndex;

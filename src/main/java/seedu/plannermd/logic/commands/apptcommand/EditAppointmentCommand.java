@@ -48,8 +48,8 @@ public class EditAppointmentCommand extends AppointmentCommand {
             + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
             + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "3. Year must be 4 characters\n"
-            + "4. Hour must be between 0-23 (0 in front of single digit is optional)\n"
-            + "5. Minute must be between 0-59 (0 in front of single digit is optional).";
+            + "4. Hour must be between 0-23\n"
+            + "5. Minute must be between 0-59.";
 
     private final Index index;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
