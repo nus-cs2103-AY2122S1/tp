@@ -20,7 +20,7 @@ public class MarkCommand extends MarkingCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the applicants identified by the index numbers used in the displayed person list as Done.\n"
-            + "Parameters: INDEX... (must be positive integers)\n"
+            + "Parameters: INDEX...\n"
             + "Example: " + COMMAND_WORD + " 1 4 7";
 
     public static final String MESSAGE_MARKED_PERSON_SUCCESS = "Marked Person(s) as Done: \n%1$s";
