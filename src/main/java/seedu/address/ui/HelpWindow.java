@@ -86,8 +86,8 @@ public class HelpWindow extends ExternalWindow {
         helpMessage.setText(HELP_MESSAGE);
     }
 
-    private void setColumnProperties(TableColumn<CommandSummary, String> tableCol, String colName,
-                                     double colWidth) {
+    private void setColumnProperties(TableColumn<CommandSummary, String> tableCol,
+            String colName, double colWidth) {
         tableCol.setCellFactory(getTableColumnTableCellCallback(tableCol));
         tableCol.setCellValueFactory(new PropertyValueFactory<>(colName));
         tableCol.prefWidthProperty().bind(table.widthProperty().multiply(colWidth));
