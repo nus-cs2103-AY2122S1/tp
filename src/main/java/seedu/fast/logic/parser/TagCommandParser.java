@@ -40,12 +40,14 @@ public class TagCommandParser implements Parser<TagCommand> {
         try {
             if (argMultimap.getValue(PREFIX_ADD_TAG).isPresent()) {
                 for (String str: argMultimap.getAllValues(PREFIX_ADD_TAG)) {
+                    checkIfSpecialTag(str);
                     addTags.add(Tag.createTag(str));
                 }
             }
 
             if (argMultimap.getValue(PREFIX_DELETE_TAG).isPresent()) {
                 for (String str: argMultimap.getAllValues(PREFIX_DELETE_TAG)) {
+                    checkIfSpecialTag(str);
                     deleteTags.add(Tag.createTag(str));
                 }
             }
@@ -53,8 +55,13 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-
         return new TagCommand(index, addTags, deleteTags);
+    }
+
+    private static void checkIfSpecialTag(String tagName) throws ParseException {
+        if (Tag.isSpecialTag(tagName)) {
+            throw new ParseException(Tag.MESSAGE_SPECIAL_TAG_ENTERED);
+        }
     }
 
 }

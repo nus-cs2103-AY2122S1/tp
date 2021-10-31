@@ -222,8 +222,30 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * Can take any value (should not be *blank*)
 
 
-#### `COMMAND`
-* The type of `COMMAND` parameters available in FAST:
+#### `DATE`
+* The date of an appointment with your client
+* Should be in this format: `yyyy-mm-dd` 
+  * e.g. `2023-05-15` 
+* Should be a valid date (cannot be a date in the past) where:
+  * `yyyy` (year): should be a positive 4-digit number 
+  * `mm` (month): should be a valid calendar month between 01 and 12
+  * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
+
+
+#### `EMAIL`
+* The email address of your client
+* Should be in this format: `local-part@domain`
+* `local-part`: 
+  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?\{\}\|~^.-`).
+  * should not start and end with special characters,
+* `domain`: 
+  * must be at least **2** characters long. 
+  * each domain label must start and end with alphanumeric characters
+  * each domain label is separated using hyphens (if any)
+
+  
+#### `HELP_TOPIC`
+* The Help topics available in FAST:
   * `Quick Start`
   * `Add`
   * `Appointment`
@@ -243,28 +265,6 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * `Investment Plan Tag`
   * `Priority Tag`
   * `Misc`
-
-
-#### `DATE`
-* The date of an appointment with your client
-* Should be in this format: `yyyy-mm-dd` 
-  * e.g. `2023-05-15` 
-* Should be a valid date (cannot be a date in the past) where:
-  * `yyyy` (year): should be a positive 4-digit number 
-  * `mm` (month): should be a valid calendar month between 01 and 12
-  * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
-
-
-#### `EMAIL`
-* The email address of your client
-* Should be in this format: `local-part@domain`
-* `local-part`: 
-  * should only contain *alphanumeric characters* and these *special characters* excluding parentheses (!#$%&'*+/=?{|}~^.-`).
-  * should not start and end with special characters,
-* `domain`: 
-  * must be at least **2** characters long. 
-  * each domain label must start and end with alphanumeric characters
-  * each domain label is separated using hyphens (if any)
 
 
 #### `INDEX`
@@ -378,13 +378,15 @@ This can be used if the client's information has changed, or if you entered an i
 
 * Edits the client at the specified `INDEX`
 
-<div markdown="block" class="alert alert-info"> :information_source: 
+<div markdown="block" class="alert alert-info"> :information_source:
+
 * Only the edited fields will be updated to the input values, while the unedited values are unchanged.
 * You can remove all the client’s tags by typing `t/` without specifying any tags after it.
 * For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
 </div>
 
-<div markdown="span" class="alert alert-warning"> :exclamation: 
+<div markdown="span" class="alert alert-warning"> :exclamation:
+
 * At least one of the optional fields must be provided.
 * When editing tags, all existing tags of the client will be replaced with the new tags.
 </div>
@@ -445,11 +447,11 @@ This CANNOT be undone!
 
 #### Adding a remark to your client: `rmk`
 
-You can add a remark to an existing client in FAST. <br>
+You can add a remark to an existing client in FAST, or update the current remark if they already have one. <br>
 This is useful for adding additional client notes such as their preferred meeting timing, allowing you to better serve your clients!
 
-<div markdown="block" class="alert alert-info">
-:information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
+<div markdown="block" class="alert alert-info"> :information_source: 
+Remarks should be used to annotate contacts with longer and more specific things compared to tags,
 which should mostly be one or two words.<br>
 </div>
 
@@ -469,8 +471,13 @@ To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
 * `rmk 1 r/loves to eat pizza` adds a remark `loves to eat pizza` to the first client.
 ![result for `rmk 1 r/loves to eat pizza`](images/remarkResult.png)
 * `rmk 1` removes the remark from the first client.<br>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Try to add remarks with specific keywords so that it is easier to [search](#searching-for-clients-find) for them.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Adding a remark will overwrite any previous remarks that were made for the client!
 </div>
 
 #### Appointments
@@ -589,23 +596,16 @@ This also allows you to keep track of the number of completed appointments with 
 ![result for `done 1`](images/appointmentDone.PNG)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
-
-<div markdown="span" class="alert alert-primary">:bulb: Tip:
-If you have accidentally marked an appointment as completed, fret not! You can always undo it! 
-<br>Refer to [Undo marking of completed appointment](#undo-marking-of-completed-appointment-ua) for more information.
-</div>
-
-
-<br>
+  
 
 ##### Undo marking of completed appointment: `ua`
 
-You can unmark the appointment with your client as completed. <br>
-This also allows you to undo your mistake if you have accidentally marked an appointment as completed.
+You can reduce the appointment count of your client as needed. <br>
 
 **Format**: `ua INDEX`
-* Decreases the completed appointment count with the client at the specified `INDEX` if the appointment does not exist.
-* The current appointment count will have to be greater than 0!
+* Decreases the completed appointment count of the client at the specified `INDEX` by 1, if no appointment is 
+  currently scheduled with the client.
+* The current appointment count has to be greater than 0.
 
 **Parameter**:
 * [`INDEX`](#index)
@@ -795,10 +795,10 @@ In the help window, you can view all the command usages built-in right into FAST
 
 ![help window](images/helpWindow.png)
 
-**Format**: `help [COMMAND]`
+**Format**: `help [HELP_TOPIC]`
 
 **Parameters**:
-* [`COMMAND`](#command)
+* [`HELP_TOPIC`](#help-topics)
 
 **Examples**:
 * `help` will just open the default help window
@@ -917,7 +917,7 @@ Action | Format, Examples
 
 Action|Format, Examples
 --------|------------------
-**Help** | `help [COMMAND]` <br> e.g. `help add`
+**Help** | `help [HELP_TOPIC]` <br> e.g. `help add`
 **Clear** | `clear`
 **Exit** | `exit`
 
