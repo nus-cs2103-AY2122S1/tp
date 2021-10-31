@@ -93,7 +93,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
 
-        appMenu = new AppMenu(commandBox);
+        appMenu = new AppMenu(this::executeCommand);
 
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), commandBox);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());

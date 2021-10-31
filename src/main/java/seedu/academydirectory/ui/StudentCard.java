@@ -28,6 +28,7 @@ public class StudentCard extends UiPart<Region> {
      * or an exception will be thrown by JavaFX during runtime.
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AcademyDirectory level 4</a>
+     * TODO: Change view layout of student card later
      */
     private final Student student;
 
@@ -69,15 +70,18 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().toString());
+        phone.setVisible(false);
         email.setText(student.getEmail().value);
+        email.setVisible(false);
         studioRecord.setText(student.getStudioRecord().toString());
         telegram.setText(student.getTelegram().value);
+        telegram.setVisible(false);
         assessment.setText(student.getAssessment().toString());
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         // Studio Record, Assessment, and Telegram will be removed for better aesthetics
-        container.getChildren().removeAll(studioRecord, assessment, telegram);
+        container.getChildren().removeAll(studioRecord, assessment);
         image.setImage(new Image("/images/student.png"));
         this.commandBox = commandBox;
     }
@@ -108,5 +112,8 @@ public class StudentCard extends UiPart<Region> {
         logger.info("Item selected");
         String commandEquivalent = "view " + this.displayedIndex;
         commandBox.execute(commandEquivalent);
+        phone.setVisible(true);
+        email.setVisible(true);
+        telegram.setVisible(true);
     }
 }
