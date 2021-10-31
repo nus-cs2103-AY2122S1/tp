@@ -172,7 +172,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void initKeyPressEventHandler(CommandBox commandBox) {
-        // Add handler to request focus on commandbox when user wants to type
+        // Add handler to request focus on commandBox when user wants to type
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (commandBox.getCommandTextField().isFocused()) {
                 return; // Don't filter if already in focus

@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandResult.DisplayType.CALENDAR;
 
 /**
- * Displays the user's weekly schedule.
+ * Displays the user's calendar.
  */
 public class CalendarCommand extends Command {
 

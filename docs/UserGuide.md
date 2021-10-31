@@ -165,6 +165,7 @@ Shortcut: <kbd>F1</kbd>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
+Executing any of the commands in this section will bring you to the students interface. Any command from other sections, such as `day` or `tag`, will bring you right out.
 
 A student must have the following essential fields:
 * Name
@@ -366,9 +367,14 @@ Optional fields for a **recurring** lesson is:
 * End date
 * Cancelled dates
 
-TAB helps to prevent scheduling mistakes like having two lessons at the same time by ensuring that lessons never overlap.
-Additionally, we will provide a notice if you schedule a lesson outside the usual 0800-2200 hours, 
-just to confirm that it was indeed intentional.
+TAB has features to help to prevent scheduling mistakes.
+For example, we help you avoid mistakes scheduling two lessons at the same slots by ensuring that lessons never overlap.
+Additionally, we help to avoid accidentally scheduling lessons outside working hours.
+
+In the future, we intend to add some nice-to-have features that will allow you to customise your working hours,
+as well as specify minimum/maximum lesson durations so that accidents like mistyping a 10-minute lesson won't happen.
+Additionally, we will allow you to toggle these checks on and off, just in case you don't want them.
+Do look forward to these features!
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note:**<br>
@@ -569,7 +575,7 @@ the fees of these lessons will not be deducted for you. Same for shifting start 
 
 ### Managing Your Schedule
 
-This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
+This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -677,15 +683,15 @@ Clears all entries from TAB.
 
 Format: `clear`
 
-#### Viewing all tags: `tag`
+#### Viewing all tags: `tags`
 
 Shows all the tags that you have created together with the number of students labelled with each tag.
 
-Format: `tag`
+Format: `tags`
 
 Shortcut: <kbd>F4</kbd>
 
-![tag](images/tag.png)
+![tags](images/tag.png)
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
 <div style="page-break-after: always;"></div>
@@ -778,19 +784,19 @@ Action | Format, Examples
 **Delete Student** | `delete INDEX`<br><br> e.g. `delete 3`
 **List Students** | `list`
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
-**View Tags** | `tag`
+**View Tags** | `tags`
 **Add Lesson** | `ladd INDEX [recurring/[END_DATE]] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [f/OUTSTANDING_FEES] [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math rates/50`
 **Edit Lesson** | `ledit INDEX LESSON_INDEX [recurring/[END_DATE]] [date/dd MMM yyyy] [time/HHmm-HHmm] [subject/SUBJECT] [rates/LESSON_RATES] [f/OUTSTANDING_FEES] [hw/HOMEWORK]… [cancel/CANCEL_DATE]… [uncancel/UNCANCEL_DATE]…​`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **Pay Lesson** | `paid INDEX LESSON_INDEX amt/AMOUNT_PAID`
 **View Calendar** | `calendar`
-**View Schedule of Particular Day** | `day`
-**View Schedule of Today** | `today`
-**View Schedule of Week** | `week`
-**View Schedule of Month** | `month`
-**View Schedule of Year** | `year`
-**Navigate forward in Schedule** | `next`
-**Navigate backward in Schedule** | `back`
+**View Daily Calendar** | `day`
+**View Weekly Calendar** | `week`
+**View Monthly Calendar** | `month`
+**View Yearly Calendar** | `year`
+**Navigate to Today** | `today`
+**Navigate forward in Calendar** | `next`
+**Navigate backward in Calendar** | `back`
 **View Reminders** | `remind`
 **Clear** |`clear`
 **Undo** | `undo`
