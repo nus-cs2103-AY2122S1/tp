@@ -97,24 +97,6 @@ public class AddressBookParser {
         case AliasCommand.COMMAND_WORD:
             return new AliasCommandParser(this).parse(arguments);
 
-        default:
-            boolean isTwoWordCommand = arguments.length() > 0
-                    && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
-
-            if (isTwoWordCommand) {
-                return parseTwoWordCommand(commandWord, arguments);
-            }
-
-            return parseAliases(userInput);
-        }
-    }
-
-    private Command parseTwoWordCommand(String commandWord, String arguments) throws ParseException {
-        commandWord = extractFullCommandWord(commandWord, arguments);
-        arguments = extractArguments(arguments);
-
-        switch (commandWord) {
-
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
@@ -131,23 +113,8 @@ public class AddressBookParser {
             return new AddScoreCommandParser().parse(arguments);
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            return parseAliases(userInput);
         }
-    }
-
-    /**
-     * Removes second word of command from arguments.
-     *
-     * @param arguments raw arguments to extract from.
-     * @return extracted arguments.
-     */
-    protected String extractArguments(String arguments) {
-        int argumentsIndex = arguments.indexOf("-");
-        if (argumentsIndex == -1) {
-            return "";
-        }
-        String extractedArguments = arguments.substring(argumentsIndex - 1);
-        return extractedArguments;
     }
 
     /**

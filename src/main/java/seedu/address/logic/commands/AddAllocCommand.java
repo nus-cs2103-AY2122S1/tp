@@ -30,7 +30,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddAllocCommand extends Command {
 
-    public static final String COMMAND_WORD = "add alloc";
+    public static final String COMMAND_WORD = "addalloc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to an existing group. "
             + "Parameters: "

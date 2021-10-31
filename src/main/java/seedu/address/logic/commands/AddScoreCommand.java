@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddScoreCommand extends Command {
 
-    public static final String COMMAND_WORD = "add score";
+    public static final String COMMAND_WORD = "addscore";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds score of an assessment for a student. "
             + "Parameters: "

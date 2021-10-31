@@ -246,45 +246,6 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void extractArguments_withNoPrefix() {
-        AddressBookParser parser = new AddressBookParser();
-        String input = " student";
-
-        assertEquals("", parser.extractArguments(input));
-    }
-
-    @Test
-    public void extractArguments_withPrefix() {
-        AddressBookParser parser = new AddressBookParser();
-        String input = " student" + NAME_DESC_AMY;
-
-        assertEquals(NAME_DESC_AMY, parser.extractArguments(input));
-    }
-
-    @Test
-    public void extractFullCommandWord_withNoPrefix() {
-        AddressBookParser parser = new AddressBookParser();
-        String firstCommandWord = "add";
-        String arguments = " score " + VALID_NAME_AMY;
-
-        assertEquals(AddScoreCommand.COMMAND_WORD,
-                parser.extractFullCommandWord(firstCommandWord, arguments));
-    }
-
-    @Test
-    public void extractFullCommandWord_withPrefix() {
-        AddressBookParser parser = new AddressBookParser();
-        String firstCommandWord = "add";
-        String arguments = " score"
-                + ASSESSMENT_DESC_AMY
-                + NAME_DESC_AMY
-                + SCORE_DESC_AMY;
-
-        assertEquals(AddScoreCommand.COMMAND_WORD,
-                parser.extractFullCommandWord(firstCommandWord, arguments));
-    }
-
-    @Test
     public void addAliases() throws Exception {
         AddressBookParser parser = new AddressBookParser();
         Map<String, String> aliases = new HashMap<>();
