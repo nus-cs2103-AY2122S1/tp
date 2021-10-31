@@ -228,7 +228,7 @@ public class ModelManager implements Model {
     @Override
     public void setTableList(List<Table> tableList) {
         requireNonNull(tableList);
-        addressBook.setTableList(tableList);
+        addressBook.setTables(tableList);
     }
 
     @Override

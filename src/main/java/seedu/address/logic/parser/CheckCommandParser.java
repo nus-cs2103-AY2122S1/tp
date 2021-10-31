@@ -38,26 +38,29 @@ public class CheckCommandParser implements Parser<CheckCommand> {
      */
     public CheckCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
         }
 
         String[] splitTrimmedArgs = trimmedArgs.split("\\s+");
-        if (splitTrimmedArgs.length > 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
-        }
 
+        // Parse the split arguments and store the result in the fields
         parseArgs(splitTrimmedArgs);
+
+        // Check if the timing is on the hour
         if (time.getMinute() != 0) {
             throw new ParseException(MESSAGE_INVALID_RESERVATION_MINUTES);
         }
+
         return new CheckCommand(new ListContainsReservationPredicate(date, time, typeOfCheck));
     }
 
     private void parseArgs(String[] splitTrimmedArgs) throws ParseException {
+        // Split inputs should contain maximum of 2 arguments (Date & time)
         if (splitTrimmedArgs.length > 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
-        } else if (splitTrimmedArgs.length == 2) {
+        } else if (splitTrimmedArgs.length == 2) { // Check if the 2 arguments are LocalDate and LocalTime
             parseDateTime(splitTrimmedArgs[0], splitTrimmedArgs[1]);
         } else { // Input arguments array is length 1
             String dateOrTimeString = splitTrimmedArgs[0];

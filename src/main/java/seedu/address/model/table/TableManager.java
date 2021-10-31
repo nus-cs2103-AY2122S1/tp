@@ -11,6 +11,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.exception.ReservationException;
 
+/**
+ * Represents the main class that handles all table related operations and data
+ */
 public class TableManager {
     private static final String MESSAGE_RESTAURANT_FULL = "Restaurant is fully booked at %1$s";
     private static final String MESSAGE_TOO_MANY_PEOPLE = "No table can accommodate %1$d person(s) on ";
@@ -34,6 +37,14 @@ public class TableManager {
         return tables.getNumberOfTables();
     }
 
+    /**
+     * Returns the smallest-sized table that can fit specified number of people.
+     * @param numberOfPeople number of people in the reservation
+     * @param filteredReservations list of reservations on the same date time as the reservation being made
+     * @return smallest table that fits the number of people
+     * @throws ReservationException when no tables have been added, when no tables are free and when all free tables
+     * are too small to accomodate the number of people.
+     */
     public Table getAvailableTable(int numberOfPeople, List<Reservation> filteredReservations)
             throws ReservationException {
 
@@ -69,6 +80,10 @@ public class TableManager {
         return Collections.min(availableTables, Table::compareTableSize);
     }
 
+    /**
+     * Replaces the tablelist with {@code tables}
+     * @param tables list of tables to replace old list with
+     */
     public void setTables(List<Table> tables) {
         this.tables.setTables(tables);
     }
@@ -82,7 +97,7 @@ public class TableManager {
     }
 
     /**
-     * Check if {@code table} exists in the database
+     * Checks if {@code table} exists in the database
      */
     public boolean hasTable(Table table) {
         requireNonNull(table);
@@ -104,10 +119,9 @@ public class TableManager {
         tables.remove(key);
     }
 
-    public void setTableList(List<Table> tables) {
-        this.tables.setTables(tables);
-    }
-
+    /**
+     * Resets the table count to 0 when a settables command is called
+     */
     public void resetTableCount() {
         Table.resetTableCount();
     }
@@ -118,11 +132,11 @@ public class TableManager {
     public ObservableList<Table> getUnmodifiableObservableList() {
         return tables.asUnmodifiableObservableList();
     }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TableManager // instanceof handles nulls
                 && tables.equals(((TableManager) other).tables));
     }
-
 }

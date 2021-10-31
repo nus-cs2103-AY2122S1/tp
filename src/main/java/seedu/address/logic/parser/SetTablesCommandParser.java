@@ -8,10 +8,11 @@ import java.util.List;
 
 import seedu.address.logic.commands.SetTablesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.table.Table;
 
 public class SetTablesCommandParser implements Parser<SetTablesCommand> {
 
-    private static final String MESSAGE_INVALID_SIZE_OR_COUNT =
+    public static final String MESSAGE_INVALID_SIZE_OR_COUNT =
             "Ensure table size and number of tables are positive integers";
     /**
      * Parses the given {@code String} of arguments in the context of the SetTablesCommand
@@ -64,23 +65,22 @@ public class SetTablesCommandParser implements Parser<SetTablesCommand> {
     private List<Integer> flattenInnerArray(String[] array) throws NumberFormatException, ParseException {
         assert array.length == 1 || array.length == 2;
         int tableSize = Integer.parseInt(array[0]);
-        checkIfPositive(tableSize);
+
+        if (!Table.checkIfValidValue(tableSize)) {
+            throw new ParseException(MESSAGE_INVALID_SIZE_OR_COUNT);
+        }
         if (array.length == 1) {
             return Collections.singletonList(tableSize);
         } else { //array.length == 2
             int numberOfTables = Integer.parseInt(array[1]);
-            checkIfPositive(numberOfTables);
+            if (!Table.checkIfValidValue(numberOfTables)) {
+                throw new ParseException(MESSAGE_INVALID_SIZE_OR_COUNT);
+            }
             ArrayList<Integer> result = new ArrayList<>();
             for (int i = 0; i < numberOfTables; i++) {
                 result.add(tableSize);
             }
             return result;
-        }
-    }
-
-    private void checkIfPositive(int value) throws ParseException {
-        if (value <= 0) {
-            throw new ParseException(MESSAGE_INVALID_SIZE_OR_COUNT);
         }
     }
 }

@@ -316,13 +316,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// tableList-level operations
 
     /**
-     * Adds a new table to the list
-     */
-    public void setTableList(List<Table> tableList) {
-        tableManager.setTableList(tableList);
-    }
-
-    /**
      * Deletes all reservations
      */
     public void resetReservations() {
@@ -340,7 +333,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        // TODO: refine later
         return String.format(
                 "%d customers\n%d employees\n%d suppliers\n%d reservations\n%d tables",
                 customers.asUnmodifiableObservableList().size(),
