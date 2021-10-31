@@ -32,7 +32,8 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSameStudent(null));
 
-        Student editedAlice = new StudentBuilder(ALICE).withRepoName(VALID_REPONAME_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Student editedAlice = new StudentBuilder(ALICE).withRepoName(VALID_REPONAME_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // different student number, all other attributes same -> returns true
