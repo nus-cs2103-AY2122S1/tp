@@ -16,7 +16,7 @@
         </padding>
         <GridPane alignment="CENTER" prefHeight="195.0" prefWidth="370.0" HBox.hgrow="ALWAYS">
             <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" minWidth="7.0" prefWidth="20" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="20" />
                 <ColumnConstraints hgrow="ALWAYS" minWidth="15.0" prefWidth="100" />
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100" />
                 <ColumnConstraints hgrow="ALWAYS" minWidth="15.0" prefWidth="150" />
