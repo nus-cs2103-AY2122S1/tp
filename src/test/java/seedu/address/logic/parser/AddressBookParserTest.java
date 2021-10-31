@@ -79,7 +79,8 @@ public class AddressBookParserTest {
         Member member = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         MeditCommand command = (MeditCommand) parser.parseCommand(MeditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
+                + CliSyntax.PREFIX_MEMBER_ID + INDEX_FIRST_MEMBER.getOneBased() + " "
+                + MemberUtil.getEditMemberDescriptorDetails(descriptor));
         assertEquals(new MeditCommand(INDEX_FIRST_MEMBER, descriptor), command);
     }
 
