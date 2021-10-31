@@ -8,7 +8,6 @@ import seedu.programmer.commons.core.LogsCenter;
 
 public class CommandHistory {
     static final String DEFAULT_COMMAND = "";
-    private static final int INITIAL_COUNTER_VALUE = -1;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
     private List<String> commandHistory;
@@ -19,7 +18,7 @@ public class CommandHistory {
      */
     public CommandHistory() {
         commandHistory = new ArrayList<>();
-        counter = INITIAL_COUNTER_VALUE;
+        counter = commandHistory.size();
     }
 
     /**
@@ -32,7 +31,7 @@ public class CommandHistory {
     }
 
     /**
-     * Returns the next most recent entered command according to the {@code counter} pointer.
+     * Returns the next most recently entered command according to the {@code counter} pointer.
      * Returns the {@code DEFAULT_COMMAND} if the {@code commandHistory} is empty.
      * Returns the least recent command if the {@code counter} is already pointer at the oldest command.
      * @return The string of the next most recent entered command.
@@ -63,6 +62,10 @@ public class CommandHistory {
             logger.info("There is no command history.");
             return DEFAULT_COMMAND;
         }
+        if (isCounterAtDefault()) {
+            logger.info("Previous command has not been executed before. Empty command returned.");
+            return DEFAULT_COMMAND;
+        }
         if (!isCounterAtLast()) {
             counter++;
         }
@@ -90,6 +93,9 @@ public class CommandHistory {
                 && counter == e.counter;
     }
 
+    private boolean isCounterAtDefault() {
+        return counter == commandHistory.size();
+    }
     private boolean isCommandHistoryEmpty() {
         return commandHistory.size() == 0;
     }
