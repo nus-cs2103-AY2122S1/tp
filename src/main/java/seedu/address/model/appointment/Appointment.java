@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a scheduled appointment with an individual.
@@ -13,9 +14,11 @@ import java.time.format.DateTimeParseException;
  */
 public class Appointment implements Comparable<Appointment> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting should be in the following format: dd-MMM-yyyy HH:mm ";
+            "Meeting should be in the following format: dd-MMM-yyyy HH:mm.\n"
+            + "Please make sure your date is valid as well.";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter
-            .ofPattern("dd-MMM-yyyy HH:mm"); // Specific format as described in argument.
+            .ofPattern("dd-MMM-uuuu HH:mm") // Specific format as described in argument.
+            .withResolverStyle(ResolverStyle.STRICT); // Ensure that dates like 30 Feb are invalid.
 
     private final LocalDateTime appointmentTime;
 
