@@ -84,6 +84,7 @@ public class SampleDataUtil {
             for (Client sampleClient : getSampleClients(sampleAb)) {
                 sampleAb.addClient(sampleClient);
             }
+            sampleAb.setClientCounter("6");
         } catch (ParseException e) {
             logger.warning("Sample data file not in the correct format. Will be starting with an empty AddressBook");
             return new AddressBook();
