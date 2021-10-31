@@ -48,6 +48,19 @@ class SessionTest {
     }
 
     @Test
+    public void isEndWithinSameDay() {
+        Session s1 = new Session("00:00", duration);
+        Session s2 = new Session("23:50", new Duration(9));
+        assertTrue(s1.isEndWithinSameDay());
+        assertTrue(s2.isEndWithinSameDay());
+
+        Session s3 = new Session("23:50", new Duration(10));
+        Session s4 = new Session("22:30", new Duration(120));
+        assertFalse(s3.isEndWithinSameDay());
+        assertFalse(s4.isEndWithinSameDay());
+    }
+
+    @Test
     public void isClash_clash_returnsTrue() {
         Session s1 = new Session("12:00", duration);
         Session s2 = new Session("12:05", duration);

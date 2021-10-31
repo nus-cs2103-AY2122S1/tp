@@ -71,6 +71,16 @@ public class AppointmentFilters {
     }
 
     /**
+     * Initialises a {@code AppointmentFilters} that only shows appointments on the {@code localDate}.
+     */
+    public static AppointmentFilters appointmentFiltersAtDate(LocalDate localDate) {
+        AppointmentFilters filters = new AppointmentFilters();
+        filters.setStartAfter(new AppointmentIsAfterPredicate(localDate));
+        filters.setStartBefore(new AppointmentIsBeforePredicate(localDate));
+        return filters;
+    }
+
+    /**
      * Copy constructor.
      */
     public static AppointmentFilters copyAppointmentFilters(AppointmentFilters filterToCopy) {
