@@ -154,7 +154,8 @@ More examples will be provided for each command in [Features](#features).
   * OTHERS: `oth`
 
 <div markdown="block" class="alert alert-danger"> :warning: 
- Only alphanumeric symbols are allowed. i.e. ‘&’, ‘!’, ‘?’ are not allowed</div>
+ Only alphanumeric symbols are allowed. i.e. ‘&’, ‘!’, ‘?’ are not allowed
+</div>
  
 --------------------------------------------------------------------------------------------------------------------
 
