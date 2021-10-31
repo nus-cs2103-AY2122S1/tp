@@ -54,7 +54,6 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_TAG + "retained "
             + PREFIX_TAG + "new";
 
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TAB.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Note: at least one contact field must be present and not empty. \n"
