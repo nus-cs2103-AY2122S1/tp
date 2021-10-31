@@ -3,17 +3,14 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Label?>
-<fx:root minHeight="600" minWidth="450" title="Dashboard" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" title="Dashboard" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/programmer_error.png" />
   </icons>
