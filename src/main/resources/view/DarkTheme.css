@@ -139,6 +139,7 @@
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-text-alignment: center;
 }
 
 .cell_small_label {
