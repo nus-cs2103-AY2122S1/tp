@@ -12,8 +12,9 @@ import static seedu.plannermd.testutil.appointment.TypicalAppointments.TWO_HOUR_
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,7 @@ import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.appointment.Appointment;
+import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.appointment.UniqueAppointmentList;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
@@ -67,23 +69,22 @@ public class AddAppointmentCommandTest {
 
     @Test
     public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
-        AddAppointmentCommandTest.ModelStubAcceptingAppointmentAdded modelStub =
-                new AddAppointmentCommandTest.ModelStubAcceptingAppointmentAdded();
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         Appointment validAppointment = new AppointmentBuilder().build();
 
         CommandResult commandResult = new AddAppointmentCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON,
                 descriptor).execute(modelStub);
 
-        assertEquals(String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment),
+        assertEquals(String.format(AddAppointmentCommand.MESSAGE_SUCCESS, validAppointment,
+                AppointmentDate.DISPLAYED_DATE_FORMATTER.format(validAppointment.getAppointmentDate().date)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validAppointment), modelStub.appointmentsAdded);
+        assertEquals(Collections.singletonList(validAppointment), modelStub.appointmentsAdded);
     }
 
     @Test
     public void execute_duplicateAppointment_throwsCommandException() {
         Appointment validAppointment = new AppointmentBuilder().build();
-        AddAppointmentCommandTest.ModelStubWithAppointment modelStub =
-                new AddAppointmentCommandTest.ModelStubWithAppointment(validAppointment);
+        ModelStubWithAppointment modelStub = new ModelStubWithAppointment(validAppointment);
         Patient patient = validAppointment.getPatient();
         Doctor doctor = validAppointment.getDoctor();
         Index doctorIndex = Index.fromZeroBased(1);
@@ -123,7 +124,7 @@ public class AddAppointmentCommandTest {
 
         AddAppointmentCommand addThirtyMinApptCommand =
                 new AddAppointmentCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON, thirtyMinDescriptor);
-        AddAppointmentCommand addTworApptCommand =
+        AddAppointmentCommand addTwoHrApptCommand =
                 new AddAppointmentCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON, twoHrDescriptor);
 
         // same object -> returns true
@@ -143,7 +144,7 @@ public class AddAppointmentCommandTest {
         assertFalse(addThirtyMinApptCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addThirtyMinApptCommand.equals(addTworApptCommand));
+        assertFalse(addThirtyMinApptCommand.equals(addTwoHrApptCommand));
     }
 
     /**
@@ -365,15 +366,20 @@ public class AddAppointmentCommandTest {
             requireNonNull(appointment);
             return this.appointment.isSameAppointment(appointment);
         }
+
+        @Override
+        public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
+            requireNonNull(predicate);
+        }
     }
 
     /**
      * A Model stub that always accept the patient being added.
      */
     private class ModelStubAcceptingAppointmentAdded extends AddAppointmentCommandTest.ModelStub {
-        final ArrayList<Doctor> doctorsAdded = new ArrayList<>();
-        final ArrayList<Patient> patientsAdded = new ArrayList<>();
-        final ArrayList<Appointment> appointmentsAdded = new ArrayList<>();
+        private final ArrayList<Doctor> doctorsAdded = new ArrayList<>();
+        private final ArrayList<Patient> patientsAdded = new ArrayList<>();
+        private ArrayList<Appointment> appointmentsAdded = new ArrayList<>();
 
         @Override
         public ObservableList<Patient> getFilteredPatientList() {
@@ -431,6 +437,13 @@ public class AddAppointmentCommandTest {
         public void addAppointment(Appointment appointment) {
             requireNonNull(appointment);
             appointmentsAdded.add(appointment);
+        }
+
+        @Override
+        public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
+            requireAllNonNull(predicate);
+            appointmentsAdded = appointmentsAdded.stream().filter(predicate)
+                    .collect(Collectors.toCollection(ArrayList::new));
         }
 
         @Override

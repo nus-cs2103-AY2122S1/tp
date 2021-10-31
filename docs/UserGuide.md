@@ -462,16 +462,15 @@ Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood tes
 You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
 </div>
 <br>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can also add appointments that have happened already! This is especially useful if you just started using PlannerMD
 and would like to store your entire history of appointments!
 </div>
 <br>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If the appointment you just created isn't appearing, it could be because the default appointment list only shows
-appointments occurring today and the one you just add doesn't happen today. To see upcoming appointments, enter `appt -u`. 
-To see all appointments, enter 'appt -f'.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+After adding an appointment, the appointment list is updated to show all appointments on the date of the added appointment. To go back to the default appointment view which shows appointments for the current day, enter `appt -l`
 </div>
 
 ### Editing an appointment: `appt -e` <a name="edit-appointment"/>
