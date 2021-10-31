@@ -176,7 +176,7 @@ Examples:
 * **`add`** `n/David Lim nat/Singaporean s/tg:DavidLim r/Funny Guy` adds `David Lim` to the list together with his nationality, Telegram handle and remark.
 * **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst` adds `Ernest` to the list together with his Telegram and Instagram handles.
 ![Add Command Example](images/AddEnerst.png)
-*Execution of Add Command: **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst`*
+*After execution of Add Command: **`add`** `n/Ernest s/tg:ernest2334 s/ig:ernessst`*
 
 ### Editing a person: `edit`
 
@@ -322,9 +322,9 @@ Examples:
 * **`find`** `n/alex n/david` returns `Alex Yeoh`, `David Li`.<br>
 * **`find`** `nat/Singaporean` <br>
 ![result for 'find n/alex n/david'](images/FindAlexAndDavid.png)
-*Find Command: n/alex n/david*
+*After execution of Find Command: **`find`** `n/alex n/david`*
 ![result for 'find nat/Singapore'](images/FindSingaporean.png)
-*Find Command: nat/Singaporean*
+*After execution of Find Command: **`find`** `nat/Singaporean`*
 
 ### Sorting all persons: `sort`
 
