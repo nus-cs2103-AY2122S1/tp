@@ -80,6 +80,7 @@ Adds a student to the student list.
 
 Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO NAME] [t/TAG]...`
 
+* `NAME` should only contain alphabets and spaces.
 * GitHub link will only be shown if both `GITHUB USERNAME` and `REPO NAME` are specified.
 * `STUDENTNUMBER` must consist of a character, followed by 7 digits, followed by another character.
   Case of character does not matter.
