@@ -29,7 +29,11 @@ public class TableManager {
         tables = new TableList();
     }
 
+    /**
+     * Constructs a new TableManager
+     */
     public TableManager(TableList tables) {
+        requireNonNull(tables);
         this.tables = tables;
     }
 
