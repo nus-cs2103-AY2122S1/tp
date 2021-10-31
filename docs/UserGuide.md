@@ -159,7 +159,7 @@ Format: `delete INDEX [MORE_INDICES]`
 
 * Deletes the person(s) at the specified `INDEX`(s).
 * The index(s) **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index(s) **must not exceed the total number of persons** in the address book
+* The index(s) **must not exceed the total number of persons** in the contacts list
 * The index(s) **can be given in any order** (e.g. `delete 1 4 5`, `delete 5 1 4`)
 
 Examples:
@@ -210,7 +210,7 @@ Format: `scall INDEX`
 
 * Updates the person at the specified `INDEX` as called.
 * The index **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index **must not exceed the total number of persons** in the address book
+* The index **must not exceed the total number of persons** in the contacts list
 * If `session` or `schedule` was previously called, the person at the specified `INDEX` will be removed from the list.
 
 Examples:
@@ -224,7 +224,7 @@ Updates that a failed call was made to a person in the current SHN enforcement s
 Format: `fcall INDEX`
 * Updates the person at the specified `INDEX` as called, and increments the person's non-compliance counter by 1.
 * The index **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index **must not exceed the total number of persons** in the address book
+* The index **must not exceed the total number of persons** in the contacts list
 * If `session` or `schedule` was previously called, the person at the specified `INDEX` will be removed from the list.
 
 Examples:

@@ -9,14 +9,14 @@ you create or modify a feature.
 
 <a name="attributes"/>
 ## Person Attributes
-Attributes are each to be represented as an object in the person object in [person library]("../src/main/java/seedu.address/model/person".)
+Attributes are each to be represented as an object in the person object in [person library]("../src/main/java/seedu.track2gather/model/person".)
 The purpose of this is to make tests easier, apply regex validation and to provide compile-time validation in our 
 commands.
 
 When creating an attribute, you minimally require:
 1. the value itself
 2. Regex validation (for example, no whitespaces at the beginning or end), in case the parser breaks
-   a. use `seedu.address.commons.util.AppUtil.checkArgument`, using a custom `MESSAGE_CONSTRAINTS` as the error message.
+   a. use `seedu.track2gather.commons.util.AppUtil.checkArgument`, using a custom `MESSAGE_CONSTRAINTS` as the error message.
 3. null check in the constructor using `java.util.Objects.requireNonNull`
 4. equals
 5. hashCode
