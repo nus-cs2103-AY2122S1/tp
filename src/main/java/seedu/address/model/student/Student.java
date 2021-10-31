@@ -109,10 +109,10 @@ public class Student implements Nameable {
             if ((tuitionClass.getId()) == id) {
                 classes.removeClass(id);
                 removeTag(tuitionClass.getName(), tuitionClass.getTimeslot());
-                return this;
+                return new Student(name, phone, email, address, remark, tags, classes);
             }
         }
-        return this;
+        return new Student(name, phone, email, address, remark, tags, classes);
     }
 
     /**
@@ -141,8 +141,10 @@ public class Student implements Nameable {
      * @return
      */
     public Set<Tag> removeTag(ClassName name, Timeslot slot) {
+        Set<Tag> updatedTags = new HashSet<Tag>();
         tags.remove(new Tag(String.format("%s | %s", name, slot)));
-        return tags;
+        updatedTags.addAll(tags);
+        return updatedTags;
     }
 
     /**

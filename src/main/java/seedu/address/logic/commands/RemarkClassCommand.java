@@ -49,6 +49,7 @@ public class RemarkClassCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
         List<TuitionClass> lastShownList = model.getFilteredTuitionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -62,7 +63,7 @@ public class RemarkClassCommand extends Command {
         Remark newRemark = UiManager.showRemarkEditor(name, remarkToEdit);
 
         TuitionClass editedClass = new TuitionClass(classToEdit.getName(), classToEdit.getLimit(),
-                classToEdit.getTimeslot(), classToEdit.getStudentList(), newRemark);
+                classToEdit.getTimeslot(), classToEdit.getStudentList(), newRemark, classToEdit.getId());
 
         logger.info("Remarks updated from: [" + remarkToEdit + "] to [" + newRemark.toString() + "]");
 

@@ -33,6 +33,7 @@ public class DeleteClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredTuitionList(Model.PREDICATE_SHOW_ALL_TUITIONS);
         List<TuitionClass> lastShownList = model.getFilteredTuitionList();
         List<String> removed = new ArrayList<String>();
         List<Integer> invalidClasses = new ArrayList<>();
