@@ -61,14 +61,15 @@ public class StringUtil {
     }
 
     /**
-     * Capitalizes the word or sentence {@code string}.
+     * Capitalizes the word or sentence {@code string}. Trims the word as well.
      */
     public static String capitalizeFirstCharAndLowerRest(String string) {
         requireNonNull(string);
-        if (string.length() == 0) {
-            return string;
+        String trimmedString = string.trim();
+        if (trimmedString.length() == 0) {
+            return trimmedString;
         }
-        return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
+        return trimmedString.substring(0, 1).toUpperCase() + trimmedString.substring(1).toLowerCase();
     }
 
     /**
@@ -76,7 +77,7 @@ public class StringUtil {
      * while the rest are lower cased. Utilises {@code capitalizeFirstCharAndLowerRest} method.
      */
     public static String capitaliseFirstCharOfEachWord(String toPrepare) {
-        String[] wordArr = toPrepare.split(" ");
+        String[] wordArr = toPrepare.trim().split(" ");
         StringBuilder sb = new StringBuilder();
         for (int idx = 0; idx < wordArr.length; idx++) {
             String word = wordArr[idx];
