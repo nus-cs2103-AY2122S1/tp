@@ -45,7 +45,7 @@ public class TypicalStudents {
             .withGroupName(VALID_GROUPNAME_G2).withRepoName("ip").withStudentNumber("A0000006B")
             .withEmail("lydia@u.nus.edu").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withUserName("user")
-            .withRepoName("ipppp").withStudentNumber("A0000007B").withEmail("anna@eu.nus.edu").build();
+            .withRepoName("ipppp").withStudentNumber("A0000007B").withEmail("anna@u.nus.edu").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier")
