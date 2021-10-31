@@ -27,7 +27,7 @@ public class SuperGroupCreateExecutor extends GroupExecutor {
     @Override public CommandResult execute() throws ExecuteException {
         try {
             if (!model.isSuperGroupList()) {
-                throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
+                throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
             }
             model.addSuperGroup(superGroup);
             return new CommandResult(String.format(MESSAGE_SUCCESS, superGroup));

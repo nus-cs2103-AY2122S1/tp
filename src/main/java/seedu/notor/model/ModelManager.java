@@ -180,19 +180,19 @@ public class ModelManager implements Model {
     @Override
     public void addSuperGroup(SuperGroup superGroup) {
         notor.addSuperGroup(superGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        listSuperGroup();
     }
 
     @Override
     public void addSuperGroup(String superGroup) throws ParseException {
         notor.addSuperGroup(superGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        listSuperGroup();
     }
 
     @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         notor.deleteSuperGroup(superGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        listSuperGroup();
     }
 
     @Override
@@ -204,7 +204,6 @@ public class ModelManager implements Model {
     public void deleteSubGroup(SubGroup subGroup) {
         SuperGroup parent = (SuperGroup) notor.findGroup(subGroup.getParent());
         parent.deleteSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =========================================

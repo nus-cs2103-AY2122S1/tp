@@ -113,7 +113,7 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
      * @param subGroup the SubGroup to be deleted.
      */
     public void deleteSubGroup(SubGroup subGroup) {
-        for (Person person : people.values()) {
+        for (Person person : subGroup.people.values()) {
             person.removeSubGroup(subGroup);
         }
         subGroups.remove(subGroup);
