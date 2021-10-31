@@ -49,6 +49,7 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
+        requireNonNull(userInput);
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -115,24 +116,6 @@ public class AddressBookParser {
         default:
             return parseAliases(userInput);
         }
-    }
-
-    /**
-     * Converts commandWord to the two word format and retrieves second word from arguments.
-     *
-     * @param firstCommandWord the original commandWord parsed.
-     * @param arguments arguments to retrieve second half of commandWord from.
-     * @return full commandWord.
-     */
-    protected String extractFullCommandWord(String firstCommandWord, String arguments) {
-        int argumentsIndex = arguments.indexOf("-");
-        if (argumentsIndex == -1) {
-            String[] arr = arguments.split(" ", 3);
-            String firstWord = arr[1];
-            return firstCommandWord + " " + firstWord;
-        }
-        String fullCommandWord = firstCommandWord + arguments.substring(0, argumentsIndex - 1).stripTrailing();
-        return fullCommandWord;
     }
 
     /**
