@@ -20,4 +20,7 @@ public class Messages {
 
     public static final String MESSAGE_WRONG_NUMBER_OF_INDEX =
             "Only %1$d indices separated by white spaces can be provided. Currently %2$d are provided.";
+
+    public static final String MESSAGE_EMPTY_WEEK = "Week cannot be empty!";
+
 }

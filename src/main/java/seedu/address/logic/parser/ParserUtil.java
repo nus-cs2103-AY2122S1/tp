@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_WEEK;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DUPLICATE_INDEX;
 
 import java.util.ArrayList;
@@ -87,6 +88,9 @@ public class ParserUtil {
      */
     public static int parseWeek(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.isBlank()) {
+            throw new ParseException(MESSAGE_EMPTY_WEEK);
+        }
         if (!Attendance.isValidWeek(Integer.parseInt(oneBasedIndex))) {
             throw new ParseException(String.format(Attendance.MESSAGE_CONSTRAINTS,
                     Attendance.FIRST_WEEK_OF_SEM, Attendance.LAST_WEEK_OF_SEM));
