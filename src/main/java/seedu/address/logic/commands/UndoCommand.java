@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -28,6 +29,10 @@ public class UndoCommand extends Command {
         UndoableCommand commandToUndo = undoRedoStack.popUndo();
 
         Person studentModified = commandToUndo.undo();
+
+        if (studentModified != null && !model.getFilteredPersonList().contains(studentModified)) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
 
         if (commandToUndo.commandType.equals(ClearCommand.COMMAND_ACTION)
                 || commandToUndo.commandType.equals(AddCommand.COMMAND_ACTION)) {

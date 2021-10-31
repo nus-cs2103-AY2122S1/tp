@@ -3,9 +3,11 @@ package seedu.address.logic;
 import java.util.Stack;
 
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoableCommand;
 
-//@@author Zhiyuan-Amos-reused
+// @@author Zhiyuan-Amos-reused
 // Reused code from
 // https://github.com/nus-cs2103-AY1718S2/addressbook-level4/
 // blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java
@@ -33,6 +35,9 @@ public class UndoRedoStack {
      * @param command Command executed.
      */
     public void pushUndoableCommand(Command command) {
+        if (!(command instanceof UndoCommand) && !(command instanceof RedoCommand)) {
+            redoStack.clear();
+        }
         if (!(command instanceof UndoableCommand)) {
             return;
         }

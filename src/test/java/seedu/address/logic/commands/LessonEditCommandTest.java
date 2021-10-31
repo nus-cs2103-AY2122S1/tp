@@ -165,6 +165,7 @@ class LessonEditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
                 personAfterLessonEdit);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(lessonEditCommand, model, expectedMessage, expectedModel);
     }
