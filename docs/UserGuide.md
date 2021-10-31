@@ -88,9 +88,9 @@ Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO N
 * If the same person is edited and the remaining empty data field is entered, a proper GitHub link will be shown.
 
 Examples:
-* `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user r/ip t/friends t/owesMoney` adds John Doe to the list
+* `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user r/ip t/friends t/owesMoney` adds John Doe to the list
   and displays a confirmation output with a proper GitHub link
-* `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user` adds John Doe to the list and displays a confirmation
+* `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user` adds John Doe to the list and displays a confirmation
   output without a proper GitHub link, but storing the `GITHUB USERNAME` in memory nonetheless.
 
 ### Edit a student : `editStudent`
@@ -107,7 +107,7 @@ Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK]
   specifying any tags after it.
 
 Examples:
-* `editStudent 1 s/A0221111L e/johndoe@example.com` Edits the student number and email address of the 1st person to be `A0221111L` and `johndoe@example.com` respectively.
+* `editStudent 1 s/A0221111L e/johndoe@u.nus.edu` Edits the student number and email address of the 1st person to be `A0221111L` and `johndoe@u.nus.edu` respectively.
 * `editStudent 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Delete a student: `deleteStudent`
@@ -458,8 +458,8 @@ If your changes to the data file makes its format invalid, tApp will discard all
 Commands | Format and Examples
 --------|-----------------------------
 [**List Students**](#list-all-students-students) | `students`
-[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​` <br> e.g., `addStudent n/Clara Ng s/A0221111W e/clara@example.com`
-[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `editStudent 1 s/A0221111L e/johndoe@example.com`
+[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​` <br> e.g., `addStudent n/Clara Ng s/A0221111W e/clara@u.nus.edu`
+[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `editStudent 1 s/A0221111L e/johndoe@u.nus.edu`
 [**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` <br> e.g., `deleteStudent 1`
 [**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/10`
 [**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` <br> e.g., `markp 1 w/10`

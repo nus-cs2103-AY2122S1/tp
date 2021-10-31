@@ -24,22 +24,22 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[] {
-            new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"), new StudentNumber("A0123436B"),
+            new Student(new Name("Alex Yeoh"), new Email("alexyeoh@u.nus.edu"), new StudentNumber("A0123436B"),
                     new UserName("ayeoh"), new RepoName("ip"), getTagSet("year2", "cs"),
                     getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
-            new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"), new StudentNumber("A0123456A"),
+            new Student(new Name("Bernice Yu"), new Email("berniceyu@u.nus.edu"), new StudentNumber("A0123456A"),
                     new UserName("BYU"), null, getTagSet("year2", "cs"),
                     getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
-            new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
+            new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@u.nus.edu"),
                     new StudentNumber("A0123450B"), null, null, getTagSet("year2", "engineering"),
                     getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
-            new Student(new Name("David Li"), new Email("lidavid@example.com"), new StudentNumber("A0123956B"),
+            new Student(new Name("David Li"), new Email("lidavid@u.nus.edu"), new StudentNumber("A0123956B"),
                     null, new RepoName("repo"), getTagSet("year3"),
                     getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
-            new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), new StudentNumber("A0823456B"),
+            new Student(new Name("Irfan Ibrahim"), new Email("irfan@u.nus.edu"), new StudentNumber("A0823456B"),
                     new UserName("IrIb"), new RepoName("myRepo"), getTagSet("year3"),
                     getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
-            new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"), new StudentNumber("A1123456B"),
+            new Student(new Name("Roy Balakrishnan"), new Email("royb@u.nus.edu"), new StudentNumber("A1123456B"),
                     null, null, getTagSet("year1"),
                     getDefaultAttendance(), getDefaultParticipation(), new GroupName()),
         };

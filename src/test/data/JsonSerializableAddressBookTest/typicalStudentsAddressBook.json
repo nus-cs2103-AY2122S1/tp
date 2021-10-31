@@ -2,7 +2,7 @@
   "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
   "students" : [ {
     "name" : "Alice Pauline",
-    "email" : "alice@example.com",
+    "email" : "alice@u.nus.edu",
     "studentNumber" : "A0000000B",
     "username" : "paulice",
     "repo" : "ip",
@@ -12,7 +12,7 @@
     "groupName" : null
   }, {
     "name" : "Benson Meier",
-    "email" : "johnd@example.com",
+    "email" : "johnd@u.nus.edu",
     "studentNumber" : "A0000000B",
     "username" : "benben",
     "repo" : "ip",
@@ -22,7 +22,7 @@
     "groupName" : "W14-4"
   }, {
     "name" : "Carl Kurz",
-    "email" : "heinz@example.com",
+    "email" : "heinz@u.nus.edu",
     "studentNumber" : "A0000000B",
     "username" : "cark",
     "repo" : "ip",
@@ -32,7 +32,7 @@
     "groupName" : "W14-4"
   }, {
     "name" : "Daniel Meier",
-    "email" : "cornelia@example.com",
+    "email" : "cornelia@u.nus.edu",
     "studentNumber" : "A0000000B",
     "username" : "danmei",
     "repo" : "ip",
@@ -42,7 +42,7 @@
     "groupName" : "W14-4"
   }, {
     "name" : "Elle Meyer",
-    "email" : "werner@example.com",
+    "email" : "werner@u.nus.edu",
     "studentNumber" : "A0000000B",
     "username" : "em",
     "repo" : "ip",
@@ -52,7 +52,7 @@
     "groupName" : "F01-3"
   }, {
     "name" : "Fiona Kunz",
-    "email" : "lydia@example.com",
+    "email" : "lydia@u.nus.edu",
     "studentNumber" : "A0000000B",
     "username" : "fku",
     "repo" : "ip",
@@ -62,7 +62,7 @@
     "groupName" : "F01-3"
   }, {
     "name" : "George Best",
-    "email" : "anna@example.com",
+    "email" : "anna@u.nus.edu",
     "studentNumber" : "A0000000B",
     "username" : "user",
     "repo" : "ipppp",
