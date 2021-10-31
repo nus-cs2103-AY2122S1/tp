@@ -1,4 +1,5 @@
 package seedu.address.logic;
+import java.math.BigDecimal;
 import java.util.Set;
 
 import seedu.address.model.Model;
@@ -18,11 +19,11 @@ public interface Calculator {
      * Calculates one student's total fee by summing up all outstanding
      * fees from their lessons.
      */
-    static float getStudentTotalFees(Set<Lesson> lessons) {
-        float total = lessons
+    static BigDecimal getStudentTotalFees(Set<Lesson> lessons) {
+        BigDecimal total = lessons
                 .stream()
-                .map(lesson -> lesson.getOutstandingFees().getMonetaryValueInFloat())
-                .reduce(0.00F, (curr, next) -> curr + next);
+                .map(lesson -> lesson.getOutstandingFees().getMonetaryValue())
+                .reduce(BigDecimal.ZERO, (curr, next) -> curr.add(next));
 
         return total;
     }

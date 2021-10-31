@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import java.math.BigDecimal;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -19,6 +21,7 @@ public class Money {
                     + " and should have at most two decimal places.";
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     public final String value;
+    private final BigDecimal valueInBigDec;
 
     /**
      * Constructs a {@code Money}.
@@ -29,6 +32,7 @@ public class Money {
         requireNonNull(amount);
         checkArgument(isValidMonetaryField(amount));
         value = formatValue(fillEmptyString(amount));
+        valueInBigDec = new BigDecimal(value);
     }
 
     private String fillEmptyString(String amount) {
@@ -64,8 +68,8 @@ public class Money {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public float getMonetaryValueInFloat() {
-        return Float.parseFloat(value);
+    public BigDecimal getMonetaryValue() {
+        return valueInBigDec;
     }
 
     @Override

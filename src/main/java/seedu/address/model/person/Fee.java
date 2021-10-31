@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Calculator.getStudentTotalFees;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class Fee {
 
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     private static final DecimalFormat df = new DecimalFormat("0.00");
-    private final float value;
+    private final BigDecimal value;
 
     /**
      * Constructs an outstanding {@code Fee}.
@@ -43,11 +44,11 @@ public class Fee {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Fee // instanceof handles nulls
-                && value == ((Fee) other).value); // state check
+                && value.equals(((Fee) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return Float.hashCode(value);
+        return value.hashCode();
     }
 }
