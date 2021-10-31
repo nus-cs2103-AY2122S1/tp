@@ -2,9 +2,11 @@ package seedu.programmer.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.programmer.ui.CommandHistory.DEFAULT_COMMAND;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.programmer.ui.exceptions.CommandHistoryException;
 
 public class CommandHistoryTest {
 
@@ -42,11 +44,11 @@ public class CommandHistoryTest {
     @Test
     public void getPrevCommand_emptyHistory_returnDefaultCommand() {
         CommandHistory commandHistory = new CommandHistory();
-        assertEquals(commandHistory.getPrevCommand(), DEFAULT_COMMAND);
+        assertThrows(CommandHistoryException.class, () -> commandHistory.getPrevCommand());
     }
 
     @Test
-    public void getPrevCommand_validHistory_success() {
+    public void getPrevCommand_validHistory_success() throws CommandHistoryException {
         CommandHistory commandHistory = new CommandHistory();
         commandHistory.add("one");
         commandHistory.add("two");
@@ -60,20 +62,20 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void getNextCommand_emptyHistory_returnDefaultCommand() {
+    public void getNextCommand_emptyHistory_returnDefaultCommand() throws CommandHistoryException {
         CommandHistory commandHistory = new CommandHistory();
-        assertEquals(commandHistory.getNextCommand(), DEFAULT_COMMAND);
+        assertThrows(CommandHistoryException.class, () -> commandHistory.getNextCommand());
     }
 
     @Test
-    public void getNextCommand_validHistory_success() {
+    public void getNextCommand_validHistory_success() throws CommandHistoryException {
         CommandHistory commandHistory = new CommandHistory();
         commandHistory.add("one");
         commandHistory.add("two");
         commandHistory.add("three");
 
         // getPrevCommand has not been executed --> expect the default empty command
-        assertEquals(commandHistory.getNextCommand(), "");
+        assertThrows(CommandHistoryException.class, () -> commandHistory.getNextCommand());
 
         // Execute getPrevCommand to the oldest command
         commandHistory.getPrevCommand();
@@ -87,7 +89,7 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws CommandHistoryException {
         CommandHistory commandHistoryOne = new CommandHistory();
         commandHistoryOne.add("test");
         CommandHistory commandHistoryOneCopy = new CommandHistory();

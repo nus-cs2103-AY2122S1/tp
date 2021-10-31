@@ -63,18 +63,17 @@ public class CommandBox extends UiPart<Region> {
         try {
             if (event.getCode() == KeyCode.UP) {
                 commandTextField.setText(commandHistory.getPrevCommand());
-            }
-
-            if (event.getCode() == KeyCode.DOWN) {
+            } else if (event.getCode() == KeyCode.DOWN) {
                 commandTextField.setText(commandHistory.getNextCommand());
+            } else {
+                return;
             }
-
-//            event.consume(); // Consume Event
-        } catch (CommandHistoryException e) {
-            System.out.println("hi");
-        } finally {
+            setStyleToDefault();
             commandTextField.end();
-
+            event.consume(); // Consume Event
+        } catch (CommandHistoryException e) {
+            commandTextField.end();
+            return;
         }
     }
 

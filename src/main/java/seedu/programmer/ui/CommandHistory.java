@@ -8,8 +8,6 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.ui.exceptions.CommandHistoryException;
 
 public class CommandHistory {
-    static final String DEFAULT_COMMAND = "";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
     private List<String> commandHistory;
     private int counter;
@@ -24,7 +22,6 @@ public class CommandHistory {
 
     /**
      * Adds the {@code command} to the {@code commandHistory}.
-     * {@code counter} resets itself to point to the most recently added command to {@code commandHistory}.
      * @param command The string to be added to the history of commands.
      */
     public void add(String command) {
@@ -33,9 +30,9 @@ public class CommandHistory {
 
     /**
      * Returns the next most recently entered command according to the {@code counter} pointer.
-     * Returns the {@code DEFAULT_COMMAND} if the {@code commandHistory} is empty.
      * Returns the least recent command if the {@code counter} is already pointer at the oldest command.
      * @return The string of the next most recent entered command.
+     * @throws CommandHistoryException is thrown when the command history is empty.
      */
     public String getPrevCommand() throws CommandHistoryException {
         if (isCommandHistoryEmpty()) {
@@ -54,9 +51,10 @@ public class CommandHistory {
 
     /**
      * Returns the next least recent entered command according to the {@code counter} pointer.
-     * Returns the {@code DEFAULT_COMMAND} if the {@code commandHistory} is empty.
      * Returns the most recent command if the {@code counter} is already pointer at the latest command.
      * @return The string of the next least recent entered command.
+     * @throws CommandHistoryException is thrown when the command history is empty or when {@code getPrevCommand}
+     * method has never been called yet.
      */
     public String getNextCommand() throws CommandHistoryException {
         if (isCommandHistoryEmpty()) {
