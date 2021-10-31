@@ -43,7 +43,7 @@ public class TableManager {
      * @param filteredReservations list of reservations on the same date time as the reservation being made
      * @return smallest table that fits the number of people
      * @throws ReservationException when no tables have been added, when no tables are free and when all free tables
-     * are too small to accomodate the number of people.
+     * are too small to accommodate the number of people.
      */
     public Table getAvailableTable(int numberOfPeople, List<Reservation> filteredReservations)
             throws ReservationException {

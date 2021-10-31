@@ -14,6 +14,7 @@ import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.ReservationsManager;
 import seedu.address.model.table.Table;
+import seedu.address.model.table.TableList;
 import seedu.address.model.table.TableManager;
 
 /**
@@ -166,6 +167,11 @@ public interface Model {
      * Adds the given table list.
      */
     void setTableList(List<Table> tableList);
+
+    /**
+     * Returns true if tableList with the same identity as {@code tableList} exists in the address book.
+     */
+    boolean hasTable(Table table);
 
     /**
      * Resets the count of tables to zero

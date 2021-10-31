@@ -20,6 +20,7 @@ import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.ReservationsManager;
 import seedu.address.model.table.Table;
+import seedu.address.model.table.TableList;
 import seedu.address.model.table.TableManager;
 
 /**
@@ -239,6 +240,12 @@ public class ModelManager implements Model {
     @Override
     public void resetTableCount() {
         addressBook.resetTableCount();
+    }
+
+    @Override
+    public boolean hasTable(Table table) {
+        requireNonNull(table);
+        return addressBook.hasTable(table);
     }
 
     //=========== Filtered Employee List Accessors =============================================================
