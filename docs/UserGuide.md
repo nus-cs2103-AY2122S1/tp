@@ -106,8 +106,15 @@ All current students' data can be downloaded to a CSV file. The TA will need to 
 file to.
 
 ### <a name="upload-data"></a>2.4 Upload Data: `upload` or F4 on keyboard
-Uploads student data (student ID, class ID, name, email) via a CSV file.
+Uploads student data via a CSV file with **only** the following fields: student ID, class ID, name, email 
 
+Note that the CSV should **not** contain students' lab results since this functionality is only meant for the TA to
+automating the adding of **students** to PE.
+- As such, simply uploading the CSV obtained via the `download` command will not be accepted
+- Furthermore, if there are already existing students, the upload will **overwrite** the existing data rather than append to it.
+This is because in a typical use case, the TA would not want to have the existing data kept if they would like to use student data from their own CSV file.
+
+In summary:
 1. Select a valid CSV file from the file chooser to upload the student data from.
 2. A valid CSV file must contain the following column header: `studentId,classId,name,email`
 3. Note that this command is not meant for uploading lab results. Rather, it is only for automating the adding of
