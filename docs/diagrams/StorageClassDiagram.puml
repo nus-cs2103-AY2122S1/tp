@@ -14,12 +14,18 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "TutorAid Student Storage" #F4F6F6{
+Interface TutorAidStudentStorage <<Interface>>
+Class JsonTutorAidStudentStorage
+Class JsonSerializableStudentBook
+Class JsonAdaptedStudent
+}
+
+package "TutorAid Lesson Storage" #F4F6F6{
+Interface TutorAidLessonStorage <<Interface>>
+Class JsonTutorAidLessonStorage
+Class JsonSerializableLessonBook
+Class JsonAdaptedLesson
 }
 
 }
@@ -29,15 +35,19 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager --> "1" TutorAidStudentStorage
+StorageManager -right-> "1" TutorAidLessonStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage --|> TutorAidStudentStorage
+Storage -right-|> TutorAidLessonStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonTutorAidStudentStorage .up.|> TutorAidStudentStorage
+JsonTutorAidStudentStorage ..> JsonSerializableStudentBook
+JsonSerializableStudentBook --> "*" JsonAdaptedStudent
+JsonTutorAidLessonStorage .up.|> TutorAidLessonStorage
+JsonTutorAidLessonStorage ..> JsonSerializableLessonBook
+JsonSerializableLessonBook --> "*" JsonAdaptedLesson
 
 @enduml
