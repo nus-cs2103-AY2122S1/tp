@@ -13,8 +13,10 @@ import seedu.address.commons.core.GuiSettings;
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final String DATA_DIR = "data";
+    private static final String USER_PREFS_FILE = "track2gather.json";
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get(DATA_DIR, USER_PREFS_FILE);
 
     /**
      * Creates a {@code UserPrefs} with default values.
