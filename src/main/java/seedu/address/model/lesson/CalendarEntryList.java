@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.calendarfx.model.Calendar;
@@ -128,6 +129,35 @@ public class CalendarEntryList {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns {@code Set<Lesson>} of existing lessons in the address book that are clashing with the lesson.
+     *
+     * @param toCheck The lesson to check.
+     * @param toIgnore The lesson to ignore.
+     * @return The set of lessons that are clashing with toCheck.
+     */
+    public Set<String> getClashes(Lesson toCheck, Lesson toIgnore) {
+        requireAllNonNull(toCheck, toIgnore);
+        return entryList.stream()
+                .filter(entry-> !entry.getUserObject().equals(toIgnore) && entry.getUserObject().isClashing(toCheck))
+                .map(entry -> entry.getTitle() + " " + entry.getUserObject().getLessonDetails())
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns {@code Set<Lesson>} of existing lessons in the address book that are clashing with the lesson.
+     *
+     * @param toCheck The lesson to check.
+     * @return The set of lessons that are clashing with toCheck.
+     */
+    public Set<String> getClashes(Lesson toCheck) {
+        requireAllNonNull(toCheck);
+        return entryList.stream()
+                .filter(entry -> entry.getUserObject().isClashing(toCheck))
+                .map(entry -> entry.getTitle() + " " + entry.getUserObject().getLessonDetails())
+                .collect(Collectors.toSet());
     }
 
     /**
