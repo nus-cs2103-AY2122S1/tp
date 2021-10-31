@@ -1,11 +1,14 @@
 package seedu.programmer.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
@@ -16,6 +19,7 @@ import seedu.programmer.ui.exceptions.CommandHistoryException;
  */
 public class CommandBox extends UiPart<Region> {
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
@@ -60,21 +64,30 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyPressed(KeyEvent event) {
+        boolean upPressed = event.getCode() == KeyCode.UP;
+        boolean downPressed = event.getCode() == KeyCode.DOWN;
+        boolean isNotUpOrDown = !upPressed && !downPressed;
+
+        // Neither up nor down pressed or no command history
+        if (isNotUpOrDown || commandHistory.isCommandHistoryEmpty()) {
+            return;
+        }
+
         try {
-            if (event.getCode() == KeyCode.UP) {
+            if (upPressed) {
                 commandTextField.setText(commandHistory.getPrevCommand());
-            } else if (event.getCode() == KeyCode.DOWN) {
-                commandTextField.setText(commandHistory.getNextCommand());
             } else {
-                return;
+                commandTextField.setText(commandHistory.getNextCommand());
             }
-            setStyleToDefault();
-            commandTextField.end();
-            event.consume(); // Consume Event
         } catch (CommandHistoryException e) {
+            logger.info("Unable to get previous or next command!");
             commandTextField.end();
             return;
         }
+
+        setStyleToDefault();
+        commandTextField.end();
+        event.consume(); // Consume Event
     }
 
     /**

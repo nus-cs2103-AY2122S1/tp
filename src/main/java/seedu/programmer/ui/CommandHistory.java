@@ -17,7 +17,7 @@ public class CommandHistory {
      */
     public CommandHistory() {
         commandHistory = new ArrayList<>();
-        counter = commandHistory.size();
+        counter = 0;
     }
 
     /**
@@ -35,16 +35,11 @@ public class CommandHistory {
      * @throws CommandHistoryException is thrown when the command history is empty.
      */
     public String getPrevCommand() throws CommandHistoryException {
-        if (isCommandHistoryEmpty()) {
-            logger.info("There is no command history.");
-            throw new CommandHistoryException("No command has been executed, there is no history to navigate.");
-        }
-
         if (!isCounterAtFirst()) {
             counter--;
         }
-        String result = commandHistory.get(counter);
 
+        String result = commandHistory.get(counter);
         logger.info("Previous Command retrieved: " + result);
         return result;
     }
@@ -57,17 +52,10 @@ public class CommandHistory {
      * method has never been called yet.
      */
     public String getNextCommand() throws CommandHistoryException {
-        if (isCommandHistoryEmpty()) {
-            logger.info("There is no command history.");
-            throw new CommandHistoryException("No command has been executed, there is no history to navigate.");
-        }
-        if (isCounterAtDefault()) {
-            logger.info("Previous command has not been executed before. Empty command returned.");
-            throw new CommandHistoryException("There is no more recent command to navigate");
-        }
         if (!isCounterAtLast()) {
             counter++;
         }
+
         String result = commandHistory.get(counter);
 
         logger.info("Next Command retrieved: " + result);
@@ -92,10 +80,10 @@ public class CommandHistory {
                 && counter == e.counter;
     }
 
-    private boolean isCounterAtDefault() {
+    public boolean isCounterAtDefault() {
         return counter == commandHistory.size();
     }
-    private boolean isCommandHistoryEmpty() {
+    public boolean isCommandHistoryEmpty() {
         return commandHistory.size() == 0;
     }
 
@@ -108,11 +96,11 @@ public class CommandHistory {
         resetCounterToDefault();
     }
 
-    private boolean isCounterAtLast() {
+    public boolean isCounterAtLast() {
         return counter == commandHistory.size() - 1;
     }
 
-    private boolean isCounterAtFirst() {
+    public boolean isCounterAtFirst() {
         return counter == 0;
     }
 }
