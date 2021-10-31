@@ -55,6 +55,19 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String IMPORT_CONTACT_CSV_FEATURE_COMMAND = "import <FILENAME>.csv";
     private static final String EXPORT_CONTACT_CSV_FEATURE_NAME = "Export Contacts to CSV file";
     private static final String EXPORT_CONTACT_CSV_FEATURE_COMMAND = "export <FILENAME>.csv";
+    private static final String DELETE_CONTACTS_FEATURE_NAME = "Delete all Student Contacts";
+    private static final String DELETE_CONTACTS_FEATURE_COMMAND = "clear";
+    private static final String EXIT_APP_FEATURE_NAME = "Exit the App";
+    private static final String EXIT_APP_FEATURE_COMMAND = "exit";
+    private static final String FAVOURITE_CONTACT_FEATURE_NAME = "Mark a Student Contact as Favourite";
+    private static final String FAVOURITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
+    private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Student Contact as UnFavourite";
+    private static final String UNFAVOURITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
+    private static final String LIST_CONTACT_FEATURE_NAME = "List all Student Contacts present";
+    private static final String LIST_CONTACT_FEATURE_COMMAND = "list";
+    private static final String HELP_FEATURE_NAME = "Launch this Help Window";
+    private static final String HELP_FEATURE_COMMAND = "help";
+
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
