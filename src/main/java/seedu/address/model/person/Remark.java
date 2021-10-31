@@ -9,12 +9,14 @@ import static java.util.Objects.requireNonNull;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Remarks should only contain ASCII characters, and it should not be blank";
-    /*
+            "Remarks should only contain ASCII characters, and it should not be blank.\n"
+                    + "The limit for remark is 52 characters.";
+
+    /**
      * The first character of the remark must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid remark.
      */
-    public static final String VALIDATION_REGEX = "[\\p{ASCII}]+[^\\s]";
+    public static final String VALIDATION_REGEX = "[[\\p{ASCII}]+[^\\s]]{1,52}";
 
     public final String value;
 
