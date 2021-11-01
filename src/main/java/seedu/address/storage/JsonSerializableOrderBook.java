@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Label;
 import seedu.address.model.OrderBook;
 import seedu.address.model.ReadOnlyOrderBook;
 import seedu.address.model.order.Order;
@@ -49,18 +48,18 @@ class JsonSerializableOrderBook {
     public OrderBook toModelType() throws IllegalValueException {
         OrderBook orderBook = new OrderBook();
         long localCount = 0;
-        ArrayList<Long> id_list = new ArrayList<>();
+        ArrayList<Long> idList = new ArrayList<>();
 
         for (JsonAdaptedOrder jsonAdaptedOrder : orders) {
             Order order = jsonAdaptedOrder.toModelType();
             orderBook.addOrder(order);
-            if (localCount < order.getId()){
+            if (localCount < order.getId()) {
                 localCount = order.getId();
             }
-            if(id_list.contains(order.getId())){
-                throw  new IllegalValueException("Order Id can not be duplicated");
-            }else{
-                id_list.add(order.getId());
+            if (idList.contains(order.getId())) {
+                throw new IllegalValueException("Order Id can not be duplicated");
+            } else {
+                idList.add(order.getId());
             }
         }
         Order.setCount(localCount + 1);

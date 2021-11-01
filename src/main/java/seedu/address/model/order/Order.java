@@ -83,7 +83,9 @@ public class Order implements Comparable<Order> {
         this.id = id;
     }
 
-    public static void setCount(long newCount) { count = newCount; }
+    public static void setCount(long newCount) {
+        count = newCount;
+    }
 
     /**
      * Returns the prefixed order id as a String.
