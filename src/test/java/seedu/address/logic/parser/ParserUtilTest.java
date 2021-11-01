@@ -19,6 +19,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rating;
+import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -36,6 +37,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_RATING = "3";
+    private static final String VALID_REVIEW = "Great Place!";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -48,6 +50,12 @@ public class ParserUtilTest {
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseIndex_leadingZero_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseIndex("000001"));
     }
 
     @Test
@@ -167,6 +175,7 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseRating(INVALID_RATING));
     }
 
+
     @Test
     public void parseRating_validValueWithoutWhitespace_returnsRating() throws Exception {
         Rating expectedRating = new Rating(VALID_RATING);
@@ -178,6 +187,45 @@ public class ParserUtilTest {
         String ratingWithWhitespace = WHITESPACE + VALID_RATING + WHITESPACE;
         Rating expectedRating = new Rating(VALID_RATING);
         assertEquals(expectedRating, ParserUtil.parseRating(ratingWithWhitespace));
+    }
+
+    @Test
+    public void parseReview_noArguments_returnNoReview() throws Exception {
+        String expectedReview = Review.EMPTY_REVIEW;
+        assertEquals(expectedReview, ParserUtil.parseReview("").value);
+    }
+
+    @Test
+    public void parseReview_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseReview((String) null));
+    }
+
+    @Test
+    public void parseRating_invalidReview_throwsParseException() {
+        String exactly499Chars =
+                "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingte"
+                        + "testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtesting"
+                        + "testingtetestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtesti"
+                        + "ngtestingtestingtetestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtes"
+                        + "tingtestingtestingtestingtetestingtestingtestingtestingtestingtestingtestingtestingtestingt"
+                        + "estingtestingtestingtestingtestingt";
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseReview(exactly499Chars + "ab"));
+    }
+
+
+    @Test
+    public void parseReview_validReviewWithoutWhitespace_returnsReview() throws Exception {
+        Review expectedReview = new Review(VALID_REVIEW);
+
+        assertEquals(expectedReview, ParserUtil.parseReview(VALID_REVIEW));
+    }
+
+    @Test
+    public void parseReview_validValueWithWhitespace_returnsTrimmedReview() throws Exception {
+        String reviewWithWhitespace = WHITESPACE + VALID_REVIEW + WHITESPACE;
+        Review expectedReview = new Review(VALID_REVIEW);
+        assertEquals(expectedReview, ParserUtil.parseReview(reviewWithWhitespace));
     }
 
     @Test

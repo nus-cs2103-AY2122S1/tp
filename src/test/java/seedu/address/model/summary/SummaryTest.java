@@ -16,6 +16,7 @@ import seedu.address.testutil.PersonBuilder;
 public class SummaryTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    String totalContacts = "Total Number of Contacts: ";
 
     @Test
     public void execute_getNumberOfContacts_success() {
@@ -26,6 +27,17 @@ public class SummaryTest {
         int summarySize = summary.getNumberOfContacts();
 
         assertEquals(size, summarySize);
+    }
+
+    @Test
+    public void execute_getNumberOfContactsGui_success() {
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        int size = addressBook.getPersonList().size();
+
+        Summary summary = new Summary(getTypicalAddressBook());
+        String summarySize = summary.getNumberOfContactsGui();
+
+        assertEquals(totalContacts + String.valueOf(size), summarySize);
     }
 
     @Test
@@ -88,5 +100,6 @@ public class SummaryTest {
             }
         }
     }
+
 
 }
