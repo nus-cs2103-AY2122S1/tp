@@ -9,8 +9,38 @@ import org.junit.jupiter.api.Test;
 public class LocationTest {
 
     @Test
-    public void constructor_null_exceptionThrown() {
+    public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Location(null));
+    }
+
+    @Test
+    public void constructor_invalidLocation_throwsIllegalArgumentException() {
+        // below 1 character
+        assertThrows(IllegalArgumentException.class, () -> new Location(""));
+        // more than 50 characters
+        assertThrows(IllegalArgumentException.class, () -> new Location("1111111111111"
+                + "11111111111111111111111111111111111111"));
+        // non-alphanumeric characters
+        assertThrows(IllegalArgumentException.class, () -> new Location("@#$"));
+        assertThrows(IllegalArgumentException.class, () -> new Location("U_TOWN"));
+    }
+
+    @Test
+    public void isValidLocation() {
+        // null location
+        assertThrows(NullPointerException.class, () -> Location.isValidLocation(null));
+
+        // valid location
+        assertTrue(Location.isValidLocation("1")); // 1 character(lower boundary)
+        assertTrue(Location.isValidLocation("1111111111111"
+                + "1111111111111111111111111111111111111")); // 50 characters(upper boundary)
+        assertTrue(Location.isValidLocation("25"));
+
+        // invalid location
+        assertFalse(Location.isValidLocation("")); // empty string
+        assertFalse(Location.isValidLocation("")); // // below 1 character
+        assertFalse(Location.isValidLocation("1111111111111"
+                + "11111111111111111111111111111111111111")); // more than 50 characters
     }
 
     @Test

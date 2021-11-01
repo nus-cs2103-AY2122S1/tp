@@ -2,6 +2,7 @@ package seedu.address.model.facility;
 
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Facility's name in the address book.
@@ -9,13 +10,10 @@ import static java.util.Objects.requireNonNull;
 public class FacilityName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Facility names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Facility names should only contain up to 50 alphanumeric characters and spaces,"
+            + " and should not be blank.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]{1,50}";
 
     public final String facilityName;
 
@@ -26,6 +24,7 @@ public class FacilityName {
      */
     public FacilityName(String facilityName) {
         requireNonNull(facilityName);
+        checkArgument(isValidFacilityName(facilityName), MESSAGE_CONSTRAINTS);
         this.facilityName = facilityName;
     }
 
