@@ -82,7 +82,7 @@ public class EventTaskCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeadlineTaskCard)) {
+        if (!(other instanceof EventTaskCard)) {
             return false;
         }
 

@@ -91,7 +91,7 @@ public class Task implements Comparable<Task>, Cloneable {
 
     public String getPriorityAsString() {
         if (this.priority == Priority.HIGH) {
-            return "HIGH️";
+            return "HIGH";
         } else if (this.priority == Priority.MEDIUM) {
             return "MEDIUM";
         } else {
