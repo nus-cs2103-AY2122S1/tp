@@ -158,7 +158,7 @@ public class TypicalPersons {
         .withEmail("joe@mama.com")
         .withAddress("final destination")
         .withTags(PriorityTag.HighPriority.NAME, InvestmentPlanTag.Savings.NAME)
-        .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE)
+        .withAppointment("07 Dec 2021", "0000", NO_APPT_VENUE)
         .withAppointmentCount(INITIAL_COUNT)
         .build();
 
@@ -169,7 +169,7 @@ public class TypicalPersons {
         .withAddress("deez lane")
         .withTags(PriorityTag.LowPriority.NAME, InvestmentPlanTag.Savings.NAME,
             InvestmentPlanTag.MotorInsurance.NAME, InvestmentPlanTag.Investment.NAME)
-        .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE)
+        .withAppointment("07 Dec 2021", "1800", NO_APPT_VENUE)
         .withAppointmentCount(INITIAL_COUNT)
         .build();
 
