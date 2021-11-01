@@ -15,7 +15,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 import seedu.tuitione.commons.core.index.Index;
@@ -187,22 +186,24 @@ public class ParserUtil {
      */
     public static UnenrollCommand parseUnenrollArgs(String args) throws ParseException {
         requireNonNull(args);
-        Index indexStudent;
-        Index indexLesson;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
 
-        try {
-            indexStudent = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE), pe);
-        }
+        String indexStudentString = argMultimap.getPreamble();
+        String indexLessonString = argMultimap.getValue(PREFIX_LESSON).orElseThrow(() ->
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE)));
 
-        try {
-            indexLesson = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON).get().trim());
-        } catch (ParseException | NoSuchElementException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE), e);
+        if (!StringUtil.isAllDigit(indexStudentString)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE));
         }
+        Index indexStudent = ParserUtil.parseIndex(indexStudentString);
+
+        if (!StringUtil.isAllDigit(indexLessonString)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE));
+        }
+        Index indexLesson = ParserUtil.parseIndex(indexLessonString);
 
         return new UnenrollCommand(indexStudent, indexLesson);
     }
@@ -213,22 +214,24 @@ public class ParserUtil {
      */
     public static EnrollCommand parseEnrollArgs(String args) throws ParseException {
         requireNonNull(args);
-        Index indexStudent;
-        Index indexLesson;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
 
-        try {
-            indexStudent = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE), pe);
-        }
+        String indexStudentString = argMultimap.getPreamble();
+        String indexLessonString = argMultimap.getValue(PREFIX_LESSON).orElseThrow(() ->
+                new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE)));
 
-        try {
-            indexLesson = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON).get().trim());
-        } catch (ParseException | NoSuchElementException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE), e);
+        if (!StringUtil.isAllDigit(indexStudentString)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE));
         }
+        Index indexStudent = ParserUtil.parseIndex(indexStudentString);
+
+        if (!StringUtil.isAllDigit(indexLessonString)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE));
+        }
+        Index indexLesson = ParserUtil.parseIndex(indexLessonString);
 
         return new EnrollCommand(indexStudent, indexLesson);
     }

@@ -3,6 +3,7 @@ package seedu.tuitione.logic.parser;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.tuitione.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 
 import org.junit.jupiter.api.Test;
@@ -32,8 +33,7 @@ public class RosterCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RosterCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                RosterCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0", MESSAGE_INVALID_INDEX);
     }
 
 }

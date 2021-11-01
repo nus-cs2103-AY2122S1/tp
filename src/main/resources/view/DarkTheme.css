@@ -18,10 +18,10 @@
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 22pt;
     -fx-font-family: "Montserrat";
     -fx-text-fill: derive(#ffefa6, 20%);
-    -fx-opacity: 1;
+    -fx-opacity: 10;
 }
 
 .text-field {
@@ -260,8 +260,8 @@ Colour region:
 Menu Sub-Menu
  */
 .context-menu {
-    -fx-background-color: #3d2608;
-    -fx-background-radius: 50;
+    -fx-background-color: #F3F7F7;
+    -fx-background-radius: 5;
 }
 
 /**
@@ -270,10 +270,9 @@ Colour region:
 Menu Sub-Menu hover
  */
 .menu-item:focused {
-    -fx-background-color: derive(#936204, 20%);
-    -fx-background-radius: 40;
-    -fx-text-fill: #3d2608;
-
+    -fx-background-color: derive(#FFEFA6, 20%);
+    -fx-background-radius: 5;
+    -fx-text-fill: #37393A;
 }
 
 .context-menu .label {
@@ -297,7 +296,7 @@ Words of Menu Bar
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Montserrat";
-    -fx-text-fill: derive(#ffefa6, 20%);
+    -fx-text-fill: derive(#3d2608, 20%);
     -fx-background-radius: 50;
     -fx-opacity: 0.9;
 }
@@ -587,9 +586,13 @@ Colour of Tags
  */
 #remarks .label {
     -fx-text-fill: white;
-    -fx-background-color: #b2814c;
+    -fx-font-family: "Montserrat"; /*to change font*/
+    -fx-font-weight: bold;
+    -fx-background-color: #C3966F;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 10;
-    -fx-font-size: 11;
+    -fx-font-size: 13;
 }
+
+

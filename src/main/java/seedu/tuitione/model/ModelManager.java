@@ -125,6 +125,7 @@ public class ModelManager implements Model {
     public void addStudent(Student student) {
         requireNonNull(student);
         tuitione.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -149,6 +150,7 @@ public class ModelManager implements Model {
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
         tuitione.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override

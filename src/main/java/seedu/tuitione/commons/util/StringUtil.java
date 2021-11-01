@@ -116,4 +116,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents an all digit string
+     * Will return false for any other non-null string input
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isAllDigit(String s) {
+        requireNonNull(s);
+        String trimmedS = s.trim();
+        return !trimmedS.isEmpty() && trimmedS.matches("\\d+");
+    }
 }
