@@ -336,6 +336,7 @@ Format: `todo n/TASK_NAME [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 * The possible priorities are High, Medium and Low.
 * `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as Low Priority.
 * The priority parameter accepts partial words and is case-insensitive.
+* A combination of different priority levels are not accepted.
 * Tasks that are not specified a priority level will be by default Low Priority.
 * `DESCRIPTION` should only contain alphanumerical characters.
 
@@ -356,7 +357,7 @@ Format: `event n/TASK_NAME on/EVENT_DATE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TA
 * Adds an event task with the specified `TASK_NAME`
 * The event task has the taskDate `DATE`
 * The taskDate must be in the format `YYYY-MM-dd`
-* Priority, description and tags are similar to Todo Tasks.
+* Priority, description and tags are similar to [**Todo Task**](#add-a-todo-task-todo).
 
 Examples:
 * `event n/Party on/2021-09-23 p/M` creates the event task "party", on "2021-09-23" with
@@ -372,7 +373,7 @@ Format: `event n/TASK_NAME by/DEADLINE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]
 * Adds a deadline task with the specified `TASK_NAME`
 * The deadline task has the task date `DEADLINE`
 * The taskDate must be in the format `YYYY-MM-dd`
-* Priority, description and tags are similar to Todo Tasks.
+* Priority, description and tags are similar to [**Todo Task**](#add-a-todo-task-todo).
 
 Examples:
 * `deadline n/tutorial participation by/2021-09-23 p/H` creates the deadline task "tutorial participation",
@@ -478,41 +479,41 @@ If your changes to the data file makes its format invalid, tApp will discard all
 
 ## [Students](#students)
 
-Commands | Format and Examples
---------|-----------------------------
-[**List Students**](#list-all-students-students) | `students`
-[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `addStudent n/Clara Ng s/A0221111W e/clara@u.nus.edu`
-[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` <br> e.g., `editStudent 1 s/A0221111L e/johndoe@u.nus.edu`
-[**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` <br> e.g., `deleteStudent 1`
-[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/10`
-[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` <br> e.g., `markp 1 w/10`
-[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` <br> e.g., `findStudent John`
+Commands | Format | Examples
+--------|------------------------|-----
+[**List Students**](#list-all-students-students) | `students` | 
+[**Add Student**](#add-a-student--addstudent) | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL  [t/TAG]…​` | e.g., `addStudent n/Clara Ng s/A0221111W e/clara@u.nus.edu` 
+[**Edit Student**](#edit-a-student--editstudent) | `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO NAME] [u/USERNAME] [t/TAG]…​` | e.g., `editStudent 1 s/A0221111L e/johndoe@u.nus.edu`
+[**Delete Student**](#delete-a-student-deletestudent) | `deleteStudent INDEX` | e.g., `deleteStudent 1`
+[**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` | e.g., `marka 1 w/10`
+[**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` | e.g., `markp 1 w/10`
+[**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` | e.g., `findStudent John`
 [**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents`
 
 ## [Groups](#groups)
 
-Commands | Format and Examples
---------|-----------------------------
+Commands | Format | Examples
+--------|------------------------|-----
 [**List Groups**](#list-all-groups-groups) | `groups`
-[**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​` <br> e.g., `addGroup g/W14-5 r/tp y/AY20222023`
-[**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​` <br> e.g., `editGroup 2 g/W14-4 r/tp y/AY20212022`
-[**Delete Group**](#delete-a-group-deletegroup) | `deleteGroup INDEX` <br> e.g., `deleteGroup 1`
-[**Add Student to Group**](#add-a-student-to-a-group-addmember) | `addMember INDEX g/GROUP` <br> e.g., `addMember 2 g/W14-4`
-[**Delete Student from Group**](#delete-a-student-from-a-group-deletemember) | `deleteMember GROUP_INDEX STUDENT_INDEX` <br> e.g., `deleteMember 2 1`
-[**Find Group**](#locating-group-by-name-findgroup) | `findGroup KEYWORD [MORE_KEYWORDS]` <br> e.g., `findGroup W15-5`
+[**Add Group**](#add-a-group-addgroup) | `addGroup g/NAME [y/YEAR] [r/REPO NAME] [t/TAG]…​` | e.g., `addGroup g/W14-5 r/tp y/AY20222023`
+[**Edit Group**](#editing-a-group--editgroup) | `editGroup INDEX [g/NAME] [r/REPO NAME] [y/Year] [t/TAG]…​` | e.g., `editGroup 2 g/W14-4 r/tp y/AY20212022`
+[**Delete Group**](#delete-a-group-deletegroup) | `deleteGroup INDEX` | e.g., `deleteGroup 1`
+[**Add Student to Group**](#add-a-student-to-a-group-addmember) | `addMember INDEX g/GROUP` | e.g., `addMember 2 g/W14-4`
+[**Delete Student from Group**](#delete-a-student-from-a-group-deletemember) | `deleteMember GROUP_INDEX STUDENT_INDEX` | e.g., `deleteMember 2 1`
+[**Find Group**](#locating-group-by-name-findgroup) | `findGroup KEYWORD [MORE_KEYWORDS]` | e.g., `findGroup W15-5`
 [**Clear Groups**](#clearing-all-entries-from-group-list-cleargroups) | `clearGroups`
 
 ## [Tasks](#tasks)
 
-Commands | Format and Examples
---------|-----------------------------
+Commands | Format | Examples
+--------|------------------------|-----
 [**List Tasks**](#list-all-tasks-tasks) | `tasks`
-[**Add Todo Task**](#add-a-todo-task-todo) | `todo n/TASK_NAME [t/TAG]…​` <br> e.g., `todo n/tP t/CS2103`
-[**Add Event Task**](#add-an-event-task-event) | `event n/TASK_NAME on/DATE [t/TAG]…​` <br> e.g., `event n/Final Exam on/2021-10-31 t/CS2103`
-[**Add Deadline Task**](#add-a-deadline-task-deadline) | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` <br> e.g., `deadline n/Finish tP by/2021-10-31 t/W14-4`
-[**Edit Task**](#editing-a-task-edittask) | `editTask INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`<br> e.g.,`editTask 2 n/study by/2012-10-31 t/W14-4`
-[**Delete Task**](#deleting-a-task-deletetask) | `deleteTask INDEX`<br> e.g., `deleteTask 3`
-[**Mark Done Task**](#marking-a-task-as-done--donetask) | `doneTask INDEX` <br> e.g., `doneTask 1`
+[**Add Todo Task**](#add-a-todo-task-todo) | `todo n/TASK_NAME [t/TAG]…​` | e.g., `todo n/tP t/CS2103`
+[**Add Event Task**](#add-an-event-task-event) | `event n/TASK_NAME on/DATE [t/TAG]…​` | e.g., `event n/Final Exam on/2021-10-31 t/CS2103`
+[**Add Deadline Task**](#add-a-deadline-task-deadline) | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` | e.g., `deadline n/Finish tP by/2021-10-31 t/W14-4`
+[**Edit Task**](#editing-a-task-edittask) | `editTask INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`| e.g.,`editTask 2 n/study by/2012-10-31 t/W14-4`
+[**Delete Task**](#deleting-a-task-deletetask) | `deleteTask INDEX`| e.g., `deleteTask 3`
+[**Mark Done Task**](#marking-a-task-as-done--donetask) | `doneTask INDEX` | e.g., `doneTask 1`
 [**Clear Tasks**](#clearing-all-entries-from-task-list-cleartasks) | `clearTasks`
 
 ## General
