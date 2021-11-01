@@ -200,8 +200,8 @@ public class MeditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC
-                + ADDRESS_DESC_BOB + PHONE_DESC_BOB;
+        userInput = " " + CliSyntax.PREFIX_MEMBER_INDEX + targetIndex.getOneBased() + EMAIL_DESC_BOB +
+                INVALID_PHONE_DESC + ADDRESS_DESC_BOB + PHONE_DESC_BOB;
         descriptor = new EditMemberDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedCommand = new MeditCommand(targetIndex, descriptor);
