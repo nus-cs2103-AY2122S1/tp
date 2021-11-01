@@ -27,7 +27,7 @@ public class AddAppointmentCommand extends AppointmentCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + FLAG_ADD + ": Adds an appointment to PlannerMD "
             + "Parameters: " + PREFIX_PATIENT + "INDEX_OF_PATIENT " + PREFIX_DOCTOR + "INDEX_OF_DOCTOR "
-            + PREFIX_START + "DATE_AND_TIME" + " [" + PREFIX_DURATION + "DURATION" + "] " + "["
+            + PREFIX_START + "DATE_AND_TIME" + "git [" + PREFIX_DURATION + "DURATION" + "] " + "["
             + PREFIX_REMARK + " REMARK" + "]\n" + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " "
             + PREFIX_PATIENT + "1 "
             + PREFIX_DOCTOR + "2 " + PREFIX_START + "12/11/2021 20:00 "

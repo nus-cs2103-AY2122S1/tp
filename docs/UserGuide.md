@@ -27,7 +27,7 @@ Take note of some syntax we will frequently use throughout the User Guide:
 * [Features](#features)
   * [General](#general)
     * [help](#help)
-    * [toggle](#toggle) 
+    * [toggle](#toggle)
     * [clear](#clear)
     * [exit](#exit)
   * [Managing Patients](#managing-patients)
@@ -76,10 +76,8 @@ Take note of some syntax we will frequently use throughout the User Guide:
 
 4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/Ui.png)    
-   
-
-    
+   ![Ui](images/Ui.png) 
+ 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -454,7 +452,8 @@ Format: `appt -a p/INDEX_OF_PATIENT d/INDEX_OF_DOCTOR s/DATE_AND_TIME [dur/DURAT
 
 Examples: `appt -a p/1 d/2 s/12/11/2021 20:00 dur/20 r/Patient wants a blood test`
 
-* Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …​
+* Both patient's and doctor's index **must be a positive integer** 1, 2, 3, …
+* Duration has to be an integer between 1 and 120 (minutes).
 * `DATE_AND_TIME` accepts the format `DD/MM/YYYY HH:MM` e.g. `12/11/2021 20:00`.
 * If you did not include the duration, it will be automatically be set to **10** minutes.
 
