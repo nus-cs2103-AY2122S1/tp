@@ -10,8 +10,11 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.facility.Facility;
+import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
 import seedu.address.testutil.FacilityBuilder;
 
@@ -98,6 +102,21 @@ public class EditFacilityCommandTest {
         expectedModel.setFacility(model.getFilteredFacilityList().get(0), editedFacility);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_capacityExceededUnfilteredList_failure() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        model.addPerson(AMY);
+        model.addPerson(BOB);
+        model.addFacility(TAMPINES_HUB_FIELD_SECTION_B);
+        model.split(new PersonAvailableOnDayPredicate(1));
+
+        EditFacilityDescriptor descriptor =
+                new EditFacilityDescriptorBuilder().withCapacity("1").build();
+        EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST, descriptor);
+
+        assertCommandFailure(command, model, EditFacilityCommand.MESSAGE_ALLOCATION_EXCEEDS_CAPACITY);
     }
 
     @Test
