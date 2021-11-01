@@ -20,14 +20,14 @@ import seedu.address.model.module.event.Event;
 import seedu.address.model.module.member.Member;
 
 /**
- * Unmarks a member in an event identified using it's displayed index from the address book.
+ * Unmark a member in an event identified using it's displayed index from the address book.
  */
 public class EunmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "eunmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unmark members identified by index number used in the displayed member list.\n"
+            + ": Unmark members identified by the corresponding index number.\n"
             + "Parameters: "
             + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
             + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)...\n"

@@ -38,7 +38,7 @@ public class MeditCommand extends Command {
     public static final String COMMAND_WORD = "medit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
-            + "by the index number used in the displayed member list. "
+            + "by the corresponding index number. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)\n"
             + "[" + PREFIX_NAME + "NAME] "

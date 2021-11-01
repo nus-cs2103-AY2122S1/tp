@@ -21,7 +21,7 @@ public class MdelCommand extends Command {
     public static final String COMMAND_WORD = "mdel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the member identified by the index number used in the displayed member list.\n"
+            + ": Deletes the member identified by the corresponding index number.\n"
             + "Parameters: " + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_MEMBER_INDEX + "1\n";
 

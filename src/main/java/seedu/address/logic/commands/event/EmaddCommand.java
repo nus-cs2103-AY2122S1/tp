@@ -27,7 +27,7 @@ public class EmaddCommand extends Command {
     public static final String COMMAND_WORD = "emadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Add members to event identified by index number used in the displayed event list.\n"
+            + ": Add members to event identified by their corresponding index numbers.\n"
             + "Parameters: "
             + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
             + PREFIX_MEMBER_INDEX + "MEMBER_INDEX (must be a positive integer)...\n"

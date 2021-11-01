@@ -27,14 +27,14 @@ import seedu.address.model.module.event.EventDate;
 import seedu.address.model.module.member.Member;
 
 /**
- * Edits the details of an existing event in the Ailurus.
+ * Edits the details of an existing event in Ailurus.
  */
 public class EeditCommand extends Command {
 
     public static final String COMMAND_WORD = "eedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
-            + "by the index number used in the displayed member list. "
+            + "by the corresponding index number. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
