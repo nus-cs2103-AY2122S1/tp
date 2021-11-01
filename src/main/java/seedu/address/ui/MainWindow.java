@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
@@ -213,12 +214,15 @@ public class MainWindow extends UiPart<Stage> {
 
     private void initListeners() {
         // Add listeners
-        centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+        ListView<Person> personListView = centerPanel.getPersonListView();
+        personListView.getSelectionModel().selectedItemProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if (newVal != null) {
                         handlePersonGridPanel(newVal);
                     }
                 });
+        personListView.setOnMouseClicked(event -> handlePersonGridPanel(personListView
+                .getSelectionModel().getSelectedItem()));
     }
 
     /**
