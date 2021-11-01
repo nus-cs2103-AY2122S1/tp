@@ -94,7 +94,8 @@ public class AddAppCommand extends Command {
         try {
             model.addAppointment(appointmentToAdd);
         } catch (ClashingAppointmentsException e) {
-            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_CLASHING_APPOINTMENT_ADDED + e.getClashingAppointment().getTimePeriod().toString());
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_CLASHING_APPOINTMENT_ADDED
+                    + e.getClashingAppointment().get(0).getTimePeriod().toString());
         } catch (DuplicateAppointmentException e) {
             throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED);
         }
