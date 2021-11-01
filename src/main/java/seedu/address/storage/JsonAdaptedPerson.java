@@ -87,26 +87,18 @@ public class JsonAdaptedPerson {
         gitStats = source.getGitStats();
     }
 
-    private boolean isImageEqual(Image firstImage, Image secondImage) {
-        if (firstImage != null && secondImage == null) {
-            return false;
-        }
-        if (firstImage == null) {
-            return secondImage == null;
-        }
+    public boolean isDefaultImage(Image firstImage) {
 
-        if (firstImage.getWidth() != secondImage.getWidth()) {
-            return false;
-        }
-        if (firstImage.getHeight() != secondImage.getHeight()) {
+        if (firstImage == null
+                || firstImage.getHeight() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getHeight()
+                || firstImage.getWidth() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getWidth()) {
             return false;
         }
 
-        // Compare images color
         for (int x = 0; x < firstImage.getWidth(); x++) {
             for (int y = 0; y < firstImage.getHeight(); y++) {
                 int firstArgb = firstImage.getPixelReader().getArgb(x, y);
-                int secondArgb = secondImage.getPixelReader().getArgb(x, y);
+                int secondArgb = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getPixelReader().getArgb(x, y);
                 if (firstArgb != secondArgb) {
                     return false;
                 }
@@ -182,7 +174,7 @@ public class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (image == null || isImageEqual(image, GitHubUtil.DEFAULT_USER_PROFILE_PICTURE)) {
+        if (image == null || isDefaultImage(image)) {
             return new Person(modelName, modelTelegram, modelGithub, modelPhone,
                     modelEmail, modelAddress, modelTags, modelIsFavourite);
         }
