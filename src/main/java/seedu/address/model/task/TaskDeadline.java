@@ -57,7 +57,7 @@ public class TaskDeadline {
             formattedDateAndTime = timeFormatter.format(time);
             if (split.length == 2) {
                 date = LocalDate.parse(split[1]);
-                formattedDateAndTime = formattedDateAndTime + " " + dateFormatter.format(date);
+                formattedDateAndTime = dateFormatter.format(date) + " " + formattedDateAndTime;
             }
         }
         return formattedDateAndTime;
