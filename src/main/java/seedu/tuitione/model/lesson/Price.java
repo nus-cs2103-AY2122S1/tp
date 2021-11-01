@@ -8,8 +8,11 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
  */
 public class Price {
 
-    public static final String PRICE_MESSAGE_CONSTRAINT = "⚠\tAlert:\n\nPrice cannot be negative";
+    public static final double MAX_PRICE = 200.0;
     public static final String CURRENCY = "SGD $";
+
+    public static final String PRICE_MESSAGE_CONSTRAINT = String.format("Price cannot be negative or more than "
+            + CURRENCY + " %1$.2f", MAX_PRICE);
 
     public final double value;
 
@@ -24,10 +27,10 @@ public class Price {
     }
 
     /**
-     * Returns true if a given price is at least 0.
+     * Returns true if a given price is between 0 and {@code MAX_PRICE} inclusive.
      */
     public static boolean isValidPrice(double testPrice) {
-        return (testPrice >= 0.0);
+        return (testPrice >= 0.0) && (testPrice <= MAX_PRICE);
     }
 
     @Override

@@ -11,8 +11,9 @@ public class Subject {
 
     public static final String SUBJECT_VALIDATION_REGEX = "\\p{Alnum}+";
     public static final int MAXIMUM_SUBJECT_LENGTH = 20;
-    public static final String SUBJECT_MESSAGE_CONSTRAINTS = String.format("Subject names should be alphanumeric and"
-            + " within %1$d characters", MAXIMUM_SUBJECT_LENGTH);
+
+    public static final String SUBJECT_MESSAGE_CONSTRAINTS = String.format("Subject names should be a single "
+            + "alphanumeric word and within %1$d characters", MAXIMUM_SUBJECT_LENGTH);
 
     public final String value;
 

@@ -9,7 +9,10 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final int MAX_LENGTH = 150;
+    public static final String MESSAGE_CONSTRAINTS =
+            String.format("Addresses can take any values, it should not be blank and should not "
+                    + "contain more than %1$d characters (whitespace included)", MAX_LENGTH);
 
     /*
      * The first character of the tuitione must not be a whitespace,
@@ -34,7 +37,9 @@ public class Address {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX)
+                && !test.isEmpty()
+                && test.length() <= MAX_LENGTH;
     }
 
     @Override

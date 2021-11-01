@@ -22,11 +22,11 @@ import seedu.tuitione.model.remark.Remark;
  */
 public class Student {
 
-    public static final int MAX_LESSON_SIZE = 10;
+    public static final int MAX_ENROLLMENT_SIZE = 10;
     public static final int MAX_REMARK_SIZE = 5;
 
-    public static final String LESSON_SIZE_MESSAGE_CONSTRAINT =
-            "⚠\tAlert:\n\nStudent %1$s has enrolled for %2$d lessons already.";
+    public static final String ENROLLMENT_MESSAGE_CONSTRAINT = "Student %1$s has enrolled for "
+            + String.format("%1$d lessons already.", MAX_ENROLLMENT_SIZE);
 
     // Identity fields
     private final Name name;
@@ -155,8 +155,7 @@ public class Student {
      */
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
-        checkArgument(isAbleToEnrollForMoreLessons(),
-                String.format(LESSON_SIZE_MESSAGE_CONSTRAINT, this.getName(), MAX_LESSON_SIZE));
+        checkArgument(isAbleToEnrollForMoreLessons(), String.format(ENROLLMENT_MESSAGE_CONSTRAINT, this.getName()));
         if (!containsLesson(lesson)) {
             lessons.add(lesson);
         }
@@ -187,7 +186,7 @@ public class Student {
      * Returns true if Student is enrolled in 9 or fewer lessons
      */
     public boolean isAbleToEnrollForMoreLessons() {
-        return lessons.size() < MAX_LESSON_SIZE;
+        return lessons.size() < MAX_ENROLLMENT_SIZE;
     }
 
     /**

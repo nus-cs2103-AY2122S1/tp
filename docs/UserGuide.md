@@ -150,7 +150,7 @@ This section outlines all the features that **TuitiONE** has. You will be able t
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will ignore follow-up inputs.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -192,13 +192,17 @@ Command Format: `filter [g/GRADE] [s/SUBJECT]`
   
     * If you are filtering by both `GRADE` and `SUBJECT`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
+* `GRADE` can be specified in lower- or upper- case (i.e. `P5` and `p5` represents the same grade).
+
+* `SUBJECT` can be specified in lower- or upper- cases (i.e. `MATH` and `math` represents the same subject which is `Math`). See [`add-l` (add lesson)](#adding-a-lesson-add-l) command for more information.
+
 Example(s):
 
 * `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective lists.
 
-* `filter s/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
+* `filter s/science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
 
-* `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student list by grade of `P2`, and display the corresponding entries in the respective lists.
+* `filter s/SCIENCE g/p2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student list by grade of `P2`, and display the corresponding entries in the respective lists.
 
 ![Result of `filter`](images/UserGuideImage/filter.PNG)
 
@@ -215,7 +219,15 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 :information_source: **Details:**
 
-* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).
+* `NAME` can only be alphanumeric and within a maximum of 150 characters. `NAME` will also be set to have the first character of each space separated word to be capital while the rest becomes lower case (i.e. `samUel oNg` becomes `Samuel Ong`). This is to comply with the majority of naming regulations worldwide.
+
+* `PARENT_CONTACT` can only be 8 digits long and start with `6`, `8` or `9` (as this application is currently based for Singapore use).
+
+* `EMAIL` can only have a maximum of 100 characters and have the conventional `@` as well as a domain name.
+
+* `ADDRESS` can only have a maximum of 150 characters.
+
+* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S5` (secondary school levels). Here specifying lower case will also be a valid grade input (e.g. `p3` is allowed and will be read in the application as `P3`).
 
 * A student can have any number of remarks, capped at 5. (including 0). The number of characters each remark can have is capped at 25.
 
@@ -302,6 +314,8 @@ Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/E
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
 * You can edit a student to have any number of remarks, capped at 5 (including 0). The number of characters each remark can have is capped at 25.
+
+* See [`add` command](#adding-a-student-add) for other constraints on defining a student.
 
 * If you enter `edit r/[REMARK_TO_ADD]`, TuitiONE will add on the given `REMARK` to the existing set of remarks.
 
@@ -395,17 +409,17 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 :information_source: **Details:**
 
-* `GRADE` here follows the similar requirements when adding a student.
+* `GRADE` here follows the similar requirements when adding a student. See [`add`](#adding-a-student-add) command for more details regarding grade.
 
-* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.
+* `SUBJECT` can only be a single word limited to `20` characters, and its first letter will be capitalized.
 
-* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.
+* `DAY_OF_WEEK` can only be these form: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun` (the first letter need not be capitalized, i.e. `mon` is allowed but not `MON`).
 
 * `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.
 
-* Lessons are fixed at **two** hour periods.
+* Lessons are fixed at **two** hour periods. In upcoming features, we will give you the power to define your lesson timing ranges.
 
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive.
 
 Example(s):
 

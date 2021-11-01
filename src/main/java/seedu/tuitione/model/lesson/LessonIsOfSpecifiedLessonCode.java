@@ -6,6 +6,7 @@ import java.util.function.Predicate;
  * Tests that a {@code Lesson}'s {@code LessonCode} matches the given lessonCode
  */
 public class LessonIsOfSpecifiedLessonCode implements Predicate<Lesson> {
+
     private final LessonCode lessonCode;
 
     public LessonIsOfSpecifiedLessonCode(LessonCode lessonCode) {

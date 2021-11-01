@@ -9,12 +9,12 @@ import java.util.Objects;
  * Represents the grade of the student
  */
 public class Grade {
-    public static final String GRADE_MESSAGE_CONSTRAINTS = "⚠\tAlert:\n\nPrefix can be upper or lower case letters, "
+    public static final String GRADE_MESSAGE_CONSTRAINTS = "Prefix can be upper or lower case letters, "
             + "and is either S (to denote secondary) or P (to denote Primary). "
-            + "\nLevel number should be from 1 to 6 for primary and 1 to 4 for secondary."
+            + "\nLevel number should be from 1 to 6 for primary and 1 to 5 for secondary."
             + " Example(s): P1, S3";
 
-    public static final String[] VALID_GRADES = {"P1", "P2", "P3", "P4", "P5", "P6", "S1", "S2", "S3", "S4"};
+    public static final String[] VALID_GRADES = {"P1", "P2", "P3", "P4", "P5", "P6", "S1", "S2", "S3", "S4", "S5"};
     public final String value;
 
     /**

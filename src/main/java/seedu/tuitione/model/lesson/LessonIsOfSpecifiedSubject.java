@@ -6,6 +6,7 @@ import java.util.function.Predicate;
  * Tests that a {@code Lesson}'s {@code Subject} matches the given subject.
  */
 public class LessonIsOfSpecifiedSubject implements Predicate<Lesson> {
+
     private final Subject subject;
 
     public LessonIsOfSpecifiedSubject(Subject subject) {
@@ -20,7 +21,7 @@ public class LessonIsOfSpecifiedSubject implements Predicate<Lesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LessonIsOfSpecifiedGrade // instanceof handles nulls
+                || (other instanceof LessonIsOfSpecifiedSubject // instanceof handles nulls
                 && subject.equals(((LessonIsOfSpecifiedSubject) other).subject)); // state check
     }
 }

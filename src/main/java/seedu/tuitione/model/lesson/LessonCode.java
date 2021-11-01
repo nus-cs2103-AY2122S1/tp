@@ -15,7 +15,7 @@ import seedu.tuitione.model.student.Grade;
  */
 public class LessonCode {
 
-    public static final String CODE_MESSAGE_CONSTRAINT = "⚠\tAlert:\n\nLesson code should be of correct format";
+    public static final String CODE_MESSAGE_CONSTRAINT = "Lesson code should be of correct format";
 
     public final String value;
 
@@ -66,17 +66,6 @@ public class LessonCode {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Provides the lesson time for a given lesson code.
-     */
-    public static LessonTime getLessonTimeFromCode(LessonCode code) {
-        String[] lessonFields = code.value.split("-");
-        return new LessonTime(
-                LessonTime.parseStringToDay(lessonFields[2]).orElseThrow(),
-                LocalTime.parse(lessonFields[3], LessonTime.TIME_FORMATTER)
-        );
     }
 
     @Override

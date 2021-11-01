@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import seedu.tuitione.model.student.Grade;
 
 public class LessonIsOfSpecifiedGradeAndSubject implements Predicate<Lesson> {
+
     private final Grade grade;
     private final Subject subject;
 

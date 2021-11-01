@@ -6,6 +6,7 @@ import java.util.function.Predicate;
  * Tests that a {@code Student}'s {@code Grade} matches the given grade.
  */
 public class StudentIsOfSpecifiedGrade implements Predicate<Student> {
+
     private final Grade grade;
 
     public StudentIsOfSpecifiedGrade(Grade grade) {
