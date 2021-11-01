@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import static java.lang.String.valueOf;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
@@ -84,6 +85,8 @@ public class SampleDataUtil {
             for (Client sampleClient : getSampleClients(sampleAb)) {
                 sampleAb.addClient(sampleClient);
             }
+            int numOfClients = getSampleClients(sampleAb).length;
+            sampleAb.setClientCounter(valueOf(numOfClients)); // indexing starts from 0
         } catch (ParseException e) {
             logger.warning("Sample data file not in the correct format. Will be starting with an empty AddressBook");
             return new AddressBook();
