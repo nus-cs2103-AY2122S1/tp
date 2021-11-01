@@ -112,7 +112,7 @@ Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO_NAME] [
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
-* This command flags out missing fields first before ensuring the validity of the fields, and finally the index. (If an invalid index is entered with no or wrong fields, the command would not check the validity of the index)
+* This command flags out indexes less than 1 first, before missing fields, ensuring the validity of the fields, and finally the validity of index that is greater than 0. (If an invalid index greater than 0 is entered with no or wrong fields, the command would not check the validity of the index)
 
 Examples:
 * `editStudent 1 s/A0221111L e/johndoe@u.nus.edu` Edits the student number and email address of the 1st student to be `A0221111L` and `johndoe@u.nus.edu` respectively.
@@ -239,7 +239,7 @@ Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 * When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
 * You can remove all the group’s tags by typing `t/` without
   specifying any tags after it.
-* Similiar to `editStudent` this command flags out missing fields first before ensuring the validity of the fields, and finally the index.
+* Similiar to `editStudent` this command flags out index values less than 1 first, before missing fields, ensuring the validity of the fields, and finally the index that is greater than 0.
 
 Examples:
 * `editGroup 1 g/W14-4 r/tp` Edits the group name and repository name of the 1st group to be `W14-4` and `tp` respectively.
