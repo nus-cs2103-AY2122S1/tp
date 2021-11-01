@@ -133,4 +133,11 @@ public class PositionBook implements ReadOnlyPositionBook {
     public int hashCode() {
         return positions.hashCode();
     }
+
+    public PositionBook getCopiedPositionBook() {
+        PositionBook copiedPositionBook = new PositionBook();
+        copiedPositionBook.positions.setPositions(this.positions.getCopiedPositions());
+
+        return copiedPositionBook;
+    }
 }

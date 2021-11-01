@@ -55,4 +55,7 @@ public class Title {
         return fullTitle.hashCode();
     }
 
+    public Title getCopiedTitle() {
+        return new Title(fullTitle);
+    }
 }

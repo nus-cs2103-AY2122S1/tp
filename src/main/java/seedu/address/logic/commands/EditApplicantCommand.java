@@ -80,9 +80,17 @@ public class EditApplicantCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
+        memento.record(model.getCopiedModel());
+
         model.setApplicant(applicantToEdit, editedApplicant);
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant));
+
+        String successMessage = String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
+        memento.recordMessage(successMessage);
+
+        model.addToHistory(this);
+
+        return new CommandResult(successMessage);
     }
 
     @Override

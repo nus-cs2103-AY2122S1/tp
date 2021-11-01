@@ -79,4 +79,8 @@ public class Position {
 
         return builder.toString();
     }
+
+    public Position getCopiedPosition() {
+        return new Position(title.getCopiedTitle(), description.getCopiedDescription());
+    }
 }

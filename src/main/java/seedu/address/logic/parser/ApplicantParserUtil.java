@@ -10,6 +10,7 @@ import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.applicant.ProfileUrl;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Title;
 
@@ -139,6 +140,27 @@ public class ApplicantParserUtil {
         } catch (IllegalArgumentException iae) {
             throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parses a {@code String url} into a {@code ProfileUrl}. It returns emptyProfileUrl if it receives
+     * empty string.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param url user input string of the github link.
+     * @return the profileUrl containing this url.
+     * @throws ParseException if the given {@code gitHubUrl} is invalid.
+     */
+    public static ProfileUrl parseUrl(String url) throws ParseException {
+        requireNonNull(url);
+        String trimmedUrl = url.trim();
+        if (trimmedUrl.equals("")) {
+            return ProfileUrl.emptyProfileUrl();
+        }
+        if (!ProfileUrl.isValidUrl(url)) {
+            throw new ParseException(ProfileUrl.MESSAGE_CONSTRAINTS);
+        }
+        return new ProfileUrl(url);
     }
 
 }
