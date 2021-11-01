@@ -218,8 +218,8 @@ This section contains information on features related to adding appointments to 
 ### Adding an appointment: `addApp`
 
 Adds an appointment for the specified person or persons identified using a list of index(es) with 
-the date (dd-MM-yyyy), optional time field (24 hour eg. 1530) and description to the 
-appointment list.
+the datetime field(dd-MM-yyyy HHmm), with time being in the 24-hour format e.g. 1530, 
+and description to the appointment list.
 
 Format: `addApp id/INDEX[INDEX,INDEX,INDEX...] a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION`
 
