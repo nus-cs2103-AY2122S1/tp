@@ -10,7 +10,6 @@ import java.time.LocalTime;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.CalendarView;
-import com.calendarfx.view.page.DayPage;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
