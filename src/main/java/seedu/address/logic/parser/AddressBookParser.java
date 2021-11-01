@@ -151,8 +151,7 @@ public class AddressBookParser {
             return new RemindCommand();
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND
-                    + "\n💡 TIP: Type \"help\" to view the valid commands!");
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

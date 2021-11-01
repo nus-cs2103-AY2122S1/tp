@@ -165,7 +165,8 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () -> parser
                         .parseCommand(""));
         assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () -> parser
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        "💡 TIP: Type \"help\" to view the valid command format!"), () -> parser
                         .parseCommand(TodayCommand.COMMAND_WORD + " 3"));
     }
 
