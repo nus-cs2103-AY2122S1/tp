@@ -40,7 +40,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label githubLink;
     @FXML
-    private FlowPane tags;
+    protected FlowPane tags;
     @FXML
     private VBox studentValuesContainer;
 
@@ -54,7 +54,7 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         email.setText("Email: " + student.getEmail().value);
         studentNumber.setText("Student Number: " + student.getStudentNumber().toString());
-        if (!student.getGroupName().toString().contentEquals("-")) {
+        if (student.hasGroupName()) {
             Label studentGrp = new Label("Group: " + student.getGroupName().toString());
             tags.getChildren().add(studentGrp);
             studentGrp.getStyleClass().add("studentGroupLabel");
