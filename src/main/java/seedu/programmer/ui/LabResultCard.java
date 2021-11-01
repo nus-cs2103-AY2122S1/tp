@@ -41,7 +41,7 @@ public class LabResultCard extends UiPart<Region> {
         this.result = result;
         labTitle.setText(result.toString());
         totalScore.setText("Total Score: " + result.getTotalScore().toString());
-        if (result.getActualScore().equals(Double.NaN)) {
+        if (result.getActualScore().equals(0)) {
             studentScore.setText("Actual Score: -");
         } else {
             studentScore.setText("Actual Score: " + result.getActualScore().toString());

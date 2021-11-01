@@ -26,7 +26,7 @@ public class EditLabCommandTest {
     private static int newLabNum1 = 14;
     private static int newLabNum2 = 13;
     private static int newLabNum3 = 12;
-    private static Double newLabTotal = 40.0;
+    private static Integer newLabTotal = 40;
     private static EditLabCommand sampleCommandA;
     private static EditLabCommand sampleCommandB;
     private static EditLabCommand sampleCommandC;
@@ -37,8 +37,8 @@ public class EditLabCommandTest {
     public static void oneTimeSetUp() {
         // Initialize sample students and Commands once before all tests
         validLab = new LabBuilder().build();
-        sampleLabA = new LabBuilder().withLabNum(10).withTotal(20.0).build();
-        Lab sampleLabB = new LabBuilder().withLabNum(11).withTotal(30.0).build();
+        sampleLabA = new LabBuilder().withLabNum(10).withTotal(20).build();
+        Lab sampleLabB = new LabBuilder().withLabNum(11).withTotal(30).build();
         sampleCommandA = new EditLabCommand(sampleLabA, newLabNum, newLabTotal);
         sampleCommandB = new EditLabCommand(sampleLabB, newLabNum);
         sampleCommandC = new EditLabCommand(sampleLabB, newLabTotal);
