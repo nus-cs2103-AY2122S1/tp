@@ -14,10 +14,14 @@ if () then ([edit involves dates])
     :TAB displays clashing warning to user;
   else ([else])
     :TAB edits the lesson for the student;
+    :TAB displays details of the
+    edited lesson to the user;
   endif
 
 else ([else])
   :TAB edits the lesson for the student;
+  :TAB displays details of the
+  edited lesson to the user;
 
 endif
 

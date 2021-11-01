@@ -12,6 +12,7 @@ if () then ([TAB has clashing lessons with new lesson])
   :TAB displays clashing warning to user;
 else ([else])
   :TAB adds the lesson to the student;
+  :TAB displays details of the lesson to the user;
 endif
 
 stop
