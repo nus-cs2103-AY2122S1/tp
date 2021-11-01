@@ -47,7 +47,13 @@ public class SortDescriptor {
             assert(orderingType.equals(DESCENDING));
             return comparator.reversed();
         }
-
     }
 
+    public SortField getSortField() {
+        return sortField;
+    }
+
+    public SortOrdering getSortOrdering() {
+        return sortOrdering;
+    }
 }
