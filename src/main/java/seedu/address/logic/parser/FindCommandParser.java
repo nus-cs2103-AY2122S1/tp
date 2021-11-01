@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.ParserUtil.testByAllFields;
 
 import java.util.Arrays;
@@ -32,8 +31,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim().replace(FindCommand.COMMAND_WORD, "");
-        checkTrimmedArgs(trimmedArgs);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_DASH_NAME, PREFIX_DASH_PHONE, PREFIX_DASH_INDEX,
                 PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
@@ -42,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         PersonContainsFieldsPredicate predicate = testByAllFields(argMultimap);
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
             return new FindCommand(ParserUtil
-                    .parseIndex(argMultimap.getValue(PREFIX_INDEX).get()).getZeroBased());
+                    .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased());
         }
         if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_DASH_NAME).get()
@@ -51,15 +48,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicate);
 
         }
+        if (!predicate.isEmpty()) {
+            return new FindCommand(predicate);
+        }
         throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    }
-
-    private void checkTrimmedArgs(String trimmedArgs) throws ParseException {
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    //"empty string found");
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
     }
 }

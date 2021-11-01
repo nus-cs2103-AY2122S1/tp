@@ -10,6 +10,9 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
+    public static final NameContainsKeywordsPredicate EMPTY =
+            new NameContainsKeywordsPredicate(List.of(""));
+
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {

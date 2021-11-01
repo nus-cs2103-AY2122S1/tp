@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 
-import java.util.List;
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,6 +34,11 @@ public class FindCommand extends Command {
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " alice bob charlie\n";
 
+    public static final String INDEX_WITH_OTHER_INPUT = COMMAND_WORD + ": With index input, "
+            + "Only the index is expected. No other field is needed.\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " " + PREFIX_DASH_INDEX + " 2";
+
     private StringBuilder successMessage = new StringBuilder(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW).append("\n");
     private final NameContainsKeywordsPredicate namePredicate;
     private final PersonContainsFieldsPredicate predicate;
@@ -59,17 +62,23 @@ public class FindCommand extends Command {
      * @param index The index that the user searched for.
      */
     public FindCommand(int index) {
-        this.namePredicate = null;
+        assert index > 0;
+        this.namePredicate = NameContainsKeywordsPredicate.EMPTY;
         this.index = index;
         this.predicate = new PersonContainsFieldsPredicate();
     }
 
+    /**
+     * Constructs a FindCommand object which searches for the person with the specified fields.
+     *
+     * @param predicate The predicate to test if the person containes the specified fields.
+     */
     public FindCommand(PersonContainsFieldsPredicate predicate) {
         assert predicate != null;
         assert !predicate.isEmpty();
         this.predicate = predicate;
         this.index = FIELD_PREDICATE_ONLY;
-        this.namePredicate = new NameContainsKeywordsPredicate(List.of(""));
+        this.namePredicate = NameContainsKeywordsPredicate.EMPTY;
     }
 
     @Override
@@ -161,32 +170,14 @@ public class FindCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && ((findByNameIsEquals((FindCommand) other)) || findByIndexIsEquals((FindCommand) other)));
+                && ((FindCommand) other).namePredicate.equals(this.namePredicate)
+                && ((FindCommand) other).index == index
+                && predicate.equals(((FindCommand) other).predicate));
     }
 
-    /**
-     * Checks if another FindCommand object which searches by name is equal to the current FindCommand object.
-     *
-     * @param otherFind The other FindCommand object to be checked
-     * @return Whether the otherFind is equal to this
-     */
-    public boolean findByNameIsEquals(FindCommand otherFind) {
-        return (otherFind.getIndex() == NAME_AND_FIELD_PREDICATE && this.index == NAME_AND_FIELD_PREDICATE)
-                && (otherFind.getNamePredicate() != null && this.namePredicate != null)
-                && (this.namePredicate.equals(otherFind.getNamePredicate()));
-    }
-
-    /**
-     * Checks if another FindCommand object which searches by index is equal to the current FindCommand object.
-     *
-     * @param otherFind The other FindCommand object to be checked
-     * @return Whether the otherFind is equal to this
-     */
-    public boolean findByIndexIsEquals(FindCommand otherFind) {
-        return (otherFind.namePredicate == null && this.namePredicate == null)
-                && (otherFind.getIndex() != NAME_AND_FIELD_PREDICATE && this.index != NAME_AND_FIELD_PREDICATE)
-                && (this.index == otherFind.getIndex());
-    }
 }
