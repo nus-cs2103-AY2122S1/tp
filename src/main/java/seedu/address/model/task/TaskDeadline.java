@@ -64,10 +64,10 @@ public class TaskDeadline {
     }
 
     /**
-     * Returns whether the string is a date.
+     * Returns whether the string is in a date format.
      *
      * @param string The string that may potentially be a date.
-     * @return A boolean stating whether the string is a date.
+     * @return A boolean stating whether the string is in a date format.
      */
     public static boolean isInDateFormat(String string) {
         if (string.length() == 10) {
@@ -81,10 +81,10 @@ public class TaskDeadline {
     }
 
     /**
-     * Returns whether the string is a time.
+     * Returns whether the string is in a time format.
      *
      * @param string The string that may potentially be a time.
-     * @return A boolean stating whether the string is a time.
+     * @return A boolean stating whether the string is in a time format.
      */
     public static boolean isInTimeFormat(String string) {
         return string.length() == 5 && isInteger(string.substring(0, 2)) && isInteger(string.substring(3, 5))
