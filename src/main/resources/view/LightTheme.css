@@ -130,22 +130,22 @@
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #ffffff;
+    -fx-wrap-text: true;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
     -fx-text-fill: #ffffff;
+    -fx-wrap-text: true;
 }
 
 .stack-pane {
      -fx-background-color: derive(#f0f0f0, 20%);
 }
 
-.pane-with-border {
+.result-pane {
      -fx-background-color: derive(#f0f0f0, 20%);
-     -fx-border-color: derive(#f0f0f0, 10%);
-     -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -157,6 +157,7 @@
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
+    -fx-wrap-text: true;
 }
 
 .result-display .label {
@@ -339,8 +340,8 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #ffffff, transparent, #ffffff;
-    -fx-background-radius: 0;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15px;
 }
 
 #healthConditions {

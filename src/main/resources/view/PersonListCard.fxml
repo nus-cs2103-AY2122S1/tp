@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane fx:id="innerPane" HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -21,39 +21,39 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <HBox alignment="CENTER_LEFT" spacing="5">
+      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
       </HBox>
       <FlowPane fx:id="healthConditions" />
-      <HBox alignment="CENTER_LEFT" spacing="5">
-        <ImageView preserveRatio="true" fitHeight="15">
+      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
+        <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/phone_icon.png" />
         </ImageView>
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
       </HBox>
 
-      <HBox alignment="CENTER_LEFT" spacing="5">
-        <ImageView preserveRatio="true" fitHeight="15">
+      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
+        <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/address_icon.png" />
         </ImageView>
-        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
       </HBox>
 
-      <HBox alignment="CENTER_LEFT" spacing="5">
-        <ImageView preserveRatio="true" fitHeight="15">
+      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
+        <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/language_icon.png" />
         </ImageView>
-        <Label fx:id="language" styleClass="cell_small_label" text="\$language" />
+        <Label fx:id="language" styleClass="cell_small_label" text="\$language"/>
       </HBox>
 
-      <Label fx:id="visit" styleClass="cell_small_label" text="\$visit" />
-      <Label fx:id="lastVisit" styleClass="cell_small_label" text="\$lastVisit" />
+      <Label fx:id="visit" styleClass="cell_small_label" text="\$visit"/>
+      <Label fx:id="lastVisit" styleClass="cell_small_label" text="\$lastVisit"/>
 
 
     </VBox>
