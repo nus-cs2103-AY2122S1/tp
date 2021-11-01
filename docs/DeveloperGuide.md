@@ -352,21 +352,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User did not specify the name of item.
-    * 1a1. BogoBogo notifies user of missing details.
+* 1a. User is adding the item for the first time, and did not specify the id, cost price or sell price of the item.
+    * 1a1. BogoBogo informs user of the missing details.
+    * 1a2. User reenters with the missing details.
+
+      Use case resumes at step 2.
+
+* 1b. User is adding item that has been added before, and only specifies either name or id without the other fields.
+    * 1b1. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
       Use case ends.
 
-* 1b. User is adding the item for the first time, and did not specify the id, price or cost of the item.
-    * 1b1. BogoBogo requests user for the missing details.
-    * 1b2. User enters the missing details.
+* 1c. User is adding an item that has been added before, but provides an id that corresponds to another item.
+    * 1c1. BogoBogo notifies user of the mismatch and shows the list of possible matches.
+    * 1c2. User reenters with the correct details.
+    * 1c3. BogoBogo will replenish the item according to the count indicated (count defaults to 1)
 
-      Use case resumes at step 2.
-
-* 1c. The given id does not match with the given name.
-    * 1c1. BogoBogo notifies user of the mismatch.
-
-      Use case resumes at step 2.
+      Use case ends.
 
 **UC02 - Deleting an item**
 
