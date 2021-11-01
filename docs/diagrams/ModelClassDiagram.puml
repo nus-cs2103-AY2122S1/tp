@@ -9,14 +9,14 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface ReadOnlyTaskBook <<Interface>>
-Interface ReadOnlySalesOrderBook <<Interface>>
+Interface ReadOnlyOrderBook <<Interface>>
 Interface Model <<Interface>>
 Class AddressBook
 Class TaskBook
-Class SalesOrderBook
+Class OrderBook
 Class ReadOnlyAddressBook
 Class ReadOnlyTaskBook
-Class ReadOnlySalesOrderBook
+Class ReadOnlyOrderBook
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -51,19 +51,19 @@ HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
 TaskBook .up.|> ReadOnlyTaskBook
-SalesOrderBook .up.|> ReadOnlySalesOrderBook
+OrderBook .up.|> ReadOnlyOrderBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 Model .left.> ReadOnlyTaskBook
-Model .right.> ReadOnlySalesOrderBook
+Model .right.> ReadOnlyOrderBook
 
 
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 ModelManager -left-> "1" TaskBook
-ModelManager -right-> "1" SalesOrderBook
+ModelManager -right-> "1" OrderBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -88,7 +88,7 @@ Task *--> TaskTag
 Task --> Date
 Task --> "isDone" Boolean
 
-SalesOrderBook *--> "1" OrderList
+OrderBook *--> "1" OrderList
 OrderList --> "~* all" Order
 Order *--> Amount
 Order *--> Customer

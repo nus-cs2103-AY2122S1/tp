@@ -1,5 +1,3 @@
-メモ編集
-Storage diagram（無題）
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
@@ -32,10 +30,10 @@ Class JsonSerializableTaskBook
 Class JsonAdaptedTask
 }
 
-package "SalesOrderBook Storage" #F4F6F6{
-Interface SalesOrderBookStorage <<Interface>>
-Class JsonSalesOrderBookStorage
-Class JsonSerializableSalesOrderBook
+package "OrderBook Storage" #F4F6F6{
+Interface OrderBookStorage <<Interface>>
+Class JsonOrderBookStorage
+Class JsonSerializableOrderBook
 Class JsonAdaptedOrder
 }
 
@@ -48,12 +46,12 @@ StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
 StorageManager -up-> "1" TaskBookStorage
-StorageManager -up-> "1" SalesOrderBookStorage
+StorageManager -up-> "1" OrderBookStorage
 
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
 Storage -left-|> TaskBookStorage
-Storage -right-|> SalesOrderBookStorage
+Storage -right-|> OrderBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
@@ -65,9 +63,9 @@ JsonTaskBookStorage .up.|> TaskBookStorage
 JsonTaskBookStorage ..> JsonSerializableTaskBook
 JsonSerializableTaskBook --> "*" JsonAdaptedTask
 
-JsonSalesOrderBookStorage .up.|> SalesOrderBookStorage
-JsonSalesOrderBookStorage ..> JsonSerializableSalesOrderBook
-JsonSerializableSalesOrderBook --> "*" JsonAdaptedOrder
+JsonOrderBookStorage .up.|> OrderBookStorage
+JsonOrderBookStorage ..> JsonSerializableOrderBook
+JsonSerializableOrderBook --> "*" JsonAdaptedOrder
 
 
 @enduml
