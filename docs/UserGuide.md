@@ -30,40 +30,7 @@ Simply head over to either our [Features](#4-features) section or our [Command S
 We strongly recommend first time users of our application to read through the user guide in order to be familiarised with how our application works.
 Throughout our user guide, we have included links which will direct you to the corresponding sections of the user guide. We have also added certain useful tips and tricks 
 to help you get more out of our application. 
-If you ever want to skip through any section of our user guide, do feel free to refer to use the table of contents right below this section to help you with the navigation.
-
-### 1.3 Table of Contents
-
-* [1. Introduction](#1-introduction)
-    * [1.1 Is this guide for you?](#11-is-this-guide-for-you)
-    * [1.2 How to use the user guide](#12-how-to-use-the-user-guide)
-    * [1.3 Table of Contents](#13-table-of-contents)
-* [2. Quick Start](#2-quick-start)
-* [3. About](#3-about)
-    * [3.1 Special Icons](#31-special-icons)
-    * [3.2 Application Homepage Explanation](#32-application-homepage-explanation)
-    * [3.2 Module Explanation](#33-module-explanation)
-    * [3.3 Command Format](#33-module-explanation)
-    * [3.4 Command Terminology](#34-command-format)
-* [4. Features](#4-features)
-    * [4.1 Database](#41-database)
-        * [4.1.1 Add](#411-adding-a-module-into-the-database--add)
-        * [4.1.2 Delete](#412-deleting-a-module-in-the-database--delete)
-        * [4.1.3 List](#413-listing-modules-stored-in-the-database--list)
-        * [4.1.4 Find](#414-finding-a-module-in-the-database--find)
-        * [4.1.5 Edit](#415-editing-a-module-in-the-database--edit)
-    * [4.2 Academic Plan](#42-academic-plan)
-      * [4.2.1 Take](#421-adding-a-module-to-the-academic-plan--take)
-      * [4.2.2 Un-take](#422-remove-a-module-from-the-academic-plan--untake)
-      * [4.2.3 Info](#423-viewing-user-information--info)
-      * [4.2.4 Set](#424-setting-users-mc-goal-or-current-semester--set)
-      * [4.2.5 View](#425-see-modules-taken-in-a-specific-semester--view)
-      * [4.2.6 Clear](#426-remove-the-schedules-for-a-specific-semester-from-modules--clear)
-    * [4.3 Miscellaneous](#43-miscellaneous)
-      * [4.3.1 Help](#431-viewing-help--help)
-* [5. FAQ](#5-faq)
-* [6. Command Summary](#6-command-summary)
-
+If you ever want to skip through any section of our user guide, do feel free to refer to use the table of contents at the top of our document to help you with the navigation.
 
 --------------------------------------------------------------------------------------------------------------------
 
