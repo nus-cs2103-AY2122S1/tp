@@ -2,9 +2,7 @@ package seedu.address.model.facility;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.DayOfWeek;
 
 import seedu.address.model.person.Person;
 
@@ -16,7 +14,7 @@ public class Facility {
     private final Location location;
     private final Time time;
     private final Capacity capacity;
-    private List<Person> personAllocatedList = new ArrayList<>();
+    private final AllocationMap allocationMap;
 
     /**
      * Creates a Facility object with the specified name,
@@ -27,12 +25,13 @@ public class Facility {
      * @param time Time of slot booked for facility.
      * @param capacity Capacity of facility booked.
      */
-    public Facility(FacilityName name, Location location, Time time, Capacity capacity) {
+    public Facility(FacilityName name, Location location, Time time, Capacity capacity, AllocationMap allocationMap) {
         requireAllNonNull(name, location, time, capacity);
         this.name = name;
         this.location = location;
         this.time = time;
         this.capacity = capacity;
+        this.allocationMap = allocationMap;
     }
 
     public FacilityName getName() {
@@ -51,42 +50,33 @@ public class Facility {
         return capacity;
     }
 
-    public List<Person> getPersonAllocatedList() {
-        return personAllocatedList;
+    public AllocationMap getAllocationMap() {
+        return allocationMap;
     }
 
-    public boolean isMaxCapacity() {
-        return capacity.isMaxCapacity(personAllocatedList.size());
+    public boolean isMaxCapacityOnDay(DayOfWeek day) {
+        return capacity.isMaxCapacity(allocationMap.getCapacityOnDay(day));
     }
 
-    public void clearAllocationList() {
-        personAllocatedList = new ArrayList<>();
+    public void clearAllocationMapOnDay(DayOfWeek day) {
+        allocationMap.clearAllocationOnDay(day);
     }
-
 
     /**
      * Returns the allocated list as a String separated by commas.
      *
      * @return the allocated list as a String.
      */
-    public boolean isPersonAllocated(Person person) {
-        return personAllocatedList.contains(person);
+    public boolean isPersonAllocatedOnDay(Person person, DayOfWeek day) {
+        return allocationMap.isPersonAllocatedOnDay(person, day);
     }
 
-    public String getPersonsAsString() {
-        if (personAllocatedList == null) {
-            return "No person allocated";
-        }
-        return personAllocatedList.stream().map(p -> p.getName().fullName)
-                .sorted().collect(Collectors.joining(", "));
+    public void addPersonToFacilityOnDay(Person person, DayOfWeek day) {
+        allocationMap.addPersonOnDay(person, day);
     }
 
-    public void addPersonToFacility(Person person) {
-        personAllocatedList.add(person);
-    }
-
-    public void removePersonFromFacility(Person person) {
-        personAllocatedList.remove(person);
+    public void removePersonFromFacilityOnDay(Person person, DayOfWeek day) {
+        allocationMap.removePersonOnDay(person, day);
     }
 
     /**
@@ -125,7 +115,7 @@ public class Facility {
                 && location.equals(facility.location)
                 && time.equals(facility.time)
                 && capacity.equals(facility.capacity)
-                && personAllocatedList.equals(facility.personAllocatedList);
+                && allocationMap.equals(facility.allocationMap);
     }
 
     @Override

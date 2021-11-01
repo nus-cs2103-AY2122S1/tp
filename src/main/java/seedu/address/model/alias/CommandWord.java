@@ -20,7 +20,7 @@ import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.EditFacilityCommand;
 import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.ExportCommand;
+//import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -52,7 +52,8 @@ public class CommandWord implements Serializable {
             AddFacilityCommand.COMMAND_WORD, SetMemberAvailabilityCommand.COMMAND_WORD, SplitCommand.COMMAND_WORD,
             MarkAttendanceCommand.COMMAND_WORD, UnmarkAttendanceCommand.COMMAND_WORD,
             ClearAttendanceCommand.COMMAND_WORD, SortMemberCommand.COMMAND_WORD, AllocateMemberCommand.COMMAND_WORD,
-            DeallocateMemberCommand.COMMAND_WORD, ImportCommand.COMMAND_WORD, ExportCommand.COMMAND_WORD,
+            DeallocateMemberCommand.COMMAND_WORD, ImportCommand.COMMAND_WORD,
+//            ExportCommand.COMMAND_WORD,
             AddAliasCommand.COMMAND_WORD, DeleteAliasCommand.COMMAND_WORD, ShowAliasesCommand.COMMAND_WORD);
 
     private String commandWord;

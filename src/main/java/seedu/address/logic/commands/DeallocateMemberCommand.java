@@ -12,6 +12,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
@@ -56,10 +57,16 @@ public class DeallocateMemberCommand extends Command {
         Person toBeDeallocated = lastShownPersonList.get(memberIndex.getZeroBased());
         Facility toDeallocate = lastShownFacilityList.get(facilityIndex.getZeroBased());
 
-        if (!toDeallocate.isPersonAllocated(toBeDeallocated)) {
+        if (!toDeallocate.isPersonAllocatedOnDay(toBeDeallocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_ALLOCATED);
         } else {
-            toDeallocate.removePersonFromFacility(toBeDeallocated);
+            AllocationMap updatedAllocationMap = toDeallocate.getAllocationMap();
+            updatedAllocationMap.removePersonOnDay(toBeDeallocated, day);
+            Facility afterDeallocated = new Facility(
+                    toDeallocate.getName(), toDeallocate.getLocation(), toDeallocate.getTime(),
+                    toDeallocate.getCapacity(), updatedAllocationMap);
+            model.setFacility(toDeallocate, afterDeallocated);
+            model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
         }
 
         String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());

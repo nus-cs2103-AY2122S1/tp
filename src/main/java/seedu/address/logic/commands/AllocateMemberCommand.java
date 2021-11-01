@@ -12,6 +12,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
@@ -56,14 +57,20 @@ public class AllocateMemberCommand extends Command {
         Person toBeAllocated = lastShownPersonList.get(memberIndex.getZeroBased());
         Facility toAllocate = lastShownFacilityList.get(facilityIndex.getZeroBased());
 
-        if (toAllocate.isPersonAllocated(toBeAllocated)) {
+        if (toAllocate.isPersonAllocatedOnDay(toBeAllocated, day)) {
             throw new CommandException(Messages.MESSAGE_MEMBER_ALREADY_ALLOCATED);
-        } else if (toAllocate.isMaxCapacity()) {
+        } else if (toAllocate.isMaxCapacityOnDay(day)) {
             throw new CommandException(Messages.MESSAGE_FACILITY_AT_MAX_CAPACITY);
         } else if (!toBeAllocated.isAvailableOnDay(day.getValue())) {
             throw new CommandException(Messages.MESSAGE_MEMBER_NOT_AVAILABLE);
         } else {
-            toAllocate.addPersonToFacility(toBeAllocated);
+            AllocationMap updatedAllocationMap = toAllocate.getAllocationMap();
+            updatedAllocationMap.addPersonOnDay(toBeAllocated, day);
+            Facility afterAllocated = new Facility(
+                    toAllocate.getName(), toAllocate.getLocation(), toAllocate.getTime(), toAllocate.getCapacity(),
+                    updatedAllocationMap);
+            model.setFacility(toAllocate, afterAllocated);
+            model.updateFilteredFacilityList(Model.PREDICATE_SHOW_ALL_FACILITIES);
         }
 
         String dayName = day.getDisplayName(TextStyle.FULL, Locale.getDefault());

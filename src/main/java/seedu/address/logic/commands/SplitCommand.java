@@ -44,7 +44,7 @@ public class SplitCommand extends Command {
         requireNonNull(model);
         PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(dayNumber);
 
-        int result = model.split(predicate);
+        int result = model.split(predicate, dayNumber);
         if (result == -1) {
             // No members available
             throw new CommandException(String.format(MESSAGE_NO_MEMBERS_AVAILABLE,

@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.facility.AllocationMap;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
@@ -91,8 +92,10 @@ public class EditFacilityCommand extends Command {
         Location updatedLocation = editFacilityDescriptor.getLocation().orElse(facilityToEdit.getLocation());
         Time updatedTime = editFacilityDescriptor.getTime().orElse(facilityToEdit.getTime());
         Capacity updatedCapacity = editFacilityDescriptor.getCapacity().orElse(facilityToEdit.getCapacity());
+        // edit command does not allow editing allocations
+        AllocationMap allocationMap = facilityToEdit.getAllocationMap();
 
-        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity);
+        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity, allocationMap);
     }
 
     @Override

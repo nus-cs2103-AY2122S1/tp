@@ -153,7 +153,7 @@ public interface Model {
      * @param predicate the condition in which specifies the members to allocate.
      * @return number of members left unallocated, -1 if zero members to allocate.
      */
-    int split(Predicate<Person> predicate);
+    int split(Predicate<Person> predicate, int dayNumber);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
