@@ -56,5 +56,5 @@ Given below are my contributions to the project.
 
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68), [\#98](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/98)
+  * PRs reviewed (with non-trivial review comments): [\#159](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/159), [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68), [\#98](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/98)
   * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/marcuschj/ped/issues/13), [2](https://github.com/marcuschj/ped/issues/12), [3](https://github.com/marcuschj/ped/issues/5), [4](https://github.com/marcuschj/ped/issues/2))
