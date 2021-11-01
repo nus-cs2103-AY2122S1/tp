@@ -41,13 +41,13 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `sum` and `delete` [\#151](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/151).
+        * Added documentation for the features `sum` and `delete`: [\#151](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/151).
         * Reorganized the entire User Guide features in a more logical manner (sections).
         * Added screenshots throughout the User Guide.
     * Developer Guide:
-        * Added implementation details of the `sum` feature.
+        * Added implementation details of the `sum` feature: [\#68](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/68).
         * Added implementation details of the `delete` (by name) feature.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#82](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/82), [\#91](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/91)
+    * PRs reviewed (with non-trivial review comments): [\#161](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/161), [\#91](https://github.com/AY2122S1-CS2103T-T12-2/tp/pull/91)
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/ryantianj/ped/issues/8), [2](https://github.com/ryantianj/ped/issues/5), [3](https://github.com/ryantianj/ped/issues/6))
