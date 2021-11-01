@@ -90,68 +90,76 @@ public class AddressBookParser {
             return new PaidCommandParser().parse(arguments);
 
         default:
-            // Commands with no arguments
-            checkEmptyArgs(arguments);
-            switch (commandWord.toLowerCase()) {
-
-            case ClearCommand.COMMAND_WORD:
-                return new ClearCommand();
-
-            case UndoCommand.COMMAND_WORD:
-                return new UndoCommand();
-
-            case RedoCommand.COMMAND_WORD:
-                return new RedoCommand();
-
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
-
-            case CalendarCommand.COMMAND_WORD:
-                return new CalendarCommand();
-
-            case DayCommand.COMMAND_WORD:
-                return new DayCommand();
-
-            case WeekCommand.COMMAND_WORD:
-                return new WeekCommand();
-
-            case MonthCommand.COMMAND_WORD:
-                return new MonthCommand();
-
-            case YearCommand.COMMAND_WORD:
-                return new YearCommand();
-
-            case TodayCommand.COMMAND_WORD:
-                return new TodayCommand();
-
-            case NextCommand.COMMAND_WORD:
-                return new NextCommand();
-
-            case BackCommand.COMMAND_WORD:
-                return new BackCommand();
-
-            case TagCommand.COMMAND_WORD:
-                return new TagCommand();
-
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
-
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
-
-            case RemindCommand.COMMAND_WORD:
-                return new RemindCommand();
-
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-            }
+            return parseSingleCommand(commandWord, arguments);
         }
 
     }
 
+    /**
+     * Parse commands that only have 1 command word and no arguments
+     */
+    private Command parseSingleCommand(String commandWord, String arguments) throws ParseException {
+        checkEmptyArgs(arguments);
+        switch (commandWord.toLowerCase()) {
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
+        case CalendarCommand.COMMAND_WORD:
+            return new CalendarCommand();
+
+        case DayCommand.COMMAND_WORD:
+            return new DayCommand();
+
+        case WeekCommand.COMMAND_WORD:
+            return new WeekCommand();
+
+        case MonthCommand.COMMAND_WORD:
+            return new MonthCommand();
+
+        case YearCommand.COMMAND_WORD:
+            return new YearCommand();
+
+        case TodayCommand.COMMAND_WORD:
+            return new TodayCommand();
+
+        case NextCommand.COMMAND_WORD:
+            return new NextCommand();
+
+        case BackCommand.COMMAND_WORD:
+            return new BackCommand();
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommand();
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND
+                    + "\n💡 TIP: Type \"help\" to view the valid commands!");
+        }
+    }
+
     private void checkEmptyArgs(String args) throws ParseException {
         if (!args.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "💡 TIP: Type \"help\" to view the valid command format!"));
         }
     }
 }
