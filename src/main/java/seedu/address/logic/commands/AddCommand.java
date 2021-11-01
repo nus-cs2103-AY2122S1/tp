@@ -77,9 +77,20 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_OPTIONAL_FREQUENCY_FLAG);
         }
 
-
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+
+        boolean isInvalidVisit = toAdd.hasVisit() && toAdd.getVisit().get().isOverdue();
+        boolean isInvalidLastVisit = toAdd.hasLastVisit() && toAdd.getLastVisit().get().isFuture();
+
+        if (isInvalidVisit && isInvalidLastVisit) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandWarning.BOTH_VISIT_FIELDS_WARNING);
+        } else if (isInvalidLastVisit) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandWarning.FUTURE_LAST_VISIT_WARNING);
+        } else if (isInvalidVisit) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandWarning.PAST_NEXT_VISIT_WARNING);
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        }
     }
 
     @Override

@@ -16,8 +16,8 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    public static final String OVERDUE_CARD_STYLE_CLASS = "overdue-card";
-    public static final String OVERDUE_VISIT_STYLE_CLASS = "overdue-visit";
+    private static final String OVERDUE_CARD_STYLE_CLASS = "overdue-card";
+    private static final String OVERDUE_VISIT_STYLE_CLASS = "overdue-visit";
 
     private static final String FXML = "PersonListCard.fxml";
     private static final String DISPLAY_LAST_VISIT = "Last visit: ";

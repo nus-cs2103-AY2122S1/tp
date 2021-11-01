@@ -229,6 +229,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            resultDisplay.setColorBasedOnResultType(commandResult.hasWarning(), false);
 
             if (commandResult.isShowSummary()) {
                 handleSummary();
@@ -251,7 +252,8 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser("[ERROR] " + e.getMessage());
+            resultDisplay.setColorBasedOnResultType(false, true);
             throw e;
         }
     }

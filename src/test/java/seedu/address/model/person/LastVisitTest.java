@@ -80,4 +80,16 @@ public class LastVisitTest {
         // format displayed date for empty visit
         assertEquals("-", new LastVisit("").getFormatted());
     }
+
+    @Test
+    public void isFuture() {
+        // no existing last visit
+        assertFalse(new LastVisit("").isFuture());
+
+        // overdue as of this module's time
+        assertTrue(new LastVisit("2077-01-01 08:00").isFuture());
+
+        // not overdue in around 100 years
+        assertFalse(new LastVisit("2000-01-01 08:00").isFuture());
+    }
 }

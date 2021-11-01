@@ -109,6 +109,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the person has a scheduled last visit.
+     */
+    public boolean hasLastVisit() {
+        return (this.lastVisit.get().hasLastVisit());
+    }
+
+    /**
      * Returns if the person has an existing visit that is overdue.
      * Only the immediate visit will be examined, not the recurring ones that follow.
      */

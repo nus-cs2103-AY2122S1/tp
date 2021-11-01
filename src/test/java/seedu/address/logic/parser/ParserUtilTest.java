@@ -229,10 +229,6 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseVisit(INVALID_DATETIME));
     }
 
-    @Test
-    public void parseVisit_invalidPastDateTime_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseVisit(INVALID_VISIT_DATETIME));
-    }
 
     @Test
     public void parseVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
@@ -262,10 +258,6 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseVisitForAdd(INVALID_DATETIME));
     }
 
-    @Test
-    public void parseVisitForAdd_invalidPastDateTime_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseVisitForAdd(INVALID_VISIT_DATETIME));
-    }
 
     @Test
     public void parseVisitForAdd_validValueWithoutWhitespace_returnsVisit() throws Exception {
@@ -293,11 +285,6 @@ public class ParserUtilTest {
     @Test
     public void parseLastVisit_invalidDateTime_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseLastVisit(INVALID_DATETIME));
-    }
-
-    @Test
-    public void parseLastVisit_invalidPastDateTime_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseLastVisit(INVALID_LAST_VISIT_DATETIME));
     }
 
     @Test

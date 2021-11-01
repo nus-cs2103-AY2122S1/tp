@@ -85,7 +85,11 @@ public class VisitCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        if (visit.isPresent() && visit.get().isOverdue()) {
+            return new CommandResult(generateSuccessMessage(editedPerson), CommandWarning.PAST_NEXT_VISIT_WARNING);
+        } else {
+            return new CommandResult(generateSuccessMessage(editedPerson));
+        }
     }
 
     /**

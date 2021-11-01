@@ -11,6 +11,7 @@ public class CommandResultTest {
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
+        CommandResult warnedResult = new CommandResult("feedback", CommandWarning.PAST_NEXT_VISIT_WARNING);
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
@@ -33,6 +34,10 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true)));
+
+        // check for warnings
+        assertFalse(commandResult.equals(warnedResult));
+        assertFalse(warnedResult.equals(new CommandResult("feedback", CommandWarning.FUTURE_LAST_VISIT_WARNING)));
     }
 
     @Test
