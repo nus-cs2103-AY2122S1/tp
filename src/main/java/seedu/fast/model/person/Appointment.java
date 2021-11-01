@@ -21,9 +21,11 @@ public class Appointment {
 
     public static final String INVALID_DATE_INPUT = "Date field must be yyyy-mm-dd, "
             + "with valid calendar year, month and days";
+    public static final String PREVIOUS_DATE_INPUT = "You cannot schedule your appointment on a date/time that "
+            + "has already passed!";
     public static final String INVALID_TIME_INPUT = "Time field must be hh:mm, "
             + "in 24-hour format, with valid hour and minute";
-    public static final String INVALID_VENUE_INPUT = "Venue field must be less than 30 characters, "
+    public static final String INVALID_VENUE_INPUT = "Venue field must not be greater than 20 characters, "
             + "including blanks, whitespaces and symbols";
 
 
@@ -58,11 +60,21 @@ public class Appointment {
         if (date.equals(NO_APPOINTMENT)) {
             return temp;
         }
-        try {
-            temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (time.equals(NO_TIME)) {
+            try {
+                temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                String source = date + " " + time;
+                temp = new SimpleDateFormat("dd MMM yyyy HHmm").parse(source);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
+
         return temp;
     }
 
@@ -144,13 +156,13 @@ public class Appointment {
     }
 
     /**
-     * Check if the input venue is at most 30 characters.
+     * Check if the input venue is at most 20 characters.
      *
      * @param test The input venue string.
      * @return A boolean indicating if the venue follows the format.
      */
     public static boolean isValidVenueFormat(String test) {
-        return test.length() <= 30;
+        return test.length() <= 20;
     }
 
 

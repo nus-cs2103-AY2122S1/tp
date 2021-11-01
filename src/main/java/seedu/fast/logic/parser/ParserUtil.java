@@ -154,6 +154,9 @@ public class ParserUtil {
         if (!Tag.isValidTagTerm(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (Tag.isSpecialTag(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_SPECIAL_TAG_ENTERED);
+        }
         return Tag.createTag(trimmedTag);
     }
 
@@ -260,6 +263,8 @@ public class ParserUtil {
      */
     public static String parseDateString(String date) throws ParseException {
         try {
+            checkDate(date);
+
             // converts the date to the specified format
             date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (DateTimeParseException dtpe) {
@@ -268,6 +273,23 @@ public class ParserUtil {
         }
 
         return date.trim();
+    }
+
+    /**
+     * Checks if the date input has already passed.
+     * If date input is in the past, date is invalid, throws an error.
+     *
+     * @param date Input date string.
+     * @throws ParseException Date input has passed.
+     */
+    private static void checkDate(String date) throws ParseException {
+        LocalDate localDate = LocalDate.parse(date);
+        LocalDate now = LocalDate.now();
+
+        if (localDate.isBefore(now)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Appointment.PREVIOUS_DATE_INPUT));
+        }
     }
 
     /**

@@ -65,7 +65,7 @@
     "appointmentDate": "11 Oct 2021",
     "appointmentTime" : "",
     "appointmentVenue" : "",
-    "appointmentCount" : "0"
+    "appointmentCount" : "1"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -73,9 +73,9 @@
     "address" : "4th street",
     "remark" : "",
     "tagged" : [ ],
-    "appointmentDate": "10 Oct 2021",
+    "appointmentDate": "No Appointment Scheduled Yet",
     "appointmentTime" : "",
     "appointmentVenue" : "",
-    "appointmentCount" : "0"
+    "appointmentCount" : "3"
   } ]
 }

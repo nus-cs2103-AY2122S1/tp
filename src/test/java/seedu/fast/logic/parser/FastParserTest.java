@@ -36,6 +36,7 @@ import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.MarkAppointmentCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
+import seedu.fast.logic.commands.UnmarkAppointmentCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.NameContainsQueriesPredicate;
@@ -125,12 +126,12 @@ public class FastParserTest {
 
     @Test
     public void parseCommand_appointment() throws Exception {
-        final LocalDate date = LocalDate.parse("2021-10-10");
+        final LocalDate date = LocalDate.parse("2025-10-10");
         final String dateString = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         final Appointment appt = new Appointment(dateString, Appointment.NO_TIME, Appointment.NO_VENUE);
         AppointmentCommand command = (AppointmentCommand) parser.parseCommand(
                 AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PREFIX_APPOINTMENT + "2021-10-10");
+                        + PREFIX_APPOINTMENT + "2025-10-10");
         assertEquals(new AppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 
@@ -153,7 +154,7 @@ public class FastParserTest {
 
     @Test
     public void parseCommand_editAppointment() throws Exception {
-        final LocalDate date = LocalDate.parse("2021-10-10");
+        final LocalDate date = LocalDate.parse("2025-10-10");
         final String dateString = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         final String venue = "Clementi Mall";
 
@@ -163,7 +164,7 @@ public class FastParserTest {
 
         EditAppointmentCommand command = (EditAppointmentCommand) parser.parseCommand(
                 EditAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                        + PREFIX_APPOINTMENT + "2021-10-10" + " " + PREFIX_APPOINTMENT_VENUE + venue);
+                        + PREFIX_APPOINTMENT + "2025-10-10" + " " + PREFIX_APPOINTMENT_VENUE + venue);
         assertEquals(new EditAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 
@@ -174,5 +175,14 @@ public class FastParserTest {
         MarkAppointmentCommand command = (MarkAppointmentCommand) parser.parseCommand(
                 MarkAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new MarkAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
+    }
+
+    @Test
+    public void parseCommand_unmarkAppointment() throws Exception {
+        final Appointment appt = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        UnmarkAppointmentCommand command = (UnmarkAppointmentCommand) parser.parseCommand(
+                UnmarkAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnmarkAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 }
