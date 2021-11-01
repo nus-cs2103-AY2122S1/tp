@@ -3,15 +3,18 @@ layout: page
 title: User Guide
 ---
 
-# LeadsForce User Guide
-![Ui](images/LeadsForceLogo.jpg)
-
-Welcome to LeadsForce User Guide! Scroll down to the table of contents to find step-by-step instructions and get to know us. 
+<h1 align="center"> LeadsForce User Guide </h1>
+<p align="center">
+<img  src=images/LeadsForceLogo.jpg alt="alt text" width="125"> 
+</p>
+<p align="center">
+Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions to the features in LeadsForce, scroll down the table of contents below to get started ☺️
+</p>
 
 ## Table of Contents
 
 * [**1. Introduction**](#1-introduction)
-  * [1.1 Reading this User Guide](#
+  * [1.1 Reading this User Guide](#11-reading-this-user-guide)
 * [**2. Quick Start**](#2-quick-start)
 * [**3. Client Information**](#3-client-information)
     * [3.1 Next Meeting format](#31-nextmeeting) 
@@ -29,7 +32,7 @@ Welcome to LeadsForce User Guide! Scroll down to the table of contents to find s
     * [4.11 Exiting the program: exit](#411-exiting-the-program--exit)
     * [4.12 Saving data](#412-saving-the-data)
     * [4.13 Edit data file](#413-edit-data-file)
-* [**5. Multiple Address Book Feature**](#5-features)
+* [**5. Multiple Address Book**](#5-multiple-address-books-feature)
     * [5.1 Create new address book: ab create](#51-create-new-address-book--ab-create)
     * [5.2 Delete existing address book: ab delete](#52-delete-existing-address-book-ab-delete--ab-delete)
     * [5.3 Switch to different address book: ab switch](#53-switch-to-different-address-book--ab-switch)
@@ -40,13 +43,19 @@ Welcome to LeadsForce User Guide! Scroll down to the table of contents to find s
 --------------------------------------------------------------------------------------------------------------------
 
 ## 1. Introduction
-LeadsForce is a desktop app that is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-Catered towards student financial advisors, LeadsForce makes the process of managing client information seamless!
-LeadsForce does this by helping the financial advisors store and retrieve client information effortlessly and seamlessly.
+Are you a student financial advisor (FA) who finds it difficult to **manage client information**, and would like a software that could help to **keep track of 
+meetings**? If so, LeadsForce might just be the app for you! 
 
-Finding your next lead has never been easier.
+LeadsForce is a client management software that helps entry-level and student financial advisors to effortlessly keep track of essential client information and
+meetings. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+Managing your leads has never been easier.
 
 ### 1.1 Reading this User Guide
+When reading our User Guide, here are some important notations to take note of! 
+
+| **Icon** | **Meaning of icons** |
+| --- | --- |
 
 
 
