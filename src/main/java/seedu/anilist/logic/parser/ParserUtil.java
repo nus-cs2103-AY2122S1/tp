@@ -2,11 +2,6 @@ package seedu.anilist.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.anilist.logic.parser.CliSyntax.getAllPrefixes;
 
 import java.util.Arrays;
 import java.util.Collection;

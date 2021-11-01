@@ -3,7 +3,6 @@ package seedu.anilist.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;

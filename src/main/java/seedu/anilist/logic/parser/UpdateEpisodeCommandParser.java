@@ -3,12 +3,8 @@ package seedu.anilist.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.anilist.commons.core.index.Index;
-import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.UpdateEpisodeCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 

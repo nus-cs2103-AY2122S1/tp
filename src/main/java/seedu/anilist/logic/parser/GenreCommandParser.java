@@ -12,7 +12,6 @@ import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.Action;
-import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.GenreAddCommand;
 import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.logic.commands.GenreDeleteCommand;

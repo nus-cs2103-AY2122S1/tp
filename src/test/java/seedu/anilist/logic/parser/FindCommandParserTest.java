@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 

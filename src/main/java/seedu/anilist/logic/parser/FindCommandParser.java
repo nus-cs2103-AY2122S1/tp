@@ -6,7 +6,6 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
 
-import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.FindCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
