@@ -329,6 +329,7 @@ public class MainWindow extends UiPart<Stage> {
             gameMainCardTable = new GameMainCardTable(FXCollections.observableList(friendsWithGame), currentGameToGet);
         } else {
             rightMainCard.getChildren().clear();
+            gameMainCardTable = new GameMainCardTable();
         }
         rightMainCard.getChildren().add(gameMainCardTable.getRoot());
     }
