@@ -9,7 +9,6 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_RESET_REMARK;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.tuitione.commons.core.index.Index;
+import seedu.tuitione.commons.util.StringUtil;
 import seedu.tuitione.logic.commands.EditCommand;
 import seedu.tuitione.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
@@ -36,15 +36,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_GRADE, PREFIX_REMARK, PREFIX_DELETE_REMARK, PREFIX_RESET_REMARK);
+                        PREFIX_GRADE, PREFIX_REMARK, PREFIX_DELETE_REMARK);
 
         Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        String preamble = argMultimap.getPreamble();
+        if (preamble.contains("/") || !StringUtil.isAllDigit(preamble)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+        index = ParserUtil.parseIndex(preamble);
 
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {

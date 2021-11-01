@@ -11,7 +11,7 @@ public class Address {
 
     public static final int MAX_LENGTH = 150;
     public static final String MESSAGE_CONSTRAINTS =
-            String.format("Addresses can take any values, it should not be blank and should not "
+            String.format("Addresses can take any values (apart from '/'), it should not be blank and should not "
                     + "contain more than %1$d characters (whitespace included)", MAX_LENGTH);
 
     /*
@@ -39,7 +39,8 @@ public class Address {
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX)
                 && !test.isEmpty()
-                && test.length() <= MAX_LENGTH;
+                && test.length() <= MAX_LENGTH
+                && !test.contains("/");
     }
 
     @Override

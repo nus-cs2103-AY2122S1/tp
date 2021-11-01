@@ -33,6 +33,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_REMARK_FRIEND;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.tuitione.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
@@ -77,7 +78,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);

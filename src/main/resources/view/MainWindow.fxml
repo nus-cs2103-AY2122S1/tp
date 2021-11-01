@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="TuitiONE" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="TuitiONE" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/TuitiONE.png" />
   </icons>
@@ -29,10 +29,10 @@
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="📂 File">
+          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="File">
             <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
-          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="❔ Help">
+          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
                <VBox.margin>
@@ -49,7 +49,6 @@
             <padding>
               <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
             </padding>
-
                   <HBox prefHeight="30.0" prefWidth="319.0">
                      <children>
                         <VBox prefHeight="76.0" prefWidth="18.0">
@@ -62,7 +61,7 @@
                            </children>
                         </VBox>
                   <VBox fx:id="studentListLabel" styleClass="pane-with-no-border">
-                           <Text fill="#572d03" text="Student List" wrappingWidth="277.484375">
+                           <Text fill="#572d03" text="Student List" wrappingWidth="277.484375" style="-fx-font-weight: bold">
                               <font>
                                  <Font name="Montserrat Medium" size="22.0" />
                               </font>
@@ -94,7 +93,7 @@
                   </VBox>
                         <VBox>
                            <children>
-                       <Text fill="#572d03" text="Lesson List" wrappingWidth="188.37109375">
+                       <Text fill="#572d03" text="Lesson List" wrappingWidth="188.37109375" style="-fx-font-weight: bold">
                                  <font>
                                     <Font name="Montserrat Medium" size="22.0" />
                                  </font>

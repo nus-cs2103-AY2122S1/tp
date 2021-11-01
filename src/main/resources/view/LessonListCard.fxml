@@ -27,9 +27,15 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="lessonCode" styleClass="cell_big_label" text="\$first" />
+                <Label fx:id="lessonCode" styleClass="cell_big_label" text="\$first">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Label>
+            <VBox.margin>
+               <Insets bottom="3.0" />
+            </VBox.margin>
             </HBox>
-            <HBox prefHeight="24.0" prefWidth="130.0">
+            <HBox>
                 <children>
                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -40,18 +46,18 @@
                     <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
                 </children>
             </HBox>
-            <HBox prefHeight="24.0" prefWidth="130.0">
+            <HBox>
                 <children>
                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../images/subscription.png" />
                   </image>
                </ImageView>
-                    <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" styleClass="cell_small_label" text=" Price:" />
+                    <Label maxWidth="100.0" minWidth="100.0" prefHeight="2.0" prefWidth="83.0" styleClass="cell_small_label" text=" Price:" />
                     <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
                 </children>
             </HBox>
-            <HBox prefHeight="24.0" prefWidth="130.0">
+            <HBox>
                 <children>
                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                   <image>
