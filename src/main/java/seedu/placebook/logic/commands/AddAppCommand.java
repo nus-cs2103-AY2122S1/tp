@@ -22,8 +22,6 @@ import seedu.placebook.model.schedule.TimePeriod;
 import seedu.placebook.model.schedule.exceptions.ClashingAppointmentsException;
 import seedu.placebook.model.schedule.exceptions.DuplicateAppointmentException;
 
-import javax.swing.*;
-
 /**
  * Creates an appointment with an existing person in PlaceBook
  */
