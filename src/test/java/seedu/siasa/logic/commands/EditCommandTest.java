@@ -24,8 +24,8 @@ import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.contact.Contact;
-import seedu.siasa.testutil.EditContactDescriptorBuilder;
 import seedu.siasa.testutil.ContactBuilder;
+import seedu.siasa.testutil.EditContactDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.

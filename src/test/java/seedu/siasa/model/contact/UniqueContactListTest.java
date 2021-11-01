@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.siasa.model.contact.exceptions.DuplicateContactException;
 import seedu.siasa.model.contact.exceptions.ContactNotFoundException;
+import seedu.siasa.model.contact.exceptions.DuplicateContactException;
 import seedu.siasa.testutil.ContactBuilder;
 
 public class UniqueContactListTest {
