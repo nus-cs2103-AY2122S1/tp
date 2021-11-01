@@ -20,6 +20,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
+import seedu.address.model.person.Person;
 
 public class EditFacilityCommand extends Command {
 
@@ -39,6 +40,8 @@ public class EditFacilityCommand extends Command {
     public static final String MESSAGE_EDIT_FACILITY_SUCCESS = "Edited Facility: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITY = "This facility already exists in SportsPA";
+    public static final String MESSAGE_ALLOCATION_EXCEEDS_CAPACITY = "The edited facility's capacity"
+            + " cannot be less than the number of members currently allocated to it";
 
     private final Index index;
     private final EditFacilityDescriptor editFacilityDescriptor;
@@ -73,6 +76,10 @@ public class EditFacilityCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_FACILITY);
         }
 
+        if (editedFacility.isMaxCapacity()) {
+            throw new CommandException(MESSAGE_ALLOCATION_EXCEEDS_CAPACITY);
+        }
+
         model.setFacility(facilityToEdit, editedFacility);
         model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);
         return new CommandResult(String.format(MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility),
@@ -91,8 +98,10 @@ public class EditFacilityCommand extends Command {
         Location updatedLocation = editFacilityDescriptor.getLocation().orElse(facilityToEdit.getLocation());
         Time updatedTime = editFacilityDescriptor.getTime().orElse(facilityToEdit.getTime());
         Capacity updatedCapacity = editFacilityDescriptor.getCapacity().orElse(facilityToEdit.getCapacity());
+        // Not an editable field
+        List<Person> personAllocatedList = facilityToEdit.getPersonAllocatedList();
 
-        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity);
+        return new Facility(updatedName, updatedLocation, updatedTime, updatedCapacity, personAllocatedList);
     }
 
     @Override
