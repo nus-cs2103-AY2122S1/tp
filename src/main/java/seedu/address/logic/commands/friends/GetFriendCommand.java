@@ -45,7 +45,6 @@ public class GetFriendCommand extends Command {
         }
 
         Friend friend = model.getFriend(friendId);
-        model.updateFilteredGamesList(new GameFriendLinksContainsGameIdPredicate(friend));
         return new CommandResult(
                 String.format(MESSAGE_FRIEND_FULL_INFORMATION, friendId.value), CommandType.FRIEND_GET, friend);
     }

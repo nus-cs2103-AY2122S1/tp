@@ -220,11 +220,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void hideFriendBox() {
-        friendBox.setVisible(false);
-        friendBox.setManaged(false);
-    }
-
     private void showFriendBox() {
         friendBox.setVisible(true);
         friendBox.setManaged(true);
@@ -242,22 +237,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void removeFriendListPanelToFriendsPlaceholder() {
-        // only remove friend list if currently shown
-        if (friendsPlaceholder.getChildren().contains(friendListPanel.getRoot())) {
-            friendsPlaceholder.getChildren().remove(friendListPanel.getRoot());
-        }
-    }
-
     private void addGameListPanelToGamesPlaceholder() {
         if (!gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
             gamesPlaceholder.getChildren().add(gameListPanel.getRoot());
-        }
-    }
-
-    private void removeGameListPanelToGamesPlaceholder() {
-        if (gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
-            gamesPlaceholder.getChildren().remove(gameListPanel.getRoot());
         }
     }
 
