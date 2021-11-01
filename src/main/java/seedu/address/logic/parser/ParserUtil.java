@@ -103,6 +103,9 @@ public class ParserUtil {
         if (!Measurement.isValidMeasurement(trimmedMeasurement, gender.value)) {
             throw new ParseException(Measurement.getMessageConstraints(gender.value));
         }
+        if (!Measurement.isValidRange(trimmedMeasurement)) {
+            throw new ParseException(Measurement.RANGE_MESSAGE_CONSTRAINTS);
+        }
         return new Measurement(trimmedMeasurement);
     }
 
@@ -117,6 +120,9 @@ public class ParserUtil {
         String trimmedMeasurement = measurement.trim();
         if (!Measurement.isValidMeasurement(trimmedMeasurement)) {
             throw new ParseException(Measurement.GENERAL_MESSAGE_CONSTRAINTS);
+        }
+        if (!Measurement.isValidRange(trimmedMeasurement)) {
+            throw new ParseException(Measurement.RANGE_MESSAGE_CONSTRAINTS);
         }
         return new Measurement(trimmedMeasurement);
     }
