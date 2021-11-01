@@ -98,6 +98,7 @@ Examples:
   and displays a confirmation output with a proper GitHub link
 * `addStudent n/John Doe e/johnd@u.nus.edu s/A0123456B u/user` adds John Doe to the list and displays a confirmation
   output without a proper GitHub link, but storing the `GITHUB USERNAME` in memory nonetheless.
+  ![result for 'addStudent'](images/addStudentJohnDoe.png)
 
 ### Edit a student : `editStudent`
 
@@ -111,12 +112,13 @@ Format: `editStudent INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [r/REPO_NAME] [
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 * You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
-* This command flags out missing fields first before ensuring the validity of the fields, and finally the index. (If an invalid index is entered with no or wrong fields, the command would not check the validity of the index)
+* This command flags out indexes less than 1 first, before missing fields, ensuring the validity of the fields, and finally the validity of index that is greater than 0. (If an invalid index greater than 0 is entered with no or wrong fields, the command would not check the validity of the index)
 
 Examples:
 * `editStudent 1 s/A0221111L e/johndoe@u.nus.edu` Edits the student number and email address of the 1st student to be `A0221111L` and `johndoe@u.nus.edu` respectively.
 * `editStudent 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-
+  !['result for 'editStudent'](images/editStudentJohnDoe.png)
+  
 ### Delete a student: `deleteStudent`
 
 Deletes the specified student from the student list.
@@ -130,6 +132,7 @@ Format: `deleteStudent INDEX`
 Examples:
 
 * `students` followed by `deleteStudent 1` removes the 1st student in the students list.
+  !['result for 'deleteStudent'](images/deleteStudentAlex.png)
 
 ### Marking a student's attendance: `marka`
 
@@ -222,6 +225,8 @@ Examples:
 * `addGroup g/W14-4 y/AY2122S1 r/tp t/tApp` adds group W14-4 to the list and displays a confirmation output with GitHub link and no
   group members
 * `addGroup g/f14-4 y/AY2122S1` adds group F14-4 to the list and displays a confirmation output with no GitHub link and group members
+  ![result for 'addGroup'](images/addGroupF14-4.png)
+
 
 ### Editing a group : `editGroup`
 
@@ -234,11 +239,13 @@ Format: `editGroup INDEX [g/GROUP_NAME] [r/REPO_NAME] [y/YEAR] [t/TAG]…​`
 * When editing tags, the existing tags of the group will be removed i.e adding of tags is not cumulative.
 * You can remove all the group’s tags by typing `t/` without
   specifying any tags after it.
-* Similiar to `editStudent` this command flags out missing fields first before ensuring the validity of the fields, and finally the index.
+* Similiar to `editStudent` this command flags out index values less than 1 first, before missing fields, ensuring the validity of the fields, and finally the index that is greater than 0.
 
 Examples:
 * `editGroup 1 g/W14-4 r/tp` Edits the group name and repository name of the 1st group to be `W14-4` and `tp` respectively.
 * `editGroup 2 y/AY20212022 t/` Edits the name of the 2nd group to be `AY20212022` and clears all existing tags.
+  ![result for 'editGroup'](images/editGroupF14-4.png)
+
 
 ### Delete a group: `deleteGroup`
 
@@ -252,6 +259,8 @@ Format: `deleteGroup INDEX`
 
 Examples:
 * `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and GitHub link of the group deleted.
+  ![result for 'deleteGroup'](images/deleteGroup1.png)
+
 
 ### Add a student to a group: `addMember`
 
@@ -266,6 +275,8 @@ Format: `addMember INDEX g/GROUP`
 
 Examples:
 * `addMember 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output that the student has been added to the group.
+  ![result for 'addMember'](images/addMemberF14-4.png)
+
 
 ### Delete a student from a group: `deleteMember`
 
@@ -279,6 +290,7 @@ Format: `deleteMember GROUP_INDEX STUDENT_INDEX`
 
 Examples:
 * `deleteMember 1 2` deletes the member with index 2 in the group member list of the  group with index 1 in group list and displays a confirmation output with the affected group member and group name.
+  ![result for 'deleteMember'](images/deleteMemberF14-4.png)
 
 ### Locating group by name: `findGroup`
 
@@ -476,7 +488,7 @@ Commands | Format | Examples
 [**Mark Student Attendance**](#marking-a-students-attendance-marka) | `marka INDEX w/WEEK` | e.g., `marka 1 w/10`
 [**Mark Student Participation**](#marking-a-students-participation-markp) | `markp INDEX w/WEEK` | e.g., `markp 1 w/10`
 [**Find Student**](#find-student-by-name-findstudent) | `findStudent KEYWORD [MORE_KEYWORDS]` | e.g., `findStudent John`
-[**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents` 
+[**Clear Students**](#clearing-all-entries-from-student-list-clearstudents) | `clearStudents`
 
 ## [Groups](#groups)
 

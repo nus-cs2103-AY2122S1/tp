@@ -177,41 +177,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Member to Group Command
-
-#### Implementation
-
-<img src="images/AddMemberSequenceDiagram.png"/>
-
-As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
-The main difference between the addMember command lies not in the way the `Logic` class is activated but in the way the `Model` class processes this command.
-
-The above process is shown in the following sequence diagram:
-
-<img src="images/AddMemberRefSequenceDiagram.png"/>
-
-The command first gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
-It then calls the `get` command to get a reference of the `Student` to be added using the index supplied by the user.
-The group to be added to is referenced to by its unique name by the user, and the command gets a reference to this `Group` by finding a group with the same name in the list.
-
-`addMembers` then updates the hidden `groupName` field of the `Student` to be added, and adds the said student to the `Group` specified by updating its `Members` class.
-Both the updated `Student` and `Group` are then set in `AddressBook`.
-
-Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
-these changes in the `AddressBook`.
-
-#### Design considerations:
-
-* Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
-    * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
-    * Cons: Increases coupling between `Student` and `Group` classes.
-
-* Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
-  * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
-  * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
-    unnatural modelling of the real world since `Group` contains students and not the other way around.
-    
-
 ### Find Command
 
 The find command can be executed for two main features in tApp: students and groups.
@@ -246,6 +211,48 @@ The above process is further summarised in the following sequence diagram:
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
 ℹ️ **Note:** The lifeline ****for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+### Add Member to Group Command
+
+#### Implementation
+
+
+![Sequence Diagram of Add Member](images/AddMemberSequenceDiagram.png)
+
+As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
+The main difference between the addMember command lies not in the way the `Logic` class is activated but in the way the `Model` class processes this command.
+
+When the user executes the `addMember` command, user input is parsed and the `Index` of student to be added, and the `GroupName` of the group to be added to are extracted into parameters of the `AddMemberCommand` class.
+
+The above process is shown in the following sequence diagram:
+
+![Reference Sequence Diagram of Add Member](images/AddMemberRefSequenceDiagram.png)
+
+A key difference to note about this command is that gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
+
+The follow steps describes the execution of the AddMember command.
+
+1. `AddMemberCommand` uses the provided `Index` and `GroupName` to obtain both a reference to the `Student` (using `Index`) and the `Group` (using `GroupName`). Since `GroupName` is unique, there will only be one `Group` selected.
+1. `AddMemberCommand` then uses these references to call the `addMembers` function of the `Model` class.
+1. The `Model` then creates and stores a new `Student` using the same information as the `Student` parameter passed in, but substituting the `GroupName` field to the name of the `Group` passed as a parameter.
+1. `Model` then calls the `addMember` function of the referenced `Group`, passing in the newly created `Student` as a parameter.
+1. `Group` then calls the `addMember` function of its `Member` class, passing in the same `Student` parameter.
+1. The `Member` then stores a reference to this `Student`.
+1. `Model` then calls `setStudent` and `setGroup` to update these changes in `AddressBook`.
+
+Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
+these changes in the `AddressBook`.
+
+#### Design considerations:
+
+* Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
+    * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
+    * Cons: Increases coupling between `Student` and `Group` classes.
+
+* Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
+    * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
+    * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
+      unnatural modelling of the real world since `Group` contains students and not the other way around.
 
 ### Tasks
 
@@ -814,6 +821,28 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a student while all students are being shown
 
+    1. Prerequisites: List all students using the `students` command. Multiple students in the list.
+    
+    1. Test case: `addStudent n/John Doe e/john@u.nus.edu s/a0000001b u/johndoee r/ip`<br>
+       Expected: A student is added to the bottom of the list, with Github link shown. Details of the student is shown in the status message. Letters in student number are automatically capitalized.
+
+    1. Test case: `addStudent n/John Doe e/jondoe@u.nus.edu s/a0000002b u/jondoee r/ip`<br>   
+       Expected: Similar to previous, no error thrown, student with same name added.
+       
+    1. Test case: `addStudent n/Mary Doe e/mary@u.nus.edu s/a0000001b` or any other student with conflicting student number or email<br>
+       Expected: No student is added. Error message of duplicate student shown in status message.
+       
+    1. Test case: `addStudent` with missing `n/`, `e/`, and/or `s/` prefixes <br>
+       Expected: No student is added. Error message of invalid command format shown.
+       
+2. Adding a student while on another directory
+    
+    1. Prerequisites: List all tasks or groups using the `tasks` or `groups` command.
+    
+    1. Perform a successful `addStudent` command
+       Expected: A student is added, and the student list is displayed. 
+    
+
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
@@ -830,6 +859,32 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 ### Editing a student
+
+1. Editing a student while all students are being shown
+
+    1. Prerequisites: List all students using the `students` command. Multiple students in the list.
+
+    1. Test case: `editStudent 1 n/John Doe u/johndoee r/ip`<br>
+       Expected: The first student in the list has details changed to the ones specified above. Details of the student is shown in the status message.
+       
+    1. Test case: `editStudent 1 s/a0000001b` or any other student number or email or both to that conflicts with another student in the list<br>   
+       Expected: No student is edited. Error message of duplicate student shown in status message.
+
+    1. Test case: `editStudent 999 n/test` where the index is greater than the number of students in the list.
+       Expected: No student is edited. Error message invalid index shown. 
+
+    1. Test case: `editStudent 1` with no prefixes <br>
+       Expected: No student is edited. Error message of missing edit fields shown.
+    
+   1. Test case: `editStudent 0 n/test`, where the index is 0 or smaller <br>
+      Expected: No student is edited. Error message of invalid command format shown.
+      
+2. Editing a student while on another directory
+
+    1. Prerequisites: List all tasks or groups using the `tasks` or `groups` command.
+
+    1. Perform a successful `editStudent` command
+       Expected: The student is edited, and the student list is displayed.
 
 ### Marking a student's attendance
 
@@ -927,9 +982,113 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a group
 
+1. Adding a group while all groups are being shown
+
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+
+    1. Test case: `addGroup g/w14-4 y/AY2122S1 r/tp`<br>
+       Expected: A group is added to the bottom of the list, with Github link shown. Details of the group is shown in the status message. Letter in group name is automatically capitalized.
+
+    1. Test case: `addGroup g/w14-4` or any other group with conflicting name<br>
+       Expected: No group is added. Error message of duplicate group shown in status message.
+
+    1. Test case: `addGroup` with missing `g/` prefixes (other prefixes can be present) <br>
+       Expected: No student is added. Error message of invalid command format shown.
+
+2. Adding a group while on another directory
+
+    1. Prerequisites: List all students or groups using the `students` or `groups` command.
+
+    1. Perform a successful `addGroup` command
+       Expected: A group is added, and the group list is displayed.
+
 ### Deleting a group
 
+1. Deleting a group while all groups are being shown
+
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+
+    1. Test case: `deleteGroup 1`<br>
+       Expected: First group is deleted from the list. Details of the deleted group shown in the status message. Members of the group in student list are no longer tagged to the group.
+
+   1. Test case: `deleteGroup 999` where the index of the group is greater than the size of the group list<br>
+      Expected: No group is deleted. Error message of invalid index shown in the status message.
+
+    1. Test case: `deleteGroup 0`<br>
+       Expected: No group is deleted. Error message of invalid command format shown in the status message.
+
+    1. Other incorrect delete commands to try: `deleteGroup`, `deleteGroup x`, `...` (where x is smaller than 0)<br>
+       Expected: Similar to previous.
+
 ### Editing a group
+
+1. Editing a group while all groups are being shown
+
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+
+    1. Test case: `editGroup 1 r/ip`<br>
+       Expected: The first group in the list has details changed to the ones specified above. Details of the group is shown in the status message.
+
+    1. Test case: `editGroup g/w14-4` changing group name a value conflicting another group in the list<br>   
+       Expected: No group is edited. Error message of duplicate group shown in status message.
+
+    1. Test case: `editGroup 999 n/test` where the index is greater than the number of groups in the list.
+       Expected: No group is edited. Error message invalid index shown.
+
+    1. Test case: `editGroup 1` with no prefixes <br>
+       Expected: No group is edited. Error message of missing edit fields shown.
+
+    1. Test case: `editStudent 0 n/test`, where the index is 0 or smaller <br>
+       Expected: No student is edited. Error message of invalid command format shown.
+
+2. Editing a student while on another directory
+
+    1. Prerequisites: List all tasks or students using the `tasks` or `students` command.
+
+    1. Perform a successful `editGroup` command
+       Expected: The group is edited, and the group list is displayed.
+
+### Adding a group member
+
+1. Adding a group member while all groups are being shown
+
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+
+    1. Test case: `addMember 1 g/w14-4` where a group with the name of W14-4 exists<br>
+       Expected: First student in the student list is added to group W14-4 as a member. Success message shown in the status message. Student in student list is tagged to the group.
+
+    1. Test case: `addMember 999 g/w14-4` where the index of the student is greater than the size of the student list<br>
+       Expected: No member is added. Error message of invalid index shown in the status message.
+
+    1. Test case: `addMember 2 g/z11-1` where no group with name Z11-1 exists<br>
+       Expected: No member is added. Error message of invalid group name shown in the status message. 
+
+    1. Test case: `addMember 0 g/w14-4`<br>
+       Expected: No group is deleted. Error message of invalid command format shown in the status message.
+
+    1. Other incorrect delete commands to try: `addMember`, `addMember x g/w14-4`, `...` (where x is smaller than 0)<br>
+       Expected: Similar to previous.
+
+### Deleting a group member
+
+1. Deleting a group member while all groups are being shown
+
+    1. Prerequisites: List all groups using the `groups` command. Multiple groups in the list.
+
+    1. Test case: `deleteMember 1 1` where the first group has at least 1 member<br>
+       Expected: First student in the member list of the first group in the group list is deleted. Success message shown in the status message. Student in student list is no longer tagged to the group.
+
+    1. Test case: `deleteMember 999 1` where the index of the group is greater than the size of the group list<br>
+       Expected: No member is deleted. Error message of invalid group index shown in the status message.
+
+    1. Test case: `deleteMember 1 99` where the index of the member is greater than the size of the member list exists<br>
+       Expected: No member is deleted. Error message of invalid member index shown in the status message.
+
+    1. Test case: `deleteMember 0 1`<br>
+       Expected: No member is deleted. Error message of invalid command format shown in the status message.
+
+    1. Other incorrect delete commands to try: `deleteMember`, `deleteMember x y`, `...` (where x and/or y are smaller than 0)<br>
+       Expected: Similar to previous.
 
 ### Finding a group
 
