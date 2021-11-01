@@ -3,39 +3,54 @@ layout: page
 title: User Guide
 ---
 
+# LeadsForce User Guide
+![Ui](images/LeadsForceLogo.jpg)
+
+Welcome to LeadsForce User Guide! Scroll down to the table of contents to find step-by-step instructions and get to know us. 
+
+## Table of Contents
+
+* [**1. Introduction**](#1-introduction)
+  * [1.1 Reading this User Guide](#
+* [**2. Quick Start**](#2-quick-start)
+* [**3. Client Information**](#3-client-information)
+    * [3.1 Next Meeting format](#31-nextmeeting) 
+* [**4. Features**](#4-features)
+    * [4.1 Create new contact: add](#41-create-new-contact--add)
+    * [4.2 Retrieve particular contact: view](#42-retrieve-particular-contact--view)
+    * [4.3 Update existing contact: edit](#43-update-existing-contact--edit)
+    * [4.4 Delete particular contact: delete](#44-delete-particular-contact--delete)
+    * [4.5 List all contacts: list](#45-list-all-contacts--list)
+    * [4.6 Sort Contacts: sort](#46-sort-contacts--sort)
+    * [4.7 Find meeting schedule: schedule](#47-find-meeting-schedule--schedule)
+    * [4.8 Locating clients by keywords: search](#48-locating-clients-by-keywords--search)
+    * [4.9 Filter current list: filter](#49-filter-current-list-by-keywords--filter)
+    * [4.10 Clearing all entries: clear](#410-clearing-all-entries--clear)
+    * [4.11 Exiting the program: exit](#411-exiting-the-program--exit)
+    * [4.12 Saving data](#412-saving-the-data)
+    * [4.13 Edit data file](#413-edit-data-file)
+* [**5. Multiple Address Book Feature**](#5-features)
+    * [5.1 Create new address book: ab create](#51-create-new-address-book--ab-create)
+    * [5.2 Delete existing address book: ab delete](#52-delete-existing-address-book-ab-delete--ab-delete)
+    * [5.3 Switch to different address book: ab switch](#53-switch-to-different-address-book--ab-switch)
+    * [5.4 List all address book: ab list](#54-list-all-address-book--ab-list)
+* [**6. FAQ**](#6-faq)
+* [**7. Command Summary**](#7-command-summary)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 1. Introduction
 LeadsForce is a desktop app that is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 Catered towards student financial advisors, LeadsForce makes the process of managing client information seamless!
 LeadsForce does this by helping the financial advisors store and retrieve client information effortlessly and seamlessly.
 
 Finding your next lead has never been easier.
-## Table of Contents
 
-* [Quick Start](#quick-start)
-* [Client Information](#client-information)
-* [Features](#features)
-    * [Create new contact: add](#create-new-contact--add)
-    * [Retrieve particular contact: view](#retrieve-particular-contact--view)
-    * [Update existing contact: edit](#update-existing-contact--edit)
-    * [Delete particular contact: delete](#delete-particular-contact--delete)
-    * [List all contacts: list](#list-all-contacts--list)
-    * [Sort Contacts: sort](#sort-contacts--sort)
-    * [Find meeting schedule: schedule](#find-meeting-schedule--schedule)
-    * [Locating clients by keywords: search](#locating-clients-by-keywords--search)
-    * [Filter current list: filter](#filter-current-list-by-keywords--filter)
-    * [Clearing all entries: clear](#clearing-all-entries--clear)
-    * [Exiting the program: exit](#exiting-the-program--exit)
-    * [Create new address book: ab create](#create-new-address-book--ab-create)
-    * [Delete existing address book: ab delete](#delete-existing-address-book-ab-delete--ab-delete)
-    * [Switch to different address book: ab switch](#switch-to-different-address-book--ab-switch)
-    * [List all address book: ab list](#list-all-address-book--ab-list)
-    * [Saving data](#saving-the-data)
-    * [Edit data file](#edit-data-file)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
+### 1.1 Reading this User Guide
 
---------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+
+## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your computer.
 
@@ -63,7 +78,7 @@ Finding your next lead has never been easier.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Client Information
+## 3. Client Information
 
 Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag.
 
@@ -81,7 +96,7 @@ Contact number | Integer (8 digits long)| p/
 Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| r/
 Tag | String | t/
 
-### NextMeeting
+### 3.1 NextMeeting
 NextMeeting entails the next meeting's *date*, *startTime*, *endTime* and *location*.
 A NextMeeting needs to be inputted in the following form:
 
@@ -104,7 +119,7 @@ Similar to NextMeeting, the LastMet is automatically updated from a NextMeeting 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 4. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -123,7 +138,7 @@ Similar to NextMeeting, the LastMet is automatically updated from a NextMeeting 
 </div>
 
 
-### Create New Contact : `add`
+### 4.1 Create New Contact : `add`
 
 Adds a new client to the address book.
 
@@ -138,7 +153,7 @@ Examples:
 * `add n/Keith e/keithtan@ymail.com p/12345678 r/4`
 
 
-### Retrieve Particular Contact : `view`
+### 4.2 Retrieve Particular Contact : `view`
 
 Fully view a client’s information in detail.
 
@@ -146,7 +161,7 @@ Format: `view {CLIENT'S ID}`
 
 Example: `view 2` would be used to view client 2's information
 
-### Update Existing Contact : `edit`
+### 4.3 Update Existing Contact : `edit`
 
 Update the information of existing users by using the “edit” command. This can be used to update the
 attributes of a client, using the tag of the client’s attribute.
@@ -163,7 +178,7 @@ Examples:
 * `edit 3 p/12345678 r/5` command changes the contact number to “12345678” and the risk appetite to 5 for the client who’s client id is 3.
 * `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”.
 
-### Delete particular contact : `delete`
+### 4.4 Delete particular contact : `delete`
 
 Deletes an existing client from the address book using their client id.
 
@@ -175,14 +190,14 @@ Examples:
 * `delete 7` will deletes client with client id 7
 * `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8
 
-### List all contacts : `list`
+### 4.5 List all contacts : `list`
 
 Shows the full list of all clients in the address book.
 
 Format: `list`
 
 
-### Sort Contacts : `sort`
+### 4.6 Sort Contacts : `sort`
 
 Sorts clients in order based off the inputted attribute
 
@@ -199,7 +214,7 @@ Examples:
 * `sort r/ASC` will sort the list by ascending risk-appetite
 * `sort i/dsc` will sort the list by descending client id
 
-### Find meeting schedule : `schedule`
+### 4.7 Find meeting schedule : `schedule`
 
 Finds the meeting schedule that the user has on a specified date.
 
@@ -212,7 +227,7 @@ Example:
 * `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
 * `schedule` displays all meetings
 
-### Locating clients by keywords : `search`
+### 4.8 Locating clients by keywords : `search`
 
 Finds clients whose contacts match with the given keywords.
 
@@ -233,7 +248,7 @@ Examples:
 * `search John` returns `john` and `John Doe`
 * `search alex david` returns `Alex Yeoh`, `David Li`<br>
 
-### Filter current list by keywords : `filter`
+### 4.9 Filter current list by keywords : `filter`
 
 Filter the current list by the given keywords.
 
@@ -255,7 +270,7 @@ Examples:
 * `search John` returns `john` and `John Doe`
 * `search alex david` returns `Alex Yeoh`, `David Li`<br>
 
-### Clearing all entries : `clear`
+### 4.10 Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
@@ -266,13 +281,27 @@ Format: `clear`
   * `yes`: to confirm and proceed with the clear command.
   * `no`: to cancel the clear command.
 
-### Exiting the program : `exit`
+### 4.11 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Create new address book : `ab create`
+### 4.12 Saving the data
+
+LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### 4.13 Edit data file
+
+LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+</div>
+
+### 5. Multiple Address Books Feature 
+
+### 5.1 Create new address book : `ab create`
 
 Create a new address book by the name provided and switch to it.
 
@@ -284,7 +313,7 @@ Format: `ab create {ADDRESSBOOK_NAME}`
 Examples:
 * 'ab create vip clients' will create a new address book named `vip clients`
 
-### Delete existing address book: ab delete : `ab delete`
+### 5.2 Delete existing address book: ab delete : `ab delete`
 
 Delete an address book that currently exists.
 
@@ -297,7 +326,7 @@ Examples:
 * 'ab delete test' will delete the address book named `test`
 
 
-### Switch to different address book : `ab switch`
+### 5.3 Switch to different address book : `ab switch`
 
 Switch to a different address book that currently exists.
 
@@ -309,34 +338,23 @@ Examples:
 * 'ab switch other' will switch over to the address book named `other`
 
 
-### List all address book : `ab list`
+### 5.4 List all address book : `ab list`
 
 List all the name of all the existing address books
 
 Format: `ab list`
 
-### Saving the data
-
-LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Edit data file
-
-LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 6. FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous LeadsForce home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 7. Command summary
 
 Action | Format | Examples
 --------|---------|---------
