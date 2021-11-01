@@ -26,9 +26,11 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, PersonDetails personDetails) {
+    public PersonListPanel(ObservableList<Person> personList, PersonDetails personDetails,
+                           TabPaneHeader tabPaneHeader) {
         super(FXML);
         this.personDetails = personDetails;
+        this.tabPaneHeader = tabPaneHeader;
         this.getRoot().setPrefHeight(Region.USE_PREF_SIZE);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -38,7 +40,7 @@ public class PersonListPanel extends UiPart<Region> {
         }
         personListView.getSelectionModel().selectedItemProperty().addListener((
                 observable, oldValue, newValue
-        ) -> personDetails.setPerson(newValue, tabPaneHeader.getTabPane().getSelectionModel().isSelected(3)));
+        ) -> personDetails.setPerson(newValue, this.tabPaneHeader.getTabPane().getSelectionModel().isSelected(3)));
 
         personListView.getItems().addListener((ListChangeListener<? super Person>) observable -> setSelectedIndex(0));
     }
