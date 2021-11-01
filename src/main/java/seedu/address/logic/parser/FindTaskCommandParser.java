@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindTaskCommand;
+import seedu.address.logic.commands.Keyword;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.TaskContainsKeywordsPredicate;
 
@@ -26,6 +27,13 @@ public class FindTaskCommandParser {
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
+        for (String keyword : nameKeywords) {
+            if (!Keyword.isValidKeyword(keyword)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTaskCommand.MESSAGE_USAGE));
+            }
+        }
+
 
         return new FindTaskCommand(new TaskContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
