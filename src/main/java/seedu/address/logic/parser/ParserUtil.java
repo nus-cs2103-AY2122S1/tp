@@ -134,17 +134,28 @@ public class ParserUtil {
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Priority parsePriority(String description) throws ParseException {
+        if (description.isEmpty()) {
+            return Priority.LOW;
+        }
         String trimmedPriorityInCamps = description.trim().toUpperCase();
         Priority priority;
         if (!Description.isValidDescription(trimmedPriorityInCamps)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        if (trimmedPriorityInCamps.contains("H")) {
+        if (trimmedPriorityInCamps.contains("H") && trimmedPriorityInCamps.contains("M") ||
+                trimmedPriorityInCamps.contains("M") && trimmedPriorityInCamps.contains("L") ||
+                trimmedPriorityInCamps.contains("H") && trimmedPriorityInCamps.contains("L")) {
+            throw new ParseException("Task priority should be only High, Medium or Low and not a combination of any.");
+        }
+        else if (trimmedPriorityInCamps.contains("H")) {
             priority = Priority.HIGH;
         } else if (trimmedPriorityInCamps.contains("M")) {
             priority = Priority.MEDIUM;
-        } else {
+        } else if (trimmedPriorityInCamps.contains("L")) {
             priority = Priority.LOW;
+        }
+        else {
+            throw new ParseException("Your specified priority level is invalid");
         }
         return priority;
     }
