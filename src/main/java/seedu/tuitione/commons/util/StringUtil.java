@@ -116,4 +116,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean isAllDigit(String s) {
+        String trimmedS = s.trim();
+        if (!trimmedS.matches("\\d+")) {
+            return false;
+        }
+        return true;
+    }
 }
