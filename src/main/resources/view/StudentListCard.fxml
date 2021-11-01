@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -26,42 +28,72 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" />
       </HBox>
-      <FlowPane fx:id="remarks"  />
-         <HBox>
+      <FlowPane fx:id="remarks" />
+         <HBox prefHeight="14.0" prefWidth="173.0">
             <children>
-                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="🔢 Grade:" />
+               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/book.png" />
+                  </image>
+               </ImageView>
+                <Label maxWidth="150.0" minWidth="150.0" prefHeight="13.0" prefWidth="150.0" styleClass="cell_small_label" text=" Grade:" />
                 <Label fx:id="grade" styleClass="cell_small_label" text="\$grade" />
             </children>
          </HBox>
          <HBox>
             <children>
-                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="☎ Parent's Contact:" wrapText="true" />
+               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/phone_shrinked.png" />
+                  </image>
+               </ImageView>
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text=" Parent's Contact:" wrapText="true" />
                 <Label fx:id="parentContact" styleClass="cell_small_label" text="\$parentContact" />
             </children>
          </HBox>
          <HBox>
             <children>
-                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="🏠 Address:" />
-                <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/house_shrinked.png" />
+                  </image>
+               </ImageView>
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text=" Address:" />
+                <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
             </children>
          </HBox>
          <HBox>
             <children>
-                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="📧 Email Address:" />
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/email.png" />
+                  </image>
+               </ImageView>
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text=" Email Address:" />
+                <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" />
             </children>
          </HBox>
          <HBox>
              <children>
-                 <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="💵 Subscription:" />
+               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/subscription.png" />
+                  </image>
+               </ImageView>
+                 <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text=" Subscription:" />
                  <Label fx:id="subscription" styleClass="cell_small_label" text="\$subscription" />
              </children>
          </HBox>
         <HBox>
             <children>
-                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text="🎒 Lesson(s):" />
+               <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../images/teach.png" />
+                  </image>
+               </ImageView>
+                <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" styleClass="cell_small_label" text=" Lesson(s):" />
                 <Label fx:id="lessons" styleClass="cell_small_label" text="\$lessons" wrapText="true" />
             </children>
         </HBox>
