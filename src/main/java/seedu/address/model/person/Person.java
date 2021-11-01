@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,6 +41,8 @@ public class Person implements Comparable<Person> {
     private Thread getProfilePicThread;
     private Thread getStatsThread;
     private HashMap<String, Double> gitStats;
+    private ArrayList<String> commonLanguages = new ArrayList<>();
+    private double simScore = 0.0;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -122,6 +125,14 @@ public class Person implements Comparable<Person> {
         ThreadProcessor.addThread(getStatsThread);
     }
 
+    public void setCommonLanguages(ArrayList<String> commonLanguages) {
+        this.commonLanguages = commonLanguages;
+    }
+
+    public void setSimScore(double simScore) {
+        this.simScore = simScore;
+    }
+
     public Name getName() {
         return name;
     }
@@ -168,6 +179,14 @@ public class Person implements Comparable<Person> {
 
     public Image getProfilePicture() {
         return profilePicture;
+    }
+
+    public ArrayList<String> getCommonLanguages() {
+        return commonLanguages;
+    }
+
+    public double getSimScore() {
+        return simScore;
     }
 
     /**

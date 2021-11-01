@@ -32,14 +32,15 @@ public class PersonListPanel extends UiPart<Region> {
         this.getRoot().setPrefHeight(Region.USE_PREF_SIZE);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        setSelectedIndex(0);
+        if (!personList.isEmpty()) {
+            personDetails.setPerson(personList.get(0), false);
+        }
         personListView.getSelectionModel().selectedItemProperty().addListener((
                 observable, oldValue, newValue
-        ) -> personDetails.setPerson(newValue));
+        ) -> personDetails.setPerson(newValue, tabPaneHeader.getTabPane().getSelectionModel().isSelected(3)));
 
-        setSelectedIndex(0);
-        personListView.getItems().addListener((ListChangeListener<? super Person>) observable -> {
-            setSelectedIndex(0);
-        });
+        personListView.getItems().addListener((ListChangeListener<? super Person>) observable -> setSelectedIndex(0));
     }
 
     public void setSelectedIndex(int index) {
@@ -47,7 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
             personListView.getSelectionModel().select(index);
             personListView.scrollTo(index);
         } else {
-            personDetails.setPerson(null);
+            personDetails.setPerson(null, tabPaneHeader.getTabPane().getSelectionModel().isSelected(3));
         }
     }
 

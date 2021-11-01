@@ -57,20 +57,30 @@ public class PersonDetails extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label simScore;
+    @FXML
+    private FlowPane commonLang;
+    @FXML
     private ImageView profileView;
     @FXML
     private FlowPane tags;
+    @FXML
+    private VBox detailOptional;
+    @FXML
+    private VBox similarityOptional;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonDetails(Person person) {
         super(FXML);
-        this.setPerson(person);
+        this.setPerson(person, false);
         this.getRoot().setPrefHeight(Region.USE_PREF_SIZE);
+        detailOptional.managedProperty().bind(detailOptional.visibleProperty());
+        similarityOptional.managedProperty().bind(similarityOptional.visibleProperty());
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(Person person, boolean showSimilarity) {
         this.person = person;
         if (person == null) {
             cardPane.setVisible(false);
@@ -124,6 +134,22 @@ public class PersonDetails extends UiPart<Region> {
                 profileView.setImage(person.getProfilePicture());
             });
             temp.start();
+        }
+
+        simScore.setText(String.valueOf(person.getSimScore()) + "%");
+        commonLang.getChildren().removeIf(l -> true);
+        person.getCommonLanguages().forEach(l -> commonLang.getChildren().add(new Label(l)));
+
+        if (showSimilarity) {
+            detailOptional.setVisible(false);
+            detailOptional.getChildren().parallelStream().forEach(n -> n.setVisible(false));
+            similarityOptional.setVisible(true);
+            similarityOptional.getChildren().parallelStream().forEach(n -> n.setVisible(true));
+        } else {
+            detailOptional.setVisible(true);
+            detailOptional.getChildren().parallelStream().forEach(n -> n.setVisible(true));
+            similarityOptional.setVisible(false);
+            similarityOptional.getChildren().parallelStream().forEach(n -> n.setVisible(false));
         }
     }
 
