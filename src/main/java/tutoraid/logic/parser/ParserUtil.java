@@ -23,7 +23,8 @@ import tutoraid.model.student.StudentName;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String MESSAGE_INVALID_DUPLICATE_INDEXES =
+            "There must not be duplicate indexes within each parameter.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -42,6 +43,7 @@ public class ParserUtil {
      * Parses multiple {@code oneBasedIndex} into an arraylist of {@code Index} and returns it.
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if any of the specified indexes are invalid (not non-zero unsigned integer).
+     * @throws ParseException if there are duplicate indexes.
      */
     public static ArrayList<Index> parseMultipleIndexes(String multipleOneBasedIndexes) throws ParseException {
         String[] trimmedMultipleIndexes = multipleOneBasedIndexes.trim().split(" ");
@@ -49,6 +51,9 @@ public class ParserUtil {
 
         for (String indexInString : trimmedMultipleIndexes) {
             Index index = parseIndex(indexInString);
+            if (indexesToReturn.contains(index)) {
+                throw new ParseException(MESSAGE_INVALID_DUPLICATE_INDEXES);
+            }
             indexesToReturn.add(index);
         }
 
