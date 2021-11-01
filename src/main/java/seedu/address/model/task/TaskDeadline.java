@@ -45,7 +45,7 @@ public class TaskDeadline {
         LocalTime time;
         String formattedDateAndTime;
         String[] split = line.nextLine().split(" ");
-        if (isDate(split[0])) {
+        if (isInDateFormat(split[0])) {
             date = LocalDate.parse(split[0]);
             formattedDateAndTime = dateFormatter.format(date);
             if (split.length == 2) {
@@ -69,7 +69,7 @@ public class TaskDeadline {
      * @param string The string that may potentially be a date.
      * @return A boolean stating whether the string is a date.
      */
-    public static boolean isDate(String string) {
+    public static boolean isInDateFormat(String string) {
         if (string.length() == 10) {
             String year = string.substring(0, 4);
             String month = string.substring(5, 7);
@@ -86,7 +86,7 @@ public class TaskDeadline {
      * @param string The string that may potentially be a time.
      * @return A boolean stating whether the string is a time.
      */
-    public static boolean isTime(String string) {
+    public static boolean isInTimeFormat(String string) {
         return string.length() == 5 && isInteger(string.substring(0, 2)) && isInteger(string.substring(3, 5))
                 && string.charAt(2) == ':';
     }
@@ -119,10 +119,10 @@ public class TaskDeadline {
             Scanner testDeadline = new Scanner(test);
             while (testDeadline.hasNext()) {
                 String currWord = testDeadline.next();
-                if (isDate(currWord) && !datePresent) {
+                if (isInDateFormat(currWord) && !datePresent) {
                     datePresent = true;
                     LocalDate.parse(currWord);
-                } else if (isTime(currWord) && !timePresent) {
+                } else if (isInTimeFormat(currWord) && !timePresent) {
                     timePresent = true;
                     LocalTime.parse(currWord);
                 } else {
