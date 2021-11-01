@@ -240,7 +240,7 @@ public class CommandTestUtil {
 
         Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
         final String[] splitName = group.getName().name.split("\\s+");
-        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(splitName[0])));
 
         assertEquals(1, model.getFilteredGroupList().size());
     }

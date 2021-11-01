@@ -133,8 +133,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.remove(key);
     }
 
+    /**
+     *
+     */
     public void clearAllTask() {
         tasks.removeAllTasks();
+    }
+
+    /**
+     *
+     */
+    public void sortTasks() {
+        tasks.sortList();
     }
 
 
