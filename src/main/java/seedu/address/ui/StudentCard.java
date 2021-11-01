@@ -23,10 +23,12 @@ public class StudentCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Student student;
-
     private static final String FXML = "StudentListCard.fxml";
 
+    protected final Student student;
+
+    @FXML
+    protected FlowPane tags;
     @FXML
     private HBox cardPane;
     @FXML
@@ -40,9 +42,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label githubLink;
     @FXML
-    protected FlowPane tags;
-    @FXML
     private VBox studentValuesContainer;
+
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.

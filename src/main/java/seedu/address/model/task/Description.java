@@ -13,9 +13,9 @@ public class Description {
     public static final Description NO_DESCRIPTION =
             new Description("");
 
-    public final String description;
+    public static final String REGEX = "[\\x00-\\x7F]*";
 
-    private static final String REGEX = "[\\x00-\\x7F]*";
+    public final String description;
 
     /**
      * Constructs a {@code Description}.
