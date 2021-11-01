@@ -1,6 +1,8 @@
 ---
 layout: page
-title: Setting up and getting started
+title: Getting Started
+parent: For Users
+nav_order: 1
 ---
 
 * Table of Contents
@@ -45,7 +47,7 @@ If you plan to use Intellij IDEA (highly recommended):
 
 1. **Learn the design**
 
-   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide - AB3.md#architecture).
+   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide.md#architecture).
 
 1. **Do the tutorials**
    These tutorials will help you get acquainted with the codebase.

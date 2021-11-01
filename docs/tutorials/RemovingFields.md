@@ -1,6 +1,8 @@
 ---
 layout: page
 title: "Tutorial: Removing Fields"
+parent: Tutorials
+grand_parent: For Users
 ---
 
 > Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away.

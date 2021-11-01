@@ -1,6 +1,7 @@
 ---
 layout: page
 title: John Doe's Project Portfolio Page
+parent: The Team
 ---
 
 ### Project: AddressBook Level 3

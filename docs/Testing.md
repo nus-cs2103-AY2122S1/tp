@@ -1,6 +1,8 @@
 ---
 layout: page
 title: Testing guide
+parent: For Developers
+nav_order: 2
 ---
 
 * Table of Contents
