@@ -3,14 +3,21 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 public class TaskDate {
 
-    public static final String MESSAGE_CONSTRAINTS = "Deadlines should be in the format yyyy-MM-dd";
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final String MESSAGE_CONSTRAINTS = "Deadlines should be in the format yyyy-MM-dd."
+            + " " + "Do ensure you input a valid date.";
+    private static String dateFormat = "uuuu-MM-dd";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
+            DateTimeFormatter
+                    .ofPattern(dateFormat)
+                    .withResolverStyle(ResolverStyle.STRICT);
 
     private final String value;
     private LocalDate deadline;
@@ -27,6 +34,8 @@ public class TaskDate {
             this.deadline = LocalDate.parse(value, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             checkArgument(false, MESSAGE_CONSTRAINTS);
+        } catch (DateTimeException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
