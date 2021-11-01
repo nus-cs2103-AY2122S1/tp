@@ -19,41 +19,35 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand(find n/chocolate)
 activate AddressBookParser
 
-create FindCommandParser
-AddressBookParser -> FindCommandParser
-activate FindCommandParser
+create SortCommandParser
+AddressBookParser -> SortCommandParser
+activate SortCommandParser
 
-create FindCommand
-FindCommandParser -> FindCommand : parse(n/chocolate)
-activate FindCommand
+create SortCommand
+SortCommandParser -> SortCommand : parse(n/)
+activate SortCommand
 
-create NameContainsKeywordsPredicate
-FindCommandParser -> NameContainsKeywordsPredicate : parse(n/chocolate)
-activate NameContainsKeywordsPredicate
+SortCommand --> LogicManager
+deactivate SortCommand
 
-NameContainsKeywordsPredicate --> FindCommand
-deactivate NameContainsKeywordsPredicate
+LogicManager -> SortCommand : execute()
+activate SortCommand
 
-FindCommand --> LogicManager
-deactivate FindCommand
+create ItemNameComparator
+LogicManager -> ItemNameComparator : execute()
+activate ItemNameComparator
 
-LogicManager -> FindCommand : execute()
-activate FindCommand
-
-FindCommand -> Model : updateFilteredItemList()
+SortCommand -> Model : SortItems()
 activate Model
 
-Model -> NameContainsKeywordsPredicate : test()
-activate NameContainsKeywordsPredicate
+ItemNameComparator --> Model
+deactivate ItemNameComparator
 
-NameContainsKeywordsPredicate --> Model
-deactivate NameContainsKeywordsPredicate
-
-Model --> FindCommand
+Model --> SortCommand
 deactivate Model
 
-FindCommand --> LogicManager : result
-deactivate FindCommand
+SortCommand --> LogicManager : result
+deactivate SortCommand
 
 [<--LogicManager
 deactivate LogicManager

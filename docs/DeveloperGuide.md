@@ -240,7 +240,7 @@ The following sequence diagram shows how the find operation works:
 The sort mechanism is facilitated by the built-in `Comparator` interface. The SortCommand constructor takes in a 
 predicate enum instruction as a parameter depending on whether the user requested to sort by name or count. The 
 items' respective fields are then compared with a `Comparator` so that the updated list displayed is sorted. 
-`Comparator<Item>` interface is implemented by e different classes:
+`Comparator<Item>` interface is implemented by different classes below:
 
 * `ItemNameComparator` — allows sorting of items by name
 * `ItemCountComparator` — allows sorting of items by count
@@ -248,10 +248,10 @@ items' respective fields are then compared with a `Comparator` so that the updat
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
 Step 1. The user opens up BogoBogo and executes `sort n/` to sort items by name. The `LogicManager` then calls the 
-`AddressBookParser` to execute `SortCommandParser#parse()`. The `SortCommandParser` then creates a `SortCommand` with 
-the enum `SortOrder.BY_NAME` as a field in its constructor. Then, the `LogicManager` calls the `SortCommand#execute()` 
-which will call the `ModelManager#sortItems()` with the `ItemNameComparator` as its parameter. This will then update the 
-display list with items sorted by name according to the `ItemNameComparator#compare()` method.
+`AddressBookParser` which create a `SortCommandParser` object. Then, `SortCommandParser#parse()` creates a `SortCommand` 
+object. Then the `LogicManager` calls the `SortCommand#execute()` which calls the `Model#SortItems()` and creates an 
+`ItemNameComparator` object which is passed as a parameter inside `Model#SortItems()`. The `Model#SortItems()` then 
+update the display list with items sorted by name according to the `ItemNameComparator#compare()` method.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input does not input any field to sort by, SortCommandParser will throw a ParseException and a SortCommand will not be created.
 
@@ -264,11 +264,7 @@ for sorting by count as well.
 
 The following sequence diagram shows how the sort operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes a Sort command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
 #### Design considerations:
 
