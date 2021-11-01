@@ -42,10 +42,8 @@ public class DownloadCommand extends Command {
 
         List<Person> modifiablePersonList = new ArrayList<>(model.getFilteredPersonList());
 
-        // TODO: Abstract out when comparators for sorting policies are finished.
-        modifiablePersonList.sort(new Comparator<Person>() {
-            @Override
-            public int compare(Person personA, Person personB) {
+        modifiablePersonList.sort((personA, personB) ->
+            {
                 model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(personA));
                 ObservableList<Policy> personAPolicies = model.getFilteredPolicyList();
                 int commissionFromPersonA = getCommissionFromPolicyList(personAPolicies);
@@ -58,7 +56,7 @@ public class DownloadCommand extends Command {
 
                 return (commissionFromPersonB - commissionFromPersonA);
             }
-        });
+        );
 
         List<String> listStringForTxt = stringListBuilderForTxt(
                 totalCommission, modifiablePersonList, numberPoliciesPerPerson);

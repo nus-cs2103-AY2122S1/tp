@@ -132,17 +132,27 @@ public class Siasa implements ReadOnlySiasa {
     }
 
     public Map<Person, Integer> getNumberPoliciesPerPerson() {
-        HashMap<Person, Integer> treeMap = new HashMap<>();
+        HashMap<Person, Integer> hashMap = new HashMap<>();
         persons.forEach(person -> {
-            treeMap.put(person, 0);
+            hashMap.put(person, 0);
         });
         policies.forEach(policy -> {
             Person owner = policy.getOwner();
-            int currentCount = treeMap.get(owner);
-            treeMap.put(owner, currentCount + 1);
+            int currentCount = hashMap.get(owner);
+            hashMap.put(owner, currentCount + 1);
         });
-        return treeMap;
+        return hashMap;
     }
+
+//    public Map<Person, Integer> getCommissionPerPerson() {
+//        HashMap<Person, Integer> hashMap = new HashMap<>();
+//        persons.forEach(person -> {
+//            int commission = 0;
+//            policies.forEach(policy -> {
+//                if (policy.getOwner().equals())
+//            });
+//        })
+//    }
 
     /// policy-level operations
 
