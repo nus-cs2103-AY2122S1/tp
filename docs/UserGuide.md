@@ -83,7 +83,7 @@ Format: `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`
 * Edit the position with the specified `INDEX`
 
 Examples: 
-* `edit-position INDEX tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
+* `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
 
 
 ### Deleting a position: `delete-position`
@@ -266,10 +266,17 @@ Action | Format, Examples
 --------|------------------
 **Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 **Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
-**Update Applicant status** | `mark NAME` <br> e.g.,  `mark john doe status/accepted`
+**Edit Applicant** | `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK]` <br> e.g. `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
 **Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List Applicants** | `list-applicant`
 **Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
+**List Applicants** | `list-applicant`
+**Update Applicant status** | `mark NAME` <br> e.g.,  `mark john doe status/accepted`
+**Add Position** | `add-position tit/TITLE des/DESCRIPTION` <br> e.g., `add-position tit/software engineer des/work in a team that builds a facial recognition application`
+**Delete Position** | `delete-position INDEX`<br> e.g., `delete-position 1`
+**Edit Position** | `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`<br> e.g., `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
+**List Position** | `list-position`
 **Visualize Positions** | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`
-**Rate** | `rate pos/POSITION` <br> e.g. `rate software engineer`
+**Rate** | `rate pos/POSITION` <br> e.g. `rate pos/software engineer`
+**Undo command** | `undo`
 **Help** | `help`
+**Exit** | `exit`
