@@ -47,7 +47,7 @@ public class UniqueStudentList implements Iterable<Student> {
      * Adds a student to the list and the list is sorted each time.
      * The student must not already exist in the list.
      */
-    public void add(Student toAdd) {
+    public void add(Student toAdd) throws DuplicateStudentException {
         requireNonNull(toAdd);
         toAdd.setLabResultRecord(labsTracker);
         if (contains(toAdd)) {
@@ -117,9 +117,8 @@ public class UniqueStudentList implements Iterable<Student> {
     /**
      * Replaces the contents of this list with {@code students}.
      * {@code students} must not contain duplicate students.
-     * @throws DuplicateStudentException if {@code students} contains duplicate students.
      */
-    public void setStudents(List<Student> students) throws DuplicateStudentException {
+    public void setStudents(List<Student> students) {
         requireAllNonNull(students);
         if (!studentsAreUnique(students)) {
             throw new DuplicateStudentException();
