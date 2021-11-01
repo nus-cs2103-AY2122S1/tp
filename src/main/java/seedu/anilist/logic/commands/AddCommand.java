@@ -9,7 +9,6 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.ui.TabOption;
 
 /**
  * Adds an anime to the anime list.
@@ -47,7 +46,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setCurrentTab(TabOption.TabOptions.ALL);
         if (model.hasAnime(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ANIME);
         }

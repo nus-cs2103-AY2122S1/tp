@@ -31,6 +31,7 @@ public class AnimeListPanel extends UiPart<Region> {
     private final TabOption currentTab;
     private final CommandExecutor commandExecutor;
     private final ObservableList<Anime> animeList;
+    private CommandBox commandBox;
 
     @FXML
     private TabPane animeListTabPane;
@@ -94,21 +95,23 @@ public class AnimeListPanel extends UiPart<Region> {
                 new ChangeListener<Tab>() {
                     @Override
                     public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
-                        try {
-                            if (newValue.equals(allTab)) {
-                                commandExecutor.execute(ListCommand.COMMAND_WORD);
-                            } else if (newValue.equals(watchingTab)) {
-                                commandExecutor.execute(ListCommand.COMMAND_WORD + " "
-                                        + PREFIX_STATUS + Status.VALID_STATUS_STRING[2]);
-                            } else if (newValue.equals(toWatchTab)) {
-                                commandExecutor.execute(ListCommand.COMMAND_WORD + " "
-                                        + PREFIX_STATUS + Status.VALID_STATUS_STRING[0]);
-                            } else if (newValue.equals(finishedTab)) {
-                                commandExecutor.execute(ListCommand.COMMAND_WORD + " "
-                                        + PREFIX_STATUS + Status.VALID_STATUS_STRING[4]);
+                        if (!commandBox.isExecuting()) {
+                            try {
+                                if (newValue.equals(allTab)) {
+                                    commandExecutor.execute(ListCommand.COMMAND_WORD);
+                                } else if (newValue.equals(watchingTab)) {
+                                    commandExecutor.execute(ListCommand.COMMAND_WORD + " "
+                                            + PREFIX_STATUS + Status.VALID_STATUS_STRING[2]);
+                                } else if (newValue.equals(toWatchTab)) {
+                                    commandExecutor.execute(ListCommand.COMMAND_WORD + " "
+                                            + PREFIX_STATUS + Status.VALID_STATUS_STRING[0]);
+                                } else if (newValue.equals(finishedTab)) {
+                                    commandExecutor.execute(ListCommand.COMMAND_WORD + " "
+                                            + PREFIX_STATUS + Status.VALID_STATUS_STRING[4]);
+                                }
+                            } catch (CommandException | ParseException e) {
+                                logger.log(Level.WARNING, "Wrongly parsed tab commands");
                             }
-                        } catch (CommandException | ParseException e) {
-                            logger.log(Level.WARNING, "Wrongly parsed tab commands");
                         }
                     }
                 }
@@ -127,6 +130,10 @@ public class AnimeListPanel extends UiPart<Region> {
         } else {
             animeListTabPane.getSelectionModel().select(allTab);
         }
+    }
+
+    public void setCommandBox(CommandBox commandBox) {
+        this.commandBox = commandBox;
     }
 
     /**

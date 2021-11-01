@@ -17,7 +17,6 @@ import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
-import seedu.anilist.ui.TabOption;
 
 public class UpdateEpisodeCommand extends Command {
     public static final String COMMAND_WORD = "update";
@@ -51,7 +50,6 @@ public class UpdateEpisodeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setCurrentTab(TabOption.TabOptions.ALL);
         List<Anime> lastShownList = model.getFilteredAnimeList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

@@ -9,7 +9,6 @@ import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.ui.TabOption;
 
 /**
  * Deletes an anime identified using it's displayed index from the anime list.
@@ -35,7 +34,6 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setCurrentTab(TabOption.TabOptions.ALL);
         List<Anime> lastShownList = model.getFilteredAnimeList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
