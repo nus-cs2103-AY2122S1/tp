@@ -14,7 +14,7 @@ import seedu.notor.ui.WarningWindow;
  */
 public class PersonClearNoteExecutor extends PersonExecutor {
     public static final String MESSAGE_CLEAR_NOTE_SUCCESS = "Cleared note of Person: %1$s";
-    public static final String MESSAGE_CLEAR_NOTE_CANCEL = "Deleting of Person: %1$s has been cancelled.";
+    public static final String MESSAGE_CLEAR_NOTE_CANCEL = "Clearing of note for %1$s has been cancelled.";
     public static final String CONFIRMATION_MESSAGE = "Do you want to proceed with clearing note of Person: %1$s?";
 
 
