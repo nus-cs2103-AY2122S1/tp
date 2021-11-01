@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_GITHUB_FIELD_CANNOT_BE_EMPTY;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_NAME;
+import static seedu.address.commons.core.Messages.MESSAGE_TAG_FIELD_CANNOT_BE_EMPTY;
+import static seedu.address.commons.core.Messages.MESSAGE_TELEGRAM_FIELD_CANNOT_BE_EMPTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -10,6 +14,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.GithubContainsKeywordsPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
@@ -35,10 +40,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         String githubUsernames = trimmedArgs.substring(2).trim();
         if (githubUsernames.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_GITHUB_FIELD_CANNOT_BE_EMPTY,
+                            FindCommand.MESSAGE_USAGE));
         }
         String[] githubUsernameKeywords = githubUsernames.split("\\s+");
-        return new FindCommand(new GithubContainsKeywordsPredicate(Arrays.asList(githubUsernameKeywords)));
+        return new FindCommand(new GithubContainsKeywordsPredicate(Arrays
+                .asList(githubUsernameKeywords)));
     }
     /**
      * Parses the list of name(s) to be searched for in the context of the FindCommand
@@ -65,10 +72,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         String tags = trimmedArgs.substring(2).trim();
         if (tags.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_TAG_FIELD_CANNOT_BE_EMPTY,
+                            FindCommand.MESSAGE_USAGE));
         }
         String[] tagKeywords = tags.split("\\s+");
-        return new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
+        return new FindCommand(new TagContainsKeywordsPredicate(Arrays
+                .asList(tagKeywords)));
     }
 
     /**
@@ -83,18 +92,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         String telegramHandles = trimmedArgs.substring(3).trim();
         if (telegramHandles.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_TELEGRAM_FIELD_CANNOT_BE_EMPTY,
+                            FindCommand.MESSAGE_USAGE));
         }
         String[] telegramHandleKeywords = telegramHandles.split("\\s+");
         return new FindCommand(new TelegramHandleContainsKeywordsPredicate(Arrays
                 .asList(telegramHandleKeywords)));
     }
-    private boolean isValidFormat(String trimmedArgs) {
+    private boolean isValidFormat(String trimmedArgs) throws ParseException {
         assert(!trimmedArgs.isEmpty());
         boolean isTag = trimmedArgs.indexOf(tagIdentifier) == 0;
         boolean isTelegram = trimmedArgs.indexOf(telegramHandleIdentifier) == 0;
         boolean isGithub = trimmedArgs.indexOf(githubUsernameIdentifier) == 0;
-        boolean isName = !trimmedArgs.contains("/") && Character.isLetter(trimmedArgs.charAt(0));
+        boolean isName = Name.isValidName(trimmedArgs);
+        if (!isName && !trimmedArgs.contains("/")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_NAME,
+                    FindCommand.MESSAGE_USAGE));
+        }
         return isTag || isTelegram || isGithub || isName;
     }
 
@@ -107,9 +121,9 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         assert(!args.contains(FindCommand.COMMAND_WORD));
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty() || !isValidFormat(trimmedArgs)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        if (!isValidFormat(trimmedArgs)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
         }
         if (trimmedArgs.indexOf(tagIdentifier) == 0) {
             return parseFindTag(trimmedArgs);
@@ -122,3 +136,4 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 }
+
