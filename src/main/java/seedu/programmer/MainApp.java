@@ -80,6 +80,7 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample ProgrammerError");
             }
             initialData = programmerErrorOptional.orElseGet(SampleDataUtil::getSampleProgrammerError);
+            storage.saveProgrammerError(initialData);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty ProgrammerError");
             initialData = new ProgrammerError();
