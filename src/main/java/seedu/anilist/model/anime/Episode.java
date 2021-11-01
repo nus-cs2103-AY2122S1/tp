@@ -32,10 +32,6 @@ public class Episode {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public int getValue() {
-        return this.episodeNumber;
-    }
-
     @Override
     public String toString() {
         return String.format("%d", episodeNumber);

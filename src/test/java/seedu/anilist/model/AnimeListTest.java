@@ -91,7 +91,7 @@ public class AnimeListTest {
     @Test
     public void fetchStats_emptyAnimeList_returnsTrue() {
         HashMap<Genre, Integer> expectedGenreCountHashmap = new HashMap<>();
-        Stats expectedStats = new Stats(0, 0, 0, 0, expectedGenreCountHashmap);
+        Stats expectedStats = new Stats(0, 0, 0, expectedGenreCountHashmap);
         assertEquals(expectedStats, animeList.fetchUserStats());
     }
 
@@ -103,7 +103,7 @@ public class AnimeListTest {
         HashMap<Genre, Integer> expectedGenreCountHashmap = new HashMap<>();
         int actionGenreCount = 1;
         expectedGenreCountHashmap.put(new Genre(VALID_GENRE_ACTION), actionGenreCount);
-        Stats expectedStats = new Stats(1 , 0, 0, 1, expectedGenreCountHashmap);
+        Stats expectedStats = new Stats(1 , 0, 0, expectedGenreCountHashmap);
         assertEquals(expectedStats, animeList.fetchUserStats());
     }
 

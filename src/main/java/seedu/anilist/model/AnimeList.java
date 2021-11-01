@@ -105,11 +105,9 @@ public class AnimeList implements ReadOnlyAnimeList {
         int watchingCount = 0;
         int toWatchCount = 0;
         int finishedCount = 0;
-        long episodesCount = 0;
         HashMap<Genre, Integer> userGenres = new HashMap<>();
 
         for (Anime anime: animeList) {
-            episodesCount += anime.getEpisode().getValue();
             for (Genre genre: anime.getGenres()) {
                 userGenres.merge(genre, 1, Integer::sum);
             }
@@ -123,7 +121,7 @@ public class AnimeList implements ReadOnlyAnimeList {
                 finishedCount += 1;
             }
         }
-        return new Stats(watchingCount, toWatchCount, finishedCount, episodesCount, userGenres);
+        return new Stats(watchingCount, toWatchCount, finishedCount, userGenres);
     }
 
 
