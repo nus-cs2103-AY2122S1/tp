@@ -49,7 +49,8 @@ public class ParserUtil {
     /**
      * Parses multiple {@code oneBasedIndex} into {@code Index} and returns them in an array.
      * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if the specified indexes are invalid (not non-zero unsigned integer and no duplicates).
+     * @throws ParseException if the specified indexes are invalid (not non-zero unsigned integer)
+     * or if there are duplicates.
      */
     public static Index[] parseMultipleIndex(String oneBasedIndexes) throws ParseException {
         String trimmedIndexes = oneBasedIndexes.trim();
