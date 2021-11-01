@@ -274,7 +274,7 @@ public class StringUtil {
         if (withSymbol) {
             return result;
         }
-        return result.replace(getCurrencySymbol(Locale.US), "");
+        return getUnformattedNumber(result.replace(getCurrencySymbol(Locale.US), ""));
     }
 
     /**
