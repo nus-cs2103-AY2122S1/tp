@@ -226,7 +226,7 @@ is below:
 
 * addtask
 * deletetask
-* listtask
+* listtasks
 * marktask
 * markorder
 
