@@ -736,9 +736,10 @@ Action | Format, Examples
 **Edit member**| `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/TAG]...` <br> e.g. `editm 1 n/Jonathan p/93837283`
 **Find member**| `findm [n/NAME] [p/PHONE] [d/DAY(S)] [tda/TODAY_ATTENDANCE] [tta/TOTAL_ATTENDANCE] [t/TAG]...` <br> e.g. `findm n/John`, `findm t/exco t/y2`
 **Sort members**| `sortm by/SORT_ORDER` <br> e.g. `sortm by/name`, `sortm by/tag`
+**Set member availability**| `setm INDEX [MORE_INDICES]... d/DAY(S)` <br> e.g.`setm 1 2 3 d/2 3 5`
 **Mark member attendance**| `mark INDEX [MORE_INDICES]...` <br> e.g. `mark 1 2`
 **Unmark member attendance**| `unmark INDEX [MORE_INDICES]...` <br> e.g. `unmark 1 2`
-**Set member availability**| `setm INDEX [MORE_INDICES]... d/DAY(S)` <br> e.g.`setm 1 2 3 d/2 3 5`
+**Clear membber attendance**| `cleara`
 **Import multiple members**| `import CSV_FILE_PATH` <br> e.g.`import myFile.csv`
 **Clear member**| `clearm`
 
