@@ -22,6 +22,7 @@ import seedu.address.model.task.Task;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
@@ -199,8 +200,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markTask(Task toMark) {
-        taskBook.markDone(toMark);
+    public boolean markTask(Task toMark) {
+        return taskBook.markDone(toMark);
 
     }
 
@@ -287,8 +288,8 @@ public class ModelManager implements Model {
     /**
      * Marks an order as completed
      */
-    public void markOrder(Order order) {
-        orderBook.markOrder(order);
+    public boolean markOrder(Order order) {
+        return orderBook.markOrder(order);
     }
 
     /**

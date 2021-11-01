@@ -24,6 +24,8 @@ public class MarkTaskCommand extends Command {
 
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked Task: %1$s";
 
+    public static final String MESSAGE_TASK_ALREADY_MARKED = "Task already marked: %1$s";
+
     private final Index targetIndex;
 
     public MarkTaskCommand(Index targetIndex) {
@@ -40,9 +42,15 @@ public class MarkTaskCommand extends Command {
         }
 
         Task taskToMark = lastShownList.get(targetIndex.getZeroBased());
-        model.markTask(taskToMark);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark),
-                CommandResult.DisplayState.TASK);
+        boolean hasChanged = model.markTask(taskToMark);
+        if (hasChanged) {
+            return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, taskToMark),
+                    CommandResult.DisplayState.TASK);
+        } else {
+            return new CommandResult(String.format(MESSAGE_TASK_ALREADY_MARKED, taskToMark),
+                    CommandResult.DisplayState.TASK);
+        }
+
     }
 
     @Override

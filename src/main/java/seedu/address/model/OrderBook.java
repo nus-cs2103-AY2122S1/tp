@@ -69,8 +69,8 @@ public class OrderBook implements ReadOnlyOrderBook {
         orders.remove(toDelete);
     }
 
-    public void markOrder(Order order) {
-        orders.markComplete(order);
+    public boolean markOrder(Order order) {
+        return orders.markComplete(order);
     }
 
     public void setOrder(Order target, Order editedOrder) {

@@ -9,41 +9,42 @@ than from traditional GUI apps. The application and guide are based on AB3 with 
 
 This project is based on the AB3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Table of Contents
-    - [Quick Start](#quick-start)
-    - [Features](#features)
-        - [Viewing help : `help`](#viewing-help--help)
-        - [Client Commands](#client-commands)
-            - [Listing all clients : `list`](#listing-all-clients--list)
-            - [Adding a client : `add`](#adding-a-client--add)
-            - [Deleting a client : `delete`](#deleting-a-client--delete)  
-            - [Editing a client : `edit`](#editing-a-client--edit)
-            - [Locating clients by name : `find`](#locating-clients-by-name--find)
-        - [Task Commands](#task-commands)
-            - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
-            - [Adding a task : `addtask`](#adding-a-task--addtask)
-            - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
-            - [Editing a task : `edittask`](#editing-a-task--edittask)
-            - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
-            - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
-            - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
-            - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
-        - [Order Commands](#order-commands)
-            - [Listing all orders : `listorder`](#listing-all-orders--listorder)
-            - [Adding an order : `addorder`](#adding-an-order--addorder)
-            - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
-            - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
-            - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords--findorder)
-            - [Listing completed orders : `completedorders`](#listing-completed-orders--completedorders)
-            - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders--incompleteorders)
-            - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
-            - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
-        - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-        - [Exiting the program : `exit`](#exiting-the-program--exit)
-        - [Saving the data](#saving-the-data)
-        - [Editing the data file](#editing-the-data-file)
-    - [FAQ](#faq)
-    - [Command Summary](#command-summary)
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Client Commands](#client-commands)
+        - [Listing all clients : `list`](#listing-all-clients--list)    
+        - [Adding a client : `add`](#adding-a-client--add)
+        - [Deleting a client : `delete`](#deleting-a-client--delete)
+        - [Editing a client : `edit`](#editing-a-client--edit)
+        - [Locating clients by name : `find`](#locating-clients-by-name--find)
+    - [Task Commands](#task-commands)
+        - [Listing all tasks : `listtask`](#listing-all-tasks--listtask)
+        - [Adding a task : `addtask`](#adding-a-task--addtask)
+        - [Deleting a task : `deletetask`](#deleting-a-task--deletetask)
+        - [Editing a task : `edittask`](#editing-a-task--edittask)
+        - [Marking a task as done : `marktask`](#marking-a-task-as-done--marktask)
+        - [Finding tasks by keywords : `findtask`](#finding-tasks-by-keywords--findtask)
+        - [Listing completed tasks : `completedtasks`](#listing-completed-tasks--completedtasks)
+        - [Listing incomplete tasks : `incompletetasks`](#listing-incomplete-tasks--incompletetasks)
+    - [Order Commands](#order-commands)
+        - [Listing all orders : `listorder`](#listing-all-orders--listorder)
+        - [Adding an order : `addorder`](#adding-an-order--addorder)
+        - [Deleting an order : `deleteorder`](#deleting-an-order--deleteorder)
+        - [Marking an order as complete : `markorder`](#marking-an-order-as-complete--markorder)
+        - [Finding orders by keywords : `findorder`](#finding-orders-by-keywords--findorder)
+        - [Listing completed orders : `completedorders`](#listing-completed-orders--completedorders)
+        - [Listing incomplete orders : `incompleteorders`](#listing-incomplete-orders--incompleteorders)
+        - [Sorting orders : `sortorders`](#sorting-orders--sortorders)
+        - [Viewing total orders : `totalorders`](#viewing-total-orders--totalorders)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
             
             
 
@@ -134,7 +135,12 @@ Format: `list`
 
 ### Adding a client : `add`
 
-Adds a client to the application.
+Allows you to add a client to the application. 
+
+Note that two clients are regarded as their names are the same! As two individuals having the exact same name
+is quite a rare occurrence, we felt this was more likely to be a user mistake we wanted to guard against, then
+it was to be an intentional choice. If you happen to have two clients with the exact same name, our recommendation
+is to add a number, to be clear that this was intentional. (e.g., adding Jane Lim and Jane Lim1).
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
@@ -166,6 +172,10 @@ Edits an existing client in the application.
 
 Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+Do not forget to edit the body measurements when you modify the client's gender.
+</div>
+
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -193,7 +203,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ## Task Commands
 
@@ -264,7 +273,7 @@ Format: `marktask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtask` followed by `deletetask 2` deletes the 2nd client in the application.
+* `listtask` followed by `marktask 2` marks the the 2nd task displayed as done.
 
 ### Finding tasks by keywords : `findtask`
 
@@ -374,10 +383,10 @@ Format: `sortorders f/FIELD [o/ORDERING]`
   * Descending, identified with a "desc" or "descending".
 * If the `ORDERING` parameter is not supplied, the list will be sorted in ascending order.
 
-
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:** <br>
+
 * By default, your orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
 * Adding / Deleting an order reverts the list to the default ordering.
 
