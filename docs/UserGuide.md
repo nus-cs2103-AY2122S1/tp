@@ -197,7 +197,8 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] 
 * Existing values of the parameters specified will be erased and updated to the input values
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-To remove a remark from a contact, simply input `r/` followed with a whitespace.
+To remove an existing phone number/telegram handle/remark from a contact, simply input `p/`/`h/`/`r/` respectively, followed with a whitespace. <br>
+e.g. `edit 1 r/` will remove the existing remark from the first contact.
 </div>
 
 Examples:
