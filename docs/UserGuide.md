@@ -165,7 +165,7 @@ Examples:
 - `list` displays all students and lessons in TutorAid by only showing their names and list indexes.
 - `list -a` displays all students and lessons in TutorAid while showing all of their fields' data.
 
-### Deleting a student : `delete`
+### Deleting a student : `del -s`
 Deletes the specified student with the given student index from TutorAid.
 
 Format: `del -s STUDENT_INDEX`
