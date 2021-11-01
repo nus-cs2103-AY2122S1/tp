@@ -37,7 +37,7 @@ public class MarkTaskDoneCommandTest {
         MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
         Task messageCopy = TaskBuilder.of(taskToMarkAsDone).build();
-        messageCopy.markTaskComplete();
+        messageCopy.toggleIsDone();
 
         String expectedMessage = String.format(
                 MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, messageCopy.getStatusString(), messageCopy);
@@ -46,7 +46,7 @@ public class MarkTaskDoneCommandTest {
 
         Task expectedCopy = TaskBuilder.of(taskToMarkAsDone).build();
         expectedModel.setTask(taskToMarkAsDone, expectedCopy);
-        expectedModel.completeTask(expectedCopy);
+        expectedModel.toggleTaskIsDone(expectedCopy);
 
         assertCommandSuccess(markTaskDoneCommand, model, expectedMessage, expectedModel);
     }
@@ -69,7 +69,7 @@ public class MarkTaskDoneCommandTest {
         MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
         Task messageCopy = TaskBuilder.of(taskToMarkAsDone).build();
-        messageCopy.markTaskComplete();
+        messageCopy.toggleIsDone();
 
         String expectedMessage = String.format(
                 MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, messageCopy.getStatusString(), messageCopy);
@@ -78,7 +78,7 @@ public class MarkTaskDoneCommandTest {
 
         Task expectedCopy = TaskBuilder.of(taskToMarkAsDone).build();
         expectedModel.setTask(taskToMarkAsDone, expectedCopy);
-        expectedModel.completeTask(expectedCopy);
+        expectedModel.toggleTaskIsDone(expectedCopy);
         showNoTask(expectedModel);
 
         assertCommandSuccess(markTaskDoneCommand, model, expectedMessage, expectedModel);

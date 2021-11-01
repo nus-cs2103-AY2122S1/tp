@@ -25,7 +25,7 @@
                 <FlowPane fx:id="tags" />
                 <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
                 <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" />
-                <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                <Label fx:id="description" styleClass="cell_small_label" text="\$description" wrapText="true" VBox.vgrow="ALWAYS"/>
             </VBox>
         </HBox>
     </GridPane>

@@ -20,9 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.StudentBuilder;
@@ -194,7 +192,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public void completeTask(Task target) {
+        public void toggleTaskIsDone(Task target) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -18,7 +18,7 @@ public class Task implements Comparable<Task>, Cloneable {
     private Set<Tag> tags = new HashSet<>();
     private String description;
     private boolean isDone;
-    private final Priority priority;
+    private Priority priority;
 
     public enum Priority {
         HIGH, MEDIUM, LOW
@@ -69,7 +69,7 @@ public class Task implements Comparable<Task>, Cloneable {
         return isDone;
     }
 
-    public void markTaskComplete() {
+    public void toggleIsDone() {
         this.isDone = !this.isDone;
     }
 
@@ -132,13 +132,14 @@ public class Task implements Comparable<Task>, Cloneable {
         return otherTask.getName().equals(getName())
                 && otherTask.getTags().equals(getTags())
                 && otherTask.getDate().equals(getDate())
-                && otherTask.getDescription().equals(getDescription());
+                && otherTask.getDescription().equals(getDescription())
+                && otherTask.getPriority().equals(getPriority());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags, isDone);
+        return Objects.hash(name, tags, description, isDone, priority);
     }
 
     @Override
@@ -205,6 +206,7 @@ public class Task implements Comparable<Task>, Cloneable {
             clone.tags.addAll(this.tags);
             clone.isDone = this.isDone;
             clone.description = this.description;
+            clone.priority = this.priority;
             return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();

@@ -15,9 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
@@ -244,9 +242,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void completeTask(Task target) {
+    public void toggleTaskIsDone(Task target) {
         requireAllNonNull(target, target);
-        target.markTaskComplete();
+        target.toggleIsDone();
         addressBook.sortTasks();
     }
 
