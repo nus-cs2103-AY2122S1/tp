@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class BirthDate {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Date of birth cannot be in the future or invalid";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Date of birth cannot be in the future or invalid date given";
     public static final String DATE_FORMAT = "y-M-d";
     private final LocalDate date;
 
