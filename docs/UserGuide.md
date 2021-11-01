@@ -217,6 +217,7 @@ member as they are considered duplicates.
 <div markdown="span" class="alert alert-primary">
 
 **:bulb: Tip 1:** Didn't tag a member when you added them? It's not too late, just tag them using this command!
+Similarly, use `t/` (nothing supplied) to remove a tag from a member.
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -226,7 +227,7 @@ member as they are considered duplicates.
 
 Examples:
 
-* `editm 1 n/Jonathan` edits the name of the 1st member to be `Jonathan`
+* `editm 1 n/Jonathan t/` edits the name of the 1st member to be `Jonathan` and removes all its tags
 * `editm 2 n/Jonathan p/93837283` edits the name and phone number of the 2nd member to be `Jonathan` and `93837283`
   respectively
 * `editm 2 t/exco t/y1` edits the 2nd member to have tags `exco` and `y1` :camera:
