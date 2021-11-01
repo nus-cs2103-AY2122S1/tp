@@ -1,4 +1,4 @@
-package seedu.siasa.logic.commands;
+package seedu.siasa.logic.commands.contact;
 
 import static seedu.siasa.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.siasa.logic.commands.CommandTestUtil.showContactAtIndex;
@@ -8,14 +8,15 @@ import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.siasa.logic.commands.CommandTestUtil;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListContactCommand.
  */
-public class ListCommandTest {
+public class ListContactCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,12 +29,13 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ListContactCommand(), model, ListContactCommand.MESSAGE_SUCCESS,
+            expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListContactCommand(), model, ListContactCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

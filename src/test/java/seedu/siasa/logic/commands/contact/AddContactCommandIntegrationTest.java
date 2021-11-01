@@ -1,4 +1,4 @@
-package seedu.siasa.logic.commands;
+package seedu.siasa.logic.commands.contact;
 
 import static seedu.siasa.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.siasa.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -14,9 +14,9 @@ import seedu.siasa.model.contact.Contact;
 import seedu.siasa.testutil.ContactBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddContactCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddContactCommandIntegrationTest {
 
     private Model model;
 
@@ -32,14 +32,14 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getSiasa(), new UserPrefs());
         expectedModel.addContact(validContact);
 
-        assertCommandSuccess(new AddCommand(validContact), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validContact), expectedModel);
+        assertCommandSuccess(new AddContactCommand(validContact), model,
+                String.format(AddContactCommand.MESSAGE_SUCCESS, validContact), expectedModel);
     }
 
     @Test
     public void execute_duplicateContact_throwsCommandException() {
         Contact contactInList = model.getSiasa().getContactList().get(0);
-        assertCommandFailure(new AddCommand(contactInList), model, AddCommand.MESSAGE_DUPLICATE_CONTACT);
+        assertCommandFailure(new AddContactCommand(contactInList), model, AddContactCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
 }

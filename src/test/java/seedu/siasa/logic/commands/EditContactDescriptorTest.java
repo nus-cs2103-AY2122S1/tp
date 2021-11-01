@@ -12,7 +12,7 @@ import static seedu.siasa.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.siasa.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.siasa.logic.commands.contact.EditContactCommand;
 import seedu.siasa.testutil.EditContactDescriptorBuilder;
 
 public class EditContactDescriptorTest {
@@ -20,7 +20,8 @@ public class EditContactDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditContactDescriptor descriptorWithSameValues = new EditContactDescriptor(DESC_AMY);
+        EditContactCommand.EditContactDescriptor descriptorWithSameValues =
+            new EditContactCommand.EditContactDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,7 +37,8 @@ public class EditContactDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditContactDescriptor editedAmy = new EditContactDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditContactCommand.EditContactDescriptor editedAmy =
+            new EditContactDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false

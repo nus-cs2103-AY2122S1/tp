@@ -8,8 +8,8 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.siasa.logic.commands.AddCommand;
-import seedu.siasa.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.siasa.logic.commands.contact.AddContactCommand;
+import seedu.siasa.logic.commands.contact.EditContactCommand.EditContactDescriptor;
 import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.tag.Tag;
 
@@ -22,7 +22,7 @@ public class ContactUtil {
      * Returns an add command string for adding the {@code contact}.
      */
     public static String getAddCommand(Contact contact) {
-        return AddCommand.COMMAND_WORD + " " + getContactDetails(contact);
+        return AddContactCommand.COMMAND_WORD + " " + getContactDetails(contact);
     }
 
     /**

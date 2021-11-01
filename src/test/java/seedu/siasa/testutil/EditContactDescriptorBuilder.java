@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.siasa.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.siasa.logic.commands.contact.EditContactCommand.EditContactDescriptor;
 import seedu.siasa.model.contact.Address;
 import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.Email;
