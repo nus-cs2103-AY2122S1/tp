@@ -12,4 +12,5 @@ public class Messages {
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d member(s) listed!";
     public static final String MESSAGE_TASKS_LISTED_OVERVIEW = "%1$d task(s) listed!";
     public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d event(s) listed!";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list of member: %1$s";
 }

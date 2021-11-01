@@ -30,8 +30,7 @@ public class TdoneCommand extends Command {
             + PREFIX_TASK_ID + "2";
 
     public static final String MESSAGE_DONE_TASK_SUCCESS = "Marked task: %1$s as done\n";
-    public static final String MESSAGE_TASK_HAS_DONE = "The task: %1$s has been done before.";
-    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s does not exist in the task list of the member\n";
 
     private final Set<Index> indexList;
 
@@ -49,18 +48,17 @@ public class TdoneCommand extends Command {
         List<Task> lastShownTaskList = model.getFilteredTaskList();
         StringBuilder resultMessage = new StringBuilder();
 
-        for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= lastShownTaskList.size()) {
-                throw new CommandException(MESSAGE_TASK_NOT_FOUND);
+        for (Index index : indexList) {
+            if (index.getZeroBased() >= lastShownTaskList.size()) {
+                throw new CommandException(String.format(MESSAGE_TASK_NOT_FOUND, index.getOneBased()));
             }
+        }
 
+        for (Index targetIndex : indexList) {
             Task taskToEdit = lastShownTaskList.get(targetIndex.getZeroBased());
-            if (taskToEdit.isDone()) {
-                throw new CommandException(String.format(MESSAGE_TASK_HAS_DONE, taskToEdit));
-            }
 
             Task editedTask = new Task(taskToEdit.getName(), true, taskToEdit.getTaskDeadline());
-            model.setTask(targetIndex.getZeroBased(), editedTask);
+            model.setTask(taskToEdit, editedTask);
             resultMessage.append(String.format(MESSAGE_DONE_TASK_SUCCESS, editedTask));
         }
 

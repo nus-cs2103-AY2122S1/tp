@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -54,6 +55,15 @@ public class TaddCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getFilteredMemberList();
+
+        for (Index targetMemberId: targetMemberIdList) {
+            Member targetMember = members.get(targetMemberId.getZeroBased());
+            if (model.hasTask(targetMember, toAdd)) {
+                throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK,
+                        targetMember.getName().toString()));
+            }
+        }
+
         for (Index targetMemberId: targetMemberIdList) {
             Member targetMember = members.get(targetMemberId.getZeroBased());
             model.addTask(targetMember, toAdd);

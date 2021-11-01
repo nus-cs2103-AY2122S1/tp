@@ -17,6 +17,8 @@ import seedu.address.model.module.member.Member;
 import seedu.address.model.module.member.Phone;
 import seedu.address.model.module.member.position.Position;
 import seedu.address.model.module.task.Task;
+import seedu.address.model.module.task.TaskDeadline;
+import seedu.address.model.module.task.TaskList;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -24,36 +26,52 @@ import seedu.address.model.module.task.Task;
 public class SampleDataUtil {
     public static Member[] getSampleMembers() {
         return new Member[] {
-            new Member(new seedu.address.model.module.Name("Alex Yeoh"), new Phone("87438807"),
+            new Member(new Name("Alex Yeoh"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getPositionSet("President")),
-            new Member(new seedu.address.model.module.Name("Bernice Yu"), new Phone("99272758"),
+            new Member(new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getPositionSet("Vice President", "Manpower Head")),
-            new Member(new seedu.address.model.module.Name("Charlotte Oliveiro"), new Phone("93210283"),
+            new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getPositionSet("Logistics Head")),
-            new Member(new seedu.address.model.module.Name("David Li"), new Phone("91031282"),
+            new Member(new Name("David Li"), new Phone("91031282"),
                 new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getPositionSet("Logistics Assistant")),
-            new Member(new seedu.address.model.module.Name("Irfan Ibrahim"), new Phone("92492021"),
+            new Member(new Name("Irfan Ibrahim"), new Phone("92492021"),
                 new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getPositionSet("Logistics Assistant")),
-            new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
+            new Member(new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getPositionSet("Program Head"))
         };
     }
 
+    public static TaskList getSampleTaskList() {
+        TaskList result = new TaskList();
+        result.setTasks(Arrays.asList(
+                new Task(new Name("team meeting"), new TaskDeadline("31/10/2021 20:00")),
+                new Task(new Name("submit form"), new TaskDeadline("02/11/2021 23:59")),
+                new Task(new Name("write report"), new TaskDeadline("05/11/2021 14:00"))
+        ));
+        return result;
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Member sampleMember : getSampleMembers()) {
+            if (sampleMember.getName().equals(new Name("Alex Yeoh"))) {
+                sampleMember.setTaskList(getSampleTaskList());
+            }
+            if (sampleMember.getName().equals(new Name("Roy Balakrishnan"))) {
+                sampleMember.setTaskList(getSampleTaskList());
+            }
             sampleAb.addMember(sampleMember);
         }
         Set<Member> set = new HashSet<>();
