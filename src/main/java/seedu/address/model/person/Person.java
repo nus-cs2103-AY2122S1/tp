@@ -153,7 +153,7 @@ public class Person {
 
         return otherPerson != null
                 && (otherPerson.getEmail().equals(getEmail())
-                        && otherPerson.getPhone().equals(getPhone()));
+                        || otherPerson.getPhone().equals(getPhone()));
     }
 
     /**
