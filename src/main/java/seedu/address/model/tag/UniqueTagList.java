@@ -41,7 +41,6 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
 
-        System.out.println("added " + toAdd);
         internalList.add(toAdd);
     }
 
