@@ -9,7 +9,7 @@ import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DAT
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_AMOUNT_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.siasa.testutil.Assert.assertThrows;
-import static seedu.siasa.testutil.TypicalPersons.ALICE;
+import static seedu.siasa.testutil.TypicalContacts.ALICE;
 import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
 import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
@@ -22,11 +22,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.siasa.model.person.Person;
-import seedu.siasa.model.person.exceptions.DuplicatePersonException;
+import seedu.siasa.model.contact.Contact;
+import seedu.siasa.model.contact.exceptions.DuplicateContactException;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.exceptions.DuplicatePolicyException;
-import seedu.siasa.testutil.PersonBuilder;
+import seedu.siasa.testutil.ContactBuilder;
 import seedu.siasa.testutil.PolicyBuilder;
 
 public class SiasaTest {
@@ -35,7 +35,7 @@ public class SiasaTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), siasa.getPersonList());
+        assertEquals(Collections.emptyList(), siasa.getContactList());
     }
 
     @Test
@@ -51,43 +51,43 @@ public class SiasaTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateContact_throwsDuplicateContactException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        SiasaStub newData = new SiasaStub(newPersons);
+        List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
+        SiasaStub newData = new SiasaStub(newContacts);
 
-        assertThrows(DuplicatePersonException.class, () -> siasa.resetData(newData));
+        assertThrows(DuplicateContactException.class, () -> siasa.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> siasa.hasPerson(null));
+    public void hasContact_nullContact_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> siasa.hasContact(null));
     }
 
     @Test
-    public void hasPerson_personNotInSiasa_returnsFalse() {
-        assertFalse(siasa.hasPerson(ALICE));
+    public void hasContact_contactNotInSiasa_returnsFalse() {
+        assertFalse(siasa.hasContact(ALICE));
     }
 
     @Test
-    public void hasPerson_personInSiasa_returnsTrue() {
-        siasa.addPerson(ALICE);
-        assertTrue(siasa.hasPerson(ALICE));
+    public void hasContact_contactInSiasa_returnsTrue() {
+        siasa.addContact(ALICE);
+        assertTrue(siasa.hasContact(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInSiasa_returnsTrue() {
-        siasa.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasContact_contactWithSameIdentityFieldsInSiasa_returnsTrue() {
+        siasa.addContact(ALICE);
+        Contact editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(siasa.hasPerson(editedAlice));
+        assertTrue(siasa.hasContact(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> siasa.getPersonList().remove(0));
+    public void getContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> siasa.getContactList().remove(0));
     }
 
     @Test
@@ -99,8 +99,8 @@ public class SiasaTest {
                 .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
                 .build();
         List<Policy> policies = Arrays.asList(FULL_LIFE, editedLifePlan);
-        List<Person> persons = Arrays.asList(FULL_LIFE.getOwner());
-        SiasaStub newData = new SiasaStub(persons, policies);
+        List<Contact> contacts = Arrays.asList(FULL_LIFE.getOwner());
+        SiasaStub newData = new SiasaStub(contacts, policies);
 
         assertThrows(DuplicatePolicyException.class, () -> siasa.resetData(newData));
     }
@@ -136,21 +136,21 @@ public class SiasaTest {
      * A stub ReadOnlySiasa whose persons list can violate interface constraints.
      */
     private static class SiasaStub implements ReadOnlySiasa {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
         private final ObservableList<Policy> policies = FXCollections.observableArrayList();
 
-        SiasaStub(Collection<Person> persons, Collection<Policy> policies) {
+        SiasaStub(Collection<Contact> contacts, Collection<Policy> policies) {
             this.policies.setAll(policies);
-            this.persons.setAll(persons);
+            this.contacts.setAll(contacts);
         }
 
-        SiasaStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        SiasaStub(Collection<Contact> contacts) {
+            this.contacts.setAll(contacts);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Contact> getContactList() {
+            return contacts;
         }
 
         @Override

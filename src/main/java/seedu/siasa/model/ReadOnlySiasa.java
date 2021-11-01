@@ -1,7 +1,7 @@
 package seedu.siasa.model;
 
 import javafx.collections.ObservableList;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 /**
@@ -10,10 +10,10 @@ import seedu.siasa.model.policy.Policy;
 public interface ReadOnlySiasa {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the contacts list.
+     * This list will not contain any duplicate contacts.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Contact> getContactList();
 
     /**
      * Returns an unmodifiable view of the persons list.

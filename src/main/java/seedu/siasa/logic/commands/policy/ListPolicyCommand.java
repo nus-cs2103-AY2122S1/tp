@@ -8,7 +8,7 @@ import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.model.Model;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all policies in the address book to the user.
  */
 public class ListPolicyCommand extends Command {
 

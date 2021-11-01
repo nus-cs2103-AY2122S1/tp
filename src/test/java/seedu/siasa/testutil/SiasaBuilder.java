@@ -1,7 +1,7 @@
 package seedu.siasa.testutil;
 
 import seedu.siasa.model.Siasa;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 /**
@@ -22,10 +22,10 @@ public class SiasaBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code Siasa} that we are building.
+     * Adds a new {@code Contact} to the {@code Siasa} that we are building.
      */
-    public SiasaBuilder withPerson(Person person) {
-        siasa.addPerson(person);
+    public SiasaBuilder withContact(Contact contact) {
+        siasa.addContact(contact);
         return this;
     }
 

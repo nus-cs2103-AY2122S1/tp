@@ -6,15 +6,15 @@ import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PAYMENT_AMOUNT_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
-import static seedu.siasa.testutil.TypicalPersons.ALICE;
-import static seedu.siasa.testutil.TypicalPersons.BOB;
+import static seedu.siasa.testutil.TypicalContacts.ALICE;
+import static seedu.siasa.testutil.TypicalContacts.BOB;
 import static seedu.siasa.testutil.TypicalPolicies.CRITICAL_ILLNESS;
 import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.siasa.model.person.Person;
-import seedu.siasa.testutil.PersonBuilder;
+import seedu.siasa.model.contact.Contact;
+import seedu.siasa.testutil.ContactBuilder;
 import seedu.siasa.testutil.PolicyBuilder;
 
 class PolicyTest {
@@ -50,12 +50,12 @@ class PolicyTest {
         assertFalse(CRITICAL_ILLNESS.isSamePolicy(editedCriticalIllness));
 
         // owner differs in name, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(ALICE).withName(ALICE.getName().fullName + " Sr").build();
+        Contact editedBob = new ContactBuilder(ALICE).withName(ALICE.getName().fullName + " Sr").build();
         editedCriticalIllness = new PolicyBuilder(CRITICAL_ILLNESS).withOwner(editedBob).build();
         assertFalse(CRITICAL_ILLNESS.isSamePolicy(editedCriticalIllness));
 
         // owner differs in non identity fields -> returns true
-        editedBob = new PersonBuilder(ALICE).withAddress("Simpson Road").build();
+        editedBob = new ContactBuilder(ALICE).withAddress("Simpson Road").build();
         editedCriticalIllness = new PolicyBuilder(CRITICAL_ILLNESS).withOwner(editedBob).build();
         assertTrue(CRITICAL_ILLNESS.isSamePolicy(editedCriticalIllness));
 

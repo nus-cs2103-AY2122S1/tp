@@ -3,8 +3,8 @@ package seedu.siasa.storage;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.testutil.Assert.assertThrows;
-import static seedu.siasa.testutil.TypicalPersons.HOON;
-import static seedu.siasa.testutil.TypicalPersons.IDA;
+import static seedu.siasa.testutil.TypicalContacts.HOON;
+import static seedu.siasa.testutil.TypicalContacts.IDA;
 import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.siasa.commons.exceptions.DataConversionException;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.Siasa;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 public class JsonSiasaStorageTest {
@@ -52,13 +52,13 @@ public class JsonSiasaStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonSiasa.json"));
+    public void readAddressBook_invalidContactSiasa_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidContactSiasa.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonSiasa.json"));
+    public void readAddressBook_invalidAndValidContactSiasa_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidContactsSiasa.json"));
     }
 
     /*
@@ -75,7 +75,7 @@ public class JsonSiasaStorageTest {
     */
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveSiasa_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         Siasa original = getTypicalSiasa();
         JsonSiasaStorage jsonAddressBookStorage = new JsonSiasaStorage(filePath);
@@ -83,32 +83,32 @@ public class JsonSiasaStorageTest {
         // Save in new file and read back
         jsonAddressBookStorage.saveSiasa(original, filePath);
         ReadOnlySiasa readBack = jsonAddressBookStorage.readSiasa(filePath).get();
-        for (Person person : readBack.getPersonList()) {
-            assertTrue(original.hasPerson(person));
+        for (Contact contact : readBack.getContactList()) {
+            assertTrue(original.hasContact(contact));
         }
         for (Policy policy : readBack.getPolicyList()) {
             assertTrue(original.hasPolicy(policy));
         }
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
+        original.addContact(HOON);
         jsonAddressBookStorage.saveSiasa(original, filePath);
-        original.removePersonAndAssociatedPolicies(HOON);
+        original.removeContactAndAssociatedPolicies(HOON);
         jsonAddressBookStorage.saveSiasa(original, filePath);
         readBack = jsonAddressBookStorage.readSiasa(filePath).get();
-        for (Person person : readBack.getPersonList()) {
-            assertTrue(original.hasPerson(person));
+        for (Contact contact : readBack.getContactList()) {
+            assertTrue(original.hasContact(contact));
         }
         for (Policy policy : readBack.getPolicyList()) {
             assertTrue(original.hasPolicy(policy));
         }
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addContact(IDA);
         jsonAddressBookStorage.saveSiasa(original); // file path not specified
         readBack = jsonAddressBookStorage.readSiasa().get(); // file path not specified
-        for (Person person : readBack.getPersonList()) {
-            assertTrue(original.hasPerson(person));
+        for (Contact contact : readBack.getContactList()) {
+            assertTrue(original.hasContact(contact));
         }
         for (Policy policy : readBack.getPolicyList()) {
             assertTrue(original.hasPolicy(policy));
@@ -117,7 +117,7 @@ public class JsonSiasaStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveSiasa_nullSiasa_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveSiasa(null, "SomeFile.json"));
     }
 
