@@ -357,15 +357,49 @@ after verifying that an appointment exists (previously) for the specified contac
 ### Help Window
 
 #### Current Implementation
-The help windows is a separate window and displays the command usage for each of the command. To access the help
+The Help Windows is a separate window and displays the command usage for each of the command. To access the help
 window, users have 3 ways to get to the help page:
-* Using the menu bar. Click on `Help` > `Help`.
-* Pressing `F1` while using FAST.
-* Typing the command `help [COMMAND]`.
+1. Using the menu bar. Click on `Help` > `Help`.
+2. Pressing `F1` while using FAST.
+3. Typing the command `help [HELP_TOPIC]`.
 
-To access the different commands' help page, there is a dropdown selector which will navigate to 
-the different help pages. By default, the help window opens to our "Quick Start" page which contains basic 
-information for first time users.
+Using the methods 1 and 2 will open the Help Window to the default help window view (currently the Quick start page).
+
+However, using method 3 gives the user the option to directly access the help page of the respective HELP_TOPIC. For 
+example, using the command `help add` or `help Add` will open the Add command help page directly. Whereas if no HELP_TOPIC
+was given as parameter, or an invalid parameter is given, the default help window will open. Either ways, the help
+window will open to allow users to view help regardless. For reference, the current valid HELP_TOPICS are: 
+* `Quick Start`
+* `Add`
+* `Appointment`
+* `Edit Appointment`
+* `Delete Appointment`
+* `Mark Appointment`
+* `Clear`
+* `Delete`
+* `Edit`
+* `Find`
+* `List`
+* `Help`
+* `Remark`
+* `Sort`
+* `Statistic`
+* `Tag`
+* `Investment Plan Tag`
+* `Priority Tag`
+* `Misc`
+
+The activity diagram below shows the many ways user can utilise the help command 
+
+![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
+
+
+To access the different commands' help page from within the help window, there is a dropdown selector which will 
+navigate to the different help pages. To achieve this, a `JavaFX::ComboBox` commandList was used which toggles between all the available 
+HELP_TOPICS. A method then reads from commandList's current value and displays the corresponding help message in a
+`JavaFX::Label`. A code snippet is shown below:
+`EventHandler<ActionEvent> event =
+e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));`
 
 #### Design Considerations
 
@@ -373,7 +407,7 @@ information for first time users.
 * **Alternative 1 (Current choice):** Using `JavaFX::ComboBox`which provides a dropdown selector.
     * Pros: Compact and easy to hide the selector in plain sight without distracting the user. Quick to navigate 
             between the pages.
-    * Cons: To new users, might not be immediately obvious that the `ComboBox` can be interacted with. Users
+    * Cons: To new users, might not be immediately obvious that the `JavaFX::ComboBox` can be interacted with. Users
             might also miss the scroll bar and miss out some commands available.
       
 * **Alternative 2:** Using a single-page design where all commands' help messages are viewable at once
@@ -391,7 +425,7 @@ by providing them a quick and easy way to access the commands' help page when th
 **Aspect: How to access the help window**
 
 Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an 
-additional `[COMMAND]` paremater for the help command, which nagivates to the selected command's help page.
+additional `[COMMAND]` paramater for the help command, which navigates to the selected command's help page.
   * Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
     first and selecting the command help page from there.
   * Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
@@ -404,12 +438,12 @@ window to the default page.
 
 #### Current Implementation
 
-The statis window displays statistics and insights into the user's client base. To access the stats window, users have 
+The statistics window displays statistics and insights into the user's client base. To access the stats window, users have 
 2 ways of getting to the stats page:
 * Using the menu bar. Click on `Stats` > `Stats`.
 * Pressing `F2` while using FAST.
 
-Currently, the stats window provides infomation for the client's Priority Tags and their Insurance Plans. We used 
+Currently, the stats window provides information for the client's Priority Tags, and their Insurance Plans Tags. We used 
 `JavaFX::PieChart` to visualise the client's data and display them to the user. We also provided a few template insights
 for the user to make sense of the data provided.
 

@@ -1,0 +1,28 @@
+@startuml
+
+start
+title Help Command Activity Diagram
+
+:User executes help command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([User entered parameter])
+    :Parse command;
+    if () then ([parameter is valid
+     HELP_TOPIC])
+    :Open help window to
+     respective HELP_TOPIC page;
+
+    else ([invalid parameter])
+    : Open help window
+     to default landing page;
+    endif
+else ([Empty parameters])
+  : Open help window
+   to default landing page;
+endif
+- User views help window
+stop
+@enduml
