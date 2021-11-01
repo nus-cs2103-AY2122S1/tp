@@ -1,64 +1,83 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SORT_ORDER_ASCENDING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SORT_ORDER_DESCENDING;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import org.junit.jupiter.api.Test;
+
 public class SortOrderTest {
+
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Phone(null));
+        assertThrows(NullPointerException.class, () -> new SortOrder(null));
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
-        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    public void constructor_invalidSortingOrder_throwsIllegalArgumentException() {
+        String invalidSortingOrder = "";
+        assertThrows(IllegalArgumentException.class, () -> new SortOrder(invalidSortingOrder));
     }
 
     @Test
-    public void isValidPhone() {
+    public void isValidSortingOrder() {
         // null phone number
-        assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
+        assertThrows(NullPointerException.class, () -> SortOrder.isValidSortingOrder(null));
 
-        // invalid phone numbers
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        // invalid sorting orders
+        assertFalse(SortOrder.isValidSortingOrder("")); // empty string
+        assertFalse(SortOrder.isValidSortingOrder(" ")); // spaces only
+        assertFalse(SortOrder.isValidSortingOrder("123")); // not "a" or "d"
+        assertFalse(SortOrder.isValidSortingOrder("hello")); // not "a" or "d"
 
-        // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        // valid sorting orders
+        assertTrue(SortOrder.isValidSortingOrder("a")); // sorting order ascending
+        assertTrue(SortOrder.isValidSortingOrder("d")); // sorting order descending
+    }
+
+    @Test
+    public void isAscendingTest() {
+        SortOrder sortOrder = new SortOrder(VALID_SORT_ORDER_ASCENDING);
+        assertTrue(sortOrder.isAscending());
+
+        sortOrder = new SortOrder(VALID_SORT_ORDER_DESCENDING);
+        assertFalse(sortOrder.isAscending());
+    }
+
+    @Test
+    public void toStringTest() {
+        SortOrder sortOrder = new SortOrder(VALID_SORT_ORDER_ASCENDING);
+        assertTrue(sortOrder.toString().equals("ascending"));
+
+        sortOrder = new SortOrder(VALID_SORT_ORDER_DESCENDING);
+        assertTrue(sortOrder.toString().equals("descending"));
+
+        String invalidSortingOrder = "randomString";
+        assertThrows(IllegalArgumentException.class, () -> new SortOrder(invalidSortingOrder).toString());
     }
 
     @Test
     public void equals() {
-        Phone phone = new Phone(VALID_PHONE_AMY);
+        SortOrder sortOrder = new SortOrder(VALID_SORT_ORDER_ASCENDING);
 
         // same values -> returns true
-        Phone toCopy = new Phone(VALID_PHONE_AMY);
-        assertTrue(phone.equals(toCopy));
+        SortOrder toCopy = new SortOrder(VALID_SORT_ORDER_ASCENDING);
+        assertTrue(sortOrder.equals(toCopy));
 
         // same object -> returns true
-        assertTrue(phone.equals(phone));
+        assertTrue(sortOrder.equals(sortOrder));
 
         // null -> returns false
-        assertFalse(phone.equals(null));
+        assertFalse(sortOrder.equals(null));
 
         // different type -> returns false
-        assertFalse(phone.equals(5));
+        assertFalse(sortOrder.equals(5));
 
         // different Phone -> returns false
-        Phone different = new Phone(VALID_PHONE_BOB);
-        assertFalse(phone.equals(different));
+        SortOrder different = new SortOrder(VALID_SORT_ORDER_DESCENDING);
+        assertFalse(sortOrder.equals(different));
 
     }
 }

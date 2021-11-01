@@ -35,22 +35,20 @@ public class SupplierCommandTestUtil {
 
     public static final String VALID_SUPPLY_TYPE_BEEF = "Beef";
     public static final String VALID_SUPPLY_TYPE_CHICKEN = "Chicken";
+    public static final String VALID_SORT_BY_DELIVERY_DETAILS = "dd";
+    public static final String VALID_SORT_BY_SUPPLY_TYPE = "st";
     public static final String VALID_DELIVERY_DETAIL_AMY = "2021-12-25 17:00";
     public static final String VALID_DELIVERY_DETAIL_BOB = "1100 26-12-2021";
 
     public static final String SUPPLY_TYPE_DESC_AMY = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_CHICKEN;
     public static final String SUPPLY_TYPE_DESC_BOB = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_BEEF;
     public static final String DELIVERY_DETAILS_DESC_AMY = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_AMY;
-    public static final String DELIVERY_DETAILS_DESC_BOB =
-            " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_BOB;
+    public static final String DELIVERY_DETAILS_DESC_BOB = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_BOB;
 
     // & not allowed in supply types
     public static final String INVALID_SUPPLY_TYPE_DESC = " " + PREFIX_SUPPLY_TYPE + "Chicken & Beef";
     // Not a valid parsable date time
     public static final String INVALID_DELIVERY_DETAILS_DESC = " " + PREFIX_DELIVERY_DETAILS + "Everyday @ 6pm";
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditSupplierCommand.EditSupplierDescriptor DESC_AMY;
     public static final EditSupplierCommand.EditSupplierDescriptor DESC_BOB;
