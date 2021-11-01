@@ -98,11 +98,11 @@ public class AddAppCommand extends Command {
                 temp += app.getTimePeriod().toString() + ", ";
             }
             temp = temp.substring(0, temp.length() - 2);
-            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_CLASHING_APPOINTMENT_ADDED
-                    + temp);
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_CLASHING_APPOINTMENT_ADDED + temp);
         } catch (DuplicateAppointmentException e) {
             throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED);
         }
+
         model.updateState();
         return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToAdd));
     }
