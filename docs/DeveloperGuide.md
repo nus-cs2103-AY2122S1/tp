@@ -177,41 +177,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Member to Group Command
-
-#### Implementation
-
-<img src="images/AddMemberSequenceDiagram.png"/>
-
-As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
-The main difference between the addMember command lies not in the way the `Logic` class is activated but in the way the `Model` class processes this command.
-
-The above process is shown in the following sequence diagram:
-
-<img src="images/AddMemberRefSequenceDiagram.png"/>
-
-The command first gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
-It then calls the `get` command to get a reference of the `Student` to be added using the index supplied by the user.
-The group to be added to is referenced to by its unique name by the user, and the command gets a reference to this `Group` by finding a group with the same name in the list.
-
-`addMembers` then updates the hidden `groupName` field of the `Student` to be added, and adds the said student to the `Group` specified by updating its `Members` class.
-Both the updated `Student` and `Group` are then set in `AddressBook`.
-
-Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
-these changes in the `AddressBook`.
-
-#### Design considerations:
-
-* Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
-    * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
-    * Cons: Increases coupling between `Student` and `Group` classes.
-
-* Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
-  * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
-  * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
-    unnatural modelling of the real world since `Group` contains students and not the other way around.
-    
-
 ### Find Command
 
 The find command can be executed for two main features in tApp: students and groups.
@@ -246,6 +211,48 @@ The above process is further summarised in the following sequence diagram:
 ![Sequence Diagram of Find Student](images/FindStudentSequenceDiagram.png)
 
 ℹ️ **Note:** The lifeline ****for `FindStudentCommandParser`, `FindStudentCommand`, `NameContainsKeywordPredicate` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+### Add Member to Group Command
+
+#### Implementation
+
+
+![Sequence Diagram of Add Member](images/AddMemberSequenceDiagram.png)
+
+As with all other commands in tApp, the addMember feature is activated when a user enters the `addMember` command word followed by its relevant arguments.
+The main difference between the addMember command lies not in the way the `Logic` class is activated but in the way the `Model` class processes this command.
+
+When the user executes the `addMember` command, user input is parsed and the `Index` of student to be added, and the `GroupName` of the group to be added to are extracted into parameters of the `AddMemberCommand` class.
+
+The above process is shown in the following sequence diagram:
+
+![Reference Sequence Diagram of Add Member](images/AddMemberRefSequenceDiagram.png)
+
+A key difference to note about this command is that gets a list of both `Students` and `Groups` from models, instead of only 1 list as per other commands.
+
+The follow steps describes the execution of the AddMember command.
+
+1. `AddMemberCommand` uses the provided `Index` and `GroupName` to obtain both a reference to the `Student` (using `Index`) and the `Group` (using `GroupName`). Since `GroupName` is unique, there will only be one `Group` selected.
+1. `AddMemberCommand` then uses these references to call the `addMembers` function of the `Model` class.
+1. The `Model` then creates and stores a new `Student` using the same information as the `Student` parameter passed in, but substituting the `GroupName` field to the name of the `Group` passed as a parameter.
+1. `Model` then calls the `addMember` function of the referenced `Group`, passing in the newly created `Student` as a parameter.
+1. `Group` then calls the `addMember` function of its `Member` class, passing in the same `Student` parameter.
+1. The `Member` then stores a reference to this `Student`.
+1. `Model` then calls `setStudent` and `setGroup` to update these changes in `AddressBook`.
+
+Unlike other commands which only changes itself in the `Model` class, `addMembers` updates both the `Student` to be added and the `Group` to which the student is added to, and saves both
+these changes in the `AddressBook`.
+
+#### Design considerations:
+
+* Alternative 1 (selected implementation): Have `Members` save a list of `Student` and `Student` have a reference to `GroupName`
+    * Pros: Easy to implement, all relevant student information can be readily accessed and displayed in the GUI.
+    * Cons: Increases coupling between `Student` and `Group` classes.
+
+* Alternative 2: Have `Members` save the `Name` of students and `Student` have a reference to `Group`
+    * Pros: Smaller JSON file size due to smaller volume of information being referenced to.
+    * Cons: Increases coupling between `Student` and `Group` classes, need to find the relevant `Student` object given its `Name` everytime the `Group` is to be displayed in the GUI,
+      unnatural modelling of the real world since `Group` contains students and not the other way around.
 
 ### Tasks
 

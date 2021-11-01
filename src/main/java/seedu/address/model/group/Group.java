@@ -81,6 +81,10 @@ public class Group {
         members.updateMember(target, editedStudent);
     }
 
+    public void addMember(Student target) {
+        members.addMember(target);
+    }
+
     /**
      * Removes a member in the group
      */
