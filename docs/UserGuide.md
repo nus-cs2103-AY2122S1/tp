@@ -593,6 +593,8 @@ Do note that the password needs to be between **8** and **32** characters long, 
 
 The accepted symbols are : `!@#$%&*()_+=|<>?{}~-[]`
 
+Note that `/` is **NOT** allowed in the password.
+
 <div class="d-flex alert alert-light pb-0">
 <div class="mr-2">
    <span class="badge badge-dark">EXAMPLE</span>
