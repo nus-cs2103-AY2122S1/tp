@@ -33,7 +33,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String ADD_NEW_CONTACT_FEATURE_COMMAND = "add n/ te/ g/ [p/] [e/] [a/] [t/]";
     private static final String DELETE_CONTACT_FEATURE_NAME = "Delete a Contact";
     private static final String DELETE_CONTACT_FEATURE_COMMAND = "delete <INDEX>";
-    private static final String DELETE_CONTACTS_FEATURE_NAME = "Delete all Student Contacts";
+    private static final String DELETE_CONTACTS_FEATURE_NAME = "Delete ALL Contacts";
     private static final String DELETE_CONTACTS_FEATURE_COMMAND = "clear";
     private static final String EDIT_CONTACT_FEATURE_NAME = "Edit a Contact";
     private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit <INDEX> [n/] [p/] [g/] [e/] [a/] [t/]";
@@ -51,11 +51,11 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V1 = "show <NAME>";
     private static final String SHOW_CONTACT_FEATURE_NAME_V2 = "Show Contact Details (by Index)";
     private static final String SHOW_CONTACT_FEATURE_COMMAND_V2 = "show <INDEX>";
-    private static final String LIST_CONTACTS_FEATURE_NAME = "List all Student Contacts present";
+    private static final String LIST_CONTACTS_FEATURE_NAME = "List all Contacts present";
     private static final String LIST_CONTACTS_FEATURE_COMMAND = "list";
-    private static final String FAVOURITE_CONTACT_FEATURE_NAME = "Mark a Student Contact as Favourite";
+    private static final String FAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as Favourite";
     private static final String FAVOURITE_CONTACT_FEATURE_COMMAND = "fav <INDEX>";
-    private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Student Contact as UnFavourite";
+    private static final String UNFAVOURITE_CONTACT_FEATURE_NAME = "Mark a Contact as UnFavourite";
     private static final String UNFAVOURITE_CONTACT_FEATURE_COMMAND = "unfav <INDEX>";
     private static final String IMPORT_CONTACT_CSV_FEATURE_NAME = "Import Contacts from CSV file";
     private static final String IMPORT_CONTACT_CSV_FEATURE_COMMAND = "import <FILENAME>.csv";
