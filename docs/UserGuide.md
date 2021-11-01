@@ -151,12 +151,14 @@ Examples:
   * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by an `@` character.
   * The **local part**:
     * must contain **at least 1** alphanumeric character. 
-    * It can contain alphanumeric characters separated by any 1 of these characters `+_.-`. e.g. `John-a-bc`
+    * It can contain alphanumeric characters separated by any 1 of these characters `+_.-`. (i.e. `John-a-bc`)
     * It must **start with** and **end with** an alphanumeric character.
   * The **domain part**:
-    * must contain **at least 2** alphanumeric characters.
-    * It can contain sections, each containing alphanumeric characters separated by `_`. Each section must end with
-    `.`. The sections must be followed by **at least** 2 alphanumeric characters. e.g. `John-a.a-b-c.bc`
+    * must contain **at least 2** domain labels. Each domain label, **except the final domain label**, must start with an 
+alphanumeric character and end with a `.`. 
+    * The final domain label must have **at least 2** alphanumeric characters, but does not need to end with
+a `.` unlike its preceding domain labels. (i.e. `John@u.sg` is valid)
+    * The domain label can contain alphanumeric characters separated by `-`. (i.e. `John@u-u.sg`)
   * For example:
     * EMAIL_ADDRESS inputs such as `PeterJack_1190@example.com` and `e1234567@u.nus.edu` are acceptable.
     * EMAIL_ADDRESS inputs such as `peterjack@example.c` and `peter..jack@example.com` are unacceptable.
