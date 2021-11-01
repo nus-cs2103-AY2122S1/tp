@@ -135,7 +135,7 @@ public class TimePeriod implements Comparable<TimePeriod> {
         final StringBuilder builder = new StringBuilder();
         builder.append("Start Time: ")
                .append(getStartDateTime().format(formatter))
-               .append("End Time: ")
+               .append(" End Time: ")
                .append(getEndDateTime().format(formatter));
 
         return builder.toString();

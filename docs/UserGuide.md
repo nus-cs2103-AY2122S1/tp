@@ -64,7 +64,7 @@ The table below contains definitions of data formats used in various parameters 
 Parameter | Data format
 ----------|------------
 `INDEX` | Positive integers, e.g. 1,2,3, ...
-`DATETIME` | dd-MM-yyyy HHmm, e.g. 03-11-2021 1730 represents 3 November 2021 5.30 pm <br> **Notes:** The format uses the 24 hour clock formats.
+`DATETIME` | dd-MM-yyyy HHmm, e.g. 03-11-2021 1730 represents 3 November 2021 5.30 pm <br> **Notes:** The format uses the 24 hour clock formats. Don't forget that there are only 12 months in a year
 `EMAIL` | Emails should be of the format local-part@domain. e.g. Johnny@gmail.com
 `Others` | All other parameters will take any alphanumeric characters and special characters as input. 
 
@@ -80,6 +80,7 @@ Parameter | Data format
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * If there is any error in command format, PlaceBook will notify you and show you the correct format, and provide an example.
+
 * Some commands will have some command specific errors, which will be elaborated on in [Features](#features), to help you troubleshoot.
   
 --------------------------------------------------------------------------------------------------------------------
@@ -217,8 +218,8 @@ This section contains information on features related to adding appointments to 
 ### Adding an appointment: `addApp`
 
 Adds an appointment for the specified person or persons identified using a list of index(es) with 
-the date (dd-MM-yyyy), optional time field (24 hour eg. 1530) and description to the 
-appointment list.
+the datetime field(dd-MM-yyyy HHmm), with time being in the 24-hour format e.g. 1530, 
+and description to the appointment list.
 
 Format: `addApp id/INDEX[INDEX,INDEX,INDEX...] a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION`
 
@@ -399,12 +400,12 @@ others, and then get them to download another PlaceBook jar file, then replace t
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**AddApp** | `addApp id/INDEX[INDEX,INDEX,INDEX...] a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION` <br> e.g., `addApp id/1,2,3 a/Starbucks @ Raffles City start/2021-01-01 1400 end/2021-01-01 1500 ds/discuss marketing strategies`
+**AddApp** | `addApp id/INDEX[INDEX,INDEX,INDEX...] a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION` <br> e.g., `addApp id/1,2,3 a/Starbucks @ Raffles City start/01-01-2021 1400 end/01-01-2021 1500 ds/discuss marketing strategies`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **DelApp** | `delApp INDEX` <br> e.g., `delApp 1`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**EditApp** | `editApp ai/INDEX a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION` <br> e.g., `editApp ai/1 a/UTown d/27-12-2021 ti/1400 ds/discuss UG and DG stuff`
+**EditApp** | `editApp ai/INDEX a/ADDRESS start/DATETIME ti/DATETIME ds/DESCRIPTION` <br> e.g., `editApp ai/1 a/UTown start/27-12-2021 1400 end/27-12-2021 1500 ds/discuss UG and DG stuff`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **FindTags** | `findTags KEYWORD [MORE_KEYWORDS]` <br> e.g., `findTags friends`
 **FindApp** | `findApp KEYWORD [MORE KEYWORDS`<br> e.g., `findApp Zoom Meeting`
