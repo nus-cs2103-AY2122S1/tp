@@ -71,8 +71,9 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortByAppointment_listSortedByAppointment() {
-        getCustomPersons(expectedModel, ELLE, BENSON, GRABAHAN, JOE);
+        getCustomPersons(expectedModel, ELLE, JOE, GRABAHAN, BENSON);
 
+        //different dates
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByAppointment.KEYWORD);
         SortCommand command = new SortCommand(new SortByAppointment(), SortByAppointment.KEYWORD);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

@@ -220,6 +220,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 #### `ADDRESS` 
 * The address of your client
 * Can take any value (should not be *blank*)
+* Should not be more than **100** characters
 
 
 #### `DATE`
@@ -274,10 +275,18 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `KEYWORD`
 *   The condition to sort your client list
-*   There are currently only 3 conditions available: name, appointment, priority.
-    * name will sort all clients in alphabetical order from A to Z.
-    * appointment will sort all client by appointment date from the earliest date to latest.
-    * priority will sort all client by priority tag from the highest to the lowest priority.
+*   There are currently only 3 `KEYWORD` available: `name`, `appointment`, `priority`.
+    * `name` will sort all clients in alphabetical order from A to Z.
+    * `appointment` will sort all client by appointment date from the earliest date to latest.
+    * `priority` will sort all client by `priority tag` from the highest to the lowest priority.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about sorting by appointment:**<br>
+
+* For clients with the **same appointment date**, FAST will first show those *without appointment times*, followed by
+the earliest time to the latest time.
+
+<div/><br>
     
 
 #### `NAME`
@@ -289,7 +298,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 * The contact number of your client
 * Should only contain numbers
   * for numbers with an area/country code e.g. +65 80081355, you can just enter 6580081355
-* Should be at least **3** digit long
+* Should be at least **3** digits long and at most **20** digits long.
 
 
 #### `QUERY`
@@ -300,7 +309,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
 
 #### `REMARK`
 * Extra notes given for your client
-* Should not be more than **75** characters
+* Should not be more than **45** characters
 
 
 #### `TAG`
