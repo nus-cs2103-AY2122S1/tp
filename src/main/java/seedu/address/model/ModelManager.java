@@ -247,9 +247,9 @@ public class ModelManager implements Model {
     public void completeTask(Task target) {
         requireAllNonNull(target, target);
         target.markTaskComplete();
-//        Task newTask = target.clone();
-//        newTask.markTaskComplete();
-//        addressBook.setTask(target, newTask);
+        /*Task newTask = target.clone();
+        newTask.markTaskComplete();
+        addressBook.setTask(target, newTask);*/
     }
 
     @Override

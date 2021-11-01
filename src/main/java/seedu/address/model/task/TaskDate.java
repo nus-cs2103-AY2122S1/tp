@@ -8,14 +8,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import java.util.Locale;
 
 public class TaskDate {
 
-    public static final String MESSAGE_CONSTRAINTS = "Deadlines should be in the format yyyy-MM-dd. " +
-            "Do ensure you input a valid date.";
-    public static String dateFormat = "uuuu-MM-dd";
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = 
+    public static final String MESSAGE_CONSTRAINTS = "Deadlines should be in the format yyyy-MM-dd."
+            + " " + "Do ensure you input a valid date.";
+    private static String dateFormat = "uuuu-MM-dd";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter
                     .ofPattern(dateFormat)
                     .withResolverStyle(ResolverStyle.STRICT);
