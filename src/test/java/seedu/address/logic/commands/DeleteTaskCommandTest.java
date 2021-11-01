@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 import static seedu.address.testutil.TypicalTasks.getTypicalTasksForModule;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -51,7 +52,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void execute_ModuleNameNotFound_throwsCommandException() {
+    public void execute_moduleNameNotFound_throwsCommandException() {
         DeleteTaskCommand deleteCommand = new DeleteTaskCommand(new TaskId(VALID_TASK_ID_0),
                 new ModuleName(INVALID_MODULE_NAME));
         String expectedMessage = String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, INVALID_MODULE_NAME);
@@ -59,7 +60,7 @@ public class DeleteTaskCommandTest {
     }
 
     @Test //need to fix this
-    public void execute_TaskIdNotFound_throwsCommandException() {
+    public void execute_taskIdNotFound_throwsCommandException() {
         TaskId invalidTaskId = new TaskId("T100");
         DeleteTaskCommand deleteCommand = new DeleteTaskCommand(invalidTaskId,
                 new ModuleName(MODULE_NAME_0));

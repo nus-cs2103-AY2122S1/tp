@@ -37,7 +37,7 @@ public class AddModuleCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddModuleCommand.MESSAGE_USAGE);
 
         // missing module name
-        assertParseFailure(addModuleCommandParser, "",expectedMessage);
+        assertParseFailure(addModuleCommandParser, "", expectedMessage);
     }
 
     @Test

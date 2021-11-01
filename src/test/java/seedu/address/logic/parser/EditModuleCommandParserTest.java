@@ -1,10 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.EditModuleCommand;
-import seedu.address.model.module.ModuleName;
-import seedu.address.logic.commands.EditModuleCommand.EditModuleDescriptor;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEW_MODULE_NAME_DESC;
@@ -16,6 +11,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_1;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.EditModuleCommand;
+import seedu.address.logic.commands.EditModuleCommand.EditModuleDescriptor;
+import seedu.address.model.module.ModuleName;
 
 public class EditModuleCommandParserTest {
 
