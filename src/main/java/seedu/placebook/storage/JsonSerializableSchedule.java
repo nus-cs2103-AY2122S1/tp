@@ -53,6 +53,10 @@ public class JsonSerializableSchedule {
             if (schedule.contains(appointment)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_APPOINTMENT);
             }
+
+            if (schedule.hasConflictingAppointment(appointment)) {
+                continue;
+            }
             schedule.addAppointment(appointment);
         }
         return schedule;
