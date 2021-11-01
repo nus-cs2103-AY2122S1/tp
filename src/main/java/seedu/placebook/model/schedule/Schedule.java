@@ -13,6 +13,7 @@ import seedu.placebook.model.ReadOnlySchedule;
 import seedu.placebook.model.person.Person;
 import seedu.placebook.model.person.exceptions.PersonNotFoundException;
 import seedu.placebook.model.schedule.exceptions.AppointmentNotFoundException;
+import seedu.placebook.model.schedule.exceptions.ClashingAppointmentsException;
 import seedu.placebook.model.schedule.exceptions.DuplicateAppointmentException;
 
 /**
@@ -64,11 +65,18 @@ public class Schedule implements Iterable<Appointment>, ReadOnlySchedule {
      * Adds an Appointment to the list.
      * Appointment Must not already be in the list
      */
-    public void addAppointment(Appointment toAdd) {
+    public void addAppointment(Appointment toAdd) throws DuplicateAppointmentException, ClashingAppointmentsException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateAppointmentException();
         }
+
+        for (Appointment appointment: appointmentList) {
+            if (appointment.isConflictingWith(toAdd)) {
+                throw new ClashingAppointmentsException(appointment);
+            }
+        }
+
         appointmentList.add(toAdd);
         appointmentList.sort(Comparator.comparing(Appointment::getDescription));
         appointmentList.sort(Comparator.comparing(Appointment::getTimePeriod));
