@@ -42,11 +42,11 @@ public class EditTaskCommand extends Command {
             + "[" + PREFIX_TASK_DATE + "DATE, TIME]\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK_DESCRIPTION + "Watch ST2334 Lecture 9"
-            + PREFIX_TASK_DATE + "10/10/2021, 1400"
+            + PREFIX_TASK_DESCRIPTION + "Watch ST2334 Lecture 9 "
+            + PREFIX_TASK_DATE + "10/10/2021, 1400 "
             + PREFIX_TAG + "lecture";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Task is now: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;

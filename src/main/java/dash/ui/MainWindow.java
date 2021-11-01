@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TabMenu tabMenu;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -147,7 +148,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getInternalUserInputList());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
     }
@@ -170,6 +171,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleHelp() {
         tabMenu.switchTab(2);
         logic.setTabNumber(2);
+        statusBarFooter.hideFilePath();
     }
 
     /**
@@ -178,6 +180,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleSwitchContactsTab() {
         tabMenu.switchTab(0);
         logic.setTabNumber(0);
+        statusBarFooter.setFilePath(logic.getAddressBookFilePath());
     }
 
     /**
@@ -186,6 +189,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleSwitchTasksTab() {
         tabMenu.switchTab(1);
         logic.setTabNumber(1);
+        statusBarFooter.setFilePath(logic.getTaskListFilePath());
     }
 
     void show() {
