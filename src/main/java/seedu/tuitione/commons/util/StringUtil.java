@@ -119,9 +119,6 @@ public class StringUtil {
 
     public static boolean isAllDigit(String s) {
         String trimmedS = s.trim();
-        if (!trimmedS.matches("\\d+")) {
-            return false;
-        }
-        return true;
+        return !trimmedS.isEmpty() && trimmedS.matches("\\d+");
     }
 }
