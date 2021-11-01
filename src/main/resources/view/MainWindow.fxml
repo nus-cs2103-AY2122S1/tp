@@ -59,7 +59,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-      
+
                     <VBox fx:id="applicantList" alignment="TOP_RIGHT" layoutY="40.0" prefHeight="382.0" prefWidth="421.0" styleClass="pane-with-border">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
@@ -74,8 +74,7 @@
                  <Image url="@../images/Positions.png" />
                </image>
              </ImageView>
-      
-      
+
               <VBox fx:id="positionList" alignment="TOP_RIGHT" layoutX="425.0" layoutY="39.0" prefHeight="382.0" prefWidth="438.0" styleClass="pane-with-border">
                 <padding>
                   <Insets bottom="10" left="10" right="10" top="10" />
