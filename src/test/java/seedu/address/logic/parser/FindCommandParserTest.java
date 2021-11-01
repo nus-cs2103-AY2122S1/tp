@@ -51,8 +51,8 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "-p 88", expectedPhoneFindCommand);
         assertParseSuccess(parser, "-e alice", expectedEmailFindCommand);
         assertParseSuccess(parser, "-a 10th", expectedAddressFindCommand);
-        assertParseSuccess(parser, "-tg owes", expectedTagFindCommand);
-        assertParseSuccess(parser, "-tk study", expectedTasksFindCommand);
+        assertParseSuccess(parser, "-l owes", expectedTagFindCommand);
+        assertParseSuccess(parser, "-tn study", expectedTasksFindCommand);
     }
 
     @Test
@@ -60,6 +60,8 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "-t ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "-sadasd ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-sadasd sadsad",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 }

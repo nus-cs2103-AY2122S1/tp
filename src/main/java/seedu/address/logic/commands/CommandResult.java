@@ -10,6 +10,7 @@ import java.util.Objects;
 public class CommandResult {
 
     private final String feedbackToUser;
+    private final String additionalText;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -17,13 +18,42 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The command issued is to show a single person's task list */
+    private boolean displaySingleTaskList;
+
+    /** The command issued is to show every person's task list */
+    private boolean displayAllTaskList;
+
+    /** The command issued modifies/writes the application's data */
+    private boolean writeCommand;
+
+    /** The application should change the text in CommandBox. */
+    private final boolean changeCommandBox;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean changeCommandBox,
+                         String additionalText) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.changeCommandBox = changeCommandBox;
+        this.additionalText = additionalText;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} without changeCommandBox.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.displayAllTaskList = false;
+        this.displaySingleTaskList = false;
+        this.writeCommand = false;
+        this.changeCommandBox = false;
+        this.additionalText = "";
     }
 
     /**
@@ -32,6 +62,32 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    public void setDisplayAllTaskList() {
+        this.displayAllTaskList = true;
+        this.displaySingleTaskList = false;
+    }
+
+    public void setDisplaySingleTaskList() {
+        this.displaySingleTaskList = true;
+        this.displayAllTaskList = false;
+    }
+
+    public void setWriteCommand() {
+        writeCommand = true;
+    }
+
+    public boolean isDisplayAllTaskList() {
+        return displayAllTaskList;
+    }
+
+    public boolean isDisplaySingleTaskList() {
+        return displaySingleTaskList;
+    }
+
+    public boolean isWriteCommand() {
+        return writeCommand;
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +100,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isChangeCommandBox() {
+        return changeCommandBox;
+    }
+
+    public String getAdditionalText() {
+        return additionalText;
     }
 
     @Override
@@ -60,12 +124,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && changeCommandBox == otherCommandResult.changeCommandBox
+                && additionalText.equals(otherCommandResult.additionalText);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, changeCommandBox, additionalText);
     }
 
 }

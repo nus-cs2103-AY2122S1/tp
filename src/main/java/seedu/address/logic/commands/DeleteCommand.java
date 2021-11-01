@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -15,7 +16,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "rm";
 
     public static final String DESCRIPTION = "Deletes the person identified by the index number used in "
             + "the displayed person list.";
@@ -23,7 +24,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: "
-            + "INDEX (must be a positive integer) "
+            + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
 
@@ -31,9 +32,13 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Delete People: ";
 
+    public static final String MESSAGE_DELETE_ALL_SUCCESS = "Address book has been cleared!";
+
     private final List<Index> targetIndexes;
 
     private boolean isMultipleDelete = false;
+
+    private boolean isAllDelete = false;
 
     /**
      * Constructor for a DeleteCommand to delete one person.
@@ -54,12 +59,26 @@ public class DeleteCommand extends Command {
         isMultipleDelete = true;
     }
 
+    /**
+     * Constructor for a DeleteCommand to delete all contacts.
+     */
+    public DeleteCommand() {
+        this.targetIndexes = null;
+        isAllDelete = true;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (!isMultipleDelete) {
+        if (isAllDelete) {
+            model.setAddressBook(new AddressBook());
+
+            CommandResult commandResult = new CommandResult(MESSAGE_DELETE_ALL_SUCCESS);
+            commandResult.setWriteCommand();
+            return commandResult;
+        } else if (!isMultipleDelete) {
             return executeDelete(model, lastShownList, targetIndexes.get(0));
         } else {
             return executeMultipleDelete(model, lastShownList, targetIndexes);
@@ -82,7 +101,11 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+
+        CommandResult commandResult = new CommandResult(
+                String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     /**
