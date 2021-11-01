@@ -79,6 +79,14 @@ public class OrderBuilder {
     }
 
     /**
+     * Increments the {@code id} of the {@code Order} that we are building.
+     */
+    public OrderBuilder incrementId(long addId) {
+        this.id += addId;
+        return this;
+    }
+
+    /**
      * builds the Order.
      */
     public Order build() {

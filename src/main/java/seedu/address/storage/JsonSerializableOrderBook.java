@@ -57,7 +57,7 @@ class JsonSerializableOrderBook {
                 localCount = order.getId();
             }
             if (idList.contains(order.getId())) {
-                throw new IllegalValueException("Order Id can not be duplicated");
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ORDER);
             } else {
                 idList.add(order.getId());
             }
