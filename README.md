@@ -6,7 +6,7 @@
 
 
 * This project is named `WhereTourGo`. `WhereTourGo` is a desktop app for managing tour contacts.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
+  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 9 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
 * For the detailed documentation of this project, see the **[WhereTourGo Website](https://ay2122s1-cs2103t-t12-2.github.io/tp)**.
 * This project is inspired by `AddressBook Level-3`. It is an ongoing software project for a desktop application used for managing contact details. It is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
