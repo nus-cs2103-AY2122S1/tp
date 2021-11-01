@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public class CommandResult {
 
-    private static String WARNING_FORMAT = "[WARNING] %1$s\n";
+    public static String WARNING_FORMAT = "[WARNING] %1$s\n";
 
     private final String feedbackToUser;
 

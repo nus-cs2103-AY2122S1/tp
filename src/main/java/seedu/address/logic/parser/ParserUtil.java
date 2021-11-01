@@ -187,12 +187,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
 
-        /*
-        if (DateTimeUtil.isPast(parsedVisit)) {
-            throw new ParseException(MESSAGE_INVALID_VISIT_DATE);
-        }
-
-         */
 
         return Optional.ofNullable(new Visit(trimmedVisit));
     }
