@@ -69,16 +69,13 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 Before diving into Socius and getting to know its features, lets get familiar with the symbols used in this user guide.
 
-<div markdown="block" class="alert alert-info">
-
 | Symbol | Meaning |
 | :----: | ------- |
 | :information_source: | Important information |
 | :exclamation: | Warnings or cautions |
 | :bulb: | Additional information such as tips |
 | :wrench: | Help with common technical issues |
-     
-</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -496,9 +493,10 @@ If the format of your data file is invalid, Socius will discard all data and sta
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+
 | Word | Meaning |
-|--------|---------|
-|        |           |
+|--------|-------|
+|        |         |
 
 ## Authors
 
@@ -507,14 +505,16 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 ## Command Summary
 
 ### General
-| Command | Format | Examples|
-|---------|-------------------|----------------------------------------------------|
+
+| Command | Format | Examples |
+| --------- | ------------------- | ----------------------------------------------- |
 | **Help** | **`help`** | **`help`** |
 | **Exit** | **`exit`** | **`exit`** |
 
 ### Modify
-| Command | Format | Examples|
-|---------|-------------------|----------------------------------------------------|
+
+| Command | Format | Examples |
+| --------- | ------------------- | ----------------------------------------------- |
 | **Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [s/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/T12 s/tg:friendlyjames r/Friendly t/colleague`|
 | **Edit** | **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​` | **`edit`** `1 s/tg:dogcatdonkey43 s/ig:applegrapeorange32 t/teammates e/wfeewf@gmail.com g/M nat/Singaporean` |
 | **Remark** | **`remark`** `INDEX [r/REMARK]` | **`remark`** `2 r/She likes coding` |
@@ -523,21 +523,24 @@ This User Guide is co-written by Hsiao Ting, Choon Yong, Kevin, Boon Kee and Nat
 | **Clear** | **`clear`** | **`clear`** |
 
 ### View
-| Command | Format | Examples|
-|---------|-------------------|----------------------------------------------------|
+
+| Command | Format | Examples |
+| --------- | ------------------- | ----------------------------------------------- |
 | **List** | **`list`** | **`list`** |
 | **Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
 | **Sort** | **`sort`** `FIELD_PREFIX/` | **`sort`** `n/` |
 | **Stat** | **`stat`** `TUTORIAL_GROUP` | **`stat`** `T09`|
 
 ### Share
-| Command | Format | Examples|
-|---------|-------------------|----------------------------------------------------|
+
+| Command | Format | Examples |
+| --------- | ------------------- | ----------------------------------------------- |
 | **Import** | **`import`** | **`import`** `contactbook.json`|
 | **Export** | **`export`** | **`export`** `contactbook.json`|
 
 ### Advance
-| Command | Format | Examples|
-|---------|-------------------|----------------------------------------------------|
+
+| Command | Format | Examples |
+|---------|-------------------|-------------------------------------------------|
 | **Alias** | **`alias`** `a/KEYWORD c/COMMAND` | **`alias`** `a/allFemales c/find g/f`|
 
