@@ -143,7 +143,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a student: `add`
+### Adding a student: `add -s`
 Adds a new student to TutorAid.
 
 Format: `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
