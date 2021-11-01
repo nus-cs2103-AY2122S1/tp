@@ -20,12 +20,14 @@ Manage large groups of contacts with advanced features such as **Import** for a 
 
 ## Table of Contents
  - [Purpose](#Purpose)
+ - [Prerequisites](#Prerequisites)
  - [Quick Start](#QuickStart)
  - [Features](#Features)
     - [Navigating Between Tabs - cmd + numkey](#Nav)
     - [Adding a new Student - add](#Add)
     - [Delete a Student - delete](#Delete)
     - [Edit a Student - edit](#Edit)
+    - [Edit your Profile - edit](#EditProfile)
     - [Find a Student - find](#Find)
     - [Show a Student Contact - show](#Show)
     - [Importing Student Contacts - import ](#Import)
@@ -40,7 +42,6 @@ Manage large groups of contacts with advanced features such as **Import** for a 
     - [Retrieve Command History - ↑ / ↓](#CommandHistory)
     - [Exiting the App - exit](#Exit)
  - [Keyboard Mappings](#KeyboardMappings)
- - [Coming Soon](#ComingSoon)
  - [FAQ](#FAQ)
  - [Command Summary](#CommandSummary)
 
@@ -49,6 +50,14 @@ Manage large groups of contacts with advanced features such as **Import** for a 
 ## Purpose
 
 This User Guide is intended for basic to advanced users of CohortConnect. It provides sufficient information for users to set up the application and learn all its features.
+
+<h2 id = "Prerequisites"> </h2>
+
+## Prerequisites
+
+1. Basic knowledge about `csv` and `json` type file formats.
+2. Basic knowledge about Technical Terms like `CLI`, `UI` and `JAR`.
+3. `Java 11` Installed on the System.
 
 <h2 id = "QuickStart"> </h2>
 
@@ -67,13 +76,29 @@ This User Guide is intended for basic to advanced users of CohortConnect. It pro
 > * Welcome Splash Screen
 
 <p align="center">
-<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/ProfileWindowUi.png?raw=true">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/ProfileSetUpWindow.png?raw=true">
 </p>
 
 > * This Window is only displayed once, when the Student launches the App for the first time.
+1. Enter Your Name in the `Name Field`.
+2. Enter Your __VALID__ Telegram Handle in the `Telegram Field`.
+3. Enter Your __VALID__ GitHub Username in the `GitHub Field`.
+
+> :bulb: TIP: 
+> 1. Telegram Handle Conventions: 
+> * Handles can use a-z, 0-9 and underscores. 
+> * Handles are case-insensitive,  
+> * Handles must be at least five characters long, and maximum is 39 characters.
+> 
+> 2. GitHub Username Conventions:
+> * Github username may only contain alphanumeric characters or hyphens.
+> * Github username cannot have multiple consecutive hyphens. 
+> * Github username cannot begin or end with a hyphen. 
+> * Maximum is 39 characters.
+
 
 <p align="center">
-<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Ui.png?raw=true">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/MainWindow.png?raw=true">
 </p>
 
 > * Main Window.
@@ -88,7 +113,7 @@ Notes about command format:
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
+>:bulb: TIP: In the Command Box, use <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to navigate the command history.
 </div>
 
 <h3 id = "Nav"> </h3>
@@ -143,25 +168,31 @@ delete 7
 
 Edits an existing Student Contact in the Address Book.
 
-Format 1: 
+Format: 
 
 ```
-edit <INDEX> [n/<NAME>] [te/TELEGRAM] [g/GITHUB] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
-Example 1:
+Example:
 
 ```
 edit 1 n/John te/john_123 t/TA
 ```
 
-Format 2:
+<h3 id = "EditProfile"> </h3>
+
+## Edit your Profile - `edit profile`
+
+Edits the Profile linked to the Address Book.
+
+Format:
 
 ```
-edit profile [n/<NAME>] [te/TELEGRAM] [g/GITHUB]
+edit profile [n/<NAME>] [te/<TELEGRAM>] [g/<GITHUB>]
 ```
 
-Example 2:
+Example:
 ```
 edit profile te/bob_osum
 ```
@@ -194,19 +225,31 @@ find t/<TAG>
 Example 2:
 
 ```
-find friends
+find t/friends
 ```
 
 Format 3: 
 
 ```
-find @<TELEGRAM>
+find te/<TELEGRAM>
 ```
 
 Example 3:
 
 ```
-find @alex_1 bobx2
+find te/alex_1 bobx2
+```
+
+Format 4:
+
+```
+find g/<GITHUB>
+```
+
+Example 4:
+
+```
+find g/david_boss
 ```
 
 <h3 id = "Show"> </h3>
@@ -397,7 +440,7 @@ Example:
 clear
 ```
 
-> WARNING: Use With Caution!
+> :exclamation: WARNING: Use With Caution!
 
 <h3 id = "OpenTelegram"> </h3>
 
@@ -456,17 +499,7 @@ exit
 7. <kbd>↓</kbd>: To Retrieve the Next Entered Command (Similar to Terminal).
 8. <kbd>F1</kbd>: To Launch the Help Window.
 
-> TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
-
-<h2 id = "ComingSoon"> </h2>
-
-## Coming Soon
-
-1. Splash Screen
-2. Optional Fields and Telegram handle
-3. Find using Tags
-4. Import and Export Student Details 
-5. Show Function to display details
+> :bulb: TIP: <kbd>⌘</kbd> for Mac = <kbd>Ctrl</kbd> for Windows
 
 <h2 id = "FAQ"> </h2>
 
@@ -493,7 +526,7 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Favourite a Student Contact | `fav <INDEX>` |
 | Find a Student (by Name) | `find <STRING> ` |
 | Find a Student (by Tag) | `find t/<TAG>` |
-| Find a Student (by Telegram Handle) | `find @<TELEGRAM>` |
+| Find a Student (by Telegram Handle) | `find te/<TELEGRAM>` |
 | Import Student Contacts | `import <FILENAME>.json` <br> `import <FILENAME>.csv` |
 | List all the Student Contacts Present | `list` |
 | Show the Help Window | `help` |

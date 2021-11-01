@@ -212,6 +212,14 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        setUserProfileInMenuBar();
+    }
+
+    /**
+     * Sets the User Data to be displayed on the
+     * Menu Bar.
+     */
+    public void setUserProfileInMenuBar() {
         if (logic.isProfilePresent()) {
             UserProfileInMenuBar userProfileInMenuBar = new UserProfileInMenuBar(logic);
             userDetails.getChildren().add(userProfileInMenuBar.getRoot());
@@ -312,6 +320,7 @@ public class MainWindow extends UiPart<Stage> {
      * Shows the {@code MainWindow}.
      */
     public void start() {
+        setUserProfileInMenuBar();
         primaryStage.show();
     }
 
