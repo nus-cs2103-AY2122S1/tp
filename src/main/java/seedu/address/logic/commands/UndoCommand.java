@@ -25,10 +25,10 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undotask";
     public static final String MESSAGE_SUCCESS = "Marked %1$d %2$s of %3$s as not done.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the task, specified by the TASKINDEX, from person"
+            + ": Marks the task, specified by the TASKINDEX, from person "
             + "identified by the index number used in the displayed person list as not done.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK_INDEX + " TaskIndex\n"
+            + PREFIX_TASK_INDEX + " TaskIndex (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
 
     public static final String DESCRIPTION = "Marks the task(s), specified by the TASK_INDEX, "
@@ -73,9 +73,14 @@ public class UndoCommand extends Command {
             }
         }
 
+        int notDone = 0;
         for (Index targetTaskIndex : copyOfIndexList) {
             Task taskDone = tasks.get(targetTaskIndex.getZeroBased());
-            taskDone.setNotDone();
+            if (taskDone.getDone()) {
+                taskDone.setNotDone();
+            } else {
+                notDone++;
+            }
         }
 
         Person editedPerson = new Person (
@@ -87,7 +92,7 @@ public class UndoCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, targetTaskIndexes.size()));
+        return new CommandResult(generateSuccessMessage(editedPerson, targetTaskIndexes.size(), notDone));
     }
 
     public String getCommand() {
@@ -103,9 +108,13 @@ public class UndoCommand extends Command {
      * the task removed.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit, int amount) {
-        String taskOrTasks = StringUtil.singularOrPlural("task", amount);
-        return String.format(MESSAGE_SUCCESS, amount, taskOrTasks, personToEdit.getName());
+    private String generateSuccessMessage(Person personToEdit, int amount, int notDone) {
+        int tasksMarked = amount - notDone;
+        String taskOrTasks = StringUtil.singularOrPlural("task", tasksMarked);
+        String taskOrTasksNotMarked = StringUtil.singularOrPlural("task", notDone);
+        String markedTasks = String.format(MESSAGE_SUCCESS, tasksMarked, taskOrTasks, personToEdit.getName());
+        String notMarkedTasks = String.format("%1$d %2$s are already not done.", notDone, taskOrTasksNotMarked);
+        return notDone == 0 ? markedTasks : markedTasks + "\n" + notMarkedTasks;
     }
 
     @Override

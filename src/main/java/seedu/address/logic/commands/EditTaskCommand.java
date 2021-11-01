@@ -35,7 +35,7 @@ public class EditTaskCommand extends Command {
             + "by the index number used in the displayed person list and task number. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK_INDEX + " TASK_INDEX "
+            + PREFIX_TASK_INDEX + " TASK_INDEX (must be a positive integer)"
             + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
             + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
