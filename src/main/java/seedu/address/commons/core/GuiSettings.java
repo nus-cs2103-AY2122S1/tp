@@ -43,6 +43,14 @@ public class GuiSettings implements Serializable {
         return windowHeight;
     }
 
+    public double getMinWindowWidth() {
+        return DEFAULT_WIDTH;
+    }
+
+    public double getMinWindowHeight() {
+        return DEFAULT_HEIGHT;
+    }
+
     public Point getWindowCoordinates() {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
     }
