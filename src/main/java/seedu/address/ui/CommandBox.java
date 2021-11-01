@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -86,7 +87,7 @@ public class CommandBox extends UiPart<Region> {
     public void handleViewSelected(MultipleSelectionModel<Person> selectedPersonModel) {
         int index = selectedPersonModel.getSelectedIndices().get(0);
         int indexOneOff = index + 1;
-        String commandText = "view " + indexOneOff;
+        String commandText = ViewCommand.COMMAND_WORD + " " + indexOneOff;
 
         try {
             commandExecutor.execute(commandText);
