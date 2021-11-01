@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalModules.MODULE_2;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_0;
 import static seedu.address.testutil.TypicalModules.MODULE_NAME_1;
 
@@ -36,6 +37,7 @@ public class EditModuleCommandTest {
 
         Model expectedModel = new ModelManager();
         expectedModel.addModule(editedModule);
+        expectedModel.addModule(MODULE_2);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 

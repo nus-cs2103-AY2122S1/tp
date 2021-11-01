@@ -266,7 +266,8 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TeachingAssistantBuddy // instanceof handles nulls
-                && students.equals(((TeachingAssistantBuddy) other).students));
+                && students.equals(((TeachingAssistantBuddy) other).students)
+                && modules.equals(((TeachingAssistantBuddy) other).modules));
     }
 
     @Override
