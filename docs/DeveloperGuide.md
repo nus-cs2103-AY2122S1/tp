@@ -3,13 +3,19 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
+  
+--------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+MrTechRecruiter (MTR) is a standalone desktop app aimed in helping technology-related company recruiters overlook and administer job positions and applicants applying for various jobs in their companies.
+
+With the advent of technology and related jobs, MTR uses Command-Line Interface (CLI) for quicker and easier typing for regular users while maintaining a exemplary Graphical User Interface (GUI).
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Adapted ideas from: [`AddressBook Level-3 (AB-3)`](https://se-education.org/addressbook-level3/)
+* Documentation/Coding standard: [`SE Student Projects`](https://se-education.org/guides/conventions/java/intermediate.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,21 +160,21 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Incomplete\] Rejection Rate feature
+### Rejection Rate feature
 
 #### Proposed Implementation
 
 The proposed rejection rate mechanism is facilitated by `Model` and `Calculator`.
-The `Model` component checks if the position exists and accesses it, while `Calculator` calculates the rejection rate.
+The `Model` component checks if the position exists and accesses it, while `Calculator` calculates the rejection rate (if applicable).
 Implements the following functions:
-* `ModelManager#hasPositionWithTitle()`  — Checks if a position with such a given title exists.
-* `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of applicants and number of rejected applicants.
+* `ModelManager#hasPositionWithTitle()`  — Checks if a position with a given title exists in the MTR.
+* `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of total applicants and number of rejected applicants for that position.
 
 These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
 
 Given below is an example usage scenario and how the rejection rate mechanism works at every step.
 
-Step 1. The user launches the application and is assumed to have some positions and applicants applying for a position in the PositionBook and ApplicantBook respectively.
+Step 1. The user launches the application which is assumed to have some positions and corresponding applicants applying for them in the MTR.
 
 ![InitialState](images/rejection-rates/Initial-state.png)
 
@@ -191,14 +197,14 @@ Step 5. Any command the user executes next simply refreshes the current state to
 
 #### Aspect: How rejection rate executes:
 
-* **Alternative 1** (current choice): Only calculate the rejection rate when needed and not store it anywhere.
+* **Alternative 1** (current choice): Calculate the rejection rate only when needed. No storing required.
     * Pros: Saves a significant amount of space and reduces immutability. Implementation is simple.
     * Cons: A user could want to calculate many rejection rates frequently and hence not storing these values might have performance issues in the long run.
 * **Alternative 2**: Store all rejection rates with their respective positions in a dictionary.
     * Pros: Accessing the rejection rates of a certain position will only require access to the dictionary and nothing else - limited accessibility.
       Also, accessing a rejection rate will be much quicker.
     * Cons: Potentially a large amount of space required, slowing performance. Also, the dictionary needs to be updated everytime an applicant's status changes or when a position/applicant is added/deleted,
-      which could result in many inter-linked implementations for the dictionary, rendering it slow.
+      which could result in many inter-linked implementations for the dictionary, rendering it slow. May be difficult to show change in UI as well with many layers affected.
 
 ### Filter applicants feature
 
@@ -684,5 +690,3 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }
-
-### _
