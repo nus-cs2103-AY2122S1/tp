@@ -1,5 +1,7 @@
 package seedu.address.model.sort;
 
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -55,7 +57,7 @@ public class SortOrdering {
 
     @Override
     public String toString() {
-        return value.name();
+        return value.name().toLowerCase(Locale.ROOT) + " order.";
     }
 
     @Override
