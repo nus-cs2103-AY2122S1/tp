@@ -58,7 +58,7 @@ public class ParserUtilTest {
     private static final String VALID_TASK_TAG = "SO100";
 
     private static final String INVALID_CUSTOMER = "";
-    private static final String INVALID_AMOUNT = ".99";
+    private static final String INVALID_AMOUNT = "10000000000";
 
     private static final String VALID_CUSTOMER = "Richard Li";
     private static final String VALID_AMOUNT = "99.99";
