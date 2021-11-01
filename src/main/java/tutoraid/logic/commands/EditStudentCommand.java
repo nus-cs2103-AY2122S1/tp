@@ -201,8 +201,7 @@ public class EditStudentCommand extends EditCommand {
             if (!(other instanceof EditStudentDescriptor)) {
                 return false;
             }
-
-            EditStudentDescriptor e = (EditStudentDescriptor) other;
+            
             EditStudentDescriptor otherDescriptor = (EditStudentDescriptor) other;
             return otherDescriptor.getStudentName().equals(getStudentName())
                     && otherDescriptor.getStudentPhone().equals(getStudentPhone())
