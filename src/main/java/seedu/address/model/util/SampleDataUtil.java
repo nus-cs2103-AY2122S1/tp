@@ -63,7 +63,7 @@ public class SampleDataUtil {
                     new OutstandingFees("100.00"),
                     EMPTY_CANCELLED_DATES_SET),
             new RecurringLesson(
-                    getDate(LocalDate.now().withDayOfMonth(3).minusMonths(1)),
+                    getDate(LocalDate.now().withDayOfMonth(3).minusWeeks(4)),
                     getDate(LocalDate.MAX),
                     new TimeRange("1930-2130"),
                     new Subject("Math"),
@@ -72,7 +72,7 @@ public class SampleDataUtil {
                     new OutstandingFees("100.00"),
                     EMPTY_CANCELLED_DATES_SET),
             new RecurringLesson(
-                    getDate(LocalDate.now().withDayOfMonth(6).minusMonths(1)),
+                    getDate(LocalDate.now().withDayOfMonth(6).minusWeeks(4)),
                     getDate(LocalDate.MAX),
                     new TimeRange("1500-1800"),
                     new Subject("Math"),
@@ -81,7 +81,7 @@ public class SampleDataUtil {
                     new OutstandingFees("100.00"),
                     EMPTY_CANCELLED_DATES_SET),
             new RecurringLesson(
-                    getDate(LocalDate.now().withDayOfMonth(8).minusMonths(1)),
+                    getDate(LocalDate.now().withDayOfMonth(8).minusWeeks(4)),
                     getDate(LocalDate.MAX),
                     new TimeRange("1200-1400"),
                     new Subject("Math"),
