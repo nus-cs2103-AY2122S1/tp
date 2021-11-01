@@ -19,7 +19,6 @@
 				<URL value="@DarkTheme.css" />
 				<URL value="@Extensions.css" />
 			</stylesheets>
-			
 			<VBox>
 				<MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
 					<Menu mnemonicParsing="false" text="File">
@@ -29,13 +28,11 @@
 						<MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
 					</Menu>
 				</MenuBar>
-				
 				<StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
 					<padding>
 						<Insets bottom="5" left="10" right="10" top="5" />
 					</padding>
 				</StackPane>
-				
 				<StackPane fx:id="resultDisplayPlaceholder" maxHeight="125.0" minHeight="125.0" prefHeight="125.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
 					<padding>
 						<Insets bottom="5" left="10" right="10" top="5" />
@@ -69,7 +66,6 @@
 					</VBox>
 					<!-- replace with help message and statistics -->
 				</HBox>
-				
 				<StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
 			</VBox>
 		</Scene>
