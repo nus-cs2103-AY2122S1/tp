@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -33,7 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String DELETE_CONTACTS_FEATURE_NAME = "Delete all Student Contacts";
     private static final String DELETE_CONTACTS_FEATURE_COMMAND = "clear";
     private static final String EDIT_CONTACT_FEATURE_NAME = "Edit a Contact";
-    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit [n/] [p/] [g/] [e/] [a/] [t/]";
+    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit <INDEX> [n/] [p/] [g/] [e/] [a/] [t/]";
     private static final String EDIT_PROFILE_FEATURE_NAME = "Edit Your Profile";
     private static final String EDIT_PROFILE_FEATURE_COMMAND = "edit profile [n/] [g/] [te/]";
     private static final String FIND_CONTACT_FEATURE_NAME_V1 = "Find a Contact (by Name)";
@@ -118,6 +119,10 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        helpTable.setFixedCellSize(25);
+        helpTable.prefHeightProperty().bind(helpTable.fixedCellSizeProperty().multiply(Bindings.size(helpTable.getItems()).add(1.01)));
+        helpTable.minHeightProperty().bind(helpTable.prefHeightProperty());
+        helpTable.maxHeightProperty().bind(helpTable.prefHeightProperty());
         getRoot().show();
         getRoot().centerOnScreen();
     }
