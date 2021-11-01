@@ -9,11 +9,19 @@ import seedu.placebook.model.schedule.Appointment;
 public class ClashingAppointmentsException extends RuntimeException {
     private final Appointment appointment;
 
+    /**
+     * Constructs ClashingAppointmentsException.
+     * @param appointment the clashing Appointment.
+     */
     public ClashingAppointmentsException(Appointment appointment) {
         super("Clashing Appointment with: ");
         this.appointment = appointment;
     }
 
+    /**
+     * Returns the clashing Appointment.
+     * @return the clashing Appointment.
+     */
     public Appointment getClashingAppointment() {
         return this.appointment;
     }
