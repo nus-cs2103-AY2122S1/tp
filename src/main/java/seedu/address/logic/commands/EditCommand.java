@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -67,7 +68,6 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -96,8 +96,21 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        // check if editing this person will lead to duplicates in the addressbook
+        if (model.hasPerson(editedPerson)) {
+            List<Person> duplicates = model.getDuplicate(editedPerson);
+            assert !duplicates.isEmpty() : "There should be at least 1 duplicate.";
+            ArrayList<Person> disallowedDuplicates = new ArrayList<>();
+            // allow changes only if it is to the same person
+            // disallow changes that may affect other applicants that is not being edited
+            for (Person duplicate : duplicates) {
+                if (!duplicate.isSamePerson(personToEdit)) {
+                    disallowedDuplicates.add(duplicate);
+                }
+            }
+            if (!disallowedDuplicates.isEmpty()) {
+                throw new CommandException(createDuplicateMessage(disallowedDuplicates, editedPerson));
+            }
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -130,6 +143,27 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRole,
                 updatedEmploymentType, updatedExpectedSalary, updatedLevelOfEducation,
                 updatedExperience, updatedTags, updatedInterview, updatedNotes);
+    }
+
+    /**
+     * Creates a UI message informing user of existing duplicate applicants.
+     * {@code duplicates} provided must contain at least 1 applicant.
+     *
+     * @param duplicates List of applicants who share the same phone number and email with {@code editedPerson}
+     * @param toCheck applicant to be checked for duplicates with
+     * @return String accumulation of all duplicate applicants
+     */
+    private String createDuplicateMessage(List<Person> duplicates, Person toCheck) {
+        assert toCheck != null;
+        assert duplicates != null;
+        assert !duplicates.isEmpty() : "There should be at least 1 duplicate";
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Person duplicate : duplicates) {
+            stringBuilder.append(duplicate);
+        }
+        return "Your edited applicant " + toCheck
+                + " shares either the same phone number or email as the following applicant(s):\n"
+                + stringBuilder;
     }
 
     @Override
