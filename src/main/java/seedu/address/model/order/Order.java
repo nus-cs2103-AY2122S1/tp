@@ -6,7 +6,7 @@ import seedu.address.model.Label;
 public class Order implements Comparable<Order> {
 
     private static final String idPrefix = "SO";
-    private static int count = 1;
+    private static long count = 1;
 
     private final Customer customer;
     private long id;
@@ -82,6 +82,8 @@ public class Order implements Comparable<Order> {
     public void setId(long id) {
         this.id = id;
     }
+
+    public static void setCount(long newCount) { count = newCount; }
 
     /**
      * Returns the prefixed order id as a String.
