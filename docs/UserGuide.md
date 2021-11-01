@@ -177,50 +177,26 @@ Update the attributes of existing users using the tag of the client’s attribut
 
 Deletes an existing client from the address book using their client id.
 
-Format: `delete {CLIENT'S ID}...`
-
-* Multiple clients can be deleted at the same time by their ids separated by a space.
-
-Examples:
-* `delete 7` will deletes client with client id 7
-* `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8
-
+| Format | `delete CLIENT'S ID...`|
+| :-: | --- |
+| **example** | • `delete 7` will deletes client with client id 7 <br> • `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8 |
+| <img src=images/info_icon.png width="50"> | • Multiple clients can be deleted with one `delete` command |
+| <img src=images/warn_icon.png width="50"> | •This action is irreversible. Once you have deleted a client, the client and his/her corresponding information will be removed from the storage file. |
+ 
 ### 4.5 List all contacts : `list`
 
 Shows the full list of all clients in the address book.
-
-Format: `list`
-
+| Format | `list` |
+| --- | ---|
 
 ### 4.6 Sort Contacts : `sort`
 
-Sorts clients in order based off the inputted attribute
+Sorts clients in order based off the inputted attribute. the `SORT DIRECTION` can take on the values `asc` and `dsc`, and will sort the clients based on the given attribute in an ascending and descending order respectively. 
 
-Format: `sort <attribute>/{ASC/DSC}...`
-
-* The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order.
-* If multiple attributes are provided, then the clients will be sorted by the attributes sequentially.
-e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income first, then for those clients whose
-disposable income are the same, they will be sorted by next meeting in descending.
-* Sorting by the attribute Tag (t/) is not supported.
-* The tags are case-insensitive. (ASC and asc are both okay.)
-
-Examples:
-* `sort r/ASC` will sort the list by ascending risk-appetite
-* `sort i/dsc` will sort the list by descending client id
-
-### 4.7 Find meeting schedule : `schedule`
-
-Finds the meeting schedule that the user has on a specified date.
-
-Format: `schedule {DATE}`
-
-* `DATE` has to be in the format of dd-MM-yyyy, where Day(dd), Month(MM) and Years(yyyy) are numerical values.
-* if the `{date}` is not specified, all meetings will be displayed.
-
-Example:
-* `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
-* `schedule` displays all meetings
+| Format | `sort <attribute>/{SORT DIRECTION}...`
+| :-: | :-- |
+| **examples** | • `sort r/ASC` will sort the list by ascending risk-appetite <br> • `sort i/dsc` will sort the list by descending client id |
+| <img src=images/info_icon.png width="50"> | • The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order. <br> • If multiple attributes are provided, then the clients will be sorted by the attributes sequentially. <br> e.g. `sort d/asc m/dsc`, this will sort the clients by disposable income first, then for those clients whose disposable income are the same, they will be sorted by next meeting in descending. <br> • Sorting by the attribute Tag (t/) is not supported. <br> • The tags are case-insensitive. (ASC and asc are both okay.) |
 
 ### 4.8 Locating clients by keywords : `search`
 
@@ -265,6 +241,18 @@ Examples:
 * `search John` returns `john` and `John Doe`
 * `search alex david` returns `Alex Yeoh`, `David Li`<br>
 
+### 4.7 Find meeting schedule : `schedule`
+
+Finds the meeting schedule that the user has on a specified date.
+
+Format: `schedule {DATE}`
+
+* `DATE` has to be in the format of dd-MM-yyyy, where Day(dd), Month(MM) and Years(yyyy) are numerical values.
+* if the `{date}` is not specified, all meetings will be displayed.
+
+Example:
+* `schedule 22-09-2021` allows the user to view the schedule that the user has on the 22nd September 2021.
+* `schedule` displays all meetings
 ### 4.10 Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -278,9 +266,9 @@ Format: `clear`
 
 ### 4.11 Exiting the program : `exit`
 
-Exits the program.
-
-Format: `exit`
+Exits LeadsForce. 
+| Format | `exit` |
+| --- | --- |
 
 ### 4.12 Saving the data
 
