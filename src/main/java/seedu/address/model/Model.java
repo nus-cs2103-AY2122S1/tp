@@ -168,6 +168,11 @@ public interface Model {
     void setTableList(List<Table> tableList);
 
     /**
+     * Returns true if tableList with the same identity as {@code tableList} exists in the address book.
+     */
+    boolean hasTable(Table table);
+
+    /**
      * Resets the count of tables to zero
      */
     void resetTableCount();

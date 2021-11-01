@@ -117,6 +117,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    public static final int VALID_TABLE_SIZE_ONE = 1;
+    public static final int VALID_TABLE_SIZE_HUNDRED = 100;
+    public static final int INVALID_TABLE_SIZE_ZERO = 0;
+    public static final int INVALID_TABLE_SIZE_NEGATIVE = -1;
+
+    public static final int VALID_TABLE_ID_ONE = 1;
+    public static final int VALID_TABLE_ID_HUNDRED = 100;
+    public static final int INVALID_TABLE_ID_ZERO = 0;
+    public static final int INVALID_TABLE_ID_NEGATIVE = -1;
+
     public static final EditEmployeeCommand.EditEmployeeDescriptor DESC_EMPLOYEE_AMY;
     public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_AMY;
     public static final EditCustomerCommand.EditCustomerDescriptor DESC_CUSTOMER_BOB;

@@ -1,5 +1,11 @@
 package seedu.address.model.table;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.SetTablesCommandParser.MESSAGE_INVALID_SIZE_OR_COUNT;
+
+/**
+ * Represents a table in the restaurant.
+ */
 public class Table {
     private static int numberOfTables = 0;
 
@@ -11,6 +17,7 @@ public class Table {
      * @param numOfSeats number of seats the table has
      */
     public Table(int numOfSeats) {
+        checkArgument(checkIfValidValue(numOfSeats), MESSAGE_INVALID_SIZE_OR_COUNT);
         this.numOfSeats = numOfSeats;
         numberOfTables++;
         tableId = numberOfTables;
@@ -22,10 +29,15 @@ public class Table {
      * @param tableId unique ID of table
      */
     public Table(int numOfSeats, int tableId) {
+        checkArgument(checkIfValidValue(numOfSeats), MESSAGE_INVALID_SIZE_OR_COUNT);
+        checkArgument(checkIfValidValue(tableId), MESSAGE_INVALID_SIZE_OR_COUNT);
         this.numOfSeats = numOfSeats;
         this.tableId = tableId;
     }
 
+    /**
+     * Checks if this table can accommodate specified number of customers
+     */
     public boolean canFit(int numOfCustomers) {
         return numOfCustomers <= numOfSeats;
     }
@@ -54,11 +66,16 @@ public class Table {
         numberOfTables = 0;
     }
 
+    public static boolean checkIfValidValue(int value) {
+        return value >= 1;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Table // instanceof handles nulls
-                && tableId == (((Table) other).tableId));
+                && tableId == (((Table) other).tableId)
+                && numOfSeats == (((Table) other).numOfSeats));
     }
 
     /**
