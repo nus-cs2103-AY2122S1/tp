@@ -1,6 +1,5 @@
 package seedu.notor.logic.executors.group;
 
-import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
