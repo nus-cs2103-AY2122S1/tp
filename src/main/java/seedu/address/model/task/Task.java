@@ -70,7 +70,7 @@ public class Task implements Comparable<Task>, Cloneable {
     }
 
     public void markTaskComplete() {
-        this.isDone = true;
+        this.isDone = !this.isDone;
     }
 
     /**
