@@ -193,6 +193,82 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Mutating Inventory
+
+This section explains how various commands update the list of items and display the result.
+
+As a background context, all the item objects are contained in a `UniqueItemList` object which enforces uniqueness between
+items and prevent duplicates. The `Inventory` manipulates the '`UniqueItemList` to update its content which then update the
+`ObservableList<Item>`. The `ObservableList<Item>` is bounded to the UI so that the UI automatically updates when the
+data in the list change.
+
+`UniqueItemList` is involved when the items are manipulated to ensure the uniqueness of the items. This, the design needs to
+ensure that every command mutates the `UniqueItemList` through `Inventory`.
+
+The general flow of inventory manipulation through AddCommand is as below:
+1. The `AddCommand` object in `Logic` component interacts with `Model` component by calling the `Model#addItem()` if a
+   new item is added and `Model#restockItem()` if an existing item is restocked.
+2. The `Model#addItem()` and `Model#restockItem()` methods then call methods with the same method signature in `Inventory`, `Inventory#addItem()` and `Inventory#restockItem()`.
+3. The `Inventory` then manipulates the `UniqueItemList` by calling the methods with the same method signature, `UniqueItemList#addItem()` and `UniqueItemList#restockItem()`.
+4. UniqueItemList then updates the `ObservableList#add` and `ObservableList#set` methods which updates the list to be returned to the user.
+   The returned list has added a new item or incremented the count of the existing item.
+
+
+Flow:`AddCommand` -> `Model` -> `Inventory` -> `UniqueItemList` -> `ObservableList<Item>`
+
+The above flow applies for all the other similar commands that manipulates the inventory.
+The detailed flow for each command is found below:
+
+**`AddCommand:`**      
+AddCommand#execute() -> Model#addItem() or Model#restockItem() -> Inventory#addItem() or Inventory#restockItem()
+-> UniqueItemList#addItem() or UniqueItemList#setItem() -> ObservableList<Item>#add() or ObservableList<Item>#set()
+
+**`RemoveCommand:`**    
+RemoveCommand#execute() -> Model#removeItem() -> Inventory#removeItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
+
+**`EditCommand:`**       
+EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
+
+**`ClearCommand:`**       
+ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
+
+**`DeleteCommand:`**      
+DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() -> ObservableList<Item>#remove()
+
+**`SortCommand:`**      
+SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>#sort()
+
+### Sort feature
+
+The sort mechanism is facilitated by the built-in `Comparator` interface. The SortCommand constructor takes in a
+predicate enum instruction as a parameter depending on whether the user requested to sort by name or count. The
+items' respective fields are then compared with a `Comparator` so that the updated list displayed is sorted.
+`Comparator<Item>` interface is implemented by different classes below:
+
+* `ItemNameComparator` — allows sorting of items by name
+* `ItemCountComparator` — allows sorting of items by count
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user opens up BogoBogo and executes `sort n/` to sort items by name. The `LogicManager` then calls the
+`AddressBookParser` which create a `SortCommandParser` object. Then, `SortCommandParser#parse()` creates a `SortCommand`
+object. Then the `LogicManager` calls the `SortCommand#execute()` which calls the `Model#SortItems()` and creates an
+`ItemNameComparator` object which is passed as a parameter inside `Model#SortItems()`. The `Model#SortItems()` then
+update the display list with items sorted by name according to the `ItemNameComparator#compare()` method.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input does not input any field to sort by, SortCommandParser will throw a ParseException and a SortCommand will not be created.
+
+Step 2. The updated list with items sorted by name will then be shown to the user. The same procedure above is executed
+for sorting by count as well.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user tries to sort when not in inventory mode, a CommandException will be thrown by SortCommand to remind user to list first. 
+
+<div>
+
+The following sequence diagram shows how the sort operation works:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
 ### Find feature 
 
 The find mechanism is facilitated by the built-in `Predicate` class. The FindCommand constructor takes in a predicate 
@@ -225,90 +301,12 @@ The following sequence diagram shows how the find operation works:
 
 #### Design considerations:
 
-**Aspect: How Find executes:**
+**Aspect:**
 
 * **Finding Multiple Names, Ids or Tags:** The FindCommand supports finding by multiple names, ids or tags.
 `IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of 
 strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to 
 update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
-
-### Sort feature
-
-The sort mechanism is facilitated by the built-in `Comparator` interface. The SortCommand constructor takes in a 
-predicate enum instruction as a parameter depending on whether the user requested to sort by name or count. The 
-items' respective fields are then compared with a `Comparator` so that the updated list displayed is sorted. 
-`Comparator<Item>` interface is implemented by different classes below:
-
-* `ItemNameComparator` — allows sorting of items by name
-* `ItemCountComparator` — allows sorting of items by count
-
-Given below is an example usage scenario and how the sort mechanism behaves at each step.
-
-Step 1. The user opens up BogoBogo and executes `sort n/` to sort items by name. The `LogicManager` then calls the 
-`AddressBookParser` which create a `SortCommandParser` object. Then, `SortCommandParser#parse()` creates a `SortCommand` 
-object. Then the `LogicManager` calls the `SortCommand#execute()` which calls the `Model#SortItems()` and creates an 
-`ItemNameComparator` object which is passed as a parameter inside `Model#SortItems()`. The `Model#SortItems()` then 
-update the display list with items sorted by name according to the `ItemNameComparator#compare()` method.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input does not input any field to sort by, SortCommandParser will throw a ParseException and a SortCommand will not be created.
-
-Step 2. The updated list with items sorted by name will then be shown to the user. The same procedure above is executed 
-for sorting by count as well.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user tries to sort when not in inventory mode, a CommandException will be thrown by SortCommand to remind user to list first. 
-
-<div>
-
-The following sequence diagram shows how the sort operation works:
-
-![SortSequenceDiagram](images/SortSequenceDiagram.png)
-
-### Mutating Inventory
-
-This section explains how various commands update the list of items and display the result. 
-
-As a background context, all the item objects are contained in a `UniqueItemList` object which enforces uniqueness between 
-items and prevent duplicates. The `Inventory` manipulates the '`UniqueItemList` to update its content which then update the
-`ObservableList<Item>`. The `ObservableList<Item>` is bounded to the UI so that the UI automatically updates when the 
-data in the list change. 
-
-`UniqueItemList` is involved when the items are manipulated to ensure the uniqueness of the items. This, the design needs to 
-ensure that every command mutates the `UniqueItemList` through `Inventory`.
-
-The general flow of inventory manipulation through AddCommand is as below:
-1. The `AddCommand` object in `Logic` component interacts with `Model` component by calling the `Model#addItem()` if a 
-new item is added and `Model#restockItem()` if an existing item is restocked. 
-2. The `Model#addItem()` and `Model#restockItem()` methods then call methods with the same method signature in `Inventory`, `Inventory#addItem()` and `Inventory#restockItem()`.
-3. The `Inventory` then manipulates the `UniqueItemList` by calling the methods with the same method signature, `UniqueItemList#addItem()` and `UniqueItemList#restockItem()`.
-4. UniqueItemList then updates the `ObservableList#add` and `ObservableList#set` methods which updates the list to be returned to the user. 
-The returned list has added a new item or incremented the count of the existing item.
-
-
-Flow:`AddCommand` -> `Model` -> `Inventory` -> `UniqueItemList` -> `ObservableList<Item>`
-
-The above flow applies for all the other similar commands that manipulates the inventory. 
-The detailed flow for each command is found below:
-
-**`AddCommand:`**      
-AddCommand#execute() -> Model#addItem() or Model#restockItem() -> Inventory#addItem() or Inventory#restockItem() 
--> UniqueItemList#addItem() or UniqueItemList#setItem() -> ObservableList<Item>#add() or ObservableList<Item>#set()
-
-**`RemoveCommand:`**    
-RemoveCommand#execute() -> Model#removeItem() -> Inventory#removeItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
-
-**`EditCommand:`**       
-EditCommand#execute() -> Model#setItem() -> Inventory#setItem() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
-
-**`ClearCommand:`**       
-ClearCommand#execute() -> Model#setItem() -> Inventory#resetData() -> Inventory#setItems() -> UniqueItemList#setItem() -> ObservableList<Item>#set()
-
-**`DeleteCommand:`**      
-DeleteCommand#execute() -> Model#deleteItem() -> Inventory#deleteItems() -> UniqueItemList#removeItem() -> ObservableList<Item>#remove()
-
-**`SortCommand:`**      
-SortCommand#execute() -> Model#sortItem() -> Inventory#sortItems() -> UniqueItemList#sortItem() -> ObservableList<Item>#sort()
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
