@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import java.util.Arrays;
 
@@ -51,6 +52,14 @@ public class FindCommandParserTest {
     public void parse_index_test() {
         FindCommand expectedFindCommand = new FindCommand(DEFAULT_TEST_INDEX);
         assertParseSuccess(parser, " " + PREFIX_DASH_INDEX + " 2", expectedFindCommand);
+
+        //EP: 0
+        expectedFindCommand = new FindCommand(0);
+        assertParseSuccess(parser, " " + PREFIX_DASH_INDEX + " 1", expectedFindCommand);
+
+        //EP:1
+        assertParseFailure(parser, " " + PREFIX_DASH_INDEX + " 0", MESSAGE_INVALID_INDEX);
+
     }
 
     @Test
