@@ -3,6 +3,7 @@ package seedu.address.model.applicant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -106,10 +107,9 @@ public class UniqueApplicantList implements Iterable<Applicant> {
      */
     public void updateApplicantsWithPosition(Position positionToEdit,
                                              Position editedPosition) {
-        ListIterator<Applicant> iterator = internalList.listIterator();
+        List<Applicant> copiedList = new ArrayList<>(internalList);
 
-        while (iterator.hasNext()) {
-            Applicant applicant = iterator.next();
+        for (Applicant applicant : copiedList) {
             if (!applicant.isApplyingTo(positionToEdit)) {
                 continue;
             }
@@ -126,7 +126,6 @@ public class UniqueApplicantList implements Iterable<Applicant> {
             add(updatedApplicant);
         }
 
-        //internalList.stream().filter(applicant -> isApplyingTo(positionToEdit))
     }
 
     public void setApplicants(UniqueApplicantList replacement) {
