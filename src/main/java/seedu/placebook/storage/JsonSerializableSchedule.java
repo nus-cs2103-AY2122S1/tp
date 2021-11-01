@@ -20,6 +20,7 @@ import seedu.placebook.model.schedule.Schedule;
 public class JsonSerializableSchedule {
 
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "Schedule contains duplicate appointment(s).";
+    public static final String MESSAGE_CONFLICTING_APPOINTMENT = "Schedule contains conflicting appointments.";
 
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
@@ -51,11 +52,11 @@ public class JsonSerializableSchedule {
         for (JsonAdaptedAppointment jsonAdaptedSchedule : appointments) {
             Appointment appointment = jsonAdaptedSchedule.toModelType();
             if (schedule.contains(appointment)) {
-                continue;
+                throw new IllegalValueException(MESSAGE_DUPLICATE_APPOINTMENT);
             }
 
             if (schedule.hasConflictingAppointment(appointment)) {
-                continue;
+                throw new IllegalValueException(MESSAGE_CONFLICTING_APPOINTMENT);
             }
             schedule.addAppointment(appointment);
         }
