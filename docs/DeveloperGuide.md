@@ -180,73 +180,60 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Lesson Management
 
-Lessons refer to the recurring or makeup lessons added by the user to TAB. These lessons can be added to any particular
-in TAB. Added lessons can also be edited and deleted.
-<br/>
+Weekly recurring or one-off (makeup) lessons are collectively known as `Lesson`. These lessons can be added to any particular
+student in TAB. Added lessons can also be edited and deleted.<br>
 
-A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, a `TimeRange` for the
-`Lesson`, a `Subject` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
-represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.
-
-<br/>
+A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `TimeRange` for the
+`Lesson`, a `Subject`, a `LessonRates` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
+represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.<br>
 
 ![LessonClassDiagram](images/LessonClassDiagram.png)
 
-*Figure I.3.1: Class Diagram of Lessons*
-<br/>
+*Figure I.3.1: Class Diagram of Lessons*<br>
 
 The model checks for clashing lessons to ensure that TAB does not contain any duplicate `Lesson` objects as well as `Lesson`
 objects with overlapping time ranges.
 
 Operations on lessons can be done using the `LessonAddCommand`, `LessonEditCommand` and `LessonDeleteCommand` commands.
-The class diagram given below shows how these commands are part of the `Logic` Component.
+The class diagram given below shows how these commands are part of the `Logic` Component.<br>
 
-<br/>
 
 ![LessonLogicDiagram](images/LessonLogic.png)
 
-*Figure I.3.2: Class Diagram of Logic Component with Lesson implementation details*
+*Figure I.3.2: Class Diagram of Logic Component with Lesson implementation details*<br>
 
-<br/>
 These commands are described in greater detail in the sections below.
 
 #### Adding Lessons
-The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
+The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.<br>
 
-<br/>
 A simple illustration of how TAB might interact with the user for `LessonAddCommand` is shown below.
 
 ![LessonAddActivityDiagram](images/LessonAddActivityDiagram.png)
 
-*Figure I.3.3.1: Activity diagram of `LessonAddCommand`*
+*Figure I.3.3.1: Activity diagram of `LessonAddCommand`*<br>
 
-<br/>
-The lesson added will be displayed in the `LessonListPanel` in TAB.
-<br/>
+The lesson added will be displayed in the `LessonListPanel` in TAB.<br>
+
 
 The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
 
-*Figure I.3.3.2: Sequence Diagram of `LessonAddCommand`*
-
-<br/>
+*Figure I.3.3.2: Sequence Diagram of `LessonAddCommand`*<br>
 
 ![LessonAddLogicSequenceDiagram](images/LessonAddLogicSequenceDiagram.png)
 
-*Figure I.3.3.3: Continued Sequence Diagram of `LessonAddCommand`*
+*Figure I.3.3.3: Continued Sequence Diagram of `LessonAddCommand`*<br>
 
-<br/>
 The `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in the `Person` in the `UniquePersonList` 
 by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd` will not be added if there is an 
-existing lesson with a clashing date and timeslot.
-<br/>
+existing lesson with a clashing date and timeslot.<br>
 
 #### Editing Lessons
 The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
-with this lesson. The lesson will be edited per the given information input by the user.
+with this lesson. The lesson will be edited per the given information input by the user.<br>
 
-<br/>
 A simple illustration of how TAB might interact with the user for `LessonEditCommand` is shown below.
 Note that edits involving dates include changes made to the start or end dates of the lesson and/or edits to the cancelled dates of the lesson.
 
@@ -254,14 +241,15 @@ Note that edits involving dates include changes made to the start or end dates o
 
 *Figure I.3.4.1: Activity diagram of `LessonEditCommand`*
 
-<br/>
+<br>
 The figure below shows the sequence diagram for editing a lesson.
 
 ![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
 
 *Figure I.3.4.2: Sequence Diagram of Lesson Edit Command*
 
-<br/>
+<br>
+
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
 object to create the `editedLesson` object. The detailed sequence diagram for LessonEditCommand is the similar to LessonAddCommand's
@@ -321,7 +309,7 @@ list of lessons to view. The `PersonListPanel` also has a listener that displays
 
 * **Alternative 2:** Allow user to define their own recurrence rule.
     * Pros: Greater flexibility in planning lessons outside the regular weekly recurrence.
-    * Cons: Difficult to detect clashes with the endless possibilities.
+    * Cons: Difficult to detect clashes with so many possibilities.
 
 <br />
 
@@ -1065,9 +1053,8 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a lesson
 
-1. Adding a lesson to a students while all students are being shown
-
-  Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Adding a lesson to a students while all students are being shown<br>
+Prerequisites: List all students using the `list` command. Multiple students in the list.
 
   * Test case: `ladd 1 date/12 Oct 2021 time/1100-1200 subject/Science rates/40`<br>
      Expected: A lesson with the corresponding details will be added to the lesson list of the 1st person in the displayed list.
@@ -1082,7 +1069,7 @@ testers are expected to do more *exploratory* testing.
     Expected: A lesson with the corresponding details will be added to the lesson list of the 2nd student in the resulting list after `find`.
     Details of the added lesson, and the student with the lesson will be shown in the status message.
 
-* Incorrect `ladd` commands to try: `ladd...`
+Incorrect `ladd` commands to try: `ladd...`
 
 1. `ladd 2 date/32 Oct 2021 time/1100-1200 subject/Science rates/40` (Invalid date)
 2. `ladd 2 date/32 Oct 2021 time/2100-2230 subject/Science rates/40` (Invalid time range; must be between 0800h - 2200h)
@@ -1092,14 +1079,38 @@ testers are expected to do more *exploratory* testing.
 
 Expected: Error details will be shown in the status message.
 
-### Deleting a lesson from a person
+### Editing a lesson of a student
 
-1. Deleting a lesson from a person while all persons are being shown
+1. Editing a lesson of a student while all students are being shown<br>
+Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-  Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+* Test case: `ledit 1 1 date/20 Jan 2022` <br>
+  Expected: First lesson of the lesson list of the first student is edited to start on 20 Jan 2022.
+  Details of the edited lesson will be shown in the status message.
+
+* Test case: `ledit 2 1 date/12 Dec 2021 recurring/10 Oct 2021`<br>
+  Expected: No lesson is edited. Error details shown in the status message.
+
+* Test case: `ledit 1 3 hw/`<br>
+  Expected: Third lesson of the lesson list of the first student is edited to have no homework.
+  Details of the edited lesson will be shown in the status message.
+
+Incorrect `ledit` commands to try: `ledit...`
+
+1. `ledit 1 x` where x > the number of lessons that the 1st student has or x <= 0.
+2. `ledit x 1` where x > the number of students in the displayed list or x <= 0.
+3. `ledit x` where either the student index or lesson index is not specified.
+4. `ledit x y PREFIX/...` where x and y are valid indices and `PREFIX/` represents a compulsory field.
+
+Expected: Error details will be shown in the status message.
+
+### Deleting a lesson from a student
+
+1. Deleting a lesson from a student while all persons are being shown<br>
+Prerequisites: List all students using the `list` command. Multiple students in the list.
 
   * Test case: `ldelete 1 1`<br>
-     Expected: First lesson of the first student is deleted from the lesson list of the student. 
+     Expected: First lesson is deleted from the lesson list of the first student. 
      Details of the deleted lesson will be shown in the status message.
 
   * Test case: `ldelete 0 1`<br>
@@ -1108,7 +1119,7 @@ Expected: Error details will be shown in the status message.
   * Test case: `ldelete 1 0`<br>
     Expected: No lesson is deleted. Error details shown in the status message.
 
-* Incorrect `ldelete` commands to try: `ldelete...`
+Incorrect `ldelete` commands to try: `ldelete...`
 
 1. `ldelete 1 x` where x > the number of lessons that the 1st student has or x <= 0.
 2. `ldelete x 1` where x > the number of students in the displayed list or x <= 0.
