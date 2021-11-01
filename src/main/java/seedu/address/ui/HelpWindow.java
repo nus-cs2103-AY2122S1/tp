@@ -58,11 +58,11 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String IMPORT_CONTACT_CSV_FEATURE_NAME = "Import Contacts from CSV file";
     private static final String IMPORT_CONTACT_CSV_FEATURE_COMMAND = "import <FILENAME>.csv";
     private static final String IMPORT_CONTACT_JSON_FEATURE_NAME = "Import Contacts from JSON file";
-    private static final String IMPORT_CONTACT_JSON_FEATURE_COMMAND = "import <FILENAME>.JSON";
+    private static final String IMPORT_CONTACT_JSON_FEATURE_COMMAND = "import <FILENAME>.json";
     private static final String EXPORT_CONTACT_CSV_FEATURE_NAME = "Export Contacts to CSV file";
     private static final String EXPORT_CONTACT_CSV_FEATURE_COMMAND = "export <FILENAME>.csv";
     private static final String EXPORT_CONTACT_JSON_FEATURE_NAME = "Export Contacts to JSON file";
-    private static final String EXPORT_CONTACT_JSON_FEATURE_COMMAND = "export <FILENAME>.JSON";
+    private static final String EXPORT_CONTACT_JSON_FEATURE_COMMAND = "export <FILENAME>.json";
     private static final String HELP_FEATURE_NAME = "Launch this Help Window";
     private static final String HELP_FEATURE_COMMAND = "help";
     private static final String EXIT_APP_FEATURE_NAME = "Exit the App";
