@@ -136,11 +136,12 @@ public class ArgumentTokenizer {
 
     /**
      * Checks if the prefix has bad form, for example, not followed by whitespace.
+     * Prefix at the end of args do not need to be followed by whitespace.
      */
     private static boolean prefixHasBadForm(String argsString, int valueStartPos) {
-        return argsString.length() - 1 < valueStartPos
-                ? argsString.length() != valueStartPos
-                : argsString.charAt(valueStartPos) != ' ';
+        return valueStartPos != 0 &&
+                (argsString.length() - 1 < valueStartPos
+                        || argsString.charAt(valueStartPos) != ' '); // Prefix not at the end of args, check for whitespace
     }
 
     /**
