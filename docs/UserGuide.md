@@ -216,16 +216,20 @@ Examples:
 
 Marks a specified staff(s) as not working for a specified date.
 
- * The salary for that date will be not included in calculation,
+* The salary for that date will be not included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
- * The format of the input date is in: `YYYY-MM-DD`.
+* The format of the input date is in: `YYYY-MM-DD`.
+* If no date input is provided, current week is taken as default.
+* If only one date input is provided, the shift added is to the next date that the shift is at. For instance,
+  if the shift is on a 1/10/2021, a monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
+* Will not indicate if there is a shift in the period provided, even if there isn't a shift, the staff will be marked absent for that period.
 
 Format:  
 
 Marking a period:  
 
-`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`  
+`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`  
 
 
 Possible to mark a single date:
@@ -244,8 +248,13 @@ Removes the period that was marked by the `mark` command.
 
 The format of the input date is in: `YYYY-MM-DD`.
 
+* If no date input is provided, current week is taken as default.
+* If only one date input is provided, the shift added is to the next date that the shift is at. For instance,
+  if the shift is on a 1/10/2021, a monday, with `da/2021-10-27` as input, the shift will be added to 1/10/2021.
+* If the shift is not in the period provided, the program will do nothing.
+
 Format:  
-`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... da/DATE [da/END DATE]`
+`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [da/DATE] [da/END DATE]`
 
 Examples:  
 `unmark -i 1 da/2020-01-03 da/2021-01-03`  
