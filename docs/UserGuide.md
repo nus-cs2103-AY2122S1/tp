@@ -107,12 +107,17 @@ Scroll down to the bottom and click on `recruitIn.jar`.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
-* Sections with headings appended with ***{Advanced}*** are intended for the advanced user.
 
-* Duplicate applicants are not allowed. For two applicants to be duplicate, 
-they must have the same ***Contact Number*** and ***Email***. An error message will show if you attempt to
-`add` or `edit` applicants in a manner that will lead to duplicate stored applicants.
+</div>
+
+
+<div markdown="block" class="alert alert-primary">
+
+**:information_source: Notes about the applicants:**<br>
+
+* Duplicate applicants are not allowed. <br>
+  For two applicants to be duplicate, they must have either the same ***Phone Number*** or ***Email*** or both. 
+  An error message will show if you attempt to `add` or `edit` applicants in a manner that will lead to duplicate stored applicants.
 
 </div>
 

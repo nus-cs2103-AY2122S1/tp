@@ -96,8 +96,17 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        // check if editing this person will lead to duplicates in the addressbook
+        if (model.hasPerson(editedPerson)) {
+            List<Person> duplicates = model.getDuplicate(editedPerson);
+            assert !duplicates.isEmpty() : "There should be at least 1 duplicate.";
+            // allow changes only if it is to the same person
+            // disallow changes that may affect other applicants that is not being edited
+            for (Person duplicate : duplicates) {
+                if (!duplicate.isSamePerson(personToEdit)) {
+                    throw new CommandException(createDuplicateMessage(duplicate, editedPerson));
+                }
+            }
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -130,6 +139,11 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRole,
                 updatedEmploymentType, updatedExpectedSalary, updatedLevelOfEducation,
                 updatedExperience, updatedTags, updatedInterview, updatedNotes);
+    }
+
+    private String createDuplicateMessage(Person duplicatePerson, Person editedPerson) {
+        return duplicatePerson.toString() + "shares either the same phone number or email as your edit:\n"
+                + editedPerson.toString();
     }
 
     @Override
