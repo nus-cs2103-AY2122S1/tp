@@ -430,7 +430,7 @@ Contact data are saved in the hard disk automatically after any command that cha
 
 #### Editing the data file <a name="editing-data"></a>
 
-contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json`. 
+contHACKS data are saved as a JSON file `[JAR file location]/data/conthacks.json`. 
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 Advanced users are welcome to update data directly by editing that data file.
