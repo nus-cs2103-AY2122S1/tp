@@ -87,17 +87,22 @@ public class JsonAdaptedPerson {
         gitStats = source.getGitStats();
     }
 
-    public boolean isDefaultImage(Image firstImage) {
+    /**
+     * Checks whether given Image is the default profile image
+     * @param image image to check
+     * @return true, if given image is same as default
+     */
+    public boolean isDefaultImage(Image image) {
 
-        if (firstImage == null
-                || firstImage.getHeight() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getHeight()
-                || firstImage.getWidth() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getWidth()) {
+        if (image == null
+                || image.getHeight() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getHeight()
+                || image.getWidth() != GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getWidth()) {
             return false;
         }
 
-        for (int x = 0; x < firstImage.getWidth(); x++) {
-            for (int y = 0; y < firstImage.getHeight(); y++) {
-                int firstArgb = firstImage.getPixelReader().getArgb(x, y);
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int firstArgb = image.getPixelReader().getArgb(x, y);
                 int secondArgb = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE.getPixelReader().getArgb(x, y);
                 if (firstArgb != secondArgb) {
                     return false;
