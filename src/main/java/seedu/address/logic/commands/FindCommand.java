@@ -92,7 +92,7 @@ public class FindCommand extends Command {
         if (index == FIELD_PREDICATE_ONLY) {
             return executeFieldSearch(model);
         }
-        if (index > 0) {
+        if (index >= 0) {
             checkIndex(model);
             indexPredicate = new StaffHasCorrectIndexPredicate(index, model);
             return executeIndexSearch(model);
