@@ -50,7 +50,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SUPPLY_TYPE = "Chicken and Beef";
-    private static final String VALID_DELIVERY_DETAILS = "14:00 2021-10-19";
+    private static final String VALID_DELIVERY_DETAILS = "1400 2021-10-19";
 
     private static final String WHITESPACE = " \t\r\n";
 

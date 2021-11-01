@@ -41,7 +41,7 @@ public class SupplierCommandTestUtil {
     public static final String VALID_SUPPLY_TYPE_BEEF = "Beef";
     public static final String VALID_SUPPLY_TYPE_CHICKEN = "Chicken";
     public static final String VALID_DELIVERY_DETAIL_AMY = "2021-12-25 17:00";
-    public static final String VALID_DELIVERY_DETAIL_BOB = "11:00 26-12-2021";
+    public static final String VALID_DELIVERY_DETAIL_BOB = "1100 26-12-2021";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
