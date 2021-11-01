@@ -214,10 +214,7 @@ which will update the filtered list with items that matches the predicate stated
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input a wrong format of the name, id or tag, a ParseException will be thrown by FindCommandParser and a FindCommand will not be created. 
 
 Step 2. The updated list with items that matches the predicate will then be shown to the user. If none matches, an empty
-list will be shown. The same procedure above is executed for finding by Id and Tags as well. 
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The FindCommand also supports finding by multiple names, ids or tags.
-The 3 classes that implement Predicate<Item> takes in a list of string which allows storing of multiple predicates. 
+list will be shown. The same procedure above is executed for finding by Id and Tags as well.
 
 <div>
 
@@ -230,10 +227,10 @@ The following sequence diagram shows how the find operation works:
 
 **Aspect: How Find executes:**
 
-* **Alternative 1:** Retrieve current inventory and check each item one by one without using the predicate class
-    * Pros: Easier to implement
-    * Cons: May have performance issue as every command will execute several loops. 
-
+* **Finding Multiple Names, Ids or Tags:** The FindCommand supports finding by multiple names, ids or tags.
+`IdContainsNumberPredicate`, `NameContainsKeywordsPredicate` and `TagContainsKeywordsPredicate` takes in a list of 
+strings which allows storing of multiple predicates. The items in the list are then matched with each predicate to 
+update the filtered list. Thus, the displayed list contains items that matches multiple predicates given.
 
 ### Sort feature
 
@@ -266,6 +263,37 @@ The following sequence diagram shows how the sort operation works:
 
 ![SortSequenceDiagram](images/SortSequenceDiagram.png)
 
+### Mutating Inventory
+
+The sort mechanism is facilitated by the built-in `Comparator` interface. The SortCommand constructor takes in a
+predicate enum instruction as a parameter depending on whether the user requested to sort by name or count. The
+items' respective fields are then compared with a `Comparator` so that the updated list displayed is sorted.
+`Comparator<Item>` interface is implemented by different classes below:
+
+* `ItemNameComparator` — allows sorting of items by name
+* `ItemCountComparator` — allows sorting of items by count
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user opens up BogoBogo and executes `sort n/` to sort items by name. The `LogicManager` then calls the
+`AddressBookParser` which create a `SortCommandParser` object. Then, `SortCommandParser#parse()` creates a `SortCommand`
+object. Then the `LogicManager` calls the `SortCommand#execute()` which calls the `Model#SortItems()` and creates an
+`ItemNameComparator` object which is passed as a parameter inside `Model#SortItems()`. The `Model#SortItems()` then
+update the display list with items sorted by name according to the `ItemNameComparator#compare()` method.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input does not input any field to sort by, SortCommandParser will throw a ParseException and a SortCommand will not be created.
+
+Step 2. The updated list with items sorted by name will then be shown to the user. The same procedure above is executed
+for sorting by count as well.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user tries to sort when not in inventory mode, a CommandException will be thrown by SortCommand to remind user to list first. 
+
+<div>
+
+The following sequence diagram shows how the sort operation works:
+
+![SortSequenceDiagram](images/SortSequenceDiagram.png)
+
 #### Design considerations:
 
 **Aspect: How Sort executes:**
@@ -273,7 +301,6 @@ The following sequence diagram shows how the sort operation works:
 * **Alternative 1:** Retrieve current inventory and check each item one by one without using the comparator class
     * Pros: Easier to implement
     * Cons: May have performance issue as every command will execute several loops.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
