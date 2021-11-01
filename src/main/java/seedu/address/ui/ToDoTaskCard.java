@@ -15,6 +15,7 @@ import seedu.address.model.task.Task;
 public class ToDoTaskCard extends UiPart<Region> {
 
     private static final String FXML = "TodoTaskListCard.fxml";
+    private static final String TODO_LABEL_STYLE = "taskType-todo";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -62,7 +63,7 @@ public class ToDoTaskCard extends UiPart<Region> {
         } else {
             priorityLabel.getStyleClass().add("priorityLabel-low");
         }
-        taskType.getStyleClass().add("taskType");
+        taskType.getStyleClass().add(TODO_LABEL_STYLE);
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

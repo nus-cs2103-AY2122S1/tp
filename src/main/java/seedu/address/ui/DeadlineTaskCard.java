@@ -15,6 +15,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
 
     private static final String FXML = "DeadlineTaskListCard.fxml";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final String DEADLINE_LABEL_STYLE = "taskType-deadline";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -65,7 +66,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
         } else {
             priorityLabel.getStyleClass().add("priorityLabel-low");
         }
-        taskType.getStyleClass().add("taskType");
+        taskType.getStyleClass().add(DEADLINE_LABEL_STYLE);
 
         taskDate.setText("Date: " + deadlineTask.getDeadline().getDeadline().format(formatter));
 
