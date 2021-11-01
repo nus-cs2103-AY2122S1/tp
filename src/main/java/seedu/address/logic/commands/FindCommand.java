@@ -62,7 +62,7 @@ public class FindCommand extends Command {
      * @param index The index that the user searched for.
      */
     public FindCommand(int index) {
-        assert index > 0;
+        assert index >= 0;
         this.namePredicate = NameContainsKeywordsPredicate.EMPTY;
         this.index = index;
         this.predicate = new PersonContainsFieldsPredicate();
