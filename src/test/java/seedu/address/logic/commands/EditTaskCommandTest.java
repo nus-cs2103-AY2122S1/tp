@@ -37,7 +37,7 @@ import seedu.address.testutil.TodoTaskBuilder;
  */
 public class EditTaskCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -66,6 +66,7 @@ public class EditTaskCommandTest {
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }
 
+    // Does not work because editTask is buggy for editing dates and priority
     /*@Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastTask = Index.fromOneBased(model.getFilteredTaskList().size()-1);
@@ -89,8 +90,6 @@ public class EditTaskCommandTest {
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }*/
-
-
 
     @Test
     public void execute_filteredList_success() {

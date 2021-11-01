@@ -43,11 +43,13 @@ public class TaskBuilder {
     /**
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    private TaskBuilder(Task taskToCopy) {
-        this.taskName = taskToCopy.getName();
+    public TaskBuilder(Task taskToCopy) {
+        this.taskName = new TaskName(taskToCopy.getName().taskName);
         this.tags = new HashSet<>(taskToCopy.getTags());
         this.isDone = taskToCopy.checkIsDone();
         this.description = new Description(taskToCopy.getDescription());
+        this.priority = taskToCopy.getPriority();
+        this.taskDate = new TaskDate(taskToCopy.getDate().toString());
     }
 
     /**
