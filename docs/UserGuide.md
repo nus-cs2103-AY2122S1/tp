@@ -169,6 +169,9 @@ Adds a Participant to Managera.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 
+* The name must contain only alphanumeric characters.
+* The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` - Adds a Participant whose name is 
   John Doe with given phone number, email and address to the Participant list.
@@ -204,6 +207,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
   in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* The name must contain only alphanumeric characters.
+* The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant 
@@ -266,24 +271,25 @@ Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
 * The index refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * A Next-of-Kin with the same name cannot be assigned to the same Participant.
+* The name must contain only alphanumeric characters.
 
 Example Usage:
 * `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - Adds a Next-of-Kin whose name is Janette Yeo with contact number
   88734323 and tag Spouse to the first Participant.
 
-### Removing Next-of-Kin from a Participant: `deleteNok`
+### Deleting Next-of-Kin of a Participant: `deleteNok`
 
-Removes a Next-of-Kin from a Participant.
+Deletes a Next-of-Kin of a Participant.
 
-Format: `deleteNok INDEX_1 INDEX_2`
+Format: `deleteNok NOK_INDEX PARTICIPANT_ID`
 
-* Removes the Next-of-Kin at specified `INDEX_1` from the Participant at specified index `INDEX_2`.
-* `INDEX_1` refers to the index number of the Next-of_Kin as shown in the Participant's list of Next-of-Kins.
-* `INDEX_2` refers to the index number of the Participant as shown in the displayed Participant list.
+* Deletes the Next-of-Kin at specified `NOK_INDEX` of the Participant at specified index `PARTICIPANT_ID`.
+* `NOK_INDEX` refers to the index number of the Next-of_Kin as shown in the Participant's list of Next-of-Kins.
+* `PARTICIPANT_ID` refers to the index number of the Participant as shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `deleteNok 2 1` - Removes the 2nd Next-of-Kin from the 1st Participant.
+* `deleteNok 2 1` - Deletes the 2nd Next-of-Kin of the 1st Participant.
 
 <br>![result for 'deleteNok 1 2'](images/deleteNokSecondFirstResult.png)
 
@@ -308,6 +314,10 @@ The following commands deal with the handling of Events in Managera. They can he
 Adds an Event to Managera.
 
 Format: `addEvent n/NAME d/DATE [t/TIME]` 
+
+* The event name must contain only alphanumeric characters.
+* The event date must be given in YYYY-MM-DD format.
+* The event time must be given in 24-hr format e.g., 0000 to 2359.
 
 Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Adds an Event "CS2100 Finals" on 20th November 2021 9:00am 
@@ -343,8 +353,11 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* You can remove the time of Event by typing `t/` and leaving a blank after it. This is only possible
-due to the fact that time is optional for an Event.
+* You can remove the event time by typing `t/` and leaving a blank after it. This is only possible 
+  due to the fact that time is optional for an Event.
+* The event name must contain only alphanumeric characters.
+* The event date must be given in YYYY-MM-DD format.
+* The event time must be given in 24-hr format e.g., 0000 to 2359.
 
 Example Usage:
 * `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event in the displayed Event list to be 
@@ -395,6 +408,9 @@ Filters the Event list for Events occurring on a specific date and optionally, t
 
 Format: `filterEvents d/DATE [t/TIME]`
 
+* The event date must be given in YYYY-MM-DD format.
+* The event time must be given in 24-hr format e.g., 0000 to 2359.
+
 Example Usage:
 * `filterEvents d/2021-09-18` - Filters the displayed Event list to show only Events occurring on 18th September 2021.
 * `filterEvents d/2021-09-18 t/0900` - Filters the displayed Event list to show only Events occurring on 
@@ -437,11 +453,11 @@ Example Usage:
 Adds a Participant with the first specified index to the Event with the second specified index.
 
 Format:
-`enroll INDEX_1 INDEX_2`
+`enroll PARTICIPANT_INDEX EVENT_INDEX`
 
-* Adds the Participant at specified `INDEX_1` to the Event at specified index `INDEX_2`.
-* `INDEX_1` refers to the index number of the Participant as shown in the displayed Participant list.
-* `INDEX_2` refers to the index number of the Event as shown in the displayed Event list.
+* Adds the Participant at specified `PARTICIPANT_INDEX` to the Event at specified index `EVENT_INDEX`.
+* `PARTICIPANT_INDEX` refers to the index number of the Participant as shown in the displayed Participant list.
+* `EVENT_INDEX` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Example Usage:
@@ -454,11 +470,11 @@ Example Usage:
 
 Removes the Participant with the first specified index from the Event with the second specified index.
 
-Format: `expel INDEX_1 INDEX_2`
+Format: `expel PARTICIPANT_INDEX EVENT_INDEX`
 
-* Removes the Participant at specified `INDEX_1` from the Event at specified index `INDEX_2`.
-* `INDEX_1` refers to the index number of the Participant as shown in the displayed Participant list.
-* `INDEX_2` refers to the index number of the Event as shown in the displayed Event list.
+* Removes the Participant at specified `PARTICIPANT_INDEX` from the Event at specified index `EVENT_INDEX`.
+* `PARTICIPANT_INDEX` refers to the index number of the Participant as shown in the displayed Participant list.
+* `EVENT_INDEX` refers to the index number of the Event as shown in the displayed Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Example Usage:
@@ -578,9 +594,11 @@ Action | Format, Examples
 **Find Participant** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Participants** | `list`
 **View Participant details** | `view INDEX` <br> e.g., `view 1`
+**Add NOK to Participant** | `addNok INDEX n/NAME p/PHONE_NUMBER tag/TAG` <br> e.g., `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse`
+**Delete NOK of Participant** | `deleteNOK NOK_INDEX PARTICIPANT_INDEX` <br> e.g., `deleteNok 2 1`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Delete Event** | `deleteEvent INDEX`  <br> e.g., `deleteEvent 1`
-**Edit Event** | `editEvent INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME]` <br> e.g., `editEvent n/241Km Marathon`
+**Edit Event** | `editEvent INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME]` <br> e.g., `editEvent 1 n/241Km Marathon`
 **Mark an Event as done** | `done INDEX` <br> e.g., `done 1`
 **Find Event** | `findEvent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findEvent Marathon Commencement`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
@@ -588,8 +606,8 @@ Action | Format, Examples
 **List Events** | `listEvents`
 **Show Event Details** | `showDetails INDEX` <br> e.g., `showDetails 1`
 **Show Event Participants** | `showParticipants INDEX` <br> e.g., `showParticipants 3`
-**Add Participant to Event** | `enroll INDEX_1 INDEX_2` <br> e.g. `enroll 1 2`
-**Remove Participant from Event** | `expel INDEX_1 INDEX_2` <br> e.g. `expel 3 1`
+**Add Participant to Event** | `enroll PARTICIPANT_INDEX EVENT_INDEX` <br> e.g. `enroll 1 2`
+**Remove Participant from Event** | `expel PARTICIPANT_INDEX EVENT_INDEX` <br> e.g. `expel 3 1`
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`
