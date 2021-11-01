@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public class CommandResult {
 
-    public static String WARNING_FORMAT = "[WARNING] %1$s\n";
+    public static final String WARNING_FORMAT = "[WARNING] %1$s\n";
 
     private final String feedbackToUser;
 
@@ -69,8 +69,7 @@ public class CommandResult {
     public String getFeedbackToUser() {
         if (hasWarning()) {
             return String.format(WARNING_FORMAT, getWarning()) + feedbackToUser;
-        }
-        else {
+        } else {
             return feedbackToUser;
         }
     }
