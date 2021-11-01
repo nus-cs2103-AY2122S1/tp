@@ -15,6 +15,7 @@ With the advent of technology and related jobs, MTR uses Command-Line Interface 
 
 ## **Acknowledgements**
 * Adapted ideas from: [`AddressBook Level-3 (AB-3)`](https://se-education.org/addressbook-level3/)
+* Logic Design for `Undo` from: [`Stack Overflow`](https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java)  
 * Documentation/Coding standard: [`SE Student Projects`](https://se-education.org/guides/conventions/java/intermediate.html)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -99,10 +100,13 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `MrTechRecruiterParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. While this command is happening, a record of the command's message and the original state of the model before the command occurred is recorded in the separate `Memento` class.
+1. In the event the user wants to undo the changes from the command, the user can simply pass `undo` into the user command, which uses the `Undo` class. 
+1. The abstract class `Command` is then called to return the `Memento` instance (via `Command#getMomento`) of that state of the model and restores the original state of the model.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -160,51 +164,93 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Rejection Rate feature
+### Add applicant feature
 
-#### Proposed Implementation
+The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
+commands in MTR, it extends the Command class. The most important attribute that it has, is the `ApplicantParticulars`
+attribute, which contains all the details of the applicant (Name, Phone, Email, Address,
+Title of Position Applying to), parsed straight from the user input.
 
-The proposed rejection rate mechanism is facilitated by `Model` and `Calculator`.
-The `Model` component checks if the position exists and accesses it, while `Calculator` calculates the rejection rate (if applicable).
-Implements the following functions:
-* `ModelManager#hasPositionWithTitle()`  — Checks if a position with a given title exists in the MTR.
-* `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of total applicants and number of rejected applicants for that position.
+The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
+applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
+`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
+`applicantBook`, using the `Model#addApplicantWithParticulars` method. Meanwhile, the `Memento` class captures the 
+existing model and success message from this command and stands by in the event of an `undo` scenario.
 
-These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
+Given below is an example usage scenario and how the add applicant feature behaves at each step.
+Preconditions: The app is already launched and the appropriate position that the new applicant is applying to already
+exist.
 
-Given below is an example usage scenario and how the rejection rate mechanism works at every step.
+Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street,
+block 123, #01-01 pos/software engineer`. The app parser will store all the user-input parameters into an
+`applicantParticulars` object, and return the `AddApplicantCommand` instance.
 
-Step 1. The user launches the application which is assumed to have some positions and corresponding applicants applying for them in the MTR.
+The following sequence diagram shows the method invocation in this step.
+![AddApplicantSequenceDiagram1](images/add-applicant/AddApplicantSequenceDiagram1.png)
 
-![InitialState](images/rejection-rates/Initial-state.png)
+Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the
+`Model#addApplicantWithParticulars` method.
 
-Step 2. The user executes `rate pos/software engineer` command to calculate the rejection rate of Software Engineer in the PositionBook.
-The `rate` command calls `Model#hasPositionWithTitle`, causing the model to check whether `Software Engineer` exists in the database as a Position.
+Step 3. Here, we will retrieve the `position` object from `positionBook`, using the `positionTitle` that the user
+input as argument, and create a new applicant instance using the `applicantParticulars` and `position` object. Then
+we will add it to the `applicantBook`.
 
-![Step2](images/rejection-rates/Step2.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If any of the guard clauses fail, i.e. the
+applicant already exist, or the position does not exist, an appropriate exception will be thrown and the applicant
+will not be created.
 
-Step 3. If the position exists, it will access the ApplicantBook via `Model#calculateRejectionRate()`, beginning a count of the number of applicants for the job and the number of rejected applicants of the same job.
+</div>
 
-![Step3](images/rejection-rates/Step3.png)
-
-Step 4. After these numbers have been obtained, the `Calculator` class is called to calculate via `Calculator#calculateRejectionRate`. This resulting floating point number is then the rejection rate of the position.
-
-![SeqDiagram](images/rejection-rates/SeqDiagram.png)
-
-Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
+The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand:
+![AddApplicantActivityDiagram1](images/add-applicant/AddApplicantActivityDiagram1.png)
 
 #### Design considerations:
 
-#### Aspect: How rejection rate executes:
+**Aspect: How and when the new applicant instance is created:**
 
-* **Alternative 1** (current choice): Calculate the rejection rate only when needed. No storing required.
-    * Pros: Saves a significant amount of space and reduces immutability. Implementation is simple.
-    * Cons: A user could want to calculate many rejection rates frequently and hence not storing these values might have performance issues in the long run.
-* **Alternative 2**: Store all rejection rates with their respective positions in a dictionary.
-    * Pros: Accessing the rejection rates of a certain position will only require access to the dictionary and nothing else - limited accessibility.
-      Also, accessing a rejection rate will be much quicker.
-    * Cons: Potentially a large amount of space required, slowing performance. Also, the dictionary needs to be updated everytime an applicant's status changes or when a position/applicant is added/deleted,
-      which could result in many inter-linked implementations for the dictionary, rendering it slow. May be difficult to show change in UI as well with many layers affected.
+* **Alternative 1 (current choice):** Saves all the user input as an applicantParticulars object.
+    * Pros: Avoids the unnecessary clutter of passing multiple parameters to multiple method calls.
+    * Cons: May have lead to greater coupling among classes.
+
+* **Alternative 2:** Each user input parameter (e.g. Name, Address, PositionTitle etc.) are passed to multiple method
+  calls.
+    * Pros: Will reduce the usage of a new class, thereby reducing coupling.
+    * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
+    
+### Delete applicant feature
+
+#### Implementation
+
+The delete-applicant feature is achieved by the `DeleteApplicantCommand` class. Just like all other
+commands in MTR, it extends the Command class. It is one of the simplest commands in the sense that the only parameter it
+takes in is the index position of the applicant in the `ApplicantBook`. However, its implementation is not.
+
+The `DeleteApplicantCommand#execute(Model model)` method will use the `Model#getFilteredApplicantList()` to indirectly
+check whether the applicant exists by checking the size of the list against the index provided. The applicant to be deleted is then
+obtained from the list via the standard `List#get()` and is removed from the model via `Model#deleteApplicant()`.
+Meanwhile, the `Memento` class captures the existing model and success message from this command and stands by in the event of an `undo` scenario.
+
+Given below is an example usage scenario and how the delete applicant feature behaves at each step.
+Preconditions: The app is already launched and the applicant to be deleted exists in MTR.
+
+Step 1: The user inputs the command `delete-applicant 1`. The app parser simply parses the index 1 and returns the `DeleteApplicantCommand` instance.
+
+Step 2: LogicManager executes this `DeleteApplicantCommand` instance, invoking the `Model#deleteApplicant()` method.
+
+Step 3: This then calls the internal method for `ApplicantBook`, `ApplicantBook#removeApplicant()`, which then removes the applicant thereafter.
+
+The following activity diagram summarizes the actions taken when LogicManager executes the DeleteApplicantCommand:
+[to be added]
+
+#### Design considerations:
+
+**Aspect: How to access and delete an applicant**
+
+* **Alternative 1 (current choice):** [to be added]
+
+* **Alternative 2:** [to be added]
+
+### Edit applicant feature
 
 ### Filter applicants feature
 
@@ -236,6 +282,64 @@ It is also used to in the validation of the filtering criteria.
     - Does not make good use of the in-built functionality of `FilteredList`
 
 *{More to be added}*
+
+
+### List applicants feature
+
+### Add position feature
+
+### Delete position feature
+
+### Edit position feature
+
+### List positions feature
+
+### Rejection Rate feature
+
+#### Proposed Implementation
+
+The proposed rejection rate mechanism is facilitated by `Model` and `Calculator`.
+The `Model` component checks if the position exists and accesses it, while `Calculator` calculates the rejection rate (if applicable).
+Implements the following functions:
+* `ModelManager#hasPositionWithTitle()`  — Checks if a position with a given title exists in the MTR.
+* `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of total applicants and number of rejected applicants for that position.
+
+These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
+
+Given below is an example usage scenario and how the rejection rate mechanism works at every step.
+
+Step 1. The user launches the application which is assumed to have some positions and corresponding applicants applying for them in the MTR.
+
+![InitialState](images/rejection-rates/Initial-state.png)
+
+Step 2. The user executes `rate pos/software engineer` command to calculate the rejection rate of Software Engineer in the PositionBook.
+The `rate` command calls `Model#hasPositionWithTitle`, causing the model to check whether `Software Engineer` exists in the database as a Position.
+
+![Step2](images/rejection-rates/Step2.png)
+
+Step 3. If the position exists, it will access the ApplicantBook via `Model#calculateRejectionRate()`, beginning a count of the number of applicants for the position as well as the number of rejected applicants of the same position.
+
+![Step3](images/rejection-rates/Step3.png)
+
+Step 4. After these numbers have been obtained, the `Calculator` class is called and calculates via `Calculator#calculateRejectionRate`. This resulting floating point number is then the rejection rate of the position.
+
+![SeqDiagram](images/rejection-rates/SeqDiagram.png)
+
+Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
+
+#### Design considerations:
+
+#### Aspect: How rejection rate executes:
+
+* **Alternative 1** (current choice): Calculate the rejection rate only when needed. No storing required.
+    * Pros: Saves a significant amount of space and reduces immutability. Implementation is simple.
+    * Cons: A user could want to calculate many rejection rates frequently and hence not storing these values might have performance issues in the long run.
+* **Alternative 2**: Store all rejection rates with their respective positions in a dictionary.
+    * Pros: Accessing the rejection rates of a certain position will only require access to the dictionary and nothing else - limited accessibility.
+      Also, accessing a rejection rate will be much quicker.
+    * Cons: Potentially a large amount of space required, slowing performance. Also, the dictionary needs to be updated everytime an applicant's status changes or when a position/applicant is added/deleted,
+      which could result in many inter-linked implementations for the dictionary, rendering it slow. May be difficult to show change in UI as well with many layers affected.
+
 
 
 ### \[Proposed\] Undo/redo feature
@@ -322,57 +426,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Add applicant feature
-
-The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
-commands in MTR, it extends the Command class. The most important attribute that it has, is the `ApplicantParticulars`
-attribute, which contains all the details of the applicant (Name, Phone, Email, Address, 
-Title of Position Applying to), parsed straight from the user input.
-
-The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
-applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
-`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
-`applicantBook`, using the `Model#addApplicantWithParticulars` method.
-
-Given below is an example usage scenario and how the add applicant feature behaves at each step.
-Preconditions: The app is already launched and the appropriate position that the new applicant is applying to already
-exist.
-
-Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, 
-block 123, #01-01 pos/software engineer`. The app parser will store all the user-input parameters into an
-`applicantParticulars` object, and return the `AddApplicantCommand` instance.
-
-The following sequence diagram shows the method invocation in this step.
-![AddApplicantSequenceDiagram1](images/AddApplicantSequenceDiagram1.png)
-
-Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the 
-`Model#addApplicantWithParticulars` method.
-
-Step 3. Here, we will retrieve the `position` object from `positionBook`, using the `positionTitle` that the user
-input as argument, and create a new applicant instance using the `applicantParticulars` and `position` object. Then 
-we will add it to the `applicantBook`. 
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If any of the guard clauses fail, i.e. the
-applicant already exist, or the position does not exist, an appropriate exception will be thrown and the applicant
-will not be created.
-
-</div>
-
-The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand:
-![AddApplicantActivityDiagram1](images/AddApplicantActivityDiagram1.png)
-
-#### Design considerations:
-
-**Aspect: How and when the new applicant instance is created:**
-
-* **Alternative 1 (current choice):** Saves all the user input as an applicantParticulars object.
-    * Pros: Avoids the unnecessary clutter of passing multiple parameters to multiple method calls.
-    * Cons: May have lead to greater coupling among classes.
-
-* **Alternative 2:** Each user input parameter (e.g. Name, Address, PositionTitle etc.) are passed to multiple method
-    calls.
-    * Pros: Will reduce the usage of a new class, thereby reducing coupling.
-    * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
 
 
 --------------------------------------------------------------------------------------------------------------------
