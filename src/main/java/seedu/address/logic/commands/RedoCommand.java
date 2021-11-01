@@ -27,12 +27,14 @@ public class RedoCommand extends Command {
         UndoableCommand commandToRedo = undoRedoStack.popRedo();
         Person studentModified = commandToRedo.redo();
 
-        if (studentModified != null && !model.getFilteredPersonList().contains(studentModified)) {
+        if (studentModified != null && !model.hasPersonFilteredList(studentModified)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
 
-        if (commandToRedo.commandType.equals(ClearCommand.COMMAND_ACTION)
-                || commandToRedo.commandType.equals(DeleteCommand.COMMAND_ACTION)) {
+        boolean isClearOrDelete = commandToRedo.commandType.equals(ClearCommand.COMMAND_ACTION)
+                || commandToRedo.commandType.equals(DeleteCommand.COMMAND_ACTION);
+
+        if (isClearOrDelete) {
             String successMessage = commandToRedo.commandType + " command has been redone.";
             return new CommandResult(successMessage);
         }

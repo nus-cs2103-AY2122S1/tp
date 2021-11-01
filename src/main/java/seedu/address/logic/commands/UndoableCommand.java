@@ -33,7 +33,7 @@ public abstract class UndoableCommand extends Command {
     protected abstract Person redo() throws AssertionError;
 
     protected Index setToDefinitiveIndex(Person personToUndo) {
-        ObservableList<Person> mainList = model.getAddressBook().getPersonList();
+        ObservableList<Person> mainList = model.getUnfilteredPersonList();
         Index definitiveIndex = Index.fromZeroBased(mainList.indexOf(personToUndo));
         return definitiveIndex;
     }

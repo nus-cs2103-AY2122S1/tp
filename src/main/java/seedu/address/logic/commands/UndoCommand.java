@@ -30,12 +30,14 @@ public class UndoCommand extends Command {
 
         Person studentModified = commandToUndo.undo();
 
-        if (studentModified != null && !model.getFilteredPersonList().contains(studentModified)) {
+        if (studentModified != null && !model.hasPersonFilteredList(studentModified)) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
 
-        if (commandToUndo.commandType.equals(ClearCommand.COMMAND_ACTION)
-                || commandToUndo.commandType.equals(AddCommand.COMMAND_ACTION)) {
+        boolean isClearOrAdd = commandToUndo.commandType.equals(ClearCommand.COMMAND_ACTION)
+                || commandToUndo.commandType.equals(AddCommand.COMMAND_ACTION);
+
+        if (isClearOrAdd) {
             String successMessage = commandToUndo.commandType + " command has been undone.";
             return new CommandResult(successMessage);
         }
