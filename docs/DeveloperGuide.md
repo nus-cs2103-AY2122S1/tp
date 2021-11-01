@@ -888,12 +888,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Update Completed Appointment**
+**Use case: UC10 - Mark Appointment**
 
 **MSS**
 
 1. User requests to list persons (UC06)
-2. User requests to update a completed appointment.
+2. User requests to mark an appointment.
 3. FAST displays a message indicating success.
 4. FAST displays the new contact below.
 
@@ -903,15 +903,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given index is invalid.
     * 2a1. FAST shows an error message.
-    * 2a2. FAST shows an example of delete appointment command to user.
+    * 2a2. FAST shows an example of mark appointment command to user.
 
 * 2b. No appointment scheduled yet.
     * 2b1. FAST shows an error message.
 
       Use case ends.
+
+
+**Use case: UC11 - Unmark Appointment**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to unmark an appointment.
+3. FAST displays a message indicating success.
+4. FAST displays the new contact below.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of unmark appointment command to user.
+
+* 2b. Appointment already exist.
+    * 2b1. FAST shows an error message.
+
+      Use case ends.
       
 
-**Use case: UC11 - Sort contacts**
+**Use case: UC12 - Sort contacts**
 
 **MSS**
 
@@ -928,7 +951,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The list is empty.
       Use case ends.
       
-**Use case: UC12 - Find Contact by priority**
+**Use case: UC13 - Find Contact by priority**
 
 **MSS**
 
@@ -951,7 +974,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
       
-**Use case: UC13 - Find Contact by tag**
+**Use case: UC14 - Find Contact by tag**
 
 **MSS**
 
@@ -968,7 +991,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
       
-**Use case: UC14 - Find Contact by remark**
+**Use case: UC15 - Find Contact by remark**
 
 **MSS**
 
@@ -991,7 +1014,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC15 - Help command**
+**Use case: UC16 - Help command**
 
 **MSS**
 
@@ -1003,7 +1026,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FAST focuses on the existing help window. Use case ends.
     
 
-**Use case: U16 - Statistics window**
+**Use case: U17 - Statistics window**
 
 **MSS**
 
@@ -1015,7 +1038,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FAST updates and focuses on the existing help window. Use case ends.
     
 
-**Use case: UC17 - Edit tags of a contact**
+**Use case: UC18 - Edit tags of a contact**
 
 **MSS**
 
