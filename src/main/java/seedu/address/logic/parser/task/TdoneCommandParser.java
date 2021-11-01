@@ -1,7 +1,7 @@
 package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 
 import java.util.Set;
 
@@ -26,13 +26,13 @@ public class TdoneCommandParser implements Parser<TdoneCommand> {
     @Override
     public TdoneCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
-                args, PREFIX_TASK_ID);
-        if (!argMultimap.getValue(PREFIX_TASK_ID).isPresent()
+                args, PREFIX_TASK_INDEX);
+        if (!argMultimap.getValue(PREFIX_TASK_INDEX).isPresent()
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TdoneCommand.MESSAGE_USAGE));
         }
 
-        Set<Index> indexSet = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_TASK_ID));
+        Set<Index> indexSet = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_TASK_INDEX));
 
         return new TdoneCommand(indexSet);
     }

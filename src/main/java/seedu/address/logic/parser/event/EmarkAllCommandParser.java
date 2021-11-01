@@ -1,7 +1,7 @@
 package seedu.address.logic.parser.event;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.event.EmarkAllCommand;
@@ -22,12 +22,12 @@ public class EmarkAllCommandParser implements Parser<EmarkAllCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public EmarkAllCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_ID);
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_ID)
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_INDEX);
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmarkAllCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_ID).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT_INDEX).get());
         return new EmarkAllCommand(index);
     }
 }

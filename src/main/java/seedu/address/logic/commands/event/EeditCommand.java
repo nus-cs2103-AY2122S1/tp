@@ -3,8 +3,8 @@ package seedu.address.logic.commands.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
@@ -37,14 +37,14 @@ public class EeditCommand extends Command {
             + "by the index number used in the displayed member list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + PREFIX_EVENT_ID + "EVENT_ID (must be a positive integer)"
+            + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_MEMBER_ID + "MEMBER_ID]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_ID + " 1"
+            + "[" + PREFIX_MEMBER_INDEX + "MEMBER_INDEX]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + " 1"
             + PREFIX_NAME + "Freshman Orientation Week "
             + PREFIX_DATE + "11/11/2021 "
-            + PREFIX_MEMBER_ID + "1 " + PREFIX_MEMBER_ID + "2";
+            + PREFIX_MEMBER_INDEX + "1 " + PREFIX_MEMBER_INDEX + "2";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

@@ -17,7 +17,7 @@ import seedu.address.logic.Logic;
  */
 public class UiManager implements Ui {
 
-    public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
+    public static final String ALERT_DIALOG_PANE_FIELD_INDEX = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/favicon.png";
@@ -72,7 +72,7 @@ public class UiManager implements Ui {
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
-        alert.getDialogPane().setId(ALERT_DIALOG_PANE_FIELD_ID);
+        alert.getDialogPane().setId(ALERT_DIALOG_PANE_FIELD_INDEX);
         alert.showAndWait();
     }
 

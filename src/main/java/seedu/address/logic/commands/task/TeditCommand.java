@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
@@ -33,12 +33,12 @@ public class TeditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the detail of the task identified"
             + "by the index number used in the displayed task list of the task identified\n"
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + PREFIX_TASK_ID + "TASK_ID (must be a positive integer) "
+            + "Parameters: " + PREFIX_TASK_INDEX + "TASK_INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "TASK_NAME] "
             // + "[" + PREFIX_STATUS + "TASK_STATUS] "
             + "[" + PREFIX_DATE + "TASK_DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + "1 "
+            + PREFIX_TASK_INDEX + "1 "
             + PREFIX_NAME + "group meeting "
             + PREFIX_DATE + "24/10/2021 23:59";
 

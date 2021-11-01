@@ -3,7 +3,7 @@ package seedu.address.logic.commands.member;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ABSENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTEND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import java.util.List;
@@ -27,12 +27,12 @@ public class MlistCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all members in Ailurus with filters. \n"
             + "Only one of " + PREFIX_ATTEND + "or " + PREFIX_ABSENT + "may be present\n"
-            + "Parameters: [" + PREFIX_EVENT_ID + "EVENT_ID (must be a positive integer)] "
+            + "Parameters: [" + PREFIX_EVENT_INDEX + "EVENT_INDEX (must be a positive integer)] "
             + "[" + PREFIX_ATTEND + "] "
             + "[" + PREFIX_ABSENT + "] \n"
-            + "Examples: " + COMMAND_WORD + " " + PREFIX_EVENT_ID + "1\n"
-            + COMMAND_WORD + " " + PREFIX_EVENT_ID + "1" + PREFIX_ATTEND + "\n"
-            + COMMAND_WORD + " " + PREFIX_EVENT_ID + "1" + PREFIX_ABSENT + "\n";
+            + "Examples: " + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1\n"
+            + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1" + PREFIX_ATTEND + "\n"
+            + COMMAND_WORD + " " + PREFIX_EVENT_INDEX + "1" + PREFIX_ABSENT + "\n";
 
     public static final String MESSAGE_SUCCESS = "Member(s) listed: %1$s members %2$s";
 
