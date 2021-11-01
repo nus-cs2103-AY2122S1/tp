@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class EventDate implements Comparable<EventDate> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date does not exists!";
+    public static final String MESSAGE_CONSTRAINTS = "Date does not exist!";
     public static final String MESSAGE_DATE_FORMAT_ERROR = "Dates should be in YYYY-MM-DD format!";
     public static final String DATE_FORMAT = "y-M-d";
 

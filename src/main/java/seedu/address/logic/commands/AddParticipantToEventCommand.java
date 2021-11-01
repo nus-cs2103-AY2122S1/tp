@@ -17,7 +17,7 @@ public class AddParticipantToEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds Participant with specified index to an event with another specified index.\n"
-            + "Index should be positive integer.\n"
+            + "Indexes should be positive integers.\n"
             + "Parameters: "
             + "PARTICIPANT_INDEX "
             + "EVENT_INDEX\n"

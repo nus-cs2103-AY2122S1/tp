@@ -18,7 +18,7 @@ public class BirthDate {
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date of birth cannot be in the future.";
     public static final String MESSAGE_DATE_FORMAT_ERROR = "Dates should be in YYYY-MM-DD format!";
-    public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exists!";
+    public static final String MESSAGE_DATE_DOES_NOT_EXIST = "Date does not exist!";
     public static final String DATE_FORMAT = "y-M-d";
     private final LocalDate date;
 
