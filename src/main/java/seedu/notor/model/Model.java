@@ -191,5 +191,5 @@ public interface Model {
 
     boolean isSuperGroupList();
 
-    boolean isArchiveView();
+    boolean isArchiveList();
 }

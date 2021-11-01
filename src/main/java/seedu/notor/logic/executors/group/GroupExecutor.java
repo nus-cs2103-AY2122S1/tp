@@ -19,14 +19,14 @@ public abstract class GroupExecutor extends Executor {
         checkGroupView();
         List<? extends Group> lastShownList = model.getFilteredGroupList();
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new ExecuteException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         return lastShownList.get(index.getZeroBased());
     }
 
     protected void checkGroupView() throws ExecuteException {
-        if (model.isPersonList()) {
+        if (model.isPersonList() || model.isArchiveList()) {
             throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
         }
     }

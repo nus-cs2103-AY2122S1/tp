@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import com.opencsv.bean.CsvBindAndSplitByName;
 import com.opencsv.bean.CsvBindByName;
 
+import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.Notable;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.common.Note;
@@ -116,7 +117,7 @@ public class Person implements Unique<Person>, Notable {
      * @param group Group to be added to the current Person instance.
      * @throws DuplicateItemException If group has already been added to the current Person instance.
      */
-    public void addGroup(Group group) throws DuplicateItemException {
+    public void addGroup(Group group) throws DuplicateItemException, ExecuteException {
         if (group instanceof SuperGroup) {
             addSuperGroup((SuperGroup) group);
         }
@@ -157,9 +158,14 @@ public class Person implements Unique<Person>, Notable {
      * @param subGroup the SubGroup to be added to that person.
      * @throws DuplicateItemException if person is already in the group.
      */
-    public void addSubGroup(SubGroup subGroup) {
+    public void addSubGroup(SubGroup subGroup) throws ExecuteException {
         if (displaySubGroups.contains(subGroup.toString())) {
             throw new DuplicateItemException();
+        }
+        if (!displaySuperGroups.contains(subGroup.getParent())) {
+            String errorMsg = String.format("%1$s does not belong in %2$s. Please add him to %3$s first.",
+                this.name, subGroup.getParent(), subGroup.getParent());
+            throw new ExecuteException(errorMsg);
         }
         displaySubGroups.add(subGroup.toString());
     }

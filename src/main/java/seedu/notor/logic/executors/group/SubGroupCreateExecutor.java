@@ -10,8 +10,8 @@ import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 
 public class SubGroupCreateExecutor extends GroupExecutor {
-    public static final String MESSAGE_SUCCESS = "Subgroup %s created";
-    public static final String MESSAGE_DUPLICATE_GROUP = "Subgroup already exists";
+    public static final String MESSAGE_SUCCESS = "Subgroup %s created.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Subgroup %1$s already exists.";
 
     private final SubGroup subGroup;
 
@@ -28,23 +28,21 @@ public class SubGroupCreateExecutor extends GroupExecutor {
 
     @Override public CommandResult execute() throws ExecuteException {
         try {
-            if (model.getFilteredGroupList().size() >= index.getOneBased()) {
-                Group group = model.getFilteredGroupList().get(index.getZeroBased());
-                // TODO: Guard clause for if group is a SubGroup instead.
-                // Make it return its own type of error.
-                if (model.isSuperGroupList()) {
+            if (model.isSuperGroupList()) {
+                if (model.getFilteredGroupList().size() >= index.getOneBased()) {
+                    Group group = model.getFilteredGroupList().get(index.getZeroBased());
+                    // Make it return its own type of error.
                     SuperGroup superGroup = (SuperGroup) group;
-                    superGroup.addSubGroup(subGroup);
                     subGroup.setParent(superGroup);
+                    superGroup.addSubGroup(subGroup);
                     return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
+                } else {
+                    throw new ExecuteException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
                 }
-                throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
-            } else {
-                // TODO: stub error message, this is supposed to be for when index is out of bounds.
-                throw new ExecuteException("");
             }
+            throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
         } catch (DuplicateItemException e) {
-            throw new ExecuteException(MESSAGE_DUPLICATE_GROUP);
+            throw new ExecuteException(String.format(MESSAGE_DUPLICATE_GROUP, subGroup));
         }
     }
 

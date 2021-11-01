@@ -1,12 +1,15 @@
 package seedu.notor.ui.note;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.StackPane;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.ui.ConfirmationWindow;
 import seedu.notor.ui.ResultDisplay;
+import seedu.notor.ui.listpanel.GroupListPanel;
+import seedu.notor.ui.listpanel.SubgroupListPanel;
 
 public class GroupNoteWindow extends NoteWindow {
 
@@ -14,14 +17,16 @@ public class GroupNoteWindow extends NoteWindow {
     private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Group: %1$s";
 
     private final Group group;
+    private final StackPane listPanelPlaceholder;
 
     /**
      * Creates a new NoteWindow.
      */
-    public GroupNoteWindow(Group group, Logic logic, ResultDisplay resultDisplay) {
+    public GroupNoteWindow(Group group, Logic logic, ResultDisplay resultDisplay, StackPane listPanelPlaceholder) {
         super(logic, resultDisplay);
         noteTextArea.setText(group.getNote().value);
         this.group = group;
+        this.listPanelPlaceholder = listPanelPlaceholder;
         confirmationWindow = new ConfirmationWindow(group.getName(), this);
         getRoot().setTitle(group.getName());
         noteTextArea.setWrapText(true);
@@ -47,6 +52,15 @@ public class GroupNoteWindow extends NoteWindow {
     @FXML
     @Override
     public void handleSave() throws CommandException {
+        if (!logic.isPersonList() && !logic.isArchiveList()) {
+            if (logic.isSuperGroupList()) {
+                GroupListPanel listPanel = new GroupListPanel(logic.getFilteredSuperGroupList());
+                listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+            } else {
+                SubgroupListPanel listPanel = new SubgroupListPanel(logic.getFilteredSubGroupList());
+                listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+            }
+        }
         String paragraph = noteTextArea.getText();
         Note editedNote = Note.of(paragraph, noteLastModified());
         group.setNote(editedNote);

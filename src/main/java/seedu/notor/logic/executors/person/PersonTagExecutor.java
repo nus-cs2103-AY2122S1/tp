@@ -59,7 +59,8 @@ public class PersonTagExecutor extends PersonExecutor {
         updatedTags.addAll(tags);
 
         return new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
-                personToTag.getNote(), updatedTags);
+                personToTag.getNote(), updatedTags, personToTag.getDisplaySuperGroups(),
+                    personToTag.getDisplaySubGroups());
     }
 
     @Override

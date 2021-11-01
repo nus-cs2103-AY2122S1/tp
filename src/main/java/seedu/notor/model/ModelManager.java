@@ -34,8 +34,7 @@ public class ModelManager implements Model {
     private FilteredList<? extends Group> filteredGroups;
     private boolean isPersonList;
     private boolean isSuperGroupList;
-    private boolean isGroupList;
-    private boolean isArchiveView = false;
+    private boolean isArchiveList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -52,6 +51,7 @@ public class ModelManager implements Model {
         // Person view is first shown.
         isPersonList = true;
         isSuperGroupList = false;
+        isArchiveList = false;
     }
 
     public ModelManager() {
@@ -180,19 +180,17 @@ public class ModelManager implements Model {
     @Override
     public void addSuperGroup(SuperGroup superGroup) {
         notor.addSuperGroup(superGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void addSuperGroup(String superGroup) throws ParseException {
         notor.addSuperGroup(superGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         notor.deleteSuperGroup(superGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        listSuperGroup();
     }
 
     @Override
@@ -204,7 +202,6 @@ public class ModelManager implements Model {
     public void deleteSubGroup(SubGroup subGroup) {
         SuperGroup parent = (SuperGroup) notor.findGroup(subGroup.getParent());
         parent.deleteSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =========================================
@@ -224,7 +221,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         isPersonList = true;
         isSuperGroupList = false;
-        isGroupList = false;
         filteredPersons.setPredicate(predicate);
     }
 
@@ -243,8 +239,7 @@ public class ModelManager implements Model {
     public void listSuperGroup() {
         isPersonList = false;
         isSuperGroupList = true;
-        isGroupList = true;
-        isArchiveView = false;
+        isArchiveList = false;
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
     }
 
@@ -252,7 +247,7 @@ public class ModelManager implements Model {
     public void displayPersons() {
         isPersonList = true;
         isSuperGroupList = false;
-        isArchiveView = false;
+        isArchiveList = false;
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         personListPanel.setPersonList(filteredPersons);
@@ -265,7 +260,7 @@ public class ModelManager implements Model {
     public void listSubGroup(Index i) {
         isPersonList = false;
         isSuperGroupList = false;
-        isArchiveView = false;
+        isArchiveList = false;
         // TODO: Abstract this. This method is too long.
         filteredGroups = new FilteredList<>(this.notor.getSuperGroups().get(i.getZeroBased()).getSubGroups()
             .asUnmodifiableObservableList());
@@ -275,7 +270,7 @@ public class ModelManager implements Model {
     public void displayPersonArchive() {
         isPersonList = true;
         isSuperGroupList = false;
-        isArchiveView = true;
+        isArchiveList = true;
         filteredPersons = new FilteredList<>(this.notor.getPersonArchiveList());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         personListPanel.setPersonList(filteredPersons);
@@ -293,8 +288,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean isArchiveView() {
-        return isPersonList && isArchiveView;
+    public boolean isArchiveList() {
+        return isPersonList && isArchiveList;
     }
 
 
