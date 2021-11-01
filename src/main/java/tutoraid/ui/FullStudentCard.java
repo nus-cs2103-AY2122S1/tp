@@ -42,8 +42,6 @@ public class FullStudentCard extends Card<Student> {
     @FXML
     private Label progress;
     @FXML
-    private Label paymentStatus;
-    @FXML
     private Label lessons;
 
 

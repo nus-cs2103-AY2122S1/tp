@@ -77,21 +77,11 @@ import static tutoraid.commons.core.HelpGuide.LIST_GENERAL_COMMAND;
 import static tutoraid.commons.core.HelpGuide.LIST_TITLE;
 import static tutoraid.commons.core.HelpGuide.L_FLAG;
 import static tutoraid.commons.core.HelpGuide.OVERVIEW;
-import static tutoraid.commons.core.HelpGuide.PAID_COMMAND;
-import static tutoraid.commons.core.HelpGuide.PAID_DESC;
-import static tutoraid.commons.core.HelpGuide.PAID_EXAMPLE;
-import static tutoraid.commons.core.HelpGuide.PAID_EXAMPLE_DESC;
-import static tutoraid.commons.core.HelpGuide.PAID_TITLE;
 import static tutoraid.commons.core.HelpGuide.QUICK_START;
 import static tutoraid.commons.core.HelpGuide.QUICK_START_TITLE;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_DESC;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_TITLE;
 import static tutoraid.commons.core.HelpGuide.S_FLAG;
-import static tutoraid.commons.core.HelpGuide.UNPAID_COMMAND;
-import static tutoraid.commons.core.HelpGuide.UNPAID_DESC;
-import static tutoraid.commons.core.HelpGuide.UNPAID_EXAMPLE;
-import static tutoraid.commons.core.HelpGuide.UNPAID_EXAMPLE_DESC;
-import static tutoraid.commons.core.HelpGuide.UNPAID_TITLE;
 import static tutoraid.commons.core.HelpGuide.USER_GUIDE_TITLE;
 import static tutoraid.commons.core.HelpGuide.VIEW_L_COMMAND;
 import static tutoraid.commons.core.HelpGuide.VIEW_L_DESC;
@@ -300,28 +290,6 @@ public class HelpWindow extends UiPart<Stage> {
     private Label delPExampleDesc;
 
     @FXML
-    private Label paidTitle;
-    @FXML
-    private Label paidCommand;
-    @FXML
-    private Label paidDesc;
-    @FXML
-    private Label paidExample;
-    @FXML
-    private Label paidExampleDesc;
-
-    @FXML
-    private Label unpaidTitle;
-    @FXML
-    private Label unpaidCommand;
-    @FXML
-    private Label unpaidDesc;
-    @FXML
-    private Label unpaidExample;
-    @FXML
-    private Label unpaidExampleDesc;
-
-    @FXML
     private Label findTitle;
     @FXML
     private Label findCommand;
@@ -449,8 +417,6 @@ public class HelpWindow extends UiPart<Stage> {
         deleteLessonFeature();
         editLessonFeature();
         viewLessonFeature();
-        paidFeature();
-        unpaidFeature();
         clearFeature();
         exitFeature();
         findFeature();
@@ -665,34 +631,6 @@ public class HelpWindow extends UiPart<Stage> {
         delPCommand.setText(DEL_P_COMMAND);
         delPExample.setText(DEL_P_EXAMPLE);
         delPExampleDesc.setText(DEL_P_EXAMPLE_DESC);
-    }
-
-    /**
-     * Creates the 'paid feature' section.
-     */
-    public void paidFeature() {
-        format8.setText(FORMAT);
-        example7.setText(EXAMPLE);
-
-        paidTitle.setText(PAID_TITLE);
-        paidDesc.setText(PAID_DESC);
-        paidCommand.setText(PAID_COMMAND);
-        paidExample.setText(PAID_EXAMPLE);
-        paidExampleDesc.setText(PAID_EXAMPLE_DESC);
-    }
-
-    /**
-     * Creates the 'unpaid feature' section.
-     */
-    public void unpaidFeature() {
-        format9.setText(FORMAT);
-        example8.setText(EXAMPLE);
-
-        unpaidTitle.setText(UNPAID_TITLE);
-        unpaidDesc.setText(UNPAID_DESC);
-        unpaidCommand.setText(UNPAID_COMMAND);
-        unpaidExample.setText(UNPAID_EXAMPLE);
-        unpaidExampleDesc.setText(UNPAID_EXAMPLE_DESC);
     }
 
     /**
