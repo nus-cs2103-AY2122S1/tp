@@ -104,9 +104,9 @@ class JsonAdaptedOrder {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "isComplete"));
         }
         if (isComplete.equals("true")) {
-            newOrder.setIsComplete(true);
+            newOrder.markCompleted();
         } else if (isComplete.equals("false")) {
-            newOrder.setIsComplete(false);
+            // intentionally allow fall through
         } else {
             throw new IllegalValueException("Something is wrong");
         }

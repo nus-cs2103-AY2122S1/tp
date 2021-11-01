@@ -44,7 +44,7 @@ public class Label {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Label
-                && checkedLabel.equals(((Label) other).checkedLabel));
+                && checkedLabel.equalsIgnoreCase(((Label) other).checkedLabel));
     }
 
     @Override

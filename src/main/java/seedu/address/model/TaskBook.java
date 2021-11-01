@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
+import seedu.address.model.task.UniqueTaskList;
 
 
 /**
@@ -14,7 +14,7 @@ import seedu.address.model.task.TaskList;
  */
 public class TaskBook implements ReadOnlyTaskBook {
 
-    private final TaskList tasks;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class TaskBook implements ReadOnlyTaskBook {
      *   among constructors.
      */
     {
-        tasks = new TaskList();
+        tasks = new UniqueTaskList();
     }
 
     public TaskBook() {}
 
     /**
-     * Creates a TaskList using the Tasks in the {@code toBeCopied}
+     * Creates a UniqueTaskList using the Tasks in the {@code toBeCopied}
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this();
@@ -68,8 +68,8 @@ public class TaskBook implements ReadOnlyTaskBook {
         tasks.removeIf(pred);
     }
 
-    public void markDone(Task task) {
-        tasks.markDone(task);
+    public boolean markDone(Task task) {
+        return tasks.markDone(task);
     }
 
     public void setTask(Task target, Task editedTask) {

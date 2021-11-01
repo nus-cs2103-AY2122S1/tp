@@ -135,13 +135,19 @@ Format: `list`
 
 ### Adding a client : `add`
 
-Adds a client to the application.
+Allows you to add a client to the application. 
+
+Note that two clients are regarded as their names are the same! As two individuals having the exact same name
+is quite a rare occurrence, we felt this was more likely to be a user mistake we wanted to guard against, then
+it was to be an intentional choice. If you happen to have two clients with the exact same name, our recommendation
+is to add a number, to be clear that this was intentional. (e.g., adding Jane Lim and Jane Lim1).
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0). The remark is also optional.
 </div>
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
@@ -166,6 +172,10 @@ Examples:
 Edits an existing client in the application.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [m/MEASUREMENT] [g/GENDER] [r/REMARK] [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+Do not forget to edit the body measurements when you modify the client's gender.
+</div>
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -264,7 +274,7 @@ Format: `marktask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtask` followed by `deletetask 2` deletes the 2nd client in the application.
+* `listtask` followed by `marktask 2` marks the the 2nd task displayed as done.
 
 ### Finding tasks by keywords : `findtask`
 
@@ -374,9 +384,9 @@ Format: `sortorders f/FIELD o/ORDERING`
   * Ascending, identified with an "asc" or "ascending".
   * Descending, identified with a "desc" or "descending".
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
-**:information_source: Note:** <br>
+**:information_source: Note:**<br>
 
 * Adding / Deleting an order reverts the list to the default ordering.
 * The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
