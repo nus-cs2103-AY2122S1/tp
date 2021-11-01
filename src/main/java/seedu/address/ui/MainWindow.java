@@ -314,6 +314,14 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
     }
 
+    private void handleStudents(CommandResult commandResult) {
+        if (commandResult.getStudent().isPresent()) {
+            Person student = commandResult.getStudent().get();
+            handlePersonGridPanel(student);
+        } else {
+            handlePersonGridPanel();
+        }
+    }
     /**
      * Displays tag list instead of the default person list.
      */
@@ -347,12 +355,7 @@ public class MainWindow extends UiPart<Stage> {
                 break;
 
             case STUDENTS:
-                if (commandResult.getStudent().isPresent()) {
-                    Person student = commandResult.getStudent().get();
-                    handlePersonGridPanel(student);
-                } else {
-                    handlePersonGridPanel();
-                }
+                handleStudents(commandResult);
                 break;
 
             case TAGS:
