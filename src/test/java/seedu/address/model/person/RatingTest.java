@@ -35,7 +35,7 @@ public class RatingTest {
         assertFalse(Rating.isValidRating(" ")); // spaces only
         assertFalse(Rating.isValidRating("91")); // more than 2 numbers
         assertFalse(Rating.isValidRating("r")); // non-numeric
-        assertFalse(Rating.isValidRating("-1")); // out of range
+        assertFalse(Rating.isValidRating("0")); // out of range
         assertFalse(Rating.isValidRating("6")); // out of range
         assertFalse(Rating.isValidRating("2.5")); // not integer
 
