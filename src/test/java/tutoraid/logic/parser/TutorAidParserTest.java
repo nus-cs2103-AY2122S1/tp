@@ -6,6 +6,7 @@ import static tutoraid.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutoraid.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import tutoraid.logic.commands.ClearCommand;
 import tutoraid.logic.commands.ExitCommand;
 import tutoraid.logic.commands.HelpCommand;
@@ -42,8 +43,9 @@ public class TutorAidParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
