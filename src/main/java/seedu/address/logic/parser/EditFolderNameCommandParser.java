@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.List;
-
 import seedu.address.logic.commands.EditFolderNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.Folder;
@@ -22,31 +20,14 @@ public class EditFolderNameCommandParser implements Parser<EditFolderNameCommand
      * @throws ParseException if the given {@code folderName} is invalid.
      */
     public EditFolderNameCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, new Prefix(""));
-        List<String> allValues = argMultimap.getAllValues(new Prefix(""));
-        if (allValues.size() <= 1) {
+        if (args.length() == 0) {
             throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditFolderNameCommand.MESSAGE_USAGE));
+                    MESSAGE_INVALID_COMMAND_FORMAT, EditFolderNameCommand.MESSAGE_USAGE));
         }
-        FolderName[] folderNames = extractFolderNames(allValues);
+        FolderName[] folderNames = extractIndividualFolders(args);
         assert folderNames.length == 2 : "Should have exactly 2 folders only!";
 
         return new EditFolderNameCommand(new Folder(folderNames[0]), new Folder(folderNames[1]));
-    }
-
-    /**
-     * Extracts the elements relevant to the
-     * folder names from {@code List} of inputs
-     * and returns 2 folder names {@code FolderName[]}
-     * @param allValues {@code List} of inputs
-     * @return folder names {@code FolderName[]}
-     * @throws ParseException if the given {@code folderNames} are invalid.
-     */
-    private FolderName[] extractFolderNames(List<String> allValues) throws ParseException {
-        String folderStringNames = buildFolderStringNames(allValues);
-        FolderName[] allFolderNames = extractIndividualFolders(folderStringNames);
-        return allFolderNames;
     }
 
     /**
@@ -78,23 +59,6 @@ public class EditFolderNameCommandParser implements Parser<EditFolderNameCommand
         }
 
         return allFolderNames;
-    }
-
-    /**
-     * Concatenates the multiple folder names into a single string.
-     * @param allValues {@code List} of inputs
-     * @return concatenated folder names {@code String}
-     */
-    private String buildFolderStringNames(List<String> allValues) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 1; i < allValues.size(); i++) {
-            if (i > 1) {
-                stringBuilder.append(" ").append(allValues.get(i));
-                continue;
-            }
-            stringBuilder.append(allValues.get(i));
-        }
-        return stringBuilder.toString();
     }
 
 }
