@@ -170,12 +170,6 @@ public interface Model {
      */
     void setGroup(Group target, Group editedGroup);
 
-    /**
-     * Adds the given github link {@code target} to a group of {@code name}.
-     * A group of {@code name} must exist in the group list.
-     */
-    void addGithubGroup(LinkYear year, RepoName repoName, Group group);
-
     /** Returns an unmodifiable view of the filtered group list */
     ObservableList<Group> getFilteredGroupList();
 

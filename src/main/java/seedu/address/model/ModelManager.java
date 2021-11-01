@@ -287,14 +287,6 @@ public class ModelManager implements Model {
         addressBook.setGroup(target, editedGroup);
     }
 
-    @Override
-    public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
-        requireAllNonNull(year, repoName, group);
-        Group newGroup = new Group(group.getName(), group.getMembers(), year, repoName, group.getTags());
-        addressBook.setGroup(group, newGroup);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-    }
-
     //=========== Filtered Student List Accessors =============================================================
 
     /**

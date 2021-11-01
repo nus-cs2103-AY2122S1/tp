@@ -249,11 +249,6 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Group> getFilteredGroupList() {
             throw new AssertionError("This method should not be called.");
         }
