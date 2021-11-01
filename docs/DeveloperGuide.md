@@ -193,6 +193,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Ordering
+
+### Implementation
+
+When ModelManager is initialised, optionalOrder is set to Optional.empty(). 
+At this point, the user has 1 order record with 2 items in his transaction list.
+
+![Initial_State](images/OrderInitialState.png)
+
+Step 1. The user enters ordering mode via the `sorder` command.
+
+Upon entering the ordering mode, optionalOrder now has a new Order() which is empty
+
+![Sorder_State](images/OrderSorderState.png)
+
+Step 2. The user adds an item to the order via the `iorder` command.
+
+Upon entering `iorder Banana c/1`, the order now contains 1 banana item.
+
+![Iorder_State](images/OrderItem1State.png)
+
+Next, upon entering `iorder Strawberry c/1`, the order now contains 1 strawberry item.
+
+![Iorder_State](images/OrderItem2State.png)
+
+Step 3. The user transacts the order via the `eorder` command.
+
+After the transaction is done, optionalOrder is reinitialised to Optional.empty()
+
+![Initial_State](images/OrderFinalState.png)
+
+Step 4. The new transactions are saved to json file.
+
+![Transact_Order_Sequence_Diagram](images/TransactOrderSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
