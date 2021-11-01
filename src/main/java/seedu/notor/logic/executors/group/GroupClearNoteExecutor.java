@@ -2,7 +2,6 @@ package seedu.notor.logic.executors.group;
 
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -35,13 +34,9 @@ public class GroupClearNoteExecutor extends GroupExecutor {
         Group group = super.getGroup();
         WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE, group));
         warningWindow.show();
-        // TODO: To update the if true after list is done. it is suppose to check person view.
         if (warningWindow.canContinue()) {
-            if (!model.isPersonList()) {
-                group.setNote(Note.EMPTY_NOTE);
-                return new CommandResult(String.format(MESSAGE_CLEAR_GROUP_NOTE_SUCCESS, group));
-            }
-            throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
+            group.setNote(Note.EMPTY_NOTE);
+            return new CommandResult(String.format(MESSAGE_CLEAR_GROUP_NOTE_SUCCESS, group));
         }
         return new CommandResult(MESSAGE_CLEAR_GROUP_NOTE_CANCEL);
     }
