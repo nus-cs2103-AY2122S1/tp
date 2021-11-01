@@ -83,6 +83,8 @@ public class SetUpScreen extends UiPart<Stage> {
         } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
                 | InvalidAlgorithmParameterException e) {
             responseDisplay.setText("Something went wrong, try again!");
+            userInputPassword.clear();
+            userConfirmPassword.clear();
         }
     }
 

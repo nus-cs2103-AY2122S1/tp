@@ -9,20 +9,22 @@ public class PasswordCommand extends Command {
     public static final String COMMAND_WORD = "password";
 
     public static final int MIN_PASSWORD_LENGTH = 8;
+    public static final int MAX_PASSWORD_LENGTH = 32;
 
     public static final String CORRECT_PASSWORD_FORMAT =
-            "Password should contain LETTERS, SPECIAL CHARACTERS and NUMBERS "
-            + "at least length of "
-            + MIN_PASSWORD_LENGTH;
+            "Password should contain LETTERS, SPECIAL CHARACTERS and NUMBERS."
+            + "Password length should be between "
+            + MIN_PASSWORD_LENGTH
+            + " and "
+            + MAX_PASSWORD_LENGTH;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_OLD_PASSWORD + " oldPassword "
-            + PREFIX_NEW_PASSWORD + " newPassword"
-            + System.lineSeparator()
-            + CORRECT_PASSWORD_FORMAT;
+            + PREFIX_NEW_PASSWORD + " newPassword";
 
     public static final String MESSAGE_SUCCESS = "Password updated!";
-    public static final String MESSAGE_WRONG_PASSWORD = "Password updated!";
+    public static final String MESSAGE_WRONG_PASSWORD = "Wrong password. Please try again!";
     public static final String MESSAGE_FAIL = "Something went wrong. Please try again!";
+    public static final String MESSAGE_INVALID＿PASSWORD = "Invalid password!";
 
     private final String oldPassword;
     private final String newPassword;
