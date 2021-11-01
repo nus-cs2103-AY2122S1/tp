@@ -456,6 +456,15 @@ Currently, the stats window provides information for the client's Priority Tags,
 `JavaFX::PieChart` to visualise the client's data and display them to the user. We also provided a few template insights
 for the user to make sense of the data provided.
 
+To calculate the statistics to be shown in the Priority pie chart, we took the data from `Fast` by applying different predicates
+and creating a new `FilteredList` each time. We then encapsulated all these data into a `PriorityData`, which is then 
+passed to `StatsWindow` to populate the pie chart with the data and generate the labels. This is illustrated in the sequence diagram
+as shown below.
+
+![Stats Window Sequence Diagram](images/StatsWindowSequenceDiagram.png).
+
+The implementation for Investment Plan Tag statistics is identical.
+
 #### Design Considerations
 
 **Aspect: How to visualise the data**

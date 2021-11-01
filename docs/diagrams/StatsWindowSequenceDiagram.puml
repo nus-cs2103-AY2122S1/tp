@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+
+
+participant ":StatsWindow" as StatsWindow UI_COLOR
+
+
+
+participant ":Fast" as Fast MODEL_COLOR
+
+activate StatsWindow UI_COLOR
+[-[UI_COLOR]> StatsWindow : StatsWindow()
+StatsWindow -[UI_COLOR]> StatsWindow : populatePriorityPieChart()
+StatsWindow -[UI_COLOR]> Fast : getPriorityData()
+
+activate Fast MODEL_COLOR
+Fast --[MODEL_COLOR]> StatsWindow : pData
+deactivate Fast
+
+StatsWindow -[UI_COLOR]> StatsWindow : addPriorityPieChartAnalysis(pData)
+StatsWindow -[UI_COLOR]>StatsWindow : addPriorityPieChartData(pData)
+
+
+
+
+
+
+
+
+@enduml
