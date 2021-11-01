@@ -38,8 +38,10 @@ public class DeliveryDetailsTest {
         assertFalse(DeliveryDetails.isValidDeliveryDetail("26-2021-21"));
         // only enter time in 12hr format
         assertFalse(DeliveryDetails.isValidDeliveryDetail("12:00 AM"));
-        //only enter time in 24hr format
+        //only enter time in 24hr format with colon
         assertFalse(DeliveryDetails.isValidDeliveryDetail("12:00"));
+        //only enter time in 24hr format without colon
+        assertFalse(DeliveryDetails.isValidDeliveryDetail("1200"));
         // invalid time format
         assertFalse(DeliveryDetails.isValidDeliveryDetail("12:00 am 2021-12-25"));
         //invalid date
@@ -50,18 +52,26 @@ public class DeliveryDetailsTest {
         assertFalse(DeliveryDetails.isValidDeliveryDetail("1:00 PM 26-12-2021"));
         // yyyy-MM-dd date format followed by invalid 12 hr clock format
         assertFalse(DeliveryDetails.isValidDeliveryDetail("2021-12-25 12:00 AM"));
-        // dd-MM-yyyy date format followed by valid 12 hr clock format
+        // dd-MM-yyyy date format followed by invalid 12 hr clock format
         assertFalse(DeliveryDetails.isValidDeliveryDetail("26-12-2021 1:00 PM"));
 
         // valid delivery details
         // valid 24 hr clock format followed by valid yyyy-MM-dd date format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("08:00 2021-01-15"));
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("0800 2021-01-15"));
         // valid 24 hr clock format followed by valid dd-MM-yyyy date format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("06:30 14-02-2021"));
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("0630 14-02-2021"));
         // valid yyyy-MM-dd date format followed by valid 24 hr clock format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("2021-01-15 08:00"));
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("2021-01-15 0800"));
         // valid dd-MM-yyyy date format followed by valid 24 hr clock format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("14-02-2021 06:30"));
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("14-02-2021 0630"));
+        // valid 24 hr clock format with colon followed by valid yyyy-MM-dd date format
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("12:00 2021-12-25"));
+        // valid 24 hr clock format with colon followed by valid dd-MM-yyyy date format
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("13:00 26-12-2021"));
+        // yyyy-MM-dd date format followed by valid 24 hr clock format with colon
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("2021-12-25 12:00"));
+        // dd-MM-yyyy date format followed by valid 24 hr clock format with colon
+        assertTrue(DeliveryDetails.isValidDeliveryDetail("26-12-2021 13:00"));
     }
 
     @Test

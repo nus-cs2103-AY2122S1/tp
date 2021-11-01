@@ -34,19 +34,19 @@ public class TypicalSuppliers {
     public static final Supplier CHETWIN = new SupplierBuilder().withName("Chetwin Low")
             .withAddress("5 Faber Drive").withEmail("chetty@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").withSupplyType("Chicken Breast")
-            .withDeliveryDetails("05-05-2021 16:30").build();
+            .withDeliveryDetails("05-05-2021 1630").build();
     public static final Supplier THANG = new SupplierBuilder().withName("Pham Ba Thang").withPhone("95352563")
             .withEmail("thang@example.com").withAddress("wall street").withSupplyType("Pineapples")
             .withDeliveryDetails("2021-10-17 18:15").build();
     public static final Supplier CLEMENT = new SupplierBuilder().withName("Kong Fanji").withPhone("87652533")
             .withEmail("Fanji@example.com").withAddress("10th street").withTags("friends")
-            .withSupplyType("Duel Masters").withDeliveryDetails("21-10-2021 11:00").build();
+            .withSupplyType("Duel Masters").withDeliveryDetails("21-10-2021 1100").build();
     public static final Supplier HERNPING = new SupplierBuilder().withName("Hern Ping").withPhone("9482224")
             .withEmail("hp@example.com").withAddress("michegan ave").withSupplyType("Hernpiblo")
             .withDeliveryDetails("11:30 22-10-2021").build();
     public static final Supplier FIORA = new SupplierBuilder().withName("Fiora Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withSupplyType("Beef")
-            .withDeliveryDetails("10:30 23-10-2021").build();
+            .withDeliveryDetails("1030 23-10-2021").build();
     public static final Supplier GREG = new SupplierBuilder().withName("Greg Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withSupplyType("Fish")
             .withDeliveryDetails("09:30 2021-10-24").build();
@@ -54,7 +54,7 @@ public class TypicalSuppliers {
     // Manually added
     public static final Supplier HOON_SUPPLIER = new SupplierBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").withSupplyType("Mee Hoon Kueh")
-            .withDeliveryDetails("07:30 2021-10-25").build();
+            .withDeliveryDetails("0730 2021-10-25").build();
     public static final Supplier IDA_SUPPLIER = new SupplierBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withSupplyType("Pork")
             .withDeliveryDetails("15:00 2021-12-25").build();
