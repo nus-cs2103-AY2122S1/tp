@@ -15,8 +15,6 @@ import seedu.address.model.student.Student;
  */
 public class StudentCard extends UiPart<Region> {
 
-    private static final String FXML = "StudentListCard.fxml";
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -26,6 +24,8 @@ public class StudentCard extends UiPart<Region> {
      */
 
     public final Student student;
+
+    private static final String FXML = "StudentListCard.fxml";
 
     @FXML
     private HBox cardPane;

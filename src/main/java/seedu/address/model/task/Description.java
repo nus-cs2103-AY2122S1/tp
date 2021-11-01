@@ -7,8 +7,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Description {
 
-    private static final String REGEX = "[\\x00-\\x7F]*";
-
     public static final String MESSAGE_CONSTRAINTS =
             "Descriptions should only contain ASCII characters.";
 
@@ -16,6 +14,8 @@ public class Description {
             new Description("");
 
     public final String description;
+
+    private static final String REGEX = "[\\x00-\\x7F]*";
 
     /**
      * Constructs a {@code Description}.
