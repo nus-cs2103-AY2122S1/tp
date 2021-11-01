@@ -192,7 +192,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         PersonDetails personDetails = new PersonDetails(null);
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetails);
+        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
+        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetails, tabPaneHeader);
         logic.setPersonList(personListPanel);
 
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -200,11 +202,8 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
         personListPanelPlaceholder.getChildren().add(progressIndicator.getRoot());
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
         tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
         personListPanel.setTabPaneHeader(tabPaneHeader);
