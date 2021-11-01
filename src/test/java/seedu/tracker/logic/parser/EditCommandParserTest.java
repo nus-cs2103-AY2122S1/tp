@@ -6,7 +6,6 @@ import static seedu.tracker.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS21
 import static seedu.tracker.logic.commands.CommandTestUtil.DESCRIPTION_DESC_GEQ1000;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_MC_DESC;
-import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_TITLE_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_CS2103T;
 import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_GEQ1000;
@@ -82,7 +81,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_CODE_DESC, Code.MESSAGE_CONSTRAINTS); // invalid code
         assertParseFailure(parser, "1" + INVALID_TITLE_DESC, Title.MESSAGE_CONSTRAINTS); // invalid title
         assertParseFailure(parser, "1" + INVALID_MC_DESC, Mc.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid title followed by valid email
         assertParseFailure(parser, "1" + INVALID_TITLE_DESC + MC_DESC_CS2103T, Title.MESSAGE_CONSTRAINTS);

@@ -6,7 +6,6 @@ import static seedu.tracker.testutil.Assert.assertThrows;
 import static seedu.tracker.testutil.TypicalModules.CS2101;
 import static seedu.tracker.testutil.TypicalModules.GEQ1000;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,15 +101,6 @@ public class JsonAdaptedModuleTest {
                 INVALID_MC, VALID_ACADEMIC_YEAR, VALID_SEMESTER, VALID_TAGS);
         String expectedMessage = Mc.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedModule module = new JsonAdaptedModule(VALID_CODE, VALID_TITLE, VALID_DESCRIPTION,
-                VALID_MC, VALID_ACADEMIC_YEAR, VALID_SEMESTER, invalidTags);
-        assertThrows(IllegalValueException.class, module::toModelType);
     }
 
     @Test

@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import seedu.tracker.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Module}'s {@code Code} matches any of the keywords given.
+ * Tests that a {@code Module}'s {@code Tag} matches any of the keywords given.
  */
 public class ModuleByTagNamePredicate implements Predicate<Module> {
     private final String tagName;

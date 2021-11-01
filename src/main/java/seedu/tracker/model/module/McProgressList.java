@@ -57,7 +57,7 @@ public class McProgressList {
 
     private void initialiseDefaultProgressList() {
         ObservableList<McProgress> defaultProgressList = FXCollections.observableArrayList();
-        Mc zeroMc = new Mc(0);
+        Mc zeroMc = new Mc();
         defaultProgressList.add(new McProgress(zeroMc, userInfo.getMcGoal(), "Total"));
 
         for (int index : TAG_INDEXES_LIST) {
