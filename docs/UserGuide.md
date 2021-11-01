@@ -158,7 +158,7 @@ Examples:
 * `p John /add Lim g:Orbital`
 * `p Mary /a g:Orbital`
 
-### Adding a person to a subgroup: `person (INDEX) /add (g:GROUP_NAME sg:SUBGROUP_NAME)`
+### Adding a person to a subgroup:
 
 Adds a person at the given index to a specified subgroup of group.
 
@@ -218,7 +218,7 @@ Examples:
 * `person 1 /remove g:Orbital`
 * `p 2 /r g:Orbital`
 
-### Removing a person from subgroup: `person (INDEX) /remove (g:GROUP_NAME sg:SUBGROUP_NAME)`
+### Removing a person from subgroup:
 
 Removes an existing person from a subgroup.
 
@@ -289,10 +289,7 @@ Advanced user Format:`p (INDEX) /uar`
 * You must be on the list of archived persons in order to use this command, as it takes the index as a compulsory parameter
 
 ### Working with groups/subgroups
-A group is a way to make sure that 
-<div markdown="block" class="alert alert-info">
-:warning: **These commands will work only when groups or subgroups are listed.** :warning:
-</div>
+
 
 #### Creating a group:
 
@@ -310,7 +307,14 @@ Examples:
 * `group Orbital /create` will create a new group called Orbital.
 * `g Orbital /c`
 
-### Deleting a group: `group (INDEX) /delete`
+<div markdown="block" class="alert alert-info">
+:warning: 
+**Only thee group create command can be used at other views.
+The rest of group commands below will work only when groups or subgroups are listed.** 
+:warning:
+</div>
+
+### Deleting a group:
 
 Deletes an existing group.
 
@@ -324,7 +328,7 @@ Examples :
 * `group 1 /delete` will delete the group at index 1.
 * `g 1 /d`
 
-### Creating a subgroup: `group (INDEX) /create n:SUBGROUP_NAME`
+### Creating a subgroup:
 Creates a new subgroup. **This command only works when group are listed and not when subgroups are listed.**
 
 Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
@@ -340,7 +344,7 @@ Examples :
 * `g 1 /create n:Artemis`
 
 
-### Adding notes to a group: `group (INDEX) /note`
+### Adding notes to a group:
 
 Add notes on a group and saves the time when the note is added.
 
@@ -364,19 +368,19 @@ Sometimes, you will want to view all people, groups, subgroups, or tags to under
 
 List can show all persons, groups, subgroups, or tags which you have added to Notor. It can also list archived persons: see [Archiving People](#Archiving People).
 
-#### _Listing all persons_ : `person /list`
+#### _Listing all persons_ :
 
 Lists all persons in the list panel.
 
 Format: `person /list`<br>
 Advanced user Format:`p /l`
 
-#### _List all groups_ : `group /list`
+#### _List all groups_ :
 
 Format:  `group /list`<br>
 Advanced user Format: `g /l`
 
-#### _Listing all persons in a group or subgroup_ : `person (INDEX) /list`
+#### _Listing all persons in a group or subgroup_ :
 
 Lists all persons in that group or subgroup.<br>
 Use after you have listed out all groups or subgroups (so you can select the index).<br>
@@ -411,7 +415,7 @@ Examples:
 
 Find allows you to obtain the results that match with the keyword specified. You can filter in this way on people, groups, and subgroups. In addition, you may add additional parameters to your search, in order to narrow the search further.
 
-### _Finding persons_ : `person /find (n:QUERY)`
+### _Finding persons_ :
 
 Finds all persons that match your search term. You may search for substrings within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
 
@@ -429,7 +433,7 @@ Examples:
 * `p /f n:Mary`
 * `p /find n:Jo t:Final Year Project`
 
-### _Find a group or subgroup_ : `group /find (g:KEYWORD)`
+### _Find a group or subgroup_ :
 
 Find all the groups with the keyword specified. This will search for the keyword within the group's name.
 Only works when group/s are shown in the list panel.

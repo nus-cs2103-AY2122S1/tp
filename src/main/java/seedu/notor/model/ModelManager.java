@@ -180,13 +180,11 @@ public class ModelManager implements Model {
     @Override
     public void addSuperGroup(SuperGroup superGroup) {
         notor.addSuperGroup(superGroup);
-        listSuperGroup();
     }
 
     @Override
     public void addSuperGroup(String superGroup) throws ParseException {
         notor.addSuperGroup(superGroup);
-        listSuperGroup();
     }
 
     @Override
