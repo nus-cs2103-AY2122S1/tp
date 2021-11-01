@@ -39,10 +39,11 @@ public class FindCommand extends Command {
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_INDEX + " 2";
 
-    private StringBuilder successMessage = new StringBuilder(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW).append("\n");
+
     private final NameContainsKeywordsPredicate namePredicate;
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
+    private StringBuilder successMessage = new StringBuilder(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW).append("\n");
     private StaffHasCorrectIndexPredicate indexPredicate = null;
 
     /**
@@ -109,7 +110,7 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @return a CommandResult to be displayed.
      */
-    public CommandResult executeNameAndFieldSearch(Model model) {
+    private CommandResult executeNameAndFieldSearch(Model model) {
         model.updateFilteredPersonList(person -> namePredicate.test(person)
                 && predicate.test(person));
         ObservableList<Person> staffs = model.getFilteredPersonList();
@@ -122,7 +123,7 @@ public class FindCommand extends Command {
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
 
-    public CommandResult executeFieldSearch(Model model) {
+    private CommandResult executeFieldSearch(Model model) {
         model.updateFilteredPersonList(person -> predicate.test(person));
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
@@ -143,7 +144,7 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @return a CommandResult to be displayed.
      */
-    public CommandResult executeIndexSearch(Model model) {
+    private CommandResult executeIndexSearch(Model model) {
         model.updateFilteredPersonList(indexPredicate);
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
@@ -161,30 +162,13 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @throws CommandException When the index inputted is not within range.
      */
-    public void checkIndex(Model model) throws CommandException {
+    private void checkIndex(Model model) throws CommandException {
         int personListSize = model.getFilteredPersonList().size();
         if (index > personListSize - 1) { // -1 so that index starts from 0
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
-    /**
-     * Returns the index of the FindCommand object.
-     *
-     * @return index
-     */
-    public int getIndex() {
-        return this.index;
-    }
-
-    /**
-     * Returns the namePredicate of the FindCommand object.
-     *
-     * @return namePredicate
-     */
-    public NameContainsKeywordsPredicate getNamePredicate() {
-        return this.namePredicate;
-    }
 
     @Override
     public boolean equals(Object other) {
