@@ -51,7 +51,7 @@ public class JsonSerializableSchedule {
         for (JsonAdaptedAppointment jsonAdaptedSchedule : appointments) {
             Appointment appointment = jsonAdaptedSchedule.toModelType();
             if (schedule.contains(appointment)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_APPOINTMENT);
+                continue;
             }
 
             if (schedule.hasConflictingAppointment(appointment)) {
