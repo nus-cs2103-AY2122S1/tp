@@ -436,8 +436,8 @@ contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json
 Advanced users are welcome to update data directly by editing that data file.
 </div>
 
-<div markdown="span" class="alert alert-warning">:warning: **Caution:**
-If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
+If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file on the next start up.
 </div>
 
 ***
