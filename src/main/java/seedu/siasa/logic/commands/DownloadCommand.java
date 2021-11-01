@@ -2,8 +2,9 @@ package seedu.siasa.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.collections.ObservableList;
+import seedu.siasa.commons.util.FileUtil;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
@@ -114,13 +116,13 @@ public class DownloadCommand extends Command {
     }
 
     private void writeToTxt(List<String> stringList) throws IOException {
-        FileWriter fileWriter = new FileWriter(TXT_FILEPATH);
+        Path pathToFile = Paths.get(".", TXT_FILEPATH);
+        FileUtil.createIfMissing(pathToFile);
+        StringBuilder stats = new StringBuilder();
         for (String string : stringList) {
-            fileWriter.append(string);
-            fileWriter.append("\n");
+            stats.append(string + "\n");
         }
-        fileWriter.flush();
-        fileWriter.close();
+        FileUtil.writeToFile(pathToFile, stats.toString());
     }
 
     private String centsToDollars(int priceInCents) {
