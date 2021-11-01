@@ -283,8 +283,8 @@ Action | Format, Examples
 **Clear contacts** | `rm -contacts`
 **Add new folder** | `mkdir FOLDER_NAME` <br> e.g. `mkdir CS2103`
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` <br> e.g., `echo 3 >> CS2103`
-**Delete contact from folder** | `rm INDEX >> FOLDER_NAME` <br> e.g., `rm 1 >> CS2102`
 **Add multiple contacts to folder** | `echo CONTACT_INDEX [CONTACT_INDEX]... >> FOLDER_NAME` <br> e.g. `echo 3 4 1 9 10 >> CS2103`
+**Delete contact from folder** | `rm INDEX >> FOLDER_NAME` <br> e.g., `rm 1 >> CS2102`
 **List folders** | `ls -folders`
 **Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` <br> e.g., `mv CS2103` &#124; `CS2102`
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
