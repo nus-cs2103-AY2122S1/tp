@@ -90,7 +90,7 @@ Here is a detailed breakdown of all the commands Notor has available. All the co
 
 ### General Commands
 
-#### Viewing help
+#### _Viewing help_ :
 
 Shows a message explaining how to access the help page.
 
@@ -102,7 +102,7 @@ If you type in a commmand with no arguments and the command requires arguments, 
 
 Format: `help`
 
-#### Clearing all entries
+#### _Clearing all entries_ :
 
 Clears all entries from Notor. Be warned; data will be deleted and **will not be saved**. The intended use of this
  command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
@@ -110,13 +110,13 @@ Clears all entries from Notor. Be warned; data will be deleted and **will not be
 Format: `clear`
 * Take care not to confuse this command with the more specific`/clearnote` command.
 
-#### Exiting the program
+#### _Exiting the program_ :
 
 Exits the program and saves your data.
 
 Format: `exit`
 
-#### Exporting data
+#### _Exporting data_ :
 
 Exports all the data of Notor into a CSV file. The exported CSV will be located in the same directory as Notor.
 
@@ -125,7 +125,7 @@ Format: `export`
 ### Working with people
 The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
-#### Creating a person:
+#### _Creating a person_ :
 
 Creates a person.
 
@@ -144,7 +144,7 @@ Examples:
 * `person John Lim /create p:91119111 e:notor@notor.com t:Loves Dancing g:1`
 * `p Michael Joe /c p:92229222 e:notor@notor.com t:Loves Singing g:2`
 
-#### Adding a person to a group:
+#### _Adding a person to a group_ :
 
 Adds a person at the given index to a specified group.
 
@@ -158,7 +158,7 @@ Examples:
 * `p John /add Lim g:Orbital`
 * `p Mary /a g:Orbital`
 
-### Adding a person to a subgroup:
+### _Adding a person to a subgroup_ :
 
 Adds a person at the given index to a specified subgroup of group.
 
@@ -171,7 +171,7 @@ Examples:
 * `p John /add Lim g:Orbital sg:Artemis`
 * `p Mary /a g:Orbital sg:Artemis`
 
-#### Deleting a person :
+#### _Deleting a person_ :
 
 Deletes an existing person.
 
@@ -185,7 +185,7 @@ Examples:
 * `person 1 /d `
 * `p 2 /d`
 
-#### Editing a person:
+#### _Editing a person_ :
 
 Edit an existing person's data.
 
@@ -205,7 +205,7 @@ Examples:
 * `person 1 /edit n:John Cena e:notor@notor.com`
 * `p 2 /e n:Little Lamb p:93339333`
 
-#### Removing a person from group:
+#### _Removing a person from group_ :
 
 Removes an existing person from a group.
 
@@ -218,7 +218,7 @@ Examples:
 * `person 1 /remove g:Orbital`
 * `p 2 /r g:Orbital`
 
-### Removing a person from subgroup:
+### _Removing a person from subgroup_ :
 
 Removes an existing person from a subgroup.
 
@@ -231,7 +231,7 @@ Examples:
 * `person 1 /remove g:Orbital sg:GroupA`
 * `p 1 /r g:Orbital sg:GroupA`
 
-#### Taking notes for a person:
+#### _Taking notes for a person_ :
 
 Pops up a note window to take note for an existing person.
 
@@ -245,7 +245,7 @@ Examples:
 * `person 1 /note`
 * `p 2 /n`
 
-#### Clearing notes of a person:
+#### _Clearing notes of a person_ :
 
 Removes note of an existing person.
 
@@ -262,25 +262,25 @@ Examples:
 ### Archiving People
 Archiving people allows you to keep your Notor clean, without losing your information. You can use this in conjunction with the [Export](#exporting-data) command to make sure your data is safe. You can restore archived mentees at any time.
 
-#### Archive a person
+#### _Archive a person_ :
 Archive a single person by the index.
 
 Format: `person (INDEX) /archive`
 Advanced user Format: `p (INDEX) /ar`
 
-#### Archive All
+#### _Archive All_ :
 Archive every person displayed in the list panel.
 
 Format: `person /archive`
 Advanced user Format: `p /ar`
 
-#### List Archived Persons
+#### _List Archived Persons_ :
 Show the list of archived Persons.
 
 Format: `person /listarchive`
 Advanced user Format: `p /lar`
 
-#### Unarchive
+#### _Unarchive_ :
 Returns the archived person to your regular person list in Notor.
 
 Format: `person (INDEX) /unarchive`
@@ -291,7 +291,7 @@ Advanced user Format:`p (INDEX) /uar`
 ### Working with groups/subgroups
 
 
-#### Creating a group:
+#### _Creating a group_ :
 
 Creates a group.
 
@@ -309,12 +309,12 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 :warning: 
-**Only thee group create command can be used at other views.
+**Only the group create command can be used at other views.
 The rest of group commands below will work only when groups or subgroups are listed.** 
 :warning:
 </div>
 
-### Deleting a group:
+#### _Deleting a group_ :
 
 Deletes an existing group.
 
@@ -328,7 +328,7 @@ Examples :
 * `group 1 /delete` will delete the group at index 1.
 * `g 1 /d`
 
-### Creating a subgroup:
+#### _Creating a subgroup_ :
 Creates a new subgroup. **This command only works when group are listed and not when subgroups are listed.**
 
 Format: `group (INDEX) /create n:SUBGROUP_NAME`<br>
@@ -344,7 +344,7 @@ Examples :
 * `g 1 /create n:Artemis`
 
 
-### Adding notes to a group:
+#### _Adding notes to a group_ :
 
 Add notes on a group and saves the time when the note is added.
 
@@ -415,7 +415,7 @@ Examples:
 
 Find allows you to obtain the results that match with the keyword specified. You can filter in this way on people, groups, and subgroups. In addition, you may add additional parameters to your search, in order to narrow the search further.
 
-### _Finding persons_ :
+#### _Finding persons_ :
 
 Finds all persons that match your search term. You may search for substrings within a persons name, or for tags the user must be tagged with. If you specify multiple search terms, only those people which match ALL criteria will be returned.
 
@@ -433,7 +433,7 @@ Examples:
 * `p /f n:Mary`
 * `p /find n:Jo t:Final Year Project`
 
-### _Find a group or subgroup_ :
+#### _Find a group or subgroup_ :
 
 Find all the groups with the keyword specified. This will search for the keyword within the group's name.
 Only works when group/s are shown in the list panel.
