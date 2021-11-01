@@ -7,17 +7,17 @@
 
 'T1 through T4 are shades of the original color from lightest to darkest
 
-!define UI_COLOR Physical
-!define UI_COLOR_T1 Honeydew
-!define UI_COLOR_T2 Technology
-!define UI_COLOR_T3 PaleGreen
+!define UI_COLOR #1D8900
+!define UI_COLOR_T1 #83E769
+!define UI_COLOR_T2 #3FC71B
+!define UI_COLOR_T3 #166800
 !define UI_COLOR_T4 #0E4100
 
-!define LOGIC_COLOR LightBlue
-!define LOGIC_COLOR_T1 LightSteelBlue
-!define LOGIC_COLOR_T2 LightCyan
-!define LOGIC_COLOR_T3 PowderBlue
-!define LOGIC_COLOR_T4 Blue
+!define LOGIC_COLOR #3333C4
+!define LOGIC_COLOR_T1 #C8C8FA
+!define LOGIC_COLOR_T2 #6A6ADC
+!define LOGIC_COLOR_T3 #1616B0
+!define LOGIC_COLOR_T4 #101086
 
 !define MODEL_COLOR #9D0012
 !define MODEL_COLOR_T1 #F97181
@@ -38,10 +38,10 @@ skinparam BackgroundColor #FFFFFFF
 skinparam Shadowing false
 
 skinparam Class {
-    FontColor #000000
+    FontColor #FFFFFF
     BorderThickness 1
-    BorderColor #000000
-    StereotypeFontColor #000000
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
     FontName Arial
 }
 
@@ -55,12 +55,12 @@ skinparam Sequence {
     MessageAlign center
     BoxFontSize 15
     BoxPadding 0
-    BoxFontColor #000000
+    BoxFontColor #FFFFFF
     FontName Arial
 }
 
 skinparam Participant {
-    FontColor #000000
+    FontColor #FFFFFFF
     Padding 20
 }
 

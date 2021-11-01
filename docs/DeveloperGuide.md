@@ -93,7 +93,6 @@ This section will explain the structure of the UI component.
 ![Structure of the UI Component](images/UiClassDiagram.png) 
 <br> *Figure 4: UI Class Diagram of FAST*
 
-
 Our `UI` component uses the JavaFx UI framework. 
 The layout of these UI parts are defined in matching `.fxml` files that are in the [`src/main/resources/view`](https://github.com/AY2122S1-CS2103T-T09-4/tp/tree/master/src/main/resources/view) folder. 
 
@@ -119,32 +118,35 @@ The data used in the *piechart* are obtained from the 'Person' object residing i
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+This section will explain the structure of the Logic component.
 
-Here's a (partial) class diagram of the `Logic` component:
+**API**: [`Logic.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/Logic.java)
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="550"/> 
+<br> *Figure 5: Logic Class Diagram of FAST*
+
+Here are the other classes in `Logic` (omitted from *Figure 5* above):
+<img src="images/ParserClasses.png" width="600"/> <br> *Figure 6: Parser Class Diagram of FAST*
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it uses the `FastParser` class to parse the user input.
+2. The `FastParser` will create a specific `XYZCommandParser` object to parse the arguments for the `XYZ` command.
+3. The `XYZCommandParser` will create the `XYZCommand` object.
+4. This results in a `Command` object  which is executed by the `LogicManager`.
+5. The `Command` object can communicate with the `Model` and update `Storage` when it is executed (e.g. to add a client).
+6. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `LogicManager`.
+
+How the parsing works:
+* When called upon to parse a user command, the `FastParser` class creates an `XYZCommandParser` which uses the other classes shown above to parse the user command and create a `XYZCommand` object which the `FastParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<br> *Figure 7: Logic Sequence Diagram of FAST (Delete Command)*
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
-
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
-<img src="images/ParserClasses.png" width="600"/>
-
-How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
