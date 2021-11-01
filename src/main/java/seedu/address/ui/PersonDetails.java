@@ -136,7 +136,7 @@ public class PersonDetails extends UiPart<Region> {
             temp.start();
         }
 
-        simScore.setText(String.valueOf(person.getSimScore()) + "%");
+        simScore.setText(person.getSimScore() + "%");
         commonLang.getChildren().removeIf(l -> true);
         person.getCommonLanguages().forEach(l -> commonLang.getChildren().add(new Label(l)));
 

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.scene.image.Image;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.GitHubUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
@@ -86,6 +87,35 @@ public class JsonAdaptedPerson {
         gitStats = source.getGitStats();
     }
 
+    private boolean isImageEqual(Image firstImage, Image secondImage) {
+        if (firstImage != null && secondImage == null) {
+            return false;
+        }
+        if (firstImage == null) {
+            return secondImage == null;
+        }
+
+        if (firstImage.getWidth() != secondImage.getWidth()) {
+            return false;
+        }
+        if (firstImage.getHeight() != secondImage.getHeight()) {
+            return false;
+        }
+
+        // Compare images color
+        for (int x = 0; x < firstImage.getWidth(); x++) {
+            for (int y = 0; y < firstImage.getHeight(); y++) {
+                int firstArgb = firstImage.getPixelReader().getArgb(x, y);
+                int secondArgb = secondImage.getPixelReader().getArgb(x, y);
+                if (firstArgb != secondArgb) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
@@ -152,7 +182,7 @@ public class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        if (image == null) {
+        if (image == null || isImageEqual(image, GitHubUtil.DEFAULT_USER_PROFILE_PICTURE)) {
             return new Person(modelName, modelTelegram, modelGithub, modelPhone,
                     modelEmail, modelAddress, modelTags, modelIsFavourite);
         }
