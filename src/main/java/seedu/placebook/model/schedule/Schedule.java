@@ -2,6 +2,7 @@ package seedu.placebook.model.schedule;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -71,15 +72,30 @@ public class Schedule implements Iterable<Appointment>, ReadOnlySchedule {
             throw new DuplicateAppointmentException();
         }
 
-        for (Appointment appointment: appointmentList) {
-            if (appointment.isConflictingWith(toAdd)) {
-                throw new ClashingAppointmentsException(appointment);
-            }
+        List<Appointment> clashingAppointments = getClashingAppointments(toAdd);
+        if (!clashingAppointments.isEmpty()) {
+            throw new ClashingAppointmentsException(clashingAppointments);
         }
 
         appointmentList.add(toAdd);
         appointmentList.sort(Comparator.comparing(Appointment::getDescription));
         appointmentList.sort(Comparator.comparing(Appointment::getTimePeriod));
+    }
+
+    /**
+     * Returns a list of appointments in the appointmentList that have time conflicts with
+     * the given appointment.
+     * @param appointmentToCheck The given appointment.
+     * @return A list of appointments that have time conflicts with the given appointment.
+     */
+    private List<Appointment> getClashingAppointments(Appointment appointmentToCheck) {
+        List<Appointment> clashingAppoinments = new ArrayList<>();
+        for (Appointment appointment : this.appointmentList) {
+            if (appointment.isConflictingWith(appointmentToCheck)) {
+                clashingAppoinments.add(appointment);
+            }
+        }
+        return clashingAppoinments;
     }
 
     public void sortAppointmentByDescription() {

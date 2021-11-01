@@ -1,5 +1,7 @@
 package seedu.placebook.model.schedule.exceptions;
 
+import java.util.List;
+
 import seedu.placebook.model.schedule.Appointment;
 
 /**
@@ -7,22 +9,23 @@ import seedu.placebook.model.schedule.Appointment;
  * The endTime of the time period is before the startTime of the time period.
  */
 public class ClashingAppointmentsException extends RuntimeException {
-    private final Appointment appointment;
+    private final List<Appointment> appointments;
 
     /**
      * Constructs ClashingAppointmentsException.
-     * @param appointment the clashing Appointment.
+     * @param appointments The list of appointments in the schedule that have time conflict
+     *                      with the appointment to add.
      */
-    public ClashingAppointmentsException(Appointment appointment) {
+    public ClashingAppointmentsException(List<Appointment> appointments) {
         super("Clashing Appointment with: ");
-        this.appointment = appointment;
+        this.appointments = appointments;
     }
 
     /**
-     * Returns the clashing Appointment.
-     * @return the clashing Appointment.
+     * Returns the clashing Appointments.
+     * @return the clashing Appointments.
      */
-    public Appointment getClashingAppointment() {
-        return this.appointment;
+    public List<Appointment> getClashingAppointment() {
+        return this.appointments;
     }
 }
