@@ -301,8 +301,35 @@ Since `Appointment` unilaterally has references `Patient` and `Doctor`, the `Uni
 to replace `Appointment` when `Patient` or `Doctor` are edited or delete them when they have references to the deleted `Patient` or `Doctor`.
 
 ### Adding an appointment
+Adding an appointment requires the user to input valid patient and doctor indexes, and the correct format for each prefix.
+The diagram below illustrates the flow of adding an appointment:
+![AddAppointment](images/AddAppointmentActivityDiagram.png)
 
+![AddAppointment](images/AddAppointmentSequenceDiagram.png)
+1. After user enters the add appointment command `appt -a` with the relevant prefix, the input will be sent
+   to `AddAppointmentCommandParser` for parsing.
+2. `AddAppointmentCommandParser` will check if the prefixes are relevant. If the prefixes are relevant, a new `AddAppointmentCommand` which extends `AppointmentCommand`
+   is created. The `AddAppointmentCommand` implements the `execute()` method from the abstract class `Command`. If the prefixes are not relevant,
+   a `ParseException` will be thrown, and the missing prefixes' error message will be shown.
+3. The `AddAppointmentCommand` will run `execute()`. First, it retrieves the `Patient` object and the `Doctor` object at the given index from the model. If the index is out of range of the
+   `Model#FilteredPatientList` or `Model#FilteredDoctorList`, it will throw an error, and the invalid index message will be shown.
+   If not, the `Appointment` object with the is created and added to the model. The add appointment success message is then returned.
+4. The UI will then display the result
 ### Deleting an appointment
+Deleting an appointment requires the user to input a valid index of the desired appointment in the appointment list.
+The diagram below illustrates the flow of deleting an appointment:
+![DeleteAppointment](images/DeleteAppointmentActivityDiagram.png)
+
+![DeleteAppointment](images/DeleteSequenceActivityDiagram.png)
+1. After user enters the delete appointment command `appt -d` with an index, the input will be sent
+   to `DeleteAppointmentCommandParser` for parsing.
+2. `DeleteAppointmentCommandParser` will check if the index is valid. If the index is valid, a new `DeleteAppointmentCommand` 
+   which extends `AppointmentCommand` is created. If not, a `ParseException` will be thrown, and the invalid index message will be shown.
+3. The `DeleteAppointmentCommand` will run `execute()`, removing the appointment at the inputted index. Then, it will return the
+   success message as a `CommandResult` object.
+4. The UI will then display the result
+
+
 
 ### Editing an appointment
 
@@ -922,8 +949,71 @@ testers are expected to do more *exploratory* testing.
 ### Listing all doctors <a name="list-doctors"/>
 
 ### Adding an appointment <a name="appointment"/>
+1. Add an appointment 
+    1. Prerequisites: There must be multiple doctors and patients in the patient and doctor lists. There are less than 100 patients and doctors. 
+       
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:00 dur/5 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:05 r/Patient wants a blood test`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 12:30 dur/50`<br>
+      Expected: An appointment is added. Details of the appointment shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/31/12/2050 14:00`<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+
+    1. Test case: `appt -a p/1 d/1 s/DATE_AND_TIME dur/5 r/Patient wants a blood test,` where `DATE_AND_TIME` is today's date and any time<br>
+       Expected: An appointment is added. Details of the appointment is shown in the response box. The appointment shows up in the appointment list.
+       
+    1. Test case: `appt -a`<br>
+       Expected: No appointment is added. Response box displays error message: `Invalid command format! ...`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `Sessions should be of the format DD/MM/YYYY HH:MM and adhere to the following constraints:...`
+
+    1. Test case: `appt -a p/100 d/1 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The patient index provided is invalid`
+    
+    1. Test case: `appt -a p/1 d/100 s/30/02/2021 dur/5 r/Patient wants a blood test`<br>
+       Expected: No appointment is added. Response box displays error message: `The doctor index provided is invalid`
+
+    1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/xxx r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/121 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
+   1. Test case: `appt -a p/1 d/1 s/30/02/2021 dur/0 r/Patient wants a blood test`<br>
+      Expected: No appointment is added. Response box displays error message: `The duration should be an integer between 1-120 minutes.`
+
 
 ### Deleting an appointment  <a name="delete-appointment"/>
+1. Deleting an appointment while all appointments are being shown
+
+    1. Prerequisites: list all appointments using the `appt -f` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the appointment list size)<br>
+       Expected: Similar to previous.
+
+2. Deleting an appointment while upcoming appointments are being shown
+    1. Prerequisites: list all persons using the `appt -l` command. Multiple appointments in the list.
+
+    1. Test case: `appt -d 1`<br>
+       Expected: First appointment is deleted from the list. Details of the deleted appointment shown in the response box.
+
+    1. Test case: `appt -d 0`<br>
+       Expected: No appointment is deleted. Error details shown in the response box: `Invalid command format!...`.
+       
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ### Editing an appointment <a name="edit-appointment"/>
 
@@ -954,7 +1044,6 @@ testers are expected to do more *exploratory* testing.
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
 
 ### Listing all appointments for today <a name="list-appointments"/>
-
 
 ### Saving data  <a name="saving-data"/>
 
