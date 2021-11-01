@@ -37,14 +37,6 @@ public class SampleDataUtil {
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     getTagSet("friends"),
                     false),
-            new Person(new Name("Atin Sakkeer Hussain"),
-                    new Telegram("crypto_code"),
-                    new Github("crypto-code"),
-                    new Phone("99272758"),
-                    new Email("atinsakkeer@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    getTagSet("colleagues", "friends"),
-                    false),
             new Person(new Name("Cheong Yee Ming"),
                     new Telegram("yee_ming"),
                     new Github("CheongYeeMing"),
@@ -68,15 +60,7 @@ public class SampleDataUtil {
                     new Email("jai@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
                     getTagSet("classmates"),
-                    false),
-            new Person(new Name("Siraj Raval"),
-                    new Telegram("siraj_r"),
-                    new Github("llSourcell"),
-                    new Phone("92624417"),
-                    new Email("siraj@example.com"),
-                    new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    getTagSet("colleagues"),
-                    true)
+                    false)
         };
     }
 
