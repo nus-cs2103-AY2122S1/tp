@@ -326,6 +326,10 @@ public class MainWindow extends UiPart<Stage> {
         return isDone;
     }
 
+    public static void setDone(boolean isDone) {
+        MainWindow.isDone = isDone;
+    }
+
     /**
      * Closes the application.
      */
