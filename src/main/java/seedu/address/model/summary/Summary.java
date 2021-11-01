@@ -126,4 +126,13 @@ public class Summary {
         return pieChartData;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Summary
+                && getNumberOfContacts() == ((Summary) other).getNumberOfContacts()
+                && getPercentageCategory().equals(((Summary) other).getPercentageCategory())
+                && getPercentageRatings().equals(((Summary) other).getPercentageRatings()));
+    }
+
 }

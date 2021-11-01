@@ -55,7 +55,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_leadingZero_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-                -> ParserUtil.parseIndex("000001"));
+            -> ParserUtil.parseIndex("000001"));
     }
 
     @Test
