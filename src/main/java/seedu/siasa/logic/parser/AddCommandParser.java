@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 import seedu.siasa.logic.commands.AddCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.contact.Address;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.Email;
 import seedu.siasa.model.contact.Name;
-import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.Phone;
 import seedu.siasa.model.tag.Tag;
 

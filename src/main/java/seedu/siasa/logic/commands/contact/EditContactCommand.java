@@ -22,9 +22,9 @@ import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.contact.Address;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.Email;
 import seedu.siasa.model.contact.Name;
-import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.contact.Phone;
 import seedu.siasa.model.tag.Tag;
 

@@ -9,8 +9,8 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.siasa.model.contact.exceptions.DuplicateContactException;
 import seedu.siasa.model.contact.exceptions.ContactNotFoundException;
+import seedu.siasa.model.contact.exceptions.DuplicateContactException;
 
 /**
  * A list of contacts that enforces uniqueness between its elements and does not allow nulls.
