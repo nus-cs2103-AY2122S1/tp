@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
@@ -40,11 +41,16 @@ public class Date implements Comparable<Date> {
             // Try to parse
             try {
                 String pattern = datePattern.getPattern();
+
+                DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+                builder.parseCaseInsensitive();
+                builder.appendPattern(pattern);
+
                 //ResolverStyle.STRICT to ensure that the parser does not correct any dates
                 // e.g. 31 Sep 2021 to 30 Sep 2021
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern)
-                        .withResolverStyle(ResolverStyle.STRICT);
-                LocalDate date = LocalDate.from(formatter.parse(dateString));
+                DateTimeFormatter dateFormat = builder.toFormatter().withResolverStyle(ResolverStyle.STRICT);
+
+                LocalDate date = LocalDate.from(dateFormat.parse(dateString));
                 return date;
             } catch (DateTimeParseException pe) {
                 // Continue loop
