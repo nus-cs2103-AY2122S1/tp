@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
-import static seedu.address.logic.parser.ParserUtil.testByAllFields;
+import static seedu.address.logic.parser.ParserUtil.testByAllFieldsExceptName;
 
 import java.util.Arrays;
 
@@ -36,7 +36,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
                 PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
 
-        PersonContainsFieldsPredicate predicate = testByAllFields(argMultimap);
+        PersonContainsFieldsPredicate predicate = testByAllFieldsExceptName(argMultimap);
         if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
             return new FindCommand(ParserUtil
                     .parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()).getZeroBased());
