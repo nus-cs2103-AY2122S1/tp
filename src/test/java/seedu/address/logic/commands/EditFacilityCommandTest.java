@@ -126,7 +126,6 @@ public class EditFacilityCommandTest {
 
         String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
 
-
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
