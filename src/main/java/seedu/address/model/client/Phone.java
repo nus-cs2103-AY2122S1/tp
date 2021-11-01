@@ -11,7 +11,6 @@ public class Phone extends NumberComparable<Phone> implements OptionalStringBase
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-
     public static final String VALIDATION_REGEX = "\\d{3,}";
 
     public final String value;
@@ -35,8 +34,8 @@ public class Phone extends NumberComparable<Phone> implements OptionalStringBase
     }
 
     @Override
-    public String toString() {
-        return value;
+    public int hashCode() {
+        return value.hashCode();
     }
 
     @Override
@@ -47,8 +46,8 @@ public class Phone extends NumberComparable<Phone> implements OptionalStringBase
     }
 
     @Override
-    public int hashCode() {
-        return value.hashCode();
+    public String toString() {
+        return value;
     }
 
 }
