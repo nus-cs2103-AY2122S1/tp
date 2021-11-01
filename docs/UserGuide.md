@@ -353,7 +353,7 @@ Format: `cleara`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 All attendance data will be removed immediately after this command is executed. This action is **irreversible**.
-</div> <br>
+</div>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -375,7 +375,7 @@ Format: `import CSV_FILE_PATH`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If there is a duplicate members(same name) being imported using the
 CSV file, the details from the CSV file will overwrite the existing details, except for the attendance data. This action is **irreversible**.
-</div> <br>
+</div>
 
 Examples:
 
@@ -393,7 +393,7 @@ Format: `clearm`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 All member data will be removed immediately after this command is executed. This action is **irreversible**.
-</div> <br>
+</div>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -471,6 +471,11 @@ Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]`
 * `INDEX` **must be a positive integer** 1, 2, 3…
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All members allocated to the facility (if any) will be unallocated if you edit its `CAPACITY` to be below the number of allocated
+members. This action is **irreversible**.
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -607,7 +612,7 @@ Format: `clearf`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 All facility data will be removed immediately after this command is executed. This action is **irreversible**.
-</div> <br>
+</div>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -677,7 +682,7 @@ directly change the contents, *e.g a member's name*, in the data file, which wil
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
-</div> <br>
+</div>
 
 [Back to Table of Contents](#table-of-contents)
 

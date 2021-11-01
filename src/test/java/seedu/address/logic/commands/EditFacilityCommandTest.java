@@ -105,18 +105,29 @@ public class EditFacilityCommandTest {
     }
 
     @Test
-    public void execute_capacityExceededUnfilteredList_failure() {
+    public void execute_unfilteredListCapacityBelowNumberOfAllocations_clearsAllocation() {
         Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Facility facility = new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build();
+        Facility editedFacility = new FacilityBuilder(facility)
+                .withCapacity("1").build();
+
         model.addPerson(AMY);
         model.addPerson(BOB);
-        model.addFacility(TAMPINES_HUB_FIELD_SECTION_B);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addFacility(editedFacility);
+
+        model.addFacility(facility);
         model.split(new PersonAvailableOnDayPredicate(1));
 
         EditFacilityDescriptor descriptor =
-                new EditFacilityDescriptorBuilder().withCapacity("1").build();
+                new EditFacilityDescriptorBuilder(facility).withCapacity("1").build();
         EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST, descriptor);
 
-        assertCommandFailure(command, model, EditFacilityCommand.MESSAGE_ALLOCATION_EXCEEDS_CAPACITY);
+        String expectedMessage = String.format(EditFacilityCommand.MESSAGE_EDIT_FACILITY_SUCCESS, editedFacility);
+
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test

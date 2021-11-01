@@ -40,8 +40,6 @@ public class EditFacilityCommand extends Command {
     public static final String MESSAGE_EDIT_FACILITY_SUCCESS = "Edited Facility: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_FACILITY = "This facility already exists in SportsPA";
-    public static final String MESSAGE_ALLOCATION_EXCEEDS_CAPACITY = "The edited facility's capacity"
-            + " cannot be less than the number of members currently allocated to it";
 
     private final Index index;
     private final EditFacilityDescriptor editFacilityDescriptor;
@@ -77,7 +75,7 @@ public class EditFacilityCommand extends Command {
         }
 
         if (editedFacility.isMaxCapacity()) {
-            throw new CommandException(MESSAGE_ALLOCATION_EXCEEDS_CAPACITY);
+            editedFacility.clearAllocationList();
         }
 
         model.setFacility(facilityToEdit, editedFacility);
