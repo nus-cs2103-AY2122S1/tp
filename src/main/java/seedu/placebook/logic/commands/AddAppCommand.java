@@ -19,6 +19,10 @@ import seedu.placebook.model.person.UniquePersonList;
 import seedu.placebook.model.person.exceptions.DuplicatePersonException;
 import seedu.placebook.model.schedule.Appointment;
 import seedu.placebook.model.schedule.TimePeriod;
+import seedu.placebook.model.schedule.exceptions.ClashingAppointmentsException;
+import seedu.placebook.model.schedule.exceptions.DuplicateAppointmentException;
+
+import javax.swing.*;
 
 /**
  * Creates an appointment with an existing person in PlaceBook
@@ -85,19 +89,15 @@ public class AddAppCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_PERSON_ADDED);
             }
         }
-        for (Appointment app : lastShownAppList) {
-            if (app.getTimePeriod().hasConflictWith(this.timePeriod)) {
-                throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED);
-            }
-        }
         Appointment appointmentToAdd = new Appointment(clients, location, timePeriod, description);
-        if (!model.getClashingAppointments(appointmentToAdd).isEmpty()) {
-            String clashingAppointments = model.getClashingAppointmentsAsString(appointmentToAdd);
-            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED
-                    + '\n' + clashingAppointments);
-        }
 
-        model.addAppointment(appointmentToAdd);
+        try {
+            model.addAppointment(appointmentToAdd);
+        } catch (ClashingAppointmentsException e) {
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_CLASHING_APPOINTMENT_ADDED + e.getClashingAppointment().getTimePeriod().toString());
+        } catch (DuplicateAppointmentException e) {
+            throw new CommandException(Messages.MESSAGE_APPOINTMENTS_DUPLICATE_APPOINTMENT_ADDED);
+        }
         model.updateState();
         return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToAdd));
     }
