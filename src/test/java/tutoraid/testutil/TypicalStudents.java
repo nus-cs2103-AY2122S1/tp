@@ -4,8 +4,6 @@ import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_NAME_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_NAME_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_BOB;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_AMY;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_LIST_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_LIST_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_AMY;
