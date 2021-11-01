@@ -183,6 +183,7 @@ More examples will be provided for each command in [Features](#features).
 
 <div markdown="block" class="alert alert-danger"> :warning: 
  Only alphanumeric symbols are allowed in the contact fields. Characters like ‘&’, ‘!’, ‘?’ are not allowed.</div>
+
  
 --------------------------------------------------------------------------------------------------------------------
 
