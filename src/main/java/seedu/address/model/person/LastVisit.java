@@ -28,6 +28,13 @@ public class LastVisit {
     }
 
     /**
+     * Determines whether the visit is empty based on value
+     */
+    public boolean hasLastVisit() {
+        return !(this.value == null || this.value.isEmpty());
+    }
+
+    /**
      * Returns true if a given string is a valid last visit.
      */
     public static boolean isValidLastVisit(String test) {
@@ -42,6 +49,24 @@ public class LastVisit {
             return false;
         }
         return DateTimeUtil.isLastSevenDays(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
+    }
+
+    /**
+     * Returns true if the last visit date is in the future
+     */
+    public boolean isFuture() {
+        if (!hasLastVisit()) {
+            return false;
+        }
+
+        LocalDateTime visitTime;
+        try {
+            visitTime = LocalDateTime.parse(value, DateTimeUtil.FORMATTER);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        return DateTimeUtil.isFuture(visitTime);
     }
 
     /**

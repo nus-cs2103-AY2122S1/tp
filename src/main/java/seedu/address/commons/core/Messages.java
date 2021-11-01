@@ -11,4 +11,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d elderly listed!";
     public static final String MESSAGE_NO_EXISTING_VISIT = "No Next visit for the elderly: %1$s";
 
+    // warnings
+    public static final String MESSAGE_INVALID_LAST_VISIT_DATE = "Last visit date should be in the past.";
+    public static final String MESSAGE_INVALID_VISIT_DATE = "Visit date should be in the future.";
+
 }

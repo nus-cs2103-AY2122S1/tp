@@ -89,7 +89,23 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+        // check for warnings
+        boolean isInvalidVisit = editedPerson.hasVisit() && editedPerson.getVisit().get().isOverdue();
+        boolean isInvalidLastVisit = editedPerson.hasLastVisit() && editedPerson.getLastVisit().get().isFuture();
+
+        if (isInvalidLastVisit && isInvalidLastVisit) {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), CommandWarning.BOTH_VISIT_FIELDS_WARNING);
+        } else if (isInvalidLastVisit) {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), CommandWarning.FUTURE_LAST_VISIT_WARNING);
+        } else if (isInvalidVisit) {
+            return new CommandResult(
+                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), CommandWarning.PAST_NEXT_VISIT_WARNING);
+        } else {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        }
     }
 
     /**

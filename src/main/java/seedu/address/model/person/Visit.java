@@ -36,7 +36,6 @@ public class Visit {
 
     /**
      * Determines whether the visit is empty based on value
-     * @return whether the visit is empty
      */
     public boolean hasVisit() {
         return !(this.value == null || this.value.isEmpty());
