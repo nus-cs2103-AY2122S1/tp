@@ -393,13 +393,22 @@ The activity diagram below shows the many ways user can utilise the help command
 
 ![Help Command Activity Diagram](images/HelpCommandActivityDiagram.png)
 
+The way the help command is parsed is slightly different from the other commands. This is due to the help command not 
+interacting with the `model` and `storage` components like other commands. Instead, the parsing of the help command
+parameter is done by `ParserUtil` and verification of the parameter is done in `HelpWindow` itself. After verification, 
+`HelpWindow` will set the text of the `JavaFX::Label` to be the corresponding help topic. This is as shown in the sequence
+diagram as shown below.
+
+![Help Command Sequnce Diagram](images/HelpCommandParsingSequenceDiagram.png)
+
 
 To access the different commands' help page from within the help window, there is a dropdown selector which will 
-navigate to the different help pages. To achieve this, a `JavaFX::ComboBox` commandList was used which toggles between all the available 
-HELP_TOPICS. A method then reads from commandList's current value and displays the corresponding help message in a
+navigate to the different help pages. To achieve this, a `JavaFX::ComboBox` commandList was used which toggles between all 
+the available HELP_TOPICS. A method then reads from commandList's current value and displays the corresponding help message in a
 `JavaFX::Label`. A code snippet is shown below:
+
 `EventHandler<ActionEvent> event =
-e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));`
+ e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));`
 
 #### Design Considerations
 
@@ -464,8 +473,7 @@ Ultimately, as our main focus was speed and ease of use, we decided on the piech
 easily understood, yet is able to convey the essence of the data to the user. Other chart types are less common and 
 thus might be confusing the the user. To address the cons of the piechart, we also included some analysis of the 
 piechart to help users better understand the data and provide a more complete statistic.
-    
-_{more aspects and alternatives to be added}_
+
 
 ### Tagging feature
 
