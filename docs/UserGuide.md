@@ -538,7 +538,7 @@ to accommodate all available members and the allocation will not be executed.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If you execute the split command after executing the allocate or deallocate command, it will **undo** the previous allocations and
+If you execute the split command after executing the allocate or deallocate command, it will **overwrite** the previous allocations and
 deallocations you have made.
 </div>
 
