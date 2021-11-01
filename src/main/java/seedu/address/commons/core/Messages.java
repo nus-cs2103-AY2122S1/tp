@@ -13,6 +13,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX = "The product index provided is invalid";
     public static final String MESSAGE_PRODUCTS_LISTED_OVERVIEW = "%1$d products listed!";
 
-    public static final String MESSAGE_VIEW_CLIENT = "Displaying details of Client %1$s";
-    public static final String MESSAGE_VIEW_PRODUCT = "Displaying details of Product %1$s";
+    public static final String MESSAGE_VIEW_CLIENT = "Displaying details of Client (ID %1$s) at index %2$s";
+    public static final String MESSAGE_VIEW_PRODUCT = "Displaying details of Product (ID %1$s) at index %2$s";
 }
