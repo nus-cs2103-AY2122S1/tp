@@ -146,17 +146,11 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if a {@code date} is a valid date.
-     * A valid date is in the form of DD/MM/YYYY.
-     */
-    public static boolean isValidDate(String date) {
-        return date.matches(DATE_VALIDATION_REGEX);
-    }
-
-    /**
      * Returns true if {@code test} is a valid non-negative number.
      */
-    public static boolean isValidNonNegativeNumber(String test) {
+    public static boolean isNonNegativeNumber(String test) {
+        requireNonNull(test);
+
         try {
             double value = Double.parseDouble(test);
             return value >= 0;
@@ -166,11 +160,11 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code currency} is a valid curreny.
-     * A valid currency is any non-negative number.
+     * Returns true if a {@code date} is a valid date.
+     * A valid date is in the form of DD/MM/YYYY.
      */
-    public static boolean isValidCurrency(String currency) {
-        return isValidNonNegativeNumber(currency);
+    public static boolean isValidDate(String date) {
+        return date.isEmpty() || date.matches(DATE_VALIDATION_REGEX);
     }
 
     /**
@@ -178,7 +172,15 @@ public class StringUtil {
      * A valid time is in the form of HH:MM.
      */
     public static boolean isValidTime(String time) {
-        return time.matches(TIME_VALIDATION_REGEX);
+        return time.isEmpty() || time.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if {@code currency} is a valid curreny.
+     * A valid currency is any non-negative number.
+     */
+    public static boolean isValidCurrency(String currency) {
+        return isNonNegativeNumber(getUnformattedNumber(currency));
     }
 
     /**
@@ -256,10 +258,17 @@ public class StringUtil {
     }
 
     /**
+     * Returns number without comma.
+     */
+    public static String getUnformattedNumber(String number) {
+        return number.replace(",", "");
+    }
+
+    /**
      * Returns {@code value} in currency format.
      */
     public static String getCurrencyFormat(String value, boolean withSymbol) {
-        double currency = Double.parseDouble(value);
+        double currency = Double.parseDouble(getUnformattedNumber(value));
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
         String result = formatter.format(currency);
         if (withSymbol) {

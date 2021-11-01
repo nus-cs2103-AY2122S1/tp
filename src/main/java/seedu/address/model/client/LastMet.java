@@ -2,7 +2,6 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.StringUtil.isValidDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
