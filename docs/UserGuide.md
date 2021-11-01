@@ -53,7 +53,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 * If a parameter should only appear once in the command but is specified multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Parameters added after commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Parameters added after commands that do not take in parameters (such as `help`, `list-applicant`, `list-position` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
