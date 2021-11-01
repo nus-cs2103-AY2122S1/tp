@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         boolean isInvalidVisit = editedPerson.hasVisit() && editedPerson.getVisit().get().isOverdue();
         boolean isInvalidLastVisit = editedPerson.hasLastVisit() && editedPerson.getLastVisit().get().isFuture();
 
-        if (isInvalidLastVisit && isInvalidLastVisit) {
+        if (isInvalidVisit && isInvalidLastVisit) {
             return new CommandResult(
                     String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), CommandWarning.BOTH_VISIT_FIELDS_WARNING);
         } else if (isInvalidLastVisit) {
