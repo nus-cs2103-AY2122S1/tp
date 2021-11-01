@@ -10,7 +10,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.friend.FriendGameFriendLinksContainsGamePredicate;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 

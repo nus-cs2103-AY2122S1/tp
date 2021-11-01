@@ -12,7 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
-import seedu.address.model.game.GameFriendLinksContainsGameIdPredicate;
 
 /**
  * Gets and displays the complete information of a friend from the address book whose FRIEND_ID matches the given
