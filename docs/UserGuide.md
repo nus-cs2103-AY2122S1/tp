@@ -347,11 +347,9 @@ Format: `addEvent n/NAME d/DATE [t/TIME]`
 * The event time must be given in 24-hr format e.g., 0000 to 2359.
   
 
-* Managera cannot accept duplicate events. An event is considered duplicate if all of its attributes
-  (name, date, time) are identical with those of an existing event.
-* If an event to be added shares identical attributes with an existing event, but one of them lacks a
-  time, they are treated as two different events. (The new event will be added)
-* An event is not considered duplicate if at least one of its attributes is different.
+* Managera cannot accept duplicate events. An event is considered duplicate it shares the same name **and** date
+  (time not considered) with those of an existing event. When adding a new event, please ensure that it has a 
+  different name or different date from those that already exist in Managera.
 
 Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Adds an Event "CS2100 Finals" on 20th November 2021 9:00am 
@@ -394,10 +392,10 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 * The event time must be given in 24-hr format e.g., 0000 to 2359.
 
 
-* If an event is edited in a way such that their attributes (name, date, time)
+* If an event is edited in a way such that its name **and** date
   would exactly match those of another existing event, Managera would refuse to execute the command as it forbids
   duplicate events.
-* An event is not considered duplicate if at least one of its attributes is different.
+* An event is considered duplicate if its name **and** date match those of another event.
 
 Example Usage:
 * `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event in the displayed Event list to be 
