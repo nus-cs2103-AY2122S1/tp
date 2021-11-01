@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.Siasa;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 /**
@@ -21,20 +21,20 @@ import seedu.siasa.model.policy.Policy;
 @JsonRootName(value = "addressbook")
 class JsonSerializableSiasa {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "Contacts list contains duplicate contact(s).";
     public static final String MESSAGE_DUPLICATE_POLICY = "Policy list contains duplicate policies(s).";
-    public static final String MESSAGE_POLICY_NO_OWNER_FOUND = "Person list does not contain owner of policy.";
+    public static final String MESSAGE_POLICY_NO_OWNER_FOUND = "Contact list does not contain owner of policy.";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedPolicy> policies = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableSiasa} with the given persons and policies.
+     * Constructs a {@code JsonSerializableSiasa} with the given contacts and policies.
      */
     @JsonCreator
-    public JsonSerializableSiasa(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+    public JsonSerializableSiasa(@JsonProperty("contacts") List<JsonAdaptedContact> contacts,
                                  @JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
-        this.persons.addAll(persons);
+        this.contacts.addAll(contacts);
         this.policies.addAll(policies);
     }
 
@@ -44,7 +44,7 @@ class JsonSerializableSiasa {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableSiasa(ReadOnlySiasa source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         policies.addAll(source.getPolicyList().stream().map(JsonAdaptedPolicy::new).collect(Collectors.toList()));
     }
 
@@ -55,22 +55,22 @@ class JsonSerializableSiasa {
      */
     public Siasa toModelType() throws IllegalValueException {
         Siasa siasa = new Siasa();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (siasa.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedContact jsonAdaptedContact : contacts) {
+            Contact contact = jsonAdaptedContact.toModelType();
+            if (siasa.hasContact(contact)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
-            siasa.addPerson(person);
+            siasa.addContact(contact);
         }
 
         for (JsonAdaptedPolicy jsonAdaptedPolicy : policies) {
-            Person policyOwner = jsonAdaptedPolicy.getOwner().toModelType();
-            ObservableList<Person> personList = siasa.getPersonList();
-            if (!personList.contains(policyOwner)) {
+            Contact policyOwner = jsonAdaptedPolicy.getOwner().toModelType();
+            ObservableList<Contact> contactList = siasa.getContactList();
+            if (!contactList.contains(policyOwner)) {
                 throw new IllegalValueException(MESSAGE_POLICY_NO_OWNER_FOUND);
             }
-            int ownerIndex = personList.indexOf(policyOwner);
-            Person owner = personList.get(ownerIndex);
+            int ownerIndex = contactList.indexOf(policyOwner);
+            Contact owner = contactList.get(ownerIndex);
             Policy policy = jsonAdaptedPolicy.toModelType(owner);
             if (siasa.hasPolicy(policy)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_POLICY);

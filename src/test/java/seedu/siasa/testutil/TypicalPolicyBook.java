@@ -10,7 +10,7 @@ public class TypicalPolicyBook {
     public static Siasa getTypicalPolicyBook() {
         Siasa siasa = new Siasa();
         for (Policy policy : TypicalPolicies.getTypicalPolicies()) {
-            assert siasa.hasPerson(policy.getOwner());
+            assert siasa.hasContact(policy.getOwner());
             siasa.addPolicy(policy);
         }
         return siasa;

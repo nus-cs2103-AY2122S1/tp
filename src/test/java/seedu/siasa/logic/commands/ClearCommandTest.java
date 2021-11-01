@@ -13,7 +13,7 @@ import seedu.siasa.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptySiasa_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptySiasa_success() {
         Model model = new ModelManager(getTypicalSiasa(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalSiasa(), new UserPrefs());
         expectedModel.setSiasa(new Siasa());

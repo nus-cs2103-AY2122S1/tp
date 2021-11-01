@@ -16,5 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_EXPIRY = new Prefix("e/");
     public static final Prefix PREFIX_PAYMENT = new Prefix("p/");
     public static final Prefix PREFIX_COMMISSION = new Prefix("c/");
-    public static final Prefix PREFIX_CLIENT_INDEX = new Prefix("cl/");
+    public static final Prefix PREFIX_CONTACT_INDEX = new Prefix("cl/");
 }

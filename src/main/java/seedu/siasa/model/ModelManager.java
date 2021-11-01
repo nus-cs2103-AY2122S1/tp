@@ -2,7 +2,7 @@ package seedu.siasa.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.siasa.model.person.PersonComparator.PERSON_SORT_BY_ALPHA_ASC;
+import static seedu.siasa.model.contact.PersonComparator.CONTACT_SORT_BY_ALPHA_ASC;
 import static seedu.siasa.model.policy.PolicyComparator.POLICY_SORT_BY_ALPHA_ASC;
 
 import java.nio.file.Path;
@@ -17,7 +17,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.commons.core.LogsCenter;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 /**
@@ -28,11 +28,11 @@ public class ModelManager implements Model {
 
     private final Siasa siasa;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Contact> filteredContacts;
     private final FilteredList<Policy> filteredPolicies;
-    private SortedList<Person> sortedPersons;
+    private SortedList<Contact> sortedContacts;
     private SortedList<Policy> sortedPolicies;
-    private Comparator<Person> comparatorPerson;
+    private Comparator<Contact> comparatorContact;
     private Comparator<Policy> comparatorPolicy;
 
     /**
@@ -46,11 +46,11 @@ public class ModelManager implements Model {
 
         this.siasa = new Siasa(siasa);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.comparatorPerson = PERSON_SORT_BY_ALPHA_ASC;
-        filteredPersons = new FilteredList<>(this.siasa.getPersonList());
+        this.comparatorContact = CONTACT_SORT_BY_ALPHA_ASC;
+        filteredContacts = new FilteredList<>(this.siasa.getContactList());
         filteredPolicies = new FilteredList<>(this.siasa.getPolicyList());
-        sortedPersons = new SortedList<>(filteredPersons);
-        sortedPersons.setComparator(PERSON_SORT_BY_ALPHA_ASC);
+        sortedContacts = new SortedList<>(filteredContacts);
+        sortedContacts.setComparator(CONTACT_SORT_BY_ALPHA_ASC);
         sortedPolicies = new SortedList<>(filteredPolicies);
         sortedPolicies.setComparator(POLICY_SORT_BY_ALPHA_ASC);
     }
@@ -109,38 +109,43 @@ public class ModelManager implements Model {
     //=========== Person CRUD ================================================================================
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return siasa.hasPerson(person);
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return siasa.hasContact(contact);
     }
 
     @Override
-    public Optional<Person> getSimilarPerson(Person person) {
-        requireNonNull(person);
-        return siasa.getSimilarPerson(person);
+    public Optional<Contact> getSimilarContact(Contact contact) {
+        requireNonNull(contact);
+        return siasa.getSimilarContact(contact);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        siasa.removePersonAndAssociatedPolicies(target);
+    public void deleteContact(Contact target) {
+        siasa.removeContactAndAssociatedPolicies(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        siasa.addPerson(person);
+    public void addContact(Contact contact) {
+        siasa.addContact(contact);
         removeAllFilters();
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
 
-        siasa.setPerson(target, editedPerson);
+        siasa.setContact(target, editedContact);
     }
 
     @Override
-    public Map<Person, Integer> getNumberPoliciesPerPerson() {
-        return siasa.getNumberPoliciesPerPerson();
+    public Map<Contact, Integer> getNumberPoliciesPerContact() {
+        return siasa.getNumberPoliciesPerContact();
+    }
+
+    @Override
+    public Map<Contact, Integer> getCommissionPerContact() {
+        return siasa.getCommissionPerContact();
     }
 
     //=========== Policy CRUD ================================================================================
@@ -176,7 +181,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removePoliciesBelongingTo(Person target) {
+    public void removePoliciesBelongingTo(Contact target) {
         siasa.removePoliciesBelongingTo(target);
     }
 
@@ -185,30 +190,30 @@ public class ModelManager implements Model {
         return siasa.getTotalCommission();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Contact List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
      * {@code versionedSiasa}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return sortedPersons;
+    public ObservableList<Contact> getFilteredContactList() {
+        return sortedContacts;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-        sortedPersons = new SortedList<>(filteredPersons);
-        sortedPersons.setComparator(comparatorPerson);
+        filteredContacts.setPredicate(predicate);
+        sortedContacts = new SortedList<>(filteredContacts);
+        sortedContacts.setComparator(comparatorContact);
     }
 
     @Override
-    public void updateFilteredPersonList(Comparator<Person> comparator) {
+    public void updateFilteredContactList(Comparator<Contact> comparator) {
         requireNonNull(comparator);
-        comparatorPerson = comparator;
-        sortedPersons.setComparator(comparatorPerson);
+        comparatorContact = comparator;
+        sortedContacts.setComparator(comparatorContact);
     }
 
     //=========== Filtered Policy List Accessors =============================================================
@@ -241,7 +246,7 @@ public class ModelManager implements Model {
      * Removes all filters on the filtered person list.
      */
     public void removeAllFilters() {
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
     }
 
@@ -261,7 +266,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return siasa.equals(other.siasa)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
+                && filteredContacts.equals(other.filteredContacts)
                 && filteredPolicies.equals(other.filteredPolicies);
     }
 

@@ -12,25 +12,25 @@ import seedu.siasa.logic.commands.DownloadCommand;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
-import seedu.siasa.logic.commands.client.AddClientCommand;
-import seedu.siasa.logic.commands.client.ClearClientPolicyCommand;
-import seedu.siasa.logic.commands.client.DeleteClientCommand;
-import seedu.siasa.logic.commands.client.EditClientCommand;
-import seedu.siasa.logic.commands.client.ListClientCommand;
-import seedu.siasa.logic.commands.client.ListClientPolicyCommand;
-import seedu.siasa.logic.commands.client.SortClientCommand;
+import seedu.siasa.logic.commands.contact.AddContactCommand;
+import seedu.siasa.logic.commands.contact.ClearContactPolicyCommand;
+import seedu.siasa.logic.commands.contact.DeleteContactCommand;
+import seedu.siasa.logic.commands.contact.EditContactCommand;
+import seedu.siasa.logic.commands.contact.ListContactCommand;
+import seedu.siasa.logic.commands.contact.ListContactPolicyCommand;
+import seedu.siasa.logic.commands.contact.SortContactCommand;
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
 import seedu.siasa.logic.commands.policy.DeletePolicyCommand;
 import seedu.siasa.logic.commands.policy.EditPolicyCommand;
 import seedu.siasa.logic.commands.policy.ListPolicyCommand;
 import seedu.siasa.logic.commands.policy.ShowExpiringPolicyCommand;
 import seedu.siasa.logic.commands.policy.SortPolicyCommand;
-import seedu.siasa.logic.parser.client.AddClientCommandParser;
-import seedu.siasa.logic.parser.client.ClearClientPolicyCommandParser;
-import seedu.siasa.logic.parser.client.DeleteClientCommandParser;
-import seedu.siasa.logic.parser.client.EditClientCommandParser;
-import seedu.siasa.logic.parser.client.ListClientPolicyCommandParser;
-import seedu.siasa.logic.parser.client.SortClientCommandParser;
+import seedu.siasa.logic.parser.contact.AddContactCommandParser;
+import seedu.siasa.logic.parser.contact.ClearContactPolicyCommandParser;
+import seedu.siasa.logic.parser.contact.DeleteContactCommandParser;
+import seedu.siasa.logic.parser.contact.EditContactCommandParser;
+import seedu.siasa.logic.parser.contact.ListContactPolicyCommandParser;
+import seedu.siasa.logic.parser.contact.SortContactCommandParser;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.logic.parser.policy.AddPolicyCommandParser;
 import seedu.siasa.logic.parser.policy.DeletePolicyCommandParser;
@@ -64,29 +64,29 @@ public class SiasaParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddClientCommand.COMMAND_WORD:
-            return new AddClientCommandParser().parse(arguments);
+        case AddContactCommand.COMMAND_WORD:
+            return new AddContactCommandParser().parse(arguments);
 
         case AddPolicyCommand.COMMAND_WORD:
             return new AddPolicyCommandParser().parse(arguments);
 
-        case EditClientCommand.COMMAND_WORD:
-            return new EditClientCommandParser().parse(arguments);
+        case EditContactCommand.COMMAND_WORD:
+            return new EditContactCommandParser().parse(arguments);
 
         case EditPolicyCommand.COMMAND_WORD:
             return new EditPolicyCommandParser().parse(arguments);
 
-        case DeleteClientCommand.COMMAND_WORD:
-            return new DeleteClientCommandParser().parse(arguments);
+        case DeleteContactCommand.COMMAND_WORD:
+            return new DeleteContactCommandParser().parse(arguments);
 
         case DeletePolicyCommand.COMMAND_WORD:
             return new DeletePolicyCommandParser().parse(arguments);
 
-        case ClearClientPolicyCommand.COMMAND_WORD:
-            return new ClearClientPolicyCommandParser().parse(arguments);
+        case ClearContactPolicyCommand.COMMAND_WORD:
+            return new ClearContactPolicyCommandParser().parse(arguments);
 
-        case SortClientCommand.COMMAND_WORD:
-            return new SortClientCommandParser().parse(arguments);
+        case SortContactCommand.COMMAND_WORD:
+            return new SortContactCommandParser().parse(arguments);
 
         case SortPolicyCommand.COMMAND_WORD:
             return new SortPolicyCommandParser().parse(arguments);
@@ -97,11 +97,11 @@ public class SiasaParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListClientPolicyCommand.COMMAND_WORD:
-            return new ListClientPolicyCommandParser().parse(arguments);
+        case ListContactPolicyCommand.COMMAND_WORD:
+            return new ListContactPolicyCommandParser().parse(arguments);
 
-        case ListClientCommand.COMMAND_WORD:
-            return new ListClientCommand();
+        case ListContactCommand.COMMAND_WORD:
+            return new ListContactCommand();
 
         case ListPolicyCommand.COMMAND_WORD:
             return new ListPolicyCommand();

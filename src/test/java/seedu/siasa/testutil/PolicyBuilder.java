@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
@@ -31,12 +31,12 @@ public class PolicyBuilder {
     private Commission commission;
     private Set<Tag> tags;
 
-    private Person owner;
+    private Contact owner;
 
     /**
      * Creates a {@code PolicyBuilder} with the default details and  owner.
      */
-    public PolicyBuilder(Person owner) {
+    public PolicyBuilder(Contact owner) {
         requireNonNull(owner);
         this.title = new Title(DEFAULT_TITLE);
         this.paymentStructure =
@@ -119,7 +119,7 @@ public class PolicyBuilder {
     /**
      * Sets the {@code Owner} of the {@code Policy} that we are building.
      */
-    public PolicyBuilder withOwner(Person owner) {
+    public PolicyBuilder withOwner(Contact owner) {
         this.owner = owner;
         return this;
     }

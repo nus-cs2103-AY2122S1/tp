@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
-import seedu.siasa.model.person.NameContainsKeywordsPredicate;
+import seedu.siasa.model.contact.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

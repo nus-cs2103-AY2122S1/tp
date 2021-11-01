@@ -15,7 +15,7 @@ import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 public class StorageManagerTest {
@@ -56,7 +56,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void siasaReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonAddressBookStorage} class.
@@ -65,8 +65,8 @@ public class StorageManagerTest {
         Siasa original = getTypicalSiasa();
         storageManager.saveSiasa(original);
         ReadOnlySiasa retrieved = storageManager.readSiasa().get();
-        for (Person person : retrieved.getPersonList()) {
-            assertTrue(original.hasPerson(person));
+        for (Contact contact : retrieved.getContactList()) {
+            assertTrue(original.hasContact(contact));
         }
         for (Policy policy : retrieved.getPolicyList()) {
             assertTrue(original.hasPolicy(policy));

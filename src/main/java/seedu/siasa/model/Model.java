@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.siasa.commons.core.GuiSettings;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 /**
@@ -16,7 +16,7 @@ import seedu.siasa.model.policy.Policy;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
     Predicate<Policy> PREDICATE_SHOW_ALL_POLICIES = unused -> true;
 
     /**
@@ -58,55 +58,60 @@ public interface Model {
     ReadOnlySiasa getSiasa();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the SIASA.
+     * Returns true if a contact with the same identity as {@code contact} exists in the SIASA.
      */
-    boolean hasPerson(Person person);
+    boolean hasContact(Contact contact);
 
     /**
-     * Returns true if a person with a similar full name as {@code person}
+     * Returns true if a contact with a similar full name as {@code contact}
      * exists in SIASA. Similar is defined as full names having an edit distance of zero
      * or one (case insensitive).
      */
-    Optional<Person> getSimilarPerson(Person person);
+    Optional<Contact> getSimilarContact(Contact contact);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the SIASA.
+     * Deletes the given contact.
+     * The contact must exist in the SIASA.
      */
-    void deletePerson(Person target);
+    void deleteContact(Contact target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the SIASA.
+     * Adds the given contact.
+     * {@code contact} must not already exist in the SIASA.
      */
-    void addPerson(Person person);
+    void addContact(Contact contact);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given contact {@code target} with {@code editedContact}.
      * {@code target} must exist in the SIASA.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the SIASA.
+     * The contact identity of {@code editedContact} must not be the same as another existing contact in the SIASA.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setContact(Contact target, Contact editedContact);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered contact list */
+    ObservableList<Contact> getFilteredContactList();
 
     /**
-     * Updates the filter of the person list to filter by the given {@code predicate}.
+     * Updates the filter of the contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredContactList(Predicate<Contact> predicate);
 
     /**
-     * Updates the comparator of the person list to sort by the given {@code comparator}.
+     * Updates the comparator of the contact list to sort by the given {@code comparator}.
      * @throws NullPointerException if {@code comparator} is null.
      */
-    void updateFilteredPersonList(Comparator<Person> comparator);
+    void updateFilteredContactList(Comparator<Contact> comparator);
 
     /**
-     * Returns a map of persons and the number of policies each of them has.
+     * Returns a map of contacts and the number of policies each of them has.
      */
-    Map<Person, Integer> getNumberPoliciesPerPerson();
+    Map<Contact, Integer> getNumberPoliciesPerContact();
+
+    /**
+     * Returrns a map of contacts and the commission from each contact.
+     */
+    Map<Contact, Integer> getCommissionPerContact();
 
     /**
      * Returns true if a policy with the same identity as {@code policy} exists in the SIASA.
@@ -148,7 +153,7 @@ public interface Model {
      * Removes all policies belonging to the given person {@code target}.
      * {@code target} must exist in the SIASA.
      */
-    void removePoliciesBelongingTo(Person target);
+    void removePoliciesBelongingTo(Contact target);
 
     /** Returns an unmodifiable view of the filtered policy list */
     ObservableList<Policy> getFilteredPolicyList();

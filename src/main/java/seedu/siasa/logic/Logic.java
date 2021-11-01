@@ -8,7 +8,7 @@ import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.ReadOnlySiasa;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Policy;
 
 /**
@@ -31,8 +31,8 @@ public interface Logic {
      */
     ReadOnlySiasa getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of contacts */
+    ObservableList<Contact> getFilteredContactList();
 
     /** Returns an unmodifiable view of the filtered list of policies */
     ObservableList<Policy> getFilteredPolicyList();

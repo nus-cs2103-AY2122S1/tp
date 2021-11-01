@@ -15,13 +15,13 @@ import seedu.siasa.logic.parser.Parser;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new SortPolicyCommand object
  */
 public class SortPolicyCommandParser implements Parser<SortPolicyCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortPolicyCommand
+     * and returns a SortPolicyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortPolicyCommand parse(String args) throws ParseException {

@@ -44,58 +44,68 @@ Student Insurance Agent Sales Assistant (SIASA) **is a Command Line Interface (C
 
 </div>
 
-### Adding a person: `addclient`
+### Adding a contact: `addcontact`
 
-Adds a person to the application.
+Adds a contact to the application.
 
-Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
+Format: `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of tags (including 0)
 </div>
 
 Examples:
-* `addclient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addclient n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addcontact n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addcontact n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `listclient`
+### Listing all contacts : `listcontact`
 
-Shows a list of all persons in the application.
+Shows a list of all contacts in the application.
 
-Format: `listclient`
+Format: `listcontact`
 
-### Editing a person : `editclient`
+### Finding contacts: `findcontact`
 
-Edits an existing person in the application.
+Finds and lists all contacts in address book whose name contains any of the argument keywords. 
 
-Format: `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `findcontact KEYWORD`
+* Keyword matching is case insensitive.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+Example:
+*  `findcontact john` returns a list with all the contacts containing the name john.
+
+### Editing a contact : `editcontact`
+
+Edits an existing contact in the application.
+
+Format: `editcontact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
+* You can remove all the contact’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `editclient 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `editclient 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editcontact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `editcontact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-### Deleting a person : `deleteclient`
+### Deleting a contact : `deletecontact`
 
-Deletes the specified person from the application.
+Deletes the specified contact from the application.
 
-Format: `deleteclient INDEX`
+Format: `deletecontact INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listclient` followed by `deleteclient 2` deletes the 2nd person in the application.
-* `find Betsy` followed by `deleteclient 1` deletes the 1st person in the results of the `find` command.
+* `listcontact` followed by `deletecontact 2` deletes the 2nd contact in the application.
+* `findcontact Betsy` followed by `deletecontact 1` deletes the 1st contact in the results of the `find` command.
 
-### Sorting a person : `sortclient`
+### Sorting a contact : `sortcontact`
 
 Sorts the client list alphabetically by the order specified.
 
@@ -108,7 +118,7 @@ These are the current sorters implemented:
 
 ### Clearing all entries : `clear`
 
-Clears all persons and policies from the application.
+Clears all contacts and policies from the application.
 
 Format: `clear`
 
@@ -116,7 +126,7 @@ Format: `clear`
 
 Adds a policy to the policy list.
 
-Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
+Format: `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/CONTACT_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A policy can have any number of tags (including 0)
@@ -144,14 +154,14 @@ Shows a list of all policies.
 
 Format: `listpolicy`
 
-### List a Person's Policies : `clientpolicy`
+### List a Contact's Policies : `contactpolicy`
 
-Shows the list of policies that belong to a specific person.
+Shows the list of policies that belong to a specific contact.
 
-Format: `clientpolicy PERSON_INDEX`
+Format: `clientpolicy CONTACT_INDEX`
 
-- List policies for the person at the specified PERSON_INDEX.
-- The index refers to the index number shown in the displayed persons list.
+- List policies for the contact at the specified CONTACT_INDEX.
+- The index refers to the index number shown in the displayed contacts list.
 - The index must be a positive integer 1, 2, 3, …​
 
 ### Editing a policy : `editpolicy`
@@ -193,23 +203,11 @@ These are the current sorts implemented:
 * `dateasc`: Sorts the policies in ascending order based on the saved expiry date
 * `datedsc`: Sorts the policies in descending order based on the saved expiry date
 
-### Clear Person's Policy : `clearpolicy`
+### Clear Contact's Policy : `clearpolicy`
 
-Clear all policies from a person.
+Clear all policies from a contact.
 
 Format: `clearpolicy PERSON_INDEX`
-
-### Download useful statistics as CSV : `download` 
-
-Download a CSV file containing useful statistics for the user. This includes
-- Most valuable clients + commission from them
-- Number of policies per customer
-- Average number of policies per customer
-- Total commission
-
-The file is stored in '/data' folder
-
-Format: `download`
 
 ### Show Expiring Policies: `expiringpolicy`
 
@@ -217,6 +215,17 @@ Show policies that are expiring in a month.
 
 Format: `expiringpolicy`
 
+### Download useful statistics as CSV : `download`
+
+Download a CSV file containing useful statistics for the user. This includes
+- Most valuable contacts + commission from them
+- Number of policies per contact
+- Average number of policies per contact
+- Total commission
+
+The file is stored in '/data' folder
+
+Format: `download`
 
 ### Exiting the program : `exit`
 
@@ -241,17 +250,17 @@ SIASA data are saved in the hard disk automatically after any command that chang
 
 Action | Format, Examples
 --------|------------------
-**Add Person** | `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete Person** | `deleteclient INDEX`<br> e.g., `delete 3`
-**Edit Person** | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**List Persons** | `listclient`
-**Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/PERSON_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
+**Add Contact** | `addcontact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete Contact** | `deletecontact INDEX`<br> e.g., `delete 3`
+**Edit Contact** | `editcontact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**List Contacts** | `listcontact`
+**Add Policy** | `addpolicy n/NAME_OF_POLICY p/PMT_AMOUNT [PMT_FREQ] [NUM_OF_PMT] c/COMMISSION_% NUM_OF_PMT cl/CONTACT_INDEX [t/TAGS] [e/COVERAGE_EXPIRY_DATE]`
 **Delete Policy** | `deletepolicy INDEX`
 **List Policies** | `listpolicy`
-**List Person's Policies** | `clientpolicy PERSON_INDEX`
-**Clear Person's Policies** | `clearpolicy PERSON_INDEX`
+**List Contact's Policies** | `clientpolicy PERSON_INDEX`
+**Clear Contact's Policies** | `clearpolicy PERSON_INDEX`
+**Show Expiring Policies** | `expiringpolicy`
 **Clear All** | `clear`
 **Download** | `download`
-**Show Expiring Policies** | `expiringpolicy`
 **Help** | `help`
 **Exit** | `exit`

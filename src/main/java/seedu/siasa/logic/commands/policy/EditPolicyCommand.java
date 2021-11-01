@@ -21,7 +21,7 @@ import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
-import seedu.siasa.model.person.Person;
+import seedu.siasa.model.contact.Contact;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.CoverageExpiryDate;
 import seedu.siasa.model.policy.PaymentStructure;
@@ -30,7 +30,7 @@ import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing policy in the address book.
  */
 public class EditPolicyCommand extends Command {
 
@@ -57,8 +57,8 @@ public class EditPolicyCommand extends Command {
     private final EditPolicyDescriptor editPolicyDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPolicyDescriptor details to edit the person with
+     * @param index of the policy in the filtered policy list to edit
+     * @param editPolicyDescriptor details to edit the policy with
      */
     public EditPolicyCommand(Index index, EditPolicyDescriptor editPolicyDescriptor) {
         requireNonNull(index);
@@ -74,7 +74,7 @@ public class EditPolicyCommand extends Command {
         List<Policy> lastShownList = model.getFilteredPolicyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
         Policy policyToEdit = lastShownList.get(index.getZeroBased());
@@ -111,13 +111,13 @@ public class EditPolicyCommand extends Command {
         if (updatedCommission.numberOfPayments > updatedPaymentStructure.numberOfPayments) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMMISSION_NUM_OF_PMT);
         }
-        Person updatedOwner;
+        Contact updatedOwner;
         if (editPolicyDescriptor.getOwnerIndex().isEmpty()) {
             updatedOwner = policyToEdit.getOwner();
         } else {
-            List<Person> lastShownList = model.getFilteredPersonList();
+            List<Contact> lastShownList = model.getFilteredContactList();
             if (editPolicyDescriptor.getOwnerIndex().get().getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
             }
             updatedOwner = lastShownList.get(editPolicyDescriptor.getOwnerIndex().get().getZeroBased());
         }
@@ -145,8 +145,8 @@ public class EditPolicyCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the policy with. Each non-empty field value will replace the
+     * corresponding field value of the policy.
      */
     public static class EditPolicyDescriptor {
         private Title title;

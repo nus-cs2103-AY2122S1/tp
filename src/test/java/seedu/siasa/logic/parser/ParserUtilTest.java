@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.siasa.testutil.Assert.assertThrows;
-import static seedu.siasa.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.siasa.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,10 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.siasa.logic.parser.exceptions.ParseException;
-import seedu.siasa.model.person.Address;
-import seedu.siasa.model.person.Email;
-import seedu.siasa.model.person.Name;
-import seedu.siasa.model.person.Phone;
+import seedu.siasa.model.contact.Address;
+import seedu.siasa.model.contact.Email;
+import seedu.siasa.model.contact.Name;
+import seedu.siasa.model.contact.Phone;
 import seedu.siasa.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -50,10 +50,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_CONTACT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_CONTACT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test

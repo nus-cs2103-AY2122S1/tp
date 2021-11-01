@@ -13,7 +13,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.policy.Policy;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a policy identified using it's displayed index from the address book.
  */
 public class DeletePolicyCommand extends Command {
 

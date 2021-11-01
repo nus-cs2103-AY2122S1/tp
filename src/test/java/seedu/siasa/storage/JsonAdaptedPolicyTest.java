@@ -3,7 +3,7 @@ package seedu.siasa.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.siasa.storage.JsonAdaptedPolicy.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.siasa.testutil.Assert.assertThrows;
-import static seedu.siasa.testutil.TypicalPersons.ALICE;
+import static seedu.siasa.testutil.TypicalContacts.ALICE;
 import static seedu.siasa.testutil.TypicalPolicies.CRITICAL_ILLNESS;
 import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
 
@@ -26,7 +26,7 @@ public class JsonAdaptedPolicyTest {
 
     private static final String VALID_TITLE = FULL_LIFE.getTitle().toString();
     private static final String VALID_EXPIRY_DATE = FULL_LIFE.getCoverageExpiryDate().toString();
-    private static final JsonAdaptedPerson VALID_OWNER = new JsonAdaptedPerson(FULL_LIFE.getOwner());
+    private static final JsonAdaptedContact VALID_OWNER = new JsonAdaptedContact(FULL_LIFE.getOwner());
     private static final JsonAdaptedCommission VALID_COMMISSION = new JsonAdaptedCommission(FULL_LIFE.getCommission());
     private static final JsonAdaptedPaymentStructure VALID_PAYMENT_STRUCTURE =
             new JsonAdaptedPaymentStructure(FULL_LIFE.getPaymentStructure());

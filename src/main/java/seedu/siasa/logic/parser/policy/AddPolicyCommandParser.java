@@ -1,8 +1,8 @@
 package seedu.siasa.logic.parser.policy;
 
 import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
@@ -26,13 +26,13 @@ import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddPolicyCommand object
  */
 public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCLientCommand
-     * and returns an AddClientCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddPolicyCommand
+     * and returns an AddPolicyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddPolicyCommand parse(String args) throws ParseException {
@@ -42,7 +42,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
                         PREFIX_EXPIRY,
                         PREFIX_PAYMENT,
                         PREFIX_COMMISSION,
-                        PREFIX_CLIENT_INDEX,
+                    PREFIX_CONTACT_INDEX,
                         PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap,
@@ -50,7 +50,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
                 PREFIX_EXPIRY,
                 PREFIX_PAYMENT,
                 PREFIX_COMMISSION,
-                PREFIX_CLIENT_INDEX)
+            PREFIX_CONTACT_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
         }
@@ -62,7 +62,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
                 ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).get(), paymentStructure);
         CoverageExpiryDate coverageExpiryDate =
                 ParserUtil.parseCoverageExpiryDate(argMultimap.getValue(PREFIX_EXPIRY).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT_INDEX).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         return new AddPolicyCommand(title, paymentStructure, coverageExpiryDate, commission, index, tagList);
