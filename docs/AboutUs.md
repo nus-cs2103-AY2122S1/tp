@@ -9,12 +9,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Tze Jit
+### Kho Tze Jit
 
 <img src="images/tzejit.png" width="200px">
 
 [[github](https://github.com/tzejit)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tzejit.md)]
 
 * Role: Team lead
 * Responsibilities: UI
