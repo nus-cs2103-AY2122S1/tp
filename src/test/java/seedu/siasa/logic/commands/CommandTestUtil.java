@@ -15,8 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.siasa.commons.core.index.Index;
-import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.commands.contact.EditContactCommand;
+import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.Siasa;
 import seedu.siasa.model.contact.Contact;

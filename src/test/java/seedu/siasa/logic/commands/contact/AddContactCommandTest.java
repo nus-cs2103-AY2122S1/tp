@@ -1,14 +1,12 @@
 package seedu.siasa.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
@@ -18,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.siasa.commons.core.GuiSettings;
-import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ReadOnlySiasa;
@@ -221,8 +218,6 @@ public class AddContactCommandTest {
         public Map<Contact, Integer> getNumberPoliciesPerContact() {
             throw new AssertionError("This method should not be called.");
         }
-
-        ;
     }
 
     /**

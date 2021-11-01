@@ -56,10 +56,10 @@ public class EditContactCommandTest {
 
         ContactBuilder contactInList = new ContactBuilder(lastContact);
         Contact editedContact = contactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+            .withTags(VALID_TAG_HUSBAND).build();
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditContactCommand editContactCommand = new EditContactCommand(indexLastContact, descriptor);
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS, editedContact);
@@ -72,7 +72,8 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_CONTACT, new EditContactDescriptor());
+        EditContactCommand editContactCommand =
+            new EditContactCommand(INDEX_FIRST_CONTACT, new EditContactDescriptor());
         Contact editedContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS, editedContact);
@@ -89,7 +90,7 @@ public class EditContactCommandTest {
         Contact contactInFilteredList = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
         Contact editedContact = new ContactBuilder(contactInFilteredList).withName(VALID_NAME_BOB).build();
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_CONTACT,
-                new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
+            new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS, editedContact);
 
@@ -115,7 +116,7 @@ public class EditContactCommandTest {
         // edit person in filtered list into a duplicate in address book
         Contact contactInList = model.getSiasa().getContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
         EditContactCommand editContactCommand = new EditContactCommand(INDEX_FIRST_CONTACT,
-                new EditContactDescriptorBuilder(contactInList).build());
+            new EditContactDescriptorBuilder(contactInList).build());
 
         assertCommandFailure(editContactCommand, model, EditContactCommand.MESSAGE_DUPLICATE_CONTACT);
     }
@@ -141,7 +142,7 @@ public class EditContactCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getSiasa().getContactList().size());
 
         EditContactCommand editContactCommand = new EditContactCommand(outOfBoundIndex,
-                new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
+            new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editContactCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
