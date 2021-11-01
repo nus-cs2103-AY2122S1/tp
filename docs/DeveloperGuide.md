@@ -13,6 +13,16 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+Financial Advisor Smart Tracker (FAST), is a free and open-source desktop app for Financial Advisors to manage their contacts.
+FAST is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+This document is a Developer Guide written to help developers who wish to understand more about the design and implementation of FAST. 
+It explains the internal structure of FAST and how the different components in FAST work together to execute the different commands.
+We hope that this Developer Guide will help any developers who wish to contribute to FAST to have a better understanding of FAST.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -21,68 +31,91 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
+In this section, you will learn more about the design and structure of **FAST**.
+
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T09-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" width="300" />
+<br> *Figure 1: Architecture Diagram of FAST*
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+**FAST** is developed and build upon **AddressBook3**. We have decided to keep the 6 components used in **AddressBook3**
+but modify and enhance each component to fit the needs of **FAST**.
+The **Architecture diagram** given above explains the high-level design of FAST.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+There are the 6 major components of **FAST**:
+1) **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/MainApp.java). It is responsible for,
+   * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+   * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+2) [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+3) [**`UI`**](#ui-component): The UI of the **FAST**.
+4) [**`Logic`**](#logic-component): The command executor.
+5) [**`Model`**](#model-component): Holds the data of the **FAST** in memory.
+6) [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-The rest of the App consists of four components.
+Each of the four main components(*labelled 3-6*) (also shown in the diagram above),
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* defines its *API* in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality 
+using the `LogicManager.java` class which follows the `Logic` interface. 
+Other components interact with a given component through its interface rather than the concrete class 
+(reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+
+<img src="images/ComponentManagers.png" width="300" />
+<br> *Figure 2: Components Managers of FAST*
 
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
-Each of the four main components (also shown in the diagram above),
-
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
-
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
-
-<img src="images/ComponentManagers.png" width="300" />
+<br> *Figure 3: Architecture Sequence Diagram of FAST*
 
 The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+This section will explain the structure of the UI component.
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+**API**: [`Ui.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+![Structure of the UI Component](images/UiClassDiagram.png) 
+<br> *Figure 4: UI Class Diagram of FAST*
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+Our `UI` component uses the JavaFx UI framework. 
+The layout of these UI parts are defined in matching `.fxml` files that are in the [`src/main/resources/view`](https://github.com/AY2122S1-CS2103T-T09-4/tp/tree/master/src/main/resources/view) folder. 
+
+The UI consists of a `MainWindow` that is made up of parts such as:
+* `CommandBox`
+* `ResultDisplay`
+* `PersonListPanel`
+* `StatusBarFooter`
+* `HelpWindow`
+* `StatsWindow`
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component,
-
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+The `PersonCard` class will create new `ItemComponent` and `TagComponent` that will help to add and load the icons used in FAST.
+
+The `StatsWindow` will display a *pie chart* and a *brief analysis message*. 
+The data used in the *piechart* are obtained from the 'Person' object residing in the `Model` component, which is obtained from `StatsWindowData`. 
 
 ### Logic component
 
