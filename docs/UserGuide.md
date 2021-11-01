@@ -419,7 +419,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * Lessons are fixed at **two** hour periods. In upcoming features, we will give you the power to define your lesson timing ranges.
 
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD.
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, … The currency used here in **TuitiONE** is Singapore dollar, SGD. The maximum value for a lesson, for practical reasons, is capped at SGD $ 200.00 inclusive.
 
 Example(s):
 
