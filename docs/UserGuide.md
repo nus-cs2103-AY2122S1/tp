@@ -32,7 +32,7 @@ Welcome to LeadsForce's User Guide! Find answers and step-by-step instructions t
     * [4.11 Exiting the program: exit](#411-exiting-the-program--exit)
     * [4.12 Saving data](#412-saving-the-data)
     * [4.13 Edit data file](#413-edit-data-file)
-* [**5. Multiple Address Book**](#5-multiple-address-books-feature)
+* [**5. Multiple Address Books**](#5-multiple-address-books-feature)
     * [5.1 Create new address book: ab create](#51-create-new-address-book--ab-create)
     * [5.2 Delete existing address book: ab delete](#52-delete-existing-address-book-ab-delete--ab-delete)
     * [5.3 Switch to different address book: ab switch](#53-switch-to-different-address-book--ab-switch)
@@ -52,12 +52,14 @@ meetings. It is optimized for use via a Command Line Interface (CLI) while still
 Managing your leads has never been easier.
 
 ### 1.1 Reading this User Guide
-When reading our User Guide, here are some important notations to take note of! 
+When reading our User Guide, here are some important information to take note of. 
 
+### 1.1.1 Icons and its meaning
 | **Icon** | **Meaning of icons** |
 | --- | --- |
-
-
+| <img src=images/info_icon.png width="50" > | Notes are specific conditions or behaviours of a feature. |
+| <img src=images/tip_icon.png width="50" > | tips are suggestions that can help LeadsForce run faster. |
+| <img src=images/warn_icon.png width="50" > | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files. |
 
 ## 2. Quick start
 
@@ -70,20 +72,19 @@ When reading our User Guide, here are some important notations to take note of!
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command in the command box and press Enter to execute it. Here are some example commands you can try:
 
     * **`list`** : Lists all contacts.
 
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Creates a contact named `John Doe` to the Address Book.
+    * **`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`** : Creates a contact named `John Doe` to the Address Book.
 
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete 3`** : Deletes the 3rd contact shown in the current list.
 
     * **`clear`** : Deletes all contacts.
 
     * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
