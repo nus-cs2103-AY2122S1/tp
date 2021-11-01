@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -219,4 +220,26 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for removeExtraWhitespace --------------------------------------
+    /*
+     * Equivalence Partitions:
+     * - null
+     * - empty string
+     * - strings with no extra spaces in between words
+     * - strings with extra spaces in between words
+     * - strings with other whitespace characters in between words
+     */
+
+    @Test
+    public void removeExtraWhitespace_nullGiven_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.removeExtraWhitespace(null));
+    }
+
+    @Test
+    public void removeExtraWhitespace_validInputs_correctResult() {
+        assertEquals(StringUtil.removeExtraWhitespace(""), "");
+        assertEquals(StringUtil.removeExtraWhitespace("words words more words"), "words words more words");
+        assertEquals(StringUtil.removeExtraWhitespace("words    more    words       -flag"), "words more words -flag");
+        assertEquals(StringUtil.removeExtraWhitespace("words \t \n words"), "words words");
+    }
 }
