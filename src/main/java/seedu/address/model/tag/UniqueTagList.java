@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,8 +16,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 public class UniqueTagList implements Iterable<Tag> {
 
     // TODO: fix bug where update event not fired
-    private final ObservableList<Tag> internalList =
-            FXCollections.observableArrayList(tag -> new Observable[] {tag.versionProperty()});
+    private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
     /**
@@ -43,6 +41,7 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
 
+        System.out.println("added " + toAdd);
         internalList.add(toAdd);
     }
 
@@ -61,9 +60,8 @@ public class UniqueTagList implements Iterable<Tag> {
      * Removes the tags based on predicates from the list.
      * The tags must exist in the list.
      */
-    public FilteredList<Tag> removeByFields(List<Predicate<Tag>> predicates) {
-        requireAllNonNull(predicates);
-        Predicate<Tag> predicate = predicates.stream().reduce(x -> true, Predicate::and);
+    public FilteredList<Tag> removeByFields(Predicate<Tag> predicate) {
+        requireAllNonNull(predicate);
         FilteredList<Tag> filteredList = internalList.filtered(predicate);
         if (filteredList.size() < 1) {
             throw new TagNotFoundException();

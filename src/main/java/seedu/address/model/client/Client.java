@@ -70,9 +70,7 @@ public class Client {
      * Invokes this when the client is no longer referenced.
      */
     public void delete() {
-        tags.forEach(tag -> {
-            tag.removeClient(this);
-        });
+        tags.forEach(tag -> tag.removeClient(this));
     }
 
     /**

@@ -41,24 +41,16 @@ public class TagsPanel extends UiPart<Region> {
 
         tagList.addListener((ListChangeListener<Tag>) change -> {
             while (change.next()) {
-                if (change.wasAdded()) {
-                    Tag tag = change.getAddedSubList().get(0);
+                for (Tag tag: change.getRemoved()) {
+                    logger.fine(tag.getName() + "was removed from the list!");
+                    tags.getChildren().remove(tagLabels.remove(tag));
+                }
+
+                for (Tag tag: change.getAddedSubList()) {
                     TagLabel tagLabel = new TagLabel(tag.toString(), tag, commandBox);
                     logger.fine(tag.getName() + "was added to the list!");
                     tags.getChildren().add(tagLabel.getRoot());
                     tagLabels.put(tag, tagLabel.getRoot());
-                } else if (change.wasRemoved()) {
-                    Tag tag = change.getRemoved().get(0);
-                    logger.fine(tag.getName() + "was removed from the list!");
-                    tags.getChildren().remove(tagLabels.remove(change.getRemoved().get(0)));
-                } else if (change.wasUpdated()) {
-                    tags.getChildren().clear();
-                    change.getList().stream()
-                            .sorted(Comparator.comparing(Tag::getName))
-                            .forEach(tag -> {
-                                TagLabel tagLabel = new TagLabel(tag.toString(), tag, commandBox);
-                                tags.getChildren().add(tagLabel.getRoot());
-                            });
                 }
             }
         });

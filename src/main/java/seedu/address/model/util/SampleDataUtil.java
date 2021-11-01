@@ -129,20 +129,6 @@ public class SampleDataUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    private static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-
-        return tagSet;
-    }
-
-    /**
      * Parses a {@code String tag} into a {@code Tag} and store it into {@code addressBook}.
      *
      * @throws ParseException if the given {@code tag} is invalid.

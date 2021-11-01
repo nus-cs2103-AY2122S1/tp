@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -47,12 +46,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         clients.asUnmodifiableObservableList().addListener((ListChangeListener<Client>) change -> {
             while (change.next()) {
-                if (change.wasRemoved()) {
-                    Client client = change.getRemoved().get(0);
-                    logger.fine(client.getName() + " was replaced/removed from UniqueClientList");
-                    client.delete();
-                    removeUnreferencedTags();
+                for (Client client: change.getAddedSubList()) {
+                    client.getTags().stream()
+                            .filter(tag -> !tags.contains(tag))
+                            .forEach(tags::add);
                 }
+
+                for (Client client: change.getRemoved()) {
+                    client.delete();
+                }
+
+                removeUnreferencedTags();
             }
         });
     }
@@ -172,18 +176,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * This method should be invoked when
      */
     public void removeUnreferencedTags() {
-        Predicate<Tag> predicate = new TagIsUnreferenced();
-        ArrayList<Predicate<Tag>> predicatesToDelete = new ArrayList<>();
-        predicatesToDelete.add(predicate);
-
-        FilteredList<Tag> filteredList = getTagList().filtered(predicate);
+        FilteredList<Tag> filteredList = getTagList().filtered(new TagIsUnreferenced());
 
         if (filteredList.size() < 1) {
             return;
         }
 
         logger.info("Cleaning unreferenced tags...");
-        FilteredList<Tag> removedTags = removeTagByFields(predicatesToDelete);
+        FilteredList<Tag> removedTags = removeTagByFields(new TagIsUnreferenced());
         logger.info(removedTags.size() + " unreferenced tags are cleared.");
     }
 
@@ -191,8 +191,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes client with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Client with {@code clientId} and {@code email} must exist in the address book.
      */
-    public FilteredList<Tag> removeTagByFields(List<Predicate<Tag>> predicates) {
-        return tags.removeByFields(predicates);
+    public FilteredList<Tag> removeTagByFields(Predicate<Tag> predicate) {
+        return tags.removeByFields(predicate);
     }
 
     /**
