@@ -16,59 +16,46 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
 Class UniquePersonList
 Class UniquePatientList
 Class UniqueDoctorList
+Class UniqueAppointmentList
 Class Person
 Class Patient
-Class Doctor
-Class Address
-Class Email
-Class Name
-Class Phone
-Class DOB
-Class Remark
-Class Tag
 Class Risk
+Class Doctor
 
+
+Class Appointment
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-
-
 ModelManager .up.|> Model
 Model .down.> State
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyPlannerMd
-ModelManager -left-> "1" PlannerMd
+ModelManager -down-> "1" PlannerMd
 ModelManager -right-> "1" UserPrefs
 PlannerMd .up.|> ReadOnlyPlannerMd
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 Patient .down.|> Person
 Doctor .down.|> Person
-PlannerMd *--> "1" UniquePatientList
+PlannerMd *--> "1" UniqueAppointmentList
+PlannerMd *--> "1" UniquePatientLists
 PlannerMd *--> "1" UniqueDoctorList
-UniquePatientList .down.|> UniquePersonList
-UniqueDoctorList .down.|> UniquePersonList
-UniquePatientList --> "~* all" Patient
-UniqueDoctorList --> "~* all" Doctor
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> DOB
-Person *--> Remark
-Person *--> "*" Tag
-Patient *--> Risk
+UniquePatientList ..|> UniquePersonList
+UniqueDoctorList ..|> UniquePersonList
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+UniqueAppointmentList -->  "~* all" Appointment
+UniquePatientList -->  "~* all" Patient
+UniqueDoctorList --> "~* all" Doctor
+
+Patient *-down-> Risk
 
 ModelManager -->"~* filtered" Patient
 ModelManager -->"~* filtered" Doctor
+ModelManager -->"~* filtered" Appointment
 @enduml

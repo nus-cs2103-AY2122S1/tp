@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs remark command;
+:Parse user input;
+if () then ([index is valid and no invalid prefixes])
+  if () then ([remark prefix is present])
+  : Generate new RemarkCommand;
+  : Execute RemarkCommand;
+      if () then ([remark input is not empty])
+       : Generate successful edit remark message;
+      else ([else])
+      : Generate successful delete remark message;
+      endif
+  else ([else])
+  : Generate error message\n indicating invalid command format;
+  endif
+else ([else])
+: Generate error message\n indicating invalid command format;
+endif
+: Display result to user;
+stop
+
+@enduml
