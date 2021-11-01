@@ -89,6 +89,7 @@ public class JsonAdaptedPerson {
 
     /**
      * Checks whether given Image is the default profile image
+     *
      * @param image image to check
      * @return true, if given image is same as default
      */

@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
 public class Ai {
 
     private static final Logger logger = LogsCenter.getLogger(Ai.class);
+    private static final String repoCount = "repo-count";
 
     /**
      * Returns the Cosine Similarity between two vectors
@@ -87,10 +88,10 @@ public class Ai {
 
     private static void normalizeRepoCount(HashMap<String, HashMap<String, Double>> features,
                                            HashMap<String, Double> mainUser) {
-        double sum = features.values().parallelStream().mapToDouble(u -> u.get("repo-count")).sum()
-                + mainUser.get("repo-count");
-        features.values().parallelStream().forEach(k -> k.replace("repo-count", k.get("repo-count") / sum));
-        mainUser.replace("repo-count", mainUser.get("repo-count") / sum);
+        double sum = features.values().parallelStream().mapToDouble(u -> u.get(repoCount)).sum()
+                + mainUser.get(repoCount);
+        features.values().parallelStream().forEach(k -> k.replace(repoCount, k.get(repoCount) / sum));
+        mainUser.replace(repoCount, mainUser.get(repoCount) / sum);
     }
 
     private static HashMap<String, Double> sort(HashMap<String, Double> distances) {
@@ -156,7 +157,7 @@ public class Ai {
         HashMap<String, ArrayList<String>> commonLanguages = new HashMap<>();
         stats.keySet().forEach(u -> commonLanguages.put(u, new ArrayList<>(sort(stats.get(u))
                 .keySet().stream()
-                .filter(s -> !s.equals("repo-count") && !s.equals("Other") && mainUserStat.containsKey(s))
+                .filter(s -> !s.equals(repoCount) && !s.equals("Other") && mainUserStat.containsKey(s))
                 .limit(5)
                 .collect(Collectors.toList()))));
         return commonLanguages;
