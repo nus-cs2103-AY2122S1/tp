@@ -48,5 +48,6 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("+111 636 856 789"));
         assertTrue(Phone.isValidPhone("636 85 67 89"));
         assertTrue(Phone.isValidPhone("+111 636 85 67 89"));
+        assertTrue(Phone.isValidPhone("+6501234567"));
     }
 }
