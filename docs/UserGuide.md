@@ -132,6 +132,10 @@ Adds an applicant to RecruitIn.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​`
 
 * To add multiple tags, multiple `t/` prefixes should be used.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Providing multiple tag values in a single `t/` prefix will lead to an error. (i.e. `add n/John p/90909090 e/john@gmail.com r/Software Tester et/Full time s/4500 l/High School y/3 t/smart helpful` will lead to an error)
+</div>
+* Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
 * Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
 Examples:
@@ -149,8 +153,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMP
  * The `INDEX` refers to the index number shown in the displayed applicants list.
  * For `t/` prefix in particular, if **only** a single tag prefix is provided like so `t/` with no values, it will erase
 remove tags from the applicant.
-   * **note** : Giving more than 1 tag prefix input with 1 or more having no value like so `t/ t/smart` will instead lead
-   to an error.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Giving more than 1 tag prefix input with 1 or more having no value will instead lead to an error. (i.e. `edit 1 t/ t/smart` leads to an error)
+</div>
+ * Inputs for each prefix is taken as a single value. (i.e. `r/software engineer` has the value `software engineer`)
  * Prefix inputs for `edit` command must follow the same input specifications as `add` command. 
 Refer to [**Add Input Specifications**](#add-inputs) for detailed input specifications.
 
