@@ -21,7 +21,7 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
+      <HBox alignment="TOP_LEFT" spacing="5">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
@@ -31,21 +31,21 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
       </HBox>
       <FlowPane fx:id="healthConditions" />
-      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
+      <HBox alignment="TOP_LEFT" spacing="5">
         <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/phone_icon.png" />
         </ImageView>
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
       </HBox>
 
-      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
+      <HBox alignment="TOP_LEFT" spacing="5">
         <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/address_icon.png" />
         </ImageView>
         <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
       </HBox>
 
-      <HBox alignment="CENTER_LEFT" spacing="5" style="-fx-alignment: top-left;">
+      <HBox alignment="TOP_LEFT" spacing="5">
         <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/language_icon.png" />
         </ImageView>
