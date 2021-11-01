@@ -187,7 +187,13 @@ public class Task implements Comparable<Task>, Cloneable {
         LocalDate thisDate = this.getDate();
         LocalDate otherDate = otherTask.getDate();
 
-        return thisDate.compareTo(otherDate);
+        int result = thisDate.compareTo(otherDate);
+
+        if (result == 0) {
+            return this.priority.compareTo(otherTask.priority);
+        } else {
+            return result;
+        }
     }
 
     @Override
