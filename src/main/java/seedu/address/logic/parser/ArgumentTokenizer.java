@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_BAD_PREFIX_FORM;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -23,7 +27,7 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
     }
@@ -85,7 +89,8 @@ public class ArgumentTokenizer {
      * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
      * @return                ArgumentMultimap object that maps prefixes to their arguments
      */
-    private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions) {
+    private static ArgumentMultimap extractArguments(String argsString, List<PrefixPosition> prefixPositions)
+            throws ParseException {
 
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
@@ -116,13 +121,26 @@ public class ArgumentTokenizer {
      */
     private static String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
-                                        PrefixPosition nextPrefixPosition) {
+                                        PrefixPosition nextPrefixPosition) throws ParseException {
         Prefix prefix = currentPrefixPosition.getPrefix();
-
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
+
+        if (prefixHasBadForm(argsString, valueStartPos)) {
+            throw new ParseException(MESSAGE_BAD_PREFIX_FORM);
+        }
+
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
 
         return value.trim();
+    }
+
+    /**
+     * Checks if the prefix has bad form, for example, not followed by whitespace.
+     */
+    private static boolean prefixHasBadForm(String argsString, int valueStartPos) {
+        return argsString.length() - 1 < valueStartPos
+                ? argsString.length() != valueStartPos
+                : argsString.charAt(valueStartPos) != ' ';
     }
 
     /**
