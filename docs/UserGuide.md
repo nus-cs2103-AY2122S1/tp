@@ -292,7 +292,10 @@ the earliest time to the latest time.
 #### `NAME`
 * The name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
-
+   <div markdown="block" class="alert alert-info">
+   :information_source: FAST does not allow duplicate names, but you may use numbers to differentiate between 2 clients with
+   the exact same name.<br>
+   </div>
 
 #### `PHONE`
 * The contact number of your client
