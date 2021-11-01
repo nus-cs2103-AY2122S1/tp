@@ -80,6 +80,7 @@ Parameter | Data format
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * If there is any error in command format, PlaceBook will notify you and show you the correct format, and provide an example.
+
 * Some commands will have some command specific errors, which will be elaborated on in [Features](#features), to help you troubleshoot.
   
 --------------------------------------------------------------------------------------------------------------------
