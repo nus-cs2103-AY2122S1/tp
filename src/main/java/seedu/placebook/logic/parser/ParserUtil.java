@@ -191,7 +191,7 @@ public class ParserUtil {
         try {
             return LocalDateTime.parse(trimmedDateTime, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("DateTime format should be \"dd-MM-yyyy HHmm\"");
+            throw new ParseException("DateTime format should be \"dd-MM-yyyy HHmm\". Don't forget that there are only 12 months in a year!");
         }
     }
 

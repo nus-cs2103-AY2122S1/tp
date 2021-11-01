@@ -64,7 +64,7 @@ The table below contains definitions of data formats used in various parameters 
 Parameter | Data format
 ----------|------------
 `INDEX` | Positive integers, e.g. 1,2,3, ...
-`DATETIME` | dd-MM-yyyy HHmm, e.g. 03-11-2021 1730 represents 3 November 2021 5.30 pm <br> **Notes:** The format uses the 24 hour clock formats.
+`DATETIME` | dd-MM-yyyy HHmm, e.g. 03-11-2021 1730 represents 3 November 2021 5.30 pm <br> **Notes:** The format uses the 24 hour clock formats. Don't forget that there are only 12 months in a year
 `EMAIL` | Emails should be of the format local-part@domain. e.g. Johnny@gmail.com
 `Others` | All other parameters will take any alphanumeric characters and special characters as input. 
 
