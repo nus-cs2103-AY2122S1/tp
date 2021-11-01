@@ -99,11 +99,11 @@ public class EditCommand extends Command {
         ClassId updatedClassId = editStudentDescriptor.getClassId().orElse(studentToEdit.getClassId());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Lab updatedLab = editStudentDescriptor.getLab().orElse(null);
-        Double updatedResult = null;
+        Integer updatedResult = null;
         if (updatedLab != null) {
             updatedResult = editStudentDescriptor.getResult().orElse(null);
             int labNum = updatedLab.getLabNum();
-            Double currTotalScore;
+            Integer currTotalScore;
             try {
                 currTotalScore = studentToEdit.getLab(labNum).getTotalScore();
             } catch (NullPointerException e) { //when getLab does not find anything
@@ -150,7 +150,7 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private ClassId classId;
         private Email email;
-        private Double result;
+        private Integer result;
         private Lab lab;
         private ObservableList<Lab> labList;
 
@@ -207,7 +207,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setLab(Lab lab, Double result) {
+        public void setLab(Lab lab, Integer result) {
             this.lab = lab;
             this.result = result;
         }
@@ -220,7 +220,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(lab);
         }
 
-        public Optional<Double> getResult() {
+        public Optional<Integer> getResult() {
             return Optional.ofNullable(result);
         }
 
