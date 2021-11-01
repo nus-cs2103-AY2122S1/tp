@@ -15,6 +15,9 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displayed list with %1$d students!";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the list of all students.\n"
+            + "Example: " + COMMAND_WORD;
+
     @Override
     public CommandResult execute() {
         requireNonNull(model);

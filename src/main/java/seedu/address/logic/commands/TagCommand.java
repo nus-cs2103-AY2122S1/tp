@@ -11,6 +11,8 @@ public class TagCommand extends Command {
             + "To view student list, type: \"list\".\n"
             + "To view calendar, type: \"calendar\".";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all tags.\n"
+            + "Example: " + COMMAND_WORD;
     @Override
     public CommandResult execute() throws CommandException {
         return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayType.TAGS);
