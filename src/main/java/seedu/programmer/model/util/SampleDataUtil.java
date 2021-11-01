@@ -97,6 +97,14 @@ public class SampleDataUtil {
         return new Lab[]{
             new Lab(1, 10),
             new Lab(2, 20),
+            new Lab(3, 10),
+            new Lab(4, 20),
+            new Lab(5, 10),
+            new Lab(6, 20),
+            new Lab(7, 10),
+            new Lab(8, 20),
+            new Lab(9, 10),
+            new Lab(10, 20),
         };
     }
 
