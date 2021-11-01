@@ -20,7 +20,7 @@ import seedu.address.model.module.event.EventDate;
 import seedu.address.model.module.member.Member;
 
 /**
- * Adds a member to the address book.
+ * Adds an event to Ailurus.
  */
 public class EaddCommand extends Command {
 
