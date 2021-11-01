@@ -165,7 +165,7 @@ Parameters:
 
 Example usages:
 * `delete 1` deletes the first anime shown in the list.
-* `delete 5` deletes the fifth anime shown on the list.
+* `delete 5` deletes the fifth anime shown in the list.
 
 </div>
 
@@ -244,7 +244,7 @@ ___
 ### Adding/ Deleting genre from anime: `genre`
 
 Adds or deletes genre(s) from a specified anime<br>
-Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
+Format: `genre INDEX c/ACTION g/GENRE [g/GENRE] ...`
 
 * Duplicate genres are not allowed
 * You need to provide at least 1 `GENRE`
@@ -257,8 +257,8 @@ Parameters:
 <div markdown="block" class="alert alert-info">
 
 Example usages:
-*  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
-*  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
+*  `genre 1 c/add g/fantasy g/supernatural g/comedy`
+*  `genre 1 c/delete g/fantasy g/supernatural g/comedy`
 
 </div>
 
@@ -300,8 +300,8 @@ Parameters:
 Example usages:
 * `list` displays all the anime in the list panel.
 * `list s/watching` displays all the anime with the watch status `watching`
-* `list s/finished` displays all the anime with the watch status `finished`
-* `list s/t` displays all the anime with the watch status `towatch`
+* `list s/w` also displays all the anime with the watch status `watching`
+* `list s/towatch` displays all the anime with the watch status `towatch`
 
 </div>
 
@@ -360,6 +360,7 @@ ___
 ### View user statistics: `stats`
 
 Displays a pop-up window that shows the statistical breakdown of anime(s) in AniList
+
 Format: `stats`
 
 **ADD IMAGE HERE**
@@ -367,6 +368,7 @@ ___
 
 ### Viewing all supported commands: `help`
 Lists all currently supported commands on the Command Results panel.
+
 Format: `help`
 
 <div markdown="block" class="alert alert-info">
@@ -379,6 +381,13 @@ Example usages:
 ![](images/UG-images/help.png)
 1. A list of all supported commands is shown in the Command Results Panel.
 2. A link to the User Guide is provided.
+___
+
+### Exit application: `exit`
+
+Exits the application.
+
+Format: `exit`
 ___
 
 ## Commands Table
@@ -412,10 +421,9 @@ ___
 *  In the form of `towatch`, `watching`, `finished`, with `t`, `w`, `f`, as their short forms.
 
 ### GENRE
-*  Refers to the genre to which the animes belong to
+*  Refers to the genre to which the anime belong to
 *  Must be from the list of available genres found in [genrelist](#list-of-avaible-genres)
-*  Any number of genres can be provided for a single anime
-*  Can only contain alphabets and spaces. Two or more consecutive spaces are not allowed
+*  A single anime can contain more than 1 genre
 
 ### INDEX
 *  Refers to the position of the Anime as shown in the displayed list
@@ -438,6 +446,6 @@ These are the current list of available Genres in the genrelist:
 *  Psychological
 *  Romance
 *  Sci Fi
-*  Slice of Life");
+*  Slice of Life
 *  Sports
 *  Supernatural

@@ -22,12 +22,12 @@ import seedu.anilist.model.genre.Genre;
  */
 public class GenreDeleteCommand extends GenreCommand {
 
-    public static final String MESSAGE_SUCCESS = "Genres %1$s deleted from anime.\n"
+    public static final String MESSAGE_SUCCESS = "Genre(s) %1$s deleted from anime.\n"
             + "%2$s";
-    public static final String MESSAGE_GENRE_NOT_PRESENT = "Genres %1$s are not present in anime.\n"
+    public static final String MESSAGE_GENRE_NOT_PRESENT = "Genre(s) %1$s are not present in anime.\n"
             + "%2$s";
-    public static final String MESSAGE_PARTIAL_SUCCESS = "Genres %1$s deleted.\n"
-            + "Genres %2$s are not present in anime.\n"
+    public static final String MESSAGE_PARTIAL_SUCCESS = "Genre(s) %1$s deleted.\n"
+            + "Genre(s) %2$s are not present in anime.\n"
             + "%3$s";
 
     public GenreDeleteCommand(Index index, GenreCommand.GenresDescriptor genresDescriptor) {
@@ -39,7 +39,7 @@ public class GenreDeleteCommand extends GenreCommand {
         requireNonNull(model);
         List<Anime> lastShownList = model.getFilteredAnimeList();
 
-        if (this.getIndex().getZeroBased() >= lastShownList.size()) {
+        if (getIndex().getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
         }
 
