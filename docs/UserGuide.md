@@ -24,9 +24,7 @@ EdRecord is a **desktop app for managing student contacts, optimized for use via
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
-
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to EdRecord.
+   * **`list`** : Lists all students contacts.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -77,7 +75,7 @@ Shows a message explaning how to access the help page.
 
 Adds a student to EdRecord.
 
-Format: `add n/NAME p/PHONE e/EMAIL [m/MODULE] [c/CLASS] [i/INFO] [t/TAG]…​`
+Format: `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​`
 
 * If specified, the module and class must already exist.
 
@@ -210,7 +208,7 @@ Examples:
 
 ### Delete class: `dlclass`
 
-Creates a new class in the specified module.
+Deletes the class in the specified module.
 
 Format: `dlclass m/MODULE c/CLASS`
 
@@ -317,7 +315,7 @@ _Details coming soon ..._
 
 |Action| Format, Examples|
 --------|------------------
-|**Add Student**| `add n/NAME p/PHONE e/EMAIL [m/MODULE] [c/CLASS] [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com i/Currently on SHN t/friend t/colleague`|
+|**Add Student**| `add n/NAME p/PHONE e/EMAIL m/MODULE c/CLASS [i/INFO] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com i/Currently on SHN t/friend t/colleague`|
 | **Edit Student**| `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [i/INFO] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`|
 | **Delete Student**| `delete INDEX`<br> e.g., `delete 3`|
 | **List Module**| `cd MODULE`<br> e.g.,`cd CS2103`, `cd *`|
