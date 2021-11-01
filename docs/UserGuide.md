@@ -591,7 +591,7 @@ password
 
 Do note that the password needs to be between **8** and **32** characters long, consisting of **LETTERS**, **NUMBERS** **AND** **SYMBOLS**.
 
-The accepted symbols are : `!@#$%&*()_+=|<>?{}[]/~-`
+The accepted symbols are : `!@#$%&*()_+=|<>?{}~-[]`
 
 <div class="d-flex alert alert-light pb-0">
 <div class="mr-2">
