@@ -190,7 +190,7 @@ Format: `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_N
 
 Example:
 
-* `edit 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
+* `edit -s 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
 
 ### Viewing a student : `view -s`
 
