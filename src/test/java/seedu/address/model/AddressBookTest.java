@@ -103,6 +103,34 @@ public class AddressBookTest {
     }
 
     @Test
+    public void getDuplicate_noPersonInAddressBook_returnsEmptyList() {
+        assertTrue(addressBook.getDuplicate(AMY).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_noPersonWithSameIdentityFieldsInAddressBook_returnsEmptyList() {
+        addressBook.addPerson(AMY);
+        assertTrue(addressBook.getDuplicate(BOB).isEmpty());
+    }
+
+    @Test
+    public void getDuplicate_personWithSameIdentityFieldsInAddressBook_returnsDuplicatePerson() {
+        addressBook.addPerson(AMY);
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertEquals(addressBook.getDuplicate(editedBob).get(0), AMY);
+    }
+
+    @Test
+    public void getDuplicate_personsWithSameIdentityFieldsInAddressBook_returnsDuplicatePersons() {
+        addressBook.addPerson(AMY);
+        addressBook.addPerson(BOB);
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withTags(VALID_TAG_HUSBAND).build();
+        List<Person> duplicates = addressBook.getDuplicate(editedBob);
+        assertEquals(duplicates.get(0), AMY);
+        assertEquals(duplicates.get(1), BOB);
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
