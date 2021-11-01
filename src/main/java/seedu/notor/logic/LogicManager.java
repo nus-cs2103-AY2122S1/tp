@@ -16,9 +16,11 @@ import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Model;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
+import seedu.notor.model.util.UniqueList;
 import seedu.notor.storage.Storage;
 
 /**
@@ -110,17 +112,25 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ObservableList<SuperGroup> getFilteredSuperGroupList() {
-        // TODO: Probably need to check here. This is too hacky.
-        return (ObservableList<SuperGroup>) model.getFilteredGroupList();
+        UniqueList<SuperGroup> superGroups = new UniqueList<>();
+        for (Group group : model.getFilteredGroupList()) {
+            if (group instanceof SuperGroup) {
+                superGroups.add((SuperGroup) group);
+            }
+        }
+        return superGroups.asUnmodifiableObservableList();
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ObservableList<SubGroup> getFilteredSubGroupList() {
-        // TODO: Probably need to check here. This is too hacky.
-        return (ObservableList<SubGroup>) model.getFilteredGroupList();
+        UniqueList<SubGroup> subGroups = new UniqueList<>();
+        for (Group group : model.getFilteredGroupList()) {
+            if (group instanceof SubGroup) {
+                subGroups.add((SubGroup) group);
+            }
+        }
+        return subGroups.asUnmodifiableObservableList();
     }
 
     @Override
@@ -135,7 +145,6 @@ public class LogicManager implements Logic {
 
     @Override
     public boolean isSuperGroupList() {
-        // TODO: BUG WHAT IF THERE IS NO ELEMENT.
         return model.isSuperGroupList();
     }
 
