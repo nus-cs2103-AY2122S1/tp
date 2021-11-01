@@ -413,7 +413,7 @@ Action | Format, Examples
 **Viewing a lesson** | `view -l LESSON_INDEX`<br> e.g., `view -l 2`
 **Add lesson** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
 **Delete lesson** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
-**Edit lesson** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80`
+**Edit lesson** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l 1 c/20 p/80`
 **Add students to lessons** | `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`add -sl s/1 2 3 l/1 2`
 **Delete students from lessons** | `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`<br>e.g.,`del -sl s/2 3 l/1 2 3`
 **Find student** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
