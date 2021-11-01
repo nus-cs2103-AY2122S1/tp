@@ -86,6 +86,19 @@ Flags|Name
 -t|Tag
 -ti|Time
 
+#### Fields of a staff
+
+The fields that a Staff must have.
+
+Flags|Name
+----|----
+-n|Name
+-s|Status
+-a|Address
+-$|Salary
+-e|Email
+-t|Tags
+
 
 
 <div markdown="block" class="alert alert-info">
@@ -180,20 +193,6 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 
 
 ### Basic management of Staff Details
-
-#### Viewing a staff : `view`
-
-Displays a staff by a specific lookup of the fields (e.g. name, tags, roles, email, address) of a staff or by index of the staff.
-
- * Does not allow for a non-specific lookup. Any fields entered must be an exact reference.
- * For example, the query `-n Candice` will result in any Staff with the exact name "Candice" and no-one else.
-
-Format:  
-`view [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
-
-Examples:  
-`view -n Candice`  
-`view -t friends -t neighbours`  
 
 #### Adding a staff : `add`
 
@@ -296,6 +295,8 @@ Examples:
 #### Finding staff : `find`
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
+Can attach [fields](#fields-of-a-staff) for additional restrictions or find by fields alone. 
+If index search is performed, no other input is expected.
 
 Name Search:
 
@@ -305,6 +306,7 @@ Name Search:
 * Staff matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `John Nathan` will return `John Wick`, `Nathan Tan`.
 
+
 Index Search:
 
 * If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
@@ -313,15 +315,24 @@ Index Search:
 * If the list is empty, no input is accepted.
 * Only single search is supported, and this search will return only the specific Staff at that index.
 
+Field Search:
+
+* Can perform field search alone or along with name search.
+* The [fields](#fields-of-a-staff) that are attached must match exactly the field to compare to.
+* All the fields will take the last input as the actual input accept for tags and roles, which will find
+the staff(s) that match all the inputs.
+
 Format:  
-`find -n KEYWORD [MORE_KEYWORDS]`  
-`find -i INDEX`  
+`find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`  
+`find -i INDEX [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`  
 
 
 Examples:  
 `find -n John`  
 `find -n alex david`    
 `find -i 3`  
+`find -t Friend`
+`find -r kitchen -r floor`
 
 List before using Find command:
 ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
@@ -497,7 +508,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find -n KEYWORD [MORE_KEYWORDS] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]`<br> `find -i [INDEX]` <br> e.g., `find -n James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]... [da/START_DATE] [da/END_DATE]`
 **Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
