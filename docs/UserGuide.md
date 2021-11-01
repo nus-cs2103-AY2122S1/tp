@@ -149,7 +149,7 @@ Adds a new student to TutorAid.
 Format: `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
 
 Examples:
-* `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
+* `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` adds a student with name John Does, student phone 81234567, parent's name Mrs Doe and parent's phone 91234567.
 
 > :bulb: The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
 
@@ -190,7 +190,7 @@ Format: `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_N
 
 Example:
 
-* `edit -s 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
+* `edit -s 2 pp/91112222` edits the 2nd student's parent contact number in TutorAid to 91112222.
 
 ### Viewing a student : `view -s`
 
@@ -309,7 +309,7 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 * If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
 
 Examples:
-* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400` adds a lesson with name P6 Maths, capacity 20, price 80 and timing Monday 1200-1400.
 
 > :bulb: The lesson's capacity, price and timing are optional details for tutors to include.
 
@@ -324,7 +324,7 @@ Format: `del -l LESSON_INDEX`
 * `LESSON_INDEX` must be a **positive integer** 1,2,3, …​
 
 Examples:
-* `del -l 3`
+* `del -l 3` deletes the 3rd student.
 
 ### Editing a lesson: `edit -l`
 
@@ -338,7 +338,7 @@ Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRIC
 * At least 1 out of 4 optional fields must be provided.
 
 Examples:
-* `edit -l c/20 p/80`
+* `edit -l 1 c/20 p/80` edits the 1st lesson's capacity and price to 20 and 80 respectively.
 
 ### Adding students to lessons: `add -sl`
 
@@ -351,7 +351,7 @@ Format: `add -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `add -sl s/1 2 3 l/1 2`
+* `add -sl s/1 2 3 l/1 2` add students with index 1, 2, 3 into lessons with index 1, 2.
 
 > :exclamation: All of these students must not be attending any of the lessons provided for this command to work.
 
@@ -366,7 +366,7 @@ Format: `del -sl s/STUDENT_INDEX... l/LESSON_INDEX...`
 * The index must be a **positive integer** 1, 2, 3, ...
 
 Examples:
-* `del -sl s/2 3 l/1 2 3`
+* `del -sl s/2 3 l/1 2 3` deletes students with index 2, 3 from lessons with index 1, 2, 3.
 
 > :exclamation: All of these students must be attending all the lessons provided for this command to work.
 
