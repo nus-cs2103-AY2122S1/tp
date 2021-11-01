@@ -29,7 +29,7 @@ public class TypicalAppointment {
     public static final Appointment CARL_APPOINTMENT = new AppointmentBuilder()
             .withClient(CARL)
             .withLocation("vivocity")
-            .withTimePeriod("25-12-2021 1000", "25-12-2021 1100")
+            .withTimePeriod("25-12-2021 1100", "25-12-2021 1200")
             .withDescription("Halloween Sales")
             .build();
 
