@@ -24,6 +24,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
             // Sort the array from large to small so that applicants will be deleted from the back
             Arrays.sort(indexes, (i1, i2) -> i2.getZeroBased() - i1.getZeroBased());
+
             return new DeleteCommand(indexes);
         } catch (ParseException pe) {
             String causeOfError = "\n" + pe.getMessage();
