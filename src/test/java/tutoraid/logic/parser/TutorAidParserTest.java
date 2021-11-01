@@ -13,8 +13,6 @@ import tutoraid.logic.commands.ClearCommand;
 import tutoraid.logic.commands.ExitCommand;
 import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.commands.ListCommand;
-import tutoraid.logic.commands.PaidCommand;
-import tutoraid.logic.commands.UnpaidCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 public class TutorAidParserTest {
@@ -43,20 +41,6 @@ public class TutorAidParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    }
-
-    @Test
-    public void parseCommand_paid() throws Exception {
-        PaidCommand command = (PaidCommand) parser.parseCommand(
-                PaidCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
-        assertEquals(new PaidCommand(INDEX_FIRST_ITEM), command);
-    }
-
-    @Test
-    public void parseCommand_unpaid() throws Exception {
-        UnpaidCommand command = (UnpaidCommand) parser.parseCommand(
-                UnpaidCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
-        assertEquals(new UnpaidCommand(INDEX_FIRST_ITEM), command);
     }
 
     @Test

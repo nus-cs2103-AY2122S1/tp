@@ -13,7 +13,6 @@ The main features of TutorAid include:
 1. Storing contacts of students and their parents
 2. Storing and managing lesson details
 3. Tracking students' progress
-4. Tracking students' payment status
 
 With TutorAid, you have a one-stop solution for keeping track of your students' contacts and staying up-to-date on their progress. TutorAid is optimised for use via a **Command Line Interface** (CLI) while retaining the benefits of a visually-appealing Graphical User Interface (GUI). If you can type fast, TutorAid can help you to manage your tutoring tasks more efficiently than traditional GUI apps.
 
@@ -194,7 +193,7 @@ Example:
 
 ### Viewing a student : `view -s`
 
-Displays the specified student’s name, phone number, progress, lessons and payment status, along with their parent’s name and phone number.
+Displays the specified student’s name, phone number, progress, and lessons, along with their parent’s name and phone number.
 
 Format: `view -s STUDENT_INDEX`
 
@@ -269,34 +268,6 @@ Format: `del -p STUDENT_INDEX`
 
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
-
-### Setting payment made: `paid`
-
-Sets the payment status of the specified student to `Paid for the current month`.
-
-Format: `paid STUDENT_INDEX`
-
-- Sets the payment status for the student at the specified `STUDENT_INDEX` as `Paid for the current month`.
-- The index refers to the index number shown in the displayed student list.
-- The index must be a **positive integer** 1, 2, 3, ...
-
-Example:
-
-- `paid 3` updates the 3rd student's payment status to `Paid for the current month`.
-
-### Unsetting payment made: `unpaid`
-
-Sets the payment status of the specified student to `Has not paid for the current month`.
-
-Format: `unpaid STUDENT_INDEX`
-
-- Sets the payment status for the student at the specified `STUDENT_INDEX` as `Has not paid for the current month`.
-- The index refers to the index number shown in the displayed student list.
-- The index must be a **positive integer** 1, 2, 3, …
-
-Examples:
-
-- `unpaid 3` updates the 3rd student's payment status to `Has not paid for the current month`.
 
 ### Adding a lesson: `add -l`
 
@@ -405,8 +376,6 @@ Action | Format, Examples
 **Edit student** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **List** | `list [-a]`<br>e.g., `list`, `list -a`
 **Help** | `help`
-**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
-**Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 **Viewing a student** | `view -s STUDENT_INDEX`<br> e.g., `view -s 2`

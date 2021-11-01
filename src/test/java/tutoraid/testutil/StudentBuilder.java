@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
-import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
@@ -27,7 +26,6 @@ public class StudentBuilder {
     private ParentName parentName;
     private Phone parentPhone;
     private ProgressList progressList;
-    private PaymentStatus paymentStatus;
     private Lessons lessons;
 
     /**
@@ -39,7 +37,6 @@ public class StudentBuilder {
         parentName = new ParentName(DEFAULT_PARENT_NAME);
         parentPhone = new Phone(DEFAULT_PARENT_PHONE);
         progressList = new ProgressList(DEFAULT_PROGRESS_LIST);
-        paymentStatus = new PaymentStatus(DEFAULT_PAYMENT_STATUS);
         lessons = new Lessons(DEFAULT_LESSONS);
     }
 
@@ -52,7 +49,6 @@ public class StudentBuilder {
         parentName = studentToCopy.getParentName();
         parentPhone = studentToCopy.getParentPhone();
         progressList = studentToCopy.getProgressList();
-        paymentStatus = studentToCopy.getPaymentStatus();
         lessons = studentToCopy.getLessons();
     }
 
@@ -97,14 +93,6 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Payment Statis} of the {@code Student} that we are building.
-     */
-    public StudentBuilder withPaymentStatus(boolean hasPaid) {
-        this.paymentStatus = new PaymentStatus(hasPaid);
-        return this;
-    }
-
-    /**
      * Sets the {@code Lessons} of the {@code Student} that we are building.
      */
     public StudentBuilder withLessons(ArrayList<String> lessons) {
@@ -119,6 +107,6 @@ public class StudentBuilder {
      */
     public Student build() {
         return new Student(studentName, studentPhone, parentName, parentPhone,
-                progressList, paymentStatus, lessons);
+                progressList, lessons);
     }
 }
