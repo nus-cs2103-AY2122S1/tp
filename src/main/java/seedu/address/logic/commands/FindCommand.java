@@ -85,9 +85,12 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         //with name and field
-        if (index == NAME_AND_FIELD_PREDICATE
-                || index == FIELD_PREDICATE_ONLY) {
+        if (index == NAME_AND_FIELD_PREDICATE) {
             return executeNameAndFieldSearch(model);
+        }
+        //empty case cannot search
+        if (index == FIELD_PREDICATE_ONLY) {
+            return executeFieldSearch(model);
         }
         if (index > 0) {
             checkIndex(model);
@@ -118,6 +121,21 @@ public class FindCommand extends Command {
         return new CommandResult(
                 String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
+
+    public CommandResult executeFieldSearch(Model model) {
+        model.updateFilteredPersonList(person -> predicate.test(person));
+        ObservableList<Person> staffs = model.getFilteredPersonList();
+        int counter = 1;
+        for (Person p : staffs) {
+            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            counter++;
+        }
+        return new CommandResult(
+                String.format(successMessage.toString(), model.getFilteredPersonList().size()));
+    }
+
+
+
 
     /**
      * Executes a search by index.

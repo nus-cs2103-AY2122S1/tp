@@ -44,6 +44,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
             String[] nameKeywords = argMultimap.getValue(PREFIX_DASH_NAME).get()
                     .trim().split("\\s+");
+            if (nameKeywords[0].equals("")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
                     predicate);
 
