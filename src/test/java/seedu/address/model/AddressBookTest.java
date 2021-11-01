@@ -47,10 +47,31 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same email and contact number
-        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+    public void resetData_withDuplicatePersonsSameContactNumberDifferentEmail_throwsDuplicatePersonException() {
+        // Two persons with the same contact number but different email
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY)
                 .withTags(VALID_TAG_HUSBAND).build();
+        List<Person> newPersons = Arrays.asList(AMY, editedBob);
+        AddressBookStub newData = new AddressBookStub(newPersons);
+
+        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicatePersonsSameEmailDifferentContactNumber_throwsDuplicatePersonException() {
+        // Two persons with the same email but different contact number
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_HUSBAND).build();
+        List<Person> newPersons = Arrays.asList(AMY, editedBob);
+        AddressBookStub newData = new AddressBookStub(newPersons);
+
+        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicatePersonsSameEmailSameContactNumber_throwsDuplicatePersonException() {
+        // Two persons with the same email but different contact number
+        Person editedBob = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_HUSBAND).build();
         List<Person> newPersons = Arrays.asList(AMY, editedBob);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
