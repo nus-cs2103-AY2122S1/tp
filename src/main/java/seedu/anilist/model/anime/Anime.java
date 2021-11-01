@@ -2,6 +2,7 @@ package seedu.anilist.model.anime;
 
 import static seedu.anilist.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -100,7 +101,11 @@ public class Anime {
         Set<Genre> genres = getGenres();
         if (!genres.isEmpty()) {
             builder.append("; Genres: ");
-            genres.forEach(builder::append);
+            Object[] genresArray = genres.toArray();
+            Arrays.sort(genresArray);
+            String genresString = Arrays.toString(genresArray);
+            genresString = genresString.substring(1, genresString.length() - 1);
+            builder.append(genresString);
         }
         builder.append(String.format("; (Status: %s)", getStatus()));
         return builder.toString();

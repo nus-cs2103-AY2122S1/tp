@@ -2,6 +2,7 @@ package seedu.anilist.model.genre;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -45,7 +46,9 @@ public class GenreList {
     public static String getListOfGenresAsString() {
         StringBuilder listOfGenresAsString = new StringBuilder();
         String separator = "";
-        for (String genre: LIST_OF_GENRES) {
+        String[] arrayOfGenre = getListOfGenres();
+        Arrays.sort(arrayOfGenre);
+        for (String genre: arrayOfGenre) {
             listOfGenresAsString.append(separator);
             listOfGenresAsString.append("    - ").append(genre);
             separator = "\n";

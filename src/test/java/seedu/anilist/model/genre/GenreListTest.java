@@ -55,13 +55,16 @@ public class GenreListTest {
 
     /**
      * Converts a list of Genres which is a String array into a String.
+     * The genres will be sorted in an ascending order.
      * Each entry is separated by a comma and space.
      */
     private String listOfGenresToString(String[] listOfGenres) {
+        String[] listOfGenresCopy = Arrays.stream(listOfGenres).toArray(String[]::new);
+        Arrays.sort(listOfGenresCopy);
         String result = "";
-        for (int i = 0; i < listOfGenres.length; i++) {
+        for (int i = 0; i < listOfGenresCopy.length; i++) {
             result += "    - ";
-            result += listOfGenres[i];
+            result += listOfGenresCopy[i];
             result += "\n";
         }
         result = result.substring(0, result.length() - 1);

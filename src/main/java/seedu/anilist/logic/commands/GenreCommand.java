@@ -183,8 +183,9 @@ public abstract class GenreCommand extends Command {
          */
         private static String genresSetToString(Set<Genre> genresSet) {
             assert genresSet != null;
-
-            String genresString = Arrays.toString(genresSet.toArray());
+            Object[] genreArray = genresSet.toArray();
+            Arrays.sort(genreArray);
+            String genresString = Arrays.toString(genreArray);
             return genresString.substring(1, genresString.length() - 1);
         }
     }
