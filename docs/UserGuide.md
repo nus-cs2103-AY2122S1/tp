@@ -643,9 +643,9 @@ changes you have made in the session. Your progress is most likely preserved aft
 
 Action | Format, Examples
 --------|------------------
-**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br>e.g., `add n/James Ho p/22224444e/jamesho@example.com a/123, Clementi Rd, 1234665`
+**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]` <br>e.g., `add n/James Ho p/22224444e/jamesho@example.com a/123, Clementi Rd, 1234665`
 **Delete Participant** | `delete INDEX`<br> e.g., `delete 3`
-**Edit Participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Participant** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Participants** | `list`
 **View Participant details** | `view INDEX` <br> e.g., `view 1`
