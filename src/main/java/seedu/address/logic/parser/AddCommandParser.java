@@ -53,8 +53,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Review review = ParserUtil.parseReview(argMultimap.getValue(PREFIX_REVIEW).isPresent()
                 ? argMultimap.getValue(PREFIX_REVIEW).get() : "");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).isPresent()
-            ? argMultimap.getValue(PREFIX_RATING).get() : "0");
+        Rating rating = argMultimap.getValue(PREFIX_RATING).isPresent()
+            ? ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get()) : ParserUtil.parseRating();
 
         Person person = new Person(categoryCode, name, phone, email, address, review, tagList, rating);
 

@@ -147,4 +147,35 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns the formatted export string for each Person.
+     */
+    public String toExportFormat() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Name: ")
+            .append(getName())
+            .append("\nCategory: ")
+            .append(getCategoryCode())
+            .append("\nPhone: ")
+            .append(getPhone())
+            .append("\nEmail: ")
+            .append(getEmail())
+            .append("\nAddress: ")
+            .append(getAddress())
+            .append("\nReview: ")
+            .append(getReview());
+
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("\nTags: ");
+            tags.forEach(builder::append);
+        }
+
+        builder.append("\nRating: ")
+            .append(getRating())
+            .append("\n-------------------------------------------------------\n");
+
+        return builder.toString();
+    }
+
 }
