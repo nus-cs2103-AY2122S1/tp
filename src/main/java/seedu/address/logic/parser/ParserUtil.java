@@ -28,6 +28,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -394,7 +395,7 @@ public class ParserUtil {
         for (String roleReq : roles) {
             roleReq = roleReq.trim().replace(PREFIX_ROLE.toString(), "");
             if (!isValidRoleRequirement(roleReq)) {
-                throw SetRoleReqCommandParser.DEFAULT_ERROR;
+                throw new ParseException(SetRoleReqCommand.getHelpMessage());
             }
             roleSet.add(roleReq);
         }
