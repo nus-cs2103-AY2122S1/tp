@@ -571,7 +571,7 @@ the fees of these lessons will not be deducted for you. Same for shifting start 
 
 ### Managing Your Schedule
 
-This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tag`, will bring you right out.
+This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any command from other sections, such as `list` or `tags`, will bring you right out.
 
 --------------------------------------------------------------------------------------------------------------------
 
