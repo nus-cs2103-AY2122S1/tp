@@ -49,7 +49,14 @@ public class JsonAdaptedSchedule {
                     modelShifts[j][i] = null;
                     continue;
                 }
-                modelShifts[j][i] = this.shifts[j][i].toModelType();
+                Shift shift = this.shifts[j][i].toModelType();
+                int location = shift.getDayOfWeek().getValue() - 1;
+                int slot = shift.getSlot().getOrder();
+                if (shifts[location][slot] != null) {
+                    throw new IllegalValueException("Duplicate shift entry in storage.");
+                }
+                modelShifts[location][slot] = shift;
+
             }
         }
         return new Schedule(modelShifts);

@@ -67,7 +67,7 @@ public class JsonAdaptedShift {
             throw new IllegalValueException(Slot.MESSAGE_CONSTRAINTS);
         }
         Slot modelSlot = Slot.translateStringToSlot(slot);
-        DayOfWeek modelDayOfWeek = DayOfWeek.valueOf(dayOfWeek);
+        DayOfWeek modelDayOfWeek = toModelTypeDayOfWeek();
         List<RecurrencePeriod> periods = new ArrayList<>();
         for (JsonAdaptedRecurrencePeriod period : history) {
             periods.add(period.toModelType());
@@ -83,8 +83,13 @@ public class JsonAdaptedShift {
 
     }
 
-
-
+    private DayOfWeek toModelTypeDayOfWeek() throws IllegalValueException {
+        try {
+            return DayOfWeek.valueOf(dayOfWeek);
+        } catch (IllegalArgumentException re) {
+            throw new IllegalValueException(re.getMessage());
+        }
+    }
 
 
 }
