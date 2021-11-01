@@ -67,7 +67,7 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index"
             + " of the student identified by the index number used in the displayed student list.\n"
-            + "Note that you cannot change the type of lesson."
+            + "Note that you cannot change the type of lesson.\n"
             + "Besides cancelled lessons, existing values of other fields will be overwritten by the input values.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
@@ -142,7 +142,9 @@ public class LessonEditCommand extends UndoableCommand {
             throws CommandException {
         assert lessonToEdit != null;
         Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getStartDate());
-        Date updatedEndDate = editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate());
+        Date updatedEndDate = lessonToEdit.isRecurring()
+                ? editLessonDescriptor.getEndDate().orElse(lessonToEdit.getEndDate())
+                : updatedDate;
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange().orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
@@ -254,7 +256,9 @@ public class LessonEditCommand extends UndoableCommand {
             throws CommandException {
         // Checks if the edited lesson clashes with any existing lessons apart from the one to be edited.
         if (model.hasClashingLesson(edited, toEdit)) {
-            throw new CommandException(MESSAGE_CLASHING_LESSON);
+            Set<String> clashes = model.getClashingLessonsString(edited, toEdit);
+            String clashingLessons = CommandUtil.lessonsToString(clashes);
+            throw new CommandException(MESSAGE_CLASHING_LESSON + clashingLessons);
         }
         lessonList.remove(toEdit);
         lessonList.add(edited);
@@ -323,6 +327,7 @@ public class LessonEditCommand extends UndoableCommand {
          * A defensive copy of {@code homeworkSet} is used internally.
          */
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
+            setRecurring(toCopy.isRecurring);
             setDate(toCopy.date);
             setEndDate(toCopy.endDate);
             setTimeRange(toCopy.timeRange);
