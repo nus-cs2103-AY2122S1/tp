@@ -6,7 +6,7 @@ title: WhereTourGo
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T12-2/tp/branch/master/graph/badge.svg?token=IIM6XKRT3S)](https://codecov.io/gh/AY2122S1-CS2103T-T12-2/tp)
 
-![Ui](images/sample.png)
+![Ui](images/ui.png)
 
 **WhereTourGo is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
