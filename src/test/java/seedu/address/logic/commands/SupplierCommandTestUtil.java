@@ -12,8 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_DETAILS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLY_TYPE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -44,11 +43,15 @@ public class SupplierCommandTestUtil {
     public static final String SUPPLY_TYPE_DESC_BOB = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_BEEF;
     public static final String DELIVERY_DETAILS_DESC_AMY = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_AMY;
     public static final String DELIVERY_DETAILS_DESC_BOB = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_BOB;
+    public static final String SORT_BY_DELIVERY_DETAILS_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_DELIVERY_DETAILS;
+    public static final String SORT_BY_SUPPLY_TYPE_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_SUPPLY_TYPE;
 
     // & not allowed in supply types
     public static final String INVALID_SUPPLY_TYPE_DESC = " " + PREFIX_SUPPLY_TYPE + "Chicken & Beef";
     // Not a valid parsable date time
     public static final String INVALID_DELIVERY_DETAILS_DESC = " " + PREFIX_DELIVERY_DETAILS + "Everyday @ 6pm";
+    //only "n", "a", "p", "e", "st", and "dd" are allowed for sort by
+    public static final String INVALID_SORT_BY_DESC = " " + PREFIX_SORT_BY + "t";
 
     public static final EditSupplierCommand.EditSupplierDescriptor DESC_AMY;
     public static final EditSupplierCommand.EditSupplierDescriptor DESC_BOB;

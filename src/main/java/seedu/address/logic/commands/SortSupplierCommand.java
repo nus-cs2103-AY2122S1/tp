@@ -61,8 +61,7 @@ public class SortSupplierCommand extends Command {
 
         SortSupplierCommand otherCommand = (SortSupplierCommand) other;
         return otherCommand.sortingOrder.equals(sortingOrder)
-                && otherCommand.sortBy.equals(sortBy)
-                && otherCommand.comparator.equals(comparator);
+                && otherCommand.sortBy.equals(sortBy);
     }
 
 }

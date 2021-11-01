@@ -93,13 +93,17 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String SORT_DESC_ASCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_ASCENDING;
     public static final String SORT_DESC_DESCENDING = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_DESCENDING;
+    public static final String SORT_BY_NAME_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_NAME;
+    public static final String SORT_BY_EMAIL_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_EMAIL;
+    public static final String SORT_BY_PHONE_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_PHONE;
+    public static final String SORT_BY_ADDRESS_DESC = " " + PREFIX_SORT_BY + VALID_SORT_BY_ADDRESS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     // "only "a" and "d" are allowed for sorting order
-    public static final String INVALID_SORT_ORDER = " " + PREFIX_SORT_ORDER + "ad";
+    public static final String INVALID_SORT_ORDER_DESC = " " + PREFIX_SORT_ORDER + "ad";
     public static final String INVALID_LP_DESC = " " + PREFIX_LP + "911a"; // 'a' not allowed in loyalty
     // points
     public static final String INVALID_ALLERGIES_DESC = " " + PREFIX_ALLERGIES + "!vvdv"; // '!' not allowed
