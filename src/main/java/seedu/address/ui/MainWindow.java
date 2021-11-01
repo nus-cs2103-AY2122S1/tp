@@ -255,8 +255,20 @@ public class MainWindow extends UiPart<Stage> {
         addGameListPanelToGamesPlaceholder();
     }
 
+    private ObservableList<Friend> getFriendList() {
+        return logic.getFriendsBook().getFriendsList();
+    }
+
+    private ObservableList<Game> getGameList() {
+        return logic.getGamesBook().getGamesList();
+    }
+
+    private boolean friendListHasFriend(ObservableList<Friend> friendList, Friend friendToTest) {
+        return friendList.stream().anyMatch(x -> x.isSameFriendId(friendToTest));
+    }
+
     private void handleFriendGet(Friend friendToGet) {
-        ObservableList<Friend> friendList = logic.getFriendsBook().getFriendsList();
+        ObservableList<Friend> friendList = this.getFriendList();
         currentFriendToGet = friendToGet;
         leftMainCard.getChildren().clear();
         rightMainCard.getChildren().clear();
@@ -267,7 +279,7 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         // If friendToGet is in friendList, populate the table with the games associated to it.
-        if (friendList.stream().anyMatch(x -> x.isSameFriendId(currentFriendToGet))) {
+        if (this.friendListHasFriend(friendList, currentFriendToGet)) {
             friendToGet = friendList
                     .stream()
                     .filter(x -> x.isSameFriendId(currentFriendToGet))
@@ -283,30 +295,38 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    private boolean gameListHasGame(ObservableList<Game> gameList, Game gameToTest) {
+        return gameList.stream().filter(game -> game.isSameGameId(gameToTest)).count() == 0;
+    }
+
+    private boolean friendListHasGameAssociation(ObservableList<Friend> friendList, Game gameToTest) {
+        return friendList.stream().anyMatch(friend -> friend.hasGameAssociation(gameToTest));
+    }
+
     private void handleGameGet(Game gameToGet) {
-        ObservableList<Friend> friendList = logic.getFriendsBook().getFriendsList();
+        ObservableList<Friend> friendList = this.getFriendList();
         currentGameToGet = gameToGet;
         leftMainCard.getChildren().clear();
         rightMainCard.getChildren().clear();
-        ObservableList<Game> gameList = logic.getGamesBook().getGamesList();
+        ObservableList<Game> gameList = this.getGameList();
 
         // If currentGameToGet is null, we do nothing.
         if (currentGameToGet == null) {
             return;
         }
         // If current gameList does not contain gameToGet, clear rightMainCard
-        if (gameList.stream().filter(game -> game.isSameGameId(gameToGet)).count() == 0) {
+        if (this.gameListHasGame(gameList, currentGameToGet)) {
             rightMainCard.getChildren().clear();
             return;
         }
 
         // If current friendList has a friend(s) which is associated to currentGameToGet, return the list of friends.
-        if (friendList.stream().anyMatch(friend -> friend.hasGameAssociation(gameToGet))) {
+        if (friendListHasGameAssociation(friendList, currentGameToGet)) {
             List<Friend> friendsWithGame = friendList.stream()
-                    .filter(friend -> friend.hasGameAssociation(gameToGet))
+                    .filter(friend -> friend.hasGameAssociation(currentGameToGet))
                     .collect(Collectors.toList());
 
-            gameMainCardTable = new GameMainCardTable(FXCollections.observableList(friendsWithGame), gameToGet);
+            gameMainCardTable = new GameMainCardTable(FXCollections.observableList(friendsWithGame), currentGameToGet);
         } else {
             rightMainCard.getChildren().clear();
         }
