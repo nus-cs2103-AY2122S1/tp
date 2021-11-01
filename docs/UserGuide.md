@@ -22,7 +22,7 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Listing all Participants: `list`](#listing-all-participants--list)
         * [Viewing a Participant's details: `view`](#viewing-a-participants-details-view)
         * [Adding Next-of-Kin to a Participant: `addNok`](#adding-next-of-kin-to-a-participant-addnok)
-        * [Removing Next-of-Kin from a Participant: `deleteNok`](#removing-next-of-kin-from-a-participant-deletenok)
+        * [Deleting Next-of-Kin of a Participant: `deleteNok`](#deleting-next-of-kin-of-a-participant-deletenok)
     * [Event](#event)
         * [Adding an event: `addEvent`](#adding-an-event-addevent)
         * [Deleting an event: `deleteEvent`](#deleting-an-event--deleteevent)
@@ -40,6 +40,7 @@ Managera is OS-independent meaning it will work on any operating system. (Window
         * [Viewing help: `help`](#viewing-help--help)
         * [Clearing all Data: `clear`](#clearing-all-data--clear)
         * [Exiting the program: `exit`](#exiting-the-program--exit)
+- [**Valid emails**](#valid-emails)    
 - [**Saving the data**](#saving-the-data)
 - [**Editing the data file**](#editing-the-data-file)
 - [**Glossary**](#glossary)
@@ -161,7 +162,7 @@ The following commands deal with the handling of Participants in Managera. They 
 * [List all Participants](#listing-all-participants--list), 
 * [View a Participant's details](#viewing-a-participants-details-view), 
 * [Add Next-of-Kin to a Participant](#adding-next-of-kin-to-a-participant-addnok) and 
-* [Remove Next-of-Kin from a Participant](#removing-next-of-kin-from-a-participant-deletenok).
+* [Delete Next-of-Kin of a Participant](#deleting-next-of-kin-of-a-participant-deletenok).
 
 ### Adding a Participant: `add`
 
@@ -170,18 +171,21 @@ Adds a Participant to Managera.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 
 * The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`
+* The phone number should only have numbers, and must be at least 3-digits long.
+* Emails should be of the form `local-part@domain`. The full list of constraints can be found [here](#valid-emails).
+* The address does not have any constraints.
 * The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
 
 
 * Managera cannot accept duplicate participants. A participant is considered duplicate if all of their attributes 
-  (name, phone number, email, address, birth date) are identical with those of an existing participant.
+  (name, phone number, email, address, birthdate) are identical with those of an existing participant.
 * If a participant to be added shares identical attributes with an existing participant, but one of them lacks a 
-  birth date, they are treated as two different participants. (The new participant will be added)
-* A participant is not considered duplicate as long as one of their attributes is different.
+  birthdate, they are treated as two different participants. (The new participant will be added)
+* A participant is not considered duplicate if at least one of their attributes is different.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` - Adds a Participant whose name is 
-  John Doe with given phone number, email and address to the Participant list.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/2000-01-02` - Adds a Participant
+  whose name is John Doe with given phone number, email, address and birthdate to the Participant list.
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567` - Adds a Participant whose name is Betsy 
   Crowe with given phone number, email and address to the Participant list.
 
@@ -214,18 +218,24 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
   in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The name must contain only alphanumeric characters.
+
+
+* The name must contain only alphanumeric characters and is case-insensitive e.g., `Alice` will match `alice`
+* The phone number should only have numbers, and must be at least 3-digits long.
+* Emails should be of the form `local-part@domain`. The full list of constraints can be found [here](#valid-emails).
+* The address does not have any constraints.
 * The date of birth must be given in YYYY-MM-DD format. It cannot be a date in the future.
   
 
-* If a participant is edited in a way such that their attributes (name, phone number, email, address, birth date) 
+* If a participant is edited in a way such that their attributes (name, phone number, email, address, birthdate) 
   would exactly match those of another existing participant, Managera would refuse to execute the command as it forbids 
   duplicate participants.
-* A participant is not considered duplicate as long as one of their attributes is different.
+* A participant is not considered duplicate if at least one of their attributes is different.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant 
-   in the displayed Participant list to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com d/1999-10-09` - Edits the phone number, email address and birthdate of the 
+   1st Participant  in the displayed Participant list to be `91234567`, `johndoe@example.com` and `1999-10-09` 
+   respectively.
 *  `edit 2 n/Betsy Crower` - Edits the name of the 2nd Participant in the displayed Participant list to be 
    `Betsy Crower`.
 
@@ -341,7 +351,7 @@ Format: `addEvent n/NAME d/DATE [t/TIME]`
   (name, date, time) are identical with those of an existing event.
 * If an event to be added shares identical attributes with an existing event, but one of them lacks a
   time, they are treated as two different events. (The new event will be added)
-* An event is not considered duplicate as long as one of its attributes is different.
+* An event is not considered duplicate if at least one of its attributes is different.
 
 Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Adds an Event "CS2100 Finals" on 20th November 2021 9:00am 
@@ -387,7 +397,7 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 * If an event is edited in a way such that their attributes (name, date, time)
   would exactly match those of another existing event, Managera would refuse to execute the command as it forbids
   duplicate events.
-* An event is not considered duplicate as long as one of its attributes is different.
+* An event is not considered duplicate if at least one of its attributes is different.
 
 Example Usage:
 * `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event in the displayed Event list to be 
@@ -560,6 +570,19 @@ Exits the program.
 
 Format: `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Valid emails
+
+* Emails should be of the form `local-part@domain`.
+* The local-part should only contain alphanumeric characters and these special characters: +_.-
+* The local-part should not start or end with any of the special characters.
+* This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods
+* The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    
 --------------------------------------------------------------------------------------------------------------------
 
 ## Saving the data
