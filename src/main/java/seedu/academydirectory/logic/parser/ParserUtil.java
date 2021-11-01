@@ -27,9 +27,10 @@ import seedu.academydirectory.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status is not 0 or 1.";
+    public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status should only be 0 or 1, "
+            + "with 0 indicating absence while 1 indicates the student was present.";
     public static final String MESSAGE_INVALID_PARTICIPATION_STATUS =
-            "Change in Participation must be between -100 and 100.";
+            "Change in Participation must be between -500 and 500 inclusive.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
