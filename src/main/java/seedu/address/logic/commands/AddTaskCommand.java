@@ -31,7 +31,7 @@ public class AddTaskCommand extends AddCommand {
             + PREFIX_MODULE_NAME + "CS2103 "
             + PREFIX_TASK_ID + "T1 "
             + PREFIX_TASK_NAME + "assignment1 "
-            + PREFIX_TASK_DEADLINE + "20-10-2021";
+            + PREFIX_TASK_DEADLINE + "2021-10-29 15:00";
 
     public static final String MESSAGE_ADD_TASK_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the module.";
