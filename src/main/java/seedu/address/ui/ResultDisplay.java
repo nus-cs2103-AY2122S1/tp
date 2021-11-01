@@ -15,6 +15,7 @@ public class ResultDisplay extends UiPart<Region> {
     private static final String FXML = "ResultDisplay.fxml";
 
     private static final String WARNING_STYLE_CLASS = "warning";
+    private static final String ERROR_STYLE_CLASS = "error";
 
     @FXML
     private TextArea resultDisplay;
@@ -28,7 +29,7 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.setText(feedbackToUser);
     }
 
-    public void setColorBasedOnResultType(boolean isWarning) {
+    public void setColorBasedOnResultType(boolean isWarning, boolean isError) {
         ObservableList<String> styles = resultDisplay.getStyleClass();
 
         if (!isWarning) {
@@ -41,6 +42,15 @@ public class ResultDisplay extends UiPart<Region> {
             }
         }
 
+        if (!isError) {
+            if (styles.contains(ERROR_STYLE_CLASS)) {
+                styles.remove(ERROR_STYLE_CLASS);
+            }
+        } else {
+            if (!styles.contains(ERROR_STYLE_CLASS)) {
+                styles.add(ERROR_STYLE_CLASS);
+            }
+        }
     }
 
 }

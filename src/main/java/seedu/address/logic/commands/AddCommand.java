@@ -82,7 +82,7 @@ public class AddCommand extends Command {
         boolean isInvalidVisit = toAdd.hasVisit() && toAdd.getVisit().get().isOverdue();
         boolean isInvalidLastVisit = toAdd.hasLastVisit() && toAdd.getLastVisit().get().isFuture();
 
-        if (isInvalidLastVisit && isInvalidLastVisit) {
+        if (isInvalidVisit && isInvalidLastVisit) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandWarning.BOTH_VISIT_FIELDS_WARNING);
         } else if (isInvalidLastVisit) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandWarning.FUTURE_LAST_VISIT_WARNING);
