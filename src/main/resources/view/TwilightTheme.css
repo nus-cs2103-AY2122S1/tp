@@ -1,10 +1,12 @@
 /* VARIABLE DEFINITIONS */
 * {
-    -fx-base1: #189f06;
-    -fx-base2: #0073bf;
-    -fx-base3: #00a896;
-    -fx-base4: #D80F0F;
-    -fx-base5: #22D8E9;
+    -fx-base1: #432371;
+    -fx-base2: #714674;
+    -fx-base3: #9f6976;
+    -fx-base4: #cc8b79;
+    -fx-base5: #faae7b;
+    -fx-font-color: #ffffff;
+    -fx-font-color-bright: #ffffff;
     -fx-menu-color: #263238;
     -fx-menu-color-highlighted: #455a64;
     -fx-menu-font-color: #ffffff;
@@ -22,35 +24,28 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: derive(-fx-base1, -50%);
+    -fx-text-fill: -fx-font-color;
     -fx-opacity: 0.9;
-}
-
-.label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
 }
 
 .label-view-header {
     -fx-font-size: 12pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
     -fx-opacity: 1;
 }
 
 .label-view {
     -fx-font-size: 9pt;
     -fx-font-family: "Open Sans Regular";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color-bright;
     -fx-opacity: 1;
 }
 
@@ -118,7 +113,7 @@
 .table-view .column-header .label {
     -fx-font-size: 20pt;
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
     -fx-alignment: center-left;
     -fx-opacity: 1;
 }
@@ -181,7 +176,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: derive(-fx-base1, -50%);
+    -fx-text-fill: -fx-font-color;
 }
 
 .cell_big_label,
@@ -212,7 +207,7 @@
     -fx-background-color: transparent;
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color-bright;
 }
 
 .result-display .label {
@@ -221,7 +216,7 @@
 
 .status-bar .label {
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -233,7 +228,7 @@
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
 }
 
 .grid-pane {
@@ -251,7 +246,7 @@
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
 }
 
 /* MENU BAR + Top-level MENU BUTTONS */
@@ -326,7 +321,7 @@
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-menu-font-color;
     -fx-opacity: 0.9;
 }
 
@@ -368,7 +363,7 @@
 .button:default:disabled {
     -fx-opacity: 0.4;
     -fx-background-color: derive(-fx-base1, -10%);
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
 }
 
 .button:default {
@@ -391,7 +386,7 @@
 .dialog-pane > *.label.content {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
 }
 
 .dialog-pane:header *.header-panel {
@@ -402,7 +397,7 @@
     -fx-font-size: 18px;
     -fx-font-style: italic;
     -fx-fill: white;
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color;
 }
 
 .scroll-bar {
@@ -441,11 +436,6 @@
     -fx-background-radius: 10;
 }
 
-#commandTypeLabel {
-    -fx-font-size: 11px;
-    -fx-text-fill: derive(-fx-base1, -10%);
-}
-
 #filterField,
 #clientListPanel,
 #clientWebpage {
@@ -457,7 +447,7 @@
     -fx-font-size: 13pt;
     -fx-background-color: transparent, derive(-fx-base1, -10%), transparent,
         derive(-fx-base1, -10%);
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-font-color-bright;
     -fx-prompt-text-fill: #d8d8d8;
 }
 

@@ -15,12 +15,13 @@ import seedu.address.ui.ThemeType;
 public class ThemeList {
     public static final ThemeType DEFAULT_THEME = ThemeType.of("BookTheme").get();
     // New Themes Name to be added to this list
-    private static final List<String> THEMES = List.of("BookTheme", "ColoredTheme", "RandomTheme", "DarkTheme");
+    private static final List<String> THEMES =
+        List.of("BookTheme", "TwilightTheme", "DarkTheme", "SpaceTheme");
     public static final List<ThemeType> THEME_LIST = THEMES.stream()
-            .map(ThemeType::of)
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .collect(Collectors.toList());
+        .map(ThemeType::of)
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .collect(Collectors.toList());
 
     private final FilteredList<ThemeType> currentTheme;
 
@@ -33,15 +34,15 @@ public class ThemeList {
         setTheme(theme);
     }
 
-    public void setTheme(ThemeType theme) {
-        currentTheme.setPredicate(x -> x.equals(theme));
-    }
-
     public ObservableList<ThemeType> getThemeList() {
         return this.currentTheme;
     }
 
     public ThemeType getTheme() {
         return this.currentTheme.get(0);
+    }
+
+    public void setTheme(ThemeType theme) {
+        currentTheme.setPredicate(x -> x.equals(theme));
     }
 }
