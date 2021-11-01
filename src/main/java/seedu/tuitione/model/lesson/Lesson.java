@@ -17,13 +17,11 @@ import seedu.tuitione.model.student.Student;
  */
 public class Lesson {
 
-    public static final String ENROLLMENT_MESSAGE_CONSTRAINT =
-            "%1$s is unable to enroll for this lesson";
-    public static final String EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT =
-            "%1$s currently has %2$s students enrolled, "
-            + "and cannot enroll anymore students.";
-    public static final String STUDENT_NOT_ENROLLED = "⚠\tAlert:\n\n%1$s is not enrolled for %2$s";
-    public static final int MAX_STUDENT_SIZE = 15;
+    public static final int MAX_LESSON_SIZE = 15;
+    public static final String UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT = "%1$s is unable to enroll for this lesson";
+    public static final String EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT = "%1$s currently has"
+            + String.format("%1$d students enrolled, and cannot enroll anymore students.", MAX_LESSON_SIZE);
+    public static final String STUDENT_NOT_ENROLLED = "%1$s is not enrolled for %2$s";
 
     private final Subject subject;
     private final Grade grade;
@@ -115,7 +113,7 @@ public class Lesson {
      * Returns true if Lesson has 14 or fewer Students enrolled.
      */
     public boolean isAbleToEnrollMoreStudents() {
-        return students.size() < MAX_STUDENT_SIZE;
+        return students.size() < MAX_LESSON_SIZE;
     }
 
     /**
@@ -165,7 +163,7 @@ public class Lesson {
      */
     public void enrollStudent(Student student) {
         requireNonNull(student);
-        checkArgument(isAbleToEnroll(student), String.format(ENROLLMENT_MESSAGE_CONSTRAINT, student.getName()));
+        checkArgument(isAbleToEnroll(student), String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, student.getName()));
         addStudent(student);
     }
 
@@ -205,7 +203,7 @@ public class Lesson {
             if (student.isSameStudent(oldStudent)) {
                 removeStudent(oldStudent);
                 checkArgument(isAbleToEnroll(newStudent),
-                        String.format(ENROLLMENT_MESSAGE_CONSTRAINT, newStudent.getName()));
+                        String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, newStudent.getName()));
                 addStudent(newStudent);
                 return;
             }

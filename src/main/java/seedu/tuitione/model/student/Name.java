@@ -12,7 +12,7 @@ public class Name {
 
     public static final int MAX_LENGTH = 150;
     public static final String MESSAGE_CONSTRAINTS =
-            "⚠\tAlert:\n\nNames should only contain alphanumeric characters and spaces, it should not be blank, "
+            "Names should only contain alphanumeric characters and spaces, it should not be blank, "
             + String.format("and it should not contain more than %1$d characters (whitespace included)", MAX_LENGTH);
 
     /*

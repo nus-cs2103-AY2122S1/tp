@@ -1,10 +1,8 @@
 package seedu.tuitione.storage;
 
-import static seedu.tuitione.model.lesson.Lesson.ENROLLMENT_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
-import static seedu.tuitione.model.lesson.Lesson.MAX_STUDENT_SIZE;
-import static seedu.tuitione.model.student.Student.LESSON_SIZE_MESSAGE_CONSTRAINT;
-import static seedu.tuitione.model.student.Student.MAX_LESSON_SIZE;
+import static seedu.tuitione.model.lesson.Lesson.UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.student.Student.ENROLLMENT_MESSAGE_CONSTRAINT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,18 +126,17 @@ class JsonSerializableTuitione {
 
             // enrollment checks
             if (!student.isAbleToEnrollForMoreLessons()) {
-                throw new IllegalValueException(String.format(LESSON_SIZE_MESSAGE_CONSTRAINT,
-                        student.getName(), MAX_LESSON_SIZE));
+                throw new IllegalValueException(String.format(ENROLLMENT_MESSAGE_CONSTRAINT, student.getName()));
             }
             if (!lesson.isAbleToEnrollMoreStudents()) {
                 throw new IllegalValueException(String.format(EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT,
-                        lesson.getLessonCode(), MAX_STUDENT_SIZE));
+                        lesson.getLessonCode()));
             }
             if (lesson.containsStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
             }
             if (!lesson.isAbleToEnroll(student)) {
-                throw new IllegalValueException(String.format(ENROLLMENT_MESSAGE_CONSTRAINT, student.getName()));
+                throw new IllegalValueException(String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, student.getName()));
             }
             lesson.enrollStudent(student);
         }

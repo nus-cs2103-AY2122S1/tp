@@ -9,10 +9,14 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
  */
 public class ParentContact {
 
+    public static final char CHAR_SIX = '6';
+    public static final char CHAR_EIGHT = '8';
+    public static final char CHAR_NINE = '9';
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "⚠\tAlert:\n\nPhone numbers should only contain numbers, should be 8 digits long and should "
-                    + "start with either a '9','8' or '6'.";
+    public static final String MESSAGE_CONSTRAINTS = "Phone numbers should only contain numbers, "
+            + "should be 8 digits long and should start with either a '"
+            + CHAR_SIX + "', '" + CHAR_EIGHT + "' or '" + CHAR_NINE + "'.";
+
     public static final String VALIDATION_REGEX = "\\d{8}";
     public final String value;
 
@@ -31,8 +35,8 @@ public class ParentContact {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX) && (test.charAt(0) == '9' || test.charAt(0) == '8'
-                || test.charAt(0) == '6');
+        return test.matches(VALIDATION_REGEX) && (test.charAt(0) == CHAR_NINE || test.charAt(0) == CHAR_EIGHT
+                || test.charAt(0) == CHAR_SIX);
     }
 
     @Override

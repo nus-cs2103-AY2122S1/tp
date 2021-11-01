@@ -17,14 +17,15 @@ import java.util.Optional;
  */
 public class LessonTime {
 
+    public static final int THIRTY = 30;
     public static final long LESSON_PERIOD_IN_HOURS = 2;
     public static final LocalTime BOUNDED_EARLIEST_START_TIME = LocalTime.of(9, 0);
     public static final LocalTime BOUNDED_LATEST_START_TIME = LocalTime.of(21, 0).minusHours(LESSON_PERIOD_IN_HOURS);
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
-    public static final String TIME_MESSAGE_CONSTRAINTS =
-            String.format("⚠\tAlert:\n\nLesson can only be between %1$s to %2$s, "
-            + "and be a multiple of 30 minutes",
-            BOUNDED_EARLIEST_START_TIME.format(TIME_FORMATTER), BOUNDED_LATEST_START_TIME.format(TIME_FORMATTER));
+
+    public static final String TIME_MESSAGE_CONSTRAINTS = String.format("Lesson can only be between %1$s to %2$s, "
+            + "and be a multiple of %3$d minutes", BOUNDED_EARLIEST_START_TIME.format(TIME_FORMATTER),
+            BOUNDED_LATEST_START_TIME.format(TIME_FORMATTER), THIRTY);
 
     public final DayOfWeek dayOfWeek;
     public final LocalTime startTime;
@@ -55,7 +56,7 @@ public class LessonTime {
         return ((testStart.equals(BOUNDED_EARLIEST_START_TIME)
                 || testStart.equals(BOUNDED_LATEST_START_TIME)
                 || (testStart.isAfter(BOUNDED_EARLIEST_START_TIME) && testStart.isBefore(BOUNDED_LATEST_START_TIME)))
-                && (testStart.getMinute()) % 30 == 0);
+                && (testStart.getMinute()) % THIRTY == 0);
     }
 
     /**

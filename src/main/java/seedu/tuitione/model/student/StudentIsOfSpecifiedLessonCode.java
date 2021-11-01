@@ -8,6 +8,7 @@ import seedu.tuitione.model.lesson.LessonCode;
  * Tests that a {@code Student}'s {@code LessonCode} matches the given lessonCode.
  */
 public class StudentIsOfSpecifiedLessonCode implements Predicate<Student> {
+
     private final LessonCode lessonCode;
 
     public StudentIsOfSpecifiedLessonCode(LessonCode lessonCode) {

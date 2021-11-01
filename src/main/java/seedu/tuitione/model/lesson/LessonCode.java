@@ -15,7 +15,7 @@ import seedu.tuitione.model.student.Grade;
  */
 public class LessonCode {
 
-    public static final String CODE_MESSAGE_CONSTRAINT = "⚠\tAlert:\n\nLesson code should be of correct format";
+    public static final String CODE_MESSAGE_CONSTRAINT = "Lesson code should be of correct format";
 
     public final String value;
 

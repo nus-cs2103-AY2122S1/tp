@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tuitione.model.lesson.Lesson.ENROLLMENT_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED;
+import static seedu.tuitione.model.lesson.Lesson.UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
 import java.time.DayOfWeek;
@@ -185,7 +185,7 @@ public class LessonTest {
 
         // we edit a student to have a different grade
         Student wrongGradeStudent = sb.withGrade("P5").build();
-        String expectedMessage = String.format(ENROLLMENT_MESSAGE_CONSTRAINT, wrongGradeStudent.getName());
+        String expectedMessage = String.format(UNABLE_TO_ENROLL_MESSAGE_CONSTRAINT, wrongGradeStudent.getName());
         assertThrows(IllegalArgumentException.class, expectedMessage, () ->
                 defaultLesson.updateStudent(student, wrongGradeStudent));
     }

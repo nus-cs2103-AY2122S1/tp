@@ -9,6 +9,7 @@ import seedu.tuitione.commons.util.StringUtil;
  * Tests that a {@code Student}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Student> {
+
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {

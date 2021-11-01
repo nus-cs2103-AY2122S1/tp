@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tuitione.model.lesson.Lesson.MAX_LESSON_SIZE;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FOURTH_LESSON;
@@ -160,8 +161,7 @@ public class EnrollCommandTest {
         benson.enrollForLesson(lessonNine);
         benson.enrollForLesson(lessonTen);
         String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_LESSONS,
-                benson.getName(),
-                Student.MAX_LESSON_SIZE);
+                benson.getName(), MAX_LESSON_SIZE);
         assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, Index.fromOneBased(6)),
                 model,
                 expectedMessage);
@@ -189,8 +189,7 @@ public class EnrollCommandTest {
         //adding lesson into model
         model.addLesson(scienceP2);
         String expectedMessage = String.format(EnrollCommand.MESSAGE_MORE_THAN_MAX_STUDENTS,
-                scienceP2.getLessonCode(),
-                Lesson.MAX_STUDENT_SIZE);
+                scienceP2.getLessonCode());
         assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, Index.fromOneBased(2)),
                 model,
                 expectedMessage);

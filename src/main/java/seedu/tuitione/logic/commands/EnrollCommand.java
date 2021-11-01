@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.tuitione.model.lesson.Lesson.EXCEED_ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.MAX_LESSON_SIZE;
 
 import java.util.List;
 
@@ -72,14 +73,11 @@ public class EnrollCommand extends Command {
             throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON, studentToEnroll.getName(), lesson));
         }
         if (!studentToEnroll.isAbleToEnrollForMoreLessons()) {
-            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_LESSONS,
-                    studentToEnroll.getName(),
-                    Student.MAX_LESSON_SIZE));
+            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_LESSONS, studentToEnroll.getName(),
+                    MAX_LESSON_SIZE));
         }
         if (!lesson.isAbleToEnrollMoreStudents()) {
-            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_STUDENTS,
-                    lesson.getLessonCode(),
-                    Lesson.MAX_STUDENT_SIZE));
+            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_STUDENTS, lesson.getLessonCode()));
         }
 
         // final overall check

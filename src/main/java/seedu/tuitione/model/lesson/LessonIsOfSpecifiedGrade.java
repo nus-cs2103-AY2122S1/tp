@@ -8,6 +8,7 @@ import seedu.tuitione.model.student.Grade;
  * Tests that a {@code Lesson}'s {@code Grade} matches the given grade.
  */
 public class LessonIsOfSpecifiedGrade implements Predicate<Lesson> {
+
     private final Grade grade;
 
     public LessonIsOfSpecifiedGrade(Grade grade) {

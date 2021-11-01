@@ -10,8 +10,9 @@ public class Price {
 
     public static final double MAX_PRICE = 200.0;
     public static final String CURRENCY = "SGD $";
-    public static final String PRICE_MESSAGE_CONSTRAINT = String.format(
-            "⚠\tAlert:\n\nPrice cannot be negative or more than " + CURRENCY + " %1$.2f", MAX_PRICE);
+
+    public static final String PRICE_MESSAGE_CONSTRAINT = String.format("Price cannot be negative or more than "
+            + CURRENCY + " %1$.2f", MAX_PRICE);
 
     public final double value;
 
