@@ -146,7 +146,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Path getOrderBookPath() {
+    public Path getOrderBookFilePath() {
         throw new AssertionError("This method should not be called.");
     }
 

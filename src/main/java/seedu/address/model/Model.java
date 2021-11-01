@@ -153,7 +153,7 @@ public interface Model {
     /**
      * Returns the user prefs' Order books  file path.
      */
-    Path getOrderBookPath();
+    Path getOrderBookFilePath();
 
     /**
      * Sets the user prefs' Order books  file path.

@@ -208,7 +208,7 @@ public class ModelManager implements Model {
     //=========== Order Management ==================================================================================
 
     @Override
-    public Path getOrderBookPath() {
+    public Path getOrderBookFilePath() {
         return userPrefs.getOrderBookFilePath();
     }
 

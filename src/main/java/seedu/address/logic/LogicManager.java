@@ -92,7 +92,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getOrderBookFilePath() {
-        return model.getOrderBookPath();
+        return model.getOrderBookFilePath();
     }
 
     @Override
