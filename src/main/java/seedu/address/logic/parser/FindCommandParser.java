@@ -39,9 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         assert(!trimmedArgs.isEmpty());
         String githubUsernames = trimmedArgs.substring(2).trim();
         if (githubUsernames.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_GITHUB_FIELD_CANNOT_BE_EMPTY,
-                            FindCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_GITHUB_FIELD_CANNOT_BE_EMPTY);
         }
         String[] githubUsernameKeywords = githubUsernames.split("\\s+");
         return new FindCommand(new GithubContainsKeywordsPredicate(Arrays
@@ -71,9 +69,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         assert(!trimmedArgs.isEmpty());
         String tags = trimmedArgs.substring(2).trim();
         if (tags.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_TAG_FIELD_CANNOT_BE_EMPTY,
-                            FindCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_TAG_FIELD_CANNOT_BE_EMPTY);
         }
         String[] tagKeywords = tags.split("\\s+");
         return new FindCommand(new TagContainsKeywordsPredicate(Arrays
@@ -91,9 +87,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         assert(!trimmedArgs.isEmpty());
         String telegramHandles = trimmedArgs.substring(3).trim();
         if (telegramHandles.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_TELEGRAM_FIELD_CANNOT_BE_EMPTY,
-                            FindCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_TELEGRAM_FIELD_CANNOT_BE_EMPTY);
         }
         String[] telegramHandleKeywords = telegramHandles.split("\\s+");
         return new FindCommand(new TelegramHandleContainsKeywordsPredicate(Arrays
@@ -121,7 +115,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         assert(!args.contains(FindCommand.COMMAND_WORD));
         String trimmedArgs = args.trim();
-        if (!isValidFormat(trimmedArgs)) {
+        if (trimmedArgs.isEmpty() || !isValidFormat(trimmedArgs)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
         }
