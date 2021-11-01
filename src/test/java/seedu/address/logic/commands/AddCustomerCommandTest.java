@@ -221,6 +221,11 @@ public class AddCustomerCommandTest {
         }
 
         @Override
+        public boolean hasTable(Table table) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void resetTableCount() {
             throw new AssertionError("This method should not be called.");
         }
