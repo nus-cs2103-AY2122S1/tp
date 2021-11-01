@@ -12,6 +12,7 @@ import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.Action;
+import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.GenreAddCommand;
 import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.logic.commands.GenreDeleteCommand;
@@ -32,7 +33,13 @@ public class GenreCommandParser implements Parser<GenreCommand> {
     public GenreCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ACTION, PREFIX_GENRE);
+        ArgumentMultimap argMultimap;
+
+        try {
+            argMultimap = ParserUtil.tokenizeWithCheck(args, true, PREFIX_ACTION, PREFIX_GENRE);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE));
+        }
 
         Index index;
         try {

@@ -22,8 +22,12 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListCommand(PREDICATE_SHOW_ALL_ANIME);
         }
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STATUS);
+        ArgumentMultimap argMultimap;
+        try {
+            argMultimap = ParserUtil.tokenizeWithCheck(args, false, PREFIX_STATUS);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
         Status statusToMatch;
 
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
