@@ -181,7 +181,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: derive(-fx-base1, -100%);
+    -fx-text-fill: white;
 }
 
 .cell_big_label,
@@ -474,7 +474,7 @@
 
 #tags .label {
     -fx-cursor: hand;
-    -fx-text-fill: derive(-fx-base2, -30%);
+    -fx-text-fill: white;
     -fx-background-color: -fx-base5;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
@@ -483,6 +483,6 @@
 }
 
 #tags .label:hover {
-    -fx-text-fill: derive(-fx-base5, 30%);
+    -fx-text-fill: white;
     -fx-background-color: derive(-fx-base1, -30%);
 }
