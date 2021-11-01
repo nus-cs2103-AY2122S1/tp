@@ -27,7 +27,8 @@ public class MlistCommandParser implements Parser<MlistCommand> {
         if (args.isEmpty()) {
             return new MlistCommand();
         }
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_INDEX, PREFIX_ATTEND, PREFIX_ABSENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EVENT_INDEX,
+                PREFIX_ATTEND, PREFIX_ABSENT);
         if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_EVENT_INDEX)
             || ParserUtil.arePrefixesPresent(argMultimap, PREFIX_ATTEND, PREFIX_ABSENT)
             || !argMultimap.getPreamble().isEmpty()) {
