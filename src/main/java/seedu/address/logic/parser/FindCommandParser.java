@@ -1,12 +1,24 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.ParserUtil.testByAllFields;
 
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -22,33 +34,25 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim().replace(FindCommand.COMMAND_WORD, "");
         checkTrimmedArgs(trimmedArgs);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_DASH_NAME, PREFIX_DASH_PHONE, PREFIX_DASH_INDEX,
+                PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
+                PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
 
-        if (trimmedArgs.contains(CliSyntax.PREFIX_DASH_NAME.getPrefix())) {
-            String[] nameKeywords = trimmedArgs.replace(CliSyntax.PREFIX_DASH_NAME.getPrefix(), "")
-                    .trim().split("\\s+");
-            if (nameKeywords[0].equals("")) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-
-        } else if (trimmedArgs.contains(CliSyntax.PREFIX_DASH_INDEX.getPrefix())) {
-            String indexString = trimmedArgs.replace("-i", "").trim();
-
-            try {
-                int index = Integer.parseInt(indexString);
-                return new FindCommand(index - 1); // -1 to account for zero indexing
-
-            } catch (NumberFormatException e) {
-                throw new ParseException(
-                        // "Invalid number, check index");
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        PersonContainsFieldsPredicate predicate = testByAllFields(argMultimap);
+        if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            return new FindCommand(ParserUtil
+                    .parseIndex(argMultimap.getValue(PREFIX_INDEX).get()).getZeroBased());
         }
+        if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
+            String[] nameKeywords = argMultimap.getValue(PREFIX_DASH_NAME).get()
+                    .trim().split("\\s+");
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)),
+                    predicate);
+
+        }
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     private void checkTrimmedArgs(String trimmedArgs) throws ParseException {

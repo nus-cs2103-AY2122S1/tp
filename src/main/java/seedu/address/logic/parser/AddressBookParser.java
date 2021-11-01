@@ -28,7 +28,6 @@ import seedu.address.logic.commands.StaffIndividualStatisticsCommand;
 import seedu.address.logic.commands.StaffStatisticsCommand;
 import seedu.address.logic.commands.SwapShiftCommand;
 import seedu.address.logic.commands.SwitchTabCommand;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewScheduleCommand;
 import seedu.address.logic.commands.ViewShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -98,9 +97,6 @@ public class AddressBookParser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
 
         case AddShiftCommand.COMMAND_WORD:
             return new AddShiftCommandParser().parse(arguments);

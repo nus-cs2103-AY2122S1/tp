@@ -4,12 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 
 /**
@@ -19,10 +22,11 @@ import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final int INVALID_INDEX = -1;
+    private static final int NAME_AND_FIELD_PREDICATE = -1;
+    private static final int FIELD_PREDICATE_ONLY = -2;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) or the index specified and "
+            + "the specified keywords (case-insensitive) along with fields or the index specified and "
             + "displays them as a list with index numbers.\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
@@ -34,6 +38,7 @@ public class FindCommand extends Command {
 
     private StringBuilder successMessage = new StringBuilder(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW).append("\n");
     private final NameContainsKeywordsPredicate namePredicate;
+    private final PersonContainsFieldsPredicate predicate;
     private final int index;
     private StaffHasCorrectIndexPredicate indexPredicate = null;
 
@@ -42,9 +47,10 @@ public class FindCommand extends Command {
      *
      * @param namePredicate Predicate to filter the list by names that match a given name.
      */
-    public FindCommand(NameContainsKeywordsPredicate namePredicate) {
+    public FindCommand(NameContainsKeywordsPredicate namePredicate, PersonContainsFieldsPredicate predicate) {
         this.namePredicate = namePredicate;
-        this.index = INVALID_INDEX; // not used
+        this.predicate = predicate;
+        this.index = NAME_AND_FIELD_PREDICATE; // not used
     }
 
     /**
@@ -55,24 +61,34 @@ public class FindCommand extends Command {
     public FindCommand(int index) {
         this.namePredicate = null;
         this.index = index;
+        this.predicate = new PersonContainsFieldsPredicate();
+    }
+
+    public FindCommand(PersonContainsFieldsPredicate predicate) {
+        assert predicate != null;
+        assert !predicate.isEmpty();
+        this.predicate = predicate;
+        this.index = FIELD_PREDICATE_ONLY;
+        this.namePredicate = new NameContainsKeywordsPredicate(List.of(""));
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (namePredicate != null) {
-            return executeNameSearch(model);
-
-        } else if (index > -1) {
-            checkIndex(model); // throws an exception if index is out of range
+        //with name and field
+        if (index == NAME_AND_FIELD_PREDICATE
+                || index == FIELD_PREDICATE_ONLY) {
+            return executeNameAndFieldSearch(model);
+        }
+        if (index > 0) {
+            checkIndex(model);
             indexPredicate = new StaffHasCorrectIndexPredicate(index, model);
             return executeIndexSearch(model);
-
-        } else {
-            throw new CommandException("Check if your input are correct: -n for name, -i for index,\n"
-                    + "and that the index given is correct!");
         }
+        throw new CommandException("Check if your input are correct: -n for name, -i for index,\n"
+                + "and that the index given is correct!");
+
+
     }
 
     /**
@@ -81,8 +97,9 @@ public class FindCommand extends Command {
      * @param model The model which contains the list to be searched on.
      * @return a CommandResult to be displayed.
      */
-    public CommandResult executeNameSearch(Model model) {
-        model.updateFilteredPersonList(namePredicate);
+    public CommandResult executeNameAndFieldSearch(Model model) {
+        model.updateFilteredPersonList(person -> namePredicate.test(person)
+                && predicate.test(person));
         ObservableList<Person> staffs = model.getFilteredPersonList();
         int counter = 1;
         for (Person p : staffs) {
@@ -156,7 +173,7 @@ public class FindCommand extends Command {
      * @return Whether the otherFind is equal to this
      */
     public boolean findByNameIsEquals(FindCommand otherFind) {
-        return (otherFind.getIndex() == INVALID_INDEX && this.index == INVALID_INDEX)
+        return (otherFind.getIndex() == NAME_AND_FIELD_PREDICATE && this.index == NAME_AND_FIELD_PREDICATE)
                 && (otherFind.getNamePredicate() != null && this.namePredicate != null)
                 && (this.namePredicate.equals(otherFind.getNamePredicate()));
     }
@@ -169,7 +186,7 @@ public class FindCommand extends Command {
      */
     public boolean findByIndexIsEquals(FindCommand otherFind) {
         return (otherFind.namePredicate == null && this.namePredicate == null)
-                && (otherFind.getIndex() != INVALID_INDEX && this.index != INVALID_INDEX)
+                && (otherFind.getIndex() != NAME_AND_FIELD_PREDICATE && this.index != NAME_AND_FIELD_PREDICATE)
                 && (this.index == otherFind.getIndex());
     }
 }
