@@ -11,7 +11,7 @@
 
 <fx:root alwaysOnTop="true" title="Total Orders" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/help_icon.png" />
+    <Image url="@/images/totalorders_icon.png" />
   </icons>
   <scene>
     <Scene>
