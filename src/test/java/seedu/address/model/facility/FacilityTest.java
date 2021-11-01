@@ -11,6 +11,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFacilities.FIELD;
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_1;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
@@ -33,6 +35,9 @@ public class FacilityTest {
         // null capacity
         assertThrows(NullPointerException.class, () -> new Facility(new FacilityName("Court"), new Location("loc"),
                 new Time("1111"), null));
+        // null person-allocated list
+        assertThrows(NullPointerException.class, () -> new Facility(new FacilityName("Court"), new Location("loc"),
+                new Time("1111"), new Capacity("5"), null));
     }
 
     @Test
@@ -107,19 +112,24 @@ public class FacilityTest {
                 new Time("1130"), new Capacity("10"));
 
         Facility facilityCopy = new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
-                new Time("1130"), new Capacity("10"));
+                new Time("1130"), new Capacity("10"), new ArrayList<>());
 
         Facility differentFacility = new Facility(new FacilityName("Field"), new Location("Opp University Hall"),
                 new Time("2045"), new Capacity("5"));
 
+        // same object
         assertTrue(facility.equals(facility));
 
+        // facilities with same name and location
         assertTrue(facility.equals(facilityCopy));
 
+        // null facility
         assertFalse(facility.equals(null));
 
+        // not a facility
         assertFalse(facility.equals("5"));
 
+        // different facility
         assertFalse(facility.equals(differentFacility));
 
         Facility differentName = new Facility(new FacilityName("Field"), new Location("University Sports Hall"),

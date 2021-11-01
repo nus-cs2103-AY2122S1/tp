@@ -1,5 +1,6 @@
 package seedu.address.model.facility;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -33,6 +34,17 @@ public class Facility {
         this.location = location;
         this.time = time;
         this.capacity = capacity;
+    }
+
+    /**
+     * Creates a Facility object with the specified name, location, time, capacity and
+     * person-allocated list.
+     */
+    public Facility(FacilityName name, Location location, Time time, Capacity capacity,
+                    List<Person> personAllocatedList) {
+        this(name, location, time, capacity);
+        requireNonNull(personAllocatedList);
+        this.personAllocatedList = personAllocatedList;
     }
 
     public FacilityName getName() {

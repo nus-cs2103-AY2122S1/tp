@@ -27,7 +27,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditFacilityCommand;
-import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
 
 public class EditFacilityCommandParserTest {
@@ -43,7 +42,7 @@ public class EditFacilityCommandParserTest {
         assertParseFailure(parser, VALID_FACILITY_NAME_COURT, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditMemberCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", EditFacilityCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
