@@ -293,6 +293,50 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### Find feature 
+
+The find mechanism is facilitated by the built-in `Predicate` class. The FindCommand constructor takes in a predicate 
+type as a parameter and the list is then filtered with `ModelManager#updateFilteredItemList` method to only contain the 
+items that match the predicate specified. `Predicate<Item>` interface is implemented by 3 different classes:
+
+* `IdContainsNumberPredicate` — allows finding of items by Id
+* `NameContainsKeywordsPredicate` — allows finding of items by Name
+* `TagContainsKeywordsPredicate` — allows finding of items by Tag
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1. The user opens up BogoBogo and executes `find n/Chocolate` to find items with the name chocolate. The 
+`LogicManager` then calls the `AddressBookParser` to execute `FindCommandParser#parse()`. The `FindCommandParser` 
+then creates a `FindCommand` with the `NameContainsKeywordsPredicate` as a field in its constructor. Then, the 
+`LogicManager` calls the `FindCommand#execute()` which will update the filtered list with items that matches the 
+predicate stated. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user input a wrong format of the name, id or tag, a ParseException will be thrown by FindCommandParser and a FindCommand will not be created. 
+
+Step 2. The updated list with items that matches the predicate will then be shown to the user. If none matches, an empty
+list will be shown. The same procedure above is executed for finding by Id and Tags as well. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The FindCommand also supports finding by multiple names, ids or tags.
+The 3 classes that implement Predicate<Item> takes in a list of string which allows storing of multiple predicates. 
+
+<div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a Find command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How Find executes:**
+
+* **Alternative 1:** Retrieve current inventory and check each item one by one without using the predicate class
+    * Pros: Easier to implement
+    * Cons: May have performance issue as every command will execute several loops. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
