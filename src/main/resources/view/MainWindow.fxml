@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="TuitiONE" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="TuitiONE" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/TuitiONE.png" />
   </icons>
@@ -28,10 +28,10 @@
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="📂 File" style="-fx-background-color: #b2814c; -fx-background-radius: 40;">
-            <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="📂 File">
+            <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
-          <Menu mnemonicParsing="false" text="❔ Help" style="-fx-background-color: #b2814c; -fx-background-radius: 40;">
+          <Menu mnemonicParsing="false" style="-fx-background-color: #b2814c; -fx-background-radius: 40;" text="❔ Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
@@ -43,16 +43,16 @@
               <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
             </padding>
             <VBox fx:id="studentListLabel" styleClass="pane-with-no-border">
-                     <Text fill="#572d03" text="👨👩 Student List">
+                     <Text fill="#572d03" style="-fx-font-weight: bold" text="👨👩 Student List">
                         <font>
                            <Font name="Montserrat Medium" size="22.0" />
                         </font>
                        <VBox.margin>
-                         <Insets top="5.0" bottom="5.0" left="12.0" />
+                         <Insets bottom="5.0" left="12.0" top="5.0" />
                        </VBox.margin>
                      </Text>
             </VBox>
-            <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-border-color: #b2814c"/>
+            <StackPane fx:id="studentListPanelPlaceholder" style="-fx-border-color: #b2814c" VBox.vgrow="ALWAYS" />
           </VBox>
 
           <VBox fx:id="lessonList" minWidth="260" prefWidth="260" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -60,15 +60,15 @@
               <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
             </padding>
             <VBox fx:id="lessonListLabel" styleClass="pane-with-no-border">
-              <Text fill="#572d03" text="📚 Lesson List">
+              <Text fill="#572d03" style="-fx-font-weight: bold" text="📚 Lesson List">
                         <font>
                            <Font name="Montserrat Medium" size="22.0" />
                         </font>
                         <VBox.margin>
-                           <Insets top="5.0" bottom="5.0" left="12.0" />
+                           <Insets bottom="5.0" left="12.0" top="5.0" />
                         </VBox.margin></Text>
             </VBox>
-            <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" style="-fx-border-color: #b2814c"/>
+            <StackPane fx:id="lessonListPanelPlaceholder" style="-fx-border-color: #b2814c" VBox.vgrow="ALWAYS" />
           </VBox>
 
         </HBox>
