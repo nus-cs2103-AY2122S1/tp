@@ -250,6 +250,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleReminder() {
+        logic.updateUpcomingLessons();
         if (!reminderWindow.isShowing()) {
             reminderWindow.show();
         } else {

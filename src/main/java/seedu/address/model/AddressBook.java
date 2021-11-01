@@ -210,12 +210,29 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.asUnmodifiableMap();
     }
 
+    /**
+     * Returns the Calendar consisting of all lessons entries.
+     *
+     * @return The Calendar consisting of all lessons entries.
+     */
     public Calendar getCalendar() {
         return entries.getCalendar();
     }
 
+    /**
+     * Returns a list of upcoming lessons within the next two days.
+     *
+     * @return List of upcoming lessons within the next two days.
+     */
     public ObservableList<Entry<Lesson>> getUpcomingLessons() {
         return entries.getUpcomingLessons();
+    }
+
+    /**
+     * Updates the list of upcoming lessons.
+     */
+    public void updateUpcomingLessons() {
+        entries.updateUpcomingLessons();
     }
 
     @Override
