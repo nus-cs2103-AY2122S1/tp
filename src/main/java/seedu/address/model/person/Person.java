@@ -147,6 +147,9 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns the formatted export string for each Person.
+     */
     public String toExportFormat() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Name: ")

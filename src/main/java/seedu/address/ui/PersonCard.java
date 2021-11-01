@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.person.Rating.EMPTY_RATING;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 
@@ -9,8 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
-
-import static seedu.address.model.person.Rating.EMPTY_RATING;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -58,7 +58,7 @@ public class PersonCard extends UiPart<Region> {
         if (ratingValue.equals(EMPTY_RATING)) {
             rating.setText(EMPTY_RATING);
         } else {
-            byte[] emojiBytes = new byte[]{(byte)0xE2, (byte)0xAD, (byte)0x90};
+            byte[] emojiBytes = new byte[]{(byte) 0xE2, (byte) 0xAD, (byte) 0x90};
             String emojiAsString = new String(emojiBytes, StandardCharsets.UTF_8);
             rating.setText(ratingValue + emojiAsString + "\u2B50");
         }
