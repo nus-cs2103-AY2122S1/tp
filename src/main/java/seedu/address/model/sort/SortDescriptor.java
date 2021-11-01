@@ -49,6 +49,13 @@ public class SortDescriptor {
         }
     }
 
+    /**
+     * Returns a success message for the {@code SortDescriptor}.
+     */
+    public String generateSuccessMessage() {
+        return "Sorted by " + sortField + "in " + sortOrdering;
+    }
+
     public SortField getSortField() {
         return sortField;
     }

@@ -148,7 +148,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/R
 A client can have any number of tags (including 0). The remark is also optional.
 </div>
 
-
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40`
 * `add n/Betsy Crowe e/bcrowe@example.com a/Sesame Street p/1234567 t/important g/F d/160_85_35_81`
@@ -229,7 +228,7 @@ Adds a task to the application.
 Format: `addtask l/LABEL d/DATE [t/TASKTAG]`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
-The new task will automatically be assigned the 'General' tag if the task tag parameter is not supplied.
+The new task will automatically be assigned the 'General' tag if the `TASKTAG` parameter is not supplied.
 </div>
 
 Examples:
@@ -374,22 +373,22 @@ Format: `incompleteorders`
 
 Sorts all orders based on a chosen field and arrangement.
 
-Format: `sortorders f/FIELD o/ORDERING`
+Format: `sortorders f/FIELD [o/ORDERING]`
 
 * Your orders are sorted based on the `FIELD` chosen. You may choose between:
   * The Date field, identified with a "d" or "date".
   * The Amount field, identified with an "a" or "amount".
-* By default, the orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
 * The direction of the arrangement depends on the `ORDERING`, which is either:
   * Ascending, identified with an "asc" or "ascending".
   * Descending, identified with a "desc" or "descending".
+* If the `ORDERING` parameter is not supplied, the list will be sorted in ascending order.
 
 <div markdown="block" class="alert alert-primary">
 
-**:information_source: Note:**<br>
+**:information_source: Note:** <br>
 
+* By default, your orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
 * Adding / Deleting an order reverts the list to the default ordering.
-* The order list will automatically be be sorted in ascending order if the ORDERING parameter is not supplied.
 
 </div>
 
