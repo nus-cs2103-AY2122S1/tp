@@ -353,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       >> Steps 1a1-1a2 are repeated until the data format entered are correct.
 
 **System: UNIon**\
-**Use case: UC03 - Add existing contact to a existing folder**\
+**Use case: UC03 - Add existing contact to an existing folder**\
 **Actor: User**\
 **Preconditions:** Folder and contact already exists in UNIon\
 **MSS:**
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
    > 1a. UNIon detects error of input by user.
       >> 1a1. Folder remains in the UNIon.\
-      >> 1a2. User respecifies the folder to be removed.\
+      >> 1a2. User re-specifies the folder to be removed.\
       Steps 1a1 - 1a2 are repeated until data format is correct.
 
 **System: UNIon**\
@@ -400,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
    1. User inputs command to remove all contacts
-   2. UNIon clears all the contacts it has stoerd till thus far.
+   2. UNIon clears all the contacts it has stored till thus far.
 
    Use case ends.
 
