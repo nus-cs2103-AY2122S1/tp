@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
       <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="➡ Please enter your command here..." style="-fx-text-fill: #3d2608;" HBox.hgrow="ALWAYS" />
       <HBox prefHeight="35.0" prefWidth="19.0" />

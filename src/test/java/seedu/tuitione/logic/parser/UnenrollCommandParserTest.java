@@ -3,6 +3,7 @@ package seedu.tuitione.logic.parser;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.tuitione.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
@@ -39,9 +40,7 @@ public class UnenrollCommandParserTest {
                 UnenrollCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "1 l/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 UnenrollCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "1 l/0", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                UnenrollCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "0 l/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                UnenrollCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 l/0", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "0 l/1", MESSAGE_INVALID_INDEX);
     }
 }

@@ -4,7 +4,6 @@ import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMA
 
 import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.commons.util.StringUtil;
-import seedu.tuitione.logic.commands.DeleteCommand;
 import seedu.tuitione.logic.commands.DeleteLessonCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
 

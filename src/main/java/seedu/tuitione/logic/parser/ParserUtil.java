@@ -15,12 +15,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.commons.util.StringUtil;
-import seedu.tuitione.logic.commands.DeleteLessonCommand;
 import seedu.tuitione.logic.commands.EnrollCommand;
 import seedu.tuitione.logic.commands.UnenrollCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
