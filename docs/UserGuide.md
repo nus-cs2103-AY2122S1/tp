@@ -56,11 +56,11 @@ When reading our User Guide, here are some important information to take note of
 
 ### 1.1.1 Icons and its meaning
 | **Icon** | **Meaning of icons** |
-| --- | --- |
-| <img src=images/info_icon.png width="50" > | Notes are specific conditions or behaviours of a feature. |
-| <img src=images/tip_icon.png width="50" > | tips are suggestions that can help LeadsForce run faster. |
-| <img src=images/warn_icon.png width="50" > | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files. |
-
+| :-: | --- |
+| <img src=images/info_icon.png width="50"> | Notes are specific conditions or behaviours of a feature. |
+| <img src=images/tip_icon.png width="50"> | tips are suggestions that can help LeadsForce run faster. |
+| <img src=images/warn_icon.png width="50"> | warnings are important information to take note of when using LeadsForce. When these warnings are not followed, this can result in LeadsForce crashing or have corrupted data files. |
+ 
 ## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your computer.
@@ -90,7 +90,7 @@ When reading our User Guide, here are some important information to take note of
 
 ## 3. Client Information
 
-Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag.
+This section details the client information that financial advisors can keep track of with LeadsForce. Every client that is registered in LeadsForce have the following attributes that has the corresponding type and argument tag. The argument tags specified here will be used in the commands of several [features](#4-features). 
 
 Client Attribute | Type of Attribute | Argument Tag
 -----------------|-----------------|-----------------
@@ -106,35 +106,32 @@ Contact number | Integer (8 digits long)| p/
 Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| r/
 Tag | String | t/
 
-### 3.1 NextMeeting
-NextMeeting entails the next meeting's *date*, *startTime*, *endTime* and *location*.
-A NextMeeting needs to be inputted in the following form:
+### 3.1 Next Meeting attribute 
+The `Next Meeting` attribute refers to the next meeting that the financial advisor using has with the client. Each `Next Meeting` consists of a *date*, *start time*, *end time* and a *location*. 
+
+A NextMeeting needs to be inputted in the following format:
 
 `m/dd-MM-yyyy (hh:mm~hh:mm), {non-empty location string)`
 
 where
-* *date* is in the format `dd-MM-yyyy`
+* *date* is in the format `dd-MM-yyyy`, where day, month and year are numerical values
 * *startTime* and *endTime* are in `hh:mm` (24 hour format)
 * *location* is a non-empty string
 
-For example, a valid NextMeeting is:
+| example | `m/25-12-2021 (00:00~23:59), Santa's Workshop`|
+| :-: | :-- |
+| <img src=images/info_icon.png width="50"> | • `Next Meeting` will automatically be updated to null when the current time passes the date and end time of the meeting and this happens whenever the application is booted up. At the same time, the `Last Met` attribute will be updated to take on the current date. |
 
-`m/25-12-2021 (00:00~23:59), Santa's Workshop`
-
-Furthermore, when the NextMeeting is over, the NextMeeting will automatically be set to null.
-This happens whenever the changes are made to the client list or when the address book is opened/loaded.
-
-### LastMet
-Similar to NextMeeting, the LastMet is automatically updated from a NextMeeting that is over.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Features
 
+This section details the various features available in a single address book in LeadsForce. These features are generally used in the management of client information and client meetings. 
+
 <div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
+ <p><img src=images/info_icon.png width="40"/><b>Notes about the command format:</b></p>
+ 
 * When `<attribute>` is given, it means that the any *attribute tag* can be used, with the exception of *client id* in some cases
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
 * If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceeding argument tag
@@ -151,43 +148,31 @@ Similar to NextMeeting, the LastMet is automatically updated from a NextMeeting 
 ### 4.1 Create New Contact : `add`
 
 Adds a new client to the address book.
-
-Format: `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES} ...​`
-
-* A client must have minimally the name and email tag filled during creation
-* Any other tags are optional
-* Tags that can be added are as seen in the client information in the Client Info Section
-
-Examples:
-* `add n/Benedict Chua e/benchua@hotmail.com`
-* `add n/Keith e/keithtan@ymail.com p/12345678 r/4`
-
+| Format | `add n/{CLIENT'S NAME} e/{EMAIL} <attribute>/{OTHER ATTRIBUTES} ...​`|
+| :-: | --- |
+| **example** | • `add n/Benedict Chua e/benchua@hotmail.com` <br> • `add n/Keith e/keithtan@ymail.com p/12345678 r/4`|
+| <img src=images/info_icon.png width="50"> | • A client must have minimally the name and email tag filled during creation <br> • Any other tags are optional <br> • Tags that can be added are as seen in the client information in the Client Info Section |
 
 ### 4.2 Retrieve Particular Contact : `view`
 
-Fully view a client’s information in detail.
+View client's information in detail. 
 
-Format: `view {CLIENT'S ID}`
-
-Example: `view 2` would be used to view client 2's information
-
+| Format | `view CLIENT'S ID` |
+| :-: | --- |
+| **example** | • `view 2` would be used to view client 2's information|
+ 
 ### 4.3 Update Existing Contact : `edit`
 
-Update the information of existing users by using the “edit” command. This can be used to update the
-attributes of a client, using the tag of the client’s attribute.
+Update the attributes of existing users using the tag of the client’s attribute, and set/edit meetings with clients.  
 
 * Multiple attributes could be changed with one command.
 * Multiple clients can be edited at the same time with the provided attributes by indicating their ids separated by a space.
-
-Format:
-`edit {CLIENT'S ID}... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`
-
-Examples:
-
-* `edit 15 n/Dominic` command changes the name of client 15 to “Dominic”.
-* `edit 3 p/12345678 r/5` command changes the contact number to “12345678” and the risk appetite to 5 for the client who’s client id is 3.
-* `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”.
-
+ 
+| Format | `edit CLIENT'S ID... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`|
+| :-: | --- |
+| **example** | • `edit 3 p/12345678 r/5` command changes client 3's contact number to “12345678” and the risk appetite to 5. <br> • `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”. <br> • `edit 3 4 5 m/21-09-2021 (09:00~10:00), Mcdonalds` sets a meeting for clients 3, 4 and 5 to be on 21st September 2021 from 9am to 10 am at Mcdonalds |
+| <img src=images/tip_icon.png width="50"> | • multiple clients and their attributes can be updated with one `edit` command! For instance, if you're planning to organise a meeting with several different clients, you could simply use this feature to do so. |
+ 
 ### 4.4 Delete particular contact : `delete`
 
 Deletes an existing client from the address book using their client id.
