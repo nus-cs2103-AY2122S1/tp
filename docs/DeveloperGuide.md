@@ -282,103 +282,192 @@ of the search.<br>
 ### Appointment feature
 
 #### Current Implementation
-The appointment status will be reflected on the right side of the contact status.
-Currently, the `appointment command` has 4 different sub-features: 
-
+The appointment feature supports 5 different type of command currently:
 1. `add appointment`
 2. `edit appointment` 
 3. `delete appointment` 
-4. `track completed appointment` 
+4. `mark appointment` 
+5. `unmark appointment`
 
-The implementation of `adding`, `editing` and `deleting` an appointment is fairly similar to the process of `adding`, 
-`editing` and `deleting` a contact. 
+This 5 features will allow users to be able to keep track of the appointments they have with their clients.
+The table below summarises the purpose of the 5 different appointment commands.
 
-`Adding appointment`: `date` field is compulsory. Parses the `date` string and `time` string by using the built-in 
-`LocalDate` parser. The `date` string and `time` string will then be formatted by built-in `DateTimeFormatter` to the 
-required format. Make use of `String::length` method to check for the character limit imposed on the `venue` field.
-Makes use of `String::equalsIgnoreCase` method to prevent user from adding appointment if it already exists.
-If all input data fields fulfill the requirements, a new `Appointment` object will be created to store the data, 
-which will be added to the `model`.
+| Command      | Command Word | Purpose |
+| ----------- | ----------- | ----- |
+| `add appointment` | `aa` | Adds a new appointment. |
+| `edit appointment` | `ea` | Edits an existing appointment. |
+| `delete appointment` | `da` | Delete an existing appointment.|
+| `mark appointment` | `ma` | Mark an appointment as done.|
+| `unmark appointment` | `ua` | Undo the marking of an appointment as done.|
 
-`Edit appointment`: Similar to `Adding appointment`, except that `date` field is no longer compulsory. 
-Included a `EditAppointmentDescriptor` class to duplicate data fields that are not modified. 
-`EditAppointmentDescriptor::isAnyFieldEmpty` is implemented to ensure that at least 1 data field is being edited.
-Makes use of `String::equalsIgnoreCase` to prevent editing a non-existent appointment.
-If all input data fields fulfills the requirements, a new `EditAppointmentDescriptor` object will be created to store 
-the data, which will be used to update the `model`.
+**Appointment**
 
-`Delete appointment`: Makes use of `String::equalsIgnoreCase` to prevent deleting a non-existent appointment.
-`deletes` an appointment by creating a new `Appointment` object with empty `date`, `time` and `venue` field for the 
-specified contact in the `model`.
+Managed by: [`Appointment.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/model/person/Appointment.java)
 
-`Track Completed Status`: Makes use of the `AppointmentCount` class to keep track of the number of completed appointment 
-with the specified contact. `AppointmentCount` will be increased by 1 each time the user enters the command.
+Stores 3 data:
+1) The 'date' of an appointment in `dd-MMM-yyyy` format as a String.
+2) The `time` of an appointment in `HHmm` format as a String.
+3) The `venue` of an appointment has to be within 20 characters as a String.
 
-Below is an example usage scenario (`adding` / `editing`):
-1. The user launches the application for the first time.
-2. The user inputs `appt 1 d/2021-10-11 t/10:00 v/NUS` to add an appointment (on 11th October 2021, 10.00am at NUS) with 
-the first listed contact.
-3. This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
-4. `FastParser::parseCommand` will determine that it is an add appointment command.
-5. `FastParser::parseCommand` will call `AppointmentCommandParser::parse`.
-   1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-   2. `ParserUtil::parseIndex`, `ParserUtil::parseDateString`, `ParserUtil::parseTimeString` and 
-   `ParserUtil::parseVenueString` will be called to check and parse the input if it passes the check (for requirement).
-   3. A new `Appointment` object with the input `date`, `time` and `venue` will be created.
-6. `AppointmentCommandParser::parse` will return a new `AppointmentCommand` object that contains the position of the 
-specified contact and the `Appointment` object. 
-7. `LogicManager` then calls the method `AppointmentCommand::execute`, which will attempt to add the new `Appointment` 
+<br>
+
+**Appointment Count**
+
+Managed by: [`AppointmentCount.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/model/person/AppointmentCount.java)
+
+Stores the completed appointment count with a specific client.
+
+<br>
+
+**Add Appointment**
+
+Managed by: [`AppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/AppointmentCommand.java) 
+and [`AppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/AppointmentCommandParser.java)
+
+`Add apppointment` requires the user to input 4 fields (`index`, `date`, `time` and `venue`), 
+of which only 2 (`index` and `date`) are compulsory for FAST to be able to execute the command.
+
+`Add appointment` requires the `date` to be of the format `yyyy-mm-dd` and `time` to be of the format `HH:mm`.
+If the `date` and/or `time` input does not follow the required format, Fast will display an error message to the user.
+
+`AppointmentCommandParser::parse()` makes use of `ParserUtil::parseDateString()` and `ParserUtil::parseTimeString()` to check if the input `date` and `time` follows the format.
+If the input `date` and `time` passes the check, `ParserUtil::parseDateString()` and `ParserUtil::parseTimeString()` will then format the `date` and `time` to be `dd-MMM-yyyy` and `HHmm` respectively.
+The new `Appointment` object created by `AppointmentCommandParser::parse()` will receive the formatted `date` and `time` as its parameter.
+
+`Add appointment` prevents the user from adding another appointment if an appointment already exist for the specified user.
+`AppointmentCommand::execute()` checks if the current `Appointment` is an `empty` appointment and only allows the `AppointmentCommand` to be executed if it is `true`.
+
+<br>
+
+**Edit Appointment**
+
+Managed by: [`EditAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/EditAppointmentCommand.java)
+and [`EditAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/EditAppointmentCommandParser.java)
+
+`Edit Appointment` function similar to `Add Appointment` except that `date` field is no longer compulsory.
+The `EditAppointmentDescriptor` is included to help to duplicate and transfer over existing data that are not edited by the `ea` command.
+
+`EditAppointmentCommandParser::parse()` makes use of `EditAppointmentDescriptor::isAnyFieldEmpty()` to ensure that at least one of the 3 fields (excluding `index`) is entered.
+
+`Edit Appointment` prevents user from editing an appointment if an appointment does not exist yet. It uses the same mechanism as `add appointment` to do the check except that this time, 
+the `EditAppointmentCommand` will execute if the current `Appointment` does not equal to an `empty` appointment.
+
+<br>
+
+**Delete Appointment**
+
+Managed by: [`DeleteAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/DeleteAppointmentCommand.java)
+and [`DeleteAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/DeleteAppointmentCommandParser.java)
+
+`Delete appointment` only requires the user to specify the `index` parameter. 
+It deletes an appointment by creating a new `Appointment` object with empty `date`, `time` and `venue` to replace the current `Appointment` object.
+The new `Appointment` object is created in `DeleteAppointmentCommandParser::parse()`.
+
+`Delete Appointment` prevents user from deleting an appointment if an appointment does not exist yet. It uses the same mechanism as `edit appointment` to do the check.
+
+<br>
+
+**Mark Appointment**
+
+Managed by: [`MarkAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/MarkAppointmentCommand.java)
+and [`MarkAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/MarkAppointmentCommandParser.java)
+
+Similar to `Delete Appointment`, `Mark Appointment` only requires the user to specify the `index` parameter. 
+
+`Mark Appointment` prevents user from marking an appointment if an appointment does not exist yet. It uses the same mechanism as `edit appointment` to do the check.
+If it passes the check, `MarkAppointment::execute()` will make use of `AppointmentCount::incrementAppointmentCount()` to increase the count by 1.
+The existing `Appointment` object will be replaced by a new `Appointment` object with an empty `date`, `time` and `venue`.
+The new `Appointment` object is created in `MarkAppointmentCommandParser::parse()`. 
+
+<br>
+
+**Unmark Appointment**
+
+Managed by: [`UnmarkAppointmentCommand.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/commands/UnmarkAppointmentCommand.java)
+and [`UnmarkAppointmentCommandParser.java`](https://github.com/AY2122S1-CS2103T-T09-4/tp/blob/master/src/main/java/seedu/fast/logic/parser/UnmarkAppointmentCommandParser.java)
+
+Similar to `Delete Appointment`, `Unmark Appointment` only requires the user to specify the `index` parameter.
+
+`Unmark Appointment` prevents user from marking an appointment if an appointment already exist. It uses the same mechanism as `add appointment` to do the check.
+If it passes the check, `UnmarkAppointment::execute()` will make use of `AppointmentCount::decrementAppointmentCount()` to decrease the count by 1.
+
+
+#### Usage Scenario
+
+**1**) The user launches the application for the first time and wants to add an appointment to a client in FAST.
+For example, the user input this command: `aa 1 d/2022-10-11 t/10:00 v/NUS`
+The initial state of the `Appointment` object present in the specified client `Person` object before the command is executed is shown below:
+
+![Appointment_Initial_State](images/AppointmentDefaultState.png)
+
+**2**) `LogicManager::execute()` will be called which will in turn calls `FastParser::parseCommand()` to parse the given input.
+`FastParser::parseCommand()` will determine that it is an add appointment command which will then call `AppointmentCommandParser::parse()`.
+
+**3**) Inside `AppointmentCommandParser::parse()`:
+* `ArgumentTokenizer::tokenize()` will be called to recognise the required prefixes for appointment feature.
+* `ParserUtil::parseIndex()`, `ParserUtil::parseDateString()`, `ParserUtil::parseTimeString()` and
+   `AddAppointmentCommandParser::checkVenue()` will be called to check and parse the input if it passes the check (for requirement). 
+* A new `Appointment` object with the input `date`, `time` and `venue` will be created as shown in the diagram below.
+
+    ![Appointment_Added_State](images/AppointmentAddedState.png)
+
+**4**) `AppointmentCommandParser::parse()` will return a new `AppointmentCommand` object that contains the index of the
+specified client and the new `Appointment` object.
+
+**5**)`LogicManager` then calls the method `AppointmentCommand::execute()`, which will attempt to add the new `Appointment`
 after verifying that no appointments had been created for the specified contact yet.
-   1. `Model::setPerson` will be called to update the contact details in the model.
-   2. `AppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed.
-   3. Message and changes will be reflected afterwards.
-   
-(`editing appointment` will follow a similar logic)
 
-Below is an example usage scenario (`deleting`):
-1.The user inputs `dappt 1` to delete an appointment with the first listed contact.
-2.This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
-3.`FastParser::parseCommand` will determine that it is a delete appointment command.
-4.`FastParser::parseCommand` will call `DeleteAppointmentCommandParser::parse`.
-    1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-    2. `ParserUtil::parseIndex`, will be called to check and parse the input if it passes the check (for requirement).
-    3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
-5.`DeleteAppointmentCommandParser::parse` will return a new `DeleteAppointmentCommand` object that contains the position of the
-   specified contact and the `Appointment` object.
-6.`LogicManager` then calls the method `DeleteAppointmentCommand::execute`, which will attempt to add the new `Appointment`
-   after verifying that an appointment exists (previously) for the specified contact.
-    1. `Model::setPerson` will be called to update the contact details in the model.
-    2. Success message and changes will be reflected afterwards.
+**6**) Inside `AppointmentCommand::execute()`:
+* `Model::setPerson` will be called to update the contact details in the model.
+* `AppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed. 
+* Message and changes will be reflected afterwards.
 
-Below is an example usage scenario (`tracking completed appointment`):
-1. The user inputs `done 1` to delete an appointment with the first listed contact. 
-2. This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
-3. `FastParser::parseCommand` will determine that it is a mark appointment command.
-4. `FastParser::parseCommand` will call `MarkAppointmentCommandParser::parse`. 
-   1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-   2. `ParserUtil::parseIndex`, will be called to check and parse the input if it passes the check (for requirement).
-   3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
-5. `MarkAppointmentCommandParser::parse` will return a new `MarkAppointmentCommand` object that contains the position of the
-specified contact and the `Appointment` object. 
-6. .`LogicManager` then calls the method `MarkAppointmentCommand::execute`, which will attempt to increment the 
-7. `appointment count` by 1 through `AppointmentCount::incrementAppointmentCount` and updates the new `Appointment`
-after verifying that an appointment exists (previously) for the specified contact.
-   1. `Model::setPerson` will be called to update the contact details in the model.
-   2. `MarkAppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed.
-   3. Success message and changes will be reflected afterwards.
+The sequence diagram below illustrates step 2 to step 6.
+
+![Appointment_Sequence_Diagram](images/AppointmentSequenceDiagram.png)
+
+**7**) Suppose that the user makes a mistake in the `date` of the appointment and he wants to change it.
+Example: `ea 1 d/2022-05-15`
+
+**8**) Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `EditAppointmentCommand` class and `EditAppointmentCommandParser` class instead.
+The diagram below shows the updated object diagram after the `ea` command is executed.
+
+![Appointment_Added_State_2](images/AppointmentAddedState2.png)
+
+**9a**) Suppose that the user cancels the appointment and wants to delete it using the command `da 1`.
+Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `DeleteAppointmentCommand` class and `DeleteAppointmentCommandParser` class instead.
+The update object diagram will be reverted back to the initial state (as shown in step 3).
+
+**9b**) Suppose that the user did not delete the appointment. Instead he wants to mark the appointment using the command `ma 1`.
+Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `MarkAppointmentCommand` class and `MarkAppointmentCommandParser` class instead.
+The diagram below shows the updated object diagram.
+
+![Appointment_Added_State_3](images/AppointmentAddedState3.png)
+
+**10**) Finally, suppose that the user mark the appointment (in step 9b) by accident and wants to unmark it using `ua 1`.
+Similar course of actions mentioned to step 2 to step 6 will occur except that this time it involves the `UnmarkAppointmentCommand` class and `UnmarkAppointmentCommandParser` class instead.
+The update object diagram will reflect the changes in the `AppointmentCount` object (decrementing count by 1), and in this case it will be similar to the object diagram shown in step 3 (since the count is 1 as shown in the diagram in step 9b).
+
+Given below is Activity Diagram for FAST Appointment procedure. It includes scenarios that are not mentioned in step 1 to step 10 above.
+
+![Appointment_Activity_Diagram](images/AppointmentActivityDiagram.png)
+
+<br> 
 
 #### Design Considerations
 
-* **Alternative 1 (current choice):** Divide the appointment features into 4 sub-features.
+* **Alternative 1 (current choice):** Divide the appointment features into 5 sub-features.
     * Pros:
         1. Isolation of a single sub-feature to a specific command: more intuitive to use.
-        2. Improvement for the command syntax. Less prefix required.
-        3. Improvement over `edit appointment` command: retains data fields not directly affected by the command.
+        2. Reduces Coupling. One Appointment Command Class handles one type of operation.
+        3. Improvement for the command syntax. Less prefix required.
+        4. Improvement over `edit appointment` command: retains data fields not directly affected by the command.
     * Cons:
         1. More classes added, resulting in more lines of codes in the program.
         2. More checks and testcases needed.
+        3. May have some very similar codes.
 
-* **Alternative 2:** Combine all 4 sub-features into one appointment command.
+* **Alternative 2:** Combine all 5 sub-features into one appointment command.
     * Pros:
         1. Reduce the number of commands in the application: less to manage, easier to remember.
     * Cons:

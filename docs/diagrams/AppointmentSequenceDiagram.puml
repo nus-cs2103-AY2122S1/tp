@@ -14,10 +14,10 @@ participant ":Model" as Model MODEL_COLOR
 participant "a:Appointment" as Appointment MODEL_COLOR
 end box
 
-[-> LogicManager : execute("aa 1 d/2022-03-27 t/10:30 v/Seletar")
+[-> LogicManager : execute("aa 1 d/2022-10-11 t/10:00 v/NUS")
 activate LogicManager
 
-LogicManager -> FastParser : parseCommand("aa 1 d/2022-03-27 t/10:30 v/Seletar")
+LogicManager -> FastParser : parseCommand("aa 1 d/2022-10-11 t/10:00 v/NUS")
 activate FastParser
 
 create AppointmentCommandParser
@@ -27,11 +27,11 @@ activate AppointmentCommandParser
 AppointmentCommandParser --> FastParser
 deactivate AppointmentCommandParser
 
-FastParser -> AppointmentCommandParser : parse("1 d/2022-03-27 t/10:30 v/Seletar")
+FastParser -> AppointmentCommandParser : parse("1 d/2022-10-11 t/10:00 v/NUS")
 activate AppointmentCommandParser
 
 create Appointment
-AppointmentCommandParser -> Appointment : Appointment("27 Mar 2022", "1030", "Seletar")
+AppointmentCommandParser -> Appointment : Appointment("11 Oct 2022", "1000", "NUS")
 activate Appointment
 
 Appointment --> AppointmentCommandParser : a
