@@ -28,16 +28,16 @@
         <URL value="@TableView.css" />
       </stylesheets>
 
-      <AnchorPane prefHeight="200" prefWidth="180">
+      <AnchorPane prefHeight="600" prefWidth="210">
         <children>
           <VBox>
             <TableView fx:id="helpTable" AnchorPane.topAnchor="1.0">
               <columns>
-                <TableColumn text="Feature" prefWidth="220">
+                <TableColumn text="Feature" prefWidth="270">
                   <cellValueFactory><PropertyValueFactory property="commandName" />
                   </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Command" prefWidth="290">
+                <TableColumn text="Command" prefWidth="260">
                   <cellValueFactory><PropertyValueFactory property="commandStructure" />
                   </cellValueFactory>
                 </TableColumn>
@@ -53,12 +53,12 @@
             <children>
               <Label fx:id="helpMessage" text="Label">
                 <HBox.margin>
-                  <Insets right="5.0" />
+                  <Insets right="5.0" left="10.0"/>
                 </HBox.margin>
               </Label>
               <Button fx:id="copyButton" mnemonicParsing="false" onAction="#openUserGuide" text="Visit URL">
                 <HBox.margin>
-                  <Insets left="32.0" />
+                  <Insets left="32.0" right="10.0"/>
                 </HBox.margin>
               </Button>
             </children>
