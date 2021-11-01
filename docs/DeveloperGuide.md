@@ -180,7 +180,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Lesson Management
 
-Weekly recurring or one-off (makeup) lessons are collectively known as `Lesson`. These lessons can be added to any particular
+Weekly recurring or one-off (makeup) lessons are classified as `Lesson` objects. These lessons can be added to any particular
 student in TAB. Added lessons can also be edited and deleted.<br>
 
 A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, an end `Date`, a `TimeRange` for the
@@ -235,20 +235,17 @@ The `LessonEditCommand` edits the lesson identified by its index in the displaye
 with this lesson. The lesson will be edited per the given information input by the user.<br>
 
 A simple illustration of how TAB might interact with the user for `LessonEditCommand` is shown below.
-Note that edits involving dates include changes made to the start or end dates of the lesson and/or edits to the cancelled dates of the lesson.
+Note that edits involving dates mean that changes are made to the start or end dates of the lesson and/or to the cancelled dates of the lesson.
 
 ![LessonEditActivityDiagram](images/LessonEditActivityDiagram.png)
 
-*Figure I.3.4.1: Activity diagram of `LessonEditCommand`*
+*Figure I.3.4.1: Activity diagram of `LessonEditCommand`*<br>
 
-<br>
 The figure below shows the sequence diagram for editing a lesson.
 
 ![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
 
-*Figure I.3.4.2: Sequence Diagram of Lesson Edit Command*
-
-<br>
+*Figure I.3.4.2: Sequence Diagram of Lesson Edit Command*<br>
 
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
@@ -257,8 +254,7 @@ with an additional step for retrieving the lesson to edit from the student of in
 
 The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
 The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
-the changes made to the specified lesson.
-<br/>
+the changes made to the specified lesson.<br>
 
 #### Deleting Lessons
 The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
@@ -266,25 +262,21 @@ student with this lesson.
 
 The logic for `LessonDeleteCommand` is similar to that of the `DeleteCommand`. The only exception is that a `Person` with the updated lesson
 list without the deleted lesson will be created and will replace the original `Person` in the model (same as with `LessonAddCommand` and 
-`LessonEditCommand`.
+`LessonEditCommand`.<br>
 
-<br />
-The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.
-<br/>
+The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.<br>
 
 #### Storing Lessons
 The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
 to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the
 `Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
-into `model`-friendly `Lesson` objects.
-<br/>
+into `model`-friendly `Lesson` objects.<br>
 
 #### Displaying Lessons in GUI
 A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
 the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
 The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
-list of lessons to view. The `PersonListPanel` also has a listener that displays the selected student's list of lesson.
-<br/>
+list of lessons to view. The `PersonListPanel` also has a listener that displays the selected student's list of lesson.<br>
 
 #### Design considerations:
 
@@ -299,6 +291,9 @@ list of lessons to view. The `PersonListPanel` also has a listener that displays
     * Cons: Operations are done with respect to the full list of lessons in the application, which means user cannot
       isolate the list of lessons of a student of choice to operate on.
 
+Alternative 1 is our choice as it fits the way private tutors handle each student better, 
+where the lessons are isolated to the student for more personalised teaching.<br>
+
 **Aspect: Recurrence rule for recurring lessons**
 
 * **Alternative 1 (current choice):** Only allow weekly recurrence
@@ -311,7 +306,10 @@ list of lessons to view. The `PersonListPanel` also has a listener that displays
     * Pros: Greater flexibility in planning lessons outside the regular weekly recurrence.
     * Cons: Difficult to detect clashes with so many possibilities.
 
-<br />
+Alternative 1 is our choice as weekly recurring lessons are common for private 1-to-1 tuition in Singapore and also allows us
+to implement the clashing warning feature more easily. As alternative 2 required more thinking on how to calculate overlapping dates,
+we decided to put off alternative 2 for future considerations.<br>
+
 
 ### Schedule feature
 
@@ -360,7 +358,7 @@ We chose alternative 2 and integrated CalendarFX into our app as the possibility
     * Pros: Month view will be slightly bigger, increasing the number of entries that can be seen by a small amount. Bugs and inconsistencies in other pages can be avoided as we will have better control what we want to display.
     * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
 
-Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its easy of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
+Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its ease of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
 
 ### Undo/redo feature
 
@@ -1038,18 +1036,20 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown<br>
+Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
+   * Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   * Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   
+Incorrect delete commands to try: `delete...`
+1. `delete x` where x is larger than the list size<br>
+2. `delete`
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+Expected: Error details shown in the status message.
 
 ### Adding a lesson
 
