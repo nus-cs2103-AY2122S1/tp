@@ -24,6 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/ryantianj.png" width="200px">
 
 [[github](https://github.com/ryantianj)]
+[[portfolio](team/ryantianj.md)]
 
 * Role: Team Lead
 * Responsibilities: Commands, DG
