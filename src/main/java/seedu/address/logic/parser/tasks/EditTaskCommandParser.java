@@ -34,15 +34,6 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
                     EditTaskCommand.COMMAND_WORD));
         }
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_INVALID_INDEX_GIVEN), pe);
-        }
-
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             editTaskDescriptor.setDescription(ParserUtil.parseTaskDescription(argMultimap
@@ -54,6 +45,15 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);
+        }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_INVALID_INDEX_GIVEN), pe);
         }
 
         return new EditTaskCommand(index, editTaskDescriptor);
