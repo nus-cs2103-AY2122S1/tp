@@ -40,6 +40,15 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if tag is of event type
+     *
+     * @return true, if tag is an event
+     */
+    public boolean isEvent() {
+        return type == Type.EVENT;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
