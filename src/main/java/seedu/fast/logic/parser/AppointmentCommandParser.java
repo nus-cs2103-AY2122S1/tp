@@ -34,11 +34,8 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
                     AppointmentCommand.MESSAGE_USAGE), ive);
         }
 
-        String retrievedDate = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
-        if (retrievedDate.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AppointmentCommand.MESSAGE_USAGE));
-        }
+        String retrievedDate = checkInputDate(argMultimap.getValue(PREFIX_APPOINTMENT)
+                .orElse(Appointment.NO_APPOINTMENT));
         String parsedDate = parseDateString(retrievedDate);
 
         String retrievedTime = argMultimap.getValue(PREFIX_APPOINTMENT_TIME).orElse(Appointment.NO_TIME);
@@ -48,6 +45,15 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         String parsedVenue = checkVenueLength(retrievedVenue);
 
         return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime, parsedVenue));
+    }
+
+    private String checkInputDate(String retrievedDate) throws ParseException {
+        if (retrievedDate.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AppointmentCommand.MESSAGE_USAGE));
+        }
+
+        return retrievedDate;
     }
 
     private String checkVenueLength(String venue) throws ParseException {
