@@ -302,6 +302,8 @@ public class MainWindow extends UiPart<Stage> {
      * @return a Popup object
      */
     private Popup createPopup(String message) {
+        // @@author AllardQuek-reused
+        // Reused with modifications from https://stackoverflow.com/questions/18669209/
         final Popup popup = new Popup();
         popup.setAutoFix(true);
         popup.setHideOnEscape(true);
