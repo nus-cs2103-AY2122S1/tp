@@ -6,6 +6,7 @@ import static seedu.address.model.sort.SortOrderingType.ASCENDING;
 import static seedu.address.model.sort.SortOrderingType.DESCENDING;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import seedu.address.model.order.Order;
 
@@ -62,5 +63,29 @@ public class SortDescriptor {
 
     public SortOrdering getSortOrdering() {
         return sortOrdering;
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortDescriptor)) {
+            return false;
+        }
+
+        // state check
+        SortDescriptor e = (SortDescriptor) other;
+
+        return sortField.equals(e.sortField) && sortOrdering.equals(e.sortOrdering);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sortField, sortOrdering);
     }
 }

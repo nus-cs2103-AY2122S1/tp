@@ -96,7 +96,7 @@ public class OrderBuilder {
      */
     public Order build() {
         Order order = new Order(label, customer, date, amount);
-        if (this.id != null) {
+        if (this.id != 0) {
             order.setId(this.id);
         }
         if (this.isComplete) {

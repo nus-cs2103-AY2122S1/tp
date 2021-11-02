@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.SortOrdersCommandTest.DATE_ASC;
+import static seedu.address.logic.commands.SortOrdersCommandTest.AMOUNT_ASC;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalOrders.SALESORDER2;
+import static seedu.address.testutil.TypicalOrders.SALESORDER4;
 import static seedu.address.testutil.TypicalOrders.getTypicalOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
@@ -66,17 +66,17 @@ public class DeleteOrderCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(),
                 getTypicalOrderBook(), new UserPrefs());
 
-        Index toDelete = Index.fromOneBased(2);
-        DeleteOrderCommand deleteFirstOrder = new DeleteOrderCommand(toDelete);
+        Order toDelete = SALESORDER4;
+        DeleteOrderCommand command = new DeleteOrderCommand(Index.fromOneBased(5));
 
-        model.sortOrderList(DATE_ASC);
+        model.sortOrderList(AMOUNT_ASC);
 
-        expectedModel.deleteOrder(SALESORDER2);
-        expectedModel.sortOrderList(DATE_ASC);
+        expectedModel.deleteOrder(toDelete);
+        expectedModel.sortOrderList(AMOUNT_ASC);
 
-        String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, SALESORDER2);
+        String expectedMessage = String.format(DeleteOrderCommand.MESSAGE_DELETE_ORDER_SUCCESS, toDelete);
 
-        assertCommandSuccess(deleteFirstOrder, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test

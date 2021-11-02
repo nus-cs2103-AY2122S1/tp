@@ -19,9 +19,9 @@ public class TypicalOrders {
     public static final Order SALESORDER1 = new OrderBuilder().withCustomer("Josh")
             .withDate("2021-09-18").withAmount("10").withLabel("testorder1").withIsComplete(true).build();
     public static final Order SALESORDER2 = new OrderBuilder().withCustomer("Mac")
-            .withDate("2021-09-19").withAmount("15").withIsComplete(true).withLabel("testorder2").build();
+            .withDate("2021-09-19").withAmount("20").withIsComplete(true).withLabel("testorder2").build();
     public static final Order SALESORDER3 = new OrderBuilder().withCustomer("Clark")
-            .withDate("2021-09-20").withAmount("20").withIsComplete(true).withLabel("testorder3").build();
+            .withDate("2021-09-20").withAmount("15").withIsComplete(true).withLabel("testorder3").build();
     public static final Order SALESORDER4 = new OrderBuilder().withCustomer("Justin")
             .withDate("2021-09-20").withAmount("20").build();
     public static final Order SALESORDER5 = new OrderBuilder().withCustomer("Stuart")
