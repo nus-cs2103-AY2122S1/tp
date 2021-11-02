@@ -75,6 +75,7 @@ Here are the meanings behind the icons used in this document.
 |Icons | Explanation |
  |--------------|-------------|
 |:bulb: | Tips |
+|:clipboard: | Format | 
 |:green_book: | Example(s) |
 |:information_source: | Important information to take note |
 |:warning: | Warning about the usage of a command |
@@ -158,7 +159,7 @@ Add a task to the task list. The tags for the command can be input in any order.
 <div markdown="block" class="alert alert-success">
 
 :green_book: **Examples:**
-* `add n/Test t/16:30 d/2021-12-01 tg/CS2103 p/Medium` adds the `Test` task on `2021-12-01`, scheduled for `16:30` with the tag set as `CS2103`, and priority level set as `Medium`
+* `add n/Test d/2021-12-01 t/16:30 tg/CS2103 p/MEDIUM` adds the `Test` task on `2021-12-01`, scheduled for `16:30` with the tag set as `CS2103`, and priority level set as `MEDIUM`
 </div>
 
 ![add_command](images/addCommand.jpeg)
@@ -182,8 +183,8 @@ Set a task's priority.
 <div markdown="block" class="alert alert-success">
 
 **:green_book: Examples:**
-* `tag 5 tg/Assignment` sets the tag of task 5 in the task list to `Assignment`
-* `tag 4 tg/Assignment tg/tough` sets the tags of task 4 in the task list to `Assignment` and `tough`
+* `tag 5 tg/CS2103` sets the tag of task 5 in the task list to `CS2103`
+* `tag 4 tg/CS2106 tg/tough` sets the tags of task 4 in the task list to `CS2106` and `tough`
 </div>
 
 
@@ -444,15 +445,15 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | <code>add <i>n/task_name (t/time) d/date (tg/tag) (p/level)</i></code> <br>e.g `add n/Assignment 1 t/13:00 d/2021-12-12 tg/CS2103 p/HIGH`
-**Tag** | <code>tag <i>task_id tg/tag (tg/tag) </i></code> <br>e.g `tag 2 tg/assignment tg/tough` <br>e.g `tag 3 tg/meeting`
+**Add** | <code>add <i>n/task_name d/date (t/time) (tg/tag) (p/level)</i></code> <br>e.g `add n/Assignment 1 d/2021-12-12 t/13:00 tg/CS2103 p/HIGH`
+**Tag** | <code>tag <i>task_id tg/tag (tg/tag) </i></code> <br>e.g `tag 2 tg/CS2103`
 **Done** | <code>done <i>task_id</i></code> <br>e.g `done 1`
 **Undone** | <code>undone <i>task_id</i></code> <br>e.g `undone 1`
-**Edit** | <code>edit <i>task_id n/task_name d/date</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
+**Edit** | <code>edit <i>task_id (n/task_name) (d/date) (t/time) (tg/tag) (p/level)</i></code> <br>e.g `edit 2 n/Task4 d/2021-11-11`
 **Find** | <code>find <i>keyword (more_keywords)</i></code> <br><code> find <i> d/date</i></code> <br><code> find <i> t/tag</i></code> <br> e.g. `find Quiz` <br> e.g. `find d/2021-12-12` <br> e.g. `find t/GEQ1000`
-**Show** | `show week_number ` <br>e.g `show 13`
+**Show** | <code>show <i>week_number</i></code> <br>e.g `show 13`
 **Sort** | <code>sort <i>x/SortBy o/SortOrder</i></code> <br>e.g `sort x/time o/asc` <br>e.g `sort x/priority o/desc`
-**Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
+**Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 3 4 </code>
 **Clear** | <code>clear</code> <br>
 **Command History** | <code>/prev</code> or <code>&#8593;</code><br>
 **Help** | `help`
