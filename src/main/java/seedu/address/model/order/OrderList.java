@@ -66,7 +66,9 @@ public class OrderList implements Iterable<Order> {
 
     public void setOrders(List<Order> orders) {
         requireAllNonNull(orders);
-
+        if (!(ordersAreUnique(orders))) {
+            throw new DuplicateOrderException();
+        }
         internalList.setAll(orders);
     }
 
@@ -127,4 +129,17 @@ public class OrderList implements Iterable<Order> {
         internalList.sort(comparator);
     }
 
+    /**
+     * Returns true if {@code orders} contains only unique tasks.
+     */
+    private boolean ordersAreUnique(List<Order> orders) {
+        for (int i = 0; i < orders.size() - 1; i++) {
+            for (int j = i + 1; j < orders.size(); j++) {
+                if (orders.get(i).isSameOrder(orders.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
