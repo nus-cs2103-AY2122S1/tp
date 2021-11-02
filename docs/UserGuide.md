@@ -160,7 +160,7 @@ Notes:
 Adds tag to an existing person in the address book.
 
 #### Format:
-* `tag INDEX [t/TAG]…​`
+* `tag INDEX t/TAG [t/MORE_TAGS]…​`
 
 Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -176,7 +176,7 @@ Notes:
 Removes an existing tag from an existing person in the address book.
 
 #### Format:
-* `untag INDEX [t/TAG]…​`
+* `untag INDEX t/TAG [t/MORE_TAGS]…​`
 
 Notes:
 * Remove tags from the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -192,7 +192,7 @@ Notes:
 Finds all persons whose names **and** tags matches ALL keywords provided.
 
 #### Format:
-* `find n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
+* `find n/NAME [n/MORE_NAMES]…​ t/TAG [t/MORE_TAGS]…​`
 
 Notes:
 * `find` is case-insensitive by default. e.g. `hans` will match `Hans`.
@@ -222,7 +222,7 @@ Notes:
 Finds all persons whose names **or** tags contain ANY of the given keywords.
 
 #### Format:
-* `findAny n/NAME [MORE_NAMES] t/TAG [MORE_TAGS]`
+* `findAny n/NAME [n/MORE_NAMES]…​ t/TAG [t/MORE_TAGS]…​`
 
 Notes:
 * `findAny` is case-insensitive by default. e.g. `hans` will match `Hans`.
