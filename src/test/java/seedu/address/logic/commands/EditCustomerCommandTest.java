@@ -34,7 +34,7 @@ import seedu.address.testutil.TypicalCustomers;
  */
 public class EditCustomerCommandTest {
 
-    private Model model = new ModelManager(TypicalCustomers.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalCustomers.getTypicalAddressBookCustomers(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
