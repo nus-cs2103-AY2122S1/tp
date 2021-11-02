@@ -240,7 +240,7 @@ Format: `edit INDEX [n/NAME] [hp/PHONE] [eml/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIR
 
 Examples:
 *  `edit 1 hp/91234567 eml/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crowe dob/20/07/1964 risk/ t/` Edits the name and date of birth of the 2nd patient to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags and risk.
+*  `edit 2 n/Betsy Crower dob/20/07/1964 risk/ t/` Edits the name and date of birth of the 2nd patient to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags and risk.
 
 ### Adding a remark to a patient's information : `remark` <a name="remark-patient"/>
 
