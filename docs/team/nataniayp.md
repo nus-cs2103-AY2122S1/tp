@@ -27,7 +27,9 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
-    * 
+    * Reviewed and merged Pull Requests of teammates.
+    * Updated User Guide, Developer Guide and README on non-feature-specific sections
+      such as FAQ and Installation Guide.
 
 
 * **Enhancements to existing features**:
