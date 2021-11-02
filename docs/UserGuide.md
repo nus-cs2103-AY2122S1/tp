@@ -206,12 +206,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the PlaceBook.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
-
-Clears all contacts from PlaceBook.
-
-Format: `clear`
-
 ## **Appointment Features**
 This section contains information on features related to adding appointments to the appointment list.
 
@@ -321,6 +315,12 @@ to sort List by, if an invalid condition is input, it will sort by baseline cond
 Format: `listapp` Optional: `listapp Time` or `listapp Description`
 
 ## **Other Features**
+
+### Clearing all entries : `clear`
+
+Clears all contacts and appointments from PlaceBook.
+
+Format: `clear`
 
 ### Command history navigation
 
