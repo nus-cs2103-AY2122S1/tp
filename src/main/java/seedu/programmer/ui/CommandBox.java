@@ -81,12 +81,13 @@ public class CommandBox extends UiPart<Region> {
         }
 
         if (upAndAtLastCommand && lastCommandIsValid) {
+            // Remember the text field resets to "" after each valid command
             commandTextField.setText(commandHistory.getCurrentCommand());
             lastCommandIsValid = false;
         } else if (downAndAtLastCommand && lastCommandIsValid) {
             logger.info("We are already at the newest command -> show current command");
-            lastCommandIsValid = false;
             commandTextField.setText("");
+            lastCommandIsValid = false;
         } else if (downAndAtLastCommand || upAndAtFirstCommand) {
             logger.info("We are already at the newest or oldest command -> show current command");
             commandTextField.setText(commandHistory.getCurrentCommand());
