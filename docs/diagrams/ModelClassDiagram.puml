@@ -8,13 +8,20 @@ skinparam arrowFontSize 10
 Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
+Interface ReadOnlyTaskBook <<Interface>>
+Interface ReadOnlyOrderBook <<Interface>>
 Interface Model <<Interface>>
 Class AddressBook
+Class TaskBook
+Class OrderBook
 Class ReadOnlyAddressBook
+Class ReadOnlyTaskBook
+Class ReadOnlyOrderBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+
 
 Class UniquePersonList
 Class Person
@@ -43,12 +50,20 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+TaskBook .up.|> ReadOnlyTaskBook
+OrderBook .up.|> ReadOnlyOrderBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .left.> ReadOnlyTaskBook
+Model .right.> ReadOnlyOrderBook
+
+
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -left-> "1" TaskBook
+ModelManager -right-> "1" OrderBook
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -66,14 +81,14 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-AddressBook *--> "1" TaskList
+TaskBook *--> "1" TaskList
 TaskList --> "~* all" Task
 Task *--> Label
 Task *--> TaskTag
 Task --> Date
 Task --> "isDone" Boolean
 
-AddressBook *--> "1" OrderList
+OrderBook *--> "1" OrderList
 OrderList --> "~* all" Order
 Order *--> Amount
 Order *--> Customer
