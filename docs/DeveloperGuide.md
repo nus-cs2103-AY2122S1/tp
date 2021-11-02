@@ -996,6 +996,12 @@ testers are expected to do more *exploratory* testing.
     
     9. Test case: `appt -f p/Aaron e/Irfan s/01/11/2021 e/30/11/2021`<br>
         Expected: Searches for appointments that has a patient with a name that contains the keyword `Aaron` in it, a doctor with a name that contains the keyword `Irfan` in it and has a starting date after `01/11/2021` [inclusive] and before `30/11/2021` [inclusive].
+       
+    10. Test case: `appt -f s/01/14/2021`<br>
+        Expected: Displays an error message telling the user that the date entered has to be valid.
+        
+    11. Test case: `appt -f d/`<br>
+        Expected: Displays an error message telling the user that a specified parameter cannot be empty.
 
 
 ### Filtering upcoming appointments <a name="filter-upcoming-appointments"/>
@@ -1016,8 +1022,14 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `appt -u d/Irfan`<br>
        Expected: Searches for appointments that has a patient name with `aaron` in it and displays the results in the appointment list.
 
-   6. Test case: `appt -u d/Irfan Ibrahim`<br>
+    6. Test case: `appt -u d/Irfan Ibrahim`<br>
       Expected: Searches for appointments that has a doctor with a name that contains the keyword `Irfan` **or** `Ibrahim` in it and displays the results in the appointment list.
+      
+    7. Test case: `appt -u d/Aaron s/21/10/2021`<br>
+        Expected: An error is displayed telling the user that a `FilterUpcomingAppointmentCommand` should not have any date parameters in it.
+
+    8. Test case: `appt -u d/`<br>
+       Expected: Displays an error message telling the user that a specified parameter cannot be empty.
       
 ### Listing all appointments for today <a name="list-appointments"/>
 
