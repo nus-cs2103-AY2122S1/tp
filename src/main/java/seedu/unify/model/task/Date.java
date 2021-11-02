@@ -23,12 +23,16 @@ public class Date {
             + "and DD is from 01 to 31\n"
             + "and should be of a valid date.";
 
-    /*
+    /**
      * The date should follow the format YYYY-MM-DD.
      */
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN);
     public static final DateTimeFormatter LOCAL_DATE_FORMAT = DateTimeFormatter.ofPattern(DATE_PATTERN);
+    private static final String YEAR_REGEX = "(202[12])";
+    private static final String MONTH_REGEX = "(0[1-9]|1[012])";
+    private static final String DAY_REGEX = "(0[1-9]|[12][0-9]|3[01])";
+    public static final String VALIDATION_REGEX = YEAR_REGEX + "-" + MONTH_REGEX + "-" + DAY_REGEX;
 
     public final String value;
     public final LocalDate localDate;
@@ -53,6 +57,9 @@ public class Date {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
         try {
             SIMPLE_DATE_FORMAT.setLenient(false);
             SIMPLE_DATE_FORMAT.parse(test);
