@@ -49,6 +49,11 @@ public class Tag {
         return type == Type.EVENT;
     }
 
+    public String getStringType() {
+        String[] types = new String[] {"", "event-", "mod-"};
+        return types[type.ordinal()];
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
