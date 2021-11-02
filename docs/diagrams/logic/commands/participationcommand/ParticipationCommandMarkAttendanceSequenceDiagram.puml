@@ -2,12 +2,6 @@
 !include ../../../style.puml
 
 Participant ":ParticipationCommand" as pc LOGIC_COLOR
-Participant ":ModelManager" as mm LOGIC_COLOR
-Participant ":FilteredList" as fl LOGIC_COLOR
-Participant ":Student" as st LOGIC_COLOR
-Participant ":StudioRecord" as sr LOGIC_COLOR
-Participant ":Participation" as p LOGIC_COLOR
-Participant ":Index" as i LOGIC_COLOR
 Participant ":Student" as ste LOGIC_COLOR
 Participant ":Attendance" as att LOGIC_COLOR
 Participant ":boolean[]" as bla LOGIC_COLOR
@@ -15,24 +9,8 @@ Participant ":Attendance" as natt LOGIC_COLOR
 
 activate pc
 opt  participationUpdate > 0
-pc -> mm ++ : getFilteredStudentList
-mm --> pc -- : studentList
-pc -> fl ++ : get(0)
-fl --> pc -- : firstStudent
-pc -> st ++ : getParticipation
-st -> sr ++ : getParticipation
-sr --> st -- : participation
-st --> pc -- : participation
-pc -> p ++ : getSessionCount
-p --> pc -- : sessionCount
 
 loop for each Index in indexArrayList
-pc -> i ++ : getZeroBased()
-i --> pc -- : zeroBasedIndex
-
-pc -> fl ++ : get(zeroBasedIndex)
-fl --> pc -- : studentToEdit
-
 pc -> ste ++ : getAttendance
 ste --> pc -- : attendance
 

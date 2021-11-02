@@ -234,7 +234,9 @@ This command serves to update the `Participation` score of students. Following t
 
 `ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring is done. `ParticipationCommand` has an additional section in the sequence diagram located above the loop in `AttendanceCommand`.
+The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring to `Participation` is done. 
+
+`ParticipationCommand` has an additional section in the sequence diagram located above the loop in `AttendanceCommand`. The purpose of the logic below is to update a student's `Attendance` to be marked as present if the `participationUpdate` is greater than 0. This is because a student that has a positive `Participation` score would also count as having attended the `Studio`.
 
 ![ParticipationCommandMarkAttendanceSequenceDiagram](images/logic/commands/participationcommand/ParticipationCommandMarkAttendanceSequenceDiagram.png)
 
