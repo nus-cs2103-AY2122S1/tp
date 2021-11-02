@@ -115,8 +115,8 @@ Uploads student data via a CSV file with **only** the following fields: student 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
 
-the CSV should **not** contain students' lab results since this functionality is only meant for the TA to
-automating the adding of **students** to PE.
+the CSV should *not* contain students' lab results since this functionality is only meant for the TA to automate the adding of students to PE.
+    
 - As such, simply uploading the CSV obtained via the `download` command will not be accepted
 - Furthermore, if there are already existing students, the upload will **overwrite** the existing data rather than append to it.
   This is because in a typical use case, the TA would not want to have the existing data kept if they would like to use student data from their own CSV file.
@@ -137,9 +137,12 @@ Adds a student to ProgrammerError with their student ID and class ID.
 
 Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
-Example:
+<div markdown="span" class="alert alert-success">:exclamation: **Example:**
+
 - `add -n Sherwin -sid A1234567X -cid B01 -email e0542421@u.nus.edu`: Adds the student called Sherwin with student ID
   A1234567X and class ID B01 and email e0542421@u.nus.edu to ProgrammerError.
+    
+</div>
 
 ### <a name="edit-student"></a>3.2 Edit Student's Details or Grade : `edit`
 Edits the details or grade of an existing student's in the PE. Take note that 1-indexing is used here as according to
