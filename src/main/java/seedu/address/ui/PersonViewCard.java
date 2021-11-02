@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Set;
 
@@ -10,9 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonWithDetails;
+import seedu.address.model.task.Task;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -42,9 +45,13 @@ public class PersonViewCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label lessons;
+    private VBox lessons;
     @FXML
-    private Label groupsLabel;
+    private VBox tasks;
+    @FXML
+    private VBox exams;
+    @FXML
+    private VBox groups;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,16 +78,29 @@ public class PersonViewCard extends UiPart<Region> {
         }
 
         Person person = personWithDetails.getPerson();
-        Set<Group> groups = personWithDetails.getGroups();
+        Set<Group> personGroups = personWithDetails.getGroups();
+        Set<Task> personTasks = personWithDetails.getTasks();
 
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        tags.getChildren().clear();
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        lessons.setText(person.getLessonsList().toString());
-        groupsLabel.setText(groups.toString());
+        updateListingVBox(lessons, person.getLessons());
+        updateListingVBox(tasks, personTasks);
+        updateListingVBox(exams, person.getExams());
+        updateListingVBox(groups, personGroups);
+    }
+
+    private void updateListingVBox(VBox toUpdate, Collection<? extends Object> objectsCollection) {
+        toUpdate.getChildren().clear();
+        int index = 1;
+        for (Object object : objectsCollection) {
+            toUpdate.getChildren().add(new Label(String.format("%d. %s", index, object)));
+            index++;
+        }
     }
 }

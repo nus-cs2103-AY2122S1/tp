@@ -44,6 +44,8 @@ public class GroupBuilder {
         return this;
     }
 
+
+
     /**
      * Builds a {@code Group} object from the {@code GroupBuilder}.
      *
@@ -54,4 +56,27 @@ public class GroupBuilder {
         uniqueId.setOwner(group);
         return group;
     }
+
+    /**
+     * Builds a {@code Group} object with ID from the {@code GroupBuilder}.
+     *
+     * @return A {@code Group} object.
+     */
+    public Group buildWithID() {
+        Group anotherGroup = new Group(name, uniqueId);
+        uniqueId.setOwner(anotherGroup);
+        return anotherGroup;
+    }
+
+    /**
+     * Builds a {@code Group} object to copy from the {@code GroupBuilder}.
+     *
+     * @return A {@code Group} object.
+     */
+    public Group buildToCopy() {
+        Group groupToCopy = new Group(name, uniqueId);
+        Group originalGroup = new Group(groupToCopy);
+        return originalGroup;
+    }
+
 }

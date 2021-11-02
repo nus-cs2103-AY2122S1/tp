@@ -32,7 +32,12 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").withId("99f5ad00-6e1b-49c8-98d8-5ae3459bb262").build();
+            .withTags("owesMoney", "friends").withId("99f5ad00-6e1b-49c8-98d8-5ae3459bb262")
+            .build();
+    /**
+     * .withAssignedTaskIds("fa9056e8-7c02-45f9-a94c-d400b0bc0452", "841fa0aa-166f-4e4e-a82f-5ca9e428b93e")
+     *             .withAssignedGroupIds("f9e93ada-3e0e-49ff-904b-f2cabc2c38b0")
+     */
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withId("984c2915-9d24-4931-917c-03b98c621f39").build();

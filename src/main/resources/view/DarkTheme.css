@@ -380,3 +380,9 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#personBox .label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+}

@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.id.UniqueIdMapper;
@@ -207,7 +208,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeGroup(Group key) {
+        UniqueId groupId = key.getId();
         groups.remove(key);
+        assert !groups.contains(key); // assert removal first, before cleaning up.
+        persons.cleanUpGroupId(groupId);
     }
 
     public UniqueIdMapper<Person> getPersonMapper() {
@@ -220,7 +224,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public PersonWithDetails getPersonWithDetails(Person person) {
         Set<Group> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds());
-        return new PersonWithDetails(person, groupsPersonIsIn);
+        Set<Task> tasksPersonHas = tasks.getFromUniqueIds(person.getAssignedTaskIds());
+        return new PersonWithDetails(person, groupsPersonIsIn, tasksPersonHas);
+    }
+
+    public GroupWithDetails getGroupWithDetails(Group group) {
+        Set<Person> studentsInGroup = persons.getFromUniqueIds(group.getAssignedPersonIds());
+        return new GroupWithDetails(group, studentsInGroup);
     }
 
     //// util methods

@@ -15,6 +15,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
@@ -181,7 +182,17 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableValue<GroupWithDetails> getViewingGroupWithDetails() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setPersonToView(Person person) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setGroupToView(Group group) {
         throw new AssertionError("This method should not be called.");
     }
 

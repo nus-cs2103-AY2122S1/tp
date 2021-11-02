@@ -1,5 +1,5 @@
 package seedu.address.model;
 
 public enum ViewingType {
-    SCHEDULE, PERSON
+    SCHEDULE, PERSON, GROUP
 }

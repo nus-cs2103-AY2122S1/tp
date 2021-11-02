@@ -5,8 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -42,6 +44,7 @@ public class Person implements HasUniqueId, Attendee,
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<UniqueId> assignedTaskIds = new HashSet<>();
+    private final Map<UniqueId, Boolean> tasksCompletion = new HashMap<>();
     private final NoOverlapLessonList lessonsList;
     private final List<Exam> exams = new ArrayList<>();
     private final Set<UniqueId> assignedGroupIds = new HashSet<>();
@@ -50,8 +53,8 @@ public class Person implements HasUniqueId, Attendee,
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList,
-                  List<Exam> exams, Set<UniqueId> assignedGroupIds) {
+                  Set<UniqueId> assignedTaskIds, Map<UniqueId, Boolean> tasksCompletion,
+                  NoOverlapLessonList lessonsList, List<Exam> exams, Set<UniqueId> assignedGroupIds) {
         this.id = UniqueId.generateId(this);
         requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id, lessonsList, exams, assignedGroupIds);
         this.name = name;
@@ -60,6 +63,7 @@ public class Person implements HasUniqueId, Attendee,
         this.address = address;
         this.tags.addAll(tags);
         this.assignedTaskIds.addAll(assignedTaskIds);
+        this.tasksCompletion.putAll(tasksCompletion);
         this.lessonsList = lessonsList;
         this.exams.addAll(exams);
         this.assignedGroupIds.addAll(assignedGroupIds);
@@ -69,8 +73,8 @@ public class Person implements HasUniqueId, Attendee,
      * Every field must be present and not null.
      */
     public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList, List<Exam> exams,
-                  Set<UniqueId> assignedGroupIds) {
+                  Set<UniqueId> assignedTaskIds, Map<UniqueId, Boolean> tasksCompletion,
+                  NoOverlapLessonList lessonsList, List<Exam> exams, Set<UniqueId> assignedGroupIds) {
         requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId, lessonsList, exams,
                 assignedGroupIds);
         this.id = uniqueId;
@@ -81,6 +85,7 @@ public class Person implements HasUniqueId, Attendee,
         this.address = address;
         this.tags.addAll(tags);
         this.assignedTaskIds.addAll(assignedTaskIds);
+        this.tasksCompletion.putAll(tasksCompletion);
         this.lessonsList = lessonsList;
         this.exams.addAll(exams);
         this.assignedGroupIds.addAll(assignedGroupIds);
@@ -98,6 +103,7 @@ public class Person implements HasUniqueId, Attendee,
         this.address = toCopy.address;
         this.tags.addAll(toCopy.tags);
         this.assignedTaskIds.addAll(toCopy.assignedTaskIds);
+        this.tasksCompletion.putAll(toCopy.tasksCompletion);
         this.lessonsList = toCopy.lessonsList;
         this.exams.addAll(toCopy.exams);
         this.assignedGroupIds.addAll(toCopy.assignedGroupIds);
@@ -139,6 +145,16 @@ public class Person implements HasUniqueId, Attendee,
         return Collections.unmodifiableSet(assignedTaskIds);
     }
 
+    /**
+     * Method to get the map of assigned tasks and their completion status
+     *
+     * @return the Person's tasksCompletion map
+     */
+    @Override
+    public Map<UniqueId, Boolean> getTasksCompletion() {
+        return Collections.unmodifiableMap(tasksCompletion);
+    }
+
     public NoOverlapLessonList getLessonsList() {
         return lessonsList;
     }
@@ -149,6 +165,16 @@ public class Person implements HasUniqueId, Attendee,
 
     public Set<UniqueId> getAssignedGroupIds() {
         return Collections.unmodifiableSet(assignedGroupIds);
+    }
+
+    /**
+     * Checks if this person contains the group id.
+     *
+     * @param id to check.
+     * @return true if this person contains the id.
+     */
+    public boolean containsGroupId(UniqueId id) {
+        return assignedGroupIds.contains(id);
     }
 
     @Override
@@ -170,7 +196,8 @@ public class Person implements HasUniqueId, Attendee,
             throw new CannotAssignException(e.getMessage());
         }
 
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams, assignedGroupIds);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, tasksCompletion,
+                newList, exams, assignedGroupIds);
     }
 
     @Override
@@ -181,7 +208,8 @@ public class Person implements HasUniqueId, Attendee,
     @Override
     public Person unassignLesson(int index) throws IndexOutOfBoundsException {
         NoOverlapLessonList newList = lessonsList.removeLesson(index);
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams, assignedGroupIds);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, tasksCompletion,
+                newList, exams, assignedGroupIds);
     }
 
     @Override
@@ -195,7 +223,8 @@ public class Person implements HasUniqueId, Attendee,
             throw new CannotAssignException(OverlappingLessonsException.MESSAGE);
         }
         NoOverlapLessonList newList = NoOverlapLessonList.of(lessons);
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams, assignedGroupIds);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, tasksCompletion,
+                newList, exams, assignedGroupIds);
     }
 
     /**
@@ -261,28 +290,50 @@ public class Person implements HasUniqueId, Attendee,
         return newPerson;
     }
 
+    @Override
+    public String getNameInString() {
+        return name.toString();
+    }
+
     /**
      * Immutable way of updating the assigned task id list
      *
      * @param newAssignedTaskIds the new assigned task id list
      * @return new Person instance with the updated assigned task id list
      */
+    @Override
     public Person updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
-        return new Person(id, name, phone, email, address, tags, newAssignedTaskIds,
+        return new Person(id, name, phone, email, address, tags, newAssignedTaskIds, tasksCompletion,
                 lessonsList, exams, assignedGroupIds);
     }
 
     /**
-     * Gets the filter list from the given model.
+     * Immutable way of updating the task completion map
      *
-     * @param model The model that stores the filter list.
-     * @return The filter list from the given model.
+     * @param newTasksCompletion the new task completion map
+     * @return new Person instance with the updated task completion map
      */
     @Override
-    public List<Person> getFilteredListFromModel(Model model) {
-        return model.getFilteredPersonList();
-    };
+    public Person updateTasksCompletion(Map<UniqueId, Boolean> newTasksCompletion) {
+        requireNonNull(newTasksCompletion);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newTasksCompletion,
+                lessonsList, exams, assignedGroupIds);
+    }
+
+    @Override
+    public boolean isSameTaskAssignable(TaskAssignable otherTaskAssignable) {
+        if (!(otherTaskAssignable instanceof Person)) {
+            return false;
+        }
+
+        return isSamePerson((Person) otherTaskAssignable);
+    }
+
+    @Override
+    public boolean isInModel(Model model) {
+        return model.hasPerson(this);
+    }
 
     /**
      * Returns true if both persons have the same name.
@@ -319,8 +370,7 @@ public class Person implements HasUniqueId, Attendee,
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getLessonsList().equals(lessonsList)
-                && otherPerson.getExams().equals(exams)
-                && otherPerson.getAssignedGroupIds().equals(assignedGroupIds);
+                && otherPerson.getExams().equals(exams);
     }
 
     @Override

@@ -12,8 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class UnassignTaskFromPersonCommandParser implements Parser<UnassignTaskFromPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AssignTaskToPersonCommand
-     * and returns an AssignTaskToPersonCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UnassignTaskFromPersonCommand
+     * and returns an UnassignTaskFromPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public UnassignTaskFromPersonCommand parse(String args) throws ParseException {

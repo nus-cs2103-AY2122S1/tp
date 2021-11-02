@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupWithDetails;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonWithDetails;
@@ -54,6 +55,9 @@ public interface Logic {
 
     /** Returns the currently viewing person */
     ObservableValue<PersonWithDetails> getViewingPersonWithDetails();
+
+    /** Returns the currently viewing group */
+    ObservableValue<GroupWithDetails> getViewingGroupWithDetails();
 
     /**
      * Returns the user prefs' address book file path.

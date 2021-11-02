@@ -28,6 +28,7 @@ import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
@@ -155,7 +156,6 @@ public class CommandTestUtil {
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
-
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
@@ -191,13 +191,24 @@ public class CommandTestUtil {
     }
 
     /**
+     * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitDescription = task.getDescription().description.split("\\s+");
+        model.updateFilteredTaskList(new TaskNameContainsKeywordsPredicate(Arrays.asList(splitDescription[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
      * Updates {@code model}'s filtered list to show only the group at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showGroupAtIndex(Model model, Index targetIndex) {
-
         assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
-
         Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
         final String[] splitName = group.getName().name.split("\\s+");
         model.updateFilteredGroupList(new GroupNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));

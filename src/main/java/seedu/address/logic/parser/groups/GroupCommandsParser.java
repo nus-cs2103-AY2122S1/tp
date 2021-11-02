@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.groups.DeleteGroupCommand;
+import seedu.address.logic.commands.groups.ViewGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class GroupCommandsParser {
@@ -48,6 +49,9 @@ public class GroupCommandsParser {
 
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);
+
+        case ViewGroupCommand.COMMAND_WORD:
+            return new ViewGroupCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -34,6 +36,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<UniqueId> assignedTaskIds;
+    private Map<UniqueId, Boolean> tasksCompletion;
     private NoOverlapLessonList lessonsList;
     private List<Exam> exams;
     private Set<UniqueId> assignedGroupIds;
@@ -49,6 +52,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         assignedTaskIds = new HashSet<>();
+        tasksCompletion = new HashMap<>();
         lessonsList = new NoOverlapLessonList();
         exams = new ArrayList<>();
         assignedGroupIds = new HashSet<>();
@@ -65,6 +69,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         assignedTaskIds = new HashSet<>(personToCopy.getAssignedTaskIds());
+        tasksCompletion = new HashMap<>(personToCopy.getTasksCompletion());
         lessonsList = personToCopy.getLessonsList();
         exams = new ArrayList<>(personToCopy.getExams());
         assignedGroupIds = new HashSet<>(personToCopy.getAssignedGroupIds());
@@ -99,6 +104,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withAssignedTaskIds(String ... assignedTaskIds) {
         this.assignedTaskIds = SampleDataUtil.getUniqueIdSet(assignedTaskIds);
+        return this;
+    }
+
+    /**
+     * Parses the {@code ids} into a {@code Set<UniqueId>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAssignedGroupIds(String ... assignedGroupIds) {
+        this.assignedGroupIds = SampleDataUtil.getUniqueIdSet(assignedGroupIds);
+        return this;
+    }
+
+    /**
+     * Copies the task completion map into {@code tasksCompletion} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTasksCompletion(Map<UniqueId, Boolean> tasksCompletion) {
+        this.tasksCompletion = new HashMap<>(tasksCompletion);
         return this;
     }
 
@@ -148,7 +169,8 @@ public class PersonBuilder {
      * @return A {@code Person} object.
      */
     public Person build() {
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams, assignedGroupIds);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, tasksCompletion,
+                lessonsList, exams, assignedGroupIds);
     }
 
 }
