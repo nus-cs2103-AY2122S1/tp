@@ -106,7 +106,7 @@ Here is how our application's homepage works
 
 #### 3.2.3 Output Display
 * Here is where our application will echo out your inputs entered.
-* Results will also be displayed in this section when the appropriate commands have been added.
+* Results will also be displayed in this section when the appropriate commands have been inputted.
 
 #### 3.2.4 Module List
 * Here are the modules stored in our [database](#database).
@@ -157,7 +157,8 @@ Notes:
 * Displays the current year and semester that the application is in.
 
 #### 3.2.7 Current MC goal
-* Displays your current MC goal.
+* Displays your current [MC goal](#mcgoal).
+* Your MC goal can be edited using the [set](#423-setting-users-mc-goal-or-current-semester--set) command.
 
 ### 3.3 Module Explanation
 Here is an image of a module in our [database](#database)<br>
@@ -231,9 +232,9 @@ Tip: Do take a good look at this section to understand the common terminologies 
 #### `CODE`
 * Represents the `module`'s code component.
 * `CODE` must follow the NUSMods module code format.
-  * `CODE` should start with 2-3 capital letters, followed by 4 numerical digits, and end with an optional capital letter
-  * Valid Examples: CJ1101K, CH1001, NMB1234
-  * Invalid Examples: CA300M, GEY10005, G1234M
+* `CODE` should start with 2-3 capital letters, followed by 4 numerical digits, and end with an optional capital letter.
+* Valid Examples: CJ1101K, CH1001, NMB1234
+* Invalid Examples: CA300M, GEY10005, G1234M
 
 #### `TITLE`
 * Represents the `module`'s title component.
@@ -258,6 +259,11 @@ Tip: Do take a good look at this section to understand the common terminologies 
 * Represents Semester of the module that is being taken.
 * The `SEMESTER` must be a positive integer from 1-4.
 * Special semesters 1 and 2 are represented by integer values 3 and 4 respectively.
+
+#### `MCGOAL`
+* Represents the total number of MC you plan to take in your academic plan.
+* `MCGOAL` must be a **positive integer** from 1-999.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -387,9 +393,9 @@ Example:
 
 You can update your MC goal or current semester with our `set` command.
 
-Format: `set m/MC` `set y/YEAR s/SEM`
+Format: `set m/MCGOAL` or `set y/YEAR s/SEMESTER`
 
-Parameters: [`MC`](#mc) [`YEAR`](#year) [`SEMESTER`](#semester)
+Parameters: [`MCGOAL`](#mcgoal) [`YEAR`](#year) [`SEMESTER`](#semester)
 
 Examples:
 * `set m/160` - is equivalent to setting the MC goal to 160 credits
