@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedOrder.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalOrders.ORDER;
+import static seedu.address.testutil.TypicalOrders.ORDER1;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,17 +22,17 @@ public class JsonAdapterOrderTest {
     private static final String INVALID_IS_COMPLETE = "true and false";
 
 
-    private static final String VALID_LABEL = ORDER.getLabel().toString();
-    private static final String VALID_DATE = ORDER.getDate().toString();
-    private static final String VALID_AMOUNT = ORDER.getAmount().toString();
-    private static final String VALID_ID = String.valueOf(ORDER.getId());
-    private static final String VALID_CUSTOMER = ORDER.getCustomer().toString();
-    private static final String VALID_IS_COMPLETE = String.valueOf(ORDER.getIsComplete());
+    private static final String VALID_LABEL = ORDER1.getLabel().toString();
+    private static final String VALID_DATE = ORDER1.getDate().toString();
+    private static final String VALID_AMOUNT = ORDER1.getAmount().toString();
+    private static final String VALID_ID = String.valueOf(ORDER1.getId());
+    private static final String VALID_CUSTOMER = ORDER1.getCustomer().toString();
+    private static final String VALID_IS_COMPLETE = String.valueOf(ORDER1.getIsComplete());
 
     @Test
     public void toModelType_validOrderDetails_returnsOrder() throws Exception {
-        JsonAdaptedOrder order = new JsonAdaptedOrder(ORDER);
-        assertEquals(ORDER, order.toModelType());
+        JsonAdaptedOrder order = new JsonAdaptedOrder(ORDER1);
+        assertEquals(ORDER1, order.toModelType());
     }
 
     @Test

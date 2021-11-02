@@ -24,7 +24,7 @@ public class TypicalOrders {
             .withDate("2021-09-20").withAmount("20").withIsComplete(true).withId(3).withLabel("testorder3").build();
 
     // Manually added - Order's details found in {@code CommandTestUtil}
-    public static final Order ORDER = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE1)
+    public static final Order ORDER1 = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE1)
             .withDate(VALID_DATE_SEPT).withAmount(VALID_AMOUNT_SALE1).build();
     public static final Order ORDER2 = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE2)
             .withDate(VALID_DATE_OCT).withAmount(VALID_AMOUNT_SALE2).build();
