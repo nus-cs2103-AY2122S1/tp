@@ -78,10 +78,14 @@ public class StringUtil {
      * @return the result String
      */
     public static <T> String listToString(List<T> list, Function<T, String> function, String delimiter) {
+        requireNonNull(list);
+        requireNonNull(function);
+        requireNonNull(delimiter);
+
         StringBuilder stringBuilder = new StringBuilder();
         for (T t : list) {
             stringBuilder.append(function.apply(t)).append(delimiter);
         }
-        return stringBuilder.substring(0, stringBuilder.length() - 2);
+        return stringBuilder.substring(0, stringBuilder.length() - delimiter.length());
     }
 }
