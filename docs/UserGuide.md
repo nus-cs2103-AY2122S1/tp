@@ -34,7 +34,7 @@ Here are the commonly used syntax and symbols throughout the UG:
 <div class="alert alert-warning">:warning: Caution</div>denotes a possible fault that could occur
 <br/>
 
-<div class="alert alert-info">ℹ️: Notes</div>denotes extra information to aid user in understanding the app
+<div class="alert alert-info">:information_source: Notes</div>denotes extra information to aid user in understanding the app
 <br/>
 
 
@@ -64,8 +64,8 @@ To run the app, simply double click the file. You should see a GUI similar to th
 
 As mentioned earlier, ModuLink works as a CLI, which means you will need to type and enter commands in the command box. To get accustomed to the interface, try the following commands (in the given the order).
 
-* **`create`** `n/John Doe id/A0123456A p/24680135 e/johndoe@example.com` : Creates your ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
-* **`addMod`** `mod/CS2103T need group mod/CS2101 need member`: Adds CS2103T and CS2101 module tags to your profile and indicates that you need to form or join a group for CS2103T and that you need member(s) for your CS2101 group.
+* **`create n/John Doe id/A0123456A p/24680135 e/johndoe@example.com`** : Creates your ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
+* **`addMod mod/CS2103T need group mod/CS2101 need member`**: Adds CS2103T and CS2101 module tags to your profile and indicates that you need to form or join a group for CS2103T and that you need member(s) for your CS2101 group.
 * **`list`**: Lists all the profiles on ModuLink.
 * **`filter mod/CS2101`**: Filters all profiles who have CS2101 as one of their module tags.
 * **`filter mod/CS2101 need group`**: Filters all profiles who have CS2101 as one of their module tags AND need to form or join a group for it.
