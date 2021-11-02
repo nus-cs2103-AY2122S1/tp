@@ -105,7 +105,7 @@ Also automatically copies over the task list from the module to the student.<br>
 Student id must be a valid NUS student id (starts with A, followed by 7 numbers and ends with a capital letter.<br>
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
 Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.<br>
-Student email must follow the format specified in the [Parameter summary](#parameter-summary) section below.<br>
+Student email must follow the format specified in the [Parameter summary](#parameter-summary-with-prefix-included) section below.<br>
 Student id, student tele handle, and student email must be unique for each student.<br>
 Duplicate student names are allowed to cater for students who may have the same name.
 
@@ -124,7 +124,7 @@ The identity fields(module name/student id) must be provided.<br>
 At least one optional editable field (name/tele handle/email) must be provided, and only provided editable fields will be changed.
 Student name should only contain alphanumeric characters and spaces, and it should not be blank. <br>
 Student tele handle must start with @, and followed by 5-32 characters containing only alphanumeric characters and the underscore '_'.<br>
-Student email must follow the format specified in the [Parameter summary](#parameter-summary) section below.<br>
+Student email must follow the format specified in the [Parameter summary](#parameter-summary-with-prefix-included) section below.<br>
 If duplicate fields are provided, only the latest fields will be processed.
 
 Format: `edit student m/<module name> i/<student id> [n/<edited student name>] [t/<edited student tele handle>] [e/<edited student email>]`
@@ -314,4 +314,3 @@ Emails should be of the format local-part@domain and adhere to the following con
    5.1. End with a domain label at least 2 characters long.
    5.2. Have each domain label start and end with alphanumeric characters.
    5.3. Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-    
