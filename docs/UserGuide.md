@@ -50,7 +50,7 @@ The third will open the help window and the last will exit the application.
 ### Viewing data
 
 Resident and Event information is organized in this panel. <br>
-You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#view))
+You can view details about a resident/event by clicking on it. (Also achievable via [View Command](#viewing-residents-information--view))
 > Residents with late FETs by 7 days and, Events with un-vaccinated residents are highlighted red
 > 
 > Vaccinated residents include the syringe icon towards the right-side of the card
@@ -62,7 +62,7 @@ You can view details about a resident/event by clicking on it. (Also achievable 
 ### Interacting
 
 This is where you can enter commands to interact with the data. <br>
-The [Command Suggestion](#Command suggestion) box will suggest parameters on typing. <br>
+The [Command Suggestion](#command-suggestion) box will suggest parameters on typing. <br>
 The result of executing the input command will be displayed the lower-most box.
 
 ![Ui](images/commandBox.png)
@@ -128,8 +128,6 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 
-<div id="view"></div>
-
 #### Viewing residents information : `view`
 
 Shows a numbered list of all the residents in the address book.
@@ -172,7 +170,7 @@ Shows a list of residents that match the provided keywords for different availab
 Format: `find [PREFIX/KEYWORD]...`
 
 * Allowed flags include; `n/`, `r/`, `e`, `p/`, `f/` and `v/`
-* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#Listing residents by fet/collection deadlines) on how to make use of these fields.
+* Prefixes for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#listing-residents-by-fetcollection-deadlines--deadline) on how to make use of these fields.
 * Searching by name:
     - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
     - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
@@ -185,7 +183,7 @@ Format: `find [PREFIX/KEYWORD]...`
     - A level can be used as a search. e.g `r/2`
     - A block-level can be used as a search. e.g `r/A2`
     - A full valid room can be used as a search. e.g `r/A210`
-* All other fields are subject to the same validity conditions as in the [Add Command](#Adding a resident's information)
+* All other fields are subject to the same validity conditions as in the [Add Command](#adding-a-residents-information--add)
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
