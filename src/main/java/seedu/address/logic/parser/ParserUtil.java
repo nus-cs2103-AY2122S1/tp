@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -49,15 +50,15 @@ public class ParserUtil {
     /** Zero based position of lesson index in preamble */
     public static final int LESSON_INDEX_ZERO_BASED = 1;
 
-    public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code preamble} into {@code String[]} and returns it.
      * Leading and trailing whitespaces will be stripped and
      * preamble string is split by whitespace into an array of strings.
      *
-     * @param preamble
-     * @return
+     * @param preamble The preamble string to parse.
+     * @return Array of argument strings in preamble.
      */
     public static String[] parsePreamble(String preamble) {
         String strippedPreamble = preamble.strip();
@@ -70,9 +71,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * stripped.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be stripped.
      *
+     * @param oneBasedIndex The index string to parse.
+     * @return Index with the value of oneBasedIndex.
      * @throws ParseException If the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -81,6 +84,36 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(strippedIndex));
+    }
+
+    /**
+     * Parses {@code studentIndex} into {@code Index} and returns it.
+     *
+     * @param studentIndex The student index string to parse.
+     * @return Index with the value of studentIndex.
+     * @throws ParseException If the student index is invalid.
+     */
+    public static Index parseStudentIndex(String studentIndex) throws ParseException {
+        try {
+            return parseIndex(studentIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX, pe);
+        }
+    }
+
+    /**
+     * Parses {@code lessonIndex} into {@code Index} and returns it.
+     *
+     * @param lessonIndex The lesson index string to parse.
+     * @return Index with the value of studentIndex.
+     * @throws ParseException If the lesson index is invalid.
+     */
+    public static Index parseLessonIndex(String lessonIndex) throws ParseException {
+        try {
+            return parseIndex(lessonIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX, pe);
+        }
     }
 
     /**
@@ -275,9 +308,7 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        Collection<String> nonEmptyTags = tags.stream()
-            .filter(tagName -> !tagName.isEmpty()).collect(Collectors.toSet());
-        for (String tagName : nonEmptyTags) {
+        for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
@@ -303,10 +334,8 @@ public class ParserUtil {
      */
     public static Set<Homework> parseHomeworkList(Collection<String> homework) throws ParseException {
         requireNonNull(homework);
-        Collection<String> nonEmptyHomework = homework.stream()
-                .filter(desc -> !desc.isEmpty()).collect(Collectors.toSet());
         final Set<Homework> homeworkSet = new HashSet<>();
-        for (String description : nonEmptyHomework) {
+        for (String description : homework) {
             homeworkSet.add(parseIndividualPieceOfHomework(description));
         }
         return homeworkSet;

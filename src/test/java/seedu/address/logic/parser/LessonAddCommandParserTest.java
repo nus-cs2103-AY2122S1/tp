@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.FUTURE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_TEXTBOOK;
@@ -31,7 +32,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalLessons.PAST_MAKEUP_LESSON;
 import static seedu.address.testutil.TypicalLessons.PAST_RECURRING_LESSON;
@@ -223,7 +223,7 @@ public class LessonAddCommandParserTest {
         // invalid index
         assertParseFailure(parser, 0 + PAST_DATE_DESC
                 + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
-                + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, MESSAGE_INVALID_INDEX);
+                + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
 
         // no index specified
         assertParseFailure(parser, " " + PAST_DATE_DESC

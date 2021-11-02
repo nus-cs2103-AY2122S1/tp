@@ -49,7 +49,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (preamble.length != INDEX_ARGS_COUNT_STUDENT) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -87,8 +86,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(String.format(EditCommand.MESSAGE_NOT_EDITED, EditCommand.MESSAGE_USAGE));
         }
+
+        // index check should come after message not edited
+        Index index = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
 
         return new EditCommand(index, editPersonDescriptor);
     }

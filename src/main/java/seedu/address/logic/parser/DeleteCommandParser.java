@@ -23,7 +23,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (preamble.length != INDEX_ARGS_COUNT_STUDENT) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
+        Index index = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
         return new DeleteCommand(index);
     }
 

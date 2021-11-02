@@ -20,8 +20,8 @@ public class LessonDeleteCommandParser implements Parser<LessonDeleteCommand> {
         if (preamble.length != INDEX_ARGS_COUNT_STUDENT_LESSON) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
         }
-        Index studentIndex = ParserUtil.parseIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
-        Index lessonIndex = ParserUtil.parseIndex(preamble[LESSON_INDEX_ZERO_BASED]);
+        Index studentIndex = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
+        Index lessonIndex = ParserUtil.parseLessonIndex(preamble[LESSON_INDEX_ZERO_BASED]);
 
         return new LessonDeleteCommand(studentIndex, lessonIndex);
     }

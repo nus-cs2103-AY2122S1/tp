@@ -33,8 +33,8 @@ public class PaidCommandParser implements Parser<PaidCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE));
         }
 
-        Index studentIndex = ParserUtil.parseIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
-        Index lessonIndex = ParserUtil.parseIndex(preamble[LESSON_INDEX_ZERO_BASED]);
+        Index studentIndex = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
+        Index lessonIndex = ParserUtil.parseLessonIndex(preamble[LESSON_INDEX_ZERO_BASED]);
 
         Money payment = ParserUtil.parseMoney(argMultimap.getValue(PREFIX_PAID_AMOUNT).get());
 

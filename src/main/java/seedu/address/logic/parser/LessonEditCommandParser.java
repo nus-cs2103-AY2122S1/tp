@@ -48,8 +48,6 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         if (preamble.length != INDEX_ARGS_COUNT_STUDENT_LESSON) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
         }
-        Index studentIndex = ParserUtil.parseIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
-        Index lessonIndex = ParserUtil.parseIndex(preamble[LESSON_INDEX_ZERO_BASED]);
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
@@ -91,8 +89,13 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
                 .ifPresent(editLessonDescriptor::setUncancelDates);
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(LessonEditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(
+                    String.format(LessonEditCommand.MESSAGE_NOT_EDITED, LessonEditCommand.MESSAGE_USAGE));
         }
+
+        // index check should come after message not edited
+        Index studentIndex = ParserUtil.parseStudentIndex(preamble[STUDENT_INDEX_ZERO_BASED]);
+        Index lessonIndex = ParserUtil.parseLessonIndex(preamble[LESSON_INDEX_ZERO_BASED]);
 
         return new LessonEditCommand(studentIndex, lessonIndex, editLessonDescriptor);
     }
