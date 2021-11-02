@@ -151,7 +151,11 @@ Format: `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_P
 Examples:
 * `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 
-> :bulb: The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
+* The student's phone number, parent's name and parent's phone number are optional details for you to include.
+
+> :bulb: TutorAid does not allow you to add duplicate students. A student is considered as a duplicate if he/she has 
+> the exact same name (case-insensitive) as an existing student in the app. 
+> For example, TutorAid will consider 'John Doe' and 'john doe' as the same student, but not 'John Doe' and 'John'.
 
 
 ### Listing all students : `list`
