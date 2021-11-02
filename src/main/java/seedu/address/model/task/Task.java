@@ -41,21 +41,21 @@ public abstract class Task implements Comparable<Task>, Cloneable {
         this.priority = priority;
     }
 
-//    /**
-//     * Constructs a {@code Task}.
-//     *
-//     * @param name A valid TaskName.
-//     * @param tags A valid Set of Tags.
-//     * @param description A valid Description of Tags.
-//     * @param isDone A boolean indicating the status of the Task.
-//     */
-//    public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
-//        this.name = name;
-//        this.tags.addAll(tags);
-//        this.isDone = isDone;
-//        this.description = description.description;
-//        this.priority = Priority.LOW;
-//    }
+    /**
+     * Constructs a {@code Task}.
+     *
+     * @param name A valid TaskName.
+     * @param tags A valid Set of Tags.
+     * @param description A valid Description of Tags.
+     * @param isDone A boolean indicating the status of the Task.
+     */
+    public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
+        this.name = name;
+        this.tags.addAll(tags);
+        this.isDone = isDone;
+        this.description = description.description;
+        this.priority = Priority.LOW;
+    }
 
     public TaskName getName() {
         return name;
