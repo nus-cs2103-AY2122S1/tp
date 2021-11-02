@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-TutorMaster is a desktop app for freelance tutors to manage their students’ grades, assignment submission and tuition fee payment. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
+TutorMaster is a desktop app for freelance tutors to manage their students’ details and related tasks. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
 
 * Table of Contents
   {:toc}
@@ -26,7 +26,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ gr
 
    * **`help`** : Displays a help message with a link to the User Guide.
 
-   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the students list.
+   * **`student -a n/Alice p/12345678 e/alice@gmail.com a/42 Wallaby Way`** : Adds a contact named `Alice` to the students list.
 
    * **`student -v 3`**: Views the 3rd student in the persons list.
 
@@ -73,19 +73,17 @@ Format: `help`
 ### Adding a student: `student -a`
 <details markdown="1"><summary>Adds a student to the students list.</summary>
 
-Format: `student -a -n NAME [-c CONTACT] [-em EMAIL] [-s DAY/STARTTIME/ENDTIME]​`
+Format: `student -a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * Adds a student with the specified `NAME`
 * `-a` refers to the add command
 * Commands in `[ ]` are optional
-* `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN` while `STARTTIME` and `ENDTIME` takes in the time in 24 hour format, for example 0800 for 8am.
-
 
 Examples:
-* `student -a -n John -c 12345678 -em john@mail.com -s TUE/1600/1800`<br>
-  adds a student with the name John, contact number 12345678, email john@mail.com and a lesson every tuesday from 4pm to 6pm
-* `student -a -n Barbara -c 12344321`<br>
-  adds a student with the name Barbara and contact number 12344321
+* `student -a n/John p/12345678 e/john@mail.com a/42 Wallaby Way, Sydney`<br>
+  adds a student with the name John, phone number 12345678, email john@mail.com and address at 42 Wallaby Way, Sydney
+* `student -a n/Barbara p/12344321 e/barber@gmail.com a/123 Sesame Street t/graduate t/actress`<br>
+  adds a student with the name Barbara, phone number 12344321, email barber@gmail.com, address at 123 Sesame Street, and tags graduate and actress
 </details>
 
 ### Viewing a student: `student -v`
@@ -107,7 +105,7 @@ Examples:
 Edits the detail of a specific student.
 </summary>
 
-Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL]`
+Format: `student -e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the detail of the student specified by the `INDEX`. `INDEX` should be a
   positive number and refers to the index number of a student in the list of students.
@@ -116,7 +114,7 @@ Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL]`
 
 Example:
 
-* `student -e 3 c/88888888 e/johnny@mail.com` Edits the contact number and email
+* `student -e 3 p/88888888 e/johnny@mail.com` Edits the phone number and email
   address of the third student in the student list to 88888888 and johnny@mail.com
   respectively.
 </details>
@@ -242,7 +240,7 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 Groups students by their names together.
 </summary>
 
-Format: `student -a INDEX…​ n/GROUPNAME`
+Format: `group -a INDEX…​ n/GROUPNAME`
 
 * Groups students into a group specified at `GROUPNAME`
 * `-a` refers to the add group command
@@ -251,7 +249,7 @@ Format: `student -a INDEX…​ n/GROUPNAME`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
+* `group -a 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
 </details>
 
 ### Deleting a group
@@ -324,7 +322,7 @@ Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
 </details>
 
-### Editing a task `[coming in v1.3]`
+### Editing a task 
 <details markdown="1">
 <summary>
 Edits a task in the task list.
@@ -334,7 +332,7 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
 * Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
 * `-e` refers to the edit command
-* It is a requirement that **at least one of the optional fields should be provided**
+* It is a requirement that **at least one of the optional fields should be provided!**
 * The current value will be updated to the value input by the user
 
 Examples:
@@ -358,7 +356,7 @@ Examples:
 * `task -d 1` deletes the task at index 1
 </details>
 
-### Listing all tasks `[coming in v1.3]`
+### Listing all tasks 
 <details markdown="1">
 <summary>
 Shows a list of all the tasks in the task list. 
@@ -367,7 +365,7 @@ Shows a list of all the tasks in the task list.
 Format: `task -l`
 </details>
 
-### Finding a task by name`[coming in v1.3]`
+### Finding a task by name
 <details markdown="1">
 <summary>
 Find tasks whose names contain any of the given keywords.
@@ -521,7 +519,7 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Adding a student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-**Edit a student** | `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]​` <br> e.g., `student -e 3 c/88888888 e/johnny@mail.com`
+**Edit a student** | `student -e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `student -e 3 c/88888888 e/johnny@mail.com`
 **View a student** | `student -v INDEX​` <br> e.g., `student -v 3`
 **Delete a student** | `student -d INDEX​` <br> e.g., `student -d 3`
 **Find a student** | `find KEYWORD [MORE_KEYWORDS]​` <br> e.g., `find alex david`
