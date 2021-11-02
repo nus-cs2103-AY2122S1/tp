@@ -32,32 +32,32 @@ public class AddLessonCommand extends AddCommand {
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TutorAid";
 
-    private final Lesson toAdd;
+    private final Lesson lesson;
 
     /**
      * Creates an AddLessonCommand to add the specified {@code Lesson}
      */
     public AddLessonCommand(Lesson lesson) {
         requireNonNull(lesson);
-        toAdd = lesson;
+        this.lesson = lesson;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasLesson(toAdd)) {
+        if (model.hasLesson(lesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        model.addLesson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        model.addLesson(lesson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, lesson));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddLessonCommand // instanceof handles nulls
-                && toAdd.equals(((AddLessonCommand) other).toAdd));
+                && lesson.equals(((AddLessonCommand) other).lesson));
     }
 }
