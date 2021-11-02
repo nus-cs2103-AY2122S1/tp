@@ -1,8 +1,8 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static seedu.tuitione.commons.core.Messages.generateSuccess;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = generateSuccess("Deleted Student:\n%1$s");
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = HEADER_SUCCESS + "Deleted Student:\n%1$s";
 
     private final Index targetIndex;
 

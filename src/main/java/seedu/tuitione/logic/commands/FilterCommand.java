@@ -1,9 +1,9 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_UPDATE;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_LESSON_FOUND_OVERVIEW;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW;
-import static seedu.tuitione.commons.core.Messages.generateUpdate;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
@@ -69,14 +69,14 @@ public class FilterCommand extends Command {
     }
 
     private String lessonFoundOutput(int size) {
-        return String.format(generateUpdate(MESSAGE_LESSON_FOUND_OVERVIEW), size);
+        return HEADER_UPDATE + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, size);
     }
 
     private String studentAndLessonFoundOutput(int studentListSize, int lessonListSize) {
         String messageContent = String.format(MESSAGE_STUDENTS_FOUND_OVERVIEW, studentListSize)
                 + "\n"
                 + String.format(MESSAGE_LESSON_FOUND_OVERVIEW, lessonListSize);
-        return generateUpdate(messageContent);
+        return HEADER_UPDATE + messageContent;
     }
 
     @Override

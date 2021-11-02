@@ -118,13 +118,17 @@ public class StringUtil {
     }
 
     /**
-     * Returns true if {@code s} represents an all digit string
+     * Returns true if {@code s} represents a numbered string, with negatives allowed.
+     * Possible values are '1234' and '-12344'.
      * Will return false for any other non-null string input
      * @throws NullPointerException if {@code s} is null.
      */
-    public static boolean isAllDigit(String s) {
+    public static boolean isAStringedNumber(String s) {
         requireNonNull(s);
         String trimmedS = s.trim();
+        if (trimmedS.startsWith("-")) {
+            trimmedS = trimmedS.substring(1);
+        }
         return !trimmedS.isEmpty() && trimmedS.matches("\\d+");
     }
 }

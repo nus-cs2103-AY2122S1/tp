@@ -1,9 +1,9 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT_FOUND;
-import static seedu.tuitione.commons.core.Messages.generateAlert;
-import static seedu.tuitione.commons.core.Messages.generateSuccess;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -41,9 +41,9 @@ public class AddCommand extends Command {
             + PREFIX_GRADE + "S3 "
             + PREFIX_REMARK + "overdue";
 
-    public static final String MESSAGE_SUCCESS = generateSuccess("New student added:\n%1$s");
-    public static final String MESSAGE_TOO_MANY_REMARKS = generateAlert(REMARK_COUNT_CONSTRAINT);
-    public static final String MESSAGE_DUPLICATE_STUDENT = generateAlert(MESSAGE_DUPLICATE_STUDENT_FOUND);
+    public static final String MESSAGE_SUCCESS = HEADER_SUCCESS + "New student added:\n%1$s";
+    public static final String MESSAGE_TOO_MANY_REMARKS = HEADER_ALERT + REMARK_COUNT_CONSTRAINT;
+    public static final String MESSAGE_DUPLICATE_STUDENT = HEADER_ALERT + MESSAGE_DUPLICATE_STUDENT_FOUND;
 
     private final Student toAdd;
 

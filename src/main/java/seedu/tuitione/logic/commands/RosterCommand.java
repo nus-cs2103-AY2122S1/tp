@@ -1,7 +1,7 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.commons.core.Messages.generateSuccess;
+import static seedu.tuitione.commons.core.Messages.HEADER_UPDATE;
 
 import java.util.List;
 
@@ -26,11 +26,11 @@ public class RosterCommand extends Command {
             + COMMAND_WORD + "\ndisplays the list of students who are"
             + " enrolled in a specific lesson registered in the TuitiONE book.\n\n"
             + "Parameters: "
-            + "LESSON_INDEX"
+            + "LESSON_INDEX (must be a positive integer)"
             + "\nExample: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ROSTER_LESSON_SUCCESS = generateSuccess("Roster of %s is displayed.\n"
-            + "A total of %s student(s) found.");
+    public static final String MESSAGE_ROSTER_LESSON_SUCCESS = HEADER_UPDATE + "Roster of %s is displayed.\n"
+            + "A total of %s student(s) found.";
     public static final String MESSAGE_ENROLLED_STUDENT_HEADER = "\nStudent(s): "; // add when there are students
 
     private final Index targetIndex;

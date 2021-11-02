@@ -1,9 +1,9 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT_FOUND;
-import static seedu.tuitione.commons.core.Messages.generateAlert;
-import static seedu.tuitione.commons.core.Messages.generateSuccess;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -56,13 +56,13 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = generateSuccess("Edited Student: %1$s");
-    public static final String MESSAGE_NOT_EDITED = generateAlert("At least one field to edit must be provided.");
-    public static final String MESSAGE_DUPLICATE_STUDENT = generateAlert(MESSAGE_DUPLICATE_STUDENT_FOUND);
-    public static final String MESSAGE_TOO_MANY_REMARKS = generateAlert(REMARK_COUNT_CONSTRAINT
-            + "\nYou can only add %d more unique remark(s).");
-    public static final String MESSAGE_NO_SUCH_REMARK_FOUND = generateAlert("The remark(s) you wish to "
-            + "remove does not exist.");
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = HEADER_SUCCESS + "Edited Student: %1$s";
+    public static final String MESSAGE_NOT_EDITED = HEADER_ALERT + "At least one field to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = HEADER_ALERT + MESSAGE_DUPLICATE_STUDENT_FOUND;
+    public static final String MESSAGE_TOO_MANY_REMARKS = HEADER_ALERT + REMARK_COUNT_CONSTRAINT
+            + "\nYou can only add %d more unique remark(s).";
+    public static final String MESSAGE_NO_SUCH_REMARK_FOUND = HEADER_ALERT + "The remark(s) you wish to "
+            + "remove does not exist.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;

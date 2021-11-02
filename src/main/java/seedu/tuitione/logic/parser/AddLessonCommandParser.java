@@ -42,7 +42,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
         Subject subject = ParserUtil.parseSubjectArgs(argMultimap.getValue(PREFIX_SUBJECT).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
-        Price price = ParserUtil.parseCostArgs(argMultimap.getValue(PREFIX_COST).get());
+        Price price = ParserUtil.parsePriceArgs(argMultimap.getValue(PREFIX_COST).get());
 
         DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY).get());
         LocalTime startTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_TIME).get());

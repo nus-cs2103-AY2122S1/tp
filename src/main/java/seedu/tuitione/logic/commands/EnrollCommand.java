@@ -1,8 +1,8 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.commons.core.Messages.generateAlert;
-import static seedu.tuitione.commons.core.Messages.generateSuccess;
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.tuitione.model.lesson.Lesson.CONFLICTING_TIMINGS_CONSTRAINT;
@@ -29,10 +29,10 @@ public class EnrollCommand extends Command {
             + COMMAND_WORD + "\nEnrolls a specified student "
             + "from a given TuitiONE lesson\n\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
-            + "l/LESSON_INDEX\n"
+            + "l/LESSON_INDEX (must be a positive integer)\n"
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_SUCCESS = generateSuccess("%1$s enrolled into lesson:\n%2$s");
+    public static final String MESSAGE_SUCCESS = HEADER_SUCCESS + "%1$s enrolled into lesson:\n%2$s";
 
     private final Index indexStudent;
     private final Index indexLesson;
@@ -65,27 +65,25 @@ public class EnrollCommand extends Command {
         Lesson lesson = lessonList.get(indexLesson.getZeroBased());
 
         // run checks
-        String alertMessageContainer;
+        String alertMessageContainer = null;
         if (!studentToEnroll.isAbleToEnrollForMoreLessons()) {
             alertMessageContainer = String.format(STUDENT_ENROLLMENT_MESSAGE_CONSTRAINT, studentToEnroll.getName());
-            throw new CommandException(generateAlert(alertMessageContainer));
 
         } else if (lesson.containsStudent(studentToEnroll)) {
             alertMessageContainer = String.format(STUDENT_ALREADY_ENROLLED_CONSTRAINT,
                     studentToEnroll.getName(), lesson);
-            throw new CommandException(generateAlert(alertMessageContainer));
 
         } else if (lesson.doesStudentHaveConflictingTimings(studentToEnroll)) {
             alertMessageContainer = String.format(CONFLICTING_TIMINGS_CONSTRAINT, studentToEnroll.getName(), lesson);
-            throw new CommandException(generateAlert(alertMessageContainer));
 
         } else if (!lesson.isStudentOfSameGrade(studentToEnroll)) {
             alertMessageContainer = String.format(DIFFERENT_GRADE_CONSTRAINT, studentToEnroll.getName(), lesson);
-            throw new CommandException(generateAlert(alertMessageContainer));
 
         } else if (!lesson.isAbleToEnrollMoreStudents()) {
             alertMessageContainer = String.format(LESSON_ENROLLMENT_MESSAGE_CONSTRAINT, lesson);
-            throw new CommandException(generateAlert(alertMessageContainer));
+        }
+        if (alertMessageContainer != null) {
+            throw new CommandException(HEADER_ALERT + alertMessageContainer);
         }
 
         lesson.enrollStudent(studentToEnroll);

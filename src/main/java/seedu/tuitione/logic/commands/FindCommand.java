@@ -1,9 +1,9 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_UPDATE;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_NO_STUDENTS_FOUND_OVERVIEW;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW;
-import static seedu.tuitione.commons.core.Messages.generateUpdate;
 
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.student.NameContainsKeywordsPredicate;
@@ -35,9 +35,9 @@ public class FindCommand extends Command {
         model.updateFilteredStudentList(predicate);
         int numberOfFilteredStudents = model.getFilteredStudentList().size();
 
-        String output = (numberOfFilteredStudents == 0)
-                ? generateUpdate(MESSAGE_NO_STUDENTS_FOUND_OVERVIEW)
-                : generateUpdate(String.format(MESSAGE_STUDENTS_FOUND_OVERVIEW, numberOfFilteredStudents));
+        String output = HEADER_UPDATE + ((numberOfFilteredStudents == 0)
+                ? MESSAGE_NO_STUDENTS_FOUND_OVERVIEW
+                : String.format(MESSAGE_STUDENTS_FOUND_OVERVIEW, numberOfFilteredStudents));
 
         return new CommandResult(output);
     }

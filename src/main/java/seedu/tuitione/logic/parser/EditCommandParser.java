@@ -41,7 +41,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index;
 
         String preamble = argMultimap.getPreamble();
-        if (preamble.contains("/") || !StringUtil.isAllDigit(preamble)) {
+        if (!StringUtil.isAStringedNumber(preamble)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
@@ -52,7 +52,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editStudentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editStudentDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editStudentDescriptor.setPhone(ParserUtil.parseParentContact(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editStudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));

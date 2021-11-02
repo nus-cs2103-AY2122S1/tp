@@ -85,25 +85,25 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseParentContact((String) null));
     }
 
     @Test
     public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseParentContact(INVALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
         ParentContact expectedParentContact = new ParentContact(VALID_PHONE);
-        assertEquals(expectedParentContact, ParserUtil.parsePhone(VALID_PHONE));
+        assertEquals(expectedParentContact, ParserUtil.parseParentContact(VALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         ParentContact expectedParentContact = new ParentContact(VALID_PHONE);
-        assertEquals(expectedParentContact, ParserUtil.parsePhone(phoneWithWhitespace));
+        assertEquals(expectedParentContact, ParserUtil.parseParentContact(phoneWithWhitespace));
     }
 
     @Test

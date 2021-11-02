@@ -43,7 +43,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        ParentContact parentContact = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        ParentContact parentContact = ParserUtil.parseParentContact(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());

@@ -1,9 +1,9 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.core.Messages.HEADER_ALERT;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_DUPLICATE_LESSON_FOUND;
-import static seedu.tuitione.commons.core.Messages.generateAlert;
-import static seedu.tuitione.commons.core.Messages.generateSuccess;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -31,8 +31,8 @@ public class AddLessonCommand extends Command {
             + PREFIX_COST + "COST\n"
             + "Example: " + "add-l s/Science g/P5 d/Wed t/1200 c/10.50";
 
-    public static final String MESSAGE_SUCCESS = generateSuccess("New lesson created:\n%1$s");
-    public static final String MESSAGE_DUPLICATE_LESSON = generateAlert(MESSAGE_DUPLICATE_LESSON_FOUND);
+    public static final String MESSAGE_SUCCESS = HEADER_SUCCESS + "New lesson created:\n%1$s";
+    public static final String MESSAGE_DUPLICATE_LESSON = HEADER_ALERT + MESSAGE_DUPLICATE_LESSON_FOUND;
 
     private final Lesson toAdd;
 

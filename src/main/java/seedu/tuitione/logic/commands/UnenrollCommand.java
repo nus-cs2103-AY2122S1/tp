@@ -1,7 +1,7 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.commons.core.Messages.generateSuccess;
+import static seedu.tuitione.commons.core.Messages.HEADER_SUCCESS;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED_CONSTRAINT;
@@ -27,11 +27,11 @@ public class UnenrollCommand extends Command {
             + COMMAND_WORD + "\nUnenroll a specified student "
             + "from a given TuitiONE lesson\n\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
-            + "l/LESSON_INDEX\n"
+            + "l/LESSON_INDEX (must be a positive integer)\n"
             + "Example: " + "unenroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = generateSuccess("Unenrolled student "
-            + "%1$s from lesson %2$s");
+    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = HEADER_SUCCESS + "Unenrolled student "
+            + "%1$s from lesson %2$s";
 
     private final Index indexStudent;
 
