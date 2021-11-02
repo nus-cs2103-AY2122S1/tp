@@ -308,7 +308,7 @@ Examples:
 
 Edits an existing event in the address book.
 
-Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
+Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [v/VENUE] [c/CAPACITY]`
 
 * Edits the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
@@ -317,7 +317,7 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+*  `edit 1 n/Football Training v/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
 #### Add residents to an event: `include`
 
@@ -424,7 +424,7 @@ Action | Format, Examples
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `deadline k/f 15-8-2021 20-08-2021`
 **Find** | **Resident:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass` <br><br> **Event:** <br> `find [PREFIX/KEYWORD]...` <br> e.g. `find n/Swim d/28-10-2021`
-**Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
+**Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training v/Field`
 **Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
 **Trace** | `trace r/RESIDENT [d/DEPTH] [t/DURATION]` <br> e.g. `trace r/D201 d/2 t/4`
 **Import** | `import CSV_NAME` <br> e.g. `import safeforhall`
