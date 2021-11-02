@@ -592,7 +592,7 @@ There is no need to save manually.
 
 ## Editing the data file
 
-Managera's data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to 
+Managera's data is saved as a JSON file `[JAR file location]/data/managera.json`. Advanced users are welcome to 
 update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -625,7 +625,7 @@ prefix "d/" lets Managera know that a date is expected.<br>
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install and run Managera in the other computer. Then overwrite the empty save file it creates with the save file 
-from your previous computer. The save file of Managera is found in `[JAR file location]/data/addressbook.json`.
+from your previous computer. The save file of Managera is found in `[JAR file location]/data/managera.json`.
 
 **Q**: Does Managera have a mobile version?<br>
 **A**: Managera currently does not operate on any other platform other than desktop.
