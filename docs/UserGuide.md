@@ -7,17 +7,22 @@ title: User Guide
   {:toc}
 
 # 1. Introduction
-Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to track their students' contacts**.
+Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to keep track of the details of 
+their students and lessons**.
 
-The main features of TutorAid include:
-1. Storing contacts of students and their parents
-2. Storing and managing lesson details
-3. Tracking students' progress
-4. Tracking students' payment status
+Some main ways in which TutorAid can help you with your tutoring responsibilities include:
+1. Storing contacts of your students and their parents
+2. Storing and managing your lesson details
+3. Tracking your students' progress
 
-With TutorAid, you have a one-stop solution for keeping track of your students' contacts and staying up-to-date on their progress. TutorAid is optimised for use via a **Command Line Interface** (CLI) while retaining the benefits of a visually-appealing Graphical User Interface (GUI). If you can type fast, TutorAid can help you to manage your tutoring tasks more efficiently than traditional GUI apps.
+TutorAid is a unique app that is optimised for use via a **Command Line Interface** (CLI) while retaining the benefits 
+of a visually-appealing Graphical User Interface (GUI). If you can type fast, TutorAid can help you to manage your 
+tutoring tasks more efficiently than traditional GUI apps!
 
-We hope that TutorAid will be helpful in adding more organisation to your tutoring career. To get TutorAid up and running, check out the [Quick Start](#3-quick-start) section.<hr>
+We hope that TutorAid will be helpful in adding more organisation to your tutoring career. 
+
+Just downloaded TutorAid? Check out the [Quick Start](#3-quick-start) section to see how you can get the app up and 
+running! <hr>
 
 # 2. About
 This section contains information and terms that may help you to understand the user guide.
@@ -54,13 +59,13 @@ This is an area where some features can be found. As TutorAid primarily interact
 #### Command Box
 The Command Box is a field in which you can type instructions (commands) to TutorAid. Text in this user guide that is `highlighted` should typically be copied into the command box exactly (including spaces). After you have typed a command into this box, you can press ENTER :leftwards_arrow_with_hook: on your keyboard to tell TutorAid to execute your command.
 
-If your command is of the wrong [format](#23-command-format), TutorAid will try to show you the correct format using the Console if it is able to guess what command you had intended to provide.
+If your command is of the wrong [format](#23-command-format), TutorAid will try to show you the correct format in the Console if it is able to infer what command you had intended to provide.
 
 #### Console
-The Console is used by TutorAid to communicate with you. Whenever a command is carried out, TutorAid will let you know whether the operation was successful. It may also provide you with details about the changes made during the operation.
+The Console is used by TutorAid to communicate with you. Whenever a command is executed, TutorAid will let you know whether the operation was successful. It may also provide you with details about the changes made during the execution.
 
 #### Student Panel
-The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their name and their index number. These modes can be set via [the list command](#listing-all-students--list). In the labelled screenshot, the Student Panel is in Minimal view.
+The Student Panel is where your students are listed. There are two modes for this panel: **Full** and **Minimal**. Full view means that all details about each student is listed, whereas Minimal view allows you to see only their names and their index numbers. These modes can be set via [the list command](#listing-all-students--list). In the labelled screenshot, the Student Panel is in Minimal view.
 
 > :bulb: The **index number** is important for many commands in TutorAid.
 
@@ -73,24 +78,24 @@ The Lesson Panel is where your lessons are listed. Just like the Student Panel, 
 The status bar shows the path where you can find the save file for TutorAid.<hr>
 
 ## 2.3 Command Format
-Commands are text that you can enter into the Command Box to tell TutorAid to perform an operation. Some commands have many components, each of which serve different purposes. The following diagram depicts the components of a command.
+Commands are text that you can enter into the Command Box to tell TutorAid to perform an operation. Some commands have many components, each of which serve different purposes. The following diagram depicts the components of a command:
 
 ![](images/command-syntax.png)
 
 #### Command Word
-The command word is how you can tell TutorAid what kind of operation you want to do. These command words are listed [here](#6-command-summary). All commands must contain a command word.
+The command word is how you can tell TutorAid what kind of operation you want it to do. These command words are listed [here](#6-command-summary). All commands must contain a command word.
 
 In the example above, `edit` tells TutorAid to perform an *edit* operation.
 
 #### Flag
-The flag is used to differentiate between variants of the same operation. For example, the `edit` command word can be used to edit the details of a student or a lesson. To differentiate between these usages, you should pass a flag to TutorAid - `edit -s` to edit a student, or `edit -l` to edit a lesson.
+The flag is used to differentiate between variants of the same operation. For example, the `edit` command word can be used to edit the details of a student or a lesson. To differentiate between these usages, you should pass a flag to TutorAid - `edit -s` to edit a student, and `edit -l` to edit a lesson.
 
 In the example above, `-s` tells TutorAid to perform the edit operation on *students*.
 
 #### Index Number
-Some commands perform operations on a specific student or lesson. You should give TutorAid an index number to specify a student or a lesson. The index number can be found by looking at the respective panels - the [Student Panel](#student-panel) or the [Lesson Panel](#lesson-panel).
+Some commands perform operations on a specific student or lesson. You should give TutorAid an index number to specify the student or the lesson. The index number can be found by looking at the respective panels - the [Student Panel](#student-panel) or the [Lesson Panel](#lesson-panel).
 
-In the example above, `3` tells TutorAid to perform the edit operation on the *third student*.
+In the example above, `3` tells TutorAid to perform the edit operation on the *third student* in the student panel.
 
 #### Parameter
 A parameter contains the *specifics* of the command to be executed. There can be **multiple** parameters for a single command, depending on the type of command that you wish to perform. Arguments are prefixed with a few characters followed by a slash (`sn/` and `sp/` for this example). These prefixes help TutorAid to differentiate parameters.
