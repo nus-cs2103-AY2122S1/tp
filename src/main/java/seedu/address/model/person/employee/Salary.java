@@ -11,11 +11,6 @@ public class Salary {
     public static final String MESSAGE_CONSTRAINTS = "Salary should be numerical and should be 3 or more digits long"
             + ".";
 
-    /*
-     * Between 1-6 digits, optional 2 digits after the dot
-     */
-    public static final String VALIDATION_REGEX = "\\d{3,}";
-
     public final String currentSalary;
 
     /**

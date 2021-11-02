@@ -22,7 +22,7 @@ public class FindCustomerCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsFindCustomerCommand() {
         // no leading and trailing whitespaces
         FindCustomerCommand expectedFindCommand =
                 new FindCustomerCommand(new CustomerClassContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
