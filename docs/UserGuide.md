@@ -292,7 +292,10 @@ the earliest time to the latest time.
 #### `NAME`
 * The name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
-
+   <div markdown="block" class="alert alert-info">
+   :information_source: FAST does not allow duplicate names, but you may use numbers to differentiate between 2 clients with
+   the exact same name.<br>
+   </div>
 
 #### `PHONE`
 * The contact number of your client
@@ -436,7 +439,7 @@ You can delete the specified client from FAST. This is useful when a client has 
 **Examples**:
 * `list` followed by `del 2` deletes the second client in FAST. If `Bernice Yu` is the second client on the list, his entry
 will be deleted.
-![EditExample](images/deleteexample.png)
+![DeleteExample](images/deleteexample.png)
 * `find Betsy` followed by `del 1` deletes the first client in the results of the `find` command.
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
@@ -524,10 +527,10 @@ The `DATE` of the appointment must at least be specified.
 
 
 **Examples**:
-* `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
-![result for `aa 1 d/2021-03-27`](images/appointment.png)
-* `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
-* `find Matthew John` followed by `aa 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
+* `aa 1 d/2022-03-27` adds an appointment with date `27 Mar 2022` to the first client in FAST.
+![result for `aa 1 d/2022-03-27`](images/appointment.png)
+* `aa 3 d/2022-03-27 t/18:00` adds an appointment with date `27 Mar 2022` and time `1800hrs` to the third client in FAST.
+* `find Matthew John` followed by `aa 3 d/2022-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2022`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
    <div markdown="block" class="alert alert-info">
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
@@ -560,8 +563,8 @@ At least **one** of the optional fields must be present.
 * [`VENUE`](#venue)
 
 **Examples**:
-* `ea 1 d/2021-03-28` edits the appointment date to be `28 Mar 2021` of the first client.
-![result for `ea 1 d/2021-03-28`](images/editappointmentexample.png)
+* `ea 1 d/2022-03-28` edits the appointment date to be `28 Mar 2022` of the first client.
+![result for `ea 1 d/2022-03-28`](images/editappointmentexample.png)
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
 <br> 
