@@ -25,6 +25,8 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private final CommandHistory commandHistory = new CommandHistory();
 
+    private boolean lastWasSuccess = false;
+
     @FXML
     private TextField commandTextField;
 
@@ -52,8 +54,10 @@ public class CommandBox extends UiPart<Region> {
             commandHistory.add(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
+            lastWasSuccess = true;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+            lastWasSuccess = false;
         }
     }
 
@@ -72,6 +76,12 @@ public class CommandBox extends UiPart<Region> {
 
         // Do nothing if neither up nor down pressed, or no command history
         if (isNotUpOrDown || noCommandHistoryPresent) {
+            return;
+        }
+
+        if (upPressed && lastWasSuccess) {
+            commandTextField.setText(commandHistory.getCurrentCommand());
+            lastWasSuccess = false;
             return;
         }
 
