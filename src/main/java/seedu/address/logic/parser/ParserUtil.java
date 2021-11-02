@@ -492,8 +492,6 @@ public class ParserUtil {
      */
     public static LocalDate[] initializeLocalDateToThisWeek() {
         return getDateArrayOfTheWeek(LocalDate.now());
-
-
     }
 
     /**

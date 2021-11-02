@@ -14,7 +14,6 @@ public class SchedulePeriodChangeCommandParser implements Parser<SchedulePeriodC
                 || argMultimap.getAllValues(PREFIX_DATE).size() != 1) {
             throw new ParseException(SchedulePeriodChangeCommand.HELP_MESSAGE);
         }
-
         return new SchedulePeriodChangeCommand(ParserUtil
                 .getWeekPeriodFromDate(ParserUtil.parseLocalDate(argMultimap.getValue(PREFIX_DATE).get())));
 
