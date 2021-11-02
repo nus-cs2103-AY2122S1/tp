@@ -31,9 +31,9 @@
                 <Insets bottom="5" left="10" right="10" top="5" />
               </padding>
             </StackPane>
-            <ScrollPane fx:id="labsMarkedList" VBox.vgrow="ALWAYS" fitToWidth="true" >
+            <ScrollPane fx:id="labsMarkedList" VBox.vgrow="ALWAYS" fitToWidth="true" styleClass="scroll-pane-bg">
               <content>
-                <VBox prefWidth="200" alignment="center" fx:id="labVBox" styleClass="pane-with-border" />
+                <VBox alignment="center" fx:id="labVBox" styleClass="sroll-pane-bg" />
               </content>
             </ScrollPane>
           </items>

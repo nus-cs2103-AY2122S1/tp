@@ -124,15 +124,15 @@ public class DashboardWindow extends PopupWindow {
 
     private String formatLabsToDisplay(TreeMap<ClassId, Integer> labMap) {
         if (labMap.size() == 0) {
-            return "You don't have any classes yet!";
+            return "\nYou don't have any classes yet!";
         }
 
-        StringBuilder dataToDisplay = new StringBuilder("No. of labs left to mark:\n");
+        StringBuilder dataToDisplay = new StringBuilder("\nNo. of labs left to mark:\n");
         for (ClassId cid: labMap.keySet()) {
             String key = cid.toString();
             String value = labMap.get(cid).toString();
             dataToDisplay.append(key).append(": ").append(value).append("\n\n");
         }
-        return dataToDisplay.append("Keep it going!  😄").toString();
+        return dataToDisplay.append("Keep it going!\n\n").toString();
     }
 }
