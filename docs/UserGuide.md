@@ -458,7 +458,7 @@ Database Commands | Format, Examples
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **List** | `list`
 **Find** | `find [c/] [t/] [d/] [m/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
-**Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [m/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
+**Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/DESCRIPTION] [m/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
 
 Academic Plan Commands | Format, Examples
 --------|------------------
