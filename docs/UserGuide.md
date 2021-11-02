@@ -5,8 +5,8 @@ title: User Guide
 
 MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MTR can get your application management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
    * **`list-applicant`** : Lists all applicants.
 
-   * **`add-applicant`**`n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo` : Adds an applicant named `Mary Ann` to the `software engineer` position.
+   * **`add-applicant`** `n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo` : Adds an applicant named `Mary Ann` to the `software engineer` position.
 
    * **`delete-applicant`**`1` : Deletes the 1st applicant shown in the current list.
    
@@ -53,7 +53,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 * If a parameter should only appear once in the command but is specified multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Parameters added after commands that do not take in parameters (such as `help`, `list-applicant`, `list-position` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -83,7 +83,7 @@ Format: `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`
 * Edit the position with the specified `INDEX`
 
 Examples: 
-* `edit-position INDEX tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
+* `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
 
 
 ### Deleting a position: `delete-position`
@@ -134,6 +134,7 @@ Format: `mark NAME status/STATUS`
 
 * `NAME` is case-insensitive. e.g. `john doe` and `John Doe` will update the same applicant's status.
 * `STATUS` is case-insensitive. e.g. `accepted` and `ACCEPTED` will both update the applicant's status to `"Accepted"`.
+* Note: Possible statuses are `ACCEPTED`, `REJECTED` or `PENDING`.
 
 Examples:
 * `mark john doe status/rejected` marks the applicant `John Doe` with status `"Accepted"`.
@@ -176,13 +177,16 @@ Format: `rate pos/POSITION`
 Examples:
 * `rate pos/software engineer`
 
+
 ### Undoing the last modification : `undo`
 
 Recovers the state before last modification is made.
 The modification command includes: `add-position` `add-applicant` `edit-position` `edit-applicant` `delete-position` `delete-applicant`
-`` [command that modifies the state should also be added later]
+
+[command that modifies the state should also be added later]
 
 Format: `undo`
+
 
 ### Filtering applicants: `filter-applicant`
 
@@ -199,6 +203,7 @@ Format: `filter-applicant [pos/POSITION] [status/STATUS]​`
 Examples:
 * `filter-applicant status/rejected` displays a list of all rejected applicants.
 * `filter-applicant pos/database administrator status/accepted` displays a list of all applicants to the `database administrator` position, that have been accepted.
+
 
 ### Visualizing a position with a pie chart: `visualize`
 
@@ -224,6 +229,7 @@ Format: `find-applicant KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find-applicant John` returns `john` and `John Doe`
+
 
 ### Exiting the program : `exit`
 
@@ -260,10 +266,17 @@ Action | Format, Examples
 --------|------------------
 **Add Applicant** | `add-applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK` <br> e.g., `add-applicant n/Mary Ann p/98765432 e/johnd@example.com a/Mary street, block 123, #01-01 pos/software engineer github/https://github.com/matoledo`
 **Delete Applicant** | `delete-applicant INDEX`<br> e.g., `delete-applicant 3`
-**Update Applicant status** | `mark NAME` <br> e.g.,  `mark john doe status/accepted`
+**Edit Applicant** | `edit-applicant INDEX [n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION github/GITHUB_PROFILE_LINK]` <br> e.g. `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
 **Find Applicant** | `find-applicant KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List Applicants** | `list-applicant`
 **Filter Applicants** | `filter-applicant [pos/POSITION] [status/STATUS]​`<br> e.g., `filter-applicant pos/software engineer status/accepted`
+**List Applicants** | `list-applicant`
+**Update Applicant status** | `mark NAME` <br> e.g.,  `mark john doe status/accepted`
+**Add Position** | `add-position tit/TITLE des/DESCRIPTION` <br> e.g., `add-position tit/software engineer des/work in a team that builds a facial recognition application`
+**Delete Position** | `delete-position INDEX`<br> e.g., `delete-position 1`
+**Edit Position** | `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`<br> e.g., `edit-position 1 tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
+**List Position** | `list-position`
 **Visualize Positions** | `visualize POSITION_TITLE​`<br> e.g., `visualize database administrator`
-**Rate | `rate pos/POSITION` <br> e.g. `rate software engineer`
+**Rate** | `rate pos/POSITION` <br> e.g. `rate pos/software engineer`
+**Undo command** | `undo`
 **Help** | `help`
+**Exit** | `exit`
