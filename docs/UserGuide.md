@@ -53,7 +53,7 @@ This section gives you a quick summary on how to download and run our applicatio
 If you are on Windows, use the DOS prompt or the PowerShell (not the WSL terminal) to run the JAR file.
 </div><br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try: 
 
    * **`list`** : Lists all modules.
