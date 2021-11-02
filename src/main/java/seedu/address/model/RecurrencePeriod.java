@@ -1,10 +1,6 @@
 package seedu.address.model;
 
-import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_END_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_START_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_END_TIME;
-import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_START_TIME;
-
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -12,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.util.TimeUtil;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Slot;
 
@@ -42,11 +39,11 @@ public class RecurrencePeriod extends Period {
         super(period);
         this.period = period;
         if (slot.equals(Slot.MORNING)) {
-            this.startTime = DEFAULT_MORNING_START_TIME;
-            this.endTime = DEFAULT_MORNING_END_TIME;
+            this.startTime = TimeUtil.getDefaultMorningStartTime();
+            this.endTime = TimeUtil.getDefaultMorningEndTime();
         } else if (slot.equals(Slot.AFTERNOON)) {
-            this.startTime = DEFAULT_AFTERNOON_START_TIME;
-            this.endTime = DEFAULT_AFTERNOON_END_TIME;
+            this.startTime = TimeUtil.getDefaultAfternoonStartTime();
+            this.endTime = TimeUtil.getDefaultAfternoonEndTime();
         } else {
             throw new IllegalStateException("This should not occur");
         }
@@ -66,8 +63,11 @@ public class RecurrencePeriod extends Period {
         return this.period;
     }
 
-    public long getWorkingHour() {
-        return Duration.between(this.startTime, this.endTime).toHours();
+    public long getWorkingHour(DayOfWeek day, Period period) {
+        long numOfTimes = this.toList().stream()
+                .filter(d -> period.contains(d))
+                .filter(d -> d.getDayOfWeek().equals(day)).count();
+        return Duration.between(this.startTime, this.endTime).toHours() * numOfTimes;
     }
 
     /**
@@ -86,9 +86,9 @@ public class RecurrencePeriod extends Period {
                 .map(p -> p.getPeriod())
                 .collect(Collectors.toList());
         underlyingPeriods = this.period.union(underlyingPeriods);
-        result = underlyingPeriods.stream()
+        result.addAll(underlyingPeriods.stream()
                 .map(p -> new RecurrencePeriod(p, startTime, endTime))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
         return result;
 
     }
@@ -121,5 +121,14 @@ public class RecurrencePeriod extends Period {
     public boolean isWithinSlotPeriod(LocalTime time) {
         return time.equals(startTime) || time.equals(endTime)
                 || time.isBefore(endTime) && time.isAfter(startTime);
+    }
+
+
+    /**
+     * Print result for viewSchedule command.
+     *
+     */
+    public String toPrintString() {
+        return getStartTime() + "-" + getEndTime();
     }
 }

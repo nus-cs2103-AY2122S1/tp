@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.FILE_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import java.io.FileNotFoundException;
@@ -22,7 +23,7 @@ public class SetRoleReqCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_ROLE + "kitchen-1 bartender-1\n"
             + COMMAND_WORD + " " + PREFIX_ROLE + "floor-3\n\n"
             + "Currently, the role requirements per shift are:\n"
-            + RoleReqStorage.getRoleReqs();
+            + "%s";
 
     private final Set<String> roleReqList;
 
@@ -41,10 +42,15 @@ public class SetRoleReqCommand extends Command {
             try {
                 RoleReqStorage.update(roleReqSplit[0], Integer.parseInt(roleReqSplit[1]));
             } catch (FileNotFoundException e) {
-                throw new CommandException("Save File for Role Requirements not found.");
+                throw new CommandException(FILE_NOT_FOUND + RoleReqStorage.FILEPATH);
             }
         }
         return new CommandResult("Role requirements successfully updated:\n\n"
                 + RoleReqStorage.getRoleReqs());
     }
+
+    public static String getHelpMessage() {
+        return String.format(HELP_MESSAGE, RoleReqStorage.getRoleReqs());
+    }
+
 }

@@ -30,9 +30,7 @@ public class SwapShiftCommandParser implements Parser<SwapShiftCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME, PREFIX_DATE);
-        LocalDate[] dates = new LocalDate[2];
-        dates[0] = LocalDate.now();
-        dates[1] = dates[0].plusDays(1);
+        LocalDate[] dates = ParserUtil.initializeLocalDateToThisWeek();
 
         // Checks if there are exactly 2 "- n" fields and exactly 2 "d/" fields
         if (argMultimap.getAllValues(PREFIX_DASH_NAME).size() != 2

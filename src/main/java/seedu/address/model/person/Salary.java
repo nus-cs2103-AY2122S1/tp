@@ -10,9 +10,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Salary implements Field {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Salaries have to be a positive integer representing the pay in cents.";
+            "Salaries have to be a positive integer (or 0) representing the pay in dollars. Cents can be added by "
+            + "adding it after a \".\", but a positive integer (or 0) is required after the period if it is "
+            + "included.";
 
-    public final Integer value;
+    public final Integer value; //
 
     /**
      * Constructs an {@code Salary}.
@@ -22,25 +24,62 @@ public class Salary implements Field {
     public Salary(String salary) {
         requireNonNull(salary);
         checkArgument(isValidSalary(salary), MESSAGE_CONSTRAINTS);
-        value = Integer.parseInt(salary);
+        if (salary.contains(".")) {
+            String[] salaryStringSplit = salary.split("\\.");
+            String centsString = salaryStringSplit[1];
+            if (centsString.length() == 1) {
+                centsString += "0";
+            } else if (centsString.length() > 2) {
+                centsString = centsString.substring(0, 2);
+            }
+            value = Integer.parseInt(salaryStringSplit[0]) * 100 + Integer.parseInt(centsString);
+        } else {
+            value = Integer.parseInt(salary) * 100;
+        }
     }
 
     /**
      * Returns if a given string is a valid salary.
      */
     public static boolean isValidSalary(String test) {
-        return test.matches("\\d+");
+        test = test.trim();
+        if (test.contains(".")) {
+            String[] testStringSplit = test.split("\\.");
+            if (testStringSplit.length != 2) { // multiple "." or empty field for dollars or cents
+                return false;
+            }
+            return isValidDollars(testStringSplit[0]) && isValidCents(testStringSplit[1]);
+        } else {
+            return isValidDollars(test);
+        }
+    }
+
+    /**
+     * Returns if a given string represents a valid dollar value.
+     */
+    public static boolean isValidDollars(String test) {
+        test = test.trim();
+        if (!test.matches("\\d+") || test.equals("")) {
+            return false;
+        }
+        int dollarInt = Integer.parseInt(test);
+        return dollarInt >= 0;
+    }
+
+    /**
+     * Returns if a given string represents a valid cents value.
+     */
+    public static boolean isValidCents(String test) {
+        test = test.trim();
+        if (!test.matches("\\d+") || test.equals("")) {
+            return false;
+        }
+        int dollarInt = Integer.parseInt(test);
+        return dollarInt >= 0;
     }
 
     @Override
     public String toString() {
-        return value.toString();
-    }
-
-    /**
-     * Returns a String representation of the value of this Salary object in dollars.
-     */
-    public String convertToDollars() {
         int dollars = value / 100;
         int cents = value % 100;
         String centsString;
@@ -51,7 +90,14 @@ public class Salary implements Field {
         } else {
             centsString = String.valueOf(cents);
         }
-        return ("$" + dollars + "." + centsString);
+        return (dollars + "." + centsString);
+    }
+
+    /**
+     * Returns a String representation of the value of this Salary object in dollars.
+     */
+    public String convertToDollars() {
+        return ("$" + toString());
     }
 
     @Override
@@ -65,5 +111,4 @@ public class Salary implements Field {
     public int hashCode() {
         return value.hashCode();
     }
-
 }

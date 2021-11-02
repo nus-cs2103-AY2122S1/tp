@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.WRONG_NUMBER_OF_DATES;
-import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -29,6 +28,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -47,6 +47,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -144,7 +145,7 @@ public class ParserUtil {
         requireNonNull(salary);
         String trimmedSalary = salary.trim();
         if (!Salary.isValidSalary(trimmedSalary)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
         }
         return new Salary(trimmedSalary);
     }
@@ -227,7 +228,7 @@ public class ParserUtil {
         }
 
         try {
-            LocalTime.parse(strings[1], DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime.parse(strings[1], TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParseException(messageConstraints);
         }
@@ -394,7 +395,7 @@ public class ParserUtil {
         for (String roleReq : roles) {
             roleReq = roleReq.trim().replace(PREFIX_ROLE.toString(), "");
             if (!isValidRoleRequirement(roleReq)) {
-                throw SetRoleReqCommandParser.DEFAULT_ERROR;
+                throw new ParseException(SetRoleReqCommand.getHelpMessage());
             }
             roleSet.add(roleReq);
         }
@@ -453,4 +454,74 @@ public class ParserUtil {
         return new Period(dates[0], dates[1]);
     }
 
+    /**
+     * Parses a String array of timings to form a LocalTime array of those timings.
+     *
+     * @param stringTimings The String array of timings to be parsed.
+     * @return A corresponding array of timings as LocalTime.
+     */
+    public static LocalTime[] parseTimingsArr(String[] stringTimings) throws ParseException {
+        if (stringTimings.length != 4) {
+            throw SetDefaultShiftTimingsCommandParser.DEFAULT_ERROR;
+        }
+
+        LocalTime[] timings = new LocalTime[4];
+        try {
+            for (int i = 0; i < 4; i++) {
+                timings[i] = LocalTime.parse(stringTimings[i], TIME_FORMATTER);
+            }
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
+        }
+
+        for (int i = 0; i < 3; i++) {
+            // if i > (i + 1)
+            if (timings[i].compareTo(timings[i + 1]) > 0) {
+                throw SetDefaultShiftTimingsCommandParser.DEFAULT_ERROR;
+            }
+        }
+
+        return timings;
+    }
+
+
+    /**
+     * Creates an array of {@code LocalDate} of size 2 representing the range of the current week.
+     * If the current date is monday, it gives the range from this monday to next sunday.
+     * If the current date is sunday, it gives the range from the previous monday to today.
+     * It always represents a range of dates, starting from monday to sunday.
+     */
+    public static LocalDate[] initializeLocalDateToThisWeek() {
+        return getDateArrayOfTheWeek(LocalDate.now());
+
+
+    }
+
+    /**
+     * Creates an array of {@code LocalDate} of size 2, representing the range
+     * of the week {@code currentDate} is in. It results in the smallest range of dates, from
+     * monday to sunday that includes {@code currentDate}.
+     *
+     */
+    public static LocalDate[] getDateArrayOfTheWeek(LocalDate currentDate) {
+        int date = currentDate.getDayOfWeek().getValue();
+        //take the current date and get the distance from monday and sunday
+        int diffFromMonday = date - 1;
+        int diffFromSunday = 7 - date;
+        return new LocalDate[]{currentDate.minusDays(diffFromMonday),
+                currentDate.plusDays(diffFromSunday)};
+    }
+
+    public static Period getWeekPeriodFromDate(LocalDate date) {
+        LocalDate[] init = getDateArrayOfTheWeek(date);
+        assert init.length == 2;
+        return new Period(init[0], init[1]);
+    }
+
+    /**
+     * Creates a Period from monday to sunday, where today is within that range.
+     */
+    public static Period initializePeriodToThisWeek() {
+        return getWeekPeriodFromDate(LocalDate.now());
+    }
 }

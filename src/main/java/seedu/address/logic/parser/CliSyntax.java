@@ -18,6 +18,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
     public static final Prefix PREFIX_DATE = new Prefix("da/");
     public static final Prefix PREFIX_SHIFT_TIME = new Prefix("st/");
+    public static final Prefix PREFIX_MORNING = new Prefix("morn/");
+    public static final Prefix PREFIX_AFTERNOON = new Prefix("aft/");
 
     // Used when searching
     public static final Prefix PREFIX_DASH_INDEX = new Prefix("-i");

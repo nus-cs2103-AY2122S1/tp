@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -207,4 +208,18 @@ public class ParserUtilTest {
         assertEquals("monday-1", ParserUtil.parseDayOfWeekAndSlot("monday-1"));
         assertEquals("monday-0", ParserUtil.parseDayOfWeekAndSlot("MONDAY-0"));
     }
+
+    @Test
+    public void initializeCurrentWeek_success() {
+        LocalDate testDate = LocalDate.of(2021, 10, 27);
+        LocalDate[] result = ParserUtil.getDateArrayOfTheWeek(testDate);
+        LocalDate[] expected = new LocalDate[] {
+                LocalDate.of(2021, 10, 25),
+                LocalDate.of(2021, 10, 31)
+        };
+        assertEquals(expected[0], result[0]);
+        assertEquals(expected[1], result[1]);
+    }
+
+
 }

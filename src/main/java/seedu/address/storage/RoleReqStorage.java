@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 public class RoleReqStorage {
 
-    private static String filePath = "data/RoleReq.txt";
-    private static File file = new File(filePath);
+    public static final String FILEPATH = "data/RoleReq.txt";
+    private static File file = new File(FILEPATH);
     private static int[] requirements = new int[]{0, 0, 0}; // bartender, floor, kitchen
 
     /**
      * Loads the existing file for the list of requirements if it exists.
      *
-     * @return an ArrayList of requirements.
+     * @return an int[] of requirements.
      * @throws IOException If there are errors processing the file.
      */
     public static int[] load() throws IOException {
@@ -25,7 +25,7 @@ public class RoleReqStorage {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdir();
             }
-            file.createNewFile(); // Create the duke.txt file.
+            file.createNewFile(); // Create the RoleReq.txt file.
             update();
             return requirements; // default should be 0, 0, 0
         }
@@ -41,7 +41,7 @@ public class RoleReqStorage {
     /**
      * Reads the saved file and adds tasks to the tasklist.
      *
-     * @return An ArrayList of tasks read from the save file.
+     * @return An int[] of tasks read from the save file.
      * @throws FileNotFoundException If saved file cannot be found.
      */
     private static int[] readFileModifyRequirements() throws FileNotFoundException {

@@ -20,6 +20,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemoveMarkCommand;
+import seedu.address.logic.commands.SchedulePeriodChangeCommand;
+import seedu.address.logic.commands.SetDefaultShiftTimingsCommand;
 import seedu.address.logic.commands.SetRoleReqCommand;
 import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.logic.commands.StaffIndividualStatisticsCommand;
@@ -111,6 +113,12 @@ public class AddressBookParser {
 
         case SetRoleReqCommand.COMMAND_WORD:
             return new SetRoleReqCommandParser().parse(arguments);
+
+        case SetDefaultShiftTimingsCommand.COMMAND_WORD:
+            return new SetDefaultShiftTimingsCommandParser().parse(arguments);
+
+        case SchedulePeriodChangeCommand.COMMAND_WORD:
+            return new SchedulePeriodChangeCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

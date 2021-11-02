@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +29,9 @@ import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent.\n\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent "
+            + "for the input duration."
+            + Messages.SHIFT_PERIOD_PARSING_DEFAULT + "\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_DASH_INDEX + " INDEX] "
             + "[" + PREFIX_DASH_NAME + " NAME] "
@@ -39,13 +41,12 @@ public class MarkCommand extends Command {
             + "[" + PREFIX_DASH_SALARY + " SALARY] "
             + "[" + PREFIX_DASH_STATUS + " STATUS] "
             + "[" + PREFIX_DASH_ROLE + " ROLE]... "
-            + PREFIX_DAY_SHIFT + "DATE "
-            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
+            + Messages.DATE_RANGE_INPUT + "\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_INDEX + "1"
-            + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
+            + " " + PREFIX_DATE + "2021-11-18\n"
             + COMMAND_WORD + " " + PREFIX_DASH_NAME + "Jace "
-            + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
+            + PREFIX_DATE + "2021-11-11" + " " + PREFIX_DATE + "2021-11-13";
 
     public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
             + "%3$s";

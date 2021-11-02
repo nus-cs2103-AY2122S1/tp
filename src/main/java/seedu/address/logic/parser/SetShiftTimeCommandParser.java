@@ -34,9 +34,7 @@ public class SetShiftTimeCommandParser implements Parser<SetShiftTimeCommand> {
         String shiftDayAndSlot;
         LocalTime[] shiftTimes;
 
-        LocalDate[] dates = new LocalDate[2];
-        dates[0] = LocalDate.now();
-        dates[1] = dates[0].plusDays(7);
+        LocalDate[] dates = ParserUtil.initializeLocalDateToThisWeek();
 
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT, PREFIX_SHIFT_TIME)
