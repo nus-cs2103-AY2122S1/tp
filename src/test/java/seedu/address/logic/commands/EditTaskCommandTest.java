@@ -31,7 +31,7 @@ import seedu.address.testutil.TypicalModules;
 import seedu.address.testutil.TypicalTasks;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditStudentCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditTaskCommand.
  */
 public class EditTaskCommandTest {
 
