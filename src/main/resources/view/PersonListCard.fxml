@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane fx:id="innerPane" HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -28,32 +28,36 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <FlowPane fx:id="healthConditions" />
+      <FlowPane fx:id="healthConditions">
+        <VBox.margin>
+          <Insets bottom="3.0" />
+        </VBox.margin>
+      </FlowPane>
       <HBox alignment="TOP_LEFT" spacing="5">
         <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/phone_icon.png" />
         </ImageView>
-        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       </HBox>
 
       <HBox alignment="TOP_LEFT" spacing="5">
         <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/address_icon.png" />
         </ImageView>
-        <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       </HBox>
 
       <HBox alignment="TOP_LEFT" spacing="5">
         <ImageView fitHeight="15" preserveRatio="true">
           <Image url="@/images/language_icon.png" />
         </ImageView>
-        <Label fx:id="language" styleClass="cell_small_label" text="\$language"/>
+        <Label fx:id="language" styleClass="cell_small_label" text="\$language" />
       </HBox>
 
-      <Label fx:id="visit" styleClass="cell_small_label" text="\$visit"/>
-      <Label fx:id="lastVisit" styleClass="cell_small_label" text="\$lastVisit"/>
+      <Label fx:id="visit" styleClass="cell_small_label" text="\$visit" />
+      <Label fx:id="lastVisit" styleClass="cell_small_label" text="\$lastVisit" />
 
 
     </VBox>
