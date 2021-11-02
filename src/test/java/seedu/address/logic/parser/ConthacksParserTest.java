@@ -119,14 +119,20 @@ public class ConthacksParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand("list") instanceof ListPersonCommand);
-        assertTrue(parser.parseCommand("list 3") instanceof ListPersonCommand);
+        List<String> aliasForList = CommandWord.getAliasList(CommandWord.LIST_PERSON);
+        for (String alias: aliasForList) {
+            assertTrue(parser.parseCommand(alias) instanceof ListPersonCommand);
+            assertTrue(parser.parseCommand(alias + " 3") instanceof ListPersonCommand);
+        }
     }
 
     @Test
     public void parseCommand_listModuleLesson() throws Exception {
-        assertTrue(parser.parseCommand("listc") instanceof ListModuleLessonCommand);
-        assertTrue(parser.parseCommand("listc 3") instanceof ListModuleLessonCommand);
+        List<String> aliasForList = CommandWord.getAliasList(CommandWord.LIST_MODULE_LESSON);
+        for (String alias : aliasForList) {
+            assertTrue(parser.parseCommand(alias) instanceof  ListModuleLessonCommand);
+            assertTrue(parser.parseCommand(alias + " 3") instanceof ListModuleLessonCommand);
+        }
     }
 
     @Test
