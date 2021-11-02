@@ -183,7 +183,6 @@ public class MainWindow extends UiPart<Stage> {
 
     public void setPeriod(Period period) {
         this.schedulePanel.setChildren(logic.getFilteredPersonList(), period);
-
     }
 
     /**

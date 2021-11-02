@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.SwapShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -30,7 +31,7 @@ public class SwapShiftCommandParser implements Parser<SwapShiftCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME, PREFIX_DATE);
-        LocalDate[] dates = ParserUtil.initializeLocalDateToThisWeek();
+        LocalDate[] dates = DateTimeUtil.getDisplayedDateArray();
 
         // Checks if there are exactly 2 "- n" fields and exactly 2 "d/" fields
         if (argMultimap.getAllValues(PREFIX_DASH_NAME).size() != 2

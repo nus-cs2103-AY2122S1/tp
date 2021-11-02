@@ -18,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -208,18 +209,4 @@ public class ParserUtilTest {
         assertEquals("monday-1", ParserUtil.parseDayOfWeekAndSlot("monday-1"));
         assertEquals("monday-0", ParserUtil.parseDayOfWeekAndSlot("MONDAY-0"));
     }
-
-    @Test
-    public void initializeCurrentWeek_success() {
-        LocalDate testDate = LocalDate.of(2021, 10, 27);
-        LocalDate[] result = ParserUtil.getDateArrayOfTheWeek(testDate);
-        LocalDate[] expected = new LocalDate[] {
-                LocalDate.of(2021, 10, 25),
-                LocalDate.of(2021, 10, 31)
-        };
-        assertEquals(expected[0], result[0]);
-        assertEquals(expected[1], result[1]);
-    }
-
-
 }

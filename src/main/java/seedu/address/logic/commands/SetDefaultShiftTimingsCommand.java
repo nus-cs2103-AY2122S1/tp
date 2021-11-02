@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.FILE_NOT_FOUND;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
 
-import seedu.address.commons.util.TimeUtil;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.storage.DefaultShiftTimingsStorage;
@@ -36,7 +36,7 @@ public class SetDefaultShiftTimingsCommand extends Command {
         try {
             DefaultShiftTimingsStorage.update(timings);
             // TimeUtil will not update if DefaultShiftTimingsStorage does not update to keep consistency
-            TimeUtil.updateTimings(timings);
+            DateTimeUtil.updateTimings(timings);
         } catch (FileNotFoundException e) {
             throw new CommandException(FILE_NOT_FOUND + DefaultShiftTimingsStorage.FILEPATH);
         }

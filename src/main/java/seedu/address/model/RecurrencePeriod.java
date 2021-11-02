@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.util.TimeUtil;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Slot;
 
@@ -39,11 +39,11 @@ public class RecurrencePeriod extends Period {
         super(period);
         this.period = period;
         if (slot.equals(Slot.MORNING)) {
-            this.startTime = TimeUtil.getDefaultMorningStartTime();
-            this.endTime = TimeUtil.getDefaultMorningEndTime();
+            this.startTime = DateTimeUtil.getDefaultMorningStartTime();
+            this.endTime = DateTimeUtil.getDefaultMorningEndTime();
         } else if (slot.equals(Slot.AFTERNOON)) {
-            this.startTime = TimeUtil.getDefaultAfternoonStartTime();
-            this.endTime = TimeUtil.getDefaultAfternoonEndTime();
+            this.startTime = DateTimeUtil.getDefaultAfternoonStartTime();
+            this.endTime = DateTimeUtil.getDefaultAfternoonEndTime();
         } else {
             throw new IllegalStateException("This should not occur");
         }

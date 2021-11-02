@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import seedu.address.commons.util.TimeUtil;
+import seedu.address.commons.util.DateTimeUtil;
 
 public class DefaultShiftTimingsStorage {
 
@@ -81,7 +81,7 @@ public class DefaultShiftTimingsStorage {
             i++;
         }
 
-        TimeUtil.updateTimings(timings);
+        DateTimeUtil.updateTimings(timings);
 
         PrintWriter pw = new PrintWriter(file);
         pw.append(txt.toString());
