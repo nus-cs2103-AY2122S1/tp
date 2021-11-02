@@ -5,7 +5,7 @@ title: Allard Quek's Project Portfolio Page
 
 [ProgrammerError](https://github.com/AY2122S1-CS2103-F09-3/tp) is a desktop application which helps CS2100 tutors manage their students’ lab results in a simple and efficient manner, allowing them to spend less time on administrative processes and more time teaching students.
 
-The following is a summary of my contributions to the project. Visit this [Reposense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=allardquek) for further details.
+The following is a summary of my contributions to the project. Visit this [Reposense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=allardquek) for more details.
 
 #### Features
 1. Added the ability to upload student data (Credits: [opencsv](http://opencsv.sourceforge.net/), Stackoverflow)
