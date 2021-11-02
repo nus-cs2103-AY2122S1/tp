@@ -81,19 +81,14 @@ public class Timetable {
             if (localStart.compareTo(earliest) < 0) {
                 earliest = localStart;
             }
-            if (localEnd.getHour() == 0) {
-                latest = LocalTime.parse("00:00");
-                if (localEnd.getMinute() > 0) {
-                    earliest = LocalTime.parse("00:00");
-                }
-            }
-            if (localEnd.compareTo(latest) > 0 && !(latest.getHour() == 0)) {
+
+            if (localEnd.compareTo(latest) > 0) {
                 latest = localEnd;
             }
         }
         this.start = Integer.parseInt(earliest.toString().substring(0, 2));
         int end = Integer.parseInt(latest.toString().substring(0, 2));
-        this.end = end == 0 ? 24 : end + 1;
+        this.end = end + 1;
         this.totalRows = (this.end - this.start + 1) * 6;
     }
 
@@ -124,16 +119,10 @@ public class Timetable {
     private void insertATuitionClass(TuitionClass tuitionClass, LocalTime startTime, int i) {
         String date = tuitionClass.getTimeslot().getDayString();
         int colInsert = dates.get(date);
-        int rowStartInsert = 6 + Math.round(startTime.until(timeStart.get(i), ChronoUnit.MINUTES) / (float) 10.0);
+        int rowStartInsert = 6 + (int) Math.floor(startTime.until(timeStart.get(i), ChronoUnit.MINUTES) / (float) 10.0);
         int rowFinishInsert;
         String message = tuitionClass.getNameString() + "\n" + tuitionClass.getTimeslot().getTime().substring(4);
-        if (timeEnd.get(i).getHour() == 0) {
-            rowFinishInsert = totalRows;
-            insertAcrossAnotherDay(colInsert + 1,
-                    Math.round(timeEnd.get(i).getMinute() / (float) 10.0), message, tuitionClass);
-        } else {
-            rowFinishInsert = 6 + Math.round(startTime.until(timeEnd.get(i), ChronoUnit.MINUTES) / (float) 10.0);
-        }
+        rowFinishInsert = 6 + Math.round(startTime.until(timeEnd.get(i), ChronoUnit.MINUTES) / (float) 10.0);
         int rowSpan = rowFinishInsert - rowStartInsert;
         Label lesson = getLabel(message, getFontSize(rowSpan),
                 colInsert, tuitionClass);
@@ -141,27 +130,6 @@ public class Timetable {
                 rowSpan == 0 ? 1 : rowSpan);
         GridPane.setHalignment(lesson, HPos.CENTER);
         GridPane.setFillWidth(lesson, true);
-    }
-
-    /**
-     * Inserts a label across 00:00.
-     * @param col the column the label should be shown at.
-     * @param rows number of rows the label should occupy.
-     * @param message the message to be shown on the label.
-     * @param tuitionClass the tuition class to be shown.
-     */
-    private void insertAcrossAnotherDay(int col, int rows, String message, TuitionClass tuitionClass) {
-        if (rows == 0) {
-            return;
-        }
-        if (col == 8) {
-            col = 1;
-        }
-        int fontSize = getFontSize(rows);
-        Label lesson = getLabel(message, fontSize, col, tuitionClass);
-        infoPage.addLesson(lesson, col, 0 + 6, 1,
-                rows);
-        GridPane.setHalignment(lesson, HPos.CENTER);
     }
 
     private String getColor(int start) {

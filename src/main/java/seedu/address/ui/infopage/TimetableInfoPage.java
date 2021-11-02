@@ -120,15 +120,6 @@ public class TimetableInfoPage extends InfoPage {
     private static String[] convertDays() {
         String[] dayOfWeek = new String[]{"Mon", "Tue", "Wed",
             "Thu", "Fri", "Sat", "Sun"};
-        String sixSpaces = "      ";
-        String fiveSpaces = "     ";
-        for (int i = 0; i < dayOfWeek.length; i++) {
-            if (i == 0 || i == 2) {
-                dayOfWeek[i] = sixSpaces + dayOfWeek[i] + fiveSpaces;
-            } else {
-                dayOfWeek[i] = sixSpaces + dayOfWeek[i] + sixSpaces;
-            }
-        }
         return dayOfWeek;
     }
 }
