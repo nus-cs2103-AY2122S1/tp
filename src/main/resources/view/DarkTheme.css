@@ -56,7 +56,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -67,8 +67,8 @@
 }
 
 .table-view .table-cell{
-    -fx-font-size: 11pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-size: 10pt;
+    -fx-font-family: "Open Sans";
 }
 
 .split-pane:horizontal .split-pane-divider {
