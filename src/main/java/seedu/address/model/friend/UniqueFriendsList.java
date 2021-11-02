@@ -3,14 +3,17 @@ package seedu.address.model.friend;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
 import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -110,7 +113,11 @@ public class UniqueFriendsList implements Iterable<Friend> {
     public void link(Friend toLink, GameFriendLink gameFriendLink) {
         requireAllNonNull(toLink, gameFriendLink);
 
-        toLink.link(gameFriendLink);
+        Map<GameId, GameFriendLink> currentLinks = new HashMap<>(toLink.getGameFriendLinks());
+        Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getFriendName(),
+                currentLinks, toLink.getSchedule());
+        editedFriend.link(gameFriendLink);
+        this.setFriend(toLink, editedFriend);
     }
 
     /**
@@ -131,7 +138,11 @@ public class UniqueFriendsList implements Iterable<Friend> {
     public void unlink(Friend friendToUnlink, Game gameToUnlink) {
         requireAllNonNull(friendToUnlink, gameToUnlink);
 
-        friendToUnlink.unlink(gameToUnlink);
+        Map<GameId, GameFriendLink> currentLinks = new HashMap<>(friendToUnlink.getGameFriendLinks());
+        Friend editedFriend = new Friend(friendToUnlink.getFriendId(), friendToUnlink.getFriendName(),
+                currentLinks, friendToUnlink.getSchedule());
+        editedFriend.unlink(gameToUnlink);
+        this.setFriend(friendToUnlink, editedFriend);
     }
 
     public void setFriends(UniqueFriendsList replacement) {
