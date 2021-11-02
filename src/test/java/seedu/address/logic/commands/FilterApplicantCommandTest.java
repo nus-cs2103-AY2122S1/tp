@@ -12,7 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 import static seedu.address.model.applicant.Application.ApplicationStatus;
 import static seedu.address.testutil.TypicalApplicants.getTypicalApplicantBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPositions.DATAENGINEER;
 import static seedu.address.testutil.TypicalPositions.DATASCIENTIST;
 import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
@@ -20,7 +19,6 @@ import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.descriptors.FilterApplicantDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PositionBook;
@@ -33,7 +31,7 @@ import seedu.address.testutil.FilterApplicantDescriptorBuilder;
 public class FilterApplicantCommandTest {
 
     private Model model = new ModelManager(
-            getTypicalAddressBook(), getTypicalApplicantBook(), getTypicalPositionBook(), new UserPrefs());
+            getTypicalApplicantBook(), getTypicalPositionBook(), new UserPrefs());
 
     @Test
     public void execute_allFiltersSpecified_success() {

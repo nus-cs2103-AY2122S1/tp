@@ -15,19 +15,15 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ApplicantBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PositionBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyApplicantBook;
 import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -68,10 +64,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         PositionBookStorage positionBookStorage = new JsonPositionBookStorage(userPrefs.getPositionBookFilePath());
         ApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(userPrefs.getApplicantBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, applicantBookStorage, positionBookStorage);
+        storage = new StorageManager(userPrefsStorage, applicantBookStorage, positionBookStorage);
 
         initLogging(config);
 
@@ -88,18 +83,11 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyPositionBook> positionBookOptional;
         Optional<ReadOnlyApplicantBook> applicantBookOptional;
-        ReadOnlyAddressBook initialAddressBookData;
         ReadOnlyPositionBook initialPositionBookData;
         ReadOnlyApplicantBook initialApplicantBookData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Addressbook data file not found. Will be starting with a sample AddressBook");
-            }
-            initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
 
             positionBookOptional = storage.readPositionBook();
             if (!positionBookOptional.isPresent()) {
@@ -115,19 +103,19 @@ public class MainApp extends Application {
 
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty "
-                    + "AddressBook/PositionBook/ApplicantBook");
-            initialAddressBookData = new AddressBook();
+                    + "PositionBook/ApplicantBook");
+
             initialPositionBookData = new PositionBook();
             initialApplicantBookData = new ApplicantBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
-                    + "AddressBook/PositionBook/ApplicantBook");
-            initialAddressBookData = new AddressBook();
+                    + "PositionBook/ApplicantBook");
+
             initialPositionBookData = new PositionBook();
             initialApplicantBookData = new ApplicantBook();
         }
 
-        return new ModelManager(initialAddressBookData, initialApplicantBookData, initialPositionBookData, userPrefs);
+        return new ModelManager(initialApplicantBookData, initialPositionBookData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -210,7 +198,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping MrTechRecruiter ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

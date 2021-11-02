@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.applicant.JsonApplicantBookStorage;
 import seedu.address.storage.position.JsonPositionBookStorage;
@@ -32,7 +30,7 @@ public class StorageManagerTest {
                 getTempFilePath("pb"));
         JsonApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(
                 getTempFilePath("applicantb"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, applicantBookStorage,
+        storageManager = new StorageManager(userPrefsStorage, applicantBookStorage,
                 positionBookStorage);
     }
 
