@@ -36,6 +36,14 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+
+    public static final DateTimeFormatter[] DATE_TIME_FORMATTERS = {
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), DateTimeFormatter.ofPattern("HHmm yyyy-MM-dd"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"), DateTimeFormatter.ofPattern("HHmm dd-MM-yyyy"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"), DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"), DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")
+    };
+
     public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HHmm";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");

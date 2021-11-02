@@ -2,6 +2,7 @@ package seedu.address.model.person.supplier;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.DATE_TIME_FORMATTERS;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -17,13 +18,6 @@ public class DeliveryDetails {
             "Delivery details is wrongly formatted. You need to input a date in yyyy-mm-dd or dd-mm-yyyy "
                     + "format and a time in HH:mm or HHmm (24hr clock) format (eg: 1800 or 18:00 for 6 pm). "
                     + "You can choose to entire enter a date first or time first in any of the formats mentioned";
-
-    private static final DateTimeFormatter[] dateTimeFormatters = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"), DateTimeFormatter.ofPattern("HHmm yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"), DateTimeFormatter.ofPattern("HHmm dd-MM-yyyy"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"), DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"), DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")
-    };
 
     private static DateTimeFormatter chosenFormat = null;
 
@@ -47,7 +41,7 @@ public class DeliveryDetails {
      */
     public static boolean isValidDeliveryDetail(String test) {
         LocalDateTime temp = null;
-        for (DateTimeFormatter dateTimeFormatter : dateTimeFormatters) {
+        for (DateTimeFormatter dateTimeFormatter : DATE_TIME_FORMATTERS) {
             try {
                 temp = LocalDateTime.parse(test, dateTimeFormatter);
                 chosenFormat = dateTimeFormatter;
